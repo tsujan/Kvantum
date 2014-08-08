@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="Icons">
+    <file>icon.png</file>
+    <file>kvantum.png</file>
+    <file>quit.png</file>
+  </qresource>
+</RCC>
