@@ -2009,17 +2009,18 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
     }
 
     case CE_TabBarTabShape : {
-      frame_spec fspec = getFrameSpec("Tab");
-      const interior_spec ispec = getInteriorSpec("Tab");
-
       const QStyleOptionTab *opt =
         qstyleoption_cast<const QStyleOptionTab *>(option);
-      QRect r = option->rect;
-      bool verticalTabs = false;
-      bool bottomTabs = false;
 
       if (opt)
       {
+        frame_spec fspec = getFrameSpec("Tab");
+        const interior_spec ispec = getInteriorSpec("Tab");
+
+        QRect r = option->rect;
+        bool verticalTabs = false;
+        bool bottomTabs = false;
+
         const theme_spec tspec = settings->getThemeSpec();
         if (tspec.joined_tabs)
         {
@@ -2085,21 +2086,22 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           m.translate(x + w, h); m.scale(-1,-1);
           painter->setTransform(m, true);
         }
-      }
 
-      if (status == "disabled")
-      {
-        status = "normal";
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-      renderFrame(painter,r,fspec,fspec.element+"-"+status);
-      if (!(option->state & State_Enabled))
-        painter->restore();
 
-      if (verticalTabs || bottomTabs)
-        painter->restore();
+        if (status == "disabled")
+        {
+          status = "normal";
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        if (!(option->state & State_Enabled))
+          painter->restore();
+
+        if (verticalTabs || bottomTabs)
+          painter->restore();
+      }
 
       break;
     }
