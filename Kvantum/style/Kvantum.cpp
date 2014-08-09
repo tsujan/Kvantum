@@ -3315,26 +3315,27 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         QRect empty = grooveRect;
         QRect full = grooveRect;
         QRect slider = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
+        QPoint sliderCenter = slider.center();
 
         // take into account the inversion
         if (option->state & State_Horizontal)
         {
           if (!opt->upsideDown) {
-            full.setWidth(slider.x());
-            empty.adjust(slider.x(),0,0,0);
+            full.setWidth(sliderCenter.x());
+            empty.adjust(sliderCenter.x(),0,0,0);
           } else {
-            empty.setWidth(slider.x());
-            full.adjust(slider.x(),0,0,0);
+            empty.setWidth(sliderCenter.x());
+            full.adjust(sliderCenter.x(),0,0,0);
           }
         }
         else
         {
           if (!opt->upsideDown) {
-            full.setHeight(slider.y());
-            empty.adjust(0,slider.y(),0,0);
+            full.setHeight(sliderCenter.y());
+            empty.adjust(0,sliderCenter.y(),0,0);
           } else {
-            empty.setHeight(slider.y());
-            full.adjust(0,slider.y(),0,0);
+            empty.setHeight(sliderCenter.y());
+            full.adjust(0,sliderCenter.y(),0,0);
           }
         }
 
@@ -3351,13 +3352,13 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
                              grooveRect.height(), grooveRect.width());
           if (!opt->upsideDown)
           {
-            empty.setRect(empty.y(), slider.x(), H, empty.width());
-            full.setRect(full.y(), full.x(), H, slider.x());
+            empty.setRect(empty.y(), sliderCenter.x(), H, empty.width());
+            full.setRect(full.y(), full.x(), H, sliderCenter.x());
           }
           else
           {
-            empty.setRect(empty.y(), empty.x(), H, slider.x());
-            full.setRect(full.y(), slider.x(), H, full.width());
+            empty.setRect(empty.y(), empty.x(), H, sliderCenter.x());
+            full.setRect(full.y(), sliderCenter.x(), H, full.width());
           }
           QTransform m;
           m.translate(0, H);
@@ -3386,7 +3387,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
 
-          fspec.capsuleV = 2;
+          fspec.hasCapsule = false;
           renderFrame(painter,grooveRect,fspec,fspec.element+"-normal");
           renderInterior(painter,grooveRect,fspec,ispec,ispec.element+"-normal");
 

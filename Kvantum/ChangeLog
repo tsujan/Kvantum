@@ -1,3 +1,7 @@
+V0.4.1
+---------
+ * Corrected slider position and groove.
+
 V0.4
 ---------
  * Added the possibility to set the normal, focused and pressed text colors for non-editable widgets. If no (valid) color is set, the color scheme will be used.
