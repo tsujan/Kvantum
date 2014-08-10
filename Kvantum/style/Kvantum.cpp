@@ -322,9 +322,9 @@ static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
 {
   if (!tb) return false;
   if (tb->popupMode() == QToolButton::MenuButtonPopup
-      || tb->popupMode() == QToolButton::InstantPopup
-      || (tb->popupMode() == QToolButton::DelayedPopup
-          && (opt && (opt->features & QStyleOptionToolButton::HasMenu))))
+      || ((tb->popupMode() == QToolButton::InstantPopup
+           || tb->popupMode() == QToolButton::DelayedPopup)
+          && opt && (opt->features & QStyleOptionToolButton::HasMenu)))
   {
     return true;
   }
@@ -453,7 +453,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
-      const label_spec lspec = getLabelSpec(group);
+      label_spec lspec = getLabelSpec(group);
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
@@ -463,6 +463,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       {
         fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
+        lspec.left = lspec.right = qMin(lspec.left,lspec.right);
+        lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
       }
 
       QRect r = option->rect;
@@ -542,9 +544,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
               pbStatus = "toggled";
           }
         }
-        else if (tb->popupMode() == QToolButton::InstantPopup
-                 || (tb->popupMode() == QToolButton::DelayedPopup
-                     && (opt && (opt->features & QStyleOptionToolButton::HasMenu))))
+        else if ((tb->popupMode() == QToolButton::InstantPopup
+                  || tb->popupMode() == QToolButton::DelayedPopup)
+                 && opt && (opt->features & QStyleOptionToolButton::HasMenu))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
@@ -570,7 +572,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const QString group = "PanelButtonTool";
       frame_spec fspec = getFrameSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
-      const label_spec lspec = getLabelSpec(group);
+      label_spec lspec = getLabelSpec(group);
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
@@ -580,6 +582,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       {
         fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
+        lspec.left = lspec.right = qMin(lspec.left,lspec.right);
+        lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
       }
 
       QRect r = option->rect;
@@ -655,9 +659,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
               fbStatus = "toggled";
           }
         }
-        else if (tb->popupMode() == QToolButton::InstantPopup
-                 || (tb->popupMode() == QToolButton::DelayedPopup
-                     && (opt && (opt->features & QStyleOptionToolButton::HasMenu))))
+        else if ((tb->popupMode() == QToolButton::InstantPopup
+                  || tb->popupMode() == QToolButton::DelayedPopup)
+                 && (opt && (opt->features & QStyleOptionToolButton::HasMenu)))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
@@ -2837,14 +2841,14 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
 
         /* the right arrow is attached */
         if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
           if (tb->popupMode() == QToolButton::MenuButtonPopup
-              || tb->popupMode() == QToolButton::InstantPopup
-              || (tb->popupMode() == QToolButton::DelayedPopup
+              || ((tb->popupMode() == QToolButton::InstantPopup
+                   || tb->popupMode() == QToolButton::DelayedPopup)
                   && (opt->features & QStyleOptionToolButton::HasMenu)))
           {
             fspec.right = 0;
@@ -2862,7 +2866,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         {
           fspec.left = fspec.right = qMin(fspec.left,fspec.right);
           fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
-          r.adjust(-fspec.left,-fspec.top,fspec.right,fspec.bottom);
+          lspec.left = lspec.right = qMin(lspec.left,lspec.right);
+          lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
+          r.adjust(-fspec.left-lspec.left,
+                   -fspec.top-lspec.top,
+                   fspec.right+lspec.right,
+                   fspec.bottom+lspec.bottom);
         }
 
         int talign = Qt::AlignCenter;
@@ -3087,9 +3096,9 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
             o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
             if (tb->popupMode() == QToolButton::MenuButtonPopup)
               drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
-            else if (tb->popupMode() == QToolButton::InstantPopup
-                     || (tb->popupMode() == QToolButton::DelayedPopup
-                         && (opt->features & QStyleOptionToolButton::HasMenu)))
+            else if ((tb->popupMode() == QToolButton::InstantPopup
+                      || tb->popupMode() == QToolButton::DelayedPopup)
+                     && (opt->features & QStyleOptionToolButton::HasMenu))
             {
               frame_spec fspec = getFrameSpec("PanelButtonTool");
               const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
@@ -4140,7 +4149,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
 
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
@@ -4150,6 +4159,8 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         {
           fspec.left = fspec.right = qMin(fspec.left,fspec.right);
           fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
+          lspec.left = lspec.right = qMin(lspec.left,lspec.right);
+          lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
         }
 
         /*
@@ -4193,11 +4204,11 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
               const frame_spec fspec1 = getFrameSpec(group1);
               const indicator_spec dspec1 = getIndicatorSpec(group1);
               s.rwidth() += fspec1.left+fspec1.right+dspec1.size+2; /* Why doesn't this or any other value for s
-                                                                    have any effect on Krita's KisToolButton? */
+                                                                       have any effect on Krita's KisToolButton? */
             }
-            else if (tb->popupMode() == QToolButton::InstantPopup
-                     || (tb->popupMode() == QToolButton::DelayedPopup
-                         && (opt->features & QStyleOptionToolButton::HasMenu)))
+            else if ((tb->popupMode() == QToolButton::InstantPopup
+                      || tb->popupMode() == QToolButton::DelayedPopup)
+                     && (opt->features & QStyleOptionToolButton::HasMenu))
             {
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
             }
@@ -5041,9 +5052,9 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                                                -fspec.left-fspec.right-dspec.size-2,
                                                0);
                 }
-                else if (tb->popupMode() == QToolButton::InstantPopup
-                         || (tb->popupMode() == QToolButton::DelayedPopup
-                             && (opt->features & QStyleOptionToolButton::HasMenu)))
+                else if ((tb->popupMode() == QToolButton::InstantPopup
+                          || tb->popupMode() == QToolButton::DelayedPopup)
+                         && (opt->features & QStyleOptionToolButton::HasMenu))
                 {
                   const QString group = "PanelButtonTool";
                   const frame_spec fspec = getFrameSpec(group);
@@ -5084,9 +5095,9 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                   int l = fspec.left+fspec.right+dspec.size+2;
                   return QRect(x+w-l,y,l,h);
                 }
-                else if ((tb->popupMode() == QToolButton::InstantPopup)
-                         || ((tb->popupMode() == QToolButton::DelayedPopup)
-                             && (opt->features & QStyleOptionToolButton::HasMenu)))
+                else if ((tb->popupMode() == QToolButton::InstantPopup
+                          || tb->popupMode() == QToolButton::DelayedPopup)
+                         && (opt->features & QStyleOptionToolButton::HasMenu))
                 {
                   const QString group = "PanelButtonTool";
                   const frame_spec fspec = getFrameSpec(group);
