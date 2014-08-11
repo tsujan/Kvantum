@@ -2,6 +2,8 @@ V0.4.1
 ---------
  * Corrected slider position and groove.
  * No redundant arrow on toolbuttons.
+ * Force the tooltip (normal) text color.
+ * Set the group-box title color.
 
 V0.4
 ---------

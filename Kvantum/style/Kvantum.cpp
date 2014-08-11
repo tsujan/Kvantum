@@ -219,6 +219,15 @@ void Kvantum::polish(QWidget * widget)
           widget->setMask(bm);
       }*/
     }
+
+    /* set the tootltip color here because
+       it seems there's no other place for it */
+    const label_spec lspec = getLabelSpec("ToolTip");
+    QColor normalColor(lspec.normalColor);
+    QPalette palette = widget->palette();
+    palette.setColor(QPalette::Inactive,QPalette::ToolTipText,normalColor);
+    widget->setPalette(palette);
+
   }
 }
 
@@ -3803,6 +3812,26 @@ int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidge
     case SH_TitleBar_AutoRaise: return true;
 
     case SH_GroupBox_TextLabelVerticalAlignment : return Qt::AlignVCenter;
+
+    case SH_GroupBox_TextLabelColor: {
+    const QString status =
+        (option->state & State_Enabled) ?
+          (option->state & State_MouseOver) ? "focused" :
+          (option->state & State_On) ? "pressed" :
+          (option->state & State_Sunken) ? "pressed" : "normal"
+        : "disabled";
+      const label_spec lspec = getLabelSpec("GroupBox");
+      int res;
+      if (status == "normal")
+        res = QColor(lspec.normalColor).rgba();
+      else if (status == "focused")
+        res = QColor(lspec.focusColor).rgba();
+      else if (status == "pressed")
+        res = QColor(lspec.pressColor).rgba();
+      else
+        res = QCommonStyle::styleHint(hint,option,widget,returnData);
+      return res;
+    }
 
     // for the sake of consistency (-> Kvantum.h -> renderLabel())
     case SH_ToolButtonStyle : return Qt::ToolButtonTextBesideIcon;
