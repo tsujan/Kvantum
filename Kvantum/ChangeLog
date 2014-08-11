@@ -4,6 +4,7 @@ V0.4.1
  * No redundant arrow on toolbuttons.
  * Force the tooltip (normal) text color.
  * Set the group-box title color.
+ * Draw a more elegant rubber band.
 
 V0.4
 ---------

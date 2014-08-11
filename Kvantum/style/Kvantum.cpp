@@ -1820,7 +1820,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               if (widget && palette == widget->palette())
               {
                 palette.setColor(QPalette::Text, normalColor);
-                palette.setColor(QPalette::HighlightedText, normalColor);
                 o.palette = palette;
                 QCommonStyle::drawControl(element,&o,painter,widget);
                 return;
@@ -1841,7 +1840,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             {
               QStyleOptionViewItemV4 o(*opt);
               QPalette palette(opt->palette);
-              palette.setColor(QPalette::Text, pressColor);
               palette.setColor(QPalette::HighlightedText, pressColor);
               o.palette = palette;
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -3066,6 +3064,22 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       break;
     }
 
+    case CE_RubberBand : {
+      if(w > 0 && h > 0)
+      {
+        painter->save();
+        QColor color = option->palette.color(QPalette::Active,QPalette::Highlight);
+        painter->setClipRegion(option->rect);
+        painter->setPen(color);
+        color.setAlpha(50);
+        painter->setBrush(color);
+        painter->drawRect(option->rect.adjusted(0,0,-1,-1));
+        painter->restore();
+      }
+
+      break;
+    }
+
     default : QCommonStyle::drawControl(element,option,painter,widget);
   }
 }
@@ -3834,6 +3848,17 @@ int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidge
 
     // for the sake of consistency (-> Kvantum.h -> renderLabel())
     case SH_ToolButtonStyle : return Qt::ToolButtonTextBesideIcon;
+
+    case SH_RubberBand_Mask : {
+      const QStyleOptionRubberBand *opt = qstyleoption_cast<const QStyleOptionRubberBand*>(option);
+      if (!opt) return true;
+      if (QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask*>(returnData))
+      {
+        mask->region = option->rect;
+        mask->region -= option->rect.adjusted(1,1,-1,-1);
+      }
+      return true;
+    }
 
     //case SH_DialogButtonLayout: return QDialogButtonBox::GnomeLayout;
 
