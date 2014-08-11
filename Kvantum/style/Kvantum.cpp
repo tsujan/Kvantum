@@ -1814,22 +1814,22 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                 && qAbs(baseValue - normalColor.value()) >= 50)
             {
               QStyleOptionViewItemV4 o(*opt);
-              QBrush brush = QBrush(normalColor);
               QPalette palette(opt->palette);
               /* if another color has been set intentionally,
                  like in Akregator's unread feeds, use it */
-              if (opt->palette == QApplication::palette())
+              if (widget && palette == widget->palette())
+              {
                 palette.setColor(QPalette::Text, normalColor);
-              palette.setColor(QPalette::HighlightedText, normalColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+                palette.setColor(QPalette::HighlightedText, normalColor);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
             else if (state == 2 && focusColor.isValid()
                      && qAbs(baseValue - focusColor.value()) >= 50)
             {
               QStyleOptionViewItemV4 o(*opt);
-              QBrush brush = QBrush(focusColor);
               QPalette palette(opt->palette);
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
@@ -1840,7 +1840,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             else if (state == 3 && pressColor.isValid())
             {
               QStyleOptionViewItemV4 o(*opt);
-              QBrush brush = QBrush(pressColor);
               QPalette palette(opt->palette);
               palette.setColor(QPalette::Text, pressColor);
               palette.setColor(QPalette::HighlightedText, pressColor);
