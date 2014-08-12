@@ -56,6 +56,13 @@ typedef struct {
   int splitter_width;
   /* scrollbar width */
   int scroll_width;
+
+  /* slider width */
+  int slider_width;
+  /* width and height of slider handle */
+  int slider_handle_width;
+  int slider_handle_length;
+
   /* width and height of checkbox
      and radio button indicators */
   int check_size;
@@ -187,6 +194,9 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;
+  tspec.slider_width = 8;
+  tspec.slider_handle_width = 16;
+  tspec.slider_handle_length = 16;
   tspec.check_size = 13;
 }
 

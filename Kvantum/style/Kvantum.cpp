@@ -3699,12 +3699,23 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
     }
     case PM_ScrollBarSliderMin : return 36;
 
-    case PM_SliderThickness : return 8;
-
     case PM_ProgressBarChunkWidth : return 20;
 
-    case PM_SliderLength : return 16;
-    case PM_SliderControlThickness : return 16;
+    /* slider groove */
+    case PM_SliderThickness : {
+      const theme_spec tspec = settings->getThemeSpec();
+      return tspec.slider_width;
+    }
+
+    /* slider handle */
+    case PM_SliderLength : {
+      const theme_spec tspec = settings->getThemeSpec();
+      return tspec.slider_handle_length;
+    }
+    case PM_SliderControlThickness : {
+      const theme_spec tspec = settings->getThemeSpec();
+      return tspec.slider_handle_width;
+    }
 
     case PM_DockWidgetFrameWidth : {
       /*QString group = "Dock";

@@ -205,6 +205,16 @@ scroll_width                      integer             The width of scrollbars. T
                                                       default value is 12px.
                                                       (Only in the General section.)
 
+slider_width                      integer             The width of sliders. The default
+                                                      value is 8px. (Only in the
+                                                      General section.)
+
+slider_handle_width
+slider_handle_length              integer             The width or height of slider
+                                                      handles. The default values are
+                                                      16px. (Only in the General
+                                                      section.)
+
 check_size                        integer             The width and height of
                                                       checkboxes and radio buttons.
                                                       The default value is 13px.

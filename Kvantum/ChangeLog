@@ -5,6 +5,7 @@ V0.4.1
  * Force the tooltip (normal) text color.
  * Set the group-box title color.
  * Draw a more elegant rubber band.
+ * Added the possibility to set the slider thickness and also the length and thickness of slider handles.
 
 V0.4
 ---------

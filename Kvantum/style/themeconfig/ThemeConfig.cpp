@@ -326,6 +326,18 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.scroll_width = v.toInt();
 
+  v = getValue("General","slider_width", empty);
+  if (v.isValid())
+    r.slider_width = v.toInt();
+
+  v = getValue("General","slider_handle_width", empty);
+  if (v.isValid())
+    r.slider_handle_width = v.toInt();
+
+  v = getValue("General","slider_handle_length", empty);
+  if (v.isValid())
+    r.slider_handle_length = v.toInt();
+
   v = getValue("General","check_size", empty);
   if (v.isValid())
     r.check_size = v.toInt();
