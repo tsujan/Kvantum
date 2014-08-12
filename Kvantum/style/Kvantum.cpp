@@ -220,14 +220,22 @@ void Kvantum::polish(QWidget * widget)
       }*/
     }
 
-    /* set the tootltip color here because
-       it seems there's no other place for it */
-    const label_spec lspec = getLabelSpec("ToolTip");
-    QColor normalColor(lspec.normalColor);
-    QPalette palette = widget->palette();
-    palette.setColor(QPalette::Inactive,QPalette::ToolTipText,normalColor);
-    widget->setPalette(palette);
-
+    /* We set the tootltip color here because
+       it seems there's no other place for it.
+       We check for "QLabel" instead of "QTipLabel"
+       because the latter may cause some problems
+       with the systray (in Enlightenment, for example). */
+    if (widget->inherits("QLabel"))
+    {
+      const label_spec lspec = getLabelSpec("ToolTip");
+      QColor normalColor(lspec.normalColor);
+      if (normalColor.isValid())
+      {
+        QPalette palette = widget->palette();
+        palette.setColor(QPalette::Inactive,QPalette::ToolTipText,normalColor);
+        widget->setPalette(palette);
+      }
+    }
   }
 }
 
@@ -3845,16 +3853,26 @@ int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidge
           (option->state & State_Sunken) ? "pressed" : "normal"
         : "disabled";
       const label_spec lspec = getLabelSpec("GroupBox");
-      int res;
+      QColor normalColor(lspec.normalColor);
+      QColor focusColor(lspec.focusColor);
+      QColor pressColor(lspec.pressColor);
       if (status == "normal")
-        res = QColor(lspec.normalColor).rgba();
+      {
+        if (normalColor.isValid())
+          return QColor(normalColor).rgba();
+      }
       else if (status == "focused")
-        res = QColor(lspec.focusColor).rgba();
+      {
+        if (focusColor.isValid())
+          return QColor(focusColor).rgba();
+      }
       else if (status == "pressed")
-        res = QColor(lspec.pressColor).rgba();
-      else
-        res = QCommonStyle::styleHint(hint,option,widget,returnData);
-      return res;
+      {
+        if (pressColor.isValid())
+          return QColor(pressColor).rgba();
+      }
+
+      return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
 
     // for the sake of consistency (-> Kvantum.h -> renderLabel())
