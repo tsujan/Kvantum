@@ -258,13 +258,9 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
 
   v = getValue(elementName,"size.minheight", i);
   r.minH = v.toInt();
-  v = getValue(elementName,"size.fixedheight", i);
-  r.fixedH = v.toInt();
 
   v = getValue(elementName,"size.minwidth", i);
   r.minW = v.toInt();
-  v = getValue(elementName,"size.fixedwidth", i);
-  r.fixedW = v.toInt();
 
   return r;
 }

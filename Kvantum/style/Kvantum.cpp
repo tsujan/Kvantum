@@ -220,11 +220,11 @@ void Kvantum::polish(QWidget * widget)
       }*/
     }
 
-    /* We set the tootltip color here because
-       it seems there's no other place for it.
-       We check for "QLabel" instead of "QTipLabel"
-       because the latter may cause some problems
-       with the systray (in Enlightenment, for example). */
+    /* We set the tootltip text color here since it seems there's
+       no other place for it. We check for "QLabel" because, on
+       the one hand, there could be some problems with systray
+       without that (in Enlightenment, for example) and, on the
+       other hand, checking for "QTipLabel" wouldn't be enough. */
     if (widget->inherits("QLabel"))
     {
       const label_spec lspec = getLabelSpec("ToolTip");
@@ -2395,7 +2395,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const QString group = "Progressbar";
 
         frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
 
         QRect r = option->rect;
         if (widget)
@@ -2421,6 +2421,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                 int top = fspec.top;
                 fspec.top = fspec.bottom;
                 fspec.bottom = top;
+
+                top = lspec.top;
+                lspec.top = lspec.bottom;
+                lspec.bottom = top;
               }
               else
               {
@@ -2429,7 +2433,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               painter->setTransform(m, true);
             }
 
-            wdth = wdth - fspec.top - fspec.bottom;
+            wdth = wdth - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
             if (f.pixelSize() > wdth)
               f.setPixelSize(wdth);
             else if (f.pointSize() > wdth)
@@ -3083,6 +3087,21 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setBrush(color);
         painter->drawRect(option->rect.adjusted(0,0,-1,-1));
         painter->restore();
+      }
+
+      break;
+    }
+
+    case CE_ShapedFrame : {
+      if (const QStyleOptionFrameV3 *f = qstyleoption_cast<const QStyleOptionFrameV3 *>(option))
+      {
+        /* skip ugly frames */
+        if (f->frameShape != QFrame::HLine
+            && f->frameShape != QFrame::VLine
+            && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised))
+        {
+          QCommonStyle::drawControl(element,option,painter,widget);
+        }
       }
 
       break;
@@ -4543,12 +4562,6 @@ QSize Kvantum::sizeCalculated(const QFont &font,
 
   if ( (sspec.minW > 0) && (s.width() < sspec.minW) )
     s.setWidth(sspec.minW);
-
-  if (sspec.fixedH > 0)
-    s.setHeight(sspec.fixedH);
-
-  if (sspec.fixedW > 0)
-    s.setWidth(sspec.fixedW);
 
   return s;
 }

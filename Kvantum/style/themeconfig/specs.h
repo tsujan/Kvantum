@@ -104,9 +104,9 @@ typedef struct {
 
 /* Generic information about the size of a widget */
 typedef struct {
-  /* min/fixed width or height. <= 0 : does not apply */
-  int minH,fixedH;
-  int minW,fixedW;
+  /* min width or height. <= 0 : does not apply */
+  int minH;
+  int minW;
 } size_spec;
 
 /* Generic information about text and icons (labels) */
@@ -176,7 +176,7 @@ static inline void default_label_spec(label_spec &lspec) {
 
 /* Fills the size spec with default values */
 static inline void default_size_spec(size_spec &sspec) {
-  sspec.minH = sspec.fixedH = sspec.minW = sspec.fixedW = -1;
+  sspec.minH = sspec.minW = -1;
 }
 
 /* Fills the widget spec with default values */

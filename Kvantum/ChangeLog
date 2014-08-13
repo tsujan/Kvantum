@@ -6,6 +6,7 @@ V0.4.1
  * Set the group-box title color.
  * Draw a more elegant rubber band.
  * Added the possibility to set the slider thickness and also the length and thickness of slider handles.
+ * Skip ugly frames.
 
 V0.4
 ---------

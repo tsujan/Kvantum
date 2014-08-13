@@ -188,10 +188,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-text.margin.top=0
-text.margin.bottom=0
-text.margin.left=5
-text.margin.right=1
+text.margin=0
 text.focus.color=white
 
 [ProgressbarContents]
