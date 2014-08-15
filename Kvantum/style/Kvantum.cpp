@@ -1184,6 +1184,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const QString group = "LineEdit";
 
       frame_spec fspec = getFrameSpec(group);
+      /* no frame when editing itemview texts */
+      if (widget)
+      {
+        if (QWidget *pW = widget->parentWidget())
+        {
+          if (qobject_cast< const QAbstractItemView* >(pW->parentWidget()))
+          {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+          }
+        }
+      }
       if (qstyleoption_cast<const QStyleOptionSpinBox *>(option))
       {
         fspec.hasCapsule = true;
@@ -3948,7 +3959,9 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
       const QString group = "LineEdit";
 
       const frame_spec fspec = getFrameSpec(group);
-      const label_spec lspec = getLabelSpec(group);
+      /* the label spec isn't used anywhere */
+      label_spec lspec;
+      default_label_spec(lspec);
       const size_spec sspec = getSizeSpec(group);
 
       s = sizeCalculated(f,fspec,lspec,sspec,"W",QPixmap());
@@ -4043,8 +4056,8 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         if (opt->editable)
         {
           const frame_spec fspec2 = getFrameSpec("LineEdit");
-          s.rheight() += (fspec2.top > fspec.top ? fspec2.top : 0)
-                         + (fspec2.bottom > fspec.bottom ? fspec2.bottom : 0);
+          s.rheight() += (fspec2.top > fspec.top ? fspec2.top-fspec.top : 0)
+                         + (fspec2.bottom > fspec.bottom ? fspec2.bottom-fspec.bottom : 0);
         }
       }
 
@@ -4644,7 +4657,18 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
     }
 
     case SE_LineEditContents : {
-      const frame_spec fspec = getFrameSpec("LineEdit");
+      frame_spec fspec = getFrameSpec("LineEdit");
+      /* no frame when editing itemview texts */
+      if (widget)
+      {
+        if (QWidget *pW = widget->parentWidget())
+        {
+          if (qobject_cast< const QAbstractItemView* >(pW->parentWidget()))
+          {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+          }
+        }
+      }
       QRect rect = interiorRect(option->rect, fspec);
 
       /* in these cases there are capsules */
