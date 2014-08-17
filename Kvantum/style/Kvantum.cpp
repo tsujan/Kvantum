@@ -411,6 +411,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           (option->state & State_Selected) ? "toggled" :
           (option->state & State_MouseOver) ? "focused" : "normal"
         : "disabled";
+  bool isInactive = false;
+  if (widget && !widget->isActiveWindow())
+  {
+    status.append(QString("-inactive"));
+    isInactive = true;
+  }
 
   switch(element) {
     case PE_Widget :
@@ -428,9 +434,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
-        status = "normal";
+        status.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -448,11 +454,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         status = "normal";
         if (option->state & State_On)
           status = "toggled";
+        if (isInactive)
+          status.append(QString("-inactive"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -490,11 +498,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       if (widget && qobject_cast<const QTabBar*>(widget->parentWidget()))
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         status = "normal";
         if (option->state & State_On)
           status = "toggled";
+        if (isInactive)
+          status.append(QString("-inactive"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -560,6 +570,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
             if (option->state & State_On)
               pbStatus = "toggled";
           }
+          if (isInactive)
+            pbStatus.append(QString("-inactive"));
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
                   || tb->popupMode() == QToolButton::DelayedPopup)
@@ -568,7 +580,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
         }
-        if (tb->autoRaise() && ((status == "normal") || (status == "disabled")) && !drawRaised)
+        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
           ;
         else
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus);
@@ -605,11 +617,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       QRect r = option->rect;
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         status = "normal";
         if (option->state & State_On)
           status = "toggled";
+        if (isInactive)
+          status.append(QString("-inactive"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -675,6 +689,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
             if (option->state & State_On)
               fbStatus = "toggled";
           }
+          if (isInactive)
+            fbStatus.append(QString("-inactive"));
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
                   || tb->popupMode() == QToolButton::DelayedPopup)
@@ -683,7 +699,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
         }
-        if (tb->autoRaise() && ((status == "normal") || (status == "disabled")) && !drawRaised)
+        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
           ;
         else
           renderFrame(painter,r,fspec,fspec.element+"-"+fbStatus);
@@ -757,50 +773,42 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       if (option->state & State_Enabled)
       {
+        QString suffix;
         if (option->state & State_MouseOver)
         {
           if (option->state & State_On)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-checked-focused");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-focused");
-          }
+            suffix = "-checked-focused";
           else
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-focused");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
-          }
+            suffix = "-focused";
         }
         else
         {
           if (option->state & State_On)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-checked-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-normal");
-          }
+            suffix = "-checked-normal";
           else
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
-          }
+            suffix = "-normal";
         }
+        if (isInactive)
+          suffix.append(QString("-inactive"));
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
       {
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
+        QString suffix;
         if (option->state & State_On)
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-checked-normal");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-normal");
-        }
+          suffix = "-checked-normal";
         else
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
-        }
+          suffix = "-normal";
+        if (isInactive)
+          suffix.append(QString("-inactive"));
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -874,65 +882,48 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       if (option->state & State_Enabled)
       {
+        QString suffix;
         if (option->state & State_MouseOver)
         {
           if (option->state & State_On)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-checked-focused");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-focused");
-          }
+            suffix = "-checked-focused";
           else if (option->state & State_NoChange)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-tristate-focused");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-tristate-focused");
-          }
+            suffix = "-tristate-focused";
           else
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-focused");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
-          }
+            suffix = "-focused";
         }
         else
         {
           if (option->state & State_On)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-checked-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-normal");
-          }
+            suffix = "-checked-normal";
           else if (option->state & State_NoChange)
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-tristate-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-tristate-normal");
-          }
+            suffix = "-tristate-normal";
           else
-          {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
-          }
+            suffix = "-normal";
         }
+        if (isInactive)
+          suffix.append(QString("-inactive"));
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
       {
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
+        QString suffix;
         if (option->state & State_On)
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-checked-normal");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-checked-normal");
-        }
+          suffix = "-checked-normal";
         else if (option->state & State_NoChange)
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-tristate-normal");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-tristate-normal");
-        }
+          suffix = "-tristate-normal";
         else
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
-        }
+          suffix = "-normal";
+        if (isInactive)
+          suffix.append(QString("-inactive"));
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -959,9 +950,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
-        status = "normal";
+        status.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -976,12 +967,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       if (option->state & State_Children)
       {
         QString eStatus = "normal";
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           eStatus = "disabled";
         else if (option->state & State_MouseOver)
           eStatus = "focused";
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           eStatus = "pressed";
+        if (isInactive)
+          eStatus.append(QString("-inactive"));
         if (option->state & State_Open)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-minus-"+eStatus);
         else
@@ -1052,13 +1045,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         const frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+        QString suffix = "-normal";
+        if (isInactive)
+          suffix = "-normal-inactive";
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -1071,13 +1067,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+      renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -1135,15 +1134,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         }
       }
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderInterior(painter,option->rect,fspec1,ispec,ispec.element+"-normal");
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+      renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix);
       renderFrame(painter,
                   option->rect,
-                  fspec,fspec.element+"-normal",
+                  fspec,fspec.element+suffix,
                   d, l, tp);
       if (!(option->state & State_Enabled))
         painter->restore();
@@ -1151,7 +1153,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       break;
     }
 
-    case PE_FrameLineEdit : {
+    case PE_FrameLineEdit : { // the frame of a lineedit inside a spinbox
       frame_spec fspec = getFrameSpec("LineEdit");
       const QStyleOptionSpinBox *sb = qstyleoption_cast<const QStyleOptionSpinBox *>(option);
       if (sb || qstyleoption_cast<const QStyleOptionComboBox *>(option))
@@ -1162,8 +1164,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleV = 2;
       }
 
-      const QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
-      if (status == "disabled")
+      QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
+      if (isInactive)
+        leStatus.append(QString("-inactive"));
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
@@ -1214,8 +1218,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       }
       const interior_spec ispec = getInteriorSpec(group);
 
-      const QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
-      if (status == "disabled")
+      QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
+      if (isInactive)
+        leStatus .append(QString("-inactive"));
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
@@ -1320,7 +1326,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       QString iStatus = status; // indicator state
       QString bStatus = status; // button state
-      if (status != "disabled")
+      if (!status.startsWith("disabled"))
       {
         const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
         if (opt)
@@ -1352,8 +1358,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         if (iStatus == "disabled")
           bStatus = "normal";
         // don't focus the indicator when the cursor isn't on the button
-        else if (bStatus == "normal")
+        else if (bStatus.startsWith("normal"))
           iStatus = "normal";
+
+        if (isInactive)
+        {
+          if (!iStatus.endsWith("-inactive"))
+            iStatus.append(QString("-inactive"));
+          if (!bStatus.endsWith("-inactive"))
+            bStatus.append(QString("-inactive"));
+        }
       }
 
       QString iString; // indicator string
@@ -1364,9 +1378,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       QRect r = option->rect;
 
-      if (bStatus == "disabled")
+      if (bStatus.startsWith("disabled"))
       {
-        bStatus = "normal";
+        bStatus.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -1412,12 +1426,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       if (opt)
       {
         QString aStatus = "normal";
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           aStatus = "disabled";
         else if (option->state & State_MouseOver)
           aStatus = "focused";
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           aStatus = "pressed";
+        if (isInactive)
+          aStatus.append(QString("-inactive"));
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-down-"+aStatus);
         else if (opt->sortIndicator == QStyleOptionHeader::SortUp)
@@ -1477,13 +1493,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           fspec.capsuleH = 1;
         fspec.left = 0; // no left frame in this case
 
-        if (tb->autoRaise() && ((status == "normal") || (status == "disabled")) && !drawRaised)
+        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
           ;
         else
         {
-          if (status == "disabled")
+          if (status.startsWith("disabled"))
           {
-            status = "normal";
+            status.replace(QString("disabled"),QString("normal"));
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
@@ -1498,9 +1514,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       }
       else
       {
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
-          status = "normal";
+          status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -1514,12 +1530,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       }
 
       QString aStatus = "normal";
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
         aStatus = "disabled";
       else if (option->state & State_MouseOver)
         aStatus = "focused";
-      else if (status == "toggled" || status == "pressed")
+      else if (status.startsWith("toggled") || status.startsWith("pressed"))
         aStatus = "pressed";
+      if (isInactive)
+        aStatus.append(QString("-inactive"));
       renderIndicator(painter,
                       option->rect,
                       fspec,dspec,dspec.element+"-"+aStatus);
@@ -1546,6 +1564,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       status = !(option->state & State_Enabled) ? "disabled" :
                  option->state & State_Sunken ? "pressed" :
                    option->state & State_MouseOver ? "focused" : "normal";
+      if (isInactive)
+        status.append(QString("-inactive"));
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status);
 
       break;
@@ -1570,12 +1590,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         dir = "-right-";
 
       QString aStatus = "normal";
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
         aStatus = "disabled";
       else if (option->state & State_MouseOver)
         aStatus = "focused";
-      else if (status == "toggled" || status == "pressed")
+      else if (status.startsWith("toggled") || status.startsWith("pressed"))
         aStatus = "pressed";
+      if (isInactive)
+        aStatus.append(QString("-inactive"));
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus);
 
       break;
@@ -1614,16 +1636,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       interior_spec ispec = getInteriorSpec("ItemView");
 
       /* we want to know if the widget has focus */
-      const QString ivStatus = (option->state & State_Enabled) ?
-                               // for Okular's navigation panel
-                               ((option->state & State_Selected)
-                                && (option->state & State_HasFocus)
-                                && (option->state & State_Active)) ? "pressed" :
-                               // for most widgets
-                               (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
-                               (option->state & State_Selected) ? "toggled" :
-                               (option->state & State_MouseOver) ? "focused" : "normal"
-                               : "disabled";
+      QString ivStatus = (option->state & State_Enabled) ?
+                         // for Okular's navigation panel
+                         ((option->state & State_Selected)
+                          && (option->state & State_HasFocus)
+                          && (option->state & State_Active)) ? "pressed" :
+                         // for most widgets
+                         (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
+                         (option->state & State_Selected) ? "toggled" :
+                         (option->state & State_MouseOver) ? "focused" : "normal"
+                         : "disabled";
+      if (isInactive)
+        ivStatus.append(QString("-inactive"));
 
       renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus);
@@ -1666,6 +1690,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         (option->state & State_Selected) ? "toggled" :
         (option->state & State_MouseOver) ? "focused" : "normal"
       : "disabled";
+  bool isInactive = false;
+  if (widget && !widget->isActiveWindow())
+  {
+    status.append(QString("-inactive"));
+    isInactive = true;
+  }
 
   const QIcon::Mode iconmode =
         (option->state & State_Enabled) ?
@@ -1727,9 +1757,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             talign |= Qt::TextShowMnemonic;
 
           int state = 1;
-          if (status == "disabled")
+          if (status.startsWith("disabled"))
             state = 0;
-          else if (status == "pressed" || status == "toggled")
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 2;
 
           if (l.size() > 0) {
@@ -1815,11 +1845,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         if (!opt->text.isEmpty())
         {
           int state = 1;
-            if (status == "disabled")
-          state = 0;
+          if (status.startsWith("disabled"))
+            state = 0;
           else if (option->state & State_MouseOver)
             state = 2;
-          else if (status == "pressed" || status == "toggled")
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 3;
           if (state != 0)
           {
@@ -1891,9 +1921,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const interior_spec ispec = getInteriorSpec(group);
         const label_spec lspec = getLabelSpec(group);
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
-          status = "normal";
+          status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -1911,9 +1941,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         else
           talign |= Qt::TextShowMnemonic;
         int state = 1;
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           state = 0;
-        else if (status == "pressed" || status == "toggled")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           state = 2;
         renderLabel(painter,option->palette,
                     option->rect,
@@ -2019,11 +2049,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           talign |= Qt::TextShowMnemonic;
 
         int state = 1;
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           state = 0;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           state = 3;
 
         renderLabel(painter,option->palette,
@@ -2117,9 +2147,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         }
 
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
-          status = "normal";
+          status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -2211,11 +2241,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           iconSize = tabV2.iconSize;
 
         int state = 1;
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           state = 0;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           state = 3;
 
         renderLabel(painter,option->palette,
@@ -2300,13 +2330,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setTransform(m, true);
       }
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,r,fspec,fspec.element+"-normal");
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+      renderFrame(painter,r,fspec,fspec.element+suffix);
+      renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -2473,6 +2506,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             (option->state & State_Sunken) ? "pressed" :
             (option->state & State_MouseOver) ? "focused" : "normal"
           : "disabled";
+      if (isInactive)
+        sStatus.append(QString("-inactive"));
 
       QRect r = option->rect;
       /* we don't check State_Horizontal because it may
@@ -2490,9 +2525,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setTransform(m, true);
       }
 
-      if (sStatus == "disabled")
+      if (sStatus.startsWith("disabled"))
       {
-        sStatus = "normal";
+        sStatus.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -2529,7 +2564,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       const indicator_spec dspec = getIndicatorSpec(group);
 
       QString iStatus = status; // indicator state
-      if (status != "disabled")
+      if (!status.startsWith("disabled"))
       {
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider *>(option);
         if (opt)
@@ -2547,6 +2582,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           else if (opt->activeSubControls != sc)
             // don't focus the indicator when the cursor isn't on it
             iStatus = "normal";
+
+          if (isInactive && !iStatus.endsWith("-inactive"))
+            iStatus.append(QString("-inactive"));
         }
       }
 
@@ -2579,11 +2617,15 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
     case CE_ScrollBarSlider : {
       QString sStatus = status; // slider state
-      if (status != "disabled")
+      if (!status.startsWith("disabled"))
       {
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider *>(option);
         if (opt && opt->activeSubControls != QStyle::SC_ScrollBarSlider)
+        {
           sStatus = "normal";
+          if (isInactive)
+            sStatus = "normal-inactive";
+        }
       }
 
       const QString group = "ScrollbarSlider";
@@ -2600,9 +2642,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         r.setRect(y, x, h, w);
       }
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
-        sStatus = "normal";
+        sStatus.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -2627,9 +2669,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
-        status = "normal";
+        status.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -2658,11 +2700,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         }
 
         int state = 1;
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           state = 0;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           state = 3;
 
         renderLabel(painter,option->palette,
@@ -2699,13 +2741,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setTransform(m, true);
       }
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,r,fspec,fspec.element+"-normal");
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+      renderFrame(painter,r,fspec,fspec.element+suffix);
+      renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -2719,9 +2764,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
 
-      if (status == "disabled")
+      if (status.startsWith("disabled"))
       {
-        status = "normal";
+        status.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -2731,6 +2776,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       {
         painter->restore();
         status = "disabled";
+        if (isInactive)
+          status = "disabled-inactive";
       }
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-"+status);
 
@@ -2761,7 +2808,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const indicator_spec dspec = getIndicatorSpec(group);
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        if (status != "disabled" && pb && pb->isDefault()) {
+        if (!status.startsWith("disabled") && pb && pb->isDefault()) {
           QFont f(pb->font());
           f.setBold(true);
           painter->setFont(f);
@@ -2772,7 +2819,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
            Also take into account the possibility of the presence of an indicator! */
         int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
         QRect r = option->rect.adjusted(-fspec.left,-fspec.top,fspec.right-ind,fspec.bottom);
-        if (status == "pressed" || status == "toggled")
+        if (status.startsWith("toggled") || status.startsWith("pressed"))
         {
           int hShift = pixelMetric(PM_ButtonShiftHorizontal);
           int vShift = pixelMetric(PM_ButtonShiftVertical);
@@ -2785,11 +2832,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           talign |= Qt::TextShowMnemonic;
 
         int state = 1;
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           state = 0;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           state = 3;
 
         renderLabel(painter,option->palette,
@@ -2816,11 +2863,13 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
         if (!(opt->features & QStyleOptionButton::Flat))
         {
-          if (status == "disabled")
+          if (status.startsWith("disabled"))
           {
             status = "normal";
             if (option->state & State_On)
               status = "toggled";
+            if (isInactive)
+              status.append(QString("-inactive"));
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
@@ -2835,13 +2884,15 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
         if (opt->features & QStyleOptionButton::HasMenu)
         {
-        QString aStatus = "normal";
-        if (status == "disabled")
-          aStatus = "disabled";
-        else if (option->state & State_MouseOver)
-          aStatus = "focused";
-        else if (status == "toggled" || status == "pressed")
-          aStatus = "pressed";
+          QString aStatus = "normal";
+          if (status.startsWith("disabled"))
+            aStatus = "disabled";
+          else if (option->state & State_MouseOver)
+            aStatus = "focused";
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
+            aStatus = "pressed";
+          if (isInactive)
+            aStatus.append(QString("-inactive"));
           renderIndicator(painter,
                           option->rect.adjusted(0, 0, -lspec.right, 0),
                           fspec,dspec,dspec.element+"-down-"+aStatus,
@@ -2849,7 +2900,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        if (status != "disabled" && pb && pb->isDefault())
+        if (!status.startsWith("disabled") && pb && pb->isDefault())
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
           renderIndicator(painter,
@@ -2929,11 +2980,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         else
         {
           int state = 1;
-          if (status == "disabled")
+          if (status.startsWith("disabled"))
             state = 0;
           else if (option->state & State_MouseOver)
             state = 2;
-          else if (status == "toggled" || status == "pressed")
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 3;
           renderLabel(painter,option->palette,
                       !(opt->features & QStyleOptionToolButton::Arrow)
@@ -2954,12 +3005,14 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           break;
 
         QString aStatus = "normal";
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
           aStatus = "disabled";
         else if (option->state & State_MouseOver)
           aStatus = "focused";
-        else if (status == "toggled" || status == "pressed")
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
           aStatus = "pressed";
+        if (isInactive)
+          aStatus.append(QString("-inactive"));
         if (!opt->text.isEmpty()) // it's empty for QStackedWidget
           r.adjust(lspec.left,lspec.top,-lspec.right,-lspec.bottom);
         switch (opt->arrowType) {
@@ -3033,19 +3086,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           }
         }
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
-          status = "normal";
+          status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         if (!(option->state & State_Enabled))
-        {
           painter->restore();
-          status = "disabled";
-        }
 
         if (hasVertTitle)
         {
@@ -3133,6 +3183,12 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           (option->state & State_Selected) ? "toggled" :
           (option->state & State_MouseOver) ? "focused" : "normal"
         : "disabled";
+  bool isInactive = false;
+  if (widget && !widget->isActiveWindow())
+  {
+    status.append(QString("-inactive"));
+    isInactive = true;
+  }
 
   switch (control) {
     case CC_ToolButton : {
@@ -3164,12 +3220,14 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
               const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
               fspec.right = fspec.left = 0;
               QString aStatus = "normal";
-              if (status == "disabled")
+              if (status.startsWith("disabled"))
                 aStatus = "disabled";
               else if (option->state & State_MouseOver)
                 aStatus = "focused";
-              else if (status == "toggled" || status == "pressed")
+              else if (status.startsWith("toggled") || status.startsWith("pressed"))
                 aStatus = "pressed";
+              if (isInactive)
+                aStatus.append(QString("-inactive"));
               renderIndicator(painter,
                               o.rect,
                               fspec,dspec,
@@ -3234,9 +3292,9 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         // SC_ComboBoxEditField includes the icon too
         o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget).adjusted(-margin,0,0,0);
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
-          status = "normal";
+          status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -3287,11 +3345,11 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           }
 
           int state = 1;
-          if (status == "disabled")
+          if (status.startsWith("disabled"))
             state = 0;
           else if (option->state & State_MouseOver)
             state = 2;
-          else if (status == "toggled" || status == "pressed")
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 3;
 
           renderLabel(painter,option->palette,
@@ -3339,13 +3397,16 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         // without this, transparent backgrounds couldn't be used
         painter->fillRect(r, option->palette.brush(QPalette::Window));
 
-        if (status == "disabled")
+        if (status.startsWith("disabled"))
         {
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        renderFrame(painter,r,fspec,fspec.element+"-normal");
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+        QString suffix = "-normal";
+        if (isInactive)
+          suffix = "-normal-inactive";
+        renderFrame(painter,r,fspec,fspec.element+suffix);
+        renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
 
@@ -3436,20 +3497,24 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           painter->setTransform(m, true);
         }
 
+        QString suffix = "-normal";
+        if (isInactive)
+          suffix = "-normal-inactive";
         if (option->state & State_Enabled)
         {
           if (!opt->upsideDown)
             fspec.capsuleV = 1;
           else
             fspec.capsuleV = -1;
-          renderFrame(painter,empty,fspec,fspec.element+"-normal");
-          renderInterior(painter,empty,fspec,ispec,ispec.element+"-normal");
+          renderFrame(painter,empty,fspec,fspec.element+suffix);
+          renderInterior(painter,empty,fspec,ispec,ispec.element+suffix);
           if (!opt->upsideDown)
             fspec.capsuleV = -1;
           else
             fspec.capsuleV = 1;
-          renderFrame(painter,full,fspec,fspec.element+"-toggled");
-          renderInterior(painter,full,fspec,ispec,ispec.element+"-toggled");
+          suffix.replace(QString("normal"),QString("toggled"));
+          renderFrame(painter,full,fspec,fspec.element+suffix);
+          renderInterior(painter,full,fspec,ispec,ispec.element+suffix);
         }
         else
         {
@@ -3457,8 +3522,8 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           painter->setOpacity(DISABLED_OPACITY);
 
           fspec.hasCapsule = false;
-          renderFrame(painter,grooveRect,fspec,fspec.element+"-normal");
-          renderInterior(painter,grooveRect,fspec,ispec,ispec.element+"-normal");
+          renderFrame(painter,grooveRect,fspec,fspec.element+suffix);
+          renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
           painter->restore();
         }
@@ -3492,14 +3557,18 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         QRect dial(subControlRect(CC_Dial,opt,SC_DialGroove,widget));
         QRect handle(subControlRect(CC_Dial,opt,SC_DialHandle,widget));
 
-        renderElement(painter,"dial",dial);
-        renderElement(painter,"dial-handle",handle);
+        QString suffix;
+        if (isInactive)
+          suffix = "-inactive";
+
+        renderElement(painter,"dial"+suffix,dial);
+        renderElement(painter,"dial-handle"+suffix,handle);
         
         if (widget)
         {
           const QDial *d = qobject_cast<const QDial *>(widget);
           if (d && d->notchesVisible())
-            renderElement(painter,"dial-notches",dial);
+            renderElement(painter,"dial-notches"+suffix,dial);
         }
       }
 
@@ -4285,8 +4354,8 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         s = defaultSize
             /* Unlike the case of CT_PushButton, the frame widths aren't taken
                into account yet. Qt seems to consider toolbuttons frameless,
-               althought it may add 4px to their heights (-> qtoolbutton.cpp
-               -> QSize QToolButton::sizeHint() const). */
+               althought it may add 4px to their widths or heights
+               (-> qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
             + QSize(fspec.left+fspec.right, fspec.top+fspec.bottom)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
@@ -4528,11 +4597,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
   }
 
   // I'm too cautious to not add this:
-  int dw = defaultSize.width() - s.width();
-  int dh = defaultSize.height() - s.height();
-  s = s + QSize(dw > 0 ? dw : 0, dh > 0 ? dh : 0);
-
-  return s;
+  return s.expandedTo(defaultSize);
 }
 
 QSize Kvantum::sizeCalculated(const QFont &font,
@@ -4820,7 +4885,11 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
         if (qobject_cast<const QAbstractItemView *>(widget))
         {
           const frame_spec fspec = getFrameSpec("PanelButtonCommand");
-          r.adjust(-fspec.left,-fspec.top,fspec.right,fspec.bottom);
+          const label_spec lspec = getLabelSpec("PanelButtonCommand");
+          r.adjust(-fspec.left-lspec.left,
+                   -fspec.top-lspec.top,
+                   fspec.right+lspec.right,
+                   fspec.bottom+lspec.bottom);
         }
       }
       return r;
@@ -5504,12 +5573,22 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
   bounds.getRect(&x,&y,&w,&h);
 
   QSvgRenderer *renderer = 0;
+  QString element_ (element);
 
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element))
+  if (themeRndr && themeRndr->isValid()
+      && (themeRndr->elementExists(element_)
+          || (element_.contains("-inactive")
+              && themeRndr->elementExists(element_.remove(QString("-inactive"))))))
+  {
     renderer = themeRndr;
-  // always use the default SVG image as fallback
-  else if (defaultRndr && defaultRndr->isValid() && defaultRndr->elementExists(element))
+  }
+  /* always use the default SVG image (which doesn't contain
+     any object for the inactive state) as fallback */
+  else if (defaultRndr && defaultRndr->isValid()
+           && defaultRndr->elementExists(element_.remove(QString("-inactive"))))
+  {
     renderer = defaultRndr;
+  }
   else
     return false;
 
@@ -5525,7 +5604,7 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
         painter->save();
         painter->setClipRect(QRect(x,y,w,h));
         for (int i=0; i<hpatterns; i++)
-          renderer->render(painter,element,QRect(x+i*hsize,y,hsize,h));
+          renderer->render(painter,element_,QRect(x+i*hsize,y,hsize,h));
         painter->restore();
       }
 
@@ -5536,7 +5615,7 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
         painter->save();
         painter->setClipRect(QRect(x,y,w,h));
         for (int i=0; i<vpatterns; i++)
-          renderer->render(painter,element,QRect(x,y+i*vsize,w,vsize));
+          renderer->render(painter,element_,QRect(x,y+i*vsize,w,vsize));
         painter->restore();
       }
 
@@ -5550,13 +5629,13 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
         for (int i=0; i<hpatterns; i++)
         {
           for (int j=0; j<vpatterns; j++)
-            renderer->render(painter,element,QRect(x+i*hsize,y+j*vsize,hsize,vsize));
+            renderer->render(painter,element_,QRect(x+i*hsize,y+j*vsize,hsize,vsize));
         }
         painter->restore();
       }
     }
     else
-      renderer->render(painter,element,QRect(x,y,w,h));
+      renderer->render(painter,element_,QRect(x,y,w,h));
   }
 
   return true;

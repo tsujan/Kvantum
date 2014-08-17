@@ -1,3 +1,7 @@
+V0.5
+---------
+ * Added optional inactive sub-states. The default theme doesn't use them.
+
 V0.4.1
 ---------
  * Corrected slider position and groove.
