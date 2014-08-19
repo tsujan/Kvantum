@@ -1,5 +1,5 @@
-// Adapted from QuantumStyle (C) Saïd LANKRI (not developed anymore but
-// continued as QSvgStyle <https://github.com/DexterMagnific/QSvgStyle>)
+// Started as a fork of QuantumStyle (C) Saïd LANKRI (not developed anymore
+// but continued as QSvgStyle <https://github.com/DexterMagnific/QSvgStyle>)
 
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
@@ -2932,6 +2932,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                   && (opt->features & QStyleOptionToolButton::HasMenu)))
           {
             fspec.right = 0;
+          }
+
+          /* respect the toolbar text color */
+          const theme_spec tspec = settings->getThemeSpec();
+          if (!tspec.group_toolbar_buttons
+              && tb->autoRaise()
+              && qobject_cast<const QToolBar *>(tb->parentWidget()))
+          {
+            const label_spec lspec1 = getLabelSpec("Toolbar");
+            lspec.normalColor = lspec1.normalColor;
           }
         }
 

@@ -1,6 +1,3 @@
-// Adapted from QuantumStyle (not developed anymore but
-// continued as QSvgStyle <https://github.com/DexterMagnific/QSvgStyle>)
-
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
  * 
@@ -43,21 +40,16 @@ class Kvantum : public QCommonStyle {
   Q_OBJECT
 
   public:
-    /*
-       Default constructor. Loads the Kvantum configuration file and
-       sets the default and user set themes, among other things.
-     */
     Kvantum();
     ~Kvantum();
 
     /*
-       Set the name of the user specific theme.
-       If there is no themename, then this style will bypass
-       this setting and fallback to the default config.
+       Set the name of the user specific theme. If there
+       is no themename, the default config will be used.
      */
     void setUserTheme(const QString &themename);
     /*
-     * Use the built-in config.
+       Use the default config.
      */
     void setBuiltinDefaultTheme();
 
