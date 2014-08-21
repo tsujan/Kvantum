@@ -39,6 +39,8 @@
 #include <QAbstractItemView>
 #include <QDockWidget>
 #include <QDial>
+#include <QDir>
+#include <QTextStream>
 //#include <QBitmap>
 #include <QtCore/qmath.h>
 //#include <QDialogButtonBox> // for dialog buttons layout
@@ -57,16 +59,38 @@ Kvantum::Kvantum()
   settings = defaultSettings = themeSettings = NULL;
   defaultRndr = themeRndr = NULL;
   globalSettings = NULL;
+  singleClick = true;
+
+  QString homeDir = QDir::homePath();
 
   char * _xdg_config_home = getenv("XDG_CONFIG_HOME");
-  if (!_xdg_config_home) {
-    char *home = getenv("HOME");
-    if (!home)
-      qDebug("CRITICAL : HOME environment variable not found ! You'll have problems !");
-
-    xdg_config_home = QString("%1/.config").arg(home);
-  } else
+  if (!_xdg_config_home)
+    xdg_config_home = QString("%1/.config").arg(homeDir);
+  else
     xdg_config_home = QString(_xdg_config_home);
+
+  QString kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
+  if (!QFile::exists(kdeGlobals))
+    kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
+  if (QFile::exists(kdeGlobals))
+  {
+    QFile file(kdeGlobals);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+      QTextStream in(&file);
+      while (!in.atEnd())
+      {
+        QString line = in.readLine();
+        if (line.startsWith("SingleClick"))
+        {
+          if (line.endsWith("=false") || line.endsWith("=0"))
+            singleClick = false;
+          break;
+        }
+      }
+      file.close();
+    }
+  }
 
   // load global config file
   if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
@@ -3915,7 +3939,7 @@ int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidge
     case SH_ItemView_ShowDecorationSelected :
     case SH_ItemView_ArrowKeysNavigateIntoChildren : return false;
 
-    case SH_ItemView_ActivateItemOnSingleClick : return true;
+    case SH_ItemView_ActivateItemOnSingleClick : return singleClick;
 
     case SH_ToolButton_PopupDelay :
     case SH_Menu_SubMenuPopupDelay : return 250;

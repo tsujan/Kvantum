@@ -2,6 +2,7 @@ V0.5
 ---------
  * Added optional inactive sub-states. The default theme doesn't use them.
  * Respect the toolbar text color with auto-raised buttons.
+ * Read kdeglobals for deciding how to activate view items with single-click as the fallback.
 
 V0.4.1
 ---------

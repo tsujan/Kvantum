@@ -207,6 +207,8 @@ class Kvantum : public QCommonStyle {
     /* To be called to cumpute theme dependencies. */
     void setupThemeDeps();
 
+    bool singleClick;
+
     /* LibreOffice, Plasma and systemsettings need workarounds. */
     bool isLibreoffice;
     bool isPlasma;
