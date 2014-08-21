@@ -204,9 +204,11 @@ class Kvantum : public QCommonStyle {
     ShortcutHandler *itsShortcutHandler;
     WindowManager *itsWindowManager;
 
-    /* To be called to cumpute theme dependencies. */
+    /* Set theme dependencies. */
     void setupThemeDeps();
 
+    /* Just under KDE, follow its setting
+       for single or double clicking. */
     bool singleClick;
 
     /* LibreOffice, Plasma and systemsettings need workarounds. */

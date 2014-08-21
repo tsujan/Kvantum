@@ -30,7 +30,7 @@ KDE:
 
 	/usr/lib/qt4/plugins/styles/
 
-Create this folder (as root, of course) if it doesn't exist. There may also be other styles directories, like "/usr/lib/kde4/plugins/styles/" or "/usr/lib/x86_64-linux-gnu/qt4/plugins/styles/", but the above one is the best.
+Create this folder (as root, of course) if it doesn't exist. There may also be other styles directories, like "/usr/lib/kde4/plugins/styles/", "/usr/lib/x86_64-linux-gnu/qt4/plugins/styles/" or "/usr/lib64/qt4/plugins/styles/"; use them only if the above one doesn't work for you.
 
 (2) Import "color/Kvantum.colors" from 'System Settings > Application Appearance > Colors > Scheme', select it and click Apply.
 
@@ -43,6 +43,12 @@ Other DEs:
 (2) Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style';
 
 (3) Manually enter the colors defined in the file "color/Colors" with 'qtconfig-qt4 > Appearance > Tune Palette...' and then, save the result with 'File > Save'.
+
+****************
+*   Updating   *
+****************
+
+If you have installed Kvantum and want to update it now, first change the style to another theme (Oxygen, for example), then remove the old file "libkvantum.so" and put the new one in its place.
 
 ***************
 *   Preview   *
