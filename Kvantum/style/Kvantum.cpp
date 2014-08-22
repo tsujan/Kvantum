@@ -112,7 +112,8 @@ Kvantum::Kvantum()
     subApp = true;
   else if (appName == "soffice.bin")
     isLibreoffice = true;
-  else if (appName == "plasma" || appName.startsWith("plasma-"))
+  else if (appName == "plasma" || appName.startsWith("plasma-")
+           || appName == "kded4") // this is for the infamous appmenu
       isPlasma = true;
   else if (appName == "systemsettings")
       isSystemSettings = true;
@@ -6010,8 +6011,8 @@ void Kvantum::renderLabel(
 {
   // compute text and icon rect
   QRect r;
-  if (((isPlasma && icon.isNull())
-       || tialign != Qt::ToolButtonIconOnly)
+  if (!isPlasma
+      && tialign != Qt::ToolButtonIconOnly
       && !text.isEmpty())
     r = labelRect(bounds,fspec,lspec);
   else
@@ -6064,9 +6065,9 @@ void Kvantum::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !icon.isNull())
     painter->drawPixmap(ricon,icon);
 
-  if (((isPlasma && icon.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
-       || tialign != Qt::ToolButtonIconOnly)
-      && !text.isEmpty())
+  if (isPlasma /*&& icon.isNull()*/ // Why do some Plasma toolbuttons pretend to have only icons?
+      || (tialign != Qt::ToolButtonIconOnly
+          && !text.isEmpty()))
   {
     if (state != 0)
     {
