@@ -110,13 +110,13 @@ Kvantum::Kvantum()
   const QString appName = QApplication::applicationName();
   if (appName == "Qt-subapplication")
     subApp = true;
-  else if (appName == "soffice.bin")
+  /*else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
       isPlasma = true;
   else if (appName == "systemsettings")
-      isSystemSettings = true;
+      isSystemSettings = true;*/
 
   connect(progresstimer,SIGNAL(timeout()), this,SLOT(advanceProgresses()));
 
@@ -264,8 +264,29 @@ void Kvantum::polish(QWidget * widget)
   }
 }
 
+static QString getAppName(const QString &file)
+{
+  QString appName(file);
+  int slashPos(appName.lastIndexOf('/'));
+  if(slashPos != -1)
+    appName.remove(0, slashPos+1);
+  return appName;
+}
+
 void Kvantum::polish(QApplication *app)
 {
+  /* use this old-fashioned method to get the app name
+     because, apparently, QApplication::applicationName()
+     doesn't work correctly with all versions of Qt4 */
+  QString appName = getAppName(app->argv()[0]);
+  if (appName == "soffice.bin")
+    isLibreoffice = true;
+  else if (appName == "plasma" || appName.startsWith("plasma-")
+           || appName == "kded4") // this is for the infamous appmenu
+      isPlasma = true;
+  else if (appName == "systemsettings")
+      isSystemSettings = true;
+
   QCommonStyle::polish(app);
   if (itsShortcutHandler)
   {

@@ -4,6 +4,7 @@ V0.5
  * Respect the toolbar text color with auto-raised buttons.
  * Read kdeglobals for deciding how to activate view items with single-click as the fallback.
  * Exclude "appmenu" as a Plasma app.
+ * Use the old-fashioned method to get the application name because, apparently, applicationName() doesn't work with all Qt4 versions.
 
 V0.4.1
 ---------
