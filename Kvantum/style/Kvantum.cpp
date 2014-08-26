@@ -1808,7 +1808,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 2;
 
-          if (l.size() > 0) {
+          if (l.size() > 0)
+          {
             // menu label
             if (opt->icon.isNull())
               renderLabel(painter,option->palette,
@@ -1828,18 +1829,20 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           }
           int iw = pixelMetric(PM_IndicatorWidth,option,widget);
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
-          if (l.size() > 1)
-            // shortcut
+          if (l.size() > 1) // shortcut
+          {
+            int space = lspec.right + fspec.right;
+            if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
+              space += dspec.size + lspec.tispace; // see CT_MenuItem
+            if (opt->checkType != QStyleOptionMenuItem::NotCheckable)
+              space += iw + lspec.tispace; // see CT_MenuItem
             renderLabel(painter,option->palette,
-                        option->rect.adjusted(0,
-                                              0,
-                                              opt->checkType == QStyleOptionMenuItem::NotCheckable ?
-                                                -lspec.tispace : -iw - 2*lspec.tispace,
-                                              0),
+                        option->rect.adjusted(0,0,-space,0),
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
                         state);
+          }
 
           QStyleOptionMenuItem o(*opt);
           o.rect = alignedRect(QApplication::layoutDirection(),
@@ -3470,6 +3473,39 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
            horizontal state later, we draw the slider
            here, beforing restoring the painter */
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
+
+        /* but we draw the glow first because the
+           slider may be rounded at top or bottom */
+        if (!status.startsWith("disabled"))
+        {
+          const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
+          int glowH = 2*pixelMetric(PM_ScrollBarExtent);
+          int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
+          if (option->state & State_Horizontal)
+          {
+            topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
+            bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
+            topGlowH = o.rect.x()+sFspec.top-topGlowY;
+          }
+          else
+          {
+            topGlowY = qMax(o.rect.y()-glowH, r.y()+fspec.top);
+            bottomGlowY = o.rect.y()+o.rect.height()-sFspec.bottom;
+            topGlowH = o.rect.y()+sFspec.top-topGlowY;
+          }
+          bottomGlowH = glowH+sFspec.bottom - qMax(bottomGlowY+glowH+sFspec.bottom - (r.y()+r.height()-fspec.bottom), 0);
+          QRect topGlow(r.x()+fspec.left,
+                        topGlowY,
+                        r.width()-fspec.left-fspec.right,
+                        topGlowH);
+          QRect bottomGlow(r.x()+fspec.left,
+                           bottomGlowY,
+                           r.width()-fspec.left-fspec.right,
+                           bottomGlowH);
+          renderElement(painter,ispec.element+"-topglow"+suffix,topGlow);
+          renderElement(painter,ispec.element+"-bottomglow"+suffix,bottomGlow);
+        }
+
         drawControl(CE_ScrollBarSlider,&o,painter,widget);
 
         if (option->state & State_Horizontal)

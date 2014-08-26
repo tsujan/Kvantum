@@ -1,3 +1,8 @@
+V0.5.1
+---------
+ * Added optional top and bottom (or left and right) glows for scrollbar sliders.
+ * Fixed the position of shortcut text for a menu-item that points to a submenu (like in the Extract menu-item of Ark's Action menu).
+
 V0.5
 ---------
  * Added optional inactive sub-states. The default theme doesn't use them.
