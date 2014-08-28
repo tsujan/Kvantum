@@ -2,6 +2,7 @@ V0.5.1
 ---------
  * Added optional top and bottom (or left and right) glows for scrollbar sliders.
  * Fixed the position of shortcut text for a menu-item that points to a submenu (like in the Extract menu-item of Ark's Action menu).
+ * Fixed a condition for rendering (button) texts of Plasma related apps.
 
 V0.5
 ---------

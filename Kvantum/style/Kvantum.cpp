@@ -6122,9 +6122,9 @@ void Kvantum::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !icon.isNull())
     painter->drawPixmap(ricon,icon);
 
-  if (isPlasma /*&& icon.isNull()*/ // Why do some Plasma toolbuttons pretend to have only icons?
-      || (tialign != Qt::ToolButtonIconOnly
-          && !text.isEmpty()))
+  if (((isPlasma && icon.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
+       || tialign != Qt::ToolButtonIconOnly)
+      && !text.isEmpty())
   {
     if (state != 0)
     {
