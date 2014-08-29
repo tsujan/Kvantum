@@ -50,6 +50,7 @@
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
 #define SPIN_BUTTON_WIDTH 16
+#define SLIDER_TICK_SIZE 4
 
 Kvantum::Kvantum()
   : QCommonStyle()
@@ -526,6 +527,26 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
 
+      // -> CE_ToolButtonLabel
+      if (widget)
+      {
+        if (QWidget *pw = widget->parentWidget())
+        {
+          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+          {
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+
+            lspec.left = qMin(lspec.left,2);
+            lspec.right = qMin(lspec.right,2);
+            lspec.top = qMin(lspec.top,2);
+            lspec.bottom = qMin(lspec.bottom,2);
+          }
+        }
+      }
+
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
 
@@ -648,6 +669,26 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       frame_spec fspec = getFrameSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+
+      // -> CE_ToolButtonLabel
+      if (widget)
+      {
+        if (QWidget *pw = widget->parentWidget())
+        {
+          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+          {
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+
+            lspec.left = qMin(lspec.left,2);
+            lspec.right = qMin(lspec.right,2);
+            lspec.top = qMin(lspec.top,2);
+            lspec.bottom = qMin(lspec.bottom,2);
+          }
+        }
+      }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
@@ -2106,7 +2147,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           state = 3;
 
         renderLabel(painter,option->palette,
-                    r,
+                    /* since the label is vertically centered, this doesn't do
+                       any harm and is good for Qt4 Designer and similar cases */
+                    r.adjusted(0,-fspec.top-lspec.top,0,fspec.bottom+lspec.bottom),
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
@@ -2972,6 +3015,26 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
 
+        // -> CE_ToolButtonLabel
+        if (widget)
+        {
+          if (QWidget *pw = widget->parentWidget())
+          {
+            if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+            {
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              lspec.left = qMin(lspec.left,2);
+              lspec.right = qMin(lspec.right,2);
+              lspec.top = qMin(lspec.top,2);
+              lspec.bottom = qMin(lspec.bottom,2);
+            }
+          }
+        }
+
         /* the right arrow is attached */
         if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
@@ -2998,8 +3061,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
            button and not just its label here (-> CT_ToolButton)... */
         QRect r = option->rect;
-        /* ... but this doesn't hurt (and is good for centering
-           text in framless buttons like in QtCreator's
+        /* ... but this doesn't do any harm (and is good for
+           centering text in framless buttons like in QtCreator's
            replace widget) because the text is centered. */
         if (tialign == Qt::ToolButtonTextOnly)
         {
@@ -3278,6 +3341,15 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
               frame_spec fspec = getFrameSpec("PanelButtonTool");
               const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
               fspec.right = fspec.left = 0;
+              // -> CE_ToolButtonLabel
+              if (QWidget *pw = widget->parentWidget())
+              {
+                if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+                {
+                  fspec.top = qMin(fspec.top,3);
+                  fspec.bottom = qMin(fspec.bottom,3);
+                }
+              }
               QString aStatus = "normal";
               if (status.startsWith("disabled"))
                 aStatus = "disabled";
@@ -3900,10 +3972,17 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
 
     case PM_ProgressBarChunkWidth : return 20;
 
-    /* slider groove */
+    /* total slider */
     case PM_SliderThickness : {
-      const theme_spec tspec = settings->getThemeSpec();
-      return tspec.slider_width;
+      int thickness = pixelMetric(PM_SliderControlThickness,option,widget);
+      if (const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option))
+      {
+        if (opt->tickPosition & QSlider::TicksAbove)
+          thickness += SLIDER_TICK_SIZE;
+        if (opt->tickPosition & QSlider::TicksBelow)
+          thickness += SLIDER_TICK_SIZE;
+      }
+      return thickness;
     }
 
     /* slider handle */
@@ -3915,6 +3994,24 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
       const theme_spec tspec = settings->getThemeSpec();
       return tspec.slider_handle_width;
     }
+
+    case PM_SliderSpaceAvailable: {
+      if (const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option))
+      {
+        int size = pixelMetric(PM_SliderControlThickness,option,widget);
+        if (opt->tickPosition & QSlider::TicksBelow)
+          ++size;
+        if (opt->tickPosition & QSlider::TicksAbove)
+          ++size;
+        return size;
+      }
+      return QCommonStyle::pixelMetric(metric,option,widget);
+    }
+
+    // this is exactly SLIDER_TICK_SIZE
+    /*case PM_SliderTickmarkOffset: {
+      return SLIDER_TICK_SIZE;
+    }*/
 
     case PM_DockWidgetFrameWidth : {
       /*QString group = "Dock";
@@ -3973,9 +4070,19 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
     case PM_ExclusiveIndicatorWidth :
     case PM_ExclusiveIndicatorHeight : {
       const theme_spec tspec = settings->getThemeSpec();
-      /* make exception for menuitems */
+      /* make exception for menuitems and viewitems */
+      bool isInsideViewitem = false;
+      if (widget)
+      {
+        if (QWidget *pw = widget->parentWidget())
+        {
+          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+            isInsideViewitem = true;
+        }
+      }
       if (isLibreoffice
-          || qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+          || qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+          || isInsideViewitem)
       {
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),
                     tspec.check_size);
@@ -4106,7 +4213,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
     fh = QFontMetrics(widget->font()).height();*/
 
   int cw = contentsSize.width();
-  int ch = contentsSize.height();
+  //int ch = contentsSize.height();
 
   QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
   QSize s = QSize(0,0);
@@ -4250,9 +4357,11 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         if (!txt.isEmpty() && !opt->icon.isNull())
           s = s + QSize(lspec.left+lspec.right + lspec.tispace,
                         lspec.top+lspec.bottom);
-        else
+        else if (!txt.isEmpty())
           s = s + QSize(lspec.left+lspec.right,
                         lspec.top+lspec.bottom);
+        else // a 2-px margin for icons
+          s = s + QSize(4, 4);
 
         /* this was for KColorButton but apparently
            it isn't needed when sizeCalculated() isn't used */
@@ -4427,6 +4536,26 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
 
+        // -> CE_ToolButtonLabel
+        if (widget)
+        {
+          if (QWidget *pw = widget->parentWidget())
+          {
+            if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+            {
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              lspec.left = qMin(lspec.left,2);
+              lspec.right = qMin(lspec.right,2);
+              lspec.top = qMin(lspec.top,2);
+              lspec.bottom = qMin(lspec.bottom,2);
+            }
+          }
+        }
+
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
 
         // -> CE_ToolButtonLabel
@@ -4457,16 +4586,19 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
                       dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
                     0);
 
-        /* add the spacings */
-        if(tialign == Qt::ToolButtonTextOnly /*|| tialign == Qt::ToolButtonIconOnly*/)
-          s = s + QSize(lspec.left+lspec.right,
-                        lspec.top+lspec.bottom);
-        else if(tialign == Qt::ToolButtonTextBesideIcon)
-          s = s + QSize(lspec.left+lspec.right + lspec.tispace,
-                        lspec.top+lspec.bottom);
-        else if(tialign == Qt::ToolButtonTextUnderIcon)
-          s = s + QSize(lspec.left+lspec.right,
-                        lspec.top+lspec.bottom + lspec.tispace);
+        /* add the spacings if there's a text */
+        if (!opt->text.isEmpty())
+        {
+          if (tialign == Qt::ToolButtonTextOnly /*|| tialign == Qt::ToolButtonIconOnly*/)
+            s = s + QSize(lspec.left+lspec.right,
+                          lspec.top+lspec.bottom);
+          else if(tialign == Qt::ToolButtonTextBesideIcon)
+            s = s + QSize(lspec.left+lspec.right + lspec.tispace,
+                          lspec.top+lspec.bottom);
+          else if(tialign == Qt::ToolButtonTextUnderIcon)
+            s = s + QSize(lspec.left+lspec.right,
+                          lspec.top+lspec.bottom + lspec.tispace);
+        }
 
         if (widget)
         {
@@ -4581,14 +4713,11 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
       break;
     }
 
-    case CT_Slider : {
-      if (option->state & State_Horizontal)
-        s = QSize(cw,pixelMetric(PM_SliderControlThickness,option,widget));
-      else
-        s = QSize(pixelMetric(PM_SliderControlThickness,option,widget),ch);
-
+    // automatically correct
+    /*case CT_Slider : {
+      return defaultSize;
       break;
-    }
+    }*/
 
     case CT_ItemViewItem : {
       /*
@@ -5216,24 +5345,41 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
     }
 
     case CC_Slider : {
-      const int thick = pixelMetric(PM_SliderThickness,option,widget);
+      const QStyleOptionSlider *opt =
+        qstyleoption_cast<const QStyleOptionSlider *>(option);
+      int halfTick = SLIDER_TICK_SIZE/2;
       const bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
-        case SC_SliderGroove :
+        case SC_SliderGroove : {
+          const theme_spec tspec = settings->getThemeSpec();
+          const int grooveThickness = tspec.slider_width;
           if (horiz)
-            return QRect(x,y+(h-thick)/2,w,thick);
+          {
+            QRect r = QRect(x,y+(h-grooveThickness)/2,w,grooveThickness);
+            if (opt && opt->tickPosition & QSlider::TicksAbove)
+              r.adjust(0,halfTick,0,halfTick);
+            if (opt && opt->tickPosition & QSlider::TicksBelow)
+              r.adjust(0,-halfTick,0,-halfTick);
+            return r;
+          }
           else
-            return QRect(x+(w-thick)/2,y,thick,h);
+          {
+            QRect r = QRect(x+(w-grooveThickness)/2,y,grooveThickness,h);
+            if (opt && opt->tickPosition & QSlider::TicksAbove) // left
+              r.adjust(halfTick,0,halfTick,0);
+            if (opt && opt->tickPosition & QSlider::TicksBelow) // right
+              r.adjust(-halfTick,0,-halfTick,0);
+            return r;
+          }
+        }
 
         case SC_SliderHandle : {
-          const QStyleOptionSlider *opt =
-            qstyleoption_cast<const QStyleOptionSlider *>(option);
-
-          if (opt) {
+          if (opt)
+          {
             subControlRect(CC_Slider,option,SC_SliderGroove,widget).getRect(&x,&y,&w,&h);
 
             const int len = pixelMetric(PM_SliderLength, option, widget);
-            const int thickness = pixelMetric(PM_SliderControlThickness, option, widget);
+            const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
             const int sliderPos(sliderPositionFromValue(opt->minimum,
                                                         opt->maximum,
                                                         opt->sliderPosition,
@@ -5241,9 +5387,9 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                                                         opt->upsideDown));
 
             if (horiz)
-              return QRect(x+sliderPos,y+(h-thickness)/2,len,thickness);
+              return QRect(x+sliderPos,y+(h-handleThickness)/2,len,handleThickness);
             else
-              return QRect(x+(w-thickness)/2,y+sliderPos,thickness,len);
+              return QRect(x+(w-handleThickness)/2,y+sliderPos,handleThickness,len);
           }
 
         }
@@ -5337,9 +5483,18 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                          && (opt->features & QStyleOptionToolButton::HasMenu))
                 {
                   const QString group = "PanelButtonTool";
-                  const frame_spec fspec = getFrameSpec(group);
+                  frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
                   const label_spec lspec = getLabelSpec(group);
+                  // -> CE_ToolButtonLabel
+                  if (QWidget *pw = widget->parentWidget())
+                  {
+                    if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+                    {
+                      fspec.left = qMin(fspec.left,3);
+                      fspec.right = qMin(fspec.right,3);
+                    }
+                  }
                   return option->rect.adjusted(0,
                                                0,
                                                - lspec.tispace-dspec.size
@@ -5380,8 +5535,17 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                          && (opt->features & QStyleOptionToolButton::HasMenu))
                 {
                   const QString group = "PanelButtonTool";
-                  const frame_spec fspec = getFrameSpec(group);
+                  frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
+                  // -> CE_ToolButtonLabel
+                  if (QWidget *pw = widget->parentWidget())
+                  {
+                    if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
+                    {
+                      fspec.left = qMin(fspec.left,3);
+                      fspec.right = qMin(fspec.right,3);
+                    }
+                  }
                   int l = dspec.size
                           // -> CE_ToolButtonLabel
                           + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
