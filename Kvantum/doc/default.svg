@@ -32,8 +32,8 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="151.5"
-     inkscape:cy="1009.8192"
+     inkscape:cx="-14"
+     inkscape:cy="1010.8192"
      inkscape:window-x="47"
      inkscape:window-y="75"
      inkscape:current-layer="svg2"
@@ -833,11 +833,11 @@
       <stop
          id="stop3786"
          offset="0"
-         style="stop-color:#3b3b3b;stop-opacity:1;" />
+         style="stop-color:#414141;stop-opacity:1;" />
       <stop
          id="stop3788"
          offset="1"
-         style="stop-color:#5f5f5f;stop-opacity:1;" />
+         style="stop-color:#555555;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"

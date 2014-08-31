@@ -3,6 +3,7 @@ V0.5.2
  * No out-of-grid text, icon, checkbox or tool-button.
  * Give space to slider ticks.
  * Draw slider tickmarks when available.
+ * Less concave pressed/toggled buttons look more natural.
 
 V0.5.1
 ---------

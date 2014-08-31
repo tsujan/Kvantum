@@ -594,8 +594,8 @@
 <linearGradient xlink:href="#linearGradient3771" id="linearGradient7809" y1="675" x1="240" y2="705" x2="240" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3837" id="linearGradient7800" y1="15" x1="15.0625" y2="1.03125" gradientUnits="userSpaceOnUse" x2="15"/>
 <linearGradient id="linearGradient3784">
-<stop offset="0" style="stop-color:#3b3b3b" id="stop3786"/>
-<stop offset="1" style="stop-color:#5f5f5f" id="stop3788"/>
+<stop offset="0" style="stop-color:#414141" id="stop3786"/>
+<stop offset="1" style="stop-color:#555" id="stop3788"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(3,0,0,3,242.00002,41.00001)" xlink:href="#linearGradient3784" id="linearGradient8054" y1="3" x1="3" y2="13" gradientUnits="userSpaceOnUse" x2="3"/>
 <linearGradient gradientTransform="matrix(-3,0,0,-3,249,714)" xlink:href="#linearGradient3801" id="linearGradient8270" y1="14" x1="2.0625" y2="2" gradientUnits="userSpaceOnUse" x2="2"/>
