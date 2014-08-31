@@ -2,6 +2,7 @@ V0.5.2
 ---------
  * No out-of-grid text, icon, checkbox or tool-button.
  * Give space to slider ticks.
+ * Draw slider tickmarks when available.
 
 V0.5.1
 ---------

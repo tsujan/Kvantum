@@ -108,6 +108,16 @@ class Kvantum : public QCommonStyle {
                        const QRect &bounds,
                        int hsize = 0, int vsize = 0,
                        Qt::Orientation orientation = Qt::Horizontal) const;
+    /* Render the (vertical) slider ticks. */
+    void renderSliderTick(QPainter* painter,
+                          const QString& element,
+                          const QRect& ticksRect,
+                          const int interval,
+                          const int available,
+                          const int min,
+                          const int max,
+                          bool above, // left
+                          bool inverted) const;
 
     /* Return the frame spec of the given widget from the theme config file. */
     inline frame_spec getFrameSpec(const QString &widgetName) const;

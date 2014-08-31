@@ -50,7 +50,7 @@
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
 #define SPIN_BUTTON_WIDTH 16
-#define SLIDER_TICK_SIZE 4
+#define SLIDER_TICK_SIZE 5
 
 Kvantum::Kvantum()
   : QCommonStyle()
@@ -3597,7 +3597,8 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
       const QStyleOptionSlider *opt =
         qstyleoption_cast<const QStyleOptionSlider *>(option);
 
-      if (opt) {
+      if (opt)
+      {
         QStyleOptionSlider o(*opt);
 
         QString group = "Slider";
@@ -3695,6 +3696,66 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         if (option->state & State_Horizontal)
           painter->restore();
 
+        /* slider ticks */
+        QRect r = option->rect;
+        if (option->state & State_Horizontal)
+        {
+          painter->save();
+          r.setRect(y, x, h, w);
+          QTransform m;
+          m.translate(0, 2*y+h);
+          m.rotate(-90);
+          m.translate(2*y+h, 0); m.scale(-1,1);
+          painter->setTransform(m, true);
+        }
+        if (status.startsWith("disabled"))
+        {
+          painter->save();
+          painter->setOpacity(0.4);
+        }
+        suffix = "-normal";
+        if (isInactive)
+          suffix = "-normal-inactive";
+        /* since we set the default size for CT_Slider, we use this
+           to have no space between the slider's ticks and its handle */
+        int extra = (r.width() - pixelMetric(PM_SliderThickness,option,widget))/2;
+        int interval = opt->tickInterval;
+        if (interval <= 0)
+          interval = opt->pageStep;
+        int available = r.height() - pixelMetric(PM_SliderLength,option,widget);
+        int min = opt->minimum;
+        int max = opt->maximum;
+        if (max == 99) max = 100; // to get the end tick
+        if (opt->tickPosition & QSlider::TicksAbove)
+        {
+          QRect tickRect(r.x() + extra,
+                         r.y(),
+                         SLIDER_TICK_SIZE,
+                         r.height());
+          renderSliderTick(painter,ispec.element+"-tick"+suffix,
+                           tickRect,
+                           interval,available,min,max,
+                           true,
+                           opt->upsideDown);
+        }
+        if (opt->tickPosition & QSlider::TicksBelow)
+        {
+          QRect tickRect(r.x()+r.width()-SLIDER_TICK_SIZE - extra,
+                         r.y(),
+                         SLIDER_TICK_SIZE,
+                         r.height());
+          renderSliderTick(painter,ispec.element+"-tick"+suffix,
+                           tickRect,
+                           interval,available,min,max,
+                           false,
+                           opt->upsideDown);
+        }
+        if (!(option->state & State_Enabled))
+          painter->restore();
+        if (option->state & State_Horizontal)
+          painter->restore();
+
+        /* slider handle */
         group = "SliderCursor";
         fspec = getFrameSpec(group);
         ispec = getInteriorSpec(group);
@@ -3995,20 +4056,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
       return tspec.slider_handle_width;
     }
 
-    case PM_SliderSpaceAvailable: {
-      if (const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option))
-      {
-        int size = pixelMetric(PM_SliderControlThickness,option,widget);
-        if (opt->tickPosition & QSlider::TicksBelow)
-          ++size;
-        if (opt->tickPosition & QSlider::TicksAbove)
-          ++size;
-        return size;
-      }
+    /* the default is good, although we don't use it */
+    /*case PM_SliderSpaceAvailable: {
       return QCommonStyle::pixelMetric(metric,option,widget);
-    }
+    }*/
 
-    // this is exactly SLIDER_TICK_SIZE
+    /* this would be exactly SLIDER_TICK_SIZE if didn't leave CT_Slider
+       to have its default size but it has no effect in our calculations */
     /*case PM_SliderTickmarkOffset: {
       return SLIDER_TICK_SIZE;
     }*/
@@ -4713,10 +4767,13 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
       break;
     }
 
-    // automatically correct
+    /* digiKam doesn't like this calculation */
     /*case CT_Slider : {
-      return defaultSize;
-      break;
+      if (option->state & State_Horizontal)
+        s = QSize(defaultSize.width(), pixelMetric(PM_SliderThickness,option,widget));
+      else
+        s = QSize(pixelMetric(PM_SliderThickness,option,widget), defaultSize.height());
+      return s;
     }*/
 
     case CT_ItemViewItem : {
@@ -5351,25 +5408,29 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
       const bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
         case SC_SliderGroove : {
-          const theme_spec tspec = settings->getThemeSpec();
-          const int grooveThickness = tspec.slider_width;
-          if (horiz)
+          if (opt)
           {
-            QRect r = QRect(x,y+(h-grooveThickness)/2,w,grooveThickness);
-            if (opt && opt->tickPosition & QSlider::TicksAbove)
-              r.adjust(0,halfTick,0,halfTick);
-            if (opt && opt->tickPosition & QSlider::TicksBelow)
-              r.adjust(0,-halfTick,0,-halfTick);
-            return r;
-          }
-          else
-          {
-            QRect r = QRect(x+(w-grooveThickness)/2,y,grooveThickness,h);
-            if (opt && opt->tickPosition & QSlider::TicksAbove) // left
-              r.adjust(halfTick,0,halfTick,0);
-            if (opt && opt->tickPosition & QSlider::TicksBelow) // right
-              r.adjust(-halfTick,0,-halfTick,0);
-            return r;
+            const theme_spec tspec = settings->getThemeSpec();
+            const int grooveThickness = tspec.slider_width;
+             int ticks = opt->tickPosition;
+            if (horiz)
+            {
+              QRect r = QRect(x,y+(h-grooveThickness)/2,w,grooveThickness);
+              if (ticks == QSlider::TicksAbove)
+                r.adjust(0,halfTick,0,halfTick);
+              else if (ticks == QSlider::TicksBelow)
+                r.adjust(0,-halfTick,0,-halfTick);
+              return r;
+            }
+            else
+            {
+              QRect r = QRect(x+(w-grooveThickness)/2,y,grooveThickness,h);
+              if (ticks == QSlider::TicksAbove) // left
+                r.adjust(halfTick,0,halfTick,0);
+              else if (ticks == QSlider::TicksBelow) // right
+                r.adjust(-halfTick,0,-halfTick,0);
+              return r;
+            }
           }
         }
 
@@ -5380,16 +5441,22 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
 
             const int len = pixelMetric(PM_SliderLength, option, widget);
             const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
-            const int sliderPos(sliderPositionFromValue(opt->minimum,
-                                                        opt->maximum,
-                                                        opt->sliderPosition,
-                                                        (horiz ? w : h) - len,
-                                                        opt->upsideDown));
+            const int sliderPos = sliderPositionFromValue (opt->minimum,
+                                                           opt->maximum,
+                                                           opt->sliderPosition,
+                                                           (horiz ? w : h) - len,
+                                                           opt->upsideDown);
 
             if (horiz)
-              return QRect(x+sliderPos,y+(h-handleThickness)/2,len,handleThickness);
+              return QRect(x+sliderPos,
+                           y+(h-handleThickness)/2,
+                           len,
+                           handleThickness);
             else
-              return QRect(x+(w-handleThickness)/2,y+sliderPos,handleThickness,len);
+              return QRect(x+(w-handleThickness)/2,
+                           y+sliderPos,
+                           handleThickness,
+                           len);
           }
 
         }
@@ -5818,15 +5885,15 @@ QRect Kvantum::squaredRect(const QRect& r) const {
   return QRect(r.x(),r.y(),e,e);
 }
 
-bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRect& bounds, int hsize, int vsize, Qt::Orientation orientation) const
+bool Kvantum::renderElement(QPainter* painter,
+                            const QString& element,
+                            const QRect& bounds, int hsize, int vsize,
+                            Qt::Orientation orientation) const
 {
   Q_UNUSED(orientation);
 
   if (!bounds.isValid())
     return false;
-
-  int x,y,h,w;
-  bounds.getRect(&x,&y,&w,&h);
 
   QSvgRenderer *renderer = 0;
   QString element_ (element);
@@ -5850,6 +5917,9 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
 
   if (renderer)
   {
+    int x,y,h,w;
+    bounds.getRect(&x,&y,&w,&h);
+
     if ( (hsize > 0) || (vsize > 0) )
     {
 
@@ -5895,6 +5965,69 @@ bool Kvantum::renderElement(QPainter* painter, const QString& element, const QRe
   }
 
   return true;
+}
+
+void Kvantum::renderSliderTick(QPainter* painter,
+                               const QString& element,
+                               const QRect& ticksRect,
+                               const int interval,
+                               const int available,
+                               const int min,
+                               const int max,
+                               bool above,
+                               bool inverted) const
+{
+  if (!ticksRect.isValid())
+    return;
+
+  QSvgRenderer *renderer = 0;
+  QString element_ (element);
+
+  if (themeRndr && themeRndr->isValid()
+      && (themeRndr->elementExists(element_)
+          || (element_.contains("-inactive")
+              && themeRndr->elementExists(element_.remove(QString("-inactive"))))))
+  {
+    renderer = themeRndr;
+  }
+  else if (defaultRndr && defaultRndr->isValid()
+           && defaultRndr->elementExists(element_.remove(QString("-inactive"))))
+  {
+    renderer = defaultRndr;
+  }
+  else
+    return;
+
+  if (renderer)
+  {
+    if (interval < 1) return;
+
+    int thickness = 1;
+    int len = pixelMetric(PM_SliderLength);
+    int x = ticksRect.x();
+    int y = ticksRect.y();
+    if (!above)
+    {
+      painter->save();
+      QTransform m;
+      m.translate(2*x+ticksRect.width(), 0);
+      m.scale(-1,1);
+      painter->setTransform(m, true);
+    }
+    int current = min;
+    while (current <= max)
+    {
+      const int position = sliderPositionFromValue(min,max,current,available,inverted) + len/2;
+      renderer->render(painter,element_,QRect(x,
+                                              y+position,
+                                              SLIDER_TICK_SIZE,
+                                              thickness));
+
+      current += interval;
+    }
+    if (!above)
+      painter->restore();
+  }
 }
 
 void Kvantum::renderFrame(QPainter *painter,

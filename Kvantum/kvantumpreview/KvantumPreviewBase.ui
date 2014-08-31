@@ -1368,6 +1368,9 @@ check box</string>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
         </widget>
        </item>
        <item row="2" column="0">
@@ -1391,12 +1394,18 @@ check box</string>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
         </widget>
        </item>
        <item row="2" column="2">
         <widget class="QSlider" name="verticalSlider">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
          </property>
         </widget>
        </item>
@@ -1414,6 +1423,9 @@ check box</string>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
          </property>
         </widget>
        </item>
@@ -1455,6 +1467,9 @@ check box</string>
          <property name="invertedAppearance">
           <bool>true</bool>
          </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -1465,6 +1480,9 @@ check box</string>
          <property name="invertedAppearance">
           <bool>true</bool>
          </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
         </widget>
        </item>
        <item row="1" column="0" colspan="4">
@@ -1474,6 +1492,9 @@ check box</string>
          </property>
          <property name="invertedAppearance">
           <bool>true</bool>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
          </property>
         </widget>
        </item>
@@ -1487,6 +1508,9 @@ check box</string>
          </property>
          <property name="invertedAppearance">
           <bool>true</bool>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksBelow</enum>
          </property>
         </widget>
        </item>
@@ -2060,8 +2084,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>94</width>
-              <height>24</height>
+              <width>169</width>
+              <height>72</height>
              </rect>
             </property>
             <attribute name="icon">
@@ -2117,8 +2141,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>94</width>
-              <height>24</height>
+              <width>169</width>
+              <height>72</height>
              </rect>
             </property>
             <attribute name="label">
