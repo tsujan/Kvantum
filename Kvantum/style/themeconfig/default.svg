@@ -1634,33 +1634,10 @@
 <path style="fill:#646464" id="path8401" d="m -220,1264 0,3 30,0 0,-3 -30,0 z"/>
 <path style="fill:url(#radialGradient9120)" id="path8405" d="m -220,1264 0,2 0,2 0,2 30,0 0,-2 0,-4 -30,0 z"/>
 </g>
-<g id="tab-pressed-bottom" transform="translate(383.49775,-221.85406)">
-<path style="fill:#191919" id="path8306" d="m -220,1303 0,3 30,0 0,-3 -30,0 z"/>
 <g style="fill:#39f">
-<path id="path8310" d="m -220,1300 0,3 30,0 0,-3 -30,0 z"/>
-<path id="path8312" d="m -220,1303 0,3 30,0 0,-3 z"/>
-</g>
-</g>
-<g id="tab-pressed-bottomleft" transform="translate(383.49775,-221.85406)">
-<path style="opacity:.22" id="path8361" d="m -220,1300 -3,3 3,0 0,-3 z"/>
-<path style="fill:#191919" id="path8363" d="m -223,1303 -3,3 6,0 0,-3 -3,0 z"/>
-<g style="fill:#39f">
-<path id="path8367" d="m -223,1300 0,3 3,-3 -3,0 z"/>
-<path id="path8369" d="m -226,1300 0,6 3,-3 0,-3 -3,0 z"/>
-<path id="path8373" d="m -220,1300 -3,3 3,0 0,-3 z"/>
-<path id="path8375" d="m -223,1303 -3,3 6,0 0,-3 z"/>
-</g>
-</g>
-<g id="tab-pressed-bottomright" transform="translate(383.49775,-221.85406)">
-<path style="opacity:.22" id="path8379" d="m -190,1300 0,3 3,0 -3,-3 z"/>
-<path style="fill:#191919" id="path8381" d="m -190,1303 0,3 6,0 -3,-3 -3,0 z"/>
-<path style="opacity:.22" id="path8385" d="m -190,1300 3,3 0,-3 -3,0 z"/>
-<g style="fill:#39f">
-<path id="path8387" d="m -187,1300 0,3 3,3 0,-6 -3,0 z"/>
-<path id="path8391" d="m -190,1300 3,3 0,-3 -3,0 z"/>
-<path id="path8393" d="m -190,1300 0,3 3,0 -3,-3 z"/>
-<path id="path8395" d="m -190,1303 0,3 6,0 -3,-3 z"/>
-</g>
+<path id="tab-pressed-bottom" d="m 163.5,1078.1562 0,6 30,0 0,-6 z"/>
+<path id="tab-pressed-bottomleft" d="m 157.5,1078.1562 0,6 6,0 0,-6 z"/>
+<path id="tab-pressed-bottomright" d="m 193.5,1078.1562 0,6 6,0 0,-6 z"/>
 </g>
 <g style="fill:#6e6e6e" id="tab-focused-top" transform="translate(494.2405,-221.82981)">
 <path id="path9140" d="m -390.4449,1266.6447 0,3 30,0 0,-3 -30,0 z"/>
@@ -1727,33 +1704,10 @@
 <path style="fill:#646464" id="path9372" d="m -220,1264 0,3 30,0 0,-3 -30,0 z"/>
 <path style="fill:url(#radialGradient9432)" id="path9374" d="m -220,1264 0,2 0,2 0,2 30,0 0,-2 0,-4 -30,0 z"/>
 </g>
-<g id="tab-toggled-bottom" transform="translate(448.49775,-221.85406)">
-<path style="fill:#191919" id="path9378" d="m -220,1303 0,3 30,0 0,-3 -30,0 z"/>
 <g style="fill:#39f">
-<path id="path9380" d="m -220,1300 0,3 30,0 0,-3 -30,0 z"/>
-<path id="path9382" d="m -220,1303 0,3 30,0 0,-3 z"/>
-</g>
-</g>
-<g id="tab-toggled-bottomleft" transform="translate(448.49775,-221.85406)">
-<path style="opacity:.22" id="path9386" d="m -220,1300 -3,3 3,0 0,-3 z"/>
-<path style="fill:#191919" id="path9388" d="m -223,1303 -3,3 6,0 0,-3 -3,0 z"/>
-<g style="fill:#39f">
-<path id="path9390" d="m -223,1300 0,3 3,-3 -3,0 z"/>
-<path id="path9392" d="m -226,1300 0,6 3,-3 0,-3 -3,0 z"/>
-<path id="path9394" d="m -220,1300 -3,3 3,0 0,-3 z"/>
-<path id="path9396" d="m -223,1303 -3,3 6,0 0,-3 z"/>
-</g>
-</g>
-<g id="tab-toggled-bottomright" transform="translate(448.49775,-221.85406)">
-<path style="opacity:.22" id="path9400" d="m -190,1300 0,3 3,0 -3,-3 z"/>
-<path style="fill:#191919" id="path9402" d="m -190,1303 0,3 6,0 -3,-3 -3,0 z"/>
-<path style="opacity:.22" id="path9404" d="m -190,1300 3,3 0,-3 -3,0 z"/>
-<g style="fill:#39f">
-<path id="path9406" d="m -187,1300 0,3 3,3 0,-6 -3,0 z"/>
-<path id="path9408" d="m -190,1300 3,3 0,-3 -3,0 z"/>
-<path id="path9410" d="m -190,1300 0,3 3,0 -3,-3 z"/>
-<path id="path9412" d="m -190,1303 0,3 6,0 -3,-3 z"/>
-</g>
+<path id="tab-toggled-bottom" d="m 228.5,1078.1562 0,6 30,0 0,-6 z"/>
+<path id="tab-toggled-bottomleft" d="m 222.5,1078.1562 0,6 6,0 0,-6 z"/>
+<path id="tab-toggled-bottomright" d="m 258.5,1078.1562 0,6 6,0 0,-6 z"/>
 </g>
 </g>
 <g id="radio-checked-normal" transform="translate(119.1696,-278.5)">
