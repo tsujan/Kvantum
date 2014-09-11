@@ -30,7 +30,7 @@ KDE:
 
 	/usr/lib/qt4/plugins/styles/
 
-Create this folder (as root, of course) if it doesn't exist. There may also be other styles directories, like "/usr/lib/kde4/plugins/styles/", "/usr/lib/x86_64-linux-gnu/qt4/plugins/styles/" or "/usr/lib64/qt4/plugins/styles/"; use them only if the above one doesn't work for you.
+Create this folder (as root, of course) if it doesn't exist. There may also be other styles directories, like "/usr/lib/kde4/plugins/styles/", "/usr/lib/x86_64-linux-gnu/qt4/plugins/styles/", or "/usr/lib64/kde4/plugins/styles/" and "/usr/lib64/qt4/plugins/styles/" in 64-bit OpenSUSE; use them only if the above one doesn't work for you.
 
 (2) Import "color/Kvantum.colors" from 'System Settings > Application Appearance > Colors > Scheme', select it and click Apply.
 

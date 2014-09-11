@@ -574,12 +574,12 @@
 <stop offset="1" style="stop-color:#4d4d4d" id="stop7329"/>
 </linearGradient>
 <linearGradient id="linearGradient3801">
-<stop offset="0" style="stop-color:#3c3c3c" id="stop3803"/>
-<stop offset="1" style="stop-color:#646464" id="stop3805"/>
+<stop offset="0" style="stop-color:#4b4b4b" id="stop3803"/>
+<stop offset="1" style="stop-color:#696969" id="stop3805"/>
 </linearGradient>
 <linearGradient id="linearGradient3779-0">
-<stop offset="0" style="stop-color:#646464" id="stop3781-5"/>
-<stop offset="1" style="stop-color:#414141" id="stop3783-7"/>
+<stop offset="0" style="stop-color:#5f5f5f" id="stop3781-5"/>
+<stop offset="1" style="stop-color:#464646" id="stop3783-7"/>
 </linearGradient>
 <linearGradient id="linearGradient7832">
 <stop offset="0" style="stop-color:#5f5f5f" id="stop7834"/>
@@ -945,8 +945,8 @@
 </g>
 <rect width="30" x="100" y="45.000011" height="30" style="fill:url(#linearGradient7838)" id="button-normal"/>
 <g id="button-pressed-bottom" transform="translate(41.000025,-624.99999)">
-<path style="fill:#787878" id="path3805-2" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
-<path style="opacity:.01" id="path3807-0" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
+<path style="fill:#5f5f5f" id="path3805-2" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
+<path style="opacity:.75;fill:#787878" id="path3807-0" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
 <path style="opacity:.001" id="path3809-0" d="m 210,711 0,3 30,0 0,-3 -30,0 z"/>
 </g>
 <g id="button-pressed-left" transform="translate(41.000025,-624.99999)">
@@ -956,29 +956,29 @@
 </g>
 <g id="button-pressed-right" transform="translate(41.000025,-624.99999)">
 <path style="fill:url(#linearGradient8261)" id="path3819-3" d="m 240,675 0,30 3,0 0,-30 -3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient8283)" id="path3825-7" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient8283)" id="path3825-7" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
 <path style="opacity:.001;fill:url(#linearGradient8337)" id="path3835-7" d="m 246,675 0,30 3,0 0,-30 -3,0 z"/>
 </g>
 <rect width="30" x="251.00003" y="50.000011" height="30" style="fill:url(#linearGradient8054)" id="button-pressed"/>
 <g id="button-pressed-bottomleft" transform="translate(41.000025,-624.99999)">
-<path style="fill:#787878" id="rect8089" d="m 210,705 -2,2 2,1 z"/>
-<path style="opacity:.01" id="rect8105" d="m 208,707 -2,2 4,2 0,-3 z"/>
+<path style="fill:#5a5a5a" id="rect8089" d="m 210,705 -2,2 2,1 z"/>
+<path style="opacity:.5;fill:#646464" id="rect8105" d="m 208,707 -2,2 4,2 0,-3 z"/>
 <path style="opacity:.01" id="path8122" d="m 204,711 0,0 6,3 0,-3 -4,-2 z "/>
 <path style="fill:url(#linearGradient8210)" id="rect8140" d="m 207,705 1,2 2,-2 z"/>
 <path style="opacity:.5;fill:url(#linearGradient8218)" id="path8160" d="m 204,705 2,4 2,-2 -1,-2 z"/>
 <path style="opacity:.01;fill:url(#linearGradient8226)" id="rect8184" d="m 201,705 3,6 0,0 2,-2 -2,-4 z "/>
 </g>
 <g id="button-pressed-bottomright" transform="translate(41.000025,-624.99999)">
-<path style="fill:#787878" id="rect8091" d="m 240,705 0,3 2,-1 z"/>
-<path style="opacity:.01" id="rect8107" d="m 240,708 0,3 4,-2 -2,-2 z"/>
+<path style="fill:#5f5f5f" id="rect8091" d="m 240,705 0,3 2,-1 z"/>
+<path style="opacity:.75;fill:#787878" id="rect8107" d="m 240,708 0,3 4,-2 -2,-2 z"/>
 <path style="opacity:.01" id="rect8126" d="m 240,711 0,3 6,-3 -2,-2 z"/>
 <path style="fill:url(#linearGradient8247)" id="path8241" d="m 240,705 2,2 1,-2 z"/>
-<path style="opacity:.5;fill:url(#linearGradient8270)" id="path8264" d="m 243,705 -1,2 2,2 2,-4 z"/>
+<path style="opacity:.8;fill:url(#linearGradient8270)" id="path8264" d="m 243,705 -1,2 2,2 2,-4 z"/>
 <path style="opacity:.01;fill:url(#linearGradient8312)" id="path8286" d="m 246,705 -2,4 2,2 3,-6 z"/>
 </g>
 <g id="button-pressed-topleft" transform="translate(41.000025,-624.99999)">
 <path style="fill:url(#linearGradient7476)" id="path8138" d="m 208,673 -1,2 3,0 z"/>
-<path style="opacity:.6;fill:#313131" id="rect8164" d="m 206,671 -2,4 3,0 1,-2 z"/>
+<path style="opacity:.6;fill:#0f0f0f" id="rect8164" d="m 206,671 -2,4 3,0 1,-2 z"/>
 <path style="opacity:.01;fill:url(#linearGradient7478)" id="path8182" d="m 204,669 -3,6 3,0 2,-4 z"/>
 <path style="opacity:.5" id="rect6613" d="m 206,671 1,1 1,1 2,-1 0,-3 z "/>
 <path style="opacity:.01" id="rect6631" d="m 204,669 0,0 2,2 4,-2 0,-3 z "/>
@@ -986,7 +986,7 @@
 </g>
 <g id="button-pressed-topright" transform="translate(41.000025,-624.99999)">
 <path style="fill:url(#linearGradient7470)" id="rect8245" d="m 242,673 -2,2 3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient7472)" id="rect8268" d="m 244,671 -2,2 1,2 3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient7472)" id="rect8268" d="m 244,671 -2,2 1,2 3,0 z"/>
 <path style="opacity:.01;fill:url(#linearGradient7474)" id="rect8290" d="m 246,669 -2,2 2,4 3,0 z"/>
 <path style="opacity:.5" id="path6621" d="m 240,669 0,3 2,1 2,-2 z"/>
 <path style="opacity:.01" id="rect6635" d="m 240,666 0,3 4,2 2,-2 z"/>
@@ -998,8 +998,8 @@
 <path style="fill:#313131" id="path3815-8" d="m 210,672 0,3 30,0 0,-3 -30,0 z"/>
 </g>
 <g id="button-toggled-bottom" transform="translate(120.00002,-625.99999)">
-<path style="fill:#787878" id="path7488" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
-<path style="opacity:.01" id="path7490" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
+<path style="fill:#5f5f5f" id="path7488" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
+<path style="opacity:.75;fill:#787878" id="path7490" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
 <path style="opacity:.001" id="path7492" d="m 210,711 0,3 30,0 0,-3 -30,0 z"/>
 </g>
 <g id="button-toggled-left" transform="translate(120.00002,-625.99999)">
@@ -1009,7 +1009,7 @@
 </g>
 <g id="button-toggled-right" transform="translate(120.00002,-625.99999)">
 <path style="fill:url(#linearGradient7593)" id="path7505" d="m 240,675 0,30 3,0 0,-30 -3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient7595)" id="path7507" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient7595)" id="path7507" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
 <path style="opacity:.001;fill:url(#linearGradient7598)" id="path7509" d="m 246,675 0,30 3,0 0,-30 -3,0 z"/>
 </g>
 <rect width="30" x="330" y="49.000011" height="30" style="fill:url(#linearGradient7600)" id="button-toggled"/>
@@ -1495,27 +1495,27 @@
 </g>
 <rect width="30" x="185" y="1325" height="30" style="fill:url(#linearGradient7181)" id="spin-normal"/>
 <g id="spin-pressed-bottom" transform="translate(125.00001,650)">
-<path style="fill:#787878" id="path6673" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
-<path style="opacity:.01" id="path6675" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
+<path style="fill:#5f5f5f" id="path6673" d="m 210,705 0,3 30,0 0,-3 -30,0 z"/>
+<path style="opacity:.75;fill:#787878" id="path6675" d="m 210,708 0,3 30,0 0,-3 -30,0 z"/>
 <path style="opacity:.001" id="path6677" d="m 210,711 0,3 30,0 0,-3 -30,0 z"/>
 </g>
 <g id="spin-pressed-right" transform="translate(125.00001,650)">
 <path style="fill:url(#linearGradient7189)" id="path6699" d="m 240,675 0,30 3,0 0,-30 -3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient7191)" id="path6701" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient7191)" id="path6701" d="m 243,675 0,30 3,0 0,-30 -3,0 z"/>
 <path style="opacity:.001;fill:url(#linearGradient7193)" id="path6703" d="m 246,675 0,30 3,0 0,-30 -3,0 z"/>
 </g>
 <rect width="30" x="335" y="1325" height="30" style="fill:url(#linearGradient7197)" id="spin-pressed"/>
 <g id="spin-pressed-bottomright" transform="translate(125.00001,650)">
-<path style="fill:#787878" id="path6827" d="m 240,705 0,3 3,0 -3,-3 z"/>
-<path style="opacity:.01" id="path6829" d="m 240,708 0,3 6,0 -3,-3 -3,0 z"/>
+<path style="fill:#5f5f5f" id="path6827" d="m 240,705 0,3 3,0 -3,-3 z"/>
+<path style="opacity:.75;fill:#787878" id="path6829" d="m 240,708 0,3 6,0 -3,-3 -3,0 z"/>
 <path style="opacity:.001" id="path6831" d="m 240,711 0,3 9,0 -3,-3 -6,0 z"/>
 <path style="fill:url(#linearGradient7251)" id="path6833" d="m 240,705 3,3 0,-3 -3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient7253)" id="path6835" d="m 243,705 0,3 3,0 0,-3 -3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient7253)" id="path6835" d="m 243,705 0,3 3,3 0,-6 z "/>
 <path style="opacity:.001;fill:url(#linearGradient7255)" id="path6837" d="m 246,705 0,6 3,3 0,-9 -3,0 z"/>
 </g>
 <g id="spin-pressed-topright" transform="translate(125.00001,650)">
 <path style="fill:url(#linearGradient7262)" id="path6857" d="m 243,672 -3,3 3,0 0,-3 z"/>
-<path style="opacity:.5;fill:url(#linearGradient7264)" id="path6859" d="m 246,669 -3,3 0,3 3,0 0,-6 z"/>
+<path style="opacity:.8;fill:url(#linearGradient7264)" id="path6859" d="m 246,669 -3,3 0,3 3,0 0,-6 z"/>
 <path style="opacity:.001;fill:url(#linearGradient7266)" id="path6862" d="m 249,666 -3,3 0,6 3,0 0,-9 z"/>
 <path style="opacity:.5" id="path6864" d="m 240,669 0,3 3,0 3,-3 -6,0 z"/>
 <path style="opacity:.001" id="path6866" d="m 240,666 0,3 6,0 3,-3 -9,0 z"/>
@@ -1862,7 +1862,7 @@
 </g>
 <g id="button-toggled-topleft" transform="translate(120.00002,-625.99999)">
 <path style="fill:url(#linearGradient8858)" id="path8846" d="m 208,673 -1,2 3,0 z"/>
-<path style="opacity:.6;fill:#313131" id="path8848" d="m 206,671 -2,4 3,0 1,-2 z"/>
+<path style="opacity:.6;fill:#0f0f0f" id="path8848" d="m 206,671 -2,4 3,0 1,-2 z"/>
 <path style="opacity:.01;fill:url(#linearGradient8860)" id="path8850" d="m 204,669 -3,6 3,0 2,-4 z"/>
 <path style="opacity:.5" id="path8852" d="m 206,671 1,1 1,1 2,-1 0,-3 z "/>
 <path style="opacity:.01" id="path8854" d="m 204,669 0,0 2,2 4,-2 0,-3 z "/>
@@ -1870,23 +1870,23 @@
 </g>
 <g id="button-toggled-topright" transform="translate(120.00002,-625.99999)">
 <path style="fill:url(#linearGradient8877)" id="path8864" d="m 242,673 -2,2 3,0 z"/>
-<path style="opacity:.5;fill:url(#linearGradient8879)" id="path8866" d="m 244,671 -2,2 1,2 3,0 z"/>
+<path style="opacity:.8;fill:url(#linearGradient8879)" id="path8866" d="m 244,671 -2,2 1,2 3,0 z"/>
 <path style="opacity:.01;fill:url(#linearGradient8881)" id="path8868" d="m 246,669 -2,2 2,4 3,0 z"/>
 <path style="opacity:.5" id="path8871" d="m 240,669 0,3 2,1 2,-2 z"/>
 <path style="opacity:.01" id="path8873" d="m 240,666 0,3 4,2 2,-2 z"/>
 <path style="fill:#313131" id="path8875" d="m 240,672 0,3 2,-2 z"/>
 </g>
 <g id="button-toggled-bottomright" transform="translate(120.00002,-625.99999)">
-<path style="fill:#787878" id="path8885" d="m 240,705 0,3 2,-1 z"/>
-<path style="opacity:.01" id="path8887" d="m 240,708 0,3 4,-2 -2,-2 z"/>
+<path style="fill:#5f5f5f" id="path8885" d="m 240,705 0,3 2,-1 z"/>
+<path style="opacity:.75;fill:#787878" id="path8887" d="m 240,708 0,3 4,-2 -2,-2 z"/>
 <path style="opacity:.01" id="path8889" d="m 240,711 0,3 6,-3 -2,-2 z"/>
 <path style="fill:url(#linearGradient8897)" id="path8891" d="m 240,705 2,2 1,-2 z"/>
-<path style="opacity:.5;fill:url(#linearGradient8899)" id="path8893" d="m 243,705 -1,2 2,2 2,-4 z"/>
+<path style="opacity:.8;fill:url(#linearGradient8899)" id="path8893" d="m 243,705 -1,2 2,2 2,-4 z"/>
 <path style="opacity:.01;fill:url(#linearGradient8901)" id="path8895" d="m 246,705 -2,4 2,2 3,-6 z"/>
 </g>
 <g id="button-toggled-bottomleft" transform="translate(120.00002,-625.99999)">
-<path style="fill:#787878" id="path8911" d="m 210,705 -2,2 2,1 z"/>
-<path style="opacity:.01" id="path8913" d="m 208,707 -2,2 4,2 0,-3 z"/>
+<path style="fill:#5a5a5a" id="path8911" d="m 210,705 -2,2 2,1 z"/>
+<path style="opacity:.5;fill:#646464" id="path8913" d="m 208,707 -2,2 4,2 0,-3 z"/>
 <path style="opacity:.01" id="path8915" d="m 204,711 0,0 6,3 0,-3 -4,-2 z "/>
 <path style="fill:url(#linearGradient8923)" id="path8917" d="m 207,705 1,2 2,-2 z"/>
 <path style="opacity:.5;fill:url(#linearGradient8925)" id="path8919" d="m 204,705 2,4 2,-2 -1,-2 z"/>

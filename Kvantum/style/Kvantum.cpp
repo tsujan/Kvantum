@@ -298,7 +298,6 @@ void Kvantum::polish(QApplication *app)
 
 void Kvantum::unpolish(QWidget * widget)
 {
-  //Q_UNUSED(widget);
   if (widget)
   {
     /*widget->setAttribute(Qt::WA_Hover, false);*/
@@ -447,6 +446,16 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
   return res;
 }
 
+// also checks for NULL widgets
+static inline QWidget *getParent (const QWidget *widget, int level)
+{
+  if (!widget || level <= 0) return NULL;
+  QWidget *w = widget->parentWidget();
+  for (int i = 1; i < level && w; ++i)
+    w = w->parentWidget();
+  return w;
+}
+
 void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * option, QPainter * painter, const QWidget * widget) const
 {
   int x,y,h,w;
@@ -528,23 +537,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       label_spec lspec = getLabelSpec(group);
 
       // -> CE_ToolButtonLabel
-      if (widget)
+      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
-        if (QWidget *pw = widget->parentWidget())
-        {
-          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-          {
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
 
-            lspec.left = qMin(lspec.left,2);
-            lspec.right = qMin(lspec.right,2);
-            lspec.top = qMin(lspec.top,2);
-            lspec.bottom = qMin(lspec.bottom,2);
-          }
-        }
+        lspec.left = qMin(lspec.left,2);
+        lspec.right = qMin(lspec.right,2);
+        lspec.top = qMin(lspec.top,2);
+        lspec.bottom = qMin(lspec.bottom,2);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -562,9 +565,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       QRect r = option->rect;
 
       /* this is just for tabbar scroll buttons */
-      if (widget && qobject_cast<const QTabBar*>(widget->parentWidget()))
+      if (qobject_cast<const QTabBar*>(getParent(widget,1)))
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
 
+      bool inToolbar = false;
       if (status.startsWith("disabled"))
       {
         status = "normal";
@@ -585,6 +589,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
+            inToolbar = true;
+            /* the disabled state is ugly
+               for grouped tool buttons */
+            if (!(option->state & State_Enabled))
+              painter->restore();
+
             drawRaised = true;
             if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;
@@ -658,7 +668,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       else
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
 
-      if (!(option->state & State_Enabled))
+      if (!(option->state & State_Enabled) && !inToolbar)
         painter->restore();
 
       break;
@@ -671,23 +681,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       label_spec lspec = getLabelSpec(group);
 
       // -> CE_ToolButtonLabel
-      if (widget)
+      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
-        if (QWidget *pw = widget->parentWidget())
-        {
-          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-          {
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
 
-            lspec.left = qMin(lspec.left,2);
-            lspec.right = qMin(lspec.right,2);
-            lspec.top = qMin(lspec.top,2);
-            lspec.bottom = qMin(lspec.bottom,2);
-          }
-        }
+        lspec.left = qMin(lspec.left,2);
+        lspec.right = qMin(lspec.right,2);
+        lspec.top = qMin(lspec.top,2);
+        lspec.bottom = qMin(lspec.bottom,2);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -704,6 +708,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       QRect r = option->rect;
 
+      bool inToolbar = false;
       if (status.startsWith("disabled"))
       {
         status = "normal";
@@ -724,6 +729,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
+            inToolbar = true;
+            /* the disabled state is ugly
+               for grouped tool buttons */
+            if (!(option->state & State_Enabled))
+              painter->restore();
+
             drawRaised = true;
             if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;
@@ -797,7 +808,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       else
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
 
-      if (!(option->state & State_Enabled))
+      if (!(option->state & State_Enabled) && !inToolbar)
         painter->restore();
 
       break;
@@ -1276,15 +1287,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       frame_spec fspec = getFrameSpec(group);
       /* no frame when editing itemview texts */
-      if (widget)
+      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
       {
-        if (QWidget *pW = widget->parentWidget())
-        {
-          if (qobject_cast< const QAbstractItemView* >(pW->parentWidget()))
-          {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          }
-        }
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
       if (qstyleoption_cast<const QStyleOptionSpinBox *>(option))
       {
@@ -1292,7 +1297,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
-      else if (widget && qobject_cast<const QComboBox*>(widget->parentWidget()))
+      else if (qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         /* see if there is any icon on
@@ -2175,7 +2180,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const theme_spec tspec = settings->getThemeSpec();
         if (tspec.joined_tabs)
         {
-          fspec.hasCapsule = true;
+          if (opt->position != QStyleOptionTab::OnlyOneTab)
+            fspec.hasCapsule = true;
           int capsule = 2;
           if (opt->position == QStyleOptionTab::Beginning)
             capsule = -1;
@@ -2183,8 +2189,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             capsule = 0;
           else if (opt->position == QStyleOptionTab::End)
             capsule = 1;
-          else if (opt->position == QStyleOptionTab::OnlyOneTab)
-            capsule = 2;
           fspec.capsuleH = capsule;
           fspec.capsuleV = 2;
         }
@@ -3016,23 +3020,17 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         label_spec lspec = getLabelSpec(group);
 
         // -> CE_ToolButtonLabel
-        if (widget)
+        if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
         {
-          if (QWidget *pw = widget->parentWidget())
-          {
-            if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-            {
-              fspec.left = qMin(fspec.left,3);
-              fspec.right = qMin(fspec.right,3);
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
 
-              lspec.left = qMin(lspec.left,2);
-              lspec.right = qMin(lspec.right,2);
-              lspec.top = qMin(lspec.top,2);
-              lspec.bottom = qMin(lspec.bottom,2);
-            }
-          }
+          lspec.left = qMin(lspec.left,2);
+          lspec.right = qMin(lspec.right,2);
+          lspec.top = qMin(lspec.top,2);
+          lspec.bottom = qMin(lspec.bottom,2);
         }
 
         /* the right arrow is attached */
@@ -3342,13 +3340,10 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
               const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
               fspec.right = fspec.left = 0;
               // -> CE_ToolButtonLabel
-              if (QWidget *pw = widget->parentWidget())
+              if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
               {
-                if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-                {
-                  fspec.top = qMin(fspec.top,3);
-                  fspec.bottom = qMin(fspec.bottom,3);
-                }
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
               }
               QString aStatus = "normal";
               if (status.startsWith("disabled"))
@@ -3599,8 +3594,6 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
 
       if (opt)
       {
-        QStyleOptionSlider o(*opt);
-
         QString group = "Slider";
 
         frame_spec fspec = getFrameSpec(group);
@@ -3696,6 +3689,9 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         if (option->state & State_Horizontal)
           painter->restore();
 
+        const int len = pixelMetric(PM_SliderLength,option,widget);
+        const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
+
         /* slider ticks */
         QRect r = option->rect;
         if (option->state & State_Horizontal)
@@ -3722,7 +3718,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         int interval = opt->tickInterval;
         if (interval <= 0)
           interval = opt->pageStep;
-        int available = r.height() - pixelMetric(PM_SliderLength,option,widget);
+        int available = r.height() - len;
         int min = opt->minimum;
         int max = opt->maximum;
         if (max == 99) max = 100; // to get the end tick
@@ -3760,14 +3756,31 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         fspec = getFrameSpec(group);
         ispec = getInteriorSpec(group);
 
-        o.rect = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
+        r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
+        if ((option->state & State_Horizontal)
+            && len != thick) /* derive the horizontal handle from
+                                the vertical one only when necessary */
+        {
+          painter->save();
+          int sY = r.y();
+          int sH = r.height();
+          r.setRect(sY, r.x(), sH, r.width());
+          QTransform m;
+          m.translate(0, 2*sY+sH);
+          m.rotate(-90);
+          m.translate(2*sY+sH, 0); m.scale(-1,1);
+          painter->setTransform(m, true);
+        }
 
-        renderFrame(painter,o.rect,fspec,fspec.element+"-"+status);
-        renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
 
         // a decorative indicator if its element exists
         const indicator_spec dspec = getIndicatorSpec(group);
-        renderIndicator(painter,o.rect,fspec,dspec,dspec.element+"-"+status);
+        renderIndicator(painter,r,fspec,dspec,dspec.element+"-"+status);
+
+        if ((option->state & State_Horizontal) && len != thick)
+          painter->restore();
       }
 
       break;
@@ -4125,18 +4138,9 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
     case PM_ExclusiveIndicatorHeight : {
       const theme_spec tspec = settings->getThemeSpec();
       /* make exception for menuitems and viewitems */
-      bool isInsideViewitem = false;
-      if (widget)
-      {
-        if (QWidget *pw = widget->parentWidget())
-        {
-          if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-            isInsideViewitem = true;
-        }
-      }
       if (isLibreoffice
           || qstyleoption_cast<const QStyleOptionMenuItem *>(option)
-          || isInsideViewitem)
+          || qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),
                     tspec.check_size);
@@ -4591,23 +4595,17 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         const indicator_spec dspec = getIndicatorSpec(group);
 
         // -> CE_ToolButtonLabel
-        if (widget)
+        if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
         {
-          if (QWidget *pw = widget->parentWidget())
-          {
-            if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-            {
-              fspec.left = qMin(fspec.left,3);
-              fspec.right = qMin(fspec.right,3);
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
 
-              lspec.left = qMin(lspec.left,2);
-              lspec.right = qMin(lspec.right,2);
-              lspec.top = qMin(lspec.top,2);
-              lspec.bottom = qMin(lspec.bottom,2);
-            }
-          }
+          lspec.left = qMin(lspec.left,2);
+          lspec.right = qMin(lspec.right,2);
+          lspec.top = qMin(lspec.top,2);
+          lspec.bottom = qMin(lspec.bottom,2);
         }
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
@@ -5002,15 +5000,9 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       /* no frame when editing itemview texts */
-      if (widget)
+      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
       {
-        if (QWidget *pW = widget->parentWidget())
-        {
-          if (qobject_cast< const QAbstractItemView* >(pW->parentWidget()))
-          {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          }
-        }
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
       QRect rect = interiorRect(option->rect, fspec);
 
@@ -5554,13 +5546,10 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                   const indicator_spec dspec = getIndicatorSpec(group);
                   const label_spec lspec = getLabelSpec(group);
                   // -> CE_ToolButtonLabel
-                  if (QWidget *pw = widget->parentWidget())
+                  if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
                   {
-                    if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-                    {
-                      fspec.left = qMin(fspec.left,3);
-                      fspec.right = qMin(fspec.right,3);
-                    }
+                    fspec.left = qMin(fspec.left,3);
+                    fspec.right = qMin(fspec.right,3);
                   }
                   return option->rect.adjusted(0,
                                                0,
@@ -5605,13 +5594,10 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                   frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
                   // -> CE_ToolButtonLabel
-                  if (QWidget *pw = widget->parentWidget())
+                  if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
                   {
-                    if (qobject_cast<const QAbstractItemView*>(pw->parentWidget()))
-                    {
-                      fspec.left = qMin(fspec.left,3);
-                      fspec.right = qMin(fspec.right,3);
-                    }
+                    fspec.left = qMin(fspec.left,3);
+                    fspec.right = qMin(fspec.right,3);
                   }
                   int l = dspec.size
                           // -> CE_ToolButtonLabel

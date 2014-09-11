@@ -1,3 +1,8 @@
+V0.5.3
+---------
+ * Derive the horizontal slider handle from the vertical one when its length and width are different.
+ * Fixes.
+
 V0.5.2
 ---------
  * No out-of-grid text, icon, checkbox or tool-button.
