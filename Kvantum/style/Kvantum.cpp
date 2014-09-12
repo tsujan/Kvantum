@@ -568,7 +568,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       if (qobject_cast<const QTabBar*>(getParent(widget,1)))
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
 
-      bool inToolbar = false;
+      bool drawRaised = false;
       if (status.startsWith("disabled"))
       {
         status = "normal";
@@ -583,19 +583,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       {
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
-        bool drawRaised = false;
         const theme_spec tspec = settings->getThemeSpec();
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
-            inToolbar = true;
+            drawRaised = true;
+
             /* the disabled state is ugly
                for grouped tool buttons */
             if (!(option->state & State_Enabled))
               painter->restore();
 
-            drawRaised = true;
             if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;
 
@@ -668,7 +667,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       else
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
 
-      if (!(option->state & State_Enabled) && !inToolbar)
+      if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
 
       break;
@@ -708,7 +707,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       QRect r = option->rect;
 
-      bool inToolbar = false;
+      bool drawRaised = false;
       if (status.startsWith("disabled"))
       {
         status = "normal";
@@ -723,19 +722,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       {
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
-        bool drawRaised = false;
         const theme_spec tspec = settings->getThemeSpec();
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
-            inToolbar = true;
+            drawRaised = true;
+
             /* the disabled state is ugly
                for grouped tool buttons */
             if (!(option->state & State_Enabled))
               painter->restore();
 
-            drawRaised = true;
             if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;
 
@@ -808,7 +806,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       else
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
 
-      if (!(option->state & State_Enabled) && !inToolbar)
+      if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
 
       break;
@@ -1592,15 +1590,19 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           if (status.startsWith("disabled"))
           {
             status.replace(QString("disabled"),QString("normal"));
-            painter->save();
-            painter->setOpacity(DISABLED_OPACITY);
+            if (!drawRaised)
+            {
+              painter->save();
+              painter->setOpacity(DISABLED_OPACITY);
+            }
           }
           renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
           renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
           if (!(option->state & State_Enabled))
           {
-            painter->restore();
             status = "disabled";
+            if (!drawRaised)
+              painter->restore();
           }
         }
       }
@@ -1854,9 +1856,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 2;
 
-          if (l.size() > 0)
+          if (l.size() > 0) // menu label
           {
-            // menu label
             if (opt->icon.isNull())
               renderLabel(painter,option->palette,
                           option->rect.adjusted(qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace,0,0,0),
@@ -1897,9 +1898,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                                  Qt::AlignRight)
                                 | Qt::AlignVCenter,
                                QSize(iw,ih),
-                               labelRect(o.rect,fspec,lspec));
-          if (isLibreoffice)
-            o.rect.adjust(4, 0, 4, 0); // why?
+                               isLibreoffice ? o.rect.adjusted(6,-2,0,0) // FIXME why?
+                                             : interiorRect(o.rect,fspec));
 
           /* change the selected and pressed states to mouse-over */
           if (o.state & QStyle::State_Selected)
@@ -3757,19 +3757,38 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         ispec = getInteriorSpec(group);
 
         r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
-        if ((option->state & State_Horizontal)
-            && len != thick) /* derive the horizontal handle from
-                                the vertical one only when necessary */
+        /* derive other handles from the
+           main one only when necessary */
+        bool derive = false;
+        if (len != thick)
         {
-          painter->save();
-          int sY = r.y();
-          int sH = r.height();
-          r.setRect(sY, r.x(), sH, r.width());
-          QTransform m;
-          m.translate(0, 2*sY+sH);
-          m.rotate(-90);
-          m.translate(2*sY+sH, 0); m.scale(-1,1);
-          painter->setTransform(m, true);
+          if (option->state & State_Horizontal)
+          {
+            derive = true;
+            painter->save();
+            int sY = r.y();
+            int sH = r.height();
+            r.setRect(sY, r.x(), sH, r.width());
+            QTransform m;
+            if (opt->tickPosition == QSlider::TicksAbove)
+            {
+              m.translate(0, 2*sY+sH);
+              m.scale(1,-1);
+            }
+            m.translate(0, 2*sY+sH);
+            m.rotate(-90);
+            m.translate(2*sY+sH, 0); m.scale(-1,1);
+            painter->setTransform(m, true);
+          }
+          else if (opt->tickPosition == QSlider::TicksAbove)
+          {
+            derive = true;
+            painter->save();
+            QTransform m;
+            m.translate(2*r.x()+r.width(), 0);
+            m.scale(-1,1);
+            painter->setTransform(m, true);
+          }
         }
 
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
@@ -3779,7 +3798,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         const indicator_spec dspec = getIndicatorSpec(group);
         renderIndicator(painter,r,fspec,dspec,dspec.element+"-"+status);
 
-        if ((option->state & State_Horizontal) && len != thick)
+        if (derive)
           painter->restore();
       }
 
@@ -4541,10 +4560,16 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         if(opt->icon.isNull())
           s.rwidth() += lspec.tispace;
 
+        /* to have enough space between the text and the check
+           button or arrow when there's no shortcut (like in
+           Ark's settings menu), we add a small extra space */
+        int extra = textSize(f,"ww").width();
+
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
         {
           const indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
-          s.rwidth() += dspec.size + lspec.tispace;
+          s.rwidth() += dspec.size + lspec.tispace
+                        + extra;
           s.rheight() += (dspec.size > s.height() ? dspec.size : 0);
         }
 
@@ -4552,7 +4577,8 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
             || opt->checkType == QStyleOptionMenuItem::NonExclusive)
         {
           int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
-          s.rwidth() += cSize + lspec.tispace;
+          s.rwidth() += cSize + lspec.tispace
+                        + extra;
           s.rheight() += (cSize > s.height() ? cSize : 0);
         }
       }
