@@ -3,6 +3,7 @@ V0.5.3
  * Derive all slider handles from the main one when its length and width are different.
  * Use interiorRect() instead of labelRect() for drawing menuitem indicators.
  * Added a little extra space to menuitems when they have indicators.
+ * Don't focus a tool button if only its arrow is focused.
  * Fixes.
 
 V0.5.2

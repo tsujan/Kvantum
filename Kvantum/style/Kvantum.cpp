@@ -640,6 +640,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
                          (option->state & State_Selected) && tb->isDown() ? "toggled" :
                            (option->state & State_MouseOver) ? "focused" : "normal"
                      : "disabled";
+          // don't focus the button if only its arrow is focused
+          if (pbStatus == "focused"
+              && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
+          {
+            pbStatus = "normal";
+          }
           if (pbStatus == "disabled")
           {
             pbStatus = "normal";
@@ -779,6 +785,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
                          (option->state & State_Selected) && tb->isDown() ? "toggled" :
                            (option->state & State_MouseOver) ? "focused" : "normal"
                      : "disabled";
+          // don't focus the button if only its arrow is focused
+          if (fbStatus == "focused"
+              && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
+          {
+            fbStatus = "normal";
+          }
           if (fbStatus == "disabled")
           {
             fbStatus = "normal";
