@@ -2795,6 +2795,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           lspec.right = 0;
         }
 
+        /* for thin headers, like in Dolphin's details view */
+        if (opt->icon.isNull())
+        {
+          fspec.top = fspec.bottom = lspec.top = lspec.bottom = 0;
+        }
+
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
@@ -2812,7 +2818,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                                             : 0,
                                           0),
                     fspec,lspec,
-                    opt->textAlignment,opt->text,QPalette::ButtonText,
+                    opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
+                    opt->text,QPalette::ButtonText,
                     state,
                     opt->icon.pixmap(pixelMetric(PM_SmallIconSize),iconmode,iconstate));
       }
