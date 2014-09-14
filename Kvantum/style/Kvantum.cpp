@@ -2189,22 +2189,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         bool verticalTabs = false;
         bool bottomTabs = false;
 
-        const theme_spec tspec = settings->getThemeSpec();
-        if (tspec.joined_tabs)
-        {
-          if (opt->position != QStyleOptionTab::OnlyOneTab)
-            fspec.hasCapsule = true;
-          int capsule = 2;
-          if (opt->position == QStyleOptionTab::Beginning)
-            capsule = -1;
-          else if (opt->position == QStyleOptionTab::Middle)
-            capsule = 0;
-          else if (opt->position == QStyleOptionTab::End)
-            capsule = 1;
-          fspec.capsuleH = capsule;
-          fspec.capsuleV = 2;
-        }
-
         if (opt->shape == QTabBar::RoundedEast
             || opt->shape == QTabBar::RoundedWest
             || opt->shape == QTabBar::TriangularEast
@@ -2214,6 +2198,60 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         }
         if (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth)
           bottomTabs = true;
+
+        if (status.startsWith("normal") || status.startsWith("focused"))
+        {
+          const theme_spec tspec = settings->getThemeSpec();
+          if (tspec.joined_tabs
+              && opt->position != QStyleOptionTab::OnlyOneTab)
+          {
+            int capsule = 2;
+            if (opt->position == QStyleOptionTab::Beginning)
+            {
+              if (opt->selectedPosition != QStyleOptionTab::NextIsSelected)
+              {
+                fspec.hasCapsule = true;
+                if (bottomTabs) // will be flipped both vertically and horizontally
+                  capsule = 1;
+                else
+                  capsule = -1;
+              }
+            }
+            else if (opt->position == QStyleOptionTab::Middle)
+            {
+              fspec.hasCapsule = true;
+              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+              {
+                if (bottomTabs)
+                  capsule = -1;
+                else
+                  capsule = 1;
+              }
+              else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+              {
+                if (bottomTabs)
+                  capsule = 1;
+                else
+                  capsule = -1;
+              }
+              else
+                capsule = 0;
+            }
+            else if (opt->position == QStyleOptionTab::End)
+            {
+              if (opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
+              {
+                fspec.hasCapsule = true;
+                if (bottomTabs)
+                  capsule = -1;
+                else
+                  capsule = 1;
+              }
+            }
+            fspec.capsuleH = capsule;
+            fspec.capsuleV = 2;
+          }
+        }
 
         if (verticalTabs)
         {

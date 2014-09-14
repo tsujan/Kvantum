@@ -4,6 +4,7 @@ V0.5.3
  * Use interiorRect() instead of labelRect() for drawing menuitem indicators.
  * Added a little extra space to menuitems when they have indicators.
  * Don't focus a tool button if only its arrow is focused.
+ * When tabs are joined together, don't join the selected tab to its adjacent one(s).
  * Fixes.
 
 V0.5.2
