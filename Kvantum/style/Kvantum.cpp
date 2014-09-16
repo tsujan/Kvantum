@@ -39,6 +39,7 @@
 #include <QAbstractItemView>
 #include <QDockWidget>
 #include <QDial>
+#include <QScrollBar>
 #include <QDir>
 #include <QTextStream>
 //#include <QBitmap>
@@ -222,12 +223,16 @@ void Kvantum::polish(QWidget * widget)
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
 
-    if (qobject_cast< const QProgressBar* >(widget))
+    if (qobject_cast<QProgressBar*>(widget))
       widget->installEventFilter(this);
+    /* without this, transparent backgrounds
+       couldn't be used for scrollbar grooves */
+    else if (qobject_cast<QScrollBar*>(widget))
+      widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
 
     if (!isLibreoffice // not required
         && !subApp
-        && (qobject_cast< const QMenu* >(widget)
+        && (qobject_cast<QMenu*>(widget)
             // systemsettings blurs tooltips in a wrong way
             || (widget->inherits("QTipLabel") && !isSystemSettings)))
     {
@@ -2746,9 +2751,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setTransform(m, true);
       }
 
-      // see CC_ScrollBar
-      painter->fillRect(r, option->palette.brush(QPalette::Window));
-
       renderFrame(painter,r,fspec,fspec.element+"-normal");
       renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
       renderIndicator(painter,r,
@@ -3076,7 +3078,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
 
-        // -> CE_ToolButtonLabel
+        /* where there may not be enough space,
+           especially in KDE new-stuff dialogs */
         if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
         {
           fspec.left = qMin(fspec.left,3);
@@ -3576,9 +3579,6 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           m.translate(H, 0); m.scale(-1,1);
           painter->setTransform(m, true);
         }
-
-        // without this, transparent backgrounds couldn't be used
-        painter->fillRect(r, option->palette.brush(QPalette::Window));
 
         if (status.startsWith("disabled"))
         {

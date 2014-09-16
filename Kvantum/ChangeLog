@@ -5,6 +5,7 @@ V0.5.3
  * Added a little extra space to menuitems when they have indicators.
  * Don't focus a tool button if only its arrow is focused.
  * When tabs are joined together, don't join the selected tab to its adjacent one(s).
+ * Clearing the attribute WA_OpaquePaintEvent from scrollbars is a better solution for their transparency problem than filling their rectangles with the window background.
  * Fixes.
 
 V0.5.2
