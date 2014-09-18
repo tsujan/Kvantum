@@ -1,3 +1,9 @@
+V0.6
+---------
+ * Whole windows and dialogs can be styled with an interior element now. The section [Window] is added for that.
+ * Removed the redundant section [Widget].
+ * Removed ugly flat backgrounds as far as possible when the window backround is styled.
+
 V0.5.3
 ---------
  * Derive all slider handles from the main one when its length and width are different.

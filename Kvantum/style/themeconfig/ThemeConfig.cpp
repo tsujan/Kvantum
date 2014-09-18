@@ -373,7 +373,6 @@ theme_spec ThemeConfig::getThemeSpec() const
       << "Splitter"
       << "Scrollbar"
       << "ScrollbarGroove"
-      << "Widget"
       << "MenuItem"
       << "Menu"
       << "MenuBarItem"
@@ -381,5 +380,6 @@ theme_spec ThemeConfig::getThemeSpec() const
       << "TitleBar"
       << "ComboBox"
       << "ToolTip"
+      << "Window"
   ;
 }*/

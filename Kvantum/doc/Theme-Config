@@ -103,8 +103,6 @@ Section                                      Meaning
 
 [Splitter]                                   A splitter handle.
 
-[Widget]                                     A plain QWidget.
-
 [Menu]                                       The panel and frame of a menu.
                                              Also its frame shadow.
 
@@ -126,6 +124,8 @@ Section                                      Meaning
 [ToolTip]                                    The panel for a tooltip label.
 
 [StatusBar]                                  The frame of a status bar.
+
+[Window]                                     A window or dialog.
 =====================================================
 
 

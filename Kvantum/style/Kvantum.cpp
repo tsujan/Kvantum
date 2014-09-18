@@ -223,12 +223,47 @@ void Kvantum::polish(QWidget * widget)
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
 
+    switch (widget->windowFlags() & Qt::WindowType_Mask) {
+      case Qt::Window:
+      case Qt::Dialog: {
+        widget->setAttribute(Qt::WA_StyledBackground);
+        break;
+      }
+      default: break;
+    }
+
+    /*if (widget->autoFillBackground()
+        && widget->parentWidget()
+        && widget->parentWidget()->objectName() == "qt_scrollarea_viewport"
+        && qobject_cast<QAbstractScrollArea*>(widget->parentWidget()->parentWidget()))
+    {
+      widget->parentWidget()->setAutoFillBackground(false);
+      widget->setAutoFillBackground(false);
+    }*/
+
     if (qobject_cast<QProgressBar*>(widget))
       widget->installEventFilter(this);
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
     else if (qobject_cast<QScrollBar*>(widget))
       widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    /* remove ugly flat backgrounds when the window backround is styled */
+    else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
+    {
+      if (sa->frameShape() == QFrame::NoFrame && sa->backgroundRole() == QPalette::Window)
+      {
+        QWidget *vp = sa->viewport();
+        if (vp && vp->backgroundRole() == QPalette::Window)
+        {
+          vp->setAutoFillBackground(false);
+          foreach (QWidget *child, vp->findChildren<QWidget*>())
+          {
+            if (child->parent() == vp && child->backgroundRole() == QPalette::Window)
+              child->setAutoFillBackground(false);
+          }
+        }
+      }
+    }
 
     if (!isLibreoffice // not required
         && !subApp
@@ -305,16 +340,27 @@ void Kvantum::unpolish(QWidget * widget)
 {
   if (widget)
   {
-    /*widget->setAttribute(Qt::WA_Hover, false);*/
     if (itsWindowManager)
       itsWindowManager->unregisterWidget(widget);
 
-    if (qobject_cast< const QProgressBar* >(widget))
+    /*widget->setAttribute(Qt::WA_Hover, false);*/
+
+    // FIXME is this needed?
+    switch (widget->windowFlags() & Qt::WindowType_Mask) {
+      case Qt::Window:
+      case Qt::Dialog: {
+        widget->setAttribute(Qt::WA_StyledBackground, false);
+        break;
+      }
+      default: break;
+    }
+
+    if (qobject_cast<QProgressBar*>(widget))
       progressbars.remove(widget);
 
     if (!isLibreoffice // not required
         && !subApp
-        && (qobject_cast< const QMenu* >(widget)
+        && (qobject_cast<QMenu*>(widget)
             || (widget->inherits("QTipLabel") && !isSystemSettings)))
     {
       const theme_spec tspec = settings->getThemeSpec();
@@ -480,14 +526,30 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
   }
 
   switch(element) {
-    case PE_Widget :
+    case PE_Widget : {
+      // only for windows and dialogs
+      if (!widget || !widget->isWindow())
+        break;
+
+      interior_spec ispec = getInteriorSpec("Window");
+      // TODO find a way to add texture
+      ispec.px = ispec.py = 0;
+      frame_spec fspec;
+      default_frame_spec(fspec);
+
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+
+      break;
+    }
+
     case PE_FrameTabBarBase :
     case PE_FrameDockWidget :
     case PE_FrameStatusBar : {
-      QString group = "Widget";
-      if (element == PE_FrameTabBarBase)
-        group = "TabBarFrame";
-      else if (element == PE_FrameDockWidget)
+      QString group = "TabBarFrame";
+      if (element == PE_FrameDockWidget)
         group = "Dock";
       else if (element == PE_FrameStatusBar)
         group = "StatusBar";
@@ -501,8 +563,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -5989,10 +6051,9 @@ bool Kvantum::renderElement(QPainter* painter,
     int x,y,h,w;
     bounds.getRect(&x,&y,&w,&h);
 
-    if ( (hsize > 0) || (vsize > 0) )
+    if (hsize > 0 || vsize > 0)
     {
-
-      if ( (hsize > 0) && (vsize <= 0) )
+      if (hsize > 0 && vsize <= 0)
       {
         int hpatterns = (w/hsize)+1;
 
@@ -6002,8 +6063,7 @@ bool Kvantum::renderElement(QPainter* painter,
           renderer->render(painter,element_,QRect(x+i*hsize,y,hsize,h));
         painter->restore();
       }
-
-      if ( (hsize <= 0) && (vsize > 0) )
+      else if (hsize <= 0 && vsize > 0)
       {
         int vpatterns = (h/vsize)+1;
 
@@ -6013,8 +6073,7 @@ bool Kvantum::renderElement(QPainter* painter,
           renderer->render(painter,element_,QRect(x,y+i*vsize,w,vsize));
         painter->restore();
       }
-
-      if ( (hsize > 0) && (vsize > 0) )
+      else if (hsize > 0 && vsize > 0)
       {
         int hpatterns = (w/hsize)+1;
         int vpatterns = (h/vsize)+1;

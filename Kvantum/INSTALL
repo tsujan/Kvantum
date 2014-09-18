@@ -34,7 +34,7 @@ Create this folder (as root, of course) if it doesn't exist. There may also be o
 
 (2) Import "color/Kvantum.colors" from 'System Settings > Application Appearance > Colors > Scheme', select it and click Apply.
 
-(3) Choose Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it.
+(3) Choose Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
 
 Other DEs:
 ==========
@@ -48,7 +48,7 @@ Other DEs:
 *   Updating   *
 ****************
 
-If you have installed Kvantum and want to update it now, first change the style to another theme (Oxygen, for example), then remove the old file "libkvantum.so" and put the new one in its place.
+If you have installed Kvantum and want to update it now, first change the style to another theme (Oxygen, for example), then remove the old file "libkvantum.so" and put the new one in its place (don't paste the latter over the former)!
 
 ***************
 *   Preview   *

@@ -245,12 +245,6 @@ frame.bottom=0
 frame.left=4
 frame.right=4
 
-[Widget]
-inherits=PanelButtonCommand
-frame=false
-interior=false
-text.margin=0
-
 [MenuItem]
 inherits=PanelButtonCommand
 frame=false
@@ -342,3 +336,6 @@ frame=false
 interior=false
 text.shadow=0
 text.margin=1
+
+[Window]
+interior=false
