@@ -12,7 +12,7 @@
 *   Compilation   *
 *******************
 
-After installing Qt4 (>= 4.8) and X11 development packages (libqt4-dev and libx11-dev in debian-based systems), just open a terminal inside this folder and issue the following command:
+After installing Qt4 (>= 4.8) and X11 development packages (libqt4-dev, libx11-dev and, perhaps, libxext-dev in debian-based systems), just open a terminal inside this folder and issue the following command:
 
 	qmake && make
 

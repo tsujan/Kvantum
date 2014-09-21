@@ -1,3 +1,7 @@
+V0.6.1
+---------
+ * Organized frame and interior rendering (some frame parts were rendered twice).
+
 V0.6
 ---------
  * Whole windows and dialogs can be styled with an interior element now. The section [Window] is added for that.

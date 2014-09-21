@@ -6171,10 +6171,12 @@ void Kvantum::renderFrame(QPainter *painter,
 
   int x0,y0,x1,y1,w,h;
   bounds.getRect(&x0,&y0,&w,&h);
-  x1 = bounds.bottomRight().x();
-  y1 = bounds.bottomRight().y();
+  /* for "historical" reasons, we have to add 1
+     (-> QRect documentation) */
+  x1 = bounds.bottomRight().x() + 1;
+  y1 = bounds.bottomRight().y() + 1;
 
-  if (!fspec.hasCapsule)
+  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
   {
     /*********
      ** Top **
@@ -6206,20 +6208,20 @@ void Kvantum::renderFrame(QPainter *painter,
     {
       renderElement(painter,element+"-bottom",
                     QRect(x0+fspec.left,
-                          y1-fspec.bottom+1,
+                          y1-fspec.bottom,
                           d-x0-fspec.left,
                           fspec.bottom),
                     0,0,Qt::Horizontal);
       renderElement(painter,element+"-bottom",
                     QRect(d+l,
-                          y1-fspec.bottom+1,
+                          y1-fspec.bottom,
                           x0+w-fspec.left-d-l,
                           fspec.bottom),
                     0,0,Qt::Horizontal);
     }
     else
       renderElement(painter,element+"-bottom",
-                    QRect(x0+fspec.left,y1-fspec.bottom+1,w-fspec.left-fspec.right,fspec.bottom),
+                    QRect(x0+fspec.left,y1-fspec.bottom,w-fspec.left-fspec.right,fspec.bottom),
                     0,0,Qt::Horizontal);
 
     /**********
@@ -6251,13 +6253,13 @@ void Kvantum::renderFrame(QPainter *painter,
     if (l != 0 && tp == QTabWidget::East)
     {
       renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right+1,
+                    QRect(x1-fspec.right,
                           y0+fspec.top,
                           fspec.right,
                           d-y0-fspec.top),
                     0,0,Qt::Horizontal);
       renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right+1,
+                    QRect(x1-fspec.right,
                           d+l,
                           fspec.right,
                           y0+h-fspec.bottom-d-l),
@@ -6265,7 +6267,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     else
       renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right+1,y0+fspec.top,fspec.right,h-fspec.top-fspec.bottom),
+                    QRect(x1-fspec.right,y0+fspec.top,fspec.right,h-fspec.top-fspec.bottom),
                     0,0,Qt::Horizontal);
 
     /*************
@@ -6279,127 +6281,96 @@ void Kvantum::renderFrame(QPainter *painter,
      ** Topright **
      **************/
     renderElement(painter,element+"-topright",
-                  QRect(x1-fspec.right+1,y0,fspec.right,fspec.top),
+                  QRect(x1-fspec.right,y0,fspec.right,fspec.top),
                   0,0,Qt::Horizontal);
 
     /****************
      ** Bottomleft **
      ****************/
     renderElement(painter,element+"-bottomleft",
-                  QRect(x0,y1-fspec.bottom+1,fspec.left,fspec.bottom),
+                  QRect(x0,y1-fspec.bottom,fspec.left,fspec.bottom),
                   0,0,Qt::Horizontal);
 
     /*****************
      ** Bottomright **
      *****************/
     renderElement(painter,element+"-bottomright",
-                  QRect(x1-fspec.right+1,y1-fspec.bottom+1,fspec.right,fspec.bottom),
+                  QRect(x1-fspec.right,y1-fspec.bottom,fspec.right,fspec.bottom),
                   0,0,Qt::Horizontal);
   }
   else // with capsule
   {
-    int left = 0, right = 0, top = 0, bottom = 0;
-
-    if ( (fspec.capsuleH == 0) && (fspec.capsuleV == 0) )
+    if (fspec.capsuleH == 0 && fspec.capsuleV == 0)
       return;
 
-    // edges
-    if ( (fspec.capsuleH == -1) || (fspec.capsuleH == 2) )
+    /* to simplify calculations, we first get margins */
+    int left = 0, right = 0, top = 0, bottom = 0;
+    if (fspec.capsuleH == -1 || fspec.capsuleH == 2)
       left = fspec.left;
-    if ( (fspec.capsuleH == 1) || (fspec.capsuleH == 2) )
+    if (fspec.capsuleH == 1 || fspec.capsuleH == 2)
       right = fspec.right;
-    if ( (fspec.capsuleV == -1)  || (fspec.capsuleV == 2) )
+    if (fspec.capsuleV == -1  || fspec.capsuleV == 2)
       top = fspec.top;
-    if ( (fspec.capsuleV == 1) || (fspec.capsuleV == 2) )
+    if (fspec.capsuleV == 1 || fspec.capsuleV == 2)
       bottom = fspec.bottom;
 
     /*********
      ** Top **
      *********/
-    if ( (fspec.capsuleV == -1) || (fspec.capsuleV == 2) )
+    if (top > 0)
     {
       renderElement(painter,element+"-top",
-                    QRect(x0+left,y0,w-left-right,fspec.top),
+                    QRect(x0+left,y0,w-left-right,top),
                     0,0,Qt::Horizontal);
 
       // topleft corner
-      if (fspec.capsuleH == -1)
+      if (left > 0)
         renderElement(painter,element+"-topleft",
-                      QRect(x0,y0,fspec.left,fspec.top),
+                      QRect(x0,y0,left,top),
                       0,0,Qt::Horizontal);
-
       // topright corner
-      if (fspec.capsuleH == 1)
+      if (right > 0)
         renderElement(painter,element+"-topright",
-                      QRect(x1-fspec.right+1,y0,fspec.right,fspec.top),
+                      QRect(x1-right,y0,right,top),
                       0,0,Qt::Horizontal);
     }
 
     /************
      ** Bottom **
      ************/
-    if ( (fspec.capsuleV == 1) || (fspec.capsuleV == 2) )
+    if (bottom > 0)
     {
       renderElement(painter,element+"-bottom",
-                    QRect(x0+left,y1-bottom+1,w-left-right,fspec.bottom),
+                    QRect(x0+left,y1-bottom,w-left-right,bottom),
                     0,0,Qt::Horizontal);
 
       // bottomleft corner
-      if (fspec.capsuleH == -1)
+      if (left > 0)
         renderElement(painter,element+"-bottomleft",
-                      QRect(x0,y1-fspec.bottom+1,fspec.left,fspec.bottom),
+                      QRect(x0,y1-bottom,left,bottom),
                       0,0,Qt::Horizontal);
-
       // bottomright corner
-      if (fspec.capsuleH == 1)
+      if (right > 0)
         renderElement(painter,element+"-bottomright",
-                      QRect(x1-fspec.right+1,y1-fspec.bottom+1,fspec.right,fspec.bottom),
+                      QRect(x1-right,y1-bottom,right,bottom),
                       0,0,Qt::Horizontal);
     }
 
     /**********
      ** Left **
      **********/
-    if ( (fspec.capsuleH == -1) || (fspec.capsuleH == 2) )
-    {
+    if (left > 0)
       renderElement(painter,element+"-left",
-                    QRect(x0,y0+top,fspec.left,h-top-bottom),
+                    QRect(x0,y0+top,left,h-top-bottom),
                     0,0,Qt::Horizontal);
-
-      // topleft corner
-      if (fspec.capsuleV == -1)
-        renderElement(painter,element+"-topleft",
-                      QRect(x0,y0,fspec.left,fspec.top),
-                      0,0,Qt::Horizontal);
-
-      // bottomleft corner
-      if (fspec.capsuleV == 1)
-        renderElement(painter,element+"-bottomleft",
-                      QRect(x0,y1-fspec.bottom+1,fspec.left,fspec.bottom),
-                      0,0,Qt::Horizontal);
-    }
 
     /***********
      ** Right **
      ***********/
-    if ( (fspec.capsuleH == 1) || (fspec.capsuleH == 2) )
-    {
+    if (right > 0)
       renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right+1,y0+top,fspec.right,h-top-bottom),
+                    QRect(x1-right,y0+top,right,h-top-bottom),
                     0,0,Qt::Horizontal);
-
-      // topright corner
-      if (fspec.capsuleV == -1)
-        renderElement(painter,element+"-topright",
-                      QRect(x1-fspec.right+1,y0,fspec.right,fspec.top),
-                      0,0,Qt::Horizontal);
-
-      // bottomright corner
-      if (fspec.capsuleV == 1)
-        renderElement(painter,element+"-bottomright",
-                      QRect(x1-fspec.right+1,y1-fspec.bottom+1,fspec.right,fspec.bottom),
-                      0,0,Qt::Horizontal);
-    }
   }
 }
 
@@ -6413,7 +6384,7 @@ void Kvantum::renderInterior(QPainter *painter,
   if (!bounds.isValid() || !ispec.hasInterior)
     return;
 
-  if (!fspec.hasCapsule)
+  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     renderElement(painter,element,interiorRect(bounds,fspec),
                   ispec.px,ispec.py,orientation);
   else
@@ -6425,27 +6396,21 @@ void Kvantum::renderInterior(QPainter *painter,
       left = fspec.left;
       right = fspec.right;
     }
-    if (fspec.capsuleH == -1)
-    {
+    else if (fspec.capsuleH == -1)
       right = fspec.right;
-    }
-    if (fspec.capsuleH == 1)
-    {
+    else if (fspec.capsuleH == 1)
       left = fspec.left;
-    }
+
     if (fspec.capsuleV == 0)
     {
       top = fspec.top;
       bottom = fspec.bottom;
     }
-    if (fspec.capsuleV == -1)
-    {
+    else if (fspec.capsuleV == -1)
       bottom = fspec.bottom;
-    }
-    if (fspec.capsuleV == 1)
-    {
+    else if (fspec.capsuleV == 1)
       top = fspec.top;
-    }
+
     if (orientation == Qt::Vertical)
       renderElement(painter,element,
                     interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
