@@ -511,18 +511,23 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
-  QString status =
-        (option->state & State_Enabled) ?
-          (option->state & State_On) ? "toggled" :
-          (option->state & State_Sunken) ? "pressed" :
-          (option->state & State_Selected) ? "toggled" :
-          (option->state & State_MouseOver) ? "focused" : "normal"
-        : "disabled";
+  QString status;
+  if (element != QStyle::PE_IndicatorTabClose)
+  {
+    status =
+          (option->state & State_Enabled) ?
+            (option->state & State_On) ? "toggled" :
+            (option->state & State_Sunken) ? "pressed" :
+            (option->state & State_Selected) ? "toggled" :
+            (option->state & State_MouseOver) ? "focused" : "normal"
+          : "disabled";
+  }
   bool isInactive = false;
   if (widget && !widget->isActiveWindow())
   {
-    status.append(QString("-inactive"));
     isInactive = true;
+    if (!status.isNull())
+      status.append(QString("-inactive"));
   }
 
   switch(element) {
@@ -729,16 +734,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
         }
-        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
-          ;
-        else
+
+        if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus);
 
         if (!isHorizontal && !withArrow)
           painter->restore();
       }
-      else
+      else if (!(option->state & State_AutoRaise)
+               || (!status.startsWith("normal") && !status.startsWith("disabled")))
+      {
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+      }
 
       if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
@@ -874,16 +881,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           // enlarge to put drop down arrow (-> SC_ToolButton)
           r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
         }
-        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
-          ;
-        else
+
+        if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
           renderFrame(painter,r,fspec,fspec.element+"-"+fbStatus);
 
         if (!isHorizontal && !withArrow)
           painter->restore();
       }
-      else
+      else if (!(option->state & State_AutoRaise)
+               || (!status.startsWith("normal") && !status.startsWith("disabled")))
+      {
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
+      }
 
       if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
@@ -1662,9 +1671,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           fspec.capsuleH = 1;
         fspec.left = 0; // no left frame in this case
 
-        if (tb->autoRaise() && (status.startsWith("normal") || status.startsWith("disabled")) && !drawRaised)
-          ;
-        else
+        if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
         {
           if (status.startsWith("disabled"))
           {
@@ -1685,7 +1692,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           }
         }
       }
-      else
+      else if (!(option->state & State_AutoRaise)
+               || (!status.startsWith("normal") && !status.startsWith("disabled")))
       {
         if (status.startsWith("disabled"))
         {
@@ -1856,18 +1864,26 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
-  QString status =
-      (option->state & State_Enabled) ?
-        (option->state & State_On) ? "toggled" :
-        (option->state & State_Sunken) ? "pressed" :
-        (option->state & State_Selected) ? "toggled" :
-        (option->state & State_MouseOver) ? "focused" : "normal"
-      : "disabled";
+  QString status;
+  /* no redundant computation */
+  if (element != QStyle::CE_TabBarTabShape
+      && element != QStyle::CE_MenuTearoff
+      && element != QStyle::CE_Splitter)
+  {
+    status =
+        (option->state & State_Enabled) ?
+          (option->state & State_On) ? "toggled" :
+          (option->state & State_Sunken) ? "pressed" :
+          (option->state & State_Selected) ? "toggled" :
+          (option->state & State_MouseOver) ? "focused" : "normal"
+        : "disabled";
+  }
   bool isInactive = false;
   if (widget && !widget->isActiveWindow())
   {
-    status.append(QString("-inactive"));
     isInactive = true;
+    if (!status.isNull())
+      status.append(QString("-inactive"));
   }
 
   const QIcon::Mode iconmode =
@@ -1881,8 +1897,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
   switch (element) {
     case CE_MenuTearoff : {
-      const QString tStatus =
-          (option->state & State_Selected) ? "focused" : "normal";
+      status = (option->state & State_Selected) ? "focused" : "normal";
       // see PM_MenuTearoffHeight and also PE_PanelMenu
       int margin = pixelMetric(PM_MenuHMargin);
       QRect r(option->rect.x() + margin,
@@ -1891,7 +1906,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               7);
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
       renderElement(painter,
-                    dspec.element+"-tearoff-"+tStatus,
+                    dspec.element+"-tearoff-"+status,
                     r,
                     20,
                     0);
@@ -2249,6 +2264,17 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
       if (opt)
       {
+        /* Let's forget about the pressed state. It's
+           useless here and makes trouble in KDevelop. */
+        status =
+            (option->state & State_Enabled) ?
+              (option->state & State_On) ? "toggled" :
+              (option->state & State_Selected) ? "toggled" :
+              (option->state & State_MouseOver) ? "focused" : "normal"
+            : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
+
         frame_spec fspec = getFrameSpec("Tab");
         const interior_spec ispec = getInteriorSpec("Tab");
 
@@ -2315,6 +2341,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                   capsule = 1;
               }
             }
+            /* I've seen this only in KDevelop */
+            if (opt->direction == Qt::RightToLeft)
+              capsule = -1*capsule;
             fspec.capsuleH = capsule;
             fspec.capsuleV = 2;
           }
@@ -2714,13 +2743,13 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
-      QString sStatus =
+      status =
           (option->state & State_Enabled) ?
             (option->state & State_Sunken) ? "pressed" :
             (option->state & State_MouseOver) ? "focused" : "normal"
           : "disabled";
       if (isInactive)
-        sStatus.append(QString("-inactive"));
+        status.append(QString("-inactive"));
 
       QRect r = option->rect;
       /* we don't check State_Horizontal because it may
@@ -2738,19 +2767,19 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         painter->setTransform(m, true);
       }
 
-      if (sStatus.startsWith("disabled"))
+      if (status.startsWith("disabled"))
       {
-        sStatus.replace(QString("disabled"),QString("normal"));
+        status.replace(QString("disabled"),QString("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
+      renderFrame(painter,r,fspec,fspec.element+"-"+status);
+      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
       /* some UIs set the handle width */
       int iW = pixelMetric(PM_SplitterWidth)-fspec.left-fspec.right;
       if (iW > qMin(w,h)) iW = qMin(w,h);
       renderElement(painter,
-                    dspec.element+"-"+sStatus,
+                    dspec.element+"-"+status,
                     alignedRect(QApplication::layoutDirection(),
                                 Qt::AlignCenter,
                                 QSize(iW,dspec.size),

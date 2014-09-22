@@ -1,6 +1,7 @@
 V0.6.1
 ---------
  * Organized frame and interior rendering (some frame parts were rendered twice).
+ * Ignore the pressed state for tabs.
 
 V0.6
 ---------
