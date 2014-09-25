@@ -670,7 +670,7 @@
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3779" id="linearGradient7030" y1="3.125" x1="3" y2="13" gradientUnits="userSpaceOnUse" x2="3.0625"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3837" id="linearGradient7032" y1="14" x1="2.0625" y2="2" gradientUnits="userSpaceOnUse" x2="2"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3837" id="linearGradient7044" y1="14" x1="2.0625" y2="2" gradientUnits="userSpaceOnUse" x2="2"/>
-<linearGradient gradientTransform="translate(-629.30176,-1094.4946)" xlink:href="#linearGradient7460" id="linearGradient7466" y1="1240" x1="190" y2="1240" x2="197.5" gradientUnits="userSpaceOnUse"/>
+<linearGradient gradientTransform="matrix(0.26666658,0,0,0.79999886,-487.16665,-846.49858)" xlink:href="#linearGradient7460" id="linearGradient7466" y1="1240" x1="190" y2="1240" x2="197.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3837" id="linearGradient7046" y1="15" x1="1" y2="0.96875" gradientUnits="userSpaceOnUse" x2="1"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3779" id="linearGradient7042" y1="3.125" x1="3" y2="13" gradientUnits="userSpaceOnUse" x2="3.0625"/>
 <linearGradient gradientTransform="matrix(3,0,0,3,201,666)" xlink:href="#linearGradient3779" id="linearGradient7040" y1="3.125" x1="3" y2="13" gradientUnits="userSpaceOnUse" x2="3.0625"/>
@@ -877,7 +877,10 @@
 <rect width="16" x="90.330406" y="323" height="16" style="fill:url(#linearGradient6592)" id="rect41393" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9"/>
 <rect width="16" x="90.330406" y="323" rx="2.2204461e-17" height="5" ry="0.06666667" style="opacity:.5;fill:url(#linearGradient6589)" id="rect41395" d="m 496,454.36218 -1176,0 m 1178,1.95919 -1176,0 m 1178,1.95918 -1176,0 m 1178,1.95918 -1176,0 m 1170,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755"/>
 </g>
-<rect width="7.5000024" x="-439.30176" y="140.50537" height="10.000014" style="fill:url(#linearGradient7466);fill-rule:evenodd" id="toolbar-handle" transform="scale(-1,1)"/>
+<g id="toolbar-handle">
+<rect width="8" x="431.5" y="140.5" height="10" style="opacity:0" id="rect5536"/>
+<rect width="2" x="-436.5" y="141.5" height="8" style="fill:url(#linearGradient7466);fill-rule:evenodd" id="toolbar-handle0" transform="scale(-1,1)"/>
+</g>
 <g id="button-normal-top" transform="translate(-109.99998,-629.99999)">
 <path style="fill:#878787" id="path3805" d="m 210,672 0,3 30,0 0,-3 -30,0 z"/>
 <path style="opacity:.01" id="path3807" d="m 210,669 0,3 30,0 0,-3 -30,0 z"/>
@@ -1411,7 +1414,7 @@
 </g>
 <g id="checkbox-normal">
 <rect width="13.042" x="119.979" y="-500.51047" height="13.021" style="fill:url(#linearGradient6612);color:#000" id="rect6506" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6566)" id="rect3760" d="m 119.979,487.4895 13.042,0 -2,2 -9.042,0 z"/>
+<path style="opacity:.2;fill:url(#linearGradient6566)" id="rect3760" d="m 119.979,487.4895 13.042,0 -2,2 -9.042,0 z"/>
 <path style="opacity:.23;fill:url(#linearGradient6562)" id="path3813" d="m 133.021,487.479 0,13.042 -2,-2 0,-9.042 z"/>
 <path style="opacity:.25;fill:url(#linearGradient6559)" id="path3817-4" d="m 119.979,500.5105 13.042,0 -2,-2 -9.042,0 z"/>
 <path style="opacity:.15;fill:url(#linearGradient6556)" id="path3821-8" d="m 119.979,500.521 0,-13.042 2,2 0,9.0425 z"/>
@@ -1669,7 +1672,7 @@
 <g style="stroke:none">
 <g id="checkbox-checked-normal">
 <rect width="13.042" x="332.45798" y="-497.51047" height="13.021" style="fill:url(#linearGradient6657);color:#000" id="rect6506-4" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6653)" id="rect3760-0" d="m 332.458,484.4895 13.042,0 -2,2 -9.042,0 z"/>
+<path style="opacity:.2;fill:url(#linearGradient6653)" id="rect3760-0" d="m 332.458,484.4895 13.042,0 -2,2 -9.042,0 z"/>
 <path style="opacity:.23;fill:url(#linearGradient6650)" id="path3813-4" d="m 345.5,484.479 0,13.042 -2,-2 0,-9.042 z"/>
 <path style="opacity:.25;fill:url(#linearGradient6647)" id="path3817-42" d="m 332.458,497.5105 13.042,0 -2,-2 -9.042,0 z"/>
 <path style="opacity:.15;fill:url(#linearGradient6644)" id="path3821-79" d="m 332.458,497.521 0,-13.042 2,2 0,9.0425 z"/>
@@ -1680,7 +1683,7 @@
 </g>
 <g id="checkbox-checked-focused" transform="translate(-0.00384,-0.16467)">
 <rect width="13.042" x="404.44595" y="-497.14377" height="13.021" style="fill:url(#linearGradient6722);color:#000" id="rect8490" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6724)" id="path8493" d="m 404.446,484.1228 13.042,0 -2,2 -9.042,0 z "/>
+<path style="opacity:.2;fill:url(#linearGradient6724)" id="path8493" d="m 404.446,484.1228 13.042,0 -2,2 -9.042,0 z "/>
 <path style="opacity:.23;fill:url(#linearGradient6726)" id="path8495" d="m 417.488,484.1123 0,13.042 -2,-2 0,-9.042 z "/>
 <path style="opacity:.25;fill:url(#linearGradient6728)" id="path8497" d="m 404.446,497.1438 13.042,0 -2,-2 -9.042,0 z "/>
 <path style="opacity:.15;fill:url(#linearGradient6730)" id="path8499" d="m 404.446,497.1543 0,-13.042 2,2 0,9.0425 z "/>
@@ -1691,7 +1694,7 @@
 </g>
 <g id="checkbox-tristate-focused" transform="translate(0.05404,1.26269)">
 <rect width="13.042" x="272.44595" y="-536.7688" height="13.021" style="fill:url(#linearGradient6862);color:#000" id="rect8571" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6848)" id="path8573" d="m 272.446,523.7478 13.042,0 -2,2 -9.042,0 z "/>
+<path style="opacity:.2;fill:url(#linearGradient6848)" id="path8573" d="m 272.446,523.7478 13.042,0 -2,2 -9.042,0 z "/>
 <path style="opacity:.23;fill:url(#linearGradient6850)" id="path8575" d="m 285.488,523.7373 0,13.042 -2,-2 0,-9.042 z "/>
 <path style="opacity:.25;fill:url(#linearGradient6852)" id="path8577" d="m 272.446,536.7688 13.042,0 -2,-2 -9.042,0 z "/>
 <path style="opacity:.15;fill:url(#linearGradient6854)" id="path8579" d="m 272.446,536.7793 0,-13.042 2,2 0,9.0425 z "/>
@@ -1702,7 +1705,7 @@
 </g>
 <g id="checkbox-tristate-normal" transform="translate(0.08292,0.26107)">
 <rect width="13.042" x="199.91707" y="-537.75989" height="13.021" style="fill:url(#linearGradient6790);color:#000" id="rect8657" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6792)" id="path8659" d="m 199.9171,524.7389 13.042,0 -2,2 -9.042,0 z "/>
+<path style="opacity:.2;fill:url(#linearGradient6792)" id="path8659" d="m 199.9171,524.7389 13.042,0 -2,2 -9.042,0 z "/>
 <path style="opacity:.23;fill:url(#linearGradient6794)" id="path8661" d="m 212.9591,524.7284 0,13.042 -2,-2 0,-9.042 z "/>
 <path style="opacity:.25;fill:url(#linearGradient6796)" id="path8663" d="m 199.9171,537.7599 13.042,0 -2,-2 -9.042,0 z "/>
 <path style="opacity:.15;fill:url(#linearGradient6798)" id="path8665" d="m 199.9171,537.7704 0,-13.042 2,2 0,9.0425 z "/>
@@ -2562,7 +2565,7 @@
 </g>
 <g style="stroke:none" id="checkbox-focused" transform="translate(69.979,-0.5105)">
 <rect width="13.042" x="119.979" y="-500.51047" height="13.021" style="fill:url(#linearGradient6593);color:#000" id="rect6580" transform="scale(1,-1)"/>
-<path style="opacity:.15;fill:url(#linearGradient6595)" id="path6582" d="m 119.979,487.4895 13.042,0 -2,2 -9.042,0 z"/>
+<path style="opacity:.2;fill:url(#linearGradient6595)" id="path6582" d="m 119.979,487.4895 13.042,0 -2,2 -9.042,0 z"/>
 <path style="opacity:.23;fill:url(#linearGradient6597)" id="path6584" d="m 133.021,487.479 0,13.042 -2,-2 0,-9.042 z"/>
 <path style="opacity:.25;fill:url(#linearGradient6599)" id="path6587" d="m 119.979,500.5105 13.042,0 -2,-2 -9.042,0 z"/>
 <path style="opacity:.15;fill:url(#linearGradient6601)" id="path6591" d="m 119.979,500.521 0,-13.042 2,2 0,9.0425 z"/>

@@ -511,23 +511,19 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
-  QString status;
-  if (element != QStyle::PE_IndicatorTabClose)
-  {
-    status =
-          (option->state & State_Enabled) ?
-            (option->state & State_On) ? "toggled" :
-            (option->state & State_Sunken) ? "pressed" :
-            (option->state & State_Selected) ? "toggled" :
-            (option->state & State_MouseOver) ? "focused" : "normal"
-          : "disabled";
-  }
+  QString status =
+        (option->state & State_Enabled) ?
+          (option->state & State_On) ? "toggled" :
+          (option->state & State_Sunken) ? "pressed" :
+          (option->state & State_Selected) ? "toggled" :
+          (option->state & State_MouseOver) ? "focused" : "normal"
+        : "disabled";
+
   bool isInactive = false;
   if (widget && !widget->isActiveWindow())
   {
     isInactive = true;
-    if (!status.isNull())
-      status.append(QString("-inactive"));
+    status.append(QString("-inactive"));
   }
 
   switch(element) {
@@ -1427,23 +1423,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
     /* toolbar is drawn at CE_ToolBar */
     /*case PE_PanelToolBar : {
-      const QString group = "Toolbar";
-
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-
-      break;
+      return;
     }*/
 
     case PE_IndicatorToolBarHandle :
     case PE_IndicatorToolBarSeparator : {
       const QString group = "Toolbar";
 
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec;
+      default_frame_spec(fspec);
+      interior_spec ispec;
+      default_interior_spec(ispec);
       const indicator_spec dspec = getIndicatorSpec(group);
 
       bool isVertical = false;
@@ -1864,26 +1854,19 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
-  QString status;
-  /* no redundant computation */
-  if (element != QStyle::CE_TabBarTabShape
-      && element != QStyle::CE_MenuTearoff
-      && element != QStyle::CE_Splitter)
-  {
-    status =
-        (option->state & State_Enabled) ?
-          (option->state & State_On) ? "toggled" :
-          (option->state & State_Sunken) ? "pressed" :
-          (option->state & State_Selected) ? "toggled" :
-          (option->state & State_MouseOver) ? "focused" : "normal"
-        : "disabled";
-  }
+  QString status =
+      (option->state & State_Enabled) ?
+        (option->state & State_On) ? "toggled" :
+        (option->state & State_Sunken) ? "pressed" :
+        (option->state & State_Selected) ? "toggled" :
+        (option->state & State_MouseOver) ? "focused" : "normal"
+      : "disabled";
+
   bool isInactive = false;
   if (widget && !widget->isActiveWindow())
   {
     isInactive = true;
-    if (!status.isNull())
-      status.append(QString("-inactive"));
+    status.append(QString("-inactive"));
   }
 
   const QIcon::Mode iconmode =
@@ -2304,29 +2287,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               if (opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
                 fspec.hasCapsule = true;
-                if (bottomTabs) // will be flipped both vertically and horizontally
-                  capsule = 1;
-                else
-                  capsule = -1;
+                capsule = -1;
               }
             }
             else if (opt->position == QStyleOptionTab::Middle)
             {
               fspec.hasCapsule = true;
               if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-              {
-                if (bottomTabs)
-                  capsule = -1;
-                else
-                  capsule = 1;
-              }
+                capsule = 1;
               else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-              {
-                if (bottomTabs)
-                  capsule = 1;
-                else
-                  capsule = -1;
-              }
+                capsule = -1;
               else
                 capsule = 0;
             }
@@ -2335,12 +2305,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               if (opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
                 fspec.hasCapsule = true;
-                if (bottomTabs)
-                  capsule = -1;
-                else
-                  capsule = 1;
+                capsule = 1;
               }
             }
+            /* will be flipped both vertically and horizontally */
+            if (bottomTabs)
+              capsule = -1*capsule;
             /* I've seen this only in KDevelop */
             if (opt->direction == Qt::RightToLeft)
               capsule = -1*capsule;
@@ -3457,8 +3427,8 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
   bool isInactive = false;
   if (widget && !widget->isActiveWindow())
   {
-    status.append(QString("-inactive"));
     isInactive = true;
+    status.append(QString("-inactive"));
   }
 
   switch (control) {
