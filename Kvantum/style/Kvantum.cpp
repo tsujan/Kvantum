@@ -250,7 +250,8 @@ void Kvantum::polish(QWidget * widget)
     /* remove ugly flat backgrounds when the window backround is styled */
     else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
     {
-      if (sa->frameShape() == QFrame::NoFrame && sa->backgroundRole() == QPalette::Window)
+      if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
+          sa->backgroundRole() == QPalette::Window)
       {
         QWidget *vp = sa->viewport();
         if (vp && vp->backgroundRole() == QPalette::Window)

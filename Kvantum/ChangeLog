@@ -3,6 +3,7 @@ V0.6.1
  * Organized frame and interior rendering (some frame parts were rendered twice).
  * Ignore the pressed state for tabs.
  * Don't use toolbar's frame and interior size specifications for its handle or separator.
+ * With styled window backgrounds, remove ugly flat backgrounds from scroll areas even when they have frame.
 
 V0.6
 ---------
