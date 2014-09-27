@@ -4,6 +4,8 @@ V0.6.1
  * Ignore the pressed state for tabs.
  * Don't use toolbar's frame and interior size specifications for its handle or separator.
  * With styled window backgrounds, remove ugly flat backgrounds from scroll areas even when they have frame.
+ * Added a 2px right margin to menu-items when they have arrow or check/radio button.
+ * Fixed transparent MDI subwindows.
 
 V0.6
 ---------

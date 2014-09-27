@@ -40,6 +40,7 @@
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
+#include <QMdiSubWindow>
 #include <QDir>
 #include <QTextStream>
 //#include <QBitmap>
@@ -265,6 +266,8 @@ void Kvantum::polish(QWidget * widget)
         }
       }
     }
+    else if (qobject_cast<QMdiSubWindow*>(widget))
+      widget->setAutoFillBackground(true);
 
     if (!isLibreoffice // not required
         && !subApp
@@ -1977,7 +1980,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                                 | Qt::AlignVCenter,
                                QSize(iw,ih),
                                isLibreoffice ? o.rect.adjusted(6,-2,0,0) // FIXME why?
-                                             : interiorRect(o.rect,fspec));
+                                               /* we add a 2px right margin at CT_MenuItem */
+                                             : interiorRect(o.rect,fspec).adjusted(0,0,-2,0));
 
           /* change the selected and pressed states to mouse-over */
           if (o.state & QStyle::State_Selected)
@@ -4067,7 +4071,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
     case PM_SpinBoxFrameWidth :
     case PM_ComboBoxFrameWidth : return 0;
 
-    case PM_MdiSubWindowFrameWidth : return 10;
+    case PM_MdiSubWindowFrameWidth : return 4;
     case PM_MdiSubWindowMinimizedWidth : return 200;
 
     case PM_LayoutLeftMargin :
@@ -4679,10 +4683,11 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         if(opt->icon.isNull())
           s.rwidth() += lspec.tispace;
 
-        /* to have enough space between the text and the check
+        /* To have enough space between the text and the check
            button or arrow when there's no shortcut (like in
-           Ark's settings menu), we add a small extra space */
-        int extra = textSize(f,"ww").width();
+           Ark's settings menu), we add a small extra space.
+           We also add 2px for the right margin. */
+        int extra = textSize(f,"ww").width() + 2;
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
         {
