@@ -29,6 +29,7 @@ indicator.size=9
 text.normal.color=white
 text.focus.color=#80C0FF
 text.press.color=white
+text.toggle.color=white
 text.shadow=0
 text.margin=1
 text.iconspacing=3

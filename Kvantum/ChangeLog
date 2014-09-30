@@ -1,6 +1,8 @@
 V0.6.2
 ---------
  * Don't display a combo toggled when its menu isn't shown.
+ * Don't use the focus text color for toggled or pressed widgets.
+ * Added a toggle text color (distinct from press text color).
 
 V0.6.1
 ---------

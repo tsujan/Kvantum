@@ -117,6 +117,8 @@ typedef struct {
   QString focusColor;
   /* pressed text color */
   QString pressColor;
+  /* toggled text color */
+  QString toggleColor;
   /* has shadow */
   bool hasShadow;
   /* shadow shift */
@@ -163,6 +165,7 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.normalColor = QString();
   lspec.focusColor = QString();
   lspec.pressColor = QString();
+  lspec.toggleColor = QString();
   lspec.hasShadow = false;
   lspec.xshift = 0;
   lspec.yshift = 1;

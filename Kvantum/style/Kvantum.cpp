@@ -1600,10 +1600,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         QString aStatus = "normal";
         if (status.startsWith("disabled"))
           aStatus = "disabled";
-        else if (option->state & State_MouseOver)
-          aStatus = "focused";
         else if (status.startsWith("toggled") || status.startsWith("pressed"))
           aStatus = "pressed";
+        else if (option->state & State_MouseOver)
+          aStatus = "focused";
         if (isInactive)
           aStatus.append(QString("-inactive"));
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
@@ -1710,10 +1710,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       QString aStatus = "normal";
       if (status.startsWith("disabled"))
         aStatus = "disabled";
-      else if (option->state & State_MouseOver)
-        aStatus = "focused";
       else if (status.startsWith("toggled") || status.startsWith("pressed"))
         aStatus = "pressed";
+      else if (option->state & State_MouseOver)
+        aStatus = "focused";
       if (isInactive)
         aStatus.append(QString("-inactive"));
       renderIndicator(painter,
@@ -1770,10 +1770,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       QString aStatus = "normal";
       if (status.startsWith("disabled"))
         aStatus = "disabled";
-      else if (option->state & State_MouseOver)
-        aStatus = "focused";
       else if (status.startsWith("toggled") || status.startsWith("pressed"))
         aStatus = "pressed";
+      else if (option->state & State_MouseOver)
+        aStatus = "focused";
       if (isInactive)
         aStatus.append(QString("-inactive"));
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus);
@@ -2027,10 +2027,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           int state = 1;
           if (status.startsWith("disabled"))
             state = 0;
-          else if (option->state & State_MouseOver)
-            state = 2;
           else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 3;
+          else if (option->state & State_MouseOver)
+            state = 2;
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ItemView");
@@ -2217,6 +2217,9 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
       if (opt && !opt->editable) {
+        if (option->state & State_Selected)
+          status.replace(QString("toggled"),QString("normal"));
+
         const QString group = "ComboBox";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
@@ -2231,10 +2234,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
+        else if (status.startsWith("pressed"))
+          state = 3;
+        else if (status.startsWith("toggled"))
+          state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          state = 3;
 
         renderLabel(painter,option->palette,
                     /* since the label is vertically centered, this doesn't do
@@ -2390,8 +2395,16 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         qstyleoption_cast<const QStyleOptionTab *>(option);
 
       if (opt) {
-        const QString group = "Tab";
+        status =
+            (option->state & State_Enabled) ?
+              (option->state & State_On) ? "toggled" :
+              (option->state & State_Selected) ? "toggled" :
+              (option->state & State_MouseOver) ? "focused" : "normal"
+            : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
 
+        const QString group = "Tab";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
 
@@ -2463,10 +2476,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
+        else if (status.startsWith("pressed"))
+          state = 3;
+        else if (status.startsWith("toggled"))
+          state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          state = 3;
 
         renderLabel(painter,option->palette,
                     r,
@@ -2925,10 +2940,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
+        else if (status.startsWith("pressed"))
+          state = 3;
+        else if (status.startsWith("toggled"))
+          state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          state = 3;
 
         renderLabel(painter,option->palette,
                     option->rect.adjusted(0,
@@ -3058,10 +3075,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
+        else if (status.startsWith("pressed"))
+          state = 3;
+        else if (status.startsWith("toggled"))
+          state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          state = 3;
 
         renderLabel(painter,option->palette,
                     r,
@@ -3111,10 +3130,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           QString aStatus = "normal";
           if (status.startsWith("disabled"))
             aStatus = "disabled";
-          else if (option->state & State_MouseOver)
-            aStatus = "focused";
           else if (status.startsWith("toggled") || status.startsWith("pressed"))
             aStatus = "pressed";
+          else if (option->state & State_MouseOver)
+            aStatus = "focused";
           if (isInactive)
             aStatus.append(QString("-inactive"));
           renderIndicator(painter,
@@ -3231,10 +3250,12 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           int state = 1;
           if (status.startsWith("disabled"))
             state = 0;
+          else if (status.startsWith("pressed"))
+            state = 3;
+          else if (status.startsWith("toggled"))
+            state = 4;
           else if (option->state & State_MouseOver)
             state = 2;
-          else if (status.startsWith("toggled") || status.startsWith("pressed"))
-            state = 3;
           renderLabel(painter,option->palette,
                       !(opt->features & QStyleOptionToolButton::Arrow)
                           || opt->arrowType == Qt::NoArrow
@@ -3256,10 +3277,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         QString aStatus = "normal";
         if (status.startsWith("disabled"))
           aStatus = "disabled";
-        else if (option->state & State_MouseOver)
-          aStatus = "focused";
         else if (status.startsWith("toggled") || status.startsWith("pressed"))
           aStatus = "pressed";
+        else if (option->state & State_MouseOver)
+          aStatus = "focused";
         if (isInactive)
           aStatus.append(QString("-inactive"));
         if (!opt->text.isEmpty()) // it's empty for QStackedWidget
@@ -3477,10 +3498,10 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
               QString aStatus = "normal";
               if (status.startsWith("disabled"))
                 aStatus = "disabled";
-              else if (option->state & State_MouseOver)
-                aStatus = "focused";
               else if (status.startsWith("toggled") || status.startsWith("pressed"))
                 aStatus = "pressed";
+              else if (option->state & State_MouseOver)
+                aStatus = "focused";
               if (isInactive)
                 aStatus.append(QString("-inactive"));
               renderIndicator(painter,
@@ -3605,10 +3626,12 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           int state = 1;
           if (status.startsWith("disabled"))
             state = 0;
+          else if (status.startsWith("pressed"))
+            state = 3;
+          else if (status.startsWith("toggled"))
+            state = 4;
           else if (option->state & State_MouseOver)
             state = 2;
-          else if (status.startsWith("toggled") || status.startsWith("pressed"))
-            state = 3;
 
           renderLabel(painter,option->palette,
                       QRect(o.rect.x(), o.rect.y(), rWidth, o.rect.height()),
@@ -6462,7 +6485,7 @@ void Kvantum::renderLabel(
                           int talign, // text alignment
                           const QString &text,
                           QPalette::ColorRole textRole, // text color role
-                          int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed)
+                          int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
                           const QPixmap &icon,
                           const Qt::ToolButtonStyle tialign // relative positions of text and icon
                          ) const
@@ -6543,6 +6566,7 @@ void Kvantum::renderLabel(
       QColor normalColor(lspec.normalColor);
       QColor focusColor(lspec.focusColor);
       QColor pressColor(lspec.pressColor);
+      QColor toggleColor(lspec.toggleColor);
       if (state == 1 && normalColor.isValid())
       {
         painter->save();
@@ -6563,6 +6587,14 @@ void Kvantum::renderLabel(
       {
         painter->save();
         painter->setPen(QPen(pressColor));
+        painter->drawText(rtext,talign,text);
+        painter->restore();
+        return;
+      }
+      else if (state == 4 && toggleColor.isValid())
+      {
+        painter->save();
+        painter->setPen(QPen(toggleColor));
         painter->drawText(rtext,talign,text);
         painter->restore();
         return;

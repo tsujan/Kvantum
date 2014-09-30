@@ -141,7 +141,7 @@ There are three logical exceptions to these rules:
 
 Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present.
 
-Exception No.2: If normal,focused or pressed text colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
+Exception No.2: If normal,focused, pressed or toggled text colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
 
 Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth".
 
@@ -278,6 +278,10 @@ text.press.color                  string (#RRGGBB)    The color of the pressed t
                                                       as #RRGGBB or with a valid name
                                                       like white, black, red, etc.
 
+text.toggle.color                 string (#RRGGBB)    The color of the toggled text
+                                                      as #RRGGBB or with a valid name
+                                                      like white, black, red, etc.
+
 text.shadow                       true/false          Draw a shadow for the text?
 
 text.shadow.xshift
@@ -336,6 +340,7 @@ composite=false
 text.normal.color=none
 text.focus.color=none
 text.press.color=none
+text.toggle.color=none
 
 Here "none" is not a valid color, so text colors will be taken from the currently used color scheme.
 
@@ -350,6 +355,7 @@ tooltip_shadow_depth=6
 text.normal.color=white
 text.focus.color=#80C0FF
 text.press.color=#white
+text.toggle.color=#white
 text.margin.top=4
 text.margin.bottom=4
 text.margin.left=5
@@ -369,6 +375,7 @@ tooltip_shadow_depth=6
 text.normal.color=white
 text.focus.color=lightgreen
 text.press.color=white
+text.toggle.color=white
 text.shadow=true
 
 Note that, in the two examples above, the compositing values and normal/focused text colors are also added because otherwise, they would be disabled (see the exceptions above). In the previous example, customized text colors were disabled for all widgets other than push-buttons because there were no sections for them. If you want them back, you could add sections like these:
