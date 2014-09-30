@@ -1621,12 +1621,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       frame_spec fspec = getFrameSpec(group);
 
       const QComboBox *combo = qobject_cast<const QComboBox *>(widget);
-      if (combo && !combo->duplicatesEnabled())
+      if (combo /*&& !combo->duplicatesEnabled()*/)
       {
         fspec.hasCapsule = true;
         fspec.capsuleH = 1;
         fspec.capsuleV = 2;
         fspec.left = 0; // no left frame in this case
+
+        if (option->state & State_Selected)
+          status.replace(QString("toggled"),QString("normal"));
       }
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
@@ -3526,6 +3529,9 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
       if (opt) {
+        if (option->state & State_Selected)
+          status.replace(QString("toggled"),QString("normal"));
+
         QStyleOptionComboBox o(*opt);
 
         const QString group = "ComboBox";
