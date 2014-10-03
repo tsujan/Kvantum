@@ -3,6 +3,8 @@ V0.6.2
  * Don't display a combo toggled when its menu isn't shown.
  * Don't use the focus text color for toggled or pressed widgets.
  * Added a toggle text color (distinct from press text color).
+ * Level a popup list with the bottom or top edge of its combobox while not letting the former cover the latter.
+ * Don't use toggled and pressed states for the progressbar indicator.
 
 V0.6.1
 ---------

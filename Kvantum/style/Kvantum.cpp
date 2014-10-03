@@ -1781,16 +1781,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       break;
     }
 
-    case PE_IndicatorProgressChunk : {
-      const QString group = "ProgressbarContents";
-
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-
+    // this doesn't seem to be used at all
+    /*case PE_IndicatorProgressChunk : {
+      QCommonStyle::drawPrimitive(element,option,painter,widget);
       break;
-    }
+    }*/
 
     case PE_IndicatorDockWidgetResizeHandle : {
       drawControl(CE_Splitter,option,painter,widget);
@@ -2587,8 +2582,13 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
       if (opt)
       {
-        const QString group = "ProgressbarContents";
+        status = (option->state & State_Enabled) ?
+                   (option->state & State_MouseOver) ? "focused" : "normal"
+                 : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
 
+        const QString group = "ProgressbarContents";
         frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
 
@@ -2612,7 +2612,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         {
           int empty = sliderPositionFromValue(opt->minimum,
                                               opt->maximum,
-                                              opt->maximum - opt->progress,
+                                              opt->maximum - opt->progress + opt->minimum,
                                               isVertical ? h : w,
                                               false);
           if (isVertical ? inverted : !inverted)
@@ -5466,48 +5466,22 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
-          /*const QString group = "ComboBox";
-
-          const frame_spec fspec = getFrameSpec(group);
-          const label_spec lspec = getLabelSpec(group);
-          const size_spec sspec = getSizeSpec(group);
-
-          int maxW = 0;
-          if (widget) {
-            const QComboBox * cb = qobject_cast<const QComboBox *>(widget);
-            QSize s;
-            for (int i=0; i<cb->count(); i++) {
-              s = sizeCalculated(cb->font(),fspec,lspec,sspec, cb->itemText(i),cb->itemIcon(i).pixmap(cb->iconSize()));
-              if (s.width() > maxW)
-                maxW = s.width();
-            }
-
-            if (cb->count() > cb->maxVisibleItems()) {
-              // add scrollbar width
-              maxW = maxW+pixelMetric(PM_ScrollBarExtent);
-            }
-          }
-
-          // popup width not shorter than combo itself
-          if (maxW < w)
-            maxW = w;*/
-
-          /* horizontally level the popup menu width the
-             combobox; the height doesn't seem to be used */
-          return QRect(0,h,w,0);
+          /* level the popup list with the bottom or top edge of the combobox */
+          int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
+          return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
         }
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
       }
       break;
 
-//     case CC_MdiControls :
-//       switch (subControl) {
-//         case SC_MdiCloseButton : return QRect(0,0,30,30);
-//
-//         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
-//       }
-//       break;
+     /*case CC_MdiControls :
+       switch (subControl) {
+         case SC_MdiCloseButton : return QRect(0,0,30,30);
+
+         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
+       }
+       break;*/
 
     case CC_ScrollBar : {
       const int extent = pixelMetric(PM_ScrollBarExtent,option,widget);
