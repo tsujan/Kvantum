@@ -32,8 +32,8 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="206.1777"
-     inkscape:cy="1007.4732"
+     inkscape:cx="141.08609"
+     inkscape:cy="1007.0304"
      inkscape:window-x="106"
      inkscape:window-y="84"
      inkscape:current-layer="svg2"
@@ -122,7 +122,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1709,7 +1709,7 @@
       <stop
          id="stop3959-7"
          offset="1"
-         style="stop-color:#f0f0f0;stop-opacity:0;" />
+         style="stop-color:#c8c8c8;stop-opacity:0;" />
     </linearGradient>
     <linearGradient
        id="linearGradient3961-9">
@@ -1729,10 +1729,10 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(2.4,0,0,-0.79999999,201,1539.8897)"
        spreadMethod="pad"
-       x1="18.209629"
-       y1="1033.788"
-       x2="19.505211"
-       y2="1033.0458" />
+       x1="16.783848"
+       y1="1034.0028"
+       x2="18.333334"
+       y2="1032.3622" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3790"
@@ -1740,9 +1740,9 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(2.4,0,0,-0.79999999,201,1539.8897)"
        spreadMethod="pad"
-       x1="3.6082248e-16"
-       y1="1033.8622"
-       x2="3.6082248e-16"
+       x1="1.6666666"
+       y1="1035.37"
+       x2="1.6666666"
        y2="1032.3622" />
     <linearGradient
        inkscape:collect="always"
@@ -1773,10 +1773,10 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,-2.4,-0.79999999,0,1074.8897,713.99998)"
        spreadMethod="pad"
-       x1="1.5364499"
-       y1="1034.12"
-       x2="0.27934134"
-       y2="1033.5178" />
+       x1="2.1170957"
+       y1="1035.2146"
+       x2="0.383508"
+       y2="1033.4459" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3955-8"
@@ -1784,9 +1784,9 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,-2.4,-0.79999999,0,1074.8897,713.99998)"
        spreadMethod="pad"
-       x1="3.6082248e-16"
-       y1="1033.8622"
-       x2="3.6082248e-16"
+       x1="1.6666583"
+       y1="1035.37"
+       x2="1.6666583"
        y2="1032.3622" />
     <linearGradient
        inkscape:collect="always"
@@ -1850,10 +1850,10 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0,-2.4,-0.79999999,0,1074.8897,713.99998)"
        spreadMethod="pad"
-       x1="18.352865"
-       y1="1033.8427"
-       x2="19.036457"
-       y2="1032.3036" />
+       x1="16.927082"
+       y1="1033.7255"
+       x2="18.333324"
+       y2="1032.3622" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3757-6"
@@ -1949,10 +1949,10 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(2.4,0,0,-0.79999999,201,1539.8897)"
        spreadMethod="pad"
-       x1="0.46035597"
-       y1="1034.4146"
-       x2="-0.3314563"
-       y2="1032.528" />
+       x1="2.0635092"
+       y1="1034.688"
+       x2="0.72887379"
+       y2="1033.3424" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3757-6"

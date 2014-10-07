@@ -31,4 +31,4 @@ QStyle *KvantumPlugin::create(const QString &key)
   return 0;
 }
 
-Q_EXPORT_PLUGIN2(pnp_kvantum, KvantumPlugin)
+Q_EXPORT_PLUGIN2(kvantum, KvantumPlugin)

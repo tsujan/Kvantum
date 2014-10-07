@@ -1,54 +1,34 @@
-*************************
-*   Preliminary Notes   *
-*************************
-
-(1) This file includes instructions on compilation and installation.
-
-(2) Kvantum does not depend on KDE and can be used for theming Qt4 applications under any Linux desktop envirenment (see below).
-
-(3) Kvantum does not provide window decorations. Such jobs are done by the window manager.
-
 *******************
 *   Compilation   *
 *******************
 
-After installing Qt4 (>= 4.8) and X11 development packages (libqt4-dev, libx11-dev and, perhaps, libxext-dev in debian-based systems), just open a terminal inside this folder and issue the following command:
+After installing Qt4 (>= 4.8) and X11 development packages (libqt4-dev, libx11-dev and libxext-dev in debian-based systems), open a terminal inside this folder and issue the following command:
 
 	qmake && make
-
-Optionally, if you have "strip" on your system, also do:
-
-	strip ./style/libkvantum.so
 
 ********************
 *   Installation   *
 ********************
 
-KDE:
-====
-(1) Put libkvantum.so, created in the folder "style", into Qt4's styles directory, which is the following folder in most distros:
+Then, use this command for installation:
 
-	/usr/lib/qt4/plugins/styles/
+	sudo make install
 
-Create this folder (as root, of course) if it doesn't exist. There may also be other styles directories, like "/usr/lib/kde4/plugins/styles/", "/usr/lib/x86_64-linux-gnu/qt4/plugins/styles/", or "/usr/lib64/kde4/plugins/styles/" and "/usr/lib64/qt4/plugins/styles/" in 64-bit OpenSUSE; use them only if the above one doesn't work for you.
+*************
+*   Usage   *
+*************
 
-(2) Import "color/Kvantum.colors" from 'System Settings > Application Appearance > Colors > Scheme', select it and click Apply.
+In KDE:
+=======
+(1) Select Kvantum from 'System Settings > Application Appearance > Colors > Scheme' and click Apply.
 
-(3) Choose Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
+(2) Select Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
 
-Other DEs:
-==========
-(1) Like above, put libkvantum.so into "/usr/lib/qt4/plugins/styles/";
+In Other DEs:
+=============
+(1) Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style';
 
-(2) Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style';
-
-(3) Manually enter the colors defined in the file "color/Colors" with 'qtconfig-qt4 > Appearance > Tune Palette...' and then, save the result with 'File > Save'.
-
-****************
-*   Updating   *
-****************
-
-If you have installed Kvantum and want to update it now, first change the style to another theme (Oxygen, for example), then remove the old file "libkvantum.so" and put the new one in its place (don't paste the latter over the former)!
+(2) Manually enter the colors defined in the file "color/Colors" with 'qtconfig-qt4 > Appearance > Tune Palette...' and then, save the result with 'File > Save'.
 
 ***************
 *   Preview   *

@@ -1,3 +1,7 @@
+V0.6.3
+---------
+ * Use "sudo make install" for installation.
+
 V0.6.2
 ---------
  * Don't display a combo toggled when its menu isn't shown.

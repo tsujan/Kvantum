@@ -28,3 +28,17 @@ HEADERS += themeconfig/specs.h \
 RESOURCES += themeconfig/defaulttheme.qrc
 
 unix:!macx: LIBS += -lX11
+
+unix {
+  #VARIABLES
+  isEmpty(PREFIX) {
+    PREFIX = /usr
+  }
+  COLORSDIR =$$PREFIX/share/kde4/apps/color-schemes
+
+  #MAKE INSTALL
+  target.path = $$[QT_INSTALL_PLUGINS]/styles
+  colors.path = $$COLORSDIR
+  colors.files += ../color/Kvantum.colors
+  INSTALLS += target colors
+}
