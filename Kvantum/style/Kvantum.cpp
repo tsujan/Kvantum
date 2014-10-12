@@ -41,6 +41,7 @@
 #include <QDial>
 #include <QScrollBar>
 #include <QMdiSubWindow>
+#include <QToolBox>
 #include <QDir>
 #include <QTextStream>
 //#include <QBitmap>
@@ -213,6 +214,16 @@ void Kvantum::setupThemeDeps()
     settings = defaultSettings;
 }
 
+// also checks for NULL widgets
+static inline QWidget *getParent (const QWidget *widget, int level)
+{
+  if (!widget || level <= 0) return NULL;
+  QWidget *w = widget->parentWidget();
+  for (int i = 1; i < level && w; ++i)
+    w = w->parentWidget();
+  return w;
+}
+
 void Kvantum::polish(QWidget * widget)
 {
   if (widget)
@@ -268,6 +279,18 @@ void Kvantum::polish(QWidget * widget)
     }
     else if (qobject_cast<QMdiSubWindow*>(widget))
       widget->setAutoFillBackground(true);
+    else if (qobject_cast<QToolBox*>(widget))
+    {
+      widget->setBackgroundRole(QPalette::NoRole);
+      widget->setAutoFillBackground(false);
+    }
+    // taken from Oxygen
+    else if (qobject_cast<QToolBox*>(getParent(widget,3)))
+    {
+      widget->setBackgroundRole(QPalette::NoRole);
+      widget->setAutoFillBackground(false);
+      widget->parentWidget()->setAutoFillBackground(false);
+    }
 
     if (!isLibreoffice // not required
         && !subApp
@@ -361,6 +384,8 @@ void Kvantum::unpolish(QWidget * widget)
 
     if (qobject_cast<QProgressBar*>(widget))
       progressbars.remove(widget);
+    else if (qobject_cast<QToolBox*>(widget))
+      widget->setBackgroundRole(QPalette::Button);
 
     if (!isLibreoffice // not required
         && !subApp
@@ -499,16 +524,6 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
   }
 
   return res;
-}
-
-// also checks for NULL widgets
-static inline QWidget *getParent (const QWidget *widget, int level)
-{
-  if (!widget || level <= 0) return NULL;
-  QWidget *w = widget->parentWidget();
-  for (int i = 1; i < level && w; ++i)
-    w = w->parentWidget();
-  return w;
 }
 
 void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * option, QPainter * painter, const QWidget * widget) const

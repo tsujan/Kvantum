@@ -2,6 +2,7 @@ V0.6.3
 ---------
  * Use "sudo make install" for installation.
  * Added a new variable for spreading the indicator of a progressbar across its whole groove and not just its interior.
+ * Removed ugly (flat) backgrounds from toolboxes.
 
 V0.6.2
 ---------
