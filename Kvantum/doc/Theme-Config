@@ -179,6 +179,13 @@ group_toolbar_buttons             true/false          Raise and group neighbor t
                                                       not raised. (Only in the General
                                                       section.)
 
+spread_progressbar                true/false          Spread progressbar's indicator
+                                                      across its whole groove and not
+                                                      just its interior? By default,
+                                                      the indicator is drawn inside
+                                                      progressbar's frame. (Only in
+                                                      the General section.)
+
 composite                         true/false          Use compositing to have
                                                       translucent menus or tooltips?
                                                       It is automatically set to false

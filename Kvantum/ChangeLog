@@ -1,6 +1,7 @@
 V0.6.3
 ---------
  * Use "sudo make install" for installation.
+ * Added a new variable for spreading the indicator of a progressbar across its whole groove and not just its interior.
 
 V0.6.2
 ---------

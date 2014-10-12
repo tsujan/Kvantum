@@ -2641,15 +2641,20 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
           if (R.x()+R.width() > r.x()+r.width())
           {
+            const theme_spec tspec = settings->getThemeSpec();
             // wrap busy indicator
-            fspec.hasCapsule = true;
-            fspec.capsuleH = -1;
-            fspec.capsuleV = 2;
+            if (!tspec.spread_progressbar)
+            {
+              fspec.hasCapsule = true;
+              fspec.capsuleH = -1;
+              fspec.capsuleV = 2;
+            }
             R.setWidth(r.x() + r.width() - R.x());
             renderFrame(painter,R,fspec,fspec.element+"-"+status);
             renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
 
-            fspec.capsuleH = 1;
+            if (!tspec.spread_progressbar)
+              fspec.capsuleH = 1;
             R = QRect(r.x(), r.y(), pm-R.width(), r.height());
             renderFrame(painter,R,fspec,fspec.element+"-"+status);
             renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
@@ -5159,8 +5164,11 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
     }
 
     case SE_ProgressBarContents : {
-      frame_spec fspec = getFrameSpec("Progressbar");
+      const theme_spec tspec = settings->getThemeSpec();
+      if (tspec.spread_progressbar)
+        return option->rect;
 
+      frame_spec fspec = getFrameSpec("Progressbar");
       // the vertical progressbar will be made out of the horizontal one
       const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
       if (pb && pb->orientation() == Qt::Vertical)

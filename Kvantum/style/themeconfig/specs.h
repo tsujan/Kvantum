@@ -44,6 +44,9 @@ typedef struct {
   /* raise and group neighbor
      toolbar buttons */
   bool group_toolbar_buttons;
+  /* let progress indicator spread across the whole
+     progress groove and not just its interior */
+  bool spread_progressbar;
   /* use composite effects
      (for now, only translucent menus
      or tooltips and their shadows) */
@@ -192,6 +195,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.joined_tabs = false;
   tspec.attach_active_tab = false;
   tspec.group_toolbar_buttons = false;
+  tspec.spread_progressbar = false;
   tspec.composite = false;
   tspec.menu_shadow_depth = 0;
   tspec.tooltip_shadow_depth = 0;
