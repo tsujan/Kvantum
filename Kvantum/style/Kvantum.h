@@ -202,7 +202,6 @@ class Kvantum : public QCommonStyle {
   private:
     QSvgRenderer *defaultRndr, *themeRndr;
     ThemeConfig *defaultSettings, *themeSettings, *settings;
-    QSettings *globalSettings;
 
     QString xdg_config_home;
 

@@ -1,3 +1,7 @@
+V0.7
+---------
+ * Added a theme manager for installing and choosing Kvantum themes.
+
 V0.6.3
 ---------
  * Use "sudo make install" for installation.

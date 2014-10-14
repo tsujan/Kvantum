@@ -62,7 +62,6 @@ Kvantum::Kvantum()
 
   settings = defaultSettings = themeSettings = NULL;
   defaultRndr = themeRndr = NULL;
-  globalSettings = NULL;
   singleClick = true;
 
   QString homeDir = QDir::homePath();
@@ -97,12 +96,14 @@ Kvantum::Kvantum()
   }
 
   // load global config file
-  if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
-    globalSettings = new QSettings(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home),QSettings::NativeFormat);
-
   QString theme;
-  if (globalSettings && globalSettings->contains("theme"))
-    theme = globalSettings->value("theme").toString();
+  if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
+  {
+    QSettings globalSettings (QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home), QSettings::NativeFormat);
+
+    if (globalSettings.status() == QSettings::NoError && globalSettings.contains("theme"))
+      theme = globalSettings.value("theme").toString();
+  }
 
   setBuiltinDefaultTheme();
   setUserTheme(theme);
@@ -178,25 +179,26 @@ void Kvantum::setUserTheme(const QString& themename)
     themeRndr = NULL;
   }
 
-  if (!themename.isNull()
-      && !themename.isEmpty()
-      && QFile::exists(QString("%1/Kvantum/%2/%2.kvconfig")
-                              .arg(xdg_config_home)
-                              .arg(themename)))
+  if (!themename.isNull() && !themename.isEmpty())
   {
-    themeSettings = new ThemeConfig(QString("%1/Kvantum/%2/%2.kvconfig")
-                                           .arg(xdg_config_home)
-                                           .arg(themename));
-  }
+    if (QFile::exists(QString("%1/Kvantum/%2/%2.kvconfig")
+                             .arg(xdg_config_home)
+                             .arg(themename)))
+    {
+      themeSettings = new ThemeConfig(QString("%1/Kvantum/%2/%2.kvconfig")
+                                             .arg(xdg_config_home)
+                                             .arg(themename));
+    }
 
-  if (QFile::exists(QString("%1/Kvantum/%2/%2.svg")
-                           .arg(xdg_config_home)
-                           .arg(themename)))
-  {
-    themeRndr = new QSvgRenderer();
-    themeRndr->load(QString("%1/Kvantum/%2/%2.svg")
-                           .arg(xdg_config_home)
-                           .arg(themename));
+    if (QFile::exists(QString("%1/Kvantum/%2/%2.svg")
+                             .arg(xdg_config_home)
+                             .arg(themename)))
+    {
+      themeRndr = new QSvgRenderer();
+      themeRndr->load(QString("%1/Kvantum/%2/%2.svg")
+                             .arg(xdg_config_home)
+                             .arg(themename));
+    }
   }
 
   setupThemeDeps();

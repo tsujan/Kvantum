@@ -30,6 +30,14 @@ In Other DEs:
 
 (2) Manually enter the colors defined in the file "color/Colors" with 'qtconfig-qt4 > Appearance > Tune Palette...' and then, save the result with 'File > Save'.
 
+**************************
+*   Using Other Themes   *
+**************************
+
+To install and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
+
+If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: THEME_NAME.svg, THEME_NAME.kvconfig and THEME_NAME.colors.
+
 ***************
 *   Preview   *
 ***************

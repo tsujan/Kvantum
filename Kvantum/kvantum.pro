@@ -1,5 +1,6 @@
 SUBDIRS += style \
-           kvantumpreview
+           kvantumpreview \
+           kvantummanager
 
 TEMPLATE = subdirs 
 
