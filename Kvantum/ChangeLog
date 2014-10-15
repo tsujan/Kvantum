@@ -1,6 +1,8 @@
 V0.7
 ---------
  * Added a theme manager for installing and choosing Kvantum themes.
+ * Remember the last chosen path in the open dialog of Kvantum Manager.
+ * Make use of Kvantum Manager's statusbar.
 
 V0.6.3
 ---------

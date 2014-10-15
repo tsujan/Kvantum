@@ -22,6 +22,7 @@ private slots:
     void useTheme();
     void txtChanged (const QString &txt);
     void tabChanged (int index);
+    void selectionChanged (int);
 
 private:
     //void closeEvent (QCloseEvent *event);
@@ -29,6 +30,7 @@ private:
     bool isThemeDir (const QString &folder);
     void updateThemeList();
     Ui::KvantumManager *ui;
+    QString lastPath;
 };
 
 #endif // KVANTUMMANAGER_H

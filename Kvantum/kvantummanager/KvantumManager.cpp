@@ -9,6 +9,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     ui->setupUi (this);
 
     setWindowTitle ("Kvantum Manager");
+    
+    lastPath = QDir::home().path();
 
     connect (ui->quit, SIGNAL (clicked()), this, SLOT (close()));
     connect (ui->openTheme, SIGNAL (clicked()), this, SLOT (openTheme()));
@@ -16,6 +18,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
+    connect (ui->comboBox, SIGNAL (currentIndexChanged (int)), this, SLOT (selectionChanged (int)));
 
     updateThemeList();
 }
@@ -37,14 +40,15 @@ KvantumManager::~KvantumManager()
 /*************************/
 void KvantumManager::openTheme()
 {
-    QDir dir = QDir::home();
+    ui->statusBar->clearMessage();
     QString filePath = QFileDialog::getExistingDirectory (this,
                                                           tr ("Open Kvantum Theme Folder..."),
-                                                          dir.path(),
+                                                          lastPath,
                                                           QFileDialog::ShowDirsOnly
                                                           | QFileDialog::ReadOnly
                                                           | QFileDialog::DontUseNativeDialog);
     ui->lineEdit->setText (filePath);
+    lastPath = filePath;
 }
 /*************************/
 bool KvantumManager::isThemeDir (const QString &folder)
@@ -174,6 +178,8 @@ void KvantumManager::installTheme()
                     QFile::copy (colorFile, colorScheme);
                 }
             }
+
+            ui->statusBar->showMessage (QString ("%1 installed.").arg (themeName), 20000);
         }
         else
             notWritable();
@@ -200,6 +206,8 @@ void KvantumManager::useTheme()
         globalSettings.remove ("theme");
     else if (globalSettings.value ("theme").toString() != theme)
         globalSettings.setValue ("theme", theme);
+
+    ui->statusBar->showMessage (QString ("Theme changed to %1.").arg (theme), 20000);
 }
 /*************************/
 void KvantumManager::txtChanged (const QString &txt)
@@ -212,8 +220,14 @@ void KvantumManager::txtChanged (const QString &txt)
 /*************************/
 void KvantumManager::tabChanged (int index)
 {
+    ui->statusBar->clearMessage();
     if (index == 1)
         updateThemeList();
+}
+/*************************/
+void KvantumManager::selectionChanged (int)
+{
+    ui->statusBar->clearMessage();
 }
 /*************************/
 void KvantumManager::updateThemeList()
