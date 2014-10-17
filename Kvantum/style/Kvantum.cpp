@@ -111,10 +111,13 @@ Kvantum::Kvantum()
   isPlasma = false;
   isLibreoffice = false;
   isSystemSettings = false;
+  isDolphin = false;
   subApp = false;
   const QString appName = QApplication::applicationName();
   if (appName == "Qt-subapplication")
     subApp = true;
+  else if (appName == "dolphin")
+    isDolphin = true;
   /*else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
@@ -244,6 +247,18 @@ void Kvantum::polish(QWidget * widget)
         break;
       }
       default: break;
+    }
+
+    if (isDolphin)
+    {
+      const hacks_spec hspec = settings->getHacksSpec();
+      if (hspec.transparent_dolphin_view
+          && widget->autoFillBackground()
+          && qobject_cast<QAbstractScrollArea*>(getParent(widget,2))
+          && !qobject_cast<QAbstractScrollArea*>(getParent(widget,3)))
+      {
+        widget->setAutoFillBackground(false);
+      }
     }
 
     /*if (widget->autoFillBackground()
@@ -1242,6 +1257,22 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
     case PE_Frame : {
       if (widget && qobject_cast<const QAbstractScrollArea*>(widget))
       {
+        if (isDolphin)
+        {
+          if (QWidget *pw = widget->parentWidget())
+          {
+            const hacks_spec hspec = settings->getHacksSpec();
+            if (hspec.transparent_dolphin_view
+                // not renaming area
+                && !qobject_cast<QAbstractScrollArea*>(pw)
+                // only Dolphin's view
+                && QString(pw->metaObject()->className()).startsWith("Dolphin"))
+            {
+              break;
+            }
+          }
+        }
+
         const QString group = "GenericFrame";
         const frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);

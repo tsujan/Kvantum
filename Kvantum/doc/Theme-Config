@@ -28,6 +28,8 @@ Section                                      Meaning
 [%General]                                   General info on the theme
                                              and some general variables.
 
+[Hacks]                                      Hacks for specific apps (currently
+                                             only one hack for Dolphin).
 
 [PanelButtonCommand]                         Panel for a button used to
                                              initiate an action, for
@@ -137,13 +139,13 @@ The following table shows the variables (keys) you could change to configure the
       (2a) First the "inherits" section will be searched for it and then, If nothing is found,
       (2b) its value will be taken from the same section of the default config file.
 
-There are three logical exceptions to these rules:
+There are three exceptions to these rules:
 
-Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present.
+Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present in a section.
 
 Exception No.2: If normal,focused, pressed or toggled text colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
 
-Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth".
+Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth". (The same is true for hacking variables but none is used in the default theme. Currently there is only one, "transparent_dolphin_view".)
 
 
 =============================================================
@@ -226,6 +228,10 @@ check_size                        integer             The width and height of
                                                       checkboxes and radio buttons.
                                                       The default value is 13px.
                                                       (Only in the General section.)
+
+transparent_dolphin_view          true/false          No background or frame for
+                                                      Dolphin's view? (Only in the
+                                                      Hacks section.)
 
 inherits                          string              The name of a secion (in the
                                                       same config file and without

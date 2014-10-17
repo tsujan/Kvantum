@@ -346,6 +346,17 @@ theme_spec ThemeConfig::getThemeSpec() const
   return r;
 }
 
+hacks_spec ThemeConfig::getHacksSpec() const
+{
+  hacks_spec r;
+  default_hacks_spec(r);
+
+  QVariant v = getValue("Hacks","transparent_dolphin_view");
+  r.transparent_dolphin_view = v.toBool();
+
+  return r;
+}
+
 /*QStringList ThemeConfig::getManagedElements()
 {
   return

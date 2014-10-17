@@ -71,6 +71,13 @@ typedef struct {
   int check_size;
 } theme_spec;
 
+/* Hacks */
+typedef struct {
+  /* don't draw any background or frame for Dolphin's
+     view (nice when the window bg has a gradient) */
+  bool transparent_dolphin_view;
+} hacks_spec;
+
 /* Generic information about a frame */
 typedef struct {
   /* Element name */
@@ -205,6 +212,11 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
+}
+
+/* Fills the hacks spec with default values */
+static inline void default_hacks_spec(hacks_spec &hspec) {
+  hspec.transparent_dolphin_view = false;
 }
 
 #endif

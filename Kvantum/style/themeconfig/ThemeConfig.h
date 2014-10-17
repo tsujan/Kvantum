@@ -61,6 +61,8 @@ class ThemeConfig {
     size_spec getSizeSpec(const QString &elementName) const;
     /* Returns the theme spec of this theme. */
     theme_spec getThemeSpec() const;
+    /* Returns the hacks spec of this theme. */
+    hacks_spec getHacksSpec() const;
 
     /* returns the list of supported elements for which settings are recognized */
     //static QStringList getManagedElements();

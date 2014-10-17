@@ -228,6 +228,9 @@ class Kvantum : public QCommonStyle {
        itself as "Qt-subapplication" and doesn't
        accept compositing. */
     bool subApp;
+
+    /* Hacks */
+    bool isDolphin;
 };
 
 #endif
