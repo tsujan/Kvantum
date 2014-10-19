@@ -1,6 +1,7 @@
 V0.7.1
 ---------
  * Added a Hacks section. Currently it has only one hack for Dolphin.
+ * Remove flat backgrounds from scroll areas also when they are inside toolboxes.
 
 V0.7
 ---------

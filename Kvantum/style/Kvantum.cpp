@@ -264,7 +264,7 @@ void Kvantum::polish(QWidget * widget)
     /*if (widget->autoFillBackground()
         && widget->parentWidget()
         && widget->parentWidget()->objectName() == "qt_scrollarea_viewport"
-        && qobject_cast<QAbstractScrollArea*>(widget->parentWidget()->parentWidget()))
+        && qobject_cast<QAbstractScrollArea*>(getParent(widget,2)))
     {
       widget->parentWidget()->setAutoFillBackground(false);
       widget->setAutoFillBackground(false);
@@ -280,15 +280,18 @@ void Kvantum::polish(QWidget * widget)
     else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
     {
       if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
-          sa->backgroundRole() == QPalette::Window)
+          sa->backgroundRole() == QPalette::Window
+          || sa->backgroundRole() == QPalette::Button) // inside toolbox
       {
         QWidget *vp = sa->viewport();
-        if (vp && vp->backgroundRole() == QPalette::Window)
+        if (vp && (vp->backgroundRole() == QPalette::Window
+                   || vp->backgroundRole() == QPalette::Button))
         {
           vp->setAutoFillBackground(false);
           foreach (QWidget *child, vp->findChildren<QWidget*>())
           {
-            if (child->parent() == vp && child->backgroundRole() == QPalette::Window)
+            if (child->parent() == vp && (child->backgroundRole() == QPalette::Window
+                                          || child->backgroundRole() == QPalette::Button))
               child->setAutoFillBackground(false);
           }
         }
@@ -4298,7 +4301,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
       return QCommonStyle::pixelMetric(metric,option,widget);
     }*/
 
-    /* this would be exactly SLIDER_TICK_SIZE if didn't leave CT_Slider
+    /* this would be exactly SLIDER_TICK_SIZE if we didn't leave CT_Slider
        to have its default size but it has no effect in our calculations */
     /*case PM_SliderTickmarkOffset: {
       return SLIDER_TICK_SIZE;
