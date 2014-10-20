@@ -2,6 +2,7 @@ V0.7.1
 ---------
  * Added a Hacks section. Currently it has only one hack for Dolphin.
  * Remove flat backgrounds from scroll areas also when they are inside toolboxes.
+ * Use update() instead of repaint() to make busy progressbars take less CPU time.
 
 V0.7
 ---------

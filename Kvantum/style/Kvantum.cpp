@@ -126,7 +126,7 @@ Kvantum::Kvantum()
   else if (appName == "systemsettings")
       isSystemSettings = true;*/
 
-  connect(progresstimer,SIGNAL(timeout()), this,SLOT(advanceProgresses()));
+  connect(progresstimer,SIGNAL(timeout()),this,SLOT(advanceProgresses()));
 
   itsShortcutHandler = NULL;
   itsWindowManager = NULL;
@@ -217,6 +217,20 @@ void Kvantum::setupThemeDeps()
   }
   else
     settings = defaultSettings;
+}
+
+void Kvantum::advanceProgresses()
+{
+  QMap<QWidget *,int>::iterator it;
+  for (it = progressbars.begin(); it != progressbars.end(); ++it)
+  {
+    QWidget *widget = it.key();
+    if (widget->isVisible())
+    {
+      it.value() += 2;
+      widget->update();
+    }
+  }
 }
 
 // also checks for NULL widgets
@@ -428,29 +442,18 @@ void Kvantum::unpolish(QApplication *app)
   QCommonStyle::unpolish(app);
 }
 
-void Kvantum::advanceProgresses()
-{
-  QMap<QWidget *,int>::iterator it;
-  for (it=progressbars.begin(); it!=progressbars.end(); ++it) {
-
-    QWidget *widget = it.key();
-    if (widget->isVisible()) {
-      it.value() += 2;
-      widget->repaint();
-    }
-  }
-}
-
 bool Kvantum::eventFilter(QObject* o, QEvent* e)
 {
-  QWidget *w = qobject_cast< QWidget* >(o);
+  QWidget *w = qobject_cast<QWidget*>(o);
 
   switch ( e->type() ) {
   case QEvent::Show:
-    if ( w ) {
-      if ( qobject_cast< QProgressBar * >(o) ) {
+    if (w)
+    {
+      if (qobject_cast<QProgressBar *>(o))
+      {
         progressbars.insert(w, 0);
-        if ( !progresstimer->isActive() )
+        if (!progresstimer->isActive())
           progresstimer->start(50);
       }
     }
@@ -458,9 +461,10 @@ bool Kvantum::eventFilter(QObject* o, QEvent* e)
     
   case QEvent::Hide:
   case QEvent::Destroy:
-    if (w) {
+    if (w)
+    {
       progressbars.remove(w);
-      if ( progressbars.size() == 0 )
+      if (progressbars.size() == 0)
         progresstimer->stop();
     }
     break;
@@ -2680,9 +2684,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         else
         { // busy progressbar
           QWidget *wi = (QWidget *)widget;
-
           int animcount = progressbars[wi];
-          int pm = pixelMetric(PM_ProgressBarChunkWidth);         
+          int pm = qMin(pixelMetric(PM_ProgressBarChunkWidth),r.width()/2-2);         
           QRect R = r.adjusted(animcount,0,0,0);
           if (isVertical ? inverted : !inverted)
             R.setX(r.x()+(animcount%r.width()));
