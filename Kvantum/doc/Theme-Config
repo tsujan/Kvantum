@@ -28,8 +28,7 @@ Section                                      Meaning
 [%General]                                   General info on the theme
                                              and some general variables.
 
-[Hacks]                                      Hacks for specific apps (currently
-                                             only one hack for Dolphin).
+[Hacks]                                      Hacks for specific apps or widgets.
 
 [PanelButtonCommand]                         Panel for a button used to
                                              initiate an action, for
@@ -145,7 +144,7 @@ Exception No.1: The "inherits" variable will not be taken from the default confi
 
 Exception No.2: If normal,focused, pressed or toggled text colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
 
-Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth". (The same is true for hacking variables but none is used in the default theme. Currently there is only one, "transparent_dolphin_view".)
+Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth". (The same is true for hacking variables but none is used in the default theme.)
 
 
 =============================================================
@@ -230,7 +229,13 @@ check_size                        integer             The width and height of
                                                       (Only in the General section.)
 
 transparent_dolphin_view          true/false          No background or frame for
-                                                      Dolphin's view? (Only in the
+                                                      Dolphin's view (Dolphin is the
+                                                      file manager of KDE)? (Only in
+                                                      the Hacks section.)
+
+transparent_ktitle_label          true/false          No background for the label of
+                                                      KtitleWidget (a KDE widget with
+                                                      a heading label)? (Only in the
                                                       Hacks section.)
 
 inherits                          string              The name of a secion (in the

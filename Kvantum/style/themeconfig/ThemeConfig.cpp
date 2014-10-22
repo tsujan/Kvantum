@@ -354,6 +354,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   QVariant v = getValue("Hacks","transparent_dolphin_view");
   r.transparent_dolphin_view = v.toBool();
 
+  v = getValue("Hacks","transparent_ktitle_label");
+  r.transparent_ktitle_label = v.toBool();
+
   return r;
 }
 

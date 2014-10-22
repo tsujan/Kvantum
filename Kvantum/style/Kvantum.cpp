@@ -275,6 +275,20 @@ void Kvantum::polish(QWidget * widget)
       }
     }
 
+    // -> ktitlewidget.cpp
+    if (widget->inherits("KTitleWidget"))
+    {
+      const hacks_spec hspec = settings->getHacksSpec();
+      if (hspec.transparent_ktitle_label)
+      {
+        /*QPalette palette = widget->palette();
+        palette.setColor(QPalette::Base,QColor(Qt::transparent));
+        widget->setPalette(palette);*/
+        if (QFrame *titleFrame = widget->findChild<QFrame *>())
+          titleFrame->setAutoFillBackground(false);
+      }
+    }
+
     /*if (widget->autoFillBackground()
         && widget->parentWidget()
         && widget->parentWidget()->objectName() == "qt_scrollarea_viewport"

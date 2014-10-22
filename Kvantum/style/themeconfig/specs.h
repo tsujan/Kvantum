@@ -76,6 +76,9 @@ typedef struct {
   /* don't draw any background or frame for Dolphin's
      view (nice when the window bg has a gradient) */
   bool transparent_dolphin_view;
+  /* transparent background for the label of KTitleWidget
+     (nice when the window bg has a gradient) */
+  bool transparent_ktitle_label;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -217,6 +220,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
 /* Fills the hacks spec with default values */
 static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
+  hspec.transparent_ktitle_label = false;
 }
 
 #endif
