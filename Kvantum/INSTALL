@@ -43,3 +43,13 @@ If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" wil
 ***************
 
 You could click on the binary file "kvantumpreview/kvantumpreview" to see how various widgets look with the currently used theme.
+
+***********
+*   GTK   *
+***********
+
+Kvantum doesn not (and will not) have any relation to GTK but if you want your GTK apps to have a look that matches the default Kvantum theme, you could download E17gtk from:
+
+http://gnome-look.org/content/show.php/E17gtk?content=163472
+
+Put its extracted folder in '/usr/share/themes/' and select it from 'System Settings > Application Appearance > GTK > GTK Themes' for both GTK2 and GTK3.

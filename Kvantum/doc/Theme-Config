@@ -58,8 +58,8 @@ Section                                      Meaning
                                              for example, a tool button that
                                              displays a menu                 
 
-[ToolboxTab]                                 Redundant! Kvantum uses the
-                                             default look for toolboxes.
+[ToolboxTab]                                 Just text colors for tab labels of
+                                             a toolbox.
 
 
 [Tab]                                        The tab shape within a tab bar.

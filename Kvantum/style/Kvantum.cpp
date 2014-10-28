@@ -2579,33 +2579,65 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
 
       break;
-    }
+    }*/
 
     case CE_ToolBoxTabLabel : {
-      const QStyleOptionToolBox *opt =
-          qstyleoption_cast<const QStyleOptionToolBox *>(option);
-
-      if (opt) {
-        const QString group = "ToolboxTab";
-
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
-
-        int talign = Qt::AlignCenter;
-        if (!styleHint(SH_UnderlineShortcut, opt, widget))
-          talign |= Qt::TextHideMnemonic;
-        else
-          talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
-                    option->rect,
-                    fspec,lspec,
-                    talign,opt->text,QPalette::ButtonText,
-                    option->state & State_Enabled,
-                    opt->icon.pixmap(pixelMetric(PM_TabBarIconSize),iconmode,iconstate));
+      /*
+          Here we rely on QCommonStyle::drawControl() and
+          just use our custom colors, knowing that QCommonStyle
+          uses QPalette::ButtonText for drawing the text.
+      */
+      if (const QStyleOptionToolBox *opt = qstyleoption_cast<const QStyleOptionToolBox *>(option))
+      {
+        if (!opt->text.isEmpty())
+        {
+          int state = 1;
+          if (status.startsWith("disabled"))
+            state = 0;
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
+            state = 3;
+          else if (option->state & State_MouseOver)
+            state = 2;
+          if (state != 0)
+          {
+            const label_spec lspec = getLabelSpec("ToolboxTab");
+            QColor normalColor(lspec.normalColor);
+            QColor focusColor(lspec.focusColor);
+            QColor pressColor(lspec.pressColor);
+            if (state == 1 && normalColor.isValid())
+            {
+              QStyleOptionToolBox o(*opt);
+              QPalette palette(opt->palette);
+              palette.setColor(QPalette::ButtonText, normalColor);
+              o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+            else if (state == 2 && focusColor.isValid())
+            {
+              QStyleOptionToolBox o(*opt);
+              QPalette palette(opt->palette);
+              palette.setColor(QPalette::ButtonText, focusColor);
+              o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+            else if (state == 3 && pressColor.isValid())
+            {
+              QStyleOptionToolBox o(*opt);
+              QPalette palette(opt->palette);
+              palette.setColor(QPalette::ButtonText, pressColor);
+              o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+          }
+        }
+        QCommonStyle::drawControl(element,option,painter,widget);
       }
 
       break;
-    }*/
+    }
 
     case CE_ProgressBarGroove : {
       const QString group = "Progressbar";

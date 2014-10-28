@@ -1,6 +1,7 @@
 V0.7.2
 ---------
  * Added a hacking variable for KTitleWidget.
+ * Made toolbox labels respect custom colors.
 
 V0.7.1
 ---------
