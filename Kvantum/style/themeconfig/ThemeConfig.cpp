@@ -346,6 +346,62 @@ theme_spec ThemeConfig::getThemeSpec() const
   return r;
 }
 
+color_spec ThemeConfig::getColorSpec() const
+{
+  color_spec r;
+  default_color_spec(r);
+
+  QVariant v = getValue("GeneralColors","window.color");
+  r.windowColor = v.toString();
+
+  v = getValue("GeneralColors","base.color");
+  r.baseColor = v.toString();
+
+  v = getValue("GeneralColors","alt.base.color");
+  r.altBaseColor = v.toString();
+
+  v = getValue("GeneralColors","button.color");
+  r.buttonColor = v.toString();
+
+  v = getValue("GeneralColors","light.color");
+  r.lightColor = v.toString();
+
+  v = getValue("GeneralColors","mid.color");
+  r.midColor = v.toString();
+
+  v = getValue("GeneralColors","highlight.color");
+  r.highlightColor = v.toString();
+
+  v = getValue("GeneralColors","inactive.highlight.color");
+  r.inactiveHighlightColor = v.toString();
+
+  v = getValue("GeneralColors","text.color");
+  r.textColor = v.toString();
+
+  v = getValue("GeneralColors","window.text.color");
+  r.windowTextColor = v.toString();
+
+  v = getValue("GeneralColors","button.text.color");
+  r.buttonTextColor = v.toString();
+
+  v = getValue("GeneralColors","disabled.text.color");
+  r.disabledTextColor = v.toString();
+
+  v = getValue("GeneralColors","tooltip.text.color");
+  r.tooltipTextColor = v.toString();
+
+  v = getValue("GeneralColors","highlight.text.color");
+  r.highlightTextColor = v.toString();
+
+  v = getValue("GeneralColors","link.color");
+  r.linkColor = v.toString();
+
+  v = getValue("GeneralColors","link.visited.color");
+  r.linkVisitedColor = v.toString();
+
+  return r;
+}
+
 hacks_spec ThemeConfig::getHacksSpec() const
 {
   hacks_spec r;

@@ -25,8 +25,13 @@ Here are the meanings of various sections:
 =====================================================
 Section                                      Meaning
 =====================================================
-[%General]                                   General info on the theme
-                                             and some general variables.
+[%General]                                   General info on the theme and
+                                             some general variables.
+
+[GeneralColors]                              The most important colors used
+                                             by the theme. Not necessary but
+                                             good for independence from
+                                             Qt4 color schemes outside KDE.
 
 [Hacks]                                      Hacks for specific apps or widgets.
 
@@ -142,101 +147,143 @@ There are three exceptions to these rules:
 
 Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present in a section.
 
-Exception No.2: If normal,focused, pressed or toggled text colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
+Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
 
 Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth". (The same is true for hacking variables but none is used in the default theme.)
 
 
-=============================================================
+==============================================================
 Variable                          Value               Meaning
-=============================================================
-author                            string              Obvious
+==============================================================
 
-comment                           string              Obvious
+                       ***************************
+                       *** The General Section ***
+                       ***************************
+
+author                            string              Obvious.
+
+comment                           string              Obvious.
 
 x11drag                           true/false          Drag windows from anywhere
-                                                      possible? (Only in the General
-                                                      section.)
+                                                      possible?
 
 alt_mnemonic                      true/false          Show underlines only when
-                                                      Alt is pressed? (Only in the
-                                                      General section.)
+                                                      Alt is pressed?
 
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
-                                                      (Only in the General section.)
 
 joined_tabs                       true/false          Join tabs together?
                                                       They are detached by default.
-                                                      (Only in the General section.)
 
 attach_active_tab                 true/false          Attach the active tab to the
                                                       tab widget? It is detached
-                                                      by default. (Only in the General
-                                                      section.)
+                                                      by default.
 
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar
                                                       buttons? By default, they are
-                                                      not raised. (Only in the General
-                                                      section.)
+                                                      not raised.
 
 spread_progressbar                true/false          Spread progressbar's indicator
                                                       across its whole groove and not
                                                       just its interior? By default,
                                                       the indicator is drawn inside
-                                                      progressbar's frame. (Only in
-                                                      the General section.)
+                                                      progressbar's frame.
 
 composite                         true/false          Use compositing to have
                                                       translucent menus or tooltips?
                                                       It is automatically set to false
                                                       if no compositing is available.
                                                       Its absence also means false.
-                                                      (Only in the General section.)
 
 menu_shadow_depth                 integer             The depth of the shadow menus
                                                       cast. A value of zero, its
                                                       absence or a false value for
                                                       "composite" means no shadow.
-                                                      (Only in the General section.)
 
 tooltip_shadow_depth              integer             The depth of the shadow tooltips
                                                       cast. A value of zero, its
                                                       absence or a false value for
                                                       "composite" means no shadow.
-                                                      (Only in the General section.)
 
 splitter_width                    integer             The width of splitter handles.
-                                                      (Only in the General section.)
 
 scroll_width                      integer             The width of scrollbars. The
                                                       default value is 12px.
-                                                      (Only in the General section.)
 
 slider_width                      integer             The width of sliders. The default
-                                                      value is 8px. (Only in the
-                                                      General section.)
+                                                      value is 8px.
 
 slider_handle_width
 slider_handle_length              integer             The width or height of slider
                                                       handles. The default values are
-                                                      16px. (Only in the General
-                                                      section.)
+                                                      16px.
 
 check_size                        integer             The width and height of
                                                       checkboxes and radio buttons.
                                                       The default value is 13px.
-                                                      (Only in the General section.)
+
+                       *********************************
+                       *** The GeneralColors Section ***
+                       *********************************
+
+window.color                      string (#RRGGBB)    A general background color as
+                                                      #RRGGBB or with a valid name
+                                                      like white, black, red, etc.
+
+base.color                        string (#RRGGBB)    Used mostly as the background
+                                                      color for text entry widgets.
+
+alt.base.color                    string (#RRGGBB)    Used as the alternate background
+                                                      color in views with alternating
+                                                      row colors.
+
+button.color                      string (#RRGGBB)    The general button background
+                                                      color.
+
+light.color                       string (#RRGGBB)    Lighter than "button.color"
+                                                      (used mostly for 3D bevels).
+
+mid.color                         string (#RRGGBB)    A little darker than "button.color"
+                                                      (used mostly for 3D bevels).
+
+highlight.color                   string (#RRGGBB)    A color for text selection.
+
+inactive.highlight.color          string (#RRGGBB)    Like "highlight.color" but when
+                                                      the text widget does not have focus.
+
+text.color                        string (#RRGGBB)    The foreground color used with
+                                                      "base.color".
+
+window.text.color                 string (#RRGGBB)    A general foreground color.
+
+button.text.color                 string (#RRGGBB)    Obvious.
+
+disabled.text.color               string (#RRGGBB)    Obvious.
+
+tooltip.text.color                string (#RRGGBB)    Obvious.
+
+highlight.text.color              string (#RRGGBB)    The color of selected text.
+
+link.color                        string (#RRGGBB)    Obvious.
+
+link.visited.color                string (#RRGGBB)    Obvious.
+
+                          *************************
+                          *** The Hacks Section ***
+                          *************************
 
 transparent_dolphin_view          true/false          No background or frame for
                                                       Dolphin's view (Dolphin is the
-                                                      file manager of KDE)? (Only in
-                                                      the Hacks section.)
+                                                      file manager of KDE)?
 
 transparent_ktitle_label          true/false          No background for the label of
                                                       KtitleWidget (a KDE widget with
-                                                      a heading label)? (Only in the
-                                                      Hacks section.)
+                                                      a heading label)?
+
+                           **********************
+                           *** Other Sections ***
+                           **********************
 
 inherits                          string              The name of a secion (in the
                                                       same config file and without
@@ -286,19 +333,17 @@ text.margin.right                 integer             The sizes of the text marg
 text.normal.color                 string (#RRGGBB)    The color of the normal text
                                                       as #RRGGBB or with a valid name
                                                       like white, black, red, etc.
+                                                      It may override the text colors
+                                                      defined under the GeneralColors
+                                                      section.
 
 
 text.focus.color                  string (#RRGGBB)    The color of the focused/hover
-                                                      text as #RRGGBB or with a valid
-                                                      name like white, black, red, etc.
+                                                      text.
 
-text.press.color                  string (#RRGGBB)    The color of the pressed text
-                                                      as #RRGGBB or with a valid name
-                                                      like white, black, red, etc.
+text.press.color                  string (#RRGGBB)    The color of the pressed text.
 
-text.toggle.color                 string (#RRGGBB)    The color of the toggled text
-                                                      as #RRGGBB or with a valid name
-                                                      like white, black, red, etc.
+text.toggle.color                 string (#RRGGBB)    The color of the toggled text.
 
 text.shadow                       true/false          Draw a shadow for the text?
 

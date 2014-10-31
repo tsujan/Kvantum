@@ -1,3 +1,7 @@
+V0.7.3
+---------
+ * Mostly rely on own colors defined under the GeneralColors section.
+
 V0.7.2
 ---------
  * Added a hacking variable for KTitleWidget.

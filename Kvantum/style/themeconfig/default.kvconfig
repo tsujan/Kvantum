@@ -16,6 +16,24 @@ slider_width=8
 slider_handle_width=16
 slider_handle_length=16
 
+[GeneralColors]
+window.color=#3D3D3E
+base.color=#2E2E2E
+alt.base.color=#383838
+button.color=#494949
+light.color=#626262
+mid.color=#303030
+highlight.color=#737373
+inactive.highlight.color=#4A4A4A
+text.color=white
+window.text.color=white
+button.text.color=white
+disabled.text.color=#A0A0A0
+tooltip.text.color=white
+highlight.text.color=white
+link.color=#2EB8E6
+link.visited.color=#FF6666
+
 [PanelButtonCommand]
 frame=true
 frame.element=button
@@ -51,7 +69,6 @@ inherits=PanelButtonCommand
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.margin=0
 
 [DockTitle]
 inherits=PanelButtonCommand
@@ -62,7 +79,6 @@ text.focus.color=white
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
-text.margin=0
 indicator.element=arrow
 frame.element=spin
 interior.element=spin
@@ -86,14 +102,11 @@ interior.element=checkbox
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.margin=0
 
 [GenericFrame]
 inherits=PanelButtonCommand
 frame=true
 interior=false
-text.shadow=0
-text.margin=0
 frame.element=common
 interior.element=common
 
@@ -105,7 +118,6 @@ interior.element=lineedit
 [DropDownButton]
 inherits=PanelButtonCommand
 indicator.element=arrow-down
-text.margin=0
 
 [IndicatorArrow]
 indicator.element=arrow
@@ -130,7 +142,6 @@ frame.right=2
 
 [TabFrame]
 inherits=PanelButtonCommand
-text.margin=0
 frame.element=tabframe
 interior.element=common
 
@@ -138,8 +149,6 @@ interior.element=common
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.shadow=0
-text.margin=0
 indicator.size=7
 
 [HeaderSection]
@@ -152,7 +161,6 @@ frame.right=1
 
 [SizeGrip]
 inherits=PanelButtonCommand
-text.margin=0
 
 [Toolbar]
 inherits=PanelButtonCommand
@@ -165,7 +173,6 @@ interior.element=toolbar
 [Slider]
 inherits=PanelButtonCommand
 frame.element=slider
-text.margin=0
 interior.element=slider
 frame.top=2
 frame.bottom=2
@@ -175,7 +182,6 @@ frame.right=2
 [SliderCursor]
 inherits=PanelButtonCommand
 frame=false
-text.margin=0
 interior.element=slidercursor
 
 [Progressbar]
@@ -192,7 +198,6 @@ text.focus.color=white
 [ProgressbarContents]
 inherits=PanelButtonCommand
 frame=false
-text.margin=0
 interior.element=progress-pattern
 
 [ItemView]
@@ -207,7 +212,6 @@ frame.right=2
 
 [Splitter]
 inherits=PanelButtonCommand
-text.margin=0
 interior.element=splitter
 frame.element=splitter
 frame.top=0
@@ -221,12 +225,10 @@ indicator.size=16
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.margin=0
 indicator.size=8
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
-text.margin=0
 frame.element=scrollbarslider
 interior.element=scrollbarslider
 frame.top=2
@@ -238,7 +240,6 @@ indicator.size=13
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
-text.margin=0
 interior.element=slider
 frame.element=slider
 frame.top=0
@@ -273,7 +274,6 @@ frame.left=4
 frame.right=4
 frame.element=menuitem
 interior.element=menuitem
-text.margin=0
 
 [TitleBar]
 inherits=PanelButtonCommand
@@ -293,7 +293,6 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-text.margin=0
 frame.element=menu
 interior.element=menu
 size.minheight=22
@@ -317,7 +316,6 @@ inherits=GenericFrame
 frame=false
 interior=false
 text.shadow=0
-text.margin=1
 
 [ToolTip]
 inherits=GenericFrame
@@ -335,8 +333,6 @@ frame.element=tooltip
 inherits=GenericFrame
 frame=false
 interior=false
-text.shadow=0
-text.margin=1
 
 [Window]
 interior=false

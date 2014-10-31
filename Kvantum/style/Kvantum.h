@@ -55,6 +55,7 @@ class Kvantum : public QCommonStyle {
 
     void polish(QWidget *widget);
     void polish(QApplication *app);
+    void polish(QPalette &palette);
     void unpolish(QWidget *widget);
     void unpolish(QApplication *app);
 

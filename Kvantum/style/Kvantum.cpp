@@ -360,23 +360,6 @@ void Kvantum::polish(QWidget * widget)
           widget->setMask(bm);
       }*/
     }
-
-    /* We set the tootltip text color here since it seems there's
-       no other place for it. We check for "QLabel" because, on
-       the one hand, there could be some problems with systray
-       without that (in Enlightenment, for example) and, on the
-       other hand, checking for "QTipLabel" wouldn't be enough. */
-    if (widget->inherits("QLabel"))
-    {
-      const label_spec lspec = getLabelSpec("ToolTip");
-      QColor normalColor(lspec.normalColor);
-      if (normalColor.isValid())
-      {
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Inactive,QPalette::ToolTipText,normalColor);
-        widget->setPalette(palette);
-      }
-    }
   }
 }
 
@@ -403,12 +386,90 @@ void Kvantum::polish(QApplication *app)
   else if (appName == "systemsettings")
       isSystemSettings = true;
 
+    /* general colors */
+    QPalette palette = app->palette();
+    polish(palette);
+    app->setPalette(palette);
+
   QCommonStyle::polish(app);
   if (itsShortcutHandler)
   {
     app->removeEventFilter(itsShortcutHandler);
     app->installEventFilter(itsShortcutHandler);
   }
+}
+
+void Kvantum::polish(QPalette &palette)
+{
+    const color_spec cspec = settings->getColorSpec();
+    QColor windowColor(cspec.windowColor);
+    QColor baseColor(cspec.baseColor);
+    QColor altBaseColor(cspec.altBaseColor);
+    QColor buttonColor(cspec.buttonColor);
+    QColor lightColor(cspec.lightColor);
+    QColor midColor(cspec.midColor);
+    QColor highlightColor(cspec.highlightColor);
+    QColor inactiveHighlightColor(cspec.inactiveHighlightColor);
+
+    QColor textColor(cspec.textColor);
+    QColor windowTextColor(cspec.windowTextColor);
+    QColor buttonTextColor(cspec.buttonTextColor);
+    QColor tooltipTextColor(cspec.tooltipTextColor);
+    QColor highlightTextColor(cspec.highlightTextColor);
+    QColor linkColor(cspec.linkColor);
+    QColor linkVisitedColor(cspec.linkVisitedColor);
+
+    QColor disabledTextColor(cspec.disabledTextColor);
+
+    if (windowColor.isValid())
+      palette.setColor(QPalette::Window,windowColor);
+    if (baseColor.isValid())
+      palette.setColor(QPalette::Base,baseColor);
+    if (altBaseColor.isValid())
+      palette.setColor(QPalette::AlternateBase,altBaseColor);
+    if (buttonColor.isValid())
+      palette.setColor(QPalette::Button,buttonColor);
+    if (lightColor.isValid())
+      palette.setColor(QPalette::Light,lightColor);
+    if (midColor.isValid())
+      palette.setColor(QPalette::Mid,midColor);
+    if (highlightColor.isValid())
+      palette.setColor(QPalette::Active,QPalette::Highlight,highlightColor);
+    if (inactiveHighlightColor.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,inactiveHighlightColor);
+
+    if (textColor.isValid())
+    {
+      palette.setColor(QPalette::Active,QPalette::Text,textColor);
+      palette.setColor(QPalette::Inactive,QPalette::Text,textColor);
+    }
+    if (windowTextColor.isValid())
+    {
+      palette.setColor(QPalette::Active,QPalette::WindowText,windowTextColor);
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,windowTextColor);
+    }
+    if (buttonTextColor.isValid())
+    {
+      palette.setColor(QPalette::Active,QPalette::ButtonText,buttonTextColor);
+      palette.setColor(QPalette::Inactive,QPalette::ButtonText,buttonTextColor);
+    }
+    if (tooltipTextColor.isValid())
+      palette.setColor(QPalette::ToolTipText,tooltipTextColor);
+    if (highlightTextColor.isValid())
+      palette.setColor(QPalette::HighlightedText,highlightTextColor);
+    if (linkColor.isValid())
+      palette.setColor(QPalette::Link,linkColor);
+    if (linkVisitedColor.isValid())
+      palette.setColor(QPalette::LinkVisited,linkVisitedColor);
+
+    if (disabledTextColor.isValid())
+    {
+      palette.setColor(QPalette::Disabled,QPalette::Text,disabledTextColor);
+      palette.setColor(QPalette::Disabled,QPalette::WindowText,disabledTextColor);
+      palette.setColor(QPalette::Disabled,QPalette::ButtonText,disabledTextColor);
+    }
+
+    QCommonStyle::polish(palette);
 }
 
 void Kvantum::unpolish(QWidget * widget)
@@ -1591,7 +1652,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           if (!up)
             sc = QStyle::SC_SpinBoxDown;
 
-          // press only the active button
+          // press or focus only the active button
           if (opt->activeSubControls != sc)
             bStatus = "normal";
         }
@@ -2647,8 +2708,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
 
       QRect r = option->rect;
 
-      /* checking State_Horizontal wouldn't work
-         with Krita's progress-spin boxes */
+      /* checking State_Horizontal wouldn't work with
+         Krita's progress-spin boxes (KisSliderSpinBox) */
       const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
       if (pb && pb->orientation() == Qt::Vertical)
       {

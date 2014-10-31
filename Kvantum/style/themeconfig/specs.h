@@ -71,6 +71,26 @@ typedef struct {
   int check_size;
 } theme_spec;
 
+/* General colors */
+typedef struct {
+  QString windowColor;
+  QString baseColor;
+  QString altBaseColor;
+  QString buttonColor;
+  QString lightColor;
+  QString midColor;
+  QString highlightColor;
+  QString inactiveHighlightColor;
+  QString textColor;
+  QString windowTextColor;
+  QString buttonTextColor;
+  QString disabledTextColor;
+  QString tooltipTextColor;
+  QString highlightTextColor;
+  QString linkColor;
+  QString linkVisitedColor;
+} color_spec;
+
 /* Hacks */
 typedef struct {
   /* don't draw any background or frame for Dolphin's
@@ -215,6 +235,25 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
+}
+
+static inline void default_color_spec(color_spec &cspec) {
+  cspec.windowColor = QString();
+  cspec.baseColor = QString();
+  cspec.altBaseColor = QString();
+  cspec.buttonColor = QString();
+  cspec.lightColor = QString();
+  cspec.midColor = QString();
+  cspec.highlightColor = QString();
+  cspec.inactiveHighlightColor = QString();
+  cspec.textColor = QString();
+  cspec.windowTextColor = QString();
+  cspec.buttonTextColor = QString();
+  cspec.disabledTextColor = QString();
+  cspec.tooltipTextColor = QString();
+  cspec.highlightTextColor = QString();
+  cspec.linkColor = QString();
+  cspec.linkVisitedColor = QString();
 }
 
 /* Fills the hacks spec with default values */

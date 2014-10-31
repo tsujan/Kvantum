@@ -26,9 +26,7 @@ In KDE:
 
 In Other DEs:
 =============
-(1) Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style';
-
-(2) Manually enter the colors defined in the file "color/Colors" with 'qtconfig-qt4 > Appearance > Tune Palette...' and then, save the result with 'File > Save'.
+Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, save the result with 'File > Save'.
 
 **************************
 *   Using Other Themes   *
@@ -48,7 +46,7 @@ You could click on the binary file "kvantumpreview/kvantumpreview" to see how va
 *   GTK   *
 ***********
 
-Kvantum doesn not (and will not) have any relation to GTK but if you want your GTK apps to have a look that matches the default Kvantum theme, you could download E17gtk from:
+Kvantum does not (and will not) have any relation to GTK but if you want your GTK apps to have a look that matches the default Kvantum theme, you could download E17gtk from:
 
 http://gnome-look.org/content/show.php/E17gtk?content=163472
 
