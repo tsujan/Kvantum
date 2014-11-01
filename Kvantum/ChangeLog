@@ -1,3 +1,8 @@
+V0.7.4
+---------
+ * Don't duplicate the field (line-edit) of a spinbox.
+ * When drawing the interior and frame of an editable combobox, don't cover its line-edit area.
+
 V0.7.3
 ---------
  * Mostly rely on own colors defined under the GeneralColors section.

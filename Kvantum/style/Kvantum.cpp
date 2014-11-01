@@ -54,6 +54,7 @@
 #define DISABLED_OPACITY 0.7
 #define SPIN_BUTTON_WIDTH 16
 #define SLIDER_TICK_SIZE 5
+#define COMBO_DROP_LENGTH 20
 
 Kvantum::Kvantum()
   : QCommonStyle()
@@ -386,10 +387,12 @@ void Kvantum::polish(QApplication *app)
   else if (appName == "systemsettings")
       isSystemSettings = true;
 
-    /* general colors */
-    QPalette palette = app->palette();
-    polish(palette);
-    app->setPalette(palette);
+  /* general colors
+     FIXME Is this needed? Can't polish(QPalette&) alone do the job?
+     The documentation for QApplication::setPalette() is ambiguous. */
+  /*QPalette palette = app->palette();
+  polish(palette);
+  app->setPalette(palette);*/
 
   QCommonStyle::polish(app);
   if (itsShortcutHandler)
@@ -402,71 +405,72 @@ void Kvantum::polish(QApplication *app)
 void Kvantum::polish(QPalette &palette)
 {
     const color_spec cspec = settings->getColorSpec();
-    QColor windowColor(cspec.windowColor);
-    QColor baseColor(cspec.baseColor);
-    QColor altBaseColor(cspec.altBaseColor);
-    QColor buttonColor(cspec.buttonColor);
-    QColor lightColor(cspec.lightColor);
-    QColor midColor(cspec.midColor);
-    QColor highlightColor(cspec.highlightColor);
-    QColor inactiveHighlightColor(cspec.inactiveHighlightColor);
 
-    QColor textColor(cspec.textColor);
-    QColor windowTextColor(cspec.windowTextColor);
-    QColor buttonTextColor(cspec.buttonTextColor);
-    QColor tooltipTextColor(cspec.tooltipTextColor);
-    QColor highlightTextColor(cspec.highlightTextColor);
-    QColor linkColor(cspec.linkColor);
-    QColor linkVisitedColor(cspec.linkVisitedColor);
+    /* background colors */
+    QColor col = cspec.windowColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Window,col);
+    col = cspec.baseColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Base,col);
+    col = cspec.altBaseColor;
+    if (col.isValid())
+      palette.setColor(QPalette::AlternateBase,col);
+    col = cspec.buttonColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Button,col);
+    col = cspec.lightColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Light,col);
+    col = cspec.midColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Mid,col);
+    col = cspec.highlightColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Active,QPalette::Highlight,col);
+    col = cspec.inactiveHighlightColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
 
-    QColor disabledTextColor(cspec.disabledTextColor);
-
-    if (windowColor.isValid())
-      palette.setColor(QPalette::Window,windowColor);
-    if (baseColor.isValid())
-      palette.setColor(QPalette::Base,baseColor);
-    if (altBaseColor.isValid())
-      palette.setColor(QPalette::AlternateBase,altBaseColor);
-    if (buttonColor.isValid())
-      palette.setColor(QPalette::Button,buttonColor);
-    if (lightColor.isValid())
-      palette.setColor(QPalette::Light,lightColor);
-    if (midColor.isValid())
-      palette.setColor(QPalette::Mid,midColor);
-    if (highlightColor.isValid())
-      palette.setColor(QPalette::Active,QPalette::Highlight,highlightColor);
-    if (inactiveHighlightColor.isValid())
-      palette.setColor(QPalette::Inactive,QPalette::Highlight,inactiveHighlightColor);
-
-    if (textColor.isValid())
+    /* text colors */
+    col = cspec.textColor;
+    if (col.isValid())
     {
-      palette.setColor(QPalette::Active,QPalette::Text,textColor);
-      palette.setColor(QPalette::Inactive,QPalette::Text,textColor);
+      palette.setColor(QPalette::Active,QPalette::Text,col);
+      palette.setColor(QPalette::Inactive,QPalette::Text,col);
     }
-    if (windowTextColor.isValid())
+    col = cspec.windowTextColor;
+    if (col.isValid())
     {
-      palette.setColor(QPalette::Active,QPalette::WindowText,windowTextColor);
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,windowTextColor);
+      palette.setColor(QPalette::Active,QPalette::WindowText,col);
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
-    if (buttonTextColor.isValid())
+    col = cspec.buttonTextColor;
+    if (col.isValid())
     {
-      palette.setColor(QPalette::Active,QPalette::ButtonText,buttonTextColor);
-      palette.setColor(QPalette::Inactive,QPalette::ButtonText,buttonTextColor);
+      palette.setColor(QPalette::Active,QPalette::ButtonText,col);
+      palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
     }
-    if (tooltipTextColor.isValid())
-      palette.setColor(QPalette::ToolTipText,tooltipTextColor);
-    if (highlightTextColor.isValid())
-      palette.setColor(QPalette::HighlightedText,highlightTextColor);
-    if (linkColor.isValid())
-      palette.setColor(QPalette::Link,linkColor);
-    if (linkVisitedColor.isValid())
-      palette.setColor(QPalette::LinkVisited,linkVisitedColor);
+    col = cspec.tooltipTextColor;
+    if (col.isValid())
+      palette.setColor(QPalette::ToolTipText,col);
+    col = cspec.highlightTextColor;
+    if (col.isValid())
+      palette.setColor(QPalette::HighlightedText,col);
+    col = cspec.linkColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Link,col);
+    col = cspec.linkVisitedColor;
+    if (col.isValid())
+      palette.setColor(QPalette::LinkVisited,col);
 
-    if (disabledTextColor.isValid())
+    /* disabled text */
+    col = cspec.disabledTextColor;
+    if (col.isValid())
     {
-      palette.setColor(QPalette::Disabled,QPalette::Text,disabledTextColor);
-      palette.setColor(QPalette::Disabled,QPalette::WindowText,disabledTextColor);
-      palette.setColor(QPalette::Disabled,QPalette::ButtonText,disabledTextColor);
+      palette.setColor(QPalette::Disabled,QPalette::Text,col);
+      palette.setColor(QPalette::Disabled,QPalette::WindowText,col);
+      palette.setColor(QPalette::Disabled,QPalette::ButtonText,col);
     }
 
     QCommonStyle::polish(palette);
@@ -1467,47 +1471,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       break;
     }
 
-    case PE_FrameLineEdit : { // the frame of a lineedit inside a spinbox
+    case PE_FrameLineEdit : {
       frame_spec fspec = getFrameSpec("LineEdit");
-      const QStyleOptionSpinBox *sb = qstyleoption_cast<const QStyleOptionSpinBox *>(option);
-      if (sb || qstyleoption_cast<const QStyleOptionComboBox *>(option))
-      {
-        // spin box and combo boxes have attached arrows, so merge with them
-        fspec.hasCapsule = true;
-        fspec.capsuleH = -1;
-        fspec.capsuleV = 2;
-      }
-
-      QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
-      if (isInactive)
-        leStatus.append(QString("-inactive"));
-      if (status.startsWith("disabled"))
-      {
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      renderFrame(painter,
-                  isLibreoffice && !sb ?
-                    option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
-                    option->rect,
-                  fspec,
-                  fspec.element+"-"+leStatus);
-      if (!(option->state & State_Enabled))
-        painter->restore();
-
-      break;
-    }
-
-    case PE_PanelLineEdit : {
-      const QString group = "LineEdit";
-
-      frame_spec fspec = getFrameSpec(group);
-      /* no frame when editing itemview texts */
-      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-      }
-      if (qstyleoption_cast<const QStyleOptionSpinBox *>(option))
+      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
@@ -1524,7 +1490,62 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
+
+      QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
+      if (isInactive)
+        leStatus.append(QString("-inactive"));
+      if (status.startsWith("disabled"))
+      {
+        painter->save();
+        painter->setOpacity(DISABLED_OPACITY);
+      }
+      renderFrame(painter,
+                  isLibreoffice && !qstyleoption_cast<const QStyleOptionSpinBox *>(option) ?
+                    option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
+                    option->rect,
+                  fspec,
+                  fspec.element+"-"+leStatus);
+      if (!(option->state & State_Enabled))
+        painter->restore();
+
+      break;
+    }
+
+    case PE_PanelLineEdit : {
+      /* don't draw the interior or frame of a Plasma spinbox */
+      if (widget && (!widget->parentWidget()
+                     || widget->parentWidget()->testAttribute(Qt::WA_NoSystemBackground)))
+      {
+        break;
+      }
+
+      /* force frame */
+      drawPrimitive(PE_FrameLineEdit,option,painter,widget);
+
+      const QString group = "LineEdit";
+
       const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec = getFrameSpec(group);
+      /* no frame when editing itemview texts */
+      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+      }
+      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+      {
+        fspec.hasCapsule = true;
+        fspec.capsuleH = -1;
+        fspec.capsuleV = 2;
+      }
+      else if (qobject_cast<const QComboBox*>(getParent(widget,1)))
+      {
+        fspec.hasCapsule = true;
+        if (widget->x() > 0)
+          fspec.capsuleH = 0;
+        else
+          fspec.capsuleH = -1;
+        fspec.capsuleV = 2;
+      }
 
       QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
       if (isInactive)
@@ -1534,21 +1555,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      /* force frame except for lineedits inside spinboxes and also
-         except for spinboxes themselves, that are dealt with above */
-      if (widget && !qobject_cast<const QAbstractSpinBox*>(widget)
-                 && !qobject_cast<const QAbstractSpinBox*>(widget->parentWidget())
-                 /*&& !qobject_cast<const QComboBox*>(widget->parentWidget())*/)
-      {
-        renderFrame(painter,option->rect,fspec,fspec.element+"-"+leStatus);
-      }
-      /* don't draw the interior of a Plasma spinbox */
-      if (!widget || (widget->parentWidget()
-                      && !widget->parentWidget()->testAttribute(Qt::WA_NoSystemBackground)))
-      {
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
-      }
-
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -3690,9 +3697,11 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
       if (opt) {
         QStyleOptionSpinBox o(*opt);
 
-        o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
+        /* The field is automatically drawn as lineedit in PE_FrameLineEdit
+           and PE_PanelLineEdit. Therefore, we shouldn't duplicate it here. */
+        /*o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
         drawPrimitive(PE_FrameLineEdit,&o,painter,widget);
-        drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
+        drawPrimitive(PE_PanelLineEdit,&o,painter,widget);*/
 
         if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows) {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
@@ -3751,8 +3760,16 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         }
         else
         {
-          renderFrame(painter,o.rect,fspec,fspec.element+"-"+status);
-          renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+status);
+          /* don't cover the lineedit area */
+          int editWidth = 0;
+          if (const QComboBox* cb = qobject_cast<const QComboBox*>(widget))
+          {
+            if (cb->lineEdit())
+              editWidth = cb->lineEdit()->width();
+          }
+          QRect r = o.rect.adjusted(0,0,-editWidth,0);
+          renderFrame(painter,r,fspec,fspec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         }
         if (!(option->state & State_Enabled))
         {
@@ -3782,11 +3799,11 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           label_spec lspec;
           default_label_spec(lspec);
           fspec.right = 0;
-          int rWidth = 0;
+          int labelWidth = 0;
           if (const QComboBox* cb = qobject_cast<const QComboBox*>(widget))
           {
             if (cb->lineEdit())
-              rWidth = cb->lineEdit()->x();
+              labelWidth = cb->lineEdit()->x();
           }
 
           int state = 1;
@@ -3800,7 +3817,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
             state = 2;
 
           renderLabel(painter,option->palette,
-                      QRect(o.rect.x(), o.rect.y(), rWidth, o.rect.height()),
+                      QRect(o.rect.x(), o.rect.y(), labelWidth, o.rect.height()),
                       fspec,lspec,
                       talign,"",QPalette::ButtonText,
                       state,
@@ -4705,7 +4722,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         s = defaultSize + QSize(fspec.left+fspec.right + lspec.left+lspec.right,
                                 fspec.top+fspec.bottom + lspec.top+lspec.bottom);
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
-        s += QSize(20+fspec1.right, 0);
+        s += QSize(COMBO_DROP_LENGTH+fspec1.right, 0);
 
         /* With an editable combo that has icon, we take into account
            the margins when positioning the icon, so we need an extra
@@ -5624,14 +5641,14 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
           const frame_spec fspec1 = getFrameSpec("DropDownButton");
           return QRect(x+margin,
                        y,
-                       w- (20+fspec1.right) -margin,
+                       w-(COMBO_DROP_LENGTH+fspec1.right)-margin,
                        h);
         }
         case SC_ComboBoxArrow : {
           const frame_spec fspec = getFrameSpec("DropDownButton");
-          return QRect(x+w-(20+fspec.right),
+          return QRect(x+w-(COMBO_DROP_LENGTH+fspec.right),
                        y,
-                       20+fspec.right,
+                       COMBO_DROP_LENGTH+fspec.right,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
