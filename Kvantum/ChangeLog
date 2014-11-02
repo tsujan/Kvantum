@@ -1,3 +1,7 @@
+V0.8
+---------
+ * Added support for right to left layouts as far as needed.
+
 V0.7.4
 ---------
  * Don't duplicate the field (line-edit) of a spinbox.

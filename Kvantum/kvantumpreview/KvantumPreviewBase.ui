@@ -1962,7 +1962,7 @@ check box</string>
             <enum>QTabWidget::South</enum>
            </property>
            <property name="tabsClosable">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="movable">
             <bool>true</bool>
@@ -2084,7 +2084,7 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>169</width>
+              <width>165</width>
               <height>72</height>
              </rect>
             </property>
@@ -2141,7 +2141,7 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>169</width>
+              <width>165</width>
               <height>72</height>
              </rect>
             </property>
@@ -2207,6 +2207,9 @@ check box</string>
           <widget class="QTabWidget" name="tabWidget_3">
            <property name="tabPosition">
             <enum>QTabWidget::West</enum>
+           </property>
+           <property name="tabsClosable">
+            <bool>true</bool>
            </property>
            <property name="movable">
             <bool>true</bool>
@@ -2289,6 +2292,9 @@ check box</string>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -2296,9 +2302,9 @@ check box</string>
     <bool>false</bool>
    </attribute>
    <addaction name="actionQuit"/>
+   <addaction name="separator"/>
    <addaction name="actionTest"/>
    <addaction name="separator"/>
-   <addaction name="actionTest3"/>
    <addaction name="separator"/>
    <addaction name="actionTest1"/>
    <addaction name="actionTest2"/>
@@ -2335,12 +2341,10 @@ check box</string>
      <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
    </property>
    <property name="text">
-    <string>Test</string>
+    <string>Toggle Layout</string>
    </property>
    <property name="toolTip">
-    <string>Just for testing
-toolbar button grouping
-and tooltips</string>
+    <string>Toggle layout direction</string>
    </property>
   </action>
   <action name="actionTest1">
@@ -2352,7 +2356,7 @@ and tooltips</string>
      <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
    </property>
    <property name="text">
-    <string>test1</string>
+    <string>Test</string>
    </property>
    <property name="toolTip">
     <string>Just for testing
@@ -2369,24 +2373,7 @@ and tooltips</string>
      <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
    </property>
    <property name="text">
-    <string>Test2</string>
-   </property>
-   <property name="toolTip">
-    <string>Just for testing
-toolbar button grouping
-and tooltips</string>
-   </property>
-  </action>
-  <action name="actionTest3">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
-   </property>
-   <property name="text">
-    <string>Test3</string>
+    <string>Test</string>
    </property>
    <property name="toolTip">
     <string>Just for testing

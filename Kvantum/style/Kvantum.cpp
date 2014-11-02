@@ -54,7 +54,7 @@
 #define DISABLED_OPACITY 0.7
 #define SPIN_BUTTON_WIDTH 16
 #define SLIDER_TICK_SIZE 5
-#define COMBO_DROP_LENGTH 20
+#define COMBO_ARROW_LENGTH 20
 
 Kvantum::Kvantum()
   : QCommonStyle()
@@ -811,6 +811,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         }
 
         QString pbStatus = status;
+        bool rtl(option->direction == Qt::RightToLeft);
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
           // merge with drop down button
@@ -818,12 +819,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           {
             fspec.capsuleV = 2;
             fspec.hasCapsule = true;
-            fspec.capsuleH = -1;
+            fspec.capsuleH = rtl ? 1 : -1;
           }
           else if (fspec.capsuleH == 1)
             fspec.capsuleH = 0;
           else if (fspec.capsuleH == 2)
-            fspec.capsuleH = -1;
+            fspec.capsuleH = rtl ? 1 : -1;
           // don't press the button if only its arrow is pressed
           pbStatus = (option->state & State_Enabled) ?
                        (option->state & State_Sunken) && tb->isDown() ? "pressed" :
@@ -850,7 +851,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
                  && opt && (opt->features & QStyleOptionToolButton::HasMenu))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
-          r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
+          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-pixelMetric(PM_HeaderMargin) : 0,
+                   0,
+                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),
+                   0);
         }
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
@@ -958,6 +962,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         }
 
         QString fbStatus = status;
+        bool rtl(option->direction == Qt::RightToLeft);
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
           // merge with drop down button
@@ -965,12 +970,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           {
             fspec.capsuleV = 2;
             fspec.hasCapsule = true;
-            fspec.capsuleH = -1;
+            fspec.capsuleH = rtl ? 1 : -1;
           }
           else if (fspec.capsuleH == 1)
             fspec.capsuleH = 0;
           else if (fspec.capsuleH == 2)
-            fspec.capsuleH = -1;
+            fspec.capsuleH = rtl ? 1 : -1;
           // don't press the button if only its arrow is pressed
           fbStatus = (option->state & State_Enabled) ?
                        (option->state & State_Sunken) && tb->isDown() ? "pressed" :
@@ -997,7 +1002,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
                  && (opt && (opt->features & QStyleOptionToolButton::HasMenu)))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
-          r.adjust(0,0,lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),0);
+          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-pixelMetric(PM_HeaderMargin) : 0,
+                   0,
+                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),
+                   0);
         }
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
@@ -1479,15 +1487,26 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
-      else if (qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (const QComboBox* cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
-        /* see if there is any icon on
-           the left of the combo box */
-        if (widget->x() > 0)
-          fspec.capsuleH = 0;
+        /* see if there is any icon on the left of
+           the combo box (or right for RTL layout) */
+        if (option->direction == Qt::RightToLeft)
+        {
+          const frame_spec fspec1 = getFrameSpec("DropDownButton");
+          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+            fspec.capsuleH = 0;
+          else
+            fspec.capsuleH = 1;
+        }
         else
-          fspec.capsuleH = -1;
+        {
+          if (widget->x() > 0)
+            fspec.capsuleH = 0;
+          else
+            fspec.capsuleH = -1;
+        }
         fspec.capsuleV = 2;
       }
 
@@ -1537,13 +1556,24 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
-      else if (qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (const QComboBox* cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
-        if (widget->x() > 0)
-          fspec.capsuleH = 0;
+        if (option->direction == Qt::RightToLeft)
+        {
+          const frame_spec fspec1 = getFrameSpec("DropDownButton");
+          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+            fspec.capsuleH = 0;
+          else
+            fspec.capsuleH = 1;
+        }
         else
-          fspec.capsuleH = -1;
+        {
+          if (widget->x() > 0)
+            fspec.capsuleH = 0;
+          else
+            fspec.capsuleH = -1;
+        }
         fspec.capsuleV = 2;
       }
 
@@ -1727,8 +1757,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
 
       /* this is compensated in CE_HeaderLabel;
          also see SE_HeaderArrow */
-      fspec.left = 0;
-      fspec.right += lspec.right;
+      if (option->direction == Qt::RightToLeft)
+      {
+        fspec.right = 0;
+        fspec.left += lspec.left;
+      }
+      else
+      {
+        fspec.left = 0;
+        fspec.right += lspec.right;
+      }
 
       const QStyleOptionHeader *opt =
         qstyleoption_cast<const QStyleOptionHeader *>(option);
@@ -1761,9 +1799,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       if (combo /*&& !combo->duplicatesEnabled()*/)
       {
         fspec.hasCapsule = true;
-        fspec.capsuleH = 1;
+        if (option->direction == Qt::RightToLeft)
+        {
+          fspec.capsuleH = -1;
+          fspec.right = 0;
+        }
+        else
+        {
+          fspec.capsuleH = 1;
+          fspec.left = 0; // no left frame in this case
+        }
         fspec.capsuleV = 2;
-        fspec.left = 0; // no left frame in this case
 
         if (option->state & State_Selected)
           status.replace(QString("toggled"),QString("normal"));
@@ -1793,17 +1839,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           }
         }
 
+        bool rtl(option->direction == Qt::RightToLeft);
         if (!fspec.hasCapsule)
         {
           fspec.hasCapsule = true;
-          fspec.capsuleH = 1;
+          fspec.capsuleH = rtl ? -1 : 1;
           fspec.capsuleV = 2;
         }
         else if (fspec.capsuleH == -1)
           fspec.capsuleH = 0;
         else if (fspec.capsuleH == 2)
-          fspec.capsuleH = 1;
-        fspec.left = 0; // no left frame in this case
+          fspec.capsuleH = rtl ? -1 : 1;
+        if (rtl)
+          fspec.right = 0;
+        else
+          fspec.left = 0; // no left frame in this case
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
         {
@@ -2072,11 +2122,20 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           else if (status.startsWith("toggled") || status.startsWith("pressed"))
             state = 2;
 
+          bool rtl(option->direction == Qt::RightToLeft);
+
           if (l.size() > 0) // menu label
           {
             if (opt->icon.isNull())
               renderLabel(painter,option->palette,
-                          option->rect.adjusted(qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace,0,0,0),
+                          option->rect.adjusted(rtl ?
+                                                  0
+                                                  : qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace,
+                                                0,
+                                                rtl ?
+                                                  -qMin(opt->maxIconWidth,smallIconSize)-lspec.tispace
+                                                  : 0,
+                                                0),
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
@@ -2100,7 +2159,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             if (opt->checkType != QStyleOptionMenuItem::NotCheckable)
               space += iw + lspec.tispace; // see CT_MenuItem
             renderLabel(painter,option->palette,
-                        option->rect.adjusted(0,0,-space,0),
+                        option->rect.adjusted(rtl ? space : 0,
+                                              0,
+                                              rtl ? 0 : -space,
+                                              0),
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
@@ -2116,7 +2178,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                                QSize(iw,ih),
                                isLibreoffice ? o.rect.adjusted(6,-2,0,0) // FIXME why?
                                                /* we add a 2px right margin at CT_MenuItem */
-                                             : interiorRect(o.rect,fspec).adjusted(0,0,-2,0));
+                                             : interiorRect(o.rect,fspec).adjusted(rtl ? 2 : 0,
+                                                                                   0,
+                                                                                   rtl ? 0 : -2,
+                                                                                   0));
 
           /* change the selected and pressed states to mouse-over */
           if (o.state & QStyle::State_Selected)
@@ -2125,7 +2190,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             o.state = (o.state & ~QStyle::State_Sunken) | QStyle::State_MouseOver;
 
           if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
-            drawPrimitive(PE_IndicatorArrowRight,&o,painter);
+            drawPrimitive(rtl ? PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
+                          &o,painter);
 
           if (opt->checkType == QStyleOptionMenuItem::Exclusive)
           {
@@ -2295,8 +2361,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        QStyleOptionButton o(*opt);
-
         const QString group = "RadioButton";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
@@ -2309,7 +2373,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         renderLabel(painter,option->palette,
                     option->rect,
                     fspec,lspec,
-                    talign,o.text,QPalette::WindowText,
+                    talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
       }
@@ -2322,8 +2386,6 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        QStyleOptionButton o(*opt);
-
         const QString group = "CheckBox";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
@@ -2336,7 +2398,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         renderLabel(painter,option->palette,
                     option->rect,
                     fspec,lspec,
-                    talign,o.text,QPalette::WindowText,
+                    talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
       }
@@ -2614,6 +2676,19 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
+
+        /* since we draw text and icon together as label,
+           for RTL we need to move the label to right */
+        if (opt->direction == Qt::RightToLeft && !verticalTabs)
+        {
+          if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
+          {
+            if (tb->tabsClosable())
+              r = alignedRect(Qt::RightToLeft, Qt::AlignLeft,
+                              QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget), h),
+                              option->rect);
+          }
+        }
 
         renderLabel(painter,option->palette,
                     r,
@@ -2997,8 +3072,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       }
 
       QRect r = option->rect;
+      bool hrtl = false;
       if (option->state & State_Horizontal)
       {
+        if (option->direction == Qt::RightToLeft)
+          hrtl = true;
         painter->save();
         r.setRect(0, 0, h, w);
         QTransform m;
@@ -3012,7 +3090,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
       renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
       renderIndicator(painter,r,
                       fspec,dspec,
-                      dspec.element+(add ? "-down-" : "-up-")+iStatus);
+                      dspec.element+(add ?
+                                       hrtl ? "-up-" : "-down-"
+                                       : hrtl ? "-down-" : "-up-")
+                                   +iStatus);
 
       if (option->state & State_Horizontal)
         painter->restore();
@@ -3098,10 +3179,20 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
 
+        bool rtl(opt->direction == Qt::RightToLeft);
+
         if (opt->sortIndicator != QStyleOptionHeader::None)
         {
-          fspec.right = 0;
-          lspec.right = 0;
+          if (rtl)
+          {
+            fspec.left = 0;
+            lspec.left = 0;
+          }
+          else
+          {
+            fspec.right = 0;
+            lspec.right = 0;
+          }
         }
 
         /* for thin headers, like in Dolphin's details view */
@@ -3121,12 +3212,17 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           state = 2;
 
         renderLabel(painter,option->palette,
-                    option->rect.adjusted(0,
-                                          0,
-                                          opt->sortIndicator != QStyleOptionHeader::None ?
-                                            -subElementRect(QStyle::SE_HeaderArrow,option,widget).width()
-                                            -pixelMetric(PM_HeaderMargin)
+                    option->rect.adjusted(rtl ?
+                                            opt->sortIndicator != QStyleOptionHeader::None ?
+                                             subElementRect(QStyle::SE_HeaderArrow,option,widget).width()
+                                             +pixelMetric(PM_HeaderMargin) : 0
                                             : 0,
+                                          0,
+                                          rtl ?
+                                            0
+                                            : opt->sortIndicator != QStyleOptionHeader::None ?
+                                               -subElementRect(QStyle::SE_HeaderArrow,option,widget).width()
+                                               -pixelMetric(PM_HeaderMargin) : 0,
                                           0),
                     fspec,lspec,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
@@ -3232,7 +3328,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
            and not for the entire button. So, enlarge it!
            Also take into account the possibility of the presence of an indicator! */
         int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
-        QRect r = option->rect.adjusted(-fspec.left,-fspec.top,fspec.right-ind,fspec.bottom);
+        QRect r = option->rect.adjusted(-fspec.left + (opt->direction == Qt::RightToLeft ? ind : 0),
+                                        -fspec.top,
+                                        fspec.right - (opt->direction == Qt::RightToLeft ? 0 : ind),
+                                        fspec.bottom);
         if (status.startsWith("toggled") || status.startsWith("pressed"))
         {
           int hShift = pixelMetric(PM_ButtonShiftHorizontal);
@@ -3310,7 +3409,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           if (isInactive)
             aStatus.append(QString("-inactive"));
           renderIndicator(painter,
-                          option->rect.adjusted(0, 0, -lspec.right, 0),
+                          option->rect.adjusted(opt->direction == Qt::RightToLeft ? lspec.left : 0,
+                                                0,
+                                                opt->direction == Qt::RightToLeft ? 0 : -lspec.right,
+                                                0),
                           fspec,dspec,dspec.element+"-down-"+aStatus,
                           Qt::AlignRight | Qt::AlignVCenter);
         }
@@ -3322,7 +3424,8 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
           renderIndicator(painter,
                           option->rect,
                           fspec,dspec,"button-default-indicator",
-                          Qt::AlignBottom | Qt::AlignRight);
+                          Qt::AlignBottom | (opt->direction == Qt::RightToLeft ?
+                                             Qt::AlignLeft : Qt::AlignRight));
         }
       }
 
@@ -3362,7 +3465,10 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                    || tb->popupMode() == QToolButton::DelayedPopup)
                   && (opt->features & QStyleOptionToolButton::HasMenu)))
           {
-            fspec.right = 0;
+            if (opt->direction == Qt::RightToLeft)
+              fspec.left = 0;
+            else
+              fspec.right = 0;
           }
 
           /* respect the toolbar text color */
@@ -3435,7 +3541,14 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
                           || tialign == Qt::ToolButtonTextOnly ?
                         r : // may still have arrow because of MenuButtonPopup
                         // also add a margin between indicator and text (-> CT_ToolButton)
-                        r.adjusted(dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),0,0,0),
+                        r.adjusted(opt->direction == Qt::RightToLeft ?
+                                     0
+                                     : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
+                                   0,
+                                   opt->direction == Qt::RightToLeft ?
+                                     -dspec.size-lspec.tispace-pixelMetric(PM_HeaderMargin)
+                                     : 0,
+                                   0),
                       fspec,lspec,
                       talign,opt->text,QPalette::ButtonText,
                       state,
@@ -3728,13 +3841,14 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         if (option->state & State_Selected)
           status.replace(QString("toggled"),QString("normal"));
 
+        bool rtl(opt->direction == Qt::RightToLeft);
         QStyleOptionComboBox o(*opt);
 
         const QString group = "ComboBox";
 
         frame_spec fspec = getFrameSpec(group);
         fspec.hasCapsule = true;
-        fspec.capsuleH = -1;
+        fspec.capsuleH = rtl ? 1 : -1;
         fspec.capsuleV = 2;
         const interior_spec ispec = getInteriorSpec(group);
 
@@ -3744,7 +3858,11 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         else if (isLibreoffice)
           margin = fspec.left;
         // SC_ComboBoxEditField includes the icon too
-        o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget).adjusted(-margin,0,0,0);
+        o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget)
+                 .adjusted(rtl ? 0 : -margin,
+                           0,
+                           rtl ? margin : 0,
+                           0);
 
         if (status.startsWith("disabled"))
         {
@@ -3767,7 +3885,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
             if (cb->lineEdit())
               editWidth = cb->lineEdit()->width();
           }
-          QRect r = o.rect.adjusted(0,0,-editWidth,0);
+          QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         }
@@ -3798,12 +3916,15 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
             talign |= Qt::TextShowMnemonic;
           label_spec lspec;
           default_label_spec(lspec);
-          fspec.right = 0;
+          if (rtl)
+            fspec.left = 0;
+          else
+            fspec.right = 0;
           int labelWidth = 0;
           if (const QComboBox* cb = qobject_cast<const QComboBox*>(widget))
           {
             if (cb->lineEdit())
-              labelWidth = cb->lineEdit()->x();
+              labelWidth = rtl ? o.rect.width()-cb->lineEdit()->width() : cb->lineEdit()->x();
           }
 
           int state = 1;
@@ -3817,7 +3938,10 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
             state = 2;
 
           renderLabel(painter,option->palette,
-                      QRect(o.rect.x(), o.rect.y(), labelWidth, o.rect.height()),
+                      QRect(rtl ?
+                              o.rect.x()+o.rect.width()-labelWidth
+                              : o.rect.x(),
+                            o.rect.y(), labelWidth, o.rect.height()),
                       fspec,lspec,
                       talign,"",QPalette::ButtonText,
                       state,
@@ -4722,7 +4846,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         s = defaultSize + QSize(fspec.left+fspec.right + lspec.left+lspec.right,
                                 fspec.top+fspec.bottom + lspec.top+lspec.bottom);
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
-        s += QSize(COMBO_DROP_LENGTH+fspec1.right, 0);
+        s += QSize(COMBO_ARROW_LENGTH + (opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right), 0);
 
         /* With an editable combo that has icon, we take into account
            the margins when positioning the icon, so we need an extra
@@ -5337,7 +5461,10 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
 
       return alignedRect(QApplication::layoutDirection(),
                          Qt::AlignRight,
-                         QSize(fspec.right+lspec.right+dspec.size, option->rect.height()),
+                         QSize(option->direction == Qt::RightToLeft ?
+                                 fspec.left+lspec.left+dspec.size
+                                 : fspec.right+lspec.right+dspec.size,
+                               option->rect.height()),
                          option->rect);
     }
 
@@ -5372,11 +5499,15 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
       QRect rect = interiorRect(option->rect, fspec);
 
       /* in these cases there are capsules */
-      if (widget
-          && (qobject_cast<const QComboBox*>(widget->parentWidget())
-              || qobject_cast<const QAbstractSpinBox*>(widget->parentWidget())))
+      if (widget)
       {
-        rect.adjust(0,0,fspec.right,0);
+        if (qobject_cast<const QComboBox*>(widget->parentWidget()))
+          rect.adjust(option->direction == Qt::RightToLeft ? -fspec.left : 0,
+                      0,
+                      option->direction == Qt::RightToLeft ? 0 : fspec.right,
+                      0);
+        else if (qobject_cast<const QAbstractSpinBox*>(widget->parentWidget()))
+          rect.adjust(0,0,fspec.right,0);
       }
 
       /* this is for editable view items */
@@ -5552,7 +5683,15 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
           int delta = 0;
           if (const QStyleOptionTitleBar *tb = qstyleoption_cast<const QStyleOptionTitleBar *>(option))
             delta = tb->rect.height() - 2;
-          return QCommonStyle::subControlRect(control,option,subControl,widget).adjusted(-delta, 0, 0, 0);
+          return QCommonStyle::subControlRect(control,option,subControl,widget)
+                               .adjusted(option->direction == Qt::RightToLeft ?
+                                           0
+                                           : -delta,
+                                         0,
+                                         option->direction == Qt::RightToLeft ?
+                                           delta
+                                           : 0,
+                                         0);
         }
         case SC_TitleBarCloseButton :
         case SC_TitleBarMaxButton :
@@ -5615,7 +5754,10 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
           if (opt && opt->editable && !opt->currentIcon.isNull())
           {
             const frame_spec fspec = getFrameSpec("ComboBox");
-            return QRect(x-fspec.left-fspec.right,y,w,h);
+            return QRect(opt->direction == Qt::RightToLeft ?
+                           x+fspec.left+fspec.right
+                           : x-fspec.left-fspec.right,
+                         y, w, h);
           }
           else
             return QRect();
@@ -5639,16 +5781,24 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
             }
           }
           const frame_spec fspec1 = getFrameSpec("DropDownButton");
-          return QRect(x+margin,
+          return QRect(option->direction == Qt::RightToLeft ?
+                         x+COMBO_ARROW_LENGTH+fspec1.left
+                         : x+margin,
                        y,
-                       w-(COMBO_DROP_LENGTH+fspec1.right)-margin,
+                       option->direction == Qt::RightToLeft ?
+                         w-(COMBO_ARROW_LENGTH+fspec1.left)-margin
+                         : w-(COMBO_ARROW_LENGTH+fspec1.right)-margin,
                        h);
         }
         case SC_ComboBoxArrow : {
           const frame_spec fspec = getFrameSpec("DropDownButton");
-          return QRect(x+w-(COMBO_DROP_LENGTH+fspec.right),
+          return QRect(option->direction == Qt::RightToLeft ?
+                         x
+                         : x+w-(COMBO_ARROW_LENGTH+fspec.right),
                        y,
-                       COMBO_DROP_LENGTH+fspec.right,
+                       option->direction == Qt::RightToLeft ?
+                         COMBO_ARROW_LENGTH+fspec.left
+                         : COMBO_ARROW_LENGTH+fspec.right,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
@@ -5680,12 +5830,14 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
             return QRect(x,y+extent,w,h-2*extent);
         case SC_ScrollBarSubLine :
           if (horiz)
-            return QRect(x,y,extent,extent);
+            return QRect(option->direction == Qt::RightToLeft ? x+w-extent : x,
+                         y,extent,extent);
           else
             return QRect(x,y,extent,extent);
         case SC_ScrollBarAddLine :
           if (horiz)
-            return QRect(x+w-extent,y,extent,extent);
+            return QRect(option->direction == Qt::RightToLeft ? x : x+w-extent,
+                         y,extent,extent);
           else
             return QRect(x,y+h-extent,extent,extent);
         case SC_ScrollBarSlider : {
@@ -5705,7 +5857,8 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
               maxLength = h;
             const int valueRange = opt->maximum - opt->minimum;
             int length = maxLength;
-            if (opt->minimum != opt->maximum) {
+            if (opt->minimum != opt->maximum)
+            {
               length = (opt->pageStep*maxLength) / (valueRange+opt->pageStep);
 
               if ((length < minLength) || (valueRange > INT_MAX/2))
@@ -5720,7 +5873,8 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                                                       maxLength - length,
                                                       opt->upsideDown);
             if (horiz)
-              return QRect(x+start,y,length,h);
+              return QRect(opt->direction == Qt::RightToLeft ? x+w-start-length : x+start,
+                           y,length,h);
             else
               return QRect(x,y+start,w,length);
           }
@@ -5871,9 +6025,13 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                   const QString group = "DropDownButton";
                   const frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
-                  return option->rect.adjusted(0,
+                  return option->rect.adjusted(opt->direction == Qt::RightToLeft ?
+                                                 fspec.left+fspec.right+dspec.size+2
+                                                 : 0,
                                                0,
-                                               -fspec.left-fspec.right-dspec.size-2,
+                                               opt->direction == Qt::RightToLeft ?
+                                                 0
+                                                 : -fspec.left-fspec.right-dspec.size-2,
                                                0);
                 }
                 else if ((tb->popupMode() == QToolButton::InstantPopup
@@ -5890,13 +6048,20 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                     fspec.left = qMin(fspec.left,3);
                     fspec.right = qMin(fspec.right,3);
                   }
-                  return option->rect.adjusted(0,
+                  return option->rect.adjusted(opt->direction == Qt::RightToLeft ?
+                                                 lspec.tispace+dspec.size
+                                                   // -> CE_ToolButtonLabel
+                                                   + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
+                                                      qMin(fspec.left,fspec.right) : fspec.left)
+                                                   + pixelMetric(PM_HeaderMargin)
+                                                 : 0,
                                                0,
-                                               - lspec.tispace-dspec.size
-                                                 // -> CE_ToolButtonLabel
-                                                 - (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                                                    qMin(fspec.left,fspec.right) : fspec.right)
-                                                 - pixelMetric(PM_HeaderMargin),
+                                               opt->direction == Qt::RightToLeft ?
+                                                 0
+                                                 : - lspec.tispace-dspec.size
+                                                     - (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
+                                                        qMin(fspec.left,fspec.right) : fspec.right)
+                                                     - pixelMetric(PM_HeaderMargin),
                                                0);
                 }
               }
@@ -5917,13 +6082,15 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
               const QToolButton * tb = qobject_cast<const QToolButton *>(widget);
               if (tb)
               {
+                bool rtl(opt->direction == Qt::RightToLeft);
                 if (tb->popupMode() == QToolButton::MenuButtonPopup)
                 {
                   const QString group = "DropDownButton";
                   const frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
                   int l = fspec.left+fspec.right+dspec.size+2;
-                  return QRect(x+w-l,y,l,h);
+                  return QRect(rtl ? x : x+w-l,
+                               y,l,h);
                 }
                 else if ((tb->popupMode() == QToolButton::InstantPopup
                           || tb->popupMode() == QToolButton::DelayedPopup)
@@ -5941,9 +6108,10 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
                   int l = dspec.size
                           // -> CE_ToolButtonLabel
                           + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                             qMin(fspec.left,fspec.right) : fspec.right)
+                             qMin(fspec.left,fspec.right) : rtl ? fspec.left : fspec.right)
                           + pixelMetric(PM_HeaderMargin);
-                  return QRect(x+w-l,y,l,h);
+                  return QRect(rtl ? x : x+w-l,
+                               y,l,h);
                 }
               }
             }
@@ -6671,7 +6839,9 @@ void Kvantum::renderLabel(
                         Qt::AlignVCenter | Qt::AlignLeft,
                         QSize(icon.width(),icon.height()),
                         r);
-    rtext = QRect(r.x()+icon.width() + (icon.isNull() ? 0 : lspec.tispace),
+    rtext = QRect(QApplication::layoutDirection() == Qt::RightToLeft ?
+                    r.x()
+                    : r.x()+icon.width() + (icon.isNull() ? 0 : lspec.tispace),
                   r.y(),
                   r.width()-ricon.width() - (icon.isNull() ? 0 : lspec.tispace),
                   r.height());
