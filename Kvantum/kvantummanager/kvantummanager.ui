@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>370</width>
-    <height>270</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,11 +30,11 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QGridLayout" name="gridLayout_3">
     <property name="topMargin">
      <number>10</number>
     </property>
-    <item>
+    <item row="0" column="0" colspan="2">
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -196,7 +196,7 @@ theme folder</string>
          <x>0</x>
          <y>0</y>
          <width>350</width>
-         <height>275</height>
+         <height>232</height>
         </rect>
        </property>
        <attribute name="label">
@@ -316,7 +316,7 @@ with Kvantum</string>
       </widget>
      </widget>
     </item>
-    <item>
+    <item row="1" column="1">
      <spacer name="verticalSpacer_4">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -327,12 +327,12 @@ with Kvantum</string>
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>20</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
     </item>
-    <item alignment="Qt::AlignRight|Qt::AlignBottom">
+    <item row="2" column="1" alignment="Qt::AlignRight">
      <widget class="QPushButton" name="quit">
       <property name="toolTip">
        <string>Ctrl+Q</string>
@@ -350,6 +350,24 @@ with Kvantum</string>
       </property>
       <property name="autoDefault">
        <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" alignment="Qt::AlignLeft">
+     <widget class="QPushButton" name="preview">
+      <property name="toolTip">
+       <string>Preview the active theme
+(Ctrl+P)</string>
+      </property>
+      <property name="text">
+       <string>Preview</string>
+      </property>
+      <property name="icon">
+       <iconset resource="kvantummanager.qrc">
+        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+P</string>
       </property>
      </widget>
     </item>

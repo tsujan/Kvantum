@@ -12,3 +12,13 @@ HEADERS += KvantumPreview.h
 FORMS += KvantumPreviewBase.ui
 SOURCES += main.cpp
 RESOURCES += KvantumPreviewResources.qrc
+unix {
+  #VARIABLES
+  isEmpty(PREFIX) {
+    PREFIX = /usr
+  }
+  BINDIR = $$PREFIX/bin
+
+  target.path =$$BINDIR
+  INSTALLS += target
+}

@@ -11,6 +11,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     setWindowTitle ("Kvantum Manager");
     
     lastPath = QDir::home().path();
+    process = new QProcess (this);
 
     connect (ui->quit, SIGNAL (clicked()), this, SLOT (close()));
     connect (ui->openTheme, SIGNAL (clicked()), this, SLOT (openTheme()));
@@ -19,6 +20,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (int)), this, SLOT (selectionChanged (int)));
+    connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
 
     updateThemeList();
 }
@@ -28,15 +30,12 @@ KvantumManager::~KvantumManager()
     delete ui;
 }
 /*************************/
-/*void KvantumManager::closeEvent (QCloseEvent *event)
+void KvantumManager::closeEvent (QCloseEvent *event)
 {
-    bool keep = false;
-    if (keep)
-        event->ignore();
-    else
-        event->accept();
+    process->terminate();
+    process->waitForFinished();
     event->accept();
-}*/
+}
 /*************************/
 void KvantumManager::openTheme()
 {
@@ -270,4 +269,13 @@ void KvantumManager::updateThemeList()
                 ui->comboBox->setCurrentIndex (index);
         }
     }
+}
+/*************************/
+void KvantumManager::preview()
+{
+    QString binDir = QApplication::applicationDirPath();
+    QString previewExe = binDir + "/kvantumpreview";
+    process->terminate();
+    process->waitForFinished();
+    process->start (previewExe);
 }
