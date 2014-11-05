@@ -1,6 +1,7 @@
-SUBDIRS += style \
-           kvantumpreview \
-           kvantummanager
+SUBDIRS += style
+
+equals(QT_MAJOR_VERSION, 4): SUBDIRS += kvantumpreview \
+                                        kvantummanager
 
 TEMPLATE = subdirs 
 

@@ -13,7 +13,9 @@ static Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZ
 void
 X11MoveTrigger (WId wid, int x, int y)
 {
+#if QT_VERSION < 0x050000
   QX11Info info;
+#endif
   XEvent xev;
   xev.xclient.type = ClientMessage;
   xev.xclient.message_type = netMoveResize;
@@ -27,7 +29,11 @@ X11MoveTrigger (WId wid, int x, int y)
   xev.xclient.data.l[4] = 0;
   XUngrabPointer (QX11Info::display(), QX11Info::appTime());
   XSendEvent (QX11Info::display(),
+#if QT_VERSION < 0x050000
               QX11Info::appRootWindow (info.screen()),
+#else
+              QX11Info::appRootWindow (QX11Info::appScreen()),
+#endif
               False,
               SubstructureRedirectMask | SubstructureNotifyMask,
               &xev);

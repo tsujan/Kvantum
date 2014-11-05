@@ -4,6 +4,7 @@ CONFIG += qt \
           warn_on
 
 QT += svg
+greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras
 
 TARGET = kvantum
 TEMPLATE = lib
@@ -25,6 +26,8 @@ HEADERS += themeconfig/specs.h \
            drag/windowmanager.h \
            drag/x11wmmove.h
 
+greaterThan(QT_MAJOR_VERSION, 4): OTHER_FILES += kvantum.json
+
 RESOURCES += themeconfig/defaulttheme.qrc
 
 unix:!macx: LIBS += -lX11
@@ -40,5 +43,6 @@ unix {
   target.path = $$[QT_INSTALL_PLUGINS]/styles
   colors.path = $$COLORSDIR
   colors.files += ../color/Kvantum.colors
-  INSTALLS += target colors
+  equals(QT_MAJOR_VERSION, 4): INSTALLS += target colors
+  greaterThan(QT_MAJOR_VERSION, 4): INSTALLS += target
 }

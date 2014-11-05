@@ -21,8 +21,14 @@
 #include <QStylePlugin>
 
 class KvantumPlugin : public QStylePlugin {
+#if QT_VERSION >= 0x050000
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "kvantum.json")
+#endif
   public:
+#if QT_VERSION < 0x050000
     QStringList keys() const;
+#endif
     QStyle *create(const QString &key);
 };
 

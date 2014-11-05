@@ -119,13 +119,15 @@ Kvantum::Kvantum()
     subApp = true;
   else if (appName == "dolphin")
     isDolphin = true;
-  /*else if (appName == "soffice.bin")
+#if QT_VERSION >= 0x050000
+  else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
       isPlasma = true;
   else if (appName == "systemsettings")
-      isSystemSettings = true;*/
+      isSystemSettings = true;
+#endif
 
   connect(progresstimer,SIGNAL(timeout()),this,SLOT(advanceProgresses()));
 
@@ -364,6 +366,7 @@ void Kvantum::polish(QWidget * widget)
   }
 }
 
+#if QT_VERSION < 0x050000
 static QString getAppName(const QString &file)
 {
   QString appName(file);
@@ -372,9 +375,11 @@ static QString getAppName(const QString &file)
     appName.remove(0, slashPos+1);
   return appName;
 }
+#endif
 
 void Kvantum::polish(QApplication *app)
 {
+#if QT_VERSION < 0x050000
   /* use this old-fashioned method to get the app name
      because, apparently, QApplication::applicationName()
      doesn't work correctly with all versions of Qt4 */
@@ -386,6 +391,7 @@ void Kvantum::polish(QApplication *app)
       isPlasma = true;
   else if (appName == "systemsettings")
       isSystemSettings = true;
+#endif
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
@@ -1685,7 +1691,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
           /* now handle the button state */
 
           // the subcontrol
+#if QT_VERSION < 0x050000
           int sc = QStyle::SC_SpinBoxUp;
+#else
+          quint32 sc = QStyle::SC_SpinBoxUp;
+#endif
           if (!up)
             sc = QStyle::SC_SpinBoxDown;
 
@@ -3052,7 +3062,11 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider *>(option);
         if (opt)
         {
+#if QT_VERSION < 0x050000
           int sc = QStyle::SC_ScrollBarAddLine;
+#else
+          quint32 sc = QStyle::SC_ScrollBarAddLine;
+#endif
           int limit = opt->maximum;
           if (!add)
           {
@@ -4817,6 +4831,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
       }*/
       const frame_spec fspec = getFrameSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
+#if QT_VERSION < 0x050000
       s = defaultSize + QSize(fspec.left + fspec1.right,
                               (fspec1.top > fspec.top ? fspec1.top : 0)
                                + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0));
@@ -4830,6 +4845,19 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
         if (sb && sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
           s.rwidth() = sb->minimumWidth() + 2*SPIN_BUTTON_WIDTH;
       }
+#else
+      /* Qt4 added 35px to the width of contentsSize
+         but Qt5 doesn't (-> qabstractspinbox.cpp) */
+      s = defaultSize + QSize(fspec.left + fspec1.right + SPIN_BUTTON_WIDTH,
+                              (fspec1.top > fspec.top ? fspec1.top : 0)
+                               + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0));
+      if (widget)
+      {
+        const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget);
+        if (sb && sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
+          s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+      }
+#endif
 
       break;
     }
@@ -6183,7 +6211,11 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
   return QCommonStyle::subControlRect(control,option,subControl,widget);
 }
 
+#if QT_VERSION < 0x050000
 QIcon Kvantum::standardIconImplementation ( QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget ) const
+#else
+QIcon Kvantum::standardIcon ( QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget ) const
+#endif
 {
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
@@ -6367,10 +6399,17 @@ QIcon Kvantum::standardIconImplementation ( QStyle::StandardPixmap standardIcon,
       else break;
     }
 
+#if QT_VERSION < 0x050000
     default : return QCommonStyle::standardIconImplementation(standardIcon,option,widget);
   }
 
   return QCommonStyle::standardIconImplementation(standardIcon,option,widget);
+#else
+    default : return QCommonStyle::standardIcon(standardIcon,option,widget);
+  }
+
+  return QCommonStyle::standardIcon(standardIcon,option,widget);
+#endif
 }
 
 QRect Kvantum::squaredRect(const QRect& r) const {

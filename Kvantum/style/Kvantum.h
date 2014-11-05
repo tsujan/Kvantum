@@ -98,9 +98,15 @@ class Kvantum : public QCommonStyle {
                                               const QWidget * widget = 0) const;
 
   protected slots:
+#if QT_VERSION < 0x050000
     QIcon standardIconImplementation (StandardPixmap standardIcon,
                                       const QStyleOption * option = 0,
                                       const QWidget * widget = 0) const;
+#else
+    QIcon standardIcon (StandardPixmap standardIcon,
+                        const QStyleOption * option = 0,
+                        const QWidget * widget = 0) const;
+#endif
 
   private:
     /* Render the element from the SVG file into the given bounds. */
@@ -167,7 +173,7 @@ class Kvantum : public QCommonStyle {
                      const QString &text,
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                     const QPixmap &icon = 0,
+                     const QPixmap &icon = QPixmap(),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
 

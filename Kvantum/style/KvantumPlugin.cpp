@@ -18,10 +18,12 @@
 #include "KvantumPlugin.h"
 #include "Kvantum.h"
 
+#if QT_VERSION < 0x050000
 QStringList KvantumPlugin::keys() const
 {
   return QStringList() << "Kvantum";
 }
+#endif
 
 QStyle *KvantumPlugin::create(const QString &key)
 {
@@ -31,4 +33,6 @@ QStyle *KvantumPlugin::create(const QString &key)
   return 0;
 }
 
+#if QT_VERSION < 0x050000
 Q_EXPORT_PLUGIN2(kvantum, KvantumPlugin)
+#endif

@@ -2,17 +2,24 @@
 *   Compilation   *
 *******************
 
-After installing Qt4 (>= 4.8) and X11 development packages (libqt4-dev, libx11-dev and libxext-dev in debian-based systems), open a terminal inside this folder and issue the following command:
+After installing X11 and Qt development packages (libx11-dev and libxext-dev for X11, libqt4-dev for Qt4, and qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev for Qt5, in Debian-based systems), open a terminal inside this folder and issue the following command:
 
 	qmake && make
+
+You might need to put the full path of qmake in the above command, especially for a second compilation against Qt5. For example, in 64-bit Debian, it is /usr/lib/x86_64-linux-gnu/qt4/bin/qmake for Qt4 and /usr/lib/x86_64-linux-gnu/qt5/bin/qmake for Qt5.
 
 ********************
 *   Installation   *
 ********************
 
-Then, use this command for installation:
+Then, use these commands for installation and cleaning:
 
 	sudo make install
+	make distclean
+
+The second command cleans the source and makes it ready for another compilation (against Qt5, for example).
+
+Installation for Qt4 is necessary but you could compile and install Kvantum twice, first for Qt4 and then for Qt5. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look. KDE apps as well as Kvantum Manager will use only the Qt4 plugin for the time being.
 
 *************
 *   Usage   *
@@ -24,9 +31,20 @@ In KDE:
 
 (2) Select Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
 
-In Other DEs:
-=============
+
+In Other DEs and for Qt4:
+=========================
 Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, save the result with 'File > Save'.
+
+In Other DEs and for Qt5:
+=========================
+Unfortunately, there is no qtconfig for Qt5. You could use this command to run a Qt5 application APP:
+
+	APP -style kvantum
+
+Or add this to your '~/profile' or  '~/.bashrc':
+
+	export QT_STYLE_OVERRIDE=kvantum
 
 **************************
 *   Using Other Themes   *
@@ -35,12 +53,6 @@ Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, sav
 To install and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
 
 If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: THEME_NAME.svg, THEME_NAME.kvconfig and THEME_NAME.colors.
-
-***************
-*   Preview   *
-***************
-
-You could click on the binary file "kvantumpreview/kvantumpreview" to see how various widgets look with the currently used theme.
 
 ***********
 *   GTK   *

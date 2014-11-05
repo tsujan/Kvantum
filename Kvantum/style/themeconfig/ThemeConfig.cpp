@@ -22,6 +22,11 @@
 #include <QFile>
 #include <QStringList>
 #include <QX11Info>
+#if QT_VERSION >= 0x050000
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
+#endif
 
 ThemeConfig::ThemeConfig(const QString& theme) :
   settings(NULL),
@@ -303,7 +308,11 @@ theme_spec ThemeConfig::getThemeSpec() const
   r.spread_progressbar = v.toBool();
 
   /* set to false if no compositing manager is running */
+#if QT_VERSION < 0x050000
   if (QX11Info::isCompositingManagerRunning())
+#else
+  if (XGetSelectionOwner(QX11Info::display(), atom))
+#endif
   {
     v = getValue("General","composite");
     r.composite = v.toBool();

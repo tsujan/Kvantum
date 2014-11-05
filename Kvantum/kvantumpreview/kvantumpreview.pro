@@ -12,6 +12,7 @@ HEADERS += KvantumPreview.h
 FORMS += KvantumPreviewBase.ui
 SOURCES += main.cpp
 RESOURCES += KvantumPreviewResources.qrc
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 unix {
   #VARIABLES
   isEmpty(PREFIX) {

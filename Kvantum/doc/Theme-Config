@@ -31,7 +31,7 @@ Section                                      Meaning
 [GeneralColors]                              The most important colors used
                                              by the theme. Not necessary but
                                              good for independence from
-                                             Qt4 color schemes outside KDE.
+                                             Qt color schemes outside KDE.
 
 [Hacks]                                      Hacks for specific apps or widgets.
 

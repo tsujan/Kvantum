@@ -8,6 +8,24 @@ composite=true
 menu_shadow_depth=6
 tooltip_shadow_depth=6
 
+[GeneralColors]
+window.color=#3D3D3E
+base.color=#2E2E2E
+alt.base.color=#383838
+button.color=#494949
+light.color=#626262
+mid.color=#303030
+highlight.color=#737373
+inactive.highlight.color=#4A4A4A
+text.color=white
+window.text.color=white
+button.text.color=white
+disabled.text.color=#A0A0A0
+tooltip.text.color=white
+highlight.text.color=white
+link.color=#2EB8E6
+link.visited.color=#FF6666
+
 [PanelButtonCommand]
 frame.top=4
 frame.bottom=4
