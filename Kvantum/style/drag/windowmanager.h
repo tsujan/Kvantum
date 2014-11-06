@@ -71,11 +71,6 @@ protected:
   {
     _enabled = value;
   }
-  // returns true if window manager is used for moving
-  bool useWMMoveResize() const
-  {
-    return _useWMMoveResize;
-  }
   // drag distance (pixels)
   void setDragDistance (int value)
   {
@@ -133,8 +128,6 @@ protected:
 private:
   // enability
   bool _enabled;
-  // use WM moveResize
-  bool _useWMMoveResize;
   // drag distance
   /* this is copied from kwin::geometry */
   int _dragDistance;
@@ -198,10 +191,6 @@ private:
   bool _dragInProgress;
   // true if drag is locked
   bool _locked;
-  // cursor override
-  /* used to keep track of application cursor being overridden when
-      dragging in non-WM mode */
-  bool _cursorOverride;
 
   // provide application-wise event filter
   /*

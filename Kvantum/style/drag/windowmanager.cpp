@@ -47,13 +47,11 @@
 WindowManager::WindowManager (QObject* parent) :
                QObject (parent),
                _enabled (true),
-               _useWMMoveResize (true),
                _dragDistance (QApplication::startDragDistance()),
                _dragDelay (QApplication::startDragTime()),
                _dragAboutToStart (false),
                _dragInProgress (false),
-               _locked (false),
-               _cursorOverride (false)
+               _locked (false)
 {
   _appEventFilter = new AppEventFilter( this );
   qApp->installEventFilter (_appEventFilter);
@@ -235,15 +233,6 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
     }
     else if (QPoint (mouseEvent->globalPos() - _globalDragPoint).manhattanLength() >= _dragDistance)
       _dragTimer.start (0, this);
-
-    return true;
-  }
-  else if (!useWMMoveResize())
-  {
-    // use QWidget::move for the grabbing
-    /* this works only if the sending object and the target are identical */
-    QWidget* window (_target.data()->window());
-    window->move (window->pos() + mouseEvent->pos() - _dragPoint);
 
     return true;
   }
@@ -562,12 +551,6 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 /*************************/
 void WindowManager::resetDrag (void)
 {
-  if ((!useWMMoveResize()) && _target && _cursorOverride)
-  {
-    qApp->restoreOverrideCursor();
-    _cursorOverride = false;
-  }
-
   _target.clear();
   if (_dragTimer.isActive())
     _dragTimer.stop();
@@ -582,21 +565,9 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   if (!(enabled() && widget) || QWidget::mouseGrabber())
     return;
 
-  // ungrab pointer
-  if (useWMMoveResize())
-  {
-    X11MoveTrigger (widget->window()->internalWinId(),
-                    position.x(), position.y());
+  X11MoveTrigger (widget->window()->internalWinId(),
+                  position.x(), position.y());
 
-  }
-  if (!useWMMoveResize())
-  {
-    if (!_cursorOverride)
-    {
-      qApp->setOverrideCursor(Qt::SizeAllCursor);
-      _cursorOverride = true;
-    }
-  }
   _dragInProgress = true;
   return;
 }
@@ -622,18 +593,16 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
     // unlock
     if (_parent->isLocked())
       _parent->setLocked (false);
-
   }
 
   if (!_parent->enabled()) return false;
 
   /*
-    if a drag is in progress, the widget will not receive any event
-    we trigger on the first MouseMove or MousePress events that are received
-    by any widget in the application to detect that the drag is finished
+    If a drag is in progress, the widget will not receive any event.
+    We trigger on the first MouseMove or MousePress events that are received
+    by any widget in the application to detect that the drag is finished.
   */
-  if (_parent->useWMMoveResize()
-      && _parent->_dragInProgress
+  if (_parent->_dragInProgress
       && _parent->_target
       && (event->type() == QEvent::MouseMove
           || event->type() == QEvent::MouseButtonPress))
@@ -663,14 +632,13 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
   if (event->type() == QEvent::MouseMove)
   {
     /*
-      HACK: quickly move the main cursor out of the window and back
-      this is needed to get the focus right for the window children
-      the origin of this issue is unknown at the moment
+      HACK: Quickly move the main cursor out of the window and back.
+      This is needed to get the focus right for the window children.
+      The origin of this issue is unknown at the moment.
     */
     const QPoint cursor = QCursor::pos();
     QCursor::setPos (window->mapToGlobal (window->rect().topRight()) + QPoint (1, 0));
     QCursor::setPos (cursor);
-
   }
 
   return true;
