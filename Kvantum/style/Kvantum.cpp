@@ -40,10 +40,11 @@
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
-#include <QMdiSubWindow>
+#include <QMdiArea>
 #include <QToolBox>
 #include <QDir>
 #include <QTextStream>
+#include <QLabel>
 //#include <QBitmap>
 #include <QtCore/qmath.h>
 //#include <QDialogButtonBox> // for dialog buttons layout
@@ -55,6 +56,7 @@
 #define SPIN_BUTTON_WIDTH 16
 #define SLIDER_TICK_SIZE 5
 #define COMBO_ARROW_LENGTH 20
+#define MIN_CONTRAST 65
 
 Kvantum::Kvantum()
   : QCommonStyle()
@@ -257,6 +259,33 @@ void Kvantum::polish(QWidget * widget)
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
 
+    const hacks_spec hspec = settings->getHacksSpec();
+    if (hspec.respect_darkness)
+    {
+      bool hasText = false;
+      if (qobject_cast<QAbstractItemView*>(widget)
+          || qobject_cast<QAbstractScrollArea*>(widget))
+        hasText = true;
+      else if (QLabel *label = qobject_cast<QLabel*>(widget))
+      {
+        if (!label->text().isEmpty())
+          hasText = true;
+      }
+      if (hasText)
+      {
+        QPalette palette = widget->palette();
+        QColor txtCol = palette.color(QPalette::Text);
+        if (qAbs(palette.color(QPalette::Base).value() - txtCol.value()) < MIN_CONTRAST
+            || qAbs(palette.color(QPalette::Window).value() - palette.color(QPalette::WindowText).value()) < MIN_CONTRAST
+            || (qobject_cast<QAbstractItemView*>(widget)
+                && qAbs(palette.color(QPalette::AlternateBase).value() - txtCol.value()) < MIN_CONTRAST))
+        {
+          polish(palette);
+          widget->setPalette(palette);
+        }
+      }
+    }
+
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog: {
@@ -266,22 +295,29 @@ void Kvantum::polish(QWidget * widget)
       default: break;
     }
 
-    if (isDolphin)
+    if (isDolphin
+        && qobject_cast<QAbstractScrollArea*>(getParent(widget,2))
+        && !qobject_cast<QAbstractScrollArea*>(getParent(widget,3)))
     {
-      const hacks_spec hspec = settings->getHacksSpec();
-      if (hspec.transparent_dolphin_view
-          && widget->autoFillBackground()
-          && qobject_cast<QAbstractScrollArea*>(getParent(widget,2))
-          && !qobject_cast<QAbstractScrollArea*>(getParent(widget,3)))
+      /* Dolphin sets the background of its KItemListContainer's viewport
+         to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
+         We force our base color here. */
+      const color_spec cspec = settings->getColorSpec();
+      QColor col = cspec.baseColor;
+      if (col.isValid())
       {
-        widget->setAutoFillBackground(false);
+        QPalette palette = widget->palette();
+        palette.setColor(widget->backgroundRole(), col);
+        widget->setPalette(palette);
       }
+      /* hack Dolphin's view */
+      if (hspec.transparent_dolphin_view && widget->autoFillBackground())
+        widget->setAutoFillBackground(false);
     }
 
     // -> ktitlewidget.cpp
     if (widget->inherits("KTitleWidget"))
     {
-      const hacks_spec hspec = settings->getHacksSpec();
       if (hspec.transparent_ktitle_label)
       {
         /*QPalette palette = widget->palette();
@@ -301,7 +337,9 @@ void Kvantum::polish(QWidget * widget)
       widget->setAutoFillBackground(false);
     }*/
 
-    if (qobject_cast<QProgressBar*>(widget))
+    if (qobject_cast<QMdiArea*>(widget))
+      widget->setAutoFillBackground(true);
+    else if (qobject_cast<QProgressBar*>(widget))
       widget->installEventFilter(this);
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
@@ -328,8 +366,6 @@ void Kvantum::polish(QWidget * widget)
         }
       }
     }
-    else if (qobject_cast<QMdiSubWindow*>(widget))
-      widget->setAutoFillBackground(true);
     else if (qobject_cast<QToolBox*>(widget))
     {
       widget->setBackgroundRole(QPalette::NoRole);
@@ -426,11 +462,22 @@ void Kvantum::polish(QPalette &palette)
     if (col.isValid())
       palette.setColor(QPalette::Button,col);
     col = cspec.lightColor;
+
     if (col.isValid())
       palette.setColor(QPalette::Light,col);
+    col = cspec.midLightColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Midlight,col);
+    col = cspec.darkColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Dark,col);
     col = cspec.midColor;
     if (col.isValid())
       palette.setColor(QPalette::Mid,col);
+    col = cspec.shadowColor;
+    if (col.isValid())
+      palette.setColor(QPalette::Shadow,col);
+
     col = cspec.highlightColor;
     if (col.isValid())
       palette.setColor(QPalette::Active,QPalette::Highlight,col);
@@ -478,8 +525,6 @@ void Kvantum::polish(QPalette &palette)
       palette.setColor(QPalette::Disabled,QPalette::WindowText,col);
       palette.setColor(QPalette::Disabled,QPalette::ButtonText,col);
     }
-
-    QCommonStyle::polish(palette);
 }
 
 void Kvantum::unpolish(QWidget * widget)
@@ -2248,7 +2293,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
             int baseValue = opt->palette.color(QPalette::Base).value();
             if (state == 1 && normalColor.isValid()
                 // a minimum amount of contrast is needed
-                && qAbs(baseValue - normalColor.value()) >= 50)
+                && qAbs(baseValue - normalColor.value()) >= MIN_CONTRAST)
             {
               QStyleOptionViewItemV4 o(*opt);
               QPalette palette(opt->palette);
@@ -2263,7 +2308,7 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
               }
             }
             else if (state == 2 && focusColor.isValid()
-                     && qAbs(baseValue - focusColor.value()) >= 50)
+                     && qAbs(baseValue - focusColor.value()) >= MIN_CONTRAST)
             {
               QStyleOptionViewItemV4 o(*opt);
               QPalette palette(opt->palette);

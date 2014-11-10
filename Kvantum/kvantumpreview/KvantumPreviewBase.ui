@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Kvantum Preview</string>
   </property>
   <property name="windowIcon">
    <iconset resource="KvantumPreviewResources.qrc">

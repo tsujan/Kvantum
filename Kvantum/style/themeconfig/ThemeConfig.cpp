@@ -226,13 +226,17 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
     v = getValue(elementName,"text.shadow.xshift", i);
     r.xshift = v.toInt();
     v = getValue(elementName,"text.shadow.yshift", i);
-    r.yshift = v.toInt();
+    if (v.isValid())
+      r.yshift = v.toInt();
     v = getValue(elementName,"text.shadow.color", i);
-    r.shadowColor = v.toString();
+    if (v.isValid())
+      r.shadowColor = v.toString();
     v = getValue(elementName,"text.shadow.alpha", i);
-    r.a = v.toInt();
+    if (v.isValid())
+      r.a = v.toInt();
     v = getValue(elementName,"text.shadow.depth", i);
-    r.depth = v.toInt();
+    if (v.isValid())
+      r.depth = v.toInt();
   }
 
   v = getValue(elementName,"text.margin", i);
@@ -264,10 +268,12 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
   QString i = v.toString();
 
   v = getValue(elementName,"size.minheight", i);
-  r.minH = v.toInt();
+  if (v.isValid())
+    r.minH = v.toInt();
 
   v = getValue(elementName,"size.minwidth", i);
-  r.minW = v.toInt();
+  if (v.isValid())
+    r.minW = v.toInt();
 
   return r;
 }
@@ -375,8 +381,18 @@ color_spec ThemeConfig::getColorSpec() const
   v = getValue("GeneralColors","light.color");
   r.lightColor = v.toString();
 
+  v = getValue("GeneralColors","mid.light.color");
+  r.midLightColor = v.toString();
+
+  v = getValue("GeneralColors","dark.color");
+  r.darkColor = v.toString();
+
   v = getValue("GeneralColors","mid.color");
   r.midColor = v.toString();
+
+  v = getValue("GeneralColors","shadow.color");
+  if (v.isValid())
+    r.shadowColor = v.toString();
 
   v = getValue("GeneralColors","highlight.color");
   r.highlightColor = v.toString();
@@ -421,6 +437,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   v = getValue("Hacks","transparent_ktitle_label");
   r.transparent_ktitle_label = v.toBool();
+
+  v = getValue("Hacks","respect_darkness");
+  r.respect_darkness = v.toBool();
 
   return r;
 }

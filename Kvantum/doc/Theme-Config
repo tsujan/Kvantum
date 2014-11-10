@@ -149,7 +149,7 @@ Exception No.1: The "inherits" variable will not be taken from the default confi
 
 Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
 
-Exception No.3: Any variable related to compositing will be neglected if omitted. For now, there are only three compositing variables, namely, "composite", "menu_shadow_depth" and "tooltip_shadow_depth". (The same is true for hacking variables but none is used in the default theme.)
+Exception No.3: Any variable related to compositing or hacking will be ignored if omitted.
 
 
 ==============================================================
@@ -244,8 +244,20 @@ button.color                      string (#RRGGBB)    The general button backgro
 light.color                       string (#RRGGBB)    Lighter than "button.color"
                                                       (used mostly for 3D bevels).
 
-mid.color                         string (#RRGGBB)    A little darker than "button.color"
+mid.light.color                   string (#RRGGBB)    Between "button.color" and
+                                                      "light.color" (used mostly
+                                                      for 3D bevels).
+
+dark.color                        string (#RRGGBB)    Darker than "button.color"
                                                       (used mostly for 3D bevels).
+
+mid.color                         string (#RRGGBB)    Between "button.color" and
+                                                      "dark.color" (used mostly
+                                                      for 3D bevels).
+
+shadow.color                      string (#RRGGBB)    A very dark color. By default,
+                                                      it is black. (used mostly for
+                                                      3D bevels).
 
 highlight.color                   string (#RRGGBB)    A color for text selection.
 
@@ -280,6 +292,9 @@ transparent_dolphin_view          true/false          No background or frame for
 transparent_ktitle_label          true/false          No background for the label of
                                                       KtitleWidget (a KDE widget with
                                                       a heading label)?
+
+respect_darkness                  true/false          Some apps don't respect dark themes.
+                                                      Fix that as far as possible?
 
                            **********************
                            *** Other Sections ***

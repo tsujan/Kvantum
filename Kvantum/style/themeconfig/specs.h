@@ -78,7 +78,10 @@ typedef struct {
   QString altBaseColor;
   QString buttonColor;
   QString lightColor;
+  QString midLightColor;
+  QString darkColor;
   QString midColor;
+  QString shadowColor;
   QString highlightColor;
   QString inactiveHighlightColor;
   QString textColor;
@@ -99,13 +102,16 @@ typedef struct {
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
   bool transparent_ktitle_label;
+  /* Some apps don't respect dark themes.
+     Fix that as far as possible! */
+  bool respect_darkness;
 } hacks_spec;
 
 /* Generic information about a frame */
 typedef struct {
   /* Element name */
   QString element;
-  /* has frame ? */
+  /* has frame? */
   bool hasFrame;
   /* Allow capsule grouping ? (used internally) */
   bool hasCapsule;
@@ -243,7 +249,10 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.altBaseColor = QString();
   cspec.buttonColor = QString();
   cspec.lightColor = QString();
+  cspec.midLightColor = QString();
+  cspec.darkColor = QString();
   cspec.midColor = QString();
+  cspec.shadowColor = QString("#000000");
   cspec.highlightColor = QString();
   cspec.inactiveHighlightColor = QString();
   cspec.textColor = QString();
@@ -260,6 +269,7 @@ static inline void default_color_spec(color_spec &cspec) {
 static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
   hspec.transparent_ktitle_label = false;
+  hspec.respect_darkness = false;
 }
 
 #endif

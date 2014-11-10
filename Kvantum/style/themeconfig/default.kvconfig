@@ -22,6 +22,8 @@ base.color=#2E2E2E
 alt.base.color=#383838
 button.color=#494949
 light.color=#626262
+mid.light.color=#555555
+dark.color=#171717
 mid.color=#303030
 highlight.color=#737373
 inactive.highlight.color=#4A4A4A
@@ -33,6 +35,9 @@ tooltip.text.color=white
 highlight.text.color=white
 link.color=#2EB8E6
 link.visited.color=#FF6666
+
+[Hacks]
+respect_darkness=true
 
 [PanelButtonCommand]
 frame=true
