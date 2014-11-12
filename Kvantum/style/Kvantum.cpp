@@ -116,20 +116,6 @@ Kvantum::Kvantum()
   isSystemSettings = false;
   isDolphin = false;
   subApp = false;
-  const QString appName = QApplication::applicationName();
-  if (appName == "Qt-subapplication")
-    subApp = true;
-  else if (appName == "dolphin")
-    isDolphin = true;
-#if QT_VERSION >= 0x050000
-  else if (appName == "soffice.bin")
-    isLibreoffice = true;
-  else if (appName == "plasma" || appName.startsWith("plasma-")
-           || appName == "kded4") // this is for the infamous appmenu
-      isPlasma = true;
-  else if (appName == "systemsettings")
-      isSystemSettings = true;
-#endif
 
   connect(progresstimer,SIGNAL(timeout()),this,SLOT(advanceProgresses()));
 
@@ -262,16 +248,17 @@ void Kvantum::polish(QWidget * widget)
     const hacks_spec hspec = settings->getHacksSpec();
     if (hspec.respect_darkness)
     {
-      bool hasText = false;
+      bool changePalette = false;
       if (qobject_cast<QAbstractItemView*>(widget)
-          || qobject_cast<QAbstractScrollArea*>(widget))
-        hasText = true;
+          || qobject_cast<QAbstractScrollArea*>(widget)
+          || qobject_cast<QTabWidget*>(widget))
+        changePalette = true;
       else if (QLabel *label = qobject_cast<QLabel*>(widget))
       {
         if (!label->text().isEmpty())
-          hasText = true;
+          changePalette = true;
       }
-      if (hasText)
+      if (changePalette)
       {
         QPalette palette = widget->palette();
         QColor txtCol = palette.color(QPalette::Text);
@@ -402,7 +389,7 @@ void Kvantum::polish(QWidget * widget)
   }
 }
 
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x040806
 static QString getAppName(const QString &file)
 {
   QString appName(file);
@@ -415,19 +402,25 @@ static QString getAppName(const QString &file)
 
 void Kvantum::polish(QApplication *app)
 {
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x040806
   /* use this old-fashioned method to get the app name
      because, apparently, QApplication::applicationName()
      doesn't work correctly with all versions of Qt4 */
   QString appName = getAppName(app->argv()[0]);
-  if (appName == "soffice.bin")
+#else
+  const QString appName = app->applicationName();
+#endif
+  if (appName == "Qt-subapplication")
+    subApp = true;
+  else if (appName == "dolphin")
+    isDolphin = true;
+  else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
       isPlasma = true;
   else if (appName == "systemsettings")
       isSystemSettings = true;
-#endif
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?

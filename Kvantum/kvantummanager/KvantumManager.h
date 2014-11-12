@@ -26,6 +26,9 @@ private slots:
     void tabChanged (int index);
     void selectionChanged (int);
     void preview();
+    void copyDefaultTheme (QString name);
+    void copyDefaultTheme();
+    void wrtieConfig (bool checked);
 
 private:
     void closeEvent (QCloseEvent *event);
@@ -35,6 +38,7 @@ private:
     Ui::KvantumManager *ui;
     QString lastPath;
     QProcess *process;
+    QString xdg_config_home;
 };
 
 #endif // KVANTUMMANAGER_H

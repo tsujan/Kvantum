@@ -42,7 +42,7 @@ Unfortunately, there is no qtconfig for Qt5. You could use this command to run a
 
 	APP -style kvantum
 
-Or add this to your '~/profile' or  '~/.bashrc':
+Or add this to your '~/profile' or '~/.bashrc':
 
 	export QT_STYLE_OVERRIDE=kvantum
 

@@ -4,23 +4,23 @@
 
 A PDF version of this document is also included for easier reading.
 
-The configuration of the default Kvantum theme can be changed by following these steps:
+The configuration of the default Kvantum theme can be easily copied by using Kvantum Manager or, manually, by following these steps:
 
 (1) Create the folder "~/.config/Kvantum/" (~ is your home);
 
 (2) Create the file "kvantum.kvconfig" in the above folder with this line in it:
 
-theme=MY_THEME
+theme=DefaultCopy
 
-Here, MY_THEME could be any name you choose for the new configuration;
+Here, DefaultCopy could be any name you choose for the new configuration;
 
-(3) Create the folder "~/.config/Kvantum/MY_THEME/" and the file "MY_THEME.kvconfig" inside it;
+(3) Create the folder "~/.config/Kvantum/DefaultCopy/" and the file "DefaultCopy.kvconfig" inside it;
 
-(4) In the file "MY_THEME.kvconfig", you could write down your own configuration. The easiest way is to copy/paste the contents of "style/themeconfig/default.kvconfig" (from the source) to it and change the values of some variables. Please note that deleting a variable often means that its value will be taken from the default configuration, so that you could keep only those sections or variables you want to change. See below for a more accurate explanation.
+(4) Copy/paste the contents of "style/themeconfig/default.kvconfig" (from the source) to "DefaultCopy.kvconfig".
 
-There are many sections and variables in the config file. That's intentional: unlike most theme engines, Kvantum is supposed to be able to control virtually all aspects of widgets.
+Now, you can change the values of variables (keys). Please note that deleting a variable often means that its value will be taken from the default configuration, so that you could keep only those sections or variables you want to change. See below for a more accurate explanation.
 
-Here are the meanings of various sections:
+There are many sections and variables in the config file. That's intentional: unlike most theme engines, Kvantum is supposed to be able to control virtually all aspects of widgets. Here are the meanings of various sections:
 
 =====================================================
 Section                                      Meaning

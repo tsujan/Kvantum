@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Icons">
     <file>../kvantumpreview/kvantum.svg</file>
+    <file>../style/themeconfig/default.kvconfig</file>
   </qresource>
 </RCC>

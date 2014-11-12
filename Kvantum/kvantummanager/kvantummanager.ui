@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>KvantumManager</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>370</width>
-    <height>280</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
     <horstretch>0</horstretch>
@@ -34,6 +26,58 @@
     <property name="topMargin">
      <number>10</number>
     </property>
+    <item row="2" column="1" alignment="Qt::AlignRight">
+     <widget class="QPushButton" name="quit">
+      <property name="toolTip">
+       <string>Ctrl+Q</string>
+      </property>
+      <property name="text">
+       <string>Quit</string>
+      </property>
+      <property name="icon">
+       <iconset theme="application-exit">
+        <normaloff/>
+       </iconset>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+Q</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" alignment="Qt::AlignLeft">
+     <widget class="QPushButton" name="preview">
+      <property name="toolTip">
+       <string>Preview the active theme
+or update its preview.</string>
+      </property>
+      <property name="text">
+       <string>Preview</string>
+      </property>
+      <property name="icon">
+       <iconset resource="kvantummanager.qrc">
+        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>30</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="0" column="0" colspan="2">
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
@@ -53,8 +97,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>362</width>
-         <height>128</height>
+         <width>364</width>
+         <height>132</height>
         </rect>
        </property>
        <attribute name="label">
@@ -195,8 +239,8 @@ theme folder</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>350</width>
-         <height>232</height>
+         <width>352</width>
+         <height>248</height>
         </rect>
        </property>
        <attribute name="label">
@@ -283,6 +327,22 @@ with Kvantum</string>
           </property>
          </spacer>
         </item>
+        <item row="3" column="2">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="4" column="0" colspan="4">
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -299,8 +359,8 @@ with Kvantum</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
-         <spacer name="verticalSpacer_3">
+        <item row="5" column="0" colspan="4">
+         <spacer name="verticalSpacer_10">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -314,61 +374,200 @@ with Kvantum</string>
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>30</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="1" alignment="Qt::AlignRight">
-     <widget class="QPushButton" name="quit">
-      <property name="toolTip">
-       <string>Ctrl+Q</string>
-      </property>
-      <property name="text">
-       <string>Quit</string>
-      </property>
-      <property name="icon">
-       <iconset theme="application-exit">
-        <normaloff/>
-       </iconset>
-      </property>
-      <property name="shortcut">
-       <string>Ctrl+Q</string>
-      </property>
-      <property name="autoDefault">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" alignment="Qt::AlignLeft">
-     <widget class="QPushButton" name="preview">
-      <property name="toolTip">
-       <string>Preview the active theme
-(Ctrl+P)</string>
-      </property>
-      <property name="text">
-       <string>Preview</string>
-      </property>
-      <property name="icon">
-       <iconset resource="kvantummanager.qrc">
-        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
-      </property>
-      <property name="shortcut">
-       <string>Ctrl+P</string>
-      </property>
+      <widget class="QWidget" name="page_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>407</width>
+         <height>216</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Configure Active Kvantum Theme</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="8" column="1">
+         <widget class="QCheckBox" name="checkBox5">
+          <property name="toolTip">
+           <string>Tabs are centered by default.</string>
+          </property>
+          <property name="text">
+           <string>Left aligned tabs</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>&lt;center&gt;&lt;b&gt;General Keys&lt;/b&gt;&lt;/center&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="toolTip">
+           <string>Uncheck the three boxes below if you want
+all widgets to appear as they are by default.</string>
+          </property>
+          <property name="text">
+           <string>&lt;center&gt;&lt;b&gt;Hacking Keys&lt;/b&gt;&lt;/center&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="10" column="1">
+         <widget class="QCheckBox" name="checkBox7">
+          <property name="toolTip">
+           <string>Active tab is detached by default.</string>
+          </property>
+          <property name="text">
+           <string>Attach active tab to tab widget</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QCheckBox" name="checkBox1">
+          <property name="toolTip">
+           <string>Merge Dolphin's view with its surroundings.</string>
+          </property>
+          <property name="text">
+           <string>Transparent Dolphin view</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="copyButton">
+          <property name="text">
+           <string>Make a Copy</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="configLabel">
+          <property name="text">
+           <string>W&lt;br&gt;W&lt;br&gt;W</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0" colspan="2">
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="1">
+         <widget class="QCheckBox" name="checkBox6">
+          <property name="toolTip">
+           <string>Inactive tabs are detached by default.</string>
+          </property>
+          <property name="text">
+           <string>Join inactive tabs</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QCheckBox" name="checkBox4">
+          <property name="toolTip">
+           <string>If checked, menus and tooltips will
+not have shadow or translucency.</string>
+          </property>
+          <property name="text">
+           <string>Disable composite effects</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>1</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="0">
+         <widget class="QCheckBox" name="checkBox3">
+          <property name="toolTip">
+           <string>Some apps may not respect dark themes.
+Kvantum can try to correct their behavior.</string>
+          </property>
+          <property name="text">
+           <string>Respect dark themes</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QCheckBox" name="checkBox2">
+          <property name="toolTip">
+           <string>Don't draw any background for KTitles.</string>
+          </property>
+          <property name="text">
+           <string>Transparent KTitle label</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1">
+         <widget class="QCheckBox" name="checkBox8">
+          <property name="toolTip">
+           <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+          </property>
+          <property name="text">
+           <string>X11 drag</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
