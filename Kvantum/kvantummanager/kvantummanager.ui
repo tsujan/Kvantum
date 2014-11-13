@@ -15,7 +15,7 @@
    <iconset resource="kvantummanager.qrc">
     <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="widget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
      <horstretch>0</horstretch>
@@ -89,9 +89,6 @@ or update its preview.</string>
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <property name="tabSpacing">
-       <number>10</number>
-      </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
@@ -102,7 +99,7 @@ or update its preview.</string>
         </rect>
        </property>
        <attribute name="label">
-        <string>Install/Update Kvantum Theme</string>
+        <string>Install/Update Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="2" column="2" colspan="2">
@@ -188,7 +185,7 @@ theme folder</string>
          </spacer>
         </item>
         <item row="0" column="0" colspan="4">
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="installLabel">
           <property name="text">
            <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it.&lt;/center&gt;</string>
           </property>
@@ -239,12 +236,12 @@ theme folder</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>352</width>
-         <height>248</height>
+         <width>366</width>
+         <height>238</height>
         </rect>
        </property>
        <attribute name="label">
-        <string>Change Kvantum Theme</string>
+        <string>Change/Delete Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="1" column="2">
@@ -263,7 +260,7 @@ theme folder</string>
           </property>
          </spacer>
         </item>
-        <item row="0" column="0">
+        <item row="0" column="0" alignment="Qt::AlignRight">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Select a theme:</string>
@@ -293,8 +290,12 @@ theme folder</string>
 this theme instead of its default theme.</string>
           </property>
           <property name="text">
-           <string>Use this theme
-with Kvantum</string>
+           <string>Use this theme</string>
+          </property>
+          <property name="icon">
+           <iconset theme="dialog-ok">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -344,7 +345,7 @@ with Kvantum</string>
          </spacer>
         </item>
         <item row="4" column="0" colspan="4">
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="usageLabel">
           <property name="text">
            <string>Since Kvantum is independent of KDE, you need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Style &gt; Applications &gt; Widget style&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Also select and apply the color scheme of this theme from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Colors &gt; Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for Plasma to see it completely.</string>
           </property>
@@ -372,65 +373,33 @@ with Kvantum</string>
           </property>
          </spacer>
         </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="deleteTheme">
+          <property name="text">
+           <string>Delete this theme</string>
+          </property>
+          <property name="icon">
+           <iconset theme="edit-delete">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_3">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>407</width>
-         <height>216</height>
+         <y>-95</y>
+         <width>433</width>
+         <height>232</height>
         </rect>
        </property>
        <attribute name="label">
-        <string>Configure Active Kvantum Theme</string>
+        <string>Configure Active Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="8" column="1">
-         <widget class="QCheckBox" name="checkBox5">
-          <property name="toolTip">
-           <string>Tabs are centered by default.</string>
-          </property>
-          <property name="text">
-           <string>Left aligned tabs</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>&lt;center&gt;&lt;b&gt;General Keys&lt;/b&gt;&lt;/center&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="toolTip">
-           <string>Uncheck the three boxes below if you want
-all widgets to appear as they are by default.</string>
-          </property>
-          <property name="text">
-           <string>&lt;center&gt;&lt;b&gt;Hacking Keys&lt;/b&gt;&lt;/center&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0" colspan="2">
-         <spacer name="verticalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="2" column="0" colspan="2">
          <spacer name="verticalSpacer_8">
           <property name="orientation">
@@ -442,37 +411,78 @@ all widgets to appear as they are by default.</string>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>10</height>
+            <height>20</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="10" column="1">
-         <widget class="QCheckBox" name="checkBox7">
+        <item row="11" column="1" alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="saveButton">
           <property name="toolTip">
-           <string>Active tab is detached by default.</string>
+           <string>Save this configuration
+(Ctrl+S)</string>
           </property>
           <property name="text">
-           <string>Attach active tab to tab widget</string>
+           <string>Save</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+S</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QCheckBox" name="checkBox1">
+        <item row="11" column="0" alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="restoreButton">
           <property name="toolTip">
-           <string>Merge Dolphin's view with its surroundings.</string>
+           <string>Revert to the default
+Kvantum theme
+(Ctrl+Z)</string>
           </property>
           <property name="text">
-           <string>Transparent Dolphin view</string>
+           <string>Defaults</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-revert">
+            <normaloff/>
+           </iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+Z</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0" alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="copyButton">
-          <property name="text">
-           <string>Make a Copy</string>
+        <item row="12" column="0" colspan="2">
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-         </widget>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="configLabel">
@@ -487,83 +497,177 @@ all widgets to appear as they are by default.</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="0" colspan="2">
-         <spacer name="verticalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="3" column="1">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="font">
+           <font>
+            <bold>true</bold>
+           </font>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
+          <property name="title">
+           <string>General Keys</string>
           </property>
-         </spacer>
-        </item>
-        <item row="9" column="1">
-         <widget class="QCheckBox" name="checkBox6">
-          <property name="toolTip">
-           <string>Inactive tabs are detached by default.</string>
-          </property>
-          <property name="text">
-           <string>Join inactive tabs</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QCheckBox" name="checkBox4">
-          <property name="toolTip">
-           <string>If checked, menus and tooltips will
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QCheckBox" name="checkBox4">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>If checked, menus and tooltips will
 not have shadow or translucency.</string>
-          </property>
-          <property name="text">
-           <string>Disable composite effects</string>
-          </property>
+             </property>
+             <property name="text">
+              <string>Disable composite effects</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox5">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Tabs are centered by default.</string>
+             </property>
+             <property name="text">
+              <string>Left aligned tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox6">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Inactive tabs are detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Join inactive tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox7">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Active tab is detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Attach active tab to tab widget</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox8">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+             </property>
+             <property name="text">
+              <string>X11 drag</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="6" column="2">
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="3" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
+          <property name="minimumSize">
            <size>
-            <width>1</width>
-            <height>20</height>
+            <width>0</width>
+            <height>0</height>
            </size>
           </property>
-         </spacer>
-        </item>
-        <item row="9" column="0">
-         <widget class="QCheckBox" name="checkBox3">
+          <property name="font">
+           <font>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="toolTip">
-           <string>Some apps may not respect dark themes.
+           <string>Uncheck the three boxes below if you want
+all widgets to appear as they are by default.</string>
+          </property>
+          <property name="title">
+           <string>Hacking Keys</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QCheckBox" name="checkBox1">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Merge Dolphin's view with its surroundings.</string>
+             </property>
+             <property name="text">
+              <string>Transparent Dolphin view</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox2">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Don't draw any background for KTitles.</string>
+             </property>
+             <property name="text">
+              <string>Transparent KTitle label</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox3">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior.</string>
-          </property>
-          <property name="text">
-           <string>Respect dark themes</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QCheckBox" name="checkBox2">
-          <property name="toolTip">
-           <string>Don't draw any background for KTitles.</string>
-          </property>
-          <property name="text">
-           <string>Transparent KTitle label</string>
-          </property>
-         </widget>
-        </item>
-        <item row="11" column="1">
-         <widget class="QCheckBox" name="checkBox8">
-          <property name="toolTip">
-           <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-          </property>
-          <property name="text">
-           <string>X11 drag</string>
-          </property>
+             </property>
+             <property name="text">
+              <string>Respect dark themes</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

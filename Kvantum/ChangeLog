@@ -3,6 +3,7 @@ V0.8.1
  * Force Dolphin's view to recognize the base color.
  * Added a hacking variable to force text contrast in apps that don't respect dark themes.
  * Added a configuration page to Kvantum Manager.
+ * Added a theme deleting button to Kvantum Manager.
 
 V0.8
 ---------

@@ -4,7 +4,7 @@
 
 A PDF version of this document is also included for easier reading.
 
-The configuration of the default Kvantum theme can be easily copied by using Kvantum Manager or, manually, by following these steps:
+The configuration of the default Kvantum theme can be easily copied by using Kvantum Manager (click Save button on its third page) or, manually, by following these steps:
 
 (1) Create the folder "~/.config/Kvantum/" (~ is your home);
 
