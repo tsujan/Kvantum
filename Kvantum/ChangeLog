@@ -2,6 +2,7 @@ V0.8.2
 ---------
  * Added support for translucent windows and dialogs.
  * Made changes to Kvantum Manager (to cover window translucency).
+ * Workaround for a Qt4 positioning bug (taken from QtCurve).
 
 V0.8.1
 ---------

@@ -353,7 +353,18 @@ void Kvantum::polish(QWidget *widget)
             && !widget->inherits("QSplashScreen")
             && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
         {
+#if QT_VERSION < 0x050000
+          /* workaround for a Qt4 bug, which makes translucent windows
+             always appear at the top left corner (taken from QtCurve) */
+          bool was_visible = widget->isVisible();
+          bool moved = widget->testAttribute(Qt::WA_Moved);
+          if (was_visible) widget->hide();
+#endif
           widget->setAttribute(Qt::WA_TranslucentBackground);
+#if QT_VERSION < 0x050000
+          if (!moved) widget->setAttribute(Qt::WA_Moved, false);
+          if (was_visible) widget->show();
+#endif
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
           translucentTopWidgets.insert(widget);
