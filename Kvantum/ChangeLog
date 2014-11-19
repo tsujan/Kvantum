@@ -1,3 +1,8 @@
+V0.8.2
+---------
+ * Added support for translucent windows and dialogs.
+ * Made changes to Kvantum Manager (to cover window translucency).
+
 V0.8.1
 ---------
  * Force Dolphin's view to recognize the base color.

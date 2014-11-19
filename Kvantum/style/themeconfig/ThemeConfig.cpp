@@ -324,7 +324,18 @@ theme_spec ThemeConfig::getThemeSpec() const
     r.composite = v.toBool();
   }
 
-  /* no menu or tooltip shadow without compositing */
+  /* no window translucency without window
+     interior elemenet or without compositing */
+
+  interior_spec ispec = getInteriorSpec("Window");
+  if (ispec.hasInterior)
+  {
+    v = getValue("General","translucent_windows");
+    if (v.isValid() && r.composite)
+      r.translucent_windows = v.toBool();
+  }
+
+  /* no menu/tooltip shadow without compositing */
 
   v = getValue("General","menu_shadow_depth");
   if (v.isValid() && r.composite)
@@ -333,6 +344,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","tooltip_shadow_depth");
   if (v.isValid() && r.composite)
     r.tooltip_shadow_depth = v.toInt();
+
+  v = getValue("General","opaque", empty);
+  if (v.isValid())
+    r.opaque << v.toStringList();
 
   v = getValue("General","splitter_width", empty);
   if (v.isValid())

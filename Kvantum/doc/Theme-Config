@@ -206,6 +206,18 @@ tooltip_shadow_depth              integer             The depth of the shadow to
                                                       absence or a false value for
                                                       "composite" means no shadow.
 
+translucent_windows               true/false          Translucent windows and dialogs?
+                                                      This requires a translucent SVG
+                                                      element too. A false value, its
+                                                      absence or a false value for
+                                                      "composite" means no translucency.
+
+opaque                            string list         A comma-separated list of
+                                                      executables, whose apps should not
+                                                      have window translucency. It has
+                                                      meaning only if translucent_windows
+                                                      is set to true.
+
 splitter_width                    integer             The width of splitter handles.
 
 scroll_width                      integer             The width of scrollbars. The

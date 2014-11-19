@@ -2,6 +2,7 @@
 #include <QFileDialog>
 #include <QSettings>
 #include <QMessageBox>
+#include <QStyleFactory>
 #if QT_VERSION >= 0x050000
 #include <QFileDevice>
 #endif
@@ -42,6 +43,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
     connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (wrtieConfig()));
     connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
+    connect (ui->checkBox9, SIGNAL (clicked (bool)), this, SLOT (transparency (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
@@ -330,6 +332,12 @@ void KvantumManager::useTheme()
     statusLabel->setText (tr ("<b>Active theme:</b> %1").arg (theme));
     ui->statusBar->showMessage (tr ("Theme changed to %1.").arg (theme), 10000);
     showAnimated (ui->usageLabel, 1000);
+
+    QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
+    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+    if (process->state() == QProcess::Running)
+      preview();
 }
 /*************************/
 void KvantumManager::txtChanged (const QString &txt)
@@ -349,13 +357,28 @@ void KvantumManager::tabChanged (int index)
     {
         updateThemeList();
         ui->usageLabel->show();
+        QString comment;
         if (kvconfigTheme.isEmpty())
             ui->deleteTheme->setEnabled (false);
         else
+        {
             ui->deleteTheme->setEnabled (true);
+            QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            if (QFile::exists (themeConfig))
+            {
+              QSettings themeSettings (themeConfig, QSettings::NativeFormat);
+              themeSettings.beginGroup ("General");
+              comment = themeSettings.value ("comment").toString();
+              themeSettings.endGroup();
+            }
+        }
+        if (comment.isEmpty())
+          comment = "Kvantum's default theme";
+        ui->comboBox->setToolTip (comment);
     }
     else if (index == 2)
     {
+        ui->opaqueEdit->clear();
         if (kvconfigTheme.isEmpty())
         {
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
@@ -370,6 +393,9 @@ void KvantumManager::tabChanged (int index)
             ui->checkBox6->setChecked (true);
             ui->checkBox7->setChecked (false);
             ui->checkBox8->setChecked (true);
+            ui->checkBox9->setChecked (false);
+            ui->opaqueLabel->setEnabled (false);
+            ui->opaqueEdit->setEnabled (false);
         }
         else
         {
@@ -409,6 +435,15 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBox8->setChecked (themeSettings.value ("x11drag").toBool());
                 else
                     ui->checkBox8->setChecked (true);
+                bool translucency = false;
+                if (themeSettings.contains ("translucent_windows"))
+                    translucency = themeSettings.value ("translucent_windows").toBool();
+                QStringList lst = themeSettings.value ("opaque").toStringList();
+                if (!lst.isEmpty())
+                    ui->opaqueEdit->setText (lst.join (","));
+                ui->checkBox9->setChecked (translucency);
+                ui->opaqueLabel->setEnabled (translucency);
+                ui->opaqueEdit->setEnabled (translucency);
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
@@ -419,6 +454,8 @@ void KvantumManager::tabChanged (int index)
             }
         }
     }
+    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
+    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
@@ -442,6 +479,25 @@ void KvantumManager::selectionChanged (const QString &txt)
         ui->deleteTheme->setEnabled (false);
     else if (!ui->deleteTheme->isEnabled())
         ui->deleteTheme->setEnabled (true);
+
+    QString comment;
+    QString text = txt;
+    if (text == "Kvantum (modified)")
+      text = "DefaultCopy";
+    if (text != "Kvantum (default)")
+    {
+        QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
+        if (QFile::exists (themeConfig))
+        {
+          QSettings themeSettings (themeConfig, QSettings::NativeFormat);
+          themeSettings.beginGroup ("General");
+          comment = themeSettings.value ("comment").toString();
+          themeSettings.endGroup();
+        }
+    }
+    if (comment.isEmpty())
+      comment = "Kvantum's default theme";
+    ui->comboBox->setToolTip (comment);
 }
 /*************************/
 void KvantumManager::updateThemeList()
@@ -587,12 +643,19 @@ void KvantumManager::wrtieConfig()
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBox2->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBox3->isChecked());
         themeSettings.endGroup();
+
         themeSettings.beginGroup ("General");
         themeSettings.setValue ("composite", !ui->checkBox4->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBox5->isChecked());
         themeSettings.setValue ("joined_tabs", ui->checkBox6->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
+        themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
+        QString opaque = ui->opaqueEdit->text();
+        opaque = opaque.simplified();
+        opaque.remove (" ");
+        QStringList opaqueList = opaque.split (",");
+        themeSettings.setValue ("opaque", opaqueList);
         themeSettings.endGroup();
 
         ui->statusBar->showMessage (tr ("Configuration saved."), 10000);
@@ -610,6 +673,12 @@ void KvantumManager::wrtieConfig()
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
         }
+
+        QApplication::setStyle (QStyleFactory::create ("kvantum"));
+        int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
+        resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+        if (process->state() == QProcess::Running)
+          preview();
     }
 }
 /*************************/
@@ -635,10 +704,19 @@ void KvantumManager::restoreDefault()
     ui->checkBox6->setChecked (true);
     ui->checkBox7->setChecked (false);
     ui->checkBox8->setChecked (true);
+    ui->checkBox9->setChecked (false);
+    ui->opaqueLabel->setEnabled (false);
+    ui->opaqueEdit->setEnabled (false);
 
     ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
     showAnimated (ui->configLabel, 1000);
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
     statusLabel->setText (tr ("<b>Active theme:</b> Kvantum (default)"));
     ui->statusBar->showMessage (tr ("Removed the (modified) copy of the default theme."), 10000);
+}
+/*************************/
+void KvantumManager::transparency (bool checked)
+{
+    ui->opaqueLabel->setEnabled (checked);
+    ui->opaqueEdit->setEnabled (checked);    
 }

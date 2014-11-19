@@ -59,53 +59,60 @@ class Kvantum : public QCommonStyle {
     void unpolish(QWidget *widget);
     void unpolish(QApplication *app);
 
-    virtual bool eventFilter(QObject * o, QEvent * e);
+    virtual bool eventFilter(QObject *o, QEvent *e);
 
     virtual int pixelMetric (PixelMetric metric,
-                             const QStyleOption * option = 0,
-                             const QWidget * widget = 0) const;
+                             const QStyleOption *option = 0,
+                             const QWidget *widget = 0) const;
     virtual QRect subElementRect (SubElement element,
-                                  const QStyleOption * option,
-                                  const QWidget * widget = 0) const;
+                                  const QStyleOption *option,
+                                  const QWidget *widget = 0) const;
     virtual QRect subControlRect (ComplexControl control,
-                                  const QStyleOptionComplex * option,
+                                  const QStyleOptionComplex *option,
                                   SubControl subControl,
-                                  const QWidget * widget = 0) const;
+                                  const QWidget *widget = 0) const;
     QSize sizeFromContents (ContentsType type,
-                            const QStyleOption * option,
-                            const QSize & contentsSize,
-                            const QWidget * widget = 0) const;
+                            const QStyleOption *option,
+                            const QSize &contentsSize,
+                            const QWidget *widget = 0) const;
 
     virtual void drawPrimitive (PrimitiveElement element,
-                                const QStyleOption * option,
-                                QPainter * painter,
-                                const QWidget * widget = 0) const;
+                                const QStyleOption *option,
+                                QPainter *painter,
+                                const QWidget *widget = 0) const;
     virtual void drawControl (ControlElement element,
-                              const QStyleOption * option,
-                              QPainter * painter,
-                              const QWidget * widget = 0) const;
+                              const QStyleOption *option,
+                              QPainter *painter,
+                              const QWidget *widget = 0) const;
     virtual void drawComplexControl (ComplexControl control,
-                                     const QStyleOptionComplex * option,
-                                     QPainter * painter,
-                                     const QWidget * widget = 0 ) const;
+                                     const QStyleOptionComplex *option,
+                                     QPainter *painter,
+                                     const QWidget *widget = 0 ) const;
     virtual int styleHint(StyleHint hint,
-                          const QStyleOption * option = 0,
-                          const QWidget * widget = 0,
-                          QStyleHintReturn * returnData = 0) const;
+                          const QStyleOption *option = 0,
+                          const QWidget *widget = 0,
+                          QStyleHintReturn *returnData = 0) const;
     virtual SubControl hitTestComplexControl (ComplexControl control,
-                                              const QStyleOptionComplex * option,
-                                              const QPoint & position,
-                                              const QWidget * widget = 0) const;
+                                              const QStyleOptionComplex *option,
+                                              const QPoint &position,
+                                              const QWidget *widget = 0) const;
+
+    /* A workaround, taken from QtCurve, for Qt5's problem with translucent windows.*/
+    void prePolish(QWidget *w) const;
+    void prePolish(const QWidget *w) const
+    {
+        prePolish(const_cast<QWidget*>(w));
+    }
 
   protected slots:
 #if QT_VERSION < 0x050000
     QIcon standardIconImplementation (StandardPixmap standardIcon,
-                                      const QStyleOption * option = 0,
-                                      const QWidget * widget = 0) const;
+                                      const QStyleOption *option = 0,
+                                      const QWidget *widget = 0) const;
 #else
     QIcon standardIcon (StandardPixmap standardIcon,
-                        const QStyleOption * option = 0,
-                        const QWidget * widget = 0) const;
+                        const QStyleOption *option = 0,
+                        const QWidget *widget = 0) const;
 #endif
 
   private:
@@ -116,9 +123,9 @@ class Kvantum : public QCommonStyle {
                        int hsize = 0, int vsize = 0,
                        Qt::Orientation orientation = Qt::Horizontal) const;
     /* Render the (vertical) slider ticks. */
-    void renderSliderTick(QPainter* painter,
-                          const QString& element,
-                          const QRect& ticksRect,
+    void renderSliderTick(QPainter *painter,
+                          const QString &element,
+                          const QRect &ticksRect,
                           const int interval,
                           const int available,
                           const int min,
@@ -177,6 +184,9 @@ class Kvantum : public QCommonStyle {
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
 
+    /* Draws background of translucent top widgets. */
+    void drawBg(QPainter *p, const QWidget *widget) const;
+
     /* Generic method to compute the ideal size of a widget. */
     QSize sizeCalculated(const QFont &font, // font to determine width/height
                          const frame_spec &fspec,
@@ -203,8 +213,10 @@ class Kvantum : public QCommonStyle {
     }
 
   private slots:
-    /* Slot called on timer timeout to advance busy progress bars. */
+    /* Called on timer timeout to advance busy progress bars. */
     void advanceProgresses();
+    /* Removes the translucency attribute from top widgets. */
+    void undoTranslucency(QObject *o);
 
   private:
     QSvgRenderer *defaultRndr, *themeRndr;
@@ -216,6 +228,8 @@ class Kvantum : public QCommonStyle {
 
     /* List of busy progress bars. */
     QMap<QWidget *,int> progressbars;
+    /* List of translucent top widgets */
+    QSet<QWidget*> translucentTopWidgets;
 
     ShortcutHandler *itsShortcutHandler;
     WindowManager *itsWindowManager;
@@ -235,6 +249,8 @@ class Kvantum : public QCommonStyle {
        itself as "Qt-subapplication" and doesn't
        accept compositing. */
     bool subApp;
+    /* Some apps shouldn't have translucent windows. */
+    bool isOpaque;
 
     /* Hacks */
     bool isDolphin;

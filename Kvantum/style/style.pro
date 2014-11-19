@@ -4,7 +4,10 @@ CONFIG += qt \
           warn_on
 
 QT += svg
-greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras
+greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras \
+                                        core-private \
+                                        widgets-private
+
 
 TARGET = kvantum
 TEMPLATE = lib

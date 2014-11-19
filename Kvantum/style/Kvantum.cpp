@@ -46,8 +46,15 @@
 #include <QTextStream>
 #include <QLabel>
 //#include <QBitmap>
+#include <QPaintEvent>
 #include <QtCore/qmath.h>
 //#include <QDialogButtonBox> // for dialog buttons layout
+
+#if QT_VERSION >= 0x050000
+#include <QSurfaceFormat>
+#include <QWindow>
+#include <private/qwidget_p.h>
+#endif
 
 #include "themeconfig/ThemeConfig.h"
 
@@ -58,8 +65,7 @@
 #define COMBO_ARROW_LENGTH 20
 #define MIN_CONTRAST 65
 
-Kvantum::Kvantum()
-  : QCommonStyle()
+Kvantum::Kvantum() : QCommonStyle()
 {
   progresstimer = new QTimer(this);
 
@@ -102,7 +108,8 @@ Kvantum::Kvantum()
   QString theme;
   if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
   {
-    QSettings globalSettings (QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home), QSettings::NativeFormat);
+    QSettings globalSettings (QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home),
+                              QSettings::NativeFormat);
 
     if (globalSettings.status() == QSettings::NoError && globalSettings.contains("theme"))
       theme = globalSettings.value("theme").toString();
@@ -116,8 +123,10 @@ Kvantum::Kvantum()
   isSystemSettings = false;
   isDolphin = false;
   subApp = false;
+  isOpaque = false;
 
-  connect(progresstimer,SIGNAL(timeout()),this,SLOT(advanceProgresses()));
+  connect(progresstimer, SIGNAL(timeout()),
+          this, SLOT(advanceProgresses()));
 
   itsShortcutHandler = NULL;
   itsWindowManager = NULL;
@@ -135,6 +144,19 @@ Kvantum::Kvantum()
 
 Kvantum::~Kvantum()
 {
+  /* without this, weird things would happen when there is
+     window translucency and the style changes from Kvantum */
+  QSet<QWidget *>::const_iterator i = translucentTopWidgets.constBegin();
+  while (i != translucentTopWidgets.constEnd())
+  {
+    if (*i)
+    {
+      (*i)->setAttribute(Qt::WA_NoSystemBackground, false);
+      (*i)->setAttribute(Qt::WA_TranslucentBackground, false);
+    }
+    ++i;
+  }
+
   delete defaultSettings;
   delete themeSettings;
 
@@ -160,7 +182,7 @@ void Kvantum::setBuiltinDefaultTheme()
   defaultRndr->load(QString(":default.svg"));
 }
 
-void Kvantum::setUserTheme(const QString& themename)
+void Kvantum::setUserTheme(const QString &themename)
 {
   if (themeSettings)
   {
@@ -234,10 +256,49 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
-void Kvantum::polish(QWidget * widget)
+// Taken from QtCurve-1.8.18:
+/*
+  In Qt5's QWidget::setVisible(bool), ensurePolished() is called after create().
+  So we request for RGBA format on toplevel widgets before they create native windows.
+*/
+void Kvantum::prePolish(QWidget *widget) const
+{
+#if QT_VERSION < 0x050000
+  Q_UNUSED(widget);
+  return;
+#else
+  if (!widget) return;
+  if (isPlasma || isOpaque || subApp || isLibreoffice)
+    return;
+  if (widget->testAttribute(Qt::WA_WState_Created))
+    return;
+  if (!settings->getThemeSpec().translucent_windows)
+    return;
+
+  QWindow *window = widget->windowHandle();
+  if (!window)
+  {
+    QWidgetPrivate *widgetPrivate = static_cast<QWidgetPrivate*>(QObjectPrivate::get(widget));
+    //widgetPrivate->updateIsOpaque();
+    widgetPrivate->createTLExtra();
+    widgetPrivate->createTLSysExtra();
+    window = widget->windowHandle();
+  }
+  if (window)
+  {
+    QSurfaceFormat format = window->format();
+    format.setAlphaBufferSize(8);
+    window->setFormat(format);
+  }
+#endif
+}
+
+void Kvantum::polish(QWidget *widget)
 {
   if (widget)
   {
+    prePolish(widget);
+
     // for moving the window containing this widget
     if (itsWindowManager)
       itsWindowManager->registerWidget(widget);
@@ -277,6 +338,28 @@ void Kvantum::polish(QWidget * widget)
       case Qt::Window:
       case Qt::Dialog: {
         widget->setAttribute(Qt::WA_StyledBackground);
+        const theme_spec tspec = settings->getThemeSpec();
+        /* take all precautions */
+        if (tspec.translucent_windows
+            && !isPlasma && !isOpaque && !subApp && !isLibreoffice
+            && widget->isWindow()
+            && widget->windowType() != Qt::Desktop
+            && !widget->testAttribute(Qt::WA_TranslucentBackground)
+            && !widget->testAttribute(Qt::WA_NoSystemBackground)
+            && !widget->testAttribute(Qt::WA_PaintOnScreen)
+            && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
+            && !widget->inherits("KScreenSaver")
+            && !widget->inherits("QTipLabel")
+            && !widget->inherits("QSplashScreen")
+            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
+        {
+          widget->setAttribute(Qt::WA_TranslucentBackground);
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+          translucentTopWidgets.insert(widget);
+          connect(widget, SIGNAL(destroyed(QObject*)),
+                  SLOT(undoTranslucency(QObject*)));
+        }
         break;
       }
       default: break;
@@ -418,9 +501,13 @@ void Kvantum::polish(QApplication *app)
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
-      isPlasma = true;
+    isPlasma = true;
   else if (appName == "systemsettings")
-      isSystemSettings = true;
+    isSystemSettings = true;
+
+  const theme_spec tspec = settings->getThemeSpec();
+  if (tspec.opaque.contains (appName))
+    isOpaque = true;
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
@@ -520,7 +607,7 @@ void Kvantum::polish(QPalette &palette)
     }
 }
 
-void Kvantum::unpolish(QWidget * widget)
+void Kvantum::unpolish(QWidget *widget)
 {
   if (widget)
   {
@@ -533,6 +620,7 @@ void Kvantum::unpolish(QWidget * widget)
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog: {
+        widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_StyledBackground, false);
         break;
       }
@@ -565,11 +653,62 @@ void Kvantum::unpolish(QApplication *app)
   QCommonStyle::unpolish(app);
 }
 
-bool Kvantum::eventFilter(QObject* o, QEvent* e)
+void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
+{
+  if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
+    return; // Plasma FIXME needed?
+  QRect bgndRect(widget->rect());
+  interior_spec ispec = getInteriorSpec("Window");
+  // TODO find a way to add texture
+  ispec.px = ispec.py = 0;
+  frame_spec fspec;
+  default_frame_spec(fspec);
+
+  QString suffix = "-normal";
+  if (!widget->isActiveWindow())
+    suffix = "-normal-inactive";
+
+  p->setClipRegion(bgndRect, Qt::IntersectClip);
+  renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix);
+}
+
+void Kvantum::undoTranslucency(QObject *o)
+{
+  QWidget *widget = static_cast<QWidget*>(o);
+  if (widget && translucentTopWidgets.contains(widget))
+  {
+    widget->setAttribute(Qt::WA_NoSystemBackground, false);
+    widget->setAttribute(Qt::WA_TranslucentBackground, false);
+    translucentTopWidgets.remove(widget);
+  }
+}
+
+bool Kvantum::eventFilter(QObject *o, QEvent *e)
 {
   QWidget *w = qobject_cast<QWidget*>(o);
+  //const theme_spec tspec = settings->getThemeSpec();
 
-  switch ( e->type() ) {
+  switch (e->type()) {
+  case QEvent::Paint:
+    if (w && w->isWindow()
+        && w->testAttribute(Qt::WA_StyledBackground)
+        && w->testAttribute(Qt::WA_TranslucentBackground)
+        && !isPlasma && !isOpaque && !subApp && !isLibreoffice
+        /*&& tspec.translucent_windows*/ // this could have weird effects with style or settings change
+       )
+    {
+      switch (w->windowFlags() & Qt::WindowType_Mask) {
+        case Qt::Window:
+        case Qt::Dialog: {
+          QPainter p(w);
+          p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
+          drawBg(&p,w);
+          break;
+        }
+        default: break;
+      }
+    }
+    break;
   case QEvent::Show:
     if (w)
     {
@@ -673,8 +812,13 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
   return res;
 }
 
-void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * option, QPainter * painter, const QWidget * widget) const
+void Kvantum::drawPrimitive(PrimitiveElement element,
+                            const QStyleOption *option,
+                            QPainter *painter,
+                            const QWidget *widget) const
 {
+  prePolish(widget);
+
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -1356,7 +1500,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       /* At least toolbars may also use this, so continue
          only if it's really a menu. LibreOffice's menuitems 
          would have no background without this either. */
-      if (!qobject_cast< const QMenu* >(widget)
+      if (!qobject_cast<const QMenu*>(widget)
           || isLibreoffice) // really not needed
         break;
 
@@ -1531,7 +1675,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
-      else if (const QComboBox* cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         /* see if there is any icon on the left of
@@ -1590,7 +1734,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
       const interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
       /* no frame when editing itemview texts */
-      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
+      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
@@ -1600,7 +1744,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
       }
-      else if (const QComboBox* cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         if (option->direction == Qt::RightToLeft)
@@ -2087,8 +2231,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element, const QStyleOption * optio
   }
 }
 
-void Kvantum::drawControl(ControlElement element, const QStyleOption * option, QPainter * painter, const QWidget * widget) const
+void Kvantum::drawControl(ControlElement element,
+                          const QStyleOption *option,
+                          QPainter *painter,
+                          const QWidget *widget) const
 {
+  prePolish(widget);
+
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -3780,8 +3929,13 @@ void Kvantum::drawControl(ControlElement element, const QStyleOption * option, Q
   }
 }
 
-void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionComplex * option, QPainter * painter, const QWidget * widget) const
+void Kvantum::drawComplexControl(ComplexControl control,
+                                 const QStyleOptionComplex *option,
+                                 QPainter *painter,
+                                 const QWidget *widget) const
 {
+  prePolish(widget);
+
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -3814,7 +3968,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
 
         if (widget)
         {
-          const QToolButton * tb = qobject_cast<const QToolButton *>(widget);
+          const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
           if (tb)
           {
             o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
@@ -3932,7 +4086,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
         {
           /* don't cover the lineedit area */
           int editWidth = 0;
-          if (const QComboBox* cb = qobject_cast<const QComboBox*>(widget))
+          if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
           {
             if (cb->lineEdit())
               editWidth = cb->lineEdit()->width();
@@ -3973,7 +4127,7 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
           else
             fspec.right = 0;
           int labelWidth = 0;
-          if (const QComboBox* cb = qobject_cast<const QComboBox*>(widget))
+          if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
           {
             if (cb->lineEdit())
               labelWidth = rtl ? o.rect.width()-cb->lineEdit()->width() : cb->lineEdit()->x();
@@ -4438,8 +4592,10 @@ void Kvantum::drawComplexControl(ComplexControl control, const QStyleOptionCompl
   }
 }
 
-int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const QWidget * widget) const
+int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
 {
+  prePolish(widget);
+
   switch (metric) {
     case PM_ButtonMargin : return 0;
     case PM_ButtonShiftHorizontal :
@@ -4682,8 +4838,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption * option, const 
   }
 }
 
-int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidget * widget, QStyleHintReturn * returnData) const
+int Kvantum::styleHint(StyleHint hint,
+                       const QStyleOption *option,
+                       const QWidget *widget,
+                       QStyleHintReturn *returnData) const
 {
+  prePolish(widget);
+
   switch (hint) {
     case SH_EtchDisabledText :
     case SH_DitherDisabledText :
@@ -4783,13 +4944,23 @@ int Kvantum::styleHint(StyleHint hint, const QStyleOption * option, const QWidge
   }
 }
 
-QCommonStyle::SubControl Kvantum::hitTestComplexControl ( ComplexControl control, const QStyleOptionComplex * option, const QPoint & position, const QWidget * widget) const
+QCommonStyle::SubControl Kvantum::hitTestComplexControl (ComplexControl control,
+                                                         const QStyleOptionComplex *option,
+                                                         const QPoint &position,
+                                                         const QWidget *widget) const
 {
+  prePolish(widget);
+
   return QCommonStyle::hitTestComplexControl(control,option,position,widget);
 }
 
-QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option, const QSize & contentsSize, const QWidget * widget) const
+QSize Kvantum::sizeFromContents (ContentsType type,
+                                 const QStyleOption *option,
+                                 const QSize &contentsSize,
+                                 const QWidget *widget) const
 {
+  prePolish(widget);
+
   if (!option)
     return contentsSize;
 
@@ -5206,7 +5377,7 @@ QSize Kvantum::sizeFromContents ( ContentsType type, const QStyleOption * option
 
         if (widget)
         {
-          const QToolButton * tb = qobject_cast<const QToolButton *>(widget);
+          const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
           if (tb)
           {
             if (tb->popupMode() == QToolButton::MenuButtonPopup)
@@ -5510,8 +5681,10 @@ QSize Kvantum::textSize (const QFont &font, const QString &text) const
   return QSize(tw,th);
 }
 
-QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, const QWidget * widget) const
+QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const
 {
+  prePolish(widget);
+
   switch (element) {
     case SE_CheckBoxFocusRect :
     case SE_RadioButtonFocusRect :
@@ -5558,7 +5731,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       /* no frame when editing itemview texts */
-      if (qobject_cast< const QAbstractItemView* >(getParent(widget,2)))
+      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
@@ -5736,8 +5909,13 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption * option, c
   }
 }
 
-QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex * option, SubControl subControl, const QWidget * widget) const
+QRect Kvantum::subControlRect(ComplexControl control,
+                              const QStyleOptionComplex *option,
+                              SubControl subControl,
+                              const QWidget *widget) const
 {
+  prePolish(widget);
+
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
 
@@ -6083,7 +6261,7 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
           {
             if (widget)
             {
-              const QToolButton * tb = qobject_cast<const QToolButton *>(widget);
+              const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
               if (tb)
               {
                 if (tb->popupMode() == QToolButton::MenuButtonPopup)
@@ -6145,7 +6323,7 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
           {
             if (widget)
             {
-              const QToolButton * tb = qobject_cast<const QToolButton *>(widget);
+              const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
               if (tb)
               {
                 bool rtl(opt->direction == Qt::RightToLeft);
@@ -6250,11 +6428,17 @@ QRect Kvantum::subControlRect(ComplexControl control, const QStyleOptionComplex 
 }
 
 #if QT_VERSION < 0x050000
-QIcon Kvantum::standardIconImplementation ( QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget ) const
+QIcon Kvantum::standardIconImplementation (QStyle::StandardPixmap standardIcon,
+                                           const QStyleOption *option,
+                                           const QWidget *widget) const
 #else
-QIcon Kvantum::standardIcon ( QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget ) const
+QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
+                             const QStyleOption *option,
+                             const QWidget *widget ) const
 #endif
 {
+  prePolish(widget);
+
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
       int s = pixelMetric(PM_ToolBarExtensionExtent);
@@ -6450,14 +6634,14 @@ QIcon Kvantum::standardIcon ( QStyle::StandardPixmap standardIcon, const QStyleO
 #endif
 }
 
-QRect Kvantum::squaredRect(const QRect& r) const {
+QRect Kvantum::squaredRect(const QRect &r) const {
   int e = (r.width() > r.height()) ? r.height() : r.width();
   return QRect(r.x(),r.y(),e,e);
 }
 
-bool Kvantum::renderElement(QPainter* painter,
-                            const QString& element,
-                            const QRect& bounds, int hsize, int vsize,
+bool Kvantum::renderElement(QPainter *painter,
+                            const QString &element,
+                            const QRect &bounds, int hsize, int vsize,
                             Qt::Orientation orientation) const
 {
   Q_UNUSED(orientation);
@@ -6534,9 +6718,9 @@ bool Kvantum::renderElement(QPainter* painter,
   return true;
 }
 
-void Kvantum::renderSliderTick(QPainter* painter,
-                               const QString& element,
-                               const QRect& ticksRect,
+void Kvantum::renderSliderTick(QPainter *painter,
+                               const QString &element,
+                               const QRect &ticksRect,
                                const int interval,
                                const int available,
                                const int min,
@@ -7038,7 +7222,7 @@ inline label_spec Kvantum::getLabelSpec(const QString &widgetName) const
   return settings->getLabelSpec(widgetName);
 }
 
-inline size_spec Kvantum::getSizeSpec(const QString& widgetName) const
+inline size_spec Kvantum::getSizeSpec(const QString &widgetName) const
 {
   return settings->getSizeSpec(widgetName);
 }

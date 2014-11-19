@@ -32,6 +32,7 @@ private slots:
     void copyDefaultTheme (QString name);
     void wrtieConfig();
     void restoreDefault();
+    void transparency (bool checked);
 
 private:
     void closeEvent (QCloseEvent *event);

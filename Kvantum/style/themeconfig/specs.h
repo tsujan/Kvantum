@@ -21,7 +21,8 @@
 #ifndef SPEC_H
 #define SPEC_H
 
-#include <QString>
+//#include <QString>
+#include <QStringList>
 //#include <QDebug>
 
 /* Generic information about a theme */
@@ -51,6 +52,10 @@ typedef struct {
      (for now, only translucent menus
      or tooltips and their shadows) */
   bool composite;
+  /* do we have translucent windows and dialogs? */
+  bool translucent_windows;
+  /* list of apps that shouldn't have window translucency */
+  QStringList opaque;
   /* depth of menu shadows */
   int menu_shadow_depth;
   /* depth of tooltip shadows */
@@ -233,6 +238,8 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.group_toolbar_buttons = false;
   tspec.spread_progressbar = false;
   tspec.composite = false;
+  tspec.translucent_windows = false;
+  tspec.opaque = QStringList() << "kscreenlocker" << "wine";
   tspec.menu_shadow_depth = 0;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;

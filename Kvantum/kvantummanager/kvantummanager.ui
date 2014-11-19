@@ -391,9 +391,9 @@ this theme instead of its default theme.</string>
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-95</y>
+         <y>0</y>
          <width>433</width>
-         <height>232</height>
+         <height>275</height>
         </rect>
        </property>
        <attribute name="label">
@@ -507,11 +507,101 @@ Kvantum theme
           <property name="title">
            <string>General Keys</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <layout class="QGridLayout" name="gridLayout_5">
            <property name="topMargin">
             <number>10</number>
            </property>
-           <item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="opaqueEdit">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables,
+whose windows should not be translucent.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="opaqueLabel">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables
+whose windows should not be translucent.</string>
+             </property>
+             <property name="text">
+              <string>Opaque apps:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox8">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+             </property>
+             <property name="text">
+              <string>X11 drag</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox7">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Active tab is detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Attach active tab to tab widget</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox6">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Inactive tabs are detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Join inactive tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox5">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Tabs are centered by default.</string>
+             </property>
+             <property name="text">
+              <string>Left aligned tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox4">
              <property name="font">
               <font>
@@ -527,64 +617,18 @@ not have shadow or translucency.</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox5">
+           <item row="5" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox9">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Tabs are centered by default.</string>
+              <string>Needs a translucent SVG background for windows.</string>
              </property>
              <property name="text">
-              <string>Left aligned tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox6">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Inactive tabs are detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Join inactive tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox7">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Active tab is detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Attach active tab to tab widget</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox8">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-             </property>
-             <property name="text">
-              <string>X11 drag</string>
+              <string>Translucent windows</string>
              </property>
             </widget>
            </item>

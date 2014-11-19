@@ -83,7 +83,7 @@
        <item row="0" column="0">
         <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>simple push button</string>
+          <string>Simple push button</string>
          </property>
         </widget>
        </item>
@@ -93,14 +93,14 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>simple push button</string>
+          <string>Simple push button</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="pushButton_4">
          <property name="text">
-          <string>toggle push button</string>
+          <string>Toggle push button</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -116,7 +116,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toggle push button</string>
+          <string>Toggle push button</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -129,7 +129,7 @@
        <item row="2" column="0">
         <widget class="QPushButton" name="pushButton_2">
          <property name="text">
-          <string>multi line
+          <string>Multi-line
  push button</string>
          </property>
         </widget>
@@ -140,7 +140,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>multi line
+          <string>Multi-line
  push button</string>
          </property>
         </widget>
@@ -148,7 +148,7 @@
        <item row="3" column="0">
         <widget class="QPushButton" name="pushButton_3">
          <property name="text">
-          <string>push button
+          <string>Push button
 with icon</string>
          </property>
          <property name="icon">
@@ -169,7 +169,7 @@ with icon</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>push button
+          <string>Push button
 with icon</string>
          </property>
          <property name="icon">
@@ -360,7 +360,7 @@ push button</string>
        <item row="0" column="0">
         <widget class="QToolButton" name="toolButton">
          <property name="text">
-          <string>simple toolbutton</string>
+          <string>Simple toolbutton</string>
          </property>
         </widget>
        </item>
@@ -370,14 +370,14 @@ push button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>simple toolbutton</string>
+          <string>Simple toolbutton</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QToolButton" name="toolButton_2">
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 toolbutton</string>
          </property>
         </widget>
@@ -388,7 +388,7 @@ toolbutton</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 toolbutton</string>
          </property>
         </widget>
@@ -396,7 +396,7 @@ toolbutton</string>
        <item row="2" column="0">
         <widget class="QToolButton" name="toolButton_3">
          <property name="text">
-          <string>toggle toolbutton</string>
+          <string>Toggle toolbutton</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -412,7 +412,7 @@ toolbutton</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toggle toolbutton</string>
+          <string>Toggle toolbutton</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -425,7 +425,7 @@ toolbutton</string>
        <item row="4" column="0">
         <widget class="QToolButton" name="toolButton_5">
          <property name="text">
-          <string>toolbutton with 32x32 icon
+          <string>Toolbutton with 32x32 icon
 and text below</string>
          </property>
          <property name="icon">
@@ -446,7 +446,7 @@ and text below</string>
        <item row="5" column="0">
         <widget class="QToolButton" name="toolButton_6">
          <property name="text">
-          <string>toolbutton with text below
+          <string>Toolbutton with text below
 and arrow</string>
          </property>
          <property name="icon">
@@ -467,7 +467,7 @@ and arrow</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toolbutton with text below
+          <string>Toolbutton with text below
 and arrow</string>
          </property>
          <property name="icon">
@@ -485,7 +485,7 @@ and arrow</string>
        <item row="6" column="0">
         <widget class="QToolButton" name="toolButton_7">
          <property name="text">
-          <string>toolbutton with 16x16 icon beside
+          <string>Toolbutton with 16x16 icon at the side
 and arrow</string>
          </property>
          <property name="icon">
@@ -506,7 +506,7 @@ and arrow</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toolbutton with icon beside
+          <string>Toolbutton with icon at the side
 and arrow</string>
          </property>
          <property name="icon">
@@ -524,7 +524,7 @@ and arrow</string>
        <item row="7" column="0">
         <widget class="QToolButton" name="toolButton_8">
          <property name="text">
-          <string>toolbutton with 16x16 icon beside
+          <string>Toolbutton with 16x16 icon at the side
 and arrow
 and menu popup button</string>
          </property>
@@ -549,7 +549,7 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toolbutton with icon beside
+          <string>Toolbutton with icon at the side
 and arrow
 and menu popup button</string>
          </property>
@@ -574,7 +574,7 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toolbutton with icon
+          <string>Toolbutton with icon
 and text below</string>
          </property>
          <property name="icon">
@@ -598,7 +598,7 @@ and text below</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>toolbutton with icon
+          <string>Toolbutton with icon
 beside text</string>
          </property>
          <property name="icon">
@@ -619,7 +619,7 @@ beside text</string>
        <item row="3" column="0">
         <widget class="QToolButton" name="toolButton_4">
          <property name="text">
-          <string>toolbutton with 32x32 icon
+          <string>Toolbutton with 32x32 icon
 beside text</string>
          </property>
          <property name="icon">
@@ -664,7 +664,7 @@ beside text</string>
        <item row="0" column="1">
         <widget class="QRadioButton" name="radioButton">
          <property name="text">
-          <string>simple radio button</string>
+          <string>Simple radio button</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -677,7 +677,7 @@ beside text</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>simple radio button</string>
+          <string>Simple radio button</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -690,7 +690,7 @@ beside text</string>
        <item row="1" column="1">
         <widget class="QRadioButton" name="radioButton_3">
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 radio button</string>
          </property>
         </widget>
@@ -701,7 +701,7 @@ radio button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 radio button</string>
          </property>
          <property name="autoExclusive">
@@ -712,7 +712,7 @@ radio button</string>
        <item row="2" column="1">
         <widget class="QRadioButton" name="radioButton_2">
          <property name="text">
-          <string>radio button with icon</string>
+          <string>Radio button with icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -732,7 +732,7 @@ radio button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>radio button with icon</string>
+          <string>Radio button with icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -752,7 +752,7 @@ radio button</string>
        <item row="3" column="1">
         <widget class="QCheckBox" name="checkBox">
          <property name="text">
-          <string>simple check box</string>
+          <string>Simple check box</string>
          </property>
         </widget>
        </item>
@@ -762,7 +762,7 @@ radio button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>simple check box</string>
+          <string>Simple check box</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -772,7 +772,7 @@ radio button</string>
        <item row="4" column="1">
         <widget class="QCheckBox" name="checkBox_2">
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 check box</string>
          </property>
         </widget>
@@ -783,7 +783,7 @@ check box</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>multi line
+          <string>Multi-line
 check box</string>
          </property>
         </widget>
@@ -791,7 +791,7 @@ check box</string>
        <item row="5" column="1">
         <widget class="QCheckBox" name="checkBox_7">
          <property name="text">
-          <string>tri-state check box</string>
+          <string>Tri-state check box</string>
          </property>
          <property name="tristate">
           <bool>true</bool>
@@ -804,7 +804,7 @@ check box</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>tri-state check box</string>
+          <string>Tri-state check box</string>
          </property>
          <property name="tristate">
           <bool>true</bool>
@@ -814,7 +814,7 @@ check box</string>
        <item row="6" column="1">
         <widget class="QCheckBox" name="checkBox_3">
          <property name="text">
-          <string>check box with icon</string>
+          <string>Check box with icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -834,7 +834,7 @@ check box</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>check box with icon</string>
+          <string>Check box with icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -941,7 +941,7 @@ check box</string>
         <widget class="QComboBox" name="comboBox">
          <item>
           <property name="text">
-           <string>standard combo box</string>
+           <string>Standard combo box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -977,7 +977,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string>standard combo box</string>
+           <string>Standard combo box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1013,7 +1013,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> without frame</string>
+           <string> Without frame</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1052,7 +1052,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> without frame</string>
+           <string> Without frame</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1088,7 +1088,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string>editable combo box</string>
+           <string>Editable combo box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1127,7 +1127,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string>editable combo box</string>
+           <string>Editable combo box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1166,7 +1166,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> without frame</string>
+           <string> Without frame</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1208,7 +1208,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> without frame</string>
+           <string> Without frame</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1332,7 +1332,7 @@ check box</string>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Sliders/Scrolls/Progress/Dials</string>
+     <string>Sliders/Scrolls/Progress/Dial</string>
     </attribute>
     <layout class="QGridLayout" name="gridLayout_12">
      <item row="1" column="0" rowspan="3">
