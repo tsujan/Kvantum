@@ -645,6 +645,12 @@ void KvantumManager::wrtieConfig()
         themeSettings.endGroup();
 
         themeSettings.beginGroup ("General");
+        bool translucenceChanged = false;
+        if (themeSettings.value ("composite").toBool() == ui->checkBox4->isChecked()
+            || themeSettings.value ("translucent_windows").toBool() != ui->checkBox9->isChecked())
+        {
+            translucenceChanged = true;
+        }
         themeSettings.setValue ("composite", !ui->checkBox4->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBox5->isChecked());
         themeSettings.setValue ("joined_tabs", ui->checkBox6->isChecked());
@@ -674,7 +680,8 @@ void KvantumManager::wrtieConfig()
             showAnimated (ui->configLabel, 1000);
         }
 
-        QApplication::setStyle (QStyleFactory::create ("kvantum"));
+        if (translucenceChanged)
+            QApplication::setStyle (QStyleFactory::create ("kvantum"));
         int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
         resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
         if (process->state() == QProcess::Running)
