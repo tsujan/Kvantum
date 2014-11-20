@@ -45,6 +45,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QLabel>
+#include <QPixmapCache> 
 //#include <QBitmap>
 #include <QPaintEvent>
 #include <QtCore/qmath.h>
@@ -670,8 +671,6 @@ void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
     return; // Plasma FIXME needed?
   QRect bgndRect(widget->rect());
   interior_spec ispec = getInteriorSpec("Window");
-  // TODO find a way to add texture
-  ispec.px = ispec.py = 0;
   frame_spec fspec;
   default_frame_spec(fspec);
 
@@ -854,8 +853,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         break;
 
       interior_spec ispec = getInteriorSpec("Window");
-      // TODO find a way to add texture
-      ispec.px = ispec.py = 0;
       frame_spec fspec;
       default_frame_spec(fspec);
 
@@ -6682,48 +6679,26 @@ bool Kvantum::renderElement(QPainter *painter,
 
   if (renderer)
   {
-    int x,y,h,w;
-    bounds.getRect(&x,&y,&w,&h);
-
     if (hsize > 0 || vsize > 0)
     {
-      if (hsize > 0 && vsize <= 0)
+      QString str = QString("%1-%2-%3").arg(element_)
+                                       .arg(QString().setNum(hsize))
+                                       .arg(QString().setNum(vsize));
+      QPixmap pixmap;
+      if (!QPixmapCache::find(str, &pixmap))
       {
-        int hpatterns = (w/hsize)+1;
-
-        painter->save();
-        painter->setClipRect(QRect(x,y,w,h));
-        for (int i=0; i<hpatterns; i++)
-          renderer->render(painter,element_,QRect(x+i*hsize,y,hsize,h));
-        painter->restore();
+        pixmap = QPixmap (hsize > 0 ? hsize : bounds.width(), vsize > 0 ? vsize : bounds.height());
+        pixmap.fill(QColor(Qt::transparent));
+        QPainter p;
+        p.begin(&pixmap);
+        renderer->render(&p,element_);
+        p.end();
+        QPixmapCache::insert(str, pixmap);
       }
-      else if (hsize <= 0 && vsize > 0)
-      {
-        int vpatterns = (h/vsize)+1;
-
-        painter->save();
-        painter->setClipRect(QRect(x,y,w,h));
-        for (int i=0; i<vpatterns; i++)
-          renderer->render(painter,element_,QRect(x,y+i*vsize,w,vsize));
-        painter->restore();
-      }
-      else if (hsize > 0 && vsize > 0)
-      {
-        int hpatterns = (w/hsize)+1;
-        int vpatterns = (h/vsize)+1;
-
-        painter->save();
-        painter->setClipRect(bounds);
-        for (int i=0; i<hpatterns; i++)
-        {
-          for (int j=0; j<vpatterns; j++)
-            renderer->render(painter,element_,QRect(x+i*hsize,y+j*vsize,hsize,vsize));
-        }
-        painter->restore();
-      }
+      painter->drawTiledPixmap(bounds,pixmap);
     }
     else
-      renderer->render(painter,element_,QRect(x,y,w,h));
+      renderer->render(painter,element_,bounds);
   }
 
   return true;

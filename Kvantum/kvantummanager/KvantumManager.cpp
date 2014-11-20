@@ -720,6 +720,8 @@ void KvantumManager::restoreDefault()
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
     statusLabel->setText (tr ("<b>Active theme:</b> Kvantum (default)"));
     ui->statusBar->showMessage (tr ("Removed the (modified) copy of the default theme."), 10000);
+
+    QApplication::setStyle (QStyleFactory::create ("kvantum"));
 }
 /*************************/
 void KvantumManager::transparency (bool checked)

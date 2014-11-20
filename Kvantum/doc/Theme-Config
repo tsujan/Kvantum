@@ -339,10 +339,6 @@ interior                          true/false          Draw an interior for
 
 interior.repeat.x.patternsize
 interior.repeat.y.patternsize     integer             The interior pattern sizes.
-                                                      If you use patterns, set these
-                                                      to >= 50 for large areas
-                                                      because otherwise, CPU usage
-                                                      might get high.
 
 indicator.size                    integer             Some widgets, like scrollbar
                                                       arrows, have indicators. This

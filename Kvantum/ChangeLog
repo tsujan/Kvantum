@@ -1,3 +1,7 @@
+V0.8.3
+---------
+ * Use drawTiledPixmap() and QPixmapCache to render patterns. In this way, windows can have texture too.
+
 V0.8.2
 ---------
  * Added support for translucent windows and dialogs.
