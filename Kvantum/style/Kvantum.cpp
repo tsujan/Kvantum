@@ -6681,13 +6681,15 @@ bool Kvantum::renderElement(QPainter *painter,
   {
     if (hsize > 0 || vsize > 0)
     {
+      int width = hsize > 0 ? hsize : bounds.width();
+      int height = vsize > 0 ? vsize : bounds.height();
       QString str = QString("%1-%2-%3").arg(element_)
-                                       .arg(QString().setNum(hsize))
-                                       .arg(QString().setNum(vsize));
+                                       .arg(QString().setNum(width))
+                                       .arg(QString().setNum(height));
       QPixmap pixmap;
       if (!QPixmapCache::find(str, &pixmap))
       {
-        pixmap = QPixmap (hsize > 0 ? hsize : bounds.width(), vsize > 0 ? vsize : bounds.height());
+        pixmap = QPixmap (width, height);
         pixmap.fill(QColor(Qt::transparent));
         QPainter p;
         p.begin(&pixmap);
