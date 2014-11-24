@@ -33,6 +33,7 @@ private slots:
     void wrtieConfig();
     void restoreDefault();
     void transparency (bool checked);
+    void aboutDialog();
 
 private:
     void closeEvent (QCloseEvent *event);

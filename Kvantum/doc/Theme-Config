@@ -218,6 +218,13 @@ opaque                            string list         A comma-separated list of
                                                       meaning only if translucent_windows
                                                       is set to true.
 
+blurring                          true/false          Blur the screen area behind
+                                                      translucent windows in KDE? This
+                                                      needs KDE blur effect and also a
+                                                      graphic card that supports it. It
+                                                      has no effect when "composite" or
+                                                      "translucent_windows" is false.
+
 splitter_width                    integer             The width of splitter handles.
 
 scroll_width                      integer             The width of scrollbars. The

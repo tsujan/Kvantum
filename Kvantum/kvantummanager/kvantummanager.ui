@@ -26,59 +26,7 @@
     <property name="topMargin">
      <number>10</number>
     </property>
-    <item row="2" column="1" alignment="Qt::AlignRight">
-     <widget class="QPushButton" name="quit">
-      <property name="toolTip">
-       <string>Ctrl+Q</string>
-      </property>
-      <property name="text">
-       <string>Quit</string>
-      </property>
-      <property name="icon">
-       <iconset theme="application-exit">
-        <normaloff/>
-       </iconset>
-      </property>
-      <property name="shortcut">
-       <string>Ctrl+Q</string>
-      </property>
-      <property name="autoDefault">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" alignment="Qt::AlignLeft">
-     <widget class="QPushButton" name="preview">
-      <property name="toolTip">
-       <string>Preview the active theme
-or update its preview.</string>
-      </property>
-      <property name="text">
-       <string>Preview</string>
-      </property>
-      <property name="icon">
-       <iconset resource="kvantummanager.qrc">
-        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>30</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="0" colspan="2">
+    <item row="0" column="0" colspan="3">
      <widget class="QToolBox" name="toolBox">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -393,7 +341,7 @@ this theme instead of its default theme.</string>
          <x>0</x>
          <y>0</y>
          <width>433</width>
-         <height>275</height>
+         <height>294</height>
         </rect>
        </property>
        <attribute name="label">
@@ -511,51 +459,6 @@ Kvantum theme
            <property name="topMargin">
             <number>10</number>
            </property>
-           <item row="6" column="1">
-            <widget class="QLineEdit" name="opaqueEdit">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables,
-whose windows should not be translucent.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="opaqueLabel">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables
-whose windows should not be translucent.</string>
-             </property>
-             <property name="text">
-              <string>Opaque apps:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox8">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-             </property>
-             <property name="text">
-              <string>X11 drag</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox7">
              <property name="font">
@@ -609,8 +512,8 @@ whose windows should not be translucent.</string>
               </font>
              </property>
              <property name="toolTip">
-              <string>If checked, menus and tooltips will
-not have shadow or translucency.</string>
+              <string>If checked, menus, tooltips and windows
+will not have translucency or shadow.</string>
              </property>
              <property name="text">
               <string>Disable composite effects</string>
@@ -629,6 +532,67 @@ not have shadow or translucency.</string>
              </property>
              <property name="text">
               <string>Translucent windows</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="opaqueLabel">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables
+whose windows should not be translucent.</string>
+             </property>
+             <property name="text">
+              <string>Opaque apps:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox8">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+             </property>
+             <property name="text">
+              <string>X11 drag</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="opaqueEdit">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables,
+whose windows should not be translucent.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox10">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Needs KDE blur effect and a
+graphic card that supports it.</string>
+             </property>
+             <property name="text">
+              <string>Blurring for translucent windows</string>
              </property>
             </widget>
            </item>
@@ -655,8 +619,8 @@ not have shadow or translucency.</string>
            </font>
           </property>
           <property name="toolTip">
-           <string>Uncheck the three boxes below if you want
-all widgets to appear as they are by default.</string>
+           <string>Uncheck these three boxes if you want all
+widgets to appear as they are by default.</string>
           </property>
           <property name="title">
            <string>Hacking Keys</string>
@@ -716,6 +680,68 @@ Kvantum can try to correct their behavior.</string>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>30</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="2" alignment="Qt::AlignRight">
+     <widget class="QPushButton" name="quit">
+      <property name="toolTip">
+       <string>Ctrl+Q</string>
+      </property>
+      <property name="text">
+       <string>Quit</string>
+      </property>
+      <property name="icon">
+       <iconset theme="application-exit">
+        <normaloff/>
+       </iconset>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+Q</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" alignment="Qt::AlignLeft">
+     <widget class="QPushButton" name="preview">
+      <property name="toolTip">
+       <string>Preview the active theme
+or update its preview.</string>
+      </property>
+      <property name="text">
+       <string>Preview</string>
+      </property>
+      <property name="icon">
+       <iconset resource="kvantummanager.qrc">
+        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" alignment="Qt::AlignHCenter">
+     <widget class="QPushButton" name="aboutButton">
+      <property name="text">
+       <string>About</string>
+      </property>
+      <property name="icon">
+       <iconset theme="help-about"/>
+      </property>
      </widget>
     </item>
    </layout>

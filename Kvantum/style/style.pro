@@ -19,7 +19,8 @@ SOURCES += themeconfig/ThemeConfig.cpp \
            KvantumPlugin.cpp \
            shortcuthandler.cpp \
            drag/x11wmmove.cpp \
-           drag/windowmanager.cpp
+           drag/windowmanager.cpp \
+           blur/blurhelper.cpp
 
 HEADERS += themeconfig/specs.h \
            themeconfig/ThemeConfig.h \
@@ -27,7 +28,8 @@ HEADERS += themeconfig/specs.h \
            KvantumPlugin.h \
            shortcuthandler.h \
            drag/windowmanager.h \
-           drag/x11wmmove.h
+           drag/x11wmmove.h \
+           blur/blurhelper.h
 
 greaterThan(QT_MAJOR_VERSION, 4): OTHER_FILES += kvantum.json
 

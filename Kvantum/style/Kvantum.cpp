@@ -131,16 +131,22 @@ Kvantum::Kvantum() : QCommonStyle()
 
   itsShortcutHandler = NULL;
   itsWindowManager = NULL;
+  blurHelper = NULL;
   const theme_spec tspec = settings->getThemeSpec();
 
   if (tspec.alt_mnemonic)
     itsShortcutHandler = new ShortcutHandler(this);
 
+#if defined Q_WS_X11 || defined Q_OS_LINUX
   if (tspec.x11drag)
   {
     itsWindowManager = new WindowManager(this);
     itsWindowManager->initialize();
   }
+
+  if (tspec.blurring)
+    blurHelper = new BlurHelper(this);
+#endif
 }
 
 Kvantum::~Kvantum()
@@ -362,6 +368,8 @@ void Kvantum::polish(QWidget *widget)
           if (was_visible) widget->hide();
 #endif
           widget->setAttribute(Qt::WA_TranslucentBackground);
+          if (blurHelper)
+            blurHelper->registerWidget(widget);
 #if QT_VERSION < 0x050000
           if (!moved) widget->setAttribute(Qt::WA_Moved, false);
           if (was_visible) widget->show();
@@ -632,6 +640,8 @@ void Kvantum::unpolish(QWidget *widget)
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog: {
+        if (blurHelper)
+          blurHelper->unregisterWidget(widget);
         widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_StyledBackground, false);
         break;

@@ -1,3 +1,7 @@
+V0.8.4
+---------
+ * Blur the screen area behind translucent windows under KDE if possible.
+
 V0.8.3
 ---------
  * Use drawTiledPixmap() and QPixmapCache to render patterns. In this way, windows can have texture too.

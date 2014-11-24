@@ -56,6 +56,8 @@ typedef struct {
   bool translucent_windows;
   /* list of apps that shouldn't have window translucency */
   QStringList opaque;
+  /* blur what is behind translucent windows if possible? */
+  bool blurring;
   /* depth of menu shadows */
   int menu_shadow_depth;
   /* depth of tooltip shadows */
@@ -240,6 +242,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.composite = false;
   tspec.translucent_windows = false;
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";
+  tspec.blurring = false;
   tspec.menu_shadow_depth = 0;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;

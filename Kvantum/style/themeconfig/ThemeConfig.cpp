@@ -21,11 +21,13 @@
 #include <QSettings>
 #include <QFile>
 #include <QStringList>
+#if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
 #if QT_VERSION >= 0x050000
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
+#endif
 #endif
 
 ThemeConfig::ThemeConfig(const QString& theme) :
@@ -292,8 +294,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (!v.toString().isEmpty())
     r.comment = v.toString();
 
+#if defined Q_WS_X11 || defined Q_OS_LINUX
   v = getValue("General","x11drag", empty);
   r.x11drag = v.toBool();
+#endif
 
   v = getValue("General","alt_mnemonic", empty);
   r.alt_mnemonic = v.toBool();
@@ -313,6 +317,7 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","spread_progressbar", empty);
   r.spread_progressbar = v.toBool();
 
+#if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */
 #if QT_VERSION < 0x050000
   if (QX11Info::isCompositingManagerRunning())
@@ -323,20 +328,27 @@ theme_spec ThemeConfig::getThemeSpec() const
     v = getValue("General","composite");
     r.composite = v.toBool();
   }
+#endif
 
-  /* no window translucency without window
-     interior elemenet or without compositing */
-
+  /* no window translucency or blurring without
+     window interior elemenet or without compositing */
   interior_spec ispec = getInteriorSpec("Window");
   if (ispec.hasInterior)
   {
     v = getValue("General","translucent_windows");
     if (v.isValid() && r.composite)
       r.translucent_windows = v.toBool();
+
+    /* no blurring without translucency */
+    if (r.translucent_windows)
+    {
+      v = getValue("General","blurring");
+      if (v.isValid() && r.composite)
+        r.blurring = v.toBool();
+    }
   }
 
   /* no menu/tooltip shadow without compositing */
-
   v = getValue("General","menu_shadow_depth");
   if (v.isValid() && r.composite)
     r.menu_shadow_depth = v.toInt();

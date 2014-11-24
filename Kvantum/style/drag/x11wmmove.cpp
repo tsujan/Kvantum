@@ -4,15 +4,19 @@
 */
 
 #include "x11wmmove.h"
+#if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <QX11Info>
+#endif
 
+#if defined Q_WS_X11 || defined Q_OS_LINUX
 static Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZE", False);
+#endif
 
-void
-X11MoveTrigger (WId wid, int x, int y)
+void X11MoveTrigger (WId wid, int x, int y)
 {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
 #if QT_VERSION < 0x050000
   QX11Info info;
 #endif
@@ -37,4 +41,8 @@ X11MoveTrigger (WId wid, int x, int y)
               False,
               SubstructureRedirectMask | SubstructureNotifyMask,
               &xev);
+#else
+  Q_UNUSED (wid); Q_UNUSED (x); Q_UNUSED (y);
+#endif
+  return;
 }

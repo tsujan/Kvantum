@@ -25,6 +25,7 @@
 #include "shortcuthandler.h"
 #include "drag/windowmanager.h"
 #include "themeconfig/specs.h"
+#include "blur/blurhelper.h"
 
 class QSvgRenderer;
 class QSettings;
@@ -233,6 +234,7 @@ class Kvantum : public QCommonStyle {
 
     ShortcutHandler *itsShortcutHandler;
     WindowManager *itsWindowManager;
+    BlurHelper* blurHelper;
 
     /* Set theme dependencies. */
     void setupThemeDeps();

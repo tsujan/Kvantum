@@ -92,8 +92,6 @@ bool ShortcutHandler::eventFilter(QObject *o, QEvent *e)
                 for (int pos = 0;pos < l.size();++pos) {
                     QWidget *w = l.at(pos);
                     if (!(w->isWindow() || !w->isVisible())) {
-                        // || w->style()->styleHint(
-                        //     QStyle::SH_UnderlineShortcut, 0, w)))
                         updateWidget(w);
                     }
                 }

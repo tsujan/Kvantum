@@ -48,6 +48,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
+    connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
 }
 /*************************/
 KvantumManager::~KvantumManager()
@@ -394,6 +395,7 @@ void KvantumManager::tabChanged (int index)
             ui->checkBox7->setChecked (false);
             ui->checkBox8->setChecked (true);
             ui->checkBox9->setChecked (false);
+            ui->checkBox10->setChecked (false);
             ui->opaqueLabel->setEnabled (false);
             ui->opaqueEdit->setEnabled (false);
         }
@@ -444,6 +446,11 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBox9->setChecked (translucency);
                 ui->opaqueLabel->setEnabled (translucency);
                 ui->opaqueEdit->setEnabled (translucency);
+                ui->checkBox10->setEnabled (translucency);
+                if (themeSettings.contains ("blurring"))
+                    ui->checkBox10->setChecked (themeSettings.value ("blurring").toBool());
+                else
+                    ui->checkBox10->setChecked (false);
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
@@ -657,6 +664,7 @@ void KvantumManager::wrtieConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
+        themeSettings.setValue ("blurring", ui->checkBox10->isChecked());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
@@ -712,6 +720,7 @@ void KvantumManager::restoreDefault()
     ui->checkBox7->setChecked (false);
     ui->checkBox8->setChecked (true);
     ui->checkBox9->setChecked (false);
+    ui->checkBox10->setChecked (false);
     ui->opaqueLabel->setEnabled (false);
     ui->opaqueEdit->setEnabled (false);
 
@@ -727,5 +736,15 @@ void KvantumManager::restoreDefault()
 void KvantumManager::transparency (bool checked)
 {
     ui->opaqueLabel->setEnabled (checked);
-    ui->opaqueEdit->setEnabled (checked);    
+    ui->opaqueEdit->setEnabled (checked); 
+    ui->checkBox10->setEnabled (checked); 
+}
+/*************************/
+void KvantumManager::aboutDialog()
+{
+    QMessageBox::about (this, tr ("About Kvantum Manager"),
+                        tr ("<center><b><big>Kvantum Manager 0.8.4</big></b></center><br>"\
+                        "<center>A tool for intsalling, selecting and</center>\n"\
+                        "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
+                        "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));
 }
