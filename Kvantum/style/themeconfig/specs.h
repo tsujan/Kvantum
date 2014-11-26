@@ -106,6 +106,8 @@ typedef struct {
   /* don't draw any background or frame for Dolphin's
      view (nice when the window bg has a gradient) */
   bool transparent_dolphin_view;
+  /* blur the region behind Konsole's transparent background? */
+  bool blur_konsole;
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
   bool transparent_ktitle_label;
@@ -278,6 +280,7 @@ static inline void default_color_spec(color_spec &cspec) {
 /* Fills the hacks spec with default values */
 static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
+  hspec.blur_konsole = false;
   hspec.transparent_ktitle_label = false;
   hspec.respect_darkness = false;
 }

@@ -123,6 +123,7 @@ Kvantum::Kvantum() : QCommonStyle()
   isLibreoffice = false;
   isSystemSettings = false;
   isDolphin = false;
+  isKonsole = false;
   subApp = false;
   isOpaque = false;
 
@@ -347,12 +348,15 @@ void Kvantum::polish(QWidget *widget)
         widget->setAttribute(Qt::WA_StyledBackground);
         const theme_spec tspec = settings->getThemeSpec();
         /* take all precautions */
-        if (tspec.translucent_windows
+        if (((tspec.translucent_windows
+              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+              && !widget->testAttribute(Qt::WA_NoSystemBackground))
+             /* enable blurring for Konsole's main window if it's transparent */
+             || (isKonsole && hspec.blur_konsole
+                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
             && !isPlasma && !isOpaque && !subApp && !isLibreoffice
             && widget->isWindow()
             && widget->windowType() != Qt::Desktop
-            && !widget->testAttribute(Qt::WA_TranslucentBackground)
-            && !widget->testAttribute(Qt::WA_NoSystemBackground)
             && !widget->testAttribute(Qt::WA_PaintOnScreen)
             && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
             && !widget->inherits("KScreenSaver")
@@ -367,13 +371,36 @@ void Kvantum::polish(QWidget *widget)
           bool moved = widget->testAttribute(Qt::WA_Moved);
           if (was_visible) widget->hide();
 #endif
+
           widget->setAttribute(Qt::WA_TranslucentBackground);
-          if (blurHelper)
-            blurHelper->registerWidget(widget);
+
 #if QT_VERSION < 0x050000
           if (!moved) widget->setAttribute(Qt::WA_Moved, false);
           if (was_visible) widget->show();
 #endif
+
+          /* enable blurring... */
+          if (blurHelper
+              /* ... but not for Konsole's dialogs if
+                 blurring isn't enabled for translucent windows */
+              && tspec.blurring)
+          {
+            blurHelper->registerWidget(widget);
+          }
+          /* enable blurring for Konsole... */
+          else if (isKonsole// && hspec.blur_konsole
+                   /* ... but only for its main window */
+                   //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
+                   && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
+          {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+            if (!blurHelper)
+              blurHelper = new BlurHelper(this);
+#endif
+            if (blurHelper)
+              blurHelper->registerWidget(widget);
+          }
+
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
           translucentTopWidgets.insert(widget);
@@ -517,6 +544,8 @@ void Kvantum::polish(QApplication *app)
     subApp = true;
   else if (appName == "dolphin")
     isDolphin = true;
+  else if (appName == "konsole")
+    isKonsole = true;
   else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")

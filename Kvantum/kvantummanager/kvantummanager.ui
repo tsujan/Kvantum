@@ -340,7 +340,7 @@ this theme instead of its default theme.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>433</width>
+         <width>447</width>
          <height>294</height>
         </rect>
        </property>
@@ -619,7 +619,7 @@ graphic card that supports it.</string>
            </font>
           </property>
           <property name="toolTip">
-           <string>Uncheck these three boxes if you want all
+           <string>Uncheck these four boxes if you want all
 widgets to appear as they are by default.</string>
           </property>
           <property name="title">
@@ -641,6 +641,22 @@ widgets to appear as they are by default.</string>
              </property>
              <property name="text">
               <string>Transparent Dolphin view</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="konsoleCheckBox">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Blur the region behind Konsole's
+transparent screen if possible.</string>
+             </property>
+             <property name="text">
+              <string>Blurring for Konsole</string>
              </property>
             </widget>
            </item>
@@ -740,7 +756,9 @@ or update its preview.</string>
        <string>About</string>
       </property>
       <property name="icon">
-       <iconset theme="help-about"/>
+       <iconset theme="help-about">
+        <normaloff/>
+       </iconset>
       </property>
      </widget>
     </item>

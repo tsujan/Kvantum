@@ -387,6 +387,7 @@ void KvantumManager::tabChanged (int index)
 
             ui->restoreButton->hide();
             ui->checkBox1->setChecked (false);
+            ui->konsoleCheckBox->setChecked (false);
             ui->checkBox2->setChecked (false);
             ui->checkBox3->setChecked (true);
             ui->checkBox4->setChecked (false);
@@ -455,6 +456,7 @@ void KvantumManager::tabChanged (int index)
 
                 themeSettings.beginGroup ("Hacks");
                 ui->checkBox1->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
+                ui->konsoleCheckBox->setChecked (themeSettings.value ("blur_konsole").toBool());
                 ui->checkBox2->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBox3->setChecked (themeSettings.value ("respect_darkness").toBool());
                 themeSettings.endGroup();
@@ -647,6 +649,7 @@ void KvantumManager::wrtieConfig()
         }
         themeSettings.beginGroup ("Hacks");
         themeSettings.setValue ("transparent_dolphin_view", ui->checkBox1->isChecked());
+        themeSettings.setValue ("blur_konsole", ui->konsoleCheckBox->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBox2->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBox3->isChecked());
         themeSettings.endGroup();
@@ -712,6 +715,7 @@ void KvantumManager::restoreDefault()
     /* correct buttons */
     ui->restoreButton->hide();
     ui->checkBox1->setChecked (false);
+    ui->konsoleCheckBox->setChecked (false);
     ui->checkBox2->setChecked (false);
     ui->checkBox3->setChecked (true);
     ui->checkBox4->setChecked (false);
@@ -736,8 +740,8 @@ void KvantumManager::restoreDefault()
 void KvantumManager::transparency (bool checked)
 {
     ui->opaqueLabel->setEnabled (checked);
-    ui->opaqueEdit->setEnabled (checked); 
-    ui->checkBox10->setEnabled (checked); 
+    ui->opaqueEdit->setEnabled (checked);
+    ui->checkBox10->setEnabled (checked);
 }
 /*************************/
 void KvantumManager::aboutDialog()

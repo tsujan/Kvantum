@@ -1,4 +1,4 @@
-Please define the colors with qtconfig-qt4 as follows if you use Kvantum OUTSIDE KDE!
+You could define the colors with qtconfig-qt4 as follows if you use Kvantum OUTSIDE KDE but that is not necessary:
 
                 Active Palette            Inactive Palette
 
