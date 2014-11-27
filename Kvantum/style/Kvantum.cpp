@@ -560,10 +560,11 @@ void Kvantum::polish(QApplication *app)
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
-     The documentation for QApplication::setPalette() is ambiguous. */
-  /*QPalette palette = app->palette();
+     The documentation for QApplication::setPalette() is ambiguous
+     but, at least outside KDE and with Qt4, it's sometimes needed. */
+  QPalette palette = app->palette();
   polish(palette);
-  app->setPalette(palette);*/
+  app->setPalette(palette);
 
   QCommonStyle::polish(app);
   if (itsShortcutHandler)

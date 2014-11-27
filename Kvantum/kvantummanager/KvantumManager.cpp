@@ -334,6 +334,8 @@ void KvantumManager::useTheme()
     ui->statusBar->showMessage (tr ("Theme changed to %1.").arg (theme), 10000);
     showAnimated (ui->usageLabel, 1000);
 
+    /* this is needed if the config file is created by this method */
+    QCoreApplication::processEvents();
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
     int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
     resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
