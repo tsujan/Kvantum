@@ -1767,8 +1767,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_PanelLineEdit : {
       /* don't draw the interior or frame of a Plasma spinbox */
-      if (widget && (!widget->parentWidget()
-                     || widget->parentWidget()->testAttribute(Qt::WA_NoSystemBackground)))
+      if (isPlasma && widget
+          && (!widget->parentWidget()
+              || widget->parentWidget()->testAttribute(Qt::WA_NoSystemBackground)))
       {
         break;
       }

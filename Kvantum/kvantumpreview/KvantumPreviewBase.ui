@@ -1611,7 +1611,7 @@ check box</string>
           </size>
          </property>
          <property name="value">
-          <number>75</number>
+          <number>25</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1630,7 +1630,7 @@ check box</string>
           </size>
          </property>
          <property name="value">
-          <number>75</number>
+          <number>25</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1662,7 +1662,7 @@ check box</string>
           </size>
          </property>
          <property name="value">
-          <number>24</number>
+          <number>25</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1719,8 +1719,11 @@ check box</string>
            <height>70</height>
           </size>
          </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
          <property name="sliderPosition">
-          <number>0</number>
+          <number>25</number>
          </property>
          <property name="notchesVisible">
           <bool>true</bool>
@@ -1736,7 +1739,7 @@ check box</string>
           </size>
          </property>
          <property name="value">
-          <number>24</number>
+          <number>25</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2890,6 +2893,102 @@ and tooltips</string>
     <hint type="destinationlabel">
      <x>399</x>
      <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_2</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_3</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>496</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_5</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_6</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>216</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_9</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>388</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dial</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar_10</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>411</x>
+     <y>392</y>
     </hint>
    </hints>
   </connection>
