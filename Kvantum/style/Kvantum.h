@@ -204,11 +204,11 @@ class Kvantum : public QCommonStyle {
     /* Return a normalized rect, i.e. a square. */
     QRect squaredRect(const QRect &r) const;
 
-    /* Return a QRect for the given frame without margins. */
+    /* Return the remaining QRect after subtracting the frames. */
     QRect interiorRect(const QRect &bounds, frame_spec f) const {
       return bounds.adjusted(f.left,f.top,-f.right,-f.bottom);
     }
-    /* Return a QRect for the given frame and text specs. */
+    /* Return the remaining QRect after subtracting the frames and text margins. */
     QRect labelRect(const QRect &bounds, frame_spec f,label_spec t) const {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);
     }

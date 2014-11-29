@@ -2543,7 +2543,11 @@ void Kvantum::drawControl(ControlElement element,
         fspec.capsuleH = 0;
         fspec.capsuleV = 2;
         const interior_spec ispec = getInteriorSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        if (isPlasma)
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+        }
 
         if (status.startsWith("disabled"))
         {
@@ -3564,8 +3568,12 @@ void Kvantum::drawControl(ControlElement element,
       if (opt) {
         const QString group = "PanelButtonCommand";
         const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        if (isPlasma)
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+        }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
         if (!status.startsWith("disabled") && pb && pb->isDefault()) {
@@ -3691,6 +3699,10 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        if (isPlasma)
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+        }
 
         /* where there may not be enough space,
            especially in KDE new-stuff dialogs */
@@ -7110,8 +7122,8 @@ void Kvantum::renderLabel(
 {
   // compute text and icon rect
   QRect r;
-  if (!isPlasma
-      && tialign != Qt::ToolButtonIconOnly
+  if (/*!isPlasma &&*/ // we ignore Plasma text margins just for push and tool buttons and menubars
+      tialign != Qt::ToolButtonIconOnly
       && !text.isEmpty())
     r = labelRect(bounds,fspec,lspec);
   else

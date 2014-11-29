@@ -99,7 +99,7 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
   /* go to the parent config if this key isn't found here
      but leave the text color to be set by the color scheme */
   if (parentConfig
-      && key != "text.normal.color" && key != "text.focus.color" && key != "text.toggle.color")
+      && key != "text.normal.color" && key != "text.focus.color" && key != "text.press.color" && key != "text.toggle.color")
   {
     i = parentConfig->getValue(group, "inherits").toString();
     r = parentConfig->getValue(group, key, i);

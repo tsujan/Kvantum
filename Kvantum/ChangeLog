@@ -1,10 +1,15 @@
+V0.8.5
+---------
+ * Ignore Plasma text margins only for push and tool buttons and menubars.
+ * Don't go to parent config for pressed text color.
+
 V0.8.4
 ---------
  * Blur the screen area behind translucent windows under KDE if possible.
  * Added a hacking variable to force blurring for Konsole.
  * Fixed line-edits inside translucent dialogs.
  * Polish palettes inside polish(QApplication*) because that may be needed outside KDE and with Qt4.
- * Processes all pending events before setting the style of Kvantum Manager if the config file is created.
+ * Process all pending events before setting the style of Kvantum Manager if the config file is created.
 
 V0.8.3
 ---------
