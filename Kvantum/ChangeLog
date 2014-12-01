@@ -2,6 +2,7 @@ V0.8.5
 ---------
  * Ignore Plasma text margins only for push and tool buttons and menubars.
  * Don't go to parent config for pressed text color.
+ * Do delayed update only for top-level windows when blurring.
 
 V0.8.4
 ---------

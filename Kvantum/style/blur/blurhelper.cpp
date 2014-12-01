@@ -66,7 +66,8 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
     case QEvent::Hide: {
       QWidget* widget (qobject_cast<QWidget*>(object));
       if (!widget) break;
-      _pendingWidgets.insert (widget, widget);
+      QWidget* window (widget->window());
+      _pendingWidgets.insert (window, window);
       delayedUpdate();
       break;
     }
@@ -75,7 +76,9 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
     case QEvent::Resize: {
       QWidget* widget (qobject_cast<QWidget*>(object));
       if (!widget) break;
-      _pendingWidgets.insert (widget, widget);
+      QWidget* window (widget->window());
+      /* do delayed update only for top-level windows */
+      _pendingWidgets.insert (window, window);
       delayedUpdate();
       break;
     }
