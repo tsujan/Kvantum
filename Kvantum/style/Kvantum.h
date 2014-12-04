@@ -98,11 +98,11 @@ class Kvantum : public QCommonStyle {
                                               const QPoint &position,
                                               const QWidget *widget = 0) const;
 
-    /* A workaround, taken from QtCurve, for Qt5's problem with translucent windows.*/
-    void prePolish(QWidget *w) const;
-    void prePolish(const QWidget *w) const
+    /* A solution for Qt5's problem with translucent windows.*/
+    void setSurfaceFormat(QWidget *w) const;
+    void setSurfaceFormat(const QWidget *w) const
     {
-        prePolish(const_cast<QWidget*>(w));
+        setSurfaceFormat(const_cast<QWidget*>(w));
     }
 
   protected slots:

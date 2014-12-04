@@ -1,3 +1,7 @@
+V0.8.6
+---------
+ * Another method for making Qt5 windows translucent (got rid of private headers).
+
 V0.8.5
 ---------
  * Ignore Plasma text margins only for push and tool buttons and menubars.

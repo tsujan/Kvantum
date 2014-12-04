@@ -1,6 +1,3 @@
-// Started as a fork of QuantumStyle (C) Saïd LANKRI (not developed anymore
-// but continued as QSvgStyle <https://github.com/DexterMagnific/QSvgStyle>)
-
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
  * 
@@ -54,7 +51,6 @@
 #if QT_VERSION >= 0x050000
 #include <QSurfaceFormat>
 #include <QWindow>
-#include <private/qwidget_p.h>
 #endif
 
 #include "themeconfig/ThemeConfig.h"
@@ -264,49 +260,10 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
-// Taken from QtCurve-1.8.18:
-/*
-  In Qt5's QWidget::setVisible(bool), ensurePolished() is called after create().
-  So we request for RGBA format on toplevel widgets before they create native windows.
-*/
-void Kvantum::prePolish(QWidget *widget) const
-{
-#if QT_VERSION < 0x050000
-  Q_UNUSED(widget);
-  return;
-#else
-  if (!widget) return;
-  if (isPlasma || isOpaque || subApp || isLibreoffice)
-    return;
-  if (widget->testAttribute(Qt::WA_WState_Created))
-    return;
-  if (!settings->getThemeSpec().translucent_windows)
-    return;
-
-  QWindow *window = widget->windowHandle();
-  if (!window)
-  {
-    QWidgetPrivate *widgetPrivate = static_cast<QWidgetPrivate*>(QObjectPrivate::get(widget));
-    //widgetPrivate->updateIsOpaque();
-    widgetPrivate->createTLExtra();
-    widgetPrivate->createTLSysExtra();
-    window = widget->windowHandle();
-  }
-  if (window)
-  {
-    QSurfaceFormat format = window->format();
-    format.setAlphaBufferSize(8);
-    window->setFormat(format);
-  }
-#endif
-}
-
 void Kvantum::polish(QWidget *widget)
 {
   if (widget)
   {
-    prePolish(widget);
-
     // for moving the window containing this widget
     if (itsWindowManager)
       itsWindowManager->registerWidget(widget);
@@ -867,8 +824,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                             QPainter *painter,
                             const QWidget *widget) const
 {
-  prePolish(widget);
-
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -2285,8 +2240,6 @@ void Kvantum::drawControl(ControlElement element,
                           QPainter *painter,
                           const QWidget *widget) const
 {
-  prePolish(widget);
-
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -3995,8 +3948,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
                                  QPainter *painter,
                                  const QWidget *widget) const
 {
-  prePolish(widget);
-
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
   QString status =
@@ -4655,8 +4606,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
 int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
 {
-  prePolish(widget);
-
   switch (metric) {
     case PM_ButtonMargin : return 0;
     case PM_ButtonShiftHorizontal :
@@ -4899,12 +4848,67 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
   }
 }
 
+/*
+  To make Qt5 windows translucent, we should first set the surface format
+  of their native handles. However, Qt5 windows may NOT have native handles
+  associated with them before having a valid winId().
+
+  We could use setAttribute(Qt::WA_NativeWindow) to make widgets native but
+  we don't want enforceNativeChildren(), which is used when WA_NativeWindow
+  is set, because it would interfere with setTransientParent(). We only want
+  to use reateTLExtra() and createTLSysExtra(). There are to ways for that:
+
+  (1) Using of private headers, which isn't a good idea for obvious reasons;
+
+  (2) Setting Qt::AA_DontCreateNativeWidgetSiblings, so that the method
+      enforceNativeChildren() isn't used in setAttribute() (-> qwidget.cpp).
+*/
+void Kvantum::setSurfaceFormat(QWidget *widget) const
+{
+#if QT_VERSION < 0x050000
+  Q_UNUSED(widget);
+  return;
+#else
+  if (!widget || !widget->isWindow()
+      || !settings->getThemeSpec().translucent_windows
+      || isPlasma || isOpaque || subApp || isLibreoffice
+      || widget->testAttribute(Qt::WA_WState_Created))
+  {
+    return;
+  }
+
+  QWindow *window = widget->windowHandle();
+  if (!window)
+  {
+    bool noNativeSiblings = true;
+    if (!qApp->testAttribute(Qt::AA_DontCreateNativeWidgetSiblings))
+    {
+      noNativeSiblings = false;
+      qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
+    }
+    widget->setAttribute(Qt::WA_NativeWindow, true);
+    window = widget->windowHandle();
+    /* reverse the changes */
+    widget->setAttribute(Qt::WA_NativeWindow, false);
+    if (!noNativeSiblings)
+      qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, false);
+  }
+  if (window)
+  {
+    QSurfaceFormat format = window->format();
+    format.setAlphaBufferSize(8);
+    window->setFormat(format);
+  }
+#endif
+}
+
 int Kvantum::styleHint(StyleHint hint,
                        const QStyleOption *option,
                        const QWidget *widget,
                        QStyleHintReturn *returnData) const
 {
-  prePolish(widget);
+  setSurfaceFormat(widget); /* FIXME Why here and nowhere else?
+                                     Perhaps because of its use in qapplication.cpp. */
 
   switch (hint) {
     case SH_EtchDisabledText :
@@ -5010,8 +5014,6 @@ QCommonStyle::SubControl Kvantum::hitTestComplexControl (ComplexControl control,
                                                          const QPoint &position,
                                                          const QWidget *widget) const
 {
-  prePolish(widget);
-
   return QCommonStyle::hitTestComplexControl(control,option,position,widget);
 }
 
@@ -5020,8 +5022,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                                  const QSize &contentsSize,
                                  const QWidget *widget) const
 {
-  prePolish(widget);
-
   if (!option)
     return contentsSize;
 
@@ -5744,8 +5744,6 @@ QSize Kvantum::textSize (const QFont &font, const QString &text) const
 
 QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const
 {
-  prePolish(widget);
-
   switch (element) {
     case SE_CheckBoxFocusRect :
     case SE_RadioButtonFocusRect :
@@ -5975,8 +5973,6 @@ QRect Kvantum::subControlRect(ComplexControl control,
                               SubControl subControl,
                               const QWidget *widget) const
 {
-  prePolish(widget);
-
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
 
@@ -6498,8 +6494,6 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
                              const QWidget *widget ) const
 #endif
 {
-  prePolish(widget);
-
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
       int s = pixelMetric(PM_ToolBarExtensionExtent);

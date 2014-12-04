@@ -6,7 +6,7 @@ First install X11 and Qt development packages. In Debian-based systems, they are
 
 * libx11-dev and libxext-dev (for X11)
 * libqt4-dev (for Qt4)
-* qtbase5-dev, libqt5svg5-dev, libqt5x11extras5-dev and qtbase5-private-dev (for Qt5 and only if you want Qt5 support)
+* qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5 and only if you want Qt5 support)
 
 Then open a terminal inside this folder and issue the following command:
 
