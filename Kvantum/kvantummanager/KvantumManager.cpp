@@ -85,7 +85,7 @@ bool KvantumManager::isThemeDir (const QString &folder)
         return false;
 
     /* QSettings doesn't accept spaces in the name */
-    QString s = folder.simplified();
+    QString s = (dir.dirName()).simplified();
     if (s.contains (" "))
         return false;
 

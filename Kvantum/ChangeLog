@@ -1,6 +1,7 @@
 V0.8.6
 ---------
  * Another method for making Qt5 windows translucent (got rid of private headers).
+ * Kvantum Manager: Allow spaces in the theme path (but not in the theme name) when installing.
 
 V0.8.5
 ---------
