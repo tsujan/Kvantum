@@ -319,7 +319,10 @@ void Kvantum::polish(QWidget *widget)
             && !widget->inherits("KScreenSaver")
             && !widget->inherits("QTipLabel")
             && !widget->inherits("QSplashScreen")
-            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
+            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+            /* Without this, apps using QtWebKit might crash when quitting.
+               Fortunately internalWinId() exists although it isn't documeneted.*/
+            && widget->internalWinId())
         {
 #if QT_VERSION < 0x050000
           /* workaround for a Qt4 bug, which makes translucent windows
