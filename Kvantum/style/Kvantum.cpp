@@ -148,19 +148,6 @@ Kvantum::Kvantum() : QCommonStyle()
 
 Kvantum::~Kvantum()
 {
-  /* without this, weird things would happen when there is
-     window translucency and the style changes from Kvantum */
-  QSet<QWidget *>::const_iterator i = translucentTopWidgets.constBegin();
-  while (i != translucentTopWidgets.constEnd())
-  {
-    if (*i)
-    {
-      (*i)->setAttribute(Qt::WA_NoSystemBackground, false);
-      (*i)->setAttribute(Qt::WA_TranslucentBackground, false);
-    }
-    ++i;
-  }
-
   delete defaultSettings;
   delete themeSettings;
 
@@ -260,6 +247,12 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
+void Kvantum::undoTranslucency(QObject *o)
+{
+  QWidget *widget = static_cast<QWidget*>(o);
+  translucentTopWidgets.remove(widget);
+}
+
 void Kvantum::polish(QWidget *widget)
 {
   if (widget)
@@ -322,7 +315,8 @@ void Kvantum::polish(QWidget *widget)
             && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
             /* Without this, apps using QtWebKit might crash when quitting.
                Fortunately internalWinId() exists although it isn't documeneted.*/
-            && widget->internalWinId())
+            && widget->internalWinId()
+            && !translucentTopWidgets.contains(widget))
         {
 #if QT_VERSION < 0x050000
           /* workaround for a Qt4 bug, which makes translucent windows
@@ -626,14 +620,18 @@ void Kvantum::unpolish(QWidget *widget)
 
     /*widget->setAttribute(Qt::WA_Hover, false);*/
 
-    // FIXME is this needed?
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog: {
         if (blurHelper)
           blurHelper->unregisterWidget(widget);
-        widget->removeEventFilter(this);
-        widget->setAttribute(Qt::WA_StyledBackground, false);
+        if (translucentTopWidgets.contains(widget))
+        {
+          widget->removeEventFilter(this);
+          widget->setAttribute(Qt::WA_NoSystemBackground, false);
+          widget->setAttribute(Qt::WA_TranslucentBackground, false);
+        }
+        widget->setAttribute(Qt::WA_StyledBackground, false); // FIXME is this needed?
         break;
       }
       default: break;
@@ -682,17 +680,6 @@ void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
   renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix);
 }
 
-void Kvantum::undoTranslucency(QObject *o)
-{
-  QWidget *widget = static_cast<QWidget*>(o);
-  if (widget && translucentTopWidgets.contains(widget))
-  {
-    widget->setAttribute(Qt::WA_NoSystemBackground, false);
-    widget->setAttribute(Qt::WA_TranslucentBackground, false);
-    translucentTopWidgets.remove(widget);
-  }
-}
-
 bool Kvantum::eventFilter(QObject *o, QEvent *e)
 {
   QWidget *w = qobject_cast<QWidget*>(o);
@@ -719,6 +706,7 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
       }
     }
     break;
+
   case QEvent::Show:
     if (w)
     {
@@ -730,7 +718,7 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
       }
     }
     break;
-    
+
   case QEvent::Hide:
   case QEvent::Destroy:
     if (w)
@@ -742,11 +730,10 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
     break;
 
   default:
-    // forward event
-    return QObject::eventFilter(o,e);
+    return false;
   }
 
-  return QObject::eventFilter(o,e);
+  return false;
 }
 
 enum toolbarButtonKind

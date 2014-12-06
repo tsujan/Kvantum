@@ -114,7 +114,7 @@ void BlurHelper::update (QWidget* widget) const
     {
       data << rect.x() << rect.y() << rect.width() << rect.height();
     }
-    XChangeProperty (QX11Info::display(), widget->winId(),
+    XChangeProperty (QX11Info::display(), widget->internalWinId(),
                      _atom_blur, XA_CARDINAL, 32, PropModeReplace,
                      reinterpret_cast<const unsigned char *>(data.constData()),
                      data.size());
@@ -128,7 +128,8 @@ void BlurHelper::update (QWidget* widget) const
 void BlurHelper::clear (QWidget* widget) const
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-  XDeleteProperty (QX11Info::display(), widget->winId(), _atom_blur);
+  // WARNING never use winId()
+  XDeleteProperty (QX11Info::display(), widget->internalWinId(), _atom_blur);
 #else
   Q_UNUSED (widget);
 #endif

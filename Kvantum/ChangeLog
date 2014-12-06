@@ -3,6 +3,7 @@ V0.8.6
  * Another method for making Qt5 windows translucent (got rid of private headers).
  * Kvantum Manager: Allow spaces in the theme path (but not in the theme name) when installing.
  * Prevent a crash on quitting in apps using QtWebKit when translucency is enabled.
+ * Fixed a rare KMix crash on log-out when blurring was enabled and the style was changed from and to Kvantum.
 
 V0.8.5
 ---------
