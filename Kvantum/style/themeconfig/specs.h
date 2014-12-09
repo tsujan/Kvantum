@@ -48,6 +48,10 @@ typedef struct {
   /* let progress indicator spread across the whole
      progress groove and not just its interior */
   bool spread_progressbar;
+  /* no percentage label for progressbars? */
+  bool textless_progressbar;
+  /* enable mouse tracking in menubars? */
+  bool menubar_mouse_tracking;
   /* use composite effects
      (for now, only translucent menus
      or tooltips and their shadows) */
@@ -167,6 +171,10 @@ typedef struct {
   QString pressColor;
   /* toggled text color */
   QString toggleColor;
+  /* use bold font? */
+  bool boldFont;
+  /* use italic font? */
+  bool italicFont;
   /* has shadow */
   bool hasShadow;
   /* shadow shift */
@@ -214,6 +222,8 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.focusColor = QString();
   lspec.pressColor = QString();
   lspec.toggleColor = QString();
+  lspec.boldFont = false;
+  lspec.italicFont = false;
   lspec.hasShadow = false;
   lspec.xshift = 0;
   lspec.yshift = 1;
@@ -241,6 +251,8 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.attach_active_tab = false;
   tspec.group_toolbar_buttons = false;
   tspec.spread_progressbar = false;
+  tspec.textless_progressbar = false;
+  tspec.menubar_mouse_tracking = true;
   tspec.composite = false;
   tspec.translucent_windows = false;
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";

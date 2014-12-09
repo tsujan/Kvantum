@@ -81,6 +81,7 @@ frame=false
 interior=true
 interior.element=dock
 text.focus.color=white
+text.bold=true
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -199,6 +200,7 @@ frame.left=2
 frame.right=2
 text.margin=0
 text.focus.color=white
+text.bold=true
 
 [ProgressbarContents]
 inherits=PanelButtonCommand

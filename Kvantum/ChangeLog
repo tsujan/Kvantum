@@ -1,3 +1,11 @@
+V0.8.7
+---------
+ * Added a key and an option for textless progressbars.
+ * Added a key and an option for disabling menubar mouse tracking.
+ * Font boldness can be set separately for most widget groups now.
+ * Fixed LibreOffice's spinboxes.
+ * Respect the MenuItem indicator name for right/left arrows and only if the SVG elements aren't found, use the IndicatorArrow name.
+
 V0.8.6
 ---------
  * Another method for making Qt5 windows translucent (got rid of private headers).

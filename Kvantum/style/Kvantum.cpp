@@ -1662,7 +1662,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameLineEdit : {
       frame_spec fspec = getFrameSpec("LineEdit");
-      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1))
+          || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
@@ -1732,7 +1733,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
-      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1))
+          || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
@@ -2128,17 +2130,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     case PE_IndicatorArrowRight : {
       frame_spec fspec;
       default_frame_spec(fspec);
-      const indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
-      
-      QString dir;
-      if (element == PE_IndicatorArrowUp)
-        dir = "-up-";
-      else if (element == PE_IndicatorArrowDown)
-        dir = "-down-";
-      else if (element == PE_IndicatorArrowLeft)
-        dir = "-left-";
-      else
-        dir = "-right-";
 
       QString aStatus = "normal";
       if (status.startsWith("disabled"))
@@ -2149,6 +2140,42 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         aStatus = "focused";
       if (isInactive)
         aStatus.append(QString("-inactive"));
+
+      /* menuitems may have their own right/left arrows */
+      if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+      {
+        const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
+        QString dir1;
+        if (element == PE_IndicatorArrowLeft)
+          dir1 = "-left-";
+        else
+          dir1 = "-right-";
+        const QRect interior = interiorRect(option->rect,fspec);
+        const QRect sq = squaredRect(interior);
+        int s = 0;
+        if (!sq.isValid())
+          s = dspec1.size;
+        else
+          s = (sq.width() > dspec1.size) ? dspec1.size : sq.width();
+        if (renderElement(painter, dspec1.element+dir1+aStatus,
+                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior),
+                          0,0,Qt::Horizontal))
+        {
+          break;
+        }
+      }
+
+      const indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      QString dir;
+      if (element == PE_IndicatorArrowUp)
+        dir = "-up-";
+      else if (element == PE_IndicatorArrowDown)
+        dir = "-down-";
+      else if (element == PE_IndicatorArrowLeft)
+        dir = "-left-";
+      else
+        dir = "-right-";
+
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus);
 
       break;
@@ -3107,13 +3134,15 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
+      const theme_spec tspec = settings->getThemeSpec();
+      if (tspec.textless_progressbar) break;
+
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
 
       if (opt && opt->textVisible)
       {
         const QString group = "Progressbar";
-
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
 
@@ -3123,9 +3152,6 @@ void Kvantum::drawControl(ControlElement element,
           const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
           if (pb)
           {
-            QFont f(pb->font());
-            f.setBold(true);
-
             int wdth = pb->height();
 
             if (pb->orientation() == Qt::Vertical)
@@ -3154,6 +3180,7 @@ void Kvantum::drawControl(ControlElement element,
             }
 
             wdth = wdth - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
+            QFont f(pb->font());
             if (f.pixelSize() > wdth)
               f.setPixelSize(wdth);
             else if (f.pointSize() > wdth)
@@ -3836,17 +3863,6 @@ void Kvantum::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
 
-        if (widget)
-        {
-          const QDockWidget *dw = qobject_cast<const QDockWidget *>(widget);
-          if (dw)
-          {
-            QFont f(dw->font());
-            f.setBold(true);
-            painter->setFont(f);
-          }
-        }
-
         if (status.startsWith("disabled"))
         {
           status.replace(QString("disabled"),QString("normal"));
@@ -4020,9 +4036,12 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
         /* The field is automatically drawn as lineedit in PE_FrameLineEdit
            and PE_PanelLineEdit. Therefore, we shouldn't duplicate it here. */
-        /*o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
-        drawPrimitive(PE_FrameLineEdit,&o,painter,widget);
-        drawPrimitive(PE_PanelLineEdit,&o,painter,widget);*/
+        if (isLibreoffice)
+        {
+          o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
+          //drawPrimitive(PE_FrameLineEdit,&o,painter,widget);
+          drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
+        }
 
         if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows) {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
@@ -4791,7 +4810,15 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       QString group = "TitleBar";
       const label_spec lspec = getLabelSpec("TitleBar");
       int v = lspec.top + lspec.bottom;
-      return qMax(widget ? widget->fontMetrics().lineSpacing()+v
+      int b = 0;
+      if (widget && lspec.boldFont)
+      {
+        QFont f = widget->font();
+        QSize s = textSize(f, "W");
+        f.setBold(true);
+        b = (textSize(f, "W") - s).height();
+      }
+      return qMax(widget ? widget->fontMetrics().lineSpacing()+v+b
                            : option ? option->fontMetrics.lineSpacing()+v : 0,
                   24);
     }
@@ -4919,8 +4946,12 @@ int Kvantum::styleHint(StyleHint hint,
     case SH_Menu_FadeOutOnHide : return false;
     
     case SH_ComboBox_ListMouseTracking :
-    case SH_Menu_MouseTracking :
-    case SH_MenuBar_MouseTracking : return true;
+    case SH_Menu_MouseTracking : return true;
+
+    case SH_MenuBar_MouseTracking : {
+      const theme_spec tspec = settings->getThemeSpec();
+      return tspec.menubar_mouse_tracking;
+    }
 
     case SH_TabBar_Alignment : {
       const theme_spec tspec = settings->getThemeSpec();
@@ -5031,8 +5062,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
   switch (type) {
     case CT_LineEdit : {
       QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
+      if (widget)
+        f = widget->font();
 
       const QString group = "LineEdit";
 
@@ -5162,7 +5193,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         const QString group = "PanelButtonCommand";
-
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
@@ -5196,7 +5226,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                     s.height() < smallIconSize ? smallIconSize : s.height());
         }*/
 
-        /* take in to account the boldness of default button text */
+        /* take in to account the boldness of default button text
+           and also the possibility of boldness in general */
         if (!txt.isEmpty())
         {
           const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
@@ -5218,15 +5249,18 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "RadioButton";
-
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         /* add the height of radio button indicator to have a
            reasonable vertical distance between radio buttons */
@@ -5252,15 +5286,18 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "CheckBox";
-
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         /* add the height of checkbox indicator to have a
            reasonable vertical distance between checkboxes */
@@ -5286,14 +5323,18 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionMenuItem *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "MenuItem";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           s = QSize(cw,10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
@@ -5339,14 +5380,18 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionMenuItem *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         QString group = "MenuBarItem";
         frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->maxIconWidth));
       }
@@ -5359,10 +5404,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionToolButton *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
@@ -5445,6 +5486,15 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             {
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
             }
+
+            /* extra space for bold text */
+            if (!opt->text.isEmpty() && lspec.boldFont)
+            {
+              QFont f = tb->font();
+              QSize s1 = textSize(f, opt->text);
+              f.setBold(true);
+              s = s + textSize(f, opt->text) - s1;
+            }
           }
         }
       }
@@ -5457,14 +5507,18 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionTab *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "Tab";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_ToolBarIconSize)));
 
@@ -5520,16 +5574,19 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         qstyleoption_cast<const QStyleOptionHeader *>(option);
 
       if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
         const QString group = "HeaderSection";
-
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
+
+        QFont f = QApplication::font();
+        if (widget)
+        {
+          f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_SmallIconSize)));
         if (opt->sortIndicator != QStyleOptionHeader::None)
@@ -7166,6 +7223,21 @@ void Kvantum::renderLabel(
        || tialign != Qt::ToolButtonIconOnly)
       && !text.isEmpty())
   {
+    if (lspec.boldFont)
+    {
+      QFont f(painter->font());
+      f.setBold(true);
+      painter->save();
+      painter->setFont(f);
+    }
+    if (lspec.italicFont)
+    {
+      QFont f(painter->font());
+      f.setItalic(true);
+      painter->save();
+      painter->setFont(f);
+    }
+
     if (state != 0)
     {
       QColor shadowColor(lspec.shadowColor);
@@ -7189,6 +7261,10 @@ void Kvantum::renderLabel(
         painter->setPen(QPen(normalColor));
         painter->drawText(rtext,talign,text);
         painter->restore();
+        if (lspec.boldFont)
+          painter->restore();
+        if (lspec.italicFont)
+         painter->restore();
         return;
       }
       else if (state == 2 && focusColor.isValid())
@@ -7197,6 +7273,10 @@ void Kvantum::renderLabel(
         painter->setPen(QPen(focusColor));
         painter->drawText(rtext,talign,text);
         painter->restore();
+        if (lspec.boldFont)
+          painter->restore();
+        if (lspec.italicFont)
+          painter->restore();
         return;
       }
       else if (state == 3 && pressColor.isValid())
@@ -7205,6 +7285,10 @@ void Kvantum::renderLabel(
         painter->setPen(QPen(pressColor));
         painter->drawText(rtext,talign,text);
         painter->restore();
+        if (lspec.boldFont)
+          painter->restore();
+        if (lspec.italicFont)
+          painter->restore();
         return;
       }
       else if (state == 4 && toggleColor.isValid())
@@ -7213,6 +7297,8 @@ void Kvantum::renderLabel(
         painter->setPen(QPen(toggleColor));
         painter->drawText(rtext,talign,text);
         painter->restore();
+        if (lspec.boldFont)
+          painter->restore();
         return;
       }
     }
@@ -7224,6 +7310,11 @@ void Kvantum::renderLabel(
                                state == 0 ? false: true,
                                text,
                                textRole);
+
+    if (lspec.boldFont)
+      painter->restore();
+    if (lspec.italicFont)
+      painter->restore();
   }
 }
 

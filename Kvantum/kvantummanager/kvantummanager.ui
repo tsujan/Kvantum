@@ -340,8 +340,8 @@ this theme instead of its default theme.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>447</width>
-         <height>294</height>
+         <width>450</width>
+         <height>332</height>
         </rect>
        </property>
        <attribute name="label">
@@ -489,21 +489,6 @@ Kvantum theme
              </property>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox5">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Tabs are centered by default.</string>
-             </property>
-             <property name="text">
-              <string>Left aligned tabs</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox4">
              <property name="font">
@@ -520,7 +505,7 @@ will not have translucency or shadow.</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="0" colspan="2">
+           <item row="7" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox9">
              <property name="font">
               <font>
@@ -535,7 +520,7 @@ will not have translucency or shadow.</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
+           <item row="8" column="0">
             <widget class="QLabel" name="opaqueLabel">
              <property name="font">
               <font>
@@ -551,7 +536,7 @@ whose windows should not be translucent.</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0" colspan="2">
+           <item row="6" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox8">
              <property name="font">
               <font>
@@ -567,7 +552,7 @@ whose windows should not be translucent.</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
+           <item row="8" column="1">
             <widget class="QLineEdit" name="opaqueEdit">
              <property name="font">
               <font>
@@ -580,7 +565,7 @@ whose windows should not be translucent.</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="0" colspan="2">
+           <item row="9" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox10">
              <property name="font">
               <font>
@@ -593,6 +578,53 @@ graphic card that supports it.</string>
              </property>
              <property name="text">
               <string>Blurring for translucent windows</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox5">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Tabs are centered by default.</string>
+             </property>
+             <property name="text">
+              <string>Left aligned tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxProgress">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Progreesbars show percentage
+labels by default.</string>
+             </property>
+             <property name="text">
+              <string>Textless Progressbars</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxMenubar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Mouse tracking is enabled
+for menubars by default.</string>
+             </property>
+             <property name="text">
+              <string>Mouse tracking for menubars</string>
              </property>
             </widget>
            </item>

@@ -99,7 +99,8 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
   /* go to the parent config if this key isn't found here
      but leave the text color to be set by the color scheme */
   if (parentConfig
-      && key != "text.normal.color" && key != "text.focus.color" && key != "text.press.color" && key != "text.toggle.color")
+      && key != "text.normal.color" && key != "text.focus.color" && key != "text.press.color" && key != "text.toggle.color"
+      && key != "text.bold" && key != "text.italic")
   {
     i = parentConfig->getValue(group, "inherits").toString();
     r = parentConfig->getValue(group, key, i);
@@ -223,6 +224,11 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
   v = getValue(elementName,"text.toggle.color", i);
   r.toggleColor = v.toString();
 
+  v = getValue(elementName,"text.bold", i);
+  r.boldFont = v.toBool();
+  v = getValue(elementName,"text.italic", i);
+  r.italicFont = v.toBool();
+
   if (r.hasShadow)
   {
     v = getValue(elementName,"text.shadow.xshift", i);
@@ -316,6 +322,13 @@ theme_spec ThemeConfig::getThemeSpec() const
 
   v = getValue("General","spread_progressbar", empty);
   r.spread_progressbar = v.toBool();
+
+  v = getValue("General","textless_progressbar", empty);
+  r.textless_progressbar = v.toBool();
+
+  v = getValue("General","menubar_mouse_tracking", empty);
+  if (v.isValid()) // it's true by default
+    r.menubar_mouse_tracking = v.toBool();
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */

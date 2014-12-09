@@ -396,6 +396,8 @@ void KvantumManager::tabChanged (int index)
             ui->checkBox5->setChecked (false);
             ui->checkBox6->setChecked (true);
             ui->checkBox7->setChecked (false);
+            ui->checkBoxProgress->setChecked (false);
+            ui->checkBoxMenubar->setChecked (true);
             ui->checkBox8->setChecked (true);
             ui->checkBox9->setChecked (false);
             ui->checkBox10->setChecked (false);
@@ -436,6 +438,14 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBox7->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 else
                     ui->checkBox7->setChecked (false);
+                if (themeSettings.contains ("textless_progressbar"))
+                    ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
+                else
+                    ui->checkBoxProgress->setChecked (false);
+                if (themeSettings.contains ("menubar_mouse_tracking"))
+                    ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
+                else
+                    ui->checkBoxMenubar->setChecked (true);
                 if (themeSettings.contains ("x11drag"))
                     ui->checkBox8->setChecked (themeSettings.value ("x11drag").toBool());
                 else
@@ -667,6 +677,8 @@ void KvantumManager::wrtieConfig()
         themeSettings.setValue ("left_tabs", ui->checkBox5->isChecked());
         themeSettings.setValue ("joined_tabs", ui->checkBox6->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
+        themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
+        themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
         themeSettings.setValue ("blurring", ui->checkBox10->isChecked());
@@ -724,6 +736,8 @@ void KvantumManager::restoreDefault()
     ui->checkBox5->setChecked (false);
     ui->checkBox6->setChecked (true);
     ui->checkBox7->setChecked (false);
+    ui->checkBoxProgress->setChecked (false);
+    ui->checkBoxMenubar->setChecked (true);
     ui->checkBox8->setChecked (true);
     ui->checkBox9->setChecked (false);
     ui->checkBox10->setChecked (false);

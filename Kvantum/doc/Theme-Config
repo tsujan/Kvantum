@@ -147,7 +147,7 @@ There are three exceptions to these rules:
 
 Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present in a section.
 
-Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme.
+Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme. Also font boldness/italicity will be ignored if omitted.
 
 Exception No.3: Any variable related to compositing or hacking will be ignored if omitted.
 
@@ -189,6 +189,13 @@ spread_progressbar                true/false          Spread progressbar's indic
                                                       just its interior? By default,
                                                       the indicator is drawn inside
                                                       progressbar's frame.
+
+textless_progressbar              true/false          No percentage label for progress
+                                                      bars? They have percentage labels
+                                                      by default.
+
+menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
+                                                      It is enabled by default.
 
 composite                         true/false          Use compositing to have
                                                       translucent menus or tooltips?
@@ -377,6 +384,12 @@ text.focus.color                  string (#RRGGBB)    The color of the focused/h
 text.press.color                  string (#RRGGBB)    The color of the pressed text.
 
 text.toggle.color                 string (#RRGGBB)    The color of the toggled text.
+
+text.bold                         true/false          Bold font for text? The font
+                                                      is not bold by default.
+
+text.italic                       true/false          Italic font for text? The font
+                                                      is not italic by default.
 
 text.shadow                       true/false          Draw a shadow for the text?
 
