@@ -126,26 +126,49 @@ void KvantumManager::installTheme()
                             this);
         msgBox.exec();
     }
+    else if ((QDir (theme).dirName()).contains ("#"))
+    {
+        QMessageBox msgBox (QMessageBox::Warning,
+                            tr ("Kvantum"),
+                            tr ("<center><b>This is not an installable Kvantum theme!</b></center>"\
+                                "<center>Installable themes should not have # in their names.</center>"\
+                                "<center>Please select another directory!</center>"),
+                            QMessageBox::Close,
+                            this);
+        msgBox.exec();
+    }
     else
     {
         QString homeDir = QDir::homePath();
         QDir cf = QDir (xdg_config_home);
         cf.mkdir ("Kvantum");
-        QDir kv = QDir (QString ("%1/Kvantum").arg (xdg_config_home));
+        QDir kv = QDir (xdg_config_home + QString ("/Kvantum"));
         /* if the Kvantum themes directory is created or already exists... */
         if (kv.exists())
         {
             QDir themeDir = QDir (theme);
             QString themeName = themeDir.dirName();
+            QDir subDir_ = QDir (QString ("%1/Kvantum/%2#").arg (xdg_config_home).arg (themeName));
+            if (subDir_.exists())
+            {
+                QMessageBox msgBox (QMessageBox::Warning,
+                                    tr ("Kvantum"),
+                                    tr ("<center><b>The theme already exists in modified form.</b></center>"\
+                                        "<center>First You have to delete its modified version!</center>"),
+                                    QMessageBox::Close,
+                                    this);
+                msgBox.exec();
+                return;
+            }
             /* ... and contains the same theme... */
             if (!kv.mkdir (themeName))
             {
-                QDir subDir = QDir (QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (themeName));
+                QDir subDir = QDir (xdg_config_home + QString ("/Kvantum/") + themeName);
                 if (subDir == themeDir)
                 {
                     QMessageBox msgBox (QMessageBox::Warning,
                                         tr ("Kvantum"),
-                                        tr ("<center>You have selected an installed theme folder.</center>"\
+                                        tr ("<center><b>You have selected an installed theme folder.</b></center>"\
                                             "<center>Please choose another directory!</center>"),
                                         QMessageBox::Close,
                                         this);
@@ -156,7 +179,7 @@ void KvantumManager::installTheme()
                 {
                     QMessageBox msgBox (QMessageBox::Warning,
                                         tr ("Confirmation"),
-                                        tr ("<center>The theme already exists.</center>"\
+                                        tr ("<center><b>The theme already exists.</b></center>"\
                                             "<center>Do you want to overwrite it?</center>"),
                                         QMessageBox::Yes | QMessageBox::No,
                                         this);
@@ -177,6 +200,17 @@ void KvantumManager::installTheme()
                     notWritable();
                     return;
                 }
+            }
+            subDir_ = QDir (QString (DATADIR) + QString ("/Kvantum/") + themeName);
+            if (subDir_.exists())
+            {
+                QMessageBox msgBox (QMessageBox::Information,
+                                    tr ("Kvantum"),
+                                    tr ("<center><b>This theme is also installed as root.</b></center>"\
+                                        "<center>The user installation will take priority.</center>"),
+                                    QMessageBox::Close,
+                                    this);
+                msgBox.exec();
             }
             /* copy the theme files appropriately */
             QFile::copy (QString ("%1/%2.kvconfig").arg (theme).arg (themeName),
@@ -251,8 +285,11 @@ void KvantumManager::deleteTheme()
         default: break;
     }
 
+    QString theme_ = theme;
     if (theme == "Kvantum (modified)")
-        theme = "DefaultCopy";
+        theme = "Default#";
+    else if (theme.endsWith (" (modified)"))
+        theme.replace (QString (" (modified)"), QString ("#"));
     else if (theme == "Kvantum (default)")
         return;
 
@@ -273,22 +310,23 @@ void KvantumManager::deleteTheme()
         QSettings settings (configFile, QSettings::NativeFormat);
         if (settings.contains ("theme") && theme == settings.value ("theme").toString())
         {
-            if (isThemeDir (QString ("%1/Kvantum/DefaultCopy").arg (xdg_config_home)))
+            if (isThemeDir (QString ("%1/Kvantum/Default#").arg (xdg_config_home)))
             {
-                settings.setValue ("theme", "DefaultCopy");
-                kvconfigTheme = "Kvantum (modified)";
+                settings.setValue ("theme", "Default#");
+                kvconfigTheme = "Default#";
             }
             else
             {
                 settings.remove ("theme");
                 kvconfigTheme = QString();
             }
-            QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
-            statusLabel->setText (tr ("<b>Active theme:</b> Kvantum (default)"));
+            QApplication::setStyle (QStyleFactory::create ("kvantum"));
+            if (process->state() == QProcess::Running)
+              preview();
         }
     }
     updateThemeList();
-    ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme), 10000);
+    ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme_), 10000);
 }
 /*************************/
 void KvantumManager::showAnimated (QWidget *w, int duration)
@@ -307,8 +345,11 @@ void KvantumManager::useTheme()
     kvconfigTheme = ui->comboBox->currentText();
     if (kvconfigTheme.isEmpty()) return;
 
+    QString theme = kvconfigTheme;
     if (kvconfigTheme == "Kvantum (modified)")
-        kvconfigTheme = "DefaultCopy";
+        kvconfigTheme = "Default#";
+    else if (kvconfigTheme.endsWith (" (modified)"))
+         kvconfigTheme.replace (QString (" (modified)"), QString ("#"));
     else if (kvconfigTheme == "Kvantum (default)")
         kvconfigTheme = QString();
 
@@ -320,14 +361,6 @@ void KvantumManager::useTheme()
         settings.remove ("theme");
     else if (settings.value ("theme").toString() != kvconfigTheme)
         settings.setValue ("theme", kvconfigTheme);
-
-    QString theme;
-    if (kvconfigTheme.isEmpty())
-        theme = "Kvantum (default)";
-    else if (kvconfigTheme == "DefaultCopy")
-        theme = "Kvantum (modified)";
-    else
-        theme = kvconfigTheme;
 
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
     statusLabel->setText (tr ("<b>Active theme:</b> %1").arg (theme));
@@ -365,8 +398,18 @@ void KvantumManager::tabChanged (int index)
             ui->deleteTheme->setEnabled (false);
         else
         {
-            ui->deleteTheme->setEnabled (true);
-            QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            QString themeConfig;
+            QDir themeDir = QDir (xdg_config_home + QString ("/Kvantum/") + kvconfigTheme);
+            if (!themeDir.exists())
+            {
+                ui->deleteTheme->setEnabled (false);
+                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme);
+            }
+            else
+            {
+                ui->deleteTheme->setEnabled (true);
+                themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            }
             if (QFile::exists (themeConfig))
             {
               QSettings themeSettings (themeConfig, QSettings::NativeFormat);
@@ -384,7 +427,7 @@ void KvantumManager::tabChanged (int index)
         ui->opaqueEdit->clear();
         if (kvconfigTheme.isEmpty())
         {
-            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
+            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
 
             ui->restoreButton->hide();
@@ -407,17 +450,29 @@ void KvantumManager::tabChanged (int index)
         else
         {
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
+            QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            if (!QFile::exists (themeConfig))
+            {
+                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme);
+                if (QFile::exists (themeConfig))
+                    ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme));
+            }
             showAnimated (ui->configLabel, 1000);
 
-            if (kvconfigTheme == "DefaultCopy")
+            if (kvconfigTheme.endsWith ("#"))
                 ui->restoreButton->show();
             else
                 ui->restoreButton->hide();
 
-            QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            /* the theme may be just an SVG image,
+               so add Kvantum's default config */
             if (!QFile::exists (themeConfig))
-                copyDefaultTheme (kvconfigTheme);
-            if (QFile::exists (themeConfig))
+            {
+                copyDefaultTheme (QString(), kvconfigTheme);
+                themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            }
+
+            if (QFile::exists (themeConfig)) // FIXME not needed
             {
                 QSettings themeSettings (themeConfig, QSettings::NativeFormat);
                 /* consult the default config file if a key doesn't exist */
@@ -486,8 +541,10 @@ void KvantumManager::selectionChanged (const QString &txt)
     QString theme;
     if (kvconfigTheme.isEmpty())
         theme = "Kvantum (default)";
-    else if (kvconfigTheme == "DefaultCopy")
+    else if (kvconfigTheme == "Default#")
         theme = "Kvantum (modified)";
+    else if (kvconfigTheme.endsWith ("#"))
+        theme = QString ("%1 (modified)").arg (kvconfigTheme.left (kvconfigTheme.length() - 1));
     else
         theme = kvconfigTheme;
 
@@ -496,15 +553,21 @@ void KvantumManager::selectionChanged (const QString &txt)
     else
         ui->usageLabel->hide();
 
-    if (txt == "Kvantum (default)")
+    if (txt == "Kvantum (default)"
+        || (!txt.endsWith (" (modified)")
+            && !QDir (xdg_config_home + QString ("/Kvantum/") + txt).exists())) // root
+    {
         ui->deleteTheme->setEnabled (false);
+    }
     else if (!ui->deleteTheme->isEnabled())
         ui->deleteTheme->setEnabled (true);
 
     QString comment;
     QString text = txt;
     if (text == "Kvantum (modified)")
-      text = "DefaultCopy";
+        text = "Default#";
+    else if (text.endsWith (" (modified)"))
+        text.replace (QString (" (modified)"), QString ("#"));
     if (text != "Kvantum (default)")
     {
         QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
@@ -536,17 +599,49 @@ void KvantumManager::updateThemeList()
         {
             if (isThemeDir (QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (folder)))
             {
-                if (folder == "DefaultCopy")
+                if (folder == "Default#")
                     list.prepend ("Kvantum (modified)");
+                else if (folder.endsWith ("#"))
+                {
+                    /* see if there's a valid root installtion */
+                    QString folder_ = folder.left (folder.length() - 1);
+                    if (!folder_.contains ("#")
+                        && isThemeDir (QString (DATADIR) + QString ("/Kvantum/%1").arg (folder_)))
+                    {
+                        list.append (QString ("%1 (modified)").arg (folder_));
+                    }
+                }
                 else
                     list.append (folder);
             }
         }
     }
+    int rootSep = 0;
+    if (!list.isEmpty())
+        rootSep = list.length();
+    kv = QDir (QString (DATADIR) + QString ("/Kvantum"));
+    if (kv.exists())
+    {
+        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        foreach (const QString &folder, folders)
+        {
+            if (!folder.contains ("#")
+                && isThemeDir (QString (DATADIR) + QString ("/Kvantum/%1").arg (folder)))
+            {
+                if (!list.contains (folder) && !list.contains (QString ("%1 (modified)").arg (folder)))
+                    list.append (folder);
+            }
+        }
+    }
     if (list.isEmpty() || list.first() != "Kvantum (modified)")
+    {
         list.prepend ("Kvantum (default)");
+        rootSep++;
+    }
     ui->comboBox->insertItems (0, list);
     ui->comboBox->insertSeparator (1);
+    if (rootSep)
+        ui->comboBox->insertSeparator (rootSep + 1);
 
     /* select the active theme and set kvconfigTheme */
     QString theme;
@@ -560,8 +655,10 @@ void KvantumManager::updateThemeList()
             kvconfigTheme = settings.value ("theme").toString();
             if (kvconfigTheme.isEmpty())
                 theme = "Kvantum (default)";
-            else if (kvconfigTheme == "DefaultCopy")
+            else if (kvconfigTheme == "Default#")
                 theme = "Kvantum (modified)";
+            else if (kvconfigTheme.endsWith ("#"))
+                theme = QString ("%1 (modified)").arg (kvconfigTheme.left (kvconfigTheme.length() - 1));
             else
                 theme = kvconfigTheme;
             int index = ui->comboBox->findText (theme);
@@ -569,9 +666,18 @@ void KvantumManager::updateThemeList()
                 ui->comboBox->setCurrentIndex (index);
             else // remove from settings if its folder is deleted
             {
-                settings.remove ("theme");
-                kvconfigTheme = QString();
-                theme = "Kvantum (default)";
+                if (list.contains ("Kvantum (modified)"))
+                {
+                    settings.setValue ("theme", "Default#");
+                    kvconfigTheme = "Default#";
+                    theme = "Kvantum (modified)";
+                }
+                else
+                {
+                    settings.remove ("theme");
+                    kvconfigTheme = QString();
+                    theme = "Kvantum (default)";
+                }
             }
         }
         else noConfig = true;
@@ -582,8 +688,8 @@ void KvantumManager::updateThemeList()
     {
         kvconfigTheme = QString();
         theme = "Kvantum (default)";
-        /* remove DefaultCopy because there's no config */
-        QString theCopy = QString ("%1/Kvantum/DefaultCopy/DefaultCopy.kvconfig").arg (xdg_config_home);
+        /* remove Default# because there's no config */
+        QString theCopy = QString ("%1/Kvantum/Default#/Default#.kvconfig").arg (xdg_config_home);
         QFile::remove (theCopy);
     }
 
@@ -600,25 +706,28 @@ void KvantumManager::preview()
     process->start (previewExe);
 }
 /*************************/
-void KvantumManager::copyDefaultTheme (QString name)
+void KvantumManager::copyDefaultTheme (QString source, QString target)
 {
     QDir cf = QDir (xdg_config_home);
     cf.mkdir ("Kvantum");
-    QDir kv = QDir (QString ("%1/Kvantum").arg (xdg_config_home));
+    QDir kv = QDir (xdg_config_home + QString ("/Kvantum"));
     if (kv.exists())
     {
-        kv.mkdir (name);
-        QString theCopy = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (name);
+        kv.mkdir (target);
+        QString theCopy = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (target);
         if (!QFile::exists (theCopy))
         {
-            if (QFile::copy (QString (":default.kvconfig"), theCopy))
+            QString themeConfig = ":default.kvconfig";
+            if (!source.isEmpty())
+                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (source);
+            if (QFile::copy (themeConfig, theCopy))
             {
 #if QT_VERSION < 0x050000
                 QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFile::WriteOwner);
 #else
                 QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFileDevice::WriteOwner);
 #endif
-                ui->statusBar->showMessage (tr ("A copy of the default theme is created."), 10000);
+                ui->statusBar->showMessage (tr ("A copy of the default config is created."), 10000);
             }
             else
                 notWritable();
@@ -626,7 +735,7 @@ void KvantumManager::copyDefaultTheme (QString name)
         else
         {
             ui->statusBar->clearMessage();
-            ui->statusBar->showMessage (tr ("A copy of the default theme is already created."), 10000);
+            ui->statusBar->showMessage (tr ("A copy was already created."), 10000);
         }
     }
     else
@@ -639,10 +748,10 @@ void KvantumManager::wrtieConfig()
     if (kvconfigTheme.isEmpty())
     {
         wasDefault = true;
-        QString theCopy = QString ("%1/Kvantum/DefaultCopy/DefaultCopy.kvconfig").arg (xdg_config_home);
+        QString theCopy = QString ("%1/Kvantum/Default#/Default#.kvconfig").arg (xdg_config_home);
         QFile::remove (theCopy);
-        copyDefaultTheme (QString ("DefaultCopy"));
-        kvconfigTheme = "DefaultCopy";
+        kvconfigTheme = "Default#";
+        copyDefaultTheme (QString(), kvconfigTheme);
 
         QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
         QSettings settings (configFile, QSettings::NativeFormat);
@@ -651,6 +760,24 @@ void KvantumManager::wrtieConfig()
     }
 
     QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+    if (!QFile::exists (themeConfig))
+    {
+        QString themeConfig_ = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme);
+        if (QFile::exists (themeConfig_))
+        {
+            wasDefault = true;
+            QString theCopy = QString ("%1/Kvantum/%2#/%2#.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            QFile::remove (theCopy);
+            copyDefaultTheme (kvconfigTheme, kvconfigTheme + "#");
+            kvconfigTheme = kvconfigTheme + "#";
+
+            QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
+            QSettings settings (configFile, QSettings::NativeFormat);
+            if (!settings.isWritable()) return;
+            settings.setValue ("theme", kvconfigTheme);
+        }
+    }
+    themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
     if (QFile::exists (themeConfig))
     {
         QSettings themeSettings (themeConfig, QSettings::NativeFormat);
@@ -691,17 +818,19 @@ void KvantumManager::wrtieConfig()
 
         ui->statusBar->showMessage (tr ("Configuration saved."), 10000);
         QString theme;
-        if (kvconfigTheme == "DefaultCopy")
+        if (kvconfigTheme == "Default#")
             theme = "Kvantum (modified)";
+        else if (kvconfigTheme.endsWith ("#"))
+            theme = QString ("%1 (modified)").arg (kvconfigTheme.left (kvconfigTheme.length() - 1));
         else
             theme = kvconfigTheme;
         QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
         statusLabel->setText (tr ("<b>Active theme:</b> %1").arg (theme));
 
-        if (wasDefault && kvconfigTheme == "DefaultCopy")
+        if (wasDefault && kvconfigTheme.endsWith ("#"))
         {
             ui->restoreButton->show();
-            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
+            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
             showAnimated (ui->configLabel, 1000);
         }
 
@@ -716,41 +845,37 @@ void KvantumManager::wrtieConfig()
 /*************************/
 void KvantumManager::restoreDefault()
 {
-    QString theCopy = QString ("%1/Kvantum/DefaultCopy/DefaultCopy.kvconfig").arg (xdg_config_home);
+    QString theCopy = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
     QFile::remove (theCopy);
     QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
     QSettings settings (configFile, QSettings::NativeFormat);
     if (!settings.isWritable()) return;
-    settings.remove ("theme");
+    /* reset kvconfigTheme and set the theme */
+    if (kvconfigTheme == "Default#")
+    {
+        kvconfigTheme = QString();
+        settings.remove ("theme");
+    }
+    else
+    {
+        kvconfigTheme.replace("#", "");
+        settings.setValue ("theme", kvconfigTheme);
+    }
 
-    /* reset kvconfigTheme */
-    kvconfigTheme = QString();
+    /* correct buttons and label */
+    tabChanged (2);
 
-    /* correct buttons */
-    ui->restoreButton->hide();
-    ui->checkBox1->setChecked (false);
-    ui->konsoleCheckBox->setChecked (false);
-    ui->checkBox2->setChecked (false);
-    ui->checkBox3->setChecked (true);
-    ui->checkBox4->setChecked (false);
-    ui->checkBox5->setChecked (false);
-    ui->checkBox6->setChecked (true);
-    ui->checkBox7->setChecked (false);
-    ui->checkBoxProgress->setChecked (false);
-    ui->checkBoxMenubar->setChecked (true);
-    ui->checkBox8->setChecked (true);
-    ui->checkBox9->setChecked (false);
-    ui->checkBox10->setChecked (false);
-    ui->opaqueLabel->setEnabled (false);
-    ui->opaqueEdit->setEnabled (false);
-
-    ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/DefaultCopy/<b>DefaultCopy.kvconfig</b></i>"));
     showAnimated (ui->configLabel, 1000);
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
-    statusLabel->setText (tr ("<b>Active theme:</b> Kvantum (default)"));
-    ui->statusBar->showMessage (tr ("Removed the (modified) copy of the default theme."), 10000);
+    statusLabel->setText (tr ("<b>Active theme:</b> %1")
+                             .arg (kvconfigTheme.isEmpty() ? "Kvantum (default)" : kvconfigTheme));
+    ui->statusBar->showMessage (tr ("Removed the (modified) copy of %1.")
+                                   .arg (kvconfigTheme.isEmpty() ? "the default theme" : kvconfigTheme),
+                                10000);
 
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    if (process->state() == QProcess::Running)
+      preview();
 }
 /*************************/
 void KvantumManager::transparency (bool checked)
@@ -763,7 +888,7 @@ void KvantumManager::transparency (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.4</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.7</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));

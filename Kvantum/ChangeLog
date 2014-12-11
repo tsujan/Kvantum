@@ -5,6 +5,10 @@ V0.8.7
  * Font boldness can be set separately for most widget groups now.
  * Fixed LibreOffice's spinboxes.
  * Respect the MenuItem indicator name for right/left arrows and only if the SVG elements aren't found, use the IndicatorArrow name.
+ * Added a key for centering toolbar handle instead of scaling it vertically.
+ * Don't draw toolbars in KAboutDialog (KAboutPerson).
+ * Added the root installation path $PREFIX/share/Kvantum. The user installation has priority.
+ * Fixed menubar item states for Qt5 and made them like that of Qt4.
 
 V0.8.6
 ---------

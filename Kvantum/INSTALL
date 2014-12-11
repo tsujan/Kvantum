@@ -60,6 +60,8 @@ To install and select Kvantum themes other than the default one, use "Kvantum Ma
 
 If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: THEME_NAME.svg, THEME_NAME.kvconfig and THEME_NAME.colors.
 
+Themes can also be packaged as deb, rpm,... packages and installed as root. The root installation path should be /usr/share/Kvantum (if PREFIX=/usr) and the KDE color schemes should go to /usr/share/kde4/apps/color-schemes. If a theme is installed both as root and as user, the latter installation will take priority.
+
 ***********
 *   GTK   *
 ***********

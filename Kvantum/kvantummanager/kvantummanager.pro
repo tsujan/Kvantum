@@ -31,6 +31,8 @@ unix {
   BINDIR = $$PREFIX/bin
   DATADIR =$$PREFIX/share
 
+  DEFINES += DATADIR=\\\"$$DATADIR\\\"
+
   #MAKE INSTALL
   iconsvg.path = $$DATADIR/pixmaps
   iconsvg.files += ../kvantumpreview/kvantum.svg

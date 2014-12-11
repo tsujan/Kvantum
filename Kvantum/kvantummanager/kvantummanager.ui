@@ -387,11 +387,11 @@ this theme instead of its default theme.</string>
          <widget class="QPushButton" name="restoreButton">
           <property name="toolTip">
            <string>Revert to the default
-Kvantum theme
+settings of this theme.
 (Ctrl+Z)</string>
           </property>
           <property name="text">
-           <string>Defaults</string>
+           <string>Restore</string>
           </property>
           <property name="icon">
            <iconset theme="document-revert">

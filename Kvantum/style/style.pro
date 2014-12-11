@@ -6,7 +6,6 @@ CONFIG += qt \
 QT += svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras
 
-
 TARGET = kvantum
 TEMPLATE = lib
 
@@ -41,6 +40,9 @@ unix {
     PREFIX = /usr
   }
   COLORSDIR =$$PREFIX/share/kde4/apps/color-schemes
+  DATADIR =$$PREFIX/share
+
+  DEFINES += DATADIR=\\\"$$DATADIR\\\"
 
   #MAKE INSTALL
   target.path = $$[QT_INSTALL_PLUGINS]/styles

@@ -184,6 +184,13 @@ group_toolbar_buttons             true/false          Raise and group neighbor t
                                                       buttons? By default, they are
                                                       not raised.
 
+center_toolbar_handle             true/false          If true, the SVG element for the
+                                                      toolbar handle will be centered
+                                                      and its size will be that of the
+                                                      toolbar indicator. Otherwise, it
+                                                      will be scaled vertically with an
+                                                      8-px width. False by default.
+
 spread_progressbar                true/false          Spread progressbar's indicator
                                                       across its whole groove and not
                                                       just its interior? By default,

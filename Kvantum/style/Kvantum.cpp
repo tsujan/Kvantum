@@ -25,6 +25,7 @@
 #include <QTimer>
 #include <QToolButton>
 #include <QToolBar>
+#include <QMainWindow>
 #include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
@@ -188,23 +189,52 @@ void Kvantum::setUserTheme(const QString &themename)
 
   if (!themename.isNull() && !themename.isEmpty())
   {
+    /* kvconfig file */
     if (QFile::exists(QString("%1/Kvantum/%2/%2.kvconfig")
-                             .arg(xdg_config_home)
-                             .arg(themename)))
+                      .arg(xdg_config_home).arg(themename)))
     {
       themeSettings = new ThemeConfig(QString("%1/Kvantum/%2/%2.kvconfig")
-                                             .arg(xdg_config_home)
-                                             .arg(themename));
+                                      .arg(xdg_config_home).arg(themename));
     }
-
+    else if (!themename.contains("#") // # is reserved by Kvantum Manager for copied kvconfig
+             && QFile::exists(QString(DATADIR)+QString("/Kvantum/%1/%1.kvconfig")
+                                               .arg(themename)))
+    {
+      themeSettings = new ThemeConfig(QString(DATADIR)+QString("/Kvantum/%1/%1.kvconfig")
+                                                       .arg(themename));
+    }
+    /* SVG image */
     if (QFile::exists(QString("%1/Kvantum/%2/%2.svg")
-                             .arg(xdg_config_home)
-                             .arg(themename)))
+                      .arg(xdg_config_home).arg(themename)))
     {
       themeRndr = new QSvgRenderer();
       themeRndr->load(QString("%1/Kvantum/%2/%2.svg")
-                             .arg(xdg_config_home)
-                             .arg(themename));
+                      .arg(xdg_config_home).arg(themename));
+    }
+    else
+    {
+      if (!themename.contains("#"))
+      {
+        if (QFile::exists(QString(DATADIR)+QString("/Kvantum/%1/%1.svg")
+                                           .arg(themename)))
+        {
+          themeRndr = new QSvgRenderer();
+          themeRndr->load(QString(DATADIR)+QString("/Kvantum/%1/%1.svg")
+                                           .arg(themename));
+        }
+      }
+      else
+      {
+        QString themename_ = themename.left(themename.length() - 1);
+        if (!themename_.isEmpty() && !themename_.contains("#")
+            && QFile::exists(QString(DATADIR)+QString("/Kvantum/%1/%1.svg")
+                                              .arg(themename_)))
+        {
+          themeRndr = new QSvgRenderer();
+          themeRndr->load(QString(DATADIR)+QString("/Kvantum/%1/%1.svg")
+                                           .arg(themename_));
+        }
+      }
     }
   }
 
@@ -906,6 +936,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+
+      // -> CE_MenuScroller and PE_PanelMenu
+      if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+      {
+        fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
+        fspec.top = fspec.bottom = 0;
+      }
 
       // -> CE_ToolButtonLabel
       if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
@@ -1812,6 +1849,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           painter->setTransform(m, true);
         }
       }
+      const theme_spec tspec = settings->getThemeSpec();
+      if (element == PE_IndicatorToolBarHandle && tspec.center_toolbar_handle)
+      {
+        renderIndicator(painter,r,fspec,dspec,dspec.element+"-handle");
+        break;
+      }
       renderInterior(painter,r,fspec,ispec,
                      dspec.element
                        +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator"));
@@ -2141,31 +2184,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         aStatus.append(QString("-inactive"));
 
-      /* menuitems may have their own right/left arrows */
-      if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
-      {
-        const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
-        QString dir1;
-        if (element == PE_IndicatorArrowLeft)
-          dir1 = "-left-";
-        else
-          dir1 = "-right-";
-        const QRect interior = interiorRect(option->rect,fspec);
-        const QRect sq = squaredRect(interior);
-        int s = 0;
-        if (!sq.isValid())
-          s = dspec1.size;
-        else
-          s = (sq.width() > dspec1.size) ? dspec1.size : sq.width();
-        if (renderElement(painter, dspec1.element+dir1+aStatus,
-                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior),
-                          0,0,Qt::Horizontal))
-        {
-          break;
-        }
-      }
-
-      const indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
       QString dir;
       if (element == PE_IndicatorArrowUp)
         dir = "-up-";
@@ -2175,6 +2193,28 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         dir = "-left-";
       else
         dir = "-right-";
+
+      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+
+      /* menuitems may have their own right/left arrows */
+      if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+      {
+        const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
+        dspec.size = dspec1.size;
+        const QRect interior = interiorRect(option->rect,fspec);
+        const QRect sq = squaredRect(interior);
+        int s = 0;
+        if (!sq.isValid())
+          s = dspec1.size;
+        else
+          s = (sq.width() > dspec1.size) ? dspec1.size : sq.width();
+        if (renderElement(painter, dspec1.element+dir+aStatus,
+                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior),
+                          0,0,Qt::Horizontal))
+        {
+          break;
+        }
+      }
 
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus);
 
@@ -2309,7 +2349,7 @@ void Kvantum::drawControl(ControlElement element,
       if (opt) {
         const QString group = "MenuItem";
 
-        frame_spec fspec = getFrameSpec(group);
+        const frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         const label_spec lspec = getLabelSpec(group);
@@ -2507,6 +2547,15 @@ void Kvantum::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionMenuItem *>(option);
 
       if (opt) {
+#if QT_VERSION >= 0x050000
+        if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
+        {
+            if (status.startsWith("toggled"))
+              status.replace(QString("toggled"),QString("normal"));
+            if (status.startsWith("focused"))
+              status.replace(QString("focused"),QString("normal"));
+        }
+#endif
         QString group = "MenuBarItem";
         frame_spec fspec = getFrameSpec(group);
         fspec.hasCapsule = true;
@@ -2541,7 +2590,13 @@ void Kvantum::drawControl(ControlElement element,
         int state = 1;
         if (status.startsWith("disabled"))
           state = 0;
+#if QT_VERSION < 0x050000
         else if (status.startsWith("toggled") || status.startsWith("pressed"))
+#else
+        else if ((!styleHint(SH_MenuBar_MouseTracking, opt, widget) && status.startsWith("pressed"))
+                  || (styleHint(SH_MenuBar_MouseTracking, opt, widget)
+                      && (status.startsWith("toggled") || status.startsWith("pressed"))))
+#endif
           state = 2;
         renderLabel(painter,option->palette,
                     option->rect,
@@ -3459,6 +3514,12 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ToolBar : {
+      if (!qstyleoption_cast<const QStyleOptionToolBar*>(option))
+        break;
+      /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
+      if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
+        break;
+
       const QString group = "Toolbar";
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
@@ -4678,9 +4739,22 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
         return qMax(v,h);
     }
 
+    case PM_MenuScrollerHeight : {
+      const indicator_spec dspec = getIndicatorSpec("MenuItem");
+      return qMax(8,dspec.size);
+    }
+
     case PM_ToolBarFrameWidth :
     case PM_ToolBarItemSpacing : return 0;
-    case PM_ToolBarHandleExtent : return 8;
+    case PM_ToolBarHandleExtent : {
+      const theme_spec tspec = settings->getThemeSpec();
+      if (tspec.center_toolbar_handle)
+      {
+        const indicator_spec dspec = getIndicatorSpec("Toolbar");
+        return dspec.size ? dspec.size : 8;
+      }
+      return 8;
+    }
     case PM_ToolBarSeparatorExtent : {
       const indicator_spec dspec = getIndicatorSpec("Toolbar");
       return dspec.size ? dspec.size : 8;
@@ -7264,7 +7338,7 @@ void Kvantum::renderLabel(
         if (lspec.boldFont)
           painter->restore();
         if (lspec.italicFont)
-         painter->restore();
+          painter->restore();
         return;
       }
       else if (state == 2 && focusColor.isValid())
@@ -7298,6 +7372,8 @@ void Kvantum::renderLabel(
         painter->drawText(rtext,talign,text);
         painter->restore();
         if (lspec.boldFont)
+          painter->restore();
+        if (lspec.italicFont)
           painter->restore();
         return;
       }

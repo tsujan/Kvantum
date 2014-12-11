@@ -320,6 +320,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","group_toolbar_buttons", empty);
   r.group_toolbar_buttons = v.toBool();
 
+  v = getValue("General","center_toolbar_handle", empty);
+  r.center_toolbar_handle = v.toBool();
+
   v = getValue("General","spread_progressbar", empty);
   r.spread_progressbar = v.toBool();
 
