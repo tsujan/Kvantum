@@ -105,15 +105,15 @@ class Kvantum : public QCommonStyle {
         setSurfaceFormat(const_cast<QWidget*>(w));
     }
 
-  protected slots:
-#if QT_VERSION < 0x050000
-    QIcon standardIconImplementation (StandardPixmap standardIcon,
-                                      const QStyleOption *option = 0,
-                                      const QWidget *widget = 0) const;
-#else
+#if QT_VERSION >= 0x050000
     QIcon standardIcon (StandardPixmap standardIcon,
                         const QStyleOption *option = 0,
                         const QWidget *widget = 0) const;
+#else
+  protected slots:
+    QIcon standardIconImplementation (StandardPixmap standardIcon,
+                                      const QStyleOption *option = 0,
+                                      const QWidget *widget = 0) const;
 #endif
 
   private:

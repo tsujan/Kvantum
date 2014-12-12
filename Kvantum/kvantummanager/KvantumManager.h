@@ -30,7 +30,7 @@ private slots:
     void selectionChanged (const QString &txt);
     void preview();
     void copyDefaultTheme (QString source, QString target);
-    void wrtieConfig();
+    void writeConfig();
     void restoreDefault();
     void transparency (bool checked);
     void aboutDialog();
@@ -41,6 +41,7 @@ private:
     bool isThemeDir (const QString &folder);
     void updateThemeList();
     void showAnimated (QWidget *w, int duration);
+    void defaultThemeButtons();
     Ui::KvantumManager *ui;
     /* Remember the last opened folder */
     QString lastPath;

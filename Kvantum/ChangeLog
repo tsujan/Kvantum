@@ -9,6 +9,7 @@ V0.8.7
  * Don't draw toolbars in KAboutDialog (KAboutPerson).
  * Added the root installation path $PREFIX/share/Kvantum. The user installation has priority.
  * Fixed menubar item states for Qt5 and made them like that of Qt4.
+ * Take button icons from icon theme if there is no SVG element for them.
 
 V0.8.6
 ---------

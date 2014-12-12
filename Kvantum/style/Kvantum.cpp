@@ -2147,7 +2147,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_IndicatorTabTear : {
       indicator_spec dspec = getIndicatorSpec("Tab");
-      renderElement(painter,dspec.element+"-tear",option->rect,0,0);
+      renderElement(painter,dspec.element+"-tear",option->rect);
 
       break;
     }
@@ -2209,8 +2209,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else
           s = (sq.width() > dspec1.size) ? dspec1.size : sq.width();
         if (renderElement(painter, dspec1.element+dir+aStatus,
-                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior),
-                          0,0,Qt::Horizontal))
+                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior)))
         {
           break;
         }
@@ -3299,8 +3298,7 @@ void Kvantum::drawControl(ControlElement element,
                     alignedRect(QApplication::layoutDirection(),
                                 Qt::AlignCenter,
                                 QSize(iW,dspec.size),
-                                r),
-                    0,0);
+                                r));
       if (!(option->state & State_Enabled))
         painter->restore();
       if (h < w)
@@ -3420,8 +3418,7 @@ void Kvantum::drawControl(ControlElement element,
                     alignedRect(QApplication::layoutDirection(),
                                 Qt::AlignCenter,
                                 QSize(pixelMetric(PM_ScrollBarExtent)-fspec.left-fspec.right,dspec.size),
-                                r),
-                    0,0);
+                                r));
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -6710,12 +6707,22 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"cancel-button",QRect(0,0,s,s)))
+      if (renderElement(&painter,"dialog-cancel",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
     case SP_DialogOkButton :
-    case SP_DialogYesButton :
+    case SP_DialogYesButton : {
+      int s = pixelMetric(PM_SmallIconSize);
+      QPixmap pm(QSize(s,s));
+      pm.fill(Qt::transparent);
+
+      QPainter painter(&pm);
+
+      if (renderElement(&painter,"dialog-ok",QRect(0,0,s,s)))
+        return QIcon(pm);
+      else break;
+    }
     case SP_DialogApplyButton : {
       int s = pixelMetric(PM_SmallIconSize);
       QPixmap pm(QSize(s,s));
@@ -6723,7 +6730,7 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"ok-button",QRect(0,0,s,s)))
+      if (renderElement(&painter,"dialog-ok-apply",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -6734,7 +6741,7 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"open-button",QRect(0,0,s,s)))
+      if (renderElement(&painter,"folder-open",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -6745,12 +6752,11 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"save-button",QRect(0,0,s,s)))
+      if (renderElement(&painter,"document-save",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
-    case SP_ArrowLeft :
-    case SP_ArrowBack : {
+    case SP_ArrowLeft : {
       int s = pixelMetric(PM_SmallIconSize);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -6758,30 +6764,40 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
       QPainter painter(&pm);
 
       // a 2-px margin
-      if (renderElement(&painter,"arrow-left-focused",QRect(2,2,s-4,s-4)))
+      if (renderElement(&painter,"go-previous",QRect(2,2,s-4,s-4)))
         return QIcon(pm);
       else break;
     }
-    case SP_ArrowRight :
-    case SP_ArrowForward : {
+    case SP_ArrowRight : {
       int s = pixelMetric(PM_SmallIconSize);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"arrow-right-focused",QRect(2,2,s-4,s-4)))
+      if (renderElement(&painter,"go-next",QRect(2,2,s-4,s-4)))
         return QIcon(pm);
       else break;
     }
-    case SP_FileDialogToParent : {
+    case SP_ArrowUp : {
       int s = pixelMetric(PM_SmallIconSize);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"arrow-up-focused",QRect(2,2,s-4,s-4)))
+      if (renderElement(&painter,"go-up",QRect(2,2,s-4,s-4)))
+        return QIcon(pm);
+      else break;
+    }
+    case SP_ArrowDown : {
+      int s = pixelMetric(PM_SmallIconSize);
+      QPixmap pm(QSize(s,s));
+      pm.fill(Qt::transparent);
+
+      QPainter painter(&pm);
+
+      if (renderElement(&painter,"go-down",QRect(2,2,s-4,s-4)))
         return QIcon(pm);
       else break;
     }
@@ -6792,20 +6808,17 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,"arrow-plus-focused",QRect(2,2,s-4,s-4)))
+      if (renderElement(&painter,"folder-new",QRect(2,2,s-4,s-4)))
         return QIcon(pm);
       else break;
     }
 
-#if QT_VERSION < 0x050000
-    default : return QCommonStyle::standardIconImplementation(standardIcon,option,widget);
+    default : break;
   }
 
+#if QT_VERSION < 0x050000
   return QCommonStyle::standardIconImplementation(standardIcon,option,widget);
 #else
-    default : return QCommonStyle::standardIcon(standardIcon,option,widget);
-  }
-
   return QCommonStyle::standardIcon(standardIcon,option,widget);
 #endif
 }
@@ -6821,6 +6834,9 @@ bool Kvantum::renderElement(QPainter *painter,
                             Qt::Orientation orientation) const
 {
   Q_UNUSED(orientation);
+
+  if (element.isEmpty())
+    return false;
 
   if (!bounds.isValid())
     return false;

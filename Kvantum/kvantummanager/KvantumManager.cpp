@@ -41,7 +41,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->installTheme, SIGNAL (clicked()), this, SLOT (installTheme()));
     connect (ui->deleteTheme, SIGNAL (clicked()), this, SLOT (deleteTheme()));
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
-    connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (wrtieConfig()));
+    connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (writeConfig()));
     connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
     connect (ui->checkBox9, SIGNAL (clicked (bool)), this, SLOT (transparency (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
@@ -384,6 +384,26 @@ void KvantumManager::txtChanged (const QString &txt)
         ui->installTheme->setEnabled (true);
 }
 /*************************/
+void KvantumManager::defaultThemeButtons()
+{
+    ui->restoreButton->hide();
+    ui->checkBox1->setChecked (false);
+    ui->konsoleCheckBox->setChecked (false);
+    ui->checkBox2->setChecked (false);
+    ui->checkBox3->setChecked (true);
+    ui->checkBox4->setChecked (false);
+    ui->checkBox5->setChecked (false);
+    ui->checkBox6->setChecked (true);
+    ui->checkBox7->setChecked (false);
+    ui->checkBoxProgress->setChecked (false);
+    ui->checkBoxMenubar->setChecked (true);
+    ui->checkBox8->setChecked (true);
+    ui->checkBox9->setChecked (false);
+    ui->checkBox10->setChecked (false);
+    ui->opaqueLabel->setEnabled (false);
+    ui->opaqueEdit->setEnabled (false);
+}
+/*************************/
 void KvantumManager::tabChanged (int index)
 {
     ui->statusBar->clearMessage();
@@ -430,32 +450,23 @@ void KvantumManager::tabChanged (int index)
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
 
-            ui->restoreButton->hide();
-            ui->checkBox1->setChecked (false);
-            ui->konsoleCheckBox->setChecked (false);
-            ui->checkBox2->setChecked (false);
-            ui->checkBox3->setChecked (true);
-            ui->checkBox4->setChecked (false);
-            ui->checkBox5->setChecked (false);
-            ui->checkBox6->setChecked (true);
-            ui->checkBox7->setChecked (false);
-            ui->checkBoxProgress->setChecked (false);
-            ui->checkBoxMenubar->setChecked (true);
-            ui->checkBox8->setChecked (true);
-            ui->checkBox9->setChecked (false);
-            ui->checkBox10->setChecked (false);
-            ui->opaqueLabel->setEnabled (false);
-            ui->opaqueEdit->setEnabled (false);
+            defaultThemeButtons();
         }
         else
         {
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
             QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
+            QString userSvg = QString ("%1/Kvantum/%2/%2.svg").arg (xdg_config_home).arg (kvconfigTheme);
+            QString rootSvg = QString (DATADIR) + QString ("/Kvantum/%1/%1.svg").arg (kvconfigTheme);
             if (!QFile::exists (themeConfig))
             {
                 themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme);
-                if (QFile::exists (themeConfig))
+                if (QFile::exists (themeConfig)
+                    /* a root theme with just an SVG image */
+                    || (!QFile::exists (userSvg) && QFile::exists (rootSvg)))
+                {
                     ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme));
+                }
             }
             showAnimated (ui->configLabel, 1000);
 
@@ -465,9 +476,17 @@ void KvantumManager::tabChanged (int index)
                 ui->restoreButton->hide();
 
             /* the theme may be just an SVG image,
-               so add Kvantum's default config */
+               so add Kvantum's default config... */
             if (!QFile::exists (themeConfig))
             {
+                /* ... only if it isn't a root theme */
+                if (!QFile::exists (userSvg) && QFile::exists (rootSvg))
+                {
+                    defaultThemeButtons();
+                    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
+                    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+                    return;
+                }
                 copyDefaultTheme (QString(), kvconfigTheme);
                 themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
             }
@@ -742,43 +761,44 @@ void KvantumManager::copyDefaultTheme (QString source, QString target)
         notWritable();
 }
 /*************************/
-void KvantumManager::wrtieConfig()
+void KvantumManager::writeConfig()
 {
     bool wasDefault = false;
-    if (kvconfigTheme.isEmpty())
+    if (kvconfigTheme.isEmpty()) // default theme
     {
         wasDefault = true;
         QString theCopy = QString ("%1/Kvantum/Default#/Default#.kvconfig").arg (xdg_config_home);
         QFile::remove (theCopy);
         kvconfigTheme = "Default#";
         copyDefaultTheme (QString(), kvconfigTheme);
-
-        QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
-        QSettings settings (configFile, QSettings::NativeFormat);
-        if (!settings.isWritable()) return;
-        settings.setValue ("theme", kvconfigTheme);
     }
 
     QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
-    if (!QFile::exists (themeConfig))
+    if (!QFile::exists (themeConfig)) // root theme
     {
+        wasDefault = true;
         QString themeConfig_ = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme);
         if (QFile::exists (themeConfig_))
         {
-            wasDefault = true;
             QString theCopy = QString ("%1/Kvantum/%2#/%2#.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
             QFile::remove (theCopy);
             copyDefaultTheme (kvconfigTheme, kvconfigTheme + "#");
             kvconfigTheme = kvconfigTheme + "#";
-
-            QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
-            QSettings settings (configFile, QSettings::NativeFormat);
-            if (!settings.isWritable()) return;
-            settings.setValue ("theme", kvconfigTheme);
+        }
+        else // root theme is just an SVG image
+        {
+            kvconfigTheme = kvconfigTheme + "#";
+            copyDefaultTheme (QString(), kvconfigTheme);
         }
     }
+
+    QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
+    QSettings settings (configFile, QSettings::NativeFormat);
+    if (!settings.isWritable()) return;
+    settings.setValue ("theme", kvconfigTheme);
+
     themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
-    if (QFile::exists (themeConfig))
+    if (QFile::exists (themeConfig)) // user theme
     {
         QSettings themeSettings (themeConfig, QSettings::NativeFormat);
         if (!themeSettings.isWritable())
