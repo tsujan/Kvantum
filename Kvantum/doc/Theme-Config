@@ -191,6 +191,13 @@ center_toolbar_handle             true/false          If true, the SVG element f
                                                       will be scaled vertically with an
                                                       8-px width. False by default.
 
+toolbutton_style                  integer             Sets the toolbutton style when it
+                                                      is not set by the app. 0: follow,
+                                                      1: icon only, 2: text only,
+                                                      3: text beside icon, and
+                                                      4: text under icon. The toolbutton
+                                                      style is 0 by default.
+
 spread_progressbar                true/false          Spread progressbar's indicator
                                                       across its whole groove and not
                                                       just its interior? By default,

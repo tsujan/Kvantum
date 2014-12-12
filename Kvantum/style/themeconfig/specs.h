@@ -48,6 +48,9 @@ typedef struct {
   /* center toolbar handle
      instead of scaling it vertically? */
   bool center_toolbar_handle;
+  /* 0 -> follow, 1-> icon only 2 -> text only,
+     3-> text beside icon, 4 -> text under icon */
+  int toolbutton_style;
   /* let progress indicator spread across the whole
      progress groove and not just its interior */
   bool spread_progressbar;
@@ -254,6 +257,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.attach_active_tab = false;
   tspec.group_toolbar_buttons = false;
   tspec.center_toolbar_handle = false;
+  tspec.toolbutton_style = 0;
   tspec.spread_progressbar = false;
   tspec.textless_progressbar = false;
   tspec.menubar_mouse_tracking = true;

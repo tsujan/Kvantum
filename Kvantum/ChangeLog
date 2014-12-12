@@ -10,6 +10,9 @@ V0.8.7
  * Added the root installation path $PREFIX/share/Kvantum. The user installation has priority.
  * Fixed menubar item states for Qt5 and made them like that of Qt4.
  * Take button icons from icon theme if there is no SVG element for them.
+ * Don't force icon sizes.
+ * Added a key for toolbutton style.
+ * Don't draw scroll area corner panels.
 
 V0.8.6
 ---------

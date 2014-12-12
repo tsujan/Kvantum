@@ -1606,6 +1606,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       break;
     }
 
+    // who needs this?
+    case PE_PanelScrollAreaCorner : {
+      if (widget && widget->inherits("WebView"))
+        QCommonStyle::drawPrimitive(element,option,painter,widget);
+      break;
+    }
+
     case PE_FrameGroupBox : {
       const QString group = "GroupBox";
       const frame_spec fspec = getFrameSpec(group);
@@ -4772,7 +4779,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return (extra > 0 ? 24 + extra : 24);
     }
 
-    case PM_ToolBarIconSize :
+    //case PM_ToolBarIconSize :
     case PM_ToolBarExtensionExtent : return 16;
     case PM_ToolBarItemMargin : {
       const frame_spec fspec = getFrameSpec("Toolbar");
@@ -4781,10 +4788,10 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return qMax(v,h);
     }
 
-    case PM_ButtonIconSize :
+    /*case PM_ButtonIconSize :
     case PM_TabBarIconSize :
     case PM_SmallIconSize : return 16;
-    case PM_LargeIconSize : return 32;
+    case PM_LargeIconSize : return 32;*/
 
     case PM_FocusFrameVMargin :
     case PM_FocusFrameHMargin :  {
@@ -5079,8 +5086,17 @@ int Kvantum::styleHint(StyleHint hint,
       return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
 
-    // for the sake of consistency (-> Kvantum.h -> renderLabel())
-    case SH_ToolButtonStyle : return Qt::ToolButtonTextBesideIcon;
+    case SH_ToolButtonStyle : {
+      const theme_spec tspec = settings->getThemeSpec();
+      switch (tspec.toolbutton_style) {
+        case 0 : return QCommonStyle::styleHint(hint,option,widget,returnData);
+        case 1 : return Qt::ToolButtonIconOnly;
+        case 2 : return Qt::ToolButtonTextOnly;
+        case 3 : return Qt::ToolButtonTextBesideIcon;
+        case 4 : return Qt::ToolButtonTextUnderIcon;
+        default :return QCommonStyle::styleHint(hint,option,widget,returnData);
+      }
+    }
 
     case SH_RubberBand_Mask : {
       const QStyleOptionRubberBand *opt = qstyleoption_cast<const QStyleOptionRubberBand*>(option);
@@ -5591,7 +5607,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_ToolBarIconSize)));
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_TabBarIconSize)));
 
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast

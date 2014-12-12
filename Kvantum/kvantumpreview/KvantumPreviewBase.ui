@@ -439,7 +439,7 @@ and text below</string>
           </size>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonFollowStyle</enum>
          </property>
         </widget>
        </item>
@@ -454,7 +454,7 @@ and arrow</string>
            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonFollowStyle</enum>
          </property>
          <property name="arrowType">
           <enum>Qt::LeftArrow</enum>
@@ -475,7 +475,7 @@ and arrow</string>
            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonFollowStyle</enum>
          </property>
          <property name="arrowType">
           <enum>Qt::LeftArrow</enum>
@@ -588,7 +588,7 @@ and text below</string>
           </size>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
+          <enum>Qt::ToolButtonFollowStyle</enum>
          </property>
         </widget>
        </item>
@@ -2296,7 +2296,7 @@ check box</string>
     <string>toolBar</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonFollowStyle</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>

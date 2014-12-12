@@ -23,6 +23,12 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     else
         xdg_config_home = QString (_xdg_config_home);
 
+    ui->comboToolButton->insertItems (0, QStringList() << "Follow Style"
+                                                       << "Icon Only"
+                                                       << "Text Only"
+                                                       << "Text Beside Icon"
+                                                       << "Text Under Icon");
+
     QLabel *statusLabel = new QLabel();
     statusLabel->setTextInteractionFlags (Qt::TextSelectableByMouse);
     ui->statusBar->addWidget (statusLabel);
@@ -402,6 +408,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBox10->setChecked (false);
     ui->opaqueLabel->setEnabled (false);
     ui->opaqueEdit->setEnabled (false);
+    ui->comboToolButton->setCurrentIndex (0);
 }
 /*************************/
 void KvantumManager::tabChanged (int index)
@@ -520,6 +527,14 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 else
                     ui->checkBoxMenubar->setChecked (true);
+                if (themeSettings.contains ("toolbutton_style"))
+                {
+                    int index = themeSettings.value ("toolbutton_style").toInt();
+                    if (index > 4 || index < 0) index = 0;
+                    ui->comboToolButton->setCurrentIndex (index);
+                }
+                else
+                    ui->comboToolButton->setCurrentIndex (0);
                 if (themeSettings.contains ("x11drag"))
                     ui->checkBox8->setChecked (themeSettings.value ("x11drag").toBool());
                 else
@@ -550,7 +565,7 @@ void KvantumManager::tabChanged (int index)
         }
     }
     int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+    resize (size().expandedTo (sizeHint() + ui->comboToolButton->sizeHint() + QSize (extra, extra)));
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
@@ -826,6 +841,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
+        themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
         themeSettings.setValue ("blurring", ui->checkBox10->isChecked());
