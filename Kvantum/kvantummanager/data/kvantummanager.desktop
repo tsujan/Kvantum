@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Name=Kvantum Manager
-Comment=A simple GUI for installing and choosing Kvantum themes
+Comment=A simple GUI for installing, selecting and manipulating Kvantum themes
 Exec=kvantummanager
 Icon=kvantum
 Terminal=false
 Type=Application
-Categories=Qt;Utility;
+Categories=Qt;Utility;Settings;DesktopSettings;LXQt;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;X-GNOME-PersonalSettings;
 X-KDE-StartupNotify=false

@@ -3108,6 +3108,7 @@ void Kvantum::drawControl(ControlElement element,
       if (opt)
       {
         status = (option->state & State_Enabled) ?
+                   (option->state & State_Selected) ? "toggled" :
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
         if (isInactive)
@@ -3254,7 +3255,9 @@ void Kvantum::drawControl(ControlElement element,
                     r,
                     fspec,lspec,
                     Qt::AlignCenter,opt->text,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0);
+                    option->state & State_Enabled ?
+                      (option->state & State_Selected) ? 4
+                      : option->state & State_MouseOver ? 2 : 1 : 0);
       }
 
       break;

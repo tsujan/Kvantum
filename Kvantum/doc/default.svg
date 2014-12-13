@@ -32,8 +32,8 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="207.94523"
-     inkscape:cy="1012.078"
+     inkscape:cx="156.80231"
+     inkscape:cy="1005.8987"
      inkscape:window-x="208"
      inkscape:window-y="54"
      inkscape:current-layer="svg2"
@@ -6908,6 +6908,26 @@
        x2="98.727921"
        y2="-447.5632"
        gradientTransform="matrix(0.15999998,0,0,0.53333333,133.38275,-1566.8517)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7330"
+       id="linearGradient5511"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-108.66959,-197)"
+       x1="229"
+       y1="520"
+       x2="229"
+       y2="536" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient25782"
+       id="linearGradient5514"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.04087536,0,0,0.06217073,92.06718,300.25501)"
+       x1="885.28809"
+       y1="365.84714"
+       x2="885.28809"
+       y2="446.27084" />
   </defs>
   <g
      style="display:none"
@@ -10075,7 +10095,8 @@
   </g>
   <g
      id="progress-pattern-disabled"
-     inkscape:label="#g6606">
+     inkscape:label="#g6606"
+     transform="translate(29.169586,-0.5)">
     <rect
        y="323"
        x="153.33041"
@@ -16058,5 +16079,28 @@
        id="path6591"
        d="m 119.979,500.521 0,-13.042 2,2 0,9.0425 z"
        style="opacity:0.14999999999999999;fill:url(#linearGradient6601);fill-opacity:1;fill-rule:nonzero;stroke:none" />
+  </g>
+  <g
+     inkscape:label="#g6584"
+     id="progress-pattern-toggled"
+     transform="translate(29.669594,-0.5)">
+    <rect
+       y="323"
+       x="120.33041"
+       height="16"
+       width="16"
+       id="rect5507"
+       style="fill:url(#linearGradient5511);fill-opacity:1;stroke:none"
+       d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9" />
+    <rect
+       d="m 496,454.36218 -1176,0 m 1178,1.95919 -1176,0 m 1178,1.95918 -1176,0 m 1178,1.95918 -1176,0 m 1170,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755"
+       style="opacity:0.5;fill:url(#linearGradient5514);fill-opacity:1;stroke:none"
+       id="rect5509"
+       width="16"
+       height="5"
+       x="120.33041"
+       y="323"
+       rx="2.2204461e-17"
+       ry="0.06666667" />
   </g>
 </svg>
