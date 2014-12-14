@@ -475,7 +475,7 @@ for menubars by default.</string>
               </font>
              </property>
              <property name="toolTip">
-              <string>Will forces a size of 16px on toolbar icons
+              <string>Will force a size of 16px on toolbar icons
 if their size is not set in the app.</string>
              </property>
              <property name="text">
