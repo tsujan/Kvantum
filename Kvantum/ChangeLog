@@ -3,7 +3,7 @@ V0.8.8
  * Changed the layout of the config page of Kvantum Manager.
  * Removed custom icons, except those for MDI titlebars (Kavntum isn't an icon theme after all).
  * Added a key for slim toolbars.
- * Fixed the appearance of Konqueror's security icon on the right on its URL bar.
+ * Fixed the appearance of Konqueror's security icon on the right of its URL bar.
 
 V0.8.7
 ---------

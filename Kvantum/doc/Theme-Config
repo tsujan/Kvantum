@@ -191,6 +191,12 @@ center_toolbar_handle             true/false          If true, the SVG element f
                                                       will be scaled vertically with an
                                                       8-px width. False by default.
 
+slim_toolbars                     true/false          When true, the size of toolbar
+                                                      icons will be 16px if it is not
+                                                      set in the app. False by default,
+                                                      which means that the size is
+                                                      determined by the DE or the app.
+
 toolbutton_style                  integer             Sets the toolbutton style when it
                                                       is not set by the app. 0: follow,
                                                       1: icon only, 2: text only,
