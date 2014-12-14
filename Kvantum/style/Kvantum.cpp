@@ -1716,22 +1716,43 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
-        /* see if there is any icon on the left of
-           the combo box (or right for RTL layout) */
+        const frame_spec fspec1 = getFrameSpec("DropDownButton");
+        /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          const frame_spec fspec1 = getFrameSpec("DropDownButton");
           if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
-            fspec.capsuleH = 0;
+          {
+            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+              fspec.capsuleH = 0;
+            else
+              fspec.capsuleH = -1;
+          }
           else
-            fspec.capsuleH = 1;
+          {
+            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+              fspec.capsuleH = 1;
+            else
+              fspec.capsuleH = 2;
+          }
         }
         else
         {
           if (widget->x() > 0)
-            fspec.capsuleH = 0;
+          {
+            /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
+            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+              fspec.capsuleH = 0;
+            else
+              fspec.capsuleH = 1;
+              
+          }
           else
-            fspec.capsuleH = -1;
+          {
+            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+              fspec.capsuleH = -1;
+            else
+              fspec.capsuleH = 2;
+          }
         }
         fspec.capsuleV = 2;
       }
@@ -1787,20 +1808,43 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
+        const frame_spec fspec1 = getFrameSpec("DropDownButton");
+        /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          const frame_spec fspec1 = getFrameSpec("DropDownButton");
           if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
-            fspec.capsuleH = 0;
+          {
+            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+              fspec.capsuleH = 0;
+            else
+              fspec.capsuleH = -1;
+          }
           else
-            fspec.capsuleH = 1;
+          {
+            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+              fspec.capsuleH = 1;
+            else
+              fspec.capsuleH = 2;
+          }
         }
         else
         {
           if (widget->x() > 0)
-            fspec.capsuleH = 0;
+          {
+            /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
+            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+              fspec.capsuleH = 0;
+            else
+              fspec.capsuleH = 1;
+              
+          }
           else
-            fspec.capsuleH = -1;
+          {
+            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+              fspec.capsuleH = -1;
+            else
+              fspec.capsuleH = 2;
+          }
         }
         fspec.capsuleV = 2;
       }
@@ -2033,21 +2077,35 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       frame_spec fspec = getFrameSpec(group);
 
-      const QComboBox *combo = qobject_cast<const QComboBox *>(widget);
-      if (combo /*&& !combo->duplicatesEnabled()*/)
+      const QComboBox *cb = qobject_cast<const QComboBox *>(widget);
+      if (cb /*&& !cb->duplicatesEnabled()*/)
       {
-        fspec.hasCapsule = true;
-        if (option->direction == Qt::RightToLeft)
+        if (QLineEdit *le = cb->lineEdit())
         {
-          fspec.capsuleH = -1;
-          fspec.right = 0;
+          /* Konqueror may add an icon to the right of lineedit (for LTR) */
+          if (option->direction == Qt::RightToLeft
+              ? le->x() == COMBO_ARROW_LENGTH + fspec.left
+              : le->x()+le->width() == cb->width()-(COMBO_ARROW_LENGTH+fspec.right))
+          {
+            fspec.hasCapsule = true;
+          }
         }
         else
+          fspec.hasCapsule = true;
+        if (fspec.hasCapsule)
         {
-          fspec.capsuleH = 1;
-          fspec.left = 0; // no left frame in this case
+          if (option->direction == Qt::RightToLeft)
+          {
+            fspec.capsuleH = -1;
+            fspec.right = 0;
+          }
+          else
+          {
+            fspec.capsuleH = 1;
+            fspec.left = 0; // no left frame in this case
+          }
+          fspec.capsuleV = 2;
         }
-        fspec.capsuleV = 2;
 
         if (option->state & State_Selected)
           status.replace(QString("toggled"),QString("normal"));
@@ -4782,7 +4840,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return (extra > 0 ? 24 + extra : 24);
     }
 
-    //case PM_ToolBarIconSize :
+    case PM_ToolBarIconSize : {
+      const theme_spec tspec = settings->getThemeSpec();
+      if (tspec.slim_toolbars)
+        return 16;
+      else
+        return QCommonStyle::pixelMetric(metric,option,widget);
+    }
     case PM_ToolBarExtensionExtent : return 16;
     case PM_ToolBarItemMargin : {
       const frame_spec fspec = getFrameSpec("Toolbar");
@@ -6715,133 +6779,19 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
         return QIcon(pm);
       else break;
     }
+    /* in these cases too, Qt sets the size to 24 in standardPixmap() */
     case SP_DialogCancelButton :
     case SP_DialogNoButton : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"dialog-cancel",QRect(0,0,s,s)))
-        return QIcon(pm);
-      else
-      {
-         /* Qt sets the size to 24 for these icons in standardPixmap() */
-         QIcon icn = QIcon::fromTheme(QLatin1String("dialog-cancel"),
-                                      QIcon::fromTheme(QLatin1String("process-stop")));
-         if (!icn.isNull()) return icn;
-         else break;
-      }
-    }
-    case SP_DialogOkButton :
-    case SP_DialogYesButton : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"dialog-ok",QRect(0,0,s,s)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_DialogApplyButton : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"dialog-ok-apply",QRect(0,0,s,s)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_DialogOpenButton : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"folder-open",QRect(0,0,s,s)))
-        return QIcon(pm);
-      else break;
+       QIcon icn = QIcon::fromTheme(QLatin1String("dialog-cancel"),
+                                    QIcon::fromTheme(QLatin1String("process-stop")));
+       if (!icn.isNull()) return icn;
+       else break;
     }
     case SP_DialogSaveButton : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"document-save",QRect(0,0,s,s)))
-        return QIcon(pm);
-      else
-      {
-         /* Qt sets the size to 24 for this icon in standardPixmap() */
-         QIcon icn = QIcon::fromTheme(QLatin1String("document-save"));
-         if (!icn.isNull()) return icn;
-         else break;
-      }
+       QIcon icn = QIcon::fromTheme(QLatin1String("document-save"));
+       if (!icn.isNull()) return icn;
+       else break;
     }
-    case SP_ArrowLeft : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      // a 2-px margin
-      if (renderElement(&painter,"go-previous",QRect(2,2,s-4,s-4)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_ArrowRight : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"go-next",QRect(2,2,s-4,s-4)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_ArrowUp : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"go-up",QRect(2,2,s-4,s-4)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_ArrowDown : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"go-down",QRect(2,2,s-4,s-4)))
-        return QIcon(pm);
-      else break;
-    }
-    case SP_FileDialogNewFolder : {
-      int s = pixelMetric(PM_SmallIconSize);
-      QPixmap pm(QSize(s,s));
-      pm.fill(Qt::transparent);
-
-      QPainter painter(&pm);
-
-      if (renderElement(&painter,"folder-new",QRect(2,2,s-4,s-4)))
-        return QIcon(pm);
-      else break;
-    }
-    /* in these cases too, Qt sets the size to 24 in standardPixmap() */
     case SP_DialogResetButton : {
       QIcon icn = QIcon::fromTheme(QLatin1String("edit-clear"));
       if (!icn.isNull()) return icn;

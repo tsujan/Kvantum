@@ -42,7 +42,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>364</width>
+         <width>357</width>
          <height>132</height>
         </rect>
        </property>
@@ -50,7 +50,52 @@
         <string>Install/Update Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="2" colspan="2">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="installLabel">
+          <property name="text">
+           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it.&lt;/center&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::RichText</enum>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
          <widget class="QLineEdit" name="lineEdit">
           <property name="minimumSize">
            <size>
@@ -59,36 +104,6 @@
            </size>
           </property>
          </widget>
-        </item>
-        <item row="4" column="3" alignment="Qt::AlignTop">
-         <widget class="QPushButton" name="installTheme">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Add this theme to the list of themes that
-Kvantum can use in addition to its default theme.</string>
-          </property>
-          <property name="text">
-           <string>Install this theme</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>5</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="openTheme">
@@ -119,63 +134,19 @@ theme folder</string>
           </property>
          </spacer>
         </item>
-        <item row="4" column="2">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="4" column="1" alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="installTheme">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
+          <property name="toolTip">
+           <string>Add this theme to the list of themes that
+Kvantum can use in addition to its default theme.</string>
           </property>
-         </spacer>
-        </item>
-        <item row="0" column="0" colspan="4">
-         <widget class="QLabel" name="installLabel">
           <property name="text">
-           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it.&lt;/center&gt;</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::RichText</enum>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-          <property name="textInteractionFlags">
-           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+           <string>Install this theme</string>
           </property>
          </widget>
-        </item>
-        <item row="1" column="0" colspan="4">
-         <spacer name="verticalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="5" column="0" colspan="4">
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>1</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </widget>
@@ -184,7 +155,7 @@ theme folder</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>366</width>
+         <width>359</width>
          <height>238</height>
         </rect>
        </property>
@@ -192,22 +163,6 @@ theme folder</string>
         <string>Change/Delete Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="2">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="0" alignment="Qt::AlignRight">
          <widget class="QLabel" name="label">
           <property name="text">
@@ -215,84 +170,7 @@ theme folder</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2" colspan="2">
-         <widget class="QComboBox" name="comboBox">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3" alignment="Qt::AlignTop">
-         <widget class="QPushButton" name="useTheme">
-          <property name="toolTip">
-           <string>If Kvantum is activated, it will use
-this theme instead of its default theme.</string>
-          </property>
-          <property name="text">
-           <string>Use this theme</string>
-          </property>
-          <property name="icon">
-           <iconset theme="dialog-ok">
-            <normaloff/>
-           </iconset>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>5</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="2">
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="4" column="0" colspan="4">
+        <item row="4" column="0" colspan="2">
          <widget class="QLabel" name="usageLabel">
           <property name="text">
            <string>Since Kvantum is independent of KDE, you need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Style &gt; Applications &gt; Widget style&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Also select and apply the color scheme of this theme from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Colors &gt; Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for Plasma to see it completely.</string>
@@ -308,7 +186,7 @@ this theme instead of its default theme.</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="0" colspan="4">
+        <item row="5" column="0" colspan="2">
          <spacer name="verticalSpacer_10">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -321,7 +199,7 @@ this theme instead of its default theme.</string>
           </property>
          </spacer>
         </item>
-        <item row="2" column="0">
+        <item row="2" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="deleteTheme">
           <property name="text">
            <string>Delete this theme</string>
@@ -333,23 +211,8 @@ this theme instead of its default theme.</string>
           </property>
          </widget>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="page_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>447</width>
-         <height>360</height>
-        </rect>
-       </property>
-       <attribute name="label">
-        <string>Configure Active Theme</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="2" column="0" colspan="2">
-         <spacer name="verticalSpacer_8">
+        <item row="3" column="0" colspan="2">
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -359,30 +222,74 @@ this theme instead of its default theme.</string>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>20</height>
+            <height>10</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="11" column="1" alignment="Qt::AlignRight">
-         <widget class="QPushButton" name="saveButton">
+        <item row="1" column="0" colspan="2">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1" alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="useTheme">
           <property name="toolTip">
-           <string>Save this configuration
-(Ctrl+S)</string>
+           <string>If Kvantum is activated, it will use
+this theme instead of its default theme.</string>
           </property>
           <property name="text">
-           <string>Save</string>
+           <string>Use this theme</string>
           </property>
           <property name="icon">
-           <iconset theme="document-save">
+           <iconset theme="dialog-ok">
             <normaloff/>
            </iconset>
           </property>
-          <property name="shortcut">
-           <string>Ctrl+S</string>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="comboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>675</width>
+         <height>298</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Configure Active Theme</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
         <item row="11" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="restoreButton">
           <property name="toolTip">
@@ -403,36 +310,7 @@ settings of this theme.
           </property>
          </widget>
         </item>
-        <item row="12" column="0" colspan="2">
-         <spacer name="verticalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>1</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="9" column="0" colspan="2">
-         <spacer name="verticalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0" colspan="2">
+        <item row="0" column="0" colspan="3">
          <widget class="QLabel" name="configLabel">
           <property name="text">
            <string>W&lt;br&gt;W&lt;br&gt;W</string>
@@ -445,21 +323,21 @@ settings of this theme.
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QGroupBox" name="groupBox_2">
+        <item row="3" column="2">
+         <widget class="QGroupBox" name="groupBox_3">
           <property name="font">
            <font>
             <bold>true</bold>
            </font>
           </property>
           <property name="title">
-           <string>General Keys</string>
+           <string>Miscellaneous</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <property name="topMargin">
             <number>10</number>
            </property>
-           <item row="4" column="0" colspan="2">
+           <item row="5" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxProgress">
              <property name="font">
               <font>
@@ -475,34 +353,18 @@ labels by default.</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxMenubar">
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox5">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Mouse tracking is enabled
-for menubars by default.</string>
+              <string>Tabs are centered by default.</string>
              </property>
              <property name="text">
-              <string>Mouse tracking for menubars</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox7">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Active tab is detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Attach active tab to tab widget</string>
+              <string>Left aligned tabs</string>
              </property>
             </widget>
            </item>
@@ -518,6 +380,164 @@ for menubars by default.</string>
              </property>
              <property name="text">
               <string>Join inactive tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox7">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Active tab is detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Attach active tab to tab widget</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBox8">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+             </property>
+             <property name="text">
+              <string>X11 drag</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QComboBox" name="comboToolButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+             </property>
+             <property name="text">
+              <string>Toolbutton style:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxMenubar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Mouse tracking is enabled
+for menubars by default.</string>
+             </property>
+             <property name="text">
+              <string>Mouse tracking for menubars</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxToolbar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will forces a size of 16px on toolbar icons
+if their size is not set in the app.</string>
+             </property>
+             <property name="text">
+              <string>Slim toolbars</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="font">
+           <font>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>Compositing</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="2" column="0">
+            <widget class="QLabel" name="opaqueLabel">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables
+whose windows should not be translucent.</string>
+             </property>
+             <property name="text">
+              <string>Opaque apps:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="opaqueEdit">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables,
+whose windows should not be translucent.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox9">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Needs a translucent SVG background for windows.</string>
+             </property>
+             <property name="text">
+              <string>Translucent windows</string>
              </property>
             </widget>
            </item>
@@ -537,67 +557,7 @@ will not have translucency or shadow.</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox9">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Needs a translucent SVG background for windows.</string>
-             </property>
-             <property name="text">
-              <string>Translucent windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0">
-            <widget class="QLabel" name="opaqueLabel">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables
-whose windows should not be translucent.</string>
-             </property>
-             <property name="text">
-              <string>Opaque apps:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox8">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-             </property>
-             <property name="text">
-              <string>X11 drag</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="1">
-            <widget class="QLineEdit" name="opaqueEdit">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables,
-whose windows should not be translucent.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="0" colspan="2">
+           <item row="3" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox10">
              <property name="font">
               <font>
@@ -610,52 +570,6 @@ graphic card that supports it.</string>
              </property>
              <property name="text">
               <string>Blurring for translucent windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox5">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Tabs are centered by default.</string>
-             </property>
-             <property name="text">
-              <string>Left aligned tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QComboBox" name="comboToolButton">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-             <property name="text">
-              <string>Toolbutton style:</string>
              </property>
             </widget>
            </item>
@@ -756,6 +670,70 @@ Kvantum can try to correct their behavior.</string>
            </item>
           </layout>
          </widget>
+        </item>
+        <item row="9" column="0" colspan="3">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="11" column="2" alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="saveButton">
+          <property name="toolTip">
+           <string>Save this configuration
+(Ctrl+S)</string>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+S</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="12" column="0" colspan="3">
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>1</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>

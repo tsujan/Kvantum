@@ -403,6 +403,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBox7->setChecked (false);
     ui->checkBoxProgress->setChecked (false);
     ui->checkBoxMenubar->setChecked (true);
+    ui->checkBoxToolbar->setChecked (false);
     ui->checkBox8->setChecked (true);
     ui->checkBox9->setChecked (false);
     ui->checkBox10->setChecked (false);
@@ -527,6 +528,10 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 else
                     ui->checkBoxMenubar->setChecked (true);
+                if (themeSettings.contains ("slim_toolbars"))
+                    ui->checkBoxToolbar->setChecked (themeSettings.value ("slim_toolbars").toBool());
+                else
+                    ui->checkBoxToolbar->setChecked (false);
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -564,8 +569,10 @@ void KvantumManager::tabChanged (int index)
             }
         }
     }
-    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-    resize (size().expandedTo (sizeHint() + ui->comboToolButton->sizeHint() + QSize (extra, extra)));
+    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent);
+    resize (size().expandedTo (sizeHint()
+                               + ui->comboToolButton->minimumSizeHint()
+                               + QSize (extra + ui->opaqueEdit->sizeHint().width(), extra)));
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
@@ -841,6 +848,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
+        themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
@@ -924,7 +932,7 @@ void KvantumManager::transparency (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.7</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.8</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));
