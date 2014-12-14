@@ -6638,7 +6638,6 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
-
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
       opt.state |= State_Enabled;
@@ -6653,7 +6652,6 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
-
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
       opt.state |= State_Enabled;
@@ -6718,8 +6716,7 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_DialogCancelButton :
-    case SP_DialogNoButton :
-    /*case SP_DialogDiscardButton :*/ {
+    case SP_DialogNoButton : {
       int s = pixelMetric(PM_SmallIconSize);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -6728,7 +6725,14 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       if (renderElement(&painter,"dialog-cancel",QRect(0,0,s,s)))
         return QIcon(pm);
-      else break;
+      else
+      {
+         /* Qt sets the size to 24 for these icons in standardPixmap() */
+         QIcon icn = QIcon::fromTheme(QLatin1String("dialog-cancel"),
+                                      QIcon::fromTheme(QLatin1String("process-stop")));
+         if (!icn.isNull()) return icn;
+         else break;
+      }
     }
     case SP_DialogOkButton :
     case SP_DialogYesButton : {
@@ -6773,7 +6777,13 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       if (renderElement(&painter,"document-save",QRect(0,0,s,s)))
         return QIcon(pm);
-      else break;
+      else
+      {
+         /* Qt sets the size to 24 for this icon in standardPixmap() */
+         QIcon icn = QIcon::fromTheme(QLatin1String("document-save"));
+         if (!icn.isNull()) return icn;
+         else break;
+      }
     }
     case SP_ArrowLeft : {
       int s = pixelMetric(PM_SmallIconSize);
@@ -6829,6 +6839,17 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 
       if (renderElement(&painter,"folder-new",QRect(2,2,s-4,s-4)))
         return QIcon(pm);
+      else break;
+    }
+    /* in these cases too, Qt sets the size to 24 in standardPixmap() */
+    case SP_DialogResetButton : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("edit-clear"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_DialogHelpButton : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("help-contents"));
+      if (!icn.isNull()) return icn;
       else break;
     }
 

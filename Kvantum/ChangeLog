@@ -14,6 +14,7 @@ V0.8.7
  * Added a key for toolbutton style.
  * Don't draw scroll area corner panels.
  * Added a toggled state for progressbars (when they are inside selected view items).
+ * Got rid of Qt's "standardbutton-no-16.png" as far as possible.
 
 V0.8.6
 ---------
