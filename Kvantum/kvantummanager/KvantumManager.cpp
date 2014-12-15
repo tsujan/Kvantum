@@ -49,7 +49,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
     connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (writeConfig()));
     connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
-    connect (ui->checkBox9, SIGNAL (clicked (bool)), this, SLOT (transparency (bool)));
+    connect (ui->checkBox4, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
+    connect (ui->checkBox9, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
@@ -327,6 +328,8 @@ void KvantumManager::deleteTheme()
                 kvconfigTheme = QString();
             }
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
+            int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
+            resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
             if (process->state() == QProcess::Running)
               preview();
         }
@@ -407,9 +410,26 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBox8->setChecked (true);
     ui->checkBox9->setChecked (false);
     ui->checkBox10->setChecked (false);
+    ui->comboToolButton->setCurrentIndex (0);
+
     ui->opaqueLabel->setEnabled (false);
     ui->opaqueEdit->setEnabled (false);
-    ui->comboToolButton->setCurrentIndex (0);
+    ui->checkBox10->setEnabled (false);
+}
+/*************************/
+void KvantumManager::resizeConfPage()
+{
+  int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent);
+  bool le = true;
+  if (!ui->opaqueEdit->isEnabled())
+  {
+    le = false;
+    ui->opaqueEdit->setEnabled (true);
+  }
+  resize (size().expandedTo (sizeHint()
+                             + ui->comboToolButton->minimumSizeHint()
+                             + QSize (extra + ui->opaqueEdit->sizeHint().width(), extra)));
+  if (!le) ui->opaqueEdit->setEnabled (false);
 }
 /*************************/
 void KvantumManager::tabChanged (int index)
@@ -491,8 +511,7 @@ void KvantumManager::tabChanged (int index)
                 if (!QFile::exists (userSvg) && QFile::exists (rootSvg))
                 {
                     defaultThemeButtons();
-                    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-                    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+                    resizeConfPage();
                     return;
                 }
                 copyDefaultTheme (QString(), kvconfigTheme);
@@ -504,10 +523,13 @@ void KvantumManager::tabChanged (int index)
                 QSettings themeSettings (themeConfig, QSettings::NativeFormat);
                 /* consult the default config file if a key doesn't exist */
                 themeSettings.beginGroup ("General");
+                bool composited = true;
                 if (themeSettings.contains ("composite"))
-                    ui->checkBox4->setChecked (!themeSettings.value ("composite").toBool());
+                    composited = themeSettings.value ("composite").toBool();
                 else
-                    ui->checkBox4->setChecked (true);
+                    composited = false;
+                ui->checkBox4->setChecked (!composited);
+                notCompisited (!composited);
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBox5->setChecked (themeSettings.value ("left_tabs").toBool());
                 else
@@ -551,9 +573,8 @@ void KvantumManager::tabChanged (int index)
                 if (!lst.isEmpty())
                     ui->opaqueEdit->setText (lst.join (","));
                 ui->checkBox9->setChecked (translucency);
-                ui->opaqueLabel->setEnabled (translucency);
-                ui->opaqueEdit->setEnabled (translucency);
-                ui->checkBox10->setEnabled (translucency);
+                if (composited)
+                    isTranslucent (translucency);
                 if (themeSettings.contains ("blurring"))
                     ui->checkBox10->setChecked (themeSettings.value ("blurring").toBool());
                 else
@@ -569,10 +590,7 @@ void KvantumManager::tabChanged (int index)
             }
         }
     }
-    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent);
-    resize (size().expandedTo (sizeHint()
-                               + ui->comboToolButton->minimumSizeHint()
-                               + QSize (extra + ui->opaqueEdit->sizeHint().width(), extra)));
+    resizeConfPage();
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
@@ -879,9 +897,10 @@ void KvantumManager::writeConfig()
         }
 
         if (translucenceChanged)
+        {
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
-        int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-        resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+            resizeConfPage();
+        }
         if (process->state() == QProcess::Running)
           preview();
     }
@@ -918,11 +937,18 @@ void KvantumManager::restoreDefault()
                                 10000);
 
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    resizeConfPage();
     if (process->state() == QProcess::Running)
       preview();
 }
 /*************************/
-void KvantumManager::transparency (bool checked)
+void KvantumManager::notCompisited (bool checked)
+{
+    ui->checkBox9->setEnabled (!checked);
+    isTranslucent (!checked && ui->checkBox9->isChecked());
+}
+/*************************/
+void KvantumManager::isTranslucent (bool checked)
 {
     ui->opaqueLabel->setEnabled (checked);
     ui->opaqueEdit->setEnabled (checked);
