@@ -343,8 +343,8 @@ void Kvantum::polish(QWidget *widget)
             && !widget->inherits("QTipLabel")
             && !widget->inherits("QSplashScreen")
             && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-            /* Without this, apps using QtWebKit might crash when quitting.
-               Fortunately internalWinId() exists although it isn't documeneted.*/
+            /* FIXME: I included this because I thought, without it, QtWebKit
+               apps would crash on quitting but that wasn't the case. */
             && widget->internalWinId()
             && !translucentTopWidgets.contains(widget))
         {
@@ -4797,6 +4797,27 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
         v = qMin(2,v);
         h = qMin(2,h);
       }
+
+      /* Sometimes (like in VLC or SVG Cleaner), developers make this
+         mistake that they give a stylesheet to a subclassed lineedit
+         but forget to prevent its propagation to the context menu. Here
+         we deal with such cases. WARNING Beware of infinite loops! */
+      if (widget && widget->internalWinId()
+          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      {
+        if (QStyle *st = widget->style())
+        {
+          if (st != this)
+          {
+            int margin = qMin(st->pixelMetric(PM_MenuHMargin,option,widget->parentWidget()),
+                              st->pixelMetric(PM_MenuVMargin,option,widget->parentWidget()));
+            margin = qMin(qMax(v,h),margin);
+            if (metric == PM_MenuTearoffHeight) return margin + 7;
+            else return margin;
+          }
+        }
+      }
+
       if (metric == PM_MenuTearoffHeight)
         /* we set the height of tearoff indicator to be 7px */
         return qMax(v,h) + 7;

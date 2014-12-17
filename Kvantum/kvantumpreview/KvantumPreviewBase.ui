@@ -439,7 +439,7 @@ and text below</string>
           </size>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonFollowStyle</enum>
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
          </property>
         </widget>
        </item>
@@ -454,7 +454,7 @@ and arrow</string>
            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonFollowStyle</enum>
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
          </property>
          <property name="arrowType">
           <enum>Qt::LeftArrow</enum>
@@ -475,7 +475,7 @@ and arrow</string>
            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonFollowStyle</enum>
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
          </property>
          <property name="arrowType">
           <enum>Qt::LeftArrow</enum>
@@ -506,7 +506,7 @@ and arrow</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with icon at the side
+          <string>Toolbutton with 16x16 icon at the side
 and arrow</string>
          </property>
          <property name="icon">
@@ -549,7 +549,7 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with icon at the side
+          <string>Toolbutton with 16x16 icon at the side
 and arrow
 and menu popup button</string>
          </property>
@@ -574,7 +574,7 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with icon
+          <string>Toolbutton with 32x32 icon
 and text below</string>
          </property>
          <property name="icon">
@@ -588,7 +588,7 @@ and text below</string>
           </size>
          </property>
          <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonFollowStyle</enum>
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
          </property>
         </widget>
        </item>
@@ -598,7 +598,7 @@ and text below</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with icon
+          <string>Toolbutton with 32x32 icon
 beside text</string>
          </property>
          <property name="icon">
@@ -2087,8 +2087,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>165</width>
-              <height>72</height>
+              <width>94</width>
+              <height>24</height>
              </rect>
             </property>
             <attribute name="icon">
@@ -2144,8 +2144,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>165</width>
-              <height>72</height>
+              <width>94</width>
+              <height>24</height>
              </rect>
             </property>
             <attribute name="label">

@@ -600,7 +600,7 @@ graphic card that supports it.</string>
 widgets to appear as they are by default.</string>
           </property>
           <property name="title">
-           <string>Hacking Keys</string>
+           <string>Hacks</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <property name="topMargin">
