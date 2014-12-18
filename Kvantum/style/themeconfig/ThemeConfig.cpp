@@ -308,6 +308,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","alt_mnemonic", empty);
   r.alt_mnemonic = v.toBool();
 
+  v = getValue("General","double_click", empty);
+  r.double_click = v.toBool();
+
   v = getValue("General","left_tabs", empty);
   r.left_tabs = v.toBool();
 

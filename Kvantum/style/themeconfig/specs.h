@@ -33,6 +33,8 @@ typedef struct {
   bool x11drag;
   /* show mnemonics only if Alt is pressed? */
   bool alt_mnemonic;
+  /* always activate view items on double clicking? */
+  bool double_click;
   /* align tabs with the left edge?
      (by default, they are centered) */
   bool left_tabs;
@@ -254,6 +256,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.comment = QString();
   tspec.x11drag = false;
   tspec.alt_mnemonic = false;
+  tspec.double_click = false;
   tspec.left_tabs = false;
   tspec.joined_tabs = false;
   tspec.attach_active_tab = false;

@@ -408,6 +408,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxToolbar->setChecked (false);
     ui->checkBox8->setChecked (true);
+    ui->checkBoxClick->setChecked (false);
     ui->checkBox9->setChecked (false);
     ui->checkBox10->setChecked (false);
     ui->comboToolButton->setCurrentIndex (0);
@@ -566,6 +567,10 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBox8->setChecked (themeSettings.value ("x11drag").toBool());
                 else
                     ui->checkBox8->setChecked (true);
+                if (themeSettings.contains ("double_click"))
+                    ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
+                else
+                    ui->checkBoxClick->setChecked (false);
                 bool translucency = false;
                 if (themeSettings.contains ("translucent_windows"))
                     translucency = themeSettings.value ("translucent_windows").toBool();
@@ -869,6 +874,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
+        themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
         themeSettings.setValue ("blurring", ui->checkBox10->isChecked());
         QString opaque = ui->opaqueEdit->text();
@@ -958,7 +964,7 @@ void KvantumManager::isTranslucent (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.8</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.9</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));

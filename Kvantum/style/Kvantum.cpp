@@ -69,7 +69,6 @@ Kvantum::Kvantum() : QCommonStyle()
 
   settings = defaultSettings = themeSettings = NULL;
   defaultRndr = themeRndr = NULL;
-  singleClick = true;
 
   QString homeDir = QDir::homePath();
 
@@ -79,6 +78,23 @@ Kvantum::Kvantum() : QCommonStyle()
   else
     xdg_config_home = QString(_xdg_config_home);
 
+  // load global config file
+  QString theme;
+  if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
+  {
+    QSettings globalSettings (QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home),
+                              QSettings::NativeFormat);
+
+    if (globalSettings.status() == QSettings::NoError && globalSettings.contains("theme"))
+      theme = globalSettings.value("theme").toString();
+  }
+
+  setBuiltinDefaultTheme();
+  setUserTheme(theme);
+
+  const theme_spec tspec = settings->getThemeSpec();
+
+  singleClick = true;
   QString kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
   if (!QFile::exists(kdeGlobals))
     kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
@@ -101,20 +117,7 @@ Kvantum::Kvantum() : QCommonStyle()
       file.close();
     }
   }
-
-  // load global config file
-  QString theme;
-  if (QFile::exists(QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home)))
-  {
-    QSettings globalSettings (QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home),
-                              QSettings::NativeFormat);
-
-    if (globalSettings.status() == QSettings::NoError && globalSettings.contains("theme"))
-      theme = globalSettings.value("theme").toString();
-  }
-
-  setBuiltinDefaultTheme();
-  setUserTheme(theme);
+  singleClick = singleClick && !tspec.double_click;
 
   isPlasma = false;
   isLibreoffice = false;
@@ -129,7 +132,6 @@ Kvantum::Kvantum() : QCommonStyle()
   itsShortcutHandler = NULL;
   itsWindowManager = NULL;
   blurHelper = NULL;
-  const theme_spec tspec = settings->getThemeSpec();
 
   if (tspec.alt_mnemonic)
     itsShortcutHandler = new ShortcutHandler(this);

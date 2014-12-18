@@ -282,8 +282,8 @@ this theme instead of its default theme.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>675</width>
-         <height>298</height>
+         <width>758</width>
+         <height>317</height>
         </rect>
        </property>
        <attribute name="label">
@@ -337,7 +337,71 @@ settings of this theme.
            <property name="topMargin">
             <number>10</number>
            </property>
+           <item row="9" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+             </property>
+             <property name="text">
+              <string>Toolbutton style:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxMenubar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Mouse tracking is enabled
+for menubars by default.</string>
+             </property>
+             <property name="text">
+              <string>Mouse tracking for menubars</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxToolbar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will force a size of 16px on toolbar icons
+if their size is not set in the app.</string>
+             </property>
+             <property name="text">
+              <string>Slim toolbars</string>
+             </property>
+            </widget>
+           </item>
            <item row="5" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBox7">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Active tab is detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Attach active tab to tab widget</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxProgress">
              <property name="font">
               <font>
@@ -353,7 +417,7 @@ labels by default.</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
+           <item row="2" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox5">
              <property name="font">
               <font>
@@ -368,7 +432,7 @@ labels by default.</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="2">
+           <item row="3" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox6">
              <property name="font">
               <font>
@@ -383,22 +447,7 @@ labels by default.</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox7">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Active tab is detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Attach active tab to tab widget</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
+           <item row="0" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBox8">
              <property name="font">
               <font>
@@ -414,7 +463,7 @@ labels by default.</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="1">
+           <item row="9" column="1">
             <widget class="QComboBox" name="comboToolButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -434,52 +483,20 @@ Default is Follow Style.</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="label_2">
+           <item row="1" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxClick">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
+              <string>Activate view items always on double clicking?
+When unchecked, single-click will be preferred
+unless KDE uses double-click.</string>
              </property>
              <property name="text">
-              <string>Toolbutton style:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxMenubar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Mouse tracking is enabled
-for menubars by default.</string>
-             </property>
-             <property name="text">
-              <string>Mouse tracking for menubars</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxToolbar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will force a size of 16px on toolbar icons
-if their size is not set in the app.</string>
-             </property>
-             <property name="text">
-              <string>Slim toolbars</string>
+              <string>Double click for view items</string>
              </property>
             </widget>
            </item>
