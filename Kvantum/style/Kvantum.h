@@ -216,8 +216,8 @@ class Kvantum : public QCommonStyle {
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgresses();
-    /* Removes the translucency attribute from top widgets. */
-    void undoTranslucency(QObject *o);
+    /* Removes a widget from the list of translucent ones. */
+    void noTranslucency(QObject *o);
 
   private:
     QSvgRenderer *defaultRndr, *themeRndr;
@@ -229,8 +229,8 @@ class Kvantum : public QCommonStyle {
 
     /* List of busy progress bars. */
     QMap<QWidget *,int> progressbars;
-    /* List of translucent top widgets */
-    QSet<QWidget*> translucentTopWidgets;
+    /* List of windows, tooltips and menus that are made translucent. */
+    QSet<const QWidget*> translucentWidgets;
 
     ShortcutHandler *itsShortcutHandler;
     WindowManager *itsWindowManager;
@@ -243,10 +243,9 @@ class Kvantum : public QCommonStyle {
        for single or double clicking. */
     bool singleClick;
 
-    /* LibreOffice, Plasma and systemsettings need workarounds. */
+    /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice;
     bool isPlasma;
-    bool isSystemSettings;
     /* So far, only VirtualBox has introduced
        itself as "Qt-subapplication" and doesn't
        accept compositing. */

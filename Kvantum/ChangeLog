@@ -1,6 +1,7 @@
 V0.8.9
 ---------
  * Added a workaround for menu paddings inherited from parent stylesheets (as in the context menu of VLC's palylist search lineedit).
+ * No shadow for tooltips/menus that are already translucent (and keep track of those made translucent).
 
 V0.8.8
 ---------

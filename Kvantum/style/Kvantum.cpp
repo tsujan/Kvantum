@@ -118,7 +118,6 @@ Kvantum::Kvantum() : QCommonStyle()
 
   isPlasma = false;
   isLibreoffice = false;
-  isSystemSettings = false;
   isDolphin = false;
   isKonsole = false;
   subApp = false;
@@ -277,10 +276,10 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
-void Kvantum::undoTranslucency(QObject *o)
+void Kvantum::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
-  translucentTopWidgets.remove(widget);
+  translucentWidgets.remove(widget);
 }
 
 void Kvantum::polish(QWidget *widget)
@@ -346,7 +345,7 @@ void Kvantum::polish(QWidget *widget)
             /* FIXME: I included this because I thought, without it, QtWebKit
                apps would crash on quitting but that wasn't the case. */
             && widget->internalWinId()
-            && !translucentTopWidgets.contains(widget))
+            && !translucentWidgets.contains(widget))
         {
 #if QT_VERSION < 0x050000
           /* workaround for a Qt4 bug, which makes translucent windows
@@ -387,9 +386,9 @@ void Kvantum::polish(QWidget *widget)
 
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
-          translucentTopWidgets.insert(widget);
+          translucentWidgets.insert(widget);
           connect(widget, SIGNAL(destroyed(QObject*)),
-                  SLOT(undoTranslucency(QObject*)));
+                  SLOT(noTranslucency(QObject*)));
         }
         break;
       }
@@ -482,13 +481,19 @@ void Kvantum::polish(QWidget *widget)
 
     if (!isLibreoffice // not required
         && !subApp
-        && (qobject_cast<QMenu*>(widget)
-            // systemsettings blurs tooltips in a wrong way
-            || (widget->inherits("QTipLabel") && !isSystemSettings)))
+        && (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
+        /* no shadow for tooltips or menus that are already translucent */
+        && !widget->testAttribute(Qt::WA_TranslucentBackground)
+        && !translucentWidgets.contains(widget))
     {
       const theme_spec tspec = settings->getThemeSpec();
       if (tspec.composite && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      {
         widget->setAttribute(Qt::WA_TranslucentBackground);
+        translucentWidgets.insert(widget);
+        connect(widget, SIGNAL(destroyed(QObject*)),
+                SLOT(noTranslucency(QObject*)));
+      }
       /*else // round off the corners
       {
         widget->setAutoFillBackground(false);
@@ -535,8 +540,6 @@ void Kvantum::polish(QApplication *app)
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma = true;
-  else if (appName == "systemsettings")
-    isSystemSettings = true;
 
   const theme_spec tspec = settings->getThemeSpec();
   if (tspec.opaque.contains (appName))
@@ -655,7 +658,7 @@ void Kvantum::unpolish(QWidget *widget)
       case Qt::Dialog: {
         if (blurHelper)
           blurHelper->unregisterWidget(widget);
-        if (translucentTopWidgets.contains(widget))
+        if (translucentWidgets.contains(widget))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -672,16 +675,13 @@ void Kvantum::unpolish(QWidget *widget)
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
-    if (!isLibreoffice // not required
-        && !subApp
-        && (qobject_cast<QMenu*>(widget)
-            || (widget->inherits("QTipLabel") && !isSystemSettings)))
+    if ((qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
+        && translucentWidgets.contains(widget))
     {
-      const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.composite && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-        widget->setAttribute(Qt::WA_TranslucentBackground, false);
-      /*else
-        widget->clearMask();*/
+      widget->setAttribute(Qt::WA_PaintOnScreen, false);
+      widget->setAttribute(Qt::WA_NoSystemBackground, false);
+      widget->setAttribute(Qt::WA_TranslucentBackground, false);
+      //widget->clearMask();
     }
   }
 }
@@ -1543,8 +1543,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_MenuHMargin,option,widget);
 
       const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.menu_shadow_depth > 0 && !subApp
-          && widget && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not torn off
+      if (tspec.menu_shadow_depth > 0 && translucentWidgets.contains(widget))
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
       else
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
@@ -2337,10 +2336,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
-      fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth);
+      fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
       const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.tooltip_shadow_depth > 0 && !isLibreoffice && !subApp && !isSystemSettings)
+      if (tspec.tooltip_shadow_depth > 0 && widget && translucentWidgets.contains(widget))
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
       else
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
@@ -4791,8 +4790,8 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       h += tspec.menu_shadow_depth;
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (!tspec.composite || isLibreoffice || subApp
-          || (widget && widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))) // torn off
+      if (!tspec.composite || isLibreoffice
+          || (qobject_cast<const QMenu*>(widget) && !translucentWidgets.contains(widget)))
       {
         v = qMin(2,v);
         h = qMin(2,h);
@@ -5003,7 +5002,8 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       h += tspec.tooltip_shadow_depth;
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (!tspec.composite || isLibreoffice || subApp || isSystemSettings)
+      if (!tspec.composite || isLibreoffice
+          || (widget && !translucentWidgets.contains(widget)))
       {
         v = qMin(2,v);
         h = qMin(2,h);
