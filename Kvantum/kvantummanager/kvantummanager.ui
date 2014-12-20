@@ -496,7 +496,7 @@ When unchecked, single-click will be preferred
 unless KDE uses double-click.</string>
              </property>
              <property name="text">
-              <string>Double click for view items</string>
+              <string>Double-click for view items</string>
              </property>
             </widget>
            </item>

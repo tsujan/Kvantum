@@ -2531,5 +2531,15 @@
 <rect width="16" x="120.33041" y="323" height="16" style="fill:url(#linearGradient5511)" id="rect5507" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9"/>
 <rect width="16" x="120.33041" y="323" rx="2.2204461e-17" height="5" ry="0.06666667" style="opacity:.5;fill:url(#linearGradient5514)" id="rect5509" d="m 496,454.36218 -1176,0 m 1178,1.95919 -1176,0 m 1178,1.95918 -1176,0 m 1178,1.95918 -1176,0 m 1170,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755 m -398,-5.87755 6,5.87755"/>
 </g>
+<g style="fill:#b74aff">
+<rect width="2.5" x="-103.75" y="953.49988" height="7.2500219" id="menu-shadow-hint-bottom"/>
+<rect width="2.5" x="-105" y="888.24988" height="4.2500219" id="menu-shadow-hint-top"/>
+<rect width="2.5" x="-922.5" y="-74.999001" height="7.2500005" id="menu-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="2.5" x="-922.5" y="-140.24899" height="7.2489886" id="menu-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="2.5" x="406.25" y="1833.9999" height="8.0001221" id="tooltip-shadow-hint-bottom"/>
+<rect width="2.5" x="404.74997" y="1778" height="8" id="tooltip-shadow-hint-top"/>
+<rect width="2.5" x="-1810" y="430" height="8.0000296" id="tooltip-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="2.5" x="-1811.25" y="373.99997" height="8.0000153" id="tooltip-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
+</g>
 </g>
 </svg>

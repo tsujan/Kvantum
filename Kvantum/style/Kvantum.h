@@ -213,6 +213,9 @@ class Kvantum : public QCommonStyle {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);
     }
 
+    /* Get pure shadow dimensions of menus/tooltips. */
+    QList<int> getShadow(frame_spec fspec, int thickness);
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgresses();

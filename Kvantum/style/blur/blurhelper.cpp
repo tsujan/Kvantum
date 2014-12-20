@@ -29,11 +29,16 @@
 #include <X11/Xatom.h>
 #endif
 
-BlurHelper::BlurHelper (QObject* parent) : QObject( parent )
+BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   _atom_blur = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
 #endif
+
+  if (!menuS.isEmpty() && menuS.size() >=4)
+    menuShadow = menuS;
+  if (!tooltipS.isEmpty() && tooltipS.size() >=4)
+    tooltipShadow = tooltipS;
 }
 /*************************/
 void BlurHelper::registerWidget (QWidget* widget)
@@ -50,7 +55,6 @@ void BlurHelper::registerWidget (QWidget* widget)
        && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
 
     addEventFilter (widget);
-
 }
 /*************************/
 void BlurHelper::unregisterWidget (QWidget* widget)
@@ -63,16 +67,8 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
 {
   switch (event->type())
   {
-    case QEvent::Hide: {
-      QWidget* widget (qobject_cast<QWidget*>(object));
-      if (!widget) break;
-      QWidget* window (widget->window());
-      _pendingWidgets.insert (window, window);
-      delayedUpdate();
-      break;
-    }
-
     case QEvent::Show:
+    case QEvent::Hide:
     case QEvent::Resize: {
       QWidget* widget (qobject_cast<QWidget*>(object));
       if (!widget) break;
@@ -94,8 +90,17 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
   if (!widget->isVisible()) return QRegion();
 
+  QList<int> r;
+  if (qobject_cast<QMenu*>(widget))
+    r = menuShadow;
+  else if (widget->inherits("QTipLabel"))
+    r = tooltipShadow;
   /* trimming the region isn't good for us */
-  return (widget->mask().isEmpty() ? widget->rect() : widget->mask());
+  return (widget->mask().isEmpty() ? 
+            r.isEmpty() ?
+              widget->rect()
+              : widget->rect().adjusted (r.at(0), r.at(1), -r.at(2), -r.at(3))
+            : widget->mask());
 }
 /*************************/
 void BlurHelper::update (QWidget* widget) const

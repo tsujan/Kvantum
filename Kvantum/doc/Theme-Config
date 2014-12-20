@@ -170,6 +170,12 @@ x11drag                           true/false          Drag windows from anywhere
 alt_mnemonic                      true/false          Show underlines only when
                                                       Alt is pressed?
 
+double_click                      true/false          Activate view items on double
+                                                      clicking? They are activated on
+                                                      single clicking by default but
+                                                      the KDE setting has priority
+                                                      over the default.
+
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 

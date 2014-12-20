@@ -41,7 +41,7 @@ class BlurHelper: public QObject
 
   public:
 
-    BlurHelper (QObject*);
+    BlurHelper (QObject*, QList<int> menuS, QList<int> tooltipS);
 
     virtual ~BlurHelper (void) {}
 
@@ -107,6 +107,11 @@ class BlurHelper: public QObject
 
     /* Delayed update timer. */
     QBasicTimer _timer;
+
+    /* Dimensions of pure shadows of menus and tooltips.
+       (left, top, right, bottom) */
+    QList<int> menuShadow;
+    QList<int> tooltipShadow;
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
     /* The required atom. */

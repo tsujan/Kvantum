@@ -32,8 +32,8 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="156.80231"
-     inkscape:cy="1005.8987"
+     inkscape:cx="175.42047"
+     inkscape:cy="1009.8192"
      inkscape:window-x="208"
      inkscape:window-y="54"
      inkscape:current-layer="svg2"
@@ -16103,4 +16103,72 @@
        rx="2.2204461e-17"
        ry="0.06666667" />
   </g>
+  <rect
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     id="menu-shadow-hint-bottom"
+     width="2.5"
+     height="7.2500219"
+     x="-103.75"
+     y="953.49988"
+     inkscape:label="#rect5510" />
+  <rect
+     y="888.24988"
+     x="-105"
+     height="4.2500219"
+     width="2.5"
+     id="menu-shadow-hint-top"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     inkscape:label="#rect6280" />
+  <rect
+     y="-74.999001"
+     x="-922.5"
+     height="7.2500005"
+     width="2.5"
+     id="menu-shadow-hint-right"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     transform="matrix(0,-1,1,0,0,0)"
+     inkscape:label="#rect6282" />
+  <rect
+     transform="matrix(0,-1,1,0,0,0)"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     id="menu-shadow-hint-left"
+     width="2.5"
+     height="7.2489886"
+     x="-922.5"
+     y="-140.24899"
+     inkscape:label="#rect6284" />
+  <rect
+     y="1833.9999"
+     x="406.25"
+     height="8.0001221"
+     width="2.5"
+     id="tooltip-shadow-hint-bottom"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     inkscape:label="#rect6286" />
+  <rect
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     id="tooltip-shadow-hint-top"
+     width="2.5"
+     height="8"
+     x="404.74997"
+     y="1778"
+     inkscape:label="#rect6288" />
+  <rect
+     transform="matrix(0,-1,1,0,0,0)"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     id="tooltip-shadow-hint-right"
+     width="2.5"
+     height="8.0000296"
+     x="-1810"
+     y="430"
+     inkscape:label="#rect6290" />
+  <rect
+     y="373.99997"
+     x="-1811.25"
+     height="8.0000153"
+     width="2.5"
+     id="tooltip-shadow-hint-left"
+     style="fill:#b74aff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+     transform="matrix(0,-1,1,0,0,0)"
+     inkscape:label="#rect6292" />
 </svg>

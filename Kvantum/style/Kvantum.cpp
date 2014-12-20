@@ -144,7 +144,11 @@ Kvantum::Kvantum() : QCommonStyle()
   }
 
   if (tspec.blurring)
-    blurHelper = new BlurHelper(this);
+  {
+    QList<int> menuS = getShadow(getFrameSpec("Menu"), pixelMetric(PM_MenuHMargin));
+    QList<int> TooltipS = getShadow(getFrameSpec("Tooltip"), pixelMetric(PM_ToolTipLabelFrameWidth));
+    blurHelper = new BlurHelper(this,menuS,TooltipS);
+  }
 #endif
 }
 
@@ -268,6 +272,63 @@ void Kvantum::advanceProgresses()
   }
 }
 
+QList<int> Kvantum::getShadow (frame_spec fspec, int thickness)
+{
+  QSvgRenderer *renderer = 0;
+  int divisor = 0;
+  QList<int> shadow;
+
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-left"))
+    renderer = themeRndr;
+  else renderer = defaultRndr;
+  divisor = renderer->boundsOnElement(fspec.element+"-shadow-left").width();
+  if (divisor)
+  {
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-left"))
+      renderer = themeRndr; // WARNING make sure that the default theme has such an element
+    else renderer = defaultRndr;
+    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-left").width()/divisor);
+  }
+
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-top"))
+    renderer = themeRndr;
+  else renderer = defaultRndr;
+  divisor = renderer->boundsOnElement(fspec.element+"-shadow-top").height();
+  if (divisor)
+  {
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-top"))
+      renderer = themeRndr;
+    else renderer = defaultRndr;
+    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-top").height()/divisor);
+  }
+
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-right"))
+    renderer = themeRndr;
+  else renderer = defaultRndr;
+  divisor = renderer->boundsOnElement(fspec.element+"-shadow-right").width();
+  if (divisor)
+  {
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-right"))
+      renderer = themeRndr;
+    else renderer = defaultRndr;
+    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-right").width()/divisor);
+  }
+
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-bottom"))
+    renderer = themeRndr;
+  else renderer = defaultRndr;
+  divisor = renderer->boundsOnElement(fspec.element+"-shadow-bottom").height();
+  if (divisor)
+  {
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-bottom"))
+      renderer = themeRndr;
+    else renderer = defaultRndr;
+    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-bottom").height()/divisor);
+  }
+
+  return shadow; // << left << top << right << bottom
+}
+
 // also checks for NULL widgets
 static inline QWidget *getParent (const QWidget *widget, int level)
 {
@@ -380,7 +441,7 @@ void Kvantum::polish(QWidget *widget)
           {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
             if (!blurHelper)
-              blurHelper = new BlurHelper(this);
+              blurHelper = new BlurHelper(this,QList<int>(),QList<int>());
 #endif
             if (blurHelper)
               blurHelper->registerWidget(widget);
@@ -495,6 +556,8 @@ void Kvantum::polish(QWidget *widget)
         translucentWidgets.insert(widget);
         connect(widget, SIGNAL(destroyed(QObject*)),
                 SLOT(noTranslucency(QObject*)));
+        if (blurHelper && tspec.blurring) // blurHelper may exist because of Konsole blurring
+          blurHelper->registerWidget(widget);
       }
       /*else // round off the corners
       {
@@ -677,12 +740,16 @@ void Kvantum::unpolish(QWidget *widget)
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
-    if ((qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
-        && translucentWidgets.contains(widget))
+    if ((qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel")))
     {
-      widget->setAttribute(Qt::WA_PaintOnScreen, false);
-      widget->setAttribute(Qt::WA_NoSystemBackground, false);
-      widget->setAttribute(Qt::WA_TranslucentBackground, false);
+      if (blurHelper)
+        blurHelper->unregisterWidget(widget);
+      if (translucentWidgets.contains(widget))
+      {
+        widget->setAttribute(Qt::WA_PaintOnScreen, false);
+        widget->setAttribute(Qt::WA_NoSystemBackground, false);
+        widget->setAttribute(Qt::WA_TranslucentBackground, false);
+      }
       //widget->clearMask();
     }
   }
