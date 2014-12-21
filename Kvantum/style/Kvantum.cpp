@@ -1612,8 +1612,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_MenuHMargin,option,widget);
 
       const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.menu_shadow_depth > 0 && translucentWidgets.contains(widget))
+      if (tspec.menu_shadow_depth > 0
+          && fspec.left >= tspec.menu_shadow_depth // otherwise shadow will have no meaning
+          && translucentWidgets.contains(widget))
+      {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+      }
       else
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
 
@@ -2408,8 +2412,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
       const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.tooltip_shadow_depth > 0 && widget && translucentWidgets.contains(widget))
+      if (tspec.tooltip_shadow_depth > 0
+          && fspec.left >= tspec.tooltip_shadow_depth
+          && widget && translucentWidgets.contains(widget))
+      {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+      }
       else
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
@@ -4868,21 +4876,27 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
 
       /* Sometimes (like in VLC or SVG Cleaner), developers make this
          mistake that they give a stylesheet to a subclassed lineedit
-         but forget to prevent its propagation to the context menu. Here
-         we deal with such cases. WARNING Beware of infinite loops! */
-      if (widget && widget->internalWinId()
+         but forget to prevent its propagation to the context menu.
+         What follows is a simple workaround for such cases. */
+      if (qobject_cast<const QMenu*>(widget)
+          && widget->style() != this
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
-        if (QStyle *st = widget->style())
+        QString css;
+        if (QWidget *p = widget->parentWidget())
         {
-          if (st != this)
+          if (qobject_cast<QLineEdit*>(p))
+            css = p->styleSheet();
+          else if (qobject_cast<QMenu*>(p))
           {
-            int margin = qMin(st->pixelMetric(PM_MenuHMargin,option,widget->parentWidget()),
-                              st->pixelMetric(PM_MenuVMargin,option,widget->parentWidget()));
-            margin = qMin(qMax(v,h),margin);
-            if (metric == PM_MenuTearoffHeight) return margin + 7;
-            else return margin;
+            if (QLineEdit *pp = qobject_cast<QLineEdit*>(p->parentWidget()))
+              css = pp->styleSheet();
           }
+        }
+        if (!css.isEmpty() && !css.contains("{"))
+        {
+          v = qMin(2,v);
+          h = qMin(2,h);
         }
       }
 
