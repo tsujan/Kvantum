@@ -4,6 +4,7 @@ V0.8.9
  * No shadow for tooltips/menus that are already translucent (and keep track of those made translucent).
  * Added a key for double-click.
  * Blur the regions behind translucent menus/tooltips appropriately if blurring is enabled.
+ * Fixed the positioning of bottom tab labels.
 
 V0.8.8
 ---------

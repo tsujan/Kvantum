@@ -2980,7 +2980,6 @@ void Kvantum::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
 
-
         if (status.startsWith("disabled"))
         {
           status.replace(QString("disabled"),QString("normal"));
@@ -3014,8 +3013,8 @@ void Kvantum::drawControl(ControlElement element,
           status.append(QString("-inactive"));
 
         const QString group = "Tab";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        frame_spec fspec = getFrameSpec(group);
+        label_spec lspec = getLabelSpec(group);
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -3025,6 +3024,8 @@ void Kvantum::drawControl(ControlElement element,
 
         QRect r = option->rect;
         bool verticalTabs = false;
+        bool bottomTabs = false;
+
         if (opt->shape == QTabBar::RoundedEast
             || opt->shape == QTabBar::RoundedWest
             || opt->shape == QTabBar::TriangularEast
@@ -3032,6 +3033,8 @@ void Kvantum::drawControl(ControlElement element,
         {
           verticalTabs = true;
         }
+        if (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth)
+          bottomTabs = true;
         
         if (verticalTabs)
         {
@@ -3056,6 +3059,15 @@ void Kvantum::drawControl(ControlElement element,
           m.translate(X, Y);
           m.rotate(rot);
           painter->setTransform(m, true);
+        }
+        else if (bottomTabs)
+        {
+          int t = fspec.bottom;
+          fspec.bottom = fspec.top;
+          fspec.top = t;
+          t = lspec.bottom;
+          lspec.bottom = lspec.top;
+          lspec.top = t;
         }
 
         /* tabButtons (as in Rekonq);
@@ -4893,7 +4905,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
               css = pp->styleSheet();
           }
         }
-        if (!css.isEmpty() && !css.contains("{"))
+        if (!css.isEmpty() && css.contains("padding") && !css.contains("{"))
         {
           v = qMin(2,v);
           h = qMin(2,h);
