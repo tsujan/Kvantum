@@ -5,6 +5,7 @@ V0.8.9
  * Added a key for double-click.
  * Blur the regions behind translucent menus/tooltips appropriately if blurring is enabled.
  * Fixed the positioning of bottom tab labels.
+ * Check for internalWinId before deleting blur atom.
 
 V0.8.8
 ---------

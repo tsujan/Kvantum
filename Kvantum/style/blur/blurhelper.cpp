@@ -134,7 +134,8 @@ void BlurHelper::clear (QWidget* widget) const
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   // WARNING never use winId()
-  XDeleteProperty (QX11Info::display(), widget->internalWinId(), _atom_blur);
+  if (widget->internalWinId())
+    XDeleteProperty (QX11Info::display(), widget->internalWinId(), _atom_blur);
 #else
   Q_UNUSED (widget);
 #endif
