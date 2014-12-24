@@ -1626,16 +1626,39 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-    // SH_TitleBar_NoBorder is set to be true
-    /*case PE_FrameWindow : {
-      const QString group = "WindowFrame";
+    case PE_FrameWindow : {
+      const color_spec cspec = settings->getColorSpec();
+      QColor col = cspec.windowColor;
+      QRect r = option->rect;
 
-      const frame_spec fspec = getFrameSpec(group);
+      painter->save();
 
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+      // left
+      painter->setPen(QPen(col.lighter(130), 0));
+      painter->drawLine(QPoint(r.left()+1, r.top()+1),
+                        QPoint(r.left()+1, r.bottom()-1));
+      painter->setPen(QPen(col.darker(120), 0));
+      painter->drawLine(QPoint(r.left(), r.top()),
+                        QPoint(r.left(), r.bottom()));
+      // bottom
+      painter->setPen(QPen(col.darker(120), 0));
+      painter->drawLine(QPoint(r.left()+1, r.bottom()-1),
+                        QPoint(r.right()-1, r.bottom()-1));
+      painter->setPen(QPen(col.darker(140), 0));
+      painter->drawLine(QPoint(r.left(), r.bottom()),
+                        QPoint(r.right(), r.bottom()));
+      // right
+      painter->setPen(QPen(col.darker(110), 0));
+      painter->drawLine(QPoint(r.right()-1, r.top()+1),
+                        QPoint(r.right()-1, r.bottom()-1));;
+      painter->setPen(QPen(col.darker(120), 0));
+      painter->drawLine(QPoint(r.right(), r.top()),
+                        QPoint(r.right(), r.bottom()));
+
+      painter->restore();
 
       break;
-    }*/
+    }
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
@@ -4741,41 +4764,45 @@ void Kvantum::drawComplexControl(ComplexControl control,
         const QString tbStatus =
               (ts & Qt::WindowActive) ? "focused" : "normal";
 
-        QStyleOptionTitleBar o(*opt);
-
         const QString group = "TitleBar";
-        const frame_spec fspec = getFrameSpec(group);
+        const frame_spec fspec = getFrameSpec(group); // zero in ThemeConfig.cpp
         const interior_spec ispec = getInteriorSpec(group);
-        const label_spec lspec = getLabelSpec(group);
 
-        // SH_TitleBar_NoBorder is set to be true
-        //renderFrame(painter,o.rect,fspec,fspec.element+"-"+status);
-        renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+tbStatus);
+        if (opt->subControls & SC_TitleBarLabel)
+        {
+          const label_spec lspec = getLabelSpec(group);
+          QStyleOptionTitleBar o(*opt);
+          // SH_TitleBar_NoBorder is set to be true
+          //renderFrame(painter,o.rect,fspec,fspec.element+"-"+status);
+          renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+tbStatus);
 
-        o.rect = subControlRect(CC_TitleBar,opt,SC_TitleBarLabel,widget);
-        QFontMetrics fm(painter->fontMetrics());
-        QString title = fm.elidedText(o.text, Qt::ElideRight,
-                                      o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
-                                                    // titlebars have no frame
-                                                    -lspec.right-lspec.left);
-        renderLabel(painter,option->palette,
-                    o.rect,
-                    fspec,lspec,
-                    Qt::AlignLeft | Qt::AlignVCenter,title,QPalette::WindowText,
-                    tbStatus == "normal" ? 1 : 2,
-                    o.icon.pixmap(pixelMetric(PM_TitleBarHeight) - 4)); // 2-px margins for the icon
+          o.rect = subControlRect(CC_TitleBar,opt,SC_TitleBarLabel,widget);
+          QFontMetrics fm(painter->fontMetrics());
+          QString title = fm.elidedText(o.text, Qt::ElideRight,
+                                        o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
+                                                      // titlebars have no frame
+                                                      -lspec.right-lspec.left);
+          renderLabel(painter,option->palette,
+                      o.rect,
+                      fspec,lspec,
+                      Qt::AlignCenter,title,QPalette::WindowText,
+                      tbStatus == "normal" ? 1 : 2,
+                      o.icon.pixmap(pixelMetric(PM_TitleBarHeight) - 4)); // 2-px margins for the icon
+        }
 
         indicator_spec dspec = getIndicatorSpec(group);
         Qt::WindowFlags tf = opt->titleBarFlags;
 
-        renderIndicator(painter,
-                        subControlRect(CC_TitleBar,opt,SC_TitleBarCloseButton,widget),
-                        fspec,dspec,
-                        dspec.element+"-close-"
-                          + ((opt->activeSubControls & QStyle::SC_TitleBarCloseButton) ?
-                              (option->state & State_Sunken) ? "pressed" : "focused"
-                                : tbStatus == "focused" ? "normal" : "disabled"));
-        if (tf & Qt::WindowMaximizeButtonHint)
+        if ((opt->subControls & SC_TitleBarCloseButton) && (tf & Qt::WindowSystemMenuHint))
+          renderIndicator(painter,
+                          subControlRect(CC_TitleBar,opt,SC_TitleBarCloseButton,widget),
+                          fspec,dspec,
+                          dspec.element+"-close-"
+                            + ((opt->activeSubControls & QStyle::SC_TitleBarCloseButton) ?
+                                (option->state & State_Sunken) ? "pressed" : "focused"
+                                  : tbStatus == "focused" ? "normal" : "disabled"));
+        if ((opt->subControls & SC_TitleBarMaxButton) && (tf & Qt::WindowMaximizeButtonHint)
+            && !(ts & Qt::WindowMaximized))
           renderIndicator(painter,
                           subControlRect(CC_TitleBar,opt,SC_TitleBarMaxButton,widget),
                           fspec,dspec,
@@ -4783,26 +4810,18 @@ void Kvantum::drawComplexControl(ComplexControl control,
                             + ((opt->activeSubControls & QStyle::SC_TitleBarMaxButton) ?
                                 (option->state & State_Sunken) ? "pressed" : "focused"
                                   : tbStatus == "focused" ? "normal" : "disabled"));
-        if (!(ts & Qt::WindowMinimized))
-        {
-          if (tf & Qt::WindowMinimizeButtonHint)
-            renderIndicator(painter,
-                            subControlRect(CC_TitleBar,opt,SC_TitleBarMinButton,widget),
-                            fspec,dspec,
-                            dspec.element+"-minimize-"
-                              + ((opt->activeSubControls & QStyle::SC_TitleBarMinButton) ?
-                                  (option->state & State_Sunken) ? "pressed" : "focused"
-                                    : tbStatus == "focused" ? "normal" : "disabled"));
-          if (tf & Qt::WindowShadeButtonHint)
-            renderIndicator(painter,
-                            subControlRect(CC_TitleBar,opt,SC_TitleBarShadeButton,widget),
-                            fspec,dspec,
-                            dspec.element+"-shade-"
-                              + ((opt->activeSubControls & QStyle::SC_TitleBarShadeButton) ?
-                                  (option->state & State_Sunken) ? "pressed" : "focused"
-                                    : tbStatus == "focused" ? "normal" : "disabled"));
-        }
-        if (!(tf & Qt::WindowShadeButtonHint))
+        if ((opt->subControls & SC_TitleBarMinButton) && (tf & Qt::WindowMinimizeButtonHint)
+            && !(ts & Qt::WindowMinimized))
+          renderIndicator(painter,
+                          subControlRect(CC_TitleBar,opt,SC_TitleBarMinButton,widget),
+                          fspec,dspec,
+                          dspec.element+"-minimize-"
+                            + ((opt->activeSubControls & QStyle::SC_TitleBarMinButton) ?
+                                (option->state & State_Sunken) ? "pressed" : "focused"
+                                  : tbStatus == "focused" ? "normal" : "disabled"));
+        if ((opt->subControls & SC_TitleBarNormalButton)
+            && (((tf & Qt::WindowMinimizeButtonHint) && (ts & Qt::WindowMinimized))
+                || ((tf & Qt::WindowMaximizeButtonHint) && (ts & Qt::WindowMaximized))))
           renderIndicator(painter,
                           subControlRect(CC_TitleBar,opt,SC_TitleBarNormalButton,widget),
                           fspec,dspec,
@@ -4810,7 +4829,17 @@ void Kvantum::drawComplexControl(ComplexControl control,
                             + ((opt->activeSubControls & QStyle::SC_TitleBarNormalButton) ?
                                 (option->state & State_Sunken) ? "pressed" : "focused"
                                   : tbStatus == "focused" ? "normal" : "disabled"));
-        else
+        if ((opt->subControls & SC_TitleBarShadeButton) && (tf & Qt::WindowShadeButtonHint)
+            && !(ts & Qt::WindowMinimized))
+          renderIndicator(painter,
+                          subControlRect(CC_TitleBar,opt,SC_TitleBarShadeButton,widget),
+                          fspec,dspec,
+                          dspec.element+"-shade-"
+                            + ((opt->activeSubControls & QStyle::SC_TitleBarShadeButton) ?
+                                (option->state & State_Sunken) ? "pressed" : "focused"
+                                  : tbStatus == "focused" ? "normal" : "disabled"));
+        if ((opt->subControls & SC_TitleBarUnshadeButton) && (tf & Qt::WindowShadeButtonHint)
+            && (ts & Qt::WindowMinimized))
           renderIndicator(painter,
                           subControlRect(CC_TitleBar,opt,SC_TitleBarUnshadeButton,widget),
                           fspec,dspec,
@@ -4818,6 +4847,18 @@ void Kvantum::drawComplexControl(ComplexControl control,
                             + ((opt->activeSubControls & QStyle::SC_TitleBarUnshadeButton) ?
                                 (option->state & State_Sunken) ? "pressed" : "focused"
                                   : tbStatus == "focused" ? "normal" : "disabled"));
+        if ((opt->subControls & SC_TitleBarContextHelpButton)&& (ts & Qt::WindowContextHelpButtonHint))
+          break;
+        if ((opt->subControls & SC_TitleBarSysMenu) && (tf & Qt::WindowSystemMenuHint))
+        {
+          if (!opt->icon.isNull())
+            opt->icon.paint(painter,subControlRect(CC_TitleBar,opt,SC_TitleBarSysMenu,widget));
+          else
+            renderIndicator(painter,
+                            subControlRect(CC_TitleBar,opt,SC_TitleBarSysMenu,widget),
+                            fspec,dspec,
+                            dspec.element+"-menu-normal");
+        }
       }
 
       break;

@@ -6,6 +6,7 @@ V0.8.9
  * Blur the regions behind translucent menus/tooltips appropriately if blurring is enabled.
  * Fixed the positioning of bottom tab labels.
  * Check for internalWinId before deleting blur atom.
+ * Fixed the outline and titlebar buttons of MDI subwindows.
 
 V0.8.8
 ---------
