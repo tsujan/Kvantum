@@ -4849,15 +4849,17 @@ void Kvantum::drawComplexControl(ComplexControl control,
                                   : tbStatus == "focused" ? "normal" : "disabled"));
         if ((opt->subControls & SC_TitleBarContextHelpButton)&& (ts & Qt::WindowContextHelpButtonHint))
           break;
+        /* FIXME Why is SP_TitleBarMenuButton used here? */
         if ((opt->subControls & SC_TitleBarSysMenu) && (tf & Qt::WindowSystemMenuHint))
         {
-          if (!opt->icon.isNull())
+          /*if (!opt->icon.isNull())
             opt->icon.paint(painter,subControlRect(CC_TitleBar,opt,SC_TitleBarSysMenu,widget));
           else
             renderIndicator(painter,
                             subControlRect(CC_TitleBar,opt,SC_TitleBarSysMenu,widget),
                             fspec,dspec,
-                            dspec.element+"-menu-normal");
+                            dspec.element+"-menu-normal");*/
+          break;
         }
       }
 
