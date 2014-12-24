@@ -399,6 +399,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBox1->setChecked (false);
     ui->konsoleCheckBox->setChecked (false);
     ui->checkBox2->setChecked (false);
+    ui->checkBoxMenuTitle->setChecked (false);
     ui->checkBox3->setChecked (true);
     ui->checkBox4->setChecked (false);
     ui->checkBox5->setChecked (false);
@@ -406,7 +407,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBox7->setChecked (false);
     ui->checkBoxProgress->setChecked (false);
     ui->checkBoxMenubar->setChecked (true);
-    ui->checkBoxToolbar->setChecked (false);
+    ui->checkBoxToolbar->setChecked (true);
     ui->checkBox8->setChecked (true);
     ui->checkBoxClick->setChecked (false);
     ui->checkBox9->setChecked (false);
@@ -554,7 +555,7 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("slim_toolbars"))
                     ui->checkBoxToolbar->setChecked (themeSettings.value ("slim_toolbars").toBool());
                 else
-                    ui->checkBoxToolbar->setChecked (false);
+                    ui->checkBoxToolbar->setChecked (true);
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -590,6 +591,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBox1->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
                 ui->konsoleCheckBox->setChecked (themeSettings.value ("blur_konsole").toBool());
                 ui->checkBox2->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
+                ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
                 ui->checkBox3->setChecked (themeSettings.value ("respect_darkness").toBool());
                 themeSettings.endGroup();
             }
@@ -855,6 +857,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("transparent_dolphin_view", ui->checkBox1->isChecked());
         themeSettings.setValue ("blur_konsole", ui->konsoleCheckBox->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBox2->isChecked());
+        themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBox3->isChecked());
         themeSettings.endGroup();
 
@@ -964,7 +967,7 @@ void KvantumManager::isTranslucent (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.9</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.10</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));

@@ -282,7 +282,7 @@ this theme instead of its default theme.</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>758</width>
+         <width>675</width>
          <height>317</height>
         </rect>
        </property>
@@ -613,7 +613,7 @@ graphic card that supports it.</string>
            </font>
           </property>
           <property name="toolTip">
-           <string>Uncheck these four boxes if you want all
+           <string>Uncheck these five boxes if you want all
 widgets to appear as they are by default.</string>
           </property>
           <property name="title">
@@ -666,6 +666,22 @@ transparent screen if possible.</string>
              </property>
              <property name="text">
               <string>Transparent KTitle label</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxMenuTitle">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Don't draw any background for (KDE) menu titles.
+(Needs Logging out and in for Plasma menus.)</string>
+             </property>
+             <property name="text">
+              <string>Transparent menu title</string>
              </property>
             </widget>
            </item>

@@ -15,6 +15,7 @@ scroll_width=12
 slider_width=8
 slider_handle_width=16
 slider_handle_length=16
+slim_toolbars=true
 
 [GeneralColors]
 window.color=#3D3D3E

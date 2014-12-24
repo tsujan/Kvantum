@@ -348,6 +348,8 @@ transparent_ktitle_label          true/false          No background for the labe
                                                       KtitleWidget (a KDE widget with
                                                       a heading label)?
 
+transparent_menutitle             true/false          No background for (KDE) menu titles?
+
 respect_darkness                  true/false          Some apps don't respect dark themes.
                                                       Fix that as far as possible?
 

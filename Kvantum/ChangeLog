@@ -1,3 +1,9 @@
+V0.8.10
+---------
+ * Added a hacking variable for (KDE) menu titles.
+ * Fixed the outline and titlebar buttons of MDI subwindows.
+ * Slim toolbars by default.
+
 V0.8.9
 ---------
  * Added a workaround for menu paddings inherited from parent stylesheets (as in the context menu of VLC's palylist search lineedit).
@@ -6,7 +12,6 @@ V0.8.9
  * Blur the regions behind translucent menus/tooltips appropriately if blurring is enabled.
  * Fixed the positioning of bottom tab labels.
  * Check for internalWinId before deleting blur atom.
- * Fixed the outline and titlebar buttons of MDI subwindows.
 
 V0.8.8
 ---------

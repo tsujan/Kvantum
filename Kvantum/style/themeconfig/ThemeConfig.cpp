@@ -493,6 +493,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","transparent_ktitle_label");
   r.transparent_ktitle_label = v.toBool();
 
+  v = getValue("Hacks","transparent_menutitle");
+  r.transparent_menutitle = v.toBool();
+
   v = getValue("Hacks","respect_darkness");
   r.respect_darkness = v.toBool();
 

@@ -4217,6 +4217,22 @@ void Kvantum::drawComplexControl(ComplexControl control,
         QStyleOptionToolButton o(*opt);
 
         o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
+
+        /* make an exception for (KDE) menu titles */
+        const hacks_spec hspec = settings->getHacksSpec();
+        if (hspec.transparent_menutitle && widget)
+        {
+          if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
+          {
+            if (tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+                && widget->parentWidget() && qobject_cast<QMenu*>(widget->parentWidget()))
+            {
+              drawControl(CE_ToolButtonLabel,&o,painter,widget);
+              break;
+            }
+          }
+        }
+
         drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
         drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
         drawControl(CE_ToolButtonLabel,&o,painter,widget);

@@ -125,6 +125,8 @@ typedef struct {
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
   bool transparent_ktitle_label;
+  /* transparent background for (KDE) menu titles */
+  bool transparent_menutitle;
   /* Some apps don't respect dark themes.
      Fix that as far as possible! */
   bool respect_darkness;
@@ -308,6 +310,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
   hspec.blur_konsole = false;
   hspec.transparent_ktitle_label = false;
+  hspec.transparent_menutitle = false;
   hspec.respect_darkness = false;
 }
 
