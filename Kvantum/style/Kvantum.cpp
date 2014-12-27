@@ -3157,7 +3157,7 @@ void Kvantum::drawControl(ControlElement element,
 
         /* eliding */
         QString txt = opt->text;
-        int txtWidth = r.width()-lspec.right-lspec.left
+        int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
                        - (closable ? lspec.tispace : 0)
                        - (opt->icon.isNull() ? 0 : icnSise);
         if (textSize(painter->font(),txt).width() > txtWidth)
@@ -3812,6 +3812,20 @@ void Kvantum::drawControl(ControlElement element,
           painter->setFont(f);
         }
 
+        /* in case there isn't enough space */
+        /*if (pb && !opt->text.isEmpty())
+        {
+          QSize txtSize = textSize(painter->font(),opt->text);
+          if (pb->width() < txtSize.width()
+                            +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                            +lspec.left+lspec.right+fspec.left+fspec.right
+              || pb->height() < txtSize.height()
+                                +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          {
+            lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+          }
+        }*/
+
         /* opt->rect provided here is just for the label
            and not for the entire button. So, enlarge it!
            Also take into account the possibility of the presence of an indicator! */
@@ -3978,21 +3992,24 @@ void Kvantum::drawControl(ControlElement element,
 
           /* when there isn't enough space
              (as in Qupzilla's bookmark toolbar) */
-          QSize txtSize = textSize(painter->font(),opt->text);
-          if ((tialign == Qt::ToolButtonTextBesideIcon
-               && (tb->width() < txtSize.width()
-                                 +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                                 +lspec.left+lspec.right+fspec.left+fspec.right
-                   || tb->height() < txtSize.height()
-                                     +lspec.top+lspec.bottom+fspec.top+fspec.bottom))
-              || (tialign == Qt::ToolButtonTextUnderIcon
-                  && (tb->height() < txtSize.height()
-                                     +(opt->icon.isNull() ? 0 : opt->iconSize.height()+lspec.tispace)
-                                     +lspec.top+lspec.bottom+fspec.top+fspec.bottom
-                      || tb->width() < txtSize.width()
-                                       +lspec.left+lspec.right+fspec.left+fspec.right)))
+          if (!opt->text.isEmpty())
           {
-            lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+            QSize txtSize = textSize(painter->font(),opt->text);
+            if ((tialign == Qt::ToolButtonTextBesideIcon
+                 && (tb->width() < txtSize.width()
+                                   +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                                   +lspec.left+lspec.right+fspec.left+fspec.right
+                     || tb->height() < txtSize.height()
+                                       +lspec.top+lspec.bottom+fspec.top+fspec.bottom))
+                || (tialign == Qt::ToolButtonTextUnderIcon
+                    && (tb->height() < txtSize.height()
+                                       +(opt->icon.isNull() ? 0 : opt->iconSize.height()+lspec.tispace)
+                                       +lspec.top+lspec.bottom+fspec.top+fspec.bottom
+                        || tb->width() < txtSize.width()
+                                         +lspec.left+lspec.right+fspec.left+fspec.right)))
+            {
+              lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+            }
           }
         }
 
