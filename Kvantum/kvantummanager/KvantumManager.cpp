@@ -49,8 +49,9 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
     connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (writeConfig()));
     connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
-    connect (ui->checkBox4, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
-    connect (ui->checkBox9, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
+    connect (ui->checkBoxComposite, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
+    connect (ui->checkBoxTrans, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
+    connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
@@ -396,27 +397,55 @@ void KvantumManager::txtChanged (const QString &txt)
 void KvantumManager::defaultThemeButtons()
 {
     ui->restoreButton->hide();
-    ui->checkBox1->setChecked (false);
-    ui->konsoleCheckBox->setChecked (false);
-    ui->checkBox2->setChecked (false);
-    ui->checkBoxMenuTitle->setChecked (false);
-    ui->checkBox3->setChecked (true);
-    ui->checkBox4->setChecked (false);
-    ui->checkBox5->setChecked (false);
-    ui->checkBox6->setChecked (true);
-    ui->checkBox7->setChecked (false);
-    ui->checkBoxProgress->setChecked (false);
-    ui->checkBoxMenubar->setChecked (true);
-    ui->checkBoxToolbar->setChecked (true);
-    ui->checkBox8->setChecked (true);
-    ui->checkBoxClick->setChecked (false);
-    ui->checkBox9->setChecked (false);
-    ui->checkBox10->setChecked (false);
-    ui->comboToolButton->setCurrentIndex (0);
+    /* Someone may have compiled Kvantum with another default theme.
+       So, we get its settings directly from its kvconfig file. */
+    QString defaultConfig = ":default.kvconfig";
+    QSettings defaultSettings (defaultConfig, QSettings::NativeFormat);
 
-    ui->opaqueLabel->setEnabled (false);
-    ui->opaqueEdit->setEnabled (false);
-    ui->checkBox10->setEnabled (false);
+    defaultSettings.beginGroup ("Hacks");
+    ui->checkBoxDolphin->setChecked (defaultSettings.value ("transparent_dolphin_view").toBool());
+    ui->checkBoxKonsole->setChecked (defaultSettings.value ("blur_konsole").toBool());
+    ui->checkBoxKtitle->setChecked (defaultSettings.value ("transparent_ktitle_label").toBool());
+    ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
+    ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
+    defaultSettings.endGroup();
+
+    defaultSettings.beginGroup ("General");
+    bool composited = defaultSettings.value ("composite").toBool();
+    ui->checkBoxComposite->setChecked (!composited);
+    ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
+    ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_tabs").toBool());
+    ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
+    ui->checkBoxProgress->setChecked (defaultSettings.value ("textless_progressbar").toBool());
+    if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
+        ui->checkBoxMenubar->setChecked (defaultSettings.value ("menubar_mouse_tracking").toBool());
+    else
+        ui->checkBoxMenubar->setChecked (true);
+    ui->checkBoxToolbar->setChecked (defaultSettings.value ("slim_toolbars").toBool());
+    int index = 0;
+    if (defaultSettings.contains ("toolbutton_style"))
+    {
+        index = defaultSettings.value ("toolbutton_style").toInt();
+        if (index > 4 || index < 0) index = 0;
+    }
+    ui->comboToolButton->setCurrentIndex (index);
+    ui->checkBoxX11->setChecked (defaultSettings.value ("x11drag").toBool());
+    ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
+    if (composited)
+    {
+        bool translucency = defaultSettings.value ("translucent_windows").toBool();
+        QStringList lst = defaultSettings.value ("opaque").toStringList();
+        if (!lst.isEmpty())
+            ui->opaqueEdit->setText (lst.join (",")); // is cleared when the config page is shown
+        ui->checkBoxTrans->setChecked (translucency);
+        isTranslucent (translucency);
+        if (translucency)
+            ui->checkBoxBlurWindow->setChecked (defaultSettings.value ("blurring").toBool());
+        popupBlurring (ui->checkBoxBlurWindow->isChecked());
+        if (!ui->checkBoxBlurWindow->isChecked())
+            ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
+    }
+    defaultSettings.endGroup();
 }
 /*************************/
 void KvantumManager::resizeConfPage()
@@ -425,8 +454,8 @@ void KvantumManager::resizeConfPage()
   bool le = true;
   if (!ui->opaqueEdit->isEnabled())
   {
-    le = false;
-    ui->opaqueEdit->setEnabled (true);
+      le = false;
+      ui->opaqueEdit->setEnabled (true);
   }
   resize (size().expandedTo (sizeHint()
                              + ui->comboToolButton->minimumSizeHint()
@@ -475,12 +504,12 @@ void KvantumManager::tabChanged (int index)
     else if (index == 2)
     {
         ui->opaqueEdit->clear();
+        defaultThemeButtons();
+
         if (kvconfigTheme.isEmpty())
         {
             ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
-
-            defaultThemeButtons();
         }
         else
         {
@@ -512,7 +541,6 @@ void KvantumManager::tabChanged (int index)
                 /* ... only if it isn't a root theme */
                 if (!QFile::exists (userSvg) && QFile::exists (rootSvg))
                 {
-                    defaultThemeButtons();
                     resizeConfPage();
                     return;
                 }
@@ -530,69 +558,55 @@ void KvantumManager::tabChanged (int index)
                     composited = themeSettings.value ("composite").toBool();
                 else
                     composited = false;
-                ui->checkBox4->setChecked (!composited);
+                ui->checkBoxComposite->setChecked (!composited);
                 notCompisited (!composited);
                 if (themeSettings.contains ("left_tabs"))
-                    ui->checkBox5->setChecked (themeSettings.value ("left_tabs").toBool());
-                else
-                    ui->checkBox5->setChecked (false);
+                    ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
                 if (themeSettings.contains ("joined_tabs"))
-                    ui->checkBox6->setChecked (themeSettings.value ("joined_tabs").toBool());
-                else
-                    ui->checkBox6->setChecked (true);
+                    ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_tabs").toBool());
                 if (themeSettings.contains ("attach_active_tab"))
-                    ui->checkBox7->setChecked (themeSettings.value ("attach_active_tab").toBool());
-                else
-                    ui->checkBox7->setChecked (false);
+                    ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("textless_progressbar"))
                     ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
-                else
-                    ui->checkBoxProgress->setChecked (false);
                 if (themeSettings.contains ("menubar_mouse_tracking"))
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
-                else
-                    ui->checkBoxMenubar->setChecked (true);
                 if (themeSettings.contains ("slim_toolbars"))
                     ui->checkBoxToolbar->setChecked (themeSettings.value ("slim_toolbars").toBool());
-                else
-                    ui->checkBoxToolbar->setChecked (true);
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
                     if (index > 4 || index < 0) index = 0;
                     ui->comboToolButton->setCurrentIndex (index);
                 }
-                else
-                    ui->comboToolButton->setCurrentIndex (0);
                 if (themeSettings.contains ("x11drag"))
-                    ui->checkBox8->setChecked (themeSettings.value ("x11drag").toBool());
-                else
-                    ui->checkBox8->setChecked (true);
+                    ui->checkBoxX11->setChecked (themeSettings.value ("x11drag").toBool());
                 if (themeSettings.contains ("double_click"))
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
-                else
-                    ui->checkBoxClick->setChecked (false);
-                bool translucency = false;
-                if (themeSettings.contains ("translucent_windows"))
-                    translucency = themeSettings.value ("translucent_windows").toBool();
-                QStringList lst = themeSettings.value ("opaque").toStringList();
-                if (!lst.isEmpty())
-                    ui->opaqueEdit->setText (lst.join (","));
-                ui->checkBox9->setChecked (translucency);
                 if (composited)
+                {
+                    bool translucency = false;
+                    if (themeSettings.contains ("translucent_windows"))
+                        translucency = themeSettings.value ("translucent_windows").toBool();
+                    QStringList lst = themeSettings.value ("opaque").toStringList();
+                    if (!lst.isEmpty())
+                        ui->opaqueEdit->setText (lst.join (","));
+                    ui->checkBoxTrans->setChecked (translucency);
                     isTranslucent (translucency);
-                if (themeSettings.contains ("blurring"))
-                    ui->checkBox10->setChecked (themeSettings.value ("blurring").toBool());
-                else
-                    ui->checkBox10->setChecked (false);
+                    if (translucency && themeSettings.contains ("blurring"))
+                        ui->checkBoxBlurWindow->setChecked (themeSettings.value ("blurring").toBool());
+                    /* popup_blurring is required by blurring */
+                    popupBlurring (ui->checkBoxBlurWindow->isChecked());
+                    if (!ui->checkBoxBlurWindow->isChecked() && themeSettings.contains ("popup_blurring"))
+                        ui->checkBoxBlurPopup->setChecked (themeSettings.value ("popup_blurring").toBool());
+                }
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
-                ui->checkBox1->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
-                ui->konsoleCheckBox->setChecked (themeSettings.value ("blur_konsole").toBool());
-                ui->checkBox2->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
+                ui->checkBoxDolphin->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
+                ui->checkBoxKonsole->setChecked (themeSettings.value ("blur_konsole").toBool());
+                ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
-                ui->checkBox3->setChecked (themeSettings.value ("respect_darkness").toBool());
+                ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 themeSettings.endGroup();
             }
         }
@@ -854,32 +868,33 @@ void KvantumManager::writeConfig()
             return;
         }
         themeSettings.beginGroup ("Hacks");
-        themeSettings.setValue ("transparent_dolphin_view", ui->checkBox1->isChecked());
-        themeSettings.setValue ("blur_konsole", ui->konsoleCheckBox->isChecked());
-        themeSettings.setValue ("transparent_ktitle_label", ui->checkBox2->isChecked());
+        themeSettings.setValue ("transparent_dolphin_view", ui->checkBoxDolphin->isChecked());
+        themeSettings.setValue ("blur_konsole", ui->checkBoxKonsole->isChecked());
+        themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
-        themeSettings.setValue ("respect_darkness", ui->checkBox3->isChecked());
+        themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
         themeSettings.endGroup();
 
         themeSettings.beginGroup ("General");
         bool translucenceChanged = false;
-        if (themeSettings.value ("composite").toBool() == ui->checkBox4->isChecked()
-            || themeSettings.value ("translucent_windows").toBool() != ui->checkBox9->isChecked())
+        if (themeSettings.value ("composite").toBool() == ui->checkBoxComposite->isChecked()
+            || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked())
         {
             translucenceChanged = true;
         }
-        themeSettings.setValue ("composite", !ui->checkBox4->isChecked());
-        themeSettings.setValue ("left_tabs", ui->checkBox5->isChecked());
-        themeSettings.setValue ("joined_tabs", ui->checkBox6->isChecked());
-        themeSettings.setValue ("attach_active_tab", ui->checkBox7->isChecked());
+        themeSettings.setValue ("composite", !ui->checkBoxComposite->isChecked());
+        themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
+        themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
+        themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
-        themeSettings.setValue ("x11drag", ui->checkBox8->isChecked());
+        themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
-        themeSettings.setValue ("translucent_windows", ui->checkBox9->isChecked());
-        themeSettings.setValue ("blurring", ui->checkBox10->isChecked());
+        themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
+        themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
+        themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
@@ -953,15 +968,30 @@ void KvantumManager::restoreDefault()
 /*************************/
 void KvantumManager::notCompisited (bool checked)
 {
-    ui->checkBox9->setEnabled (!checked);
-    isTranslucent (!checked && ui->checkBox9->isChecked());
+    ui->checkBoxBlurPopup->setEnabled (!checked && !ui->checkBoxBlurWindow->isChecked());
+    ui->checkBoxTrans->setEnabled (!checked);
+    isTranslucent (!checked && ui->checkBoxTrans->isChecked());
+    if (checked)
+    {
+        ui->checkBoxTrans->setChecked (false);
+        ui->checkBoxBlurPopup->setChecked (false);
+    }
 }
 /*************************/
 void KvantumManager::isTranslucent (bool checked)
 {
     ui->opaqueLabel->setEnabled (checked);
     ui->opaqueEdit->setEnabled (checked);
-    ui->checkBox10->setEnabled (checked);
+    ui->checkBoxBlurWindow->setEnabled (checked);
+    if (!checked)
+        ui->checkBoxBlurWindow->setChecked (false);
+}
+/*************************/
+void KvantumManager::popupBlurring (bool checked)
+{
+    if (checked)
+      ui->checkBoxBlurPopup->setChecked (true);
+    ui->checkBoxBlurPopup->setEnabled (!checked);
 }
 /*************************/
 void KvantumManager::aboutDialog()

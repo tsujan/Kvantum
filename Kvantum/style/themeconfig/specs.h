@@ -72,6 +72,8 @@ typedef struct {
   QStringList opaque;
   /* blur what is behind translucent windows if possible? */
   bool blurring;
+  /* blur what is behind menus/tooltips if possible? */
+  bool popup_blurring;
   /* depth of menu shadows */
   int menu_shadow_depth;
   /* depth of tooltip shadows */
@@ -142,8 +144,6 @@ typedef struct {
   bool hasCapsule;
   /* frame size */
   int top,bottom,left,right;
-  /* pattern size */
-  int ptop,pbottom,pleft,pright;
   /* widget position in a capsule (used internally) */
   int capsuleH,capsuleV; // 0 -> middle, -1 -> left,top, 1 -> right,bottom, 2 -> left+right,top+bottom
 } frame_spec;
@@ -211,7 +211,6 @@ static inline void default_frame_spec(frame_spec &fspec) {
   fspec.hasCapsule = false; // may change to true in Kvantum.cpp
   fspec.element = QString();
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
-  fspec.ptop = fspec.pbottom = fspec.pleft = fspec.pright = 0;
   fspec.capsuleH = fspec.capsuleV = 0;
 }
 
@@ -273,6 +272,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.translucent_windows = false;
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";
   tspec.blurring = false;
+  tspec.popup_blurring = false;
   tspec.menu_shadow_depth = 0;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;

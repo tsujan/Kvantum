@@ -34,6 +34,7 @@ private slots:
     void restoreDefault();
     void isTranslucent (bool checked);
     void notCompisited (bool checked);
+    void popupBlurring (bool checked);
     void aboutDialog();
 
 private:

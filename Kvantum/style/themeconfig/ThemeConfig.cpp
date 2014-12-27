@@ -138,15 +138,6 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       r.left = v.toInt();
       v = getValue(elementName,"frame.right", i);
       r.right = v.toInt();
-
-      v = getValue(elementName,"frame.repeat.top.patternsize", i);
-      r.ptop = v.toInt();
-      v = getValue(elementName,"frame.repeat.bottom.patternsize", i);
-      r.pbottom = v.toInt();
-      v = getValue(elementName,"frame.repeat.left.patternsize", i);
-      r.pleft = v.toInt();
-      v = getValue(elementName,"frame.repeat.right.patternsize", i);
-      r.pright = v.toInt();
     }
   }
 
@@ -175,9 +166,9 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName) const
     {
       r.element = v.toString();
 
-      v = getValue(elementName,"interior.repeat.x.patternsize", i);
+      v = getValue(elementName,"interior.x.patternsize", i);
       r.px = v.toInt();
-      v = getValue(elementName,"interior.repeat.y.patternsize", i);
+      v = getValue(elementName,"interior.y.patternsize", i);
       r.py = v.toInt();
     }
   }
@@ -355,21 +346,40 @@ theme_spec ThemeConfig::getThemeSpec() const
   }
 #endif
 
-  /* no window translucency or blurring without
-     window interior elemenet or without compositing */
-  interior_spec ispec = getInteriorSpec("Window");
-  if (ispec.hasInterior)
+  /* no blurring or window translucency without compositing */
+  if (r.composite)
   {
-    v = getValue("General","translucent_windows");
-    if (v.isValid() && r.composite)
-      r.translucent_windows = v.toBool();
-
-    /* no blurring without translucency */
-    if (r.translucent_windows)
+    /* no window translucency or blurring
+       without window interior elemenet */
+    interior_spec ispec = getInteriorSpec("Window");
+    if (ispec.hasInterior)
     {
-      v = getValue("General","blurring");
-      if (v.isValid() && r.composite)
-        r.blurring = v.toBool();
+      v = getValue("General","translucent_windows");
+      if (v.isValid())
+        r.translucent_windows = v.toBool();
+
+      /* no window blurring without window translucency */
+      if (r.translucent_windows)
+      {
+        v = getValue("General","blurring");
+        if (v.isValid())
+          r.blurring = v.toBool();
+      }
+    }
+
+    /* "blurring" is sufficient but not necessary for "popup_blurring" */
+    if (r.blurring)
+      r.popup_blurring = true;
+    else
+    {
+      interior_spec ispecM = getInteriorSpec("Menu");
+      interior_spec ispecT = getInteriorSpec("ToolTip");
+      if (ispecM.hasInterior || ispecT.hasInterior)
+      {
+        v = getValue("General","popup_blurring");
+        if (v.isValid())
+          r.popup_blurring = v.toBool();
+      }
     }
   }
 

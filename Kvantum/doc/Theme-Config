@@ -140,7 +140,7 @@ The following table shows the variables (keys) you could change to configure the
 (1) If a section (group) is not present in your configuration, its variables and their values will be taken from the default config file.
 
 (2) If a variable is not present in a section of your configuration:
-      (2a) First the "inherits" section will be searched for it and then, If nothing is found,
+      (2a) First the "inherits" section will be searched for it and then, if nothing is found,
       (2b) its value will be taken from the same section of the default config file.
 
 There are three exceptions to these rules:
@@ -199,9 +199,9 @@ center_toolbar_handle             true/false          If true, the SVG element f
 
 slim_toolbars                     true/false          When true, the size of toolbar
                                                       icons will be 16px if it is not
-                                                      set in the app. False by default,
-                                                      which means that the size is
-                                                      determined by the DE or the app.
+                                                      set in the app. If false, the size
+                                                      will be determined by the DE or
+                                                      the app. True by default.
 
 toolbutton_style                  integer             Sets the toolbutton style when it
                                                       is not set by the app. 0: follow,
@@ -257,6 +257,12 @@ blurring                          true/false          Blur the screen area behin
                                                       graphic card that supports it. It
                                                       has no effect when "composite" or
                                                       "translucent_windows" is false.
+
+popup_blurring                    true/false          Blur the regions behind translucent
+                                                      menus and tooltips? This needs KDE
+                                                      blur effect and a graphic card that
+                                                      supports it. It will automatically
+                                                      be set to true if blurring is true.
 
 splitter_width                    integer             The width of splitter handles.
 
@@ -372,18 +378,16 @@ frame.right                       integer             The height or width of
                                                       the corresponding frame
                                                       part if there is any.
 
-frame.repeat.top.patternsize
-frame.repeat.bottom.patternsize
-frame.repeat.left.patternsize
-frame.repeat.right.patternsize    integer             The frame pattern sizes
-                                                      if a pattern is used for
-                                                      drawing the frame.
-
 interior                          true/false          Draw an interior for
                                                       the widget?
 
-interior.repeat.x.patternsize
-interior.repeat.y.patternsize     integer             The interior pattern sizes.
+interior.x.patternsize
+interior.y.patternsize            integer             The interior pattern sizes.
+                                                      Used for tiling the interior of
+                                                      a widget with a pattern. A value
+                                                      of zero means no tiling in the
+                                                      corresponding direction. Their
+                                                      absence also means no pattern.
 
 indicator.size                    integer             Some widgets, like scrollbar
                                                       arrows, have indicators. This

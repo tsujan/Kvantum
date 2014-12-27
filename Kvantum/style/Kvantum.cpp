@@ -556,7 +556,15 @@ void Kvantum::polish(QWidget *widget)
         translucentWidgets.insert(widget);
         connect(widget, SIGNAL(destroyed(QObject*)),
                 SLOT(noTranslucency(QObject*)));
-        if (blurHelper && tspec.blurring) // blurHelper may exist because of Konsole blurring
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+        if (!blurHelper && tspec.popup_blurring)
+        {
+          QList<int> menuS = getShadow(getFrameSpec("Menu"), pixelMetric(PM_MenuHMargin));
+          QList<int> TooltipS = getShadow(getFrameSpec("Tooltip"), pixelMetric(PM_ToolTipLabelFrameWidth));
+          blurHelper = new BlurHelper(this,menuS,TooltipS);
+        }
+#endif
+        if (blurHelper && tspec.popup_blurring) // blurHelper may exist because of Konsole blurring
           blurHelper->registerWidget(widget);
       }
       /*else // round off the corners
@@ -1025,6 +1033,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         lspec.right = qMin(lspec.right,2);
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
+        lspec.tispace = qMin(lspec.tispace,3);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -1180,6 +1189,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         lspec.right = qMin(lspec.right,2);
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
+        lspec.tispace = qMin(lspec.tispace,3);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -3127,28 +3137,41 @@ void Kvantum::drawControl(ControlElement element,
         else if (option->state & State_MouseOver)
           state = 2;
 
+        bool closable = false;
+        if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
+        {
+          if (tb->tabsClosable())
+            closable = true;
+        }
+
         /* since we draw text and icon together as label,
            for RTL we need to move the label to right */
-        if (opt->direction == Qt::RightToLeft && !verticalTabs)
+        if (opt->direction == Qt::RightToLeft && !verticalTabs && closable)
+          r = alignedRect(Qt::RightToLeft, Qt::AlignLeft,
+                          QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget), h),
+                          option->rect);
+
+        int icnSise = iconSize.isValid() ? 
+                        qMax(iconSize.width(), iconSize.height())
+                        : pixelMetric(PM_TabBarIconSize);
+
+        /* eliding */
+        QString txt = opt->text;
+        int txtWidth = r.width()-lspec.right-lspec.left
+                       - (closable ? lspec.tispace : 0)
+                       - (opt->icon.isNull() ? 0 : icnSise);
+        if (textSize(painter->font(),txt).width() > txtWidth)
         {
-          if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
-          {
-            if (tb->tabsClosable())
-              r = alignedRect(Qt::RightToLeft, Qt::AlignLeft,
-                              QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget), h),
-                              option->rect);
-          }
+          QFontMetrics fm(painter->fontMetrics());
+          txt = fm.elidedText(opt->text, Qt::ElideRight, txtWidth);
         }
 
         renderLabel(painter,option->palette,
                     r,
                     fspec,lspec,
-                    talign,opt->text,QPalette::WindowText,
+                    talign,txt,QPalette::WindowText,
                     state,
-                    opt->icon.pixmap((iconSize.isValid() ? 
-                                       qMax(iconSize.width(), iconSize.height()) :
-                                       pixelMetric(PM_TabBarIconSize)),
-                                     iconmode,iconstate));
+                    opt->icon.pixmap(icnSise,iconmode,iconstate));
 
         if (verticalTabs)
           painter->restore();
@@ -3924,11 +3947,14 @@ void Kvantum::drawControl(ControlElement element,
           lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
+          lspec.tispace = qMin(lspec.tispace,3);
         }
 
-        /* the right arrow is attached */
+        const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
+
         if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
+          /* the right arrow is attached */
           if (tb->popupMode() == QToolButton::MenuButtonPopup
               || ((tb->popupMode() == QToolButton::InstantPopup
                    || tb->popupMode() == QToolButton::DelayedPopup)
@@ -3949,9 +3975,27 @@ void Kvantum::drawControl(ControlElement element,
             const label_spec lspec1 = getLabelSpec("Toolbar");
             lspec.normalColor = lspec1.normalColor;
           }
+
+          /* when there isn't enough space
+             (as in Qupzilla's bookmark toolbar) */
+          QSize txtSize = textSize(painter->font(),opt->text);
+          if ((tialign == Qt::ToolButtonTextBesideIcon
+               && (tb->width() < txtSize.width()
+                                 +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                                 +lspec.left+lspec.right+fspec.left+fspec.right
+                   || tb->height() < txtSize.height()
+                                     +lspec.top+lspec.bottom+fspec.top+fspec.bottom))
+              || (tialign == Qt::ToolButtonTextUnderIcon
+                  && (tb->height() < txtSize.height()
+                                     +(opt->icon.isNull() ? 0 : opt->iconSize.height()+lspec.tispace)
+                                     +lspec.top+lspec.bottom+fspec.top+fspec.bottom
+                      || tb->width() < txtSize.width()
+                                       +lspec.left+lspec.right+fspec.left+fspec.right)))
+          {
+            lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+          }
         }
 
-        const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
            button and not just its label here (-> CT_ToolButton)... */
         QRect r = option->rect;
@@ -5750,6 +5794,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
+          lspec.tispace = qMin(lspec.tispace,3);
         }
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
@@ -6718,12 +6763,13 @@ QRect Kvantum::subControlRect(ComplexControl control,
                   const QString group = "PanelButtonTool";
                   frame_spec fspec = getFrameSpec(group);
                   const indicator_spec dspec = getIndicatorSpec(group);
-                  const label_spec lspec = getLabelSpec(group);
+                  label_spec lspec = getLabelSpec(group);
                   // -> CE_ToolButtonLabel
                   if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
                   {
                     fspec.left = qMin(fspec.left,3);
                     fspec.right = qMin(fspec.right,3);
+                    lspec.tispace = qMin(lspec.tispace,3);
                   }
                   return option->rect.adjusted(opt->direction == Qt::RightToLeft ?
                                                  lspec.tispace+dspec.size
@@ -7030,6 +7076,14 @@ bool Kvantum::renderElement(QPainter *painter,
   {
     if (hsize > 0 || vsize > 0)
     {
+      /* draw the pattern over the background
+         if a separate pattern element exists */
+      if (renderer->elementExists(element_+"-pattern"))
+      {
+        renderer->render(painter,element_,bounds);
+        element_ = element_+"-pattern";
+      }
+
       int width = hsize > 0 ? hsize : bounds.width();
       int height = vsize > 0 ? vsize : bounds.height();
       QString str = QString("%1-%2-%3").arg(element_)

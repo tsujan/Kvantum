@@ -387,7 +387,7 @@ if their size is not set in the app.</string>
             </widget>
            </item>
            <item row="5" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox7">
+            <widget class="QCheckBox" name="checkBoxAttachTab">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -418,7 +418,7 @@ labels by default.</string>
             </widget>
            </item>
            <item row="2" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox5">
+            <widget class="QCheckBox" name="checkBoxleftTab">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -433,7 +433,7 @@ labels by default.</string>
             </widget>
            </item>
            <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox6">
+            <widget class="QCheckBox" name="checkBoxJoinTab">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -448,7 +448,7 @@ labels by default.</string>
             </widget>
            </item>
            <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox8">
+            <widget class="QCheckBox" name="checkBoxX11">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -514,7 +514,68 @@ unless KDE uses double-click.</string>
            <string>Compositing</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_6">
-           <item row="2" column="0">
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="opaqueEdit">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>A comma-separated list of executables,
+whose windows should not be translucent.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxTrans">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Needs a translucent SVG background for windows.</string>
+             </property>
+             <property name="text">
+              <string>Translucent windows</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxComposite">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>If checked, menus, tooltips and windows
+will not have translucency or shadow.</string>
+             </property>
+             <property name="text">
+              <string>Disable composite effects</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxBlurWindow">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Needs KDE blur effect, a graphic card
+that supports it, and a translucent
+window SVG background.</string>
+             </property>
+             <property name="text">
+              <string>Blurring for translucent windows</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
             <widget class="QLabel" name="opaqueLabel">
              <property name="font">
               <font>
@@ -530,63 +591,21 @@ whose windows should not be translucent.</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="opaqueEdit">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables,
-whose windows should not be translucent.</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox9">
+            <widget class="QCheckBox" name="checkBoxBlurPopup">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Needs a translucent SVG background for windows.</string>
+              <string>Needs KDE blur effect, a graphic card that supports it,
+and translucent menu/tooltip SVG elements.
+
+Automatically checked if window blurring is enabled.</string>
              </property>
              <property name="text">
-              <string>Translucent windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox4">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>If checked, menus, tooltips and windows
-will not have translucency or shadow.</string>
-             </property>
-             <property name="text">
-              <string>Disable composite effects</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBox10">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Needs KDE blur effect and a
-graphic card that supports it.</string>
-             </property>
-             <property name="text">
-              <string>Blurring for translucent windows</string>
+              <string>Blurring for menus and tooltips</string>
              </property>
             </widget>
            </item>
@@ -624,7 +643,7 @@ widgets to appear as they are by default.</string>
             <number>10</number>
            </property>
            <item>
-            <widget class="QCheckBox" name="checkBox1">
+            <widget class="QCheckBox" name="checkBoxDolphin">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -639,7 +658,7 @@ widgets to appear as they are by default.</string>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="konsoleCheckBox">
+            <widget class="QCheckBox" name="checkBoxKonsole">
              <property name="font">
               <font>
                <bold>false</bold>
@@ -655,14 +674,14 @@ transparent screen if possible.</string>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox2">
+            <widget class="QCheckBox" name="checkBoxKtitle">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Don't draw any background for KTitles.</string>
+              <string>Do not draw any background for KTitles.</string>
              </property>
              <property name="text">
               <string>Transparent KTitle label</string>
@@ -677,7 +696,7 @@ transparent screen if possible.</string>
               </font>
              </property>
              <property name="toolTip">
-              <string>Don't draw any background for (KDE) menu titles.
+              <string>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</string>
              </property>
              <property name="text">
@@ -686,7 +705,7 @@ transparent screen if possible.</string>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox3">
+            <widget class="QCheckBox" name="checkBoxDark">
              <property name="font">
               <font>
                <bold>false</bold>

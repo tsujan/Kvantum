@@ -3,6 +3,12 @@ V0.8.10
  * Added a hacking variable for (KDE) menu titles.
  * Fixed the outline and titlebar buttons of MDI subwindows.
  * Slim toolbars by default.
+ * Added a separate key for blurring the regions behind (translucent) menus and tooltips.
+ * Improved Kvantum Manager's config page.
+ * Who needs frame pattern?
+ * Allow tiling over the interior background with a separate (translucent) pattern object.
+ * Remove toolbutton text margins when there isn't enough space (as in Qupzilla's bookmark toolbar).
+ * Elide tab text when needed.
 
 V0.8.9
 ---------
