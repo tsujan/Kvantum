@@ -1817,6 +1817,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
+
+        if (isLibreoffice)
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
       }
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
@@ -1909,6 +1914,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
+
+        if (isLibreoffice)
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
       }
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
@@ -2046,6 +2056,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
 
+      if (isLibreoffice)
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+      }
+
       QString iStatus = status; // indicator state
       QString bStatus = status; // button state
       if (!status.startsWith("disabled"))
@@ -2120,8 +2135,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isLibreoffice)
       {
         bStatus = iStatus = "normal";
-        if (up) iString = "-plus-";
-        else iString = "-minus-";
+        /*if (up) iString = "-plus-";
+        else iString = "-minus-";*/
       }
 
       // horizontally center both indicators
@@ -6452,12 +6467,16 @@ QRect Kvantum::subControlRect(ComplexControl control,
 
     case CC_SpinBox : {
       int sw = SPIN_BUTTON_WIDTH; // spin button width
+      frame_spec fspec = getFrameSpec("IndicatorSpinBox");
+
       // a workaround for LibreOffice
       if (isLibreoffice)
+      {
         sw = 12;
+        fspec.right = qMin(fspec.right,3);
+      }
 
       // take into account the right frame width
-      const frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       switch (subControl) {
         case SC_SpinBoxFrame :
           return QRect();
