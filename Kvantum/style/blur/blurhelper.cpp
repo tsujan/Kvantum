@@ -35,24 +35,24 @@ BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) 
   _atom_blur = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
 #endif
 
-  if (!menuS.isEmpty() && menuS.size() >=4)
+  if (!menuS.isEmpty() && menuS.size() >= 4)
     menuShadow = menuS;
-  if (!tooltipS.isEmpty() && tooltipS.size() >=4)
+  if (!tooltipS.isEmpty() && tooltipS.size() >= 4)
     tooltipShadow = tooltipS;
 }
 /*************************/
 void BlurHelper::registerWidget (QWidget* widget)
 {
-   /* no need to these conditions again */
-   /*if (widget->isWindow()
-       && widget->testAttribute (Qt::WA_TranslucentBackground)
-       && widget->windowType() != Qt::Desktop
-       && !widget->testAttribute (Qt::WA_X11NetWmWindowTypeDesktop)
-       && !widget->testAttribute (Qt::WA_PaintOnScreen)
-       && !widget->inherits ("KScreenSaver")
-       && !widget->inherits ("QTipLabel")
-       && !widget->inherits ("QSplashScreen")
-       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
+  /* these conditions are taken care of in Kvantum.cpp -> polish(QWidget *widget) */
+  /*if (widget->isWindow()
+      && widget->testAttribute (Qt::WA_TranslucentBackground)
+      && widget->windowType() != Qt::Desktop
+      && !widget->testAttribute (Qt::WA_X11NetWmWindowTypeDesktop)
+      && !widget->testAttribute (Qt::WA_PaintOnScreen)
+      && !widget->inherits ("KScreenSaver")
+      && !widget->inherits ("QTipLabel")
+      && !widget->inherits ("QSplashScreen")
+      && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
 
     addEventFilter (widget);
 }

@@ -43,7 +43,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QLabel>
-#include <QPixmapCache> 
+#include <QPixmapCache>
 //#include <QBitmap>
 #include <QPaintEvent>
 #include <QtCore/qmath.h>
@@ -61,6 +61,8 @@
 #define SPIN_BUTTON_WIDTH 16
 #define SLIDER_TICK_SIZE 5
 #define COMBO_ARROW_LENGTH 20
+#define TOOL_BUTTON_ARROW_MARGIN 2
+#define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define MIN_CONTRAST 65
 
 Kvantum::Kvantum() : QCommonStyle()
@@ -145,9 +147,9 @@ Kvantum::Kvantum() : QCommonStyle()
 
   if (tspec.blurring)
   {
-    QList<int> menuS = getShadow(getFrameSpec("Menu"), pixelMetric(PM_MenuHMargin));
-    QList<int> TooltipS = getShadow(getFrameSpec("Tooltip"), pixelMetric(PM_ToolTipLabelFrameWidth));
-    blurHelper = new BlurHelper(this,menuS,TooltipS);
+    QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin));
+    QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
+    blurHelper = new BlurHelper(this,menuS,tooltipS);
   }
 #endif
 }
@@ -272,61 +274,76 @@ void Kvantum::advanceProgresses()
   }
 }
 
-QList<int> Kvantum::getShadow (frame_spec fspec, int thickness)
+QList<int> Kvantum::getShadow (const QString &widgetName, int thickness)
 {
   QSvgRenderer *renderer = 0;
   int divisor = 0;
   QList<int> shadow;
+  shadow << 0 << 0 << 0 << 0;
+  frame_spec fspec = getFrameSpec(widgetName);
+  QString element = fspec.element;
 
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-left"))
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-left"))
     renderer = themeRndr;
   else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(fspec.element+"-shadow-left").width();
+  divisor = renderer->boundsOnElement(element+"-shadow-left").width();
   if (divisor)
   {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-left"))
-      renderer = themeRndr; // WARNING make sure that the default theme has such an element
-    else renderer = defaultRndr;
-    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-left").width()/divisor);
-  }
-
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-top"))
-    renderer = themeRndr;
-  else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(fspec.element+"-shadow-top").height();
-  if (divisor)
-  {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-top"))
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-left"))
       renderer = themeRndr;
-    else renderer = defaultRndr;
-    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-top").height()/divisor);
+    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
+      renderer = defaultRndr;
+    else renderer = 0;
+    if (renderer)
+      shadow[0] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-left").width()/divisor);
   }
 
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-right"))
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-top"))
     renderer = themeRndr;
   else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(fspec.element+"-shadow-right").width();
+  divisor = renderer->boundsOnElement(element+"-shadow-top").height();
   if (divisor)
   {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-right"))
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-top"))
       renderer = themeRndr;
-    else renderer = defaultRndr;
-    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-right").width()/divisor);
+    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
+      renderer = defaultRndr;
+    else renderer = 0;
+    if (renderer)
+      shadow[1] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-top").height()/divisor);
   }
 
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-bottom"))
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-right"))
     renderer = themeRndr;
   else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(fspec.element+"-shadow-bottom").height();
+  divisor = renderer->boundsOnElement(element+"-shadow-right").width();
   if (divisor)
   {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(fspec.element+"-shadow-hint-bottom"))
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-right"))
       renderer = themeRndr;
-    else renderer = defaultRndr;
-    shadow << thickness*(renderer->boundsOnElement(fspec.element+"-shadow-hint-bottom").height()/divisor);
+    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
+      renderer = defaultRndr;
+    else renderer = 0;
+    if (renderer)
+      shadow[2] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-right").width()/divisor);
   }
 
-  return shadow; // << left << top << right << bottom
+  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-bottom"))
+    renderer = themeRndr;
+  else renderer = defaultRndr;
+  divisor = renderer->boundsOnElement(element+"-shadow-bottom").height();
+  if (divisor)
+  {
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-bottom"))
+      renderer = themeRndr;
+    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
+      renderer = defaultRndr;
+    else renderer = 0;
+    if (renderer)
+      shadow[3] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-bottom").height()/divisor);
+  }
+
+  return shadow; // [left, top, right, bottom]
 }
 
 // also checks for NULL widgets
@@ -406,8 +423,9 @@ void Kvantum::polish(QWidget *widget)
             && !widget->inherits("QSplashScreen")
             && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
             /* FIXME: I included this because I thought, without it, QtWebKit
-               apps would crash on quitting but that wasn't the case. */
-            && widget->internalWinId()
+               apps would crash on quitting but that wasn't the case. However,
+               only blurring needs it and it's taken care of by BlurHelper. */
+            //&& widget->internalWinId()
             && !translucentWidgets.contains(widget))
         {
 #if QT_VERSION < 0x050000
@@ -559,9 +577,9 @@ void Kvantum::polish(QWidget *widget)
 #if defined Q_WS_X11 || defined Q_OS_LINUX
         if (!blurHelper && tspec.popup_blurring)
         {
-          QList<int> menuS = getShadow(getFrameSpec("Menu"), pixelMetric(PM_MenuHMargin));
-          QList<int> TooltipS = getShadow(getFrameSpec("Tooltip"), pixelMetric(PM_ToolTipLabelFrameWidth));
-          blurHelper = new BlurHelper(this,menuS,TooltipS);
+          QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin));
+          QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
+          blurHelper = new BlurHelper(this,menuS,tooltipS);
         }
 #endif
         if (blurHelper && tspec.popup_blurring) // blurHelper may exist because of Konsole blurring
@@ -1067,6 +1085,29 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       }
       if (tb)
       {
+        // lack of space  (-> CE_ToolButtonLabel)
+        if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+        {
+          if (tb->popupMode() != QToolButton::MenuButtonPopup)
+          {
+            if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            {
+                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
+          else
+          {
+            const frame_spec fspec1 = getFrameSpec("DropDownButton");
+            if (tb->width() < opt->iconSize.width()+fspec.left
+                              +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
+                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
+        }
+
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
         const theme_spec tspec = settings->getThemeSpec();
@@ -1219,6 +1260,31 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       }
       if (tb)
       {
+        bool rtl(option->direction == Qt::RightToLeft);
+
+        // lack of space  (-> CE_ToolButtonLabel)
+        if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+        {
+          if (tb->popupMode() != QToolButton::MenuButtonPopup)
+          {
+            if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            {
+                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
+          else
+          {
+            const frame_spec fspec1 = getFrameSpec("DropDownButton");
+            if (tb->width() < opt->iconSize.width()+fspec.left
+                              +(rtl ? fspec1.left : fspec1.right)
+                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
+        }
+
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
         const theme_spec tspec = settings->getThemeSpec();
@@ -1259,7 +1325,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         QString fbStatus = status;
-        bool rtl(option->direction == Qt::RightToLeft);
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
           // merge with drop down button
@@ -2231,7 +2296,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           status.replace(QString("toggled"),QString("normal"));
       }
       const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
+      indicator_spec dspec = getIndicatorSpec(group);
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       if (tb)
@@ -2256,6 +2321,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         bool rtl(option->direction == Qt::RightToLeft);
+
         if (!fspec.hasCapsule)
         {
           fspec.hasCapsule = true;
@@ -2270,6 +2336,28 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.right = 0;
         else
           fspec.left = 0; // no left frame in this case
+
+        /* lack of space */
+        const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+        if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull()
+            && tb->popupMode() == QToolButton::MenuButtonPopup)
+        {
+          const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+          if (tb->width() < opt->iconSize.width()+fspec1.left
+                            +(rtl ? fspec.left : fspec.right)
+                            +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+          {
+            if (rtl)
+            {
+              fspec.left = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+            else
+            {
+              fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+            }
+            dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
+          }
+        }
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
         {
@@ -3416,46 +3504,42 @@ void Kvantum::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec(group);
 
         QRect r = option->rect;
-        if (widget)
+        if (const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget))
         {
-          const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
-          if (pb)
+          int wdth = pb->height();
+
+          if (pb->orientation() == Qt::Vertical)
           {
-            int wdth = pb->height();
+            wdth = pb->width();
 
-            if (pb->orientation() == Qt::Vertical)
+            r.setRect(0, 0, h, w);
+            QTransform m;
+            if (pb->textDirection() == QProgressBar::TopToBottom)
             {
-              wdth = pb->width();
+              m.translate(0, w); m.scale(1,-1);
+              // be fully consistent
+              int top = fspec.top;
+              fspec.top = fspec.bottom;
+              fspec.bottom = top;
 
-              r.setRect(0, 0, h, w);
-              QTransform m;
-              if (pb->textDirection() == QProgressBar::TopToBottom)
-              {
-                m.translate(0, w); m.scale(1,-1);
-                // be fully consistent
-                int top = fspec.top;
-                fspec.top = fspec.bottom;
-                fspec.bottom = top;
-
-                top = lspec.top;
-                lspec.top = lspec.bottom;
-                lspec.bottom = top;
-              }
-              else
-              {
-                m.translate(h, 0); m.scale(-1,1);
-              }
-              painter->setTransform(m, true);
+              top = lspec.top;
+              lspec.top = lspec.bottom;
+              lspec.bottom = top;
             }
-
-            wdth = wdth - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
-            QFont f(pb->font());
-            if (f.pixelSize() > wdth)
-              f.setPixelSize(wdth);
-            else if (f.pointSize() > wdth)
-              f.setPointSize(wdth);
-            painter->setFont(f);
+            else
+            {
+              m.translate(h, 0); m.scale(-1,1);
+            }
+            painter->setTransform(m, true);
           }
+
+          wdth = wdth - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
+          QFont f(pb->font());
+          if (f.pixelSize() > wdth)
+            f.setPixelSize(wdth);
+          else if (f.pointSize() > wdth)
+            f.setPointSize(wdth);
+          painter->setFont(f);
         }
 
         renderLabel(painter,option->palette,
@@ -4024,6 +4108,30 @@ void Kvantum::drawControl(ControlElement element,
                                          +lspec.left+lspec.right+fspec.left+fspec.right)))
             {
               lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+              fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+            }
+          }
+
+          /* lack of space (as in some of Krita's KisToolButtons) */
+          if (tialign == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+          {
+            if (tb->popupMode() != QToolButton::MenuButtonPopup)
+            {
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                  || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+              {
+                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              }
+            }
+            else
+            {
+              const frame_spec fspec1 = getFrameSpec("DropDownButton");
+              if (tb->width() < opt->iconSize.width()+fspec.left
+                                +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
+                                +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+              {
+                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              }
             }
           }
         }
@@ -4068,6 +4176,7 @@ void Kvantum::drawControl(ControlElement element,
             && opt->arrowType != Qt::NoArrow)
         {
           iAlignment |= Qt::AlignHCenter;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         }
         else
         {
@@ -4313,42 +4422,38 @@ void Kvantum::drawComplexControl(ComplexControl control,
         drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
-        if (widget)
+        if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
-          const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-          if (tb)
+          o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
+          if (tb->popupMode() == QToolButton::MenuButtonPopup)
+            drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
+          else if ((tb->popupMode() == QToolButton::InstantPopup
+                    || tb->popupMode() == QToolButton::DelayedPopup)
+                   && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
-            if (tb->popupMode() == QToolButton::MenuButtonPopup)
-              drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
-            else if ((tb->popupMode() == QToolButton::InstantPopup
-                      || tb->popupMode() == QToolButton::DelayedPopup)
-                     && (opt->features & QStyleOptionToolButton::HasMenu))
+            frame_spec fspec = getFrameSpec("PanelButtonTool");
+            const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
+            fspec.right = fspec.left = 0;
+            // -> CE_ToolButtonLabel
+            if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
             {
-              frame_spec fspec = getFrameSpec("PanelButtonTool");
-              const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
-              fspec.right = fspec.left = 0;
-              // -> CE_ToolButtonLabel
-              if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
-              {
-                fspec.top = qMin(fspec.top,3);
-                fspec.bottom = qMin(fspec.bottom,3);
-              }
-              QString aStatus = "normal";
-              if (status.startsWith("disabled"))
-                aStatus = "disabled";
-              else if (status.startsWith("toggled") || status.startsWith("pressed"))
-                aStatus = "pressed";
-              else if (option->state & State_MouseOver)
-                aStatus = "focused";
-              if (isInactive)
-                aStatus.append(QString("-inactive"));
-              renderIndicator(painter,
-                              o.rect,
-                              fspec,dspec,
-                              dspec.element+"-down-"+aStatus,
-                              Qt::AlignLeft | Qt::AlignVCenter);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
             }
+            QString aStatus = "normal";
+            if (status.startsWith("disabled"))
+              aStatus = "disabled";
+            else if (status.startsWith("toggled") || status.startsWith("pressed"))
+              aStatus = "pressed";
+            else if (option->state & State_MouseOver)
+              aStatus = "focused";
+            if (isInactive)
+              aStatus.append(QString("-inactive"));
+            renderIndicator(painter,
+                            o.rect,
+                            fspec,dspec,
+                            dspec.element+"-down-"+aStatus,
+                            Qt::AlignLeft | Qt::AlignVCenter);
           }
         }
       }
@@ -4836,10 +4941,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
         renderElement(painter,"dial"+suffix,dial);
         renderElement(painter,"dial-handle"+suffix,handle);
         
-        if (widget)
+        if (const QDial *d = qobject_cast<const QDial *>(widget))
         {
-          const QDial *d = qobject_cast<const QDial *>(widget);
-          if (d && d->notchesVisible())
+          if (d->notchesVisible())
             renderElement(painter,"dial-notches"+suffix,dial);
         }
       }
@@ -5451,9 +5555,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
   if (!option)
     return contentsSize;
 
-  int x,y,w,h;
-  option->rect.getRect(&x,&y,&w,&h);
-
   /*int fh = 14; // font height
   if (widget)
     fh = QFontMetrics(widget->font()).height();*/
@@ -5535,10 +5636,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       /* This is a workaround for some apps (like Kdenlive with its
          TimecodeDisplay) that presuppose all spinboxes should have
          vertical buttons and set an insufficient minimum width for them. */
-      if (widget)
+      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
       {
-        const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget);
-        if (sb && sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
+        if (sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
           s.rwidth() = sb->minimumWidth() + 2*SPIN_BUTTON_WIDTH;
       }
 #else
@@ -5547,10 +5647,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       s = defaultSize + QSize(fspec.left + fspec1.right + SPIN_BUTTON_WIDTH,
                               (fspec1.top > fspec.top ? fspec1.top : 0)
                                + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0));
-      if (widget)
+      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
       {
-        const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget);
-        if (sb && sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
+        if (sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
           s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
       }
 #endif
@@ -5670,10 +5769,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         /* add the height of radio button indicator to have a
            reasonable vertical distance between radio buttons */
 	    bool hasLabel = true;
-	    if (widget)
+	    if (const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget))
 	    {
-	      const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget);
-	      if (ab && ab->text().isEmpty())
+	      if (ab->text().isEmpty())
 	        hasLabel = false;
 	    }
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize));
@@ -5707,10 +5805,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         /* add the height of checkbox indicator to have a
            reasonable vertical distance between checkboxes */
 	    bool hasLabel = true;
-	    if (widget)
+	    if (const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget))
 	    {
-	      const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget);
-	      if (ab && ab->text().isEmpty())
+	      if (ab->text().isEmpty())
 	        hasLabel = false;
 	    }
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize));
@@ -5843,20 +5940,22 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         /*
            Don't use sizeCalculated() for calculating the size
            because the button may be vertical, like in digiKam.
+           Unfortunately, there's no standard way to determine
+           how margins and frames are changed in such cases.
         */
 
         s = defaultSize
             /* Unlike the case of CT_PushButton, the frame widths aren't taken
                into account yet. Qt seems to consider toolbuttons frameless,
-               althought it may add 4px to their widths or heights
-               (-> qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
+               althought it adds 6 and 5 px to their widths or heights respectively
+               (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
             + QSize(fspec.left+fspec.right, fspec.top+fspec.bottom)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
                         || tialign == Qt::ToolButtonTextOnly ?
-                      0 :
+                      0
                       // also add a margin between indicator and text (-> CE_ToolButtonLabel)
-                      dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
+                      : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
                     0);
 
         /* add the spacings if there's a text */
@@ -5873,34 +5972,34 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                           lspec.top+lspec.bottom + lspec.tispace);
         }
 
-        if (widget)
+        if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
-          const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-          if (tb)
+          if (tb->popupMode() == QToolButton::MenuButtonPopup)
           {
-            if (tb->popupMode() == QToolButton::MenuButtonPopup)
-            {
-              const QString group1 = "DropDownButton";
-              const frame_spec fspec1 = getFrameSpec(group1);
-              const indicator_spec dspec1 = getIndicatorSpec(group1);
-              s.rwidth() += fspec1.left+fspec1.right+dspec1.size+2; /* Why doesn't this or any other value for s
-                                                                       have any effect on Krita's KisToolButton? */
-            }
-            else if ((tb->popupMode() == QToolButton::InstantPopup
-                      || tb->popupMode() == QToolButton::DelayedPopup)
-                     && (opt->features & QStyleOptionToolButton::HasMenu))
-            {
+            const QString group1 = "DropDownButton";
+            const frame_spec fspec1 = getFrameSpec(group1);
+            indicator_spec dspec1 = getIndicatorSpec(group1);
+            dspec1.size = qMin(dspec1.size,qMin(defaultSize.height(),defaultSize.width()));
+            s.rwidth() += (opt->direction == Qt::RightToLeft ?
+                             fspec1.left-fspec.left
+                             : fspec1.right-fspec.right) // there's a capsule
+                          +dspec1.size+2*TOOL_BUTTON_ARROW_MARGIN
+                          -pixelMetric(PM_MenuButtonIndicator); // added in qcommonstyle.cpp
+          }
+          else if ((tb->popupMode() == QToolButton::InstantPopup
+                    || tb->popupMode() == QToolButton::DelayedPopup)
+                   && (opt->features & QStyleOptionToolButton::HasMenu))
+          {
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
-            }
+          }
 
-            /* extra space for bold text */
-            if (!opt->text.isEmpty() && lspec.boldFont)
-            {
-              QFont f = tb->font();
-              QSize s1 = textSize(f, opt->text);
-              f.setBold(true);
-              s = s + textSize(f, opt->text) - s1;
-            }
+          /* extra space for bold text */
+          if (!opt->text.isEmpty() && lspec.boldFont)
+          {
+            QFont f = tb->font();
+            QSize s1 = textSize(f, opt->text);
+            f.setBold(true);
+            s = s + textSize(f, opt->text) - s1;
           }
         }
       }
@@ -5937,9 +6036,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           verticalTabs = true;
         }
 
-        if (widget) {
-          const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
-          if (tb && tb->tabsClosable())
+        if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
+        {
+          if (tb->tabsClosable())
             s.rwidth() += pixelMetric(verticalTabs ? PM_TabCloseIndicatorHeight : PM_TabCloseIndicatorWidth,
                                       option,widget)
                           + lspec.tispace;
@@ -6773,56 +6872,65 @@ QRect Kvantum::subControlRect(ComplexControl control,
 
           if (opt)
           {
-            if (widget)
+            if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
             {
-              const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-              if (tb)
+              bool rtl(opt->direction == Qt::RightToLeft);
+              if (tb->popupMode() == QToolButton::MenuButtonPopup)
               {
-                if (tb->popupMode() == QToolButton::MenuButtonPopup)
+                const QString group = "DropDownButton";
+                frame_spec fspec = getFrameSpec(group);
+                indicator_spec dspec = getIndicatorSpec(group);
+                /* limit the arrow size */
+                dspec.size = qMin(dspec.size, h);
+                /* lack of space */
+                if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
-                  const QString group = "DropDownButton";
-                  const frame_spec fspec = getFrameSpec(group);
-                  const indicator_spec dspec = getIndicatorSpec(group);
-                  return option->rect.adjusted(opt->direction == Qt::RightToLeft ?
-                                                 fspec.left+fspec.right+dspec.size+2
-                                                 : 0,
-                                               0,
-                                               opt->direction == Qt::RightToLeft ?
-                                                 0
-                                                 : -fspec.left-fspec.right-dspec.size-2,
-                                               0);
-                }
-                else if ((tb->popupMode() == QToolButton::InstantPopup
-                          || tb->popupMode() == QToolButton::DelayedPopup)
-                         && (opt->features & QStyleOptionToolButton::HasMenu))
-                {
-                  const QString group = "PanelButtonTool";
-                  frame_spec fspec = getFrameSpec(group);
-                  const indicator_spec dspec = getIndicatorSpec(group);
-                  label_spec lspec = getLabelSpec(group);
-                  // -> CE_ToolButtonLabel
-                  if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                  const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+                  if (tb->width() < opt->iconSize.width()+fspec1.left
+                                    +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
-                    fspec.left = qMin(fspec.left,3);
-                    fspec.right = qMin(fspec.right,3);
-                    lspec.tispace = qMin(lspec.tispace,3);
+                    if (rtl)
+                      fspec.left = qMin(fspec.left,3);
+                    else
+                      fspec.right = qMin(fspec.right,3);
+                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                   }
-                  return option->rect.adjusted(opt->direction == Qt::RightToLeft ?
-                                                 lspec.tispace+dspec.size
-                                                   // -> CE_ToolButtonLabel
-                                                   + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                                                      qMin(fspec.left,fspec.right) : fspec.left)
-                                                   + pixelMetric(PM_HeaderMargin)
-                                                 : 0,
-                                               0,
-                                               opt->direction == Qt::RightToLeft ?
-                                                 0
-                                                 : - lspec.tispace-dspec.size
-                                                     - (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                                                        qMin(fspec.left,fspec.right) : fspec.right)
-                                                     - pixelMetric(PM_HeaderMargin),
-                                               0);
                 }
+                return option->rect.adjusted(rtl ? fspec.left+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN : 0,
+                                             0,
+                                             rtl ? 0 : -fspec.right-dspec.size-2*TOOL_BUTTON_ARROW_MARGIN,
+                                             0);
+              }
+              else if ((tb->popupMode() == QToolButton::InstantPopup
+                        || tb->popupMode() == QToolButton::DelayedPopup)
+                       && (opt->features & QStyleOptionToolButton::HasMenu))
+              {
+                const QString group = "PanelButtonTool";
+                frame_spec fspec = getFrameSpec(group);
+                const indicator_spec dspec = getIndicatorSpec(group);
+                label_spec lspec = getLabelSpec(group);
+                // -> CE_ToolButtonLabel
+                if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                {
+                  fspec.left = qMin(fspec.left,3);
+                  fspec.right = qMin(fspec.right,3);
+                  lspec.tispace = qMin(lspec.tispace,3);
+                }
+                return option->rect.adjusted(rtl ?
+                                               lspec.tispace+dspec.size
+                                                 // -> CE_ToolButtonLabel
+                                                 + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
+                                                    qMin(fspec.left,fspec.right) : fspec.left)
+                                                 + pixelMetric(PM_HeaderMargin)
+                                               : 0,
+                                             0,
+                                             rtl ?
+                                               0
+                                               : - lspec.tispace-dspec.size
+                                                   - (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
+                                                      qMin(fspec.left,fspec.right) : fspec.right)
+                                                   - pixelMetric(PM_HeaderMargin),
+                                             0);
               }
             }
           }
@@ -6836,42 +6944,54 @@ QRect Kvantum::subControlRect(ComplexControl control,
 
           if (opt)
           {
-            if (widget)
+            if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
             {
-              const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-              if (tb)
+              bool rtl(opt->direction == Qt::RightToLeft);
+              if (tb->popupMode() == QToolButton::MenuButtonPopup)
               {
-                bool rtl(opt->direction == Qt::RightToLeft);
-                if (tb->popupMode() == QToolButton::MenuButtonPopup)
+                const QString group = "DropDownButton";
+                frame_spec fspec = getFrameSpec(group);
+                indicator_spec dspec = getIndicatorSpec(group);
+                /* limit the arrow size */
+                dspec.size = qMin(dspec.size, h);
+                /* lack of space */
+                if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
-                  const QString group = "DropDownButton";
-                  const frame_spec fspec = getFrameSpec(group);
-                  const indicator_spec dspec = getIndicatorSpec(group);
-                  int l = fspec.left+fspec.right+dspec.size+2;
-                  return QRect(rtl ? x : x+w-l,
-                               y,l,h);
-                }
-                else if ((tb->popupMode() == QToolButton::InstantPopup
-                          || tb->popupMode() == QToolButton::DelayedPopup)
-                         && (opt->features & QStyleOptionToolButton::HasMenu))
-                {
-                  const QString group = "PanelButtonTool";
-                  frame_spec fspec = getFrameSpec(group);
-                  const indicator_spec dspec = getIndicatorSpec(group);
-                  // -> CE_ToolButtonLabel
-                  if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                  const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+                  if (tb->width() < opt->iconSize.width()+fspec1.left
+                                    +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
-                    fspec.left = qMin(fspec.left,3);
-                    fspec.right = qMin(fspec.right,3);
+                    if (rtl)
+                      fspec.left = qMin(fspec.left,3);
+                    else
+                      fspec.right = qMin(fspec.right,3);
+                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                   }
-                  int l = dspec.size
-                          // -> CE_ToolButtonLabel
-                          + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                             qMin(fspec.left,fspec.right) : rtl ? fspec.left : fspec.right)
-                          + pixelMetric(PM_HeaderMargin);
-                  return QRect(rtl ? x : x+w-l,
-                               y,l,h);
                 }
+                int l = (rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN;
+                return QRect(rtl ? x : x+w-l,
+                             y,l,h);
+              }
+              else if ((tb->popupMode() == QToolButton::InstantPopup
+                        || tb->popupMode() == QToolButton::DelayedPopup)
+                       && (opt->features & QStyleOptionToolButton::HasMenu))
+              {
+                const QString group = "PanelButtonTool";
+                frame_spec fspec = getFrameSpec(group);
+                const indicator_spec dspec = getIndicatorSpec(group);
+                // -> CE_ToolButtonLabel
+                if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                {
+                  fspec.left = qMin(fspec.left,3);
+                  fspec.right = qMin(fspec.right,3);
+                }
+                int l = dspec.size
+                        // -> CE_ToolButtonLabel
+                        + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
+                           qMin(fspec.left,fspec.right) : rtl ? fspec.left : fspec.right)
+                        + pixelMetric(PM_HeaderMargin);
+                return QRect(rtl ? x : x+w-l,
+                             y,l,h);
               }
             }
           }
@@ -7479,13 +7599,13 @@ void Kvantum::renderIndicator(QPainter *painter,
                               const QString &element, // indocator SVG element
                               Qt::Alignment alignment) const
 {
+  if (!bounds.isValid()) return;
   const QRect interior = interiorRect(bounds,fspec);
-  const QRect sq = squaredRect(interior);
-  int s = 0;
+  QRect sq = squaredRect(interior);
   if (!sq.isValid())
-    s = dspec.size;
-  else // make the indicator smaller if there isn't enough space
-    s = (sq.width() > dspec.size) ? dspec.size : sq.width();
+    sq = squaredRect(bounds);
+  /* make the indicator smaller if there isn't enough space */
+  int s = (sq.width() > dspec.size) ? dspec.size : sq.width();
 
   renderElement(painter,element,
                 alignedRect(QApplication::layoutDirection(),alignment,QSize(s,s),interior),

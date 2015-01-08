@@ -1,3 +1,12 @@
+V0.8.11
+---------
+ * Ignore frame width for toolbuttons with just an arrow as icon.
+ * Toolbuttons with popup menus were too wide.
+ * Set limits on toolbutton frame sizes where there isn't enough space.
+ * Set limits on frame and indicator sizes of toolbutton dropdown indicators where there isn't enough space.
+ * Always limit indicator size to its bounding rectangle.
+ * Translucency doesn't need internalWinId (only blurring does).
+
 V0.8.10
 ---------
  * Added a hacking variable for (KDE) menu titles.

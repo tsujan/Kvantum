@@ -214,7 +214,7 @@ class Kvantum : public QCommonStyle {
     }
 
     /* Get pure shadow dimensions of menus/tooltips. */
-    QList<int> getShadow(frame_spec fspec, int thickness);
+    QList<int> getShadow(const QString &widgetName, int thickness);
 
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
