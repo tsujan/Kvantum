@@ -64,13 +64,7 @@ class BlurHelper: public QObject
         QObject::timerEvent (event);
     }
 
-    void addEventFilter (QObject* object)
-    {
-      object->removeEventFilter (this);
-      object->installEventFilter (this);
-    }
-
-    /* The blur-behind region a given widget. */
+    /* The blur-behind region for a given widget. */
     QRegion blurRegion (QWidget*) const;
 
     /* Update blur region for all pending widgets. A timer is
@@ -80,8 +74,6 @@ class BlurHelper: public QObject
       if (!_timer.isActive())
         _timer.start (10, this);
     }
-
-    /* Update blur region for all pending widgets. */
     void update (void)
     {
       foreach (const WidgetPointer& widget, _pendingWidgets)

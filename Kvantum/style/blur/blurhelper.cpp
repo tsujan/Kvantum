@@ -54,7 +54,8 @@ void BlurHelper::registerWidget (QWidget* widget)
       && !widget->inherits ("QSplashScreen")
       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
 
-    addEventFilter (widget);
+    widget->removeEventFilter (this);
+    widget->installEventFilter (this);
 }
 /*************************/
 void BlurHelper::unregisterWidget (QWidget* widget)

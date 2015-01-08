@@ -280,67 +280,31 @@ QList<int> Kvantum::getShadow (const QString &widgetName, int thickness)
   int divisor = 0;
   QList<int> shadow;
   shadow << 0 << 0 << 0 << 0;
+  QList<QString> direction;
+  direction << "left" << "top" << "right" << "bottom";
   frame_spec fspec = getFrameSpec(widgetName);
   QString element = fspec.element;
 
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-left"))
-    renderer = themeRndr;
-  else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(element+"-shadow-left").width();
-  if (divisor)
+  for (int i = 0; i < 4; ++i)
   {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-left"))
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-"+direction[i]))
       renderer = themeRndr;
-    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
-      renderer = defaultRndr;
-    else renderer = 0;
-    if (renderer)
-      shadow[0] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-left").width()/divisor);
-  }
-
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-top"))
-    renderer = themeRndr;
-  else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(element+"-shadow-top").height();
-  if (divisor)
-  {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-top"))
-      renderer = themeRndr;
-    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
-      renderer = defaultRndr;
-    else renderer = 0;
-    if (renderer)
-      shadow[1] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-top").height()/divisor);
-  }
-
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-right"))
-    renderer = themeRndr;
-  else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(element+"-shadow-right").width();
-  if (divisor)
-  {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-right"))
-      renderer = themeRndr;
-    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
-      renderer = defaultRndr;
-    else renderer = 0;
-    if (renderer)
-      shadow[2] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-right").width()/divisor);
-  }
-
-  if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-bottom"))
-    renderer = themeRndr;
-  else renderer = defaultRndr;
-  divisor = renderer->boundsOnElement(element+"-shadow-bottom").height();
-  if (divisor)
-  {
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-bottom"))
-      renderer = themeRndr;
-    else if (defaultRndr->elementExists(element+"-shadow-hint-left"))
-      renderer = defaultRndr;
-    else renderer = 0;
-    if (renderer)
-      shadow[3] = thickness*(renderer->boundsOnElement(element+"-shadow-hint-bottom").height()/divisor);
+    else renderer = defaultRndr;
+    QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
+    divisor = (i%2 ? br.height() : br.width());
+    if (divisor)
+    {
+      if (themeRndr && themeRndr->isValid() && themeRndr->elementExists(element+"-shadow-hint-"+direction[i]))
+        renderer = themeRndr;
+      else if (defaultRndr->elementExists(element+"-shadow-hint-"+direction[i]))
+        renderer = defaultRndr;
+      else renderer = 0;
+      if (renderer)
+      {
+        br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
+        shadow[i] = thickness*((i%2 ? br.height() : br.width())/divisor);
+      }
+    }
   }
 
   return shadow; // [left, top, right, bottom]
