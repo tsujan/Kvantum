@@ -264,7 +264,8 @@ popup_blurring                    true/false          Blur the regions behind tr
                                                       supports it. It will automatically
                                                       be set to true if blurring is true.
 
-splitter_width                    integer             The width of splitter handles.
+splitter_width                    integer             The width of splitter handles. 7px
+                                                      by default.
 
 scroll_width                      integer             The width of scrollbars. The
                                                       default value is 12px.

@@ -1784,7 +1784,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         const QStyleOptionTabWidgetFrameV2 *twf =
             qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option);
         const QTabWidget *tw((const QTabWidget*)widget);
-        if (tw && twf)
+        if (tw && twf && !twf->selectedTabRect.isNull()/* && tw->isEnabled()*/)
         {
           tp = tw->tabPosition();
           QRect tr = twf->selectedTabRect;
@@ -1828,10 +1828,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         suffix = "-normal-inactive";
       renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix);
+      const frame_spec fspecT = getFrameSpec("Tab");
       renderFrame(painter,
                   option->rect,
                   fspec,fspec.element+suffix,
-                  d, l, tp);
+                  d, l, fspecT.left, fspecT.right,tp);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -3082,7 +3083,10 @@ void Kvantum::drawControl(ControlElement element,
 
         if (status.startsWith("disabled"))
         {
-          status.replace(QString("disabled"),QString("normal"));
+          if ((option->state & State_On) || (option->state & State_Selected))
+            status.replace(QString("disabled"),QString("toggled"));
+          else
+            status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -7298,6 +7302,8 @@ void Kvantum::renderFrame(QPainter *painter,
                           const QString &element, // frame SVG element
                           int d, // distance of the attached tab from the edge
                           int l, // length of the attached tab
+                          int f1, // width of tab's left frame
+                          int f2, // width of tab's right tab frame
                           int tp) const // tab position
 {
   if (!bounds.isValid() || !fspec.hasFrame)
@@ -7315,7 +7321,7 @@ void Kvantum::renderFrame(QPainter *painter,
     /*********
      ** Top **
      *********/
-    if (l != 0 && tp == QTabWidget::North)
+    if (l > 0 && tp == QTabWidget::North)
     {
       renderElement(painter,element+"-top",
                     QRect(x0+fspec.left,
@@ -7329,6 +7335,21 @@ void Kvantum::renderFrame(QPainter *painter,
                           x0+w-fspec.left-d-l,
                           fspec.top),
                     0,0,Qt::Horizontal);
+     /* left and right junctions */
+     if (d-x0-fspec.left >= 0)
+       renderElement(painter,element+"-top-leftjunct",
+                      QRect(d,
+                            y0,
+                            f1,
+                            fspec.top),
+                      0,0,Qt::Horizontal);
+     if (x0+w-fspec.left-d-l >= 0)
+       renderElement(painter,element+"-top-rightjunct",
+                      QRect(d+l-f2,
+                            y0,
+                            f2,
+                            fspec.top),
+                      0,0,Qt::Horizontal);
     }
     else
       renderElement(painter,element+"-top",
@@ -7338,7 +7359,7 @@ void Kvantum::renderFrame(QPainter *painter,
     /************
      ** Bottom **
      ************/
-    if (l != 0 && tp == QTabWidget::South)
+    if (l > 0 && tp == QTabWidget::South)
     {
       renderElement(painter,element+"-bottom",
                     QRect(x0+fspec.left,
@@ -7352,6 +7373,20 @@ void Kvantum::renderFrame(QPainter *painter,
                           x0+w-fspec.left-d-l,
                           fspec.bottom),
                     0,0,Qt::Horizontal);
+      if (d-x0-fspec.left >= 0)
+        renderElement(painter,element+"-bottom-leftjunct",
+                      QRect(d,
+                            y1-fspec.bottom,
+                            f2,
+                            fspec.bottom),
+                      0,0,Qt::Horizontal);
+      if (x0+w-fspec.left-d-l >= 0)
+        renderElement(painter,element+"-bottom-rightjunct",
+                      QRect(d+l-f1,
+                            y1-fspec.bottom,
+                            f1,
+                            fspec.bottom),
+                      0,0,Qt::Horizontal);
     }
     else
       renderElement(painter,element+"-bottom",
@@ -7361,7 +7396,7 @@ void Kvantum::renderFrame(QPainter *painter,
     /**********
      ** Left **
      **********/
-    if (l != 0 && tp == QTabWidget::West)
+    if (l > 0 && tp == QTabWidget::West)
     {
       renderElement(painter,element+"-left",
                     QRect(x0,
@@ -7375,6 +7410,20 @@ void Kvantum::renderFrame(QPainter *painter,
                           fspec.left,
                           y0+h-fspec.bottom-d-l),
                     0,0,Qt::Horizontal);
+      if (y0+h-fspec.bottom-d-l >= 0)
+        renderElement(painter,element+"-left-leftjunct",
+                      QRect(x0,
+                            d+l-f2,
+                            fspec.left,
+                            f2),
+                      0,0,Qt::Horizontal);
+      if (d-y0-fspec.top >= 0)
+        renderElement(painter,element+"-left-rightjunct",
+                      QRect(x0,
+                            d,
+                            fspec.left,
+                            f1),
+                      0,0,Qt::Horizontal);
     }
     else
       renderElement(painter,element+"-left",
@@ -7384,7 +7433,7 @@ void Kvantum::renderFrame(QPainter *painter,
     /***********
      ** Right **
      ***********/
-    if (l != 0 && tp == QTabWidget::East)
+    if (l > 0 && tp == QTabWidget::East)
     {
       renderElement(painter,element+"-right",
                     QRect(x1-fspec.right,
@@ -7398,6 +7447,20 @@ void Kvantum::renderFrame(QPainter *painter,
                           fspec.right,
                           y0+h-fspec.bottom-d-l),
                     0,0,Qt::Horizontal);
+      if (d-y0-fspec.top >= 0)
+        renderElement(painter,element+"-right-leftjunct",
+                      QRect(x1-fspec.right,
+                            d,
+                            fspec.right,
+                            f1),
+                      0,0,Qt::Horizontal);
+      if (y0+h-fspec.bottom-d-l >= 0)
+        renderElement(painter,element+"-right-rightjunct",
+                      QRect(x1-fspec.right,
+                            d+l-f2,
+                            fspec.right,
+                            f2),
+                      0,0,Qt::Horizontal);
     }
     else
       renderElement(painter,element+"-right",
@@ -7407,28 +7470,60 @@ void Kvantum::renderFrame(QPainter *painter,
     /*************
      ** Topleft **
      *************/
-    renderElement(painter,element+"-topleft",
+    QString  element_ = element+"-topleft";
+    if (l > 0)
+    {
+      if (tp == QTabWidget::North && d < fspec.left)
+        element_ = element+"-left";
+      else if (tp == QTabWidget::West && d < fspec.top)
+        element_ = element+"-top";
+    }
+    renderElement(painter,element_,
                   QRect(x0,y0,fspec.left,fspec.top),
                   0,0,Qt::Horizontal);
 
     /**************
      ** Topright **
      **************/
-    renderElement(painter,element+"-topright",
+    element_ = element+"-topright";
+    if (l > 0)
+    {
+      if (tp == QTabWidget::North && w-d-l < fspec.right)
+        element_ = element+"-right";
+      else if (tp == QTabWidget::East && d < fspec.top)
+        element_ = element+"-top";
+    }
+    renderElement(painter,element_,
                   QRect(x1-fspec.right,y0,fspec.right,fspec.top),
                   0,0,Qt::Horizontal);
 
     /****************
      ** Bottomleft **
      ****************/
-    renderElement(painter,element+"-bottomleft",
+    element_ = element+"-bottomleft";
+    if (l > 0)
+    {
+      if (tp == QTabWidget::South && d < fspec.left)
+        element_ = element+"-left";
+      else if (tp == QTabWidget::West && h-d-l < fspec.bottom)
+        element_ = element+"-bottom";
+    }
+    renderElement(painter,element_,
                   QRect(x0,y1-fspec.bottom,fspec.left,fspec.bottom),
                   0,0,Qt::Horizontal);
 
     /*****************
      ** Bottomright **
      *****************/
-    renderElement(painter,element+"-bottomright",
+    element_ = element+"-bottomright";
+    if (l > 0)
+    {
+      if (tp == QTabWidget::South && w-d-l < fspec.right)
+        element_ = element+"-right";
+      else if (tp == QTabWidget::East && h-d-l < fspec.bottom)
+        element_ = element+"-bottom";
+    }
+    renderElement(painter,element_,
                   QRect(x1-fspec.right,y1-fspec.bottom,fspec.right,fspec.bottom),
                   0,0,Qt::Horizontal);
   }

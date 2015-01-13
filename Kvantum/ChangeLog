@@ -1,3 +1,8 @@
+V0.8.12
+---------
+ * Added optional tab widget junctions for attachimg active tabs.
+ * Draw disabled active tabs correctly.
+
 V0.8.11
 ---------
  * Ignore frame width for toolbuttons with just an arrow as icon.
