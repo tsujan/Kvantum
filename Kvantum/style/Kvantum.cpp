@@ -1783,16 +1783,19 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         const QStyleOptionTabWidgetFrameV2 *twf =
             qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option);
-        const QTabWidget *tw((const QTabWidget*)widget);
-        if (tw && twf && !twf->selectedTabRect.isNull()/* && tw->isEnabled()*/)
+        const QTabWidget *tw = qobject_cast<const QTabWidget *>(widget);
+        if (tw && twf
+            && twf->selectedTabRect.isValid()
+            && !twf->tabBarSize.isEmpty()) // empty in Kdenlive
         {
           tp = tw->tabPosition();
           QRect tr = twf->selectedTabRect;
-          switch (tw->tabPosition()) {
+          switch (tp) {
             case QTabWidget::North: {
               fspec1.top = 0;
               d = tr.x();
               l = tr.width();
+              break;
             }
             case QTabWidget::South: {
               fspec1.bottom = 0;
@@ -1804,6 +1807,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               fspec1.left = 0;
               d = tr.y();
               l = tr.height();
+              break;
             }
             case QTabWidget::East: {
               fspec1.right = 0;

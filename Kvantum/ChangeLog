@@ -2,6 +2,7 @@ V0.8.12
 ---------
  * Added optional tab widget junctions for attachimg active tabs.
  * Draw disabled active tabs correctly.
+ * Don't try to attach empty tabs (as in Kdenlive's track widget).
 
 V0.8.11
 ---------
