@@ -4,7 +4,8 @@ V0.8.12
  * Draw disabled active tabs correctly.
  * Don't try to attach empty tabs (as in Kdenlive's track widget).
  * Try to attach the active tab to its tab widget even when the QStyle option of the tab widget frame doesn't exist (as in GoldenDict).
- * Fixed menuitems with both checkbox/radiobutton and submenu arrow.
+ * Force blurring for Yakuake too if it's forced for Konsole.
+ * Put the check/radio button on the left side of the menu item. Fixed the menu item size too.
 
 V0.8.11
 ---------

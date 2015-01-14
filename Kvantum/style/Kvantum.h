@@ -261,6 +261,7 @@ class Kvantum : public QCommonStyle {
     /* Hacks */
     bool isDolphin;
     bool isKonsole;
+    bool isYakuake;
 };
 
 #endif

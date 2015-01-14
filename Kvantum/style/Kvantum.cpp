@@ -125,6 +125,7 @@ Kvantum::Kvantum() : QCommonStyle()
   isLibreoffice = false;
   isDolphin = false;
   isKonsole = false;
+  isYakuake = false;
   subApp = false;
   isOpaque = false;
 
@@ -375,7 +376,7 @@ void Kvantum::polish(QWidget *widget)
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
               && !widget->testAttribute(Qt::WA_NoSystemBackground))
              /* enable blurring for Konsole's main window if it's transparent */
-             || (isKonsole && hspec.blur_konsole
+             || ((isKonsole || isYakuake) && hspec.blur_konsole
                  && widget->testAttribute(Qt::WA_TranslucentBackground)))
             && !isPlasma && !isOpaque && !subApp && !isLibreoffice
             && widget->isWindow()
@@ -385,7 +386,7 @@ void Kvantum::polish(QWidget *widget)
             && !widget->inherits("KScreenSaver")
             && !widget->inherits("QTipLabel")
             && !widget->inherits("QSplashScreen")
-            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+            && (isYakuake || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
             /* FIXME: I included this because I thought, without it, QtWebKit
                apps would crash on quitting but that wasn't the case. However,
                only blurring needs it and it's taken care of by BlurHelper. */
@@ -416,7 +417,7 @@ void Kvantum::polish(QWidget *widget)
             blurHelper->registerWidget(widget);
           }
           /* enable blurring for Konsole... */
-          else if (isKonsole// && hspec.blur_konsole
+          else if ((isKonsole || isYakuake)// && hspec.blur_konsole
                    /* ... but only for its main window */
                    //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
                    && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
@@ -590,6 +591,8 @@ void Kvantum::polish(QApplication *app)
     isDolphin = true;
   else if (appName == "konsole")
     isKonsole = true;
+  else if (appName == "yakuake")
+    isYakuake = true;
   else if (appName == "soffice.bin")
     isLibreoffice = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
@@ -2468,15 +2471,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
         dspec.size = dspec1.size;
-        const QRect interior = interiorRect(option->rect,fspec);
-        const QRect sq = squaredRect(interior);
-        int s = 0;
-        if (!sq.isValid())
-          s = dspec1.size;
-        else
-          s = (sq.width() > dspec1.size) ? dspec1.size : sq.width();
-        if (renderElement(painter, dspec1.element+dir+aStatus,
-                          alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,QSize(s,s),interior)))
+        /* the arrow rectangle is set at CE_MenuItem appropriately */
+        if (renderElement(painter, dspec1.element+dir+aStatus,option->rect))
         {
           break;
         }
@@ -2650,17 +2646,21 @@ void Kvantum::drawControl(ControlElement element,
 
           bool rtl(option->direction == Qt::RightToLeft);
 
+          int iw = pixelMetric(PM_IndicatorWidth,option,widget);
+          int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (l.size() > 0) // menu label
           {
+            int checkSpace = 0;
+            if (opt->menuHasCheckableItems)
+              checkSpace = iw + lspec.tispace + 2; // we add a 2px left margin at CT_MenuItem
+            int iconSpace = 0;
+            if (opt->maxIconWidth)
+              iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
             if (opt->icon.isNull())
               renderLabel(painter,option->palette,
-                          option->rect.adjusted(rtl ?
-                                                  0
-                                                  : qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace,
+                          option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
-                                                rtl ?
-                                                  -qMin(opt->maxIconWidth,smallIconSize)-lspec.tispace
-                                                  : 0,
+                                                rtl ? -iconSpace-checkSpace : 0,
                                                 0),
                           fspec,lspec,
                           Qt::AlignLeft | talign,
@@ -2668,22 +2668,21 @@ void Kvantum::drawControl(ControlElement element,
                           state);
             else
               renderLabel(painter,option->palette,
-                          option->rect,
+                          option->rect.adjusted(rtl ? 0 : checkSpace,
+                                                0,
+                                                rtl ? -checkSpace : 0,
+                                                0),
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,
                           opt->icon.pixmap(smallIconSize,iconmode,iconstate));
           }
-          int iw = pixelMetric(PM_IndicatorWidth,option,widget);
-          int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (l.size() > 1) // shortcut
           {
-            int space = lspec.right + fspec.right;
+            int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
-              space += dspec.size + lspec.tispace; // see CT_MenuItem
-            if (opt->checkType != QStyleOptionMenuItem::NotCheckable)
-              space += iw + lspec.tispace; // see CT_MenuItem
+              space = dspec.size + lspec.tispace + 2; // we add a 2px right margin at CT_MenuItem
             renderLabel(painter,option->palette,
                         option->rect.adjusted(rtl ? space : 0,
                                               0,
@@ -2696,46 +2695,52 @@ void Kvantum::drawControl(ControlElement element,
           }
 
           QStyleOptionMenuItem o(*opt);
-          o.rect = alignedRect(QApplication::layoutDirection(),
-                               ((isLibreoffice && opt->menuItemType != QStyleOptionMenuItem::SubMenu) ?
-                                 Qt::AlignLeft :
-                                 Qt::AlignRight)
-                                | Qt::AlignVCenter,
-                               QSize(iw,ih),
-                               isLibreoffice ? o.rect.adjusted(6,-2,0,0) // FIXME why?
-                                               /* we add a 2px right margin at CT_MenuItem */
-                                             : interiorRect(o.rect,fspec).adjusted(rtl ? 2 : 0,
-                                                                                   0,
-                                                                                   rtl ? 0 : -2,
-                                                                                   0));
-
           /* change the selected and pressed states to mouse-over */
           if (o.state & QStyle::State_Selected)
             o.state = (o.state & ~QStyle::State_Selected) | QStyle::State_MouseOver;
           if (o.state & QStyle::State_Sunken)
             o.state = (o.state & ~QStyle::State_Sunken) | QStyle::State_MouseOver;
 
+          /* submenu arrow */
           if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
           {
+            o.rect = alignedRect(QApplication::layoutDirection(),
+                                 Qt::AlignRight | Qt::AlignVCenter,
+                                 QSize(dspec.size,dspec.size),
+                                 /* we add a 2px right margin at CT_MenuItem */
+                                 interiorRect(opt->rect,fspec).adjusted(rtl ? 2 : 0,
+                                                                        0,
+                                                                        rtl ? 0 : -2,
+                                                                        0));
             drawPrimitive(rtl ? PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
                           &o,painter);
-            /* this menuitem may still have a check box or radio button */
-            if (!isLibreoffice)
-              /* we add a 2px space at CT_MenuItem */
-              o.rect.translate(rtl ? o.rect.width()+2 : -o.rect.width()-2, 0);
           }
 
-          if (opt->checkType == QStyleOptionMenuItem::Exclusive)
+          /* checkbox or radio button */
+          if (opt->checkType != QStyleOptionMenuItem::NotCheckable)
           {
-            if (opt->checked)
-              o.state |= State_On;
-            drawPrimitive(PE_IndicatorRadioButton,&o,painter,widget);
-          }
-          else if (opt->checkType == QStyleOptionMenuItem::NonExclusive)
-          {
-            if (opt->checked)
-              o.state |= State_On;
-            drawPrimitive(PE_IndicatorCheckBox,&o,painter,widget);
+            o.rect = alignedRect(QApplication::layoutDirection(),
+                                 Qt::AlignLeft | Qt::AlignVCenter,
+                                 QSize(iw,ih),
+                                 isLibreoffice ?
+                                   opt->rect.adjusted(6,-2,0,0) // FIXME why?
+                                     /* we add a 2px left margin at CT_MenuItem */
+                                   : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : 2,
+                                                                            0,
+                                                                            rtl ? 2 : 0,
+                                                                            0));
+            if (opt->checkType == QStyleOptionMenuItem::Exclusive)
+            {
+              if (opt->checked)
+                o.state |= State_On;
+              drawPrimitive(PE_IndicatorRadioButton,&o,painter,widget);
+            }
+            else if (opt->checkType == QStyleOptionMenuItem::NonExclusive)
+            {
+              if (opt->checked)
+                o.state |= State_On;
+              drawPrimitive(PE_IndicatorCheckBox,&o,painter,widget);
+            }
           }
         }
       }
@@ -5845,35 +5850,29 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         else
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->maxIconWidth));
 
-        /* even when there's no icon, another menuitem may
-           have icon and that's considered at CE_MenuItem,
-           so take it into account here too because text-icon 
-           spacing hasn't been added with sizeCalculated() */
-        if(opt->icon.isNull())
-          s.rwidth() += lspec.tispace;
-
-        /* To have enough space between the text and the check
-           button or arrow when there's no shortcut (like in
-           Ark's settings menu), we add a small extra space.
-           We also add 2px for the right margin. */
-        int extra = textSize(f,"ww").width() + 2;
+        /* even when there's no icon, another menuitem may have icon
+           and that isn't taken into account with sizeCalculated() */
+        if(opt->icon.isNull() && opt->maxIconWidth)
+          s.rwidth() += qMin(opt->maxIconWidth,pixelMetric(PM_SmallIconSize)) + lspec.tispace;
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
         {
-          const indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
-          s.rwidth() += dspec.size + lspec.tispace
-                        + extra;
+          const indicator_spec dspec = getIndicatorSpec(group);
+          /* we also add 2px for the right margin. */
+          s.rwidth() += dspec.size + lspec.tispace + 2;
           s.rheight() += (dspec.size > s.height() ? dspec.size : 0);
         }
 
-        if (opt->checkType == QStyleOptionMenuItem::Exclusive
-            || opt->checkType == QStyleOptionMenuItem::NonExclusive)
+        if (opt->menuHasCheckableItems)
         {
           int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
-          s.rwidth() += cSize + lspec.tispace
-                        /* a 2px space between checkbox/radiobutton and arrow */
-                        + (opt->menuItemType == QStyleOptionMenuItem::SubMenu ? 2 : extra);
-          s.rheight() += (cSize > s.height() ? cSize : 0);
+          s.rwidth() += cSize + lspec.tispace + 2; // 2px for the left margin
+          /* for the height, see if there's really a check/radio button */
+          if (opt->checkType == QStyleOptionMenuItem::Exclusive
+              || opt->checkType == QStyleOptionMenuItem::NonExclusive)
+          {
+            s.rheight() += (cSize > s.height() ? cSize : 0);
+          }
         }
       }
 

@@ -665,8 +665,8 @@ widgets to appear as they are by default.</string>
               </font>
              </property>
              <property name="toolTip">
-              <string>Blur the region behind Konsole's
-transparent screen if possible.</string>
+              <string>Blur the regions behind the transparent
+screens of Konsole and Yakuake if possible.</string>
              </property>
              <property name="text">
               <string>Blurring for Konsole</string>
