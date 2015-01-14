@@ -3,6 +3,8 @@ V0.8.12
  * Added optional tab widget junctions for attachimg active tabs.
  * Draw disabled active tabs correctly.
  * Don't try to attach empty tabs (as in Kdenlive's track widget).
+ * Try to attach the active tab to its tab widget even when the QStyle option of the tab widget frame doesn't exist (as in GoldenDict).
+ * Fixed menuitems with both checkbox/radiobutton and submenu arrow.
 
 V0.8.11
 ---------

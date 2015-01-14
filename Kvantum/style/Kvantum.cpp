@@ -1781,43 +1781,68 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const theme_spec tspec = settings->getThemeSpec();
       if (tspec.attach_active_tab)
       {
-        const QStyleOptionTabWidgetFrameV2 *twf =
-            qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option);
         const QTabWidget *tw = qobject_cast<const QTabWidget *>(widget);
-        if (tw && twf
-            && twf->selectedTabRect.isValid()
-            && !twf->tabBarSize.isEmpty()) // empty in Kdenlive
+        if (tw)
         {
+          QRect tr;
           tp = tw->tabPosition();
-          QRect tr = twf->selectedTabRect;
-          switch (tp) {
-            case QTabWidget::North: {
-              fspec1.top = 0;
-              d = tr.x();
-              l = tr.width();
-              break;
+          if (const QStyleOptionTabWidgetFrameV2 *twf =
+              qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option))
+          {
+            if (!twf->tabBarSize.isEmpty()) // it's empty in Kdenlive
+              tr = twf->selectedTabRect;
+          }
+          // as in GoldenDict's Preferences dialog
+#if QT_VERSION < 0x050000
+          else if (QTabBar *tb = widget->findChild<QTabBar *>(QLatin1String("qt_tabwidget_tabbar")))
+#else
+          else if (QTabBar *tb = tw->tabBar())
+#endif
+          {
+            int index = tw->currentIndex();
+            if (index >= 0)
+            {
+              tr = tb->tabRect(index);
+              if (tr.isValid())
+              {
+                if (tp == QTabWidget::North || tp == QTabWidget::South)
+                  tr.translate(tb->x(),0);
+                else
+                  tr.translate(0,tb->y());
+              }
             }
-            case QTabWidget::South: {
-              fspec1.bottom = 0;
-              d = tr.x();
-              l = tr.width();
-              break;
-            }
-            case QTabWidget::West: {
-              fspec1.left = 0;
-              d = tr.y();
-              l = tr.height();
-              break;
-            }
-            case QTabWidget::East: {
-              fspec1.right = 0;
-              d = tr.y();
-              l = tr.height();
-              break;
-            }
-            default : {
-              d = 0;
-              l = 0;
+          }
+          if (tr.isValid())
+          {
+            switch (tp) {
+              case QTabWidget::North: {
+                fspec1.top = 0;
+                d = tr.x();
+                l = tr.width();
+                break;
+              }
+              case QTabWidget::South: {
+                fspec1.bottom = 0;
+                d = tr.x();
+                l = tr.width();
+                break;
+              }
+              case QTabWidget::West: {
+                fspec1.left = 0;
+                d = tr.y();
+                l = tr.height();
+                break;
+              }
+              case QTabWidget::East: {
+                fspec1.right = 0;
+                d = tr.y();
+                l = tr.height();
+                break;
+              }
+              default : {
+                d = 0;
+                l = 0;
+              }
             }
           }
         }
@@ -2691,8 +2716,14 @@ void Kvantum::drawControl(ControlElement element,
             o.state = (o.state & ~QStyle::State_Sunken) | QStyle::State_MouseOver;
 
           if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
+          {
             drawPrimitive(rtl ? PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
                           &o,painter);
+            /* this menuitem may still have a check box or radio button */
+            if (!isLibreoffice)
+              /* we add a 2px space at CT_MenuItem */
+              o.rect.translate(rtl ? o.rect.width()+2 : -o.rect.width()-2, 0);
+          }
 
           if (opt->checkType == QStyleOptionMenuItem::Exclusive)
           {
@@ -2700,8 +2731,7 @@ void Kvantum::drawControl(ControlElement element,
               o.state |= State_On;
             drawPrimitive(PE_IndicatorRadioButton,&o,painter,widget);
           }
-
-          if (opt->checkType == QStyleOptionMenuItem::NonExclusive)
+          else if (opt->checkType == QStyleOptionMenuItem::NonExclusive)
           {
             if (opt->checked)
               o.state |= State_On;
@@ -5841,7 +5871,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         {
           int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
           s.rwidth() += cSize + lspec.tispace
-                        + extra;
+                        /* a 2px space between checkbox/radiobutton and arrow */
+                        + (opt->menuItemType == QStyleOptionMenuItem::SubMenu ? 2 : extra);
           s.rheight() += (cSize > s.height() ? cSize : 0);
         }
       }
