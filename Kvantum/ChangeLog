@@ -4,6 +4,7 @@ V0.8.13
  * Set limits on combobox sizes where there isn't enough space.
  * Fixed combobox focus state.
  * In Kvantum Manager, enable the popup blurring checkbox when both translucency and composite checkboxes are unchecked.
+ * When blurring, don't go to the next ancestor window.
 
 V0.8.12
 ---------
