@@ -153,7 +153,7 @@ class Kvantum : public QCommonStyle {
                      int d = 0, // distance of the attached tab from the edge
                      int l = 0, // length of the attached tab
                      int f1 = 0, // width of tab's left frame
-                     int f2 = 0, // width of tab's right tab frame
+                     int f2 = 0, // width of tab's right frame
                      int tp = 0) const; // tab position
 
     /* Generic method that draws an interior. */

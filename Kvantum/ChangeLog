@@ -1,5 +1,11 @@
 V0.8.12
 ---------
+ * Use transformations inside the SVG image to reduce memory footprint.
+ * Set limits on combobox sizes where there isn't enough space.
+ * Fixed combobox focus state.
+
+V0.8.12
+---------
  * Added optional tab widget junctions for attachimg active tabs.
  * Draw disabled active tabs correctly.
  * Don't try to attach empty tabs (as in Kdenlive's track widget).

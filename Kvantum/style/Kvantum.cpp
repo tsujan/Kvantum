@@ -2255,9 +2255,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorButtonDropDown : {
+      QRect r = option->rect;
       const QString group = "DropDownButton";
 
       frame_spec fspec = getFrameSpec(group);
+
+      bool rtl(option->direction == Qt::RightToLeft);
 
       const QComboBox *cb = qobject_cast<const QComboBox *>(widget);
       if (cb /*&& !cb->duplicatesEnabled()*/)
@@ -2289,8 +2292,36 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.capsuleV = 2;
         }
 
-        if (option->state & State_Selected)
-          status.replace(QString("toggled"),QString("normal"));
+        status = (option->state & State_Enabled) ?
+                  (option->state & State_On) ? "toggled" :
+                  (option->state & State_Sunken) ? "pressed" :
+                  (option->state & State_MouseOver) ? "focused" : "normal"
+                : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
+
+        /* when there isn't enough space */
+        if (const QStyleOptionComboBox *opt =
+              qstyleoption_cast<const QStyleOptionComboBox *>(option))
+        {
+          if (!opt->editable && !cb->lineEdit())
+          {
+            QSize txtSize = textSize(painter->font(),opt->currentText);
+            const label_spec lspec1 = getLabelSpec("ComboBox");
+            const frame_spec fspec1 = getFrameSpec("ComboBox");
+            if (cb->width() < fspec1.left+lspec1.left+txtSize.width()+lspec1.right+fspec1.right
+                              +COMBO_ARROW_LENGTH+(rtl ? fspec.left : fspec.right))
+            {
+              if (rtl)
+                r.adjust(0,0,-qMax(fspec.left-3,0),0);
+              else
+                r.adjust(qMax(fspec.right-3,0),0,0,0);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+            }
+          }
+        }
       }
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
@@ -2316,8 +2347,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             }
           }
         }
-
-        bool rtl(option->direction == Qt::RightToLeft);
 
         if (!fspec.hasCapsule)
         {
@@ -2367,8 +2396,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               painter->setOpacity(DISABLED_OPACITY);
             }
           }
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          renderFrame(painter,r,fspec,fspec.element+"-"+status);
           if (!(option->state & State_Enabled))
           {
             status = "disabled";
@@ -2386,8 +2415,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-        renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -2405,7 +2434,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         aStatus.append(QString("-inactive"));
       renderIndicator(painter,
-                      option->rect,
+                      r,
                       fspec,dspec,dspec.element+"-"+aStatus);
 
       break;
@@ -2727,7 +2756,7 @@ void Kvantum::drawControl(ControlElement element,
                                      /* we add a 2px left margin at CT_MenuItem */
                                    : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : 2,
                                                                             0,
-                                                                            rtl ? 2 : 0,
+                                                                            rtl ? -2 : 0,
                                                                             0));
             if (opt->checkType == QStyleOptionMenuItem::Exclusive)
             {
@@ -2966,14 +2995,19 @@ void Kvantum::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
       if (opt && !opt->editable) {
-        if (option->state & State_Selected)
-          status.replace(QString("toggled"),QString("normal"));
+        status = (option->state & State_Enabled) ?
+                  (option->state & State_On) ? "toggled" :
+                  (option->state & State_Sunken) ? "pressed" :
+                  (option->state & State_MouseOver) ? "focused" : "normal"
+                : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
 
         const QString group = "ComboBox";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        frame_spec fspec = getFrameSpec(group);
+        label_spec lspec = getLabelSpec(group);
 
-        const QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
+        QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
@@ -2989,6 +3023,34 @@ void Kvantum::drawControl(ControlElement element,
           state = 4;
         else if (option->state & State_MouseOver)
           state = 2;
+
+        if (const QComboBox *cb = qobject_cast<const QComboBox *>(widget))
+        { // when there isn't enough space
+          if(!cb->lineEdit())
+          {
+            QSize txtSize = textSize(painter->font(),opt->currentText);
+            const frame_spec fspec1 = getFrameSpec("DropDownButton");
+            if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+fspec.right
+                              +COMBO_ARROW_LENGTH
+                              +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right))
+            {
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              lspec.left = qMin(lspec.left,2);
+              lspec.right = qMin(lspec.right,2);
+              lspec.top = qMin(lspec.top,2);
+              lspec.bottom = qMin(lspec.bottom,2);
+
+              if (opt->direction == Qt::RightToLeft)
+                r.adjust(-COMBO_ARROW_LENGTH+fspec1.left,0,0,0);
+              else
+                r.adjust(0,0,COMBO_ARROW_LENGTH+fspec1.right,0);
+            }
+          }
+        }
 
         renderLabel(painter,option->palette,
                     /* since the label is vertically centered, this doesn't do
@@ -4506,8 +4568,13 @@ void Kvantum::drawComplexControl(ComplexControl control,
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
       if (opt) {
-        if (option->state & State_Selected)
-          status.replace(QString("toggled"),QString("normal"));
+        status = (option->state & State_Enabled) ?
+                  (option->state & State_On) ? "toggled" :
+                  (option->state & State_Sunken) ? "pressed" :
+                  (option->state & State_MouseOver) ? "focused" : "normal"
+                : "disabled";
+        if (isInactive)
+          status.append(QString("-inactive"));
 
         bool rtl(opt->direction == Qt::RightToLeft);
         QStyleOptionComboBox o(*opt);
@@ -4552,6 +4619,25 @@ void Kvantum::drawComplexControl(ComplexControl control,
           {
             if (cb->lineEdit())
               editWidth = cb->lineEdit()->width();
+            else // when there isn't enough space
+            {
+              QSize txtSize = textSize(painter->font(),opt->currentText);
+              const label_spec lspec = getLabelSpec(group);
+              const frame_spec fspec1 = getFrameSpec("DropDownButton");
+              if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+fspec.right
+                                +COMBO_ARROW_LENGTH+(rtl ? fspec1.left : fspec1.right))
+              {
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
+                /* fspec1 will be reduced to 3 at PE_IndicatorButtonDropDown */
+                if (rtl)
+                  o.rect.adjust(-qMax(fspec1.left-3,0),0,0,0);
+                else
+                  o.rect.adjust(0,0,qMax(fspec1.right-3,0),0);
+              }
+            }
           }
           QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
@@ -7337,7 +7423,7 @@ void Kvantum::renderFrame(QPainter *painter,
                           int d, // distance of the attached tab from the edge
                           int l, // length of the attached tab
                           int f1, // width of tab's left frame
-                          int f2, // width of tab's right tab frame
+                          int f2, // width of tab's right frame
                           int tp) const // tab position
 {
   if (!bounds.isValid() || !fspec.hasFrame)
