@@ -1,8 +1,9 @@
-V0.8.12
+V0.8.13
 ---------
  * Use transformations inside the SVG image to reduce memory footprint.
  * Set limits on combobox sizes where there isn't enough space.
  * Fixed combobox focus state.
+ * In Kvantum Manager, enable the popup blurring checkbox when both translucency and composite checkboxes are unchecked.
 
 V0.8.12
 ---------

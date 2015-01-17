@@ -984,7 +984,11 @@ void KvantumManager::isTranslucent (bool checked)
     ui->opaqueEdit->setEnabled (checked);
     ui->checkBoxBlurWindow->setEnabled (checked);
     if (!checked)
+    {
         ui->checkBoxBlurWindow->setChecked (false);
+        if (!ui->checkBoxComposite->isChecked())
+          ui->checkBoxBlurPopup->setEnabled (true);
+    }
 }
 /*************************/
 void KvantumManager::popupBlurring (bool checked)
