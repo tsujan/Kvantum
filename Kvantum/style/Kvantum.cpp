@@ -1732,8 +1732,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         QString suffix = "-normal";
+        /* distinguish between the focus and normal states
+           only if the focus frame elements exist */
+        if (widget && widget->hasFocus()
+            && themeRndr && themeRndr->isValid()
+            && themeRndr->elementExists(fspec.element+"-focused-left"))
+        {
+          suffix = "-focused";
+        }
         if (isInactive)
-          suffix = "-normal-inactive";
+          suffix = "-normal-inactive"; // the focus state is meaningless here
         renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
@@ -5480,7 +5488,10 @@ void Kvantum::setSurfaceFormat(QWidget *widget) const
   return;
 #else
   if (!widget || !widget->isWindow()
-      || !settings->getThemeSpec().translucent_windows
+      || (!settings->getThemeSpec().translucent_windows
+          && !((isKonsole || isYakuake)
+               && settings->getHacksSpec().blur_konsole
+               && widget->testAttribute(Qt::WA_TranslucentBackground)))
       || isPlasma || isOpaque || subApp || isLibreoffice
       || widget->testAttribute(Qt::WA_WState_Created))
   {

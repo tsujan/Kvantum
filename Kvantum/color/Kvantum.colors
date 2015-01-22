@@ -21,8 +21,8 @@ IntensityEffect=0
 [Colors:Button]
 BackgroundAlternate=62,62,62
 BackgroundNormal=73,73,73
-DecorationFocus=83,83,83
-DecorationHover=63,63,63
+DecorationFocus=170,170,170
+DecorationHover=150,150,150
 ForegroundActive=255,128,224
 ForegroundInactive=160,160,160
 ForegroundLink=46,184,230
@@ -35,8 +35,8 @@ ForegroundVisited=255,102,102
 [Colors:Selection]
 BackgroundAlternate=115,115,115
 BackgroundNormal=115,115,115
-DecorationFocus=83,83,83
-DecorationHover=63,63,63
+DecorationFocus=170,170,170
+DecorationHover=150,150,150
 ForegroundActive=255,128,224
 ForegroundInactive=160,160,160
 ForegroundLink=46,184,230
@@ -49,8 +49,8 @@ ForegroundVisited=255,102,102
 [Colors:Tooltip]
 BackgroundAlternate=0,0,0
 BackgroundNormal=0,0,0
-DecorationFocus=83,83,83
-DecorationHover=63,63,63
+DecorationFocus=170,170,170
+DecorationHover=150,150,150
 ForegroundActive=255,128,224
 ForegroundInactive=225,225,225
 ForegroundLink=46,184,230
@@ -63,8 +63,8 @@ ForegroundVisited=255,102,102
 [Colors:View]
 BackgroundAlternate=56,56,56
 BackgroundNormal=46,46,46
-DecorationFocus=83,83,83
-DecorationHover=63,63,63
+DecorationFocus=170,170,170
+DecorationHover=150,150,150
 ForegroundActive=255,128,224
 ForegroundInactive=160,160,160
 ForegroundLink=46,184,230
@@ -77,8 +77,8 @@ ForegroundVisited=255,102,102
 [Colors:Window]
 BackgroundAlternate=49,49,49
 BackgroundNormal=61,61,62
-DecorationFocus=83,83,83
-DecorationHover=63,63,63
+DecorationFocus=170,170,170
+DecorationHover=150,150,150
 ForegroundActive=255,128,224
 ForegroundInactive=160,160,160
 ForegroundLink=46,184,230
@@ -94,12 +94,12 @@ Name=Kvantum
 shadeSortColumn=true
 
 [KDE]
-contrast=10
+contrast=0
 
 [WM]
-activeBackground=90,90,90
-activeBlend=90,90,90
+activeBackground=61,61,62
+activeBlend=61,61,62
 activeForeground=255,255,255
-inactiveBackground=90,90,90
-inactiveBlend=90,90,90
+inactiveBackground=61,61,62
+inactiveBlend=61,61,62
 inactiveForeground=220,220,220

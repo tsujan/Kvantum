@@ -1,3 +1,9 @@
+V0.8.14
+---------
+ * Distinguish between the focus and normal states of generic frames only if the frame focus elements exist.
+ * Consider blurring for Qt5 Konsole.
+ * Made Kvantum Manager see commas in the theme comment.
+
 V0.8.13
 ---------
  * Use transformations inside the SVG image to reduce memory footprint.

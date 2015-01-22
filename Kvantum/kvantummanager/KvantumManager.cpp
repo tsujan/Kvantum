@@ -459,7 +459,9 @@ void KvantumManager::resizeConfPage()
   }
   resize (size().expandedTo (sizeHint()
                              + ui->comboToolButton->minimumSizeHint()
-                             + QSize (extra + ui->opaqueEdit->sizeHint().width(), extra)));
+                             + QSize (extra + ui->opaqueEdit->sizeHint().width()
+                                            + 3*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13),
+                                      extra)));
   if (!le) ui->opaqueEdit->setEnabled (false);
 }
 /*************************/
@@ -491,14 +493,20 @@ void KvantumManager::tabChanged (int index)
             }
             if (QFile::exists (themeConfig))
             {
-              QSettings themeSettings (themeConfig, QSettings::NativeFormat);
-              themeSettings.beginGroup ("General");
-              comment = themeSettings.value ("comment").toString();
-              themeSettings.endGroup();
+                QSettings themeSettings (themeConfig, QSettings::NativeFormat);
+                themeSettings.beginGroup ("General");
+                comment = themeSettings.value ("comment").toString();
+                if (comment.isEmpty()) // comma(s) in the comment
+                {
+                    QStringList lst = themeSettings.value ("comment").toStringList();
+                    if (!lst.isEmpty())
+                        comment = lst.join (", ");
+                }
+                themeSettings.endGroup();
             }
         }
         if (comment.isEmpty())
-          comment = "Kvantum's default theme";
+          comment = "No description";
         ui->comboBox->setToolTip (comment);
     }
     else if (index == 2)
@@ -653,14 +661,20 @@ void KvantumManager::selectionChanged (const QString &txt)
         QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
         if (QFile::exists (themeConfig))
         {
-          QSettings themeSettings (themeConfig, QSettings::NativeFormat);
-          themeSettings.beginGroup ("General");
-          comment = themeSettings.value ("comment").toString();
-          themeSettings.endGroup();
+            QSettings themeSettings (themeConfig, QSettings::NativeFormat);
+            themeSettings.beginGroup ("General");
+            comment = themeSettings.value ("comment").toString();
+            if (comment.isEmpty()) // comma(s) in the comment
+            {
+                QStringList lst = themeSettings.value ("comment").toStringList();
+                if (!lst.isEmpty())
+                    comment = lst.join (", ");
+            }
+            themeSettings.endGroup();
         }
     }
     if (comment.isEmpty())
-      comment = "Kvantum's default theme";
+      comment = "No description";
     ui->comboBox->setToolTip (comment);
 }
 /*************************/
@@ -1001,7 +1015,7 @@ void KvantumManager::popupBlurring (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.13</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.14</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a></center>"));
