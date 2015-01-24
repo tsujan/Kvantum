@@ -1,3 +1,7 @@
+V0.8.15
+---------
+ * Added the possibility of having high contrast between the colors of buttons, toolbars and menubars, on the one hand, and generic containers, on the other hand.
+
 V0.8.14
 ---------
  * Distinguish between the focus and normal states of generic frames only if the frame focus elements exist.

@@ -47,6 +47,7 @@
 //#include <QBitmap>
 #include <QPaintEvent>
 #include <QtCore/qmath.h>
+#include <QMenuBar>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
 #if QT_VERSION >= 0x050000
@@ -337,6 +338,40 @@ void Kvantum::polish(QWidget *widget)
 
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
+
+   /* KCalc sets the text color of its pushbuttons itself,
+      although they have bevel and frame like ordinary pushbuttons */
+    if (widget->inherits("KCalcButton"))
+    {
+      QPalette palette = widget->palette();
+      const label_spec lspec = getLabelSpec("PanelButtonCommand");
+      QColor col(lspec.normalColor);
+      if (col.isValid())
+      {
+        palette.setColor(QPalette::Active,QPalette::ButtonText,col);
+        palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
+        widget->setPalette(palette);
+      }
+    }
+
+    /* respect the toolbar text color */
+    QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
+    QColor windowTextColor(settings->getColorSpec().windowTextColor);
+    if (toolbarTextColor.isValid()
+        && toolbarTextColor != windowTextColor)
+    {
+      QWidget *gp = getParent(widget,2);
+      if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+           && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(getParent(widget,1))) // Krita, Amarok
+          || (widget->inherits("AnimatedLabelStack") // Amarok
+              && qobject_cast<QToolBar*>(gp)
+              && qobject_cast<QMainWindow*>(getParent(gp,1))))
+      {
+        QPalette palette = widget->palette();
+        palette.setColor(widget->foregroundRole(),toolbarTextColor);
+        widget->setPalette(palette);
+      }
+    }
 
     const hacks_spec hspec = settings->getHacksSpec();
     if (hspec.respect_darkness)
@@ -2334,8 +2369,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
 
-      const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-      if (tb)
+      if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
       {
         bool drawRaised = false;
         const theme_spec tspec = settings->getThemeSpec();
@@ -2412,6 +2446,28 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             if (!drawRaised)
               painter->restore();
           }
+        }
+
+        /* use the "flat" indicator with flat buttons if it exists */
+        if (tb->autoRaise())
+        {
+          const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
+          QWidget *gp = getParent(widget,2);
+          if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+          {
+            if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flatMenubar-"+dspec1.element+"-down-normal"))
+              dspec.element = "flatMenubar-"+dspec1.element+"-down";
+          }
+          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
+                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+          {
+            if (!tspec.group_toolbar_buttons
+                && themeRndr && themeRndr->isValid()
+                && themeRndr->elementExists("flatToolbar-"+dspec1.element+"-down-normal"))
+              dspec.element = "flatToolbar-"+dspec1.element+"-down";
+          }
+          else if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+            dspec.element = "flat-"+dspec1.element+"-down";
         }
       }
       else if (!(option->state & State_AutoRaise)
@@ -4032,6 +4088,25 @@ void Kvantum::drawControl(ControlElement element,
         else if (option->state & State_MouseOver)
           state = 2;
 
+        /* respect the text color of the parent widget */
+        if (pb && pb->isFlat())
+        {
+          const color_spec cspec = settings->getColorSpec();
+          QColor col = cspec.windowTextColor;
+          QString name;
+          if (col.isValid())
+            name = cspec.windowTextColor;
+          else
+          {
+            QPalette palette = pb->palette();
+            QString name = palette.color(QPalette::WindowText).name();
+          }
+          lspec.normalColor = name;
+          lspec.focusColor = name;
+          lspec.pressColor = name;
+          lspec.toggleColor = name;
+        }
+
         renderLabel(painter,option->palette,
                     r,
                     fspec,lspec,
@@ -4051,7 +4126,7 @@ void Kvantum::drawControl(ControlElement element,
         const QString group = "PanelButtonCommand";
         const frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
-        const indicator_spec dspec = getIndicatorSpec(group);
+        indicator_spec dspec = getIndicatorSpec(group);
         const label_spec lspec = getLabelSpec(group);
 
         if (!(opt->features & QStyleOptionButton::Flat))
@@ -4078,12 +4153,22 @@ void Kvantum::drawControl(ControlElement element,
         if (opt->features & QStyleOptionButton::HasMenu)
         {
           QString aStatus = "normal";
-          if (status.startsWith("disabled"))
-            aStatus = "disabled";
-          else if (status.startsWith("toggled") || status.startsWith("pressed"))
-            aStatus = "pressed";
-          else if (option->state & State_MouseOver)
-            aStatus = "focused";
+          /* use the "flat" indicator with flat buttons if it exists */
+          if (opt->features & QStyleOptionButton::Flat
+              && themeRndr && themeRndr->isValid()
+              && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+          {
+            dspec.element = "flat-"+dspec.element;
+          }
+          else
+          {
+            if (status.startsWith("disabled"))
+              aStatus = "disabled";
+            else if (status.startsWith("toggled") || status.startsWith("pressed"))
+              aStatus = "pressed";
+            else if (option->state & State_MouseOver)
+              aStatus = "focused";
+          }
           if (isInactive)
             aStatus.append(QString("-inactive"));
           renderIndicator(painter,
@@ -4099,9 +4184,14 @@ void Kvantum::drawControl(ControlElement element,
         if (!status.startsWith("disabled") && pb && pb->isDefault())
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
+          QString di = "button-default-indicator";
+          if (opt->features & QStyleOptionButton::Flat
+              && themeRndr && themeRndr->isValid()
+              && themeRndr->elementExists("flat-button-default-indicator"))
+            di = "flat-button-default-indicator";
           renderIndicator(painter,
                           option->rect,
-                          fspec,dspec,"button-default-indicator",
+                          fspec,dspec,di,
                           Qt::AlignBottom | (opt->direction == Qt::RightToLeft ?
                                              Qt::AlignLeft : Qt::AlignRight));
         }
@@ -4117,7 +4207,7 @@ void Kvantum::drawControl(ControlElement element,
       if (opt) {
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
-        const indicator_spec dspec = getIndicatorSpec(group);
+        indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
         if (isPlasma)
         {
@@ -4156,14 +4246,45 @@ void Kvantum::drawControl(ControlElement element,
               fspec.right = 0;
           }
 
-          /* respect the toolbar text color */
-          const theme_spec tspec = settings->getThemeSpec();
-          if (!tspec.group_toolbar_buttons
-              && tb->autoRaise()
-              && qobject_cast<const QToolBar *>(tb->parentWidget()))
+          /* respect the text color of the parent widget */
+          if (tb->autoRaise())
           {
-            const label_spec lspec1 = getLabelSpec("Toolbar");
-            lspec.normalColor = lspec1.normalColor;
+            QWidget *gp = getParent(widget,2);
+            if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+            {
+              const label_spec lspec1 = getLabelSpec("MenuBar");
+              lspec.normalColor = lspec1.normalColor;
+              if (themeRndr && themeRndr->isValid()
+                  && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
+                dspec.element = "flatMenubar-"+dspec.element;
+            }
+            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
+                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+            {
+              const theme_spec tspec = settings->getThemeSpec();
+              if (!tspec.group_toolbar_buttons)
+              {
+                const label_spec lspec1 = getLabelSpec("Toolbar");
+                lspec.normalColor = lspec1.normalColor;
+                if (themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flatToolbar-"+dspec.element+"-down-normal"))
+                  dspec.element = "flatToolbar-"+dspec.element;
+              }
+            }
+            else
+            {
+              const color_spec cspec = settings->getColorSpec();
+              QColor col = cspec.windowTextColor;
+              if (col.isValid())
+                lspec.normalColor = cspec.windowTextColor;
+              else
+              {
+                QPalette palette = tb->palette();
+                lspec.normalColor = palette.color(QPalette::WindowText).name();
+              }
+              if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                dspec.element = "flat-"+dspec.element;
+            }
           }
 
           /* when there isn't enough space
@@ -4509,7 +4630,29 @@ void Kvantum::drawComplexControl(ComplexControl control,
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
             frame_spec fspec = getFrameSpec("PanelButtonTool");
-            const indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
+            indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
+            /* use the "flat" indicator with flat buttons if it exists */
+            if (tb->autoRaise())
+            {
+              QWidget *gp = getParent(widget,2);
+              if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+              {
+                if (themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
+                  dspec.element = "flatMenubar-"+dspec.element;
+              }
+              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
+                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+              {
+                const theme_spec tspec = settings->getThemeSpec();
+                if (!tspec.group_toolbar_buttons
+                    && themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flatToolbar-"+dspec.element+"-down-normal"))
+                  dspec.element = "flatToolbar-"+dspec.element;
+              }
+              else if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                dspec.element = "flat-"+dspec.element;
+            }
             fspec.right = fspec.left = 0;
             // -> CE_ToolButtonLabel
             if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
