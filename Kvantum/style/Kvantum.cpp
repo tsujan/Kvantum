@@ -64,6 +64,7 @@
 #define COMBO_ARROW_LENGTH 20
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
+#define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
 #define MIN_CONTRAST 65
 
 Kvantum::Kvantum() : QCommonStyle()
@@ -1034,7 +1035,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
+      indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
 
       // -> CE_MenuScroller and PE_PanelMenu
@@ -1095,8 +1096,23 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           if (tb->popupMode() != QToolButton::MenuButtonPopup)
           {
-            if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            if ((tb->popupMode() == QToolButton::InstantPopup
+                 || tb->popupMode() == QToolButton::DelayedPopup)
+                && (opt->features & QStyleOptionToolButton::HasMenu))
+            {
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+              {
+                if (opt->direction == Qt::RightToLeft)
+                  fspec.right = qMin(fspec.right,3);
+                else
+                  fspec.left = qMin(fspec.left,3);
+                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                lspec.tispace=0;
+              }
+            }
+            else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                     || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
             {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
             }
@@ -1220,7 +1236,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     case PE_FrameButtonTool : {
       const QString group = "PanelButtonTool";
       frame_spec fspec = getFrameSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
+      indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
 
       // -> CE_ToolButtonLabel
@@ -1272,8 +1288,23 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           if (tb->popupMode() != QToolButton::MenuButtonPopup)
           {
-            if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            if ((tb->popupMode() == QToolButton::InstantPopup
+                 || tb->popupMode() == QToolButton::DelayedPopup)
+                && (opt->features & QStyleOptionToolButton::HasMenu))
+            {
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+              {
+                if (opt->direction == Qt::RightToLeft)
+                  fspec.right = qMin(fspec.right,3);
+                else
+                  fspec.left = qMin(fspec.left,3);
+                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                lspec.tispace=0;
+              }
+            }
+            else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                     || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
             {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
             }
@@ -4318,8 +4349,23 @@ void Kvantum::drawControl(ControlElement element,
           {
             if (tb->popupMode() != QToolButton::MenuButtonPopup)
             {
-              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                  || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+              if ((tb->popupMode() == QToolButton::InstantPopup
+                   || tb->popupMode() == QToolButton::DelayedPopup)
+                  && (opt->features & QStyleOptionToolButton::HasMenu))
+              {
+                if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                  +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                {
+                  if (opt->direction == Qt::RightToLeft)
+                    fspec.right = qMin(fspec.right,3);
+                  else
+                    fspec.left = qMin(fspec.left,3);
+                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP); // not needed
+                  lspec.tispace=0; // not needed
+                }
+              }
+              else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                       || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
               {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
               }
@@ -4394,7 +4440,7 @@ void Kvantum::drawControl(ControlElement element,
                       !(opt->features & QStyleOptionToolButton::Arrow)
                           || opt->arrowType == Qt::NoArrow
                           || tialign == Qt::ToolButtonTextOnly ?
-                        r : // may still have arrow because of MenuButtonPopup
+                        r : // may still have arrow for a menu but that's dealt with at CC_ToolButton
                         // also add a margin between indicator and text (-> CT_ToolButton)
                         r.adjusted(opt->direction == Qt::RightToLeft ?
                                      0
@@ -4632,8 +4678,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            frame_spec fspec = getFrameSpec("PanelButtonTool");
-            indicator_spec dspec = getIndicatorSpec("PanelButtonTool");
+            const QString group = "PanelButtonCommand";
+            frame_spec fspec = getFrameSpec(group);
+            indicator_spec dspec = getIndicatorSpec(group);
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise())
             {
@@ -4657,11 +4704,23 @@ void Kvantum::drawComplexControl(ComplexControl control,
                 dspec.element = "flat-"+dspec.element;
             }
             fspec.right = fspec.left = 0;
+            Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
             // -> CE_ToolButtonLabel
             if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
             {
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
+            }
+            /* lack of space */
+            if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+            {
+              const label_spec lspec = getLabelSpec(group);
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+              {
+                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
+                ialign = Qt::AlignRight | Qt::AlignBottom;
+              }
             }
             QString aStatus = "normal";
             if (status.startsWith("disabled"))
@@ -4676,7 +4735,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
                             o.rect,
                             fspec,dspec,
                             dspec.element+"-down-"+aStatus,
-                            Qt::AlignLeft | Qt::AlignVCenter);
+                            ialign);
           }
         }
       }
@@ -7152,7 +7211,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
               {
                 const QString group = "PanelButtonTool";
                 frame_spec fspec = getFrameSpec(group);
-                const indicator_spec dspec = getIndicatorSpec(group);
+                indicator_spec dspec = getIndicatorSpec(group);
                 label_spec lspec = getLabelSpec(group);
                 // -> CE_ToolButtonLabel
                 if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
@@ -7160,6 +7219,20 @@ QRect Kvantum::subControlRect(ComplexControl control,
                   fspec.left = qMin(fspec.left,3);
                   fspec.right = qMin(fspec.right,3);
                   lspec.tispace = qMin(lspec.tispace,3);
+                }
+                /* lack of space */
+                if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+                {
+                  if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                    +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                  {
+                    if (rtl)
+                      fspec.left = qMin(fspec.left,3);
+                    else
+                      fspec.right = qMin(fspec.right,3);
+                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                    lspec.tispace=0;
+                  }
                 }
                 return option->rect.adjusted(rtl ?
                                                lspec.tispace+dspec.size
@@ -7223,12 +7296,26 @@ QRect Kvantum::subControlRect(ComplexControl control,
               {
                 const QString group = "PanelButtonTool";
                 frame_spec fspec = getFrameSpec(group);
-                const indicator_spec dspec = getIndicatorSpec(group);
+                indicator_spec dspec = getIndicatorSpec(group);
                 // -> CE_ToolButtonLabel
                 if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
                 {
                   fspec.left = qMin(fspec.left,3);
                   fspec.right = qMin(fspec.right,3);
+                }
+                /* lack of space */
+                if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+                {
+                  const label_spec lspec = getLabelSpec(group);
+                  if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                    +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                  {
+                    if (rtl)
+                      fspec.left = qMin(fspec.left,3);
+                    else
+                      fspec.right = qMin(fspec.right,3);
+                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
+                  }
                 }
                 int l = dspec.size
                         // -> CE_ToolButtonLabel
