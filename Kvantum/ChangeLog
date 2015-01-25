@@ -1,6 +1,7 @@
 V0.8.15
 ---------
  * Added the possibility of having high contrast between the colors of buttons, toolbars and menubars, on the one hand, and generic containers, on the other hand.
+ * Fixed the text color of K3b's location bar when there's a high contrast between the window and toolbar text colors.
 
 V0.8.14
 ---------

@@ -343,11 +343,11 @@ void Kvantum::polish(QWidget *widget)
       although they have bevel and frame like ordinary pushbuttons */
     if (widget->inherits("KCalcButton"))
     {
-      QPalette palette = widget->palette();
       const label_spec lspec = getLabelSpec("PanelButtonCommand");
       QColor col(lspec.normalColor);
       if (col.isValid())
       {
+        QPalette palette = widget->palette();
         palette.setColor(QPalette::Active,QPalette::ButtonText,col);
         palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
         widget->setPalette(palette);
@@ -368,7 +368,10 @@ void Kvantum::polish(QWidget *widget)
               && qobject_cast<QMainWindow*>(getParent(gp,1))))
       {
         QPalette palette = widget->palette();
-        palette.setColor(widget->foregroundRole(),toolbarTextColor);
+        palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
+        palette.setColor(QPalette::Inactive,widget->foregroundRole(),toolbarTextColor);
+        palette.setColor(QPalette::Active,QPalette::WindowText,toolbarTextColor); // for KAction in locationbar as in K3b
+        palette.setColor(QPalette::Inactive,QPalette::WindowText,toolbarTextColor);
         widget->setPalette(palette);
       }
     }
@@ -2453,13 +2456,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
           QWidget *gp = getParent(widget,2);
-          if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+          if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
           {
             if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flatMenubar-"+dspec1.element+"-down-normal"))
               dspec.element = "flatMenubar-"+dspec1.element+"-down";
           }
-          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
-                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
           {
             if (!tspec.group_toolbar_buttons
                 && themeRndr && themeRndr->isValid()
@@ -4250,7 +4253,7 @@ void Kvantum::drawControl(ControlElement element,
           if (tb->autoRaise())
           {
             QWidget *gp = getParent(widget,2);
-            if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+            if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
               lspec.normalColor = lspec1.normalColor;
@@ -4258,8 +4261,8 @@ void Kvantum::drawControl(ControlElement element,
                   && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
                 dspec.element = "flatMenubar-"+dspec.element;
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
-                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
             {
               const theme_spec tspec = settings->getThemeSpec();
               if (!tspec.group_toolbar_buttons)
@@ -4635,14 +4638,14 @@ void Kvantum::drawComplexControl(ComplexControl control,
             if (tb->autoRaise())
             {
               QWidget *gp = getParent(widget,2);
-              if (qobject_cast<const QMenuBar *>(gp) || qobject_cast<const QMenuBar *>(tb->parentWidget()))
+              if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
               {
                 if (themeRndr && themeRndr->isValid()
                     && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
                   dspec.element = "flatMenubar-"+dspec.element;
               }
-              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<const QToolBar *>(tb->parentWidget()))
-                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<const QToolBar *>(gp)))
+              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
               {
                 const theme_spec tspec = settings->getThemeSpec();
                 if (!tspec.group_toolbar_buttons
