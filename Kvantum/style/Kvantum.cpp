@@ -1295,7 +1295,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
                                 +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
               {
-                if (opt->direction == Qt::RightToLeft)
+                if (rtl)
                   fspec.right = qMin(fspec.right,3);
                 else
                   fspec.left = qMin(fspec.left,3);
@@ -4165,6 +4165,12 @@ void Kvantum::drawControl(ControlElement element,
 
         if (!(opt->features & QStyleOptionButton::Flat))
         {
+          // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
+          if (widget && !qobject_cast<const QPushButton *>(widget))
+          {
+            drawPrimitive(PE_Frame,option,painter,widget);
+            break;
+          }
           if (status.startsWith("disabled"))
           {
             status = "normal";
