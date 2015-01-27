@@ -3354,7 +3354,8 @@ void Kvantum::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        if (!qobject_cast<const QTabWidget *>(widget->parentWidget())
+        QTabWidget *tw = qobject_cast<QTabWidget *>(widget->parentWidget());
+        if ((!tw || tw->documentMode())
             && themeRndr && themeRndr->isValid() && themeRndr->elementExists("floating-"+ispec.element+"-normal"))
         {
           ispec.element="floating-"+ispec.element;
