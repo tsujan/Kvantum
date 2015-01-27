@@ -43,6 +43,8 @@
 #include <QDir>
 #include <QTextStream>
 #include <QLabel>
+#include <QDoubleSpinBox>
+#include <QDateTimeEdit>
 #include <QPixmapCache>
 //#include <QBitmap>
 #include <QPaintEvent>
@@ -938,6 +940,24 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
   }
 
   return res;
+}
+
+static inline QString spinMaxText (const QAbstractSpinBox* sp)
+{
+  QString maxTxt;
+  if (const QSpinBox *sb = qobject_cast<const QSpinBox *>(sp))
+    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(sb->maximum()).arg(sb->suffix());
+  else if (const QDoubleSpinBox *sb = qobject_cast<const QDoubleSpinBox *>(sp))
+    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(sb->maximum()).arg(sb->suffix());
+  else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit *>(sp))
+    maxTxt = sb->displayFormat();
+  if (!maxTxt.isEmpty())
+  {
+    QString svt = sp->specialValueText();
+    if (!svt.isEmpty() && svt.size() > maxTxt.size())
+      maxTxt = svt;
+  }
+  return maxTxt;
 }
 
 void Kvantum::drawPrimitive(PrimitiveElement element,
@@ -1961,6 +1981,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
+        // -> CC_SpinBox
+        else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+        {
+          QString maxTxt = spinMaxText(p);
+          if (!maxTxt.isEmpty())
+          {
+            int txtWidth = textSize(p->font(),maxTxt).width();
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspecSB.right+fspec.left
+                && p->width() >= txtWidth+2*10+3+3)
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
+        }
       }
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
       {
@@ -2057,6 +2092,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice)
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
+        // -> CC_SpinBox
+        else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+        {
+          QString maxTxt = spinMaxText(p);
+          if (!maxTxt.isEmpty())
+          {
+            int txtWidth = textSize(p->font(),maxTxt).width();
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspecSB.right+fspec.left
+                && p->width() >= txtWidth+2*10+3+3)
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
+          }
         }
       }
       else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
@@ -2198,6 +2248,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isLibreoffice)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+      }
+      // -> CC_SpinBox
+      else if (const QAbstractSpinBox *w = qobject_cast<const QAbstractSpinBox*>(widget))
+      {
+        QString maxTxt = spinMaxText(w);
+        if (!maxTxt.isEmpty())
+        {
+          int txtWidth = textSize(w->font(),maxTxt).width();
+          const frame_spec fspecLE = getFrameSpec("LineEdit");
+          if (w->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspec.right+fspecLE.left
+              && w->width() >= txtWidth+2*10+3+3)
+          {
+              fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
+          }
+        }
       }
 
       QString iStatus = status; // indicator state
@@ -3181,7 +3246,7 @@ void Kvantum::drawControl(ControlElement element,
           status.append(QString("-inactive"));
 
         frame_spec fspec = getFrameSpec("Tab");
-        const interior_spec ispec = getInteriorSpec("Tab");
+        interior_spec ispec = getInteriorSpec("Tab");
 
         QRect r = option->rect;
         bool verticalTabs = false;
@@ -3288,6 +3353,12 @@ void Kvantum::drawControl(ControlElement element,
             status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
+        }
+        if (!qobject_cast<const QTabWidget *>(widget->parentWidget())
+            && themeRndr && themeRndr->isValid() && themeRndr->elementExists("floating-"+ispec.element+"-normal"))
+        {
+          ispec.element="floating-"+ispec.element;
+          fspec.element="floating-"+fspec.element;
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
@@ -6883,6 +6954,22 @@ QRect Kvantum::subControlRect(ComplexControl control,
       {
         sw = 12;
         fspec.right = qMin(fspec.right,3);
+      }
+      /* I've seen this only in Pencil */
+      else if (const QAbstractSpinBox *w = qobject_cast<const QAbstractSpinBox*>(widget))
+      {
+        QString maxTxt = spinMaxText(w);
+        if (!maxTxt.isEmpty())
+        {
+          int txtWidth = textSize(w->font(),maxTxt).width();
+          const frame_spec fspecLE = getFrameSpec("LineEdit");
+          if (w->width() < txtWidth+2*sw+fspec.right+fspecLE.left
+              && w->width() >= txtWidth+2*10+3+3) // otherwise wouldn't help
+          {
+            sw = 10;
+            fspec.right = qMin(fspec.right,3);
+          }
+        }
       }
 
       // take into account the right frame width
