@@ -31,24 +31,32 @@ public:
     splitter->setSizes (sizes);
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
+    connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
   }
   ~KvantumPreview() {}
 
 private slots:
   void toggleLayout() {
-    if (QApplication::layoutDirection () == Qt::LeftToRight)
+    if (QApplication::layoutDirection() == Qt::LeftToRight)
       QApplication::setLayoutDirection (Qt::RightToLeft);
     else
       QApplication::setLayoutDirection (Qt::LeftToRight);
 
     /* FIXME Why isn't the close button position
        updated after changing layout direction? */
-    tabWidget_2->setTabsClosable(false);
-    tabWidget_2->setTabsClosable(true);
-    tabWidget_5->setTabsClosable(false);
-    tabWidget_5->setTabsClosable(true);
-    tabWidget_6->setTabsClosable(false);
-    tabWidget_6->setTabsClosable(true);
+    tabWidget_2->setTabsClosable (false);
+    tabWidget_2->setTabsClosable (true);
+    tabWidget_5->setTabsClosable (false);
+    tabWidget_5->setTabsClosable (true);
+    tabWidget_6->setTabsClosable (false);
+    tabWidget_6->setTabsClosable (true);
+  }
+  void docMode (bool checked) {
+    tabWidget_2->setDocumentMode (checked);
+    tabWidget_3->setDocumentMode (checked);
+    tabWidget_4->setDocumentMode (checked);
+    tabWidget_5->setDocumentMode (checked);
+    tabWidget_6->setDocumentMode (checked);
   }
 };
 

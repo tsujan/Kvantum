@@ -1947,6 +1947,15 @@ check box</string>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Page 1</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab_16">
             <attribute name="icon">
@@ -1956,6 +1965,15 @@ check box</string>
             <attribute name="title">
              <string>Tab 2</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_17">
+               <property name="text">
+                <string>Page 2</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -1963,6 +1981,9 @@ check box</string>
           <widget class="QTabWidget" name="tabWidget_5">
            <property name="tabPosition">
             <enum>QTabWidget::South</enum>
+           </property>
+           <property name="currentIndex">
+            <number>0</number>
            </property>
            <property name="tabsClosable">
             <bool>true</bool>
@@ -1978,11 +1999,29 @@ check box</string>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Page 1</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab_14">
             <attribute name="title">
              <string>Tab 2</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Page 2</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -2175,6 +2214,15 @@ check box</string>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QCheckBox" name="checkBoxDocMode">
+               <property name="text">
+                <string>Document mode</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab_8">
             <attribute name="icon">
@@ -2184,6 +2232,15 @@ check box</string>
             <attribute name="title">
              <string>Tab 2</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Page 2</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -2211,6 +2268,9 @@ check box</string>
            <property name="tabPosition">
             <enum>QTabWidget::West</enum>
            </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
            <property name="tabsClosable">
             <bool>true</bool>
            </property>
@@ -2225,11 +2285,29 @@ check box</string>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Page 1</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab_10">
             <attribute name="title">
              <string>Tab 2</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Page 2</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>
@@ -2239,7 +2317,7 @@ check box</string>
             <enum>QTabWidget::East</enum>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="movable">
             <bool>true</bool>
@@ -2252,11 +2330,29 @@ check box</string>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Page 1</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="tab_11">
             <attribute name="title">
              <string>Tab 2</string>
             </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Page 2</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </item>

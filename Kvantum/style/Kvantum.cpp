@@ -2551,22 +2551,37 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (tb->autoRaise())
         {
           const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
+          const label_spec lspec1 = getLabelSpec("PanelButtonTool");
+          QWidget *p = tb->parentWidget();
           QWidget *gp = getParent(widget,2);
-          if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
+          if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
           {
-            if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flatMenubar-"+dspec1.element+"-down-normal"))
-              dspec.element = "flatMenubar-"+dspec1.element+"-down";
+            if (qAbs(QColor(lspec1.normalColor).value()
+                     - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST
+                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+            {
+              dspec.element = "flat-"+dspec1.element+"-down";
+            }
           }
-          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                    || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
           {
             if (!tspec.group_toolbar_buttons
-                && themeRndr && themeRndr->isValid()
-                && themeRndr->elementExists("flatToolbar-"+dspec1.element+"-down-normal"))
-              dspec.element = "flatToolbar-"+dspec1.element+"-down";
+                && qAbs(QColor(lspec1.normalColor).value()
+                        - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST
+                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+            {
+              dspec.element = "flat-"+dspec1.element+"-down";
+            }
           }
-          else if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
-            dspec.element = "flat-"+dspec1.element+"-down";
+          else if (p)
+          {
+            if (qAbs(QColor(lspec1.normalColor).value() - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST
+                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+            {
+              dspec.element = "flat-"+dspec1.element+"-down";
+            }
+          }
         }
       }
       else if (!(option->state & State_AutoRaise)
@@ -4361,41 +4376,53 @@ void Kvantum::drawControl(ControlElement element,
           /* respect the text color of the parent widget */
           if (tb->autoRaise())
           {
+            QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
-            if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
+            if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
+              if (qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST
+                  && themeRndr && themeRndr->isValid()
+                  && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+              {
+                dspec.element = "flat-"+dspec.element;
+              }
               lspec.normalColor = lspec1.normalColor;
-              if (themeRndr && themeRndr->isValid()
-                  && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
-                dspec.element = "flatMenubar-"+dspec.element;
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                      || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
             {
               const theme_spec tspec = settings->getThemeSpec();
               if (!tspec.group_toolbar_buttons)
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
+                if (qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST
+                    && themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
                 lspec.normalColor = lspec1.normalColor;
-                if (themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flatToolbar-"+dspec.element+"-down-normal"))
-                  dspec.element = "flatToolbar-"+dspec.element;
               }
             }
-            else
+            else if (p)
             {
-              const color_spec cspec = settings->getColorSpec();
-              QColor col = cspec.windowTextColor;
-              if (col.isValid())
-                lspec.normalColor = cspec.windowTextColor;
-              else
+              QPalette palette = p->palette();
+              QColor col = palette.color(p->foregroundRole());
+              if (!col.isValid())
               {
-                QPalette palette = tb->palette();
-                lspec.normalColor = palette.color(QPalette::WindowText).name();
+                const color_spec cspec = settings->getColorSpec();
+                col = cspec.windowTextColor;
+                if (!col.isValid())
+                  col = tb->palette().color(QPalette::WindowText);
               }
-              if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+              if (qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST
+                  && themeRndr && themeRndr->isValid()
+                  && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+              {
                 dspec.element = "flat-"+dspec.element;
+              }
+              lspec.normalColor = col.name();
             }
           }
 
@@ -4759,27 +4786,45 @@ void Kvantum::drawComplexControl(ComplexControl control,
             const QString group = "PanelButtonCommand";
             frame_spec fspec = getFrameSpec(group);
             indicator_spec dspec = getIndicatorSpec(group);
+            const label_spec lspec = getLabelSpec(group);
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise())
             {
+              QWidget *p = tb->parentWidget();
               QWidget *gp = getParent(widget,2);
-              if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(tb->parentWidget()))
+              if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
               {
-                if (themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flatMenubar-"+dspec.element+"-down-normal"))
-                  dspec.element = "flatMenubar-"+dspec.element;
+                if (qAbs(QColor(lspec.normalColor).value()
+                         - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST
+                    && themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
               }
-              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(tb->parentWidget()))
+              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                        || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
               {
                 const theme_spec tspec = settings->getThemeSpec();
                 if (!tspec.group_toolbar_buttons
+                    && qAbs(QColor(lspec.normalColor).value()
+                            - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST
                     && themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flatToolbar-"+dspec.element+"-down-normal"))
-                  dspec.element = "flatToolbar-"+dspec.element;
+                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
               }
-              else if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
-                dspec.element = "flat-"+dspec.element;
+              else if (p)
+              {
+                if (qAbs(QColor(lspec.normalColor).value()
+                         - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST
+                    && themeRndr && themeRndr->isValid()
+                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
+              }
             }
             fspec.right = fspec.left = 0;
             Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -4792,7 +4837,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
             /* lack of space */
             if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
             {
-              const label_spec lspec = getLabelSpec(group);
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
                                 +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
               {
