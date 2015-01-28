@@ -132,6 +132,7 @@ Kvantum::Kvantum() : QCommonStyle()
   isYakuake = false;
   subApp = false;
   isOpaque = false;
+  hasFlatIndicator = false;
 
   connect(progresstimer, SIGNAL(timeout()),
           this, SLOT(advanceProgresses()));
@@ -157,6 +158,11 @@ Kvantum::Kvantum() : QCommonStyle()
     blurHelper = new BlurHelper(this,menuS,tooltipS);
   }
 #endif
+
+  /* search for the toolbutton flat indicator just once */
+  if (themeRndr && themeRndr->isValid()
+      && themeRndr->elementExists("flat-"+getIndicatorSpec("PanelButtonTool").element+"-down-normal"))
+    hasFlatIndicator = true;
 }
 
 Kvantum::~Kvantum()
@@ -1984,16 +1990,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         // -> CC_SpinBox
         else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
         {
-          QString maxTxt = spinMaxText(p);
-          if (!maxTxt.isEmpty())
+          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right)
           {
-            int txtWidth = textSize(p->font(),maxTxt).width();
-            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            if (p->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspecSB.right+fspec.left
-                && p->width() >= txtWidth+2*10+3+3)
-            {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-            }
           }
         }
       }
@@ -2096,16 +2096,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         // -> CC_SpinBox
         else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
         {
-          QString maxTxt = spinMaxText(p);
-          if (!maxTxt.isEmpty())
+          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right)
           {
-            int txtWidth = textSize(p->font(),maxTxt).width();
-            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            if (p->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspecSB.right+fspec.left
-                && p->width() >= txtWidth+2*10+3+3)
-            {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-            }
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           }
         }
       }
@@ -2245,31 +2239,27 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
 
+      const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
       }
       // -> CC_SpinBox
-      else if (const QAbstractSpinBox *w = qobject_cast<const QAbstractSpinBox*>(widget))
+      else if (opt)
       {
-        QString maxTxt = spinMaxText(w);
-        if (!maxTxt.isEmpty())
+        if (up)
         {
-          int txtWidth = textSize(w->font(),maxTxt).width();
-          const frame_spec fspecLE = getFrameSpec("LineEdit");
-          if (w->width() < txtWidth+2*SPIN_BUTTON_WIDTH+fspec.right+fspecLE.left
-              && w->width() >= txtWidth+2*10+3+3)
-          {
-              fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
-          }
+          if (opt->rect.width() < SPIN_BUTTON_WIDTH + fspec.right)
+            fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
         }
+        else if (opt->rect.width() < SPIN_BUTTON_WIDTH)
+          fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
       }
 
       QString iStatus = status; // indicator state
       QString bStatus = status; // button state
       if (!status.startsWith("disabled"))
       {
-        const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
         if (opt)
         {
           /* first disable the indicator if an
@@ -2548,7 +2538,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         /* use the "flat" indicator with flat buttons if it exists */
-        if (tb->autoRaise())
+        if (tb->autoRaise() && hasFlatIndicator)
         {
           const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
           const label_spec lspec1 = getLabelSpec("PanelButtonTool");
@@ -2557,8 +2547,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
           {
             if (qAbs(QColor(lspec1.normalColor).value()
-                     - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST
-                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+                     - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST)
             {
               dspec.element = "flat-"+dspec1.element+"-down";
             }
@@ -2568,19 +2557,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           {
             if (!tspec.group_toolbar_buttons
                 && qAbs(QColor(lspec1.normalColor).value()
-                        - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST
-                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
+                        - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST)
             {
               dspec.element = "flat-"+dspec1.element+"-down";
             }
           }
-          else if (p)
+          else if (p && qAbs(QColor(lspec1.normalColor).value()
+                             - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST)
           {
-            if (qAbs(QColor(lspec1.normalColor).value() - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST
-                && themeRndr && themeRndr->isValid() && themeRndr->elementExists("flat-"+dspec1.element+"-down-normal"))
-            {
-              dspec.element = "flat-"+dspec1.element+"-down";
-            }
+            dspec.element = "flat-"+dspec1.element+"-down";
           }
         }
       }
@@ -4381,9 +4366,8 @@ void Kvantum::drawControl(ControlElement element,
             if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
-              if (qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST
-                  && themeRndr && themeRndr->isValid()
-                  && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+              if (hasFlatIndicator
+                  && qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST)
               {
                 dspec.element = "flat-"+dspec.element;
               }
@@ -4396,9 +4380,8 @@ void Kvantum::drawControl(ControlElement element,
               if (!tspec.group_toolbar_buttons)
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
-                if (qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST
-                    && themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                if (hasFlatIndicator
+                    && qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST)
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -4416,12 +4399,8 @@ void Kvantum::drawControl(ControlElement element,
                 if (!col.isValid())
                   col = tb->palette().color(QPalette::WindowText);
               }
-              if (qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST
-                  && themeRndr && themeRndr->isValid()
-                  && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
-              {
+              if (hasFlatIndicator && qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST)
                 dspec.element = "flat-"+dspec.element;
-              }
               lspec.normalColor = col.name();
             }
           }
@@ -4788,16 +4767,14 @@ void Kvantum::drawComplexControl(ComplexControl control,
             indicator_spec dspec = getIndicatorSpec(group);
             const label_spec lspec = getLabelSpec(group);
             /* use the "flat" indicator with flat buttons if it exists */
-            if (tb->autoRaise())
+            if (tb->autoRaise() && hasFlatIndicator)
             {
               QWidget *p = tb->parentWidget();
               QWidget *gp = getParent(widget,2);
               if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
               {
                 if (qAbs(QColor(lspec.normalColor).value()
-                         - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST
-                    && themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                         - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST)
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -4808,22 +4785,15 @@ void Kvantum::drawComplexControl(ComplexControl control,
                 const theme_spec tspec = settings->getThemeSpec();
                 if (!tspec.group_toolbar_buttons
                     && qAbs(QColor(lspec.normalColor).value()
-                            - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST
-                    && themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+                            - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST)
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
               }
-              else if (p)
+              else if (p && qAbs(QColor(lspec.normalColor).value()
+                                 - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST)
               {
-                if (qAbs(QColor(lspec.normalColor).value()
-                         - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST
-                    && themeRndr && themeRndr->isValid()
-                    && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
-                {
-                  dspec.element = "flat-"+dspec.element;
-                }
+                dspec.element = "flat-"+dspec.element;
               }
             }
             fspec.right = fspec.left = 0;

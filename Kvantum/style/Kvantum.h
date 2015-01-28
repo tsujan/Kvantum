@@ -262,6 +262,9 @@ class Kvantum : public QCommonStyle {
     bool isDolphin;
     bool isKonsole;
     bool isYakuake;
+
+    /* Search for the toolbutton flat indicator just once! */
+    bool hasFlatIndicator;
 };
 
 #endif
