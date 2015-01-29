@@ -6,6 +6,7 @@ V0.8.15
  * Added optional floating tabs (see Theme-Making.pdf).
  * Workaround for lack of space in spinboxes.
  * Don't give the button text colors to those plasma toolbuttons that pretend to have only icons but have texts.
+ * Use Plasma foreground color for Plasma toolbutton text.
 
 V0.8.14
 ---------

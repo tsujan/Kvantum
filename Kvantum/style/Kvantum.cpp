@@ -4361,7 +4361,7 @@ void Kvantum::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          if (tb->autoRaise())
+          if (tb->autoRaise() || (isPlasma && !tb->autoFillBackground()))
           {
             QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
@@ -4404,6 +4404,12 @@ void Kvantum::drawControl(ControlElement element,
               if (hasFlatIndicator && qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST)
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
+              if (isPlasma && !tb->autoFillBackground())
+              {
+                lspec.focusColor = col.name();
+                lspec.pressColor = col.name();
+                lspec.toggleColor = col.name();
+              }
             }
           }
 
