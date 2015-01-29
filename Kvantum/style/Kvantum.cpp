@@ -348,13 +348,15 @@ void Kvantum::polish(QWidget *widget)
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
 
-   /* KCalc sets the text color of its pushbuttons itself,
+   /* KCalc and Dragon Player set the text color of their pushbuttons,
       although they have bevel and frame like ordinary pushbuttons */
-    if (widget->inherits("KCalcButton"))
+    if (widget->inherits("KPushButton")
+        && qobject_cast<QPushButton *>(widget) && !qobject_cast<QPushButton *>(widget)->isFlat()
+        /*&& widget->inherits("KCalcButton")*/)
     {
       const label_spec lspec = getLabelSpec("PanelButtonCommand");
       QColor col(lspec.normalColor);
-      if (col.isValid())
+      if (col.isValid() && col != widget->palette().color(widget->foregroundRole()))
       {
         QPalette palette = widget->palette();
         palette.setColor(QPalette::Active,QPalette::ButtonText,col);
@@ -366,8 +368,7 @@ void Kvantum::polish(QWidget *widget)
     /* respect the toolbar text color */
     QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
     QColor windowTextColor(settings->getColorSpec().windowTextColor);
-    if (toolbarTextColor.isValid()
-        && toolbarTextColor != windowTextColor)
+    if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
     {
       QWidget *gp = getParent(widget,2);
       if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
@@ -2400,7 +2401,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (QLineEdit *le = cb->lineEdit())
         {
           /* Konqueror may add an icon to the right of lineedit (for LTR) */
-          if (option->direction == Qt::RightToLeft
+          if (rtl
               ? le->x() == COMBO_ARROW_LENGTH + fspec.left
               : le->x()+le->width() == cb->width()-(COMBO_ARROW_LENGTH+fspec.right))
           {
@@ -2411,7 +2412,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.hasCapsule = true;
         if (fspec.hasCapsule)
         {
-          if (option->direction == Qt::RightToLeft)
+          if (rtl)
           {
             fspec.capsuleH = -1;
             fspec.right = 0;
@@ -2448,6 +2449,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                 r.adjust(0,0,-qMax(fspec.left-3,0),0);
               else
                 r.adjust(qMax(fspec.right-3,0),0,0,0);
+              fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
@@ -4405,31 +4407,24 @@ void Kvantum::drawControl(ControlElement element,
             }
           }
 
-          /* when there isn't enough space
-             (as in Qupzilla's bookmark toolbar) */
-          if (!opt->text.isEmpty())
+          /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
+          if (tialign != Qt::ToolButtonIconOnly)
           {
-            QSize txtSize = textSize(painter->font(),opt->text);
-            if ((tialign == Qt::ToolButtonTextBesideIcon
-                 && (tb->width() < txtSize.width()
-                                   +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                                   +lspec.left+lspec.right+fspec.left+fspec.right
-                     || tb->height() < txtSize.height()
-                                       +lspec.top+lspec.bottom+fspec.top+fspec.bottom))
-                || (tialign == Qt::ToolButtonTextUnderIcon
-                    && (tb->height() < txtSize.height()
-                                       +(opt->icon.isNull() ? 0 : opt->iconSize.height()+lspec.tispace)
-                                       +lspec.top+lspec.bottom+fspec.top+fspec.bottom
-                        || tb->width() < txtSize.width()
-                                         +lspec.left+lspec.right+fspec.left+fspec.right)))
+            if (!opt->text.isEmpty()
+                && (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon))
             {
-              lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
-              fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+              size_spec sspec;
+              default_size_spec(sspec);
+              QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize),tialign);
+              if (tb->width() < cs.width() || tb->height() < cs.height())
+              {
+                lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+                fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+              }
             }
           }
-
           /* lack of space (as in some of Krita's KisToolButtons) */
-          if (tialign == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+          else if (!opt->icon.isNull())
           {
             if (tb->popupMode() != QToolButton::MenuButtonPopup)
             {
@@ -6629,24 +6624,30 @@ QSize Kvantum::sizeCalculated(const QFont &font,
   int tw = ts.width();
   int th = ts.height();
 
-  if (tialign == Qt::ToolButtonIconOnly) {
+  if (tialign == Qt::ToolButtonIconOnly)
+  {
     s.rwidth() += icon.width();
     s.rheight() += icon.height();
-  } else if (tialign == Qt::ToolButtonTextOnly) {
+  }
+  else if (tialign == Qt::ToolButtonTextOnly)
+  {
     s.rwidth() += tw;
     s.rheight() += th;
-  } else if (tialign == Qt::ToolButtonTextBesideIcon) {
+  }
+  else if (tialign == Qt::ToolButtonTextBesideIcon)
+  {
     s.rwidth() += (icon.isNull() ? 0 : icon.width()) + (icon.isNull() ? 0 : (text.isEmpty() ? 0 : lspec.tispace)) + tw;
     s.rheight() += qMax(icon.height(),th);
-  } else if (tialign == Qt::ToolButtonTextUnderIcon) {
+  }
+  else if (tialign == Qt::ToolButtonTextUnderIcon)
+  {
     s.rwidth() += qMax(icon.width(),tw);
     s.rheight() += icon.height() + (icon.isNull() ? 0 : lspec.tispace) + th;
   }
 
-  if ( (sspec.minH > 0) && (s.height() < sspec.minH) )
+  if (s.height() < sspec.minH)
     s.setHeight(sspec.minH);
-
-  if ( (sspec.minW > 0) && (s.width() < sspec.minW) )
+  if (s.width() < sspec.minW)
     s.setWidth(sspec.minW);
 
   return s;
@@ -6660,16 +6661,20 @@ QSize Kvantum::textSize (const QFont &font, const QString &text) const
   int tw = 0;
   int th = 0;
 
-  if (!text.isEmpty()) {
+  if (!text.isEmpty())
+  {
     /* remove & mnemonic character and tabs (for menu items) */
     // FIXME don't remove & if it is not followed by a character
     QString t = QString(text).remove('\t');
     {
       int i=0;
-      while ( i<t.size() ) {
-        if ( t.at(i) == '&' ) {
+      while ( i<t.size() )
+      {
+        if ( t.at(i) == '&' )
+        {
           // see if next character is not a space
-          if ( (i+1<t.size()) && (t.at(i+1) != ' ') ) {
+          if ( (i+1<t.size()) && (t.at(i+1) != ' ') )
+          {
             t.remove(i,1);
             i++;
           }
@@ -6682,9 +6687,8 @@ QSize Kvantum::textSize (const QFont &font, const QString &text) const
     QStringList l = t.split('\n');
 
     th = QFontMetrics(font).height()*(l.size());
-    for (int i=0; i<l.size(); i++) {
+    for (int i=0; i<l.size(); i++)
       tw = qMax(tw,QFontMetrics(font).width(l[i]));
-    }
   }
 
   return QSize(tw,th);
@@ -6990,7 +6994,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
       // take into account the right frame width
       switch (subControl) {
         case SC_SpinBoxFrame :
-          return QRect();
+          return option->rect;
         case SC_SpinBoxEditField :
           return QRect(x,
                        y,
@@ -7029,7 +7033,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
                          y, w, h);
           }
           else
-            return QRect();
+            return option->rect;
         }
         case SC_ComboBoxEditField : {
           int margin = 0;
@@ -8234,7 +8238,7 @@ void Kvantum::renderLabel(
       painter->setFont(f);
     }
 
-    if (state != 0)
+    if (state != 0 && !(isPlasma && tialign == Qt::ToolButtonIconOnly))
     {
       QColor shadowColor(lspec.shadowColor);
       if (lspec.hasShadow && shadowColor.isValid())
