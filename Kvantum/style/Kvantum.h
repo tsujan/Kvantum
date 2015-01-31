@@ -19,6 +19,7 @@
 #define KVANTUM_H
 
 #include <QCommonStyle>
+#include <QPushButton>
 #include <QString>
 #include <QMap>
 
@@ -102,7 +103,14 @@ class Kvantum : public QCommonStyle {
     void setSurfaceFormat(QWidget *w) const;
     void setSurfaceFormat(const QWidget *w) const
     {
-        setSurfaceFormat(const_cast<QWidget*>(w));
+      setSurfaceFormat(const_cast<QWidget*>(w));
+    }
+
+    /* A method for forcing the pushbutton text color. */
+    void forcePushButtonTextColor(QPushButton *pb) const;
+    void forcePushButtonTextColor(const QPushButton *pb) const
+    {
+      forcePushButtonTextColor(const_cast<QPushButton*>(pb));
     }
 
 #if QT_VERSION >= 0x050000

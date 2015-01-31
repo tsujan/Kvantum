@@ -9,6 +9,7 @@ V0.8.15
  * Use Plasma foreground color for Plasma toolbutton text.
  * Set limits on lineedit frame size when needed.
  * A better criterion for deciding if a widget belongs to Plasma.
+ * Force the pushbutton normal text color.
 
 V0.8.14
 ---------

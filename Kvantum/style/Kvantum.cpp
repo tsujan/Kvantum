@@ -26,14 +26,14 @@
 #include <QToolButton>
 #include <QToolBar>
 #include <QMainWindow>
-#include <QPushButton>
+//#include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
 #include <QMenu>
 #include <QGroupBox>
 #include <QAbstractScrollArea>
-#include <QAbstractButton>
+//#include <QAbstractButton>
 #include <QAbstractItemView>
 #include <QDockWidget>
 #include <QDial>
@@ -347,23 +347,6 @@ void Kvantum::polish(QWidget *widget)
 
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
-
-   /* KCalc and Dragon Player set the text color of their pushbuttons,
-      although they have bevel and frame like ordinary pushbuttons */
-    if (widget->inherits("KPushButton")
-        && qobject_cast<QPushButton *>(widget) && !qobject_cast<QPushButton *>(widget)->isFlat()
-        /*&& widget->inherits("KCalcButton")*/)
-    {
-      const label_spec lspec = getLabelSpec("PanelButtonCommand");
-      QColor col(lspec.normalColor);
-      if (col.isValid() && col != widget->palette().color(widget->foregroundRole()))
-      {
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Active,QPalette::ButtonText,col);
-        palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
-        widget->setPalette(palette);
-      }
-    }
 
     /* respect the toolbar text color */
     QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
@@ -2762,6 +2745,28 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
   }
 }
 
+/* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text
+   color of their pushbuttons, although those buttons have bevel like ordinary
+   pushbuttons. This is a method to force the pushbutton text color when the bevel
+   is drawn at CE_PushButtonBevel, without forcing any color when the bevel is
+   drawn differently, as in Amarok's BreadcrumbItemButton (ElidingButton). */
+void Kvantum::forcePushButtonTextColor(QPushButton *pb) const
+{
+  if (pb && !pb->isFlat()
+      && !pb->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
+  {
+    const label_spec lspec = getLabelSpec("PanelButtonCommand");
+    QColor col(lspec.normalColor);
+    QPalette palette = pb->palette();
+    if (col.isValid() && col != palette.color(pb->foregroundRole()))
+    {
+      palette.setColor(QPalette::Active,QPalette::ButtonText,col);
+      palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
+      pb->setPalette(palette);
+    }
+  }
+}
+
 void Kvantum::drawControl(ControlElement element,
                           const QStyleOption *option,
                           QPainter *painter,
@@ -4307,7 +4312,8 @@ void Kvantum::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        if (!status.startsWith("disabled") && pb && pb->isDefault())
+        forcePushButtonTextColor(pb);
+        if (pb && pb->isDefault() && !status.startsWith("disabled"))
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
           QString di = "button-default-indicator";
