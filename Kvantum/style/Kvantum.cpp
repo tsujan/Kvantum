@@ -1977,6 +1977,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameLineEdit : {
       frame_spec fspec = getFrameSpec("LineEdit");
+      if (qobject_cast<const QLineEdit*>(widget)
+          && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+              || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())))
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      }
       if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
@@ -1992,7 +1998,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right)
+          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           }
@@ -2064,12 +2071,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_PanelLineEdit : {
       /* don't draw the interior or frame of a Plasma spinbox */
-      if (isPlasma && widget
-          && (!widget->parentWidget()
-              || widget->parentWidget()->testAttribute(Qt::WA_NoSystemBackground)))
-      {
+      if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         break;
-      }
 
       /* force frame */
       drawPrimitive(PE_FrameLineEdit,option,painter,widget);
@@ -2078,6 +2081,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       const interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
+      if (qobject_cast<const QLineEdit*>(widget)
+          && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+              || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())))
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      }
       /* no frame when editing itemview texts */
       if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
@@ -2098,7 +2107,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right)
+          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           }
@@ -3037,9 +3047,10 @@ void Kvantum::drawControl(ControlElement element,
         fspec.capsuleV = 2;
         const interior_spec ispec = getInteriorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        if (isPlasma)
+        if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
 
         if (status.startsWith("disabled"))
@@ -4137,12 +4148,13 @@ void Kvantum::drawControl(ControlElement element,
 
       if (opt) {
         const QString group = "PanelButtonCommand";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        if (isPlasma)
+        if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
@@ -4323,9 +4335,16 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        if (isPlasma)
+        bool inPlasma = false;
+        QWidget *p = getParent(widget,1);
+        if (isPlasma && widget
+            && (widget->window()->testAttribute(Qt::WA_NoSystemBackground)
+                /* toolbuttons on PanelController */
+                || (p && p->palette().color(p->backgroundRole()) == QColor(Qt::transparent))))
         {
+          inPlasma = true;
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         }
 
         /* where there may not be enough space,
@@ -4361,9 +4380,8 @@ void Kvantum::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          if (tb->autoRaise() || (isPlasma && !tb->autoFillBackground()))
+          if (tb->autoRaise() || inPlasma)
           {
-            QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
             if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
             {
@@ -4404,7 +4422,7 @@ void Kvantum::drawControl(ControlElement element,
               if (hasFlatIndicator && qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST)
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
-              if (isPlasma && !tb->autoFillBackground())
+              if (inPlasma)
               {
                 lspec.focusColor = col.name();
                 lspec.pressColor = col.name();
@@ -6751,6 +6769,24 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+      }
+      else if (widget && widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      }
+      else if (qobject_cast<const QLineEdit*>(widget)
+               && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      }
+      else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+      {
+        const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+        if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+            || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+        {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
       }
       QRect rect = interiorRect(option->rect, fspec);
 
