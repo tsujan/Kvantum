@@ -370,30 +370,21 @@ void Kvantum::polish(QWidget *widget)
     }
 
     const hacks_spec hspec = settings->getHacksSpec();
-    if (hspec.respect_darkness)
+    if (hspec.respect_darkness
+        && (qobject_cast<QAbstractItemView*>(widget)
+            || qobject_cast<QAbstractScrollArea*>(widget)
+            || qobject_cast<QTabWidget*>(widget)
+            || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
     {
-      bool changePalette = false;
-      if (qobject_cast<QAbstractItemView*>(widget)
-          || qobject_cast<QAbstractScrollArea*>(widget)
-          || qobject_cast<QTabWidget*>(widget))
-        changePalette = true;
-      else if (QLabel *label = qobject_cast<QLabel*>(widget))
+      QPalette palette = widget->palette();
+      QColor txtCol = palette.color(QPalette::Text);
+      if (qAbs(palette.color(QPalette::Base).value() - txtCol.value()) < MIN_CONTRAST
+          || qAbs(palette.color(QPalette::Window).value() - palette.color(QPalette::WindowText).value()) < MIN_CONTRAST
+          || (qobject_cast<QAbstractItemView*>(widget)
+              && qAbs(palette.color(QPalette::AlternateBase).value() - txtCol.value()) < MIN_CONTRAST))
       {
-        if (!label->text().isEmpty())
-          changePalette = true;
-      }
-      if (changePalette)
-      {
-        QPalette palette = widget->palette();
-        QColor txtCol = palette.color(QPalette::Text);
-        if (qAbs(palette.color(QPalette::Base).value() - txtCol.value()) < MIN_CONTRAST
-            || qAbs(palette.color(QPalette::Window).value() - palette.color(QPalette::WindowText).value()) < MIN_CONTRAST
-            || (qobject_cast<QAbstractItemView*>(widget)
-                && qAbs(palette.color(QPalette::AlternateBase).value() - txtCol.value()) < MIN_CONTRAST))
-        {
-          polish(palette);
-          widget->setPalette(palette);
-        }
+        polish(palette);
+        widget->setPalette(palette);
       }
     }
 
@@ -4431,8 +4422,10 @@ void Kvantum::drawControl(ControlElement element,
               if (inPlasma)
               {
                 lspec.focusColor = col.name();
-                lspec.pressColor = col.name();
                 lspec.toggleColor = col.name();
+                /* Plasma menu titles */
+                if (settings->getHacksSpec().transparent_menutitle || !qobject_cast<QMenu*>(getParent(widget,1)))
+                  lspec.pressColor = col.name();
               }
             }
           }
@@ -4766,7 +4759,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
           if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
           {
             if (tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
-                && widget->parentWidget() && qobject_cast<QMenu*>(widget->parentWidget()))
+                && qobject_cast<QMenu*>(getParent(widget,1)))
             {
               drawControl(CE_ToolButtonLabel,&o,painter,widget);
               break;

@@ -10,6 +10,7 @@ V0.8.15
  * Set limits on lineedit frame size when needed.
  * A better criterion for deciding if a widget belongs to Plasma.
  * Force the pushbutton normal text color.
+ * Don't set the text color of Plasma menu titles to that of their menus when they aren't transparent.
 
 V0.8.14
 ---------
