@@ -32,6 +32,8 @@ public:
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
+    connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
+    connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
   }
   ~KvantumPreview() {}
 
@@ -57,6 +59,36 @@ private slots:
     tabWidget_4->setDocumentMode (checked);
     tabWidget_5->setDocumentMode (checked);
     tabWidget_6->setDocumentMode (checked);
+  }
+  void makeFlat (bool checked) {
+    pushButton->setFlat (checked);
+    pushButton_4->setFlat (checked);
+    pushButton_2->setFlat (checked);
+    pushButton_3->setFlat (checked);
+    pushButton_5->setFlat (checked);
+    pushButton_9->setFlat (checked);
+    pushButton_11->setFlat (checked);
+    pushButton_10->setFlat (checked);
+    pushButton_12->setFlat (checked);
+    pushButton_6->setFlat (checked);
+  }
+  void makeAutoRaise (bool checked) {
+    toolButton->setAutoRaise (checked);
+    toolButton_2->setAutoRaise (checked);
+    toolButton_3->setAutoRaise (checked);
+    toolButton_4->setAutoRaise (checked);
+    toolButton_5->setAutoRaise (checked);
+    toolButton_6->setAutoRaise (checked);
+    toolButton_7->setAutoRaise (checked);
+    toolButton_8->setAutoRaise (checked);
+    toolButton_16->setAutoRaise (checked);
+    toolButton_15->setAutoRaise (checked);
+    toolButton_12->setAutoRaise (checked);
+    toolButton_9->setAutoRaise (checked);
+    toolButton_14->setAutoRaise (checked);
+    toolButton_13->setAutoRaise (checked);
+    toolButton_10->setAutoRaise (checked);
+    toolButton_11->setAutoRaise (checked);
   }
 };
 
