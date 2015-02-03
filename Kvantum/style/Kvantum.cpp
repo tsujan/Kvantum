@@ -348,6 +348,18 @@ void Kvantum::polish(QWidget *widget)
     widget->setAttribute(Qt::WA_Hover, true);
     //widget->setAttribute(Qt::WA_MouseTracking, true);
 
+    /* So far I haven't found any use for this: */
+    /*if (qobject_cast<QMenu*>(widget))
+    {
+      QColor menuTextColor(getLabelSpec("Menu").normalColor);
+      QPalette palette = widget->palette();
+      if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::Text))
+      {
+        palette.setColor(QPalette::Active,QPalette::Text,menuTextColor);
+        widget->setPalette(palette);
+      }
+    }*/
+
     /* respect the toolbar text color */
     QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
     QColor windowTextColor(settings->getColorSpec().windowTextColor);
@@ -4423,12 +4435,17 @@ void Kvantum::drawControl(ControlElement element,
               {
                 lspec.focusColor = col.name();
                 lspec.toggleColor = col.name();
-                /* Plasma menu titles */
-                if (settings->getHacksSpec().transparent_menutitle || !qobject_cast<QMenu*>(getParent(widget,1)))
+                /* take care of Plasma menu titles */
+                if (!qobject_cast<QMenu*>(p))
                   lspec.pressColor = col.name();
+                else if (settings->getHacksSpec().transparent_menutitle)
+                  lspec.pressColor = getLabelSpec("Menu").normalColor;
               }
             }
           }
+          /* KDE menu titles */
+          else if (qobject_cast<QMenu*>(p) && settings->getHacksSpec().transparent_menutitle)
+            lspec.pressColor = getLabelSpec("Menu").normalColor;
 
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
           if (tialign != Qt::ToolButtonIconOnly)
