@@ -11,6 +11,8 @@ V0.8.15
  * A better criterion for deciding if a widget belongs to Plasma.
  * Force the pushbutton normal text color.
  * Don't set the text color of Plasma menu titles to that of their menus when they aren't transparent.
+ * Use gray values of colors for checking their contrast.
+ * Force view-item text colors when item text is added as a label (as in VLC).
 
 V0.8.14
 ---------

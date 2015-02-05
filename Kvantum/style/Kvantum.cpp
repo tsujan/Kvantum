@@ -331,6 +331,14 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
+static inline bool enoughContrast (QColor col1, QColor col2)
+{
+  if (!col1.isValid() || !col2.isValid()) return true;
+  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
+    return false;
+  return true;
+}
+
 void Kvantum::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
@@ -390,10 +398,10 @@ void Kvantum::polish(QWidget *widget)
     {
       QPalette palette = widget->palette();
       QColor txtCol = palette.color(QPalette::Text);
-      if (qAbs(palette.color(QPalette::Base).value() - txtCol.value()) < MIN_CONTRAST
-          || qAbs(palette.color(QPalette::Window).value() - palette.color(QPalette::WindowText).value()) < MIN_CONTRAST
+      if (!enoughContrast(palette.color(QPalette::Base), txtCol)
+          || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
           || (qobject_cast<QAbstractItemView*>(widget)
-              && qAbs(palette.color(QPalette::AlternateBase).value() - txtCol.value()) < MIN_CONTRAST))
+              && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
       {
         polish(palette);
         widget->setPalette(palette);
@@ -2544,27 +2552,20 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           QWidget *gp = getParent(widget,2);
           if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
           {
-            if (qAbs(QColor(lspec1.normalColor).value()
-                     - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST)
-            {
+            if (enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
               dspec.element = "flat-"+dspec1.element+"-down";
-            }
           }
           else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                    || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
           {
             if (!tspec.group_toolbar_buttons
-                && qAbs(QColor(lspec1.normalColor).value()
-                        - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST)
+                && enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
             {
               dspec.element = "flat-"+dspec1.element+"-down";
             }
           }
-          else if (p && qAbs(QColor(lspec1.normalColor).value()
-                             - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST)
-          {
+          else if (p && enoughContrast(QColor(lspec1.normalColor), p->palette().color(p->foregroundRole())))
             dspec.element = "flat-"+dspec1.element+"-down";
-          }
         }
       }
       else if (!(option->state & State_AutoRaise)
@@ -2697,20 +2698,55 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
          PM_FocusFrameHMargin and PM_FocusFrameVMargin for viewitems.
       */
 
-      const frame_spec fspec = getFrameSpec("ItemView");
-      interior_spec ispec = getInteriorSpec("ItemView");
+      const QString group = "ItemView";
+      const frame_spec fspec = getFrameSpec(group);
+      const interior_spec ispec = getInteriorSpec(group);
 
-      /* we want to know if the widget has focus */
+      /* QCommonStyle uses something like this: */
+      /*QString ivStatus = (widget ? widget->isEnabled() : (option->state & QStyle::State_Enabled)) ?
+                         (option->state & QStyle::State_Selected) ?
+                         (option->state & QStyle::State_Active) ? "pressed" : "toggled" :
+                         (option->state & State_MouseOver) ? "focused" : "normal" : "disabled";*/
+      /* but we want to know if the widget itself has focus */
       QString ivStatus = (option->state & State_Enabled) ?
-                         // for Okular's navigation panel
+                         // as in Okular's navigation panel
                          ((option->state & State_Selected)
                           && (option->state & State_HasFocus)
                           && (option->state & State_Active)) ? "pressed" :
-                         // for most widgets
+                         // as in most widgets
                          (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
                          (option->state & State_Selected) ? "toggled" :
                          (option->state & State_MouseOver) ? "focused" : "normal"
                          : "disabled";
+
+      /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */
+      const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4 *>(option);
+      const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
+      if (opt && opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
+          && iv && (option->state & State_Enabled))
+      {
+        if (QWidget *iw = iv->indexWidget(opt->index))
+        {
+          const label_spec lspec = getLabelSpec(group);
+          QColor col;
+          if (ivStatus == "normal")
+            col = lspec.normalColor;
+          else if (ivStatus == "focused")
+            col = lspec.focusColor;
+          else if (ivStatus == "pressed")
+            col = lspec.pressColor;
+          else if (ivStatus == "toggled")
+            col = lspec.toggleColor;
+          if (col.isValid())
+          {
+            QPalette palette = iw->palette();
+            palette.setColor(QPalette::Active,QPalette::Text,col);
+            palette.setColor(QPalette::Inactive,QPalette::Text,col);
+            iw->setPalette(palette);
+          }
+        }
+      }
+
       if (isInactive)
         ivStatus.append(QString("-inactive"));
 
@@ -2968,43 +3004,44 @@ void Kvantum::drawControl(ControlElement element,
       */
       if (const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4 *>(option))
       {
-        if (!opt->text.isEmpty())
+        QPalette palette(opt->palette);
+        if (!opt->text.isEmpty()
+            /* If another color has been set intentionally,
+               as in Akregator's unread feeds or in Kate's
+               text style preferences, use it! */
+            && widget && palette == widget->palette())
         {
-          int state = 1;
-          if (status.startsWith("disabled"))
-            state = 0;
-          else if (status.startsWith("toggled") || status.startsWith("pressed"))
-            state = 3;
-          else if (option->state & State_MouseOver)
-            state = 2;
+          // as in PE_PanelItemViewItem
+          int state = (option->state & State_Enabled) ?
+                      ((option->state & State_Selected)
+                       && (option->state & State_HasFocus)
+                       && (option->state & State_Active)) ? 3 :
+                      (widget && widget->hasFocus() && (option->state & State_Selected)) ? 3 :
+                      (option->state & State_Selected) ? 4 :
+                      (option->state & State_MouseOver) ? 2 : 1 : 0;
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ItemView");
             QColor normalColor(lspec.normalColor);
             QColor focusColor(lspec.focusColor);
             QColor pressColor(lspec.pressColor);
-            int baseValue = opt->palette.color(QPalette::Base).value();
+            QColor toggleColor(lspec.toggleColor);
             if (state == 1 && normalColor.isValid()
-                // a minimum amount of contrast is needed
-                && qAbs(baseValue - normalColor.value()) >= MIN_CONTRAST)
+                /* a minimum amount of contrast is needed,
+                   supposing that the normal interior is transparent */
+                && enoughContrast(palette.color(QPalette::Base), normalColor))
             {
               QStyleOptionViewItemV4 o(*opt);
-              QPalette palette(opt->palette);
-              /* if another color has been set intentionally,
-                 like in Akregator's unread feeds, use it */
-              if (widget && palette == widget->palette())
-              {
-                palette.setColor(QPalette::Text, normalColor);
-                o.palette = palette;
-                QCommonStyle::drawControl(element,&o,painter,widget);
-                return;
-              }
+              palette.setColor(QPalette::Text, normalColor);
+              o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
             }
             else if (state == 2 && focusColor.isValid()
-                     && qAbs(baseValue - focusColor.value()) >= MIN_CONTRAST)
+                     // supposing that the focus interior is translucent
+                     && enoughContrast(palette.color(QPalette::Base), focusColor))
             {
               QStyleOptionViewItemV4 o(*opt);
-              QPalette palette(opt->palette);
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
@@ -3014,8 +3051,15 @@ void Kvantum::drawControl(ControlElement element,
             else if (state == 3 && pressColor.isValid())
             {
               QStyleOptionViewItemV4 o(*opt);
-              QPalette palette(opt->palette);
               palette.setColor(QPalette::HighlightedText, pressColor);
+              o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+            else if (state == 4 && toggleColor.isValid())
+            {
+              QStyleOptionViewItemV4 o(*opt);
+              palette.setColor(QPalette::HighlightedText, toggleColor);
               o.palette = palette;
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
@@ -4395,11 +4439,8 @@ void Kvantum::drawControl(ControlElement element,
             if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
-              if (hasFlatIndicator
-                  && qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST)
-              {
+              if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), QColor(lspec1.normalColor)))
                 dspec.element = "flat-"+dspec.element;
-              }
               lspec.normalColor = lspec1.normalColor;
             }
             else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
@@ -4409,11 +4450,8 @@ void Kvantum::drawControl(ControlElement element,
               if (!tspec.group_toolbar_buttons)
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
-                if (hasFlatIndicator
-                    && qAbs(QColor(lspec.normalColor).value() - QColor(lspec1.normalColor).value()) >= MIN_CONTRAST)
-                {
+                if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), QColor(lspec1.normalColor)))
                   dspec.element = "flat-"+dspec.element;
-                }
                 lspec.normalColor = lspec1.normalColor;
               }
             }
@@ -4428,7 +4466,7 @@ void Kvantum::drawControl(ControlElement element,
                 if (!col.isValid())
                   col = tb->palette().color(QPalette::WindowText);
               }
-              if (hasFlatIndicator && qAbs(QColor(lspec.normalColor).value() - col.value()) >= MIN_CONTRAST)
+              if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), col))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
               if (inPlasma)
@@ -4808,28 +4846,21 @@ void Kvantum::drawComplexControl(ComplexControl control,
               QWidget *gp = getParent(widget,2);
               if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
               {
-                if (qAbs(QColor(lspec.normalColor).value()
-                         - QColor(getLabelSpec("MenuBar").normalColor).value()) >= MIN_CONTRAST)
-                {
+                if (enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
-                }
               }
               else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                        || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
               {
                 const theme_spec tspec = settings->getThemeSpec();
                 if (!tspec.group_toolbar_buttons
-                    && qAbs(QColor(lspec.normalColor).value()
-                            - QColor(getLabelSpec("Toolbar").normalColor).value()) >= MIN_CONTRAST)
+                    && enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
               }
-              else if (p && qAbs(QColor(lspec.normalColor).value()
-                                 - p->palette().color(p->foregroundRole()).value()) >= MIN_CONTRAST)
-              {
+              else if (p && enoughContrast(QColor(lspec.normalColor), p->palette().color(p->foregroundRole())))
                 dspec.element = "flat-"+dspec.element;
-              }
             }
             fspec.right = fspec.left = 0;
             Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
