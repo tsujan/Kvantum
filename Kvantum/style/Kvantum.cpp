@@ -2789,15 +2789,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
    pushbuttons. This is a method to force the pushbutton text color when the bevel
    is drawn at CE_PushButtonBevel, without forcing any color when the bevel is
    drawn differently, as in Amarok's BreadcrumbItemButton (ElidingButton). */
-void Kvantum::forcePushButtonTextColor(QPushButton *pb) const
+void Kvantum::forcePushButtonTextColor(QPushButton *pb, QColor col) const
 {
-  if (pb && !pb->isFlat()
+  if (col.isValid() && pb && !pb->isFlat()
       && !pb->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
     const label_spec lspec = getLabelSpec("PanelButtonCommand");
-    QColor col(lspec.normalColor);
     QPalette palette = pb->palette();
-    if (col.isValid() && col != palette.color(pb->foregroundRole()))
+    if (col != palette.color(QPalette::ButtonText))
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
@@ -4359,7 +4358,20 @@ void Kvantum::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        forcePushButtonTextColor(pb);
+
+        /* force text color */
+        if (!status.startsWith("disabled"))
+        {
+          QColor col = QColor(lspec.normalColor);
+          if (status.startsWith("pressed"))
+            col = QColor(lspec.pressColor);
+          else if (status.startsWith("toggled"))
+            col = QColor(lspec.toggleColor);
+          else if (option->state & State_MouseOver)
+            col = QColor(lspec.focusColor);
+          forcePushButtonTextColor(pb,col);
+        }
+
         if (pb && pb->isDefault() && !status.startsWith("disabled"))
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
