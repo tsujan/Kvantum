@@ -107,10 +107,10 @@ class Kvantum : public QCommonStyle {
     }
 
     /* A method for forcing the pushbutton text color. */
-    void forcePushButtonTextColor(QPushButton *pb) const;
-    void forcePushButtonTextColor(const QPushButton *pb) const
+    void forcePushButtonTextColor(QPushButton *pb, QColor col) const;
+    void forcePushButtonTextColor(const QPushButton *pb, QColor col) const
     {
-      forcePushButtonTextColor(const_cast<QPushButton*>(pb));
+      forcePushButtonTextColor(const_cast<QPushButton*>(pb), col);
     }
 
 #if QT_VERSION >= 0x050000

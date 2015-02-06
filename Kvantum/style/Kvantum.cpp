@@ -2791,6 +2791,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
    drawn differently, as in Amarok's BreadcrumbItemButton (ElidingButton). */
 void Kvantum::forcePushButtonTextColor(QPushButton *pb, QColor col) const
 {
+  if (!col.isValid())
+    col = QColor(settings->getColorSpec().buttonTextColor);
   if (col.isValid() && pb && !pb->isFlat()
       && !pb->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
