@@ -13,6 +13,7 @@ V0.8.15
  * Don't set the text color of Plasma menu titles to that of their menus when they aren't transparent.
  * Use gray values of colors for checking their contrast.
  * Force view-item text colors when item text is added as a label (as in VLC).
+ * Always return to qApp colors when no valid color is defined.
 
 V0.8.14
 ---------

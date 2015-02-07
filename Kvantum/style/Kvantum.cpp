@@ -490,8 +490,7 @@ void Kvantum::polish(QWidget *widget)
       /* Dolphin sets the background of its KItemListContainer's viewport
          to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
          We force our base color here. */
-      const color_spec cspec = settings->getColorSpec();
-      QColor col = cspec.baseColor;
+      QColor col = settings->getColorSpec().baseColor;
       if (col.isValid())
       {
         QPalette palette = widget->palette();
@@ -1759,8 +1758,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameWindow : {
-      const color_spec cspec = settings->getColorSpec();
-      QColor col = cspec.windowColor;
+      QColor col = QApplication::palette().color(QPalette::Window);
+      if (!col.isValid()) break;
       QRect r = option->rect;
 
       painter->save();
@@ -2737,6 +2736,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             col = lspec.pressColor;
           else if (ivStatus == "toggled")
             col = lspec.toggleColor;
+          if (!col.isValid())
+            col = QApplication::palette().color(QPalette::Text);
           if (col.isValid())
           {
             QPalette palette = iw->palette();
@@ -2792,7 +2793,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 void Kvantum::forcePushButtonTextColor(QPushButton *pb, QColor col) const
 {
   if (!col.isValid())
-    col = QColor(settings->getColorSpec().buttonTextColor);
+    col = QApplication::palette().color(QPalette::ButtonText);
   if (col.isValid() && pb && !pb->isFlat()
       && !pb->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
