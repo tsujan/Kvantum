@@ -714,7 +714,10 @@ void Kvantum::polish(QPalette &palette)
       palette.setColor(QPalette::Active,QPalette::WindowText,col);
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
-    col = cspec.buttonTextColor;
+    if (isLibreoffice)
+      col = getLabelSpec("PanelButtonCommand").normalColor;
+    else
+      col = cspec.buttonTextColor;
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
@@ -3081,9 +3084,16 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_MenuBarItem : {
+      QString group = "MenuBarItem";
+      label_spec lspec = getLabelSpec(group);
+      if (isLibreoffice
+          && enoughContrast(QColor(lspec.normalColor),
+                            QApplication::palette().color(QPalette::WindowText)))
+      {
+        break;
+      }
       const QStyleOptionMenuItem *opt =
           qstyleoption_cast<const QStyleOptionMenuItem *>(option);
-
       if (opt) {
 #if QT_VERSION >= 0x050000
         if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
@@ -3094,13 +3104,11 @@ void Kvantum::drawControl(ControlElement element,
               status.replace(QString("focused"),QString("normal"));
         }
 #endif
-        QString group = "MenuBarItem";
         frame_spec fspec = getFrameSpec(group);
         fspec.hasCapsule = true;
         fspec.capsuleH = 0;
         fspec.capsuleV = 2;
         const interior_spec ispec = getInteriorSpec(group);
-        label_spec lspec = getLabelSpec(group);
         if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
@@ -3148,14 +3156,19 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_MenuBarEmptyArea : {
-        const QString group = "MenuBar";
+      if (isLibreoffice
+          && enoughContrast(QColor(getLabelSpec("MenuBarItem").normalColor),
+                            QApplication::palette().color(QPalette::WindowText)))
+      {
+        break;
+      }
+      const QString group = "MenuBar";
+      const frame_spec fspec = getFrameSpec(group);
+      const interior_spec ispec = getInteriorSpec(group);
 
-        const frame_spec fspec = getFrameSpec(group);
-        const interior_spec ispec = getInteriorSpec(group);
-
-        // NOTE this does not use the status (otherwise always disabled)
-        renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+      // NOTE this does not use the status (otherwise always disabled)
+      renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
 
       break;
     }
