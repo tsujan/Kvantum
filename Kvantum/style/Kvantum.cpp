@@ -333,7 +333,7 @@ static inline QWidget *getParent (const QWidget *widget, int level)
 
 static inline bool enoughContrast (QColor col1, QColor col2)
 {
-  if (!col1.isValid() || !col2.isValid()) return true;
+  if (!col1.isValid() || !col2.isValid()) return false;
   if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
     return false;
   return true;
@@ -715,7 +715,11 @@ void Kvantum::polish(QPalette &palette)
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
     if (isLibreoffice)
+    {
       col = getLabelSpec("PanelButtonCommand").normalColor;
+      if (!col.isValid())
+        col = cspec.buttonTextColor;
+    }
     else
       col = cspec.buttonTextColor;
     if (col.isValid())
@@ -2644,6 +2648,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         aStatus = "pressed";
       else if (option->state & State_MouseOver)
         aStatus = "focused";
+      /* it's disabled in KColorChooser; why? */
+      if (widget && widget->inherits("KSelector") && aStatus == "disabled")
+        aStatus = "pressed";
       if (isInactive)
         aStatus.append(QString("-inactive"));
 
