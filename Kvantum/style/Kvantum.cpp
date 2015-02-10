@@ -2544,6 +2544,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (!(option->state & State_Enabled))
           {
             status = "disabled";
+            if (isInactive)
+              status.append(QString("-inactive"));
             if (!drawRaised)
               painter->restore();
           }
@@ -2589,18 +2591,31 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           painter->restore();
           status = "disabled";
+          if (isInactive)
+            status.append(QString("-inactive"));
         }
       }
 
-      QString aStatus = "normal";
-      if (status.startsWith("disabled"))
-        aStatus = "disabled";
-      else if (status.startsWith("toggled") || status.startsWith("pressed"))
-        aStatus = "pressed";
-      else if (option->state & State_MouseOver)
-        aStatus = "focused";
-      if (isInactive)
-        aStatus.append(QString("-inactive"));
+      QString aStatus;
+      /* distinguish between the toggled and pressed states
+         only if a toggled down arrow element exists */
+      if (themeRndr && themeRndr->isValid()
+          && themeRndr->elementExists(dspec.element+"-toggled"))
+      {
+        aStatus = status;
+      }
+      else
+      {
+        aStatus = "normal";
+        if (status.startsWith("disabled"))
+          aStatus = "disabled";
+        else if (status.startsWith("toggled") || status.startsWith("pressed"))
+          aStatus = "pressed";
+        else if (option->state & State_MouseOver)
+          aStatus = "focused";
+        if (isInactive)
+          aStatus.append(QString("-inactive"));
+      }
       renderIndicator(painter,
                       r,
                       fspec,dspec,dspec.element+"-"+aStatus);
@@ -4354,11 +4369,11 @@ void Kvantum::drawControl(ControlElement element,
         {
           QString aStatus = "normal";
           /* use the "flat" indicator with flat buttons if it exists */
-          if (opt->features & QStyleOptionButton::Flat
-              && themeRndr && themeRndr->isValid()
-              && themeRndr->elementExists("flat-"+dspec.element+"-down-normal"))
+          if (opt->features & QStyleOptionButton::Flat)
           {
-            dspec.element = "flat-"+dspec.element;
+            if (hasFlatIndicator
+                && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::WindowText)))
+              dspec.element = "flat-"+dspec.element;
           }
           else
           {
@@ -4653,15 +4668,25 @@ void Kvantum::drawControl(ControlElement element,
         if (!(opt->features & QStyleOptionToolButton::Arrow) || tialign == Qt::ToolButtonTextOnly)
           break;
 
-        QString aStatus = "normal";
-        if (status.startsWith("disabled"))
-          aStatus = "disabled";
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          aStatus = "pressed";
-        else if (option->state & State_MouseOver)
-          aStatus = "focused";
-        if (isInactive)
-          aStatus.append(QString("-inactive"));
+        QString aStatus;
+        // as with PE_IndicatorButtonDropDown
+        if (themeRndr && themeRndr->isValid()
+            && themeRndr->elementExists(dspec.element+"-down-toggled"))
+        {
+          aStatus = status;
+        }
+        else
+        {
+          aStatus = "normal";
+          if (status.startsWith("disabled"))
+            aStatus = "disabled";
+          else if (status.startsWith("toggled") || status.startsWith("pressed"))
+            aStatus = "pressed";
+          else if (option->state & State_MouseOver)
+            aStatus = "focused";
+          if (isInactive)
+            aStatus.append(QString("-inactive"));
+        }
         if (!opt->text.isEmpty()) // it's empty for QStackedWidget
           r.adjust(lspec.left,lspec.top,-lspec.right,-lspec.bottom);
         switch (opt->arrowType) {
@@ -4870,7 +4895,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            const QString group = "PanelButtonCommand";
+            const QString group = "PanelButtonTool";
             frame_spec fspec = getFrameSpec(group);
             indicator_spec dspec = getIndicatorSpec(group);
             const label_spec lspec = getLabelSpec(group);

@@ -14,6 +14,7 @@ V0.8.15
  * Use gray values of colors for checking their contrast.
  * Force view-item text colors when item text is added as a label (as in VLC).
  * Always return to qApp colors when no valid color is defined.
+ * Distinguish between the toggled and pressed arrow states if a toggled down arrow element exists.
 
 V0.8.14
 ---------

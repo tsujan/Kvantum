@@ -367,13 +367,20 @@ toolbutton</string>
        <item row="2" column="0">
         <widget class="QToolButton" name="toolButton_3">
          <property name="text">
-          <string>Toggle toolbutton</string>
+          <string>Toggle toolbutton
+with an arrow</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
          </property>
          <property name="checked">
           <bool>true</bool>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::LeftArrow</enum>
          </property>
         </widget>
        </item>
@@ -383,13 +390,20 @@ toolbutton</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toggle toolbutton</string>
+          <string>Toggle toolbutton
+with an arrow</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
          </property>
          <property name="checked">
           <bool>true</bool>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::LeftArrow</enum>
          </property>
         </widget>
        </item>
