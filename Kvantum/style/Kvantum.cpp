@@ -1315,7 +1315,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
 
-      if (widget && hasPanel)
+      if (widget && hasPanel && !paneledButtons.contains(widget))
       {
         paneledButtons.insert(widget);
         connect(widget, SIGNAL(destroyed(QObject*)), SLOT(notPaneled(QObject*)));
