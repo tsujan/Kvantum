@@ -26,7 +26,7 @@
 #include <QToolButton>
 #include <QToolBar>
 #include <QMainWindow>
-//#include <QPushButton>
+#include <QPushButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
@@ -967,6 +967,46 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
   return maxTxt;
 }
 
+/* Does the (tool-)button have a panel drawn at PE_PanelButtonCommand?
+   This is used for setting the text color of non-flat, panelless buttons that are
+   already styled, like those in QtCreator's find bar or QupZilla's bookmark toolbar. */
+static QSet<const QWidget*> paneledButtons;
+void Kvantum::notPaneled(QObject *o)
+{
+  QWidget *widget = static_cast<QWidget*>(o);
+  paneledButtons.remove(widget);
+}
+
+/* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text color
+   of their pushbuttons, although those buttons have bevel like ordinary pushbuttons,
+   and digiKam sets the text color of its vertical toolbuttons. This is a method to force
+   the push or tool button text colors when the bevel is drawn at CE_PushButtonBevel or
+   PE_PanelButtonTool, without forcing any color when the bevel is drawn differently, as
+   in Amarok's BreadcrumbItemButton (ElidingButton). */
+void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
+{
+  QAbstractButton *b = qobject_cast<QAbstractButton *>(widget);
+  if (!b) return;
+  if (!col.isValid())
+    col = QApplication::palette().color(QPalette::ButtonText);
+  QPushButton *pb = qobject_cast<QPushButton *>(b);
+  QToolButton *tb = qobject_cast<QToolButton *>(b);
+  if (col.isValid()
+      && (!pb || !pb->isFlat())
+      && (!tb || paneledButtons.contains(widget))
+      && !b->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
+  {
+    const label_spec lspec = getLabelSpec("PanelButtonCommand");
+    QPalette palette = b->palette();
+    if (col != palette.color(QPalette::ButtonText))
+    {
+      palette.setColor(QPalette::Active,QPalette::ButtonText,col);
+      palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
+      b->setPalette(palette);
+    }
+  }
+}
+
 void Kvantum::drawPrimitive(PrimitiveElement element,
                             const QStyleOption *option,
                             QPainter *painter,
@@ -1058,12 +1098,26 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
-      const QString group = "PanelButtonTool";
+      bool hasPanel = false;
 
+      const QString group = "PanelButtonTool";
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+
+      /* force text color */
+      if (!status.startsWith("disabled"))
+      {
+        QColor col = QColor(lspec.normalColor);
+        if (status.startsWith("pressed"))
+          col = QColor(lspec.pressColor);
+        else if (status.startsWith("toggled"))
+          col = QColor(lspec.toggleColor);
+        else if (option->state & State_MouseOver)
+          col = QColor(lspec.focusColor);
+        forceButtonTextColor(widget,col);
+      }
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
@@ -1243,7 +1297,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
+        {
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus);
+          hasPanel = true;
+        }
 
         if (!isHorizontal && !withArrow)
           painter->restore();
@@ -1252,10 +1309,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                || (!status.startsWith("normal") && !status.startsWith("disabled")))
       {
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        hasPanel = true;
       }
 
       if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
+
+      if (widget && hasPanel)
+      {
+        paneledButtons.insert(widget);
+        connect(widget, SIGNAL(destroyed(QObject*)), SLOT(notPaneled(QObject*)));
+      }
 
       break;
     }
@@ -2810,29 +2874,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
   }
 }
 
-/* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text
-   color of their pushbuttons, although those buttons have bevel like ordinary
-   pushbuttons. This is a method to force the pushbutton text color when the bevel
-   is drawn at CE_PushButtonBevel, without forcing any color when the bevel is
-   drawn differently, as in Amarok's BreadcrumbItemButton (ElidingButton). */
-void Kvantum::forcePushButtonTextColor(QPushButton *pb, QColor col) const
-{
-  if (!col.isValid())
-    col = QApplication::palette().color(QPalette::ButtonText);
-  if (col.isValid() && pb && !pb->isFlat()
-      && !pb->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
-  {
-    const label_spec lspec = getLabelSpec("PanelButtonCommand");
-    QPalette palette = pb->palette();
-    if (col != palette.color(QPalette::ButtonText))
-    {
-      palette.setColor(QPalette::Active,QPalette::ButtonText,col);
-      palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
-      pb->setPalette(palette);
-    }
-  }
-}
-
 void Kvantum::drawControl(ControlElement element,
                           const QStyleOption *option,
                           QPainter *painter,
@@ -4338,6 +4379,19 @@ void Kvantum::drawControl(ControlElement element,
         indicator_spec dspec = getIndicatorSpec(group);
         const label_spec lspec = getLabelSpec(group);
 
+        /* force text color */
+        if (!status.startsWith("disabled"))
+        {
+          QColor col = QColor(lspec.normalColor);
+          if (status.startsWith("pressed"))
+            col = QColor(lspec.pressColor);
+          else if (status.startsWith("toggled"))
+            col = QColor(lspec.toggleColor);
+          else if (option->state & State_MouseOver)
+            col = QColor(lspec.focusColor);
+          forceButtonTextColor(widget,col);
+        }
+
         if (!(opt->features & QStyleOptionButton::Flat))
         {
           // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
@@ -4396,20 +4450,6 @@ void Kvantum::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-
-        /* force text color */
-        if (!status.startsWith("disabled"))
-        {
-          QColor col = QColor(lspec.normalColor);
-          if (status.startsWith("pressed"))
-            col = QColor(lspec.pressColor);
-          else if (status.startsWith("toggled"))
-            col = QColor(lspec.toggleColor);
-          else if (option->state & State_MouseOver)
-            col = QColor(lspec.focusColor);
-          forcePushButtonTextColor(pb,col);
-        }
-
         if (pb && pb->isDefault() && !status.startsWith("disabled"))
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
@@ -4438,17 +4478,17 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        bool inPlasma = false;
+        /*bool inPlasma = false;
         QWidget *p = getParent(widget,1);
         if (isPlasma && widget
             && (widget->window()->testAttribute(Qt::WA_NoSystemBackground)
-                /* toolbuttons on PanelController */
+                // toolbuttons on PanelController
                 || (p && p->palette().color(p->backgroundRole()) == QColor(Qt::transparent))))
         {
           inPlasma = true;
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-        }
+        }*/
 
         /* where there may not be enough space,
            especially in KDE new-stuff dialogs */
@@ -4483,7 +4523,8 @@ void Kvantum::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          if (tb->autoRaise() || inPlasma)
+          QWidget *p = getParent(widget,1);
+          if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
             QWidget *gp = getParent(widget,2);
             if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
@@ -4507,8 +4548,11 @@ void Kvantum::drawControl(ControlElement element,
             }
             else if (p)
             {
-              QPalette palette = p->palette();
-              QColor col = palette.color(p->foregroundRole());
+              QColor col;
+              if (!tb->autoRaise() && !paneledButtons.contains(widget)) // an already styled toolbutton
+                col = opt->palette.color(QPalette::ButtonText);
+              else
+                col = p->palette().color(p->foregroundRole());
               if (!col.isValid())
               {
                 const color_spec cspec = settings->getColorSpec();
@@ -4519,7 +4563,7 @@ void Kvantum::drawControl(ControlElement element,
               if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), col))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
-              if (inPlasma)
+              if (/*inPlasma ||*/ !paneledButtons.contains(widget))
               {
                 lspec.focusColor = col.name();
                 lspec.toggleColor = col.name();
@@ -4631,6 +4675,7 @@ void Kvantum::drawControl(ControlElement element,
         {
           iAlignment |= Qt::AlignHCenter;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
         }
         else
         {

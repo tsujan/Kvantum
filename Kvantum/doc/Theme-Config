@@ -29,9 +29,7 @@ Section                                      Meaning
                                              some general variables.
 
 [GeneralColors]                              The most important colors used
-                                             by the theme. Not necessary but
-                                             good for independence from
-                                             Qt color schemes outside KDE.
+                                             by the theme.
 
 [Hacks]                                      Hacks for specific apps or widgets.
 

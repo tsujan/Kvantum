@@ -19,7 +19,6 @@
 #define KVANTUM_H
 
 #include <QCommonStyle>
-#include <QPushButton>
 #include <QString>
 #include <QMap>
 
@@ -106,11 +105,11 @@ class Kvantum : public QCommonStyle {
       setSurfaceFormat(const_cast<QWidget*>(w));
     }
 
-    /* A method for forcing the pushbutton text color. */
-    void forcePushButtonTextColor(QPushButton *pb, QColor col) const;
-    void forcePushButtonTextColor(const QPushButton *pb, QColor col) const
+    /* A method for forcing (push and tool) button text colors. */
+    void forceButtonTextColor(QWidget *widget, QColor col) const;
+    void forceButtonTextColor(const QWidget *widget, QColor col) const
     {
-      forcePushButtonTextColor(const_cast<QPushButton*>(pb), col);
+      forceButtonTextColor(const_cast<QWidget*>(widget), col);
     }
 
 #if QT_VERSION >= 0x050000
@@ -231,6 +230,8 @@ class Kvantum : public QCommonStyle {
     void advanceProgresses();
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
+    /* Removes a (tool-)button from the list of paneled ones. */
+    void notPaneled(QObject *o);
 
   private:
     QSvgRenderer *defaultRndr, *themeRndr;
