@@ -1127,7 +1127,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       }
 
       // -> CE_ToolButtonLabel
-      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -1156,7 +1156,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       QRect r = option->rect;
 
       /* this is just for tabbar scroll buttons */
-      if (qobject_cast<const QTabBar*>(getParent(widget,1)))
+      if (qobject_cast<QTabBar*>(getParent(widget,1)))
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
 
       bool drawRaised = false;
@@ -1331,7 +1331,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       label_spec lspec = getLabelSpec(group);
 
       // -> CE_ToolButtonLabel
-      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -2047,7 +2047,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
-      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1))
+      if (qobject_cast<QAbstractSpinBox*>(getParent(widget,1))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
         fspec.hasCapsule = true;
@@ -2059,7 +2059,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
         // -> CC_SpinBox
-        else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
           if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
@@ -2069,7 +2069,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
@@ -2152,11 +2152,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
       /* no frame when editing itemview texts */
-      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
-      if (qobject_cast<const QAbstractSpinBox*>(getParent(widget,1))
+      if (qobject_cast<QAbstractSpinBox*>(getParent(widget,1))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
         fspec.hasCapsule = true;
@@ -2168,7 +2168,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
         // -> CC_SpinBox
-        else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
           if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
@@ -2178,7 +2178,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      else if (const QComboBox *cb = qobject_cast<const QComboBox*>(getParent(widget,1)))
+      else if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(widget,1)))
       {
         fspec.hasCapsule = true;
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
@@ -4286,6 +4286,12 @@ void Kvantum::drawControl(ControlElement element,
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         }
+        else if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          lspec.tispace = qMin(lspec.tispace,3);
+        }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
         if (!status.startsWith("disabled") && pb && pb->isDefault()) {
@@ -4374,10 +4380,10 @@ void Kvantum::drawControl(ControlElement element,
 
       if (opt) {
         const QString group = "PanelButtonCommand";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
 
         /* force text color */
         if (!status.startsWith("disabled"))
@@ -4390,6 +4396,13 @@ void Kvantum::drawControl(ControlElement element,
           else if (option->state & State_MouseOver)
             col = QColor(lspec.focusColor);
           forceButtonTextColor(widget,col);
+        }
+
+        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          lspec.tispace = qMin(lspec.tispace,3);
         }
 
         if (!(opt->features & QStyleOptionButton::Flat))
@@ -4492,7 +4505,7 @@ void Kvantum::drawControl(ControlElement element,
 
         /* where there may not be enough space,
            especially in KDE new-stuff dialogs */
-        if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -4970,7 +4983,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
             fspec.right = fspec.left = 0;
             Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
             // -> CE_ToolButtonLabel
-            if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+            if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
             {
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
@@ -5922,7 +5935,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       /* make exception for menuitems and viewitems */
       if (isLibreoffice
           || qstyleoption_cast<const QStyleOptionMenuItem *>(option)
-          || qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+          || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),
                     tspec.check_size);
@@ -6269,9 +6282,16 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         const QString group = "PanelButtonCommand";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        frame_spec fspec = getFrameSpec(group);
+        label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
+
+        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          lspec.tispace = qMin(lspec.tispace,3);
+        }
 
        /*
           Like with CT_ToolButton, don't use sizeCalculated()!
@@ -6479,7 +6499,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
 
         // -> CE_ToolButtonLabel
-        if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -6918,7 +6938,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       /* no frame when editing itemview texts */
-      if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
@@ -6931,7 +6951,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
-      else if (const QAbstractSpinBox *p = qobject_cast<const QAbstractSpinBox*>(getParent(widget,1)))
+      else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
         const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
         if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
@@ -7520,7 +7540,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 indicator_spec dspec = getIndicatorSpec(group);
                 label_spec lspec = getLabelSpec(group);
                 // -> CE_ToolButtonLabel
-                if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
                 {
                   fspec.left = qMin(fspec.left,3);
                   fspec.right = qMin(fspec.right,3);
@@ -7604,7 +7624,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 frame_spec fspec = getFrameSpec(group);
                 indicator_spec dspec = getIndicatorSpec(group);
                 // -> CE_ToolButtonLabel
-                if (qobject_cast<const QAbstractItemView*>(getParent(widget,2)))
+                if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
                 {
                   fspec.left = qMin(fspec.left,3);
                   fspec.right = qMin(fspec.right,3);

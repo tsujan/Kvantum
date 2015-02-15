@@ -8,6 +8,7 @@ V0.8.15
  * Don't give the button text colors to those plasma toolbuttons that pretend to have only icons but have texts.
  * Use Plasma foreground color for Plasma toolbutton text.
  * Set limits on lineedit frame size when needed.
+ * Set limits on pushbutton sizes inside a view-item.
  * A better criterion for deciding if a widget belongs to Plasma.
  * Force the (push and tool) button text colors.
  * Don't set the text color of Plasma menu titles to that of their menus when they aren't transparent.
