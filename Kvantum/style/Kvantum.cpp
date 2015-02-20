@@ -375,6 +375,7 @@ void Kvantum::polish(QWidget *widget)
     {
       QWidget *gp = getParent(widget,2);
       if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+           && !qobject_cast<QLineEdit*>(widget)
            && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(getParent(widget,1))) // Krita, Amarok
           || (widget->inherits("AnimatedLabelStack") // Amarok
               && qobject_cast<QToolBar*>(gp)
