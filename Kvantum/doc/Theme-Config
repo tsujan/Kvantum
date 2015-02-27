@@ -174,6 +174,11 @@ double_click                      true/false          Activate view items on dou
                                                       the KDE setting has priority
                                                       over the default.
 
+vertical_spin_indicators          true/false          Draw spin indicators vertically
+                                                      and inside the spin line-edit?
+                                                      By default, they are drawn on
+                                                      adjacent buttons.
+
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 

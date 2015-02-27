@@ -431,6 +431,7 @@ void KvantumManager::defaultThemeButtons()
     ui->comboToolButton->setCurrentIndex (index);
     ui->checkBoxX11->setChecked (defaultSettings.value ("x11drag").toBool());
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
+    ui->checkBoxSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
     if (composited)
     {
         bool translucency = defaultSettings.value ("translucent_windows").toBool();
@@ -590,6 +591,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxX11->setChecked (themeSettings.value ("x11drag").toBool());
                 if (themeSettings.contains ("double_click"))
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
+                if (themeSettings.contains ("vertical_spin_indicators"))
+                    ui->checkBoxSpin->setChecked (themeSettings.value ("vertical_spin_indicators").toBool());
                 if (composited)
                 {
                     bool translucency = false;
@@ -906,6 +909,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
+        themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxSpin->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
@@ -1015,7 +1019,7 @@ void KvantumManager::popupBlurring (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.15</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.16</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>"));

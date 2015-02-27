@@ -92,6 +92,9 @@ typedef struct {
   /* width and height of checkbox
      and radio button indicators */
   int check_size;
+  /* draw spin indicators vertically
+     and inside the spin line-edit? */
+  bool vertical_spin_indicators;
 } theme_spec;
 
 /* General colors */
@@ -281,6 +284,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
+  tspec.vertical_spin_indicators = false;
 }
 
 static inline void default_color_spec(color_spec &cspec) {

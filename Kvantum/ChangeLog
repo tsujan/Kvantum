@@ -1,3 +1,7 @@
+V0.8.16
+---------
+ * A new key for drawng spin indicators vertically inside the spin line-edit.
+
 V0.8.15
 ---------
  * Added the possibility of having high contrast between the colors of buttons, toolbars and menubars, on the one hand, and generic containers, on the other hand.

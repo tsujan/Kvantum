@@ -2060,13 +2060,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
         // -> CC_SpinBox
-        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        else if (!settings->getThemeSpec().vertical_spin_indicators)
         {
-          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+            {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
           }
         }
       }
@@ -2169,13 +2172,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
         // -> CC_SpinBox
-        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        else if (!settings->getThemeSpec().vertical_spin_indicators)
         {
-          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            }
           }
         }
       }
@@ -2298,22 +2304,27 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (element == PE_IndicatorSpinMinus || element == PE_IndicatorSpinDown)
         up = false;
 
+      const theme_spec tspec = settings->getThemeSpec();
       const QString group = "IndicatorSpinBox";
 
-      frame_spec fspec = getFrameSpec(group);
-      fspec.hasCapsule = true;
-      if (up)
+      frame_spec fspec;
+      if (!tspec.vertical_spin_indicators)
       {
-        fspec.capsuleH = 1;
-        fspec.capsuleV = 2;
+        fspec = getFrameSpec(group);
+        fspec.hasCapsule = true;
+        if (up)
+        {
+          fspec.capsuleH = 1;
+          fspec.capsuleV = 2;
+        }
+        else
+        {
+          fspec.capsuleH = 0;
+          fspec.capsuleV = 2;
+        }
       }
       else
-      {
-        fspec.capsuleH = 0;
-        fspec.capsuleV = 2;
-      }
-      const interior_spec ispec = getInteriorSpec(group);
-      indicator_spec dspec = getIndicatorSpec(group);
+        fspec = getFrameSpec("LineEdit");
 
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice)
@@ -2321,7 +2332,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
       }
       // -> CC_SpinBox
-      else if (opt)
+      else if (opt && !tspec.vertical_spin_indicators)
       {
         if (up)
         {
@@ -2381,25 +2392,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
       }
 
-      QString iString; // indicator string
-      if (element == PE_IndicatorSpinPlus) iString = "-plus-";
-      else if (element == PE_IndicatorSpinMinus) iString = "-minus-";
-      else if (element == PE_IndicatorSpinUp) iString = "-up-";
-      else  iString = "-down-";
-
-      QRect r = option->rect;
-
-      if (bStatus.startsWith("disabled"))
-      {
-        bStatus.replace(QString("disabled"),QString("normal"));
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      renderFrame(painter,r,fspec,fspec.element+"-"+bStatus);
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus);
-      if (!(option->state & State_Enabled))
-        painter->restore();
-
       /* a workaround for LibreOffice;
          also see subControlRect() -> CC_SpinBox */
       if (isLibreoffice)
@@ -2409,10 +2401,41 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else iString = "-minus-";*/
       }
 
+      QString iString; // indicator string
+      if (element == PE_IndicatorSpinPlus) iString = "-plus-";
+      else if (element == PE_IndicatorSpinMinus) iString = "-minus-";
+      else if (element == PE_IndicatorSpinUp) iString = "-up-";
+      else  iString = "-down-";
+
+      QRect r = option->rect;
+
+      if (!tspec.vertical_spin_indicators)
+      {
+        if (bStatus.startsWith("disabled"))
+        {
+          bStatus.replace(QString("disabled"),QString("normal"));
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+        const interior_spec ispec = getInteriorSpec(group);
+        renderFrame(painter,r,fspec,fspec.element+"-"+bStatus);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus);
+        if (!(option->state & State_Enabled))
+          painter->restore();
+      }
+
       // horizontally center both indicators
       fspec.left = 0;
-      if (!up)
-        fspec.right = 0;
+      if (!tspec.vertical_spin_indicators)
+      {
+        if (!up) fspec.right = 0;
+      }
+      else
+      {
+        if (up) fspec.bottom = 0;
+        else fspec.top = 0;
+      }
+      const indicator_spec dspec = getIndicatorSpec(group);
       renderIndicator(painter,
                       r,
                       fspec,dspec,
@@ -5036,13 +5059,37 @@ void Kvantum::drawComplexControl(ComplexControl control,
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
 
-        if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows) {
+        if (settings->getThemeSpec().vertical_spin_indicators)
+        {
+          const interior_spec ispec = getInteriorSpec("LineEdit");
+          frame_spec fspec = getFrameSpec("LineEdit");
+          fspec.hasCapsule = true;
+          fspec.capsuleH = 1;
+          fspec.capsuleV = 2;
+          QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
+          r.setHeight(subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget).height());
+          QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
+          if (isInactive)
+            leStatus .append(QString("-inactive"));
+          if (status.startsWith("disabled"))
+          {
+            painter->save();
+            painter->setOpacity(DISABLED_OPACITY);
+          }
+          renderFrame(painter,r,fspec,fspec.element+"-"+leStatus);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+leStatus);
+          if (!(option->state & State_Enabled))
+            painter->restore();
+        }
+        if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows)
+        {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           drawPrimitive(PE_IndicatorSpinUp,&o,painter,widget);
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget);
           drawPrimitive(PE_IndicatorSpinDown,&o,painter,widget);
         }
-        else if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus) {
+        else if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus)
+        {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           drawPrimitive(PE_IndicatorSpinPlus,&o,painter,widget);
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget);
@@ -6212,31 +6259,38 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         else
           s = defaultSize;
       }*/
+      const theme_spec tspec = settings->getThemeSpec();
       const frame_spec fspec = getFrameSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
 #if QT_VERSION < 0x050000
-      s = defaultSize + QSize(fspec.left + fspec1.right,
-                              (fspec1.top > fspec.top ? fspec1.top : 0)
-                               + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0));
+      s = defaultSize + QSize(fspec.left + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
+                              tspec.vertical_spin_indicators ? 0 : ((fspec1.top > fspec.top ? fspec1.top : 0)
+                                                                 + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0)));
 
       /* This is a workaround for some apps (like Kdenlive with its
          TimecodeDisplay) that presuppose all spinboxes should have
          vertical buttons and set an insufficient minimum width for them. */
-      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
+      if (!tspec.vertical_spin_indicators)
       {
-        if (sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
-          s.rwidth() = sb->minimumWidth() + 2*SPIN_BUTTON_WIDTH;
+        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
+        {
+          if (sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
+            s.rwidth() = sb->minimumWidth() + 2*SPIN_BUTTON_WIDTH;
+        }
       }
 #else
       /* Qt4 added 35px to the width of contentsSize
          but Qt5 doesn't (-> qabstractspinbox.cpp) */
-      s = defaultSize + QSize(fspec.left + fspec1.right + SPIN_BUTTON_WIDTH,
-                              (fspec1.top > fspec.top ? fspec1.top : 0)
-                               + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0));
-      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
+      s = defaultSize + QSize(fspec.left + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right + SPIN_BUTTON_WIDTH),
+                              tspec.vertical_spin_indicators ? 0 : ((fspec1.top > fspec.top ? fspec1.top : 0)
+                                                                 + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0)));
+      if (!tspec.vertical_spin_indicators)
       {
-        if (sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
-          s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
+        {
+          if (sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
+            s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+        }
       }
 #endif
 
@@ -6952,13 +7006,16 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
-      else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+      else if (!settings->getThemeSpec().vertical_spin_indicators)
       {
-        const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-        if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-            || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+        if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
         {
+          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+          if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          }
         }
       }
       QRect rect = interiorRect(option->rect, fspec);
@@ -7182,29 +7239,36 @@ QRect Kvantum::subControlRect(ComplexControl control,
     case CC_SpinBox : {
       int sw = SPIN_BUTTON_WIDTH; // spin button width
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
+      const frame_spec fspecLE = getFrameSpec("LineEdit");
+      const theme_spec tspec = settings->getThemeSpec();
 
-      // a workaround for LibreOffice
-      if (isLibreoffice)
+      if (!tspec.vertical_spin_indicators)
       {
-        sw = 12;
-        fspec.right = qMin(fspec.right,3);
-      }
-      /* I've seen this only in Pencil */
-      else if (const QAbstractSpinBox *w = qobject_cast<const QAbstractSpinBox*>(widget))
-      {
-        QString maxTxt = spinMaxText(w);
-        if (!maxTxt.isEmpty())
+        // a workaround for LibreOffice
+        if (isLibreoffice)
         {
-          int txtWidth = textSize(w->font(),maxTxt).width();
-          const frame_spec fspecLE = getFrameSpec("LineEdit");
-          if (w->width() < txtWidth+2*sw+fspec.right+fspecLE.left
-              && w->width() >= txtWidth+2*10+3+3) // otherwise wouldn't help
+          sw = 12;
+          fspec.right = qMin(fspec.right,3);
+        }
+        /* I've seen this only in Pencil */
+        else if (const QAbstractSpinBox *w = qobject_cast<const QAbstractSpinBox*>(widget))
+        {
+          QString maxTxt = spinMaxText(w);
+          if (!maxTxt.isEmpty())
           {
-            sw = 10;
-            fspec.right = qMin(fspec.right,3);
+            int txtWidth = textSize(w->font(),maxTxt).width();
+            if (w->width() < txtWidth+2*sw+fspec.right+fspecLE.left
+                && w->width() >= txtWidth+2*10+3+3) // otherwise wouldn't help
+            {
+              sw = 10;
+              fspec.right = qMin(fspec.right,3);
+            }
           }
         }
       }
+
+      if (tspec.vertical_spin_indicators)
+        fspec = fspecLE;
 
       // take into account the right frame width
       switch (subControl) {
@@ -7213,18 +7277,24 @@ QRect Kvantum::subControlRect(ComplexControl control,
         case SC_SpinBoxEditField :
           return QRect(x,
                        y,
-                       w - (sw + fspec.right) - sw,
+                       w - (sw + fspec.right) - (tspec.vertical_spin_indicators ? 0 : sw),
                        h);
         case SC_SpinBoxUp :
           return QRect(x + w - (sw + fspec.right),
                        y,
                        sw + fspec.right,
-                       h);
+                       tspec.vertical_spin_indicators ? h/2 + (h%2 ? 1 : 0) : h);
         case SC_SpinBoxDown :
-          return QRect(x + w - (sw + fspec.right) - sw,
-                       y,
-                       sw,
-                       h);
+          if (!tspec.vertical_spin_indicators)
+            return QRect(x + w - (sw + fspec.right) - sw,
+                         y,
+                         sw,
+                         h);
+          else
+            return QRect(x + w - (sw + fspec.right),
+                         y + h/2,
+                         sw + fspec.right,
+                         h/2 + (h%2 ? 1 : 0));
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
       }

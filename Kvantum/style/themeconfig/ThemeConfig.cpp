@@ -420,6 +420,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.check_size = v.toInt();
 
+  v = getValue("General","vertical_spin_indicators");
+  r.vertical_spin_indicators = v.toBool();
+
   return r;
 }
 
