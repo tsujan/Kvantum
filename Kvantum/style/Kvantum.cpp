@@ -2992,7 +2992,7 @@ void Kvantum::drawControl(ControlElement element,
           {
             int checkSpace = 0;
             if (opt->menuHasCheckableItems)
-              checkSpace = iw + lspec.tispace + 2; // we add a 2px left margin at CT_MenuItem
+              checkSpace = iw + lspec.tispace;
             int iconSpace = 0;
             if (opt->maxIconWidth)
               iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
@@ -3064,10 +3064,9 @@ void Kvantum::drawControl(ControlElement element,
                                  QSize(iw,ih),
                                  isLibreoffice ?
                                    opt->rect.adjusted(6,-2,0,0) // FIXME why?
-                                     /* we add a 2px left margin at CT_MenuItem */
-                                   : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : 2,
+                                   : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
                                                                             0,
-                                                                            rtl ? -2 : 0,
+                                                                            rtl ? -lspec.right : 0,
                                                                             0));
             if (opt->checkType == QStyleOptionMenuItem::Exclusive)
             {
@@ -6506,7 +6505,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         if (opt->menuHasCheckableItems)
         {
           int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
-          s.rwidth() += cSize + lspec.tispace + 2; // 2px for the left margin
+          s.rwidth() += cSize + lspec.tispace;
           /* for the height, see if there's really a check/radio button */
           if (opt->checkType == QStyleOptionMenuItem::Exclusive
               || opt->checkType == QStyleOptionMenuItem::NonExclusive)

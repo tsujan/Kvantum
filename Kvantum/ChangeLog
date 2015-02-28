@@ -1,6 +1,7 @@
 V0.8.16
 ---------
  * A new key for drawng spin indicators vertically inside the spin line-edit.
+ * The left (or right for RTL) text margin of menuitems also includes their checkboxes and radiobuttons now.
 
 V0.8.15
 ---------
