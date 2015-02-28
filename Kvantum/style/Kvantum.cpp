@@ -5761,9 +5761,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       const frame_spec fspec = getFrameSpec("Menu");
 
       int v = qMax(fspec.top,fspec.bottom);
-      v += tspec.menu_shadow_depth;
       int h = qMax(fspec.left,fspec.right);
-      h += tspec.menu_shadow_depth;
+      if (tspec.composite
+          && (!qobject_cast<const QMenu*>(widget) || translucentWidgets.contains(widget)))
+      {
+        v += tspec.menu_shadow_depth;
+        h += tspec.menu_shadow_depth;
+      }
       /* a margin > 2px could create ugly
          corners without compositing */
       if (/*!tspec.composite ||*/ isLibreoffice
@@ -5980,13 +5984,17 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       const frame_spec fspec = getFrameSpec("ToolTip");
 
       int v = qMax(fspec.top,fspec.bottom);
-      v += tspec.tooltip_shadow_depth;
       int h = qMax(fspec.left,fspec.right);
-      h += tspec.tooltip_shadow_depth;
+      if (tspec.composite
+          && (!widget || translucentWidgets.contains(widget)))
+      {
+        v += tspec.tooltip_shadow_depth;
+        h += tspec.tooltip_shadow_depth;
+      }
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (!tspec.composite || isLibreoffice
-          || (widget && !translucentWidgets.contains(widget)))
+      if (/*!tspec.composite ||*/ isLibreoffice
+          /*|| (widget && !translucentWidgets.contains(widget))*/)
       {
         v = qMin(2,v);
         h = qMin(2,h);

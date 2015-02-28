@@ -2,7 +2,7 @@ V0.8.16
 ---------
  * A new key for drawng spin indicators vertically inside the spin line-edit.
  * The left (or right for RTL) text margin of menuitems also includes their checkboxes and radiobuttons now.
- * Removed the 2-px limit from menu frame thickness without compositing.
+ * Removed the 2-px frame thickness limit from menus and tooltips without compositing.
  * Allow different thicknesses for horizontal and vertical menu frames.
  * Added a hacking variable for drawing KDE capacity bars as progressbars.
 
