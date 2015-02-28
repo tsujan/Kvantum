@@ -153,7 +153,7 @@ Kvantum::Kvantum() : QCommonStyle()
 
   if (tspec.blurring)
   {
-    QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin));
+    QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
     QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
     blurHelper = new BlurHelper(this,menuS,tooltipS);
   }
@@ -285,7 +285,7 @@ void Kvantum::advanceProgresses()
   }
 }
 
-QList<int> Kvantum::getShadow (const QString &widgetName, int thickness)
+QList<int> Kvantum::getShadow (const QString &widgetName, int thicknessH, int thicknessV)
 {
   QSvgRenderer *renderer = 0;
   int divisor = 0;
@@ -313,7 +313,7 @@ QList<int> Kvantum::getShadow (const QString &widgetName, int thickness)
       if (renderer)
       {
         br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-        shadow[i] = thickness*((i%2 ? br.height() : br.width())/divisor);
+        shadow[i] = i%2 ? thicknessV*(br.height()/divisor) : thicknessH*(br.width()/divisor);
       }
     }
   }
@@ -584,7 +584,7 @@ void Kvantum::polish(QWidget *widget)
 #if defined Q_WS_X11 || defined Q_OS_LINUX
         if (!blurHelper && tspec.popup_blurring)
         {
-          QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin));
+          QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
           QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
           blurHelper = new BlurHelper(this,menuS,tooltipS);
         }
@@ -1810,9 +1810,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      /* no reason to have different sizes for
-         different parts of the menu frame */
-      fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_MenuHMargin,option,widget);
+      fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
+      fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
       const theme_spec tspec = settings->getThemeSpec();
       if (tspec.menu_shadow_depth > 0
@@ -2933,10 +2932,10 @@ void Kvantum::drawControl(ControlElement element,
     case CE_MenuTearoff : {
       status = (option->state & State_Selected) ? "focused" : "normal";
       // see PM_MenuTearoffHeight and also PE_PanelMenu
-      int margin = pixelMetric(PM_MenuHMargin);
-      QRect r(option->rect.x() + margin,
-              option->rect.y() + margin,
-              option->rect.width() - 2*margin,
+      int marginH = pixelMetric(PM_MenuHMargin);
+      QRect r(option->rect.x() + marginH,
+              option->rect.y() + pixelMetric(PM_MenuVMargin),
+              option->rect.width() - 2*marginH,
               7);
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
       renderElement(painter,
@@ -5747,8 +5746,8 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       h += tspec.menu_shadow_depth;
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (!tspec.composite || isLibreoffice
-          || (qobject_cast<const QMenu*>(widget) && !translucentWidgets.contains(widget)))
+      if (/*!tspec.composite ||*/ isLibreoffice
+          /*|| (qobject_cast<const QMenu*>(widget) && !translucentWidgets.contains(widget))*/)
       {
         v = qMin(2,v);
         h = qMin(2,h);
@@ -5782,14 +5781,15 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
 
       if (metric == PM_MenuTearoffHeight)
         /* we set the height of tearoff indicator to be 7px */
-        return qMax(v,h) + 7;
-      else
-        return qMax(v,h);
+        return v + 7;
+      else if (metric == PM_MenuHMargin)
+        return h;
+      else return v;
     }
 
     case PM_MenuScrollerHeight : {
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
-      return qMax(8,dspec.size);
+      return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
 
     case PM_ToolBarFrameWidth :
