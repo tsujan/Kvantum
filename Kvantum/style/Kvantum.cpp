@@ -2928,7 +2928,7 @@ void Kvantum::drawControl(ControlElement element,
   const QIcon::State iconstate =
       (option->state & State_On) ? QIcon::On : QIcon::Off;
 
-  switch (element) {
+  switch ((unsigned)element) { // unsigned because of CE_Kv_KCapacityBar
     case CE_MenuTearoff : {
       status = (option->state & State_Selected) ? "focused" : "normal";
       // see PM_MenuTearoffHeight and also PE_PanelMenu
@@ -3848,6 +3848,8 @@ void Kvantum::drawControl(ControlElement element,
           // don't draw frames if there isn't enough space
           if (r.width() <= fspec.left+fspec.right)
             fspec.left = fspec.right = 0;
+          if (r.height() <= fspec.top+fspec.bottom)
+            fspec.top = fspec.bottom = 0;
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         }
@@ -4906,6 +4908,24 @@ void Kvantum::drawControl(ControlElement element,
         {
           QCommonStyle::drawControl(element,option,painter,widget);
         }
+      }
+
+      break;
+    }
+
+    case CE_Kv_KCapacityBar : {
+      if (const QStyleOptionProgressBar *opt = qstyleoption_cast<const QStyleOptionProgressBar*>(option))
+      {
+        QStyleOptionProgressBar o(*opt);
+        const theme_spec tspec = settings->getThemeSpec();
+        frame_spec fspec = getFrameSpec("Progressbar");
+        drawControl(CE_ProgressBarGroove, &o, painter, widget);
+        if (!tspec.spread_progressbar)
+          o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
+        drawControl(CE_ProgressBarContents, &o, painter, widget);
+        if (!tspec.spread_progressbar)
+          o.rect.adjust(-fspec.left, -fspec.top, fspec.right, fspec.bottom);
+        drawControl(CE_ProgressBarLabel, &o, painter, widget);
       }
 
       break;
@@ -6167,7 +6187,14 @@ int Kvantum::styleHint(StyleHint hint,
 
     //case SH_SpinControls_DisableOnBounds: return true;
 
-    default : return QCommonStyle::styleHint(hint,option,widget,returnData);
+    default : {
+      if (hint >= SH_CustomBase && settings->getHacksSpec().kcapacitybar_as_progressbar
+          && widget && widget->objectName() == "CE_CapacityBar")
+      {
+        return CE_Kv_KCapacityBar;
+      }
+      return QCommonStyle::styleHint(hint,option,widget,returnData);
+    }
   }
 }
 

@@ -38,14 +38,6 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="page">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>357</width>
-         <height>132</height>
-        </rect>
-       </property>
        <attribute name="label">
         <string>Install/Update Theme</string>
        </attribute>
@@ -151,14 +143,6 @@ Kvantum can use in addition to its default theme.</string>
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>359</width>
-         <height>238</height>
-        </rect>
-       </property>
        <attribute name="label">
         <string>Change/Delete Theme</string>
        </attribute>
@@ -278,14 +262,6 @@ this theme instead of its default theme.</string>
        </layout>
       </widget>
       <widget class="QWidget" name="page_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>675</width>
-         <height>317</height>
-        </rect>
-       </property>
        <attribute name="label">
         <string>Configure Active Theme</string>
        </attribute>
@@ -631,18 +607,6 @@ Automatically checked if window blurring is enabled.</string>
         </item>
         <item row="3" column="0">
          <widget class="QGroupBox" name="groupBox">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
           <property name="font">
            <font>
             <bold>true</bold>
@@ -718,6 +682,21 @@ screens of Konsole and Yakuake if possible.</string>
              </property>
              <property name="text">
               <string>Transparent menu title</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxKCapacity">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Style KDE capacity bars as progressbars.</string>
+             </property>
+             <property name="text">
+              <string>Show KCapacityBar as progressbar</string>
              </property>
             </widget>
            </item>

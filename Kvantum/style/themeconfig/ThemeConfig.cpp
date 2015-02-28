@@ -509,6 +509,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","transparent_menutitle");
   r.transparent_menutitle = v.toBool();
 
+  v = getValue("Hacks","kcapacitybar_as_progressbar");
+  r.kcapacitybar_as_progressbar = v.toBool();
+
   v = getValue("Hacks","respect_darkness");
   r.respect_darkness = v.toBool();
 

@@ -4,6 +4,7 @@ V0.8.16
  * The left (or right for RTL) text margin of menuitems also includes their checkboxes and radiobuttons now.
  * Removed the 2-px limit from menu frame thickness without compositing.
  * Allow different thicknesses for horizontal and vertical menu frames.
+ * Added a hacking variable for drawing KDE capacity bars as progressbars.
 
 V0.8.15
 ---------

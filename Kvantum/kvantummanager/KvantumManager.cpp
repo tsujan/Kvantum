@@ -407,6 +407,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxKonsole->setChecked (defaultSettings.value ("blur_konsole").toBool());
     ui->checkBoxKtitle->setChecked (defaultSettings.value ("transparent_ktitle_label").toBool());
     ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
+    ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
     defaultSettings.endGroup();
 
@@ -449,7 +450,7 @@ void KvantumManager::defaultThemeButtons()
     defaultSettings.endGroup();
 }
 /*************************/
-void KvantumManager::resizeConfPage()
+void KvantumManager::resizeConfPage (bool thirdPage)
 {
   int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent);
   bool le = true;
@@ -459,7 +460,11 @@ void KvantumManager::resizeConfPage()
       ui->opaqueEdit->setEnabled (true);
   }
   resize (size().expandedTo (sizeHint()
-                             + ui->comboToolButton->minimumSizeHint()
+                             + (thirdPage ?
+                                  ui->checkBoxKCapacity->minimumSizeHint() - ui->checkBoxDolphin->minimumSizeHint()
+                                  + ui->comboToolButton->minimumSizeHint()
+                                  + QSize (0, 6*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
+                                  : QSize())
                              + QSize (extra + ui->opaqueEdit->sizeHint().width()
                                             + 3*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13),
                                       extra)));
@@ -468,6 +473,7 @@ void KvantumManager::resizeConfPage()
 /*************************/
 void KvantumManager::tabChanged (int index)
 {
+    bool thirdPage (index == 2);
     ui->statusBar->clearMessage();
     if (index == 0)
         showAnimated (ui->installLabel, 1000);
@@ -550,7 +556,7 @@ void KvantumManager::tabChanged (int index)
                 /* ... only if it isn't a root theme */
                 if (!QFile::exists (userSvg) && QFile::exists (rootSvg))
                 {
-                    resizeConfPage();
+                    resizeConfPage (true);
                     return;
                 }
                 copyDefaultTheme (QString(), kvconfigTheme);
@@ -617,12 +623,13 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxKonsole->setChecked (themeSettings.value ("blur_konsole").toBool());
                 ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
+                ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 themeSettings.endGroup();
             }
         }
     }
-    resizeConfPage();
+    resizeConfPage (thirdPage);
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
@@ -889,6 +896,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("blur_konsole", ui->checkBoxKonsole->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
+        themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
         themeSettings.endGroup();
 
@@ -941,7 +949,7 @@ void KvantumManager::writeConfig()
         if (translucenceChanged)
         {
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
-            resizeConfPage();
+            resizeConfPage (true);
         }
         if (process->state() == QProcess::Running)
           preview();
@@ -979,7 +987,7 @@ void KvantumManager::restoreDefault()
                                 10000);
 
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
-    resizeConfPage();
+    resizeConfPage (true);
     if (process->state() == QProcess::Running)
       preview();
 }

@@ -39,6 +39,7 @@ class ThemeConfig;
 
 class Kvantum : public QCommonStyle {
   Q_OBJECT
+  Q_CLASSINFO("X-KDE-CustomElements","true")
 
   public:
     Kvantum();
@@ -111,6 +112,10 @@ class Kvantum : public QCommonStyle {
     {
       forceButtonTextColor(const_cast<QWidget*>(widget), col);
     }
+
+    enum CustomElements {
+      CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
+    };
 
 #if QT_VERSION >= 0x050000
     QIcon standardIcon (StandardPixmap standardIcon,
