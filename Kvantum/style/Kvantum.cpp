@@ -2041,9 +2041,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameLineEdit : {
       frame_spec fspec = getFrameSpec("LineEdit");
-      if (qobject_cast<const QLineEdit*>(widget)
-          && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-              || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())))
+      if (isLibreoffice
+          || (qobject_cast<const QLineEdit*>(widget)
+              && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+                  || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
@@ -2054,12 +2055,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
 
-        if (isLibreoffice)
-        {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        }
         // -> CC_SpinBox
-        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
         {
           int n;
           frame_spec fspecSB;
@@ -2156,9 +2153,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       const interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
-      if (qobject_cast<const QLineEdit*>(widget)
-          && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-              || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())))
+      if (isLibreoffice
+          || (qobject_cast<const QLineEdit*>(widget)
+              && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+                  || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
@@ -2174,12 +2172,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
 
-        if (isLibreoffice)
-        {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        }
         // -> CC_SpinBox
-        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
         {
           int n;
           frame_spec fspecSB;
@@ -5109,7 +5103,11 @@ void Kvantum::drawComplexControl(ComplexControl control,
           fspec.hasCapsule = true;
           fspec.capsuleH = 1;
           fspec.capsuleV = 2;
-          if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
+          if (isLibreoffice)
+          {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          }
+          else if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
           {
             if (QLineEdit *le = sb->findChild<QLineEdit *>())
             {
@@ -7320,16 +7318,16 @@ QRect Kvantum::subControlRect(ComplexControl control,
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const theme_spec tspec = settings->getThemeSpec();
 
-      if (!tspec.vertical_spin_indicators)
+      // a workaround for LibreOffice
+      if (isLibreoffice)
       {
-        // a workaround for LibreOffice
-        if (isLibreoffice)
-        {
-          sw = 12;
-          fspec.right = qMin(fspec.right,3);
-        }
+        sw = 12;
+        fspec.right = qMin(fspec.right,3);
+      }
+      else if (!tspec.vertical_spin_indicators)
+      {
         /* I've seen this only in Pencil */
-        else if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
+        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
           QString maxTxt = spinMaxText(sb);
           if (!maxTxt.isEmpty())
