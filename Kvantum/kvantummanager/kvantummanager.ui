@@ -620,9 +620,6 @@ widgets to appear as they are by default.</string>
            <string>Hacks</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
-           <property name="topMargin">
-            <number>10</number>
-           </property>
            <item>
             <widget class="QCheckBox" name="checkBoxDolphin">
              <property name="font">

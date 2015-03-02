@@ -463,7 +463,7 @@ void KvantumManager::resizeConfPage (bool thirdPage)
                              + (thirdPage ?
                                   ui->checkBoxKCapacity->minimumSizeHint() - ui->checkBoxDolphin->minimumSizeHint()
                                   + ui->comboToolButton->minimumSizeHint()
-                                  + QSize (0, 6*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
+                                  + QSize (0, 9*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
                                   : QSize())
                              + QSize (extra + ui->opaqueEdit->sizeHint().width()
                                             + 3*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13),
