@@ -2056,24 +2056,20 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
 
         // -> CC_SpinBox
-        if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        if (settings->getThemeSpec().vertical_spin_indicators)
         {
-          int n;
-          frame_spec fspecSB;
-          if (settings->getThemeSpec().vertical_spin_indicators)
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
+        else
+        {
+          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
-            n = 1;
-            fspecSB = fspec;
-          }
-          else
-          {
-            n = 2;
-            fspecSB = getFrameSpec("IndicatorSpinBox");
-          }
-          if (p->width() < widget->width() + n*SPIN_BUTTON_WIDTH + fspecSB.right
-              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-          {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+            }
           }
         }
       }
@@ -2173,24 +2169,20 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
 
         // -> CC_SpinBox
-        if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+        if (settings->getThemeSpec().vertical_spin_indicators)
         {
-          int n;
-          frame_spec fspecSB;
-          if (settings->getThemeSpec().vertical_spin_indicators)
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
+        else
+        {
+          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
-            n = 1;
-            fspecSB = fspec;
-          }
-          else
-          {
-            n = 2;
-            fspecSB = getFrameSpec("IndicatorSpinBox");
-          }
-          if (p->width() < widget->width() + n*SPIN_BUTTON_WIDTH + fspecSB.right
-              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-          {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+            {
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+            }
           }
         }
       }
@@ -2333,7 +2325,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
       }
       else
+      {
         fspec = getFrameSpec("LineEdit");
+        fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
+      }
 
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice)
@@ -2341,14 +2336,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
       }
       // -> CC_SpinBox
-      else if (opt)
+      else if (opt && !tspec.vertical_spin_indicators)
       {
         if (up)
         {
           if (opt->rect.width() < SPIN_BUTTON_WIDTH + fspec.right)
             fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
         }
-        else if (opt->rect.width() < SPIN_BUTTON_WIDTH + (tspec.vertical_spin_indicators ? fspec.right : 0))
+        else if (opt->rect.width() < SPIN_BUTTON_WIDTH)
           fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
       }
 
@@ -5103,21 +5098,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
           fspec.hasCapsule = true;
           fspec.capsuleH = 1;
           fspec.capsuleV = 2;
-          if (isLibreoffice)
-          {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-          }
-          else if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
-          {
-            if (QLineEdit *le = sb->findChild<QLineEdit *>())
-            {
-              if (sb->width() < le->width() + SPIN_BUTTON_WIDTH + fspec.right
-                  || sb->height() < fspec.top+fspec.bottom+QFontMetrics(le->font()).height())
-              {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
-              }
-            }
-          }
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           r.setHeight(subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget).height());
           QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
@@ -7076,22 +7057,18 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       }
       else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
-        int n;
-        frame_spec fspecSB;
-        if (settings->getThemeSpec().vertical_spin_indicators)
+        if (!settings->getThemeSpec().vertical_spin_indicators)
         {
-          n = 1;
-          fspecSB = fspec;
+          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
+          if (p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+          }
         }
         else
         {
-          n = 2;
-          fspecSB = getFrameSpec("IndicatorSpinBox");
-        }
-        if (p->width() < widget->width() + n*SPIN_BUTTON_WIDTH + fspecSB.right
-            || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-        {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
       }
       QRect rect = interiorRect(option->rect, fspec);
@@ -7333,32 +7310,22 @@ QRect Kvantum::subControlRect(ComplexControl control,
           if (!maxTxt.isEmpty())
           {
             int txtWidth = textSize(sb->font(),maxTxt).width();
-            if (sb->width() < txtWidth+2*sw+fspec.right+fspecLE.left
-                && sb->width() >= txtWidth+2*10+2+2) // otherwise wouldn't help
+            if (w < txtWidth+2*sw+fspec.right+fspecLE.left+1 // 1 for padding
+                && w >= txtWidth+2*8+2+2+1) // otherwise wouldn't help
             {
-              sw = 10;
+              sw = 8;
               fspec.right = qMin(fspec.right,2);
             }
           }
         }
       }
-      else if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
-      {
-        QString maxTxt = spinMaxText(sb);
-        if (!maxTxt.isEmpty())
-        {
-          int txtWidth = textSize(sb->font(),maxTxt).width();
-          if (sb->width() < txtWidth+sw+fspecLE.right+fspecLE.left
-              && sb->width() >= txtWidth+10+2+2)
-          {
-            sw = 10;
-            fspecLE.right = qMin(fspecLE.right,2);
-          }
-        }
-      }
 
       if (tspec.vertical_spin_indicators)
+      {
+        fspecLE.right = qMin(fspecLE.right,3);
         fspec = fspecLE;
+        sw = 8;
+      }
 
       // take into account the right frame width
       switch (subControl) {
@@ -7677,8 +7644,8 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
                   const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
-                  if (tb->width() < opt->iconSize.width()+fspec1.left
-                                    +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
+                  if (w < opt->iconSize.width()+fspec1.left
+                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -7710,8 +7677,8 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 /* lack of space */
                 if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
-                  if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                    +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                  if (w < opt->iconSize.width()+fspec.left+fspec.right
+                          +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -7763,8 +7730,8 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
                   const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
-                  if (tb->width() < opt->iconSize.width()+fspec1.left
-                                    +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
+                  if (w < opt->iconSize.width()+fspec1.left
+                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -7794,8 +7761,8 @@ QRect Kvantum::subControlRect(ComplexControl control,
                 if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
                   const label_spec lspec = getLabelSpec(group);
-                  if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                    +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                  if (w < opt->iconSize.width()+fspec.left+fspec.right
+                          +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
