@@ -991,10 +991,10 @@ void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
   if (!col.isValid())
     col = QApplication::palette().color(QPalette::ButtonText);
   QPushButton *pb = qobject_cast<QPushButton *>(b);
-  QToolButton *tb = qobject_cast<QToolButton *>(b);
+  //QToolButton *tb = qobject_cast<QToolButton *>(b);
   if (col.isValid()
       && (!pb || !pb->isFlat())
-      && (!tb || paneledButtons.contains(widget))
+      //&& (!tb || paneledButtons.contains(widget))
       && !b->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
     const label_spec lspec = getLabelSpec("PanelButtonCommand");
@@ -1106,19 +1106,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
-
-      /* force text color */
-      if (!status.startsWith("disabled"))
-      {
-        QColor col = QColor(lspec.normalColor);
-        if (status.startsWith("pressed"))
-          col = QColor(lspec.pressColor);
-        else if (status.startsWith("toggled"))
-          col = QColor(lspec.toggleColor);
-        else if (option->state & State_MouseOver)
-          col = QColor(lspec.focusColor);
-        forceButtonTextColor(widget,col);
-      }
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
@@ -1320,6 +1307,27 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         paneledButtons.insert(widget);
         connect(widget, SIGNAL(destroyed(QObject*)), SLOT(notPaneled(QObject*)));
+      }
+
+      /* force text color */
+      if (!status.startsWith("disabled"))
+      {
+        QColor col;
+        if (hasPanel)
+        {
+          col = QColor(lspec.normalColor);
+          if (status.startsWith("pressed"))
+            col = QColor(lspec.pressColor);
+          else if (status.startsWith("toggled"))
+            col = QColor(lspec.toggleColor);
+          else if (option->state & State_MouseOver)
+            col = QColor(lspec.focusColor);
+        }
+        else
+          /* FIXME: in fact, the foreground color of the parent widget should be
+             used here (-> CE_ToolButtonLabel) but I've encountered no problem yet */
+          col = QApplication::palette().color(QPalette::WindowText);
+        forceButtonTextColor(widget,col);
       }
 
       break;
@@ -4385,16 +4393,7 @@ void Kvantum::drawControl(ControlElement element,
         /* respect the text color of the parent widget */
         if (pb && pb->isFlat())
         {
-          const color_spec cspec = settings->getColorSpec();
-          QColor col = cspec.windowTextColor;
-          QString name;
-          if (col.isValid())
-            name = cspec.windowTextColor;
-          else
-          {
-            QPalette palette = pb->palette();
-            QString name = palette.color(QPalette::WindowText).name();
-          }
+          QString name = QApplication::palette().color(QPalette::WindowText).name();
           lspec.normalColor = name;
           lspec.focusColor = name;
           lspec.pressColor = name;
@@ -4426,13 +4425,19 @@ void Kvantum::drawControl(ControlElement element,
         /* force text color */
         if (!status.startsWith("disabled"))
         {
-          QColor col = QColor(lspec.normalColor);
-          if (status.startsWith("pressed"))
-            col = QColor(lspec.pressColor);
-          else if (status.startsWith("toggled"))
-            col = QColor(lspec.toggleColor);
-          else if (option->state & State_MouseOver)
-            col = QColor(lspec.focusColor);
+          QColor col;
+          if (!(opt->features & QStyleOptionButton::Flat))
+          {
+            col = QColor(lspec.normalColor);
+            if (status.startsWith("pressed"))
+              col = QColor(lspec.pressColor);
+            else if (status.startsWith("toggled"))
+              col = QColor(lspec.toggleColor);
+            else if (option->state & State_MouseOver)
+              col = QColor(lspec.focusColor);
+          }
+          else // FIXME: the foreground color of the parent widget should be used
+            col = QApplication::palette().color(QPalette::WindowText);
           forceButtonTextColor(widget,col);
         }
 
@@ -4605,12 +4610,7 @@ void Kvantum::drawControl(ControlElement element,
               else
                 col = p->palette().color(p->foregroundRole());
               if (!col.isValid())
-              {
-                const color_spec cspec = settings->getColorSpec();
-                col = cspec.windowTextColor;
-                if (!col.isValid())
-                  col = tb->palette().color(QPalette::WindowText);
-              }
+                col = QApplication::palette().color(QPalette::WindowText);
               if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), col))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
