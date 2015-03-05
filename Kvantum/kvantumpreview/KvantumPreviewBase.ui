@@ -739,9 +739,6 @@ beside text</string>
          <property name="text">
           <string>Simple radio button</string>
          </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
          <property name="autoExclusive">
           <bool>false</bool>
          </property>
@@ -823,9 +820,6 @@ radio button</string>
          </property>
          <property name="text">
           <string>Simple check box</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
          </property>
         </widget>
        </item>

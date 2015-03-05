@@ -2855,7 +2855,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */
       const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4 *>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
-      if (opt && opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
+      if (opt && opt->backgroundBrush.style() != Qt::NoBrush)
+      {
+        /* in this case, the item is colored intentionally
+           (as in Konsole's color scheme editing dialog) */
+        if (opt->state & QStyle::State_HasFocus)
+          painter->fillRect(opt->rect, opt->palette.brush(QPalette::Active, QPalette::Highlight));
+        painter->fillRect(interiorRect(opt->rect,fspec), opt->backgroundBrush);
+        break;
+      }
+      else if (opt && opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
           && iv && (option->state & State_Enabled))
       {
         if (QWidget *iw = iv->indexWidget(opt->index))

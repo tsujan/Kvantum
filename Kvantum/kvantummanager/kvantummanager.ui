@@ -613,7 +613,7 @@ Automatically checked if window blurring is enabled.</string>
            </font>
           </property>
           <property name="toolTip">
-           <string>Uncheck these five boxes if you want all
+           <string>Uncheck these six boxes if you want all
 widgets to appear as they are by default.</string>
           </property>
           <property name="title">

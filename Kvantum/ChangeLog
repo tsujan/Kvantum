@@ -5,6 +5,7 @@ V0.8.16
  * Removed the 2-px frame thickness limit from menus and tooltips without compositing.
  * Allow different thicknesses for horizontal and vertical menu frames.
  * Added a hacking variable for drawing KDE capacity bars as progressbars.
+ * Fixed Konsole's color scheme editing dialog.
 
 V0.8.15
 ---------
