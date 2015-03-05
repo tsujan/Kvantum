@@ -2861,7 +2861,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
            (as in Konsole's color scheme editing dialog) */
         if (opt->state & QStyle::State_HasFocus)
           painter->fillRect(opt->rect, opt->palette.brush(QPalette::Active, QPalette::Highlight));
-        painter->fillRect(interiorRect(opt->rect,fspec), opt->backgroundBrush);
+        QBrush brush = opt->backgroundBrush;
+        QColor col = brush.color();
+        if (col.alpha() < 255)
+        {
+          /* this is for deciding on the text color at CE_ItemViewItem later */
+          col.setRgb(col.red(),col.green(),col.blue());
+          brush.setColor(col);
+        }
+        painter->fillRect(interiorRect(opt->rect,fspec), brush);
         break;
       }
       else if (opt && opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
@@ -3147,10 +3155,18 @@ void Kvantum::drawControl(ControlElement element,
             QColor focusColor(lspec.focusColor);
             QColor pressColor(lspec.pressColor);
             QColor toggleColor(lspec.toggleColor);
+            QColor col;
+            if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
+            {
+              col = QColor(Qt::white);
+              if (qGray(opt->backgroundBrush.color().rgb()) >= 127)
+                col = QColor(Qt::black);
+              normalColor = focusColor = pressColor = toggleColor = col;
+            }
             if (state == 1 && normalColor.isValid()
                 /* a minimum amount of contrast is needed,
                    supposing that the normal interior is transparent */
-                && enoughContrast(palette.color(QPalette::Base), normalColor))
+                && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
             {
               QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::Text, normalColor);
@@ -3160,7 +3176,7 @@ void Kvantum::drawControl(ControlElement element,
             }
             else if (state == 2 && focusColor.isValid()
                      // supposing that the focus interior is translucent
-                     && enoughContrast(palette.color(QPalette::Base), focusColor))
+                     && (col.isValid() || enoughContrast(palette.color(QPalette::Base), focusColor)))
             {
               QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::Text, focusColor);
