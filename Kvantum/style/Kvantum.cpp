@@ -2859,8 +2859,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         /* in this case, the item is colored intentionally
            (as in Konsole's color scheme editing dialog) */
-        if (opt->state & QStyle::State_HasFocus)
-          painter->fillRect(opt->rect, opt->palette.brush(QPalette::Active, QPalette::Highlight));
+        if (opt->state & State_HasFocus)
+          renderFrame(painter,option->rect,fspec,fspec.element+"-pressed");
+        else
+        {
+          if (isInactive)
+            ivStatus.append(QString("-inactive"));
+          renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
+        }
         QBrush brush = opt->backgroundBrush;
         QColor col = brush.color();
         if (col.alpha() < 255)
