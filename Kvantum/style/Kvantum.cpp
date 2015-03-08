@@ -1053,6 +1053,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (!widget || !widget->isWindow())
         break;
 
+      // don't draw the interior when there's a custom background color (as in KNotes)
+      if (option->palette.color(QPalette::Window) != QApplication::palette().color(QPalette::Window)
+          && (!widget || (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                          && !widget->testAttribute(Qt::WA_NoSystemBackground)))) break;
+
       interior_spec ispec = getInteriorSpec("Window");
       frame_spec fspec;
       default_frame_spec(fspec);
@@ -1116,6 +1121,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
+      /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
+      if (qobject_cast<const QPushButton *>(widget))
+      {
+        painter->fillRect(option->rect, option->palette.brush(QPalette::Button));
+        break;
+      }
+
       bool hasPanel = false;
 
       const QString group = "PanelButtonTool";
@@ -4339,8 +4351,12 @@ void Kvantum::drawControl(ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+      /* sizegrip might look ugly with cutom window colors (as in KNotes) */
+      if (option->palette.color(QPalette::Window) == QApplication::palette().color(QPalette::Window))
+      {
+        renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+      }
       if (!(option->state & State_Enabled))
       {
         painter->restore();
@@ -7959,6 +7975,7 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
         return QIcon(pm);
       else break;
     }
+    case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
       int s = 12;
       QPixmap pm(QSize(s,s));

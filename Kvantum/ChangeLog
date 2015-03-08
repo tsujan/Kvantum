@@ -7,6 +7,9 @@ V0.8.16
  * Added a hacking variable for drawing KDE capacity bars as progressbars.
  * Fixed Konsole's color scheme editing dialog.
  * Set PM_LargeIconSize and PM_IconViewIconSize to the KDE value for dialog icon size.
+ * Prevent drawing pushbuttons as toolbuttons (as in QupZilla and KNotes).
+ * Don't draw the interior and frame of sizegrip if its window has a custom background color (as in KNotes).
+ * Don't draw the interior of a window with custom background color (as in KNotes).
 
 V0.8.15
 ---------
