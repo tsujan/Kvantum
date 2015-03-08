@@ -101,12 +101,13 @@ Kvantum::Kvantum() : QCommonStyle()
   const theme_spec tspec = settings->getThemeSpec();
 
   singleClick = true;
+  largeIconSize = 32;
   QString kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
   if (!QFile::exists(kdeGlobals))
     kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
   if (QFile::exists(kdeGlobals))
   {
-    QFile file(kdeGlobals);
+    /*QFile file(kdeGlobals);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
       QTextStream in(&file);
@@ -121,6 +122,22 @@ Kvantum::Kvantum() : QCommonStyle()
         }
       }
       file.close();
+    }*/
+    QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
+    QVariant v;
+    KDESettings.beginGroup("KDE");
+    v = KDESettings.value ("SingleClick");
+    KDESettings.endGroup();
+    if (v.isValid())
+      singleClick = v.toBool();
+    KDESettings.beginGroup("DialogIcons");
+    v = KDESettings.value ("Size");
+    KDESettings.endGroup();
+    if (v.isValid())
+    {
+      int iconSize = v.toInt();
+      if (iconSize > 0 && iconSize <= 256)
+        largeIconSize = iconSize;
     }
   }
   singleClick = singleClick && !tspec.double_click;
@@ -5910,8 +5927,10 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
 
     /*case PM_ButtonIconSize :
     case PM_TabBarIconSize :
-    case PM_SmallIconSize : return 16;
-    case PM_LargeIconSize : return 32;*/
+    case PM_SmallIconSize : return 16;*/
+
+    case PM_IconViewIconSize:
+    case PM_LargeIconSize : return largeIconSize;
 
     case PM_FocusFrameVMargin :
     case PM_FocusFrameHMargin :  {
