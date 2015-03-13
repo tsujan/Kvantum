@@ -52,6 +52,9 @@ typedef struct {
   bool center_toolbar_handle;
   /* 16-px icons for toolbars by default? */
   bool slim_toolbars;
+  /* merge the background of menubar with
+     that of toolbar when they're adjacent? */
+  bool merge_menubar_with_toolbar;
   /* 0 -> follow, 1-> icon only 2 -> text only,
      3 -> text beside icon, 4 -> text under icon */
   int toolbutton_style;
@@ -269,6 +272,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.group_toolbar_buttons = false;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;
+  tspec.merge_menubar_with_toolbar = false;
   tspec.toolbutton_style = 0;
   tspec.spread_progressbar = false;
   tspec.textless_progressbar = false;

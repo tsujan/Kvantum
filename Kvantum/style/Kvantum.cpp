@@ -3271,16 +3271,26 @@ void Kvantum::drawControl(ControlElement element,
               status.replace(QString("focused"),QString("normal"));
         }
 #endif
+
+        QRect r = option->rect;
+        if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
+            && widget && widget->window())
+        {
+          if (QToolBar *tb = qobject_cast<QToolBar*>(widget->window()->childAt(widget->x(), widget->y()+r.height()+1)))
+          {
+            if (tb->orientation() == Qt::Horizontal)
+            {
+              r.adjust(0,0,0,tb->height());
+              group = "Toolbar";
+            }
+          }
+        }
+
         frame_spec fspec = getFrameSpec(group);
         fspec.hasCapsule = true;
         fspec.capsuleH = 0;
         fspec.capsuleV = 2;
-        const interior_spec ispec = getInteriorSpec(group);
-        if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
-        {
-          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        }
+        interior_spec ispec = getInteriorSpec(group);
 
         if (status.startsWith("disabled"))
         {
@@ -3288,6 +3298,23 @@ void Kvantum::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
+
+        if (group == "Toolbar")
+        {
+          renderFrame(painter,r,fspec,fspec.element+"-normal");
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+          fspec = getFrameSpec("MenuBarItem");
+          fspec.hasCapsule = true;
+          fspec.capsuleH = 0;
+          fspec.capsuleV = 2;
+          ispec = getInteriorSpec("MenuBarItem");
+        }
+        else if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
+
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
         if (!(option->state & State_Enabled))
@@ -3329,13 +3356,26 @@ void Kvantum::drawControl(ControlElement element,
       {
         break;
       }
-      const QString group = "MenuBar";
+      QString group = "MenuBar";
+      QRect r = option->rect;
+      if (settings->getThemeSpec().merge_menubar_with_toolbar
+          && widget && widget->window())
+      {
+        if (QToolBar *tb = qobject_cast<QToolBar*>(widget->window()->childAt(widget->x(), widget->y()+r.height()+1)))
+        {
+          if (tb->orientation() == Qt::Horizontal)
+          {
+            r.adjust(0,0,0,tb->height());
+            group = "Toolbar";
+          }
+        }
+      }
+
       const frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      // NOTE this does not use the status (otherwise always disabled)
-      renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+      renderFrame(painter,r,fspec,fspec.element+"-normal");
+      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
 
       break;
     }
@@ -4330,6 +4370,15 @@ void Kvantum::drawControl(ControlElement element,
       QString suffix = "-normal";
       if (isInactive)
         suffix = "-normal-inactive";
+
+      if ((option->state & State_Horizontal)
+          && settings->getThemeSpec().merge_menubar_with_toolbar
+          && widget && widget->window())
+      {
+        if (QMenuBar *mb = qobject_cast<QMenuBar*>(widget->window()->childAt(widget->x(), widget->y()-1)))
+          r.adjust(0,-mb->height(),0,0);
+      }
+
       renderFrame(painter,r,fspec,fspec.element+suffix);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
@@ -6640,7 +6689,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         QString group = "MenuBarItem";
-        frame_spec fspec = getFrameSpec(group);
+        const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 

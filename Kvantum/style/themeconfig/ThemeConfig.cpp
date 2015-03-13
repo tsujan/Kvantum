@@ -320,6 +320,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","slim_toolbars", empty);
   r.slim_toolbars = v.toBool();
 
+  v = getValue("General","merge_menubar_with_toolbar", empty);
+  r.merge_menubar_with_toolbar = v.toBool();
+
   v = getValue("General","toolbutton_style", empty);
   r.toolbutton_style = v.toInt();
 

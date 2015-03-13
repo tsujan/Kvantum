@@ -422,6 +422,7 @@ void KvantumManager::defaultThemeButtons()
         ui->checkBoxMenubar->setChecked (defaultSettings.value ("menubar_mouse_tracking").toBool());
     else
         ui->checkBoxMenubar->setChecked (true);
+    ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("slim_toolbars").toBool());
     int index = 0;
     if (defaultSettings.contains ("toolbutton_style"))
@@ -463,7 +464,7 @@ void KvantumManager::resizeConfPage (bool thirdPage)
                              + (thirdPage ?
                                   ui->checkBoxKCapacity->minimumSizeHint() - ui->checkBoxDolphin->minimumSizeHint()
                                   + ui->comboToolButton->minimumSizeHint()
-                                  + QSize (0, 9*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
+                                  + QSize (0, 10*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
                                   : QSize())
                              + QSize (extra + ui->opaqueEdit->sizeHint().width()
                                             + 3*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13),
@@ -585,6 +586,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
                 if (themeSettings.contains ("menubar_mouse_tracking"))
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
+                if (themeSettings.contains ("merge_menubar_with_toolbar"))
+                    ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
                 if (themeSettings.contains ("slim_toolbars"))
                     ui->checkBoxToolbar->setChecked (themeSettings.value ("slim_toolbars").toBool());
                 if (themeSettings.contains ("toolbutton_style"))
@@ -913,6 +916,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
+        themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
         themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
@@ -1027,7 +1031,7 @@ void KvantumManager::popupBlurring (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.16</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.17</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>"));

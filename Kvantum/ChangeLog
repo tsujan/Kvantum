@@ -1,3 +1,7 @@
+V0.8.17
+---------
+ * Added a key for drawing adjacent menu and tool bars as a whole.
+
 V0.8.16
 ---------
  * A new key for drawng spin indicators vertically inside the spin line-edit.

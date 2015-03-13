@@ -226,6 +226,11 @@ textless_progressbar              true/false          No percentage label for pr
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
 
+merge_menubar_with_toolbar        true/false          Draw adjacent menu and tool bars
+                                                      as a whole? If true, the toolbar
+                                                      SVG interior and frame will be used
+                                                      for drawing them.
+
 composite                         true/false          Use compositing to have
                                                       translucent menus or tooltips?
                                                       It is automatically set to false

@@ -313,72 +313,6 @@ settings of this theme.
            <property name="topMargin">
             <number>10</number>
            </property>
-           <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxleftTab">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Tabs are centered by default.</string>
-             </property>
-             <property name="text">
-              <string>Left aligned tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxJoinTab">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Inactive tabs are detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Join inactive tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxX11">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-             </property>
-             <property name="text">
-              <string>X11 drag</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="1">
-            <widget class="QComboBox" name="comboToolButton">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxClick">
              <property name="font">
@@ -396,7 +330,7 @@ unless KDE uses double-click.</string>
              </property>
             </widget>
            </item>
-           <item row="10" column="0">
+           <item row="11" column="0">
             <widget class="QLabel" name="label_2">
              <property name="font">
               <font>
@@ -429,7 +363,7 @@ for menubars by default.</string>
              </property>
             </widget>
            </item>
-           <item row="9" column="0" colspan="2">
+           <item row="10" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxToolbar">
              <property name="font">
               <font>
@@ -490,6 +424,89 @@ the spin-down one inside the spin line-edit.</string>
              </property>
              <property name="text">
               <string>Vertical spin indicators</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxleftTab">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Tabs are centered by default.</string>
+             </property>
+             <property name="text">
+              <string>Left aligned tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxJoinTab">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Inactive tabs are detached by default.</string>
+             </property>
+             <property name="text">
+              <string>Join inactive tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxX11">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+             </property>
+             <property name="text">
+              <string>X11 drag</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <widget class="QComboBox" name="comboToolButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxMenuToolbar">
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>If checked, the menubar and toolbar will be drawn as a whole
+with the toolbar SVG elemt when they are adjacent to one another.</string>
+             </property>
+             <property name="text">
+              <string>Merge menubar with toolbar</string>
              </property>
             </widget>
            </item>
