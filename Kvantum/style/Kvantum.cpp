@@ -3273,7 +3273,8 @@ void Kvantum::drawControl(ControlElement element,
 #endif
 
         group = "MenuBar";
-        QRect r = option->rect;
+        QRect r = opt->menuRect; // menubar svg element may not be simple
+        if (r.isNull()) r = option->rect;
         if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
             && widget && widget->window())
         {
