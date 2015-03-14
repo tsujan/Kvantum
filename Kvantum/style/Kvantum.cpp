@@ -3272,6 +3272,7 @@ void Kvantum::drawControl(ControlElement element,
         }
 #endif
 
+        group = "MenuBar";
         QRect r = option->rect;
         if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
             && widget && widget->window())
@@ -3299,17 +3300,17 @@ void Kvantum::drawControl(ControlElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
 
-        if (group == "Toolbar")
-        {
-          renderFrame(painter,r,fspec,fspec.element+"-normal");
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
-          fspec = getFrameSpec("MenuBarItem");
-          fspec.hasCapsule = true;
-          fspec.capsuleH = 0;
-          fspec.capsuleV = 2;
-          ispec = getInteriorSpec("MenuBarItem");
-        }
-        else if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
+        /* fill the non-empty regions of the menubar */
+        renderFrame(painter,r,fspec,fspec.element+"-normal");
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+
+        fspec = getFrameSpec("MenuBarItem");
+        fspec.hasCapsule = true;
+        fspec.capsuleH = 0;
+        fspec.capsuleV = 2;
+        ispec = getInteriorSpec("MenuBarItem");
+
+        if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);

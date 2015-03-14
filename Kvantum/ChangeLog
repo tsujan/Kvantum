@@ -1,6 +1,7 @@
 V0.8.17
 ---------
  * Added a key for drawing adjacent menu and tool bars as a whole.
+ * Fill the whole menubar (and not just its empty area) with its SVG element.
 
 V0.8.16
 ---------
