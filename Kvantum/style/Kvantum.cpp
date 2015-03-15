@@ -3278,12 +3278,15 @@ void Kvantum::drawControl(ControlElement element,
         if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
             && widget && widget->window())
         {
-          QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height()+1);
+          QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height());
           QToolBar *tb = qobject_cast<QToolBar*>(child);
-          while (!tb && child && widget->window()->isAncestorOf(child))
+          if (!tb && pixelMetric(PM_ToolBarItemMargin,option,widget) == 0)
           {
-            child = child->parentWidget();
-            tb = qobject_cast<QToolBar*>(child);
+            while (!tb && child && widget->window()->isAncestorOf(child))
+            {
+              child = child->parentWidget();
+              tb = qobject_cast<QToolBar*>(child);
+            }
           }
           if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
           {
@@ -3370,12 +3373,15 @@ void Kvantum::drawControl(ControlElement element,
       if (settings->getThemeSpec().merge_menubar_with_toolbar
           && widget && widget->window())
       {
-        QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height()+1);
+        QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height());
         QToolBar *tb = qobject_cast<QToolBar*>(child);
-        while (!tb && child && widget->window()->isAncestorOf(child))
+        if (!tb && pixelMetric(PM_ToolBarItemMargin,option,widget) == 0)
         {
-          child = child->parentWidget();
-          tb = qobject_cast<QToolBar*>(child);
+          while (!tb && child && widget->window()->isAncestorOf(child))
+          {
+            child = child->parentWidget();
+            tb = qobject_cast<QToolBar*>(child);
+          }
         }
         if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
         {
@@ -4353,56 +4359,58 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ToolBar : {
-      if (!qstyleoption_cast<const QStyleOptionToolBar*>(option))
-        break;
-      /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
-      if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
-        break;
-
-      const QString group = "Toolbar";
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
-
-      QRect r = option->rect;
-      if (!(option->state & State_Horizontal))
+      if (const QStyleOptionToolBar *opt = qstyleoption_cast<const QStyleOptionToolBar*>(option))
       {
-        r.setRect(0, 0, h, w);
-        QTransform m;
-        m.translate(w, 0);
-        m.rotate(90);
-        m.translate(0, w); m.scale(1,-1);
-        painter->setTransform(m, true);
-      }
+        /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
+        if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
+          break;
 
-      if (status.startsWith("disabled"))
-      {
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      QString suffix = "-normal";
-      if (isInactive)
-        suffix = "-normal-inactive";
+        const QString group = "Toolbar";
+        const frame_spec fspec = getFrameSpec(group);
+        const interior_spec ispec = getInteriorSpec(group);
+        const indicator_spec dspec = getIndicatorSpec(group);
 
-      if ((option->state & State_Horizontal)
-          && settings->getThemeSpec().merge_menubar_with_toolbar
-          && widget && widget->window())
-      {
-        QWidget *child = widget->window()->childAt(widget->x(), widget->y()-1);
-        QMenuBar *mb = qobject_cast<QMenuBar*>(child);
-        while (!mb && child && widget->window()->isAncestorOf(child))
+        QRect r = option->rect;
+        if (!(option->state & State_Horizontal))
         {
-          child = child->parentWidget();
-          mb = qobject_cast<QMenuBar*>(child);
+          r.setRect(0, 0, h, w);
+          QTransform m;
+          m.translate(w, 0);
+          m.rotate(90);
+          m.translate(0, w); m.scale(1,-1);
+          painter->setTransform(m, true);
         }
-        if (mb && mb->isVisible())
-          r.adjust(0,-mb->height(),0,0);
-      }
 
-      renderFrame(painter,r,fspec,fspec.element+suffix);
-      renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
-      if (!(option->state & State_Enabled))
-        painter->restore();
+        if (status.startsWith("disabled"))
+        {
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+        QString suffix = "-normal";
+        if (isInactive)
+          suffix = "-normal-inactive";
+
+        if ((option->state & State_Horizontal)
+            && (opt->toolBarArea == Qt::TopToolBarArea || opt->toolBarArea == Qt::NoToolBarArea)
+            && settings->getThemeSpec().merge_menubar_with_toolbar
+            && widget && widget->window())
+        {
+          QWidget *child = widget->window()->childAt(widget->x(), widget->y()-1);
+          QMenuBar *mb = qobject_cast<QMenuBar*>(child);
+          while (!mb && child && widget->window()->isAncestorOf(child))
+          {
+            child = child->parentWidget();
+            mb = qobject_cast<QMenuBar*>(child);
+          }
+          if (mb && mb->isVisible())
+            r.adjust(0,-mb->height(),0,0);
+        }
+
+        renderFrame(painter,r,fspec,fspec.element+suffix);
+        renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
+        if (!(option->state & State_Enabled))
+          painter->restore();
+      }
 
       break;
     }
@@ -5979,6 +5987,20 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       const indicator_spec dspec = getIndicatorSpec("Toolbar");
       return dspec.size ? dspec.size : 8;
     }
+    case PM_ToolBarIconSize : {
+      const theme_spec tspec = settings->getThemeSpec();
+      if (tspec.slim_toolbars)
+        return 16;
+      else
+        return QCommonStyle::pixelMetric(metric,option,widget);
+    }
+    case PM_ToolBarExtensionExtent : return 16;
+    case PM_ToolBarItemMargin : {
+      const frame_spec fspec = getFrameSpec("Toolbar");
+      int v = qMax(fspec.top,fspec.bottom);
+      int h = qMax(fspec.left,fspec.right);
+      return qMax(v,h);
+    }
 
     case PM_TabBarTabHSpace :
     case PM_TabBarTabVSpace :
@@ -5993,21 +6015,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       const frame_spec fspec = getFrameSpec("Tab");
       int extra = fspec.left + fspec.right - 4;
       return (extra > 0 ? 24 + extra : 24);
-    }
-
-    case PM_ToolBarIconSize : {
-      const theme_spec tspec = settings->getThemeSpec();
-      if (tspec.slim_toolbars)
-        return 16;
-      else
-        return QCommonStyle::pixelMetric(metric,option,widget);
-    }
-    case PM_ToolBarExtensionExtent : return 16;
-    case PM_ToolBarItemMargin : {
-      const frame_spec fspec = getFrameSpec("Toolbar");
-      int v = qMax(fspec.top,fspec.bottom);
-      int h = qMax(fspec.left,fspec.right);
-      return qMax(v,h);
     }
 
     /*case PM_ButtonIconSize :
