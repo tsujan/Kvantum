@@ -3278,13 +3278,17 @@ void Kvantum::drawControl(ControlElement element,
         if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
             && widget && widget->window())
         {
-          if (QToolBar *tb = qobject_cast<QToolBar*>(widget->window()->childAt(widget->x(), widget->y()+r.height()+1)))
+          QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height()+1);
+          QToolBar *tb = qobject_cast<QToolBar*>(child);
+          while (!tb && child && widget->window()->isAncestorOf(child))
           {
-            if (tb->orientation() == Qt::Horizontal)
-            {
-              r.adjust(0,0,0,tb->height());
-              group = "Toolbar";
-            }
+            child = child->parentWidget();
+            tb = qobject_cast<QToolBar*>(child);
+          }
+          if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
+          {
+            r.adjust(0,0,0,tb->height());
+            group = "Toolbar";
           }
         }
 
@@ -3300,10 +3304,14 @@ void Kvantum::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-
         /* fill the non-empty regions of the menubar */
         renderFrame(painter,r,fspec,fspec.element+"-normal");
         renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+        if (!(option->state & State_Enabled))
+        {
+          painter->restore();
+          status = "disabled";
+        }
 
         fspec = getFrameSpec("MenuBarItem");
         fspec.hasCapsule = true;
@@ -3317,12 +3325,11 @@ void Kvantum::drawControl(ControlElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         }
 
-        renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-        if (!(option->state & State_Enabled))
+        /* draw a panel for the menubar-item only if it's focused or pressed */
+        if (!status.startsWith("normal") && !status.startsWith("disabled"))
         {
-          painter->restore();
-          status = "disabled";
+          renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter |Qt::TextSingleLine;
@@ -3363,13 +3370,17 @@ void Kvantum::drawControl(ControlElement element,
       if (settings->getThemeSpec().merge_menubar_with_toolbar
           && widget && widget->window())
       {
-        if (QToolBar *tb = qobject_cast<QToolBar*>(widget->window()->childAt(widget->x(), widget->y()+r.height()+1)))
+        QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height()+1);
+        QToolBar *tb = qobject_cast<QToolBar*>(child);
+        while (!tb && child && widget->window()->isAncestorOf(child))
         {
-          if (tb->orientation() == Qt::Horizontal)
-          {
-            r.adjust(0,0,0,tb->height());
-            group = "Toolbar";
-          }
+          child = child->parentWidget();
+          tb = qobject_cast<QToolBar*>(child);
+        }
+        if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
+        {
+          r.adjust(0,0,0,tb->height());
+          group = "Toolbar";
         }
       }
 
@@ -4377,7 +4388,14 @@ void Kvantum::drawControl(ControlElement element,
           && settings->getThemeSpec().merge_menubar_with_toolbar
           && widget && widget->window())
       {
-        if (QMenuBar *mb = qobject_cast<QMenuBar*>(widget->window()->childAt(widget->x(), widget->y()-1)))
+        QWidget *child = widget->window()->childAt(widget->x(), widget->y()-1);
+        QMenuBar *mb = qobject_cast<QMenuBar*>(child);
+        while (!mb && child && widget->window()->isAncestorOf(child))
+        {
+          child = child->parentWidget();
+          mb = qobject_cast<QMenuBar*>(child);
+        }
+        if (mb && mb->isVisible())
           r.adjust(0,-mb->height(),0,0);
       }
 
