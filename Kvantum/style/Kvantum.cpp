@@ -3275,23 +3275,21 @@ void Kvantum::drawControl(ControlElement element,
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
         if (r.isNull()) r = option->rect;
-        if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar
-            && widget && widget->window())
+        if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar && getParent(widget,1))
         {
-          QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height());
-          QToolBar *tb = qobject_cast<QToolBar*>(child);
-          if (!tb && pixelMetric(PM_ToolBarItemMargin,option,widget) == 0)
+          QList<QToolBar *> tList = getParent(widget,1)->findChildren<QToolBar*>();
+          if (!tList.isEmpty())
           {
-            while (!tb && child && widget->window()->isAncestorOf(child))
+            for (int i = 0; i < tList.count(); ++i)
             {
-              child = child->parentWidget();
-              tb = qobject_cast<QToolBar*>(child);
+              if (tList.at(i)->isVisible() && tList.at(i)->orientation() == Qt::Horizontal
+                  && widget->y()+r.height() == tList.at(i)->y())
+              {
+                r.adjust(0,0,0,tList.at(i)->height());
+                group = "Toolbar";
+                break;
+              }
             }
-          }
-          if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
-          {
-            r.adjust(0,0,0,tb->height());
-            group = "Toolbar";
           }
         }
 
@@ -3370,23 +3368,21 @@ void Kvantum::drawControl(ControlElement element,
       }
       QString group = "MenuBar";
       QRect r = option->rect;
-      if (settings->getThemeSpec().merge_menubar_with_toolbar
-          && widget && widget->window())
+      if (settings->getThemeSpec().merge_menubar_with_toolbar && getParent(widget,1))
       {
-        QWidget *child = widget->window()->childAt(widget->x(), widget->y()+r.height());
-        QToolBar *tb = qobject_cast<QToolBar*>(child);
-        if (!tb && pixelMetric(PM_ToolBarItemMargin,option,widget) == 0)
+        QList<QToolBar *> tList = getParent(widget,1)->findChildren<QToolBar*>();
+        if (!tList.isEmpty())
         {
-          while (!tb && child && widget->window()->isAncestorOf(child))
+          for (int i = 0; i < tList.count(); ++i)
           {
-            child = child->parentWidget();
-            tb = qobject_cast<QToolBar*>(child);
+            if (tList.at(i)->isVisible() && tList.at(i)->orientation() == Qt::Horizontal
+                && widget->y()+r.height() == tList.at(i)->y())
+            {
+              r.adjust(0,0,0,tList.at(i)->height());
+              group = "Toolbar";
+              break;
+            }
           }
-        }
-        if (tb && tb->isVisible() && tb->orientation() == Qt::Horizontal)
-        {
-          r.adjust(0,0,0,tb->height());
-          group = "Toolbar";
         }
       }
 
@@ -4359,58 +4355,60 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ToolBar : {
-      if (const QStyleOptionToolBar *opt = qstyleoption_cast<const QStyleOptionToolBar*>(option))
+      if (!qstyleoption_cast<const QStyleOptionToolBar*>(option))
+        break;
+      /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
+      if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
+        break;
+
+      const QString group = "Toolbar";
+      const frame_spec fspec = getFrameSpec(group);
+      const interior_spec ispec = getInteriorSpec(group);
+      const indicator_spec dspec = getIndicatorSpec(group);
+
+      QRect r = option->rect;
+      if (!(option->state & State_Horizontal))
       {
-        /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
-        if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
-          break;
-
-        const QString group = "Toolbar";
-        const frame_spec fspec = getFrameSpec(group);
-        const interior_spec ispec = getInteriorSpec(group);
-        const indicator_spec dspec = getIndicatorSpec(group);
-
-        QRect r = option->rect;
-        if (!(option->state & State_Horizontal))
-        {
-          r.setRect(0, 0, h, w);
-          QTransform m;
-          m.translate(w, 0);
-          m.rotate(90);
-          m.translate(0, w); m.scale(1,-1);
-          painter->setTransform(m, true);
-        }
-
-        if (status.startsWith("disabled"))
-        {
-          painter->save();
-          painter->setOpacity(DISABLED_OPACITY);
-        }
-        QString suffix = "-normal";
-        if (isInactive)
-          suffix = "-normal-inactive";
-
-        if ((option->state & State_Horizontal)
-            && (opt->toolBarArea == Qt::TopToolBarArea || opt->toolBarArea == Qt::NoToolBarArea)
-            && settings->getThemeSpec().merge_menubar_with_toolbar
-            && widget && widget->window())
-        {
-          QWidget *child = widget->window()->childAt(widget->x(), widget->y()-1);
-          QMenuBar *mb = qobject_cast<QMenuBar*>(child);
-          while (!mb && child && widget->window()->isAncestorOf(child))
-          {
-            child = child->parentWidget();
-            mb = qobject_cast<QMenuBar*>(child);
-          }
-          if (mb && mb->isVisible())
-            r.adjust(0,-mb->height(),0,0);
-        }
-
-        renderFrame(painter,r,fspec,fspec.element+suffix);
-        renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
-        if (!(option->state & State_Enabled))
-          painter->restore();
+        r.setRect(0, 0, h, w);
+        QTransform m;
+        m.translate(w, 0);
+        m.rotate(90);
+        m.translate(0, w); m.scale(1,-1);
+        painter->setTransform(m, true);
       }
+
+      if (status.startsWith("disabled"))
+      {
+        painter->save();
+        painter->setOpacity(DISABLED_OPACITY);
+      }
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
+
+      if (settings->getThemeSpec().merge_menubar_with_toolbar)
+      {
+        if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
+        {
+          if (QMenuBar *mb = mw->menuBar())
+          {
+            if (mb->isVisible())
+            {
+              mb->update();
+              if ((option->state & State_Horizontal)
+                  && mb->y()+mb->height() == widget->y())
+              {
+                r.adjust(0,-mb->height(),0,0);
+              }
+            }
+          }
+        }
+      }
+
+      renderFrame(painter,r,fspec,fspec.element+suffix);
+      renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
+      if (!(option->state & State_Enabled))
+        painter->restore();
 
       break;
     }
