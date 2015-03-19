@@ -29,6 +29,7 @@ public:
     setupUi (this);
     QList<int> sizes; sizes << 50 << 50;
     splitter->setSizes (sizes);
+    treeWidget->sortItems (0, Qt::AscendingOrder);
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));

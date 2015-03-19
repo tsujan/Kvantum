@@ -2861,7 +2861,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       */
 
       const QString group = "ItemView";
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
       /* QCommonStyle uses something like this: */
@@ -2881,58 +2881,102 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                          (option->state & State_MouseOver) ? "focused" : "normal"
                          : "disabled";
 
-      /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */
       const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4 *>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
-      if (opt && opt->backgroundBrush.style() != Qt::NoBrush)
+      if (opt)
       {
-        /* in this case, the item is colored intentionally
-           (as in Konsole's color scheme editing dialog) */
-        if (opt->state & State_HasFocus)
-          renderFrame(painter,option->rect,fspec,fspec.element+"-pressed");
-        else
-        {
-          if (isInactive)
-            ivStatus.append(QString("-inactive"));
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
+        int left = 0, right = 0;
+        switch (opt->viewItemPosition) {
+          case QStyleOptionViewItemV4::OnlyOne:
+          case QStyleOptionViewItemV4::Invalid: break;
+          case QStyleOptionViewItemV4::Beginning: {
+            fspec.hasCapsule = true;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = -1;
+            right = fspec.right;
+            break;
+          }
+          case QStyleOptionViewItemV4::End: {
+            fspec.hasCapsule = true;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = 1;
+            left = fspec.left;
+            break;
+          }
+          case QStyleOptionViewItemV4::Middle: {
+            fspec.hasCapsule = true;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = 0;
+            left = fspec.left;
+            right = fspec.right;
+            break;
+          }
+          default: break;
         }
-        QBrush brush = opt->backgroundBrush;
-        QColor col = brush.color();
-        if (col.alpha() < 255)
+        if (opt->backgroundBrush.style() != Qt::NoBrush)
         {
-          /* this is for deciding on the text color at CE_ItemViewItem later */
-          col.setRgb(col.red(),col.green(),col.blue());
-          brush.setColor(col);
-        }
-        painter->fillRect(interiorRect(opt->rect,fspec), brush);
-        break;
-      }
-      else if (opt && opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
-          && iv && (option->state & State_Enabled))
-      {
-        if (QWidget *iw = iv->indexWidget(opt->index))
-        {
-          const label_spec lspec = getLabelSpec(group);
-          QColor col;
-          if (ivStatus == "normal")
-            col = lspec.normalColor;
-          else if (ivStatus == "focused")
-            col = lspec.focusColor;
-          else if (ivStatus == "pressed")
-            col = lspec.pressColor;
-          else if (ivStatus == "toggled")
-            col = lspec.toggleColor;
-          if (!col.isValid())
-            col = QApplication::palette().color(QPalette::Text);
-          if (col.isValid())
+          /* in this case, the item is colored intentionally
+             (as in Konsole's color scheme editing dialog) */
+          if (opt->state & State_HasFocus)
+            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed");
+          else if (ivStatus != "normal" && ivStatus != "disabled")
           {
-            QPalette palette = iw->palette();
-            palette.setColor(QPalette::Active,QPalette::Text,col);
-            palette.setColor(QPalette::Inactive,QPalette::Text,col);
-            iw->setPalette(palette);
+            if (isInactive)
+              ivStatus.append(QString("-inactive"));
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
+          }
+          QBrush brush = opt->backgroundBrush;
+          QColor col = brush.color();
+          if (col.alpha() < 255)
+          {
+            /* this is for deciding on the text color at CE_ItemViewItem later */
+            col.setRgb(col.red(),col.green(),col.blue());
+            brush.setColor(col);
+          }
+          painter->fillRect(interiorRect(opt->rect,fspec).adjusted(-left,0,right,0), brush);
+          break;
+        }
+        else if (opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
+                 && iv && (option->state & State_Enabled))
+        {
+          /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */
+          if (QWidget *iw = iv->indexWidget(opt->index))
+          {
+            const label_spec lspec = getLabelSpec(group);
+            QColor col;
+            if (ivStatus == "normal")
+            {
+              if (enoughContrast(opt->palette.color(QPalette::Base), lspec.normalColor))
+                col = lspec.normalColor;
+            }
+            else if (ivStatus == "focused")
+            {
+              if (enoughContrast(QApplication::palette().color(QPalette::Text), lspec.focusColor)
+                  // supposing that the focus interior is translucent, take care of contrast
+                  || enoughContrast(opt->palette.color(QPalette::Base), lspec.focusColor))
+              {
+                col = lspec.focusColor;
+              }
+            }
+            else if (ivStatus == "pressed")
+              col = lspec.pressColor;
+            else if (ivStatus == "toggled")
+              col = lspec.toggleColor;
+            if (!col.isValid())
+              col = QApplication::palette().color(QPalette::Text);
+            if (col.isValid())
+            {
+              QPalette palette = iw->palette();
+              palette.setColor(QPalette::Active,QPalette::Text,col);
+              palette.setColor(QPalette::Inactive,QPalette::Text,col);
+              iw->setPalette(palette);
+            }
           }
         }
       }
+
+      if (ivStatus == "normal" || ivStatus == "disabled")
+        break; // for the sake of consistency, we don't draw any background here
 
       if (isInactive)
         ivStatus.append(QString("-inactive"));
@@ -3199,8 +3243,8 @@ void Kvantum::drawControl(ControlElement element,
               normalColor = focusColor = pressColor = toggleColor = col;
             }
             if (state == 1 && normalColor.isValid()
-                /* a minimum amount of contrast is needed,
-                   supposing that the normal interior is transparent */
+                /* since we don't draw the normal interior,
+                   a minimum amount of contrast is needed */
                 && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
             {
               QStyleOptionViewItemV4 o(*opt);
@@ -3210,8 +3254,10 @@ void Kvantum::drawControl(ControlElement element,
               return;
             }
             else if (state == 2 && focusColor.isValid()
-                     // supposing that the focus interior is translucent
-                     && (col.isValid() || enoughContrast(palette.color(QPalette::Base), focusColor)))
+                     && (col.isValid()
+                         || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
+                         // supposing that the focus interior is translucent, take care of contrast
+                         || enoughContrast(palette.color(QPalette::Base), focusColor)))
             {
               QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::Text, focusColor);

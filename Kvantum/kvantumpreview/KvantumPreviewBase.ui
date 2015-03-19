@@ -1878,17 +1878,37 @@ check box</string>
          </column>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Third Item</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Second Item</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Second Child</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>First Child</string>
+           </property>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>First Item</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
             <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
           </property>
           <property name="text">
-           <string>Test</string>
+           <string>Editable</string>
           </property>
           <property name="text">
-           <string>test</string>
+           <string>Editable</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1899,44 +1919,24 @@ check box</string>
           </property>
           <item>
            <property name="text">
-            <string>New Subitem</string>
+            <string>Third Child</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Second Child</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>First Child</string>
            </property>
            <property name="icon">
             <iconset resource="KvantumPreviewResources.qrc">
              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
            </property>
            <property name="text">
-            <string>Test</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>New Item</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>New Item</string>
-           </property>
-          </item>
-         </item>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>New Subitem</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>New Item</string>
+            <string>Non-Editable</string>
            </property>
           </item>
          </item>
@@ -1965,8 +1965,17 @@ check box</string>
            <layout class="QGridLayout" name="gridLayout_17">
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
               <property name="text">
                <string>Frame</string>
+              </property>
+              <property name="margin">
+               <number>5</number>
               </property>
              </widget>
             </item>
@@ -2138,6 +2147,9 @@ check box</string>
               <property name="text">
                <string>Widget</string>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
              </widget>
             </item>
            </layout>
@@ -2191,6 +2203,18 @@ check box</string>
             <attribute name="label">
              <string>Page 1</string>
             </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>Tool Box</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_2">
             <property name="geometry">
@@ -2309,8 +2333,17 @@ check box</string>
            <layout class="QGridLayout" name="gridLayout_16">
             <item row="0" column="0">
              <widget class="QLabel" name="label_4">
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
               <property name="text">
                <string>Frame</string>
+              </property>
+              <property name="margin">
+               <number>5</number>
               </property>
              </widget>
             </item>
