@@ -107,22 +107,6 @@ Kvantum::Kvantum() : QCommonStyle()
     kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
   if (QFile::exists(kdeGlobals))
   {
-    /*QFile file(kdeGlobals);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-      QTextStream in(&file);
-      while (!in.atEnd())
-      {
-        QString line = in.readLine();
-        if (line.startsWith("SingleClick"))
-        {
-          if (line.endsWith("=false") || line.endsWith("=0"))
-            singleClick = false;
-          break;
-        }
-      }
-      file.close();
-    }*/
     QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
     QVariant v;
     KDESettings.beginGroup("KDE");
@@ -5105,7 +5089,23 @@ void Kvantum::drawControl(ControlElement element,
             && f->frameShape != QFrame::VLine
             && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised))
         {
-          QCommonStyle::drawControl(element,option,painter,widget);
+          if (f->frameShape == QFrame::Box)
+          { // the default box frame is ugly too
+            if (!f->rect.isValid() || f->lineWidth == 0) break;
+            painter->save();
+            QColor col;
+            if (f->state & QStyle::State_Sunken)
+              col = f->palette.mid().color();
+            else
+              col = f->palette.midlight().color();
+            QRegion reg(f->rect);
+            QRegion internalReg(f->rect.adjusted(f->lineWidth,f->lineWidth,-f->lineWidth,-f->lineWidth));
+            painter->setClipRegion(reg.subtracted(internalReg));
+            painter->fillRect(f->rect,col);
+            painter->restore();
+          }
+          else
+            QCommonStyle::drawControl(element,option,painter,widget);
         }
       }
 

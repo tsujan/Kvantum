@@ -1953,11 +1953,8 @@ check box</string>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="2" column="1">
           <widget class="QFrame" name="frame_2">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::Panel</enum>
            </property>
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
@@ -1965,14 +1962,11 @@ check box</string>
            <layout class="QGridLayout" name="gridLayout_17">
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
-              <property name="frameShape">
-               <enum>QFrame::Box</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
               <property name="text">
-               <string>Frame</string>
+               <string>Panel frame</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
               <property name="margin">
                <number>5</number>
@@ -2014,7 +2008,7 @@ check box</string>
              <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
               <widget class="QLabel" name="label_16">
                <property name="text">
-                <string>Page 1</string>
+                <string>Page 1 (disabled)</string>
                </property>
               </widget>
              </item>
@@ -2032,7 +2026,7 @@ check box</string>
              <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
               <widget class="QLabel" name="label_17">
                <property name="text">
-                <string>Page 2</string>
+                <string>Page 2 (disabled)</string>
                </property>
               </widget>
              </item>
@@ -2091,10 +2085,10 @@ check box</string>
          <item row="2" column="2">
           <widget class="QStackedWidget" name="stackedWidget">
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::Panel</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Sunken</enum>
            </property>
            <property name="currentIndex">
             <number>0</number>
@@ -2104,7 +2098,10 @@ check box</string>
              <item row="0" column="0">
               <widget class="QLabel" name="label_2">
                <property name="text">
-                <string>Stack Widget (page1)</string>
+                <string>Stack widget (page1)</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -2133,6 +2130,9 @@ check box</string>
              <widget class="QLabel" name="label_6">
               <property name="text">
                <string>Group box</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -2176,6 +2176,9 @@ check box</string>
              <widget class="QLabel" name="label_8">
               <property name="text">
                <string>Checkable group box</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -2325,7 +2328,7 @@ check box</string>
          <item row="2" column="0">
           <widget class="QFrame" name="frame">
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::Box</enum>
            </property>
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
@@ -2333,14 +2336,11 @@ check box</string>
            <layout class="QGridLayout" name="gridLayout_16">
             <item row="0" column="0">
              <widget class="QLabel" name="label_4">
-              <property name="frameShape">
-               <enum>QFrame::Box</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
               <property name="text">
-               <string>Frame</string>
+               <string>Box frame</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
               <property name="margin">
                <number>5</number>
