@@ -4,6 +4,7 @@ V0.8.17
  * Fill the whole menubar (and not just its empty area) with its SVG element.
  * Fit adjacent view-items together.
  * Replaced the ugly default box frame with a simple one.
+ * A workaround for the problem of Dolphin's view-items with QSvgRenderer.
 
 V0.8.16
 ---------

@@ -2902,12 +2902,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           /* in this case, the item is colored intentionally
              (as in Konsole's color scheme editing dialog) */
           if (opt->state & State_HasFocus)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed");
+            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,true);
           else if (ivStatus != "normal" && ivStatus != "disabled")
           {
             if (isInactive)
               ivStatus.append(QString("-inactive"));
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,true);
           }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
@@ -2965,8 +2965,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         ivStatus.append(QString("-inactive"));
 
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus);
+      /* since Dolphin's view-items have problem with QSvgRenderer, we set usePixmap to true */
+      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,true);
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,Qt::Vertical,true);
 
       break;
     }
@@ -8168,10 +8169,24 @@ QRect Kvantum::squaredRect(const QRect &r) const {
   return QRect(r.x(),r.y(),e,e);
 }
 
+/* Here, instead of using the render() method of QSvgRenderer
+   directly, we first make a QPixmap for drawing SVG elements. */
+static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRect bounds, QString element)
+{
+  QPixmap pixmap = QPixmap(bounds.width(), bounds.height());
+  pixmap.fill(QColor(Qt::transparent));
+  QPainter p;
+  p.begin(&pixmap);
+  renderer->render(&p,element);
+  p.end();
+  painter->drawPixmap(bounds,pixmap);
+}
+
 bool Kvantum::renderElement(QPainter *painter,
                             const QString &element,
                             const QRect &bounds, int hsize, int vsize,
-                            Qt::Orientation orientation) const
+                            Qt::Orientation orientation,
+                            bool usePixmap) const
 {
   Q_UNUSED(orientation);
 
@@ -8209,7 +8224,10 @@ bool Kvantum::renderElement(QPainter *painter,
          if a separate pattern element exists */
       if (renderer->elementExists(element_+"-pattern"))
       {
-        renderer->render(painter,element_,bounds);
+        if (usePixmap)
+          drawSvgElement(renderer,painter,bounds,element_);
+        else
+          renderer->render(painter,element_,bounds);
         element_ = element_+"-pattern";
       }
 
@@ -8232,7 +8250,12 @@ bool Kvantum::renderElement(QPainter *painter,
       painter->drawTiledPixmap(bounds,pixmap);
     }
     else
-      renderer->render(painter,element_,bounds);
+    {
+      if (usePixmap)
+        drawSvgElement(renderer,painter,bounds,element_);
+      else
+        renderer->render(painter,element_,bounds);
+    }
   }
 
   return true;
@@ -8309,7 +8332,8 @@ void Kvantum::renderFrame(QPainter *painter,
                           int l, // length of the attached tab
                           int f1, // width of tab's left frame
                           int f2, // width of tab's right frame
-                          int tp) const // tab position
+                          int tp, // tab position
+                          bool usePixmap) const
 {
   if (!bounds.isValid() || !fspec.hasFrame)
     return;
@@ -8333,13 +8357,13 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0,
                           d-x0-fspec.left,
                           fspec.top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       renderElement(painter,element+"-top",
                     QRect(d+l,
                           y0,
                           x0+w-fspec.left-d-l,
                           fspec.top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
      /* left and right junctions */
      if (d-x0-fspec.left >= 0)
        renderElement(painter,element+"-top-leftjunct",
@@ -8347,19 +8371,19 @@ void Kvantum::renderFrame(QPainter *painter,
                             y0,
                             f1,
                             fspec.top),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
      if (x0+w-fspec.left-d-l >= 0)
        renderElement(painter,element+"-top-rightjunct",
                       QRect(d+l-f2,
                             y0,
                             f2,
                             fspec.top),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
     else
       renderElement(painter,element+"-top",
                     QRect(x0+fspec.left,y0,w-fspec.left-fspec.right,fspec.top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
     /************
      ** Bottom **
@@ -8371,32 +8395,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y1-fspec.bottom,
                           d-x0-fspec.left,
                           fspec.bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       renderElement(painter,element+"-bottom",
                     QRect(d+l,
                           y1-fspec.bottom,
                           x0+w-fspec.left-d-l,
                           fspec.bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       if (d-x0-fspec.left >= 0)
         renderElement(painter,element+"-bottom-leftjunct",
                       QRect(d,
                             y1-fspec.bottom,
                             f2,
                             fspec.bottom),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
       if (x0+w-fspec.left-d-l >= 0)
         renderElement(painter,element+"-bottom-rightjunct",
                       QRect(d+l-f1,
                             y1-fspec.bottom,
                             f1,
                             fspec.bottom),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
     else
       renderElement(painter,element+"-bottom",
                     QRect(x0+fspec.left,y1-fspec.bottom,w-fspec.left-fspec.right,fspec.bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
     /**********
      ** Left **
@@ -8408,32 +8432,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0+fspec.top,
                           fspec.left,
                           d-y0-fspec.top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       renderElement(painter,element+"-left",
                     QRect(x0,
                           d+l,
                           fspec.left,
                           y0+h-fspec.bottom-d-l),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       if (y0+h-fspec.bottom-d-l >= 0)
         renderElement(painter,element+"-left-leftjunct",
                       QRect(x0,
                             d+l-f2,
                             fspec.left,
                             f2),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
       if (d-y0-fspec.top >= 0)
         renderElement(painter,element+"-left-rightjunct",
                       QRect(x0,
                             d,
                             fspec.left,
                             f1),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
     else
       renderElement(painter,element+"-left",
                     QRect(x0,y0+fspec.top,fspec.left,h-fspec.top-fspec.bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
     /***********
      ** Right **
@@ -8445,32 +8469,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0+fspec.top,
                           fspec.right,
                           d-y0-fspec.top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       renderElement(painter,element+"-right",
                     QRect(x1-fspec.right,
                           d+l,
                           fspec.right,
                           y0+h-fspec.bottom-d-l),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
       if (d-y0-fspec.top >= 0)
         renderElement(painter,element+"-right-leftjunct",
                       QRect(x1-fspec.right,
                             d,
                             fspec.right,
                             f1),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
       if (y0+h-fspec.bottom-d-l >= 0)
         renderElement(painter,element+"-right-rightjunct",
                       QRect(x1-fspec.right,
                             d+l-f2,
                             fspec.right,
                             f2),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
     else
       renderElement(painter,element+"-right",
                     QRect(x1-fspec.right,y0+fspec.top,fspec.right,h-fspec.top-fspec.bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
     /*************
      ** Topleft **
@@ -8485,7 +8509,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x0,y0,fspec.left,fspec.top),
-                  0,0,Qt::Horizontal);
+                  0,0,Qt::Horizontal,usePixmap);
 
     /**************
      ** Topright **
@@ -8500,7 +8524,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x1-fspec.right,y0,fspec.right,fspec.top),
-                  0,0,Qt::Horizontal);
+                  0,0,Qt::Horizontal,usePixmap);
 
     /****************
      ** Bottomleft **
@@ -8515,7 +8539,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x0,y1-fspec.bottom,fspec.left,fspec.bottom),
-                  0,0,Qt::Horizontal);
+                  0,0,Qt::Horizontal,usePixmap);
 
     /*****************
      ** Bottomright **
@@ -8530,7 +8554,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x1-fspec.right,y1-fspec.bottom,fspec.right,fspec.bottom),
-                  0,0,Qt::Horizontal);
+                  0,0,Qt::Horizontal,usePixmap);
   }
   else // with capsule
   {
@@ -8555,18 +8579,18 @@ void Kvantum::renderFrame(QPainter *painter,
     {
       renderElement(painter,element+"-top",
                     QRect(x0+left,y0,w-left-right,top),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
       // topleft corner
       if (left > 0)
         renderElement(painter,element+"-topleft",
                       QRect(x0,y0,left,top),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
       // topright corner
       if (right > 0)
         renderElement(painter,element+"-topright",
                       QRect(x1-right,y0,right,top),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
 
     /************
@@ -8576,18 +8600,18 @@ void Kvantum::renderFrame(QPainter *painter,
     {
       renderElement(painter,element+"-bottom",
                     QRect(x0+left,y1-bottom,w-left-right,bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
       // bottomleft corner
       if (left > 0)
         renderElement(painter,element+"-bottomleft",
                       QRect(x0,y1-bottom,left,bottom),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
       // bottomright corner
       if (right > 0)
         renderElement(painter,element+"-bottomright",
                       QRect(x1-right,y1-bottom,right,bottom),
-                      0,0,Qt::Horizontal);
+                      0,0,Qt::Horizontal,usePixmap);
     }
 
     /**********
@@ -8596,7 +8620,7 @@ void Kvantum::renderFrame(QPainter *painter,
     if (left > 0)
       renderElement(painter,element+"-left",
                     QRect(x0,y0+top,left,h-top-bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
 
     /***********
      ** Right **
@@ -8604,7 +8628,7 @@ void Kvantum::renderFrame(QPainter *painter,
     if (right > 0)
       renderElement(painter,element+"-right",
                     QRect(x1-right,y0+top,right,h-top-bottom),
-                    0,0,Qt::Horizontal);
+                    0,0,Qt::Horizontal,usePixmap);
   }
 }
 
@@ -8613,14 +8637,15 @@ void Kvantum::renderInterior(QPainter *painter,
                              const frame_spec &fspec, // frame spec
                              const interior_spec &ispec, // interior spec
                              const QString &element, // interior SVG element
-                             Qt::Orientation orientation) const
+                             Qt::Orientation orientation,
+                             bool usePixmap) const
 {
   if (!bounds.isValid() || !ispec.hasInterior)
     return;
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     renderElement(painter,element,interiorRect(bounds,fspec),
-                  ispec.px,ispec.py,orientation);
+                  ispec.px,ispec.py,orientation,usePixmap);
   else
   {
     // add these to compensate the absence of the frame
@@ -8648,11 +8673,11 @@ void Kvantum::renderInterior(QPainter *painter,
     if (orientation == Qt::Vertical)
       renderElement(painter,element,
                     interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
-                    ispec.py,ispec.px,orientation);
+                    ispec.py,ispec.px,orientation,usePixmap);
     else
       renderElement(painter,element,
                     interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
-                    ispec.px,ispec.py,orientation);
+                    ispec.px,ispec.py,orientation,usePixmap);
   }
 }
 
