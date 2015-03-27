@@ -138,6 +138,9 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       r.left = v.toInt();
       v = getValue(elementName,"frame.right", i);
       r.right = v.toInt();
+
+      v = getValue(elementName,"frame.expansion", i);
+      r.expansion = v.toInt();
     }
   }
 

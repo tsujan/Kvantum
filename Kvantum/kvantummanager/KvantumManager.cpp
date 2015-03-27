@@ -1031,7 +1031,7 @@ void KvantumManager::popupBlurring (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.17</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.18</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>"));

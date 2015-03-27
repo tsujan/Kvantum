@@ -1674,9 +1674,6 @@ check box</string>
        </item>
        <item row="0" column="1" alignment="Qt::AlignLeft">
         <widget class="QProgressBar" name="progressBar_6">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1688,6 +1685,9 @@ check box</string>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -1709,6 +1709,9 @@ check box</string>
        </item>
        <item row="0" column="4" alignment="Qt::AlignRight|Qt::AlignTop">
         <widget class="QProgressBar" name="progressBar_9">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -1744,11 +1747,11 @@ check box</string>
        </item>
        <item row="2" column="0" colspan="3" alignment="Qt::AlignTop">
         <widget class="QProgressBar" name="progressBar_3">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
          <property name="value">
           <number>25</number>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -1786,6 +1789,9 @@ check box</string>
        </item>
        <item row="0" column="5" alignment="Qt::AlignLeft|Qt::AlignTop">
         <widget class="QProgressBar" name="progressBar_10">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -2240,7 +2246,7 @@ check box</string>
             <bool>false</bool>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_3">
             <property name="geometry">

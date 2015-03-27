@@ -154,6 +154,9 @@ typedef struct {
   int top,bottom,left,right;
   /* widget position in a capsule (used internally) */
   int capsuleH,capsuleV; // 0 -> middle, -1 -> left,top, 1 -> right,bottom, 2 -> left+right,top+bottom
+  /* if a widget's smallest dimension isn't greater than this,
+     its frames (corners) will be expanded as far as possible */
+  int expansion;
 } frame_spec;
 
 /* Generic information about a frame interior */
@@ -220,6 +223,7 @@ static inline void default_frame_spec(frame_spec &fspec) {
   fspec.element = QString();
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
   fspec.capsuleH = fspec.capsuleV = 0;
+  fspec.expansion = 0;
 }
 
 /* Fills the interior with default values */

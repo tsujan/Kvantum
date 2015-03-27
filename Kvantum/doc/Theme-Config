@@ -381,18 +381,27 @@ inherits                          string              The name of a secion (in t
                                                       brackets) whose configuration
                                                       is also used for this one.
 
-frame                             true/false          Draw a frame around
-                                                      the widget?
+frame                             true/false          Draw a frame around the widget?
 
 frame.top
 frame.bottom
 frame.left
-frame.right                       integer             The height or width of
-                                                      the corresponding frame
-                                                      part if there is any.
+frame.right                       integer             The height or width of the
+                                                      corresponding frame part
+                                                      if there is any.
 
-interior                          true/false          Draw an interior for
-                                                      the widget?
+frame.expansion                   integer             A positive value will expand the
+                                                      frames until the corner frames meet
+                                                      each other either vertically or
+                                                      horizontally, provided that at least
+                                                      the height or the width of the widget
+                                                      is not greater than it. With appropriate
+                                                      SVG images, this key can be used for
+                                                      making corners completely rounded. Its
+                                                      value is zero by default. Read the file
+                                                      "Theme-Making.pdf" for an explanation.
+
+interior                          true/false          Draw an interior for the widget?
 
 interior.x.patternsize
 interior.y.patternsize            integer             The interior pattern sizes.

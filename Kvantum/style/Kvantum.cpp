@@ -1134,6 +1134,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
+        fspec.expansion = 0;
 
         lspec.left = qMin(lspec.left,2);
         lspec.right = qMin(lspec.right,2);
@@ -1189,6 +1190,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   fspec.right = qMin(fspec.right,3);
                 else
                   fspec.left = qMin(fspec.left,3);
+                fspec.expansion = 0;
                 dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
                 lspec.tispace=0;
               }
@@ -1197,6 +1199,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                      || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
             {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+                fspec.expansion = 0;
             }
           }
           else
@@ -1207,6 +1210,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              fspec.expansion = 0;
             }
           }
         }
@@ -1352,6 +1356,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
 
+      if (qobject_cast<const QPushButton *>(widget))
+        fspec.expansion = 0; // -> PE_PanelButtonTool
+
       // -> CE_ToolButtonLabel
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
@@ -1359,6 +1366,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
+        fspec.expansion = 0;
 
         lspec.left = qMin(lspec.left,2);
         lspec.right = qMin(lspec.right,2);
@@ -1412,6 +1420,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   fspec.right = qMin(fspec.right,3);
                 else
                   fspec.left = qMin(fspec.left,3);
+                fspec.expansion = 0;
                 dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
                 lspec.tispace=0;
               }
@@ -1420,6 +1429,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                      || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
             {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+                fspec.expansion = 0;
             }
           }
           else
@@ -1430,6 +1440,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              fspec.expansion = 0;
             }
           }
         }
@@ -2068,6 +2079,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.expansion = 0;
       }
       if (qobject_cast<QAbstractSpinBox*>(getParent(widget,1))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
@@ -2080,6 +2092,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (settings->getThemeSpec().vertical_spin_indicators)
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
         }
         else
         {
@@ -2090,6 +2103,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                 || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+              fspec.expansion = 0;
             }
           }
         }
@@ -2098,19 +2112,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec.hasCapsule = true;
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
+        int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                    cb->height() <= getFrameSpec("ComboBox").expansion ? cb->height()/2 : 0);
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+          if (widget->width() < cb->width() - comboArrowLength - fspec1.left)
           {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+            if (widget->x() == comboArrowLength + fspec1.left)
               fspec.capsuleH = 0;
             else
               fspec.capsuleH = -1;
           }
           else
           {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+            if (widget->x() == comboArrowLength + fspec1.left)
               fspec.capsuleH = 1;
             else
               fspec.capsuleH = 2;
@@ -2121,7 +2137,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (widget->x() > 0)
           {
             /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+            if (widget->x()+w == cb->width() - (comboArrowLength+fspec1.right))
               fspec.capsuleH = 0;
             else
               fspec.capsuleH = 1;
@@ -2129,7 +2145,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
           else
           {
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+            if (widget->x()+w == cb->width() - (comboArrowLength+fspec1.right))
               fspec.capsuleH = -1;
             else
               fspec.capsuleH = 2;
@@ -2176,6 +2192,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.expansion = 0;
       }
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -2193,6 +2210,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (settings->getThemeSpec().vertical_spin_indicators)
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
         }
         else
         {
@@ -2203,6 +2221,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                 || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+              fspec.expansion = 0;
             }
           }
         }
@@ -2211,19 +2230,21 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec.hasCapsule = true;
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
+        int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                    cb->height() <= getFrameSpec("ComboBox").expansion ? cb->height()/2 : 0);
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+          if (widget->width() < cb->width() - comboArrowLength - fspec1.left)
           {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+            if (widget->x() == comboArrowLength + fspec1.left)
               fspec.capsuleH = 0;
             else
               fspec.capsuleH = -1;
           }
           else
           {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
+            if (widget->x() == comboArrowLength + fspec1.left)
               fspec.capsuleH = 1;
             else
               fspec.capsuleH = 2;
@@ -2234,7 +2255,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (widget->x() > 0)
           {
             /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+            if (widget->x()+w == cb->width() - (comboArrowLength+fspec1.right))
               fspec.capsuleH = 0;
             else
               fspec.capsuleH = 1;
@@ -2242,7 +2263,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
           else
           {
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
+            if (widget->x()+w == cb->width() - (comboArrowLength+fspec1.right))
               fspec.capsuleH = -1;
             else
               fspec.capsuleH = 2;
@@ -2349,12 +2370,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec = getFrameSpec("LineEdit");
         fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
+        fspec.expansion = 0;
       }
 
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+        fspec.expansion = 0;
       }
       // -> CC_SpinBox
       else if (opt && !tspec.vertical_spin_indicators)
@@ -2362,10 +2385,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (up)
         {
           if (opt->rect.width() < SPIN_BUTTON_WIDTH + fspec.right)
+          {
             fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
+            fspec.expansion = 0;
+          }
         }
         else if (opt->rect.width() < SPIN_BUTTON_WIDTH)
+        {
           fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
+          fspec.expansion = 0;
+        }
       }
 
       QString iStatus = status; // indicator state
@@ -2530,12 +2559,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const QComboBox *cb = qobject_cast<const QComboBox *>(widget);
       if (cb /*&& !cb->duplicatesEnabled()*/)
       {
+        const frame_spec fspec1 = getFrameSpec("ComboBox");
+        int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                    cb->height() <= fspec1.expansion ? cb->height()/2 : 0);
         if (QLineEdit *le = cb->lineEdit())
         {
           /* Konqueror may add an icon to the right of lineedit (for LTR) */
           if (rtl
-              ? le->x() == COMBO_ARROW_LENGTH + fspec.left
-              : le->x()+le->width() == cb->width()-(COMBO_ARROW_LENGTH+fspec.right))
+              ? le->x() == comboArrowLength + fspec.left
+              : le->x()+le->width() == cb->width()-(comboArrowLength+fspec.right))
           {
             fspec.hasCapsule = true;
           }
@@ -2556,6 +2588,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
           fspec.capsuleV = 2;
         }
+        fspec.expansion = fspec1.expansion;
 
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
@@ -2573,9 +2606,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           {
             QSize txtSize = textSize(painter->font(),opt->currentText);
             const label_spec lspec1 = getLabelSpec("ComboBox");
-            const frame_spec fspec1 = getFrameSpec("ComboBox");
             if (cb->width() < fspec1.left+lspec1.left+txtSize.width()+lspec1.right+fspec1.right
-                              +COMBO_ARROW_LENGTH+(rtl ? fspec.left : fspec.right))
+                              +comboArrowLength+(rtl ? fspec.left : fspec.right))
             {
               if (rtl)
                 r.adjust(0,0,-qMax(fspec.left-3,0),0);
@@ -2585,6 +2617,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               fspec.right = qMin(fspec.right,3);
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
+              fspec.expansion = 0;
             }
           }
         }
@@ -2646,6 +2679,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             {
               fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
             }
+            fspec.expansion = 0;
             dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
           }
         }
@@ -3355,6 +3389,7 @@ void Kvantum::drawControl(ControlElement element,
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
         }
 
         /* draw a panel for the menubar-item only if it's focused or pressed */
@@ -3524,10 +3559,12 @@ void Kvantum::drawControl(ControlElement element,
         { // when there isn't enough space
           if(!cb->lineEdit())
           {
+            int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                        cb->height() <= fspec.expansion ? cb->height()/2 : 0);
             QSize txtSize = textSize(painter->font(),opt->currentText);
             const frame_spec fspec1 = getFrameSpec("DropDownButton");
             if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+fspec.right
-                              +COMBO_ARROW_LENGTH
+                              +comboArrowLength
                               +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right))
             {
               fspec.left = qMin(fspec.left,3);
@@ -3541,9 +3578,9 @@ void Kvantum::drawControl(ControlElement element,
               lspec.bottom = qMin(lspec.bottom,2);
 
               if (opt->direction == Qt::RightToLeft)
-                r.adjust(-COMBO_ARROW_LENGTH+fspec1.left,0,0,0);
+                r.adjust(-comboArrowLength+fspec1.left,0,0,0);
               else
-                r.adjust(0,0,COMBO_ARROW_LENGTH+fspec1.right,0);
+                r.adjust(0,0,comboArrowLength+fspec1.right,0);
             }
           }
         }
@@ -3835,10 +3872,12 @@ void Kvantum::drawControl(ControlElement element,
         int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
                        - (closable ? lspec.tispace : 0)
                        - (opt->icon.isNull() ? 0 : icnSise);
-        if (textSize(painter->font(),txt).width() > txtWidth)
+        QFont F(painter->font());
+        if (lspec.boldFont) F.setBold(true);
+        if (textSize(F,txt).width() > txtWidth)
         {
-          QFontMetrics fm(painter->fontMetrics());
-          txt = fm.elidedText(opt->text, Qt::ElideRight, txtWidth);
+          QFontMetrics fm(F);
+          txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
         }
 
         renderLabel(painter,option->palette,
@@ -3985,6 +4024,13 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
 
+        /* if the progressbar is rounded, its contents should be so too */
+        bool isRounded = false;
+        const theme_spec tspec = settings->getThemeSpec();
+        const frame_spec fspec1 = getFrameSpec("Progressbar");
+        fspec.expansion = fspec1.expansion - (tspec.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
+        if (fspec.expansion >= qMin(h,w)) isRounded = true;
+
         bool isVertical = false;
         bool inverted = false;
         const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
@@ -4001,6 +4047,7 @@ void Kvantum::drawControl(ControlElement element,
         if (isVertical)
           r.setRect(y, x, h, w);
 
+        bool thin = false;
         if (opt->progress >= 0)
         {
           int empty = sliderPositionFromValue(opt->minimum,
@@ -4013,45 +4060,131 @@ void Kvantum::drawControl(ControlElement element,
           else
             r.adjust(empty,0,0,0);
 
-          // don't draw frames if there isn't enough space
-          if (r.width() <= fspec.left+fspec.right)
-            fspec.left = fspec.right = 0;
-          if (r.height() <= fspec.top+fspec.bottom)
-            fspec.top = fspec.bottom = 0;
+          // take care of thin indicators
+          if (r.width() > 0)
+          {
+            if (isRounded)
+            {
+              if ((!isVertical && r.width() < h) || (isVertical && r.width() < w))
+              {
+                painter->save();
+                painter->setClipRegion(r);
+                if (!isVertical && !inverted)
+                  r.setWidth(h);
+                else if (isVertical && inverted)
+                  r.setWidth(w);
+                else if (!isVertical && inverted)
+                  r.adjust(r.width()-h,0,0,0);
+                else// if (isVertical && !inverted)
+                  r.adjust(r.width()-w,0,0,0);
+                thin = true;
+              }
+            }
+            else if (r.width() < fspec.left+fspec.right)
+            {
+              painter->save();
+              painter->setClipRegion(r);
+              if ((!isVertical && !inverted) || (isVertical && inverted))
+                r.setWidth(fspec.left+fspec.right);
+              else
+                r.adjust(r.width()-fspec.left-fspec.right,0,0,0);
+              thin = true;
+            }
+          }
+          if (r.height() < fspec.top+fspec.bottom)
+          {
+            fspec.top = fspec.bottom = r.height()/2;
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (thin)
+            painter->restore();
         }
         else
         { // busy progressbar
           QWidget *wi = (QWidget *)widget;
           int animcount = progressbars[wi];
-          int pm = qMin(pixelMetric(PM_ProgressBarChunkWidth),r.width()/2-2);         
+          int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);         
           QRect R = r.adjusted(animcount,0,0,0);
           if (isVertical ? inverted : !inverted)
             R.setX(r.x()+(animcount%r.width()));
           else
             R.setX(r.x()+r.width()-(animcount%r.width()));
-          R.setWidth(pm);
-
+          if (!isRounded)
+            R.setWidth(pm);
+          else
+          {
+            if (!isVertical)
+              R.setWidth(h);
+            else
+              R.setWidth(w);
+          }
+          if (R.height() < fspec.top+fspec.bottom)
+          {
+            fspec.top = fspec.bottom = r.height()/2;
+          }
+            
           if (R.x()+R.width() > r.x()+r.width())
           {
-            const theme_spec tspec = settings->getThemeSpec();
-            // wrap busy indicator
-            if (!tspec.spread_progressbar)
-            {
-              fspec.hasCapsule = true;
-              fspec.capsuleH = -1;
-              fspec.capsuleV = 2;
-            }
             R.setWidth(r.x() + r.width() - R.x());
-            renderFrame(painter,R,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
 
-            if (!tspec.spread_progressbar)
-              fspec.capsuleH = 1;
-            R = QRect(r.x(), r.y(), pm-R.width(), r.height());
+            // keep external corners rounded
+            thin = false;
+            QRect R1(R);
+            if (R1.width() > 0)
+            {
+              if (isRounded)
+              {
+                painter->save();
+                painter->setClipRegion(R);
+                if (!isVertical)
+                  R1.adjust(R.width()-h,0,0,0);
+                else
+                  R1.adjust(R.width()-w,0,0,0);
+                thin = true;
+              }
+              else if (R1.width() < fspec.left+fspec.right)
+              {
+                painter->save();
+                painter->setClipRegion(R1);
+                R1.adjust(R.width()-fspec.left-fspec.right,0,0,0);
+                thin = true;
+              }
+            }
+
+            renderFrame(painter,R1,fspec,fspec.element+"-"+status);
+            renderInterior(painter,R1,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
+            if (thin)
+              painter->restore();
+
+            R = QRect(r.x(), r.y(), (!isRounded ? pm : !isVertical? h : w)-R.width(), r.height());
+
+            thin = false;
+            if (R.width() > 0)
+            {
+              if (isRounded)
+              {
+                painter->save();
+                painter->setClipRegion(R);
+                if (!isVertical)
+                  R.setWidth(h);
+                else
+                  R.setWidth(w);
+                thin = true;
+              }
+              else if (R.width() < fspec.left+fspec.right)
+              {
+                painter->save();
+                painter->setClipRegion(R);
+                R.setWidth(fspec.left+fspec.right);
+                thin = true;
+              }
+            }
+
             renderFrame(painter,R,fspec,fspec.element+"-"+status);
             renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
+            if (thin)
+              painter->restore();
           }
           else
           {
@@ -4077,14 +4210,16 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
 
+        int length = w;
         QRect r = option->rect;
         if (const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget))
         {
-          int wdth = pb->height();
+          int thickness = pb->height();
 
           if (pb->orientation() == Qt::Vertical)
           {
-            wdth = pb->width();
+            length = h;
+            thickness = pb->width();
 
             r.setRect(0, 0, h, w);
             QTransform m;
@@ -4107,19 +4242,25 @@ void Kvantum::drawControl(ControlElement element,
             painter->setTransform(m, true);
           }
 
-          wdth = wdth - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
+          thickness = thickness - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
           QFont f(pb->font());
-          if (f.pixelSize() > wdth)
-            f.setPixelSize(wdth);
-          else if (f.pointSize() > wdth)
-            f.setPointSize(wdth);
+          if (f.pixelSize() > thickness)
+            f.setPixelSize(thickness);
+          else if (f.pointSize() > thickness)
+            f.setPointSize(thickness);
           painter->setFont(f);
         }
+
+        QString txt = opt->text;
+        QFont F(painter->font());
+        if (lspec.boldFont) F.setBold(true);
+        QFontMetrics fm(F);
+        txt = fm.elidedText(txt, Qt::ElideRight, length);
 
         renderLabel(painter,option->palette,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,opt->text,QPalette::WindowText,
+                    Qt::AlignCenter,txt,QPalette::WindowText,
                     option->state & State_Enabled ?
                       (option->state & State_Selected) ? 4
                       : option->state & State_MouseOver ? 2 : 1 : 0);
@@ -4615,6 +4756,7 @@ void Kvantum::drawControl(ControlElement element,
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
@@ -4626,6 +4768,8 @@ void Kvantum::drawControl(ControlElement element,
             drawPrimitive(PE_Frame,option,painter,widget);
             break;
           }
+          // KColorButton
+          if (opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
           if (status.startsWith("disabled"))
           {
             status = "normal";
@@ -5043,7 +5187,9 @@ void Kvantum::drawControl(ControlElement element,
         fspec.left=fspec.right=fspec.top=fspec.bottom=0;
         lspec.left=lspec.right=lspec.top=lspec.bottom=0;
         
-        QFontMetrics fm(painter->fontMetrics());
+        QFont F(painter->font());
+        if (lspec.boldFont) F.setBold(true);
+        QFontMetrics fm(F);
         QString title = fm.elidedText(opt->title, Qt::ElideRight, tRect.width());
         int talign = Qt::AlignHCenter | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -5285,6 +5431,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
           fspec.capsuleH = 1;
           fspec.capsuleV = 2;
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
           QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           r.setHeight(subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget).height());
           QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
@@ -5380,13 +5527,16 @@ void Kvantum::drawComplexControl(ComplexControl control,
               QSize txtSize = textSize(painter->font(),opt->currentText);
               const label_spec lspec = getLabelSpec(group);
               const frame_spec fspec1 = getFrameSpec("DropDownButton");
+              int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                          cb->height() <= fspec.expansion ? cb->height()/2 : 0);
               if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+fspec.right
-                                +COMBO_ARROW_LENGTH+(rtl ? fspec1.left : fspec1.right))
+                                +comboArrowLength+(rtl ? fspec1.left : fspec1.right))
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
+                fspec.expansion = 0;
                 /* fspec1 will be reduced to 3 at PE_IndicatorButtonDropDown */
                 if (rtl)
                   o.rect.adjust(-qMax(fspec1.left-3,0),0,0,0);
@@ -5822,7 +5972,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
           renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+tbStatus);
 
           o.rect = subControlRect(CC_TitleBar,opt,SC_TitleBarLabel,widget);
-          QFontMetrics fm(painter->fontMetrics());
+          QFont F(painter->font());
+          if (lspec.boldFont) F.setBold(true);
+          QFontMetrics fm(F);
           QString title = fm.elidedText(o.text, Qt::ElideRight,
                                         o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
                                                       // titlebars have no frame
@@ -6545,7 +6697,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         s = defaultSize + QSize(fspec.left+fspec.right + lspec.left+lspec.right,
                                 fspec.top+fspec.bottom + lspec.top+lspec.bottom);
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
-        s += QSize(COMBO_ARROW_LENGTH + (opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right), 0);
+        int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                    s.height() <= fspec.expansion ? s.height()/2 : 0);
+        s += QSize(comboArrowLength + (opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right), 0);
 
         /* With an editable combo that has icon, we take into account
            the margins when positioning the icon, so we need an extra
@@ -7566,10 +7720,11 @@ QRect Kvantum::subControlRect(ComplexControl control,
         }
         case SC_ComboBoxEditField : {
           int margin = 0;
+          const frame_spec fspec = getFrameSpec("ComboBox");
           if (isLibreoffice)
           {
-            const frame_spec fspec = getFrameSpec("LineEdit");
-            margin = fspec.left;
+            const frame_spec Fspec = getFrameSpec("LineEdit");
+            margin = Fspec.left;
           }
           else
           {
@@ -7577,30 +7732,31 @@ QRect Kvantum::subControlRect(ComplexControl control,
             const QStyleOptionComboBox *opt =
                 qstyleoption_cast<const QStyleOptionComboBox *>(option);
             if (opt && opt->editable && !opt->currentIcon.isNull())
-            {
-              const frame_spec fspec = getFrameSpec("ComboBox");
               margin = fspec.left+fspec.right;
-            }
           }
           const frame_spec fspec1 = getFrameSpec("DropDownButton");
+          int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                      h <= fspec.expansion ? h/2 : 0);
           return QRect(option->direction == Qt::RightToLeft ?
-                         x+COMBO_ARROW_LENGTH+fspec1.left
+                         x+comboArrowLength+fspec1.left
                          : x+margin,
                        y,
                        option->direction == Qt::RightToLeft ?
-                         w-(COMBO_ARROW_LENGTH+fspec1.left)-margin
-                         : w-(COMBO_ARROW_LENGTH+fspec1.right)-margin,
+                         w-(comboArrowLength+fspec1.left)-margin
+                         : w-(comboArrowLength+fspec1.right)-margin,
                        h);
         }
         case SC_ComboBoxArrow : {
           const frame_spec fspec = getFrameSpec("DropDownButton");
+          int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
+                                      h <= getFrameSpec("ComboBox").expansion ? h/2 : 0);
           return QRect(option->direction == Qt::RightToLeft ?
                          x
-                         : x+w-(COMBO_ARROW_LENGTH+fspec.right),
+                         : x+w-(comboArrowLength+fspec.right),
                        y,
                        option->direction == Qt::RightToLeft ?
-                         COMBO_ARROW_LENGTH+fspec.left
-                         : COMBO_ARROW_LENGTH+fspec.right,
+                         comboArrowLength+fspec.left
+                         : comboArrowLength+fspec.right,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
@@ -8345,6 +8501,65 @@ void Kvantum::renderFrame(QPainter *painter,
   x1 = bounds.bottomRight().x() + 1;
   y1 = bounds.bottomRight().y() + 1;
 
+  int Left,Top,Right,Bottom;
+  Left = Top = Right = Bottom = 0;
+  QString element1(element);
+  int e = qMin(h,w);
+  if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
+      && (!fspec.hasCapsule || (fspec.capsuleV == 2 && fspec.capsuleH != 0)))
+  {
+    if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
+    {
+      if (e%2 == 0)
+      {
+        Left = Top = Right = Bottom = e/2;
+      }
+      else
+      {
+        Left = Top = (e+1)/2;
+        Right = Bottom = (e-1)/2;
+      }
+    }
+    else
+    {
+      int X = 0;
+      if (h <= 2*w)
+      {
+        if (h%2 == 0)
+        {
+          X = Top = Bottom = h/2;
+        }
+        else
+        {
+          X = Top = (h+1)/2;
+          Bottom = (h-1)/2;
+        }
+      }
+      else
+          X = Top = Bottom = w;
+      if (fspec.capsuleH == -1)
+      {
+        Left = X;
+        Right = fspec.right;
+      }
+      else
+      {
+        Right = X;
+        Left = fspec.left;
+      }
+    }
+    QString element0(element);
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))))
+      element1 = "expand-"+element;
+  }
+  else
+  {
+    Left = fspec.left;
+    Top = fspec.top;
+    Right = fspec.right;
+    Bottom = fspec.bottom;
+  }
+
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
   {
     /*********
@@ -8352,37 +8567,37 @@ void Kvantum::renderFrame(QPainter *painter,
      *********/
     if (l > 0 && tp == QTabWidget::North)
     {
-      renderElement(painter,element+"-top",
-                    QRect(x0+fspec.left,
+      renderElement(painter,element1+"-top",
+                    QRect(x0+Left,
                           y0,
-                          d-x0-fspec.left,
-                          fspec.top),
+                          d-x0-Left,
+                          Top),
                     0,0,Qt::Horizontal,usePixmap);
-      renderElement(painter,element+"-top",
+      renderElement(painter,element1+"-top",
                     QRect(d+l,
                           y0,
-                          x0+w-fspec.left-d-l,
-                          fspec.top),
+                          x0+w-Left-d-l,
+                          Top),
                     0,0,Qt::Horizontal,usePixmap);
      /* left and right junctions */
-     if (d-x0-fspec.left >= 0)
-       renderElement(painter,element+"-top-leftjunct",
+     if (d-x0-Left >= 0)
+       renderElement(painter,element1+"-top-leftjunct",
                       QRect(d,
                             y0,
                             f1,
-                            fspec.top),
+                            Top),
                       0,0,Qt::Horizontal,usePixmap);
-     if (x0+w-fspec.left-d-l >= 0)
-       renderElement(painter,element+"-top-rightjunct",
+     if (x0+w-Left-d-l >= 0)
+       renderElement(painter,element1+"-top-rightjunct",
                       QRect(d+l-f2,
                             y0,
                             f2,
-                            fspec.top),
+                            Top),
                       0,0,Qt::Horizontal,usePixmap);
     }
     else
-      renderElement(painter,element+"-top",
-                    QRect(x0+fspec.left,y0,w-fspec.left-fspec.right,fspec.top),
+      renderElement(painter,element1+"-top",
+                    QRect(x0+Left,y0,w-Left-Right,Top),
                     0,0,Qt::Horizontal,usePixmap);
 
     /************
@@ -8390,36 +8605,36 @@ void Kvantum::renderFrame(QPainter *painter,
      ************/
     if (l > 0 && tp == QTabWidget::South)
     {
-      renderElement(painter,element+"-bottom",
-                    QRect(x0+fspec.left,
-                          y1-fspec.bottom,
-                          d-x0-fspec.left,
-                          fspec.bottom),
+      renderElement(painter,element1+"-bottom",
+                    QRect(x0+Left,
+                          y1-Bottom,
+                          d-x0-Left,
+                          Bottom),
                     0,0,Qt::Horizontal,usePixmap);
-      renderElement(painter,element+"-bottom",
+      renderElement(painter,element1+"-bottom",
                     QRect(d+l,
-                          y1-fspec.bottom,
-                          x0+w-fspec.left-d-l,
-                          fspec.bottom),
+                          y1-Bottom,
+                          x0+w-Left-d-l,
+                          Bottom),
                     0,0,Qt::Horizontal,usePixmap);
-      if (d-x0-fspec.left >= 0)
-        renderElement(painter,element+"-bottom-leftjunct",
+      if (d-x0-Left >= 0)
+        renderElement(painter,element1+"-bottom-leftjunct",
                       QRect(d,
-                            y1-fspec.bottom,
+                            y1-Bottom,
                             f2,
-                            fspec.bottom),
+                            Bottom),
                       0,0,Qt::Horizontal,usePixmap);
-      if (x0+w-fspec.left-d-l >= 0)
-        renderElement(painter,element+"-bottom-rightjunct",
+      if (x0+w-Left-d-l >= 0)
+        renderElement(painter,element1+"-bottom-rightjunct",
                       QRect(d+l-f1,
-                            y1-fspec.bottom,
+                            y1-Bottom,
                             f1,
-                            fspec.bottom),
+                            Bottom),
                       0,0,Qt::Horizontal,usePixmap);
     }
     else
-      renderElement(painter,element+"-bottom",
-                    QRect(x0+fspec.left,y1-fspec.bottom,w-fspec.left-fspec.right,fspec.bottom),
+      renderElement(painter,element1+"-bottom",
+                    QRect(x0+Left,y1-Bottom,w-Left-Right,Bottom),
                     0,0,Qt::Horizontal,usePixmap);
 
     /**********
@@ -8427,36 +8642,36 @@ void Kvantum::renderFrame(QPainter *painter,
      **********/
     if (l > 0 && tp == QTabWidget::West)
     {
-      renderElement(painter,element+"-left",
+      renderElement(painter,element1+"-left",
                     QRect(x0,
-                          y0+fspec.top,
-                          fspec.left,
-                          d-y0-fspec.top),
+                          y0+Top,
+                          Left,
+                          d-y0-Top),
                     0,0,Qt::Horizontal,usePixmap);
-      renderElement(painter,element+"-left",
+      renderElement(painter,element1+"-left",
                     QRect(x0,
                           d+l,
-                          fspec.left,
-                          y0+h-fspec.bottom-d-l),
+                          Left,
+                          y0+h-Bottom-d-l),
                     0,0,Qt::Horizontal,usePixmap);
-      if (y0+h-fspec.bottom-d-l >= 0)
-        renderElement(painter,element+"-left-leftjunct",
+      if (y0+h-Bottom-d-l >= 0)
+        renderElement(painter,element1+"-left-leftjunct",
                       QRect(x0,
                             d+l-f2,
-                            fspec.left,
+                            Left,
                             f2),
                       0,0,Qt::Horizontal,usePixmap);
-      if (d-y0-fspec.top >= 0)
-        renderElement(painter,element+"-left-rightjunct",
+      if (d-y0-Top >= 0)
+        renderElement(painter,element1+"-left-rightjunct",
                       QRect(x0,
                             d,
-                            fspec.left,
+                            Left,
                             f1),
                       0,0,Qt::Horizontal,usePixmap);
     }
     else
-      renderElement(painter,element+"-left",
-                    QRect(x0,y0+fspec.top,fspec.left,h-fspec.top-fspec.bottom),
+      renderElement(painter,element1+"-left",
+                    QRect(x0,y0+Top,Left,h-Top-Bottom),
                     0,0,Qt::Horizontal,usePixmap);
 
     /***********
@@ -8464,96 +8679,96 @@ void Kvantum::renderFrame(QPainter *painter,
      ***********/
     if (l > 0 && tp == QTabWidget::East)
     {
-      renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right,
-                          y0+fspec.top,
-                          fspec.right,
-                          d-y0-fspec.top),
+      renderElement(painter,element1+"-right",
+                    QRect(x1-Right,
+                          y0+Top,
+                          Right,
+                          d-y0-Top),
                     0,0,Qt::Horizontal,usePixmap);
-      renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right,
+      renderElement(painter,element1+"-right",
+                    QRect(x1-Right,
                           d+l,
-                          fspec.right,
-                          y0+h-fspec.bottom-d-l),
+                          Right,
+                          y0+h-Bottom-d-l),
                     0,0,Qt::Horizontal,usePixmap);
-      if (d-y0-fspec.top >= 0)
-        renderElement(painter,element+"-right-leftjunct",
-                      QRect(x1-fspec.right,
+      if (d-y0-Top >= 0)
+        renderElement(painter,element1+"-right-leftjunct",
+                      QRect(x1-Right,
                             d,
-                            fspec.right,
+                            Right,
                             f1),
                       0,0,Qt::Horizontal,usePixmap);
-      if (y0+h-fspec.bottom-d-l >= 0)
-        renderElement(painter,element+"-right-rightjunct",
-                      QRect(x1-fspec.right,
+      if (y0+h-Bottom-d-l >= 0)
+        renderElement(painter,element1+"-right-rightjunct",
+                      QRect(x1-Right,
                             d+l-f2,
-                            fspec.right,
+                            Right,
                             f2),
                       0,0,Qt::Horizontal,usePixmap);
     }
     else
-      renderElement(painter,element+"-right",
-                    QRect(x1-fspec.right,y0+fspec.top,fspec.right,h-fspec.top-fspec.bottom),
+      renderElement(painter,element1+"-right",
+                    QRect(x1-Right,y0+Top,Right,h-Top-Bottom),
                     0,0,Qt::Horizontal,usePixmap);
 
     /*************
      ** Topleft **
      *************/
-    QString  element_ = element+"-topleft";
+    QString  element_ = element1+"-topleft";
     if (l > 0)
     {
-      if (tp == QTabWidget::North && d < fspec.left)
-        element_ = element+"-left";
-      else if (tp == QTabWidget::West && d < fspec.top)
-        element_ = element+"-top";
+      if (tp == QTabWidget::North && d < Left)
+        element_ = element1+"-left";
+      else if (tp == QTabWidget::West && d < Top)
+        element_ = element1+"-top";
     }
     renderElement(painter,element_,
-                  QRect(x0,y0,fspec.left,fspec.top),
+                  QRect(x0,y0,Left,Top),
                   0,0,Qt::Horizontal,usePixmap);
 
     /**************
      ** Topright **
      **************/
-    element_ = element+"-topright";
+    element_ = element1+"-topright";
     if (l > 0)
     {
-      if (tp == QTabWidget::North && w-d-l < fspec.right)
-        element_ = element+"-right";
-      else if (tp == QTabWidget::East && d < fspec.top)
-        element_ = element+"-top";
+      if (tp == QTabWidget::North && w-d-l < Right)
+        element_ = element1+"-right";
+      else if (tp == QTabWidget::East && d < Top)
+        element_ = element1+"-top";
     }
     renderElement(painter,element_,
-                  QRect(x1-fspec.right,y0,fspec.right,fspec.top),
+                  QRect(x1-Right,y0,Right,Top),
                   0,0,Qt::Horizontal,usePixmap);
 
     /****************
      ** Bottomleft **
      ****************/
-    element_ = element+"-bottomleft";
+    element_ = element1+"-bottomleft";
     if (l > 0)
     {
-      if (tp == QTabWidget::South && d < fspec.left)
-        element_ = element+"-left";
-      else if (tp == QTabWidget::West && h-d-l < fspec.bottom)
-        element_ = element+"-bottom";
+      if (tp == QTabWidget::South && d < Left)
+        element_ = element1+"-left";
+      else if (tp == QTabWidget::West && h-d-l < Bottom)
+        element_ = element1+"-bottom";
     }
     renderElement(painter,element_,
-                  QRect(x0,y1-fspec.bottom,fspec.left,fspec.bottom),
+                  QRect(x0,y1-Bottom,Left,Bottom),
                   0,0,Qt::Horizontal,usePixmap);
 
     /*****************
      ** Bottomright **
      *****************/
-    element_ = element+"-bottomright";
+    element_ = element1+"-bottomright";
     if (l > 0)
     {
-      if (tp == QTabWidget::South && w-d-l < fspec.right)
-        element_ = element+"-right";
-      else if (tp == QTabWidget::East && h-d-l < fspec.bottom)
-        element_ = element+"-bottom";
+      if (tp == QTabWidget::South && w-d-l < Right)
+        element_ = element1+"-right";
+      else if (tp == QTabWidget::East && h-d-l < Bottom)
+        element_ = element1+"-bottom";
     }
     renderElement(painter,element_,
-                  QRect(x1-fspec.right,y1-fspec.bottom,fspec.right,fspec.bottom),
+                  QRect(x1-Right,y1-Bottom,Right,Bottom),
                   0,0,Qt::Horizontal,usePixmap);
   }
   else // with capsule
@@ -8564,31 +8779,31 @@ void Kvantum::renderFrame(QPainter *painter,
     /* to simplify calculations, we first get margins */
     int left = 0, right = 0, top = 0, bottom = 0;
     if (fspec.capsuleH == -1 || fspec.capsuleH == 2)
-      left = fspec.left;
+      left = Left;
     if (fspec.capsuleH == 1 || fspec.capsuleH == 2)
-      right = fspec.right;
+      right = Right;
     if (fspec.capsuleV == -1  || fspec.capsuleV == 2)
-      top = fspec.top;
+      top = Top;
     if (fspec.capsuleV == 1 || fspec.capsuleV == 2)
-      bottom = fspec.bottom;
+      bottom = Bottom;
 
     /*********
      ** Top **
      *********/
     if (top > 0)
     {
-      renderElement(painter,element+"-top",
+      renderElement(painter,element1+"-top",
                     QRect(x0+left,y0,w-left-right,top),
                     0,0,Qt::Horizontal,usePixmap);
 
       // topleft corner
       if (left > 0)
-        renderElement(painter,element+"-topleft",
+        renderElement(painter,element1+"-topleft",
                       QRect(x0,y0,left,top),
                       0,0,Qt::Horizontal,usePixmap);
       // topright corner
       if (right > 0)
-        renderElement(painter,element+"-topright",
+        renderElement(painter,element1+"-topright",
                       QRect(x1-right,y0,right,top),
                       0,0,Qt::Horizontal,usePixmap);
     }
@@ -8598,18 +8813,18 @@ void Kvantum::renderFrame(QPainter *painter,
      ************/
     if (bottom > 0)
     {
-      renderElement(painter,element+"-bottom",
+      renderElement(painter,element1+"-bottom",
                     QRect(x0+left,y1-bottom,w-left-right,bottom),
                     0,0,Qt::Horizontal,usePixmap);
 
       // bottomleft corner
       if (left > 0)
-        renderElement(painter,element+"-bottomleft",
+        renderElement(painter,element1+"-bottomleft",
                       QRect(x0,y1-bottom,left,bottom),
                       0,0,Qt::Horizontal,usePixmap);
       // bottomright corner
       if (right > 0)
-        renderElement(painter,element+"-bottomright",
+        renderElement(painter,element1+"-bottomright",
                       QRect(x1-right,y1-bottom,right,bottom),
                       0,0,Qt::Horizontal,usePixmap);
     }
@@ -8618,7 +8833,7 @@ void Kvantum::renderFrame(QPainter *painter,
      ** Left **
      **********/
     if (left > 0)
-      renderElement(painter,element+"-left",
+      renderElement(painter,element1+"-left",
                     QRect(x0,y0+top,left,h-top-bottom),
                     0,0,Qt::Horizontal,usePixmap);
 
@@ -8626,7 +8841,7 @@ void Kvantum::renderFrame(QPainter *painter,
      ** Right **
      ***********/
     if (right > 0)
-      renderElement(painter,element+"-right",
+      renderElement(painter,element1+"-right",
                     QRect(x1-right,y0+top,right,h-top-bottom),
                     0,0,Qt::Horizontal,usePixmap);
   }
@@ -8641,6 +8856,10 @@ void Kvantum::renderInterior(QPainter *painter,
                              bool usePixmap) const
 {
   if (!bounds.isValid() || !ispec.hasInterior)
+    return;
+
+  if (!isLibreoffice && fspec.expansion > 0 && qMin(bounds.height(),bounds.width()) <= fspec.expansion
+      && (!fspec.hasCapsule || (fspec.capsuleV == 2 && fspec.capsuleH != 0)))
     return;
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
