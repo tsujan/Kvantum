@@ -8510,6 +8510,20 @@ void Kvantum::renderFrame(QPainter *painter,
   {
     if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     {
+      /* to get smoother gradients, we use QTransform in this special case */
+      if (h > w)
+      {
+        QRect r;
+        r.setRect(y0, x0, h, w);
+        QTransform m;
+        m.scale(-1,1);
+        m.rotate(90);
+        painter->save();
+        painter->setTransform(m, true);
+        renderFrame(painter,r,fspec,element,d,l,f1,f2,tp,usePixmap);
+        painter->restore();
+        return;
+      }
       if (e%2 == 0)
       {
         Left = Top = Right = Bottom = e/2;
