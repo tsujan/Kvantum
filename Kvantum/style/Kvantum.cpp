@@ -3669,7 +3669,7 @@ void Kvantum::drawControl(ControlElement element,
             if (bottomTabs)
               capsule = -1*capsule;
             /* I've seen this only in KDevelop */
-            if (opt->direction == Qt::RightToLeft)
+            if (opt->direction == Qt::RightToLeft && !verticalTabs)
               capsule = -1*capsule;
             fspec.capsuleH = capsule;
             fspec.capsuleV = 2;
@@ -7601,12 +7601,16 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
             break;
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
-            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width(), paneRect.y()),
+            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width()
+                                         +(option->direction == Qt::RightToLeft ? paneRect.width() : 0),
+                             paneRect.y()),
                       twf->leftCornerWidgetSize);
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
-            r = QRect(QPoint(paneRect.x()+paneRect.width(), paneRect.y()),
+            r = QRect(QPoint(option->direction == Qt::RightToLeft ? paneRect.x()
+                                                                  : paneRect.x()+paneRect.width(),
+                             paneRect.y()),
                       twf->leftCornerWidgetSize);
             break;
           default: break;
@@ -7638,13 +7642,15 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
             break;
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
-            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width(),
+            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width()
+                                         +(option->direction == Qt::RightToLeft ? paneRect.width() : 0),
                              paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
                       twf->leftCornerWidgetSize);
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
-            r = QRect(QPoint(paneRect.x()+paneRect.width(),
+            r = QRect(QPoint(option->direction == Qt::RightToLeft ? paneRect.x()
+                                                                  : paneRect.x()+paneRect.width(),
                              paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
                       twf->leftCornerWidgetSize);
             break;
