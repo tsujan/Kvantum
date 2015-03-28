@@ -7582,6 +7582,80 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       return QCommonStyle::subElementRect(element,option,widget).adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);
     }
 
+    case SE_TabWidgetLeftCorner : {
+      QRect r;
+      if (const QStyleOptionTabWidgetFrame *twf =
+          qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option))
+      {
+        QRect paneRect = subElementRect(SE_TabWidgetTabPane, twf, widget);
+        switch (twf->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth:
+            r = QRect(QPoint(paneRect.x(), paneRect.y()-twf->leftCornerWidgetSize.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth:
+            r = QRect(QPoint(paneRect.x(), paneRect.y()+paneRect.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width(), paneRect.y()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+            r = QRect(QPoint(paneRect.x()+paneRect.width(), paneRect.y()),
+                      twf->leftCornerWidgetSize);
+            break;
+          default: break;
+        }
+        r = visualRect(twf->direction, twf->rect, r);
+      }
+      if (r.isValid()) return r;
+      else return QCommonStyle::subElementRect(element,option,widget);
+    }
+
+    case SE_TabWidgetRightCorner : {
+      QRect r;
+      if (const QStyleOptionTabWidgetFrame *twf =
+          qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option))
+      {
+        QRect paneRect = subElementRect(SE_TabWidgetTabPane, twf, widget);
+        switch (twf->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth:
+            r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
+                             paneRect.y()-twf->leftCornerWidgetSize.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth:
+            r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
+                             paneRect.y()+paneRect.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width(),
+                             paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+            r = QRect(QPoint(paneRect.x()+paneRect.width(),
+                             paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
+                      twf->leftCornerWidgetSize);
+            break;
+          default: break;
+        }
+        r = visualRect(twf->direction, twf->rect, r);
+      }
+      if (r.isValid()) return r;
+      else return QCommonStyle::subElementRect(element,option,widget);
+    }
+
     default : return QCommonStyle::subElementRect(element,option,widget);
   }
 }

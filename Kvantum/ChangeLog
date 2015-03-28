@@ -2,6 +2,7 @@ V0.8.18
 ---------
  * Now it's possible to have completely rounded corners (and more).
  * Elide the progressbar text when there isn't space (as in Dolphin's space info).
+ * Added missing corner widgets for vertical tabs.
 
 V0.8.17
 ---------
