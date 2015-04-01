@@ -331,6 +331,9 @@ highlight.color                   string (#RRGGBB)    A color for text selection
 inactive.highlight.color          string (#RRGGBB)    Like "highlight.color" but when
                                                       the text widget does not have focus.
 
+tooltip.base.color                string (#RRGGBB)    Tooltip background color (used in
+                                                      "WhatsThis" tooltips).
+
 text.color                        string (#RRGGBB)    The foreground color used with
                                                       "base.color".
 

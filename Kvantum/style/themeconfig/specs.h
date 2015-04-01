@@ -113,6 +113,7 @@ typedef struct {
   QString shadowColor;
   QString highlightColor;
   QString inactiveHighlightColor;
+  QString tooltipBasetColor;
   QString textColor;
   QString windowTextColor;
   QString buttonTextColor;
@@ -309,6 +310,7 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.shadowColor = QString("#000000");
   cspec.highlightColor = QString();
   cspec.inactiveHighlightColor = QString();
+  cspec.tooltipBasetColor = QString();
   cspec.textColor = QString();
   cspec.windowTextColor = QString();
   cspec.buttonTextColor = QString();

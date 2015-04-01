@@ -703,6 +703,21 @@ void Kvantum::polish(QPalette &palette)
     if (col.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
 
+    col = cspec.tooltipBasetColor;
+    if (col.isValid())
+      palette.setColor(QPalette::ToolTipBase,col);
+    else
+    { // for backward compatibility
+      col = cspec.tooltipTextColor;
+      if (col.isValid())
+      {
+        QColor col1 = QColor(Qt::white);
+        if (qGray(col.rgb()) >= 127)
+          col1 = QColor(Qt::black);
+        palette.setColor(QPalette::ToolTipBase,col1);
+      }
+    }
+
     /* text colors */
     col = cspec.textColor;
     if (col.isValid())
@@ -2099,10 +2114,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
             const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+            QString maxTxt = spinMaxText(p);
+            if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
+                || p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
                 || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
               fspec.expansion = 0;
             }
           }
@@ -2217,10 +2234,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
           {
             const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            if (p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+            QString maxTxt = spinMaxText(p);
+            if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
+                || p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
                 || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
               fspec.expansion = 0;
             }
           }
@@ -2384,15 +2403,25 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         if (up)
         {
-          if (opt->rect.width() < SPIN_BUTTON_WIDTH + fspec.right)
+          int m = opt->rect.width() - SPIN_BUTTON_WIDTH;
+          if (fspec.right > m)
           {
-            fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
+            m = qMax(m,2);
+            fspec.right = qMin(fspec.right,m);
             fspec.expansion = 0;
           }
         }
-        else if (opt->rect.width() < SPIN_BUTTON_WIDTH)
+        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
-          fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,2);
+          if (spinMaxText(sb).isEmpty())
+          {
+            fspec.right = qMin(fspec.right,3);
+            fspec.expansion = 0;
+          }
+        }
+        if (opt->rect.height() < fspec.top + fspec.bottom)
+        {
+          fspec.top = fspec.bottom = qMin(fspec.top,3);
           fspec.expansion = 0;
         }
       }
@@ -6607,80 +6636,31 @@ QSize Kvantum::sizeFromContents (ContentsType type,
     }
 
     case CT_SpinBox : {
-      /*const QStyleOptionSpinBox *opt =
-        qstyleoption_cast<const QStyleOptionSpinBox *>(option);
-
-      if (opt) {
-        QFont f = QApplication::font();
-        if (widget)
-          f = widget->font();
-
-        const QString group = "LineEdit";
-
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
-        const size_spec sspec = getSizeSpec(group);
-
-        if (widget)
-        {
-          const QSpinBox *sb = qobject_cast<const QSpinBox *>(widget);
-          if (sb)
-            s = sizeCalculated(f,fspec,lspec,sspec,sb->text()+QString("%1").arg(sb->maximum()),QPixmap())
-                + QSize(2*SPIN_BUTTON_WIDTH,0);
-          else
-          {
-            const QDoubleSpinBox *sb1 = qobject_cast<const QDoubleSpinBox *>(widget);
-            if (sb1)
-	          s = sizeCalculated(f,fspec,lspec,sspec,sb1->text()+QString("%1").arg(sb1->maximum()),QPixmap())
-	              + QSize(2*SPIN_BUTTON_WIDTH,0);
-	        else
-	        {
-              const QDateTimeEdit *sb2 = qobject_cast<const QDateTimeEdit *>(widget);
-              if (sb2)
-                s = sizeCalculated(f,fspec,lspec,sspec,sb2->displayFormat(),QPixmap())
-                    + QSize(2*SPIN_BUTTON_WIDTH,0);
-              else
-                s = defaultSize;
-	        }
-          }
-        }
-        else
-          s = defaultSize;
-      }*/
+      /* Here we don't use defaultSize because, for Qt4, it's based on spinbox size hint,
+         which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
+         corrected in Qt5 but the following method works for both. */
       const theme_spec tspec = settings->getThemeSpec();
       const frame_spec fspec = getFrameSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
-#if QT_VERSION < 0x050000
-      s = defaultSize + QSize(fspec.left + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
-                              tspec.vertical_spin_indicators ? 0 : ((fspec1.top > fspec.top ? fspec1.top : 0)
-                                                                 + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0)));
+      const size_spec sspec = getSizeSpec("IndicatorSpinBox");
+      const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
+      if (sb)
+      {
+        QString maxTxt = spinMaxText(sb) + QLatin1Char(' ');
+        s = textSize(sb->font(),maxTxt)
+            + QSize(fspec.left + 2 // cursor padding
+                               + 2*SPIN_BUTTON_WIDTH
+                               + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
+                    tspec.vertical_spin_indicators ? 6 // 3+3
+                      : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom)));
+        /* This is a workaround for some apps (like Kdenlive with its
+           TimecodeDisplay) that presuppose all spinboxes should have
+           vertical buttons and set an insufficient minimum width for them. */
+        if (!tspec.vertical_spin_indicators && sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
+          s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
 
-      /* This is a workaround for some apps (like Kdenlive with its
-         TimecodeDisplay) that presuppose all spinboxes should have
-         vertical buttons and set an insufficient minimum width for them. */
-      if (!tspec.vertical_spin_indicators)
-      {
-        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
-        {
-          if (sb->minimumWidth() > s.width() - 2*SPIN_BUTTON_WIDTH)
-            s.rwidth() = sb->minimumWidth() + 2*SPIN_BUTTON_WIDTH;
-        }
+        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
-#else
-      /* Qt4 added 35px to the width of contentsSize
-         but Qt5 doesn't (-> qabstractspinbox.cpp) */
-      s = defaultSize + QSize(fspec.left + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right + SPIN_BUTTON_WIDTH),
-                              tspec.vertical_spin_indicators ? 0 : ((fspec1.top > fspec.top ? fspec1.top : 0)
-                                                                 + (fspec1.bottom > fspec.bottom ? fspec1.bottom : 0)));
-      if (!tspec.vertical_spin_indicators)
-      {
-        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox *>(widget))
-        {
-          if (sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
-            s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
-        }
-      }
-#endif
 
       break;
     }
@@ -6693,6 +6673,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const QString group = "ComboBox";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
+        const size_spec sspec = getSizeSpec(group);
 
         s = defaultSize + QSize(fspec.left+fspec.right + lspec.left+lspec.right,
                                 fspec.top+fspec.bottom + lspec.top+lspec.bottom);
@@ -6716,6 +6697,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           s.rheight() += (fspec2.top > fspec.top ? fspec2.top-fspec.top : 0)
                          + (fspec2.bottom > fspec.bottom ? fspec2.bottom-fspec.bottom : 0);
         }
+
+        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
       break;
@@ -6730,6 +6713,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
+        const size_spec sspec = getSizeSpec(group);
 
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
@@ -6780,6 +6764,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             s = s + textSize(f, txt) - s1;
           }
         }
+
+        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
       break;
@@ -6942,6 +6928,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
+        const size_spec sspec = getSizeSpec(group);
 
         // -> CE_ToolButtonLabel
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -7034,6 +7021,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             s = s + textSize(f, opt->text) - s1;
           }
         }
+
+        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
       break;
@@ -7156,8 +7145,10 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           qstyleoption_cast<const QStyleOptionViewItem *>(option);
       if (opt)
       {
-        const frame_spec fspec = getFrameSpec("ItemView");
-        const label_spec lspec = getLabelSpec("ItemView");
+        const QString group = "ItemView";
+        const frame_spec fspec = getFrameSpec(group);
+        const label_spec lspec = getLabelSpec(group);
+        const size_spec sspec = getSizeSpec(group);
         QStyleOptionViewItem::Position pos = opt->decorationPosition;
 
         s.rheight() += fspec.top + fspec.bottom;
@@ -7212,6 +7203,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         }
         else if (!hasIcon)
           s.rheight() += lspec.top + lspec.bottom;
+
+        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
       // the item text may be inside a button like in Kate's font preferences (see SE_PushButtonContents)
@@ -7231,8 +7224,10 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
     case CT_TabWidget : {
       const frame_spec fspec = getFrameSpec("TabFrame");
+      const size_spec sspec = getSizeSpec("TabFrame");
       s = defaultSize + QSize(fspec.left+fspec.right,
                               fspec.top+fspec.bottom);
+      s = s.expandedTo(QSize(sspec.minW,sspec.minH));
 
       break;
     }
@@ -7296,35 +7291,23 @@ QSize Kvantum::sizeCalculated(const QFont &font,
 
 QSize Kvantum::textSize (const QFont &font, const QString &text) const
 {
-  // compute width and height of text. QFontMetrics seems to ignore \n
-  // and returns wrong values
-
-  int tw = 0;
-  int th = 0;
+  int tw, th;
+  tw = th = 0;
 
   if (!text.isEmpty())
   {
-    /* remove & mnemonic character and tabs (for menu items) */
-    // FIXME don't remove & if it is not followed by a character
-    QString t = QString(text).remove('\t');
+    QString t(text);
+    /* remove the '&' mnemonic character and tabs (for menu items) */
+    t.remove('\t');
+    int i = 0;
+    while (i < t.size())
     {
-      int i=0;
-      while ( i<t.size() )
-      {
-        if ( t.at(i) == '&' )
-        {
-          // see if next character is not a space
-          if ( (i+1<t.size()) && (t.at(i+1) != ' ') )
-          {
-            t.remove(i,1);
-            i++;
-          }
-        }
-        i++;
-      }
+      if (t.at(i) == '&')
+        t.remove(i,1);
+      i++;
     }
 
-    /* deal with \n */
+    /* deal with newlines */
     QStringList l = t.split('\n');
 
     th = QFontMetrics(font).height()*(l.size());
@@ -7401,10 +7384,12 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
         if (!settings->getThemeSpec().vertical_spin_indicators)
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-          if (p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+          QString maxTxt = spinMaxText(p);
+          if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
+              || p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
               || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,2);
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           }
         }
         else
@@ -7711,7 +7696,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
       break;
 
     case CC_SpinBox : {
-      int sw = SPIN_BUTTON_WIDTH; // spin button width
+      int sw = SPIN_BUTTON_WIDTH;
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const theme_spec tspec = settings->getThemeSpec();
@@ -7724,20 +7709,35 @@ QRect Kvantum::subControlRect(ComplexControl control,
       }
       else if (!tspec.vertical_spin_indicators)
       {
-        /* I've seen this only in Pencil */
+        /* when there isn't enough horizontal space (as in Pencil) */
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
           QString maxTxt = spinMaxText(sb);
           if (!maxTxt.isEmpty())
           {
+            maxTxt = maxTxt + QLatin1Char(' ');
             int txtWidth = textSize(sb->font(),maxTxt).width();
-            if (w < txtWidth+2*sw+fspec.right+fspecLE.left+1 // 1 for padding
-                && w >= txtWidth+2*8+2+2+1) // otherwise wouldn't help
+            int m = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
+            if (fspec.right > m)
             {
-              sw = 8;
-              fspec.right = qMin(fspec.right,2);
+              /* in this case, line-edit frame width is set to
+                 3 at PE_FrameLineEdit and PE_PanelLineEdit */
+              m = w-txtWidth-2*sw-3-2;
+              if (fspec.right > m)
+              {
+                m = qMax(m,2);
+                if (m > 2 || w >= txtWidth+2*8+2) // otherwise wouldn't help
+                {
+                  if (m == 2)
+                    sw = 8;
+                  fspec.right = qMin(fspec.right,
+                                     qMin(m,3)); // for a uniform look
+                }
+                else fspec.right = qMin(fspec.right,3); // better than nothing
+              }
             }
           }
+          else fspec.right = qMin(fspec.right,3);
         }
       }
 

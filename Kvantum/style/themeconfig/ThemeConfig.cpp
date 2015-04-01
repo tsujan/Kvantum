@@ -471,6 +471,9 @@ color_spec ThemeConfig::getColorSpec() const
   v = getValue("GeneralColors","inactive.highlight.color");
   r.inactiveHighlightColor = v.toString();
 
+  v = getValue("GeneralColors","tooltip.base.color");
+  r.tooltipBasetColor = v.toString();
+
   v = getValue("GeneralColors","text.color");
   r.textColor = v.toString();
 
