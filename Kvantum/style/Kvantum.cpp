@@ -6716,9 +6716,23 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         if (widget)
           f = widget->font();
 
+        bool hasIcon = false;
+        if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
+        {
+          for (int i = 0; i < cb->count(); i++)
+          {
+            if (!cb->itemIcon(i).isNull())
+            {
+              hasIcon = true;
+              break;
+            }
+          }
+        }
+        else hasIcon = true;
+
         s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right,
                   sizeCalculated(f,fspec,lspec,sspec,"W",
-                                 opt->currentIcon.isNull() ? QSize() : opt->iconSize).height());
+                                 hasIcon ? opt->iconSize : QSize()).height());
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
         int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
                                     s.height() <= fspec.expansion ? s.height()/2 : 0);

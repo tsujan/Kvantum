@@ -6,6 +6,7 @@ V0.8.18
  * A better way of calculating spinbox sizes.
  * Added a key for tooltip background color.
  * Use minW and minH as far as possible.
+ * Better size calculation for some widgets (to align them horizontally if possible).
 
 V0.8.17
 ---------
