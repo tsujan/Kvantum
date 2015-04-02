@@ -211,7 +211,7 @@ class Kvantum : public QCommonStyle {
                          const label_spec &lspec,
                          const size_spec &sspec,
                          const QString &text,
-                         const QPixmap &icon,
+                         const QSize iconSize,
                          // text-icon alignment
                          const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon) const;
 

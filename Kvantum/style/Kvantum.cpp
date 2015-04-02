@@ -1134,6 +1134,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+      lspec.left = qMax(0,lspec.left-1);
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.right = qMax(0,lspec.right-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
+      
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
@@ -1370,6 +1375,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       frame_spec fspec = getFrameSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+      lspec.left = qMax(0,lspec.left-1);
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.right = qMax(0,lspec.right-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
 
       if (qobject_cast<const QPushButton *>(widget))
         fspec.expansion = 0; // -> PE_PanelButtonTool
@@ -2634,7 +2643,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (!opt->editable && !cb->lineEdit())
           {
             QSize txtSize = textSize(painter->font(),opt->currentText);
-            const label_spec lspec1 = getLabelSpec("ComboBox");
+            label_spec lspec1 = getLabelSpec("ComboBox");
+            lspec1.left = qMax(0,lspec1.left-1);
+            lspec1.right = qMax(0,lspec1.right-1);
             if (cb->width() < fspec1.left+lspec1.left+txtSize.width()+lspec1.right+fspec1.right
                               +comboArrowLength+(rtl ? fspec.left : fspec.right))
             {
@@ -3566,6 +3577,10 @@ void Kvantum::drawControl(ControlElement element,
         const QString group = "ComboBox";
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
 
         QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -4667,6 +4682,10 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
         if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
@@ -4761,6 +4780,10 @@ void Kvantum::drawControl(ControlElement element,
         const interior_spec ispec = getInteriorSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
 
         /* force text color */
         if (!status.startsWith("disabled"))
@@ -4877,6 +4900,10 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
         /*bool inPlasma = false;
         QWidget *p = getParent(widget,1);
         if (isPlasma && widget
@@ -4981,7 +5008,7 @@ void Kvantum::drawControl(ControlElement element,
             {
               size_spec sspec;
               default_size_spec(sspec);
-              QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize),tialign);
+              QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,opt->text,opt->iconSize,tialign);
               if (tb->width() < cs.width() || tb->height() < cs.height())
               {
                 lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
@@ -5554,7 +5581,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
             else // when there isn't enough space
             {
               QSize txtSize = textSize(painter->font(),opt->currentText);
-              const label_spec lspec = getLabelSpec(group);
+              label_spec lspec = getLabelSpec(group);
+              lspec.left = qMax(0,lspec.left-1);
+              lspec.right = qMax(0,lspec.right-1);
               const frame_spec fspec1 = getFrameSpec("DropDownButton");
               int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
                                           cb->height() <= fspec.expansion ? cb->height()/2 : 0);
@@ -6198,8 +6227,12 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
 
-    case PM_ToolBarFrameWidth :
-    case PM_ToolBarItemSpacing : return 0;
+    case PM_ToolBarFrameWidth : return 0;
+    case PM_ToolBarItemSpacing : {
+      if (settings->getThemeSpec().group_toolbar_buttons)
+        return 0;
+      else return 4;
+    }
     case PM_ToolBarHandleExtent : {
       const theme_spec tspec = settings->getThemeSpec();
       if (tspec.center_toolbar_handle)
@@ -6622,14 +6655,14 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         f = widget->font();
 
       const QString group = "LineEdit";
-
       const frame_spec fspec = getFrameSpec(group);
-      /* the label spec isn't used anywhere */
-      label_spec lspec;
-      default_label_spec(lspec);
       const size_spec sspec = getSizeSpec(group);
+      /* the label spec is only used for vertical spacing */
+      label_spec lspec = getLabelSpec(group);
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
 
-      s = sizeCalculated(f,fspec,lspec,sspec,"W",QPixmap());
+      s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
       s = QSize(s.width() < cw ? cw : s.width(),s.height());
 
       break;
@@ -6672,11 +6705,19 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       if (opt) {
         const QString group = "ComboBox";
         const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
 
-        s = defaultSize + QSize(fspec.left+fspec.right + lspec.left+lspec.right,
-                                fspec.top+fspec.bottom + lspec.top+lspec.bottom);
+        QFont f = QApplication::font();
+        if (widget)
+          f = widget->font();
+
+        s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right,
+                  sizeCalculated(f,fspec,lspec,sspec,"W",opt->iconSize).height());
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
         int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
                                     s.height() <= fspec.expansion ? s.height()/2 : 0);
@@ -6698,7 +6739,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                          + (fspec2.bottom > fspec.bottom ? fspec2.bottom-fspec.bottom : 0);
         }
 
-        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
+        if (s.width() < sspec.minW)
+          s.setWidth(sspec.minW);
       }
 
       break;
@@ -6711,9 +6753,13 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       if (opt) {
         const QString group = "PanelButtonCommand";
         frame_spec fspec = getFrameSpec(group);
-        label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
 
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
@@ -6797,7 +6843,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 	      if (ab->text().isEmpty())
 	        hasLabel = false;
 	    }
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize));
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
         int dw = defaultSize.width() - s.width();
         //int dh = defaultSize.height() - s.height();
         s = s + QSize((dw > 0 ? dw : 0) + (pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_ExclusiveIndicatorWidth)),
@@ -6833,7 +6879,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 	      if (ab->text().isEmpty())
 	        hasLabel = false;
 	    }
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->iconSize));
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
         int dw = defaultSize.width() - s.width();
         //int dh = defaultSize.height() - s.height();
         s = s + QSize((dw > 0 ? dw : 0) + (pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_IndicatorWidth)),
@@ -6864,7 +6910,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           s = QSize(cw,10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
         else
-          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->maxIconWidth));
+          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+                             opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */
@@ -6913,7 +6960,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(opt->maxIconWidth));
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+                           opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
       }
 
       break;
@@ -6926,9 +6974,13 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       if (opt) {
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
-        label_spec lspec = getLabelSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
 
         // -> CE_ToolButtonLabel
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -6968,7 +7020,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                into account yet. Qt seems to consider toolbuttons frameless,
                althought it adds 6 and 5 px to their widths or heights respectively
                (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
-            + QSize(fspec.left+fspec.right, fspec.top+fspec.bottom)
+            + QSize(fspec.left+fspec.right - 6 , fspec.top+fspec.bottom - 5) // 6 and 5 were added in qcommonstyle.cpp
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
                         || tialign == Qt::ToolButtonTextOnly ?
@@ -7046,7 +7098,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_TabBarIconSize)));
+        int iconSize = pixelMetric(PM_TabBarIconSize);
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+                           opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize));
 
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast
@@ -7114,7 +7168,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->icon.pixmap(pixelMetric(PM_SmallIconSize)));
+        int iconSize = pixelMetric(PM_SmallIconSize);
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+                           opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize));
         if (opt->sortIndicator != QStyleOptionHeader::None)
           s.rwidth() += dspec.size + pixelMetric(PM_HeaderMargin);
       }
@@ -7244,7 +7300,7 @@ QSize Kvantum::sizeCalculated(const QFont &font,
                               const label_spec &lspec, // label spec
                               const size_spec &sspec, // size spec
                               const QString &text,
-                              const QPixmap &icon,
+                              const QSize iconSize,
                               // text-icon alignment
                               const Qt::ToolButtonStyle tialign) const
 {
@@ -7262,8 +7318,11 @@ QSize Kvantum::sizeCalculated(const QFont &font,
 
   if (tialign == Qt::ToolButtonIconOnly)
   {
-    s.rwidth() += icon.width();
-    s.rheight() += icon.height();
+    if (iconSize.isValid())
+    {
+      s.rwidth() += iconSize.width();
+      s.rheight() += iconSize.height();
+    }
   }
   else if (tialign == Qt::ToolButtonTextOnly)
   {
@@ -7272,13 +7331,29 @@ QSize Kvantum::sizeCalculated(const QFont &font,
   }
   else if (tialign == Qt::ToolButtonTextBesideIcon)
   {
-    s.rwidth() += (icon.isNull() ? 0 : icon.width()) + (icon.isNull() ? 0 : (text.isEmpty() ? 0 : lspec.tispace)) + tw;
-    s.rheight() += qMax(icon.height(),th);
+    if (iconSize.isValid())
+    {
+      s.rwidth() += iconSize.width() + (text.isEmpty() ? 0 : lspec.tispace) + tw;
+      s.rheight() += qMax(iconSize.height(), th);
+    }
+    else
+    {
+      s.rwidth() +=  tw;
+      s.rheight() += th;
+    }
   }
   else if (tialign == Qt::ToolButtonTextUnderIcon)
   {
-    s.rwidth() += qMax(icon.width(),tw);
-    s.rheight() += icon.height() + (icon.isNull() ? 0 : lspec.tispace) + th;
+    if (iconSize.isValid())
+    {
+      s.rwidth() += qMax(iconSize.width(), tw);
+      s.rheight() += iconSize.height() + (text.isEmpty() ? 0 : lspec.tispace) + th;
+    }
+    else
+    {
+      s.rwidth() += tw;
+      s.rheight() += th;
+    }
   }
 
   if (s.height() < sspec.minH)
@@ -7552,7 +7627,11 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
         if (qobject_cast<const QAbstractItemView *>(widget))
         {
           const frame_spec fspec = getFrameSpec("PanelButtonCommand");
-          const label_spec lspec = getLabelSpec("PanelButtonCommand");
+          label_spec lspec = getLabelSpec("PanelButtonCommand");
+          lspec.left = qMax(0,lspec.left-1);
+          lspec.top = qMax(0,lspec.top-1);
+          lspec.right = qMax(0,lspec.right-1);
+          lspec.bottom = qMax(0,lspec.bottom-1);
           r.adjust(-fspec.left-lspec.left,
                    -fspec.top-lspec.top,
                    fspec.right+lspec.right,
@@ -8235,7 +8314,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
             lspec.left = 0;
           }
         }
-        QSize s = sizeCalculated(widget->font(),fspec,lspec,sspec,opt->text,QPixmap());
+        QSize s = sizeCalculated(widget->font(),fspec,lspec,sspec,opt->text,QSize());
         int checkSize = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
 
         switch (subControl) {
