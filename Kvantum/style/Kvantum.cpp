@@ -6717,7 +6717,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           f = widget->font();
 
         s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right,
-                  sizeCalculated(f,fspec,lspec,sspec,"W",opt->iconSize).height());
+                  sizeCalculated(f,fspec,lspec,sspec,"W",
+                                 opt->currentIcon.isNull() ? QSize() : opt->iconSize).height());
         const frame_spec fspec1 = getFrameSpec("DropDownButton");
         int comboArrowLength = qMax(COMBO_ARROW_LENGTH,
                                     s.height() <= fspec.expansion ? s.height()/2 : 0);
