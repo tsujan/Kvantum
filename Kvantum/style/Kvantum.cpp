@@ -6704,8 +6704,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                                + 2*SPIN_BUTTON_WIDTH
                                + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
                     lspec.top + lspec.bottom
-                    + tspec.vertical_spin_indicators ? 6 // 3+3
-                      : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom)));
+                    + (tspec.vertical_spin_indicators ? 6 // 3+3
+                       : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
         /* This is a workaround for some apps (like Kdenlive with its
            TimecodeDisplay) that presuppose all spinboxes should have
            vertical buttons and set an insufficient minimum width for them. */
