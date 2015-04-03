@@ -131,16 +131,16 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       r.element = v.toString();
 
       v = getValue(elementName,"frame.top", i);
-      r.top = v.toInt();
+      r.top = qMax(v.toInt(),0);
       v = getValue(elementName,"frame.bottom", i);
-      r.bottom = v.toInt();
+      r.bottom = qMax(v.toInt(),0);
       v = getValue(elementName,"frame.left", i);
-      r.left = v.toInt();
+      r.left = qMax(v.toInt(),0);
       v = getValue(elementName,"frame.right", i);
-      r.right = v.toInt();
+      r.right = qMax(v.toInt(),0);
 
       v = getValue(elementName,"frame.expansion", i);
-      r.expansion = v.toInt();
+      r.expansion = qMax(v.toInt(),0);
     }
   }
 
@@ -170,9 +170,9 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName) const
       r.element = v.toString();
 
       v = getValue(elementName,"interior.x.patternsize", i);
-      r.px = v.toInt();
+      r.px = qMax(v.toInt(),0);
       v = getValue(elementName,"interior.y.patternsize", i);
-      r.py = v.toInt();
+      r.py = qMax(v.toInt(),0);
     }
   }
   return r;
@@ -192,7 +192,7 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName) const
     r.element = v.toString();
 
     v = getValue(elementName,"indicator.size", i);
-    r.size = v.toInt();
+    r.size = qMax(v.toInt(),0);
   }
 
   return r;
@@ -235,10 +235,10 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
       r.shadowColor = v.toString();
     v = getValue(elementName,"text.shadow.alpha", i);
     if (v.isValid())
-      r.a = v.toInt();
+      r.a = qMax(v.toInt(),0);
     v = getValue(elementName,"text.shadow.depth", i);
     if (v.isValid())
-      r.depth = v.toInt();
+      r.depth = qMax(v.toInt(),0);
   }
 
   v = getValue(elementName,"text.margin", i);
@@ -246,17 +246,17 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
   if (r.hasMargin)
   {
     v = getValue(elementName,"text.margin.top", i);
-    r.top = v.toInt();
+    r.top = qMax(v.toInt(),0);
     v = getValue(elementName,"text.margin.bottom", i);
-    r.bottom = v.toInt();
+    r.bottom = qMax(v.toInt(),0);
     v = getValue(elementName,"text.margin.left", i);
-    r.left = v.toInt();
+    r.left = qMax(v.toInt(),0);
     v = getValue(elementName,"text.margin.right", i);
-    r.right = v.toInt();
+    r.right = qMax(v.toInt(),0);
   }
 
   v = getValue(elementName,"text.iconspacing", i);
-  r.tispace = v.toInt();
+  r.tispace = qMax(v.toInt(),0);
 
   return r;
 }
@@ -271,11 +271,11 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
 
   v = getValue(elementName,"size.minheight", i);
   if (v.isValid())
-    r.minH = v.toInt();
+    r.minH = qMax(v.toInt(),0);
 
   v = getValue(elementName,"size.minwidth", i);
   if (v.isValid())
-    r.minW = v.toInt();
+    r.minW = qMax(v.toInt(),0);
 
   return r;
 }
@@ -392,11 +392,11 @@ theme_spec ThemeConfig::getThemeSpec() const
   /* no menu/tooltip shadow without compositing */
   v = getValue("General","menu_shadow_depth");
   if (v.isValid() && r.composite)
-    r.menu_shadow_depth = v.toInt();
+    r.menu_shadow_depth = qMax(v.toInt(),0);
 
   v = getValue("General","tooltip_shadow_depth");
   if (v.isValid() && r.composite)
-    r.tooltip_shadow_depth = v.toInt();
+    r.tooltip_shadow_depth = qMax(v.toInt(),0);
 
   v = getValue("General","opaque", empty);
   if (v.isValid())
@@ -404,27 +404,27 @@ theme_spec ThemeConfig::getThemeSpec() const
 
   v = getValue("General","splitter_width", empty);
   if (v.isValid())
-    r.splitter_width = v.toInt();
+    r.splitter_width = qMax(v.toInt(),0);
 
   v = getValue("General","scroll_width", empty);
   if (v.isValid())
-    r.scroll_width = v.toInt();
+    r.scroll_width = qMax(v.toInt(),0);
 
   v = getValue("General","slider_width", empty);
   if (v.isValid())
-    r.slider_width = v.toInt();
+    r.slider_width = qMax(v.toInt(),0);
 
   v = getValue("General","slider_handle_width", empty);
   if (v.isValid())
-    r.slider_handle_width = v.toInt();
+    r.slider_handle_width = qMax(v.toInt(),0);
 
   v = getValue("General","slider_handle_length", empty);
   if (v.isValid())
-    r.slider_handle_length = v.toInt();
+    r.slider_handle_length = qMax(v.toInt(),0);
 
   v = getValue("General","check_size", empty);
   if (v.isValid())
-    r.check_size = v.toInt();
+    r.check_size = qMax(v.toInt(),0);
 
   v = getValue("General","vertical_spin_indicators");
   r.vertical_spin_indicators = v.toBool();
@@ -526,46 +526,3 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   return r;
 }
-
-/*QStringList ThemeConfig::getManagedElements()
-{
-  return
-    QStringList()
-      << "PanelButtonCommand"
-      << "PanelButtonTool"
-      << "Dock"
-      << "RadioButton"
-      << "CheckBox"
-      << "Focus"
-      << "GenericFrame"
-      << "TabFrame"
-      << "GroupBox"
-      << "LineEdit"
-      << "IndicatorSpinBox"
-      << "DropDownButton"
-      << "IndicatorArrow"
-      << "ToolboxTab"
-      << "Tab"
-      << "TreeExpander"
-      << "HeaderSection"
-      << "SizeGrip"
-      << "Toolbar"
-      << "ScrollbarSlider"
-      << "Slider"
-      << "SliderCursor"
-      << "Progressbar"
-      << "ProgressbarContents"
-      << "ItemView"
-      << "Splitter"
-      << "Scrollbar"
-      << "ScrollbarGroove"
-      << "MenuItem"
-      << "Menu"
-      << "MenuBarItem"
-      << "MenuBar"
-      << "TitleBar"
-      << "ComboBox"
-      << "ToolTip"
-      << "Window"
-  ;
-}*/

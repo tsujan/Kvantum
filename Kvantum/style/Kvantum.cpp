@@ -6231,7 +6231,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_ToolBarItemSpacing : {
       if (settings->getThemeSpec().group_toolbar_buttons)
         return 0;
-      else return 4;
+      else
+      {
+        label_spec lspec = getLabelSpec("PanelButtonTool");
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.right = qMax(0,lspec.right-1);
+        return qMax(0, 5-lspec.left-lspec.right);
+      }
     }
     case PM_ToolBarHandleExtent : {
       const theme_spec tspec = settings->getThemeSpec();
@@ -6707,6 +6713,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const frame_spec fspec = getFrameSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
+        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -6771,6 +6778,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
+        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -6794,14 +6802,10 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         /* Add the spacings! The frame widths are calculated
            as pixelMetric(PM_DefaultFrameWidth,option,widget). */
         const QString txt = opt->text;
+        s = s + QSize(lspec.left+lspec.right,
+                      lspec.top+lspec.bottom); // either text or icon
         if (!txt.isEmpty() && !opt->icon.isNull())
-          s = s + QSize(lspec.left+lspec.right + lspec.tispace,
-                        lspec.top+lspec.bottom);
-        else if (!txt.isEmpty())
-          s = s + QSize(lspec.left+lspec.right,
-                        lspec.top+lspec.bottom);
-        else // a 2-px margin for icons
-          s = s + QSize(4, 4);
+          s = s + QSize(lspec.tispace, 0);
 
         /* this was for KColorButton but apparently
            it isn't needed when sizeCalculated() isn't used */
@@ -6992,6 +6996,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
+        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -7044,19 +7049,13 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                       : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
                     0);
 
-        /* add the spacings if there's a text */
-        if (!opt->text.isEmpty())
-        {
-          if (tialign == Qt::ToolButtonTextOnly /*|| tialign == Qt::ToolButtonIconOnly*/)
-            s = s + QSize(lspec.left+lspec.right,
-                          lspec.top+lspec.bottom);
-          else if(tialign == Qt::ToolButtonTextBesideIcon)
-            s = s + QSize(lspec.left+lspec.right + lspec.tispace,
-                          lspec.top+lspec.bottom);
-          else if(tialign == Qt::ToolButtonTextUnderIcon)
-            s = s + QSize(lspec.left+lspec.right,
-                          lspec.top+lspec.bottom + lspec.tispace);
-        }
+        /* add the spacings */
+        s = s + QSize(lspec.left+lspec.right,
+                      lspec.top+lspec.bottom);
+        if (tialign == Qt::ToolButtonTextBesideIcon)
+          s = s + QSize(lspec.tispace, 0);
+        else if (tialign == Qt::ToolButtonTextUnderIcon)
+          s = s + QSize(0, lspec.tispace);
 
         if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
         {
