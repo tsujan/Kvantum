@@ -6690,6 +6690,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
          corrected in Qt5 but the following method works for both. */
       const theme_spec tspec = settings->getThemeSpec();
       const frame_spec fspec = getFrameSpec("LineEdit");
+      label_spec lspec = getLabelSpec("LineEdit");
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
       const size_spec sspec = getSizeSpec("IndicatorSpinBox");
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
@@ -6700,7 +6703,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             + QSize(fspec.left + 2 // cursor padding
                                + 2*SPIN_BUTTON_WIDTH
                                + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
-                    tspec.vertical_spin_indicators ? 6 // 3+3
+                    lspec.top + lspec.bottom
+                    + tspec.vertical_spin_indicators ? 6 // 3+3
                       : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom)));
         /* This is a workaround for some apps (like Kdenlive with its
            TimecodeDisplay) that presuppose all spinboxes should have
@@ -7048,9 +7052,9 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         s = defaultSize
             /* Unlike the case of CT_PushButton, the frame widths aren't taken
                into account yet. Qt seems to consider toolbuttons frameless,
-               althought it adds 6 and 5 px to their widths or heights respectively
+               althought it adds 6 and 5 px to their widths and heights respectively
                (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
-            + QSize(fspec.left+fspec.right - 6 , fspec.top+fspec.bottom - 5) // 6 and 5 were added in qcommonstyle.cpp
+            + QSize(fspec.left+fspec.right - 6 , fspec.top+fspec.bottom - 5)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
                         || tialign == Qt::ToolButtonTextOnly ?
