@@ -567,6 +567,16 @@ void Kvantum::polish(QWidget *widget)
       widget->setAutoFillBackground(false);
       widget->parentWidget()->setAutoFillBackground(false);
     }
+    // remove the ugly shadow of QWhatsThis tooltips
+    else if (widget->inherits("QWhatsThat"))
+    {
+      QPalette palette = widget->palette();
+      QColor shadow = palette.shadow().color();
+      shadow.setAlpha(0);
+      palette.setColor(QPalette::Shadow, shadow);
+      widget->setPalette(palette);
+    }
+
 
     if (!isLibreoffice // not required
         && !subApp
