@@ -6679,9 +6679,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                                  const QSize &contentsSize,
                                  const QWidget *widget) const
 {
-  int cw = contentsSize.width();
-  //int ch = contentsSize.height();
-
   QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
   QSize s = QSize(0,0);
 
@@ -6700,7 +6697,11 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       lspec.bottom = qMax(0,lspec.bottom-1);
 
       s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
-      s = QSize(s.width() < cw ? cw : s.width(),s.height());
+      if (s.width() < defaultSize.width())
+        s.rwidth() = defaultSize.width();
+      /* defaultSize may be a bit thicker because
+         of frame, which doesn't matter to us */
+      return s;
 
       break;
     }
@@ -6966,7 +6967,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         }
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
-          s = QSize(cw,10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
+          s = QSize(contentsSize.width(),10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
         else
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                              opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
