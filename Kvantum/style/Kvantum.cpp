@@ -576,7 +576,13 @@ void Kvantum::polish(QWidget *widget)
       palette.setColor(QPalette::Shadow, shadow);
       widget->setPalette(palette);
     }
-
+#if QT_VERSION >= 0x050000
+    else if (qobject_cast<QAbstractSpinBox*>(widget))
+    {// see eventFilter() for the reason
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+    }
+#endif
 
     if (!isLibreoffice // not required
         && !subApp
@@ -805,6 +811,10 @@ void Kvantum::unpolish(QWidget *widget)
 
     if (qobject_cast<QProgressBar*>(widget))
       progressbars.remove(widget);
+#if QT_VERSION >= 0x050000
+    else if (qobject_cast<QAbstractSpinBox*>(widget))
+      widget->removeEventFilter(this);
+#endif
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
@@ -885,6 +895,24 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
       }
     }
     break;
+
+#if QT_VERSION >= 0x050000
+  /* FIXME For some reason unknown to me (a Qt5 bug?), the Qt5 spinbox size hint
+     is sometimes wrong as if Qt5 spinboxes don't have time to consult CT_SpinBox
+     although they should (-> qabstractspinbox.cpp -> QAbstractSpinBox::sizeHint).
+     Here we force a minimum size by using CT_SpinBox when the maximum size isn't
+     set by the app or isn't smaller than our size. */
+  case QEvent::ShowToParent:
+    if (w && qobject_cast<QAbstractSpinBox*>(o))
+    {
+      QSize size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
+      if (w->maximumWidth() > size.width())
+        w->setMinimumWidth(size.width());
+      if (w->maximumHeight() > size.height())
+        w->setMinimumHeight(size.height());
+    }
+    break;
+#endif
 
   case QEvent::Hide:
   case QEvent::Destroy:
@@ -2407,14 +2435,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else
       {
         fspec = getFrameSpec("LineEdit");
-        fspec.right = fspec.left = fspec.top = fspec.bottom = qMin(fspec.right,3);
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         fspec.expansion = 0;
       }
 
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice)
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         fspec.expansion = 0;
       }
       // -> CC_SpinBox
@@ -6651,13 +6679,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                                  const QSize &contentsSize,
                                  const QWidget *widget) const
 {
-  if (!option)
-    return contentsSize;
-
-  /*int fh = 14; // font height
-  if (widget)
-    fh = QFontMetrics(widget->font()).height();*/
-
   int cw = contentsSize.width();
   //int ch = contentsSize.height();
 
@@ -6689,7 +6710,11 @@ QSize Kvantum::sizeFromContents (ContentsType type,
          which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
          corrected in Qt5 but the following method works for both. */
       const theme_spec tspec = settings->getThemeSpec();
-      const frame_spec fspec = getFrameSpec("LineEdit");
+      frame_spec fspec = getFrameSpec("LineEdit");
+      if (settings->getThemeSpec().vertical_spin_indicators)
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      }
       label_spec lspec = getLabelSpec("LineEdit");
       lspec.top = qMax(0,lspec.top-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
@@ -6704,7 +6729,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                                + 2*SPIN_BUTTON_WIDTH
                                + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
                     lspec.top + lspec.bottom
-                    + (tspec.vertical_spin_indicators ? 6 // 3+3
+                    + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
                        : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
         /* This is a workaround for some apps (like Kdenlive with its
            TimecodeDisplay) that presuppose all spinboxes should have
@@ -7850,7 +7875,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
 
       if (tspec.vertical_spin_indicators)
       {
-        fspecLE.right = qMin(fspecLE.right,3);
+        fspecLE.right = qMin(fspecLE.left,3);
         fspec = fspecLE;
         sw = 8;
       }
