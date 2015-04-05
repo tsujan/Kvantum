@@ -5877,32 +5877,35 @@ void Kvantum::drawComplexControl(ComplexControl control,
         QString suffix = "-normal";
         if (isInactive)
           suffix = "-normal-inactive";
-        if (option->state & State_Enabled)
+        if (opt->subControls & SC_SliderGroove) // QtColorPicker doesn't need the groove
         {
-          if (!opt->upsideDown)
-            fspec.capsuleV = 1;
+          if (option->state & State_Enabled)
+          {
+            if (!opt->upsideDown)
+              fspec.capsuleV = 1;
+            else
+              fspec.capsuleV = -1;
+            renderFrame(painter,empty,fspec,fspec.element+suffix);
+            renderInterior(painter,empty,fspec,ispec,ispec.element+suffix);
+            if (!opt->upsideDown)
+              fspec.capsuleV = -1;
+            else
+              fspec.capsuleV = 1;
+            suffix.replace(QString("normal"),QString("toggled"));
+            renderFrame(painter,full,fspec,fspec.element+suffix);
+            renderInterior(painter,full,fspec,ispec,ispec.element+suffix);
+          }
           else
-            fspec.capsuleV = -1;
-          renderFrame(painter,empty,fspec,fspec.element+suffix);
-          renderInterior(painter,empty,fspec,ispec,ispec.element+suffix);
-          if (!opt->upsideDown)
-            fspec.capsuleV = -1;
-          else
-            fspec.capsuleV = 1;
-          suffix.replace(QString("normal"),QString("toggled"));
-          renderFrame(painter,full,fspec,fspec.element+suffix);
-          renderInterior(painter,full,fspec,ispec,ispec.element+suffix);
-        }
-        else
-        {
-          painter->save();
-          painter->setOpacity(DISABLED_OPACITY);
+          {
+            painter->save();
+            painter->setOpacity(DISABLED_OPACITY);
 
-          fspec.hasCapsule = false;
-          renderFrame(painter,grooveRect,fspec,fspec.element+suffix);
-          renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
+            fspec.hasCapsule = false;
+            renderFrame(painter,grooveRect,fspec,fspec.element+suffix);
+            renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
-          painter->restore();
+            painter->restore();
+          }
         }
 
         if (option->state & State_Horizontal)
