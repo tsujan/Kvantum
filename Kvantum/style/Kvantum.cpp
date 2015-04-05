@@ -4871,7 +4871,11 @@ void Kvantum::drawControl(ControlElement element,
             painter->setOpacity(DISABLED_OPACITY);
           }
           renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          if (widget && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
+            // color button!?
+            painter->fillRect(interiorRect(opt->rect,fspec), widget->palette().brush(QPalette::Button));
+          else
+            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
           if (!(option->state & State_Enabled))
           {
             painter->restore();
