@@ -1820,13 +1820,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameFocusRect : {
-      const QString group = "Focus";
-
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-
-      renderFrame(painter,option->rect,fspec,fspec.element);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element);
+      if (qstyleoption_cast<const QStyleOptionFocusRect *>(option)
+          /* this would be ugly, IMO */
+          && !qobject_cast<const QAbstractItemView*>(widget))
+      {
+        frame_spec fspec = getFrameSpec("Focus");
+        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        renderFrame(painter,option->rect,fspec,fspec.element);
+      }
 
       break;
     }
@@ -7422,7 +7423,24 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
 {
   switch (element) {
     case SE_CheckBoxFocusRect :
-    case SE_RadioButtonFocusRect :
+    case SE_RadioButtonFocusRect : {
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton *>(option);
+      if (opt)
+        return opt->rect.adjusted(tspec.check_size,0,0,0);
+    }
+
+    case SE_PushButtonFocusRect : {
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton *>(option);
+      if (opt)
+        return opt->rect;
+    }
+
+    case SE_ComboBoxFocusRect :
+    case SE_SliderFocusRect :
+    case SE_ItemViewItemFocusRect : return QRect();
+
     case SE_ProgressBarGroove :
     case SE_HeaderLabel :
     case SE_ProgressBarLabel : return option->rect;
