@@ -1952,7 +1952,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
-      if (widget && qobject_cast<const QAbstractScrollArea*>(widget))
+      if (widget && (qobject_cast<const QAbstractScrollArea*>(widget) || widget->inherits("QWellArray")))
       {
         if (isDolphin)
         {
@@ -1982,7 +1982,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         QString suffix = "-normal";
         /* distinguish between the focus and normal states
            only if the focus frame elements exist */
-        if (widget && widget->hasFocus()
+        if (!widget->inherits("QWellArray")
+            && widget && widget->hasFocus()
             && themeRndr && themeRndr->isValid()
             && themeRndr->elementExists(fspec.element+"-focused-left"))
         {
@@ -7427,7 +7428,10 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton *>(option);
       if (opt)
-        return opt->rect.adjusted(tspec.check_size,0,0,0);
+        return opt->rect.adjusted(opt->direction == Qt::RightToLeft ? 0 : pixelMetric(PM_IndicatorWidth),
+                                  0,
+                                  opt->direction == Qt::RightToLeft ? -pixelMetric(PM_IndicatorWidth) : 0,
+                                  0);
     }
 
     case SE_PushButtonFocusRect : {
