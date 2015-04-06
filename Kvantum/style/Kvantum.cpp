@@ -98,7 +98,7 @@ Kvantum::Kvantum() : QCommonStyle()
   setBuiltinDefaultTheme();
   setUserTheme(theme);
 
-  const theme_spec tspec = settings->getThemeSpec();
+  tspec = settings->getThemeSpec();
 
   singleClick = true;
   largeIconSize = 32;
@@ -414,7 +414,6 @@ void Kvantum::polish(QWidget *widget)
       case Qt::Window:
       case Qt::Dialog: {
         widget->setAttribute(Qt::WA_StyledBackground);
-        const theme_spec tspec = settings->getThemeSpec();
         /* take all precautions */
         if (((tspec.translucent_windows
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
@@ -591,7 +590,6 @@ void Kvantum::polish(QWidget *widget)
         && !widget->testAttribute(Qt::WA_TranslucentBackground)
         && !translucentWidgets.contains(widget))
     {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.composite && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         widget->setAttribute(Qt::WA_TranslucentBackground);
@@ -658,7 +656,6 @@ void Kvantum::polish(QApplication *app)
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma = true;
 
-  const theme_spec tspec = settings->getThemeSpec();
   if (tspec.opaque.contains (appName))
     isOpaque = true;
 
@@ -860,7 +857,6 @@ void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
 bool Kvantum::eventFilter(QObject *o, QEvent *e)
 {
   QWidget *w = qobject_cast<QWidget*>(o);
-  //const theme_spec tspec = settings->getThemeSpec();
 
   switch (e->type()) {
   case QEvent::Paint:
@@ -1275,7 +1271,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
-        const theme_spec tspec = settings->getThemeSpec();
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
@@ -1509,7 +1504,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
         bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;
-        const theme_spec tspec = settings->getThemeSpec();
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
@@ -1907,7 +1901,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.menu_shadow_depth > 0
           && fspec.left >= tspec.menu_shadow_depth // otherwise shadow will have no meaning
           && translucentWidgets.contains(widget))
@@ -2043,7 +2036,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       int l = 0;
       int tp = 0;
 
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.attach_active_tab)
       {
         const QTabWidget *tw = qobject_cast<const QTabWidget *>(widget);
@@ -2151,7 +2143,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
 
         // -> CC_SpinBox
-        if (settings->getThemeSpec().vertical_spin_indicators)
+        if (tspec.vertical_spin_indicators)
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           fspec.expansion = 0;
@@ -2271,7 +2263,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
 
         // -> CC_SpinBox
-        if (settings->getThemeSpec().vertical_spin_indicators)
+        if (tspec.vertical_spin_indicators)
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           fspec.expansion = 0;
@@ -2389,7 +2381,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           painter->setTransform(m, true);
         }
       }
-      const theme_spec tspec = settings->getThemeSpec();
       if (element == PE_IndicatorToolBarHandle && tspec.center_toolbar_handle)
       {
         renderIndicator(painter,r,fspec,dspec,dspec.element+"-handle");
@@ -2413,7 +2404,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (element == PE_IndicatorSpinMinus || element == PE_IndicatorSpinDown)
         up = false;
 
-      const theme_spec tspec = settings->getThemeSpec();
       const QString group = "IndicatorSpinBox";
 
       frame_spec fspec;
@@ -2706,7 +2696,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
       {
         bool drawRaised = false;
-        const theme_spec tspec = settings->getThemeSpec();
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
@@ -3091,7 +3080,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.tooltip_shadow_depth > 0
           && fspec.left >= tspec.tooltip_shadow_depth
           && widget && translucentWidgets.contains(widget))
@@ -3418,7 +3406,7 @@ void Kvantum::drawControl(ControlElement element,
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
         if (r.isNull()) r = option->rect;
-        if (!isPlasma && settings->getThemeSpec().merge_menubar_with_toolbar && getParent(widget,1))
+        if (!isPlasma && tspec.merge_menubar_with_toolbar && getParent(widget,1))
         {
           QList<QToolBar *> tList = getParent(widget,1)->findChildren<QToolBar*>();
           if (!tList.isEmpty())
@@ -3512,7 +3500,7 @@ void Kvantum::drawControl(ControlElement element,
       }
       QString group = "MenuBar";
       QRect r = option->rect;
-      if (settings->getThemeSpec().merge_menubar_with_toolbar && getParent(widget,1))
+      if (tspec.merge_menubar_with_toolbar && getParent(widget,1))
       {
         QList<QToolBar *> tList = getParent(widget,1)->findChildren<QToolBar*>();
         if (!tList.isEmpty())
@@ -3716,7 +3704,6 @@ void Kvantum::drawControl(ControlElement element,
 
         if (status.startsWith("normal") || status.startsWith("focused"))
         {
-          const theme_spec tspec = settings->getThemeSpec();
           if (tspec.joined_tabs
               && opt->position != QStyleOptionTab::OnlyOneTab)
           {
@@ -4108,7 +4095,6 @@ void Kvantum::drawControl(ControlElement element,
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
-        const theme_spec tspec = settings->getThemeSpec();
         const frame_spec fspec1 = getFrameSpec("Progressbar");
         fspec.expansion = fspec1.expansion - (tspec.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
         if (fspec.expansion >= qMin(h,w)) isRounded = true;
@@ -4280,7 +4266,6 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.textless_progressbar) break;
 
       const QStyleOptionProgressBar *opt =
@@ -4640,7 +4625,7 @@ void Kvantum::drawControl(ControlElement element,
       if (isInactive)
         suffix = "-normal-inactive";
 
-      if (settings->getThemeSpec().merge_menubar_with_toolbar)
+      if (tspec.merge_menubar_with_toolbar)
       {
         if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
         {
@@ -5005,7 +4990,6 @@ void Kvantum::drawControl(ControlElement element,
             else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                      || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
             {
-              const theme_spec tspec = settings->getThemeSpec();
               if (!tspec.group_toolbar_buttons)
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
@@ -5361,7 +5345,6 @@ void Kvantum::drawControl(ControlElement element,
       if (const QStyleOptionProgressBar *opt = qstyleoption_cast<const QStyleOptionProgressBar*>(option))
       {
         QStyleOptionProgressBar o(*opt);
-        const theme_spec tspec = settings->getThemeSpec();
         frame_spec fspec = getFrameSpec("Progressbar");
         drawControl(CE_ProgressBarGroove, &o, painter, widget);
         if (!tspec.spread_progressbar)
@@ -5456,7 +5439,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
               else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
                        || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
               {
-                const theme_spec tspec = settings->getThemeSpec();
                 if (!tspec.group_toolbar_buttons
                     && enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
                 {
@@ -5521,7 +5503,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
 
-        if (settings->getThemeSpec().vertical_spin_indicators)
+        if (tspec.vertical_spin_indicators)
         {
           const interior_spec ispec = getInteriorSpec("LineEdit");
           frame_spec fspec = getFrameSpec("LineEdit");
@@ -6213,7 +6195,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_MenuHMargin : 
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      const theme_spec tspec = settings->getThemeSpec();
       const frame_spec fspec = getFrameSpec("Menu");
 
       int v = qMax(fspec.top,fspec.bottom);
@@ -6274,7 +6255,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
 
     case PM_ToolBarFrameWidth : return 0;
     case PM_ToolBarItemSpacing : {
-      if (settings->getThemeSpec().group_toolbar_buttons)
+      if (tspec.group_toolbar_buttons)
         return 0;
       else
       {
@@ -6285,7 +6266,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       }
     }
     case PM_ToolBarHandleExtent : {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.center_toolbar_handle)
       {
         const indicator_spec dspec = getIndicatorSpec("Toolbar");
@@ -6298,7 +6278,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return dspec.size ? dspec.size : 8;
     }
     case PM_ToolBarIconSize : {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.slim_toolbars)
         return 16;
       else
@@ -6357,15 +6336,11 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_CheckBoxLabelSpacing :
     case PM_RadioButtonLabelSpacing : return 5;
 
-    case PM_SplitterWidth : {
-      const theme_spec tspec = settings->getThemeSpec();
+    case PM_SplitterWidth :
       return tspec.splitter_width;
-    }
 
-    case PM_ScrollBarExtent : {
-      const theme_spec tspec = settings->getThemeSpec();
+    case PM_ScrollBarExtent :
       return tspec.scroll_width;
-    }
     case PM_ScrollBarSliderMin : return 36;
 
     case PM_ProgressBarChunkWidth : return 20;
@@ -6384,14 +6359,10 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     }
 
     /* slider handle */
-    case PM_SliderLength : {
-      const theme_spec tspec = settings->getThemeSpec();
+    case PM_SliderLength :
       return tspec.slider_handle_length;
-    }
-    case PM_SliderControlThickness : {
-      const theme_spec tspec = settings->getThemeSpec();
+    case PM_SliderControlThickness :
       return tspec.slider_handle_width;
-    }
 
     /* the default is good, although we don't use it */
     /*case PM_SliderSpaceAvailable: {
@@ -6447,7 +6418,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_HeaderMargin : return 2;
 
     case PM_ToolTipLabelFrameWidth : {
-      const theme_spec tspec = settings->getThemeSpec();
       const frame_spec fspec = getFrameSpec("ToolTip");
 
       int v = qMax(fspec.top,fspec.bottom);
@@ -6473,7 +6443,6 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_IndicatorHeight :
     case PM_ExclusiveIndicatorWidth :
     case PM_ExclusiveIndicatorHeight : {
-      const theme_spec tspec = settings->getThemeSpec();
       /* make exception for menuitems and viewitems */
       if (isLibreoffice
           || qstyleoption_cast<const QStyleOptionMenuItem *>(option)
@@ -6511,7 +6480,7 @@ void Kvantum::setSurfaceFormat(QWidget *widget) const
   return;
 #else
   if (!widget || !widget->isWindow()
-      || (!settings->getThemeSpec().translucent_windows
+      || (!tspec.translucent_windows
           && !((isKonsole || isYakuake)
                && settings->getHacksSpec().blur_konsole
                && widget->testAttribute(Qt::WA_TranslucentBackground)))
@@ -6575,13 +6544,10 @@ int Kvantum::styleHint(StyleHint hint,
     case SH_ComboBox_ListMouseTracking :
     case SH_Menu_MouseTracking : return true;
 
-    case SH_MenuBar_MouseTracking : {
-      const theme_spec tspec = settings->getThemeSpec();
+    case SH_MenuBar_MouseTracking :
       return tspec.menubar_mouse_tracking;
-    }
 
     case SH_TabBar_Alignment : {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.left_tabs)
         return Qt::AlignLeft;
       else
@@ -6636,7 +6602,6 @@ int Kvantum::styleHint(StyleHint hint,
     }
 
     case SH_ToolButtonStyle : {
-      const theme_spec tspec = settings->getThemeSpec();
       switch (tspec.toolbutton_style) {
         case 0 : return QCommonStyle::styleHint(hint,option,widget,returnData);
         case 1 : return Qt::ToolButtonIconOnly;
@@ -6717,9 +6682,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       /* Here we don't use defaultSize because, for Qt4, it's based on spinbox size hint,
          which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
          corrected in Qt5 but the following method works for both. */
-      const theme_spec tspec = settings->getThemeSpec();
       frame_spec fspec = getFrameSpec("LineEdit");
-      if (settings->getThemeSpec().vertical_spin_indicators)
+      if (tspec.vertical_spin_indicators)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
@@ -7479,7 +7443,6 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
     }
 
     case SE_ProgressBarContents : {
-      const theme_spec tspec = settings->getThemeSpec();
       if (tspec.spread_progressbar)
         return option->rect;
 
@@ -7517,7 +7480,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
       }
       else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
-        if (!settings->getThemeSpec().vertical_spin_indicators)
+        if (!tspec.vertical_spin_indicators)
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
           QString maxTxt = spinMaxText(p);
@@ -7839,7 +7802,6 @@ QRect Kvantum::subControlRect(ComplexControl control,
       int sw = SPIN_BUTTON_WIDTH;
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
-      const theme_spec tspec = settings->getThemeSpec();
 
       // a workaround for LibreOffice
       if (isLibreoffice)
@@ -8073,7 +8035,6 @@ QRect Kvantum::subControlRect(ComplexControl control,
         case SC_SliderGroove : {
           if (opt)
           {
-            const theme_spec tspec = settings->getThemeSpec();
             const int grooveThickness = tspec.slider_width;
              int ticks = opt->tickPosition;
             if (horiz)
