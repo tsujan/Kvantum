@@ -6675,7 +6675,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         s.rwidth() = defaultSize.width();
       /* defaultSize may be a bit thicker because of frame, which doesn't matter
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
-      if (!qobject_cast<const QLineEdit*>(widget))
+      if (s.height() < defaultSize.height() && !qobject_cast<const QLineEdit*>(widget))
         s.rheight() = defaultSize.height();
       return s;
 
