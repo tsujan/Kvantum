@@ -20,15 +20,12 @@
 #ifndef BLURHELPER_H
 #define BLURHELPER_H
 
-#include <QObject>
+#include <QWidget>
 #include <QPointer>
 #include <QHash>
 #include <QBasicTimer>
 #include <QTimerEvent>
-#include <QDockWidget>
-#include <QMenu>
 #include <QRegion>
-#include <QToolBar>
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <X11/Xdefs.h>

@@ -19,23 +19,14 @@
 #define KVANTUM_H
 
 #include <QCommonStyle>
-#include <QString>
 #include <QMap>
 
 #include "shortcuthandler.h"
 #include "drag/windowmanager.h"
-#include "themeconfig/specs.h"
+#include "themeconfig/ThemeConfig.h"
 #include "blur/blurhelper.h"
 
 class QSvgRenderer;
-class QSettings;
-class QVariant;
-class QFont;
-class QTimer;
-template<typename T> class QList;
-template<typename T1, typename T2> class QMap;
-
-class ThemeConfig;
 
 class Kvantum : public QCommonStyle {
   Q_OBJECT

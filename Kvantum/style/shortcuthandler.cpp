@@ -18,10 +18,10 @@
  */
 
 #include "shortcuthandler.h"
-#include <QWidget>
-#include <QMenu>
+
 #include <QEvent>
 #include <QKeyEvent>
+#include <QMenu>
 #include <QMenuBar>
 
 ShortcutHandler::ShortcutHandler(QObject *parent) : QObject(parent),

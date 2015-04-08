@@ -20,8 +20,6 @@
 
 #include "themeconfig/specs.h"
 
-class QString;
-class QVariant;
 class QSettings;
 
 /*

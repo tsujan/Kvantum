@@ -21,9 +21,7 @@
 #ifndef SPEC_H
 #define SPEC_H
 
-//#include <QString>
 #include <QStringList>
-//#include <QDebug>
 
 /* Generic information about a theme */
 typedef struct {

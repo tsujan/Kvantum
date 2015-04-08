@@ -8,6 +8,7 @@ V0.8.18
  * Use minW and minH as far as possible.
  * Better size calculation for some widgets (to align them horizontally if possible).
  * Force the minimum sizes of Qt5 spinboxes (workaround for a probable Qt5 bug).
+ * Get the theme specification only once because the XLib function XGetSelectionOwner() is used instead of QX11Info::isCompositingManagerRunning() for Qt5.
 
 V0.8.17
 ---------

@@ -21,11 +21,8 @@
 #ifndef WINDOWMANAGER_H
 #define WINDOWMANAGER_H
 
-#include <QEvent>
 #include <QBasicTimer>
-#include <QObject>
 #include <QSet>
-#include <QString>
 #if QT_VERSION < 0x050000
 #include <QWeakPointer>
 #else

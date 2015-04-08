@@ -21,7 +21,7 @@
 
 #include <QEvent>
 #include <QVector>
-#include <QPushButton>
+#include <QMenu>
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>

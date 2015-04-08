@@ -17,12 +17,12 @@
 
 #include "Kvantum.h"
 
-#include <QApplication>
+#include <QDir>
 #include <QPainter>
-#include <QSvgRenderer>
 #include <QSettings>
-#include <QFile>
 #include <QTimer>
+#include <QSvgRenderer>
+#include <QApplication>
 #include <QToolButton>
 #include <QToolBar>
 #include <QMainWindow>
@@ -40,8 +40,6 @@
 #include <QScrollBar>
 #include <QMdiArea>
 #include <QToolBox>
-#include <QDir>
-#include <QTextStream>
 #include <QLabel>
 #include <QDoubleSpinBox>
 #include <QDateTimeEdit>
@@ -56,8 +54,6 @@
 #include <QSurfaceFormat>
 #include <QWindow>
 #endif
-
-#include "themeconfig/ThemeConfig.h"
 
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7

@@ -18,8 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QProgressBar>
 #include <QApplication>
+#include <QProgressBar>
 #include <QComboBox>
 #include <QDialog>
 #include <QDockWidget>
@@ -30,16 +30,12 @@
 #include <QMenuBar>
 #include <QMouseEvent>
 #include <QStatusBar>
-#include <QStyle>
 #include <QStyleOptionGroupBox>
 #include <QTabBar>
-#include <QTabWidget>
 #include <QToolBar>
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
-#include <QTextStream>
-#include <QTextDocument>
 
 #include "windowmanager.h"
 #include "x11wmmove.h"
