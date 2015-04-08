@@ -4268,58 +4268,39 @@ void Kvantum::drawControl(ControlElement element,
 
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
+      const QStyleOptionProgressBarV2 *opt2 =
+          qstyleoption_cast<const QStyleOptionProgressBarV2 *>(option);
 
       if (opt && opt->textVisible)
       {
-        const QString group = "Progressbar";
-        frame_spec fspec = getFrameSpec(group);
-        label_spec lspec = getLabelSpec(group);
+        frame_spec fspec;
+        default_frame_spec(fspec);
+        label_spec lspec = getLabelSpec("Progressbar");
+        lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
         int length = w;
         QRect r = option->rect;
-        if (const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget))
+
+        if (opt2 && opt2->orientation == Qt::Vertical)
         {
-          int thickness = pb->height();
-
-          if (pb->orientation() == Qt::Vertical)
+          length = h;
+          r.setRect(0, 0, h, w);
+          QTransform m;
+          if (!opt2->bottomToTop)
           {
-            length = h;
-            thickness = pb->width();
-
-            r.setRect(0, 0, h, w);
-            QTransform m;
-            if (pb->textDirection() == QProgressBar::TopToBottom)
-            {
-              m.translate(0, w); m.scale(1,-1);
-              // be fully consistent
-              int top = fspec.top;
-              fspec.top = fspec.bottom;
-              fspec.bottom = top;
-
-              top = lspec.top;
-              lspec.top = lspec.bottom;
-              lspec.bottom = top;
-            }
-            else
-            {
-              m.translate(h, 0); m.scale(-1,1);
-            }
-            painter->setTransform(m, true);
+            m.translate(0, w); m.scale(1,-1);
           }
-
-          thickness = thickness - fspec.top-fspec.bottom - lspec.top-lspec.bottom;
-          QFont f(pb->font());
-          if (f.pixelSize() > thickness)
-            f.setPixelSize(thickness);
-          else if (f.pointSize() > thickness)
-            f.setPointSize(thickness);
-          painter->setFont(f);
+          else
+          {
+            m.translate(h, 0); m.scale(-1,1);
+          }
+          painter->setTransform(m, true);
         }
 
+        QFont f(painter->font());
         QString txt = opt->text;
-        QFont F(painter->font());
-        if (lspec.boldFont) F.setBold(true);
-        QFontMetrics fm(F);
+        if (lspec.boldFont) f.setBold(true);
+        QFontMetrics fm(f);
         txt = fm.elidedText(txt, Qt::ElideRight, length);
 
         renderLabel(painter,option->palette,
@@ -5348,8 +5329,6 @@ void Kvantum::drawControl(ControlElement element,
         if (!tspec.spread_progressbar)
           o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
         drawControl(CE_ProgressBarContents, &o, painter, widget);
-        if (!tspec.spread_progressbar)
-          o.rect.adjust(-fspec.left, -fspec.top, fspec.right, fspec.bottom);
         drawControl(CE_ProgressBarLabel, &o, painter, widget);
       }
 
