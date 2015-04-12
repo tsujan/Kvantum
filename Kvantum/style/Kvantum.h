@@ -258,11 +258,6 @@ class Kvantum : public QCommonStyle {
     /* The general specification of the theme. */
     theme_spec tspec;
 
-    /* Just under KDE, follow its setting for
-       single or double clicking and also for large icon size. */
-    bool singleClick;
-    int largeIconSize;
-
     /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice;
     bool isPlasma;

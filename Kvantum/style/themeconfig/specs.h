@@ -96,6 +96,12 @@ typedef struct {
   /* draw spin indicators vertically
      and inside the spin line-edit? */
   bool vertical_spin_indicators;
+  /* fill rubber band rectangle with highlight color? */
+  bool fill_rubberband;
+
+  int small_icon_size;
+  int large_icon_size;
+  int button_icon_size;
 } theme_spec;
 
 /* General colors */
@@ -294,6 +300,10 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
   tspec.vertical_spin_indicators = false;
+  tspec.fill_rubberband = false;
+  tspec.small_icon_size = 16;
+  tspec.large_icon_size = 32;
+  tspec.button_icon_size = 16;
 }
 
 static inline void default_color_spec(color_spec &cspec) {

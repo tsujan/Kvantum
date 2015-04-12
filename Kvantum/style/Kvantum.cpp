@@ -48,6 +48,7 @@
 #include <QPaintEvent>
 #include <QtCore/qmath.h>
 #include <QMenuBar>
+#include <QGraphicsView>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
 #if QT_VERSION >= 0x050000
@@ -96,8 +97,6 @@ Kvantum::Kvantum() : QCommonStyle()
 
   tspec = settings->getThemeSpec();
 
-  singleClick = true;
-  largeIconSize = 32;
   QString kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
   if (!QFile::exists(kdeGlobals))
     kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
@@ -105,22 +104,31 @@ Kvantum::Kvantum() : QCommonStyle()
   {
     QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
     QVariant v;
+    int iconSize;
     KDESettings.beginGroup("KDE");
     v = KDESettings.value ("SingleClick");
     KDESettings.endGroup();
     if (v.isValid())
-      singleClick = v.toBool();
+      tspec.double_click = !v.toBool();
     KDESettings.beginGroup("DialogIcons");
     v = KDESettings.value ("Size");
     KDESettings.endGroup();
     if (v.isValid())
     {
-      int iconSize = v.toInt();
+      iconSize = v.toInt();
       if (iconSize > 0 && iconSize <= 256)
-        largeIconSize = iconSize;
+        tspec.large_icon_size = iconSize;
+    }
+    KDESettings.beginGroup("SmallIcons");
+    v = KDESettings.value ("Size");
+    KDESettings.endGroup();
+    if (v.isValid())
+    {
+      iconSize = v.toInt();
+      if (iconSize > 0 && iconSize <= 256)
+        tspec.small_icon_size = iconSize;
     }
   }
-  singleClick = singleClick && !tspec.double_click;
 
   isPlasma = false;
   isLibreoffice = false;
@@ -1651,9 +1659,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         break;
       }*/
 
-      const QString group = "RadioButton";
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec;
+      default_frame_spec(fspec);
+      const interior_spec ispec = getInteriorSpec("RadioButton");
 
       if (option->state & State_Enabled)
       {
@@ -1674,7 +1682,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
@@ -1691,7 +1698,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           suffix = "-normal";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
@@ -1760,9 +1766,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         break;
       }*/
 
-      const QString group = "CheckBox";
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec;
+      default_frame_spec(fspec);
+      const interior_spec ispec = getInteriorSpec("CheckBox");
 
       if (option->state & State_Enabled)
       {
@@ -1787,7 +1793,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
@@ -1806,7 +1811,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           suffix = "-normal";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
@@ -2446,6 +2450,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             fspec.expansion = 0;
           }
         }
+        else if (w < SPIN_BUTTON_WIDTH) fspec.expansion = 0;
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
           if (spinMaxText(sb).isEmpty())
@@ -2726,12 +2731,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else
           fspec.left = 0; // no left frame in this case
 
+        const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+        if (fspec.capsuleH == 0)
+          fspec.expansion = fspec1.expansion;
+
         /* lack of space */
         const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
         if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull()
             && tb->popupMode() == QToolButton::MenuButtonPopup)
         {
-          const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
           if (tb->width() < opt->iconSize.width()+fspec1.left
                             +(rtl ? fspec.left : fspec.right)
                             +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
@@ -3540,9 +3548,9 @@ void Kvantum::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        const QString group = "RadioButton";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        frame_spec fspec;
+        default_frame_spec(fspec);
+        const label_spec lspec = getLabelSpec("RadioButton");
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -3565,9 +3573,9 @@ void Kvantum::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionButton *>(option);
 
       if (opt) {
-        const QString group = "CheckBox";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        frame_spec fspec;
+        default_frame_spec(fspec);
+        const label_spec lspec = getLabelSpec("CheckBox");
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -6283,12 +6291,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       return (extra > 0 ? 24 + extra : 24);
     }
 
-    /*case PM_ButtonIconSize :
     case PM_TabBarIconSize :
-    case PM_SmallIconSize : return 16;*/
+    case PM_ListViewIconSize :
+    case PM_ButtonIconSize : return tspec.button_icon_size; 
+    case PM_SmallIconSize : return tspec.small_icon_size;
 
     case PM_IconViewIconSize:
-    case PM_LargeIconSize : return largeIconSize;
+    case PM_LargeIconSize : return tspec.large_icon_size;
 
     case PM_FocusFrameVMargin :
     case PM_FocusFrameHMargin :  {
@@ -6508,7 +6517,7 @@ int Kvantum::styleHint(StyleHint hint,
     case SH_ItemView_ShowDecorationSelected :
     case SH_ItemView_ArrowKeysNavigateIntoChildren : return false;
 
-    case SH_ItemView_ActivateItemOnSingleClick : return singleClick;
+    case SH_ItemView_ActivateItemOnSingleClick : return !tspec.double_click;
 
     case SH_ToolButton_PopupDelay :
     case SH_Menu_SubMenuPopupDelay : return 250;
@@ -6591,13 +6600,18 @@ int Kvantum::styleHint(StyleHint hint,
 
     case SH_RubberBand_Mask : {
       const QStyleOptionRubberBand *opt = qstyleoption_cast<const QStyleOptionRubberBand*>(option);
-      if (!opt) return true;
+      if (!opt) return false;
       if (QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask*>(returnData))
       {
         mask->region = option->rect;
-        mask->region -= option->rect.adjusted(1,1,-1,-1);
+        if (!qobject_cast<QGraphicsView*>(getParent(widget,1)) // as in Oxygen
+            && (!tspec.fill_rubberband || !qobject_cast<QMainWindow*>(getParent(widget,1))))
+        {
+          mask->region -= option->rect.adjusted(1,1,-1,-1);
+        }
+        return true;
       }
-      return true;
+      return false;
     }
 
     //case SH_DialogButtonLayout: return QDialogButtonBox::GnomeLayout;
@@ -6703,7 +6717,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const frame_spec fspec = getFrameSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -6768,7 +6781,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -6832,7 +6844,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         const QString group = "RadioButton";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec;
+        default_frame_spec(fspec);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
@@ -6844,19 +6857,10 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        /* add the height of radio button indicator to have a
-           reasonable vertical distance between radio buttons */
-	    bool hasLabel = true;
-	    if (const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget))
-	    {
-	      if (ab->text().isEmpty())
-	        hasLabel = false;
-	    }
+	    int ih = pixelMetric(PM_ExclusiveIndicatorHeight);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
-        int dw = defaultSize.width() - s.width();
-        //int dh = defaultSize.height() - s.height();
-        s = s + QSize((dw > 0 ? dw : 0) + (pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_ExclusiveIndicatorWidth)),
-                      /*(dh > 0 ? dh : 0) +*/ (hasLabel ? 0 : pixelMetric(PM_ExclusiveIndicatorHeight)));
+        s = s + QSize(pixelMetric(PM_RadioButtonLabelSpacing) + pixelMetric(PM_ExclusiveIndicatorWidth),
+                      (s.height() < ih ? ih : 0));
       }
 
       break;
@@ -6868,7 +6872,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         const QString group = "CheckBox";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec;
+        default_frame_spec(fspec);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
@@ -6880,19 +6885,10 @@ QSize Kvantum::sizeFromContents (ContentsType type,
             f.setBold(true);
         }
 
-        /* add the height of checkbox indicator to have a
-           reasonable vertical distance between checkboxes */
-	    bool hasLabel = true;
-	    if (const QAbstractButton *ab = qobject_cast<const QAbstractButton *>(widget))
-	    {
-	      if (ab->text().isEmpty())
-	        hasLabel = false;
-	    }
+        int ih = pixelMetric(PM_IndicatorHeight);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
-        int dw = defaultSize.width() - s.width();
-        //int dh = defaultSize.height() - s.height();
-        s = s + QSize((dw > 0 ? dw : 0) + (pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_IndicatorWidth)),
-                      /*(dh > 0 ? dh : 0) +*/ (hasLabel ? 0 : pixelMetric(PM_IndicatorHeight)));
+        s = s + QSize(pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_IndicatorWidth),
+                      (s.height() < ih ? ih : 0));
       }
 
       break;
@@ -6986,7 +6982,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        // for horizontal alignment with some widgets
         lspec.left = qMax(0,lspec.left-1);
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
@@ -8686,7 +8681,7 @@ void Kvantum::renderFrame(QPainter *painter,
   QString element1(element);
   int e = qMin(h,w);
   if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
-      && (!fspec.hasCapsule || (fspec.capsuleV == 2 && fspec.capsuleH != 0)))
+      && (!fspec.hasCapsule || fspec.capsuleV == 2))
   {
     if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     {
@@ -8717,7 +8712,7 @@ void Kvantum::renderFrame(QPainter *painter,
     else
     {
       int X = 0;
-      if (h <= 2*w)
+      if (h <= 2*w || fspec.capsuleH == 0)
       {
         if (h%2 == 0)
         {
@@ -8736,10 +8731,15 @@ void Kvantum::renderFrame(QPainter *painter,
         Left = X;
         Right = fspec.right;
       }
-      else
+      else if (fspec.capsuleH == 1)
       {
         Right = X;
         Left = fspec.left;
+      }
+      else
+      {
+        Left = fspec.left;
+        Right = fspec.right;
       }
     }
     QString element0(element);
@@ -9053,7 +9053,7 @@ void Kvantum::renderInterior(QPainter *painter,
     return;
 
   if (!isLibreoffice && fspec.expansion > 0 && qMin(bounds.height(),bounds.width()) <= fspec.expansion
-      && (!fspec.hasCapsule || (fspec.capsuleV == 2 && fspec.capsuleH != 0)))
+      && (!fspec.hasCapsule || fspec.capsuleV == 2))
     return;
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))

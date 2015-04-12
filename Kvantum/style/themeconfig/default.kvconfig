@@ -98,12 +98,10 @@ indicator.size=8
 
 [RadioButton]
 inherits=PanelButtonCommand
-frame=false
 interior.element=radio
 
 [CheckBox]
 inherits=PanelButtonCommand
-frame=false
 interior.element=checkbox
 
 [Focus]

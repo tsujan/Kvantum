@@ -429,6 +429,21 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","vertical_spin_indicators");
   r.vertical_spin_indicators = v.toBool();
 
+  v = getValue("General","fill_rubberband");
+  r.fill_rubberband = v.toBool();
+
+  v = getValue("General","small_icon_size", empty);
+  if (v.isValid())
+    r.small_icon_size = qMin(qMax(v.toInt(),16), 48);
+
+  v = getValue("General","large_icon_size", empty);
+  if (v.isValid())
+    r.large_icon_size = qMin(qMax(v.toInt(),24), 128);
+
+  v = getValue("General","button_icon_size", empty);
+  if (v.isValid())
+    r.button_icon_size = qMin(qMax(v.toInt(),16), 64);
+
   return r;
 }
 

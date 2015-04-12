@@ -418,6 +418,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
     ui->checkBoxProgress->setChecked (defaultSettings.value ("textless_progressbar").toBool());
+    ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
         ui->checkBoxMenubar->setChecked (defaultSettings.value ("menubar_mouse_tracking").toBool());
     else
@@ -448,27 +449,38 @@ void KvantumManager::defaultThemeButtons()
         if (!ui->checkBoxBlurWindow->isChecked())
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
+    int icnSize = 16;
+    if (defaultSettings.contains ("small_icon_size"))
+        icnSize = defaultSettings.value ("small_icon_size").toInt();
+    icnSize = qMin(qMax(icnSize,16), 48);
+    ui->spinSmall->setValue (icnSize);
+    icnSize = 32;
+    if (defaultSettings.contains ("large_icon_size"))
+        icnSize = defaultSettings.value ("large_icon_size").toInt();
+    icnSize = qMin(qMax(icnSize,24), 128);
+    ui->spinLarge->setValue (icnSize);
+    icnSize = 16;
+    if (defaultSettings.contains ("button_icon_size"))
+        icnSize = defaultSettings.value ("button_icon_size").toInt();
+    icnSize = qMin(qMax(icnSize,16), 64);
+    ui->spinButton->setValue (icnSize);
     defaultSettings.endGroup();
 }
 /*************************/
 void KvantumManager::resizeConfPage (bool thirdPage)
 {
-  int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent);
   bool le = true;
   if (!ui->opaqueEdit->isEnabled())
   {
       le = false;
       ui->opaqueEdit->setEnabled (true);
   }
-  resize (size().expandedTo (sizeHint()
+  resize (size().expandedTo (sizeHint() + ui->opaqueEdit->sizeHint()
+                             + QSize (0, ui->saveButton->sizeHint().height())
                              + (thirdPage ?
-                                  ui->checkBoxKCapacity->minimumSizeHint() - ui->checkBoxDolphin->minimumSizeHint()
-                                  + ui->comboToolButton->minimumSizeHint()
-                                  + QSize (0, 10*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13))
-                                  : QSize())
-                             + QSize (extra + ui->opaqueEdit->sizeHint().width()
-                                            + 3*(QApplication::style()->pixelMetric (QStyle::PM_IndicatorWidth) - 13),
-                                      extra)));
+                                  ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
+                                    + QSize (ui->groupBox_4->minimumSizeHint().width(), ui->saveButton->sizeHint().height())
+                                  : QSize())));
   if (!le) ui->opaqueEdit->setEnabled (false);
 }
 /*************************/
@@ -584,6 +596,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("textless_progressbar"))
                     ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
+                if (themeSettings.contains ("fill_rubberband"))
+                    ui->checkBoxRubber->setChecked (themeSettings.value ("fill_rubberband").toBool());
                 if (themeSettings.contains ("menubar_mouse_tracking"))
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 if (themeSettings.contains ("merge_menubar_with_toolbar"))
@@ -618,6 +632,24 @@ void KvantumManager::tabChanged (int index)
                     popupBlurring (ui->checkBoxBlurWindow->isChecked());
                     if (!ui->checkBoxBlurWindow->isChecked() && themeSettings.contains ("popup_blurring"))
                         ui->checkBoxBlurPopup->setChecked (themeSettings.value ("popup_blurring").toBool());
+                }
+                if (themeSettings.contains ("small_icon_size"))
+                {
+                    int icnSize = themeSettings.value ("small_icon_size").toInt();
+                    icnSize = qMin(qMax(icnSize,16), 48);
+                    ui->spinSmall->setValue (icnSize);
+                }
+                if (themeSettings.contains ("large_icon_size"))
+                {
+                    int icnSize = themeSettings.value ("large_icon_size").toInt();
+                    icnSize = qMin(qMax(icnSize,24), 128);
+                    ui->spinLarge->setValue (icnSize);
+                }
+                if (themeSettings.contains ("button_icon_size"))
+                {
+                    int icnSize = themeSettings.value ("button_icon_size").toInt();
+                    icnSize = qMin(qMax(icnSize,16), 64);
+                    ui->spinButton->setValue (icnSize);
                 }
                 themeSettings.endGroup();
 
@@ -915,6 +947,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
+        themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
         themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
@@ -925,6 +958,9 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
+        themeSettings.setValue ("small_icon_size", ui->spinSmall->value());
+        themeSettings.setValue ("large_icon_size", ui->spinLarge->value());
+        themeSettings.setValue ("button_icon_size", ui->spinButton->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
