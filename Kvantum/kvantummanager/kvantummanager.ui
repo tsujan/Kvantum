@@ -476,7 +476,7 @@ the spin-down one inside the spin line-edit.</string>
              </property>
              <property name="toolTip">
               <string>If checked, the menubar and toolbar will be drawn as a whole
-with the toolbar SVG elemt when they are adjacent to one another.</string>
+with the toolbar SVG element when they are adjacent to one another.</string>
              </property>
              <property name="text">
               <string>Merge menubar with toolbar</string>

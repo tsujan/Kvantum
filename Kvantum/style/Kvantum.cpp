@@ -1159,10 +1159,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_PanelButtonTool : {
       /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
-      if (qobject_cast<const QPushButton *>(widget))
+      if (const QPushButton *pb = qobject_cast<const QPushButton *>(widget))
       {
-        painter->fillRect(option->rect, option->palette.brush(QPalette::Button));
-        break;
+        if (pb->text().isEmpty())
+        {
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Button));
+          break;
+        }
       }
 
       bool hasPanel = false;
