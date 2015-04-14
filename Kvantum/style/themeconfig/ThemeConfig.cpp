@@ -114,10 +114,6 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
   frame_spec r;
   default_frame_spec(r);
 
-  // titlebars and indicator arrows never have frame
-  if (elementName == "TitleBar" || elementName == "IndicatorArrow")
-    return r;
-
   QVariant v = getValue(elementName, "inherits");
   QString i = v.toString();
 
@@ -139,8 +135,11 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       v = getValue(elementName,"frame.right", i);
       r.right = qMax(v.toInt(),0);
 
-      v = getValue(elementName,"frame.expansion", i);
-      r.expansion = qMax(v.toInt(),0);
+      if (r.top && r.bottom && r.left && r.right)
+      {
+        v = getValue(elementName,"frame.expansion", i);
+        r.expansion = qMax(v.toInt(),0);
+      }
     }
   }
 
@@ -151,10 +150,6 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName) const
 {
   interior_spec r;
   default_interior_spec(r);
-
-  // indicator arrows never have interior
-  if (elementName == "IndicatorArrow")
-    return r;
 
   QVariant v = getValue(elementName, "inherits");
   QString i = v.toString();

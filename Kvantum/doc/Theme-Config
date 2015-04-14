@@ -162,8 +162,7 @@ author                            string              Obvious.
 
 comment                           string              Obvious.
 
-x11drag                           true/false          Drag windows from anywhere
-                                                      possible?
+x11drag                           true/false          Drag windows from anywhere possible?
 
 alt_mnemonic                      true/false          Show underlines only when
                                                       Alt is pressed?
@@ -286,9 +285,10 @@ slider_handle_length              integer             The width or height of sli
                                                       handles. The default values are
                                                       16px.
 
-check_size                        integer             The width and height of
-                                                      checkboxes and radio buttons.
-                                                      The default value is 13px.
+check_size                        integer             The width and height of checkboxes
+                                                      and radio buttons. The default
+                                                      value is 13px.
+
 small_icon_size
 large_icon_size
 button_icon_size                  integer             These affect menu-items/headers,
@@ -390,19 +390,17 @@ respect_darkness                  true/false          Some apps don't respect da
                            *** Other Sections ***
                            **********************
 
-inherits                          string              The name of a secion (in the
-                                                      same config file and without
-                                                      brackets) whose configuration
-                                                      is also used for this one.
+inherits                          string              The name of a secion (in the same config
+                                                      file and without brackets) whose
+                                                      configuration is also used for this one.
 
 frame                             true/false          Draw a frame around the widget?
 
 frame.top
 frame.bottom
 frame.left
-frame.right                       integer             The height or width of the
-                                                      corresponding frame part
-                                                      if there is any.
+frame.right                       integer             The height or width of the corresponding
+                                                      frame part if there is any.
 
 frame.expansion                   integer             A positive value will expand the
                                                       frames until the corner frames meet
@@ -418,16 +416,16 @@ frame.expansion                   integer             A positive value will expa
 interior                          true/false          Draw an interior for the widget?
 
 interior.x.patternsize
-interior.y.patternsize            integer             The interior pattern sizes.
-                                                      Used for tiling the interior of
-                                                      a widget with a pattern. A value
-                                                      of zero means no tiling in the
-                                                      corresponding direction. Their
-                                                      absence also means no pattern.
+interior.y.patternsize            integer             The interior pattern sizes. Used for
+                                                      tiling the interior of a widget with
+                                                      a pattern. A value of zero means no
+                                                      tiling in the corresponding direction.
+                                                      Their absence also means no pattern.
+                                                      Some widget types may never accept
+                                                      patterns.
 
-indicator.size                    integer             Some widgets, like scrollbar
-                                                      arrows, have indicators. This
-                                                      is their size.
+indicator.size                    integer             Some widgets, like scrollbar arrows,
+                                                      have indicators. This is their size.
 
 text.margin                       true/false          Put a margin around the text
                                                       for widgets that have text?
@@ -438,16 +436,13 @@ text.margin.left
 text.margin.right                 integer             The sizes of the text margins
                                                       if there is any.
 
-text.normal.color                 string (#RRGGBB)    The color of the normal text
-                                                      as #RRGGBB or with a valid name
-                                                      like white, black, red, etc.
-                                                      It may override the text colors
-                                                      defined under the GeneralColors
-                                                      section.
+text.normal.color                 string (#RRGGBB)    The color of the normal text as
+                                                      #RRGGBB or with a valid name like
+                                                      white, black, red, etc. It may
+                                                      override the text colors defined
+                                                      under the GeneralColors section.
 
-
-text.focus.color                  string (#RRGGBB)    The color of the focused/hover
-                                                      text.
+text.focus.color                  string (#RRGGBB)    The color of the focused/hover text.
 
 text.press.color                  string (#RRGGBB)    The color of the pressed text.
 
@@ -486,18 +481,14 @@ If you want to make your own theme (see the file "Theme-Making"), you'll also ne
 =====================================================
 Variable                Value                Meaning
 =====================================================
-interior.element       string                The SVG element to be used
-                                             for drawing the interior of
-                                             a widget.
+interior.element       string                The SVG element to be used for
+                                             drawing the interior of a widget.
 
-frame.element          string                The SVG element to be used
-                                             for drawing the frame of a
-                                             widget.
+frame.element          string                The SVG element to be used for
+                                             drawing the frame of a widget.
 
-
-indicator.element      string                The SVG element to be used
-                                             for drawing the indicator of
-                                             a widget.
+indicator.element      string                The SVG element to be used for
+                                             drawing the indicator of a widget.
 =====================================================
 
 

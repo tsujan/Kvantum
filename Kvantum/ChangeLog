@@ -11,6 +11,9 @@ V0.8.18
  * Get the theme specification only once because the XLib function XGetSelectionOwner() is used instead of QX11Info::isCompositingManagerRunning() for Qt5.
  * Added keys for icons sizes (KDE setting has priority).
  * A key for filling the rubber-band rectangle.
+ * Solved the problem of rounding drop-down tool-buttons.
+ * Better size calculation for menubar and better placement of its items.
+ * Clean-up.
 
 V0.8.17
 ---------

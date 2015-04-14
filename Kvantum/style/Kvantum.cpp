@@ -1116,8 +1116,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else if (element == PE_FrameStatusBar)
         group = "StatusBar";
 
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      fspec.expansion = 0;
 
       if (status.startsWith("disabled"))
       {
@@ -1158,9 +1159,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
+      const QString group = "PanelButtonTool";
+      frame_spec fspec = getFrameSpec(group);
+
       /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
       if (const QPushButton *pb = qobject_cast<const QPushButton *>(widget))
       {
+        fspec.expansion = 0;
         if (pb->text().isEmpty())
         {
           painter->fillRect(option->rect, option->palette.brush(QPalette::Button));
@@ -1170,16 +1175,20 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       bool hasPanel = false;
 
-      const QString group = "PanelButtonTool";
-      frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
       lspec.left = qMax(0,lspec.left-1);
       lspec.top = qMax(0,lspec.top-1);
       lspec.right = qMax(0,lspec.right-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
-      
+
+      /* this is just for tabbar scroll buttons */
+      if (qobject_cast<QTabBar*>(getParent(widget,1)))
+      {
+        painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+        fspec.expansion = 0;
+      }
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
@@ -1217,10 +1226,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       }
 
       QRect r = option->rect;
-
-      /* this is just for tabbar scroll buttons */
-      if (qobject_cast<QTabBar*>(getParent(widget,1)))
-        painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
 
       bool drawRaised = false;
       if (status.startsWith("disabled"))
@@ -1283,6 +1288,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
             drawRaised = true;
+            ispec.px = ispec.py = 0;
+            
 
             /* the disabled state is ugly
                for grouped tool buttons */
@@ -1318,37 +1325,41 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         bool rtl(option->direction == Qt::RightToLeft);
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
-          // merge with drop down button
-          if (!fspec.hasCapsule)
+          ispec.px = ispec.py = 0;
+          if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
           {
-            fspec.capsuleV = 2;
-            fspec.hasCapsule = true;
-            fspec.capsuleH = rtl ? 1 : -1;
+            // merge with drop down button
+            if (!fspec.hasCapsule)
+            {
+              fspec.capsuleV = 2;
+              fspec.hasCapsule = true;
+              fspec.capsuleH = rtl ? 1 : -1;
+            }
+            else if (fspec.capsuleH == 1)
+              fspec.capsuleH = 0;
+            else if (fspec.capsuleH == 2)
+              fspec.capsuleH = rtl ? 1 : -1;
+            // don't press the button if only its arrow is pressed
+            pbStatus = (option->state & State_Enabled) ?
+                         (option->state & State_Sunken) && tb->isDown() ? "pressed" :
+                           (option->state & State_Selected) && tb->isDown() ? "toggled" :
+                             (option->state & State_MouseOver) ? "focused" : "normal"
+                       : "disabled";
+            // don't focus the button if only its arrow is focused
+            if (pbStatus == "focused"
+                && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
+            {
+              pbStatus = "normal";
+            }
+            if (pbStatus == "disabled")
+            {
+              pbStatus = "normal";
+              if (option->state & State_On)
+                pbStatus = "toggled";
+            }
+            if (isInactive)
+              pbStatus.append(QString("-inactive"));
           }
-          else if (fspec.capsuleH == 1)
-            fspec.capsuleH = 0;
-          else if (fspec.capsuleH == 2)
-            fspec.capsuleH = rtl ? 1 : -1;
-          // don't press the button if only its arrow is pressed
-          pbStatus = (option->state & State_Enabled) ?
-                       (option->state & State_Sunken) && tb->isDown() ? "pressed" :
-                         (option->state & State_Selected) && tb->isDown() ? "toggled" :
-                           (option->state & State_MouseOver) ? "focused" : "normal"
-                     : "disabled";
-          // don't focus the button if only its arrow is focused
-          if (pbStatus == "focused"
-              && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
-          {
-            pbStatus = "normal";
-          }
-          if (pbStatus == "disabled")
-          {
-            pbStatus = "normal";
-            if (option->state & State_On)
-              pbStatus = "toggled";
-          }
-          if (isInactive)
-            pbStatus.append(QString("-inactive"));
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
                   || tb->popupMode() == QToolButton::DelayedPopup)
@@ -1363,7 +1374,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
         {
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
           hasPanel = true;
         }
 
@@ -1420,8 +1431,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       lspec.right = qMax(0,lspec.right-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
 
-      if (qobject_cast<const QPushButton *>(widget))
-        fspec.expansion = 0; // -> PE_PanelButtonTool
+      if (qobject_cast<const QPushButton *>(widget) // -> PE_PanelButtonTool
+          || qobject_cast<QTabBar*>(getParent(widget,1))) // tabbar scroll buttons
+        fspec.expansion = 0;
 
       // -> CE_ToolButtonLabel
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -1550,37 +1562,40 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         QString fbStatus = status;
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
-          // merge with drop down button
-          if (!fspec.hasCapsule)
+          if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
           {
-            fspec.capsuleV = 2;
-            fspec.hasCapsule = true;
-            fspec.capsuleH = rtl ? 1 : -1;
+            // merge with drop down button
+            if (!fspec.hasCapsule)
+            {
+              fspec.capsuleV = 2;
+              fspec.hasCapsule = true;
+              fspec.capsuleH = rtl ? 1 : -1;
+            }
+            else if (fspec.capsuleH == 1)
+              fspec.capsuleH = 0;
+            else if (fspec.capsuleH == 2)
+              fspec.capsuleH = rtl ? 1 : -1;
+            // don't press the button if only its arrow is pressed
+            fbStatus = (option->state & State_Enabled) ?
+                         (option->state & State_Sunken) && tb->isDown() ? "pressed" :
+                           (option->state & State_Selected) && tb->isDown() ? "toggled" :
+                             (option->state & State_MouseOver) ? "focused" : "normal"
+                       : "disabled";
+            // don't focus the button if only its arrow is focused
+            if (fbStatus == "focused"
+                && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
+            {
+              fbStatus = "normal";
+            }
+            if (fbStatus == "disabled")
+            {
+              fbStatus = "normal";
+              if (option->state & State_On)
+                fbStatus = "toggled";
+            }
+            if (isInactive)
+              fbStatus.append(QString("-inactive"));
           }
-          else if (fspec.capsuleH == 1)
-            fspec.capsuleH = 0;
-          else if (fspec.capsuleH == 2)
-            fspec.capsuleH = rtl ? 1 : -1;
-          // don't press the button if only its arrow is pressed
-          fbStatus = (option->state & State_Enabled) ?
-                       (option->state & State_Sunken) && tb->isDown() ? "pressed" :
-                         (option->state & State_Selected) && tb->isDown() ? "toggled" :
-                           (option->state & State_MouseOver) ? "focused" : "normal"
-                     : "disabled";
-          // don't focus the button if only its arrow is focused
-          if (fbStatus == "focused"
-              && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
-          {
-            fbStatus = "normal";
-          }
-          if (fbStatus == "disabled")
-          {
-            fbStatus = "normal";
-            if (option->state & State_On)
-              fbStatus = "toggled";
-          }
-          if (isInactive)
-            fbStatus.append(QString("-inactive"));
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
                   || tb->popupMode() == QToolButton::DelayedPopup)
@@ -1594,7 +1609,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
-          renderFrame(painter,r,fspec,fspec.element+"-"+fbStatus);
+          renderFrame(painter,r,fspec,fspec.element+"-"+fbStatus,0,0,0,0,0,drawRaised);
 
         if (!isHorizontal && !withArrow)
           painter->restore();
@@ -1974,8 +1989,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         const QString group = "GenericFrame";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
+        fspec.expansion = 0;
 
         if (status.startsWith("disabled"))
         {
@@ -2033,8 +2049,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameTabWidget : {
       const QString group = "TabFrame";
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      fspec.expansion = 0;
 
       frame_spec fspec1 = fspec;
       int d = 0;
@@ -2543,9 +2560,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        const interior_spec ispec = getInteriorSpec(group);
-        renderFrame(painter,r,fspec,fspec.element+"-"+bStatus);
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus);
+        interior_spec ispec = getInteriorSpec(group);
+        ispec.px = ispec.py = 0;
+        renderFrame(painter,r,fspec,fspec.element+"-"+bStatus,0,0,0,0,0,true);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus,true);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -2625,6 +2643,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const QString group = "DropDownButton";
 
       frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0; // depends on the containing widget
 
       bool rtl(option->direction == Qt::RightToLeft);
 
@@ -2696,8 +2715,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      const interior_spec ispec = getInteriorSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
+      ispec.px = ispec.py = 0;
 
       if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
       {
@@ -2734,12 +2754,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         else
           fspec.left = 0; // no left frame in this case
 
-        const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
-        if (fspec.capsuleH == 0)
-          fspec.expansion = fspec1.expansion;
-
         /* lack of space */
         const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+        const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
         if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull()
             && tb->popupMode() == QToolButton::MenuButtonPopup)
         {
@@ -2755,12 +2772,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             {
               fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
             }
-            fspec.expansion = 0;
             dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
           }
         }
 
-        if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
+        if (fspec1.expansion <= 0 // otherwise drawn at PE_PanelButtonTool and PE_FrameButtonTool
+            && (!tb->autoRaise()
+                || (!status.startsWith("normal") && !status.startsWith("disabled"))
+                || drawRaised))
         {
           if (status.startsWith("disabled"))
           {
@@ -3012,12 +3031,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           /* in this case, the item is colored intentionally
              (as in Konsole's color scheme editing dialog) */
           if (opt->state & State_HasFocus)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,true);
+            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.hasCapsule,true);
           else if (ivStatus != "normal" && ivStatus != "disabled")
           {
             if (isInactive)
               ivStatus.append(QString("-inactive"));
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,true);
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
           }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
@@ -3076,8 +3095,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         ivStatus.append(QString("-inactive"));
 
       /* since Dolphin's view-items have problem with QSvgRenderer, we set usePixmap to true */
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,true);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,Qt::Vertical,true);
+      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.hasCapsule,true);
 
       break;
     }
@@ -3434,9 +3453,16 @@ void Kvantum::drawControl(ControlElement element,
         }
 
         frame_spec fspec = getFrameSpec(group);
-        fspec.hasCapsule = true;
-        fspec.capsuleH = 0;
-        fspec.capsuleV = 2;
+        if (tspec.merge_menubar_with_toolbar && group != "Toolbar")
+        {
+          const frame_spec fspec1 = getFrameSpec("Toolbar");
+          fspec.left = fspec1.left;
+          fspec.top = fspec1.top;
+          fspec.right = fspec1.right;
+          fspec.bottom = fspec1.bottom;
+        }
+        int topFrame = fspec.top;
+        int bottomFrame = fspec.bottom;
         interior_spec ispec = getInteriorSpec(group);
 
         if (status.startsWith("disabled"))
@@ -3455,9 +3481,6 @@ void Kvantum::drawControl(ControlElement element,
         }
 
         fspec = getFrameSpec("MenuBarItem");
-        fspec.hasCapsule = true;
-        fspec.capsuleH = 0;
-        fspec.capsuleV = 2;
         ispec = getInteriorSpec("MenuBarItem");
 
         if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
@@ -3467,11 +3490,14 @@ void Kvantum::drawControl(ControlElement element,
           fspec.expansion = 0;
         }
 
+        /* topFrame and bottomFrame are added at CT_MenuBarItem */
+        r = option->rect.adjusted(0,topFrame,0,-bottomFrame);
+
         /* draw a panel for the menubar-item only if it's focused or pressed */
         if (!status.startsWith("normal") && !status.startsWith("disabled"))
         {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          renderFrame(painter,r,fspec,fspec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter |Qt::TextSingleLine;
@@ -3490,8 +3516,7 @@ void Kvantum::drawControl(ControlElement element,
                       && (status.startsWith("toggled") || status.startsWith("pressed"))))
 #endif
           state = 2;
-        renderLabel(painter,option->palette,
-                    option->rect,
+        renderLabel(painter,option->palette,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     state);
@@ -3527,8 +3552,16 @@ void Kvantum::drawControl(ControlElement element,
         }
       }
 
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      if (tspec.merge_menubar_with_toolbar && group != "Toolbar")
+      {
+        const frame_spec fspec1 = getFrameSpec("Toolbar");
+        fspec.left = fspec1.left;
+        fspec.top = fspec1.top;
+        fspec.right = fspec1.right;
+        fspec.bottom = fspec1.bottom;
+      }
 
       renderFrame(painter,r,fspec,fspec.element+"-normal");
       renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
@@ -3809,8 +3842,12 @@ void Kvantum::drawControl(ControlElement element,
           ispec.element="floating-"+ispec.element;
           fspec.element="floating-"+fspec.element;
         }
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        if (fspec.hasCapsule)
+        {
+          ispec.px = ispec.py = 0;
+        }
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,fspec.hasCapsule);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,fspec.hasCapsule);
         if (!(option->state & State_Enabled))
           painter->restore();
 
@@ -4230,7 +4267,7 @@ void Kvantum::drawControl(ControlElement element,
             }
 
             renderFrame(painter,R1,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R1,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
+            renderInterior(painter,R1,fspec,ispec,ispec.element+"-"+status);
             if (thin)
               painter->restore();
 
@@ -4259,7 +4296,7 @@ void Kvantum::drawControl(ControlElement element,
             }
 
             renderFrame(painter,R,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status, Qt::Horizontal);
+            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status);
             if (thin)
               painter->restore();
           }
@@ -5211,6 +5248,7 @@ void Kvantum::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        fspec.expansion = 0;
 
         QRect r = option->rect;
         QRect tRect =subElementRect(SE_DockWidgetTitleBarText, option, widget);
@@ -5378,40 +5416,46 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
       if (opt)
       {
+        const QString group = "PanelButtonTool";
+        frame_spec fspec = getFrameSpec(group);
+        const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
         QStyleOptionToolButton o(*opt);
 
-        o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
+        QRect r = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
+        o.rect = r;
 
         /* make an exception for (KDE) menu titles */
         const hacks_spec hspec = settings->getHacksSpec();
         if (hspec.transparent_menutitle && widget)
         {
-          if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
+          if (tb && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+              && qobject_cast<QMenu*>(getParent(widget,1)))
           {
-            if (tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
-                && qobject_cast<QMenu*>(getParent(widget,1)))
-            {
-              drawControl(CE_ToolButtonLabel,&o,painter,widget);
-              break;
-            }
+            drawControl(CE_ToolButtonLabel,&o,painter,widget);
+            break;
           }
         }
 
+        /* to have a consistent look, integrate the drop-down part
+           with the rest of the tool button if it's maximally rounded */
+        if (fspec.expansion > 0 && tb && tb->popupMode() == QToolButton::MenuButtonPopup)
+          o.rect = r.united(subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget));
         drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
         drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
+        o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
-        if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
+        if (tb)
         {
           o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
+          /* for a maximally rounded button, only the indicator
+             will be drawn at PE_IndicatorButtonDropDown */
           if (tb->popupMode() == QToolButton::MenuButtonPopup)
             drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
           else if ((tb->popupMode() == QToolButton::InstantPopup
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            const QString group = "PanelButtonTool";
-            frame_spec fspec = getFrameSpec(group);
             indicator_spec dspec = getIndicatorSpec(group);
             const label_spec lspec = getLabelSpec(group);
             /* use the "flat" indicator with flat buttons if it exists */
@@ -5556,7 +5600,8 @@ void Kvantum::drawComplexControl(ComplexControl control,
         fspec.hasCapsule = true;
         fspec.capsuleH = rtl ? 1 : -1;
         fspec.capsuleV = 2;
-        const interior_spec ispec = getInteriorSpec(group);
+        interior_spec ispec = getInteriorSpec(group);
+        ispec.px = ispec.py = 0;
 
         int margin = 0; // see CC_ComboBox at subControlRect
         if (opt->editable && !opt->currentIcon.isNull())
@@ -6033,7 +6078,8 @@ void Kvantum::drawComplexControl(ComplexControl control,
               (ts & Qt::WindowActive) ? "focused" : "normal";
 
         const QString group = "TitleBar";
-        const frame_spec fspec = getFrameSpec(group); // zero in ThemeConfig.cpp
+        frame_spec fspec;
+        default_frame_spec(fspec);
         const interior_spec ispec = getInteriorSpec(group);
 
         if (opt->subControls & SC_TitleBarLabel)
@@ -6176,7 +6222,13 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
     case PM_MenuBarVMargin :
     case PM_MenuBarHMargin :  return 0;
 
-    case PM_MenuBarItemSpacing : return 2;
+    case PM_MenuBarItemSpacing : {
+      /* needed for putting menubar-items inside menubar frame */
+      if (tspec.merge_menubar_with_toolbar)
+        return getFrameSpec("Toolbar").left;
+      else
+        return getFrameSpec("MenuBar").left;
+    }
 
     case PM_MenuPanelWidth : return 0;
 
@@ -6956,9 +7008,16 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
       if (opt) {
         QString group = "MenuBarItem";
-        const frame_spec fspec = getFrameSpec(group);
+        frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
+        frame_spec fspec1;
+        if (tspec.merge_menubar_with_toolbar)
+          fspec1 = getFrameSpec("Toolbar");
+        else
+          fspec1 = getFrameSpec("MenuBar");
+        /* needed for putting menubar-items inside menubar frame */
+        fspec.top += fspec1.top+fspec1.bottom;
 
         QFont f = QApplication::font();
         if (widget)
@@ -8519,11 +8578,9 @@ static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRe
 bool Kvantum::renderElement(QPainter *painter,
                             const QString &element,
                             const QRect &bounds, int hsize, int vsize,
-                            Qt::Orientation orientation,
-                            bool usePixmap) const
+                            bool usePixmap // first make a QPixmap for drawing
+                           ) const
 {
-  Q_UNUSED(orientation);
-
   if (element.isEmpty())
     return false;
 
@@ -8667,7 +8724,9 @@ void Kvantum::renderFrame(QPainter *painter,
                           int f1, // width of tab's left frame
                           int f2, // width of tab's right frame
                           int tp, // tab position
-                          bool usePixmap) const
+                          bool grouped, // is among grouped similar widgets?
+                          bool usePixmap // first make a QPixmap for drawing
+                         ) const
 {
   if (!bounds.isValid() || !fspec.hasFrame)
     return;
@@ -8682,7 +8741,7 @@ void Kvantum::renderFrame(QPainter *painter,
   int Left,Top,Right,Bottom;
   Left = Top = Right = Bottom = 0;
   QString element1(element);
-  int e = qMin(h,w);
+  int e = grouped ? h : qMin(h,w);
   if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
       && (!fspec.hasCapsule || fspec.capsuleV == 2))
   {
@@ -8698,7 +8757,7 @@ void Kvantum::renderFrame(QPainter *painter,
         m.rotate(90);
         painter->save();
         painter->setTransform(m, true);
-        renderFrame(painter,r,fspec,element,d,l,f1,f2,tp,usePixmap);
+        renderFrame(painter,r,fspec,element,d,l,f1,f2,tp,grouped,usePixmap);
         painter->restore();
         return;
       }
@@ -8769,13 +8828,13 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0,
                           d-x0-Left,
                           Top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       renderElement(painter,element1+"-top",
                     QRect(d+l,
                           y0,
                           x0+w-Left-d-l,
                           Top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
      /* left and right junctions */
      if (d-x0-Left >= 0)
        renderElement(painter,element1+"-top-leftjunct",
@@ -8783,19 +8842,19 @@ void Kvantum::renderFrame(QPainter *painter,
                             y0,
                             f1,
                             Top),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
      if (x0+w-Left-d-l >= 0)
        renderElement(painter,element1+"-top-rightjunct",
                       QRect(d+l-f2,
                             y0,
                             f2,
                             Top),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
     else
       renderElement(painter,element1+"-top",
                     QRect(x0+Left,y0,w-Left-Right,Top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
     /************
      ** Bottom **
@@ -8807,32 +8866,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y1-Bottom,
                           d-x0-Left,
                           Bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       renderElement(painter,element1+"-bottom",
                     QRect(d+l,
                           y1-Bottom,
                           x0+w-Left-d-l,
                           Bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       if (d-x0-Left >= 0)
         renderElement(painter,element1+"-bottom-leftjunct",
                       QRect(d,
                             y1-Bottom,
                             f2,
                             Bottom),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
       if (x0+w-Left-d-l >= 0)
         renderElement(painter,element1+"-bottom-rightjunct",
                       QRect(d+l-f1,
                             y1-Bottom,
                             f1,
                             Bottom),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
     else
       renderElement(painter,element1+"-bottom",
                     QRect(x0+Left,y1-Bottom,w-Left-Right,Bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
     /**********
      ** Left **
@@ -8844,32 +8903,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0+Top,
                           Left,
                           d-y0-Top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       renderElement(painter,element1+"-left",
                     QRect(x0,
                           d+l,
                           Left,
                           y0+h-Bottom-d-l),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       if (y0+h-Bottom-d-l >= 0)
         renderElement(painter,element1+"-left-leftjunct",
                       QRect(x0,
                             d+l-f2,
                             Left,
                             f2),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
       if (d-y0-Top >= 0)
         renderElement(painter,element1+"-left-rightjunct",
                       QRect(x0,
                             d,
                             Left,
                             f1),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
     else
       renderElement(painter,element1+"-left",
                     QRect(x0,y0+Top,Left,h-Top-Bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
     /***********
      ** Right **
@@ -8881,32 +8940,32 @@ void Kvantum::renderFrame(QPainter *painter,
                           y0+Top,
                           Right,
                           d-y0-Top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       renderElement(painter,element1+"-right",
                     QRect(x1-Right,
                           d+l,
                           Right,
                           y0+h-Bottom-d-l),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
       if (d-y0-Top >= 0)
         renderElement(painter,element1+"-right-leftjunct",
                       QRect(x1-Right,
                             d,
                             Right,
                             f1),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
       if (y0+h-Bottom-d-l >= 0)
         renderElement(painter,element1+"-right-rightjunct",
                       QRect(x1-Right,
                             d+l-f2,
                             Right,
                             f2),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
     else
       renderElement(painter,element1+"-right",
                     QRect(x1-Right,y0+Top,Right,h-Top-Bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
     /*************
      ** Topleft **
@@ -8921,7 +8980,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x0,y0,Left,Top),
-                  0,0,Qt::Horizontal,usePixmap);
+                  0,0,usePixmap);
 
     /**************
      ** Topright **
@@ -8936,7 +8995,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x1-Right,y0,Right,Top),
-                  0,0,Qt::Horizontal,usePixmap);
+                  0,0,usePixmap);
 
     /****************
      ** Bottomleft **
@@ -8951,7 +9010,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x0,y1-Bottom,Left,Bottom),
-                  0,0,Qt::Horizontal,usePixmap);
+                  0,0,usePixmap);
 
     /*****************
      ** Bottomright **
@@ -8966,7 +9025,7 @@ void Kvantum::renderFrame(QPainter *painter,
     }
     renderElement(painter,element_,
                   QRect(x1-Right,y1-Bottom,Right,Bottom),
-                  0,0,Qt::Horizontal,usePixmap);
+                  0,0,usePixmap);
   }
   else // with capsule
   {
@@ -8991,18 +9050,18 @@ void Kvantum::renderFrame(QPainter *painter,
     {
       renderElement(painter,element1+"-top",
                     QRect(x0+left,y0,w-left-right,top),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
       // topleft corner
       if (left > 0)
         renderElement(painter,element1+"-topleft",
                       QRect(x0,y0,left,top),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
       // topright corner
       if (right > 0)
         renderElement(painter,element1+"-topright",
                       QRect(x1-right,y0,right,top),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
 
     /************
@@ -9012,18 +9071,18 @@ void Kvantum::renderFrame(QPainter *painter,
     {
       renderElement(painter,element1+"-bottom",
                     QRect(x0+left,y1-bottom,w-left-right,bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
       // bottomleft corner
       if (left > 0)
         renderElement(painter,element1+"-bottomleft",
                       QRect(x0,y1-bottom,left,bottom),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
       // bottomright corner
       if (right > 0)
         renderElement(painter,element1+"-bottomright",
                       QRect(x1-right,y1-bottom,right,bottom),
-                      0,0,Qt::Horizontal,usePixmap);
+                      0,0,usePixmap);
     }
 
     /**********
@@ -9032,7 +9091,7 @@ void Kvantum::renderFrame(QPainter *painter,
     if (left > 0)
       renderElement(painter,element1+"-left",
                     QRect(x0,y0+top,left,h-top-bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
 
     /***********
      ** Right **
@@ -9040,7 +9099,7 @@ void Kvantum::renderFrame(QPainter *painter,
     if (right > 0)
       renderElement(painter,element1+"-right",
                     QRect(x1-right,y0+top,right,h-top-bottom),
-                    0,0,Qt::Horizontal,usePixmap);
+                    0,0,usePixmap);
   }
 }
 
@@ -9049,19 +9108,21 @@ void Kvantum::renderInterior(QPainter *painter,
                              const frame_spec &fspec, // frame spec
                              const interior_spec &ispec, // interior spec
                              const QString &element, // interior SVG element
-                             Qt::Orientation orientation,
-                             bool usePixmap) const
+                             bool grouped, // is among grouped similar widgets?
+                             bool usePixmap // first make a QPixmap for drawing
+                            ) const
 {
   if (!bounds.isValid() || !ispec.hasInterior)
     return;
 
-  if (!isLibreoffice && fspec.expansion > 0 && qMin(bounds.height(),bounds.width()) <= fspec.expansion
+  int e = grouped ? bounds.height() : qMin(bounds.height(),bounds.width());
+  if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
       && (!fspec.hasCapsule || fspec.capsuleV == 2))
     return;
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     renderElement(painter,element,interiorRect(bounds,fspec),
-                  ispec.px,ispec.py,orientation,usePixmap);
+                  ispec.px,ispec.py,usePixmap);
   else
   {
     // add these to compensate the absence of the frame
@@ -9086,14 +9147,9 @@ void Kvantum::renderInterior(QPainter *painter,
     else if (fspec.capsuleV == 1)
       top = fspec.top;
 
-    if (orientation == Qt::Vertical)
-      renderElement(painter,element,
-                    interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
-                    ispec.py,ispec.px,orientation,usePixmap);
-    else
-      renderElement(painter,element,
-                    interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
-                    ispec.px,ispec.py,orientation,usePixmap);
+    renderElement(painter,element,
+                  interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
+                  ispec.px,ispec.py,usePixmap);
   }
 }
 
@@ -9101,7 +9157,7 @@ void Kvantum::renderIndicator(QPainter *painter,
                               const QRect &bounds, // frame bounds
                               const frame_spec &fspec, // frame spec
                               const indicator_spec &dspec, // indicator spec
-                              const QString &element, // indocator SVG element
+                              const QString &element, // indicator SVG element
                               Qt::Alignment alignment) const
 {
   if (!bounds.isValid()) return;
@@ -9114,7 +9170,7 @@ void Kvantum::renderIndicator(QPainter *painter,
 
   renderElement(painter,element,
                 alignedRect(QApplication::layoutDirection(),alignment,QSize(s,s),interior),
-                0,0,Qt::Horizontal);
+                0,0);
 }
 
 void Kvantum::renderLabel(

@@ -125,8 +125,8 @@ class Kvantum : public QCommonStyle {
                        const QString &element,
                        const QRect &bounds,
                        int hsize = 0, int vsize = 0,
-                       Qt::Orientation orientation = Qt::Horizontal,
-                       bool usePixmap = false) const;
+                       bool usePixmap = false // first make a QPixmap for drawing
+                      ) const;
     /* Render the (vertical) slider ticks. */
     void renderSliderTick(QPainter *painter,
                           const QString &element,
@@ -159,7 +159,9 @@ class Kvantum : public QCommonStyle {
                      int f1 = 0, // width of tab's left frame
                      int f2 = 0, // width of tab's right frame
                      int tp = 0, // tab position
-                     bool usePixmap = false) const;
+                     bool grouped = false, // is among grouped similar widgets?
+                     bool usePixmap = false // first make a QPixmap for drawing
+                    ) const;
 
     /* Generic method that draws an interior. */
     void renderInterior(QPainter *painter,
@@ -167,8 +169,9 @@ class Kvantum : public QCommonStyle {
                         const frame_spec &fspec, // frame spec
                         const interior_spec &ispec, // interior spec
                         const QString &element, // interior SVG element
-                        Qt::Orientation orientation = Qt::Vertical,
-                        bool usePixmap = false) const;
+                        bool grouped = false, // is among grouped similar widgets?
+                        bool usePixmap = false // first make a QPixmap for drawing
+                       ) const;
 
     /* Generic method that draws an indicator. */
     void renderIndicator(QPainter *painter,
