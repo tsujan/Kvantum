@@ -984,7 +984,7 @@ check box</string>
        <item row="6" column="0">
         <widget class="QLineEdit" name="lineEdit_2">
          <property name="text">
-          <string>Line edit without frame</string>
+          <string>Frameless (no difference)</string>
          </property>
          <property name="frame">
           <bool>false</bool>
@@ -1004,22 +1004,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 4</string>
           </property>
          </item>
         </widget>
@@ -1040,22 +1040,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Standard combo box 4</string>
           </property>
          </item>
         </widget>
@@ -1067,7 +1067,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> Without frame</string>
+           <string>Frameless (no difference)</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1076,22 +1076,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 4</string>
           </property>
          </item>
         </widget>
@@ -1106,7 +1106,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> Without frame</string>
+           <string>Frameless (no difference)</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1115,22 +1115,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 4</string>
           </property>
          </item>
         </widget>
@@ -1151,22 +1151,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 4</string>
           </property>
          </item>
         </widget>
@@ -1190,22 +1190,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Editable combo box 4</string>
           </property>
          </item>
         </widget>
@@ -1220,7 +1220,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> Without frame</string>
+           <string>Frameless (no difference)</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1229,22 +1229,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 4</string>
           </property>
          </item>
         </widget>
@@ -1262,7 +1262,7 @@ check box</string>
          </property>
          <item>
           <property name="text">
-           <string> Without frame</string>
+           <string>Frameless (no difference)</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
@@ -1271,22 +1271,22 @@ check box</string>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>New Item</string>
+           <string>Frameless 4</string>
           </property>
          </item>
         </widget>
@@ -1294,7 +1294,7 @@ check box</string>
        <item row="5" column="0">
         <widget class="QLineEdit" name="lineEdit">
          <property name="text">
-          <string>Line edit</string>
+          <string>Line-edit</string>
          </property>
          <property name="frame">
           <bool>true</bool>
@@ -1307,7 +1307,7 @@ check box</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Line edit</string>
+          <string>Line-edit</string>
          </property>
          <property name="frame">
           <bool>true</bool>
@@ -1320,7 +1320,7 @@ check box</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Line edit without frame</string>
+          <string>Frameless (no difference)</string>
          </property>
          <property name="frame">
           <bool>false</bool>
