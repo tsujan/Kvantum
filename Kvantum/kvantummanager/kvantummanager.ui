@@ -389,6 +389,39 @@ Automatically checked if window blurring is enabled.</string>
            <property name="topMargin">
             <number>10</number>
            </property>
+           <item row="8" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxRubber">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow. This
+option fills them with the highlight color.</string>
+             </property>
+             <property name="text">
+              <string>Fill rubber-band rectangles</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="checkBoxProgress">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Progreesbars show percentage
+labels by default.</string>
+             </property>
+             <property name="text">
+              <string>Textless Progressbars</string>
+             </property>
+            </widget>
+           </item>
            <item row="6" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxAttachTab">
              <property name="font">
@@ -483,7 +516,7 @@ with the toolbar SVG element when they are adjacent to one another.</string>
              </property>
             </widget>
            </item>
-           <item row="12" column="1">
+           <item row="11" column="1">
             <widget class="QComboBox" name="comboToolButton">
              <property name="font">
               <font>
@@ -494,22 +527,6 @@ with the toolbar SVG element when they are adjacent to one another.</string>
               <string>Will have effect only if style
 is not set by the app itself.
 Default is Follow Style.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxToolbar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will force a size of 16px on toolbar icons
-if their size is not set in the app.</string>
-             </property>
-             <property name="text">
-              <string>Slim toolbars</string>
              </property>
             </widget>
            </item>
@@ -530,23 +547,6 @@ but KDE setting always has priority over this.</string>
              </property>
             </widget>
            </item>
-           <item row="12" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-             <property name="text">
-              <string>Toolbutton style:</string>
-             </property>
-            </widget>
-           </item>
            <item row="9" column="0" colspan="2">
             <widget class="QCheckBox" name="checkBoxMenubar">
              <property name="font">
@@ -563,36 +563,20 @@ for menubars by default.</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxProgress">
+           <item row="11" column="0">
+            <widget class="QLabel" name="label_2">
              <property name="font">
               <font>
                <bold>false</bold>
               </font>
              </property>
              <property name="toolTip">
-              <string>Progreesbars show percentage
-labels by default.</string>
+              <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
              </property>
              <property name="text">
-              <string>Textless Progressbars</string>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxRubber">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow. This
-option fills them with the highlight color.</string>
-             </property>
-             <property name="text">
-              <string>Fill rubber-band rectangles</string>
+              <string>Toolbutton style:</string>
              </property>
             </widget>
            </item>
@@ -831,7 +815,7 @@ The default value is 16 px but
 KDE setting has priority over this.</string>
              </property>
              <property name="text">
-              <string>Small icon size:</string>
+              <string>Small icon:</string>
              </property>
             </widget>
            </item>
@@ -848,7 +832,7 @@ The default value is 32 px but
 KDE setting has priority over this.</string>
              </property>
              <property name="text">
-              <string>Large icon size:</string>
+              <string>Large icon:</string>
              </property>
             </widget>
            </item>
@@ -864,7 +848,7 @@ KDE setting has priority over this.</string>
 The default value is 16 px.</string>
              </property>
              <property name="text">
-              <string>Button icon size:</string>
+              <string>Button icon:</string>
              </property>
             </widget>
            </item>
@@ -924,6 +908,48 @@ KDE setting has priority over this.</string>
              <property name="toolTip">
               <string>Affects buttons, tab-bars and list-views.
 The default value is 16 px.</string>
+             </property>
+             <property name="suffix">
+              <string> px</string>
+             </property>
+             <property name="minimum">
+              <number>16</number>
+             </property>
+             <property name="maximum">
+              <number>64</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelToolbar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Affects toolbars.
+The default value is 24 px but
+some apps set it themselves.
+KDE apps get it from KDE setting.</string>
+             </property>
+             <property name="text">
+              <string>Toolbar icon:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QSpinBox" name="spinToolbar">
+             <property name="font">
+              <font>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>Affects toolbars.
+The default value is 24 px but
+some apps set it themselves.
+KDE apps get it from KDE setting.</string>
              </property>
              <property name="suffix">
               <string> px</string>

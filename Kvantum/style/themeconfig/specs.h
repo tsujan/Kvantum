@@ -102,6 +102,7 @@ typedef struct {
   int small_icon_size;
   int large_icon_size;
   int button_icon_size;
+  int toolbar_icon_size;
 } theme_spec;
 
 /* General colors */
@@ -304,6 +305,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;
+  tspec.toolbar_icon_size = 24;
 }
 
 static inline void default_color_spec(color_spec &cspec) {

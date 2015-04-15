@@ -424,7 +424,6 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
-    ui->checkBoxToolbar->setChecked (defaultSettings.value ("slim_toolbars").toBool());
     int index = 0;
     if (defaultSettings.contains ("toolbutton_style"))
     {
@@ -464,6 +463,13 @@ void KvantumManager::defaultThemeButtons()
         icnSize = defaultSettings.value ("button_icon_size").toInt();
     icnSize = qMin(qMax(icnSize,16), 64);
     ui->spinButton->setValue (icnSize);
+    icnSize = 24;
+    if (defaultSettings.contains ("toolbar_icon_size"))
+        icnSize = defaultSettings.value ("toolbar_icon_size").toInt();
+    else if (defaultSettings.value ("slim_toolbars").toBool())
+        icnSize = 16;
+    icnSize = qMin(qMax(icnSize,16), 64);
+    ui->spinToolbar->setValue (icnSize);
     defaultSettings.endGroup();
 }
 /*************************/
@@ -602,8 +608,6 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 if (themeSettings.contains ("merge_menubar_with_toolbar"))
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
-                if (themeSettings.contains ("slim_toolbars"))
-                    ui->checkBoxToolbar->setChecked (themeSettings.value ("slim_toolbars").toBool());
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -651,6 +655,14 @@ void KvantumManager::tabChanged (int index)
                     icnSize = qMin(qMax(icnSize,16), 64);
                     ui->spinButton->setValue (icnSize);
                 }
+                if (themeSettings.contains ("toolbar_icon_size"))
+                {
+                    int icnSize = themeSettings.value ("toolbar_icon_size").toInt();
+                    icnSize = qMin(qMax(icnSize,16), 64);
+                    ui->spinToolbar->setValue (icnSize);
+                }
+                else if (themeSettings.contains ("slim_toolbars"))
+                    ui->spinToolbar->setValue (16);
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
@@ -950,7 +962,6 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
-        themeSettings.setValue ("slim_toolbars", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
@@ -961,6 +972,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("small_icon_size", ui->spinSmall->value());
         themeSettings.setValue ("large_icon_size", ui->spinLarge->value());
         themeSettings.setValue ("button_icon_size", ui->spinButton->value());
+        themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");

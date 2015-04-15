@@ -439,6 +439,12 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.button_icon_size = qMin(qMax(v.toInt(),16), 64);
 
+  v = getValue("General","toolbar_icon_size", empty);
+  if (v.isValid())
+    r.toolbar_icon_size = qMin(qMax(v.toInt(),16), 64);
+  else if (r.slim_toolbars)
+    r.toolbar_icon_size = 16;
+
   return r;
 }
 

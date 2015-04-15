@@ -6315,12 +6315,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       const indicator_spec dspec = getIndicatorSpec("Toolbar");
       return dspec.size ? dspec.size : 8;
     }
-    case PM_ToolBarIconSize : {
-      if (tspec.slim_toolbars)
-        return 16;
-      else
-        return QCommonStyle::pixelMetric(metric,option,widget);
-    }
+    case PM_ToolBarIconSize : return tspec.toolbar_icon_size;
     case PM_ToolBarExtensionExtent : return 16;
     case PM_ToolBarItemMargin : {
       const frame_spec fspec = getFrameSpec("Toolbar");
