@@ -127,8 +127,6 @@ Section                                      Meaning
 
 [ToolTip]                                    The panel for a tooltip label.
 
-[StatusBar]                                  The frame of a status bar.
-
 [Window]                                     A window or dialog.
 =====================================================
 
@@ -291,10 +289,12 @@ check_size                        integer             The width and height of ch
 
 small_icon_size
 large_icon_size
-button_icon_size                  integer             These affect menu-items/headers,
-                                                      icon views and buttons respectively.
-                                                      KDE setting will have priority over
-                                                      these values if it exists.
+button_icon_size
+toolbar_icon_size                 integer             These affect menu-items/headers,
+                                                      icon-views, buttons/tabbars/listviews
+                                                      and toolbars respectively. KDE setting
+                                                      will have priority over these values
+                                                      if it exists.
 
 fill_rubberband                   true/false          Always fill the rubber-band rectangle
                                                       with the highlight color? By default,

@@ -336,10 +336,5 @@ text.margin=0
 interior.element=tooltip
 frame.element=tooltip
 
-[StatusBar]
-inherits=GenericFrame
-frame=false
-interior=false
-
 [Window]
 interior=false
