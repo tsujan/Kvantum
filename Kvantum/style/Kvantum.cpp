@@ -1222,7 +1222,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
 
       // color button
-      if (opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
+      if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
 
       // -> CE_ToolButtonLabel
       if (opt && opt->toolButtonStyle == Qt::ToolButtonTextOnly)
@@ -1462,7 +1462,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
 
       // color button
-      if (opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
+      if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
 
       // -> CE_ToolButtonLabel
       if (opt && opt->toolButtonStyle == Qt::ToolButtonTextOnly)
