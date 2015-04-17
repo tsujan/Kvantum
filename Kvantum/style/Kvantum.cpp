@@ -1215,7 +1215,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         lspec.right = qMin(lspec.right,2);
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
-        lspec.tispace = qMin(lspec.tispace,3);
+        lspec.tispace = qMin(lspec.tispace,2);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -1455,7 +1455,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         lspec.right = qMin(lspec.right,2);
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
-        lspec.tispace = qMin(lspec.tispace,3);
+        lspec.tispace = qMin(lspec.tispace,2);
       }
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
@@ -3695,6 +3695,7 @@ void Kvantum::drawControl(ControlElement element,
               lspec.right = qMin(lspec.right,2);
               lspec.top = qMin(lspec.top,2);
               lspec.bottom = qMin(lspec.bottom,2);
+              lspec.tispace = qMin(lspec.tispace,2);
 
               /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
               const indicator_spec dspec = getIndicatorSpec("DropDownButton");
@@ -5000,7 +5001,7 @@ void Kvantum::drawControl(ControlElement element,
           lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
-          lspec.tispace = qMin(lspec.tispace,3);
+          lspec.tispace = qMin(lspec.tispace,2);
         }
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
@@ -6785,6 +6786,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         lspec.top = qMax(0,lspec.top-1);
         lspec.right = qMax(0,lspec.right-1);
         lspec.bottom = qMax(0,lspec.bottom-1);
+        const frame_spec fspec1 = getFrameSpec("LineEdit");
 
         QFont f = QApplication::font();
         if (widget)
@@ -6804,9 +6806,11 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         }
         else hasIcon = true;
 
-        /* we don't add COMBO_ARROW_LENGTH (=20) to the width because qMax(23,X) is
-           already added to it in qcommonstyle.cpp, but we add 4px for text margin */
-        s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right + 4,
+        /* we don't add COMBO_ARROW_LENGTH (=20) to the width because
+           qMax(23,X) is already added to it in qcommonstyle.cpp */
+        s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right
+                                      + (opt->editable ? fspec1.left+fspec1.right
+                                        : hasIcon ? lspec.tispace : 0),
                   sizeCalculated(f,fspec,lspec,sspec,"W",
                                  hasIcon ? opt->iconSize : QSize()).height());
 
@@ -6820,11 +6824,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         /* consider the top and bottom frames
            of lineedits inside editable combos */
         if (opt->editable)
-        {
-          const frame_spec fspec1 = getFrameSpec("LineEdit");
           s.rheight() += (fspec1.top > fspec.top ? fspec1.top-fspec.top : 0)
                          + (fspec1.bottom > fspec.bottom ? fspec1.bottom-fspec.bottom : 0);
-        }
 
         if (s.width() < sspec.minW)
           s.setWidth(sspec.minW);
@@ -7068,7 +7069,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
-          lspec.tispace = qMin(lspec.tispace,3);
+          lspec.tispace = qMin(lspec.tispace,2);
         }
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
