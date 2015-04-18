@@ -579,6 +579,22 @@ void Kvantum::polish(QWidget *widget)
       palette.setColor(QPalette::Shadow, shadow);
       widget->setPalette(palette);
     }
+
+    /* in rare cases like KNotes' font combos */
+    if (qobject_cast<QLineEdit*>(widget))
+    {
+      QColor col = settings->getColorSpec().textColor;
+      if (col.isValid())
+      {
+        QPalette palette = widget->palette();
+        if (col != palette.color(QPalette::Active,QPalette::Text))
+        {
+          palette.setColor(QPalette::Active,QPalette::Text,col);
+          palette.setColor(QPalette::Inactive,QPalette::Text,col);
+          widget->setPalette(palette);
+        }
+      }
+    }
 #if QT_VERSION >= 0x050000
     else if (qobject_cast<QAbstractSpinBox*>(widget))
     {// see eventFilter() for the reason

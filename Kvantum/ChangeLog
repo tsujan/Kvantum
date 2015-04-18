@@ -16,6 +16,7 @@ V0.8.18
  * Integrate the arrow part of a non-editable combobox with it.
  * Better size calculation for comboboxes.
  * Removed the useless StatusBar section. Also removed the focus state of TabBarFrame.
+ * Force text color in line-edits when needed (as in KNotes' font comboboxes).
  * Clean-up.
 
 V0.8.17
