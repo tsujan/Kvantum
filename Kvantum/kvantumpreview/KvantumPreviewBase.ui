@@ -1645,6 +1645,9 @@ check box</string>
            <height>100</height>
           </size>
          </property>
+         <property name="maximum">
+          <number>0</number>
+         </property>
          <property name="value">
           <number>-1</number>
          </property>
@@ -1698,6 +1701,9 @@ check box</string>
            <width>16777215</width>
            <height>100</height>
           </size>
+         </property>
+         <property name="maximum">
+          <number>0</number>
          </property>
          <property name="value">
           <number>-1</number>

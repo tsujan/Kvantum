@@ -138,6 +138,7 @@ Kvantum::Kvantum() : QCommonStyle()
   subApp = false;
   isOpaque = false;
   hasFlatIndicator = false;
+  isKisSlider = false;
 
   connect(progresstimer, SIGNAL(timeout()),
           this, SLOT(advanceProgresses()));
@@ -531,8 +532,35 @@ void Kvantum::polish(QWidget *widget)
 
     if (qobject_cast<QMdiArea*>(widget))
       widget->setAutoFillBackground(true);
-    else if (qobject_cast<QProgressBar*>(widget))
+    else if (qobject_cast<QProgressBar*>(widget)
+              /* unfortunately, KisSliderSpinBox uses a null widget in drawing
+                 its progressbar, so we can identify it only through eventFilter() */
+             || widget->inherits("KisAbstractSliderSpinBox"))
+    {
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
+    }
+    else if (qobject_cast<QLineEdit*>(widget))
+    { // in rare cases like KNotes' font combos
+      QColor col = settings->getColorSpec().textColor;
+      if (col.isValid())
+      {
+        QPalette palette = widget->palette();
+        if (col != palette.color(QPalette::Active,QPalette::Text))
+        {
+          palette.setColor(QPalette::Active,QPalette::Text,col);
+          palette.setColor(QPalette::Inactive,QPalette::Text,col);
+          widget->setPalette(palette);
+        }
+      }
+    }
+#if QT_VERSION >= 0x050000
+    else if (qobject_cast<QAbstractSpinBox*>(widget))
+    {// see eventFilter() for the reason
+      widget->removeEventFilter(this);
       widget->installEventFilter(this);
+    }
+#endif
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
     else if (qobject_cast<QScrollBar*>(widget))
@@ -579,29 +607,6 @@ void Kvantum::polish(QWidget *widget)
       palette.setColor(QPalette::Shadow, shadow);
       widget->setPalette(palette);
     }
-
-    /* in rare cases like KNotes' font combos */
-    if (qobject_cast<QLineEdit*>(widget))
-    {
-      QColor col = settings->getColorSpec().textColor;
-      if (col.isValid())
-      {
-        QPalette palette = widget->palette();
-        if (col != palette.color(QPalette::Active,QPalette::Text))
-        {
-          palette.setColor(QPalette::Active,QPalette::Text,col);
-          palette.setColor(QPalette::Inactive,QPalette::Text,col);
-          widget->setPalette(palette);
-        }
-      }
-    }
-#if QT_VERSION >= 0x050000
-    else if (qobject_cast<QAbstractSpinBox*>(widget))
-    {// see eventFilter() for the reason
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-    }
-#endif
 
     if (!isLibreoffice // not required
         && !subApp
@@ -826,8 +831,8 @@ void Kvantum::unpolish(QWidget *widget)
       default: break;
     }
 
-    if (qobject_cast<QProgressBar*>(widget))
-      progressbars.remove(widget);
+    if (widget->inherits("KisAbstractSliderSpinBox"))
+      widget->removeEventFilter(this);
 #if QT_VERSION >= 0x050000
     else if (qobject_cast<QAbstractSpinBox*>(widget))
       widget->removeEventFilter(this);
@@ -880,22 +885,46 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
 
   switch (e->type()) {
   case QEvent::Paint:
-    if (w && w->isWindow()
-        && w->testAttribute(Qt::WA_StyledBackground)
-        && w->testAttribute(Qt::WA_TranslucentBackground)
-        && !isPlasma && !isOpaque && !subApp && !isLibreoffice
-        /*&& tspec.translucent_windows*/ // this could have weird effects with style or settings change
-       )
+    if (w)
     {
-      switch (w->windowFlags() & Qt::WindowType_Mask) {
-        case Qt::Window:
-        case Qt::Dialog: {
-          QPainter p(w);
-          p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
-          drawBg(&p,w);
-          break;
+      if (w->inherits("KisAbstractSliderSpinBox"))
+        isKisSlider = true;
+      else if (QProgressBar *pb = qobject_cast<QProgressBar *>(o))
+      {
+        if (pb->maximum() == 0 && pb->minimum() == 0)
+        { // add the busy progress bar to the list
+          if (!progressbars.contains(w))
+          {
+            progressbars.insert(w, 0);
+            if (!progresstimer->isActive())
+              progresstimer->start(50);
+          }
         }
-        default: break;
+        else
+        {
+          progressbars.remove(w);
+          if (progressbars.size() == 0)
+            progresstimer->stop();
+        }
+        isKisSlider = false;
+      }
+      else if (w->isWindow()
+               && w->testAttribute(Qt::WA_StyledBackground)
+               && w->testAttribute(Qt::WA_TranslucentBackground)
+               && !isPlasma && !isOpaque && !subApp && !isLibreoffice
+               /*&& tspec.translucent_windows*/ // this could have weird effects with style or settings change
+              )
+      {
+        switch (w->windowFlags() & Qt::WindowType_Mask) {
+          case Qt::Window:
+          case Qt::Dialog: {
+            QPainter p(w);
+            p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
+            drawBg(&p,w);
+            break;
+          }
+          default: break;
+        }
       }
     }
     break;
@@ -903,11 +932,15 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
   case QEvent::Show:
     if (w)
     {
-      if (qobject_cast<QProgressBar *>(o))
+      if (QProgressBar *pb = qobject_cast<QProgressBar *>(o))
       {
-        progressbars.insert(w, 0);
-        if (!progresstimer->isActive())
-          progresstimer->start(50);
+        if (pb->maximum() == 0 && pb->minimum() == 0)
+        {
+          if (!progressbars.contains(w))
+            progressbars.insert(w, 0);
+          if (!progresstimer->isActive())
+            progresstimer->start(50);
+        }
       }
     }
     break;
@@ -934,9 +967,12 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
   case QEvent::Destroy:
     if (w)
     {
-      progressbars.remove(w);
-      if (progressbars.size() == 0)
-        progresstimer->stop();
+      if (qobject_cast<QProgressBar *>(o))
+      {
+        progressbars.remove(w);
+        if (progressbars.size() == 0)
+          progresstimer->stop();
+      }
     }
     break;
 
@@ -1048,6 +1084,16 @@ void Kvantum::notPaneled(QObject *o)
   paneledButtons.remove(widget);
 }
 
+/* Although unusual, it is possible that a subclassed toolbutton sets its palette
+   in its paintEvent(), in which case, using of forceButtonTextColor() below would
+   result in an infinite loop. We use the following QHash to prevent such loops. */
+static QHash<QWidget *,QColor> txtColForced;
+void Kvantum::removeTxtColForced(QObject *o)
+{
+  QWidget *widget = static_cast<QWidget*>(o);
+  txtColForced.remove(widget);
+}
+
 /* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text color
    of their pushbuttons, although those buttons have bevel like ordinary pushbuttons,
    and digiKam sets the text color of its vertical toolbuttons. This is a method to force
@@ -1056,6 +1102,10 @@ void Kvantum::notPaneled(QObject *o)
    in Amarok's BreadcrumbItemButton (ElidingButton). */
 void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
 {
+  /* eliminate any possibility of getting caught in infinite loops */
+  if (widget && txtColForced.contains(widget) && txtColForced.value(widget) == col)
+    return;
+
   QAbstractButton *b = qobject_cast<QAbstractButton *>(widget);
   if (!b) return;
   if (!col.isValid())
@@ -1074,6 +1124,8 @@ void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
       b->setPalette(palette);
+      txtColForced.insert(widget,col);
+      connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeTxtColForced(QObject*)), Qt::UniqueConnection);
     }
   }
 }
@@ -1264,6 +1316,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       }
       if (tb)
       {
+        bool rtl(option->direction == Qt::RightToLeft);
+
         // lack of space  (-> CE_ToolButtonLabel)
         if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
         {
@@ -1276,7 +1330,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
                                 +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
               {
-                if (opt->direction == Qt::RightToLeft)
+                if (rtl)
                   fspec.right = qMin(fspec.right,3);
                 else
                   fspec.left = qMin(fspec.left,3);
@@ -1296,7 +1350,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           {
             const frame_spec fspec1 = getFrameSpec("DropDownButton");
             if (tb->width() < opt->iconSize.width()+fspec.left
-                              +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
+                              +(rtl ? fspec1.left : fspec1.right)
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
@@ -1311,9 +1365,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
-            drawRaised = true;
-            ispec.px = ispec.py = 0;
-            
+            drawRaised = true; ispec.px = ispec.py = 0;
 
             /* the disabled state is ugly
                for grouped tool buttons */
@@ -1346,7 +1398,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
 
         QString pbStatus = status;
-        bool rtl(option->direction == Qt::RightToLeft);
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
           if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
@@ -1397,6 +1448,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
         if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
         {
+          renderFrame(painter,r,fspec,fspec.element+"-"+pbStatus,0,0,0,0,0,drawRaised);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
           hasPanel = true;
         }
@@ -1407,6 +1459,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else if (!(option->state & State_AutoRaise)
                || (!status.startsWith("normal") && !status.startsWith("disabled")))
       {
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         hasPanel = true;
       }
@@ -1444,213 +1497,8 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-    case PE_FrameButtonTool : {
-      const QString group = "PanelButtonTool";
-      frame_spec fspec = getFrameSpec(group);
-      indicator_spec dspec = getIndicatorSpec(group);
-      label_spec lspec = getLabelSpec(group);
-      lspec.left = qMax(0,lspec.left-1);
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.right = qMax(0,lspec.right-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
-
-      if (qobject_cast<const QPushButton *>(widget) // -> PE_PanelButtonTool
-          || qobject_cast<QTabBar*>(getParent(widget,1))) // tabbar scroll buttons
-        fspec.expansion = 0;
-
-      // -> CE_ToolButtonLabel
-      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
-      {
-        fspec.left = qMin(fspec.left,3);
-        fspec.right = qMin(fspec.right,3);
-        fspec.top = qMin(fspec.top,3);
-        fspec.bottom = qMin(fspec.bottom,3);
-        fspec.expansion = 0;
-
-        lspec.left = qMin(lspec.left,2);
-        lspec.right = qMin(lspec.right,2);
-        lspec.top = qMin(lspec.top,2);
-        lspec.bottom = qMin(lspec.bottom,2);
-        lspec.tispace = qMin(lspec.tispace,2);
-      }
-
-      const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-      const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
-
-      // color button
-      if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
-
-      // -> CE_ToolButtonLabel
-      if (opt && opt->toolButtonStyle == Qt::ToolButtonTextOnly)
-      {
-        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-        fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
-        lspec.left = lspec.right = qMin(lspec.left,lspec.right);
-        lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
-      }
-
-      QRect r = option->rect;
-
-      bool drawRaised = false;
-      if (status.startsWith("disabled"))
-      {
-        status = "normal";
-        if (option->state & State_On)
-          status = "toggled";
-        if (isInactive)
-          status.append(QString("-inactive"));
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      if (tb)
-      {
-        bool rtl(option->direction == Qt::RightToLeft);
-
-        // lack of space  (-> CE_ToolButtonLabel)
-        if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
-        {
-          if (tb->popupMode() != QToolButton::MenuButtonPopup)
-          {
-            if ((tb->popupMode() == QToolButton::InstantPopup
-                 || tb->popupMode() == QToolButton::DelayedPopup)
-                && (opt->features & QStyleOptionToolButton::HasMenu))
-            {
-              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
-              {
-                if (rtl)
-                  fspec.right = qMin(fspec.right,3);
-                else
-                  fspec.left = qMin(fspec.left,3);
-                fspec.expansion = 0;
-                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
-                lspec.tispace=0;
-              }
-            }
-            else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                     || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
-            {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-                fspec.expansion = 0;
-            }
-          }
-          else
-          {
-            const frame_spec fspec1 = getFrameSpec("DropDownButton");
-            if (tb->width() < opt->iconSize.width()+fspec.left
-                              +(rtl ? fspec1.left : fspec1.right)
-                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
-            {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-              fspec.expansion = 0;
-            }
-          }
-        }
-
-        bool withArrow = hasArrow (tb, opt);
-        bool isHorizontal = true;
-        if (tspec.group_toolbar_buttons)
-        {
-          if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
-          {
-            drawRaised = true;
-
-            /* the disabled state is ugly
-               for grouped tool buttons */
-            if (!(option->state & State_Enabled))
-              painter->restore();
-
-            if (toolBar->orientation() == Qt::Vertical)
-              isHorizontal = false;
-
-            if (!isHorizontal && !withArrow)
-            {
-              r.setRect(0, 0, h, w);
-              painter->save();
-              QTransform m;
-              m.translate(0, w);
-              m.scale(1,-1);
-              m.translate(0, w);
-              m.rotate(-90);
-              painter->setTransform(m, true);
-            }
-
-            int kind = whichToolbarButton (tb, opt, toolBar);
-            if (kind != 2)
-            {
-              fspec.hasCapsule = true;
-              fspec.capsuleV = 2;
-              fspec.capsuleH = kind;
-            }
-          }
-        }
-
-        QString fbStatus = status;
-        if (tb->popupMode() == QToolButton::MenuButtonPopup)
-        {
-          if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
-          {
-            // merge with drop down button
-            if (!fspec.hasCapsule)
-            {
-              fspec.capsuleV = 2;
-              fspec.hasCapsule = true;
-              fspec.capsuleH = rtl ? 1 : -1;
-            }
-            else if (fspec.capsuleH == 1)
-              fspec.capsuleH = 0;
-            else if (fspec.capsuleH == 2)
-              fspec.capsuleH = rtl ? 1 : -1;
-            // don't press the button if only its arrow is pressed
-            fbStatus = (option->state & State_Enabled) ?
-                         (option->state & State_Sunken) && tb->isDown() ? "pressed" :
-                           (option->state & State_Selected) && tb->isDown() ? "toggled" :
-                             (option->state & State_MouseOver) ? "focused" : "normal"
-                       : "disabled";
-            // don't focus the button if only its arrow is focused
-            if (fbStatus == "focused"
-                && opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
-            {
-              fbStatus = "normal";
-            }
-            if (fbStatus == "disabled")
-            {
-              fbStatus = "normal";
-              if (option->state & State_On)
-                fbStatus = "toggled";
-            }
-            if (isInactive)
-              fbStatus.append(QString("-inactive"));
-          }
-        }
-        else if ((tb->popupMode() == QToolButton::InstantPopup
-                  || tb->popupMode() == QToolButton::DelayedPopup)
-                 && (opt && (opt->features & QStyleOptionToolButton::HasMenu)))
-        {
-          // enlarge to put drop down arrow (-> SC_ToolButton)
-          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-pixelMetric(PM_HeaderMargin) : 0,
-                   0,
-                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),
-                   0);
-        }
-
-        if (!tb->autoRaise() || (!status.startsWith("normal") && !status.startsWith("disabled")) || drawRaised)
-          renderFrame(painter,r,fspec,fspec.element+"-"+fbStatus,0,0,0,0,0,drawRaised);
-
-        if (!isHorizontal && !withArrow)
-          painter->restore();
-      }
-      else if (!(option->state & State_AutoRaise)
-               || (!status.startsWith("normal") && !status.startsWith("disabled")))
-      {
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
-      }
-
-      if (!(option->state & State_Enabled) && !drawRaised)
-        painter->restore();
-
-      break;
-    }
+    /* the frame is always drawn at PE_PanelButtonTool */
+    case PE_FrameButtonTool : {return;}
 
     case PE_IndicatorRadioButton : {
       /* make exception for menuitems */
@@ -2173,8 +2021,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-    case PE_FrameLineEdit : {
-      frame_spec fspec = getFrameSpec("LineEdit");
+    /* frame is forced on lineedits at PE_PanelLineEdit */
+    case PE_FrameLineEdit : {return;}
+
+    case PE_PanelLineEdit : {
+      /* don't draw the interior or frame of a Plasma spinbox */
+      if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
+        break;
+
+      const QString group = "LineEdit";
+      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       if (isLibreoffice
           || (qobject_cast<const QLineEdit*>(widget)
               && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
@@ -2183,7 +2040,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         fspec.expansion = 0;
       }
-      if (qobject_cast<QAbstractSpinBox*>(getParent(widget,1))
+      QWidget *p = getParent(widget,1);
+      /* no frame when editing itemview texts */
+      if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
+      {
+        fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
+      }
+      if (qobject_cast<QAbstractSpinBox*>(p)
+          || (p && p->inherits("KisAbstractSliderSpinBox"))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
         fspec.hasCapsule = true;
@@ -2198,13 +2062,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
         else
         {
-          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+          if (QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p))
           {
             const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            QString maxTxt = spinMaxText(p);
-            if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
-                || p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+            QString maxTxt = spinMaxText(sb);
+            if (maxTxt.isEmpty() || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
+                || sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
               fspec.expansion = 0;
@@ -2212,7 +2076,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      else if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(widget,1)))
+      else if (QComboBox *cb = qobject_cast<QComboBox*>(p))
       {
         fspec.hasCapsule = true;
         const frame_spec fspec1 = getFrameSpec("ComboBox");
@@ -2220,38 +2084,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         if (option->direction == Qt::RightToLeft)
         {
           if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
-          {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
-              fspec.capsuleH = 0;
-            else
-              fspec.capsuleH = -1;
-          }
-          else
-          {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
-              fspec.capsuleH = 1;
-            else
-              fspec.capsuleH = 2;
-          }
+            fspec.capsuleH = 0;
+          else fspec.capsuleH = 1;
         }
         else
         {
-          if (widget->x() > 0)
-          {
-            /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
-              fspec.capsuleH = 0;
-            else
-              fspec.capsuleH = 1;
-              
-          }
-          else
-          {
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
-              fspec.capsuleH = -1;
-            else
-              fspec.capsuleH = 2;
-          }
+          if (widget->x() > 0) fspec.capsuleH = 0;
+          else fspec.capsuleH = -1;
         }
         fspec.capsuleV = 2;
       }
@@ -2264,124 +2103,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
+      /* force frame */
       renderFrame(painter,
                   isLibreoffice && !qstyleoption_cast<const QStyleOptionSpinBox *>(option) ?
                     option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
                     option->rect,
                   fspec,
                   fspec.element+"-"+leStatus);
-      if (!(option->state & State_Enabled))
-        painter->restore();
-
-      break;
-    }
-
-    case PE_PanelLineEdit : {
-      /* don't draw the interior or frame of a Plasma spinbox */
-      if (isPlasma && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
-        break;
-
-      /* force frame */
-      drawPrimitive(PE_FrameLineEdit,option,painter,widget);
-
-      const QString group = "LineEdit";
-
-      const interior_spec ispec = getInteriorSpec(group);
-      frame_spec fspec = getFrameSpec(group);
-      if (isLibreoffice
-          || (qobject_cast<const QLineEdit*>(widget)
-              && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-                  || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        fspec.expansion = 0;
-      }
-      /* no frame when editing itemview texts */
-      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-      }
-      if (qobject_cast<QAbstractSpinBox*>(getParent(widget,1))
-          || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
-      {
-        fspec.hasCapsule = true;
-        fspec.capsuleH = -1;
-        fspec.capsuleV = 2;
-
-        // -> CC_SpinBox
-        if (tspec.vertical_spin_indicators)
-        {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-          fspec.expansion = 0;
-        }
-        else
-        {
-          if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
-          {
-            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            QString maxTxt = spinMaxText(p);
-            if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
-                || p->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-                || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-            {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-              fspec.expansion = 0;
-            }
-          }
-        }
-      }
-      else if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(widget,1)))
-      {
-        fspec.hasCapsule = true;
-        const frame_spec fspec1 = getFrameSpec("ComboBox");
-        /* see if there is any icon on the left of the combo box (for LTR) */
-        if (option->direction == Qt::RightToLeft)
-        {
-          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
-          {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
-              fspec.capsuleH = 0;
-            else
-              fspec.capsuleH = -1;
-          }
-          else
-          {
-            if (widget->x() == COMBO_ARROW_LENGTH + fspec1.left)
-              fspec.capsuleH = 1;
-            else
-              fspec.capsuleH = 2;
-          }
-        }
-        else
-        {
-          if (widget->x() > 0)
-          {
-            /* also see if Konqueror has added an icon to the right of lineedit (for LTR) */
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
-              fspec.capsuleH = 0;
-            else
-              fspec.capsuleH = 1;
-              
-          }
-          else
-          {
-            if (widget->x()+w == cb->width() - (COMBO_ARROW_LENGTH+fspec1.right))
-              fspec.capsuleH = -1;
-            else
-              fspec.capsuleH = 2;
-          }
-        }
-        fspec.capsuleV = 2;
-      }
-
-      QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
-      if (isInactive)
-        leStatus .append(QString("-inactive"));
-      if (status.startsWith("disabled"))
-      {
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
       if (!(option->state & State_Enabled))
         painter->restore();
@@ -2678,32 +2406,18 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         fspec = getFrameSpec("ComboBox");
         ispec = getInteriorSpec("ComboBox");
-        if (QLineEdit *le = cb->lineEdit())
+        fspec.hasCapsule = true;
+        if (rtl)
         {
-          /* Konqueror may add an icon to the right of lineedit (for LTR) */
-          if (rtl
-              ? le->x() == COMBO_ARROW_LENGTH + fspec.left
-              : le->x()+le->width() == cb->width()-(COMBO_ARROW_LENGTH+fspec.right))
-          {
-            fspec.hasCapsule = true;
-          }
+          fspec.capsuleH = -1;
+          fspec.right = 0;
         }
         else
-          fspec.hasCapsule = true;
-        if (fspec.hasCapsule)
         {
-          if (rtl)
-          {
-            fspec.capsuleH = -1;
-            fspec.right = 0;
-          }
-          else
-          {
-            fspec.capsuleH = 1;
-            fspec.left = 0; // no left frame in this case
-          }
-          fspec.capsuleV = 2;
+          fspec.capsuleH = 1;
+          fspec.left = 0; // no left frame in this case
         }
+        fspec.capsuleV = 2;
 
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
@@ -2797,7 +2511,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        if (fspec1.expansion <= 0 // otherwise drawn at PE_PanelButtonTool and PE_FrameButtonTool
+        if (fspec1.expansion <= 0 // otherwise drawn at PE_PanelButtonTool
             && (!tb->autoRaise()
                 || (!status.startsWith("normal") && !status.startsWith("disabled"))
                 || drawRaised))
@@ -2888,6 +2602,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           aStatus = "focused";
         if (isInactive)
           aStatus.append(QString("-inactive"));
+      }
+      /* Konqueror may have added an icon to the right of lineedit (for LTR),
+         in which case, the arrow rectangle whould be widened at CC_ComboBox */
+      if (cb && cb->lineEdit())
+      {
+        int extra = r.width()-COMBO_ARROW_LENGTH-(rtl ? fspec.left : fspec.right);
+        if (extra > 0)
+        {
+          if (rtl) r.adjust(0,0,-extra,0);
+          else r.adjust(extra,0,0,0);
+        }
       }
       renderIndicator(painter,
                       r,
@@ -4018,15 +3743,18 @@ void Kvantum::drawControl(ControlElement element,
 
         /* eliding */
         QString txt = opt->text;
-        int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
-                       - (closable ? lspec.tispace : 0)
-                       - (opt->icon.isNull() ? 0 : icnSise);
-        QFont F(painter->font());
-        if (lspec.boldFont) F.setBold(true);
-        if (textSize(F,txt).width() > txtWidth)
+        if (!txt.isEmpty())
         {
-          QFontMetrics fm(F);
-          txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+          int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
+                         - (closable ? lspec.tispace : 0)
+                         - (opt->icon.isNull() ? 0 : icnSise);
+          QFont F(painter->font());
+          if (lspec.boldFont) F.setBold(true);
+          if (textSize(F,txt).width() > txtWidth)
+          {
+            QFontMetrics fm(F);
+            txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+          }
         }
 
         renderLabel(painter,option->palette,
@@ -4121,8 +3849,14 @@ void Kvantum::drawControl(ControlElement element,
     case CE_ProgressBarGroove : {
       const QString group = "Progressbar";
 
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      if (isKisSlider)
+      {
+        fspec.hasCapsule = true;
+        fspec.capsuleH = -1;
+        fspec.capsuleV = 2;
+      }
 
       QRect r = option->rect;
 
@@ -4172,6 +3906,12 @@ void Kvantum::drawControl(ControlElement element,
         const QString group = "ProgressbarContents";
         frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
+        if (isKisSlider)
+        {
+          fspec.hasCapsule = true;
+          fspec.capsuleH = -1;
+          fspec.capsuleV = 2;
+        }
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
@@ -4196,13 +3936,15 @@ void Kvantum::drawControl(ControlElement element,
           r.setRect(y, x, h, w);
 
         bool thin = false;
-        if (opt->progress >= 0)
+        if (opt->maximum != 0 || opt->minimum != 0)
         {
-          int empty = sliderPositionFromValue(opt->minimum,
-                                              opt->maximum,
-                                              opt->maximum - opt->progress + opt->minimum,
-                                              isVertical ? h : w,
-                                              false);
+          int length = isVertical ? h : w;
+          int empty = length
+                      - sliderPositionFromValue(opt->minimum,
+                                                opt->maximum,
+                                                qMax(opt->progress,opt->minimum),
+                                                length,
+                                                false);
           if (isVertical ? inverted : !inverted)
             r.adjust(0,0,-empty,0);
           else
@@ -4381,9 +4123,12 @@ void Kvantum::drawControl(ControlElement element,
 
         QFont f(painter->font());
         QString txt = opt->text;
-        if (lspec.boldFont) f.setBold(true);
-        QFontMetrics fm(f);
-        txt = fm.elidedText(txt, Qt::ElideRight, length);
+        if (!txt.isEmpty())
+        {
+          if (lspec.boldFont) f.setBold(true);
+          QFontMetrics fm(f);
+          txt = fm.elidedText(txt, Qt::ElideRight, length);
+        }
 
         renderLabel(painter,option->palette,
                     r,
@@ -4896,10 +4641,12 @@ void Kvantum::drawControl(ControlElement element,
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
+        const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
+
         if (!(opt->features & QStyleOptionButton::Flat))
         {
           // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
-          if (widget && !qobject_cast<const QPushButton *>(widget))
+          if (widget && !pb)
           {
             drawPrimitive(PE_Frame,option,painter,widget);
             break;
@@ -4916,12 +4663,20 @@ void Kvantum::drawControl(ControlElement element,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-          if (widget && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
-            // color button!?
+          if (widget
+              && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
+                  || (opt->icon.isNull()
+                      && widget->palette().color(QPalette::Button) != QApplication::palette().color(QPalette::Button))))
+          { // color button!?
+            fspec.expansion = 0;
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             painter->fillRect(interiorRect(opt->rect,fspec), widget->palette().brush(QPalette::Button));
+          }
           else
+          {
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          }
           if (!(option->state & State_Enabled))
           {
             painter->restore();
@@ -4959,7 +4714,6 @@ void Kvantum::drawControl(ControlElement element,
                           Qt::AlignRight | Qt::AlignVCenter);
         }
 
-        const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
         if (pb && pb->isDefault() && !status.startsWith("disabled"))
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
@@ -5330,11 +5084,15 @@ void Kvantum::drawControl(ControlElement element,
            account with PM_DockWidgetTitleMargin */
         fspec.left=fspec.right=fspec.top=fspec.bottom=0;
         lspec.left=lspec.right=lspec.top=lspec.bottom=0;
-        
-        QFont F(painter->font());
-        if (lspec.boldFont) F.setBold(true);
-        QFontMetrics fm(F);
-        QString title = fm.elidedText(opt->title, Qt::ElideRight, tRect.width());
+
+        QString title = opt->title;
+        if (!title.isEmpty())
+        {
+          QFont F(painter->font());
+          if (lspec.boldFont) F.setBold(true);
+          QFontMetrics fm(F);
+          title = fm.elidedText(title, Qt::ElideRight, tRect.width());
+        }
         int talign = Qt::AlignHCenter | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
@@ -5475,7 +5233,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
         if (fspec.expansion > 0 && tb && tb->popupMode() == QToolButton::MenuButtonPopup)
           o.rect = r.united(subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget));
         drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
-        drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
+        //drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
         o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
@@ -5560,12 +5318,11 @@ void Kvantum::drawComplexControl(ComplexControl control,
       if (opt) {
         QStyleOptionSpinBox o(*opt);
 
-        /* The field is automatically drawn as lineedit in PE_FrameLineEdit
-           and PE_PanelLineEdit. Therefore, we shouldn't duplicate it here. */
+        /* The field is automatically drawn as lineedit at PE_PanelLineEdit.
+           So, we don't duplicate it here but LibreOffice is an exception. */
         if (isLibreoffice)
         {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
-          //drawPrimitive(PE_FrameLineEdit,&o,painter,widget);
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
 
@@ -5671,8 +5428,20 @@ void Kvantum::drawComplexControl(ComplexControl control,
           int editWidth = 0;
           if (cb)
           {
-            if (cb->lineEdit())
-              editWidth = cb->lineEdit()->width();
+            if (QLineEdit *le = cb->lineEdit())
+            {
+              editWidth = le->width();
+              QRect R;
+              /* Konqueror may add an icon to the right of lineedit (for LTR) */
+              int extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
+                               : w - (COMBO_ARROW_LENGTH+fspec.right) - (le->x()+editWidth);
+              if (extra > 0)
+              {
+                editWidth += extra;
+                if (rtl) arrowRect.adjust(0,0,extra,0);
+                else arrowRect.adjust(-extra,0,0,0);
+              }
+            }
             else // when there isn't enough space
             {
               QSize txtSize = textSize(painter->font(),opt->currentText);
@@ -6122,13 +5891,17 @@ void Kvantum::drawComplexControl(ComplexControl control,
           renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+tbStatus);
 
           o.rect = subControlRect(CC_TitleBar,opt,SC_TitleBarLabel,widget);
-          QFont F(painter->font());
-          if (lspec.boldFont) F.setBold(true);
-          QFontMetrics fm(F);
-          QString title = fm.elidedText(o.text, Qt::ElideRight,
-                                        o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
-                                                      // titlebars have no frame
-                                                      -lspec.right-lspec.left);
+          QString title = o.text;
+          if (!title.isEmpty())
+          {
+            QFont F(painter->font());
+            if (lspec.boldFont) F.setBold(true);
+            QFontMetrics fm(F);
+            title = fm.elidedText(title, Qt::ElideRight,
+                                  o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
+                                                // titlebars have no frame
+                                                -lspec.right-lspec.left);
+          }
           renderLabel(painter,option->palette,
                       o.rect,
                       fspec,lspec,
@@ -6806,7 +6579,11 @@ QSize Kvantum::sizeFromContents (ContentsType type,
 
         QFont f = QApplication::font();
         if (widget)
+        {
           f = widget->font();
+          if (lspec.boldFont)
+            f.setBold(true);
+        }
 
         bool hasIcon = false;
         if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
@@ -7902,8 +7679,8 @@ QRect Kvantum::subControlRect(ComplexControl control,
             int m = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
             if (fspec.right > m)
             {
-              /* in this case, line-edit frame width is set to
-                 3 at PE_FrameLineEdit and PE_PanelLineEdit */
+              /* in this case, lineedit frame width
+                 is set to 3 at PE_PanelLineEdit */
               m = w-txtWidth-2*sw-3-2;
               if (fspec.right > m)
               {
@@ -7986,7 +7763,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
           if (isLibreoffice)
           {
             const frame_spec Fspec = getFrameSpec("LineEdit");
-            margin = Fspec.left;
+            margin = qMin(Fspec.left,3);
           }
           else
           {
@@ -8824,7 +8601,7 @@ void Kvantum::renderFrame(QPainter *painter,
       }
     }
     QString element0(element);
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))))
+    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))+"-top"))
       element1 = "expand-"+element;
   }
   else
@@ -8833,6 +8610,8 @@ void Kvantum::renderFrame(QPainter *painter,
     Top = fspec.top;
     Right = fspec.right;
     Bottom = fspec.bottom;
+
+    if (Left ==0 && Top == 0 && Right == 0 && Bottom == 0) return;
   }
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))

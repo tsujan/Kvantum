@@ -237,6 +237,8 @@ class Kvantum : public QCommonStyle {
     void noTranslucency(QObject *o);
     /* Removes a (tool-)button from the list of paneled ones. */
     void notPaneled(QObject *o);
+    /* Removes a button from the list of those with forced text colors. */
+    void removeTxtColForced(QObject *o);
 
   private:
     QSvgRenderer *defaultRndr, *themeRndr;
@@ -275,6 +277,9 @@ class Kvantum : public QCommonStyle {
     bool isDolphin;
     bool isKonsole;
     bool isYakuake;
+
+    /* For identifying KisSliderSpinBox. */
+    bool isKisSlider;
 
     /* Search for the toolbutton flat indicator just once! */
     bool hasFlatIndicator;
