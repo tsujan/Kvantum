@@ -3420,12 +3420,13 @@ void Kvantum::drawControl(ControlElement element,
           if(!cb->lineEdit())
           {
             QSize txtSize = textSize(painter->font(),opt->currentText);
+            const indicator_spec dspec = getIndicatorSpec("DropDownButton");
+            int deltaR = 0; int deltaL = 0;
+            int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
             if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right)
             {
-              int deltaR = (fspec.right > 3 ? fspec.right - 3 : 0) + (lspec.right > 2 ? lspec.right - 2 : 0);
-              int deltaL = (fspec.left > 3 ? fspec.left - 3 : 0) + (lspec.left > 2 ? lspec.left - 2 : 0);
-              int deltaTop = (fspec.top > 3 ? fspec.top - 3 : 0) + (lspec.top > 2 ? lspec.top - 2 : 0);
-              int deltaBottom = (fspec.bottom > 3 ? fspec.bottom - 3 : 0) + (lspec.bottom > 2 ? lspec.bottom - 2 : 0);
+              deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
+              deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
 
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
@@ -3439,20 +3440,13 @@ void Kvantum::drawControl(ControlElement element,
               lspec.tispace = qMin(lspec.tispace,2);
 
               /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
-              const indicator_spec dspec = getIndicatorSpec("DropDownButton");
-              if (opt->direction == Qt::RightToLeft)
-                r.adjust(-deltaL-lspec.left-(COMBO_ARROW_LENGTH
-                                             -qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9)),
-                         -deltaTop,
-                         deltaR,
-                         deltaBottom);
-              else
-                r.adjust(-deltaL,
-                         -deltaTop,
-                         deltaR+lspec.right+(COMBO_ARROW_LENGTH
-                                             -qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9)),
-                         deltaBottom);
+              iSize = qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9);
             }
+            /* give all available space to the label */
+            if (opt->direction == Qt::RightToLeft)
+              r.adjust(-deltaL-COMBO_ARROW_LENGTH+iSize, 0, 0, 0);
+            else
+              r.adjust(0, 0, deltaR+COMBO_ARROW_LENGTH-iSize, 0);
           }
         }
 
