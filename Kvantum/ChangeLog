@@ -7,6 +7,7 @@ V0.8.19
  * Better look for KisSliderSpinBox, especially when progressbar corners are maximally rounded.
  * Better handling of Konqueror's extra icon inside its URL combobox.
  * Don't force text color on buttons that are drawn in the standard way.
+ * Workarounds for KMultiTabBarTab (a pushbutton drawn as a toolbutton).
 
 V0.8.18
 ---------

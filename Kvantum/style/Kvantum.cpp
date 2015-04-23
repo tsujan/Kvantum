@@ -535,7 +535,12 @@ void Kvantum::polish(QWidget *widget)
     else if (qobject_cast<QProgressBar*>(widget)
               /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                  its progressbar, so we can identify it only through eventFilter() */
-             || widget->inherits("KisAbstractSliderSpinBox"))
+             || widget->inherits("KisAbstractSliderSpinBox")
+             /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
+                for drawing its panel, but not if its state is normal. To force the
+                normal text color on it, we need to make it use PE_PanelButtonTool
+                with the normal state too and that can be done at its paint event. */
+             || widget->inherits("KMultiTabBarTab"))
     {
         widget->removeEventFilter(this);
         widget->installEventFilter(this);
@@ -926,6 +931,20 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
           default: break;
         }
       }
+      else if (!w->underMouse() && w->inherits("KMultiTabBarTab"))
+      {
+        if (QPushButton *pb = qobject_cast<QPushButton *>(o))
+        {
+          if (!pb->isChecked())
+          {
+            QPainter p(w);
+            QStyleOptionToolButton opt;
+            opt.initFrom(w);
+            opt.state |= QStyle::State_AutoRaise;
+            drawPrimitive(QStyle::PE_PanelButtonTool,&opt,&p,w);
+          }
+        }
+      }
     }
     break;
 
@@ -1087,7 +1106,7 @@ static QSet<const QWidget*> standardButton;
    in its paintEvent(), in which case, using of forceButtonTextColor() below could
    result in an infinite loop if our criterion for setting a new palette was only
    the text color. We use the following QHash to prevent such loops. */
-static QHash<QWidget *,QColor> txtColForced;
+static QHash<QWidget*,QColor> txtColForced;
 
 void Kvantum::removeFromSet(QObject *o)
 {
@@ -4491,7 +4510,8 @@ void Kvantum::drawControl(ControlElement element,
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton *>(option);
       if (opt) {
-        if (widget && !standardButton.contains(widget))
+        if (qobject_cast<const QPushButton *>(widget)
+            && !standardButton.contains(widget))
         {
           standardButton.insert(widget);
           connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
@@ -4899,6 +4919,12 @@ void Kvantum::drawControl(ControlElement element,
             }
           }
         }
+        else // because of a mess in kate5/new KMultiTabBarTab
+        {
+          lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+          lspec.normalColor = opt->palette.color(QPalette::ButtonText).name();
+        }
 
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
            button and not just its label here (-> CT_ToolButton)... */
@@ -5212,14 +5238,14 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
       if (opt)
       {
-        if (widget && !standardButton.contains(widget))
+        const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
+        if (tb && !standardButton.contains(widget))
         {
           standardButton.insert(widget);
           connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
         }
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
-        const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
         QStyleOptionToolButton o(*opt);
 
         QRect r = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
