@@ -235,10 +235,8 @@ class Kvantum : public QCommonStyle {
     void advanceProgresses();
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
-    /* Removes a (tool-)button from the list of paneled ones. */
-    void notPaneled(QObject *o);
-    /* Removes a button from the list of those with forced text colors. */
-    void removeTxtColForced(QObject *o);
+    /* Removes a button from all special lists. */
+    void removeFromSet(QObject *o);
 
   private:
     QSvgRenderer *defaultRndr, *themeRndr;

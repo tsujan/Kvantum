@@ -1078,19 +1078,22 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
    This is used for setting the text color of non-flat, panelless buttons that are
    already styled, like those in QtCreator's find bar or QupZilla's bookmark toolbar. */
 static QSet<const QWidget*> paneledButtons;
-void Kvantum::notPaneled(QObject *o)
+
+/* Is this button drawn in a standard way? If so, we don't want
+   to force any text color on it with forceButtonTextColor(). */
+static QSet<const QWidget*> standardButton;
+
+/* Although not usual, it's possible that a subclassed toolbutton sets its palette
+   in its paintEvent(), in which case, using of forceButtonTextColor() below could
+   result in an infinite loop if our criterion for setting a new palette was only
+   the text color. We use the following QHash to prevent such loops. */
+static QHash<QWidget *,QColor> txtColForced;
+
+void Kvantum::removeFromSet(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   paneledButtons.remove(widget);
-}
-
-/* Although unusual, it is possible that a subclassed toolbutton sets its palette
-   in its paintEvent(), in which case, using of forceButtonTextColor() below would
-   result in an infinite loop. We use the following QHash to prevent such loops. */
-static QHash<QWidget *,QColor> txtColForced;
-void Kvantum::removeTxtColForced(QObject *o)
-{
-  QWidget *widget = static_cast<QWidget*>(o);
+  standardButton.remove(widget);
   txtColForced.remove(widget);
 }
 
@@ -1125,7 +1128,7 @@ void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
       b->setPalette(palette);
       txtColForced.insert(widget,col);
-      connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeTxtColForced(QObject*)), Qt::UniqueConnection);
+      connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
     }
   }
 }
@@ -1470,11 +1473,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (widget && hasPanel && !paneledButtons.contains(widget))
       {
         paneledButtons.insert(widget);
-        connect(widget, SIGNAL(destroyed(QObject*)), SLOT(notPaneled(QObject*)));
+        connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
       }
 
-      /* force text color */
-      if (!status.startsWith("disabled"))
+      /* force text color if the button isn't drawn in a standard way */
+      if (widget && !standardButton.contains(widget)
+          && !status.startsWith("disabled"))
       {
         QColor col;
         if (hasPanel)
@@ -3444,9 +3448,9 @@ void Kvantum::drawControl(ControlElement element,
             }
             /* give all available space to the label */
             if (opt->direction == Qt::RightToLeft)
-              r.adjust(-deltaL-COMBO_ARROW_LENGTH+iSize, 0, 0, 0);
+              r.adjust(-deltaL-qMax(COMBO_ARROW_LENGTH-iSize,0), 0, 0, 0);
             else
-              r.adjust(0, 0, deltaR+COMBO_ARROW_LENGTH-iSize, 0);
+              r.adjust(0, 0, deltaR+qMax(COMBO_ARROW_LENGTH-iSize,0), 0);
           }
         }
 
@@ -4487,6 +4491,11 @@ void Kvantum::drawControl(ControlElement element,
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton *>(option);
       if (opt) {
+        if (widget && !standardButton.contains(widget))
+        {
+          standardButton.insert(widget);
+          connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
+        }
         drawControl(QStyle::CE_PushButtonBevel,opt,painter,widget);
         QStyleOptionButton subopt(*opt);
         subopt.rect = subElementRect(SE_PushButtonContents,opt,widget);
@@ -4608,8 +4617,9 @@ void Kvantum::drawControl(ControlElement element,
         lspec.right = qMax(0,lspec.right-1);
         lspec.bottom = qMax(0,lspec.bottom-1);
 
-        /* force text color */
-        if (!status.startsWith("disabled"))
+        /* force text color if the button isn't drawn in a standard way */
+        if (widget && !standardButton.contains(widget)
+            && !status.startsWith("disabled"))
         {
           QColor col;
           if (!(opt->features & QStyleOptionButton::Flat))
@@ -5202,6 +5212,11 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
       if (opt)
       {
+        if (widget && !standardButton.contains(widget))
+        {
+          standardButton.insert(widget);
+          connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
+        }
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
         const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
