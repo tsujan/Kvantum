@@ -379,10 +379,12 @@ void Kvantum::polish(QWidget *widget)
     QColor windowTextColor(settings->getColorSpec().windowTextColor);
     if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
     {
-      QWidget *gp = getParent(widget,2);
+      QWidget *p = getParent(widget,1);
+      QWidget *gp = getParent(p,1);
       if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
            && !qobject_cast<QLineEdit*>(widget)
-           && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(getParent(widget,1))) // Krita, Amarok
+           && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(p) // Krita, Amarok
+           && !p->findChild<QTabBar*>())
           || (widget->inherits("AnimatedLabelStack") // Amarok
               && qobject_cast<QToolBar*>(gp)
               && qobject_cast<QMainWindow*>(getParent(gp,1))))
@@ -774,14 +776,7 @@ void Kvantum::polish(QPalette &palette)
       palette.setColor(QPalette::Active,QPalette::WindowText,col);
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
-    if (isLibreoffice)
-    {
-      col = getLabelSpec("PanelButtonCommand").normalColor;
-      if (!col.isValid())
-        col = cspec.buttonTextColor;
-    }
-    else
-      col = cspec.buttonTextColor;
+    col = cspec.buttonTextColor;
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
@@ -1139,7 +1134,6 @@ void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
       //&& (!tb || paneledButtons.contains(widget))
       && !b->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
-    const label_spec lspec = getLabelSpec("PanelButtonCommand");
     QPalette palette = b->palette();
     if (col != palette.color(QPalette::ButtonText))
     {
@@ -1481,8 +1475,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       else if (!(option->state & State_AutoRaise)
                || (!status.startsWith("normal") && !status.startsWith("disabled")))
       {
+        bool libreoffice = false;
+        if (isLibreoffice && (option->state & State_Enabled) && !status.startsWith("toggled")
+            && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+        {
+          libreoffice = true;
+          painter->save();
+          painter->setOpacity(0.5);
+        }
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        if (libreoffice) painter->restore();
         hasPanel = true;
       }
 
@@ -1597,6 +1600,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
         if (isInactive)
           suffix.append(QString("-inactive"));
+        if (isLibreoffice && suffix == "-checked-focused"
+            && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
@@ -1708,6 +1714,9 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         }
         if (isInactive)
           suffix.append(QString("-inactive"));
+        if (isLibreoffice && suffix == "-checked-focused"
+            && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       }
       else
@@ -1970,7 +1979,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           }
           // as in GoldenDict's Preferences dialog
 #if QT_VERSION < 0x050000
-          else if (QTabBar *tb = widget->findChild<QTabBar *>(QLatin1String("qt_tabwidget_tabbar")))
+          else if (QTabBar *tb = widget->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar")))
 #else
           else if (QTabBar *tb = tw->tabBar())
 #endif
@@ -2155,26 +2164,15 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       default_interior_spec(ispec);
       const indicator_spec dspec = getIndicatorSpec(group);
 
-      bool isVertical = false;
-      if (!(option->state & State_Horizontal))
-        isVertical = true;
       QRect r = option->rect;
-      if (isVertical)
+      if (!(option->state & State_Horizontal))
       {
-        /*
-           Since we rotate the whole toolbar in CE_ToolBar,
-           the handle doesn't need any transformation and
-           just its rectangle should be corrected.
-        */
         r.setRect(y, x, h, w);
-        if (element == PE_IndicatorToolBarSeparator)
-        {
-          painter->save();
-          QTransform m;
-          m.translate(w + 2*x, 0); // w+2*x is the width of vertical toolbar
-          m.rotate(90);
-          painter->setTransform(m, true);
-        }
+        painter->save();
+        QTransform m;
+        m.translate(w + 2*x, 0); // w+2*x is the width of vertical toolbar
+        m.rotate(90);
+        painter->setTransform(m, true);
       }
       if (element == PE_IndicatorToolBarHandle && tspec.center_toolbar_handle)
       {
@@ -2185,7 +2183,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                      dspec.element
                        +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator"));
 
-      if (isVertical && element == PE_IndicatorToolBarSeparator)
+      if (!(option->state & State_Horizontal))
         painter->restore();
 
       break;
@@ -2572,8 +2570,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             if (enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
               dspec.element = "flat-"+dspec1.element+"-down";
           }
-          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
-                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
+          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+                    && !p->findChild<QTabBar*>())
+                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                       && !gp->findChild<QTabBar*>()))
           {
             if (!tspec.group_toolbar_buttons
                 && enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
@@ -2967,8 +2967,17 @@ void Kvantum::drawControl(ControlElement element,
           //renderElement(painter,dspec.element+"-tearoff",option->rect,20,0);
         else
         {
+          bool libreoffice = false;
+          if (isLibreoffice && (option->state & State_Enabled)
+            && enoughContrast(QColor(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
+          {
+            libreoffice = true;
+            painter->save();
+            painter->setOpacity(0.5);
+          }
           renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
           renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          if (libreoffice) painter->restore();
 
           const QStringList l = opt->text.split('\t');
 
@@ -4419,6 +4428,9 @@ void Kvantum::drawControl(ControlElement element,
     case CE_ToolBar : {
       if (!qstyleoption_cast<const QStyleOptionToolBar*>(option))
         break;
+      /* practically not a toolbar (Kaffeine's sidebar) */
+      if (widget && widget->findChild<QTabBar*>())
+        break;
       /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
       if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
         break;
@@ -4432,6 +4444,7 @@ void Kvantum::drawControl(ControlElement element,
       if (!(option->state & State_Horizontal))
       {
         r.setRect(0, 0, h, w);
+        painter->save();
         QTransform m;
         m.translate(w, 0);
         m.rotate(90);
@@ -4470,6 +4483,8 @@ void Kvantum::drawControl(ControlElement element,
       renderFrame(painter,r,fspec,fspec.element+suffix);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
+        painter->restore();
+      if (!(option->state & State_Horizontal))
         painter->restore();
 
       break;
@@ -4698,8 +4713,17 @@ void Kvantum::drawControl(ControlElement element,
           }
           else
           {
+            bool libreoffice = false;
+            if (isLibreoffice && (option->state & State_Enabled)
+                && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+            {
+              libreoffice = true;
+              painter->save();
+              painter->setOpacity(0.5);
+            }
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            if (libreoffice) painter->restore();
           }
           if (!(option->state & State_Enabled))
           {
@@ -4826,8 +4850,10 @@ void Kvantum::drawControl(ControlElement element,
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = lspec1.normalColor;
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
-                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
+            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+                      && !p->findChild<QTabBar*>())
+                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                         && !gp->findChild<QTabBar*>()))
             {
               if (!tspec.group_toolbar_buttons)
               {
@@ -5295,8 +5321,10 @@ void Kvantum::drawComplexControl(ComplexControl control,
                 if (enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
-              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p))
-                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)))
+              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+                        && !p->findChild<QTabBar*>())
+                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                           && !gp->findChild<QTabBar*>()))
               {
                 if (!tspec.group_toolbar_buttons
                     && enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
@@ -5496,8 +5524,20 @@ void Kvantum::drawComplexControl(ComplexControl control,
           QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
           /* integrate the arrow part if the combo isn't editable */
           if (cb && !cb->lineEdit()) r = r.united(arrowRect);
+          bool libreoffice = false;
+          if (isLibreoffice && (option->state & State_Enabled))
+          {
+            const label_spec lspec = getLabelSpec(group);
+            if (enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+            {
+              libreoffice = true;
+              painter->save();
+              painter->setOpacity(0.5);
+            }
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (libreoffice) painter->restore();
         }
         if (!(option->state & State_Enabled))
         {
@@ -7746,11 +7786,15 @@ QRect Kvantum::subControlRect(ComplexControl control,
       switch (subControl) {
         case SC_SpinBoxFrame :
           return option->rect;
-        case SC_SpinBoxEditField :
-          return QRect(x,
+        case SC_SpinBoxEditField : {
+          int margin = 0;
+          if (isLibreoffice)
+            margin = qMin(fspecLE.left,3);
+          return QRect(x + margin,
                        y,
                        w - (sw + fspec.right) - (tspec.vertical_spin_indicators ? 0 : sw),
                        h);
+        }
         case SC_SpinBoxUp :
           return QRect(x + w - (sw + fspec.right),
                        y,

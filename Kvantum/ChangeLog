@@ -8,6 +8,8 @@ V0.8.19
  * Better handling of Konqueror's extra icon inside its URL combobox.
  * Don't force text color on buttons that are drawn in the standard way.
  * Workarounds for KMultiTabBarTab (a pushbutton drawn as a toolbutton).
+ * Don't draw a toolbar containing a tab-bar (as in Kaffeine).
+ * Fixes for LibreOffice with dark-and-light themes.
 
 V0.8.18
 ---------

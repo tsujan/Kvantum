@@ -437,10 +437,14 @@ text.margin.right                 integer             The sizes of the text marg
                                                       if there is any.
 
 text.normal.color                 string (#RRGGBB)    The color of the normal text as
-                                                      #RRGGBB or with a valid name like
-                                                      white, black, red, etc. It may
-                                                      override the text colors defined
-                                                      under the GeneralColors section.
+                                                      #RRGGBB or with a valid name like white,
+                                                      black, red, etc. It may override the
+                                                      text colors defined under the section
+                                                      "GeneralColors".
+                                                      Note: State-specific text colors do not
+                                                      have meaning for Window, Dock, LineEdit
+                                                      and frame widgets (namely GenericFrame,
+                                                      TabFrame and TabBarFrame).
 
 text.focus.color                  string (#RRGGBB)    The color of the focused/hover text.
 
