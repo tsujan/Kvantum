@@ -2817,7 +2817,10 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             col.setRgb(col.red(),col.green(),col.blue());
             brush.setColor(col);
           }
+          QPointF oldBO = painter->brushOrigin();
+          painter->setBrushOrigin(opt->rect.topLeft()); // sometimes needed (as in Basket)
           painter->fillRect(interiorRect(opt->rect,fspec).adjusted(-left,0,right,0), brush);
+          painter->setBrushOrigin(oldBO);
           break;
         }
         else if (opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
