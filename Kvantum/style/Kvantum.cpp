@@ -3202,13 +3202,13 @@ void Kvantum::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionMenuItem *>(option);
       if (opt) {
 #if QT_VERSION >= 0x050000
-        if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
-        {
-            if (status.startsWith("toggled"))
-              status.replace(QString("toggled"),QString("normal"));
-            if (status.startsWith("focused"))
-              status.replace(QString("focused"),QString("normal"));
-        }
+      if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
+      {
+        if (status.startsWith("toggled"))
+          status.replace(QString("toggled"),QString("normal"));
+        if (status.startsWith("focused"))
+          status.replace(QString("focused"),QString("normal"));
+      }
 #endif
 
         group = "MenuBar";
@@ -3245,20 +3245,9 @@ void Kvantum::drawControl(ControlElement element,
         int bottomFrame = fspec.bottom;
         interior_spec ispec = getInteriorSpec(group);
 
-        if (status.startsWith("disabled"))
-        {
-          status.replace(QString("disabled"),QString("normal"));
-          painter->save();
-          painter->setOpacity(DISABLED_OPACITY);
-        }
         /* fill the non-empty regions of the menubar */
         renderFrame(painter,r,fspec,fspec.element+"-normal");
         renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
-        if (!(option->state & State_Enabled))
-        {
-          painter->restore();
-          status = "disabled";
-        }
 
         fspec = getFrameSpec("MenuBarItem");
         ispec = getInteriorSpec("MenuBarItem");
@@ -5487,6 +5476,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
         }
         else // ignore framelessness
         {
+          label_spec lspec = getLabelSpec(group);
           /* don't cover the lineedit area */
           int editWidth = 0;
           if (cb)
@@ -5508,7 +5498,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
             else // when there isn't enough space
             {
               QSize txtSize = textSize(painter->font(),opt->currentText);
-              label_spec lspec = getLabelSpec(group);
               lspec.left = qMax(0,lspec.left-1);
               lspec.right = qMax(0,lspec.right-1);
               if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right)
@@ -5527,7 +5516,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
           bool libreoffice = false;
           if (isLibreoffice && (option->state & State_Enabled))
           {
-            const label_spec lspec = getLabelSpec(group);
             if (enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
             {
               libreoffice = true;
@@ -5538,6 +5526,35 @@ void Kvantum::drawComplexControl(ComplexControl control,
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
           if (libreoffice) painter->restore();
+          /* force label color (as in Krusader) */
+          if (cb && !status.startsWith("disabled"))
+          {
+            QList<QLabel *> llist = cb->findChildren<QLabel*>();
+            if (!llist.isEmpty())
+            {
+              QColor col;
+              col = QColor(lspec.normalColor);
+              if (status.startsWith("pressed"))
+                col = QColor(lspec.pressColor);
+              else if (status.startsWith("toggled"))
+                col = QColor(lspec.toggleColor);
+              else if (option->state & State_MouseOver)
+                col = QColor(lspec.focusColor);
+              if (col.isValid())
+              {
+                for (int i = 0; i < llist.count(); ++i)
+                {
+                  QPalette palette = llist.at(i)->palette();
+                  if (col != palette.color(QPalette::WindowText))
+                  {
+                    palette.setColor(QPalette::Active,QPalette::WindowText,col);
+                    palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
+                    llist.at(i)->setPalette(palette);
+                  }
+                }
+              }
+            }
+          }
         }
         if (!(option->state & State_Enabled))
         {
@@ -5545,9 +5562,8 @@ void Kvantum::drawComplexControl(ComplexControl control,
           status = "disabled";
         }
 
-        /* when the combo box is editable, the edit field is drawn
-           but the icon is missing (edit fields do not have icons)
-           so we draw the icon here and center it */
+        /* since the icon of an editable combo-box isn't drawn
+           at CE_ComboBoxLabel, we draw and center it here */
         if (opt->editable && !opt->currentIcon.isNull())
         {
           const QIcon::Mode iconmode =
