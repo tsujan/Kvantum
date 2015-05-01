@@ -4003,8 +4003,8 @@ void Kvantum::drawControl(ControlElement element,
           {
             fspec.top = fspec.bottom = r.height()/2;
           }
-          renderFrame(painter,r,fspec,fspec.element+"-"+status);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
           if (thin)
             painter->restore();
         }
@@ -4060,8 +4060,8 @@ void Kvantum::drawControl(ControlElement element,
               }
             }
 
-            renderFrame(painter,R1,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R1,fspec,ispec,ispec.element+"-"+status);
+            renderFrame(painter,R1,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+            renderInterior(painter,R1,fspec,ispec,ispec.element+"-"+status,true);
             if (thin)
               painter->restore();
 
@@ -4089,15 +4089,15 @@ void Kvantum::drawControl(ControlElement element,
               }
             }
 
-            renderFrame(painter,R,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status);
+            renderFrame(painter,R,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status,true);
             if (thin)
               painter->restore();
           }
           else
           {
-            renderFrame(painter,R,fspec,fspec.element+"-"+status);
-            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status);
+            renderFrame(painter,R,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+            renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status,true);
           }
         }
       }
