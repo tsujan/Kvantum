@@ -561,13 +561,11 @@ void Kvantum::polish(QWidget *widget)
         }
       }
     }
-#if QT_VERSION >= 0x050000
     else if (qobject_cast<QAbstractSpinBox*>(widget))
     {// see eventFilter() for the reason
       widget->removeEventFilter(this);
       widget->installEventFilter(this);
     }
-#endif
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
     else if (qobject_cast<QScrollBar*>(widget))
@@ -833,10 +831,8 @@ void Kvantum::unpolish(QWidget *widget)
 
     if (widget->inherits("KisAbstractSliderSpinBox"))
       widget->removeEventFilter(this);
-#if QT_VERSION >= 0x050000
     else if (qobject_cast<QAbstractSpinBox*>(widget))
       widget->removeEventFilter(this);
-#endif
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
@@ -959,7 +955,6 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
-#if QT_VERSION >= 0x050000
   /* FIXME For some reason unknown to me (a Qt5 bug?), the Qt5 spinbox size hint
      is sometimes wrong as if Qt5 spinboxes don't have time to consult CT_SpinBox
      although they should (-> qabstractspinbox.cpp -> QAbstractSpinBox::sizeHint).
@@ -968,14 +963,26 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
   case QEvent::ShowToParent:
     if (w && qobject_cast<QAbstractSpinBox*>(o))
     {
-      QSize size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
+      QSize size;
+      if (QDateTimeEdit *te = qobject_cast<QDateTimeEdit*>(o))
+      {
+        QString df = te->displayFormat();
+        if (df.contains("d") || df.contains("M") || df.contains("y"))
+        { /* here we can't calculate the maximum text 
+            length, so we rely on the default size */
+          QStyleOptionSpinBox opt;
+          opt.initFrom(w);
+          size = sizeFromContents(CT_SpinBox,&opt,w->minimumSizeHint(),w);
+        }
+      }
+      if (!size.isValid())
+        size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
       if (w->maximumWidth() > size.width())
         w->setMinimumWidth(size.width());
       if (w->maximumHeight() > size.height())
         w->setMinimumHeight(size.height());
     }
     break;
-#endif
 
   case QEvent::Hide:
   case QEvent::Destroy:
@@ -1074,11 +1081,32 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
 {
   QString maxTxt;
   if (const QSpinBox *sb = qobject_cast<const QSpinBox *>(sp))
-    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(sb->maximum()).arg(sb->suffix());
+  {
+    int max = sb->maximum();
+    int min = sb->minimum();
+    max = (max + min < 0 ? -min : max);
+    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(max).arg(sb->suffix());
+    if (min < 0) maxTxt = "-" + maxTxt;
+  }
   else if (const QDoubleSpinBox *sb = qobject_cast<const QDoubleSpinBox *>(sp))
-    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(sb->maximum()).arg(sb->suffix());
+  {
+    double max = sb->maximum();
+    double min = sb->minimum();
+    int Max = (max + min < 0 ? -min : max);
+    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(Max).arg(sb->suffix());
+    if (sb->decimals() > 0)
+    {
+      maxTxt = maxTxt + ".";
+      for (int i = 0; i < sb->decimals() ; ++i) maxTxt = maxTxt + "0";
+    }
+    if (min < 0) maxTxt = "-" + maxTxt;
+  }
   else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit *>(sp))
+  {
     maxTxt = sb->displayFormat();
+    if (maxTxt.contains("d") || maxTxt.contains("M") || maxTxt.contains("y"))
+      maxTxt = "d"; // longest text is meaningless here
+  }
   if (!maxTxt.isEmpty())
   {
     QString svt = sp->specialValueText();
@@ -6644,6 +6672,14 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                     lspec.top + lspec.bottom
                     + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
                        : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
+
+        if (const QDateTimeEdit *te = qobject_cast<const QDateTimeEdit*>(widget))
+        {
+          QString df = te->displayFormat();
+          if (df.contains("d") || df.contains("M") || df.contains("y")) // we don't know the longest text
+            s.rwidth() = defaultSize.width() + fspec.left + 2
+                                             + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right);
+        }
         /* This is a workaround for some apps (like Kdenlive with its
            TimecodeDisplay) that presuppose all spinboxes should have
            vertical buttons and set an insufficient minimum width for them. */

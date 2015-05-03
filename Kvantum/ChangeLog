@@ -12,6 +12,7 @@ V0.8.19
  * Fixes for LibreOffice with dark-and-light themes.
  * Give combobox text colors to its label if there is one.
  * No pale background for disabled menubar-items.
+ * Correct length for spinboxes with negative and/or double values and also for date-time-edits.
 
 V0.8.18
 ---------
