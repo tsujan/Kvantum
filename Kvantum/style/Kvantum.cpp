@@ -967,7 +967,8 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
       if (QDateTimeEdit *te = qobject_cast<QDateTimeEdit*>(o))
       {
         QString df = te->displayFormat();
-        if (df.contains("d") || df.contains("M") || df.contains("y"))
+        if (df.contains("d") || df.contains("M") || df.contains("y")
+            || df.contains("t") || df.contains("a",Qt::CaseInsensitive))
         { /* here we can't calculate the maximum text 
             length, so we rely on the default size */
           QStyleOptionSpinBox opt;
@@ -1103,9 +1104,20 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
   }
   else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit *>(sp))
   {
-    maxTxt = sb->displayFormat();
-    if (maxTxt.contains("d") || maxTxt.contains("M") || maxTxt.contains("y"))
+    if (maxTxt.contains("d") || maxTxt.contains("M") || maxTxt.contains("y")
+        || maxTxt.contains("t") || maxTxt.contains("a",Qt::CaseInsensitive))
       maxTxt = "d"; // longest text is meaningless here
+    else
+    {
+      maxTxt = sb->displayFormat();
+      /* take into account leading zeros */
+      QRegExp exp = QRegExp("hh|HH|mm|ss");
+      maxTxt.replace(exp,QString("00"));
+      exp = QRegExp("h|H|m|s");
+      maxTxt.replace(exp,QString("00"));
+      maxTxt.replace(QString("zzz"),QString("000"));
+      maxTxt.replace(QString("z"),QString("000"));
+    }
   }
   if (!maxTxt.isEmpty())
   {
@@ -6676,7 +6688,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
         if (const QDateTimeEdit *te = qobject_cast<const QDateTimeEdit*>(widget))
         {
           QString df = te->displayFormat();
-          if (df.contains("d") || df.contains("M") || df.contains("y")) // we don't know the longest text
+          if (df.contains("d") || df.contains("M") || df.contains("y")
+              || df.contains("t") || df.contains("a",Qt::CaseInsensitive)) // we don't know the longest text
             s.rwidth() = defaultSize.width() + fspec.left + 2
                                              + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right);
         }
