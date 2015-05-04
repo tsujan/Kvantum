@@ -958,26 +958,13 @@ bool Kvantum::eventFilter(QObject *o, QEvent *e)
   /* FIXME For some reason unknown to me (a Qt5 bug?), the Qt5 spinbox size hint
      is sometimes wrong as if Qt5 spinboxes don't have time to consult CT_SpinBox
      although they should (-> qabstractspinbox.cpp -> QAbstractSpinBox::sizeHint).
-     Here we force a minimum size by using CT_SpinBox when the maximum size isn't
-     set by the app or isn't smaller than our size. */
+     The same thing rarely happens with Qt4 too. Here we force a minimum size by
+     using CT_SpinBox when the maximum size isn't set by the app or isn't smaller
+     than our size. */
   case QEvent::ShowToParent:
     if (w && qobject_cast<QAbstractSpinBox*>(o))
     {
-      QSize size;
-      if (QDateTimeEdit *te = qobject_cast<QDateTimeEdit*>(o))
-      {
-        QString df = te->displayFormat();
-        if (df.contains("d") || df.contains("M") || df.contains("y")
-            || df.contains("t") || df.contains("a",Qt::CaseInsensitive))
-        { /* here we can't calculate the maximum text 
-            length, so we rely on the default size */
-          QStyleOptionSpinBox opt;
-          opt.initFrom(w);
-          size = sizeFromContents(CT_SpinBox,&opt,w->minimumSizeHint(),w);
-        }
-      }
-      if (!size.isValid())
-        size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
+      QSize size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
       if (w->maximumWidth() > size.width())
         w->setMinimumWidth(size.width());
       if (w->maximumHeight() > size.height())
@@ -1078,6 +1065,48 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
   return res;
 }
 
+/* get the widest day/month string if needed */
+static QString maxDay;
+static QString maxMonth;
+static QString maxFullDay;
+static QString maxFullMonth;
+static void getMaxDay(bool full)
+{
+  QString day;
+  int max = 0;
+  QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
+  for (int i=1; i<=7 ; ++i)
+  {
+    QString theDay = QLocale::system().dayName(i,format);
+    int size = QFontMetrics(QApplication::font()).width(theDay);
+    if (max < size)
+    {
+      max = size;
+      day = theDay;
+    }
+  }
+  if (full) maxFullDay = day;
+  else maxDay = day;
+}
+static void getMaxMonth(bool full)
+{
+  QString month;
+  int max = 0;
+  QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
+  for (int i=1; i<=12 ; ++i)
+  {
+    QString theMonth = QLocale::system().monthName(i,format);
+    int size = QFontMetrics(QApplication::font()).width(theMonth);
+    if (max < size)
+    {
+      max = size;
+      month = theMonth;
+    }
+  }
+  if (full) maxFullMonth = month;
+  else maxMonth = month;
+}
+
 static inline QString spinMaxText (const QAbstractSpinBox* sp)
 {
   QString maxTxt;
@@ -1104,19 +1133,50 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
   }
   else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit *>(sp))
   {
-    if (maxTxt.contains("d") || maxTxt.contains("M") || maxTxt.contains("y")
-        || maxTxt.contains("t") || maxTxt.contains("a",Qt::CaseInsensitive))
-      maxTxt = "d"; // longest text is meaningless here
-    else
+    maxTxt = sb->displayFormat();
+    /* take into account leading zeros */
+    QRegExp exp = QRegExp("hh|HH|mm|ss");
+    maxTxt.replace(exp,QString("00"));
+    exp = QRegExp("h|H|m|s");
+    maxTxt.replace(exp,QString("00"));
+    maxTxt.replace(QString("zzz"),QString("000"));
+    maxTxt.replace(QString("z"),QString("000"));
+    /* am/pm */
+    maxTxt.replace(QString("ap"),QString("pm"),Qt::CaseInsensitive);
+    maxTxt.replace(QString("a"),QString("pm"),Qt::CaseInsensitive);
+    /* these will be replaced later */
+    maxTxt.replace(QString("dddd"),QString("eeee"));
+    maxTxt.replace(QString("MMMM"),QString("ffff"));
+    maxTxt.replace(QString("ddd"),QString("eee"));
+    maxTxt.replace(QString("MMM"),QString("fff"));
+    /* leading zeros */
+    exp = QRegExp("dd|MM");
+    maxTxt.replace(exp,QString("00"));
+    exp = QRegExp("d|M");
+    maxTxt.replace(exp,QString("00"));
+    /* time zone */
+    maxTxt.replace(QString("t"),sb->dateTime().toString("t"));
+    /* full day/month name */
+    if (maxTxt.contains("eeee"))
     {
-      maxTxt = sb->displayFormat();
-      /* take into account leading zeros */
-      QRegExp exp = QRegExp("hh|HH|mm|ss");
-      maxTxt.replace(exp,QString("00"));
-      exp = QRegExp("h|H|m|s");
-      maxTxt.replace(exp,QString("00"));
-      maxTxt.replace(QString("zzz"),QString("000"));
-      maxTxt.replace(QString("z"),QString("000"));
+      if (maxFullDay.isNull()) getMaxDay(true);
+      maxTxt.replace(QString("eeee"),maxFullDay);
+    }
+    if (maxTxt.contains("ffff"))
+    {
+      if (maxFullMonth.isNull()) getMaxMonth(true);
+      maxTxt.replace(QString("ffff"),maxFullMonth);
+    }
+    /* short day/month name */
+    if (maxTxt.contains("eee"))
+    {
+      if (maxDay.isNull()) getMaxDay(false);
+      maxTxt.replace(QString("eee"),maxDay);
+    }
+    if (maxTxt.contains("fff"))
+    {
+      if (maxMonth.isNull()) getMaxMonth(false);
+      maxTxt.replace(QString("fff"),maxMonth);
     }
   }
   if (!maxTxt.isEmpty())
@@ -6684,15 +6744,6 @@ QSize Kvantum::sizeFromContents (ContentsType type,
                     lspec.top + lspec.bottom
                     + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
                        : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
-
-        if (const QDateTimeEdit *te = qobject_cast<const QDateTimeEdit*>(widget))
-        {
-          QString df = te->displayFormat();
-          if (df.contains("d") || df.contains("M") || df.contains("y")
-              || df.contains("t") || df.contains("a",Qt::CaseInsensitive)) // we don't know the longest text
-            s.rwidth() = defaultSize.width() + fspec.left + 2
-                                             + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right);
-        }
         /* This is a workaround for some apps (like Kdenlive with its
            TimecodeDisplay) that presuppose all spinboxes should have
            vertical buttons and set an insufficient minimum width for them. */
