@@ -3,6 +3,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QStyleFactory>
+#include <QDesktopWidget>
 #if QT_VERSION >= 0x050000
 #include <QFileDevice>
 #endif
@@ -57,6 +58,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
     connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
+
+    resize (sizeHint().expandedTo (QSize (600, 400)));
 }
 /*************************/
 KvantumManager::~KvantumManager()
@@ -417,6 +420,10 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
+    if (defaultSettings.contains ("scroll_arrows")) // it's true by default
+      ui->checkBoxScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
+    else
+      ui->checkBoxScrollArrow->setChecked (false);
     ui->checkBoxProgress->setChecked (defaultSettings.value ("textless_progressbar").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
@@ -481,11 +488,13 @@ void KvantumManager::resizeConfPage (bool thirdPage)
       le = false;
       ui->opaqueEdit->setEnabled (true);
   }
-  resize (size().expandedTo (sizeHint() + ui->opaqueEdit->sizeHint()
-                             + (thirdPage ?
-                                  ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
-                                    + QSize (ui->groupBox_4->minimumSizeHint().width(), ui->saveButton->sizeHint().height())
-                                  : QSize())));
+  QSize newSize  = size().expandedTo (sizeHint()
+                                      + (thirdPage ?
+                                           ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
+                                             + QSize (0, 3*ui->saveButton->sizeHint().height() + 10)
+                                           : QSize (ui->saveButton->sizeHint().width(), 0)));
+  newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
+  resize (newSize);
   if (!le) ui->opaqueEdit->setEnabled (false);
 }
 /*************************/
@@ -541,12 +550,12 @@ void KvantumManager::tabChanged (int index)
 
         if (kvconfigTheme.isEmpty())
         {
-            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
         }
         else
         {
-            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
             QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme);
             QString userSvg = QString ("%1/Kvantum/%2/%2.svg").arg (xdg_config_home).arg (kvconfigTheme);
             QString rootSvg = QString (DATADIR) + QString ("/Kvantum/%1/%1.svg").arg (kvconfigTheme);
@@ -557,7 +566,7 @@ void KvantumManager::tabChanged (int index)
                     /* a root theme with just an SVG image */
                     || (!QFile::exists (userSvg) && QFile::exists (rootSvg)))
                 {
-                    ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme));
+                    ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme));
                 }
             }
             showAnimated (ui->configLabel, 1000);
@@ -599,6 +608,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_tabs").toBool());
                 if (themeSettings.contains ("attach_active_tab"))
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
+                if (themeSettings.contains ("scroll_arrows"))
+                    ui->checkBoxScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("textless_progressbar"))
                     ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
@@ -957,6 +968,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
         themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
+        themeSettings.setValue ("scroll_arrows", !ui->checkBoxScrollArrow->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
@@ -993,7 +1005,7 @@ void KvantumManager::writeConfig()
         if (wasDefault && kvconfigTheme.endsWith ("#"))
         {
             ui->restoreButton->show();
-            ui->configLabel->setText (tr ("These are the most important keys.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme));
             showAnimated (ui->configLabel, 1000);
         }
 
@@ -1078,7 +1090,7 @@ void KvantumManager::popupBlurring (bool checked)
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.19</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.20</big></b></center><br>"\
                         "<center>A tool for intsalling, selecting and</center>\n"\
                         "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                         "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>"));

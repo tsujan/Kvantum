@@ -275,6 +275,9 @@ splitter_width                    integer             The width of splitter hand
 scroll_width                      integer             The width of scrollbars. The
                                                       default value is 12px.
 
+scroll_arrows                     true/false          Draw scrollbar add-line and sub-line
+                                                      arrows? True by default.
+
 slider_width                      integer             The width of sliders. The default
                                                       value is 8px.
 

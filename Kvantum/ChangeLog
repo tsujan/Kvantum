@@ -1,3 +1,9 @@
+V0.8.20
+---------
+ * Added a key for removing scrollbar arrows.
+ * Simplified transformations between horizontal and vertical elements.
+ * Changed the config page layout of Kvantum Manager.
+
 V0.8.19
 ---------
  * Eliminate any possibility of getting caught in infinite loops when forcing text colors of (tool-)buttons.

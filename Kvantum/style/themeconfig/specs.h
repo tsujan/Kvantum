@@ -83,6 +83,8 @@ typedef struct {
   int splitter_width;
   /* scrollbar width */
   int scroll_width;
+  /* draw scroll arrows? */
+  bool scroll_arrows;
 
   /* slider width */
   int slider_width;
@@ -296,6 +298,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;
+  tspec.scroll_arrows=true;
   tspec.slider_width = 8;
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;

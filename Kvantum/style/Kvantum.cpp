@@ -1483,8 +1483,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           {
             drawRaised = true; ispec.px = ispec.py = 0;
 
-            /* the disabled state is ugly
-               for grouped tool buttons */
+            /* the disabled state is ugly for grouped tool buttons */
             if (!(option->state & State_Enabled))
               painter->restore();
 
@@ -1496,9 +1495,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
               r.setRect(0, 0, h, w);
               painter->save();
               QTransform m;
-              m.translate(0, w);
               m.scale(1,-1);
-              m.translate(0, w);
               m.rotate(-90);
               painter->setTransform(m, true);
             }
@@ -2270,18 +2267,16 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         r.setRect(y, x, h, w);
         painter->save();
         QTransform m;
-        m.translate(w + 2*x, 0); // w+2*x is the width of vertical toolbar
-        m.rotate(90);
+        m.scale(1,-1);
+        m.rotate(-90);
         painter->setTransform(m, true);
       }
       if (element == PE_IndicatorToolBarHandle && tspec.center_toolbar_handle)
-      {
         renderIndicator(painter,r,fspec,dspec,dspec.element+"-handle");
-        break;
-      }
-      renderInterior(painter,r,fspec,ispec,
-                     dspec.element
-                       +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator"));
+      else
+        renderInterior(painter,r,fspec,ispec,
+                       dspec.element
+                         +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator"));
 
       if (!(option->state & State_Horizontal))
         painter->restore();
@@ -4278,14 +4273,13 @@ void Kvantum::drawControl(ControlElement element,
          lead to wrong results (like in Qt4 Designer) */
       if (h < w)
       {
-        painter->save();
         /* we enter x and y into our calculations because
            there may be more than one splitter handle */
         r.setRect(y, x, h, w);
+        painter->save();
         QTransform m;
-        m.translate(0, 2*y+h);
+        m.scale(1,-1);
         m.rotate(-90);
-        m.translate(2*y+h, 0); m.scale(-1,1);
         painter->setTransform(m, true);
       }
 
@@ -4361,12 +4355,11 @@ void Kvantum::drawControl(ControlElement element,
       {
         if (option->direction == Qt::RightToLeft)
           hrtl = true;
+        r.setRect(y, x, h, w);
         painter->save();
-        r.setRect(0, 0, h, w);
         QTransform m;
-        m.translate(x, h);
+        m.scale(1,-1);
         m.rotate(-90);
-        m.translate(h, 0); m.scale(-1,1);
         painter->setTransform(m, true);
       }
 
@@ -4538,9 +4531,8 @@ void Kvantum::drawControl(ControlElement element,
         r.setRect(0, 0, h, w);
         painter->save();
         QTransform m;
-        m.translate(w, 0);
-        m.rotate(90);
-        m.translate(0, w); m.scale(1,-1);
+        m.scale(1,-1);
+        m.rotate(-90);
         painter->setTransform(m, true);
       }
 
@@ -5194,14 +5186,13 @@ void Kvantum::drawControl(ControlElement element,
 
         if (hasVertTitle)
         {
-          painter->save();
           r.setRect(0, 0, h, w);
           tRect.setRect(tRect.y(), tRect.x(),
                         tRect.height(), tRect.width());
-          QTransform m;
-          m.translate(w, 0);
-          m.rotate(90);
-          m.translate(0, w); m.scale(1,-1);
+          painter->save();
+          QTransform m;          
+          m.scale(1,-1);
+          m.rotate(-90);
           painter->setTransform(m, true);
         }
 
@@ -5741,13 +5732,12 @@ void Kvantum::drawComplexControl(ComplexControl control,
         QRect r = o.rect;
         if (option->state & State_Horizontal)
         {
-          painter->save();
           int H = r.height();
           r.setRect(r.y(), r.x(), H, r.width());
+          painter->save();
           QTransform m;
-          m.translate(0, H);
+          m.scale(1,-1);
           m.rotate(-90);
-          m.translate(H, 0); m.scale(-1,1);
           painter->setTransform(m, true);
         }
 
@@ -5863,7 +5853,6 @@ void Kvantum::drawComplexControl(ComplexControl control,
         if (option->state & State_Horizontal)
         {
           int H = empty.height();
-          painter->save();
           grooveRect.setRect(grooveRect.y(), grooveRect.x(),
                              grooveRect.height(), grooveRect.width());
           if (!opt->upsideDown)
@@ -5876,10 +5865,10 @@ void Kvantum::drawComplexControl(ComplexControl control,
             empty.setRect(empty.y(), empty.x(), H, sliderCenter.x());
             full.setRect(full.y(), sliderCenter.x(), H, full.width());
           }
+          painter->save();
           QTransform m;
-          m.translate(0, H);
+          m.scale(1,-1);
           m.rotate(-90);
-          m.translate(H, 0); m.scale(-1,1);
           painter->setTransform(m, true);
         }
 
@@ -5927,12 +5916,11 @@ void Kvantum::drawComplexControl(ComplexControl control,
         QRect r = option->rect;
         if (option->state & State_Horizontal)
         {
-          painter->save();
           r.setRect(y, x, h, w);
+          painter->save();
           QTransform m;
-          m.translate(0, 2*y+h);
+          m.scale(1,-1);
           m.rotate(-90);
-          m.translate(2*y+h, 0); m.scale(-1,1);
           painter->setTransform(m, true);
         }
         if (status.startsWith("disabled"))
@@ -5996,19 +5984,18 @@ void Kvantum::drawComplexControl(ComplexControl control,
           if (option->state & State_Horizontal)
           {
             derive = true;
-            painter->save();
             int sY = r.y();
             int sH = r.height();
             r.setRect(sY, r.x(), sH, r.width());
+            painter->save();
             QTransform m;
             if (opt->tickPosition == QSlider::TicksAbove)
             {
               m.translate(0, 2*sY+sH);
               m.scale(1,-1);
             }
-            m.translate(0, 2*sY+sH);
+            m.scale(1,-1);
             m.rotate(-90);
-            m.translate(2*sY+sH, 0); m.scale(-1,1);
             painter->setTransform(m, true);
           }
           else if (opt->tickPosition == QSlider::TicksAbove)
@@ -8010,7 +7997,9 @@ QRect Kvantum::subControlRect(ComplexControl control,
        break;*/
 
     case CC_ScrollBar : {
-      const int extent = pixelMetric(PM_ScrollBarExtent,option,widget);
+      int extent = 0;
+      if (tspec.scroll_arrows)
+        extent = pixelMetric(PM_ScrollBarExtent,option,widget);
       const bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
         case SC_ScrollBarGroove :

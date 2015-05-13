@@ -405,6 +405,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.scroll_width = qMax(v.toInt(),0);
 
+  v = getValue("General","scroll_arrows", empty);
+  if (v.isValid()) // it's true by default
+    r.scroll_arrows = v.toBool();
+
   v = getValue("General","slider_width", empty);
   if (v.isValid())
     r.slider_width = qMax(v.toInt(),0);

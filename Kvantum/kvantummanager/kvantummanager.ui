@@ -266,324 +266,7 @@ this theme instead of its default theme.</string>
         <string>Configure Active Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="3" column="1">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="title">
-           <string>Compositing</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_6">
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="opaqueEdit">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables,
-whose windows should not be translucent.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxTrans">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Needs a translucent SVG background for windows.</string>
-             </property>
-             <property name="text">
-              <string>Translucent windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxComposite">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>If checked, menus, tooltips and windows
-will not have translucency or shadow.</string>
-             </property>
-             <property name="text">
-              <string>Disable composite effects</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxBlurWindow">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Needs KDE blur effect, a graphic card
-that supports it, and a translucent
-window SVG background.</string>
-             </property>
-             <property name="text">
-              <string>Blurring for translucent windows</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="opaqueLabel">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>A comma-separated list of executables
-whose windows should not be translucent.</string>
-             </property>
-             <property name="text">
-              <string>Opaque apps:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxBlurPopup">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Needs KDE blur effect, a graphic card that supports it,
-and translucent menu/tooltip SVG elements.
-
-Automatically checked if window blurring is enabled.</string>
-             </property>
-             <property name="text">
-              <string>Blurring for menus and tooltips</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="title">
-           <string>Miscellaneous</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <property name="topMargin">
-            <number>10</number>
-           </property>
-           <item row="8" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxRubber">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow. This
-option fills them with the highlight color.</string>
-             </property>
-             <property name="text">
-              <string>Fill rubber-band rectangles</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxProgress">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Progreesbars show percentage
-labels by default.</string>
-             </property>
-             <property name="text">
-              <string>Textless Progressbars</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxAttachTab">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Active tab is detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Attach active tab to tab widget</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxSpin">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>By default, spin indicators are drawn on adjacent buttons.
-Checking this puts the spin-up indicators above
-the spin-down one inside the spin line-edit.</string>
-             </property>
-             <property name="text">
-              <string>Vertical spin indicators</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxleftTab">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Tabs are centered by default.</string>
-             </property>
-             <property name="text">
-              <string>Left aligned tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxJoinTab">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Inactive tabs are detached by default.</string>
-             </property>
-             <property name="text">
-              <string>Join inactive tabs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxX11">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
-             </property>
-             <property name="text">
-              <string>X11 drag</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxMenuToolbar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>If checked, the menubar and toolbar will be drawn as a whole
-with the toolbar SVG element when they are adjacent to one another.</string>
-             </property>
-             <property name="text">
-              <string>Merge menubar with toolbar</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="1">
-            <widget class="QComboBox" name="comboToolButton">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxClick">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Activate view items always on double clicking?
-When unchecked, single-click will be preferred
-but KDE setting always has priority over this.</string>
-             </property>
-             <property name="text">
-              <string>Double-click for view items</string>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="0" colspan="2">
-            <widget class="QCheckBox" name="checkBoxMenubar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Mouse tracking is enabled
-for menubars by default.</string>
-             </property>
-             <property name="text">
-              <string>Mouse tracking for menubars</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-             </property>
-             <property name="text">
-              <string>Toolbutton style:</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="4">
+        <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="configLabel">
           <property name="text">
            <string>W&lt;br&gt;W&lt;br&gt;W</string>
@@ -595,6 +278,51 @@ Default is Follow Style.</string>
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
           </property>
          </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="12" column="0" colspan="2">
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="11" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="restoreButton">
@@ -616,150 +344,7 @@ settings of this theme.
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QGroupBox" name="groupBox">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>Uncheck these six boxes if you want all
-widgets to appear as they are by default.</string>
-          </property>
-          <property name="title">
-           <string>Hacks</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QCheckBox" name="checkBoxDolphin">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Merge Dolphin's view with its surroundings.</string>
-             </property>
-             <property name="text">
-              <string>Transparent Dolphin view</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxKonsole">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Blur the regions behind the transparent
-screens of Konsole and Yakuake if possible.</string>
-             </property>
-             <property name="text">
-              <string>Blurring for Konsole</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxKtitle">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Do not draw any background for KTitles.</string>
-             </property>
-             <property name="text">
-              <string>Transparent KTitle label</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxMenuTitle">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Do not draw any background for (KDE) menu titles.
-(Needs Logging out and in for Plasma menus.)</string>
-             </property>
-             <property name="text">
-              <string>Transparent menu title</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxKCapacity">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Style KDE capacity bars as progressbars.</string>
-             </property>
-             <property name="text">
-              <string>Show KCapacityBar as progressbar</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxDark">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Some apps may not respect dark themes.
-Kvantum can try to correct their behavior.</string>
-             </property>
-             <property name="text">
-              <string>Respect dark themes</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="9" column="0" colspan="4">
-         <spacer name="verticalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0" colspan="4">
-         <spacer name="verticalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="11" column="3" alignment="Qt::AlignRight">
+        <item row="11" column="1" alignment="Qt::AlignRight">
          <widget class="QPushButton" name="saveButton">
           <property name="toolTip">
            <string>Save this configuration
@@ -778,212 +363,563 @@ Kvantum can try to correct their behavior.</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="0" colspan="4">
-         <spacer name="verticalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="3" column="0" colspan="2">
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="2">
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="title">
-           <string>Icon Sizes</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_7">
-           <item row="0" column="0">
-            <widget class="QLabel" name="labelSmall">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects menu-items and headers.
-The default value is 16 px but
-KDE setting has priority over this.</string>
-             </property>
-             <property name="text">
-              <string>Small icon:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="labelLarge">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects icon views.
+          <widget class="QWidget" name="tab">
+           <property name="toolTip">
+            <string>Uncheck these six boxes if you want all
+widgets to appear as they are by default.</string>
+           </property>
+           <attribute name="title">
+            <string>Hacks</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="5" column="0">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="checkBoxDolphin">
+              <property name="toolTip">
+               <string>Merge Dolphin's view with its surroundings.</string>
+              </property>
+              <property name="text">
+               <string>Transparent Dolphin view</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="checkBoxKCapacity">
+              <property name="toolTip">
+               <string>Style KDE capacity bars as progressbars.</string>
+              </property>
+              <property name="text">
+               <string>Show KCapacityBar as progressbar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="checkBoxKonsole">
+              <property name="toolTip">
+               <string>Blur the regions behind the transparent
+screens of Konsole and Yakuake if possible.</string>
+              </property>
+              <property name="text">
+               <string>Blurring for Konsole</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="checkBoxDark">
+              <property name="toolTip">
+               <string>Some apps may not respect dark themes.
+Kvantum can try to correct their behavior.</string>
+              </property>
+              <property name="text">
+               <string>Respect dark themes</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="checkBoxMenuTitle">
+              <property name="toolTip">
+               <string>Do not draw any background for (KDE) menu titles.
+(Needs Logging out and in for Plasma menus.)</string>
+              </property>
+              <property name="text">
+               <string>Transparent menu title</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="checkBoxKtitle">
+              <property name="toolTip">
+               <string>Do not draw any background for KTitles.</string>
+              </property>
+              <property name="text">
+               <string>Transparent KTitle label</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Compositing</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="opaqueEdit">
+              <property name="toolTip">
+               <string>A comma-separated list of executables,
+whose windows should not be translucent.</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="opaqueLabel">
+              <property name="toolTip">
+               <string>A comma-separated list of executables
+whose windows should not be translucent.</string>
+              </property>
+              <property name="text">
+               <string>Opaque apps:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QCheckBox" name="checkBoxComposite">
+              <property name="toolTip">
+               <string>If checked, menus, tooltips and windows
+will not have translucency or shadow.</string>
+              </property>
+              <property name="text">
+               <string>Disable composite effects</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="2">
+             <widget class="QCheckBox" name="checkBoxBlurPopup">
+              <property name="toolTip">
+               <string>Needs KDE blur effect, a graphic card that supports it,
+and translucent menu/tooltip SVG elements.
+
+Automatically checked if window blurring is enabled.</string>
+              </property>
+              <property name="text">
+               <string>Blurring for menus and tooltips</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="2">
+             <widget class="QCheckBox" name="checkBoxTrans">
+              <property name="toolTip">
+               <string>Needs a translucent SVG background for windows.</string>
+              </property>
+              <property name="text">
+               <string>Translucent windows</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1" colspan="2">
+             <widget class="QCheckBox" name="checkBoxBlurWindow">
+              <property name="toolTip">
+               <string>Needs KDE blur effect, a graphic card
+that supports it, and a translucent
+window SVG background.</string>
+              </property>
+              <property name="text">
+               <string>Blurring for translucent windows</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="0">
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Icon Sizes</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_10">
+            <item row="2" column="2">
+             <widget class="QSpinBox" name="spinButton">
+              <property name="toolTip">
+               <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>16</number>
+              </property>
+              <property name="maximum">
+               <number>64</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="labelLarge">
+              <property name="toolTip">
+               <string>Affects icon views.
 The default value is 32 px but
 KDE setting has priority over this.</string>
-             </property>
-             <property name="text">
-              <string>Large icon:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="labelButton">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-             </property>
-             <property name="text">
-              <string>Button icon:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="spinSmall">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects menu-items and headers.
-The default value is 16 px but
-KDE setting has priority over this.</string>
-             </property>
-             <property name="suffix">
-              <string> px</string>
-             </property>
-             <property name="minimum">
-              <number>16</number>
-             </property>
-             <property name="maximum">
-              <number>48</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="spinLarge">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects icon views.
-The default value is 32 px but
-KDE setting has priority over this.</string>
-             </property>
-             <property name="suffix">
-              <string> px</string>
-             </property>
-             <property name="minimum">
-              <number>24</number>
-             </property>
-             <property name="maximum">
-              <number>128</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="spinButton">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-             </property>
-             <property name="suffix">
-              <string> px</string>
-             </property>
-             <property name="minimum">
-              <number>16</number>
-             </property>
-             <property name="maximum">
-              <number>64</number>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="labelToolbar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects toolbars.
+              </property>
+              <property name="text">
+               <string>Large icon:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QSpinBox" name="spinToolbar">
+              <property name="toolTip">
+               <string>Affects toolbars.
 The default value is 24 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
-             </property>
-             <property name="text">
-              <string>Toolbar icon:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QSpinBox" name="spinToolbar">
-             <property name="font">
-              <font>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Affects toolbars.
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>16</number>
+              </property>
+              <property name="maximum">
+               <number>64</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QSpinBox" name="spinSmall">
+              <property name="toolTip">
+               <string>Affects menu-items and headers.
+The default value is 16 px but
+KDE setting has priority over this.</string>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>16</number>
+              </property>
+              <property name="maximum">
+               <number>48</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="labelSmall">
+              <property name="toolTip">
+               <string>Affects menu-items and headers.
+The default value is 16 px but
+KDE setting has priority over this.</string>
+              </property>
+              <property name="text">
+               <string>Small icon:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="labelButton">
+              <property name="toolTip">
+               <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
+              </property>
+              <property name="text">
+               <string>Button icon:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QSpinBox" name="spinLarge">
+              <property name="toolTip">
+               <string>Affects icon views.
+The default value is 32 px but
+KDE setting has priority over this.</string>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>24</number>
+              </property>
+              <property name="maximum">
+               <number>128</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="labelToolbar">
+              <property name="toolTip">
+               <string>Affects toolbars.
 The default value is 24 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
-             </property>
-             <property name="suffix">
-              <string> px</string>
-             </property>
-             <property name="minimum">
-              <number>16</number>
-             </property>
-             <property name="maximum">
-              <number>64</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
+              </property>
+              <property name="text">
+               <string>Toolbar icon:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="3">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_4">
+           <attribute name="title">
+            <string>Miscellaneous</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_11">
+            <item row="12" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="toolTip">
+               <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+              </property>
+              <property name="text">
+               <string>Toolbutton style:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="2">
+             <widget class="QComboBox" name="comboToolButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxMenuToolbar">
+              <property name="toolTip">
+               <string>If checked, the menubar and toolbar will be drawn as a whole
+with the toolbar SVG element when they are adjacent to one another.</string>
+              </property>
+              <property name="text">
+               <string>Merge menubar with toolbar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxMenubar">
+              <property name="toolTip">
+               <string>Mouse tracking is enabled
+for menubars by default.</string>
+              </property>
+              <property name="text">
+               <string>Mouse tracking for menubars</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxRubber">
+              <property name="toolTip">
+               <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow. This
+option fills them with the highlight color.</string>
+              </property>
+              <property name="text">
+               <string>Fill rubber-band rectangles</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxProgress">
+              <property name="toolTip">
+               <string>Progreesbars show percentage
+labels by default.</string>
+              </property>
+              <property name="text">
+               <string>Textless Progressbars</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="0">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="6" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxScrollArrow">
+              <property name="toolTip">
+               <string>Scrollbars have add-line and sub-line arrows by default.</string>
+              </property>
+              <property name="text">
+               <string>No arrows for scrollbars</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxAttachTab">
+              <property name="toolTip">
+               <string>Active tab is detached by default.</string>
+              </property>
+              <property name="text">
+               <string>Attach active tab to tab widget</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxJoinTab">
+              <property name="toolTip">
+               <string>Inactive tabs are detached by default.</string>
+              </property>
+              <property name="text">
+               <string>Join inactive tabs</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxleftTab">
+              <property name="toolTip">
+               <string>Tabs are centered by default.</string>
+              </property>
+              <property name="text">
+               <string>Left aligned tabs</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxSpin">
+              <property name="toolTip">
+               <string>By default, spin indicators are drawn on adjacent buttons.
+Checking this puts the spin-up indicators above
+the spin-down one inside the spin line-edit.</string>
+              </property>
+              <property name="text">
+               <string>Vertical spin indicators</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxClick">
+              <property name="toolTip">
+               <string>Activate view items always on double clicking?
+When unchecked, single-click will be preferred
+but KDE setting always has priority over this.</string>
+              </property>
+              <property name="text">
+               <string>Double-click for view items</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxX11">
+              <property name="toolTip">
+               <string>Drag windows from anywhere possible?
+(Depends on X11)</string>
+              </property>
+              <property name="text">
+               <string>X11 drag</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="3">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="11" column="1">
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
-    </item>
-    <item row="1" column="2">
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>30</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item row="2" column="2" alignment="Qt::AlignRight">
      <widget class="QPushButton" name="quit">
@@ -1032,6 +968,22 @@ or update its preview.</string>
        </iconset>
       </property>
      </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>10</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>

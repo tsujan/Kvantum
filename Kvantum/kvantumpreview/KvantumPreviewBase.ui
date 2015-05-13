@@ -502,7 +502,7 @@ and arrow</string>
           <enum>Qt::ToolButtonTextBesideIcon</enum>
          </property>
          <property name="arrowType">
-          <enum>Qt::LeftArrow</enum>
+          <enum>Qt::UpArrow</enum>
          </property>
         </widget>
        </item>
@@ -549,7 +549,7 @@ and menu popup button</string>
           <enum>Qt::ToolButtonTextBesideIcon</enum>
          </property>
          <property name="arrowType">
-          <enum>Qt::LeftArrow</enum>
+          <enum>Qt::RightArrow</enum>
          </property>
         </widget>
        </item>
@@ -781,6 +781,12 @@ radio button</string>
            <height>32</height>
           </size>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item row="2" column="2">
@@ -801,6 +807,9 @@ radio button</string>
            <height>32</height>
           </size>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
          <property name="autoExclusive">
           <bool>false</bool>
          </property>
@@ -811,6 +820,9 @@ radio button</string>
          <property name="text">
           <string>Simple check box</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="3" column="2">
@@ -820,6 +832,9 @@ radio button</string>
          </property>
          <property name="text">
           <string>Simple check box</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
