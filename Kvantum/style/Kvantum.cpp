@@ -3963,6 +3963,7 @@ void Kvantum::drawControl(ControlElement element,
       const QString group = "Progressbar";
 
       frame_spec fspec = getFrameSpec(group);
+      fspec.left = fspec.right = qMin(fspec.left,fspec.right);
       const interior_spec ispec = getInteriorSpec(group);
       if (isKisSlider)
       {
@@ -4018,6 +4019,7 @@ void Kvantum::drawControl(ControlElement element,
 
         const QString group = "ProgressbarContents";
         frame_spec fspec = getFrameSpec(group);
+        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         const interior_spec ispec = getInteriorSpec(group);
         if (isKisSlider)
         {
@@ -4215,11 +4217,13 @@ void Kvantum::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec("Progressbar");
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
+        bool isVertical = false;
         int length = w;
         QRect r = option->rect;
 
         if (opt2 && opt2->orientation == Qt::Vertical)
         {
+          isVertical = true;
           length = h;
           r.setRect(0, 0, h, w);
           QTransform m;
@@ -4243,13 +4247,78 @@ void Kvantum::drawControl(ControlElement element,
           txt = fm.elidedText(txt, Qt::ElideRight, length);
         }
 
+        int state = option->state & State_Enabled ?
+                      (option->state & State_Selected) ? 4
+                      : option->state & State_MouseOver ? 2 : 1 : 0;
+
+        /* find the part inside the indicator */
+        QRect R;
+        QColor col(settings->getColorSpec().progressIndicatorTextColor);
+        if (state != 0 && !txt.isEmpty() && col.isValid())
+        {
+          QColor txtCol;
+          if (state == 1) txtCol = QColor(lspec.normalColor);
+          else if (state == 2) txtCol = QColor(lspec.focusColor);
+          else if (state == 4) txtCol = QColor(lspec.toggleColor);
+          // do nothing if the colors are the same
+          if ((!txtCol.isValid() || col != txtCol)
+              && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
+          {
+            int full = sliderPositionFromValue(opt->minimum,
+                                               opt->maximum,
+                                               qMax(opt->progress,opt->minimum),
+                                               length,
+                                               false);
+            bool inverted = false;
+            const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
+            if (pb && pb->invertedAppearance()) inverted = true;
+            if (!isVertical)
+            {
+              if (inverted)
+                R = r.adjusted(w-full,0,0,0);
+              else
+                R = r.adjusted(0,0,full-w,0);
+            }
+            else
+            {
+              if (inverted)
+              {
+                if (!opt2 || !opt2->bottomToTop)
+                  R = r.adjusted(0,0,full-h,0);
+                else
+                  R = r.adjusted(h-full,0,0,0);
+              }
+              else
+              {
+                if (!opt2 || !opt2->bottomToTop)
+                  R = r.adjusted(h-full,0,0,0);
+                else
+                  R = r.adjusted(0,0,full-h,0);
+              }
+            }
+          }
+        }
+
+        if (R.isValid())
+        {
+          painter->save();
+          painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
+        }
         renderLabel(painter,option->palette,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,
-                    option->state & State_Enabled ?
-                      (option->state & State_Selected) ? 4
-                      : option->state & State_MouseOver ? 2 : 1 : 0);
+                    Qt::AlignCenter,txt,QPalette::WindowText, state);
+        if (R.isValid())
+        {
+          painter->restore();
+          painter->save();
+          painter->setClipRect(R);
+          renderLabel(painter,option->palette,
+                      r,
+                      fspec,lspec,
+                      Qt::AlignCenter,txt,QPalette::WindowText,-1);
+          painter->restore();
+        }
       }
 
       break;
@@ -5305,6 +5374,7 @@ void Kvantum::drawControl(ControlElement element,
       {
         QStyleOptionProgressBar o(*opt);
         frame_spec fspec = getFrameSpec("Progressbar");
+        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         drawControl(CE_ProgressBarGroove, &o, painter, widget);
         if (!tspec.spread_progressbar)
           o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
@@ -7485,6 +7555,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
         return option->rect;
 
       frame_spec fspec = getFrameSpec("Progressbar");
+      fspec.left = fspec.right = qMin(fspec.left,fspec.right);
       // the vertical progressbar will be made out of the horizontal one
       const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
       if (pb && pb->orientation() == Qt::Vertical)
@@ -9260,6 +9331,23 @@ void Kvantum::renderLabel(
         for (int i=0; i<lspec.depth; i++)
           painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
         painter->restore();
+      }
+
+      if (state == -1)
+      {
+        QColor col(settings->getColorSpec().progressIndicatorTextColor);
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(col);
+          painter->drawText(rtext,talign,text);
+          painter->restore();
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
+          return;
+        }
       }
 
       QColor normalColor(lspec.normalColor);

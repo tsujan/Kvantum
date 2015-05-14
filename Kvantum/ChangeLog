@@ -3,6 +3,7 @@ V0.8.20
  * Added a key for removing scrollbar arrows.
  * Simplified transformations between horizontal and vertical elements.
  * Changed the config page layout of Kvantum Manager.
+ * Added a key for assigning a separate color to that part of the progress text, which is inside the progress indicator. (Useful when there isn't enough contrast between the progress text and indicator.)
 
 V0.8.19
 ---------

@@ -365,6 +365,12 @@ link.color                        string (#RRGGBB)    Obvious.
 
 link.visited.color                string (#RRGGBB)    Obvious.
 
+progress.indicator.text.color     string (#RRGGBB)    The color of that part of the progress
+                                                      text, which is inside the progress
+                                                      indicator. Useful when the progress
+                                                      text does not have enough contrast
+                                                      with the progress indicator.
+
                           *************************
                           *** The Hacks Section ***
                           *************************

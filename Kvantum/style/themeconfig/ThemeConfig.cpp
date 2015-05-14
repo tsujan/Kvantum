@@ -518,6 +518,9 @@ color_spec ThemeConfig::getColorSpec() const
   v = getValue("GeneralColors","link.visited.color");
   r.linkVisitedColor = v.toString();
 
+  v = getValue("GeneralColors","progress.indicator.text.color");
+  r.progressIndicatorTextColor = v.toString();
+
   return r;
 }
 

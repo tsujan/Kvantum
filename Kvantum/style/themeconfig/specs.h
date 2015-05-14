@@ -129,6 +129,7 @@ typedef struct {
   QString highlightTextColor;
   QString linkColor;
   QString linkVisitedColor;
+  QString progressIndicatorTextColor;
 } color_spec;
 
 /* Hacks */
@@ -332,6 +333,7 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.highlightTextColor = QString();
   cspec.linkColor = QString();
   cspec.linkVisitedColor = QString();
+  cspec.progressIndicatorTextColor = QString();
 }
 
 /* Fills the hacks spec with default values */
