@@ -4203,10 +4203,7 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
-      if (tspec.textless_progressbar ||
-          (tspec.progressbar_thickness > 0
-           && !isKisSlider && (!widget || !widget->inherits("KCapacityBar"))))
-        break;
+      if (tspec.textless_progressbar) break;
 
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
@@ -4220,6 +4217,9 @@ void Kvantum::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec("Progressbar");
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
+        QFont f(painter->font());
+        if (lspec.boldFont) f.setBold(true);
+        QFontMetrics fm(f);
         bool isVertical = false;
         int length = w;
         QRect r = option->rect;
@@ -4241,14 +4241,13 @@ void Kvantum::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
 
-        QFont f(painter->font());
+        if (tspec.progressbar_thickness > 0
+            && fm.height() >= (isVertical ? w : h))
+          break;
+
         QString txt = opt->text;
         if (!txt.isEmpty())
-        {
-          if (lspec.boldFont) f.setBold(true);
-          QFontMetrics fm(f);
           txt = fm.elidedText(txt, Qt::ElideRight, length);
-        }
 
         int state = option->state & State_Enabled ?
                       (option->state & State_Selected) ? 4

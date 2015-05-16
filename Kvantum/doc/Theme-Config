@@ -216,17 +216,16 @@ spread_progressbar                true/false          Spread progressbar's indic
                                                       the indicator is drawn inside
                                                       progressbar's frame.
 
-textless_progressbar              true/false          No percentage label for progress
-                                                      bars? They have percentage labels
-                                                      by default, unless the value of
-                                                      the following key is positive.
+textless_progressbar              true/false          No percentage label for progressbars?
+                                                      They have percentage labels by
+                                                      default -- unless the labels do not
+                                                      fit into the bars because of a small
+                                                      value for the following key.
 
 progressbar_thickness             integer             If positive, it sets the (maximum)
-                                                      progressbar thickness and removes
-                                                      the text, even when the value of
-                                                      "textless_progressbar" is false. It
-                                                      is zero by default, which means there
-                                                      is no limit to progressbar thickness.
+                                                      progressbar thickness. It is zero
+                                                      by default, which means there is no
+                                                      limit to progressbar thickness.
 
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
