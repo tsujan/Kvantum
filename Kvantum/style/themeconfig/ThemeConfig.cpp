@@ -330,6 +330,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","textless_progressbar", empty);
   r.textless_progressbar = v.toBool();
 
+  v = getValue("General","progressbar_thickness", empty);
+  r.progressbar_thickness = v.toInt();
+
   v = getValue("General","menubar_mouse_tracking", empty);
   if (v.isValid()) // it's true by default
     r.menubar_mouse_tracking = v.toBool();

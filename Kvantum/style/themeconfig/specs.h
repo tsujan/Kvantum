@@ -61,6 +61,8 @@ typedef struct {
   bool spread_progressbar;
   /* no percentage label for progressbars? */
   bool textless_progressbar;
+  /* thin progressbars? */
+  int progressbar_thickness;
   /* enable mouse tracking in menubars? */
   bool menubar_mouse_tracking;
   /* use composite effects
@@ -289,6 +291,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.toolbutton_style = 0;
   tspec.spread_progressbar = false;
   tspec.textless_progressbar = false;
+  tspec.progressbar_thickness = 0;
   tspec.menubar_mouse_tracking = true;
   tspec.composite = false;
   tspec.translucent_windows = false;

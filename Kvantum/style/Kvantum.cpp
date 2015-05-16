@@ -3981,7 +3981,7 @@ void Kvantum::drawControl(ControlElement element,
       {
         /* we don't save and restore the painter to draw
            the contents and the label correctly below */
-        r.setRect(0, 0, h, w);
+        r.setRect(y, x, h, w);
         QTransform m;
         m.scale(-1,1);
         m.rotate(90);
@@ -4203,7 +4203,10 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
-      if (tspec.textless_progressbar) break;
+      if (tspec.textless_progressbar ||
+          (tspec.progressbar_thickness > 0
+           && !isKisSlider && (!widget || !widget->inherits("KCapacityBar"))))
+        break;
 
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
@@ -7401,6 +7404,21 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       break;
     }
 
+    /*case CT_ProgressBar : {
+      s = defaultSize;
+      if (!isKisSlider && tspec.progressbar_thickness > 0)
+      {
+        const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
+        if (pb && pb->orientation() == Qt::Vertical)
+          s.rwidth() = qMin(tspec.progressbar_thickness,s.width());
+        else
+          s.rheight() = qMin(tspec.progressbar_thickness,s.height());
+        return s;
+      }
+
+      break;
+    }*/
+
     default : return defaultSize;
   }
 
@@ -7531,9 +7549,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
     case SE_SliderFocusRect :
     case SE_ItemViewItemFocusRect : return QRect();
 
-    case SE_ProgressBarGroove :
-    case SE_HeaderLabel :
-    case SE_ProgressBarLabel : return option->rect;
+    case SE_HeaderLabel : return option->rect;
 
     case SE_HeaderArrow : {
       const QString group = "HeaderSection";
@@ -7550,9 +7566,25 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
                          option->rect);
     }
 
+    case SE_ProgressBarGroove :
+    case SE_ProgressBarLabel : {
+       QRect r = option->rect;
+       if (!isKisSlider && tspec.progressbar_thickness > 0)
+       {
+         const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
+         QSize s;
+         if (pb && pb->orientation() == Qt::Vertical)
+           s = QSize(qMin(tspec.progressbar_thickness,r.width()),r.height());
+         else
+           s = QSize(r.width(),qMin(tspec.progressbar_thickness,r.height()));
+         r = alignedRect(QApplication::layoutDirection(),Qt::AlignCenter,s,r);
+       }
+       return r;
+    }
+
     case SE_ProgressBarContents : {
       if (tspec.spread_progressbar)
-        return option->rect;
+        return subElementRect(SE_ProgressBarGroove,option,widget);
 
       frame_spec fspec = getFrameSpec("Progressbar");
       fspec.left = fspec.right = qMin(fspec.left,fspec.right);
@@ -7568,7 +7600,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
         fspec.right = bottom;
       }
 
-      return interiorRect(option->rect, fspec);
+      return interiorRect(subElementRect(SE_ProgressBarGroove,option,widget), fspec);
     }
 
     case SE_LineEditContents : {
@@ -8845,17 +8877,17 @@ void Kvantum::renderFrame(QPainter *painter,
       if (fspec.capsuleH == -1)
       {
         Left = X;
-        Right = fspec.right;
+        Right = qMin(fspec.right,w/2);
       }
       else if (fspec.capsuleH == 1)
       {
         Right = X;
-        Left = fspec.left;
+        Left = qMin(fspec.left,w/2);
       }
       else
       {
-        Left = fspec.left;
-        Right = fspec.right;
+        Left = qMin(fspec.left,w/2);
+        Right = qMin(fspec.right,w/2);
       }
     }
     QString element0(element);
@@ -8864,10 +8896,10 @@ void Kvantum::renderFrame(QPainter *painter,
   }
   else
   {
-    Left = fspec.left;
-    Top = fspec.top;
-    Right = fspec.right;
-    Bottom = fspec.bottom;
+    Left = qMin(fspec.left,w/2);
+    Top = qMin(fspec.top,h/2);
+    Right = qMin(fspec.right,w/2);
+    Bottom = qMin(fspec.bottom,h/2);
 
     if (Left ==0 && Top == 0 && Right == 0 && Bottom == 0) return;
   }
