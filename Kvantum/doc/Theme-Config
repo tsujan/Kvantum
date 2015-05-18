@@ -283,7 +283,10 @@ scroll_width                      integer             The width of scrollbars. T
                                                       default value is 12px.
 
 scroll_arrows                     true/false          Draw scrollbar add-line and sub-line
-                                                      arrows? True by default.
+                                                      arrows? True by default. If set to
+                                                      false, it will remove scroll arrows
+                                                      as far as possible but some apps might
+                                                      still force scroll arrows.
 
 slider_width                      integer             The width of sliders. The default
                                                       value is 8px.

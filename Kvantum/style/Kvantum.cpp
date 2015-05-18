@@ -4381,6 +4381,8 @@ void Kvantum::drawControl(ControlElement element,
 
     case CE_ScrollBarAddLine :
     case CE_ScrollBarSubLine : {
+      QRect r = option->rect;
+      if (!r.isValid()) return;
       bool add = true;
       if (element == CE_ScrollBarSubLine)
         add = false;
@@ -4420,7 +4422,6 @@ void Kvantum::drawControl(ControlElement element,
         }
       }
 
-      QRect r = option->rect;
       bool hrtl = false;
       if (option->state & State_Horizontal)
       {
@@ -5802,10 +5803,16 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarGroove,widget);
         QRect r = o.rect;
-        if (option->state & State_Horizontal)
+        bool horiz = (option->state & State_Horizontal);
+        /* arrows may be forced by another style, as in Gwenview
+          (-> CC_ScrollBar at drawComplexControl) */
+        int extent = pixelMetric(PM_ScrollBarExtent,option,widget);
+        int arrowSize = 0;
+        if (!tspec.scroll_arrows && (horiz ? r.width() == w-2*extent : r.height() == h-2*extent))
+          arrowSize = extent;
+        if (horiz)
         {
-          int H = r.height();
-          r.setRect(r.y(), r.x(), H, r.width());
+          r.setRect(r.y(), r.x(), r.height(), r.width());
           painter->save();
           QTransform m;
           m.scale(1,-1);
@@ -5836,9 +5843,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
         if (!status.startsWith("disabled"))
         {
           const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
-          int glowH = 2*pixelMetric(PM_ScrollBarExtent);
+          int glowH = 2*extent;
           int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
-          if (option->state & State_Horizontal)
+          if (horiz)
           {
             topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
             bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
@@ -5865,13 +5872,31 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
         drawControl(CE_ScrollBarSlider,&o,painter,widget);
 
-        if (option->state & State_Horizontal)
+        if (horiz)
           painter->restore();
 
-        o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarAddLine,widget);
+        if (arrowSize > 0)
+        {
+          if (horiz)
+            o.rect = QRect(option->direction == Qt::RightToLeft ? x : x+w-arrowSize, y,
+                           arrowSize, arrowSize);
+          else
+            o.rect = QRect(x, y+h-arrowSize, arrowSize, arrowSize);
+        }
+        else
+          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarAddLine,widget);
         drawControl(CE_ScrollBarAddLine,&o,painter,widget);
 
-        o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
+        if (arrowSize > 0)
+        {
+          if (horiz)
+            o.rect = QRect(option->direction == Qt::RightToLeft ? x+w-arrowSize : x, y,
+                           arrowSize, arrowSize);
+          else
+            o.rect = QRect(x, y, arrowSize, arrowSize);
+        }
+        else
+          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
         drawControl(CE_ScrollBarSubLine,&o,painter,widget);
       }
 
@@ -8099,66 +8124,94 @@ QRect Kvantum::subControlRect(ComplexControl control,
        break;*/
 
     case CC_ScrollBar : {
-      int extent = 0;
-      if (tspec.scroll_arrows)
-        extent = pixelMetric(PM_ScrollBarExtent,option,widget);
-      const bool horiz = (option->state & State_Horizontal);
+      const QStyleOptionSlider *opt =
+          qstyleoption_cast<const QStyleOptionSlider *>(option);
+      if (!opt) break;;
+
+      int extent = pixelMetric(PM_ScrollBarExtent,option,widget);
+      int arrowSize = 0;
+      if (tspec.scroll_arrows
+          /* when arrows are present in a different style, as in Gwenview */
+          || (widget && widget->style() != this
+              && subControl != SC_ScrollBarSubLine && subControl != SC_ScrollBarAddLine // no infinite loop
+              && widget->style()->subControlRect(CC_ScrollBar,option,SC_ScrollBarSubLine,widget).isValid()))
+      {
+        arrowSize = extent;
+      }
+      bool horiz = (option->state & State_Horizontal);
+
+      int maxLength = 0; // max slider length
+      int length = 0; // slider length
+      int start = 0; // slider start
+      if (subControl == SC_ScrollBarSlider
+          || subControl == SC_ScrollBarAddPage
+          || subControl == SC_ScrollBarSubPage)
+      {
+        QRect r = subControlRect(CC_ScrollBar,option,SC_ScrollBarGroove,widget);
+        r.getRect(&x,&y,&w,&h);
+
+        const int minLength = pixelMetric(PM_ScrollBarSliderMin,option,widget);
+        if (horiz)
+          maxLength = w;
+        else
+          maxLength = h;
+        const int valueRange = opt->maximum - opt->minimum;
+        length = maxLength;
+        if (opt->minimum != opt->maximum)
+        {
+          length = (opt->pageStep*maxLength) / (valueRange+opt->pageStep);
+
+          if ((length < minLength) || (valueRange > INT_MAX/2))
+            length = minLength;
+          if (length > maxLength)
+            length = maxLength;
+        }
+
+        start = sliderPositionFromValue(opt->minimum,
+                                        opt->maximum,
+                                        opt->sliderPosition,
+                                        maxLength - length,
+                                        opt->upsideDown);
+      }
+
       switch (subControl) {
         case SC_ScrollBarGroove :
           if (horiz)
-            return QRect(x+extent,y,w-2*extent,h);
+            return QRect(x+arrowSize, y, w-2*arrowSize, h);
           else
-            return QRect(x,y+extent,w,h-2*extent);
+            return QRect(x, y+arrowSize, w, h-2*arrowSize);
         case SC_ScrollBarSubLine :
           if (horiz)
-            return QRect(option->direction == Qt::RightToLeft ? x+w-extent : x,
-                         y,extent,extent);
+            return QRect(option->direction == Qt::RightToLeft ? x+w-arrowSize : x, y,
+                         arrowSize, arrowSize);
           else
-            return QRect(x,y,extent,extent);
+            return QRect(x, y, arrowSize, arrowSize);
         case SC_ScrollBarAddLine :
           if (horiz)
-            return QRect(option->direction == Qt::RightToLeft ? x : x+w-extent,
-                         y,extent,extent);
+            return QRect(option->direction == Qt::RightToLeft ? x : x+w-arrowSize, y,
+                         arrowSize, arrowSize);
           else
-            return QRect(x,y+h-extent,extent,extent);
+            return QRect(x, y+h-arrowSize, arrowSize, arrowSize);
         case SC_ScrollBarSlider : {
-          const QStyleOptionSlider *opt =
-              qstyleoption_cast<const QStyleOptionSlider *>(option);
-
-          if (opt)
-          {
-            QRect r = subControlRect(CC_ScrollBar,option,SC_ScrollBarGroove,widget);
-            r.getRect(&x,&y,&w,&h);
-
-            const int minLength = pixelMetric(PM_ScrollBarSliderMin,option,widget);
-            int maxLength; // max slider length
-            if (horiz)
-              maxLength = w;
-            else
-              maxLength = h;
-            const int valueRange = opt->maximum - opt->minimum;
-            int length = maxLength;
-            if (opt->minimum != opt->maximum)
-            {
-              length = (opt->pageStep*maxLength) / (valueRange+opt->pageStep);
-
-              if ((length < minLength) || (valueRange > INT_MAX/2))
-                length = minLength;
-              if (length > maxLength)
-                length = maxLength;
-            }
-
-            const int start = sliderPositionFromValue(opt->minimum,
-                                                      opt->maximum,
-                                                      opt->sliderPosition,
-                                                      maxLength - length,
-                                                      opt->upsideDown);
-            if (horiz)
-              return QRect(opt->direction == Qt::RightToLeft ? x+w-start-length : x+start,
-                           y,length,h);
-            else
-              return QRect(x,y+start,w,length);
-          }
+          if (horiz)
+            return QRect(opt->direction == Qt::RightToLeft ? x+w-start-length : x+start, y,
+                         length, h);
+          else
+            return QRect(x, y+start, w, length);
+        }
+        case SC_ScrollBarAddPage : {
+          if (horiz)
+            return QRect(arrowSize+start+length, 0,
+                         maxLength-start-length, extent);
+          else
+            return QRect(0, arrowSize+start+length,
+                         extent, maxLength-start-length);
+        }
+        case SC_ScrollBarSubPage : {
+          if (horiz)
+            return QRect(arrowSize, 0, start, extent);
+          else
+            return QRect(0, arrowSize, extent, start);
         }
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
@@ -8171,7 +8224,7 @@ QRect Kvantum::subControlRect(ComplexControl control,
       const QStyleOptionSlider *opt =
         qstyleoption_cast<const QStyleOptionSlider *>(option);
       int halfTick = SLIDER_TICK_SIZE/2;
-      const bool horiz = (option->state & State_Horizontal);
+      bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
         case SC_SliderGroove : {
           if (opt)
