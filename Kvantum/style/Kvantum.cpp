@@ -3960,7 +3960,10 @@ void Kvantum::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarGroove : {
-      const QString group = "Progressbar";
+      QString group;
+      if (tspec.vertical_spin_indicators && isKisSlider)
+        group = "LineEdit";
+      else group = "Progressbar";
 
       frame_spec fspec = getFrameSpec(group);
       fspec.left = fspec.right = qMin(fspec.left,fspec.right);
@@ -3970,6 +3973,11 @@ void Kvantum::drawControl(ControlElement element,
         fspec.hasCapsule = true;
         fspec.capsuleH = -1;
         fspec.capsuleV = 2;
+        if (tspec.vertical_spin_indicators)
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
+        }
       }
 
       QRect r = option->rect;
@@ -4030,9 +4038,17 @@ void Kvantum::drawControl(ControlElement element,
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
-        const frame_spec fspec1 = getFrameSpec("Progressbar");
-        fspec.expansion = fspec1.expansion - (tspec.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
-        if (fspec.expansion >= qMin(h,w)) isRounded = true;
+        if (tspec.vertical_spin_indicators && isKisSlider)
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.expansion = 0;
+        }
+        else
+        {
+          const frame_spec fspec1 = getFrameSpec("Progressbar");
+          fspec.expansion = fspec1.expansion - (tspec.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
+          if (fspec.expansion >= qMin(h,w)) isRounded = true;
+        }
 
         bool isVertical = false;
         bool inverted = false;
@@ -5556,7 +5572,9 @@ void Kvantum::drawComplexControl(ComplexControl control,
           fspec.expansion = 0;
           QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           r.setHeight(subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget).height());
-          QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
+          QString leStatus;
+          if (isKisSlider) leStatus = "normal";
+          else leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
           if (isInactive)
             leStatus .append(QString("-inactive"));
           if (status.startsWith("disabled"))
@@ -8881,7 +8899,9 @@ void Kvantum::renderFrame(QPainter *painter,
   QString element1(element);
   int e = grouped ? h : qMin(h,w);
   if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
-      && (!fspec.hasCapsule || fspec.capsuleV == 2))
+      && (!fspec.hasCapsule || fspec.capsuleV == 2)
+      /* there's no right/left expanded element */
+      && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
   {
     if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     {
@@ -8924,7 +8944,7 @@ void Kvantum::renderFrame(QPainter *painter,
           Bottom = (h-1)/2;
         }
       }
-      else
+      else // this never happens
           X = Top = Bottom = w;
       if (fspec.capsuleH == -1)
       {
@@ -9255,9 +9275,12 @@ void Kvantum::renderInterior(QPainter *painter,
   if (!bounds.isValid() || !ispec.hasInterior)
     return;
 
-  int e = grouped ? bounds.height() : qMin(bounds.height(),bounds.width());
+  int w = bounds.width(); int h = bounds.height();
+  int e = grouped ? h : qMin(h,w);
   if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
-      && (!fspec.hasCapsule || fspec.capsuleV == 2))
+      && (!fspec.hasCapsule || fspec.capsuleV == 2)
+      /* there's no right/left expanded element */
+      && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
     return;
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
