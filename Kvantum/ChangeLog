@@ -5,6 +5,10 @@ V0.8.20
  * Changed the config page layout of Kvantum Manager.
  * Added a key for assigning a separate color to that part of the progress text, which is inside the progress indicator. (Useful when there isn't enough contrast between the progress text and indicator.)
  * Added a key for setting the maximum thickness of progressbars.
+ * Increased text margins of the default theme (because of size changes in v0.8.18).
+ * Fit adjacent header sections together.
+ * To know about RTL, ask the widget, not the app.
+ * Take into account all exceptional situations with Kvantum Manager.
 
 V0.8.19
 ---------

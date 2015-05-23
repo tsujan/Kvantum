@@ -25,7 +25,7 @@ button.color=#494949
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#303030
+mid.color=#3C3C3C
 highlight.color=#737373
 inactive.highlight.color=#4A4A4A
 tooltip.base.color=black
@@ -59,10 +59,10 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=2
-text.margin.bottom=2
-text.margin.left=3
-text.margin.right=3
+text.margin.top=3
+text.margin.bottom=3
+text.margin.left=4
+text.margin.right=4
 text.shadow.xshift=2
 text.shadow.yshift=2
 text.shadow.color=#000000
@@ -84,6 +84,10 @@ interior=true
 interior.element=dock
 text.focus.color=white
 text.bold=true
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -94,15 +98,23 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-indicator.size=8
+indicator.size=9
 
 [RadioButton]
 inherits=PanelButtonCommand
 interior.element=radio
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
 
 [CheckBox]
 inherits=PanelButtonCommand
 interior.element=checkbox
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
 
 [Focus]
 inherits=PanelButtonCommand
@@ -137,8 +149,6 @@ inherits=PanelButtonCommand
 interior.element=tab
 text.margin.left=8
 text.margin.right=8
-text.margin.top=3
-text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
 frame.top=2
@@ -159,11 +169,6 @@ indicator.size=7
 
 [HeaderSection]
 inherits=PanelButtonCommand
-frame.element=header
-frame.top=3
-frame.bottom=3
-frame.left=1
-frame.right=1
 
 [SizeGrip]
 inherits=PanelButtonCommand
@@ -172,7 +177,6 @@ inherits=PanelButtonCommand
 inherits=PanelButtonCommand
 indicator.element=toolbar
 indicator.size=5
-text.margin=0
 frame.element=toolbar
 interior.element=toolbar
 
@@ -198,7 +202,6 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-text.margin=0
 text.focus.color=white
 text.bold=true
 
@@ -261,6 +264,10 @@ interior.element=menuitem
 indicator.element=menuitem
 size.minheight=22
 text.focus.color=#4DA6FF
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -270,8 +277,8 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-text.margin.left=4
-text.margin.right=4
+text.margin.top=2
+text.margin.bottom=2
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -290,6 +297,10 @@ indicator.size=12
 indicator.element=mdi
 text.normal.color=black
 text.focus.color=white
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
 
 [ComboBox]
 inherits=PanelButtonCommand

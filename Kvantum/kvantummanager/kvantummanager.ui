@@ -327,7 +327,7 @@ this theme instead of its default theme.</string>
         <item row="11" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="restoreButton">
           <property name="toolTip">
-           <string>Revert to the default
+           <string>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</string>
           </property>
