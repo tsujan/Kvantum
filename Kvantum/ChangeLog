@@ -9,6 +9,8 @@ V0.8.20
  * Fit adjacent header sections together.
  * To know about RTL, ask the widget, not the app.
  * Take into account all exceptional situations with Kvantum Manager.
+ * No need to normal and disabled menuitem panels.
+ * Improved "Theme-Making.pdf", especially its Indicators section.
 
 V0.8.19
 ---------

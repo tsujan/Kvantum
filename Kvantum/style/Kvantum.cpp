@@ -3090,8 +3090,12 @@ void Kvantum::drawControl(ControlElement element,
             painter->save();
             painter->setOpacity(0.5);
           }
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          /* don't draw panel for normal and disabled states */
+          if (!status.startsWith("normal") && !status.startsWith("disabled"))
+          {
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+          }
           if (libreoffice) painter->restore();
 
           const QStringList l = opt->text.split('\t');
@@ -4046,7 +4050,12 @@ void Kvantum::drawControl(ControlElement element,
 
         const QString group = "ProgressbarContents";
         frame_spec fspec = getFrameSpec(group);
-        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+        if (isKisSlider)
+          fspec.right = 0;
+        else
+        {
+          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+        }
         const interior_spec ispec = getInteriorSpec(group);
         if (isKisSlider)
         {
@@ -7748,7 +7757,12 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
         return subElementRect(SE_ProgressBarGroove,option,widget);
 
       frame_spec fspec = getFrameSpec("Progressbar");
-      fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+      if (isKisSlider)
+        fspec.right = 0;
+      else
+      {
+        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+      }
       // the vertical progressbar will be made out of the horizontal one
       const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
       if (pb && pb->orientation() == Qt::Vertical)

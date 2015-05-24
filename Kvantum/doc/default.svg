@@ -32,8 +32,8 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1"
-     inkscape:cx="231.51312"
-     inkscape:cy="1016.0198"
+     inkscape:cx="179.4849"
+     inkscape:cy="1009.2742"
      inkscape:window-x="279"
      inkscape:window-y="96"
      inkscape:current-layer="svg2"
@@ -6315,75 +6315,6 @@
      d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9"
      inkscape:label="#rect7716" />
   <rect
-     inkscape:label="#rect14388"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0"
-     id="menuitem-normal-left"
-     y="909.19531"
-     x="76.67466"
-     height="8"
-     width="4" />
-  <rect
-     inkscape:label="#rect14390"
-     width="4"
-     height="8"
-     x="92.67466"
-     y="909.19531"
-     id="menuitem-normal-right"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0" />
-  <rect
-     inkscape:label="#rect14392"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0"
-     id="menuitem-normal-topright"
-     y="903.19531"
-     x="92.67466"
-     height="4"
-     width="4" />
-  <rect
-     inkscape:label="#rect14394"
-     width="4"
-     height="4"
-     x="92.67466"
-     y="919.19531"
-     id="menuitem-normal-bottomright"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0" />
-  <rect
-     inkscape:label="#rect14396"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0"
-     id="menuitem-normal-bottomleft"
-     y="919.19531"
-     x="76.67466"
-     height="4"
-     width="4" />
-  <rect
-     inkscape:label="#rect14398"
-     width="4"
-     height="4"
-     x="76.67466"
-     y="903.19531"
-     id="menuitem-normal-topleft"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0" />
-  <rect
-     inkscape:label="#rect14381"
-     style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none;opacity:0"
-     id="menuitem-normal-top"
-     y="903.19531"
-     x="82.67466"
-     height="4"
-     width="8" />
-  <g
-     style="fill:#f4f4f4;fill-opacity:1;opacity:0"
-     id="menuitem-normal-bottom"
-     transform="matrix(0.26666667,0,0,0.36363636,55.341327,909.24534)"
-     inkscape:label="#g14379">
-    <rect
-       style="fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect9636"
-       y="27.362183"
-       x="102.5"
-       height="11"
-       width="30" />
-  </g>
-  <rect
      inkscape:label="#rect7606"
      y="1805.1184"
      x="138.25496"
@@ -7453,26 +7384,6 @@
      width="30"
      id="button-focused"
      style="fill:url(#linearGradient6555);fill-opacity:1;fill-rule:nonzero;stroke:none" />
-  <path
-     inkscape:label="#rect7089"
-     sodipodi:nodetypes="ccccc"
-     inkscape:connector-curvature="0"
-     id="menuitem-normal"
-     d="m 82.424657,909.40034 8,0 0,8 -8,0 z"
-     style="opacity:0;fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none" />
-  <g
-     style="opacity:0;fill:#3e3e3e;fill-opacity:1"
-     transform="matrix(2,0,0,0.66666666,323.38582,891.56524)"
-     inkscape:label="#g5330"
-     id="menuitem-disabled">
-    <rect
-       style="opacity:0.8;fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect7239"
-       width="15"
-       height="15"
-       x="-59"
-       y="28.362183" />
-  </g>
   <rect
      style="fill:url(#linearGradient7386);fill-opacity:1;fill-rule:evenodd;stroke:none"
      id="group-normal-left"
@@ -10137,13 +10048,6 @@
        id="rect9087"
        style="opacity:0.2;fill:url(#linearGradient9091);fill-opacity:1;fill-rule:evenodd;stroke:none" />
   </g>
-  <path
-     style="opacity:0;fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     d="m 282.80671,905.67454 8,0 0,8 -8,0 z"
-     id="menubaritem-normal"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccccc"
-     inkscape:label="#rect7089" />
   <rect
      y="904.2782"
      x="320.80676"
@@ -10160,19 +10064,6 @@
      id="menubaritem-toggled"
      style="opacity:0;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
      inkscape:label="#rect8124" />
-  <g
-     id="menubaritem-disabled"
-     inkscape:label="#g5330"
-     transform="matrix(0.66666667,0,0,0.66666666,467.64005,889.12)"
-     style="opacity:0;fill:#3e3e3e;fill-opacity:1">
-    <rect
-       y="28.36215"
-       x="-55.249996"
-       height="11.25"
-       width="11.249998"
-       id="rect8186"
-       style="opacity:0.8;fill:#3e3e3e;fill-opacity:1;fill-rule:evenodd;stroke:none" />
-  </g>
   <rect
      style="fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
      id="menubaritem-pressed-bottom"
@@ -10233,41 +10124,6 @@
      x="904.2782"
      y="-413.30676"
      inkscape:label="#rect8970" />
-  <rect
-     transform="matrix(0,1,-1,0,0,0)"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-normal-right"
-     width="12.5"
-     height="2.5"
-     x="903.67462"
-     y="-295.80676"
-     inkscape:label="#rect8972" />
-  <rect
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-normal-top"
-     width="12.5"
-     height="2.5"
-     x="280.80676"
-     y="901.17462"
-     inkscape:label="#rect8974" />
-  <rect
-     y="278.30676"
-     x="-916.17462"
-     height="2.5"
-     width="12.5"
-     id="menubaritem-normal-left"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     transform="matrix(0,-1,1,0,0,0)"
-     inkscape:label="#rect8976" />
-  <rect
-     y="-918.67462"
-     x="-293.30676"
-     height="2.5"
-     width="12.5"
-     id="menubaritem-normal-bottom"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     transform="scale(-1,-1)"
-     inkscape:label="#rect8978" />
   <rect
      style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
      id="menubaritem-pressed-topright"
@@ -10332,105 +10188,6 @@
      x="315.80676"
      y="916.7782"
      inkscape:label="#rect8994" />
-  <rect
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-normal-topright"
-     width="2.5"
-     height="2.5"
-     x="293.30676"
-     y="901.17462"
-     inkscape:label="#rect8996" />
-  <rect
-     y="901.17462"
-     x="278.30676"
-     height="2.5"
-     width="2.5"
-     id="menubaritem-normal-topleft"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     inkscape:label="#rect8998" />
-  <rect
-     y="916.17462"
-     x="293.30676"
-     height="2.5"
-     width="2.5"
-     id="menubaritem-normal-bottomright"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     inkscape:label="#rect9000" />
-  <rect
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-normal-bottomleft"
-     width="2.5"
-     height="2.5"
-     x="278.30676"
-     y="916.17462"
-     inkscape:label="#rect9002" />
-  <rect
-     y="-443.30676"
-     x="905.5282"
-     height="2.5"
-     width="12.5"
-     id="menubaritem-disabled-right"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     transform="matrix(0,1,-1,0,0,0)"
-     inkscape:label="#rect9004" />
-  <rect
-     y="903.0282"
-     x="428.30676"
-     height="2.5"
-     width="12.5"
-     id="menubaritem-disabled-top"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     inkscape:label="#rect9006" />
-  <rect
-     transform="matrix(0,-1,1,0,0,0)"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-disabled-left"
-     width="12.5"
-     height="2.5"
-     x="-918.0282"
-     y="425.80676"
-     inkscape:label="#rect9008" />
-  <rect
-     transform="scale(-1,-1)"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-disabled-bottom"
-     width="12.5"
-     height="2.5"
-     x="-440.80676"
-     y="-920.5282"
-     inkscape:label="#rect9010" />
-  <rect
-     y="903.0282"
-     x="440.80676"
-     height="2.5"
-     width="2.5"
-     id="menubaritem-disabled-topright"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     inkscape:label="#rect9012" />
-  <rect
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-disabled-topleft"
-     width="2.5"
-     height="2.5"
-     x="425.80676"
-     y="903.0282"
-     inkscape:label="#rect9014" />
-  <rect
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     id="menubaritem-disabled-bottomright"
-     width="2.5"
-     height="2.5"
-     x="440.80676"
-     y="918.0282"
-     inkscape:label="#rect9016" />
-  <rect
-     y="918.0282"
-     x="425.80676"
-     height="2.5"
-     width="2.5"
-     id="menubaritem-disabled-bottomleft"
-     style="opacity:0;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
-     inkscape:label="#rect9018" />
   <text
      xml:space="preserve"
      style="font-size:16.36311722px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
@@ -11704,78 +11461,6 @@
          id="tspan5779">(invisible frame)</tspan></text>
   </g>
   <g
-     id="g5813"
-     transform="translate(-4.1932526,-60.721863)">
-    <text
-       xml:space="preserve"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       x="74.193253"
-       y="950.72186"
-       id="text5758"><tspan
-         id="tspan5786"
-         sodipodi:role="line"
-         x="74.193253"
-         y="950.72186">(Invisible)</tspan></text>
-    <text
-       id="text5785"
-       y="940.64941"
-       x="77.592148"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       xml:space="preserve"><tspan
-         y="940.64941"
-         x="77.592148"
-         sodipodi:role="line"
-         id="tspan5789">Normal</tspan></text>
-  </g>
-  <g
-     id="g5819"
-     transform="translate(-1.6932541,-58.214472)">
-    <text
-       id="text5762"
-       y="951.77814"
-       x="204.19325"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       xml:space="preserve"><tspan
-         id="tspan5788"
-         y="951.77814"
-         x="204.19325"
-         sodipodi:role="line">(Invisible)</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       x="206.58258"
-       y="939.92755"
-       id="text5795"><tspan
-         sodipodi:role="line"
-         x="206.58258"
-         y="939.92755"
-         id="tspan5799">Disabled</tspan></text>
-  </g>
-  <g
-     id="g5825"
-     transform="translate(-4.1932526,-60.721863)">
-    <text
-       id="text5805"
-       y="951.77814"
-       x="274.19324"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       xml:space="preserve"><tspan
-         y="951.77814"
-         x="274.19324"
-         sodipodi:role="line"
-         id="tspan5807">(Invisible)</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       x="277.59213"
-       y="941.70569"
-       id="text5809"><tspan
-         id="tspan5811"
-         sodipodi:role="line"
-         x="277.59213"
-         y="941.70569">Normal</tspan></text>
-  </g>
-  <g
      id="g5841"
      transform="translate(-4.1932526,-60.721863)">
     <text
@@ -11798,30 +11483,6 @@
          x="337.32266"
          sodipodi:role="line"
          id="tspan5835">Only bottom</tspan></text>
-  </g>
-  <g
-     id="g5847"
-     transform="translate(210.80674,-58.214472)">
-    <text
-       xml:space="preserve"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       x="204.19325"
-       y="951.77814"
-       id="text5849"><tspan
-         sodipodi:role="line"
-         x="204.19325"
-         y="951.77814"
-         id="tspan5851">(Invisible)</tspan></text>
-    <text
-       id="text5853"
-       y="939.92755"
-       x="206.58258"
-       style="font-size:7.11242914px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
-       xml:space="preserve"><tspan
-         id="tspan5855"
-         y="939.92755"
-         x="206.58258"
-         sodipodi:role="line">Disabled</tspan></text>
   </g>
   <g
      id="g5863"
@@ -13586,4 +13247,14 @@
      x="262.5"
      y="1700"
      inkscape:label="#rect6444" />
+  <text
+     id="text6249"
+     y="881.96216"
+     x="132.9612"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.11242914px;line-height:normal;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;enable-background:accumulate"
+     xml:space="preserve"><tspan
+       y="881.96216"
+       x="132.9612"
+       sodipodi:role="line"
+       id="tspan6251">No frame</tspan></text>
 </svg>
