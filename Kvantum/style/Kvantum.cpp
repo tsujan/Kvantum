@@ -2462,10 +2462,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       {
         if (up) fspec.bottom = 0;
         else fspec.top = 0;
-        if (hasFlatIndicator
-            && enoughContrast(QColor(getLabelSpec(group).normalColor), QColor(getLabelSpec("LineEdit").normalColor)))
+        if (hasFlatIndicator)
         {
-          dspec.element = "flat-"+dspec.element;
+          QColor col = QColor(getLabelSpec(group).normalColor);
+          if (!col.isValid())
+            col = QApplication::palette().color(QPalette::ButtonText);
+          if (enoughContrast(col, QApplication::palette().color(QPalette::Text)))
+            dspec.element = "flat-"+dspec.element;
         }
         align = Qt::AlignRight | Qt::AlignVCenter;
       }
@@ -2674,11 +2677,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
           const label_spec lspec1 = getLabelSpec("PanelButtonTool");
+          QColor col = QColor(lspec1.normalColor);
+          if (!col.isValid())
+            col = QApplication::palette().color(QPalette::ButtonText);
           QWidget *p = tb->parentWidget();
           QWidget *gp = getParent(widget,2);
           if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
           {
-            if (enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
+            if (enoughContrast(col, QColor(getLabelSpec("MenuBar").normalColor)))
               dspec.element = "flat-"+dspec1.element+"-down";
           }
           else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
@@ -2687,12 +2693,12 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                        && !gp->findChild<QTabBar*>()))
           {
             if (!tspec.group_toolbar_buttons
-                && enoughContrast(QColor(lspec1.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
+                && enoughContrast(col, QColor(getLabelSpec("Toolbar").normalColor)))
             {
               dspec.element = "flat-"+dspec1.element+"-down";
             }
           }
-          else if (p && enoughContrast(QColor(lspec1.normalColor), p->palette().color(p->foregroundRole())))
+          else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
             dspec.element = "flat-"+dspec1.element+"-down";
         }
       }
@@ -5040,9 +5046,14 @@ void Kvantum::drawControl(ControlElement element,
           /* use the "flat" indicator with flat buttons if it exists */
           if (opt->features & QStyleOptionButton::Flat)
           {
-            if (hasFlatIndicator
-                && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::WindowText)))
-              dspec.element = "flat-"+dspec.element;
+            if (hasFlatIndicator)
+            {
+              QColor ncol = QColor(lspec.normalColor);
+              if (!ncol.isValid())
+                ncol = QApplication::palette().color(QPalette::ButtonText);
+              if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText)))
+                dspec.element = "flat-"+dspec.element;
+            }
           }
           else
           {
@@ -5145,11 +5156,14 @@ void Kvantum::drawControl(ControlElement element,
           QWidget *p = getParent(widget,1);
           if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
+            QColor ncol = QColor(lspec.normalColor);
+            if (!ncol.isValid())
+              ncol = QApplication::palette().color(QPalette::ButtonText);
             QWidget *gp = getParent(widget,2);
             if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
-              if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), QColor(lspec1.normalColor)))
+              if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = lspec1.normalColor;
             }
@@ -5161,7 +5175,7 @@ void Kvantum::drawControl(ControlElement element,
               if (!tspec.group_toolbar_buttons)
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
-                if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), QColor(lspec1.normalColor)))
+                if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
                   dspec.element = "flat-"+dspec.element;
                 lspec.normalColor = lspec1.normalColor;
               }
@@ -5175,7 +5189,7 @@ void Kvantum::drawControl(ControlElement element,
                 col = p->palette().color(p->foregroundRole());
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::WindowText);
-              if (hasFlatIndicator && enoughContrast(QColor(lspec.normalColor), col))
+              if (hasFlatIndicator && enoughContrast(ncol, col))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = col.name();
               if (/*inPlasma ||*/ !paneledButtons.contains(widget))
@@ -5622,11 +5636,14 @@ void Kvantum::drawComplexControl(ComplexControl control,
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise() && hasFlatIndicator)
             {
+              QColor col = QColor(lspec.normalColor);
+              if (!col.isValid())
+                col = QApplication::palette().color(QPalette::ButtonText);
               QWidget *p = tb->parentWidget();
               QWidget *gp = getParent(widget,2);
               if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
               {
-                if (enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("MenuBar").normalColor)))
+                if (enoughContrast(col, QColor(getLabelSpec("MenuBar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
               else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
@@ -5635,12 +5652,12 @@ void Kvantum::drawComplexControl(ComplexControl control,
                            && !gp->findChild<QTabBar*>()))
               {
                 if (!tspec.group_toolbar_buttons
-                    && enoughContrast(QColor(lspec.normalColor), QColor(getLabelSpec("Toolbar").normalColor)))
+                    && enoughContrast(col, QColor(getLabelSpec("Toolbar").normalColor)))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
               }
-              else if (p && enoughContrast(QColor(lspec.normalColor), p->palette().color(p->foregroundRole())))
+              else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
                 dspec.element = "flat-"+dspec.element;
             }
             fspec.right = fspec.left = 0;
