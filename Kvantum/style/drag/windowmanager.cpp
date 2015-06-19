@@ -89,6 +89,7 @@ void WindowManager::initializeWhiteList (const QStringList &list)
 
   // add user specified whitelisted classnames
   _whiteList.insert (ExceptionId ("MplayerWindow"));
+  _whiteList.insert (ExceptionId ("Screen@smplayer"));
   _whiteList.insert (ExceptionId ("ViewSliders@kmix"));
   _whiteList.insert (ExceptionId ("Sidebar_Widget@konqueror"));
 

@@ -59,7 +59,7 @@
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
 #define SPIN_BUTTON_WIDTH 16
-#define SLIDER_TICK_SIZE 5
+#define SLIDER_TICK_SIZE 5 // 10 at most
 #define COMBO_ARROW_LENGTH 20
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
@@ -6082,70 +6082,91 @@ void Kvantum::drawComplexControl(ComplexControl control,
       if (opt)
       {
         QString group = "Slider";
-
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
 
-        QRect grooveRect = subControlRect(CC_Slider,opt,SC_SliderGroove,widget);
-        QRect empty = grooveRect;
-        QRect full = grooveRect;
-        QRect slider = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
-        QPoint sliderCenter = slider.center();
+        int ticks = opt->tickPosition;
+        const int len = pixelMetric(PM_SliderLength,option,widget);
+        const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
 
-        // take into account the inversion
-        if (option->state & State_Horizontal)
+       /************
+        ** Groove **
+        ************/
+        if (opt->subControls & SC_SliderGroove) // QtColorPicker doesn't need the groove
         {
-          if (!opt->upsideDown) {
-            full.setWidth(sliderCenter.x());
-            empty.adjust(sliderCenter.x(),0,0,0);
-          } else {
-            empty.setWidth(sliderCenter.x());
-            full.adjust(sliderCenter.x(),0,0,0);
-          }
-        }
-        else
-        {
-          if (!opt->upsideDown) {
-            full.setHeight(sliderCenter.y());
-            empty.adjust(0,sliderCenter.y(),0,0);
-          } else {
-            empty.setHeight(sliderCenter.y());
-            full.adjust(0,sliderCenter.y(),0,0);
-          }
-        }
-
-        fspec.hasCapsule = true;
-        fspec.capsuleH = 2;
-
-        /* with a bit of visualization, we can get the
-           horizontal bars from the vertical ones */
-        if (option->state & State_Horizontal)
-        {
-          int H = empty.height();
-          grooveRect.setRect(grooveRect.y(), grooveRect.x(),
-                             grooveRect.height(), grooveRect.width());
-          if (!opt->upsideDown)
+          /* find the groove rect, taking into accout slider_width */
+          QRect grooveRect = subControlRect(CC_Slider,opt,SC_SliderGroove,widget);
+          const int grooveThickness = qMin(tspec.slider_width,thick);
+          int delta;
+          if (option->state & State_Horizontal)
           {
-            empty.setRect(empty.y(), sliderCenter.x(), H, empty.width());
-            full.setRect(full.y(), full.x(), H, sliderCenter.x());
+            delta = (grooveRect.height()-grooveThickness)/2;
+            grooveRect.adjust(0,delta,0,-delta);
           }
           else
           {
-            empty.setRect(empty.y(), empty.x(), H, sliderCenter.x());
-            full.setRect(full.y(), sliderCenter.x(), H, full.width());
+            delta = (grooveRect.width()-grooveThickness)/2;
+            grooveRect.adjust(delta,0,-delta,0);
           }
-          painter->save();
-          QTransform m;
-          m.scale(1,-1);
-          m.rotate(-90);
-          painter->setTransform(m, true);
-        }
 
-        QString suffix = "-normal";
-        if (isInactive)
-          suffix = "-normal-inactive";
-        if (opt->subControls & SC_SliderGroove) // QtColorPicker doesn't need the groove
-        {
+          QRect empty = grooveRect;
+          QRect full = grooveRect;
+          QRect slider = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
+          QPoint sliderCenter = slider.center();
+
+          /* take into account the inversion */
+          if (option->state & State_Horizontal)
+          {
+            if (!opt->upsideDown) {
+              full.setWidth(sliderCenter.x());
+              empty.adjust(sliderCenter.x(),0,0,0);
+            } else {
+              empty.setWidth(sliderCenter.x());
+              full.adjust(sliderCenter.x(),0,0,0);
+            }
+          }
+          else
+          {
+            if (!opt->upsideDown) {
+              full.setHeight(sliderCenter.y());
+              empty.adjust(0,sliderCenter.y(),0,0);
+            } else {
+              empty.setHeight(sliderCenter.y());
+              full.adjust(0,sliderCenter.y(),0,0);
+            }
+          }
+
+          fspec.hasCapsule = true;
+          fspec.capsuleH = 2;
+
+          /* with a bit of visualization, we can get the
+             horizontal bars from the vertical ones */
+          if (option->state & State_Horizontal)
+          {
+            int H = empty.height();
+            grooveRect.setRect(grooveRect.y(), grooveRect.x(),
+                               grooveRect.height(), grooveRect.width());
+            if (!opt->upsideDown)
+            {
+              empty.setRect(empty.y(), sliderCenter.x(), H, empty.width());
+              full.setRect(full.y(), full.x(), H, sliderCenter.x());
+            }
+            else
+            {
+              empty.setRect(empty.y(), empty.x(), H, sliderCenter.x());
+              full.setRect(full.y(), sliderCenter.x(), H, full.width());
+            }
+            painter->save();
+            QTransform m;
+            m.scale(1,-1);
+            m.rotate(-90);
+            painter->setTransform(m, true);
+          }
+
+          /* now draw the groove */
+          QString suffix = "-normal";
+          if (isInactive)
+            suffix = "-normal-inactive";
           if (option->state & State_Enabled)
           {
             if (!opt->upsideDown)
@@ -6173,120 +6194,128 @@ void Kvantum::drawComplexControl(ComplexControl control,
 
             painter->restore();
           }
+
+          if (option->state & State_Horizontal)
+            painter->restore();
         }
 
-        if (option->state & State_Horizontal)
-          painter->restore();
-
-        const int len = pixelMetric(PM_SliderLength,option,widget);
-        const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
-
-        /* slider ticks */
-        QRect r = option->rect;
-        if (option->state & State_Horizontal)
+       /***************
+        ** Tickmarks **
+        ***************/
+        if (opt->subControls & SC_SliderTickmarks)
         {
-          r.setRect(y, x, h, w);
-          painter->save();
-          QTransform m;
-          m.scale(1,-1);
-          m.rotate(-90);
-          painter->setTransform(m, true);
-        }
-        if (status.startsWith("disabled"))
-        {
-          painter->save();
-          painter->setOpacity(0.4);
-        }
-        suffix = "-normal";
-        if (isInactive)
-          suffix = "-normal-inactive";
-        /* since we set the default size for CT_Slider, we use this
-           to have no space between the slider's ticks and its handle */
-        int extra = (r.width() - pixelMetric(PM_SliderThickness,option,widget))/2;
-        int interval = opt->tickInterval;
-        if (interval <= 0)
-          interval = opt->pageStep;
-        int available = r.height() - len;
-        int min = opt->minimum;
-        int max = opt->maximum;
-        if (max == 99) max = 100; // to get the end tick
-        if (opt->tickPosition & QSlider::TicksAbove)
-        {
-          QRect tickRect(r.x() + extra,
-                         r.y(),
-                         SLIDER_TICK_SIZE,
-                         r.height());
-          renderSliderTick(painter,ispec.element+"-tick"+suffix,
-                           tickRect,
-                           interval,available,min,max,
-                           true,
-                           opt->upsideDown);
-        }
-        if (opt->tickPosition & QSlider::TicksBelow)
-        {
-          QRect tickRect(r.x()+r.width()-SLIDER_TICK_SIZE - extra,
-                         r.y(),
-                         SLIDER_TICK_SIZE,
-                         r.height());
-          renderSliderTick(painter,ispec.element+"-tick"+suffix,
-                           tickRect,
-                           interval,available,min,max,
-                           false,
-                           opt->upsideDown);
-        }
-        if (!(option->state & State_Enabled))
-          painter->restore();
-        if (option->state & State_Horizontal)
-          painter->restore();
-
-        /* slider handle */
-        group = "SliderCursor";
-        fspec = getFrameSpec(group);
-        ispec = getInteriorSpec(group);
-
-        r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
-        /* derive other handles from the
-           main one only when necessary */
-        bool derive = false;
-        if (len != thick)
-        {
+          /* slider ticks */
+          QRect r = option->rect;
           if (option->state & State_Horizontal)
           {
-            derive = true;
-            int sY = r.y();
-            int sH = r.height();
-            r.setRect(sY, r.x(), sH, r.width());
+            r.setRect(y, x, h, w);
             painter->save();
             QTransform m;
-            if (opt->tickPosition == QSlider::TicksAbove)
-            {
-              m.translate(0, 2*sY+sH);
-              m.scale(1,-1);
-            }
             m.scale(1,-1);
             m.rotate(-90);
             painter->setTransform(m, true);
           }
-          else if (opt->tickPosition == QSlider::TicksAbove)
+          if (status.startsWith("disabled"))
           {
-            derive = true;
             painter->save();
-            QTransform m;
-            m.translate(2*r.x()+r.width(), 0);
-            m.scale(-1,1);
-            painter->setTransform(m, true);
+            painter->setOpacity(0.4);
           }
+          QString suffix = "-normal";
+          if (isInactive)
+            suffix = "-normal-inactive";
+          /* since we set the default size for CT_Slider, we use this
+             to have no space between the slider's ticks and its handle */
+          int extra = (r.width() - pixelMetric(PM_SliderThickness,option,widget))/2;
+          int interval = opt->tickInterval;
+          if (interval <= 0)
+            interval = opt->pageStep;
+          int available = r.height() - len;
+          int min = opt->minimum;
+          int max = opt->maximum;
+          if (max == 99) max = 100; // to get the end tick
+          if (ticks & QSlider::TicksAbove)
+          {
+            QRect tickRect(r.x() + extra,
+                           r.y(),
+                           SLIDER_TICK_SIZE,
+                           r.height());
+            renderSliderTick(painter,ispec.element+"-tick"+suffix,
+                             tickRect,
+                             interval,available,min,max,
+                             true,
+                             opt->upsideDown);
+          }
+          if (ticks & QSlider::TicksBelow)
+          {
+            QRect tickRect(r.x()+r.width()-SLIDER_TICK_SIZE - extra,
+                           r.y(),
+                           SLIDER_TICK_SIZE,
+                           r.height());
+            renderSliderTick(painter,ispec.element+"-tick"+suffix,
+                             tickRect,
+                             interval,available,min,max,
+                             false,
+                             opt->upsideDown);
+          }
+          if (!(option->state & State_Enabled))
+            painter->restore();
+          if (option->state & State_Horizontal)
+            painter->restore();
         }
 
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+       /************
+        ** Handle **
+        ************/
+        if (opt->subControls & SC_SliderHandle) // I haven't seen a slider without handle
+        {
+          group = "SliderCursor";
+          fspec = getFrameSpec(group);
+          ispec = getInteriorSpec(group);
 
-        // a decorative indicator if its element exists
-        const indicator_spec dspec = getIndicatorSpec(group);
-        renderIndicator(painter,r,fspec,dspec,dspec.element+"-"+status,option->direction);
+          QRect r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
+          /* derive other handles from the
+             main one only when necessary */
+          bool derive = false;
+          if (len != thick)
+          {
+            if (option->state & State_Horizontal)
+            {
+              derive = true;
+              int sY = r.y();
+              int sH = r.height();
+              r.setRect(sY, r.x(), sH, r.width());
+              painter->save();
+              QTransform m;
+              if (ticks == QSlider::TicksAbove)
+              {
+                m.translate(0, 2*sY+sH);
+                m.scale(1,-1);
+              }
+              m.scale(1,-1);
+              m.rotate(-90);
+              painter->setTransform(m, true);
+            }
+            else if (ticks == QSlider::TicksAbove)
+            {
+              derive = true;
+              painter->save();
+              QTransform m;
+              m.translate(2*r.x()+r.width(), 0);
+              m.scale(-1,1);
+              painter->setTransform(m, true);
+            }
+          }
 
-        if (derive)
-          painter->restore();
+          renderFrame(painter,r,fspec,fspec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+
+          // a decorative indicator if its element exists
+          const indicator_spec dspec = getIndicatorSpec(group);
+          renderIndicator(painter,r,fspec,dspec,dspec.element+"-"+status,option->direction);
+
+          if (derive)
+            painter->restore();
+        }
       }
 
       break;
@@ -8391,31 +8420,35 @@ QRect Kvantum::subControlRect(ComplexControl control,
     case CC_Slider : {
       const QStyleOptionSlider *opt =
         qstyleoption_cast<const QStyleOptionSlider *>(option);
-      int halfTick = SLIDER_TICK_SIZE/2;
       bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
-        case SC_SliderGroove : {
+        case SC_SliderGroove : { // sets the clicking area
           if (opt)
           {
-            const int grooveThickness = tspec.slider_width;
-             int ticks = opt->tickPosition;
+            int ticks = opt->tickPosition;
+            const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
             if (horiz)
             {
-              QRect r = QRect(x,y+(h-grooveThickness)/2,w,grooveThickness);
               if (ticks == QSlider::TicksAbove)
-                r.adjust(0,halfTick,0,halfTick);
+                y += SLIDER_TICK_SIZE/2;
               else if (ticks == QSlider::TicksBelow)
-                r.adjust(0,-halfTick,0,-halfTick);
-              return r;
+                y -= SLIDER_TICK_SIZE/2;
+              /* decrease the height of the clicking area to the handle thickness */
+              return QRect(x,
+                           y+(h-handleThickness)/2,
+                           w,
+                           handleThickness);
             }
             else
             {
-              QRect r = QRect(x+(w-grooveThickness)/2,y,grooveThickness,h);
               if (ticks == QSlider::TicksAbove) // left
-                r.adjust(halfTick,0,halfTick,0);
+                x += SLIDER_TICK_SIZE/2;
               else if (ticks == QSlider::TicksBelow) // right
-                r.adjust(-halfTick,0,-halfTick,0);
-              return r;
+                x -= SLIDER_TICK_SIZE/2;
+              return QRect(x+(w-handleThickness)/2,
+                           y,
+                           handleThickness,
+                           h);
             }
           }
         }
@@ -8424,25 +8457,16 @@ QRect Kvantum::subControlRect(ComplexControl control,
           if (opt)
           {
             subControlRect(CC_Slider,option,SC_SliderGroove,widget).getRect(&x,&y,&w,&h);
-
             const int len = pixelMetric(PM_SliderLength, option, widget);
-            const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
             const int sliderPos = sliderPositionFromValue (opt->minimum,
                                                            opt->maximum,
                                                            opt->sliderPosition,
                                                            (horiz ? w : h) - len,
                                                            opt->upsideDown);
-
             if (horiz)
-              return QRect(x+sliderPos,
-                           y+(h-handleThickness)/2,
-                           len,
-                           handleThickness);
+              return QRect(x+sliderPos, y, len, h);
             else
-              return QRect(x+(w-handleThickness)/2,
-                           y+sliderPos,
-                           handleThickness,
-                           len);
+              return QRect(x, y+sliderPos, w, len);
           }
 
         }

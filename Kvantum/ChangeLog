@@ -11,6 +11,8 @@ V0.8.20
  * Take into account all exceptional situations with Kvantum Manager.
  * No need to normal and disabled menuitem panels.
  * Improved "Theme-Making.pdf", especially its Indicators section.
+ * Added SMPlayer's screen to the whitelist of draggable widgets.
+ * Increased the thickness of the clickable rectangle of sliders to the slider thickness.
 
 V0.8.19
 ---------
