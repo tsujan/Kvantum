@@ -3634,6 +3634,7 @@ void Kvantum::drawControl(ControlElement element,
         QRect r = option->rect;
         bool verticalTabs = false;
         bool bottomTabs = false;
+        bool docMode = false;
 
         if (opt->shape == QTabBar::RoundedEast
             || opt->shape == QTabBar::RoundedWest
@@ -3642,7 +3643,10 @@ void Kvantum::drawControl(ControlElement element,
         {
             verticalTabs = true;
         }
-        if (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth)
+        QTabWidget *tw = qobject_cast<QTabWidget *>(getParent(widget,1));
+        if (!tw || tw->documentMode()) docMode = true;
+        if ((!docMode || tspec.mirror_doc_tabs)
+            && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
 
         if (status.startsWith("normal") || status.startsWith("focused"))
@@ -3696,7 +3700,8 @@ void Kvantum::drawControl(ControlElement element,
           painter->save();
           int X, Y, rot;
           int xTr = 0; int xScale = 1;
-          if (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast)
+          if ((!docMode || tspec.mirror_doc_tabs)
+              && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
           {
             X = w;
             Y = y;
@@ -3736,8 +3741,7 @@ void Kvantum::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        QTabWidget *tw = qobject_cast<QTabWidget *>(getParent(widget,1));
-        if ((!tw || tw->documentMode())
+        if (docMode
             && themeRndr && themeRndr->isValid() && themeRndr->elementExists("floating-"+ispec.element+"-normal"))
         {
           ispec.element="floating-"+ispec.element;
@@ -3786,6 +3790,7 @@ void Kvantum::drawControl(ControlElement element,
         QRect r = option->rect;
         bool verticalTabs = false;
         bool bottomTabs = false;
+        bool mirror = true;
 
         if (opt->shape == QTabBar::RoundedEast
             || opt->shape == QTabBar::RoundedWest
@@ -3794,7 +3799,10 @@ void Kvantum::drawControl(ControlElement element,
         {
           verticalTabs = true;
         }
-        if (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth)
+        QTabWidget *tw = qobject_cast<QTabWidget *>(getParent(widget,1));
+        if ((!tw || tw->documentMode()) && !tspec.mirror_doc_tabs)
+          mirror = false;
+        if (mirror && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
         
         if (verticalTabs)
@@ -3808,6 +3816,15 @@ void Kvantum::drawControl(ControlElement element,
             X = w;
             Y = y;
             rot = 90;
+            if (!mirror)
+            { // without mirroring, the top and bottom margins should be swapped
+              int t = fspec.bottom;
+              fspec.bottom = fspec.top;
+              fspec.top = t;
+              t = lspec.bottom;
+              lspec.bottom = lspec.top;
+              lspec.top = t;
+            }
           }
           else
           {
@@ -3822,7 +3839,7 @@ void Kvantum::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
         else if (bottomTabs)
-        {
+        { // the top and bottom margins should be swapped
           int t = fspec.bottom;
           fspec.bottom = fspec.top;
           fspec.top = t;

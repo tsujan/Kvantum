@@ -309,6 +309,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","attach_active_tab", empty);
   r.attach_active_tab = v.toBool();
 
+  v = getValue("General","mirror_doc_tabs", empty);
+  if (v.isValid()) // it's true by default
+    r.mirror_doc_tabs = v.toBool();
+
   v = getValue("General","group_toolbar_buttons", empty);
   r.group_toolbar_buttons = v.toBool();
 

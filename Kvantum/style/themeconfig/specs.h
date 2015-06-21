@@ -42,6 +42,10 @@ typedef struct {
   /* attach the active tab to the tab widget?
      (by default, it is detached) */
   bool attach_active_tab;
+  /* mirror the top/left tab to draw the bottom/right tab also in
+     the document mode? (By default, the bottom and right tabs are
+     always the mirror images of the top and left tabs, respectively */
+  bool mirror_doc_tabs;
   /* raise and group neighbor
      toolbar buttons */
   bool group_toolbar_buttons;
@@ -284,6 +288,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.left_tabs = false;
   tspec.joined_tabs = false;
   tspec.attach_active_tab = false;
+  tspec.mirror_doc_tabs = true;
   tspec.group_toolbar_buttons = false;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;

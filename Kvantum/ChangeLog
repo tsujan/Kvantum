@@ -13,6 +13,7 @@ V0.8.20
  * Improved "Theme-Making.pdf", especially its Indicators section.
  * Added SMPlayer's screen to the whitelist of draggable widgets.
  * Increased the thickness of the clickable rectangle of sliders to the slider thickness.
+ * Added a key for not mirroring the top/left tab shape to draw the bottom/right tab in the document mode.
 
 V0.8.19
 ---------

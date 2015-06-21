@@ -186,6 +186,18 @@ attach_active_tab                 true/false          Attach the active tab to t
                                                       tab widget? It is detached
                                                       by default.
 
+mirror_doc_tabs                   true/false          In the document mode, mirror the
+                                                      top/left tab shape to draw the bottom
+                                                      /right tab? True by default, which
+                                                      means that the bottom and right tab
+                                                      shapes are always the mirror images of
+                                                      the top and left ones, respectively.
+                                                      Setting this key to false will change
+                                                      this behavior only if the tab widget
+                                                      is in the document mode, so that the
+                                                      top/right and bottom/left tab shapes
+                                                      will be identical.
+
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar
                                                       buttons? By default, they are
                                                       not raised.
