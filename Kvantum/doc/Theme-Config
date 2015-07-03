@@ -128,6 +128,11 @@ Section                                      Meaning
 [ToolTip]                                    The panel for a tooltip label.
 
 [Window]                                     A window or dialog.
+
+[WindowTranslucent]                          This is used when a distinction is
+                                             needed to be made between opaque and
+                                             translucent windows. If it is omitted,
+                                             the above section is used for all windows.
 =====================================================
 
 

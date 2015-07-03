@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #if QT_VERSION >= 0x050000
 #include <QFileDevice>
+#include <QTextStream>
 #endif
 //#include <QDebug>
 
@@ -50,7 +51,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
     connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (writeConfig()));
     connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
-    connect (ui->checkBoxComposite, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
+    connect (ui->checkBoxNoComposite, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
     connect (ui->checkBoxTrans, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
     connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
@@ -344,6 +345,7 @@ void KvantumManager::deleteTheme()
                 settings.remove ("theme");
                 kvconfigTheme = QString();
             }
+            QCoreApplication::processEvents();
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
             int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
             resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
@@ -429,14 +431,14 @@ void KvantumManager::defaultThemeButtons()
 
     defaultSettings.beginGroup ("General");
     bool composited = defaultSettings.value ("composite").toBool();
-    ui->checkBoxComposite->setChecked (!composited);
+    ui->checkBoxNoComposite->setChecked (!composited);
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
     if (defaultSettings.contains ("scroll_arrows")) // it's true by default
-      ui->checkBoxScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
+      ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
-      ui->checkBoxScrollArrow->setChecked (false);
+      ui->checkBoxNoScrollArrow->setChecked (false);
     ui->checkBoxProgress->setChecked (defaultSettings.value ("textless_progressbar").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
@@ -604,7 +606,7 @@ void KvantumManager::tabChanged (int index)
                     composited = themeSettings.value ("composite").toBool();
                 else
                     composited = false;
-                ui->checkBoxComposite->setChecked (!composited);
+                ui->checkBoxNoComposite->setChecked (!composited);
                 notCompisited (!composited);
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
@@ -613,7 +615,7 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("attach_active_tab"))
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("scroll_arrows"))
-                    ui->checkBoxScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
+                    ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("textless_progressbar"))
                     ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
@@ -909,6 +911,14 @@ void KvantumManager::copyDefaultTheme (QString source, QString target)
     else
         notWritable();
 }
+#if QT_VERSION >= 0x050000
+/*************************/
+static QString boolToStr (bool b)
+{
+    if (b) return QString ("true");
+    else return QString ("false");
+}
+#endif
 /*************************/
 void KvantumManager::writeConfig()
 {
@@ -953,27 +963,93 @@ void KvantumManager::writeConfig()
             notWritable();
             return;
         }
+#if QT_VERSION >= 0x050000
+        /*************************************************************************
+          WARNING! Damn! The Qt5 QSettings changes the order of keys on writing.
+                         We should write the settings directly!
+        **************************************************************************/
+        QMap<QString, QString> hackKeys, hackKeysMissing, generalKeys, generalKeysMissing;
+        QString str;
+        hackKeys.insert("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
+        hackKeys.insert("blur_konsole", boolToStr (ui->checkBoxKonsole->isChecked()));
+        hackKeys.insert("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
+        hackKeys.insert("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
+        hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
+        hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
+
+        generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
+        generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
+        generalKeys.insert("joined_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
+        generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
+        generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
+        generalKeys.insert("textless_progressbar", boolToStr (ui->checkBoxProgress->isChecked()));
+        generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
+        generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
+        generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
+        generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
+        generalKeys.insert("x11drag", boolToStr (ui->checkBoxX11->isChecked()));
+        generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
+        generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxSpin->isChecked()));
+        generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
+        generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
+        generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
+        generalKeys.insert("small_icon_size", str.setNum (ui->spinSmall->value()));
+        generalKeys.insert("large_icon_size", str.setNum (ui->spinLarge->value()));
+        generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
+        generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
+
+        QString opaque = ui->opaqueEdit->text();
+        opaque = opaque.simplified();
+        opaque.remove (" ");
+        generalKeys.insert("opaque", opaque);
+#endif
         themeSettings.beginGroup ("Hacks");
+#if QT_VERSION >= 0x050000
+        QMap<QString, QString>::iterator it;
+        it = hackKeys.begin();
+        while (!hackKeys.isEmpty() && it != hackKeys.end())
+        {
+            if (!themeSettings.contains (it.key()))
+            {
+                hackKeysMissing.insert (it.key(), hackKeys.value (it.key()));
+                it = hackKeys.erase (it);
+            }
+            else ++it;
+        }
+#else
         themeSettings.setValue ("transparent_dolphin_view", ui->checkBoxDolphin->isChecked());
         themeSettings.setValue ("blur_konsole", ui->checkBoxKonsole->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
         themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
+#endif
         themeSettings.endGroup();
 
         themeSettings.beginGroup ("General");
         bool translucenceChanged = false;
-        if (themeSettings.value ("composite").toBool() == ui->checkBoxComposite->isChecked()
+        if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked())
         {
             translucenceChanged = true;
         }
-        themeSettings.setValue ("composite", !ui->checkBoxComposite->isChecked());
+#if QT_VERSION >= 0x050000
+        it = generalKeys.begin();
+        while (!generalKeys.isEmpty() && it != generalKeys.end())
+        {
+            if (!themeSettings.contains (it.key()))
+            {
+                generalKeysMissing.insert (it.key(), generalKeys.value (it.key()));
+                it = generalKeys.erase (it);
+            }
+            else ++it;
+        }
+#else
+        themeSettings.setValue ("composite", !ui->checkBoxNoComposite->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
         themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
-        themeSettings.setValue ("scroll_arrows", !ui->checkBoxScrollArrow->isChecked());
+        themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
@@ -994,8 +1070,107 @@ void KvantumManager::writeConfig()
         opaque.remove (" ");
         QStringList opaqueList = opaque.split (",");
         themeSettings.setValue ("opaque", opaqueList);
+#endif
         themeSettings.endGroup();
+#if QT_VERSION >= 0x050000
+        QFile file (themeConfig);
+        if (!file.open (QIODevice::ReadOnly | QIODevice::Text))
+            return;
+        QStringList lines;
+        QTextStream in (&file);
+        while (!in.atEnd())
+        {
+            bool found = false;
+            QString line = in.readLine();
+            if (!hackKeys.isEmpty())
+            {
+                for (it = hackKeys.begin(); it != hackKeys.end(); ++it)
+                {   /* one "\\b" is enough because if "keyA" is in the file, "key" isn't in hackKeys */
+                    if (line.contains (QRegExp ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                    {
+                        line = QString ("%1=%2").arg (it.key()).arg (hackKeys.value (it.key()));
+                        hackKeys.remove (it.key());
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found && !generalKeys.isEmpty())
+            {
+                for (it = generalKeys.begin(); it != generalKeys.end(); ++it)
+                {
+                    if (line.contains (QRegExp ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                    {
+                        line = QString ("%1=%2").arg (it.key()).arg (generalKeys.value (it.key()));
+                        generalKeys.remove (it.key());
+                        break;
+                    }
+                }
+            }
+            lines.append (line);
+        }
+        file.close();
 
+        int i, j;
+        if (!hackKeysMissing.isEmpty())
+        {
+            for (i = 0; i < lines.count(); ++i)
+            {
+                if (lines.at (i).contains (QRegExp ("^\\s*\\[\\s*\\bHacks\\b\\s*\\]")))
+                    break;
+            }
+            if (i == lines.count())
+            {
+                lines << "" << QString ("[Hacks]");
+                ++i;
+            }
+            for (j = i+1; j < lines.count(); ++j)
+            {
+                if (lines.at (j).contains (QRegExp("^\\s*\\[")))
+                    break;
+            }
+            while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j;
+            for (it = hackKeysMissing.begin(); it != hackKeysMissing.end(); ++it)
+            {
+                lines.insert (j, QString ("%1=%2").arg (it.key()).arg (hackKeysMissing.value (it.key())));
+                ++j;
+            }
+        }
+        if (!generalKeysMissing.isEmpty())
+        {
+            for (i = 0; i < lines.count(); ++i)
+            {
+                if (lines.at (i).contains (QRegExp ("^\\s*\\[\\s*%\\bGeneral\\b\\s*\\]")))
+                    break;
+            }
+            if (i == lines.count())
+            {
+                lines << "" << QString ("[%General]");
+                ++i;
+            }
+            for (j = i+1; j < lines.count(); ++j)
+            {
+                if (lines.at (j).contains (QRegExp("^\\s*\\[")))
+                    break;
+            }
+            while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j;
+            for (it = generalKeysMissing.begin(); it != generalKeysMissing.end(); ++it)
+            {
+                lines.insert (j, QString ("%1=%2").arg (it.key()).arg (generalKeysMissing.value (it.key())));
+                ++j;
+            }
+        }
+
+        if (!lines.isEmpty())
+        {
+            if (!file.open (QIODevice::WriteOnly | QIODevice::Text))
+                return;
+            QTextStream out (&file);
+            for (int i = 0; i < lines.count(); ++i)
+                out << lines.at(i) << "\n";
+            file.close();
+        }
+#endif
         ui->statusBar->showMessage (tr ("Configuration saved."), 10000);
         QString theme;
         if (kvconfigTheme == "Default#")
@@ -1014,6 +1189,7 @@ void KvantumManager::writeConfig()
             showAnimated (ui->configLabel, 1000);
         }
 
+        QCoreApplication::processEvents();
         if (translucenceChanged)
         {
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
@@ -1047,6 +1223,7 @@ void KvantumManager::restoreDefault()
                                    .arg (kvconfigTheme == "Default#" ? "the default theme" : kvconfigTheme_),
                                 10000);
 
+    QCoreApplication::processEvents();
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
     resizeConfPage (true);
     if (process->state() == QProcess::Running)
@@ -1073,7 +1250,7 @@ void KvantumManager::isTranslucent (bool checked)
     if (!checked)
     {
         ui->checkBoxBlurWindow->setChecked (false);
-        if (!ui->checkBoxComposite->isChecked())
+        if (!ui->checkBoxNoComposite->isChecked())
           ui->checkBoxBlurPopup->setEnabled (true);
     }
 }
@@ -1087,9 +1264,14 @@ void KvantumManager::popupBlurring (bool checked)
 /*************************/
 void KvantumManager::aboutDialog()
 {
+    QString qt ("Qt5");
+#if QT_VERSION < 0x050000
+    qt = "Qt4";
+#endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.20</big></b></center><br>"\
-                        "<center>A tool for intsalling, selecting and</center>\n"\
-                        "<center>configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
-                        "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>"));
+                        tr ("<center><b><big>Kvantum Manager 0.8.21</big></b></center><br>"\
+                            "<center>A %1 tool for intsalling, selecting</center>\n"\
+                            "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
+                            "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")
+                            .arg (qt));
 }

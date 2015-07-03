@@ -124,7 +124,7 @@ class Kvantum : public QCommonStyle {
     bool renderElement(QPainter *painter,
                        const QString &element,
                        const QRect &bounds,
-                       int hsize = 0, int vsize = 0,
+                       int hsize = 0, int vsize = 0, // pattern sizes
                        bool usePixmap = false // first make a QPixmap for drawing
                       ) const;
     /* Render the (vertical) slider ticks. */
@@ -160,7 +160,8 @@ class Kvantum : public QCommonStyle {
                      int f2 = 0, // width of tab's right frame
                      int tp = 0, // tab position
                      bool grouped = false, // is among grouped similar widgets?
-                     bool usePixmap = false // first make a QPixmap for drawing
+                     bool usePixmap = false, // first make a QPixmap for drawing
+                     bool drawBorder = true // draw a border with maximum rounding if possible
                     ) const;
 
     /* Generic method that draws an interior. */

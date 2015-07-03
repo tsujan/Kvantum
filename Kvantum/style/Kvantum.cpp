@@ -878,7 +878,9 @@ void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
     return; // Plasma FIXME needed?
   QRect bgndRect(widget->rect());
-  interior_spec ispec = getInteriorSpec("Window");
+  interior_spec ispec = getInteriorSpec("WindowTranslucent");
+  if (ispec.element.isEmpty())
+    ispec = getInteriorSpec("Window");
   frame_spec fspec;
   default_frame_spec(fspec);
 
@@ -1017,7 +1019,7 @@ enum toolbarButtonKind
 
 static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
 {
-  if (!tb) return false;
+  if (!tb || !opt) return false;
   if (tb->popupMode() == QToolButton::MenuButtonPopup
       || ((tb->popupMode() == QToolButton::InstantPopup
            || tb->popupMode() == QToolButton::DelayedPopup)
@@ -1387,12 +1389,17 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       lspec.right = qMax(0,lspec.right-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
 
+      const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
+      const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+
       /* this is just for tabbar scroll buttons */
       if (qobject_cast<QTabBar*>(getParent(widget,1)))
       {
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        fspec.expansion = 0;
+        //fspec.expansion = 0;
       }
+      // color button
+      else if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
@@ -1408,20 +1415,14 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
-        fspec.expansion = 0;
+        //fspec.expansion = 0;
 
-        lspec.left = qMin(lspec.left,2);
-        lspec.right = qMin(lspec.right,2);
+        //lspec.left = qMin(lspec.left,2);
+        //lspec.right = qMin(lspec.right,2);
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
         lspec.tispace = qMin(lspec.tispace,2);
       }
-
-      const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
-      const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
-
-      // color button
-      if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
 
       // -> CE_ToolButtonLabel
       if (opt && opt->toolButtonStyle == Qt::ToolButtonTextOnly)
@@ -1465,7 +1466,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   fspec.right = qMin(fspec.right,3);
                 else
                   fspec.left = qMin(fspec.left,3);
-                fspec.expansion = 0;
+                //fspec.expansion = 0;
                 dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
                 lspec.tispace=0;
               }
@@ -1474,7 +1475,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                      || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
             {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-                fspec.expansion = 0;
+                //fspec.expansion = 0;
             }
           }
           else
@@ -1485,7 +1486,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-              fspec.expansion = 0;
+              //fspec.expansion = 0;
             }
           }
         }
@@ -2182,7 +2183,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                   || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        fspec.expansion = 0;
+        //fspec.expansion = 0;
       }
       QWidget *p = getParent(widget,1);
       /* no frame when editing itemview texts */
@@ -2215,7 +2216,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
                 || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-              fspec.expansion = 0;
+              //fspec.expansion = 0;
             }
           }
         }
@@ -2357,13 +2358,13 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
           if (spinMaxText(sb).isEmpty())
           {
             fspec.right = qMin(fspec.right,3);
-            fspec.expansion = 0;
+            //fspec.expansion = 0;
           }
         }
         if (opt->rect.height() < fspec.top + fspec.bottom)
         {
           fspec.top = fspec.bottom = qMin(fspec.top,3);
-          fspec.expansion = 0;
+          //fspec.expansion = 0;
         }
       }
 
@@ -2556,7 +2557,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
-                  (option->state & State_Sunken) ? "pressed" :
+                  ((option->state & State_Sunken) || cb->hasFocus()) ? "pressed" :
                   (option->state & State_MouseOver) ? "focused" : "normal"
                 : "disabled";
         if (isInactive)
@@ -2863,6 +2864,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       const QString group = "ItemView";
       frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0; // maximum rounding is problematic here
       interior_spec ispec = getInteriorSpec(group);
       ispec.px = ispec.py = 0;
 
@@ -4568,6 +4570,7 @@ void Kvantum::drawControl(ControlElement element,
     case CE_HeaderSection : {
       const QString group = "HeaderSection";
       frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0; // maximum rounding is problematic here
       const interior_spec ispec = getInteriorSpec(group);
 
       bool horiz = true;
@@ -5001,7 +5004,7 @@ void Kvantum::drawControl(ControlElement element,
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-          fspec.expansion = 0;
+          //fspec.expansion = 0;
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
@@ -5146,8 +5149,8 @@ void Kvantum::drawControl(ControlElement element,
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
 
-          lspec.left = qMin(lspec.left,2);
-          lspec.right = qMin(lspec.right,2);
+          //lspec.left = qMin(lspec.left,2);
+          //lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
           lspec.tispace = qMin(lspec.tispace,2);
@@ -5850,6 +5853,11 @@ void Kvantum::drawComplexControl(ComplexControl control,
                 if (rtl) arrowRect.adjust(0,0,extra,0);
                 else arrowRect.adjust(-extra,0,0,0);
               }
+              if (cb->hasFocus())
+              {
+                if (isInactive) status = "pressed-inactive";
+                else status = "pressed";
+              }
             }
             else // when there isn't enough space
             {
@@ -5862,7 +5870,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
                 fspec.right = qMin(fspec.right,3);
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
-                fspec.expansion = 0;
+                //fspec.expansion = 0;
               }
             }
           }
@@ -7046,7 +7054,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
       {
         QString maxTxt = spinMaxText(sb) + QLatin1Char(' ');
         s = textSize(sb->font(),maxTxt)
-            + QSize(fspec.left + 2 // cursor padding
+            + QSize(fspec.left + (tspec.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
                                + 2*SPIN_BUTTON_WIDTH
                                + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
                     lspec.top + lspec.bottom
@@ -7340,8 +7348,8 @@ QSize Kvantum::sizeFromContents (ContentsType type,
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
 
-          lspec.left = qMin(lspec.left,2);
-          lspec.right = qMin(lspec.right,2);
+          //lspec.left = qMin(lspec.left,2);
+          //lspec.right = qMin(lspec.right,2);
           lspec.top = qMin(lspec.top,2);
           lspec.bottom = qMin(lspec.bottom,2);
           lspec.tispace = qMin(lspec.tispace,2);
@@ -7843,22 +7851,28 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
 
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
+      label_spec lspec = getLabelSpec("LineEdit");
+      lspec.top = lspec.bottom = 0;
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+        lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
       }
       else if (widget && widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        lspec.left = lspec.right = qMin(lspec.left,2);
       }
       else if (qobject_cast<const QLineEdit*>(widget)
                && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        lspec.left = lspec.right = qMin(lspec.left,2);
       }
       else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
+        lspec.right = 0;
         if (!tspec.vertical_spin_indicators)
         {
           const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
@@ -7868,14 +7882,16 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
               || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            lspec.left = 0;
           }
         }
         else
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          lspec.left = 0;
         }
       }
-      QRect rect = interiorRect(option->rect, fspec);
+      QRect rect = labelRect(option->rect, fspec, lspec);
 
       /* in these cases there are capsules */
       if (widget)
@@ -8927,7 +8943,8 @@ static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRe
 
 bool Kvantum::renderElement(QPainter *painter,
                             const QString &element,
-                            const QRect &bounds, int hsize, int vsize,
+                            const QRect &bounds,
+                            int hsize, int vsize, // pattern sizes
                             bool usePixmap // first make a QPixmap for drawing
                            ) const
 {
@@ -9075,7 +9092,8 @@ void Kvantum::renderFrame(QPainter *painter,
                           int f2, // width of tab's right frame
                           int tp, // tab position
                           bool grouped, // is among grouped similar widgets?
-                          bool usePixmap // first make a QPixmap for drawing
+                          bool usePixmap, // first make a QPixmap for drawing
+                          bool drawBorder // draw a border with maximum rounding if possible
                          ) const
 {
   if (!bounds.isValid() || !fspec.hasFrame)
@@ -9091,12 +9109,24 @@ void Kvantum::renderFrame(QPainter *painter,
   int Left,Top,Right,Bottom;
   Left = Top = Right = Bottom = 0;
   QString element1(element);
+  QString element0(element); // used just for checking
   int e = grouped ? h : qMin(h,w);
-  if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
+  bool drawExpanded = false;
+  /* still round the corners if the "expand-" element is found */
+  if (fspec.expansion > 0 &&
+      (e <= fspec.expansion || (themeRndr && themeRndr->isValid()
+                                && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))))))
+  {
+    drawExpanded = true;
+  }
+  if (!isLibreoffice && fspec.expansion > 0 && drawExpanded
       && (!fspec.hasCapsule || fspec.capsuleV == 2)
       /* there's no right/left expanded element */
       && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
   {
+    e = qMin(e,fspec.expansion);
+    int H = h;
+    if (grouped) H = e;
     if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     {
       /* to get smoother gradients, we use QTransform in this special case */
@@ -9126,16 +9156,16 @@ void Kvantum::renderFrame(QPainter *painter,
     else
     {
       int X = 0;
-      if (h <= 2*w || fspec.capsuleH == 0)
+      if (H <= 2*w || fspec.capsuleH == 0)
       {
-        if (h%2 == 0)
+        if (H%2 == 0)
         {
-          X = Top = Bottom = h/2;
+          X = Top = Bottom = H/2;
         }
         else
         {
-          X = Top = (h+1)/2;
-          Bottom = (h-1)/2;
+          X = Top = (H+1)/2;
+          Bottom = (H-1)/2;
         }
       }
       else // this never happens
@@ -9156,18 +9186,30 @@ void Kvantum::renderFrame(QPainter *painter,
         Right = qMin(fspec.right,w/2);
       }
     }
-    QString element0(element);
-    if (themeRndr && themeRndr->isValid() && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))+"-top"))
+    element0 = element;
+    if (drawBorder && themeRndr && themeRndr->isValid()
+        && themeRndr->elementExists("border-"+element0.remove(QString("-inactive"))+"-top"))
+    {
+      element1 = "border-"+element;
+    }
+    else if (themeRndr && themeRndr->isValid()
+             && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive"))+"-top"))
+    {
       element1 = "expand-"+element;
+      drawBorder = false;
+    }
+    else drawBorder = false; // don't waste CPU time
   }
   else
   {
+    drawBorder = false;
+    drawExpanded = false;
     Left = qMin(fspec.left,w/2);
     Top = qMin(fspec.top,h/2);
     Right = qMin(fspec.right,w/2);
     Bottom = qMin(fspec.bottom,h/2);
 
-    if (Left ==0 && Top == 0 && Right == 0 && Bottom == 0) return;
+    if (Left == 0 && Top == 0 && Right == 0 && Bottom == 0) return;
   }
 
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
@@ -9455,6 +9497,28 @@ void Kvantum::renderFrame(QPainter *painter,
                     QRect(x1-right,y0+top,right,h-top-bottom),
                     0,0,usePixmap);
   }
+
+
+  if (drawExpanded && Top + Bottom != h) // when needed and there is space...
+  { // ... draw the "interior"
+    if (grouped)
+      Right = Left = 0;
+    renderElement(painter,element1,
+                  bounds.adjusted(Left,Top,-Right,-Bottom),
+                  0,0,usePixmap);
+  }
+  if (drawBorder) // draw inside this rectangle to make a border
+  {
+    /* the expansion should be less here; otherwise, the border wouldn't be smooth */
+    frame_spec Fspec = fspec;
+    Fspec.expansion = fspec.expansion - fspec.top - fspec.bottom;
+    renderFrame(painter,
+                bounds.adjusted((fspec.hasCapsule && (fspec.capsuleH == 1 || fspec.capsuleH == 0)) ? 0 : fspec.left,
+                                fspec.top,
+                                (fspec.hasCapsule && (fspec.capsuleH == -1 || fspec.capsuleH == 0)) ?  0: -fspec.right,
+                                -fspec.bottom),
+                Fspec,element,d,l,f1,f2,tp,grouped,usePixmap,false); // this time, don't draw any border
+  }
 }
 
 void Kvantum::renderInterior(QPainter *painter,
@@ -9471,7 +9535,10 @@ void Kvantum::renderInterior(QPainter *painter,
 
   int w = bounds.width(); int h = bounds.height();
   int e = grouped ? h : qMin(h,w);
-  if (!isLibreoffice && fspec.expansion > 0 && e <= fspec.expansion
+  QString element0(element);
+  if (!isLibreoffice && fspec.expansion > 0
+      && (e <= fspec.expansion || (themeRndr && themeRndr->isValid()
+                                   && themeRndr->elementExists("expand-"+element0.remove(QString("-inactive")))))
       && (!fspec.hasCapsule || fspec.capsuleV == 2)
       /* there's no right/left expanded element */
       && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))

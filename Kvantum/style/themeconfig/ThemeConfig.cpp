@@ -359,7 +359,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   {
     /* no window translucency or blurring
        without window interior elemenet */
-    interior_spec ispec = getInteriorSpec("Window");
+    interior_spec ispec = getInteriorSpec("WindowTranslucent");
+    if (ispec.element.isEmpty())
+      ispec = getInteriorSpec("Window");
     if (ispec.hasInterior)
     {
       v = getValue("General","translucent_windows");

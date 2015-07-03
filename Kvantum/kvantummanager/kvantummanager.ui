@@ -493,7 +493,7 @@ whose windows should not be translucent.</string>
              </widget>
             </item>
             <item row="0" column="1" colspan="2">
-             <widget class="QCheckBox" name="checkBoxComposite">
+             <widget class="QCheckBox" name="checkBoxNoComposite">
               <property name="toolTip">
                <string>If checked, menus, tooltips and windows
 will not have translucency or shadow.</string>
@@ -810,7 +810,7 @@ labels by default.</string>
              </spacer>
             </item>
             <item row="6" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxScrollArrow">
+             <widget class="QCheckBox" name="checkBoxNoScrollArrow">
               <property name="toolTip">
                <string>Scrollbars have add-line and sub-line arrows by default.
 Checking this box removes arrows as far as possible.</string>
