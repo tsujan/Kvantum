@@ -7,6 +7,7 @@ V0.8.21
  * Set the pressed state for a combobox if its line-edit has focus.
  * Compile kvantumpreview and kventummanager against Qt5 by default.
  * Workaround for the nasty behavior of Qt5 QSettings, which reorders keys on writing.
+ * A little more space for centered toolbar handles.
 
 V0.8.20
 ---------

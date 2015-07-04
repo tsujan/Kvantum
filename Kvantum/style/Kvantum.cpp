@@ -6624,7 +6624,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
       if (tspec.center_toolbar_handle)
       {
         const indicator_spec dspec = getIndicatorSpec("Toolbar");
-        return dspec.size ? dspec.size : 8;
+        return dspec.size ? 2*dspec.size : 16;
       }
       return 8;
     }
