@@ -159,7 +159,7 @@ Kvantum::Kvantum() : QCommonStyle()
   if (tspec.blurring)
   {
     QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
-    QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
+    QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
     blurHelper = new BlurHelper(this,menuS,tooltipS);
   }
 #endif
@@ -645,7 +645,7 @@ void Kvantum::polish(QWidget *widget)
         if (!blurHelper && tspec.popup_blurring)
         {
           QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
-          QList<int> tooltipS = getShadow("Tooltip", pixelMetric(PM_ToolTipLabelFrameWidth));
+          QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
           blurHelper = new BlurHelper(this,menuS,tooltipS);
         }
 #endif
