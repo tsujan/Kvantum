@@ -422,6 +422,9 @@ kcapacitybar_as_progressbar       true/false          Draw KCapacityBar as progr
 respect_darkness                  true/false          Some apps don't respect dark themes.
                                                       Fix that as far as possible?
 
+force_size_grip                   true/false          Show the size grips of dialogs and
+                                                      statusbars as far as possible?
+
                            **********************
                            *** Other Sections ***
                            **********************

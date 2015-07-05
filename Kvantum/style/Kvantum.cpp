@@ -49,6 +49,8 @@
 #include <QtCore/qmath.h>
 #include <QMenuBar>
 #include <QGraphicsView>
+#include <QDialog>
+#include <QStatusBar>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
 #if QT_VERSION >= 0x050000
@@ -437,69 +439,88 @@ void Kvantum::polish(QWidget *widget)
       case Qt::Dialog: {
         widget->setAttribute(Qt::WA_StyledBackground);
         /* take all precautions */
-        if (((tspec.translucent_windows
-              && !widget->testAttribute(Qt::WA_TranslucentBackground)
-              && !widget->testAttribute(Qt::WA_NoSystemBackground))
-             /* enable blurring for Konsole's main window if it's transparent */
-             || ((isKonsole || isYakuake) && hspec.blur_konsole
-                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
-            && !isPlasma && !isOpaque && !subApp && !isLibreoffice
+        if (!isPlasma && !isOpaque && !subApp && !isLibreoffice
             && widget->isWindow()
             && widget->windowType() != Qt::Desktop
             && !widget->testAttribute(Qt::WA_PaintOnScreen)
             && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
             && !widget->inherits("KScreenSaver")
             && !widget->inherits("QTipLabel")
-            && !widget->inherits("QSplashScreen")
-            && (isYakuake || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
-            /* FIXME: I included this because I thought, without it, QtWebKit
-               apps would crash on quitting but that wasn't the case. However,
-               only blurring needs it and it's taken care of by BlurHelper. */
-            //&& widget->internalWinId()
-            && !translucentWidgets.contains(widget))
+            && !widget->inherits("QSplashScreen"))
+            
         {
-#if QT_VERSION < 0x050000
-          /* workaround for a Qt4 bug, which makes translucent windows
-             always appear at the top left corner (taken from QtCurve) */
-          bool was_visible = widget->isVisible();
-          bool moved = widget->testAttribute(Qt::WA_Moved);
-          if (was_visible) widget->hide();
-#endif
-
-          widget->setAttribute(Qt::WA_TranslucentBackground);
-
-#if QT_VERSION < 0x050000
-          if (!moved) widget->setAttribute(Qt::WA_Moved, false);
-          if (was_visible) widget->show();
-#endif
-
-          /* enable blurring... */
-          if (blurHelper
-              /* ... but not for Konsole's dialogs if
-                 blurring isn't enabled for translucent windows */
-              && tspec.blurring)
+          if (widget->minimumSize() != widget->maximumSize())
           {
-            blurHelper->registerWidget(widget);
+            /*if (QMainWindow* mw = qobject_cast<QMainWindow*>(widget))
+            {
+              if (hspec.forceSizeGrip)
+              {
+                QStatusBar *sb = mw->statusBar();
+                sb->setSizeGripEnabled(true);
+              }
+            }
+            else*/ if (QDialog* d = qobject_cast<QDialog*>(widget))
+            {
+              if (hspec.forceSizeGrip)
+                d->setSizeGripEnabled(true);
+            }
           }
-          /* enable blurring for Konsole... */
-          else if ((isKonsole || isYakuake)// && hspec.blur_konsole
-                   /* ... but only for its main window */
-                   //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
-                   && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
+          if (((tspec.translucent_windows
+                && !widget->testAttribute(Qt::WA_TranslucentBackground)
+                && !widget->testAttribute(Qt::WA_NoSystemBackground))
+               /* enable blurring for Konsole's main window if it's transparent */
+               || ((isKonsole || isYakuake) && hspec.blur_konsole
+                   && widget->testAttribute(Qt::WA_TranslucentBackground)))
+              && (isYakuake || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
+              /* FIXME: I included this because I thought, without it, QtWebKit
+                 apps would crash on quitting but that wasn't the case. However,
+                 only blurring needs it and it's taken care of by BlurHelper. */
+              //&& widget->internalWinId()
+              && !translucentWidgets.contains(widget))
           {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-            if (!blurHelper)
-              blurHelper = new BlurHelper(this,QList<int>(),QList<int>());
+#if QT_VERSION < 0x050000
+            /* workaround for a Qt4 bug, which makes translucent windows
+               always appear at the top left corner (taken from QtCurve) */
+            bool was_visible = widget->isVisible();
+            bool moved = widget->testAttribute(Qt::WA_Moved);
+            if (was_visible) widget->hide();
 #endif
-            if (blurHelper)
+
+            widget->setAttribute(Qt::WA_TranslucentBackground);
+
+#if QT_VERSION < 0x050000
+            if (!moved) widget->setAttribute(Qt::WA_Moved, false);
+            if (was_visible) widget->show();
+#endif
+
+            /* enable blurring... */
+            if (blurHelper
+                /* ... but not for Konsole's dialogs if
+                   blurring isn't enabled for translucent windows */
+                && tspec.blurring)
+            {
               blurHelper->registerWidget(widget);
-          }
+            }
+            /* enable blurring for Konsole... */
+            else if ((isKonsole || isYakuake)// && hspec.blur_konsole
+                     /* ... but only for its main window */
+                     //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
+                     && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
+            {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+              if (!blurHelper)
+                blurHelper = new BlurHelper(this,QList<int>(),QList<int>());
+#endif
+              if (blurHelper)
+                blurHelper->registerWidget(widget);
+            }
 
-          widget->removeEventFilter(this);
-          widget->installEventFilter(this);
-          translucentWidgets.insert(widget);
-          connect(widget, SIGNAL(destroyed(QObject*)),
-                  SLOT(noTranslucency(QObject*)));
+            widget->removeEventFilter(this);
+            widget->installEventFilter(this);
+            translucentWidgets.insert(widget);
+            connect(widget, SIGNAL(destroyed(QObject*)),
+                    SLOT(noTranslucency(QObject*)));
+          }
         }
         break;
       }
@@ -626,6 +647,11 @@ void Kvantum::polish(QWidget *widget)
       shadow.setAlpha(0);
       palette.setColor(QPalette::Shadow, shadow);
       widget->setPalette(palette);
+    }
+    else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
+    {
+      if (hspec.forceSizeGrip)
+        sb->setSizeGripEnabled(true);
     }
 
     if (!isLibreoffice // not required

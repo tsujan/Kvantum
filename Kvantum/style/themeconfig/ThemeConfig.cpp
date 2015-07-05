@@ -556,5 +556,8 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","respect_darkness");
   r.respect_darkness = v.toBool();
 
+  v = getValue("Hacks","force_size_grip");
+  r.forceSizeGrip = v.toBool();
+
   return r;
 }

@@ -370,7 +370,7 @@ settings of this theme.
           </property>
           <widget class="QWidget" name="tab">
            <property name="toolTip">
-            <string>Uncheck these six boxes if you want all
+            <string>Uncheck these seven boxes if you want all
 widgets to appear as they are by default.</string>
            </property>
            <attribute name="title">
@@ -465,6 +465,17 @@ Kvantum can try to correct their behavior.</string>
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="6" column="1">
+             <widget class="QCheckBox" name="checkBoxGrip">
+              <property name="toolTip">
+               <string>Show size grips of dialogs and statusbars
+as far as possible.</string>
+              </property>
+              <property name="text">
+               <string>Force size grips</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

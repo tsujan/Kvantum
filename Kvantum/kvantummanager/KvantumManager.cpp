@@ -427,6 +427,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
     ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
+    ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
     defaultSettings.endGroup();
 
     defaultSettings.beginGroup ("General");
@@ -688,6 +689,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
                 ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
+                ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
                 themeSettings.endGroup();
             }
         }
@@ -976,6 +978,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
         hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
         hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
+        hackKeys.insert("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
@@ -1023,6 +1026,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
         themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
+        themeSettings.setValue ("force_size_grip", ui->checkBoxGrip->isChecked());
 #endif
         themeSettings.endGroup();
 

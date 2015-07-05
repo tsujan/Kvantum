@@ -155,6 +155,8 @@ typedef struct {
   /* Some apps don't respect dark themes.
      Fix that as far as possible! */
   bool respect_darkness;
+  /* show size grips as far as possible? */
+  bool forceSizeGrip;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -352,6 +354,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_menutitle = false;
   hspec.kcapacitybar_as_progressbar = false;
   hspec.respect_darkness = false;
+  hspec.forceSizeGrip = false;
 }
 
 #endif

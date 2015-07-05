@@ -8,6 +8,7 @@ V0.8.21
  * Compile kvantumpreview and kventummanager against Qt5 by default.
  * Workaround for the nasty behavior of Qt5 QSettings, which reorders keys on writing.
  * A little more space for centered toolbar handles.
+ * Added a hacking key to force size grips of dialogs and statusbars.
 
 V0.8.20
 ---------
