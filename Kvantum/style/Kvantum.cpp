@@ -2890,7 +2890,6 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
 
       const QString group = "ItemView";
       frame_spec fspec = getFrameSpec(group);
-      fspec.expansion = 0; // maximum rounding is problematic here
       interior_spec ispec = getInteriorSpec(group);
       ispec.px = ispec.py = 0;
 
@@ -2924,6 +2923,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             fspec.capsuleV = 2;
             fspec.capsuleH = -1;
             right = fspec.right;
+            fspec.expansion = 0;
             break;
           }
           case QStyleOptionViewItemV4::End: {
@@ -2931,6 +2931,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             fspec.capsuleV = 2;
             fspec.capsuleH = 1;
             left = fspec.left;
+            fspec.expansion = 0;
             break;
           }
           case QStyleOptionViewItemV4::Middle: {
@@ -2939,6 +2940,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
             fspec.capsuleH = 0;
             left = fspec.left;
             right = fspec.right;
+            fspec.expansion = 0;
             break;
           }
           default: break;
@@ -2947,6 +2949,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
         {
           /* in this case, the item is colored intentionally
              (as in Konsole's color scheme editing dialog) */
+          fspec.expansion = 0;
           if (opt->state & State_HasFocus)
             renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.hasCapsule,true);
           else if (ivStatus != "normal" && ivStatus != "disabled")
@@ -3014,6 +3017,11 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         ivStatus.append(QString("-inactive"));
 
+      /* this is needed for elegance */
+      if (option->rect.height() < 2)
+        fspec.expansion = 0;
+      else
+        fspec.expansion = qMin(fspec.expansion,option->rect.height()/2);
       /* since Dolphin's view-items have problem with QSvgRenderer, we set usePixmap to true */
       renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.hasCapsule,true);
@@ -4596,7 +4604,6 @@ void Kvantum::drawControl(ControlElement element,
     case CE_HeaderSection : {
       const QString group = "HeaderSection";
       frame_spec fspec = getFrameSpec(group);
-      fspec.expansion = 0; // maximum rounding is problematic here
       const interior_spec ispec = getInteriorSpec(group);
 
       bool horiz = true;
@@ -4691,8 +4698,13 @@ void Kvantum::drawControl(ControlElement element,
       }
       else if (status.startsWith("toggled")) // the toggled state isn't needed
         status.replace(QString("toggled"),QString("normal"));
-      renderFrame(painter,r,fspec,fspec.element+"-"+status);
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+      /* for elegance */
+      if (r.height() < 2)
+        fspec.expansion = 0;
+      else
+        fspec.expansion = qMin(fspec.expansion,r.height()/2);
+      renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
       if (themeRndr && themeRndr->isValid() && !themeRndr->elementExists("header-separator"))
         renderElement(painter,fspec.element+"-"+status+"-left",sep);
@@ -9538,6 +9550,7 @@ void Kvantum::renderFrame(QPainter *painter,
     /* the expansion should be less here; otherwise, the border wouldn't be smooth */
     frame_spec Fspec = fspec;
     Fspec.expansion = fspec.expansion - fspec.top - fspec.bottom;
+    if (Fspec.expansion <= 0) Fspec.expansion = 1;
     renderFrame(painter,
                 bounds.adjusted((fspec.hasCapsule && (fspec.capsuleH == 1 || fspec.capsuleH == 0)) ? 0 : fspec.left,
                                 fspec.top,
