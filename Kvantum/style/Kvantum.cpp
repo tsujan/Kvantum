@@ -649,8 +649,8 @@ void Kvantum::polish(QWidget *widget)
       widget->setPalette(palette);
     }
     else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
-    {
-      if (hspec.forceSizeGrip)
+    { // WARNING: adding size grip to non-window widgets may cause crash
+      if (hspec.forceSizeGrip && qobject_cast<QMainWindow*>(sb->parentWidget()))
         sb->setSizeGripEnabled(true);
     }
 

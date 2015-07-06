@@ -470,7 +470,9 @@ Kvantum can try to correct their behavior.</string>
              <widget class="QCheckBox" name="checkBoxGrip">
               <property name="toolTip">
                <string>Show size grips of dialogs and statusbars
-as far as possible.</string>
+as far as possible.
+
+WARNING: This key is experimental.</string>
               </property>
               <property name="text">
                <string>Force size grips</string>

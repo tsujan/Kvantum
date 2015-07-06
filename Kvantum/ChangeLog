@@ -1,6 +1,6 @@
 V0.8.22
 ---------
- * Added a hacking key to force size grips of dialogs and statusbars.
+ * Added an experimental hacking key to force size grips of dialogs and statusbars.
  * Partially rounded view-items (in some places) and headers.
 
 V0.8.21
