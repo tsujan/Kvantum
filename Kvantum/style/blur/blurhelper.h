@@ -31,6 +31,7 @@
 #include <X11/Xdefs.h>
 #endif
 
+namespace Kvantum {
 /* A class for blurring the region behind a translucent window in KDE. */
 class BlurHelper: public QObject
 {
@@ -107,5 +108,6 @@ class BlurHelper: public QObject
     Atom _atom_blur;
 #endif
 };
+}
 
 #endif

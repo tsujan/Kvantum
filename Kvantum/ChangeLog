@@ -2,6 +2,7 @@ V0.8.22
 ---------
  * Added an experimental hacking key to force size grips of dialogs and statusbars.
  * Partially rounded view-items (in some places) and headers.
+ * How did I forget namespace in such a program?!
 
 V0.8.21
 ---------

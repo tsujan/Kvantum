@@ -24,6 +24,7 @@
 #include <QMenu>
 #include <QMenuBar>
 
+namespace Kvantum {
 ShortcutHandler::ShortcutHandler(QObject *parent) : QObject(parent),
                                                     itsAltDown(false)
 {
@@ -158,4 +159,5 @@ bool ShortcutHandler::eventFilter(QObject *o, QEvent *e)
         break;
     }
     return QObject::eventFilter(o, e);
+}
 }

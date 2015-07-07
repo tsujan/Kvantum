@@ -29,6 +29,7 @@
 #include <X11/Xatom.h>
 #endif
 
+namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
@@ -140,4 +141,5 @@ void BlurHelper::clear (QWidget* widget) const
   Q_UNUSED (widget);
 #endif
   return;
+}
 }

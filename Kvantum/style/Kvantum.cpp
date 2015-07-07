@@ -68,7 +68,9 @@
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
 #define MIN_CONTRAST 65
 
-Kvantum::Kvantum() : QCommonStyle()
+namespace Kvantum
+{
+Style::Style() : QCommonStyle()
 {
   progresstimer = new QTimer(this);
 
@@ -172,7 +174,7 @@ Kvantum::Kvantum() : QCommonStyle()
     hasFlatIndicator = true;
 }
 
-Kvantum::~Kvantum()
+Style::~Style()
 {
   delete defaultSettings;
   delete themeSettings;
@@ -181,7 +183,7 @@ Kvantum::~Kvantum()
   delete themeRndr;
 }
 
-void Kvantum::setBuiltinDefaultTheme()
+void Style::setBuiltinDefaultTheme()
 {
   if (defaultSettings)
   {
@@ -199,7 +201,7 @@ void Kvantum::setBuiltinDefaultTheme()
   defaultRndr->load(QString(":default.svg"));
 }
 
-void Kvantum::setUserTheme(const QString &themename)
+void Style::setUserTheme(const QString &themename)
 {
   if (themeSettings)
   {
@@ -282,7 +284,7 @@ void Kvantum::setUserTheme(const QString &themename)
   setupThemeDeps();
 }
 
-void Kvantum::setupThemeDeps()
+void Style::setupThemeDeps()
 {
   if (themeSettings)
   {
@@ -294,7 +296,7 @@ void Kvantum::setupThemeDeps()
     settings = defaultSettings;
 }
 
-void Kvantum::advanceProgresses()
+void Style::advanceProgresses()
 {
   QMap<QWidget *,int>::iterator it;
   for (it = progressbars.begin(); it != progressbars.end(); ++it)
@@ -308,7 +310,7 @@ void Kvantum::advanceProgresses()
   }
 }
 
-QList<int> Kvantum::getShadow (const QString &widgetName, int thicknessH, int thicknessV)
+QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thicknessV)
 {
   QSvgRenderer *renderer = 0;
   int divisor = 0;
@@ -362,13 +364,13 @@ static inline bool enoughContrast (QColor col1, QColor col2)
   return true;
 }
 
-void Kvantum::noTranslucency(QObject *o)
+void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets.remove(widget);
 }
 
-void Kvantum::polish(QWidget *widget)
+void Style::polish(QWidget *widget)
 {
   if (widget)
   {
@@ -703,7 +705,7 @@ static QString getAppName(const QString &file)
 }
 #endif
 
-void Kvantum::polish(QApplication *app)
+void Style::polish(QApplication *app)
 {
 #if QT_VERSION < 0x040806
   /* use this old-fashioned method to get the app name
@@ -746,7 +748,7 @@ void Kvantum::polish(QApplication *app)
   }
 }
 
-void Kvantum::polish(QPalette &palette)
+void Style::polish(QPalette &palette)
 {
     const color_spec cspec = settings->getColorSpec();
 
@@ -844,7 +846,7 @@ void Kvantum::polish(QPalette &palette)
     }
 }
 
-void Kvantum::unpolish(QWidget *widget)
+void Style::unpolish(QWidget *widget)
 {
   if (widget)
   {
@@ -892,14 +894,14 @@ void Kvantum::unpolish(QWidget *widget)
   }
 }
 
-void Kvantum::unpolish(QApplication *app)
+void Style::unpolish(QApplication *app)
 {
   if (itsShortcutHandler)
     app->removeEventFilter(itsShortcutHandler);
   QCommonStyle::unpolish(app);
 }
 
-void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
+void Style::drawBg(QPainter *p, const QWidget *widget) const
 {
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
     return; // Plasma FIXME needed?
@@ -918,7 +920,7 @@ void Kvantum::drawBg(QPainter *p, const QWidget *widget) const
   renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix);
 }
 
-bool Kvantum::eventFilter(QObject *o, QEvent *e)
+bool Style::eventFilter(QObject *o, QEvent *e)
 {
   QWidget *w = qobject_cast<QWidget*>(o);
 
@@ -1246,7 +1248,7 @@ static QSet<const QWidget*> standardButton;
    the text color. We use the following QHash to prevent such loops. */
 static QHash<QWidget*,QColor> txtColForced;
 
-void Kvantum::removeFromSet(QObject *o)
+void Style::removeFromSet(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   paneledButtons.remove(widget);
@@ -1260,7 +1262,7 @@ void Kvantum::removeFromSet(QObject *o)
    the push or tool button text colors when the bevel is drawn at CE_PushButtonBevel or
    PE_PanelButtonTool, without forcing any color when the bevel is drawn differently, as
    in Amarok's BreadcrumbItemButton (ElidingButton). */
-void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
+void Style::forceButtonTextColor(QWidget *widget, QColor col) const
 {
   /* eliminate any possibility of getting caught in infinite loops */
   if (widget && txtColForced.contains(widget) && txtColForced.value(widget) == col)
@@ -1289,7 +1291,7 @@ void Kvantum::forceButtonTextColor(QWidget *widget, QColor col) const
   }
 }
 
-void Kvantum::drawPrimitive(PrimitiveElement element,
+void Style::drawPrimitive(PrimitiveElement element,
                             const QStyleOption *option,
                             QPainter *painter,
                             const QWidget *widget) const
@@ -3056,7 +3058,7 @@ void Kvantum::drawPrimitive(PrimitiveElement element,
   }
 }
 
-void Kvantum::drawControl(ControlElement element,
+void Style::drawControl(ControlElement element,
                           const QStyleOption *option,
                           QPainter *painter,
                           const QWidget *widget) const
@@ -5616,7 +5618,7 @@ void Kvantum::drawControl(ControlElement element,
   }
 }
 
-void Kvantum::drawComplexControl(ComplexControl control,
+void Style::drawComplexControl(ComplexControl control,
                                  const QStyleOptionComplex *option,
                                  QPainter *painter,
                                  const QWidget *widget) const
@@ -6539,7 +6541,7 @@ void Kvantum::drawComplexControl(ComplexControl control,
   }
 }
 
-int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
+int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
 {
   switch (metric) {
     case PM_ButtonMargin : return 0;
@@ -6862,7 +6864,7 @@ int Kvantum::pixelMetric(PixelMetric metric, const QStyleOption *option, const Q
   (2) Setting Qt::AA_DontCreateNativeWidgetSiblings, so that the method
       enforceNativeChildren() isn't used in setAttribute() (-> qwidget.cpp).
 */
-void Kvantum::setSurfaceFormat(QWidget *widget) const
+void Style::setSurfaceFormat(QWidget *widget) const
 {
 #if QT_VERSION < 0x050000
   Q_UNUSED(widget);
@@ -6904,7 +6906,7 @@ void Kvantum::setSurfaceFormat(QWidget *widget) const
 #endif
 }
 
-int Kvantum::styleHint(StyleHint hint,
+int Style::styleHint(StyleHint hint,
                        const QStyleOption *option,
                        const QWidget *widget,
                        QStyleHintReturn *returnData) const
@@ -7032,7 +7034,7 @@ int Kvantum::styleHint(StyleHint hint,
   }
 }
 
-QCommonStyle::SubControl Kvantum::hitTestComplexControl (ComplexControl control,
+QCommonStyle::SubControl Style::hitTestComplexControl (ComplexControl control,
                                                          const QStyleOptionComplex *option,
                                                          const QPoint &position,
                                                          const QWidget *widget) const
@@ -7040,7 +7042,7 @@ QCommonStyle::SubControl Kvantum::hitTestComplexControl (ComplexControl control,
   return QCommonStyle::hitTestComplexControl(control,option,position,widget);
 }
 
-QSize Kvantum::sizeFromContents (ContentsType type,
+QSize Style::sizeFromContents (ContentsType type,
                                  const QStyleOption *option,
                                  const QSize &contentsSize,
                                  const QWidget *widget) const
@@ -7701,7 +7703,7 @@ QSize Kvantum::sizeFromContents (ContentsType type,
   return s.expandedTo(defaultSize);
 }
 
-QSize Kvantum::sizeCalculated(const QFont &font,
+QSize Style::sizeCalculated(const QFont &font,
                               const frame_spec &fspec, // frame spec
                               const label_spec &lspec, // label spec
                               const size_spec &sspec, // size spec
@@ -7770,7 +7772,7 @@ QSize Kvantum::sizeCalculated(const QFont &font,
   return s;
 }
 
-QSize Kvantum::textSize (const QFont &font, const QString &text) const
+QSize Style::textSize (const QFont &font, const QString &text) const
 {
   int tw, th;
   tw = th = 0;
@@ -7799,7 +7801,7 @@ QSize Kvantum::textSize (const QFont &font, const QString &text) const
   return QSize(tw,th);
 }
 
-QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const
+QRect Style::subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const
 {
   switch (element) {
     case SE_CheckBoxFocusRect :
@@ -8187,7 +8189,7 @@ QRect Kvantum::subElementRect(SubElement element, const QStyleOption *option, co
   }
 }
 
-QRect Kvantum::subControlRect(ComplexControl control,
+QRect Style::subControlRect(ComplexControl control,
                               const QStyleOptionComplex *option,
                               SubControl subControl,
                               const QWidget *widget) const
@@ -8833,11 +8835,11 @@ QRect Kvantum::subControlRect(ComplexControl control,
 }
 
 #if QT_VERSION < 0x050000
-QIcon Kvantum::standardIconImplementation (QStyle::StandardPixmap standardIcon,
+QIcon Style::standardIconImplementation (QStyle::StandardPixmap standardIcon,
                                            const QStyleOption *option,
                                            const QWidget *widget) const
 #else
-QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
+QIcon Style::standardIcon (QStyle::StandardPixmap standardIcon,
                              const QStyleOption *option,
                              const QWidget *widget ) const
 #endif
@@ -8961,7 +8963,7 @@ QIcon Kvantum::standardIcon (QStyle::StandardPixmap standardIcon,
 #endif
 }
 
-QRect Kvantum::squaredRect(const QRect &r) const {
+QRect Style::squaredRect(const QRect &r) const {
   int e = (r.width() > r.height()) ? r.height() : r.width();
   return QRect(r.x(),r.y(),e,e);
 }
@@ -8979,7 +8981,7 @@ static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRe
   painter->drawPixmap(bounds,pixmap);
 }
 
-bool Kvantum::renderElement(QPainter *painter,
+bool Style::renderElement(QPainter *painter,
                             const QString &element,
                             const QRect &bounds,
                             int hsize, int vsize, // pattern sizes
@@ -9057,7 +9059,7 @@ bool Kvantum::renderElement(QPainter *painter,
   return true;
 }
 
-void Kvantum::renderSliderTick(QPainter *painter,
+void Style::renderSliderTick(QPainter *painter,
                                const QString &element,
                                const QRect &ticksRect,
                                const int interval,
@@ -9120,7 +9122,7 @@ void Kvantum::renderSliderTick(QPainter *painter,
   }
 }
 
-void Kvantum::renderFrame(QPainter *painter,
+void Style::renderFrame(QPainter *painter,
                           const QRect &bounds, // frame bounds
                           const frame_spec &fspec, // frame spec
                           const QString &element, // frame SVG element
@@ -9560,7 +9562,7 @@ void Kvantum::renderFrame(QPainter *painter,
   }
 }
 
-void Kvantum::renderInterior(QPainter *painter,
+void Style::renderInterior(QPainter *painter,
                              const QRect &bounds, // frame bounds
                              const frame_spec &fspec, // frame spec
                              const interior_spec &ispec, // interior spec
@@ -9616,7 +9618,7 @@ void Kvantum::renderInterior(QPainter *painter,
   }
 }
 
-void Kvantum::renderIndicator(QPainter *painter,
+void Style::renderIndicator(QPainter *painter,
                               const QRect &bounds, // frame bounds
                               const frame_spec &fspec, // frame spec
                               const indicator_spec &dspec, // indicator spec
@@ -9637,7 +9639,7 @@ void Kvantum::renderIndicator(QPainter *painter,
                 0,0);
 }
 
-void Kvantum::renderLabel(
+void Style::renderLabel(
                           QPainter *painter,
                           const QPalette &palette,
                           const QRect &bounds, // frame bounds
@@ -9828,27 +9830,28 @@ void Kvantum::renderLabel(
   }
 }
 
-inline frame_spec Kvantum::getFrameSpec(const QString &widgetName) const
+inline frame_spec Style::getFrameSpec(const QString &widgetName) const
 {
   return settings->getFrameSpec(widgetName);
 }
 
-inline interior_spec Kvantum::getInteriorSpec(const QString &widgetName) const
+inline interior_spec Style::getInteriorSpec(const QString &widgetName) const
 {
   return settings->getInteriorSpec(widgetName);
 }
 
-inline indicator_spec Kvantum::getIndicatorSpec(const QString &widgetName) const
+inline indicator_spec Style::getIndicatorSpec(const QString &widgetName) const
 {
   return settings->getIndicatorSpec(widgetName);
 }
 
-inline label_spec Kvantum::getLabelSpec(const QString &widgetName) const
+inline label_spec Style::getLabelSpec(const QString &widgetName) const
 {
   return settings->getLabelSpec(widgetName);
 }
 
-inline size_spec Kvantum::getSizeSpec(const QString &widgetName) const
+inline size_spec Style::getSizeSpec(const QString &widgetName) const
 {
   return settings->getSizeSpec(widgetName);
+}
 }

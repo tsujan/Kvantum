@@ -14,6 +14,7 @@
 static Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZE", False);
 #endif
 
+namespace Kvantum {
 void X11MoveTrigger (WId wid, int x, int y)
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
@@ -45,4 +46,5 @@ void X11MoveTrigger (WId wid, int x, int y)
   Q_UNUSED (wid); Q_UNUSED (x); Q_UNUSED (y);
 #endif
   return;
+}
 }

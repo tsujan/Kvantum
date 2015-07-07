@@ -22,6 +22,7 @@
 
 class QSettings;
 
+namespace Kvantum {
 /*
    Class that loads theme settings.
  */
@@ -87,5 +88,6 @@ class ThemeConfig {
     QSettings *settings;
     ThemeConfig *parentConfig;
 };
+}
 
 #endif // THEMECONFIG_H

@@ -30,6 +30,7 @@ static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
 #endif
 #endif
 
+namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
   settings(NULL),
   parentConfig(NULL)
@@ -560,4 +561,5 @@ hacks_spec ThemeConfig::getHacksSpec() const
   r.forceSizeGrip = v.toBool();
 
   return r;
+}
 }

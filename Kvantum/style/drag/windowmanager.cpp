@@ -40,6 +40,7 @@
 #include "windowmanager.h"
 #include "x11wmmove.h"
 
+namespace Kvantum {
 WindowManager::WindowManager (QObject* parent) :
                QObject (parent),
                _enabled (true),
@@ -57,7 +58,6 @@ void WindowManager::initialize (const QStringList &whiteList, const QStringList 
 {
   setEnabled (true);
   setDragDelay (QApplication::startDragTime());
-  QStringList sl = QStringList();
   initializeWhiteList (whiteList);
   initializeBlackList (blackList);
 }
@@ -639,4 +639,5 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
   }
 
   return true;
+}
 }

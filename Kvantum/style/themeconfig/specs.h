@@ -23,6 +23,7 @@
 
 #include <QStringList>
 
+namespace Kvantum {
 /* Generic information about a theme */
 typedef struct {
   QString author;
@@ -355,6 +356,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.kcapacitybar_as_progressbar = false;
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
+}
 }
 
 #endif

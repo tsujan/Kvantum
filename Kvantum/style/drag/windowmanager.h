@@ -30,6 +30,7 @@
 #endif
 #include <QWidget>
 
+namespace Kvantum {
 class WindowManager: public QObject
 {
   Q_OBJECT
@@ -216,5 +217,6 @@ private:
   // allow access of all private members to the app event filter
   friend class AppEventFilter;
 };
+}
 
 #endif

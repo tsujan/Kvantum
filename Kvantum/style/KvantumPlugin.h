@@ -20,6 +20,7 @@
 
 #include <QStylePlugin>
 
+namespace Kvantum {
 class KvantumPlugin : public QStylePlugin {
 #if QT_VERSION >= 0x050000
     Q_OBJECT
@@ -31,5 +32,6 @@ class KvantumPlugin : public QStylePlugin {
 #endif
     QStyle *create(const QString &key);
 };
+}
 
 #endif

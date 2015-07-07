@@ -28,13 +28,14 @@
 
 class QSvgRenderer;
 
-class Kvantum : public QCommonStyle {
+namespace Kvantum {
+class Style : public QCommonStyle {
   Q_OBJECT
   Q_CLASSINFO("X-KDE-CustomElements","true")
 
   public:
-    Kvantum();
-    ~Kvantum();
+    Style();
+    ~Style();
 
     /*
        Set the name of the user specific theme. If there
@@ -285,5 +286,6 @@ class Kvantum : public QCommonStyle {
     /* Search for the toolbutton flat indicator just once! */
     bool hasFlatIndicator;
 };
+}
 
 #endif

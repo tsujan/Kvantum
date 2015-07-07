@@ -26,6 +26,7 @@
 
 class QWidget;
 
+namespace Kvantum {
 class ShortcutHandler: public QObject {
     Q_OBJECT
 
@@ -57,5 +58,6 @@ private:
     QSet<QWidget*> itsUpdated;
     QList<QWidget*> itsOpenMenus;
 };
+}
 
 #endif
