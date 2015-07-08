@@ -3,6 +3,7 @@ V0.8.22
  * Added an experimental hacking key to force size grips of dialogs and statusbars.
  * Partially rounded view-items (in some places) and headers.
  * How did I forget namespace in such a program?!
+ * Take care of transparent line-edits in comboboxes (I've seen them only in Qt5 Cantata).
 
 V0.8.21
 ---------

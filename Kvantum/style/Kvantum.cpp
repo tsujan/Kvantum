@@ -2252,10 +2252,10 @@ void Style::drawPrimitive(PrimitiveElement element,
       else if (QComboBox *cb = qobject_cast<QComboBox*>(p))
       {
         fspec.hasCapsule = true;
-        const frame_spec fspec1 = getFrameSpec("ComboBox");
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
+          const frame_spec fspec1 = getFrameSpec("ComboBox");
           if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
             fspec.capsuleH = 0;
           else fspec.capsuleH = 1;
@@ -2570,18 +2570,23 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         fspec = getFrameSpec("ComboBox");
         ispec = getInteriorSpec("ComboBox");
-        fspec.hasCapsule = true;
-        if (rtl)
+        if (!(cb->lineEdit()
+              // someone may want transparent lineedits (as the developer of Cantata does)
+              && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
         {
-          fspec.capsuleH = -1;
-          fspec.right = 0;
+          fspec.hasCapsule = true;
+          if (rtl)
+          {
+            fspec.capsuleH = -1;
+            fspec.right = 0;
+          }
+          else
+          {
+            fspec.capsuleH = 1;
+            fspec.left = 0; // no left frame in this case
+          }
+          fspec.capsuleV = 2;
         }
-        else
-        {
-          fspec.capsuleH = 1;
-          fspec.left = 0; // no left frame in this case
-        }
-        fspec.capsuleV = 2;
 
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
@@ -5929,6 +5934,17 @@ void Style::drawComplexControl(ComplexControl control,
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          /* in case we don't like transparent lineedits (in Cantata) */
+          /*if (cb && cb->lineEdit()
+              && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0)
+          {
+            QStyleOptionComboBox leOpt(*opt);
+            leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
+                                         rtl ? editWidth-o.rect.width() : 0);
+            leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
+                          | State_KeyboardFocusChange;
+            drawPrimitive(PE_PanelLineEdit, &leOpt, painter, cb->lineEdit());
+          }*/
           if (libreoffice) painter->restore();
           /* force label color (as in Krusader) */
           if (cb && !status.startsWith("disabled"))
@@ -5991,11 +6007,8 @@ void Style::drawComplexControl(ComplexControl control,
           else
             fspec.right = 0;
           int labelWidth = 0;
-          if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
-          {
-            if (cb->lineEdit())
-              labelWidth = rtl ? o.rect.width()-cb->lineEdit()->width() : cb->lineEdit()->x();
-          }
+          if (cb && cb->lineEdit())
+            labelWidth = rtl ? o.rect.width()-cb->lineEdit()->width() : cb->lineEdit()->x();
 
           int state = 1;
           if (status.startsWith("disabled"))
