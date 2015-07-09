@@ -6745,7 +6745,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_ScrollBarExtent :
       return tspec.scroll_width;
-    case PM_ScrollBarSliderMin : return 36;
+    case PM_ScrollBarSliderMin :
+      return tspec.scroll_min_extent;
 
     case PM_ProgressBarChunkWidth : return 20;
 
@@ -8433,11 +8434,12 @@ QRect Style::subControlRect(ComplexControl control,
         QRect r = subControlRect(CC_ScrollBar,option,SC_ScrollBarGroove,widget);
         r.getRect(&x,&y,&w,&h);
 
-        const int minLength = pixelMetric(PM_ScrollBarSliderMin,option,widget);
         if (horiz)
           maxLength = w;
         else
           maxLength = h;
+        int minLength = pixelMetric(PM_ScrollBarSliderMin,option,widget);
+        if (minLength >= maxLength) minLength = qMax(maxLength-1,16); // 1px for scrolling down
         const int valueRange = opt->maximum - opt->minimum;
         length = maxLength;
         if (opt->minimum != opt->maximum)

@@ -4,6 +4,8 @@ V0.8.22
  * Partially rounded view-items (in some places) and headers.
  * How did I forget namespace in such a program?!
  * Take care of transparent line-edits in comboboxes (I've seen them only in Qt5 Cantata).
+ * Added a key for the minimum scrollbar extent and gave a 1px space to scrollbars of very thin widgets.
+ * Set lower/upper limits for some integer keys.
 
 V0.8.21
 ---------

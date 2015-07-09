@@ -293,11 +293,19 @@ popup_blurring                    true/false          Blur the regions behind tr
                                                       supports it. It will automatically
                                                       be set to true if blurring is true.
 
-splitter_width                    integer             The width of splitter handles. 7px
-                                                      by default.
+splitter_width                    integer             The width of splitter handles. It
+                                                      cannot be greater than 32px and is
+                                                      7px by default.
 
-scroll_width                      integer             The width of scrollbars. The
+scroll_width                      integer             The thickness of scrollbars. It
+                                                      cannot be greater than 32px. The
                                                       default value is 12px.
+
+scroll_min_extent                 integer             The minimum height of a vertical
+                                                      scrollbar slider and the minimum
+                                                      width of a horizontal one. It cannot
+                                                      be greater that 100px or less than
+                                                      16px. The default value is 36px.
 
 scroll_arrows                     true/false          Draw scrollbar add-line and sub-line
                                                       arrows? True by default. If set to
@@ -305,13 +313,13 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
                                                       as far as possible but some apps might
                                                       still force scroll arrows.
 
-slider_width                      integer             The width of sliders. The default
-                                                      value is 8px.
+slider_width                      integer             The width of sliders. It cannot be
+                                                      greater than 48px and is 8px by default.
 
 slider_handle_width
-slider_handle_length              integer             The width or height of slider
-                                                      handles. The default values are
-                                                      16px.
+slider_handle_length              integer             The width and the height of slider
+                                                      handles. They cannot be greater than
+                                                      48px. The default values are 16px.
 
 check_size                        integer             The width and height of checkboxes
                                                       and radio buttons. The default

@@ -409,11 +409,15 @@ theme_spec ThemeConfig::getThemeSpec() const
 
   v = getValue("General","splitter_width", empty);
   if (v.isValid())
-    r.splitter_width = qMax(v.toInt(),0);
+    r.splitter_width = qMin(qMax(v.toInt(),0),32);
 
   v = getValue("General","scroll_width", empty);
   if (v.isValid())
-    r.scroll_width = qMax(v.toInt(),0);
+    r.scroll_width = qMin(qMax(v.toInt(),0),32);
+
+  v = getValue("General","scroll_min_extent", empty);
+  if (v.isValid())
+    r.scroll_min_extent = qMin(qMax(v.toInt(),16),100);
 
   v = getValue("General","scroll_arrows", empty);
   if (v.isValid()) // it's true by default
@@ -421,15 +425,15 @@ theme_spec ThemeConfig::getThemeSpec() const
 
   v = getValue("General","slider_width", empty);
   if (v.isValid())
-    r.slider_width = qMax(v.toInt(),0);
+    r.slider_width = qMin(qMax(v.toInt(),0),48);
 
   v = getValue("General","slider_handle_width", empty);
   if (v.isValid())
-    r.slider_handle_width = qMax(v.toInt(),0);
+    r.slider_handle_width = qMin(qMax(v.toInt(),0),48);
 
   v = getValue("General","slider_handle_length", empty);
   if (v.isValid())
-    r.slider_handle_length = qMax(v.toInt(),0);
+    r.slider_handle_length = qMin(qMax(v.toInt(),0),48);
 
   v = getValue("General","check_size", empty);
   if (v.isValid())
