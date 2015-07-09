@@ -4600,7 +4600,8 @@ void Style::drawControl(ControlElement element,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
                                 Qt::AlignCenter,
-                                QSize(pixelMetric(PM_ScrollBarExtent)-fspec.left-fspec.right,dspec.size),
+                                QSize(pixelMetric(PM_ScrollBarExtent)-fspec.left-fspec.right,
+                                      qMin(dspec.size,r.height()-fspec.top-fspec.bottom)),
                                 r));
       if (!(option->state & State_Enabled))
         painter->restore();
