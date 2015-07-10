@@ -3688,7 +3688,7 @@ void Style::drawControl(ControlElement element,
         }
         QTabWidget *tw = qobject_cast<QTabWidget *>(getParent(widget,1));
         if (!tw || tw->documentMode()) docMode = true;
-        if ((!docMode || tspec.mirror_doc_tabs)
+        if ((!(docMode || !tspec.attach_active_tab) || tspec.mirror_doc_tabs)
             && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
 
@@ -3743,7 +3743,7 @@ void Style::drawControl(ControlElement element,
           painter->save();
           int X, Y, rot;
           int xTr = 0; int xScale = 1;
-          if ((!docMode || tspec.mirror_doc_tabs)
+          if ((!(docMode || !tspec.attach_active_tab) || tspec.mirror_doc_tabs)
               && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
           {
             X = w;
@@ -3843,7 +3843,7 @@ void Style::drawControl(ControlElement element,
           verticalTabs = true;
         }
         QTabWidget *tw = qobject_cast<QTabWidget *>(getParent(widget,1));
-        if ((!tw || tw->documentMode()) && !tspec.mirror_doc_tabs)
+        if ((!tw || tw->documentMode() || !tspec.attach_active_tab) && !tspec.mirror_doc_tabs)
           mirror = false;
         if (mirror && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;

@@ -29,7 +29,14 @@ public:
     setupUi (this);
     QList<int> sizes; sizes << 50 << 50;
     splitter->setSizes (sizes);
+    splitter_2->setSizes (sizes);
     treeWidget->sortItems (0, Qt::AscendingOrder);
+#if QT_VERSION < 0x050000
+    QTabBar *tb = tabWidget->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar"));
+    if (tb) tb->setUsesScrollButtons (false);
+#else
+    tabWidget->tabBar()->setUsesScrollButtons (false);
+#endif
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));

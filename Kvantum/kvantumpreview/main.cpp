@@ -25,6 +25,17 @@ int main (int argc, char *argv[])
   QApplication viewer (argc,argv);
   KvantumPreview k (NULL);
   k.show();
+  QList<QTabWidget *> list = k.findChildren<QTabWidget*>();
+  if (!list.isEmpty())
+  {
+    QTabWidget *tw = list.at (0);
+#if QT_VERSION < 0x050000
+    QTabBar *tb = tw->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar"));
+    if (tb) tb->setUsesScrollButtons (true);
+#else
+    tw->tabBar()->setUsesScrollButtons (true);
+#endif
+  }
   QObject::connect (&viewer, SIGNAL (lastWindowClosed()), &viewer, SLOT (quit()));
   return viewer.exec();
 }

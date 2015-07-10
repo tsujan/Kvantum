@@ -6,6 +6,7 @@ V0.8.22
  * Take care of transparent line-edits in comboboxes (I've seen them only in Qt5 Cantata).
  * Added a key for the minimum scrollbar extent and gave a 1px space to scrollbars of very thin widgets.
  * Set lower/upper limits for some integer keys.
+ * If "mirror_doc_tabs" is false, don't mirror tabs when "attach_active_tab" is also false.
 
 V0.8.21
 ---------
