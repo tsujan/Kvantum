@@ -651,9 +651,15 @@ void Style::polish(QWidget *widget)
       widget->setPalette(palette);
     }
     else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
-    { // WARNING: adding size grip to non-window widgets may cause crash
-      if (hspec.forceSizeGrip && qobject_cast<QMainWindow*>(sb->parentWidget()))
-        sb->setSizeGripEnabled(true);
+    {
+      if (hspec.forceSizeGrip)
+      { // WARNING: adding size grip to non-window widgets may cause crash
+        if (QMainWindow *mw = qobject_cast<QMainWindow*>(sb->parentWidget()))
+        {
+          if (mw->minimumSize() != mw->maximumSize())
+            sb->setSizeGripEnabled(true);
+        }
+      }
     }
 
     if (!isLibreoffice // not required
