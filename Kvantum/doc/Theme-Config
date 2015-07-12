@@ -4,7 +4,7 @@
 
 A PDF version of this document is also included for easier reading.
 
-The configuration of the default Kvantum theme can be easily copied by using Kvantum Manager (click Save button on its third page) or, manually, by following these steps:
+The configuration of the default Kvantum theme can be easily copied by using Kvantum Manager (click Save button on its third page) or, manually and if the source of Kvantum is available, by following these steps:
 
 (1) Create the folder "~/.config/Kvantum/" (~ is your home);
 
@@ -130,9 +130,22 @@ Section                                      Meaning
 [Window]                                     A window or dialog.
 
 [WindowTranslucent]                          This is used when a distinction is
-                                             needed to be made between opaque and
-                                             translucent windows. If it is omitted,
-                                             the above section is used for all windows.
+                                             needed to be made between (backgrounds
+                                             of) opaque and translucent windows. If
+                                             it is omitted, the above section will
+                                             be used for all windows.
+
+[Dialog]                                     This is used when a distinction is
+                                             needed to be made between (backgrounds
+                                             of) dialogs and windows. If it is
+                                             omitted, the section "Window" will be
+                                             used for both windows and dialogs.
+
+                                             Here, "dialog" means any window without
+                                             menubar and toolbar and not necessarily
+                                             a QDialog.
+
+[DialogTranslucent]                          Like "WindowTranslucent" but for dialogs.
 =====================================================
 
 

@@ -262,6 +262,17 @@ void KvantumManager::installTheme()
                         QFile::remove (colorScheme);
                     QFile::copy (colorFile, colorScheme);
                 }
+                /* repeat for kf5 */
+                QString lShare = QString ("%1/.local/share").arg (homeDir);
+                QDir lShareDir = QDir (lShare);
+                if (lShareDir.exists())
+                {
+                    lShareDir.mkdir ("color-schemes");
+                    QString colorScheme = QString ("%1/color-schemes/%2.colors").arg (lShare).arg (themeName);
+                    if (QFile::exists (colorScheme))
+                        QFile::remove (colorScheme);
+                    QFile::copy (colorFile, colorScheme);
+                }
             }
 
             ui->statusBar->showMessage (tr ("%1 installed.").arg (themeName), 10000);
@@ -1273,7 +1284,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.22</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.23</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")

@@ -912,9 +912,27 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
     return; // Plasma FIXME needed?
   QRect bgndRect(widget->rect());
-  interior_spec ispec = getInteriorSpec("WindowTranslucent");
+  interior_spec ispec = getInteriorSpec("DialogTranslucent");
   if (ispec.element.isEmpty())
-    ispec = getInteriorSpec("Window");
+    ispec = getInteriorSpec("Dialog");
+  if (!ispec.element.isEmpty())
+  {
+    if (QWidget *child = widget->childAt(0,0))
+    { // even dialogs may have menubar or toolbar (as in Qt Designer)
+      if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
+      {
+        ispec = getInteriorSpec("WindowTranslucent");
+        if (ispec.element.isEmpty())
+          ispec = getInteriorSpec("Window");
+      }
+    }
+  }
+  else
+  {
+    ispec = getInteriorSpec("WindowTranslucent");
+    if (ispec.element.isEmpty())
+      ispec = getInteriorSpec("Window");
+  }
   frame_spec fspec;
   default_frame_spec(fspec);
 
@@ -1330,7 +1348,17 @@ void Style::drawPrimitive(PrimitiveElement element,
           && (!widget || (!widget->testAttribute(Qt::WA_TranslucentBackground)
                           && !widget->testAttribute(Qt::WA_NoSystemBackground)))) break;
 
-      interior_spec ispec = getInteriorSpec("Window");
+      interior_spec ispec = getInteriorSpec("Dialog");
+      if (!ispec.element.isEmpty())
+      {
+        if (QWidget *child = widget->childAt(0,0))
+        {
+          if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
+            ispec = getInteriorSpec("Window");
+        }
+      }
+      else
+        ispec = getInteriorSpec("Window");
       frame_spec fspec;
       default_frame_spec(fspec);
 

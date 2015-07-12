@@ -1,3 +1,8 @@
+V0.8.23
+---------
+ * Added two new sections for opaque and translucent dialogs. The fallbacks are the sections "WindowTranslucent" and "Window".
+ * Added KF5 system and user color scheme paths to "style.pro" and "KvantumManager.cpp", respectively. The system path is used with the Qt5 compilation.
+
 V0.8.22
 ---------
  * Added an experimental hacking key to force size grips of dialogs and statusbars.

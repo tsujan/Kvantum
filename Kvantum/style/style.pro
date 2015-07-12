@@ -40,6 +40,7 @@ unix {
     PREFIX = /usr
   }
   COLORSDIR =$$PREFIX/share/kde4/apps/color-schemes
+  KF5COLORSDIR =$$PREFIX/share/color-schemes
   DATADIR =$$PREFIX/share
 
   DEFINES += DATADIR=\\\"$$DATADIR\\\"
@@ -48,6 +49,8 @@ unix {
   target.path = $$[QT_INSTALL_PLUGINS]/styles
   colors.path = $$COLORSDIR
   colors.files += ../color/Kvantum.colors
+  kf5colors.path = $$KF5COLORSDIR
+  kf5colors.files += ../color/Kvantum.colors
   equals(QT_MAJOR_VERSION, 4): INSTALLS += target colors
-  greaterThan(QT_MAJOR_VERSION, 4): INSTALLS += target
+  greaterThan(QT_MAJOR_VERSION, 4): INSTALLS += target kf5colors
 }
