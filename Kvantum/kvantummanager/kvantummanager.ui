@@ -370,7 +370,7 @@ settings of this theme.
           </property>
           <widget class="QWidget" name="tab">
            <property name="toolTip">
-            <string>Uncheck these seven boxes if you want all
+            <string>Uncheck these eight boxes if you want all
 widgets to appear as they are by default.</string>
            </property>
            <attribute name="title">
@@ -476,6 +476,16 @@ WARNING: This key is experimental.</string>
               </property>
               <property name="text">
                <string>Force size grips</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QCheckBox" name="checkBoxIconless">
+              <property name="toolTip">
+               <string>No icon for push buttons that have text.</string>
+              </property>
+              <property name="text">
+               <string>Iconless Push Buttons</string>
               </property>
              </widget>
             </item>

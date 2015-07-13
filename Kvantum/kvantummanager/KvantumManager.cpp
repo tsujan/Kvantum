@@ -439,6 +439,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
     ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
+    ui->checkBoxIconless->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     defaultSettings.endGroup();
 
     defaultSettings.beginGroup ("General");
@@ -701,6 +702,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
+                ui->checkBoxIconless->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 themeSettings.endGroup();
             }
         }
@@ -990,6 +992,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
         hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
         hackKeys.insert("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
+        hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconless->isChecked()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
@@ -1018,6 +1021,9 @@ void KvantumManager::writeConfig()
         generalKeys.insert("opaque", opaque);
 #endif
         themeSettings.beginGroup ("Hacks");
+        bool restyle = false;
+        if (themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconless->isChecked())
+            restyle = true;
 #if QT_VERSION >= 0x050000
         QMap<QString, QString>::iterator it;
         it = hackKeys.begin();
@@ -1038,15 +1044,15 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
         themeSettings.setValue ("force_size_grip", ui->checkBoxGrip->isChecked());
+        themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconless->isChecked());
 #endif
         themeSettings.endGroup();
 
         themeSettings.beginGroup ("General");
-        bool translucenceChanged = false;
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked())
         {
-            translucenceChanged = true;
+            restyle = true;
         }
 #if QT_VERSION >= 0x050000
         it = generalKeys.begin();
@@ -1205,7 +1211,7 @@ void KvantumManager::writeConfig()
         }
 
         QCoreApplication::processEvents();
-        if (translucenceChanged)
+        if (restyle)
         {
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
             resizeConfPage (true);

@@ -445,6 +445,8 @@ respect_darkness                  true/false          Some apps don't respect da
 force_size_grip                   true/false          Show the size grips of dialogs and
                                                       statusbars as far as possible?
 
+iconless_pushbutton               true/false          No icon for push buttons that have text?
+
                            **********************
                            *** Other Sections ***
                            **********************

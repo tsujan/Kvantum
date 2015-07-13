@@ -564,6 +564,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","force_size_grip");
   r.forceSizeGrip = v.toBool();
 
+  v = getValue("Hacks","iconless_pushbutton");
+  r.iconless_pushbutton = v.toBool();
+
   return r;
 }
 }

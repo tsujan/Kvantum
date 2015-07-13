@@ -160,6 +160,8 @@ typedef struct {
   bool respect_darkness;
   /* show size grips as far as possible? */
   bool forceSizeGrip;
+  /* no icon for pushbuttons as far as possible? */
+  bool iconless_pushbutton;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -359,6 +361,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.kcapacitybar_as_progressbar = false;
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
+  hspec.iconless_pushbutton = false;
 }
 }
 

@@ -5039,7 +5039,8 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,option->direction,
-                    opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
+                    (settings->getHacksSpec().iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
+                      : opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
       }
 
       break;
