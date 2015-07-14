@@ -2242,7 +2242,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (isLibreoffice
           || (qobject_cast<const QLineEdit*>(widget)
               && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-                  || (widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth()))))
+                  || widget->minimumWidth() == widget->maximumWidth())))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         //fspec.expansion = 0;
@@ -2515,14 +2515,11 @@ void Style::drawPrimitive(PrimitiveElement element,
       indicator_spec dspec = getIndicatorSpec(group);
       Qt::Alignment align;
       // horizontally center both indicators
-      fspec.left = 0;
       if (!tspec.vertical_spin_indicators)
-      {
-        if (!up) fspec.right = 0;
         align = Qt::AlignCenter;
-      }
       else
       {
+        fspec.left = 0;
         if (up) fspec.bottom = 0;
         else fspec.top = 0;
         if (hasFlatIndicator)
@@ -2546,28 +2543,34 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorHeaderArrow : {
-      const QString group = "HeaderSection";
-      frame_spec fspec = getFrameSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
-      const label_spec lspec = getLabelSpec(group);
-
-      /* this is compensated in CE_HeaderLabel;
-         also see SE_HeaderArrow */
-      if (option->direction == Qt::RightToLeft)
-      {
-        fspec.right = 0;
-        fspec.left += lspec.left;
-      }
-      else
-      {
-        fspec.left = 0;
-        fspec.right += lspec.right;
-      }
-
       const QStyleOptionHeader *opt =
         qstyleoption_cast<const QStyleOptionHeader *>(option);
       if (opt)
       {
+        const QString group = "HeaderSection";
+        frame_spec fspec = getFrameSpec(group);
+        const indicator_spec dspec = getIndicatorSpec(group);
+        const label_spec lspec = getLabelSpec(group);
+
+        /* this is compensated in CE_HeaderLabel;
+           also see SE_HeaderArrow */
+        if (option->direction == Qt::RightToLeft)
+        {
+          fspec.right = 0;
+          if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
+            fspec.left = lspec.left;
+          else
+            fspec.left += lspec.left;
+        }
+        else
+        {
+          fspec.left = 0;
+          if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
+            fspec.right = lspec.right;
+          else
+            fspec.right += lspec.right;
+        }
+
         QString aStatus = "normal";
         if (status.startsWith("disabled"))
           aStatus = "disabled";
@@ -2610,15 +2613,9 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           fspec.hasCapsule = true;
           if (rtl)
-          {
             fspec.capsuleH = -1;
-            fspec.right = 0;
-          }
           else
-          {
             fspec.capsuleH = 1;
-            fspec.left = 0; // no left frame in this case
-          }
           fspec.capsuleV = 2;
         }
 
@@ -2688,10 +2685,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.capsuleH = 0;
         else if (fspec.capsuleH == 2)
           fspec.capsuleH = rtl ? -1 : 1;
-        if (rtl)
-          fspec.right = 0;
-        else
-          fspec.left = 0; // no left frame in this case
 
         /* lack of space */
         const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
@@ -2955,7 +2948,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
       if (opt)
       {
-        int left = 0, right = 0;
         switch (opt->viewItemPosition) {
           case QStyleOptionViewItemV4::OnlyOne:
           case QStyleOptionViewItemV4::Invalid: break;
@@ -2963,7 +2955,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = -1;
-            right = fspec.right;
             fspec.expansion = 0;
             break;
           }
@@ -2971,7 +2962,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = 1;
-            left = fspec.left;
             fspec.expansion = 0;
             break;
           }
@@ -2979,8 +2969,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = 0;
-            left = fspec.left;
-            right = fspec.right;
             fspec.expansion = 0;
             break;
           }
@@ -3009,7 +2997,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           QPointF oldBO = painter->brushOrigin();
           painter->setBrushOrigin(opt->rect.topLeft()); // sometimes needed (as in Basket)
-          painter->fillRect(interiorRect(opt->rect,fspec).adjusted(-left,0,right,0), brush);
+          painter->fillRect(interiorRect(opt->rect,fspec), brush);
           painter->setBrushOrigin(oldBO);
           break;
         }
@@ -3228,7 +3216,8 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,option->direction,
-                          opt->icon.pixmap(smallIconSize,iconmode,iconstate));
+                          opt->icon.pixmap(smallIconSize,iconmode,iconstate),
+                          QSize(smallIconSize,smallIconSize));
           }
           if (l.size() > 1) // shortcut
           {
@@ -3570,7 +3559,8 @@ void Style::drawControl(ControlElement element,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     option->direction,
-                    opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
+                    opt->icon.pixmap(opt->iconSize,iconmode,iconstate),
+                    opt->iconSize);
       }
 
       break;
@@ -3596,7 +3586,8 @@ void Style::drawControl(ControlElement element,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     option->direction,
-                    opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
+                    opt->icon.pixmap(opt->iconSize,iconmode,iconstate),
+                    opt->iconSize);
       }
 
       break;
@@ -3682,7 +3673,8 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,option->direction,
-                    opt->currentIcon.pixmap(opt->iconSize,iconmode,iconstate));
+                    opt->currentIcon.pixmap(opt->iconSize,iconmode,iconstate),
+                    opt->iconSize);
       }
 
       break;
@@ -3973,7 +3965,7 @@ void Style::drawControl(ControlElement element,
                           QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget), h),
                           option->rect);
 
-        int icnSise = iconSize.isValid() ? 
+        int icnSize = iconSize.isValid() ? 
                         qMax(iconSize.width(), iconSize.height())
                         : pixelMetric(PM_TabBarIconSize);
 
@@ -3983,7 +3975,7 @@ void Style::drawControl(ControlElement element,
         {
           int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
                          - (closable ? lspec.tispace : 0)
-                         - (opt->icon.isNull() ? 0 : icnSise);
+                         - (opt->icon.isNull() ? 0 : icnSize);
           QFont F(painter->font());
           if (lspec.boldFont) F.setBold(true);
           if (textSize(F,txt).width() > txtWidth)
@@ -3998,7 +3990,8 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
                     state,option->direction,
-                    opt->icon.pixmap(icnSise,iconmode,iconstate));
+                    opt->icon.pixmap(icnSize,iconmode,iconstate),
+                    QSize(icnSize,icnSize));
 
         if (verticalTabs)
           painter->restore();
@@ -4151,18 +4144,17 @@ void Style::drawControl(ControlElement element,
         const QString group = "ProgressbarContents";
         frame_spec fspec = getFrameSpec(group);
         if (isKisSlider)
-          fspec.right = 0;
+        {
+          //fspec.right = 0;
+          fspec.hasCapsule = true;
+          fspec.capsuleH = -1;
+          fspec.capsuleV = 2;
+        }
         else
         {
           fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         }
         const interior_spec ispec = getInteriorSpec(group);
-        if (isKisSlider)
-        {
-          fspec.hasCapsule = true;
-          fspec.capsuleH = -1;
-          fspec.capsuleV = 2;
-        }
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
@@ -4772,6 +4764,15 @@ void Style::drawControl(ControlElement element,
 
         bool rtl(opt->direction == Qt::RightToLeft);
 
+        if (opt->orientation != Qt::Horizontal)
+        { // -> CT_HeaderSection
+          int t = fspec.left;
+          fspec.left = fspec.top;
+          fspec.top = t;
+          t = fspec.right;
+          fspec.right = fspec.bottom;
+          fspec.bottom = t;
+        }
         if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
         {
           if (opt->orientation == Qt::Horizontal)
@@ -4796,6 +4797,13 @@ void Style::drawControl(ControlElement element,
         {
           lspec.right = lspec.left = 0;
         }
+        if (opt->sortIndicator != QStyleOptionHeader::None)
+        { // the frame is taken care of at SE_HeaderArrow
+          if (rtl)
+            fspec.left = 0;
+          else
+            fspec.right = 0;
+        }
 
         /* for thin headers, like in Dolphin's details view */
         if (opt->icon.isNull())
@@ -4811,6 +4819,7 @@ void Style::drawControl(ControlElement element,
         else if (option->state & State_MouseOver)
           state = 2;
 
+        int smallIconSize = pixelMetric(PM_SmallIconSize);
         renderLabel(painter,option->palette,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
@@ -4828,7 +4837,8 @@ void Style::drawControl(ControlElement element,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
                     state,option->direction,
-                    opt->icon.pixmap(pixelMetric(PM_SmallIconSize),iconmode,iconstate));
+                    opt->icon.pixmap(smallIconSize,iconmode,iconstate),
+                    QSize(smallIconSize,smallIconSize));
       }
 
       break;
@@ -5040,7 +5050,8 @@ void Style::drawControl(ControlElement element,
                     talign,opt->text,QPalette::ButtonText,
                     state,option->direction,
                     (settings->getHacksSpec().iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
-                      : opt->icon.pixmap(opt->iconSize,iconmode,iconstate));
+                      : opt->icon.pixmap(opt->iconSize,iconmode,iconstate),
+                     opt->iconSize);
       }
 
       break;
@@ -5441,7 +5452,7 @@ void Style::drawControl(ControlElement element,
                       fspec,lspec,
                       talign,opt->text,QPalette::ButtonText,
                       state,option->direction,
-                      opt->icon.pixmap(opt->iconSize,iconmode,iconstate),tialign);
+                      opt->icon.pixmap(opt->iconSize,iconmode,iconstate),opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
         }
 
@@ -5880,6 +5891,11 @@ void Style::drawComplexControl(ComplexControl control,
 
         const QString group = "ComboBox";
 
+        label_spec lspec = getLabelSpec(group);
+        lspec.left = qMax(0,lspec.left-1);
+        lspec.top = qMax(0,lspec.top-1);
+        lspec.right = qMax(0,lspec.right-1);
+        lspec.bottom = qMax(0,lspec.bottom-1);
         frame_spec fspec = getFrameSpec(group);
         if (!cb || cb->lineEdit()) // otherwise the arrow part will be integrated
         {
@@ -5891,7 +5907,8 @@ void Style::drawComplexControl(ComplexControl control,
 
         int margin = 0; // see CC_ComboBox at subControlRect
         if (opt->editable && !opt->currentIcon.isNull())
-          margin = fspec.left+fspec.right;
+          margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
+                    - 3; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
         else if (isLibreoffice)
           margin = fspec.left;
         // SC_ComboBoxEditField includes the icon too
@@ -5916,7 +5933,6 @@ void Style::drawComplexControl(ComplexControl control,
         }
         else // ignore framelessness
         {
-          label_spec lspec = getLabelSpec(group);
           /* don't cover the lineedit area */
           int editWidth = 0;
           if (cb)
@@ -5924,7 +5940,6 @@ void Style::drawComplexControl(ComplexControl control,
             if (QLineEdit *le = cb->lineEdit())
             {
               editWidth = le->width();
-              QRect R;
               /* Konqueror may add an icon to the right of lineedit (for LTR) */
               int extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
                                : w - (COMBO_ARROW_LENGTH+fspec.right) - (le->x()+editWidth);
@@ -5943,8 +5958,6 @@ void Style::drawComplexControl(ComplexControl control,
             else // when there isn't enough space
             {
               QSize txtSize = textSize(painter->font(),opt->currentText);
-              lspec.left = qMax(0,lspec.left-1);
-              lspec.right = qMax(0,lspec.right-1);
               if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right)
               {
                 fspec.left = qMin(fspec.left,3);
@@ -6031,40 +6044,15 @@ void Style::drawComplexControl(ComplexControl control,
           const QIcon::State iconstate =
             (option->state & State_On) ? QIcon::On : QIcon::Off;
 
-          int talign = Qt::AlignHCenter | Qt::AlignVCenter;
-          if (!styleHint(SH_UnderlineShortcut, opt, widget))
-            talign |= Qt::TextHideMnemonic;
-          else
-            talign |= Qt::TextShowMnemonic;
-          label_spec lspec;
-          default_label_spec(lspec);
-          if (rtl)
-            fspec.left = 0;
-          else
-            fspec.right = 0;
-          int labelWidth = 0;
-          if (cb && cb->lineEdit())
-            labelWidth = rtl ? o.rect.width()-cb->lineEdit()->width() : cb->lineEdit()->x();
-
-          int state = 1;
-          if (status.startsWith("disabled"))
-            state = 0;
-          else if (status.startsWith("pressed"))
-            state = 3;
-          else if (status.startsWith("toggled"))
-            state = 4;
-          else if (option->state & State_MouseOver)
-            state = 2;
-
-          renderLabel(painter,option->palette,
-                      QRect(rtl ?
-                              o.rect.x()+o.rect.width()-labelWidth
-                              : o.rect.x(),
-                            o.rect.y(), labelWidth, o.rect.height()),
-                      fspec,lspec,
-                      talign,"",QPalette::ButtonText,
-                      state,option->direction,
-                      opt->currentIcon.pixmap(opt->iconSize,iconmode,iconstate));
+          fspec.top = fspec.bottom = 0;
+          lspec.top = lspec.bottom = 0;
+          QPixmap icn = opt->currentIcon.pixmap(opt->iconSize,iconmode,iconstate);
+          QRect ricn = alignedRect(option->direction,
+                                   Qt::AlignVCenter | Qt::AlignLeft,
+                                   opt->iconSize,
+                                   labelRect(option->rect,fspec,lspec));
+          QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, QSize(icn.width(),icn.height()), ricn);
+          painter->drawPixmap(iconRect,icn);
         }
 
         o.rect = arrowRect;
@@ -6495,13 +6483,15 @@ void Style::drawComplexControl(ComplexControl control,
                                                 // titlebars have no frame
                                                 -lspec.right-lspec.left);
           }
+          int icnSize = pixelMetric(PM_TitleBarHeight) - 4; // 2-px margins for the icon
           renderLabel(painter,option->palette,
                       o.rect,
                       fspec,lspec,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
                       option->direction,
-                      o.icon.pixmap(pixelMetric(PM_TitleBarHeight) - 4)); // 2-px margins for the icon
+                      o.icon.pixmap(icnSize),
+                      QSize(icnSize,icnSize));
         }
 
         indicator_spec dspec = getIndicatorSpec(group);
@@ -7114,8 +7104,8 @@ QSize Style::sizeFromContents (ContentsType type,
       lspec.bottom = qMax(0,lspec.bottom-1);
 
       s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
-      if (s.width() < defaultSize.width())
-        s.rwidth() = defaultSize.width();
+      s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2,0),
+                        s.width());
       /* defaultSize may be a bit thicker because of frame, which doesn't matter
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
       if (s.height() < defaultSize.height() && !qobject_cast<const QLineEdit*>(widget))
@@ -7176,6 +7166,7 @@ QSize Style::sizeFromContents (ContentsType type,
         lspec.right = qMax(0,lspec.right-1);
         lspec.bottom = qMax(0,lspec.bottom-1);
         const frame_spec fspec1 = getFrameSpec("LineEdit");
+        const label_spec lspec1 = getLabelSpec("LineEdit");
 
         QFont f = QApplication::font();
         if (widget) f = widget->font();
@@ -7195,20 +7186,20 @@ QSize Style::sizeFromContents (ContentsType type,
         }
         else hasIcon = true;
 
-        /* we don't add COMBO_ARROW_LENGTH (=20) to the width because
-           qMax(23,X) is already added to it in qcommonstyle.cpp */
-        s = QSize(defaultSize.width() + fspec.left+fspec.right + lspec.left+lspec.right
-                                      + (opt->editable ? fspec1.left+fspec1.right
-                                        : hasIcon ? lspec.tispace : 0),
+        /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
+           qMax(23,X) is already added to it in qcommonstyle.cpp.
+
+           We want that the left icon respect frame width,
+           text margin and text-icon spacing in the editable mode too. */
+        s = QSize(defaultSize.width() + fspec.left+fspec.right
+                                      + (opt->editable ? lspec1.left+lspec1.right +
+                                          (option->direction == Qt::RightToLeft ?
+                                            fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
+                                            : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
+                                          : lspec.left+lspec.right)
+                                      + (hasIcon ? lspec.tispace : 0) ,
                   sizeCalculated(f,fspec,lspec,sspec,"W",
                                  hasIcon ? opt->iconSize : QSize()).height());
-
-        /* With an editable combo that has icon, we take into account
-           the margins when positioning the icon, so we need an extra
-           space here (see CC_ComboBox at subControlRect) but the text
-           margins we added above are redundant now. */
-        if (opt->editable && !opt->currentIcon.isNull())
-          s += QSize(fspec.left+fspec.right - lspec.left-lspec.right, 0);
 
         /* consider the top and bottom frames
            of lineedits inside editable combos */
@@ -7879,14 +7870,21 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_HeaderLabel : return option->rect;
 
     case SE_HeaderArrow : {
+      const QString group = "HeaderSection";
+      frame_spec fspec = getFrameSpec(group);
+      const indicator_spec dspec = getIndicatorSpec(group);
+      const label_spec lspec = getLabelSpec(group);
       if (const QStyleOptionHeader *opt = qstyleoption_cast<const QStyleOptionHeader*>(option))
       {
         if (opt->orientation != Qt::Horizontal) return QRect();
+        if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
+        {
+          if (option->direction == Qt::RightToLeft)
+            fspec.left = 0;
+          else
+            fspec.right = 0;
+        }
       }
-      const QString group = "HeaderSection";
-      const frame_spec fspec = getFrameSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
-      const label_spec lspec = getLabelSpec(group);
 
       return alignedRect(option->direction,
                          Qt::AlignRight,
@@ -7949,7 +7947,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
       }
-      else if (widget && widget->minimumWidth() != 0 && widget->minimumWidth() == widget->maximumWidth())
+      else if (widget && widget->minimumWidth() == widget->maximumWidth())
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         lspec.left = lspec.right = qMin(lspec.left,2);
@@ -7986,11 +7984,21 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       /* in these cases there are capsules */
       if (widget)
       {
-        if (qobject_cast<const QComboBox*>(widget->parentWidget()))
+        if (QComboBox *cb = qobject_cast<QComboBox*>(widget->parentWidget()))
+        {
           rect.adjust(option->direction == Qt::RightToLeft ? -fspec.left : 0,
                       0,
                       option->direction == Qt::RightToLeft ? 0 : fspec.right,
                       0);
+          if (option->direction == Qt::RightToLeft)
+          {
+            const frame_spec fspec1 = getFrameSpec("ComboBox");
+            if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+              rect.adjust(0,0,fspec.right,0);
+          }
+          else if (widget->x() > 0)
+              rect.adjust(-fspec.left,0,0,0);
+        }
         else if (qobject_cast<const QAbstractSpinBox*>(widget->parentWidget()))
           rect.adjust(0,0,fspec.right,0);
       }
@@ -8372,26 +8380,11 @@ QRect Style::subControlRect(ComplexControl control,
 
     case CC_ComboBox :
       switch (subControl) {
-        case SC_ComboBoxFrame : {
-          /* for an editable combo that has an icon, take
-             into account the right and left margins when
-             positioning the icon (also -> CT_ComboBox) */
-          const QStyleOptionComboBox *opt =
-              qstyleoption_cast<const QStyleOptionComboBox *>(option);
-          if (opt && opt->editable && !opt->currentIcon.isNull())
-          {
-            const frame_spec fspec = getFrameSpec("ComboBox");
-            return QRect(opt->direction == Qt::RightToLeft ?
-                           x+fspec.left+fspec.right
-                           : x-fspec.left-fspec.right,
-                         y, w, h);
-          }
-          else
-            return option->rect;
-        }
+        case SC_ComboBoxFrame : return option->rect;
         case SC_ComboBoxEditField : {
           int margin = 0;
           const frame_spec fspec = getFrameSpec("ComboBox");
+          const label_spec lspec =  getLabelSpec("ComboBox");
           if (isLibreoffice)
           {
             const frame_spec Fspec = getFrameSpec("LineEdit");
@@ -8399,11 +8392,15 @@ QRect Style::subControlRect(ComplexControl control,
           }
           else
           {
-            /* as in SC_ComboBoxFrame above */
             const QStyleOptionComboBox *opt =
                 qstyleoption_cast<const QStyleOptionComboBox *>(option);
+            /* The left icon should respect frame width, text margin
+               and text-icon spacing in the editable mode too */
             if (opt && opt->editable && !opt->currentIcon.isNull())
-              margin = fspec.left+fspec.right;
+              margin = (option->direction == Qt::RightToLeft ? fspec.right+qMax(0,lspec.right-1)
+                                                             : fspec.left+qMax(0,lspec.left-1))
+                       + lspec.tispace
+                       - 3; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
           }
           return QRect(option->direction == Qt::RightToLeft ?
                          x+COMBO_ARROW_LENGTH+fspec.left
@@ -9033,11 +9030,11 @@ static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRe
 }
 
 bool Style::renderElement(QPainter *painter,
-                            const QString &element,
-                            const QRect &bounds,
-                            int hsize, int vsize, // pattern sizes
-                            bool usePixmap // first make a QPixmap for drawing
-                           ) const
+                          const QString &element,
+                          const QRect &bounds,
+                          int hsize, int vsize, // pattern sizes
+                          bool usePixmap // first make a QPixmap for drawing
+                         ) const
 {
   if (element.isEmpty())
     return false;
@@ -9111,14 +9108,14 @@ bool Style::renderElement(QPainter *painter,
 }
 
 void Style::renderSliderTick(QPainter *painter,
-                               const QString &element,
-                               const QRect &ticksRect,
-                               const int interval,
-                               const int available,
-                               const int min,
-                               const int max,
-                               bool above,
-                               bool inverted) const
+                             const QString &element,
+                             const QRect &ticksRect,
+                             const int interval,
+                             const int available,
+                             const int min,
+                             const int max,
+                             bool above,
+                             bool inverted) const
 {
   if (!ticksRect.isValid())
     return;
@@ -9174,18 +9171,18 @@ void Style::renderSliderTick(QPainter *painter,
 }
 
 void Style::renderFrame(QPainter *painter,
-                          const QRect &bounds, // frame bounds
-                          const frame_spec &fspec, // frame spec
-                          const QString &element, // frame SVG element
-                          int d, // distance of the attached tab from the edge
-                          int l, // length of the attached tab
-                          int f1, // width of tab's left frame
-                          int f2, // width of tab's right frame
-                          int tp, // tab position
-                          bool grouped, // is among grouped similar widgets?
-                          bool usePixmap, // first make a QPixmap for drawing
-                          bool drawBorder // draw a border with maximum rounding if possible
-                         ) const
+                        const QRect &bounds, // frame bounds
+                        const frame_spec &fspec, // frame spec
+                        const QString &element, // frame SVG element
+                        int d, // distance of the attached tab from the edge
+                        int l, // length of the attached tab
+                        int f1, // width of tab's left frame
+                        int f2, // width of tab's right frame
+                        int tp, // tab position
+                        bool grouped, // is among grouped similar widgets?
+                        bool usePixmap, // first make a QPixmap for drawing
+                        bool drawBorder // draw a border with maximum rounding if possible
+                       ) const
 {
   if (!bounds.isValid() || !fspec.hasFrame)
     return;
@@ -9295,10 +9292,64 @@ void Style::renderFrame(QPainter *painter,
   {
     drawBorder = false;
     drawExpanded = false;
-    Left = qMin(fspec.left,w/2);
-    Top = qMin(fspec.top,h/2);
-    Right = qMin(fspec.right,w/2);
-    Bottom = qMin(fspec.bottom,h/2);
+    Left = fspec.left;
+    Right = fspec.right;
+    Top = fspec.top;
+    Bottom = fspec.bottom;
+
+    /* extreme cases */
+    if (fspec.left + fspec.right > w)
+    {
+      if (fspec.hasCapsule && fspec.capsuleH != 2)
+      {
+        if (fspec.capsuleH == -1)
+        {
+          if (fspec.left > w) Left = w;
+        }
+        else if (fspec.capsuleH == 1)
+        {
+          if (fspec.right > w) Right = w;
+        }
+      }
+      else
+      {
+        if (w%2 == 0)
+        {
+          Left = Right = w/2;
+        }
+        else
+        {
+          Left = (w+1)/2;
+          Right = (w-1)/2;
+        }
+      }
+    }
+    if (fspec.top + fspec.bottom > h)
+    {
+      if (fspec.hasCapsule && fspec.capsuleV != 2)
+      {
+        if (fspec.capsuleV == -1)
+        {
+          if (fspec.top > h) Top = h;
+        }
+        else if (fspec.capsuleV == 1)
+        {
+          if (fspec.bottom > h) Bottom = h;
+        }
+      }
+      else
+      {
+        if (h%2 == 0)
+        {
+          Top = Bottom = h/2;
+        }
+        else
+        {
+          Top = (h+1)/2;
+          Bottom = (h-1)/2;
+        }
+      }
+    }
 
     if (Left == 0 && Top == 0 && Right == 0 && Bottom == 0) return;
   }
@@ -9614,13 +9665,13 @@ void Style::renderFrame(QPainter *painter,
 }
 
 void Style::renderInterior(QPainter *painter,
-                             const QRect &bounds, // frame bounds
-                             const frame_spec &fspec, // frame spec
-                             const interior_spec &ispec, // interior spec
-                             const QString &element, // interior SVG element
-                             bool grouped, // is among grouped similar widgets?
-                             bool usePixmap // first make a QPixmap for drawing
-                            ) const
+                           const QRect &bounds, // frame bounds
+                           const frame_spec &fspec, // frame spec
+                           const interior_spec &ispec, // interior spec
+                           const QString &element, // interior SVG element
+                           bool grouped, // is among grouped similar widgets?
+                           bool usePixmap // first make a QPixmap for drawing
+                          ) const
 {
   if (!bounds.isValid() || !ispec.hasInterior)
     return;
@@ -9636,46 +9687,27 @@ void Style::renderInterior(QPainter *painter,
       && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
     return;
 
-  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
-    renderElement(painter,element,interiorRect(bounds,fspec),
-                  ispec.px,ispec.py,usePixmap);
-  else
+  /* extreme cases */
+  if (fspec.hasCapsule// && (fspec.capsuleH != 2 || fspec.capsuleV != 2)
+      && ((fspec.capsuleH == -1 && fspec.left >= w)
+          || (fspec.capsuleH == 1 && fspec.right >= w)
+          || (fspec.capsuleV == -1 && fspec.top >= h)
+          || (fspec.capsuleV == 1 && fspec.bottom >= h)))
   {
-    // add these to compensate the absence of the frame
-    int left = 0, right = 0, top = 0, bottom = 0;
-    if (fspec.capsuleH == 0)
-    {
-      left = fspec.left;
-      right = fspec.right;
-    }
-    else if (fspec.capsuleH == -1)
-      right = fspec.right;
-    else if (fspec.capsuleH == 1)
-      left = fspec.left;
-
-    if (fspec.capsuleV == 0)
-    {
-      top = fspec.top;
-      bottom = fspec.bottom;
-    }
-    else if (fspec.capsuleV == -1)
-      bottom = fspec.bottom;
-    else if (fspec.capsuleV == 1)
-      top = fspec.top;
-
-    renderElement(painter,element,
-                  interiorRect(bounds,fspec).adjusted(-left,-top,right,bottom),
-                  ispec.px,ispec.py,usePixmap);
+      return;
   }
+
+  renderElement(painter,element,interiorRect(bounds,fspec),
+                ispec.px,ispec.py,usePixmap);
 }
 
 void Style::renderIndicator(QPainter *painter,
-                              const QRect &bounds, // frame bounds
-                              const frame_spec &fspec, // frame spec
-                              const indicator_spec &dspec, // indicator spec
-                              const QString &element, // indicator SVG element
-                              Qt::LayoutDirection ld,
-                              Qt::Alignment alignment) const
+                            const QRect &bounds, // frame bounds
+                            const frame_spec &fspec, // frame spec
+                            const indicator_spec &dspec, // indicator spec
+                            const QString &element, // indicator SVG element
+                            Qt::LayoutDirection ld,
+                            Qt::Alignment alignment) const
 {
   if (!bounds.isValid()) return;
   const QRect interior = interiorRect(bounds,fspec);
@@ -9691,19 +9723,20 @@ void Style::renderIndicator(QPainter *painter,
 }
 
 void Style::renderLabel(
-                          QPainter *painter,
-                          const QPalette &palette,
-                          const QRect &bounds, // frame bounds
-                          const frame_spec &fspec, // frame spec
-                          const label_spec &lspec, // label spec
-                          int talign, // text alignment
-                          const QString &text,
-                          QPalette::ColorRole textRole, // text color role
-                          int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                          Qt::LayoutDirection ld,
-                          const QPixmap &icon,
-                          const Qt::ToolButtonStyle tialign // relative positions of text and icon
-                         ) const
+                        QPainter *painter,
+                        const QPalette &palette,
+                        const QRect &bounds, // frame bounds
+                        const frame_spec &fspec, // frame spec
+                        const label_spec &lspec, // label spec
+                        int talign, // text alignment
+                        const QString &text,
+                        QPalette::ColorRole textRole, // text color role
+                        int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
+                        Qt::LayoutDirection ld,
+                        const QPixmap &icon,
+                        QSize iconSize,
+                        const Qt::ToolButtonStyle tialign // relative positions of text and icon
+                       ) const
 {
   // compute text and icon rect
   QRect r;
@@ -9717,6 +9750,9 @@ void Style::renderLabel(
   if (!r.isValid())
     return;
 
+  if (icon.isNull() || !iconSize.isValid())
+    iconSize = QSize(0,0);
+
   QRect ricon = r;
   QRect rtext = r;
 
@@ -9724,11 +9760,11 @@ void Style::renderLabel(
   {
     ricon = alignedRect(ld,
                         Qt::AlignVCenter | Qt::AlignLeft,
-                        QSize(icon.width(),icon.height()),
+                        iconSize,
                         r);
     rtext = QRect(ld == Qt::RightToLeft ?
                     r.x()
-                    : r.x()+icon.width() + (icon.isNull() ? 0 : lspec.tispace),
+                    : r.x()+iconSize.width() + (icon.isNull() ? 0 : lspec.tispace),
                   r.y(),
                   r.width()-ricon.width() - (icon.isNull() ? 0 : lspec.tispace),
                   r.height());
@@ -9737,10 +9773,10 @@ void Style::renderLabel(
   {
     ricon = alignedRect(ld,
                         Qt::AlignTop | Qt::AlignHCenter,
-                        QSize(icon.width(),icon.height()),
+                        iconSize,
                         r);
     rtext = QRect(r.x(),
-                  r.y()+icon.height() + (icon.isNull() ? 0 : lspec.tispace),
+                  r.y()+iconSize.height() + (icon.isNull() ? 0 : lspec.tispace),
                   r.width(),
                   r.height()-ricon.height() - (icon.isNull() ? 0 : lspec.tispace));
   }
@@ -9748,7 +9784,7 @@ void Style::renderLabel(
   {
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
-                        QSize(icon.width(),icon.height()),
+                        iconSize,
                         r);
   }
 
@@ -9756,12 +9792,15 @@ void Style::renderLabel(
   {
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
-                        QSize(icon.width(),icon.height()),
+                        iconSize,
                         r);
   }
 
   if (tialign != Qt::ToolButtonTextOnly && !icon.isNull())
-    painter->drawPixmap(ricon,icon);
+  {
+    QRect iconRect = alignedRect(ld, Qt::AlignCenter, QSize(icon.width(),icon.height()), ricon);
+    painter->drawPixmap(iconRect,icon);
+  }
 
   if (((isPlasma && icon.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
        || tialign != Qt::ToolButtonIconOnly)
@@ -9878,6 +9917,35 @@ void Style::renderLabel(
       painter->restore();
     if (lspec.italicFont)
       painter->restore();
+  }
+}
+
+QRect Style::interiorRect(const QRect &bounds, frame_spec fspec) const
+{
+  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
+    return bounds.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);
+  else
+  {
+    int left = 0, right = 0, top = 0, bottom = 0;
+    if (fspec.capsuleH == -1)
+      left = fspec.left;
+    else if (fspec.capsuleH == 1)
+      right = fspec.right;
+    else if (fspec.capsuleH == 2)
+    {
+      left = fspec.left;
+      right = fspec.right;
+    }
+    if (fspec.capsuleV == -1)
+      top = fspec.top;
+    else if (fspec.capsuleV == 1)
+      bottom = fspec.bottom;
+    else if (fspec.capsuleV == 2)
+    {
+      top = fspec.top;
+      bottom = fspec.bottom;
+    }
+    return bounds.adjusted(left,top,-right,-bottom);
   }
 }
 

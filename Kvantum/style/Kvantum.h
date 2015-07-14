@@ -197,6 +197,7 @@ class Style : public QCommonStyle {
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
                      Qt::LayoutDirection ld = Qt::LeftToRight,
                      const QPixmap &icon = QPixmap(),
+                     QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
 
@@ -220,9 +221,7 @@ class Style : public QCommonStyle {
     QRect squaredRect(const QRect &r) const;
 
     /* Return the remaining QRect after subtracting the frames. */
-    QRect interiorRect(const QRect &bounds, frame_spec f) const {
-      return bounds.adjusted(f.left,f.top,-f.right,-f.bottom);
-    }
+    QRect interiorRect(const QRect &bounds, frame_spec fspec) const;
     /* Return the remaining QRect after subtracting the frames and text margins. */
     QRect labelRect(const QRect &bounds, frame_spec f,label_spec t) const {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);

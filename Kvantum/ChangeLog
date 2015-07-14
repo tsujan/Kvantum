@@ -3,6 +3,7 @@ V0.8.23
  * Added two new sections for opaque and translucent dialogs. The fallbacks are the sections "WindowTranslucent" and "Window".
  * Added KF5 system and user color scheme paths to "style.pro" and "KvantumManager.cpp", respectively. The system path is used with the Qt5 compilation.
  * Added a hacking key for removing the icons of pushbuttons as far as possible.
+ * A lot of subtle changes that together guarantee a more logical look under unusual circumstances.
 
 V0.8.22
 ---------
