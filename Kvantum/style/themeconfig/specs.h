@@ -162,6 +162,8 @@ typedef struct {
   bool forceSizeGrip;
   /* no icon for pushbuttons as far as possible? */
   bool iconless_pushbutton;
+  /* no icon for menuitems? */
+  bool iconless_menu;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -362,6 +364,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
   hspec.iconless_pushbutton = false;
+  hspec.iconless_menu = false;
 }
 }
 

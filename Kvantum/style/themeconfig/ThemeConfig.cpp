@@ -567,6 +567,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","iconless_pushbutton");
   r.iconless_pushbutton = v.toBool();
 
+  v = getValue("Hacks","iconless_menu");
+  r.iconless_menu = v.toBool();
+
   return r;
 }
 }

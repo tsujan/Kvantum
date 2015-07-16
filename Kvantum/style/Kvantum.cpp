@@ -3190,13 +3190,14 @@ void Style::drawControl(ControlElement element,
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (l.size() > 0) // menu label
           {
+            const hacks_spec hspec = settings->getHacksSpec();
             int checkSpace = 0;
             if (opt->menuHasCheckableItems)
               checkSpace = iw + lspec.tispace;
             int iconSpace = 0;
-            if (opt->maxIconWidth)
+            if (opt->maxIconWidth && !hspec.iconless_menu)
               iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
-            if (opt->icon.isNull())
+            if (opt->icon.isNull() || hspec.iconless_menu)
               renderLabel(painter,option->palette,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
@@ -7343,15 +7344,18 @@ QSize Style::sizeFromContents (ContentsType type,
         if (widget) f = widget->font();
         if (lspec.boldFont) f.setBold(true);
 
+        const hacks_spec hspec = settings->getHacksSpec();
+
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           s = QSize(contentsSize.width(),10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
         else
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                             opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
+                             (opt->icon.isNull() || hspec.iconless_menu) ? QSize()
+                             : QSize(opt->maxIconWidth,opt->maxIconWidth));
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */
-        if(opt->icon.isNull() && opt->maxIconWidth)
+        if(opt->icon.isNull() && !hspec.iconless_menu && opt->maxIconWidth)
           s.rwidth() += qMin(opt->maxIconWidth,pixelMetric(PM_SmallIconSize)) + lspec.tispace;
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)

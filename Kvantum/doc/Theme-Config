@@ -447,6 +447,8 @@ force_size_grip                   true/false          Show the size grips of dia
 
 iconless_pushbutton               true/false          No icon for push buttons that have text?
 
+iconless_menu                     true/false          No icon for menus?
+
                            **********************
                            *** Other Sections ***
                            **********************
