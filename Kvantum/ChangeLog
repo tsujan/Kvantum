@@ -5,6 +5,7 @@ V0.8.23
  * Added a hacking key for removing the icons of pushbuttons as far as possible.
  * Another hacking key for removing menu icons.
  * A lot of subtle changes that together guarantee a more logical look under unusual circumstances.
+ * Corrected some miscalculations.
 
 V0.8.22
 ---------

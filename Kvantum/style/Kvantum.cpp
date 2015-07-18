@@ -4121,8 +4121,8 @@ void Style::drawControl(ControlElement element,
       QString suffix = "-normal";
       if (isInactive)
         suffix = "-normal-inactive";
-      renderFrame(painter,r,fspec,fspec.element+suffix);
-      renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
+      renderFrame(painter,r,fspec,fspec.element+suffix,0,0,0,0,0,true);
+      renderInterior(painter,r,fspec,ispec,ispec.element+suffix,true);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -6187,6 +6187,7 @@ void Style::drawComplexControl(ComplexControl control,
         QString group = "Slider";
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
+        fspec.expansion = 0;
 
         int ticks = opt->tickPosition;
         const int len = pixelMetric(PM_SliderLength,option,widget);
@@ -6374,6 +6375,7 @@ void Style::drawComplexControl(ComplexControl control,
           group = "SliderCursor";
           fspec = getFrameSpec(group);
           ispec = getInteriorSpec(group);
+          fspec.expansion = 0;
 
           QRect r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
           /* derive other handles from the
@@ -9202,6 +9204,8 @@ void Style::renderFrame(QPainter *painter,
   Left = Top = Right = Bottom = 0;
   QString element1(element);
   QString element0(element); // used just for checking
+  if (fspec.hasCapsule && fspec.capsuleH != 2)
+    grouped = true;
   int e = grouped ? h : qMin(h,w);
   bool drawExpanded = false;
   /* still round the corners if the "expand-" element is found */
@@ -9219,10 +9223,12 @@ void Style::renderFrame(QPainter *painter,
     e = qMin(e,fspec.expansion);
     int H = h;
     if (grouped) H = e;
-    if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
+    if (!fspec.hasCapsule || fspec.capsuleH == 2)
     {
-      /* to get smoother gradients, we use QTransform in this special case */
-      if (h > w)
+      /* to get smoother gradients, we use QTransform in this special case
+         but not when the rect is grouped (as in grouped toolbuttons inside
+         vertical toolbars or small progressbar indicators */
+      if (h > w && !grouped)
       {
         QRect r;
         r.setRect(y0, x0, h, w);
@@ -9235,6 +9241,8 @@ void Style::renderFrame(QPainter *painter,
         painter->restore();
         return;
       }
+      if (h > w && grouped)
+        e = qMin(e,w);  // only here e may be greater than w
       if (e%2 == 0)
       {
         Left = Top = Right = Bottom = e/2;
@@ -9248,20 +9256,16 @@ void Style::renderFrame(QPainter *painter,
     else
     {
       int X = 0;
-      if (H <= 2*w || fspec.capsuleH == 0)
+      /* here, this is always true: (H <= 2*w || fspec.capsuleH == 0) */
+      if (H%2 == 0)
       {
-        if (H%2 == 0)
-        {
-          X = Top = Bottom = H/2;
-        }
-        else
-        {
-          X = Top = (H+1)/2;
-          Bottom = (H-1)/2;
-        }
+        X = Top = Bottom = H/2;
       }
-      else // this never happens
-          X = Top = Bottom = w;
+      else
+      {
+        X = Top = (H+1)/2;
+        Bottom = (H-1)/2;
+      }
       if (fspec.capsuleH == -1)
       {
         Left = X;
@@ -9271,11 +9275,6 @@ void Style::renderFrame(QPainter *painter,
       {
         Right = X;
         Left = qMin(fspec.left,w/2);
-      }
-      else
-      {
-        Left = qMin(fspec.left,w/2);
-        Right = qMin(fspec.right,w/2);
       }
     }
     element0 = element;
@@ -9647,8 +9646,15 @@ void Style::renderFrame(QPainter *painter,
 
   if (drawExpanded && Top + Bottom != h) // when needed and there is space...
   { // ... draw the "interior"
-    if (grouped)
-      Right = Left = 0;
+    if (grouped && fspec.hasCapsule)
+    {
+      if (fspec.capsuleH == 0)
+        Right = Left = 0;
+      else if (fspec.capsuleH == -1)
+        Right = 0;
+      else if (fspec.capsuleH == 1)
+        Left = 0;
+    }
     renderElement(painter,element1,
                   bounds.adjusted(Left,Top,-Right,-Bottom),
                   0,0,usePixmap);
@@ -9681,6 +9687,8 @@ void Style::renderInterior(QPainter *painter,
     return;
 
   int w = bounds.width(); int h = bounds.height();
+  if (fspec.hasCapsule && fspec.capsuleH != 2)
+    grouped = true;
   int e = grouped ? h : qMin(h,w);
   QString element0(element);
   if (!isLibreoffice && fspec.expansion > 0
