@@ -1031,7 +1031,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
      using CT_SpinBox when the maximum size isn't set by the app or isn't smaller
      than our size. */
   case QEvent::ShowToParent:
-    if (w && qobject_cast<QAbstractSpinBox*>(o))
+    if (w
+        /* not if it's just a QAbstractSpinBox, hoping that
+           no one sets the minimum width in normal cases */
+        && (qobject_cast<QSpinBox*>(o)
+            || qobject_cast<QDoubleSpinBox*>(o)
+            || qobject_cast<QDateTimeEdit*>(o)))
     {
       QSize size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
       if (w->maximumWidth() > size.width())
@@ -7132,22 +7137,29 @@ QSize Style::sizeFromContents (ContentsType type,
       lspec.bottom = qMax(0,lspec.bottom-1);
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
       const size_spec sspec = getSizeSpec("IndicatorSpinBox");
-      const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
-      if (sb)
+      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
       {
-        QString maxTxt = spinMaxText(sb) + QLatin1Char(' ');
-        s = textSize(sb->font(),maxTxt)
-            + QSize(fspec.left + (tspec.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
-                               + 2*SPIN_BUTTON_WIDTH
-                               + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
-                    lspec.top + lspec.bottom
-                    + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
-                       : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
-        /* This is a workaround for some apps (like Kdenlive with its
-           TimecodeDisplay) that presuppose all spinboxes should have
-           vertical buttons and set an insufficient minimum width for them. */
-        if (!tspec.vertical_spin_indicators && sb->minimumWidth() > s.width() - SPIN_BUTTON_WIDTH)
-          s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+        QString maxTxt = spinMaxText(sb);
+        if (!maxTxt.isEmpty())
+        {
+          maxTxt = maxTxt + QLatin1Char(' ');
+          s = textSize(sb->font(),maxTxt)
+              + QSize(fspec.left + (tspec.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
+                                 + 2*SPIN_BUTTON_WIDTH
+                                 + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
+                      lspec.top + lspec.bottom
+                      + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
+                         : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
+        }
+        else
+        {
+          /* This is a for some apps (like Kdenlive with its
+             TimecodeDisplay) that subclass only QAbstractSpinBox. */
+          if (tspec.vertical_spin_indicators)
+            s.rwidth() = sb->minimumWidth();
+          else
+            s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+        }
 
         s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }

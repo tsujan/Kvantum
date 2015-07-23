@@ -6,6 +6,8 @@ V0.8.23
  * Another hacking key for removing menu icons.
  * A lot of subtle changes that together guarantee a more logical look under unusual circumstances.
  * Corrected some miscalculations.
+ * When calculating spinbox size, consider the case where only QAbstractSpinBox is subclassed.
+ * Fixed a compilation error with Qt5-5.5.0.
 
 V0.8.22
 ---------

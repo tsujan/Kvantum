@@ -15,8 +15,6 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ThemeConfig.h"
-
 #include <QVariant>
 #include <QSettings>
 #include <QFile>
@@ -29,6 +27,8 @@
 static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
 #endif
 #endif
+
+#include "ThemeConfig.h"
 
 namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
