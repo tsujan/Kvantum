@@ -441,7 +441,7 @@ void Style::polish(QWidget *widget)
       case Qt::Dialog: {
         widget->setAttribute(Qt::WA_StyledBackground);
         /* take all precautions */
-        if (!isPlasma && !isOpaque && !subApp && !isLibreoffice
+        if (!isPlasma && !subApp && !isLibreoffice
             && widget->isWindow()
             && widget->windowType() != Qt::Desktop
             && !widget->testAttribute(Qt::WA_PaintOnScreen)
@@ -467,7 +467,7 @@ void Style::polish(QWidget *widget)
                 d->setSizeGripEnabled(true);
             }
           }
-          if (((tspec.translucent_windows
+          if (((tspec.translucent_windows && !isOpaque
                 && !widget->testAttribute(Qt::WA_TranslucentBackground)
                 && !widget->testAttribute(Qt::WA_NoSystemBackground))
                /* enable blurring for Konsole's main window if it's transparent */
@@ -585,9 +585,9 @@ void Style::polish(QWidget *widget)
         widget->removeEventFilter(this);
         widget->installEventFilter(this);
     }
-    else if (qobject_cast<QLineEdit*>(widget))
-    { // in rare cases like KNotes' font combos
-      QColor col = settings->getColorSpec().textColor;
+    else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
+    { // in rare cases like KNotes' font combos or Kcalc
+      QColor col(settings->getColorSpec().textColor);
       if (col.isValid())
       {
         QPalette palette = widget->palette();
@@ -1348,10 +1348,16 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!widget || !widget->isWindow())
         break;
 
-      // don't draw the interior when there's a custom background color (as in KNotes)
+      // we don't accept custom background colors for windows...
       if (option->palette.color(QPalette::Window) != QApplication::palette().color(QPalette::Window)
           && (!widget || (!widget->testAttribute(Qt::WA_TranslucentBackground)
-                          && !widget->testAttribute(Qt::WA_NoSystemBackground)))) break;
+                          && !widget->testAttribute(Qt::WA_NoSystemBackground))))
+      {
+        if (option->palette.color(QPalette::Window) == option->palette.color(QPalette::Base))
+          break; // ...but make an exception for apps lik KNotes
+        else
+          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+      }
 
       interior_spec ispec = getInteriorSpec("Dialog");
       if (!ispec.element.isEmpty())
@@ -3199,10 +3205,11 @@ void Style::drawControl(ControlElement element,
             int checkSpace = 0;
             if (opt->menuHasCheckableItems)
               checkSpace = iw + lspec.tispace;
-            int iconSpace = 0;
-            if (opt->maxIconWidth && !hspec.iconless_menu)
-              iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
-            if (opt->icon.isNull() || hspec.iconless_menu)
+            if (opt->icon.isNull() || (hspec.iconless_menu && !l[0].isEmpty()))
+            {
+              int iconSpace = 0;
+              if (opt->maxIconWidth && !hspec.iconless_menu)
+                iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
               renderLabel(painter,option->palette,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
@@ -3212,18 +3219,24 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,option->direction);
+            }
             else
-              renderLabel(painter,option->palette,
-                          option->rect.adjusted(rtl ? 0 : checkSpace,
-                                                0,
-                                                rtl ? -checkSpace : 0,
-                                                0),
+            {
+              QRect r = option->rect.adjusted(rtl ? 0 : checkSpace,
+                                              0,
+                                              rtl ? -checkSpace : 0,
+                                              0);
+              if (l[0].isEmpty()) // textless menuitem, as in Kdenlive's play button menu
+                r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
+                                QSize(smallIconSize,smallIconSize),labelRect(r,fspec,lspec));
+              renderLabel(painter,option->palette,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,option->direction,
                           opt->icon.pixmap(smallIconSize,iconmode,iconstate),
                           QSize(smallIconSize,smallIconSize));
+            }
           }
           if (l.size() > 1) // shortcut
           {
@@ -4915,31 +4928,10 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_SizeGrip : {
-      const QString group = "SizeGrip";
+      const indicator_spec dspec = getIndicatorSpec("SizeGrip");
+      frame_spec fspec;
+      default_frame_spec(fspec);
 
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
-
-      if (status.startsWith("disabled"))
-      {
-        status.replace(QString("disabled"),QString("normal"));
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      /* sizegrip might look ugly with cutom window colors (as in KNotes) */
-      if (option->palette.color(QPalette::Window) == QApplication::palette().color(QPalette::Window))
-      {
-        renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-      }
-      if (!(option->state & State_Enabled))
-      {
-        painter->restore();
-        status = "disabled";
-        if (isInactive)
-          status = "disabled-inactive";
-      }
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-"+status,option->direction);
 
       break;
@@ -7363,9 +7355,13 @@ QSize Style::sizeFromContents (ContentsType type,
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           s = QSize(contentsSize.width(),10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
         else
+        {
+          const QStringList l = opt->text.split('\t');
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                             (opt->icon.isNull() || hspec.iconless_menu) ? QSize()
+                             (opt->icon.isNull() || (hspec.iconless_menu && !(l.size() > 0 && l[0].isEmpty())))
+                             ? QSize()
                              : QSize(opt->maxIconWidth,opt->maxIconWidth));
+        }
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */

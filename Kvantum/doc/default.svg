@@ -13257,4 +13257,26 @@
        x="132.9612"
        sodipodi:role="line"
        id="tspan6251">No frame</tspan></text>
+  <path
+     style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 463,1700 0,10 -10,0 z"
+     id="sizegrip-normal"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccc" />
+  <path
+     style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 473,1700 0,10 -10,0 z"
+     id="sizegrip-focused"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccc" />
+  <text
+     id="text6196"
+     y="1712.1307"
+     x="331.41827"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.48666191px;line-height:normal;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;enable-background:accumulate"
+     xml:space="preserve"><tspan
+       y="1712.1307"
+       x="331.41827"
+       id="tspan6198"
+       sodipodi:role="line">Size Grip</tspan></text>
 </svg>

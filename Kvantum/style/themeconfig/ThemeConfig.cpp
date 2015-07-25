@@ -188,7 +188,8 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName) const
     r.element = v.toString();
 
     v = getValue(elementName,"indicator.size", i);
-    r.size = qMax(v.toInt(),0);
+    if (v.isValid())
+      r.size = qMax(v.toInt(),0);
   }
 
   return r;

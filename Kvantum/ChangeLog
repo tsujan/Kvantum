@@ -8,6 +8,10 @@ V0.8.23
  * Corrected some miscalculations.
  * When calculating spinbox size, consider the case where only QAbstractSpinBox is subclassed.
  * Fixed a compilation error with Qt5-5.5.0.
+ * Took care of textless menuitems.
+ * Forced KCalcDisplay's text color.
+ * Let the size grip be just an indicator and added one to the default theme.
+ * Don't allow windows to have custom background colors if they have different window and base colors. As for their text color, it's the responsibility of developers to use QStyle correctly.
 
 V0.8.22
 ---------

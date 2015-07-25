@@ -2039,5 +2039,11 @@
 <use width="450" x="0" y="0" height="1380" xlink:href="#mdi-maximize-normal" id="mdi-shade-normal" transform="matrix(1,0,0,-1,315.81578,2221.9767)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#mdi-maximize-focused" id="mdi-shade-focused" transform="matrix(1,0,0,-1,315.81577,2310.8116)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#menuitem-pressed" id="menuitem-toggled" transform="translate(44.999993,0)"/>
-<rect width="3" x="262.5" y="1700" height="10" style="fill:url(#linearGradient6452);stroke:none;stroke-width:3.5" id="header-separator"/>
+<g style="stroke:none">
+<rect width="3" x="262.5" y="1700" height="10" style="fill:url(#linearGradient6452);stroke-width:3.5" id="header-separator"/>
+<g style="stroke-linecap:round;stroke-linejoin:round;fill:#787878;stroke-width:3">
+<path id="sizegrip-normal" d="m 463,1700 0,10 -10,0 z"/>
+<path id="sizegrip-focused" d="m 473,1700 0,10 -10,0 z"/>
+</g>
+</g>
 </svg>

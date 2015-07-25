@@ -171,7 +171,7 @@ indicator.size=7
 inherits=PanelButtonCommand
 
 [SizeGrip]
-inherits=PanelButtonCommand
+indicator.element=sizegrip
 
 [Toolbar]
 inherits=PanelButtonCommand
