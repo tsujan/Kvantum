@@ -664,7 +664,12 @@ void Style::polish(QWidget *widget)
 
     if (!isLibreoffice // not required
         && !subApp
-        && (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
+        && ((qobject_cast<QMenu*>(widget)
+             /* if the top-level window has a palette of its own, the parent should too */
+             && (!widget->parentWidget()
+                 || !widget->parentWidget()->window()->testAttribute(Qt::WA_SetPalette)
+                 || widget->parentWidget()->testAttribute(Qt::WA_SetPalette)))
+            || widget->inherits("QTipLabel"))
         /* no shadow for tooltips or menus that are already translucent */
         && !widget->testAttribute(Qt::WA_TranslucentBackground)
         && !translucentWidgets.contains(widget))
@@ -4932,7 +4937,40 @@ void Style::drawControl(ControlElement element,
       frame_spec fspec;
       default_frame_spec(fspec);
 
+      Qt::Corner corner;
+      if (const QStyleOptionSizeGrip *sgOpt = qstyleoption_cast<const QStyleOptionSizeGrip *>(option))
+        corner = sgOpt->corner;
+      else if (option->direction == Qt::RightToLeft)
+        corner = Qt::BottomLeftCorner;
+      else
+        corner = Qt::BottomRightCorner;
+      if (corner == Qt::BottomLeftCorner)
+      {
+        painter->save();
+        QTransform m;
+        m.translate(w,0);
+        m.scale(-1,1);
+        painter->setTransform(m, true);
+      }
+      else if (corner == Qt::TopRightCorner)
+      {
+        painter->save();
+        QTransform m;
+        m.translate(0,h);
+        m.scale(1,-1);
+        painter->setTransform(m, true);
+      }
+      else if (corner == Qt::TopLeftCorner)
+      {
+        painter->save();
+        QTransform m;
+        m.translate(w,h);
+        m.scale(-1,-1);
+        painter->setTransform(m, true);
+      }
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-"+status,option->direction);
+      if (corner != Qt::BottomRightCorner)
+        painter->restore();
 
       break;
     }

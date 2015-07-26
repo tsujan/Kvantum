@@ -11,7 +11,9 @@ V0.8.23
  * Took care of textless menuitems.
  * Forced KCalcDisplay's text color.
  * Let the size grip be just an indicator and added one to the default theme.
+ * Draw the size grip relative to the corner.
  * Don't allow windows to have custom background colors if they have different window and base colors. As for their text color, it's the responsibility of developers to use QStyle correctly.
+ * Another criterion for giving shadow/translucency to menus.
 
 V0.8.22
 ---------
