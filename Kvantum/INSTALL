@@ -25,7 +25,9 @@ Then, use these commands for installation and cleaning:
 
 The second command cleans the source and makes it ready for another compilation (against Qt5, for example).
 
-Installation for Qt4 is necessary but you could compile and install Kvantum twice, first for Qt4 and then for Qt5. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look. KDE apps as well as Kvantum Manager will use only the Qt4 plugin for the time being.
+Installation for Qt4 is necessary but you could compile and install Kvantum twice, first for Qt4 and then for Qt5. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look.
+
+Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issue the compilation command using the Qt4 qmake.
 
 *************
 *   Usage   *
