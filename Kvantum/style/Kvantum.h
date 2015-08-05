@@ -214,9 +214,6 @@ class Style : public QCommonStyle {
                          // text-icon alignment
                          const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon) const;
 
-    /* Compute width and height of widget text. */
-    QSize textSize (const QFont &font, const QString &text) const;
-
     /* Return a normalized rect, i.e. a square. */
     QRect squaredRect(const QRect &r) const;
 

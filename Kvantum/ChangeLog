@@ -14,7 +14,8 @@ V0.8.23
  * Draw the size grip relative to the corner.
  * Don't allow windows to have custom background colors if they have different window and base colors. As for their text color, it's the responsibility of developers to use QStyle correctly.
  * Another criterion for giving shadow/translucency to menus.
- * Changed the toggled button of the default theme.
+ * Changed the toggled and pressed buttons of the default theme.
+ * To get the spinbox maximum-length text, use the real width of the text, not the number of its characters.
 
 V0.8.22
 ---------

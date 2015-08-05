@@ -1261,8 +1261,12 @@ static inline QString spinMaxText (const QAbstractSpinBox* sp)
   if (!maxTxt.isEmpty())
   {
     QString svt = sp->specialValueText();
-    if (!svt.isEmpty() && svt.size() > maxTxt.size())
-      maxTxt = svt;
+    if (!svt.isEmpty())
+    {
+      QFontMetrics fm(sp->font());
+      if (fm.width(svt) > fm.width(maxTxt))
+        maxTxt = svt;
+    }
   }
   return maxTxt;
 }
@@ -1323,6 +1327,36 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
       connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
     }
   }
+}
+
+/* Compute the size of a text. */
+static inline QSize textSize (const QFont &font, const QString &text)
+{
+  int tw, th;
+  tw = th = 0;
+
+  if (!text.isEmpty())
+  {
+    QString t(text);
+    /* remove the '&' mnemonic character and tabs (for menu items) */
+    t.remove('\t');
+    int i = 0;
+    while (i < t.size())
+    {
+      if (t.at(i) == '&')
+        t.remove(i,1);
+      i++;
+    }
+
+    /* deal with newlines */
+    QStringList l = t.split('\n');
+
+    th = QFontMetrics(font).height()*(l.size());
+    for (int i=0; i<l.size(); i++)
+      tw = qMax(tw,QFontMetrics(font).width(l[i]));
+  }
+
+  return QSize(tw,th);
 }
 
 void Style::drawPrimitive(PrimitiveElement element,
@@ -7863,35 +7897,6 @@ QSize Style::sizeCalculated(const QFont &font,
     s.setWidth(sspec.minW);
 
   return s;
-}
-
-QSize Style::textSize (const QFont &font, const QString &text) const
-{
-  int tw, th;
-  tw = th = 0;
-
-  if (!text.isEmpty())
-  {
-    QString t(text);
-    /* remove the '&' mnemonic character and tabs (for menu items) */
-    t.remove('\t');
-    int i = 0;
-    while (i < t.size())
-    {
-      if (t.at(i) == '&')
-        t.remove(i,1);
-      i++;
-    }
-
-    /* deal with newlines */
-    QStringList l = t.split('\n');
-
-    th = QFontMetrics(font).height()*(l.size());
-    for (int i=0; i<l.size(); i++)
-      tw = qMax(tw,QFontMetrics(font).width(l[i]));
-  }
-
-  return QSize(tw,th);
 }
 
 QRect Style::subElementRect(SubElement element, const QStyleOption *option, const QWidget *widget) const
