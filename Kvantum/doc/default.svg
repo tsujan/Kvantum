@@ -399,7 +399,7 @@
       <stop
          id="stop7332"
          offset="0"
-         style="stop-color:#4978a7;stop-opacity:1" />
+         style="stop-color:#3a5f84;stop-opacity:1" />
       <stop
          style="stop-color:#345372;stop-opacity:1"
          offset="0.31"
@@ -411,7 +411,7 @@
       <stop
          id="stop7336"
          offset="1"
-         style="stop-color:#5ba0e5;stop-opacity:1;" />
+         style="stop-color:#4b8ccd;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
        id="linearGradient7460">
@@ -5465,27 +5465,27 @@
     <linearGradient
        gradientUnits="userSpaceOnUse"
        x2="210"
-       y2="712.5"
+       y2="705"
        x1="210"
-       y1="669.5"
+       y1="674"
        id="linearGradient6203"
        xlink:href="#linearGradient7330"
        gradientTransform="translate(120,-626)" />
     <linearGradient
        x2="210"
        gradientUnits="userSpaceOnUse"
-       y2="713"
-       x1="209.99998"
-       y1="670"
+       y2="705"
+       x1="210"
+       y1="675"
        id="linearGradient6331"
        xlink:href="#linearGradient7330"
        gradientTransform="translate(120,-626)" />
     <linearGradient
        x2="3"
        gradientUnits="userSpaceOnUse"
-       y2="15.5"
+       y2="13"
        x1="3"
-       y1="1.1666666"
+       y1="2.6666667"
        id="linearGradient6294"
        xlink:href="#linearGradient7330"
        gradientTransform="matrix(3,0,0,3,321,40)" />
@@ -12804,7 +12804,7 @@
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#3f6e9d;stroke:none"
+       style="fill:#5f96cd;stroke:none"
        id="path6234"
        d="m 330,79 0,3 30,0 0,-3 -30,0 z" />
   </g>
@@ -12827,7 +12827,7 @@
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#4878a8;stroke:none"
+       style="fill:#5082b4;stroke:none"
        id="path6244"
        d="m 327,79 1,2 2,-2 z" />
     <path
@@ -12842,7 +12842,7 @@
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#3f6e9d;stroke:none"
+       style="fill:#5b8cbd;stroke:none"
        id="path6250"
        d="m 330,79 -2,2 2,1 z" />
   </g>
@@ -12880,12 +12880,12 @@
        d="m 366,79 -2,4 2,2 0,0 3,-6 z" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#4878a8;stroke:none"
+       style="fill:#5082b4;stroke:none"
        id="path6266"
        d="m 360,79 2,2 1,-2 z" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#3f6e9d;stroke:none"
+       style="fill:#5b8cbd;stroke:none"
        id="path6268"
        d="m 360,79 0,3 2,-1 z" />
   </g>
