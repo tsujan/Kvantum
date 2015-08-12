@@ -157,7 +157,7 @@ Kvantum can use in addition to its default theme.</string>
         <item row="4" column="0" colspan="2">
          <widget class="QLabel" name="usageLabel">
           <property name="text">
-           <string>Since Kvantum is independent of KDE, you need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Style &gt; Applications &gt; Widget style&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Also select and apply the color scheme of this theme from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Colors &gt; Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for Plasma to see it completely.</string>
+           <string>Since Kvantum is independent of KDE, if you use it under KDE you will need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Style &gt; Applications &gt; Widget style&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under KDE, also select and apply the color scheme of this theme from &lt;b&gt;&lt;i&gt;System Settings &gt; Application Appearance &gt; Colors &gt; Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for Plasma to see it completely.</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>

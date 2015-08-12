@@ -1,7 +1,8 @@
 SUBDIRS += style
 
 greaterThan(QT_MAJOR_VERSION, 4): SUBDIRS += kvantumpreview \
-                                             kvantummanager
+                                             kvantummanager \
+                                             themes
 
 TEMPLATE = subdirs 
 

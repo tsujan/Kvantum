@@ -1,3 +1,8 @@
+V0.8.24
+---------
+ * Added some of my themes, that don't need special titlebars, to the project for Kvantum to have extra themes by default. They're installed as root with Qt5 installation.
+ * Fixed Kvantum Managers's comment tooltip for root themes.
+
 V0.8.23
 ---------
  * Added two new sections for opaque and translucent dialogs. The fallbacks are the sections "WindowTranslucent" and "Window".

@@ -5,14 +5,14 @@
 First install X11 and Qt development packages. In Debian-based systems, they are:
 
 * libx11-dev and libxext-dev (for X11)
-* libqt4-dev (for Qt4)
-* qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5 and only if you want Qt5 support)
+* libqt4-dev (for Qt4 and if you want Qt4 support)
+* qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
 
 Then open a terminal inside this folder and issue the following command:
 
 	qmake && make
 
-You might need to put the full path of qmake in the above command, especially for a second compilation against Qt5. For example, in 64-bit Debian, it is /usr/lib/x86_64-linux-gnu/qt4/bin/qmake for Qt4 and /usr/lib/x86_64-linux-gnu/qt5/bin/qmake for Qt5.
+You might need to put the full path of qmake in the above command (especially for a second compilation against your non-default Qt installation). For example, in 64-bit Debian, it is /usr/lib/x86_64-linux-gnu/qt4/bin/qmake for Qt4 and /usr/lib/x86_64-linux-gnu/qt5/bin/qmake for Qt5.
 
 ********************
 *   Installation   *
@@ -23,9 +23,9 @@ Then, use these commands for installation and cleaning:
 	sudo make install
 	make distclean
 
-The second command cleans the source and makes it ready for another compilation (against Qt5, for example).
+The second command cleans the source and makes it ready for another compilation (against another version of Qt, for example).
 
-Installation for Qt4 is necessary but you could compile and install Kvantum twice, first for Qt4 and then for Qt5. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look.
+Installation for your default Qt version (Qt5, in most distros) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look.
 
 Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issue the compilation command using the Qt4 qmake.
 
@@ -46,23 +46,27 @@ Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, sav
 
 In Other DEs and for Qt5:
 =========================
-Unfortunately, there is no qtconfig for Qt5. You could use this command to run a Qt5 application APP:
+Unfortunately, there is no qtconfig for Qt5. In environments that don't have a Qt5 configuration utility, you could use this command to run a Qt5 application APP:
 
 	APP -style kvantum
 
-Or add this to your '~/profile' or '~/.bashrc':
+Or, better, add this to your '~/.profile' or '~/.bashrc':
 
 	export QT_STYLE_OVERRIDE=kvantum
+
+If the display manager you use doesn't source '~/.profile', you could probably add the above line to '~/.xsessionrc'.
 
 **************************
 *   Using Other Themes   *
 **************************
 
-To install and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
+To install (as user) and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
 
 If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: THEME_NAME.svg, THEME_NAME.kvconfig and THEME_NAME.colors.
 
-Themes can also be packaged as deb, rpm,... packages and installed as root. The root installation path should be /usr/share/Kvantum (if PREFIX=/usr) and the KDE color schemes should go to /usr/share/kde4/apps/color-schemes. If a theme is installed both as root and as user, the latter installation will take priority.
+Themes can also be packaged as deb, rpm,... packages and installed as root. The root installation path should be '/usr/share/Kvantum/' (if PREFIX=/usr) and the KDE color schemes should go to '/usr/share/kde4/apps/color-schemes/' for KDE4 and '/usr/share/color-schemes/' for KF5. If a theme is installed both as root and as user, the latter installation will take priority.
+
+The default Qt5 installation adds some root themes, that can be selected by using Kvantum Manager.
 
 ***********
 *   GTK   *

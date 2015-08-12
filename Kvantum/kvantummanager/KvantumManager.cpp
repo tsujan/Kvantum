@@ -539,7 +539,10 @@ void KvantumManager::tabChanged (int index)
         ui->usageLabel->show();
         QString comment;
         if (kvconfigTheme.isEmpty())
+        {
             ui->deleteTheme->setEnabled (false);
+            comment = "The default Kvantum theme";
+        }
         else
         {
             QString themeConfig;
@@ -748,7 +751,12 @@ void KvantumManager::selectionChanged (const QString &txt)
         text.replace (QString (" (modified)"), QString ("#"));
     if (text != "Kvantum (default)")
     {
-        QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
+        QString themeConfig;
+        QDir themeDir = QDir (xdg_config_home + QString ("/Kvantum/") + text);
+        if (!themeDir.exists() && !text.endsWith ("#"))
+            themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (text);
+        else
+            themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
         if (QFile::exists (themeConfig))
         {
             QSettings themeSettings (themeConfig, QSettings::NativeFormat);
@@ -763,6 +771,7 @@ void KvantumManager::selectionChanged (const QString &txt)
             themeSettings.endGroup();
         }
     }
+    else comment = "The default Kvantum theme";
     if (comment.isEmpty())
       comment = "No description";
     ui->comboBox->setToolTip (comment);
@@ -1294,7 +1303,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.23</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.24</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")
