@@ -836,8 +836,12 @@ void KvantumManager::updateThemeList()
     }
     ui->comboBox->insertItems (0, list);
     ui->comboBox->insertSeparator (1);
+    ui->comboBox->insertSeparator (1);
     if (rootSep)
-        ui->comboBox->insertSeparator (rootSep + 1);
+    {
+        ui->comboBox->insertSeparator (rootSep + 2);
+        ui->comboBox->insertSeparator (rootSep + 2);
+    }
 
     /* select the active theme and set kvconfigTheme */
     QString theme;
