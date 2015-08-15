@@ -7344,8 +7344,13 @@ QSize Style::sizeFromContents (ContentsType type,
         const QString txt = opt->text;
         s = s + QSize(lspec.left+lspec.right,
                       lspec.top+lspec.bottom); // either text or icon
-        if (!txt.isEmpty() && !opt->icon.isNull())
-          s = s + QSize(lspec.tispace, 0);
+        if (!txt.isEmpty())
+        {
+          if (lspec.hasShadow)
+            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+          if (!opt->icon.isNull())
+            s = s + QSize(lspec.tispace, 0);
+        }
 
         /* this was for KColorButton but apparently
            it isn't needed when sizeCalculated() isn't used */
@@ -7599,13 +7604,18 @@ QSize Style::sizeFromContents (ContentsType type,
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
           }
 
-          /* extra space for bold text */
-          if (!opt->text.isEmpty() && lspec.boldFont)
+          /* extra space for shadow and bold text */
+          if (!opt->text.isEmpty())
           {
-            QFont f = tb->font();
-            QSize s1 = textSize(f, opt->text);
-            f.setBold(true);
-            s = s + textSize(f, opt->text) - s1;
+            if (lspec.hasShadow)
+              s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+            if (lspec.boldFont)
+            {
+              QFont f = tb->font();
+              QSize s1 = textSize(f, opt->text);
+              f.setBold(true);
+              s = s + textSize(f, opt->text) - s1;
+            }
           }
         }
 
@@ -7847,20 +7857,21 @@ QSize Style::sizeFromContents (ContentsType type,
 }
 
 QSize Style::sizeCalculated(const QFont &font,
-                              const frame_spec &fspec, // frame spec
-                              const label_spec &lspec, // label spec
-                              const size_spec &sspec, // size spec
-                              const QString &text,
-                              const QSize iconSize,
-                              // text-icon alignment
-                              const Qt::ToolButtonStyle tialign) const
+                            const frame_spec &fspec, // frame spec
+                            const label_spec &lspec, // label spec
+                            const size_spec &sspec, // size spec
+                            const QString &text,
+                            const QSize iconSize,
+                            // text-icon alignment
+                            const Qt::ToolButtonStyle tialign) const
 {
   QSize s;
   s.setWidth(fspec.left+fspec.right+lspec.left+lspec.right);
   s.setHeight(fspec.top+fspec.bottom+lspec.top+lspec.bottom);
-  if (lspec.hasShadow) {
-    s.rwidth() += lspec.xshift+lspec.depth;
-    s.rheight() += lspec.yshift+lspec.depth;
+  if (!text.isEmpty() && lspec.hasShadow)
+  {
+    s.rwidth() += qAbs(lspec.xshift)+lspec.depth;
+    s.rheight() += qAbs(lspec.yshift)+lspec.depth;
   }
 
   QSize ts = textSize (font, text);
