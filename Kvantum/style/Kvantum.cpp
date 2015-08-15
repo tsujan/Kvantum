@@ -5061,7 +5061,7 @@ void Style::drawControl(ControlElement element,
         }
 
         /* in case there isn't enough space */
-        /*if (pb && !opt->text.isEmpty())
+        if (pb && !opt->text.isEmpty())
         {
           QSize txtSize = textSize(painter->font(),opt->text);
           if (pb->width() < txtSize.width()
@@ -5071,8 +5071,10 @@ void Style::drawControl(ControlElement element,
                                 +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
           {
             lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            lspec.tispace = qMin(lspec.tispace,3);
           }
-        }*/
+        }
 
         /* opt->rect provided here is just for the label
            and not for the entire button. So, enlarge it!
@@ -5171,6 +5173,20 @@ void Style::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
+
+        if (pb && !opt->text.isEmpty()) // -> CE_PushButtonLabel
+        {
+          QSize txtSize = textSize(painter->font(),opt->text);
+          if (pb->width() < txtSize.width()
+                            +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                            +lspec.left+lspec.right+fspec.left+fspec.right
+              || pb->height() < txtSize.height()
+                                +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          {
+            lspec.left = lspec.right = 0;
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          }
+        }
 
         if (!(opt->features & QStyleOptionButton::Flat))
         {
