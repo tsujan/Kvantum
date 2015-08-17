@@ -3,6 +3,8 @@ V0.8.24
  * Added some of my themes, that don't need special titlebars, to the project for Kvantum to have extra themes by default. They're installed as root with Qt5 installation.
  * Fixed Kvantum Managers's comment tooltip for root themes.
  * Fixed a miscalculation when the text has shadow.
+ * Took care of buttonless spinboxes.
+ * Don't move the cursor out of the window and back for x11 dragging with Qt5. This workaround not only isn't needed anymore but also creates artifacts with Openbox.
 
 V0.8.23
 ---------

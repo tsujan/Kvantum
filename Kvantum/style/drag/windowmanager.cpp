@@ -612,10 +612,14 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 /*************************/
 bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* event)
 {
-  Q_UNUSED( object );
+  Q_UNUSED(object);
 
+#if QT_VERSION >= 0x050000
+  Q_UNUSED(event);
+#else
   // store target window (see later)
   QWidget* window (_parent->_target.data()->window());
+#endif
 
   /*
     post some mouseRelease event to the target, in order to counter balance
@@ -626,6 +630,7 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (_parent->_target.data(), &mouseEvent);
 
+#if QT_VERSION < 0x050000
   if (event->type() == QEvent::MouseMove)
   {
     /*
@@ -637,6 +642,7 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
     QCursor::setPos (window->mapToGlobal (window->rect().topRight()) + QPoint (1, 0));
     QCursor::setPos (cursor);
   }
+#endif
 
   return true;
 }

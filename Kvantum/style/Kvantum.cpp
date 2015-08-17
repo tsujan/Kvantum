@@ -2303,13 +2303,17 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
       }
-      if (qobject_cast<QAbstractSpinBox*>(p)
+      QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p);
+      if (sb
           || (p && p->inherits("KisAbstractSliderSpinBox"))
           || (isLibreoffice && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
       {
-        fspec.hasCapsule = true;
-        fspec.capsuleH = -1;
-        fspec.capsuleV = 2;
+        if (!sb || sb->buttonSymbols() != QAbstractSpinBox::NoButtons)
+        {
+          fspec.hasCapsule = true;
+          fspec.capsuleH = -1;
+          fspec.capsuleV = 2;
+        }
 
         // -> CC_SpinBox
         if (tspec.vertical_spin_indicators)
@@ -2317,19 +2321,17 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           fspec.expansion = 0;
         }
-        else
+        else if (sb)
         {
-          if (QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p))
+          QString maxTxt = spinMaxText(sb);
+          if (maxTxt.isEmpty() || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
+                                  + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+              || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
+                  && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
+              || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
-            const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
-            QString maxTxt = spinMaxText(sb);
-            if (maxTxt.isEmpty() || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
-                || sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
-                || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-            {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-              //fspec.expansion = 0;
-            }
+            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            //fspec.expansion = 0;
           }
         }
       }
@@ -7226,16 +7228,19 @@ QSize Style::sizeFromContents (ContentsType type,
           s = textSize(sb->font(),maxTxt)
               + QSize(fspec.left + (tspec.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
                                  + 2*SPIN_BUTTON_WIDTH
-                                 + (tspec.vertical_spin_indicators ? fspec.right : fspec1.right),
+                                 + (tspec.vertical_spin_indicators
+                                    || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? // as in qpdfview
+                                      fspec.right : fspec1.right),
                       lspec.top + lspec.bottom
-                      + (tspec.vertical_spin_indicators ? fspec.top + fspec.bottom
+                      + (tspec.vertical_spin_indicators
+                         || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.top + fspec.bottom
                          : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
         }
         else
         {
           /* This is a for some apps (like Kdenlive with its
              TimecodeDisplay) that subclass only QAbstractSpinBox. */
-          if (tspec.vertical_spin_indicators)
+          if (tspec.vertical_spin_indicators || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
             s.rwidth() = sb->minimumWidth();
           else
             s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
@@ -8047,14 +8052,17 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         lspec.right = 0;
         if (!tspec.vertical_spin_indicators)
         {
-          const frame_spec fspecSB = getFrameSpec("IndicatorSpinBox");
           QString maxTxt = spinMaxText(p);
           if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
-              || p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + fspecSB.right
+                                  + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+              || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
+                  && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
               || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
             lspec.left = 0;
+            if (p->buttonSymbols() == QAbstractSpinBox::NoButtons)
+              lspec.right = 0;
           }
         }
         else
@@ -8083,8 +8091,11 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           else if (widget->x() > 0)
               rect.adjust(-fspec.left,0,0,0);
         }
-        else if (qobject_cast<const QAbstractSpinBox*>(widget->parentWidget()))
-          rect.adjust(0,0,fspec.right,0);
+        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(widget->parentWidget()))
+        {
+          if (p->buttonSymbols() != QAbstractSpinBox::NoButtons)
+            rect.adjust(0,0,fspec.right,0);
+        }
       }
 
       /* this is for editable view items */
@@ -8391,36 +8402,41 @@ QRect Style::subControlRect(ComplexControl control,
         /* when there isn't enough horizontal space (as in Pencil) */
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
-          QString maxTxt = spinMaxText(sb);
-          if (!maxTxt.isEmpty())
+          if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+            sw = 0;
+          else
           {
-            maxTxt = maxTxt + QLatin1Char(' ');
-            int txtWidth = textSize(sb->font(),maxTxt).width();
-            int m = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
-            if (fspec.right > m)
+            QString maxTxt = spinMaxText(sb);
+            if (!maxTxt.isEmpty())
             {
-              /* in this case, lineedit frame width
-                 is set to 3 at PE_PanelLineEdit */
-              m = w-txtWidth-2*sw-3-2;
+              maxTxt = maxTxt + QLatin1Char(' ');
+              int txtWidth = textSize(sb->font(),maxTxt).width();
+              int m = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
               if (fspec.right > m)
               {
-                m = qMax(m,2);
-                if (m > 2 || w >= txtWidth+2*8+2) // otherwise wouldn't help
+                /* in this case, lineedit frame width
+                   is set to 3 at PE_PanelLineEdit */
+                m = w-txtWidth-2*sw-3-2;
+                if (fspec.right > m)
                 {
-                  if (m == 2)
-                    sw = 8;
-                  fspec.right = qMin(fspec.right,
-                                     qMin(m,3)); // for a uniform look
+                  m = qMax(m,2);
+                  if (m > 2 || w >= txtWidth+2*8+2) // otherwise wouldn't help
+                  {
+                    if (m == 2)
+                      sw = 8;
+                    fspec.right = qMin(fspec.right,
+                                       qMin(m,3)); // for a uniform look
+                  }
+                  else fspec.right = qMin(fspec.right,3); // better than nothing
                 }
-                else fspec.right = qMin(fspec.right,3); // better than nothing
               }
             }
+            else fspec.right = qMin(fspec.right,3);
           }
-          else fspec.right = qMin(fspec.right,3);
         }
       }
 
-      if (tspec.vertical_spin_indicators)
+      if (sw != 0 && tspec.vertical_spin_indicators)
       {
         fspecLE.right = qMin(fspecLE.left,3);
         fspec = fspecLE;
