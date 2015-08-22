@@ -1,3 +1,7 @@
+V0.8.25
+---------
+ * Added a key for drawing editable comboboxes as lineedits.
+
 V0.8.24
 ---------
  * Added some of my themes, that don't need special titlebars, to the project for Kvantum to have extra themes by default. They're installed as root with Qt5 installation.

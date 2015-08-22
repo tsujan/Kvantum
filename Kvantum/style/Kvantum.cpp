@@ -2341,8 +2341,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          const frame_spec fspec1 = getFrameSpec("ComboBox");
-          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
+          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH
+                                - (tspec.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
             fspec.capsuleH = 0;
           else fspec.capsuleH = 1;
         }
@@ -2657,8 +2657,22 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QComboBox *cb = qobject_cast<const QComboBox *>(widget);
       if (cb /*&& !cb->duplicatesEnabled()*/)
       {
-        fspec = getFrameSpec("ComboBox");
-        ispec = getInteriorSpec("ComboBox");
+        if (tspec.combo_as_lineedit && ((combo && combo->editable) || cb->lineEdit()))
+        {
+          fspec = getFrameSpec("LineEdit");
+          ispec = getInteriorSpec("LineEdit");
+          const indicator_spec dspec1 = getIndicatorSpec("LineEdit");
+          if (themeRndr && themeRndr->isValid()
+              && themeRndr->elementExists(dspec1.element+"-normal"))
+          {
+            dspec = dspec1;
+          }
+        }
+        else
+        {
+          fspec = getFrameSpec("ComboBox");
+          ispec = getInteriorSpec("ComboBox");
+        }
         if (!(cb->lineEdit()
               // someone may want transparent lineedits (as the developer of Cantata does)
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
@@ -2819,6 +2833,18 @@ void Style::drawPrimitive(PrimitiveElement element,
                && (!(option->state & State_AutoRaise)
                    || (!status.startsWith("normal") && !status.startsWith("disabled"))))
       {
+        if (cb && tspec.combo_as_lineedit)
+        {
+          if (cb->hasFocus())
+          {
+            if (isInactive) status = "focused-inactive";
+            else status = "focused";
+          }
+          else if (status.startsWith("focused"))
+            status.replace(QString("focused"),QString("normal"));
+          else if (status.startsWith("toggled"))
+            status.replace(QString("toggled"),QString("normal"));
+        }
         if (status.startsWith("disabled"))
         {
           status.replace(QString("disabled"),QString("normal"));
@@ -5985,18 +6011,24 @@ void Style::drawComplexControl(ComplexControl control,
         lspec.right = qMax(0,lspec.right-1);
         lspec.bottom = qMax(0,lspec.bottom-1);
         frame_spec fspec = getFrameSpec(group);
+        interior_spec ispec = getInteriorSpec(group);
         if (!cb || cb->lineEdit()) // otherwise the arrow part will be integrated
         {
+          if (tspec.combo_as_lineedit)
+          {
+            fspec = getFrameSpec("LineEdit");
+            ispec = getInteriorSpec("LineEdit");
+          }
           fspec.hasCapsule = true;
           fspec.capsuleH = rtl ? 1 : -1;
           fspec.capsuleV = 2;
         }
-        interior_spec ispec = getInteriorSpec(group);
 
         int margin = 0; // see CC_ComboBox at subControlRect
         if (opt->editable && !opt->currentIcon.isNull())
           margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
-                    - 3; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+                    - (tspec.combo_as_lineedit ? 0
+                       : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
         else if (isLibreoffice)
           margin = fspec.left;
         // SC_ComboBoxEditField includes the icon too
@@ -6039,8 +6071,23 @@ void Style::drawComplexControl(ComplexControl control,
               }
               if (cb->hasFocus())
               {
-                if (isInactive) status = "pressed-inactive";
-                else status = "pressed";
+                if (tspec.combo_as_lineedit)
+                {
+                  if (isInactive) status = "focused-inactive";
+                  else status = "focused";
+                }
+                else
+                {
+                  if (isInactive) status = "pressed-inactive";
+                  else status = "pressed";
+                }
+              }
+              else if (tspec.combo_as_lineedit)
+              {
+                if (status.startsWith("focused"))
+                  status.replace(QString("focused"),QString("normal"));
+                else if (status.startsWith("toggled"))
+                  status.replace(QString("toggled"),QString("normal"));
               }
             }
             else // when there isn't enough space
@@ -7304,8 +7351,14 @@ QSize Style::sizeFromContents (ContentsType type,
         /* consider the top and bottom frames
            of lineedits inside editable combos */
         if (opt->editable)
+        {
           s.rheight() += (fspec1.top > fspec.top ? fspec1.top-fspec.top : 0)
                          + (fspec1.bottom > fspec.bottom ? fspec1.bottom-fspec.bottom : 0);
+          if (tspec.combo_as_lineedit)
+            s.rwidth() += option->direction == Qt::RightToLeft ?
+                           (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
+                           : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
+        }
 
         if (s.width() < sspec.minW)
           s.setWidth(sspec.minW);
@@ -8482,8 +8535,14 @@ QRect Style::subControlRect(ComplexControl control,
       switch (subControl) {
         case SC_ComboBoxFrame : return option->rect;
         case SC_ComboBoxEditField : {
+          const QStyleOptionComboBox *opt =
+              qstyleoption_cast<const QStyleOptionComboBox *>(option);
           int margin = 0;
-          const frame_spec fspec = getFrameSpec("ComboBox");
+          frame_spec fspec;
+          if (tspec.combo_as_lineedit && opt && opt->editable)
+            fspec = getFrameSpec("LineEdit");
+          else
+            fspec = getFrameSpec("ComboBox");
           const label_spec lspec =  getLabelSpec("ComboBox");
           if (isLibreoffice)
           {
@@ -8492,15 +8551,14 @@ QRect Style::subControlRect(ComplexControl control,
           }
           else
           {
-            const QStyleOptionComboBox *opt =
-                qstyleoption_cast<const QStyleOptionComboBox *>(option);
             /* The left icon should respect frame width, text margin
                and text-icon spacing in the editable mode too */
             if (opt && opt->editable && !opt->currentIcon.isNull())
               margin = (option->direction == Qt::RightToLeft ? fspec.right+qMax(0,lspec.right-1)
                                                              : fspec.left+qMax(0,lspec.left-1))
                        + lspec.tispace
-                       - 3; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+                       - (tspec.combo_as_lineedit ? 0
+                          : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
           }
           return QRect(option->direction == Qt::RightToLeft ?
                          x+COMBO_ARROW_LENGTH+fspec.left
@@ -8512,7 +8570,13 @@ QRect Style::subControlRect(ComplexControl control,
                        h);
         }
         case SC_ComboBoxArrow : {
-          const frame_spec fspec = getFrameSpec("ComboBox");
+          const QStyleOptionComboBox *opt =
+              qstyleoption_cast<const QStyleOptionComboBox *>(option);
+          frame_spec fspec;
+          if (tspec.combo_as_lineedit && opt && opt->editable)
+            fspec = getFrameSpec("LineEdit");
+          else
+            fspec = getFrameSpec("ComboBox");
           return QRect(option->direction == Qt::RightToLeft ?
                          x
                          : x+w-(COMBO_ARROW_LENGTH+fspec.right),

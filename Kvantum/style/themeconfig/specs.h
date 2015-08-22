@@ -107,6 +107,8 @@ typedef struct {
   /* draw spin indicators vertically
      and inside the spin line-edit? */
   bool vertical_spin_indicators;
+  /* draw an editable combobox as a lineedit with arrow? */
+  bool combo_as_lineedit;
   /* fill rubber band rectangle with highlight color? */
   bool fill_rubberband;
 
@@ -323,6 +325,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
   tspec.vertical_spin_indicators = false;
+  tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;

@@ -831,4 +831,7 @@
 <rect width="2" x="149" y="75" height="10" style="fill-opacity:0" id="header-separator0"/>
 <rect width="1" x="149.5" y="75" height="10" style="fill:#969696" id="rect5030"/>
 </g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-normal" id="b-arrow-normal" transform="matrix(1,0,0,-1,169.00004,998.69298)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-focused" id="b-arrow-focused" transform="matrix(1,0,0,-1,148,1001.386)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-disabled" id="b-arrow-disabled" transform="matrix(1,0,0,-1,82,1001.386)"/>
 </svg>

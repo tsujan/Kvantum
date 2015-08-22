@@ -470,6 +470,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxX11->setChecked (defaultSettings.value ("x11drag").toBool());
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
     ui->checkBoxSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
+    ui->checkBoxCombo->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
     if (composited)
     {
         bool translucency = defaultSettings.value ("translucent_windows").toBool();
@@ -520,7 +521,8 @@ void KvantumManager::resizeConfPage (bool thirdPage)
   QSize newSize  = size().expandedTo (sizeHint()
                                       + (thirdPage ?
                                            ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
-                                             + QSize (0, 3*ui->saveButton->sizeHint().height() + 10)
+                                             + QSize (0, 3*ui->saveButton->sizeHint().height() + 10
+                                                         + ui->checkBoxCombo->sizeHint().height())
                                            : QSize (ui->saveButton->sizeHint().width(), 0)));
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
@@ -653,6 +655,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
                 if (themeSettings.contains ("vertical_spin_indicators"))
                     ui->checkBoxSpin->setChecked (themeSettings.value ("vertical_spin_indicators").toBool());
+                if (themeSettings.contains ("combo_as_lineedit"))
+                    ui->checkBoxCombo->setChecked (themeSettings.value ("combo_as_lineedit").toBool());
                 if (composited)
                 {
                     bool translucency = false;
@@ -1023,6 +1027,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("x11drag", boolToStr (ui->checkBoxX11->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxSpin->isChecked()));
+        generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxCombo->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
@@ -1067,7 +1072,8 @@ void KvantumManager::writeConfig()
 
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
-            || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked())
+            || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
+            || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxSpin->isChecked())
         {
             restyle = true;
         }
@@ -1096,6 +1102,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
         themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxSpin->isChecked());
+        themeSettings.setValue ("combo_as_lineedit", ui->checkBoxCombo->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
@@ -1307,7 +1314,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.8.24</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.8.25</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")

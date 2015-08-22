@@ -443,6 +443,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","vertical_spin_indicators");
   r.vertical_spin_indicators = v.toBool();
 
+  v = getValue("General","combo_as_lineedit");
+  r.combo_as_lineedit = v.toBool();
+
   v = getValue("General","fill_rubberband");
   r.fill_rubberband = v.toBool();
 
