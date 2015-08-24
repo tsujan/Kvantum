@@ -1,6 +1,7 @@
 V0.8.25
 ---------
  * Added a key for drawing editable comboboxes as lineedits.
+ * Use the generic frame for combo menus.
 
 V0.8.24
 ---------

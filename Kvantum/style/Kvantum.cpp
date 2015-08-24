@@ -2101,7 +2101,9 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
-      if (widget && (qobject_cast<const QAbstractScrollArea*>(widget) || widget->inherits("QWellArray")))
+      if (widget && (qobject_cast<const QAbstractScrollArea*>(widget)
+                     || widget->inherits("QWellArray") // color dialog's color rects
+                     || widget->inherits("QComboBoxPrivateContainer"))) // frame for combo menus
       {
         if (isDolphin)
         {
@@ -5739,7 +5741,8 @@ void Style::drawControl(ControlElement element,
         /* skip ugly frames */
         if (f->frameShape != QFrame::HLine
             && f->frameShape != QFrame::VLine
-            && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised))
+            && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised
+                || (widget && widget->inherits("QComboBoxPrivateContainer"))))
         {
           if (f->frameShape == QFrame::Box)
           { // the default box frame is ugly too

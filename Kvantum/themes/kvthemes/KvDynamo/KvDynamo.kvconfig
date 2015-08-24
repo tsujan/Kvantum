@@ -26,6 +26,7 @@ blurring=false
 popup_blurring=false
 opaque=
 vertical_spin_indicators=false
+combo_as_lineedit=true
 fill_rubberband=false
 merge_menubar_with_toolbar=false
 small_icon_size=16
