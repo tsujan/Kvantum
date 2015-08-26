@@ -273,6 +273,7 @@ class Style : public QCommonStyle {
 
     /* Hacks */
     bool isDolphin;
+    bool isPcmanfm;
     bool isKonsole;
     bool isYakuake;
 

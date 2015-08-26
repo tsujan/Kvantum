@@ -432,6 +432,10 @@ transparent_dolphin_view          true/false          No background or frame for
                                                       Dolphin's view (Dolphin is the
                                                       file manager of KDE)?
 
+transparent_pcmanfm_sidepane      true/false          No background or frame for
+                                                      PCManFM-qt's side-pane (PCManFM-qt
+                                                      is the file manager of LXQT)?
+
 blur_konsole                      true/false          Blur the region behind Konsole's
                                                       transparent background if possible?
 

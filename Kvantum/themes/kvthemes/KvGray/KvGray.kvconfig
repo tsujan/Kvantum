@@ -46,6 +46,7 @@ link.visited.color=#644A9B
 
 [Hacks]
 transparent_dolphin_view=true
+transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 blur_konsole=false
 transparent_menutitle=false

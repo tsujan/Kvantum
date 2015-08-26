@@ -2,6 +2,8 @@ V0.8.25
 ---------
  * Added a key for drawing editable comboboxes as lineedits.
  * Use the generic frame for combo menus.
+ * Check iconlessness when grouping toolbar buttons.
+ * Added a hacking key for merging PCManFM-qt's sidepane with its surroundings (to Kvantum Manager).
 
 V0.8.24
 ---------

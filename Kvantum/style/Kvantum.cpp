@@ -136,6 +136,7 @@ Style::Style() : QCommonStyle()
   isPlasma = false;
   isLibreoffice = false;
   isDolphin = false;
+  isPcmanfm = false;
   isKonsole = false;
   isYakuake = false;
   subApp = false;
@@ -547,6 +548,13 @@ void Style::polish(QWidget *widget)
       if (hspec.transparent_dolphin_view && widget->autoFillBackground())
         widget->setAutoFillBackground(false);
     }
+    else if (isPcmanfm
+             && hspec.transparent_pcmanfm_sidepane
+             && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
+                 || (getParent(widget,2) && getParent(widget,2)->inherits("Fm::SidePane"))))
+    {
+      widget->setAutoFillBackground(false);
+    }
 
     // -> ktitlewidget.cpp
     if (widget->inherits("KTitleWidget"))
@@ -730,6 +738,8 @@ void Style::polish(QApplication *app)
     subApp = true;
   else if (appName == "dolphin")
     isDolphin = true;
+  else if (appName == "pcmanfm-qt")
+    isPcmanfm = true;
   else if (appName == "konsole")
     isKonsole = true;
   else if (appName == "yakuake")
@@ -1106,18 +1116,15 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
     const QToolButton *left = qobject_cast<const QToolButton *>(toolBar->childAt (g.x()-1, g.y()));
     const QToolButton *right =  qobject_cast<const QToolButton *>(toolBar->childAt (g.x()+g.width()+1, g.y()));
 
-    if (left)
+    if (left && opt->icon.isNull() == left->icon().isNull())
     {
-      if (right)
+      if (right && opt->icon.isNull() == right->icon().isNull())
         res = tbMiddle;
       else
         res = tbRight;
     }
-    else
-    {
-      if (right)
+    else if (right && opt->icon.isNull() == right->icon().isNull())
         res = tbLeft;
-    }
   }
   else
   {
@@ -1127,18 +1134,15 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
     const QToolButton *top = qobject_cast<const QToolButton *>(toolBar->childAt (g.x(), g.y()-1));
     const QToolButton *bottom =  qobject_cast<const QToolButton *>(toolBar->childAt (g.x(), g.y()+g.height()+1));
 
-    if (top && !hasArrow (top, opt))
+    if (top && !hasArrow (top, opt) && opt->icon.isNull() == top->icon().isNull())
     {
-      if (bottom && !hasArrow (bottom, opt))
+      if (bottom && !hasArrow (bottom, opt) && opt->icon.isNull() == bottom->icon().isNull())
         res = tbMiddle;
       else
         res = tbRight;
     }
-    else
-    {
-      if (bottom && !hasArrow (bottom, opt))
+    else if (bottom && !hasArrow (bottom, opt) && opt->icon.isNull() == bottom->icon().isNull())
         res = tbLeft;
-    }
   }
 
   return res;
@@ -2109,8 +2113,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           if (QWidget *pw = widget->parentWidget())
           {
-            const hacks_spec hspec = settings->getHacksSpec();
-            if (hspec.transparent_dolphin_view
+            if (settings->getHacksSpec().transparent_dolphin_view
                 // not renaming area
                 && !qobject_cast<QAbstractScrollArea*>(pw)
                 // only Dolphin's view
@@ -2119,6 +2122,12 @@ void Style::drawPrimitive(PrimitiveElement element,
               break;
             }
           }
+        }
+        else if (isPcmanfm
+                 && settings->getHacksSpec().transparent_pcmanfm_sidepane
+                 && widget->parentWidget() && widget->parentWidget()->inherits("Fm::SidePane"))
+        {
+          break;
         }
 
         const QString group = "GenericFrame";
