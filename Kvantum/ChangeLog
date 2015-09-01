@@ -4,6 +4,7 @@ V0.8.25
  * Use the generic frame for combo menus.
  * Check iconlessness when grouping toolbar buttons.
  * Added a hacking key for merging PCManFM-qt's sidepane with its surroundings (to Kvantum Manager).
+ * It's time to have a decent icon for Kvantum.
 
 V0.8.24
 ---------

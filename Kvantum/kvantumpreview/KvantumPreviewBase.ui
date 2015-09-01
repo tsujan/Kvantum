@@ -2552,8 +2552,7 @@ check box</string>
   </widget>
   <action name="actionQuit">
    <property name="icon">
-    <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/quit.png</normaloff>:/Icons/quit.png</iconset>
+    <iconset theme="application-exit"/>
    </property>
    <property name="text">
     <string>&amp;Quit</string>
