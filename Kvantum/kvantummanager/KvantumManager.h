@@ -47,14 +47,14 @@ private:
     void resizeConfPage (bool thirdPage);
     Ui::KvantumManager *ui;
     /* Remember the last opened folder */
-    QString lastPath;
+    QString lastPath_;
     /* For running Kvantum Preview */
-    QProcess *process;
+    QProcess *process_;
     QString xdg_config_home;
     /* Theme name in the kvconfig file */
-    QString kvconfigTheme;
-    QGraphicsOpacityEffect *effect;
-    QPropertyAnimation *animation;
+    QString kvconfigTheme_;
+    QGraphicsOpacityEffect *effect_;
+    QPropertyAnimation *animation_;
 };
 
 #endif // KVANTUMMANAGER_H

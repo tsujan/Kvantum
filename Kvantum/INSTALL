@@ -25,9 +25,9 @@ Then, use these commands for installation and cleaning:
 
 The second command cleans the source and makes it ready for another compilation (against another version of Qt, for example).
 
-Installation for your default Qt version (Qt5, in most distros) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4. If you use KDE and have chosen Kvantum in System Settings, all Qt4 and Qt5 apps will have the same Kvantum look.
+Installation for your default Qt version (Qt5, in most distros) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4.
 
-Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issue the compilation command using the Qt4 qmake.
+Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issuing the compilation command using the Qt4 qmake.
 
 *************
 *   Usage   *
@@ -35,10 +35,13 @@ Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt
 
 In KDE:
 =======
-(1) Select Kvantum from 'System Settings > Application Appearance > Colors > Scheme' and click Apply.
+(1) Select Kvantum from 'System Settings > (Application Appearance >) Color(s > Scheme)' and click Apply.
 
-(2) Select Kvantum from 'System Settings > Application Appearance > Style > Applications > Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
+(2) Select Kvantum from 'System Settings > Application Appearance/Style > (Style > Applications >) Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
 
+In LXQT:
+========
+Select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme. Afterward, the easiest way for all LXQT parts to see Kvantum is logging out and in again.
 
 In Other DEs and for Qt4:
 =========================
@@ -54,13 +57,15 @@ Or, better, add this to your '~/.profile' or '~/.bashrc':
 
 	export QT_STYLE_OVERRIDE=kvantum
 
-If the display manager you use doesn't source '~/.profile', you could probably add the above line to '~/.xsessionrc'.
+If the display manager you use does not source '~/.profile', you could probably add the above line to '~/.xsessionrc'.
 
 **************************
 *   Using Other Themes   *
 **************************
 
 To install (as user) and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
+
+For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 
 If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: THEME_NAME.svg, THEME_NAME.kvconfig and THEME_NAME.colors.
 
@@ -72,8 +77,4 @@ The default Qt5 installation adds some root themes, that can be selected by usin
 *   GTK   *
 ***********
 
-Kvantum does not (and will not) have any relation to GTK but if you want your GTK apps to have a look that matches the default Kvantum theme, you could download E17gtk from:
-
-http://gnome-look.org/content/show.php/E17gtk?content=163472
-
-Put its extracted folder in '/usr/share/themes/' and select it from 'System Settings > Application Appearance > GTK > GTK Themes' for both GTK2 and GTK3.
+Kvantum does not -- and will not -- have any relation to GTK.
