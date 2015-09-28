@@ -237,6 +237,7 @@ frame.right=3
 inherits=PanelButtonCommand
 frame=false
 interior.element=slidercursor
+indicator.element=none
 
 [Progressbar]
 inherits=PanelButtonCommand
