@@ -680,14 +680,17 @@ void Style::polish(QWidget *widget)
       && !widget->testAttribute(Qt::WA_TranslucentBackground))
   {
 #if QT_VERSION >= 0x050000
-    /* FIXME: On rare occasions, the backgrounds of translucent menus or even tooltips
-       are fiiled by the window background color. I don't know the root of this bug but
-       what follows is a workaround, which works with setSurfaceFormat() below. */
-    QPalette palette = widget->palette();
-    QColor winCol = palette.window().color();
-    winCol.setAlpha(0);
-    palette.setColor(QPalette::Window, winCol);
-    widget->setPalette(palette);
+    /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
+       the window background color. I don't know the root of this bug but what follows
+       is a workaround, which works with setSurfaceFormat() below. */
+    if (widget->inherits("QTipLabel"))
+    {
+      QPalette palette = widget->palette();
+      QColor winCol = palette.window().color();
+      winCol.setAlpha(0);
+      palette.setColor(QPalette::Window, winCol);
+      widget->setPalette(palette);
+    }
 #endif
     widget->setAttribute(Qt::WA_TranslucentBackground);
     translucentWidgets.insert(widget);
@@ -7052,10 +7055,12 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (!tspec.composite || !widget || widget->testAttribute(Qt::WA_WState_Created) || subApp || isLibreoffice)
+  if (!tspec.composite
+      || !widget || widget->testAttribute(Qt::WA_WState_Created)
+      || qobject_cast<QMenu*>(widget) // WARNING: prevent a hang in KFileDialog!
+      || subApp || isLibreoffice)
     return;
-  if ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-      || widget->inherits("QTipLabel")) ; // see polish(QWidget*)
+  if (widget->inherits("QTipLabel")) ; // see polish(QWidget*)
   else if (!widget->isWindow()
            || (!tspec.translucent_windows
                && !((isKonsole || isYakuake)

@@ -1,6 +1,6 @@
 V0.9.1
 ---------
- * A workaround for the rare occasion when the background of a Qt5 composited menu or tooltip is filled by the window background color.
+ * A workaround for the rare occasion when the background of a Qt5 composited tooltip is filled by the window background color.
 
 V0.9.0
 ---------
