@@ -373,343 +373,336 @@ void Style::noTranslucency(QObject *o)
 
 void Style::polish(QWidget *widget)
 {
-  if (widget)
+  if (!widget) return;
+
+  // for moving the window containing this widget
+  if (itsWindowManager)
+    itsWindowManager->registerWidget(widget);
+
+  widget->setAttribute(Qt::WA_Hover, true);
+  //widget->setAttribute(Qt::WA_MouseTracking, true);
+
+  /* So far I haven't found any use for this: */
+  /*if (qobject_cast<QMenu*>(widget))
   {
-    // for moving the window containing this widget
-    if (itsWindowManager)
-      itsWindowManager->registerWidget(widget);
-
-    widget->setAttribute(Qt::WA_Hover, true);
-    //widget->setAttribute(Qt::WA_MouseTracking, true);
-
-    /* So far I haven't found any use for this: */
-    /*if (qobject_cast<QMenu*>(widget))
+    QColor menuTextColor(getLabelSpec("Menu").normalColor);
+    QPalette palette = widget->palette();
+    if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::Text))
     {
-      QColor menuTextColor(getLabelSpec("Menu").normalColor);
-      QPalette palette = widget->palette();
-      if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::Text))
-      {
-        palette.setColor(QPalette::Active,QPalette::Text,menuTextColor);
-        widget->setPalette(palette);
-      }
-    }*/
-
-    /* respect the toolbar text color */
-    QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
-    QColor windowTextColor(settings->getColorSpec().windowTextColor);
-    if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
-    {
-      QWidget *p = getParent(widget,1);
-      QWidget *gp = getParent(p,1);
-      if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
-           && !qobject_cast<QLineEdit*>(widget)
-           && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(p) // Krita, Amarok
-           && !p->findChild<QTabBar*>())
-          || (widget->inherits("AnimatedLabelStack") // Amarok
-              && qobject_cast<QToolBar*>(gp)
-              && qobject_cast<QMainWindow*>(getParent(gp,1))))
-      {
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
-        palette.setColor(QPalette::Inactive,widget->foregroundRole(),toolbarTextColor);
-        palette.setColor(QPalette::Active,QPalette::WindowText,toolbarTextColor); // for KAction in locationbar as in K3b
-        palette.setColor(QPalette::Inactive,QPalette::WindowText,toolbarTextColor);
-        widget->setPalette(palette);
-      }
-    }
-
-    const hacks_spec hspec = settings->getHacksSpec();
-    if (hspec.respect_darkness
-        && (qobject_cast<QAbstractItemView*>(widget)
-            || qobject_cast<QAbstractScrollArea*>(widget)
-            || qobject_cast<QTabWidget*>(widget)
-            || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
-    {
-      QPalette palette = widget->palette();
-      QColor txtCol = palette.color(QPalette::Text);
-      if (!enoughContrast(palette.color(QPalette::Base), txtCol)
-          || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
-          || (qobject_cast<QAbstractItemView*>(widget)
-              && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
-      {
-        polish(palette);
-        widget->setPalette(palette);
-      }
-    }
-
-    switch (widget->windowFlags() & Qt::WindowType_Mask) {
-      case Qt::Window:
-      case Qt::Dialog: {
-        widget->setAttribute(Qt::WA_StyledBackground);
-        /* take all precautions */
-        if (!isPlasma && !subApp && !isLibreoffice
-            && widget->isWindow()
-            && widget->windowType() != Qt::Desktop
-            && !widget->testAttribute(Qt::WA_PaintOnScreen)
-            && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-            && !widget->inherits("KScreenSaver")
-            && !widget->inherits("QTipLabel")
-            && !widget->inherits("QSplashScreen"))
-            
-        {
-          if (widget->minimumSize() != widget->maximumSize())
-          {
-            /*if (QMainWindow* mw = qobject_cast<QMainWindow*>(widget))
-            {
-              if (hspec.forceSizeGrip)
-              {
-                QStatusBar *sb = mw->statusBar();
-                sb->setSizeGripEnabled(true);
-              }
-            }
-            else*/ if (QDialog* d = qobject_cast<QDialog*>(widget))
-            {
-              if (hspec.forceSizeGrip)
-                d->setSizeGripEnabled(true);
-            }
-          }
-          if (((tspec.translucent_windows && !isOpaque
-                && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                && !widget->testAttribute(Qt::WA_NoSystemBackground))
-               /* enable blurring for Konsole's main window if it's transparent */
-               || ((isKonsole || isYakuake) && hspec.blur_konsole
-                   && widget->testAttribute(Qt::WA_TranslucentBackground)))
-              && (isYakuake || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
-              /* FIXME: I included this because I thought, without it, QtWebKit
-                 apps would crash on quitting but that wasn't the case. However,
-                 only blurring needs it and it's taken care of by BlurHelper. */
-              //&& widget->internalWinId()
-              && !translucentWidgets.contains(widget))
-          {
-#if QT_VERSION < 0x050000
-            /* workaround for a Qt4 bug, which makes translucent windows
-               always appear at the top left corner (taken from QtCurve) */
-            bool was_visible = widget->isVisible();
-            bool moved = widget->testAttribute(Qt::WA_Moved);
-            if (was_visible) widget->hide();
-#endif
-
-            widget->setAttribute(Qt::WA_TranslucentBackground);
-
-#if QT_VERSION < 0x050000
-            if (!moved) widget->setAttribute(Qt::WA_Moved, false);
-            if (was_visible) widget->show();
-#endif
-
-            /* enable blurring... */
-            if (blurHelper
-                /* ... but not for Konsole's dialogs if
-                   blurring isn't enabled for translucent windows */
-                && tspec.blurring)
-            {
-              blurHelper->registerWidget(widget);
-            }
-            /* enable blurring for Konsole... */
-            else if ((isKonsole || isYakuake)// && hspec.blur_konsole
-                     /* ... but only for its main window */
-                     //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
-                     && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
-            {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-              if (!blurHelper)
-                blurHelper = new BlurHelper(this,QList<int>(),QList<int>());
-#endif
-              if (blurHelper)
-                blurHelper->registerWidget(widget);
-            }
-
-            widget->removeEventFilter(this);
-            widget->installEventFilter(this);
-            translucentWidgets.insert(widget);
-            connect(widget, SIGNAL(destroyed(QObject*)),
-                    SLOT(noTranslucency(QObject*)));
-          }
-        }
-        break;
-      }
-      default: break;
-    }
-
-    if (isDolphin
-        && qobject_cast<QAbstractScrollArea*>(getParent(widget,2))
-        && !qobject_cast<QAbstractScrollArea*>(getParent(widget,3)))
-    {
-      /* Dolphin sets the background of its KItemListContainer's viewport
-         to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
-         We force our base color here. */
-      QColor col = settings->getColorSpec().baseColor;
-      if (col.isValid())
-      {
-        QPalette palette = widget->palette();
-        palette.setColor(widget->backgroundRole(), col);
-        widget->setPalette(palette);
-      }
-      /* hack Dolphin's view */
-      if (hspec.transparent_dolphin_view && widget->autoFillBackground())
-        widget->setAutoFillBackground(false);
-    }
-    else if (isPcmanfm
-             && hspec.transparent_pcmanfm_sidepane
-             && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
-                 || (getParent(widget,2) && getParent(widget,2)->inherits("Fm::SidePane"))))
-    {
-      widget->setAutoFillBackground(false);
-    }
-
-    // -> ktitlewidget.cpp
-    if (widget->inherits("KTitleWidget"))
-    {
-      if (hspec.transparent_ktitle_label)
-      {
-        /*QPalette palette = widget->palette();
-        palette.setColor(QPalette::Base,QColor(Qt::transparent));
-        widget->setPalette(palette);*/
-        if (QFrame *titleFrame = widget->findChild<QFrame *>())
-          titleFrame->setAutoFillBackground(false);
-      }
-    }
-
-    /*if (widget->autoFillBackground()
-        && widget->parentWidget()
-        && widget->parentWidget()->objectName() == "qt_scrollarea_viewport"
-        && qobject_cast<QAbstractScrollArea*>(getParent(widget,2)))
-    {
-      widget->parentWidget()->setAutoFillBackground(false);
-      widget->setAutoFillBackground(false);
-    }*/
-
-    if (qobject_cast<QMdiArea*>(widget))
-      widget->setAutoFillBackground(true);
-    else if (qobject_cast<QProgressBar*>(widget)
-              /* unfortunately, KisSliderSpinBox uses a null widget in drawing
-                 its progressbar, so we can identify it only through eventFilter() */
-             || widget->inherits("KisAbstractSliderSpinBox")
-             /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
-                for drawing its panel, but not if its state is normal. To force the
-                normal text color on it, we need to make it use PE_PanelButtonTool
-                with the normal state too and that can be done at its paint event. */
-             || widget->inherits("KMultiTabBarTab"))
-    {
-        widget->removeEventFilter(this);
-        widget->installEventFilter(this);
-    }
-    else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
-    { // in rare cases like KNotes' font combos or Kcalc
-      QColor col(settings->getColorSpec().textColor);
-      if (col.isValid())
-      {
-        QPalette palette = widget->palette();
-        if (col != palette.color(QPalette::Active,QPalette::Text))
-        {
-          palette.setColor(QPalette::Active,QPalette::Text,col);
-          palette.setColor(QPalette::Inactive,QPalette::Text,col);
-          widget->setPalette(palette);
-        }
-      }
-    }
-    else if (qobject_cast<QAbstractSpinBox*>(widget))
-    {// see eventFilter() for the reason
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-    }
-    /* without this, transparent backgrounds
-       couldn't be used for scrollbar grooves */
-    else if (qobject_cast<QScrollBar*>(widget))
-      widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
-    /* remove ugly flat backgrounds when the window backround is styled */
-    else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
-    {
-      if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
-          sa->backgroundRole() == QPalette::Window
-          || sa->backgroundRole() == QPalette::Button) // inside toolbox
-      {
-        QWidget *vp = sa->viewport();
-        if (vp && (vp->backgroundRole() == QPalette::Window
-                   || vp->backgroundRole() == QPalette::Button))
-        {
-          vp->setAutoFillBackground(false);
-          foreach (QWidget *child, vp->findChildren<QWidget*>())
-          {
-            if (child->parent() == vp && (child->backgroundRole() == QPalette::Window
-                                          || child->backgroundRole() == QPalette::Button))
-              child->setAutoFillBackground(false);
-          }
-        }
-      }
-    }
-    else if (qobject_cast<QToolBox*>(widget))
-    {
-      widget->setBackgroundRole(QPalette::NoRole);
-      widget->setAutoFillBackground(false);
-    }
-    // taken from Oxygen
-    else if (qobject_cast<QToolBox*>(getParent(widget,3)))
-    {
-      widget->setBackgroundRole(QPalette::NoRole);
-      widget->setAutoFillBackground(false);
-      widget->parentWidget()->setAutoFillBackground(false);
-    }
-    // remove the ugly shadow of QWhatsThis tooltips
-    else if (widget->inherits("QWhatsThat"))
-    {
-      QPalette palette = widget->palette();
-      QColor shadow = palette.shadow().color();
-      shadow.setAlpha(0);
-      palette.setColor(QPalette::Shadow, shadow);
+      palette.setColor(QPalette::Active,QPalette::Text,menuTextColor);
       widget->setPalette(palette);
     }
-    else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
-    {
-      if (hspec.forceSizeGrip)
-      { // WARNING: adding size grip to non-window widgets may cause crash
-        if (QMainWindow *mw = qobject_cast<QMainWindow*>(sb->parentWidget()))
-        {
-          if (mw->minimumSize() != mw->maximumSize())
-            sb->setSizeGripEnabled(true);
-        }
-      }
-    }
+  }*/
 
-    if (!isLibreoffice // not required
-        && !subApp
-        && ((qobject_cast<QMenu*>(widget)
-             /* if the top-level window has a palette of its own, the parent should too */
-             && (!widget->parentWidget()
-                 || !widget->parentWidget()->window()->testAttribute(Qt::WA_SetPalette)
-                 || widget->parentWidget()->testAttribute(Qt::WA_SetPalette)))
-            || widget->inherits("QTipLabel"))
-        /* no shadow for tooltips or menus that are already translucent */
-        && !widget->testAttribute(Qt::WA_TranslucentBackground)
-        && !translucentWidgets.contains(widget))
+  /* respect the toolbar text color */
+  QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
+  QColor windowTextColor(settings->getColorSpec().windowTextColor);
+  if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
+  {
+    QWidget *p = getParent(widget,1);
+    QWidget *gp = getParent(p,1);
+    if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+         && !qobject_cast<QLineEdit*>(widget)
+         && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(p) // Krita, Amarok
+         && !p->findChild<QTabBar*>())
+        || (widget->inherits("AnimatedLabelStack") // Amarok
+            && qobject_cast<QToolBar*>(gp)
+            && qobject_cast<QMainWindow*>(getParent(gp,1))))
     {
-      if (tspec.composite && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-      {
-        widget->setAttribute(Qt::WA_TranslucentBackground);
-        translucentWidgets.insert(widget);
-        connect(widget, SIGNAL(destroyed(QObject*)),
-                SLOT(noTranslucency(QObject*)));
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-        if (!blurHelper && tspec.popup_blurring)
-        {
-          QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
-          QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
-          blurHelper = new BlurHelper(this,menuS,tooltipS);
-        }
-#endif
-        if (blurHelper && tspec.popup_blurring) // blurHelper may exist because of Konsole blurring
-          blurHelper->registerWidget(widget);
-      }
-      /*else // round off the corners
-      {
-        widget->setAutoFillBackground(false);
-        QPixmap pixmap = QPixmap::grabWidget(widget);
-        QBitmap bm = pixmap.createHeuristicMask();
-        pixmap.setMask(bm);
-        QImage img = pixmap.toImage();
-        if (qAlpha(img.pixel(0,0)) == 0)
-          widget->setMask(bm);
-      }*/
+      QPalette palette = widget->palette();
+      palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
+      palette.setColor(QPalette::Inactive,widget->foregroundRole(),toolbarTextColor);
+      palette.setColor(QPalette::Active,QPalette::WindowText,toolbarTextColor); // for KAction in locationbar as in K3b
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,toolbarTextColor);
+      widget->setPalette(palette);
     }
+  }
+
+  const hacks_spec hspec = settings->getHacksSpec();
+  if (hspec.respect_darkness
+      && (qobject_cast<QAbstractItemView*>(widget)
+          || qobject_cast<QAbstractScrollArea*>(widget)
+          || qobject_cast<QTabWidget*>(widget)
+          || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
+  {
+    QPalette palette = widget->palette();
+    QColor txtCol = palette.color(QPalette::Text);
+    if (!enoughContrast(palette.color(QPalette::Base), txtCol)
+        || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
+        || (qobject_cast<QAbstractItemView*>(widget)
+            && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+    {
+      polish(palette);
+      widget->setPalette(palette);
+    }
+  }
+
+  switch (widget->windowFlags() & Qt::WindowType_Mask) {
+    case Qt::Window:
+    case Qt::Dialog: {
+      widget->setAttribute(Qt::WA_StyledBackground);
+      /* take all precautions */
+      if (!isPlasma && !subApp && !isLibreoffice
+          && widget->isWindow()
+          && widget->windowType() != Qt::Desktop
+          && !widget->testAttribute(Qt::WA_PaintOnScreen)
+          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
+          && !widget->inherits("KScreenSaver")
+          && !widget->inherits("QTipLabel")
+          && !widget->inherits("QSplashScreen"))
+            
+      {
+        if (widget->minimumSize() != widget->maximumSize())
+        {
+          /*if (QMainWindow* mw = qobject_cast<QMainWindow*>(widget))
+          {
+            if (hspec.forceSizeGrip)
+            {
+              QStatusBar *sb = mw->statusBar();
+              sb->setSizeGripEnabled(true);
+            }
+          }
+          else*/ if (QDialog* d = qobject_cast<QDialog*>(widget))
+          {
+            if (hspec.forceSizeGrip)
+              d->setSizeGripEnabled(true);
+          }
+        }
+        if (((tspec.translucent_windows && !isOpaque
+              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+              && !widget->testAttribute(Qt::WA_NoSystemBackground))
+             /* enable blurring for Konsole's main window if it's transparent */
+             || ((isKonsole || isYakuake) && hspec.blur_konsole
+                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
+            && (isYakuake || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
+            /* FIXME: I included this because I thought, without it, QtWebKit
+               apps would crash on quitting but that wasn't the case. However,
+               only blurring needs it and it's taken care of by BlurHelper. */
+            //&& widget->internalWinId()
+            && !translucentWidgets.contains(widget))
+        {
+#if QT_VERSION < 0x050000
+          /* workaround for a Qt4 bug, which makes translucent windows
+             always appear at the top left corner (taken from QtCurve) */
+          bool was_visible = widget->isVisible();
+          bool moved = widget->testAttribute(Qt::WA_Moved);
+          if (was_visible) widget->hide();
+#endif
+
+          widget->setAttribute(Qt::WA_TranslucentBackground);
+
+#if QT_VERSION < 0x050000
+          if (!moved) widget->setAttribute(Qt::WA_Moved, false);
+          if (was_visible) widget->show();
+#endif
+
+          /* enable blurring... */
+          if (blurHelper
+              /* ... but not for Konsole's dialogs if
+                 blurring isn't enabled for translucent windows */
+              && tspec.blurring)
+          {
+            blurHelper->registerWidget(widget);
+          }
+          /* enable blurring for Konsole... */
+          else if ((isKonsole || isYakuake)// && hspec.blur_konsole
+                   /* ... but only for its main window */
+                   //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
+                   && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
+          {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+            if (!blurHelper)
+              blurHelper = new BlurHelper(this,QList<int>(),QList<int>());
+#endif
+            if (blurHelper)
+              blurHelper->registerWidget(widget);
+          }
+
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+          translucentWidgets.insert(widget);
+          connect(widget, SIGNAL(destroyed(QObject*)),
+                  SLOT(noTranslucency(QObject*)));
+        }
+      }
+      break;
+    }
+    default: break;
+  }
+
+  if (isDolphin
+      && qobject_cast<QAbstractScrollArea*>(getParent(widget,2))
+      && !qobject_cast<QAbstractScrollArea*>(getParent(widget,3)))
+  {
+    /* Dolphin sets the background of its KItemListContainer's viewport
+       to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
+       We force our base color here. */
+    QColor col = settings->getColorSpec().baseColor;
+    if (col.isValid())
+    {
+      QPalette palette = widget->palette();
+      palette.setColor(widget->backgroundRole(), col);
+      widget->setPalette(palette);
+    }
+    /* hack Dolphin's view */
+    if (hspec.transparent_dolphin_view && widget->autoFillBackground())
+      widget->setAutoFillBackground(false);
+  }
+  else if (isPcmanfm
+           && hspec.transparent_pcmanfm_sidepane
+           && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
+               || (getParent(widget,2) && getParent(widget,2)->inherits("Fm::SidePane"))))
+  {
+    widget->setAutoFillBackground(false);
+  }
+
+  // -> ktitlewidget.cpp
+  if (widget->inherits("KTitleWidget"))
+  {
+    if (hspec.transparent_ktitle_label)
+    {
+      /*QPalette palette = widget->palette();
+      palette.setColor(QPalette::Base,QColor(Qt::transparent));
+      widget->setPalette(palette);*/
+      if (QFrame *titleFrame = widget->findChild<QFrame *>())
+        titleFrame->setAutoFillBackground(false);
+    }
+  }
+
+  /*if (widget->autoFillBackground()
+      && widget->parentWidget()
+      && widget->parentWidget()->objectName() == "qt_scrollarea_viewport"
+      && qobject_cast<QAbstractScrollArea*>(getParent(widget,2)))
+  {
+    widget->parentWidget()->setAutoFillBackground(false);
+    widget->setAutoFillBackground(false);
+  }*/
+
+  if (qobject_cast<QMdiArea*>(widget))
+    widget->setAutoFillBackground(true);
+  else if (qobject_cast<QProgressBar*>(widget)
+            /* unfortunately, KisSliderSpinBox uses a null widget in drawing
+               its progressbar, so we can identify it only through eventFilter() */
+           || widget->inherits("KisAbstractSliderSpinBox")
+           /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
+              for drawing its panel, but not if its state is normal. To force the
+              normal text color on it, we need to make it use PE_PanelButtonTool
+              with the normal state too and that can be done at its paint event. */
+           || widget->inherits("KMultiTabBarTab"))
+  {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+  }
+  else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
+  { // in rare cases like KNotes' font combos or Kcalc
+    QColor col(settings->getColorSpec().textColor);
+    if (col.isValid())
+    {
+      QPalette palette = widget->palette();
+      if (col != palette.color(QPalette::Active,QPalette::Text))
+      {
+        palette.setColor(QPalette::Active,QPalette::Text,col);
+        palette.setColor(QPalette::Inactive,QPalette::Text,col);
+        widget->setPalette(palette);
+      }
+    }
+  }
+  else if (qobject_cast<QAbstractSpinBox*>(widget))
+  {// see eventFilter() for the reason
+    widget->removeEventFilter(this);
+    widget->installEventFilter(this);
+  }
+  /* without this, transparent backgrounds
+     couldn't be used for scrollbar grooves */
+  else if (qobject_cast<QScrollBar*>(widget))
+    widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
+  /* remove ugly flat backgrounds when the window backround is styled */
+  else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
+  {
+    if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
+        sa->backgroundRole() == QPalette::Window
+        || sa->backgroundRole() == QPalette::Button) // inside toolbox
+    {
+      QWidget *vp = sa->viewport();
+      if (vp && (vp->backgroundRole() == QPalette::Window
+                 || vp->backgroundRole() == QPalette::Button))
+      {
+        vp->setAutoFillBackground(false);
+        foreach (QWidget *child, vp->findChildren<QWidget*>())
+        {
+          if (child->parent() == vp && (child->backgroundRole() == QPalette::Window
+                                        || child->backgroundRole() == QPalette::Button))
+            child->setAutoFillBackground(false);
+        }
+      }
+    }
+  }
+  else if (qobject_cast<QToolBox*>(widget))
+  {
+    widget->setBackgroundRole(QPalette::NoRole);
+    widget->setAutoFillBackground(false);
+  }
+  // taken from Oxygen
+  else if (qobject_cast<QToolBox*>(getParent(widget,3)))
+  {
+    widget->setBackgroundRole(QPalette::NoRole);
+    widget->setAutoFillBackground(false);
+    widget->parentWidget()->setAutoFillBackground(false);
+  }
+  // remove the ugly shadow of QWhatsThis tooltips
+  else if (widget->inherits("QWhatsThat"))
+  {
+    QPalette palette = widget->palette();
+    QColor shadow = palette.shadow().color();
+    shadow.setAlpha(0);
+    palette.setColor(QPalette::Shadow, shadow);
+    widget->setPalette(palette);
+    }
+  else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
+  {
+    if (hspec.forceSizeGrip)
+    { // WARNING: adding size grip to non-window widgets may cause crash
+      if (QMainWindow *mw = qobject_cast<QMainWindow*>(sb->parentWidget()))
+      {
+        if (mw->minimumSize() != mw->maximumSize())
+          sb->setSizeGripEnabled(true);
+      }
+    }
+  }
+
+  if (tspec.composite
+      && !isLibreoffice // not required
+      && !subApp
+      && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+          || widget->inherits("QTipLabel"))
+      && !translucentWidgets.contains(widget)
+      /* no shadow for tooltips or menus that are already translucent */
+      && !widget->testAttribute(Qt::WA_TranslucentBackground))
+  {
+#if QT_VERSION >= 0x050000
+    /* FIXME: On rare occasions, the backgrounds of translucent menus or even tooltips
+       are fiiled by the window background color. I don't know the root of this bug but
+       what follows is a workaround, which works with setSurfaceFormat() below. */
+    QPalette palette = widget->palette();
+    QColor winCol = palette.window().color();
+    winCol.setAlpha(0);
+    palette.setColor(QPalette::Window, winCol);
+    widget->setPalette(palette);
+#endif
+    widget->setAttribute(Qt::WA_TranslucentBackground);
+    translucentWidgets.insert(widget);
+    connect(widget, SIGNAL(destroyed(QObject*)),
+            SLOT(noTranslucency(QObject*)));
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+    if (!blurHelper && tspec.popup_blurring)
+    {
+      QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
+      QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
+      blurHelper = new BlurHelper(this,menuS,tooltipS);
+    }
+#endif
+    if (blurHelper && tspec.popup_blurring) // blurHelper may exist because of Konsole blurring
+      blurHelper->registerWidget(widget);
   }
 }
 
@@ -7059,13 +7052,16 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (!widget || !widget->isWindow()
-      || (!tspec.translucent_windows
-          && !((isKonsole || isYakuake)
-               && settings->getHacksSpec().blur_konsole
-               && widget->testAttribute(Qt::WA_TranslucentBackground)))
-      || isPlasma || isOpaque || subApp || isLibreoffice
-      || widget->testAttribute(Qt::WA_WState_Created))
+  if (!tspec.composite || !widget || widget->testAttribute(Qt::WA_WState_Created) || subApp || isLibreoffice)
+    return;
+  if ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      || widget->inherits("QTipLabel")) ; // see polish(QWidget*)
+  else if (!widget->isWindow()
+           || (!tspec.translucent_windows
+               && !((isKonsole || isYakuake)
+                    && settings->getHacksSpec().blur_konsole
+                    && widget->testAttribute(Qt::WA_TranslucentBackground)))
+           || isPlasma || isOpaque)
   {
     return;
   }
