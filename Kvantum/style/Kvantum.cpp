@@ -670,14 +670,14 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if (tspec.composite
+  theme_spec tspec_now = settings->getThemeSpec();
+  if (tspec_now.composite
       && !isLibreoffice // not required
       && !subApp
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-          || widget->inherits("QTipLabel"))
-      && !translucentWidgets.contains(widget)
-      /* no shadow for tooltips or menus that are already translucent */
-      && !widget->testAttribute(Qt::WA_TranslucentBackground))
+             /* no shadow for tooltips that are already translucent */
+          || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
+      && !translucentWidgets.contains(widget))
   {
 #if QT_VERSION >= 0x050000
     /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
@@ -697,14 +697,14 @@ void Style::polish(QWidget *widget)
     connect(widget, SIGNAL(destroyed(QObject*)),
             SLOT(noTranslucency(QObject*)));
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-    if (!blurHelper && tspec.popup_blurring)
+    if (!blurHelper && tspec_now.popup_blurring)
     {
       QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
       QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
       blurHelper = new BlurHelper(this,menuS,tooltipS);
     }
 #endif
-    if (blurHelper && tspec.popup_blurring) // blurHelper may exist because of Konsole blurring
+    if (blurHelper && tspec_now.popup_blurring) // blurHelper may exist because of Konsole blurring
       blurHelper->registerWidget(widget);
   }
 }
@@ -2051,8 +2051,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
-      if (tspec.menu_shadow_depth > 0
-          && fspec.left >= tspec.menu_shadow_depth // otherwise shadow will have no meaning
+      theme_spec tspec_now = settings->getThemeSpec();
+      if (tspec_now.menu_shadow_depth > 0
+          && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && translucentWidgets.contains(widget))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
@@ -3150,8 +3151,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
-      if (tspec.tooltip_shadow_depth > 0
-          && fspec.left >= tspec.tooltip_shadow_depth
+      theme_spec tspec_now = settings->getThemeSpec();
+      if (tspec_now.tooltip_shadow_depth > 0
+          && fspec.left >= tspec_now.tooltip_shadow_depth
           && widget && translucentWidgets.contains(widget))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
@@ -6778,15 +6780,16 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
-      if (tspec.composite
+      theme_spec tspec_now = settings->getThemeSpec();
+      if (tspec_now.composite
           && (!qobject_cast<const QMenu*>(widget) || translucentWidgets.contains(widget)))
       {
-        v += tspec.menu_shadow_depth;
-        h += tspec.menu_shadow_depth;
+        v += tspec_now.menu_shadow_depth;
+        h += tspec_now.menu_shadow_depth;
       }
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (/*!tspec.composite ||*/ isLibreoffice
+      if (/*!tspec_now.composite ||*/ isLibreoffice
           /*|| (qobject_cast<const QMenu*>(widget) && !translucentWidgets.contains(widget))*/)
       {
         v = qMin(2,v);
@@ -6998,15 +7001,16 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
-      if (tspec.composite
+      theme_spec tspec_now = settings->getThemeSpec();
+      if (tspec_now.composite
           && (!widget || translucentWidgets.contains(widget)))
       {
-        v += tspec.tooltip_shadow_depth;
-        h += tspec.tooltip_shadow_depth;
+        v += tspec_now.tooltip_shadow_depth;
+        h += tspec_now.tooltip_shadow_depth;
       }
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (/*!tspec.composite ||*/ isLibreoffice
+      if (/*!tspec_now.composite ||*/ isLibreoffice
           /*|| (widget && !translucentWidgets.contains(widget))*/)
       {
         v = qMin(2,v);

@@ -1,6 +1,7 @@
 V0.9.1
 ---------
  * A workaround for the rare occasion when the background of a Qt5 composited tooltip is filled by the window background color.
+ * In the case of menus and tooltips, check compositing at the moment of their creaton (this fixes shadowless menus of KF5 desktop and panel).
 
 V0.9.0
 ---------
