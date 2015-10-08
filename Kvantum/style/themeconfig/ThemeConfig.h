@@ -58,6 +58,8 @@ class ThemeConfig {
     label_spec getLabelSpec(const QString &elementName) const;
     /* Returns the size spec of the given widget. */
     size_spec getSizeSpec(const QString &elementName) const;
+    /* Returns only those theme specs that are related to compositing. */
+    theme_spec getCompositeSpec() const;
     /* Returns the theme spec of this theme. */
     theme_spec getThemeSpec() const;
     /* Returns the general color spec of this theme. */

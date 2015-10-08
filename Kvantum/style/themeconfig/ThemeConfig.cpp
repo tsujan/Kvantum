@@ -277,71 +277,11 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
   return r;
 }
 
-theme_spec ThemeConfig::getThemeSpec() const
+theme_spec ThemeConfig::getCompositeSpec() const
 {
   theme_spec r;
   default_theme_spec(r);
-
-  QString empty; // use this for going to the parent
-  QVariant v = getValue("General","author", empty);
-  if (!v.toString().isEmpty())
-    r.author = v.toString();
-
-  v = getValue("General","comment", empty);
-  if (!v.toString().isEmpty())
-    r.comment = v.toString();
-
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-  v = getValue("General","x11drag", empty);
-  r.x11drag = v.toBool();
-#endif
-
-  v = getValue("General","alt_mnemonic", empty);
-  r.alt_mnemonic = v.toBool();
-
-  v = getValue("General","double_click", empty);
-  r.double_click = v.toBool();
-
-  v = getValue("General","left_tabs", empty);
-  r.left_tabs = v.toBool();
-
-  v = getValue("General","joined_tabs", empty);
-  r.joined_tabs = v.toBool();
-
-  v = getValue("General","attach_active_tab", empty);
-  r.attach_active_tab = v.toBool();
-
-  v = getValue("General","mirror_doc_tabs", empty);
-  if (v.isValid()) // it's true by default
-    r.mirror_doc_tabs = v.toBool();
-
-  v = getValue("General","group_toolbar_buttons", empty);
-  r.group_toolbar_buttons = v.toBool();
-
-  v = getValue("General","center_toolbar_handle", empty);
-  r.center_toolbar_handle = v.toBool();
-
-  v = getValue("General","slim_toolbars", empty);
-  r.slim_toolbars = v.toBool();
-
-  v = getValue("General","merge_menubar_with_toolbar", empty);
-  r.merge_menubar_with_toolbar = v.toBool();
-
-  v = getValue("General","toolbutton_style", empty);
-  r.toolbutton_style = v.toInt();
-
-  v = getValue("General","spread_progressbar", empty);
-  r.spread_progressbar = v.toBool();
-
-  v = getValue("General","textless_progressbar", empty);
-  r.textless_progressbar = v.toBool();
-
-  v = getValue("General","progressbar_thickness", empty);
-  r.progressbar_thickness = v.toInt();
-
-  v = getValue("General","menubar_mouse_tracking", empty);
-  if (v.isValid()) // it's true by default
-    r.menubar_mouse_tracking = v.toBool();
+  QVariant v;
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */
@@ -403,6 +343,75 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","tooltip_shadow_depth");
   if (v.isValid() && r.composite)
     r.tooltip_shadow_depth = qMax(v.toInt(),0);
+
+  return r;
+}
+
+theme_spec ThemeConfig::getThemeSpec() const
+{
+  /* start with compositing */
+  theme_spec r = getCompositeSpec();
+
+  QString empty; // use this for going to the parent
+  QVariant v = getValue("General","author", empty);
+  if (!v.toString().isEmpty())
+    r.author = v.toString();
+
+  v = getValue("General","comment", empty);
+  if (!v.toString().isEmpty())
+    r.comment = v.toString();
+
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+  v = getValue("General","x11drag", empty);
+  r.x11drag = v.toBool();
+#endif
+
+  v = getValue("General","alt_mnemonic", empty);
+  r.alt_mnemonic = v.toBool();
+
+  v = getValue("General","double_click", empty);
+  r.double_click = v.toBool();
+
+  v = getValue("General","left_tabs", empty);
+  r.left_tabs = v.toBool();
+
+  v = getValue("General","joined_tabs", empty);
+  r.joined_tabs = v.toBool();
+
+  v = getValue("General","attach_active_tab", empty);
+  r.attach_active_tab = v.toBool();
+
+  v = getValue("General","mirror_doc_tabs", empty);
+  if (v.isValid()) // it's true by default
+    r.mirror_doc_tabs = v.toBool();
+
+  v = getValue("General","group_toolbar_buttons", empty);
+  r.group_toolbar_buttons = v.toBool();
+
+  v = getValue("General","center_toolbar_handle", empty);
+  r.center_toolbar_handle = v.toBool();
+
+  v = getValue("General","slim_toolbars", empty);
+  r.slim_toolbars = v.toBool();
+
+  v = getValue("General","merge_menubar_with_toolbar", empty);
+  r.merge_menubar_with_toolbar = v.toBool();
+
+  v = getValue("General","toolbutton_style", empty);
+  r.toolbutton_style = v.toInt();
+
+  v = getValue("General","spread_progressbar", empty);
+  r.spread_progressbar = v.toBool();
+
+  v = getValue("General","textless_progressbar", empty);
+  r.textless_progressbar = v.toBool();
+
+  v = getValue("General","progressbar_thickness", empty);
+  r.progressbar_thickness = v.toInt();
+
+  v = getValue("General","menubar_mouse_tracking", empty);
+  if (v.isValid()) // it's true by default
+    r.menubar_mouse_tracking = v.toBool();
 
   v = getValue("General","opaque", empty);
   if (v.isValid())

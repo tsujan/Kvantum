@@ -670,7 +670,7 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  theme_spec tspec_now = settings->getThemeSpec();
+  theme_spec tspec_now = settings->getCompositeSpec();
   if (tspec_now.composite
       && !isLibreoffice // not required
       && !subApp
@@ -2051,7 +2051,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
-      theme_spec tspec_now = settings->getThemeSpec();
+      theme_spec tspec_now = settings->getCompositeSpec();
       if (tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && translucentWidgets.contains(widget))
@@ -3151,7 +3151,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       const interior_spec ispec = getInteriorSpec(group);
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
-      theme_spec tspec_now = settings->getThemeSpec();
+      theme_spec tspec_now = settings->getCompositeSpec();
       if (tspec_now.tooltip_shadow_depth > 0
           && fspec.left >= tspec_now.tooltip_shadow_depth
           && widget && translucentWidgets.contains(widget))
@@ -6780,7 +6780,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
-      theme_spec tspec_now = settings->getThemeSpec();
+      theme_spec tspec_now = settings->getCompositeSpec();
       if (tspec_now.composite
           && (!qobject_cast<const QMenu*>(widget) || translucentWidgets.contains(widget)))
       {
@@ -7001,7 +7001,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
-      theme_spec tspec_now = settings->getThemeSpec();
+      theme_spec tspec_now = settings->getCompositeSpec();
       if (tspec_now.composite
           && (!widget || translucentWidgets.contains(widget)))
       {
