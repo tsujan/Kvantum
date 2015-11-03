@@ -4434,7 +4434,10 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
-      if (tspec.textless_progressbar) break;
+      if (tspec.textless_progressbar
+          // always show text in KCapacityBar
+          && !(widget && widget->inherits("KCapacityBar")))
+        break;
 
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
@@ -4473,7 +4476,9 @@ void Style::drawControl(ControlElement element,
         }
 
         if (tspec.progressbar_thickness > 0
-            && fm.height() >= (isVertical ? w : h))
+            && fm.height() >= (isVertical ? w : h)
+            // KCapacityBar doesn't obey thickness setting
+            && !(widget && widget->inherits("KCapacityBar")))
           break;
 
         QString txt = opt->text;
