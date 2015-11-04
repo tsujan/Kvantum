@@ -7222,6 +7222,20 @@ int Style::styleHint(StyleHint hint,
 
     //case SH_SpinControls_DisableOnBounds: return true;
 
+#if QT_VERSION >= 0x050000
+    case SH_ToolTip_WakeUpDelay : {
+      int delay = tspec.tooltip_delay;
+      if (tspec.tooltip_delay >= 0)
+        return delay;
+      return QCommonStyle::styleHint(hint,option,widget,returnData);
+    }
+    case SH_ToolTip_FallAsleepDelay : {
+      if (tspec.tooltip_delay >= 0)
+        return 0;
+      return QCommonStyle::styleHint(hint,option,widget,returnData);
+    }
+#endif
+
     default : {
       if (hint >= SH_CustomBase && settings->getHacksSpec().kcapacitybar_as_progressbar
           && widget && widget->objectName() == "CE_CapacityBar")

@@ -104,6 +104,8 @@ typedef struct {
   /* width and height of checkbox
      and radio button indicators */
   int check_size;
+  /* delay before showing tooltip (in milliseconds)*/
+  int tooltip_delay;
   /* draw spin indicators vertically
      and inside the spin line-edit? */
   bool vertical_spin_indicators;
@@ -326,6 +328,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
   tspec.check_size = 13;
+  tspec.tooltip_delay = -1;
   tspec.vertical_spin_indicators = false;
   tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;

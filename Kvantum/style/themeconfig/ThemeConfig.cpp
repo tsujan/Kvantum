@@ -449,6 +449,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.check_size = qMax(v.toInt(),0);
 
+  v = getValue("General","tooltip_delay", empty);
+  if (v.isValid())
+    r.tooltip_delay = v.toInt();
+
   v = getValue("General","vertical_spin_indicators");
   r.vertical_spin_indicators = v.toBool();
 
