@@ -60,6 +60,11 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
     connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
 
+#if QT_VERSION < 0x050000
+    ui->labelTooltipDelay->setVisible (false);
+    ui->spinTooltipDelay->setVisible (false);
+#endif
+
     resize (sizeHint().expandedTo (QSize (600, 400)));
 }
 /*************************/
@@ -461,6 +466,12 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
+#if QT_VERSION >= 0x050000
+    int delay = -1;
+    if (defaultSettings.contains ("tooltip_delay")) // it's false by default
+        delay = qMin (qMax (defaultSettings.value ("tooltip_delay").toInt(), -1), 9999);
+    ui->spinTooltipDelay->setValue (delay);
+# endif
     int index = 0;
     if (defaultSettings.contains ("toolbutton_style"))
     {
@@ -523,7 +534,11 @@ void KvantumManager::resizeConfPage (bool thirdPage)
                                       + (thirdPage ?
                                            ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
                                              + QSize (0, 3*ui->saveButton->sizeHint().height() + 10
-                                                         + ui->checkBoxCombo->sizeHint().height())
+                                                         + ui->checkBoxCombo->sizeHint().height()
+#if QT_VERSION >= 0x050000
+                                                         + ui->spinTooltipDelay->sizeHint().height()
+#endif
+                                                     )
                                            : QSize (ui->saveButton->sizeHint().width(), 0)));
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
@@ -644,6 +659,12 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 if (themeSettings.contains ("merge_menubar_with_toolbar"))
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
+#if QT_VERSION >= 0x050000
+                int delay = -1;
+                if (themeSettings.contains ("tooltip_delay"))
+                    delay = qMin (qMax (themeSettings.value ("tooltip_delay").toInt(), -1), 9999);
+                ui->spinTooltipDelay->setValue (delay);
+#endif
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -1026,6 +1047,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
+        generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", boolToStr (ui->checkBoxX11->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
