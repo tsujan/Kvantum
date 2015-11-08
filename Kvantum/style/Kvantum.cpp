@@ -3417,8 +3417,26 @@ void Style::drawControl(ControlElement element,
             if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
             {
               col = QColor(Qt::white);
-              if (qGray(opt->backgroundBrush.color().rgb()) >= 127)
-                col = QColor(Qt::black);
+              Qt::BrushStyle bs = opt->backgroundBrush.style();
+              if (bs != Qt::LinearGradientPattern
+                  && bs != Qt::ConicalGradientPattern
+                  && bs != Qt::RadialGradientPattern)
+              {
+                if (qGray(opt->backgroundBrush.color().rgb()) >= 127)
+                  col = QColor(Qt::black);
+              }
+              else // FIXME: this isn't an accurate method
+              {
+                QGradientStops gs = opt->backgroundBrush.gradient()->stops();
+                for (int i = 0; i < gs.size(); ++i)
+                {
+                  if (qGray(gs.at(i).second.rgb()) >= 127)
+                  {
+                    col = QColor(Qt::black);
+                    break;
+                  }
+                }
+              }
               normalColor = focusColor = pressColor = toggleColor = col;
             }
             if (state == 1 && normalColor.isValid()

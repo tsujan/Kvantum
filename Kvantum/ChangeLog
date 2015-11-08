@@ -4,6 +4,7 @@ V0.9.1
  * In the case of menus and tooltips, check compositing at the moment of their creaton (this fixes shadowless menus of KF5 desktop and panel).
  * Always show text in KCapacityBar.
  * Added a general key for setting tooltip display delay.
+ * Consider the possibility of color gradients in the case of view-items with hard-coded backgrounds when setting their texts.
 
 V0.9.0
 ---------
