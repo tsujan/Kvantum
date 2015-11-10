@@ -100,7 +100,9 @@ Style::Style() : QCommonStyle()
 
   tspec = settings->getThemeSpec();
 
-  QString kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
+  QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
+  if (!QFile::exists(kdeGlobals))
+    kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
   if (!QFile::exists(kdeGlobals))
     kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
   if (QFile::exists(kdeGlobals))

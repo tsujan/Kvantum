@@ -5,6 +5,7 @@ V0.9.1
  * Always show text in KCapacityBar.
  * Added a general key for setting tooltip display delay.
  * Consider the possibility of color gradients in the case of view-items with hard-coded backgrounds when setting their texts.
+ * Gave priority to the new location of kdeglobals.
 
 V0.9.0
 ---------
