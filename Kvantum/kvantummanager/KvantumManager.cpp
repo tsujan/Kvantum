@@ -95,24 +95,41 @@ void KvantumManager::openTheme()
     lastPath_ = filePath;
 }
 /*************************/
-bool KvantumManager::isThemeDir (const QString &folder)
+/* Either folderPath is the path of a directory inside the config folder,
+   in which case its name should be the theme name, or it points to a folder
+   inside an alternative installation path, in which case its name should be
+   "Kvantum" and the theme name should be the name of its parent directory. */
+bool KvantumManager::isThemeDir (const QString &folderPath)
 {
-    QDir dir = QDir (folder);
-    if (!dir.exists())
-        return false;
+    if (folderPath.isEmpty()) return false;
+    QDir dir = QDir (folderPath);
+    if (!dir.exists()) return false;
 
-    /* "Default" is reserved for the copied default theme */
-    if (dir.dirName() == "Default") return false;
+    QString themeName = dir.dirName();
+
+    QStringList parts = folderPath.split ("/");
+    if (parts.last() == "Kvantum")
+    {
+        if (parts.size() < 3)
+            return false;
+        else
+            themeName = parts.at (parts.size() - 2);
+    }
+
+    /* "Default" is reserved for the copied default theme,
+       "Kvantum" for the alternative installation paths. */
+    if (themeName == "Default" || themeName == "Kvantum")
+        return false;
     /* QSettings doesn't accept spaces in the name */
-    QString s = (dir.dirName()).simplified();
+    QString s = themeName.simplified();
     if (s.contains (" "))
         return false;
 
     QStringList files = dir.entryList (QDir::Files, QDir::Name);
     foreach (const QString &file, files)
     {
-        if (file == QString ("%1.kvconfig").arg (dir.dirName())
-            || file == QString ("%1.svg").arg (dir.dirName()))
+        if (file == QString ("%1.kvconfig").arg (themeName)
+            || file == QString ("%1.svg").arg (themeName))
         {
             return true;
         }
@@ -121,12 +138,30 @@ bool KvantumManager::isThemeDir (const QString &folder)
     return false;
 }
 /*************************/
-void KvantumManager::notWritable()
+// The returned path isn't checked for being a real Kvantum theme directory.
+QString KvantumManager::userThemeDir (const QString &themeName)
+{
+    if (themeName.isEmpty())
+        return xdg_config_home + QString ("/Kvantum/###"); // useless
+    QString themeDir = xdg_config_home + QString ("/Kvantum/") + themeName;
+    if (!themeName.endsWith ("#") && !isThemeDir (themeDir))
+    {
+        QString homeDir = QDir::homePath();
+        themeDir = QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (themeName);
+        if (!isThemeDir (themeDir))
+            themeDir = QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (themeName);
+    }
+    return themeDir;
+}
+/*************************/
+void KvantumManager::notWritable (const QString &path)
 {
     QMessageBox msgBox (QMessageBox::Warning,
                         tr ("Kvantum"),
-                        tr ("<center><b>You have no permission to write!</b></center>"\
-                            "<center>Please fix that first!</center>"),
+                        tr ("<center><b>You have no permission to write here:</b></center>"\
+                            "<center>%1</center>"\
+                            "<center>Please fix that first!</center>")
+                           .arg (path),
                         QMessageBox::Close,
                         this);
     msgBox.exec();
@@ -135,22 +170,13 @@ void KvantumManager::notWritable()
 void KvantumManager::installTheme()
 {
     QString theme = ui->lineEdit->text();
+    if (theme.isEmpty()) return;
     if (QDir (theme).dirName() == "Default")
     {
         QMessageBox msgBox (QMessageBox::Warning,
                             tr ("Kvantum"),
                             tr ("<center><b>This is not an installable Kvantum theme!</b></center>"\
                                 "<center>The name of an installable themes should not be \"Default\".</center>"\
-                                "<center>Please select another directory!</center>"),
-                            QMessageBox::Close,
-                            this);
-        msgBox.exec();
-    }
-    else if (!isThemeDir (theme))
-    {
-        QMessageBox msgBox (QMessageBox::Warning,
-                            tr ("Kvantum"),
-                            tr ("<center><b>This is not a Kvantum theme!</b></center>"\
                                 "<center>Please select another directory!</center>"),
                             QMessageBox::Close,
                             this);
@@ -167,6 +193,16 @@ void KvantumManager::installTheme()
                             this);
         msgBox.exec();
     }
+    else if (!isThemeDir (theme))
+    {
+            QMessageBox msgBox (QMessageBox::Warning,
+                                tr ("Kvantum"),
+                                tr ("<center><b>This is not a Kvantum theme folder!</b></center>"\
+                                    "<center>Please select another directory!</center>"),
+                                QMessageBox::Close,
+                                this);
+            msgBox.exec();
+    }
     else
     {
         QString homeDir = QDir::homePath();
@@ -177,9 +213,14 @@ void KvantumManager::installTheme()
         if (kv.exists())
         {
             QDir themeDir = QDir (theme);
-            QString themeName = themeDir.dirName();
-            QDir subDir_ = QDir (QString ("%1/Kvantum/%2#").arg (xdg_config_home).arg (themeName));
-            if (subDir_.exists())
+            QStringList parts = theme.split ("/");
+            QString themeName;
+            if (parts.last() == "Kvantum")
+                themeName = parts.at (parts.size() - 2); // parts.size() >= 3 is guaranteed at isThemeDir()
+            else
+                themeName = themeDir.dirName();
+            QDir _subDir = QDir (QString ("%1/Kvantum/%2#").arg (xdg_config_home).arg (themeName));
+            if (_subDir.exists())
             {
                 QMessageBox msgBox (QMessageBox::Warning,
                                     tr ("Kvantum"),
@@ -227,27 +268,49 @@ void KvantumManager::installTheme()
                 }
                 else
                 {
-                    notWritable();
+                    notWritable (subDir.absolutePath());
                     return;
                 }
             }
-            subDir_ = QDir (QString (DATADIR) + QString ("/Kvantum/") + themeName);
-            if (subDir_.exists())
+            /* inform the user about priorities */
+            QString otherDir = QString (DATADIR) + QString ("/Kvantum/") + themeName;
+            if (!isThemeDir (otherDir))
+                otherDir = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (themeName);
+            if (isThemeDir (otherDir))
             {
                 QMessageBox msgBox (QMessageBox::Information,
                                     tr ("Kvantum"),
-                                    tr ("<center><b>This theme is also installed as root.</b></center>"\
-                                        "<center>The user installation will take priority.</center>"),
+                                    tr ("<center><b>This theme is also installed as root in:</b></center>"\
+                                        "<center>%1</center>"\
+                                        "<center>The user installation will take priority.</center>")
+                                       .arg (otherDir),
                                     QMessageBox::Close,
                                     this);
                 msgBox.exec();
+            }
+            else
+            {
+                otherDir = QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (themeName);
+                if (!isThemeDir (otherDir))
+                    otherDir = QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (themeName);
+                if (isThemeDir (otherDir))
+                {
+                    QMessageBox msgBox (QMessageBox::Information,
+                                        tr ("Kvantum"),
+                                        tr ("<center><b>This theme is also installed as user in:</b></center>"\
+                                            "<center>%1</center>"\
+                                            "<center>This installation will take priority.</center>")
+                                           . arg (otherDir),
+                                        QMessageBox::Close,
+                                        this);
+                    msgBox.exec();
+                }
             }
             /* copy the theme files appropriately */
             QFile::copy (QString ("%1/%2.kvconfig").arg (theme).arg (themeName),
                          QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (themeName));
             QFile::copy (QString ("%1/%2.svg").arg (theme).arg (themeName),
                          QString ("%1/Kvantum/%2/%2.svg").arg (xdg_config_home).arg (themeName));
-
             /* also copy the color scheme file */
             QString colorFile = QString ("%1/%2.colors").arg (theme).arg (themeName);
             if (QFile::exists (colorFile))
@@ -283,14 +346,14 @@ void KvantumManager::installTheme()
             ui->statusBar->showMessage (tr ("%1 installed.").arg (themeName), 10000);
         }
         else
-            notWritable();
+            notWritable (kv.absolutePath());
     }
 }
 /*************************/
-static inline bool removeDir(const QString &dirName)
+static inline bool removeDir (const QString &dirName)
 {
     bool res = true;
-    QDir dir(dirName);
+    QDir dir (dirName);
     if (dir.exists())
     {
         Q_FOREACH (QFileInfo info, dir.entryInfoList (QDir::Files | QDir::AllDirs
@@ -334,12 +397,41 @@ void KvantumManager::deleteTheme()
     else if (theme == "Kvantum (default)")
         return;
 
+    QString homeDir = QDir::homePath();
     if (!removeDir (QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (theme)))
     {
         QMessageBox msgBox (QMessageBox::Warning,
                             tr ("Kvantum"),
-                            tr ("<center><b>Not all objects could be removed!</b></center>"\
-                                "<center>You might want to investigate the cause.</center>"),
+                            tr ("<center><b>This directory cannot be removed:</b></center>"\
+                                "<center>%1/Kvantum/%2</center>"\
+                                "<center>You might want to investigate the cause.</center>")
+                               .arg (xdg_config_home).arg (theme),
+                            QMessageBox::Close,
+                            this);
+        msgBox.exec();
+        return;
+    }
+    if (!removeDir (QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (theme)))
+    {
+        QMessageBox msgBox (QMessageBox::Warning,
+                            tr ("Kvantum"),
+                            tr ("<center><b>This directory cannot be removed:</b></center>"\
+                                "<center>%1/.themes/%2/Kvantum</center>"\
+                                "<center>You might want to investigate the cause.</center>")
+                               .arg (homeDir).arg (theme),
+                            QMessageBox::Close,
+                            this);
+        msgBox.exec();
+        return;
+    }
+    if (!removeDir (QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (theme)))
+    {
+        QMessageBox msgBox (QMessageBox::Warning,
+                            tr ("Kvantum"),
+                            tr ("<center><b>This directory cannot be removed:</b></center>"\
+                                "<center>%1/.local/share/themes/%2/Kvantum</center>"\
+                                "<center>You might want to investigate the cause.</center>")
+                               .arg (homeDir).arg (theme),
                             QMessageBox::Close,
                             this);
         msgBox.exec();
@@ -564,16 +656,20 @@ void KvantumManager::tabChanged (int index)
         else
         {
             QString themeConfig;
-            QDir themeDir = QDir (xdg_config_home + QString ("/Kvantum/") + kvconfigTheme_);
-            if (!themeDir.exists())
+            QString themeDir = userThemeDir (kvconfigTheme_);
+            if (!isThemeDir (themeDir)) // check root folders
             {
                 ui->deleteTheme->setEnabled (false);
-                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme_);
+                themeDir = QString (DATADIR) + QString ("/Kvantum/") + kvconfigTheme_;
+                if (!isThemeDir (themeDir))
+                  themeConfig = QString(DATADIR) + QString ("/themes/%1/Kvantum/%1.kvconfig").arg (kvconfigTheme_);
+                else
+                  themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme_);
             }
             else
             {
                 ui->deleteTheme->setEnabled (true);
-                themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
+                themeConfig = themeDir + QString ("/%1.kvconfig").arg (kvconfigTheme_);
             }
             if (QFile::exists (themeConfig))
             {
@@ -600,19 +696,23 @@ void KvantumManager::tabChanged (int index)
 
         if (kvconfigTheme_.isEmpty())
         {
-            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
         }
         else
         {
-            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
             /* a config other than the default Kvantum one */
-            QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
-            QString userSvg = QString ("%1/Kvantum/%2/%2.svg").arg (xdg_config_home).arg (kvconfigTheme_);
+            QString themeDir = userThemeDir (kvconfigTheme_);
+            QString themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (kvconfigTheme_);
+            QString userSvg = QString ("%1/%2.svg").arg (themeDir).arg (kvconfigTheme_);
 
+            /* If themeConfig doesn't exist but userSvg does, themeConfig be created by copying
+               the default config below and this message will be correct. If neither themeConfig
+               nor userSvg exists, this message will be replaced by the one that follows it. */
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:<br><i>%1</b></i>").arg (themeConfig));
             if (!QFile::exists (themeConfig) && !QFile::exists (userSvg))
             { // no user theme but a root one
-                ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme_));
+                ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme_));
             }
             showAnimated (ui->configLabel, 1000);
 
@@ -626,9 +726,14 @@ void KvantumManager::tabChanged (int index)
             if (!QFile::exists (themeConfig))
             {
                 if (QFile::exists (userSvg)) // a user theme without config
-                    copyDefaultTheme (QString(), kvconfigTheme_);
+                    copyRootTheme (QString(), kvconfigTheme_);
                 else // a root theme
-                    themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme_);
+                {
+                    QString rootDir = QString (DATADIR) + QString ("/Kvantum/%1").arg (kvconfigTheme_);
+                    if (!isThemeDir (rootDir))
+                        rootDir =  QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (kvconfigTheme_);
+                    themeConfig = QString ("%1/%2.kvconfig").arg (rootDir).arg (kvconfigTheme_);
+                }
             }
 
             if (QFile::exists (themeConfig)) // doesn't exist for a root theme without config
@@ -761,29 +866,40 @@ void KvantumManager::selectionChanged (const QString &txt)
     else
         ui->usageLabel->hide();
 
-    if (txt == "Kvantum (default)"
-        || (!txt.endsWith (" (modified)")
-            && !QDir (xdg_config_home + QString ("/Kvantum/") + txt).exists())) // root
-    {
-        ui->deleteTheme->setEnabled (false);
-    }
-    else if (!ui->deleteTheme->isEnabled())
-        ui->deleteTheme->setEnabled (true);
-
-    QString comment;
     QString text = txt;
+    if (text == "Kvantum (default)")
+        text = QString();
     if (text == "Kvantum (modified)")
         text = "Default#";
     else if (text.endsWith (" (modified)"))
         text.replace (QString (" (modified)"), QString ("#"));
-    if (text != "Kvantum (default)")
+
+    QString themeDir, themeConfig;
+    if (!text.isEmpty())
     {
-        QString themeConfig;
-        QDir themeDir = QDir (xdg_config_home + QString ("/Kvantum/") + text);
-        if (!themeDir.exists() && !text.endsWith ("#"))
-            themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (text);
-        else
-            themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (text);
+        themeDir = userThemeDir (text);
+        themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (text);
+    }
+
+    if (txt == "Kvantum (default)"
+        || !isThemeDir (themeDir)) // root
+    {
+        ui->deleteTheme->setEnabled (false);
+    }
+    else
+        ui->deleteTheme->setEnabled (true);
+
+    QString comment;
+    if (!text.isEmpty())
+    {
+        if (!isThemeDir (themeDir))
+        {
+            if (isThemeDir (QString (DATADIR) + QString ("/Kvantum/%1").arg (text)))
+                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (text);
+            else
+                themeConfig = QString (DATADIR) + QString ("/themes/%1/Kvantum/%1.kvconfig").arg (text);
+        }
+
         if (QFile::exists (themeConfig))
         {
             QSettings themeSettings (themeConfig, QSettings::NativeFormat);
@@ -810,7 +926,7 @@ void KvantumManager::updateThemeList()
 
     QStringList list;
 
-    /* add all themes */
+    /* first add the user themes to the list */
     QDir kv = QDir (QString ("%1/Kvantum").arg (xdg_config_home));
     if (kv.exists())
     {
@@ -826,7 +942,8 @@ void KvantumManager::updateThemeList()
                     /* see if there's a valid root installtion */
                     QString folder_ = folder.left (folder.length() - 1);
                     if (!folder_.contains ("#")
-                        && isThemeDir (QString (DATADIR) + QString ("/Kvantum/%1").arg (folder_)))
+                        && (isThemeDir (QString (DATADIR) + QString ("/Kvantum/%1").arg (folder_))
+                            || isThemeDir (QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (folder_))))
                     {
                         list.append (QString ("%1 (modified)").arg (folder_));
                     }
@@ -836,9 +953,38 @@ void KvantumManager::updateThemeList()
             }
         }
     }
-    int rootSep = 0;
-    if (!list.isEmpty())
-        rootSep = list.length();
+    QString homeDir = QDir::homePath();
+    kv = QDir (QString ("%1/.themes").arg (homeDir));
+    if (kv.exists())
+    {
+        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        foreach (const QString &folder, folders)
+        {
+            if (isThemeDir (QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (folder))
+                && !folder.contains ("#")
+                && !list.contains (folder)) // the themes installed in the config folder have priority
+            {
+                list.append (folder);
+            }
+        }
+    }
+    kv = QDir (QString ("%1/.local/share/themes").arg (homeDir));
+    if (kv.exists())
+    {
+        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        foreach (const QString &folder, folders)
+        {
+            if (isThemeDir (QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (folder))
+                && !folder.contains ("#")
+                && !list.contains (folder)) // the user themes installed in the above paths have priority
+            {
+                list.append (folder);
+            }
+        }
+    }
+
+    /* now add the root themes */
+    QStringList rootList;
     kv = QDir (QString (DATADIR) + QString ("/Kvantum"));
     if (kv.exists())
     {
@@ -851,23 +997,45 @@ void KvantumManager::updateThemeList()
                 if (!list.contains (folder) // a user theme with the same name takes priority
                     && !list.contains (QString ("%1 (modified)").arg (folder)))
                 {
-                    list.append (folder);
+                    rootList.append (folder);
                 }
             }
         }
     }
+    kv = QDir (QString (DATADIR) + QString ("/themes"));
+    if (kv.exists())
+    {
+        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        foreach (const QString &folder, folders)
+        {
+            if (!folder.contains ("#")
+                && isThemeDir (QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (folder)))
+            {
+                if (!list.contains (folder) // a user theme with the same name takes priority
+                    && !list.contains (QString ("%1 (modified)").arg (folder))
+                    // a root theme inside 'DATADIR/Kvantum/' with the same name takes priority
+                    && !rootList.contains (folder))
+                {
+                    rootList.append (folder);
+                }
+            }
+        }
+    }
+    list.append (rootList);
+    list.sort();
+
+    /* add the whole list to the combobox */
+    bool hasDefaultThenme (false);
     if (list.isEmpty() || list.first() != "Kvantum (modified)")
     {
         list.prepend ("Kvantum (default)");
-        rootSep++;
+        hasDefaultThenme = true;
     }
     ui->comboBox->insertItems (0, list);
-    ui->comboBox->insertSeparator (1);
-    ui->comboBox->insertSeparator (1);
-    if (rootSep)
+    if (hasDefaultThenme)
     {
-        ui->comboBox->insertSeparator (rootSep + 2);
-        ui->comboBox->insertSeparator (rootSep + 2);
+        ui->comboBox->insertSeparator (1);
+        ui->comboBox->insertSeparator (1);
     }
 
     /* select the active theme and set kvconfigTheme_ */
@@ -933,40 +1101,69 @@ void KvantumManager::preview()
     process_->start (previewExe);
 }
 /*************************/
-void KvantumManager::copyDefaultTheme (QString source, QString target)
+/* This either copies the default config to a user theme without config
+   or copies a root config to a folder under the config directory. */
+void KvantumManager::copyRootTheme (QString source, QString target)
 {
+    if (target.isEmpty()) return;
     QDir cf = QDir (xdg_config_home);
-    cf.mkdir ("Kvantum");
-    QDir kv = QDir (xdg_config_home + QString ("/Kvantum"));
-    if (kv.exists())
+    cf.mkdir ("Kvantum"); // for the default theme, the config folder may not exist yet
+    QString kv = xdg_config_home + QString ("/Kvantum");
+    QDir kvDir = QDir (kv);
+    if (!kvDir.exists())
     {
-        kv.mkdir (target);
-        QString theCopy = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (target);
-        if (!QFile::exists (theCopy))
-        {
-            QString themeConfig = ":default.kvconfig";
-            if (!source.isEmpty())
-                themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (source);
-            if (QFile::copy (themeConfig, theCopy))
-            {
-#if QT_VERSION < 0x050000
-                QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFile::WriteOwner);
-#else
-                QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFileDevice::WriteOwner);
-#endif
-                ui->statusBar->showMessage (tr ("A copy of the default config is created."), 10000);
-            }
-            else // either there's no source or the target isn't writable
-                notWritable();
-        }
-        else
-        {
-            ui->statusBar->clearMessage();
-            ui->statusBar->showMessage (tr ("A copy was already created."), 10000);
-        }
+        notWritable (kv);
+        return;
+    }
+    QString targetFolder = QString ("%1/Kvantum/%2") .arg (xdg_config_home).arg (target);
+    QString altPath;
+    if (source.isEmpty()) // the default config will be copied to a user theme without config
+    {
+        altPath = userThemeDir (target);
+        if (altPath == targetFolder || !isThemeDir (altPath))
+            altPath = QString();
+    }
+
+    QString theCopy;
+    if (altPath.isEmpty())
+    { /* we're under the config directory (and want to copy either a non-default root
+         config to it or the default config to a user theme inside the config folder) */
+        kvDir.mkdir (target);
+        theCopy = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (target);
     }
     else
-        notWritable();
+        /* we're under an alternative theme installation path (and want
+           to copy the default config to a user theme without config) */
+        theCopy = QString ("%1/%2.kvconfig").arg (altPath).arg (target);
+    if (!QFile::exists (theCopy))
+    {
+        QString themeConfig = ":default.kvconfig";
+        if (!source.isEmpty())
+        {
+            QString sourceDir = QString (DATADIR) + QString ("/Kvantum/%1").arg (source);
+            if (!isThemeDir (sourceDir))
+                sourceDir = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (source);
+            QString _themeConfig = QString ("%1/%2.kvconfig").arg (sourceDir).arg (source);
+            if (QFile::exists (_themeConfig)) // otherwise, the root theme is just an SVG image
+                themeConfig = _themeConfig;
+        }
+        if (QFile::copy (themeConfig, theCopy))
+        {
+#if QT_VERSION < 0x050000
+            QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFile::WriteOwner);
+#else
+            QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFileDevice::WriteOwner);
+#endif
+            ui->statusBar->showMessage (tr ("A copy of the root config is created."), 10000);
+        }
+        else
+            notWritable (theCopy);
+    }
+    else
+    {
+        ui->statusBar->clearMessage();
+        ui->statusBar->showMessage (tr ("A copy was already created."), 10000);
+    }
 }
 #if QT_VERSION >= 0x050000
 /*************************/
@@ -979,45 +1176,42 @@ static QString boolToStr (bool b)
 /*************************/
 void KvantumManager::writeConfig()
 {
-    bool wasDefault = false;
+    bool wasRootTheme = false;
     if (kvconfigTheme_.isEmpty()) // default theme
     {
-        wasDefault = true;
+        wasRootTheme = true;
         QFile::remove (QString ("%1/Kvantum/Default#/Default#.kvconfig").arg (xdg_config_home));
         kvconfigTheme_ = "Default#";
-        copyDefaultTheme (QString(), kvconfigTheme_);
+        copyRootTheme (QString(), kvconfigTheme_);
     }
 
-    QString themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
+    QString themeDir = userThemeDir (kvconfigTheme_);
+    QString themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (kvconfigTheme_);
     if (!QFile::exists (themeConfig))
-    { // root theme (because config files are copied for user themes at tabChanged())
-        wasDefault = true;
-        QString themeConfig_ = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme_);
-        if (QFile::exists (themeConfig_))
-        {
-            QFile::remove (QString ("%1/Kvantum/%2#/%2#.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_));
-            copyDefaultTheme (kvconfigTheme_, kvconfigTheme_ + "#");
-            kvconfigTheme_ = kvconfigTheme_ + "#";
-        }
-        else // root theme is just an SVG image
-        {
-            kvconfigTheme_ = kvconfigTheme_ + "#";
-            copyDefaultTheme (QString(), kvconfigTheme_);
-        }
+    { // root theme (because Kvantum's default theme config is copied at tabChanged())
+        wasRootTheme = true;
+        QFile::remove (QString ("%1/Kvantum/%2#/%2#.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_));
+        copyRootTheme (kvconfigTheme_, kvconfigTheme_ + "#");
+        kvconfigTheme_ = kvconfigTheme_ + "#";
     }
 
     QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
     QSettings settings (configFile, QSettings::NativeFormat);
-    if (!settings.isWritable()) return;
+    if (!settings.isWritable())
+    {
+        notWritable (configFile);
+        return;
+    }
     settings.setValue ("theme", kvconfigTheme_);
 
-    themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
-    if (QFile::exists (themeConfig)) // user theme
+    if (wasRootTheme)
+        themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
+    if (QFile::exists (themeConfig)) // user theme (originally or after copying)
     {
         QSettings themeSettings (themeConfig, QSettings::NativeFormat);
         if (!themeSettings.isWritable())
         {
-            notWritable();
+            notWritable (themeConfig);
             return;
         }
 #if QT_VERSION >= 0x050000
@@ -1099,7 +1293,12 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
-            || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxSpin->isChecked())
+            || themeSettings.value ("x11drag").toBool() != ui->checkBoxX11->isChecked()
+            || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxSpin->isChecked()
+            || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
+            || themeSettings.value ("joined_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
+            || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
+            || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked())
         {
             restyle = true;
         }
@@ -1253,10 +1452,10 @@ void KvantumManager::writeConfig()
         QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
         statusLabel->setText (tr ("<b>Active theme:</b> %1").arg (theme));
 
-        if (wasDefault && kvconfigTheme_.endsWith ("#"))
+        if (wasRootTheme && kvconfigTheme_.endsWith ("#"))
         {
             ui->restoreButton->show();
-            ui->configLabel->setText (tr ("These are the settings that can be safely changed..<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
             showAnimated (ui->configLabel, 1000);
         }
 
@@ -1272,19 +1471,25 @@ void KvantumManager::writeConfig()
 }
 /*************************/
 void KvantumManager::restoreDefault()
-{ // The restore button is shown only when kvconfigTheme_ ends with "#" (-> tabChanged()).
+{ 
+    /* The restore button is shown only when kvconfigTheme_ ends with "#" (-> tabChanged())
+       but we're wise and so, cautious ;) */
+    if (!kvconfigTheme_.endsWith ("#")) return;
     QFile::remove (QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_));
     QString _kvconfigTheme_ (kvconfigTheme_);
     if (kvconfigTheme_ == "Default#")
-        copyDefaultTheme (QString(), kvconfigTheme_);
+        copyRootTheme (QString(), kvconfigTheme_);
     else
     {
         _kvconfigTheme_.remove(QString("#"));
-        QString themeConfig_ = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (_kvconfigTheme_);
-        if (QFile::exists (themeConfig_))
-            copyDefaultTheme (_kvconfigTheme_, kvconfigTheme_);
+        QString rootDir = QString (DATADIR) + QString ("/Kvantum/%1").arg (_kvconfigTheme_);
+        if (!isThemeDir (rootDir))
+            rootDir = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (_kvconfigTheme_);
+        QString _themeConfig = QString ("%1/%2.kvconfig").arg (rootDir).arg (_kvconfigTheme_);
+        if (QFile::exists (_themeConfig))
+            copyRootTheme (_kvconfigTheme_, kvconfigTheme_);
         else // root theme is just an SVG image
-            copyDefaultTheme (QString(), kvconfigTheme_);
+            copyRootTheme (QString(), kvconfigTheme_);
     }
 
     /* correct buttons and label */
@@ -1340,9 +1545,9 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.9.1</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.9.2</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")
-                            .arg (qt));
+                           .arg (qt));
 }

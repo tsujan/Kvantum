@@ -185,6 +185,10 @@ Kvantum can use in addition to its default theme.</string>
         </item>
         <item row="2" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="deleteTheme">
+          <property name="toolTip">
+           <string>Remove the selected theme
+from all user installation paths.</string>
+          </property>
           <property name="text">
            <string>Delete this theme</string>
           </property>
@@ -912,7 +916,7 @@ labels by default.</string>
              <widget class="QCheckBox" name="checkBoxSpin">
               <property name="toolTip">
                <string>By default, spin indicators are drawn on adjacent buttons.
-Checking this puts the spin-up indicators above
+Checking this puts the spin-up indicator above
 the spin-down one inside the spin line-edit.</string>
               </property>
               <property name="text">

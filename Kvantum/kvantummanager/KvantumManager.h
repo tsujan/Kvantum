@@ -29,7 +29,7 @@ private slots:
     void tabChanged (int index);
     void selectionChanged (const QString &txt);
     void preview();
-    void copyDefaultTheme (QString source, QString target);
+    void copyRootTheme (QString source, QString target);
     void writeConfig();
     void restoreDefault();
     void isTranslucent (bool checked);
@@ -39,8 +39,9 @@ private slots:
 
 private:
     void closeEvent (QCloseEvent *event);
-    void notWritable();
-    bool isThemeDir (const QString &folder);
+    void notWritable (const QString &path);
+    bool isThemeDir (const QString &folderPath);
+    QString userThemeDir (const QString &themeName);
     void updateThemeList();
     void showAnimated (QWidget *w, int duration);
     void defaultThemeButtons();
