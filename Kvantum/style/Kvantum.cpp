@@ -5210,7 +5210,8 @@ void Style::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        if (!status.startsWith("disabled") && pb && pb->isDefault()) {
+        if (!settings->getHacksSpec().normal_default_pushbutton
+            && !status.startsWith("disabled") && pb && pb->isDefault()) {
           QFont f(pb->font());
           f.setBold(true);
           painter->setFont(f);

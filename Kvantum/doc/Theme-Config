@@ -463,6 +463,8 @@ respect_darkness                  true/false          Some apps don't respect da
 force_size_grip                   true/false          Show the size grips of dialogs and
                                                       statusbars as far as possible?
 
+normal_default_pushbutton         true/false          No bold font for default push buttons?
+
 iconless_pushbutton               true/false          No icon for push buttons that have text?
 
 iconless_menu                     true/false          No icon for menus?

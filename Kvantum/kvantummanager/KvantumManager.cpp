@@ -537,6 +537,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
     ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
+    ui->checkBoxNormalBtn->setChecked (defaultSettings.value ("normal_default_pushbutton").toBool());
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
     defaultSettings.endGroup();
@@ -838,6 +839,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
+                ui->checkBoxNormalBtn->setChecked (themeSettings.value ("normal_default_pushbutton").toBool());
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
                 themeSettings.endGroup();
@@ -1229,6 +1231,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
         hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
         hackKeys.insert("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
+        hackKeys.insert("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
         hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
 
@@ -1262,8 +1265,11 @@ void KvantumManager::writeConfig()
 #endif
         themeSettings.beginGroup ("Hacks");
         bool restyle = false;
-        if (themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked())
+        if (themeSettings.value ("normal_default_pushbutton").toBool() != ui->checkBoxNormalBtn->isChecked()
+            || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked())
+        {
             restyle = true;
+        }
 #if QT_VERSION >= 0x050000
         QMap<QString, QString>::iterator it;
         it = hackKeys.begin();
@@ -1285,6 +1291,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
         themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
         themeSettings.setValue ("force_size_grip", ui->checkBoxGrip->isChecked());
+        themeSettings.setValue ("normal_default_pushbutton", ui->checkBoxNormalBtn->isChecked());
         themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconlessBtn->isChecked());
         themeSettings.setValue ("iconless_menu", ui->checkBoxIconlessMenu->isChecked());
 #endif
