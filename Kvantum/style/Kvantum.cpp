@@ -6877,7 +6877,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_LayoutBottomMargin : return 4;
 
     case PM_LayoutHorizontalSpacing :
-    case PM_LayoutVerticalSpacing : return 2;
+    case PM_LayoutVerticalSpacing : return tspec.layout_spacing;
 
     case PM_MenuBarPanelWidth :
     case PM_MenuBarVMargin :

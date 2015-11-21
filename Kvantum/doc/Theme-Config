@@ -351,6 +351,10 @@ tooltip_delay                     integer             The delay, in milliseconds
                                                       showing tooltips. (This key has NO
                                                       effect on Qt4 applications!)
 
+layout_spacing                    integer             Obvious. Its value is between 2 and 10
+                                                      (px), and will have no effect if set in
+                                                      the code of an app. It is 2 by default.
+
 small_icon_size
 large_icon_size
 button_icon_size

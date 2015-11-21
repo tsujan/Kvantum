@@ -114,6 +114,8 @@ typedef struct {
   /* fill rubber band rectangle with highlight color? */
   bool fill_rubberband;
 
+  int layout_spacing;
+
   int small_icon_size;
   int large_icon_size;
   int button_icon_size;
@@ -334,6 +336,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.vertical_spin_indicators = false;
   tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;
+  tspec.layout_spacing = 2;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;
