@@ -1,8 +1,10 @@
 V0.9.2
 ---------
  * Added '$DATADIR/themes/$THEME_NAME/Kvantum/', '~/.themes/$THEME_NAME/Kvantum/' and '~/.local/share/themes/$THEME_NAME/Kvantum/' to the installation paths but with lower priority (the second directory has priority over the third one).
- * Added a hacking key for not using bold font for the text of a default push button.
- * Added a general key for layout spacing, with a value between 2 and 10px.
+ * Added a hacking key for not using bold font for the text of a default push button (to Kvantum Manager).
+ * Added a general key for layout spacing, with a value between 2 and 10px (to Kvantum Manager).
+ * Added another extra theme (KvCurves3d).
+ * Used a more reliable boolean for determining whether a slider is horizontal.
 
 V0.9.1
 ---------

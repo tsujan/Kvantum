@@ -6453,6 +6453,7 @@ void Style::drawComplexControl(ComplexControl control,
         interior_spec ispec = getInteriorSpec(group);
         fspec.expansion = 0;
 
+        bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
         int ticks = opt->tickPosition;
         const int len = pixelMetric(PM_SliderLength,option,widget);
         const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
@@ -6466,7 +6467,7 @@ void Style::drawComplexControl(ComplexControl control,
           QRect grooveRect = subControlRect(CC_Slider,opt,SC_SliderGroove,widget);
           const int grooveThickness = qMin(tspec.slider_width,thick);
           int delta;
-          if (option->state & State_Horizontal)
+          if (horiz)
           {
             delta = (grooveRect.height()-grooveThickness)/2;
             grooveRect.adjust(0,delta,0,-delta);
@@ -6483,7 +6484,7 @@ void Style::drawComplexControl(ComplexControl control,
           QPoint sliderCenter = slider.center();
 
           /* take into account the inversion */
-          if (option->state & State_Horizontal)
+          if (horiz)
           {
             if (!opt->upsideDown) {
               full.setWidth(sliderCenter.x());
@@ -6509,7 +6510,7 @@ void Style::drawComplexControl(ComplexControl control,
 
           /* with a bit of visualization, we can get the
              horizontal bars from the vertical ones */
-          if (option->state & State_Horizontal)
+          if (horiz)
           {
             int H = empty.height();
             grooveRect.setRect(grooveRect.y(), grooveRect.x(),
@@ -6563,7 +6564,7 @@ void Style::drawComplexControl(ComplexControl control,
             painter->restore();
           }
 
-          if (option->state & State_Horizontal)
+          if (horiz)
             painter->restore();
         }
 
@@ -6574,7 +6575,7 @@ void Style::drawComplexControl(ComplexControl control,
         {
           /* slider ticks */
           QRect r = option->rect;
-          if (option->state & State_Horizontal)
+          if (horiz)
           {
             r.setRect(y, x, h, w);
             painter->save();
@@ -6627,7 +6628,7 @@ void Style::drawComplexControl(ComplexControl control,
           }
           if (!(option->state & State_Enabled))
             painter->restore();
-          if (option->state & State_Horizontal)
+          if (horiz)
             painter->restore();
         }
 
@@ -6647,7 +6648,7 @@ void Style::drawComplexControl(ComplexControl control,
           bool derive = false;
           if (len != thick)
           {
-            if (option->state & State_Horizontal)
+            if (horiz)
             {
               derive = true;
               int sY = r.y();
@@ -8856,11 +8857,11 @@ QRect Style::subControlRect(ComplexControl control,
     case CC_Slider : {
       const QStyleOptionSlider *opt =
         qstyleoption_cast<const QStyleOptionSlider *>(option);
-      bool horiz = (option->state & State_Horizontal);
       switch (subControl) {
         case SC_SliderGroove : { // sets the clicking area
           if (opt)
           {
+            bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
             int ticks = opt->tickPosition;
             const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
             if (horiz)
@@ -8892,6 +8893,7 @@ QRect Style::subControlRect(ComplexControl control,
         case SC_SliderHandle : {
           if (opt)
           {
+            bool horiz = opt->orientation == Qt::Horizontal;
             subControlRect(CC_Slider,option,SC_SliderGroove,widget).getRect(&x,&y,&w,&h);
             const int len = pixelMetric(PM_SliderLength, option, widget);
             const int sliderPos = sliderPositionFromValue (opt->minimum,

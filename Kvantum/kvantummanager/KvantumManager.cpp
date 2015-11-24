@@ -590,28 +590,33 @@ void KvantumManager::defaultThemeButtons()
         if (!ui->checkBoxBlurWindow->isChecked())
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
-    int icnSize = 16;
+    int theSize = 16;
     if (defaultSettings.contains ("small_icon_size"))
-        icnSize = defaultSettings.value ("small_icon_size").toInt();
-    icnSize = qMin(qMax(icnSize,16), 48);
-    ui->spinSmall->setValue (icnSize);
-    icnSize = 32;
+        theSize = defaultSettings.value ("small_icon_size").toInt();
+    theSize = qMin(qMax(theSize,16), 48);
+    ui->spinSmall->setValue (theSize);
+    theSize = 32;
     if (defaultSettings.contains ("large_icon_size"))
-        icnSize = defaultSettings.value ("large_icon_size").toInt();
-    icnSize = qMin(qMax(icnSize,24), 128);
-    ui->spinLarge->setValue (icnSize);
-    icnSize = 16;
+        theSize = defaultSettings.value ("large_icon_size").toInt();
+    theSize = qMin(qMax(theSize,24), 128);
+    ui->spinLarge->setValue (theSize);
+    theSize = 16;
     if (defaultSettings.contains ("button_icon_size"))
-        icnSize = defaultSettings.value ("button_icon_size").toInt();
-    icnSize = qMin(qMax(icnSize,16), 64);
-    ui->spinButton->setValue (icnSize);
-    icnSize = 24;
+        theSize = defaultSettings.value ("button_icon_size").toInt();
+    theSize = qMin(qMax(theSize,16), 64);
+    ui->spinButton->setValue (theSize);
+    theSize = 24;
     if (defaultSettings.contains ("toolbar_icon_size"))
-        icnSize = defaultSettings.value ("toolbar_icon_size").toInt();
+        theSize = defaultSettings.value ("toolbar_icon_size").toInt();
     else if (defaultSettings.value ("slim_toolbars").toBool())
-        icnSize = 16;
-    icnSize = qMin(qMax(icnSize,16), 64);
-    ui->spinToolbar->setValue (icnSize);
+        theSize = 16;
+    theSize = qMin(qMax(theSize,16), 64);
+    ui->spinToolbar->setValue (theSize);
+    theSize = 2;
+    if (defaultSettings.contains ("layout_spacing"))
+      theSize = defaultSettings.value ("layout_spacing").toInt();
+    theSize = qMin(qMax(theSize,2), 10);
+    ui->spinLayout->setValue (theSize);
     defaultSettings.endGroup();
 }
 /*************************/
@@ -828,6 +833,12 @@ void KvantumManager::tabChanged (int index)
                 }
                 else if (themeSettings.contains ("slim_toolbars"))
                     ui->spinToolbar->setValue (16);
+                if (themeSettings.contains ("layout_spacing"))
+                {
+                    int theSize = themeSettings.value ("layout_spacing").toInt();
+                    theSize = qMin(qMax(theSize,2), 10);
+                    ui->spinLayout->setValue (theSize);
+                }
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
@@ -1257,6 +1268,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("large_icon_size", str.setNum (ui->spinLarge->value()));
         generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
         generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
+        generalKeys.insert("layout_spacing", str.setNum (ui->spinLayout->value()));
 
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
@@ -1305,7 +1317,9 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
-            || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked())
+            || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
+            || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
+            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value())
         {
             restyle = true;
         }
@@ -1342,6 +1356,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("large_icon_size", ui->spinLarge->value());
         themeSettings.setValue ("button_icon_size", ui->spinButton->value());
         themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
+        themeSettings.setValue ("layout_spacing", ui->spinLayout->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");

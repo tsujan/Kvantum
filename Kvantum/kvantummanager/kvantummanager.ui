@@ -629,7 +629,7 @@ window SVG background.</string>
           </widget>
           <widget class="QWidget" name="tab_3">
            <attribute name="title">
-            <string>Icon Sizes</string>
+            <string>Sizes</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_10">
             <item row="2" column="2">
@@ -777,6 +777,34 @@ KDE apps get it from KDE setting.</string>
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="labelLayout">
+              <property name="toolTip">
+               <string>The default value is 2 px but
+some apps set it themeselves.</string>
+              </property>
+              <property name="text">
+               <string>Layout spacing:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QSpinBox" name="spinLayout">
+              <property name="toolTip">
+               <string>The default value is 2 px but
+some apps set it themeselves.</string>
+              </property>
+              <property name="suffix">
+               <string> px</string>
+              </property>
+              <property name="minimum">
+               <number>2</number>
+              </property>
+              <property name="maximum">
+               <number>10</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
