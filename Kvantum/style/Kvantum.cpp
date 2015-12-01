@@ -461,6 +461,25 @@ static inline bool enoughContrast (QColor col1, QColor col2)
   return true;
 }
 
+/* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
+   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
+static inline QColor getFromRGBA(const QString str)
+{
+  QColor col(str);
+  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
+    return col;
+  bool ok;
+  int alpha = str.right(2).toInt(&ok, 16);
+  if (ok)
+  {
+    QString tmp(str);
+    tmp.remove(7, 2);
+    col = QColor(tmp);
+    col.setAlpha(alpha);
+  }
+  return col;
+}
+
 void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
@@ -481,7 +500,7 @@ void Style::polish(QWidget *widget)
   /* So far I haven't found any use for this: */
   /*if (qobject_cast<QMenu*>(widget))
   {
-    QColor menuTextColor(getLabelSpec("Menu").normalColor);
+    QColor menuTextColor = getFromRGBA(getLabelSpec("Menu").normalColor);
     QPalette palette = widget->palette();
     if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::Text))
     {
@@ -491,8 +510,8 @@ void Style::polish(QWidget *widget)
   }*/
 
   /* respect the toolbar text color */
-  QColor toolbarTextColor(getLabelSpec("Toolbar").normalColor);
-  QColor windowTextColor(settings->getColorSpec().windowTextColor);
+  QColor toolbarTextColor = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+  QColor windowTextColor = getFromRGBA(settings->getColorSpec().windowTextColor);
   if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
   {
     QWidget *p = getParent(widget,1);
@@ -633,7 +652,7 @@ void Style::polish(QWidget *widget)
     /* Dolphin sets the background of its KItemListContainer's viewport
        to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
        We force our base color here. */
-    QColor col = settings->getColorSpec().baseColor;
+    QColor col = getFromRGBA(settings->getColorSpec().baseColor);
     if (col.isValid())
     {
       QPalette palette = widget->palette();
@@ -691,7 +710,7 @@ void Style::polish(QWidget *widget)
   }
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   { // in rare cases like KNotes' font combos or Kcalc
-    QColor col(settings->getColorSpec().textColor);
+    QColor col = getFromRGBA(settings->getColorSpec().textColor);
     if (col.isValid())
     {
       QPalette palette = widget->palette();
@@ -866,48 +885,48 @@ void Style::polish(QPalette &palette)
     const color_spec cspec = settings->getColorSpec();
 
     /* background colors */
-    QColor col = cspec.windowColor;
+    QColor col = getFromRGBA(cspec.windowColor);
     if (col.isValid())
       palette.setColor(QPalette::Window,col);
-    col = cspec.baseColor;
+    col = getFromRGBA(cspec.baseColor);
     if (col.isValid())
       palette.setColor(QPalette::Base,col);
-    col = cspec.altBaseColor;
+    col = getFromRGBA(cspec.altBaseColor);
     if (col.isValid())
       palette.setColor(QPalette::AlternateBase,col);
-    col = cspec.buttonColor;
+    col = getFromRGBA(cspec.buttonColor);
     if (col.isValid())
       palette.setColor(QPalette::Button,col);
-    col = cspec.lightColor;
 
+    col = getFromRGBA(cspec.lightColor);
     if (col.isValid())
       palette.setColor(QPalette::Light,col);
-    col = cspec.midLightColor;
+    col = getFromRGBA(cspec.midLightColor);
     if (col.isValid())
       palette.setColor(QPalette::Midlight,col);
-    col = cspec.darkColor;
+    col = getFromRGBA(cspec.darkColor);
     if (col.isValid())
       palette.setColor(QPalette::Dark,col);
-    col = cspec.midColor;
+    col = getFromRGBA(cspec.midColor);
     if (col.isValid())
       palette.setColor(QPalette::Mid,col);
-    col = cspec.shadowColor;
+    col = getFromRGBA(cspec.shadowColor);
     if (col.isValid())
       palette.setColor(QPalette::Shadow,col);
 
-    col = cspec.highlightColor;
+    col = getFromRGBA(cspec.highlightColor);
     if (col.isValid())
       palette.setColor(QPalette::Active,QPalette::Highlight,col);
-    col = cspec.inactiveHighlightColor;
+    col = getFromRGBA(cspec.inactiveHighlightColor);
     if (col.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
 
-    col = cspec.tooltipBasetColor;
+    col = getFromRGBA(cspec.tooltipBasetColor);
     if (col.isValid())
       palette.setColor(QPalette::ToolTipBase,col);
     else
     { // for backward compatibility
-      col = cspec.tooltipTextColor;
+      col = getFromRGBA(cspec.tooltipTextColor);
       if (col.isValid())
       {
         QColor col1 = QColor(Qt::white);
@@ -918,39 +937,39 @@ void Style::polish(QPalette &palette)
     }
 
     /* text colors */
-    col = cspec.textColor;
+    col = getFromRGBA(cspec.textColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::Text,col);
       palette.setColor(QPalette::Inactive,QPalette::Text,col);
     }
-    col = cspec.windowTextColor;
+    col = getFromRGBA(cspec.windowTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::WindowText,col);
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
-    col = cspec.buttonTextColor;
+    col = getFromRGBA(cspec.buttonTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
     }
-    col = cspec.tooltipTextColor;
+    col = getFromRGBA(cspec.tooltipTextColor);
     if (col.isValid())
       palette.setColor(QPalette::ToolTipText,col);
-    col = cspec.highlightTextColor;
+    col = getFromRGBA(cspec.highlightTextColor);
     if (col.isValid())
       palette.setColor(QPalette::HighlightedText,col);
-    col = cspec.linkColor;
+    col = getFromRGBA(cspec.linkColor);
     if (col.isValid())
       palette.setColor(QPalette::Link,col);
-    col = cspec.linkVisitedColor;
+    col = getFromRGBA(cspec.linkVisitedColor);
     if (col.isValid())
       palette.setColor(QPalette::LinkVisited,col);
 
     /* disabled text */
-    col = cspec.disabledTextColor;
+    col = getFromRGBA(cspec.disabledTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Disabled,QPalette::Text,col);
@@ -1798,7 +1817,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         bool libreoffice = false;
         if (isLibreoffice && (option->state & State_Enabled) && !status.startsWith("toggled")
-            && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+            && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
         {
           libreoffice = true;
           painter->save();
@@ -1826,13 +1845,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         QColor col;
         if (hasPanel)
         {
-          col = QColor(lspec.normalColor);
+          col = getFromRGBA(lspec.normalColor);
           if (status.startsWith("pressed"))
-            col = QColor(lspec.pressColor);
+            col = getFromRGBA(lspec.pressColor);
           else if (status.startsWith("toggled"))
-            col = QColor(lspec.toggleColor);
+            col = getFromRGBA(lspec.toggleColor);
           else if (option->state & State_MouseOver)
-            col = QColor(lspec.focusColor);
+            col = getFromRGBA(lspec.focusColor);
         }
         else
           /* FIXME: in fact, the foreground color of the parent widget should be
@@ -2680,7 +2699,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         else fspec.top = 0;
         if (hasFlatIndicator)
         {
-          QColor col = QColor(getLabelSpec(group).normalColor);
+          QColor col = getFromRGBA(getLabelSpec(group).normalColor);
           if (!col.isValid())
             col = QApplication::palette().color(QPalette::ButtonText);
           if (enoughContrast(col, QApplication::palette().color(QPalette::Text)))
@@ -2908,14 +2927,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
           const label_spec lspec1 = getLabelSpec("PanelButtonTool");
-          QColor col = QColor(lspec1.normalColor);
+          QColor col = getFromRGBA(lspec1.normalColor);
           if (!col.isValid())
             col = QApplication::palette().color(QPalette::ButtonText);
           QWidget *p = tb->parentWidget();
           QWidget *gp = getParent(widget,2);
           if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
           {
-            if (enoughContrast(col, QColor(getLabelSpec("MenuBar").normalColor)))
+            if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
               dspec.element = "flat-"+dspec1.element+"-down";
           }
           else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
@@ -2924,7 +2943,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                        && !gp->findChild<QTabBar*>()))
           {
             if (!tspec.group_toolbar_buttons
-                && enoughContrast(col, QColor(getLabelSpec("Toolbar").normalColor)))
+                && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
             {
               dspec.element = "flat-"+dspec1.element+"-down";
             }
@@ -3193,22 +3212,24 @@ void Style::drawPrimitive(PrimitiveElement element,
             QColor col;
             if (ivStatus == "normal")
             {
-              if (enoughContrast(opt->palette.color(QPalette::Base), lspec.normalColor))
-                col = lspec.normalColor;
+              QColor tmpCol = getFromRGBA(lspec.normalColor);
+              if (enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
+                col = tmpCol;
             }
             else if (ivStatus == "focused")
             {
-              if (enoughContrast(QApplication::palette().color(QPalette::Text), lspec.focusColor)
+              QColor tmpCol = getFromRGBA(lspec.focusColor);
+              if (enoughContrast(QApplication::palette().color(QPalette::Text), tmpCol)
                   // supposing that the focus interior is translucent, take care of contrast
-                  || enoughContrast(opt->palette.color(QPalette::Base), lspec.focusColor))
+                  || enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
               {
-                col = lspec.focusColor;
+                col = tmpCol;
               }
             }
             else if (ivStatus == "pressed")
-              col = lspec.pressColor;
+              col = getFromRGBA(lspec.pressColor);
             else if (ivStatus == "toggled")
-              col = lspec.toggleColor;
+              col = getFromRGBA(lspec.toggleColor);
             if (!col.isValid())
               col = QApplication::palette().color(QPalette::Text);
             if (col.isValid())
@@ -3338,7 +3359,7 @@ void Style::drawControl(ControlElement element,
         {
           bool libreoffice = false;
           if (isLibreoffice && (option->state & State_Enabled)
-            && enoughContrast(QColor(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
+            && enoughContrast(getFromRGBA(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
           {
             libreoffice = true;
             painter->save();
@@ -3505,10 +3526,10 @@ void Style::drawControl(ControlElement element,
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ItemView");
-            QColor normalColor(lspec.normalColor);
-            QColor focusColor(lspec.focusColor);
-            QColor pressColor(lspec.pressColor);
-            QColor toggleColor(lspec.toggleColor);
+            QColor normalColor = getFromRGBA(lspec.normalColor);
+            QColor focusColor = getFromRGBA(lspec.focusColor);
+            QColor pressColor = getFromRGBA(lspec.pressColor);
+            QColor toggleColor = getFromRGBA(lspec.toggleColor);
             QColor col;
             if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
             {
@@ -3593,7 +3614,7 @@ void Style::drawControl(ControlElement element,
       QString group = "MenuBarItem";
       label_spec lspec = getLabelSpec(group);
       if (isLibreoffice
-          && enoughContrast(QColor(lspec.normalColor),
+          && enoughContrast(getFromRGBA(lspec.normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
         break;
@@ -3696,7 +3717,7 @@ void Style::drawControl(ControlElement element,
 
     case CE_MenuBarEmptyArea : {
       if (isLibreoffice
-          && enoughContrast(QColor(getLabelSpec("MenuBarItem").normalColor),
+          && enoughContrast(getFromRGBA(getLabelSpec("MenuBarItem").normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
         break;
@@ -4246,9 +4267,9 @@ void Style::drawControl(ControlElement element,
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ToolboxTab");
-            QColor normalColor(lspec.normalColor);
-            QColor focusColor(lspec.focusColor);
-            QColor pressColor(lspec.pressColor);
+            QColor normalColor = getFromRGBA(lspec.normalColor);
+            QColor focusColor = getFromRGBA(lspec.focusColor);
+            QColor pressColor = getFromRGBA(lspec.pressColor);
             if (state == 1 && normalColor.isValid())
             {
               QStyleOptionToolBox o(*opt);
@@ -4605,13 +4626,13 @@ void Style::drawControl(ControlElement element,
 
         /* find the part inside the indicator */
         QRect R;
-        QColor col(settings->getColorSpec().progressIndicatorTextColor);
+        QColor col = getFromRGBA(settings->getColorSpec().progressIndicatorTextColor);
         if (state != 0 && !txt.isEmpty() && col.isValid())
         {
           QColor txtCol;
-          if (state == 1) txtCol = QColor(lspec.normalColor);
-          else if (state == 2) txtCol = QColor(lspec.focusColor);
-          else if (state == 4) txtCol = QColor(lspec.toggleColor);
+          if (state == 1) txtCol = getFromRGBA(lspec.normalColor);
+          else if (state == 2) txtCol = getFromRGBA(lspec.focusColor);
+          else if (state == 4) txtCol = getFromRGBA(lspec.toggleColor);
           // do nothing if the colors are the same
           if ((!txtCol.isValid() || col != txtCol)
               && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
@@ -5308,13 +5329,13 @@ void Style::drawControl(ControlElement element,
           QColor col;
           if (!(opt->features & QStyleOptionButton::Flat))
           {
-            col = QColor(lspec.normalColor);
+            col = getFromRGBA(lspec.normalColor);
             if (status.startsWith("pressed"))
-              col = QColor(lspec.pressColor);
+              col = getFromRGBA(lspec.pressColor);
             else if (status.startsWith("toggled"))
-              col = QColor(lspec.toggleColor);
+              col = getFromRGBA(lspec.toggleColor);
             else if (option->state & State_MouseOver)
-              col = QColor(lspec.focusColor);
+              col = getFromRGBA(lspec.focusColor);
           }
           else // FIXME: the foreground color of the parent widget should be used
             col = QApplication::palette().color(QPalette::WindowText);
@@ -5378,7 +5399,7 @@ void Style::drawControl(ControlElement element,
           {
             bool libreoffice = false;
             if (isLibreoffice && (option->state & State_Enabled)
-                && enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+                && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
             {
               libreoffice = true;
               painter->save();
@@ -5403,7 +5424,7 @@ void Style::drawControl(ControlElement element,
           {
             if (hasFlatIndicator)
             {
-              QColor ncol = QColor(lspec.normalColor);
+              QColor ncol = getFromRGBA(lspec.normalColor);
               if (!ncol.isValid())
                 ncol = QApplication::palette().color(QPalette::ButtonText);
               if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText)))
@@ -5511,7 +5532,7 @@ void Style::drawControl(ControlElement element,
           QWidget *p = getParent(widget,1);
           if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
-            QColor ncol = QColor(lspec.normalColor);
+            QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
             QWidget *gp = getParent(widget,2);
@@ -5992,14 +6013,14 @@ void Style::drawComplexControl(ComplexControl control,
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise() && hasFlatIndicator)
             {
-              QColor col = QColor(lspec.normalColor);
+              QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::ButtonText);
               QWidget *p = tb->parentWidget();
               QWidget *gp = getParent(widget,2);
               if (qobject_cast<QMenuBar *>(gp) || qobject_cast<QMenuBar *>(p))
               {
-                if (enoughContrast(col, QColor(getLabelSpec("MenuBar").normalColor)))
+                if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
               else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
@@ -6008,7 +6029,7 @@ void Style::drawComplexControl(ComplexControl control,
                            && !gp->findChild<QTabBar*>()))
               {
                 if (!tspec.group_toolbar_buttons
-                    && enoughContrast(col, QColor(getLabelSpec("Toolbar").normalColor)))
+                    && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -6239,7 +6260,7 @@ void Style::drawComplexControl(ComplexControl control,
           bool libreoffice = false;
           if (isLibreoffice && (option->state & State_Enabled))
           {
-            if (enoughContrast(QColor(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+            if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
             {
               libreoffice = true;
               painter->save();
@@ -6267,13 +6288,13 @@ void Style::drawComplexControl(ComplexControl control,
             if (!llist.isEmpty())
             {
               QColor col;
-              col = QColor(lspec.normalColor);
+              col = getFromRGBA(lspec.normalColor);
               if (status.startsWith("pressed"))
-                col = QColor(lspec.pressColor);
+                col = getFromRGBA(lspec.pressColor);
               else if (status.startsWith("toggled"))
-                col = QColor(lspec.toggleColor);
+                col = getFromRGBA(lspec.toggleColor);
               else if (option->state & State_MouseOver)
-                col = QColor(lspec.focusColor);
+                col = getFromRGBA(lspec.focusColor);
               if (col.isValid())
               {
                 for (int i = 0; i < llist.count(); ++i)
@@ -7278,30 +7299,30 @@ int Style::styleHint(StyleHint hint,
     case SH_GroupBox_TextLabelVerticalAlignment : return Qt::AlignVCenter;
 
     case SH_GroupBox_TextLabelColor: {
-    const QString status =
-        (option->state & State_Enabled) ?
-          (option->state & State_MouseOver) ? "focused" :
-          (option->state & State_On) ? "pressed" :
-          (option->state & State_Sunken) ? "pressed" : "normal"
-        : "disabled";
+      const QString status =
+          (option->state & State_Enabled) ?
+            (option->state & State_MouseOver) ? "focused" :
+            (option->state & State_On) ? "pressed" :
+            (option->state & State_Sunken) ? "pressed" : "normal"
+          : "disabled";
       const label_spec lspec = getLabelSpec("GroupBox");
-      QColor normalColor(lspec.normalColor);
-      QColor focusColor(lspec.focusColor);
-      QColor pressColor(lspec.pressColor);
+      QColor normalColor = getFromRGBA(lspec.normalColor);
+      QColor focusColor = getFromRGBA(lspec.focusColor);
+      QColor pressColor = getFromRGBA(lspec.pressColor);
       if (status == "normal")
       {
         if (normalColor.isValid())
-          return QColor(normalColor).rgba();
+          return normalColor.rgba();
       }
       else if (status == "focused")
       {
         if (focusColor.isValid())
-          return QColor(focusColor).rgba();
+          return focusColor.rgba();
       }
       else if (status == "pressed")
       {
         if (pressColor.isValid())
-          return QColor(pressColor).rgba();
+          return pressColor.rgba();
       }
 
       return QCommonStyle::styleHint(hint,option,widget,returnData);
@@ -10146,7 +10167,7 @@ void Style::renderLabel(
 
     if (state != 0 && !(isPlasma && tialign == Qt::ToolButtonIconOnly))
     {
-      QColor shadowColor(lspec.shadowColor);
+      QColor shadowColor = getFromRGBA(lspec.shadowColor);
       if (lspec.hasShadow && shadowColor.isValid())
       {
         painter->save();
@@ -10159,7 +10180,7 @@ void Style::renderLabel(
 
       if (state == -1)
       {
-        QColor col(settings->getColorSpec().progressIndicatorTextColor);
+        QColor col = getFromRGBA(settings->getColorSpec().progressIndicatorTextColor);
         if (col.isValid())
         {
           painter->save();
@@ -10174,10 +10195,10 @@ void Style::renderLabel(
         }
       }
 
-      QColor normalColor(lspec.normalColor);
-      QColor focusColor(lspec.focusColor);
-      QColor pressColor(lspec.pressColor);
-      QColor toggleColor(lspec.toggleColor);
+      QColor normalColor = getFromRGBA(lspec.normalColor);
+      QColor focusColor = getFromRGBA(lspec.focusColor);
+      QColor pressColor = getFromRGBA(lspec.pressColor);
+      QColor toggleColor = getFromRGBA(lspec.toggleColor);
       if (state == 1 && normalColor.isValid())
       {
         painter->save();

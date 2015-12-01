@@ -5,6 +5,7 @@ V0.9.2
  * Added a general key for layout spacing, with a value between 2 and 10px (to Kvantum Manager).
  * Added another extra theme (KvCurves3d).
  * Used a more reliable boolean for determining whether a slider is horizontal.
+ * Support the #RRGGBBAA format for color names.
 
 V0.9.1
 ---------

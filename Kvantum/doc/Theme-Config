@@ -373,64 +373,64 @@ fill_rubberband                   true/false          Always fill the rubber-ban
                        *** The GeneralColors Section ***
                        *********************************
 
-window.color                      string (#RRGGBB)    A general background color as
-                                                      #RRGGBB or with a valid name
-                                                      like white, black, red, etc.
+window.color                      string (#RRGGBBAA)  A general background color as
+                                                      #RRGGBB or #RRGGBBAA or with a valid
+                                                      name like white, black, red, etc.
 
-base.color                        string (#RRGGBB)    Used mostly as the background
+base.color                        string (#RRGGBBAA)  Used mostly as the background
                                                       color for text entry widgets.
 
-alt.base.color                    string (#RRGGBB)    Used as the alternate background
+alt.base.color                    string (#RRGGBBAA)  Used as the alternate background
                                                       color in views with alternating
                                                       row colors.
 
-button.color                      string (#RRGGBB)    The general button background
+button.color                      string (#RRGGBBAA)  The general button background
                                                       color.
 
-light.color                       string (#RRGGBB)    Lighter than "button.color"
+light.color                       string (#RRGGBBAA)  Lighter than "button.color"
                                                       (used mostly for 3D bevels).
 
-mid.light.color                   string (#RRGGBB)    Between "button.color" and
+mid.light.color                   string (#RRGGBBAA)  Between "button.color" and
                                                       "light.color" (used mostly
                                                       for 3D bevels).
 
-dark.color                        string (#RRGGBB)    Darker than "button.color"
+dark.color                        string (#RRGGBBAA)  Darker than "button.color"
                                                       (used mostly for 3D bevels).
 
-mid.color                         string (#RRGGBB)    Between "button.color" and
+mid.color                         string (#RRGGBBAA)  Between "button.color" and
                                                       "dark.color" (used mostly
                                                       for 3D bevels).
 
-shadow.color                      string (#RRGGBB)    A very dark color. By default,
+shadow.color                      string (#RRGGBBAA)  A very dark color. By default,
                                                       it is black. (used mostly for
                                                       3D bevels).
 
-highlight.color                   string (#RRGGBB)    A color for text selection.
+highlight.color                   string (#RRGGBBAA)  A color for text selection.
 
-inactive.highlight.color          string (#RRGGBB)    Like "highlight.color" but when
+inactive.highlight.color          string (#RRGGBBAA)  Like "highlight.color" but when
                                                       the text widget does not have focus.
 
-tooltip.base.color                string (#RRGGBB)    Tooltip background color (used in
+tooltip.base.color                string (#RRGGBBAA)  Tooltip background color (used in
                                                       "WhatsThis" tooltips).
 
-text.color                        string (#RRGGBB)    The foreground color used with
+text.color                        string (#RRGGBBAA)  The foreground color used with
                                                       "base.color".
 
-window.text.color                 string (#RRGGBB)    A general foreground color.
+window.text.color                 string (#RRGGBBAA)  A general foreground color.
 
-button.text.color                 string (#RRGGBB)    Obvious.
+button.text.color                 string (#RRGGBBAA)  Obvious.
 
-disabled.text.color               string (#RRGGBB)    Obvious.
+disabled.text.color               string (#RRGGBBAA)  Obvious.
 
-tooltip.text.color                string (#RRGGBB)    Obvious.
+tooltip.text.color                string (#RRGGBBAA)  Obvious.
 
-highlight.text.color              string (#RRGGBB)    The color of selected text.
+highlight.text.color              string (#RRGGBBAA)  The color of selected text.
 
-link.color                        string (#RRGGBB)    Obvious.
+link.color                        string (#RRGGBBAA)  Obvious.
 
-link.visited.color                string (#RRGGBB)    Obvious.
+link.visited.color                string (#RRGGBBAA)  Obvious.
 
-progress.indicator.text.color     string (#RRGGBB)    The color of that part of the progress
+progress.indicator.text.color     string (#RRGGBBAA)  The color of that part of the progress
                                                       text, which is inside the progress
                                                       indicator. Useful when the progress
                                                       text does not have enough contrast
@@ -523,21 +523,21 @@ text.margin.left
 text.margin.right                 integer             The sizes of the text margins
                                                       if there is any.
 
-text.normal.color                 string (#RRGGBB)    The color of the normal text as
-                                                      #RRGGBB or with a valid name like white,
-                                                      black, red, etc. It may override the
-                                                      text colors defined under the section
-                                                      "GeneralColors".
+text.normal.color                 string (#RRGGBBAA)  The color of the normal text as
+                                                      #RRGGBB or #RRGGBBAA or with a valid
+                                                      name like white, black, red, etc. It may
+                                                      override the text colors defined under
+                                                      the section "GeneralColors".
                                                       Note: State-specific text colors do not
                                                       have meaning for Window, Dock, LineEdit
                                                       and frame widgets (namely GenericFrame,
                                                       TabFrame and TabBarFrame).
 
-text.focus.color                  string (#RRGGBB)    The color of the focused/hover text.
+text.focus.color                  string (#RRGGBBAA)  The color of the focused/hover text.
 
-text.press.color                  string (#RRGGBB)    The color of the pressed text.
+text.press.color                  string (#RRGGBBAA)  The color of the pressed text.
 
-text.toggle.color                 string (#RRGGBB)    The color of the toggled text.
+text.toggle.color                 string (#RRGGBBAA)  The color of the toggled text.
 
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
@@ -551,12 +551,14 @@ text.shadow.xshift
 text.shadow.yshift                integer             The vertical/horizontal shifts
                                                       of the text shadow if it exists.
 
-text.shadow.color                 string (#RRGGBB)    The color of the text shadow as
-                                                      #RRGGBB or with a valid name
-                                                      like white, black, red, etc.
+text.shadow.color                 string (#RRGGBBAA)  The color of the text shadow as
+                                                      #RRGGBB or #RRGGBBAA or with a valid
+                                                      name like white, black, red, etc.
 
-text.shadow.alpha                 integer (0-255)     The opacity of the text shadow.
-                                                      255 means completely opaque.
+text.shadow.alpha                 integer (0-255)     The opacity of the text shadow. 255
+                                                      means completely opaque. If the opacity
+                                                      is set in #RRGGBBAA as the shadow color
+                                                      name, this key can be set to 255. 
 
 text.shadow.depth                 integer             The text shadow depth.
 
