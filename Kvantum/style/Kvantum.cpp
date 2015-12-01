@@ -10171,7 +10171,8 @@ void Style::renderLabel(
       if (lspec.hasShadow && shadowColor.isValid())
       {
         painter->save();
-        shadowColor.setAlpha(lspec.a);
+        if (lspec.a < 255)
+          shadowColor.setAlpha(lspec.a);
         painter->setPen(QPen(shadowColor));
         for (int i=0; i<lspec.depth; i++)
           painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);

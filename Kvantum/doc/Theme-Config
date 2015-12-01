@@ -556,9 +556,10 @@ text.shadow.color                 string (#RRGGBBAA)  The color of the text shad
                                                       name like white, black, red, etc.
 
 text.shadow.alpha                 integer (0-255)     The opacity of the text shadow. 255
-                                                      means completely opaque. If the opacity
+                                                      means completely opaque. If the alpha
                                                       is set in #RRGGBBAA as the shadow color
-                                                      name, this key can be set to 255. 
+                                                      name, this key can be left to 255 (its
+                                                      default value). 
 
 text.shadow.depth                 integer             The text shadow depth.
 
