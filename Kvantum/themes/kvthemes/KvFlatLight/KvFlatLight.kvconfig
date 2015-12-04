@@ -360,6 +360,7 @@ text.italic=true
 
 [ComboBox]
 inherits=PanelButtonCommand
+indicator.element=none
 
 [Menu]
 inherits=PanelButtonCommand

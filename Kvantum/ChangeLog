@@ -6,6 +6,8 @@ V0.9.2
  * Added another extra theme (KvCurves3d).
  * Used a more reliable boolean for determining whether a slider is horizontal.
  * Support the #RRGGBBAA format for color names.
+ * Use the combobox indicator element if its normal state exists.
+ * Respect darkness only when the window color is dark enough.
 
 V0.9.1
 ---------

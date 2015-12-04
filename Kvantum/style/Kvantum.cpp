@@ -535,20 +535,25 @@ void Style::polish(QWidget *widget)
 
   const hacks_spec hspec = settings->getHacksSpec();
   if (hspec.respect_darkness
-      && (qobject_cast<QAbstractItemView*>(widget)
-          || qobject_cast<QAbstractScrollArea*>(widget)
-          || qobject_cast<QTabWidget*>(widget)
-          || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
+      && !isPcmanfm) // we don't want to give a solid backgeound to LXQT's desktop by accident
   {
-    QPalette palette = widget->palette();
-    QColor txtCol = palette.color(QPalette::Text);
-    if (!enoughContrast(palette.color(QPalette::Base), txtCol)
-        || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
-        || (qobject_cast<QAbstractItemView*>(widget)
-            && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+    QColor winCol = getFromRGBA(settings->getColorSpec().windowColor);
+    if (winCol.isValid() && qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
+        && (qobject_cast<QAbstractItemView*>(widget)
+            || qobject_cast<QAbstractScrollArea*>(widget)
+            || qobject_cast<QTabWidget*>(widget)
+            || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
     {
-      polish(palette);
-      widget->setPalette(palette);
+      QPalette palette = widget->palette();
+      QColor txtCol = palette.color(QPalette::Text);
+      if (!enoughContrast(palette.color(QPalette::Base), txtCol)
+          || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
+          || (qobject_cast<QAbstractItemView*>(widget)
+              && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+      {
+        polish(palette);
+        widget->setPalette(palette);
+      }
     }
   }
 
@@ -2795,6 +2800,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           fspec = getFrameSpec("ComboBox");
           ispec = getInteriorSpec("ComboBox");
+          const indicator_spec dspec1 = getIndicatorSpec("ComboBox");
+          if (themeRndr && themeRndr->isValid()
+              && themeRndr->elementExists(dspec1.element+"-normal"))
+          {
+            dspec = dspec1;
+          }
         }
         if (!(cb->lineEdit()
               // someone may want transparent lineedits (as the developer of Cantata does)
@@ -7188,7 +7199,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
   We could use setAttribute(Qt::WA_NativeWindow) to make widgets native but
   we don't want enforceNativeChildren(), which is used when WA_NativeWindow
   is set, because it would interfere with setTransientParent(). We only want
-  to use reateTLExtra() and createTLSysExtra(). There are to ways for that:
+  to use createTLExtra() and createTLSysExtra(). There are to ways for that:
 
   (1) Using of private headers, which isn't a good idea for obvious reasons;
 
