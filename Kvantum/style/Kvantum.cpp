@@ -1729,14 +1729,17 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
-            drawRaised = true; ispec.px = ispec.py = 0;
-
             /* the disabled state is ugly for grouped tool buttons */
             if (!(option->state & State_Enabled))
               painter->restore();
 
             if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;
+            else
+            {
+              drawRaised = true;
+              ispec.px = ispec.py = 0;
+            }
 
             if (!isHorizontal && !withArrow)
             {
@@ -1748,12 +1751,15 @@ void Style::drawPrimitive(PrimitiveElement element,
               painter->setTransform(m, true);
             }
 
-            int kind = whichToolbarButton (tb, opt, toolBar);
-            if (kind != 2)
+            if (isHorizontal)
             {
-              fspec.hasCapsule = true;
-              fspec.capsuleV = 2;
-              fspec.capsuleH = kind;
+              int kind = whichToolbarButton (tb, opt, toolBar);
+              if (kind != 2)
+              {
+                fspec.hasCapsule = true;
+                fspec.capsuleV = 2;
+                fspec.capsuleH = kind;
+              }
             }
           }
         }
@@ -2855,23 +2861,22 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (const QToolButton *tb = qobject_cast<const QToolButton *>(widget))
       {
+        const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget());
         const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
         fspec.top = fspec1.top; fspec.bottom = fspec1.bottom;
         bool drawRaised = false;
-        if (tspec.group_toolbar_buttons)
+        if (tspec.group_toolbar_buttons
+            && toolBar && toolBar->orientation() != Qt::Vertical)
         {
-          if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
-          {
-            drawRaised = true;
+          drawRaised = true;
 
-            const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
-            int kind = whichToolbarButton (tb, opt, toolBar);
-            if (kind != 2)
-            {
-              fspec.hasCapsule = true;
-              fspec.capsuleV = 2;
-              fspec.capsuleH = kind;
-            }
+          const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+          int kind = whichToolbarButton (tb, opt, toolBar);
+          if (kind != 2)
+          {
+            fspec.hasCapsule = true;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = kind;
           }
         }
 
@@ -2953,7 +2958,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                    || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
                        && !gp->findChild<QTabBar*>()))
           {
-            if (!tspec.group_toolbar_buttons
+            if ((!tspec.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
                 && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
             {
               dspec.element = "flat-"+dspec1.element+"-down";
@@ -5559,7 +5564,8 @@ void Style::drawControl(ControlElement element,
                      || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
                          && !gp->findChild<QTabBar*>()))
             {
-              if (!tspec.group_toolbar_buttons)
+              const QToolBar *toolBar = qobject_cast<QToolBar *>(p);
+              if (!tspec.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
               {
                 const label_spec lspec1 = getLabelSpec("Toolbar");
                 if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
@@ -6039,7 +6045,8 @@ void Style::drawComplexControl(ComplexControl control,
                        || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
                            && !gp->findChild<QTabBar*>()))
               {
-                if (!tspec.group_toolbar_buttons
+                const QToolBar *toolBar = qobject_cast<QToolBar *>(p);
+                if ((!tspec.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
                     && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
                 {
                   dspec.element = "flat-"+dspec.element;
