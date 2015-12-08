@@ -2703,9 +2703,6 @@ and tooltips</string>
    </property>
   </action>
   <action name="actionTest2">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
      <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>

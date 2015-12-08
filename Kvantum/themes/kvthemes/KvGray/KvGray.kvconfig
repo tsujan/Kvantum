@@ -25,10 +25,10 @@ popup_blurring=false
 opaque=
 
 [GeneralColors]
-window.color=#D2D2D2
+window.color=#e6e6e6
 base.color=#F0F0F0
 alt.base.color=#E6E6E6
-button.color=#D2D2D2
+button.color=#e6e6e6
 light.color=#F3F3F3
 mid.light.color=#ECECEC
 dark.color=#BEBEBE
@@ -38,7 +38,7 @@ inactive.highlight.color=#828282
 text.color=black
 window.text.color=black
 button.text.color=black
-disabled.text.color=#787878
+disabled.text.color=#00000073
 tooltip.text.color=white
 highlight.text.color=white
 link.color=#0057AE
@@ -105,10 +105,8 @@ text.press.color=black
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+interior=false
+frame=false
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -198,6 +196,7 @@ text.margin.left=3
 text.margin.right=3
 text.bold=true
 text.italic=true
+text.normal.color=#e6e6e6
 
 [ComboBox]
 inherits=PanelButtonCommand

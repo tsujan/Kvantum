@@ -42,6 +42,8 @@ public:
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
     connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
     connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
+    actionTest2->setMenu (menuFile);
+    toolButton_8->setMenu (menuFile);
   }
   ~KvantumPreview() {}
 

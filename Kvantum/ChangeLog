@@ -9,6 +9,7 @@ V0.9.2
  * Use the combobox indicator element if its normal state exists.
  * Respect darkness only when the window color is dark enough.
  * Don't group toolbar buttons on a vertical toolbar because they wouldn't look elegant, especially with frame expansion.
+ * Don't rotate toolbar buttons by 90 degrees on a vertical toolbar.
 
 V0.9.1
 ---------

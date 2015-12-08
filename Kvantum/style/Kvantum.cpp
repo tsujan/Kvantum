@@ -1723,36 +1723,21 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        bool withArrow = hasArrow (tb, opt);
-        bool isHorizontal = true;
+        /*bool withArrow = hasArrow (tb, opt);
+        bool isHorizontal = true;*/
         if (tspec.group_toolbar_buttons)
         {
           if (const QToolBar *toolBar = qobject_cast<const QToolBar *>(tb->parentWidget()))
           {
-            /* the disabled state is ugly for grouped tool buttons */
-            if (!(option->state & State_Enabled))
-              painter->restore();
-
-            if (toolBar->orientation() == Qt::Vertical)
-              isHorizontal = false;
-            else
+            /*if (toolBar->orientation() == Qt::Vertical)
+              isHorizontal = false;*/
+            if (toolBar->orientation() != Qt::Vertical)
             {
+              /* the disabled state is ugly for grouped tool buttons */
+              if (!(option->state & State_Enabled))
+                painter->restore();
               drawRaised = true;
               ispec.px = ispec.py = 0;
-            }
-
-            if (!isHorizontal && !withArrow)
-            {
-              r.setRect(0, 0, h, w);
-              painter->save();
-              QTransform m;
-              m.scale(1,-1);
-              m.rotate(-90);
-              painter->setTransform(m, true);
-            }
-
-            if (isHorizontal)
-            {
               int kind = whichToolbarButton (tb, opt, toolBar);
               if (kind != 2)
               {
@@ -1761,6 +1746,16 @@ void Style::drawPrimitive(PrimitiveElement element,
                 fspec.capsuleH = kind;
               }
             }
+
+            /*if (!isHorizontal && !withArrow)
+            {
+              r.setRect(0, 0, h, w);
+              painter->save();
+              QTransform m;
+              m.scale(1,-1);
+              m.rotate(-90);
+              painter->setTransform(m, true);
+            }*/
           }
         }
 
@@ -1820,8 +1815,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           hasPanel = true;
         }
 
-        if (!isHorizontal && !withArrow)
-          painter->restore();
+        /*if (!isHorizontal && !withArrow)
+          painter->restore();*/
       }
       else if (!(option->state & State_AutoRaise)
                || (!status.startsWith("normal") && !status.startsWith("disabled")))

@@ -700,32 +700,34 @@
 <path style="opacity:.7;font-family:Sans;fill:#39f;text-align:start;line-height:normal;color:#000;stroke-width:3;text-transform:none" id="path8455" d="m 409.5,169 0,29.5 3,0 0,-29.5 -3,0 z"/>
 <rect width="29.5" x="-198.5" y="403.5" height="9" style="opacity:0;fill:#fff;fill-rule:evenodd" id="rect8475" transform="matrix(0,-1,1,0,0,0)"/>
 </g>
-</g>
-<path style="fill:url(#linearGradient6029);fill-rule:evenodd;stroke:none" id="progress-normal-top" d="m 297.5,240.4996 32.5,0 0,-7.5 -32.5,0 0,7.5 z "/>
-<path style="fill:url(#linearGradient6025);fill-rule:evenodd;stroke:none" id="progress-normal-bottom" d="m 330,280.4996 0,-7.5 -32.5,0 0,7.5 32.5,0 z "/>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-left" transform="translate(47.5,71.749579)">
+<g style="fill-rule:evenodd">
+<path style="fill:url(#linearGradient6029)" id="progress-normal-top" d="m 297.5,240.4996 32.5,0 0,-7.5 -32.5,0 0,7.5 z "/>
+<path style="fill:url(#linearGradient6025)" id="progress-normal-bottom" d="m 330,280.4996 0,-7.5 -32.5,0 0,7.5 32.5,0 z "/>
+<g id="progress-normal-left" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient6019)" id="path9213" d="m 250,201.25 0,-32.5 -7.5,0 0,32.5 7.5,0 z"/>
 <rect width="7.5" x="-250" y="-201.25" height="32.5" style="fill:url(#linearGradient6021)" id="rect9215" transform="scale(-1,-1)"/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-bottomleft" transform="translate(47.5,71.749579)">
+<g id="progress-normal-bottomleft" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient6015)" id="path9219" d="m 250,208.75 0,-7.5 -7.5,0 c 0,3.80963 3.77876,7.5 7.5,7.5 z"/>
 <path style="fill:url(#linearGradient6017)" id="path9221" d="m 250,208.75 0,-7.5 -7.5,0 c 0,4.04343 3.51846,7.5 7.5,7.5 z"/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-topleft" transform="translate(47.5,71.749579)">
+<g id="progress-normal-topleft" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient6011)" id="path9225" d="m 250,168.75 0,-7.5 c -3.72124,0 -7.5,3.86715 -7.5,7.5 h 7.5 z "/>
 <path style="fill:url(#linearGradient6013)" id="path9227" d="m 250,168.75 0,-7.5 c -3.72124,0 -7.5,3.86715 -7.5,7.5 h 7.5 z "/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-right" transform="translate(47.5,71.749579)">
+<g id="progress-normal-right" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient6007)" id="path9231" d="m 282.5,168.75 0,32.5 7.5,0 0,-32.5 -7.5,0 z"/>
 <rect width="7.5" x="282.5" y="-201.25" height="32.5" style="fill:url(#linearGradient6009)" id="rect9233" transform="scale(1,-1)"/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-bottomright" transform="translate(47.5,71.749579)">
+<g id="progress-normal-bottomright" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient6003)" id="path9237" d="m 282.5,208.75 c 3.80963,0 7.5,-3.69037 7.5,-7.5 h -7.5 v 7.5 z "/>
 <path style="fill:url(#linearGradient6005)" id="path9239" d="m 282.5,208.75 0,-7.5 7.5,0 c 0,4.04343 -3.51846,7.5 -7.5,7.5 z"/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="progress-normal-topright" transform="translate(47.5,71.749579)">
+<g id="progress-normal-topright" transform="translate(47.5,71.749579)">
 <path style="fill:url(#linearGradient5999)" id="path9243" d="m 290,168.75 c 0,-3.72124 -3.69037,-7.5 -7.5,-7.5 v 7.5 h 7.5 z "/>
 <path style="fill:url(#linearGradient6001)" id="path9245" d="m 282.5,168.75 0,-7.5 c 3.72124,0 7.5,3.86715 7.5,7.5 h -7.5 z "/>
+</g>
+</g>
 </g>
 <path style="fill:#c5b2a3;fill-rule:evenodd;stroke:none" id="progress-pattern-normal-top" d="m 44,237.4996 16,0 0,-7.5 -16,0 0,7.5 z "/>
 <path style="fill:#ba9e86;fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottom" d="m 60,260.9996 0,-7.5 -16,0 0,7.5 16,0 z "/>
@@ -1341,15 +1343,6 @@
 <use width="450" x="0" y="0" height="1380" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,204.5,-4.2962647e-7)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,204.5,-4.2962647e-7)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled-right" transform="matrix(-1,0,0,1,204.5,-4.2962647e-7)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal" id="progress-focused" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-top" id="progress-focused-top" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-bottom" id="progress-focused-bottom" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-left" id="progress-focused-left" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-bottomleft" id="progress-focused-bottomleft" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-topleft" id="progress-focused-topleft" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-right" id="progress-focused-right" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-bottomright" id="progress-focused-bottomright" transform="translate(88.75,-1.2500004)"/>
-<use width="450" x="0" y="0" height="1380" xlink:href="#progress-normal-topright" id="progress-focused-topright" transform="translate(88.75,-1.2500004)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#arrow-up-normal" id="arrow-down-normal" transform="matrix(1,0,0,-1,0,873.00046)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#arrow-up-normal" id="arrow-right-normal" transform="matrix(0,1,-1,0,699.70024,406.50023)"/>
 <use width="450" x="0" y="0" height="1380" xlink:href="#arrow-up-normal" id="arrow-left-normal" transform="matrix(0,-1,1,0,-144.69322,484.00023)"/>
