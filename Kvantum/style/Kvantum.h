@@ -196,10 +196,15 @@ class Style : public QCommonStyle {
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
                      Qt::LayoutDirection ld = Qt::LeftToRight,
-                     const QPixmap &icon = QPixmap(),
+                     const QPixmap &px = QPixmap(),
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
+    /* Gets a pixmap with a proper size from an icon considering HDPI. */
+    QPixmap getPixmapFromIcon(const QIcon &icon,
+                              const QIcon::Mode iconmode,
+                              const QIcon::State iconstate,
+                              QSize iconSize) const;
 
     /* Draws background of translucent top widgets. */
     void drawBg(QPainter *p, const QWidget *widget) const;
@@ -239,49 +244,52 @@ class Style : public QCommonStyle {
     void removeFromSet(QObject *o);
 
   private:
-    QSvgRenderer *defaultRndr, *themeRndr;
-    ThemeConfig *defaultSettings, *themeSettings, *settings;
-
-    QString xdg_config_home;
-
-    QTimer *progresstimer;
-
-    /* List of busy progress bars. */
-    QMap<QWidget *,int> progressbars;
-    /* List of windows, tooltips and menus that are made translucent. */
-    QSet<const QWidget*> translucentWidgets;
-
-    ShortcutHandler *itsShortcutHandler;
-    WindowManager *itsWindowManager;
-    BlurHelper* blurHelper;
-
     /* Set theme dependencies. */
     void setupThemeDeps();
 
+    QSvgRenderer *defaultRndr_, *themeRndr_;
+    ThemeConfig *defaultSettings_, *themeSettings_, *settings_;
+
+    QString xdg_config_home;
+
+    QTimer *progresstimer_;
+
+    /* List of busy progress bars. */
+    QMap<QWidget*,int> progressbars_;
+    /* List of windows, tooltips and menus that are made translucent. */
+    QSet<const QWidget*> translucentWidgets_;
+
+    ShortcutHandler *itsShortcutHandler_;
+    WindowManager *itsWindowManager_;
+    BlurHelper *blurHelper_;
+
     /* The general specification of the theme. */
-    theme_spec tspec;
+    theme_spec tspec_;
 
     /* LibreOffice and Plasma need workarounds. */
-    bool isLibreoffice;
-    bool isPlasma;
+    bool isLibreoffice_;
+    bool isPlasma_;
     /* So far, only VirtualBox has introduced
        itself as "Qt-subapplication" and doesn't
        accept compositing. */
-    bool subApp;
+    bool subApp_;
     /* Some apps shouldn't have translucent windows. */
-    bool isOpaque;
+    bool isOpaque_;
 
     /* Hacks */
-    bool isDolphin;
-    bool isPcmanfm;
-    bool isKonsole;
-    bool isYakuake;
+    bool isDolphin_;
+    bool isPcmanfm_;
+    bool isKonsole_;
+    bool isYakuake_;
 
     /* For identifying KisSliderSpinBox. */
-    bool isKisSlider;
+    bool isKisSlider_;
 
     /* Search for the toolbutton flat indicator just once! */
-    bool hasFlatIndicator;
+    bool hasFlatIndicator_;
+
+    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps. */
+    int pixelRatio_;
 };
 }
 

@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="KvantumPreviewResources.qrc">
-    <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
+    <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="currentIndex">
@@ -155,11 +155,10 @@ width</string>
         <widget class="QPushButton" name="pushButton_3">
          <property name="text">
           <string>Push button
-with icon</string>
+with 32px folder icon</string>
          </property>
          <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="iconSize">
           <size>
@@ -176,11 +175,10 @@ with icon</string>
          </property>
          <property name="text">
           <string>Push button
-with icon</string>
+with 32px folder icon</string>
          </property>
          <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="iconSize">
           <size>
@@ -444,12 +442,12 @@ with an arrow</string>
        <item row="4" column="0">
         <widget class="QToolButton" name="toolButton_5">
          <property name="text">
-          <string>Toolbutton with 32x32 icon
+          <string>Toolbutton with 32px SVG icon
 and text below</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -470,7 +468,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -491,7 +489,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -504,12 +502,12 @@ and arrow</string>
        <item row="6" column="0">
         <widget class="QToolButton" name="toolButton_7">
          <property name="text">
-          <string>Toolbutton with 16x16 icon at the side
+          <string>Toolbutton with icon at the side
 and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -525,12 +523,12 @@ and arrow</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with 16x16 icon at the side
+          <string>Toolbutton with icon at the side
 and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -543,13 +541,13 @@ and arrow</string>
        <item row="7" column="0">
         <widget class="QToolButton" name="toolButton_8">
          <property name="text">
-          <string>Toolbutton with 16x16 icon at the side
+          <string>Toolbutton with icon at the side
 and arrow
 and menu popup button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="popupMode">
           <enum>QToolButton::MenuButtonPopup</enum>
@@ -568,13 +566,13 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with 16x16 icon at the side
+          <string>Toolbutton with icon at the side
 and arrow
 and menu popup button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="popupMode">
           <enum>QToolButton::MenuButtonPopup</enum>
@@ -593,12 +591,12 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with 32x32 icon
+          <string>Toolbutton with 32px SVG icon
 and text below</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -617,7 +615,7 @@ and text below</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with 32x32 icon
+          <string>Toolbutton with 32px PNG icon
 beside text</string>
          </property>
          <property name="icon">
@@ -638,7 +636,7 @@ beside text</string>
        <item row="3" column="0">
         <widget class="QToolButton" name="toolButton_4">
          <property name="text">
-          <string>Toolbutton with 32x32 icon
+          <string>Toolbutton with 32px PNG icon
 beside text</string>
          </property>
          <property name="icon">
@@ -671,13 +669,7 @@ width</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -870,7 +862,7 @@ radio button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -896,7 +888,7 @@ radio button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -984,7 +976,7 @@ check box</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1004,7 +996,7 @@ check box</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1111,7 +1103,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1147,7 +1139,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1183,7 +1175,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1222,7 +1214,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1258,7 +1250,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1297,7 +1289,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1336,7 +1328,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1378,7 +1370,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1987,7 +1979,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
          </column>
          <column>
@@ -2026,7 +2018,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
           <property name="text">
            <string>Editable</string>
@@ -2036,7 +2028,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
           </property>
           <property name="flags">
            <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -2057,7 +2049,7 @@ check box</string>
            </property>
            <property name="icon">
             <iconset resource="KvantumPreviewResources.qrc">
-             <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+             <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
            </property>
            <property name="text">
             <string>Non-Editable</string>
@@ -2169,7 +2161,7 @@ check box</string>
            <widget class="QWidget" name="tab_16">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 2</string>
@@ -2203,7 +2195,7 @@ check box</string>
            <widget class="QWidget" name="tab_13">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2353,7 +2345,7 @@ check box</string>
             </property>
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="label">
              <string>Page 1</string>
@@ -2405,7 +2397,7 @@ check box</string>
             </property>
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="label">
              <string>Page 1</string>
@@ -2460,7 +2452,7 @@ check box</string>
            <widget class="QWidget" name="tab_8">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 2</string>
@@ -2519,7 +2511,7 @@ check box</string>
            <widget class="QWidget" name="tab_9">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2564,7 +2556,7 @@ check box</string>
            <widget class="QWidget" name="tab_12">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2691,7 +2683,7 @@ check box</string>
    </property>
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
+     <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
    </property>
    <property name="text">
     <string>Test</string>
@@ -2705,7 +2697,7 @@ and tooltips</string>
   <action name="actionTest2">
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/kvantum.png</normaloff>:/Icons/kvantum.png</iconset>
+     <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
    </property>
    <property name="text">
     <string>Test</string>

@@ -43,13 +43,19 @@
 namespace Kvantum {
 WindowManager::WindowManager (QObject* parent) :
                QObject (parent),
-               _enabled (true),
-               _dragDistance (QApplication::startDragDistance()),
-               _dragDelay (QApplication::startDragTime()),
-               _dragAboutToStart (false),
-               _dragInProgress (false),
-               _locked (false)
+               pixelRatio_ (1),
+               enabled_ (true),
+               dragDistance_ (QApplication::startDragDistance()),
+               dragDelay_ (QApplication::startDragTime()),
+               dragAboutToStart_ (false),
+               dragInProgress_ (false),
+               locked_ (false)
 {
+#if QT_VERSION >= 0x050500
+  int dpr = qApp->devicePixelRatio();
+  if (dpr > 1)
+    pixelRatio_ = dpr;
+#endif
   _appEventFilter = new AppEventFilter( this );
   qApp->installEventFilter (_appEventFilter);
 }
@@ -85,33 +91,33 @@ void WindowManager::unregisterWidget (QWidget* widget)
 /*************************/
 void WindowManager::initializeWhiteList (const QStringList &list)
 {
-  _whiteList.clear();
+  whiteList_.clear();
 
   // add user specified whitelisted classnames
-  _whiteList.insert (ExceptionId ("MplayerWindow"));
-  _whiteList.insert (ExceptionId ("Screen@smplayer"));
-  _whiteList.insert (ExceptionId ("ViewSliders@kmix"));
-  _whiteList.insert (ExceptionId ("Sidebar_Widget@konqueror"));
+  whiteList_.insert (ExceptionId ("MplayerWindow"));
+  whiteList_.insert (ExceptionId ("Screen@smplayer"));
+  whiteList_.insert (ExceptionId ("ViewSliders@kmix"));
+  whiteList_.insert (ExceptionId ("Sidebar_Widget@konqueror"));
 
   foreach (const QString& exception, list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
-      _whiteList.insert (exception);
+      whiteList_.insert (exception);
   }
 }
 /*************************/
 void WindowManager::initializeBlackList (const QStringList &list)
 {
 
-  _blackList.clear();
-  _blackList.insert (ExceptionId ("CustomTrackView@kdenlive"));
-  _blackList.insert (ExceptionId ("MuseScore"));
+  blackList_.clear();
+  blackList_.insert (ExceptionId ("CustomTrackView@kdenlive"));
+  blackList_.insert (ExceptionId ("MuseScore"));
   foreach (const QString& exception, list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
-      _blackList.insert (exception);
+      blackList_.insert (exception);
   }
 
 }
@@ -127,12 +133,12 @@ bool WindowManager::eventFilter (QObject* object, QEvent* event)
       break;
 
     case QEvent::MouseMove:
-      if (object == _target.data())
+      if (object == target_.data())
         return mouseMoveEvent (object, event);
       break;
 
     case QEvent::MouseButtonRelease:
-      if (_target) return mouseReleaseEvent (object, event);
+      if (target_) return mouseReleaseEvent (object, event);
       break;
 
     default:
@@ -148,8 +154,8 @@ void WindowManager::timerEvent (QTimerEvent* event)
   if (event->timerId() == _dragTimer.timerId())
   {
     _dragTimer.stop();
-    if (_target)
-      startDrag (_target.data(), _globalDragPoint);
+    if (target_)
+      startDrag (target_.data(), globalDragPoint_);
   }
   else
     return QObject::timerEvent (event);
@@ -182,14 +188,14 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
     return false;
 
   // save target and drag point
-  _target = widget;
-  _dragPoint = position;
-  _globalDragPoint = mouseEvent->globalPos();
-  _dragAboutToStart = true;
+  target_ = widget;
+  dragPoint_ = position;
+  globalDragPoint_ = mouseEvent->globalPos();
+  dragAboutToStart_ = true;
 
   // send a move event to the current child with same position
   // if received, it is caught to actually start the drag
-  QPoint localPoint (_dragPoint);
+  QPoint localPoint (dragPoint_);
   if (child)
     localPoint = child->mapFrom (widget, localPoint);
   else
@@ -212,23 +218,23 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
 
   // cast event and check drag distance
   QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
-  if (!_dragInProgress)
+  if (!dragInProgress_)
   {
-    if (_dragAboutToStart)
+    if (dragAboutToStart_)
     {
-      if (mouseEvent->globalPos() == _globalDragPoint)
+      if (mouseEvent->globalPos() == globalDragPoint_)
       {
         // start timer,
-        _dragAboutToStart = false;
+        dragAboutToStart_ = false;
         if (_dragTimer.isActive())
           _dragTimer.stop();
-        _dragTimer.start (_dragDelay, this);
+        _dragTimer.start (dragDelay_, this);
 
       }
       else resetDrag();
 
     }
-    else if (QPoint (mouseEvent->globalPos() - _globalDragPoint).manhattanLength() >= _dragDistance)
+    else if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
       _dragTimer.start (0, this);
 
     return true;
@@ -334,7 +340,7 @@ bool WindowManager::isBlackListed (QWidget* widget)
 
   // list-based blacklisted widgets
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, _blackList)
+  foreach (const ExceptionId &id, blackList_)
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;
@@ -355,7 +361,7 @@ bool WindowManager::isWhiteListed (QWidget* widget) const
 {
 
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, _whiteList)
+  foreach (const ExceptionId &id, whiteList_)
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;
@@ -548,13 +554,13 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 /*************************/
 void WindowManager::resetDrag (void)
 {
-  _target.clear();
+  target_.clear();
   if (_dragTimer.isActive())
     _dragTimer.stop();
-  _dragPoint = QPoint();
-  _globalDragPoint = QPoint();
-  _dragAboutToStart = false;
-  _dragInProgress = false;
+  dragPoint_ = QPoint();
+  globalDragPoint_ = QPoint();
+  dragAboutToStart_ = false;
+  dragInProgress_ = false;
 }
 /*************************/
 void WindowManager::startDrag (QWidget *widget, const QPoint &position)
@@ -563,9 +569,9 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
     return;
 
   X11MoveTrigger (widget->window()->internalWinId(),
-                  position.x(), position.y());
+                  position.x()*pixelRatio_, position.y()*pixelRatio_);
 
-  _dragInProgress = true;
+  dragInProgress_ = true;
   return;
 }
 /*************************/
@@ -584,23 +590,23 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
   if (event->type() == QEvent::MouseButtonRelease)
   {
     // stop drag timer
-    if (_parent->_dragTimer.isActive())
-      _parent->resetDrag();
+    if (parent_->_dragTimer.isActive())
+      parent_->resetDrag();
 
     // unlock
-    if (_parent->isLocked())
-      _parent->setLocked (false);
+    if (parent_->isLocked())
+      parent_->setLocked (false);
   }
 
-  if (!_parent->enabled()) return false;
+  if (!parent_->enabled()) return false;
 
   /*
     If a drag is in progress, the widget will not receive any event.
     We trigger on the first MouseMove or MousePress events that are received
     by any widget in the application to detect that the drag is finished.
   */
-  if (_parent->_dragInProgress
-      && _parent->_target
+  if (parent_->dragInProgress_
+      && parent_->target_
       && (event->type() == QEvent::MouseMove
           || event->type() == QEvent::MouseButtonPress))
   {
@@ -618,7 +624,7 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
   Q_UNUSED(event);
 #else
   // store target window (see later)
-  QWidget* window (_parent->_target.data()->window());
+  QWidget* window (parent_->target_.data()->window());
 #endif
 
   /*
@@ -626,9 +632,9 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
     the mouse press that triggered the drag. Note that it triggers a resetDrag
   */
   QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
-                          _parent->_dragPoint,
+                          parent_->dragPoint_,
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-  qApp->sendEvent (_parent->_target.data(), &mouseEvent);
+  qApp->sendEvent (parent_->target_.data(), &mouseEvent);
 
 #if QT_VERSION < 0x050000
   if (event->type() == QEvent::MouseMove)

@@ -62,22 +62,22 @@ protected:
   // enable state
   bool enabled() const
   {
-    return _enabled;
+    return enabled_;
   }
   // enable state
   void setEnabled (bool value)
   {
-    _enabled = value;
+    enabled_ = value;
   }
   // drag distance (pixels)
   void setDragDistance (int value)
   {
-    _dragDistance = value;
+    dragDistance_ = value;
   }
   // drag delay (msec)
   void setDragDelay (int value)
   {
-    _dragDelay = value;
+    dragDelay_ = value;
   }
 
   // set list of whiteListed widgets
@@ -115,23 +115,25 @@ protected:
   // @{
   void setLocked (bool value)
   {
-    _locked = value;
+    locked_ = value;
   }
   // lock
   bool isLocked() const
   {
-    return _locked;
+    return locked_;
   }
   // @}
 private:
+  // the value of QT_DEVICE_PIXEL_RATIO
+  int pixelRatio_;
   // enability
-  bool _enabled;
+  bool enabled_;
   // drag distance
   /* this is copied from kwin::geometry */
-  int _dragDistance;
+  int dragDistance_;
   // drag delay
   /* this is copied from kwin::geometry */
-  int _dragDelay;
+  int dragDelay_;
 
   // wrapper for exception id
   class ExceptionId: public QPair<QString, QString>
@@ -163,44 +165,44 @@ private:
     it is read from options and is used to adjust
     per-app window dragging issues
   */
-  ExceptionSet _whiteList;
+  ExceptionSet whiteList_;
   // list of black listed special widgets
   /*
     it is read from options and is used to adjust
     per-app window dragging issues
   */
-  ExceptionSet _blackList;
+  ExceptionSet blackList_;
   // ! drag point
-  QPoint _dragPoint;
-  QPoint _globalDragPoint;
+  QPoint dragPoint_;
+  QPoint globalDragPoint_;
   // drag timer
   QBasicTimer _dragTimer;
   // target being dragged
 #if QT_VERSION < 0x050000
-  /* QWeakPointer is used in case the target gets deleted while drag
-      is in progress */
-  QWeakPointer<QWidget> _target;
+  /* QWeakPointer is used in case the target
+     gets deleted while drag is in progress */
+  QWeakPointer<QWidget> target_;
 #else
-  QPointer<QWidget> _target;
+  QPointer<QWidget> target_;
 #endif
   // true if drag is about to start
-  bool _dragAboutToStart;
+  bool dragAboutToStart_;
   // true if drag is in progress
-  bool _dragInProgress;
+  bool dragInProgress_;
   // true if drag is locked
-  bool _locked;
+  bool locked_;
 
   // provide application-wise event filter
   /*
-    it us used to unlock dragging and make sure event look is properly
-    restored after a drag has occurred
+    it us used to unlock dragging and make sure event look
+    is properly restored after a drag has occurred
   */
   class AppEventFilter: public QObject
   {
   public:
     AppEventFilter (WindowManager *parent) :
                    QObject (parent),
-                   _parent (parent)
+                   parent_ (parent)
     {}
   virtual bool eventFilter (QObject*, QEvent*);
   protected:
@@ -209,7 +211,7 @@ private:
     bool appMouseEvent (QObject*, QEvent*);
   private:
     // parent
-    WindowManager *_parent;
+    WindowManager *parent_;
   };
 
   // application event filter

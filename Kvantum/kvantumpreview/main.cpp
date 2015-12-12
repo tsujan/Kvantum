@@ -23,6 +23,9 @@ int main (int argc, char *argv[])
 {
   QApplication::setApplicationName ("KvantumViewer");
   QApplication viewer (argc,argv);
+#if QT_VERSION >= 0x050500
+  viewer.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
   KvantumPreview k (NULL);
   k.show();
   QList<QTabWidget *> list = k.findChildren<QTabWidget*>();

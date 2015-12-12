@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="Icons">
+    <file>icon.svg</file>
     <file>icon.png</file>
-    <file>kvantum.png</file>
+    <file>kvantum.svg</file>
   </qresource>
 </RCC>

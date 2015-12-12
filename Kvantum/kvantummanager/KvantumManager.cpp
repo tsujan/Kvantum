@@ -1039,7 +1039,7 @@ void KvantumManager::updateThemeList()
 
     /* add the whole list to the combobox */
     bool hasDefaultThenme (false);
-    if (list.isEmpty() || list.first() != "Kvantum (modified)")
+    if (list.isEmpty() || !list.contains("Kvantum (modified)"))
     {
         list.prepend ("Kvantum (default)");
         hasDefaultThenme = true;
@@ -1567,7 +1567,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.9.2</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.9.3</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")
