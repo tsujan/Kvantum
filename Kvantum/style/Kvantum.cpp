@@ -1630,6 +1630,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       const QToolButton *tb = qobject_cast<const QToolButton *>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+      //const QStyleOptionTitleBar *titleBar = qstyleoption_cast<const QStyleOptionTitleBar *>(option);
 
       /* this is just for tabbar scroll buttons */
       if (qobject_cast<QTabBar*>(getParent(widget,1)))
@@ -1637,6 +1638,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
         //fspec.expansion = 0;
       }
+      /*else if ((titleBar && (titleBar->titleBarFlags & Qt::WindowType_Mask) == Qt::Tool)
+               || qobject_cast<QDockWidget*>(getParent(widget,1)))
+      {
+        return;
+      }*/
       // color button
       else if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
 
@@ -6890,6 +6896,110 @@ void Style::drawComplexControl(ComplexControl control,
       break;
     }
 
+    case CC_MdiControls: { // on menubar
+      QStyleOptionButton btnOpt;
+      btnOpt.QStyleOption::operator=(*option);
+      btnOpt.state &= ~State_MouseOver;
+      const QIcon::Mode iconmode =
+        (option->state & State_Enabled) ?
+        (option->state & State_Sunken) ? QIcon::Active :
+        (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+        : QIcon::Disabled;
+      const QIcon::State iconstate =
+        (option->state & State_On) ? QIcon::On : QIcon::Off;
+      if (option->subControls & QStyle::SC_MdiCloseButton)
+      {
+        if (option->activeSubControls & QStyle::SC_MdiCloseButton)
+        {
+          if (option->state & State_Sunken)
+          {
+            btnOpt.state |= State_Sunken;
+            btnOpt.state &= ~State_Raised;
+          }
+          else
+          {
+            btnOpt.state |= State_MouseOver;
+            btnOpt.state &= ~State_Raised;
+            btnOpt.state &= ~State_Sunken;
+          }
+        }
+        else
+        {
+          btnOpt.state |= State_Raised;
+          btnOpt.state &= ~State_Sunken;
+          btnOpt.state &= ~State_MouseOver;
+        }
+        btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiCloseButton, widget);
+        //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
+        QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarCloseButton,&btnOpt,widget),
+                                       iconmode,iconstate,QSize(16,16));
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        painter->drawPixmap(iconRect,pm);
+      }
+      if (option->subControls & QStyle::SC_MdiNormalButton)
+      {
+        if (option->activeSubControls & QStyle::SC_MdiNormalButton)
+        {
+          if (option->state & State_Sunken)
+          {
+            btnOpt.state |= State_Sunken;
+            btnOpt.state &= ~State_Raised;
+            btnOpt.state &= ~State_MouseOver;
+          }
+          else
+          {
+            btnOpt.state |= State_MouseOver;
+            btnOpt.state &= ~State_Raised;
+            btnOpt.state &= ~State_Sunken;
+          }
+        }
+        else
+        {
+          btnOpt.state |= State_Raised;
+          btnOpt.state &= ~State_Sunken;
+          btnOpt.state &= ~State_MouseOver;
+        }
+        btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiNormalButton, widget);
+        //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
+        QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarNormalButton,&btnOpt,widget),
+                                       iconmode,iconstate,QSize(16,16));
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        painter->drawPixmap(iconRect,pm);
+      }
+      if (option->subControls & QStyle::SC_MdiMinButton)
+      {
+        if (option->activeSubControls & QStyle::SC_MdiMinButton)
+        {
+          if (option->state & State_Sunken)
+          {
+            btnOpt.state |= State_Sunken;
+            btnOpt.state &= ~State_Raised;
+            btnOpt.state &= ~State_MouseOver;
+          }
+          else
+          {
+            btnOpt.state |= State_MouseOver;
+            btnOpt.state &= ~State_Raised;
+            btnOpt.state &= ~State_Sunken;
+          }
+        }
+        else
+        {
+          btnOpt.state |= State_Raised;
+          btnOpt.state &= ~State_Sunken;
+          btnOpt.state &= ~State_MouseOver;
+        }
+        btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiMinButton, widget);
+        //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
+        QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarMinButton,&btnOpt,widget),
+                                                    iconmode,iconstate,QSize(16,16));
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        painter->drawPixmap(iconRect,pm);
+      }
+
+      break;
+    }
+
     default : QCommonStyle::drawComplexControl(control,option,painter,widget);
   }
 }
@@ -9285,18 +9395,24 @@ QIcon Style::standardIcon (QStyle::StandardPixmap standardIcon,
       return QIcon(pm);
     }
     case SP_TitleBarMinButton : {
-      int s = 12;
+      int s = 12*pixelRatio_;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-minimize-normal",QRect(0,0,s,s)))
+      QString status("normal");
+      if (option)
+        status = (option->state & State_Enabled) ?
+                   (option->state & State_Sunken) ? "pressed" :
+                   (option->state & State_MouseOver) ? "focused" : "normal"
+                 : "disabled";
+      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-minimize-"+status,QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
     case SP_TitleBarMaxButton : {
-      int s = 12;
+      int s = 12*pixelRatio_;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -9308,18 +9424,24 @@ QIcon Style::standardIcon (QStyle::StandardPixmap standardIcon,
     }
     case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
-      int s = 12;
+      int s = 12*pixelRatio_;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-normal",QRect(0,0,s,s)))
+      QString status("normal");
+      if (qstyleoption_cast<const QStyleOptionButton *>(option))
+        status = (option->state & State_Enabled) ?
+                   (option->state & State_Sunken) ? "pressed" :
+                   (option->state & State_MouseOver) ? "focused" : "normal"
+                 : "disabled";
+      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-"+status,QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
     case SP_TitleBarMenuButton : {
-      int s = 12;
+      int s = 12*pixelRatio_;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -9330,13 +9452,19 @@ QIcon Style::standardIcon (QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarNormalButton : {
-      int s = 12;
+      int s = 12*pixelRatio_;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-normal",QRect(0,0,s,s)))
+      QString status("normal");
+      if (qstyleoption_cast<const QStyleOptionButton *>(option))
+        status = (option->state & State_Enabled) ?
+                   (option->state & State_Sunken) ? "pressed" :
+                   (option->state & State_MouseOver) ? "focused" : "normal"
+                 : "disabled";
+      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-"+status,QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
