@@ -540,6 +540,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxNormalBtn->setChecked (defaultSettings.value ("normal_default_pushbutton").toBool());
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
+    ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
     defaultSettings.endGroup();
 
     defaultSettings.beginGroup ("General");
@@ -853,6 +854,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxNormalBtn->setChecked (themeSettings.value ("normal_default_pushbutton").toBool());
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
+                ui->checkBoxToolbar->setChecked (themeSettings.value ("single_top_toolbar").toBool());
                 themeSettings.endGroup();
             }
         }
@@ -1245,6 +1247,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
         hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
+        hackKeys.insert("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
@@ -1306,6 +1309,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("normal_default_pushbutton", ui->checkBoxNormalBtn->isChecked());
         themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconlessBtn->isChecked());
         themeSettings.setValue ("iconless_menu", ui->checkBoxIconlessMenu->isChecked());
+        themeSettings.setValue ("single_top_toolbar", ui->checkBoxToolbar->isChecked());
 #endif
         themeSettings.endGroup();
 

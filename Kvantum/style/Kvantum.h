@@ -247,6 +247,9 @@ class Style : public QCommonStyle {
     /* Set theme dependencies. */
     void setupThemeDeps();
 
+    /* Is this a toolbar that should be styled? */
+    bool isStylableToolbar(const QWidget *w) const;
+
     QSvgRenderer *defaultRndr_, *themeRndr_;
     ThemeConfig *defaultSettings_, *themeSettings_, *settings_;
 

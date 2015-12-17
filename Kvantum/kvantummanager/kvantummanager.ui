@@ -527,6 +527,17 @@ with LXQT Session Settings.</string>
               </property>
              </widget>
             </item>
+            <item row="11" column="1">
+             <widget class="QCheckBox" name="checkBoxToolbar">
+              <property name="toolTip">
+               <string>Only the top toolbar should be styled?
+By default, all toolbars are styled.</string>
+              </property>
+              <property name="text">
+               <string>Single top toolbar</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="tab_2">

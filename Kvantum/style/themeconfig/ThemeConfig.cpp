@@ -597,6 +597,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","iconless_menu");
   r.iconless_menu = v.toBool();
 
+  v = getValue("Hacks","single_top_toolbar");
+  r.single_top_toolbar = v.toBool();
+
   return r;
 }
 }

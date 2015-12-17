@@ -473,6 +473,13 @@ iconless_pushbutton               true/false          No icon for push buttons t
 
 iconless_menu                     true/false          No icon for menus?
 
+single_top_toolbar                true/false          Style only the top toolbar? If true,
+                                                      only the top horizontal toolbar, which
+                                                      is immediately below the menubar or at
+                                                      the top of the main window, will be
+                                                      styled. By default all toolbars are
+                                                      styled, of course.
+
                            **********************
                            *** Other Sections ***
                            **********************
@@ -529,9 +536,9 @@ text.normal.color                 string (#RRGGBBAA)  The color of the normal te
                                                       override the text colors defined under
                                                       the section "GeneralColors".
                                                       Note: State-specific text colors do not
-                                                      have meaning for Window, Dock, LineEdit
-                                                      and frame widgets (namely GenericFrame,
-                                                      TabFrame and TabBarFrame).
+                                                      have meaning for Window, Dialog, Dock,
+                                                      LineEdit and frame widgets (namely
+                                                      GenericFrame, TabFrame and TabBarFrame).
 
 text.focus.color                  string (#RRGGBBAA)  The color of the focused/hover text.
 

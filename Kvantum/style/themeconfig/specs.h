@@ -174,6 +174,8 @@ typedef struct {
   bool iconless_pushbutton;
   /* no icon for menuitems? */
   bool iconless_menu;
+  /* only style the top toolbar? */
+  bool single_top_toolbar;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -380,6 +382,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.normal_default_pushbutton = false;
   hspec.iconless_pushbutton = false;
   hspec.iconless_menu = false;
+  hspec.single_top_toolbar = false;
 }
 }
 

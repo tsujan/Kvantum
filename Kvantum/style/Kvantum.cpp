@@ -493,6 +493,28 @@ void Style::noTranslucency(QObject *o)
   translucentWidgets_.remove(widget);
 }
 
+bool Style::isStylableToolbar(const QWidget *w) const
+{
+  const QToolBar *tb = qobject_cast<const QToolBar*>(w);
+  if (!tb) return false;
+  if (!settings_->getHacksSpec().single_top_toolbar) return true;
+  if (tb->orientation() == Qt::Vertical) return false;
+  if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(w,1)))
+  {
+    if (QMenuBar *mb = mw->menuBar()) // WARNING: an empty menubar may be created
+    {
+      if (mb->isVisible())
+      {
+        if (mb->y()+mb->height() == tb->y())
+          return true;
+      }
+      else if (tb->y() == 0) return true;
+    }
+    else if (tb->y() == 0) return true;
+  }
+  return false;
+}
+
 void Style::polish(QWidget *widget)
 {
   if (!widget) return;
@@ -525,10 +547,10 @@ void Style::polish(QWidget *widget)
     QWidget *gp = getParent(p,1);
     if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
          && !qobject_cast<QLineEdit*>(widget)
-         && qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar*>(p) // Krita, Amarok
+         && qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p) // Krita, Amarok
          && !p->findChild<QTabBar*>())
         || (widget->inherits("AnimatedLabelStack") // Amarok
-            && qobject_cast<QToolBar*>(gp)
+            && isStylableToolbar(gp)
             && qobject_cast<QMainWindow*>(getParent(gp,1))))
     {
       QPalette palette = widget->palette();
@@ -2961,9 +2983,9 @@ void Style::drawPrimitive(PrimitiveElement element,
             if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
               dspec.element = "flat-"+dspec1.element+"-down";
           }
-          else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+          else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
                     && !p->findChild<QTabBar*>())
-                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                   || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
                        && !gp->findChild<QTabBar*>()))
           {
             if ((!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
@@ -3352,7 +3374,7 @@ void Style::drawControl(ControlElement element,
       QRect r(option->rect.x() + marginH,
               option->rect.y() + pixelMetric(PM_MenuVMargin),
               option->rect.width() - 2*marginH,
-              7);
+              8);
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
       renderElement(painter,
                     dspec.element+"-tearoff-"+status,
@@ -5116,13 +5138,12 @@ void Style::drawControl(ControlElement element,
       if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
         break;
 
-      const QString group = "Toolbar";
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
+      bool stylable(true);
+      if (settings_->getHacksSpec().single_top_toolbar && !isStylableToolbar(widget))
+        stylable = false;
 
       QRect r = option->rect;
-      if (!(option->state & State_Horizontal))
+      if (stylable && !(option->state & State_Horizontal))
       {
         r.setRect(0, 0, h, w);
         painter->save();
@@ -5131,15 +5152,6 @@ void Style::drawControl(ControlElement element,
         m.rotate(-90);
         painter->setTransform(m, true);
       }
-
-      if (status.startsWith("disabled"))
-      {
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      QString suffix = "-normal";
-      if (isInactive)
-        suffix = "-normal-inactive";
 
       if (tspec_.merge_menubar_with_toolbar)
       {
@@ -5150,7 +5162,7 @@ void Style::drawControl(ControlElement element,
             if (mb->isVisible())
             {
               mb->update();
-              if ((option->state & State_Horizontal)
+              if (stylable && (option->state & State_Horizontal)
                   && mb->y()+mb->height() == widget->y())
               {
                 r.adjust(0,-mb->height(),0,0);
@@ -5159,6 +5171,21 @@ void Style::drawControl(ControlElement element,
           }
         }
       }
+
+      if (!stylable) break;
+
+      const QString group = "Toolbar";
+      const frame_spec fspec = getFrameSpec(group);
+      const interior_spec ispec = getInteriorSpec(group);
+
+      if (status.startsWith("disabled"))
+      {
+        painter->save();
+        painter->setOpacity(DISABLED_OPACITY);
+      }
+      QString suffix = "-normal";
+      if (isInactive)
+        suffix = "-normal-inactive";
 
       renderFrame(painter,r,fspec,fspec.element+suffix);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
@@ -5570,9 +5597,9 @@ void Style::drawControl(ControlElement element,
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = lspec1.normalColor;
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+            else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
                       && !p->findChild<QTabBar*>())
-                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
                          && !gp->findChild<QTabBar*>()))
             {
               const QToolBar *toolBar = qobject_cast<QToolBar *>(p);
@@ -6052,9 +6079,9 @@ void Style::drawComplexControl(ComplexControl control,
                 if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
-              else if ((qobject_cast<QMainWindow*>(gp) && qobject_cast<QToolBar *>(p)
+              else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
                         && !p->findChild<QTabBar*>())
-                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && qobject_cast<QToolBar *>(gp)
+                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
                            && !gp->findChild<QTabBar*>()))
               {
                 const QToolBar *toolBar = qobject_cast<QToolBar *>(p);
@@ -7100,8 +7127,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       }
 
       if (metric == PM_MenuTearoffHeight)
-        /* we set the height of tearoff indicator to be 7px */
-        return v + 7;
+        /* we set the height of tearoff indicator to be 8px */
+        return v + 8;
       else if (metric == PM_MenuHMargin)
         return h;
       else return v;
@@ -9576,7 +9603,7 @@ bool Style::renderElement(QPainter *painter,
       QPixmap pixmap;
       if (!QPixmapCache::find(str, &pixmap))
       {
-        pixmap = QPixmap (width, height);
+        pixmap = QPixmap(width, height);
         pixmap.fill(QColor(Qt::transparent));
         QPainter p;
         p.begin(&pixmap);
