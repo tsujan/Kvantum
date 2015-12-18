@@ -121,6 +121,9 @@ class Style : public QCommonStyle {
 #endif
 
   private:
+    /* Set theme dependencies. */
+    void setupThemeDeps();
+
     /* Render the element from the SVG file into the given bounds. */
     bool renderElement(QPainter *painter,
                        const QString &element,
@@ -235,6 +238,17 @@ class Style : public QCommonStyle {
       return getShadow(widgetName,thickness,thickness);
     }
 
+    /* Is this a toolbar that should be styled? */
+    bool isStylableToolbar(const QWidget *w) const;
+
+    /* For some fonts, e.g. Noto Sans, QFontMetrics(font)::height() returns
+       a too big number but QFontMetrics::boundingRect() returns the height
+       of character M correctly. I don't know why they also use the so-called
+       "magic constant" 1.6 but it doesn't do any harm. */
+    int getFontHeight(QFont f) const {
+      return QFontMetrics(f).boundingRect(QLatin1Char('M')).height()*1.6;
+    }
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgresses();
@@ -244,12 +258,6 @@ class Style : public QCommonStyle {
     void removeFromSet(QObject *o);
 
   private:
-    /* Set theme dependencies. */
-    void setupThemeDeps();
-
-    /* Is this a toolbar that should be styled? */
-    bool isStylableToolbar(const QWidget *w) const;
-
     QSvgRenderer *defaultRndr_, *themeRndr_;
     ThemeConfig *defaultSettings_, *themeSettings_, *settings_;
 

@@ -3,6 +3,7 @@ V0.9.3
  * Support high DPI displays (when QT_DEVICE_PIXEL_RATIO > 1 and even when AA_UseHighDpiPixmaps isn't set).
  * Draw subwindow titlebar buttons on menubars exactly as on MDI titlebars.
  * Added a hacking key for not styling any toolbar other than the top one.
+ * Calculate the height of problematic fonts like Noto Sans correctly.
 
 V0.9.2
 ---------
