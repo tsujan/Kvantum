@@ -243,10 +243,11 @@ class Style : public QCommonStyle {
 
     /* For some fonts, e.g. Noto Sans, QFontMetrics(font)::height() returns
        a too big number but QFontMetrics::boundingRect() returns the height
-       of character M correctly. I don't know why they also use the so-called
-       "magic constant" 1.6 but it doesn't do any harm. */
+       of character M correctly. I don't know how they found the so-called
+       "magic constant" 1.6 but it seems to be correct. */
     int getFontHeight(QFont f) const {
-      return QFontMetrics(f).boundingRect(QLatin1Char('M')).height()*1.6;
+      return qMin((int)(QFontMetrics(f).boundingRect(QLatin1Char('M')).height()*1.6),
+                  QFontMetrics(f).height());
     }
 
   private slots:

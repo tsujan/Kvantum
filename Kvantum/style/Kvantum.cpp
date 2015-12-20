@@ -1501,7 +1501,8 @@ static inline QSize textSize (const QFont &font, const QString &text)
     QStringList l = t.split('\n');
 
     //th = QFontMetrics(font).height()*(l.size());
-    th = QFontMetrics(font).boundingRect(QLatin1Char('M')).height()*1.6;
+    th = qMin((int)(QFontMetrics(font).boundingRect(QLatin1Char('M')).height()*1.6),
+              QFontMetrics(font).height());
     th *= l.size();
     for (int i=0; i<l.size(); i++)
       tw = qMax(tw,QFontMetrics(font).width(l[i]));
@@ -4381,8 +4382,10 @@ void Style::drawControl(ControlElement element,
       /* checking State_Horizontal wouldn't work with
          Krita's progress-spin boxes (KisSliderSpinBox) */
       const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
+      bool isVertical(false);
       if (pb && pb->orientation() == Qt::Vertical)
       {
+        isVertical = true;
         /* we don't save and restore the painter to draw
            the contents and the label correctly below */
         r.setRect(y, x, h, w);
@@ -4391,6 +4394,12 @@ void Style::drawControl(ControlElement element,
         m.rotate(90);
         painter->setTransform(m, true);
       }
+
+      /* When the maximum progressbar thickness isn't greater than
+         the frame expansion, it means that progressbars should be
+         always rounded. Here, we force this rule on KCapacityBar. */
+      if (fspec.expansion > 0 && tspec_.progressbar_thickness <= fspec.expansion)
+        fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
 
       if (status.startsWith("disabled"))
       {
@@ -4436,6 +4445,17 @@ void Style::drawControl(ControlElement element,
         }
         const interior_spec ispec = getInteriorSpec(group);
 
+        bool isVertical = false;
+        bool inverted = false;
+        const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
+        if (pb)
+        {
+          if (pb->orientation() == Qt::Vertical)
+            isVertical = true;
+          if (pb->invertedAppearance())
+            inverted = true;
+        }
+
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
         if (tspec_.vertical_spin_indicators && isKisSlider_)
@@ -4447,18 +4467,10 @@ void Style::drawControl(ControlElement element,
         {
           const frame_spec fspec1 = getFrameSpec("Progressbar");
           fspec.expansion = fspec1.expansion - (tspec_.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
+          // like in CE_ProgressBarGroove
+          if (fspec1.expansion > 0 && tspec_.progressbar_thickness <= fspec1.expansion)
+            fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
-        }
-
-        bool isVertical = false;
-        bool inverted = false;
-        const QProgressBar *pb = qobject_cast<const QProgressBar *>(widget);
-        if (pb)
-        {
-          if (pb->orientation() == Qt::Vertical)
-            isVertical = true;
-          if (pb->invertedAppearance())
-            inverted = true;
         }
 
         QRect r = option->rect;
@@ -4620,8 +4632,8 @@ void Style::drawControl(ControlElement element,
 
     case CE_ProgressBarLabel : {
       if (tspec_.textless_progressbar
-          // always show text in KCapacityBar
-          && !(widget && widget->inherits("KCapacityBar")))
+          // always show text in KCapacityBar and KisSliderSpinBox
+          && !(widget && widget->inherits("KCapacityBar")) && !isKisSlider_)
         break;
 
       const QStyleOptionProgressBar *opt =
@@ -4639,12 +4651,19 @@ void Style::drawControl(ControlElement element,
         QFont f(painter->font());
         if (lspec.boldFont) f.setBold(true);
         bool isVertical = false;
+        if (opt2 && opt2->orientation == Qt::Vertical)
+          isVertical = true;
+
+        if (tspec_.progressbar_thickness > 0
+            && getFontHeight(f) >= (isVertical ? w : h)
+            // KCapacityBar and KisSliderSpinBox don't obey thickness setting
+            && !(widget && widget->inherits("KCapacityBar")) && !isKisSlider_)
+          break;
+
         int length = w;
         QRect r = option->rect;
-
-        if (opt2 && opt2->orientation == Qt::Vertical)
+        if (isVertical)
         {
-          isVertical = true;
           length = h;
           r.setRect(0, 0, h, w);
           QTransform m;
@@ -4658,12 +4677,6 @@ void Style::drawControl(ControlElement element,
           }
           painter->setTransform(m, true);
         }
-
-        if (tspec_.progressbar_thickness > 0
-            && getFontHeight(f) >= (isVertical ? w : h)
-            // KCapacityBar doesn't obey thickness setting
-            && !(widget && widget->inherits("KCapacityBar")))
-          break;
 
         QString txt = opt->text;
         if (!txt.isEmpty())

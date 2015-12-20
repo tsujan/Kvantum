@@ -5,6 +5,8 @@ V0.9.3
  * Added a hacking key for not styling any toolbar other than the top one.
  * Calculate the height of problematic fonts like Noto Sans correctly.
  * Corrected a typo in SE_TabWidgetRightCorner.
+ * Force progressbar roundness on KCapacityBar in all circumstances.
+ * Always show text in KisSliderSpinBox.
 
 V0.9.2
 ---------
