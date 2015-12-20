@@ -8663,7 +8663,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             r = QRect(QPoint(paneRect.x(), paneRect.y()+paneRect.height()),
                       twf->leftCornerWidgetSize);
             break;
-          case QTabBar::RoundedWest:
+          /* WARNING: The Qt documentation says, "Corner widgets are designed for North
+             and South tab positions; other orientations are known to not work properly." */
+          /*case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
             r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width()
                                          +(option->direction == Qt::RightToLeft ? paneRect.width() : 0),
@@ -8676,7 +8678,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                                                                   : paneRect.x()+paneRect.width(),
                              paneRect.y()),
                       twf->leftCornerWidgetSize);
-            break;
+            break;*/
           default: break;
         }
         r = visualRect(twf->direction, twf->rect, r);
@@ -8695,29 +8697,29 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           case QTabBar::RoundedNorth:
           case QTabBar::TriangularNorth:
             r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
-                             paneRect.y()-twf->leftCornerWidgetSize.height()),
-                      twf->leftCornerWidgetSize);
+                             paneRect.y()-twf->rightCornerWidgetSize.height()),
+                      twf->rightCornerWidgetSize);
             break;
           case QTabBar::RoundedSouth:
           case QTabBar::TriangularSouth:
             r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
                              paneRect.y()+paneRect.height()),
-                      twf->leftCornerWidgetSize);
+                      twf->rightCornerWidgetSize);
             break;
-          case QTabBar::RoundedWest:
+          /*case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
-            r = QRect(QPoint(paneRect.x()-twf->leftCornerWidgetSize.width()
+            r = QRect(QPoint(paneRect.x()-twf->rightCornerWidgetSize.width()
                                          +(option->direction == Qt::RightToLeft ? paneRect.width() : 0),
                              paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
-                      twf->leftCornerWidgetSize);
+                      twf->rightCornerWidgetSize);
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
             r = QRect(QPoint(option->direction == Qt::RightToLeft ? paneRect.x()
                                                                   : paneRect.x()+paneRect.width(),
                              paneRect.y()+paneRect.height()-twf->rightCornerWidgetSize.height()),
-                      twf->leftCornerWidgetSize);
-            break;
+                      twf->rightCornerWidgetSize);
+            break;*/
           default: break;
         }
         r = visualRect(twf->direction, twf->rect, r);
