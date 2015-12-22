@@ -403,9 +403,6 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","spread_progressbar", empty);
   r.spread_progressbar = v.toBool();
 
-  v = getValue("General","textless_progressbar", empty);
-  r.textless_progressbar = v.toBool();
-
   v = getValue("General","progressbar_thickness", empty);
   r.progressbar_thickness = v.toInt();
 

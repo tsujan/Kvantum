@@ -824,6 +824,21 @@ some apps set it themeselves.</string>
             <string>Miscellaneous</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_11">
+            <item row="13" column="2">
+             <widget class="QComboBox" name="comboToolButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+              </property>
+             </widget>
+            </item>
             <item row="7" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxNoScrollArrow">
               <property name="toolTip">
@@ -856,7 +871,7 @@ Checking this box removes arrows as far as possible.</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="1">
+            <item row="13" column="1">
              <widget class="QLabel" name="label_2">
               <property name="toolTip">
                <string>Will have effect only if style
@@ -868,22 +883,7 @@ Default is Follow Style.</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="2">
-             <widget class="QComboBox" name="comboToolButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="toolTip">
-               <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="1" colspan="3">
+            <item row="10" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxMenuToolbar">
               <property name="toolTip">
                <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -894,7 +894,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="1" colspan="3">
+            <item row="9" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxMenubar">
               <property name="toolTip">
                <string>Mouse tracking is enabled
@@ -905,7 +905,7 @@ for menubars by default.</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1" colspan="3">
+            <item row="8" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxRubber">
               <property name="toolTip">
                <string>By default, drop rectangles for movable
@@ -917,18 +917,7 @@ option fills them with the highlight color.</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxProgress">
-              <property name="toolTip">
-               <string>Progreesbars show percentage
-labels by default.</string>
-              </property>
-              <property name="text">
-               <string>Textless Progressbars</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="0">
+            <item row="13" column="0">
              <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -961,6 +950,18 @@ labels by default.</string>
               </property>
              </widget>
             </item>
+            <item row="1" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxClick">
+              <property name="toolTip">
+               <string>Activate view items always on double clicking?
+When unchecked, single-click will be preferred
+but KDE setting always has priority over this.</string>
+              </property>
+              <property name="text">
+               <string>Double-click for view items</string>
+              </property>
+             </widget>
+            </item>
             <item row="2" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxSpin">
               <property name="toolTip">
@@ -984,19 +985,7 @@ line-edit with arrow (and icon, if it exists)?</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxClick">
-              <property name="toolTip">
-               <string>Activate view items always on double clicking?
-When unchecked, single-click will be preferred
-but KDE setting always has priority over this.</string>
-              </property>
-              <property name="text">
-               <string>Double-click for view items</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="3">
+            <item row="13" column="3">
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -1009,7 +998,7 @@ but KDE setting always has priority over this.</string>
               </property>
              </spacer>
             </item>
-            <item row="12" column="1">
+            <item row="11" column="1">
              <spacer name="verticalSpacer_7">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -1025,7 +1014,7 @@ but KDE setting always has priority over this.</string>
               </property>
              </spacer>
             </item>
-            <item row="13" column="1">
+            <item row="12" column="1">
              <widget class="QLabel" name="labelTooltipDelay">
               <property name="toolTip">
                <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1038,7 +1027,7 @@ Zero means tooltips are shown instantly.
               </property>
              </widget>
             </item>
-            <item row="13" column="2" alignment="Qt::AlignLeft">
+            <item row="12" column="2" alignment="Qt::AlignLeft">
              <widget class="QSpinBox" name="spinTooltipDelay">
               <property name="toolTip">
                <string>The delay, in milliseconds, before a tooltip is shown.

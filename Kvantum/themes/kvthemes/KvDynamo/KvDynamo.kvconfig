@@ -12,7 +12,6 @@ splitter_width=7
 check_size=21
 slider_handle_width=18
 slider_handle_length=18
-textless_progressbar=false
 spread_progressbar=true
 progressbar_thickness=8
 menubar_mouse_tracking=true

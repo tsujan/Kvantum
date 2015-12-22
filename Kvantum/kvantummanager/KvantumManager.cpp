@@ -553,7 +553,6 @@ void KvantumManager::defaultThemeButtons()
       ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
-    ui->checkBoxProgress->setChecked (defaultSettings.value ("textless_progressbar").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
         ui->checkBoxMenubar->setChecked (defaultSettings.value ("menubar_mouse_tracking").toBool());
@@ -632,7 +631,7 @@ void KvantumManager::resizeConfPage (bool thirdPage)
   QSize newSize  = size().expandedTo (sizeHint()
                                       + (thirdPage ?
                                            ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
-                                             + QSize (0, 3*ui->saveButton->sizeHint().height() + 10
+                                             + QSize (0, 2*ui->saveButton->sizeHint().height() + 10
                                                          + ui->checkBoxCombo->sizeHint().height()
 #if QT_VERSION >= 0x050000
                                                          + ui->spinTooltipDelay->sizeHint().height()
@@ -763,8 +762,6 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("scroll_arrows"))
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
-                if (themeSettings.contains ("textless_progressbar"))
-                    ui->checkBoxProgress->setChecked (themeSettings.value ("textless_progressbar").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
                     ui->checkBoxRubber->setChecked (themeSettings.value ("fill_rubberband").toBool());
                 if (themeSettings.contains ("menubar_mouse_tracking"))
@@ -1254,7 +1251,6 @@ void KvantumManager::writeConfig()
         generalKeys.insert("joined_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
-        generalKeys.insert("textless_progressbar", boolToStr (ui->checkBoxProgress->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
@@ -1344,7 +1340,6 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
-        themeSettings.setValue ("textless_progressbar", ui->checkBoxProgress->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());

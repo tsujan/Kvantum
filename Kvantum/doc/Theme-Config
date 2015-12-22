@@ -251,16 +251,15 @@ spread_progressbar                true/false          Spread progressbar's indic
                                                       the indicator is drawn inside
                                                       progressbar's frame.
 
-textless_progressbar              true/false          No percentage label for progressbars?
-                                                      They have percentage labels by
-                                                      default -- unless the labels do not
-                                                      fit into the bars because of a small
-                                                      value for the following key.
-
 progressbar_thickness             integer             If positive, it sets the (maximum)
-                                                      progressbar thickness. It is zero
-                                                      by default, which means there is no
-                                                      limit to progressbar thickness.
+                                                      progressbar thickness as far as
+                                                      possible. It is zero by default,
+                                                      which means there is no limit to
+                                                      progressbar thickness.
+                                                      
+                                                      Note: If it is positive but less
+                                                      than the height of the progressbar
+                                                      text, the text will not be shown.
 
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
@@ -535,6 +534,7 @@ text.normal.color                 string (#RRGGBBAA)  The color of the normal te
                                                       name like white, black, red, etc. It may
                                                       override the text colors defined under
                                                       the section "GeneralColors".
+                                                      
                                                       Note: State-specific text colors do not
                                                       have meaning for Window, Dialog, Dock,
                                                       LineEdit and frame widgets (namely

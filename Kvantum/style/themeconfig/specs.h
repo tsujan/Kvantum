@@ -64,8 +64,6 @@ typedef struct {
   /* let progress indicator spread across the whole
      progress groove and not just its interior */
   bool spread_progressbar;
-  /* no percentage label for progressbars? */
-  bool textless_progressbar;
   /* thin progressbars? */
   int progressbar_thickness;
   /* enable mouse tracking in menubars? */
@@ -316,7 +314,6 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.merge_menubar_with_toolbar = false;
   tspec.toolbutton_style = 0;
   tspec.spread_progressbar = false;
-  tspec.textless_progressbar = false;
   tspec.progressbar_thickness = 0;
   tspec.menubar_mouse_tracking = true;
   tspec.composite = false;

@@ -14,7 +14,6 @@ slider_handle_length=12
 center_toolbar_handle=true
 slim_toolbars=true
 x11drag=true
-textless_progressbar=false
 menubar_mouse_tracking=true
 toolbutton_style=0
 double_click=false

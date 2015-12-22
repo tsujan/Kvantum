@@ -28,7 +28,6 @@ opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_
 popup_blurring=true
 scroll_arrows=false
 small_icon_size=16
-textless_progressbar=false
 toolbar_icon_size=16
 toolbutton_style=0
 translucent_windows=false

@@ -1234,7 +1234,7 @@ enum toolbarButtonKind
   tbAlone
 };
 
-static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
+/*static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
 {
   if (!tb || !opt) return false;
   if (tb->popupMode() == QToolButton::MenuButtonPopup
@@ -1245,37 +1245,39 @@ static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
     return true;
   }
   return false;
-}
+}*/
 
-static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButton *opt, const QToolBar *toolBar)
+static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
 {
   int res = tbAlone;
 
   if (!tb || !toolBar)
     return res;
 
-  QRect g = tb->geometry();
-
   if (toolBar->orientation() == Qt::Horizontal)
   {
+    QRect g = tb->geometry();
     const QToolButton *left = qobject_cast<const QToolButton *>(toolBar->childAt (g.x()-1, g.y()));
     const QToolButton *right =  qobject_cast<const QToolButton *>(toolBar->childAt (g.x()+g.width()+1, g.y()));
 
-    if (left && opt->icon.isNull() == left->icon().isNull())
+    if (left && g.height() == left->height())
     {
-      if (right && opt->icon.isNull() == right->icon().isNull())
+      if (right && g.height() == right->height())
         res = tbMiddle;
       else
         res = tbRight;
     }
-    else if (right && opt->icon.isNull() == right->icon().isNull())
-        res = tbLeft;
+    else if (right && g.height() == right->height())
+      res = tbLeft;
   }
-  else
+  // we don't group buttons on a vertical toolbar
+  /*else
   {
+    // opt was QStyleOptionToolButton*
     if (hasArrow (tb, opt))
       return res;
 
+    QRect g = tb->geometry();
     const QToolButton *top = qobject_cast<const QToolButton *>(toolBar->childAt (g.x(), g.y()-1));
     const QToolButton *bottom =  qobject_cast<const QToolButton *>(toolBar->childAt (g.x(), g.y()+g.height()+1));
 
@@ -1287,8 +1289,8 @@ static int whichToolbarButton (const QToolButton *tb, const QStyleOptionToolButt
         res = tbRight;
     }
     else if (bottom && !hasArrow (bottom, opt) && opt->icon.isNull() == bottom->icon().isNull())
-        res = tbLeft;
-  }
+      res = tbLeft;
+  }*/
 
   return res;
 }
@@ -1776,7 +1778,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 painter->restore();
               drawRaised = true;
               ispec.px = ispec.py = 0;
-              int kind = whichToolbarButton (tb, opt, toolBar);
+              int kind = whichToolbarButton (tb, toolBar);
               if (kind != 2)
               {
                 fspec.hasCapsule = true;
@@ -2903,8 +2905,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           drawRaised = true;
 
-          const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
-          int kind = whichToolbarButton (tb, opt, toolBar);
+          //const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton *>(option);
+          int kind = whichToolbarButton (tb, toolBar);
           if (kind != 2)
           {
             fspec.hasCapsule = true;
@@ -4398,7 +4400,7 @@ void Style::drawControl(ControlElement element,
       /* When the maximum progressbar thickness isn't greater than
          the frame expansion, it means that progressbars should be
          always rounded. Here, we force this rule on KCapacityBar. */
-      if (fspec.expansion > 0 && tspec_.progressbar_thickness <= fspec.expansion)
+      if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness <= fspec.expansion)
         fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
 
       if (status.startsWith("disabled"))
@@ -4468,7 +4470,7 @@ void Style::drawControl(ControlElement element,
           const frame_spec fspec1 = getFrameSpec("Progressbar");
           fspec.expansion = fspec1.expansion - (tspec_.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
           // like in CE_ProgressBarGroove
-          if (fspec1.expansion > 0 && tspec_.progressbar_thickness <= fspec1.expansion)
+          if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness <= fspec1.expansion)
             fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
         }
@@ -4631,11 +4633,6 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarLabel : {
-      if (tspec_.textless_progressbar
-          // always show text in KCapacityBar and KisSliderSpinBox
-          && !(widget && widget->inherits("KCapacityBar")) && !isKisSlider_)
-        break;
-
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar *>(option);
       const QStyleOptionProgressBarV2 *opt2 =
