@@ -1502,10 +1502,17 @@ static inline QSize textSize (const QFont &font, const QString &text)
     /* deal with newlines */
     QStringList l = t.split('\n');
 
-    //th = QFontMetrics(font).height()*(l.size());
-    th = qMin((int)(QFontMetrics(font).boundingRect(QLatin1Char('M')).height()*1.6),
-              QFontMetrics(font).height());
-    th *= l.size();
+    if (l.size() == 1)
+      th = QFontMetrics(font).height()*(l.size());
+    else
+    {
+      /* For some fonts, e.g. Noto Sans, QFontMetrics(font)::height() returns
+         a too big height for multiline texts but QFontMetrics::boundingRect()
+         returns the correct height with character M. I don't know how they
+         found the so-called "magic constant" 1.6 but it seems to be correct. */
+      th = QFontMetrics(font).boundingRect(QLatin1Char('M')).height()*1.6;
+      th *= l.size();
+    }
     for (int i=0; i<l.size(); i++)
       tw = qMax(tw,QFontMetrics(font).width(l[i]));
   }
@@ -2497,7 +2504,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                                   + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
-              || sb->height() < fspec.top+fspec.bottom+getFontHeight(widget->font()))
+              || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
             //fspec.expansion = 0;
@@ -4652,7 +4659,7 @@ void Style::drawControl(ControlElement element,
           isVertical = true;
 
         if (tspec_.progressbar_thickness > 0
-            && getFontHeight(f) >= (isVertical ? w : h)
+            && QFontMetrics(f).height() >= (isVertical ? w : h)
             // KCapacityBar and KisSliderSpinBox don't obey thickness setting
             && !(widget && widget->inherits("KCapacityBar")) && !isKisSlider_)
           break;
@@ -8455,7 +8462,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                                   + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
-              || p->height() < fspec.top+fspec.bottom+getFontHeight(widget->font()))
+              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
             lspec.left = 0;
@@ -8586,7 +8593,14 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               if (!txt.isEmpty())
               {
                 QStringList l = txt.split('\n');
-                int txtHeight = getFontHeight(opt->font)*(l.size());
+                int txtHeight = 0;
+                if (l.size() == 1)
+                  txtHeight = QFontMetrics(opt->font).height()*(l.size());
+                else
+                {
+                  txtHeight = QFontMetrics(opt->font).boundingRect(QLatin1Char('M')).height()*1.6;
+                  txtHeight *= l.size();
+                }
                 r = alignedRect(option->direction,
                     align | Qt::AlignVCenter,
                     QSize(r.width(), txtHeight),

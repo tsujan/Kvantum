@@ -241,15 +241,6 @@ class Style : public QCommonStyle {
     /* Is this a toolbar that should be styled? */
     bool isStylableToolbar(const QWidget *w) const;
 
-    /* For some fonts, e.g. Noto Sans, QFontMetrics(font)::height() returns
-       a too big number but QFontMetrics::boundingRect() returns the height
-       of character M correctly. I don't know how they found the so-called
-       "magic constant" 1.6 but it seems to be correct. */
-    int getFontHeight(QFont f) const {
-      return qMin((int)(QFontMetrics(f).boundingRect(QLatin1Char('M')).height()*1.6),
-                  QFontMetrics(f).height());
-    }
-
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgresses();
