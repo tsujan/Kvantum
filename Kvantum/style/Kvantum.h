@@ -189,8 +189,8 @@ class Style : public QCommonStyle {
 
     /* Generic method that draws a label (text and/or icon) inside the frame. */
     void renderLabel(
+                     const QStyleOption *option,
                      QPainter *painter,
-                     const QPalette &palette,
                      const QRect &bounds, // frame bounds
                      const frame_spec &fspec, // frame spec
                      const label_spec &lspec, // label spec
@@ -198,7 +198,6 @@ class Style : public QCommonStyle {
                      const QString &text,
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                     Qt::LayoutDirection ld = Qt::LeftToRight,
                      const QPixmap &px = QPixmap(),
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon

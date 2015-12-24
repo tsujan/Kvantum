@@ -394,7 +394,7 @@ widgets to appear as they are by default.</string>
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxDolphin">
               <property name="toolTip">
                <string>Merge Dolphin's view with its surroundings.</string>
@@ -404,7 +404,7 @@ widgets to appear as they are by default.</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="5" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKCapacity">
               <property name="toolTip">
                <string>Style KDE capacity bars as progressbars.</string>
@@ -414,7 +414,7 @@ widgets to appear as they are by default.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="2" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKonsole">
               <property name="toolTip">
                <string>Blur the regions behind the transparent
@@ -425,7 +425,7 @@ screens of Konsole and Yakuake if possible.</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
+            <item row="6" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxDark">
               <property name="toolTip">
                <string>Some apps may not respect dark themes.
@@ -436,7 +436,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="4" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxMenuTitle">
               <property name="toolTip">
                <string>Do not draw any background for (KDE) menu titles.
@@ -447,7 +447,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="3" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKtitle">
               <property name="toolTip">
                <string>Do not draw any background for KTitles.</string>
@@ -457,7 +457,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="2">
+            <item row="6" column="3">
              <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -470,7 +470,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </spacer>
             </item>
-            <item row="7" column="1">
+            <item row="7" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxGrip">
               <property name="toolTip">
                <string>Show size grips of dialogs and statusbars
@@ -483,7 +483,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="8" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxNormalBtn">
               <property name="toolTip">
                <string>No bold font for default push buttons.</string>
@@ -493,7 +493,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
+            <item row="9" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxIconlessBtn">
               <property name="toolTip">
                <string>No icon for push buttons that have text.</string>
@@ -503,7 +503,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="1">
+            <item row="10" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxIconlessMenu">
               <property name="toolTip">
                <string>No icon for menu-items?</string>
@@ -513,7 +513,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="1" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxPcmanfm">
               <property name="toolTip">
                <string>Merge PCManFM-qt's sidepane with its surroundings.
@@ -527,7 +527,7 @@ with LXQT Session Settings.</string>
               </property>
              </widget>
             </item>
-            <item row="11" column="1">
+            <item row="11" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxToolbar">
               <property name="toolTip">
                <string>Only the top toolbar should be styled?
@@ -535,6 +535,35 @@ By default, all toolbars are styled.</string>
               </property>
               <property name="text">
                <string>Single top toolbar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
+             <widget class="QLabel" name="labelTint">
+              <property name="toolTip">
+               <string>The highlight color is used for tinting.
+
+Not all widgets respect this key
+but most buttons and tabs do.</string>
+              </property>
+              <property name="text">
+               <string>Tint label icons on mouseover by </string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="2">
+             <widget class="QSpinBox" name="spinTint">
+              <property name="toolTip">
+               <string>The highlight color is used for tinting.
+
+Not all widgets respect this key
+but most buttons and tabs do.</string>
+              </property>
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="maximum">
+               <number>100</number>
               </property>
              </widget>
             </item>

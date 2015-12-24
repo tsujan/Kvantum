@@ -166,6 +166,9 @@ typedef struct {
   bool respect_darkness;
   /* show size grips as far as possible? */
   bool forceSizeGrip;
+  /* tint icons with the highlight color
+     on mouseover by this percentage */
+  int tint_on_mouseover;
   /* don't use bold font for default pushbuttons? */
   bool normal_default_pushbutton;
   /* no icon for pushbuttons as far as possible? */
@@ -376,6 +379,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.kcapacitybar_as_progressbar = false;
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
+  hspec.tint_on_mouseover = 0;
   hspec.normal_default_pushbutton = false;
   hspec.iconless_pushbutton = false;
   hspec.iconless_menu = false;

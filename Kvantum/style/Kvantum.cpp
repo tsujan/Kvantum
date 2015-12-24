@@ -3461,7 +3461,7 @@ void Style::drawControl(ControlElement element,
               int iconSpace = 0;
               if (opt->maxIconWidth && !hspec.iconless_menu)
                 iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
-              renderLabel(painter,option->palette,
+              renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
                                                 rtl ? -iconSpace-checkSpace : 0,
@@ -3469,7 +3469,7 @@ void Style::drawControl(ControlElement element,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state,option->direction);
+                          state);
             }
             else
             {
@@ -3481,11 +3481,11 @@ void Style::drawControl(ControlElement element,
               if (l[0].isEmpty()) // textless menuitem, as in Kdenlive's play button menu
                 r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
                                 iconSize,labelRect(r,fspec,lspec));
-              renderLabel(painter,option->palette,r,
+              renderLabel(option,painter,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state,option->direction,
+                          state,
                           getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                           iconSize);
             }
@@ -3495,7 +3495,7 @@ void Style::drawControl(ControlElement element,
             int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
               space = dspec.size + lspec.tispace + 2; // we add a 2px right margin at CT_MenuItem
-            renderLabel(painter,option->palette,
+            renderLabel(option,painter,
                         option->rect.adjusted(rtl ? space : 0,
                                               0,
                                               rtl ? 0 : -space,
@@ -3503,7 +3503,7 @@ void Style::drawControl(ControlElement element,
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
-                        state,option->direction);
+                        state);
           }
 
           QStyleOptionMenuItem o(*opt);
@@ -3765,10 +3765,10 @@ void Style::drawControl(ControlElement element,
                       && (status.startsWith("toggled") || status.startsWith("pressed"))))
 #endif
           state = 2;
-        renderLabel(painter,option->palette,r,
+        renderLabel(option,painter,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    state,option->direction);
+                    state);
       }
 
       break;
@@ -3842,12 +3842,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -3869,12 +3868,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -3955,13 +3953,13 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     /* since the label is vertically centered, this doesn't do
                        any harm and is good for Qt4 Designer and similar cases */
                     r.adjusted(0,-fspec.top-lspec.top,0,fspec.bottom+lspec.bottom),
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -4275,11 +4273,11 @@ void Style::drawControl(ControlElement element,
         }
 
         iconSize = QSize(icnSize,icnSize);
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
 
@@ -4743,19 +4741,19 @@ void Style::drawControl(ControlElement element,
           painter->save();
           painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
         }
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,state,option->direction);
+                    Qt::AlignCenter,txt,QPalette::WindowText,state);
         if (R.isValid())
         {
           painter->restore();
           painter->save();
           painter->setClipRect(R);
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       r,
                       fspec,lspec,
-                      Qt::AlignCenter,txt,QPalette::WindowText,-1,option->direction);
+                      Qt::AlignCenter,txt,QPalette::WindowText,-1);
           painter->restore();
         }
       }
@@ -5122,7 +5120,7 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
                                              subElementRect(QStyle::SE_HeaderArrow,option,widget).width()
@@ -5138,7 +5136,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
       }
@@ -5366,11 +5364,11 @@ void Style::drawControl(ControlElement element,
           lspec.toggleColor = name;
         }
 
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     (settings_->getHacksSpec().iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
@@ -5772,7 +5770,7 @@ void Style::drawControl(ControlElement element,
             state = 4;
           else if (option->state & State_MouseOver)
             state = 2;
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       !(opt->features & QStyleOptionToolButton::Arrow)
                           || opt->arrowType == Qt::NoArrow
                           || tialign == Qt::ToolButtonTextOnly ?
@@ -5788,7 +5786,7 @@ void Style::drawControl(ControlElement element,
                                    0),
                       fspec,lspec,
                       talign,opt->text,QPalette::ButtonText,
-                      state,option->direction,
+                      state,
                       getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
@@ -5923,12 +5921,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     tRect,
                     fspec,lspec,
                     talign,title,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction);
+                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0);
 
         if (hasVertTitle)
         {
@@ -6848,12 +6845,11 @@ void Style::drawComplexControl(ComplexControl control,
           }
           int icnSize = pixelMetric(PM_TitleBarHeight) - 4; // 2-px margins for the icon
           QSize iconSize = QSize(icnSize,icnSize);
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       o.rect,
                       fspec,lspec,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
-                      option->direction,
                       getPixmapFromIcon(o.icon,QIcon::Normal,QIcon::Off,iconSize),
                       iconSize);
         }
@@ -10273,8 +10269,8 @@ void Style::renderIndicator(QPainter *painter,
 }
 
 void Style::renderLabel(
+                        const QStyleOption *option,
                         QPainter *painter,
-                        const QPalette &palette,
                         const QRect &bounds, // frame bounds
                         const frame_spec &fspec, // frame spec
                         const label_spec &lspec, // label spec
@@ -10282,7 +10278,6 @@ void Style::renderLabel(
                         const QString &text,
                         QPalette::ColorRole textRole, // text color role
                         int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                        Qt::LayoutDirection ld,
                         const QPixmap &px,
                         QSize iconSize,
                         const Qt::ToolButtonStyle tialign // relative positions of text and icon
@@ -10305,6 +10300,7 @@ void Style::renderLabel(
 
   QRect ricon = r;
   QRect rtext = r;
+  Qt::LayoutDirection ld = option->direction;
 
   if (tialign == Qt::ToolButtonTextBesideIcon)
   {
@@ -10350,6 +10346,30 @@ void Style::renderLabel(
   {
     QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
     painter->drawPixmap(iconRect,px);
+    qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+    if (tintPercentage > 0
+        && (option->state & State_Enabled) && (option->state & State_MouseOver))
+    { // this trick is taken from <https://github.com/luebking/virtuality>
+      QColor tint = option->palette.color(QPalette::Active,QPalette::Highlight);
+      const int r = tint.red(), g = tint.green(), b = tint.blue();
+      QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32);
+      int size = img.width()*img.height();
+      QRgb *pixel = (QRgb*)img.bits();
+      for (int i = 0; i < size; ++i)
+      {
+        if (int a = qAlpha(*pixel))
+        {
+          const int v = qGray(*pixel);
+          a = 255 - v*a/255;
+          a = 255 - a*a/255;
+          a *= tintPercentage/100;
+          *pixel = qRgba(r, g, b, a);
+        }
+        ++pixel;
+      }
+      QPixmap tintingPixmap = QPixmap::fromImage(img);
+      painter->drawPixmap(iconRect,tintingPixmap);
+    }
   }
 
   if (((isPlasma_ && px.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
@@ -10459,7 +10479,7 @@ void Style::renderLabel(
     QCommonStyle::drawItemText(painter,
                                rtext,
                                talign,
-                               palette,
+                               option->palette,
                                state == 0 ? false: true,
                                text,
                                textRole);
