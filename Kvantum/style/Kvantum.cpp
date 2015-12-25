@@ -10345,31 +10345,22 @@ void Style::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
     QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
-    painter->drawPixmap(iconRect,px);
+
     qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
     if (tintPercentage > 0
         && (option->state & State_Enabled) && (option->state & State_MouseOver))
-    { // this trick is taken from <https://github.com/luebking/virtuality>
-      QColor tint = option->palette.color(QPalette::Active,QPalette::Highlight);
-      const int r = tint.red(), g = tint.green(), b = tint.blue();
-      QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32);
-      int size = img.width()*img.height();
-      QRgb *pixel = (QRgb*)img.bits();
-      for (int i = 0; i < size; ++i)
-      {
-        if (int a = qAlpha(*pixel))
-        {
-          const int v = qGray(*pixel);
-          a = 255 - v*a/255;
-          a = 255 - a*a/255;
-          a *= tintPercentage/100;
-          *pixel = qRgba(r, g, b, a);
-        }
-        ++pixel;
-      }
-      QPixmap tintingPixmap = QPixmap::fromImage(img);
-      painter->drawPixmap(iconRect,tintingPixmap);
+    {
+      QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+      QColor tintColor = option->palette.color(QPalette::Active, QPalette::Highlight);
+      tintColor.setAlphaF(tintPercentage/100);
+      QPainter p(&img);
+      p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+      p.fillRect(0, 0, img.width(), img.height(), tintColor);
+      p.end();
+      painter->drawPixmap(iconRect,QPixmap::fromImage(img));
     }
+    else
+      painter->drawPixmap(iconRect,px);
   }
 
   if (((isPlasma_ && px.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
