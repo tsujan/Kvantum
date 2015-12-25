@@ -3636,6 +3636,14 @@ void Style::drawControl(ControlElement element,
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0
+                  && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                  && !opt->decorationSize.isEmpty())
+              {
+                QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -4343,6 +4351,14 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, focusColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0 && !opt->icon.isNull())
+              {
+                QPixmap px = tintedPixmap(option,
+                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                          tintPercentage);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -4352,6 +4368,14 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, pressColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+              {
+                QPixmap px = tintedPixmap(option,
+                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                          tintPercentage);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -6408,7 +6432,15 @@ void Style::drawComplexControl(ComplexControl control,
                                    Qt::AlignVCenter | Qt::AlignLeft,
                                    opt->iconSize,
                                    labelRect(option->rect,fspec,lspec));
-          QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+          QRect iconRect = alignedRect(option->direction,
+                                       Qt::AlignCenter,
+                                       QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+          qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+          if (tintPercentage > 0
+              && (option->state & State_Enabled) && (option->state & State_MouseOver))
+          {
+            icn = tintedPixmap(option, icn, tintPercentage);
+          }
           painter->drawPixmap(iconRect,icn);
         }
 
@@ -10350,14 +10382,7 @@ void Style::renderLabel(
     if (tintPercentage > 0
         && (option->state & State_Enabled) && (option->state & State_MouseOver))
     {
-      QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
-      QColor tintColor = option->palette.color(QPalette::Active, QPalette::Highlight);
-      tintColor.setAlphaF(tintPercentage/100);
-      QPainter p(&img);
-      p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-      p.fillRect(0, 0, img.width(), img.height(), tintColor);
-      p.end();
-      painter->drawPixmap(iconRect,QPixmap::fromImage(img));
+      painter->drawPixmap(iconRect, tintedPixmap(option,px,tintPercentage));
     }
     else
       painter->drawPixmap(iconRect,px);
@@ -10499,6 +10524,22 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (hdpi && px.size() == iconSize) // not from icon theme
     px = icon.pixmap(iconSize,iconmode,iconstate);
   return px;
+}
+
+QPixmap Style::tintedPixmap(const QStyleOption *option,
+                            const QPixmap &px,
+                            const qreal tintPercentage) const
+{ // -> qcommonstyle.cpp -> QCommonStyle::generatedIconPixmap()
+  if (!option || px.isNull()) return QPixmap();
+  if (tintPercentage <= 0) return px;
+  QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  QColor tintColor = option->palette.color(QPalette::Active, QPalette::Highlight);
+  tintColor.setAlphaF(tintPercentage/100);
+  QPainter p(&img);
+  p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  p.fillRect(0, 0, img.width(), img.height(), tintColor);
+  p.end();
+  return QPixmap::fromImage(img);
 }
 
 QRect Style::interiorRect(const QRect &bounds, frame_spec fspec) const

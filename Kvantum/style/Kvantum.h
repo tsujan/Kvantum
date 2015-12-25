@@ -202,11 +202,17 @@ class Style : public QCommonStyle {
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
+
     /* Gets a pixmap with a proper size from an icon considering HDPI. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
                               const QIcon::Mode iconmode,
                               const QIcon::State iconstate,
                               QSize iconSize) const;
+
+    /* Returns a pixmap tinted by the highlight color. */
+    QPixmap tintedPixmap(const QStyleOption *option,
+                         const QPixmap &px,
+                         const qreal tintPercentage) const;
 
     /* Draws background of translucent top widgets. */
     void drawBg(QPainter *p, const QWidget *widget) const;

@@ -474,9 +474,7 @@ Kvantum can try to correct their behavior.</string>
              <widget class="QCheckBox" name="checkBoxGrip">
               <property name="toolTip">
                <string>Show size grips of dialogs and statusbars
-as far as possible.
-
-WARNING: This key is experimental.</string>
+as far as possible.</string>
               </property>
               <property name="text">
                <string>Force size grips</string>
@@ -543,8 +541,7 @@ By default, all toolbars are styled.</string>
               <property name="toolTip">
                <string>The highlight color is used for tinting.
 
-Not all widgets respect this key
-but most buttons and tabs do.</string>
+Some icons may not respect this key.</string>
               </property>
               <property name="text">
                <string>Tint label icons on mouseover by </string>
@@ -556,8 +553,7 @@ but most buttons and tabs do.</string>
               <property name="toolTip">
                <string>The highlight color is used for tinting.
 
-Not all widgets respect this key
-but most buttons and tabs do.</string>
+Some icons may not respect this key.</string>
               </property>
               <property name="suffix">
                <string> %</string>
@@ -983,8 +979,9 @@ option fills them with the highlight color.</string>
              <widget class="QCheckBox" name="checkBoxClick">
               <property name="toolTip">
                <string>Activate view items always on double clicking?
-When unchecked, single-click will be preferred
-but KDE setting always has priority over this.</string>
+When unchecked, single-click is preferred
+but KDE setting will have priority over this
+if set explicitly.</string>
               </property>
               <property name="text">
                <string>Double-click for view items</string>
