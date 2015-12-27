@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="/" >
+  <qresource prefix="Kvantum" >
     <file>default.svg</file>
     <file>default.kvconfig</file>
   </qresource>

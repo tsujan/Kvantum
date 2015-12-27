@@ -585,6 +585,14 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","force_size_grip");
   r.forceSizeGrip = v.toBool();
 
+  v = getValue("Hacks","tint_on_mouseover");
+  if (v.isValid())
+    r.tint_on_mouseover = qMin(qMax(v.toInt(),0),100);
+
+  v = getValue("Hacks","disabled_icon_opacity");
+  if (v.isValid())
+    r.disabled_icon_opacity = qMin(qMax(v.toInt(),0),100);
+
   v = getValue("Hacks","normal_default_pushbutton");
   r.normal_default_pushbutton = v.toBool();
 

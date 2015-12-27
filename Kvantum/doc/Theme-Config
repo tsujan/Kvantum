@@ -466,6 +466,17 @@ respect_darkness                  true/false          Some apps don't respect da
 force_size_grip                   true/false          Show the size grips of dialogs and
                                                       statusbars as far as possible?
 
+tint_on_mouseover                 integer             Tint the label icons with the highlight
+                                                      color on mouseover by this percentage?
+                                                      This will not work if the containing
+                                                      widget is not styled by Kvantum.
+
+disabled_icon_opacity             integer             Set the opacity of disabled icons by
+                                                      this percentage? It is useful with
+                                                      monochrome icons and when the opacity
+                                                      of disabled icons is not reduced by
+                                                      other means.
+
 normal_default_pushbutton         true/false          No bold font for default push buttons?
 
 iconless_pushbutton               true/false          No icon for push buttons that have text?

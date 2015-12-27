@@ -15,7 +15,16 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     ui->setupUi (this);
 
     setWindowTitle ("Kvantum Manager");
-    
+    ui->toolBox->setItemIcon (0,
+                              QIcon::fromTheme ("system-software-install",
+                                                QIcon (":/Icons/data/system-software-install.svg")));
+    ui->toolBox->setItemIcon (1,
+                              QIcon::fromTheme ("preferences-desktop-theme",
+                                                QIcon (":/Icons/data/preferences-desktop-theme.svg")));
+    ui->toolBox->setItemIcon (2,
+                              QIcon::fromTheme ("preferences-system",
+                                                QIcon (":/Icons/data/preferences-system.svg")));
+
     lastPath_ = QDir::home().path();
     process_ = new QProcess (this);
 
@@ -525,7 +534,7 @@ void KvantumManager::defaultThemeButtons()
     ui->restoreButton->hide();
     /* Someone may have compiled Kvantum with another default theme.
        So, we get its settings directly from its kvconfig file. */
-    QString defaultConfig = ":default.kvconfig";
+    QString defaultConfig = ":/Kvantum/default.kvconfig";
     QSettings defaultSettings (defaultConfig, QSettings::NativeFormat);
 
     defaultSettings.beginGroup ("Hacks");
@@ -541,6 +550,14 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
+    int tmp = 0;
+    if (defaultSettings.contains ("tint_on_mouseover")) // it's false by default
+        tmp = qMin (qMax (defaultSettings.value ("tint_on_mouseover").toInt(), 0), 100);
+    ui->spinTint->setValue (tmp);
+    tmp = 100;
+    if (defaultSettings.contains ("disabled_icon_opacity")) // it's false by default
+        tmp = qMin (qMax (defaultSettings.value ("disabled_icon_opacity").toInt(), 0), 100);
+    ui->spinOpacity->setValue (tmp);
     defaultSettings.endGroup();
 
     defaultSettings.beginGroup ("General");
@@ -852,6 +869,14 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
                 ui->checkBoxToolbar->setChecked (themeSettings.value ("single_top_toolbar").toBool());
+                int tmp = 0;
+                if (themeSettings.contains ("tint_on_mouseover"))
+                    tmp = qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(), 0), 100);
+                ui->spinTint->setValue (tmp);
+                tmp = 100;
+                if (themeSettings.contains ("disabled_icon_opacity"))
+                    tmp = qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(), 0), 100);
+                ui->spinOpacity->setValue (tmp);
                 themeSettings.endGroup();
             }
         }
@@ -1149,7 +1174,7 @@ void KvantumManager::copyRootTheme (QString source, QString target)
         theCopy = QString ("%1/%2.kvconfig").arg (altPath).arg (target);
     if (!QFile::exists (theCopy))
     {
-        QString themeConfig = ":default.kvconfig";
+        QString themeConfig = ":/Kvantum/default.kvconfig";
         if (!source.isEmpty())
         {
             QString sourceDir = QString (DATADIR) + QString ("/Kvantum/%1").arg (source);
@@ -1245,6 +1270,8 @@ void KvantumManager::writeConfig()
         hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
         hackKeys.insert("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
+        hackKeys.insert("tint_on_mouseover", str.setNum (ui->spinTint->value()));
+        hackKeys.insert("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
@@ -1277,7 +1304,9 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("Hacks");
         bool restyle = false;
         if (themeSettings.value ("normal_default_pushbutton").toBool() != ui->checkBoxNormalBtn->isChecked()
-            || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked())
+            || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked()
+            || qMin(qMax(themeSettings.value ("tint_on_mouseover").toInt(),0),100) != ui->spinTint->value()
+            || qMin(qMax(themeSettings.value ("disabled_icon_opacity").toInt(),0),100) != ui->spinOpacity->value())
         {
             restyle = true;
         }
@@ -1306,6 +1335,8 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconlessBtn->isChecked());
         themeSettings.setValue ("iconless_menu", ui->checkBoxIconlessMenu->isChecked());
         themeSettings.setValue ("single_top_toolbar", ui->checkBoxToolbar->isChecked());
+        themeSettings.setValue ("tint_on_mouseover", ui->spinTint->value());
+        themeSettings.setValue ("disabled_icon_opacity", ui->spinOpacity->value());
 #endif
         themeSettings.endGroup();
 
@@ -1566,9 +1597,9 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.9.3</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.9.4</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
-                            "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p></p>")
+                            "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p>")
                            .arg (qt));
 }

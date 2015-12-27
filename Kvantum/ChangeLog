@@ -1,8 +1,13 @@
+V0.9.4
+---------
+ * Added a hacking key for not styling any toolbar other than the top one.
+ * Added a hacking key for tinting label icons on mouseover.
+ * Added a hacking key for setting the opacity of disabled icons.
+
 V0.9.3
 ---------
  * Support high DPI displays (when QT_DEVICE_PIXEL_RATIO > 1 and even when AA_UseHighDpiPixmaps isn't set).
  * Draw subwindow titlebar buttons on menubars exactly as on MDI titlebars.
- * Added a hacking key for not styling any toolbar other than the top one.
  * Workaround for a Qt5 bug, which gives wrong heights for fonts like Noto Sans.
  * Corrected a typo in SE_TabWidgetRightCorner.
  * Force progressbar roundness on KCapacityBar in all circumstances.

@@ -33,8 +33,8 @@ ForegroundPositive=128,255,128
 ForegroundVisited=255,102,102
 
 [Colors:Selection]
-BackgroundAlternate=115,115,115
-BackgroundNormal=115,115,115
+BackgroundAlternate=140,16,17
+BackgroundNormal=140,16,17
 DecorationFocus=170,170,170
 DecorationHover=150,150,150
 ForegroundActive=255,128,224

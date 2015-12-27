@@ -206,9 +206,9 @@ void Style::setBuiltinDefaultTheme()
     defaultRndr_ = NULL;
   }
 
-  defaultSettings_ = new ThemeConfig(":default.kvconfig");
+  defaultSettings_ = new ThemeConfig(":/Kvantum/default.kvconfig");
   defaultRndr_ = new QSvgRenderer();
-  defaultRndr_->load(QString(":default.svg"));
+  defaultRndr_->load(QString(":/Kvantum/default.svg"));
 }
 
 void Style::setUserTheme(const QString &themename)
@@ -3461,7 +3461,7 @@ void Style::drawControl(ControlElement element,
               int iconSpace = 0;
               if (opt->maxIconWidth && !hspec.iconless_menu)
                 iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
-              renderLabel(painter,option->palette,
+              renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
                                                 rtl ? -iconSpace-checkSpace : 0,
@@ -3469,7 +3469,7 @@ void Style::drawControl(ControlElement element,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state,option->direction);
+                          state);
             }
             else
             {
@@ -3481,11 +3481,11 @@ void Style::drawControl(ControlElement element,
               if (l[0].isEmpty()) // textless menuitem, as in Kdenlive's play button menu
                 r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
                                 iconSize,labelRect(r,fspec,lspec));
-              renderLabel(painter,option->palette,r,
+              renderLabel(option,painter,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state,option->direction,
+                          state,
                           getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                           iconSize);
             }
@@ -3495,7 +3495,7 @@ void Style::drawControl(ControlElement element,
             int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
               space = dspec.size + lspec.tispace + 2; // we add a 2px right margin at CT_MenuItem
-            renderLabel(painter,option->palette,
+            renderLabel(option,painter,
                         option->rect.adjusted(rtl ? space : 0,
                                               0,
                                               rtl ? 0 : -space,
@@ -3503,7 +3503,7 @@ void Style::drawControl(ControlElement element,
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
-                        state,option->direction);
+                        state);
           }
 
           QStyleOptionMenuItem o(*opt);
@@ -3636,6 +3636,14 @@ void Style::drawControl(ControlElement element,
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0
+                  && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                  && !opt->decorationSize.isEmpty())
+              {
+                QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -3652,6 +3660,20 @@ void Style::drawControl(ControlElement element,
               QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::HighlightedText, toggleColor);
               o.palette = palette;
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+          }
+          else
+          {
+            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            if (opacityPercentage < 100
+                && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                && !opt->decorationSize.isEmpty())
+            {
+              QStyleOptionViewItemV4 o(*opt);
+              QPixmap px = translucentPixmap(opt->icon.pixmap(opt->decorationSize), opacityPercentage);
+              o.icon = QIcon(px);
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -3765,10 +3787,10 @@ void Style::drawControl(ControlElement element,
                       && (status.startsWith("toggled") || status.startsWith("pressed"))))
 #endif
           state = 2;
-        renderLabel(painter,option->palette,r,
+        renderLabel(option,painter,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    state,option->direction);
+                    state);
       }
 
       break;
@@ -3842,12 +3864,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -3869,12 +3890,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -3955,13 +3975,13 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     /* since the label is vertically centered, this doesn't do
                        any harm and is good for Qt4 Designer and similar cases */
                     r.adjusted(0,-fspec.top-lspec.top,0,fspec.bottom+lspec.bottom),
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -4275,11 +4295,11 @@ void Style::drawControl(ControlElement element,
         }
 
         iconSize = QSize(icnSize,icnSize);
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
 
@@ -4345,6 +4365,14 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, focusColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0 && !opt->icon.isNull())
+              {
+                QPixmap px = tintedPixmap(option,
+                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                          tintPercentage);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -4354,6 +4382,27 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, pressColor);
               o.palette = palette;
+              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+              {
+                QPixmap px = tintedPixmap(option,
+                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                          tintPercentage);
+                o.icon = QIcon(px);
+              }
+              QCommonStyle::drawControl(element,&o,painter,widget);
+              return;
+            }
+          }
+          else
+          {
+            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            if (opacityPercentage < 100 && !opt->icon.isNull())
+            {
+              QStyleOptionToolBox o(*opt);
+              QPixmap px = translucentPixmap(opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                             opacityPercentage);
+              o.icon = QIcon(px);
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -4743,19 +4792,19 @@ void Style::drawControl(ControlElement element,
           painter->save();
           painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
         }
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,state,option->direction);
+                    Qt::AlignCenter,txt,QPalette::WindowText,state);
         if (R.isValid())
         {
           painter->restore();
           painter->save();
           painter->setClipRect(R);
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       r,
                       fspec,lspec,
-                      Qt::AlignCenter,txt,QPalette::WindowText,-1,option->direction);
+                      Qt::AlignCenter,txt,QPalette::WindowText,-1);
           painter->restore();
         }
       }
@@ -5122,7 +5171,7 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
                                              subElementRect(QStyle::SE_HeaderArrow,option,widget).width()
@@ -5138,7 +5187,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
       }
@@ -5366,11 +5415,11 @@ void Style::drawControl(ControlElement element,
           lspec.toggleColor = name;
         }
 
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     r,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
-                    state,option->direction,
+                    state,
                     (settings_->getHacksSpec().iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
@@ -5772,7 +5821,7 @@ void Style::drawControl(ControlElement element,
             state = 4;
           else if (option->state & State_MouseOver)
             state = 2;
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       !(opt->features & QStyleOptionToolButton::Arrow)
                           || opt->arrowType == Qt::NoArrow
                           || tialign == Qt::ToolButtonTextOnly ?
@@ -5788,7 +5837,7 @@ void Style::drawControl(ControlElement element,
                                    0),
                       fspec,lspec,
                       talign,opt->text,QPalette::ButtonText,
-                      state,option->direction,
+                      state,
                       getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
@@ -5923,12 +5972,11 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        renderLabel(painter,option->palette,
+        renderLabel(option,painter,
                     tRect,
                     fspec,lspec,
                     talign,title,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    option->direction);
+                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0);
 
         if (hasVertTitle)
         {
@@ -6411,7 +6459,21 @@ void Style::drawComplexControl(ComplexControl control,
                                    Qt::AlignVCenter | Qt::AlignLeft,
                                    opt->iconSize,
                                    labelRect(option->rect,fspec,lspec));
-          QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+          QRect iconRect = alignedRect(option->direction,
+                                       Qt::AlignCenter,
+                                       QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+          if (!(option->state & State_Enabled))
+          {
+            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            if (opacityPercentage < 100)
+              icn = translucentPixmap(icn, opacityPercentage);
+          }
+          else if (option->state & State_MouseOver)
+          {
+            qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+            if (tintPercentage > 0)
+              icn = tintedPixmap(option, icn, tintPercentage);
+          }
           painter->drawPixmap(iconRect,icn);
         }
 
@@ -6848,12 +6910,11 @@ void Style::drawComplexControl(ComplexControl control,
           }
           int icnSize = pixelMetric(PM_TitleBarHeight) - 4; // 2-px margins for the icon
           QSize iconSize = QSize(icnSize,icnSize);
-          renderLabel(painter,option->palette,
+          renderLabel(option,painter,
                       o.rect,
                       fspec,lspec,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
-                      option->direction,
                       getPixmapFromIcon(o.icon,QIcon::Normal,QIcon::Off,iconSize),
                       iconSize);
         }
@@ -10273,8 +10334,8 @@ void Style::renderIndicator(QPainter *painter,
 }
 
 void Style::renderLabel(
+                        const QStyleOption *option,
                         QPainter *painter,
-                        const QPalette &palette,
                         const QRect &bounds, // frame bounds
                         const frame_spec &fspec, // frame spec
                         const label_spec &lspec, // label spec
@@ -10282,7 +10343,6 @@ void Style::renderLabel(
                         const QString &text,
                         QPalette::ColorRole textRole, // text color role
                         int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                        Qt::LayoutDirection ld,
                         const QPixmap &px,
                         QSize iconSize,
                         const Qt::ToolButtonStyle tialign // relative positions of text and icon
@@ -10305,6 +10365,7 @@ void Style::renderLabel(
 
   QRect ricon = r;
   QRect rtext = r;
+  Qt::LayoutDirection ld = option->direction;
 
   if (tialign == Qt::ToolButtonTextBesideIcon)
   {
@@ -10349,7 +10410,23 @@ void Style::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
     QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
-    painter->drawPixmap(iconRect,px);
+
+    if (!(option->state & State_Enabled))
+    {
+      qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+      if (opacityPercentage < 100)
+        painter->drawPixmap(iconRect,translucentPixmap(px, opacityPercentage));
+      else
+        painter->drawPixmap(iconRect,px);
+    }
+    else
+    {
+      qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+      if (tintPercentage > 0 && (option->state & State_MouseOver))
+        painter->drawPixmap(iconRect, tintedPixmap(option,px,tintPercentage));
+      else
+        painter->drawPixmap(iconRect,px);
+    }
   }
 
   if (((isPlasma_ && px.isNull()) // Why do some Plasma toolbuttons pretend to have only icons?
@@ -10459,7 +10536,7 @@ void Style::renderLabel(
     QCommonStyle::drawItemText(painter,
                                rtext,
                                talign,
-                               palette,
+                               option->palette,
                                state == 0 ? false: true,
                                text,
                                textRole);
@@ -10488,6 +10565,35 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (hdpi && px.size() == iconSize) // not from icon theme
     px = icon.pixmap(iconSize,iconmode,iconstate);
   return px;
+}
+
+QPixmap Style::tintedPixmap(const QStyleOption *option,
+                            const QPixmap &px,
+                            const qreal tintPercentage) const
+{ // -> qcommonstyle.cpp -> QCommonStyle::generatedIconPixmap()
+  if (!option || px.isNull()) return QPixmap();
+  if (tintPercentage <= 0) return px;
+  QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  QColor tintColor = option->palette.color(QPalette::Active, QPalette::Highlight);
+  tintColor.setAlphaF(tintPercentage/100);
+  QPainter p(&img);
+  p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+  p.fillRect(0, 0, img.width(), img.height(), tintColor);
+  p.end();
+  return QPixmap::fromImage(img);
+}
+
+QPixmap Style::translucentPixmap(const QPixmap &px,
+                                 const qreal opacityPercentage) const
+{ // -> qcommonstyle.cpp -> QCommonStyle::generatedIconPixmap()
+  if (px.isNull()) return QPixmap();
+  QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  img.fill(Qt::transparent);
+  QPainter p(&img);
+  p.setOpacity(opacityPercentage/100);
+  p.drawPixmap(0, 0, px);
+  p.end();
+  return QPixmap::fromImage(img);
 }
 
 QRect Style::interiorRect(const QRect &bounds, frame_spec fspec) const

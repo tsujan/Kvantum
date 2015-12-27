@@ -45,7 +45,7 @@
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="installLabel">
           <property name="text">
-           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it.&lt;/center&gt;</string>
+           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>
@@ -133,7 +133,7 @@ theme folder</string>
           </property>
           <property name="toolTip">
            <string>Add this theme to the list of themes that
-Kvantum can use in addition to its default theme.</string>
+Kvantum can use in addition to its own themes.</string>
           </property>
           <property name="text">
            <string>Install this theme</string>
@@ -187,7 +187,10 @@ Kvantum can use in addition to its default theme.</string>
          <widget class="QPushButton" name="deleteTheme">
           <property name="toolTip">
            <string>Remove the selected theme
-from all user installation paths.</string>
+from all user installation paths.
+
+The root installation will still be
+available if present.</string>
           </property>
           <property name="text">
            <string>Delete this theme</string>
@@ -234,8 +237,8 @@ from all user installation paths.</string>
         <item row="2" column="1" alignment="Qt::AlignRight">
          <widget class="QPushButton" name="useTheme">
           <property name="toolTip">
-           <string>If Kvantum is activated, it will use
-this theme instead of its default theme.</string>
+           <string>If Kvantum is activated, it will use this
+theme (instead of its default theme).</string>
           </property>
           <property name="text">
            <string>Use this theme</string>
@@ -394,7 +397,7 @@ widgets to appear as they are by default.</string>
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxDolphin">
               <property name="toolTip">
                <string>Merge Dolphin's view with its surroundings.</string>
@@ -404,7 +407,7 @@ widgets to appear as they are by default.</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="5" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKCapacity">
               <property name="toolTip">
                <string>Style KDE capacity bars as progressbars.</string>
@@ -414,7 +417,7 @@ widgets to appear as they are by default.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="2" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKonsole">
               <property name="toolTip">
                <string>Blur the regions behind the transparent
@@ -425,7 +428,7 @@ screens of Konsole and Yakuake if possible.</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
+            <item row="6" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxDark">
               <property name="toolTip">
                <string>Some apps may not respect dark themes.
@@ -436,7 +439,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="4" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxMenuTitle">
               <property name="toolTip">
                <string>Do not draw any background for (KDE) menu titles.
@@ -447,7 +450,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="3" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxKtitle">
               <property name="toolTip">
                <string>Do not draw any background for KTitles.</string>
@@ -457,7 +460,7 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="2">
+            <item row="6" column="3">
              <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -470,20 +473,18 @@ Kvantum can try to correct their behavior.</string>
               </property>
              </spacer>
             </item>
-            <item row="7" column="1">
+            <item row="7" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxGrip">
               <property name="toolTip">
                <string>Show size grips of dialogs and statusbars
-as far as possible.
-
-WARNING: This key is experimental.</string>
+as far as possible.</string>
               </property>
               <property name="text">
                <string>Force size grips</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="1">
+            <item row="8" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxNormalBtn">
               <property name="toolTip">
                <string>No bold font for default push buttons.</string>
@@ -493,7 +494,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
+            <item row="9" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxIconlessBtn">
               <property name="toolTip">
                <string>No icon for push buttons that have text.</string>
@@ -503,7 +504,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="1">
+            <item row="10" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxIconlessMenu">
               <property name="toolTip">
                <string>No icon for menu-items?</string>
@@ -513,7 +514,7 @@ WARNING: This key is experimental.</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="1" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxPcmanfm">
               <property name="toolTip">
                <string>Merge PCManFM-qt's sidepane with its surroundings.
@@ -527,7 +528,7 @@ with LXQT Session Settings.</string>
               </property>
              </widget>
             </item>
-            <item row="11" column="1">
+            <item row="11" column="1" colspan="2">
              <widget class="QCheckBox" name="checkBoxToolbar">
               <property name="toolTip">
                <string>Only the top toolbar should be styled?
@@ -535,6 +536,81 @@ By default, all toolbars are styled.</string>
               </property>
               <property name="text">
                <string>Single top toolbar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
+             <spacer name="verticalSpacer_12">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>5</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="13" column="1">
+             <widget class="QLabel" name="labelTint">
+              <property name="toolTip">
+               <string>The highlight color is used for tinting.
+Mostly relevant with monochrome icons.
+
+Hard-coded icons/styles may not respect this key.</string>
+              </property>
+              <property name="text">
+               <string>Tint label icons on mouseover by </string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="2">
+             <widget class="QSpinBox" name="spinTint">
+              <property name="toolTip">
+               <string>The highlight color is used for tinting.
+Mostly relevant with monochrome icons.
+
+Hard-coded icons/styles may not respect this key.</string>
+              </property>
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1">
+             <widget class="QLabel" name="labelOpacity">
+              <property name="toolTip">
+               <string>Useful with monochrome icon sets and
+when the opacity of disabled icons is not
+reduced by other means.</string>
+              </property>
+              <property name="text">
+               <string>Opacity of disabled icons:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="2">
+             <widget class="QSpinBox" name="spinOpacity">
+              <property name="toolTip">
+               <string>Useful with monochrome icon sets and
+when the opacity of disabled icons is not
+reduced by other means.</string>
+              </property>
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>100</number>
               </property>
              </widget>
             </item>
@@ -954,8 +1030,9 @@ option fills them with the highlight color.</string>
              <widget class="QCheckBox" name="checkBoxClick">
               <property name="toolTip">
                <string>Activate view items always on double clicking?
-When unchecked, single-click will be preferred
-but KDE setting always has priority over this.</string>
+When unchecked, single-click is preferred
+but KDE setting will have priority over this
+if set explicitly.</string>
               </property>
               <property name="text">
                <string>Double-click for view items</string>
@@ -966,8 +1043,8 @@ but KDE setting always has priority over this.</string>
              <widget class="QCheckBox" name="checkBoxSpin">
               <property name="toolTip">
                <string>By default, spin indicators are drawn on adjacent buttons.
-Checking this puts the spin-up indicator above
-the spin-down one inside the spin line-edit.</string>
+Checking this puts the spin-up indicator above the
+spin-down one inside the spin line-edit.</string>
               </property>
               <property name="text">
                <string>Vertical spin indicators</string>
@@ -1009,7 +1086,7 @@ line-edit with arrow (and icon, if it exists)?</string>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>10</height>
+                <height>5</height>
                </size>
               </property>
              </spacer>
