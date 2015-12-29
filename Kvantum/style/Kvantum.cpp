@@ -894,6 +894,11 @@ void Style::polish(QApplication *app)
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma_ = true;
+  else if (appName == "plasmashell") // KF5
+  {
+    isPlasma_ = true;
+    tspec_.vertical_spin_indicators = true; // KF5 is a mess!
+  }
 
   if (tspec_.opaque.contains (appName))
     isOpaque_ = true;
@@ -6214,7 +6219,7 @@ void Style::drawComplexControl(ComplexControl control,
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
 
-        if (tspec_.vertical_spin_indicators)
+        if (tspec_.vertical_spin_indicators && opt->subControls & SC_SpinBoxUp)
         {
           const interior_spec ispec = getInteriorSpec("LineEdit");
           frame_spec fspec = getFrameSpec("LineEdit");
@@ -6240,19 +6245,21 @@ void Style::drawComplexControl(ComplexControl control,
           if (!(option->state & State_Enabled))
             painter->restore();
         }
-        if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows)
+        if (opt->subControls & SC_SpinBoxUp)
         {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
-          drawPrimitive(PE_IndicatorSpinUp,&o,painter,widget);
-          o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget);
-          drawPrimitive(PE_IndicatorSpinDown,&o,painter,widget);
+          if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows)
+            drawPrimitive(PE_IndicatorSpinUp,&o,painter,widget);
+          else if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus)
+            drawPrimitive(PE_IndicatorSpinPlus,&o,painter,widget);
         }
-        else if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus)
+        if (opt->subControls & SC_SpinBoxDown)
         {
-          o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
-          drawPrimitive(PE_IndicatorSpinPlus,&o,painter,widget);
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget);
-          drawPrimitive(PE_IndicatorSpinMinus,&o,painter,widget);
+          if (opt->buttonSymbols == QAbstractSpinBox::UpDownArrows)
+            drawPrimitive(PE_IndicatorSpinDown,&o,painter,widget);
+          else if (opt->buttonSymbols == QAbstractSpinBox::PlusMinus)
+            drawPrimitive(PE_IndicatorSpinMinus,&o,painter,widget);
         }
       }
 

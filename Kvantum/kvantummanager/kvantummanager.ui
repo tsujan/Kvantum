@@ -45,7 +45,7 @@
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="installLabel">
           <property name="text">
-           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used with Kvantum. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</string>
+           <string>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used by Kvantum. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>

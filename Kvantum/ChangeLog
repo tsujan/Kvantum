@@ -3,6 +3,7 @@ V0.9.4
  * Added a hacking key for not styling any toolbar other than the top one.
  * Added a hacking key for tinting label icons on mouseover.
  * Added a hacking key for setting the opacity of disabled icons.
+ * Draw each spinbox indicator only once.
 
 V0.9.3
 ---------
