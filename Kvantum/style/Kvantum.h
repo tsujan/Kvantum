@@ -55,41 +55,41 @@ class Style : public QCommonStyle {
 
     virtual bool eventFilter(QObject *o, QEvent *e);
 
-    virtual int pixelMetric (PixelMetric metric,
-                             const QStyleOption *option = 0,
-                             const QWidget *widget = 0) const;
-    virtual QRect subElementRect (SubElement element,
-                                  const QStyleOption *option,
-                                  const QWidget *widget = 0) const;
-    virtual QRect subControlRect (ComplexControl control,
-                                  const QStyleOptionComplex *option,
-                                  SubControl subControl,
-                                  const QWidget *widget = 0) const;
-    QSize sizeFromContents (ContentsType type,
-                            const QStyleOption *option,
-                            const QSize &contentsSize,
+    virtual int pixelMetric(PixelMetric metric,
+                            const QStyleOption *option = 0,
                             const QWidget *widget = 0) const;
+    virtual QRect subElementRect(SubElement element,
+                                 const QStyleOption *option,
+                                 const QWidget *widget = 0) const;
+    virtual QRect subControlRect(ComplexControl control,
+                                 const QStyleOptionComplex *option,
+                                 SubControl subControl,
+                                 const QWidget *widget = 0) const;
+    QSize sizeFromContents(ContentsType type,
+                           const QStyleOption *option,
+                           const QSize &contentsSize,
+                           const QWidget *widget = 0) const;
 
-    virtual void drawPrimitive (PrimitiveElement element,
-                                const QStyleOption *option,
-                                QPainter *painter,
-                                const QWidget *widget = 0) const;
-    virtual void drawControl (ControlElement element,
-                              const QStyleOption *option,
-                              QPainter *painter,
-                              const QWidget *widget = 0) const;
-    virtual void drawComplexControl (ComplexControl control,
-                                     const QStyleOptionComplex *option,
-                                     QPainter *painter,
-                                     const QWidget *widget = 0 ) const;
+    virtual void drawPrimitive(PrimitiveElement element,
+                               const QStyleOption *option,
+                               QPainter *painter,
+                               const QWidget *widget = 0) const;
+    virtual void drawControl(ControlElement element,
+                             const QStyleOption *option,
+                             QPainter *painter,
+                             const QWidget *widget = 0) const;
+    virtual void drawComplexControl(ComplexControl control,
+                                    const QStyleOptionComplex *option,
+                                    QPainter *painter,
+                                    const QWidget *widget = 0 ) const;
     virtual int styleHint(StyleHint hint,
                           const QStyleOption *option = 0,
                           const QWidget *widget = 0,
                           QStyleHintReturn *returnData = 0) const;
-    virtual SubControl hitTestComplexControl (ComplexControl control,
-                                              const QStyleOptionComplex *option,
-                                              const QPoint &position,
-                                              const QWidget *widget = 0) const;
+    virtual SubControl hitTestComplexControl(ComplexControl control,
+                                             const QStyleOptionComplex *option,
+                                             const QPoint &position,
+                                             const QWidget *widget = 0) const;
 
     /* A solution for Qt5's problem with translucent windows.*/
     void setSurfaceFormat(QWidget *w) const;
@@ -110,14 +110,14 @@ class Style : public QCommonStyle {
     };
 
 #if QT_VERSION >= 0x050000
-    QIcon standardIcon (StandardPixmap standardIcon,
-                        const QStyleOption *option = 0,
-                        const QWidget *widget = 0) const;
+    QIcon standardIcon(StandardPixmap standardIcon,
+                       const QStyleOption *option = 0,
+                       const QWidget *widget = 0) const;
 #else
   protected slots:
-    QIcon standardIconImplementation (StandardPixmap standardIcon,
-                                      const QStyleOption *option = 0,
-                                      const QWidget *widget = 0) const;
+    QIcon standardIconImplementation(StandardPixmap standardIcon,
+                                     const QStyleOption *option = 0,
+                                     const QWidget *widget = 0) const;
 #endif
 
   private:

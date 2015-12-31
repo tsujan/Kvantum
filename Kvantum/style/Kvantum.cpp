@@ -892,13 +892,9 @@ void Style::polish(QApplication *app)
   else if (appName == "soffice.bin")
     isLibreoffice_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
+           || appName == "plasmashell" // Plasma5
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma_ = true;
-  else if (appName == "plasmashell") // KF5
-  {
-    isPlasma_ = true;
-    tspec_.vertical_spin_indicators = true; // KF5 is a mess!
-  }
 
   if (tspec_.opaque.contains (appName))
     isOpaque_ = true;
@@ -1526,9 +1522,9 @@ static inline QSize textSize (const QFont &font, const QString &text)
 }
 
 void Style::drawPrimitive(PrimitiveElement element,
-                            const QStyleOption *option,
-                            QPainter *painter,
-                            const QWidget *widget) const
+                          const QStyleOption *option,
+                          QPainter *painter,
+                          const QWidget *widget) const
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
@@ -2485,9 +2481,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
       }
       QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p);
-      if (sb
+      const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox *>(option);
+      if (sb || sbOpt
           || (p && p->inherits("KisAbstractSliderSpinBox"))
-          || (isLibreoffice_ && qstyleoption_cast<const QStyleOptionSpinBox *>(option)))
+          || (isLibreoffice_ && sbOpt))
       {
         if (!sb || sb->buttonSymbols() != QAbstractSpinBox::NoButtons)
         {
@@ -2496,8 +2493,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.capsuleV = 2;
         }
 
-        // -> CC_SpinBox
-        if (tspec_.vertical_spin_indicators)
+        // the measure we used for CC_SpinBox at drawComplexControl()
+        if (tspec_.vertical_spin_indicators || (!widget && sbOpt && sbOpt->frame))
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           fspec.expansion = 0;
@@ -2545,7 +2542,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       /* force frame */
       renderFrame(painter,
-                  isLibreoffice_ && !qstyleoption_cast<const QStyleOptionSpinBox *>(option) ?
+                  isLibreoffice_ && !sbOpt ?
                     option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
                     option->rect,
                   fspec,
@@ -2604,9 +2601,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         up = false;
 
       const QString group = "IndicatorSpinBox";
+      const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
+      // the measure we used for CC_SpinBox at drawComplexControl()
+      bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       frame_spec fspec;
-      if (!tspec_.vertical_spin_indicators)
+      if (!verticalIndicators)
       {
         fspec = getFrameSpec(group);
         fspec.hasCapsule = true;
@@ -2628,14 +2628,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.expansion = 0;
       }
 
-      const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (isLibreoffice_)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         fspec.expansion = 0;
       }
       // -> CC_SpinBox
-      else if (opt && !tspec_.vertical_spin_indicators)
+      else if (opt && !verticalIndicators)
       {
         if (up)
         {
@@ -2729,7 +2728,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       QRect r = option->rect;
 
-      if (!tspec_.vertical_spin_indicators)
+      if (!verticalIndicators)
       {
         if (bStatus.startsWith("disabled"))
         {
@@ -2748,7 +2747,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       indicator_spec dspec = getIndicatorSpec(group);
       Qt::Alignment align;
       // horizontally center both indicators
-      if (!tspec_.vertical_spin_indicators)
+      if (!verticalIndicators)
         align = Qt::AlignCenter;
       else
       {
@@ -3353,9 +3352,9 @@ void Style::drawPrimitive(PrimitiveElement element,
 }
 
 void Style::drawControl(ControlElement element,
-                          const QStyleOption *option,
-                          QPainter *painter,
-                          const QWidget *widget) const
+                        const QStyleOption *option,
+                        QPainter *painter,
+                        const QWidget *widget) const
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
@@ -6062,9 +6061,9 @@ void Style::drawControl(ControlElement element,
 }
 
 void Style::drawComplexControl(ComplexControl control,
-                                 const QStyleOptionComplex *option,
-                                 QPainter *painter,
-                                 const QWidget *widget) const
+                               const QStyleOptionComplex *option,
+                               QPainter *painter,
+                               const QWidget *widget) const
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
@@ -6210,16 +6209,21 @@ void Style::drawComplexControl(ComplexControl control,
 
       if (opt) {
         QStyleOptionSpinBox o(*opt);
+        /* If a null widget is fed into this method but the spinbox
+           has a frame, we'll draw buttons vertically. Fortunately,
+           KisSliderSpinBox never fulfills this condition. */
+        bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt->frame));
 
         /* The field is automatically drawn as lineedit at PE_PanelLineEdit.
-           So, we don't duplicate it here but LibreOffice is an exception. */
-        if (isLibreoffice_)
+           So, we don't duplicate it here but there are some exceptions. */
+        if (isLibreoffice_
+            || (!widget && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
           o.rect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
 
-        if (tspec_.vertical_spin_indicators && opt->subControls & SC_SpinBoxUp)
+        if (verticalIndicators && opt->subControls & SC_SpinBoxUp)
         {
           const interior_spec ispec = getInteriorSpec("LineEdit");
           frame_spec fspec = getFrameSpec("LineEdit");
@@ -7490,9 +7494,9 @@ void Style::setSurfaceFormat(QWidget *widget) const
 }
 
 int Style::styleHint(StyleHint hint,
-                       const QStyleOption *option,
-                       const QWidget *widget,
-                       QStyleHintReturn *returnData) const
+                     const QStyleOption *option,
+                     const QWidget *widget,
+                     QStyleHintReturn *returnData) const
 {
   setSurfaceFormat(widget); /* FIXME Why here and nowhere else?
                                      Perhaps because of its use in qapplication.cpp. */
@@ -7631,18 +7635,18 @@ int Style::styleHint(StyleHint hint,
   }
 }
 
-QCommonStyle::SubControl Style::hitTestComplexControl (ComplexControl control,
-                                                         const QStyleOptionComplex *option,
-                                                         const QPoint &position,
-                                                         const QWidget *widget) const
+QCommonStyle::SubControl Style::hitTestComplexControl(ComplexControl control,
+                                                      const QStyleOptionComplex *option,
+                                                      const QPoint &position,
+                                                      const QWidget *widget) const
 {
   return QCommonStyle::hitTestComplexControl(control,option,position,widget);
 }
 
-QSize Style::sizeFromContents (ContentsType type,
-                                 const QStyleOption *option,
-                                 const QSize &contentsSize,
-                                 const QWidget *widget) const
+QSize Style::sizeFromContents(ContentsType type,
+                              const QStyleOption *option,
+                              const QSize &contentsSize,
+                              const QWidget *widget) const
 {
   QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
   QSize s = QSize(0,0);
@@ -8825,9 +8829,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 }
 
 QRect Style::subControlRect(ComplexControl control,
-                              const QStyleOptionComplex *option,
-                              SubControl subControl,
-                              const QWidget *widget) const
+                            const QStyleOptionComplex *option,
+                            SubControl subControl,
+                            const QWidget *widget) const
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
@@ -8872,6 +8876,9 @@ QRect Style::subControlRect(ComplexControl control,
       int sw = SPIN_BUTTON_WIDTH;
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
+      const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
+      // the measure we used for CC_SpinBox at drawComplexControl()
+      bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       // a workaround for LibreOffice
       if (isLibreoffice_)
@@ -8879,7 +8886,7 @@ QRect Style::subControlRect(ComplexControl control,
         sw = 12;
         fspec.right = qMin(fspec.right,3);
       }
-      else if (!tspec_.vertical_spin_indicators)
+      else if (!verticalIndicators)
       {
         /* when there isn't enough horizontal space (as in Pencil) */
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
@@ -8918,7 +8925,7 @@ QRect Style::subControlRect(ComplexControl control,
         }
       }
 
-      if (sw != 0 && tspec_.vertical_spin_indicators)
+      if (sw != 0 && verticalIndicators)
       {
         fspecLE.right = qMin(fspecLE.left,3);
         fspec = fspecLE;
@@ -8935,16 +8942,16 @@ QRect Style::subControlRect(ComplexControl control,
             margin = qMin(fspecLE.left,3);
           return QRect(x + margin,
                        y,
-                       w - (sw + fspec.right) - (tspec_.vertical_spin_indicators ? 0 : sw),
+                       w - (sw + fspec.right) - (verticalIndicators ? 0 : sw),
                        h);
         }
         case SC_SpinBoxUp :
           return QRect(x + w - (sw + fspec.right),
                        y,
                        sw + fspec.right,
-                       tspec_.vertical_spin_indicators ? h/2 + (h%2 ? 1 : 0) : h);
+                       verticalIndicators ? h/2 + (h%2 ? 1 : 0) : h);
         case SC_SpinBoxDown :
-          if (!tspec_.vertical_spin_indicators)
+          if (!verticalIndicators)
             return QRect(x + w - (sw + fspec.right) - sw,
                          y,
                          sw,
@@ -9477,13 +9484,13 @@ QRect Style::subControlRect(ComplexControl control,
 }
 
 #if QT_VERSION < 0x050000
-QIcon Style::standardIconImplementation (QStyle::StandardPixmap standardIcon,
-                                           const QStyleOption *option,
-                                           const QWidget *widget) const
+QIcon Style::standardIconImplementation(QStyle::StandardPixmap standardIcon,
+                                        const QStyleOption *option,
+                                        const QWidget *widget) const
 #else
-QIcon Style::standardIcon (QStyle::StandardPixmap standardIcon,
-                             const QStyleOption *option,
-                             const QWidget *widget ) const
+QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
+                          const QStyleOption *option,
+                          const QWidget *widget ) const
 #endif
 {
   switch (standardIcon) {
