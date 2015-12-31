@@ -32,30 +32,30 @@ static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
 
 namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
-  settings(NULL),
-  parentConfig(NULL)
+  settings_(NULL),
+  parentConfig_(NULL)
 {
   load(theme);
 }
 
 ThemeConfig::~ThemeConfig()
 {
-  if (settings)
-    delete settings;
+  if (settings_)
+    delete settings_;
 }
 
 void ThemeConfig::load(const QString& theme)
 {
-  if (settings)
+  if (settings_)
   {
-    delete settings;
-    settings = NULL;
+    delete settings_;
+    settings_ = NULL;
   }
 
   if (!QFile::exists(theme))
     return;
 
-  settings = new QSettings(theme,QSettings::NativeFormat);
+  settings_ = new QSettings(theme,QSettings::NativeFormat);
 }
 
 QVariant ThemeConfig::getValue(const QString& group, const QString& key) const
@@ -65,11 +65,11 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key) const
   if (group.isNull() || group.isEmpty() || key.isNull() || key.isEmpty())
     return r;
 
-  if (settings)
+  if (settings_)
   {
-    settings->beginGroup(group);
-    r = settings->value(key);
-    settings->endGroup();
+    settings_->beginGroup(group);
+    r = settings_->value(key);
+    settings_->endGroup();
   }
 
   return r;
@@ -99,12 +99,12 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
 
   /* go to the parent config if this key isn't found here
      but leave the text color to be set by the color scheme */
-  if (parentConfig
+  if (parentConfig_
       && key != "text.normal.color" && key != "text.focus.color" && key != "text.press.color" && key != "text.toggle.color"
       && key != "text.bold" && key != "text.italic")
   {
-    i = parentConfig->getValue(group, "inherits").toString();
-    r = parentConfig->getValue(group, key, i);
+    i = parentConfig_->getValue(group, "inherits").toString();
+    r = parentConfig_->getValue(group, key, i);
   }
 
   return r;

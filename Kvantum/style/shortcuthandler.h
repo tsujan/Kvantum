@@ -17,8 +17,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __SHORTCUT_HANDLER_H__
-#define __SHORTCUT_HANDLER_H__
+#ifndef SHORTCUTHANDLER_H
+#define SHORTCUTHANDLER_H
 
 #include <QObject>
 #include <QSet>
@@ -38,7 +38,7 @@ public:
     bool
     isAltDown() const
     {
-        return itsAltDown;
+        return itsAltDown_;
     }
     bool showShortcut(const QWidget *widget) const;
 
@@ -53,10 +53,10 @@ protected:
 
 private:
 
-    bool itsAltDown;
-    QSet<QWidget*> itsSeenAlt;
-    QSet<QWidget*> itsUpdated;
-    QList<QWidget*> itsOpenMenus;
+    bool itsAltDown_;
+    QSet<QWidget*> itsSeenAlt_;
+    QSet<QWidget*> itsUpdated_;
+    QList<QWidget*> itsOpenMenus_;
 };
 }
 

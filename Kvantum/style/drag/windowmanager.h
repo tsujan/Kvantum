@@ -176,7 +176,7 @@ private:
   QPoint dragPoint_;
   QPoint globalDragPoint_;
   // drag timer
-  QBasicTimer _dragTimer;
+  QBasicTimer dragTimer_;
   // target being dragged
 #if QT_VERSION < 0x050000
   /* QWeakPointer is used in case the target

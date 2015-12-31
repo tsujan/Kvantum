@@ -44,8 +44,8 @@ class ThemeConfig {
      */
     void setParent(ThemeConfig *parent)
     {
-      if (!parent->parentConfig)
-        parentConfig = parent;
+      if (!parent->parentConfig_)
+        parentConfig_ = parent;
     }
 
     /* Returns the frame spec of the given widget. */
@@ -87,8 +87,8 @@ class ThemeConfig {
      */
     QVariant getValue(const QString &group, const QString& key) const;
 
-    QSettings *settings;
-    ThemeConfig *parentConfig;
+    QSettings *settings_;
+    ThemeConfig *parentConfig_;
 };
 }
 

@@ -1039,10 +1039,13 @@ void Style::unpolish(QWidget *widget)
       default: break;
     }
 
-    if (widget->inherits("KisAbstractSliderSpinBox"))
+    if (widget->inherits("KisAbstractSliderSpinBox")
+        || widget->inherits("KMultiTabBarTab")
+        || qobject_cast<QProgressBar*>(widget)
+        || qobject_cast<QAbstractSpinBox*>(widget))
+    {
       widget->removeEventFilter(this);
-    else if (qobject_cast<QAbstractSpinBox*>(widget))
-      widget->removeEventFilter(this);
+    }
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
@@ -1126,7 +1129,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               progresstimer_->start(50);
           }
         }
-        else
+        else if (!progressbars_.isEmpty())
         {
           progressbars_.remove(w);
           if (progressbars_.size() == 0)
@@ -1209,7 +1212,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
 
   case QEvent::Hide:
   case QEvent::Destroy:
-    if (w)
+    if (w && !progressbars_.isEmpty())
     {
       if (qobject_cast<QProgressBar *>(o))
       {

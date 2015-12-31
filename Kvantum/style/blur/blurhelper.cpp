@@ -33,13 +33,13 @@ namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-  _atom_blur = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
+  atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
 #endif
 
   if (!menuS.isEmpty() && menuS.size() >= 4)
-    menuShadow = menuS;
+    menuShadow_ = menuS;
   if (!tooltipS.isEmpty() && tooltipS.size() >= 4)
-    tooltipShadow = tooltipS;
+    tooltipShadow_ = tooltipS;
 }
 /*************************/
 void BlurHelper::registerWidget (QWidget* widget)
@@ -75,7 +75,7 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
       QWidget* widget (qobject_cast<QWidget*>(object));
       /* take precautions */
       if (!widget || !widget->isWindow()) break;
-      _pendingWidgets.insert (widget, widget);
+      pendingWidgets_.insert (widget, widget);
       delayedUpdate();
       break;
     }
@@ -93,9 +93,9 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 
   QList<int> r;
   if (qobject_cast<QMenu*>(widget))
-    r = menuShadow;
+    r = menuShadow_;
   else if (widget->inherits("QTipLabel"))
-    r = tooltipShadow;
+    r = tooltipShadow_;
   /* trimming the region isn't good for us */
   return (widget->mask().isEmpty() ? 
             r.isEmpty() ?
@@ -121,7 +121,7 @@ void BlurHelper::update (QWidget* widget) const
       data << rect.x() << rect.y() << rect.width() << rect.height();
     }
     XChangeProperty (QX11Info::display(), widget->internalWinId(),
-                     _atom_blur, XA_CARDINAL, 32, PropModeReplace,
+                     atom_blur_, XA_CARDINAL, 32, PropModeReplace,
                      reinterpret_cast<const unsigned char *>(data.constData()),
                      data.size());
   }
@@ -136,7 +136,7 @@ void BlurHelper::clear (QWidget* widget) const
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   // WARNING never use winId()
   if (widget->internalWinId())
-    XDeleteProperty (QX11Info::display(), widget->internalWinId(), _atom_blur);
+    XDeleteProperty (QX11Info::display(), widget->internalWinId(), atom_blur_);
 #else
   Q_UNUSED (widget);
 #endif

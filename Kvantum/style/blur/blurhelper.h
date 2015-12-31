@@ -53,9 +53,9 @@ class BlurHelper: public QObject
        update of blur regions of pending widgets. */
     virtual void timerEvent (QTimerEvent* event)
     {
-      if (event->timerId() == _timer.timerId())
+      if (event->timerId() == timer_.timerId())
       {
-        _timer.stop();
+        timer_.stop();
         update();
       }
       else
@@ -69,17 +69,17 @@ class BlurHelper: public QObject
        used to allow some buffering of the update requests. */
     void delayedUpdate (void)
     {
-      if (!_timer.isActive())
-        _timer.start (10, this);
+      if (!timer_.isActive())
+        timer_.start (10, this);
     }
     void update (void)
     {
-      foreach (const WidgetPointer& widget, _pendingWidgets)
+      foreach (const WidgetPointer& widget, pendingWidgets_)
       {
         if (widget)
           update (widget.data());
       }
-      _pendingWidgets.clear();
+      pendingWidgets_.clear();
     }
 
     /* Update blur regions for given widget. */
@@ -93,19 +93,19 @@ class BlurHelper: public QObject
     /* List of widgets for which blur region must be updated. */
     typedef QPointer<QWidget> WidgetPointer;
     typedef QHash<QWidget*, WidgetPointer> WidgetSet;
-    WidgetSet _pendingWidgets;
+    WidgetSet pendingWidgets_;
 
     /* Delayed update timer. */
-    QBasicTimer _timer;
+    QBasicTimer timer_;
 
     /* Dimensions of pure shadows of menus and tooltips.
        (left, top, right, bottom) */
-    QList<int> menuShadow;
-    QList<int> tooltipShadow;
+    QList<int> menuShadow_;
+    QList<int> tooltipShadow_;
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
     /* The required atom. */
-    Atom _atom_blur;
+    Atom atom_blur_;
 #endif
 };
 }

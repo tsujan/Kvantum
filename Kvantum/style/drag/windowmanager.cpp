@@ -151,9 +151,9 @@ bool WindowManager::eventFilter (QObject* object, QEvent* event)
 void WindowManager::timerEvent (QTimerEvent* event)
 {
 
-  if (event->timerId() == _dragTimer.timerId())
+  if (event->timerId() == dragTimer_.timerId())
   {
-    _dragTimer.stop();
+    dragTimer_.stop();
     if (target_)
       startDrag (target_.data(), globalDragPoint_);
   }
@@ -213,8 +213,8 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
   Q_UNUSED (object);
 
   // stop timer
-  if (_dragTimer.isActive())
-    _dragTimer.stop();
+  if (dragTimer_.isActive())
+    dragTimer_.stop();
 
   // cast event and check drag distance
   QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
@@ -226,16 +226,16 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
       {
         // start timer,
         dragAboutToStart_ = false;
-        if (_dragTimer.isActive())
-          _dragTimer.stop();
-        _dragTimer.start (dragDelay_, this);
+        if (dragTimer_.isActive())
+          dragTimer_.stop();
+        dragTimer_.start (dragDelay_, this);
 
       }
       else resetDrag();
 
     }
     else if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
-      _dragTimer.start (0, this);
+      dragTimer_.start (0, this);
 
     return true;
   }
@@ -555,8 +555,8 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 void WindowManager::resetDrag (void)
 {
   target_.clear();
-  if (_dragTimer.isActive())
-    _dragTimer.stop();
+  if (dragTimer_.isActive())
+    dragTimer_.stop();
   dragPoint_ = QPoint();
   globalDragPoint_ = QPoint();
   dragAboutToStart_ = false;
@@ -590,7 +590,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
   if (event->type() == QEvent::MouseButtonRelease)
   {
     // stop drag timer
-    if (parent_->_dragTimer.isActive())
+    if (parent_->dragTimer_.isActive())
       parent_->resetDrag();
 
     // unlock
