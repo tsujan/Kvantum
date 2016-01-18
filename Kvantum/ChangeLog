@@ -5,6 +5,8 @@ V0.9.4
  * Added a hacking key for setting the opacity of disabled icons.
  * Draw each spinbox indicator only once.
  * Draw framed spin buttons vertically if a null widget is fed into the related methods.
+ * Show all menu-items in the case of too big menus.
+ * A little overlap for submenus.
 
 V0.9.3
 ---------

@@ -1687,8 +1687,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
       {
-        fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
-        fspec.top = fspec.bottom = 0;
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
 
       // -> CE_ToolButtonLabel
@@ -7169,6 +7168,17 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_MenuPanelWidth : return 0;
 
+    case PM_SubMenuOverlap : {
+      theme_spec tspec_now = settings_->getCompositeSpec();
+      if (tspec_now.composite
+          && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+      {
+        const frame_spec fspec = getFrameSpec("Menu");
+        return -qMax(fspec.left,fspec.right);
+      }
+      return 0;
+    }
+
     case PM_MenuHMargin : 
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
@@ -7516,7 +7526,7 @@ int Style::styleHint(StyleHint hint,
 
     case SH_ToolButton_PopupDelay :
     case SH_Menu_SubMenuPopupDelay : return 250;
-    case SH_Menu_Scrollable :
+    case SH_Menu_Scrollable : return false; // let's see the whole menu
     case SH_Menu_SloppySubMenus : return true;
     /* when set to true, only the last submenu is
        hidden on clicking anywhere outside the menu */

@@ -43,6 +43,8 @@ In LXQT:
 ========
 Select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme. Afterward, the easiest way for all LXQT parts to see Kvantum is logging out and in again.
 
+Be sure to disable Compton's shadow for composited Qt menus if the Kvantum theme that you use has its own menu shadows.
+
 In Other DEs and for Qt4:
 =========================
 Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, save the result with 'File > Save'.
