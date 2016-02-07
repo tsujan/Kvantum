@@ -1587,14 +1587,9 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameStatusBar : {return;} // simple is elegant
 
-    case PE_FrameTabBarBase :
     case PE_FrameDockWidget : {
-      QString group = "TabBarFrame";
-      if (element == PE_FrameDockWidget)
-        group = "Dock";
-
-      frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec = getFrameSpec("Dock");
+      const interior_spec ispec = getInteriorSpec("Dock");
       fspec.expansion = 0;
 
       if (status.startsWith("disabled"))
@@ -1603,16 +1598,88 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      // TabBarFrame seems to have a redundant focus state
-      else if (!status.startsWith("normal") && element == PE_FrameTabBarBase )
-      {
-        if (status.endsWith("-inactive")) status = "normal-inactive";
-        else status = "normal";
-      }
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
       renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
       if (!(option->state & State_Enabled))
         painter->restore();
+
+      break;
+    }
+
+    case PE_FrameTabBarBase : {
+      if (const QStyleOptionTabBarBaseV2 *opt
+              = qstyleoption_cast<const QStyleOptionTabBarBaseV2 *>(option))
+      {
+        QRect r = option->rect;
+        // FIXME: Why does Qt draw redundant frames when there's a corner widget?
+        if (!r.contains(opt->tabBarRect, true)) return;
+        bool verticalTabs = false;
+        bool bottomTabs = false;
+        // as with CE_TabBarTabShape
+        if (opt->shape == QTabBar::RoundedEast
+            || opt->shape == QTabBar::RoundedWest
+            || opt->shape == QTabBar::TriangularEast
+            || opt->shape == QTabBar::TriangularWest)
+        {
+          verticalTabs = true;
+          painter->save();
+          int X, Y, rot;
+          int xTr = 0; int xScale = 1;
+          if (tspec_.mirror_doc_tabs
+              && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
+          {
+            X = w;
+            Y = y;
+            rot = 90;
+          }
+          else
+          {
+            X = 0;
+            Y = y + h;
+            rot = -90;
+            xTr = h; xScale = -1;
+          }
+          r.setRect(0, 0, h, w);
+          QTransform m;
+          m.translate(X, Y);
+          m.rotate(rot);
+          m.translate(xTr, 0); m.scale(xScale,1);
+          painter->setTransform(m, true);
+        }
+        else if (tspec_.mirror_doc_tabs
+                 && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
+        {
+          bottomTabs = true;
+          painter->save();
+          QTransform m;
+          r.setRect(0, 0, w, h);
+          m.translate(x + w, h); m.scale(-1,-1);
+          painter->setTransform(m, true);
+        }
+
+        frame_spec fspec = getFrameSpec("TabBarFrame");
+        const interior_spec ispec = getInteriorSpec("TabBarFrame");
+        fspec.expansion = 0;
+
+        if (status.startsWith("disabled"))
+        {
+          status.replace(QString("disabled"),QString("normal"));
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+        // TabBarFrame seems to have a redundant focus state
+        else if (!status.startsWith("normal"))
+        {
+          if (status.endsWith("-inactive")) status = "normal-inactive";
+          else status = "normal";
+        }
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        if (!(option->state & State_Enabled))
+          painter->restore();
+        if (verticalTabs || bottomTabs)
+          painter->restore();
+      }
 
       break;
     }
@@ -8745,6 +8812,128 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                    -fspec.top-lspec.top,
                    fspec.right+lspec.right,
                    fspec.bottom+lspec.bottom);
+        }
+      }
+      return r;
+    }
+
+    case SE_TabWidgetTabBar : {
+      /* Here, we fix some minute miscalculations in QCommonStyle, which can be
+         relevant only for centered tabs and when the tabbar base panel is drawn. */
+      QRect r;
+      if (const QStyleOptionTabWidgetFrame *opt
+              = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option))
+      {
+        r.setSize(opt->tabBarSize);
+        const uint alingMask = Qt::AlignLeft | Qt::AlignRight | Qt::AlignHCenter;
+        QSize leftCornerSize = opt->leftCornerWidgetSize.isValid()
+                                 ? opt->leftCornerWidgetSize : QSize(0, 0);
+        QSize rightCornerSize = opt->rightCornerWidgetSize.isValid()
+                                  ? opt->rightCornerWidgetSize : QSize(0, 0);
+        switch (opt->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth: {
+            r.setWidth(qMin(r.width(), opt->rect.width() - leftCornerSize.width()
+                                                         - rightCornerSize.width()));
+            switch (styleHint(SH_TabBar_Alignment, opt, widget) & alingMask) {
+              default:
+              case Qt::AlignLeft:
+                r.moveTopLeft(QPoint(leftCornerSize.width(), 0));
+                break;
+              case Qt::AlignHCenter: {
+                r.moveTopLeft(QPoint(opt->rect.center().x() - qRound(r.width()/2.0f) + 1
+                                                            + leftCornerSize.width()/2
+                                                            - rightCornerSize.width()/2,
+                                     0));
+                break;
+              }
+              case Qt::AlignRight:
+                r.moveTopLeft(QPoint(opt->rect.width() - opt->tabBarSize.width()
+                                                       - rightCornerSize.width(),
+                                     0));
+                break;
+            }
+            r = visualRect(opt->direction, opt->rect, r);
+            break;
+          }
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth: {
+            r.setWidth(qMin(r.width(),
+                            opt->rect.width() - leftCornerSize.width()
+                                              - rightCornerSize.width()));
+            switch (styleHint(SH_TabBar_Alignment, opt, widget) & alingMask) {
+              default:
+              case Qt::AlignLeft: {
+                r.moveTopLeft(QPoint(leftCornerSize.width(),
+                                     opt->rect.height() - opt->tabBarSize.height()));
+                break;
+              }
+              case Qt::AlignHCenter: {
+                r.moveTopLeft(QPoint(opt->rect.center().x() - qRound(r.width() / 2.0f) + 1
+                                                            + leftCornerSize.width()/2
+                                                            - rightCornerSize.width()/2,
+                                     opt->rect.height() - opt->tabBarSize.height()));
+                break;
+              }
+              case Qt::AlignRight: {
+                r.moveTopLeft(QPoint(opt->rect.width() - opt->tabBarSize.width()
+                                                       - rightCornerSize.width(),
+                                     opt->rect.height() - opt->tabBarSize.height()));
+                break;
+              }
+            }
+            r = visualRect(opt->direction, opt->rect, r);
+            break;
+          }
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast: {
+            r.setHeight(qMin(r.height(),
+                        opt->rect.height() - leftCornerSize.height()
+                                           - rightCornerSize.height()));
+            switch (styleHint(SH_TabBar_Alignment, opt, widget) & alingMask) {
+              default:
+              case Qt::AlignLeft: {
+                r.moveTopLeft(QPoint(opt->rect.width() - opt->tabBarSize.width(),
+                                     leftCornerSize.height()));
+                break;
+              }
+              case Qt::AlignHCenter: {
+                r.moveTopLeft(QPoint(opt->rect.width() - opt->tabBarSize.width(),
+                                     opt->rect.center().y() - qRound(r.height() / 2.0f) + 1));
+                break;
+              }
+              case Qt::AlignRight: {
+                r.moveTopLeft(QPoint(opt->rect.width() - opt->tabBarSize.width(),
+                                     opt->rect.height() - opt->tabBarSize.height()
+                                                        - rightCornerSize.height()));
+                break;
+              }
+            }
+            break;
+          }
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest: {
+            r.setHeight(qMin(r.height(),
+                        opt->rect.height() - leftCornerSize.height()
+                                           - rightCornerSize.height()));
+            switch (styleHint(SH_TabBar_Alignment, opt, widget) & alingMask) {
+              default:
+              case Qt::AlignLeft: {
+                r.moveTopLeft(QPoint(0, leftCornerSize.height()));
+                break;
+              }
+              case Qt::AlignHCenter: {
+                r.moveTopLeft(QPoint(0, opt->rect.center().y() - qRound(r.height() / 2.0f) + 1));
+                break;
+              }
+              case Qt::AlignRight: {
+                r.moveTopLeft(QPoint(0, opt->rect.height() - opt->tabBarSize.height()
+                                                           - rightCornerSize.height()));
+                break;
+              }
+            }
+            break;
+          }
         }
       }
       return r;

@@ -7,6 +7,8 @@ V0.9.4
  * Draw framed spin buttons vertically if a null widget is fed into the related methods.
  * Show all menu-items in the case of too big menus.
  * A little overlap for submenus.
+ * Fixes for tabbar base panel.
+ * Added KvGnome, with a Gnome like look and feel, to the extra themes.
 
 V0.9.3
 ---------
