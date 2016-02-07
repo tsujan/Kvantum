@@ -1612,7 +1612,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         QRect r = option->rect;
         // FIXME: Why does Qt draw redundant frames when there's a corner widget?
-        if (!r.contains(opt->tabBarRect, true)) return;
+        if (!r.contains(opt->tabBarRect) || r == opt->tabBarRect)
+          return;
         bool verticalTabs = false;
         bool bottomTabs = false;
         // as with CE_TabBarTabShape
