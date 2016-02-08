@@ -140,6 +140,13 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       {
         v = getValue(elementName,"frame.expansion", i);
         r.expansion = qMax(v.toInt(),0);
+        // no frame expansion with different frame and interior element names
+        if (r.expansion > 0)
+        {
+          QVariant v = getValue(elementName, "interior.element", i);
+          if (r.element != v.toString())
+            r.expansion = 0;
+        }
       }
     }
   }

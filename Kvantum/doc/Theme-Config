@@ -506,16 +506,18 @@ frame.left
 frame.right                       integer             The height or width of the corresponding
                                                       frame part if there is any.
 
-frame.expansion                   integer             A positive value will expand the
-                                                      frames until the corner frames meet
-                                                      each other either vertically or
-                                                      horizontally, provided that at least
-                                                      the height or the width of the widget
-                                                      is not greater than it. With appropriate
-                                                      SVG images, this key can be used for
-                                                      making corners completely rounded. Its
-                                                      value is zero by default. Read the file
-                                                      "Theme-Making.pdf" for an explanation.
+frame.expansion                   integer             A positive value will expand the frames
+                                                      until the corner frames meet each other
+                                                      either vertically or horizontally,
+                                                      provided that (1) the frame and interior
+                                                      element names are identical and (2) at 
+                                                      least the height or the width of the
+                                                      widget is not greater than it. With
+                                                      appropriate SVG images, this key can be
+                                                      used for making corners completely
+                                                      rounded. Its value is zero by default.
+                                                      Read the file "Theme-Making.pdf" for
+                                                      more explanation.
 
 interior                          true/false          Draw an interior for the widget?
 
