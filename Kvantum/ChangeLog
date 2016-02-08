@@ -9,6 +9,7 @@ V0.9.4
  * A little overlap for submenus.
  * Fixes for tabbar base panel.
  * Added KvGnome, with a Gnome like look and feel, to the extra themes.
+ * The interior used in partial frame expansion should have the frame name.
 
 V0.9.3
 ---------

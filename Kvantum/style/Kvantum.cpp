@@ -10503,17 +10503,23 @@ void Style::renderInterior(QPainter *painter,
     return;
 
   int w = bounds.width(); int h = bounds.height();
-  if (fspec.hasCapsule && fspec.capsuleH != 2)
-    grouped = true;
-  int e = grouped ? h : qMin(h,w);
-  QString element0(element);
-  if (!isLibreoffice_ && fspec.expansion > 0
-      && (e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                   && themeRndr_->elementExists("expand-"+element0.remove(QString("-inactive")))))
-      && (!fspec.hasCapsule || fspec.capsuleV == 2)
-      /* there's no right/left expanded element */
-      && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
-    return;
+  if (!isLibreoffice_ && fspec.expansion > 0)
+  {
+    if (fspec.hasCapsule && fspec.capsuleH != 2)
+      grouped = true;
+    int e = grouped ? h : qMin(h,w);
+    QString element0(element);
+    /* the interior used for partial frame expansion has the frame name */
+    element0 = element0.remove(QString("-inactive")).replace(ispec.element, fspec.element);
+    if ((e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
+                                  && themeRndr_->elementExists("expand-"+element0)))
+        && (!fspec.hasCapsule || fspec.capsuleV == 2)
+        /* there's no right/left expanded element */
+        && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
+    {
+      return;
+    }
+  }
 
   /* extreme cases */
   if (fspec.hasCapsule// && (fspec.capsuleH != 2 || fspec.capsuleV != 2)
