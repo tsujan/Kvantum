@@ -306,10 +306,10 @@ inherits=PanelButtonCommand
 text.margin=0
 frame.element=itemview
 interior.element=itemview
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 text.margin.top=3
 text.margin.bottom=3
 text.margin.left=4
@@ -362,8 +362,8 @@ text.margin.left=2
 text.margin.right=2
 frame.top=2
 frame.bottom=2
-frame.left=2
-frame.right=2
+frame.left=6
+frame.right=6
 text.shadow=false
 
 [MenuBar]
@@ -371,6 +371,7 @@ inherits=PanelButtonCommand
 interior=false
 frame=true
 frame.element=menubar
+frame.bottom=1
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -405,6 +406,10 @@ inherits=PanelButtonCommand
 
 [Menu]
 inherits=PanelButtonCommand
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
 frame.element=menu
 interior.element=menu
 size.minheight=22

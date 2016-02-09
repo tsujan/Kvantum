@@ -1493,14 +1493,250 @@ check box</string>
      <string>Sliders/Scrolls/Progress/Dial</string>
     </attribute>
     <layout class="QGridLayout" name="gridLayout_12">
+     <item row="3" column="1">
+      <layout class="QGridLayout" name="gridLayout_11">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <item row="0" column="2" colspan="3">
+        <widget class="QProgressBar" name="progressBar_6">
+         <property name="value">
+          <number>25</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="12">
+        <widget class="QProgressBar" name="progressBar_8">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>0</number>
+         </property>
+         <property name="value">
+          <number>-1</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QProgressBar" name="progressBar_5">
+         <property name="value">
+          <number>25</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6" alignment="Qt::AlignRight">
+        <widget class="QProgressBar" name="progressBar_9">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="value">
+          <number>25</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="textDirection">
+          <enum>QProgressBar::BottomToTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="6" rowspan="2" colspan="2" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QDial" name="dial">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="sliderPosition">
+          <number>25</number>
+         </property>
+         <property name="notchesVisible">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7" alignment="Qt::AlignLeft">
+        <widget class="QProgressBar" name="progressBar_10">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="value">
+          <number>25</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+         <property name="textDirection">
+          <enum>QProgressBar::BottomToTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="12">
+        <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="5" rowspan="2">
+        <spacer name="horizontalSpacer_21">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="8" rowspan="2">
+        <spacer name="horizontalSpacer_22">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="9" colspan="3" alignment="Qt::AlignRight">
+        <widget class="QProgressBar" name="progressBar_7">
+         <property name="maximum">
+          <number>0</number>
+         </property>
+         <property name="value">
+          <number>-1</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <spacer name="horizontalSpacer_15">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="13">
+        <spacer name="horizontalSpacer_20">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="9" colspan="5" alignment="Qt::AlignBottom">
+        <widget class="QProgressBar" name="progressBar">
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="9" colspan="5" alignment="Qt::AlignTop">
+        <widget class="QProgressBar" name="progressBar_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>0</number>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="5" alignment="Qt::AlignBottom">
+        <widget class="QProgressBar" name="progressBar_2">
+         <property name="value">
+          <number>25</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="5" alignment="Qt::AlignTop">
+        <widget class="QProgressBar" name="progressBar_3">
+         <property name="value">
+          <number>25</number>
+         </property>
+         <property name="invertedAppearance">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
      <item row="1" column="0" rowspan="3">
       <spacer name="horizontalSpacer_9">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>50</width>
          <height>20</height>
         </size>
        </property>
@@ -1508,19 +1744,6 @@ check box</string>
      </item>
      <item row="1" column="1">
       <layout class="QGridLayout" name="gridLayout_10">
-       <item row="2" column="4">
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="0" column="0" colspan="4">
         <widget class="QSlider" name="horizontalSlider">
          <property name="orientation">
@@ -1531,20 +1754,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="4" colspan="4">
+       <item row="0" column="5" colspan="4">
         <widget class="QSlider" name="horizontalSlider_2">
          <property name="enabled">
           <bool>false</bool>
@@ -1574,7 +1784,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="6">
+       <item row="2" column="7">
         <widget class="QSlider" name="verticalSlider_2">
          <property name="enabled">
           <bool>false</bool>
@@ -1587,7 +1797,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="7">
+       <item row="2" column="8">
         <widget class="QScrollBar" name="verticalScrollBar_2">
          <property name="enabled">
           <bool>false</bool>
@@ -1604,7 +1814,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="4" colspan="4">
+       <item row="3" column="5" colspan="4">
         <widget class="QScrollBar" name="horizontalScrollBar_2">
          <property name="enabled">
           <bool>false</bool>
@@ -1614,7 +1824,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="5">
+       <item row="2" column="6">
         <widget class="QSlider" name="verticalSlider_4">
          <property name="enabled">
           <bool>false</bool>
@@ -1656,7 +1866,7 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="4" colspan="4">
+       <item row="1" column="5" colspan="4">
         <widget class="QSlider" name="horizontalSlider_4">
          <property name="enabled">
           <bool>false</bool>
@@ -1672,6 +1882,22 @@ check box</string>
          </property>
         </widget>
        </item>
+       <item row="0" column="4" rowspan="3">
+        <spacer name="horizontalSpacer_14">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item row="1" column="2" rowspan="3">
@@ -1679,9 +1905,12 @@ check box</string>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>50</width>
          <height>20</height>
         </size>
        </property>
@@ -1692,10 +1921,13 @@ check box</string>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>301</width>
-         <height>50</height>
+         <width>20</width>
+         <height>40</height>
         </size>
        </property>
       </spacer>
@@ -1705,9 +1937,12 @@ check box</string>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>301</width>
+         <width>20</width>
          <height>20</height>
         </size>
        </property>
@@ -1718,237 +1953,16 @@ check box</string>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>301</width>
-         <height>50</height>
+         <width>20</width>
+         <height>40</height>
         </size>
        </property>
       </spacer>
-     </item>
-     <item row="3" column="1">
-      <layout class="QGridLayout" name="gridLayout_11">
-       <item row="1" column="7" colspan="3" alignment="Qt::AlignBottom">
-        <widget class="QProgressBar" name="progressBar">
-         <property name="minimum">
-          <number>0</number>
-         </property>
-         <property name="maximum">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="9">
-        <widget class="QProgressBar" name="progressBar_8">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximum">
-          <number>0</number>
-         </property>
-         <property name="value">
-          <number>-1</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="invertedAppearance">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QProgressBar" name="progressBar_5">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="value">
-          <number>25</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" alignment="Qt::AlignLeft">
-        <widget class="QProgressBar" name="progressBar_6">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="value">
-          <number>25</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="invertedAppearance">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="8" alignment="Qt::AlignRight">
-        <widget class="QProgressBar" name="progressBar_7">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximum">
-          <number>0</number>
-         </property>
-         <property name="value">
-          <number>-1</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4" alignment="Qt::AlignRight|Qt::AlignTop">
-        <widget class="QProgressBar" name="progressBar_9">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>90</height>
-          </size>
-         </property>
-         <property name="value">
-          <number>25</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="textDirection">
-          <enum>QProgressBar::BottomToTop</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="7" colspan="3" alignment="Qt::AlignTop">
-        <widget class="QProgressBar" name="progressBar_4">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="minimum">
-          <number>0</number>
-         </property>
-         <property name="maximum">
-          <number>0</number>
-         </property>
-         <property name="invertedAppearance">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="3" alignment="Qt::AlignTop">
-        <widget class="QProgressBar" name="progressBar_3">
-         <property name="value">
-          <number>25</number>
-         </property>
-         <property name="invertedAppearance">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="3" alignment="Qt::AlignBottom">
-        <widget class="QProgressBar" name="progressBar_2">
-         <property name="value">
-          <number>25</number>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4" rowspan="2" colspan="2">
-        <widget class="QDial" name="dial">
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>70</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>70</height>
-          </size>
-         </property>
-         <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="sliderPosition">
-          <number>25</number>
-         </property>
-         <property name="notchesVisible">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5" alignment="Qt::AlignLeft|Qt::AlignTop">
-        <widget class="QProgressBar" name="progressBar_10">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>90</height>
-          </size>
-         </property>
-         <property name="value">
-          <number>25</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="invertedAppearance">
-          <bool>true</bool>
-         </property>
-         <property name="textDirection">
-          <enum>QProgressBar::BottomToTop</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <spacer name="horizontalSpacer_14">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="6">
-        <spacer name="horizontalSpacer_15">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
      </item>
     </layout>
    </widget>
@@ -3057,22 +3071,6 @@ and tooltips</string>
     <hint type="destinationlabel">
      <x>346</x>
      <y>281</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>checkBox_7</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>checkBox_8</receiver>
-   <slot>setChecked(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>237</x>
-     <y>312</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>377</x>
-     <y>318</y>
     </hint>
    </hints>
   </connection>

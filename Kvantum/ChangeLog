@@ -10,6 +10,7 @@ V0.9.4
  * Fixes for tabbar base panel.
  * Added KvGnome, with a Gnome like look and feel, to the extra themes.
  * The interior used in partial frame expansion should have the frame name.
+ * Workaround for bad hard-coded slider styling.
 
 V0.9.3
 ---------

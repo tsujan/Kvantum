@@ -6881,8 +6881,35 @@ void Style::drawComplexControl(ComplexControl control,
           fspec.expansion = 0;
 
           QRect r = subControlRect(CC_Slider,opt,SC_SliderHandle,widget);
-          /* derive other handles from the
-             main one only when necessary */
+          /* workaround for bad hard-coded styling (as in Sayonara) */
+          QRect R = option->rect;
+          if (horiz)
+          {
+            if (r.y() < R.y())
+              r.moveTop(R.y());
+            if (r.bottom() > R.bottom())
+            {
+              r.setHeight(R.height() - r.y());
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+            }
+          }
+          else
+          {
+            if (r.x() < R.x())
+              r.moveLeft(R.x());
+            if (r.right() > R.right())
+            {
+              r.setWidth(R.width() - r.x());
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+            }
+          }
+          /* derive other handles from the main one only when necessary */
           bool derive = false;
           if (len != thick)
           {
@@ -10503,7 +10530,7 @@ void Style::renderInterior(QPainter *painter,
     return;
 
   int w = bounds.width(); int h = bounds.height();
-  if (!isLibreoffice_ && fspec.expansion > 0)
+  if (!isLibreoffice_ && fspec.expansion > 0 && !ispec.element.isEmpty())
   {
     if (fspec.hasCapsule && fspec.capsuleH != 2)
       grouped = true;

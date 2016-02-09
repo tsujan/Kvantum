@@ -42,6 +42,7 @@ public:
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
     connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
     connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
+    connect (checkBox_7, SIGNAL (stateChanged (int)), this, SLOT (setDisabledState (int)));
     actionTest2->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
   }
@@ -101,6 +102,9 @@ private slots:
     toolButton_10->setAutoRaise (checked);
     toolButton_11->setAutoRaise (checked);
     toolButton_17->setAutoRaise (checked);
+  }
+  void setDisabledState (int state) {
+    checkBox_8->setCheckState((Qt::CheckState)state);
   }
 };
 
