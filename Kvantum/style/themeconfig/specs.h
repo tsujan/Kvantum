@@ -82,6 +82,8 @@ typedef struct {
   bool popup_blurring;
   /* depth of menu shadows */
   int menu_shadow_depth;
+  /* overlap between a submenu and its parent */
+  int submenu_overlap;
   /* depth of tooltip shadows */
   int tooltip_shadow_depth;
   /* splitter width */
@@ -327,6 +329,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.blurring = false;
   tspec.popup_blurring = false;
   tspec.menu_shadow_depth = 0;
+  tspec.submenu_overlap = -1;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;

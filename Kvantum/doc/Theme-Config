@@ -275,6 +275,11 @@ composite                         true/false          Use compositing to have
                                                       if no compositing is available.
                                                       Its absence also means false.
 
+submenu_overlap                   integer             The horizontal overlap between a
+                                                      submenu and its parent. The default
+                                                      is -1, which means automatic. It
+                                                      cannot be greater than 16px.
+
 menu_shadow_depth                 integer             The depth of the shadow menus
                                                       cast. A value of zero, its
                                                       absence or a false value for

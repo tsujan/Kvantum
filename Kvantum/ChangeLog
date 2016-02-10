@@ -11,6 +11,8 @@ V0.9.4
  * Added KvGnome, with a Gnome like look and feel, to the extra themes.
  * The interior used in partial frame expansion should have the frame name.
  * Workaround for bad hard-coded slider styling.
+ * Swap left and right text margins in RTL.
+ * Added a general key for submenu overlap with -1 (automatic) as default.
 
 V0.9.3
 ---------

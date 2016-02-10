@@ -634,6 +634,11 @@ void KvantumManager::defaultThemeButtons()
       theSize = defaultSettings.value ("layout_spacing").toInt();
     theSize = qMin(qMax(theSize,2), 10);
     ui->spinLayout->setValue (theSize);
+    theSize = -1;
+    if (defaultSettings.contains ("submenu_overlap"))
+      theSize = defaultSettings.value ("submenu_overlap").toInt();
+    theSize = qMin(qMax(theSize,-1), 16);
+    ui->spinOverlap->setValue (theSize);
     defaultSettings.endGroup();
 }
 /*************************/
@@ -853,6 +858,12 @@ void KvantumManager::tabChanged (int index)
                     int theSize = themeSettings.value ("layout_spacing").toInt();
                     theSize = qMin(qMax(theSize,2), 10);
                     ui->spinLayout->setValue (theSize);
+                }
+                if (themeSettings.contains ("submenu_overlap"))
+                {
+                    int theSize = themeSettings.value ("submenu_overlap").toInt();
+                    theSize = qMin(qMax(theSize,-1), 16);
+                    ui->spinOverlap->setValue (theSize);
                 }
                 themeSettings.endGroup();
 
@@ -1295,6 +1306,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
         generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
         generalKeys.insert("layout_spacing", str.setNum (ui->spinLayout->value()));
+        generalKeys.insert("submenu_overlap", str.setNum (ui->spinOverlap->value()));
 
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
@@ -1387,6 +1399,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("button_icon_size", ui->spinButton->value());
         themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
         themeSettings.setValue ("layout_spacing", ui->spinLayout->value());
+        themeSettings.setValue ("submenu_overlap", ui->spinOverlap->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");

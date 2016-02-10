@@ -414,6 +414,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   if (v.isValid())
     r.opaque << v.toStringList();
 
+  v = getValue("General","submenu_overlap", empty);
+  if (v.isValid())
+    r.submenu_overlap = qMin(qMax(v.toInt(),-1),16);
+
   v = getValue("General","splitter_width", empty);
   if (v.isValid())
     r.splitter_width = qMin(qMax(v.toInt(),0),32);

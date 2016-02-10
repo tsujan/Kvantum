@@ -2624,8 +2624,20 @@ check box</string>
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <widget class="QMenu" name="menuSubmenu">
+     <property name="title">
+      <string>Submenu</string>
+     </property>
+     <addaction name="actionTest1"/>
+     <addaction name="separator"/>
+     <addaction name="actionMenu_radio"/>
+     <addaction name="actionMenu_radio1"/>
+    </widget>
+    <addaction name="actionTest1"/>
+    <addaction name="separator"/>
     <addaction name="actionMenu_Item"/>
     <addaction name="actionNew_Item"/>
+    <addaction name="menuSubmenu"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -2672,7 +2684,7 @@ check box</string>
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Menu Item</string>
+    <string>Checkbox</string>
    </property>
   </action>
   <action name="actionTest">
@@ -2730,7 +2742,23 @@ and tooltips</string>
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Menu Item</string>
+    <string>Checkbox</string>
+   </property>
+  </action>
+  <action name="actionMenu_radio">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Radio button</string>
+   </property>
+  </action>
+  <action name="actionMenu_radio1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Radio button</string>
    </property>
   </action>
  </widget>

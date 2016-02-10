@@ -32,7 +32,7 @@ popup_blurring=true
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso
 vertical_spin_indicators=false
 fill_rubberband=false
-merge_menubar_with_toolbar=false
+merge_menubar_with_toolbar=true
 small_icon_size=16
 large_icon_size=32
 button_icon_size=16
@@ -40,6 +40,7 @@ toolbar_icon_size=22
 combo_as_lineedit=true
 layout_spacing=3
 tooltip_delay=-1
+submenu_overlap=6
 
 [GeneralColors]
 window.color=#e9e9e9
@@ -75,7 +76,7 @@ iconless_pushbutton=false
 iconless_menu=false
 disabled_icon_opacity=100
 normal_default_pushbutton=false
-single_top_toolbar=false
+single_top_toolbar=true
 tint_on_mouseover=0
 
 [PanelButtonCommand]
@@ -251,13 +252,13 @@ inherits=PanelButtonCommand
 indicator.element=toolbar
 indicator.size=5
 text.margin=0
-interior=false
+interior=true
 frame=true
 interior.element=menubar
-frame.element=menubar1
+frame.element=menubar
 text.normal.color=black
 text.focus.color=black
-frame.bottom=4
+frame.bottom=1
 text.shadow=false
 
 [Slider]
@@ -356,21 +357,21 @@ indicator.element=menuitem
 size.minheight=22
 text.normal.color=black
 text.focus.color=white
-text.margin.top=0
-text.margin.bottom=0
-text.margin.left=2
-text.margin.right=2
+text.margin.top=1
+text.margin.bottom=1
+text.margin.left=15
+text.margin.right=5
 frame.top=2
 frame.bottom=2
-frame.left=6
-frame.right=6
+frame.left=2
+frame.right=2
 text.shadow=false
 
 [MenuBar]
 inherits=PanelButtonCommand
 interior=false
 frame=true
-frame.element=menubar
+frame.element=none
 frame.bottom=1
 
 [MenuBarItem]
@@ -382,7 +383,7 @@ frame.top=0
 frame.bottom=3
 frame.left=2
 frame.right=2
-text.margin.left=1
+text.margin.left=4
 text.margin.right=4
 text.margin.top=0
 text.margin.bottom=2

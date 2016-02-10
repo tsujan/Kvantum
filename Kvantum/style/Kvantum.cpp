@@ -7264,14 +7264,19 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuPanelWidth : return 0;
 
     case PM_SubMenuOverlap : {
-      theme_spec tspec_now = settings_->getCompositeSpec();
-      if (tspec_now.composite
-          && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+      int so = tspec_.submenu_overlap;
+      if (so >= 0)
+        return -so;
+      else
       {
-        const frame_spec fspec = getFrameSpec("Menu");
-        return -qMax(fspec.left,fspec.right);
+        if (settings_->getCompositeSpec().composite
+            && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+        {
+          const frame_spec fspec = getFrameSpec("Menu");
+          return -qMax(fspec.left,fspec.right);
+        }
+        return 0;
       }
-      return 0;
     }
 
     case PM_MenuHMargin : 
@@ -10892,7 +10897,14 @@ inline indicator_spec Style::getIndicatorSpec(const QString &widgetName) const
 
 inline label_spec Style::getLabelSpec(const QString &widgetName) const
 {
-  return settings_->getLabelSpec(widgetName);
+  label_spec lspec = settings_->getLabelSpec(widgetName);
+  if (QApplication::layoutDirection() == Qt::RightToLeft)
+  {
+    int l = lspec.left;
+    lspec.left = lspec.right;
+    lspec.right = l;
+  }
+  return lspec;
 }
 
 inline size_spec Style::getSizeSpec(const QString &widgetName) const

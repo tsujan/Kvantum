@@ -43,6 +43,9 @@ public:
     connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
     connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
     connect (checkBox_7, SIGNAL (stateChanged (int)), this, SLOT (setDisabledState (int)));
+    QActionGroup *aGroup = new QActionGroup (this);
+    actionMenu_radio->setActionGroup (aGroup);
+    actionMenu_radio1->setActionGroup (aGroup);
     actionTest2->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
   }
