@@ -2536,10 +2536,15 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QString group = "LineEdit";
       const interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
+      label_spec lspec = getLabelSpec(group);
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
+      const size_spec sspec = getSizeSpec(group);
       if (isLibreoffice_
           || (qobject_cast<const QLineEdit*>(widget)
               && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-                  || widget->minimumWidth() == widget->maximumWidth())))
+                  || widget->minimumWidth() == widget->maximumWidth()
+                  || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         //fspec.expansion = 0;
@@ -2572,8 +2577,9 @@ void Style::drawPrimitive(PrimitiveElement element,
         else if (sb)
         {
           QString maxTxt = spinMaxText(sb);
-          if (maxTxt.isEmpty() || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
-                                  + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+          if (maxTxt.isEmpty()
+              || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
+                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
               || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
@@ -2956,7 +2962,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           label_spec lspec1 = getLabelSpec("ComboBox");
           lspec1.left = qMax(0,lspec1.left-1);
           lspec1.right = qMax(0,lspec1.right-1);
-          if (cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right)
+          if (cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
+              || cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
             if (rtl)
               r.adjust(0,0,-qMax(fspec.left-3,0),0);
@@ -4022,7 +4029,8 @@ void Style::drawControl(ControlElement element,
             const indicator_spec dspec = getIndicatorSpec("DropDownButton");
             int deltaR = 0; int deltaL = 0;
             int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
-            if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right)
+            if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
             {
               deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
               deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
@@ -4049,10 +4057,11 @@ void Style::drawControl(ControlElement element,
           }
         }
 
+        int vFrame = qMax(fspec.top,fspec.bottom);
         renderLabel(option,painter,
-                    /* since the label is vertically centered, this doesn't do
-                       any harm and is good for Qt4 Designer and similar cases */
-                    r.adjusted(0,-fspec.top-lspec.top,0,fspec.bottom+lspec.bottom),
+                    /* since the label is vertically centered inside the label rectangle,
+                       this doesn't do any harm and is good for Qt Designer and similar cases */
+                    r.adjusted(0, -vFrame-lspec.top, 0, vFrame+lspec.bottom),
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
@@ -5449,14 +5458,14 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        /* opt->rect provided here is just for the label
-           and not for the entire button. So, enlarge it!
-           Also take into account the possibility of the presence of an indicator! */
+        /* We should enlarge opt->rect because it's shrinked by PM_DefaultFrameWidth.
+           We also take into account the possibility of the presence of an indicator. */
+        int frame = pixelMetric(PM_DefaultFrameWidth, option, widget);
         int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
-        QRect r = option->rect.adjusted(-fspec.left + (opt->direction == Qt::RightToLeft ? ind : 0),
-                                        -fspec.top,
-                                        fspec.right - (opt->direction == Qt::RightToLeft ? 0 : ind),
-                                        fspec.bottom);
+        QRect r = option->rect.adjusted(-frame + (opt->direction == Qt::RightToLeft ? ind : 0),
+                                        -frame,
+                                        frame - (opt->direction == Qt::RightToLeft ? 0 : ind),
+                                        frame);
         if (status.startsWith("toggled") || status.startsWith("pressed"))
         {
           int hShift = pixelMetric(PM_ButtonShiftHorizontal);
@@ -6447,13 +6456,20 @@ void Style::drawComplexControl(ComplexControl control,
             else // when there isn't enough space
             {
               QSize txtSize = textSize(painter->font(),opt->currentText);
-              if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right)
+              if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                  || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
                 //fspec.expansion = 0;
+
+                lspec.left = qMin(lspec.left,2);
+                lspec.right = qMin(lspec.right,2);
+                lspec.top = qMin(lspec.top,2);
+                lspec.bottom = qMin(lspec.bottom,2);
+                lspec.tispace = qMin(lspec.tispace,2);
               }
             }
           }
@@ -6533,8 +6549,8 @@ void Style::drawComplexControl(ComplexControl control,
           const QIcon::State iconstate =
             (option->state & State_On) ? QIcon::On : QIcon::Off;
 
-          fspec.top = fspec.bottom = 0;
-          lspec.top = lspec.bottom = 0;
+          /*fspec.top = fspec.bottom = 0;
+            lspec.top = lspec.bottom = 0;*/
           QPixmap icn = getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize);
           QRect ricn = alignedRect(option->direction,
                                    Qt::AlignVCenter | Qt::AlignLeft,
@@ -7232,6 +7248,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         group = "GenericFrame";
 
       const frame_spec fspec = getFrameSpec(group);
+      if (qobject_cast<const QAbstractItemView *>(widget)
+          && qstyleoption_cast<const QStyleOptionButton *>(option))
+      { // as in Kate's preferences for its default text style
+        return qMin(fspec.left,3);
+      }
       return qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right));
     }
 
@@ -8619,14 +8640,17 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       label_spec lspec = getLabelSpec("LineEdit");
-      lspec.top = lspec.bottom = 0;
+      lspec.top = qMax(0,lspec.top-1);
+      lspec.bottom = qMax(0,lspec.bottom-1);
+      const size_spec sspec = getSizeSpec("LineEdit");
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
       }
-      else if (widget && widget->minimumWidth() == widget->maximumWidth())
+      else if (widget && (widget->minimumWidth() == widget->maximumWidth()
+                          || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height()))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
         lspec.left = lspec.right = qMin(lspec.left,2);
@@ -8643,8 +8667,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         if (!tspec_.vertical_spin_indicators)
         {
           QString maxTxt = spinMaxText(p);
-          if (maxTxt.isEmpty() || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
-                                  + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+          if (maxTxt.isEmpty() 
+              || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
+                                        + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
               || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
@@ -8661,6 +8686,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           lspec.left = 0;
         }
       }
+      lspec.top = lspec.bottom = 0;
       QRect rect = labelRect(option->rect, fspec, lspec);
 
       /* in these cases there are capsules */

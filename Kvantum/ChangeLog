@@ -13,6 +13,7 @@ V0.9.4
  * Workaround for bad hard-coded slider styling.
  * Swap left and right text margins in RTL.
  * Added a general key for submenu overlap with -1 (automatic) as default.
+ * Take frame vertical asymmetry into account when drawing labels of push buttons and comboboxes.
 
 V0.9.3
 ---------

@@ -103,7 +103,7 @@ text.margin=1
 text.iconspacing=3
 indicator.element=arrow
 text.margin.top=1
-text.margin.bottom=2
+text.margin.bottom=1
 text.margin.left=3
 text.margin.right=3
 
