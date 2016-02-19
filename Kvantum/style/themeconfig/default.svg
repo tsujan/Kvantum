@@ -527,7 +527,7 @@
 <linearGradient id="linearGradient7390">
 <stop offset="0" style="stop-color:#3d3d3e" id="stop7392"/>
 <stop offset="0.85000002" style="stop-color:#3d3d3e" id="stop7398"/>
-<stop offset="1" style="stop-color:#606060" id="stop7394"/>
+<stop offset="1" style="stop-color:#555555" id="stop7394"/>
 </linearGradient>
 <linearGradient id="linearGradient7987">
 <stop offset="0" style="stop-color:#323232" id="stop7989"/>
@@ -2002,7 +2002,7 @@
 <rect width="30" x="329.99997" y="49" height="30" style="fill:url(#linearGradient6331)" id="button-toggled"/>
 <g style="fill-rule:evenodd">
 <path style="fill:url(#linearGradient6510)" id="button-pressed-bottom" d="m 286.421,76.4211 -32.8421,0 0,7.5789 32.8421,0 0,-7.5789 z "/>
-<path style="opacity:.75;fill:url(#radialGradient6512)" id="button-pressed-bottomright" d="m 286.421,76.4211 0,7.5789 c 3.76041,0 7.57895,-3.90786 7.57895,-7.57895 h -7.57895 z "/>
+<path style="opacity:.6;fill:url(#radialGradient6512)" id="button-pressed-bottomright" d="m 286.421,76.4211 0,7.5789 c 3.76041,0 7.57895,-3.90786 7.57895,-7.57895 h -7.57895 z "/>
 <path style="fill:url(#radialGradient6514)" id="button-pressed-bottomleft" d="m 246,76.4211 c 0,3.76041 3.72922,7.57895 7.57895,7.57895 v -7.57895 h -7.57895 z "/>
 <path style="fill:url(#radialGradient6516)" id="button-pressed-topleft" d="m 253.5789,36 c -3.84973,0 -7.57895,3.72922 -7.57895,7.57895 h 7.57895 v -7.57895 z "/>
 <path style="fill:#4b4b4b" id="button-pressed" d="m 253.5789,43.579 0,32.8421 32.8421,0 0,-32.8421 -32.8421,0 z "/>

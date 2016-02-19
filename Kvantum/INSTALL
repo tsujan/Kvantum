@@ -41,9 +41,11 @@ In KDE:
 
 In LXQT:
 ========
-Select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme. Afterward, the easiest way for all LXQT parts to see Kvantum is logging out and in again.
+(1) Select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
 
-Be sure to disable Compton's shadow for composited Qt menus if the Kvantum theme that you use has its own menu shadows.
+(2) Select a corresponding Openbox theme in any way you apply themes for Openbox (some of the installed Openbox themes can be used with different Kvantum themes). Afterward, the easiest way for all LXQT parts to see Kvantum is logging out and in again.
+
+Be sure to disable Compton's shadow for composited Qt menus if the Kvantum theme that you use has its own menu shadow. Because of a Qt5 bug, Compton may not distinguish between Qt5 menus and normal windows, in which case you could add "argb" to the "shadow-exclude" section of '~/.config/compton.conf'
 
 In Other DEs and for Qt4:
 =========================
@@ -86,4 +88,4 @@ The default Qt5 installation adds some root themes, that can be selected by usin
 *   GTK   *
 ***********
 
-Kvantum does not -- and will not -- have any relation to GTK.
+Kvantum does not -- and will not -- have any relation to GTK. However, among its extra themes, it includes KvGnome, which has a Gnome-like look and feel.

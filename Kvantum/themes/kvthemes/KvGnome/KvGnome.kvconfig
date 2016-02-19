@@ -65,7 +65,7 @@ progress.indicator.text.color=white
 
 [Hacks]
 transparent_ktitle_label=true
-transparent_dolphin_view=true
+transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
 blur_konsole=true
 transparent_menutitle=false

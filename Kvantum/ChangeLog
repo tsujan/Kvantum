@@ -1,3 +1,8 @@
+V0.9.5
+---------
+ * Added Openbox themes for use with the included Kvantum themes (under LXQT).
+ * Added a new extra theme (KvSimplicity).
+
 V0.9.4
 ---------
  * Added a hacking key for not styling any toolbar other than the top one.

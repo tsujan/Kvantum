@@ -1,0 +1,5 @@
+"Kvantum.colors" is for KDE apps that may use KDE-specific colors.
+
+Long story short, a KDE color scheme should be seen as a part of the user settings for the KDE style engine(s) but some KDE apps use it directly.
+
+"Kvantum.colors" will be installed for the default Kvantum theme. There are also other color schemes, in 'themes/colors/', that will be installed to be used alongside the extra themes.

@@ -479,7 +479,7 @@
          offset="0.85000002"
          style="stop-color:#3d3d3e;stop-opacity:1;" />
       <stop
-         style="stop-color:#606060;stop-opacity:1;"
+         style="stop-color:#555555;stop-opacity:1;"
          offset="1"
          id="stop7394" />
     </linearGradient>
@@ -12852,7 +12852,7 @@
      d="m 286.42102,76.421075 -32.8421,0 0,7.5789 32.8421,0 0,-7.5789 z" />
   <path
      inkscape:connector-curvature="0"
-     style="fill:url(#radialGradient6512);fill-rule:evenodd;stroke:none;fill-opacity:1;opacity:0.75"
+     style="fill:url(#radialGradient6512);fill-rule:evenodd;stroke:none;fill-opacity:1;opacity:0.6"
      id="button-pressed-bottomright"
      d="m 286.42102,76.421075 0,7.5789 c 3.76041,0 7.57895,-3.90786 7.57895,-7.57895 l -7.57895,0 z" />
   <path

@@ -62,6 +62,7 @@ iconless_menu=false
 iconless_pushbutton=false
 kcapacitybar_as_progressbar=true
 transparent_dolphin_view=false
+transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 transparent_menutitle=false
 
