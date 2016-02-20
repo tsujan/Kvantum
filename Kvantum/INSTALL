@@ -67,7 +67,7 @@ If the display manager you use does not source '~/.profile', you could probably 
 *   Using Other Themes   *
 **************************
 
-To install (as user) and select Kvantum themes other than the default one, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
+To select or install (as user) Kvantum themes, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 
