@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=The same as KvDark but with some red elements
+comment=A stylish dark theme with some red elements
 left_tabs=true
 attach_active_tab=true
 joined_tabs=true
@@ -35,11 +35,11 @@ toolbar_icon_size=16
 window.color=#3D3D3E
 base.color=#2E2E2E
 alt.base.color=#383838
-button.color=#494949
-light.color=#626262
+button.color=#3D3D3E
+light.color=#6E6E6E
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#3C3C3C
+mid.color=#282828
 highlight.color=#737373
 inactive.highlight.color=#4A4A4A
 text.color=white
@@ -58,6 +58,7 @@ blur_konsole=true
 transparent_ktitle_label=false
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true
+force_size_grip=true
 transparent_pcmanfm_sidepane=true
 
 [PanelButtonCommand]
@@ -98,6 +99,11 @@ inherits=PanelButtonCommand
 
 [GenericFrame]
 inherits=PanelButtonCommand
+frame.element=group
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -113,19 +119,21 @@ text.margin.right=3
 inherits=PanelButtonCommand
 text.margin.left=5
 text.margin.right=5
-text.margin.bottom=4
+text.margin.top=1
+text.margin.bottom=2
 frame.top=5
-frame.bottom=3
+frame.bottom=5
 frame.left=5
 frame.right=5
 text.press.color=white
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+interior.element=tabframe
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -134,10 +142,10 @@ frame.element=button
 [GroupBox]
 inherits=GenericFrame
 interior=false
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
 text.press.color=white
 
 [SizeGrip]

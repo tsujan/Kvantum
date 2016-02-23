@@ -2628,12 +2628,12 @@ check box</string>
      <property name="title">
       <string>Submenu</string>
      </property>
-     <addaction name="actionTest1"/>
+     <addaction name="actionDocMode"/>
      <addaction name="separator"/>
      <addaction name="actionMenu_radio"/>
      <addaction name="actionMenu_radio1"/>
     </widget>
-    <addaction name="actionTest1"/>
+    <addaction name="actionDocMode"/>
     <addaction name="separator"/>
     <addaction name="actionMenu_Item"/>
     <addaction name="actionNew_Item"/>
@@ -2662,8 +2662,8 @@ check box</string>
    <addaction name="actionTest"/>
    <addaction name="separator"/>
    <addaction name="separator"/>
-   <addaction name="actionTest1"/>
-   <addaction name="actionTest2"/>
+   <addaction name="actionDocMode"/>
+   <addaction name="actionMenuButton"/>
   </widget>
   <action name="actionQuit">
    <property name="icon">
@@ -2703,7 +2703,7 @@ check box</string>
     <string>Toggle layout direction</string>
    </property>
   </action>
-  <action name="actionTest1">
+  <action name="actionDocMode">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -2712,26 +2712,22 @@ check box</string>
      <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
    </property>
    <property name="text">
-    <string>Test</string>
+    <string>Doc Mode</string>
    </property>
    <property name="toolTip">
-    <string>Just for testing
-toolbar button grouping
-and tooltips</string>
+    <string>Show tabs in the document mode</string>
    </property>
   </action>
-  <action name="actionTest2">
+  <action name="actionMenuButton">
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
      <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
    </property>
    <property name="text">
-    <string>Test</string>
+    <string>Menu Button</string>
    </property>
    <property name="toolTip">
-    <string>Just for testing
-toolbar button grouping
-and tooltips</string>
+    <string>Hold pressed to show a menu</string>
    </property>
   </action>
   <action name="actionNew_Item">

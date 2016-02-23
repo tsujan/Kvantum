@@ -35,7 +35,7 @@ toolbar_icon_size=16
 window.color=#3D3D3E
 base.color=#2E2E2E
 alt.base.color=#383838
-button.color=#494949
+button.color=#3D3D3E
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
@@ -113,10 +113,6 @@ text.press.color=white
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
 
 [HeaderSection]
 inherits=PanelButtonCommand

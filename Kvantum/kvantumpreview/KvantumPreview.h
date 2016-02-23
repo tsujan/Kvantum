@@ -39,6 +39,7 @@ public:
 #endif
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
+    connect (actionDocMode, SIGNAL (toggled (bool)), this, SLOT (KvDocMode (bool)));
     connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
     connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
     connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
@@ -46,7 +47,7 @@ public:
     QActionGroup *aGroup = new QActionGroup (this);
     actionMenu_radio->setActionGroup (aGroup);
     actionMenu_radio1->setActionGroup (aGroup);
-    actionTest2->setMenu (menuFile);
+    actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
   }
   ~KvantumPreview() {}
@@ -66,6 +67,9 @@ private slots:
     tabWidget_5->setTabsClosable (true);
     tabWidget_6->setTabsClosable (false);
     tabWidget_6->setTabsClosable (true);
+  }
+  void KvDocMode (bool checked) {
+    tabWidget->setDocumentMode (checked);
   }
   void docMode (bool checked) {
     tabWidget_2->setDocumentMode (checked);
