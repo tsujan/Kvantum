@@ -88,4 +88,4 @@ The default Qt5 installation adds some root themes, that can be selected by usin
 *   GTK   *
 ***********
 
-Kvantum does not -- and will not -- have any relation to GTK. However, among its extra themes, it includes KvGnome, which has a Gnome-like look and feel.
+Kvantum does not -- and will not -- have any relation to GTK. However, among its extra themes, it includes KvGnome and KvGnomeDark, which have Gnome-like looks and feels.

@@ -63,6 +63,7 @@ text.margin.bottom=1
 text.margin.left=2
 text.margin.right=2
 text.press.color=black
+text.toggle.color=white
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -102,6 +103,7 @@ frame.bottom=3
 frame.left=5
 frame.right=5
 text.press.color=black
+text.toggle.color=black
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -109,6 +111,9 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
+
+[TreeExpander]
+indicator.size=9
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -150,16 +155,13 @@ frame.left=6
 frame.right=6
 
 [Progressbar]
+inherits=PanelButtonCommand
 text.bold=true
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
 
 [ItemView]
 inherits=PanelButtonCommand

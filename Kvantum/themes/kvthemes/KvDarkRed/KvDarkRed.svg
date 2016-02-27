@@ -1143,36 +1143,36 @@
 <path style="fill:url(#linearGradient5131)" id="floating-tab-toggled" d="m 147.5,879 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 <g id="floating-tab-toggled-top" transform="translate(-122.5,-353.5)">
 <path style="fill:url(#linearGradient5133)" id="path5083" d="m 270,1227.25 0,5.25 32.5,0 0,-5.25 z"/>
-<path style="opacity:.6;fill:#aaa" id="path5085" d="m 270,1225 0,2.25 32.5,0 0,-2.25 -32.5,0 z"/>
+<path style="opacity:.5;fill:#aaa" id="path5085" d="m 270,1225 0,2.25 32.5,0 0,-2.25 -32.5,0 z"/>
 </g>
 <g id="floating-tab-toggled-left" transform="translate(-122.5,-353.5)">
 <path style="fill:url(#linearGradient5135)" id="path5089" d="m 270,1265 0,-32.5 -6,0 0,32.5 z"/>
-<path style="opacity:.6;fill:url(#linearGradient5137)" id="path5091" d="m 264,1265 0,-32.5 -1.5,0 0,32.5 1.5,0 z"/>
+<path style="opacity:.5;fill:url(#linearGradient5137)" id="path5091" d="m 264,1265 0,-32.5 -1.5,0 0,32.5 1.5,0 z"/>
 </g>
 <g id="floating-tab-toggled-right" transform="translate(-122.5,-353.5)">
 <path style="fill:url(#linearGradient5139)" id="path5095" d="m 302.5,1232.5 0,32.5 6,0 0,-32.5 z"/>
-<path style="opacity:.6;fill:url(#linearGradient5142)" id="path5097" d="m 308.5,1232.5 0,32.5 1.5,0 0,-32.5 -1.5,0 z"/>
+<path style="opacity:.5;fill:url(#linearGradient5142)" id="path5097" d="m 308.5,1232.5 0,32.5 1.5,0 0,-32.5 -1.5,0 z"/>
 </g>
 <g id="floating-tab-toggled-topleft" transform="translate(-122.5,-353.5)">
 <path style="fill:url(#linearGradient5144)" id="path5101" d="m 270,1227.25 c -3.22097,0 -6,2.2348 -6,5.2721 l 6,-.022 z "/>
-<path style="opacity:.6;fill:url(#linearGradient5146)" id="path5103" d="m 270,1225 c -3.80963,0 -7.5,3.6904 -7.5,7.5 h 1.5 c 0,-3 3.0221,-5.25 6.0221,-5.25 z "/>
+<path style="opacity:.5;fill:url(#linearGradient5146)" id="path5103" d="m 270,1225 c -3.80963,0 -7.5,3.6904 -7.5,7.5 h 1.5 c 0,-3 3.0221,-5.25 6.0221,-5.25 z "/>
 </g>
 <g id="floating-tab-toggled-topright" transform="translate(-122.5,-353.5)">
 <path style="fill:url(#linearGradient5148)" id="path5107" d="m 302.5,1227.25 0,5.25 6,0 c 0,-2.75 -2.7649,-5.25 -6,-5.25 z"/>
-<path style="opacity:.6;fill:url(#linearGradient5150)" id="path5109" d="m 302.5,1225 c 3.80963,0 7.5,3.6904 7.5,7.5 h -1.5 c 0,-3 -2.99307,-5.25 -5.99307,-5.25 z "/>
+<path style="opacity:.5;fill:url(#linearGradient5150)" id="path5109" d="m 302.5,1225 c 3.80963,0 7.5,3.6904 7.5,7.5 h -1.5 c 0,-3 -2.99307,-5.25 -5.99307,-5.25 z "/>
 </g>
 </g>
 </g>
 <g id="floating-tab-toggled-bottomleft" transform="translate(-122.5,-353.5)">
 <g style="fill-rule:evenodd;stroke:none" id="g5113">
 <path style="fill:url(#linearGradient5152)" id="path5115" d="m 264,1265 0,7.5 6,0 0,-7.5 z"/>
-<path style="opacity:.6;fill:url(#linearGradient5154)" id="path5117" d="m 262.5,1265 0,7.5 1.5,0 0,-7.5 z"/>
+<path style="opacity:.5;fill:url(#linearGradient5154)" id="path5117" d="m 262.5,1265 0,7.5 1.5,0 0,-7.5 z"/>
 </g>
 </g>
 <g id="floating-tab-toggled-bottomright" transform="translate(-122.5,-353.5)">
 <g style="fill-rule:evenodd;stroke:none" id="g5121">
 <path style="fill:url(#linearGradient5156)" id="path5123" d="m 302.5,1265 0,7.5 6,0 0,-7.5 z"/>
-<path style="opacity:.6;fill:url(#linearGradient5158)" id="path5125" d="m 308.5,1265 0,7.5 1.5,0 0,-7.5 z"/>
+<path style="opacity:.5;fill:url(#linearGradient5158)" id="path5125" d="m 308.5,1265 0,7.5 1.5,0 0,-7.5 z"/>
 </g>
 </g>
 <g id="floating-tab-toggled-bottom" transform="translate(-122.5,-353.5)">

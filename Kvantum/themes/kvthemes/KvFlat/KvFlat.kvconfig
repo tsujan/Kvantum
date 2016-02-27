@@ -55,7 +55,7 @@ interior=true
 interior.element=button
 indicator.size=9
 text.normal.color=white
-text.focus.color=#80C0FF
+text.focus.color=#7DDCFF
 text.press.color=white
 text.toggle.color=white
 text.shadow=0
@@ -96,7 +96,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-indicator.size=8
+indicator.size=9
 
 [RadioButton]
 inherits=PanelButtonCommand
@@ -169,7 +169,7 @@ frame.right=4
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=7
+indicator.size=9
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -222,10 +222,10 @@ inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
 interior.element=progress-pattern
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 
 [ItemView]
 inherits=PanelButtonCommand
