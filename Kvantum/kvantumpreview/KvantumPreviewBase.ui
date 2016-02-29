@@ -541,13 +541,16 @@ and arrow</string>
        <item row="7" column="0">
         <widget class="QToolButton" name="toolButton_8">
          <property name="text">
-          <string>Toolbutton with icon at the side
-and arrow
-and menu popup button</string>
+          <string>Toggle toolbutton with icon,
+ordinary arrow
+and dropdown menu arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <property name="popupMode">
           <enum>QToolButton::MenuButtonPopup</enum>
@@ -566,13 +569,16 @@ and menu popup button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Toolbutton with icon at the side
-and arrow
-and menu popup button</string>
+          <string>Toggle toolbutton with icon,
+ordinary arrow
+and dropdown menu arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <property name="popupMode">
           <enum>QToolButton::MenuButtonPopup</enum>
@@ -3335,6 +3341,22 @@ check box</string>
     <hint type="destinationlabel">
      <x>411</x>
      <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_8</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>toolButton_11</receiver>
+   <slot>setChecked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>523</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>581</x>
+     <y>523</y>
     </hint>
    </hints>
   </connection>

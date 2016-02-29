@@ -2,6 +2,8 @@ V0.9.5
 ---------
  * Added Openbox themes for use with the included Kvantum themes (under LXQT).
  * Added three extra themes (KvSimplicity, KvGnomeDark and KvFlatRed), polished some themes and modified KvDarkRed.
+ * At last a workaround for the Qt5 "hover bug", because of which, comboboxes and buttons remain in the mouseover state after their menus are closed and without the cursor being over them.
+ * Use the pressed state for focused non-editable comboboxes.
 
 V0.9.4
 ---------
