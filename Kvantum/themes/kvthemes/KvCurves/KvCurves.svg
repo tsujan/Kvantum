@@ -968,7 +968,7 @@
 <path id="expand-menuitem-pressed-right" d="m -21.75,694 -16.5,0 0,12 16.5,0 0,-12 z "/>
 <path id="expand-menuitem-toggled" d="m -38.25,718 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-menuitem-toggled-right" d="m -21.75,718 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-menuitem-toggledleft" d="m -54.75,718 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path id="expand-menuitem-toggled-left" d="m -54.75,718 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <g style="fill:#a21215" id="g922">
 <path id="expand-itemview-pressed-topleft" d="m 324.75,945 c 0,-6.648 5.352,-12 12,-12 v 12 h -12 z "/>

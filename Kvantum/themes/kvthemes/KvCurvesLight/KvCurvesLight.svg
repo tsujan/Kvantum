@@ -779,7 +779,7 @@
 <path id="expand-menuitem-pressed-right" d="m 52.5,645 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-menuitem-toggled" d="m 36,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-menuitem-toggled-right" d="m 52.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-menuitem-toggledleft" d="m 19.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path id="expand-menuitem-toggled-left" d="m 19.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <g style="fill:#5d86c5">
 <path id="expand-itemview-pressed-topleft" d="m 207.75,895 c 0,-6.648 5.352,-12 12,-12 v 12 h -12 z "/>
