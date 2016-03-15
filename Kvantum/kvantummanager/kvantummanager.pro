@@ -34,7 +34,7 @@ unix {
   DEFINES += DATADIR=\\\"$$DATADIR\\\"
 
   #MAKE INSTALL
-  iconsvg.path = $$DATADIR/pixmaps
+  iconsvg.path = $$DATADIR/icons/hicolor/scalable/apps
   iconsvg.files += ../kvantumpreview/kvantum.svg
 
   desktop.path = $$DATADIR/applications

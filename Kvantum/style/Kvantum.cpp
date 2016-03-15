@@ -568,6 +568,8 @@ void Style::polish(QWidget *widget)
   {
     QColor winCol = getFromRGBA(settings_->getColorSpec().windowColor);
     if (winCol.isValid() && qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
+        // it's usual to define custom colors in text edits
+        && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
         && (qobject_cast<QAbstractItemView*>(widget)
             || qobject_cast<QAbstractScrollArea*>(widget)
             || qobject_cast<QTabWidget*>(widget)
