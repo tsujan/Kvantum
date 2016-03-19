@@ -40,7 +40,7 @@ toolbar_icon_size=22
 combo_as_lineedit=true
 layout_spacing=3
 tooltip_delay=-1
-submenu_overlap=7
+submenu_overlap=3
 
 [GeneralColors]
 window.color=#393f3f
@@ -406,10 +406,10 @@ inherits=PanelButtonCommand
 
 [Menu]
 inherits=PanelButtonCommand
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame.element=menu
 interior.element=menu
 size.minheight=22

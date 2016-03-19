@@ -242,6 +242,7 @@ class Style : public QCommonStyle {
     }
 
     /* Get pure shadow dimensions of menus/tooltips. */
+    void getMenuHShadows();
     QList<int> getShadow(const QString &widgetName, int thicknessH, int thicknessV);
     QList<int> getShadow(const QString &widgetName, int thickness) {
       return getShadow(widgetName,thickness,thickness);
@@ -302,6 +303,10 @@ class Style : public QCommonStyle {
 
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps. */
     int pixelRatio_;
+
+    /* For not getting the menu horizontal shadows repeatedly.
+       They're used to position submenus. */
+    QList<int> menuHShadows;
 };
 }
 

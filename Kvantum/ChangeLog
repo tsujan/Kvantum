@@ -6,6 +6,8 @@ V0.9.5
  * Use the pressed state for focused non-editable comboboxes.
  * Don't enforce darkness on text editors.
  * Moved the Kvantum icon to the standard hicolor directory.
+ * Made the submenu overlap accurate. (As a result, a hidden mistake in the calculation of menu/tootip shadow thickness is fixed too.)
+ * A workaround for Qt's messy RTL submenu positioning.
 
 V0.9.4
 ---------

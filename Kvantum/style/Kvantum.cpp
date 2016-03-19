@@ -414,10 +414,47 @@ void Style::advanceProgresses()
   }
 }
 
+// This is also used to adjust submenu position horizontally when menus have shadow.
+void Style::getMenuHShadows()
+{
+  if (menuHShadows.count() == 2)
+    return;
+
+  QSvgRenderer *renderer = 0;
+  qreal divisor = 0;
+  menuHShadows << 0 << 0;  // [left, right]
+  QList<QString> direction;
+  direction << "left" << "right";
+  frame_spec fspec = getFrameSpec("Menu");
+  QString element = fspec.element;
+
+  for (int i = 0; i < 2; ++i)
+  {
+    if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
+      renderer = themeRndr_;
+    else renderer = defaultRndr_;
+    QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
+    divisor = br.width();
+    if (qRound(divisor))
+    {
+      if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+        renderer = themeRndr_;
+      else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+        renderer = defaultRndr_;
+      else renderer = 0;
+      if (renderer)
+      {
+        br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
+        menuHShadows[i] = pixelMetric(PM_MenuHMargin)*(br.width()/divisor);
+      }
+    }
+  }
+}
+
 QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thicknessV)
 {
   QSvgRenderer *renderer = 0;
-  int divisor = 0;
+  qreal divisor = 0;
   QList<int> shadow;
   shadow << 0 << 0 << 0 << 0;
   QList<QString> direction;
@@ -427,6 +464,12 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
 
   for (int i = 0; i < 4; ++i)
   {
+    if (widgetName == "Menu" && i%2 == 0 // left and right
+        && menuHShadows.count() == 2)
+    {
+      shadow[i] = menuHShadows[i/2];
+      continue;
+    }
     if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
       renderer = themeRndr_;
     else renderer = defaultRndr_;
@@ -445,6 +488,11 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
         shadow[i] = i%2 ? thicknessV*(br.height()/divisor) : thicknessH*(br.width()/divisor);
       }
     }
+  }
+
+  if (widgetName == "Menu" && menuHShadows.isEmpty())
+  {
+    menuHShadows << shadow[0] << shadow[2];
   }
 
   return shadow; // [left, top, right, bottom]
@@ -830,11 +878,22 @@ void Style::polish(QWidget *widget)
           || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
       && !translucentWidgets_.contains(widget))
   {
+    if (qobject_cast<QMenu*>(widget))
+    {
+      getMenuHShadows();
+      /* RTL submenus aren't positioned correctly. To fix that,
+         we should move them but the RTL property isn't set yet. */
+      if (qobject_cast<QMenu*>(getParent(widget,1)))
+      {
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
+      }
+    }
 #if QT_VERSION >= 0x050000
     /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
        the window background color. I don't know the root of this bug but what follows
        is a workaround, which works with setSurfaceFormat() below. */
-    if (widget->inherits("QTipLabel"))
+    else// if (widget->inherits("QTipLabel"))
     {
       QPalette palette = widget->palette();
       QColor winCol = palette.window().color();
@@ -1057,6 +1116,8 @@ void Style::unpolish(QWidget *widget)
         blurHelper_->unregisterWidget(widget);
       if (translucentWidgets_.contains(widget))
       {
+        if (qobject_cast<QMenu*>(widget) && qobject_cast<QMenu*>(getParent(widget,1)))
+          widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_PaintOnScreen, false);
         widget->setAttribute(Qt::WA_NoSystemBackground, false);
         widget->setAttribute(Qt::WA_TranslucentBackground, false);
@@ -1186,6 +1247,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (!progresstimer_->isActive())
             progresstimer_->start(50);
         }
+      }
+      else if (w->layoutDirection() == Qt::RightToLeft
+               && menuHShadows.count() == 2
+               && qobject_cast<QMenu*>(o) && qobject_cast<QMenu*>(getParent(w,1)))
+      {
+        // correct the submenu position
+        w->move(w->x() + menuHShadows.at(0)
+                       - (pixelMetric(PM_MenuHMargin) - menuHShadows.at(1)),
+                w->y());
       }
     }
     break;
@@ -2339,7 +2409,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       // right
       painter->setPen(QPen(col.darker(110), 0));
       painter->drawLine(QPoint(r.right()-1, r.top()+1),
-                        QPoint(r.right()-1, r.bottom()-1));;
+                        QPoint(r.right()-1, r.bottom()-1));
       painter->setPen(QPen(col.darker(120), 0));
       painter->drawLine(QPoint(r.right(), r.top()),
                         QPoint(r.right(), r.bottom()));
@@ -7341,9 +7411,24 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuPanelWidth : return 0;
 
     case PM_SubMenuOverlap : {
+#if QT_VERSION >= 0x050000
+      if (QApplication::layoutDirection() == Qt::RightToLeft)
+        return 0; // RTL submenu positioning is a mess in Qt5
+#endif
       int so = tspec_.submenu_overlap;
       if (so >= 0)
+      {
+        /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
+           equal to PM_MenuHMargin. So, we make the overlap accurate here. */
+        so -= pixelMetric(PM_MenuHMargin);
+        if (settings_->getCompositeSpec().composite
+            && menuHShadows.count() == 2
+            && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+        {
+          so += (menuHShadows.at(0) + menuHShadows.at(1));
+        }
         return -so;
+      }
       else
       {
         if (settings_->getCompositeSpec().composite
@@ -7705,6 +7790,12 @@ int Style::styleHint(StyleHint hint,
     case SH_Menu_SubMenuPopupDelay : return 250;
     case SH_Menu_Scrollable : return false; // let's see the whole menu
     case SH_Menu_SloppySubMenus : return true;
+#if QT_VERSION >= 0x050500
+    case SH_Menu_SubMenuSloppyCloseTimeout : return 1000;
+    case SH_Menu_SubMenuResetWhenReenteringParent : return false;
+    case SH_Menu_SubMenuDontStartSloppyOnLeave : return false;
+    case SH_Menu_SubMenuSloppySelectOtherActions : return true;
+#endif
     /* when set to true, only the last submenu is
        hidden on clicking anywhere outside the menu */
     case SH_Menu_FadeOutOnHide : return false;
@@ -9360,7 +9451,7 @@ QRect Style::subControlRect(ComplexControl control,
     case CC_ScrollBar : {
       const QStyleOptionSlider *opt =
           qstyleoption_cast<const QStyleOptionSlider *>(option);
-      if (!opt) break;;
+      if (!opt) break;
 
       int extent = pixelMetric(PM_ScrollBarExtent,option,widget);
       int arrowSize = 0;
