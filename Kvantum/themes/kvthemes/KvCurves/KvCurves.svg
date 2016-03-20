@@ -1069,4 +1069,9 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-close-normal" id="tab-close-pressed" transform="translate(40,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(60,0)"/>
+<g style="stroke:none;fill-rule:evenodd;fill:#fff;fill-opacity:.118">
+<path id="expand-button-default" d="m 300,110 -17,0 0,10 17,0 0,-10 z"/>
+<path id="expand-button-default-left" d="m 300,120 -17,0 0,10 17,0 0,-10 z"/>
+<path id="expand-button-default-right" d="m 300,130 -17,0 0,10 17,0 0,-10 z"/>
+</g>
 </svg>

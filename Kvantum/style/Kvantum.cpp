@@ -5776,6 +5776,7 @@ void Style::drawControl(ControlElement element,
         if (pb && pb->isDefault() && !status.startsWith("disabled"))
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-default");
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
           QString di = "button-default-indicator";
           if (opt->features & QStyleOptionButton::Flat
               && themeRndr_ && themeRndr_->isValid()

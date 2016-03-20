@@ -1149,4 +1149,9 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-left-normal" transform="matrix(-1,0,0,1,400,-215)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-up-normal" transform="matrix(0,-1,1,0,-650,860)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-right-normal" transform="translate(-350,-160)"/>
+<g style="stroke:none;fill-rule:evenodd;fill-opacity:.078">
+<path id="expand-button-default" d="m 320,90 -17,0 0,10 17,0 0,-10 z"/>
+<path id="expand-button-default-left" d="m 320,100 -17,0 0,10 17,0 0,-10 z"/>
+<path id="expand-button-default-right" d="m 320,110 -17,0 0,10 17,0 0,-10 z"/>
+</g>
 </svg>
