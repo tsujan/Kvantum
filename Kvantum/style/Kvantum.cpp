@@ -1880,6 +1880,14 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       if (tb)
       {
+        /* always show menu titles in the toggled state */
+        if (!settings_->getHacksSpec().transparent_menutitle
+            && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+            && qobject_cast<QMenu*>(getParent(widget,1)))
+        {
+          status.replace(QString("pressed"),QString("toggled"));
+        }
+
         bool rtl(option->direction == Qt::RightToLeft);
 
         // lack of space  (-> CE_ToolButtonLabel)
@@ -5839,6 +5847,15 @@ void Style::drawControl(ControlElement element,
 
         if (tb)
         {
+          /* always show menu titles in the toggled state */
+          bool transMenuTitle(settings_->getHacksSpec().transparent_menutitle);
+          if (!transMenuTitle
+              && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+              && qobject_cast<QMenu*>(getParent(widget,1)))
+          {
+            status.replace(QString("pressed"),QString("toggled"));
+          }
+
           /* the right arrow is attached */
           if (tb->popupMode() == QToolButton::MenuButtonPopup
               || ((tb->popupMode() == QToolButton::InstantPopup
@@ -5899,13 +5916,13 @@ void Style::drawControl(ControlElement element,
                 /* take care of Plasma menu titles */
                 if (!qobject_cast<QMenu*>(p))
                   lspec.pressColor = col.name();
-                else if (settings_->getHacksSpec().transparent_menutitle)
+                else if (transMenuTitle)
                   lspec.pressColor = getLabelSpec("Menu").normalColor;
               }
             }
           }
           /* KDE menu titles */
-          else if (qobject_cast<QMenu*>(p) && settings_->getHacksSpec().transparent_menutitle)
+          else if (qobject_cast<QMenu*>(p) && transMenuTitle)
             lspec.pressColor = getLabelSpec("Menu").normalColor;
 
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
@@ -6303,15 +6320,12 @@ void Style::drawComplexControl(ComplexControl control,
         o.rect = r;
 
         /* make an exception for (KDE) menu titles */
-        const hacks_spec hspec = settings_->getHacksSpec();
-        if (hspec.transparent_menutitle && widget)
+        if (settings_->getHacksSpec().transparent_menutitle
+            && tb && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+            && qobject_cast<QMenu*>(getParent(widget,1)))
         {
-          if (tb && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
-              && qobject_cast<QMenu*>(getParent(widget,1)))
-          {
-            drawControl(CE_ToolButtonLabel,&o,painter,widget);
-            break;
-          }
+          drawControl(CE_ToolButtonLabel,&o,painter,widget);
+          break;
         }
 
         /* to have a consistent look, integrate the drop-down part

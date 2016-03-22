@@ -1,6 +1,7 @@
 V0.9.6
 ---------
  * Added support for default button interior.
+ * Show menu titles in the toggled and not pressed state.
 
 V0.9.5
 ---------
