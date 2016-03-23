@@ -463,6 +463,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","fill_rubberband");
   r.fill_rubberband = v.toBool();
 
+  v = getValue("General","groupbox_top_label");
+  r.groupbox_top_label = v.toBool();
+
   v = getValue("General","layout_spacing", empty);
   if (v.isValid())
     r.layout_spacing = qMin(qMax(v.toInt(),2), 10);

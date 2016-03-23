@@ -931,32 +931,6 @@ some apps set it themeselves.</string>
             <string>Miscellaneous</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_11">
-            <item row="13" column="2">
-             <widget class="QComboBox" name="comboToolButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="toolTip">
-               <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxNoScrollArrow">
-              <property name="toolTip">
-               <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.</string>
-              </property>
-              <property name="text">
-               <string>No arrows for scrollbars</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxX11">
               <property name="toolTip">
@@ -965,95 +939,6 @@ Checking this box removes arrows as far as possible.</string>
               </property>
               <property name="text">
                <string>X11 drag</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxJoinTab">
-              <property name="toolTip">
-               <string>Inactive tabs are detached by default.</string>
-              </property>
-              <property name="text">
-               <string>Join inactive tabs</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="1">
-             <widget class="QLabel" name="label_2">
-              <property name="toolTip">
-               <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-              </property>
-              <property name="text">
-               <string>Toolbutton style:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxMenuToolbar">
-              <property name="toolTip">
-               <string>If checked, the menubar and toolbar will be drawn as a whole by
-the toolbar SVG element when they are adjacent to one another.</string>
-              </property>
-              <property name="text">
-               <string>Merge menubar with toolbar</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxMenubar">
-              <property name="toolTip">
-               <string>Mouse tracking is enabled
-for menubars by default.</string>
-              </property>
-              <property name="text">
-               <string>Mouse tracking for menubars</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxRubber">
-              <property name="toolTip">
-               <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow. This
-option fills them with the highlight color.</string>
-              </property>
-              <property name="text">
-               <string>Fill rubber-band rectangles</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="0">
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>10</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="6" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxAttachTab">
-              <property name="toolTip">
-               <string>Active tab is detached by default.</string>
-              </property>
-              <property name="text">
-               <string>Attach active tab to tab widget</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1" colspan="3">
-             <widget class="QCheckBox" name="checkBoxleftTab">
-              <property name="toolTip">
-               <string>Tabs are centered by default.</string>
-              </property>
-              <property name="text">
-               <string>Left aligned tabs</string>
               </property>
              </widget>
             </item>
@@ -1093,20 +978,93 @@ line-edit with arrow (and icon, if it exists)?</string>
               </property>
              </widget>
             </item>
-            <item row="13" column="3">
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+            <item row="4" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxleftTab">
+              <property name="toolTip">
+               <string>Tabs are centered by default.</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>10</width>
-                <height>20</height>
-               </size>
+              <property name="text">
+               <string>Left aligned tabs</string>
               </property>
-             </spacer>
+             </widget>
             </item>
-            <item row="11" column="1">
+            <item row="5" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxJoinTab">
+              <property name="toolTip">
+               <string>Inactive tabs are detached by default.</string>
+              </property>
+              <property name="text">
+               <string>Join inactive tabs</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxAttachTab">
+              <property name="toolTip">
+               <string>Active tab is detached by default.</string>
+              </property>
+              <property name="text">
+               <string>Attach active tab to tab widget</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+              <property name="toolTip">
+               <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.</string>
+              </property>
+              <property name="text">
+               <string>No arrows for scrollbars</string>
+              </property>
+             </widget>
+            </item>
+
+            <item row="8" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxGroupLabel">
+              <property name="toolTip">
+               <string>By default, the label is on the frame.</string>
+              </property>
+              <property name="text">
+               <string>Group-box label above frame</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxRubber">
+              <property name="toolTip">
+               <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow. This
+option fills them with the highlight color.</string>
+              </property>
+              <property name="text">
+               <string>Fill rubber-band rectangles</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxMenubar">
+              <property name="toolTip">
+               <string>Mouse tracking is enabled
+for menubars by default.</string>
+              </property>
+              <property name="text">
+               <string>Mouse tracking for menubars</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1" colspan="3">
+             <widget class="QCheckBox" name="checkBoxMenuToolbar">
+              <property name="toolTip">
+               <string>If checked, the menubar and toolbar will be drawn as a whole by
+the toolbar SVG element when they are adjacent to one another.</string>
+              </property>
+              <property name="text">
+               <string>Merge menubar with toolbar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
              <spacer name="verticalSpacer_7">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -1122,7 +1080,7 @@ line-edit with arrow (and icon, if it exists)?</string>
               </property>
              </spacer>
             </item>
-            <item row="12" column="1">
+            <item row="13" column="1">
              <widget class="QLabel" name="labelTooltipDelay">
               <property name="toolTip">
                <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1135,7 +1093,7 @@ Zero means tooltips are shown instantly.
               </property>
              </widget>
             </item>
-            <item row="12" column="2" alignment="Qt::AlignLeft">
+            <item row="13" column="2" alignment="Qt::AlignLeft">
              <widget class="QSpinBox" name="spinTooltipDelay">
               <property name="toolTip">
                <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1153,6 +1111,59 @@ Zero means tooltips are shown instantly.
                <number>9999</number>
               </property>
              </widget>
+            </item>
+            <item row="14" column="0">
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="14" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="toolTip">
+               <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+              </property>
+              <property name="text">
+               <string>Toolbutton style:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="2">
+             <widget class="QComboBox" name="comboToolButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="3">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>10</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>

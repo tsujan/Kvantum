@@ -570,6 +570,7 @@ void KvantumManager::defaultThemeButtons()
       ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
+    ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
         ui->checkBoxMenubar->setChecked (defaultSettings.value ("menubar_mouse_tracking").toBool());
@@ -784,6 +785,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("scroll_arrows"))
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
+                if (themeSettings.contains ("groupbox_top_label"))
+                    ui->checkBoxGroupLabel->setChecked (themeSettings.value ("groupbox_top_label").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
                     ui->checkBoxRubber->setChecked (themeSettings.value ("fill_rubberband").toBool());
                 if (themeSettings.contains ("menubar_mouse_tracking"))
@@ -1289,6 +1292,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("joined_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
+        generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
@@ -1383,6 +1387,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
+        themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());

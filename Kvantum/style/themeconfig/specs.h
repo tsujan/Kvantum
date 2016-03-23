@@ -113,6 +113,9 @@ typedef struct {
   bool combo_as_lineedit;
   /* fill rubber band rectangle with highlight color? */
   bool fill_rubberband;
+  /* put the groupbox label above the frame?
+     (it's on the frame by default) */
+  bool groupbox_top_label;
 
   int layout_spacing;
 
@@ -343,6 +346,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.vertical_spin_indicators = false;
   tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;
+  tspec.groupbox_top_label = false;
   tspec.layout_spacing = 2;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;

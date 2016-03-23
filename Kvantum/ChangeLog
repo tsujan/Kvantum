@@ -2,6 +2,7 @@ V0.9.6
 ---------
  * Added support for default button interior.
  * Show menu titles in the toggled and not pressed state.
+ * Added an option for putting the group-box label above the frame.
 
 V0.9.5
 ---------

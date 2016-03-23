@@ -335,6 +335,10 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
                                                       as far as possible but some apps might
                                                       still force scroll arrows.
 
+groupbox_top_label                true/false          Draw the group-box label above the top
+                                                      frame? By default, it is drawn on the
+                                                      top frame.
+
 slider_width                      integer             The width of sliders. It cannot be
                                                       greater than 48px and is 8px by default.
 
