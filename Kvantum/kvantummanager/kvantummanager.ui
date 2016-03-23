@@ -889,7 +889,7 @@ some apps set it themeselves.</string>
                <number>2</number>
               </property>
               <property name="maximum">
-               <number>10</number>
+               <number>16</number>
               </property>
              </widget>
             </item>

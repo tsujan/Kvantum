@@ -7370,7 +7370,7 @@ void Style::drawComplexControl(ComplexControl control,
       break;
     }
 
-    case CC_GroupBox: { // I added only for correcting RTL text alignment
+    case CC_GroupBox: { // added only for correcting RTL text alignment
       const QStyleOptionGroupBox *opt =
         qstyleoption_cast<const QStyleOptionGroupBox *>(option);
       if (opt) {
@@ -8718,13 +8718,15 @@ QSize Style::sizeFromContents(ContentsType type,
         qstyleoption_cast<const QStyleOptionGroupBox *>(option);
       QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt? opt->text : QString(),QSize());
       fspec = getFrameSpec(group);
+      lspec = getLabelSpec(group);
       int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
-      int spacing = (tspec_.groupbox_top_label ? 0 : 6); // 3px between text and frame
+      int spacing = (tspec_.groupbox_top_label ? 0 : 6 + 10); /* 3px between text and frame and
+                                                                 text starts at 10px after the left frame */
       s = QSize(qMax(defaultSize.width(), textSize.width() + checkWidth + spacing)
-                  + fspec.left + fspec.right + 10, // text starts at 10px after the left frame
-                defaultSize.height() + fspec.top + fspec.bottom
+                  + fspec.left + fspec.right + lspec.left + lspec.right,
+                defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
                   + (tspec_.groupbox_top_label ? 0
-                     : qMax(pixelMetric(PM_IndicatorHeight),textSize.height())/2)); // for centering the contents
+                     : qMax(pixelMetric(PM_IndicatorHeight),textSize.height()))); // for centering the contents
       sspec = getSizeSpec(group);
       s = s.expandedTo(QSize(sspec.minW,sspec.minH));
 
@@ -10024,7 +10026,8 @@ QRect Style::subControlRect(ComplexControl control,
             int top = 0;
             if (!tspec_.groupbox_top_label)
               top = qMax(checkHeight,textSize.height())/2;
-            return interiorRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec)
+            lspec = getLabelSpec("GroupBox");
+            return labelRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec, lspec)
                    .adjusted(0,top,0,-top);
           }
           case SC_GroupBoxFrame : {

@@ -336,7 +336,8 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
                                                       still force scroll arrows.
 
 groupbox_top_label                true/false          Draw the group-box label above the top
-                                                      frame? By default, it is drawn on the
+                                                      frame? It is false by default, which
+                                                      means that the label is drawn ON the
                                                       top frame.
 
 slider_width                      integer             The width of sliders. It cannot be
@@ -359,7 +360,7 @@ tooltip_delay                     integer             The delay, in milliseconds
                                                       showing tooltips. (This key has NO
                                                       effect on Qt4 applications!)
 
-layout_spacing                    integer             Obvious. Its value is between 2 and 10
+layout_spacing                    integer             Obvious. Its value is between 2 and 16
                                                       (px), and will have no effect if set in
                                                       the code of an app. It is 2 by default.
 
