@@ -4224,16 +4224,19 @@ void Style::drawControl(ControlElement element,
         if ((!(docMode || !tspec_.attach_active_tab) || tspec_.mirror_doc_tabs)
             && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
+        bool joinActiveTab(tspec_.joined_active_tab && (docMode || !tspec_.attach_active_tab));
+        bool rtl(opt->direction == Qt::RightToLeft && !verticalTabs);
 
-        if (status.startsWith("normal") || status.startsWith("focused"))
+        if (joinActiveTab
+            || status.startsWith("normal") || status.startsWith("focused"))
         {
-          if (tspec_.joined_tabs
+          if (tspec_.joined_inactive_tabs
               && opt->position != QStyleOptionTab::OnlyOneTab)
           {
             int capsule = 2;
             if (opt->position == QStyleOptionTab::Beginning)
             {
-              if (opt->selectedPosition != QStyleOptionTab::NextIsSelected)
+              if (joinActiveTab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = -1;
@@ -4242,7 +4245,9 @@ void Style::drawControl(ControlElement element,
             else if (opt->position == QStyleOptionTab::Middle)
             {
               fspec.hasCapsule = true;
-              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+              if (joinActiveTab)
+                capsule = 0;
+              else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
                 capsule = 1;
               else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
                 capsule = -1;
@@ -4251,7 +4256,7 @@ void Style::drawControl(ControlElement element,
             }
             else if (opt->position == QStyleOptionTab::End)
             {
-              if (opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
+              if (joinActiveTab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = 1;
@@ -4261,11 +4266,32 @@ void Style::drawControl(ControlElement element,
             if (bottomTabs)
               capsule = -1*capsule;
             /* I've seen this only in KDevelop */
-            if (opt->direction == Qt::RightToLeft && !verticalTabs)
+            if (rtl)
               capsule = -1*capsule;
             fspec.capsuleH = capsule;
             fspec.capsuleV = 2;
           }
+        }
+
+        bool drawSep(joinActiveTab
+                     && opt->position != QStyleOptionTab::OnlyOneTab
+                     && ((tspec_.mirror_doc_tabs && bottomTabs)
+                           ? rtl ? opt->position != QStyleOptionTab::End
+                                 : opt->position != QStyleOptionTab::Beginning
+                           : rtl ? opt->position != QStyleOptionTab::Beginning
+                                 : opt->position != QStyleOptionTab::End));
+        QRect sep, sepTop, sepBottom;
+        if (drawSep)
+        {
+          sep.setRect(x+w-fspec.right,
+                      y+fspec.top,
+                      fspec.right,
+                      h-fspec.top-fspec.bottom);
+          sepTop.setRect(x+w-fspec.right, y, fspec.right, fspec.top);
+          sepBottom.setRect(x+w-fspec.right,
+                            y+h-fspec.bottom,
+                            fspec.right,
+                            fspec.bottom);
         }
 
         if (verticalTabs)
@@ -4279,12 +4305,63 @@ void Style::drawControl(ControlElement element,
           if ((!(docMode || !tspec_.attach_active_tab) || tspec_.mirror_doc_tabs)
               && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
           {
+            if (drawSep)
+            {
+              /* finding the correct sep rects is a little tricky and, especially,
+                 the difference between right and left as well as top and bottom
+                 frames should be taken into acount with care */
+              if (!tspec_.mirror_doc_tabs)
+              {
+                sep.setRect(x+h-fspec.right,
+                            y+fspec.top,
+                            fspec.right,
+                            w-fspec.top-fspec.bottom);
+                sepTop.setRect(x+h-fspec.right,
+                               y,
+                               fspec.right,
+                               fspec.top);
+                sepBottom.setRect(x+h-fspec.right,
+                                  y+w-fspec.bottom,
+                                  fspec.right,
+                                  fspec.bottom);
+              }
+              else
+              {
+                sep.setRect(h-fspec.right,
+                            fspec.top,
+                            fspec.right,
+                            w-fspec.top-fspec.bottom);
+                sepTop.setRect(h-fspec.right,
+                               0,
+                               fspec.right,
+                               fspec.top);
+                sepBottom.setRect(h-fspec.right,
+                                  w-fspec.bottom,
+                                  fspec.right,
+                                  fspec.bottom);
+              }
+            }
             X = w;
             Y = y;
             rot = 90;
           }
           else
           {
+            if (drawSep)
+            {
+              sep.setRect(h-fspec.right,
+                          fspec.top,
+                          fspec.right,
+                          w-fspec.top-fspec.bottom);
+              sepTop.setRect(h-fspec.right,
+                             0,
+                             fspec.right,
+                             fspec.top);
+              sepBottom.setRect(h-fspec.right,
+                                w-fspec.bottom,
+                                fspec.right,
+                                fspec.bottom);
+            }
             X = 0;
             Y = y + h;
             rot = -90;
@@ -4300,6 +4377,21 @@ void Style::drawControl(ControlElement element,
         }
         else if (bottomTabs)
         {
+          if (drawSep && tspec_.mirror_doc_tabs)
+          {
+            sep.setRect(w-fspec.right,
+                        fspec.top,
+                        fspec.right,
+                        h-fspec.top-fspec.bottom);
+            sepTop.setRect(w-fspec.right,
+                           0,
+                           fspec.right,
+                           fspec.top);
+            sepBottom.setRect(w-fspec.right,
+                              h-fspec.bottom,
+                              fspec.right,
+                              fspec.bottom);
+          }
           painter->save();
           QTransform m;
           /* flip bottom tabs both vertically and horizontally */
@@ -4317,11 +4409,13 @@ void Style::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
+        QString sepName = fspec.element + "-separator";
         if (docMode
             && themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists("floating-"+ispec.element+"-normal"))
         {
           ispec.element="floating-"+ispec.element;
           fspec.element="floating-"+fspec.element;
+          sepName = "floating-"+sepName;
         }
         if (fspec.hasCapsule)
         {
@@ -4329,6 +4423,12 @@ void Style::drawControl(ControlElement element,
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,fspec.hasCapsule);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,fspec.hasCapsule);
+        if (drawSep)
+        {
+          renderElement(painter,sepName,sep);
+          renderElement(painter,sepName+"-top",sepTop);
+          renderElement(painter,sepName+"-bottom",sepBottom);
+        }
         if (!(option->state & State_Enabled))
           painter->restore();
 
@@ -5071,11 +5171,9 @@ void Style::drawControl(ControlElement element,
       if (element == CE_ScrollBarSubLine)
         add = false;
 
-      const QString group = "Scrollbar";
-
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-      const indicator_spec dspec = getIndicatorSpec(group);
+      frame_spec fspec;
+      default_frame_spec(fspec);
+      const indicator_spec dspec = getIndicatorSpec("Scrollbar");
 
       QString iStatus = status; // indicator state
       if (!status.startsWith("disabled"))
@@ -5119,8 +5217,6 @@ void Style::drawControl(ControlElement element,
         painter->setTransform(m, true);
       }
 
-      renderFrame(painter,r,fspec,fspec.element+"-normal");
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
       renderIndicator(painter,r,
                       fspec,dspec,
                       dspec.element+(add ?
@@ -6730,11 +6826,6 @@ void Style::drawComplexControl(ComplexControl control,
       if (opt) {
         QStyleOptionSlider o(*opt);
 
-        const QString group = "ScrollbarGroove";
-
-        const frame_spec fspec = getFrameSpec(group);
-        const interior_spec ispec = getInteriorSpec(group);
-
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarGroove,widget);
         QRect r = o.rect;
         bool horiz = (option->state & State_Horizontal);
@@ -6744,94 +6835,116 @@ void Style::drawComplexControl(ComplexControl control,
         int arrowSize = 0;
         if (!tspec_.scroll_arrows && (horiz ? r.width() == w-2*extent : r.height() == h-2*extent))
           arrowSize = extent;
-        if (horiz)
-        {
-          r.setRect(r.y(), r.x(), r.height(), r.width());
-          painter->save();
-          QTransform m;
-          m.scale(1,-1);
-          m.rotate(-90);
-          painter->setTransform(m, true);
-        }
 
-        if (status.startsWith("disabled"))
+        /*******************
+          Grrove and Slider
+        ********************/
+        if (opt->subControls & SC_ScrollBarSlider)
         {
-          painter->save();
-          painter->setOpacity(DISABLED_OPACITY);
-        }
-        QString suffix = "-normal";
-        if (isInactive)
-          suffix = "-normal-inactive";
-        renderFrame(painter,r,fspec,fspec.element+suffix);
-        renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
-        if (!(option->state & State_Enabled))
-          painter->restore();
+          const QString group = "ScrollbarGroove";
+          const frame_spec fspec = getFrameSpec(group);
+          const interior_spec ispec = getInteriorSpec(group);
 
-        /* to not need any transformation for the
-           horizontal state later, we draw the slider
-           here, beforing restoring the painter */
-        o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
-
-        /* but we draw the glow first because the
-           slider may be rounded at top or bottom */
-        if (!status.startsWith("disabled"))
-        {
-          const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
-          int glowH = 2*extent;
-          int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
           if (horiz)
           {
-            topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
-            bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
-            topGlowH = o.rect.x()+sFspec.top-topGlowY;
+            r.setRect(r.y(), r.x(), r.height(), r.width());
+            painter->save();
+            QTransform m;
+            m.scale(1,-1);
+            m.rotate(-90);
+            painter->setTransform(m, true);
           }
-          else
+
+          if (status.startsWith("disabled"))
           {
-            topGlowY = qMax(o.rect.y()-glowH, r.y()+fspec.top);
-            bottomGlowY = o.rect.y()+o.rect.height()-sFspec.bottom;
-            topGlowH = o.rect.y()+sFspec.top-topGlowY;
+            painter->save();
+            painter->setOpacity(DISABLED_OPACITY);
           }
-          bottomGlowH = glowH+sFspec.bottom - qMax(bottomGlowY+glowH+sFspec.bottom - (r.y()+r.height()-fspec.bottom), 0);
-          QRect topGlow(r.x()+fspec.left,
-                        topGlowY,
-                        r.width()-fspec.left-fspec.right,
-                        topGlowH);
-          QRect bottomGlow(r.x()+fspec.left,
-                           bottomGlowY,
-                           r.width()-fspec.left-fspec.right,
-                           bottomGlowH);
-          renderElement(painter,ispec.element+"-topglow"+suffix,topGlow);
-          renderElement(painter,ispec.element+"-bottomglow"+suffix,bottomGlow);
-        }
 
-        drawControl(CE_ScrollBarSlider,&o,painter,widget);
+          QString suffix = "-normal";
+          if (isInactive)
+            suffix = "-normal-inactive";
+          renderFrame(painter,r,fspec,fspec.element+suffix);
+          renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
+          if (!(option->state & State_Enabled))
+            painter->restore();
 
-        if (horiz)
-          painter->restore();
+          /* to not need any transformation for the
+             horizontal state later, we draw the slider
+             here, beforing restoring the painter */
+          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
 
-        if (arrowSize > 0)
-        {
+          /* but we draw the glow first because the
+             slider may be rounded at top or bottom */
+          if (!status.startsWith("disabled"))
+          {
+            const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
+            int glowH = 2*extent;
+            int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
+            if (horiz)
+            {
+              topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
+              bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
+              topGlowH = o.rect.x()+sFspec.top-topGlowY;
+            }
+            else
+            {
+              topGlowY = qMax(o.rect.y()-glowH, r.y()+fspec.top);
+              bottomGlowY = o.rect.y()+o.rect.height()-sFspec.bottom;
+              topGlowH = o.rect.y()+sFspec.top-topGlowY;
+            }
+            bottomGlowH = glowH+sFspec.bottom
+                          - qMax(bottomGlowY+glowH+sFspec.bottom - (r.y()+r.height()-fspec.bottom), 0);
+            QRect topGlow(r.x()+fspec.left,
+                          topGlowY,
+                          r.width()-fspec.left-fspec.right,
+                          topGlowH);
+            QRect bottomGlow(r.x()+fspec.left,
+                             bottomGlowY,
+                             r.width()-fspec.left-fspec.right,
+                             bottomGlowH);
+            renderElement(painter,ispec.element+"-topglow"+suffix,topGlow);
+            renderElement(painter,ispec.element+"-bottomglow"+suffix,bottomGlow);
+          }
+
+          drawControl(CE_ScrollBarSlider,&o,painter,widget);
           if (horiz)
-            o.rect = QRect(option->direction == Qt::RightToLeft ? x : x+w-arrowSize, y,
-                           arrowSize, arrowSize);
-          else
-            o.rect = QRect(x, y+h-arrowSize, arrowSize, arrowSize);
+            painter->restore();
         }
-        else
-          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarAddLine,widget);
-        drawControl(CE_ScrollBarAddLine,&o,painter,widget);
-
-        if (arrowSize > 0)
+        /***********
+          Sub-Line
+        ************/
+        if (opt->subControls & SC_ScrollBarSubLine)
         {
-          if (horiz)
-            o.rect = QRect(option->direction == Qt::RightToLeft ? x+w-arrowSize : x, y,
-                           arrowSize, arrowSize);
+          if (arrowSize > 0)
+          {
+            if (horiz)
+              o.rect = QRect(option->direction == Qt::RightToLeft ? x : x+w-arrowSize, y,
+                             arrowSize, arrowSize);
+            else
+              o.rect = QRect(x, y+h-arrowSize, arrowSize, arrowSize);
+          }
           else
-            o.rect = QRect(x, y, arrowSize, arrowSize);
+            o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarAddLine,widget);
+          drawControl(CE_ScrollBarAddLine,&o,painter,widget);
         }
-        else
-          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
-        drawControl(CE_ScrollBarSubLine,&o,painter,widget);
+        /***********
+          Add-Line
+        ************/
+        if (opt->subControls & SC_ScrollBarSubLine)
+        {
+          if (arrowSize > 0)
+          {
+            if (horiz)
+              o.rect = QRect(option->direction == Qt::RightToLeft ? x+w-arrowSize : x, y,
+                             arrowSize, arrowSize);
+            else
+              o.rect = QRect(x, y, arrowSize, arrowSize);
+          }
+          else
+            o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
+          drawControl(CE_ScrollBarSubLine,&o,painter,widget);
+        }
       }
 
       break;

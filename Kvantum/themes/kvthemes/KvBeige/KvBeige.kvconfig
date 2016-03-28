@@ -3,7 +3,6 @@ author=Tsu Jan
 comment=A beige theme for Kvantum
 left_tabs=true
 attach_active_tab=true
-joined_tabs=true
 group_toolbar_buttons=true
 spread_progressbar=true
 composite=true
@@ -12,7 +11,6 @@ tooltip_shadow_depth=6
 slider_handle_width=16
 slider_handle_length=12
 center_toolbar_handle=true
-slim_toolbars=true
 x11drag=true
 menubar_mouse_tracking=true
 toolbutton_style=0
@@ -22,6 +20,7 @@ translucent_windows=false
 blurring=false
 popup_blurring=false
 opaque=
+toolbar_icon_size=16
 
 [GeneralColors]
 window.color=#efebe7

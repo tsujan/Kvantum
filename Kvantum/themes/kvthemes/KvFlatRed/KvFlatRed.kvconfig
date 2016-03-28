@@ -4,7 +4,6 @@ comment=A dark flat theme with reddish elements that supports window translucenc
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
-joined_tabs=true
 attach_active_tab=true
 group_toolbar_buttons=false
 spread_progressbar=true
@@ -17,7 +16,7 @@ scroll_min_extent=50
 slider_width=6
 slider_handle_width=16
 slider_handle_length=16
-slim_toolbars=true
+toolbar_icon_size=16
 check_size=16
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso
 
@@ -256,8 +255,6 @@ indicator.size=16
 
 [Scrollbar]
 inherits=PanelButtonCommand
-frame=false
-interior=false
 indicator.size=8
 
 [ScrollbarSlider]

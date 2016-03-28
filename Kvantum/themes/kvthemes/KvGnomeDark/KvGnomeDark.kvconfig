@@ -4,8 +4,9 @@ comment=A dark theme with a Gnome like look and feel
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
-joined_tabs=true
+joined_inactive_tabs=true
 attach_active_tab=false
+joined_active_tab=true
 mirror_doc_tabs=false
 group_toolbar_buttons=false
 spread_progressbar=true
@@ -18,7 +19,6 @@ scroll_min_extent=50
 slider_width=4
 slider_handle_width=24
 slider_handle_length=20
-slim_toolbars=true
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
@@ -325,8 +325,6 @@ indicator.size=32
 
 [Scrollbar]
 inherits=PanelButtonCommand
-frame=false
-interior=false
 indicator.element=arrow
 indicator.size=10
 

@@ -37,9 +37,11 @@ typedef struct {
   /* align tabs with the left edge?
      (by default, they are centered) */
   bool left_tabs;
-  /* join tabs together?
-     (by default, they are detached) */
-  bool joined_tabs;
+  /* join inactive tabs together?
+     (by default, they are joined) */
+  bool joined_inactive_tabs;
+  /* also join the active tab to them if it's detached? */
+  bool joined_active_tab;
   /* attach the active tab to the tab widget?
      (by default, it is detached) */
   bool attach_active_tab;
@@ -311,11 +313,12 @@ static inline void default_size_spec(size_spec &sspec) {
 static inline void default_theme_spec(theme_spec &tspec) {
   tspec.author = QString();
   tspec.comment = QString();
-  tspec.x11drag = false;
+  tspec.x11drag = true;
   tspec.alt_mnemonic = false;
   tspec.double_click = false;
   tspec.left_tabs = false;
-  tspec.joined_tabs = false;
+  tspec.joined_inactive_tabs = true;
+  tspec.joined_active_tab = false;
   tspec.attach_active_tab = false;
   tspec.mirror_doc_tabs = true;
   tspec.group_toolbar_buttons = false;
@@ -351,7 +354,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;
-  tspec.toolbar_icon_size = 24;
+  tspec.toolbar_icon_size = 22;
 }
 
 static inline void default_color_spec(color_spec &cspec) {

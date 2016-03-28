@@ -991,7 +991,7 @@ line-edit with arrow (and icon, if it exists)?</string>
             <item row="5" column="1" colspan="3">
              <widget class="QCheckBox" name="checkBoxJoinTab">
               <property name="toolTip">
-               <string>Inactive tabs are detached by default.</string>
+               <string>Inactive tabs are joined by default.</string>
               </property>
               <property name="text">
                <string>Join inactive tabs</string>

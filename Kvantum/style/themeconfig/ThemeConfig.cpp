@@ -352,106 +352,122 @@ theme_spec ThemeConfig::getThemeSpec() const
   /* start with compositing */
   theme_spec r = getCompositeSpec();
 
-  QString empty; // use this for going to the parent
-  QVariant v = getValue("General","author", empty);
+  QVariant v = getValue("General","author");
   if (!v.toString().isEmpty())
     r.author = v.toString();
 
-  v = getValue("General","comment", empty);
+  v = getValue("General","comment");
   if (!v.toString().isEmpty())
     r.comment = v.toString();
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-  v = getValue("General","x11drag", empty);
-  r.x11drag = v.toBool();
+  v = getValue("General","x11drag");
+  if (v.isValid()) // true by default
+    r.x11drag = v.toBool();
 #endif
 
-  v = getValue("General","alt_mnemonic", empty);
-  r.alt_mnemonic = v.toBool();
+  v = getValue("General","alt_mnemonic");
+  if (v.isValid()) // true by default
+    r.alt_mnemonic = v.toBool();
 
-  v = getValue("General","double_click", empty);
+  v = getValue("General","double_click");
   r.double_click = v.toBool();
 
-  v = getValue("General","left_tabs", empty);
+  v = getValue("General","left_tabs");
   r.left_tabs = v.toBool();
 
-  v = getValue("General","joined_tabs", empty);
-  r.joined_tabs = v.toBool();
+  v = getValue("General","joined_inactive_tabs");
+  if (v.isValid()) // true by default
+    r.joined_inactive_tabs = v.toBool();
+  else // backward compatibility
+  {
+    v = getValue("General","joined_tabs");
+    if (v.isValid())
+      r.joined_inactive_tabs = v.toBool();
+  }
 
-  v = getValue("General","attach_active_tab", empty);
+  if (r.joined_inactive_tabs)
+  {
+    v = getValue("General","joined_active_tab");
+    r.joined_active_tab = v.toBool();
+  }
+
+  v = getValue("General","attach_active_tab");
   r.attach_active_tab = v.toBool();
 
-  v = getValue("General","mirror_doc_tabs", empty);
-  if (v.isValid()) // it's true by default
+  v = getValue("General","mirror_doc_tabs");
+  if (v.isValid()) // true by default
     r.mirror_doc_tabs = v.toBool();
 
-  v = getValue("General","group_toolbar_buttons", empty);
+  v = getValue("General","group_toolbar_buttons");
   r.group_toolbar_buttons = v.toBool();
 
-  v = getValue("General","center_toolbar_handle", empty);
+  v = getValue("General","center_toolbar_handle");
   r.center_toolbar_handle = v.toBool();
 
-  v = getValue("General","slim_toolbars", empty);
+  v = getValue("General","slim_toolbars");
   r.slim_toolbars = v.toBool();
 
-  v = getValue("General","merge_menubar_with_toolbar", empty);
+  v = getValue("General","merge_menubar_with_toolbar");
   r.merge_menubar_with_toolbar = v.toBool();
 
-  v = getValue("General","toolbutton_style", empty);
-  r.toolbutton_style = v.toInt();
+  v = getValue("General","toolbutton_style");
+  if (v.isValid()) // 0 by default
+    r.toolbutton_style = v.toInt();
 
-  v = getValue("General","spread_progressbar", empty);
+  v = getValue("General","spread_progressbar");
   r.spread_progressbar = v.toBool();
 
-  v = getValue("General","progressbar_thickness", empty);
-  r.progressbar_thickness = v.toInt();
+  v = getValue("General","progressbar_thickness");
+  if (v.isValid()) // 0 by default
+    r.progressbar_thickness = v.toInt();
 
-  v = getValue("General","menubar_mouse_tracking", empty);
-  if (v.isValid()) // it's true by default
+  v = getValue("General","menubar_mouse_tracking");
+  if (v.isValid()) //true by default
     r.menubar_mouse_tracking = v.toBool();
 
-  v = getValue("General","opaque", empty);
+  v = getValue("General","opaque", QString()); // for going to the parent
   if (v.isValid())
     r.opaque << v.toStringList();
 
-  v = getValue("General","submenu_overlap", empty);
-  if (v.isValid())
+  v = getValue("General","submenu_overlap");
+  if (v.isValid()) // -1 by default
     r.submenu_overlap = qMin(qMax(v.toInt(),-1),16);
 
-  v = getValue("General","splitter_width", empty);
-  if (v.isValid())
+  v = getValue("General","splitter_width");
+  if (v.isValid()) // 7 by default
     r.splitter_width = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("General","scroll_width", empty);
-  if (v.isValid())
+  v = getValue("General","scroll_width");
+  if (v.isValid()) // 12 by default
     r.scroll_width = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("General","scroll_min_extent", empty);
-  if (v.isValid())
+  v = getValue("General","scroll_min_extent");
+  if (v.isValid()) // 36 by default
     r.scroll_min_extent = qMin(qMax(v.toInt(),16),100);
 
-  v = getValue("General","scroll_arrows", empty);
-  if (v.isValid()) // it's true by default
+  v = getValue("General","scroll_arrows");
+  if (v.isValid()) // true by default
     r.scroll_arrows = v.toBool();
 
-  v = getValue("General","slider_width", empty);
-  if (v.isValid())
+  v = getValue("General","slider_width");
+  if (v.isValid()) // 8 by default
     r.slider_width = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","slider_handle_width", empty);
-  if (v.isValid())
+  v = getValue("General","slider_handle_width");
+  if (v.isValid()) // 16 by default
     r.slider_handle_width = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","slider_handle_length", empty);
-  if (v.isValid())
+  v = getValue("General","slider_handle_length");
+  if (v.isValid()) // 16 by default
     r.slider_handle_length = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","check_size", empty);
-  if (v.isValid())
+  v = getValue("General","check_size");
+  if (v.isValid()) //13 by default
     r.check_size = qMax(v.toInt(),0);
 
-  v = getValue("General","tooltip_delay", empty);
-  if (v.isValid())
+  v = getValue("General","tooltip_delay");
+  if (v.isValid()) // -1 by default
     r.tooltip_delay = v.toInt();
 
   v = getValue("General","vertical_spin_indicators");
@@ -466,24 +482,24 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","groupbox_top_label");
   r.groupbox_top_label = v.toBool();
 
-  v = getValue("General","layout_spacing", empty);
-  if (v.isValid())
+  v = getValue("General","layout_spacing");
+  if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);
 
-  v = getValue("General","small_icon_size", empty);
-  if (v.isValid())
+  v = getValue("General","small_icon_size");
+  if (v.isValid()) // 16 by default
     r.small_icon_size = qMin(qMax(v.toInt(),16), 48);
 
-  v = getValue("General","large_icon_size", empty);
-  if (v.isValid())
+  v = getValue("General","large_icon_size");
+  if (v.isValid()) // 32 by default
     r.large_icon_size = qMin(qMax(v.toInt(),24), 128);
 
-  v = getValue("General","button_icon_size", empty);
-  if (v.isValid())
+  v = getValue("General","button_icon_size");
+  if (v.isValid()) // 16 by default
     r.button_icon_size = qMin(qMax(v.toInt(),16), 64);
 
-  v = getValue("General","toolbar_icon_size", empty);
-  if (v.isValid())
+  v = getValue("General","toolbar_icon_size");
+  if (v.isValid()) // 22 by default
     r.toolbar_icon_size = qMin(qMax(v.toInt(),16), 64);
   else if (r.slim_toolbars)
     r.toolbar_icon_size = 16;

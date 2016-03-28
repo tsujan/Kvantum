@@ -149,7 +149,7 @@ Section                                      Meaning
 =====================================================
 
 
-The following table shows the variables (keys) you could change to configure the current theme -- without necessarily making a new one. These are the rules for the value inheritance:
+The following table shows the variables (keys) you could change to configure the current theme -- without necessarily making a new one -- with the default values of some of them. These are the rules for the value inheritance:
 
 (1) If a section (group) is not present in your configuration, its variables and their values will be taken from the default config file.
 
@@ -179,9 +179,10 @@ author                            string              Obvious.
 comment                           string              Obvious.
 
 x11drag                           true/false          Drag windows from anywhere possible?
+                                                      True by default.
 
-alt_mnemonic                      true/false          Show underlines only when
-                                                      Alt is pressed?
+alt_mnemonic                      true/false          Show underlines only when Alt is
+                                                      pressed? True by default.
 
 double_click                      true/false          Activate view items on double
                                                       clicking? They are activated on
@@ -203,12 +204,23 @@ combo_as_lineedit                true/false           Draw an editable combo box
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 
-joined_tabs                       true/false          Join tabs together?
-                                                      They are detached by default.
+joined_inactive_tabs              true/false          Join inactive tabs together?
+                                                      They are joined by default.
 
 attach_active_tab                 true/false          Attach the active tab to the
                                                       tab widget? It is detached
                                                       by default.
+
+joined_active_tab                 true/false          If "joined_inactive_tabs" is true, this
+                                                      key will also join the active tab to its
+                                                      adjacent inactive tab(s) provided that
+                                                      the tab widget is in the document mode OR
+                                                      the key "attach_active_tab" is false.
+                                                      Then tab separators will also be drawn if
+                                                      they exist in the SVG file (read the file
+                                                      "Theme-Making.pdf" for more explanation
+                                                      on tab separators).
+                                                      Its value is false by default.
 
 mirror_doc_tabs                   true/false          By default, bottom and right tab shapes
                                                       are mirror images of top and left ones,
@@ -236,7 +248,9 @@ slim_toolbars                     true/false          When true, the size of too
                                                       icons will be 16px if it is not
                                                       set in the app. If false, the size
                                                       will be determined by the DE or
-                                                      the app. True by default.
+                                                      the app. False by default.
+                                                      You could use "toolbar_icon_size"
+                                                      instead of this key (see below).
 
 toolbutton_style                  integer             Sets the toolbutton style when it
                                                       is not set by the app. 0: follow,

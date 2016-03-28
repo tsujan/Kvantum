@@ -4,7 +4,6 @@ comment=A light theme with an emphasis on elegant simplicity
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
-joined_tabs=true
 attach_active_tab=false
 mirror_doc_tabs=false
 group_toolbar_buttons=true
@@ -18,7 +17,6 @@ scroll_min_extent=50
 slider_width=6
 slider_handle_width=18
 slider_handle_length=18
-slim_toolbars=true
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
@@ -288,8 +286,6 @@ indicator.size=32
 
 [Scrollbar]
 inherits=PanelButtonCommand
-frame=false
-interior=false
 indicator.element=arrow
 indicator.size=10
 

@@ -2,7 +2,6 @@
 author=Hombre Maledicto
 comment=A Breeze like theme with large margins by Hombre Maledicto
 left_tabs=true
-joined_tabs=true
 scroll_width=13
 attach_active_tab=true
 composite=true
@@ -15,7 +14,6 @@ slider_handle_length=18
 spread_progressbar=true
 progressbar_thickness=8
 menubar_mouse_tracking=true
-slim_toolbars=true
 toolbutton_style=0
 center_toolbar_handle=true
 x11drag=true
@@ -228,8 +226,6 @@ frame.right=1
 [Scrollbar]
 inherits=PanelButtonCommand
 indicator.size=22
-interior=false
-frame=false
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand

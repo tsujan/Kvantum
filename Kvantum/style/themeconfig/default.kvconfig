@@ -4,7 +4,7 @@ comment=A theme inspired by Enlightenment
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
-joined_tabs=true
+joined_inactive_tabs=true
 attach_active_tab=false
 group_toolbar_buttons=false
 composite=true
@@ -15,7 +15,7 @@ scroll_width=12
 slider_width=8
 slider_handle_width=16
 slider_handle_length=16
-slim_toolbars=true
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -234,8 +234,6 @@ indicator.size=16
 
 [Scrollbar]
 inherits=PanelButtonCommand
-frame=false
-interior=false
 indicator.size=8
 
 [ScrollbarSlider]

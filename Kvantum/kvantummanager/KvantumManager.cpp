@@ -564,7 +564,7 @@ void KvantumManager::defaultThemeButtons()
     bool composited = defaultSettings.value ("composite").toBool();
     ui->checkBoxNoComposite->setChecked (!composited);
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
-    ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_tabs").toBool());
+    ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
     if (defaultSettings.contains ("scroll_arrows")) // it's true by default
       ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
@@ -779,7 +779,9 @@ void KvantumManager::tabChanged (int index)
                 notCompisited (!composited);
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
-                if (themeSettings.contains ("joined_tabs"))
+                if (themeSettings.contains ("joined_inactive_tabs"))
+                    ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_inactive_tabs").toBool());
+                if (themeSettings.contains ("joined_tabs")) // backward compatibility
                     ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_tabs").toBool());
                 if (themeSettings.contains ("attach_active_tab"))
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
@@ -1289,7 +1291,7 @@ void KvantumManager::writeConfig()
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
-        generalKeys.insert("joined_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
+        generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
@@ -1362,7 +1364,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("x11drag").toBool() != ui->checkBoxX11->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxSpin->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
-            || themeSettings.value ("joined_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
+            || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
@@ -1384,7 +1386,7 @@ void KvantumManager::writeConfig()
 #else
         themeSettings.setValue ("composite", !ui->checkBoxNoComposite->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
-        themeSettings.setValue ("joined_tabs", ui->checkBoxJoinTab->isChecked());
+        themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());

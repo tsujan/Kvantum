@@ -4,7 +4,6 @@ comment=A dark flat theme inspired by Breeze
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
-joined_tabs=true
 attach_active_tab=true
 group_toolbar_buttons=false
 spread_progressbar=true
@@ -16,8 +15,8 @@ scroll_width=12
 slider_width=6
 slider_handle_width=16
 slider_handle_length=16
-slim_toolbars=true
 check_size=16
+toolbar_icon_size=16
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -250,8 +249,6 @@ indicator.size=16
 
 [Scrollbar]
 inherits=PanelButtonCommand
-frame=false
-interior=false
 indicator.size=8
 
 [ScrollbarSlider]

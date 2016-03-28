@@ -3,6 +3,8 @@ V0.9.6
  * Added support for default button interior.
  * Show menu titles in the toggled and not pressed state.
  * Added an option for putting the group-box label above the frame.
+ * Removed scrollbar add-line and sub-line frame and interior.
+ * Add a key to join the active tab to its (inactive) adjacent tab(s). Also added support for tab separators.
 
 V0.9.5
 ---------
