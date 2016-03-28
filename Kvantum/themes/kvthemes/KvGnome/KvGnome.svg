@@ -1138,15 +1138,15 @@
 </g>
 <g id="button-separator-bottom" transform="translate(265,772.5)">
 <rect width="3" x="-72.999901" y="20" height="7.5" style="stroke-linejoin:round;fill-opacity:0;stroke-linecap:square;stroke-width:2" id="rect5091"/>
-<path style="fill-opacity:.275" id="path5179" d="m -71,20 0,3.5 1,0 0,-3.5 -1,0 z"/>
+<path style="fill-opacity:.2" id="path5179" d="m -71,20 0,3.5 1,0 0,-3.5 -1,0 z"/>
 </g>
 <g id="button-separator-top" transform="translate(265,772.5)">
 <rect width="3" x="-73" y="-2.5" height="7.5" style="stroke-linejoin:round;fill-opacity:0;stroke-linecap:square;stroke-width:2" id="rect5093"/>
-<path style="fill-opacity:.275" id="path5052" d="m -71,0 0,5 1,0 0,-5 -1,0 z"/>
+<path style="fill-opacity:.2" id="path5052" d="m -71,0 0,5 1,0 0,-5 -1,0 z"/>
 </g>
 <g style="stroke-width:2;stroke-linecap:square;stroke-linejoin:round" id="button-separator" transform="matrix(0.2,0,0,0.5,232,777.5)">
 <rect width="15" x="-200" y="0" height="30" style="fill-opacity:0" id="rect5075"/>
-<rect width="5" x="-190" y="0" height="30" style="fill-opacity:.275" id="rect5073"/>
+<rect width="5" x="-190" y="0" height="30" style="fill-opacity:.2" id="rect5073"/>
 </g>
 </g>
 </svg>

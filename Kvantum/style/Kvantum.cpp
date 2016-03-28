@@ -8621,6 +8621,14 @@ QSize Style::sizeFromContents(ContentsType type,
           verticalTabs = true;
         }
 
+        if (opt->text.isEmpty())
+        {
+          if (verticalTabs)
+            s.rheight() += lspec.left + lspec.right;
+          else
+            s.rwidth() += lspec.left + lspec.right;
+        }
+
         if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
         {
           if (tb->tabsClosable())
