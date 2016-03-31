@@ -298,9 +298,6 @@ class Style : public QCommonStyle {
     /* For identifying KisSliderSpinBox. */
     bool isKisSlider_;
 
-    /* Search for the toolbutton flat indicator just once! */
-    bool hasFlatIndicator_;
-
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps. */
     int pixelRatio_;
 

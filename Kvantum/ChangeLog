@@ -5,6 +5,9 @@ V0.9.6
  * Added an option for putting the group-box label above the frame.
  * Removed scrollbar add-line and sub-line frame and interior.
  * Add a key to join the active tab to its (inactive) adjacent tab(s). Also added support for tab separators.
+ * Added a key for drawing spin indicators inside the spin line-edit.
+ * When toobar buttons are grouped and one of the buttons is shown or hidden, update the toolbar.
+ * Corrections to the states of toolbuttons with menu arrow.
 
 V0.9.5
 ---------

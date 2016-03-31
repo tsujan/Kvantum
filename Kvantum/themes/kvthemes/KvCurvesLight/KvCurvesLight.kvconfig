@@ -28,6 +28,7 @@ blurring=false
 popup_blurring=true
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso
 vertical_spin_indicators=false
+inline_spin_indicators=true
 combo_as_lineedit=true
 merge_menubar_with_toolbar=false
 scroll_arrows=false

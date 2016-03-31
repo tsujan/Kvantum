@@ -190,6 +190,10 @@ double_click                      true/false          Activate view items on dou
                                                       the KDE setting has priority
                                                       over the default.
 
+inline_spin_indicators            true/false          Draw spin indicators inside the spin
+                                                      line-edit? By default, they are drawn
+                                                      as buttons.
+
 vertical_spin_indicators          true/false          Draw spin indicators vertically
                                                       and inside the spin line-edit?
                                                       By default, they are drawn on

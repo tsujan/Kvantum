@@ -1,6 +1,3 @@
-// Adapted from QuantumStyle (C) Saïd LANKRI (not developed anymore but
-// continued as QSvgStyle <https://github.com/DexterMagnific/QSvgStyle>)
-
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
  * 
@@ -111,6 +108,9 @@ typedef struct {
   /* draw spin indicators vertically
      and inside the spin line-edit? */
   bool vertical_spin_indicators;
+  /* draw spin indicators horizontally
+     but inside the spin line-edit? */
+  bool inline_spin_indicators;
   /* draw an editable combobox as a lineedit with arrow? */
   bool combo_as_lineedit;
   /* fill rubber band rectangle with highlight color? */
@@ -314,7 +314,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.author = QString();
   tspec.comment = QString();
   tspec.x11drag = true;
-  tspec.alt_mnemonic = false;
+  tspec.alt_mnemonic = true;
   tspec.double_click = false;
   tspec.left_tabs = false;
   tspec.joined_inactive_tabs = true;
@@ -347,6 +347,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.check_size = 13;
   tspec.tooltip_delay = -1;
   tspec.vertical_spin_indicators = false;
+  tspec.inline_spin_indicators = false;
   tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;
   tspec.groupbox_top_label = false;

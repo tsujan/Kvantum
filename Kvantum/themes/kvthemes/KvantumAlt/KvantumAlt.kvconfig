@@ -30,6 +30,8 @@ toolbar_icon_size=16
 toolbutton_style=0
 translucent_windows=false
 vertical_spin_indicators=false
+inline_spin_indicators=true
+combo_as_lineedit=true
 
 [GeneralColors]
 window.color=#3D3D3E

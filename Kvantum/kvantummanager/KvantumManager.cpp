@@ -464,8 +464,7 @@ void KvantumManager::deleteTheme()
             }
             QCoreApplication::processEvents();
             QApplication::setStyle (QStyleFactory::create ("kvantum"));
-            int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-            resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+            resizeConfPage (false);
             if (process_->state() == QProcess::Running)
               preview();
         }
@@ -515,8 +514,7 @@ void KvantumManager::useTheme()
     /* this is needed if the config file is created by this method */
     QCoreApplication::processEvents();
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
-    int extra = QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent) * 2;
-    resize (size().expandedTo (sizeHint() + QSize (extra, extra)));
+    resizeConfPage (false);
     if (process_->state() == QProcess::Running)
       preview();
 }
@@ -592,7 +590,8 @@ void KvantumManager::defaultThemeButtons()
     ui->comboToolButton->setCurrentIndex (index);
     ui->checkBoxX11->setChecked (defaultSettings.value ("x11drag").toBool());
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
-    ui->checkBoxSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
+    ui->checkBoxInlineSpin->setChecked (defaultSettings.value ("inline_spin_indicators").toBool());
+    ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
     ui->checkBoxCombo->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
     if (composited)
     {
@@ -643,6 +642,8 @@ void KvantumManager::defaultThemeButtons()
     defaultSettings.endGroup();
 }
 /*************************/
+/* Here. we try to avoid scrollbars as far as possible but
+   there is no way to guarantee that they won't be shown. */
 void KvantumManager::resizeConfPage (bool thirdPage)
 {
   bool le = true;
@@ -651,16 +652,17 @@ void KvantumManager::resizeConfPage (bool thirdPage)
       le = false;
       ui->opaqueEdit->setEnabled (true);
   }
-  QSize newSize  = size().expandedTo (sizeHint()
-                                      + (thirdPage ?
-                                           ui->comboToolButton->sizeHint() + ui->saveButton->sizeHint()
-                                             + QSize (0, 2*ui->saveButton->sizeHint().height() + 10
-                                                         + ui->checkBoxCombo->sizeHint().height()
-#if QT_VERSION >= 0x050000
-                                                         + ui->spinTooltipDelay->sizeHint().height()
-#endif
-                                                     )
-                                           : QSize (ui->saveButton->sizeHint().width(), 0)));
+  int textIconHeight = qMax (QApplication::style()->pixelMetric (QStyle::PM_SmallIconSize),
+                             QFontMetrics(font()).height());
+  QSize newSize  = size().expandedTo (ui->page_2->sizeHint());
+  if (thirdPage) // the biggest page
+      newSize = size().expandedTo (ui->groupBox->sizeHint()
+                                   + QSize (10 + QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent),
+                                            2*ui->saveButton->sizeHint().height()
+                                              + ui->statusBar->sizeHint().height()
+                                              + ui->configLabel->sizeHint().height()
+                                              + 6*textIconHeight
+                                              + 45));
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
   if (!le) ui->opaqueEdit->setEnabled (false);
@@ -811,8 +813,10 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxX11->setChecked (themeSettings.value ("x11drag").toBool());
                 if (themeSettings.contains ("double_click"))
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
+                if (themeSettings.contains ("inline_spin_indicators"))
+                    ui->checkBoxInlineSpin->setChecked (themeSettings.value ("inline_spin_indicators").toBool());
                 if (themeSettings.contains ("vertical_spin_indicators"))
-                    ui->checkBoxSpin->setChecked (themeSettings.value ("vertical_spin_indicators").toBool());
+                    ui->checkBoxVSpin->setChecked (themeSettings.value ("vertical_spin_indicators").toBool());
                 if (themeSettings.contains ("combo_as_lineedit"))
                     ui->checkBoxCombo->setChecked (themeSettings.value ("combo_as_lineedit").toBool());
                 if (composited)
@@ -1302,7 +1306,8 @@ void KvantumManager::writeConfig()
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", boolToStr (ui->checkBoxX11->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
-        generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxSpin->isChecked()));
+        generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
+        generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
         generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxCombo->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
@@ -1362,11 +1367,13 @@ void KvantumManager::writeConfig()
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
             || themeSettings.value ("x11drag").toBool() != ui->checkBoxX11->isChecked()
-            || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxSpin->isChecked()
+            || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
+            || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
+            || themeSettings.value ("groupbox_top_label").toBool() == !ui->checkBoxGroupLabel->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
             || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value())
         {
@@ -1396,7 +1403,8 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
-        themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxSpin->isChecked());
+        themeSettings.setValue ("inline_spin_indicators", ui->checkBoxInlineSpin->isChecked());
+        themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());
         themeSettings.setValue ("combo_as_lineedit", ui->checkBoxCombo->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
