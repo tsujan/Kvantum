@@ -652,10 +652,11 @@ void KvantumManager::resizeConfPage (bool thirdPage)
       le = false;
       ui->opaqueEdit->setEnabled (true);
   }
-  int textIconHeight = qMax (QApplication::style()->pixelMetric (QStyle::PM_SmallIconSize),
-                             QFontMetrics(font()).height());
   QSize newSize  = size().expandedTo (ui->page_2->sizeHint());
   if (thirdPage) // the biggest page
+  {
+      int textIconHeight = qMax (QApplication::style()->pixelMetric (QStyle::PM_SmallIconSize),
+                                 QFontMetrics(font()).height());
       newSize = size().expandedTo (ui->groupBox->sizeHint()
                                    + QSize (10 + QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent),
                                             2*ui->saveButton->sizeHint().height()
@@ -663,6 +664,7 @@ void KvantumManager::resizeConfPage (bool thirdPage)
                                               + ui->configLabel->sizeHint().height()
                                               + 6*textIconHeight
                                               + 45));
+  }
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
   if (!le) ui->opaqueEdit->setEnabled (false);

@@ -11373,7 +11373,8 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
     hdpi = true;
 #endif
   QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_ : iconSize*pixelRatio_,iconmode,iconstate);
-  if (hdpi && px.size() == iconSize) // not from icon theme
+  if (hdpi && (px.size() == iconSize // not from icon theme
+               || px.size().width() < iconSize.width())) // when pixelRatio_ is odd FIXME: why?!
     px = icon.pixmap(iconSize,iconmode,iconstate);
   return px;
 }

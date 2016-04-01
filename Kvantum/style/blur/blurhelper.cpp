@@ -22,6 +22,9 @@
 #include <QEvent>
 #include <QVector>
 #include <QMenu>
+#if QT_VERSION >= 0x050500
+#include <QApplication> // for hdpi
+#endif
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
@@ -96,11 +99,21 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
     r = menuShadow_;
   else if (widget->inherits("QTipLabel"))
     r = tooltipShadow_;
+  QRect rect = widget->rect();
+
+  int dpr = 1;
+#if QT_VERSION >= 0x050500
+  dpr = qApp->devicePixelRatio();
+  if (dpr < 1) dpr = 1;
+  if (dpr > 1)
+    rect.setSize (rect.size() * dpr);
+#endif
+
   /* trimming the region isn't good for us */
   return (widget->mask().isEmpty() ? 
             r.isEmpty() ?
-              widget->rect()
-              : widget->rect().adjusted (r.at(0), r.at(1), -r.at(2), -r.at(3))
+              rect
+              : rect.adjusted (dpr*r.at(0), dpr*r.at(1), -dpr*r.at(2), -dpr*r.at(3))
             : widget->mask());
 }
 /*************************/

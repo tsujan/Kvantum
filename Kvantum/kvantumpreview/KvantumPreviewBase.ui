@@ -864,7 +864,7 @@ radio button</string>
        <item row="2" column="1">
         <widget class="QRadioButton" name="radioButton_2">
          <property name="text">
-          <string>Radio button with icon</string>
+          <string>Radio button with 32px SVG icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -890,7 +890,7 @@ radio button</string>
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Radio button with icon</string>
+          <string>Radio button with 32px SVG icon</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
@@ -984,12 +984,6 @@ check box</string>
           <iconset resource="KvantumPreviewResources.qrc">
            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
          </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
         </widget>
        </item>
        <item row="6" column="2">
@@ -1003,12 +997,6 @@ check box</string>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
          </property>
          <property name="tristate">
           <bool>true</bool>
