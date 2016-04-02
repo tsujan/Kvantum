@@ -7727,7 +7727,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         so -= pixelMetric(PM_MenuHMargin);
         if (settings_->getCompositeSpec().composite
             && menuHShadows.count() == 2
-            && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+            && (!qobject_cast<const QMenu*>(widget)
+                || translucentWidgets_.contains(widget)
+                || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
         {
           so += (menuHShadows.at(0) + menuHShadows.at(1));
         }
@@ -7736,7 +7738,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       else
       {
         if (settings_->getCompositeSpec().composite
-            && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+            && (!qobject_cast<const QMenu*>(widget)
+                || translucentWidgets_.contains(widget)
+                || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
         {
           const frame_spec fspec = getFrameSpec("Menu");
           return -qMax(fspec.left,fspec.right);
