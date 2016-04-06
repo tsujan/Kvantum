@@ -1929,11 +1929,19 @@ void Style::drawPrimitive(PrimitiveElement element,
                 lspec.tispace=0;
               }
             }
-            else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                     || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            else
             {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right)
+              {
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+              }
+              if (tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+              {
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
                 //fspec.expansion = 0;
+              }
             }
           }
           else
@@ -1943,7 +1951,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                               +(rtl ? fspec1.left : fspec1.right)
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
             {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
               //fspec.expansion = 0;
             }
           }
@@ -2647,16 +2656,29 @@ void Style::drawPrimitive(PrimitiveElement element,
       lspec.top = qMax(0,lspec.top-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
       const size_spec sspec = getSizeSpec(group);
-      bool isMaxFrameSet(false); // no redundant calculation 
-      if (isLibreoffice_
-          || (qobject_cast<const QLineEdit*>(widget)
-              && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-                  || widget->minimumWidth() == widget->maximumWidth()
-                  || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())))
+      if (isLibreoffice_)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        isMaxFrameSet = true;
-        //fspec.expansion = 0;
+      }
+      else if (qobject_cast<const QLineEdit*>(widget))
+      {
+        if (!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        }
+        else
+        {
+          if (widget->minimumWidth() == widget->maximumWidth())
+          {
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+          }
+          if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+          {
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+          }
+        }
       }
       QWidget *p = getParent(widget,1);
       /* no frame when editing itemview texts */
@@ -2683,17 +2705,22 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           fspec.expansion = 0;
         }
-        else if (sb && !isMaxFrameSet)
+        else if (sb)
         {
           QString maxTxt = spinMaxText(sb);
           if (maxTxt.isEmpty()
               || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
-              || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+                  && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right))
           {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+          }
+          if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          {
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
             //fspec.expansion = 0;
           }
         }
@@ -3151,12 +3178,10 @@ void Style::drawPrimitive(PrimitiveElement element,
                             +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
           {
             if (rtl)
-            {
-              fspec.left = fspec.top = fspec.bottom = qMin(fspec.left,3);
-            }
+              fspec.left = qMin(fspec.left,3);
             else
             {
-              fspec.right = fspec.top = fspec.bottom = qMin(fspec.right,3);
+              fspec.right = qMin(fspec.right,3);
             }
             dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
           }
@@ -5687,12 +5712,18 @@ void Style::drawControl(ControlElement element,
           QSize txtSize = textSize(painter->font(),opt->text);
           if (pb->width() < txtSize.width()
                             +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                            +lspec.left+lspec.right+fspec.left+fspec.right
-              || pb->height() < txtSize.height()
-                                +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+                            +lspec.left+lspec.right+fspec.left+fspec.right)
           {
-            lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            lspec.left = lspec.right = 0;
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            lspec.tispace = qMin(lspec.tispace,3);
+          }
+          if (pb->height() < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          {
+            lspec.top = lspec.bottom = 0;
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
             lspec.tispace = qMin(lspec.tispace,3);
           }
         }
@@ -5809,12 +5840,17 @@ void Style::drawControl(ControlElement element,
           QSize txtSize = textSize(painter->font(),opt->text);
           if (pb->width() < txtSize.width()
                             +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                            +lspec.left+lspec.right+fspec.left+fspec.right
-              || pb->height() < txtSize.height()
-                                +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+                            +lspec.left+lspec.right+fspec.left+fspec.right)
           {
             lspec.left = lspec.right = 0;
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+          }
+          if (pb->height() < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          {
+            lspec.top = lspec.bottom = 0;
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
           }
         }
 
@@ -6096,10 +6132,18 @@ void Style::drawControl(ControlElement element,
                   lspec.tispace=0; // not needed
                 }
               }
-              else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                       || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+              else
               {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+                if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right)
+                {
+                  fspec.left = qMin(fspec.left,3);
+                  fspec.right = qMin(fspec.right,3);
+                }
+                if (tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+                {
+                  fspec.top = qMin(fspec.top,3);
+                  fspec.bottom = qMin(fspec.bottom,3);
+                }
               }
             }
             else
@@ -6109,7 +6153,8 @@ void Style::drawControl(ControlElement element,
                                 +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
                                 +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
               {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
               }
             }
           }
@@ -6607,12 +6652,10 @@ void Style::drawComplexControl(ComplexControl control,
             r.setLeft(subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget).left());
 
             // exactly as in PE_PanelLineEdit
-            bool isMaxFrameSet(false);
             if (isLibreoffice_)
             {
               fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
               fspec.expansion = 0;
-              isMaxFrameSet = true;
             }
             else if (QLineEdit *child = widget->findChild<QLineEdit *>())
             {
@@ -6620,30 +6663,42 @@ void Style::drawComplexControl(ComplexControl control,
               lspec.top = qMax(0,lspec.top-1);
               lspec.bottom = qMax(0,lspec.bottom-1);
               const size_spec sspec = getSizeSpec("LineEdit");
-              if ((!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
-                  || child->minimumWidth() == child->maximumWidth()
-                  || child->height() < sizeCalculated(child->font(),fspec,lspec,sspec,"W",QSize()).height())
+              if (!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
               {
                 fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-                isMaxFrameSet = true;
+              }
+              else
+              {
+                if (child->minimumWidth() == child->maximumWidth())
+                {
+                  fspec.left = qMin(fspec.left,3);
+                  fspec.right = qMin(fspec.right,3);
+                }
+                if (child->height() < sizeCalculated(child->font(),fspec,lspec,sspec,"W",QSize()).height())
+                {
+                  fspec.top = qMin(fspec.top,3);
+                  fspec.bottom = qMin(fspec.bottom,3);
+                }
               }
             }
-            if (!isMaxFrameSet)
+            if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
             {
-              if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
+              QString maxTxt = spinMaxText(sb);
+              if (maxTxt.isEmpty()
+                  || editRect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
+                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
+                                             ? fspec.right : 0)
+                  || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
+                      && sb->width() < editRect.width() + 2*SPIN_BUTTON_WIDTH
+                                                        + getFrameSpec("IndicatorSpinBox").right))
               {
-                QString maxTxt = spinMaxText(sb);
-                if (maxTxt.isEmpty()
-                    || editRect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
-                                          + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
-                                               ? fspec.right : 0)
-                    || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                        && sb->width() < editRect.width() + 2*SPIN_BUTTON_WIDTH
-                                                          + getFrameSpec("IndicatorSpinBox").right)
-                    || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-                {
-                  fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-                }
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+              }
+              if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+              {
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
               }
             }
           }
@@ -7844,8 +7899,14 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(v,h);
     }
 
-    case PM_TabBarTabHSpace :
-    case PM_TabBarTabVSpace :
+    case PM_TabBarTabHSpace : {
+      const frame_spec fspec = getFrameSpec("Tab");
+      return fspec.right + fspec.left;
+    }
+    case PM_TabBarTabVSpace: {
+      const frame_spec fspec = getFrameSpec("Tab");
+      return fspec.top + fspec.bottom;
+    }
     case PM_TabBarBaseHeight :
     case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
@@ -8728,12 +8789,7 @@ QSize Style::sizeFromContents(ContentsType type,
         }
 
         if (opt->text.isEmpty())
-        {
-          if (verticalTabs)
-            s.rheight() += lspec.left + lspec.right;
-          else
-            s.rwidth() += lspec.left + lspec.right;
-        }
+          s.rwidth() += lspec.left + lspec.right;
 
         if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
         {
@@ -9159,19 +9215,30 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
       }
-      else if (widget && (widget->minimumWidth() == widget->maximumWidth()
-                          || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height()))
+      else if (widget)
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        lspec.left = lspec.right = qMin(lspec.left,2);
+        if (qobject_cast<const QLineEdit*>(widget)
+            && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+        {
+          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          lspec.left = lspec.right = qMin(lspec.left,2);
+        }
+        else
+        {
+          if (widget->minimumWidth() == widget->maximumWidth())
+          {
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            lspec.left = lspec.right = qMin(lspec.left,2);
+          }
+          if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+          {
+            fspec.top = qMin(fspec.left,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+          }
+        }
       }
-      else if (qobject_cast<const QLineEdit*>(widget)
-               && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
-        lspec.left = lspec.right = qMin(lspec.left,2);
-      }
-      else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+      if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
         lspec.right = 0;
         if (!tspec_.vertical_spin_indicators)
@@ -9181,13 +9248,18 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right)
-              || p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+                  && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right))
           {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
             lspec.left = 0;
             if (p->buttonSymbols() == QAbstractSpinBox::NoButtons)
               lspec.right = 0;
+          }
+          if (p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          {
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
           }
         }
         else
