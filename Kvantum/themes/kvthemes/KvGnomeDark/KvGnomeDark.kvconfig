@@ -223,10 +223,10 @@ text.bold=true
 inherits=PanelButtonCommand
 frame.element=none
 interior=false
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 
 [TreeExpander]
 inherits=PanelButtonCommand

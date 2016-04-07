@@ -7899,14 +7899,14 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(v,h);
     }
 
+    /* PM_TabBarTabHSpace provides an appropriate space between the
+       close button and frame but PM_TabBarTabVSpace isn't needed */
     case PM_TabBarTabHSpace : {
       const frame_spec fspec = getFrameSpec("Tab");
       return fspec.right + fspec.left;
     }
-    case PM_TabBarTabVSpace: {
-      const frame_spec fspec = getFrameSpec("Tab");
-      return fspec.top + fspec.bottom;
-    }
+    case PM_TabBarTabVSpace : return 0;
+
     case PM_TabBarBaseHeight :
     case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
