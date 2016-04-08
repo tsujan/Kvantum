@@ -403,7 +403,7 @@ widgets to appear as they are by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="4">
+               <item row="0" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxDark">
                  <property name="toolTip">
                   <string>Some apps may not respect dark themes.
@@ -414,7 +414,7 @@ Kvantum can try to correct their behavior.</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="5">
+               <item row="0" column="6">
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -441,7 +441,7 @@ with LXQT Session Settings.</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="4">
+               <item row="1" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGrip">
                  <property name="toolTip">
                   <string>Show size grips of dialogs and statusbars
@@ -463,7 +463,7 @@ screens of Konsole and Yakuake if possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="4">
+               <item row="2" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxNormalBtn">
                  <property name="toolTip">
                   <string>No bold font for default push buttons.</string>
@@ -483,7 +483,7 @@ screens of Konsole and Yakuake if possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="4">
+               <item row="3" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxIconlessBtn">
                  <property name="toolTip">
                   <string>No icon for push buttons that have text.</string>
@@ -504,7 +504,7 @@ screens of Konsole and Yakuake if possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="4">
+               <item row="4" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxIconlessMenu">
                  <property name="toolTip">
                   <string>No icon for menu-items?</string>
@@ -524,7 +524,7 @@ screens of Konsole and Yakuake if possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="4">
+               <item row="5" column="4" colspan="2">
                 <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
                   <string>Only the top toolbar should be styled?
@@ -606,6 +606,44 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                  <property name="maximum">
                   <number>100</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="4">
+                <widget class="QLabel" name="labelLxqtMenu">
+                 <property name="toolTip">
+                  <string>Has effect only when the main menu is NOT styled
+by the LXQT theme and has the default font.
+
+Values less than 16 mean the default menu icon size.
+
+Needs LXQT panel to be restarted
+(or just log out and in again).</string>
+                 </property>
+                 <property name="text">
+                  <string>LXQT main menu icon size:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="5">
+                <widget class="QSpinBox" name="spinLxqtMenu">
+                 <property name="toolTip">
+                  <string>Has effect only when the main menu is NOT styled
+by the LXQT theme and has the default font.
+
+Values less than 16 mean the default menu icon size.
+
+Needs LXQT panel to be restarted
+(or just log out and in again).</string>
+                 </property>
+                 <property name="suffix">
+                  <string> px</string>
+                 </property>
+                 <property name="maximum">
+                  <number>32</number>
+                 </property>
+                 <property name="value">
+                  <number>0</number>
                  </property>
                 </widget>
                </item>

@@ -10,6 +10,7 @@ V0.9.6
  * Corrections to the states of toolbuttons with menu arrow.
  * Corrected blurring with HDPI because the HDPI tranlucency bug is fixed in Qt-5.6. Also tried to correct icon sizes for odd DPRs.
  * Set tab horizontal and vertical spaces according to tab frame thickness (which results in an appropriate space between close button and right frame).
+ * Added an experimental hacking key for setting LXQT's main menu icon size when it isn't set by the current LXQT theme.
 
 V0.9.5
 ---------

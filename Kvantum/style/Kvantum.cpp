@@ -3702,7 +3702,7 @@ void Style::drawControl(ControlElement element,
             {
               int iconSpace = 0;
               if (opt->maxIconWidth && !hspec.iconless_menu)
-                iconSpace = qMin(opt->maxIconWidth,smallIconSize)+lspec.tispace;
+                iconSpace = smallIconSize + lspec.tispace;
               renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                                 0,
@@ -3715,6 +3715,31 @@ void Style::drawControl(ControlElement element,
             }
             else
             {
+              int lxqtMenuIconSize = hspec.lxqtmainmenu_iconsize;
+              if (lxqtMenuIconSize >= 16
+                  && lxqtMenuIconSize != smallIconSize
+                  && qobject_cast<const QMenu*>(widget))
+              {
+                if (widget->objectName() == "TopLevelMainMenu")
+                  smallIconSize = lxqtMenuIconSize;
+                else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
+                {
+                  if (menu->objectName() == "TopLevelMainMenu")
+                    smallIconSize = lxqtMenuIconSize;
+                  else
+                  {
+                    while (qobject_cast<QMenu*>(getParent(menu, 1)))
+                    {
+                      menu = qobject_cast<QMenu*>(getParent(menu, 1));
+                      if (menu->objectName() == "TopLevelMainMenu")
+                      {
+                        smallIconSize = lxqtMenuIconSize;
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
               QSize iconSize = QSize(smallIconSize,smallIconSize);
               QRect r = option->rect.adjusted(rtl ? 0 : checkSpace,
                                               0,
@@ -8581,6 +8606,33 @@ QSize Style::sizeFromContents(ContentsType type,
 
         const hacks_spec hspec = settings_->getHacksSpec();
 
+        int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
+        int lxqtMenuIconSize = hspec.lxqtmainmenu_iconsize;
+        if (lxqtMenuIconSize >= 16
+            && lxqtMenuIconSize != iconSize
+            && qobject_cast<const QMenu*>(widget))
+        {
+          if (widget->objectName() == "TopLevelMainMenu")
+            iconSize = lxqtMenuIconSize;
+          else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
+          {
+            if (menu->objectName() == "TopLevelMainMenu")
+              iconSize = lxqtMenuIconSize;
+            else
+            {
+              while (qobject_cast<QMenu*>(getParent(menu, 1)))
+              {
+                menu = qobject_cast<QMenu*>(getParent(menu, 1));
+                if (menu->objectName() == "TopLevelMainMenu")
+                {
+                  iconSize = lxqtMenuIconSize;
+                  break;
+                }
+              }
+            }
+          }
+        }
+
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           s = QSize(contentsSize.width(),10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
         else
@@ -8589,13 +8641,13 @@ QSize Style::sizeFromContents(ContentsType type,
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                              (opt->icon.isNull() || (hspec.iconless_menu && !(l.size() > 0 && l[0].isEmpty())))
                              ? QSize()
-                             : QSize(opt->maxIconWidth,opt->maxIconWidth));
+                             : QSize(iconSize,iconSize));
         }
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */
         if(opt->icon.isNull() && !hspec.iconless_menu && opt->maxIconWidth)
-          s.rwidth() += qMin(opt->maxIconWidth,pixelMetric(PM_SmallIconSize)) + lspec.tispace;
+          s.rwidth() += iconSize + lspec.tispace;
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
         {

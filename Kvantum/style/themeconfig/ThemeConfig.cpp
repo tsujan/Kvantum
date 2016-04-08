@@ -593,6 +593,10 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","transparent_pcmanfm_sidepane");
   r.transparent_pcmanfm_sidepane = v.toBool();
 
+  v = getValue("Hacks","lxqtmainmenu_iconsize");
+  if (v.isValid())
+    r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
+
   v = getValue("Hacks","blur_konsole");
   r.blur_konsole = v.toBool();
 

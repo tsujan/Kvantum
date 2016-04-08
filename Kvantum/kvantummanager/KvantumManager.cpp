@@ -556,6 +556,10 @@ void KvantumManager::defaultThemeButtons()
     if (defaultSettings.contains ("disabled_icon_opacity")) // it's false by default
         tmp = qMin (qMax (defaultSettings.value ("disabled_icon_opacity").toInt(), 0), 100);
     ui->spinOpacity->setValue (tmp);
+    tmp = 0;
+    if (defaultSettings.contains ("lxqtmainmenu_iconsize")) // it's false by default
+        tmp = qMin (qMax (defaultSettings.value ("lxqtmainmenu_iconsize").toInt(), 0), 32);
+    ui->spinLxqtMenu->setValue (tmp);
     defaultSettings.endGroup();
 
     defaultSettings.beginGroup ("General");
@@ -899,6 +903,10 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("disabled_icon_opacity"))
                     tmp = qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(), 0), 100);
                 ui->spinOpacity->setValue (tmp);
+                tmp = 0;
+                if (themeSettings.contains ("lxqtmainmenu_iconsize"))
+                    tmp = qMin (qMax (themeSettings.value ("lxqtmainmenu_iconsize").toInt(), 0), 100);
+                ui->spinLxqtMenu->setValue (tmp);
                 themeSettings.endGroup();
             }
         }
@@ -1294,6 +1302,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
         hackKeys.insert("tint_on_mouseover", str.setNum (ui->spinTint->value()));
         hackKeys.insert("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
+        hackKeys.insert("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
@@ -1362,6 +1371,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("single_top_toolbar", ui->checkBoxToolbar->isChecked());
         themeSettings.setValue ("tint_on_mouseover", ui->spinTint->value());
         themeSettings.setValue ("disabled_icon_opacity", ui->spinOpacity->value());
+        themeSettings.setValue ("lxqtmainmenu_iconsize", ui->spinLxqtMenu->value());
 #endif
         themeSettings.endGroup();
 
