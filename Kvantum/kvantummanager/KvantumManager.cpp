@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QStyleFactory>
 #include <QDesktopWidget>
+#include <QWhatsThis>
 #if QT_VERSION >= 0x050000
 #include <QFileDevice>
 #include <QTextStream>
@@ -68,6 +69,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
     connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
+    connect (ui->whatsthisButton, SIGNAL(clicked()), this, SLOT (showWhatsThis()));
 
 #if QT_VERSION < 0x050000
     ui->labelTooltipDelay->setVisible (false);
@@ -1567,6 +1569,20 @@ void KvantumManager::restoreDefault()
     /* The restore button is shown only when kvconfigTheme_ ends with "#" (-> tabChanged())
        but we're wise and so, cautious ;) */
     if (!kvconfigTheme_.endsWith ("#")) return;
+
+    QMessageBox msgBox (QMessageBox::Question,
+                        tr ("Confirmation"),
+                        tr ("<center><b>Do you want to revert to the default (root) settings of this theme?</b></center>"),
+                        QMessageBox::Yes | QMessageBox::No,
+                        this);
+    msgBox.setInformativeText (tr ("<center><i>You will lose the changes you may have made.</i></center>"));
+    msgBox.setDefaultButton (QMessageBox::No);
+    switch (msgBox.exec()) {
+        case QMessageBox::No: return;
+        case QMessageBox::Yes:
+        default: break;
+    }
+
     QFile::remove (QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_));
     QString _kvconfigTheme_ (kvconfigTheme_);
     if (kvconfigTheme_ == "Default#")
@@ -1628,6 +1644,11 @@ void KvantumManager::popupBlurring (bool checked)
     if (checked)
       ui->checkBoxBlurPopup->setChecked (true);
     ui->checkBoxBlurPopup->setEnabled (!checked);
+}
+/*************************/
+void KvantumManager::showWhatsThis()
+{
+    QWhatsThis::enterWhatsThisMode();
 }
 /*************************/
 void KvantumManager::aboutDialog()
