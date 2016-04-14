@@ -52,7 +52,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     animation_ = new QPropertyAnimation (effect_, "opacity");
 
     setAttribute (Qt::WA_AlwaysShowToolTips);
-    showAnimated (ui->installLabel, 2000);
+    showAnimated (ui->installLabel, 1500);
 
     connect (ui->quit, SIGNAL (clicked()), this, SLOT (close()));
     connect (ui->openTheme, SIGNAL (clicked()), this, SLOT (openTheme()));

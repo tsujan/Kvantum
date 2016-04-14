@@ -56,6 +56,9 @@
 #if QT_VERSION >= 0x050000
 #include <QSurfaceFormat>
 #include <QWindow>
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+#include <QtPlatformHeaders/QXcbWindowFunctions>
+#endif
 #endif
 
 #define M_PI 3.14159265358979323846
@@ -8162,6 +8165,32 @@ void Style::setSurfaceFormat(QWidget *widget) const
 #endif
 }
 
+/*
+  This is a workaround for a Qt5 bug (QTBUG-47043), because of which,
+  _NET_WM_WINDOW_TYPE is set to _NET_WM_WINDOW_TYPE_NORMAL for QMenu.
+*/
+void Style::setMenuType(const QWidget *widget) const
+{
+#if QT_VERSION < 0x050000 || !(defined Q_WS_X11 || defined Q_OS_LINUX)
+  Q_UNUSED(widget);
+  return;
+#else
+  if (!qobject_cast<const QMenu*>(widget)
+      || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
+      || !widget->windowHandle())
+    return;
+
+  int wmWindowType = 0;
+  if (widget->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
+    wmWindowType |= QXcbWindowFunctions::DropDownMenu;
+  if (widget->testAttribute(Qt::WA_X11NetWmWindowTypePopupMenu))
+    wmWindowType |= QXcbWindowFunctions::PopupMenu;
+  if (wmWindowType == 0) return;
+  QXcbWindowFunctions::setWmWindowType(widget->windowHandle(),
+                                       static_cast<QXcbWindowFunctions::WmWindowType>(wmWindowType));
+#endif
+}
+
 int Style::styleHint(StyleHint hint,
                      const QStyleOption *option,
                      const QWidget *widget,
@@ -8169,6 +8198,7 @@ int Style::styleHint(StyleHint hint,
 {
   setSurfaceFormat(widget); /* FIXME Why here and nowhere else?
                                      Perhaps because of its use in qapplication.cpp. */
+  setMenuType(widget);
 
   switch (hint) {
     case SH_EtchDisabledText :

@@ -755,6 +755,9 @@ reduced by other means.</string>
                   <string>A comma-separated list of executables,
 whose windows should not be translucent.</string>
                  </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                 </widget>
                </item>
                <item row="3" column="1">

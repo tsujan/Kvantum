@@ -134,7 +134,7 @@
 </linearGradient>
 <linearGradient id="linearGradient4965">
 <stop offset="0" style="stop-color:#f0f0f0" id="stop4968"/>
-<stop offset="1" style="stop-color:#bcbcc0" id="stop4970"/>
+<stop offset="1" style="stop-color:#bcbcc0;stop-opacity:.9" id="stop4970"/>
 </linearGradient>
 <linearGradient id="linearGradient6741-7">
 <stop offset="0" style="stop-color:#4e9ff2" id="stop4973"/>
@@ -787,7 +787,7 @@
 <path style="fill:url(#linearGradient5326)" id="border-itemview-pressed-right" d="m 291.5,1199 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topright" id="slider-normal-bottomright" transform="matrix(1,0,0,-1,0,1475.5006)"/>
-<rect width="40" x="387.5" y="1035" height="40" style="opacity:.9;fill:url(#linearGradient4972);stroke:none" id="window-normal"/>
+<rect width="40" x="387.5" y="1035" height="40" style="fill:url(#linearGradient4972);stroke:none" id="window-normal"/>
 <circle cx="362.5" cy="743.5" style="fill:url(#radialGradient5503);fill-rule:evenodd;stroke:url(#linearGradient16960)" r="8.4999743" id="slidercursor-focused"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slidercursor-focused" id="slidercursor-pressed" transform="translate(29.308819,0.3410387)"/>
 <g style="fill-rule:evenodd">

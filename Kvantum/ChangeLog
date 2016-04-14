@@ -12,6 +12,7 @@ V0.9.6
  * Set tab horizontal and vertical spaces according to tab frame thickness (which results in an appropriate space between close button and right frame).
  * Added an experimental hacking key for setting the icon size of LXQT's main menu when it isn't styled by LXQT.
  * Added "What's This?" to Kvantum Manager.
+ * Added a workaround for a Qt5 bug (QTBUG-47043), because of which, _NET_WM_WINDOW_TYPE is set to _NET_WM_WINDOW_TYPE_NORMAL instead of _NET_WM_WINDOW_TYPE_DROPDOWN_MENU or _NET_WM_WINDOW_TYPE_POPUP_MENU for QMenu.
 
 V0.9.5
 ---------
