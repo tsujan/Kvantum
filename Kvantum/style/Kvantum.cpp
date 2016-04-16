@@ -11419,39 +11419,33 @@ void Style::renderLabel(
 
     if (state != 0 && !(isPlasma_ && tialign == Qt::ToolButtonIconOnly))
     {
-      QColor shadowColor = getFromRGBA(lspec.shadowColor);
-      if (lspec.hasShadow && shadowColor.isValid())
-      {
-        painter->save();
-        if (lspec.a < 255)
-          shadowColor.setAlpha(lspec.a);
-        painter->setPen(QPen(shadowColor));
-        for (int i=0; i<lspec.depth; i++)
-          painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
-        painter->restore();
-      }
-
-      if (state == -1)
-      {
-        QColor col = getFromRGBA(settings_->getColorSpec().progressIndicatorTextColor);
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(col);
-          painter->drawText(rtext,talign,text);
-          painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
-          return;
-        }
-      }
-
       QColor normalColor = getFromRGBA(lspec.normalColor);
       QColor focusColor = getFromRGBA(lspec.focusColor);
       QColor pressColor = getFromRGBA(lspec.pressColor);
       QColor toggleColor = getFromRGBA(lspec.toggleColor);
+      QColor progColor = getFromRGBA(settings_->getColorSpec().progressIndicatorTextColor);
+
+      if (lspec.hasShadow)
+      {
+        QColor shadowColor = getFromRGBA(lspec.shadowColor);
+        /* the shadow should have enough contrast with the text */
+        if (shadowColor.isValid()
+            && ((state == 1 && (!normalColor.isValid() || enoughContrast(normalColor, shadowColor)))
+                || (state == 2 && (!focusColor.isValid() || enoughContrast(focusColor, shadowColor)))
+                || (state == 3 && (!pressColor.isValid() || enoughContrast(pressColor, shadowColor)))
+                || (state == 4 && (!toggleColor.isValid() || enoughContrast(toggleColor, shadowColor)))
+                || (state == -1 && (!progColor.isValid() || enoughContrast(progColor, shadowColor)))))
+        {
+          painter->save();
+          if (lspec.a < 255)
+            shadowColor.setAlpha(lspec.a);
+          painter->setPen(QPen(shadowColor));
+          for (int i=0; i<lspec.depth; i++)
+            painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
+          painter->restore();
+        }
+      }
+
       if (state == 1 && normalColor.isValid())
       {
         painter->save();
@@ -11492,6 +11486,18 @@ void Style::renderLabel(
       {
         painter->save();
         painter->setPen(QPen(toggleColor));
+        painter->drawText(rtext,talign,text);
+        painter->restore();
+        if (lspec.boldFont)
+          painter->restore();
+        if (lspec.italicFont)
+          painter->restore();
+        return;
+      }
+      else if (state == -1 && progColor.isValid())
+      {
+        painter->save();
+        painter->setPen(progColor);
         painter->drawText(rtext,talign,text);
         painter->restore();
         if (lspec.boldFont)
