@@ -1494,6 +1494,18 @@ check box</string>
        </property>
        <item row="0" column="2" colspan="3">
         <widget class="QProgressBar" name="progressBar_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
          <property name="value">
           <number>25</number>
          </property>
@@ -1509,6 +1521,18 @@ check box</string>
         <widget class="QProgressBar" name="progressBar_8">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
          </property>
          <property name="maximum">
           <number>0</number>
@@ -1526,6 +1550,18 @@ check box</string>
        </item>
        <item row="0" column="1">
         <widget class="QProgressBar" name="progressBar_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
          <property name="value">
           <number>25</number>
          </property>
@@ -1538,6 +1574,18 @@ check box</string>
         <widget class="QProgressBar" name="progressBar_9">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
          </property>
          <property name="value">
           <number>25</number>
@@ -1573,6 +1621,18 @@ check box</string>
         <widget class="QProgressBar" name="progressBar_10">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
          </property>
          <property name="value">
           <number>25</number>
@@ -1638,6 +1698,18 @@ check box</string>
        </item>
        <item row="0" column="9" colspan="3" alignment="Qt::AlignRight">
         <widget class="QProgressBar" name="progressBar_7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
          <property name="maximum">
           <number>0</number>
          </property>
@@ -1836,6 +1908,12 @@ check box</string>
        </item>
        <item row="2" column="1">
         <widget class="QSlider" name="verticalSlider_3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>120</height>
+          </size>
+         </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

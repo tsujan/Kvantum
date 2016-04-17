@@ -11536,7 +11536,8 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
 #endif
-  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_ : iconSize*pixelRatio_,iconmode,iconstate);
+  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_ // QPixmap::setDevicePixelRatio() is used too (-> qicon.cpp)
+                                : iconSize*pixelRatio_,iconmode,iconstate);
   if (hdpi && (px.size() == iconSize // not from icon theme
                || px.size().width() < iconSize.width())) // when pixelRatio_ is odd FIXME: why?!
     px = icon.pixmap(iconSize,iconmode,iconstate);

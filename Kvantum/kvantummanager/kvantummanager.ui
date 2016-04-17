@@ -1357,7 +1357,7 @@ Zero means tooltips are shown instantly.
                   <string>Active tab is detached by default.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this removes the bottom frame of the active tab and also cuts the frame of the tab widget under it, so that they seem attached to each other.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Attach active tab to tab widget</string>
