@@ -5458,10 +5458,11 @@ void Style::drawControl(ControlElement element,
       else if (status.startsWith("toggled")) // the toggled state isn't needed
         status.replace(QString("toggled"),QString("normal"));
       /* for elegance */
-      if (r.height() < 2)
+      /*if (r.height() < 2)
         fspec.expansion = 0;
       else
-        fspec.expansion = qMin(fspec.expansion,r.height()/2);
+        fspec.expansion = qMin(fspec.expansion,r.height()/2);*/
+      fspec.expansion = 0; // vertical headers have variable heights
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
