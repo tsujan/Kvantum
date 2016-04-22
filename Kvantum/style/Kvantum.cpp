@@ -4305,10 +4305,9 @@ void Style::drawControl(ControlElement element,
         if ((!(docMode || !tspec_.attach_active_tab) || tspec_.mirror_doc_tabs)
             && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
-        bool joinActiveTab(tspec_.joined_active_tab && (docMode || !tspec_.attach_active_tab));
         bool rtl(opt->direction == Qt::RightToLeft && !verticalTabs);
 
-        if (joinActiveTab
+        if (tspec_.joined_active_tab
             || status.startsWith("normal") || status.startsWith("focused"))
         {
           if (tspec_.joined_inactive_tabs
@@ -4317,7 +4316,7 @@ void Style::drawControl(ControlElement element,
             int capsule = 2;
             if (opt->position == QStyleOptionTab::Beginning)
             {
-              if (joinActiveTab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
+              if (tspec_.joined_active_tab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = -1;
@@ -4326,7 +4325,7 @@ void Style::drawControl(ControlElement element,
             else if (opt->position == QStyleOptionTab::Middle)
             {
               fspec.hasCapsule = true;
-              if (joinActiveTab)
+              if (tspec_.joined_active_tab)
                 capsule = 0;
               else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
                 capsule = 1;
@@ -4337,7 +4336,7 @@ void Style::drawControl(ControlElement element,
             }
             else if (opt->position == QStyleOptionTab::End)
             {
-              if (joinActiveTab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
+              if (tspec_.joined_active_tab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = 1;
@@ -4354,7 +4353,7 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        bool drawSep(joinActiveTab
+        bool drawSep(tspec_.joined_active_tab
                      && opt->position != QStyleOptionTab::OnlyOneTab
                      && ((tspec_.mirror_doc_tabs && bottomTabs)
                            ? rtl ? opt->position != QStyleOptionTab::End

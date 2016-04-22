@@ -35,9 +35,11 @@ Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt
 
 In KDE:
 =======
-(1) Select Kvantum from 'System Settings > (Application Appearance >) Color(s > Scheme)' and click Apply.
+(1) Select Kvantum from 'System Settings > Application Style > Widget Style' and apply it.
 
-(2) Select Kvantum from 'System Settings > Application Appearance/Style > (Style > Applications >) Widget style' and apply it. Logging out and in would be good for Plasma to see the new theme.
+(2) Select Kvantum from 'System Settings > Color > Scheme' and click Apply. You could change the color scheme later if you choose another Kvantum theme with Kvantum Manager (see "Using Other Themes" below).
+
+Logging out and in would be good for Plasma to see the new theme.
 
 In LXQT:
 ========
@@ -82,7 +84,7 @@ Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
 
 Please read the last section of "Theme-Making.pdf" for more information on theme installation paths and their priorities.
 
-The default Qt5 installation adds some root themes, that can be selected by using Kvantum Manager.
+The default Qt5 installation adds several root themes, that can be selected by using Kvantum Manager. Their corresponding KDE color schemes and Openbox themes are also installed.
 
 ***********
 *   GTK   *

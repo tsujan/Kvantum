@@ -208,18 +208,16 @@ combo_as_lineedit                true/false           Draw an editable combo box
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 
-joined_inactive_tabs              true/false          Join inactive tabs together?
-                                                      They are joined by default.
-
 attach_active_tab                 true/false          Attach the active tab to the
                                                       tab widget? It is detached
                                                       by default.
 
+joined_inactive_tabs              true/false          Join inactive tabs together?
+                                                      They are joined by default.
+
 joined_active_tab                 true/false          If "joined_inactive_tabs" is true, this
                                                       key will also join the active tab to its
-                                                      adjacent inactive tab(s) provided that
-                                                      the tab widget is in the document mode OR
-                                                      the key "attach_active_tab" is false.
+                                                      adjacent inactive tab(s).
                                                       Then tab separators will also be drawn if
                                                       they exist in the SVG file (read the file
                                                       "Theme-Making.pdf" for more explanation
