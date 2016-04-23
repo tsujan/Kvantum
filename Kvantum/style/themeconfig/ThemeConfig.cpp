@@ -376,6 +376,9 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","left_tabs");
   r.left_tabs = v.toBool();
 
+  v = getValue("General","center_doc_tabs");
+  r.center_doc_tabs = v.toBool();
+
   v = getValue("General","joined_inactive_tabs");
   if (v.isValid()) // true by default
     r.joined_inactive_tabs = v.toBool();
