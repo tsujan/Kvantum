@@ -11,6 +11,7 @@ unix {
   OBDIR = $$PREFIX/share/themes
 
   #MAKE INSTALL
+  QMAKE_INSTALL_DIR = cp -f -R --no-preserve=mode
   kv.path = $$KVDIR
   kv.files += ./kvthemes/*
   colors.path = $$COLORSDIR
