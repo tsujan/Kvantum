@@ -103,3 +103,12 @@ window.inactive.label.text.font:
 menu.title.text.font:
 menu.items.font:
 
+!! osd (pop ups)
+osd.border.width: 2
+
+osd.hilight.bg: flat solid
+osd.hilight.bg.color: #848484
+
+osd.unhilight.bg: flat solid border
+osd.unhilight.bg.color: #ffffff
+osd.unhilight.bg.border.color: #7b7b7b
