@@ -115,8 +115,8 @@ osd.bg: flat solid
 osd.bg.color: #3D3D3E
 
 osd.hilight.bg: Gradient Vertical Flat
-osd.hilight.bg.color: #141414
-osd.hilight.bg.colorTo: #646464
+osd.hilight.bg.color: #a21214
+osd.hilight.bg.colorTo: #790d0f
 
 osd.unhilight.bg: flat solid border
 osd.unhilight.bg.color: #3d3d3e

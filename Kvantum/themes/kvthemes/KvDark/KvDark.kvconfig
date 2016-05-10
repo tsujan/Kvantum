@@ -48,6 +48,7 @@ tooltip.text.color=white
 highlight.text.color=white
 link.color=#2EB8E6
 link.visited.color=#FF6666
+progress.indicator.text.color=black
 
 [Hacks]
 respect_darkness=true

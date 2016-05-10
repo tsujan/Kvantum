@@ -47,6 +47,7 @@ private:
     void showAnimated (QWidget *w, int duration);
     void defaultThemeButtons();
     void resizeConfPage (bool thirdPage);
+    void restyleWindow();
     Ui::KvantumManager *ui;
     /* Remember the last opened folder */
     QString lastPath_;

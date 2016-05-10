@@ -115,7 +115,7 @@ osd.bg: flat solid
 osd.bg.color: #3a4040
 
 osd.hilight.bg: flat solid
-osd.hilight.bg.color: #275d95
+osd.hilight.bg.color: #215d9c
 
 osd.unhilight.bg: flat solid border
 osd.unhilight.bg.color: #3a4040

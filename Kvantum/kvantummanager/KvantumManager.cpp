@@ -465,7 +465,7 @@ void KvantumManager::deleteTheme()
                 kvconfigTheme_ = QString();
             }
             QCoreApplication::processEvents();
-            QApplication::setStyle (QStyleFactory::create ("kvantum"));
+            restyleWindow();
             resizeConfPage (false);
             if (process_->state() == QProcess::Running)
               preview();
@@ -515,7 +515,7 @@ void KvantumManager::useTheme()
 
     /* this is needed if the config file is created by this method */
     QCoreApplication::processEvents();
-    QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    restyleWindow();
     resizeConfPage (false);
     if (process_->state() == QProcess::Running)
       preview();
@@ -674,6 +674,19 @@ void KvantumManager::resizeConfPage (bool thirdPage)
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
   if (!le) ui->opaqueEdit->setEnabled (false);
+}
+/*************************/
+void KvantumManager::restyleWindow()
+{
+  QApplication::setStyle (QStyleFactory::create ("kvantum"));
+#if QT_VERSION >= 0x050000
+  // Qt5 has QEvent::ThemeChange
+  Q_FOREACH(QWidget *widget, QApplication::allWidgets())
+  {
+    QEvent event (QEvent::ThemeChange);
+    QApplication::sendEvent (widget, &event);
+  }
+#endif
 }
 /*************************/
 void KvantumManager::tabChanged (int index)
@@ -1556,7 +1569,7 @@ void KvantumManager::writeConfig()
         QCoreApplication::processEvents();
         if (restyle)
         {
-            QApplication::setStyle (QStyleFactory::create ("kvantum"));
+            restyleWindow();
             resizeConfPage (true);
         }
         if (process_->state() == QProcess::Running)
@@ -1608,7 +1621,7 @@ void KvantumManager::restoreDefault()
                                 10000);
 
     QCoreApplication::processEvents();
-    QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    restyleWindow();
     resizeConfPage (true);
     if (process_->state() == QProcess::Running)
       preview();
