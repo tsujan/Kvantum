@@ -2110,8 +2110,6 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameButtonTool : {return;}
 
     case PE_IndicatorRadioButton : {
-      frame_spec fspec;
-      default_frame_spec(fspec);
       const interior_spec ispec = getInteriorSpec("RadioButton");
 
       if (option->state & State_Enabled)
@@ -2132,6 +2130,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             suffix = "-normal";
         }
         if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
         if (isInactive)
@@ -2139,7 +2138,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
+        renderElement(painter, prefix+ispec.element+suffix, option->rect);
       }
       else
       {
@@ -2154,11 +2153,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         else
           suffix = "-normal";
         if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
+        renderElement(painter, prefix+ispec.element+suffix, option->rect);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -2167,8 +2167,6 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorCheckBox : {
-      frame_spec fspec;
-      default_frame_spec(fspec);
       const interior_spec ispec = getInteriorSpec("CheckBox");
 
       if (option->state & State_Enabled)
@@ -2193,6 +2191,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             suffix = "-normal";
         }
         if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
         if (isInactive)
@@ -2200,7 +2199,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
+        renderElement(painter, prefix+ispec.element+suffix, option->rect);
       }
       else
       {
@@ -2217,11 +2216,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         else
           suffix = "-normal";
         if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
+        renderElement(painter, prefix+ispec.element+suffix, option->rect);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -3540,11 +3540,7 @@ void Style::drawControl(ControlElement element,
               option->rect.width() - 2*marginH,
               8);
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
-      renderElement(painter,
-                    dspec.element+"-tearoff-"+status,
-                    r,
-                    20,
-                    0);
+      renderElement(painter,dspec.element+"-tearoff-"+status,r,20,0);
 
       break;
     }
@@ -11225,8 +11221,7 @@ void Style::renderIndicator(QPainter *painter,
   int s = (sq.width() > dspec.size) ? dspec.size : sq.width();
 
   renderElement(painter,element,
-                alignedRect(ld,alignment,QSize(s,s),interior),
-                0,0);
+                alignedRect(ld,alignment,QSize(s,s),interior));
 }
 
 void Style::renderLabel(
