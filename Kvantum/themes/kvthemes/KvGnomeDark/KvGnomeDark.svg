@@ -954,4 +954,32 @@
 <use width="100%" x="0" y="0" height="100%" id="use8821" xlink:href="#progress-normal-bottomleft0" transform="matrix(-1,0,0,1,537.99998,9e-5)"/>
 <path style="opacity:.07;fill:url(#linearGradient8869);fill-rule:evenodd;stroke:none" id="path8827" d="m 285,148.0001 c 1.68749,0 2.99999,-1.3125 2.99999,-2.99999 h -2.99998 z "/>
 </g>
+<ellipse cx="243" cy="587" rx="7.0000587" ry="7.0000591" style="stroke:#a0a0a0;fill-opacity:0;color:#000;stroke-width:2" id="menu-radio-normal"/>
+<g style="color:#000" id="menu-radio-checked-normal">
+<ellipse cx="283.00003" cy="587" rx="7.5000072" ry="7.5000076" style="stroke:#969696;fill-opacity:0" id="use4891"/>
+<ellipse cx="283.00003" cy="587" rx="3" ry="2.9999981" style="fill:#fff;stroke:none;stroke-width:1.274" id="ellipse4893"/>
+</g>
+<g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd" id="menu-checkbox-normal">
+<rect width="16" x="320.00003" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4907"/>
+<rect width="13.000153" x="321" y="581" rx="2.6000299" ry="2.6000299" height="13.000153" style="stroke:#a0a0a0;stroke-width:2" id="rect4910"/>
+</g>
+<g style="fill-rule:evenodd;stroke-linecap:round" id="menu-checkbox-checked-normal">
+<g style="fill-opacity:0">
+<rect width="16" x="360" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4927"/>
+<rect width="14.000277" x="360.5" y="580.5" rx="2.8000553" height="14.000277" ry="2.8000553" style="stroke:#969696" id="rect4947"/>
+</g>
+<path style="fill:none;stroke:#fff;stroke-width:3" id="path4933" d="m 363.6268,586.0001 2.7733,2.6997 8,-8"/>
+</g>
+<g id="menu-checkbox-tristate-normal">
+<g style="stroke-linecap:round;fill-opacity:0;fill-rule:evenodd">
+<rect width="16" x="400" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4967"/>
+<rect width="14.000277" x="400.5" y="580.5" rx="2.8000553" ry="2.8000553" height="14.000277" style="stroke:#969696" id="rect4969"/>
+</g>
+<rect width="10" x="402.5" y="-589.00006" height="3" style="fill:#fff;stroke:none;color:#000" id="rect4960" transform="scale(1,-1)"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20,-1.7827176e-7)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(19.999977,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-normal" id="menu-checkbox-checked-focused" transform="translate(20,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-normal" id="menu-checkbox-tristate-focused" transform="translate(20,0)"/>
 </svg>

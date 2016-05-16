@@ -2110,63 +2110,13 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameButtonTool : {return;}
 
     case PE_IndicatorRadioButton : {
-      /* make exception for menuitems */
-      /*if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
-      {
-        frame_spec fspec;
-        default_frame_spec(fspec);
-        interior_spec ispec;
-        default_interior_spec(ispec);
-        const indicator_spec dspec = getIndicatorSpec("MenuItem");
-        
-        if (option->state & State_Enabled)
-        {
-          if (option->state & State_MouseOver)
-          {
-            if (option->state & State_On)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-radio-checked-focused");
-            else
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-radio-focused");
-          }
-          else
-          {
-            if (option->state & State_On)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-radio-checked-normal");
-            else
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-radio-normal");
-          }
-        }
-        else
-        {
-          if (status == "disabled")
-          {
-            painter->save();
-            painter->setOpacity(DISABLED_OPACITY);
-          }
-          if (option->state & State_On)
-            renderInterior(painter,option->rect,fspec,ispec,
-                           dspec.element+"-radio-checked-normal");
-          else
-            renderInterior(painter,option->rect,fspec,ispec,
-                           dspec.element+"-radio-normal");
-          if (!(option->state & State_Enabled))
-            painter->restore();
-        }
-
-        break;
-      }*/
-
       frame_spec fspec;
       default_frame_spec(fspec);
       const interior_spec ispec = getInteriorSpec("RadioButton");
 
       if (option->state & State_Enabled)
       {
-        QString suffix;
+        QString suffix, prefix;
         if (option->state & State_MouseOver)
         {
           if (option->state & State_On)
@@ -2181,12 +2131,15 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
+        if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+          prefix = "menu-"; // make exception for menuitems
         if (isInactive)
           suffix.append(QString("-inactive"));
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
       }
       else
       {
@@ -2195,14 +2148,17 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        QString suffix;
+        QString suffix, prefix;
         if (option->state & State_On)
           suffix = "-checked-normal";
         else
           suffix = "-normal";
+        if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+          prefix = "menu-";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -2211,72 +2167,13 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorCheckBox : {
-      /* make exception for menuitems */
-      /*if (qstyleoption_cast<const QStyleOptionMenuItem *>(option))
-      {
-        frame_spec fspec;
-        default_frame_spec(fspec);
-        interior_spec ispec;
-        default_interior_spec(ispec);
-        const indicator_spec dspec = getIndicatorSpec("MenuItem");
-        
-        if (option->state & State_Enabled)
-        {
-          if (option->state & State_MouseOver)
-          {
-            if (option->state & State_On)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-checked-focused");
-            else if (option->state & State_NoChange)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-tristate-focused");
-            else
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-focused");
-          }
-          else
-          {
-            if (option->state & State_On)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-checked-normal");
-            else if (option->state & State_NoChange)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-tristate-normal");
-            else
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-normal");
-          }
-        }
-        else
-        {
-          if (status == "disabled")
-          {
-            painter->save();
-            painter->setOpacity(DISABLED_OPACITY);
-          }
-          if (option->state & State_On)
-            renderInterior(painter,option->rect,fspec,ispec,
-                           dspec.element+"-checkbox-checked-normal");
-          else if (option->state & State_NoChange)
-              renderInterior(painter,option->rect,fspec,ispec,
-                             dspec.element+"-checkbox-tristate-normal");
-          else
-            renderInterior(painter,option->rect,fspec,ispec,
-                           dspec.element+"-checkbox-normal");
-          if (!(option->state & State_Enabled))
-            painter->restore();
-        }
-
-        break;
-      }*/
-
       frame_spec fspec;
       default_frame_spec(fspec);
       const interior_spec ispec = getInteriorSpec("CheckBox");
 
       if (option->state & State_Enabled)
       {
-        QString suffix;
+        QString suffix, prefix;
         if (option->state & State_MouseOver)
         {
           if (option->state & State_On)
@@ -2295,12 +2192,15 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
+        if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+          prefix = "menu-"; // make exception for menuitems
         if (isInactive)
           suffix.append(QString("-inactive"));
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
       }
       else
       {
@@ -2309,16 +2209,19 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        QString suffix;
+        QString suffix, prefix;
         if (option->state & State_On)
           suffix = "-checked-normal";
         else if (option->state & State_NoChange)
           suffix = "-tristate-normal";
         else
           suffix = "-normal";
+        if (qstyleoption_cast<const QStyleOptionMenuItem *>(option)
+            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+          prefix = "menu-";
         if (isInactive)
           suffix.append(QString("-inactive"));
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,prefix+ispec.element+suffix);
         if (!(option->state & State_Enabled))
           painter->restore();
       }

@@ -1,6 +1,7 @@
 V0.9.7
 ---------
  * Deal with QML peculiarities.
+ * Added support for separate checkboxes and radiobuttons on menus.
 
 V0.9.6
 ---------
