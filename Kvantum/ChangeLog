@@ -1,3 +1,7 @@
+V0.9.7
+---------
+ * Deal with QML peculiarities.
+
 V0.9.6
 ---------
  * Added support for default button interior.

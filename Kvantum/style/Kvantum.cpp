@@ -2460,29 +2460,33 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
-      if (widget && (qobject_cast<const QAbstractScrollArea*>(widget)
-                     || widget->inherits("QWellArray") // color dialog's color rects
-                     || widget->inherits("QComboBoxPrivateContainer"))) // frame for combo menus
+      if (!widget // QML pretends there's no widget!
+          || qobject_cast<const QAbstractScrollArea*>(widget)
+          || widget->inherits("QWellArray") // color dialog's color rects
+          || widget->inherits("QComboBoxPrivateContainer")) // frame for combo menus
       {
-        if (isDolphin_)
+        if (widget)
         {
-          if (QWidget *pw = widget->parentWidget())
+          if (isDolphin_)
           {
-            if (settings_->getHacksSpec().transparent_dolphin_view
-                // not renaming area
-                && !qobject_cast<QAbstractScrollArea*>(pw)
-                // only Dolphin's view
-                && QString(pw->metaObject()->className()).startsWith("Dolphin"))
+            if (QWidget *pw = widget->parentWidget())
             {
-              break;
+              if (settings_->getHacksSpec().transparent_dolphin_view
+                  // not renaming area
+                  && !qobject_cast<QAbstractScrollArea*>(pw)
+                  // only Dolphin's view
+                  && QString(pw->metaObject()->className()).startsWith("Dolphin"))
+              {
+                break;
+              }
             }
           }
-        }
-        else if (isPcmanfm_
-                 && settings_->getHacksSpec().transparent_pcmanfm_sidepane
-                 && widget->parentWidget() && widget->parentWidget()->inherits("Fm::SidePane"))
-        {
-          break;
+          else if (isPcmanfm_
+                   && settings_->getHacksSpec().transparent_pcmanfm_sidepane
+                   && widget->parentWidget() && widget->parentWidget()->inherits("Fm::SidePane"))
+          {
+            break;
+          }
         }
 
         const QString group = "GenericFrame";
@@ -2498,8 +2502,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         QString suffix = "-normal";
         /* distinguish between the focus and normal states
            only if the focus frame elements exist */
-        if (!widget->inherits("QWellArray")
-            && widget && widget->hasFocus()
+        if (widget && !widget->inherits("QWellArray")
+            && widget->hasFocus()
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists(fspec.element+"-focused-left"))
         {
@@ -3054,7 +3058,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QComboBox *cb = qobject_cast<const QComboBox *>(widget);
       if (cb /*&& !cb->duplicatesEnabled()*/)
       {
-        if (tspec_.combo_as_lineedit && ((combo && combo->editable) || cb->lineEdit()))
+        if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
         {
           fspec = getFrameSpec("LineEdit");
           ispec = getInteriorSpec("LineEdit");
@@ -3076,7 +3080,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             dspec = dspec1;
           }
         }
-        if (!(cb->lineEdit()
+        if (!(combo && combo->editable && cb->lineEdit()
               // someone may want transparent lineedits (as the developer of Cantata does)
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
         {
@@ -3096,7 +3100,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isInactive)
           status.append(QString("-inactive"));
 
-        if (combo && !combo->editable && !cb->lineEdit())
+        if ((combo && !combo->editable) || !cb->lineEdit())
         {
           /* in this case, the state definition isn't the usual one */
           status = (option->state & State_Enabled) ?
@@ -3254,7 +3258,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      else if ((!combo || !cb || combo->editable || cb->lineEdit()) // otherwise drawn at CC_ComboBox
+      else if ((combo && combo->editable && !(cb && !cb->lineEdit())) // otherwise drawn at CC_ComboBox
                && (!(option->state & State_AutoRaise)
                    || (!status.startsWith("normal") && !status.startsWith("disabled"))))
       {
@@ -3310,7 +3314,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       /* Konqueror may have added an icon to the right of lineedit (for LTR),
          in which case, the arrow rectangle whould be widened at CC_ComboBox */
-      if (cb && cb->lineEdit())
+      if (combo && combo->editable && cb && cb->lineEdit())
       {
         int extra = r.width()-COMBO_ARROW_LENGTH-(rtl ? fspec.left : fspec.right);
         if (extra > 0)
@@ -4665,10 +4669,15 @@ void Style::drawControl(ControlElement element,
                          - (opt->icon.isNull() ? 0 : icnSize);
           QFont F(painter->font());
           if (lspec.boldFont) F.setBold(true);
-          if (textSize(F,txt).width() > txtWidth)
+          QSize txtSize = textSize(F,txt);
+          if (txtSize.width() > txtWidth)
           {
             QFontMetrics fm(F);
             txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+          }
+          if (txtSize.height() > r.height()-lspec.top-lspec.bottom-fspec.top-fspec.bottom)
+          { // try to work around design flaws as far as possible
+            lspec.top = lspec.bottom = 0;
           }
         }
 
@@ -6451,7 +6460,8 @@ void Style::drawControl(ControlElement element,
         if (f->frameShape != QFrame::HLine
             && f->frameShape != QFrame::VLine
             && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised
-                || (widget && widget->inherits("QComboBoxPrivateContainer"))))
+                || (!widget // There's no widget in the case of a QML combobox!
+                    || widget->inherits("QComboBoxPrivateContainer"))))
         {
           if (f->frameShape == QFrame::Box)
           { // the default box frame is ugly too
@@ -6768,6 +6778,9 @@ void Style::drawComplexControl(ComplexControl control,
     }
 
     case CC_ComboBox : {
+      /* WARNING: QML comboboxes have lineedit even when they aren't editable.
+         Hence, the existence of a lineedit isn't a sufficient but only a necessary
+         condition for editability. I just hope they won't break the necessity of it ;) */
       const QStyleOptionComboBox *opt =
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
@@ -6797,7 +6810,7 @@ void Style::drawComplexControl(ComplexControl control,
         lspec.bottom = qMax(0,lspec.bottom-1);
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
-        if (!cb || cb->lineEdit()) // otherwise the arrow part will be integrated
+        if (opt->editable && cb && cb->lineEdit()) // otherwise the arrow part will be integrated
         {
           if (tspec_.combo_as_lineedit)
           {
@@ -6842,8 +6855,9 @@ void Style::drawComplexControl(ComplexControl control,
           int editWidth = 0;
           if (cb)
           {
-            if (QLineEdit *le = cb->lineEdit())
+            if (opt->editable && cb->lineEdit())
             {
+              QLineEdit *le = cb->lineEdit();
               editWidth = le->width();
               /* Konqueror may add an icon to the right of lineedit (for LTR) */
               int extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
@@ -6897,7 +6911,7 @@ void Style::drawComplexControl(ComplexControl control,
           }
           QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
           /* integrate the arrow part if the combo isn't editable */
-          if (cb && !cb->lineEdit()) r = r.united(arrowRect);
+          if (!opt->editable || (cb && !cb->lineEdit())) r = r.united(arrowRect);
           bool libreoffice = false;
           if (isLibreoffice_ && (option->state & State_Enabled))
           {
@@ -8223,9 +8237,11 @@ int Style::styleHint(StyleHint hint,
     /* when set to true, only the last submenu is
        hidden on clicking anywhere outside the menu */
     case SH_Menu_FadeOutOnHide : return false;
-    
+
     case SH_ComboBox_ListMouseTracking :
     case SH_Menu_MouseTracking : return true;
+
+    case SH_ComboBox_PopupFrameStyle: return QFrame::StyledPanel | QFrame::Plain;
 
     case SH_MenuBar_MouseTracking :
       return tspec_.menubar_mouse_tracking;

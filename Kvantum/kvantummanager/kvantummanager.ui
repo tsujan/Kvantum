@@ -249,7 +249,7 @@ theme (instead of its default theme).</string>
         <item row="4" column="0" colspan="2">
          <widget class="QLabel" name="usageLabel">
           <property name="text">
-           <string>&lt;br&gt;&lt;br&gt;Since Kvantum is independent of KDE/LXQT, you first need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings → Application Style → Widget Style&lt;/i&gt;&lt;/b&gt; or &lt;i&gt;&lt;b&gt;Configuration Center → Appearance&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under KDE, also select and apply the color scheme of this theme in &lt;b&gt;&lt;i&gt;System Settings → Color → Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under LXQT, you could find and apply a matching &lt;b&gt;Openbox&lt;/b&gt; theme if this theme is included in Kvantum (i.e. not installed manually).&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQT parts to see it completely.</string>
+           <string>&lt;br&gt;&lt;br&gt;Since Kvantum is independent of KDE/LXQt, you first need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings → Application Style → Widget Style&lt;/i&gt;&lt;/b&gt; or &lt;i&gt;&lt;b&gt;Configuration Center → Appearance&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under KDE, also select and apply the color scheme of this theme in &lt;b&gt;&lt;i&gt;System Settings → Color → Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under LXQt, you could find and apply a matching &lt;b&gt;Openbox&lt;/b&gt; theme if this theme is included in Kvantum (i.e. not installed manually).&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>
@@ -453,12 +453,12 @@ Kvantum can try to correct their behavior.</string>
                  <property name="toolTip">
                   <string>Merge PCManFM-qt's sidepane with its surroundings.
 
-Under LXQT, it needs logging out and in or closing
+Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
-with LXQT Session Settings.</string>
+with LXQt Session Settings.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's sidepane with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQT, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQT &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's sidepane with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Transparent sidepane for PCManFM-qt</string>
@@ -539,7 +539,7 @@ screens of Konsole and Yakuake if possible.</string>
 (Needs Logging out and in for Plasma menus.)</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQT panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Transparent menu title</string>
@@ -669,31 +669,31 @@ Hard-coded icons/styles may not respect this key.</string>
                <item row="7" column="4">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
-                  <string>Has effect only when the main menu is NOT styled by LXQT.
+                  <string>Has effect only when the main menu is NOT styled by LXQt.
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQT panel to be restarted (or just log out and in again).</string>
+Needs LXQt panel to be restarted (or just log out and in again).</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQT.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQT panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQt.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQt panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>LXQT main menu icon size:</string>
+                  <string>LXQt main menu icon size:</string>
                  </property>
                 </widget>
                </item>
                <item row="7" column="5">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
-                  <string>Has effect only when the main menu is NOT styled by LXQT.
+                  <string>Has effect only when the main menu is NOT styled by LXQt.
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQT panel to be restarted (or just log out and in again).</string>
+Needs LXQt panel to be restarted (or just log out and in again).</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQT.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQT panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQt.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQt panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="suffix">
                   <string> px</string>
