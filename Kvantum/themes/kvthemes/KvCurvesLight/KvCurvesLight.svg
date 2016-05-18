@@ -214,7 +214,8 @@
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4532-0-2-4-8-5-6" transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"/>
 </g>
 <rect width="14.000228" x="91" y="-400.00021" height="14.000228" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
-<g style="stroke:none;fill-rule:evenodd">
+<g style="stroke:none">
+<g style="fill-rule:evenodd">
 <rect width="8" x="260.48718" y="953.26208" height="4" style="fill:#98b2da" id="itemview-pressed-top"/>
 <rect width="8" x="260.48718" y="969.26202" height="4" style="fill:#3b63a1" id="itemview-pressed-bottom"/>
 <path style="fill:#5d86c5" id="itemview-pressed" d="m 260.2372,959.4672 8,0 0,8 -8,0 z"/>
@@ -225,8 +226,8 @@
 <path style="fill:#98b2da" id="itemview-pressed-topleft" d="m 258.4872,953.2621 0,4 -4,0 z"/>
 <path style="fill:#5780c1" id="itemview-pressed-bottomleft" d="m 254.4872,969.2621 4,0 0,4 z"/>
 </g>
-<path style="fill:url(#linearGradient5576);stroke:none" id="titlebar-normal" d="m 363.5,745 0,32 32,0 0,-32 z"/>
-<g style="stroke:none;fill-rule:evenodd">
+<path style="fill:url(#linearGradient5576)" id="titlebar-normal" d="m 363.5,745 0,32 32,0 0,-32 z"/>
+<g style="fill-rule:evenodd">
 <rect width="15" x="280.74991" y="756.4201" height="15" style="fill:#5d86c5" id="tab-tear"/>
 <g style="fill:#5a5a5a">
 <rect width="45" x="47.5009" y="819.41992" rx="22.5" height="45" ry="22.5" style="opacity:0" id="dial"/>
@@ -246,6 +247,7 @@
 <path style="fill:#a0a0a0" id="path3775" d="m 336.9643,1225.9643 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 <path style="fill:#fff;fill-opacity:.627" id="path3777" d="m 336.9643,1238.0357 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 <path style="fill:#a0a0a0" id="path3779" d="m 336.9643,1237.25 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
+</g>
 </g>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="splitter-grip-focused" transform="translate(27.5009,153.91993)">
@@ -619,21 +621,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-normal-topright" transform="matrix(-1,0,0,1,103.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use5143" transform="matrix(-1,0,0,1,103.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,103.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-focused-topleft" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-focused-top" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8400" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-focused-bottomleft" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottom" id="expand-progress-pattern-focused-bottom" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-focused-topright" transform="matrix(-1,0,0,1,167.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-focused-bottomright" transform="matrix(-1,0,0,1,167.5001,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-toggled-topleft" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-toggled-top" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8424" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-toggled-bottomleft" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottom" id="expand-progress-pattern-toggled-bottom" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,233.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8432" transform="matrix(-1,0,0,1,233.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,233.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-disabled-topleft" transform="translate(204,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-disabled-top" transform="translate(204,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#path4884" id="use8440" transform="translate(204,0)"/>
@@ -697,9 +684,6 @@
 <path id="expand-tab-normal-left" d="m 26.5,730 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-tab-normal" d="m 43,730 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-tab-normal-right" d="m 59.5,730 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-tab-focused-left" d="m 26.5,742 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-tab-focused" d="m 43,742 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-tab-focused-right" d="m 59.5,742 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 </g>
 </g>
@@ -779,7 +763,7 @@
 <path id="expand-menuitem-pressed-right" d="m 52.5,645 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-menuitem-toggled" d="m 36,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-menuitem-toggled-right" d="m 52.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path id="expand-menuitem-toggled-left" d="m 19.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path id="expand-menuitem-toggledleft" d="m 19.5,669 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <g style="fill:#5d86c5">
 <path id="expand-itemview-pressed-topleft" d="m 207.75,895 c 0,-6.648 5.352,-12 12,-12 v 12 h -12 z "/>
@@ -915,7 +899,6 @@
 <use width="450" x="0" y="0" height="1230" id="common-normal-bottomright" xlink:href="#common-normal-topleft" transform="matrix(-1,0,0,-1,126,2046)"/>
 <use width="450" x="0" y="0" height="1230" id="common-normal-bottom" xlink:href="#common-normal-left" transform="matrix(0,-1,1,0,-960,1086)"/>
 <use width="450" x="0" y="0" height="1230" id="common-normal-bottomleft" xlink:href="#common-normal-topleft" transform="matrix(0,-1,1,0,-960,1086)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#titlebar-normal" id="titlebar-focused" transform="translate(-33.5,0)"/>
 <path style="opacity:.95;fill:#eff0f1;fill-rule:evenodd;stroke:none" id="menu-normal" d="m 155,650 48,0 0,48 -48,0 z "/>
 <g style="opacity:.95;stroke:none" id="menu-normal-left" transform="translate(33.7421,-53.7533)">
 <path style="fill:#eff0f1;fill-rule:evenodd" id="menu-normal-left0" d="m 116.257,703.753 4.9999,3e-4 0,48 -4.9999,-3e-4 z"/>
@@ -1149,9 +1132,4 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-left-normal" transform="matrix(-1,0,0,1,400,-215)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-up-normal" transform="matrix(0,-1,1,0,-650,860)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-right-normal" transform="translate(-350,-160)"/>
-<g style="stroke:none;fill-rule:evenodd;fill-opacity:.078">
-<path id="expand-button-default" d="m 320,90 -17,0 0,10 17,0 0,-10 z"/>
-<path id="expand-button-default-left" d="m 320,100 -17,0 0,10 17,0 0,-10 z"/>
-<path id="expand-button-default-right" d="m 320,110 -17,0 0,10 17,0 0,-10 z"/>
-</g>
 </svg>

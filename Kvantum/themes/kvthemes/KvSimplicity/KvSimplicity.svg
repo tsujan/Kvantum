@@ -818,9 +818,7 @@
 <use width="100%" x="0" y="0" height="100%" id="progress-normal-bottomright" xlink:href="#progress-normal-bottomleft" transform="matrix(-1,0,0,1,671.99992,6.3955213e-7)"/>
 <g style="stroke:none;fill-rule:evenodd">
 <path id="expand-progress-pattern-normal" d="m 410,140 0,10 10,0 0,-10 -10,0 z"/>
-<path id="expand-progress-normal" d="m 410,170 0,10 10,0 0,-10 -10,0 z"/>
-<path id="expand-progress-pattern-focused" d="m 410,150 0,10 10,0 0,-10 -10,0 z"/>
-<path id="expand-progress-pattern-toggled" d="m 410,160 0,10 10,0 0,-10 -10,0 z"/>
+<path id="expand-progress-normal" d="m 410,150 0,10 10,0 0,-10 -10,0 z"/>
 <rect width="10" x="337" y="1112" height="10" style="stroke-linejoin:round;fill-opacity:0;stroke-width:1.885" id="grip-normal"/>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="scrollbarslider-normal-topleft" transform="translate(-135.5,5.749757)">
@@ -934,11 +932,7 @@
 </g>
 <g style="stroke-linecap:round;stroke-width:3.609">
 <rect width="10" x="0" y="10" height="10" id="expand-button-normal"/>
-<rect width="10" x="0" y="20" height="10" id="expand-button-focused"/>
-<rect width="10" x="0" y="30" height="10" id="expand-button-pressed"/>
-<rect width="10" x="0" y="40" height="10" id="expand-button-toggled"/>
-<rect width="10" x="0" y="50" height="10" id="expand-lineedit-normal"/>
-<rect width="10" x="0" y="60" height="10" id="expand-lineedit-focused"/>
+<rect width="10" x="285" y="72.5" height="10" id="expand-lineedit-normal"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-left" id="button-pressed-right" transform="matrix(-1,0,0,-1,217.00001,70.999933)"/>
@@ -992,24 +986,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="progress-pattern-normal-right" transform="matrix(-1,0,0,1,292.5,122.5002)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,292.5,122.5002)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,292.5,122.5002)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="progress-pattern-focused-left" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="progress-pattern-focused-bottomleft" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="progress-pattern-focused-topleft" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottom" id="progress-pattern-focused-bottom" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-top" id="progress-pattern-focused-top" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled" id="progress-pattern-focused" transform="translate(-165,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="progress-pattern-focused-right" transform="matrix(-1,0,0,1,352.5,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="progress-pattern-focused-bottomright" transform="matrix(-1,0,0,1,352.5,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="progress-pattern-focused-topright" transform="matrix(-1,0,0,1,352.5,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="progress-pattern-toggled-left" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="progress-pattern-toggled-bottomleft" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="progress-pattern-toggled-topleft" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottom" id="progress-pattern-toggled-bottom" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-top" id="progress-pattern-toggled-top" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled" id="progress-pattern-toggled" transform="translate(-105,122.49985)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="progress-pattern-toggled-right" transform="matrix(-1,0,0,1,412.4999,122.49995)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,412.4999,122.49995)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,412.4999,122.49995)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#itemview-pressed" id="expand-itemview-pressed-left" transform="translate(190.5,-27.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#itemview-pressed" id="border-itemview-pressed-right" transform="translate(206.5,8)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#itemview-pressed" id="border-itemview-pressed-left" transform="translate(190.5,8)"/>

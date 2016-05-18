@@ -5004,15 +5004,15 @@ void Style::drawControl(ControlElement element,
         if (isVertical)
         {
           length = h;
-          r.setRect(0, 0, h, w);
+          r.setRect(y, x, h, w);
           QTransform m;
           if (!opt2->bottomToTop)
           {
-            m.translate(0, w); m.scale(1,-1);
+            m.translate(0, w+2*x); m.scale(1,-1);
           }
           else
           {
-            m.translate(h, 0); m.scale(-1,1);
+            m.translate(h+2*y, 0); m.scale(-1,1);
           }
           painter->setTransform(m, true);
         }
@@ -10539,60 +10539,64 @@ bool Style::renderElement(QPainter *painter,
   if (themeRndr_ && themeRndr_->isValid()
       && (themeRndr_->elementExists(element_)
           || (element_.contains("-inactive")
-              && themeRndr_->elementExists(element_.remove(QString("-inactive"))))))
+              && themeRndr_->elementExists(element_.remove(QString("-inactive"))))
+          // fall back to the normal state if other states aren't found
+          || (element_.contains("-toggled")
+              && themeRndr_->elementExists(element_.replace("-toggled","-normal")))
+          || (element_.contains("-pressed")
+              && themeRndr_->elementExists(element_.replace("-pressed","-normal")))
+          || (element_.contains("-focused")
+              && themeRndr_->elementExists(element_.replace("-focused","-normal")))))
   {
     renderer = themeRndr_;
   }
   /* always use the default SVG image (which doesn't contain
      any object for the inactive state) as fallback */
-  else if (defaultRndr_ && defaultRndr_->isValid()
-           && defaultRndr_->elementExists(element_.remove(QString("-inactive"))))
+  else if (defaultRndr_ && defaultRndr_->isValid())
   {
-    renderer = defaultRndr_;
+    element_ = element;
+    if (defaultRndr_->elementExists(element_.remove(QString("-inactive"))))
+      renderer = defaultRndr_;
   }
-  else
-    return false;
+  if (!renderer) return false;
 
-  if (renderer)
+  if (hsize > 0 || vsize > 0)
   {
-    if (hsize > 0 || vsize > 0)
-    {
-      /* draw the pattern over the background
-         if a separate pattern element exists */
-      if (renderer->elementExists(element_+"-pattern"))
-      {
-        if (usePixmap)
-          drawSvgElement(renderer,painter,bounds,element_);
-        else
-          renderer->render(painter,element_,bounds);
-        element_ = element_+"-pattern";
-      }
-
-      int width = hsize > 0 ? hsize : bounds.width();
-      int height = vsize > 0 ? vsize : bounds.height();
-      QString str = QString("%1-%2-%3").arg(element_)
-                                       .arg(QString().setNum(width))
-                                       .arg(QString().setNum(height));
-      QPixmap pixmap;
-      if (!QPixmapCache::find(str, &pixmap))
-      {
-        pixmap = QPixmap(width, height);
-        pixmap.fill(QColor(Qt::transparent));
-        QPainter p;
-        p.begin(&pixmap);
-        renderer->render(&p,element_);
-        p.end();
-        QPixmapCache::insert(str, pixmap);
-      }
-      painter->drawTiledPixmap(bounds,pixmap);
-    }
-    else
+    /* draw the pattern over the background
+       if a separate pattern element exists */
+    if (renderer->elementExists(element_+"-pattern"))
     {
       if (usePixmap)
         drawSvgElement(renderer,painter,bounds,element_);
       else
         renderer->render(painter,element_,bounds);
+      element_ = element_+"-pattern";
     }
+
+    int width = hsize > 0 ? hsize : bounds.width();
+    int height = vsize > 0 ? vsize : bounds.height();
+    QString str = QString("%1-%2-%3").arg(element_)
+                                     .arg(QString().setNum(width))
+                                     .arg(QString().setNum(height));
+    QPixmap pixmap;
+    if (!QPixmapCache::find(str, &pixmap))
+    {
+      pixmap = QPixmap(width, height);
+      pixmap.fill(QColor(Qt::transparent));
+      QPainter p;
+      p.begin(&pixmap);
+      renderer->render(&p,element_);
+      p.end();
+      QPixmapCache::insert(str, pixmap);
+    }
+    painter->drawTiledPixmap(bounds,pixmap);
+  }
+  else
+  {
+    if (usePixmap)
+      drawSvgElement(renderer,painter,bounds,element_);
+    else
+      renderer->render(painter,element_,bounds);
   }
 
   return true;
@@ -10689,6 +10693,7 @@ void Style::renderFrame(QPainter *painter,
   Left = Top = Right = Bottom = 0;
   QString element1(element);
   QString element0(element); // used just for checking
+  element0 = "expand-"+element0;
   if (fspec.hasCapsule && fspec.capsuleH != 2)
     grouped = true;
   int e = grouped ? h : qMin(h,w);
@@ -10696,7 +10701,14 @@ void Style::renderFrame(QPainter *painter,
   /* still round the corners if the "expand-" element is found */
   if (fspec.expansion > 0 &&
       (e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                && themeRndr_->elementExists("expand-"+element0.remove(QString("-inactive"))))))
+                                && (themeRndr_->elementExists(element0.remove(QString("-inactive")))
+                                    // fall back to the normal state
+                                    || (element0.contains("-toggled")
+                                        && themeRndr_->elementExists(element0.replace("-toggled","-normal")))
+                                    || (element0.contains("-pressed")
+                                        && themeRndr_->elementExists(element0.replace("-pressed","-normal")))
+                                    || (element0.contains("-focused")
+                                        && themeRndr_->elementExists(element0.replace("-focused","-normal")))))))
   {
     drawExpanded = true;
   }
@@ -10762,19 +10774,39 @@ void Style::renderFrame(QPainter *painter,
         Left = qMin(fspec.left,w/2);
       }
     }
-    element0 = element;
+    element0 = "border-"+element;
     if (drawBorder && themeRndr_ && themeRndr_->isValid()
-        && themeRndr_->elementExists("border-"+element0.remove(QString("-inactive"))+"-top"))
+        && (themeRndr_->elementExists(element0.remove(QString("-inactive"))+"-top")
+            || (element0.contains("-toggled")
+                && themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top"))
+            || (element0.contains("-pressed")
+                && themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top"))
+            || (element0.contains("-focused")
+                && themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top"))))
     {
-      element1 = "border-"+element;
+      element1 = element0;
+      if (element.contains("-inactive"))
+        element1 = element1 + "-inactive";
     }
-    else if (themeRndr_ && themeRndr_->isValid()
-             && themeRndr_->elementExists("expand-"+element0.remove(QString("-inactive"))+"-top"))
+    else
     {
-      element1 = "expand-"+element;
-      drawBorder = false;
+      element0 = "expand-"+element;
+      if (themeRndr_ && themeRndr_->isValid()
+          && (themeRndr_->elementExists(element0.remove(QString("-inactive"))+"-top")
+              || (element0.contains("-toggled")
+                  && themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top"))
+              || (element0.contains("-pressed")
+                  && themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top"))
+              || (element0.contains("-focused")
+                  && themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top"))))
+      {
+        element1 = element0;
+        if (element.contains("-inactive"))
+          element1 = element1 + "-inactive";
+        drawBorder = false;
+      }
+      else drawBorder = false; // don't waste CPU time
     }
-    else drawBorder = false; // don't waste CPU time
   }
   else
   {
@@ -11180,8 +11212,15 @@ void Style::renderInterior(QPainter *painter,
     QString element0(element);
     /* the interior used for partial frame expansion has the frame name */
     element0 = element0.remove(QString("-inactive")).replace(ispec.element, fspec.element);
+    element0 = "expand-"+element0;
     if ((e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                  && themeRndr_->elementExists("expand-"+element0)))
+                                  && (themeRndr_->elementExists(element0)
+                                      || (element0.contains("-toggled")
+                                          && themeRndr_->elementExists(element0.replace("-toggled","-normal")))
+                                      || (element0.contains("-pressed")
+                                          && themeRndr_->elementExists(element0.replace("-pressed","-normal")))
+                                      || (element0.contains("-focused")
+                                          && themeRndr_->elementExists(element0.replace("-focused","-normal"))))))
         && (!fspec.hasCapsule || fspec.capsuleV == 2)
         /* there's no right/left expanded element */
         && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))

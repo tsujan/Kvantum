@@ -2,6 +2,7 @@ V0.9.7
 ---------
  * Deal with QML peculiarities.
  * Added support for separate checkboxes and radiobuttons on menus.
+ * Fall back to the normal state if an object for another state isn't found.
 
 V0.9.6
 ---------

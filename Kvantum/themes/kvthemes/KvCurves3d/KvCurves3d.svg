@@ -356,12 +356,13 @@
 <rect width="8" x="427.57098" y="888.41992" height="13" style="opacity:0" id="grip-pressed"/>
 </g>
 <path style="fill:url(#linearGradient8392);fill-rule:evenodd;stroke:none" id="slider-toggled-topleft" d="m 187.9998,635.2502 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
-<path style="fill:url(#linearGradient4736);fill-rule:evenodd;stroke:none" id="slider-toggled-left" d="m 175.9998,647.2502 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
-<g style="stroke:none" id="resize-grip-normal" transform="translate(15,57.5)">
+<g style="stroke:none">
+<path style="fill:url(#linearGradient4736);fill-rule:evenodd" id="slider-toggled-left" d="m 175.9998,647.2502 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
+<g id="resize-grip-normal" transform="translate(15,57.5)">
 <rect width="25" x="375" y="87.5" height="25" style="opacity:0;fill:#7b7b7b" id="rect5042"/>
 <path style="fill:#646464" id="path5044" d="m 400,92.5 -20,20 20,0 z"/>
 </g>
-<g style="stroke:none" id="g282">
+<g id="g282">
 <rect width="16" x="394.18478" y="87.996841" height="8" style="opacity:0;fill:#1e1e1e" id="toolbar-normal-top"/>
 <rect width="16" x="394.18478" y="117.99684" height="8" style="opacity:0;fill:#5a5a5a" id="toolbar-normal-bottom"/>
 <rect width="16" x="98.996841" y="-391.18478" height="8" style="opacity:0" id="toolbar-normal-left" transform="matrix(0,1,-1,0,0,0)"/>
@@ -375,7 +376,7 @@
 <rect width="8" x="117.99684" y="-391.18478" height="8" style="opacity:0" id="toolbar-normal-bottomleft" transform="matrix(0,1,-1,0,0,0)"/>
 </g>
 </g>
-<use width="450" x="0" y="0" height="1230" xlink:href="#resize-grip-normal" id="resize-grip-focused" transform="translate(25,0)"/>
+</g>
 <g style="stroke:none" id="common-normal-left" transform="translate(-269,-125)">
 <path style="fill:#4b4b4b" id="path5131" d="m 307,1179 0,30 2,0 0,-30 z"/>
 <path style="fill:#232323;fill-rule:evenodd" id="rect5135" d="m 305,1179 0,30 2,0 0,-30 z"/>
@@ -734,21 +735,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-normal-topright" transform="matrix(-1,0,0,1,103.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use5143" transform="matrix(-1,0,0,1,103.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,103.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-focused-topleft" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-focused-top" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8400" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-focused-bottomleft" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottom" id="expand-progress-pattern-focused-bottom" transform="translate(64,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-focused-topright" transform="matrix(-1,0,0,1,167.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-focused-bottomright" transform="matrix(-1,0,0,1,167.5001,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-toggled-topleft" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-toggled-top" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8424" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-toggled-bottomleft" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottom" id="expand-progress-pattern-toggled-bottom" transform="translate(130,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,233.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use8432" transform="matrix(-1,0,0,1,233.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,233.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-disabled-topleft" transform="translate(204,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#expand-progress-pattern-normal-top" id="expand-progress-pattern-disabled-top" transform="translate(204,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.5" xlink:href="#path4884" id="use8440" transform="translate(204,0)"/>

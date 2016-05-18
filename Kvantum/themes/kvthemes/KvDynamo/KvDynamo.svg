@@ -644,24 +644,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,762,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-normal-right" transform="translate(4,4)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,-1,762,203)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topleft" transform="translate(12.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-top" transform="translate(12.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused" transform="translate(12.5,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-bottomleft" transform="matrix(1,0,0,-1,12.5,203)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topright" transform="matrix(0,1,-1,0,495,-279.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-right" transform="translate(16.5,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-bottomright" transform="matrix(-1,0,0,-1,774.5,203)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-bottom" transform="translate(12.5,8)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-left" transform="translate(8.5,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topleft" transform="translate(25,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-top" transform="translate(25,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled" transform="translate(25,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-left" transform="translate(21,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-bottom" transform="translate(25,8)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-right" transform="translate(29,4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-bottomleft" transform="matrix(1,0,0,-1,25,203)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,787,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,-1,787,203)"/>
 <path class="ColorScheme-Text" style="fill:#b9dcee;fill-rule:evenodd;stroke:none;color:#31363b" id="progress-pattern-disabled-topleft" d="m 416.5,95.5 0,4 -4,0 c 0,-2.216 1.784,-4 4,-4 z"/>
 <path class="ColorScheme-Text" style="fill:#b9dcee;fill-rule:evenodd;stroke:none;color:#31363b" id="progress-pattern-disabled-top" d="m 420.5,99.5 -4,0 0,-4 4,0 0,4 z"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-disabled-top" id="progress-pattern-disabled" transform="translate(0,4)"/>

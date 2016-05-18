@@ -601,10 +601,6 @@
 <path style="fill:#aaa;fill-rule:evenodd;stroke:none" id="progress-pattern-disabled-topleft" d="m 216.25,140.75 0,-7.5 c -3.7212,0 -7.5,3.86715 -7.5,7.5 h 7.5 z"/>
 <rect width="7.5" x="208.75" y="140.75" height="16" style="fill:#aaa;stroke:none" id="progress-pattern-disabled-left" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9"/>
 <path style="fill:#1895d8;fill-rule:evenodd;stroke:none" id="progress-pattern-normal-topleft" d="m 40.75,140.75 0,-7.5 c -3.7212,0 -7.5,3.86715 -7.5,7.5 h 7.5 z"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-focused-left" transform="translate(53.250001,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topleft" transform="translate(53.250001,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled-left" transform="translate(110.5,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topleft" transform="translate(110.5,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-disabled-left" id="progress-pattern-disabled-top" transform="matrix(0,1,-1,0,373,-75.5)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-disabled-topleft" id="progress-pattern-disabled-topright" transform="matrix(0,1,-1,0,373,-75.5)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-disabled-topleft" id="progress-pattern-disabled-bottomright" transform="matrix(-1,0,0,-1,448.5,297.5)"/>
@@ -617,28 +613,14 @@
 </g>
 <path style="fill:#c3c5c5;fill-rule:evenodd;stroke:none" id="progress-normal-bottomleft" d="m 308.75,171.25 -7.5,0 c 0,3.72124 3.86715,7.5 7.5,7.5 v -7.5 z "/>
 <rect width="7.5" x="133.25" y="-56.75" height="16" style="fill:#1895d8;stroke:none" id="progress-pattern-normal-top" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9" transform="matrix(0,1,-1,0,0,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-top" transform="translate(53.250001,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-top" transform="translate(110.5,0)"/>
 <path style="fill:#147ab0;fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottomleft" d="m 40.75,156.75 0,7.5 c -3.7212,0 -7.5,-3.86715 -7.5,-7.5 h 7.5 z"/>
 <rect width="7.5" x="-164.25" y="-56.75" height="16" style="fill:#147ab0;stroke:none" id="progress-pattern-normal-bottom" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9" transform="matrix(0,-1,-1,0,0,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottom" id="progress-pattern-focused-bottom" transform="translate(53.250003,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-focused-bottomleft" transform="translate(53.250002,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottom" id="progress-pattern-toggled-bottom" transform="translate(110.5,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-toggled-bottomleft" transform="translate(110.5,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal" transform="matrix(2.1333333,0,0,1,-30.183332,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-focused" transform="matrix(2.1333333,0,0,1,23.066668,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled" transform="matrix(2.1333333,0,0,1,80.316664,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal-right" transform="translate(23.5,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-focused-right" transform="translate(76.750001,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled-right" transform="translate(134,0)"/>
 <path style="fill:url(#linearGradient5665);fill-rule:evenodd;stroke:none" id="progress-normal" d="m 341.25,171.25 0,-32.5 -32.5,0 0,32.5 32.5,0 z"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-disabled-left" id="progress-pattern-disabled" transform="matrix(2.1333333,0,0,1,-229.08333,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,97.499999,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-focused-bottomright" transform="matrix(-1,0,0,1,150.75,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,208,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,97.499999,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topright" transform="matrix(-1,0,0,1,150.75,0)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,208,0)"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd;stroke:none" id="button-normal" d="m 28.75,15.6699 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
 <path style="fill:#6e6e6e;fill-rule:evenodd;stroke:none" id="button-focused-topleft" d="m 98.75,8.1715 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 v -7.5 z"/>
 <path style="fill:#009ef0;fill-rule:evenodd;stroke:none" id="button-toggled" d="m 233.75,15.6699 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>

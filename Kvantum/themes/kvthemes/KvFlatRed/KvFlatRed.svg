@@ -798,30 +798,12 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,87.499999,0.00481)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal-right" transform="matrix(-1,0,0,1,87.499999,0.00481)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,87.499999,0.00481)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottom" id="progress-pattern-focused-bottom" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-focused-bottomleft" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal" id="progress-pattern-focused" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-focused-left" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topleft" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-focused-top" transform="translate(56.25,-0.00474)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottom" id="progress-pattern-toggled-bottom" transform="translate(116.25,-1.25108)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-toggled-bottomleft" transform="translate(116.25,-1.25108)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal" id="progress-pattern-toggled" transform="translate(116.25,-1.25108)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled-left" transform="translate(116.25,-1.25108)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topleft" transform="translate(116.25,-1.25108)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-top" id="progress-pattern-toggled-top" transform="translate(116.25,-1.25108)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-bottom" id="progress-pattern-disabled-bottom" transform="translate(186.25,-9.8e-4)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-disabled-bottomleft" transform="translate(186.25,-9.8e-4)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal" id="progress-pattern-disabled" transform="translate(186.25,-9.8e-4)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-left" id="progress-pattern-disabled-left" transform="translate(186.25,-9.8e-4)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-disabled-topleft" transform="translate(186.25,-9.8e-4)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-top" id="progress-pattern-disabled-top" transform="translate(186.25,-9.8e-4)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-focused-bottomright" transform="matrix(-1,0,0,1,143.75,7e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-focused-right" transform="matrix(-1,0,0,1,143.75,7e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-focused-topright" transform="matrix(-1,0,0,1,143.75,7e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-toggled-bottomright" transform="matrix(-1,0,0,1,203.75,-1.24627)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-toggled-right" transform="matrix(-1,0,0,1,203.75,-1.24627)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-toggled-topright" transform="matrix(-1,0,0,1,203.75,-1.24627)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-disabled-bottomright" transform="matrix(-1,0,0,1,273.75,0.00383)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-left" id="progress-pattern-disabled-right" transform="matrix(-1,0,0,1,273.75,0.00383)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.4" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-disabled-topright" transform="matrix(-1,0,0,1,273.75,0.00383)"/>

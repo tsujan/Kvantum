@@ -634,9 +634,7 @@
 <path style="fill:url(#linearGradient5111)" id="path5079" d="m 84,729.5006 0,16.4058 0,0.094 8,2e-4 0,-16.4994 -8,-2e-4 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topleft" id="slider-normal-bottomleft" transform="matrix(1,0,0,-1,0,1220.5002)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#titlebar-normal" id="titlebar-focused" transform="translate(0,-40)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.41" xlink:href="#button-default-indicator" id="resize-grip-normal" transform="translate(0,30)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#resize-grip-normal" id="resize-grip-focused" transform="translate(0,30)"/>
 <g style="stroke:none" id="button-normal-topright" transform="matrix(-1,0,0,1,78.750001,-36.25154)">
 <path style="fill:url(#linearGradient5255);fill-rule:evenodd" id="path4979" d="m 28.75,41.2516 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 v -7.5 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5257);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path4981" d="m 28.75,41.2516 c -4.00799,-0.01544 -7.47125,3.46991 -7.5,7.5 l 2.5,-1e-4 c 0,-2.5 2.5,-5 5,-5 z"/>
@@ -727,8 +725,10 @@
 <path style="fill:url(#linearGradient5416);fill-rule:evenodd;stroke:none" id="progress-normal" d="m 253,113 0,32 32,0 0,-32 -32,0 z"/>
 <use width="100%" x="0" y="0" height="100%" id="progress-normal-right" xlink:href="#progress-normal-left" transform="matrix(-1,0,0,1,538,-3.9518297e-5)"/>
 <use width="100%" x="0" y="0" height="100%" id="progress-normal-topright" xlink:href="#progress-normal-topleft" transform="matrix(-1,0,0,1,538.00006,4.9322899e-6)"/>
-<path style="fill:url(#linearGradient7652);fill-rule:evenodd;stroke:none" id="progress-pattern-normal-top" d="m 22.5002,112.5001 32.4998,0 0,-7.5 -32.5,0 z "/>
-<path style="fill:url(#linearGradient8020);fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottom" d="m 54.9998,145.0001 -32.4998,0 0,7.5 32.5,0 z "/>
+<g style="stroke:none;fill-rule:evenodd">
+<path style="fill:url(#linearGradient7652)" id="progress-pattern-normal-top" d="m 22.5002,112.5001 32.4998,0 0,-7.5 -32.5,0 z "/>
+<path style="fill:url(#linearGradient8020)" id="progress-pattern-normal-bottom" d="m 54.9998,145.0001 -32.4998,0 0,7.5 32.5,0 z "/>
+</g>
 <path style="fill:url(#linearGradient7912);fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottomleft" d="m 22.5,152.5001 c -3.80963,0 -7.5,-3.69037 -7.5,-7.5 h 7.5 v 7.5 z "/>
 <g style="stroke:none">
 <g id="progress-normal-top" transform="matrix(0,0.4,-0.98461538,0,333.00158,101.50005)">
@@ -748,28 +748,8 @@
 <use width="100%" x="0" y="0" height="100%" id="progress-pattern-normal-right" xlink:href="#progress-pattern-normal-left" transform="matrix(-1,0,0,1,77.500002,1.1e-4)"/>
 <use width="100%" x="0" y="0" height="100%" id="progress-pattern-normal-topright" xlink:href="#progress-pattern-normal-topleft" transform="matrix(-1,0,0,1,77.500002,1.1e-4)"/>
 <use width="100%" x="0" y="0" height="100%" id="progress-pattern-normal-bottomright" xlink:href="#progress-pattern-normal-bottomleft" transform="matrix(-1,0,0,1,77.500002,1.1e-4)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-left" xlink:href="#progress-pattern-normal-left" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-topleft" xlink:href="#progress-pattern-normal-topleft" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused" xlink:href="#progress-pattern-normal" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-top" xlink:href="#progress-pattern-normal-top" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-bottom" xlink:href="#progress-pattern-normal-bottom" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-bottomleft" xlink:href="#progress-pattern-normal-bottomleft" transform="translate(60,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-right" xlink:href="#progress-pattern-normal-left" transform="matrix(-1,0,0,1,137.5,-5e-5)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-topright" xlink:href="#progress-pattern-normal-topleft" transform="matrix(-1,0,0,1,137.5,-5e-5)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-focused-bottomright" xlink:href="#progress-pattern-normal-bottomleft" transform="matrix(-1,0,0,1,137.5,-5e-5)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-left" xlink:href="#progress-pattern-normal-left" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-topleft" xlink:href="#progress-pattern-normal-topleft" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled" xlink:href="#progress-pattern-normal" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-top" xlink:href="#progress-pattern-normal-top" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-bottom" xlink:href="#progress-pattern-normal-bottom" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-bottomleft" xlink:href="#progress-pattern-normal-bottomleft" transform="translate(120,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-right" xlink:href="#progress-pattern-normal-left" transform="matrix(-1,0,0,1,197.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-topright" xlink:href="#progress-pattern-normal-topleft" transform="matrix(-1,0,0,1,197.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" id="progress-pattern-toggled-bottomright" xlink:href="#progress-pattern-normal-bottomleft" transform="matrix(-1,0,0,1,197.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal" id="expand-progress-pattern-normal" transform="translate(287.5,-42.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-normal" id="expand-progress-normal" transform="translate(96.999999,-12.499932)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal" id="expand-progress-pattern-focused" transform="translate(287.5,-10)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal" id="expand-progress-pattern-toggled" transform="translate(287.5,22.5)"/>
 <rect width="10" x="330" y="842.00006" height="10" style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;fill-opacity:0;stroke-width:1.885" id="grip-normal"/>
 <g style="fill-rule:evenodd;stroke:none" id="scrollbarslider-normal-topleft" transform="translate(72.000001,-273.99994)">
 <path style="fill:#969696;fill-opacity:0" id="scrollbarslider-normal-topleft0-9" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 v -12 z "/>
