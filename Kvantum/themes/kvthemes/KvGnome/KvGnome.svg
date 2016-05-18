@@ -388,8 +388,8 @@
 </g>
 <g style="stroke:none">
 <g style="fill:#4a90d9">
-<rect width="20" x="275" y="680.00006" height="5" id="menubar-pressed-bottom"/>
-<rect width="20" x="340" y="680.00006" height="5" id="menubar-toggled-bottom"/>
+<rect width="20" x="275" y="680.00006" height="5" id="menubaritem-pressed-bottom"/>
+<rect width="20" x="340" y="680.00006" height="5" id="menubaritem-toggled-bottom"/>
 </g>
 <g style="fill-rule:evenodd" id="g368" transform="translate(-3.1052462,-60.69899)">
 <g style="opacity:.8;fill:#323232" id="arrow-plus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,145.14121,339.31233)">
@@ -945,10 +945,10 @@
 <path style="font-family:Sans;fill:#4a90d9;text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5563" d="m 315,112.5001 c -5e-05,3.00799 3.46991,4.97128 7.5,5.00003 v -3.00009 c -2.00316,0 -3.53121,-0.49994 -3.49996,-2 z "/>
 </g>
 <g style="fill:#4a90d9">
-<rect width="20" x="255" y="680.00006" height="5" id="menubar-pressed-bottomleft"/>
-<rect width="20" x="295" y="680.00006" height="5" id="menubar-pressed-bottomright"/>
-<rect width="20" x="320" y="680.00006" height="5" id="menubar-toggled-bottomleft"/>
-<rect width="20" x="360" y="680.00006" height="5" id="menubar-toggled-bottomright"/>
+<rect width="20" x="255" y="680.00006" height="5" id="menubaritem-pressed-bottomleft"/>
+<rect width="20" x="295" y="680.00006" height="5" id="menubaritem-pressed-bottomright"/>
+<rect width="20" x="320" y="680.00006" height="5" id="menubaritem-toggled-bottomleft"/>
+<rect width="20" x="360" y="680.00006" height="5" id="menubaritem-toggled-bottomright"/>
 </g>
 </g>
 <path style="fill:#f5f5f5;fill-rule:evenodd;stroke:url(#linearGradient6022)" id="slidercursor-focused" d="m 151.2118,609 c -3.0458,2.49994 -6.42343,8.49982 -12.1428,8.49982 -5.71931,0 -8.57265,-3.99991 -8.56881,-8.49982 0.003,-4.50051 2.8495,-8.4998 8.56881,-8.4998 5.71936,0 9.09699,5.99986 12.1428,8.4998 z "/>

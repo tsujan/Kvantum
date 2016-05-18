@@ -336,8 +336,8 @@ frame.expansion=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
-interior.element=menubar
-frame.element=menubar
+interior=false
+frame.element=menubaritem
 frame.top=0
 frame.bottom=2
 frame.left=2

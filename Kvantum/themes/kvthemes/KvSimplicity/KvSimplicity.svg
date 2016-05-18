@@ -368,9 +368,11 @@
 <rect width="5" x="800" y="-305" height="5" style="fill:#f0f0f0;stroke:none" id="menubar-normal-topleft" transform="matrix(0,1,-1,0,0,0)"/>
 <rect width="20" x="305" y="800" height="5" style="fill:#f0f0f0;stroke:none" id="menubar-normal-top"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#menubar-normal-left" id="menubar-normal-right" transform="translate(25,0)"/>
-<rect width="20" x="358.49985" y="828.5" height="5" style="fill:#005ab4;stroke:none" id="menubar-pressed-bottom"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#menubar-pressed-bottom" id="menubar-toggled-bottom" transform="translate(50,0)"/>
 <g style="stroke:none">
+<g style="fill:#005ab4">
+<rect width="20" x="358.49985" y="828.5" height="5" id="menubaritem-pressed-bottom"/>
+<rect width="20" x="408.49985" y="828.5" height="5" id="menubaritem-toggled-bottom"/>
+</g>
 <g style="fill-rule:evenodd">
 <g style="opacity:.8;fill:#323232" id="arrow-plus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,145.14121,339.31233)">
 <rect width="2.840909" x="-6.8212047" y="57.29216" height="12.5" id="rect4570" transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"/>
