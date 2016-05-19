@@ -2232,10 +2232,14 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameFocusRect : {
       if (qstyleoption_cast<const QStyleOptionFocusRect *>(option)
           /* this would be ugly, IMO */
-          && !qobject_cast<const QAbstractItemView*>(widget))
+          /*&& !qobject_cast<const QAbstractItemView*>(widget)*/)
       {
         frame_spec fspec = getFrameSpec("Focus");
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.expansion = 0;
+        fspec.left = qMin(fspec.left,2);
+        fspec.right = qMin(fspec.right,2);
+        fspec.top = qMin(fspec.top,2);
+        fspec.bottom = qMin(fspec.bottom,2);
         renderFrame(painter,option->rect,fspec,fspec.element);
       }
 
@@ -3468,6 +3472,14 @@ void Style::drawPrimitive(PrimitiveElement element,
       renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.hasCapsule,true);
 
+      if (opt && opt->state & State_HasFocus)
+      {
+        QStyleOptionFocusRect fropt;
+        fropt.QStyleOption::operator=(*opt);
+        fropt.rect = interiorRect(opt->rect, fspec);
+        drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+      }
+
       break;
     }
 
@@ -4019,6 +4031,35 @@ void Style::drawControl(ControlElement element,
         drawPrimitive(PE_IndicatorArrowDown,option,painter,widget);
       else
         drawPrimitive(PE_IndicatorArrowUp,option,painter,widget);
+
+      break;
+    }
+
+    case CE_RadioButton:
+    case CE_CheckBox: {
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton *>(option);
+
+      if (opt) {
+        bool isRadio = (element == CE_RadioButton);
+        QStyleOptionButton subopt = *opt;
+        subopt.rect = subElementRect(isRadio ? SE_RadioButtonIndicator
+                                             : SE_CheckBoxIndicator, opt, widget);
+        drawPrimitive(isRadio ? PE_IndicatorRadioButton : PE_IndicatorCheckBox,
+                      &subopt, painter, widget);
+        subopt.rect = subElementRect(isRadio ? SE_RadioButtonContents
+                                             : SE_CheckBoxContents, opt, widget);
+        drawControl(isRadio ? CE_RadioButtonLabel : CE_CheckBoxLabel, &subopt, painter, widget);
+
+        if (opt->state & State_HasFocus)
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          fropt.rect = subElementRect(isRadio ? SE_RadioButtonFocusRect
+                                              : SE_CheckBoxFocusRect, opt, widget);
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+        }
+      }
 
       break;
     }
@@ -4588,6 +4629,17 @@ void Style::drawControl(ControlElement element,
                     state,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
+
+        if (tabV2.state & State_HasFocus)
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          QRect FR = opt->rect;
+          if (verticalTabs)
+            FR.setRect(0, 0, h, w);
+          fropt.rect = interiorRect(FR, fspec);
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+        }
 
         if (verticalTabs)
           painter->restore();
@@ -5893,6 +5945,14 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignBottom | (opt->direction == Qt::RightToLeft ?
                                              Qt::AlignLeft : Qt::AlignRight));
         }
+
+        if (opt->state & State_HasFocus)
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          fropt.rect = interiorRect(subElementRect(SE_PushButtonFocusRect, opt, widget), fspec);
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+        }
       }
 
       break;
@@ -6543,6 +6603,14 @@ void Style::drawComplexControl(ComplexControl control,
                             ialign);
           }
         }
+
+        if (opt->state & State_HasFocus)
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          fropt.rect = interiorRect(opt->rect, fspec);
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+        }
       }
 
       break;
@@ -7006,6 +7074,15 @@ void Style::drawComplexControl(ComplexControl control,
           }
 
           drawControl(CE_ScrollBarSlider,&o,painter,widget);
+
+          if (opt->state & State_HasFocus)
+          {
+            QStyleOptionFocusRect fropt;
+            fropt.QStyleOption::operator=(*opt);
+            fropt.rect = r;
+            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          }
+
           if (horiz)
             painter->restore();
         }
@@ -7168,6 +7245,17 @@ void Style::drawComplexControl(ComplexControl control,
             renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
             painter->restore();
+          }
+
+          if (opt && opt->state & State_HasFocus)
+          {
+            QStyleOptionFocusRect fropt;
+            fropt.QStyleOption::operator=(*opt);
+            QRect FR = opt->rect;
+            if (horiz)
+              FR.setRect(0, 0, h, w);
+            fropt.rect = FR;
+            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
           }
 
           if (horiz)
@@ -7344,6 +7432,14 @@ void Style::drawComplexControl(ComplexControl control,
         {
           if (d->notchesVisible())
             renderElement(painter,"dial-notches"+suffix,dial);
+        }
+
+        if (opt->state & State_HasFocus)
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          fropt.rect = dial;
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
       }
 
@@ -9125,6 +9221,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                                   0,
                                   opt->direction == Qt::RightToLeft ? -pixelMetric(PM_IndicatorWidth) : 0,
                                   0);
+      else
+        return QCommonStyle::subElementRect(element,option,widget);
     }
 
     case SE_PushButtonFocusRect : {
