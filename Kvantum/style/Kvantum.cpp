@@ -56,7 +56,7 @@
 #if QT_VERSION >= 0x050000
 #include <QSurfaceFormat>
 #include <QWindow>
-#if defined Q_WS_X11 || defined Q_OS_LINUX
+#if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
 #include <QtPlatformHeaders/QXcbWindowFunctions>
 #endif
 #endif
@@ -8084,7 +8084,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
 */
 void Style::setMenuType(const QWidget *widget) const
 {
-#if QT_VERSION < 0x050000 || !(defined Q_WS_X11 || defined Q_OS_LINUX)
+#if QT_VERSION < 0x050500 || !(defined Q_WS_X11 || defined Q_OS_LINUX)
   Q_UNUSED(widget);
   return;
 #else
