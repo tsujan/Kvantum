@@ -4,6 +4,7 @@ V0.9.7
  * Added support for separate checkboxes and radiobuttons on menus.
  * Fall back to the normal state if an object for another state isn't found.
  * Draw the focus frame around widgets with keyboard focus if it's enabled in the theme (it's disabled in the default theme).
+ * Added a key for disabling pushbutton contents shift.
 
 V0.9.6
 ---------

@@ -120,6 +120,9 @@ typedef struct {
   /* put the groupbox label above the frame?
      (it's on the frame by default) */
   bool groupbox_top_label;
+  /* shift the contents of a pushbutton when it's down?
+     (the contennts are shifted by default) */
+  bool button_contents_shift;
 
   int layout_spacing;
 
@@ -356,6 +359,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.combo_as_lineedit = false;
   tspec.fill_rubberband = false;
   tspec.groupbox_top_label = false;
+  tspec.button_contents_shift = true;
   tspec.layout_spacing = 2;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;

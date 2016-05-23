@@ -581,6 +581,10 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
+    if (defaultSettings.contains ("button_contents_shift")) // it's true by default
+        ui->checkBoxButtonShift->setChecked (defaultSettings.value ("button_contents_shift").toBool());
+    else
+        ui->checkBoxButtonShift->setChecked (true);
 #if QT_VERSION >= 0x050000
     int delay = -1;
     if (defaultSettings.contains ("tooltip_delay")) // it's false by default
@@ -818,6 +822,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 if (themeSettings.contains ("merge_menubar_with_toolbar"))
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
+                if (themeSettings.contains ("button_contents_shift"))
+                    ui->checkBoxButtonShift->setChecked (themeSettings.value ("button_contents_shift").toBool());
 #if QT_VERSION >= 0x050000
                 int delay = -1;
                 if (themeSettings.contains ("tooltip_delay"))
@@ -1328,6 +1334,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
+        generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", boolToStr (ui->checkBoxX11->isChecked()));
@@ -1401,6 +1408,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() == !ui->checkBoxGroupLabel->isChecked()
+            || themeSettings.value ("button_contents_shift").toBool() == !ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
             || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value())
         {
@@ -1427,6 +1435,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
+        themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", ui->checkBoxX11->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());

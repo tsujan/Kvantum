@@ -488,6 +488,10 @@ theme_spec ThemeConfig::getThemeSpec() const
   v = getValue("General","groupbox_top_label");
   r.groupbox_top_label = v.toBool();
 
+  v = getValue("General","button_contents_shift");
+  if (v.isValid()) // true by default
+    r.button_contents_shift = v.toBool();
+
   v = getValue("General","layout_spacing");
   if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);

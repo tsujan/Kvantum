@@ -7759,8 +7759,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 {
   switch (metric) {
     case PM_ButtonMargin : return 0;
+
     case PM_ButtonShiftHorizontal :
-    case PM_ButtonShiftVertical : return 1;
+    case PM_ButtonShiftVertical : return tspec_.button_contents_shift ? 1 : 0;
 
     case PM_DefaultFrameWidth : {
       QString group;
