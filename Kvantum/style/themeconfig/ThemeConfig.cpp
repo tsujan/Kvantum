@@ -389,12 +389,6 @@ theme_spec ThemeConfig::getThemeSpec() const
       r.joined_inactive_tabs = v.toBool();
   }
 
-  if (r.joined_inactive_tabs)
-  {
-    v = getValue("General","joined_active_tab");
-    r.joined_active_tab = v.toBool();
-  }
-
   v = getValue("General","attach_active_tab");
   r.attach_active_tab = v.toBool();
 

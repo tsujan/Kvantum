@@ -172,6 +172,30 @@ Style::Style() : QCommonStyle()
     itsWindowManager_->initialize();
   }
 
+  // decide about connecting active tabs to others and using floating tabs once for all
+  joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
+  if (themeRndr_ && themeRndr_->isValid() && tspec_.joined_inactive_tabs)
+  {
+    const frame_spec fspec = getFrameSpec("Tab");
+    QString sepName = fspec.element + "-separator";
+    if (themeRndr_->elementExists(sepName+"-normal")
+        || themeRndr_->elementExists(sepName+"-toggled"))
+    {
+      joinedActiveTab_ = true;
+    }
+    if (fspec.expansion == 0 // no floating tabs with frame expansion
+        && themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
+    {
+      hasFloatingTabs_ = true;
+      sepName = "floating-"+sepName;
+      if (themeRndr_->elementExists(sepName+"-normal")
+          || themeRndr_->elementExists(sepName+"-toggled"))
+      {
+        joinedActiveFloatingTab_ = true;
+      }
+    }
+  }
+
   if (tspec_.blurring)
   {
     QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
@@ -4218,14 +4242,11 @@ void Style::drawControl(ControlElement element,
 
       if (opt)
       {
-        /* Let's forget about the pressed state. It's
-           useless here and makes trouble in KDevelop. */
-        status =
-            (option->state & State_Enabled) ?
-              (option->state & State_On) ? "toggled" :
-              (option->state & State_Selected) ? "toggled" :
-              (option->state & State_MouseOver) ? "focused" : "normal"
-            : "disabled";
+        /* Let's forget about the pressed state. It's useless here and
+           makes trouble in KDevelop. The disabled state is useless too. */
+        status = (option->state & State_On) ? "toggled" :
+                 (option->state & State_Selected) ? "toggled" :
+                 (option->state & State_MouseOver) ? "focused" : "normal";
         if (isInactive)
           status.append(QString("-inactive"));
 
@@ -4250,8 +4271,34 @@ void Style::drawControl(ControlElement element,
             && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
         bool rtl(opt->direction == Qt::RightToLeft && !verticalTabs);
+        bool joinedActiveTab(joinedActiveTab_);
+        QString sepName = fspec.element + "-separator";
 
-        if (tspec_.joined_active_tab
+        if (docMode && hasFloatingTabs_)
+        {
+          ispec.element="floating-"+ispec.element;
+          fspec.element="floating-"+fspec.element;
+          joinedActiveTab = joinedActiveFloatingTab_;
+          sepName = "floating-"+sepName;
+        }
+
+        if (joinedActiveTab) // only use normal and toggled states
+        {
+          if ((option->state & State_On) || (option->state & State_Selected)
+               // use toggled separator on both sides of selected tabs if possible
+              || (opt->position != QStyleOptionTab::OnlyOneTab
+                  && (!bottomTabs ? (!rtl ? opt->selectedPosition == QStyleOptionTab::NextIsSelected
+                                     : opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                      : (!rtl ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
+                         : opt->selectedPosition == QStyleOptionTab::NextIsSelected))))
+          {
+            sepName = sepName+"-toggled"; // falls back to normal state automatically
+          }
+          else
+            sepName = sepName+"-normal";
+        }
+
+        if (joinedActiveTab
             || status.startsWith("normal") || status.startsWith("focused"))
         {
           if (tspec_.joined_inactive_tabs
@@ -4260,7 +4307,7 @@ void Style::drawControl(ControlElement element,
             int capsule = 2;
             if (opt->position == QStyleOptionTab::Beginning)
             {
-              if (tspec_.joined_active_tab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
+              if (joinedActiveTab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = -1;
@@ -4269,7 +4316,7 @@ void Style::drawControl(ControlElement element,
             else if (opt->position == QStyleOptionTab::Middle)
             {
               fspec.hasCapsule = true;
-              if (tspec_.joined_active_tab)
+              if (joinedActiveTab)
                 capsule = 0;
               else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
                 capsule = 1;
@@ -4280,7 +4327,7 @@ void Style::drawControl(ControlElement element,
             }
             else if (opt->position == QStyleOptionTab::End)
             {
-              if (tspec_.joined_active_tab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
+              if (joinedActiveTab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = 1;
@@ -4297,7 +4344,7 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        bool drawSep(tspec_.joined_active_tab
+        bool drawSep(joinedActiveTab
                      && opt->position != QStyleOptionTab::OnlyOneTab
                      && ((tspec_.mirror_doc_tabs && bottomTabs)
                            ? rtl ? opt->position != QStyleOptionTab::End
@@ -4424,22 +4471,10 @@ void Style::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
 
-        if (status.startsWith("disabled"))
+        if (!(option->state & State_Enabled))
         {
-          if ((option->state & State_On) || (option->state & State_Selected))
-            status.replace(QString("disabled"),QString("toggled"));
-          else
-            status.replace(QString("disabled"),QString("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
-        }
-        QString sepName = fspec.element + "-separator";
-        if (docMode
-            && themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists("floating-"+ispec.element+"-normal"))
-        {
-          ispec.element="floating-"+ispec.element;
-          fspec.element="floating-"+fspec.element;
-          sepName = "floating-"+sepName;
         }
         if (fspec.hasCapsule)
         {

@@ -5,6 +5,7 @@ V0.9.7
  * Fall back to the normal state if an object for another state isn't found.
  * Draw the focus frame around widgets with keyboard focus if it's enabled in the theme (it's disabled in the default theme).
  * Added a key for disabling pushbutton contents shift.
+ * Simplified the logic for tab separators and removed "joined_active_tab".
 
 V0.9.6
 ---------

@@ -218,17 +218,9 @@ attach_active_tab                 true/false          Attach the active tab to t
                                                       tab widget? It is detached
                                                       by default.
 
-joined_inactive_tabs              true/false          Join inactive tabs together?
-                                                      They are joined by default.
-
-joined_active_tab                 true/false          If "joined_inactive_tabs" is true, this
-                                                      key will also join the active tab to its
-                                                      adjacent inactive tab(s).
-                                                      Then tab separators will also be drawn if
-                                                      they exist in the SVG file (read the file
-                                                      "Theme-Making.pdf" for more explanation
-                                                      on tab separators).
-                                                      Its value is false by default.
+joined_inactive_tabs              true/false          Join inactive tabs together? They are
+                                                      joined by default. Also see
+                                                      "Theme-Making.pdf" for tab separators.
 
 mirror_doc_tabs                   true/false          By default, bottom and right tab shapes
                                                       are mirror images of top and left ones,

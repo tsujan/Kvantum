@@ -39,8 +39,6 @@ typedef struct {
   /* join inactive tabs together?
      (by default, they are joined) */
   bool joined_inactive_tabs;
-  /* also join the active tab to them if it's detached? */
-  bool joined_active_tab;
   /* attach the active tab to the tab widget?
      (by default, it is detached) */
   bool attach_active_tab;
@@ -326,7 +324,6 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.left_tabs = false;
   tspec.center_doc_tabs = false;
   tspec.joined_inactive_tabs = true;
-  tspec.joined_active_tab = false;
   tspec.attach_active_tab = false;
   tspec.mirror_doc_tabs = true;
   tspec.group_toolbar_buttons = false;

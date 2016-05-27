@@ -6,7 +6,6 @@ alt_mnemonic=true
 left_tabs=false
 joined_inactive_tabs=true
 attach_active_tab=false
-joined_active_tab=true
 mirror_doc_tabs=false
 group_toolbar_buttons=false
 spread_progressbar=true

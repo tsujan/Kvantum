@@ -281,6 +281,8 @@ class Style : public QCommonStyle {
 
     /* The general specification of the theme. */
     theme_spec tspec_;
+    /* All general info about tabs. */
+    bool joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
 
     /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice_;
