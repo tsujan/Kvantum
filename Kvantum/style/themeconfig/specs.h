@@ -160,8 +160,10 @@ typedef struct {
   /* don't draw any background or frame for Dolphin's
      view (nice when the window bg has a gradient) */
   bool transparent_dolphin_view;
-  /* don't draw any background foe PCManFM-qt's side pane */
+  /* don't draw any background for PCManFM-qt's side pane */
   bool transparent_pcmanfm_sidepane;
+  /* don't draw any background or frame for PCManFM-qt's view */
+  bool transparent_pcmanfm_view;
   /* separate icon size for LXQT's main menus? */
   int lxqtmainmenu_iconsize;
   /* blur the region behind Konsole's transparent background? */
@@ -392,6 +394,7 @@ static inline void default_color_spec(color_spec &cspec) {
 static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
   hspec.transparent_pcmanfm_sidepane = false;
+  hspec.transparent_pcmanfm_view = false;
   hspec.lxqtmainmenu_iconsize = 0;
   hspec.blur_konsole = false;
   hspec.transparent_ktitle_label = false;

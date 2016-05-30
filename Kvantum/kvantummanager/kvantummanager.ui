@@ -408,185 +408,7 @@ widgets to appear as they are by default.</string>
                <string>Hacks</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_8">
-               <item row="0" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxDolphin">
-                 <property name="toolTip">
-                  <string>Merge Dolphin's view with its surroundings.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge Dolphin's view with its surroundings?&lt;/p&gt;&lt;p&gt;By default, it has the base background.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Transparent Dolphin view</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxDark">
-                 <property name="toolTip">
-                  <string>Some apps may not respect dark themes.
-Kvantum can try to correct their behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some applications may not respect dark themes. &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; can try to correct their behavior as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Respect dark themes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="6">
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>5</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxPcmanfm">
-                 <property name="toolTip">
-                  <string>Merge PCManFM-qt's sidepane with its surroundings.
-
-Under LXQt, it needs logging out and in or closing
-PCManFM-qt and then, stopping and starting Desktop
-with LXQt Session Settings.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's sidepane with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Transparent sidepane for PCManFM-qt</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGrip">
-                 <property name="toolTip">
-                  <string>Show size grips of dialogs and statusbars
-as far as possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Force size grips</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxKonsole">
-                 <property name="toolTip">
-                  <string>Blur the regions behind the transparent
-screens of Konsole and Yakuake if possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blur the regions behind the transparent screens of Konsole and Yakuake if possible?&lt;/p&gt;&lt;p&gt;This needs the KDE blur effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Blurring for Konsole</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNormalBtn">
-                 <property name="toolTip">
-                  <string>No bold font for default push buttons.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No bold font for default push buttons?&lt;/p&gt;&lt;p&gt;Such push buttons have bold text by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Normal font for default push buttons</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxKtitle">
-                 <property name="toolTip">
-                  <string>Do not draw any background for KTitles.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Transparent KTitle label</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessBtn">
-                 <property name="toolTip">
-                  <string>No icon for push buttons that have text.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for push buttons that have text?&lt;/p&gt;&lt;p&gt;By default, most push buttons have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Iconless push buttons</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenuTitle">
-                 <property name="toolTip">
-                  <string>Do not draw any background for (KDE) menu titles.
-(Needs Logging out and in for Plasma menus.)</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Transparent menu title</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessMenu">
-                 <property name="toolTip">
-                  <string>No icon for menu-items?</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for menu-items?&lt;/p&gt;&lt;p&gt;By default, some of them may have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Iconless  menus</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxKCapacity">
-                 <property name="toolTip">
-                  <string>Style KDE capacity bars as progressbars.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Show KCapacityBar as progressbar</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="4" colspan="2">
-                <widget class="QCheckBox" name="checkBoxToolbar">
-                 <property name="toolTip">
-                  <string>Only the top toolbar should be styled?
-By default, all toolbars are styled.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the top toolbar should be styled?&lt;/p&gt;&lt;p&gt;By default, all toolbars are styled, whether they are on the top or at any other position.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Single top toolbar</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
+               <item row="0" column="0">
                 <spacer name="horizontalSpacer_1">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -599,7 +421,20 @@ By default, all toolbars are styled.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="3">
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBoxDolphin">
+                 <property name="toolTip">
+                  <string>Merge Dolphin's view with its surroundings.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge Dolphin's view with its surroundings?&lt;/p&gt;&lt;p&gt;By default, it has the base background.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transparent Dolphin view</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
                 <spacer name="horizontalSpacer_2">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -615,13 +450,24 @@ By default, all toolbars are styled.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="4">
-                <spacer name="verticalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="0" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxGrip">
+                 <property name="toolTip">
+                  <string>Show size grips of dialogs and statusbars
+as far as possible.</string>
                  </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Force size grips</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5">
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -631,7 +477,135 @@ By default, all toolbars are styled.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="7" column="1">
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="checkBoxPcmanfmSide">
+                 <property name="toolTip">
+                  <string>Merge PCManFM-qt's sidepane with its surroundings.
+
+Under LXQt, it needs logging out and in or closing
+PCManFM-qt and then, stopping and starting Desktop
+with LXQt Session Settings.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's sidepane with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transparent sidepane for PCManFM-qt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxNormalBtn">
+                 <property name="toolTip">
+                  <string>No bold font for default push buttons.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No bold font for default push buttons?&lt;/p&gt;&lt;p&gt;Such push buttons have bold text by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Normal font for default push buttons</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="checkBoxPcmanfmView">
+                 <property name="toolTip">
+                  <string>Merge PCManFM-qt's view with its surroundings.
+
+Under LXQt, it needs logging out and in or closing
+PCManFM-qt and then, stopping and starting Desktop
+with LXQt Session Settings.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's view with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transparent view for PCManFM-qt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxIconlessBtn">
+                 <property name="toolTip">
+                  <string>No icon for push buttons that have text.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for push buttons that have text?&lt;/p&gt;&lt;p&gt;By default, most push buttons have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Iconless push buttons</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QCheckBox" name="checkBoxKonsole">
+                 <property name="toolTip">
+                  <string>Blur the regions behind the transparent
+screens of Konsole and Yakuake if possible.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blur the regions behind the transparent screens of Konsole and Yakuake if possible?&lt;/p&gt;&lt;p&gt;This needs the KDE blur effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Blurring for Konsole</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxIconlessMenu">
+                 <property name="toolTip">
+                  <string>No icon for menu-items?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for menu-items?&lt;/p&gt;&lt;p&gt;By default, some of them may have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Iconless  menus</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QCheckBox" name="checkBoxKtitle">
+                 <property name="toolTip">
+                  <string>Do not draw any background for KTitles.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transparent KTitle label</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxToolbar">
+                 <property name="toolTip">
+                  <string>Only the top toolbar should be styled?
+By default, all toolbars are styled.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the top toolbar should be styled?&lt;/p&gt;&lt;p&gt;By default, all toolbars are styled, whether they are on the top or at any other position.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Single top toolbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="checkBoxMenuTitle">
+                 <property name="toolTip">
+                  <string>Do not draw any background for (KDE) menu titles.
+(Needs Logging out and in for Plasma menus.)</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Transparent menu title</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3">
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -647,7 +621,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="2">
+               <item row="5" column="4">
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -666,7 +640,70 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="6" column="1">
+                <widget class="QCheckBox" name="checkBoxKCapacity">
+                 <property name="toolTip">
+                  <string>Style KDE capacity bars as progressbars.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Show KCapacityBar as progressbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="3">
+                <widget class="QLabel" name="labelOpacity">
+                 <property name="toolTip">
+                  <string>Useful with monochrome icon sets and
+when the opacity of disabled icons is not
+reduced by other means.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Opacity of disabled icons:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="4">
+                <widget class="QSpinBox" name="spinOpacity">
+                 <property name="toolTip">
+                  <string>Useful with monochrome icon sets and
+when the opacity of disabled icons is not
+reduced by other means.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option migh be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="suffix">
+                  <string> %</string>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>100</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QCheckBox" name="checkBoxDark">
+                 <property name="toolTip">
+                  <string>Some apps may not respect dark themes.
+Kvantum can try to correct their behavior.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some applications may not respect dark themes. &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; can try to correct their behavior as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Respect dark themes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="3">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -683,7 +720,7 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="5">
+               <item row="7" column="4">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -703,42 +740,6 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
                  </property>
                  <property name="value">
                   <number>0</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1">
-                <widget class="QLabel" name="labelOpacity">
-                 <property name="toolTip">
-                  <string>Useful with monochrome icon sets and
-when the opacity of disabled icons is not
-reduced by other means.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Opacity of disabled icons:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="2">
-                <widget class="QSpinBox" name="spinOpacity">
-                 <property name="toolTip">
-                  <string>Useful with monochrome icon sets and
-when the opacity of disabled icons is not
-reduced by other means.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option migh be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> %</string>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                 <property name="value">
-                  <number>100</number>
                  </property>
                 </widget>
                </item>
@@ -1278,7 +1279,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
 By default, the contents are shifted by 1px.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift the contents of push buttons when pressed? By default, the contents are shifted by 1px both horizontally and vertically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift the contents of push buttons when pressed?&lt;/p&gt;&lt;p&gt;By default, the contents are shifted by 1px both horizontally and vertically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Shift push-button contents</string>

@@ -539,7 +539,8 @@ void KvantumManager::defaultThemeButtons()
 
     defaultSettings.beginGroup ("Hacks");
     ui->checkBoxDolphin->setChecked (defaultSettings.value ("transparent_dolphin_view").toBool());
-    ui->checkBoxPcmanfm->setChecked (defaultSettings.value ("transparent_pcmanfm_sidepane").toBool());
+    ui->checkBoxPcmanfmSide->setChecked (defaultSettings.value ("transparent_pcmanfm_sidepane").toBool());
+    ui->checkBoxPcmanfmView->setChecked (defaultSettings.value ("transparent_pcmanfm_view").toBool());
     ui->checkBoxKonsole->setChecked (defaultSettings.value ("blur_konsole").toBool());
     ui->checkBoxKtitle->setChecked (defaultSettings.value ("transparent_ktitle_label").toBool());
     ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
@@ -905,7 +906,8 @@ void KvantumManager::tabChanged (int index)
 
                 themeSettings.beginGroup ("Hacks");
                 ui->checkBoxDolphin->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
-                ui->checkBoxPcmanfm->setChecked (themeSettings.value ("transparent_pcmanfm_sidepane").toBool());
+                ui->checkBoxPcmanfmSide->setChecked (themeSettings.value ("transparent_pcmanfm_sidepane").toBool());
+                ui->checkBoxPcmanfmView->setChecked (themeSettings.value ("transparent_pcmanfm_view").toBool());
                 ui->checkBoxKonsole->setChecked (themeSettings.value ("blur_konsole").toBool());
                 ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
@@ -1310,7 +1312,8 @@ void KvantumManager::writeConfig()
         QMap<QString, QString> hackKeys, hackKeysMissing, generalKeys, generalKeysMissing;
         QString str;
         hackKeys.insert("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
-        hackKeys.insert("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfm->isChecked()));
+        hackKeys.insert("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfmSide->isChecked()));
+        hackKeys.insert("transparent_pcmanfm_view", boolToStr (ui->checkBoxPcmanfmView->isChecked()));
         hackKeys.insert("blur_konsole", boolToStr (ui->checkBoxKonsole->isChecked()));
         hackKeys.insert("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
         hackKeys.insert("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
@@ -1380,7 +1383,8 @@ void KvantumManager::writeConfig()
         }
 #else
         themeSettings.setValue ("transparent_dolphin_view", ui->checkBoxDolphin->isChecked());
-        themeSettings.setValue ("transparent_pcmanfm_sidepane", ui->checkBoxPcmanfm->isChecked());
+        themeSettings.setValue ("transparent_pcmanfm_sidepane", ui->checkBoxPcmanfmSide->isChecked());
+        themeSettings.setValue ("transparent_pcmanfm_view", ui->checkBoxPcmanfmView->isChecked());
         themeSettings.setValue ("blur_konsole", ui->checkBoxKonsole->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());

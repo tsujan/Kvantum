@@ -102,6 +102,7 @@ Style::Style() : QCommonStyle()
   setUserTheme(theme);
 
   tspec_ = settings_->getThemeSpec();
+  hspec_ = settings_->getHacksSpec();
 
   QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
   if (!QFile::exists(kdeGlobals))
@@ -566,7 +567,7 @@ bool Style::isStylableToolbar(const QWidget *w) const
 {
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
   if (!tb) return false;
-  if (!settings_->getHacksSpec().single_top_toolbar) return true;
+  if (!hspec_.single_top_toolbar) return true;
   if (tb->orientation() == Qt::Vertical) return false;
   if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(w,1)))
   {
@@ -631,8 +632,7 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  const hacks_spec hspec = settings_->getHacksSpec();
-  if (hspec.respect_darkness
+  if (hspec_.respect_darkness
       && !isPcmanfm_) // we don't want to give a solid backgeound to LXQT's desktop by accident
   {
     QColor winCol = getFromRGBA(settings_->getColorSpec().windowColor);
@@ -676,7 +676,7 @@ void Style::polish(QWidget *widget)
         {
           /*if (QMainWindow* mw = qobject_cast<QMainWindow*>(widget))
           {
-            if (hspec.forceSizeGrip)
+            if (hspec_.forceSizeGrip)
             {
               QStatusBar *sb = mw->statusBar();
               sb->setSizeGripEnabled(true);
@@ -684,7 +684,7 @@ void Style::polish(QWidget *widget)
           }
           else*/ if (QDialog* d = qobject_cast<QDialog*>(widget))
           {
-            if (hspec.forceSizeGrip)
+            if (hspec_.forceSizeGrip)
               d->setSizeGripEnabled(true);
           }
         }
@@ -692,7 +692,7 @@ void Style::polish(QWidget *widget)
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
               && !widget->testAttribute(Qt::WA_NoSystemBackground))
              /* enable blurring for Konsole's main window if it's transparent */
-             || ((isKonsole_ || isYakuake_) && hspec.blur_konsole
+             || ((isKonsole_ || isYakuake_) && hspec_.blur_konsole
                  && widget->testAttribute(Qt::WA_TranslucentBackground)))
             && (isYakuake_ || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
             /* FIXME: I included this because I thought, without it, QtWebKit
@@ -725,7 +725,7 @@ void Style::polish(QWidget *widget)
             blurHelper_->registerWidget(widget);
           }
           /* enable blurring for Konsole... */
-          else if ((isKonsole_ || isYakuake_)// && hspec.blur_konsole
+          else if ((isKonsole_ || isYakuake_)// && hspec_.blur_konsole
                    /* ... but only for its main window */
                    //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
                    && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
@@ -765,21 +765,28 @@ void Style::polish(QWidget *widget)
       widget->setPalette(palette);
     }
     /* hack Dolphin's view */
-    if (hspec.transparent_dolphin_view && widget->autoFillBackground())
+    if (hspec_.transparent_dolphin_view && widget->autoFillBackground())
       widget->setAutoFillBackground(false);
   }
-  else if (isPcmanfm_
-           && hspec.transparent_pcmanfm_sidepane
-           && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
-               || (getParent(widget,2) && getParent(widget,2)->inherits("Fm::SidePane"))))
+  else if (isPcmanfm_ && (hspec_.transparent_pcmanfm_view || hspec_.transparent_pcmanfm_sidepane))
   {
-    widget->setAutoFillBackground(false);
+    QWidget *gp = getParent(widget,2);
+    bool isSidePane = (getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
+                       || (gp && gp->inherits("Fm::SidePane"));
+    if ((hspec_.transparent_pcmanfm_view
+         && widget->autoFillBackground()
+         && (gp && gp->inherits("Fm::FolderView"))
+         && !(isSidePane || (gp && gp->inherits("PCManFM::DesktopWindow"))))
+        || (isSidePane && hspec_.transparent_pcmanfm_sidepane))
+    {
+      widget->setAutoFillBackground(false);
+    }
   }
 
   // -> ktitlewidget.cpp
   if (widget->inherits("KTitleWidget"))
   {
-    if (hspec.transparent_ktitle_label)
+    if (hspec_.transparent_ktitle_label)
     {
       /*QPalette palette = widget->palette();
       palette.setColor(QPalette::Base,QColor(Qt::transparent));
@@ -880,7 +887,7 @@ void Style::polish(QWidget *widget)
   }
   else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
   {
-    if (hspec.forceSizeGrip)
+    if (hspec_.forceSizeGrip)
     { // WARNING: adding size grip to non-window widgets may cause crash
       if (QMainWindow *mw = qobject_cast<QMainWindow*>(sb->parentWidget()))
       {
@@ -1926,7 +1933,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (tb)
       {
         /* always show menu titles in the toggled state */
-        if (!settings_->getHacksSpec().transparent_menutitle
+        if (!hspec_.transparent_menutitle
             && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
             && qobject_cast<QMenu*>(getParent(widget,1)))
         {
@@ -2402,7 +2409,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             if (QWidget *pw = widget->parentWidget())
             {
-              if (settings_->getHacksSpec().transparent_dolphin_view
+              if (hspec_.transparent_dolphin_view
                   // not renaming area
                   && !qobject_cast<QAbstractScrollArea*>(pw)
                   // only Dolphin's view
@@ -2412,11 +2419,17 @@ void Style::drawPrimitive(PrimitiveElement element,
               }
             }
           }
-          else if (isPcmanfm_
-                   && settings_->getHacksSpec().transparent_pcmanfm_sidepane
-                   && widget->parentWidget() && widget->parentWidget()->inherits("Fm::SidePane"))
+          else if (isPcmanfm_ && (hspec_.transparent_pcmanfm_view || hspec_.transparent_pcmanfm_sidepane))
           {
-            break;
+            if (QWidget *pw = widget->parentWidget())
+            {
+              if ((hspec_.transparent_pcmanfm_view
+                   && pw->inherits("Fm::FolderView") && !pw->inherits("Fm::SidePane"))
+                  || (hspec_.transparent_pcmanfm_sidepane && pw->inherits("Fm::SidePane")))
+              {
+                break;
+              }
+            }
           }
         }
 
@@ -3636,14 +3649,13 @@ void Style::drawControl(ControlElement element,
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (l.size() > 0) // menu label
           {
-            const hacks_spec hspec = settings_->getHacksSpec();
             int checkSpace = 0;
             if (opt->menuHasCheckableItems)
               checkSpace = iw + lspec.tispace;
-            if (opt->icon.isNull() || (hspec.iconless_menu && !l[0].isEmpty()))
+            if (opt->icon.isNull() || (hspec_.iconless_menu && !l[0].isEmpty()))
             {
               int iconSpace = 0;
-              if (opt->maxIconWidth && !hspec.iconless_menu)
+              if (opt->maxIconWidth && !hspec_.iconless_menu)
                 iconSpace = smallIconSize + lspec.tispace;
               renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
@@ -3657,7 +3669,7 @@ void Style::drawControl(ControlElement element,
             }
             else
             {
-              int lxqtMenuIconSize = hspec.lxqtmainmenu_iconsize;
+              int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
               if (lxqtMenuIconSize >= 16
                   && lxqtMenuIconSize != smallIconSize
                   && qobject_cast<const QMenu*>(widget))
@@ -3845,7 +3857,7 @@ void Style::drawControl(ControlElement element,
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
-              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              qreal tintPercentage = hspec_.tint_on_mouseover;
               if (tintPercentage > 0
                   && (opt->features & QStyleOptionViewItemV2::HasDecoration)
                   && !opt->decorationSize.isEmpty())
@@ -3875,7 +3887,7 @@ void Style::drawControl(ControlElement element,
           }
           else
           {
-            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            qreal opacityPercentage = hspec_.disabled_icon_opacity;
             if (opacityPercentage < 100
                 && (opt->features & QStyleOptionViewItemV2::HasDecoration)
                 && !opt->decorationSize.isEmpty())
@@ -4738,7 +4750,7 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, focusColor);
               o.palette = palette;
-              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              qreal tintPercentage = hspec_.tint_on_mouseover;
               if (tintPercentage > 0 && !opt->icon.isNull())
               {
                 QPixmap px = tintedPixmap(option,
@@ -4755,7 +4767,7 @@ void Style::drawControl(ControlElement element,
               QPalette palette(opt->palette);
               palette.setColor(QPalette::ButtonText, pressColor);
               o.palette = palette;
-              qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+              qreal tintPercentage = hspec_.tint_on_mouseover;
               if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
               {
                 QPixmap px = tintedPixmap(option,
@@ -4769,7 +4781,7 @@ void Style::drawControl(ControlElement element,
           }
           else
           {
-            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            qreal opacityPercentage = hspec_.disabled_icon_opacity;
             if (opacityPercentage < 100 && !opt->icon.isNull())
             {
               QStyleOptionToolBox o(*opt);
@@ -5576,7 +5588,7 @@ void Style::drawControl(ControlElement element,
         break;
 
       bool stylable(true);
-      if (settings_->getHacksSpec().single_top_toolbar && !isStylableToolbar(widget))
+      if (hspec_.single_top_toolbar && !isStylableToolbar(widget))
         stylable = false;
 
       QRect r = option->rect;
@@ -5722,7 +5734,7 @@ void Style::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton *>(widget);
-        if (!settings_->getHacksSpec().normal_default_pushbutton
+        if (!hspec_.normal_default_pushbutton
             && !status.startsWith("disabled") && pb && pb->isDefault()) {
           QFont f(pb->font());
           f.setBold(true);
@@ -5800,7 +5812,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
-                    (settings_->getHacksSpec().iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
+                    (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize);
       }
@@ -6040,7 +6052,7 @@ void Style::drawControl(ControlElement element,
         if (tb)
         {
           /* always show menu titles in the toggled state */
-          bool transMenuTitle(settings_->getHacksSpec().transparent_menutitle);
+          bool transMenuTitle(hspec_.transparent_menutitle);
           if (!transMenuTitle
               && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
               && qobject_cast<QMenu*>(getParent(widget,1)))
@@ -6542,7 +6554,7 @@ void Style::drawComplexControl(ComplexControl control,
         o.rect = r;
 
         /* make an exception for (KDE) menu titles */
-        if (settings_->getHacksSpec().transparent_menutitle
+        if (hspec_.transparent_menutitle
             && tb && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
             && qobject_cast<QMenu*>(getParent(widget,1)))
         {
@@ -6999,13 +7011,13 @@ void Style::drawComplexControl(ComplexControl control,
                                        QSize(icn.width(),icn.height())/pixelRatio_, ricn);
           if (!(option->state & State_Enabled))
           {
-            qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+            qreal opacityPercentage = hspec_.disabled_icon_opacity;
             if (opacityPercentage < 100)
               icn = translucentPixmap(icn, opacityPercentage);
           }
           else if (option->state & State_MouseOver)
           {
-            qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+            qreal tintPercentage = hspec_.tint_on_mouseover;
             if (tintPercentage > 0)
               icn = tintedPixmap(option, icn, tintPercentage);
           }
@@ -8178,7 +8190,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
   else if (!widget->isWindow()
            || (!tspec_.translucent_windows
                && !((isKonsole_ || isYakuake_)
-                    && settings_->getHacksSpec().blur_konsole
+                    && hspec_.blur_konsole
                     && widget->testAttribute(Qt::WA_TranslucentBackground)))
            || isPlasma_ || isOpaque_)
   {
@@ -8389,7 +8401,7 @@ int Style::styleHint(StyleHint hint,
 #endif
 
     default : {
-      if (hint >= SH_CustomBase && settings_->getHacksSpec().kcapacitybar_as_progressbar
+      if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
           && widget && widget->objectName() == "CE_CapacityBar")
       {
         return CE_Kv_KCapacityBar;
@@ -8689,10 +8701,8 @@ QSize Style::sizeFromContents(ContentsType type,
         if (widget) f = widget->font();
         if (lspec.boldFont) f.setBold(true);
 
-        const hacks_spec hspec = settings_->getHacksSpec();
-
         int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
-        int lxqtMenuIconSize = hspec.lxqtmainmenu_iconsize;
+        int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
         if (lxqtMenuIconSize >= 16
             && lxqtMenuIconSize != iconSize
             && qobject_cast<const QMenu*>(widget))
@@ -8724,14 +8734,14 @@ QSize Style::sizeFromContents(ContentsType type,
         {
           const QStringList l = opt->text.split('\t');
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                             (opt->icon.isNull() || (hspec.iconless_menu && !(l.size() > 0 && l[0].isEmpty())))
+                             (opt->icon.isNull() || (hspec_.iconless_menu && !(l.size() > 0 && l[0].isEmpty())))
                              ? QSize()
                              : QSize(iconSize,iconSize));
         }
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */
-        if(opt->icon.isNull() && !hspec.iconless_menu && opt->maxIconWidth)
+        if(opt->icon.isNull() && !hspec_.iconless_menu && opt->maxIconWidth)
           s.rwidth() += iconSize + lspec.tispace;
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
@@ -11477,7 +11487,7 @@ void Style::renderLabel(
 
     if (!(option->state & State_Enabled))
     {
-      qreal opacityPercentage = settings_->getHacksSpec().disabled_icon_opacity;
+      qreal opacityPercentage = hspec_.disabled_icon_opacity;
       if (opacityPercentage < 100)
         painter->drawPixmap(iconRect,translucentPixmap(px, opacityPercentage));
       else
@@ -11485,7 +11495,7 @@ void Style::renderLabel(
     }
     else
     {
-      qreal tintPercentage = settings_->getHacksSpec().tint_on_mouseover;
+      qreal tintPercentage = hspec_.tint_on_mouseover;
       if (tintPercentage > 0 && (option->state & State_MouseOver))
         painter->drawPixmap(iconRect, tintedPixmap(option,px,tintPercentage));
       else

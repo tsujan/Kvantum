@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A light theme with an emphasis on elegant simplicity
+comment=An elegantly simple dark theme that supports translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -35,40 +35,52 @@ small_icon_size=16
 large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
-combo_as_lineedit=false
+combo_as_lineedit=true
+groupbox_top_label=false
+inline_spin_indicators=true
+joined_inactive_tabs=true
+layout_spacing=2
+submenu_overlap=-1
+tooltip_delay=-1
+button_contents_shift=true
 
 [GeneralColors]
-window.color=#F0F0F0
-base.color=white
-alt.base.color=#F0F0F0
-button.color=#F0F0F0
-light.color=white
-mid.light.color=#ECECEC
-dark.color=#B4B4B4
-mid.color=#D9D9D9
-highlight.color=#3176bf
+window.color=#3D3D3E
+base.color=#282828
+alt.base.color=#323232
+button.color=#3D3D3E
+light.color=#626262
+mid.light.color=#555555
+dark.color=#171717
+mid.color=#303030
+highlight.color=#4a90d9
 inactive.highlight.color=#828282
-text.color=black
-window.text.color=black
-button.text.color=black
-disabled.text.color=#00000073
+tooltip.base.color=black
+text.color=white
+window.text.color=white
+button.text.color=white
+disabled.text.color=#A0A0A0
 tooltip.text.color=white
 highlight.text.color=white
-link.color=#0057AE
-link.visited.color=#452886
-progress.indicator.text.color=white
+link.color=#2EB8E6
+link.visited.color=#FF6666
 
 [Hacks]
 transparent_ktitle_label=true
 transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
 blur_konsole=true
-transparent_menutitle=true
-respect_darkness=false
+transparent_menutitle=false
+respect_darkness=true
 kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
+disabled_icon_opacity=100
+lxqtmainmenu_iconsize=22
+normal_default_pushbutton=false
+single_top_toolbar=true
+tint_on_mouseover=0
 
 [PanelButtonCommand]
 frame=true
@@ -79,20 +91,20 @@ frame.left=3
 frame.right=3
 interior=true
 interior.element=button
-indicator.size=9
-text.normal.color=black
-text.focus.color=#0052aa
-text.press.color=black
+indicator.size=11
+text.normal.color=white
+text.focus.color=#9bccff
+text.press.color=white
 text.toggle.color=white
 text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=2
-text.margin.bottom=2
-text.margin.left=3
-text.margin.right=3
-frame.expansion=10
+text.margin.top=4
+text.margin.bottom=4
+text.margin.left=4
+text.margin.right=4
+frame.expansion=12
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -105,14 +117,14 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-text.normal.color=black
+text.normal.color=white
 
 [DockTitle]
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 text.bold=true
 
 [IndicatorSpinBox]
@@ -122,22 +134,22 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-indicator.size=9
-text.normal.color=black
+indicator.size=11
+text.normal.color=white
 
 [RadioButton]
 inherits=PanelButtonCommand
 frame=false
 interior.element=radio
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 
 [CheckBox]
 inherits=PanelButtonCommand
 frame=false
 interior.element=checkbox
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 
 [Focus]
 inherits=PanelButtonCommand
@@ -161,6 +173,7 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=1
 text.margin.right=1
+frame.expansion=10
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -168,13 +181,13 @@ indicator.element=arrow-down
 
 [IndicatorArrow]
 indicator.element=arrow
-indicator.size=9
+indicator.size=11
 
 [ToolboxTab]
 inherits=PanelButtonCommand
-text.normal.color=black
-text.press.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.press.color=white
+text.focus.color=#9bccff
 
 [Tab]
 inherits=PanelButtonCommand
@@ -189,26 +202,22 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.normal.color=black
+text.normal.color=white
 text.press.color=none
-text.focus.color=#0052aa
-text.toggle.color=black
-frame.expansion=10
+text.focus.color=#9bccff
+text.toggle.color=white
+frame.expansion=8
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=tabframe1
+frame=false
 interior=false
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
 
 [TreeExpander]
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
+indicator.size=11
 indicator.element=arrow
 
 [HeaderSection]
@@ -228,8 +237,8 @@ indicator.size=5
 text.margin=0
 interior.element=menubar
 frame.element=menubar
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 frame.bottom=4
 frame.expansion=0
 
@@ -252,12 +261,12 @@ inherits=PanelButtonCommand
 frame.element=progress
 interior.element=progress
 text.margin=0
-text.normal.color=black
-text.focus.color=black
-text.press.color=black
-text.toggle.color=black
+text.normal.color=white
+text.focus.color=white
+text.press.color=white
+text.toggle.color=white
 text.bold=true
-frame.expansion=10
+frame.expansion=0
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -278,8 +287,8 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=4
 text.margin.right=4
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 text.press.color=white
 text.toggle.color=white
 frame.expansion=6
@@ -290,7 +299,7 @@ indicator.size=32
 [Scrollbar]
 inherits=PanelButtonCommand
 indicator.element=arrow
-indicator.size=10
+indicator.size=11
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
@@ -316,7 +325,7 @@ frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 size.minheight=22
-text.normal.color=black
+text.normal.color=white
 text.focus.color=white
 text.margin.top=0
 text.margin.bottom=0
@@ -345,8 +354,8 @@ frame.right=2
 text.margin.left=1
 text.margin.right=4
 text.margin.top=0
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#9bccff
 frame.expansion=0
 
 [TitleBar]
@@ -356,7 +365,7 @@ interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
 text.normal.color=#787878
-text.focus.color=black
+text.focus.color=white
 text.bold=true
 text.italic=true
 frame.expansion=0
@@ -374,7 +383,7 @@ frame.element=menu
 interior.element=menu
 size.minheight=22
 size.minwidth=22
-text.normal.color=black
+text.normal.color=white
 frame.expansion=0
 
 [GroupBox]
@@ -387,9 +396,9 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.normal.color=black
-text.press.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.press.color=white
+text.focus.color=#9bccff
 frame.expansion=0
 
 [TabBarFrame]

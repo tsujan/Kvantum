@@ -6,6 +6,8 @@ V0.9.7
  * Draw the focus frame around widgets with keyboard focus if it's enabled in the theme (it's disabled in the default theme).
  * Added a key for disabling pushbutton contents shift.
  * Simplified the logic for tab separators and removed "joined_active_tab".
+ * Added a hacking key for merging PCManFM-Qt's folder-view with its surroundings (to Kvantum Manager).
+ * Added a dark version of KvSimplicity (KvSimplicityDark).
 
 V0.9.6
 ---------
