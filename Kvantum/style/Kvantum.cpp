@@ -771,13 +771,12 @@ void Style::polish(QWidget *widget)
   else if (isPcmanfm_ && (hspec_.transparent_pcmanfm_view || hspec_.transparent_pcmanfm_sidepane))
   {
     QWidget *gp = getParent(widget,2);
-    bool isSidePane = (getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
-                       || (gp && gp->inherits("Fm::SidePane"));
     if ((hspec_.transparent_pcmanfm_view
          && widget->autoFillBackground()
-         && (gp && gp->inherits("Fm::FolderView"))
-         && !(isSidePane || (gp && gp->inherits("PCManFM::DesktopWindow"))))
-        || (isSidePane && hspec_.transparent_pcmanfm_sidepane))
+         && (gp && gp->inherits("Fm::FolderView") && !gp->inherits("PCManFM::DesktopWindow")))
+        || (hspec_.transparent_pcmanfm_sidepane
+            && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
+                || (gp && gp->inherits("Fm::SidePane")))))
     {
       widget->setAutoFillBackground(false);
     }
@@ -2423,8 +2422,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             if (QWidget *pw = widget->parentWidget())
             {
-              if ((hspec_.transparent_pcmanfm_view
-                   && pw->inherits("Fm::FolderView") && !pw->inherits("Fm::SidePane"))
+              if ((hspec_.transparent_pcmanfm_view && pw->inherits("Fm::FolderView"))
                   || (hspec_.transparent_pcmanfm_sidepane && pw->inherits("Fm::SidePane")))
               {
                 break;
