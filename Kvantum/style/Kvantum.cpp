@@ -2335,7 +2335,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       /* At least toolbars may also use this, so continue
          only if it's really a menu. LibreOffice's menuitems 
          would have no background without this either. */
-      if (!qobject_cast<const QMenu*>(widget)
+      if ((widget // it's NULL in the case of QML menus
+           && !qobject_cast<const QMenu*>(widget))
           || isLibreoffice_) // really not needed
         break;
 
@@ -2349,12 +2350,16 @@ void Style::drawPrimitive(PrimitiveElement element,
       theme_spec tspec_now = settings_->getCompositeSpec();
       if (tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
-          && translucentWidgets_.contains(widget))
+          && widget && translucentWidgets_.contains(widget))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
       }
       else
+      {
+        if (!widget) // QML
+          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+      }
 
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
 
@@ -2397,7 +2402,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
-      if (!widget // QML pretends there's no widget!
+      if (!widget // it's NULL with QML
           || qobject_cast<const QAbstractScrollArea*>(widget)
           || widget->inherits("QWellArray") // color dialog's color rects
           || widget->inherits("QComboBoxPrivateContainer")) // frame for combo menus
@@ -2453,6 +2458,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
         if (isInactive)
           suffix = "-normal-inactive"; // the focus state is meaningless here
+        if (!widget) // QML again!
+          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Base));
         renderFrame(painter,option->rect,fspec,fspec.element+suffix);
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
         if (!(option->state & State_Enabled))
@@ -3367,6 +3374,13 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     //case PE_PanelItemViewRow :
     case PE_PanelItemViewItem : {
+      // this may be better for QML but I don't like it
+      /*if (!widget)
+      {
+        QCommonStyle::drawPrimitive(element,option,painter,widget);
+        return;
+      }*/
+
       /*
          Here frame has no real meaning but we force one by adjusting
          PM_FocusFrameHMargin and PM_FocusFrameVMargin for viewitems.
@@ -6464,7 +6478,7 @@ void Style::drawControl(ControlElement element,
         if (f->frameShape != QFrame::HLine
             && f->frameShape != QFrame::VLine
             && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised
-                || (!widget // There's no widget in the case of a QML combobox!
+                || (!widget // it's NULL in the case of a QML combobox
                     || widget->inherits("QComboBoxPrivateContainer"))))
         {
           if (f->frameShape == QFrame::Box)
@@ -6668,7 +6682,7 @@ void Style::drawComplexControl(ComplexControl control,
       if (opt) {
         QStyleOptionSpinBox o(*opt);
         /* If a null widget is fed into this method but the spinbox
-           has a frame, we'll draw buttons vertically. Fortunately,
+           has a frame (QML), we'll draw buttons vertically. Fortunately,
            KisSliderSpinBox never fulfills this condition. */
         bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt->frame));
         QRect editRect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
@@ -6792,7 +6806,7 @@ void Style::drawComplexControl(ComplexControl control,
     case CC_ComboBox : {
       /* WARNING: QML comboboxes have lineedit even when they aren't editable.
          Hence, the existence of a lineedit isn't a sufficient but only a necessary
-         condition for editability. I just hope they won't break the necessity of it ;) */
+         condition for editability. */
       const QStyleOptionComboBox *opt =
           qstyleoption_cast<const QStyleOptionComboBox *>(option);
 
@@ -7901,9 +7915,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         v += tspec_now.menu_shadow_depth;
         h += tspec_now.menu_shadow_depth;
       }
-      /* a margin > 2px could create ugly
-         corners without compositing */
+      /* a margin > 2px could create ugly corners without compositing */
       if (/*!tspec_now.composite ||*/ isLibreoffice_
+          || (!widget && option) // QML menus (see PE_PanelMenu)
           /*|| (qobject_cast<const QMenu*>(widget) && !translucentWidgets_.contains(widget))*/)
       {
         v = qMin(2,v);
@@ -9127,23 +9141,28 @@ QSize Style::sizeFromContents(ContentsType type,
       size_spec sspec;
       default_size_spec(sspec);
 
+      const QStyleOptionGroupBox *opt =
+        qstyleoption_cast<const QStyleOptionGroupBox *>(option);
+
       bool checkable(false);
-      if (const QGroupBox *gb = static_cast<const QGroupBox*>(widget))
+      if (const QGroupBox *gb = qobject_cast<const QGroupBox *>(widget))
       {
         if (gb->isCheckable())
-        {
           checkable = true;
-          if (option && option->direction == Qt::RightToLeft)
-            lspec.right = 0;
-          else
-            lspec.left = 0;
-        }
       }
+      if (!checkable && opt && (opt->subControls & QStyle::SC_GroupBoxCheckBox)) // QML
+        checkable = true;
+      if (checkable)
+      { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
+        if (option && option->direction == Qt::RightToLeft)
+          lspec.right = 0;
+        else
+          lspec.left = 0;
+      }
+
       QFont f = QApplication::font();
       if (widget) f = widget->font();
       if (lspec.boldFont) f.setBold(true);
-      const QStyleOptionGroupBox *opt =
-        qstyleoption_cast<const QStyleOptionGroupBox *>(option);
       QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt? opt->text : QString(),QSize());
       fspec = getFrameSpec(group);
       lspec = getLabelSpec(group);
@@ -9867,7 +9886,7 @@ QRect Style::subControlRect(ComplexControl control,
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
-      // the measure we used for CC_SpinBox at drawComplexControl()
+      // the measure we used for CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       // a workaround for LibreOffice
@@ -10428,15 +10447,17 @@ QRect Style::subControlRect(ComplexControl control,
         bool checkable = false;
         if (const QGroupBox *gb = qobject_cast<const QGroupBox *>(widget))
         {
-          // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
           if (gb->isCheckable())
-          {
             checkable = true;
-            if (rtl)
-              lspec.right = 0;
-            else
-              lspec.left = 0;
-          }
+        }
+        if (!checkable && (opt->subControls & QStyle::SC_GroupBoxCheckBox)) // QML
+          checkable = true;
+        if (checkable)
+        { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
+          if (rtl)
+            lspec.right = 0;
+          else
+            lspec.left = 0;
         }
         QFont f = QApplication::font();
         if (widget) f = widget->font();
