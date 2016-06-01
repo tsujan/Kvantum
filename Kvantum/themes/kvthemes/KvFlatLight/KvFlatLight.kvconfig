@@ -329,6 +329,7 @@ frame.right=2
 inherits=PanelButtonCommand
 frame=false
 interior=false
+text.normal.color=black
 
 [MenuBarItem]
 inherits=PanelButtonCommand

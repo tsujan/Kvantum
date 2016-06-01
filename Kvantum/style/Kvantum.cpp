@@ -1672,22 +1672,24 @@ void Style::drawPrimitive(PrimitiveElement element,
   switch(element) {
     case PE_Widget : {
       // only for windows and dialogs
-      if (!widget || !widget->isWindow())
+      if (widget // it's NULL with QML
+          && !widget->isWindow())
         break;
 
       // we don't accept custom background colors for windows...
-      if (option->palette.color(QPalette::Window) != QApplication::palette().color(QPalette::Window)
-          && (!widget || (!widget->testAttribute(Qt::WA_TranslucentBackground)
-                          && !widget->testAttribute(Qt::WA_NoSystemBackground))))
+      if (!widget // QML
+          || (option->palette.color(QPalette::Window) != QApplication::palette().color(QPalette::Window)
+              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+              && !widget->testAttribute(Qt::WA_NoSystemBackground)))
       {
         if (option->palette.color(QPalette::Window) == option->palette.color(QPalette::Base))
-          break; // ...but make an exception for apps lik KNotes
+          break; // ...but make an exception for apps like KNotes
         else
           painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
       }
 
       interior_spec ispec = getInteriorSpec("Dialog");
-      if (!ispec.element.isEmpty())
+      if (widget && !ispec.element.isEmpty())
       {
         if (QWidget *child = widget->childAt(0,0))
         {
@@ -2770,7 +2772,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       const QString group = "IndicatorSpinBox";
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
-      // the measure we used for CC_SpinBox at drawComplexControl()
+      // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       frame_spec fspec;
@@ -3805,7 +3807,8 @@ void Style::drawControl(ControlElement element,
             /* If another color has been set intentionally,
                as in Akregator's unread feeds or in Kate's
                text style preferences, use it! */
-            && widget && palette == widget->palette())
+            && (!widget // QML
+                || palette == widget->palette()))
         {
           // as in PE_PanelItemViewItem
           int state = (option->state & State_Enabled) ?
@@ -4504,6 +4507,44 @@ void Style::drawControl(ControlElement element,
         {
           ispec.px = ispec.py = 0;
         }
+        if (!widget) // WARNING: Why QML tabs are cut by 1px from below?
+        {
+          if (!verticalTabs)
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
+            {
+              r.adjust(0,1,0,0);
+              sep.adjust(0,1,0,0);
+              sepTop.adjust(0,1,0,1);
+            }
+            else
+            {
+              r.adjust(0,0,0,-1);
+              sep.adjust(0,0,0,-1);
+              sepBottom.adjust(0,-1,0,-1);
+            }
+          }
+          else // this is redundant because TabView's tabPosition is either Qt.TopEdge or Qt.BottomEdge
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
+            {
+              if (tspec_.mirror_doc_tabs)
+              {
+                r.adjust(0,1,0,0);
+                sep.adjust(0,1,0,0);
+                sepTop.adjust(0,1,0,1);
+              }
+            }
+            else
+            {
+              r.adjust(0,0,0,-1);
+              sep.adjust(0,0,0,-1);
+              sepBottom.adjust(0,-1,0,-1);
+            }
+          }
+        }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,fspec.hasCapsule);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,fspec.hasCapsule);
         if (drawSep)
@@ -4540,7 +4581,11 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
 
-        int talign = Qt::AlignLeft | Qt::AlignVCenter;
+        int talign;
+        if (!widget) // QML
+          talign = Qt::AlignCenter;
+        else
+          talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
         else
@@ -4680,6 +4725,25 @@ void Style::drawControl(ControlElement element,
           }
         }
 
+        if (!widget) // QML
+        {
+          if (!verticalTabs)
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
+              r.adjust(0,0,0,-1);
+            else
+              r.adjust(0,1,0,0);
+          }
+          else // redundant
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
+              r.adjust(0,0,0,-1);
+            else
+              r.adjust(0,1,0,0);
+          }
+        }
         iconSize = QSize(icnSize,icnSize);
         renderLabel(option,painter,
                     r,
@@ -4988,7 +5052,7 @@ void Style::drawControl(ControlElement element,
           if (thin)
             painter->restore();
         }
-        else
+        else if (widget)
         { // busy progressbar
           QWidget *wi = (QWidget *)widget;
           int animcount = progressbars_[wi];
@@ -5080,6 +5144,8 @@ void Style::drawControl(ControlElement element,
             renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status,true);
           }
         }
+        else
+          QCommonStyle::drawControl(element,option,painter,widget);
       }
 
       break;
@@ -8000,10 +8066,30 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
        close button and frame but PM_TabBarTabVSpace isn't needed */
     case PM_TabBarTabHSpace : {
       const frame_spec fspec = getFrameSpec("Tab");
-      return fspec.right + fspec.left;
+      int hSpace = fspec.left + fspec.right;
+      if (!widget) // QML
+      {
+        const label_spec lspec = getLabelSpec("Tab");
+        int common = QCommonStyle::pixelMetric(metric,option,widget);
+        hSpace += lspec.left + lspec.right;
+        hSpace = qMax(hSpace, common);
+      }
+      return hSpace;
     }
-    case PM_TabBarTabVSpace : return 0;
+    case PM_TabBarTabVSpace : {
+      if (!widget) // QML
+      {
+        const frame_spec fspec = getFrameSpec("Tab");
+        const label_spec lspec = getLabelSpec("Tab");
+        int common = QCommonStyle::pixelMetric(metric,option,widget);
+        return qMax(fspec.top+fspec.bottom + lspec.top+lspec.bottom
+                      + 1, // WARNING: Why QML tabs are cut by 1px from below?
+                    common);
+      }
+      else return 0;
+    }
 
+    case PM_TabBarTabOverlap :
     case PM_TabBarBaseHeight :
     case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
@@ -9886,7 +9972,7 @@ QRect Style::subControlRect(ComplexControl control,
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
-      // the measure we used for CC_SpinBox at drawComplexControl() (for QML)
+      // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       // a workaround for LibreOffice
