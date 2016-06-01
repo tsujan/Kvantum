@@ -244,6 +244,8 @@ class Style : public QCommonStyle {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);
     }
 
+    /* Get menu margins, including its shadow. */
+    int getMenuMargin(bool horiz) const;
     /* Get pure shadow dimensions of menus/tooltips. */
     void getMenuHShadows();
     QList<int> getShadow(const QString &widgetName, int thicknessH, int thicknessV);

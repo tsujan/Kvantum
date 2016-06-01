@@ -199,7 +199,7 @@ Style::Style() : QCommonStyle()
 
   if (tspec_.blurring)
   {
-    QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
+    QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
     QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
     blurHelper_ = new BlurHelper(this,menuS,tooltipS);
   }
@@ -436,6 +436,14 @@ void Style::advanceProgresses()
   }
 }
 
+int Style::getMenuMargin(bool horiz) const
+{
+  const frame_spec fspec = getFrameSpec("Menu");
+  int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
+  margin += tspec_.menu_shadow_depth;
+  return margin;
+}
+
 // This is also used to adjust submenu position horizontally when menus have shadow.
 void Style::getMenuHShadows()
 {
@@ -467,7 +475,7 @@ void Style::getMenuHShadows()
       if (renderer)
       {
         br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-        menuHShadows[i] = pixelMetric(PM_MenuHMargin)*(br.width()/divisor);
+        menuHShadows[i] = getMenuMargin(true)*(br.width()/divisor);
       }
     }
   }
@@ -948,7 +956,7 @@ void Style::polish(QWidget *widget)
 #if defined Q_WS_X11 || defined Q_OS_LINUX
     if (!blurHelper_ && tspec_now.popup_blurring)
     {
-      QList<int> menuS = getShadow("Menu", pixelMetric(PM_MenuHMargin), pixelMetric(PM_MenuVMargin));
+      QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
       QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
       blurHelper_ = new BlurHelper(this,menuS,tooltipS);
     }
@@ -1294,7 +1302,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         // correct the submenu position
         w->move(w->x() + menuHShadows.at(0)
-                       - (pixelMetric(PM_MenuHMargin) - menuHShadows.at(1)),
+                       - (getMenuMargin(true) - menuHShadows.at(1)),
                 w->y());
       }
       else if (qobject_cast<QToolButton*>(o))
@@ -3597,9 +3605,9 @@ void Style::drawControl(ControlElement element,
     case CE_MenuTearoff : {
       status = (option->state & State_Selected) ? "focused" : "normal";
       // see PM_MenuTearoffHeight and also PE_PanelMenu
-      int marginH = pixelMetric(PM_MenuHMargin);
+      int marginH = pixelMetric(PM_MenuHMargin,option,widget);
       QRect r(option->rect.x() + marginH,
-              option->rect.y() + pixelMetric(PM_MenuVMargin),
+              option->rect.y() + pixelMetric(PM_MenuVMargin,option,widget),
               option->rect.width() - 2*marginH,
               8);
       const indicator_spec dspec = getIndicatorSpec("MenuItem");
@@ -3664,12 +3672,17 @@ void Style::drawControl(ControlElement element,
           if (l.size() > 0) // menu label
           {
             int checkSpace = 0;
-            if (opt->menuHasCheckableItems)
+            if ((widget && opt->menuHasCheckableItems)
+                /* QML menus only use checkType, while
+                   the default value of menuHasCheckableItems is true. */
+                || opt->checkType != QStyleOptionMenuItem::NotCheckable)
               checkSpace = iw + lspec.tispace;
             if (opt->icon.isNull() || (hspec_.iconless_menu && !l[0].isEmpty()))
             {
               int iconSpace = 0;
-              if (opt->maxIconWidth && !hspec_.iconless_menu)
+              if ((opt->maxIconWidth
+                   || !widget) // QML menus set maxIconWidth to 0, although they have icon
+                  && !hspec_.iconless_menu)
                 iconSpace = smallIconSize + lspec.tispace;
               renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
@@ -7930,7 +7943,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         return getFrameSpec("MenuBar").left;
     }
 
-    case PM_MenuPanelWidth : return 0;
+    case PM_MenuPanelWidth :
+    case PM_MenuDesktopFrameWidth: return 0;
 
     case PM_SubMenuOverlap : {
 #if QT_VERSION >= 0x050000
@@ -7942,7 +7956,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       {
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
-        so -= pixelMetric(PM_MenuHMargin);
+        so -= getMenuMargin(true);
         if (settings_->getCompositeSpec().composite
             && menuHShadows.count() == 2
             && (!qobject_cast<const QMenu*>(widget)
@@ -7976,7 +7990,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
       if (tspec_now.composite
-          && (!qobject_cast<const QMenu*>(widget) || translucentWidgets_.contains(widget)))
+          && widget && translucentWidgets_.contains(widget))
       {
         v += tspec_now.menu_shadow_depth;
         h += tspec_now.menu_shadow_depth;
@@ -8412,7 +8426,8 @@ int Style::styleHint(StyleHint hint,
     case SH_ScrollView_FrameOnlyAroundContents : return true;
 
     case SH_UnderlineShortcut:
-      return (widget && itsShortcutHandler_) ? itsShortcutHandler_->showShortcut(widget) : true;
+      return (widget && itsShortcutHandler_) ? itsShortcutHandler_->showShortcut(widget)
+                                             : false; // underline for QML widgets
 
     case SH_TitleBar_NoBorder: return true;
     case SH_TitleBar_AutoRaise: return true;
