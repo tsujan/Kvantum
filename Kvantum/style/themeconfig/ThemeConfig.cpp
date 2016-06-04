@@ -110,8 +110,11 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
   return r;
 }
 
-frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
+frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
 {
+  if (fSpecs_.contains(elementName))
+    return fSpecs_[elementName];
+
   frame_spec r;
   default_frame_spec(r);
 
@@ -160,11 +163,15 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
     }
   }
 
+  fSpecs_[elementName] = r;
   return r;
 }
 
-interior_spec ThemeConfig::getInteriorSpec(const QString &elementName) const
+interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
 {
+  if (iSpecs_.contains(elementName))
+    return iSpecs_[elementName];
+
   interior_spec r;
   default_interior_spec(r);
 
@@ -187,11 +194,16 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName) const
       r.py = qMax(v.toInt(),0);
     }
   }
+
+  iSpecs_[elementName] = r;
   return r;
 }
 
-indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName) const
+indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
 {
+  if (dSpecs_.contains(elementName))
+    return dSpecs_[elementName];
+
   indicator_spec r;
   default_indicator_spec(r);
 
@@ -208,11 +220,15 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName) const
       r.size = qMax(v.toInt(),0);
   }
 
+  dSpecs_[elementName] = r;
   return r;
 }
 
-label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
+label_spec ThemeConfig::getLabelSpec(const QString &elementName)
 {
+  if (lSpecs_.contains(elementName))
+    return lSpecs_[elementName];
+
   label_spec r;
   default_label_spec(r);
 
@@ -271,11 +287,15 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName) const
   v = getValue(elementName,"text.iconspacing", i);
   r.tispace = qMax(v.toInt(),0);
 
+  lSpecs_[elementName] = r;
   return r;
 }
 
-size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
+size_spec ThemeConfig::getSizeSpec(const QString& elementName)
 {
+  if (sSpecs_.contains(elementName))
+    return sSpecs_[elementName];
+
   size_spec r;
   default_size_spec(r);
 
@@ -290,10 +310,11 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName) const
   if (v.isValid())
     r.minW = qMax(v.toInt(),0);
 
+  sSpecs_[elementName] = r;
   return r;
 }
 
-theme_spec ThemeConfig::getCompositeSpec() const
+theme_spec ThemeConfig::getCompositeSpec()
 {
   theme_spec r;
   default_theme_spec(r);
@@ -363,7 +384,7 @@ theme_spec ThemeConfig::getCompositeSpec() const
   return r;
 }
 
-theme_spec ThemeConfig::getThemeSpec() const
+theme_spec ThemeConfig::getThemeSpec()
 {
   /* start with compositing */
   theme_spec r = getCompositeSpec();

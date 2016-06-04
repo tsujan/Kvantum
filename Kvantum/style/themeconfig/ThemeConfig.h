@@ -49,19 +49,19 @@ class ThemeConfig {
     }
 
     /* Returns the frame spec of the given widget. */
-    frame_spec getFrameSpec(const QString &elementName) const;
+    frame_spec getFrameSpec(const QString &elementName);
     /* Returns the interior spec of the given widget. */
-    interior_spec getInteriorSpec(const QString &elementName) const;
+    interior_spec getInteriorSpec(const QString &elementName);
     /* Returns the indicator spec of the given widget. */
-    indicator_spec getIndicatorSpec(const QString &elementName) const;
+    indicator_spec getIndicatorSpec(const QString &elementName);
     /* Returns the label (text+icon) spec of the given widget. */
-    label_spec getLabelSpec(const QString &elementName) const;
+    label_spec getLabelSpec(const QString &elementName);
     /* Returns the size spec of the given widget. */
-    size_spec getSizeSpec(const QString &elementName) const;
+    size_spec getSizeSpec(const QString &elementName);
     /* Returns only those theme specs that are related to compositing. */
-    theme_spec getCompositeSpec() const;
+    theme_spec getCompositeSpec();
     /* Returns the theme spec of this theme. */
-    theme_spec getThemeSpec() const;
+    theme_spec getThemeSpec();
     /* Returns the general color spec of this theme. */
     color_spec getColorSpec() const;
     /* Returns the hacks spec of this theme. */
@@ -89,6 +89,14 @@ class ThemeConfig {
 
     QSettings *settings_;
     ThemeConfig *parentConfig_;
+    /*
+       Remember specifications instead of getting them again and again!
+    */
+    QHash<QString, frame_spec> fSpecs_;
+    QHash<QString, interior_spec> iSpecs_;
+    QHash<QString, indicator_spec> dSpecs_;
+    QHash<QString, label_spec> lSpecs_;
+    QHash<QString, size_spec> sSpecs_;
 };
 }
 

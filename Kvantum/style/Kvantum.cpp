@@ -103,6 +103,7 @@ Style::Style() : QCommonStyle()
 
   tspec_ = settings_->getThemeSpec();
   hspec_ = settings_->getHacksSpec();
+  cspec_ = settings_->getColorSpec();
 
   QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
   if (!QFile::exists(kdeGlobals))
@@ -618,7 +619,7 @@ void Style::polish(QWidget *widget)
 
   /* respect the toolbar text color */
   QColor toolbarTextColor = getFromRGBA(getLabelSpec("Toolbar").normalColor);
-  QColor windowTextColor = getFromRGBA(settings_->getColorSpec().windowTextColor);
+  QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
   if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
   {
     QWidget *p = getParent(widget,1);
@@ -643,7 +644,7 @@ void Style::polish(QWidget *widget)
   if (hspec_.respect_darkness
       && !isPcmanfm_) // we don't want to give a solid backgeound to LXQT's desktop by accident
   {
-    QColor winCol = getFromRGBA(settings_->getColorSpec().windowColor);
+    QColor winCol = getFromRGBA(cspec_.windowColor);
     if (winCol.isValid() && qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
         // it's usual to define custom colors in text edits
         && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
@@ -765,7 +766,7 @@ void Style::polish(QWidget *widget)
     /* Dolphin sets the background of its KItemListContainer's viewport
        to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
        We force our base color here. */
-    QColor col = getFromRGBA(settings_->getColorSpec().baseColor);
+    QColor col = getFromRGBA(cspec_.baseColor);
     if (col.isValid())
     {
       QPalette palette = widget->palette();
@@ -829,7 +830,7 @@ void Style::polish(QWidget *widget)
   }
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   { // in rare cases like KNotes' font combos or Kcalc
-    QColor col = getFromRGBA(settings_->getColorSpec().textColor);
+    QColor col = getFromRGBA(cspec_.textColor);
     if (col.isValid())
     {
       QPalette palette = widget->palette();
@@ -916,53 +917,55 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  theme_spec tspec_now = settings_->getCompositeSpec();
-  if (tspec_now.composite
-      && !isLibreoffice_ // not required
+  if (!isLibreoffice_ // not required
       && !subApp_
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
              /* no shadow for tooltips that are already translucent */
           || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
       && !translucentWidgets_.contains(widget))
   {
-    if (qobject_cast<QMenu*>(widget))
+    theme_spec tspec_now = settings_->getCompositeSpec();
+    if (tspec_now.composite)
     {
-      getMenuHShadows();
-      /* RTL submenus aren't positioned correctly. To fix that,
-         we should move them but the RTL property isn't set yet. */
-      if (qobject_cast<QMenu*>(getParent(widget,1)))
+      if (qobject_cast<QMenu*>(widget))
       {
-        widget->removeEventFilter(this);
-        widget->installEventFilter(this);
+        getMenuHShadows();
+        /* RTL submenus aren't positioned correctly. To fix that,
+           we should move them but the RTL property isn't set yet. */
+        if (qobject_cast<QMenu*>(getParent(widget,1)))
+        {
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+        }
       }
-    }
 #if QT_VERSION >= 0x050000
-    /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
-       the window background color. I don't know the root of this bug but what follows
-       is a workaround, which works with setSurfaceFormat() below. */
-    else// if (widget->inherits("QTipLabel"))
-    {
-      QPalette palette = widget->palette();
-      QColor winCol = palette.window().color();
-      winCol.setAlpha(0);
-      palette.setColor(QPalette::Window, winCol);
-      widget->setPalette(palette);
-    }
+      /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
+         the window background color. I don't know the root of this bug but what follows
+         is a workaround, which works with setSurfaceFormat() below. */
+      else// if (widget->inherits("QTipLabel"))
+      {
+        QPalette palette = widget->palette();
+        QColor winCol = palette.window().color();
+        winCol.setAlpha(0);
+        palette.setColor(QPalette::Window, winCol);
+        widget->setPalette(palette);
+      }
 #endif
-    widget->setAttribute(Qt::WA_TranslucentBackground);
-    translucentWidgets_.insert(widget);
-    connect(widget, SIGNAL(destroyed(QObject*)),
-            SLOT(noTranslucency(QObject*)));
+      widget->setAttribute(Qt::WA_TranslucentBackground);
+      translucentWidgets_.insert(widget);
+      connect(widget, SIGNAL(destroyed(QObject*)),
+              SLOT(noTranslucency(QObject*)));
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-    if (!blurHelper_ && tspec_now.popup_blurring)
-    {
-      QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-      QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
-      blurHelper_ = new BlurHelper(this,menuS,tooltipS);
-    }
+      if (!blurHelper_ && tspec_now.popup_blurring)
+      {
+        QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+        QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
+        blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+      }
 #endif
-    if (blurHelper_ && tspec_now.popup_blurring) // blurHelper_ may exist because of Konsole blurring
-      blurHelper_->registerWidget(widget);
+      if (blurHelper_ && tspec_now.popup_blurring) // blurHelper_ may exist because of Konsole blurring
+        blurHelper_->registerWidget(widget);
+    }
   }
 }
 
@@ -1025,51 +1028,49 @@ void Style::polish(QApplication *app)
 
 void Style::polish(QPalette &palette)
 {
-    const color_spec cspec = settings_->getColorSpec();
-
     /* background colors */
-    QColor col = getFromRGBA(cspec.windowColor);
+    QColor col = getFromRGBA(cspec_.windowColor);
     if (col.isValid())
       palette.setColor(QPalette::Window,col);
-    col = getFromRGBA(cspec.baseColor);
+    col = getFromRGBA(cspec_.baseColor);
     if (col.isValid())
       palette.setColor(QPalette::Base,col);
-    col = getFromRGBA(cspec.altBaseColor);
+    col = getFromRGBA(cspec_.altBaseColor);
     if (col.isValid())
       palette.setColor(QPalette::AlternateBase,col);
-    col = getFromRGBA(cspec.buttonColor);
+    col = getFromRGBA(cspec_.buttonColor);
     if (col.isValid())
       palette.setColor(QPalette::Button,col);
 
-    col = getFromRGBA(cspec.lightColor);
+    col = getFromRGBA(cspec_.lightColor);
     if (col.isValid())
       palette.setColor(QPalette::Light,col);
-    col = getFromRGBA(cspec.midLightColor);
+    col = getFromRGBA(cspec_.midLightColor);
     if (col.isValid())
       palette.setColor(QPalette::Midlight,col);
-    col = getFromRGBA(cspec.darkColor);
+    col = getFromRGBA(cspec_.darkColor);
     if (col.isValid())
       palette.setColor(QPalette::Dark,col);
-    col = getFromRGBA(cspec.midColor);
+    col = getFromRGBA(cspec_.midColor);
     if (col.isValid())
       palette.setColor(QPalette::Mid,col);
-    col = getFromRGBA(cspec.shadowColor);
+    col = getFromRGBA(cspec_.shadowColor);
     if (col.isValid())
       palette.setColor(QPalette::Shadow,col);
 
-    col = getFromRGBA(cspec.highlightColor);
+    col = getFromRGBA(cspec_.highlightColor);
     if (col.isValid())
       palette.setColor(QPalette::Active,QPalette::Highlight,col);
-    col = getFromRGBA(cspec.inactiveHighlightColor);
+    col = getFromRGBA(cspec_.inactiveHighlightColor);
     if (col.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
 
-    col = getFromRGBA(cspec.tooltipBasetColor);
+    col = getFromRGBA(cspec_.tooltipBasetColor);
     if (col.isValid())
       palette.setColor(QPalette::ToolTipBase,col);
     else
     { // for backward compatibility
-      col = getFromRGBA(cspec.tooltipTextColor);
+      col = getFromRGBA(cspec_.tooltipTextColor);
       if (col.isValid())
       {
         QColor col1 = QColor(Qt::white);
@@ -1080,39 +1081,39 @@ void Style::polish(QPalette &palette)
     }
 
     /* text colors */
-    col = getFromRGBA(cspec.textColor);
+    col = getFromRGBA(cspec_.textColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::Text,col);
       palette.setColor(QPalette::Inactive,QPalette::Text,col);
     }
-    col = getFromRGBA(cspec.windowTextColor);
+    col = getFromRGBA(cspec_.windowTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::WindowText,col);
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
     }
-    col = getFromRGBA(cspec.buttonTextColor);
+    col = getFromRGBA(cspec_.buttonTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
     }
-    col = getFromRGBA(cspec.tooltipTextColor);
+    col = getFromRGBA(cspec_.tooltipTextColor);
     if (col.isValid())
       palette.setColor(QPalette::ToolTipText,col);
-    col = getFromRGBA(cspec.highlightTextColor);
+    col = getFromRGBA(cspec_.highlightTextColor);
     if (col.isValid())
       palette.setColor(QPalette::HighlightedText,col);
-    col = getFromRGBA(cspec.linkColor);
+    col = getFromRGBA(cspec_.linkColor);
     if (col.isValid())
       palette.setColor(QPalette::Link,col);
-    col = getFromRGBA(cspec.linkVisitedColor);
+    col = getFromRGBA(cspec_.linkVisitedColor);
     if (col.isValid())
       palette.setColor(QPalette::LinkVisited,col);
 
     /* disabled text */
-    col = getFromRGBA(cspec.disabledTextColor);
+    col = getFromRGBA(cspec_.disabledTextColor);
     if (col.isValid())
     {
       palette.setColor(QPalette::Disabled,QPalette::Text,col);
@@ -5241,7 +5242,7 @@ void Style::drawControl(ControlElement element,
 
         /* find the part inside the indicator */
         QRect R;
-        QColor col = getFromRGBA(settings_->getColorSpec().progressIndicatorTextColor);
+        QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
         if (state != 0 && !txt.isEmpty() && col.isValid())
         {
           QColor txtCol;
@@ -11686,7 +11687,7 @@ void Style::renderLabel(
       QColor focusColor = getFromRGBA(lspec.focusColor);
       QColor pressColor = getFromRGBA(lspec.pressColor);
       QColor toggleColor = getFromRGBA(lspec.toggleColor);
-      QColor progColor = getFromRGBA(settings_->getColorSpec().progressIndicatorTextColor);
+      QColor progColor = getFromRGBA(cspec_.progressIndicatorTextColor);
 
       if (lspec.hasShadow)
       {

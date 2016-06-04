@@ -285,6 +285,8 @@ class Style : public QCommonStyle {
     theme_spec tspec_;
     /* The hacking specification of the theme. */
     hacks_spec hspec_;
+    /* The color specification of the theme. */
+    color_spec cspec_;
     /* All general info about tabs. */
     bool joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
 
