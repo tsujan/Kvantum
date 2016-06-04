@@ -538,6 +538,16 @@ frame.left
 frame.right                       integer             The height or width of the corresponding
                                                       frame part if there is any.
 
+frame.expanded.top
+frame.expanded.bottom
+frame.expanded.left
+frame.expanded.right              integer             The same as above but for expanded frames
+                                                      (see "frame.expansion" below).
+                                                      If they are set to zero, missing or
+                                                      greater than their corresponding ordinary
+                                                      frame sizes, the ordinary frame sizes
+                                                      will be used for expanded frames.
+
 frame.expansion                   integer             A positive value will expand the
                                                       frames until the corner frames meet
                                                       each other either vertically or

@@ -73,13 +73,17 @@ iconless_pushbutton=false
 [PanelButtonCommand]
 frame=true
 frame.element=button
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
+frame.expanded.top=2
+frame.expanded.bottom=2
+frame.expanded.left=2
+frame.expanded.right=2
 interior=true
 interior.element=button
-indicator.size=9
+indicator.size=10
 text.normal.color=white
 text.focus.color=#FFCA00
 text.press.color=white
@@ -88,10 +92,10 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=3
-text.margin.bottom=3
-text.margin.left=7
-text.margin.right=7
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=6
+text.margin.right=6
 text.shadow.xshift=2
 text.shadow.yshift=2
 text.shadow.color=#000000
@@ -106,7 +110,10 @@ inherits=PanelButtonCommand
 inherits=PanelButtonCommand
 frame=true
 interior=true
-frame.expansion=0
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 
 [DockTitle]
 inherits=PanelButtonCommand
@@ -118,7 +125,10 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
-frame.expansion=0
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -169,8 +179,8 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
-text.margin.left=5
-text.margin.right=5
+text.margin.left=4
+text.margin.right=4
 frame.expansion=50
 
 [DropDownButton]
@@ -180,7 +190,7 @@ frame.expansion=0
 
 [IndicatorArrow]
 indicator.element=arrow
-indicator.size=9
+indicator.size=10
 frame.expansion=0
 
 [ToolboxTab]
@@ -190,12 +200,13 @@ frame.expansion=0
 [Tab]
 inherits=PanelButtonCommand
 interior.element=tab
-text.margin.left=6
-text.margin.right=6
-text.margin.top=3
-text.margin.bottom=3
+text.margin.left=5
+text.margin.right=5
+text.margin.top=2
+text.margin.bottom=2
 frame.element=tab
 indicator.element=tab
+indicator.size=9
 text.press.color=white
 text.toggle.color=white
 
@@ -213,7 +224,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=7
+indicator.size=9
 frame.expansion=0
 
 [HeaderSection]
@@ -222,10 +233,10 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame.expansion=10
 
 [SizeGrip]
@@ -244,7 +255,10 @@ text.margin=0
 frame.element=toolbar
 interior=false
 frame.expansion=0
+frame.top=2
 frame.bottom=2
+frame.left=2
+frame.right=2
 
 [Slider]
 inherits=PanelButtonCommand
@@ -297,6 +311,10 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
+text.margin.top=3
+text.margin.bottom=3
+text.margin.left=7
+text.margin.right=7
 frame.expansion=10
 
 [Splitter]
@@ -340,10 +358,6 @@ interior.element=menuitem
 indicator.element=menuitem
 size.minheight=22
 text.focus.color=white
-text.margin.top=3
-text.margin.bottom=3
-text.margin.left=7
-text.margin.right=7
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -355,6 +369,8 @@ frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
+text.margin.top=3
+text.margin.bottom=3
 frame.expansion=0
 
 [TitleBar]

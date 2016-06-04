@@ -140,6 +140,22 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName) const
       {
         v = getValue(elementName,"frame.expansion", i);
         r.expansion = qMax(v.toInt(),0);
+
+        if (r.expansion > 0)
+        {
+          v = getValue(elementName,"frame.expanded.top", i);
+          r.topExpanded = qMin(v.toInt(),r.top);
+          if (r.topExpanded <= 0) r.topExpanded = r.top;
+          v = getValue(elementName,"frame.expanded.bottom", i);
+          r.bottomExpanded = qMin(v.toInt(),r.bottom);
+          if (r.bottomExpanded <= 0) r.bottomExpanded = r.bottom;
+          v = getValue(elementName,"frame.expanded.left", i);
+          r.leftExpanded = qMin(v.toInt(),r.left);
+          if (r.leftExpanded <= 0) r.leftExpanded = r.left;
+          v = getValue(elementName,"frame.expanded.right", i);
+          r.rightExpanded = qMin(v.toInt(),r.right);
+          if (r.rightExpanded <= 0) r.rightExpanded = r.right;
+        }
       }
     }
   }

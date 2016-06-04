@@ -159,7 +159,7 @@ class Style : public QCommonStyle {
     /* Generic method that draws a frame. */
     void renderFrame(QPainter *painter,
                      const QRect &bounds, // frame bounds
-                     const frame_spec &fspec, // frame spec
+                     frame_spec fspec, // frame spec
                      const QString &element, // frame SVG element (basename)
                      int d = 0, // distance of the attached tab from the edge
                      int l = 0, // length of the attached tab

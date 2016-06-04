@@ -10965,7 +10965,7 @@ void Style::renderSliderTick(QPainter *painter,
 
 void Style::renderFrame(QPainter *painter,
                         const QRect &bounds, // frame bounds
-                        const frame_spec &fspec, // frame spec
+                        frame_spec fspec, // frame spec
                         const QString &element, // frame SVG element
                         int d, // distance of the attached tab from the edge
                         int l, // length of the attached tab
@@ -11009,6 +11009,10 @@ void Style::renderFrame(QPainter *painter,
                                         && themeRndr_->elementExists(element0.replace("-focused","-normal")))))))
   {
     drawExpanded = true;
+    fspec.left = fspec.leftExpanded;
+    fspec.right = fspec.rightExpanded;
+    fspec.top = fspec.topExpanded;
+    fspec.bottom = fspec.bottomExpanded;
   }
   if (!isLibreoffice_ && fspec.expansion > 0 && drawExpanded
       && (!fspec.hasCapsule || fspec.capsuleV == 2)
