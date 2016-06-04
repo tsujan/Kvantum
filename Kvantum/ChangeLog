@@ -1,3 +1,8 @@
+V0.9.8
+---------
+ * Consider QML anchoring, because of which, some widgets can't have frame expansion, tiling pattern or even interior gradient.
+ * No interior and frame expansion when the label of a group box is drawn on its top frame.
+
 V0.9.7
 ---------
  * Deal with QML peculiarities.

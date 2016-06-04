@@ -440,19 +440,19 @@ int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  margin += tspec_.menu_shadow_depth;
+  margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
 }
 
 // This is also used to adjust submenu position horizontally when menus have shadow.
 void Style::getMenuHShadows()
 {
-  if (menuHShadows.count() == 2)
+  if (menuHShadows_.count() == 2)
     return;
 
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
-  menuHShadows << 0 << 0;  // [left, right]
+  menuHShadows_ << 0 << 0;  // [left, right]
   QList<QString> direction;
   direction << "left" << "right";
   frame_spec fspec = getFrameSpec("Menu");
@@ -475,7 +475,7 @@ void Style::getMenuHShadows()
       if (renderer)
       {
         br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-        menuHShadows[i] = getMenuMargin(true)*(br.width()/divisor);
+        menuHShadows_[i] = getMenuMargin(true)*(br.width()/divisor);
       }
     }
   }
@@ -495,9 +495,9 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
   for (int i = 0; i < 4; ++i)
   {
     if (widgetName == "Menu" && i%2 == 0 // left and right
-        && menuHShadows.count() == 2)
+        && menuHShadows_.count() == 2)
     {
-      shadow[i] = menuHShadows[i/2];
+      shadow[i] = menuHShadows_[i/2];
       continue;
     }
     if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
@@ -520,9 +520,9 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
     }
   }
 
-  if (widgetName == "Menu" && menuHShadows.isEmpty())
+  if (widgetName == "Menu" && menuHShadows_.isEmpty())
   {
-    menuHShadows << shadow[0] << shadow[2];
+    menuHShadows_ << shadow[0] << shadow[2];
   }
 
   return shadow; // [left, top, right, bottom]
@@ -1297,12 +1297,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
       }
       else if (w->layoutDirection() == Qt::RightToLeft
-               && menuHShadows.count() == 2
+               && menuHShadows_.count() == 2
                && qobject_cast<QMenu*>(o) && qobject_cast<QMenu*>(getParent(w,1)))
       {
         // correct the submenu position
-        w->move(w->x() + menuHShadows.at(0)
-                       - (getMenuMargin(true) - menuHShadows.at(1)),
+        w->move(w->x() + menuHShadows_.at(0)
+                       - (getMenuMargin(true) - menuHShadows_.at(1)),
                 w->y());
       }
       else if (qobject_cast<QToolButton*>(o))
@@ -2352,6 +2352,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       const QString group = "Menu";
       frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0;
       const interior_spec ispec = getInteriorSpec(group);
 
       fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
@@ -2488,8 +2489,11 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameGroupBox : {
       const QString group = "GroupBox";
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      if (!tspec_.groupbox_top_label
+          || !widget) // WARNING: QML has anchoring!
+        fspec.expansion = 0;
 
       if (status.startsWith("disabled"))
       {
@@ -2500,7 +2504,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (isInactive)
         suffix = "-normal-inactive";
       renderFrame(painter,option->rect,fspec,fspec.element+suffix);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+      if (tspec_.groupbox_top_label
+          && widget) // QML anchoring
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -2595,7 +2601,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString suffix = "-normal";
       if (isInactive)
         suffix = "-normal-inactive";
-      renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix);
+      if (widget) // WARNING: QML has anchoring!
+        renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix);
       const frame_spec fspecT = getFrameSpec("Tab");
       renderFrame(painter,
                   option->rect,
@@ -2616,12 +2623,19 @@ void Style::drawPrimitive(PrimitiveElement element,
         break;
 
       const QString group = "LineEdit";
-      const interior_spec ispec = getInteriorSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
       label_spec lspec = getLabelSpec(group);
       lspec.top = qMax(0,lspec.top-1);
       lspec.bottom = qMax(0,lspec.bottom-1);
       const size_spec sspec = getSizeSpec(group);
+
+      if (!widget) // WARNING: QML has anchoring!
+      {
+        fspec.expansion = 0;
+        ispec.px = ispec.py = 0;
+      }
+
       if (isLibreoffice_)
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
@@ -3997,6 +4011,11 @@ void Style::drawControl(ControlElement element,
         interior_spec ispec = getInteriorSpec(group);
 
         /* fill the non-empty regions of the menubar */
+        if (!widget) // WARNING: QML has anchoring!
+        {
+          fspec.expansion = 0;
+          ispec.px = ispec.py = 0;
+        }
         renderFrame(painter,r,fspec,fspec.element+"-normal");
         renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
 
@@ -4073,7 +4092,12 @@ void Style::drawControl(ControlElement element,
       }
 
       frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
+      if (!widget) // WARNING: QML has anchoring!
+      {
+        fspec.expansion = 0;
+        ispec.px = ispec.py = 0;
+      }
       if (tspec_.merge_menubar_with_toolbar && group != "Toolbar")
       {
         const frame_spec fspec1 = getFrameSpec("Toolbar");
@@ -5715,8 +5739,13 @@ void Style::drawControl(ControlElement element,
       if (!stylable) break;
 
       const QString group = "Toolbar";
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec = getFrameSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
+      if (!widget) // WARNING: QML has anchoring!
+      {
+        fspec.expansion = 0;
+        ispec.px = ispec.py = 0;
+      }
 
       if (status.startsWith("disabled"))
       {
@@ -6915,6 +6944,11 @@ void Style::drawComplexControl(ComplexControl control,
         lspec.bottom = qMax(0,lspec.bottom-1);
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
+        if (!widget) // WARNING: QML has anchoring!
+        {
+          fspec.expansion = 0;
+          ispec.px = ispec.py = 0;
+        }
         if (opt->editable && cb && cb->lineEdit()) // otherwise the arrow part will be integrated
         {
           if (tspec_.combo_as_lineedit)
@@ -7958,12 +7992,12 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
         so -= getMenuMargin(true);
         if (settings_->getCompositeSpec().composite
-            && menuHShadows.count() == 2
+            && menuHShadows_.count() == 2
             && (!qobject_cast<const QMenu*>(widget)
                 || translucentWidgets_.contains(widget)
                 || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
         {
-          so += (menuHShadows.at(0) + menuHShadows.at(1));
+          so += (menuHShadows_.at(0) + menuHShadows_.at(1));
         }
         return -so;
       }

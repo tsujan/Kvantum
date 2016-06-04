@@ -233,9 +233,8 @@ mirror_doc_tabs                   true/false          By default, bottom and rig
                                                       bottom/right tab shapes will be identical.
                                                       The default value is true.
 
-group_toolbar_buttons             true/false          Raise and group neighbor toolbar
-                                                      buttons? By default, they are
-                                                      not raised.
+group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
+                                                      By default, they are not raised.
 
 center_toolbar_handle             true/false          If true, the SVG element for the
                                                       toolbar handle will be centered
@@ -353,6 +352,9 @@ groupbox_top_label                true/false          Draw the group-box label a
                                                       frame? It is false by default, which
                                                       means that the label is drawn ON the
                                                       top frame.
+                                                      If this key is set to false, group boxes
+                                                      will not have interior and frame
+                                                      expansion.
 
 button_contents_shift             true/false          Shift the contents of push-buttons when
                                                       they are down? It is true by default.

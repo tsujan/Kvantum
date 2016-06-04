@@ -312,7 +312,7 @@ class Style : public QCommonStyle {
 
     /* For not getting the menu horizontal shadows repeatedly.
        They're used to position submenus. */
-    QList<int> menuHShadows;
+    QList<int> menuHShadows_;
 };
 }
 
