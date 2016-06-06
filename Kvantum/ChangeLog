@@ -4,6 +4,7 @@ V0.9.8
  * No interior and frame expansion when the label of a group box is drawn on its top frame.
  * Added support for expanded frame sizes.
  * Remember theme specifications instead of getting theme repeatedly! This can save considerable CPU usage when a GUI is being updated quickly and continuously.
+ * Added another theme to the collection.
 
 V0.9.7
 ---------

@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark theme with a Gnome like look and feel
+comment=A fancier version of KvGnomeDark
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -19,7 +19,7 @@ slider_width=4
 slider_handle_width=24
 slider_handle_length=20
 center_toolbar_handle=true
-check_size=16
+check_size=18
 textless_progressbar=false
 progressbar_thickness=100
 menubar_mouse_tracking=true
@@ -40,6 +40,9 @@ combo_as_lineedit=true
 layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=3
+groupbox_top_label=false
+inline_spin_indicators=true
+button_contents_shift=true
 
 [GeneralColors]
 window.color=#393f3f
@@ -72,10 +75,12 @@ kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
-disabled_icon_opacity=100
+disabled_icon_opacity=50
 normal_default_pushbutton=false
 single_top_toolbar=true
 tint_on_mouseover=0
+lxqtmainmenu_iconsize=22
+transparent_pcmanfm_view=false
 
 [PanelButtonCommand]
 frame=true
@@ -220,12 +225,15 @@ text.bold=true
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=none
-interior=false
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.element=common
+interior=true
+interior.element=tframe
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
+interior.x.patternsize=20
+interior.y.patternsize=15
 
 [TreeExpander]
 inherits=PanelButtonCommand
@@ -416,7 +424,7 @@ size.minheight=22
 size.minwidth=22
 text.normal.color=white
 text.shadow=false
-
+frame.expansion=100
 [GroupBox]
 inherits=GenericFrame
 frame=true
@@ -456,3 +464,9 @@ frame.element=tooltip
 inherits=GenericFrame
 frame=false
 interior=false
+
+[Dialog]
+interior=true
+interior.element=dialog
+interior.x.patternsize=20
+interior.y.patternsize=15

@@ -745,6 +745,7 @@ void KvantumManager::tabChanged (int index)
         if (comment.isEmpty())
           comment = "No description";
         ui->comboBox->setToolTip (comment);
+        ui->comboBox->setWhatsThis (comment);
     }
     else if (index == 2)
     {
@@ -1008,6 +1009,7 @@ void KvantumManager::selectionChanged (const QString &txt)
     if (comment.isEmpty())
       comment = "No description";
     ui->comboBox->setToolTip (comment);
+    ui->comboBox->setWhatsThis (comment);
 }
 /*************************/
 void KvantumManager::updateThemeList()

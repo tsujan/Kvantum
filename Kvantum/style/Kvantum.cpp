@@ -464,19 +464,22 @@ void Style::getMenuHShadows()
     if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
       renderer = themeRndr_;
     else renderer = defaultRndr_;
-    QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
-    divisor = br.width();
-    if (qRound(divisor))
+    if (renderer)
     {
-      if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-        renderer = themeRndr_;
-      else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-        renderer = defaultRndr_;
-      else renderer = 0;
-      if (renderer)
+      QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
+      divisor = br.width();
+      if (qRound(divisor))
       {
-        br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-        menuHShadows_[i] = getMenuMargin(true)*(br.width()/divisor);
+        if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+          renderer = themeRndr_;
+        else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+          renderer = defaultRndr_;
+        else renderer = 0;
+        if (renderer)
+        {
+          br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
+          menuHShadows_[i] = getMenuMargin(true)*(br.width()/divisor);
+        }
       }
     }
   }
@@ -504,19 +507,22 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
     if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
       renderer = themeRndr_;
     else renderer = defaultRndr_;
-    QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
-    divisor = (i%2 ? br.height() : br.width());
-    if (divisor)
+    if (renderer)
     {
-      if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-        renderer = themeRndr_;
-      else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-        renderer = defaultRndr_;
-      else renderer = 0;
-      if (renderer)
+      QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
+      divisor = (i%2 ? br.height() : br.width());
+      if (divisor)
       {
-        br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-        shadow[i] = i%2 ? thicknessV*(br.height()/divisor) : thicknessH*(br.width()/divisor);
+        if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+          renderer = themeRndr_;
+        else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
+          renderer = defaultRndr_;
+        else renderer = 0;
+        if (renderer)
+        {
+          br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
+          shadow[i] = i%2 ? thicknessV*(br.height()/divisor) : thicknessH*(br.width()/divisor);
+        }
       }
     }
   }
@@ -3561,6 +3567,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QString group = "ToolTip";
 
       frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0;
       const interior_spec ispec = getInteriorSpec(group);
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
@@ -10837,15 +10844,11 @@ bool Style::renderElement(QPainter *painter,
 
   if (themeRndr_ && themeRndr_->isValid()
       && (themeRndr_->elementExists(element_)
-          || (element_.contains("-inactive")
-              && themeRndr_->elementExists(element_.remove(QString("-inactive"))))
+          || themeRndr_->elementExists(element_.remove("-inactive"))
           // fall back to the normal state if other states aren't found
-          || (element_.contains("-toggled")
-              && themeRndr_->elementExists(element_.replace("-toggled","-normal")))
-          || (element_.contains("-pressed")
-              && themeRndr_->elementExists(element_.replace("-pressed","-normal")))
-          || (element_.contains("-focused")
-              && themeRndr_->elementExists(element_.replace("-focused","-normal")))))
+          || themeRndr_->elementExists(element_.replace("-toggled","-normal"))
+          || themeRndr_->elementExists(element_.replace("-pressed","-normal"))
+          || themeRndr_->elementExists(element_.replace("-focused","-normal"))))
   {
     renderer = themeRndr_;
   }
@@ -10854,7 +10857,7 @@ bool Style::renderElement(QPainter *painter,
   else if (defaultRndr_ && defaultRndr_->isValid())
   {
     element_ = element;
-    if (defaultRndr_->elementExists(element_.remove(QString("-inactive"))))
+    if (defaultRndr_->elementExists(element_.remove("-inactive")))
       renderer = defaultRndr_;
   }
   if (!renderer) return false;
@@ -10920,48 +10923,45 @@ void Style::renderSliderTick(QPainter *painter,
   if (themeRndr_ && themeRndr_->isValid()
       && (themeRndr_->elementExists(element_)
           || (element_.contains("-inactive")
-              && themeRndr_->elementExists(element_.remove(QString("-inactive"))))))
+              && themeRndr_->elementExists(element_.remove("-inactive")))))
   {
     renderer = themeRndr_;
   }
   else if (defaultRndr_ && defaultRndr_->isValid()
-           && defaultRndr_->elementExists(element_.remove(QString("-inactive"))))
+           && defaultRndr_->elementExists(element_.remove("-inactive")))
   {
     renderer = defaultRndr_;
   }
   else
     return;
 
-  if (renderer)
+  if (interval < 1) return;
+
+  int thickness = 1;
+  int len = pixelMetric(PM_SliderLength);
+  int x = ticksRect.x();
+  int y = ticksRect.y();
+  if (!above)
   {
-    if (interval < 1) return;
-
-    int thickness = 1;
-    int len = pixelMetric(PM_SliderLength);
-    int x = ticksRect.x();
-    int y = ticksRect.y();
-    if (!above)
-    {
-      painter->save();
-      QTransform m;
-      m.translate(2*x+ticksRect.width(), 0);
-      m.scale(-1,1);
-      painter->setTransform(m, true);
-    }
-    int current = min;
-    while (current <= max)
-    {
-      const int position = sliderPositionFromValue(min,max,current,available,inverted) + len/2;
-      renderer->render(painter,element_,QRect(x,
-                                              y+position,
-                                              SLIDER_TICK_SIZE,
-                                              thickness));
-
-      current += interval;
-    }
-    if (!above)
-      painter->restore();
+    painter->save();
+    QTransform m;
+    m.translate(2*x+ticksRect.width(), 0);
+    m.scale(-1,1);
+    painter->setTransform(m, true);
   }
+  int current = min;
+  while (current <= max)
+  {
+    const int position = sliderPositionFromValue(min,max,current,available,inverted) + len/2;
+    renderer->render(painter,element_,QRect(x,
+                                            y+position,
+                                            SLIDER_TICK_SIZE,
+                                            thickness));
+
+    current += interval;
+  }
+  if (!above)
+    painter->restore();
 }
 
 void Style::renderFrame(QPainter *painter,
@@ -11000,14 +11000,11 @@ void Style::renderFrame(QPainter *painter,
   /* still round the corners if the "expand-" element is found */
   if (fspec.expansion > 0 &&
       (e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                && (themeRndr_->elementExists(element0.remove(QString("-inactive")))
+                                && (themeRndr_->elementExists(element0.remove("-inactive"))
                                     // fall back to the normal state
-                                    || (element0.contains("-toggled")
-                                        && themeRndr_->elementExists(element0.replace("-toggled","-normal")))
-                                    || (element0.contains("-pressed")
-                                        && themeRndr_->elementExists(element0.replace("-pressed","-normal")))
-                                    || (element0.contains("-focused")
-                                        && themeRndr_->elementExists(element0.replace("-focused","-normal")))))))
+                                    || themeRndr_->elementExists(element0.replace("-toggled","-normal"))
+                                    || themeRndr_->elementExists(element0.replace("-pressed","-normal"))
+                                    || themeRndr_->elementExists(element0.replace("-focused","-normal"))))))
   {
     drawExpanded = true;
     fspec.left = fspec.leftExpanded;
@@ -11079,13 +11076,10 @@ void Style::renderFrame(QPainter *painter,
     }
     element0 = "border-"+element;
     if (drawBorder && themeRndr_ && themeRndr_->isValid()
-        && (themeRndr_->elementExists(element0.remove(QString("-inactive"))+"-top")
-            || (element0.contains("-toggled")
-                && themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top"))
-            || (element0.contains("-pressed")
-                && themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top"))
-            || (element0.contains("-focused")
-                && themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top"))))
+        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
+            || themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top")
+            || themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top")
+            || themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top")))
     {
       element1 = element0;
       if (element.contains("-inactive"))
@@ -11095,13 +11089,10 @@ void Style::renderFrame(QPainter *painter,
     {
       element0 = "expand-"+element;
       if (themeRndr_ && themeRndr_->isValid()
-          && (themeRndr_->elementExists(element0.remove(QString("-inactive"))+"-top")
-              || (element0.contains("-toggled")
-                  && themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top"))
-              || (element0.contains("-pressed")
-                  && themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top"))
-              || (element0.contains("-focused")
-                  && themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top"))))
+          && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
+              || themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top")
+              || themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top")
+              || themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top")))
       {
         element1 = element0;
         if (element.contains("-inactive"))
@@ -11514,16 +11505,13 @@ void Style::renderInterior(QPainter *painter,
     int e = grouped ? h : qMin(h,w);
     QString element0(element);
     /* the interior used for partial frame expansion has the frame name */
-    element0 = element0.remove(QString("-inactive")).replace(ispec.element, fspec.element);
+    element0 = element0.remove("-inactive").replace(ispec.element, fspec.element);
     element0 = "expand-"+element0;
     if ((e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
                                   && (themeRndr_->elementExists(element0)
-                                      || (element0.contains("-toggled")
-                                          && themeRndr_->elementExists(element0.replace("-toggled","-normal")))
-                                      || (element0.contains("-pressed")
-                                          && themeRndr_->elementExists(element0.replace("-pressed","-normal")))
-                                      || (element0.contains("-focused")
-                                          && themeRndr_->elementExists(element0.replace("-focused","-normal"))))))
+                                      || themeRndr_->elementExists(element0.replace("-toggled","-normal"))
+                                      || themeRndr_->elementExists(element0.replace("-pressed","-normal"))
+                                      || themeRndr_->elementExists(element0.replace("-focused","-normal")))))
         && (!fspec.hasCapsule || fspec.capsuleV == 2)
         /* there's no right/left expanded element */
         && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
