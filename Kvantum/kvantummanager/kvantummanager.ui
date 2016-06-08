@@ -754,10 +754,12 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
                 <widget class="QLineEdit" name="opaqueEdit">
                  <property name="toolTip">
                   <string>A comma-separated list of executables,
-whose windows should not be translucent.</string>
+whose windows should not be translucent.
+
+(Some apps may crash with translucent windows!)</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -765,10 +767,12 @@ whose windows should not be translucent.</string>
                 <widget class="QLabel" name="opaqueLabel">
                  <property name="toolTip">
                   <string>A comma-separated list of executables
-whose windows should not be translucent.</string>
+whose windows should not be translucent.
+
+(Some apps may crash with translucent windows!)</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Opaque apps:</string>

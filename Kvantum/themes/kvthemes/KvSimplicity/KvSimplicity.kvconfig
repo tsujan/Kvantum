@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A light theme with an emphasis on elegant simplicity
+comment=A light theme with an emphasis on elegant simplicity and support for translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -27,7 +27,7 @@ double_click=false
 translucent_windows=false
 blurring=false
 popup_blurring=true
-opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita
 vertical_spin_indicators=false
 fill_rubberband=false
 merge_menubar_with_toolbar=true

@@ -1013,7 +1013,7 @@ void Style::polish(QApplication *app)
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma_ = true;
 
-  if (tspec_.opaque.contains (appName))
+  if (tspec_.opaque.contains(appName, Qt::CaseInsensitive))
     isOpaque_ = true;
 
   /* general colors

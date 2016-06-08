@@ -35,8 +35,8 @@ ForegroundVisited=100,74,155
 [Colors:Selection]
 BackgroundAlternate=130,130,130
 BackgroundNormal=100,100,100
-DecorationFocus=230,230,230
-DecorationHover=230,230,230
+DecorationFocus=210,210,210
+DecorationHover=210,210,210
 ForegroundActive=255,128,224
 ForegroundInactive=255,255,255
 ForegroundLink=0,87,174
@@ -49,8 +49,8 @@ ForegroundVisited=100,74,155
 [Colors:Tooltip]
 BackgroundAlternate=0,0,0
 BackgroundNormal=0,0,0
-DecorationFocus=230,230,230
-DecorationHover=230,230,230
+DecorationFocus=210,210,210
+DecorationHover=210,210,210
 ForegroundActive=255,128,224
 ForegroundInactive=225,225,225
 ForegroundLink=0,87,174
@@ -61,10 +61,10 @@ ForegroundPositive=0,110,40
 ForegroundVisited=100,74,155
 
 [Colors:View]
-BackgroundAlternate=230,230,230
-BackgroundNormal=240,240,240
-DecorationFocus=230,230,230
-DecorationHover=230,230,230
+BackgroundAlternate=240,240,240
+BackgroundNormal=255,255,255
+DecorationFocus=210,210,210
+DecorationHover=210,210,210
 ForegroundActive=255,128,224
 ForegroundInactive=136,135,134
 ForegroundLink=0,87,174
@@ -75,10 +75,10 @@ ForegroundPositive=0,110,40
 ForegroundVisited=100,74,155
 
 [Colors:Window]
-BackgroundAlternate=230,230,230
-BackgroundNormal=230,230,230
-DecorationFocus=230,230,230
-DecorationHover=230,230,230
+BackgroundAlternate=210,210,210
+BackgroundNormal=210,210,210
+DecorationFocus=210,210,210
+DecorationHover=210,210,210
 ForegroundActive=255,128,224
 ForegroundInactive=136,135,134
 ForegroundLink=0,87,174
@@ -89,17 +89,17 @@ ForegroundPositive=0,110,40
 ForegroundVisited=100,74,155
 
 [General]
-ColorScheme=KvGray
-Name=KvGray
+ColorScheme=KvRoughGlass
+Name=KvRoughGlass
 shadeSortColumn=true
 
 [KDE]
 contrast=0
 
 [WM]
-activeBackground=230,230,230
-activeBlend=230,230,230
+activeBackground=210,210,210
+activeBlend=210,210,210
 activeForeground=0,0,0
-inactiveBackground=230,230,230
+inactiveBackground=210,210,210
 inactiveBlend=75,71,67
 inactiveForeground=100,100,100
