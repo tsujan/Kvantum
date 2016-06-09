@@ -28,7 +28,6 @@ double_click=false
 translucent_windows=false
 blurring=false
 popup_blurring=true
-opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita
 vertical_spin_indicators=false
 fill_rubberband=false
 merge_menubar_with_toolbar=true

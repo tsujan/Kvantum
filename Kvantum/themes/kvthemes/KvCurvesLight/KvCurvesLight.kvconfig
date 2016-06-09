@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A light, nont-flat theme with curved lines
+comment=A light, nont-flat theme with curved lines that supports translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -26,7 +26,7 @@ double_click=false
 translucent_windows=false
 blurring=false
 popup_blurring=true
-opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita,dragon
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
