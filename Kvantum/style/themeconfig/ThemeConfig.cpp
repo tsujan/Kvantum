@@ -545,6 +545,9 @@ theme_spec ThemeConfig::getThemeSpec()
   else if (r.slim_toolbars)
     r.toolbar_icon_size = 16;
 
+  v = getValue("General","animate_states");
+  r.animate_states = v.toBool();
+
   return r;
 }
 

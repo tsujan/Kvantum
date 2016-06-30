@@ -79,6 +79,9 @@ typedef struct {
   bool blurring;
   /* blur what is behind menus/tooltips if possible? */
   bool popup_blurring;
+  /* should buttons and comboboxes be animated
+     under the cursor when their state changes? */
+  bool animate_states;
   /* depth of menu shadows */
   int menu_shadow_depth;
   /* overlap between a submenu and its parent */
@@ -344,6 +347,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";
   tspec.blurring = false;
   tspec.popup_blurring = false;
+  tspec.animate_states = false;
   tspec.menu_shadow_depth = 0;
   tspec.submenu_overlap = -1;
   tspec.tooltip_shadow_depth = 0;

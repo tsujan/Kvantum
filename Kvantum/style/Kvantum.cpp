@@ -51,6 +51,7 @@
 #include <QGraphicsView>
 #include <QDialog>
 #include <QStatusBar>
+//#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
 #if QT_VERSION >= 0x050000
@@ -75,7 +76,11 @@ namespace Kvantum
 {
 Style::Style() : QCommonStyle()
 {
-  progresstimer_ = new QTimer(this);
+  progressTimer_ = new QTimer(this);
+  opacityTimer_ = new QTimer(this);
+  animationOpacity_ = 100;
+  animationStartState_ = "normal";
+  animatedWidget_ = NULL;
 
   settings_ = defaultSettings_ = themeSettings_ = NULL;
   defaultRndr_ = themeRndr_ = NULL;
@@ -157,8 +162,10 @@ Style::Style() : QCommonStyle()
     pixelRatio_ = dpr;
 #endif
 
-  connect(progresstimer_, SIGNAL(timeout()),
-          this, SLOT(advanceProgresses()));
+  connect(progressTimer_, SIGNAL(timeout()),
+          this, SLOT(advanceProgressbar()));
+  connect(opacityTimer_, SIGNAL(timeout()),
+          this, SLOT(setAnimationOpacity()));
 
   itsShortcutHandler_ = NULL;
   itsWindowManager_ = NULL;
@@ -423,17 +430,29 @@ void Style::setupThemeDeps()
     settings_ = defaultSettings_;
 }
 
-void Style::advanceProgresses()
+void Style::advanceProgressbar()
 {
   QMap<QWidget *,int>::iterator it;
   for (it = progressbars_.begin(); it != progressbars_.end(); ++it)
   {
     QWidget *widget = it.key();
-    if (widget->isVisible())
+    if (widget && widget->isVisible())
     {
       it.value() += 2;
       widget->update();
     }
+  }
+}
+
+void Style::setAnimationOpacity()
+{ //qDebug() << animationOpacity_;
+  if (animationOpacity_ >= 100 || !animatedWidget_)
+    opacityTimer_->stop();
+  else
+  {
+    if (animationOpacity_ <= 75)
+      animationOpacity_ += 25;
+    animatedWidget_->update();
   }
 }
 
@@ -822,6 +841,10 @@ void Style::polish(QWidget *widget)
   if (qobject_cast<QMdiArea*>(widget))
     widget->setAutoFillBackground(true);
   else if (qobject_cast<QProgressBar*>(widget)
+           || (tspec_.animate_states &&
+               (qobject_cast<QPushButton*>(widget)
+                || qobject_cast<QToolButton*>(widget)
+                || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit())))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter() */
            || widget->inherits("KisAbstractSliderSpinBox")
@@ -911,7 +934,8 @@ void Style::polish(QWidget *widget)
     }
   }
   // update grouped toolbar buttons when one of them is shown/hidden
-  else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
+  else if (!tspec_.animate_states // otherwise it already has event filter installed on it
+           && tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
   {
     if (QToolBar *toolBar = qobject_cast<QToolBar*>(widget->parentWidget()))
     {
@@ -1158,7 +1182,10 @@ void Style::unpolish(QWidget *widget)
         || widget->inherits("KMultiTabBarTab")
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
-        || qobject_cast<QToolButton*>(widget))
+        || qobject_cast<QToolButton*>(widget)
+        || (tspec_.animate_states &&
+            (qobject_cast<QPushButton*>(widget)
+             || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit()))))
     {
       widget->removeEventFilter(this);
     }
@@ -1243,15 +1270,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (!progressbars_.contains(w))
           {
             progressbars_.insert(w, 0);
-            if (!progresstimer_->isActive())
-              progresstimer_->start(50);
+            if (!progressTimer_->isActive())
+              progressTimer_->start(50);
           }
         }
         else if (!progressbars_.isEmpty())
         {
           progressbars_.remove(w);
           if (progressbars_.size() == 0)
-            progresstimer_->stop();
+            progressTimer_->stop();
         }
         isKisSlider_ = false;
       }
@@ -1290,6 +1317,117 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
+  case QEvent::HoverEnter:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
+      {
+        QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
+        if (!ab->isDown() && !ab->isChecked())
+        {
+          animationStartState_ = "normal";
+          if (w->isActiveWindow())
+            animationStartState_.append(QString("-inactive"));
+          animatedWidget_ = w;
+          animationOpacity_ = 0;
+          opacityTimer_->start(50);
+        }
+        else if (ab->isChecked())
+        {
+          animationStartState_ = "toggled";
+          if (w->isActiveWindow())
+            animationStartState_.append(QString("-inactive"));
+        }
+      }
+      else if (qobject_cast<QComboBox *>(o))
+      {
+        if (!w->hasFocus())
+          animationStartState_ = "normal";
+        else if (!animationStartState_.startsWith("pressed"))
+          animationStartState_ = "pressed";
+        else // the popup is closed (with Qt5)
+          animationStartState_ = "toggled";
+        if (w->isActiveWindow())
+          animationStartState_.append(QString("-inactive"));
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
+    }
+    break;
+
+#if QT_VERSION < 0x050000
+  case QEvent::FocusIn:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      if (qobject_cast<QComboBox *>(o) && w->hasFocus())
+      { // the popup is closed with Qt4
+        if (!animationStartState_.startsWith("focused") && !animationStartState_.endsWith("-inactive"))
+          animationStartState_ = "toggled";
+        if (w->isActiveWindow())
+          animationStartState_.append(QString("-inactive"));
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
+    }
+    break;
+#endif
+
+  // we use HoverLeave and not Leave because of popup menus of comboxes
+  case QEvent::HoverLeave:
+    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
+    {
+      opacityTimer_->stop();
+      animatedWidget_ = NULL;
+      animationOpacity_ = 100;
+      w->update();
+    }
+    break;
+
+  case QEvent::MouseButtonRelease:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
+      {
+        QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
+        if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
+        {
+          if (!ab->isCheckable() && ab->isDown())
+            animationStartState_ = "pressed";
+          else
+            animationStartState_ = "toggled";
+        }
+        else
+          animationStartState_ = "pressed";
+        if (w->isActiveWindow())
+          animationStartState_.append(QString("-inactive"));
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
+      else if (qobject_cast<QComboBox *>(o))
+      {
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
+    }
+    break;
+
+  case QEvent::MouseButtonPress:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o)
+          || qobject_cast<QComboBox *>(o))
+      {
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
+    }
+    break;
+
   case QEvent::Show:
     if (w)
     {
@@ -1299,8 +1437,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           if (!progressbars_.contains(w))
             progressbars_.insert(w, 0);
-          if (!progresstimer_->isActive())
-            progresstimer_->start(50);
+          if (!progressTimer_->isActive())
+            progressTimer_->start(50);
         }
       }
       else if (w->layoutDirection() == Qt::RightToLeft
@@ -1343,20 +1481,26 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::Hide:
-    if (qobject_cast<QToolButton*>(o))
+    if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
     {
       if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
         toolBar->update();
-      break;
+      //break; // toolbuttons may be animated (see below)
     }
-  case QEvent::Destroy:
-    if (w && !progressbars_.isEmpty())
+  case QEvent::Destroy: // FIXME: Is this really needed?
+    if (w)
     {
-      if (qobject_cast<QProgressBar *>(o))
+      if (!progressbars_.isEmpty() && qobject_cast<QProgressBar *>(o))
       {
         progressbars_.remove(w);
         if (progressbars_.size() == 0)
-          progresstimer_->stop();
+          progressTimer_->stop();
+      }
+      else if (animatedWidget_ == w)
+      {
+        opacityTimer_->stop();
+        animatedWidget_ = NULL;
+        animationOpacity_ = 100;
       }
     }
     break;
@@ -2094,8 +2238,25 @@ void Style::drawPrimitive(PrimitiveElement element,
 
         if (!tb->autoRaise() || (!pbStatus.startsWith("normal") && !pbStatus.startsWith("disabled")) || drawRaised)
         {
+          if (widget->isEnabled() && animatedWidget_ == widget)
+          {
+            if (animationOpacity_ < 100
+                && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+            {
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_,0,0,0,0,0,drawRaised);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_,drawRaised);
+            }
+            painter->save();
+            painter->setOpacity((qreal)animationOpacity_/100);
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+pbStatus,0,0,0,0,0,drawRaised);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
+          if (widget->isEnabled() && animatedWidget_ == widget)
+          {
+            painter->restore();
+            if (animationOpacity_ >= 100)
+              animationStartState_ = pbStatus;
+          }
           hasPanel = true;
         }
 
@@ -3191,8 +3352,25 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           if (!tb->autoRaise() || !status.startsWith("normal") || drawRaised)
           {
+            if (widget->isEnabled() && animatedWidget_ == widget)
+            {
+              if (animationOpacity_ < 100
+                  && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+              {
+                renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+              }
+              painter->save();
+              painter->setOpacity((qreal)animationOpacity_/100);
+            }
             renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
             renderFrame(painter,r,fspec,fspec.element+"-"+status);
+            if (widget->isEnabled() && animatedWidget_ == widget)
+            {
+              painter->restore();
+              if (animationOpacity_ >= 100)
+                animationStartState_ = status;
+            }
           }
           if (!(option->state & State_Enabled))
           {
@@ -6056,8 +6234,24 @@ void Style::drawControl(ControlElement element,
               painter->save();
               painter->setOpacity(0.5);
             }
+            if (widget && widget->isEnabled() && animatedWidget_ == widget)
+            {
+              if (animationOpacity_ < 100)
+              {
+                renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
+                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
+              }
+              painter->save();
+              painter->setOpacity((qreal)animationOpacity_/100);
+            }
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            if (widget && widget->isEnabled() && animatedWidget_ == widget)
+            {
+              painter->restore();
+              if (animationOpacity_ >= 100)
+                animationStartState_ = status;
+            }
             if (libreoffice) painter->restore();
           }
           if (!(option->state & State_Enabled))
@@ -7069,8 +7263,24 @@ void Style::drawComplexControl(ComplexControl control,
               painter->setOpacity(0.5);
             }
           }
+          if (cb && cb->isEnabled() && !(opt->editable && cb->lineEdit()) && animatedWidget_ == widget)
+          {
+            if (animationOpacity_ < 100)
+            {
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+            }
+            painter->save();
+            painter->setOpacity((qreal)animationOpacity_/100);
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (cb && cb->isEnabled() && !(opt->editable && cb->lineEdit()) && animatedWidget_ == widget)
+          {
+            painter->restore();
+            if (animationOpacity_ >= 100)
+              animationStartState_ = status;
+          }
           /* in case we don't like transparent lineedits (in Cantata) */
           /*if (cb && cb->lineEdit()
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0)
@@ -8469,7 +8679,7 @@ int Style::styleHint(StyleHint hint,
 
     case SH_UnderlineShortcut:
       return (widget && itsShortcutHandler_) ? itsShortcutHandler_->showShortcut(widget)
-                                             : false; // underline for QML widgets
+                                             : false; // no underline by default or for QML widgets
 
     case SH_TitleBar_NoBorder: return true;
     case SH_TitleBar_AutoRaise: return true;
@@ -10833,10 +11043,7 @@ bool Style::renderElement(QPainter *painter,
                           bool usePixmap // first make a QPixmap for drawing
                          ) const
 {
-  if (element.isEmpty())
-    return false;
-
-  if (!bounds.isValid())
+  if (element.isEmpty() || !bounds.isValid() || painter->opacity() == 0)
     return false;
 
   QSvgRenderer *renderer = 0;
@@ -10978,7 +11185,7 @@ void Style::renderFrame(QPainter *painter,
                         bool drawBorder // draw a border with maximum rounding if possible
                        ) const
 {
-  if (!bounds.isValid() || !fspec.hasFrame)
+  if (!bounds.isValid() || !fspec.hasFrame || painter->opacity() == 0)
     return;
 
   int x0,y0,x1,y1,w,h;
@@ -11494,7 +11701,7 @@ void Style::renderInterior(QPainter *painter,
                            bool usePixmap // first make a QPixmap for drawing
                           ) const
 {
-  if (!bounds.isValid() || !ispec.hasInterior)
+  if (!bounds.isValid() || !ispec.hasInterior || painter->opacity() == 0)
     return;
 
   int w = bounds.width(); int h = bounds.height();

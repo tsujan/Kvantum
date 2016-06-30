@@ -258,7 +258,8 @@ class Style : public QCommonStyle {
 
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
-    void advanceProgresses();
+    void advanceProgressbar();
+    void setAnimationOpacity();
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
     /* Removes a button from all special lists. */
@@ -270,7 +271,10 @@ class Style : public QCommonStyle {
 
     QString xdg_config_home;
 
-    QTimer *progresstimer_;
+    QTimer *progressTimer_, *opacityTimer_;
+    int animationOpacity_;
+    mutable QString animationStartState_;
+    QPointer<QWidget> animatedWidget_;
 
     /* List of busy progress bars. */
     QMap<QWidget*,int> progressbars_;
