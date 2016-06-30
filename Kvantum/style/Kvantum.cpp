@@ -844,6 +844,7 @@ void Style::polish(QWidget *widget)
            || (tspec_.animate_states &&
                (qobject_cast<QPushButton*>(widget)
                 || qobject_cast<QToolButton*>(widget)
+                || qobject_cast<QSlider*>(widget)
                 || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit())))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter() */
@@ -879,7 +880,14 @@ void Style::polish(QWidget *widget)
   /* without this, transparent backgrounds
      couldn't be used for scrollbar grooves */
   else if (qobject_cast<QScrollBar*>(widget))
+  {
     widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    if (tspec_.animate_states)
+    {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+    }
+  }
   /* remove ugly flat backgrounds when the window backround is styled */
   else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
   {
@@ -1185,6 +1193,8 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QToolButton*>(widget)
         || (tspec_.animate_states &&
             (qobject_cast<QPushButton*>(widget)
+             || qobject_cast<QScrollBar*>(widget)
+             || qobject_cast<QSlider*>(widget)
              || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit()))))
     {
       widget->removeEventFilter(this);
@@ -1353,6 +1363,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
         opacityTimer_->start(50);
       }
+      else if (qobject_cast<QScrollBar *>(o) || qobject_cast<QSlider *>(o))
+      {
+        animationStartState_ = "normal";
+        if (!w->isActiveWindow())
+          animationStartState_.append(QString("-inactive"));
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
     }
     break;
 
@@ -1409,7 +1428,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
         opacityTimer_->start(50);
       }
-      else if (qobject_cast<QComboBox *>(o))
+      else if (qobject_cast<QComboBox *>(o)
+               || qobject_cast<QScrollBar *>(o) || qobject_cast<QSlider *>(o))
       {
         animatedWidget_ = w;
         animationOpacity_ = 0;
@@ -1423,15 +1443,16 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(e);
     if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
       break;
-    if (w && w->isEnabled() && tspec_.animate_states)
+    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
     {
-      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o)
-          || qobject_cast<QComboBox *>(o))
+      if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
       {
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        if (ab->isCheckable() && ab->isChecked()) // from toggled to toggled
+          break;
       }
+      animatedWidget_ = w;
+      animationOpacity_ = 0;
+      opacityTimer_->start(50);
     }
     break;
   }
@@ -5629,7 +5650,8 @@ void Style::drawControl(ControlElement element,
 
     case CE_ScrollBarSlider : {
       QString sStatus = status; // slider state
-      if (!status.startsWith("disabled"))
+      if (!tspec_.animate_states // when animated, focus it when the cursor enters the groove
+          && !status.startsWith("disabled"))
       {
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider *>(option);
         if (opt && opt->activeSubControls != QStyle::SC_ScrollBarSlider)
@@ -5660,8 +5682,24 @@ void Style::drawControl(ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
+      if (widget && widget->isEnabled() && animatedWidget_ == widget)
+      {
+        if (animationOpacity_ < 100)
+        {
+          renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+        }
+        painter->save();
+        painter->setOpacity((qreal)animationOpacity_/100);
+      }
       renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
+      if (widget && widget->isEnabled() && animatedWidget_ == widget)
+      {
+        painter->restore();
+        if (animationOpacity_ >= 100)
+          animationStartState_ = sStatus;
+      }
       renderElement(painter,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
@@ -7795,8 +7833,24 @@ void Style::drawComplexControl(ComplexControl control,
             }
           }
 
+          if (widget && widget->isEnabled() && animatedWidget_ == widget)
+          {
+            if (animationOpacity_ < 100)
+            {
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+            }
+            painter->save();
+            painter->setOpacity((qreal)animationOpacity_/100);
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (widget && widget->isEnabled() && animatedWidget_ == widget)
+          {
+            painter->restore();
+            if (animationOpacity_ >= 100)
+              animationStartState_ = status;
+          }
 
           // a decorative indicator if its element exists
           const indicator_spec dspec = getIndicatorSpec(group);
