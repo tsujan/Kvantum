@@ -1385,7 +1385,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
-  case QEvent::MouseButtonRelease:
+  case QEvent::MouseButtonRelease: {
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(e);
+    if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
+      break;
     if (w && w->isEnabled() && tspec_.animate_states)
     {
       if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
@@ -1414,8 +1417,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
     }
     break;
+  }
 
-  case QEvent::MouseButtonPress:
+  case QEvent::MouseButtonPress: {
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(e);
+    if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
+      break;
     if (w && w->isEnabled() && tspec_.animate_states)
     {
       if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o)
@@ -1427,6 +1434,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
     }
     break;
+  }
 
   case QEvent::Show:
     if (w)
