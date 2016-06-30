@@ -1326,7 +1326,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!ab->isDown() && !ab->isChecked())
         {
           animationStartState_ = "normal";
-          if (w->isActiveWindow())
+          if (!w->isActiveWindow())
             animationStartState_.append(QString("-inactive"));
           animatedWidget_ = w;
           animationOpacity_ = 0;
@@ -1335,7 +1335,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         else if (ab->isChecked())
         {
           animationStartState_ = "toggled";
-          if (w->isActiveWindow())
+          if (!w->isActiveWindow())
             animationStartState_.append(QString("-inactive"));
         }
       }
@@ -1347,7 +1347,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_ = "pressed";
         else // the popup is closed (with Qt5)
           animationStartState_ = "toggled";
-        if (w->isActiveWindow())
+        if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
@@ -1364,7 +1364,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       { // the popup is closed with Qt4
         if (!animationStartState_.startsWith("focused") && !animationStartState_.endsWith("-inactive"))
           animationStartState_ = "toggled";
-        if (w->isActiveWindow())
+        if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
@@ -1403,7 +1403,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         else
           animationStartState_ = "pressed";
-        if (w->isActiveWindow())
+        if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
