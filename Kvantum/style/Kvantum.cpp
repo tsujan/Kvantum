@@ -845,6 +845,7 @@ void Style::polish(QWidget *widget)
                (qobject_cast<QPushButton*>(widget)
                 || qobject_cast<QToolButton*>(widget)
                 || qobject_cast<QSlider*>(widget)
+                || widget->inherits("QComboBoxPrivateContainer")
                 || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit())))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter() */
@@ -1195,6 +1196,7 @@ void Style::unpolish(QWidget *widget)
             (qobject_cast<QPushButton*>(widget)
              || qobject_cast<QScrollBar*>(widget)
              || qobject_cast<QSlider*>(widget)
+             || widget->inherits("QComboBoxPrivateContainer")
              || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit()))))
     {
       widget->removeEventFilter(this);
@@ -1330,6 +1332,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::HoverEnter:
     if (w && w->isEnabled() && tspec_.animate_states)
     {
+      /* if another animation is in progress, end it */
+      if (animatedWidget_ && animatedWidget_ != w
+          && !w->inherits("QComboBoxPrivateContainer")) // Qt4
+      {
+        opacityTimer_->stop();
+        animationOpacity_ = 100;
+        animatedWidget_->update();
+        animatedWidget_ = NULL;
+      }
       if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
       {
         QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
@@ -1353,10 +1364,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (!w->hasFocus())
           animationStartState_ = "normal";
-        else if (!animationStartState_.startsWith("pressed"))
+        else if (!animationStartState_.startsWith("toggled")) // the popup may have been closed (with Qt5)
           animationStartState_ = "pressed";
-        else // the popup is closed (with Qt5)
-          animationStartState_ = "toggled";
         if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
@@ -1379,13 +1388,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::FocusIn:
     if (w && w->isEnabled() && tspec_.animate_states)
     {
-      if (qobject_cast<QComboBox *>(o) && w->hasFocus())
-      { // the popup is closed with Qt4
-        if (!animationStartState_.startsWith("focused") && !animationStartState_.endsWith("-inactive"))
-          animationStartState_ = "toggled";
+      if (qobject_cast<QComboBox *>(o) && w->hasFocus()
+          && animatedWidget_ == w) // immediately after popup is closed
+      {
         if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
-        animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(50);
       }
@@ -1393,14 +1400,23 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 #endif
 
-  // we use HoverLeave and not Leave because of popup menus of comboxes
+  // we use HoverLeave and not Leave because of popups of comboxes
   case QEvent::HoverLeave:
     if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
     {
-      opacityTimer_->stop();
-      animatedWidget_ = NULL;
-      animationOpacity_ = 100;
-      w->update();
+      if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
+      {
+        if (ab->isCheckable() && ab->isChecked())
+        {
+          break;
+        }
+      }
+      if (!opacityTimer_->isActive())
+      {
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(50);
+      }
     }
     break;
 
@@ -1428,7 +1444,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
         opacityTimer_->start(50);
       }
-      else if (qobject_cast<QComboBox *>(o)
+      else if (qobject_cast<QComboBox *>(o) // impossible because of popup
                || qobject_cast<QScrollBar *>(o) || qobject_cast<QSlider *>(o))
       {
         animatedWidget_ = w;
@@ -1516,6 +1532,29 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         toolBar->update();
       //break; // toolbuttons may be animated (see below)
     }
+#if QT_VERSION >= 0x050000
+    else if (w && w->isEnabled() && tspec_.animate_states
+             && w->inherits("QComboBoxPrivateContainer"))
+    {
+      if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(w, 1)))
+      {
+        if (!cb->lineEdit())
+        {
+          /* The opacity of the last animation frame is 100, which will result in
+             a pressed state after the popup is closed if we don't set it to 0 here. */
+          animationOpacity_ = 0;
+          // but animate states when popup is closed by clicking outside combocox
+          if (!cb->rect().contains(cb->mapFromGlobal(QCursor::pos())))
+          {
+            animatedWidget_ = getParent(w, 1); // needed if cursor has been on popup
+            animationStartState_ = "toggled"; // needed if cursor has been on popup
+            opacityTimer_->start(50);
+          }
+          break;
+        }
+      }
+    }
+#endif
   case QEvent::Destroy: // FIXME: Is this really needed?
     if (w)
     {
@@ -2287,6 +2326,22 @@ void Style::drawPrimitive(PrimitiveElement element,
               animationStartState_ = pbStatus;
           }
           hasPanel = true;
+        }
+        // fade out animation
+        else if (widget->isEnabled() && animatedWidget_ == widget
+                 && tb->autoRaise() && pbStatus.startsWith("normal") && !drawRaised)
+        {
+          if (animationOpacity_ < 100
+              && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+          {
+            painter->save();
+            painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+            painter->restore();
+          }
+          if (animationOpacity_ >= 100)
+            animationStartState_ = pbStatus;
         }
 
         /*if (!isHorizontal && !withArrow)
@@ -3400,6 +3455,21 @@ void Style::drawPrimitive(PrimitiveElement element,
               if (animationOpacity_ >= 100)
                 animationStartState_ = status;
             }
+          }
+          // fade out animation
+          else if (widget->isEnabled() && animatedWidget_ == widget)
+          {
+            if (animationOpacity_ < 100
+                && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+            {
+              painter->save();
+              painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+              painter->restore();
+            }
+            if (animationOpacity_ >= 100)
+              animationStartState_ = status;
           }
           if (!(option->state & State_Enabled))
           {

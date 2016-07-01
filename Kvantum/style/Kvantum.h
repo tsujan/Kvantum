@@ -273,25 +273,27 @@ class Style : public QCommonStyle {
 
     QTimer *progressTimer_, *opacityTimer_;
     int animationOpacity_;
+    /* The start state for state change animation */
     mutable QString animationStartState_;
+    /* The widget whose state change is animated under the cursor */
     QPointer<QWidget> animatedWidget_;
 
-    /* List of busy progress bars. */
+    /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;
-    /* List of windows, tooltips and menus that are made translucent. */
+    /* List of windows, tooltips and menus that are made translucent */
     QSet<const QWidget*> translucentWidgets_;
 
     ShortcutHandler *itsShortcutHandler_;
     WindowManager *itsWindowManager_;
     BlurHelper *blurHelper_;
 
-    /* The general specification of the theme. */
+    /* The general specification of the theme */
     theme_spec tspec_;
-    /* The hacking specification of the theme. */
+    /* The hacking specification of the theme */
     hacks_spec hspec_;
-    /* The color specification of the theme. */
+    /* The color specification of the theme */
     color_spec cspec_;
-    /* All general info about tabs. */
+    /* All general info about tabs */
     bool joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
 
     /* LibreOffice and Plasma need workarounds. */
@@ -310,14 +312,14 @@ class Style : public QCommonStyle {
     bool isKonsole_;
     bool isYakuake_;
 
-    /* For identifying KisSliderSpinBox. */
+    /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
 
-    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps. */
+    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
     int pixelRatio_;
 
     /* For not getting the menu horizontal shadows repeatedly.
-       They're used to position submenus. */
+       They're used to position submenus */
     QList<int> menuHShadows_;
 };
 }
