@@ -32,6 +32,7 @@ translucent_windows=false
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
+animate_states=true
 
 [GeneralColors]
 window.color=#3D3D3E

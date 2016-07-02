@@ -42,6 +42,7 @@ submenu_overlap=3
 groupbox_top_label=false
 inline_spin_indicators=true
 button_contents_shift=true
+animate_states=true
 
 [GeneralColors]
 window.color=#393f3f

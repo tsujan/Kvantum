@@ -39,6 +39,7 @@ combo_as_lineedit=true
 layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=2
+animate_states=true
 
 [GeneralColors]
 window.color=#e9e9e9

@@ -51,6 +51,8 @@
 #include <QGraphicsView>
 #include <QDialog>
 #include <QStatusBar>
+#include <QCheckBox>
+#include <QRadioButton>
 //#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
@@ -71,6 +73,8 @@
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
 #define MIN_CONTRAST 65
+#define ANIMATION_FRAME 40 // in ms
+#define OPACITY_STEP 20 // percent
 
 namespace Kvantum
 {
@@ -450,8 +454,10 @@ void Style::setAnimationOpacity()
     opacityTimer_->stop();
   else
   {
-    if (animationOpacity_ <= 75)
-      animationOpacity_ += 25;
+    if (animationOpacity_ <= 100 - OPACITY_STEP)
+      animationOpacity_ += OPACITY_STEP;
+    else
+      animationOpacity_ = 100;
     animatedWidget_->update();
   }
 }
@@ -844,8 +850,11 @@ void Style::polish(QWidget *widget)
            || (tspec_.animate_states &&
                (qobject_cast<QPushButton*>(widget)
                 || qobject_cast<QToolButton*>(widget)
+                || qobject_cast<QCheckBox*>(widget)
+                || qobject_cast<QRadioButton*>(widget)
                 || qobject_cast<QSlider*>(widget)
                 || widget->inherits("QComboBoxPrivateContainer")
+                || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
                 || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit())))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter() */
@@ -1194,9 +1203,12 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QToolButton*>(widget)
         || (tspec_.animate_states &&
             (qobject_cast<QPushButton*>(widget)
+             || qobject_cast<QCheckBox*>(widget)
+             || qobject_cast<QRadioButton*>(widget)
              || qobject_cast<QScrollBar*>(widget)
              || qobject_cast<QSlider*>(widget)
              || widget->inherits("QComboBoxPrivateContainer")
+             || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
              || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit()))))
     {
       widget->removeEventFilter(this);
@@ -1330,7 +1342,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::HoverEnter:
-    if (w && w->isEnabled() && tspec_.animate_states)
+    if (w && w->isEnabled() && tspec_.animate_states
+        && !qobject_cast<QAbstractSpinBox *>(o) && !qobject_cast<QProgressBar *>(o))
     {
       /* if another animation is in progress, end it */
       if (animatedWidget_ && animatedWidget_ != w
@@ -1351,13 +1364,44 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             animationStartState_.append(QString("-inactive"));
           animatedWidget_ = w;
           animationOpacity_ = 0;
-          opacityTimer_->start(50);
+          opacityTimer_->start(ANIMATION_FRAME);
         }
         else if (ab->isChecked())
         {
           animationStartState_ = "toggled";
           if (!w->isActiveWindow())
             animationStartState_.append(QString("-inactive"));
+        }
+      }
+      else if (qobject_cast<QCheckBox *>(o) || qobject_cast<QRadioButton *>(o))
+      {
+        QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
+        if (!ab->isChecked())
+          animationStartState_ = "-normal";
+        else
+        {
+          if (QCheckBox *cb = qobject_cast<QCheckBox *>(o))
+          {
+            if (cb->checkState() == Qt::PartiallyChecked)
+              animationStartState_ = "-tristate-normal";
+            else
+              animationStartState_ = "-checked-normal";
+          }
+          else
+           animationStartState_ = "-checked-normal";
+        }
+        if (!w->isActiveWindow())
+          animationStartState_.append(QString("-inactive"));
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(ANIMATION_FRAME);
+      }
+      else if (qobject_cast<QGroupBox *>(o))
+      { // no animation; just for getting the next start state
+        if (animatedWidget_ != w)
+        {
+          animatedWidget_ = w;
+          animationOpacity_ = 100;
         }
       }
       else if (qobject_cast<QComboBox *>(o))
@@ -1370,7 +1414,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
       }
       else if (qobject_cast<QScrollBar *>(o) || qobject_cast<QSlider *>(o))
       {
@@ -1379,7 +1423,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1394,7 +1438,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!w->isActiveWindow())
           animationStartState_.append(QString("-inactive"));
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1404,18 +1448,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::HoverLeave:
     if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
     {
-      if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
+      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
       {
+        QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
         if (ab->isCheckable() && ab->isChecked())
-        {
           break;
-        }
       }
-      if (!opacityTimer_->isActive())
+      if (!opacityTimer_->isActive() && !qobject_cast<QGroupBox *>(o))
       {
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1426,30 +1469,38 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       break;
     if (w && w->isEnabled() && tspec_.animate_states)
     {
-      if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton *>(o);
-        if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
+      if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
+      { // includes checkboxes and radio buttons too
+        if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
         {
-          if (!ab->isCheckable() && ab->isDown())
+          if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
+          {
+              if (!ab->isCheckable() && ab->isDown())
             animationStartState_ = "pressed";
+            else
+              animationStartState_ = "toggled";
+          }
           else
-            animationStartState_ = "toggled";
+            animationStartState_ = "pressed";
+          if (!w->isActiveWindow())
+            animationStartState_.append(QString("-inactive"));
         }
-        else
-          animationStartState_ = "pressed";
-        if (!w->isActiveWindow())
-          animationStartState_.append(QString("-inactive"));
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
+      } // FIXME: Also take "autoExclusive" into account?
+      else if (qobject_cast<QGroupBox *>(o))
+      {
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(ANIMATION_FRAME);
       }
       else if (qobject_cast<QComboBox *>(o) // impossible because of popup
                || qobject_cast<QScrollBar *>(o) || qobject_cast<QSlider *>(o))
       {
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(50);
+        opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1463,12 +1514,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
       {
-        if (ab->isCheckable() && ab->isChecked()) // from toggled to toggled
+        if (qobject_cast<QCheckBox *>(o) || qobject_cast<QRadioButton *>(o)
+            || (ab->isCheckable() && ab->isChecked())) // from toggled to toggled
+        {
           break;
+        }
       }
+      else if (qobject_cast<QGroupBox *>(o))
+        break;
       animatedWidget_ = w;
       animationOpacity_ = 0;
-      opacityTimer_->start(50);
+      opacityTimer_->start(ANIMATION_FRAME);
     }
     break;
   }
@@ -1548,7 +1604,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           {
             animatedWidget_ = getParent(w, 1); // needed if cursor has been on popup
             animationStartState_ = "toggled"; // needed if cursor has been on popup
-            opacityTimer_->start(50);
+            opacityTimer_->start(ANIMATION_FRAME);
           }
           break;
         }
@@ -2430,7 +2486,20 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+        if (widget && animatedWidget_ == widget && prefix.isEmpty())
+        {
+          if (animationOpacity_ < 100)
+            renderElement(painter, ispec.element+animationStartState_, option->rect);
+          painter->save();
+          painter->setOpacity((qreal)animationOpacity_/100);
+        }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
+        if (widget && animatedWidget_ == widget && prefix.isEmpty())
+        {
+          painter->restore();
+          if (animationOpacity_ >= 100)
+            animationStartState_ = suffix;
+        }
       }
       else
       {
@@ -2491,7 +2560,23 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem *>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+        /* stop animation if the mouse button is released outside the checkbox of a groupbox */
+        if (widget && animatedWidget_ == widget && animationStartState_ == suffix)
+          animationOpacity_ = 100;
+        if (widget && animatedWidget_ == widget && prefix.isEmpty() && animationStartState_ != suffix)
+        {
+          if (animationOpacity_ < 100)
+            renderElement(painter, ispec.element+animationStartState_, option->rect);
+          painter->save();
+          painter->setOpacity((qreal)animationOpacity_/100);
+        }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
+        if (widget && animatedWidget_ == widget && prefix.isEmpty() && animationStartState_ != suffix)
+        {
+          painter->restore();
+          if (animationOpacity_ >= 100)
+            animationStartState_ = suffix;
+        }
       }
       else
       {

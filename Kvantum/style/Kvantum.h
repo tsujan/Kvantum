@@ -272,7 +272,7 @@ class Style : public QCommonStyle {
     QString xdg_config_home;
 
     QTimer *progressTimer_, *opacityTimer_;
-    int animationOpacity_;
+    mutable int animationOpacity_; // Mutibility is used only with groupboxes.
     /* The start state for state change animation */
     mutable QString animationStartState_;
     /* The widget whose state change is animated under the cursor */
