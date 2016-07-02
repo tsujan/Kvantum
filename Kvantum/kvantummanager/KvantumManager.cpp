@@ -568,6 +568,7 @@ void KvantumManager::defaultThemeButtons()
     defaultSettings.beginGroup ("General");
     bool composited = defaultSettings.value ("composite").toBool();
     ui->checkBoxNoComposite->setChecked (!composited);
+    ui->checkBoxAnimation->setChecked (defaultSettings.value ("animate_states").toBool());
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
@@ -806,6 +807,8 @@ void KvantumManager::tabChanged (int index)
                     composited = false;
                 ui->checkBoxNoComposite->setChecked (!composited);
                 notCompisited (!composited);
+                if (themeSettings.contains ("animate_states"))
+                    ui->checkBoxAnimation->setChecked (themeSettings.value ("animate_states").toBool());
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
                 if (themeSettings.contains ("joined_inactive_tabs"))
@@ -1331,6 +1334,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
+        generalKeys.insert("animate_states", boolToStr (ui->checkBoxAnimation->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
         generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
@@ -1409,6 +1413,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("x11drag").toBool() != ui->checkBoxX11->isChecked()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
+            || themeSettings.value ("animate_states").toBool() != ui->checkBoxAnimation->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
@@ -1433,6 +1438,7 @@ void KvantumManager::writeConfig()
         }
 #else
         themeSettings.setValue ("composite", !ui->checkBoxNoComposite->isChecked());
+        themeSettings.setValue ("animate_states", ui->checkBoxAnimation->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
         themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
@@ -1686,7 +1692,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.9.8</big></b></center><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.10.0</big></b></center><br>"\
                             "<center>A %1 tool for intsalling, selecting</center>\n"\
                             "<center>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes</center><br>"\
                             "<center>Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><p>")

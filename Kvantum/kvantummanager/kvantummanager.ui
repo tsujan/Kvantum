@@ -747,7 +747,7 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string>Compositing</string>
+               <string>Compositing &amp;&amp; Animation</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_9">
                <item row="3" column="2">
@@ -862,6 +862,20 @@ window SVG background.</string>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="5" column="1" colspan="2">
+                <widget class="QCheckBox" name="checkBoxAnimation">
+                 <property name="toolTip">
+                  <string>A 200ms fading animation when the state of
+a button-like widget is changed by the mouse.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of a button-like widget is changed by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because always only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;Currently these widgets are supported: buttons (including radio buttons and check boxes), non-editable combo boxes and slider handles.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Animation for state change under mouse</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
