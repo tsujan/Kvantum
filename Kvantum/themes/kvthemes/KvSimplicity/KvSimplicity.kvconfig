@@ -36,6 +36,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=false
+animate_states=true
 
 [GeneralColors]
 window.color=#F0F0F0

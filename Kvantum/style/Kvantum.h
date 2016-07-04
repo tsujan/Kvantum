@@ -145,6 +145,8 @@ class Style : public QCommonStyle {
                           bool above, // left
                           bool inverted) const;
 
+    /* Return the state of the given widget. */
+    QString getState(const QStyleOption *option, const QWidget *widget) const;
     /* Return the frame spec of the given widget from the theme config file. */
     inline frame_spec getFrameSpec(const QString &widgetName) const;
     /* Return the interior spec of the given widget from the theme config file. */
@@ -272,7 +274,7 @@ class Style : public QCommonStyle {
     QString xdg_config_home;
 
     QTimer *progressTimer_, *opacityTimer_;
-    mutable int animationOpacity_; // Mutibility is used only with groupboxes.
+    mutable int animationOpacity_;
     /* The start state for state change animation */
     mutable QString animationStartState_;
     /* The widget whose state change is animated under the cursor */
