@@ -1873,14 +1873,14 @@ check box</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="4">
+       <item row="3" column="0" colspan="3">
         <widget class="QScrollBar" name="horizontalScrollBar">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="3" column="5" colspan="4">
+       <item row="3" column="5" colspan="3">
         <widget class="QScrollBar" name="horizontalScrollBar_2">
          <property name="enabled">
           <bool>false</bool>

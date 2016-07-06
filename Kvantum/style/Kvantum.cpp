@@ -633,7 +633,10 @@ void Style::polish(QWidget *widget)
   if (itsWindowManager_)
     itsWindowManager_->registerWidget(widget);
 
-  widget->setAttribute(Qt::WA_Hover, true);
+  QWidget *pw = widget->parentWidget();
+
+  if (!pw || !pw->inherits("QWebEngineView")) // FIXME: a bug in QtWebEngine?
+    widget->setAttribute(Qt::WA_Hover, true);
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
   /* So far I haven't found any use for this: */
@@ -653,12 +656,11 @@ void Style::polish(QWidget *widget)
   QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
   if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
   {
-    QWidget *p = getParent(widget,1);
-    QWidget *gp = getParent(p,1);
+    QWidget *gp = getParent(pw,1);
     if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
          && !qobject_cast<QLineEdit*>(widget)
-         && qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p) // Krita, Amarok
-         && !p->findChild<QTabBar*>())
+         && qobject_cast<QMainWindow*>(gp) && isStylableToolbar(pw) // Krita, Amarok
+         && !pw->findChild<QTabBar*>())
         || (widget->inherits("AnimatedLabelStack") // Amarok
             && isStylableToolbar(gp)
             && qobject_cast<QMainWindow*>(getParent(gp,1))))
@@ -815,7 +817,7 @@ void Style::polish(QWidget *widget)
          && widget->autoFillBackground()
          && (gp && gp->inherits("Fm::FolderView") && !gp->inherits("PCManFM::DesktopWindow")))
         || (hspec_.transparent_pcmanfm_sidepane
-            && ((getParent(widget,1) && getParent(widget,1)->inherits("Fm::DirTreeView"))
+            && ((pw && pw->inherits("Fm::DirTreeView"))
                 || (gp && gp->inherits("Fm::SidePane")))))
     {
       widget->setAutoFillBackground(false);
@@ -929,7 +931,7 @@ void Style::polish(QWidget *widget)
   {
     widget->setBackgroundRole(QPalette::NoRole);
     widget->setAutoFillBackground(false);
-    widget->parentWidget()->setAutoFillBackground(false);
+    pw->setAutoFillBackground(false);
   }
   // remove the ugly shadow of QWhatsThis tooltips
   else if (widget->inherits("QWhatsThat"))
@@ -944,7 +946,7 @@ void Style::polish(QWidget *widget)
   {
     if (hspec_.forceSizeGrip)
     { // WARNING: adding size grip to non-window widgets may cause crash
-      if (QMainWindow *mw = qobject_cast<QMainWindow*>(sb->parentWidget()))
+      if (QMainWindow *mw = qobject_cast<QMainWindow*>(pw))
       {
         if (mw->minimumSize() != mw->maximumSize())
           sb->setSizeGripEnabled(true);
@@ -955,7 +957,7 @@ void Style::polish(QWidget *widget)
   else if (!tspec_.animate_states // otherwise it already has event filter installed on it
            && tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
   {
-    if (QToolBar *toolBar = qobject_cast<QToolBar*>(widget->parentWidget()))
+    if (QToolBar *toolBar = qobject_cast<QToolBar*>(pw))
     {
       if (toolBar->orientation() != Qt::Vertical)
       {
@@ -980,7 +982,7 @@ void Style::polish(QWidget *widget)
         getMenuHShadows();
         /* RTL submenus aren't positioned correctly. To fix that,
            we should move them but the RTL property isn't set yet. */
-        if (qobject_cast<QMenu*>(getParent(widget,1)))
+        if (qobject_cast<QMenu*>(pw))
         {
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
