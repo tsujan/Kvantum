@@ -3,6 +3,7 @@ V0.10.0
  * Added optional state change animation for buttons and non-editable comboboxes.
  * Draw flat pushbuttons like auto-raised toolbuttons.
  * A workaround for QtWebEngine's selection text issue.
+ * Added an Oxygen-like theme.
 
 V0.9.8
 ---------
