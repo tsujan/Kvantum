@@ -53,6 +53,7 @@
 #include <QStatusBar>
 #include <QCheckBox>
 #include <QRadioButton>
+#include <QLayout> // only for forceSizeGrip
 //#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
@@ -727,7 +728,17 @@ void Style::polish(QWidget *widget)
           else*/ if (QDialog* d = qobject_cast<QDialog*>(widget))
           {
             if (hspec_.forceSizeGrip)
-              d->setSizeGripEnabled(true);
+            {
+              /* QProgressDialog has a bug that gives a wrong position to
+                 its resize grip. It has no layout and there's no reason
+                 to force resize grip on any dialog without layout. */
+              QLayout *lo = widget->layout();
+              if (lo && lo->sizeConstraint() != QLayout::SetFixedSize
+                  && lo->sizeConstraint() != QLayout::SetNoConstraint)
+              {
+                d->setSizeGripEnabled(true);
+              }
+            }
           }
         }
         if (((tspec_.translucent_windows && !isOpaque_

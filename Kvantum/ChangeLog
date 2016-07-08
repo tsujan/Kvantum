@@ -4,6 +4,7 @@ V0.10.0
  * Draw flat pushbuttons like auto-raised toolbuttons.
  * A workaround for QtWebEngine's selection text issue.
  * Added an Oxygen-like theme.
+ * Don't force size grip on a dialog that doesn't have a layout or its layout has a size constraint of "SetFixedSize" or "SetNoConstraint".
 
 V0.9.8
 ---------
