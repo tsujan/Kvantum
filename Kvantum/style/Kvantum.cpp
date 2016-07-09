@@ -3458,6 +3458,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           label_spec lspec1 = getLabelSpec("ComboBox");
           lspec1.left = qMax(0,lspec1.left-1);
           lspec1.right = qMax(0,lspec1.right-1);
+          lspec1.top = qMax(0,lspec1.top-1);
+          lspec1.bottom = qMax(0,lspec1.bottom-1);
           if (cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
               || cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
