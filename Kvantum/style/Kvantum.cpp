@@ -9278,10 +9278,11 @@ QSize Style::sizeFromContents(ContentsType type,
         if (widget) f = widget->font();
         if (lspec.boldFont) f.setBold(true);
 
-	    int ih = pixelMetric(PM_ExclusiveIndicatorHeight);
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
-        s = s + QSize(pixelMetric(PM_RadioButtonLabelSpacing) + pixelMetric(PM_ExclusiveIndicatorWidth),
-                      (s.height() < ih ? ih : 0));
+        int ih = pixelMetric(PM_ExclusiveIndicatorHeight);
+        if (!opt->text.isEmpty() || !opt->icon.isNull())
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
+            + QSize(pixelMetric(PM_RadioButtonLabelSpacing), 0);
+        s = s + QSize(pixelMetric(PM_ExclusiveIndicatorWidth), (s.height() < ih ? ih : 0));
       }
 
       break;
@@ -9303,9 +9304,10 @@ QSize Style::sizeFromContents(ContentsType type,
         if (lspec.boldFont) f.setBold(true);
 
         int ih = pixelMetric(PM_IndicatorHeight);
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize);
-        s = s + QSize(pixelMetric(PM_CheckBoxLabelSpacing) + pixelMetric(PM_IndicatorWidth),
-                      (s.height() < ih ? ih : 0));
+        if (!opt->text.isEmpty() || !opt->icon.isNull())
+          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
+              + QSize(pixelMetric(PM_CheckBoxLabelSpacing), 0);
+        s = s + QSize(pixelMetric(PM_IndicatorWidth), (s.height() < ih ? ih : 0));
       }
 
       break;

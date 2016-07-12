@@ -325,16 +325,7 @@ text.margin.bottom=3
 frame.expansion=6
 
 [Splitter]
-inherits=PanelButtonCommand
-interior.element=splitter
-frame.element=splitter
-frame.top=0
-frame.bottom=0
-frame.left=1
-frame.right=1
-indicator.element=splitter-grip
-indicator.size=16
-frame.expansion=0
+indicator.size=32
 
 [Scrollbar]
 inherits=PanelButtonCommand

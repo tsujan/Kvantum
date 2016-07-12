@@ -1,3 +1,7 @@
+V0.10.1
+---------
+ * No label spacing for checkboxes and radiobuttons that have neither text nor icon.
+
 V0.10.0
 ---------
  * Added optional state change animation for buttons and non-editable comboboxes.
