@@ -136,7 +136,7 @@
 <linearGradient gradientTransform="matrix(0,1,1,0,-626,211.5)" xlink:href="#linearGradient4729" id="linearGradient6877" y1="669.5" x1="102.5" y2="669.50006" gradientUnits="userSpaceOnUse" x2="126.5"/>
 <linearGradient id="linearGradient5011">
 <stop offset="0" style="stop-color:#e5e5e6" id="stop5013"/>
-<stop offset="1" style="stop-color:#bdbdbf" id="stop5015"/>
+<stop offset="1" style="stop-color:#bdbdbf;stop-opacity:.898" id="stop5015"/>
 </linearGradient>
 <linearGradient id="linearGradient6250">
 <stop offset="0" style="stop-color:#ebebeb" id="stop6252"/>
@@ -332,7 +332,7 @@
 <rect width="25" x="375" y="87.5" height="25" style="opacity:0;fill:#7b7b7b" id="rect5170"/>
 <path style="fill:#5d86c5" id="path5172" d="m 400,92.5 -20,20 20,0 z"/>
 </g>
-<rect width="48" x="136.0009" y="996" height="48" style="opacity:.9;fill:url(#linearGradient5019)" id="window-normal"/>
+<rect width="48" x="136.0009" y="996" height="48" style="fill:url(#linearGradient5019)" id="window-normal"/>
 </g>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-normal" id="arrow-down-normal" transform="matrix(1,0,0,-1,0,894.79987)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="arrow-down-pressed" transform="matrix(1,0,0,-1,0,893.98588)"/>

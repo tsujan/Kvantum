@@ -38,6 +38,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 tooltip_delay=-1
+animate_states=true
 
 [GeneralColors]
 window.color=#3D3D3E

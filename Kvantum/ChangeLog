@@ -1,6 +1,7 @@
 V0.10.1
 ---------
  * No label spacing for checkboxes and radiobuttons that have neither text nor icon.
+ * State change animation for QLineEdit. 
 
 V0.10.0
 ---------

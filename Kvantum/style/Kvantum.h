@@ -274,7 +274,7 @@ class Style : public QCommonStyle {
     QString xdg_config_home;
 
     QTimer *progressTimer_, *opacityTimer_;
-    mutable int animationOpacity_;
+    mutable int animationOpacity_; // A value >= 100 stops state change animation.
     /* The start state for state change animation */
     mutable QString animationStartState_;
     /* The widget whose state change is animated under the cursor */

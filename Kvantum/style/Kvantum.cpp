@@ -866,6 +866,7 @@ void Style::polish(QWidget *widget)
                 || qobject_cast<QCheckBox*>(widget)
                 || qobject_cast<QRadioButton*>(widget)
                 || qobject_cast<QSlider*>(widget)
+                || qobject_cast<QLineEdit*>(widget)
                 || widget->inherits("QComboBoxPrivateContainer")
                 || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
                 || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit())))
@@ -1220,6 +1221,7 @@ void Style::unpolish(QWidget *widget)
              || qobject_cast<QRadioButton*>(widget)
              || qobject_cast<QScrollBar*>(widget)
              || qobject_cast<QSlider*>(widget)
+             || qobject_cast<QLineEdit*>(widget)
              || widget->inherits("QComboBoxPrivateContainer")
              || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
              || (qobject_cast<QComboBox*>(widget) && !qobject_cast<QComboBox*>(widget)->lineEdit()))))
@@ -1363,9 +1365,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (animatedWidget_ && animatedWidget_ != w
           && !w->inherits("QComboBoxPrivateContainer")) // Qt4
       {
-        opacityTimer_->stop();
-        animationOpacity_ = 100;
-        animatedWidget_->update();
+        if (opacityTimer_->isActive())
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
+        }
         animatedWidget_ = NULL;
       }
       if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
@@ -1439,6 +1444,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
       }
+      else if (qobject_cast<QLineEdit *>(o))
+      {
+        /* prevent a flash with Qt5 when pressing mouse button
+           inside a line-edit belonging to an inactive window */
+        animatedWidget_ = w;
+
+        if (w->hasFocus())
+          animationStartState_ = "focused";
+        else
+        {
+          animationStartState_ = "normal";
+          if (!w->isActiveWindow())
+            animationStartState_.append(QString("-inactive"));
+        }
+      }
     }
     break;
 
@@ -1456,9 +1476,23 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 #endif
 
+  case QEvent::FocusOut:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      if (animatedWidget_ == w && opacityTimer_->isActive()
+          && qobject_cast<QLineEdit *>(o))
+      {
+        opacityTimer_->stop();
+        animationOpacity_ = 100;
+        w->update();
+      }
+    }
+    break;
+
   // we use HoverLeave and not Leave because of popups of comboxes
   case QEvent::HoverLeave:
-    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
+    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w
+        && !qobject_cast<QLineEdit *>(o))
     {
       if (qobject_cast<QPushButton *>(o) || qobject_cast<QToolButton *>(o))
       {
@@ -1522,7 +1556,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(e);
     if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
       break;
-    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w)
+    if (w && w->isEnabled() && tspec_.animate_states
+        && (animatedWidget_ == w || qobject_cast<QLineEdit *>(o)))
     {
       if (QAbstractButton *ab = qobject_cast<QAbstractButton *>(o))
       {
@@ -1534,6 +1569,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QGroupBox *>(o))
         break;
+      else if (qobject_cast<QLineEdit *>(o)
+               && animatedWidget_ == w && opacityTimer_->isActive())
+      {
+        break; // animation in progress
+      }
       animatedWidget_ = w;
       animationOpacity_ = 0;
       opacityTimer_->start(ANIMATION_FRAME);
@@ -3098,6 +3138,18 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
+      if (!isLibreoffice_ && widget && widget->isEnabled() && animatedWidget_ == widget)
+      {
+        if (animationStartState_ == leStatus)
+          animationOpacity_ = 100;
+        else if (animationOpacity_ < 100)
+        {
+          renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
+        }
+        painter->save();
+        painter->setOpacity((qreal)animationOpacity_/100);
+      }
       /* force frame */
       renderFrame(painter,
                   isLibreoffice_ && !sbOpt ?
@@ -3106,6 +3158,12 @@ void Style::drawPrimitive(PrimitiveElement element,
                   fspec,
                   fspec.element+"-"+leStatus);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
+      if (!isLibreoffice_ && widget && widget->isEnabled() && animatedWidget_ == widget)
+      {
+        painter->restore();
+        if (animationOpacity_ >= 100)
+          animationStartState_ = leStatus;
+      }
       if (!(option->state & State_Enabled))
         painter->restore();
 
