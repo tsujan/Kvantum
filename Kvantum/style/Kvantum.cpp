@@ -862,7 +862,8 @@ void Style::polish(QWidget *widget)
   else if (qobject_cast<QProgressBar*>(widget)
            || (tspec_.animate_states &&
                (qobject_cast<QPushButton*>(widget)
-                || qobject_cast<QToolButton*>(widget)
+                || (qobject_cast<QToolButton*>(widget)
+                    && !qobject_cast<QLineEdit*>(pw)) // exclude line-edit clear buttons
                 || qobject_cast<QCheckBox*>(widget)
                 || qobject_cast<QRadioButton*>(widget)
                 || qobject_cast<QSlider*>(widget)
