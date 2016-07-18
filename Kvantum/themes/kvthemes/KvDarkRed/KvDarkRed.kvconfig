@@ -11,6 +11,7 @@ tooltip_shadow_depth=6
 slider_width=4
 slider_handle_width=18
 slider_handle_length=12
+scroll_min_extent=50
 x11drag=true
 popup_blurring=true
 menubar_mouse_tracking=true
@@ -29,6 +30,14 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 animate_states=true
+button_contents_shift=true
+combo_as_lineedit=true
+groupbox_top_label=false
+inline_spin_indicators=true
+joined_inactive_tabs=true
+layout_spacing=2
+submenu_overlap=-1
+tooltip_delay=-1
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -59,19 +68,28 @@ transparent_menutitle=false
 kcapacitybar_as_progressbar=true
 force_size_grip=true
 transparent_pcmanfm_sidepane=true
+disabled_icon_opacity=100
+iconless_menu=false
+iconless_pushbutton=false
+lxqtmainmenu_iconsize=22
+normal_default_pushbutton=false
+single_top_toolbar=false
+tint_on_mouseover=0
+transparent_pcmanfm_view=false
 
 [PanelButtonCommand]
 frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
 text.press.color=white
 text.toggle.color=white
 text.focus.color=#FFCA00
+indicator.size=10
 
 [PanelButtonTool]
 inherits=PanelButtonCommand

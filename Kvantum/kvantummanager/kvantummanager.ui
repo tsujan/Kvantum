@@ -866,11 +866,11 @@ window SVG background.</string>
                <item row="5" column="1" colspan="2">
                 <widget class="QCheckBox" name="checkBoxAnimation">
                  <property name="toolTip">
-                  <string>A 200ms fading animation when the state of button-like
-and some other widgets is changed by the mouse.</string>
+                  <string>A 200ms fading animation when the state of a
+button-like widget is changed by the mouse.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of button-like and some other widgets is changed by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because always only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), non-editable combo boxes, slider handles and line-edits.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of a button-like widget is changed by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because always only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), non-editable combo boxes, slider handles and line-edits.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Animation for state change under mouse</string>
