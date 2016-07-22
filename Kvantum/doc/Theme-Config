@@ -329,14 +329,19 @@ popup_blurring                    true/false          Blur the regions behind tr
                                                       be set to true if blurring is true.
 
 animate_states                    true/false          Animate the state change in some
-                                                      widgets when they are under the mouse
-                                                      cursor? Widgets, like buttons, may
-                                                      have normal, focused (hover), pressed
-                                                      and toggled states. If this key is
-                                                      set to true, there will be a 200-ms
+                                                      widgets, especially when they are under
+                                                      the mouse cursor? Widgets like buttons
+                                                      may have normal, focused (hover),
+                                                      pressed and toggled states. If this key
+                                                      is set to true, there will be a 200-ms
                                                       fading animation on state change for
-                                                      button-like widgets under the cursor.
-                                                      Its default value is false.
+                                                      some widgets.
+                                                      
+                                                      The default value is false. These
+                                                      widgets are supported: all kinds of
+                                                      buttons, combo boxes, line-edits and
+                                                      scroll views. For buttons, the animation
+                                                      happens only under the mouse cursor.
 
 splitter_width                    integer             The width of splitter handles. It
                                                       cannot be greater than 32px and is

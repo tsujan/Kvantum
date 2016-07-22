@@ -5071,7 +5071,9 @@ void Style::drawControl(ControlElement element,
         QString status =
                 (option->state & State_On) ? "toggled" :
                  (option->state & State_Selected) ? "toggled" :
-                 (option->state & State_MouseOver) ? "focused" : "normal";
+                 (option->state & State_MouseOver) ?
+                  (option->state & State_Enabled) ? "focused" : "normal"
+                : "normal";
         if (widget && !widget->isActiveWindow())
           status.append(QString("-inactive"));
 
