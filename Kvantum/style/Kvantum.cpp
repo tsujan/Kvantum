@@ -77,15 +77,34 @@
 #define ANIMATION_FRAME 40 // in ms
 #define OPACITY_STEP 20 // percent
 
+#if QT_VERSION < 0x050000
+#define QStyleOptionTabBarBase_v2 QStyleOptionTabBarBaseV2
+#define QStyleOptionTabWidgetFrame_v2 QStyleOptionTabWidgetFrameV2
+#define QStyleOptionViewItem_v2 QStyleOptionViewItemV2
+#define QStyleOptionViewItem_v4 QStyleOptionViewItemV4
+#define QStyleOptionTab_v2 QStyleOptionTabV2
+#define QStyleOptionProgressBar_v2 QStyleOptionProgressBarV2
+#define QStyleOptionFrame_v3 QStyleOptionFrameV3
+#else
+#define QStyleOptionTabBarBase_v2 QStyleOptionTabBarBase
+#define QStyleOptionTabWidgetFrame_v2 QStyleOptionTabWidgetFrame
+#define QStyleOptionViewItem_v2 QStyleOptionViewItem
+#define QStyleOptionViewItem_v4 QStyleOptionViewItem
+#define QStyleOptionTab_v2 QStyleOptionTab
+#define QStyleOptionProgressBar_v2 QStyleOptionProgressBar
+#define QStyleOptionFrame_v3 QStyleOptionFrame
+#endif
+
 namespace Kvantum
 {
 Style::Style() : QCommonStyle()
 {
   progressTimer_ = new QTimer(this);
   opacityTimer_ = new QTimer(this);
-  animationOpacity_ = 100;
-  animationStartState_ = "normal";
-  animatedWidget_ = NULL;
+  opacityTimerOut_ = new QTimer(this);
+  animationOpacity_ = animationOpacityOut_ = 100;
+  animationStartState_ = animationStartStateOut_ = "normal";
+  animatedWidget_ = animatedWidgetOut_ = NULL;
 
   settings_ = defaultSettings_ = themeSettings_ = NULL;
   defaultRndr_ = themeRndr_ = NULL;
@@ -171,6 +190,8 @@ Style::Style() : QCommonStyle()
           this, SLOT(advanceProgressbar()));
   connect(opacityTimer_, SIGNAL(timeout()),
           this, SLOT(setAnimationOpacity()));
+  connect(opacityTimerOut_, SIGNAL(timeout()),
+          this, SLOT(setAnimationOpacityOut()));
 
   itsShortcutHandler_ = NULL;
   itsWindowManager_ = NULL;
@@ -460,6 +481,20 @@ void Style::setAnimationOpacity()
     else
       animationOpacity_ = 100;
     animatedWidget_->update();
+  }
+}
+
+void Style::setAnimationOpacityOut()
+{ //qDebug() << animatedWidgetOut_;
+  if (animationOpacityOut_ >= 100 || !animatedWidgetOut_)
+    opacityTimerOut_->stop();
+  else
+  {
+    if (animationOpacityOut_ <= 100 - OPACITY_STEP)
+      animationOpacityOut_ += OPACITY_STEP;
+    else
+      animationOpacityOut_ = 100;
+    animatedWidgetOut_->update();
   }
 }
 
@@ -870,9 +905,7 @@ void Style::polish(QWidget *widget)
                 || qobject_cast<QLineEdit*>(widget)
                 || widget->inherits("QComboBoxPrivateContainer")
                 || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
-                // don't animate editable comboboxes unless they're drawn as lineedits
-                || (qobject_cast<QComboBox*>(widget)
-                    && (tspec_.combo_as_lineedit || !qobject_cast<QComboBox*>(widget)->lineEdit()))))
+                || qobject_cast<QComboBox*>(widget)))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter() */
            || widget->inherits("KisAbstractSliderSpinBox")
@@ -1464,45 +1497,84 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::FocusIn:
     if (w && w->isEnabled() && tspec_.animate_states)
     {
-#if QT_VERSION < 0x050000
       if (qobject_cast<QComboBox*>(o)
-          && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit())
-          && w->hasFocus()
-          && animatedWidget_ == w) // immediately after popup is closed
-      {
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-        break;
-      }
-#endif
-      QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(o);
-      if ((sa && !w->inherits("QComboBoxListView")) // exclude combo popups
-          || qobject_cast<QLineEdit*>(o)
-          || (tspec_.inline_spin_indicators && qobject_cast<QAbstractSpinBox*>(o))
-          || (tspec_.combo_as_lineedit
-              && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
-      {
-        if (animatedWidget_ && animatedWidget_ != w)
+          && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
+      { // QEvent::MouseButtonPress may follow this
+        if (opacityTimer_->isActive()) // the cusror may have been on the popup scrollbar
         {
-          if (sa)
-          { // no animation when a scrollbar is going to be animated
-            if ((animatedWidget_ == sa->verticalScrollBar() || animatedWidget_ == sa->horizontalScrollBar())
-                && animatedWidget_->rect().contains(animatedWidget_->mapFromGlobal(QCursor::pos())))
-            {
-              break;
-            }
-          }
-          if (opacityTimer_->isActive())
-          {
-            opacityTimer_->stop();
-            animationOpacity_ = 100;
-            animatedWidget_->update();
-          }
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
         }
-        animationStartState_ = "normal";
         animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
+      }
+      else
+      {
+        QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(o);
+        if ((sa && !w->inherits("QComboBoxListView")) // exclude combo popups
+            || (qobject_cast<QLineEdit*>(o)
+                // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
+                && !qobject_cast<QComboBox*>(w->parentWidget()))
+            || qobject_cast<QAbstractSpinBox*>(o)
+            || (tspec_.combo_as_lineedit
+                && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
+        {
+          if (animatedWidget_ && animatedWidget_ != w)
+          {
+            if (sa)
+            { // no animation when a scrollbar is going to be animated
+              if ((animatedWidget_ == sa->verticalScrollBar() || animatedWidget_ == sa->horizontalScrollBar())
+                  && animatedWidget_->rect().contains(animatedWidget_->mapFromGlobal(QCursor::pos())))
+              {
+                break;
+              }
+            }
+            if (opacityTimer_->isActive())
+            {
+              opacityTimer_->stop();
+              animationOpacity_ = 100;
+              animatedWidget_->update();
+            }
+          }
+          animationStartState_ = "normal";
+          animatedWidget_ = w;
+          animationOpacity_ = 0;
+          opacityTimer_->start(ANIMATION_FRAME);
+        }
+      }
+    }
+    break;
+
+  case QEvent::FocusOut:
+    if (w && w->isEnabled() && tspec_.animate_states)
+    {
+      QWidget *popup = QApplication::activePopupWidget();
+      if (popup && !popup->isAncestorOf(w))
+        break; // not due to a popup widget
+      if (qobject_cast<QComboBox*>(o)
+          || qobject_cast<QLineEdit*>(o)
+          || qobject_cast<QAbstractSpinBox*>(o)
+          || (qobject_cast<QAbstractScrollArea*>(o)
+              && !w->inherits("QComboBoxListView"))) // exclude combo popups
+      {
+        if (opacityTimerOut_->isActive())
+        {
+          opacityTimerOut_->stop();
+          animationOpacityOut_ = 100;
+          animatedWidgetOut_->update();
+        }
+        if (qobject_cast<QComboBox*>(o)
+            && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
+        {
+          animationStartStateOut_ = "pressed";
+        }
+        else
+          animationStartStateOut_ = "focused";
+        animatedWidgetOut_ = w;
+        animationOpacityOut_ = 0;
+        opacityTimerOut_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1580,10 +1652,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       break;
     if (w && w->isEnabled() && tspec_.animate_states
         && animatedWidget_ == w
+        // these widget are dealt with in QEvent::FocusIn
         && !qobject_cast<QAbstractSpinBox*>(o)
-        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-        && !(tspec_.combo_as_lineedit
-             && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
+        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o))
     {
       if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
       {
@@ -1662,27 +1733,22 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       //break; // toolbuttons may be animated (see below)
     }
     else if (w && w->isEnabled() && tspec_.animate_states
-             && w->inherits("QComboBoxPrivateContainer"))
+             && w->inherits("QComboBoxPrivateContainer")
+             && qobject_cast<QComboBox*>(getParent(w, 1)))
     {
-      if (QComboBox *cb = qobject_cast<QComboBox*>(getParent(w, 1)))
-      {
-        if (!cb->lineEdit())
-        {
-          /* The opacity of the last animation frame is 100, which will result in
-             a pressed state after the popup is closed if we don't set it to 0 here. */
-          animationOpacity_ = 0;
-          // but animate states when popup is closed by clicking outside combocox
-          if (!cb->rect().contains(cb->mapFromGlobal(QCursor::pos())))
-          {
-            animatedWidget_ = getParent(w, 1); // needed if cursor has been on popup
-            animationStartState_ = "toggled"; // needed if cursor has been on popup
-            opacityTimer_->start(ANIMATION_FRAME);
-          }
-          break;
-        }
-      }
+      /* start with an appropriate state on closing popup, considering
+         that lineedits only have normal and focused states in Kvantum */
+      if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
+        animationStartState_ = "normal"; // -> QEvent::FocusIn
+      else
+        animationStartState_ = "toggled";
+      /* ensure that the combobox will be animated on closing popup
+         (especially needed if the cursor has been on the popup) */
+      animatedWidget_ = getParent(w, 1);
+      animationOpacity_ = 0;
+      break;
     }
-  case QEvent::Destroy: // FIXME: Is this really needed?
+  case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
     {
       if (!progressbars_.isEmpty() && qobject_cast<QProgressBar*>(o))
@@ -1691,11 +1757,20 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (progressbars_.size() == 0)
           progressTimer_->stop();
       }
-      else if (animatedWidget_ == w)
+      else
       {
-        opacityTimer_->stop();
-        animatedWidget_ = NULL;
-        animationOpacity_ = 100;
+        if (animatedWidget_ == w)
+        {
+          opacityTimer_->stop();
+          animatedWidget_ = NULL;
+          animationOpacity_ = 100;
+        }
+        if (animatedWidgetOut_ == w)
+        {
+          opacityTimerOut_->stop();
+          animatedWidgetOut_ = NULL;
+          animationOpacityOut_ = 100;
+        }
       }
     }
     break;
@@ -2031,6 +2106,91 @@ QString Style::getState(const QStyleOption *option, const QWidget *widget) const
   */
 }
 
+/* This method is used, instead of drawPrimitive(PE_PanelLineEdit,...), for drawing the lineedit
+   of an editable combobox because animatedWidget_ is always NULL for KUrlComboBox -> KLineEdit.
+   Although it's only needed in such special cases, it can always be used safely. */
+void Style::drawComboLineEdit(const QStyleOption *option,
+                              QPainter *painter,
+                              const QWidget *lineedit,
+                              const QWidget *combo) const
+{
+  if (!lineedit || !combo) return;
+  if (isPlasma_ && lineedit->window()->testAttribute(Qt::WA_NoSystemBackground))
+    return;
+
+  const QString group = "LineEdit";
+  interior_spec ispec = getInteriorSpec(group);
+  frame_spec fspec = getFrameSpec(group);
+  label_spec lspec = getLabelSpec(group);
+  lspec.top = qMax(0,lspec.top-1);
+  lspec.bottom = qMax(0,lspec.bottom-1);
+  const size_spec sspec = getSizeSpec(group);
+
+  if (isLibreoffice_) // impossible because lineedit != NULL
+  {
+    fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+  }
+  else
+  {
+    if (!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+    {
+      fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+    }
+    else
+    {
+      if (lineedit->minimumWidth() == lineedit->maximumWidth())
+      {
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+      }
+      if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+      {
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
+      }
+    }
+  }
+
+  if (qobject_cast<QAbstractItemView*>(getParent(combo,1)))
+  {
+    fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
+  }
+
+  fspec.hasCapsule = true;
+  if (option->direction == Qt::RightToLeft)
+  {
+    if (lineedit->width() < combo->width() - COMBO_ARROW_LENGTH
+                            - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
+      fspec.capsuleH = 0;
+    else fspec.capsuleH = 1;
+  }
+  else
+  {
+    if (lineedit->x() > 0) fspec.capsuleH = 0;
+    else fspec.capsuleH = -1;
+  }
+  fspec.capsuleV = 2;
+
+  // lineedits only have normal and focused states in Kvantum
+  QString leStatus = (option->state & State_HasFocus) ? "-focused" : "-normal";
+  if (!lineedit->isActiveWindow())
+    leStatus.append(QString("-inactive"));
+  if (!(option->state & State_Enabled))
+  {
+    painter->save();
+    painter->setOpacity(DISABLED_OPACITY);
+  }
+  renderFrame(painter,
+              isLibreoffice_ ? // impossible
+                option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
+                option->rect,
+              fspec,
+              fspec.element+leStatus);
+  renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
+  if (!(option->state & State_Enabled))
+    painter->restore();
+}
+
 void Style::drawPrimitive(PrimitiveElement element,
                           const QStyleOption *option,
                           QPainter *painter,
@@ -2103,8 +2263,8 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameTabBarBase : {
-      if (const QStyleOptionTabBarBaseV2 *opt
-              = qstyleoption_cast<const QStyleOptionTabBarBaseV2*>(option))
+      if (const QStyleOptionTabBarBase_v2 *opt
+              = qstyleoption_cast<const QStyleOptionTabBarBase_v2*>(option))
       {
         QRect r = option->rect;
         // FIXME: Why does Qt draw redundant frames when there's a corner widget?
@@ -2848,8 +3008,9 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     //case PE_FrameButtonBevel :
     case PE_Frame : {
+      const QAbstractScrollArea *sa = qobject_cast<const QAbstractScrollArea*>(widget);
       if (!widget // it's NULL with QML
-          || qobject_cast<const QAbstractScrollArea*>(widget)
+          || sa
           || widget->inherits("QWellArray") // color dialog's color rects
           || widget->inherits("QComboBoxPrivateContainer")) // frame for combo menus
       {
@@ -2896,7 +3057,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* distinguish between the focus and normal states
            only if the focus frame elements exist */
         if (widget && !widget->inherits("QWellArray") && widget->hasFocus()
-            && themeRndr_ && themeRndr_->isValid())
+            && themeRndr_ && themeRndr_->isValid()
+            // only with flat backgrounds
+            && (!sa || (sa->backgroundRole() == QPalette::Window
+                        && !(sa->viewport()
+                             && sa->viewport()->styleSheet().isEmpty()
+                             && !sa->viewport()->autoFillBackground()))))
         {
           fStatus = "focused";
         }
@@ -2904,23 +3070,43 @@ void Style::drawPrimitive(PrimitiveElement element,
           fStatus = "normal-inactive"; // the focus state is meaningless here
         if (!widget) // QML again!
           painter->fillRect(option->rect, QApplication::palette().color(QPalette::Base));
-        bool animate(widget && widget->isEnabled() && animatedWidget_ == widget && fStatus == "focused");
+        bool animate(widget && widget->isEnabled()
+                     && ((animatedWidget_ == widget && !fStatus.startsWith("normal"))
+                         || (animatedWidgetOut_ == widget && fStatus.startsWith("normal"))));
+        QString animationStartState(animationStartState_);
+        int animationOpacity = animationOpacity_;
         if (animate)
         {
-          if (animationStartState_ == fStatus)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
+          if (fStatus.startsWith("normal")) // -> QEvent::FocusOut
+          {
+            animationStartState = animationStartStateOut_;
+            animationOpacity = animationOpacityOut_;
+          }
+          if (animationStartState == fStatus)
+          {
+            animationOpacity = 100;
+            if (fStatus.startsWith("normal"))
+              animationOpacityOut_ = 100;
+            else
+              animationOpacity_ = 100;
+          }
+          else if (animationOpacity < 100)
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
           painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
+          painter->setOpacity((qreal)animationOpacity/100);
         }
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+fStatus);
         //renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+fStatus); // interior doesn't make sense
         if (animate)
         {
           painter->restore();
-          if (animationOpacity_ >= 100)
-            animationStartState_ = fStatus;
+          if (animationOpacity >= 100)
+          {
+            if (fStatus.startsWith("normal"))
+              animationStartStateOut_ = fStatus;
+            else
+              animationStartState_ = fStatus;
+          }
         }
         if (!(option->state & State_Enabled))
           painter->restore();
@@ -2980,8 +3166,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           QRect tr;
           tp = tw->tabPosition();
-          if (const QStyleOptionTabWidgetFrameV2 *twf =
-              qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option))
+          if (const QStyleOptionTabWidgetFrame_v2 *twf =
+              qstyleoption_cast<const QStyleOptionTabWidgetFrame_v2*>(option))
           {
             if (!twf->tabBarSize.isEmpty()) // it's empty in Kdenlive
               tr = twf->selectedTabRect;
@@ -3071,6 +3257,13 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         break;
 
+      QWidget *p = getParent(widget,1);
+
+      /* We draw lineedits of editable comboboxes only in drawComboLineEdit().
+         It seems that some style plugins draw it twice. */
+      if (qobject_cast<const QLineEdit*>(widget) && qobject_cast<QComboBox*>(p))
+        break;
+
       const QString group = "LineEdit";
       interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
@@ -3109,7 +3302,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      QWidget *p = getParent(widget,1);
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
       {
@@ -3154,13 +3346,13 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
       }
-      else if (QComboBox *cb = qobject_cast<QComboBox*>(p))
+      else if (qobject_cast<QComboBox*>(p)) // FIXME: without being a QLineEdit?!
       {
         fspec.hasCapsule = true;
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          if (widget->width() < cb->width() - COMBO_ARROW_LENGTH
+          if (widget->width() < p->width() - COMBO_ARROW_LENGTH
                                 - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
             fspec.capsuleH = 0;
           else fspec.capsuleH = 1;
@@ -3173,6 +3365,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
       }
 
+      // lineedits only have normal and focused states in Kvantum
       QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
       if (widget && !widget->isActiveWindow())
         leStatus.append(QString("-inactive"));
@@ -3181,25 +3374,38 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animateCombo(tspec_.combo_as_lineedit
-                        && qobject_cast<QComboBox*>(p) && animatedWidget_ == p);
-      bool animateSpin(tspec_.inline_spin_indicators
-                       && qobject_cast<QAbstractSpinBox*>(p) && animatedWidget_ == p);
+      bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
+                       && ((animatedWidget_ == p && !leStatus.startsWith("normal"))
+                           || (animatedWidgetOut_ == p && leStatus.startsWith("normal"))));
       bool animate(!isLibreoffice_ && widget && widget->isEnabled()
-                   && (animatedWidget_ == widget || animateSpin || animateCombo)
-                   && !qobject_cast<const QAbstractScrollArea*>(widget));
+                   && !qobject_cast<const QAbstractScrollArea*>(widget)
+                   && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
+                       || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))
+                       || animateSpin));
+      QString animationStartState(animationStartState_);
+      int animationOpacity = animationOpacity_;
       if (animate)
       {
-        if (((animateSpin || animateCombo) && animationStartState_ == "focused")
-            || animationStartState_ == leStatus)
-          animationOpacity_ = 100;
-        else if (animationOpacity_ < 100)
+        if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
         {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
+          animationStartState = animationStartStateOut_;
+          animationOpacity = animationOpacityOut_;
+        }
+        if (animationStartState == leStatus)
+        {
+          animationOpacity = 100;
+          if (leStatus.startsWith("normal"))
+            animationOpacityOut_ = 100;
+          else
+            animationOpacity_ = 100;
+        }
+        else if (animationOpacity < 100)
+        {
+          renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
         }
         painter->save();
-        painter->setOpacity((qreal)animationOpacity_/100);
+        painter->setOpacity((qreal)animationOpacity/100);
       }
       /* force frame */
       renderFrame(painter,
@@ -3212,10 +3418,10 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (animate)
       {
         painter->restore();
-        if (animationOpacity_ >= 100)
+        if (animationOpacity >= 100)
         {
-          if (animateSpin || animateCombo)
-            animationStartState_ = "focused";
+          if (leStatus.startsWith("normal"))
+            animationStartStateOut_ = leStatus;
           else
             animationStartState_ = leStatus;
         }
@@ -3772,27 +3978,52 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        bool animate(cb && tspec_.combo_as_lineedit && widget->isEnabled() && animatedWidget_ == widget
-                     && !qobject_cast<const QAbstractScrollArea*>(widget));
+        bool mouseAnimation(animatedWidget_ == widget
+                            && (!status.startsWith("normal")
+                                || ((!tspec_.combo_as_lineedit
+                                     || (cb && cb->view() && cb->view()->isVisible()))
+                                    && animationStartState_.startsWith("focused"))));
+        bool animate(cb && cb->isEnabled()
+                     && !qobject_cast<const QAbstractScrollArea*>(widget)
+                     && (mouseAnimation
+                         || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
+        QString animationStartState(animationStartState_);
+        int animationOpacity = animationOpacity_;
         if (animate)
         {
-          if (animationStartState_ == status)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
+          if (!mouseAnimation) // -> QEvent::FocusOut
           {
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+            animationStartState = animationStartStateOut_;
+            animationOpacity = animationOpacityOut_;
+          }
+          if (animationStartState == status)
+          {
+            animationOpacity = 100;
+            if (!mouseAnimation)
+              animationOpacityOut_ = 100;
+            else
+              animationOpacity_ = 100;
+          }
+          else if (animationOpacity < 100)
+          {
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
+            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
           }
           painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
+          painter->setOpacity((qreal)animationOpacity/100);
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
         if (animate)
         {
           painter->restore();
-          if (animationOpacity_ >= 100)
-            animationStartState_ = status;
+          if (animationOpacity >= 100)
+          {
+            if (animatedWidget_ == widget)
+              animationStartState_ = status;
+            if (!mouseAnimation)
+              animationStartStateOut_ = status;
+          }
         }
         if (!(option->state & State_Enabled))
         {
@@ -3971,28 +4202,28 @@ void Style::drawPrimitive(PrimitiveElement element,
                          (option->state & State_MouseOver) ? "focused" : "normal"
                          : "disabled";
 
-      const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(option);
+      const QStyleOptionViewItem_v4 *opt = qstyleoption_cast<const QStyleOptionViewItem_v4*>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
       if (opt)
       {
         switch (opt->viewItemPosition) {
-          case QStyleOptionViewItemV4::OnlyOne:
-          case QStyleOptionViewItemV4::Invalid: break;
-          case QStyleOptionViewItemV4::Beginning: {
+          case QStyleOptionViewItem_v4::OnlyOne:
+          case QStyleOptionViewItem_v4::Invalid: break;
+          case QStyleOptionViewItem_v4::Beginning: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = -1;
             fspec.expansion = 0;
             break;
           }
-          case QStyleOptionViewItemV4::End: {
+          case QStyleOptionViewItem_v4::End: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = 1;
             fspec.expansion = 0;
             break;
           }
-          case QStyleOptionViewItemV4::Middle: {
+          case QStyleOptionViewItem_v4::Middle: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = 0;
@@ -4354,7 +4585,7 @@ void Style::drawControl(ControlElement element,
           eliding and other calculations and just use our custom
           colors instead of the default ones whenever possible.
       */
-      if (const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(option))
+      if (const QStyleOptionViewItem_v4 *opt = qstyleoption_cast<const QStyleOptionViewItem_v4*>(option))
       {
         QPalette palette(opt->palette);
         if (!opt->text.isEmpty()
@@ -4410,7 +4641,7 @@ void Style::drawControl(ControlElement element,
                    a minimum amount of contrast is needed */
                 && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
             {
-              QStyleOptionViewItemV4 o(*opt);
+              QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::Text, normalColor);
               o.palette = palette;
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -4422,13 +4653,13 @@ void Style::drawControl(ControlElement element,
                          // supposing that the focus interior is translucent, take care of contrast
                          || enoughContrast(palette.color(QPalette::Base), focusColor)))
             {
-              QStyleOptionViewItemV4 o(*opt);
+              QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
               qreal tintPercentage = hspec_.tint_on_mouseover;
               if (tintPercentage > 0
-                  && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                  && (opt->features & QStyleOptionViewItem_v2::HasDecoration)
                   && !opt->decorationSize.isEmpty())
               {
                 QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
@@ -4439,7 +4670,7 @@ void Style::drawControl(ControlElement element,
             }
             else if (state == 3 && pressColor.isValid())
             {
-              QStyleOptionViewItemV4 o(*opt);
+              QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::HighlightedText, pressColor);
               o.palette = palette;
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -4447,7 +4678,7 @@ void Style::drawControl(ControlElement element,
             }
             else if (state == 4 && toggleColor.isValid())
             {
-              QStyleOptionViewItemV4 o(*opt);
+              QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::HighlightedText, toggleColor);
               o.palette = palette;
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -4458,10 +4689,10 @@ void Style::drawControl(ControlElement element,
           {
             qreal opacityPercentage = hspec_.disabled_icon_opacity;
             if (opacityPercentage < 100
-                && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                && (opt->features & QStyleOptionViewItem_v2::HasDecoration)
                 && !opt->decorationSize.isEmpty())
             {
-              QStyleOptionViewItemV4 o(*opt);
+              QStyleOptionViewItem_v4 o(*opt);
               QPixmap px = translucentPixmap(opt->icon.pixmap(opt->decorationSize), opacityPercentage);
               o.icon = QIcon(px);
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -5238,7 +5469,7 @@ void Style::drawControl(ControlElement element,
         }
         r.adjust(ltb, 0, -rtb, 0);
 
-        QStyleOptionTabV2 tabV2(*opt);
+        QStyleOptionTab_v2 tabV2(*opt);
         QSize iconSize;
         if (!tabV2.icon.isNull())
           iconSize = tabV2.iconSize;
@@ -5723,8 +5954,8 @@ void Style::drawControl(ControlElement element,
     case CE_ProgressBarLabel : {
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar*>(option);
-      const QStyleOptionProgressBarV2 *opt2 =
-          qstyleoption_cast<const QStyleOptionProgressBarV2*>(option);
+      const QStyleOptionProgressBar_v2 *opt2 =
+          qstyleoption_cast<const QStyleOptionProgressBar_v2*>(option);
 
       if (opt && opt->textVisible)
       {
@@ -5967,6 +6198,11 @@ void Style::drawControl(ControlElement element,
 
     case CE_ScrollBarSlider : {
       QString status = getState(option,widget);
+      if (status.startsWith("focused")
+          && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+      {
+        status.replace(QString("focused"),QString("normal"));
+      }
       QString sStatus = status; // slider state
       if (!tspec_.animate_states // when animated, focus it when the cursor enters the groove
           && (option->state & State_Enabled))
@@ -7173,7 +7409,7 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ShapedFrame : {
-      if (const QStyleOptionFrameV3 *f = qstyleoption_cast<const QStyleOptionFrameV3*>(option))
+      if (const QStyleOptionFrame_v3 *f = qstyleoption_cast<const QStyleOptionFrame_v3*>(option))
       {
         /* skip ugly frames */
         if (f->frameShape != QFrame::HLine
@@ -7464,28 +7700,48 @@ void Style::drawComplexControl(ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          bool animate(!verticalIndicators // inline
-                       && widget && widget->isEnabled() && animatedWidget_ == widget
-                       && !qobject_cast<const QAbstractScrollArea*>(widget));
+          bool animate(widget && widget->isEnabled()
+                       && !qobject_cast<const QAbstractScrollArea*>(widget)
+                       && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
+                           || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))));
+
+          QString animationStartState(animationStartState_);
+          int animationOpacity = animationOpacity_;
           if (animate)
           {
-            if (animationStartState_ == leStatus)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
+            if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
             {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+              animationStartState = animationStartStateOut_;
+              animationOpacity = animationOpacityOut_;
+            }
+            if (animationStartState == leStatus)
+            {
+              animationOpacity = 100;
+              if (leStatus.startsWith("normal"))
+                animationOpacityOut_ = 100;
+              else
+                animationOpacity_ = 100;
+            }
+            else if (animationOpacity < 100)
+            {
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
             }
             painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
+            painter->setOpacity((qreal)animationOpacity/100);
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+leStatus);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+leStatus);
           if (animate)
           {
             painter->restore();
-            if (animationOpacity_ >= 100)
-              animationStartState_ = leStatus;
+            if (animationOpacity >= 100)
+            {
+              if (leStatus.startsWith("normal"))
+                animationStartStateOut_ = leStatus;
+              else
+                animationStartState_ = leStatus;
+            }
           }
           if (!(option->state & State_Enabled))
             painter->restore();
@@ -7520,23 +7776,11 @@ void Style::drawComplexControl(ComplexControl control,
           qstyleoption_cast<const QStyleOptionComboBox*>(option);
 
       if (opt) {
-        QString status =
-                 (option->state & State_Enabled) ?
-                  (option->state & State_On) ? "toggled" :
-                  (option->state & State_MouseOver)
-                    && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-                  ? "focused" :
-                  (option->state & State_Sunken)
-                  // to know it has focus
-                  || (option->state & State_Selected) ? "pressed" : "normal"
-                 : "disabled";
-        if (widget && !widget->isActiveWindow())
-          status.append(QString("-inactive"));
-
-        bool rtl(opt->direction == Qt::RightToLeft);
         QStyleOptionComboBox o(*opt);
+        QRect arrowRect = subControlRect(CC_ComboBox,opt,SC_ComboBoxArrow,widget);
         const QComboBox *cb = qobject_cast<const QComboBox*>(widget);
-
+        bool rtl(opt->direction == Qt::RightToLeft);
+        bool editable(opt->editable && cb && cb->lineEdit());
         const QString group = "ComboBox";
 
         label_spec lspec = getLabelSpec(group);
@@ -7551,7 +7795,7 @@ void Style::drawComplexControl(ComplexControl control,
           fspec.expansion = 0;
           ispec.px = ispec.py = 0;
         }
-        if (opt->editable && cb && cb->lineEdit()) // otherwise the arrow part will be integrated
+        if (editable) // otherwise the arrow part will be integrated
         {
           if (tspec_.combo_as_lineedit)
           {
@@ -7563,215 +7807,280 @@ void Style::drawComplexControl(ComplexControl control,
           fspec.capsuleV = 2;
         }
 
-        int margin = 0; // see CC_ComboBox at subControlRect
-        if (opt->editable && !opt->currentIcon.isNull())
-          margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
-                    - (tspec_.combo_as_lineedit ? 0
-                       : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
-        else if (isLibreoffice_)
-          margin = fspec.left;
-        // SC_ComboBoxEditField includes the icon too
-        o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget)
-                 .adjusted(rtl ? 0 : -margin,
-                           0,
-                           rtl ? margin : 0,
-                           0);
-        QRect arrowRect = subControlRect(CC_ComboBox,opt,SC_ComboBoxArrow,widget);
-
-        if (!(option->state & State_Enabled))
+        int extra = 0;
+        if (editable)
         {
-          status.replace(QString("disabled"),QString("normal"));
-          painter->save();
-          painter->setOpacity(DISABLED_OPACITY);
-        }
-        if (isLibreoffice_ && opt->editable)
-        {
-          painter->fillRect(o.rect, option->palette.brush(QPalette::Base));
-          const frame_spec fspec1 = getFrameSpec("LineEdit");
-          renderFrame(painter,o.rect,fspec,fspec1.element+"-normal");
-        }
-        else // ignore framelessness
-        {
-          /* don't cover the lineedit area */
-          int editWidth = 0;
-          if (cb)
+          QLineEdit *le = cb->lineEdit();
+          /* Konqueror may add an icon to the right of lineedit (for LTR) */
+          extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
+                       : w - (COMBO_ARROW_LENGTH+fspec.right) - (le->x()+le->width());
+          if (extra > 0)
           {
-            if (opt->editable && cb->lineEdit())
-            {
-              QLineEdit *le = cb->lineEdit();
-              editWidth = le->width();
-              /* Konqueror may add an icon to the right of lineedit (for LTR) */
-              int extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
-                               : w - (COMBO_ARROW_LENGTH+fspec.right) - (le->x()+editWidth);
-              if (extra > 0)
-              {
-                editWidth += extra;
-                if (rtl) arrowRect.adjust(0,0,extra,0);
-                else arrowRect.adjust(-extra,0,0,0);
-              }
-              if (cb->hasFocus())
-              {
-                if (tspec_.combo_as_lineedit)
-                {
-                  if (!widget->isActiveWindow()) status = "focused-inactive";
-                  else status = "focused";
-                }
-                else
-                {
-                  if (!widget->isActiveWindow()) status = "pressed-inactive";
-                  else status = "pressed";
-                }
-              }
-              else if (tspec_.combo_as_lineedit)
-              {
-                if (status.startsWith("focused"))
-                  status.replace(QString("focused"),QString("normal"));
-                else if (status.startsWith("toggled"))
-                  status.replace(QString("toggled"),QString("normal"));
-              }
-            }
-            else // when there isn't enough space
-            {
-              QSize txtSize = textSize(painter->font(),opt->currentText);
-              if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
-                  || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
-              {
-                fspec.left = qMin(fspec.left,3);
-                fspec.right = qMin(fspec.right,3);
-                fspec.top = qMin(fspec.top,3);
-                fspec.bottom = qMin(fspec.bottom,3);
-                //fspec.expansion = 0;
-
-                lspec.left = qMin(lspec.left,2);
-                lspec.right = qMin(lspec.right,2);
-                lspec.top = qMin(lspec.top,2);
-                lspec.bottom = qMin(lspec.bottom,2);
-                lspec.tispace = qMin(lspec.tispace,2);
-              }
-            }
+            if (rtl) arrowRect.adjust(0,0,extra,0);
+            else arrowRect.adjust(-extra,0,0,0);
           }
-          QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
-          /* integrate the arrow part if the combo isn't editable */
-          if (!opt->editable || (cb && !cb->lineEdit())) r = r.united(arrowRect);
-          bool libreoffice = false;
-          if (isLibreoffice_ && (option->state & State_Enabled))
+        }
+
+        if (opt->subControls & SC_ComboBoxFrame) // frame
+        {
+          QString status =
+                   (option->state & State_Enabled) ?
+                    (option->state & State_On) ? "toggled" :
+                    (option->state & State_MouseOver)
+                      && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+                    ? "focused" :
+                    (option->state & State_Sunken)
+                    // to know it has focus
+                    || (option->state & State_Selected) ? "pressed" : "normal"
+                   : "disabled";
+          if (widget && !widget->isActiveWindow())
+            status.append(QString("-inactive"));
+
+          int margin = 0; // see CC_ComboBox at subControlRect
+          if (opt->editable && !opt->currentIcon.isNull())
+            margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
+                      - (tspec_.combo_as_lineedit ? 0
+                         : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+          else if (isLibreoffice_)
+            margin = fspec.left;
+          // SC_ComboBoxEditField includes the icon too
+          o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget)
+                   .adjusted(rtl ? 0 : -margin,
+                             0,
+                             rtl ? margin : 0,
+                             0);
+
+          if (!(option->state & State_Enabled))
           {
-            if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
-            {
-              libreoffice = true;
-              painter->save();
-              painter->setOpacity(0.5);
-            }
-          }
-          bool animate(cb && cb->isEnabled()
-                       && (!(opt->editable && cb->lineEdit()) || tspec_.combo_as_lineedit)
-                       && animatedWidget_ == widget);
-          if (animate)
-          {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
-            {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-            }
+            status.replace(QString("disabled"),QString("normal"));
             painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
+            painter->setOpacity(DISABLED_OPACITY);
           }
-          renderFrame(painter,r,fspec,fspec.element+"-"+status);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-          if (animate)
+          if (isLibreoffice_ && opt->editable)
           {
-            painter->restore();
-            if (animationOpacity_ >= 100)
-              animationStartState_ = status;
+            painter->fillRect(o.rect, option->palette.brush(QPalette::Base));
+            const frame_spec fspec1 = getFrameSpec("LineEdit");
+            renderFrame(painter,o.rect,fspec,fspec1.element+"-normal");
           }
-          /* in case we don't like transparent lineedits (in Cantata) */
-          /*if (cb && cb->lineEdit()
-              && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0)
+          else // ignore framelessness
           {
-            QStyleOptionComboBox leOpt(*opt);
-            leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
-                                         rtl ? editWidth-o.rect.width() : 0);
-            leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
-                          | State_KeyboardFocusChange;
-            drawPrimitive(PE_PanelLineEdit, &leOpt, painter, cb->lineEdit());
-          }*/
-          if (libreoffice) painter->restore();
-          /* force label color (as in Krusader) */
-          if (cb && (option->state & State_Enabled))
-          {
-            QList<QLabel*> llist = cb->findChildren<QLabel*>();
-            if (!llist.isEmpty())
+            /* don't cover the lineedit area */
+            int editWidth = 0;
+            if (cb)
             {
-              QColor col;
-              col = getFromRGBA(lspec.normalColor);
-              if (status.startsWith("pressed"))
-                col = getFromRGBA(lspec.pressColor);
-              else if (status.startsWith("toggled"))
-                col = getFromRGBA(lspec.toggleColor);
-              else if (option->state & State_MouseOver)
-                col = getFromRGBA(lspec.focusColor);
-              if (col.isValid())
+              if (editable)
               {
-                for (int i = 0; i < llist.count(); ++i)
+                if (!tspec_.combo_as_lineedit) // otherwise, the frame and edit field are drawn together as a lineedit
+                  editWidth = cb->lineEdit()->width();
+                if (extra > 0)
+                  editWidth += extra;
+                if (cb->hasFocus())
                 {
-                  QPalette palette = llist.at(i)->palette();
-                  if (col != palette.color(QPalette::WindowText))
+                  if (tspec_.combo_as_lineedit)
                   {
-                    palette.setColor(QPalette::Active,QPalette::WindowText,col);
-                    palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
-                    llist.at(i)->setPalette(palette);
+                    if (!widget->isActiveWindow()) status = "focused-inactive"; // impossible
+                    else status = "focused";
+                  }
+                  else
+                  {
+                    if (!widget->isActiveWindow()) status = "pressed-inactive";
+                    else status = "pressed";
+                  }
+                }
+                else if (tspec_.combo_as_lineedit)
+                {
+                  if (status.startsWith("focused"))
+                    status.replace(QString("focused"),QString("normal"));
+                  else if (status.startsWith("toggled"))
+                    status.replace(QString("toggled"),QString("normal"));
+                }
+              }
+              else // when there isn't enough space
+              {
+                QSize txtSize = textSize(painter->font(),opt->currentText);
+                if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                    || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
+                {
+                  fspec.left = qMin(fspec.left,3);
+                  fspec.right = qMin(fspec.right,3);
+                  fspec.top = qMin(fspec.top,3);
+                  fspec.bottom = qMin(fspec.bottom,3);
+                  //fspec.expansion = 0;
+
+                  lspec.left = qMin(lspec.left,2);
+                  lspec.right = qMin(lspec.right,2);
+                  lspec.top = qMin(lspec.top,2);
+                  lspec.bottom = qMin(lspec.bottom,2);
+                  lspec.tispace = qMin(lspec.tispace,2);
+                }
+              }
+            }
+            QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
+            /* integrate the arrow part if the combo isn't editable */
+            if (!opt->editable || (cb && !cb->lineEdit())) r = r.united(arrowRect);
+            bool libreoffice = false;
+            if (isLibreoffice_ && (option->state & State_Enabled))
+            {
+              if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+              {
+                libreoffice = true;
+                painter->save();
+                painter->setOpacity(0.5);
+              }
+            }
+            if (!editable
+                // nothing should be drawn here if the lineedit is transparent (as in Cantata)
+                || cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() != 0)
+            {
+              QStyleOptionComboBox leOpt(*opt);
+              if (!tspec_.combo_as_lineedit && editable)
+              {
+                leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
+                                             rtl ? editWidth-o.rect.width() : 0);
+              }
+              bool mouseAnimation(animatedWidget_ == widget
+                                  && (!status.startsWith("normal")
+                                      || ((!editable || !tspec_.combo_as_lineedit
+                                           || (cb->view() && cb->view()->isVisible()))
+                                          && animationStartState_.startsWith("focused"))));
+              bool animate(cb && cb->isEnabled()
+                           && (mouseAnimation
+                               || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
+              QString animationStartState(animationStartState_);
+              int animationOpacity = animationOpacity_;
+              if (animate)
+              {
+                if (!mouseAnimation) // -> QEvent::FocusOut
+                {
+                  animationStartState = animationStartStateOut_;
+                  animationOpacity = animationOpacityOut_;
+                }
+                if (animationStartState == status)
+                {
+                  animationOpacity = 100;
+                  if (!mouseAnimation)
+                    animationOpacityOut_ = 100;
+                  else
+                    animationOpacity_ = 100;
+                }
+                else if (animationOpacity < 100)
+                {
+                  renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
+                  renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
+                  if (!tspec_.combo_as_lineedit && editable)
+                  {
+                    if (!mouseAnimation)
+                      leOpt.state = State_Enabled | State_Active | State_HasFocus;
+                    else
+                      leOpt.state = opt->state & (State_Enabled);
+                    drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
+                  }
+                }
+                painter->save();
+                painter->setOpacity((qreal)animationOpacity/100);
+              }
+              renderFrame(painter,r,fspec,fspec.element+"-"+status);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+              if (!tspec_.combo_as_lineedit && editable)
+              {
+                leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
+                              | State_KeyboardFocusChange;
+                drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
+              }
+              if (animate)
+              {
+                painter->restore();
+                if (animationOpacity >= 100)
+                {
+                  if (!mouseAnimation)
+                  {
+                    animationStartStateOut_ = status;
+                    if (!editable && animatedWidget_ == widget)
+                      animationStartState_ = status;
+                  }
+                  else
+                    animationStartState_ = status;
+                }
+              }
+            }
+            if (libreoffice) painter->restore();
+            /* force label color (as in Krusader) */
+            if (cb && (option->state & State_Enabled))
+            {
+              QList<QLabel*> llist = cb->findChildren<QLabel*>();
+              if (!llist.isEmpty())
+              {
+                QColor col;
+                col = getFromRGBA(lspec.normalColor);
+                if (status.startsWith("pressed"))
+                  col = getFromRGBA(lspec.pressColor);
+                else if (status.startsWith("toggled"))
+                  col = getFromRGBA(lspec.toggleColor);
+                else if (option->state & State_MouseOver)
+                  col = getFromRGBA(lspec.focusColor);
+                if (col.isValid())
+                {
+                  for (int i = 0; i < llist.count(); ++i)
+                  {
+                    QPalette palette = llist.at(i)->palette();
+                    if (col != palette.color(QPalette::WindowText))
+                    {
+                      palette.setColor(QPalette::Active,QPalette::WindowText,col);
+                      palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
+                      llist.at(i)->setPalette(palette);
+                    }
                   }
                 }
               }
             }
           }
-        }
-        if (!(option->state & State_Enabled))
-          painter->restore();
-
-        /* since the icon of an editable combo-box isn't drawn
-           at CE_ComboBoxLabel, we draw and center it here */
-        if (opt->editable && !opt->currentIcon.isNull())
-        {
-          const QIcon::Mode iconmode =
-            (option->state & State_Enabled) ?
-            (option->state & State_Sunken) ? QIcon::Active :
-            (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-            : QIcon::Disabled;
-
-          const QIcon::State iconstate =
-            (option->state & State_On) ? QIcon::On : QIcon::Off;
-
-          /*fspec.top = fspec.bottom = 0;
-            lspec.top = lspec.bottom = 0;*/
-          QPixmap icn = getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize);
-          QRect ricn = alignedRect(option->direction,
-                                   Qt::AlignVCenter | Qt::AlignLeft,
-                                   opt->iconSize,
-                                   labelRect(option->rect,fspec,lspec));
-          QRect iconRect = alignedRect(option->direction,
-                                       Qt::AlignCenter,
-                                       QSize(icn.width(),icn.height())/pixelRatio_, ricn);
           if (!(option->state & State_Enabled))
+            painter->restore();
+
+          /* since the icon of an editable combo-box isn't drawn
+             at CE_ComboBoxLabel, we draw and center it here */
+          if (opt->editable && !opt->currentIcon.isNull())
           {
-            qreal opacityPercentage = hspec_.disabled_icon_opacity;
-            if (opacityPercentage < 100)
-              icn = translucentPixmap(icn, opacityPercentage);
+            const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+              : QIcon::Disabled;
+
+            const QIcon::State iconstate =
+              (option->state & State_On) ? QIcon::On : QIcon::Off;
+
+            /*fspec.top = fspec.bottom = 0;
+              lspec.top = lspec.bottom = 0;*/
+            QPixmap icn = getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize);
+            QRect ricn = alignedRect(option->direction,
+                                     Qt::AlignVCenter | Qt::AlignLeft,
+                                     opt->iconSize,
+                                     labelRect(option->rect,fspec,lspec));
+            QRect iconRect = alignedRect(option->direction,
+                                         Qt::AlignCenter,
+                                         QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+            if (!(option->state & State_Enabled))
+            {
+              qreal opacityPercentage = hspec_.disabled_icon_opacity;
+              if (opacityPercentage < 100)
+                icn = translucentPixmap(icn, opacityPercentage);
+            }
+            else if (option->state & State_MouseOver)
+            {
+              qreal tintPercentage = hspec_.tint_on_mouseover;
+              if (tintPercentage > 0)
+                icn = tintedPixmap(option, icn, tintPercentage);
+            }
+            painter->drawPixmap(iconRect,icn);
           }
-          else if (option->state & State_MouseOver)
-          {
-            qreal tintPercentage = hspec_.tint_on_mouseover;
-            if (tintPercentage > 0)
-              icn = tintedPixmap(option, icn, tintPercentage);
-          }
-          painter->drawPixmap(iconRect,icn);
+        } // end of frame
+
+        if (opt->subControls & SC_ComboBoxArrow) // arrow
+        {
+          o.rect = arrowRect;
+          drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
         }
-
-        o.rect = arrowRect;
-        drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
-
       }
 
       break;
@@ -8500,7 +8809,7 @@ void Style::drawComplexControl(ComplexControl control,
         QRect checkBoxRect = proxy()->subControlRect(CC_GroupBox, opt, SC_GroupBoxCheckBox, widget);
         if (opt->subControls & QStyle::SC_GroupBoxFrame)
         {
-          QStyleOptionFrameV3 frame;
+          QStyleOptionFrame_v3 frame;
           frame.QStyleOption::operator=(*opt);
           frame.features = opt->features;
           frame.lineWidth = opt->lineWidth;
@@ -9834,10 +10143,10 @@ QSize Style::sizeFromContents(ContentsType type,
         /* the width is already increased with PM_FocusFrameHMargin */
         //s.rwidth() += fspec.left + fspec.right;
 
-        const QStyleOptionViewItemV2 *vopt =
-            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
+        const QStyleOptionViewItem_v2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItem_v2*>(option);
         bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
+        if (vopt && (vopt->features & QStyleOptionViewItem_v2::HasDecoration))
           hasIcon = true;
 
         /* this isn't needed anymore because PM_FocusFrameHMargin and
@@ -10260,10 +10569,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
       if (opt)
       {
-        const QStyleOptionViewItemV2 *vopt =
-            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
+        const QStyleOptionViewItem_v2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItem_v2*>(option);
         bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
+        if (vopt && (vopt->features & QStyleOptionViewItem_v2::HasDecoration))
           hasIcon = true;
 
         Qt::Alignment align = opt->displayAlignment;
@@ -10323,8 +10632,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               || align == Qt::AlignHCenter
               || align == Qt::AlignJustify)
           {
-            const QStyleOptionViewItemV4 *vopt1 =
-              qstyleoption_cast<const QStyleOptionViewItemV4*>(option);
+            const QStyleOptionViewItem_v4 *vopt1 =
+              qstyleoption_cast<const QStyleOptionViewItem_v4*>(option);
             if (vopt1)
             {
               QString txt = vopt1->text;
@@ -10360,9 +10669,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (opt)
       {
         // put the icon inside the frame
-        const QStyleOptionViewItemV2 *vopt =
-            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
-        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
+        const QStyleOptionViewItem_v2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItem_v2*>(option);
+        if (vopt && (vopt->features & QStyleOptionViewItem_v2::HasDecoration))
         {
           QStyleOptionViewItem::Position pos = opt->decorationPosition;
           const frame_spec fspec = getFrameSpec("ItemView");

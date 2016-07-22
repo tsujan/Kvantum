@@ -208,6 +208,12 @@ class Style : public QCommonStyle {
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
 
+    /* Draws the lineedit of an editable combobox. */
+    void drawComboLineEdit (const QStyleOption *option,
+                            QPainter *painter,
+                            const QWidget *lineedit,
+                            const QWidget *combo) const;
+
     /* Gets a pixmap with a proper size from an icon considering HDPI. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
                               const QIcon::Mode iconmode,
@@ -262,6 +268,7 @@ class Style : public QCommonStyle {
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
     void setAnimationOpacity();
+    void setAnimationOpacityOut();
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
     /* Removes a button from all special lists. */
@@ -273,12 +280,12 @@ class Style : public QCommonStyle {
 
     QString xdg_config_home;
 
-    QTimer *progressTimer_, *opacityTimer_;
-    mutable int animationOpacity_; // A value >= 100 stops state change animation.
+    QTimer *progressTimer_, *opacityTimer_, *opacityTimerOut_;
+    mutable int animationOpacity_, animationOpacityOut_; // A value >= 100 stops state change animation.
     /* The start state for state change animation */
-    mutable QString animationStartState_;
-    /* The widget whose state change is animated under the cursor */
-    QPointer<QWidget> animatedWidget_;
+    mutable QString animationStartState_, animationStartStateOut_;
+    /* The widget whose state change is animated */
+    QPointer<QWidget> animatedWidget_, animatedWidgetOut_;
 
     /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;

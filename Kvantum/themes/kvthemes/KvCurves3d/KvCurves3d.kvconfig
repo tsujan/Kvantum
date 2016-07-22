@@ -44,7 +44,7 @@ animate_states=true
 window.color=#3D3D3E
 base.color=#282828
 alt.base.color=#323232
-button.color=#5F5F5F
+button.color=#3D3D3E
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
@@ -73,6 +73,7 @@ iconless_menu=false
 iconless_pushbutton=false
 normal_default_pushbutton=false
 transparent_pcmanfm_sidepane=true
+lxqtmainmenu_iconsize=22
 
 [PanelButtonCommand]
 frame=true
