@@ -4,6 +4,7 @@ V0.10.1
  * Added a dark cyan theme.
  * State change animation for line-edits and also for spin and combo boxes when they're drawn as line-edits.
  * Quietened compiler warnings with Qt-5.7.
+ * Use "const char*" instead of "QString" wherever appropriate.
 
 V0.10.0
 ---------

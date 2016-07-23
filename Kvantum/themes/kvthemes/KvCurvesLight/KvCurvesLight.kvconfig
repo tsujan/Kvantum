@@ -39,6 +39,11 @@ button_icon_size=16
 toolbar_icon_size=16
 tooltip_delay=-1
 animate_states=true
+button_contents_shift=true
+groupbox_top_label=false
+joined_inactive_tabs=true
+layout_spacing=2
+submenu_overlap=-1
 
 [GeneralColors]
 window.color=#E5E5E6
@@ -73,6 +78,11 @@ iconless_pushbutton=false
 normal_default_pushbutton=false
 transparent_pcmanfm_sidepane=true
 respect_darkness=false
+disabled_icon_opacity=100
+lxqtmainmenu_iconsize=22
+single_top_toolbar=false
+tint_on_mouseover=0
+transparent_pcmanfm_view=false
 
 [PanelButtonCommand]
 frame=true
