@@ -2420,8 +2420,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         return;
       }*/
-      // color button
-      else if (opt && opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
+      else if (opt && opt->text.size() == 0 && opt->icon.isNull()
+               && (!widget || !widget->inherits("QDockWidgetTitleButton")))
+        fspec.expansion = 0; // color button
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
@@ -7504,7 +7505,10 @@ void Style::drawComplexControl(ComplexControl control,
            with the rest of the tool button if it's maximally rounded */
         if (fspec.expansion > 0 && tb && tb->popupMode() == QToolButton::MenuButtonPopup)
           o.rect = r.united(subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget));
-        drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
+        /* when SH_DockWidget_ButtonsHaveFrame is set to true (default), dock button panels
+           are also drawn at PE_PanelButtonTool with all needed states (-> qdockwidget.cpp) */
+        if (!widget || !widget->inherits("QDockWidgetTitleButton"))
+          drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
         //drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
         o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);

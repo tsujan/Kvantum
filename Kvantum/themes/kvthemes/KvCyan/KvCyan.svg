@@ -1,6 +1,6 @@
 <svg width="450" version="1.0" xmlns="http://www.w3.org/2000/svg" height="1230" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs id="defs5">
-<linearGradient gradientTransform="matrix(0,-1.6,0.98461538,0,203.99842,97.499992)" xlink:href="#linearGradient5206" id="linearGradient5194" y1="81.251595" x1="23.750036" y2="81.251602" gradientUnits="userSpaceOnUse" x2="53.75"/>
+<linearGradient gradientTransform="matrix(0,-1.6,0.98461538,0,78.99836,217.49999)" xlink:href="#linearGradient5206" id="linearGradient5194" y1="81.251595" x1="23.750036" y2="81.251602" gradientUnits="userSpaceOnUse" x2="53.75"/>
 <linearGradient gradientTransform="matrix(1.5999945,0,0,-1.5999945,206.00012,129.5023)" xlink:href="#linearGradient5206" id="linearGradient5178" y1="43.751629" x1="48.750088" y2="73.751701" gradientUnits="userSpaceOnUse" x2="48.750092"/>
 <linearGradient gradientTransform="matrix(1,0,0,-1,78.000018,93.514338)" xlink:href="#linearGradient3837" id="linearGradient5125" y1="86.014328" x1="174" y2="79.014328" gradientUnits="userSpaceOnUse" x2="174.00005"/>
 <linearGradient gradientTransform="matrix(1,0,0,-1,78.000018,93.514338)" xlink:href="#linearGradient3837" id="linearGradient5168" y1="86.014328" x1="206" y2="79.014328" gradientUnits="userSpaceOnUse" x2="205.99998"/>
@@ -948,26 +948,23 @@
 <g id="progress-normal-bottomright" transform="translate(-125.00006,120)">
 <path style="fill:url(#linearGradient5214);fill-rule:evenodd" id="path5207" d="m 284,63.5 c 7,0 12,-5 12,-12 l -11.9999,0 z "/>
 <g style="text-indent:0;text-align:start;text-transform:none;font-family:Sans;line-height:normal;color:#000">
-<path style="opacity:.2;fill:#fff" id="path5210" d="m 284.0001,63.5 c 6.99994,8e-06 11.9999,-4.99999 12,-12 -2e-05,5.49997 -6.50002,8.99995 -12,8.99997 Z "/>
-<path style="fill-opacity:.196" id="path5212" d="m 284.0001,60.514 c 5.49992,-0.014274 11.9999,-3.51398 11.9999,-9.01398 l -3,0 c 0,4.49996 -4.5,5.99996 -9.00011,6.01396 z "/>
+<path style="opacity:.17;fill:#fff" id="path5210" d="m 284.0001,63.5 c 6.99994,8e-06 9,-4.99999 9,-12 0,6.50001 -1.5,9.00001 -9.00004,9.00002 z "/>
+<path style="fill-opacity:.196" id="path5212" d="m 284.0014,63.5 c 6.99868,0 11.9987,-5 11.9986,-12 l -3,0 c 0,6.99996 -2,12 -8.99868,12 z "/>
 </g>
 </g>
 <g id="progress-normal-left" transform="translate(-125.00006,120)">
 <path style="fill:url(#linearGradient5203);fill-rule:evenodd" id="path5199" d="m 252,19.5002 0,31.9998 -12,0 0,-32 z "/>
 <path style="font-family:Sans;text-align:start;line-height:normal;fill-opacity:.235;color:#000;text-indent:0;text-transform:none" id="path5201" d="m 240,51.5 0,-32 3,0 0,32 z "/>
 </g>
-<g id="progress-normal-bottom" transform="translate(-125.00006,120)">
-<path style="fill:url(#linearGradient5194);fill-rule:evenodd" id="path5182" d="m 283.9998,51.5 -31.9998,0 0,12 32,0 z "/>
-<g style="text-indent:0;text-align:start;text-transform:none;font-family:Sans;line-height:normal;color:#000">
-<path style="opacity:.2;fill:#fff" id="path5190" d="m 252,63.5 32,0 0,-3 -32,0 z "/>
-<path style="fill-opacity:.196" id="path5192" d="m 252,60.514 32,0 0,-3 -32,0 z "/>
-</g>
+<g id="progress-normal-bottom">
+<path style="fill:url(#linearGradient5194);fill-rule:evenodd" id="path5182" d="m 158.9997,171.5 -31.9998,0 0,12 32,0 z "/>
+<path style="opacity:.17;font-family:Sans;fill:#fff;text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5190" d="m 127,183.5 32,0 0,-3 -32,0 z "/>
 </g>
 <g id="progress-normal-bottomleft" transform="translate(-125.00006,120)">
 <path style="fill:url(#linearGradient5178);fill-rule:evenodd" id="path5172" d="m 252,63.5 c -6.99996,3.3e-05 -12,-4.99997 -12,-12 l 12,0 z "/>
 <g style="text-indent:0;text-align:start;text-transform:none;font-family:Sans;line-height:normal;color:#000">
-<path style="opacity:.2;fill:#fff" id="path5174" d="m 252,63.5 c -6.99998,2.4e-05 -12,-4.99998 -12,-12 -2e-05,5.49998 6.49998,8.99997 12,8.99997 Z "/>
-<path style="fill-opacity:.196" id="path5176" d="m 252,60.514 c -5.49996,-0.014274 -12,-3.51398 -11.9999,-9.01396 l 3,-0 c 0,4.5 4.5,6 9.00003,6.014 z "/>
+<path style="opacity:.17;fill:#fff" id="path5174" d="m 252,63.5 c -6.99998,2.4e-05 -8.99992,-4.99998 -8.99992,-12 0,6.50001 1.5,9.00001 8.99996,9 z "/>
+<path style="fill-opacity:.235" id="path5176" d="m 252.0001,63.5 c -7,0 -12,-5 -12,-12 l 3,-0 c 0,7 2,12 9,12 z "/>
 </g>
 </g>
 <g id="progress-normal-topright" transform="translate(-125.00006,120)">
