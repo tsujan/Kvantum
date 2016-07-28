@@ -6,6 +6,7 @@ V0.10.1
  * Quietened compiler warnings with Qt-5.7.
  * Use "const char*" instead of "QString" wherever appropriate.
  * Don't draw the panel of a dock title button twice.
+ * Fixed RTL view items.
 
 V0.10.0
 ---------

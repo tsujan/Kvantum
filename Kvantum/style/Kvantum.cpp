@@ -4213,14 +4213,20 @@ void Style::drawPrimitive(PrimitiveElement element,
           case QStyleOptionViewItem_v4::Beginning: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
-            fspec.capsuleH = -1;
+            if (opt->direction == Qt::RightToLeft)
+              fspec.capsuleH = 1;
+            else
+              fspec.capsuleH = -1;
             fspec.expansion = 0;
             break;
           }
           case QStyleOptionViewItem_v4::End: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
-            fspec.capsuleH = 1;
+            if (opt->direction == Qt::RightToLeft)
+              fspec.capsuleH = -1;
+            else
+              fspec.capsuleH = 1;
             fspec.expansion = 0;
             break;
           }

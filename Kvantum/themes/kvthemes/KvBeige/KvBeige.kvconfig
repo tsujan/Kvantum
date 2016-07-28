@@ -8,6 +8,7 @@ spread_progressbar=true
 composite=true
 menu_shadow_depth=7
 tooltip_shadow_depth=6
+scroll_min_extent=50
 slider_handle_width=16
 slider_handle_length=12
 center_toolbar_handle=true
@@ -21,6 +22,7 @@ blurring=false
 popup_blurring=false
 opaque=
 toolbar_icon_size=16
+animate_states=true
 
 [GeneralColors]
 window.color=#efebe7
@@ -36,7 +38,7 @@ inactive.highlight.color=#9C8D80
 text.color=black
 window.text.color=black
 button.text.color=black
-disabled.text.color=#787878
+disabled.text.color=#00000073
 tooltip.text.color=white
 highlight.text.color=white
 link.color=#0057AE
