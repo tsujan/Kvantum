@@ -12608,6 +12608,43 @@ void Style::renderLabel(
        || tialign != Qt::ToolButtonIconOnly)
       && !text.isEmpty())
   {
+    // draw text based on its direction, not based on the layout direction
+    painter->save();
+    if (text.isRightToLeft())
+    {
+      painter->setLayoutDirection(Qt::RightToLeft);
+      if (option->direction == Qt::LeftToRight)
+      {
+        if (talign & Qt::AlignLeft)
+        {
+          talign &= ~Qt::AlignLeft;
+          talign |= Qt::AlignRight;
+        }
+        else if (talign & Qt::AlignRight)
+        {
+          talign &= ~Qt::AlignRight;
+          talign |= Qt::AlignLeft;
+        }
+      }
+    }
+    else
+    {
+      painter->setLayoutDirection(Qt::LeftToRight);
+      if (option->direction == Qt::RightToLeft)
+      {
+        if (talign & Qt::AlignLeft)
+        {
+          talign &= ~Qt::AlignLeft;
+          talign |= Qt::AlignRight;
+        }
+        else if (talign & Qt::AlignRight)
+        {
+          talign &= ~Qt::AlignRight;
+          talign |= Qt::AlignLeft;
+        }
+      }
+    }
+
     if (lspec.boldFont)
     {
       QFont f(painter->font());
@@ -12662,6 +12699,7 @@ void Style::renderLabel(
           painter->restore();
         if (lspec.italicFont)
           painter->restore();
+        painter->restore();
         return;
       }
       else if (state == 2 && focusColor.isValid())
@@ -12674,6 +12712,7 @@ void Style::renderLabel(
           painter->restore();
         if (lspec.italicFont)
           painter->restore();
+        painter->restore();
         return;
       }
       else if (state == 3 && pressColor.isValid())
@@ -12686,6 +12725,7 @@ void Style::renderLabel(
           painter->restore();
         if (lspec.italicFont)
           painter->restore();
+        painter->restore();
         return;
       }
       else if (state == 4 && toggleColor.isValid())
@@ -12698,6 +12738,7 @@ void Style::renderLabel(
           painter->restore();
         if (lspec.italicFont)
           painter->restore();
+        painter->restore();
         return;
       }
       else if (state == -1 && progColor.isValid())
@@ -12710,6 +12751,7 @@ void Style::renderLabel(
           painter->restore();
         if (lspec.italicFont)
           painter->restore();
+        painter->restore();
         return;
       }
     }
@@ -12726,6 +12768,7 @@ void Style::renderLabel(
       painter->restore();
     if (lspec.italicFont)
       painter->restore();
+    painter->restore();
   }
 }
 
