@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=The same as KvCurves but with some 3d elements
+comment=A dark, 3d theme with curved elements that supports translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
