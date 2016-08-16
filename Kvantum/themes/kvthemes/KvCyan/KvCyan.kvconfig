@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark cyan theme for Kvantum
+comment=A dark cyan theme that supports translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false

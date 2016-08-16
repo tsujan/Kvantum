@@ -576,7 +576,7 @@
 <use width="450" x="0" y="0" height="1230" style="opacity:.2" id="itemview-focused-topleft" xlink:href="#itemview-toggled-topleft" transform="translate(-63.5,0)"/>
 <use width="450" x="0" y="0" height="1230" style="opacity:.2" id="itemview-focused-bottomleft" xlink:href="#itemview-toggled-bottomleft" transform="translate(-63.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topright" id="slider-normal-bottomright" transform="matrix(1,0,0,-1,0,1475.5006)"/>
-<rect width="40" x="387.5" y="1035" height="40" style="fill:url(#linearGradient4972);stroke:none" id="window-normal"/>
+<rect width="40" x="387.5" y="1035" height="40" style="fill:url(#linearGradient4972);stroke:none;opacity:0.9" id="window-normal"/>
 <g style="fill-rule:evenodd">
 <circle cx="425" cy="743.5" style="fill:url(#radialGradient6350);stroke:url(#linearGradient6352)" r="8.4999743" id="slidercursor-disabled"/>
 <g style="stroke:none">
