@@ -523,6 +523,9 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
+  v = getValue("General","scrollbar_in_view");
+  r.scrollbar_in_view = v.toBool();
+
   v = getValue("General","layout_spacing");
   if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);
