@@ -363,6 +363,10 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
                                                       as far as possible but some apps might
                                                       still force scroll arrows.
 
+scrollbar_in_view                 true/false          Should scrollbars be inside, or outside
+                                                      the view frame? It is false (outside)
+                                                      by default.
+
 groupbox_top_label                true/false          Draw the group-box label above the top
                                                       frame? It is false by default, which
                                                       means that the label is drawn ON the
@@ -373,10 +377,6 @@ groupbox_top_label                true/false          Draw the group-box label a
 
 button_contents_shift             true/false          Shift the contents of push-buttons when
                                                       they are down? It is true by default.
-
-scrollbar_in_view                 true/false          Should a views scrollbars be inside, or
-                                                      outside the frame? It is false (outside)
-                                                      by default.
 
 slider_width                      integer             The width of sliders. It cannot be
                                                       greater than 48px and is 8px by default.

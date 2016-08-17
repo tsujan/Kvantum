@@ -937,11 +937,12 @@ void Style::polish(QWidget *widget)
     widget->removeEventFilter(this);
     widget->installEventFilter(this);
   }
-  /* without this, transparent backgrounds
-     couldn't be used for scrollbar grooves */
   else if (qobject_cast<QScrollBar*>(widget))
   {
+    /* without this, transparent backgrounds
+       couldn't be used for scrollbar grooves */
     widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
+
     if (tspec_.animate_states)
     {
       widget->removeEventFilter(this);
@@ -967,12 +968,31 @@ void Style::polish(QWidget *widget)
             child->setAutoFillBackground(false);
         }
       }
-      // support animation only if the background is flat
-      else if (tspec_.animate_states
-               && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
+      else
       {
-        widget->removeEventFilter(this);
-        widget->installEventFilter(this);
+        // support animation only if the background is flat
+        if (tspec_.animate_states
+            && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
+        {
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+        }
+        // set the background of scrollbars correctly when they're inside the frame
+        if (tspec_.scrollbar_in_view && vp && vp->autoFillBackground()
+            && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background")))
+        {
+          if (QScrollBar *sb = sa->horizontalScrollBar())
+            sb->setAutoFillBackground(true);
+          if (QScrollBar *sb = sa->verticalScrollBar())
+            sb->setAutoFillBackground(true);
+          QColor col = vp->palette().color(vp->backgroundRole());
+          if (col.isValid())
+          {
+            QPalette palette = widget->palette();
+            palette.setColor(widget->backgroundRole(), col);
+            widget->setPalette(palette);
+          }
+        }
       }
     }
   }
@@ -3116,10 +3136,21 @@ void Style::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-    // who needs this?
+    /* draw corner area only if scrollbars are drawn inside frame
+       and viewport doesn't have a customized background */
     case PE_PanelScrollAreaCorner : {
-      if (widget && widget->inherits("WebView"))
-        QCommonStyle::drawPrimitive(element,option,painter,widget);
+      if (!tspec_.scrollbar_in_view)
+        return;
+      if (const QAbstractScrollArea *sa = qobject_cast<const QAbstractScrollArea*>(widget))
+      {
+        if (QWidget *vp = sa->viewport())
+        {
+          if (!vp->styleSheet().isEmpty() && vp->styleSheet().contains("background"))
+            return;
+        }
+      }
+      const QBrush brush(option->palette.brush(QPalette::Window));
+      painter->fillRect(option->rect, brush);
       break;
     }
 
