@@ -979,16 +979,33 @@ void Style::polish(QWidget *widget)
         }
         // set the background of scrollbars correctly when they're inside the frame
         if (tspec_.scrollbar_in_view && vp && vp->autoFillBackground()
-            && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background")))
+            && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
+            // also consider pcmanfm hacking keys
+            && !(isPcmanfm_
+                 && ((hspec_.transparent_pcmanfm_view && pw
+                      && pw->inherits("Fm::FolderView") && !pw->inherits("PCManFM::DesktopWindow"))
+                     || (hspec_.transparent_pcmanfm_sidepane
+                         && (sa->inherits("Fm::DirTreeView") || (pw && pw->inherits("Fm::SidePane")))))))
         {
-          if (QScrollBar *sb = sa->horizontalScrollBar())
-            sb->setAutoFillBackground(true);
-          if (QScrollBar *sb = sa->verticalScrollBar())
-            sb->setAutoFillBackground(true);
           QColor col = vp->palette().color(vp->backgroundRole());
-          if (col.isValid())
+          QPalette palette;
+          if (QScrollBar *sb = sa->horizontalScrollBar())
           {
-            QPalette palette = widget->palette();
+            sb->setAutoFillBackground(true);
+            palette = sb->palette();
+            palette.setColor(sb->backgroundRole(), col);
+            sb->setPalette(palette);
+          }
+          if (QScrollBar *sb = sa->verticalScrollBar())
+          {
+            sb->setAutoFillBackground(true);
+            palette = sb->palette();
+            palette.setColor(sb->backgroundRole(), col);
+            sb->setPalette(palette);
+          }
+          if (col.isValid()) // FIXME: is this needed?
+          {
+            palette = widget->palette();
             palette.setColor(widget->backgroundRole(), col);
             widget->setPalette(palette);
           }
@@ -3145,8 +3162,11 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         if (QWidget *vp = sa->viewport())
         {
-          if (!vp->styleSheet().isEmpty() && vp->styleSheet().contains("background"))
+          if (!vp->autoFillBackground()
+              || (!vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
+          {
             return;
+          }
         }
       }
       const QBrush brush(option->palette.brush(QPalette::Window));
