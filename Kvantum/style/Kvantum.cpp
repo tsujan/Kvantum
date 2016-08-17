@@ -9420,7 +9420,7 @@ int Style::styleHint(StyleHint hint,
 
     case SH_Slider_StopMouseOverSlider : return true;
 
-    case SH_ScrollView_FrameOnlyAroundContents : return true;
+    case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;
 
     case SH_UnderlineShortcut:
       return (widget && itsShortcutHandler_) ? itsShortcutHandler_->showShortcut(widget)
