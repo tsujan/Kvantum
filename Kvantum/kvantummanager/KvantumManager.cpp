@@ -576,6 +576,7 @@ void KvantumManager::defaultThemeButtons()
       ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
+    ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
@@ -819,6 +820,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("scroll_arrows"))
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
+                if (themeSettings.contains ("scrollbar_in_view"))
+                    ui->checkBoxScrollIn->setChecked (themeSettings.value ("scrollbar_in_view").toBool());
                 if (themeSettings.contains ("groupbox_top_label"))
                     ui->checkBoxGroupLabel->setChecked (themeSettings.value ("groupbox_top_label").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
@@ -1339,6 +1342,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
+        generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
@@ -1418,8 +1422,9 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
-            || themeSettings.value ("groupbox_top_label").toBool() == !ui->checkBoxGroupLabel->isChecked()
-            || themeSettings.value ("button_contents_shift").toBool() == !ui->checkBoxButtonShift->isChecked()
+            || themeSettings.value ("scrollbar_in_view").toBool() != ui->checkBoxScrollIn->isChecked()
+            || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
+            || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
             || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value())
         {
@@ -1443,6 +1448,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
+        themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
         themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
@@ -1692,7 +1698,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.10.1</big></b><br><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.10.2</big></b><br><br>"\
                             "A %1 tool for intsalling, selecting<br>"\
                             "and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes<br><br>"\
                             "Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><br>")

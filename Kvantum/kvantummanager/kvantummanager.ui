@@ -1149,16 +1149,15 @@ some apps set it themeselves.</string>
                 </widget>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                <widget class="QCheckBox" name="checkBoxScrollIn">
                  <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.</string>
+                  <string>Draw scrollbars inside view frames?</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>No arrows for scrollbars</string>
+                  <string>Scrollbars inside frames</string>
                  </property>
                 </widget>
                </item>
@@ -1442,6 +1441,20 @@ Default is Follow Style.</string>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                 <property name="toolTip">
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>No arrows for scrollbars</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>

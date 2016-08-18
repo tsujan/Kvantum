@@ -363,9 +363,8 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
                                                       as far as possible but some apps might
                                                       still force scroll arrows.
 
-scrollbar_in_view                 true/false          Should scrollbars be inside, or outside
-                                                      the view frame? It is false (outside)
-                                                      by default.
+scrollbar_in_view                 true/false          Should scrollbars be inside the view
+                                                      frame? It is false (outside) by default.
 
 groupbox_top_label                true/false          Draw the group-box label above the top
                                                       frame? It is false by default, which

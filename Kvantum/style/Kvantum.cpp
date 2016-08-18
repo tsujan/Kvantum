@@ -100,8 +100,7 @@ namespace Kvantum
 Style::Style() : QCommonStyle()
 {
   progressTimer_ = new QTimer(this);
-  opacityTimer_ = new QTimer(this);
-  opacityTimerOut_ = new QTimer(this);
+  opacityTimer_ = opacityTimerOut_ = NULL;
   animationOpacity_ = animationOpacityOut_ = 100;
   animationStartState_ = animationStartStateOut_ = "normal";
   animatedWidget_ = animatedWidgetOut_ = NULL;
@@ -188,10 +187,16 @@ Style::Style() : QCommonStyle()
 
   connect(progressTimer_, SIGNAL(timeout()),
           this, SLOT(advanceProgressbar()));
-  connect(opacityTimer_, SIGNAL(timeout()),
-          this, SLOT(setAnimationOpacity()));
-  connect(opacityTimerOut_, SIGNAL(timeout()),
-          this, SLOT(setAnimationOpacityOut()));
+
+  if (tspec_.animate_states)
+  {
+    opacityTimer_ = new QTimer(this);
+    opacityTimerOut_ = new QTimer(this);
+    connect(opacityTimer_, SIGNAL(timeout()),
+            this, SLOT(setAnimationOpacity()));
+    connect(opacityTimerOut_, SIGNAL(timeout()),
+            this, SLOT(setAnimationOpacityOut()));
+  }
 
   itsShortcutHandler_ = NULL;
   itsWindowManager_ = NULL;
@@ -907,8 +912,9 @@ void Style::polish(QWidget *widget)
                 || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
                 || qobject_cast<QComboBox*>(widget)))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
-               its progressbar, so we can identify it only through eventFilter() */
-           || widget->inherits("KisAbstractSliderSpinBox")
+               its progressbar, so we can identify it only through eventFilter()
+               (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
+           || widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
            /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
               for drawing its panel, but not if its state is normal. To force the
               normal text color on it, we need to make it use PE_PanelButtonTool
@@ -1291,6 +1297,7 @@ void Style::unpolish(QWidget *widget)
     }
 
     if (widget->inherits("KisAbstractSliderSpinBox")
+        || widget->inherits("Digikam::DAbstractSliderSpinBox")
         || widget->inherits("KMultiTabBarTab")
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
@@ -1381,7 +1388,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::Paint:
     if (w)
     {
-      if (w->inherits("KisAbstractSliderSpinBox"))
+      if (w->inherits("KisAbstractSliderSpinBox") || w->inherits("Digikam::DAbstractSliderSpinBox"))
         isKisSlider_ = true;
       else if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
       {
@@ -3362,7 +3369,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p);
       const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (sb || sbOpt
-          || (p && p->inherits("KisAbstractSliderSpinBox"))
+          || (p && (p->inherits("KisAbstractSliderSpinBox") || p->inherits("Digikam::DAbstractSliderSpinBox")))
           || (isLibreoffice_ && sbOpt))
       {
         if (!sb || sb->buttonSymbols() != QAbstractSpinBox::NoButtons)

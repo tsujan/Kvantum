@@ -2,6 +2,7 @@ V0.10.2
 ---------
  * Added a key for drawing scrollbars inside the view frame (thanks to Craig).
  * Draw the background of scrollbar and scroll corner area appropriately when the scrollbar is inside the view frame.
+ * Consider digiKam's DAbstractSliderSpinBox as a KisSliderSpinBox.
 
 V0.10.1
 ---------
