@@ -9452,6 +9452,7 @@ int Style::styleHint(StyleHint hint,
     case SH_Menu_MouseTracking : return true;
 
     case SH_ComboBox_PopupFrameStyle: return QFrame::StyledPanel | QFrame::Plain;
+    case SH_ComboBox_Popup : return tspec_.combo_menu;
 
     case SH_MenuBar_MouseTracking :
       return tspec_.menubar_mouse_tracking;

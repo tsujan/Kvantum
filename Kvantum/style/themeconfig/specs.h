@@ -126,6 +126,8 @@ typedef struct {
   bool button_contents_shift;
   /* draw scrollbars within view */
   bool scrollbar_in_view;
+  /* use popup menu for non-editable combo popup */
+  bool combo_menu;
 
   int layout_spacing;
 
@@ -369,6 +371,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.groupbox_top_label = false;
   tspec.button_contents_shift = true;
   tspec.scrollbar_in_view = false;
+  tspec.combo_menu = false;
   tspec.layout_spacing = 2;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
