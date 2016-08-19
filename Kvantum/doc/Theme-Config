@@ -178,7 +178,12 @@ author                            string              Obvious.
 
 comment                           string              Obvious.
 
-x11drag                           true/false          Drag windows from anywhere possible?
+x11drag                           string              Drag windows from contents? Values:
+                                                        none
+                                                        menubar
+                                                        menubar_and_primary_toolbar
+                                                        all (default)
+                                                      
                                                       True by default.
 
 alt_mnemonic                      true/false          Show underlines only when Alt is

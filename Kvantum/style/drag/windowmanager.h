@@ -35,7 +35,39 @@ class WindowManager: public QObject
 {
   Q_OBJECT
 public:
-  explicit WindowManager (QObject*);
+  enum Drag {
+      DRAG_NONE,
+      DRAG_MENUBAR_ONLY,
+      DRAG_MENUBAR_AND_PRIMARY_TOOLBAR,
+      DRAG_ALL,
+
+      DRAG_COUNT
+  };
+
+  static Drag toDrag(const QString &str)
+  {
+    for (int i=0; i<DRAG_COUNT; ++i)
+    {
+      if (toStr((Drag)i)==str)
+        return (Drag)i;
+    }
+    // true/false compatability...
+    return "false"==str ? DRAG_NONE : DRAG_ALL;
+  }
+
+  static QString toStr(Drag drag)
+  {
+    switch (drag)
+    {
+    default:
+    case DRAG_ALL: return "all";
+    case DRAG_NONE: return "none";
+    case DRAG_MENUBAR_ONLY: return "menubar";
+    case DRAG_MENUBAR_AND_PRIMARY_TOOLBAR: return "menubar_and_primary_toolbar";
+    }
+  }
+
+  explicit WindowManager (QObject *parent, Drag drag);
   virtual ~WindowManager (void) {}
   // initialize
   /* read relevant options from OxygenStyleConfigData */
@@ -191,6 +223,7 @@ private:
   bool dragInProgress_;
   // true if drag is locked
   bool locked_;
+  Drag drag_;
 
   // provide application-wise event filter
   /*

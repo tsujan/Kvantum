@@ -19,14 +19,19 @@
 #define SPEC_H
 
 #include <QStringList>
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+#include "drag/windowmanager.h"
+#endif
 
 namespace Kvantum {
 /* Generic information about a theme */
 typedef struct {
   QString author;
   QString comment;
+  #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* draggable from anywhere possible (under x11) */
-  bool x11drag;
+  WindowManager::Drag x11drag;
+  #endif
   /* show mnemonics only if Alt is pressed? */
   bool alt_mnemonic;
   /* always activate view items on double clicking? */
@@ -330,7 +335,9 @@ static inline void default_size_spec(size_spec &sspec) {
 static inline void default_theme_spec(theme_spec &tspec) {
   tspec.author = QString();
   tspec.comment = QString();
-  tspec.x11drag = true;
+  #if defined Q_WS_X11 || defined Q_OS_LINUX
+  tspec.x11drag = WindowManager::DRAG_ALL;
+  #endif
   tspec.alt_mnemonic = true;
   tspec.double_click = false;
   tspec.left_tabs = false;

@@ -19,6 +19,7 @@
 #include <QSettings>
 #include <QFile>
 #include <QStringList>
+#include "ThemeConfig.h"
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
 #if QT_VERSION >= 0x050000
@@ -27,8 +28,6 @@
 static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
 #endif
 #endif
-
-#include "ThemeConfig.h"
 
 namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
@@ -400,7 +399,7 @@ theme_spec ThemeConfig::getThemeSpec()
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   v = getValue("General","x11drag");
   if (v.isValid()) // true by default
-    r.x11drag = v.toBool();
+    r.x11drag = WindowManager::toDrag(v.toString());
 #endif
 
   v = getValue("General","alt_mnemonic");
