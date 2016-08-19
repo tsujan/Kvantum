@@ -208,7 +208,7 @@ Style::Style() : QCommonStyle()
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   if (tspec_.x11drag)
   {
-    itsWindowManager_ = new WindowManager(this);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
     itsWindowManager_->initialize();
   }
 

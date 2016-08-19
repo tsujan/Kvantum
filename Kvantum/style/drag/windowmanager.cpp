@@ -39,9 +39,29 @@
 
 #include "windowmanager.h"
 #include "x11wmmove.h"
-
+#include <QDebug>
 namespace Kvantum {
-WindowManager::WindowManager (QObject* parent) :
+
+static inline bool isPrimaryToolBar(QWidget *w)
+{
+  QToolBar *tb=qobject_cast<QToolBar*>(w);
+  if (tb || 0==strcmp(w->metaObject()->className(), "ToolBar"))
+  {
+    if (!tb || Qt::Horizontal==tb->orientation())
+    {
+      if (0==w->pos().y())
+      {
+        return true;
+      }
+
+      QMainWindow *mw=qobject_cast<QMainWindow *>(w->topLevelWidget());
+      return mw->menuBar()->isVisible() && w->pos().y()<=mw->menuBar()->height()+1;
+    }
+  }
+  return false;
+}
+
+WindowManager::WindowManager (QObject* parent, Drag drag) :
                QObject (parent),
                pixelRatio_ (1),
                enabled_ (true),
@@ -49,7 +69,8 @@ WindowManager::WindowManager (QObject* parent) :
                dragDelay_ (QApplication::startDragTime()),
                dragAboutToStart_ (false),
                dragInProgress_ (false),
-               locked_ (false)
+               locked_ (false),
+               drag_ (drag)
 {
 #if QT_VERSION >= 0x050500
   int dpr = qApp->devicePixelRatio();
@@ -423,8 +444,12 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
   }
 
   // tool buttons
-  if (QToolButton* toolButton = qobject_cast<QToolButton*>(widget))
+
+  if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget)) {
+    if (drag_ < DRAG_ALL && !isPrimaryToolBar(widget->parentWidget()))
+      return false;
     return toolButton->autoRaise() && !toolButton->isEnabled();
+  }
 
   // check menubar
   if (QMenuBar* menuBar = qobject_cast<QMenuBar*>(widget))
@@ -444,6 +469,17 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     // return true in all other cases
     return true;
   }
+
+  bool toolbar=isPrimaryToolBar(widget);
+  if (drag_< DRAG_MENUBAR_AND_PRIMARY_TOOLBAR && toolbar)
+    return false;
+
+  /*
+      in MINIMAL mode, anything that has not been already accepted
+      and does not come from a toolbar is rejected
+      */
+  if (drag_ < DRAG_ALL)
+    return toolbar;
 
   /* following checks are relevant only for WD_FULL mode */
 
