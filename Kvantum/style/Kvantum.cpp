@@ -9045,8 +9045,10 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuHMargin : 
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      const frame_spec fspec = getFrameSpec("Menu");
+      if (qobject_cast<const QComboBox*>(widget) && metric == PM_MenuVMargin)
+        return 0; // added to the height of combo menu in qcombobox.cpp -> showPopup()
 
+      const frame_spec fspec = getFrameSpec("Menu");
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
