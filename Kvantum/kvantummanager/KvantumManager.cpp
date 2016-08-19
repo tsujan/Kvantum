@@ -605,7 +605,8 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
     ui->checkBoxInlineSpin->setChecked (defaultSettings.value ("inline_spin_indicators").toBool());
     ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
-    ui->checkBoxCombo->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
+    ui->checkBoxComboEdit->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
+    ui->checkBoxComboMenu->setChecked (defaultSettings.value ("combo_menu").toBool());
     if (composited)
     {
         bool translucency = defaultSettings.value ("translucent_windows").toBool();
@@ -853,7 +854,9 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("vertical_spin_indicators"))
                     ui->checkBoxVSpin->setChecked (themeSettings.value ("vertical_spin_indicators").toBool());
                 if (themeSettings.contains ("combo_as_lineedit"))
-                    ui->checkBoxCombo->setChecked (themeSettings.value ("combo_as_lineedit").toBool());
+                    ui->checkBoxComboEdit->setChecked (themeSettings.value ("combo_as_lineedit").toBool());
+                if (themeSettings.contains ("combo_menu"))
+                    ui->checkBoxComboMenu->setChecked (themeSettings.value ("combo_menu").toBool());
                 if (composited)
                 {
                     bool translucency = false;
@@ -1354,7 +1357,8 @@ void KvantumManager::writeConfig()
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
-        generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxCombo->isChecked()));
+        generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxComboEdit->isChecked()));
+        generalKeys.insert("combo_menu", boolToStr (ui->checkBoxComboMenu->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
@@ -1417,6 +1421,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("x11drag").toBool() != ui->checkBoxX11->isChecked()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
+            || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
             || themeSettings.value ("animate_states").toBool() != ui->checkBoxAnimation->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
@@ -1459,7 +1464,8 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
         themeSettings.setValue ("inline_spin_indicators", ui->checkBoxInlineSpin->isChecked());
         themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());
-        themeSettings.setValue ("combo_as_lineedit", ui->checkBoxCombo->isChecked());
+        themeSettings.setValue ("combo_as_lineedit", ui->checkBoxComboEdit->isChecked());
+        themeSettings.setValue ("combo_menu", ui->checkBoxComboMenu->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());

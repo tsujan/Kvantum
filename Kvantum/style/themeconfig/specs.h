@@ -116,6 +116,8 @@ typedef struct {
   bool inline_spin_indicators;
   /* draw an editable combobox as a lineedit with arrow? */
   bool combo_as_lineedit;
+  /* use popup menu for combo popup */
+  bool combo_menu;
   /* fill rubber band rectangle with highlight color? */
   bool fill_rubberband;
   /* put the groupbox label above the frame?
@@ -126,8 +128,6 @@ typedef struct {
   bool button_contents_shift;
   /* draw scrollbars within view */
   bool scrollbar_in_view;
-  /* use popup menu for non-editable combo popup */
-  bool combo_menu;
 
   int layout_spacing;
 
@@ -367,11 +367,11 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.vertical_spin_indicators = false;
   tspec.inline_spin_indicators = false;
   tspec.combo_as_lineedit = false;
+  tspec.combo_menu = false;
   tspec.fill_rubberband = false;
   tspec.groupbox_top_label = false;
   tspec.button_contents_shift = true;
   tspec.scrollbar_in_view = false;
-  tspec.combo_menu = false;
   tspec.layout_spacing = 2;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;

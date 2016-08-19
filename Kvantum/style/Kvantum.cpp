@@ -983,9 +983,12 @@ void Style::polish(QWidget *widget)
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
         }
-        // set the background of scrollbars correctly when they're inside the frame
-        if (tspec_.scrollbar_in_view && vp && vp->autoFillBackground()
+        // set the background correctly when scrollbars are either inside the frame or inside a combo popup
+        if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView") && !tspec_.combo_menu))
+            && vp && vp->autoFillBackground()
             && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
+            // but not when the combo popup is drawn as a menu
+            && !(tspec_.combo_menu && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys
             && !(isPcmanfm_
                  && ((hspec_.transparent_pcmanfm_view && pw
@@ -2786,7 +2789,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        bool animate(widget && animatedWidget_ == widget && prefix.isEmpty()
+        bool animate(widget && animatedWidget_ == widget
+                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
                      && !qobject_cast<const QAbstractScrollArea*>(widget));
         if (animate)
         {
@@ -2864,7 +2868,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        bool animate(widget && animatedWidget_ == widget && prefix.isEmpty()
+        bool animate(widget && animatedWidget_ == widget
+                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
                      && !qobject_cast<const QAbstractScrollArea*>(widget));
         if (animate)
         {
@@ -4192,7 +4197,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
 
       /* menuitems may have their own right/left arrows */
-      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+          && (element == PE_IndicatorArrowLeft || element == PE_IndicatorArrowRight))
       {
         const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
         dspec.size = dspec1.size;
@@ -11191,9 +11197,18 @@ QRect Style::subControlRect(ComplexControl control,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
-          /* level the popup list with the bottom or top edge of the combobox */
-          int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
-          return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
+          if (!tspec_.combo_menu)
+          { // level the popup list with the bottom or top edge of the combobox
+            int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
+            return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
+          }
+          else
+          { // take into account the space needed by checkbox and icon
+            int space = qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth)*pixelRatio_, tspec_.check_size)
+                        + tspec_.small_icon_size
+                        + pixelMetric(PM_CheckBoxLabelSpacing);
+            return option->rect.adjusted(-space, 0, 0, 0);
+          }
         }
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);

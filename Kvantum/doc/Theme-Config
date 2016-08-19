@@ -205,10 +205,10 @@ combo_as_lineedit                true/false           Draw an editable combo box
                                                       boxes consist of combo, line-edit and
                                                       drop down elements.
 
-combo_menu                        true/false          Should the popup of non-editable combos
-                                                      be styled as per popup menus? (i.e. like
-                                                      Gtk). By default, they are shown below
-                                                      the combo as per editable combos.
+combo_menu                        true/false          Should the popup of combo boxes be
+                                                      styled as per popup menus (i.e. like
+                                                      Gtk)? By default, they are shown below
+                                                      the combo box.
 
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.

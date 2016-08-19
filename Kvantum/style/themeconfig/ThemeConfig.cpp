@@ -513,6 +513,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","combo_as_lineedit");
   r.combo_as_lineedit = v.toBool();
 
+  v = getValue("General","combo_menu");
+  r.combo_menu = v.toBool();
+
   v = getValue("General","fill_rubberband");
   r.fill_rubberband = v.toBool();
 
@@ -525,9 +528,6 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","scrollbar_in_view");
   r.scrollbar_in_view = v.toBool();
-
-  v = getValue("General","combo_menu");
-  r.combo_menu = v.toBool();
 
   v = getValue("General","layout_spacing");
   if (v.isValid()) // 2 by default

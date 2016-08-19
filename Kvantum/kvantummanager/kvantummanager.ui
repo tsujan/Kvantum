@@ -1149,6 +1149,20 @@ some apps set it themeselves.</string>
                 </widget>
                </item>
                <item row="0" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                 <property name="toolTip">
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>No arrows for scrollbars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxScrollIn">
                  <property name="toolTip">
                   <string>Draw scrollbars inside view frames?</string>
@@ -1177,7 +1191,7 @@ if set explicitly.</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3" colspan="2">
+               <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
                   <string>By default, the label is on the frame.</string>
@@ -1204,7 +1218,7 @@ Checking this puts them inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3" colspan="2">
+               <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
@@ -1234,7 +1248,7 @@ spin-down one inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
+               <item row="4" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
                   <string>Mouse tracking is enabled
@@ -1249,7 +1263,7 @@ for menubars by default.</string>
                 </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QCheckBox" name="checkBoxCombo">
+                <widget class="QCheckBox" name="checkBoxComboEdit">
                  <property name="toolTip">
                   <string>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</string>
@@ -1262,7 +1276,20 @@ line-edit with arrow (and icon, if it exists)?</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3" colspan="2">
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="checkBoxComboMenu">
+                 <property name="toolTip">
+                  <string>Draw combo popups as menu popups?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw combo popups as menu popups (i.e. like in Gtk)?&lt;/p&gt;&lt;p&gt;By default, combo popups do not cover the combo box.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Combo popup as menu</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -1276,7 +1303,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1">
+               <item row="6" column="1">
                 <widget class="QCheckBox" name="checkBoxleftTab">
                  <property name="toolTip">
                   <string>Tabs are centered by default.</string>
@@ -1289,7 +1316,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3" colspan="2">
+               <item row="6" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
                   <string>Shift the contents of push buttons when pressed?
@@ -1303,7 +1330,20 @@ By default, the contents are shifted by 1px.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
+               <item row="7" column="0">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>10</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="7" column="1">
                 <widget class="QCheckBox" name="checkBoxJoinTab">
                  <property name="toolTip">
                   <string>Inactive tabs are joined by default.</string>
@@ -1316,7 +1356,23 @@ By default, the contents are shifted by 1px.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3">
+               <item row="7" column="2">
+                <spacer name="horizontalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="7" column="3">
                 <widget class="QLabel" name="labelTooltipDelay">
                  <property name="toolTip">
                   <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1332,7 +1388,7 @@ Zero means tooltips are shown instantly.
                  </property>
                 </widget>
                </item>
-               <item row="6" column="4" alignment="Qt::AlignLeft">
+               <item row="7" column="4" alignment="Qt::AlignLeft">
                 <widget class="QSpinBox" name="spinTooltipDelay">
                  <property name="toolTip">
                   <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1354,20 +1410,7 @@ Zero means tooltips are shown instantly.
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>10</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="7" column="1">
+               <item row="8" column="1">
                 <widget class="QCheckBox" name="checkBoxAttachTab">
                  <property name="toolTip">
                   <string>Active tab is detached by default.</string>
@@ -1380,23 +1423,7 @@ Zero means tooltips are shown instantly.
                  </property>
                 </widget>
                </item>
-               <item row="7" column="2">
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="7" column="3">
+               <item row="8" column="3">
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
                   <string>Will have effect only if style
@@ -1411,7 +1438,7 @@ Default is Follow Style.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="8" column="4">
                 <widget class="QComboBox" name="comboToolButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -1441,20 +1468,6 @@ Default is Follow Style.</string>
                   </size>
                  </property>
                 </spacer>
-               </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
-                 <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>No arrows for scrollbars</string>
-                 </property>
-                </widget>
                </item>
               </layout>
              </widget>
