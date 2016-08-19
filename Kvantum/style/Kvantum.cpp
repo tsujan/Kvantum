@@ -3093,9 +3093,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        const QString group = "GenericFrame";
-        frame_spec fspec = getFrameSpec(group);
-        const interior_spec ispec = getInteriorSpec(group);
+        frame_spec fspec = getFrameSpec("GenericFrame");
         fspec.expansion = 0;
 
         if (!(option->state & State_Enabled))
@@ -3146,7 +3144,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->setOpacity((qreal)animationOpacity/100);
         }
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+fStatus);
-        //renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+fStatus); // interior doesn't make sense
         if (animate)
         {
           painter->restore();
