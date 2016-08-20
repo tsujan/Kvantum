@@ -29,7 +29,7 @@ private slots:
     void tabChanged (int index);
     void selectionChanged (const QString &txt);
     void preview();
-    void copyRootTheme (QString source, QString target);
+    bool copyRootTheme (QString source, QString target);
     void writeConfig();
     void restoreDefault();
     void isTranslucent (bool checked);
