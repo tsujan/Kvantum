@@ -48,6 +48,33 @@ private:
     void defaultThemeButtons();
     void resizeConfPage (bool thirdPage);
     void restyleWindow();
+    // to be independent of '../style/drag/windowmanager.h'
+    enum Drag {
+        DRAG_NONE,
+        DRAG_MENUBAR_ONLY,
+        DRAG_MENUBAR_AND_PRIMARY_TOOLBAR,
+        DRAG_ALL,
+
+        DRAG_COUNT
+    };
+    Drag toDrag (const QString &str) {
+        for (int i = 0; i < DRAG_COUNT; ++i) {
+            if (toStr ((Drag)i) == str)
+                return (Drag)i;
+        }
+        // backward compatibility
+        return (str == "true" || str == "1") ? DRAG_ALL : DRAG_NONE;
+    }
+    QString toStr (Drag drag) {
+        switch (drag) {
+            default:
+            case DRAG_ALL: return "all";
+            case DRAG_NONE: return "none";
+            case DRAG_MENUBAR_ONLY: return "menubar";
+            case DRAG_MENUBAR_AND_PRIMARY_TOOLBAR: return "menubar_and_primary_toolbar";
+        }
+    }
+
     Ui::KvantumManager *ui;
     /* Remember the last opened folder */
     QString lastPath_;

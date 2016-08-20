@@ -183,8 +183,10 @@ x11drag                           string              Drag windows from contents
                                                         menubar
                                                         menubar_and_primary_toolbar
                                                         all (default)
-                                                      
-                                                      True by default.
+
+                                                      Boolean values are also supported:
+                                                        true (the same as "all" -- default)
+                                                        false (the same as "none")
 
 alt_mnemonic                      true/false          Show underlines only when Alt is
                                                       pressed? True by default.

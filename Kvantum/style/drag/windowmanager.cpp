@@ -39,7 +39,7 @@
 
 #include "windowmanager.h"
 #include "x11wmmove.h"
-#include <QDebug>
+
 namespace Kvantum {
 
 static inline bool isPrimaryToolBar(QWidget *w)

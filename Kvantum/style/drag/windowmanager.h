@@ -36,34 +36,32 @@ class WindowManager: public QObject
   Q_OBJECT
 public:
   enum Drag {
-      DRAG_NONE,
-      DRAG_MENUBAR_ONLY,
-      DRAG_MENUBAR_AND_PRIMARY_TOOLBAR,
-      DRAG_ALL,
+    DRAG_NONE,
+    DRAG_MENUBAR_ONLY,
+    DRAG_MENUBAR_AND_PRIMARY_TOOLBAR,
+    DRAG_ALL,
 
-      DRAG_COUNT
+    DRAG_COUNT
   };
-
-  static Drag toDrag(const QString &str)
+  static Drag toDrag (const QString &str)
   {
-    for (int i=0; i<DRAG_COUNT; ++i)
+    for (int i = 0; i < DRAG_COUNT; ++i)
     {
-      if (toStr((Drag)i)==str)
+      if (toStr ((Drag)i) == str)
         return (Drag)i;
     }
-    // true/false compatability...
-    return "false"==str ? DRAG_NONE : DRAG_ALL;
+    return DRAG_NONE;
   }
 
-  static QString toStr(Drag drag)
+  static QString toStr (Drag drag)
   {
     switch (drag)
     {
-    default:
-    case DRAG_ALL: return "all";
-    case DRAG_NONE: return "none";
-    case DRAG_MENUBAR_ONLY: return "menubar";
-    case DRAG_MENUBAR_AND_PRIMARY_TOOLBAR: return "menubar_and_primary_toolbar";
+      default:
+      case DRAG_ALL: return "all";
+      case DRAG_NONE: return "none";
+      case DRAG_MENUBAR_ONLY: return "menubar";
+      case DRAG_MENUBAR_AND_PRIMARY_TOOLBAR: return "menubar_and_primary_toolbar";
     }
   }
 

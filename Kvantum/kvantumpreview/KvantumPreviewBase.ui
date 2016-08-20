@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>686</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -158,8 +158,7 @@ width</string>
 with 32px folder icon</string>
          </property>
          <property name="icon">
-          <iconset theme="folder">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="iconSize">
           <size>
@@ -179,8 +178,7 @@ with 32px folder icon</string>
 with 32px folder icon</string>
          </property>
          <property name="icon">
-          <iconset theme="folder">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="iconSize">
           <size>
@@ -2487,8 +2485,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>35</height>
+              <width>171</width>
+              <height>72</height>
              </rect>
             </property>
             <attribute name="icon">
@@ -2516,8 +2514,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>28</height>
+              <width>92</width>
+              <height>22</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2539,8 +2537,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>28</height>
+              <width>92</width>
+              <height>22</height>
              </rect>
             </property>
             <attribute name="icon">
@@ -2556,8 +2554,8 @@ check box</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>98</width>
-              <height>28</height>
+              <width>171</width>
+              <height>72</height>
              </rect>
             </property>
             <attribute name="label">
@@ -2748,7 +2746,7 @@ check box</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2813,8 +2811,7 @@ check box</string>
   </widget>
   <action name="actionQuit">
    <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="application-exit"/>
    </property>
    <property name="text">
     <string>&amp;Quit</string>
@@ -2840,7 +2837,8 @@ check box</string>
    </property>
    <property name="icon">
     <iconset theme="format-text-direction-rtl">
-     <normaloff>.</normaloff>.</iconset>
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Toggle Layout</string>

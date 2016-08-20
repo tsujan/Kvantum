@@ -28,10 +28,11 @@ namespace Kvantum {
 typedef struct {
   QString author;
   QString comment;
-  #if defined Q_WS_X11 || defined Q_OS_LINUX
-  /* draggable from anywhere possible (under x11) */
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+  /* draggable from menubar, primary toolbar
+     or anywhere possible (under x11)? */
   WindowManager::Drag x11drag;
-  #endif
+#endif
   /* show mnemonics only if Alt is pressed? */
   bool alt_mnemonic;
   /* always activate view items on double clicking? */
@@ -335,9 +336,9 @@ static inline void default_size_spec(size_spec &sspec) {
 static inline void default_theme_spec(theme_spec &tspec) {
   tspec.author = QString();
   tspec.comment = QString();
-  #if defined Q_WS_X11 || defined Q_OS_LINUX
+#if defined Q_WS_X11 || defined Q_OS_LINUX
   tspec.x11drag = WindowManager::DRAG_ALL;
-  #endif
+#endif
   tspec.alt_mnemonic = true;
   tspec.double_click = false;
   tspec.left_tabs = false;

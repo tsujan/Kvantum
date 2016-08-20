@@ -9,7 +9,6 @@
 #include <QFileDevice>
 #include <QTextStream>
 #endif
-#include "../style/drag/windowmanager.h"
 //#include <QDebug>
 
 KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
@@ -42,10 +41,10 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
                                                        << "Text Beside Icon"
                                                        << "Text Under Icon");
 
-    ui->comboX11Drag->insertItems(0, QStringList() << "None"
-                                                   << "Menubar"
-                                                   << "Menubar and primary toolbar"
-                                                   << "All");
+    ui->comboX11Drag->insertItems (0, QStringList() << "None"
+                                                    << "Menubar"
+                                                    << "Menubar and primary toolbar"
+                                                    << "All");
 
     QLabel *statusLabel = new QLabel();
     statusLabel->setTextInteractionFlags (Qt::TextSelectableByMouse);
@@ -607,7 +606,7 @@ void KvantumManager::defaultThemeButtons()
         if (index > 4 || index < 0) index = 0;
     }
     ui->comboToolButton->setCurrentIndex (index);
-    ui->comboX11Drag->setCurrentIndex(Kvantum::WindowManager::toDrag(defaultSettings.value("x11drag").toString()));
+    ui->comboX11Drag->setCurrentIndex(toDrag(defaultSettings.value("x11drag").toString()));
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
     ui->checkBoxInlineSpin->setChecked (defaultSettings.value ("inline_spin_indicators").toBool());
     ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
@@ -852,7 +851,7 @@ void KvantumManager::tabChanged (int index)
                     ui->comboToolButton->setCurrentIndex (index);
                 }
                 if (themeSettings.contains ("x11drag"))
-                    ui->comboX11Drag->setCurrentIndex(Kvantum::WindowManager::toDrag(themeSettings.value("x11drag").toString()));
+                    ui->comboX11Drag->setCurrentIndex(toDrag(themeSettings.value("x11drag").toString()));
                 if (themeSettings.contains ("double_click"))
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
                 if (themeSettings.contains ("inline_spin_indicators"))
@@ -1359,7 +1358,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
-        generalKeys.insert("x11drag", Kvantum::WindowManager::toStr((Kvantum::WindowManager::Drag)ui->comboX11Drag->currentIndex()));
+        generalKeys.insert("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
@@ -1424,7 +1423,7 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
-            || Kvantum::WindowManager::toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
+            || toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
@@ -1466,7 +1465,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
         themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
-        themeSettings.setValue ("x11drag", Kvantum::WindowManager::toStr((Kvantum::WindowManager::Drag)ui->comboX11Drag->currentIndex()));
+        themeSettings.setValue ("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
         themeSettings.setValue ("inline_spin_indicators", ui->checkBoxInlineSpin->isChecked());
         themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());

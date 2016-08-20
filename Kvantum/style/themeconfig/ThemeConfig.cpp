@@ -398,8 +398,12 @@ theme_spec ThemeConfig::getThemeSpec()
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   v = getValue("General","x11drag");
-  if (v.isValid()) // true by default
-    r.x11drag = WindowManager::toDrag(v.toString());
+  if (v.isValid()) // "WindowManager::DRAG_ALL" by default
+  {
+    // backward compatibility
+    if (!(v.toString() == "true" || v.toInt() == 1))
+      r.x11drag = WindowManager::toDrag(v.toString());
+  }
 #endif
 
   v = getValue("General","alt_mnemonic");
