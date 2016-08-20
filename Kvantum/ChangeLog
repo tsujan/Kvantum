@@ -5,6 +5,7 @@ V0.10.2
  * Consider digiKam's DAbstractSliderSpinBox as a KisSliderSpinBox.
  * Added a key for drawing combo popups as menu popups (thanks to Craig).
  * Expand x11drag option to allow finer control (thanks to Craig).
+ * Allow bold and italic GroupBox titles (thanks to Craig).
 
 V0.10.1
 ---------
