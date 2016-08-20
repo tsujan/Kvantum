@@ -8912,6 +8912,7 @@ void Style::drawComplexControl(ComplexControl control,
         // Draw title
         if ((opt->subControls & QStyle::SC_GroupBoxLabel) && !opt->text.isEmpty())
         {
+          bool boldFont = getLabelSpec("GroupBox").boldFont;
           QColor textColor = opt->textColor;
           if (textColor.isValid())
             painter->setPen(textColor);
@@ -8921,9 +8922,21 @@ void Style::drawComplexControl(ComplexControl control,
           else
             talign |= Qt::TextShowMnemonic;
 
+          if (boldFont)
+          {
+            QFont font(painter->font());
+
+            font.setBold(true);
+            painter->save();
+            painter->setFont(font);
+          }
+
           drawItemText(painter, textRect, talign,
                        opt->palette, opt->state & State_Enabled, opt->text,
                        textColor.isValid() ? QPalette::NoRole : QPalette::WindowText);
+
+          if (boldFont)
+            painter->restore();
 
           if (opt->state & State_HasFocus)
           {
