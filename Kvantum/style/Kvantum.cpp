@@ -214,24 +214,30 @@ Style::Style() : QCommonStyle()
 
   // decide about connecting active tabs to others and using floating tabs once for all
   joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
-  if (themeRndr_ && themeRndr_->isValid() && tspec_.joined_inactive_tabs)
+  if (themeRndr_ && themeRndr_->isValid())
   {
     const frame_spec fspec = getFrameSpec("Tab");
-    QString sepName = fspec.element + "-separator";
-    if (themeRndr_->elementExists(sepName+"-normal")
-        || themeRndr_->elementExists(sepName+"-toggled"))
-    {
-      joinedActiveTab_ = true;
-    }
     if (fspec.expansion == 0 // no floating tabs with frame expansion
         && themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
     {
       hasFloatingTabs_ = true;
-      sepName = "floating-"+sepName;
+    }
+    if (tspec_.joined_inactive_tabs)
+    {
+      QString sepName = fspec.element + "-separator";
       if (themeRndr_->elementExists(sepName+"-normal")
           || themeRndr_->elementExists(sepName+"-toggled"))
       {
-        joinedActiveFloatingTab_ = true;
+        joinedActiveTab_ = true;
+      }
+      if (hasFloatingTabs_)
+      {
+        sepName = "floating-"+sepName;
+        if (themeRndr_->elementExists(sepName+"-normal")
+            || themeRndr_->elementExists(sepName+"-toggled"))
+        {
+          joinedActiveFloatingTab_ = true;
+        }
       }
     }
   }

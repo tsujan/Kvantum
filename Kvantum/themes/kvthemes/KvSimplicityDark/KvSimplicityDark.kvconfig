@@ -100,10 +100,10 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=4
-text.margin.bottom=4
-text.margin.left=4
-text.margin.right=4
+text.margin.top=5
+text.margin.bottom=5
+text.margin.left=5
+text.margin.right=5
 frame.expansion=12
 
 [PanelButtonTool]
@@ -194,8 +194,8 @@ inherits=PanelButtonCommand
 interior.element=tab
 text.margin.left=6
 text.margin.right=6
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=4
+text.margin.bottom=4
 frame.element=tab
 indicator.element=tab
 frame.top=4
@@ -399,6 +399,7 @@ frame.right=4
 text.normal.color=white
 text.press.color=white
 text.focus.color=#9bccff
+text.bold=true
 frame.expansion=0
 
 [TabBarFrame]
