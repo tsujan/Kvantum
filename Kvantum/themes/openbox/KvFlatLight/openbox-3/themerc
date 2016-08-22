@@ -1,70 +1,71 @@
 !! An Openbox theme for the KvFlatLight Kvantum theme
 
 menu.title.bg:  flat solid border
-menu.title.bg.color: #eaeaeb
-menu.title.bg.border.color: #eaeaeb
-menu.title.text.color: #000000
+menu.title.bg.color: #3F3F3F
+menu.title.bg.border.color: #000000
+menu.title.text.color: #ffffff
 
-menu.items.bg: flat solid border
-menu.items.bg.color: #eaeaeb
-menu.items.text.color: #000000
-menu.items.disabled.text.color: #737573
+menu.items.bg: Gradient Vertical Flat
+menu.items.bg.color: #646464
+menu.items.bg.colorTo: #141414
+menu.items.text.color: #ffffff
+menu.items.disabled.text.color: #939393
 menu.items.bg.border.color: #000000
 
 menu.items.active.bg: flat solid
-menu.items.active.bg.color: #464646
+menu.items.active.bg.color: #000000
 menu.items.active.text.color: #ffffff
 
 !! General window settings
 *.justify: center
 
 !! focused window settings
-window.active.client.color: #eaeaeb
+window.active.client.color: #3D3D3E
 
 window.active.title.bg: Gradient Vertical Flat
-window.active.title.bg.color: #eaeaeb
-window.active.title.bg.colorTo: #eaeaeb
+window.active.title.bg.color: #3D3D3E
+window.active.title.bg.colorTo: #3D3D3E
 window.active.title.bg.border.color: Parentrelative
 window.active.title.bg.highlight: 256
 window.active.title.bg.shadow: 0
 
 window.active.handle.bg: flat solid border
-window.active.handle.bg.color: #eaeaeb
-window.active.handle.bg.border.color: #eaeaeb
-!window.active.handle.bg.color: #eaeaeb
+window.active.handle.bg.color: #3D3D3E
+window.active.handle.bg.border.color: #3D3D3E
+!window.active.handle.bg.color: #3D3D3E
 window.active.grip.bg: parentrelative
 
 window.active.label.bg: parentrelative
-window.active.label.text.color: #000000
+window.active.label.text.color: #ffffff
 
 window.active.button.*.bg: parentrelative
-window.active.button.*.image.color: #000000
+window.active.button.*.image.color: #ffffff
 
 window.active.button.pressed.bg: flat solid bevel1
-!window.active.button.pressed.bg.color: #eaeaeb
-window.active.button.pressed.bg.color: #eaeaeb
-window.active.button.pressed.image.color: #000000
+!window.active.button.pressed.bg.color: #3D3D3E
+window.active.button.pressed.bg.color: #3D3D3E
+window.active.button.pressed.image.color: #ffffff
 
 !#hover
 window.active.button.hover.bg: flat solid
-window.active.button.hover.image.color: #000000
-window.active.button.hover.bg.color: #eaeaeb
+window.active.button.hover.image.color: #ffffff
+window.active.button.hover.bg.color: #3D3D3E
 
 window.active.button.disabled.bg: flat solid
 window.active.button.disabled.bg.color: #dfb454
-window.active.button.disabled.image.color: #000000
+window.active.button.disabled.image.color: #ffffff
 
 
 !! unfocused window settings
-window.inactive.client.color: #eaeaeb
+window.inactive.client.color: #3D3D3E
 
 window.inactive.title.bg: Gradient Vertical Flat
-window.inactive.title.bg.color: #eaeaeb
-window.inactive.title.bg.colorTo: #eaeaeb
-window.inactive.title.bg.border.color: #eaeaeb
+window.inactive.title.bg.color: #3D3D3E
+window.inactive.title.bg.colorTo: #3D3D3E
+window.inactive.title.bg.border.color: #3D3D3E
 
 window.inactive.handle.bg: flat solid
-window.inactive.handle.bg.color: #eaeaeb
+window.inactive.handle.bg.color: #3D3D3E
 
 window.inactive.grip.bg: parentrelative
 
@@ -72,17 +73,17 @@ window.inactive.label.bg: parentrelative
 window.inactive.label.text.color: #888a85
 
 window.inactive.button.*.bg: parentrelative
-window.inactive.button.unpressed.image.color: #000000
+window.inactive.button.unpressed.image.color: #ffffff
 
 window.inactive.button.pressed.bg: flat border solid
-window.inactive.button.pressed.bg.color: #eaeaeb
-window.inactive.button.pressed.bg.border.color: #eaeaeb
+window.inactive.button.pressed.bg.color: #3D3D3E
+window.inactive.button.pressed.bg.border.color: #3D3D3E
 
 window.inactive.button.hover.bg: flat solid
-window.inactive.button.hover.bg.color: #eaeaeb
+window.inactive.button.hover.bg.color: #3D3D3E
 
 window.inactive.button.disabled.bg:flat solid
-window.inactive.button.disabled.bg.color:  #eaeaeb
+window.inactive.button.disabled.bg.color:  #3D3D3E
 
 
 !! Global width settings
@@ -95,7 +96,7 @@ window.client.padding.height: 0
 menu.overlap: 2
 
 !! Miscellaneous settings
-border.color: #eaeaeb
+border.color: #3D3D3E
 
 !! fonts are empty
 window.active.label.text.font:
@@ -106,9 +107,10 @@ menu.items.font:
 !! osd (pop ups)
 osd.border.width: 2
 
-osd.hilight.bg: flat solid
+osd.hilight.bg: Gradient Vertical Flat
 osd.hilight.bg.color: #009ef0
+osd.hilight.bg.colorTo: #0085c8
 
 osd.unhilight.bg: flat solid border
-osd.unhilight.bg.color: #ffffff
-osd.unhilight.bg.border.color: #b1b1b1
+osd.unhilight.bg.color: #3d3d3e
+osd.unhilight.bg.border.color: #646464
