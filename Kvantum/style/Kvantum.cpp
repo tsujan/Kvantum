@@ -1020,9 +1020,10 @@ void Style::polish(QWidget *widget)
               palette.setColor(sb->backgroundRole(), col);
               sb->setPalette(palette);
             }
-            if (col.isValid()) // FIXME: is this needed?
+            // FIXME: is this needed?
+            palette = widget->palette();
+            if (palette.color(vp->backgroundRole()) != col)
             {
-              palette = widget->palette();
               palette.setColor(widget->backgroundRole(), col);
               widget->setPalette(palette);
             }
