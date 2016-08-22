@@ -1003,26 +1003,29 @@ void Style::polish(QWidget *widget)
                          && (sa->inherits("Fm::DirTreeView") || (pw && pw->inherits("Fm::SidePane")))))))
         {
           QColor col = vp->palette().color(vp->backgroundRole());
-          QPalette palette;
-          if (QScrollBar *sb = sa->horizontalScrollBar())
+          if (col.isValid())
           {
-            sb->setAutoFillBackground(true);
-            palette = sb->palette();
-            palette.setColor(sb->backgroundRole(), col);
-            sb->setPalette(palette);
-          }
-          if (QScrollBar *sb = sa->verticalScrollBar())
-          {
-            sb->setAutoFillBackground(true);
-            palette = sb->palette();
-            palette.setColor(sb->backgroundRole(), col);
-            sb->setPalette(palette);
-          }
-          if (col.isValid()) // FIXME: is this needed?
-          {
-            palette = widget->palette();
-            palette.setColor(widget->backgroundRole(), col);
-            widget->setPalette(palette);
+            QPalette palette;
+            if (QScrollBar *sb = sa->horizontalScrollBar())
+            {
+              sb->setAutoFillBackground(true);
+              palette = sb->palette();
+              palette.setColor(sb->backgroundRole(), col);
+              sb->setPalette(palette);
+            }
+            if (QScrollBar *sb = sa->verticalScrollBar())
+            {
+              sb->setAutoFillBackground(true);
+              palette = sb->palette();
+              palette.setColor(sb->backgroundRole(), col);
+              sb->setPalette(palette);
+            }
+            if (col.isValid()) // FIXME: is this needed?
+            {
+              palette = widget->palette();
+              palette.setColor(widget->backgroundRole(), col);
+              widget->setPalette(palette);
+            }
           }
         }
       }
@@ -3173,6 +3176,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_PanelScrollAreaCorner : {
       if (!tspec_.scrollbar_in_view)
         return;
+      QColor col;
       if (const QAbstractScrollArea *sa = qobject_cast<const QAbstractScrollArea*>(widget))
       {
         if (QWidget *vp = sa->viewport())
@@ -3182,10 +3186,12 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             return;
           }
+          col = vp->palette().color(vp->backgroundRole());
         }
       }
-      const QBrush brush(option->palette.brush(QPalette::Window));
-      painter->fillRect(option->rect, brush);
+      if (!col.isValid())
+        col = option->palette.color(QPalette::Window);
+      painter->fillRect(option->rect, col);
       break;
     }
 
@@ -3672,6 +3678,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       else  iString = "-down-";
 
       QRect r = option->rect;
+      indicator_spec dspec = getIndicatorSpec(group);
 
       if (!verticalIndicators && !tspec_.inline_spin_indicators)
       {
@@ -3685,11 +3692,23 @@ void Style::drawPrimitive(PrimitiveElement element,
         ispec.px = ispec.py = 0;
         renderFrame(painter,r,fspec,fspec.element+"-"+bStatus,0,0,0,0,0,true);
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus,true);
+        if (element == PE_IndicatorSpinDown || element == PE_IndicatorSpinMinus)
+        { // draw spinbox separator if it exists
+          QString sepName = dspec.element + "-separator";
+          QRect sep;
+          sep.setRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+          if (renderElement(painter, sepName+"-"+bStatus, sep))
+          {
+            sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+            renderElement(painter, sepName+"-top-"+bStatus, sep);
+            sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+            renderElement(painter, sepName+"-bottom-"+bStatus, sep);
+          }
+        }
         if (!(option->state & State_Enabled))
           painter->restore();
       }
 
-      indicator_spec dspec = getIndicatorSpec(group);
       Qt::Alignment align;
       // horizontally center both indicators
       if (!verticalIndicators)
@@ -7496,13 +7515,14 @@ void Style::drawControl(ControlElement element,
         {
           if (f->frameShape == QFrame::Box)
           { // the default box frame is ugly too
-            if (!f->rect.isValid() || f->lineWidth == 0) break;
-            painter->save();
             QColor col;
             if (f->state & QStyle::State_Sunken)
               col = f->palette.mid().color();
             else
               col = f->palette.midlight().color();
+            if (!f->rect.isValid() || f->lineWidth == 0 || !col.isValid())
+              break;
+            painter->save();
             QRegion reg(f->rect);
             QRegion internalReg(f->rect.adjusted(f->lineWidth,f->lineWidth,-f->lineWidth,-f->lineWidth));
             painter->setClipRegion(reg.subtracted(internalReg));
