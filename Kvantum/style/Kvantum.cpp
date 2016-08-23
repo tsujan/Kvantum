@@ -8981,16 +8981,22 @@ void Style::drawComplexControl(ComplexControl control,
         // Draw title
         if ((opt->subControls & QStyle::SC_GroupBoxLabel) && !opt->text.isEmpty())
         {
-          QColor textColor = opt->textColor;
-          if (textColor.isValid())
-            painter->setPen(textColor);
-          int talign = Qt::AlignHCenter | Qt::AlignVCenter;
-          if (!styleHint(SH_UnderlineShortcut, opt, widget))
-            talign |= Qt::TextHideMnemonic;
-          else
-            talign |= Qt::TextShowMnemonic;
-
           const label_spec lspec = getLabelSpec("GroupBox");
+          QColor col;
+          if (!(option->state & State_Enabled))
+            col = getFromRGBA(cspec_.disabledTextColor);
+          else if (option->state & State_MouseOver)
+            col = getFromRGBA(lspec.focusColor);
+          else
+            col = getFromRGBA(lspec.normalColor);
+          if (!col.isValid())
+            col = option->palette.color(QPalette::Text);
+          if (col.isValid())
+          {
+            painter->save();
+            painter->setPen(col);
+          }
+
           if (lspec.boldFont || lspec.italicFont)
           {
             QFont font(painter->font());
@@ -9002,11 +9008,19 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setFont(font);
           }
 
+          int talign = Qt::AlignHCenter | Qt::AlignVCenter;
+          if (!styleHint(SH_UnderlineShortcut, opt, widget))
+            talign |= Qt::TextHideMnemonic;
+          else
+            talign |= Qt::TextShowMnemonic;
+
           drawItemText(painter, textRect, talign,
                        opt->palette, opt->state & State_Enabled, opt->text,
-                       textColor.isValid() ? QPalette::NoRole : QPalette::WindowText);
+                       col.isValid() ? QPalette::NoRole : QPalette::WindowText);
 
           if (lspec.boldFont || lspec.italicFont)
+            painter->restore();
+          if (col.isValid())
             painter->restore();
 
           if (opt->state & State_HasFocus)
@@ -9584,30 +9598,25 @@ int Style::styleHint(StyleHint hint,
     }
 
     case SH_GroupBox_TextLabelColor: {
-      const QString status =
-          (option->state & State_Enabled) ?
-            (option->state & State_MouseOver) ? "focused" :
-            (option->state & State_On) ? "pressed" :
-            (option->state & State_Sunken) ? "pressed" : "normal"
-          : "disabled";
       const label_spec lspec = getLabelSpec("GroupBox");
-      QColor normalColor = getFromRGBA(lspec.normalColor);
-      QColor focusColor = getFromRGBA(lspec.focusColor);
-      QColor pressColor = getFromRGBA(lspec.pressColor);
-      if (status == "normal")
+      QColor col;
+      if (!(option->state & State_Enabled))
       {
-        if (normalColor.isValid())
-          return normalColor.rgba();
+        col = getFromRGBA(cspec_.disabledTextColor);
+        if (col.isValid())
+          return col.rgba();
       }
-      else if (status == "focused")
+      else if (option->state & State_MouseOver)
       {
-        if (focusColor.isValid())
-          return focusColor.rgba();
+        col = getFromRGBA(lspec.focusColor);
+        if (col.isValid())
+          return col.rgba();
       }
-      else if (status == "pressed")
+      else
       {
-        if (pressColor.isValid())
-          return pressColor.rgba();
+        col = getFromRGBA(lspec.normalColor);
+        if (col.isValid())
+          return col.rgba();
       }
 
       return QCommonStyle::styleHint(hint,option,widget,returnData);
