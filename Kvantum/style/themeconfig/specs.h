@@ -140,6 +140,7 @@ typedef struct {
   bool scrollbar_in_view;
 
   int layout_spacing;
+  int layout_margin;
 
   int small_icon_size;
   int large_icon_size;
@@ -387,6 +388,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.button_contents_shift = true;
   tspec.scrollbar_in_view = false;
   tspec.layout_spacing = 2;
+  tspec.layout_margin = 4;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;

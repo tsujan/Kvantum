@@ -652,8 +652,13 @@ void KvantumManager::defaultThemeButtons()
     theSize = 2;
     if (defaultSettings.contains ("layout_spacing"))
       theSize = defaultSettings.value ("layout_spacing").toInt();
-    theSize = qMin(qMax(theSize,2), 10);
+    theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayout->setValue (theSize);
+    theSize = 4;
+    if (defaultSettings.contains ("layout_margin"))
+      theSize = defaultSettings.value ("layout_margin").toInt();
+    theSize = qMin(qMax(theSize,2), 16);
+    ui->spinLayoutMargin->setValue (theSize);
     theSize = -1;
     if (defaultSettings.contains ("submenu_overlap"))
       theSize = defaultSettings.value ("submenu_overlap").toInt();

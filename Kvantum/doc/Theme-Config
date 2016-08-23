@@ -420,6 +420,10 @@ layout_spacing                    integer             Obvious. Its value is betw
                                                       (px), and will have no effect if set in
                                                       the code of an app. It is 2 by default.
 
+layout_margin                     integer             Obvious. Its value is between 2 and 16
+                                                      (px), and will have no effect if set in
+                                                      the code of an app. It is 4 by default.
+
 small_icon_size
 large_icon_size
 button_icon_size
