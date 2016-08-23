@@ -7,6 +7,8 @@ V0.10.2
  * Expand x11drag option to allow finer control (thanks to Craig).
  * Allow bold and italic GroupBox titles (thanks to Craig).
  * Added an Arc like theme.
+ * Added a key for drawing tree branch lines (to Kvantum Manager).
+ * Added a key for setting the width of horizontal spin buttons (to Kvantum Manager).
 
 V0.10.1
 ---------

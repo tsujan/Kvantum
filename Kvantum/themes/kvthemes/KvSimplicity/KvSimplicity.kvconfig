@@ -80,7 +80,7 @@ frame.left=3
 frame.right=3
 interior=true
 interior.element=button
-indicator.size=9
+indicator.size=10
 text.normal.color=black
 text.focus.color=#0052aa
 text.press.color=black
@@ -169,7 +169,7 @@ indicator.element=arrow-down
 
 [IndicatorArrow]
 indicator.element=arrow
-indicator.size=9
+indicator.size=10
 
 [ToolboxTab]
 inherits=PanelButtonCommand
@@ -209,7 +209,7 @@ frame.right=4
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
+indicator.size=10
 indicator.element=arrow
 
 [HeaderSection]

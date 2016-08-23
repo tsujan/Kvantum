@@ -487,6 +487,9 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.scroll_arrows = v.toBool();
 
+  v = getValue("General","tree_branch_line");
+  r.tree_branch_line = v.toBool();
+
   v = getValue("General","slider_width");
   if (v.isValid()) // 8 by default
     r.slider_width = qMin(qMax(v.toInt(),0),48);
@@ -512,6 +515,10 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","inline_spin_indicators");
   r.inline_spin_indicators = v.toBool();
+
+  v = getValue("General","spin_button_width");
+  if (v.isValid()) // 16 by default
+    r.spin_button_width = qMin(qMax(v.toInt(),16), 32);
 
   v = getValue("General","combo_as_lineedit");
   r.combo_as_lineedit = v.toBool();

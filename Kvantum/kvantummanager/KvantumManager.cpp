@@ -582,6 +582,7 @@ void KvantumManager::defaultThemeButtons()
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
     ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
+    ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
     if (defaultSettings.contains ("menubar_mouse_tracking")) // it's true by default
@@ -658,6 +659,11 @@ void KvantumManager::defaultThemeButtons()
       theSize = defaultSettings.value ("submenu_overlap").toInt();
     theSize = qMin(qMax(theSize,-1), 16);
     ui->spinOverlap->setValue (theSize);
+    theSize = 16;
+    if (defaultSettings.contains ("spin_button_width"))
+      theSize = defaultSettings.value ("spin_button_width").toInt();
+    theSize = qMin(qMax(theSize,16), 32);
+    ui->spinSpinBtnWidth->setValue (theSize);
     defaultSettings.endGroup();
 }
 /*************************/
@@ -828,6 +834,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("scrollbar_in_view"))
                     ui->checkBoxScrollIn->setChecked (themeSettings.value ("scrollbar_in_view").toBool());
+                if (themeSettings.contains ("tree_branch_line"))
+                    ui->checkBoxTree->setChecked (themeSettings.value ("tree_branch_line").toBool());
                 if (themeSettings.contains ("groupbox_top_label"))
                     ui->checkBoxGroupLabel->setChecked (themeSettings.value ("groupbox_top_label").toBool());
                 if (themeSettings.contains ("fill_rubberband"))
@@ -916,6 +924,12 @@ void KvantumManager::tabChanged (int index)
                     int theSize = themeSettings.value ("submenu_overlap").toInt();
                     theSize = qMin(qMax(theSize,-1), 16);
                     ui->spinOverlap->setValue (theSize);
+                }
+                if (themeSettings.contains ("spin_button_width"))
+                {
+                    int theSize = themeSettings.value ("spin_button_width").toInt();
+                    theSize = qMin(qMax(theSize,16), 32);
+                    ui->spinSpinBtnWidth->setValue (theSize);
                 }
                 themeSettings.endGroup();
 
@@ -1358,6 +1372,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
         generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
+        generalKeys.insert("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
@@ -1380,6 +1395,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
         generalKeys.insert("layout_spacing", str.setNum (ui->spinLayout->value()));
         generalKeys.insert("submenu_overlap", str.setNum (ui->spinOverlap->value()));
+        generalKeys.insert("spin_button_width", str.setNum (ui->spinSpinBtnWidth->value()));
 
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
@@ -1443,7 +1459,8 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
-            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value())
+            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value()
+            || qMin(qMax(themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value())
         {
             restyle = true;
         }
@@ -1466,6 +1483,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
+        themeSettings.setValue ("tree_branch_line", ui->checkBoxTree->isChecked());
         themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
@@ -1487,6 +1505,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
         themeSettings.setValue ("layout_spacing", ui->spinLayout->value());
         themeSettings.setValue ("submenu_overlap", ui->spinOverlap->value());
+        themeSettings.setValue ("spin_button_width", ui->spinSpinBtnWidth->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");

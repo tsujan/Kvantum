@@ -1,7 +1,7 @@
 [%General]
 author=Tsu Jan
 comment=A minimalistic theme inspired by the Arc GTK theme
-x11drag=all
+x11drag=menubar_and_primary_toolbar
 alt_mnemonic=true
 left_tabs=true
 attach_active_tab=true
@@ -30,6 +30,7 @@ blurring=false
 popup_blurring=false
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita,dragon,qupzilla,digikam
 vertical_spin_indicators=false
+spin_button_width=32
 fill_rubberband=false
 merge_menubar_with_toolbar=true
 small_icon_size=16
@@ -38,15 +39,16 @@ button_icon_size=16
 toolbar_icon_size=22
 combo_as_lineedit=true
 animate_states=true
-button_contents_shift=true
+button_contents_shift=false
 combo_menu=true
 groupbox_top_label=false
 inline_spin_indicators=false
 joined_inactive_tabs=false
-layout_spacing=2
+layout_spacing=3
 scrollbar_in_view=true
 submenu_overlap=0
 tooltip_delay=-1
+tree_branch_line=true
 
 [GeneralColors]
 window.color=#f5f6f7
@@ -82,7 +84,7 @@ iconless_pushbutton=false
 iconless_menu=false
 disabled_icon_opacity=100
 lxqtmainmenu_iconsize=22
-normal_default_pushbutton=false
+normal_default_pushbutton=true
 single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
@@ -222,10 +224,8 @@ frame.right=4
 
 [TreeExpander]
 inherits=PanelButtonCommand
-frame=false
-interior=false
-indicator.size=10
-indicator.element=arrow
+indicator.size=12
+indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -272,7 +272,7 @@ text.normal.color=#000000c8
 text.focus.color=black
 text.press.color=black
 text.toggle.color=black
-text.bold=true
+text.bold=false
 frame.expansion=8
 
 [ProgressbarContents]

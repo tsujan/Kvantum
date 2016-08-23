@@ -206,6 +206,10 @@ vertical_spin_indicators          true/false          Draw spin indicators verti
                                                       By default, they are drawn on
                                                       adjacent buttons.
 
+spin_button_width                integer              The width of horizontal spin buttons.
+                                                      It is 16px by default and is always
+                                                      between 16 and 32px.
+
 combo_as_lineedit                true/false           Draw an editable combo box as a
                                                       line-edit with an arrow (and an icon
                                                       if any)? By default, editable combo
@@ -377,6 +381,9 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
 
 scrollbar_in_view                 true/false          Should scrollbars be inside the view
                                                       frame? It is false (outside) by default.
+
+tree_branch_line                  true/false          Draw tree branch lines? Ther are not
+                                                      drawn by default.
 
 groupbox_top_label                true/false          Draw the group-box label above the top
                                                       frame? It is false by default, which

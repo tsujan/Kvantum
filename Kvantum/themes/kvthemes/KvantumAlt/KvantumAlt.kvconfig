@@ -33,6 +33,7 @@ vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
 animate_states=true
+tree_branch_line=true
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -189,9 +190,7 @@ interior.element=common
 
 [TreeExpander]
 inherits=PanelButtonCommand
-frame=false
-interior=false
-indicator.size=7
+indicator.size=10
 
 [HeaderSection]
 inherits=PanelButtonCommand

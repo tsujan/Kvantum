@@ -1127,6 +1127,43 @@ some apps set it themeselves.</string>
                  </property>
                 </widget>
                </item>
+               <item row="6" column="1">
+                <widget class="QLabel" name="label_4">
+                 <property name="toolTip">
+                  <string>The width of horizontal spin buttons.
+(Has not effect when spin indicators are vertical or inline.)</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Spin button width: </string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="2">
+                <widget class="QSpinBox" name="spinSpinBtnWidth">
+                 <property name="toolTip">
+                  <string>The width of horizontal spin buttons.
+(Has not effect when spin indicators are vertical or inline.)</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="suffix">
+                  <string> px</string>
+                 </property>
+                 <property name="minimum">
+                  <number>16</number>
+                 </property>
+                 <property name="maximum">
+                  <number>32</number>
+                 </property>
+                 <property name="value">
+                  <number>16</number>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
              <widget class="QWidget" name="tab_4">
@@ -1151,15 +1188,15 @@ if set explicitly.</string>
                 </widget>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxScrollIn">
+                <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
-                  <string>Draw scrollbars inside view frames?</string>
+                  <string>Draw tree branch lines?</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw tree branch lines?&lt;/p&gt;&lt;p&gt;By default, tree branches have indicators but no line.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Scrollbars inside frames</string>
+                  <string>Tree branch lines</string>
                  </property>
                 </widget>
                </item>
@@ -1479,6 +1516,19 @@ Checking this box removes arrows as far as possible.</string>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="9" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollIn">
+                 <property name="toolTip">
+                  <string>Draw scrollbars inside view frames?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollbars inside frames</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>

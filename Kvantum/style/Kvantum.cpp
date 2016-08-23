@@ -67,7 +67,6 @@
 
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
-#define SPIN_BUTTON_WIDTH 16
 #define SLIDER_TICK_SIZE 5 // 10 at most
 #define COMBO_ARROW_LENGTH 20
 #define TOOL_BUTTON_ARROW_MARGIN 2
@@ -2944,26 +2943,18 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorBranch : {
-      QString group = "TreeExpander";
-
-      frame_spec fspec = getFrameSpec(group);
-      interior_spec ispec = getInteriorSpec(group);
-      indicator_spec dspec = getIndicatorSpec(group);
-
-      QString status = getState(option,widget);
-      if (!(option->state & State_Enabled))
-      {
-        status.replace("disabled","normal");
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
-      }
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-      if (!(option->state & State_Enabled))
-        painter->restore();
+      const indicator_spec dspec = getIndicatorSpec("TreeExpander");
+      QRect r = option->rect;
+      bool rtl(option->direction == Qt::RightToLeft);
+      int expanderAdjust = 0;
 
       if (option->state & State_Children)
       {
+        frame_spec fspec;
+        default_frame_spec(fspec);
+
+
+        QString status = getState(option,widget);
         QString eStatus = "normal";
         if (!(option->state & State_Enabled))
           eStatus = "disabled";
@@ -2974,9 +2965,60 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (widget && !widget->isActiveWindow())
           eStatus.append("-inactive");
         if (option->state & State_Open)
-          renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-minus-"+eStatus,option->direction);
+          renderIndicator(painter,r,fspec,dspec,dspec.element+"-minus-"+eStatus,option->direction);
         else
-          renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-plus-"+eStatus,option->direction);
+        {
+          if (rtl)
+          { // flip the indicator horizontally because it may be an arrow
+            painter->save();
+            QTransform m;
+            r.setRect(x, y, w, h);
+            m.translate(2*x + w, 0); m.scale(-1,1);
+            painter->setTransform(m, true);
+          }
+          renderIndicator(painter,r,fspec,dspec,dspec.element+"-plus-"+eStatus,option->direction);
+          if (rtl)
+            painter->restore();
+        }
+
+        if (tspec_.tree_branch_line)
+        {
+          int sizeLimit = qMin(qMin(r.width(), r.height()), dspec.size);
+          if(!( sizeLimit&1)) --sizeLimit; // make it odd
+          expanderAdjust = sizeLimit/2 + 1;
+        }
+      }
+
+      if (tspec_.tree_branch_line) // taken from Oxygen
+      {
+        const QPoint center(r.center());
+        const int centerX = center.x();
+        const int centerY = center.y();
+
+        QColor col(option->palette.color(QPalette::Text));
+        col.setAlpha(60);
+        painter->save();
+        painter->setPen(col);
+        if (option->state & (State_Item | State_Children | State_Sibling))
+        {
+          const QLine line( QPoint(centerX, r.top()), QPoint(centerX, centerY - expanderAdjust));
+          painter->drawLine( line );
+        }
+        // the right/left (depending on dir) line gets drawn if we have an item
+        if (option->state & State_Item)
+        {
+          const QLine line = rtl ?
+                QLine( QPoint(r.left(), centerY), QPoint(centerX - expanderAdjust, centerY)) :
+                QLine( QPoint(centerX + expanderAdjust, centerY), QPoint(r.right(), centerY));
+          painter->drawLine(line);
+        }
+        // the bottom if we have a sibling
+        if (option->state & State_Sibling)
+        {
+          const QLine line( QPoint(centerX, centerY + expanderAdjust), QPoint(centerX, r.bottom()));
+          painter->drawLine(line);
+        }
+        painter->restore();
       }
 
       break;
@@ -3407,7 +3449,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && sb->width() < widget->width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right))
+                  && sb->width() < widget->width() + 2*tspec_.spin_button_width + getFrameSpec("IndicatorSpinBox").right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
@@ -3590,7 +3632,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         if (up)
         {
-          int m = opt->rect.width() - SPIN_BUTTON_WIDTH;
+          int m = opt->rect.width() - tspec_.spin_button_width;
           if (fspec.right > m)
           {
             m = qMax(m,2);
@@ -3598,7 +3640,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.expansion = 0;
           }
         }
-        else if (w < SPIN_BUTTON_WIDTH) fspec.expansion = 0;
+        else if (w < tspec_.spin_button_width) fspec.expansion = 0;
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
           if (spinMaxText(sb).isEmpty())
@@ -7777,7 +7819,7 @@ void Style::drawComplexControl(ComplexControl control,
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
                                              ? fspec.right : 0)
                   || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                      && sb->width() < editRect.width() + 2*SPIN_BUTTON_WIDTH
+                      && sb->width() < editRect.width() + 2*tspec_.spin_button_width
                                                         + getFrameSpec("IndicatorSpinBox").right))
               {
                 fspec.left = qMin(fspec.left,3);
@@ -9690,7 +9732,7 @@ QSize Style::sizeFromContents(ContentsType type,
           maxTxt = maxTxt + QLatin1Char(' ');
           s = textSize(sb->font(),maxTxt)
               + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
-                                 + 2*SPIN_BUTTON_WIDTH
+                                 + 2*tspec_.spin_button_width
                                  + (tspec_.vertical_spin_indicators
                                     || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? // as in qpdfview
                                       fspec.right : fspec1.right),
@@ -9706,7 +9748,7 @@ QSize Style::sizeFromContents(ContentsType type,
           if (tspec_.vertical_spin_indicators || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
             s.rwidth() = sb->minimumWidth();
           else
-            s.rwidth() = sb->minimumWidth() + SPIN_BUTTON_WIDTH;
+            s.rwidth() = sb->minimumWidth() + tspec_.spin_button_width;
         }
 
         s = s.expandedTo(QSize(sspec.minW,sspec.minH));
@@ -10620,7 +10662,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && p->width() < option->rect.width() + 2*SPIN_BUTTON_WIDTH + getFrameSpec("IndicatorSpinBox").right))
+                  && p->width() < option->rect.width() + 2*tspec_.spin_button_width + getFrameSpec("IndicatorSpinBox").right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
@@ -11088,7 +11130,7 @@ QRect Style::subControlRect(ComplexControl control,
       break;
 
     case CC_SpinBox : {
-      int sw = SPIN_BUTTON_WIDTH;
+      int sw = tspec_.spin_button_width;
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
@@ -11103,33 +11145,32 @@ QRect Style::subControlRect(ComplexControl control,
       }
       else if (!verticalIndicators)
       {
-        /* when there isn't enough horizontal space (as in Pencil) */
         if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
         {
           if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
             sw = 0;
-          else
+          else // when there isn't enough horizontal space (as in VLC and Pencil)
           {
             QString maxTxt = spinMaxText(sb);
             if (!maxTxt.isEmpty())
             {
               maxTxt = maxTxt + QLatin1Char(' ');
               int txtWidth = textSize(sb->font(),maxTxt).width();
-              int m = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
-              if (fspec.right > m)
+              int rightFrame = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
+              if (fspec.right > rightFrame)
               {
-                /* in this case, lineedit frame width
-                   is set to 3 at PE_PanelLineEdit */
-                m = w-txtWidth-2*sw-3-2;
-                if (fspec.right > m)
+                sw = 16;
+                // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
+                rightFrame = w-txtWidth-2*sw-3-2;
+                if (fspec.right > rightFrame)
                 {
-                  m = qMax(m,2);
-                  if (m > 2 || w >= txtWidth+2*8+2) // otherwise wouldn't help
+                  rightFrame = qMax(rightFrame,2);
+                  if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
                   {
-                    if (m == 2)
+                    if (rightFrame == 2) // see PE_IndicatorSpinUp
                       sw = 8;
                     fspec.right = qMin(fspec.right,
-                                       qMin(m,3)); // for a uniform look
+                                       qMin(rightFrame,3)); // for a uniform look
                   }
                   else fspec.right = qMin(fspec.right,3); // better than nothing
                 }

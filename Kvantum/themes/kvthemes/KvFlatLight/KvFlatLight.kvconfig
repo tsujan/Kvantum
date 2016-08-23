@@ -106,6 +106,7 @@ text.margin.top=3
 text.margin.bottom=3
 text.margin.left=3
 text.margin.right=3
+frame.expansion=8
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -203,6 +204,7 @@ text.normal.color=black
 text.press.color=black
 text.focus.color=#194B64
 text.toggle.color=black
+frame.expansion=0
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -269,6 +271,7 @@ text.focus.color=black
 text.press.color=black
 text.toggle.color=black
 text.bold=true
+frame.expansion=0
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -319,6 +322,7 @@ frame.left=6
 frame.right=6
 indicator.element=grip
 indicator.size=13
+frame.expansion=0
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
@@ -346,12 +350,14 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
 frame=false
 interior.element=menubar
 text.normal.color=white
+frame.expansion=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -365,6 +371,7 @@ text.margin.left=5
 text.margin.right=5
 text.normal.color=white
 text.focus.color=#41C3FF
+frame.expansion=0
 
 [TitleBar]
 inherits=PanelButtonCommand
@@ -376,6 +383,7 @@ text.normal.color=#C8C8C8
 text.focus.color=white
 text.bold=true
 text.italic=true
+frame.expansion=0
 
 [ComboBox]
 inherits=PanelButtonCommand
@@ -392,6 +400,7 @@ interior.element=menu
 size.minheight=22
 size.minwidth=22
 text.normal.color=black
+frame.expansion=0
 
 [GroupBox]
 inherits=GenericFrame
@@ -406,6 +415,7 @@ frame.right=4
 text.normal.color=black
 text.press.color=black
 text.focus.color=#2B7EA8
+frame.expansion=0
 
 [TabBarFrame]
 inherits=GenericFrame
@@ -424,6 +434,7 @@ text.shadow=0
 text.margin=0
 interior.element=tooltip
 frame.element=tooltip
+frame.expansion=0
 
 [StatusBar]
 inherits=GenericFrame

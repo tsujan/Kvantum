@@ -102,6 +102,8 @@ typedef struct {
   int scroll_min_extent;
   /* draw scroll arrows? */
   bool scroll_arrows;
+  /* draw tree branch lines? */
+  bool tree_branch_line;
 
   /* slider width */
   int slider_width;
@@ -120,6 +122,8 @@ typedef struct {
   /* draw spin indicators horizontally
      but inside the spin line-edit? */
   bool inline_spin_indicators;
+  /* width of a horizontal spin button */
+  int spin_button_width;
   /* draw an editable combobox as a lineedit with arrow? */
   bool combo_as_lineedit;
   /* use popup menu for combo popup */
@@ -367,6 +371,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.scroll_width = 12;
   tspec.scroll_min_extent = 36;
   tspec.scroll_arrows=true;
+  tspec.tree_branch_line=false;
   tspec.slider_width = 8;
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
@@ -374,6 +379,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.tooltip_delay = -1;
   tspec.vertical_spin_indicators = false;
   tspec.inline_spin_indicators = false;
+  tspec.spin_button_width = 16;
   tspec.combo_as_lineedit = false;
   tspec.combo_menu = false;
   tspec.fill_rubberband = false;
