@@ -4501,6 +4501,7 @@ void Style::drawControl(ControlElement element,
 
   const QIcon::Mode iconmode =
         (option->state & State_Enabled) ?
+        (option->state & State_Selected) ? QIcon::Selected :
         (option->state & State_Sunken) ? QIcon::Active :
         (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
       : QIcon::Disabled;
