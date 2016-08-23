@@ -1216,6 +1216,9 @@ void KvantumManager::preview()
 {
     QString binDir = QApplication::applicationDirPath();
     QString previewExe = binDir + "/kvantumpreview";
+#if QT_VERSION >= 0x050000
+    previewExe += " -style kvantum";
+#endif
     process_->terminate();
     process_->waitForFinished();
     process_->start (previewExe);

@@ -1131,7 +1131,7 @@ some apps set it themeselves.</string>
                 <widget class="QLabel" name="label_4">
                  <property name="toolTip">
                   <string>The width of horizontal spin buttons.
-(Has not effect when spin indicators are vertical or inline.)</string>
+(Has no effect when spin indicators are vertical or inline.)</string>
                  </property>
                  <property name="whatsThis">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1145,7 +1145,7 @@ some apps set it themeselves.</string>
                 <widget class="QSpinBox" name="spinSpinBtnWidth">
                  <property name="toolTip">
                   <string>The width of horizontal spin buttons.
-(Has not effect when spin indicators are vertical or inline.)</string>
+(Has no effect when spin indicators are vertical or inline.)</string>
                  </property>
                  <property name="whatsThis">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
