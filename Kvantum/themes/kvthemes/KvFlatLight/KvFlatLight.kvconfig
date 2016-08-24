@@ -83,6 +83,7 @@ single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_sidepane=true
 transparent_pcmanfm_view=false
+no_selection_tint=true
 
 [PanelButtonCommand]
 frame=true

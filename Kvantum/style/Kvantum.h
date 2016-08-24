@@ -91,6 +91,10 @@ class Style : public QCommonStyle {
                                              const QPoint &position,
                                              const QWidget *widget = 0) const;
 
+    virtual QPixmap generatedIconPixmap(QIcon::Mode iconMode,
+                                        const QPixmap &pixmap,
+                                        const QStyleOption *option) const;
+
     /* A solution for Qt5's problem with translucent windows.*/
     void setSurfaceFormat(QWidget *w) const;
     void setSurfaceFormat(const QWidget *w) const
@@ -263,6 +267,9 @@ class Style : public QCommonStyle {
 
     /* Is this a toolbar that should be styled? */
     bool isStylableToolbar(const QWidget *w) const;
+
+    /* Consider monochrome icons that reverse color when selected. */
+    QIcon::Mode getIconMode(int state, label_spec lspec) const;
 
   private slots:
     /* Called on timer timeout to advance busy progress bars. */

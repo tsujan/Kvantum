@@ -683,6 +683,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (v.isValid())
     r.tint_on_mouseover = qMin(qMax(v.toInt(),0),100);
 
+  v = getValue("Hacks","no_selection_tint");
+  r.no_selection_tint = v.toBool();
+
   v = getValue("Hacks","disabled_icon_opacity");
   if (v.isValid())
     r.disabled_icon_opacity = qMin(qMax(v.toInt(),0),100);

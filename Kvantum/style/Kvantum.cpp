@@ -72,7 +72,7 @@
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
-#define MIN_CONTRAST 65
+#define MIN_CONTRAST 78
 #define ANIMATION_FRAME 40 // in ms
 #define OPACITY_STEP 20 // percent
 
@@ -4495,6 +4495,30 @@ void Style::drawPrimitive(PrimitiveElement element,
   }
 }
 
+QIcon::Mode Style::getIconMode(int state, label_spec lspec) const
+{
+  QIcon::Mode icnMode;
+  if (state == 0)
+    icnMode = QIcon::Disabled;
+  else
+    icnMode = QIcon::Normal;
+
+  QColor txtCol;
+  if (state == 1)
+    txtCol = getFromRGBA(lspec.normalColor);
+  if (state == 2)
+    txtCol = getFromRGBA(lspec.focusColor);
+  if (state == 3)
+    txtCol = getFromRGBA(lspec.pressColor);
+  else if (state == 4)
+    txtCol = getFromRGBA(lspec.toggleColor);
+
+  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::ButtonText)))
+    icnMode = QIcon::Selected;
+
+  return icnMode;
+}
+
 void Style::drawControl(ControlElement element,
                         const QStyleOption *option,
                         QPainter *painter,
@@ -5194,7 +5218,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
-                    getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize),
+                    getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
 
@@ -6874,13 +6898,14 @@ void Style::drawControl(ControlElement element,
           if (margin > 0)
             R.adjust(margin, 0, -margin, 0);
         }
+
         renderLabel(&o,painter,
                     R,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
-                      : getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
+                      : getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
 
@@ -7405,7 +7430,7 @@ void Style::drawControl(ControlElement element,
                       fspec,lspec,
                       talign,opt->text,QPalette::ButtonText,
                       state,
-                      getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
+                      getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
         }
@@ -8209,18 +8234,22 @@ void Style::drawComplexControl(ComplexControl control,
              at CE_ComboBoxLabel, we draw and center it here */
           if (opt->editable && !opt->currentIcon.isNull())
           {
-            const QIcon::Mode iconmode =
-              (option->state & State_Enabled) ?
-              (option->state & State_Sunken) ? QIcon::Active :
-              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-              : QIcon::Disabled;
-
             const QIcon::State iconstate =
               (option->state & State_On) ? QIcon::On : QIcon::Off;
 
+            int state = 1;
+            if (!(option->state & State_Enabled))
+              state = 0;
+            else if (status.startsWith("pressed"))
+              state = 3;
+            else if (status.startsWith("toggled"))
+              state = 4;
+            else if (status.startsWith("focused"))
+              state = 2;
+
             /*fspec.top = fspec.bottom = 0;
               lspec.top = lspec.bottom = 0;*/
-            QPixmap icn = getPixmapFromIcon(opt->currentIcon,iconmode,iconstate,opt->iconSize);
+            QPixmap icn = getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize);
             QRect ricn = alignedRect(option->direction,
                                      Qt::AlignVCenter | Qt::AlignLeft,
                                      opt->iconSize,
@@ -11958,6 +11987,86 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 #endif
 }
 
+static inline uint qt_intensity(uint r, uint g, uint b)
+{
+  // 30% red, 59% green, 11% blue
+  return (77 * r + 150 * g + 28 * b) / 255;
+}
+
+QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
+                                   const QPixmap &pixmap,
+                                   const QStyleOption *opt) const
+{
+  switch (iconMode) {
+    case QIcon::Disabled: {
+      QImage im = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
+
+      // Create a colortable based on the background (black -> bg -> white)
+      QColor bg = opt->palette.color(QPalette::Disabled, QPalette::Window);
+      int red = bg.red();
+      int green = bg.green();
+      int blue = bg.blue();
+      uchar reds[256], greens[256], blues[256];
+      for (int i=0; i<128; ++i)
+      {
+        reds[i]   = uchar((red   * (i<<1)) >> 8);
+        greens[i] = uchar((green * (i<<1)) >> 8);
+        blues[i]  = uchar((blue  * (i<<1)) >> 8);
+      }
+      for (int i=0; i<128; ++i)
+      {
+        reds[i+128]   = uchar(qMin(red   + (i << 1), 255));
+        greens[i+128] = uchar(qMin(green + (i << 1), 255));
+        blues[i+128]  = uchar(qMin(blue  + (i << 1), 255));
+      }
+
+      int intensity = qt_intensity(red, green, blue);
+      const int factor = 191;
+
+      // High intensity colors needs dark shifting in the color table, while
+      // low intensity colors needs light shifting. This is to increase the
+      // percieved contrast.
+      if ((red - factor > green && red - factor > blue)
+          || (green - factor > red && green - factor > blue)
+          || (blue - factor > red && blue - factor > green))
+        intensity = qMin(255, intensity + 91);
+      else if (intensity <= 128)
+        intensity -= 51;
+
+      for (int y=0; y<im.height(); ++y)
+      {
+        QRgb *scanLine = (QRgb*)im.scanLine(y);
+        for (int x=0; x<im.width(); ++x)
+        {
+          QRgb pixel = *scanLine;
+          // Calculate color table index, taking intensity adjustment
+          // and a magic offset into account.
+          uint ci = uint(qGray(pixel)/3 + (130 - intensity / 3));
+          *scanLine = qRgba(reds[ci], greens[ci], blues[ci], qAlpha(pixel));
+          ++scanLine;
+        }
+      }
+
+      return QPixmap::fromImage(im);
+    }
+    case QIcon::Selected: {
+      if (hspec_.no_selection_tint) break;
+      QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+      QColor color = opt->palette.color(QPalette::Normal, QPalette::Highlight);
+      color.setAlphaF(qreal(0.3));
+      QPainter painter(&img);
+      painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+      painter.fillRect(0, 0, img.width(), img.height(), color);
+      painter.end();
+      return QPixmap::fromImage(img);
+    }
+    case QIcon::Active:
+      return pixmap;
+    default: break;
+  }
+  return pixmap;
+}
+
 QRect Style::squaredRect(const QRect &r) const {
   int e = (r.width() > r.height()) ? r.height() : r.width();
   return QRect(r.x(),r.y(),e,e);
@@ -12989,7 +13098,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
 QPixmap Style::tintedPixmap(const QStyleOption *option,
                             const QPixmap &px,
                             const qreal tintPercentage) const
-{ // -> qcommonstyle.cpp -> QCommonStyle::generatedIconPixmap()
+{ // -> generatedIconPixmap()
   if (!option || px.isNull()) return QPixmap();
   if (tintPercentage <= 0) return px;
   QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
@@ -13004,7 +13113,7 @@ QPixmap Style::tintedPixmap(const QStyleOption *option,
 
 QPixmap Style::translucentPixmap(const QPixmap &px,
                                  const qreal opacityPercentage) const
-{ // -> qcommonstyle.cpp -> QCommonStyle::generatedIconPixmap()
+{ // -> generatedIconPixmap()
   if (px.isNull()) return QPixmap();
   QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
   img.fill(Qt::transparent);

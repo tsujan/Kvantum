@@ -12,6 +12,8 @@ V0.10.2
  * Global minimum width for push buttons.
  * Center text+icon in push buttons.
  * Added a key for layout margins (thanks to Craig).
+ * Support monochrome icon sets that reverse the color of selected icons.
+ * Added a hacking key for not tinting selected icons.
 
 V0.10.1
 ---------

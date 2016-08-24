@@ -201,6 +201,8 @@ typedef struct {
   /* tint icons with the highlight color
      on mouseover by this percentage */
   int tint_on_mouseover;
+  /* don't tint icons with the highlight color on selecting them */
+  bool no_selection_tint;
   /* set the opacity of disabled icons by this percentage */
   int disabled_icon_opacity;
   /* don't use bold font for default pushbuttons? */
@@ -432,6 +434,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
   hspec.tint_on_mouseover = 0;
+  hspec.no_selection_tint = false;
   hspec.disabled_icon_opacity = 100;
   hspec.normal_default_pushbutton = false;
   hspec.iconless_pushbutton = false;

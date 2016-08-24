@@ -544,6 +544,9 @@ tint_on_mouseover                 integer             Tint the label icons with 
                                                       This will not work if the containing
                                                       widget is not styled by Kvantum.
 
+no_selection_tint                 true/false          Do not tint selected label icons with
+                                                      the highlight color! False by default.
+
 disabled_icon_opacity             integer             Set the opacity of disabled icons by
                                                       this percentage? It is useful with
                                                       monochrome icons and when the opacity
