@@ -543,6 +543,10 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);
 
+  v = getValue("General","layout_margin");
+  if (v.isValid()) // 4 by default
+    r.layout_margin = qMin(qMax(v.toInt(),2), 16);
+
   v = getValue("General","small_icon_size");
   if (v.isValid()) // 16 by default
     r.small_icon_size = qMin(qMax(v.toInt(),16), 48);

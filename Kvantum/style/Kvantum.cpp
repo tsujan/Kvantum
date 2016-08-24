@@ -9103,7 +9103,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_LayoutLeftMargin :
     case PM_LayoutRightMargin :
     case PM_LayoutTopMargin :
-    case PM_LayoutBottomMargin : return 4;
+    case PM_LayoutBottomMargin : return tspec_.layout_margin;
 
     case PM_LayoutHorizontalSpacing :
     case PM_LayoutVerticalSpacing : return tspec_.layout_spacing;
