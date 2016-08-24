@@ -685,15 +685,18 @@ void KvantumManager::resizeConfPage (bool thirdPage)
   QSize newSize  = size().expandedTo (ui->page_2->sizeHint());
   if (thirdPage) // the biggest page
   {
-      int textIconHeight = qMax (QApplication::style()->pixelMetric (QStyle::PM_SmallIconSize),
+      QStyle *style = QApplication::style();
+      int textIconHeight = qMax (style->pixelMetric (QStyle::PM_SmallIconSize),
                                  QFontMetrics(font()).height());
       newSize = size().expandedTo (ui->groupBox->sizeHint()
-                                   + QSize (10 + QApplication::style()->pixelMetric (QStyle::PM_ScrollBarExtent),
+                                   + QSize (4*style->pixelMetric (QStyle::PM_LayoutLeftMargin)
+                                              + style->pixelMetric (QStyle::PM_ScrollBarExtent),
                                             2*ui->saveButton->sizeHint().height()
                                               + ui->statusBar->sizeHint().height()
                                               + ui->configLabel->sizeHint().height()
                                               + 6*textIconHeight
-                                              + 45));
+                                              + (1+2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
+                                              + (4+1)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)));
   }
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
@@ -921,8 +924,14 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("layout_spacing"))
                 {
                     int theSize = themeSettings.value ("layout_spacing").toInt();
-                    theSize = qMin(qMax(theSize,2), 10);
+                    theSize = qMin(qMax(theSize,2), 16);
                     ui->spinLayout->setValue (theSize);
+                }
+                if (themeSettings.contains ("layout_margin"))
+                {
+                    int theSize = themeSettings.value ("layout_margin").toInt();
+                    theSize = qMin(qMax(theSize,2), 16);
+                    ui->spinLayoutMargin->setValue (theSize);
                 }
                 if (themeSettings.contains ("submenu_overlap"))
                 {
@@ -1402,6 +1411,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
         generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
         generalKeys.insert("layout_spacing", str.setNum (ui->spinLayout->value()));
+        generalKeys.insert("layout_margin", str.setNum (ui->spinLayoutMargin->value()));
         generalKeys.insert("submenu_overlap", str.setNum (ui->spinOverlap->value()));
         generalKeys.insert("spin_button_width", str.setNum (ui->spinSpinBtnWidth->value()));
 
@@ -1467,7 +1477,8 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
-            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),10) != ui->spinLayout->value()
+            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),16) != ui->spinLayout->value()
+            || qMin(qMax(themeSettings.value ("layout_margin").toInt(),2),16) != ui->spinLayoutMargin->value()
             || qMin(qMax(themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value())
         {
             restyle = true;
@@ -1512,6 +1523,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("button_icon_size", ui->spinButton->value());
         themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
         themeSettings.setValue ("layout_spacing", ui->spinLayout->value());
+        themeSettings.setValue ("layout_margin", ui->spinLayoutMargin->value());
         themeSettings.setValue ("submenu_overlap", ui->spinOverlap->value());
         themeSettings.setValue ("spin_button_width", ui->spinSpinBtnWidth->value());
         QString opaque = ui->opaqueEdit->text();

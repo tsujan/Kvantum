@@ -11,6 +11,7 @@ V0.10.2
  * Added a key for setting the width of horizontal spin buttons (to Kvantum Manager).
  * Global minimum width for push buttons.
  * Center text+icon in push buttons.
+ * Added a key for layout margins (thanks to Craig).
 
 V0.10.1
 ---------
