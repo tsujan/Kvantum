@@ -5715,7 +5715,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
                     state,
-                    getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
+                    getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                     iconSize);
 
         if (tabV2.state & State_HasFocus)
