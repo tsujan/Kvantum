@@ -2995,27 +2995,31 @@ void Style::drawPrimitive(PrimitiveElement element,
         const int centerX = center.x();
         const int centerY = center.y();
 
-        QColor col(option->palette.color(QPalette::Text));
-        col.setAlpha(60);
+        QColor col;
+        if (qGray(option->palette.color(QPalette::Base).rgb()) <= 100)
+          col = option->palette.color(QPalette::Light);
+        else
+          col = option->palette.color(QPalette::Dark);
+        if (!col.isValid()) break;
         painter->save();
         painter->setPen(col);
         if (option->state & (State_Item | State_Children | State_Sibling))
         {
-          const QLine line( QPoint(centerX, r.top()), QPoint(centerX, centerY - expanderAdjust));
+          const QLine line(QPoint(centerX, r.top()), QPoint(centerX, centerY - expanderAdjust));
           painter->drawLine( line );
         }
         // the right/left (depending on dir) line gets drawn if we have an item
         if (option->state & State_Item)
         {
           const QLine line = rtl ?
-                QLine( QPoint(r.left(), centerY), QPoint(centerX - expanderAdjust, centerY)) :
-                QLine( QPoint(centerX + expanderAdjust, centerY), QPoint(r.right(), centerY));
+                QLine(QPoint(r.left(), centerY), QPoint(centerX - expanderAdjust, centerY)) :
+                QLine(QPoint(centerX + expanderAdjust, centerY), QPoint(r.right(), centerY));
           painter->drawLine(line);
         }
         // the bottom if we have a sibling
         if (option->state & State_Sibling)
         {
-          const QLine line( QPoint(centerX, centerY + expanderAdjust), QPoint(centerX, r.bottom()));
+          const QLine line(QPoint(centerX, centerY + expanderAdjust), QPoint(centerX, r.bottom()));
           painter->drawLine(line);
         }
         painter->restore();
