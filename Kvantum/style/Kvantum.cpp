@@ -6791,25 +6791,32 @@ void Style::drawControl(ControlElement element,
           painter->setFont(f);
         }
 
-        /* in case there isn't enough space */
-        if (pb && !opt->text.isEmpty())
+        QSize txtSize;
+        if (!opt->text.isEmpty())
         {
-          QSize txtSize = textSize(painter->font(),opt->text);
-          if (pb->width() < txtSize.width()
-                            +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                            +lspec.left+lspec.right+fspec.left+fspec.right)
+          QFont fnt(painter->font());
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+            fnt.setBold(true);
+          txtSize = textSize(fnt,opt->text);
+           /* in case there isn't enough space */
+          if (pb)
           {
-            lspec.left = lspec.right = 0;
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            lspec.tispace = qMin(lspec.tispace,3);
-          }
-          if (pb->height() < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
-          {
-            lspec.top = lspec.bottom = 0;
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
-            lspec.tispace = qMin(lspec.tispace,3);
+            if (pb->width() < txtSize.width()
+                              +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                              +lspec.left+lspec.right+fspec.left+fspec.right)
+            {
+              lspec.left = lspec.right = 0;
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              lspec.tispace = qMin(lspec.tispace,3);
+            }
+            if (pb->height() < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+            {
+              lspec.top = lspec.bottom = 0;
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+              lspec.tispace = qMin(lspec.tispace,3);
+            }
           }
         }
 
@@ -6828,7 +6835,7 @@ void Style::drawControl(ControlElement element,
           int vShift = pixelMetric(PM_ButtonShiftVertical);
           r = r.adjusted(hShift,vShift,hShift,vShift);
         }
-        int talign = Qt::AlignCenter | Qt::AlignVCenter;
+        int talign = Qt::AlignHCenter | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
         else
@@ -6851,8 +6858,19 @@ void Style::drawControl(ControlElement element,
         QStyleOptionButton o(*opt);
         if ((option->state & State_MouseOver) && state != 2)
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+
+        /* center text+icon */
+        QRect R = r;
+        if (txtSize.isValid() && !opt->icon.isNull())
+        {
+          int margin = (r.width() - txtSize.width() - opt->iconSize.width()
+                        - fspec.left - fspec.right - lspec.left - lspec.right - lspec.tispace
+                        - (lspec.hasShadow ? qAbs(lspec.xshift)+lspec.depth : 0)) / 2;
+          if (margin > 0)
+            R.adjust(margin, 0, -margin, 0);
+        }
         renderLabel(&o,painter,
-                    r,
+                    R,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
@@ -6917,7 +6935,10 @@ void Style::drawControl(ControlElement element,
 
         if (pb && !opt->text.isEmpty()) // -> CE_PushButtonLabel
         {
-          QSize txtSize = textSize(painter->font(),opt->text);
+          QFont fnt(painter->font());
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+            fnt.setBold(true);
+          QSize txtSize = textSize(fnt,opt->text);
           if (pb->width() < txtSize.width()
                             +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
                             +lspec.left+lspec.right+fspec.left+fspec.right)
@@ -9888,18 +9909,20 @@ QSize Style::sizeFromContents(ContentsType type,
 
         /* take in to account the boldness of default button text
            and also the possibility of boldness in general */
-        if (!txt.isEmpty())
+        if (!txt.isEmpty() && ((opt->features & QStyleOptionButton::AutoDefaultButton)
+                               || lspec.boldFont))
         {
-          const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
-          if (pb/* && pb->isDefault()*/)
-          {
-            QFont f = pb->font();
-            QSize s1 = textSize(f, txt);
-            f.setBold(true);
-            s = s + textSize(f, txt) - s1;
-          }
+          QFont f = QApplication::font();
+          if (widget) f = widget->font();
+          QSize s1 = textSize(f, txt);
+          f.setBold(true);
+          s = s + textSize(f, txt) - s1;
         }
 
+        // consider a global min. width for push buttons
+        s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
+                                 + 6*QFontMetrics(QApplication::font()).width("W"),
+                               s.height()));
         s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
