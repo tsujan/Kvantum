@@ -41,7 +41,7 @@ combo_as_lineedit=true
 animate_states=true
 button_contents_shift=false
 combo_menu=true
-groupbox_top_label=false
+groupbox_top_label=true
 inline_spin_indicators=false
 joined_inactive_tabs=false
 layout_spacing=6
@@ -400,16 +400,10 @@ frame.expansion=0
 
 [GroupBox]
 inherits=GenericFrame
-frame=true
-frame.element=group
+frame=false
 text.shadow=0
 text.margin=0
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
 text.normal.color=#000000c8
-text.press.color=#000000c8
 text.focus.color=black
 text.bold=true
 frame.expansion=0
