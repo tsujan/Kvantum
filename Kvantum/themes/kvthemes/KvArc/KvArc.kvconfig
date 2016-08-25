@@ -11,15 +11,15 @@ spread_progressbar=true
 composite=true
 menu_shadow_depth=5
 tooltip_shadow_depth=6
-splitter_width=8
-scroll_width=12
+splitter_width=4
+scroll_width=9
 scroll_arrows=false
 scroll_min_extent=60
 slider_width=6
 slider_handle_width=18
 slider_handle_length=18
 center_toolbar_handle=true
-check_size=16
+check_size=14
 textless_progressbar=false
 progressbar_thickness=40
 menubar_mouse_tracking=true
@@ -63,8 +63,8 @@ mid.color=white
 highlight.color=#5294e2
 inactive.highlight.color=#5294e2
 text.color=#000000c8
-window.text.color=black
-button.text.color=black
+window.text.color=#000000c8
+button.text.color=#000000c8
 disabled.text.color=#00000073
 tooltip.text.color=white
 highlight.text.color=white
@@ -211,7 +211,7 @@ frame.right=4
 text.normal.color=#0000007d
 text.focus.color=#000000b4
 text.press.color=none
-text.toggle.color=black
+text.toggle.color=#000000c8
 frame.expansion=0
 
 [TabFrame]
@@ -230,10 +230,10 @@ indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.top=0
+frame.bottom=1
+frame.left=0
+frame.right=1
 
 [SizeGrip]
 indicator.element=resize-grip
