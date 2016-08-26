@@ -237,11 +237,15 @@ indicator.element=tree
 inherits=PanelButtonCommand
 interior.element=header
 frame.element=header
-text.bold=true
+text.bold=false
 text.normal.color=#0000008c
 text.focus.color=#5796e8
 text.toggle.color=black
 frame.expansion=0
+frame.top=0
+frame.bottom=0
+frame.left=2
+frame.right=0
 
 [SizeGrip]
 indicator.element=resize-grip
