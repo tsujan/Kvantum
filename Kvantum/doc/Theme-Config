@@ -603,6 +603,11 @@ frame.expansion                   integer             A positive value will expa
                                                       value is zero by default. Read the file
                                                       "Theme-Making.pdf" for more explanation.
 
+frame.patternsize                 integer             The frame pattern size. Used for tiling
+                                                      the frame of a widget with a pattern. A
+                                                      value of zero means no pattern (default).
+                                                      Mostly useful for making dotted frames.
+
 interior                          true/false          Draw an interior for the widget?
 
 interior.x.patternsize

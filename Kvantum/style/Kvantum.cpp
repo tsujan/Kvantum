@@ -6534,8 +6534,6 @@ void Style::drawControl(ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      else if (status.startsWith("toggled")) // the toggled state isn't needed
-        status.replace("toggled","normal");
       /* for elegance */
       /*if (r.height() < 2)
         fspec.expansion = 0;
@@ -6616,12 +6614,15 @@ void Style::drawControl(ControlElement element,
           fspec.top = fspec.bottom = lspec.top = lspec.bottom = 0;
         }
 
+        QString status = getState(option,widget);
         int state = 1;
         if (!(option->state & State_Enabled))
           state = 0;
-        else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
+        else if (status.startsWith("pressed"))
           state = 3;
-        else if (option->state & State_MouseOver)
+        else if (status.startsWith("toggled"))
+          state = 4;
+        else if (status.startsWith("focused"))
           state = 2;
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
@@ -12436,13 +12437,13 @@ void Style::renderFrame(QPainter *painter,
                           y0,
                           d-x0-Left,
                           Top),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
       renderElement(painter,element1+"-top",
                     QRect(d+l,
                           y0,
                           x0+w-Left-d-l,
                           Top),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
      /* left and right junctions */
      if (d-x0-Left >= 0)
        renderElement(painter,element1+"-top-leftjunct",
@@ -12462,7 +12463,7 @@ void Style::renderFrame(QPainter *painter,
     else
       renderElement(painter,element1+"-top",
                     QRect(x0+Left,y0,w-Left-Right,Top),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
 
     /************
      ** Bottom **
@@ -12474,13 +12475,13 @@ void Style::renderFrame(QPainter *painter,
                           y1-Bottom,
                           d-x0-Left,
                           Bottom),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
       renderElement(painter,element1+"-bottom",
                     QRect(d+l,
                           y1-Bottom,
                           x0+w-Left-d-l,
                           Bottom),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
       if (d-x0-Left >= 0)
         renderElement(painter,element1+"-bottom-leftjunct",
                       QRect(d,
@@ -12499,7 +12500,7 @@ void Style::renderFrame(QPainter *painter,
     else
       renderElement(painter,element1+"-bottom",
                     QRect(x0+Left,y1-Bottom,w-Left-Right,Bottom),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
 
     /**********
      ** Left **
@@ -12511,13 +12512,13 @@ void Style::renderFrame(QPainter *painter,
                           y0+Top,
                           Left,
                           d-y0-Top),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
       renderElement(painter,element1+"-left",
                     QRect(x0,
                           d+l,
                           Left,
                           y0+h-Bottom-d-l),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
       if (y0+h-Bottom-d-l >= 0)
         renderElement(painter,element1+"-left-leftjunct",
                       QRect(x0,
@@ -12536,7 +12537,7 @@ void Style::renderFrame(QPainter *painter,
     else
       renderElement(painter,element1+"-left",
                     QRect(x0,y0+Top,Left,h-Top-Bottom),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
 
     /***********
      ** Right **
@@ -12548,13 +12549,13 @@ void Style::renderFrame(QPainter *painter,
                           y0+Top,
                           Right,
                           d-y0-Top),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
       renderElement(painter,element1+"-right",
                     QRect(x1-Right,
                           d+l,
                           Right,
                           y0+h-Bottom-d-l),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
       if (d-y0-Top >= 0)
         renderElement(painter,element1+"-right-leftjunct",
                       QRect(x1-Right,
@@ -12573,7 +12574,7 @@ void Style::renderFrame(QPainter *painter,
     else
       renderElement(painter,element1+"-right",
                     QRect(x1-Right,y0+Top,Right,h-Top-Bottom),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
 
     /*************
      ** Topleft **
@@ -12658,7 +12659,7 @@ void Style::renderFrame(QPainter *painter,
     {
       renderElement(painter,element1+"-top",
                     QRect(x0+left,y0,w-left-right,top),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
 
       // topleft corner
       if (left > 0)
@@ -12679,7 +12680,7 @@ void Style::renderFrame(QPainter *painter,
     {
       renderElement(painter,element1+"-bottom",
                     QRect(x0+left,y1-bottom,w-left-right,bottom),
-                    0,0,usePixmap);
+                    fspec.ps,0,usePixmap);
 
       // bottomleft corner
       if (left > 0)
@@ -12699,7 +12700,7 @@ void Style::renderFrame(QPainter *painter,
     if (left > 0)
       renderElement(painter,element1+"-left",
                     QRect(x0,y0+top,left,h-top-bottom),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
 
     /***********
      ** Right **
@@ -12707,7 +12708,7 @@ void Style::renderFrame(QPainter *painter,
     if (right > 0)
       renderElement(painter,element1+"-right",
                     QRect(x1-right,y0+top,right,h-top-bottom),
-                    0,0,usePixmap);
+                    0,fspec.ps,usePixmap);
   }
 
 

@@ -81,7 +81,7 @@ transparent_menutitle=true
 respect_darkness=false
 kcapacitybar_as_progressbar=true
 force_size_grip=true
-iconless_pushbutton=false
+iconless_pushbutton=true
 iconless_menu=false
 disabled_icon_opacity=100
 lxqtmainmenu_iconsize=22
@@ -131,7 +131,7 @@ text.normal.color=#000000c8
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=#000000c8
+text.normal.color=#0000008c
 text.focus.color=black
 text.bold=true
 
@@ -160,8 +160,13 @@ text.focus.color=black
 
 [Focus]
 inherits=PanelButtonCommand
-frame=false
-interior=false
+frame=true
+frame.element=focus
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+frame.patternsize=20
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -191,8 +196,8 @@ indicator.size=9
 
 [ToolboxTab]
 inherits=PanelButtonCommand
-text.normal.color=#000000b4
-text.press.color=black
+text.normal.color=#000000c8
+text.press.color=#0000008c
 text.focus.color=black
 
 [Tab]
@@ -230,10 +235,13 @@ indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand
-frame.top=0
-frame.bottom=1
-frame.left=0
-frame.right=1
+interior.element=header
+frame.element=header
+text.bold=true
+text.normal.color=#0000008c
+text.focus.color=#5796e8
+text.toggle.color=black
+frame.expansion=0
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -403,7 +411,7 @@ inherits=GenericFrame
 frame=false
 text.shadow=0
 text.margin=0
-text.normal.color=#000000c8
+text.normal.color=#0000008c
 text.focus.color=black
 text.bold=true
 frame.expansion=0

@@ -138,6 +138,9 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
       v = getValue(elementName,"frame.right", i);
       r.right = qMax(v.toInt(),0);
 
+      v = getValue(elementName,"frame.patternsize", i);
+      r.ps = qMax(v.toInt(),0);
+
       if (r.top && r.bottom && r.left && r.right)
       {
         v = getValue(elementName,"frame.expansion", i);

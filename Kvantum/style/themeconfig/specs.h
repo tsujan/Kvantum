@@ -229,6 +229,8 @@ typedef struct {
   int topExpanded,bottomExpanded,leftExpanded,rightExpanded;
   /* widget position in a capsule (used internally) */
   int capsuleH,capsuleV; // 0 -> middle, -1 -> left,top, 1 -> right,bottom, 2 -> left+right,top+bottom
+  /* pattern size */
+  int ps;
   /* if a widget's smallest dimension isn't greater than this,
      its frames (corners) will be expanded as far as possible */
   int expansion;
@@ -299,6 +301,7 @@ static inline void default_frame_spec(frame_spec &fspec) {
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
   fspec.topExpanded = fspec.bottomExpanded = fspec.leftExpanded = fspec.rightExpanded = 0;
   fspec.capsuleH = fspec.capsuleV = 0;
+  fspec.ps = 0;
   fspec.expansion = 0;
 }
 

@@ -31,7 +31,7 @@
 </defs>
 <text x="44.75" y="257.31104" style="font-family:Gill Sans;text-align:justify;stroke:none;line-height:125%;font-weight:bold;font-size:14px" id="text6990" xml:space="preserve"><tspan x="44.75" y="257.31104" id="tspan6992"/>
 </text>
-<g style="color:#000;stroke:#a0a0a0;fill:#fbfbfc">
+<g style="color:#000;fill:#fbfbfc;stroke:#a0a0a0">
 <rect width="15.000229" x="192.49988" y="-215.50024" rx="2" height="15.000229" ry="2" id="checkbox-normal" transform="scale(1,-1)"/>
 <ellipse cx="30.500008" cy="208" rx="7.5000072" ry="7.5000076" id="radio-normal"/>
 </g>
@@ -891,4 +891,82 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="tree-minus-focused" transform="matrix(1,0,0,-1,173.89475,612.69914)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="tree-minus-normal" transform="matrix(1,0,0,-1,95.192982,613.11402)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-disabled" id="tree-minus-disabled" transform="matrix(1,0,0,-1,106.69298,607.00002)"/>
+<g style="stroke:none;text-indent:0">
+<g style="fill-rule:evenodd">
+<g style="fill:#fff">
+<path id="header-normal-bottom" d="m 78.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-focused-bottom" d="m 101,96.5 -6,0 v 6 h 6 z "/>
+</g>
+<path style="fill:#5294e2" id="header-pressed-bottom" d="m 146,96.5 -6,0 0,6 6,0 z "/>
+<g style="fill:#fff">
+<path id="header-normal-bottomleft" d="m 84.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-normal-bottomright" d="m 90.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-normal-left" d="m 90.5,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-normal-right" d="m 84.5,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-normal-top" d="m 78.5,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-normal-topright" d="m 84.5,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-normal-topleft" d="m 90.5,90.5 -6,0 0,6 6,0 z "/>
+</g>
+</g>
+<g id="header-separator" transform="matrix(1,0,0,0.9375,0,6.875)">
+<path style="fill-rule:evenodd;fill-opacity:0" id="path4843" d="M 68.5,101.9998 68.5,70 l -6,0 0,32 z"/>
+<path style="font-family:Sans;text-align:start;line-height:normal;fill-opacity:.157;color:#000;text-indent:0;text-transform:none" id="path4845" d="m 62.5,75.3333 0,21.3333 2,0 0,-21.3333 z "/>
+</g>
+<g style="fill-rule:evenodd">
+<g style="fill:#fff">
+<path id="header-focused-bottomleft" d="m 107,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-focused-bottomright" d="m 113,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-focused-left" d="m 113,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-focused-right" d="m 107,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-focused-top" d="m 101,90.5 -6,0 v 6 h 6 z "/>
+<path id="header-focused-topright" d="m 107,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-focused-topleft" d="m 113,90.5 -6,0 0,6 6,0 z "/>
+</g>
+<g style="fill:#5294e2">
+<path id="header-pressed-bottomleft" d="m 152,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-bottomright" d="m 158,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-left" d="m 152,84.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-right" d="m 158,84.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-top" d="m 146,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-topleft" d="m 152,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-pressed-topright" d="m 158,90.5 -6,0 0,6 6,0 z "/>
+</g>
+</g>
+<g style="color:#000;fill-opacity:.119;text-align:start;text-transform:none;font-family:Sans;line-height:normal">
+<path id="focus-bottomleft" d="m 192.5,101.5 2,0 0,-2 -2,0 z"/>
+<path id="focus-bottomright" d="m 214.5,101.5 2,0 0,-2 -2,0 z"/>
+<path id="focus-topleft" d="m 192.5,79.5 2,0 0,-2 -2,0 z"/>
+<path id="focus-topright" d="m 214.5,79.5 2,0 0,-2 -2,0 z"/>
+</g>
+</g>
+<g style="color:#000;text-transform:none;text-indent:0;line-height:normal;text-align:start;font-family:Sans;stroke:none" id="focus-top" transform="translate(104.5,-30)">
+<path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 20,0 0,-2 -20,0 z"/>
+<g style="fill-opacity:.119">
+<path id="path4914" d="m 90,109.5 2.5,0 0,-2 -2.5,0 z"/>
+<path id="path4922" d="m 95,109.5 2.5,0 0,-2 -2.5,0 z"/>
+<path id="path4924" d="m 99.75,109.5 2.5,0 0,-2 -2.5,0 z"/>
+<path id="path4926" d="m 105,109.5 2.5,0 0,-2 -2.5,0 z"/>
+</g>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-right" transform="matrix(0,1,-1,0,294,-115)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-bottom" transform="matrix(-1,0,0,-1,409,179)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-left" transform="matrix(0,-1,1,0,115,294)"/>
+<g style="stroke:none;fill-rule:evenodd">
+<g style="fill:#fff">
+<path id="header-normal" d="m 78.5,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-focused" d="m 101,90.5 0,-6 -6,0 0,6 z "/>
+</g>
+<path style="fill:#5294e2" id="header-pressed" d="m 146,84.5 -6,0 0,6 6,0 z "/>
+<g style="fill:#fff">
+<path id="header-toggled-bottom" d="m 123.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled-bottomleft" d="m 129.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled-bottomright" d="m 135.5,96.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled-right" d="m 135.5,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-toggled-left" d="m 129.5,90.5 0,-6 -6,0 0,6 z "/>
+<path id="header-toggled-top" d="m 123.5,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled-topleft" d="m 129.5,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled-topright" d="m 135.5,90.5 -6,0 0,6 6,0 z "/>
+<path id="header-toggled" d="m 123.5,90.5 0,-6 -6,0 0,6 z "/>
+</g>
+</g>
 </svg>
