@@ -10595,10 +10595,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt)
-        return opt->rect.adjusted(opt->direction == Qt::RightToLeft ? 0 : pixelMetric(PM_IndicatorWidth),
-                                  0,
-                                  opt->direction == Qt::RightToLeft ? -pixelMetric(PM_IndicatorWidth) : 0,
-                                  0);
+          return opt->rect.adjusted(opt->direction == Qt::RightToLeft ? 0 : pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing),
+                                    0,
+                                    opt->direction == Qt::RightToLeft ? -(pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing)) : 0,
+                                    0);
       else
         return QCommonStyle::subElementRect(element,option,widget);
     }
