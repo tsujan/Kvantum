@@ -10595,10 +10595,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt)
-          return opt->rect.adjusted(opt->direction == Qt::RightToLeft ? 0 : pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing),
-                                    0,
-                                    opt->direction == Qt::RightToLeft ? -(pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing)) : 0,
-                                    0);
+        return opt->rect.adjusted(opt->direction == Qt::RightToLeft ?
+                                    0 : pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing),
+                                  0,
+                                  opt->direction == Qt::RightToLeft ?
+                                    -(pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing)) : 0,
+                                  0);
       else
         return QCommonStyle::subElementRect(element,option,widget);
     }
@@ -12574,7 +12576,7 @@ void Style::renderFrame(QPainter *painter,
     else
       renderElement(painter,element1+"-right",
                     QRect(x1-Right,y0+Top,Right,h-Top-Bottom),
-                    fspec.ps,0,usePixmap);
+                    0,fspec.ps,usePixmap);
 
     /*************
      ** Topleft **
