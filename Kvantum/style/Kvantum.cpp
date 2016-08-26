@@ -8198,6 +8198,16 @@ void Style::drawComplexControl(ComplexControl control,
               }
             }
             if (libreoffice) painter->restore();
+            /* draw focus rect */
+            if (!editable
+                && (option->state & State_Enabled) && !(option->state & State_On)
+                && ((option->state & State_Sunken) || (option->state & State_Selected)))
+            {
+              QStyleOptionFocusRect fropt;
+              fropt.QStyleOption::operator=(*opt);
+              fropt.rect = interiorRect(r, fspec);
+              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            }
             /* force label color (as in Krusader) */
             if (cb && (option->state & State_Enabled))
             {

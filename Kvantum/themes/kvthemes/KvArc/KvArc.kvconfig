@@ -131,7 +131,7 @@ text.normal.color=#000000c8
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=#0000008c
+text.normal.color=#00000096
 text.focus.color=black
 text.bold=true
 
@@ -197,7 +197,7 @@ indicator.size=9
 [ToolboxTab]
 inherits=PanelButtonCommand
 text.normal.color=#000000c8
-text.press.color=#0000008c
+text.press.color=#00000096
 text.focus.color=black
 
 [Tab]
@@ -237,8 +237,12 @@ indicator.element=tree
 inherits=PanelButtonCommand
 interior.element=header
 frame.element=header
+frame.top=3
+frame.bottom=3
+frame.left=1
+frame.right=1
 text.bold=true
-text.normal.color=#0000008c
+text.normal.color=#00000096
 text.focus.color=#5796e8
 text.toggle.color=black
 frame.expansion=0
@@ -391,6 +395,10 @@ frame.expansion=0
 
 [ComboBox]
 inherits=PanelButtonCommand
+interior.element=combo
+frame.element=combo
+text.press.color=#000000c8
+indicator.element=carrow
 
 [Menu]
 inherits=PanelButtonCommand
@@ -411,7 +419,7 @@ inherits=GenericFrame
 frame=false
 text.shadow=0
 text.margin=0
-text.normal.color=#0000008c
+text.normal.color=#00000096
 text.focus.color=black
 text.bold=true
 frame.expansion=0
