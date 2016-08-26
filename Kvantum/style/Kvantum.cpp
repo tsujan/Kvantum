@@ -17,6 +17,7 @@
 
 #include "Kvantum.h"
 
+#include <QProcess>
 #include <QDir>
 #include <QPainter>
 #include <QSettings>
@@ -96,8 +97,65 @@
 
 namespace Kvantum
 {
+static QString readDconfSetting(const QString &setting)
+{
+  // For some reason, dconf does not seem to terminate correctly when run under some desktops (e.g. KDE)
+  // Destroying the QProcess seems to block, causing the app to appear to hang before starting.
+  // So, create QProcess on the heap - and only wait 1.5s for response. Connect finished to deleteLater
+  // so that the object is destroyed.
+  QString schemeToUse=QLatin1String("/org/gnome/desktop/interface/");
+  QProcess *process=new QProcess();
+  process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse+setting);
+  QObject::connect(process, SIGNAL(finished(int)), process, SLOT(deleteLater()));
+
+  if (process->waitForFinished(1500)) {
+    QString resp = process->readAllStandardOutput();
+    resp = resp.trimmed();
+    resp.remove('\'');
+
+    if (resp.isEmpty()) {
+      // Probably set to the default, and dconf does not store defaults! Therefore, need to read via gsettings...
+      schemeToUse=schemeToUse.mid(1, schemeToUse.length()-2).replace("/", ".");
+      QProcess *gsettingsProc=new QProcess();
+      gsettingsProc->start(QLatin1String("gsettings"), QStringList() << QLatin1String("get") << schemeToUse << setting);
+      QObject::connect(gsettingsProc, SIGNAL(finished(int)), process, SLOT(deleteLater()));
+      if (gsettingsProc->waitForFinished(1500)) {
+        resp = gsettingsProc->readAllStandardOutput();
+        resp = resp.trimmed();
+        resp.remove('\'');
+      } else {
+        gsettingsProc->kill();
+      }
+    }
+    return resp;
+  }
+  process->kill();
+  return QString();
+}
+
+static void setAppFont()
+{
+  QString fontName=readDconfSetting("font-name");
+  if (!fontName.isEmpty())
+  {
+    QStringList parts=fontName.split(' ', QString::SkipEmptyParts);
+    if (parts.length()>1)
+    {
+      uint size=parts.takeLast().toUInt();
+      if (size>5 && size<20)
+      {
+        QFont f(parts.join(' '), size);
+        QApplication::setFont(f);
+      }
+    }
+  }
+}
+
 Style::Style() : QCommonStyle()
 {
+  QByteArray desktop=qgetenv("XDG_CURRENT_DESKTOP").toLower();
+  QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+  useGtkSettings_ = gtkDesktops.contains(desktop);
   progressTimer_ = new QTimer(this);
   opacityTimer_ = opacityTimerOut_ = NULL;
   animationOpacity_ = animationOpacityOut_ = 100;
@@ -132,38 +190,46 @@ Style::Style() : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-  QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
-  if (!QFile::exists(kdeGlobals))
-    kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
-  if (!QFile::exists(kdeGlobals))
-    kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
-  if (QFile::exists(kdeGlobals))
+  if (useGtkSettings_)
   {
-    QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
-    QVariant v;
-    int iconSize;
-    KDESettings.beginGroup("KDE");
-    v = KDESettings.value ("SingleClick");
-    KDESettings.endGroup();
-    if (v.isValid())
-      tspec_.double_click = !v.toBool();
-    KDESettings.beginGroup("DialogIcons");
-    v = KDESettings.value ("Size");
-    KDESettings.endGroup();
-    if (v.isValid())
+    hspec_.iconless_pushbutton = true;
+    hspec_.iconless_menu = true;
+  }
+  else
+  {
+    QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
+    if (!QFile::exists(kdeGlobals))
+      kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
+    if (!QFile::exists(kdeGlobals))
+      kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
+    if (QFile::exists(kdeGlobals))
     {
-      iconSize = v.toInt();
-      if (iconSize > 0 && iconSize <= 256)
-        tspec_.large_icon_size = iconSize;
-    }
-    KDESettings.beginGroup("SmallIcons");
-    v = KDESettings.value ("Size");
-    KDESettings.endGroup();
-    if (v.isValid())
-    {
-      iconSize = v.toInt();
-      if (iconSize > 0 && iconSize <= 256)
-        tspec_.small_icon_size = iconSize;
+      QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
+      QVariant v;
+      int iconSize;
+      KDESettings.beginGroup("KDE");
+      v = KDESettings.value ("SingleClick");
+      KDESettings.endGroup();
+      if (v.isValid())
+        tspec_.double_click = !v.toBool();
+      KDESettings.beginGroup("DialogIcons");
+      v = KDESettings.value ("Size");
+      KDESettings.endGroup();
+      if (v.isValid())
+      {
+        iconSize = v.toInt();
+        if (iconSize > 0 && iconSize <= 256)
+          tspec_.large_icon_size = iconSize;
+      }
+      KDESettings.beginGroup("SmallIcons");
+      v = KDESettings.value ("Size");
+      KDESettings.endGroup();
+      if (v.isValid())
+      {
+        iconSize = v.toInt();
+        if (iconSize > 0 && iconSize <= 256)
+          tspec_.small_icon_size = iconSize;
+      }
     }
   }
 
@@ -1183,6 +1249,10 @@ void Style::polish(QApplication *app)
   {
     app->removeEventFilter(itsShortcutHandler_);
     app->installEventFilter(itsShortcutHandler_);
+  }
+  if (useGtkSettings_)
+  {
+    setAppFont();
   }
 }
 
@@ -9732,6 +9802,8 @@ int Style::styleHint(StyleHint hint,
       return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
 #endif
+
+    case SH_DialogButtonBox_ButtonsHaveIcons: return !hspec_.iconless_pushbutton;
 
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
