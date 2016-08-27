@@ -33,6 +33,8 @@ typedef struct {
      or anywhere possible (under x11)? */
   WindowManager::Drag x11drag;
 #endif
+  /* should some settings of the current DE be respected? */
+  bool respect_DE;
   /* show mnemonics only if Alt is pressed? */
   bool alt_mnemonic;
   /* always activate view items on double clicking? */
@@ -349,6 +351,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   tspec.x11drag = WindowManager::DRAG_ALL;
 #endif
+  tspec.respect_DE = true;
   tspec.alt_mnemonic = true;
   tspec.double_click = false;
   tspec.left_tabs = false;

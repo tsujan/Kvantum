@@ -409,6 +409,10 @@ theme_spec ThemeConfig::getThemeSpec()
   }
 #endif
 
+  v = getValue("General","respect_DE");
+  if (v.isValid()) // true by default
+    r.respect_DE = v.toBool();
+
   v = getValue("General","alt_mnemonic");
   if (v.isValid()) // true by default
     r.alt_mnemonic = v.toBool();

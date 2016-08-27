@@ -97,7 +97,7 @@
 
 namespace Kvantum
 {
-static QString readDconfSetting(const QString &setting)
+static QString readDconfSetting(const QString &setting) // by Craig Drummond
 {
   // For some reason, dconf does not seem to terminate correctly when run under some desktops (e.g. KDE)
   // Destroying the QProcess seems to block, causing the app to appear to hang before starting.
@@ -144,7 +144,7 @@ static void setAppFont()
       uint size=parts.takeLast().toUInt();
       if (size>5 && size<20)
       {
-        QFont f(parts.join(' '), size);
+        QFont f(parts.join(" "), size);
         QApplication::setFont(f);
       }
     }
@@ -153,9 +153,6 @@ static void setAppFont()
 
 Style::Style() : QCommonStyle()
 {
-  QByteArray desktop=qgetenv("XDG_CURRENT_DESKTOP").toLower();
-  QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-  useGtkSettings_ = gtkDesktops.contains(desktop);
   progressTimer_ = new QTimer(this);
   opacityTimer_ = opacityTimerOut_ = NULL;
   animationOpacity_ = animationOpacityOut_ = 100;
@@ -164,6 +161,9 @@ Style::Style() : QCommonStyle()
 
   settings_ = defaultSettings_ = themeSettings_ = NULL;
   defaultRndr_ = themeRndr_ = NULL;
+
+  useGtkSettings_ = false;
+  bool useKDESettings(false);
 
   QString homeDir = QDir::homePath();
 
@@ -190,12 +190,25 @@ Style::Style() : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
+  if (tspec_.respect_DE)
+  {
+    QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+    if (desktop == QByteArray("kde"))
+      useKDESettings = true;
+    else
+    {
+      QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+      if (gtkDesktops.contains(desktop))
+        useGtkSettings_ = true;
+    }
+  }
+
   if (useGtkSettings_)
   {
     hspec_.iconless_pushbutton = true;
     hspec_.iconless_menu = true;
   }
-  else
+  else if (useKDESettings)
   {
     QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
     if (!QFile::exists(kdeGlobals))
@@ -1250,10 +1263,9 @@ void Style::polish(QApplication *app)
     app->removeEventFilter(itsShortcutHandler_);
     app->installEventFilter(itsShortcutHandler_);
   }
+
   if (useGtkSettings_)
-  {
     setAppFont();
-  }
 }
 
 void Style::polish(QPalette &palette)
@@ -9802,8 +9814,6 @@ int Style::styleHint(StyleHint hint,
       return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
 #endif
-
-    case SH_DialogButtonBox_ButtonsHaveIcons: return !hspec_.iconless_pushbutton;
 
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
