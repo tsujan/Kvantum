@@ -163,7 +163,6 @@ Style::Style() : QCommonStyle()
   defaultRndr_ = themeRndr_ = NULL;
 
   useGtkSettings_ = false;
-  bool useKDESettings(false);
 
   QString homeDir = QDir::homePath();
 
@@ -193,55 +192,61 @@ Style::Style() : QCommonStyle()
   if (tspec_.respect_DE)
   {
     QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+
     if (desktop == QByteArray("kde"))
-      useKDESettings = true;
+    {
+      QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
+      if (!QFile::exists(kdeGlobals))
+        kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
+      if (!QFile::exists(kdeGlobals))
+        kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
+      if (QFile::exists(kdeGlobals))
+      {
+        QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
+        QVariant v;
+        int iconSize;
+        KDESettings.beginGroup("KDE");
+        v = KDESettings.value ("SingleClick");
+        KDESettings.endGroup();
+        if (v.isValid())
+          tspec_.double_click = !v.toBool();
+        else
+          tspec_.double_click = false;
+        KDESettings.beginGroup("DialogIcons");
+        v = KDESettings.value ("Size");
+        KDESettings.endGroup();
+        if (v.isValid())
+        {
+          iconSize = v.toInt();
+          if (iconSize > 0 && iconSize <= 256)
+            tspec_.large_icon_size = iconSize;
+        }
+        else
+          tspec_.large_icon_size = 32;
+        KDESettings.beginGroup("SmallIcons");
+        v = KDESettings.value ("Size");
+        KDESettings.endGroup();
+        if (v.isValid())
+        {
+          iconSize = v.toInt();
+          if (iconSize > 0 && iconSize <= 256)
+            tspec_.small_icon_size = iconSize;
+        }
+        else
+          tspec_.small_icon_size = 16;
+      }
+    }
     else
     {
       QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
       if (gtkDesktops.contains(desktop))
+      {
         useGtkSettings_ = true;
-    }
-  }
-
-  if (useGtkSettings_)
-  {
-    hspec_.iconless_pushbutton = true;
-    hspec_.iconless_menu = true;
-  }
-  else if (useKDESettings)
-  {
-    QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
-    if (!QFile::exists(kdeGlobals))
-      kdeGlobals = QString("%1/.kde/share/config/kdeglobals").arg(homeDir);
-    if (!QFile::exists(kdeGlobals))
-      kdeGlobals = QString("%1/.kde4/share/config/kdeglobals").arg(homeDir);
-    if (QFile::exists(kdeGlobals))
-    {
-      QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
-      QVariant v;
-      int iconSize;
-      KDESettings.beginGroup("KDE");
-      v = KDESettings.value ("SingleClick");
-      KDESettings.endGroup();
-      if (v.isValid())
-        tspec_.double_click = !v.toBool();
-      KDESettings.beginGroup("DialogIcons");
-      v = KDESettings.value ("Size");
-      KDESettings.endGroup();
-      if (v.isValid())
-      {
-        iconSize = v.toInt();
-        if (iconSize > 0 && iconSize <= 256)
-          tspec_.large_icon_size = iconSize;
-      }
-      KDESettings.beginGroup("SmallIcons");
-      v = KDESettings.value ("Size");
-      KDESettings.endGroup();
-      if (v.isValid())
-      {
-        iconSize = v.toInt();
-        if (iconSize > 0 && iconSize <= 256)
-          tspec_.small_icon_size = iconSize;
+        hspec_.iconless_pushbutton = true;
+        hspec_.iconless_menu = true;
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+        tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
+#endif
       }
     }
   }

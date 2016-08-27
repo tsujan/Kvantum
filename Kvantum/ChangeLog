@@ -16,7 +16,7 @@ V0.10.2
  * Added a hacking key for not tinting selected icons.
  * Added a key for frame patterns.
  * Added support for focus rectangle to comboboxes.
- * Try to respect some DE settings (thanks to Craig).
+ * Added a key to respect some DE settings (thanks to Craig).
 
 V0.10.1
 ---------

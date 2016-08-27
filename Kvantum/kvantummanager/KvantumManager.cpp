@@ -35,6 +35,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     else
         xdg_config_home = QString (_xdg_config_home);
 
+    desktop_ = qgetenv ("XDG_CURRENT_DESKTOP").toLower();
+
     ui->comboToolButton->insertItems (0, QStringList() << "Follow Style"
                                                        << "Icon Only"
                                                        << "Text Only"
@@ -69,6 +71,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->checkBoxNoComposite, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
     connect (ui->checkBoxTrans, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
     connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
+    connect (ui->checkBoxDE, SIGNAL (clicked (bool)), this, SLOT (respectDE (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
@@ -608,6 +611,10 @@ void KvantumManager::defaultThemeButtons()
     }
     ui->comboToolButton->setCurrentIndex (index);
     ui->comboX11Drag->setCurrentIndex(toDrag(defaultSettings.value("x11drag").toString()));
+    if (defaultSettings.contains ("respect_DE"))
+        ui->checkBoxDE->setChecked (defaultSettings.value ("respect_DE").toBool());
+    else
+        ui->checkBoxDE->setChecked (true);
     ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
     ui->checkBoxInlineSpin->setChecked (defaultSettings.value ("inline_spin_indicators").toBool());
     ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
@@ -670,6 +677,8 @@ void KvantumManager::defaultThemeButtons()
     theSize = qMin(qMax(theSize,16), 32);
     ui->spinSpinBtnWidth->setValue (theSize);
     defaultSettings.endGroup();
+
+    respectDE (ui->checkBoxDE->isChecked());
 }
 /*************************/
 /* Here. we try to avoid scrollbars as far as possible but
@@ -868,6 +877,8 @@ void KvantumManager::tabChanged (int index)
                 }
                 if (themeSettings.contains ("x11drag"))
                     ui->comboX11Drag->setCurrentIndex(toDrag(themeSettings.value("x11drag").toString()));
+                if (themeSettings.contains ("respect_DE"))
+                    ui->checkBoxDE->setChecked (themeSettings.value ("respect_DE").toBool());
                 if (themeSettings.contains ("double_click"))
                     ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
                 if (themeSettings.contains ("inline_spin_indicators"))
@@ -974,6 +985,8 @@ void KvantumManager::tabChanged (int index)
                     tmp = qMin (qMax (themeSettings.value ("lxqtmainmenu_iconsize").toInt(), 0), 100);
                 ui->spinLxqtMenu->setValue (tmp);
                 themeSettings.endGroup();
+                
+                respectDE (ui->checkBoxDE->isChecked());
             }
         }
     }
@@ -1398,6 +1411,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
+        generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
@@ -1510,6 +1524,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
+        themeSettings.setValue ("respect_DE", ui->checkBoxDE->isChecked());
         themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
         themeSettings.setValue ("inline_spin_indicators", ui->checkBoxInlineSpin->isChecked());
         themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());
@@ -1750,6 +1765,30 @@ void KvantumManager::popupBlurring (bool checked)
     if (checked)
       ui->checkBoxBlurPopup->setChecked (true);
     ui->checkBoxBlurPopup->setEnabled (!checked);
+}
+/*************************/
+void KvantumManager::respectDE (bool checked)
+{
+    if (desktop_ == QByteArray("kde"))
+    {
+        ui->labelSmall->setEnabled (!checked);
+        ui->spinSmall->setEnabled (!checked);
+        ui->labelLarge->setEnabled (!checked);
+        ui->spinLarge->setEnabled (!checked);
+        ui->checkBoxClick->setEnabled (!checked);
+    }
+    else
+    {
+        QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+        if (gtkDesktops.contains(desktop_))
+        {
+            ui->labelX11Drag->setEnabled (!checked);
+            ui->comboX11Drag->setEnabled (!checked);
+            ui->checkBoxIconlessBtn->setEnabled (!checked);
+            ui->checkBoxIconlessMenu->setEnabled (!checked);
+        }
+        else ui->checkBoxDE->setEnabled (false);
+    }
 }
 /*************************/
 void KvantumManager::showWhatsThis()

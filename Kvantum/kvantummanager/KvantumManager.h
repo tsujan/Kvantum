@@ -35,6 +35,7 @@ private slots:
     void isTranslucent (bool checked);
     void notCompisited (bool checked);
     void popupBlurring (bool checked);
+    void respectDE (bool checked);
     void showWhatsThis();
     void aboutDialog();
 
@@ -85,6 +86,7 @@ private:
     QString kvconfigTheme_;
     QGraphicsOpacityEffect *effect_;
     QPropertyAnimation *animation_;
+    QByteArray desktop_;
 };
 
 #endif // KVANTUMMANAGER_H

@@ -1,6 +1,7 @@
 [%General]
 author=Tsu Jan
 comment=A theme inspired by Enlightenment
+respect_DE=true
 x11drag=true
 alt_mnemonic=true
 left_tabs=false

@@ -527,10 +527,13 @@ with LXQt Session Settings.</string>
                <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxIconlessBtn">
                  <property name="toolTip">
-                  <string>No icon for push buttons that have text.</string>
+                  <string>No icon for push buttons that have text.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for push buttons that have text?&lt;/p&gt;&lt;p&gt;By default, most push buttons have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for push buttons that have text?&lt;/p&gt;&lt;p&gt;By default, most push buttons have icon.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Iconless push buttons</string>
@@ -554,10 +557,13 @@ screens of Konsole and Yakuake if possible.</string>
                <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxIconlessMenu">
                  <property name="toolTip">
-                  <string>No icon for menu-items?</string>
+                  <string>No icon for menu-items?
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for menu-items?&lt;/p&gt;&lt;p&gt;By default, some of them may have icon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for menu-items?&lt;/p&gt;&lt;p&gt;By default, some of them may have icon.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Iconless  menus</string>
@@ -909,11 +915,13 @@ The default value is 16 px.</string>
                  <property name="toolTip">
                   <string>Affects icon views.
 The default value is 32 px but
-KDE setting has priority over this.
-Also some apps set it themselves.</string>
+some apps set it themselves.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but KDE setting has priority over this. Also some applications may set it themselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Large icon:</string>
@@ -946,11 +954,13 @@ KDE apps get it from KDE setting.</string>
                 <widget class="QSpinBox" name="spinSmall">
                  <property name="toolTip">
                   <string>Affects menu-items and headers.
-The default value is 16 px but
-KDE setting has priority over this.</string>
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but KDE setting has priority over this. Also some applications may set it themselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="suffix">
                   <string> px</string>
@@ -967,11 +977,13 @@ KDE setting has priority over this.</string>
                 <widget class="QLabel" name="labelSmall">
                  <property name="toolTip">
                   <string>Affects menu-items and headers.
-The default value is 16 px but
-KDE setting has priority over this.</string>
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but KDE setting has priority over this. Also some applications may set it themselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Small icon:</string>
@@ -997,11 +1009,13 @@ The default value is 16 px.</string>
                  <property name="toolTip">
                   <string>Affects icon views.
 The default value is 32 px but
-KDE setting has priority over this.
-Also some apps set it themselves.</string>
+some apps set it themselves.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but KDE setting has priority over this. Also some applications may set it themselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="suffix">
                   <string> px</string>
@@ -1204,22 +1218,53 @@ some apps set it themeselves.</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_11">
                <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBoxDE">
+                 <property name="toolTip">
+                  <string>When this is enabled and checked, Kvantum will try to
+respect some settings of the current desktop environment.
+
+This checkbox may disable some options.
+Uncheck it if you want to activate those options!</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it sets the font of Qt apps to that of the DE, removes icons from menus and push-buttons (even if the corresponding dconf keys are changed), and sets x11-drag only for menubars and primary toolbars (although GTK does not have such a feature).&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to activate those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Respect current DE if possible</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QCheckBox" name="checkBoxScrollIn">
+                 <property name="toolTip">
+                  <string>Draw scrollbars inside view frames?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollbars inside frames</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
                 <widget class="QCheckBox" name="checkBoxClick">
                  <property name="toolTip">
                   <string>Activate view items always on double clicking?
-When unchecked, single-click is preferred
-but KDE setting will have priority over this
-if set explicitly.</string>
+When unchecked, single-click is preferred.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate view items always on double clicking?&lt;/p&gt;&lt;p&gt;When unchecked, single-click is preferred but KDE setting will have priority over this &lt;span style=&quot; font-style:italic;&quot;&gt;if set explicitly&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate view items always on double clicking?&lt;/p&gt;&lt;p&gt;When unchecked, single-click is preferred.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Double-click for view items</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="3" colspan="2">
+               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
                   <string>Draw tree branch lines?</string>
@@ -1232,7 +1277,7 @@ if set explicitly.</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
+               <item row="2" column="1">
                 <widget class="QCheckBox" name="checkBoxInlineSpin">
                  <property name="toolTip">
                   <string>By default, spin indicators are drawn like buttons.
@@ -1246,7 +1291,7 @@ Checking this puts them inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3" colspan="2">
+               <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
                   <string>By default, the label is on the frame.</string>
@@ -1259,7 +1304,7 @@ Checking this puts them inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
+               <item row="3" column="1">
                 <widget class="QCheckBox" name="checkBoxVSpin">
                  <property name="toolTip">
                   <string>By default, spin indicators are drawn on adjacent buttons.
@@ -1274,7 +1319,7 @@ spin-down one inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3" colspan="2">
+               <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
@@ -1289,7 +1334,7 @@ option fills them with the highlight color.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
+               <item row="4" column="1">
                 <widget class="QCheckBox" name="checkBoxComboEdit">
                  <property name="toolTip">
                   <string>Draw the whole editable combo-box as a
@@ -1303,7 +1348,7 @@ line-edit with arrow (and icon, if it exists)?</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
+               <item row="4" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
                   <string>Mouse tracking is enabled
@@ -1317,7 +1362,7 @@ for menubars by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
+               <item row="5" column="1">
                 <widget class="QCheckBox" name="checkBoxComboMenu">
                  <property name="toolTip">
                   <string>Draw combo popups as menu popups?</string>
@@ -1330,7 +1375,7 @@ for menubars by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3" colspan="2">
+               <item row="5" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -1344,7 +1389,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1">
+               <item row="6" column="1">
                 <widget class="QCheckBox" name="checkBoxleftTab">
                  <property name="toolTip">
                   <string>Tabs are centered by default.</string>
@@ -1357,7 +1402,7 @@ the toolbar SVG element when they are adjacent to one another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3" colspan="2">
+               <item row="6" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
                   <string>Shift the contents of push buttons when pressed?
@@ -1371,7 +1416,7 @@ By default, the contents are shifted by 1px.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
+               <item row="7" column="1">
                 <widget class="QCheckBox" name="checkBoxJoinTab">
                  <property name="toolTip">
                   <string>Inactive tabs are joined by default.</string>
@@ -1384,7 +1429,7 @@ By default, the contents are shifted by 1px.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3">
+               <item row="7" column="3">
                 <widget class="QLabel" name="labelTooltipDelay">
                  <property name="toolTip">
                   <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1400,7 +1445,7 @@ Zero means tooltips are shown instantly.
                  </property>
                 </widget>
                </item>
-               <item row="6" column="4" alignment="Qt::AlignLeft">
+               <item row="7" column="4" alignment="Qt::AlignLeft">
                 <widget class="QSpinBox" name="spinTooltipDelay">
                  <property name="toolTip">
                   <string>The delay, in milliseconds, before a tooltip is shown.
@@ -1422,52 +1467,6 @@ Zero means tooltips are shown instantly.
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1">
-                <widget class="QCheckBox" name="checkBoxAttachTab">
-                 <property name="toolTip">
-                  <string>Active tab is detached by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Attach active tab to tab widget</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="3">
-                <widget class="QLabel" name="label_2">
-                 <property name="toolTip">
-                  <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Toolbutton style:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="4">
-                <widget class="QComboBox" name="comboToolButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                </widget>
-               </item>
                <item row="8" column="0">
                 <spacer name="horizontalSpacer_8">
                  <property name="orientation">
@@ -1482,16 +1481,15 @@ Default is Follow Style.</string>
                 </spacer>
                </item>
                <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                <widget class="QCheckBox" name="checkBoxAttachTab">
                  <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.</string>
+                  <string>Active tab is detached by default.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>No arrows for scrollbars</string>
+                  <string>Attach active tab to tab widget</string>
                  </property>
                 </widget>
                </item>
@@ -1512,27 +1510,35 @@ Checking this box removes arrows as far as possible.</string>
                 </spacer>
                </item>
                <item row="8" column="3">
-                <widget class="QLabel" name="labelX11Drag">
+                <widget class="QLabel" name="label_2">
                  <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
+                  <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>X11 drag:</string>
+                  <string>Toolbutton style:</string>
                  </property>
                 </widget>
                </item>
                <item row="8" column="4">
-                <widget class="QComboBox" name="comboX11Drag">
+                <widget class="QComboBox" name="comboToolButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
-(Depends on X11)</string>
+                  <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -1550,15 +1556,47 @@ Checking this box removes arrows as far as possible.</string>
                 </spacer>
                </item>
                <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxScrollIn">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
                  <property name="toolTip">
-                  <string>Draw scrollbars inside view frames?</string>
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Scrollbars inside frames</string>
+                  <string>No arrows for scrollbars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="3">
+                <widget class="QLabel" name="labelX11Drag">
+                 <property name="toolTip">
+                  <string>Drag windows from anywhere possible?
+(Depends on X11)
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>X11 drag:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="4">
+                <widget class="QComboBox" name="comboX11Drag">
+                 <property name="toolTip">
+                  <string>Drag windows from anywhere possible?
+(Depends on X11)
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
