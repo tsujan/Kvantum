@@ -1786,6 +1786,20 @@ void KvantumManager::respectDE (bool checked)
             ui->comboX11Drag->setEnabled (!checked);
             ui->checkBoxIconlessBtn->setEnabled (!checked);
             ui->checkBoxIconlessMenu->setEnabled (!checked);
+            ui->checkBoxNoComposite->setEnabled (!checked);
+            ui->checkBoxBlurPopup->setEnabled (!ui->checkBoxNoComposite->isChecked()
+                                               && !ui->checkBoxBlurWindow->isChecked()
+                                               && !checked);
+            ui->checkBoxTrans->setEnabled (!ui->checkBoxNoComposite->isChecked() && !checked);
+            ui->opaqueLabel->setEnabled (!ui->checkBoxNoComposite->isChecked()
+                                         && ui->checkBoxTrans->isChecked()
+                                         && !checked);
+            ui->opaqueEdit->setEnabled (!ui->checkBoxNoComposite->isChecked()
+                                        && ui->checkBoxTrans->isChecked()
+                                        && !checked);
+            ui->checkBoxBlurWindow->setEnabled (!ui->checkBoxNoComposite->isChecked()
+                                                && ui->checkBoxTrans->isChecked()
+                                                && !checked);
         }
         else ui->checkBoxDE->setEnabled (false);
     }

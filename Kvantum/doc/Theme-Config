@@ -187,7 +187,8 @@ respect_DE                        true/false          Should some settings of th
                                                       "double_click" are overridden by KDE
                                                       settings. Under Unity, Gnome and Pantheon,
                                                       "iconless_pushbutton" and "iconless_menu"
-                                                      are set to true and "x11drag" is set to
+                                                      are set to true, "composite" is set to
+                                                      false, and "x11drag" is set to
                                                       "menubar_and_primary_toolbar".
                                                       
 

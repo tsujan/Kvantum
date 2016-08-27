@@ -247,6 +247,9 @@ Style::Style() : QCommonStyle()
 #if defined Q_WS_X11 || defined Q_OS_LINUX
         tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
 #endif
+        // without compositing, these keys should be corrected
+        tspec_.translucent_windows = false;
+        tspec_.blurring = false;
       }
     }
   }
@@ -596,7 +599,8 @@ int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  margin += settings_->getCompositeSpec().menu_shadow_depth;
+  if (!useGtkSettings_) // used without compositing at PM_SubMenuOverlap
+    margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
 }
 
@@ -1162,6 +1166,7 @@ void Style::polish(QWidget *widget)
   }
 
   if (!isLibreoffice_ // not required
+      && !useGtkSettings_
       && !subApp_
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
              /* no shadow for tooltips that are already translucent */
@@ -1829,7 +1834,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
-      else if (w->layoutDirection() == Qt::RightToLeft
+      else if (!useGtkSettings_ && w->layoutDirection() == Qt::RightToLeft
                && menuHShadows_.count() == 2
                && qobject_cast<QMenu*>(o) && qobject_cast<QMenu*>(getParent(w,1)))
       {
@@ -3147,7 +3152,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (tspec_now.menu_shadow_depth > 0
+      if (!useGtkSettings_ && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && widget && translucentWidgets_.contains(widget))
       {
@@ -4562,7 +4567,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (tspec_now.tooltip_shadow_depth > 0
+      if (!useGtkSettings_ && tspec_now.tooltip_shadow_depth > 0
           && fspec.left >= tspec_now.tooltip_shadow_depth
           && widget && translucentWidgets_.contains(widget))
       {
@@ -9266,7 +9271,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
         so -= getMenuMargin(true);
-        if (settings_->getCompositeSpec().composite
+        if (!useGtkSettings_
+            && settings_->getCompositeSpec().composite
             && menuHShadows_.count() == 2
             && (!qobject_cast<const QMenu*>(widget)
                 || translucentWidgets_.contains(widget)
@@ -9278,7 +9284,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       }
       else
       {
-        if (settings_->getCompositeSpec().composite
+        if (!useGtkSettings_
+            && settings_->getCompositeSpec().composite
             && (!qobject_cast<const QMenu*>(widget)
                 || translucentWidgets_.contains(widget)
                 || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
@@ -9300,7 +9307,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (tspec_now.composite
+      if (!useGtkSettings_ && tspec_now.composite
           && widget && translucentWidgets_.contains(widget))
       {
         v += tspec_now.menu_shadow_depth;
@@ -9547,7 +9554,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (tspec_now.composite
+      if (!useGtkSettings_ && tspec_now.composite
           && (!widget || translucentWidgets_.contains(widget)))
       {
         v += tspec_now.tooltip_shadow_depth;
@@ -9604,7 +9611,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (!tspec_.composite
+  if (useGtkSettings_ || !tspec_.composite
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
       || qobject_cast<QMenu*>(widget) // WARNING: prevent a hang in KFileDialog!
       || subApp_ || isLibreoffice_)
