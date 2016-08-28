@@ -338,7 +338,12 @@ class Style : public QCommonStyle {
        They're used to position submenus */
     QList<int> menuHShadows_;
 
-    bool useGtkSettings_;
+    /* Is this DE GTK-based? Currently Gnome, Unity and Pantheon are supported. */
+    bool gtkDesktop_;
+    /* Under Gnome and Unity, we disable compositing because otherwise, DE shadows
+       would be drawn around Kvantum's menu shadows. Other DEs have their own ways
+       of preventing that or the user could disable compositing with Kvantum Manager. */
+    bool noComposite_;
 };
 }
 

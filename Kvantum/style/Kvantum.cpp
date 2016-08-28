@@ -162,7 +162,8 @@ Style::Style() : QCommonStyle()
   settings_ = defaultSettings_ = themeSettings_ = NULL;
   defaultRndr_ = themeRndr_ = NULL;
 
-  useGtkSettings_ = false;
+  gtkDesktop_ = false;
+  noComposite_ = false;
 
   QString homeDir = QDir::homePath();
 
@@ -189,11 +190,26 @@ Style::Style() : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
+  QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+  gtkDesktop_ = gtkDesktops.contains(desktop);
+
+
   if (tspec_.respect_DE)
   {
-    QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
-
-    if (desktop == QByteArray("kde"))
+    if (gtkDesktop_)
+    {
+      hspec_.iconless_pushbutton = true;
+      hspec_.iconless_menu = true;
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+      tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
+#endif
+      noComposite_ = true;
+      // without compositing, these keys should be corrected
+      tspec_.translucent_windows = false;
+      tspec_.blurring = false;
+    }
+    else if (desktop == QByteArray("kde"))
     {
       QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
       if (!QFile::exists(kdeGlobals))
@@ -234,22 +250,6 @@ Style::Style() : QCommonStyle()
         }
         else
           tspec_.small_icon_size = 16;
-      }
-    }
-    else
-    {
-      QSet<QByteArray> gtkDesktops=QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-      if (gtkDesktops.contains(desktop))
-      {
-        useGtkSettings_ = true;
-        hspec_.iconless_pushbutton = true;
-        hspec_.iconless_menu = true;
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-        tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-#endif
-        // without compositing, these keys should be corrected
-        tspec_.translucent_windows = false;
-        tspec_.blurring = false;
       }
     }
   }
@@ -599,7 +599,7 @@ int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  if (!useGtkSettings_) // used without compositing at PM_SubMenuOverlap
+  if (!noComposite_) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
 }
@@ -1166,7 +1166,7 @@ void Style::polish(QWidget *widget)
   }
 
   if (!isLibreoffice_ // not required
-      && !useGtkSettings_
+      && !noComposite_
       && !subApp_
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
              /* no shadow for tooltips that are already translucent */
@@ -1274,7 +1274,7 @@ void Style::polish(QApplication *app)
     app->installEventFilter(itsShortcutHandler_);
   }
 
-  if (useGtkSettings_)
+  if (gtkDesktop_) // under gtk DEs, always use their font
     setAppFont();
 }
 
@@ -1834,7 +1834,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
-      else if (!useGtkSettings_ && w->layoutDirection() == Qt::RightToLeft
+      else if (!noComposite_ && w->layoutDirection() == Qt::RightToLeft
                && menuHShadows_.count() == 2
                && qobject_cast<QMenu*>(o) && qobject_cast<QMenu*>(getParent(w,1)))
       {
@@ -3152,7 +3152,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!useGtkSettings_ && tspec_now.menu_shadow_depth > 0
+      if (!noComposite_ && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && widget && translucentWidgets_.contains(widget))
       {
@@ -4567,7 +4567,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!useGtkSettings_ && tspec_now.tooltip_shadow_depth > 0
+      if (!noComposite_ && tspec_now.tooltip_shadow_depth > 0
           && fspec.left >= tspec_now.tooltip_shadow_depth
           && widget && translucentWidgets_.contains(widget))
       {
@@ -9271,7 +9271,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
         so -= getMenuMargin(true);
-        if (!useGtkSettings_
+        if (!noComposite_
             && settings_->getCompositeSpec().composite
             && menuHShadows_.count() == 2
             && (!qobject_cast<const QMenu*>(widget)
@@ -9284,7 +9284,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       }
       else
       {
-        if (!useGtkSettings_
+        if (!noComposite_
             && settings_->getCompositeSpec().composite
             && (!qobject_cast<const QMenu*>(widget)
                 || translucentWidgets_.contains(widget)
@@ -9307,7 +9307,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!useGtkSettings_ && tspec_now.composite
+      if (!noComposite_ && tspec_now.composite
           && widget && translucentWidgets_.contains(widget))
       {
         v += tspec_now.menu_shadow_depth;
@@ -9554,7 +9554,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!useGtkSettings_ && tspec_now.composite
+      if (!noComposite_ && tspec_now.composite
           && (!widget || translucentWidgets_.contains(widget)))
       {
         v += tspec_now.tooltip_shadow_depth;
@@ -9611,7 +9611,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (useGtkSettings_ || !tspec_.composite
+  if (noComposite_ || !tspec_.composite
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
       || qobject_cast<QMenu*>(widget) // WARNING: prevent a hang in KFileDialog!
       || subApp_ || isLibreoffice_)
