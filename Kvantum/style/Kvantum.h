@@ -33,6 +33,13 @@ class Style : public QCommonStyle {
   Q_OBJECT
   Q_CLASSINFO("X-KDE-CustomElements","true")
 
+  enum Desktop {
+    Desktop_KDE,
+    Desktop_Unity,
+    Desktop_GNOME,
+    Desktop_Other
+  };
+
   public:
     Style();
     ~Style();
@@ -282,6 +289,10 @@ class Style : public QCommonStyle {
     void removeFromSet(QObject *o);
 
   private:
+    bool useGtkSettings() const { return Desktop_Unity==desktop_ || Desktop_GNOME==desktop_; }
+    bool disableComposite() const { return Desktop_Unity==desktop_; }
+
+  private:
     QSvgRenderer *defaultRndr_, *themeRndr_;
     ThemeConfig *defaultSettings_, *themeSettings_, *settings_;
 
@@ -338,7 +349,7 @@ class Style : public QCommonStyle {
        They're used to position submenus */
     QList<int> menuHShadows_;
 
-    bool useGtkSettings_;
+    Desktop desktop_;
 };
 }
 
