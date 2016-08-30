@@ -302,15 +302,11 @@ Style::Style() : QCommonStyle()
   joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
   if (themeRndr_ && themeRndr_->isValid())
   {
-    const frame_spec fspec = getFrameSpec("Tab");
-    if (fspec.expansion == 0 // no floating tabs with frame expansion
-        && themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
-    {
+    if (themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
       hasFloatingTabs_ = true;
-    }
     if (tspec_.joined_inactive_tabs)
     {
-      QString sepName = fspec.element + "-separator";
+      QString sepName = getFrameSpec("Tab").element + "-separator";
       if (themeRndr_->elementExists(sepName+"-normal")
           || themeRndr_->elementExists(sepName+"-toggled"))
       {
@@ -2518,7 +2514,16 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
-      const QString group = "PanelButtonTool";
+      QString group = "PanelButtonTool";
+      QWidget *p = getParent(widget,1);
+      QWidget *gp = getParent(p,1);
+      if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
+          && (!getFrameSpec("ToolbarButton").element.isEmpty()
+              || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+      {
+        group = "ToolbarButton";
+      }
+
       frame_spec fspec = getFrameSpec(group);
 
       /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
@@ -2558,7 +2563,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       //const QStyleOptionTitleBar *titleBar = qstyleoption_cast<const QStyleOptionTitleBar*>(option);
 
       /* this is just for tabbar scroll buttons */
-      if (qobject_cast<QTabBar*>(getParent(widget,1)))
+      if (qobject_cast<QTabBar*>(p))
       {
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
         //fspec.expansion = 0;
@@ -2579,7 +2584,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       // -> CE_ToolButtonLabel
-      if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+      if (qobject_cast<QAbstractItemView*>(gp))
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -2621,7 +2626,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* always show menu titles in the toggled state */
         if (!hspec_.transparent_menutitle
             && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
-            && qobject_cast<QMenu*>(getParent(widget,1)))
+            && qobject_cast<QMenu*>(p))
         {
           status.replace("pressed","toggled");
         }
@@ -3928,7 +3933,19 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     case PE_IndicatorButtonDropDown : {
       QRect r = option->rect;
-      const QString group = "DropDownButton";
+      QString group = "DropDownButton";
+
+      const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
+      if (tb)
+      {
+        QWidget *p = getParent(widget,1);
+        if (p && (isStylableToolbar(p) || isStylableToolbar(getParent(p,1)))
+            && (!getFrameSpec("ToolbarButton").element.isEmpty()
+                || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+        {
+          group = "ToolbarButton";
+        }
+      }
 
       frame_spec fspec = getFrameSpec(group);
       fspec.expansion = 0; // depends on the containing widget
@@ -4025,7 +4042,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
 
-      if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
+      if (tb)
       {
         if (status.startsWith("focused")
             && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
@@ -7240,7 +7257,15 @@ void Style::drawControl(ControlElement element,
 
       if (opt) {
         QString status = getState(option,widget);
-        const QString group = "PanelButtonTool";
+        QString group = "PanelButtonTool";
+        QWidget *p = getParent(widget,1);
+        QWidget *gp = getParent(p,1);
+        if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
+            && (!getFrameSpec("ToolbarButton").element.isEmpty()
+                || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+        {
+          group = "ToolbarButton";
+        }
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
@@ -7262,7 +7287,7 @@ void Style::drawControl(ControlElement element,
 
         /* where there may not be enough space,
            especially in KDE new-stuff dialogs */
-        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        if (qobject_cast<QAbstractItemView*>(gp))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -7285,7 +7310,7 @@ void Style::drawControl(ControlElement element,
           bool transMenuTitle(hspec_.transparent_menutitle);
           if (!transMenuTitle
               && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
-              && qobject_cast<QMenu*>(getParent(widget,1)))
+              && qobject_cast<QMenu*>(p))
           {
             status.replace("pressed","toggled");
           }
@@ -7311,7 +7336,6 @@ void Style::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          QWidget *p = getParent(widget,1);
           if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
             bool hasFlatIndicator(themeRndr_ && themeRndr_->isValid()
@@ -7319,7 +7343,6 @@ void Style::drawControl(ControlElement element,
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
-            QWidget *gp = getParent(widget,2);
             if (qobject_cast<QMenuBar*>(gp) || qobject_cast<QMenuBar*>(p))
             {
               const label_spec lspec1 = getLabelSpec("MenuBar");
@@ -7804,7 +7827,16 @@ void Style::drawComplexControl(ComplexControl control,
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            indicator_spec dspec = getIndicatorSpec(group);
+            QWidget *p = getParent(widget,1);
+            QWidget *gp = getParent(p,1);
+            QString group1 = group;
+            if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
+                && (!getFrameSpec("ToolbarButton").element.isEmpty()
+                    || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+            {
+              group1 = "ToolbarButton";
+            }
+            indicator_spec dspec = getIndicatorSpec(group1);
             const label_spec lspec = getLabelSpec(group);
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise()
@@ -7814,8 +7846,6 @@ void Style::drawComplexControl(ComplexControl control,
               QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::ButtonText);
-              QWidget *p = tb->parentWidget();
-              QWidget *gp = getParent(widget,2);
               if (qobject_cast<QMenuBar*>(gp) || qobject_cast<QMenuBar*>(p))
               {
                 if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
@@ -7839,7 +7869,7 @@ void Style::drawComplexControl(ComplexControl control,
             fspec.right = fspec.left = 0;
             Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
             // -> CE_ToolButtonLabel
-            if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+            if (qobject_cast<QAbstractItemView*>(gp))
             {
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
@@ -10046,22 +10076,24 @@ QSize Style::sizeFromContents(ContentsType type,
                     s.height() < smallIconSize ? smallIconSize : s.height());
         }*/
 
-        /* take in to account the boldness of default button text
-           and also the possibility of boldness in general */
-        if (!txt.isEmpty() && ((opt->features & QStyleOptionButton::AutoDefaultButton)
-                               || lspec.boldFont))
+        if (!txt.isEmpty())
         {
-          QFont f = QApplication::font();
-          if (widget) f = widget->font();
-          QSize s1 = textSize(f, txt);
-          f.setBold(true);
-          s = s + textSize(f, txt) - s1;
+          // consider a global min. width for push buttons
+          s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
+                                   + 6*QFontMetrics(QApplication::font()).width("W"),
+                                 s.height()));
+          /* take in to account the boldness of default button text
+             and also the possibility of boldness in general */
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+          {
+            QFont f = QApplication::font();
+            if (widget) f = widget->font();
+            QSize s1 = textSize(f, txt);
+            f.setBold(true);
+            s = s + textSize(f, txt) - s1;
+          }
         }
 
-        // consider a global min. width for push buttons
-        s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
-                                 + 6*QFontMetrics(QApplication::font()).width("W"),
-                               s.height()));
         s = s.expandedTo(QSize(sspec.minW,sspec.minH));
       }
 
@@ -12209,9 +12241,9 @@ bool Style::renderElement(QPainter *painter,
       && (themeRndr_->elementExists(element_)
           || themeRndr_->elementExists(element_.remove("-inactive"))
           // fall back to the normal state if other states aren't found
-          || themeRndr_->elementExists(element_.replace("-toggled","-normal"))
-          || themeRndr_->elementExists(element_.replace("-pressed","-normal"))
-          || themeRndr_->elementExists(element_.replace("-focused","-normal"))))
+          || themeRndr_->elementExists(element_.replace("-toggled","-normal")
+                                               .replace("-pressed","-normal")
+                                               .replace("-focused","-normal"))))
   {
     renderer = themeRndr_;
   }
@@ -12353,8 +12385,38 @@ void Style::renderFrame(QPainter *painter,
 
   int Left,Top,Right,Bottom;
   Left = Top = Right = Bottom = 0;
-  QString element1(element);
-  QString element0(element); // used just for checking
+
+  bool isInactive(false);
+  QStringList states;
+  states << "-normal" << "-focused" << "-pressed" << "-toggled";
+  QString state;
+  QStringList list = element.split("-");
+  int count = list.count();
+  if (count > 2 && list.at(count - 1) == "inactive")
+  {
+    state = "-" + list.at(count - 2);
+    isInactive = true;
+  }
+  else if (count > 1)
+  {
+    state = "-" + list.at(count - 1);
+    if (!states.contains(state))
+      state = QString();
+  }
+
+  // search for expanded frame element
+  QString realElement = fspec.expandedElement;
+  if (fspec.expansion <= 0 || realElement.isEmpty())
+    realElement = element;
+  else if (!state.isEmpty())
+  {
+    realElement += state;
+    if (isInactive)
+      realElement += "-inactive";
+  }
+
+  QString element1(realElement);
+  QString element0(realElement); // used just for checking
   element0 = "expand-"+element0;
   if (fspec.hasCapsule && fspec.capsuleH != 2)
     grouped = true;
@@ -12365,9 +12427,8 @@ void Style::renderFrame(QPainter *painter,
       (e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
                                 && (themeRndr_->elementExists(element0.remove("-inactive"))
                                     // fall back to the normal state
-                                    || themeRndr_->elementExists(element0.replace("-toggled","-normal"))
-                                    || themeRndr_->elementExists(element0.replace("-pressed","-normal"))
-                                    || themeRndr_->elementExists(element0.replace("-focused","-normal"))))))
+                                    || (!state.isEmpty()
+                                        && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
   {
     drawExpanded = true;
     fspec.left = fspec.leftExpanded;
@@ -12397,7 +12458,7 @@ void Style::renderFrame(QPainter *painter,
         m.rotate(90);
         painter->save();
         painter->setTransform(m, true);
-        renderFrame(painter,r,fspec,element,d,l,f1,f2,tp,grouped,usePixmap);
+        renderFrame(painter,r,fspec,realElement,d,l,f1,f2,tp,grouped,usePixmap);
         painter->restore();
         return;
       }
@@ -12437,28 +12498,24 @@ void Style::renderFrame(QPainter *painter,
         Left = qMin(fspec.left,w/2);
       }
     }
-    element0 = "border-"+element;
+    element0 = "border-"+realElement;
     if (drawBorder && themeRndr_ && themeRndr_->isValid()
         && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-            || themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top")
-            || themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top")
-            || themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top")))
+            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
     {
       element1 = element0;
-      if (element.contains("-inactive"))
+      if (isInactive)
         element1 = element1 + "-inactive";
     }
     else
     {
-      element0 = "expand-"+element;
+      element0 = "expand-"+realElement;
       if (themeRndr_ && themeRndr_->isValid()
           && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-              || themeRndr_->elementExists(element0.replace("-toggled","-normal")+"-top")
-              || themeRndr_->elementExists(element0.replace("-pressed","-normal")+"-top")
-              || themeRndr_->elementExists(element0.replace("-focused","-normal")+"-top")))
+              || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
       {
         element1 = element0;
-        if (element.contains("-inactive"))
+        if (isInactive)
           element1 = element1 + "-inactive";
         drawBorder = false;
       }
@@ -12866,15 +12923,18 @@ void Style::renderInterior(QPainter *painter,
     if (fspec.hasCapsule && fspec.capsuleH != 2)
       grouped = true;
     int e = grouped ? h : qMin(h,w);
+    QString frameElement(fspec.expandedElement);
+    if (frameElement.isEmpty())
+      frameElement = fspec.element;
     QString element0(element);
     /* the interior used for partial frame expansion has the frame name */
-    element0 = element0.remove("-inactive").replace(ispec.element, fspec.element);
+    element0 = element0.remove("-inactive").replace(ispec.element, frameElement);
     element0 = "expand-"+element0;
     if ((e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
                                   && (themeRndr_->elementExists(element0)
-                                      || themeRndr_->elementExists(element0.replace("-toggled","-normal"))
-                                      || themeRndr_->elementExists(element0.replace("-pressed","-normal"))
-                                      || themeRndr_->elementExists(element0.replace("-focused","-normal")))))
+                                      || themeRndr_->elementExists(element0.replace("-toggled","-normal")
+                                                                           .replace("-pressed","-normal")
+                                                                           .replace("-focused","-normal")))))
         && (!fspec.hasCapsule || fspec.capsuleV == 2)
         /* there's no right/left expanded element */
         && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))

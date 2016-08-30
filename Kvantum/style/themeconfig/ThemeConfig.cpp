@@ -117,10 +117,15 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   frame_spec r;
   default_frame_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  /* except for text colors and indicator, frame and interior elements,
+     ToolbarButton gets all of its variables from PanelButtonTool */
+  QString name = elementName;
+  if (name == "ToolbarButton")
+    name = "PanelButtonTool";
+  QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
-  v = getValue(elementName,"frame", i);
+  v = getValue(name,"frame", i);
   r.hasFrame = v.toBool();
   if (r.hasFrame)
   {
@@ -129,40 +134,42 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
     {
       r.element = v.toString();
 
-      v = getValue(elementName,"frame.top", i);
+      v = getValue(name,"frame.top", i);
       r.top = qMax(v.toInt(),0);
-      v = getValue(elementName,"frame.bottom", i);
+      v = getValue(name,"frame.bottom", i);
       r.bottom = qMax(v.toInt(),0);
-      v = getValue(elementName,"frame.left", i);
+      v = getValue(name,"frame.left", i);
       r.left = qMax(v.toInt(),0);
-      v = getValue(elementName,"frame.right", i);
+      v = getValue(name,"frame.right", i);
       r.right = qMax(v.toInt(),0);
 
-      v = getValue(elementName,"frame.patternsize", i);
+      v = getValue(name,"frame.patternsize", i);
       r.ps = qMax(v.toInt(),0);
 
       if (r.top && r.bottom && r.left && r.right)
       {
-        v = getValue(elementName,"frame.expansion", i);
+        v = getValue(name,"frame.expansion", i);
         r.expansion = qMax(v.toInt(),0);
 
         if (r.expansion > 0)
         {
-          v = getValue(elementName,"frame.expanded.top", i);
+          v = getValue(name,"frame.expanded.top", i);
           r.topExpanded = qMin(v.toInt(),r.top);
           if (r.topExpanded <= 0) r.topExpanded = r.top;
-          v = getValue(elementName,"frame.expanded.bottom", i);
+          v = getValue(name,"frame.expanded.bottom", i);
           r.bottomExpanded = qMin(v.toInt(),r.bottom);
           if (r.bottomExpanded <= 0) r.bottomExpanded = r.bottom;
-          v = getValue(elementName,"frame.expanded.left", i);
+          v = getValue(name,"frame.expanded.left", i);
           r.leftExpanded = qMin(v.toInt(),r.left);
           if (r.leftExpanded <= 0) r.leftExpanded = r.left;
-          v = getValue(elementName,"frame.expanded.right", i);
+          v = getValue(name,"frame.expanded.right", i);
           r.rightExpanded = qMin(v.toInt(),r.right);
           if (r.rightExpanded <= 0) r.rightExpanded = r.right;
         }
       }
     }
+    v = getValue(elementName, "frame.expandedElement");
+    r.expandedElement = v.toString();
   }
 
   fSpecs_[elementName] = r;
@@ -177,10 +184,13 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
   interior_spec r;
   default_interior_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QString name = elementName;
+  if (name == "ToolbarButton")
+    name = "PanelButtonTool";
+  QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
-  v = getValue(elementName,"interior", i);
+  v = getValue(name,"interior", i);
   r.hasInterior = v.toBool();
 
   if (r.hasInterior)
@@ -190,9 +200,9 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
     {
       r.element = v.toString();
 
-      v = getValue(elementName,"interior.x.patternsize", i);
+      v = getValue(name,"interior.x.patternsize", i);
       r.px = qMax(v.toInt(),0);
-      v = getValue(elementName,"interior.y.patternsize", i);
+      v = getValue(name,"interior.y.patternsize", i);
       r.py = qMax(v.toInt(),0);
     }
   }
@@ -209,7 +219,10 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   indicator_spec r;
   default_indicator_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QString name = elementName;
+  if (name == "ToolbarButton")
+    name = "PanelButtonTool";
+  QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
   v = getValue(elementName, "indicator.element", i);
@@ -217,7 +230,7 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   {
     r.element = v.toString();
 
-    v = getValue(elementName,"indicator.size", i);
+    v = getValue(name,"indicator.size", i);
     if (v.isValid())
       r.size = qMax(v.toInt(),0);
   }
@@ -234,7 +247,10 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
   label_spec r;
   default_label_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QString name = elementName;
+  if (name == "ToolbarButton")
+    name = "PanelButtonTool";
+  QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
   v = getValue(elementName,"text.shadow", i);
@@ -272,21 +288,21 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       r.depth = qMax(v.toInt(),0);
   }
 
-  v = getValue(elementName,"text.margin", i);
+  v = getValue(name,"text.margin", i);
   r.hasMargin = v.toBool();
   if (r.hasMargin)
   {
-    v = getValue(elementName,"text.margin.top", i);
+    v = getValue(name,"text.margin.top", i);
     r.top = qMax(v.toInt(),0);
-    v = getValue(elementName,"text.margin.bottom", i);
+    v = getValue(name,"text.margin.bottom", i);
     r.bottom = qMax(v.toInt(),0);
-    v = getValue(elementName,"text.margin.left", i);
+    v = getValue(name,"text.margin.left", i);
     r.left = qMax(v.toInt(),0);
-    v = getValue(elementName,"text.margin.right", i);
+    v = getValue(name,"text.margin.right", i);
     r.right = qMax(v.toInt(),0);
   }
 
-  v = getValue(elementName,"text.iconspacing", i);
+  v = getValue(name,"text.iconspacing", i);
   r.tispace = qMax(v.toInt(),0);
 
   lSpecs_[elementName] = r;
@@ -301,14 +317,17 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   size_spec r;
   default_size_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QString name = elementName;
+  if (name == "ToolbarButton")
+    name = "PanelButtonTool";
+  QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
-  v = getValue(elementName,"size.minheight", i);
+  v = getValue(name,"size.minheight", i);
   if (v.isValid())
     r.minH = qMax(v.toInt(),0);
 
-  v = getValue(elementName,"size.minwidth", i);
+  v = getValue(name,"size.minwidth", i);
   if (v.isValid())
     r.minW = qMax(v.toInt(),0);
 

@@ -87,6 +87,14 @@ Section                                      Meaning
 [Toolbar]                                    A toolbar. Also its handle and
                                              separator.
 
+[ToolbarButton]                              Panel for a tool button on a toolbar.
+                                             This section is optional and can be
+                                             omitted. If present, it will take all
+                                             of its variables from PanelButtonTool,
+                                             except for its text colors, text
+                                             shadow, and (indicator, frame and
+                                             interior) elements.
+
 [Scrollbar]                                  Scrollbar increase/decrease
                                              indicators (arrows).
 
@@ -163,7 +171,7 @@ Exception No.1: The "inherits" variable will not be taken from the default confi
 
 Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme. Also font boldness/italicity will be ignored if omitted.
 
-Exception No.3: Any variable related to compositing or hacking will be ignored if omitted.
+Exception No.3: Any variable related to compositing or hacking and also "frame.expandedElement" will be ignored if omitted.
 
 
 ==============================================================
@@ -695,18 +703,24 @@ size.minheight                    integer             Minimum/fixed width or hei
 If you want to make your own theme (see the file "Theme-Making"), you'll also need to know the meanings of these variables:
 
 
-=====================================================
+=============================================================
 Variable                Value                Meaning
-=====================================================
-interior.element       string                The SVG element to be used for
-                                             drawing the interior of a widget.
+=============================================================
+interior.element               string                The SVG element to be used for
+                                                     drawing the interior of a widget.
 
-frame.element          string                The SVG element to be used for
-                                             drawing the frame of a widget.
+frame.element                  string                The SVG element to be used for
+                                                     drawing the frame of a widget.
 
-indicator.element      string                The SVG element to be used for
-                                             drawing the indicator of a widget.
-=====================================================
+frame.expandedElement          string                The optional SVG element to be used
+                                                     only for drawing the expanded frame.
+                                                     If not present, "frame.element"
+                                                     will be used for expanded frames too.
+                                                     See "frame.expansion"!
+
+indicator.element              string                The SVG element to be used for
+                                                     drawing the indicator of a widget.
+=============================================================
 
 
 Some Examples

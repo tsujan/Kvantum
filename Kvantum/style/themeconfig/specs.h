@@ -221,6 +221,8 @@ typedef struct {
 typedef struct {
   /* Element name */
   QString element;
+  /* Element name for frame expansion */
+  QString expandedElement;
   /* has frame? */
   bool hasFrame;
   /* Allow capsule grouping ? (used internally) */
@@ -300,6 +302,7 @@ static inline void default_frame_spec(frame_spec &fspec) {
   fspec.hasFrame = false;
   fspec.hasCapsule = false; // may change to true in Kvantum.cpp
   fspec.element = QString();
+  fspec.expandedElement = QString();
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
   fspec.topExpanded = fspec.bottomExpanded = fspec.leftExpanded = fspec.rightExpanded = 0;
   fspec.capsuleH = fspec.capsuleV = 0;
