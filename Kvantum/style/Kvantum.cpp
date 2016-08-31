@@ -4993,7 +4993,7 @@ void Style::drawControl(ControlElement element,
           && enoughContrast(getFromRGBA(lspec.normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
-        break;
+        break; // dark-and-light themes
       }
       const QStyleOptionMenuItem *opt =
           qstyleoption_cast<const QStyleOptionMenuItem*>(option);
@@ -5068,9 +5068,20 @@ void Style::drawControl(ControlElement element,
         /* draw a panel for the menubar-item only if it's focused or pressed */
         if (!status.startsWith("normal") && (option->state & State_Enabled))
         {
+          bool libreoffice = false;
+          if (isLibreoffice_ && (option->state & State_Enabled)
+            && enoughContrast(getFromRGBA(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
+          {
+            libreoffice = true;
+            painter->save();
+            painter->setOpacity(0.5);
+          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (libreoffice) painter->restore();
         }
+        else
+          lspec.normalColor = getLabelSpec(group).normalColor;
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter | Qt::TextSingleLine;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
