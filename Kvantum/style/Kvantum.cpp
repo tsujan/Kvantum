@@ -10078,10 +10078,6 @@ QSize Style::sizeFromContents(ContentsType type,
 
         if (!txt.isEmpty())
         {
-          // consider a global min. width for push buttons
-          s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
-                                   + 6*QFontMetrics(QApplication::font()).width("W"),
-                                 s.height()));
           /* take in to account the boldness of default button text
              and also the possibility of boldness in general */
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
@@ -10092,6 +10088,10 @@ QSize Style::sizeFromContents(ContentsType type,
             f.setBold(true);
             s = s + textSize(f, txt) - s1;
           }
+          // consider a global min. width for push buttons
+          s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
+                                   + 6*QFontMetrics(QApplication::font()).width("W"),
+                                 s.height()));
         }
 
         s = s.expandedTo(QSize(sspec.minW,sspec.minH));
