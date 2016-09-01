@@ -757,8 +757,7 @@ int Style::mergedToolbarHeight(const QWidget *menubar) const
 bool Style::isStylableToolbar(const QWidget *w) const
 {
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
-  if (!tb || !tb->isVisible()) // KToolBar may still be invisible. FIXME: Why?
-    return false;
+  if (!tb) return false;
   if (!hspec_.single_top_toolbar) return true;
   if (tb->orientation() == Qt::Vertical) return false;
   if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(w,1)))
