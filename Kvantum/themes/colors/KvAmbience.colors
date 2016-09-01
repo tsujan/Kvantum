@@ -89,8 +89,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [General]
-ColorScheme=KvAmbiance
-Name=KvAmbiance
+ColorScheme=KvAmbience
+Name=KvAmbience
 shadeSortColumn=true
 
 [KDE]

@@ -757,12 +757,13 @@ int Style::mergedToolbarHeight(const QWidget *menubar) const
 bool Style::isStylableToolbar(const QWidget *w) const
 {
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
-  if (!tb) return false;
+  if (!tb || !tb->isVisible()) // KToolBar may still be invisible. FIXME: Why?
+    return false;
   if (!hspec_.single_top_toolbar) return true;
   if (tb->orientation() == Qt::Vertical) return false;
   if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(w,1)))
   {
-    if (QMenuBar *mb = mw->menuBar()) // WARNING: an empty menubar may be created
+    if (QWidget *mb = mw->menuWidget()) // WARNING: an empty menubar may be created by menuBar()
     {
       if (mb->isVisible())
       {
@@ -6810,7 +6811,7 @@ void Style::drawControl(ControlElement element,
       {
         if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
         {
-          if (QMenuBar *mb = mw->menuBar())
+          if (QWidget *mb = mw->menuWidget())
           {
             if (mb->isVisible())
             {

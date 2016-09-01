@@ -86,7 +86,7 @@ iconless_menu=false
 disabled_icon_opacity=100
 lxqtmainmenu_iconsize=22
 normal_default_pushbutton=true
-single_top_toolbar=false
+single_top_toolbar=true
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
 
