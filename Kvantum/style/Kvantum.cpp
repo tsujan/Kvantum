@@ -285,18 +285,8 @@ Style::Style() : QCommonStyle()
   }
 
   itsShortcutHandler_ = NULL;
-  itsWindowManager_ = NULL;
-  blurHelper_ = NULL;
-
   if (tspec_.alt_mnemonic)
     itsShortcutHandler_ = new ShortcutHandler(this);
-
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-  if (tspec_.x11drag)
-  {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
-    itsWindowManager_->initialize();
-  }
 
   // decide about connecting active tabs to others and using floating tabs once for all
   joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
@@ -322,6 +312,16 @@ Style::Style() : QCommonStyle()
         }
       }
     }
+  }
+
+  itsWindowManager_ = NULL;
+  blurHelper_ = NULL;
+
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+  if (tspec_.x11drag)
+  {
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
+    itsWindowManager_->initialize();
   }
 
   if (tspec_.blurring)
@@ -731,6 +731,27 @@ void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets_.remove(widget);
+}
+
+int Style::mergedToolbarHeight(const QWidget *menubar) const
+{
+  if (!tspec_.merge_menubar_with_toolbar || isPlasma_) return 0;
+  QWidget *p = getParent(menubar,1);
+  if (!p) return 0;
+  QList<QToolBar*> tList = p->findChildren<QToolBar*>();
+  if (!tList.isEmpty())
+  {
+    for (int i = 0; i < tList.count(); ++i)
+    {
+      if (tList.at(i)->isVisible() && tList.at(i)->orientation() == Qt::Horizontal
+          && menubar->y()+menubar->height() == tList.at(i)->y())
+      {
+        return tList.at(i)->height();
+        break;
+      }
+    }
+  }
+  return 0;
 }
 
 bool Style::isStylableToolbar(const QWidget *w) const
@@ -3951,6 +3972,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.expansion = 0; // depends on the containing widget
       interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
+      if (group == "ToolbarButton")
+        dspec.element += "-down";
 
       QString status = getState(option,widget);
       bool rtl(option->direction == Qt::RightToLeft);
@@ -4167,19 +4190,30 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* use the "flat" indicator with flat buttons if it exists */
         if (tb->autoRaise())
         {
-          const indicator_spec dspec1 = getIndicatorSpec("PanelButtonTool");
+          QString group1 = "PanelButtonTool";
+          if (group == "ToolbarButton")
+            group1 = group;
+          const indicator_spec dspec1 = getIndicatorSpec(group1);
           if (themeRndr_ && themeRndr_->isValid()
               && themeRndr_->elementExists("flat-"+dspec1.element+"-down-normal"))
           {
-            const label_spec lspec1 = getLabelSpec("PanelButtonTool");
+            const label_spec lspec1 = getLabelSpec(group1);
             QColor col = getFromRGBA(lspec1.normalColor);
             if (!col.isValid())
               col = QApplication::palette().color(QPalette::ButtonText);
             QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
-            if (qobject_cast<QMenuBar*>(gp) || qobject_cast<QMenuBar*>(p))
+            QWidget* menubar = NULL;
+            if (qobject_cast<QMenuBar*>(gp))
+              menubar = gp;
+            else if (qobject_cast<QMenuBar*>(p))
+              menubar = p;
+            if (menubar)
             {
-              if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
+              group1 = "MenuBar";
+              if (mergedToolbarHeight(menubar))
+                group1 = "Toolbar";
+              if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                 dspec.element = "flat-"+dspec1.element+"-down";
             }
             else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
@@ -5012,22 +5046,10 @@ void Style::drawControl(ControlElement element,
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
         if (r.isNull()) r = option->rect;
-        if (!isPlasma_ && tspec_.merge_menubar_with_toolbar && getParent(widget,1))
+        if (int th = mergedToolbarHeight(widget))
         {
-          QList<QToolBar*> tList = getParent(widget,1)->findChildren<QToolBar*>();
-          if (!tList.isEmpty())
-          {
-            for (int i = 0; i < tList.count(); ++i)
-            {
-              if (tList.at(i)->isVisible() && tList.at(i)->orientation() == Qt::Horizontal
-                  && widget->y()+r.height() == tList.at(i)->y())
-              {
-                r.adjust(0,0,0,tList.at(i)->height());
-                group = "Toolbar";
-                break;
-              }
-            }
-          }
+          group = "Toolbar";
+          r.adjust(0,0,0,th);
         }
 
         frame_spec fspec = getFrameSpec(group);
@@ -5117,22 +5139,10 @@ void Style::drawControl(ControlElement element,
       }
       QString group = "MenuBar";
       QRect r = option->rect;
-      if (tspec_.merge_menubar_with_toolbar && getParent(widget,1))
+      if (int th = mergedToolbarHeight(widget))
       {
-        QList<QToolBar*> tList = getParent(widget,1)->findChildren<QToolBar*>();
-        if (!tList.isEmpty())
-        {
-          for (int i = 0; i < tList.count(); ++i)
-          {
-            if (tList.at(i)->isVisible() && tList.at(i)->orientation() == Qt::Horizontal
-                && widget->y()+r.height() == tList.at(i)->y())
-            {
-              r.adjust(0,0,0,tList.at(i)->height());
-              group = "Toolbar";
-              break;
-            }
-          }
-        }
+        group = "Toolbar";
+        r.adjust(0,0,0,th);
       }
 
       frame_spec fspec = getFrameSpec(group);
@@ -7354,9 +7364,17 @@ void Style::drawControl(ControlElement element,
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
-            if (qobject_cast<QMenuBar*>(gp) || qobject_cast<QMenuBar*>(p))
+            QWidget* menubar = NULL;
+            if (qobject_cast<QMenuBar*>(gp))
+              menubar = gp;
+            else if (qobject_cast<QMenuBar*>(p))
+              menubar = p;
+            if (menubar)
             {
-              const label_spec lspec1 = getLabelSpec("MenuBar");
+              QString group1("MenuBar");
+              if (mergedToolbarHeight(menubar))
+                group1 = "Toolbar";
+              const label_spec lspec1 = getLabelSpec(group1);
               if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
                 dspec.element = "flat-"+dspec.element;
               lspec.normalColor = lspec1.normalColor;
@@ -7848,7 +7866,7 @@ void Style::drawComplexControl(ComplexControl control,
               group1 = "ToolbarButton";
             }
             indicator_spec dspec = getIndicatorSpec(group1);
-            const label_spec lspec = getLabelSpec(group);
+            const label_spec lspec = getLabelSpec(group1);
             /* use the "flat" indicator with flat buttons if it exists */
             if (tb->autoRaise()
                 && themeRndr_ && themeRndr_->isValid()
@@ -7857,9 +7875,17 @@ void Style::drawComplexControl(ComplexControl control,
               QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::ButtonText);
-              if (qobject_cast<QMenuBar*>(gp) || qobject_cast<QMenuBar*>(p))
+              QWidget* menubar = NULL;
+              if (qobject_cast<QMenuBar*>(gp))
+                menubar = gp;
+              else if (qobject_cast<QMenuBar*>(p))
+                menubar = p;
+              if (menubar)
               {
-                if (enoughContrast(col, getFromRGBA(getLabelSpec("MenuBar").normalColor)))
+                group1 = "MenuBar";
+                if (mergedToolbarHeight(menubar))
+                  group1 = "Toolbar";
+                if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
               else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)

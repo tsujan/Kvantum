@@ -117,13 +117,14 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   frame_spec r;
   default_frame_spec(r);
 
+  QVariant v = getValue(elementName, "inherits");
+  QString i = v.toString();
+
   /* except for text colors and indicator, frame and interior elements,
      ToolbarButton gets all of its variables from PanelButtonTool */
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
-  QVariant v = getValue(name, "inherits");
-  QString i = v.toString();
 
   v = getValue(name,"frame", i);
   r.hasFrame = v.toBool();
@@ -133,6 +134,9 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
     if (!v.toString().isEmpty())
     {
       r.element = v.toString();
+
+      if (elementName == "ToolbarButton")
+        i = getValue(name, "inherits").toString();
 
       v = getValue(name,"frame.top", i);
       r.top = qMax(v.toInt(),0);
@@ -184,11 +188,12 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
   interior_spec r;
   default_interior_spec(r);
 
+  QVariant v = getValue(elementName, "inherits");
+  QString i = v.toString();
+
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
-  QVariant v = getValue(name, "inherits");
-  QString i = v.toString();
 
   v = getValue(name,"interior", i);
   r.hasInterior = v.toBool();
@@ -199,6 +204,9 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
     if (!v.toString().isEmpty())
     {
       r.element = v.toString();
+
+      if (elementName == "ToolbarButton")
+        i = getValue(name, "inherits").toString();
 
       v = getValue(name,"interior.x.patternsize", i);
       r.px = qMax(v.toInt(),0);
@@ -219,16 +227,20 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   indicator_spec r;
   default_indicator_spec(r);
 
-  QString name = elementName;
-  if (name == "ToolbarButton")
-    name = "PanelButtonTool";
-  QVariant v = getValue(name, "inherits");
+  QVariant v = getValue(elementName, "inherits");
   QString i = v.toString();
 
   v = getValue(elementName, "indicator.element", i);
   if (!v.toString().isEmpty())
   {
     r.element = v.toString();
+
+    QString name = elementName;
+    if (name == "ToolbarButton")
+    {
+      name = "PanelButtonTool";
+      i = getValue(name, "inherits").toString();
+    }
 
     v = getValue(name,"indicator.size", i);
     if (v.isValid())
@@ -247,10 +259,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
   label_spec r;
   default_label_spec(r);
 
-  QString name = elementName;
-  if (name == "ToolbarButton")
-    name = "PanelButtonTool";
-  QVariant v = getValue(name, "inherits");
+  QVariant v = getValue(elementName, "inherits");
   QString i = v.toString();
 
   v = getValue(elementName,"text.shadow", i);
@@ -288,6 +297,13 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       r.depth = qMax(v.toInt(),0);
   }
 
+  QString name = elementName;
+  if (name == "ToolbarButton")
+  {
+    name = "PanelButtonTool";
+    i = getValue(name, "inherits").toString();
+  }
+
   v = getValue(name,"text.margin", i);
   r.hasMargin = v.toBool();
   if (r.hasMargin)
@@ -320,6 +336,7 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
+
   QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 

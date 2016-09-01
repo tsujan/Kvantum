@@ -265,6 +265,8 @@ class Style : public QCommonStyle {
       return getShadow(widgetName,thickness,thickness);
     }
 
+    /* If this menubar is merged with a toolbar, return the toolbar height! */
+    int mergedToolbarHeight(const QWidget *menubar) const;
     /* Is this a toolbar that should be styled? */
     bool isStylableToolbar(const QWidget *w) const;
 
