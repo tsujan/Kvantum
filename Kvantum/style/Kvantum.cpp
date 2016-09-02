@@ -769,7 +769,8 @@ bool Style::isStylableToolbar(const QWidget *w) const
         if (mb->y()+mb->height() == tb->y())
           return true;
       }
-      else if (tb->y() == 0) return true;
+      else if (tb->y() == 0 && tb->isVisible()) // FIXME: Why can KtoolBar be invisible here?
+        return true;
     }
     else if (tb->y() == 0) return true;
   }
