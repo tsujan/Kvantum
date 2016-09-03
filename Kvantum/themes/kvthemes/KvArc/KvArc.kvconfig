@@ -426,9 +426,13 @@ frame.expansion=0
 
 [TabBarFrame]
 inherits=GenericFrame
-frame=false
+frame=true
+frame.element=tabBarFrame
 interior=false
-text.shadow=0
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
 
 [ToolTip]
 inherits=GenericFrame

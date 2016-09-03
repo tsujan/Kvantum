@@ -2436,6 +2436,15 @@ void Style::drawPrimitive(PrimitiveElement element,
         // FIXME: Why does Qt draw redundant frames when there's a corner widget?
         if (!r.contains(opt->tabBarRect) || r == opt->tabBarRect)
           return;
+
+        int l = 0; int d = 0;
+        QRect tr = opt->selectedTabRect;
+        if (tspec_.attach_active_tab)
+        {
+          if (tr.isNull()) return;
+          d = tr.x();
+          l = tr.width();
+        }
         bool verticalTabs = false;
         bool bottomTabs = false;
         // as with CE_TabBarTabShape
@@ -2444,6 +2453,11 @@ void Style::drawPrimitive(PrimitiveElement element,
             || opt->shape == QTabBar::TriangularEast
             || opt->shape == QTabBar::TriangularWest)
         {
+          if (tspec_.attach_active_tab)
+          {
+            l = tr.height();
+            d = tr.y();
+          }
           verticalTabs = true;
           painter->save();
           int X, Y, rot;
@@ -2472,6 +2486,8 @@ void Style::drawPrimitive(PrimitiveElement element,
         else if (tspec_.mirror_doc_tabs
                  && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
         {
+          if (tspec_.attach_active_tab)
+            d = w - l - d;
           bottomTabs = true;
           painter->save();
           QTransform m;
@@ -2498,7 +2514,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           else status = "normal";
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status, d,l,0,0,1);
         if (!(option->state & State_Enabled))
           painter->restore();
         if (verticalTabs || bottomTabs)

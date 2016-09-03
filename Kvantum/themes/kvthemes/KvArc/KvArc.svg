@@ -1016,4 +1016,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="floating-tab-normal-bottom" transform="matrix(0,-1,1,0,-883.5,1079)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="floating-tab-normal-bottomleft" transform="matrix(0,-1,1,0,-887.5,1078.9999)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="floating-tab-normal-bottomright" transform="matrix(0,-1,1,0,-879.5,1079)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="tabBarFrame-normal-bottom" transform="matrix(0,-1,1,0,-882,1086.5001)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="tabBarFrame-normal-bottomright" transform="matrix(0,-1,1,0,-886,1086.5)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-bottomleft" id="tabBarFrame-normal-bottomleft" transform="matrix(0,-1,1,0,-878,1086.5001)"/>
 </svg>
