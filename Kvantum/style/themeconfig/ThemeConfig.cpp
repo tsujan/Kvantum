@@ -475,6 +475,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","attach_active_tab");
   r.attach_active_tab = v.toBool();
 
+  v = getValue("General","no_active_tab_separator");
+  r.no_active_tab_separator = v.toBool();
+
   v = getValue("General","mirror_doc_tabs");
   if (v.isValid()) // true by default
     r.mirror_doc_tabs = v.toBool();

@@ -5378,7 +5378,7 @@ void Style::drawControl(ControlElement element,
 
         QRect r = option->rect;
         bool verticalTabs = false;
-        bool bottomTabs = false;
+        bool mirroredBottomTab = false;
         bool docMode = false;
 
         if (opt->shape == QTabBar::RoundedEast
@@ -5390,11 +5390,12 @@ void Style::drawControl(ControlElement element,
         }
         QTabWidget *tw = qobject_cast<QTabWidget*>(getParent(widget,1));
         if (!tw || tw->documentMode()) docMode = true;
-        if ((!(docMode || !tspec_.attach_active_tab) || tspec_.mirror_doc_tabs)
-            && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
-          bottomTabs = true;
+        bool mirror = (!docMode && tspec_.attach_active_tab) ? true : tspec_.mirror_doc_tabs;
+        if (mirror && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
+          mirroredBottomTab = true;
         bool rtl(opt->direction == Qt::RightToLeft && !verticalTabs);
         bool joinedActiveTab(joinedActiveTab_);
+        bool noActiveTabSep = tspec_.no_active_tab_separator;
         QString sepName = fspec.element + "-separator";
 
         if (docMode && hasFloatingTabs_)
@@ -5410,8 +5411,8 @@ void Style::drawControl(ControlElement element,
           if ((option->state & State_On) || (option->state & State_Selected)
                // use toggled separator on both sides of selected tabs if possible
               || (opt->position != QStyleOptionTab::OnlyOneTab
-                  && (!bottomTabs ? (!rtl ? opt->selectedPosition == QStyleOptionTab::NextIsSelected
-                                     : opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                  && (!mirroredBottomTab ? (!rtl ? opt->selectedPosition == QStyleOptionTab::NextIsSelected
+                                             : opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
                       : (!rtl ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
                          : opt->selectedPosition == QStyleOptionTab::NextIsSelected))))
           {
@@ -5421,7 +5422,7 @@ void Style::drawControl(ControlElement element,
             sepName = sepName+"-normal";
         }
 
-        if (joinedActiveTab
+        if ((joinedActiveTab && !noActiveTabSep)
             || status.startsWith("normal") || status.startsWith("focused"))
         {
           if (tspec_.joined_inactive_tabs
@@ -5430,7 +5431,7 @@ void Style::drawControl(ControlElement element,
             int capsule = 2;
             if (opt->position == QStyleOptionTab::Beginning)
             {
-              if (joinedActiveTab || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
+              if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = -1;
@@ -5439,7 +5440,7 @@ void Style::drawControl(ControlElement element,
             else if (opt->position == QStyleOptionTab::Middle)
             {
               fspec.hasCapsule = true;
-              if (joinedActiveTab)
+              if ((joinedActiveTab && !noActiveTabSep))
                 capsule = 0;
               else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
                 capsule = 1;
@@ -5450,14 +5451,14 @@ void Style::drawControl(ControlElement element,
             }
             else if (opt->position == QStyleOptionTab::End)
             {
-              if (joinedActiveTab || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
+              if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
                 fspec.hasCapsule = true;
                 capsule = 1;
               }
             }
             /* will be flipped both vertically and horizontally */
-            if (bottomTabs)
+            if (mirroredBottomTab)
               capsule = -1*capsule;
             /* I've seen this only in KDevelop */
             if (rtl)
@@ -5469,13 +5470,16 @@ void Style::drawControl(ControlElement element,
 
         bool drawSep(joinedActiveTab
                      && opt->position != QStyleOptionTab::OnlyOneTab
-                     && ((tspec_.mirror_doc_tabs && bottomTabs)
+                     && (mirroredBottomTab
                            ? rtl ? opt->position != QStyleOptionTab::End
                                  : opt->position != QStyleOptionTab::Beginning
                            : rtl ? opt->position != QStyleOptionTab::Beginning
                                  : opt->position != QStyleOptionTab::End));
         QRect sep, sepTop, sepBottom;
-        if (drawSep)
+        bool isActiveTabSep = ((option->state & State_Selected)
+                               || (mirroredBottomTab ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
+                                                     : opt->selectedPosition == QStyleOptionTab::NextIsSelected));
+        if (drawSep && !(noActiveTabSep && isActiveTabSep))
         {
           sep.setRect(x+w-fspec.right,
                       y+fspec.top,
@@ -5496,15 +5500,15 @@ void Style::drawControl(ControlElement element,
           painter->save();
           int X, Y, rot;
           int xTr = 0; int xScale = 1;
-          if ((!(docMode || !tspec_.attach_active_tab) || tspec_.mirror_doc_tabs)
+          if ((!(docMode || !tspec_.attach_active_tab) || mirror)
               && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
           {
-            if (drawSep)
+            if (drawSep && !(noActiveTabSep && isActiveTabSep))
             {
               /* finding the correct sep rects is a little tricky and, especially,
                  the difference between right and left as well as top and bottom
                  frames should be taken into acount with care */
-              if (!tspec_.mirror_doc_tabs)
+              if (!mirror)
               {
                 sep.setRect(x+h-fspec.right,
                             y+fspec.top,
@@ -5541,7 +5545,7 @@ void Style::drawControl(ControlElement element,
           }
           else
           {
-            if (drawSep)
+            if (drawSep && !(noActiveTabSep && isActiveTabSep))
             {
               sep.setRect(h-fspec.right,
                           fspec.top,
@@ -5569,9 +5573,9 @@ void Style::drawControl(ControlElement element,
           m.translate(xTr, 0); m.scale(xScale,1);
           painter->setTransform(m, true);
         }
-        else if (bottomTabs)
+        else if (mirroredBottomTab)
         {
-          if (drawSep && tspec_.mirror_doc_tabs)
+          if (drawSep && mirror && !(noActiveTabSep && isActiveTabSep))
           {
             sep.setRect(w-fspec.right,
                         fspec.top,
@@ -5652,7 +5656,7 @@ void Style::drawControl(ControlElement element,
         if (!(option->state & State_Enabled))
           painter->restore();
 
-        if (verticalTabs || bottomTabs)
+        if (verticalTabs || mirroredBottomTab)
           painter->restore();
       }
 
@@ -12452,6 +12456,8 @@ void Style::renderFrame(QPainter *painter,
     if (isInactive)
       realElement += "-inactive";
   }
+  else if (element.endsWith("-default")) // default button
+    realElement += "-default";
 
   QString element1(realElement);
   QString element0(realElement); // used just for checking

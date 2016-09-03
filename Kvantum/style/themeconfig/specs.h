@@ -50,6 +50,8 @@ typedef struct {
   /* attach the active tab to the tab widget?
      (by default, it is detached) */
   bool attach_active_tab;
+  /* when using tab separators, don't draw them for the active tab */
+  bool no_active_tab_separator;
   /* mirror the top/left tab to draw the bottom/right tab also in
      the document mode? (By default, the bottom and right tabs are
      always the mirror images of the top and left tabs, respectively */
@@ -361,6 +363,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.center_doc_tabs = false;
   tspec.joined_inactive_tabs = true;
   tspec.attach_active_tab = false;
+  tspec.no_active_tab_separator = false;
   tspec.mirror_doc_tabs = true;
   tspec.group_toolbar_buttons = false;
   tspec.center_toolbar_handle = false;

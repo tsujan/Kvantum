@@ -251,7 +251,7 @@ interior=false
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
+indicator.size=10
 indicator.element=arrow
 
 [HeaderSection]

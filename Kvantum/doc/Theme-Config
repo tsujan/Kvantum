@@ -271,6 +271,14 @@ mirror_doc_tabs                   true/false          By default, bottom and rig
                                                       bottom/right tab shapes will be identical.
                                                       The default value is true.
 
+no_active_tab_separator           true/false          Do not draw tab separator for the active
+                                                      tab? False by default, which means that,
+                                                      if tab separators exist in the SVG image,
+                                                      they will be drawn for all tabs.
+                                                      
+                                                      See "Theme-Making.pdf" for an explanation
+                                                      of tab separators.
+
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
 

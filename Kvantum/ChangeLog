@@ -18,6 +18,7 @@ V0.10.2
  * Added support for focus rectangle to comboboxes.
  * Added a key to respect some DE settings (thanks to Craig).
  * Added a theme inspired by Ubuntu's Ambiance.
+ * Added a fair copy of Ubuntu's Ambiance.
  * Added an optional section for styling toolbar buttons.
  * Added an optional key for distinguishing between expanded and usual frames.
 
