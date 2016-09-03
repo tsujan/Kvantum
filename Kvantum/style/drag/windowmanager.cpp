@@ -54,8 +54,8 @@ static inline bool isPrimaryToolBar(QWidget *w)
         return true;
       }
 
-      QMainWindow *mw=qobject_cast<QMainWindow *>(w->window());
-      return mw->menuWidget()->isVisible() && w->pos().y()<=mw->menuWidget()->height()+1;
+      if (QMainWindow *mw = qobject_cast<QMainWindow *>(w->window()))
+        return mw->menuWidget()->isVisible() && w->pos().y()<=mw->menuWidget()->height()+1;
     }
   }
   return false;
