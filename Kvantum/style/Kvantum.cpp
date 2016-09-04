@@ -4831,7 +4831,7 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,
-                          getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
+                          getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                           iconSize);
             }
           }
