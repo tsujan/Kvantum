@@ -5493,8 +5493,11 @@ void Style::drawControl(ControlElement element,
                                  : opt->position != QStyleOptionTab::End));
         QRect sep, sepTop, sepBottom;
         bool isActiveTabSep = ((option->state & State_Selected)
-                               || (mirroredBottomTab ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
-                                                     : opt->selectedPosition == QStyleOptionTab::NextIsSelected));
+                               || (mirroredBottomTab
+                                     ? (!rtl ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
+                                             : opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                                     : (!rtl ? opt->selectedPosition == QStyleOptionTab::NextIsSelected
+                                             : opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)));
         if (drawSep && !(noActiveTabSep && isActiveTabSep))
         {
           sep.setRect(x+w-fspec.right,
