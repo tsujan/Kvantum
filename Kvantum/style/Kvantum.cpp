@@ -3416,8 +3416,13 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (tspec_.attach_active_tab)
       {
+        /* WARNING: We use "floating tabs" when QTabWidget is NULL because
+           QStyleOptionTabWidgetFrame::selectedTabRect.x() is wrong for QML.
+           For the sake of consistency, we don't draw tab widget frame either
+           in such cases. Other styles are too simple to have this problem. */
         const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
-        if (tw)
+        if (!tw) return;
+        else
         {
           QRect tr;
           tp = tw->tabPosition();
