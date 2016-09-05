@@ -303,7 +303,7 @@ frame.top=6
 frame.bottom=6
 indicator.element=grip
 indicator.size=13
-frame.expansion=48
+frame.expansion=0
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand

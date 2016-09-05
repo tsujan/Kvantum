@@ -6544,7 +6544,8 @@ void Style::drawControl(ControlElement element,
 
       const QString group = "ScrollbarSlider";
 
-      const frame_spec fspec = getFrameSpec(group);
+      frame_spec fspec = getFrameSpec(group);
+      fspec.expansion = 0; // no need to frame expansion because the thickness is known
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
 

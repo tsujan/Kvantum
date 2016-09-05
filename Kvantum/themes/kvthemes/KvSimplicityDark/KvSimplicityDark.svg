@@ -651,12 +651,6 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,39,0)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomleft" transform="matrix(1,0,0,-1,0,1344.0001)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomright" transform="matrix(-1,0,0,-1,39,1344.0001)"/>
-<use width="450" x="0" y="0" height="1230" id="expand-scrollbarslider-normal-top" xlink:href="#scrollbarslider-normal-left" transform="matrix(0,1,1,0,-514.24976,652.5001)"/>
-<use width="450" x="0" y="0" height="1230" id="expand-scrollbarslider-normal-topleft" xlink:href="#scrollbarslider-normal-topleft" transform="matrix(0,1,1,0,-514.24976,652.5001)"/>
-<use width="450" x="0" y="0" height="1230" id="expand-scrollbarslider-normal-topright" xlink:href="#scrollbarslider-normal-topleft" transform="matrix(0,1,-1,0,829.7504,652.5001)"/>
-<use width="100%" x="0" y="0" height="100%" id="expand-scrollbarslider-normal-bottomleft" xlink:href="#scrollbarslider-normal-topleft" transform="matrix(0,-1,1,0,-514.24976,691.5001)"/>
-<use width="100%" x="0" y="0" height="100%" id="expand-scrollbarslider-normal-bottom" xlink:href="#scrollbarslider-normal-left" transform="matrix(0,-1,1,0,-514.24976,691.5001)"/>
-<use width="100%" x="0" y="0" height="100%" id="expand-scrollbarslider-normal-bottomright" xlink:href="#scrollbarslider-normal-topleft" transform="matrix(0,-1,-1,0,829.7498,691.5001)"/>
 <g style="stroke:none" id="scrollbarslider-focused-topright" transform="matrix(1,0,0,1.3788159,-144.99723,-276.52661)">
 <rect width="12" x="225" y="669.797" height="8.702877" style="opacity:0" id="rect5155"/>
 <path style="fill:url(#linearGradient6966);fill-rule:evenodd" id="path5158" d="m 225,670.8848 0,7.6152 10.5,0 c 0,-4.35156 -4.5,-7.61523 -10.5,-7.61521 z"/>
@@ -681,18 +675,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="scrollbarslider-pressed-right" transform="translate(37.500046,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-pressed-bottomright" transform="matrix(1,0,0,-1,37.5,1340.9999)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-pressed-bottomleft" transform="matrix(1,0,0,-1,37.5,1340.9999)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-focused-bottomright" transform="matrix(0,1,-1,0,897.0027,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-focused-topright" transform="matrix(0,1,-1,0,897.0027,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="expand-scrollbarslider-focused-top" transform="matrix(0,1,-1,0,897.0027,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="expand-scrollbarslider-focused-bottom" transform="matrix(0,1,-1,0,897.0027,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-focused-bottomleft" transform="matrix(0,1,1,0,-443.99723,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-focused-topleft" transform="matrix(0,1,1,0,-443.99723,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-pressed-bottomright" transform="matrix(0,1,-1,0,961.0028,594.4973)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-pressed-topright" transform="matrix(0,1,-1,0,961.0028,594.4973)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="expand-scrollbarslider-pressed-top" transform="matrix(0,1,-1,0,961.0028,594.4973)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="expand-scrollbarslider-pressed-bottom" transform="matrix(0,1,-1,0,961.0028,594.4973)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-pressed-bottomleft" transform="matrix(0,1,1,0,-379.99723,594.4972)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-pressed-topleft" transform="matrix(0,1,1,0,-379.99723,594.4972)"/>
 <g style="stroke:none">
 <g id="tab-toggled-bottom" transform="matrix(0,-1.3333333,0.98461538,0,111.99842,522.33334)">
 <path style="fill:url(#linearGradient8663);fill-rule:evenodd" id="path8659" d="m 28.75,81.2514 0,-32.4998 -7.5,0 0,32.5 z"/>
