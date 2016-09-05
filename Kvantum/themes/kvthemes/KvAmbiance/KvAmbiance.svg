@@ -780,12 +780,12 @@
 </g>
 <g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd" id="menu-checkbox-focused" transform="translate(20.000024,0)">
 <rect width="16" x="320.00003" y="580" height="16" style="stroke:none;stroke-width:3" id="rect5070"/>
-<rect width="13.499949" x="320.75" y="581.75" rx="2.6999893" height="13.499949" ry="2.6999893" style="stroke:#fff;stroke-width:1.5" id="rect5072"/>
+<rect width="13.499949" x="320.75" y="581.75" rx="2.5" height="13.499949" ry="2.5" style="stroke:#fff;stroke-width:1.5" id="rect5072"/>
 </g>
 <g style="fill-rule:evenodd;stroke-linecap:round" id="menu-checkbox-checked-focused" transform="translate(20.000014,0)">
 <rect width="16" x="360" y="580" height="16" style="stroke:none;fill-opacity:0;stroke-width:3" id="rect5076"/>
 <g style="stroke:#fff">
-<rect width="13.500483" x="360.75" y="581.74951" rx="2.7000964" ry="2.7000964" height="13.500483" style="fill-opacity:0;stroke-width:1.5" id="rect5078"/>
+<rect width="13.500483" x="360.75" y="581.74951" rx="2.5" ry="2.5" height="13.500483" style="fill-opacity:0;stroke-width:1.5" id="rect5078"/>
 <path style="fill:none;stroke-width:3" id="path5080" d="m 363.6268,587.0001 2.7733,2.6997 8,-8"/>
 </g>
 </g>
@@ -794,7 +794,7 @@
 <g id="g5087">
 <g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd">
 <rect width="16" x="400" y="580" height="16" style="stroke:none;stroke-width:3" id="rect5089"/>
-<rect width="13.500483" x="400.74976" y="581.74976" rx="2.7000964" height="13.500483" ry="2.7000964" style="stroke:#fff;stroke-width:1.5" id="rect5092"/>
+<rect width="13.500483" x="400.74976" y="581.74976" rx="2.5" height="13.500483" ry="2.5" style="stroke:#fff;stroke-width:1.5" id="rect5092"/>
 </g>
 <rect width="10" x="402.5" y="-590.00006" height="3" style="fill:#fff;stroke:none;color:#000" id="rect5094" transform="scale(1,-1)"/>
 </g>

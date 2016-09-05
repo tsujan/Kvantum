@@ -8506,7 +8506,8 @@ void Style::drawComplexControl(ComplexControl control,
         if (opt->subControls & SC_ScrollBarSlider)
         {
           const QString group = "ScrollbarGroove";
-          const frame_spec fspec = getFrameSpec(group);
+          frame_spec fspec = getFrameSpec(group);
+          fspec.expansion = 0; // no need to frame expansion because the thickness is known
           const interior_spec ispec = getInteriorSpec(group);
 
           if (horiz)

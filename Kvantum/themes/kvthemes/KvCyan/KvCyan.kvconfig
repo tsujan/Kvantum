@@ -309,16 +309,24 @@ indicator.size=12
 [ScrollbarSlider]
 inherits=PanelButtonCommand
 frame.element=scrollbarslider
-interior=scrollbarslider
+interior=false
 indicator.element=grip
 indicator.size=13
-frame.expansion=24
+frame.left=6
+frame.right=6
+frame.top=6
+frame.bottom=6
+frame.expansion=0
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
 frame.element=groove
-interior.element=groove
-frame.expansion=24
+interior=false
+frame.left=6
+frame.right=6
+frame.top=6
+frame.bottom=6
+frame.expansion=0
 
 [MenuItem]
 inherits=PanelButtonCommand

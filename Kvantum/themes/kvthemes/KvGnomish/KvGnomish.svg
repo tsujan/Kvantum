@@ -405,13 +405,7 @@
 </g>
 </g>
 <rect width="5" x="175" y="820.00006" rx="2.5" height="32" ry="2.5" style="fill:url(#linearGradient4622);stroke:none" id="splitter-grip-focused"/>
-<g style="stroke:none">
-<rect width="5" x="185" y="820.00006" rx="2.5" height="32" ry="2.5" style="fill:url(#linearGradient5968)" id="splitter-grip-normal"/>
-<g style="stroke-width:1.885;fill-opacity:0;fill-rule:evenodd;stroke-linejoin:round">
-<rect width="10" x="345" y="842.00006" height="10" id="grip-focused"/>
-<rect width="10" x="360" y="842.00006" height="10" id="grip-pressed"/>
-</g>
-</g>
+<rect width="5" x="185" y="820.00006" rx="2.5" height="32" ry="2.5" style="fill:url(#linearGradient5968);stroke:none" id="splitter-grip-normal"/>
 <g style="fill-rule:evenodd;stroke:none" id="slider-normal-topleft" transform="translate(-59.999999,-127.49994)">
 <path style="fill-opacity:0" id="path5018" d="m 92,717.5 -12,0 0,12 12,0 z"/>
 <path style="fill:url(#linearGradient5352)" id="path5020" d="m 92,719.5 c -4.5,0 -8,4 -8,9 l 0,0.9998 8,2e-4 z"/>
@@ -500,7 +494,6 @@
 <g style="stroke:none;fill-rule:evenodd">
 <path id="expand-progress-pattern-normal" d="m 310,115 0,10 10,0 0,-10 -10,0 z"/>
 <path id="expand-progress-normal" d="m 310,125 0,10 10,0 0,-10 -10,0 z"/>
-<rect width="10" x="330" y="842.00006" height="10" style="stroke-linejoin:round;fill-opacity:0;stroke-width:1.885" id="grip-normal"/>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="scrollbarslider-normal-topleft" transform="translate(72.000001,-273.99994)">
 <path style="fill:#969696;fill-opacity:0" id="scrollbarslider-normal-topleft0-9" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 v -12 z "/>
@@ -535,18 +528,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="scrollbarslider-pressed-right" transform="translate(35,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-pressed-bottomright" transform="matrix(1,0,0,-1,34.99995,1677.0001)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-pressed-bottomleft" transform="matrix(1,0,0,-1,34.99995,1677.0001)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-focused-bottomright" transform="matrix(0,1,-1,0,1212.0001,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-focused-topright" transform="matrix(0,1,-1,0,1212.0001,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="expand-scrollbarslider-focused-top" transform="matrix(0,1,-1,0,1212.0001,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="expand-scrollbarslider-focused-bottom" transform="matrix(0,1,-1,0,1212.0001,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-focused-bottomleft" transform="matrix(0,1,1,0,-465.00006,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-focused-topleft" transform="matrix(0,1,1,0,-465.00006,570.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-pressed-bottomright" transform="matrix(0,1,-1,0,1257.0001,570.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-pressed-topright" transform="matrix(0,1,-1,0,1257.0001,570.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="expand-scrollbarslider-pressed-top" transform="matrix(0,1,-1,0,1257.0001,570.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-right" id="expand-scrollbarslider-pressed-bottom" transform="matrix(0,1,-1,0,1257.0001,570.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="expand-scrollbarslider-pressed-bottomleft" transform="matrix(0,1,1,0,-420.00014,570.00001)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="expand-scrollbarslider-pressed-topleft" transform="matrix(0,1,1,0,-420.00014,570.00001)"/>
 <g style="stroke:none" id="button-focused-left" transform="translate(48.750001,-36.25149)">
 <path style="fill:url(#linearGradient5091);fill-rule:evenodd" id="path5032" d="m 28.75,81.2514 0,-32.4998 -7.5,0 0,32.5 z"/>
 <path style="font-family:Sans;fill:#212525;text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5034" d="m 21.25,48.7516 0,32.5 2.5,0 0,-32.5 z"/>
@@ -816,26 +797,26 @@
 <use width="100%" x="0" y="0" height="100%" id="use8821" xlink:href="#progress-normal-bottomleft0" transform="matrix(-1,0,0,1,537.99998,9e-5)"/>
 <path style="opacity:.06;fill:url(#linearGradient8869);fill-rule:evenodd;stroke:none" id="path8827" d="m 285,148.0001 c 1.68749,0 2.99999,-1.3125 2.99999,-2.99999 h -2.99998 z "/>
 </g>
-<ellipse cx="243" cy="587" rx="7.0000587" ry="7.0000591" style="stroke:#a0a0a0;fill-opacity:0;color:#000;stroke-width:2" id="menu-radio-normal"/>
+<ellipse cx="243" cy="587" rx="7.2497864" ry="7.2497869" style="stroke:#aaa;fill-opacity:0;color:#000;stroke-width:1.5" id="menu-radio-normal"/>
 <g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd" id="menu-checkbox-normal">
 <rect width="16" x="320.00003" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4907"/>
-<rect width="13.000153" x="321" y="581" rx="2.6000299" ry="2.6000299" height="13.000153" style="stroke:#a0a0a0;stroke-width:2" id="rect4910"/>
+<rect width="13.499949" x="320.75003" y="580.75" rx="2.5" ry="2.5" height="13.499949" style="stroke:#aaa;stroke-width:1.5" id="rect4910"/>
 </g>
 <g style="fill-rule:evenodd;stroke-linecap:round" id="menu-checkbox-checked-normal">
 <g style="fill-opacity:0">
 <rect width="16" x="360" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4927"/>
-<rect width="14.000277" x="360.5" y="580.5" rx="2.8000553" height="14.000277" ry="2.8000553" style="stroke:#969696" id="rect4947"/>
+<rect width="13.500483" x="360.74976" y="580.74976" rx="2.5" height="13.500483" ry="2.5" style="stroke:#aaa;stroke-width:1.5" id="rect4947"/>
 </g>
 <path style="fill:none;stroke:#fff;stroke-width:3" id="path4933" d="m 363.6268,586.0001 2.7733,2.6997 8,-8"/>
 </g>
 <g id="menu-checkbox-tristate-normal">
-<g style="stroke-linecap:round;fill-opacity:0;fill-rule:evenodd">
+<g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd">
 <rect width="16" x="400" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4967"/>
-<rect width="14.000277" x="400.5" y="580.5" rx="2.8000553" ry="2.8000553" height="14.000277" style="stroke:#969696" id="rect4969"/>
+<rect width="13.500483" x="400.74976" y="580.74976" rx="2.5" ry="2.5" height="13.500483" style="stroke:#aaa;stroke-width:1.5" id="rect4969"/>
 </g>
 <rect width="10" x="402.5" y="-589.00006" height="3" style="fill:#fff;stroke:none;color:#000" id="rect4960" transform="scale(1,-1)"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20,-1.7827176e-7)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20.276398,-0.27636719)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-normal" id="menu-checkbox-checked-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-normal" id="menu-checkbox-tristate-focused" transform="translate(20,0)"/>
@@ -872,13 +853,10 @@
 <path style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-linecap:round;stroke-width:3.375" id="path5051" d="m 364.0802,605.8751 3.12,3.0371 9,-9"/>
 </g>
 <g id="menu-radio-checked-normal">
-<use width="100%" x="0" y="0" height="100%" id="use4825" xlink:href="#menu-radio-normal" transform="translate(40,1.1920929e-7)"/>
+<use width="100%" x="0" y="0" height="100%" id="use4825" xlink:href="#menu-radio-normal" transform="translate(40,-1.7881393e-7)"/>
 <ellipse cx="283.00003" cy="587" rx="3" ry="2.9999981" style="fill:#fff;stroke:none;color:#000;stroke-width:1.274" id="ellipse4893"/>
 </g>
-<g style="color:#000" id="menu-radio-checked-focused">
-<ellipse cx="303" cy="587" rx="7.0000587" ry="7.0000591" style="stroke:#a0a0a0;fill-opacity:0;stroke-width:2" id="ellipse4833"/>
-<ellipse cx="303" cy="587" rx="3" ry="2.9999981" style="fill:#fff;stroke:none;stroke-width:1.274" id="ellipse4821"/>
-</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.8" xlink:href="#tframe-normal-pattern" id="dialog-normal" transform="translate(0,21)"/>
 <g style="fill-rule:evenodd;stroke:none" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,382,-274)">
 <path style="fill:#969696;fill-opacity:0" id="path6017" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 v -12 z "/>
@@ -888,13 +866,7 @@
 <path style="fill:#969696;fill-opacity:0" id="path6025" d="m 143,1101 0,16.4064 0,.094 12,0 0,-16.5 -12,0 z "/>
 <path style="fill:url(#linearGradient11585)" id="path6027" d="m 151,1100.9998 0,16.4064 0,0.094 4,2e-4 0,-16.5 -4,-2e-4 z"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topright" id="use6301" transform="matrix(1,0,0,-1,10e-7,1670.5006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="expand-scrollbarslider-normal-topright" transform="matrix(0,1,-1,0,1160.5001,600.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-left" id="expand-scrollbarslider-normal-top" transform="matrix(0,1,-1,0,1160.5001,600.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topright" id="expand-scrollbarslider-normal-bottomright" transform="matrix(0,1,-1,0,1160.5001,600.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-right" id="expand-scrollbarslider-normal-bottom" transform="matrix(0,1,-1,0,1160.5001,600.00006)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="expand-scrollbarslider-normal-topleft" transform="matrix(0,1,1,0,-510.00006,600)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topright" id="expand-scrollbarslider-normal-bottomleft" transform="matrix(0,1,1,0,-509.9997,600.00006)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-topright" id="scrollbarslider-normal-bottomright" transform="matrix(1,0,0,-1,10e-7,1670.5006)"/>
 <g style="stroke:none" id="common-focused-left" transform="matrix(1.3333333,0,0,1,-208,-301.99994)">
 <path style="fill:#215d9c" id="path4831" d="m 271.5,1170 0,30 1.5,0 0,-30 z "/>
 <path style="fill:#282828;fill-rule:evenodd" id="path4833" d="m 270,1170 0,30 1.5,0 0,-30 z "/>
