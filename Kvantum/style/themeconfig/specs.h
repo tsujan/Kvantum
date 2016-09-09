@@ -47,8 +47,8 @@ typedef struct {
   /* join inactive tabs together?
      (by default, they are joined) */
   bool joined_inactive_tabs;
-  /* attach the active tab to the tab widget?
-     (by default, it is detached) */
+  /* attach the active tab to the tab widget or
+     the tabbar base? (by default, it is detached) */
   bool attach_active_tab;
   /* when using tab separators, don't draw them for the active tab */
   bool no_active_tab_separator;

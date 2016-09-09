@@ -252,8 +252,8 @@ center_doc_tabs                   true/false          Always center tabs if the 
                                                       which means that tabs are aligned in the
                                                       document mode as in the usual mode.
 
-attach_active_tab                 true/false          Attach the active tab to the
-                                                      tab widget? It is detached
+attach_active_tab                 true/false          Attach the active tab to the tab widget
+                                                      or the tab-bar base? It is detached
                                                       by default.
 
 joined_inactive_tabs              true/false          Join inactive tabs together? They are
