@@ -3908,13 +3908,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         align = Qt::AlignRight | Qt::AlignVCenter;
       }
       if ((verticalIndicators || tspec_.inline_spin_indicators)
-          && themeRndr_ && themeRndr_->isValid()
-          && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+          && themeRndr_ && themeRndr_->isValid())
       {
         QColor col = getFromRGBA(getLabelSpec(group).normalColor);
         if (!col.isValid())
           col = QApplication::palette().color(QPalette::ButtonText);
-        if (enoughContrast(col, QApplication::palette().color(QPalette::Text)))
+        if (enoughContrast(col, QApplication::palette().color(QPalette::Text))
+            && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
           dspec.element = "flat-"+dspec.element;
       }
       renderIndicator(painter,
@@ -4210,17 +4210,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         /* use the "flat" indicator with flat buttons if it exists */
-        if (tb->autoRaise())
+        if (status.startsWith("normal") && tb->autoRaise()
+            && themeRndr_ && themeRndr_->isValid())
         {
           QString group1 = "PanelButtonTool";
           if (group == "ToolbarButton")
             group1 = group;
           const indicator_spec dspec1 = getIndicatorSpec(group1);
-          if (themeRndr_ && themeRndr_->isValid()
-              && themeRndr_->elementExists("flat-"+dspec1.element+"-down-normal"))
+          if (themeRndr_->elementExists("flat-"+dspec1.element+"-down-normal"))
           {
-            const label_spec lspec1 = getLabelSpec(group1);
-            QColor col = getFromRGBA(lspec1.normalColor);
+            QColor col = getFromRGBA(getLabelSpec(group1).normalColor);
             if (!col.isValid())
               col = QApplication::palette().color(QPalette::ButtonText);
             QWidget *p = tb->parentWidget();
@@ -4332,26 +4331,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
 
-      QString aStatus;
       /* distinguish between the toggled and pressed states
          only if a toggled down arrow element exists */
-      if (themeRndr_ && themeRndr_->isValid()
-          && themeRndr_->elementExists(dspec.element+"-toggled"))
+      if (status.startsWith("toggled")
+          && !(themeRndr_ && themeRndr_->isValid()
+               && themeRndr_->elementExists(dspec.element+"-toggled")))
       {
-        aStatus = status;
-      }
-      else
-      {
-        aStatus = "normal";
-        if (!(option->state & State_Enabled))
-          aStatus = "disabled";
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
-          aStatus = "pressed";
-        else if ((option->state & State_MouseOver)
-                 && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
-          aStatus = "focused";
-        if (widget && !widget->isActiveWindow())
-          aStatus.append("-inactive");
+        status.replace("toggled","pressed");
       }
       /* Konqueror may have added an icon to the right of lineedit (for LTR),
          in which case, the arrow rectangle whould be widened at CC_ComboBox */
@@ -4366,7 +4352,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       renderIndicator(painter,
                       r,
-                      fspec,dspec,dspec.element+"-"+aStatus,
+                      fspec,dspec,dspec.element+"-"+status,
                       option->direction);
 
       break;
@@ -4415,8 +4401,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       /* it's disabled in KColorChooser; why? */
       if (widget && widget->inherits("KSelector") && !(option->state & State_Enabled))
         aStatus = "pressed";
-      if (widget && !widget->isActiveWindow())
-        aStatus.append("-inactive");
 
       QString dir;
       if (element == PE_IndicatorArrowUp)
@@ -4443,6 +4427,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
 
+      if (aStatus == "normal"
+          && painter->pen().color() == QColor(Qt::white) // -> SP_ToolBarHorizontalExtensionButton
+          && themeRndr_ && themeRndr_->isValid()
+          && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+      {
+        dspec.element = "flat-"+dspec.element;
+      }
+
+      if (widget && !widget->isActiveWindow())
+        aStatus.append("-inactive");
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus,option->direction);
 
       break;
@@ -7240,13 +7234,13 @@ void Style::drawControl(ControlElement element,
           /* use the "flat" indicator with flat buttons if it exists */
           if ((opt->features & QStyleOptionButton::Flat) && status.startsWith("normal"))
           {
-            if (themeRndr_ && themeRndr_->isValid()
-                && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+            if (themeRndr_ && themeRndr_->isValid())
             {
               QColor ncol = getFromRGBA(lspec.normalColor);
               if (!ncol.isValid())
                 ncol = QApplication::palette().color(QPalette::ButtonText);
-              if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText)))
+              if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText))
+                  && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
                 dspec.element = "flat-"+dspec.element;
             }
           }
@@ -7355,6 +7349,18 @@ void Style::drawControl(ControlElement element,
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
         const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
 
+        if (status.startsWith("focused"))
+        {
+          if (widget)
+          {
+            QRect R = option->rect;
+            if (fspec.expansion > 0 || (tb && tb->popupMode() != QToolButton::MenuButtonPopup))
+              R = widget->rect();
+            if (!R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+              status.replace("focused","normal");
+          }
+        }
+
         if (tb)
         {
           /* always show menu titles in the toggled state */
@@ -7389,8 +7395,7 @@ void Style::drawControl(ControlElement element,
           /* respect the text color of the parent widget */
           if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
-            bool hasFlatIndicator(themeRndr_ && themeRndr_->isValid()
-                                  && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"));
+            bool isNormal(status.startsWith("normal"));
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
@@ -7401,26 +7406,40 @@ void Style::drawControl(ControlElement element,
               menubar = p;
             if (menubar)
             {
-              QString group1("MenuBar");
-              if (mergedToolbarHeight(menubar))
-                group1 = "Toolbar";
-              const label_spec lspec1 = getLabelSpec(group1);
-              if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
-                dspec.element = "flat-"+dspec.element;
-              lspec.normalColor = lspec1.normalColor;
+              if (isNormal)
+              {
+                QString group1("MenuBar");
+                if (mergedToolbarHeight(menubar))
+                  group1 = "Toolbar";
+                const label_spec lspec1 = getLabelSpec(group1);
+                if (themeRndr_ && themeRndr_->isValid()
+                    && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
+                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
+                lspec.normalColor = lspec1.normalColor;
+              }
             }
             else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
                       && !p->findChild<QTabBar*>())
                      || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
                          && !gp->findChild<QTabBar*>()))
             {
-              const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
-              if (!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
+              if (isNormal)
               {
-                const label_spec lspec1 = getLabelSpec("Toolbar");
-                if (hasFlatIndicator && enoughContrast(ncol, QColor(lspec1.normalColor)))
-                  dspec.element = "flat-"+dspec.element;
-                lspec.normalColor = lspec1.normalColor;
+                const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
+                if (!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
+                {
+                  const label_spec lspec1 = getLabelSpec("Toolbar");
+                  if (themeRndr_ && themeRndr_->isValid()
+                      && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
+                      && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                  {
+                    dspec.element = "flat-"+dspec.element;
+                  }
+                  lspec.normalColor = lspec1.normalColor;
+                }
               }
             }
             else if (p)
@@ -7432,9 +7451,16 @@ void Style::drawControl(ControlElement element,
                 col = p->palette().color(p->foregroundRole());
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::WindowText);
-              if (hasFlatIndicator && enoughContrast(ncol, col))
-                dspec.element = "flat-"+dspec.element;
-              lspec.normalColor = col.name();
+              if (isNormal)
+              {
+                if (themeRndr_ && themeRndr_->isValid()
+                    && enoughContrast(ncol, col)
+                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                {
+                  dspec.element = "flat-"+dspec.element;
+                }
+                lspec.normalColor = col.name();
+              }
               if (/*inPlasma ||*/ !paneledButtons.contains(widget))
               {
                 lspec.focusColor = col.name();
@@ -7573,18 +7599,8 @@ void Style::drawControl(ControlElement element,
             state = 3;
           else if (status.startsWith("toggled"))
             state = 4;
-          else if (option->state & State_MouseOver)
-          {
-            if (!widget) state = 2;
-            else
-            {
-              QRect R = option->rect;
-              if (fspec.expansion > 0 || (tb && tb->popupMode() != QToolButton::MenuButtonPopup))
-                R = widget->rect();
-              if (R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-                state = 2;
-            }
-          }
+          else if (status.startsWith("focused"))
+            state = 2;
           QStyleOptionToolButton o(*opt);
           if ((option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
@@ -7614,20 +7630,9 @@ void Style::drawControl(ControlElement element,
         if (!(opt->features & QStyleOptionToolButton::Arrow) || tialign == Qt::ToolButtonTextOnly)
           break;
 
-        if (status.startsWith("focused"))
-        {
-          if (widget)
-          {
-            QRect R = r;
-            if (fspec.expansion > 0 || (tb && tb->popupMode() != QToolButton::MenuButtonPopup))
-              R = widget->rect();
-            if (!R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-              status.replace("focused","normal");
-          }
-        }
-        else if (status.startsWith("toggled")
-                 && (!themeRndr_ || !themeRndr_->isValid()
-                     || !themeRndr_->elementExists(dspec.element+"-down-toggled")))
+        if (status.startsWith("toggled")
+            && (!themeRndr_ || !themeRndr_->isValid()
+                || !themeRndr_->elementExists(dspec.element+"-down-toggled")))
         {
           /* distinguish between the toggled and pressed states
              only if a toggled down arrow element exists */
@@ -7897,8 +7902,19 @@ void Style::drawComplexControl(ComplexControl control,
             }
             indicator_spec dspec = getIndicatorSpec(group1);
             const label_spec lspec = getLabelSpec(group1);
+
+            QString aStatus = "normal";
+            if (!(option->state & State_Enabled))
+              aStatus = "disabled";
+            else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
+              aStatus = "pressed";
+            else if ((option->state & State_MouseOver)
+                     && widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+              aStatus = "focused";
+
             /* use the "flat" indicator with flat buttons if it exists */
-            if (tb->autoRaise()
+            if (aStatus == "normal"
+                && tb->autoRaise()
                 && themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
             {
@@ -7951,14 +7967,6 @@ void Style::drawComplexControl(ComplexControl control,
                 ialign = Qt::AlignRight | Qt::AlignBottom;
               }
             }
-            QString aStatus = "normal";
-            if (!(option->state & State_Enabled))
-              aStatus = "disabled";
-            else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
-              aStatus = "pressed";
-            else if ((option->state & State_MouseOver)
-                     && widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-              aStatus = "focused";
             if (!widget->isActiveWindow())
               aStatus.append("-inactive");
             renderIndicator(painter,
@@ -12064,11 +12072,27 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
+
+      /* If this is a dark-and-light theme, we set the pen color of
+         the painter to white as a sign to use at PE_IndicatorArrowRight. */
+      if (themeRndr_ && themeRndr_->isValid())
+      { // for toolbar, widget is NULL but for menubar, it isn't
+        QColor col;
+        if (!widget || mergedToolbarHeight(widget) > 0)
+          col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+        else
+          col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
+        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor)))
+          painter.setPen(QColor(Qt::white));
+      }
+
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
-      opt.state |= State_Enabled;
+      opt.state |= State_Enabled; // other states don't work for toolbar FIXME: why?
 
-      drawPrimitive(PE_IndicatorArrowRight,&opt,&painter,0);
+      drawPrimitive(QApplication::layoutDirection() == Qt::RightToLeft ?
+                      PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
+                    &opt,&painter,0);
 
       return QIcon(pm);
     }
@@ -12078,6 +12102,15 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
+
+      if (!hspec_.single_top_toolbar
+          && themeRndr_ && themeRndr_->isValid()
+          && enoughContrast(getFromRGBA(getLabelSpec("Toolbar").normalColor),
+                            getFromRGBA(cspec_.windowTextColor)))
+      {
+        painter.setPen(QColor(Qt::white));
+      }
+
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
       opt.state |= State_Enabled;
