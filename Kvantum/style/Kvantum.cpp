@@ -7301,6 +7301,7 @@ void Style::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionToolButton*>(option);
 
       if (opt) {
+        QString txt = opt->text;
         QString status = getState(option,widget);
         QString group = "PanelButtonTool";
         QWidget *p = getParent(widget,1);
@@ -7480,16 +7481,54 @@ void Style::drawControl(ControlElement element,
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
           if (tialign != Qt::ToolButtonIconOnly)
           {
-            if (!opt->text.isEmpty()
-                && (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon))
+            if (!txt.isEmpty())
             {
-              size_spec sspec;
-              default_size_spec(sspec);
-              QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,opt->text,opt->iconSize,tialign);
-              if (tb->width() < cs.width() || tb->height() < cs.height())
+              if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
-                lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
-                fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+                size_spec sspec;
+                default_size_spec(sspec);
+                QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,txt,opt->iconSize,tialign);
+                if (tb->height() < cs.height())
+                {
+                  lspec.top = lspec.bottom = 0;
+                  fspec.top = fspec.bottom = 0;
+                  if (tialign == Qt::ToolButtonTextUnderIcon)
+                    lspec.tispace = 0;
+                }
+                if (tb->width() < cs.width())
+                {
+                  if (tialign == Qt::ToolButtonTextUnderIcon)
+                  {
+                    lspec.left = lspec.right = 0;
+                    fspec.left = fspec.right = 0;
+                  }
+                  else if (cs.width() - tb->width() <= fspec.left + fspec.right
+                                                       + lspec.left + lspec.right + lspec.tispace)
+                  {
+                    lspec.left = lspec.right = lspec.tispace = 0;
+                    fspec.left = fspec.right = 0;
+                  }
+                  else // If the text is beside the icon but doesn't fit in,...
+                  { // ... elide it!
+                    QFontMetrics fm(painter->font());
+                    int txtWidth = tb->width() - opt->iconSize.width()
+                                   - fspec.left - fspec.right
+                                   - lspec.left - lspec.right - lspec.tispace;
+                    txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+                  }
+                }
+              }
+              else if (tialign == Qt::ToolButtonTextOnly)
+              { // again, elide the text if it doesn't fit in
+                size_spec sspec;
+                default_size_spec(sspec);
+                QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,txt,QSize(),tialign);
+                if (cs.width() - tb->width() > fspec.left + fspec.right + lspec.left + lspec.right)
+                {
+                  QFontMetrics fm(painter->font());
+                  int txtWidth = tb->width() - fspec.left - fspec.right - lspec.left - lspec.right;
+                  txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+                }
               }
             }
           }
@@ -7619,7 +7658,7 @@ void Style::drawControl(ControlElement element,
                                      : 0,
                                    0),
                       fspec,lspec,
-                      talign,opt->text,QPalette::ButtonText,
+                      talign,txt,QPalette::ButtonText,
                       state,
                       getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                       opt->iconSize,tialign);
@@ -7638,7 +7677,7 @@ void Style::drawControl(ControlElement element,
              only if a toggled down arrow element exists */
           status.replace("toggled","pressed");
         }
-        if (!opt->text.isEmpty()) // it's empty for QStackedWidget
+        if (!txt.isEmpty()) // it's empty for QStackedWidget
           r.adjust(lspec.left,lspec.top,-lspec.right,-lspec.bottom);
         switch (opt->arrowType) {
           case Qt::NoArrow :

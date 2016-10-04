@@ -481,10 +481,10 @@ inherits=PanelButtonCommand
 frame=true
 frame.element=tabBarFrame
 interior=false
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
+frame.top=6
+frame.bottom=6
+frame.left=6
+frame.right=6
 
 [ToolTip]
 inherits=GenericFrame
