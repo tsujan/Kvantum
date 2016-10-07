@@ -2206,7 +2206,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
 }
 
 /* Compute the size of a text. */
-static inline QSize textSize (const QFont &font, const QString &text)
+static inline QSize textSize(const QFont &font, const QString &text)
 {
   int tw, th;
   tw = th = 0;
@@ -7483,27 +7483,32 @@ void Style::drawControl(ControlElement element,
           {
             if (!txt.isEmpty())
             {
+              QSize txtSize = textSize(painter->font(), txt);
               if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
-                size_spec sspec;
-                default_size_spec(sspec);
-                QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,txt,opt->iconSize,tialign);
-                if (tb->height() < cs.height())
+                QSize availableSize = opt->rect.size() - opt->iconSize
+                                      - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                              fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+                if (tialign == Qt::ToolButtonTextBesideIcon)
+                  availableSize -= QSize(lspec.tispace, 0);
+                else
+                  availableSize -= QSize(0, lspec.tispace);
+                if (txtSize.height() > availableSize.height())
                 {
                   lspec.top = lspec.bottom = 0;
                   fspec.top = fspec.bottom = 0;
                   if (tialign == Qt::ToolButtonTextUnderIcon)
                     lspec.tispace = 0;
                 }
-                if (tb->width() < cs.width())
+                if (txtSize.width() > availableSize.width())
                 {
                   if (tialign == Qt::ToolButtonTextUnderIcon)
                   {
                     lspec.left = lspec.right = 0;
                     fspec.left = fspec.right = 0;
                   }
-                  else if (cs.width() - tb->width() <= fspec.left + fspec.right
-                                                       + lspec.left + lspec.right + lspec.tispace)
+                  else if (txtSize.width() <= availableSize.width() + fspec.left + fspec.right
+                                                                    + lspec.left + lspec.right + lspec.tispace)
                   {
                     lspec.left = lspec.right = lspec.tispace = 0;
                     fspec.left = fspec.right = 0;
@@ -7511,23 +7516,17 @@ void Style::drawControl(ControlElement element,
                   else // If the text is beside the icon but doesn't fit in,...
                   { // ... elide it!
                     QFontMetrics fm(painter->font());
-                    int txtWidth = tb->width() - opt->iconSize.width()
-                                   - fspec.left - fspec.right
-                                   - lspec.left - lspec.right - lspec.tispace;
-                    txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+                    txt = fm.elidedText(txt, Qt::ElideRight, availableSize.width());
                   }
                 }
               }
               else if (tialign == Qt::ToolButtonTextOnly)
               { // again, elide the text if it doesn't fit in
-                size_spec sspec;
-                default_size_spec(sspec);
-                QSize cs = sizeCalculated(painter->font(),fspec,lspec,sspec,txt,QSize(),tialign);
-                if (cs.width() - tb->width() > fspec.left + fspec.right + lspec.left + lspec.right)
+                int availableWidth = opt->rect.width() - fspec.left - fspec.right - lspec.left - lspec.right;
+                if (txtSize.width() > availableWidth)
                 {
                   QFontMetrics fm(painter->font());
-                  int txtWidth = tb->width() - fspec.left - fspec.right - lspec.left - lspec.right;
-                  txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+                  txt = fm.elidedText(txt, Qt::ElideRight, availableWidth);
                 }
               }
             }
@@ -10786,7 +10785,7 @@ QSize Style::sizeCalculated(const QFont &font,
     s.rheight() += qAbs(lspec.yshift)+lspec.depth;
   }
 
-  QSize ts = textSize (font, text);
+  QSize ts = textSize(font, text);
   int tw = ts.width();
   int th = ts.height();
 
