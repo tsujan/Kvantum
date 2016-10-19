@@ -55,7 +55,7 @@ mid.light.color=#555555
 dark.color=#171717
 mid.color=#303030
 highlight.color=#4a90d9
-inactive.highlight.color=#828282
+inactive.highlight.color=#737373
 tooltip.base.color=black
 text.color=white
 window.text.color=white
@@ -292,7 +292,7 @@ text.normal.color=white
 text.focus.color=#9bccff
 text.press.color=white
 text.toggle.color=white
-frame.expansion=6
+frame.expansion=0
 
 [Splitter]
 indicator.size=32
