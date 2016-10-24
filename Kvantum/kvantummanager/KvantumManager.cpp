@@ -559,6 +559,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
+    ui->checkBoxTint->setChecked (defaultSettings.value ("no_selection_tint").toBool());
     int tmp = 0;
     if (defaultSettings.contains ("tint_on_mouseover")) // it's false by default
         tmp = qMin (qMax (defaultSettings.value ("tint_on_mouseover").toInt(), 0), 100);
@@ -972,6 +973,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
                 ui->checkBoxToolbar->setChecked (themeSettings.value ("single_top_toolbar").toBool());
+                ui->checkBoxTint->setChecked (themeSettings.value ("no_selection_tint").toBool());
                 int tmp = 0;
                 if (themeSettings.contains ("tint_on_mouseover"))
                     tmp = qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(), 0), 100);
@@ -1391,6 +1393,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
         hackKeys.insert("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
+        hackKeys.insert("no_selection_tint", boolToStr (ui->checkBoxTint->isChecked()));
         hackKeys.insert("tint_on_mouseover", str.setNum (ui->spinTint->value()));
         hackKeys.insert("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
         hackKeys.insert("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
@@ -1469,6 +1472,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconlessBtn->isChecked());
         themeSettings.setValue ("iconless_menu", ui->checkBoxIconlessMenu->isChecked());
         themeSettings.setValue ("single_top_toolbar", ui->checkBoxToolbar->isChecked());
+        themeSettings.setValue ("no_selection_tint", ui->checkBoxTint->isChecked());
         themeSettings.setValue ("tint_on_mouseover", ui->spinTint->value());
         themeSettings.setValue ("disabled_icon_opacity", ui->spinOpacity->value());
         themeSettings.setValue ("lxqtmainmenu_iconsize", ui->spinLxqtMenu->value());
