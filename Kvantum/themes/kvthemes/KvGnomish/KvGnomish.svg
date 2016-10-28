@@ -175,7 +175,7 @@
 <g style="stroke:none;fill-rule:evenodd">
 <rect width="15" x="330" y="780.00006" height="15" style="fill:#4a90d9" id="tab-tear"/>
 <rect width="45" x="20" y="815.00006" rx="22.5" ry="22.5" height="45" style="fill:#303434" id="dial"/>
-<path style="fill:#2c2d2d" id="menu-normal" d="m 116.9998,662.0001 48,0 0,48 -48,0 z "/>
+<path style="opacity:.9;fill:#2c2d2d" id="menu-normal" d="m 116.9998,662.0001 48,0 0,48 -48,0 z "/>
 <path style="fill:#2a76c6" id="menu-normal-left" d="m 111.99895,661.99979 4.9999,3e-4 0,48 -4.9999,-3e-4 z"/>
 <path style="fill:#393f3f" id="menu-normal-topleft" d="m 116.9989,656.9998 -4.9989,.0003 -.001,5 4.9999,0 z "/>
 </g>

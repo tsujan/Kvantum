@@ -9293,11 +9293,12 @@ void Style::drawComplexControl(ComplexControl control,
             col = getFromRGBA(lspec.normalColor);
           if (!col.isValid())
             col = option->palette.color(QPalette::Text);
-          if (col.isValid())
-          {
-            painter->save();
-            painter->setPen(col);
-          }
+
+          int talign = Qt::AlignHCenter | Qt::AlignVCenter;
+          if (!styleHint(SH_UnderlineShortcut, opt, widget))
+            talign |= Qt::TextHideMnemonic;
+          else
+            talign |= Qt::TextShowMnemonic;
 
           if (lspec.boldFont || lspec.italicFont)
           {
@@ -9310,19 +9311,36 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setFont(font);
           }
 
-          int talign = Qt::AlignHCenter | Qt::AlignVCenter;
-          if (!styleHint(SH_UnderlineShortcut, opt, widget))
-            talign |= Qt::TextHideMnemonic;
-          else
-            talign |= Qt::TextShowMnemonic;
+          if (lspec.hasShadow)
+          {
+            QColor shadowColor = getFromRGBA(lspec.shadowColor);
+            /* the shadow should have enough contrast with the text */
+            if (shadowColor.isValid() && enoughContrast(col, shadowColor))
+            {
+              painter->save();
+              if (lspec.a < 255)
+                shadowColor.setAlpha(lspec.a);
+              painter->setPen(QPen(shadowColor));
+              for (int i=0; i<lspec.depth; i++)
+                painter->drawText(textRect.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),
+                                  talign,opt->text);
+              painter->restore();
+            }
+          }
+
+          if (col.isValid())
+          {
+            painter->save();
+            painter->setPen(col);
+          }
 
           drawItemText(painter, textRect, talign,
                        opt->palette, opt->state & State_Enabled, opt->text,
                        col.isValid() ? QPalette::NoRole : QPalette::WindowText);
 
-          if (lspec.boldFont || lspec.italicFont)
-            painter->restore();
           if (col.isValid())
+            painter->restore();
+          if (lspec.boldFont || lspec.italicFont)
             painter->restore();
 
           if (opt->state & State_HasFocus)

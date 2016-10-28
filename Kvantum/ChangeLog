@@ -4,6 +4,7 @@ V0.10.3
  * No state other than normal is needed for toolbutton flat arrows.
  * Added yet another toolbutton size workaround when the button text is too long.
  * Added the hacking key "no_selection_tint" to Kvantum Manager.
+ * Support shadow for groupbox label.
 
 V0.10.2
 ---------

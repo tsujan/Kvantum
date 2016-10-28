@@ -364,8 +364,8 @@ indicator.element=menuitem
 size.minheight=22
 text.normal.color=white
 text.focus.color=white
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=3
+text.margin.bottom=3
 text.margin.left=15
 text.margin.right=5
 frame.top=2
@@ -424,7 +424,7 @@ size.minheight=22
 size.minwidth=22
 text.normal.color=white
 text.shadow=false
-frame.expansion=100
+
 [GroupBox]
 inherits=GenericFrame
 frame=true
@@ -437,6 +437,7 @@ frame.right=4
 text.normal.color=white
 text.press.color=white
 text.focus.color=white
+text.bold=true
 
 [TabBarFrame]
 inherits=PanelButtonCommand
