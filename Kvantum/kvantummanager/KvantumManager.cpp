@@ -549,7 +549,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxDolphin->setChecked (defaultSettings.value ("transparent_dolphin_view").toBool());
     ui->checkBoxPcmanfmSide->setChecked (defaultSettings.value ("transparent_pcmanfm_sidepane").toBool());
     ui->checkBoxPcmanfmView->setChecked (defaultSettings.value ("transparent_pcmanfm_view").toBool());
-    ui->checkBoxKonsole->setChecked (defaultSettings.value ("blur_konsole").toBool());
+    ui->checkBoxBlurTranslucent->setChecked (defaultSettings.value ("blur_translucent").toBool());
     ui->checkBoxKtitle->setChecked (defaultSettings.value ("transparent_ktitle_label").toBool());
     ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
     ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
@@ -963,7 +963,10 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxDolphin->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
                 ui->checkBoxPcmanfmSide->setChecked (themeSettings.value ("transparent_pcmanfm_sidepane").toBool());
                 ui->checkBoxPcmanfmView->setChecked (themeSettings.value ("transparent_pcmanfm_view").toBool());
-                ui->checkBoxKonsole->setChecked (themeSettings.value ("blur_konsole").toBool());
+                bool blurTrans ((themeSettings.contains ("blur_translucent")
+                                 && themeSettings.value ("blur_translucent").toBool())
+                                || themeSettings.value ("blur_konsole").toBool()); // backward compatibility
+                ui->checkBoxBlurTranslucent->setChecked (blurTrans);
                 ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
                 ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
@@ -1383,7 +1386,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
         hackKeys.insert("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfmSide->isChecked()));
         hackKeys.insert("transparent_pcmanfm_view", boolToStr (ui->checkBoxPcmanfmView->isChecked()));
-        hackKeys.insert("blur_konsole", boolToStr (ui->checkBoxKonsole->isChecked()));
+        hackKeys.insert("blur_translucent", boolToStr (ui->checkBoxBlurTranslucent->isChecked()));
         hackKeys.insert("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
         hackKeys.insert("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
         hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
@@ -1462,7 +1465,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("transparent_dolphin_view", ui->checkBoxDolphin->isChecked());
         themeSettings.setValue ("transparent_pcmanfm_sidepane", ui->checkBoxPcmanfmSide->isChecked());
         themeSettings.setValue ("transparent_pcmanfm_view", ui->checkBoxPcmanfmView->isChecked());
-        themeSettings.setValue ("blur_konsole", ui->checkBoxKonsole->isChecked());
+        themeSettings.setValue ("blur_translucent", ui->checkBoxBlurTranslucent->isChecked());
         themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
         themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
         themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());

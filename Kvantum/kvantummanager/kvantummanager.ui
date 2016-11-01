@@ -543,16 +543,18 @@ Miscellaneous → Respect current DE if possible</string>
                 </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QCheckBox" name="checkBoxKonsole">
+                <widget class="QCheckBox" name="checkBoxBlurTranslucent">
                  <property name="toolTip">
-                  <string>Blur the regions behind the transparent
-screens of Konsole and Yakuake if possible.</string>
+                  <string>Blur the regions behind windows that are made
+translucent by their apps explicitly if possible.
+
+Konsole, QTerminal and LXQt panel are some examples.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blur the regions behind the transparent screens of Konsole and Yakuake if possible?&lt;/p&gt;&lt;p&gt;This needs the KDE blur effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blur the regions behind windows that are made translucent by their apps explicitly?&lt;/p&gt;&lt;p&gt;This needs the KDE blur effect.&lt;/p&gt;&lt;p&gt;Konsole, QTerminal and LXQt panel are some examples.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Blurring for Konsole</string>
+                  <string>Blur explicitly translucent windows</string>
                  </property>
                 </widget>
                </item>

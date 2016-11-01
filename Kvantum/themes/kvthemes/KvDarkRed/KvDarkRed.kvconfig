@@ -62,7 +62,7 @@ link.visited.color=#FF6666
 [Hacks]
 respect_darkness=true
 transparent_dolphin_view=false
-blur_konsole=true
+blur_translucent=true
 transparent_ktitle_label=false
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true

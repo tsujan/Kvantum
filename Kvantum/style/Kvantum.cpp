@@ -258,8 +258,6 @@ Style::Style() : QCommonStyle()
   isLibreoffice_ = false;
   isDolphin_ = false;
   isPcmanfm_ = false;
-  isKonsole_ = false;
-  isYakuake_ = false;
   subApp_ = false;
   isOpaque_ = false;
   isKisSlider_ = false;
@@ -731,6 +729,7 @@ void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets_.remove(widget);
+  hardCodedTranslucency_.remove(widget);
 }
 
 int Style::mergedToolbarHeight(const QWidget *menubar) const
@@ -892,13 +891,14 @@ void Style::polish(QWidget *widget)
             }
           }
         }
-        if (((tspec_.translucent_windows && !isOpaque_
-              && !widget->testAttribute(Qt::WA_TranslucentBackground)
-              && !widget->testAttribute(Qt::WA_NoSystemBackground))
-             /* enable blurring for Konsole's main window if it's transparent */
-             || ((isKonsole_ || isYakuake_) && hspec_.blur_konsole
-                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
-            && (isYakuake_ || !widget->windowFlags().testFlag(Qt::FramelessWindowHint))
+        bool opaqueWindow(tspec_.translucent_windows && !isOpaque_
+                          && !widget->testAttribute(Qt::WA_TranslucentBackground)
+                          && !widget->testAttribute(Qt::WA_NoSystemBackground)
+                          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint));
+        if ((opaqueWindow
+            /* enable blurring for hard-coded transluceny */
+            || (hspec_.blur_translucent
+                && widget->testAttribute(Qt::WA_TranslucentBackground)))
             /* FIXME: I included this because I thought, without it, QtWebKit
                apps would crash on quitting but that wasn't the case. However,
                only blurring needs it and it's taken care of by BlurHelper. */
@@ -913,26 +913,22 @@ void Style::polish(QWidget *widget)
           if (was_visible) widget->hide();
 #endif
 
-          widget->setAttribute(Qt::WA_TranslucentBackground);
+          if (opaqueWindow)
+            widget->setAttribute(Qt::WA_TranslucentBackground);
 
 #if QT_VERSION < 0x050000
           if (!moved) widget->setAttribute(Qt::WA_Moved, false);
           if (was_visible) widget->show();
 #endif
 
-          /* enable blurring... */
-          if (blurHelper_
-              /* ... but not for Konsole's dialogs if
-                 blurring isn't enabled for translucent windows */
-              && tspec_.blurring)
+          /* enable blurring */
+          if (tspec_.blurring
+              && blurHelper_) // not needed
           {
             blurHelper_->registerWidget(widget);
           }
-          /* enable blurring for Konsole... */
-          else if ((isKonsole_ || isYakuake_)// && hspec_.blur_konsole
-                   /* ... but only for its main window */
-                   //&& !widget->testAttribute(Qt::WA_NoSystemBackground)
-                   && (widget->windowFlags() & Qt::WindowType_Mask) == Qt::Window)
+          /* enable blurring for hard-coded transluceny */
+          else if (!opaqueWindow && hspec_.blur_translucent)
           {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
             if (!blurHelper_)
@@ -942,8 +938,13 @@ void Style::polish(QWidget *widget)
               blurHelper_->registerWidget(widget);
           }
 
-          widget->removeEventFilter(this);
-          widget->installEventFilter(this);
+          if (opaqueWindow)
+          {
+            widget->removeEventFilter(this);
+            widget->installEventFilter(this);
+          }
+          else
+            hardCodedTranslucency_.insert(widget);
           translucentWidgets_.insert(widget);
           connect(widget, SIGNAL(destroyed(QObject*)),
                   SLOT(noTranslucency(QObject*)));
@@ -1230,7 +1231,8 @@ void Style::polish(QWidget *widget)
         blurHelper_ = new BlurHelper(this,menuS,tooltipS);
       }
 #endif
-      if (blurHelper_ && tspec_now.popup_blurring) // blurHelper_ may exist because of Konsole blurring
+      /* blurHelper_ may exist because of blurring hard-coded transluceny */
+      if (blurHelper_ && tspec_now.popup_blurring)
         blurHelper_->registerWidget(widget);
     }
   }
@@ -1263,10 +1265,6 @@ void Style::polish(QApplication *app)
     isDolphin_ = true;
   else if (appName == "pcmanfm-qt")
     isPcmanfm_ = true;
-  else if (appName == "konsole")
-    isKonsole_ = true;
-  else if (appName == "yakuake")
-    isYakuake_ = true;
   else if (appName == "soffice.bin")
     isLibreoffice_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
@@ -1406,7 +1404,8 @@ void Style::unpolish(QWidget *widget)
       case Qt::Dialog: {
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
-        if (translucentWidgets_.contains(widget))
+        if (translucentWidgets_.contains(widget)
+            && !hardCodedTranslucency_.contains(widget))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -1473,7 +1472,8 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   interior_spec ispec = getInteriorSpec("DialogTranslucent");
   if (ispec.element.isEmpty())
     ispec = getInteriorSpec("Dialog");
-  if (!ispec.element.isEmpty())
+  if (!ispec.element.isEmpty()
+      && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel
   {
     if (QWidget *child = widget->childAt(0,0))
     { // even dialogs may have menubar or toolbar (as in Qt Designer)
@@ -2385,7 +2385,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       interior_spec ispec = getInteriorSpec("Dialog");
-      if (widget && !ispec.element.isEmpty())
+      if (widget && !ispec.element.isEmpty()
+          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel)
       {
         if (QWidget *child = widget->childAt(0,0))
         {
@@ -9780,10 +9781,9 @@ void Style::setSurfaceFormat(QWidget *widget) const
     return;
   if (widget->inherits("QTipLabel")) ; // see polish(QWidget*)
   else if (!widget->isWindow()
-           || (!tspec_.translucent_windows
-               && !((isKonsole_ || isYakuake_)
-                    && hspec_.blur_konsole
-                    && widget->testAttribute(Qt::WA_TranslucentBackground)))
+           /* FIXME: if transluceny is enabled, hard-coded translucency
+                     will also be included but that seems harmless */
+           || !tspec_.translucent_windows
            || isPlasma_ || isOpaque_)
   {
     return;

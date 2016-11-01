@@ -67,7 +67,7 @@ link.visited.color=#452886
 progress.indicator.text.color=white
 
 [Hacks]
-blur_konsole=true
+blur_translucent=true
 transparent_dolphin_view=false
 transparent_ktitle_label=true
 transparent_menutitle=false

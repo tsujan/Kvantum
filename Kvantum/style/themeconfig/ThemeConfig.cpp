@@ -707,8 +707,14 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (v.isValid())
     r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("Hacks","blur_konsole");
-  r.blur_konsole = v.toBool();
+  v = getValue("Hacks","blur_translucent");
+  if (v.isValid())
+    r.blur_translucent = v.toBool();
+  else // backward compatibility
+  {
+    v = getValue("Hacks","blur_konsole");
+    r.blur_translucent = v.toBool();
+  }
 
   v = getValue("Hacks","transparent_ktitle_label");
   r.transparent_ktitle_label = v.toBool();

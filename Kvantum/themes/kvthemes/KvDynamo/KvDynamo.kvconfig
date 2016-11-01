@@ -317,7 +317,7 @@ text.toggle.color=white
 
 [Hacks]
 transparent_dolphin_view=false
-blur_konsole=false
+blur_translucent=false
 transparent_ktitle_label=false
 transparent_menutitle=false
 respect_darkness=false

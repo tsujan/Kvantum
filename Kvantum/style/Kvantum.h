@@ -298,8 +298,8 @@ class Style : public QCommonStyle {
 
     /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;
-    /* List of windows, tooltips and menus that are made translucent */
-    QSet<const QWidget*> translucentWidgets_;
+    /* List of windows, tooltips and menus that are (made) translucent */
+    QSet<const QWidget*> translucentWidgets_, hardCodedTranslucency_;
 
     ShortcutHandler *itsShortcutHandler_;
     WindowManager *itsWindowManager_;
@@ -327,8 +327,6 @@ class Style : public QCommonStyle {
     /* Hacks */
     bool isDolphin_;
     bool isPcmanfm_;
-    bool isKonsole_;
-    bool isYakuake_;
 
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;

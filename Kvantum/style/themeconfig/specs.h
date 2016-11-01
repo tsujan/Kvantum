@@ -188,8 +188,9 @@ typedef struct {
   bool transparent_pcmanfm_view;
   /* separate icon size for LXQT's main menus? */
   int lxqtmainmenu_iconsize;
-  /* blur the region behind Konsole's transparent background? */
-  bool blur_konsole;
+  /* blur the region behind a window background that is
+     explicitly made translucent by its app? */
+  bool blur_translucent;
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
   bool transparent_ktitle_label;
@@ -439,7 +440,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_pcmanfm_sidepane = false;
   hspec.transparent_pcmanfm_view = false;
   hspec.lxqtmainmenu_iconsize = 0;
-  hspec.blur_konsole = false;
+  hspec.blur_translucent = false;
   hspec.transparent_ktitle_label = false;
   hspec.transparent_menutitle = false;
   hspec.kcapacitybar_as_progressbar = false;

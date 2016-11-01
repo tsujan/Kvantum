@@ -43,7 +43,7 @@ link.visited.color=#FF6666
 
 [Hacks]
 respect_darkness=true
-blur_konsole=true
+blur_translucent=true
 transparent_dolphin_view=false
 transparent_ktitle_label=true
 transparent_menutitle=false
