@@ -106,7 +106,7 @@ text.shadow.yshift=2
 text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
-frame.expansion=40
+frame.expansion=42
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -294,7 +294,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-frame.expansion=40
+frame.expansion=42
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -305,7 +305,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-frame.expansion=40
+frame.expansion=42
 
 [ItemView]
 inherits=PanelButtonCommand
