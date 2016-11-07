@@ -323,11 +323,7 @@ Style::Style() : QCommonStyle()
   }
 
   if (tspec_.blurring)
-  {
-    QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-    QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
-    blurHelper_ = new BlurHelper(this,menuS,tooltipS);
-  }
+    creatBlurHelper();
 #endif
 }
 
@@ -545,6 +541,13 @@ void Style::setupThemeDeps()
   }
   else
     settings_ = defaultSettings_;
+}
+
+void Style::creatBlurHelper()
+{
+  QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+  QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
+  blurHelper_ = new BlurHelper(this,menuS,tooltipS);
 }
 
 void Style::advanceProgressbar()
@@ -932,7 +935,7 @@ void Style::polish(QWidget *widget)
           {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
             if (!blurHelper_)
-              blurHelper_ = new BlurHelper(this,QList<int>(),QList<int>());
+              creatBlurHelper();
 #endif
             if (blurHelper_)
               blurHelper_->registerWidget(widget);
@@ -1225,11 +1228,7 @@ void Style::polish(QWidget *widget)
               SLOT(noTranslucency(QObject*)));
 #if defined Q_WS_X11 || defined Q_OS_LINUX
       if (!blurHelper_ && tspec_now.popup_blurring)
-      {
-        QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-        QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
-        blurHelper_ = new BlurHelper(this,menuS,tooltipS);
-      }
+        creatBlurHelper();
 #endif
       /* blurHelper_ may exist because of blurring hard-coded transluceny */
       if (blurHelper_ && tspec_now.popup_blurring)

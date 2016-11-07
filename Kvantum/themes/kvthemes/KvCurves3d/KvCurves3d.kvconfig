@@ -419,6 +419,7 @@ frame=true
 frame.element=group
 text.shadow=0
 text.margin=0
+text.bold=true
 frame.top=4
 frame.bottom=4
 frame.left=4

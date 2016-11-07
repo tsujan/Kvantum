@@ -131,6 +131,9 @@ class Style : public QCommonStyle {
     /* Set theme dependencies. */
     void setupThemeDeps();
 
+    /* Create a unique blur helper considering menu and tooltip shadows. */
+    void creatBlurHelper();
+
     /* Render the element from the SVG file into the given bounds. */
     bool renderElement(QPainter *painter,
                        const QString &element,
