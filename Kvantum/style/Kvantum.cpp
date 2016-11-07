@@ -7140,10 +7140,14 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
-        if (widget && !pb)
+        if (widget && !pb) // bad styling method in the app
         {
-          drawPrimitive(PE_Frame,option,painter,widget);
+          QColor optCol = opt->palette.color(QPalette::Button);
+          // KDE Partition Manager
+          if (optCol.isValid() && optCol != QApplication::palette().color(QPalette::Button))
+            painter->fillRect(opt->rect, optCol);
+          else // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
+            drawPrimitive(PE_Frame,option,painter,widget);
           break;
         }
         // KColorButton (color button in general)
