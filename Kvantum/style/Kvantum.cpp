@@ -180,7 +180,24 @@ Style::Style() : QCommonStyle()
   {
     QSettings themeChooser (themeChooserFile,QSettings::NativeFormat);
     if (themeChooser.status() == QSettings::NoError && themeChooser.contains("theme"))
+    {
       theme = themeChooser.value("theme").toString();
+#if QT_VERSION >= 0x040806
+      /* check if this app has a specific theme assigned to it */
+      QString appName = qApp->applicationName();
+      themeChooser.beginGroup ("Applications");
+      QStringList list = themeChooser.childKeys();
+      for (int i = 0; i < list.count(); ++i)
+      {
+        if (themeChooser.value (list.at(i)).toStringList().contains(appName))
+        {
+          theme = list.at(i);
+          break;
+        }
+      }
+      themeChooser.endGroup();
+#endif
+    }
   }
 
   setBuiltinDefaultTheme();
