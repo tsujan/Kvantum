@@ -611,6 +611,14 @@ frame.bottom
 frame.left
 frame.right                       integer             The height or width of the corresponding
                                                       frame part if there is any.
+                                                      
+                                                      These values are mostly respected but
+                                                      there are two exceptions: (1) Where there
+                                                      is not enough space (because of a bad GUI
+                                                      design); and (2) A few widgets may not
+                                                      accept the exact values -- for example,
+                                                      toolbars use the maximum value in all
+                                                      directions.
 
 frame.expanded.top
 frame.expanded.bottom
@@ -660,6 +668,10 @@ text.margin.bottom
 text.margin.left
 text.margin.right                 integer             The sizes of the text margins
                                                       if there is any.
+                                                      
+                                                      These values are mostly respected but
+                                                      not if there is a lack of space because
+                                                      of a bad GUI design.
 
 text.normal.color                 string (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid
