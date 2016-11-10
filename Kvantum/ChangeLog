@@ -6,7 +6,7 @@ V0.10.3
  * Added the hacking key "no_selection_tint" to Kvantum Manager.
  * Support shadow for groupbox label.
  * Added support for blurring any hard-coded translucency (and not just Konsole) with kwin.
- * A preliminary support for app specific themes (not documented yet).
+ * Added support for app specific themes (to Kvantum Manager).
 
 V0.10.2
 ---------

@@ -8,6 +8,8 @@
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 
+namespace Kvantum {
+
 namespace Ui {
 class KvantumManager;
 }
@@ -28,9 +30,12 @@ private slots:
     void txtChanged (const QString &txt);
     void tabChanged (int index);
     void selectionChanged (const QString &txt);
+    void assignAppTheme (const QString &previousTheme, const QString &newTheme);
     void preview();
     bool copyRootTheme (QString source, QString target);
     void writeConfig();
+    void writeAppLists();
+    void removeAppList();
     void restoreDefault();
     void isTranslucent (bool checked);
     void notCompisited (bool checked);
@@ -44,11 +49,12 @@ private:
     void notWritable (const QString &path);
     bool isThemeDir (const QString &folderPath);
     QString userThemeDir (const QString &themeName);
-    void updateThemeList();
+    void updateThemeList (bool updateAppThemes = true);
     void showAnimated (QWidget *w, int duration);
     void defaultThemeButtons();
     void resizeConfPage (bool thirdPage);
     void restyleWindow();
+    void writeOrigAppLists();
     // to be independent of '../style/drag/windowmanager.h'
     enum Drag {
         DRAG_NONE,
@@ -87,6 +93,9 @@ private:
     QGraphicsOpacityEffect *effect_;
     QPropertyAnimation *animation_;
     QByteArray desktop_;
+    QHash<QString, QStringList> appThemes_, origAppThemes_;
 };
+
+}
 
 #endif // KVANTUMMANAGER_H

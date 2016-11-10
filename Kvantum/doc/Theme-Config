@@ -743,6 +743,19 @@ indicator.element              string                The SVG element to be used 
 =============================================================
 
 
+Application Themes
+==================
+Specific Themes can be assigned to applications, so that those applications use their corresponding themes instead of the active theme. This can be done easily by using the last page of Kvantum Manager (Application Themes) or manually, by adding app lists (executable names) to '~/.config/Kvantum/kvantum.kvconfig' with the following format:
+
+[General]
+theme=ACTIVE_THEME
+
+[Applications]
+THEME1=app1, app2
+THEME2=app3
+...
+
+
 Some Examples
 =============
 

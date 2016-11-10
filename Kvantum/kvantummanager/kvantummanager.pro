@@ -13,12 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    KvantumManager.cpp
+           KvantumManager.cpp
 
 RESOURCES += kvantummanager.qrc
 
-HEADERS  += \
-    KvantumManager.h
+HEADERS +=  KvantumManager.h \
+            combobox.h
 
 FORMS += \
     kvantummanager.ui

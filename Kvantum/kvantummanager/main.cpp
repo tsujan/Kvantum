@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     }
     if (QApplication::style()->objectName() != "kvantum")
         QApplication::setStyle (QStyleFactory::create ("kvantum"));
-    KvantumManager km (NULL);
+    Kvantum::KvantumManager km (NULL);
     km.show();
 
     return a.exec();

@@ -189,7 +189,7 @@ Style::Style() : QCommonStyle()
       QStringList list = themeChooser.childKeys();
       for (int i = 0; i < list.count(); ++i)
       {
-        if (themeChooser.value (list.at(i)).toStringList().contains(appName))
+        if (themeChooser.value (list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
         {
           theme = list.at(i);
           break;

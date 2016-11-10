@@ -11,6 +11,8 @@
 #endif
 //#include <QDebug>
 
+namespace Kvantum {
+
 KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
 {
     ui->setupUi (this);
@@ -25,6 +27,9 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     ui->toolBox->setItemIcon (2,
                               QIcon::fromTheme ("preferences-system",
                                                 QIcon (":/Icons/data/preferences-system.svg")));
+    ui->toolBox->setItemIcon (3,
+                              QIcon::fromTheme ("unknownapp",
+                                                QIcon (":/Icons/data/app.svg")));
 
     lastPath_ = QDir::home().path();
     process_ = new QProcess (this);
@@ -48,11 +53,15 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
                                                     << "Menubar and primary toolbar"
                                                     << "All");
 
+#if QT_VERSION >= 0x050200
+    ui->appsEdit->setClearButtonEnabled (true);
+#endif
+
     QLabel *statusLabel = new QLabel();
     statusLabel->setTextInteractionFlags (Qt::TextSelectableByMouse);
     ui->statusBar->addWidget (statusLabel);
 
-    /* set kvconfigTheme_ */
+    /* set kvconfigTheme_ and connect to combobox signals */
     updateThemeList();
 
     effect_ = new QGraphicsOpacityEffect();
@@ -73,8 +82,10 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
     connect (ui->checkBoxDE, SIGNAL (clicked (bool)), this, SLOT (respectDE (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
+    connect (ui->appsEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
-    connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (selectionChanged (const QString &)));
+    connect (ui->saveAppButton, SIGNAL (clicked()), this, SLOT (writeAppLists()));
+    connect (ui->removeAppButton, SIGNAL (clicked()), this, SLOT (removeAppList()));
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
     connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
     connect (ui->whatsthisButton, SIGNAL(clicked()), this, SLOT (showWhatsThis()));
@@ -367,6 +378,8 @@ void KvantumManager::installTheme()
         else
             notWritable (kv.absolutePath());
     }
+
+    updateThemeList();
 }
 /*************************/
 static inline bool removeDir (const QString &dirName)
@@ -394,6 +407,8 @@ void KvantumManager::deleteTheme()
 {
     QString theme = ui->comboBox->currentText();
     if (theme.isEmpty()) return;
+
+    QString appTheme = theme; // for removing apps list later
 
     QMessageBox msgBox (QMessageBox::Question,
                         tr ("Confirmation"),
@@ -479,8 +494,20 @@ void KvantumManager::deleteTheme()
               preview();
         }
     }
-    updateThemeList();
     ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme_), 10000);
+
+    updateThemeList();
+    /* remove the apps list associated with this theme */
+    QStringList appList = appTheme.split (" ");
+    if (appList.count() == 1) // not a modified root theme
+    {
+        QString appTheme = appList.first(); // for removing apps list later
+        if (appTheme == "Kvantum") // impossible
+            appTheme = "Default";
+        appThemes_.remove (appTheme);
+        origAppThemes_.remove (appTheme);
+        writeOrigAppLists();
+    }
 }
 /*************************/
 void KvantumManager::showAnimated (QWidget *w, int duration)
@@ -532,9 +559,19 @@ void KvantumManager::useTheme()
 void KvantumManager::txtChanged (const QString &txt)
 {
     if (txt.isEmpty())
-        ui->installTheme->setEnabled (false);
-    else if (!ui->installTheme->isEnabled())
-        ui->installTheme->setEnabled (true);
+    {
+        if (QObject::sender() == ui->lineEdit)
+            ui->installTheme->setEnabled (false);
+        else if (QObject::sender() == ui->appsEdit && appThemes_.isEmpty())
+            ui->removeAppButton->setEnabled (false);
+    }
+    else
+    {
+        if (QObject::sender() == ui->lineEdit)
+            ui->installTheme->setEnabled (true);
+        else if (QObject::sender() == ui->appsEdit)
+            ui->removeAppButton->setEnabled (true);
+    }
 }
 /*************************/
 void KvantumManager::defaultThemeButtons()
@@ -728,14 +765,16 @@ void KvantumManager::restyleWindow()
 /*************************/
 void KvantumManager::tabChanged (int index)
 {
-    updateThemeList();
     bool thirdPage (index == 2);
     ui->statusBar->clearMessage();
     if (index == 0)
         showAnimated (ui->installLabel, 1000);
-    if (index == 1)
+    if (index == 1 || index == 3)
     {
-        ui->usageLabel->show();
+        if (index == 1)
+            ui->usageLabel->show();
+        else
+            showAnimated (ui->appLabel, 1000);
         QString comment;
         if (kvconfigTheme_.isEmpty())
         {
@@ -776,8 +815,17 @@ void KvantumManager::tabChanged (int index)
         }
         if (comment.isEmpty())
           comment = "No description";
-        ui->comboBox->setToolTip (comment);
-        ui->comboBox->setWhatsThis (comment);
+        if (index == 1)
+        {
+            ui->comboBox->setToolTip (comment);
+            ui->comboBox->setWhatsThis (comment);
+        }
+        else
+        {
+            ui->appCombo->setToolTip (comment);
+            ui->appCombo->setWhatsThis (comment);
+            ui->removeAppButton->setDisabled (appThemes_.isEmpty());
+        }
     }
     else if (index == 2)
     {
@@ -995,11 +1043,14 @@ void KvantumManager::tabChanged (int index)
             }
         }
     }
+
     resizeConfPage (thirdPage);
 }
 /*************************/
 void KvantumManager::selectionChanged (const QString &txt)
 {
+    if (txt.isEmpty()) return; // not needed
+
     ui->statusBar->clearMessage();
 
     QString theme;
@@ -1072,9 +1123,59 @@ void KvantumManager::selectionChanged (const QString &txt)
     ui->comboBox->setWhatsThis (comment);
 }
 /*************************/
-void KvantumManager::updateThemeList()
+void KvantumManager::assignAppTheme (const QString &previousTheme, const QString &newTheme)
 {
+    /* first assign the previous app theme... */
+    QString appTheme = previousTheme;
+    appTheme = appTheme.split (" ").first();
+    if (appTheme == "Kvantum")
+        appTheme = "Default";
+    QString editTxt = ui->appsEdit->text();
+    if (!editTxt.isEmpty())
+    {
+        if (!appTheme.isEmpty())
+        {
+            editTxt = editTxt.simplified();
+            editTxt.remove (" ");
+            QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
+            appList.removeDuplicates();
+            appThemes_.insert (appTheme, appList);
+        }
+    }
+    else
+        appThemes_.remove (appTheme);
+    /* ... then set the lineedit text to the apps list of the new theme */
+    appTheme = newTheme;
+    if (!appTheme.isEmpty())
+    {
+        appTheme = appTheme.split (" ").first();
+        if (appTheme == "Kvantum")
+            appTheme = "Default";
+        if (!appThemes_.value (appTheme).isEmpty())
+            ui->appsEdit->setText (appThemes_.value (appTheme).join (","));
+        else
+            ui->appsEdit->setText ("");
+    }
+    else // never happens
+        ui->appsEdit->setText ("");
+
+    ui->removeAppButton->setDisabled (appThemes_.isEmpty());
+}
+/*************************/
+void KvantumManager::updateThemeList (bool updateAppThemes)
+{
+    /* may be connected before */
+    disconnect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)),
+                this, SLOT (selectionChanged (const QString &)));
     ui->comboBox->clear();
+    QString curAppTheme;
+    if (updateAppThemes)
+    {
+        disconnect (ui->appCombo, SIGNAL (textChangedSignal (const QString &, const QString &)),
+                    this, SLOT (assignAppTheme (const QString &, const QString &)));
+        curAppTheme = ui->appCombo->currentText();
+        ui->appCombo->clear();
+    }
 
     QStringList list;
 
@@ -1184,10 +1285,23 @@ void KvantumManager::updateThemeList()
         hasDefaultThenme = true;
     }
     ui->comboBox->insertItems (0, list);
+    if (updateAppThemes)
+        ui->appCombo->insertItems (0, list);
     if (hasDefaultThenme)
     {
         ui->comboBox->insertSeparator (1);
         ui->comboBox->insertSeparator (1);
+        if (updateAppThemes)
+        {
+            ui->appCombo->insertSeparator (1);
+            ui->appCombo->insertSeparator (1);
+        }
+    }
+    if (updateAppThemes && !curAppTheme.isEmpty()) // restore the previous text
+    {
+        int indx = ui->appCombo->findText (curAppTheme);
+        if (indx > -1)
+            ui->appCombo->setCurrentIndex (indx);
     }
 
     /* select the active theme and set kvconfigTheme_ */
@@ -1228,6 +1342,22 @@ void KvantumManager::updateThemeList()
             }
         }
         else noConfig = true;
+
+        /* getting the app themes list is needed only the first time */
+        if (updateAppThemes && appThemes_.isEmpty())
+        {
+            settings.beginGroup ("Applications");
+            QStringList appThemes = settings.childKeys();
+            QStringList appList;
+            for (int i = 0; i < appThemes.count(); ++i)
+            {
+                appList = settings.value (appThemes.at(i)).toStringList();
+                appList.removeDuplicates();
+                appThemes_.insert (appThemes.at(i), appList);
+            }
+            settings.endGroup();
+            origAppThemes_ = appThemes_;
+        }
     }
     else noConfig = true;
 
@@ -1238,6 +1368,27 @@ void KvantumManager::updateThemeList()
         /* remove Default# because there's no config */
         QString theCopy = QString ("%1/Kvantum/Default#/Default#.kvconfig").arg (xdg_config_home);
         QFile::remove (theCopy);
+    }
+
+    /* connect to combobox signal */
+    connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)),
+             this, SLOT (selectionChanged (const QString &)));
+
+    /* put the app themes list in the text edit */
+    if (updateAppThemes)
+    {
+        QString curTxt = ui->appCombo->currentText();
+        if (!curTxt.isEmpty())
+        {
+            curTxt = curTxt.split (" ").first();
+            if (curTxt == "Kvantum")
+                curTxt = "Default";
+            if (!appThemes_.value (curTxt).isEmpty())
+                ui->appsEdit->setText (appThemes_.value (curTxt).join (","));
+        }
+
+        connect (ui->appCombo, SIGNAL (textChangedSignal (const QString &, const QString &)),
+                 this, SLOT (assignAppTheme (const QString &, const QString &)));
     }
 
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
@@ -1551,7 +1702,7 @@ void KvantumManager::writeConfig()
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
-        QStringList opaqueList = opaque.split (",");
+        QStringList opaqueList = opaque.split (",", QString::SkipEmptyParts);
         themeSettings.setValue ("opaque", opaqueList);
 #endif
         themeSettings.endGroup();
@@ -1681,6 +1832,84 @@ void KvantumManager::writeConfig()
         if (process_->state() == QProcess::Running)
           preview();
     }
+
+    updateThemeList();
+}
+/*************************/
+void KvantumManager::writeAppLists()
+{
+    /* first update the app themes list... */
+    QString appTheme = ui->appCombo->currentText();
+    appTheme = appTheme.split (" ").first();
+    if (appTheme == "Kvantum")
+        appTheme = "Default";
+    QString editTxt = ui->appsEdit->text();
+    if (!editTxt.isEmpty())
+    {
+        if (!appTheme.isEmpty())
+        {
+            editTxt = editTxt.simplified();
+            editTxt.remove (" ");
+            QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
+            appList.removeDuplicates();
+            appThemes_.insert (appTheme, appList);
+        }
+    }
+    else
+        appThemes_.remove (appTheme);
+    /* ... then write it to the kvconfig file */
+    QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
+    QSettings settings (configFile, QSettings::NativeFormat);
+    if (!settings.isWritable())
+    {
+        notWritable (configFile);
+        return;
+    }
+    settings.remove ("Applications");
+    if (!appThemes_.isEmpty())
+    {
+        settings.beginGroup ("Applications");
+        QHashIterator<QString, QStringList> i (appThemes_);
+        while (i.hasNext())
+        {
+            i.next();
+            settings.setValue (i.key(), i.value());
+        }
+        settings.endGroup();
+    }
+
+    ui->removeAppButton->setDisabled (appThemes_.isEmpty());
+    origAppThemes_ = appThemes_;
+}
+/*************************/
+void KvantumManager::writeOrigAppLists()
+{
+    QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
+    QSettings settings (configFile, QSettings::NativeFormat);
+    if (!settings.isWritable())
+    {
+        notWritable (configFile);
+        return;
+    }
+    settings.remove ("Applications");
+    if (!origAppThemes_.isEmpty())
+    {
+        settings.beginGroup ("Applications");
+        QHashIterator<QString, QStringList> i (origAppThemes_);
+        while (i.hasNext())
+        {
+            i.next();
+            settings.setValue (i.key(), i.value());
+        }
+        settings.endGroup();
+    }
+}
+/*************************/
+void KvantumManager::removeAppList()
+{
+    appThemes_.clear();
+    ui->removeAppButton->setEnabled (false);
+    ui->appsEdit->setText("");
 }
 /*************************/
 void KvantumManager::restoreDefault()
@@ -1740,6 +1969,8 @@ void KvantumManager::restoreDefault()
     resizeConfPage (true);
     if (process_->state() == QProcess::Running)
       preview();
+
+    updateThemeList (false);
 }
 /*************************/
 void KvantumManager::notCompisited (bool checked)
@@ -1829,4 +2060,6 @@ void KvantumManager::aboutDialog()
                             "and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes<br><br>"\
                             "Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><br>")
                            .arg (qt));
+}
+
 }
