@@ -491,7 +491,7 @@ void KvantumManager::deleteTheme()
             restyleWindow();
             resizeConfPage (false);
             if (process_->state() == QProcess::Running)
-              preview();
+                preview();
         }
     }
     ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme_), 10000);
@@ -506,8 +506,8 @@ void KvantumManager::deleteTheme()
             appTheme = "Default";
         appThemes_.remove (appTheme);
         origAppThemes_.remove (appTheme);
-        writeOrigAppLists();
     }
+    writeOrigAppLists();
 }
 /*************************/
 void KvantumManager::showAnimated (QWidget *w, int duration)
@@ -553,7 +553,7 @@ void KvantumManager::useTheme()
     restyleWindow();
     resizeConfPage (false);
     if (process_->state() == QProcess::Running)
-      preview();
+        preview();
 }
 /*************************/
 void KvantumManager::txtChanged (const QString &txt)
@@ -1325,19 +1325,37 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
             int index = ui->comboBox->findText (theme);
             if (index > -1)
                 ui->comboBox->setCurrentIndex (index);
-            else // remove from settings if its folder is deleted
+            else
             {
-                if (list.contains ("Kvantum (modified)"))
+                /* if there's a modified version of this theme, use it instead */
+                if (!kvconfigTheme_.endsWith ("#"))
+                    index = ui->comboBox->findText (theme + " (modified)");
+                if (index > -1)
                 {
-                    settings.setValue ("theme", "Default#");
-                    kvconfigTheme_ = "Default#";
-                    theme = "Kvantum (modified)";
+                    kvconfigTheme_ += "#";
+                    theme += " (modified)";
+                    ui->comboBox->setCurrentIndex (index);
+                    settings.setValue ("theme", kvconfigTheme_); // correct the config file
+                    QCoreApplication::processEvents();
+                    restyleWindow();
+                    resizeConfPage (false);
+                    if (process_->state() == QProcess::Running)
+                        preview();
                 }
-                else
+                else // remove from settings if its folder is deleted
                 {
-                    settings.remove ("theme");
-                    kvconfigTheme_ = QString();
-                    theme = "Kvantum (default)";
+                    if (list.contains ("Kvantum (modified)"))
+                    {
+                        settings.setValue ("theme", "Default#");
+                        kvconfigTheme_ = "Default#";
+                        theme = "Kvantum (modified)";
+                    }
+                    else
+                    {
+                        settings.remove ("theme");
+                        kvconfigTheme_ = QString();
+                        theme = "Kvantum (default)";
+                    }
                 }
             }
         }
@@ -1349,14 +1367,36 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
             settings.beginGroup ("Applications");
             QStringList appThemes = settings.childKeys();
             QStringList appList;
+            QString appTheme;
+            bool nonexistent = false;
             for (int i = 0; i < appThemes.count(); ++i)
             {
                 appList = settings.value (appThemes.at(i)).toStringList();
                 appList.removeDuplicates();
-                appThemes_.insert (appThemes.at(i), appList);
+                appTheme = appThemes.at (i);
+                if (appTheme.endsWith ("#"))
+                {
+                    /* we remove # for simplicity and add it only at writeAppLists() */
+                    appTheme.remove (appTheme.count() - 1, 1);
+                    if (ui->comboBox->findText (appTheme + " (modified)") == -1)
+                    {
+                        nonexistent = true;
+                        continue;
+                    }
+                }
+                /* see if the theme is incorrect but its modified version exists */
+                else if (ui->comboBox->findText (appTheme) == -1)
+                {
+                    nonexistent = true;
+                    if (ui->comboBox->findText (appTheme + " (modified)") == -1)
+                        continue;
+                }
+                appThemes_.insert (appTheme, appList);
             }
             settings.endGroup();
             origAppThemes_ = appThemes_;
+            if (nonexistent) // correct the config file
+                writeOrigAppLists();
         }
     }
     else noConfig = true;
@@ -1830,10 +1870,12 @@ void KvantumManager::writeConfig()
             resizeConfPage (true);
         }
         if (process_->state() == QProcess::Running)
-          preview();
+            preview();
     }
 
     updateThemeList();
+    if (wasRootTheme && kvconfigTheme_.endsWith ("#"))
+        writeOrigAppLists();
 }
 /*************************/
 void KvantumManager::writeAppLists()
@@ -1857,29 +1899,11 @@ void KvantumManager::writeAppLists()
     }
     else
         appThemes_.remove (appTheme);
+    origAppThemes_ = appThemes_;
     /* ... then write it to the kvconfig file */
-    QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
-    QSettings settings (configFile, QSettings::NativeFormat);
-    if (!settings.isWritable())
-    {
-        notWritable (configFile);
-        return;
-    }
-    settings.remove ("Applications");
-    if (!appThemes_.isEmpty())
-    {
-        settings.beginGroup ("Applications");
-        QHashIterator<QString, QStringList> i (appThemes_);
-        while (i.hasNext())
-        {
-            i.next();
-            settings.setValue (i.key(), i.value());
-        }
-        settings.endGroup();
-    }
+    writeOrigAppLists();
 
     ui->removeAppButton->setDisabled (appThemes_.isEmpty());
-    origAppThemes_ = appThemes_;
 }
 /*************************/
 void KvantumManager::writeOrigAppLists()
@@ -1896,10 +1920,16 @@ void KvantumManager::writeOrigAppLists()
     {
         settings.beginGroup ("Applications");
         QHashIterator<QString, QStringList> i (origAppThemes_);
+        QString appTheme;
         while (i.hasNext())
         {
             i.next();
-            settings.setValue (i.key(), i.value());
+            appTheme = i.key();
+            /* add # */
+            int indx = ui->comboBox->findText (appTheme + " (modified)");
+            if (indx > -1)
+                appTheme += "#";
+            settings.setValue (appTheme, i.value());
         }
         settings.endGroup();
     }
@@ -1940,7 +1970,7 @@ void KvantumManager::restoreDefault()
     }
     else
     {
-        _kvconfigTheme_.remove(QString("#"));
+        _kvconfigTheme_.remove (QString("#"));
         QString rootDir = QString (DATADIR) + QString ("/Kvantum/%1").arg (_kvconfigTheme_);
         if (!isThemeDir (rootDir))
             rootDir = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (_kvconfigTheme_);
@@ -1968,7 +1998,7 @@ void KvantumManager::restoreDefault()
     restyleWindow();
     resizeConfPage (true);
     if (process_->state() == QProcess::Running)
-      preview();
+        preview();
 
     updateThemeList (false);
 }

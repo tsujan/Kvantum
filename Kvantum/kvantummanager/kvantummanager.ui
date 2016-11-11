@@ -1747,10 +1747,11 @@ Miscellaneous → Respect current DE if possible</string>
         <item row="6" column="0" alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="removeAppButton">
           <property name="toolTip">
-           <string>Use the active theme for all apps!</string>
+           <string>Use the active theme for all apps!
+(Needs saving to take effect.)</string>
           </property>
           <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the active theme for all applications!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the active theme for all applications!&lt;/p&gt;&lt;p&gt;This needs saving to take effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Remove List</string>
