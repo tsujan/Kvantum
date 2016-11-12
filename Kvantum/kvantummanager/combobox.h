@@ -3,7 +3,7 @@
 
 #include <QComboBox>
 
-namespace Kvantum {
+namespace KvManager {
 
 class ComboBox : public QComboBox
 {

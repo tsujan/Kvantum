@@ -11,7 +11,7 @@
 #endif
 //#include <QDebug>
 
-namespace Kvantum {
+namespace KvManager {
 
 KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
 {

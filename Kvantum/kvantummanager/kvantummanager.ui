@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Kvantum::KvantumManager</class>
+ <class>KvManager::KvantumManager</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="sizePolicy">
    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -1719,7 +1719,7 @@ Miscellaneous → Respect current DE if possible</string>
          </spacer>
         </item>
         <item row="4" column="0">
-         <widget class="Kvantum::ComboBox" name="appCombo"/>
+         <widget class="KvManager::ComboBox" name="appCombo"/>
         </item>
         <item row="4" column="1">
          <widget class="QLineEdit" name="appsEdit">
@@ -1885,7 +1885,7 @@ or update its preview.</string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Kvantum::ComboBox</class>
+   <class>KvManager::ComboBox</class>
    <extends>QComboBox</extends>
    <header>combobox.h</header>
   </customwidget>

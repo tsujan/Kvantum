@@ -8,7 +8,7 @@
 #include <QPropertyAnimation>
 #include <QGraphicsOpacityEffect>
 
-namespace Kvantum {
+namespace KvManager {
 
 namespace Ui {
 class KvantumManager;
