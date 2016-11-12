@@ -179,9 +179,10 @@ Style::Style() : QCommonStyle()
   if (QFile::exists(themeChooserFile))
   {
     QSettings themeChooser (themeChooserFile,QSettings::NativeFormat);
-    if (themeChooser.status() == QSettings::NoError && themeChooser.contains("theme"))
+    if (themeChooser.status() == QSettings::NoError)
     {
-      theme = themeChooser.value("theme").toString();
+      if (themeChooser.contains("theme"))
+        theme = themeChooser.value("theme").toString();
 #if QT_VERSION >= 0x040806
       /* check if this app has a specific theme assigned to it */
       QString appName = qApp->applicationName();
@@ -340,7 +341,14 @@ Style::Style() : QCommonStyle()
   }
 
   if (tspec_.blurring)
-    creatBlurHelper();
+  {
+    QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+    const frame_spec fspec = getFrameSpec("ToolTip");
+    int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+    thickness += tspec_.tooltip_shadow_depth;
+    QList<int> tooltipS = getShadow("ToolTip", thickness);
+    blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+  }
 #endif
 }
 
@@ -558,13 +566,6 @@ void Style::setupThemeDeps()
   }
   else
     settings_ = defaultSettings_;
-}
-
-void Style::creatBlurHelper()
-{
-  QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-  QList<int> tooltipS = getShadow("ToolTip", pixelMetric(PM_ToolTipLabelFrameWidth));
-  blurHelper_ = new BlurHelper(this,menuS,tooltipS);
 }
 
 void Style::advanceProgressbar()
@@ -911,14 +912,16 @@ void Style::polish(QWidget *widget)
             }
           }
         }
-        bool opaqueWindow(tspec_.translucent_windows && !isOpaque_
+        theme_spec tspec_now = settings_->getCompositeSpec();
+        bool opaqueWindow(tspec_now.translucent_windows && !isOpaque_
                           && !widget->testAttribute(Qt::WA_TranslucentBackground)
                           && !widget->testAttribute(Qt::WA_NoSystemBackground)
                           && !widget->windowFlags().testFlag(Qt::FramelessWindowHint));
         if ((opaqueWindow
-            /* enable blurring for hard-coded transluceny */
-            || (hspec_.blur_translucent
-                && widget->testAttribute(Qt::WA_TranslucentBackground)))
+             /* enable blurring for hard-coded transluceny */
+             || (tspec_now.composite
+                 && hspec_.blur_translucent
+                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
             /* FIXME: I included this because I thought, without it, QtWebKit
                apps would crash on quitting but that wasn't the case. However,
                only blurring needs it and it's taken care of by BlurHelper. */
@@ -942,7 +945,7 @@ void Style::polish(QWidget *widget)
 #endif
 
           /* enable blurring */
-          if (tspec_.blurring
+          if (tspec_now.blurring
               && blurHelper_) // not needed
           {
             blurHelper_->registerWidget(widget);
@@ -952,7 +955,14 @@ void Style::polish(QWidget *widget)
           {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
             if (!blurHelper_)
-              creatBlurHelper();
+            {
+              QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+              const frame_spec fspec = getFrameSpec("ToolTip");
+              int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+              thickness += tspec_now.tooltip_shadow_depth;
+              QList<int> tooltipS = getShadow("ToolTip", thickness);
+              blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+            }
 #endif
             if (blurHelper_)
               blurHelper_->registerWidget(widget);
@@ -1245,7 +1255,14 @@ void Style::polish(QWidget *widget)
               SLOT(noTranslucency(QObject*)));
 #if defined Q_WS_X11 || defined Q_OS_LINUX
       if (!blurHelper_ && tspec_now.popup_blurring)
-        creatBlurHelper();
+      {
+        QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+        const frame_spec fspec = getFrameSpec("ToolTip");
+        int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+        thickness += tspec_now.tooltip_shadow_depth;
+        QList<int> tooltipS = getShadow("ToolTip", thickness);
+        blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+      }
 #endif
       /* blurHelper_ may exist because of blurring hard-coded transluceny */
       if (blurHelper_ && tspec_now.popup_blurring)
