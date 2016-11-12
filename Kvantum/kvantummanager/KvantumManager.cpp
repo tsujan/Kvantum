@@ -635,6 +635,10 @@ void KvantumManager::defaultThemeButtons()
         ui->checkBoxButtonShift->setChecked (defaultSettings.value ("button_contents_shift").toBool());
     else
         ui->checkBoxButtonShift->setChecked (true);
+    if (defaultSettings.contains ("alt_mnemonic")) // it's true by default
+        ui->checkBoxAlt->setChecked (defaultSettings.value ("alt_mnemonic").toBool());
+    else
+        ui->checkBoxAlt->setChecked (true);
 #if QT_VERSION >= 0x050000
     int delay = -1;
     if (defaultSettings.contains ("tooltip_delay")) // it's false by default
@@ -741,9 +745,10 @@ void KvantumManager::resizeConfPage (bool thirdPage)
                                             2*ui->saveButton->sizeHint().height()
                                               + ui->statusBar->sizeHint().height()
                                               + ui->configLabel->sizeHint().height()
+                                              + (2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
+                                              + (4+3)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)
                                               + 6*textIconHeight
-                                              + (1+2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
-                                              + (4+1)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)));
+                                              + (ui->restoreButton->isEnabled() ? textIconHeight : 0)));
   }
   newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
   resize (newSize);
@@ -912,6 +917,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
                 if (themeSettings.contains ("button_contents_shift"))
                     ui->checkBoxButtonShift->setChecked (themeSettings.value ("button_contents_shift").toBool());
+                if (themeSettings.contains ("alt_mnemonic"))
+                    ui->checkBoxAlt->setChecked (themeSettings.value ("alt_mnemonic").toBool());
 #if QT_VERSION >= 0x050000
                 int delay = -1;
                 if (themeSettings.contains ("tooltip_delay"))
@@ -1605,6 +1612,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
         generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
+        generalKeys.insert("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
@@ -1720,6 +1728,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
         themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
+        themeSettings.setValue ("alt_mnemonic", ui->checkBoxAlt->isChecked());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
         themeSettings.setValue ("respect_DE", ui->checkBoxDE->isChecked());

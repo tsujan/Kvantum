@@ -210,8 +210,8 @@ x11drag                           string              Drag windows from contents
                                                         true (the same as "all" -- default)
                                                         false (the same as "none")
 
-alt_mnemonic                      true/false          Show underlines only when Alt is
-                                                      pressed? True by default.
+alt_mnemonic                      true/false          Show underlines when Alt is pressed?
+                                                      True by default.
 
 double_click                      true/false          Activate view items on double
                                                       clicking? They are activated on
