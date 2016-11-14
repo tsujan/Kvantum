@@ -19,8 +19,8 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=230,229,228
-BackgroundNormal=230,229,228
+BackgroundAlternate=242,241,240
+BackgroundNormal=242,241,240
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -75,8 +75,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [Colors:Window]
-BackgroundAlternate=230,229,228
-BackgroundNormal=230,229,228
+BackgroundAlternate=242,241,240
+BackgroundNormal=242,241,240
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -89,17 +89,17 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [General]
-ColorScheme=KvAmbience
-Name=KvAmbience
+ColorScheme=KvAmbiance
+Name=KvAmbiance
 shadeSortColumn=true
 
 [KDE]
 contrast=0
 
 [WM]
-activeBackground=230,229,228
-activeBlend=230,229,228
+activeBackground=242,241,240
+activeBlend=242,241,240
 activeForeground=0,0,0
-inactiveBackground=230,229,228
-inactiveBlend=230,229,228
+inactiveBackground=242,241,240
+inactiveBlend=242,241,240
 inactiveForeground=104,108,111
