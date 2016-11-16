@@ -1,6 +1,6 @@
 <svg width="450" version="1.0" xmlns="http://www.w3.org/2000/svg" height="920" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs id="defs5">
-<linearGradient xlink:href="#linearGradient6741-3" id="linearGradient5489" y1="690" x1="190" y2="676.5" gradientUnits="userSpaceOnUse" x2="190"/>
+<linearGradient gradientTransform="translate(5,-6.1035156e-5)" xlink:href="#linearGradient6741-3" id="linearGradient5126" y1="690" x1="190" y2="676.5" gradientUnits="userSpaceOnUse" x2="190"/>
 <linearGradient gradientTransform="matrix(1.0000198,0,0,1.0769444,47.494536,385.03406)" xlink:href="#linearGradient5116" id="linearGradient5200" y1="201" x1="273" y2="214" gradientUnits="userSpaceOnUse" x2="273"/>
 <linearGradient gradientTransform="matrix(0,0.8,-1,0,402.2516,43.5)" xlink:href="#linearGradient4635" id="linearGradient5201" y1="81.211327" x1="23.75" y2="81.251602" gradientUnits="userSpaceOnUse" x2="74.374939"/>
 <linearGradient gradientTransform="matrix(0.16666667,0,0,1,232.5,575)" xlink:href="#linearGradient5035" id="linearGradient5045" y1="95" x1="195" y2="65" gradientUnits="userSpaceOnUse" x2="195"/>
@@ -299,10 +299,10 @@
 <path style="opacity:.5;fill:url(#radialGradient6744)" id="menu-shadow-bottomright" d="m 80,716 0,7 7,0 0,-7 z"/>
 </g>
 <g style="fill:#b74aff">
-<rect width="2.5" x="50" y="716" height="7.01" id="menu-shadow-hint-bottom"/>
-<rect width="2.5" x="50" y="649" height="3.01" id="menu-shadow-hint-top"/>
-<rect width="2.5" x="-685" y="80" height="7.05" id="menu-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
-<rect width="2.5" x="-685" y="15" height="7.05" id="menu-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="2.5" x="50" y="716" height="7.1" id="menu-shadow-hint-bottom"/>
+<rect width="2.5" x="50" y="649" height="3.1" id="menu-shadow-hint-top"/>
+<rect width="2.5" x="-685" y="80" height="7.1" id="menu-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="2.5" x="-685" y="15" height="7.1" id="menu-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
 </g>
 </g>
 <g style="fill:#3daee9;fill-rule:evenodd;stroke:none" id="group-normal-left" transform="matrix(0.66666667,0,0,1,318.33333,-344.49994)">
@@ -313,11 +313,7 @@
 <rect width="6" x="-106" y="-1118.5" height="6" style="fill-rule:evenodd;fill-opacity:0" id="rect6009" transform="scale(-1,-1)"/>
 <path style="fill:#aaa" id="path6011" d="m 106,1114.75 c -1.89453,0 -3.75,1.8438 -3.75,3.75 h 1.5 c 0,-1.1953 1.125,-2.25 2.25,-2.25 z "/>
 </g>
-<g style="stroke:none;fill-rule:evenodd">
-<circle cx="80" cy="835.00006" style="fill:url(#radialGradient5079)" r="5" id="dial-handle"/>
-<path style="fill:#f58b5f" id="menuitem-pressed-topleft" d="m 194,675.0001 0,4 -4,0 0,-4 z "/>
-</g>
-<rect width="4" x="190" y="680.00006" height="8" style="fill:url(#linearGradient5489);fill-rule:evenodd;stroke:none" id="menuitem-pressed-left"/>
+<circle cx="80" cy="835.00006" style="fill:url(#radialGradient5079);fill-rule:evenodd;stroke:none" r="5" id="dial-handle"/>
 <path style="fill:url(#linearGradient5948);fill-rule:evenodd;stroke:none" id="slider-toggled-topleft" d="m 77,590.0001 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
 <path style="fill:url(#linearGradient5248);fill-rule:evenodd;stroke:none" id="slider-toggled-left" d="m 65,602.0001 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
 <g style="stroke:none" id="common-normal-left" transform="matrix(1.3333333,0,0,1,-271,-301.99994)">
@@ -339,25 +335,10 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="arrow-right-pressed" transform="matrix(0,1,-1,0,571.00281,76.21331)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="arrow-left-pressed" transform="matrix(0,-1,1,0,187.40077,360.00281)"/>
 <g style="stroke:none;fill-rule:evenodd">
-<g style="fill:#f58b5f">
-<path id="menuitem-pressed-topright" d="m 208,679.0001 -4,0 0,-4 4,0 z "/>
-<rect width="4" x="675.00006" y="-203" height="8" id="menuitem-pressed-top" transform="matrix(0,1,-1,0,0,0)"/>
-</g>
-<g style="fill:#9a3f1a">
-<path id="menuitem-pressed-bottomright" d="m 204,693.0001 0,-4 4,0 0,4 z "/>
-<path id="menuitem-pressed-bottomleft" d="m 190,689.0001 4,0 0,4 -4,0 z "/>
-<rect width="4" x="-693.00006" y="195" height="8" id="menuitem-pressed-bottom" transform="matrix(0,-1,1,0,0,0)"/>
-</g>
-<g style="fill:#f58b5f">
-<path id="menuitem-toggled-topleft" d="m 214,675.0001 0,4 -4,0 0,-4 z "/>
-<path id="menuitem-toggled-topright" d="m 228,679.0001 -4,0 0,-4 4,0 z "/>
-<rect width="4" x="675.00006" y="-223" height="8" id="menuitem-toggled-top" transform="matrix(0,1,-1,0,0,0)"/>
-</g>
-<g style="fill:#9a3f1a">
-<path id="menuitem-toggled-bottomright" d="m 224,693.0001 0,-4 4,0 0,4 z "/>
-<path id="menuitem-toggled-bottomleft" d="m 210,689.0001 4,0 0,4 -4,0 z "/>
-<rect width="4" x="-693.00006" y="215" height="8" id="menuitem-toggled-bottom" transform="matrix(0,-1,1,0,0,0)"/>
-</g>
+<rect width="4" x="675" y="-203" height="8" style="fill:#f58b5f" id="menuitem-pressed-top" transform="matrix(0,1,-1,0,0,0)"/>
+<rect width="4" x="-693" y="195" height="8" style="fill:#9a3f1a" id="menuitem-pressed-bottom" transform="matrix(0,-1,1,0,0,0)"/>
+<rect width="4" x="675" y="-223" height="8" style="fill:#f58b5f" id="menuitem-toggled-top" transform="matrix(0,1,-1,0,0,0)"/>
+<rect width="4" x="-693" y="215" height="8" style="fill:#9a3f1a" id="menuitem-toggled-bottom" transform="matrix(0,-1,1,0,0,0)"/>
 </g>
 <use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-top" transform="matrix(0,1,-1,0,1193.0001,385.00006)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-topright" transform="matrix(0,1,-1,0,1193.0001,385.00006)"/>
@@ -1240,11 +1221,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-focused" id="menu-checkbox-tristate-normal" transform="translate(-20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="menuitem-right-normal" transform="matrix(0,-1,1,0,73.38494,731.39475)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="menuitem-left-normal" transform="matrix(0,1,-1,0,750.61506,662.60525)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed-left" id="menuitem-pressed" transform="translate(5,-6.1035156e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed-left" id="menuitem-pressed-right" transform="translate(14,-6.1035156e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed-left" id="menuitem-toggled-left" transform="translate(20,-6.1035156e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed-left" id="menuitem-toggled" transform="translate(25,-6.1035156e-5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed-left" id="menuitem-toggled-right" transform="translate(34,-6.1035156e-5)"/>
+<rect width="4" x="195" y="680" height="8" style="fill:url(#linearGradient5126);fill-rule:evenodd;stroke:none" id="menuitem-pressed"/>
 <g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:square;stroke-width:2">
 <g id="tab-separator-toggled" transform="matrix(1,0,0,0.40000028,0,457.69979)">
 <rect width="5.9998016" x="195.00009" y="749.5" height="15" style="fill-opacity:0" id="rect5143"/>
@@ -1261,4 +1238,5 @@
 <rect width="1.9997864" x="199.00011" y="751.5" height="2" style="fill:#828181" id="rect5164"/>
 </g>
 </g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed" id="menuitem-toggled" transform="translate(20,0)"/>
 </svg>
