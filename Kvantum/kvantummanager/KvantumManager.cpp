@@ -777,60 +777,22 @@ void KvantumManager::tabChanged (int index)
     if (index == 1 || index == 3)
     {
         if (index == 1)
-            ui->usageLabel->show();
+        {
+            showAnimated (ui->usageLabel, 1000);
+            /* it's better to put the active theme in the theme combobox */
+            QString activeTheme;
+            if (kvconfigTheme_.isEmpty())
+                activeTheme = "Kvantum (default)";
+            else if (kvconfigTheme_ == "Default#")
+                activeTheme = "Kvantum (modified)";
+            else if (kvconfigTheme_.endsWith ("#"))
+                activeTheme = QString ("%1 (modified)").arg (kvconfigTheme_.left (kvconfigTheme_.length() - 1));
+            else
+                activeTheme = kvconfigTheme_;
+            ui->comboBox->setCurrentText (activeTheme);
+        }
         else
             showAnimated (ui->appLabel, 1000);
-        QString comment;
-        if (kvconfigTheme_.isEmpty())
-        {
-            ui->deleteTheme->setEnabled (false);
-            comment = "The default Kvantum theme";
-        }
-        else
-        {
-            QString themeConfig;
-            QString themeDir = userThemeDir (kvconfigTheme_);
-            if (!isThemeDir (themeDir)) // check root folders
-            {
-                ui->deleteTheme->setEnabled (false);
-                themeDir = QString (DATADIR) + QString ("/Kvantum/") + kvconfigTheme_;
-                if (!isThemeDir (themeDir))
-                  themeConfig = QString(DATADIR) + QString ("/themes/%1/Kvantum/%1.kvconfig").arg (kvconfigTheme_);
-                else
-                  themeConfig = QString (DATADIR) + QString ("/Kvantum/%1/%1.kvconfig").arg (kvconfigTheme_);
-            }
-            else
-            {
-                ui->deleteTheme->setEnabled (true);
-                themeConfig = themeDir + QString ("/%1.kvconfig").arg (kvconfigTheme_);
-            }
-            if (QFile::exists (themeConfig))
-            {
-                QSettings themeSettings (themeConfig, QSettings::NativeFormat);
-                themeSettings.beginGroup ("General");
-                comment = themeSettings.value ("comment").toString();
-                if (comment.isEmpty()) // comma(s) in the comment
-                {
-                    QStringList lst = themeSettings.value ("comment").toStringList();
-                    if (!lst.isEmpty())
-                        comment = lst.join (", ");
-                }
-                themeSettings.endGroup();
-            }
-        }
-        if (comment.isEmpty())
-          comment = "No description";
-        if (index == 1)
-        {
-            ui->comboBox->setToolTip (comment);
-            ui->comboBox->setWhatsThis (comment);
-        }
-        else
-        {
-            ui->appCombo->setToolTip (comment);
-            ui->appCombo->setWhatsThis (comment);
-            ui->removeAppButton->setDisabled (appThemes_.isEmpty());
-        }
     }
     else if (index == 2)
     {
@@ -1054,31 +1016,16 @@ void KvantumManager::tabChanged (int index)
     resizeConfPage (thirdPage);
 }
 /*************************/
-void KvantumManager::selectionChanged (const QString &txt)
+/* Gets the comment and sets the state of the "deleteTheme" button. */
+QString KvantumManager::getComment (const QString &comboText, bool setState)
 {
-    if (txt.isEmpty()) return; // not needed
+    QString comment;
+    if (comboText.isEmpty()) return comment;
 
-    ui->statusBar->clearMessage();
-
-    QString theme;
-    if (kvconfigTheme_.isEmpty())
-        theme = "Kvantum (default)";
-    else if (kvconfigTheme_ == "Default#")
-        theme = "Kvantum (modified)";
-    else if (kvconfigTheme_.endsWith ("#"))
-        theme = QString ("%1 (modified)").arg (kvconfigTheme_.left (kvconfigTheme_.length() - 1));
-    else
-        theme = kvconfigTheme_;
-
-    if (txt == theme)
-        showAnimated (ui->usageLabel, 1000);
-    else
-        ui->usageLabel->hide();
-
-    QString text = txt;
+    QString text = comboText;
     if (text == "Kvantum (default)")
         text = QString();
-    if (text == "Kvantum (modified)")
+    else if (text == "Kvantum (modified)")
         text = "Default#";
     else if (text.endsWith (" (modified)"))
         text.replace (QString (" (modified)"), QString ("#"));
@@ -1090,15 +1037,17 @@ void KvantumManager::selectionChanged (const QString &txt)
         themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (text);
     }
 
-    if (txt == "Kvantum (default)"
-        || !isThemeDir (themeDir)) // root
+    if (setState)
     {
-        ui->deleteTheme->setEnabled (false);
+        if (comboText == "Kvantum (default)"
+            || !isThemeDir (themeDir)) // root
+        {
+            ui->deleteTheme->setEnabled (false);
+        }
+        else
+            ui->deleteTheme->setEnabled (true);
     }
-    else
-        ui->deleteTheme->setEnabled (true);
 
-    QString comment;
     if (!text.isEmpty())
     {
         if (!isThemeDir (themeDir))
@@ -1126,12 +1075,40 @@ void KvantumManager::selectionChanged (const QString &txt)
     else comment = "The default Kvantum theme";
     if (comment.isEmpty())
       comment = "No description";
+
+    return comment;
+}
+/*************************/
+void KvantumManager::selectionChanged (const QString &txt)
+{
+    if (txt.isEmpty()) return; // not needed
+
+    ui->statusBar->clearMessage();
+
+    QString theme;
+    if (kvconfigTheme_.isEmpty())
+        theme = "Kvantum (default)";
+    else if (kvconfigTheme_ == "Default#")
+        theme = "Kvantum (modified)";
+    else if (kvconfigTheme_.endsWith ("#"))
+        theme = QString ("%1 (modified)").arg (kvconfigTheme_.left (kvconfigTheme_.length() - 1));
+    else
+        theme = kvconfigTheme_;
+
+    if (txt == theme)
+        showAnimated (ui->usageLabel, 1000);
+    else
+        ui->usageLabel->hide();
+
+    QString comment = getComment (txt);
     ui->comboBox->setToolTip (comment);
     ui->comboBox->setWhatsThis (comment);
 }
 /*************************/
 void KvantumManager::assignAppTheme (const QString &previousTheme, const QString &newTheme)
 {
+    if (previousTheme.isEmpty() || newTheme.isEmpty()) // not needed
+        return;
     /* first assign the previous app theme... */
     QString appTheme = previousTheme;
     appTheme = appTheme.split (" ").first();
@@ -1140,33 +1117,29 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
     QString editTxt = ui->appsEdit->text();
     if (!editTxt.isEmpty())
     {
-        if (!appTheme.isEmpty())
-        {
-            editTxt = editTxt.simplified();
-            editTxt.remove (" ");
-            QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
-            appList.removeDuplicates();
-            appThemes_.insert (appTheme, appList);
-        }
+        editTxt = editTxt.simplified();
+        editTxt.remove (" ");
+        QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
+        appList.removeDuplicates();
+        appThemes_.insert (appTheme, appList);
     }
     else
         appThemes_.remove (appTheme);
     /* ... then set the lineedit text to the apps list of the new theme */
     appTheme = newTheme;
-    if (!appTheme.isEmpty())
-    {
-        appTheme = appTheme.split (" ").first();
-        if (appTheme == "Kvantum")
-            appTheme = "Default";
-        if (!appThemes_.value (appTheme).isEmpty())
-            ui->appsEdit->setText (appThemes_.value (appTheme).join (","));
-        else
-            ui->appsEdit->setText ("");
-    }
-    else // never happens
+    appTheme = appTheme.split (" ").first();
+    if (appTheme == "Kvantum")
+        appTheme = "Default";
+    if (!appThemes_.value (appTheme).isEmpty())
+        ui->appsEdit->setText (appThemes_.value (appTheme).join (","));
+    else
         ui->appsEdit->setText ("");
 
     ui->removeAppButton->setDisabled (appThemes_.isEmpty());
+
+    QString comment = getComment (newTheme, false);
+    ui->appCombo->setToolTip (comment);
+    ui->appCombo->setWhatsThis (comment);
 }
 /*************************/
 void KvantumManager::updateThemeList (bool updateAppThemes)
@@ -1417,6 +1390,10 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
         QFile::remove (theCopy);
     }
 
+    QString comment = getComment (ui->comboBox->currentText());
+    ui->comboBox->setToolTip (comment);
+    ui->comboBox->setWhatsThis (comment);
+
     /* connect to combobox signal */
     connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)),
              this, SLOT (selectionChanged (const QString &)));
@@ -1427,6 +1404,10 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
         QString curTxt = ui->appCombo->currentText();
         if (!curTxt.isEmpty())
         {
+            comment = getComment (curTxt, false);
+            ui->appCombo->setToolTip (comment);
+            ui->appCombo->setWhatsThis (comment);
+
             curTxt = curTxt.split (" ").first();
             if (curTxt == "Kvantum")
                 curTxt = "Default";

@@ -55,6 +55,7 @@ private:
     void resizeConfPage (bool thirdPage);
     void restyleWindow();
     void writeOrigAppLists();
+    QString getComment (const QString &comboText, bool setState = true);
     // to be independent of '../style/drag/windowmanager.h'
     enum Drag {
         DRAG_NONE,
