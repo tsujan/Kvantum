@@ -778,8 +778,7 @@ void KvantumManager::tabChanged (int index)
     {
         if (index == 1)
         {
-            showAnimated (ui->usageLabel, 1000);
-            /* it's better to put the active theme in the theme combobox */
+            /* put the active theme in the theme combobox */
             QString activeTheme;
             if (kvconfigTheme_.isEmpty())
                 activeTheme = "Kvantum (default)";
@@ -789,7 +788,10 @@ void KvantumManager::tabChanged (int index)
                 activeTheme = QString ("%1 (modified)").arg (kvconfigTheme_.left (kvconfigTheme_.length() - 1));
             else
                 activeTheme = kvconfigTheme_;
-            ui->comboBox->setCurrentText (activeTheme);
+            if (ui->comboBox->currentText() == activeTheme)
+                showAnimated (ui->usageLabel, 1000);
+            else
+                ui->comboBox->setCurrentText (activeTheme); // sets tooltip and animation
         }
         else
             showAnimated (ui->appLabel, 1000);
