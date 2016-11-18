@@ -17,6 +17,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
 {
     ui->setupUi (this);
 
+    confPageVisited_ = false;
+
     setWindowTitle ("Kvantum Manager");
     ui->toolBox->setItemIcon (0,
                               QIcon::fromTheme ("system-software-install",
@@ -491,7 +493,6 @@ void KvantumManager::deleteTheme()
             }
             QCoreApplication::processEvents();
             restyleWindow();
-            resizeConfPage (false);
             if (process_->state() == QProcess::Running)
                 preview();
         }
@@ -556,9 +557,10 @@ void KvantumManager::useTheme()
     /* this is needed if the config file is created by this method */
     QCoreApplication::processEvents();
     restyleWindow();
-    resizeConfPage (false);
     if (process_->state() == QProcess::Running)
         preview();
+
+    confPageVisited_ = false;
 }
 /*************************/
 void KvantumManager::txtChanged (const QString &txt)
@@ -728,38 +730,6 @@ void KvantumManager::defaultThemeButtons()
     respectDE (ui->checkBoxDE->isChecked());
 }
 /*************************/
-/* Here. we try to avoid scrollbars as far as possible but
-   there is no way to guarantee that they won't be shown. */
-void KvantumManager::resizeConfPage (bool thirdPage)
-{
-  bool le = true;
-  if (!ui->opaqueEdit->isEnabled())
-  {
-      le = false;
-      ui->opaqueEdit->setEnabled (true);
-  }
-  QSize newSize  = size().expandedTo (ui->page_2->sizeHint());
-  if (thirdPage) // the biggest page
-  {
-      QStyle *style = QApplication::style();
-      int textIconHeight = qMax (style->pixelMetric (QStyle::PM_SmallIconSize),
-                                 QFontMetrics(font()).height());
-      newSize = size().expandedTo (ui->groupBox->sizeHint()
-                                   + QSize (4*style->pixelMetric (QStyle::PM_LayoutLeftMargin)
-                                              + style->pixelMetric (QStyle::PM_ScrollBarExtent),
-                                            2*ui->saveButton->sizeHint().height()
-                                              + ui->statusBar->sizeHint().height()
-                                              + ui->configLabel->sizeHint().height()
-                                              + (2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
-                                              + (4+3)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)
-                                              + 6*textIconHeight
-                                              + (ui->restoreButton->isEnabled() ? textIconHeight : 0)));
-  }
-  newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
-  resize (newSize);
-  if (!le) ui->opaqueEdit->setEnabled (false);
-}
-/*************************/
 void KvantumManager::restyleWindow()
 {
   QApplication::setStyle (QStyleFactory::create ("kvantum"));
@@ -775,7 +745,6 @@ void KvantumManager::restyleWindow()
 /*************************/
 void KvantumManager::tabChanged (int index)
 {
-    bool thirdPage (index == 2);
     ui->statusBar->clearMessage();
     if (index == 0)
         showAnimated (ui->installLabel, 1000);
@@ -1014,13 +983,30 @@ void KvantumManager::tabChanged (int index)
                     tmp = qMin (qMax (themeSettings.value ("lxqtmainmenu_iconsize").toInt(), 0), 100);
                 ui->spinLxqtMenu->setValue (tmp);
                 themeSettings.endGroup();
-                
+
                 respectDE (ui->checkBoxDE->isChecked());
             }
         }
+        if (!confPageVisited_)
+        { // here we try to avoid scrollbars as far as possible but there is no exact way for that
+            QStyle *style = QApplication::style();
+            int textIconHeight = qMax (style->pixelMetric (QStyle::PM_SmallIconSize),
+                                       QFontMetrics(font()).height());
+            QSize newSize = size().expandedTo (ui->groupBox->sizeHint()
+                              + QSize (4*style->pixelMetric (QStyle::PM_LayoutLeftMargin)
+                                           + style->pixelMetric (QStyle::PM_ScrollBarExtent),
+                                       2*ui->saveButton->sizeHint().height()
+                                         + ui->statusBar->sizeHint().height()
+                                         + ui->configLabel->sizeHint().height()
+                                         + (2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
+                                         + (4+3)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)
+                                         + 6*textIconHeight
+                                         + (ui->restoreButton->isEnabled() ? textIconHeight : 0)));
+            newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
+            resize (newSize);
+            confPageVisited_ = true;
+        }
     }
-
-    resizeConfPage (thirdPage);
 }
 /*************************/
 /* Gets the comment and sets the state of the "deleteTheme" button. */
@@ -1331,7 +1317,6 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                     settings.setValue ("theme", kvconfigTheme_); // correct the config file
                     QCoreApplication::processEvents();
                     restyleWindow();
-                    resizeConfPage (false);
                     if (process_->state() == QProcess::Running)
                         preview();
                 }
@@ -1868,10 +1853,7 @@ void KvantumManager::writeConfig()
 
         QCoreApplication::processEvents();
         if (restyle)
-        {
             restyleWindow();
-            resizeConfPage (true);
-        }
         if (process_->state() == QProcess::Running)
             preview();
     }
@@ -1999,7 +1981,6 @@ void KvantumManager::restoreDefault()
 
     QCoreApplication::processEvents();
     restyleWindow();
-    resizeConfPage (true);
     if (process_->state() == QProcess::Running)
         preview();
 

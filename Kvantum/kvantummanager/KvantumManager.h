@@ -52,7 +52,6 @@ private:
     void updateThemeList (bool updateAppThemes = true);
     void showAnimated (QWidget *w, int duration);
     void defaultThemeButtons();
-    void resizeConfPage (bool thirdPage);
     void restyleWindow();
     void writeOrigAppLists();
     QString getComment (const QString &comboText, bool setState = true);
@@ -95,6 +94,7 @@ private:
     QPropertyAnimation *animation_;
     QByteArray desktop_;
     QHash<QString, QStringList> appThemes_, origAppThemes_;
+    bool confPageVisited_;
 };
 
 }
