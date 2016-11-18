@@ -214,11 +214,13 @@ available if present.</string>
         <item row="2" column="1" alignment="Qt::AlignRight">
          <widget class="QPushButton" name="useTheme">
           <property name="toolTip">
-           <string>If Kvantum is activated, it will use this
-theme (instead of its default theme).</string>
+           <string>Activate this theme!
+
+A disabled button means that
+the theme is already active.</string>
           </property>
           <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; is activated, it will use this theme (instead of its default theme).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If the button is clicked, &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; will use this theme (instead of its default theme).&lt;/p&gt;&lt;p&gt;A disabled button means that the theme is already active.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Use this theme</string>

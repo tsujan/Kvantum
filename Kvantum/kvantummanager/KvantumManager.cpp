@@ -42,6 +42,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
 
     desktop_ = qgetenv ("XDG_CURRENT_DESKTOP").toLower();
 
+    ui->useTheme->setEnabled (false);
+
     ui->comboToolButton->insertItems (0, QStringList() << "Follow Style"
                                                        << "Icon Only"
                                                        << "Text Only"
@@ -514,6 +516,7 @@ void KvantumManager::showAnimated (QWidget *w, int duration)
 {
     w->show();
     w->setGraphicsEffect (effect_);
+    animation_->stop();
     animation_->setDuration (duration);
     animation_->setStartValue (0.0);
     animation_->setEndValue (1.0);
@@ -547,6 +550,8 @@ void KvantumManager::useTheme()
     statusLabel->setText (tr ("<b>Active theme:</b> %1").arg (theme));
     ui->statusBar->showMessage (tr ("Theme changed to %1.").arg (theme), 10000);
     showAnimated (ui->usageLabel, 1000);
+
+    ui->useTheme->setEnabled (false);
 
     /* this is needed if the config file is created by this method */
     QCoreApplication::processEvents();
@@ -791,7 +796,7 @@ void KvantumManager::tabChanged (int index)
             if (ui->comboBox->currentText() == activeTheme)
                 showAnimated (ui->usageLabel, 1000);
             else
-                ui->comboBox->setCurrentText (activeTheme); // sets tooltip and animation
+                ui->comboBox->setCurrentText (activeTheme); // sets tooltip, animation, etc.
         }
         else
             showAnimated (ui->appLabel, 1000);
@@ -1098,9 +1103,15 @@ void KvantumManager::selectionChanged (const QString &txt)
         theme = kvconfigTheme_;
 
     if (txt == theme)
+    {
+        ui->useTheme->setEnabled (false);
         showAnimated (ui->usageLabel, 1000);
+    }
     else
+    {
+        ui->useTheme->setEnabled (true);
         ui->usageLabel->hide();
+    }
 
     QString comment = getComment (txt);
     ui->comboBox->setToolTip (comment);
