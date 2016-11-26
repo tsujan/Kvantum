@@ -1,7 +1,7 @@
 [%General]
 author=Tsu Jan
 comment=A dark flat theme with reddish elements that supports window translucency
-x11drag=true
+x11drag=all
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=true
@@ -18,7 +18,35 @@ slider_handle_width=16
 slider_handle_length=16
 toolbar_icon_size=16
 check_size=16
-opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,kamoso,QtCreator,VirtualBox,trojita,dragon,qupzilla,digikam
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,qupzilla,digikam
+animate_states=true
+blurring=false
+button_contents_shift=true
+button_icon_size=16
+combo_as_lineedit=true
+combo_menu=false
+double_click=false
+fill_rubberband=false
+groupbox_top_label=false
+inline_spin_indicators=true
+joined_inactive_tabs=true
+large_icon_size=32
+layout_margin=4
+layout_spacing=2
+menubar_mouse_tracking=true
+merge_menubar_with_toolbar=false
+popup_blurring=true
+respect_DE=true
+scroll_arrows=false
+scrollbar_in_view=false
+small_icon_size=16
+spin_button_width=16
+submenu_overlap=-1
+toolbutton_style=0
+tooltip_delay=-1
+translucent_windows=false
+tree_branch_line=false
+vertical_spin_indicators=false
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -29,8 +57,8 @@ light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
 mid.color=#303030
-highlight.color=#737373
-inactive.highlight.color=#4A4A4A
+highlight.color=#a21215
+inactive.highlight.color=#890f11
 tooltip.base.color=black
 text.color=white
 window.text.color=white
@@ -49,13 +77,16 @@ transparent_ktitle_label=true
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true
 disabled_icon_opacity=100
-force_size_grip=false
+force_size_grip=true
 iconless_menu=false
 iconless_pushbutton=false
 normal_default_pushbutton=false
 single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_sidepane=false
+lxqtmainmenu_iconsize=0
+no_selection_tint=false
+transparent_pcmanfm_view=false
 
 [PanelButtonCommand]
 frame=true
@@ -75,8 +106,8 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=3
+text.margin.bottom=3
 text.margin.left=3
 text.margin.right=3
 text.shadow.xshift=2
@@ -137,6 +168,8 @@ frame.right=4
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+text.margin.left=2
+text.margin.right=2
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -154,8 +187,8 @@ inherits=PanelButtonCommand
 interior.element=tab
 text.margin.left=6
 text.margin.right=6
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=3
+text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
 frame.top=4
@@ -186,6 +219,8 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+text.margin.top=2
+text.margin.bottom=2
 
 [SizeGrip]
 inherits=PanelButtonCommand
@@ -199,8 +234,8 @@ inherits=PanelButtonCommand
 indicator.element=toolbar
 indicator.size=5
 text.margin=0
-frame.element=toolbar
-interior=false
+frame.element=none
+interior.element=none
 
 [Slider]
 inherits=PanelButtonCommand
@@ -234,7 +269,11 @@ interior.element=progress-pattern
 
 [ItemView]
 inherits=PanelButtonCommand
-text.margin=0
+text.margin=1
+text.margin.top=1
+text.margin.bottom=1
+text.margin.left=1
+text.margin.right=1
 frame.element=itemview
 interior.element=itemview
 frame.top=1
@@ -255,7 +294,7 @@ indicator.size=16
 
 [Scrollbar]
 inherits=PanelButtonCommand
-indicator.size=8
+indicator.size=9
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
@@ -265,8 +304,6 @@ frame.top=6
 frame.bottom=6
 frame.left=6
 frame.right=6
-indicator.element=grip
-indicator.size=13
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
@@ -293,6 +330,11 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+
+[MenuBar]
+inherits=PanelButtonCommand
+frame.element=none
+interior.element=none
 
 [MenuBarItem]
 inherits=PanelButtonCommand

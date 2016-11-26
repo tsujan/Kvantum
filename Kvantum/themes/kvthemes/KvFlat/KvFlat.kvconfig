@@ -12,6 +12,10 @@ menu_shadow_depth=6
 tooltip_shadow_depth=6
 splitter_width=7
 scroll_width=12
+scroll_min_extent=50
+scroll_arrows=false
+combo_as_lineedit=true
+inline_spin_indicators=true
 slider_width=6
 slider_handle_width=16
 slider_handle_length=16
@@ -27,8 +31,8 @@ light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
 mid.color=#303030
-highlight.color=#737373
-inactive.highlight.color=#4A4A4A
+highlight.color=#3f67a5
+inactive.highlight.color=#2e4c7a
 text.color=white
 window.text.color=white
 button.text.color=white
@@ -61,8 +65,8 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=3
+text.margin.bottom=3
 text.margin.left=3
 text.margin.right=3
 text.shadow.xshift=2
@@ -127,6 +131,8 @@ frame.right=4
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+text.margin.left=2
+text.margin.right=2
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -176,6 +182,8 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+text.margin.top=2
+text.margin.bottom=2
 
 [SizeGrip]
 inherits=PanelButtonCommand
@@ -228,7 +236,11 @@ frame.right=3
 
 [ItemView]
 inherits=PanelButtonCommand
-text.margin=0
+text.margin=1
+text.margin.top=1
+text.margin.bottom=1
+text.margin.left=1
+text.margin.right=1
 frame.element=itemview
 interior.element=itemview
 frame.top=1
@@ -249,7 +261,7 @@ indicator.size=16
 
 [Scrollbar]
 inherits=PanelButtonCommand
-indicator.size=8
+indicator.size=9
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
