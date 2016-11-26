@@ -765,7 +765,13 @@ void KvantumManager::tabChanged (int index)
             if (ui->comboBox->currentText() == activeTheme)
                 showAnimated (ui->usageLabel, 1000);
             else
+            {
+#if QT_VERSION < 0x050000
+                ui->comboBox->setCurrentIndex (ui->comboBox->findText (activeTheme));
+#else
                 ui->comboBox->setCurrentText (activeTheme); // sets tooltip, animation, etc.
+#endif
+            }
         }
         else
             showAnimated (ui->appLabel, 1000);
