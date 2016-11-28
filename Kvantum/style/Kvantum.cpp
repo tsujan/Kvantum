@@ -5784,46 +5784,80 @@ void Style::drawControl(ControlElement element,
 
         /* handle overlapping */
         int overlap = tspec_.active_tab_overlap;
-        if (qobject_cast<const QTabBar*>(widget) // not QML
-            && overlap > 0 && !joinedActiveTab
-            && !status.startsWith("toggled")
+        if (overlap > 0 && !joinedActiveTab
             && opt->position != QStyleOptionTab::OnlyOneTab)
         {
-          int exp = qMin(frameExpansion, qMin(r.width(), r.height())) / 2 + 1;
-          overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
-          if (rtl)
+          if (!status.startsWith("toggled"))
           {
-            if (mirroredBottomTab)
+            int exp = qMin(frameExpansion, qMin(r.width(), r.height())) / 2 + 1;
+            overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
+            if (rtl)
             {
-              if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-                r.adjust(-overlap, 0, 0, 0);
-              else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-                r.adjust(0, 0, overlap, 0);
+              if (mirroredBottomTab)
+              {
+                if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                  r.adjust(-overlap, 0, 0, 0);
+                else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                  r.adjust(0, 0, overlap, 0);
+              }
+              else
+              {
+                if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                  r.adjust(-overlap, 0, 0, 0);
+                else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                  r.adjust(0, 0, overlap, 0);
+              }
             }
             else
             {
-              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-                r.adjust(-overlap, 0, 0, 0);
-              else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-                r.adjust(0, 0, overlap, 0);
+              if (mirroredBottomTab)
+              {
+                if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                  r.adjust(-overlap, 0, 0, 0);
+                else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                  r.adjust(0, 0, overlap, 0);
+              }
+              else
+              {
+                if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                  r.adjust(-overlap, 0, 0, 0);
+                else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                  r.adjust(0, 0, overlap, 0);
+              }
             }
           }
-          else
+          else if (!widget) // with QML, we imitate an overlap
           {
-            if (mirroredBottomTab)
+            int fe = fspec.expansion;
+            if (tspec_.no_inactive_tab_expansion)
+              fspec.expansion = 0;
+            bool hc(fspec.hasCapsule);
+            fspec.hasCapsule = true;
+            int ch = fspec.capsuleH;
+            int cv = fspec.capsuleV;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = 0;
+            QRect R = r;
+            if (opt->position == QStyleOptionTab::Beginning)
             {
-              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-                r.adjust(-overlap, 0, 0, 0);
-              else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-                r.adjust(0, 0, overlap, 0);
+              if (rtl)
+                R.adjust(0,0,-r.width()/2,0);
+              else
+                R.adjust(r.width()/2,0,0,0);
             }
-            else
+            else if (opt->position == QStyleOptionTab::End)
             {
-              if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-                r.adjust(-overlap, 0, 0, 0);
-              else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-                r.adjust(0, 0, overlap, 0);
+              if (rtl)
+                R.adjust(r.width()/2,0,0,0);
+              else
+                R.adjust(0,0,-r.width()/2,0);
             }
+            renderInterior(painter,R,fspec,ispec,ispec.element+"-normal",fspec.hasCapsule);
+            renderFrame(painter,R,fspec,fspec.element+"-normal",0,0,0,0,0,fspec.hasCapsule);
+            fspec.hasCapsule = hc;
+            fspec.capsuleV = cv;
+            fspec.capsuleH = ch;
+            fspec.expansion = fe;
           }
         }
 
