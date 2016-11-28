@@ -150,7 +150,7 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
       v = getValue(name,"frame.patternsize", i);
       r.ps = qMax(v.toInt(),0);
 
-      if (r.top && r.bottom && r.left && r.right)
+      if (r.top || r.bottom || r.left || r.right)
       {
         v = getValue(name,"frame.expansion", i);
         r.expansion = qMax(v.toInt(),0);
@@ -158,17 +158,33 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
         if (r.expansion > 0)
         {
           v = getValue(name,"frame.expanded.top", i);
-          r.topExpanded = qMin(v.toInt(),r.top);
-          if (r.topExpanded <= 0) r.topExpanded = r.top;
+          if (v.isValid())
+          {
+            r.topExpanded = qMin(v.toInt(),r.top);
+            if (r.topExpanded < 0) r.topExpanded = r.top;
+          }
+          else r.topExpanded = r.top;
           v = getValue(name,"frame.expanded.bottom", i);
-          r.bottomExpanded = qMin(v.toInt(),r.bottom);
-          if (r.bottomExpanded <= 0) r.bottomExpanded = r.bottom;
+          if (v.isValid())
+          {
+            r.bottomExpanded = qMin(v.toInt(),r.bottom);
+            if (r.bottomExpanded < 0) r.bottomExpanded = r.bottom;
+          }
+          else r.bottomExpanded = r.bottom;
           v = getValue(name,"frame.expanded.left", i);
-          r.leftExpanded = qMin(v.toInt(),r.left);
-          if (r.leftExpanded <= 0) r.leftExpanded = r.left;
+          if (v.isValid())
+          {
+            r.leftExpanded = qMin(v.toInt(),r.left);
+            if (r.leftExpanded < 0) r.leftExpanded = r.left;
+          }
+          else r.leftExpanded = r.left;
           v = getValue(name,"frame.expanded.right", i);
-          r.rightExpanded = qMin(v.toInt(),r.right);
-          if (r.rightExpanded <= 0) r.rightExpanded = r.right;
+          if (v.isValid())
+          {
+            r.rightExpanded = qMin(v.toInt(),r.right);
+            if (r.rightExpanded < 0) r.rightExpanded = r.right;
+          }
+          else r.rightExpanded = r.right;
         }
       }
     }
@@ -478,9 +494,16 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","no_active_tab_separator");
   r.no_active_tab_separator = v.toBool();
 
+  v = getValue("General","active_tab_overlap");
+  if (v.isValid()) // 0 by default
+    r.active_tab_overlap = qMax(v.toInt(),0);
+
   v = getValue("General","mirror_doc_tabs");
   if (v.isValid()) // true by default
     r.mirror_doc_tabs = v.toBool();
+
+  v = getValue("General","no_inactive_tab_expansion");
+  r.no_inactive_tab_expansion = v.toBool();
 
   v = getValue("General","group_toolbar_buttons");
   r.group_toolbar_buttons = v.toBool();

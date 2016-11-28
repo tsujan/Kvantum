@@ -3,6 +3,7 @@ author=Tsu Jan
 comment=A beige theme for Kvantum
 left_tabs=true
 attach_active_tab=true
+active_tab_overlap=40
 group_toolbar_buttons=true
 spread_progressbar=true
 composite=true
@@ -12,7 +13,7 @@ scroll_min_extent=50
 slider_handle_width=16
 slider_handle_length=12
 center_toolbar_handle=true
-x11drag=true
+x11drag=all
 menubar_mouse_tracking=true
 toolbutton_style=0
 double_click=false
@@ -23,6 +24,28 @@ popup_blurring=false
 opaque=
 toolbar_icon_size=16
 animate_states=true
+alt_mnemonic=true
+button_contents_shift=true
+button_icon_size=16
+combo_as_lineedit=false
+combo_menu=false
+fill_rubberband=false
+groupbox_top_label=false
+inline_spin_indicators=false
+joined_inactive_tabs=true
+no_inactive_tab_expansion=true
+large_icon_size=32
+layout_margin=4
+layout_spacing=2
+merge_menubar_with_toolbar=false
+respect_DE=true
+scroll_arrows=true
+scrollbar_in_view=false
+small_icon_size=16
+spin_button_width=16
+submenu_overlap=-1
+tooltip_delay=-1
+tree_branch_line=false
 
 [GeneralColors]
 window.color=#efebe7
@@ -53,16 +76,28 @@ blur_translucent=false
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true
 respect_darkness=false
+single_top_toolbar=true
+disabled_icon_opacity=100
+force_size_grip=true
+iconless_menu=false
+iconless_pushbutton=false
+lxqtmainmenu_iconsize=0
+no_selection_tint=true
+normal_default_pushbutton=false
+tint_on_mouseover=0
+transparent_pcmanfm_view=false
 
 [PanelButtonCommand]
 frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
+text.normal.color=black
+text.focus.color=black
 text.press.color=black
 text.toggle.color=white
 
@@ -79,10 +114,8 @@ interior.element=lineedit
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.element=button
+interior.element=button
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -93,18 +126,27 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+text.press.color=#000000d2
 
 [Tab]
 inherits=PanelButtonCommand
-text.margin.left=5
-text.margin.right=5
-text.margin.bottom=4
+text.margin.left=10
+text.margin.right=10
+text.margin.top=2
+text.margin.bottom=2
+text.normal.color=#000000d2
 frame.top=5
 frame.bottom=3
 frame.left=5
 frame.right=5
+frame.expanded.top=2
+frame.expanded.bottom=0
+frame.expanded.left=1
+frame.expanded.right=1
 text.press.color=black
 text.toggle.color=black
+frame.expansion=54
+indicator.size=10
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -126,7 +168,8 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.press.color=black
+text.normal.color=#000000d2
+text.bold=true
 
 [SizeGrip]
 inherits=PanelButtonCommand

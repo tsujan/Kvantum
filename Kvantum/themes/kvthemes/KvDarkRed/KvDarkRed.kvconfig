@@ -73,7 +73,7 @@ iconless_menu=false
 iconless_pushbutton=false
 lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
-single_top_toolbar=false
+single_top_toolbar=true
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
 
@@ -136,13 +136,14 @@ text.margin.right=3
 inherits=PanelButtonCommand
 text.margin.left=5
 text.margin.right=5
-text.margin.top=1
-text.margin.bottom=2
+text.margin.top=2
+text.margin.bottom=3
 frame.top=5
 frame.bottom=5
 frame.left=5
 frame.right=5
 text.press.color=white
+indicator.size=8
 
 [TabFrame]
 inherits=PanelButtonCommand

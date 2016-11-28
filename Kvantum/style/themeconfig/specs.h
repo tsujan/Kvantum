@@ -52,10 +52,15 @@ typedef struct {
   bool attach_active_tab;
   /* when using tab separators, don't draw them for the active tab */
   bool no_active_tab_separator;
+  /* number of pixels inactive tabs overlap the active one */
+  int active_tab_overlap;
   /* mirror the top/left tab to draw the bottom/right tab also in
      the document mode? (By default, the bottom and right tabs are
      always the mirror images of the top and left tabs, respectively */
   bool mirror_doc_tabs;
+  /* if tabs have frmae expansion, should only
+     the frames of the active tab be expanded? */
+  bool no_inactive_tab_expansion;
   /* raise and group neighbor
      toolbar buttons */
   bool group_toolbar_buttons;
@@ -365,7 +370,9 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.joined_inactive_tabs = true;
   tspec.attach_active_tab = false;
   tspec.no_active_tab_separator = false;
+  tspec.active_tab_overlap = 0;
   tspec.mirror_doc_tabs = true;
+  tspec.no_inactive_tab_expansion = false;
   tspec.group_toolbar_buttons = false;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;

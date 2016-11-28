@@ -279,6 +279,18 @@ no_active_tab_separator           true/false          Do not draw tab separator 
                                                       See "Theme-Making.pdf" for an explanation
                                                       of tab separators.
 
+active_tab_overlap                integer             Number of pixels inactive tabs overlap
+                                                      the active one. It is zero by default.
+                                                      The active tab is drawn in front of its
+                                                      adjacent inactive tabs when the value of
+                                                      this key is positive.
+                                                      
+                                                      It is safe to set a great value here.
+
+no_inactive_tab_expansion         true/false          If tabs have frame expansion, setting
+                                                      this key to true will disable frame
+                                                      expansion for inactive tabs.
+
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
 

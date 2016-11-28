@@ -60,6 +60,7 @@ kcapacitybar_as_progressbar=true
 force_size_grip=false
 iconless_menu=false
 iconless_pushbutton=false
+single_top_toolbar=true
 
 [PanelButtonCommand]
 frame.top=3
@@ -147,6 +148,10 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+
+[Scrollbar]
+inherits=PanelButtonCommand
+indicator.size=9
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand

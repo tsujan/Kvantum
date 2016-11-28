@@ -50,14 +50,15 @@ blur_translucent=false
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true
 respect_darkness=false
+single_top_toolbar=true
 
 [PanelButtonCommand]
 frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
 text.press.color=black
@@ -94,6 +95,7 @@ text.margin.right=3
 inherits=PanelButtonCommand
 text.margin.left=5
 text.margin.right=5
+text.margin.top=1
 text.margin.bottom=4
 frame.top=5
 frame.bottom=3

@@ -344,6 +344,8 @@ class Style : public QCommonStyle {
        would be drawn around Kvantum's menu shadows. Other DEs have their own ways
        of preventing that or the user could disable compositing with Kvantum Manager. */
     bool noComposite_;
+    /* For correct updating on mouseover with active tab overlapping */
+    QRect tabHoverRect_;
 };
 }
 

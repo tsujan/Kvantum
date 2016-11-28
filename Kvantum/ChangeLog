@@ -8,6 +8,8 @@ V0.10.3
  * Added support for blurring any hard-coded translucency (and not just Konsole) with kwin.
  * Added support for app specific themes (to Kvantum Manager).
  * Added a dark variant of KvArc (KvArcDark).
+ * Added a key for overlapping the active tab.
+ * Added a key to disable frame expansion for inactive tabs.
 
 V0.10.2
 ---------

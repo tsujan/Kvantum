@@ -1042,6 +1042,8 @@ void Style::polish(QWidget *widget)
   if (qobject_cast<QMdiArea*>(widget))
     widget->setAutoFillBackground(true);
   else if (qobject_cast<QProgressBar*>(widget)
+           || (tspec_.active_tab_overlap > 0
+               && qobject_cast<QTabBar*>(widget))  // see QEvent::HoverEnter
            || (tspec_.animate_states &&
                (qobject_cast<QPushButton*>(widget)
                 || (qobject_cast<QToolButton*>(widget)
@@ -1456,6 +1458,7 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
         || qobject_cast<QToolButton*>(widget)
+        || (tspec_.active_tab_overlap > 0 && qobject_cast<QTabBar*>(widget))
         || (tspec_.animate_states &&
             (qobject_cast<QPushButton*>(widget)
              || qobject_cast<QCheckBox*>(widget)
@@ -1599,13 +1602,83 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
+  case QEvent::HoverMove:
+    if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
+    { // see QEvent::HoverEnter below
+      QHoverEvent *he = static_cast<QHoverEvent*>(e);
+      int indx = tabbar->tabAt(he->pos());
+      if (indx > -1)
+      {
+        int diff = qAbs(indx - tabbar->currentIndex());
+        if (tabHoverRect_.isNull()
+            && diff == 1)
+        {
+          /* the cursor has moved to a tab adjacent to
+             the active tab without leaving the tabbar */
+          QRect r = tabbar->tabRect(indx);
+          const frame_spec fspec = getFrameSpec("Tab");
+          int overlap = tspec_.active_tab_overlap;
+          int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
+          overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
+          if (tabbar->shape() == QTabBar::RoundedWest
+              || tabbar->shape() == QTabBar::RoundedEast
+              || tabbar->shape() == QTabBar::TriangularWest
+              || tabbar->shape() == QTabBar::TriangularEast)
+          {
+            tabHoverRect_ = r.adjusted(0,-overlap,0,overlap);
+          }
+          else
+            tabHoverRect_ = r.adjusted(-overlap,0,overlap,0);
+          tabbar->update(tabHoverRect_);
+        }
+        else if (!tabHoverRect_.isNull()
+                 && (diff == 0 || diff == 2))
+        {
+          /* the cursor has left a tab adjacent to the active tab and moved to
+             the active or the next inactive tab without leaving the tabbar */
+          tabbar->update(tabHoverRect_);
+          tabHoverRect_ = QRect();
+        }
+      }
+    }
+    break;
+
   case QEvent::HoverEnter:
-    if (w && w->isEnabled() && tspec_.animate_states
-        && !w->isWindow() // WARNING: Translucent (Qt5) windows have enter event!
-        && !qobject_cast<QAbstractSpinBox*>(o) && !qobject_cast<QProgressBar*>(o)
-        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-        && !(tspec_.combo_as_lineedit
-             && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
+    if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
+    {
+      /* In qtabbar.cpp -> QTabBar::event(), Qt updates only the tab rect
+         when the cursor moves between the tab widget and the tab, which
+         results in an ugly hover effect with overlapping. So, we update
+         the extended tab rect when there's an overlapping. */
+      QHoverEvent *he = static_cast<QHoverEvent*>(e);
+      int indx = tabbar->tabAt(he->pos());
+      if (indx > -1 && qAbs(indx - tabbar->currentIndex()) == 1)
+      {
+        QRect r = tabbar->tabRect(indx);
+        const frame_spec fspec = getFrameSpec("Tab");
+        int overlap = tspec_.active_tab_overlap;
+        int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
+        overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
+        if (tabbar->shape() == QTabBar::RoundedWest
+            || tabbar->shape() == QTabBar::RoundedEast
+            || tabbar->shape() == QTabBar::TriangularWest
+            || tabbar->shape() == QTabBar::TriangularEast)
+        {
+          tabHoverRect_ = r.adjusted(0,-overlap,0,overlap);
+        }
+        else
+          tabHoverRect_ = r.adjusted(-overlap,0,overlap,0);
+        tabbar->update(tabHoverRect_);
+      }
+      else
+        tabHoverRect_ = QRect();
+    }
+    else if (w && w->isEnabled() && tspec_.animate_states
+             && !w->isWindow() // WARNING: Translucent (Qt5) windows have enter event!
+             && !qobject_cast<QAbstractSpinBox*>(o) && !qobject_cast<QProgressBar*>(o)
+             && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
+             && !(tspec_.combo_as_lineedit
+                  && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
       /* if another animation is in progress, end it */
       if (animatedWidget_ && animatedWidget_ != w
@@ -1778,13 +1851,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
-  // we use HoverLeave and not Leave because of popups of comboxes
   case QEvent::HoverLeave:
-    if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w
-        && !qobject_cast<QAbstractSpinBox*>(o)
-        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-        && !(tspec_.combo_as_lineedit
-             && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
+    if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
+    { // see QEvent::HoverEnter above
+      if (!tabHoverRect_.isNull())
+      {
+        tabbar->update(tabHoverRect_);
+        tabHoverRect_ = QRect();
+      }
+    }
+    // we use HoverLeave and not Leave because of popups of comboxes
+    else if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w
+             && !qobject_cast<QAbstractSpinBox*>(o)
+             && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
+             && !(tspec_.combo_as_lineedit
+                  && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
       if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
       {
@@ -5411,6 +5492,9 @@ void Style::drawControl(ControlElement element,
 
       if (opt)
       {
+        frame_spec fspec = getFrameSpec("Tab");
+        interior_spec ispec = getInteriorSpec("Tab");
+
         /* Let's forget about the pressed state. It's useless here and
            makes trouble in KDevelop. The disabled state is useless too. */
         QString status =
@@ -5419,11 +5503,11 @@ void Style::drawControl(ControlElement element,
                  (option->state & State_MouseOver) ?
                   (option->state & State_Enabled) ? "focused" : "normal"
                 : "normal";
+        int frameExpansion = fspec.expansion;
+        if (status != "toggled" && tspec_.no_inactive_tab_expansion)
+          fspec.expansion = 0;
         if (widget && !widget->isActiveWindow())
           status.append("-inactive");
-
-        frame_spec fspec = getFrameSpec("Tab");
-        interior_spec ispec = getInteriorSpec("Tab");
 
         QRect r = option->rect;
         bool verticalTabs = false;
@@ -5697,6 +5781,52 @@ void Style::drawControl(ControlElement element,
             }
           }
         }
+
+        /* handle overlapping */
+        int overlap = tspec_.active_tab_overlap;
+        if (qobject_cast<const QTabBar*>(widget) // not QML
+            && overlap > 0 && !joinedActiveTab
+            && !status.startsWith("toggled")
+            && opt->position != QStyleOptionTab::OnlyOneTab)
+        {
+          int exp = qMin(frameExpansion, qMin(r.width(), r.height())) / 2 + 1;
+          overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
+          if (rtl)
+          {
+            if (mirroredBottomTab)
+            {
+              if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                r.adjust(-overlap, 0, 0, 0);
+              else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                r.adjust(0, 0, overlap, 0);
+            }
+            else
+            {
+              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                r.adjust(-overlap, 0, 0, 0);
+              else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                r.adjust(0, 0, overlap, 0);
+            }
+          }
+          else
+          {
+            if (mirroredBottomTab)
+            {
+              if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                r.adjust(-overlap, 0, 0, 0);
+              else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                r.adjust(0, 0, overlap, 0);
+            }
+            else
+            {
+              if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
+                r.adjust(-overlap, 0, 0, 0);
+              else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
+                r.adjust(0, 0, overlap, 0);
+            }
+          }
+        }
+
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,fspec.hasCapsule);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,fspec.hasCapsule);
         if (drawSep)
