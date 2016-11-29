@@ -5828,15 +5828,12 @@ void Style::drawControl(ControlElement element,
           }
           else if (!widget) // with QML, we imitate an overlap
           {
-            int fe = fspec.expansion;
+            frame_spec fspec1 = fspec;
             if (tspec_.no_inactive_tab_expansion)
-              fspec.expansion = 0;
-            bool hc(fspec.hasCapsule);
-            fspec.hasCapsule = true;
-            int ch = fspec.capsuleH;
-            int cv = fspec.capsuleV;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = 0;
+              fspec1.expansion = 0;
+            fspec1.hasCapsule = true;
+            fspec1.capsuleV = 2;
+            fspec1.capsuleH = 0;
             QRect R = r;
             if (opt->position == QStyleOptionTab::Beginning)
             {
@@ -5852,12 +5849,8 @@ void Style::drawControl(ControlElement element,
               else
                 R.adjust(0,0,-r.width()/2,0);
             }
-            renderInterior(painter,R,fspec,ispec,ispec.element+"-normal",fspec.hasCapsule);
-            renderFrame(painter,R,fspec,fspec.element+"-normal",0,0,0,0,0,fspec.hasCapsule);
-            fspec.hasCapsule = hc;
-            fspec.capsuleV = cv;
-            fspec.capsuleH = ch;
-            fspec.expansion = fe;
+            renderInterior(painter,R,fspec1,ispec,ispec.element+"-normal",fspec1.hasCapsule);
+            renderFrame(painter,R,fspec1,fspec1.element+"-normal",0,0,0,0,0,fspec1.hasCapsule);
           }
         }
 

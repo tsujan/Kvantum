@@ -69,7 +69,7 @@ link.visited.color=#644A9B
 progress.indicator.text.color=white
 
 [Hacks]
-transparent_dolphin_view=true
+transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 blur_translucent=false
@@ -106,6 +106,17 @@ inherits=PanelButtonCommand
 
 [DockTitle]
 text.bold=true
+
+[GenericFrame]
+inherits=PanelButtonCommand
+frame=true
+interior=false
+frame.element=common
+interior.element=common
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 
 [LineEdit]
 inherits=PanelButtonCommand
@@ -171,6 +182,16 @@ frame.right=4
 text.normal.color=#000000d2
 text.bold=true
 
+[TabBarFrame]
+inherits=GenericFrame
+frame=true
+frame.element=tabBarFrame
+interior=false
+frame.top=0
+frame.bottom=1
+frame.left=0
+frame.right=0
+
 [SizeGrip]
 inherits=PanelButtonCommand
 frame=false
@@ -209,6 +230,15 @@ frame.element=progress-pattern
 
 [ItemView]
 inherits=PanelButtonCommand
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
+text.margin=true
+text.margin.top=1
+text.margin.bottom=1
+text.margin.left=1
+text.margin.right=1
 text.toggle.color=white
 text.press.color=white
 

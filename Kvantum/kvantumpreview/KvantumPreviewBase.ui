@@ -21,6 +21,9 @@
    <property name="currentIndex">
     <number>0</number>
    </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
      <string>Push buttons</string>
