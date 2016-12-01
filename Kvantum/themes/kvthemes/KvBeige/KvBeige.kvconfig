@@ -271,6 +271,15 @@ frame.right=2
 text.margin.left=4
 text.margin.right=4
 
+[MenuBar]
+inherits=PanelButtonCommand
+interior=false
+frame.top=0
+frame.bottom=0
+frame.left=2
+frame.right=2
+frame.element=none
+
 [TitleBar]
 inherits=PanelButtonCommand
 text.margin.top=2
