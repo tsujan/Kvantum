@@ -630,6 +630,7 @@ void KvantumManager::defaultThemeButtons()
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
     ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
+    ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
@@ -849,6 +850,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("scrollbar_in_view"))
                     ui->checkBoxScrollIn->setChecked (themeSettings.value ("scrollbar_in_view").toBool());
+                if (themeSettings.contains ("scrollable_menu"))
+                    ui->checkBoxScrollableMenu->setChecked (themeSettings.value ("scrollable_menu").toBool());
                 if (themeSettings.contains ("tree_branch_line"))
                     ui->checkBoxTree->setChecked (themeSettings.value ("tree_branch_line").toBool());
                 if (themeSettings.contains ("groupbox_top_label"))
@@ -1591,6 +1594,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
         generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
+        generalKeys.insert("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
         generalKeys.insert("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
@@ -1707,6 +1711,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
+        themeSettings.setValue ("scrollable_menu", ui->checkBoxScrollableMenu->isChecked());
         themeSettings.setValue ("tree_branch_line", ui->checkBoxTree->isChecked());
         themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());

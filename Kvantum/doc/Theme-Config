@@ -346,6 +346,11 @@ composite                         true/false          Use compositing to have
                                                       if no compositing is available.
                                                       Its absence also means false.
 
+scrollable_menu                   true/false          Should (big) menus be scrollable and
+                                                      have scroll arrows on their top and/or
+                                                      bottom? False by default, which means
+                                                      all menu-items are shown.
+
 submenu_overlap                   integer             The horizontal overlap between a
                                                       submenu and its parent. The default
                                                       is -1, which means automatic. It

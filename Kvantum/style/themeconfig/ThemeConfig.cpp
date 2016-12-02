@@ -595,6 +595,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","combo_menu");
   r.combo_menu = v.toBool();
 
+  v = getValue("General","scrollable_menu");
+  r.scrollable_menu = v.toBool();
+
   v = getValue("General","fill_rubberband");
   r.fill_rubberband = v.toBool();
 

@@ -1238,20 +1238,311 @@ some apps set it themeselves.</string>
                <string>Miscellaneous</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_11">
-               <item row="0" column="1">
-                <widget class="QCheckBox" name="checkBoxDE">
+               <item row="9" column="0">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>10</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="1">
+                <widget class="QCheckBox" name="checkBoxAttachTab">
                  <property name="toolTip">
-                  <string>When this is enabled and checked, Kvantum will try to
-respect some settings of the current desktop environment.
-
-This checkbox may disable some options.
-Uncheck it if you want to use those options!</string>
+                  <string>Active tab is detached by default.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed), disables compositing to use DE menu shadows, and sets x11-drag only for menubars and primary toolbars (although GTK does not have such a feature).&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Respect current DE if possible</string>
+                  <string>Attach active tab to tab widget</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="2">
+                <spacer name="horizontalSpacer_9">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="9" column="5">
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="10" column="1">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                 <property name="toolTip">
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>No arrows for scrollbars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollIn">
+                 <property name="toolTip">
+                  <string>Draw scrollbars inside view frames?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollbars inside frames</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxTree">
+                 <property name="toolTip">
+                  <string>Draw tree branch lines?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw tree branch lines?&lt;/p&gt;&lt;p&gt;By default, tree branches have indicators but no line.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Tree branch lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxGroupLabel">
+                 <property name="toolTip">
+                  <string>By default, the label is on the frame.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the label is on the frame and the frame is cut to contain it.&lt;/p&gt;&lt;p&gt;Checking this puts the label right above the frame, so that the frame isn't cut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Group-box label above frame</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxRubber">
+                 <property name="toolTip">
+                  <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow. This
+option fills them with the highlight color.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, drop rectangles for movable toolbars and dock widgets are hollow.&lt;/p&gt;&lt;p&gt;This option fills drop rectangles with the highlight color.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Fill rubber-band rectangles</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxMenubar">
+                 <property name="toolTip">
+                  <string>Mouse tracking is enabled
+for menubars by default.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse tracking for menubars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxMenuToolbar">
+                 <property name="toolTip">
+                  <string>If checked, the menubar and toolbar will be drawn as a whole by
+the toolbar SVG element when they are adjacent to one another.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, the menubar and toolbar will be drawn as a whole by the toolbar SVG element when they are adjacent to one another.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Merge menubar with toolbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxButtonShift">
+                 <property name="toolTip">
+                  <string>Shift the contents of push buttons when pressed?
+By default, the contents are shifted by 1px.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift the contents of push buttons when pressed?&lt;/p&gt;&lt;p&gt;By default, the contents are shifted by 1px both horizontally and vertically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Shift push-button contents</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="3">
+                <widget class="QLabel" name="labelX11Drag">
+                 <property name="toolTip">
+                  <string>Drag windows from anywhere possible?
+(Depends on X11)
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>X11 drag:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="4">
+                <widget class="QComboBox" name="comboX11Drag">
+                 <property name="toolTip">
+                  <string>Drag windows from anywhere possible?
+(Depends on X11)
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="3">
+                <widget class="QLabel" name="label_2">
+                 <property name="toolTip">
+                  <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Toolbutton style:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="4">
+                <widget class="QComboBox" name="comboToolButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip">
+                  <string>Will have effect only if style
+is not set by the app itself.
+Default is Follow Style.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="3">
+                <widget class="QLabel" name="labelTooltipDelay">
+                 <property name="toolTip">
+                  <string>The delay, in milliseconds, before a tooltip is shown.
+
+Zero means tooltips are shown instantly.
+-1 means the default Qt behavior.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Tooltip delay:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="4" alignment="Qt::AlignLeft">
+                <widget class="QSpinBox" name="spinTooltipDelay">
+                 <property name="toolTip">
+                  <string>The delay, in milliseconds, before a tooltip is shown.
+
+Zero means tooltips are shown instantly.
+-1 means the default Qt behavior.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="suffix">
+                  <string> ms</string>
+                 </property>
+                 <property name="minimum">
+                  <number>-1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>9999</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxAlt">
+                 <property name="toolTip">
+                  <string>If unchecked, shortcuts will not be underlined at all.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, shortcuts will not be underlined at all.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Underline shortcuts with Alt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="checkBoxInlineSpin">
+                 <property name="toolTip">
+                  <string>By default, spin indicators are drawn like buttons.
+Checking this puts them inside the spin line-edit.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the spin indicators are drawn as two buttons with arrows or plus/minus signs.&lt;/p&gt;&lt;p&gt;Checking this integrates the spin indicators into the spin line-edit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Inline spin indicators</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QCheckBox" name="checkBoxComboEdit">
+                 <property name="toolTip">
+                  <string>Draw the whole editable combo-box as a
+line-edit with arrow (and icon, if it exists)?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Editable combo as line-edit</string>
                  </property>
                 </widget>
                </item>
@@ -1272,20 +1563,6 @@ Miscellaneous → Respect current DE if possible</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="checkBoxInlineSpin">
-                 <property name="toolTip">
-                  <string>By default, spin indicators are drawn like buttons.
-Checking this puts them inside the spin line-edit.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the spin indicators are drawn as two buttons with arrows or plus/minus signs.&lt;/p&gt;&lt;p&gt;Checking this integrates the spin indicators into the spin line-edit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Inline spin indicators</string>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="1">
                 <widget class="QCheckBox" name="checkBoxVSpin">
                  <property name="toolTip">
@@ -1301,17 +1578,20 @@ spin-down one inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="checkBoxComboEdit">
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBoxDE">
                  <property name="toolTip">
-                  <string>Draw the whole editable combo-box as a
-line-edit with arrow (and icon, if it exists)?</string>
+                  <string>When this is enabled and checked, Kvantum will try to
+respect some settings of the current desktop environment.
+
+This checkbox may disable some options.
+Uncheck it if you want to use those options!</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed), disables compositing to use DE menu shadows, and sets x11-drag only for menubars and primary toolbars (although GTK does not have such a feature).&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Editable combo as line-edit</string>
+                  <string>Respect current DE if possible</string>
                  </property>
                 </widget>
                </item>
@@ -1354,283 +1634,17 @@ line-edit with arrow (and icon, if it exists)?</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>10</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxAttachTab">
-                 <property name="toolTip">
-                  <string>Active tab is detached by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Attach active tab to tab widget</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="2">
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="8" column="5">
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>5</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
-                 <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>No arrows for scrollbars</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="1">
-                <widget class="QCheckBox" name="checkBoxScrollIn">
-                 <property name="toolTip">
-                  <string>Draw scrollbars inside view frames?</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Scrollbars inside frames</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTree">
+                <widget class="QCheckBox" name="checkBoxScrollableMenu">
                  <property name="toolTip">
-                  <string>Draw tree branch lines?</string>
+                  <string>Should big menus be scrollable?
+By default, all of their menu-items are shown.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw tree branch lines?&lt;/p&gt;&lt;p&gt;By default, tree branches have indicators but no line.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Should big menus be scrollable and have scroll arrows on their top and/or bottom?&lt;/p&gt;&lt;p&gt;By default, all of their menu-items are shown.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Tree branch lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGroupLabel">
-                 <property name="toolTip">
-                  <string>By default, the label is on the frame.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the label is on the frame and the frame is cut to contain it.&lt;/p&gt;&lt;p&gt;Checking this puts the label right above the frame, so that the frame isn't cut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Group-box label above frame</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxRubber">
-                 <property name="toolTip">
-                  <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow. This
-option fills them with the highlight color.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, drop rectangles for movable toolbars and dock widgets are hollow.&lt;/p&gt;&lt;p&gt;This option fills drop rectangles with the highlight color.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Fill rubber-band rectangles</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenubar">
-                 <property name="toolTip">
-                  <string>Mouse tracking is enabled
-for menubars by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse tracking for menubars</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenuToolbar">
-                 <property name="toolTip">
-                  <string>If checked, the menubar and toolbar will be drawn as a whole by
-the toolbar SVG element when they are adjacent to one another.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, the menubar and toolbar will be drawn as a whole by the toolbar SVG element when they are adjacent to one another.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Merge menubar with toolbar</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxButtonShift">
-                 <property name="toolTip">
-                  <string>Shift the contents of push buttons when pressed?
-By default, the contents are shifted by 1px.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift the contents of push buttons when pressed?&lt;/p&gt;&lt;p&gt;By default, the contents are shifted by 1px both horizontally and vertically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Shift push-button contents</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="3">
-                <widget class="QLabel" name="labelX11Drag">
-                 <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
-(Depends on X11)
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>X11 drag:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="4">
-                <widget class="QComboBox" name="comboX11Drag">
-                 <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
-(Depends on X11)
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="3">
-                <widget class="QLabel" name="label_2">
-                 <property name="toolTip">
-                  <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Toolbutton style:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="4">
-                <widget class="QComboBox" name="comboToolButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="toolTip">
-                  <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="3">
-                <widget class="QLabel" name="labelTooltipDelay">
-                 <property name="toolTip">
-                  <string>The delay, in milliseconds, before a tooltip is shown.
-
-Zero means tooltips are shown instantly.
--1 means the default Qt behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Tooltip delay:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="4" alignment="Qt::AlignLeft">
-                <widget class="QSpinBox" name="spinTooltipDelay">
-                 <property name="toolTip">
-                  <string>The delay, in milliseconds, before a tooltip is shown.
-
-Zero means tooltips are shown instantly.
--1 means the default Qt behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> ms</string>
-                 </property>
-                 <property name="minimum">
-                  <number>-1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>9999</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxAlt">
-                 <property name="toolTip">
-                  <string>If unchecked, shortcuts will not be underlined at all.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, shortcuts will not be underlined at all.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Underline shortcuts with Alt</string>
+                  <string>Scrollable menus</string>
                  </property>
                 </widget>
                </item>

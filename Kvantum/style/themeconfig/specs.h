@@ -137,6 +137,8 @@ typedef struct {
   bool combo_as_lineedit;
   /* use popup menu for combo popup */
   bool combo_menu;
+  /* should popup menus support scrolling? */
+  bool scrollable_menu;
   /* fill rubber band rectangle with highlight color? */
   bool fill_rubberband;
   /* put the groupbox label above the frame?
@@ -405,6 +407,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.spin_button_width = 16;
   tspec.combo_as_lineedit = false;
   tspec.combo_menu = false;
+  tspec.scrollable_menu = false;
   tspec.fill_rubberband = false;
   tspec.groupbox_top_label = false;
   tspec.button_contents_shift = true;

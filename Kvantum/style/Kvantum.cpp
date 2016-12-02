@@ -10055,7 +10055,7 @@ int Style::styleHint(StyleHint hint,
 
     case SH_ToolButton_PopupDelay :
     case SH_Menu_SubMenuPopupDelay : return 250;
-    case SH_Menu_Scrollable : return false; // let's see the whole menu
+    case SH_Menu_Scrollable : return tspec_.scrollable_menu;
     case SH_Menu_SloppySubMenus : return true;
 #if QT_VERSION >= 0x050500
     case SH_Menu_SubMenuSloppyCloseTimeout : return 1000;
