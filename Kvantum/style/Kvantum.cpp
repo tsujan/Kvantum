@@ -2096,6 +2096,12 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
     const QToolButton *left = qobject_cast<const QToolButton*>(toolBar->childAt (g.x()-1, g.y()));
     const QToolButton *right =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x()+g.width()+1, g.y()));
 
+    /* only immediate children should be considered */
+    if (left && left->parentWidget() != toolBar)
+      left = NULL;
+    if (right && right->parentWidget() != toolBar)
+      right = NULL;
+
     if (left && g.height() == left->height())
     {
       if (right && g.height() == right->height())
