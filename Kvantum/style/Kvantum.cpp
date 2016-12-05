@@ -797,6 +797,27 @@ bool Style::isStylableToolbar(const QWidget *w) const
   return false;
 }
 
+QWidget* Style::getStylableToolbar(const QWidget *w) const
+{
+  if (w == NULL) return NULL;
+  QWidget *wi = w->parentWidget();
+  if (wi == NULL || wi->autoFillBackground())
+    return NULL;
+  else if (isStylableToolbar(wi))
+    return wi;
+  /* pcmanfm-qt has toolbar buttons with a depth
+     of 5 and a deeper child doesn't make sense */
+  for (int i = 1; i < 5; ++i)
+  {
+    wi = wi->parentWidget();
+    if (wi == NULL || wi->autoFillBackground())
+      return NULL;
+    if (isStylableToolbar(wi))
+      return wi;
+  }
+  return NULL;
+}
+
 void Style::polish(QWidget *widget)
 {
   if (!widget) return;
@@ -2675,12 +2696,16 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_PanelButtonTool : {
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
-      QWidget *gp = getParent(p,1);
-      if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
-          && (!getFrameSpec("ToolbarButton").element.isEmpty()
-              || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+      QWidget *stb = getStylableToolbar(widget);
+      bool autoraise(option->state & State_AutoRaise);
+      if (stb)
       {
-        group = "ToolbarButton";
+        autoraise = true; // we make all toolbuttons auto-raised inside toolbars
+        if (!getFrameSpec("ToolbarButton").element.isEmpty()
+            || !getInteriorSpec("ToolbarButton").element.isEmpty())
+        {
+          group = "ToolbarButton";
+        }
       }
 
       frame_spec fspec = getFrameSpec(group);
@@ -2743,7 +2768,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       // -> CE_ToolButtonLabel
-      if (qobject_cast<QAbstractItemView*>(gp))
+      if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -2918,14 +2943,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         bool animate(widget->isEnabled() && animatedWidget_ == widget);
-        if (!tb->autoRaise() || !pbStatus.startsWith("normal") || drawRaised)
+        if (tb->autoRaise())
+          autoraise = true;
+        if (!autoraise || !pbStatus.startsWith("normal") || drawRaised)
         {
           if (animate)
           {
             if (animationStartState_ == pbStatus)
               animationOpacity_ = 100;
             else if (animationOpacity_ < 100
-                     && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+                     && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
             {
               renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_,0,0,0,0,0,drawRaised);
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_,drawRaised);
@@ -2963,7 +2990,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         /*if (!isHorizontal && !withArrow)
           painter->restore();*/
       }
-      else if (!(option->state & State_AutoRaise) || !status.startsWith("normal"))
+      else if (!autoraise || !status.startsWith("normal"))
       {
         bool libreoffice = false;
         if (isLibreoffice_ && (option->state & State_Enabled) && !status.startsWith("toggled")
@@ -4091,14 +4118,20 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString group = "DropDownButton";
 
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
+      QWidget *stb = NULL;
+      bool autoraise = false;
       if (tb)
       {
-        QWidget *p = getParent(widget,1);
-        if (p && (isStylableToolbar(p) || isStylableToolbar(getParent(p,1)))
-            && (!getFrameSpec("ToolbarButton").element.isEmpty()
-                || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+        autoraise = tb->autoRaise();
+        stb = getStylableToolbar(widget);
+        if (stb)
         {
-          group = "ToolbarButton";
+          autoraise = true;
+          if (!getFrameSpec("ToolbarButton").element.isEmpty()
+              || !getInteriorSpec("ToolbarButton").element.isEmpty())
+          {
+            group = "ToolbarButton";
+          }
         }
       }
 
@@ -4271,14 +4304,14 @@ void Style::drawPrimitive(PrimitiveElement element,
             }
           }
           bool animate(widget->isEnabled() && animatedWidget_ == widget);
-          if (!tb->autoRaise() || !status.startsWith("normal") || drawRaised)
+          if (!autoraise || !status.startsWith("normal") || drawRaised)
           {
             if (animate)
             {
               if (animationStartState_ == status)
                 animationOpacity_ = 100;
               else if (animationOpacity_ < 100
-                       && (!tb->autoRaise() || !animationStartState_.startsWith("normal") || drawRaised))
+                       && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
               {
                 renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
@@ -4322,7 +4355,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         /* use the "flat" indicator with flat buttons if it exists */
-        if (status.startsWith("normal") && tb->autoRaise()
+        if (status.startsWith("normal") && autoraise
             && themeRndr_ && themeRndr_->isValid())
         {
           QString group1 = "PanelButtonTool";
@@ -4349,12 +4382,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                 dspec.element = "flat-"+dspec1.element+"-down";
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
-                      && !p->findChild<QTabBar*>())
-                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
-                         && !gp->findChild<QTabBar*>()))
+            else if (stb && !stb->findChild<QTabBar*>())
             {
-              if ((!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
+              if ((!tspec_.group_toolbar_buttons
+                   || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
                   && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
               {
                 dspec.element = "flat-"+dspec1.element+"-down";
@@ -7493,16 +7524,27 @@ void Style::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionToolButton*>(option);
 
       if (opt) {
+        const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
         QString txt = opt->text;
         QString status = getState(option,widget);
         QString group = "PanelButtonTool";
         QWidget *p = getParent(widget,1);
         QWidget *gp = getParent(p,1);
-        if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
-            && (!getFrameSpec("ToolbarButton").element.isEmpty()
-                || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+        QWidget *stb = NULL;
+        bool autoraise = false;
+        if (tb)
         {
-          group = "ToolbarButton";
+          autoraise = tb->autoRaise();
+          stb = getStylableToolbar(widget);
+          if (stb)
+          {
+            autoraise = true;
+            if (!getFrameSpec("ToolbarButton").element.isEmpty()
+                || !getInteriorSpec("ToolbarButton").element.isEmpty())
+            {
+              group = "ToolbarButton";
+            }
+          }
         }
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
@@ -7540,7 +7582,6 @@ void Style::drawControl(ControlElement element,
         }
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
-        const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
 
         if (status.startsWith("focused"))
         {
@@ -7586,7 +7627,7 @@ void Style::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          if (tb->autoRaise() /*|| inPlasma*/ || !paneledButtons.contains(widget))
+          if (autoraise /*|| inPlasma*/ || !paneledButtons.contains(widget))
           {
             bool isNormal(status.startsWith("normal"));
             QColor ncol = getFromRGBA(lspec.normalColor);
@@ -7614,15 +7655,12 @@ void Style::drawControl(ControlElement element,
                 lspec.normalColor = lspec1.normalColor;
               }
             }
-            else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
-                      && !p->findChild<QTabBar*>())
-                     || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
-                         && !gp->findChild<QTabBar*>()))
+            else if (stb && !stb->findChild<QTabBar*>())
             {
               if (isNormal)
               {
-                const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
-                if (!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
+                if (!tspec_.group_toolbar_buttons
+                    || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
                 {
                   const label_spec lspec1 = getLabelSpec("Toolbar");
                   if (themeRndr_ && themeRndr_->isValid()
@@ -7638,7 +7676,7 @@ void Style::drawControl(ControlElement element,
             else if (p)
             {
               QColor col;
-              if (!tb->autoRaise() && !paneledButtons.contains(widget)) // an already styled toolbutton
+              if (!autoraise && !paneledButtons.contains(widget)) // an already styled toolbutton
                 col = opt->palette.color(QPalette::ButtonText);
               else
                 col = p->palette().color(p->foregroundRole());
@@ -8126,11 +8164,16 @@ void Style::drawComplexControl(ComplexControl control,
             QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
             QString group1 = group;
-            if (p && (isStylableToolbar(p) || isStylableToolbar(gp))
-                && (!getFrameSpec("ToolbarButton").element.isEmpty()
-                    || !getInteriorSpec("ToolbarButton").element.isEmpty()))
+            QWidget *stb = getStylableToolbar(widget);
+            bool autoraise(tb->autoRaise());
+            if (stb)
             {
-              group1 = "ToolbarButton";
+              autoraise = true;
+              if (!getFrameSpec("ToolbarButton").element.isEmpty()
+                  || !getInteriorSpec("ToolbarButton").element.isEmpty())
+              {
+                group1 = "ToolbarButton";
+              }
             }
             indicator_spec dspec = getIndicatorSpec(group1);
             const label_spec lspec = getLabelSpec(group1);
@@ -8146,7 +8189,7 @@ void Style::drawComplexControl(ComplexControl control,
 
             /* use the "flat" indicator with flat buttons if it exists */
             if (aStatus == "normal"
-                && tb->autoRaise()
+                && autoraise
                 && themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
             {
@@ -8166,10 +8209,7 @@ void Style::drawComplexControl(ComplexControl control,
                 if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
-              else if ((qobject_cast<QMainWindow*>(gp) && isStylableToolbar(p)
-                        && !p->findChild<QTabBar*>())
-                       || (qobject_cast<QMainWindow*>(getParent(gp,1)) && isStylableToolbar(gp)
-                           && !gp->findChild<QTabBar*>()))
+              else if (stb && !stb->findChild<QTabBar*>())
               {
                 const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
                 if ((!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))

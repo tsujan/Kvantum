@@ -269,6 +269,8 @@ class Style : public QCommonStyle {
     int mergedToolbarHeight(const QWidget *menubar) const;
     /* Is this a toolbar that should be styled? */
     bool isStylableToolbar(const QWidget *w) const;
+    /* Get the stylable toolbar, of which this toolbutton is a child. */
+    QWidget* getStylableToolbar(const QWidget *w) const;
 
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;

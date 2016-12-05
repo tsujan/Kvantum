@@ -11,6 +11,7 @@ V0.10.3
  * Added a key for overlapping the active tab.
  * Added a key to disable frame expansion for inactive tabs.
  * Added a key for scrollable menus (to Kvantum Manager).
+ * Draw all toolbuttons auto-raised inside toolbars.
 
 V0.10.2
 ---------
