@@ -11,7 +11,7 @@ tooltip_shadow_depth=6
 slider_handle_width=16
 slider_handle_length=12
 center_toolbar_handle=true
-x11drag=true
+x11drag=all
 menubar_mouse_tracking=true
 toolbutton_style=0
 double_click=false
@@ -43,7 +43,7 @@ link.color=#0057AE
 link.visited.color=#644A9B
 
 [Hacks]
-transparent_dolphin_view=true
+transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 blur_translucent=false
@@ -69,6 +69,17 @@ inherits=PanelButtonCommand
 [DockTitle]
 text.bold=true
 
+[GenericFrame]
+inherits=PanelButtonCommand
+frame=true
+interior=false
+frame.element=common
+interior.element=common
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
+
 [LineEdit]
 inherits=PanelButtonCommand
 frame.element=lineedit
@@ -76,6 +87,8 @@ interior.element=lineedit
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
+frame.element=button
+interior.element=button
 frame.top=2
 frame.bottom=2
 frame.left=2
@@ -90,6 +103,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+text.press.color=#000000d2
 
 [Tab]
 inherits=PanelButtonCommand
@@ -102,6 +116,7 @@ frame.bottom=3
 frame.left=5
 frame.right=5
 text.press.color=black
+indicator.size=6
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -118,7 +133,8 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.press.color=black
+text.normal.color=#000000d2
+text.bold=true
 
 [SizeGrip]
 inherits=PanelButtonCommand
@@ -187,6 +203,15 @@ frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
+
+[MenuBar]
+inherits=PanelButtonCommand
+interior=false
+frame.top=0
+frame.bottom=0
+frame.left=2
+frame.right=2
+frame.element=none
 
 [TitleBar]
 inherits=PanelButtonCommand

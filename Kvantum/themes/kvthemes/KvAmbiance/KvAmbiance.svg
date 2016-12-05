@@ -316,7 +316,7 @@
 <ellipse cx="243" cy="608.00006" rx="7.5000072" ry="7.5000076" style="fill:url(#linearGradient5105);stroke:#8c8c8c;color:#000" id="radio-normal"/>
 <g style="stroke:none;fill-rule:evenodd">
 <rect width="15" x="330" y="780.00006" height="15" style="fill:#dc6434" id="tab-tear"/>
-<rect width="45" x="20" y="815.00006" rx="22.5" ry="22.5" height="45" style="fill-opacity:.039" id="dial"/>
+<rect width="45" x="20" y="815.00006" rx="22.5" ry="22.5" height="45" style="fill-opacity:.078" id="dial"/>
 <g style="fill:#fff" id="dial-notches" transform="translate(-102.875,148.00006)">
 <rect width="45" x="202.5" y="667.5" height="45" style="opacity:0" id="rect6567"/>
 <g style="fill:#5a5a5a" id="g183">
@@ -820,7 +820,7 @@
 <path style="fill:url(#linearGradient5005)" id="tbutton-normal" d="m 218.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
 <rect width="5" x="10" y="0" height="5" style="stroke-linejoin:round;stroke-linecap:round;stroke-width:3" id="expand-tbutton-normal"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-down-normal" transform="translate(188,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-down-normal" transform="translate(188,-16)"/>
 <g style="stroke:none" id="common-focused-left" transform="matrix(1.3333333,0,0,1,-233,-301.99994)">
 <rect width="3" x="270" y="1170" height="30" style="fill:#f07746" id="rect5273"/>
 <path style="fill:#fff" id="path5275" d="m 271.5,1170 0,30 1.5,0 0,-30 z "/>
@@ -1505,4 +1505,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-pressed-topright" transform="matrix(-1,0,0,1,706.5,-1.09e-4)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-bottomleft" id="lineedit-pressed-bottomright" transform="matrix(-1,0,0,1,706.5,-1.09e-4)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-pressed" id="menuitem-toggled" transform="translate(20,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-right-normal" transform="matrix(0,-1,1,0,-61.30701,335.30701)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-left-normal" transform="matrix(0,1,-1,0,505.30701,297.30701)"/>
 </svg>

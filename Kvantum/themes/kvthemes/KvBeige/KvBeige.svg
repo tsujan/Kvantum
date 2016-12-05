@@ -478,10 +478,7 @@
 </text>
 <rect width="16" x="252" y="-1246.75" height="16" style="fill:url(#linearGradient5576)" id="common-normal" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9" transform="scale(1,-1)"/>
 </g>
-<g id="g533">
-<path style="opacity:0" id="toolbar-normal-top" d="m 250,135 0,5 30,0 0,-5 z"/>
 <path style="opacity:0" id="toolbar-normal-bottom" d="m 250,170 0,5 30,0 0,-5 z"/>
-</g>
 <rect width="30" x="25" y="955" height="30" style="opacity:.5;fill:url(#linearGradient7407)" id="dock-normal"/>
 <rect width="32.5" x="297.5" y="240.49957" height="32.5" style="fill:url(#linearGradient6033)" id="progress-normal"/>
 </g>
@@ -1070,10 +1067,7 @@
 <path style="stroke-opacity:.494;fill:url(#linearGradient5705);stroke:#000;stroke-width:.387" id="slidercursor-disabled" d="m 362.0534,646.2382 c -2.5082,-2.22011 -2.45144,-8.1771 0,-10.4413 2.51242,-2.32049 13.7535,2.61634 13.7535,5.22063 0,2.60429 -11.2411,7.44448 -13.7535,5.22064 z "/>
 <path style="fill:#5a5a5a;stroke:none" id="button-default-indicator" d="m 442.3445,47.3558 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
 <rect width="30" x="250" y="140" height="30" style="fill:url(#linearGradient5595);stroke:none" id="toolbar-normal"/>
-<g style="stroke:none">
-<path style="opacity:0" id="toolbar-normal-topright" d="m 285,135 -5,0 0,5 5,0 z"/>
-<path style="opacity:0" id="toolbar-normal-bottomright" d="m 285,170 -5,0 0,5 5,0 z"/>
-</g>
+<path style="opacity:0;stroke:none" id="toolbar-normal-bottomright" d="m 285,170 -5,0 0,5 5,0 z"/>
 <path style="fill:url(#linearGradient5385);fill-rule:evenodd;stroke:none" id="scrollbarslider-focused-topright" d="m 64,1134.7502 0,12 12,0 c 0,-6.648 -5.352,-12 -12,-12 z "/>
 <path style="fill:url(#linearGradient5382);fill-rule:evenodd;stroke:none" id="scrollbarslider-focused-topleft" d="m 64,1134.7501 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
 <path style="fill:url(#linearGradient4759);fill-rule:evenodd;stroke:none" id="scrollbarslider-focused-left" d="m 52,1146.7501 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>

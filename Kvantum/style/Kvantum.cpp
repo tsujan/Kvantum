@@ -2096,7 +2096,7 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
     const QToolButton *left = qobject_cast<const QToolButton*>(toolBar->childAt (g.x()-1, g.y()));
     const QToolButton *right =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x()+g.width()+1, g.y()));
 
-    /* only immediate children should be considered */
+    /* only direct children should be considered */
     if (left && left->parentWidget() != toolBar)
       left = NULL;
     if (right && right->parentWidget() != toolBar)
@@ -2756,15 +2756,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
         lspec.tispace = qMin(lspec.tispace,2);
-      }
-
-      // -> CE_ToolButtonLabel
-      if (opt && opt->toolButtonStyle == Qt::ToolButtonTextOnly)
-      {
-        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-        fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
-        lspec.left = lspec.right = qMin(lspec.left,lspec.right);
-        lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
       }
 
       QRect r = option->rect;
@@ -7722,12 +7713,28 @@ void Style::drawControl(ControlElement element,
                 }
               }
               else if (tialign == Qt::ToolButtonTextOnly)
-              { // again, elide the text if it doesn't fit in
-                int availableWidth = opt->rect.width() - fspec.left - fspec.right - lspec.left - lspec.right;
-                if (txtSize.width() > availableWidth)
+              {
+                QSize availableSize = opt->rect.size()
+                                      - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                              fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+                if (txtSize.height() > availableSize.height())
                 {
-                  QFontMetrics fm(painter->font());
-                  txt = fm.elidedText(txt, Qt::ElideRight, availableWidth);
+                  lspec.top = lspec.bottom = 0;
+                  fspec.top = fspec.bottom = 0;
+                }
+                if (txtSize.width() > availableSize.width())
+                {
+                  if (txtSize.width() <= availableSize.width() + fspec.left + fspec.right
+                                                               + lspec.left + lspec.right)
+                  {
+                    lspec.left = lspec.right = 0;
+                    fspec.left = fspec.right = 0;
+                  }
+                  else // again, elide the text if it doesn't fit in
+                  {
+                    QFontMetrics fm(painter->font());
+                    txt = fm.elidedText(txt, Qt::ElideRight, availableSize.width());
+                  }
                 }
               }
             }
@@ -7789,20 +7796,6 @@ void Style::drawControl(ControlElement element,
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
            button and not just its label here (-> CT_ToolButton)... */
         QRect r = option->rect;
-        /* ... but this doesn't do any harm (and is good for
-           centering text in framless buttons like in QtCreator's
-           replace widget) because the text is centered. */
-        if (tialign == Qt::ToolButtonTextOnly)
-        {
-          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-          fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
-          lspec.left = lspec.right = qMin(lspec.left,lspec.right);
-          lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
-          r.adjust(-fspec.left-lspec.left,
-                   -fspec.top-lspec.top,
-                   fspec.right+lspec.right,
-                   fspec.bottom+lspec.bottom);
-        }
 
         int talign = Qt::AlignCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -10623,15 +10616,6 @@ QSize Style::sizeFromContents(ContentsType type,
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
 
-        // -> CE_ToolButtonLabel
-        if (tialign == Qt::ToolButtonTextOnly)
-        {
-          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-          fspec.top = fspec.bottom = qMin(fspec.top,fspec.bottom);
-          lspec.left = lspec.right = qMin(lspec.left,lspec.right);
-          lspec.top = lspec.bottom = qMin(lspec.top,lspec.bottom);
-        }
-
         /*
            Don't use sizeCalculated() for calculating the size
            because the button may be vertical, like in digiKam.
@@ -12125,16 +12109,14 @@ QRect Style::subControlRect(ComplexControl control,
                 return option->rect.adjusted(rtl ?
                                                lspec.tispace+dspec.size
                                                  // -> CE_ToolButtonLabel
-                                                 + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                                                    qMin(fspec.left,fspec.right) : fspec.left)
+                                                 + fspec.left
                                                  + pixelMetric(PM_HeaderMargin)
                                                : 0,
                                              0,
                                              rtl ?
                                                0
                                                : - lspec.tispace-dspec.size
-                                                   - (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                                                      qMin(fspec.left,fspec.right) : fspec.right)
+                                                   - fspec.right
                                                    - pixelMetric(PM_HeaderMargin),
                                              0);
               }
@@ -12207,8 +12189,7 @@ QRect Style::subControlRect(ComplexControl control,
                 }
                 int l = dspec.size
                         // -> CE_ToolButtonLabel
-                        + (opt->toolButtonStyle == Qt::ToolButtonTextOnly ?
-                           qMin(fspec.left,fspec.right) : rtl ? fspec.left : fspec.right)
+                        + (rtl ? fspec.left : fspec.right)
                         + pixelMetric(PM_HeaderMargin);
                 return QRect(rtl ? x : x+w-l,
                              y,l,h);
