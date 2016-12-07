@@ -12,6 +12,7 @@ V0.10.3
  * Added a key to disable frame expansion for inactive tabs.
  * Added a key for scrollable menus (to Kvantum Manager).
  * Draw all toolbuttons auto-raised inside toolbars.
+ * Add hover effect only selectively.
 
 V0.10.2
 ---------

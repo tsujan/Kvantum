@@ -828,8 +828,37 @@ void Style::polish(QWidget *widget)
 
   QWidget *pw = widget->parentWidget();
 
-  if (!pw || !pw->inherits("QWebEngineView")) // FIXME: a bug in QtWebEngine?
+  /*if (!pw || !pw->inherits("QWebEngineView")) // FIXME: a bug in QtWebEngine?
+    widget->setAttribute(Qt::WA_Hover, true);*/
+  /*
+     It's better to add the hover effect selectively and only to
+     the following widgets (some of which are dealt with later):
+     
+       QAbstractButton (all kinds of buttons)
+       QAbstractSlider
+       Direct children of QAbstractItemView (view items)
+       QSplitterHandle
+       QHeaderView
+       QSizeGrip
+       QDockWidget
+       QComboBox
+       QTabBar
+       QAbstractSpinBox
+       QScrollBar
+     
+     We don't add the hover efffect to QLineEdit, QAbstractScrollArea
+     and non-checkable QGroupBox.
+  */
+  if (qobject_cast<QAbstractButton*>(widget)
+      || qobject_cast<QAbstractSlider*>(widget)
+      || qobject_cast<QAbstractItemView*>(getParent(widget,1))
+      || widget->inherits("QSplitterHandle")
+      || widget->inherits("QHeaderView")
+      || widget->inherits("QSizeGrip"))
+  {
     widget->setAttribute(Qt::WA_Hover, true);
+  }
+
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
   /* So far I haven't found any use for this: */
@@ -1062,33 +1091,8 @@ void Style::polish(QWidget *widget)
 
   if (qobject_cast<QMdiArea*>(widget))
     widget->setAutoFillBackground(true);
-  else if (qobject_cast<QProgressBar*>(widget)
-           || (tspec_.active_tab_overlap > 0
-               && qobject_cast<QTabBar*>(widget))  // see QEvent::HoverEnter
-           || (tspec_.animate_states &&
-               (qobject_cast<QPushButton*>(widget)
-                || (qobject_cast<QToolButton*>(widget)
-                    && !qobject_cast<QLineEdit*>(pw)) // exclude line-edit clear buttons
-                || qobject_cast<QCheckBox*>(widget)
-                || qobject_cast<QRadioButton*>(widget)
-                || qobject_cast<QSlider*>(widget)
-                || qobject_cast<QLineEdit*>(widget)
-                || widget->inherits("QComboBoxPrivateContainer")
-                || (qobject_cast<QGroupBox*>(widget) && qobject_cast<QGroupBox*>(widget)->isCheckable())
-                || qobject_cast<QComboBox*>(widget)))
-            /* unfortunately, KisSliderSpinBox uses a null widget in drawing
-               its progressbar, so we can identify it only through eventFilter()
-               (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
-           || widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
-           /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
-              for drawing its panel, but not if its state is normal. To force the
-              normal text color on it, we need to make it use PE_PanelButtonTool
-              with the normal state too and that can be done at its paint event. */
-           || widget->inherits("KMultiTabBarTab"))
-  {
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-  }
+  else if (qobject_cast<QDockWidget*>(widget))
+    widget->setAttribute(Qt::WA_Hover, true);
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   { // in rare cases like KNotes' font combos or Kcalc
     QColor col = getFromRGBA(cspec_.textColor);
@@ -1102,14 +1106,80 @@ void Style::polish(QWidget *widget)
         widget->setPalette(palette);
       }
     }
+
+    if (qobject_cast<QLineEdit*>(widget) && tspec_.animate_states)
+    {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+    }
+  }
+  else if (qobject_cast<QComboBox*>(widget)
+           || qobject_cast<QSlider*>(widget))
+  {
+    widget->setAttribute(Qt::WA_Hover, true);
+    if (tspec_.animate_states)
+    {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+    }
+  }
+  else if (qobject_cast<QTabBar*>(widget))
+  {
+    widget->setAttribute(Qt::WA_Hover, true);
+    if (tspec_.active_tab_overlap > 0) // see QEvent::HoverEnter
+    {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
+    }
+  }
+  else if (qobject_cast<QProgressBar*>(widget))
+  {
+    widget->setAttribute(Qt::WA_Hover, true);
+    widget->removeEventFilter(this);
+    widget->installEventFilter(this);
+  }
+  else if (QGroupBox *gb = qobject_cast<QGroupBox*>(widget))
+  {
+    if (gb->isCheckable())
+    {
+      widget->setAttribute(Qt::WA_Hover, true);
+      if (tspec_.animate_states)
+      {
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
+      }
+    }
+  }
+  else if ((tspec_.animate_states &&
+            (qobject_cast<QPushButton*>(widget)
+             || (qobject_cast<QToolButton*>(widget)
+                 && !qobject_cast<QLineEdit*>(pw)) // exclude line-edit clear buttons
+             || qobject_cast<QCheckBox*>(widget)
+             || qobject_cast<QRadioButton*>(widget)
+             || widget->inherits("QComboBoxPrivateContainer")))
+            /* unfortunately, KisSliderSpinBox uses a null widget in drawing
+               its progressbar, so we can identify it only through eventFilter()
+               (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
+           || widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
+           /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
+              for drawing its panel, but not if its state is normal. To force the
+              normal text color on it, we need to make it use PE_PanelButtonTool
+              with the normal state too and that can be done at its paint event. */
+           || widget->inherits("KMultiTabBarTab"))
+  {
+      widget->removeEventFilter(this);
+      widget->installEventFilter(this);
   }
   else if (qobject_cast<QAbstractSpinBox*>(widget))
-  {// see eventFilter() for the reason
+  {
+    widget->setAttribute(Qt::WA_Hover, true);
+    // see eventFilter() for the reason
     widget->removeEventFilter(this);
     widget->installEventFilter(this);
   }
   else if (qobject_cast<QScrollBar*>(widget))
   {
+    widget->setAttribute(Qt::WA_Hover, true);
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
     widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
