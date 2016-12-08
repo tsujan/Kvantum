@@ -278,39 +278,43 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
   QVariant v = getValue(elementName, "inherits");
   QString i = v.toString();
 
-  v = getValue(elementName,"text.shadow", i);
-  r.hasShadow = v.toBool();
-
-  v = getValue(elementName,"text.normal.color", i);
-  r.normalColor = v.toString();
-  v = getValue(elementName,"text.focus.color", i);
-  r.focusColor = v.toString();
-  v = getValue(elementName,"text.press.color", i);
-  r.pressColor = v.toString();
-  v = getValue(elementName,"text.toggle.color", i);
-  r.toggleColor = v.toString();
-
-  v = getValue(elementName,"text.bold", i);
-  r.boldFont = v.toBool();
-  v = getValue(elementName,"text.italic", i);
-  r.italicFont = v.toBool();
-
-  if (r.hasShadow)
+  /* LineEdit is excluded for its size calculation to be correct */
+  if (elementName != "LineEdit")
   {
-    v = getValue(elementName,"text.shadow.xshift", i);
-    r.xshift = v.toInt();
-    v = getValue(elementName,"text.shadow.yshift", i);
-    if (v.isValid())
-      r.yshift = v.toInt();
-    v = getValue(elementName,"text.shadow.color", i);
-    if (v.isValid())
-      r.shadowColor = v.toString();
-    v = getValue(elementName,"text.shadow.alpha", i);
-    if (v.isValid())
-      r.a = qMax(v.toInt(),0);
-    v = getValue(elementName,"text.shadow.depth", i);
-    if (v.isValid())
-      r.depth = qMax(v.toInt(),0);
+    v = getValue(elementName,"text.shadow", i);
+    r.hasShadow = v.toBool();
+
+    v = getValue(elementName,"text.normal.color", i);
+    r.normalColor = v.toString();
+    v = getValue(elementName,"text.focus.color", i);
+    r.focusColor = v.toString();
+    v = getValue(elementName,"text.press.color", i);
+    r.pressColor = v.toString();
+    v = getValue(elementName,"text.toggle.color", i);
+    r.toggleColor = v.toString();
+
+    v = getValue(elementName,"text.bold", i);
+    r.boldFont = v.toBool();
+    v = getValue(elementName,"text.italic", i);
+    r.italicFont = v.toBool();
+
+    if (r.hasShadow)
+    {
+      v = getValue(elementName,"text.shadow.xshift", i);
+      r.xshift = v.toInt();
+      v = getValue(elementName,"text.shadow.yshift", i);
+      if (v.isValid())
+        r.yshift = v.toInt();
+      v = getValue(elementName,"text.shadow.color", i);
+      if (v.isValid())
+        r.shadowColor = v.toString();
+      v = getValue(elementName,"text.shadow.alpha", i);
+      if (v.isValid())
+        r.a = qMax(v.toInt(),0);
+      v = getValue(elementName,"text.shadow.depth", i);
+      if (v.isValid())
+        r.depth = qMax(v.toInt(),0);
+    }
   }
 
   QString name = elementName;
