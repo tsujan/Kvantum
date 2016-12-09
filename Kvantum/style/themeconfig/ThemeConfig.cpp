@@ -336,6 +336,22 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     r.left = qMax(v.toInt(),0);
     v = getValue(name,"text.margin.right", i);
     r.right = qMax(v.toInt(),0);
+
+    /* let's be more precise */
+    if(name == "LineEdit")
+    {
+      r.top = qMax(0,r.top-1);
+      r.bottom = qMax(0,r.bottom-1);
+    }
+    else if (name == "PanelButtonCommand"
+             || name == "PanelButtonTool"
+             || name == "ComboBox")
+    {
+      r.left = qMax(0,r.left-1);
+      r.right = qMax(0,r.right-1);
+      r.top = qMax(0,r.top-1);
+      r.bottom = qMax(0,r.bottom-1);
+    }
   }
 
   v = getValue(name,"text.iconspacing", i);

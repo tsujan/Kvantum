@@ -142,8 +142,8 @@ inherits=PanelButtonCommand
 
 [LineEdit]
 inherits=PanelButtonCommand
-text.margin.top=5
-text.margin.bottom=5
+text.margin.top=6
+text.margin.bottom=6
 text.margin.left=0
 text.margin.right=0
 

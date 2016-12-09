@@ -101,8 +101,8 @@ text.shadow.depth=2
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
 
@@ -182,8 +182,8 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=1
 text.margin.right=1
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=3
+text.margin.bottom=3
 
 [DropDownButton]
 inherits=PanelButtonCommand

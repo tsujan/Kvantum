@@ -2498,9 +2498,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   const QString group = "LineEdit";
   interior_spec ispec = getInteriorSpec(group);
   frame_spec fspec = getFrameSpec(group);
-  label_spec lspec = getLabelSpec(group);
-  lspec.top = qMax(0,lspec.top-1);
-  lspec.bottom = qMax(0,lspec.bottom-1);
+  const label_spec lspec = getLabelSpec(group);
   const size_spec sspec = getSizeSpec(group);
 
   if (isLibreoffice_) // impossible because lineedit != NULL
@@ -2807,10 +2805,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
-      lspec.left = qMax(0,lspec.left-1);
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.right = qMax(0,lspec.right-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
 
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
@@ -3736,9 +3730,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QString group = "LineEdit";
       interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
-      label_spec lspec = getLabelSpec(group);
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
+      const label_spec lspec = getLabelSpec(group);
       const size_spec sspec = getSizeSpec(group);
 
       if (!widget) // WARNING: QML has anchoring!
@@ -4277,11 +4269,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             status.append("-inactive");
           /* when there isn't enough space */
           QSize txtSize = textSize(painter->font(),combo->currentText);
-          label_spec lspec1 = getLabelSpec("ComboBox");
-          lspec1.left = qMax(0,lspec1.left-1);
-          lspec1.right = qMax(0,lspec1.right-1);
-          lspec1.top = qMax(0,lspec1.top-1);
-          lspec1.bottom = qMax(0,lspec1.bottom-1);
+          const label_spec lspec1 = getLabelSpec("ComboBox");
           if (cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
               || cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
@@ -5508,10 +5496,6 @@ void Style::drawControl(ControlElement element,
         const QString group = "ComboBox";
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
 
         QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -7240,10 +7224,6 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
         if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
@@ -7293,14 +7273,12 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        /* We should enlarge opt->rect because it's shrinked by PM_DefaultFrameWidth.
-           We also take into account the possibility of the presence of an indicator. */
-        int frame = pixelMetric(PM_DefaultFrameWidth, option, widget);
+        /* take into account the possibility of the presence of an indicator */
         int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
-        QRect r = option->rect.adjusted(-frame + (opt->direction == Qt::RightToLeft ? ind : 0),
-                                        -frame,
-                                        frame - (opt->direction == Qt::RightToLeft ? 0 : ind),
-                                        frame);
+        QRect r = option->rect.adjusted((opt->direction == Qt::RightToLeft ? ind : 0),
+                                        0,
+                                        -(opt->direction == Qt::RightToLeft ? 0 : ind),
+                                        0);
         QString status = getState(option,widget);
         if (status.startsWith("toggled") || status.startsWith("pressed"))
         {
@@ -7372,10 +7350,6 @@ void Style::drawControl(ControlElement element,
         const interior_spec ispec = getInteriorSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
 
         /* force text color if the button isn't drawn in a standard way */
         if (widget && !standardButton.contains(widget)
@@ -7403,6 +7377,13 @@ void Style::drawControl(ControlElement element,
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           //fspec.expansion = 0;
           lspec.tispace = qMin(lspec.tispace,3);
+        }
+
+        if (!opt->text.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
+        { // as in Kate's preferences for its default text style
+          painter->fillRect(option->rect.adjusted(1,1,-1,-1),
+                            QApplication::palette().color(QPalette::Button));
+          return;
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
@@ -7619,10 +7600,6 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
         /*bool inPlasma = false;
         QWidget *p = getParent(widget,1);
         if (isPlasma_ && widget
@@ -8380,9 +8357,7 @@ void Style::drawComplexControl(ComplexControl control,
             }
             else if (QLineEdit *child = widget->findChild<QLineEdit*>())
             {
-              label_spec lspec = getLabelSpec("LineEdit");
-              lspec.top = qMax(0,lspec.top-1);
-              lspec.bottom = qMax(0,lspec.bottom-1);
+              const label_spec lspec = getLabelSpec("LineEdit");
               const size_spec sspec = getSizeSpec("LineEdit");
               if (!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
               {
@@ -8517,10 +8492,6 @@ void Style::drawComplexControl(ComplexControl control,
         const QString group = "ComboBox";
 
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
         if (!widget) // WARNING: QML has anchoring!
@@ -9682,18 +9653,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ButtonShiftVertical : return tspec_.button_contents_shift ? 1 : 0;
 
     case PM_DefaultFrameWidth : {
-      QString group;
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
-        group = "PanelButtonCommand";
-      else
-        group = "GenericFrame";
-
-      const frame_spec fspec = getFrameSpec(group);
-      if (qobject_cast<const QAbstractItemView*>(widget)
-          && qstyleoption_cast<const QStyleOptionButton*>(option))
-      { // as in Kate's preferences for its default text style
-        return qMin(fspec.left,3);
-      }
+        return 0; // not needed but logical (->CT_PushButton)
+      const frame_spec fspec = getFrameSpec("GenericFrame");
       return qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right));
     }
 
@@ -9833,9 +9795,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         return 0;
       else
       {
-        label_spec lspec = getLabelSpec("PanelButtonTool");
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.right = qMax(0,lspec.right-1);
+        const label_spec lspec = getLabelSpec("PanelButtonTool");
         return qMax(0, 5-lspec.left-lspec.right);
       }
     }
@@ -10328,9 +10288,7 @@ QSize Style::sizeFromContents(ContentsType type,
       const frame_spec fspec = getFrameSpec(group);
       const size_spec sspec = getSizeSpec(group);
       /* the label spec is only used for vertical spacing */
-      label_spec lspec = getLabelSpec(group);
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
+      const label_spec lspec = getLabelSpec(group);
 
       s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
       s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2,0),
@@ -10353,9 +10311,7 @@ QSize Style::sizeFromContents(ContentsType type,
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
-      label_spec lspec = getLabelSpec("LineEdit");
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
+      const label_spec lspec = getLabelSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
       const size_spec sspec = getSizeSpec("IndicatorSpinBox");
       if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
@@ -10400,10 +10356,6 @@ QSize Style::sizeFromContents(ContentsType type,
         const frame_spec fspec = getFrameSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
         const frame_spec fspec1 = getFrameSpec("LineEdit");
         const label_spec lspec1 = getLabelSpec("LineEdit");
 
@@ -10469,10 +10421,7 @@ QSize Style::sizeFromContents(ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
+        const QString txt = opt->text;
 
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
@@ -10481,27 +10430,27 @@ QSize Style::sizeFromContents(ContentsType type,
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
+        if (!txt.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
+        { // as in Kate's preferences for its default text style
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
+        }
+
        /*
           Like with CT_ToolButton, don't use sizeCalculated()!
        */
 
-        /* also take into account the possibility of the presence of an indicator */
-        s = defaultSize
+        /* Qt adds PM_ButtonMargin plus twice PM_DefaultFrameWidth to the width and
+           also the height but doesn't add anything (PM_ButtonDefaultIndicator = 0)
+           for auto-default (-> qcommonstyle.cpp). So, we set PM_ButtonMargin and
+           PM_DefaultFrameWidth to zero for pushbuttons, add our frames and spacings
+           instead, and take into account the indicator and auto-defaultness. */
+        s = contentsSize
+            + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                    fspec.top+fspec.bottom+lspec.top+lspec.bottom)
             + QSize(opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0, 0);
-
-        /* Add the spacings! The frame widths are calculated
-           as pixelMetric(PM_DefaultFrameWidth,option,widget). */
-        const QString txt = opt->text;
-        s = s + QSize(lspec.left+lspec.right,
-                      lspec.top+lspec.bottom); // either text or icon
-        if (!txt.isEmpty())
-        {
-          if (lspec.hasShadow)
-            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
-          if (!opt->icon.isNull())
-            s = s + QSize(lspec.tispace, 0);
-        }
-
         /* this was for KColorButton but apparently
            it isn't needed when sizeCalculated() isn't used */
         /*if (txt.size() == 0 && opt->icon.isNull())
@@ -10510,9 +10459,12 @@ QSize Style::sizeFromContents(ContentsType type,
           s = QSize(s.width() < smallIconSize ? smallIconSize : s.width(),
                     s.height() < smallIconSize ? smallIconSize : s.height());
         }*/
-
         if (!txt.isEmpty())
         {
+          if (lspec.hasShadow)
+            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+          if (!opt->icon.isNull())
+            s = s + QSize(lspec.tispace, 0);
           /* take in to account the boldness of default button text
              and also the possibility of boldness in general */
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
@@ -10523,8 +10475,8 @@ QSize Style::sizeFromContents(ContentsType type,
             f.setBold(true);
             s = s + textSize(f, txt) - s1;
           }
-          // consider a global min. width for push buttons
-          s = s.expandedTo(QSize(2*pixelMetric(PM_DefaultFrameWidth,option,widget)
+          // consider a global min. width for push buttons as is done in "qcommonstyle.cpp" 
+          s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
                                    + 6*QFontMetrics(QApplication::font()).width("W"),
                                  s.height()));
         }
@@ -10704,10 +10656,6 @@ QSize Style::sizeFromContents(ContentsType type,
         const indicator_spec dspec = getIndicatorSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        lspec.left = qMax(0,lspec.left-1);
-        lspec.top = qMax(0,lspec.top-1);
-        lspec.right = qMax(0,lspec.right-1);
-        lspec.bottom = qMax(0,lspec.bottom-1);
 
         // -> CE_ToolButtonLabel
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -10733,12 +10681,12 @@ QSize Style::sizeFromContents(ContentsType type,
            how margins and frames are changed in such cases.
         */
 
-        s = defaultSize
-            /* Unlike the case of CT_PushButton, the frame widths aren't taken
-               into account yet. Qt seems to consider toolbuttons frameless,
-               althought it adds 6 and 5 px to their widths and heights respectively
-               (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint() const). */
-            + QSize(fspec.left+fspec.right - 6 , fspec.top+fspec.bottom - 5)
+        s = contentsSize
+            /* Qt just adds 6 and 5 px to the width and height respectively
+               (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint())
+               but we add add our frames and spacings instead. */
+            + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                    fspec.top+fspec.bottom+lspec.top+lspec.bottom)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
                         || tialign == Qt::ToolButtonTextOnly ?
@@ -10747,9 +10695,7 @@ QSize Style::sizeFromContents(ContentsType type,
                       : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
                     0);
 
-        /* add the spacings */
-        s = s + QSize(lspec.left+lspec.right,
-                      lspec.top+lspec.bottom);
+        /* add the text-icon spacing */
         if (tialign == Qt::ToolButtonTextBesideIcon)
           s = s + QSize(lspec.tispace, 0);
         else if (tialign == Qt::ToolButtonTextUnderIcon)
@@ -11251,8 +11197,6 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       label_spec lspec = getLabelSpec("LineEdit");
-      lspec.top = qMax(0,lspec.top-1);
-      lspec.bottom = qMax(0,lspec.bottom-1);
       const size_spec sspec = getSizeSpec("LineEdit");
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -11483,22 +11427,14 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       QRect r = QCommonStyle::subElementRect(element,option,widget);
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
-      // Kate's preferences for its default text style
-      if (opt && !opt->text.isEmpty() && widget)
-      {
-        if (qobject_cast<const QAbstractItemView*>(widget))
-        {
-          const frame_spec fspec = getFrameSpec("PanelButtonCommand");
-          label_spec lspec = getLabelSpec("PanelButtonCommand");
-          lspec.left = qMax(0,lspec.left-1);
-          lspec.top = qMax(0,lspec.top-1);
-          lspec.right = qMax(0,lspec.right-1);
-          lspec.bottom = qMax(0,lspec.bottom-1);
-          r.adjust(-fspec.left-lspec.left,
-                   -fspec.top-lspec.top,
-                   fspec.right+lspec.right,
-                   fspec.bottom+lspec.bottom);
-        }
+      if (opt && !opt->text.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
+      { // as in Kate's preferences for its default text style
+        const frame_spec fspec = getFrameSpec("PanelButtonCommand");
+        const label_spec lspec = getLabelSpec("PanelButtonCommand");
+        r.adjust(-fspec.left-lspec.left,
+                 -fspec.top-lspec.top,
+                 fspec.right+lspec.right,
+                 fspec.bottom+lspec.bottom);
       }
       return r;
     }
@@ -11877,8 +11813,8 @@ QRect Style::subControlRect(ComplexControl control,
             /* The left icon should respect frame width, text margin
                and text-icon spacing in the editable mode too */
             if (opt && opt->editable && !opt->currentIcon.isNull())
-              margin = (option->direction == Qt::RightToLeft ? fspec.right+qMax(0,lspec.right-1)
-                                                             : fspec.left+qMax(0,lspec.left-1))
+              margin = (option->direction == Qt::RightToLeft ? fspec.right+lspec.right
+                                                             : fspec.left+lspec.left)
                        + lspec.tispace
                        - (tspec_.combo_as_lineedit ? 0
                           : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
