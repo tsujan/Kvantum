@@ -2,13 +2,16 @@
 author=Hombre Maledicto
 comment=A Breeze like theme with large margins by Hombre Maledicto
 left_tabs=true
-scroll_width=13
+scroll_width=12
+scroll_min_extent=40
 attach_active_tab=true
+active_tab_overlap=5
 composite=true
 menu_shadow_depth=6
 tooltip_shadow_depth=2
 splitter_width=7
 check_size=21
+slider_width=8
 slider_handle_width=18
 slider_handle_length=18
 spread_progressbar=true
@@ -16,7 +19,7 @@ progressbar_thickness=8
 menubar_mouse_tracking=true
 toolbutton_style=0
 center_toolbar_handle=true
-x11drag=true
+x11drag=all
 double_click=false
 translucent_windows=false
 blurring=false
@@ -35,8 +38,8 @@ toolbar_icon_size=16
 
 [GeneralColors]
 window.color=#EBEBE9
-base.color=#EBEBE9
-alt.base.color=#DFDFDE
+base.color=#F5F5F4
+alt.base.color=#EBEBEA
 button.color=#EBEBE9
 light.color=#F5F5F4
 mid.light.color=#F0F0EF
@@ -64,14 +67,14 @@ text.press.color=white
 indicator.size=10
 
 [PanelButtonCommand]
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 text.margin.top=5
 text.margin.bottom=5
-text.margin.left=15
-text.margin.right=15
+text.margin.left=5
+text.margin.right=5
 text.shadow.red=120
 text.shadow.green=124
 text.shadow.blue=126
@@ -102,6 +105,16 @@ text.shadow.alpha=20
 text.shadow=true
 text.focus.color=#4d4d4d
 
+[Dock]
+inherits=PanelButtonCommand
+frame=true
+frame.element=tabframe
+interior=false
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+
 [DockTitle]
 inherits=PanelButtonCommand
 interior=false
@@ -114,16 +127,19 @@ indicator.size=0
 
 [GroupBox]
 inherits=GenericFrame
-frame.element=common
-interior.element=common
+frame.element=group
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 interior=false
-text.margin.top=5
-text.margin.bottom=5
-text.margin.left=15
-text.margin.right=15
+text.bold=true
+text.normal.color=#4D4D4D
 
 [GenericFrame]
 inherits=PanelButtonCommand
+frame.element=common
+interior.element=common
 frame.top=2
 frame.bottom=2
 frame.left=2
@@ -132,10 +148,10 @@ frame.right=2
 [Slider]
 inherits=PanelButtonCommand
 interior=true
-frame.top=6
-frame.bottom=6
-frame.left=6
-frame.right=6
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
 
 [SliderCursor]
 inherits=PanelButtonCommand
@@ -144,11 +160,13 @@ inherits=PanelButtonCommand
 inherits=PanelButtonCommand
 text.margin.top=6
 text.margin.bottom=6
-text.margin.left=0
-text.margin.right=0
+text.margin.left=2
+text.margin.right=2
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
+interior.element=button
+frame.element=button
 frame.top=2
 frame.bottom=2
 frame.left=2
@@ -157,9 +175,9 @@ indicator.size=10
 
 [DropDownButton]
 inherits=PanelButtonCommand
-frame.top=2
+frame.top=3
 frame.bottom=3
-frame.left=0
+frame.left=3
 frame.right=3
 indicator.size=10
 
@@ -176,8 +194,8 @@ text.margin.right=3
 
 [Tab]
 inherits=PanelButtonCommand
-text.margin.left=18
-text.margin.right=18
+text.margin.left=15
+text.margin.right=15
 text.margin.bottom=6
 text.margin.top=6
 frame.top=2
@@ -186,10 +204,18 @@ frame.left=2
 frame.right=2
 frame=true
 indicator.size=8
-text.focus.color=#4D4D4D
-text.press.color=#4D4D4D
 text.normal.color=#4D4D4D
 text.toggle.color=black
+
+[TabBarFrame]
+inherits=GenericFrame
+frame=true
+frame.element=tabframe
+interior=false
+frame.top=0
+frame.bottom=1
+frame.left=0
+frame.right=0
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -226,21 +252,21 @@ frame.right=1
 
 [Scrollbar]
 inherits=PanelButtonCommand
-indicator.size=22
+indicator.size=12
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
 interior=true
-frame.top=8
-frame.bottom=8
+frame.top=6
+frame.bottom=6
 frame.left=6
 frame.right=6
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
 interior=true
-frame.top=8
-frame.bottom=8
+frame.top=6
+frame.bottom=6
 frame.left=6
 frame.right=6
 
@@ -284,6 +310,10 @@ frame.right=2
 
 [MenuItem]
 inherits=PanelButtonCommand
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 text.focus.color=white
 text.margin.top=5
 text.margin.bottom=5
@@ -292,6 +322,10 @@ text.margin.right=10
 
 [MenuBarItem]
 inherits=PanelButtonCommand
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 text.margin.top=3
 text.margin.bottom=3
 text.margin.left=6
@@ -308,15 +342,18 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+text.bold=true
+text.normal.color=#696969
 
 [ComboBox]
 inherits=PanelButtonCommand
-text.margin.left=4
-text.margin.right=4
+text.margin.left=5
+text.margin.right=5
 text.toggle.color=white
 
 [Hacks]
 transparent_dolphin_view=false
+transparent_pcmanfm_sidepane=true
 blur_translucent=false
 transparent_ktitle_label=false
 transparent_menutitle=false

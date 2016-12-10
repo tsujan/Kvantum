@@ -8225,17 +8225,15 @@ void Style::drawComplexControl(ComplexControl control,
             indicator_spec dspec = getIndicatorSpec(group1);
             const label_spec lspec = getLabelSpec(group1);
 
-            QString aStatus = "normal";
-            if (!(option->state & State_Enabled))
-              aStatus = "disabled";
-            else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
-              aStatus = "pressed";
-            else if ((option->state & State_MouseOver)
-                     && widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-              aStatus = "focused";
+            QString aStatus = getState(option,widget);
+            if (aStatus.startsWith("focused")
+                && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+            {
+              aStatus.replace("focused","normal");
+            }
 
             /* use the "flat" indicator with flat buttons if it exists */
-            if (aStatus == "normal"
+            if (aStatus.startsWith("normal")
                 && autoraise
                 && themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
@@ -8286,8 +8284,14 @@ void Style::drawComplexControl(ComplexControl control,
                 ialign = Qt::AlignRight | Qt::AlignBottom;
               }
             }
-            if (!widget->isActiveWindow())
-              aStatus.append("-inactive");
+            /* distinguish between the toggled and pressed states
+               only if a toggled down arrow element exists */
+            if (aStatus.startsWith("toggled")
+                && !(themeRndr_ && themeRndr_->isValid()
+                     && themeRndr_->elementExists(dspec.element+"-down-toggled")))
+            {
+              aStatus.replace("toggled","pressed");
+            }
             renderIndicator(painter,
                             o.rect,
                             fspec,dspec,

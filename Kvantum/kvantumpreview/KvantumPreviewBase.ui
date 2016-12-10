@@ -2866,6 +2866,9 @@ check box</string>
    </property>
   </action>
   <action name="actionMenuButton">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
      <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
