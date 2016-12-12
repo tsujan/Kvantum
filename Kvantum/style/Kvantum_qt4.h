@@ -15,8 +15,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KVANTUM_H
-#define KVANTUM_H
+#ifndef KVANTUM_QT4_H
+#define KVANTUM_QT4_H
 
 #include <QCommonStyle>
 #include <QMap>
