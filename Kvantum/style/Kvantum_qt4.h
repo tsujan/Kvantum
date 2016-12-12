@@ -116,9 +116,10 @@ class Style : public QCommonStyle {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };
 
-    QIcon standardIcon(StandardPixmap standardIcon,
-                       const QStyleOption *option = 0,
-                       const QWidget *widget = 0) const;
+  protected slots:
+    QIcon standardIconImplementation(StandardPixmap standardIcon,
+                                     const QStyleOption *option = 0,
+                                     const QWidget *widget = 0) const;
 
   private:
     /* Set theme dependencies. */

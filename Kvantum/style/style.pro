@@ -21,12 +21,14 @@ SOURCES += themeconfig/ThemeConfig.cpp \
 
 HEADERS += themeconfig/specs.h \
            themeconfig/ThemeConfig.h \
-           Kvantum.h \
            KvantumPlugin.h \
            shortcuthandler.h \
            drag/windowmanager.h \
            drag/x11wmmove.h \
            blur/blurhelper.h
+
+greaterThan(QT_MAJOR_VERSION, 4): HEADERS += Kvantum.h
+lessThan(QT_MAJOR_VERSION, 5): HEADERS += Kvantum_qt4.h
 
 greaterThan(QT_MAJOR_VERSION, 4): OTHER_FILES += kvantum.json
 
