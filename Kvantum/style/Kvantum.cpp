@@ -15,6 +15,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Kvantum.h"
+
 #include <QProcess>
 #include <QDir>
 #include <QPainter>
@@ -62,12 +64,6 @@
 #if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
 #include <QtPlatformHeaders/QXcbWindowFunctions>
 #endif
-#endif
-
-#if QT_VERSION >= 0x050000
-#include "Kvantum.h"
-#else
-#include "Kvantum_qt4.h"
 #endif
 
 #define M_PI 3.14159265358979323846
