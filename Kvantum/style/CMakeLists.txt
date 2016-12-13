@@ -7,8 +7,8 @@ if(NOT ENABLE_QT4)
 else()
   find_package(Qt4 4.8.7 REQUIRED)
 
-include( ${QT_USE_FILE} )
-add_definitions( ${QT_DEFINITIONS} )
+include(${QT_USE_FILE})
+add_definitions(${QT_DEFINITIONS})
 endif()
 find_package (X11)
 
@@ -38,7 +38,7 @@ else()
   set(KVANTUM_STYLE_DIR "${QT_PLUGINS_DIR}/styles/")
 
   include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-                      ${${QT_INCLUDE_DIR}} ${QT_QTSVG_INCLUDE_DIR}
+                      ${QT_INCLUDE_DIR} ${QT_QTSVG_INCLUDE_DIR}
                       ${X11_INCLUDE_DIR})
 endif()
 
