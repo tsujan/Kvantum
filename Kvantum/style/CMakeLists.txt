@@ -82,5 +82,5 @@ else()
                                ${X11_LIBRARIES})
 endif()
 
-install(TARGETS kvantum LIBRARY DESTINATION ${KDE_COLOR_DIR})
+install(TARGETS kvantum LIBRARY DESTINATION ${KVANTUM_STYLE_DIR})
 install(FILES "${CMAKE_SOURCE_DIR}/color/Kvantum.colors" DESTINATION ${KDE_COLOR_DIR})
