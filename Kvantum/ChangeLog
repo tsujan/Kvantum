@@ -13,6 +13,7 @@ V0.10.3
  * Added a key for scrollable menus (to Kvantum Manager).
  * Draw all toolbuttons auto-raised inside toolbars.
  * Add hover effect only selectively.
+ * Added CMake support (while qmake is kept).
 
 V0.10.2
 ---------
