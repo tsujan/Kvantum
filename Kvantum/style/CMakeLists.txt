@@ -1,8 +1,15 @@
-find_package (Qt5Widgets REQUIRED)
-find_package (Qt5Gui REQUIRED)
-find_package (Qt5Core REQUIRED)
-find_package (Qt5Svg REQUIRED)
-find_package (Qt5X11Extras REQUIRED)
+if(NOT ENABLE_QT4)
+  find_package (Qt5Widgets REQUIRED)
+  find_package (Qt5Gui REQUIRED)
+  find_package (Qt5Core REQUIRED)
+  find_package (Qt5Svg REQUIRED)
+  find_package (Qt5X11Extras REQUIRED)
+else()
+  find_package(Qt4 4.8.7 REQUIRED)
+
+include( ${QT_USE_FILE} )
+add_definitions( ${QT_DEFINITIONS} )
+endif()
 find_package (X11)
 
 set(CMAKE_AUTOMOC ON)
@@ -14,18 +21,26 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_CMAKE_PREFIX_PATH})
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 
-get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE}
-                    IMPORTED_LOCATION)
-execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
-                OUTPUT_VARIABLE _Qt5_PLUGIN_INSTALL_DIR
-                ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-set(KVANTUM_STYLE_DIR "${_Qt5_PLUGIN_INSTALL_DIR}/styles/")
+if(NOT ENABLE_QT4)
+  get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE}
+                      IMPORTED_LOCATION)
+  execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
+                  OUTPUT_VARIABLE _Qt5_PLUGIN_INSTALL_DIR
+                  ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(KVANTUM_STYLE_DIR "${_Qt5_PLUGIN_INSTALL_DIR}/styles/")
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-                    ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
-                    ${Qt5Gui_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS}
-                    ${Qt5X11Extras_INCLUDE_DIRS}
-                    ${X11_INCLUDE_DIR})
+  include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                      ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
+                      ${Qt5Gui_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS}
+                      ${Qt5X11Extras_INCLUDE_DIRS}
+                      ${X11_INCLUDE_DIR})
+else()
+  set(KVANTUM_STYLE_DIR "${QT_PLUGINS_DIR}/styles/")
+
+  include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                      ${${QT_INCLUDE_DIR}} ${QT_QTSVG_INCLUDE_DIR}
+                      ${X11_INCLUDE_DIR})
+endif()
 
 add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 
@@ -39,16 +54,33 @@ set(kvantum_SOURCES
     themeconfig/ThemeConfig.cpp)
 
 set(kvantum_RESOURCES themeconfig/defaulttheme.qrc)
-#set(COLOR_DIR "/usr/share/kde4/apps/color-schemes/")
-set(KF5_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/color-schemes/")
+if(NOT ENABLE_QT4)
+  set(KDE_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/color-schemes/")
+else()
+  set(KDE_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/kde4/apps/color-schemes/")
+endif()
 
-qt5_add_resources(RESOURCES ${kvantum_RESOURCES})
+if(NOT ENABLE_QT4)
+  qt5_add_resources(RESOURCES ${kvantum_RESOURCES})
+else()
+  qt4_add_resources(RESOURCES ${kvantum_RESOURCES})
+endif()
 
 add_library(kvantum SHARED ${kvantum_SOURCES} ${RESOURCES})
 
-#target_link_libraries(kvantum ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARY} ${Qt5Svg_LIBRARY} ${X11_LIBRARIES} ${Qt5X11Extras_LIBRARIES})
+if(NOT ENABLE_QT4)
+ target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                               ${Qt5Gui_LIBRARIES}
+                               ${Qt5Widgets_LIBRARIES}
+                               ${Qt5Svg_LIBRARIES}
+                               ${Qt5X11Extras_LIBRARIES}
+                               ${X11_LIBRARIES})
+else()
+ target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}
+                               ${QT_QTGUI_LIBRARY}
+                               ${QT_QTSVG_LIBRARY}
+                               ${X11_LIBRARIES})
+endif()
 
-target_link_libraries(kvantum ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Widgets_LIBRARIES} ${Qt5Svg_LIBRARIES} ${Qt5X11Extras_LIBRARIES} ${X11_LIBRARIES})
-
-install(TARGETS kvantum LIBRARY DESTINATION ${KVANTUM_STYLE_DIR})
-install(FILES "${CMAKE_SOURCE_DIR}/color/Kvantum.colors" DESTINATION ${KF5_COLOR_DIR})
+install(TARGETS kvantum LIBRARY DESTINATION ${KDE_COLOR_DIR})
+install(FILES "${CMAKE_SOURCE_DIR}/color/Kvantum.colors" DESTINATION ${KDE_COLOR_DIR})

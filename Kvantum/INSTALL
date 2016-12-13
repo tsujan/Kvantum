@@ -4,30 +4,63 @@
 
 First install X11 and Qt development packages. In Debian-based systems, they are:
 
-* libx11-dev and libxext-dev (for X11)
-* libqt4-dev (for Qt4 and if you want Qt4 support)
-* qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
+ * g++
+ * libx11-dev and libxext-dev (for X11)
+ * qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
+ * libqt4-dev (for Qt4 and if you want Qt4 support)
 
-Then open a terminal inside this folder and issue the following command:
+In Arch-based systems, the required package are:
+
+ * gcc (or gcc-multilib for multilib systems)
+ * libx11 and libxext (for X11)
+ * qt5-base, qt5-svg and qt5-x11extras (for Qt5) 
+ * qt4 (for Qt4 and if you want Qt4 support)
+
+There are two ways to compile Kvantum: with qmake or with cmake.
+
+With qmake
+==========
+Just open a terminal inside this folder and issue the following command:
 
 	qmake && make
 
 You might need to put the full path of qmake in the above command (especially for a second compilation against your non-default Qt installation). For example, in 64-bit Debian, it is /usr/lib/x86_64-linux-gnu/qt4/bin/qmake for Qt4 and /usr/lib/x86_64-linux-gnu/qt5/bin/qmake for Qt5.
 
+With cmake
+==========
+Open a terminal inside this folder and issue the following commands for Qt5:
+
+	mkdir build && cd build
+	cmake ..
+	make
+
+For Qt5, just add the option "-DENABLE_QT4=ON" to the cmake command in this way:
+
+	mkdir build && cd build
+	cmake .. -DENABLE_QT4=ON
+	make
+
+If you want to install Kvantum in a nonstandard path (which is not recommended), you could add the option "-DCMAKE_INSTALL_PREFIX=YOUR_SELECTED_PATH" to the cmake command.
+
 ********************
 *   Installation   *
 ********************
 
-Then, use these commands for installation and cleaning:
+Then, use this commands for installation:
 
 	sudo make install
+
+If you have compiled Kvantum with qmake, the following command cleans the source completely and makes it ready for another compilation (against another version of Qt, for example):
+
 	make distclean
 
-The second command cleans the source and makes it ready for another compilation (against another version of Qt, for example).
+If you have used cmake for compilation, to compile Kvantum again, first remove the contents of the build directory.
 
 Installation for your default Qt version (Qt5, in most distros) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4.
 
-Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issuing the compilation command using the Qt4 qmake.
+Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issuing the qmake compilation command using the Qt4 qmake.
+
+The main reason for including a cmake build is that a few distros (especially Fedora) may have problem with qmake.
 
 *************
 *   Usage   *
@@ -69,11 +102,15 @@ If the display manager you use does not source '~/.profile', you could probably 
 *   Using Other Themes   *
 **************************
 
-To select or install (as user) Kvantum themes, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could switch between themes easily.
+To select or install (as user) Kvantum themes, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could not only switch between themes easily but also select themes for specific applications.
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 
-If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers may want to put these files in their theme folder: $THEME_NAME.svg, $THEME_NAME.kvconfig and $THEME_NAME.colors.
+*****************************
+*   Notes for Theme Makers  *
+*****************************
+
+If the KDE color scheme of the theme is inside its folder, "Kvantum Manager" will install it too. So, theme makers might want to put these files in their theme folder: $THEME_NAME.svg, $THEME_NAME.kvconfig and $THEME_NAME.colors.
 
 The contents of theme folders (if valid) can also be installed manually in the user's home. The possible installation paths are '~/.config/Kvantum/$THEME_NAME/', '~/.themes/$THEME_NAME/Kvantum/' and '~/.local/share/themes/$THEME_NAME/Kvantum/', each one of which takes priority over the next one, i.e. if a theme is installed in more than one path, only the instance with the highest priority will be used by Kvantum.
 
