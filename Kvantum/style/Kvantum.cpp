@@ -610,11 +610,11 @@ void Style::setAnimationOpacityOut()
   }
 }
 
-int Style::getMenuMargin(bool horiz) const
+int Style::getMenuMargin(bool horiz, bool hasShadow) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  if (!noComposite_) // used without compositing at PM_SubMenuOverlap
+  if (!noComposite_ && hasShadow) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
 }
@@ -2069,7 +2069,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         // correct the submenu position
         w->move(w->x() + menuHShadows_.at(0)
-                       - (getMenuMargin(true) - menuHShadows_.at(1)),
+                       - (getMenuMargin(true, !(w->testAttribute(Qt::WA_NativeWindow)
+                                                && w->testAttribute(Qt::WA_WState_Created)))
+                          - menuHShadows_.at(1)),
                 w->y());
       }
       else if (qobject_cast<QToolButton*>(o))
@@ -9708,7 +9710,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       {
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
-        so -= getMenuMargin(true);
+        so -= getMenuMargin(true, !widget ? true
+                                          : !(widget->testAttribute(Qt::WA_NativeWindow)
+                                              && widget->testAttribute(Qt::WA_WState_Created)));
         if (!noComposite_
             && settings_->getCompositeSpec().composite
             && menuHShadows_.count() == 2
