@@ -934,7 +934,6 @@ void Style::polish(QWidget *widget)
           && !widget->inherits("KScreenSaver")
           && !widget->inherits("QTipLabel")
           && !widget->inherits("QSplashScreen"))
-            
       {
         if (widget->minimumSize() != widget->maximumSize())
         {
@@ -1310,6 +1309,10 @@ void Style::polish(QWidget *widget)
   if (!isLibreoffice_ // not required
       && !noComposite_
       && !subApp_
+      /* If both WA_NativeWindow and WA_WState_Created are set for a menu,
+         its background will be filled by the window background color.
+         In other words, cached native menus can't be translucent. */
+      && !(widget->testAttribute(Qt::WA_NativeWindow) && widget->testAttribute(Qt::WA_WState_Created))
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
              /* no shadow for tooltips that are already translucent */
           || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
@@ -1578,6 +1581,9 @@ void Style::unpolish(QWidget *widget)
         widget->setAttribute(Qt::WA_PaintOnScreen, false);
         widget->setAttribute(Qt::WA_NoSystemBackground, false);
         widget->setAttribute(Qt::WA_TranslucentBackground, false);
+        /* menus may be cached, so that if not removed from the list,
+           they might lack translucency the next time they appear */
+        translucentWidgets_.remove(widget);
       }
       //widget->clearMask();
     }
