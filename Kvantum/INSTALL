@@ -34,7 +34,7 @@ Open a terminal inside this folder and issue the following commands for Qt5:
 	cmake ..
 	make
 
-For Qt5, just add the option "-DENABLE_QT4=ON" to the cmake command in this way:
+For Qt4, just add the option "-DENABLE_QT4=ON" to the cmake command in this way:
 
 	mkdir build && cd build
 	cmake .. -DENABLE_QT4=ON
