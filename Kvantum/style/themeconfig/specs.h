@@ -64,6 +64,10 @@ typedef struct {
   /* raise and group neighbor
      toolbar buttons */
   bool group_toolbar_buttons;
+  /* the space between toolbar items */
+  int toolbar_item_spacing;
+  /* the space between toolbar items and toolbar frame */
+  int toolbar_interior_spacing;
   /* center toolbar handle
      instead of scaling it vertically? */
   bool center_toolbar_handle;
@@ -376,6 +380,8 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.mirror_doc_tabs = true;
   tspec.no_inactive_tab_expansion = false;
   tspec.group_toolbar_buttons = false;
+  tspec.toolbar_item_spacing = 0;
+  tspec.toolbar_interior_spacing = 0;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;
   tspec.merge_menubar_with_toolbar = false;

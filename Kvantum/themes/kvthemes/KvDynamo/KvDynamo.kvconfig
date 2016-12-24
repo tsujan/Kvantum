@@ -19,6 +19,7 @@ progressbar_thickness=8
 menubar_mouse_tracking=true
 toolbutton_style=0
 center_toolbar_handle=true
+toolbar_item_spacing=1
 x11drag=all
 double_click=false
 translucent_windows=false
@@ -67,10 +68,10 @@ text.press.color=white
 indicator.size=10
 
 [PanelButtonCommand]
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 text.margin.top=5
 text.margin.bottom=5
 text.margin.left=5
@@ -175,18 +176,18 @@ indicator.size=10
 
 [DropDownButton]
 inherits=PanelButtonCommand
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 indicator.size=10
 
 [ToolboxTab]
 inherits=PanelButtonCommand
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3

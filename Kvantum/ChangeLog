@@ -14,6 +14,7 @@ V0.10.3
  * Draw all toolbuttons auto-raised inside toolbars.
  * Add hover effect only selectively.
  * Added CMake support (while qmake is kept).
+ * Added two keys for toolbar spacing.
 
 V0.10.2
 ---------

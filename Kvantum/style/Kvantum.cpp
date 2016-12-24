@@ -9803,16 +9803,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
 
-    case PM_ToolBarFrameWidth : return 0;
-    case PM_ToolBarItemSpacing : {
-      if (tspec_.group_toolbar_buttons)
-        return 0;
-      else
-      {
-        const label_spec lspec = getLabelSpec("PanelButtonTool");
-        return qMax(0, 5-lspec.left-lspec.right);
-      }
-    }
+    case PM_ToolBarFrameWidth : return tspec_.toolbar_interior_spacing;
+    case PM_ToolBarItemSpacing : return tspec_.toolbar_item_spacing;
     case PM_ToolBarHandleExtent : {
       if (tspec_.center_toolbar_handle)
       {

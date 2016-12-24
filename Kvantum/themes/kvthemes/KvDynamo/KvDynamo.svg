@@ -1,53 +1,53 @@
 <svg width="450" version="1.0" xmlns="http://www.w3.org/2000/svg" height="720" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs id="defs5">
+<linearGradient id="linearGradient5975">
+<stop offset="0" style="stop-color:#3daee9" id="stop5977"/>
+<stop offset="1" style="stop-color:#339ad5;stop-opacity:.882" id="stop5979"/>
+</linearGradient>
+<linearGradient gradientTransform="matrix(1,0,0,2,1031.8075,-1637.1651)" xlink:href="#linearGradient5975" id="linearGradient5690" y1="810.58386" x1="-719.80701" y2="789.58398" gradientUnits="userSpaceOnUse" x2="-719.80707"/>
 <linearGradient id="linearGradient6149">
 <stop offset="0" style="stop-color:#eff0f1" id="stop6151"/>
 <stop offset="1" style="stop-color:#e9eaea" id="stop6153"/>
 </linearGradient>
-<linearGradient gradientTransform="matrix(0.66666667,0,0,2,802.87147,-1628.1651)" xlink:href="#linearGradient5975" id="linearGradient4788" y1="810.58386" x1="-719.80701" y2="789.58398" gradientUnits="userSpaceOnUse" x2="-719.80707"/>
-<linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5874" xlink:href="#linearGradient8855-0" y1="1137.5001" y2="1145.25" x1="-73.00103" x2="-73.01564" gradientUnits="userSpaceOnUse"/>
-<linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5806" xlink:href="#linearGradient8855-0" y1="1079.5" y2="1077.25" x1="-25" x2="-25" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5896" xlink:href="#linearGradient8855-0" y1="1084.5" y2="1084.5" x1="-20" x2="-12.750015" gradientUnits="userSpaceOnUse"/>
-<linearGradient id="linearGradient6806">
-<stop offset="0" id="stop6808"/>
-<stop offset="0.48779979" id="stop6810"/>
-<stop offset="1" style="stop-opacity:0" id="stop6812"/>
-</linearGradient>
 <linearGradient id="linearGradient6732">
 <stop offset="0" id="stop6734"/>
 <stop offset="0.71428341" id="stop6738"/>
 <stop offset="1" style="stop-opacity:0" id="stop6736"/>
 </linearGradient>
+<linearGradient xlink:href="#linearGradient6149" id="linearGradient5682" y1="779.58398" x1="-664.80719" y2="779.58398" gradientUnits="userSpaceOnUse" x2="-719.80719"/>
 <linearGradient id="linearGradient8855-0">
 <stop offset="0" id="stop8857-8"/>
 <stop offset="1" style="stop-opacity:0" id="stop8859-2"/>
 </linearGradient>
-<linearGradient id="linearGradient5975">
-<stop offset="0" style="stop-color:#3daee9" id="stop5977"/>
-<stop offset="1" style="stop-color:#339ad5;stop-opacity:.882" id="stop5979"/>
+<linearGradient id="linearGradient6806">
+<stop offset="0" id="stop6808"/>
+<stop offset="0.48779979" id="stop6810"/>
+<stop offset="1" style="stop-opacity:0" id="stop6812"/>
 </linearGradient>
+<linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5806" xlink:href="#linearGradient8855-0" y1="1079.5" y2="1077.25" x1="-25" x2="-25" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(-823.80709,948.58403)" xlink:href="#linearGradient4134-0-5-9" id="linearGradient3426-0" y1="-159" x1="160" y2="-138" gradientUnits="userSpaceOnUse" x2="160"/>
 <linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5839" xlink:href="#linearGradient8855-0" y1="1084.5001" y2="1084.5" x1="-78.00103" x2="-80.25" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(-879.80709,948.58403)" xlink:href="#linearGradient4134-0-5-9" id="linearGradient3424-6" y1="-159" x1="160" y2="-138" gradientUnits="userSpaceOnUse" x2="160"/>
-<linearGradient gradientTransform="matrix(0.22068966,0,0,1.0322581,222.01724,638.1779)" xlink:href="#linearGradient4709" id="linearGradient6645" y1="41" x1="410" y2="71.9375" gradientUnits="userSpaceOnUse" x2="410"/>
+<linearGradient gradientTransform="translate(-31,7.25)" id="linearGradient5874" xlink:href="#linearGradient8855-0" y1="1137.5001" y2="1145.25" x1="-73.00103" x2="-73.01564" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient4134-0-5-9">
 <stop offset="0" style="stop-color:#fafafa" id="stop4136-9-2-0"/>
 <stop offset="1" style="stop-color:#fafafa" id="stop5116-7-1"/>
 <stop offset="1" style="stop-color:#afb4b9;stop-opacity:.314" id="stop4138-5-2-4"/>
 </linearGradient>
+<linearGradient gradientTransform="matrix(0.22068966,0,0,1.0322581,222.01724,638.1779)" xlink:href="#linearGradient4709" id="linearGradient6645" y1="41" x1="410" y2="71.9375" gradientUnits="userSpaceOnUse" x2="410"/>
+<linearGradient gradientTransform="matrix(0.4,0,0,1.2000018,187.00025,-98.000477)" xlink:href="#linearGradient5975" id="linearGradient5987" y1="95" x1="362.5" y2="130" gradientUnits="userSpaceOnUse" x2="362.5"/>
 <linearGradient id="linearGradient4709">
 <stop offset="0" style="stop-color:#dbdbdd" id="stop4711"/>
 <stop offset="0.15000001" style="stop-color:#ccccce" id="stop5488"/>
 <stop offset="0.85000002" style="stop-color:#ccccce" id="stop4713"/>
 <stop offset="1" style="stop-color:#c2c2c4" id="stop4715"/>
 </linearGradient>
-<linearGradient gradientTransform="matrix(0.4,0,0,1.2000018,198.00001,-107.00048)" xlink:href="#linearGradient5975" id="linearGradient5987" y1="95" x1="362.5" y2="130" gradientUnits="userSpaceOnUse" x2="362.5"/>
-<linearGradient xlink:href="#linearGradient6149" id="linearGradient6647" y1="779.58398" x1="-664.80719" y2="779.58398" gradientUnits="userSpaceOnUse" x2="-719.80719"/>
-<linearGradient gradientTransform="matrix(0.99484198,0,0,1.0678599,1.093172,-35.0716)" xlink:href="#linearGradient6149" id="linearGradient6147" y1="38.461594" x1="115" y2="81.538422" x2="115.00004" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-25" fy="1084.5" cx="-25" cy="1084.5" gradientTransform="matrix(3.25,2.1160233e-5,-1.307955e-5,2.0085913,25.264597,-1086.5668)" r="3.625" id="radialGradient5907" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-25" fy="1132.5" cx="-25" cy="1132.5" gradientTransform="matrix(2.5273881e-5,3.3792923,-3.2329886,2.4177057e-5,3605.3609,1224.205)" r="3.625" id="radialGradient5885" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-73.00103" fy="1132.5001" cx="-73.00103" cy="1132.5001" gradientTransform="matrix(-2.1031641,1.7239374e-4,-2.7699244e-4,-3.3792965,-257.21996,4966.8163)" r="3.625" id="radialGradient5850" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
+<linearGradient gradientTransform="matrix(0.99484198,0,0,1.0678599,-9.4068297,-29.071599)" xlink:href="#linearGradient6149" id="linearGradient6147" y1="38.461594" x1="115" y2="81.538422" x2="115.00004" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-73" fy="1084.5" cx="-73" cy="1084.5" gradientTransform="matrix(0,-2,2,0,-2273,945.75)" r="3.625" id="radialGradient5828" xlink:href="#linearGradient6732" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-25" fy="1084.5" cx="-25" cy="1084.5" gradientTransform="matrix(3.25,2.1160233e-5,-1.307955e-5,2.0085913,25.264597,-1086.5668)" r="3.625" id="radialGradient5907" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-73.00103" fy="1132.5001" cx="-73.00103" cy="1132.5001" gradientTransform="matrix(-2.1031641,1.7239374e-4,-2.7699244e-4,-3.3792965,-257.21996,4966.8163)" r="3.625" id="radialGradient5850" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-25" fy="1132.5" cx="-25" cy="1132.5" gradientTransform="matrix(2.5273881e-5,3.3792923,-3.2329886,2.4177057e-5,3605.3609,1224.205)" r="3.625" id="radialGradient5885" xlink:href="#linearGradient6806" gradientUnits="userSpaceOnUse"/>
 </defs>
 <g style="stroke:none">
 <text x="51" y="-371.44214" style="font-family:'Gill Sans';text-align:justify;line-height:125%;font-weight:bold;font-size:14px" id="text6990" xml:space="preserve"><tspan x="51" y="-371.44214" id="tspan6992"/>
@@ -207,7 +207,9 @@
 </g>
 </g>
 <rect width="10" x="38" y="622.49976" rx="5" height="10" ry="5" style="fill:none;stroke:#3daee9" id="dial"/>
+</g>
 <g style="stroke:none">
+<g style="fill-rule:evenodd">
 <g style="fill:#fff" id="dial-notches" transform="translate(-74.500214,-60.50018)">
 <rect width="45" x="202.5" y="667.5" height="45" style="opacity:0" id="rect6567"/>
 <g style="fill:#3db2e9" id="g231">
@@ -248,27 +250,9 @@
 <path style="opacity:.45;fill:url(#radialGradient5885)" id="rect6587" d="m -51,1139.75 c 0,2.77 -2.23,5 -5,5 v 7.25 h 12.25 v -12.25 z "/>
 </g>
 </g>
-</g>
-<g style="stroke:none" id="button-normal-topleft">
-<rect width="3" x="89.499985" y="3" height="3" style="fill-rule:evenodd;stroke-linejoin:bevel;fill-opacity:0;stroke-linecap:round" id="rect4836"/>
-<g id="button-normal-topleft0" transform="matrix(0.4682777,0,0,1,429.5696,-773.584)">
-<path class="ColorScheme-Text" style="opacity:.8;fill-opacity:.333;color:#31363b" id="path4101-5" d="m -719.8071,777.584 c -2.35879,0 -4.27097,0.89543 -4.27097,2 h 2.13548 c 0,-0.55228 0.9561,-1 2.13549,-1 v -1 z "/>
-<path class="ColorScheme-Background" style="fill:#eff0f1;color:#eff0f1" id="path4105-8" d="m 721.9425,-779.5841 a 2.13548,1 0 0,1 -2.13548,1 v -1 z " transform="scale(-1,-1)"/>
-</g>
-</g>
-<g style="stroke:none">
-<rect width="46" x="92.5" y="6" class="ColorScheme-Background" height="46" style="fill:url(#linearGradient6147);color:#eff0f1" id="button-normal"/>
 <rect width="20.086231" x="28.413773" y="149.10492" height="20.89509" style="fill-opacity:.004" id="rect3803-3-8"/>
 </g>
 <ellipse class="ColorScheme-ButtonBackground" cx="38" cy="158" rx="9.5000391" ry="9.5000381" style="fill:#eff0f1;stroke:#787c7e;color:#eff0f1;stroke-width:2" id="radio-normal"/>
-<g style="stroke:none" id="lineedit-normal-topleft">
-<rect width="3" x="31.49999" y="80" height="3" style="fill-rule:evenodd;stroke-linejoin:bevel;fill-opacity:0;stroke-linecap:round" id="rect4954"/>
-<g id="lineedit-normal-topleft0" transform="translate(754.30709,-696.584)">
-<path class="ColorScheme-Text" style="opacity:.2;fill:;color:#31363b" id="path4101-5-2" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
-<path class="ColorScheme-Background" style="fill:#fff;color:#eff0f1" id="path4105-8-9" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
-</g>
-</g>
-<rect width="46" x="34.5" y="83" class="ColorScheme-Background" height="46" style="fill:#fff;stroke:none;color:#eff0f1" id="lineedit-normal"/>
 <g style="stroke:none" id="common-normal-topleft" transform="matrix(1.5,0,0,1.5,1380.2106,-685.876)">
 <path class="ColorScheme-Text" style="opacity:.3;fill:#2d3237;color:#31363b" id="path4101-5-9" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
 <path class="ColorScheme-Background" style="fill:#f5f5f4;color:#eff0f1" id="path4105-8-1" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
@@ -282,22 +266,7 @@
 <rect width="4" x="33" y="15" height="4" style="opacity:.01;fill:#e4e6e8" id="rect3864" transform="matrix(-1.3333333,0,0,1.3333333,58.333333,-18.333333)"/>
 <path class="ColorScheme-Text" style="fill:#b8bbbc;fill-rule:evenodd;color:#31363b" id="path3895-9" d="M 9,2.5556 9,7 13.4444,7 C 13.444444,4.3333333 11.666667,2.5555556 9,2.5556 Z"/>
 </g>
-<g style="stroke:none;color:#3daee9" id="button-toggled-left" transform="matrix(1.5,0,0,1,-161.5,0)">
-<rect width="2" x="321" y="-49" class="ColorScheme-ButtonFocus" height="42" style="fill-opacity:0" id="rect4766" transform="scale(1,-1)"/>
-<rect width="1.3333334" x="321.66666" y="-49" class="ColorScheme-ButtonFocus" height="42" style="fill:url(#linearGradient4788)" id="button-toggled-left0" transform="scale(1,-1)"/>
-</g>
 <circle class="ColorScheme-Background" cx="74" cy="371.5" style="fill:#eff0f1;stroke:#909396;color:#eff0f1;stroke-width:2" id="slidercursor-normal" r="8.0000715"/>
-<g style="stroke:none" id="button-focused-topleft">
-<rect width="3" x="164.5" y="3.4999843" height="3" style="fill-rule:evenodd;stroke-linejoin:bevel;fill-opacity:0;stroke-linecap:round" id="rect4870"/>
-<g id="button-focused-topleft0" transform="matrix(1.0001884,0,0,1,887.44289,-773.084)">
-<path class="ColorScheme-ButtonHover" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#3daee9" id="path3376" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
-<path style="fill:#eaeae8" id="path3378" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
-</g>
-</g>
-<g style="stroke:none;color:#eff0f1">
-<rect width="46" x="167.5" y="6.5" class="ColorScheme-Background" height="46" style="fill:#eaeae8" id="button-focused"/>
-<rect width="46" x="135" y="84.999992" class="ColorScheme-Background" height="46" style="fill:#fff" id="lineedit-focused"/>
-</g>
 <rect width="20" x="217" y="-487.5" height="2" style="fill:#3daee9;stroke:none" id="itemview-toggled-top" transform="scale(1,-1)"/>
 <rect width="20" x="217" y="-507.5" class="ColorScheme-ButtonFocus" height="20" style="fill:#3daee9;stroke:none;color:#3daee9" id="itemview-toggled" transform="scale(1,-1)"/>
 <path style="fill:#3daee9;stroke:none" id="itemview-toggled-topleft" d="m 217,485.5 c -1.22097,0 -2,0.77069 -2,2 h 2 c 0,0 0,-1.33333 0,-2 z "/>
@@ -385,10 +354,7 @@
 </g>
 </g>
 <ellipse class="ColorScheme-ButtonHover" cx="126.26118" cy="372.3797" rx="8.2611732" ry="8.1202984" style="fill:none;color:#3daee6" id="path3919-8-1"/>
-<g style="color:#eff0f1">
-<ellipse class="ColorScheme-Background" cx="127" cy="371.5" rx="8.4998589" ry="8.4998598" style="fill:#b8bbbc;stroke:#ebebe9" id="slidercursor-disabled"/>
-<rect width="42" x="323" y="7" class="ColorScheme-Background" height="42" style="fill:url(#linearGradient5987);stroke:none" id="button-toggled"/>
-</g>
+<ellipse class="ColorScheme-Background" cx="127" cy="371.5" rx="8.4998589" ry="8.4998598" style="fill:#b8bbbc;stroke:#ebebe9;color:#eff0f1" id="slidercursor-disabled"/>
 <g id="checkbox-normal" transform="translate(13.5,-357.09985)">
 <rect width="16" x="229" y="520.09985" rx="1.133713" height="16" ry="1.062856" style="fill:#787c7e;stroke:none;fill-opacity:.863" id="rect41393-2" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9"/>
 <g style="fill:#eff0f1" id="progress-pattern-normal-8" transform="matrix(0.78125,0,0,0.8,51.84375,105.69986)">
@@ -428,29 +394,6 @@
 </g>
 </g>
 <path style="fill:#b4b4b4" id="resize-grip-normal" d="m 242.5,90.5 0,20 -20,0 z"/>
-</g>
-<g style="stroke:none" id="button-normal-bottomleft">
-<rect width="3" x="89.499985" y="52.000038" height="3" style="fill-rule:evenodd;stroke-linejoin:bevel;fill-opacity:0;stroke-linecap:round" id="rect4834"/>
-<g id="button-normal-bottomleft0" transform="matrix(0.4682777,0,0,-1,429.5696,831.58404)">
-<path class="ColorScheme-Text" style="opacity:.8;fill-opacity:.333;color:#31363b" id="path5569" d="m -719.8071,777.584 c -2.35879,0 -4.27097,0.89543 -4.27097,2 h 2.13548 c 0,-0.55228 0.9561,-1 2.13549,-1 v -1 z "/>
-<path class="ColorScheme-Background" style="fill:#e9eaea;color:#eff0f1" id="path5571" d="m 721.9425,-779.5841 a 2.13548,1 0 0,1 -2.13548,1 v -1 z " transform="scale(-1,-1)"/>
-</g>
-</g>
-<g style="color:#3daee9;stroke:none" id="button-toggled-topleft" transform="matrix(1.49981,0,0,1.49981,-161.43874,-3.4986703)">
-<path class="ColorScheme-ButtonHover" style="fill-opacity:0" id="path4762" d="m 323.0002,5 -2.0004,-.0003 -0,2.0003 h 2.00025 z "/>
-<path class="ColorScheme-ButtonHover" style="fill:#3daee9" id="button-toggled-topleft0" d="m 323.0002,5.6665 c -0.73661,0 -1.33376,0.597029 -1.33376,1.3335 0.44456,0 1.33367,0 1.33367,0 0,0 9e-05,-0.888999 9e-05,-1.3335 z "/>
-</g>
-<g style="color:#3daee9;stroke:none" id="button-toggled-top" transform="matrix(1,0,0,1.5,0,-3.5)">
-<rect width="2" x="5" y="323.00015" class="ColorScheme-ButtonFocus" height="42" style="fill-opacity:0" id="rect4756" transform="matrix(0,1,1,0,0,0)"/>
-<rect width="1.3333334" x="5.6666665" y="323.00015" class="ColorScheme-ButtonFocus" height="42" style="fill:#3daee9" id="button-toggled-top0" transform="matrix(0,1,1,0,0,0)"/>
-</g>
-<g style="color:#3daee9;stroke:none" id="button-toggled-bottomleft" transform="matrix(1.499785,0,0,1.499785,-161.43064,-24.489467)">
-<path class="ColorScheme-ButtonHover" style="fill-opacity:0" id="path4770" d="m 323.0001,51 -2.0004,.0003 -0,-2.0003 2.0002,0 z "/>
-<path class="ColorScheme-ButtonHover" style="fill:#339ad5;fill-opacity:.882" id="button-toggled-bottomleft0" d="m 323.0001,50.3335 c -0.73663,0 -1.33378,-0.597039 -1.33378,-1.33353 0.44456,0 1.33369,0 1.33369,0 0,0 9e-05,0.889015 9e-05,1.33353 z "/>
-</g>
-<g style="color:#3daee9;stroke:none" id="button-toggled-bottom" transform="matrix(1,0,0,1.5,0,-24.5)">
-<rect width="2" x="-51" y="323.00015" class="ColorScheme-ButtonFocus" height="42" style="fill-opacity:0" id="rect4778" transform="matrix(0,-1,1,0,0,0)"/>
-<rect width="1.3333334" x="-50.333332" y="323.00015" class="ColorScheme-ButtonFocus" height="42" style="fill:#339ad5;fill-opacity:.882" id="button-toggled-bottom0" transform="matrix(0,-1,1,0,0,0)"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-normal-top" id="progress-normal" transform="translate(0,4)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-normal-topleft" id="progress-normal-bottomleft" transform="matrix(1,0,0,-1,0,203)"/>
@@ -724,13 +667,13 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="menuitem-left-focused" transform="matrix(0,-1,1,0,187.99998,529.99998)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-plus-pressed" id="arrow-plus-toggled" transform="translate(44,0)"/>
 <g style="stroke:none" id="common-focused-top" transform="matrix(0.72727273,0,0,1.5,877.99614,-685.876)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#31363b" id="rect4787"/>
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill:#339ad5;color:#31363b" id="rect4787"/>
 <rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#f5f5f4;color:#eff0f1" id="rect4789"/>
 </g>
 <rect width="40" x="354.5" y="483.5" class="ColorScheme-Background" height="40" style="fill:#f5f5f4;stroke:none;color:#eff0f1" id="common-focused"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-top" id="common-focused-left" transform="matrix(0,-1,1,0,-129.00003,878)"/>
 <g style="stroke:none" id="common-focused-topleft" transform="matrix(1.5,0,0,1.5,1434.2106,-685.876)">
-<path class="ColorScheme-Text" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#31363b" id="path4797" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
+<path class="ColorScheme-Text" style="opacity:.8;fill:#339ad5;color:#31363b" id="path4797" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
 <path class="ColorScheme-Background" style="fill:#f5f5f4;color:#eff0f1" id="path4799" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(1,0,0,-1,-1.84375e-5,1007)"/>
@@ -738,88 +681,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-top" id="common-focused-right" transform="matrix(0,1,-1,0,877.99995,129)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-topright" transform="matrix(-1,0,0,1,748.99992,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,748.99992,1007)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="button-toggled-right" transform="matrix(-1,0,0,1,688,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="button-toggled-topright" transform="matrix(-1,0,0,1,688,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="button-toggled-bottomright" transform="matrix(-1,0,0,1,688.00014,0)"/>
-<g style="stroke:none" id="button-normal-top">
-<g id="button-normal-top0" transform="matrix(0.83636364,0,0,1,694.52056,-773.584)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect3329-1"/>
-<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#eff0f1;color:#eff0f1" id="rect4117-4"/>
-</g>
-<rect width="46" x="92.5" y="2.9999843" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:0;color:#31363b" id="rect4792"/>
-</g>
-<g style="stroke:none" id="button-normal-left">
-<g id="button-normal-left0" transform="matrix(0,-0.83636364,1,0,-687.08398,-550.0206)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect5557"/>
-<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:url(#linearGradient6647);color:#eff0f1" id="rect5559"/>
-</g>
-<rect width="46" x="-52" y="89.5" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:0;color:#31363b" id="rect4806" transform="matrix(0,-1,1,0,0,0)"/>
-</g>
-<g style="stroke:none" id="button-normal-bottom">
-<g id="button-normal-bottom0" transform="matrix(0.83636364,0,0,-1,694.52056,831.58398)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect5563"/>
-<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#e9eaea;color:#eff0f1" id="rect5565"/>
-</g>
-<rect width="46" x="92.5" y="-54.999996" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:0;color:#31363b" id="rect4822" transform="scale(1,-1)"/>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-topleft" id="button-normal-topright" transform="matrix(-1,0,0,1,231.00001,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-bottomleft" id="button-normal-bottomright" transform="matrix(-1,0,0,1,231.00001,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-left" id="button-normal-right" transform="matrix(-1,0,0,1,231.00001,0)"/>
-<g style="stroke:none" id="button-focused-top">
-<g id="button-focused-top0" transform="matrix(0.83636364,0,0,1,769.52056,-773.084)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-ButtonHover" height="1" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#3daee9" id="rect3394"/>
-<rect width="55" x="-719.80719" y="778.58398" height="1" style="fill:#eaeae8" id="rect3396"/>
-</g>
-<rect width="46" x="167.5" y="3.4999843" class="ColorScheme-ButtonHover" height="1" style="opacity:.8;fill-opacity:0;color:#3daee9" id="rect4858"/>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-focused-bottomleft" transform="matrix(0,-1,1,0,160.99999,220.00009)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-focused-left" transform="matrix(0,-1,1,0,161.00001,219.99843)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-focused-topright" transform="matrix(0,1,-1,0,220,-161.00001)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-focused-right" transform="matrix(0,1,-1,0,219.99998,-161)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-focused-bottomright" transform="matrix(-1,0,0,-1,381.00009,59.000007)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-focused-bottom" transform="matrix(1,0,0,-1,-8.5224341e-6,59.000084)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-pressed-topleft" transform="translate(74,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-pressed-top" transform="translate(74,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-pressed-bottomleft" transform="matrix(0,-1,1,0,234.99999,220.00018)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-pressed-left" transform="matrix(0,-1,1,0,235.00001,220)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-pressed-topright" transform="matrix(0,1,-1,0,294.00003,-161.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-pressed-right" transform="matrix(0,1,-1,0,294.00003,-161.00011)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-topleft" id="button-pressed-bottomright" transform="matrix(-1,0,0,-1,455.00009,59.000007)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-top" id="button-pressed-bottom" transform="matrix(1,0,0,-1,74.000021,59.00007)"/>
-<rect width="46" x="241.49988" y="6.5" class="ColorScheme-Background" height="46" style="fill:#eaeae8;stroke:none;color:#eff0f1" id="button-pressed"/>
-<g style="stroke:none" id="lineedit-focused-topleft" transform="translate(-32.500178,78.5)">
-<rect width="3" x="164.5" y="3.4999843" height="3" style="fill-rule:evenodd;stroke-linejoin:bevel;fill-opacity:0;stroke-linecap:round" id="rect4910"/>
-<g id="g4912" transform="matrix(1.0001884,0,0,1,887.44289,-773.084)">
-<path class="ColorScheme-ButtonHover" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#3daee9" id="path4914" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
-<path style="fill:#fff" id="path4916" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
-</g>
-</g>
-<g style="stroke:none" id="lineedit-focused-top" transform="translate(-32.500178,78.5)">
-<g id="g4920" transform="matrix(0.83636364,0,0,1,769.52056,-773.084)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-ButtonHover" height="1" style="opacity:.8;fill:#339ad5;fill-opacity:.882;color:#3daee9" id="rect4922"/>
-<rect width="55" x="-719.80719" y="778.58398" height="1" style="fill:#fff" id="rect4924"/>
-</g>
-<rect width="46" x="167.5" y="3.4999843" class="ColorScheme-ButtonHover" height="1" style="opacity:.8;fill-opacity:0;color:#3daee9" id="rect4926"/>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomleft" transform="matrix(0,-1,1,0,50,265.99962)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-left" transform="matrix(0,-1,1,0,49.999829,265.99825)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-topright" transform="matrix(0,1,-1,0,266.00003,-49.999822)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-right" transform="matrix(0,1,-1,0,265.99998,-49.999821)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomright" transform="matrix(-1,0,0,-1,315.99991,216.00003)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-bottom" transform="matrix(1,0,0,-1,1.7937757e-4,215.99998)"/>
-<g style="stroke:none" id="lineedit-normal-top">
-<g id="lineedit-normal-top0" transform="matrix(0.83636364,0,0,1,636.52056,-696.584)">
-<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.2;fill:;color:#31363b" id="rect3329-1-9"/>
-<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#fff;color:#eff0f1" id="rect4117-4-4"/>
-</g>
-<rect width="46" x="34.5" y="79.999985" class="ColorScheme-Text" height="1" style="opacity:.2;fill-opacity:0;color:#31363b" id="rect4942"/>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-topleft" id="lineedit-normal-bottomleft" transform="matrix(0,-1,1,0,-48.500001,163.49999)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-top" id="lineedit-normal-left" transform="matrix(0,-1,1,0,-48.499985,163.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-topleft" id="lineedit-normal-topright" transform="matrix(0,1,-1,0,163.5,48.50001)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-top" id="lineedit-normal-right" transform="matrix(0,1,-1,0,163.49998,48.500001)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-topleft" id="lineedit-normal-bottomright" transform="matrix(-1,0,0,-1,115,212.00003)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-top" id="lineedit-normal-bottom" transform="matrix(1,0,0,-1,1.3775659e-6,211.99998)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-normal-left" id="scrollbarslider-normal-right" transform="matrix(-1,0,0,1,432,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-focused-right" transform="matrix(-1,0,0,1,476.99981,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-pressed-left" transform="translate(20,0)"/>
@@ -838,4 +699,95 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-top" id="group-normal-right" transform="matrix(0,1,-1,0,878.49996,237.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-bottomright" transform="matrix(-1,0,0,-1,640.99997,1116)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-top" id="group-normal-bottom" transform="matrix(1,0,0,-1,2.5102315e-5,1115.9999)"/>
+<g style="stroke:none" id="button-normal-topleft" transform="matrix(0.4682777,0,0,1,419.0696,-767.584)">
+<path class="ColorScheme-Text" style="opacity:.8;fill-opacity:.333;color:#31363b" id="path4101-5" d="m -719.8071,777.584 c -2.35879,0 -4.27097,0.89543 -4.27097,2 h 2.13548 c 0,-0.55228 0.9561,-1 2.13549,-1 v -1 z "/>
+<path class="ColorScheme-Background" style="fill:#eff0f1;color:#eff0f1" id="path4105-8" d="m 721.9425,-779.5841 a 2.13548,1 0 0,1 -2.13548,1 v -1 z " transform="scale(-1,-1)"/>
+</g>
+<g style="stroke:none">
+<g id="button-normal-top">
+<rect width="46" x="82" y="9.9999847" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect3329-1"/>
+<rect width="46" x="82" y="10.999985" class="ColorScheme-Background" height="1" style="fill:#eff0f1;color:#eff0f1" id="rect4117-4"/>
+</g>
+<rect width="46" x="82" y="12" class="ColorScheme-Background" height="46" style="fill:url(#linearGradient6147);color:#eff0f1" id="button-normal"/>
+</g>
+<rect width="2" x="310.00024" y="-58" class="ColorScheme-ButtonFocus" height="42" style="fill:url(#linearGradient5690);stroke:none;color:#3daee9" id="button-toggled-left" transform="scale(1,-1)"/>
+<g style="stroke:none" id="button-focused-topleft" transform="matrix(1.0001884,0,0,1,875.94309,-767.58401)">
+<path class="ColorScheme-ButtonHover" style="fill:#339ad5;color:#3daee9" id="path3376" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
+<path style="fill:#eaeae8" id="path3378" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
+</g>
+<g style="stroke:none" id="button-focused-top" transform="matrix(0.83636364,0,0,1,758.02076,-767.58401)">
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-ButtonHover" height="1" style="fill:#339ad5;color:#3daee9" id="rect3394"/>
+<rect width="55" x="-719.80719" y="778.58398" height="1" style="fill:#eaeae8" id="rect3396"/>
+</g>
+<rect width="46" x="156.0002" y="11.999989" class="ColorScheme-Background" height="46" style="fill:#eaeae8;stroke:none;color:#eff0f1" id="button-focused"/>
+<rect width="42" x="312.00024" y="15.999998" class="ColorScheme-Background" height="42" style="fill:url(#linearGradient5987);stroke:none;color:#eff0f1" id="button-toggled"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-left" xlink:href="#button-focused-top" transform="matrix(0,-1,1,0,144.00021,214.00019)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-bottomleft" xlink:href="#button-focused-topleft" transform="matrix(1,0,0,-1,5.2359863e-8,69.999977)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-topright" xlink:href="#button-focused-topleft" transform="matrix(-1,0,0,1,358.0004,2.4999996e-8)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-right" xlink:href="#button-focused-top" transform="matrix(0,1,-1,0,214.00019,-144.00021)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-bottomright" xlink:href="#button-focused-topleft" transform="matrix(-1,0,0,-1,358.0004,69.999977)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-focused-bottom" xlink:href="#button-focused-top" transform="matrix(1,0,0,-1,1.4823599e-6,69.999977)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-topleft" xlink:href="#button-focused-topleft" transform="translate(77.999998,-1.9185764e-4)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-top" xlink:href="#button-focused-top" transform="translate(77.999999,-1.9185764e-4)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed" xlink:href="#button-focused" transform="translate(77.999998,-1.9185764e-4)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-bottomleft" xlink:href="#button-focused-topleft" transform="matrix(0,-1,1,0,222.00021,214)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-left" xlink:href="#button-focused-top" transform="matrix(0,-1,1,0,222.00021,214)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-topright" xlink:href="#button-focused-topleft" transform="matrix(0,1,-1,0,292.00019,-144.0004)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-right" xlink:href="#button-focused-top" transform="matrix(0,1,-1,0,292.00019,-144.0004)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-bottomright" xlink:href="#button-focused-topleft" transform="matrix(-1,0,0,-1,436.0004,69.999786)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-pressed-bottom" xlink:href="#button-focused-top" transform="matrix(1,0,0,-1,77.999999,69.999786)"/>
+<g style="stroke:none" id="button-normal-left" transform="matrix(0,-0.83636364,1,0,-697.58398,-544.0206)">
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect5557"/>
+<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:url(#linearGradient5682);color:#eff0f1" id="rect5559"/>
+</g>
+<g style="stroke:none" id="button-normal-bottom" transform="matrix(0.83636364,0,0,-1,684.02056,837.58398)">
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.8;fill-opacity:.333;color:#31363b" id="rect5563"/>
+<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#e9eaea;color:#eff0f1" id="rect5565"/>
+</g>
+<g style="stroke:none" id="button-normal-bottomleft" transform="matrix(0.4682777,0,0,-1,419.0696,837.58404)">
+<path class="ColorScheme-Text" style="opacity:.8;fill-opacity:.333;color:#31363b" id="path5569" d="m -719.8071,777.584 c -2.35879,0 -4.27097,0.89543 -4.27097,2 h 2.13548 c 0,-0.55228 0.9561,-1 2.13549,-1 v -1 z "/>
+<path class="ColorScheme-Background" style="fill:#e9eaea;color:#eff0f1" id="path5571" d="m 721.9425,-779.5841 a 2.13548,1 0 0,1 -2.13548,1 v -1 z " transform="scale(-1,-1)"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" id="button-normal-topright" xlink:href="#button-normal-topleft" transform="matrix(-1,0,0,1,210,3.1518668e-8)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-normal-right" xlink:href="#button-normal-left" transform="matrix(-1,0,0,1,210,3.1518555e-8)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-normal-bottomright" xlink:href="#button-normal-bottomleft" transform="matrix(-1,0,0,1,210,3.1518441e-8)"/>
+<path class="ColorScheme-ButtonHover" style="fill:#3daee9;stroke:none;color:#3daee9" id="button-toggled-topleft" d="m 312.0004,14 c -1.10478,0 -2.00038,0.89543 -2.00038,2 0.66675,0 2.00025,0 2.00025,0 0,0 0.00013,-1.33333 0.00013,-2 z "/>
+<rect width="2" x="13.999998" y="312.0004" class="ColorScheme-ButtonFocus" height="42" style="fill:#3daee9;stroke:none;color:#3daee9" id="button-toggled-top" transform="matrix(0,1,1,0,0,0)"/>
+<path class="ColorScheme-ButtonHover" style="fill:#339ad5;stroke:none;fill-opacity:.882;color:#3daee9" id="button-toggled-bottomleft" d="m 312.0004,60 c -1.10478,0 -2.00038,-0.89543 -2.00038,-2 0.66675,0 2.00025,0 2.00025,0 0,0 0.00013,1.33333 0.00013,2 z "/>
+<rect width="2" x="-60" y="312.0004" class="ColorScheme-ButtonFocus" height="42" style="fill:#339ad5;stroke:none;fill-opacity:.882;color:#3daee9" id="button-toggled-bottom" transform="matrix(0,-1,1,0,0,0)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-toggled-right" xlink:href="#button-toggled-left" transform="matrix(-1,0,0,1,666.00067,-2.5996113e-4)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-toggled-topright" xlink:href="#button-toggled-topleft" transform="matrix(-1,0,0,1,666.00067,-2.5996113e-4)"/>
+<use width="100%" x="0" y="0" height="100%" id="button-toggled-bottomright" xlink:href="#button-toggled-bottomleft" transform="matrix(-1,0,0,1,666.00067,-2.5996113e-4)"/>
+<g style="stroke:none" id="lineedit-normal-topleft" transform="translate(731.80711,-702.58402)">
+<path class="ColorScheme-Text" style="opacity:.2;color:#31363b" id="path4101-5-2" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
+<path class="ColorScheme-Background" style="fill:#fff;color:#eff0f1" id="path4105-8-9" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
+</g>
+<g style="stroke:none" id="lineedit-normal-top" transform="matrix(0.83636364,0,0,1,614.02058,-702.58402)">
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-Text" height="1" style="opacity:.2;color:#31363b" id="rect3329-1-9"/>
+<rect width="55" x="-719.80719" y="778.58398" class="ColorScheme-Background" height="1" style="fill:#fff;color:#eff0f1" id="rect4117-4-4"/>
+</g>
+<g style="stroke:none;color:#eff0f1">
+<rect width="46" x="12.000025" y="76.999992" class="ColorScheme-Background" height="46" style="fill:#fcfcfc" id="lineedit-normal"/>
+<rect width="46" x="102.00038" y="76.999802" class="ColorScheme-Background" height="46" style="fill:#fff" id="lineedit-focused"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-bottomleft" xlink:href="#lineedit-normal-topleft" transform="matrix(0,-1,1,0,-64.999964,135)"/>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-left" xlink:href="#lineedit-normal-top" transform="matrix(0,-1,1,0,-64.999964,135)"/>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-topright" xlink:href="#lineedit-normal-topleft" transform="matrix(0,1,-1,0,135,64.999964)"/>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-right" xlink:href="#lineedit-normal-top" transform="matrix(0,1,-1,0,135,64.999964)"/>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-bottom" xlink:href="#lineedit-normal-top" transform="matrix(1,0,0,-1,9.7500002e-7,199.99996)"/>
+<use width="100%" x="0" y="0" height="100%" id="lineedit-normal-bottomright" xlink:href="#lineedit-normal-topleft" transform="matrix(-1,0,0,-1,70.000052,199.99996)"/>
+<g style="stroke:none" id="lineedit-focused-topleft" transform="matrix(1.0001884,0,0,1,821.94309,-702.5842)">
+<path class="ColorScheme-ButtonHover" style="fill:#339ad5;color:#3daee9" id="path5039" d="m -719.8071,777.584 c -1.10457,0 -2,0.89543 -2,2 h 1 c 0,-0.55228 0.44772,-1 1,-1 v -1 z "/>
+<path style="fill:#fff" id="path5041" d="m 162,-159 a 2,2 0 0,1 -2,2 v -2 z " transform="matrix(-0.5,0,0,-0.5,-639.80709,700.08403)"/>
+</g>
+<g style="stroke:none" id="lineedit-focused-top" transform="matrix(0.83636364,0,0,1,704.02076,-702.5842)">
+<rect width="55" x="-719.80719" y="777.58398" class="ColorScheme-ButtonHover" height="1" style="fill:#339ad5;color:#3daee9" id="rect5105"/>
+<rect width="55" x="-719.80719" y="778.58398" height="1" style="fill:#fff" id="rect5107"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomleft" transform="matrix(0,-1,1,0,25.000185,225.00019)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-left" transform="matrix(0,-1,1,0,25.000216,225.0002)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-topright" transform="matrix(0,1,-1,0,224.9998,-25.000195)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-right" transform="matrix(0,1,-1,0,224.99975,-25.000005)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomright" transform="matrix(-1,0,0,-1,250.00019,199.99981)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-bottom" transform="matrix(1,0,0,-1,-1.9852243e-4,199.99978)"/>
 </svg>

@@ -528,6 +528,17 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","group_toolbar_buttons");
   r.group_toolbar_buttons = v.toBool();
 
+  if (!r.group_toolbar_buttons)
+  {
+    v = getValue("General","toolbar_item_spacing");
+    if (v.isValid()) // 0 by default
+      r.toolbar_item_spacing = qMax(v.toInt(),0);
+  }
+
+  v = getValue("General","toolbar_interior_spacing");
+  if (v.isValid()) // 0 by default
+    r.toolbar_interior_spacing = qMax(v.toInt(),0);
+
   v = getValue("General","center_toolbar_handle");
   r.center_toolbar_handle = v.toBool();
 

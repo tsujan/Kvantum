@@ -294,6 +294,13 @@ no_inactive_tab_expansion         true/false          If tabs have frame expansi
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
 
+toolbar_item_spacing              integer             The space between toolbar buttons. Zero
+                                                      by default. It is also zero if the key
+                                                      group_toolbar_buttons is set to true.
+
+toolbar_interior_spacing          integer             The space around the interior of toolbars.
+                                                      Zero by default.
+
 center_toolbar_handle             true/false          If true, the SVG element for the
                                                       toolbar handle will be centered
                                                       and its size will be that of the
