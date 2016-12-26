@@ -4881,7 +4881,7 @@ QIcon::Mode Style::getIconMode(int state, label_spec lspec) const
   else if (state == 4)
     txtCol = getFromRGBA(lspec.toggleColor);
 
-  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::ButtonText)))
+  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
     icnMode = QIcon::Selected;
 
   return icnMode;
@@ -5177,6 +5177,12 @@ void Style::drawControl(ControlElement element,
               QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::Text, normalColor);
               o.palette = palette;
+              if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
+              {
+                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                               iconstate, opt->decorationSize);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -5198,6 +5204,12 @@ void Style::drawControl(ControlElement element,
                 QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
                 o.icon = QIcon(px);
               }
+              else if (pixelRatio_ > 1)
+              {
+                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                               iconstate, opt->decorationSize);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -5206,6 +5218,12 @@ void Style::drawControl(ControlElement element,
               QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::HighlightedText, pressColor);
               o.palette = palette;
+              if (pixelRatio_ > 1)
+              {
+                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                               iconstate, opt->decorationSize);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -5214,6 +5232,12 @@ void Style::drawControl(ControlElement element,
               QStyleOptionViewItem_v4 o(*opt);
               palette.setColor(QPalette::HighlightedText, toggleColor);
               o.palette = palette;
+              if (pixelRatio_ > 1)
+              {
+                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                               iconstate, opt->decorationSize);
+                o.icon = QIcon(px);
+              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -13445,6 +13469,7 @@ void Style::renderLabel(
 
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
+    // the pixmap should have been enlarged by pixelRatio_
     QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
 
     if (!(option->state & State_Enabled))
@@ -13639,17 +13664,21 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
                                  QSize iconSize) const
 {
   if (icon.isNull()) return QPixmap();
-  /* we don't want a too big pixmap because it would
-     result in a malformed icon when made smaller */
+  /* We need a QPixmap whose size is pixelRatio_ times iconSize. However, with
+     an HDPI-enabled app, the size of the QPixmap returned by QIcon::pixmap()
+     is pixelRatio_*pixelRatio_*iconSize when the icon is taken from a theme
+     and is (almost) pixelRatio_*iconSize when the icon isn't taken from a
+     theme but has no fixed size. What follows covers both cases and also
+     the case of icons with fixed sizes. */
   bool hdpi(false);
 #if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
 #endif
-  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_ // QPixmap::setDevicePixelRatio() is used too (-> qicon.cpp)
+  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_
                                 : iconSize*pixelRatio_,iconmode,iconstate);
-  if (hdpi && (px.size() == iconSize // not from icon theme
-               || px.size().width() < iconSize.width())) // when pixelRatio_ is odd FIXME: why?!
+  /* for an HDPI-enabled app and when the icon isn't taken from a theme */
+  if (hdpi && px.size().width() < pixelRatio_*(iconSize.width() - iconSize.width()%pixelRatio_))
     px = icon.pixmap(iconSize,iconmode,iconstate);
   return px;
 }

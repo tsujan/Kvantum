@@ -207,7 +207,7 @@ class Style : public QCommonStyle {
                      const QString &text,
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                     const QPixmap &px = QPixmap(),
+                     const QPixmap &px = QPixmap(), // should have the correct size with HDPI
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
                     ) const;
