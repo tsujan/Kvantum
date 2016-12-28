@@ -113,8 +113,8 @@ inherits=PanelButtonCommand
 
 [Dock]
 inherits=PanelButtonCommand
-interior.element=dock
-frame.element=dock
+interior.element=window
+frame.element=window
 frame.top=1
 frame.bottom=1
 frame.left=1
@@ -195,8 +195,8 @@ inherits=PanelButtonCommand
 interior.element=tab
 text.margin.left=6
 text.margin.right=6
-text.margin.top=3
-text.margin.bottom=3
+text.margin.top=4
+text.margin.bottom=4
 frame.element=tab
 indicator.element=tab
 indicator.size=9
@@ -337,7 +337,7 @@ interior.element=menuitem
 indicator.element=menuitem
 size.minheight=22
 text.normal.color=black
-text.focus.color=white
+text.focus.color=black
 text.margin.top=0
 text.margin.bottom=0
 text.margin.left=2
@@ -346,7 +346,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-frame.expansion=0
+frame.expansion=8
 
 [MenuBar]
 inherits=PanelButtonCommand
