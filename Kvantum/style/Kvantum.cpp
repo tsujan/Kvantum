@@ -1843,7 +1843,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (!w->hasFocus())
           animationStartState_ = "normal";
-        else if (!animationStartState_.startsWith("toggled")) // the popup may have been closed (with Qt5)
+        else if (!animationStartState_.startsWith("c-toggled")) // the popup may have been closed (with Qt5)
           animationStartState_ = "pressed";
         if (!w->isActiveWindow())
           animationStartState_.append("-inactive");
@@ -2120,7 +2120,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
         animationStartState_ = "normal"; // -> QEvent::FocusIn
       else
-        animationStartState_ = "toggled";
+        animationStartState_ = "c-toggled"; // distinguish it from a toggled button
       /* ensure that the combobox will be animated on closing popup
          (especially needed if the cursor has been on the popup) */
       animatedWidget_ = getParent(w, 1);
@@ -4494,6 +4494,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                      && (mouseAnimation
                          || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
         QString animationStartState(animationStartState_);
+        if (animationStartState.startsWith("c-"))
+          animationStartState.remove(0, 2);
         int animationOpacity = animationOpacity_;
         if (animate)
         {
@@ -4526,7 +4528,12 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (animationOpacity >= 100)
           {
             if (animatedWidget_ == widget)
+            {
               animationStartState_ = status;
+              // distinguish between toggled combo and toggled button
+              if (animationStartState_.startsWith("toggled"))
+                animationStartState_ = "c-" + animationStartState_;
+            }
             if (!mouseAnimation)
               animationStartStateOut_ = status;
           }
@@ -8687,6 +8694,8 @@ void Style::drawComplexControl(ComplexControl control,
                            && (mouseAnimation
                                || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
               QString animationStartState(animationStartState_);
+              if (animationStartState.startsWith("c-"))
+                animationStartState.remove(0, 2);
               int animationOpacity = animationOpacity_;
               if (animate)
               {
@@ -8740,6 +8749,9 @@ void Style::drawComplexControl(ComplexControl control,
                   }
                   else
                     animationStartState_ = status;
+                  // distinguish between toggled combo and toggled button
+                  if (animationStartState_.startsWith("toggled"))
+                    animationStartState_ = "c-" + animationStartState_;
                 }
               }
             }
