@@ -3604,10 +3604,10 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString suffix = "-normal";
       if (widget && !widget->isActiveWindow())
         suffix = "-normal-inactive";
-      renderFrame(painter,option->rect,fspec,fspec.element+suffix);
+      renderFrame(painter,option->rect,fspec,fspec.element+suffix,0,0,0,0,0,true);
       if (tspec_.groupbox_top_label
           && widget) // QML anchoring
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix,true);
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -3618,7 +3618,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QString group = "TabFrame";
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
-      fspec.expansion = 0;
 
       frame_spec fspec1 = fspec;
       int d = 0;
@@ -3627,6 +3626,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (tspec_.attach_active_tab)
       {
+        fspec.expansion = 0;
         /* WARNING: We use "floating tabs" when QTabWidget is NULL because
            QStyleOptionTabWidgetFrame::selectedTabRect.x() is wrong for QML.
            For the sake of consistency, we don't draw tab widget frame either
@@ -3708,12 +3708,13 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (widget && !widget->isActiveWindow())
         suffix = "-normal-inactive";
       if (widget) // WARNING: QML has anchoring!
-        renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix);
+        renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix,true);
       const frame_spec fspecT = getFrameSpec("Tab");
       renderFrame(painter,
                   option->rect,
                   fspec,fspec.element+suffix,
-                  d, l, fspecT.left, fspecT.right,tp);
+                  d, l, fspecT.left, fspecT.right,tp,
+                  true);
       if (!(option->state & State_Enabled))
         painter->restore();
 

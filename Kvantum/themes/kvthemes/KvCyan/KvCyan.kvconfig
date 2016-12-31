@@ -204,7 +204,6 @@ frame.bottom=3
 frame.left=3
 frame.right=3
 text.normal.color=white
-text.press.color=none
 text.focus.color=#00e6ff
 text.toggle.color=white
 frame.expansion=12

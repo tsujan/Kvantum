@@ -216,7 +216,6 @@ frame.left=4
 frame.right=4
 text.normal.color=#ffffff78
 text.focus.color=#ffffffb4
-text.press.color=none
 text.toggle.color=#ffffffd2
 frame.expansion=0
 

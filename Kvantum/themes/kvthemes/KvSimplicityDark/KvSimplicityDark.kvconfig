@@ -207,7 +207,6 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.normal.color=white
-text.press.color=none
 text.focus.color=#9bccff
 text.toggle.color=white
 frame.expansion=8

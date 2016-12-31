@@ -192,7 +192,6 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.normal.color=black
-text.press.color=none
 text.focus.color=#0052aa
 text.toggle.color=black
 frame.expansion=10

@@ -1,7 +1,7 @@
 [%General]
 author=Tsu Jan
 comment=A theme inspired by KDE4's Oxygen
-x11drag=true
+x11drag=all
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
@@ -36,7 +36,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=true
-groupbox_top_label=false
+groupbox_top_label=true
 inline_spin_indicators=true
 joined_inactive_tabs=true
 layout_spacing=2
@@ -125,7 +125,7 @@ text.normal.color=black
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=black
+text.normal.color=#000000c8
 text.focus.color=#0052aa
 text.bold=true
 
@@ -187,7 +187,7 @@ indicator.size=12
 [ToolboxTab]
 inherits=PanelButtonCommand
 text.normal.color=black
-text.press.color=black
+text.press.color=#000000c8
 text.focus.color=#0052aa
 
 [Tab]
@@ -205,14 +205,13 @@ frame.bottom=3
 frame.left=3
 frame.right=3
 text.normal.color=black
-text.press.color=none
 text.focus.color=#0052aa
 text.toggle.color=black
 frame.expansion=12
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=tabframe1
+frame.element=none
 interior=false
 frame.top=4
 frame.bottom=4
@@ -401,16 +400,19 @@ frame.expansion=0
 inherits=GenericFrame
 frame=true
 frame.element=group
+interior=true
+interior.element=group
 text.shadow=0
 text.margin=0
 frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.normal.color=black
+text.bold=true
+text.normal.color=#000000c8
 text.press.color=black
 text.focus.color=#0052aa
-frame.expansion=0
+frame.expansion=12
 
 [TabBarFrame]
 inherits=GenericFrame
