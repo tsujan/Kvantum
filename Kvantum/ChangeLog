@@ -15,6 +15,7 @@ V0.10.3
  * Add hover effect only selectively.
  * Added CMake support (while qmake is kept).
  * Added two keys for toolbar spacing.
+ * Added a key for submenu delay (to Kvantum Manager). It can be used to show submenus only by clicking.
 
 V0.10.2
 ---------

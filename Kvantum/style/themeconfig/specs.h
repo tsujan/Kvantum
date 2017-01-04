@@ -105,6 +105,9 @@ typedef struct {
   int menu_shadow_depth;
   /* overlap between a submenu and its parent */
   int submenu_overlap;
+  /* milliseconds to wait before opening a submenu
+     (-1 means no popup, 0 means immediately) */
+  int submenu_delay;
   /* depth of tooltip shadows */
   int tooltip_shadow_depth;
   /* splitter width */
@@ -397,6 +400,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.animate_states = false;
   tspec.menu_shadow_depth = 0;
   tspec.submenu_overlap = -1;
+  tspec.submenu_delay = 250;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;

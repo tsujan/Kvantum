@@ -470,6 +470,12 @@ tooltip_delay                     integer             The delay, in milliseconds
                                                       showing tooltips. (This key has NO
                                                       effect on Qt4 applications!)
 
+submenu_delay                     integer             The delay, in milliseconds, before
+                                                      opening a submenu. 250 by default.
+                                                      -1 means opening submens only by
+                                                      clicking, while 0 means showing them
+                                                      immediately.
+
 layout_spacing                    integer             Obvious. Its value is between 2 and 16
                                                       (px), and will have no effect if set in
                                                       the code of an app. It is 2 by default.

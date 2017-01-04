@@ -571,6 +571,10 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // -1 by default
     r.submenu_overlap = qMin(qMax(v.toInt(),-1),16);
 
+  v = getValue("General","submenu_delay");
+  if (v.isValid()) // 250 by default
+    r.submenu_delay = qMin(qMax(v.toInt(),-1),1000);
+
   v = getValue("General","splitter_width");
   if (v.isValid()) // 7 by default
     r.splitter_width = qMin(qMax(v.toInt(),0),32);

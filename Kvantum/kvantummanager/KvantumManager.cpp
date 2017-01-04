@@ -95,8 +95,8 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->whatsthisButton, SIGNAL(clicked()), this, SLOT (showWhatsThis()));
 
 #if QT_VERSION < 0x050000
-    ui->labelTooltipDelay->setVisible (false);
-    ui->spinTooltipDelay->setVisible (false);
+    ui->labelTooltipDelay->setEnabled (false);
+    ui->spinTooltipDelay->setEnabled (false);
 #endif
 
     resize (sizeHint().expandedTo (QSize (600, 400)));
@@ -647,12 +647,16 @@ void KvantumManager::defaultThemeButtons()
         ui->checkBoxAlt->setChecked (defaultSettings.value ("alt_mnemonic").toBool());
     else
         ui->checkBoxAlt->setChecked (true);
-#if QT_VERSION >= 0x050000
     int delay = -1;
-    if (defaultSettings.contains ("tooltip_delay")) // it's false by default
+#if QT_VERSION >= 0x050000
+    if (defaultSettings.contains ("tooltip_delay")) // it's -1 by default
         delay = qMin (qMax (defaultSettings.value ("tooltip_delay").toInt(), -1), 9999);
     ui->spinTooltipDelay->setValue (delay);
 # endif
+    delay = 250;
+    if (defaultSettings.contains ("submenu_delay")) // it's 250 by default
+        delay = qMin (qMax (defaultSettings.value ("submenu_delay").toInt(), -1), 1000);
+    ui->spinSubmenuDelay->setValue (delay);
     int index = 0;
     if (defaultSettings.contains ("toolbutton_style"))
     {
@@ -866,12 +870,16 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxButtonShift->setChecked (themeSettings.value ("button_contents_shift").toBool());
                 if (themeSettings.contains ("alt_mnemonic"))
                     ui->checkBoxAlt->setChecked (themeSettings.value ("alt_mnemonic").toBool());
-#if QT_VERSION >= 0x050000
                 int delay = -1;
+#if QT_VERSION >= 0x050000
                 if (themeSettings.contains ("tooltip_delay"))
                     delay = qMin (qMax (themeSettings.value ("tooltip_delay").toInt(), -1), 9999);
                 ui->spinTooltipDelay->setValue (delay);
 #endif
+                delay = 250;
+                if (themeSettings.contains ("submenu_delay"))
+                    delay = qMin (qMax (themeSettings.value ("submenu_delay").toInt(), -1), 1000);
+                ui->spinSubmenuDelay->setValue (delay);
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -1603,6 +1611,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
         generalKeys.insert("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
+        generalKeys.insert("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
         generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
@@ -1719,6 +1728,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
         themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
         themeSettings.setValue ("alt_mnemonic", ui->checkBoxAlt->isChecked());
+        themeSettings.setValue ("submenu_delay", ui->spinSubmenuDelay->value());
         themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
         themeSettings.setValue ("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
         themeSettings.setValue ("respect_DE", ui->checkBoxDE->isChecked());

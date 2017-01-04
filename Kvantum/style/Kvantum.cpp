@@ -10165,8 +10165,8 @@ int Style::styleHint(StyleHint hint,
 
     case SH_ItemView_ActivateItemOnSingleClick : return !tspec_.double_click;
 
-    case SH_ToolButton_PopupDelay :
-    case SH_Menu_SubMenuPopupDelay : return 250;
+    case SH_ToolButton_PopupDelay : return 250;
+    case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;
     case SH_Menu_Scrollable : return tspec_.scrollable_menu;
     case SH_Menu_SloppySubMenus : return true;
 #if QT_VERSION >= 0x050500

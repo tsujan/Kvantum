@@ -908,177 +908,313 @@ some widgets is changed, mostly by the mouse.</string>
              </widget>
              <widget class="QWidget" name="tab_3">
               <attribute name="title">
-               <string>Sizes</string>
+               <string>Sizes &amp;&amp; Delays</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_10">
-               <item row="2" column="2">
-                <widget class="QSpinBox" name="spinButton">
-                 <property name="toolTip">
-                  <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>16</number>
-                 </property>
-                 <property name="maximum">
-                  <number>64</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="labelLarge">
-                 <property name="toolTip">
-                  <string>Affects icon views.
-The default value is 32 px but
-some apps set it themselves.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Large icon:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="2">
-                <widget class="QSpinBox" name="spinToolbar">
-                 <property name="toolTip">
-                  <string>Affects toolbars.
-The default value is 22 px but
-some apps set it themselves.
-KDE apps get it from KDE setting.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>16</number>
-                 </property>
-                 <property name="maximum">
-                  <number>64</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QSpinBox" name="spinSmall">
-                 <property name="toolTip">
-                  <string>Affects menu-items and headers.
-The default value is 16 px.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>16</number>
-                 </property>
-                 <property name="maximum">
-                  <number>48</number>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="1">
-                <widget class="QLabel" name="labelSmall">
-                 <property name="toolTip">
-                  <string>Affects menu-items and headers.
-The default value is 16 px.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+                <widget class="QGroupBox" name="groupBox_2">
+                 <property name="title">
+                  <string>Sizes</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Small icon:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="labelButton">
-                 <property name="toolTip">
-                  <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Button icon:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QSpinBox" name="spinLarge">
-                 <property name="toolTip">
-                  <string>Affects icon views.
+                 <layout class="QGridLayout" name="gridLayout_7">
+                  <item row="6" column="1">
+                   <widget class="QSpinBox" name="spinOverlap">
+                    <property name="toolTip">
+                     <string>The horizontal overlap between a submenu and its parent.
+-1 means automatic.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>-1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                    <property name="value">
+                     <number>-1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QSpinBox" name="spinSpinBtnWidth">
+                    <property name="toolTip">
+                     <string>The width of horizontal spin buttons.
+(Has no effect when spin indicators are vertical or inline.)</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>32</number>
+                    </property>
+                    <property name="value">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QSpinBox" name="spinLarge">
+                    <property name="toolTip">
+                     <string>Affects icon views.
 The default value is 32 px but
 some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>24</number>
-                 </property>
-                 <property name="maximum">
-                  <number>128</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QLabel" name="labelToolbar">
-                 <property name="toolTip">
-                  <string>Affects toolbars.
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>24</number>
+                    </property>
+                    <property name="maximum">
+                     <number>128</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QSpinBox" name="spinSmall">
+                    <property name="toolTip">
+                     <string>Affects menu-items and headers.
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>48</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="toolTip">
+                     <string>The horizontal overlap between a submenu and its parent.
+-1 means automatic.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Submenu overlap: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="labelToolbar">
+                    <property name="toolTip">
+                     <string>Affects toolbars.
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Toolbar icon:</string>
-                 </property>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Toolbar icon:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QSpinBox" name="spinLayoutMargin">
+                    <property name="toolTip">
+                     <string>The default value is 4 px but some apps set it themeselves.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>2</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_4">
+                    <property name="toolTip">
+                     <string>The width of horizontal spin buttons.
+(Has no effect when spin indicators are vertical or inline.)</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Spin button width: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QSpinBox" name="spinToolbar">
+                    <property name="toolTip">
+                     <string>Affects toolbars.
+The default value is 22 px but
+some apps set it themselves.
+KDE apps get it from KDE setting.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>64</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="labelLayout">
+                    <property name="toolTip">
+                     <string>The default value is 2 px but
+some apps set it themeselves.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Layout spacing:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelSmall">
+                    <property name="toolTip">
+                     <string>Affects menu-items and headers.
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Small icon:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QSpinBox" name="spinLayout">
+                    <property name="toolTip">
+                     <string>The default value is 2 px but
+some apps set it themeselves.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>2</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QSpinBox" name="spinButton">
+                    <property name="toolTip">
+                     <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>64</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelLarge">
+                    <property name="toolTip">
+                     <string>Affects icon views.
+The default value is 32 px but
+some apps set it themselves.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Large icon:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelButton">
+                    <property name="toolTip">
+                     <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Button icon:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="labelMarging">
+                    <property name="toolTip">
+                     <string>The default value is 4 px but some apps set it themeselves.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Layout margin:</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
-               <item row="3" column="0">
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>10</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="3" column="3">
+               <item row="0" column="0">
                 <spacer name="horizontalSpacer_7">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1091,145 +1227,111 @@ KDE apps get it from KDE setting.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="4" column="1">
-                <widget class="QLabel" name="labelLayout">
-                 <property name="toolTip">
-                  <string>The default value is 2 px but
-some apps set it themeselves.</string>
+               <item row="0" column="2">
+                <widget class="QGroupBox" name="groupBox_3">
+                 <property name="title">
+                  <string>Delays</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Layout spacing:</string>
-                 </property>
+                 <layout class="QGridLayout" name="gridLayout_12">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelTooltipDelay">
+                    <property name="toolTip">
+                     <string>The delay, in milliseconds, before a tooltip is shown.
+
+Zero means tooltips are shown instantly.
+-1 means the default Qt behavior.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Tooltip delay:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_5">
+                    <property name="toolTip">
+                     <string>The delay, in milliseconds, to wait before opening a submenu.
+250 by default.
+
+-1 means no poup (opening by clicking).
+0 means no delay.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, to wait before opening a submenu. It is 250 by default.&lt;/p&gt;&lt;p&gt;-1 means no poup, i.e. opening by clicking, while 0 means no delay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Submenu delay: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QSpinBox" name="spinTooltipDelay">
+                    <property name="toolTip">
+                     <string>The delay, in milliseconds, before a tooltip is shown.
+
+Zero means tooltips are shown instantly.
+-1 means the default Qt behavior.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> ms</string>
+                    </property>
+                    <property name="minimum">
+                     <number>-1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>9999</number>
+                    </property>
+                    <property name="value">
+                     <number>-1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QSpinBox" name="spinSubmenuDelay">
+                    <property name="toolTip">
+                     <string>The delay, in milliseconds, to wait before opening a submenu.
+250 by default.
+
+-1 means no poup (opening by clicking).
+0 means no delay.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, to wait before opening a submenu. It is 250 by default.&lt;/p&gt;&lt;p&gt;-1 means no poup, i.e. opening by clicking, while 0 means no delay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> ms</string>
+                    </property>
+                    <property name="minimum">
+                     <number>-1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                    <property name="value">
+                     <number>250</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
-               <item row="4" column="2">
-                <widget class="QSpinBox" name="spinLayout">
-                 <property name="toolTip">
-                  <string>The default value is 2 px but
-some apps set it themeselves.</string>
+               <item row="0" column="3">
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
                  </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <number>16</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <widget class="QLabel" name="labelMarging">
-                 <property name="toolTip">
-                  <string>The default value is 4 px but some apps set it themeselves.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Layout margin:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="2">
-                <widget class="QSpinBox" name="spinLayoutMargin">
-                 <property name="toolTip">
-                  <string>The default value is 4 px but some apps set it themeselves.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <number>16</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QLabel" name="label_3">
-                 <property name="toolTip">
-                  <string>The horizontal overlap between a submenu and its parent.
--1 means automatic.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Submenu overlap: </string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="2">
-                <widget class="QSpinBox" name="spinOverlap">
-                 <property name="toolTip">
-                  <string>The horizontal overlap between a submenu and its parent.
--1 means automatic.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>-1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>16</number>
-                 </property>
-                 <property name="value">
-                  <number>-1</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
-                <widget class="QLabel" name="label_4">
-                 <property name="toolTip">
-                  <string>The width of horizontal spin buttons.
-(Has no effect when spin indicators are vertical or inline.)</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Spin button width: </string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="2">
-                <widget class="QSpinBox" name="spinSpinBtnWidth">
-                 <property name="toolTip">
-                  <string>The width of horizontal spin buttons.
-(Has no effect when spin indicators are vertical or inline.)</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical or inline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> px</string>
-                 </property>
-                 <property name="minimum">
-                  <number>16</number>
-                 </property>
-                 <property name="maximum">
-                  <number>32</number>
-                 </property>
-                 <property name="value">
-                  <number>16</number>
-                 </property>
-                </widget>
+                </spacer>
                </item>
               </layout>
              </widget>
@@ -1464,44 +1566,6 @@ Default is Follow Style.</string>
                  </property>
                  <property name="whatsThis">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="3">
-                <widget class="QLabel" name="labelTooltipDelay">
-                 <property name="toolTip">
-                  <string>The delay, in milliseconds, before a tooltip is shown.
-
-Zero means tooltips are shown instantly.
--1 means the default Qt behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Tooltip delay:</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="9" column="4" alignment="Qt::AlignLeft">
-                <widget class="QSpinBox" name="spinTooltipDelay">
-                 <property name="toolTip">
-                  <string>The delay, in milliseconds, before a tooltip is shown.
-
-Zero means tooltips are shown instantly.
--1 means the default Qt behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="suffix">
-                  <string> ms</string>
-                 </property>
-                 <property name="minimum">
-                  <number>-1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>9999</number>
                  </property>
                 </widget>
                </item>
