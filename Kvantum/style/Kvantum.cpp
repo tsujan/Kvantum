@@ -610,11 +610,11 @@ void Style::setAnimationOpacityOut()
   }
 }
 
-int Style::getMenuMargin(bool horiz, bool hasShadow) const
+int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  if (!noComposite_ && hasShadow) // used without compositing at PM_SubMenuOverlap
+  if (!noComposite_) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
 }
@@ -1309,10 +1309,6 @@ void Style::polish(QWidget *widget)
   if (!isLibreoffice_ // not required
       && !noComposite_
       && !subApp_
-      /* If both WA_NativeWindow and WA_WState_Created are set for a menu,
-         its background will be filled by the window background color.
-         In other words, cached native menus can't be translucent. */
-      && !(widget->testAttribute(Qt::WA_NativeWindow) && widget->testAttribute(Qt::WA_WState_Created))
       && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
              /* no shadow for tooltips that are already translucent */
           || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
@@ -1332,19 +1328,6 @@ void Style::polish(QWidget *widget)
           widget->installEventFilter(this);
         }
       }
-#if QT_VERSION >= 0x050000
-      /* FIXME: On rare occasions, the backgrounds of translucent tooltips are filled by
-         the window background color. I don't know the root of this bug but what follows
-         is a workaround, which works with setSurfaceFormat() below. */
-      else// if (widget->inherits("QTipLabel"))
-      {
-        QPalette palette = widget->palette();
-        QColor winCol = palette.window().color();
-        winCol.setAlpha(0);
-        palette.setColor(QPalette::Window, winCol);
-        widget->setPalette(palette);
-      }
-#endif
       widget->setAttribute(Qt::WA_TranslucentBackground);
       translucentWidgets_.insert(widget);
       connect(widget, SIGNAL(destroyed(QObject*)),
@@ -2069,9 +2052,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         // correct the submenu position
         w->move(w->x() + menuHShadows_.at(0)
-                       - (getMenuMargin(true, !(w->testAttribute(Qt::WA_NativeWindow)
-                                                && w->testAttribute(Qt::WA_WState_Created)))
-                          - menuHShadows_.at(1)),
+                       - (getMenuMargin(true) - menuHShadows_.at(1)),
                 w->y());
       }
       else if (qobject_cast<QToolButton*>(o))
@@ -3408,7 +3389,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       theme_spec tspec_now = settings_->getCompositeSpec();
       if (!noComposite_ && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
-          && widget && translucentWidgets_.contains(widget))
+          && widget && translucentWidgets_.contains(widget)
+          /* detached menus may come here because of setSurfaceFormat() */
+          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
       }
@@ -4166,15 +4149,17 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.right += lspec.right;
         }
 
-        QString aStatus = "normal";
-        if (!(option->state & State_Enabled))
-          aStatus = "disabled";
-        else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
-          aStatus = "pressed";
-        else if (option->state & State_MouseOver)
-          aStatus = "focused";
+        QString aStatus = getState(option,widget);
         if (widget && !widget->isActiveWindow())
           aStatus.append("-inactive");
+        /* distinguish between the toggled and pressed states
+           only if a toggled down arrow element exists */
+        if (aStatus.startsWith("toggled")
+            && !(themeRndr_ && themeRndr_->isValid()
+                 && themeRndr_->elementExists(dspec.element+"-down-toggled")))
+        {
+          aStatus.replace("toggled","pressed");
+        }
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-down-"+aStatus,option->direction);
         else if (opt->sortIndicator == QStyleOptionHeader::SortUp)
@@ -4549,7 +4534,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       /* distinguish between the toggled and pressed states
-         only if a toggled down arrow element exists */
+         only if a toggled arrow element exists */
       if (status.startsWith("toggled")
           && !(themeRndr_ && themeRndr_->isValid()
                && themeRndr_->elementExists(dspec.element+"-toggled")))
@@ -9747,9 +9732,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       {
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
            equal to PM_MenuHMargin. So, we make the overlap accurate here. */
-        so -= getMenuMargin(true, !widget ? true
-                                          : !(widget->testAttribute(Qt::WA_NativeWindow)
-                                              && widget->testAttribute(Qt::WA_WState_Created)));
+        so -= getMenuMargin(true);
         if (!noComposite_
             && settings_->getCompositeSpec().composite
             && menuHShadows_.count() == 2
@@ -9787,7 +9770,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
       if (!noComposite_ && tspec_now.composite
-          && widget && translucentWidgets_.contains(widget))
+          && widget && translucentWidgets_.contains(widget)
+          /* detached menus may come here because of setSurfaceFormat() */
+          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         v += tspec_now.menu_shadow_depth;
         h += tspec_now.menu_shadow_depth;
@@ -10082,10 +10067,17 @@ void Style::setSurfaceFormat(QWidget *widget) const
 #else
   if (noComposite_ || !tspec_.composite
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
-      || qobject_cast<QMenu*>(widget) // WARNING: prevent a hang in KFileDialog!
       || subApp_ || isLibreoffice_)
     return;
-  if (widget->inherits("QTipLabel")) ; // see polish(QWidget*)
+  if (widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget))
+  {
+    /* this is enough for all tooltips and menus to have translucency and/or
+       shadow, while setting WA_NativeWindow to true for menus (see below)
+       could create a freeze with KFileDialog's menus (FIXME: why?) */
+    if (!translucentWidgets_.contains(widget))
+      widget->ensurePolished();
+    return;
+  }
   else if (!widget->isWindow()
            /* FIXME: if transluceny is enabled, hard-coded translucency
                      will also be included but that seems harmless */
@@ -10114,8 +10106,11 @@ void Style::setSurfaceFormat(QWidget *widget) const
   if (window)
   {
     QSurfaceFormat format = window->format();
-    format.setAlphaBufferSize(8);
-    window->setFormat(format);
+    if (format.alphaBufferSize() != 8)
+    {
+      format.setAlphaBufferSize(8);
+      window->setFormat(format);
+    }
   }
 #endif
 }

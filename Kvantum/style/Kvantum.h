@@ -257,7 +257,7 @@ class Style : public QCommonStyle {
     }
 
     /* Get menu margins, including its shadow. */
-    int getMenuMargin(bool horiz, bool hasShadow = true) const;
+    int getMenuMargin(bool horiz) const;
     /* Get pure shadow dimensions of menus/tooltips. */
     void getMenuHShadows();
     QList<int> getShadow(const QString &widgetName, int thicknessH, int thicknessV);

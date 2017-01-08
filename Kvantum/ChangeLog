@@ -1,3 +1,8 @@
+V0.10.4
+---------
+ * Better coverage of menu/tooltip translucency and/or shadow.
+ * Fixed the states of header arrows.
+
 V0.10.3
 ---------
  * Choose the correct arrow for toolbar and menubar extension buttons. Unfortunately, the arrows can have no state other than normal and disabled (a Qt bug).

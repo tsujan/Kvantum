@@ -2090,7 +2090,7 @@ void KvantumManager::aboutDialog()
     qt = "Qt4";
 #endif
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        tr ("<center><b><big>Kvantum Manager 0.10.3</big></b><br><br>"\
+                        tr ("<center><b><big>Kvantum Manager 0.10.4</big></b><br><br>"\
                             "A %1 tool for intsalling, selecting<br>"\
                             "and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes<br><br>"\
                             "Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><br>")
