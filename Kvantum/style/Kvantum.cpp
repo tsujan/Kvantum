@@ -932,8 +932,9 @@ void Style::polish(QWidget *widget)
           && widget->windowType() != Qt::Desktop
           && !widget->testAttribute(Qt::WA_PaintOnScreen)
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-          && !widget->inherits("KScreenSaver")
+          && !qobject_cast<QMenu*>(widget) // hard to believe (as in qlipper)
           && !widget->inherits("QTipLabel")
+          && !widget->inherits("KScreenSaver")
           && !widget->inherits("QSplashScreen"))
       {
         if (widget->minimumSize() != widget->maximumSize())
