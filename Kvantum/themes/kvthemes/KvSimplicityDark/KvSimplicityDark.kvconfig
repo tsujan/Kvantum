@@ -432,3 +432,7 @@ interior=false
 [WindowTranslucent]
 interior=true
 interior.element=window
+
+[DialogTranslucent]
+interior=true
+interior.element=dialog

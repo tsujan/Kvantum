@@ -301,7 +301,8 @@ class Style : public QCommonStyle {
     /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;
     /* List of windows, tooltips and menus that are (made) translucent */
-    QSet<const QWidget*> translucentWidgets_, hardCodedTranslucency_;
+    QSet<const QWidget*> translucentWidgets_;
+    mutable QSet<const QWidget*> forcedTranslucency_;
 
     ShortcutHandler *itsShortcutHandler_;
     WindowManager *itsWindowManager_;

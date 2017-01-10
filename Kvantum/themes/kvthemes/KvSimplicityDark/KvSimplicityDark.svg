@@ -127,8 +127,8 @@
 </linearGradient>
 <linearGradient id="linearGradient4965">
 <stop offset="0" style="stop-color:#3d3d3e" id="stop4968"/>
-<stop offset="0.3" style="stop-color:#3d3d3e;stop-opacity:.941" id="stop4835"/>
-<stop offset="1" style="stop-color:#3d3d3e;stop-opacity:.941" id="stop4970"/>
+<stop offset="0.3" style="stop-color:#3d3d3e;stop-opacity:.93" id="stop4835"/>
+<stop offset="1" style="stop-color:#3d3d3e;stop-opacity:.93" id="stop4970"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient4635" id="linearGradient5074" y1="48.751537" x1="58.750366" y2="48.751339" x2="22.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient6741-7">
@@ -478,7 +478,7 @@
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topright" id="slider-normal-bottomright" transform="matrix(1,0,0,-1,0,589.5006)"/>
-<rect width="40" x="387.5" y="592" height="40" style="fill:url(#linearGradient4972);stroke:none" id="window-normal"/>
+<rect width="40" x="387.5" y="592" height="40" style="fill:url(#linearGradient4972);stroke:none" id="dialog-normal"/>
 <circle cx="362.5" cy="300.50024" style="fill:url(#radialGradient6962);fill-rule:evenodd;stroke:url(#linearGradient6964)" r="8.5" id="slidercursor-focused"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slidercursor-focused" id="slidercursor-pressed" transform="translate(29.308819,0.34104)"/>
 <circle cx="425" cy="300.50024" style="fill:url(#radialGradient6350);fill-rule:evenodd;stroke:url(#linearGradient6352)" id="slidercursor-disabled" r="8.5"/>
@@ -866,4 +866,5 @@
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26,0)"/>
 <rect width="10" x="0" y="30" height="10" style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3.609" id="expand-itemview-normal"/>
 <rect width="14" x="226" y="-215" rx="1" height="14" ry="1" style="fill:url(#linearGradient4859);stroke:url(#linearGradient4861);color:#000;stroke-width:2" id="checkbox-focused" transform="scale(1,-1)"/>
+<rect width="40" x="387.5" y="640" height="40" style="fill:#3d3d3e;stroke:none;fill-opacity:.93" id="window-normal"/>
 </svg>

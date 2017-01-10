@@ -750,7 +750,7 @@ void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets_.remove(widget);
-  hardCodedTranslucency_.remove(widget);
+  forcedTranslucency_.remove(widget);
 }
 
 int Style::mergedToolbarHeight(const QWidget *menubar) const
@@ -923,7 +923,8 @@ void Style::polish(QWidget *widget)
 
   switch (widget->windowFlags() & Qt::WindowType_Mask) {
     case Qt::Window:
-    case Qt::Dialog: {
+    case Qt::Dialog:
+    case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
       widget->setAttribute(Qt::WA_StyledBackground);
       /* take all precautions */
       if (!isPlasma_ && !subApp_ && !isLibreoffice_
@@ -961,72 +962,84 @@ void Style::polish(QWidget *widget)
             }
           }
         }
-        theme_spec tspec_now = settings_->getCompositeSpec();
-        bool opaqueWindow(tspec_now.translucent_windows && !isOpaque_
-                          && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                          && !widget->testAttribute(Qt::WA_NoSystemBackground)
-                          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint));
-        if ((opaqueWindow
-             /* enable blurring for hard-coded transluceny */
-             || (tspec_now.composite
-                 && hspec_.blur_translucent
-                 && widget->testAttribute(Qt::WA_TranslucentBackground)))
-            /* FIXME: I included this because I thought, without it, QtWebKit
-               apps would crash on quitting but that wasn't the case. However,
-               only blurring needs it and it's taken care of by BlurHelper. */
-            //&& widget->internalWinId()
-            && !translucentWidgets_.contains(widget))
+        /* translucency and blurring */
+        if (!translucentWidgets_.contains(widget))
         {
+          theme_spec tspec_now = settings_->getCompositeSpec();
 #if QT_VERSION < 0x050000
-          /* workaround for a Qt4 bug, which makes translucent windows
-             always appear at the top left corner (taken from QtCurve) */
-          bool was_visible = widget->isVisible();
-          bool moved = widget->testAttribute(Qt::WA_Moved);
-          if (was_visible) widget->hide();
-#endif
-
-          if (opaqueWindow)
-            widget->setAttribute(Qt::WA_TranslucentBackground);
-
-#if QT_VERSION < 0x050000
-          if (!moved) widget->setAttribute(Qt::WA_Moved, false);
-          if (was_visible) widget->show();
-#endif
-
-          /* enable blurring */
-          if (tspec_now.blurring
-              && blurHelper_) // not needed
+          if (!isOpaque_ && tspec_now.translucent_windows
+              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+              && !widget->testAttribute(Qt::WA_NoSystemBackground))
           {
-            blurHelper_->registerWidget(widget);
+            forcedTranslucency_.insert(widget);
           }
-          /* enable blurring for hard-coded transluceny */
-          else if (!opaqueWindow && hspec_.blur_translucent)
+#endif
+          bool wasOpaque(forcedTranslucency_.contains(widget)
+                         // no translucency for frameless windows (-> setSurfaceFormat)
+                         && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+                         && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
+          /* WARNING: Unlike most Qt5 windows, there are some opaque ones that are
+                      polished BEFORE being created, as in Qt4 (like Octopi's window). */
+          bool Qt5NotCreated(false);
+#if QT_VERSION >= 0x050000
+          Qt5NotCreated = (!wasOpaque && !isOpaque_ && tspec_now.translucent_windows
+                           && !widget->testAttribute(Qt::WA_WState_Created)
+                           && !widget->testAttribute(Qt::WA_TranslucentBackground)
+                           && !widget->testAttribute(Qt::WA_NoSystemBackground)
+                           && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+                           && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
+#endif
+          if ((wasOpaque || Qt5NotCreated
+               /* enable blurring for hard-coded transluceny */
+               || (tspec_now.composite && hspec_.blur_translucent
+                   && widget->testAttribute(Qt::WA_TranslucentBackground))))
           {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-            if (!blurHelper_)
+            if (Qt5NotCreated)
             {
-              QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-              const frame_spec fspec = getFrameSpec("ToolTip");
-              int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
-              thickness += tspec_now.tooltip_shadow_depth;
-              QList<int> tooltipS = getShadow("ToolTip", thickness);
-              blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+              widget->setAttribute(Qt::WA_TranslucentBackground);
+              forcedTranslucency_.insert(widget); // needed in unpolish()
             }
-#endif
-            if (blurHelper_)
-              blurHelper_->registerWidget(widget);
-          }
+#if QT_VERSION < 0x050000
+            /* workaround for a Qt4 bug, which makes translucent windows
+               always appear at the top left corner (taken from QtCurve) */
+            bool was_visible = widget->isVisible();
+            bool moved = widget->testAttribute(Qt::WA_Moved);
+            if (was_visible) widget->hide();
 
-          if (opaqueWindow)
-          {
-            widget->removeEventFilter(this);
-            widget->installEventFilter(this);
+            if (wasOpaque) // for Qt5, it's done by setSurfaceFormat()
+              widget->setAttribute(Qt::WA_TranslucentBackground);
+
+            if (!moved) widget->setAttribute(Qt::WA_Moved, false);
+            if (was_visible) widget->show();
+#endif
+
+            /* enable blurring */
+            if (!(wasOpaque || Qt5NotCreated) || tspec_now.blurring)
+            {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+              if (!blurHelper_)
+              {
+                QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+                const frame_spec fspec = getFrameSpec("ToolTip");
+                int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+                thickness += tspec_now.tooltip_shadow_depth;
+                QList<int> tooltipS = getShadow("ToolTip", thickness);
+                blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+              }
+#endif
+              if (blurHelper_)
+                blurHelper_->registerWidget(widget);
+            }
+
+            if (wasOpaque || Qt5NotCreated)
+            {
+              widget->removeEventFilter(this);
+              widget->installEventFilter(this);
+            }
+            translucentWidgets_.insert(widget);
+            connect(widget, SIGNAL(destroyed(QObject*)),
+                    SLOT(noTranslucency(QObject*)));
           }
-          else
-            hardCodedTranslucency_.insert(widget);
-          translucentWidgets_.insert(widget);
-          connect(widget, SIGNAL(destroyed(QObject*)),
-                  SLOT(noTranslucency(QObject*)));
         }
       }
       break;
@@ -1306,13 +1319,25 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if (!isLibreoffice_ // not required
-      && !noComposite_
-      && !subApp_
-      && ((qobject_cast<QMenu*>(widget) && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-             /* no shadow for tooltips that are already translucent */
-          || (widget->inherits("QTipLabel") && !widget->testAttribute(Qt::WA_TranslucentBackground)))
-      && !translucentWidgets_.contains(widget))
+#if QT_VERSION >= 0x050000
+  bool isMenuOrTooltip(!isLibreoffice_ // not required
+                       && !noComposite_
+                       && !subApp_
+                       && (qobject_cast<QMenu*>(widget)
+                           /* no shadow for tooltips that are already translucent */
+                           || (widget->inherits("QTipLabel")
+                               && (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                                   || forcedTranslucency_.contains(widget)))));
+#else
+  bool isMenuOrTooltip(!isLibreoffice_
+                       && !noComposite_
+                       && !subApp_
+                       && ((qobject_cast<QMenu*>(widget)
+                            && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+                           || (widget->inherits("QTipLabel")
+                               && !widget->testAttribute(Qt::WA_TranslucentBackground))));
+#endif
+  if (isMenuOrTooltip && !translucentWidgets_.contains(widget))
   {
     theme_spec tspec_now = settings_->getCompositeSpec();
     if (tspec_now.composite)
@@ -1328,7 +1353,9 @@ void Style::polish(QWidget *widget)
           widget->installEventFilter(this);
         }
       }
+#if QT_VERSION < 0x050000
       widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
       translucentWidgets_.insert(widget);
       connect(widget, SIGNAL(destroyed(QObject*)),
               SLOT(noTranslucency(QObject*)));
@@ -1513,11 +1540,11 @@ void Style::unpolish(QWidget *widget)
 
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
-      case Qt::Dialog: {
+      case Qt::Dialog:
+      case Qt::Sheet: {
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
-        if (translucentWidgets_.contains(widget)
-            && !hardCodedTranslucency_.contains(widget))
+        if (forcedTranslucency_.contains(widget))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -1553,7 +1580,7 @@ void Style::unpolish(QWidget *widget)
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
 
-    if ((qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel")))
+    if (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
     {
       if (blurHelper_)
         blurHelper_->unregisterWidget(widget);
@@ -1656,7 +1683,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         switch (w->windowFlags() & Qt::WindowType_Mask) {
           case Qt::Window:
-          case Qt::Dialog: {
+          case Qt::Dialog:
+          case Qt::Sheet: {
             QPainter p(w);
             p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
             drawBg(&p,w);
@@ -3390,7 +3418,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!noComposite_ && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && widget && translucentWidgets_.contains(widget)
-          /* detached menus may come here because of setSurfaceFormat() */
+          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
@@ -10045,19 +10073,15 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 }
 
 /*
-  To make Qt5 windows translucent, we should first set the surface format
-  of their native handles. However, Qt5 windows may NOT have native handles
-  associated with them before having a valid winId().
-
-  We could use setAttribute(Qt::WA_NativeWindow) to make widgets native but
-  we don't want enforceNativeChildren(), which is used when WA_NativeWindow
-  is set, because it would interfere with setTransientParent(). We only want
-  to use createTLExtra() and createTLSysExtra(). There are to ways for that:
-
-  (1) Using of private headers, which isn't a good idea for obvious reasons;
-
-  (2) Setting Qt::AA_DontCreateNativeWidgetSiblings, so that the method
-      enforceNativeChildren() isn't used in setAttribute() (-> qwidget.cpp).
+  To make Qt windows translucent, we should set the surface format of
+  their native handles BEFORE they're created but Qt5 windows are
+  polished AFTER they're created, so that setting of the attribute
+  "WA_TranslucentBackground" in "Style::polish()" would have no effect.
+  
+  Early creation of native handles could have unpredictable side effects,
+  especially for menus. However, it seems that setting of the attribute
+  "WA_TranslucentBackground" in an early stage -- before the widget is
+  created -- sets the alpha buffer size to 8 safely and automatically.
 */
 void Style::setSurfaceFormat(QWidget *widget) const
 {
@@ -10065,53 +10089,51 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (noComposite_ || !tspec_.composite
+  if (noComposite_
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
-      || subApp_ || isLibreoffice_)
+      || widget->testAttribute(Qt::WA_TranslucentBackground)
+      || widget->testAttribute(Qt::WA_NoSystemBackground)
+      || subApp_ || isLibreoffice_
+      || forcedTranslucency_.contains(widget))
     return;
+  bool realWindow(true);
   if (widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget))
   {
-    /* this is enough for all tooltips and menus to have translucency and/or
-       shadow, while setting WA_NativeWindow to true for menus (see below)
-       could create a freeze with KFileDialog's menus (FIXME: why?) */
-    if (!translucentWidgets_.contains(widget))
-      widget->ensurePolished();
-    return;
+    /* we want translucency and/or shadow for menus and
+       tooltips even if the main window isn't translucent */
+    realWindow = false;
   }
-  else if (!widget->isWindow()
-           /* FIXME: if transluceny is enabled, hard-coded translucency
-                     will also be included but that seems harmless */
-           || !tspec_.translucent_windows
-           || isPlasma_ || isOpaque_)
+  else
   {
-    return;
+    if (isPlasma_ || isOpaque_ || !widget->isWindow())
+      return;
+    switch (widget->windowFlags() & Qt::WindowType_Mask) {
+      case Qt::Window:
+      case Qt::Dialog:
+      case Qt::Sheet: break;
+      default: return;
+    }
+    if (widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+        || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
+        || widget->windowType() == Qt::Desktop
+        || widget->testAttribute(Qt::WA_PaintOnScreen)
+        || widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
+        || widget->inherits("KScreenSaver")
+        || widget->inherits("QSplashScreen"))
+     return;
   }
 
-  QWindow *window = widget->windowHandle();
-  if (!window)
-  {
-    bool noNativeSiblings = true;
-    if (!qApp->testAttribute(Qt::AA_DontCreateNativeWidgetSiblings))
-    {
-      noNativeSiblings = false;
-      qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
-    }
-    widget->setAttribute(Qt::WA_NativeWindow, true);
-    window = widget->windowHandle();
-    /* reverse the changes */
-    widget->setAttribute(Qt::WA_NativeWindow, false);
-    if (!noNativeSiblings)
-      qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, false);
-  }
-  if (window)
-  {
-    QSurfaceFormat format = window->format();
-    if (format.alphaBufferSize() != 8)
-    {
-      format.setAlphaBufferSize(8);
-      window->setFormat(format);
-    }
-  }
+  theme_spec tspec_now = settings_->getCompositeSpec();
+  if (!tspec_now.composite
+      || (realWindow && !tspec_now.translucent_windows))
+    return;
+
+  /* this will set the alpha buffer size to 8 in a safe way */
+  widget->setAttribute(Qt::WA_TranslucentBackground);
+  /* distinguish forced translucency from hard-coded translucency */
+  forcedTranslucency_.insert(widget);
+  connect(widget, SIGNAL(destroyed(QObject*)),
+          SLOT(noTranslucency(QObject*)));
 #endif
 }
 
