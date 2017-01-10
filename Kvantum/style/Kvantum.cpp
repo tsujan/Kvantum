@@ -974,47 +974,43 @@ void Style::polish(QWidget *widget)
             forcedTranslucency_.insert(widget);
           }
 #endif
-          bool wasOpaque(forcedTranslucency_.contains(widget)
+          bool wasOpaque((forcedTranslucency_.contains(widget)
+                          /* WARNING: Unlike most Qt5 windows, there are some
+                                      opaque ones that are polished BEFORE
+                                      being created (like Octopi's window). */
+                          || (!isOpaque_ && tspec_now.translucent_windows
+                              && !widget->testAttribute(Qt::WA_WState_Created)
+                              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+                              && !widget->testAttribute(Qt::WA_NoSystemBackground)))
                          // no translucency for frameless windows (-> setSurfaceFormat)
                          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
                          && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
-          /* WARNING: Unlike most Qt5 windows, there are some opaque ones that are
-                      polished BEFORE being created, as in Qt4 (like Octopi's window). */
-          bool Qt5NotCreated(false);
-#if QT_VERSION >= 0x050000
-          Qt5NotCreated = (!wasOpaque && !isOpaque_ && tspec_now.translucent_windows
-                           && !widget->testAttribute(Qt::WA_WState_Created)
-                           && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                           && !widget->testAttribute(Qt::WA_NoSystemBackground)
-                           && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-                           && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
-#endif
-          if ((wasOpaque || Qt5NotCreated
+          if ((wasOpaque
                /* enable blurring for hard-coded transluceny */
                || (tspec_now.composite && hspec_.blur_translucent
                    && widget->testAttribute(Qt::WA_TranslucentBackground))))
           {
-            if (Qt5NotCreated)
-            {
-              widget->setAttribute(Qt::WA_TranslucentBackground);
-              forcedTranslucency_.insert(widget); // needed in unpolish()
-            }
 #if QT_VERSION < 0x050000
             /* workaround for a Qt4 bug, which makes translucent windows
                always appear at the top left corner (taken from QtCurve) */
             bool was_visible = widget->isVisible();
             bool moved = widget->testAttribute(Qt::WA_Moved);
             if (was_visible) widget->hide();
+#endif
 
-            if (wasOpaque) // for Qt5, it's done by setSurfaceFormat()
+            if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+            {
               widget->setAttribute(Qt::WA_TranslucentBackground);
+              forcedTranslucency_.insert(widget); // needed in unpolish() with Qt5
+            }
 
+#if QT_VERSION < 0x050000
             if (!moved) widget->setAttribute(Qt::WA_Moved, false);
             if (was_visible) widget->show();
 #endif
 
             /* enable blurring */
-            if (!(wasOpaque || Qt5NotCreated) || tspec_now.blurring)
+            if (!wasOpaque || tspec_now.blurring)
             {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
               if (!blurHelper_)
@@ -1031,7 +1027,7 @@ void Style::polish(QWidget *widget)
                 blurHelper_->registerWidget(widget);
             }
 
-            if (wasOpaque || Qt5NotCreated)
+            if (wasOpaque)
             {
               widget->removeEventFilter(this);
               widget->installEventFilter(this);
@@ -1353,9 +1349,8 @@ void Style::polish(QWidget *widget)
           widget->installEventFilter(this);
         }
       }
-#if QT_VERSION < 0x050000
-      widget->setAttribute(Qt::WA_TranslucentBackground);
-#endif
+      if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+        widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
       translucentWidgets_.insert(widget);
       connect(widget, SIGNAL(destroyed(QObject*)),
               SLOT(noTranslucency(QObject*)));
