@@ -10094,7 +10094,6 @@ void Style::setSurfaceFormat(QWidget *widget) const
 #else
   if (noComposite_
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
-      || widget->windowHandle()
       || widget->testAttribute(Qt::WA_TranslucentBackground)
       || widget->testAttribute(Qt::WA_NoSystemBackground)
       || subApp_ || isLibreoffice_
@@ -10118,7 +10117,8 @@ void Style::setSurfaceFormat(QWidget *widget) const
       case Qt::Sheet: break;
       default: return;
     }
-    if (widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+    if (widget->windowHandle() // too early
+        || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
         || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
         || widget->windowType() == Qt::Desktop
         || widget->testAttribute(Qt::WA_PaintOnScreen)
