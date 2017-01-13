@@ -10094,6 +10094,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
 #else
   if (noComposite_
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
+      || widget->windowHandle()
       || widget->testAttribute(Qt::WA_TranslucentBackground)
       || widget->testAttribute(Qt::WA_NoSystemBackground)
       || subApp_ || isLibreoffice_
