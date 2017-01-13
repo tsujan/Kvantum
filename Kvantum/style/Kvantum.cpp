@@ -924,7 +924,11 @@ void Style::polish(QWidget *widget)
   switch (widget->windowFlags() & Qt::WindowType_Mask) {
     case Qt::Window:
     case Qt::Dialog:
+    case Qt::Popup:
     case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
+      /* popup, not menu (-> GoldenDict); also, although it may be
+         hard to believe, a menu can have the Dialog flag (-> qlipper) */
+      if (qobject_cast<QMenu*>(widget)) break;
       widget->setAttribute(Qt::WA_StyledBackground);
       /* take all precautions */
       if (!isPlasma_ && !subApp_ && !isLibreoffice_
@@ -932,7 +936,6 @@ void Style::polish(QWidget *widget)
           && widget->windowType() != Qt::Desktop
           && !widget->testAttribute(Qt::WA_PaintOnScreen)
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-          && !qobject_cast<QMenu*>(widget) // hard to believe (as in qlipper)
           && !widget->inherits("QTipLabel")
           && !widget->inherits("KScreenSaver")
           && !widget->inherits("QSplashScreen"))
@@ -1537,7 +1540,9 @@ void Style::unpolish(QWidget *widget)
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog:
+      case Qt::Popup:
       case Qt::Sheet: {
+        if (qobject_cast<QMenu*>(widget)) break;
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
         if (forcedTranslucency_.contains(widget))
@@ -1680,7 +1685,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         switch (w->windowFlags() & Qt::WindowType_Mask) {
           case Qt::Window:
           case Qt::Dialog:
+          case Qt::Popup:
           case Qt::Sheet: {
+            if (qobject_cast<QMenu*>(w)) break;
             QPainter p(w);
             p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
             drawBg(&p,w);
@@ -10106,6 +10113,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
       case Qt::Dialog:
+      case Qt::Popup:
       case Qt::Sheet: break;
       default: return;
     }
