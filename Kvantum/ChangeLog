@@ -3,6 +3,7 @@ V0.10.4
  * Better coverage of menu/tooltip translucency and/or shadow.
  * Fixed the states of header arrows.
  * A safe, simple and elegant solution to all Qt5 translucency problems :)
+ * Workaround for Qt5 submenu timeout bug.
 
 V0.10.3
 ---------

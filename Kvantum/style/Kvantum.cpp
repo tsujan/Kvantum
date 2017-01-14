@@ -10209,7 +10209,13 @@ int Style::styleHint(StyleHint hint,
     case SH_Menu_Scrollable : return tspec_.scrollable_menu;
     case SH_Menu_SloppySubMenus : return true;
 #if QT_VERSION >= 0x050500
-    case SH_Menu_SubMenuSloppyCloseTimeout : return 1000;
+    /* QMenu has some bugs regarding this timeout. It's also
+       used when reentering a menuitem with submenu and even
+       when SH_Menu_SubMenuPopupDelay is negative. Here, we
+       set it to 20s for negative delays as a workaround. */
+    case SH_Menu_SubMenuSloppyCloseTimeout : {
+      return tspec_.submenu_delay < 0 ? 20000 : 1000;
+    }
     case SH_Menu_SubMenuResetWhenReenteringParent : return false;
     case SH_Menu_SubMenuDontStartSloppyOnLeave : return false;
     case SH_Menu_SubMenuSloppySelectOtherActions : return true;
