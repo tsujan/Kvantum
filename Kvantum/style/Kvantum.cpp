@@ -39,7 +39,7 @@
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
-#include <QMdiArea>
+//#include <QMdiArea>
 #include <QToolBox>
 #include <QLabel>
 #include <QDoubleSpinBox>
@@ -1101,9 +1101,7 @@ void Style::polish(QWidget *widget)
     widget->setAutoFillBackground(false);
   }*/
 
-  if (qobject_cast<QMdiArea*>(widget))
-    widget->setAutoFillBackground(true);
-  else if (qobject_cast<QDockWidget*>(widget))
+  if (qobject_cast<QDockWidget*>(widget))
     widget->setAttribute(Qt::WA_Hover, true);
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   { // in rare cases like KNotes' font combos or Kcalc
@@ -10078,7 +10076,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 /*
   To make Qt windows translucent, we should set the surface format of
   their native handles BEFORE they're created but Qt5 windows are
-  polished AFTER they're created, so that setting of the attribute
+  often polished AFTER they're created, so that setting the attribute
   "WA_TranslucentBackground" in "Style::polish()" would have no effect.
   
   Early creation of native handles could have unpredictable side effects,
@@ -10096,6 +10094,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
       || !widget || widget->testAttribute(Qt::WA_WState_Created)
       || widget->testAttribute(Qt::WA_TranslucentBackground)
       || widget->testAttribute(Qt::WA_NoSystemBackground)
+      || widget->autoFillBackground() // video players like kaffeine
       || subApp_ || isLibreoffice_
       || forcedTranslucency_.contains(widget))
     return;
@@ -10126,6 +10125,24 @@ void Style::setSurfaceFormat(QWidget *widget) const
         || widget->inherits("KScreenSaver")
         || widget->inherits("QSplashScreen"))
      return;
+
+    if (/*QMainWindow *mw = */qobject_cast<QMainWindow*>(widget))
+    {
+      /* it's possible that a main window is inside another one
+         (like FormPreviewView in linguist), in which case,
+         translucency could cause weird effects */
+      if (widget->parentWidget())
+        return;
+      // isn't this an overkill?
+      /* if (QWidget *cw = mw->centralWidget())
+      { 
+        if (cw->autoFillBackground())
+          return;
+         QString ss = cw->styleSheet();
+        if (!ss.isEmpty() && ss.contains("background-color"))
+          return; // as in smplayer
+      }*/
+    }
   }
 
   theme_spec tspec_now = settings_->getCompositeSpec();
