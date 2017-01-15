@@ -40,6 +40,7 @@
 #include <QDial>
 #include <QScrollBar>
 //#include <QMdiArea>
+#include <QMdiSubWindow>
 #include <QToolBox>
 #include <QLabel>
 #include <QDoubleSpinBox>
@@ -1101,7 +1102,11 @@ void Style::polish(QWidget *widget)
     widget->setAutoFillBackground(false);
   }*/
 
-  if (qobject_cast<QDockWidget*>(widget))
+  if (qobject_cast<QMdiSubWindow*>(widget))
+    /* to integrate the corner area, autoFillBackground isn't set
+       for QMdiArea, so QMdiSubWindow should be drawn at PE_Widget */
+    widget->setAttribute(Qt::WA_StyledBackground);
+  else if (qobject_cast<QDockWidget*>(widget))
     widget->setAttribute(Qt::WA_Hover, true);
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   { // in rare cases like KNotes' font combos or Kcalc
@@ -2594,6 +2599,11 @@ void Style::drawPrimitive(PrimitiveElement element,
 
   switch(element) {
     case PE_Widget : {
+      if (qobject_cast<const QMdiSubWindow*>(widget))
+      {
+        painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+        break;
+      }
       // only for windows and dialogs
       if (widget // it's NULL with QML
           && !widget->isWindow())
