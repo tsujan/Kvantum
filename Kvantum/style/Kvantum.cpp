@@ -7606,12 +7606,14 @@ void Style::drawControl(ControlElement element,
 
         if (pb && pb->isDefault() && (option->state & State_Enabled))
         {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-default");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
           QString di = "button-default-indicator";
-          if ((opt->features & QStyleOptionButton::Flat) && status.startsWith("normal")
-              && themeRndr_ && themeRndr_->isValid()
-              && themeRndr_->elementExists("flat-button-default-indicator"))
+          if (!((opt->features & QStyleOptionButton::Flat) && status.startsWith("normal")))
+          {
+            renderFrame(painter,option->rect,fspec,fspec.element+"-default");
+            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
+          }
+          else if (themeRndr_ && themeRndr_->isValid()
+                   && themeRndr_->elementExists("flat-button-default-indicator"))
           {
             di = "flat-button-default-indicator";
           }
