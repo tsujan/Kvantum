@@ -904,22 +904,22 @@ void Style::polish(QWidget *widget)
         // it's usual to define custom colors in text edits
         && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit"))
     {
-      bool chnagePalette(false);
+      bool changePalette(false);
       if (qobject_cast<QAbstractItemView*>(widget) || qobject_cast<QAbstractScrollArea*>(widget))
       { // we don't want to give a solid backgeound to LXQt's desktop by accident
         QWidget *win = widget->window();
         if (!win->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
             && win->windowType() != Qt::Desktop)
         {
-          chnagePalette = true;
+          changePalette = true;
         }
       }
       else if (qobject_cast<QTabWidget*>(widget)
                || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty()))
       {
-        chnagePalette = true;
+        changePalette = true;
       }
-      if (chnagePalette)
+      if (changePalette)
       {
         QPalette palette = widget->palette();
         QColor txtCol = palette.color(QPalette::Text);
