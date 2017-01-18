@@ -13,6 +13,9 @@
 
 namespace KvManager {
 
+static QStringList windowGroups = (QStringList() << "Window" << "WindowTranslucent"
+                                                 << "Dialog" << "DialogTranslucent");
+
 KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
 {
     ui->setupUi (this);
@@ -622,6 +625,7 @@ void KvantumManager::defaultThemeButtons()
     bool composited = defaultSettings.value ("composite").toBool();
     ui->checkBoxNoComposite->setChecked (!composited);
     ui->checkBoxAnimation->setChecked (defaultSettings.value ("animate_states").toBool());
+    ui->checkBoxPattern->setChecked (defaultSettings.value ("no_window_pattern").toBool());
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
     ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
@@ -712,22 +716,22 @@ void KvantumManager::defaultThemeButtons()
     ui->spinToolbar->setValue (theSize);
     theSize = 2;
     if (defaultSettings.contains ("layout_spacing"))
-      theSize = defaultSettings.value ("layout_spacing").toInt();
+        theSize = defaultSettings.value ("layout_spacing").toInt();
     theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayout->setValue (theSize);
     theSize = 4;
     if (defaultSettings.contains ("layout_margin"))
-      theSize = defaultSettings.value ("layout_margin").toInt();
+        theSize = defaultSettings.value ("layout_margin").toInt();
     theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayoutMargin->setValue (theSize);
     theSize = -1;
     if (defaultSettings.contains ("submenu_overlap"))
-      theSize = defaultSettings.value ("submenu_overlap").toInt();
+        theSize = defaultSettings.value ("submenu_overlap").toInt();
     theSize = qMin(qMax(theSize,-1), 16);
     ui->spinOverlap->setValue (theSize);
     theSize = 16;
     if (defaultSettings.contains ("spin_button_width"))
-      theSize = defaultSettings.value ("spin_button_width").toInt();
+        theSize = defaultSettings.value ("spin_button_width").toInt();
     theSize = qMin(qMax(theSize,16), 32);
     ui->spinSpinBtnWidth->setValue (theSize);
     defaultSettings.endGroup();
@@ -742,8 +746,8 @@ void KvantumManager::restyleWindow()
   // Qt5 has QEvent::ThemeChange
   Q_FOREACH(QWidget *widget, QApplication::allWidgets())
   {
-    QEvent event (QEvent::ThemeChange);
-    QApplication::sendEvent (widget, &event);
+      QEvent event (QEvent::ThemeChange);
+      QApplication::sendEvent (widget, &event);
   }
 #endif
 }
@@ -790,6 +794,7 @@ void KvantumManager::tabChanged (int index)
         {
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>"));
             showAnimated (ui->configLabel, 1000);
+            ui->checkBoxPattern->setEnabled (false);
         }
         else
         {
@@ -842,6 +847,8 @@ void KvantumManager::tabChanged (int index)
                 notCompisited (!composited);
                 if (themeSettings.contains ("animate_states"))
                     ui->checkBoxAnimation->setChecked (themeSettings.value ("animate_states").toBool());
+                if (themeSettings.contains ("no_window_pattern"))
+                    ui->checkBoxPattern->setChecked (themeSettings.value ("no_window_pattern").toBool());
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
                 if (themeSettings.contains ("joined_inactive_tabs"))
@@ -1002,7 +1009,24 @@ void KvantumManager::tabChanged (int index)
                 themeSettings.endGroup();
 
                 respectDE (ui->checkBoxDE->isChecked());
+
+                bool hasWindowPattern (false);
+                foreach (const QString &windowGroup, windowGroups)
+                {
+                    themeSettings.beginGroup (windowGroup);
+                    if (themeSettings.value ("interior.x.patternsize", 0).toInt() > 0
+                        && themeSettings.value ("interior.y.patternsize", 0).toInt() > 0)
+                    {
+                        hasWindowPattern = true;
+                        themeSettings.endGroup();
+                        break;
+                    }
+                    themeSettings.endGroup();
+                }
+                ui->checkBoxPattern->setEnabled (hasWindowPattern);
             }
+            else
+                ui->checkBoxPattern->setEnabled (false);
         }
         if (!confPageVisited_)
         { // here we try to avoid scrollbars as far as possible but there is no exact way for that
@@ -1597,6 +1621,7 @@ void KvantumManager::writeConfig()
 
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("animate_states", boolToStr (ui->checkBoxAnimation->isChecked()));
+        generalKeys.insert("no_window_pattern", boolToStr (ui->checkBoxPattern->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
         generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
@@ -1687,6 +1712,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
             || themeSettings.value ("animate_states").toBool() != ui->checkBoxAnimation->isChecked()
+            || themeSettings.value ("no_window_pattern").toBool() != ui->checkBoxPattern->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
@@ -1715,6 +1741,7 @@ void KvantumManager::writeConfig()
 #else
         themeSettings.setValue ("composite", !ui->checkBoxNoComposite->isChecked());
         themeSettings.setValue ("animate_states", ui->checkBoxAnimation->isChecked());
+        themeSettings.setValue ("no_window_pattern", ui->checkBoxPattern->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
         themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());

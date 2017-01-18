@@ -413,6 +413,12 @@ animate_states                    true/false          Animate the state change i
                                                       scroll views. For buttons, the animation
                                                       happens only under the mouse cursor.
 
+no_window_pattern                 true/false          Do not draw window/dialog tiling
+                                                      patterns? The purpose of this key is
+                                                      more flexibility with themes that
+                                                      include tiling patterns for windows
+                                                      and/or dialogs.
+
 splitter_width                    integer             The width of splitter handles. It
                                                       cannot be greater than 32px and is
                                                       7px by default.

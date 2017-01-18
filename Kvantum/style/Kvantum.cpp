@@ -1645,6 +1645,9 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (!widget->isActiveWindow())
     suffix = "-normal-inactive";
 
+  if (tspec_.no_window_pattern)
+    ispec.px = -2; // no tiling pattern with translucency
+
   p->setClipRegion(bgndRect, Qt::IntersectClip);
   renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix);
 }
@@ -2639,6 +2642,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString suffix = "-normal";
       if (widget && !widget->isActiveWindow())
         suffix = "-normal-inactive";
+      if (tspec_.no_window_pattern)
+        ispec.px = -1; // no tiling pattern (without translucency)
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
 
       break;
@@ -12719,13 +12724,13 @@ bool Style::renderElement(QPainter *painter,
     return false;
 
   QSvgRenderer *renderer = 0;
-  QString element_ (element);
+  QString _element(element);
 
   if (themeRndr_ && themeRndr_->isValid()
-      && (themeRndr_->elementExists(element_)
-          || themeRndr_->elementExists(element_.remove("-inactive"))
+      && (themeRndr_->elementExists(_element)
+          || themeRndr_->elementExists(_element.remove("-inactive"))
           // fall back to the normal state if other states aren't found
-          || themeRndr_->elementExists(element_.replace("-toggled","-normal")
+          || themeRndr_->elementExists(_element.replace("-toggled","-normal")
                                                .replace("-pressed","-normal")
                                                .replace("-focused","-normal"))))
   {
@@ -12735,28 +12740,44 @@ bool Style::renderElement(QPainter *painter,
      any object for the inactive state) as fallback */
   else if (defaultRndr_ && defaultRndr_->isValid())
   {
-    element_ = element;
-    if (defaultRndr_->elementExists(element_.remove("-inactive")))
+    _element = element;
+    if (defaultRndr_->elementExists(_element.remove("-inactive")))
       renderer = defaultRndr_;
   }
   if (!renderer) return false;
 
-  if (hsize > 0 || vsize > 0)
+  if (hsize < 0) // means no tiling pattern (for windows/dialogs)
+  {
+    if (renderer->elementExists(_element+"-pattern"))
+    {
+      if (usePixmap)
+        drawSvgElement(renderer,painter,bounds,_element);
+      else
+        renderer->render(painter,_element,bounds);
+    }
+    else if (hsize == -2) // translucency without overlay pattern
+    {
+      QColor wc = QApplication::palette().color(QPalette::Window);
+      wc.setAlpha(240);
+      painter->fillRect(bounds, wc);
+    }
+  }
+  else if (hsize > 0 || vsize > 0)
   {
     /* draw the pattern over the background
        if a separate pattern element exists */
-    if (renderer->elementExists(element_+"-pattern"))
+    if (renderer->elementExists(_element+"-pattern"))
     {
       if (usePixmap)
-        drawSvgElement(renderer,painter,bounds,element_);
+        drawSvgElement(renderer,painter,bounds,_element);
       else
-        renderer->render(painter,element_,bounds);
-      element_ = element_+"-pattern";
+        renderer->render(painter,_element,bounds);
+      _element = _element+"-pattern";
     }
 
     int width = hsize > 0 ? hsize : bounds.width();
     int height = vsize > 0 ? vsize : bounds.height();
-    QString str = QString("%1-%2-%3").arg(element_)
+    QString str = QString("%1-%2-%3").arg(_element)
                                      .arg(QString().setNum(width))
                                      .arg(QString().setNum(height));
     QPixmap pixmap;
@@ -12766,7 +12787,7 @@ bool Style::renderElement(QPainter *painter,
       pixmap.fill(QColor(Qt::transparent));
       QPainter p;
       p.begin(&pixmap);
-      renderer->render(&p,element_);
+      renderer->render(&p,_element);
       p.end();
       QPixmapCache::insert(str, pixmap);
     }
@@ -12775,9 +12796,9 @@ bool Style::renderElement(QPainter *painter,
   else
   {
     if (usePixmap)
-      drawSvgElement(renderer,painter,bounds,element_);
+      drawSvgElement(renderer,painter,bounds,_element);
     else
-      renderer->render(painter,element_,bounds);
+      renderer->render(painter,_element,bounds);
   }
 
   return true;
@@ -12797,17 +12818,17 @@ void Style::renderSliderTick(QPainter *painter,
     return;
 
   QSvgRenderer *renderer = 0;
-  QString element_ (element);
+  QString _element(element);
 
   if (themeRndr_ && themeRndr_->isValid()
-      && (themeRndr_->elementExists(element_)
-          || (element_.contains("-inactive")
-              && themeRndr_->elementExists(element_.remove("-inactive")))))
+      && (themeRndr_->elementExists(_element)
+          || (_element.contains("-inactive")
+              && themeRndr_->elementExists(_element.remove("-inactive")))))
   {
     renderer = themeRndr_;
   }
   else if (defaultRndr_ && defaultRndr_->isValid()
-           && defaultRndr_->elementExists(element_.remove("-inactive")))
+           && defaultRndr_->elementExists(_element.remove("-inactive")))
   {
     renderer = defaultRndr_;
   }
@@ -12832,7 +12853,7 @@ void Style::renderSliderTick(QPainter *painter,
   while (current <= max)
   {
     const int position = sliderPositionFromValue(min,max,current,available,inverted) + len/2;
-    renderer->render(painter,element_,QRect(x,
+    renderer->render(painter,_element,QRect(x,
                                             y+position,
                                             SLIDER_TICK_SIZE,
                                             thickness));
@@ -13228,60 +13249,60 @@ void Style::renderFrame(QPainter *painter,
     /*************
      ** Topleft **
      *************/
-    QString  element_ = element1+"-topleft";
+    QString  _element = element1+"-topleft";
     if (l > 0)
     {
       if (tp == QTabWidget::North && d < Left)
-        element_ = element1+"-left";
+        _element = element1+"-left";
       else if (tp == QTabWidget::West && d < Top)
-        element_ = element1+"-top";
+        _element = element1+"-top";
     }
-    renderElement(painter,element_,
+    renderElement(painter,_element,
                   QRect(x0,y0,Left,Top),
                   0,0,usePixmap);
 
     /**************
      ** Topright **
      **************/
-    element_ = element1+"-topright";
+    _element = element1+"-topright";
     if (l > 0)
     {
       if (tp == QTabWidget::North && w-d-l < Right)
-        element_ = element1+"-right";
+        _element = element1+"-right";
       else if (tp == QTabWidget::East && d < Top)
-        element_ = element1+"-top";
+        _element = element1+"-top";
     }
-    renderElement(painter,element_,
+    renderElement(painter,_element,
                   QRect(x1-Right,y0,Right,Top),
                   0,0,usePixmap);
 
     /****************
      ** Bottomleft **
      ****************/
-    element_ = element1+"-bottomleft";
+    _element = element1+"-bottomleft";
     if (l > 0)
     {
       if (tp == QTabWidget::South && d < Left)
-        element_ = element1+"-left";
+        _element = element1+"-left";
       else if (tp == QTabWidget::West && h-d-l < Bottom)
-        element_ = element1+"-bottom";
+        _element = element1+"-bottom";
     }
-    renderElement(painter,element_,
+    renderElement(painter,_element,
                   QRect(x0,y1-Bottom,Left,Bottom),
                   0,0,usePixmap);
 
     /*****************
      ** Bottomright **
      *****************/
-    element_ = element1+"-bottomright";
+    _element = element1+"-bottomright";
     if (l > 0)
     {
       if (tp == QTabWidget::South && w-d-l < Right)
-        element_ = element1+"-right";
+        _element = element1+"-right";
       else if (tp == QTabWidget::East && h-d-l < Bottom)
-        element_ = element1+"-bottom";
+        _element = element1+"-bottom";
     }
-    renderElement(painter,element_,
+    renderElement(painter,_element,
                   QRect(x1-Right,y1-Bottom,Right,Bottom),
                   0,0,usePixmap);
   }

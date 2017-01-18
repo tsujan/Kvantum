@@ -675,6 +675,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","animate_states");
   r.animate_states = v.toBool();
 
+  v = getValue("General","no_window_pattern");
+  r.no_window_pattern = v.toBool();
+
   return r;
 }
 

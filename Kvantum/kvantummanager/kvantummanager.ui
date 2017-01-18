@@ -771,7 +771,7 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
              </widget>
              <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string>Compositing &amp;&amp; Animation</string>
+               <string>Compositing &amp;&amp; General Look</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_9">
                <item row="3" column="2">
@@ -901,6 +901,20 @@ some widgets is changed, mostly by the mouse.</string>
                  </property>
                  <property name="text">
                   <string>Animation for state change under mouse</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1" colspan="2">
+                <widget class="QCheckBox" name="checkBoxPattern">
+                 <property name="toolTip">
+                  <string>Check this to remove all window/dialog tiling patterns!
+Uncheck it if you want those patterns back!</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this to remove all window/dialog tiling patterns!&lt;/p&gt;&lt;p&gt;Uncheck it if you want those patterns back!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Remove window/dialog tiling patterns</string>
                  </property>
                 </widget>
                </item>

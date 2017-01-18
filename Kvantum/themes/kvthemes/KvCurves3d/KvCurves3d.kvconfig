@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark, 3d theme with curved elements that supports translucency
+comment=A dark, 3d theme with curved elements.\nIt supports window translucency with a rough-glass texture.
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -39,6 +39,7 @@ button_icon_size=16
 toolbar_icon_size=16
 tooltip_delay=-1
 animate_states=true
+no_window_pattern=true
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -455,3 +456,5 @@ frame.expansion=0
 [WindowTranslucent]
 interior=true
 interior.element=window
+interior.x.patternsize=48
+interior.y.patternsize=48

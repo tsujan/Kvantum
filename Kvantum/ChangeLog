@@ -5,6 +5,7 @@ V0.10.4
  * A safe, simple and elegant solution to all Qt5 translucency problems :)
  * Workaround for Qt5 submenu timeout bug.
  * Don't draw normal states of flat default buttons.
+ * A key is added (to Kvantum Manager) for not drawing window/dialog tiling patterns. As an example, an overlay pattern is added to KvCurves3d's translucent window and the key in question is used to disable it by default.
 
 V0.10.3
 ---------

@@ -101,6 +101,8 @@ typedef struct {
   /* should buttons and comboboxes be animated
      under the cursor when their state changes? */
   bool animate_states;
+  /* disable window/dialog patterns */
+  bool no_window_pattern;
   /* depth of menu shadows */
   int menu_shadow_depth;
   /* overlap between a submenu and its parent */
@@ -263,7 +265,9 @@ typedef struct {
   QString element;
   /* has interior */
   bool hasInterior;
-  /* pattern size */
+  /* Pattern sizes. They're always nonnegative but, only internally,
+     a negative px means no tiling pattern regardless of actual values
+     and px=-2 means that, in addition, windows (dialogs) are translucent. */
   int px,py;
 } interior_spec;
 
@@ -398,6 +402,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.blurring = false;
   tspec.popup_blurring = false;
   tspec.animate_states = false;
+  tspec.no_window_pattern = false;
   tspec.menu_shadow_depth = 0;
   tspec.submenu_overlap = -1;
   tspec.submenu_delay = 250;
