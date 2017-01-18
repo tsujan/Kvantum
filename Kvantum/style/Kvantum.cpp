@@ -897,27 +897,40 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if (hspec_.respect_darkness
-      && !isPcmanfm_) // we don't want to give a solid backgeound to LXQT's desktop by accident
+  if (hspec_.respect_darkness)
   {
     QColor winCol = getFromRGBA(cspec_.windowColor);
     if (winCol.isValid() && qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
         // it's usual to define custom colors in text edits
-        && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
-        && (qobject_cast<QAbstractItemView*>(widget)
-            || qobject_cast<QAbstractScrollArea*>(widget)
-            || qobject_cast<QTabWidget*>(widget)
-            || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty())))
+        && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit"))
     {
-      QPalette palette = widget->palette();
-      QColor txtCol = palette.color(QPalette::Text);
-      if (!enoughContrast(palette.color(QPalette::Base), txtCol)
-          || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
-          || (qobject_cast<QAbstractItemView*>(widget)
-              && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+      bool chnagePalette(false);
+      if (qobject_cast<QAbstractItemView*>(widget) || qobject_cast<QAbstractScrollArea*>(widget))
+      { // we don't want to give a solid backgeound to LXQt's desktop by accident
+        QWidget *win = widget->window();
+        if (!win->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
+            && win->windowType() != Qt::Desktop)
+        {
+          chnagePalette = true;
+        }
+      }
+      else if (qobject_cast<QTabWidget*>(widget)
+               || (qobject_cast<QLabel*>(widget) && !qobject_cast<QLabel*>(widget)->text().isEmpty()))
       {
-        polish(palette);
-        widget->setPalette(palette);
+        chnagePalette = true;
+      }
+      if (chnagePalette)
+      {
+        QPalette palette = widget->palette();
+        QColor txtCol = palette.color(QPalette::Text);
+        if (!enoughContrast(palette.color(QPalette::Base), txtCol)
+            || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
+            || (qobject_cast<QAbstractItemView*>(widget)
+                && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+        {
+          polish(palette);
+          widget->setPalette(palette);
+        }
       }
     }
   }
