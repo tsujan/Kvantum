@@ -1658,7 +1658,7 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (!widget->isActiveWindow())
     suffix = "-normal-inactive";
 
-  if (tspec_.no_window_pattern)
+  if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
     ispec.px = -2; // no tiling pattern with translucency
 
   p->setClipRegion(bgndRect, Qt::IntersectClip);
@@ -2655,7 +2655,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString suffix = "-normal";
       if (widget && !widget->isActiveWindow())
         suffix = "-normal-inactive";
-      if (tspec_.no_window_pattern)
+      if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
         ispec.px = -1; // no tiling pattern (without translucency)
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
 

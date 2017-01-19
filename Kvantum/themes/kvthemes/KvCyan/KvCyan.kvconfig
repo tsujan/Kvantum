@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark cyan theme that supports translucency
+comment=A dark cyan theme that supports translucency with a rough-glass texture
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -43,6 +43,7 @@ layout_spacing=2
 submenu_overlap=-1
 tooltip_delay=-1
 animate_states=true
+no_window_pattern=true
 button_contents_shift=true
 
 [GeneralColors]
@@ -437,3 +438,9 @@ interior=false
 [Window]
 interior=true
 interior.element=window
+
+[WindowTranslucent]
+interior=true
+interior.element=windowtr
+interior.x.patternsize=48
+interior.y.patternsize=48
