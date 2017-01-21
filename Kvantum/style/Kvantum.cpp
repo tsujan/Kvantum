@@ -355,10 +355,6 @@ Style::Style() : QCommonStyle()
 
 Style::~Style()
 {
-#if QT_VERSION >= 0x050500
-  qDeleteAll(animations_);
-#endif
-
   delete defaultSettings_;
   delete themeSettings_;
 
