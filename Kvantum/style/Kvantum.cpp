@@ -10068,8 +10068,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBar_ScrollButtonOverlap : return 1;
 
 #if QT_VERSION >= 0x050500
+    /* With transient scrollbars, we've removed arrows and put
+       their frame around their contents. Here, we put transient
+       scrollbars on top of scroll area by using a negative
+       spacing and a zero overlap (-> qabstractscrollarea.cpp). */
     case PM_ScrollView_ScrollBarOverlap : return 0;
-
     case PM_ScrollView_ScrollBarSpacing : {
       if (styleHint(SH_ScrollBar_Transient,option,widget))
         return -pixelMetric(PM_ScrollBarExtent,option,widget);

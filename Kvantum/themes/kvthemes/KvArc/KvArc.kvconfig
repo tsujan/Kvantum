@@ -48,6 +48,7 @@ joined_inactive_tabs=false
 layout_spacing=6
 layout_margin=9
 scrollbar_in_view=true
+transient_scrollbar=true
 submenu_overlap=0
 tooltip_delay=-1
 tree_branch_line=true
