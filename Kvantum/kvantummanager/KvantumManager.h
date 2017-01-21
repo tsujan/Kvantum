@@ -41,6 +41,7 @@ private slots:
     void notCompisited (bool checked);
     void popupBlurring (bool checked);
     void respectDE (bool checked);
+    void trantsientScrollbarEnbled (bool checked);
     void showWhatsThis();
     void aboutDialog();
 

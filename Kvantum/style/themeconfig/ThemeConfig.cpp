@@ -587,10 +587,6 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // 36 by default
     r.scroll_min_extent = qMin(qMax(v.toInt(),16),100);
 
-  v = getValue("General","scroll_arrows");
-  if (v.isValid()) // true by default
-    r.scroll_arrows = v.toBool();
-
   v = getValue("General","tree_branch_line");
   r.tree_branch_line = v.toBool();
 
@@ -643,8 +639,20 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
-  v = getValue("General","scrollbar_in_view");
-  r.scrollbar_in_view = v.toBool();
+  v = getValue("General","transient_scrollbar");
+  r.transient_scrollbar = v.toBool();
+
+  if (!r.transient_scrollbar)
+  {
+    v = getValue("General","scrollbar_in_view");
+    r.scrollbar_in_view = v.toBool(); // false by default
+
+    v = getValue("General","scroll_arrows");
+    if (v.isValid()) // true by default
+      r.scroll_arrows = v.toBool();
+  }
+  else
+    r.scroll_arrows = false;
 
   v = getValue("General","layout_spacing");
   if (v.isValid()) // 2 by default

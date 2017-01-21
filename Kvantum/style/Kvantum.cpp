@@ -355,6 +355,10 @@ Style::Style() : QCommonStyle()
 
 Style::~Style()
 {
+#if QT_VERSION >= 0x050500
+  qDeleteAll(animations_);
+#endif
+
   delete defaultSettings_;
   delete themeSettings_;
 
@@ -582,6 +586,33 @@ void Style::advanceProgressbar()
     }
   }
 }
+
+#if QT_VERSION >= 0x050500
+void Style::startAnimation(Animation *animation) const
+{
+  stopAnimation(animation->target());
+  connect(animation, SIGNAL(destroyed(QObject*)),
+          SLOT(removeAnimation(QObject*)), Qt::UniqueConnection);
+  animations_.insert(animation->target(), animation);
+  animation->start();
+}
+
+void Style::stopAnimation(const QObject *target) const
+{
+  Animation *animation = animations_.take(target);
+  if (animation)
+  {
+    animation->stop();
+    delete animation;
+  }
+}
+
+void Style::removeAnimation(QObject *animation)
+{
+  if (animation)
+    animations_.remove(animation->parent());
+}
+#endif
 
 void Style::setAnimationOpacity()
 { //qDebug() << animationOpacity_;
@@ -6872,14 +6903,21 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ScrollBarSlider : {
-      QString status = getState(option,widget);
+      /* no toggled state (especially good with transient scrollbars) */
+      QString status = (option->state & State_Enabled) ?
+                       (option->state & State_Sunken) ? "pressed" :
+                       (option->state & State_Selected) ? "pressed" :
+                       (option->state & State_MouseOver) ? "focused" : "normal"
+                       : "disabled";
+      if (widget && !widget->isActiveWindow())
+        status.append("-inactive");
       if (status.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
         status.replace("focused","normal");
       }
       QString sStatus = status; // slider state
-      if (!tspec_.animate_states // when animated, focus it when the cursor enters the groove
+      if (!tspec_.animate_states // focus on entering the groove only with animation
           && (option->state & State_Enabled))
       {
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option);
@@ -6916,6 +6954,7 @@ void Style::drawControl(ControlElement element,
                    && !qobject_cast<const QAbstractScrollArea*>(widget));
       if (animate)
       {
+        qreal opacity = painter->opacity();
         if (animationStartState_ == sStatus)
           animationOpacity_ = 100;
         else if (animationOpacity_ < 100)
@@ -6924,7 +6963,7 @@ void Style::drawControl(ControlElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
         }
         painter->save();
-        painter->setOpacity((qreal)animationOpacity_/100);
+        painter->setOpacity(qMin((qreal)animationOpacity_/100, opacity));
       }
       renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
@@ -8902,6 +8941,62 @@ void Style::drawComplexControl(ComplexControl control,
         qstyleoption_cast<const QStyleOptionSlider*>(option);
 
       if (opt) {
+        painter->save();
+#if QT_VERSION >= 0x050500
+        QObject *styleObject = option->styleObject;
+        if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
+        {
+          qreal opacity = 0.0;
+          bool transient = !option->activeSubControls;
+
+          int oldPos = styleObject->property("_q_stylepos").toInt();
+          int oldMin = styleObject->property("_q_stylemin").toInt();
+          int oldMax = styleObject->property("_q_stylemax").toInt();
+          QRect oldRect = styleObject->property("_q_stylerect").toRect();
+          //int oldState = styleObject->property("_q_stylestate").toInt();
+          uint oldActiveControls = styleObject->property("_q_stylecontrols").toUInt();
+
+          if (!transient
+              || oldPos != opt->sliderPosition
+              || oldMin != opt->minimum
+              || oldMax != opt->maximum
+              || oldRect != opt->rect
+              //|| oldState != opt->state
+              || oldActiveControls != opt->activeSubControls)
+          {
+            opacity = 1.0;
+
+            styleObject->setProperty("_q_stylepos", opt->sliderPosition);
+            styleObject->setProperty("_q_stylemin", opt->minimum);
+            styleObject->setProperty("_q_stylemax", opt->maximum);
+            styleObject->setProperty("_q_stylerect", opt->rect);
+            styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
+            styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
+
+            ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
+            if (transient)
+            {
+              if (!anim)
+              {
+                anim = new ScrollbarAnimation(ScrollbarAnimation::Deactivating, styleObject);
+                startAnimation(anim);
+              }
+              else if (anim->mode() == ScrollbarAnimation::Deactivating)
+                anim->setCurrentTime(0); /* the scrollbar was already fading out 
+                                            but, for example, its position changed */
+            }
+            else if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
+              stopAnimation(styleObject);
+          }
+
+          ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
+          if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
+            opacity = anim->currentValue();
+
+          painter->setOpacity(opacity);
+        }
+#endif
+
         QStyleOptionSlider o(*opt);
 
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarGroove,widget);
@@ -9033,6 +9128,8 @@ void Style::drawComplexControl(ComplexControl control,
             o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
           drawControl(CE_ScrollBarSubLine,&o,painter,widget);
         }
+
+        painter->restore();
       }
 
       break;
@@ -9059,7 +9156,7 @@ void Style::drawComplexControl(ComplexControl control,
         ************/
         if (opt->subControls & SC_SliderGroove) // QtColorPicker doesn't need the groove
         {
-          /* find the groove rect, taking into accout slider_width */
+          /* find the groove rect, taking into account slider_width */
           QRect grooveRect = subControlRect(CC_Slider,opt,SC_SliderGroove,widget);
           const int grooveThickness = qMin(tspec_.slider_width,thick);
           int delta;
@@ -9938,9 +10035,20 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarBaseHeight :
     case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
-    case PM_TabBarTabShiftVertical :
-    case PM_ScrollView_ScrollBarSpacing : return 0;
+    case PM_TabBarTabShiftVertical : return 0;
     case PM_TabBar_ScrollButtonOverlap : return 1;
+
+#if QT_VERSION >= 0x050500
+    case PM_ScrollView_ScrollBarOverlap : return 0;
+
+    case PM_ScrollView_ScrollBarSpacing : {
+      if (styleHint(SH_ScrollBar_Transient,option,widget))
+        return -pixelMetric(PM_ScrollBarExtent,option,widget);
+      return 0;
+    }
+#else
+    case PM_ScrollView_ScrollBarSpacing : return 0;
+#endif
 
     case PM_TabBarScrollButtonWidth : {
       const frame_spec fspec = getFrameSpec("Tab");
@@ -10282,6 +10390,10 @@ int Style::styleHint(StyleHint hint,
 
     case SH_ScrollBar_ContextMenu :
     case SH_ScrollBar_LeftClickAbsolutePosition : return true;
+
+#if QT_VERSION >= 0x050500
+    case SH_ScrollBar_Transient : return tspec_.transient_scrollbar;
+#endif
 
     case SH_Slider_StopMouseOverSlider : return true;
 
@@ -12754,8 +12866,14 @@ bool Style::renderElement(QPainter *painter,
   else if (defaultRndr_ && defaultRndr_->isValid())
   {
     _element = element;
-    if (defaultRndr_->elementExists(_element.remove("-inactive")))
+    if (defaultRndr_->elementExists(_element.remove("-inactive"))
+        // even the default theme may not have all states
+        || defaultRndr_->elementExists(_element.replace("-toggled","-normal")
+                                               .replace("-pressed","-normal")
+                                               .replace("-focused","-normal")))
+    {
       renderer = defaultRndr_;
+    }
   }
   if (!renderer) return false;
 

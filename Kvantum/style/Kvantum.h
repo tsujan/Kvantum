@@ -25,6 +25,9 @@
 #include "drag/windowmanager.h"
 #include "themeconfig/ThemeConfig.h"
 #include "blur/blurhelper.h"
+#if QT_VERSION >= 0x050500
+#include "animation/animation.h"
+#endif
 
 class QSvgRenderer;
 
@@ -275,6 +278,12 @@ class Style : public QCommonStyle {
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;
 
+#if QT_VERSION >= 0x050500
+    /* For transient scrollbars: */
+    void startAnimation(Animation *animation) const;
+    void stopAnimation(const QObject *target) const;
+#endif
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
@@ -284,6 +293,10 @@ class Style : public QCommonStyle {
     void noTranslucency(QObject *o);
     /* Removes a button from all special lists. */
     void removeFromSet(QObject *o);
+
+#if QT_VERSION >= 0x050500
+    void removeAnimation(QObject *animation); // For transient scrollbars
+#endif
 
   private:
     QSvgRenderer *defaultRndr_, *themeRndr_;
@@ -349,6 +362,10 @@ class Style : public QCommonStyle {
     bool noComposite_;
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;
+
+#if QT_VERSION >= 0x050500
+    mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars
+#endif
 };
 }
 

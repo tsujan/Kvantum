@@ -88,6 +88,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     connect (ui->checkBoxTrans, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
     connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
     connect (ui->checkBoxDE, SIGNAL (clicked (bool)), this, SLOT (respectDE (bool)));
+    connect (ui->checkBoxTransient, SIGNAL (clicked (bool)), this, SLOT (trantsientScrollbarEnbled (bool)));
     connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->appsEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
     connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
@@ -100,6 +101,7 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
 #if QT_VERSION < 0x050000
     ui->labelTooltipDelay->setEnabled (false);
     ui->spinTooltipDelay->setEnabled (false);
+    ui->checkBoxTransient->setEnabled (false);
 #endif
 
     resize (sizeHint().expandedTo (QSize (600, 400)));
@@ -634,6 +636,7 @@ void KvantumManager::defaultThemeButtons()
     else
       ui->checkBoxNoScrollArrow->setChecked (false);
     ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
+    ui->checkBoxTransient->setChecked (defaultSettings.value ("transient_scrollbar").toBool());
     ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
@@ -861,6 +864,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("scrollbar_in_view"))
                     ui->checkBoxScrollIn->setChecked (themeSettings.value ("scrollbar_in_view").toBool());
+                if (themeSettings.contains ("transient_scrollbar"))
+                    ui->checkBoxTransient->setChecked (themeSettings.value ("transient_scrollbar").toBool());
                 if (themeSettings.contains ("scrollable_menu"))
                     ui->checkBoxScrollableMenu->setChecked (themeSettings.value ("scrollable_menu").toBool());
                 if (themeSettings.contains ("tree_branch_line"))
@@ -1028,6 +1033,12 @@ void KvantumManager::tabChanged (int index)
             else
                 ui->checkBoxPattern->setEnabled (false);
         }
+
+#if QT_VERSION >= 0x050000
+        ui->checkBoxScrollIn->setEnabled (!ui->checkBoxTransient->isChecked());
+        ui->checkBoxNoScrollArrow->setEnabled (!ui->checkBoxTransient->isChecked());
+#endif
+
         if (!confPageVisited_)
         { // here we try to avoid scrollbars as far as possible but there is no exact way for that
             QStyle *style = QApplication::style();
@@ -1627,6 +1638,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
         generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
+        generalKeys.insert("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
         generalKeys.insert("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
         generalKeys.insert("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
@@ -1718,6 +1730,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
             || themeSettings.value ("scrollbar_in_view").toBool() != ui->checkBoxScrollIn->isChecked()
+            || themeSettings.value ("transient_scrollbar").toBool() != ui->checkBoxTransient->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
@@ -1747,6 +1760,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
+        themeSettings.setValue ("transient_scrollbar", ui->checkBoxTransient->isChecked());
         themeSettings.setValue ("scrollable_menu", ui->checkBoxScrollableMenu->isChecked());
         themeSettings.setValue ("tree_branch_line", ui->checkBoxTree->isChecked());
         themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
@@ -2103,6 +2117,12 @@ void KvantumManager::respectDE (bool checked)
         }
         else ui->checkBoxDE->setEnabled (false);
     }
+}
+/*************************/
+void KvantumManager::trantsientScrollbarEnbled (bool checked)
+{
+    ui->checkBoxScrollIn->setEnabled (!checked);
+    ui->checkBoxNoScrollArrow->setEnabled (!checked);
 }
 /*************************/
 void KvantumManager::showWhatsThis()

@@ -28,7 +28,11 @@ HEADERS += themeconfig/specs.h \
            drag/x11wmmove.h \
            blur/blurhelper.h
 
-greaterThan(QT_MAJOR_VERSION, 4): OTHER_FILES += kvantum.json
+greaterThan(QT_MAJOR_VERSION, 4) {
+  SOURCES += animation/animation.cpp
+  HEADERS += animation/animation.h
+  OTHER_FILES += kvantum.json
+}
 
 RESOURCES += themeconfig/defaulttheme.qrc
 

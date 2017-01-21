@@ -44,14 +44,26 @@ endif()
 
 add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 
-set(kvantum_SOURCES
-    Kvantum.cpp
-    KvantumPlugin.cpp
-    shortcuthandler.cpp
-    blur/blurhelper.cpp
-    drag/windowmanager.cpp
-    drag/x11wmmove.cpp
-    themeconfig/ThemeConfig.cpp)
+if(NOT ENABLE_QT4)
+  set(kvantum_SOURCES
+      Kvantum.cpp
+      KvantumPlugin.cpp
+      shortcuthandler.cpp
+      blur/blurhelper.cpp
+      drag/windowmanager.cpp
+      drag/x11wmmove.cpp
+      themeconfig/ThemeConfig.cpp
+      animation/animation.cpp)
+else()
+  set(kvantum_SOURCES
+      Kvantum.cpp
+      KvantumPlugin.cpp
+      shortcuthandler.cpp
+      blur/blurhelper.cpp
+      drag/windowmanager.cpp
+      drag/x11wmmove.cpp
+      themeconfig/ThemeConfig.cpp)
+endif()
 
 set(kvantum_RESOURCES themeconfig/defaulttheme.qrc)
 if(NOT ENABLE_QT4)

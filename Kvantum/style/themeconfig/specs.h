@@ -158,6 +158,8 @@ typedef struct {
   bool button_contents_shift;
   /* draw scrollbars within view */
   bool scrollbar_in_view;
+  /* show scrollbars only when needed? */
+  bool transient_scrollbar;
 
   int layout_spacing;
   int layout_margin;
@@ -427,6 +429,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.groupbox_top_label = false;
   tspec.button_contents_shift = true;
   tspec.scrollbar_in_view = false;
+  tspec.transient_scrollbar = false;
   tspec.layout_spacing = 2;
   tspec.layout_margin = 4;
   tspec.small_icon_size = 16;

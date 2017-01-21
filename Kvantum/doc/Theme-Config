@@ -442,6 +442,13 @@ scroll_arrows                     true/false          Draw scrollbar add-line an
 scrollbar_in_view                 true/false          Should scrollbars be inside the view
                                                       frame? It is false (outside) by default.
 
+transient_scrollbar               true/false          Should scrollbars appear only when
+                                                      needed and disappear when not needed?
+                                                      False by default.
+                                                      
+                                                      If this key is true, "scroll_arrows" and
+                                                      "scrollbar_in_view" will become false.
+
 tree_branch_line                  true/false          Draw tree branch lines? Ther are not
                                                       drawn by default.
 
