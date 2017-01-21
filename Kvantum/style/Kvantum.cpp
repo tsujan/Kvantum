@@ -355,6 +355,38 @@ Style::Style() : QCommonStyle()
 
 Style::~Style()
 {
+#if QT_VERSION >= 0x050500
+  QHash<const QObject*, Animation*>::iterator i = animations_.begin();
+  while (i != animations_.end())
+  {
+    QHash<const QObject*, Animation*>::iterator prev = i;
+    ++i;
+    Animation *animation = animations_.take(prev.key());
+    if (animation)
+    { // deleting should be done after stopping
+      animation->stop();
+      delete animation;
+      animation = NULL;
+    }
+  }
+#endif
+
+  if (progressTimer_)
+  {
+    progressTimer_->stop();
+    delete progressTimer_;
+  }
+  if (opacityTimer_)
+  {
+    opacityTimer_->stop();
+    delete opacityTimer_;
+  }
+  if (opacityTimerOut_)
+  {
+    opacityTimerOut_->stop();
+    delete opacityTimerOut_;
+  }
+
   delete defaultSettings_;
   delete themeSettings_;
 
@@ -600,6 +632,7 @@ void Style::stopAnimation(const QObject *target) const
   {
     animation->stop();
     delete animation;
+    animation = NULL;
   }
 }
 
