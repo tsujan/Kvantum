@@ -4811,8 +4811,12 @@ void Style::drawPrimitive(PrimitiveElement element,
                          // as in most widgets
                          (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
                          (option->state & State_Selected) ? "toggled" :
-                         (option->state & State_MouseOver) ? "focused" : "normal"
-                         : "disabled";
+                         ((option->state & State_MouseOver)
+                          /* Qt has a bug that gives a mouse-over state to a view item
+                             when the view is scrolled by holding a scrollbar and the
+                             cursor goes over the item. This is a simple workaround. */
+                          && !(QApplication::mouseButtons() & Qt::LeftButton)) ? "focused"
+                         : "normal" : "disabled";
       if (ivStatus.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
@@ -5250,7 +5254,8 @@ void Style::drawControl(ControlElement element,
                        && (option->state & State_Active)) ? 3 :
                       (widget && widget->hasFocus() && (option->state & State_Selected)) ? 3 :
                       (option->state & State_Selected) ? 4 :
-                      (option->state & State_MouseOver) ? 2 : 1 : 0;
+                      ((option->state & State_MouseOver)
+                       && !(QApplication::mouseButtons() & Qt::LeftButton)) ? 2 : 1 : 0;
           if (state == 2
               && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
           {
