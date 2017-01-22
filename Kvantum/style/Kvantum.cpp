@@ -4813,6 +4813,11 @@ void Style::drawPrimitive(PrimitiveElement element,
                          (option->state & State_Selected) ? "toggled" :
                          (option->state & State_MouseOver) ? "focused" : "normal"
                          : "disabled";
+      if (ivStatus.startsWith("focused")
+          && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+      {
+        ivStatus.replace("focused","normal");
+      }
 
       const QStyleOptionViewItem_v4 *opt = qstyleoption_cast<const QStyleOptionViewItem_v4*>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
@@ -5246,6 +5251,11 @@ void Style::drawControl(ControlElement element,
                       (widget && widget->hasFocus() && (option->state & State_Selected)) ? 3 :
                       (option->state & State_Selected) ? 4 :
                       (option->state & State_MouseOver) ? 2 : 1 : 0;
+          if (state == 2
+              && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+          {
+            state = 1;
+          }
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ItemView");
