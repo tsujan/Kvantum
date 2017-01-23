@@ -1062,6 +1062,7 @@ void Style::polish(QWidget *widget)
                               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
                          // no translucency for frameless windows (-> setSurfaceFormat)
                          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+                         && !widget->windowFlags().testFlag(Qt::CustomizeWindowHint)
                          && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
           if ((wasOpaque
                /* enable blurring for hard-coded transluceny */
@@ -10303,6 +10304,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
     }
     if (widget->windowHandle() // too early
         || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+        || widget->windowFlags().testFlag(Qt::CustomizeWindowHint)
         || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
         || widget->windowType() == Qt::Desktop
         || widget->testAttribute(Qt::WA_PaintOnScreen)
