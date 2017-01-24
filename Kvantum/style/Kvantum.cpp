@@ -1062,10 +1062,9 @@ void Style::polish(QWidget *widget)
                               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
                          // no translucency for frameless windows (-> setSurfaceFormat)
                          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-                         && !widget->windowFlags().testFlag(Qt::CustomizeWindowHint)
                          && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
           if ((wasOpaque
-               /* enable blurring for hard-coded transluceny */
+               /* enable blurring for hard-coded translucency */
                || (tspec_now.composite && hspec_.blur_translucent
                    && widget->testAttribute(Qt::WA_TranslucentBackground))))
           {
@@ -1446,7 +1445,7 @@ void Style::polish(QWidget *widget)
         blurHelper_ = new BlurHelper(this,menuS,tooltipS);
       }
 #endif
-      /* blurHelper_ may exist because of blurring hard-coded transluceny */
+      /* blurHelper_ may exist because of blurring hard-coded translucency */
       if (blurHelper_ && tspec_now.popup_blurring)
         blurHelper_->registerWidget(widget);
     }
@@ -1622,7 +1621,9 @@ void Style::unpolish(QWidget *widget)
         if (qobject_cast<QMenu*>(widget)) break;
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
-        if (forcedTranslucency_.contains(widget))
+        if (forcedTranslucency_.contains(widget)
+            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+            && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -10302,9 +10303,8 @@ void Style::setSurfaceFormat(QWidget *widget) const
       case Qt::Sheet: break;
       default: return;
     }
-    if (widget->windowHandle() // too early
+    if (widget->windowHandle() // too late
         || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-        || widget->windowFlags().testFlag(Qt::CustomizeWindowHint)
         || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
         || widget->windowType() == Qt::Desktop
         || widget->testAttribute(Qt::WA_PaintOnScreen)
@@ -10313,13 +10313,15 @@ void Style::setSurfaceFormat(QWidget *widget) const
         || widget->inherits("QSplashScreen"))
      return;
 
+    QWidget *p = widget->parentWidget();
+    if (p && !p->testAttribute(Qt::WA_WState_Created)) // too soon
+      return;
     if (/*QMainWindow *mw = */qobject_cast<QMainWindow*>(widget))
     {
       /* it's possible that a main window is inside another one
          (like FormPreviewView in linguist), in which case,
          translucency could cause weird effects */
-      if (widget->parentWidget())
-        return;
+      if (p) return;
       // isn't this an overkill?
       /* if (QWidget *cw = mw->centralWidget())
       { 
