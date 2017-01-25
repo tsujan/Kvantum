@@ -10327,7 +10327,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
       { 
         if (cw->autoFillBackground())
           return;
-         QString ss = cw->styleSheet();
+        QString ss = cw->styleSheet();
         if (!ss.isEmpty() && ss.contains("background-color"))
           return; // as in smplayer
       }*/
