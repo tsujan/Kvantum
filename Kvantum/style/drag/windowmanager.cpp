@@ -411,17 +411,6 @@ bool WindowManager::canDrag (QWidget* widget)
   if (widget->cursor().shape() != Qt::ArrowCursor)
     return false;
 
-  /* dragging from a widget inside a scroll area
-     doesn't add to usability and isn't a good idea
-     (QtCreator and Qt Designer are two examples) */
-  QWidget* parent = widget;
-  while (parent)
-  {
-    if (qobject_cast<QAbstractScrollArea*>(parent))
-      return false;
-    parent = parent->parentWidget();
-  }
-
   // accept
   return true;
 }
@@ -435,6 +424,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
   /*
     check against children from which drag should never be enabled,
     even if mousePress/Move has been passed to the parent
+    (FIXME: Should dragging from inside QAbstractScrollArea be disabled?)
   */
   if (child
      && (qobject_cast<QComboBox*>(child)

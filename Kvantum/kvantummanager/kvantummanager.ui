@@ -793,10 +793,10 @@ whose windows should not be translucent.
                   <string>A comma-separated list of executables
 whose windows should not be translucent.
 
-(Some apps may crash with translucent windows!)</string>
+(Some apps may have problems with translucency!)</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may crash with translucent windows.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may have problems with translucency.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Opaque apps:</string>

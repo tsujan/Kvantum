@@ -7894,9 +7894,9 @@ void Style::drawControl(ControlElement element,
               QColor col;
               if (!autoraise && !paneledButtons.contains(widget)) // an already styled toolbutton
                 col = opt->palette.color(QPalette::ButtonText);
-              else
+              else if (!qobject_cast<QToolBar*>(p)) // not a non-stylable toolbar
                 col = p->palette().color(p->foregroundRole());
-              if (!col.isValid())
+              if (!col.isValid()) // maybe a non-stylable toolbar
                 col = QApplication::palette().color(QPalette::WindowText);
               if (isNormal)
               {

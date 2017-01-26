@@ -369,18 +369,6 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#common-normal-left" id="common-normal-bottom" transform="matrix(0,-1,1,0,-1001,1379)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#common-normal-topleft" id="common-normal-bottomleft" transform="matrix(0,-1,1,0,-1001,1379)"/>
 <path style="fill-rule:evenodd;stroke:none;fill-opacity:0" id="scrollbargroove-normal-left" d="m 18.4999,1124.2502 0,9.9431 0,.057 10.0002,0 0,-10 -10.0002,0 z "/>
-<g id="tab-close-normal" transform="matrix(0.26434829,0,0,0.26434829,252.15793,959.98099)">
-<path style="stroke-opacity:0;fill:#505050;font-family:Bitstream Vera Sans;stroke:#000;stroke-linejoin:round;font-weight:bold;stroke-linecap:round;stroke-width:5.997;font-size:12px" id="text1928" d="M 114.7999,62.0475 96.7771,80.0554 114.6872,98.0115 97.9066,114.7783 79.9965,96.8222 61.9737,114.8301 45.1394,97.9525 63.1622,79.9446 45.2521,61.9885 62.0327,45.2217 79.9428,63.1778 97.9656,45.1699 114.7999,62.0475"/>
-</g>
-<g id="tab-close-pressed" transform="matrix(0.26434829,0,0,0.26434829,308.56704,961.60519)">
-<path style="font-family:Bitstream Vera Sans;stroke:none;font-weight:bold;font-size:12px" id="path8064" d="M 120.7984,57.5019 101.224,77.0602 120.676,96.5623 102.4507,114.7726 82.9987,95.2705 63.4243,114.8288 45.1407,96.4981 64.7151,76.9398 45.2631,57.4377 63.4884,39.2273 l 19.452,19.5021 19.5744,-19.5583 18.2836,18.3307"/>
-</g>
-<g id="tab-close-focused" transform="matrix(0.26434829,0,0,0.26434829,279.36004,960.81209)">
-<path style="stroke-opacity:0;fill:#2f8ab7;font-family:Bitstream Vera Sans;stroke:#000;stroke-linejoin:round;font-weight:bold;stroke-linecap:round;stroke-width:5.997;font-size:12px" id="path8054" d="M 114.7999,62.0475 96.7771,80.0554 114.6872,98.0115 97.9066,114.7783 79.9965,96.8222 61.9737,114.8301 45.1394,97.9525 63.1622,79.9446 45.2521,61.9885 62.0327,45.2217 79.9428,63.1778 97.9656,45.1699 114.7999,62.0475"/>
-</g>
-<g id="tab-close-disabled" transform="matrix(0.26434829,0,0,0.26434829,338.56704,961.60519)">
-<path style="fill:#848484;font-family:Bitstream Vera Sans;stroke:none;font-weight:bold;font-size:12px" id="path8708" d="M 120.7984,57.5019 101.224,77.0602 120.676,96.5623 102.4507,114.7726 82.9987,95.2705 63.4243,114.8288 45.1407,96.4981 64.7151,76.9398 45.2631,57.4377 63.4884,39.2273 l 19.452,19.5021 19.5744,-19.5583 18.2836,18.3307"/>
-</g>
 <g style="stroke:none" id="g333">
 <g id="mdi-menu-normal">
 <path id="path4688" d="m 916,828.5 0,31 31,0 0,-31 z  m 4.5,4.5 22,0 0,6 -22,0 z  m 0,10.486 22,.0001 0,12.0139 -22,0 z "/>
@@ -789,7 +777,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-normal" id="b-arrow-normal" transform="matrix(1,0,0,-1,169.00004,998.69298)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-focused" id="b-arrow-focused" transform="matrix(1,0,0,-1,148,1001.386)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-b-arrow-up-disabled" id="b-arrow-disabled" transform="matrix(1,0,0,-1,82,1001.386)"/>
-<g style="stroke:none;fill:#3d3d3e;fill-rule:evenodd;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+<g style="stroke:none;fill-rule:evenodd;fill:#3d3d3e;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
 <rect width="20" x="306" y="806" height="20" id="menubar-normal"/>
 <rect width="20" x="358" y="806" height="20" id="menubar-pressed"/>
 <rect width="20" x="408" y="806" height="20" id="menubar-toggled"/>
@@ -838,8 +826,20 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(0,-1,1,0,-936,1444)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-left" id="common-focused-right" transform="matrix(-1,0,0,1,508,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,508,2380)"/>
-<g style="stroke:none;fill-rule:evenodd;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+<g style="stroke:none;fill-rule:evenodd">
+<g style="stroke-linecap:round;stroke-width:3;stroke-linejoin:round">
 <rect width="10" x="8.8817842e-16" y="10" height="10" id="expand-button-normal"/>
 <rect width="10" x="300" y="70" height="10" id="expand-lineedit-normal"/>
 </g>
+<g style="stroke-linecap:square" id="tab-close-focused" transform="translate(-20,175)">
+<rect width="18" x="320" y="795" height="18" style="stroke-opacity:0;fill:#5a5a5a;fill-opacity:0;stroke-width:4" id="rect5192"/>
+<path style="fill:#2f8ab7;stroke-width:2.5" id="path5194" d="m 329,798.334 a 6,6 0 0 0 -6,6 6,6 0 0 0 6,6 6,6 0 0 0 6,-6 6,6 0 0 0 -6,-6 z m 0,3 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 z"/>
+</g>
+</g>
+<g style="fill-rule:evenodd;stroke:none;stroke-linecap:square" id="tab-close-pressed" transform="translate(0,175)">
+<rect width="18" x="320" y="795" height="18" style="stroke-opacity:0;fill:#5a5a5a;fill-opacity:0;stroke-width:4" id="rect5198"/>
+<path style="stroke-width:2.5" id="path5200" d="m 329,798.334 a 6,6 0 0 0 -6,6 6,6 0 0 0 6,6 6,6 0 0 0 6,-6 6,6 0 0 0 -6,-6 z m 0,3 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 z"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.55" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-40)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.25" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(20)"/>
 </svg>
