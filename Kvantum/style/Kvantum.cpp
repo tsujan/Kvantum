@@ -838,11 +838,17 @@ int Style::mergedToolbarHeight(const QWidget *menubar) const
 bool Style::isStylableToolbar(const QWidget *w) const
 {
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
-  if (!tb) return false;
-  if (!hspec_.single_top_toolbar) return true;
-  if (tb->orientation() == Qt::Vertical) return false;
+  if (!tb
+      || w->autoFillBackground()
+      || w->findChild<QTabBar*>()) // practically not a toolbar (Kaffeine's sidebar)
+  {
+    return false;
+  }
+  /* don't style toolbars in places like KAboutDialog (-> KAboutData -> KAboutPerson) */
   if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(w,1)))
   {
+    if (!hspec_.single_top_toolbar) return true;
+    if (tb->orientation() == Qt::Vertical) return false;
     if (QWidget *mb = mw->menuWidget()) // WARNING: an empty menubar may be created by menuBar()
     {
       if (mb->isVisible())
@@ -860,21 +866,19 @@ bool Style::isStylableToolbar(const QWidget *w) const
 
 QWidget* Style::getStylableToolbar(const QWidget *w) const
 {
-  if (w == NULL) return NULL;
-  QWidget *wi = w->parentWidget();
-  if (wi == NULL || wi->autoFillBackground())
-    return NULL;
-  else if (isStylableToolbar(wi))
-    return wi;
-  /* pcmanfm-qt has toolbar buttons with a depth
-     of 5 and a deeper child doesn't make sense */
-  for (int i = 1; i < 5; ++i)
+  if (QWidget *p = getParent(w,1))
   {
-    wi = wi->parentWidget();
-    if (wi == NULL || wi->autoFillBackground())
-      return NULL;
-    if (isStylableToolbar(wi))
-      return wi;
+    if (isStylableToolbar(p))
+      return p;
+    /* pcmanfm-qt has toolbar buttons with a depth
+       of 5 and a deeper child doesn't make sense */
+    for (int i = 1; i < 5; ++i)
+    {
+      p = p->parentWidget();
+      if (p == NULL) return NULL;
+      if (isStylableToolbar(p))
+        return p;
+    }
   }
   return NULL;
 }
@@ -939,14 +943,11 @@ void Style::polish(QWidget *widget)
   QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
   if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
   {
-    QWidget *gp = getParent(pw,1);
     if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
          && !qobject_cast<QLineEdit*>(widget)
-         && qobject_cast<QMainWindow*>(gp) && isStylableToolbar(pw) // Krita, Amarok
-         && !pw->findChild<QTabBar*>())
+         && isStylableToolbar(pw)) // Krita, Amarok
         || (widget->inherits("AnimatedLabelStack") // Amarok
-            && isStylableToolbar(gp)
-            && qobject_cast<QMainWindow*>(getParent(gp,1))))
+            && isStylableToolbar(getParent(pw,1))))
     {
       QPalette palette = widget->palette();
       palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
@@ -2158,16 +2159,18 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
-      else if (!noComposite_ && w->layoutDirection() == Qt::RightToLeft
-               && menuHShadows_.count() == 2
-               && qobject_cast<QMenu*>(o) && qobject_cast<QMenu*>(getParent(w,1)))
+      else if (qobject_cast<QMenu*>(o))
       {
-        // correct the submenu position
-        w->move(w->x() + menuHShadows_.at(0)
-                       - (getMenuMargin(true) - menuHShadows_.at(1)),
-                w->y());
+        if (!noComposite_ && w->layoutDirection() == Qt::RightToLeft
+            && menuHShadows_.count() == 2
+            && qobject_cast<QMenu*>(getParent(w,1)))
+        { // correct the submenu position
+          w->move(w->x() + menuHShadows_.at(0)
+                         - (getMenuMargin(true) - menuHShadows_.at(1)),
+                  w->y());
+        }
       }
-      else if (qobject_cast<QToolButton*>(o))
+      else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
       {
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
@@ -2198,10 +2201,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::Hide:
-    if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
+    if (qobject_cast<QToolButton*>(o))
     {
-      if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
-        toolBar->update();
+      if (tspec_.group_toolbar_buttons)
+      {
+        if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
+          toolBar->update();
+      }
       //break; // toolbuttons may be animated (see below)
     }
     else if (w && w->isEnabled() && tspec_.animate_states
@@ -2872,9 +2878,8 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_PanelButtonTool : {
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
-      QWidget *stb = getStylableToolbar(widget);
       bool autoraise(option->state & State_AutoRaise);
-      if (stb)
+      if (getStylableToolbar(widget))
       {
         autoraise = true; // we make all toolbuttons auto-raised inside toolbars
         if (!getFrameSpec("ToolbarButton").element.isEmpty()
@@ -4553,7 +4558,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                 dspec.element = "flat-"+dspec1.element+"-down";
             }
-            else if (stb && !stb->findChild<QTabBar*>())
+            else if (stb)
             {
               if ((!tspec_.group_toolbar_buttons
                    || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
@@ -7246,30 +7251,13 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ToolBar : {
-      if (!qstyleoption_cast<const QStyleOptionToolBar*>(option))
-        break;
-      /* practically not a toolbar (Kaffeine's sidebar) */
-      if (widget && widget->findChild<QTabBar*>())
-        break;
-      /* don't draw in places like KAboutDialog (> KAboutData > KAboutPerson) */
-      if (!qobject_cast<QMainWindow*>(getParent(widget,1)))
-        break;
-
-      bool stylable(true);
-      if (hspec_.single_top_toolbar && !isStylableToolbar(widget))
-        stylable = false;
+      /* QCommonStyle checks for QStyleOptionToolBar but we don't need it.
+         Moreover, we can't check for it in getStylableToolbar(). */
 
       QRect r = option->rect;
-      if (stylable && !(option->state & State_Horizontal))
-      {
-        r.setRect(0, 0, h, w);
-        painter->save();
-        QTransform m;
-        m.scale(1,-1);
-        m.rotate(-90);
-        painter->setTransform(m, true);
-      }
 
+      /* update the menubar if needed */
+      bool stylable(isStylableToolbar(widget));
       if (tspec_.merge_menubar_with_toolbar)
       {
         if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
@@ -7288,8 +7276,17 @@ void Style::drawControl(ControlElement element,
           }
         }
       }
-
       if (!stylable) break;
+
+      if (!(option->state & State_Horizontal))
+      {
+        r.setRect(0, 0, h, w);
+        painter->save();
+        QTransform m;
+        m.scale(1,-1);
+        m.rotate(-90);
+        painter->setTransform(m, true);
+      }
 
       const QString group = "Toolbar";
       frame_spec fspec = getFrameSpec(group);
@@ -7871,7 +7868,7 @@ void Style::drawControl(ControlElement element,
                 lspec.normalColor = lspec1.normalColor;
               }
             }
-            else if (stb && !stb->findChild<QTabBar*>())
+            else if (stb)
             {
               if (isNormal)
               {
@@ -7894,9 +7891,9 @@ void Style::drawControl(ControlElement element,
               QColor col;
               if (!autoraise && !paneledButtons.contains(widget)) // an already styled toolbutton
                 col = opt->palette.color(QPalette::ButtonText);
-              else if (!qobject_cast<QToolBar*>(p)) // not a non-stylable toolbar
+              else
                 col = p->palette().color(p->foregroundRole());
-              if (!col.isValid()) // maybe a non-stylable toolbar
+              if (!col.isValid())
                 col = QApplication::palette().color(QPalette::WindowText);
               if (isNormal)
               {
@@ -8423,7 +8420,7 @@ void Style::drawComplexControl(ComplexControl control,
                 if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
-              else if (stb && !stb->findChild<QTabBar*>())
+              else if (stb)
               {
                 const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
                 if ((!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
