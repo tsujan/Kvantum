@@ -1,6 +1,6 @@
 ABOUT:
 ========
-Kvantum (by Pedram Pourang, a.k.a. Tsu Jan <tsujan2000@gmail.com>) is an SVG-based theme engine for Qt4/Qt5, KDE and LXQT, with an emphasis on elegance, usability and practicality. Its homepage is:
+Kvantum (by Pedram Pourang, a.k.a. Tsu Jan <tsujan2000@gmail.com>) is an SVG-based theme engine for Qt4/Qt5, KDE and LXQt, with an emphasis on elegance, usability and practicality. Its homepage is:
 
 	https://github.com/tsujan/Kvantum
 
@@ -19,8 +19,8 @@ The core idea of Kvantum, namely using of SVG images for drawing Qt widgets, is 
 
 Some code parts are adapted from:
 
-QtCurve (http://quickgit.kde.org/?p=qtcurve.git)
-Oxygen (http://quickgit.kde.org/?p=oxygen.git)
+QtCurve (https://projects.kde.org/projects/playground/artwork/qtcurve/repository)
+Oxygen (https://projects.kde.org/projects/playground/artwork/oxygen/repository)
 Oxygen-Transparent (https://projects.kde.org/projects/playground/artwork/oxygen-transparent/repository)
 Bespin (http://cloudcity.sourceforge.net/download.php)
 
