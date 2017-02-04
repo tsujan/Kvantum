@@ -10311,8 +10311,11 @@ void Style::setSurfaceFormat(QWidget *widget) const
      return;
 
     QWidget *p = widget->parentWidget();
-    if (p && !p->testAttribute(Qt::WA_WState_Created)) // too soon
+    if (p && (!p->testAttribute(Qt::WA_WState_Created) // too soon
+              || qobject_cast<QMdiSubWindow*>(p))) // as in linguist
+    {
       return;
+    }
     if (/*QMainWindow *mw = */qobject_cast<QMainWindow*>(widget))
     {
       /* it's possible that a main window is inside another one
