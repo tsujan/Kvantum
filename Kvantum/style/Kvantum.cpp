@@ -1054,11 +1054,11 @@ void Style::polish(QWidget *widget)
           }
 #endif
           bool wasOpaque((forcedTranslucency_.contains(widget)
-                          /* WARNING: Unlike most Qt5 windows, there are some
-                                      opaque ones that are polished BEFORE
-                                      being created (like Octopi's window). */
+                          /* WARNING:
+                             Unlike most Qt5 windows, there are some opaque ones
+                             that are polished BEFORE being created (as in Octopi).
+                             Also the theme may change from Kvantum and to it again. */
                           || (!isOpaque_ && tspec_now.translucent_windows
-                              && !widget->testAttribute(Qt::WA_WState_Created)
                               && !widget->testAttribute(Qt::WA_TranslucentBackground)
                               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
                          // no translucency for frameless windows (-> setSurfaceFormat)
@@ -1631,6 +1631,10 @@ void Style::unpolish(QWidget *widget)
           widget->setAttribute(Qt::WA_TranslucentBackground, false);
         }
         widget->setAttribute(Qt::WA_StyledBackground, false); // FIXME is this needed?
+        /* this is needed with tranlucent windows when
+           the theme is changed from Kvantum and to it again */
+        translucentWidgets_.remove(widget);
+        forcedTranslucency_.remove(widget);
         break;
       }
       default: break;
@@ -1674,6 +1678,7 @@ void Style::unpolish(QWidget *widget)
         /* menus may be cached, so that if not removed from the list,
            they might lack translucency the next time they appear */
         translucentWidgets_.remove(widget);
+        forcedTranslucency_.remove(widget);
       }
       //widget->clearMask();
     }

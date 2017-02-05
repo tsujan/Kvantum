@@ -74,7 +74,10 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
   {
     case QEvent::Show:
     case QEvent::Hide:
-    case QEvent::Resize: {
+    case QEvent::Resize:
+    /* the theme may changed from
+       Kvantum and to it again */
+    case QEvent::StyleChange: {
       QWidget* widget (qobject_cast<QWidget*>(object));
       /* take precautions */
       if (!widget || !widget->isWindow()) break;
