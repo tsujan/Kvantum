@@ -55,10 +55,10 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
                                                        << "Text Beside Icon"
                                                        << "Text Under Icon");
 
-    ui->comboX11Drag->insertItems (0, QStringList() << "None"
+    ui->comboX11Drag->insertItems (0, QStringList() << "Titlebar"
                                                     << "Menubar"
                                                     << "Menubar and primary toolbar"
-                                                    << "All");
+                                                    << "Anywhere possible");
 
 #if QT_VERSION >= 0x050200
     ui->appsEdit->setClearButtonEnabled (true);

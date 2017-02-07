@@ -38,7 +38,9 @@
 #include <QGraphicsView>
 
 #include "windowmanager.h"
+#if QT_VERSION < 0x050800
 #include "x11wmmove.h"
+#endif
 
 namespace Kvantum {
 
@@ -71,6 +73,9 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                dragInProgress_ (false),
                locked_ (false),
                drag_ (drag)
+#if QT_VERSION >= 0x050800
+               , cursorOverride_ (false)
+#endif
 {
 #if QT_VERSION >= 0x050500
   int dpr = qApp->devicePixelRatio();
@@ -261,7 +266,19 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
     return true;
   }
   else
+  {
+#if QT_VERSION >= 0x050800
+    // use QWidget::move for the grabbing
+    /* this works only if the sending object and the target are identical */
+    if (target_)
+    {
+      QWidget *window (target_.data()->window());
+      window->move (window->pos() + mouseEvent->pos() - dragPoint_);
+      return true;
+    }
+#endif
     return false;
+  }
 }
 /*************************/
 bool WindowManager::mouseReleaseEvent (QObject* object, QEvent* event)
@@ -580,6 +597,13 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 /*************************/
 void WindowManager::resetDrag (void)
 {
+#if QT_VERSION >= 0x050800
+  if (target_ && cursorOverride_)
+  {
+    qApp->restoreOverrideCursor();
+    cursorOverride_ = false;
+  }
+#endif
   target_.clear();
   if (dragTimer_.isActive())
     dragTimer_.stop();
@@ -591,12 +615,22 @@ void WindowManager::resetDrag (void)
 /*************************/
 void WindowManager::startDrag (QWidget *widget, const QPoint &position)
 {
+#if QT_VERSION >= 0x050800
+  Q_UNUSED(position);
+#endif
   if (!(enabled() && widget) || QWidget::mouseGrabber())
     return;
 
+#if QT_VERSION < 0x050800
   X11MoveTrigger (widget->window()->internalWinId(),
                   position.x()*pixelRatio_, position.y()*pixelRatio_);
-
+#else
+  if (!cursorOverride_)
+  {
+    qApp->setOverrideCursor (Qt::DragMoveCursor);
+    cursorOverride_ = true;
+  }
+#endif
   dragInProgress_ = true;
   return;
 }
@@ -613,6 +647,9 @@ bool WindowManager::isDockWidgetTitle (const QWidget* widget) const
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 {
+#if QT_VERSION >= 0x050800
+  Q_UNUSED(object);
+#endif
   if (event->type() == QEvent::MouseButtonRelease)
   {
     // stop drag timer
@@ -624,6 +661,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
       parent_->setLocked (false);
   }
 
+#if QT_VERSION < 0x050800
   if (!parent_->enabled()) return false;
 
   /*
@@ -638,7 +676,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
   {
     return appMouseEvent (object, event);
   }
-
+#endif
   return false;
 }
 /*************************/
@@ -654,8 +692,8 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
 #endif
 
   /*
-    post some mouseRelease event to the target, in order to counter balance
-    the mouse press that triggered the drag. Note that it triggers a resetDrag
+    Post some mouseRelease event to the target, in order to counter balance
+    the mouse press that triggered the drag. Note that it triggers resetDrag()!
   */
   QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
                           parent_->dragPoint_,

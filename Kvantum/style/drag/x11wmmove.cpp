@@ -2,7 +2,7 @@
     Adapted from Bespin's WM.cpp v0.r1710
     and QtCurve's x11helpers.c v1.8.17.
 
-    Qt5 doesn't need this but uses it for now.
+    Qt5 doesn't need this but Qt<5.8 uses it.
 */
 
 #include "x11wmmove.h"

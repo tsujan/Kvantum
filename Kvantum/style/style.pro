@@ -24,8 +24,8 @@ HEADERS += themeconfig/specs.h \
            Kvantum.h \
            KvantumPlugin.h \
            shortcuthandler.h \
-           drag/windowmanager.h \
            drag/x11wmmove.h \
+           drag/windowmanager.h \
            blur/blurhelper.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {

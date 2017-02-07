@@ -10448,7 +10448,11 @@ int Style::styleHint(StyleHint hint,
     case SH_ScrollBar_LeftClickAbsolutePosition : return true;
 
 #if QT_VERSION >= 0x050500
-    case SH_ScrollBar_Transient : return tspec_.transient_scrollbar;
+    case SH_ScrollBar_Transient : {
+      if (widget && widget->hasMouseTracking())
+        return false; // prevent artifacts in widgets like QGraphicsView
+      return tspec_.transient_scrollbar;
+    }
 #endif
 
     case SH_Slider_StopMouseOverSlider : return true;
