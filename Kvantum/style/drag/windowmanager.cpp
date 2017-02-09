@@ -36,6 +36,7 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
+#include <QDesktopWidget>
 
 #include "windowmanager.h"
 #if QT_VERSION < 0x050800
@@ -208,7 +209,12 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
     return false;
 
   // retrieve widget's child at event position
+#if QT_VERSION >= 0x050800
+  // (see WindowManager::mouseMoveEvent for the reason)
+  QPoint position = widget->mapFromGlobal (mouseEvent->globalPos());
+#else
   QPoint position (mouseEvent->pos());
+#endif
   QWidget* child = widget->childAt (position);
   if(!canDrag (widget, child, position))
     return false;
@@ -273,7 +279,29 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
     if (target_)
     {
       QWidget *window (target_.data()->window());
-      window->move (window->pos() + mouseEvent->pos() - dragPoint_);
+      QRect ag = QApplication::desktop()->availableGeometry();
+      QRect fg = window->frameGeometry();
+      /* FIXME: For some unknown reason, mapping from the global position
+         results in smoother movements than mouseEvent->pos() does,
+         especially when the window is translucent. */
+      QPoint pos = target_.data()->mapFromGlobal (mouseEvent->globalPos());
+      QPoint winPos = window->pos();
+      QPoint newWinPos = winPos + pos - dragPoint_;
+      /* if the window is completely inside the screen, don't try to
+         move it offscreen because some WM's (like KWin) don't allow that */
+      if (ag.contains (fg))
+      {
+        if (newWinPos.x() < ag.x())
+          pos = QPoint (ag.x() + (dragPoint_ - winPos).x(), pos.y());
+        else if (newWinPos.x() + fg.width() > ag.x() + ag.width())
+          pos = QPoint (ag.x() + ag.width() - fg.width() + (dragPoint_ - winPos).x(), pos.y());
+        if (newWinPos.y() < ag.y())
+          pos = QPoint (pos.x(), ag.y() + (dragPoint_ - winPos).y());
+        else if (newWinPos.y() + fg.height() > ag.y() + ag.height())
+          pos = QPoint (pos.x(), ag.y() + ag.height() - fg.height() + (dragPoint_ - winPos).y());
+      }
+
+      window->move (winPos + pos - dragPoint_);
       return true;
     }
 #endif
@@ -427,6 +455,18 @@ bool WindowManager::canDrag (QWidget* widget)
   */
   if (widget->cursor().shape() != Qt::ArrowCursor)
     return false;
+
+#if QT_VERSION >= 0x050800
+  // X11BypassWindowManagerHint can be used to have fixed position
+  if (widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+    return false;
+  /* Qt5 has a weird "hover bug", because of which, the cursor may not
+     be over the widget but mousePressEvent() may be called on pressing
+     the left mouse button. Since this function is called first by
+     WindowManager::mousePressEvent(), we add a workaround here. */
+  if (!widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
+    return false;
+#endif
 
   // accept
   return true;
@@ -632,7 +672,6 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   }
 #endif
   dragInProgress_ = true;
-  return;
 }
 /*************************/
 bool WindowManager::isDockWidgetTitle (const QWidget* widget) const
