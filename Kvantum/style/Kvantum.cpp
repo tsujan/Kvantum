@@ -1970,7 +1970,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (qobject_cast<QComboBox*>(o)
           && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
       { // QEvent::MouseButtonPress may follow this
-        if (opacityTimer_->isActive()) // the cusror may have been on the popup scrollbar
+        if (animatedWidget_ // the cusror may have been on the popup scrollbar
+            && opacityTimer_->isActive())
         {
           opacityTimer_->stop();
           animationOpacity_ = 100;
@@ -2029,7 +2030,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           || (qobject_cast<QAbstractScrollArea*>(o)
               && !w->inherits("QComboBoxListView"))) // exclude combo popups
       {
-        if (opacityTimerOut_->isActive())
+        if (animatedWidgetOut_ && opacityTimerOut_->isActive())
         {
           opacityTimerOut_->stop();
           animationOpacityOut_ = 100;
@@ -2088,6 +2089,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
       { // includes checkboxes and radio buttons too
+        if (animatedWidget_ && animatedWidget_ != w
+            && opacityTimer_->isActive())
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
+        }
         if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
         {
           if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
@@ -2108,6 +2116,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       } // FIXME: Also take "autoExclusive" into account?
       else if (qobject_cast<QGroupBox*>(o))
       {
+        if (animatedWidget_ && animatedWidget_ != w
+            && opacityTimer_->isActive())
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
+        }
         animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
@@ -2116,6 +2131,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
                || qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
       {
+        if (animatedWidget_ && animatedWidget_ != w
+            && opacityTimer_->isActive())
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
+        }
         animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
@@ -2144,6 +2166,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QGroupBox*>(o))
         break;
+      /* we don't need to stop animation here because
+         no other widget could have been animated */
       animatedWidget_ = w;
       animationOpacity_ = 0;
       opacityTimer_->start(ANIMATION_FRAME);

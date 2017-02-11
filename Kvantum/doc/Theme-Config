@@ -209,6 +209,8 @@ x11drag                           string              Drag windows from contents
                                                       Boolean values are also supported:
                                                         true (the same as "all" -- default)
                                                         false (the same as "none")
+                                                      
+                                                      x11drag does not depend on x11 for Qt≥5.8.
 
 alt_mnemonic                      true/false          Show underlines when Alt is pressed?
                                                       True by default.

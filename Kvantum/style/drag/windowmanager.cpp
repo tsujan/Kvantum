@@ -210,7 +210,7 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
 
   // retrieve widget's child at event position
 #if QT_VERSION >= 0x050800
-  // (see WindowManager::mouseMoveEvent for the reason)
+  // see WindowManager::mouseMoveEvent for the reason
   QPoint position = widget->mapFromGlobal (mouseEvent->globalPos());
 #else
   QPoint position (mouseEvent->pos());
