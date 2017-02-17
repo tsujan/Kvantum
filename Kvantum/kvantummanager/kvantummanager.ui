@@ -927,7 +927,7 @@ Transient scrollbars appear on top of
 their scroll views only when needed.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Make scrollbars transient!&lt;/p&gt;&lt;p&gt;Transient scrollbars appear only when needed and fade out when not needed. They take no extra space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Make scrollbars transient!&lt;/p&gt;&lt;p&gt;Transient scrollbars appear only when needed and fade out when not needed. They usually take no extra space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Transient scrollbars</string>

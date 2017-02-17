@@ -1487,8 +1487,13 @@ void Style::polish(QApplication *app)
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma_ = true;
 
-  if (tspec_.opaque.contains(appName, Qt::CaseInsensitive))
+  if (tspec_.opaque.contains(appName, Qt::CaseInsensitive)
+      /* to avoid total transparency, we don't force translucency
+         when the app has a stylesheet */
+      || (app->style() && app->style()->inherits("QStyleSheetStyle")))
+  {
     isOpaque_ = true;
+  }
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
@@ -2100,8 +2105,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
           {
-              if (!ab->isCheckable() && ab->isDown())
-            animationStartState_ = "pressed";
+            if (!ab->isCheckable() && ab->isDown())
+              animationStartState_ = "pressed";
             else
               animationStartState_ = "toggled";
           }
@@ -9787,7 +9792,7 @@ void Style::drawComplexControl(ComplexControl control,
       if (opt) {
         // Draw frame
         QRect textRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxLabel, widget);
-        QRect checkBoxRect = proxy()->subControlRect(CC_GroupBox, opt, SC_GroupBoxCheckBox, widget);
+        QRect checkBoxRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxCheckBox, widget);
         if (opt->subControls & QStyle::SC_GroupBoxFrame)
         {
           QStyleOptionFrame_v3 frame;
@@ -10303,12 +10308,31 @@ void Style::setSurfaceFormat(QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
-  if (noComposite_
-      || !widget || widget->testAttribute(Qt::WA_WState_Created)
+  if (!widget || noComposite_ || subApp_ || isLibreoffice_)
+    return;
+
+  /* The widget style may change while the app style is still Kvantum
+     (as in Qt Designer), in which case, we should remove our forced
+     translucency. It'll be up to the new style to restore
+     translucency if it supports translucent windows. */
+  QStyle *ws = widget->style();
+  bool otherStyle(ws && ws != this && !ws->objectName().isEmpty());
+  if (otherStyle
+      && !(isPlasma_ || isOpaque_)
+      && widget->testAttribute(Qt::WA_TranslucentBackground)
+      && forcedTranslucency_.contains(widget)
+      && !(widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget)))
+  {
+    widget->setAttribute(Qt::WA_TranslucentBackground, false);
+    widget->setAttribute(Qt::WA_NoSystemBackground, false);
+    widget->setAutoFillBackground(true); // Fusion needs this
+    return;
+  }
+
+  if (widget->testAttribute(Qt::WA_WState_Created)
       || widget->testAttribute(Qt::WA_TranslucentBackground)
       || widget->testAttribute(Qt::WA_NoSystemBackground)
       || widget->autoFillBackground() // video players like kaffeine
-      || subApp_ || isLibreoffice_
       || forcedTranslucency_.contains(widget))
     return;
   bool realWindow(true);
@@ -10320,7 +10344,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
   }
   else
   {
-    if (isPlasma_ || isOpaque_ || !widget->isWindow())
+    if (otherStyle || isPlasma_ || isOpaque_ || !widget->isWindow())
       return;
     switch (widget->windowFlags() & Qt::WindowType_Mask) {
       case Qt::Window:
@@ -10345,21 +10369,24 @@ void Style::setSurfaceFormat(QWidget *widget) const
     {
       return;
     }
-    if (/*QMainWindow *mw = */qobject_cast<QMainWindow*>(widget))
+    if (QMainWindow *mw = qobject_cast<QMainWindow*>(widget))
     {
       /* it's possible that a main window is inside another one
          (like FormPreviewView in linguist), in which case,
          translucency could cause weird effects */
       if (p) return;
-      // isn't this an overkill?
-      /* if (QWidget *cw = mw->centralWidget())
+      /* stylesheets with background can cause total transparency */
+      QString ss = mw->styleSheet();
+      if (!ss.isEmpty() && ss.contains("background"))
+        return;
+      if (QWidget *cw = mw->centralWidget())
       { 
         if (cw->autoFillBackground())
           return;
-        QString ss = cw->styleSheet();
-        if (!ss.isEmpty() && ss.contains("background-color"))
+        ss = cw->styleSheet();
+        if (!ss.isEmpty() && ss.contains("background"))
           return; // as in smplayer
-      }*/
+      }
     }
   }
 

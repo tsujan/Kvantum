@@ -148,8 +148,8 @@
 <stop offset="1" style="stop-color:#969696;stop-opacity:.098" id="stop5223"/>
 </linearGradient>
 <linearGradient id="linearGradient4965">
-<stop offset="0" style="stop-color:#dedbda" id="stop5080"/>
-<stop offset="1" style="stop-color:#ccc7c4" id="stop5082"/>
+<stop offset="0" style="stop-color:#dedbda;stop-opacity:.91" id="stop5080"/>
+<stop offset="1" style="stop-color:#cac5c1;stop-opacity:.91" id="stop5082"/>
 </linearGradient>
 <linearGradient id="linearGradient5170">
 <stop offset="0" style="stop-color:#141414;stop-opacity:.137" id="stop5229"/>
