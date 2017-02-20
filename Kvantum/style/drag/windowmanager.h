@@ -222,9 +222,6 @@ private:
   // true if drag is locked
   bool locked_;
   Drag drag_;
-#if QT_VERSION >= 0x050800
-  bool cursorOverride_;
-#endif
 
   // provide application-wise event filter
   /*

@@ -1543,7 +1543,7 @@ By default, the contents are shifted by 1px.</string>
                 <widget class="QLabel" name="labelX11Drag">
                  <property name="toolTip">
                   <string>Drag windows from anywhere possible?
-(Depends on X11 for Qt&lt;5.8)
+(Depends on X11)
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
@@ -1560,7 +1560,7 @@ Miscellaneous → Respect current DE if possible</string>
                 <widget class="QComboBox" name="comboX11Drag">
                  <property name="toolTip">
                   <string>Drag windows from anywhere possible?
-(Depends on X11 for Qt&lt;5.8)
+(Depends on X11)
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
