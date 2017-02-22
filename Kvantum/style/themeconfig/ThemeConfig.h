@@ -97,6 +97,8 @@ class ThemeConfig {
     QHash<QString, indicator_spec> dSpecs_;
     QHash<QString, label_spec> lSpecs_;
     QHash<QString, size_spec> sSpecs_;
+
+    bool isX11_;
 };
 }
 

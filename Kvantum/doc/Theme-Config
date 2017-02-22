@@ -198,7 +198,6 @@ respect_DE                        true/false          Should some settings of th
                                                       are set to true, "composite" is set to
                                                       false, and "x11drag" is set to
                                                       "menubar_and_primary_toolbar".
-                                                      
 
 x11drag                           string              Drag windows from contents? Values:
                                                         none
@@ -209,6 +208,8 @@ x11drag                           string              Drag windows from contents
                                                       Boolean values are also supported:
                                                         true (the same as "all" -- default)
                                                         false (the same as "none")
+                                                      
+                                                      "x11drag" is independent of X11 on wayland.
 
 alt_mnemonic                      true/false          Show underlines when Alt is pressed?
                                                       True by default.
@@ -375,8 +376,8 @@ tooltip_shadow_depth              integer             The depth of the shadow to
 
 translucent_windows               true/false          Translucent windows and dialogs?
                                                       This requires a translucent SVG
-                                                      element too. A false value, its
-                                                      absence or a false value for
+                                                      element for windows. A false value,
+                                                      its absence or a false value for
                                                       "composite" means no translucency.
 
 opaque                            string list         A comma-separated list of

@@ -36,10 +36,15 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
+#if QT_VERSION >= 0x050200
+#include <QDesktopWidget> // to be used on wayland
+#endif
 
 #include "windowmanager.h"
 #include "x11wmmove.h"
 
+// WindowManager is called on wayland only if Qt >= 5.2,
+// in which case, it uses QWidget::move() for dragging.
 namespace Kvantum {
 
 static inline bool isPrimaryToolBar(QWidget *w)
@@ -61,7 +66,7 @@ static inline bool isPrimaryToolBar(QWidget *w)
   return false;
 }
 
-WindowManager::WindowManager (QObject* parent, Drag drag) :
+WindowManager::WindowManager (QObject* parent, Drag drag, bool isX11) :
                QObject (parent),
                pixelRatio_ (1),
                enabled_ (true),
@@ -71,7 +76,11 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                dragInProgress_ (false),
                locked_ (false),
                drag_ (drag)
+#if QT_VERSION >= 0x050200
+               , cursorOverride_ (false)
+#endif
 {
+  isX11_ = isX11;
 #if QT_VERSION >= 0x050500
   int dpr = qApp->devicePixelRatio();
   if (dpr > 1)
@@ -203,7 +212,12 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
     return false;
 
   // retrieve widget's child at event position
-  QPoint position (mouseEvent->pos());
+  QPoint position;
+  if (!isX11_)
+    position = widget->mapFromGlobal (mouseEvent->globalPos()); // see WindowManager::mouseMoveEvent for the reason
+  else
+    position = mouseEvent->pos();
+
   QWidget* child = widget->childAt (position);
   if(!canDrag (widget, child, position))
     return false;
@@ -261,7 +275,39 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
     return true;
   }
   else
+  {
+#if QT_VERSION >= 0x050200
+    if (!isX11_ && target_)
+    { // use QWidget::move for the grabbing
+      QWidget *window (target_.data()->window());
+      QRect ag = QApplication::desktop()->availableGeometry();
+      QRect fg = window->frameGeometry();
+      /* FIXME: For some unknown reason, mapping from the global position
+         results in smoother movements than mouseEvent->pos() does,
+         especially when the window is translucent. */
+      QPoint pos = target_.data()->mapFromGlobal (mouseEvent->globalPos());
+      QPoint winPos = window->pos();
+      QPoint newWinPos = winPos + pos - dragPoint_;
+      /* if the window is completely inside the screen, don't try to
+         move it offscreen because some WM's (like KWin) don't allow that */
+      if (ag.contains (fg))
+      {
+        if (newWinPos.x() < ag.x())
+          pos = QPoint (ag.x() + (dragPoint_ - winPos).x(), pos.y());
+        else if (newWinPos.x() + fg.width() > ag.x() + ag.width())
+          pos = QPoint (ag.x() + ag.width() - fg.width() + (dragPoint_ - winPos).x(), pos.y());
+        if (newWinPos.y() < ag.y())
+          pos = QPoint (pos.x(), ag.y() + (dragPoint_ - winPos).y());
+        else if (newWinPos.y() + fg.height() > ag.y() + ag.height())
+          pos = QPoint (pos.x(), ag.y() + ag.height() - fg.height() + (dragPoint_ - winPos).y());
+      }
+
+      window->move (winPos + pos - dragPoint_);
+      return true;
+    }
+#endif
     return false;
+  }
 }
 /*************************/
 bool WindowManager::mouseReleaseEvent (QObject* object, QEvent* event)
@@ -410,6 +456,19 @@ bool WindowManager::canDrag (QWidget* widget)
   */
   if (widget->cursor().shape() != Qt::ArrowCursor)
     return false;
+
+  if (!isX11_)
+  {
+    // X11BypassWindowManagerHint can be used to have fixed position
+    if (widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+      return false;
+    /* Qt5 has a weird "hover bug", because of which, the cursor may not
+       be over the widget but mousePressEvent() may be called on pressing
+       the left mouse button. Since this function is called first by
+       WindowManager::mousePressEvent(), we add a workaround here. */
+    if (!widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
+      return false;
+  }
 
   // accept
   return true;
@@ -580,6 +639,14 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 /*************************/
 void WindowManager::resetDrag (void)
 {
+#if QT_VERSION >= 0x050200
+  if (!isX11_ && target_ && cursorOverride_)
+  {
+    qApp->restoreOverrideCursor();
+    cursorOverride_ = false;
+  }
+#endif
+
   target_.clear();
   if (dragTimer_.isActive())
     dragTimer_.stop();
@@ -594,8 +661,18 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   if (!(enabled() && widget) || QWidget::mouseGrabber())
     return;
 
-  X11MoveTrigger (widget->window()->internalWinId(),
-                  position.x()*pixelRatio_, position.y()*pixelRatio_);
+  if (isX11_)
+  {
+    X11MoveTrigger (widget->window()->internalWinId(),
+                    position.x()*pixelRatio_, position.y()*pixelRatio_);
+  }
+#if QT_VERSION >= 0x050200
+  else if (!cursorOverride_)
+  {
+    qApp->setOverrideCursor (Qt::DragMoveCursor);
+    cursorOverride_ = true;
+  }
+#endif
 
   dragInProgress_ = true;
 }
@@ -623,19 +700,22 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
       parent_->setLocked (false);
   }
 
-  if (!parent_->enabled()) return false;
-
-  /*
-    If a drag is in progress, the widget will not receive any event.
-    We trigger on the first MouseMove or MousePress events that are received
-    by any widget in the application to detect that the drag is finished.
-  */
-  if (parent_->dragInProgress_
-      && parent_->target_
-      && (event->type() == QEvent::MouseMove
-          || event->type() == QEvent::MouseButtonPress))
+  if (parent_->isX11_)
   {
-    return appMouseEvent (object, event);
+    if (!parent_->enabled()) return false;
+
+    /*
+      If a drag is in progress, the widget will not receive any event.
+      We trigger on the first MouseMove or MousePress events that are received
+      by any widget in the application to detect that the drag is finished.
+    */
+    if (parent_->dragInProgress_
+        && parent_->target_
+        && (event->type() == QEvent::MouseMove
+            || event->type() == QEvent::MouseButtonPress))
+    {
+      return appMouseEvent (object, event);
+    }
   }
 
   return false;

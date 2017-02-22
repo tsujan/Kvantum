@@ -32,6 +32,7 @@
 #include <X11/Xatom.h>
 #endif
 
+// BlurHelper is never called on wayland or without x11.
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
 {

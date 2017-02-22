@@ -19,20 +19,18 @@
 #define SPEC_H
 
 #include <QStringList>
-#if defined Q_WS_X11 || defined Q_OS_LINUX
 #include "drag/windowmanager.h"
-#endif
 
 namespace Kvantum {
 /* Generic information about a theme */
 typedef struct {
   QString author;
   QString comment;
-#if defined Q_WS_X11 || defined Q_OS_LINUX
+  /* running on X11? (only used internally) */
+  bool isX11;
   /* draggable from menubar, primary toolbar
      or anywhere possible (under x11)? */
   WindowManager::Drag x11drag;
-#endif
   /* should some settings of the current DE be respected? */
   bool respect_DE;
   /* show mnemonics only if Alt is pressed? */
@@ -374,9 +372,8 @@ static inline void default_size_spec(size_spec &sspec) {
 static inline void default_theme_spec(theme_spec &tspec) {
   tspec.author = QString();
   tspec.comment = QString();
-#if defined Q_WS_X11 || defined Q_OS_LINUX
+  tspec.isX11 = false;
   tspec.x11drag = WindowManager::DRAG_ALL;
-#endif
   tspec.respect_DE = true;
   tspec.alt_mnemonic = true;
   tspec.double_click = false;

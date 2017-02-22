@@ -12,10 +12,6 @@
 #include <QX11Info>
 #endif
 
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-static Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZE", False);
-#endif
-
 namespace Kvantum {
 void X11MoveTrigger (WId wid, int x, int y)
 {
@@ -23,6 +19,7 @@ void X11MoveTrigger (WId wid, int x, int y)
 #if QT_VERSION < 0x050000
   QX11Info info;
 #endif
+  Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZE", False);
   XEvent xev;
   xev.xclient.type = ClientMessage;
   xev.xclient.message_type = netMoveResize;

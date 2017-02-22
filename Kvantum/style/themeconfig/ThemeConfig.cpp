@@ -25,7 +25,6 @@
 #if QT_VERSION >= 0x050000
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
-static Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
 #endif
 #endif
 
@@ -34,6 +33,16 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   settings_(NULL),
   parentConfig_(NULL)
 {
+#if defined Q_WS_X11 || defined Q_OS_LINUX
+#if QT_VERSION < 0x050200
+  isX11_ = true;
+#else
+  isX11_ = QX11Info::isPlatformX11();
+#endif
+#else
+  isX11_ = false;
+#endif
+
   load(theme);
 }
 
@@ -396,10 +405,19 @@ theme_spec ThemeConfig::getCompositeSpec()
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */
-#if QT_VERSION < 0x050000
+#if QT_VERSION < 0x050200
   if (QX11Info::isCompositingManagerRunning())
 #else
-  if (XGetSelectionOwner(QX11Info::display(), atom))
+  bool compositing = false;
+  if (isX11_)
+  {
+    Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
+    if (XGetSelectionOwner(QX11Info::display(), atom))
+      compositing = true;
+  }
+  else
+    compositing = true; // wayland is always composited
+  if (compositing)
 #endif
   {
     v = getValue("General","composite");
@@ -408,10 +426,10 @@ theme_spec ThemeConfig::getCompositeSpec()
 #endif
 
   /* no blurring or window translucency without compositing */
-  if (r.composite)
+  if (isX11_ && r.composite)
   {
     /* no window translucency or blurring
-       without window interior elemenet */
+       without window interior element */
     interior_spec ispec = getInteriorSpec("WindowTranslucent");
     if (ispec.element.isEmpty())
       ispec = getInteriorSpec("Window");
@@ -463,6 +481,8 @@ theme_spec ThemeConfig::getThemeSpec()
   /* start with compositing */
   theme_spec r = getCompositeSpec();
 
+  r.isX11 = isX11_;
+
   QVariant v = getValue("General","author");
   if (!v.toString().isEmpty())
     r.author = v.toString();
@@ -471,7 +491,6 @@ theme_spec ThemeConfig::getThemeSpec()
   if (!v.toString().isEmpty())
     r.comment = v.toString();
 
-#if defined Q_WS_X11 || defined Q_OS_LINUX
   v = getValue("General","x11drag");
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default
   {
@@ -479,7 +498,6 @@ theme_spec ThemeConfig::getThemeSpec()
     if (!(v.toString() == "true" || v.toInt() == 1))
       r.x11drag = WindowManager::toDrag(v.toString());
   }
-#endif
 
   v = getValue("General","respect_DE");
   if (v.isValid()) // true by default
@@ -779,13 +797,16 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (v.isValid())
     r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("Hacks","blur_translucent");
-  if (v.isValid())
-    r.blur_translucent = v.toBool();
-  else // backward compatibility
+  if (isX11_)
   {
-    v = getValue("Hacks","blur_konsole");
-    r.blur_translucent = v.toBool();
+    v = getValue("Hacks","blur_translucent");
+    if (v.isValid())
+      r.blur_translucent = v.toBool();
+    else // backward compatibility
+    {
+      v = getValue("Hacks","blur_konsole");
+      r.blur_translucent = v.toBool();
+    }
   }
 
   v = getValue("Hacks","transparent_ktitle_label");

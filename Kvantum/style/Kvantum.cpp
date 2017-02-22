@@ -220,9 +220,7 @@ Style::Style() : QCommonStyle()
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
-#if defined Q_WS_X11 || defined Q_OS_LINUX
       tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-#endif
       noComposite_ = true;
       // without compositing, these keys should be corrected
       tspec_.translucent_windows = false;
@@ -334,10 +332,9 @@ Style::Style() : QCommonStyle()
   itsWindowManager_ = NULL;
   blurHelper_ = NULL;
 
-#if defined Q_WS_X11 || defined Q_OS_LINUX
   if (tspec_.x11drag)
   {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag, tspec_.isX11);
     itsWindowManager_->initialize();
   }
 
@@ -350,7 +347,6 @@ Style::Style() : QCommonStyle()
     QList<int> tooltipS = getShadow("ToolTip", thickness);
     blurHelper_ = new BlurHelper(this,menuS,tooltipS);
   }
-#endif
 }
 
 Style::~Style()
@@ -1089,9 +1085,8 @@ void Style::polish(QWidget *widget)
 #endif
 
             /* enable blurring */
-            if (!wasOpaque || tspec_now.blurring)
+            if (tspec_.isX11 && (!wasOpaque || tspec_now.blurring))
             {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
               if (!blurHelper_)
               {
                 QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
@@ -1101,7 +1096,6 @@ void Style::polish(QWidget *widget)
                 QList<int> tooltipS = getShadow("ToolTip", thickness);
                 blurHelper_ = new BlurHelper(this,menuS,tooltipS);
               }
-#endif
               if (blurHelper_)
                 blurHelper_->registerWidget(widget);
             }
@@ -1435,20 +1429,22 @@ void Style::polish(QWidget *widget)
       translucentWidgets_.insert(widget);
       connect(widget, SIGNAL(destroyed(QObject*)),
               SLOT(noTranslucency(QObject*)));
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-      if (!blurHelper_ && tspec_now.popup_blurring)
+
+      if (tspec_.isX11)
       {
-        QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-        const frame_spec fspec = getFrameSpec("ToolTip");
-        int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
-        thickness += tspec_now.tooltip_shadow_depth;
-        QList<int> tooltipS = getShadow("ToolTip", thickness);
-        blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+        if (!blurHelper_ && tspec_now.popup_blurring)
+        {
+          QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+          const frame_spec fspec = getFrameSpec("ToolTip");
+          int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+          thickness += tspec_now.tooltip_shadow_depth;
+          QList<int> tooltipS = getShadow("ToolTip", thickness);
+          blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+        }
+        /* blurHelper_ may exist because of blurring hard-coded translucency */
+        if (blurHelper_ && tspec_now.popup_blurring)
+          blurHelper_->registerWidget(widget);
       }
-#endif
-      /* blurHelper_ may exist because of blurring hard-coded translucency */
-      if (blurHelper_ && tspec_now.popup_blurring)
-        blurHelper_->registerWidget(widget);
     }
   }
 }
@@ -10414,6 +10410,8 @@ void Style::setMenuType(const QWidget *widget) const
   Q_UNUSED(widget);
   return;
 #else
+  if (!tspec_.isX11) return;
+
   if (!qobject_cast<const QMenu*>(widget)
       || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
       || !widget->windowHandle())

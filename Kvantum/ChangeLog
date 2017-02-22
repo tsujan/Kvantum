@@ -9,6 +9,7 @@ V0.10.4
  * Added support for transient scrollbars :)
  * Don't make a window translucent if it has a stylesheet containing "background".
  * Don't force window translucency when the app has a stylesheet (in contrast to widget stylesheets) because, otherwise, there would be a chance of total window transparency.
+ * Don't crash on wayland (although it's still very unstable).
 
 V0.10.3
 ---------
