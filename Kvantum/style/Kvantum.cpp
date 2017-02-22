@@ -1485,7 +1485,7 @@ void Style::polish(QApplication *app)
 
   if (tspec_.opaque.contains(appName, Qt::CaseInsensitive)
       /* to avoid total transparency, we don't force translucency
-         when the app has a stylesheet */
+         when the app has a stylesheet (as in qupzilla) */
       || (app->style() && app->style()->inherits("QStyleSheetStyle")))
   {
     isOpaque_ = true;
@@ -10360,8 +10360,8 @@ void Style::setSurfaceFormat(QWidget *widget) const
      return;
 
     QWidget *p = widget->parentWidget();
-    if (p && (!p->testAttribute(Qt::WA_WState_Created) // too soon
-              || qobject_cast<QMdiSubWindow*>(p))) // as in linguist
+    if (p && (/*!p->testAttribute(Qt::WA_WState_Created) // FIXME: too soon?
+              ||*/ qobject_cast<QMdiSubWindow*>(p))) // as in linguist
     {
       return;
     }
