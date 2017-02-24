@@ -332,9 +332,9 @@ Style::Style() : QCommonStyle()
   itsWindowManager_ = NULL;
   blurHelper_ = NULL;
 
-  if (tspec_.x11drag)
+  if (tspec_.x11drag && tspec_.isX11)
   {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag, tspec_.isX11);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag/*, tspec_.isX11*/);
     itsWindowManager_->initialize();
   }
 

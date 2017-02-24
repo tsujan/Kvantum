@@ -65,7 +65,7 @@ public:
     }
   }
 
-  explicit WindowManager (QObject *parent, Drag drag, bool isX11);
+  explicit WindowManager (QObject *parent, Drag drag/*, bool isX11*/);
   virtual ~WindowManager (void) {}
   // initialize
   /* read relevant options from OxygenStyleConfigData */
@@ -222,8 +222,8 @@ private:
   // true if drag is locked
   bool locked_;
   Drag drag_;
-  bool isX11_;
-#if QT_VERSION >= 0x050200
+  //bool isX11_;
+#if 0
   bool cursorOverride_;
 #endif
 

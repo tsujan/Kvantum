@@ -36,15 +36,16 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
-#if QT_VERSION >= 0x050200
+#if 0
 #include <QDesktopWidget> // to be used on wayland
 #endif
 
 #include "windowmanager.h"
 #include "x11wmmove.h"
 
-// WindowManager is called on wayland only if Qt >= 5.2,
-// in which case, it uses QWidget::move() for dragging.
+// WindowManager can be called on wayland only for Qt >= 5.2,
+// in which case, it'll use QWidget::move() for dragging.
+// However, the code is commented out for now.
 namespace Kvantum {
 
 static inline bool isPrimaryToolBar(QWidget *w)
@@ -66,7 +67,7 @@ static inline bool isPrimaryToolBar(QWidget *w)
   return false;
 }
 
-WindowManager::WindowManager (QObject* parent, Drag drag, bool isX11) :
+WindowManager::WindowManager (QObject* parent, Drag drag/*, bool isX11*/) :
                QObject (parent),
                pixelRatio_ (1),
                enabled_ (true),
@@ -76,11 +77,11 @@ WindowManager::WindowManager (QObject* parent, Drag drag, bool isX11) :
                dragInProgress_ (false),
                locked_ (false),
                drag_ (drag)
-#if QT_VERSION >= 0x050200
+#if 0
                , cursorOverride_ (false)
 #endif
 {
-  isX11_ = isX11;
+  //isX11_ = isX11;
 #if QT_VERSION >= 0x050500
   int dpr = qApp->devicePixelRatio();
   if (dpr > 1)
@@ -213,9 +214,9 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
 
   // retrieve widget's child at event position
   QPoint position;
-  if (!isX11_)
+  /*if (!isX11_)
     position = widget->mapFromGlobal (mouseEvent->globalPos()); // see WindowManager::mouseMoveEvent for the reason
-  else
+  else*/
     position = mouseEvent->pos();
 
   QWidget* child = widget->childAt (position);
@@ -276,7 +277,7 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
   }
   else
   {
-#if QT_VERSION >= 0x050200
+#if 0
     if (!isX11_ && target_)
     { // use QWidget::move for the grabbing
       QWidget *window (target_.data()->window());
@@ -457,6 +458,7 @@ bool WindowManager::canDrag (QWidget* widget)
   if (widget->cursor().shape() != Qt::ArrowCursor)
     return false;
 
+#if 0
   if (!isX11_)
   {
     // X11BypassWindowManagerHint can be used to have fixed position
@@ -469,6 +471,7 @@ bool WindowManager::canDrag (QWidget* widget)
     if (!widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
       return false;
   }
+#endif
 
   // accept
   return true;
@@ -639,7 +642,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 /*************************/
 void WindowManager::resetDrag (void)
 {
-#if QT_VERSION >= 0x050200
+#if 0
   if (!isX11_ && target_ && cursorOverride_)
   {
     qApp->restoreOverrideCursor();
@@ -661,18 +664,16 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   if (!(enabled() && widget) || QWidget::mouseGrabber())
     return;
 
-  if (isX11_)
-  {
+  //if (isX11_)
+  //{
     X11MoveTrigger (widget->window()->internalWinId(),
                     position.x()*pixelRatio_, position.y()*pixelRatio_);
-  }
-#if QT_VERSION >= 0x050200
+  /*}
   else if (!cursorOverride_)
   {
     qApp->setOverrideCursor (Qt::DragMoveCursor);
     cursorOverride_ = true;
-  }
-#endif
+  }*/
 
   dragInProgress_ = true;
 }
@@ -700,8 +701,8 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
       parent_->setLocked (false);
   }
 
-  if (parent_->isX11_)
-  {
+  //if (parent_->isX11_)
+  //{
     if (!parent_->enabled()) return false;
 
     /*
@@ -716,7 +717,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
     {
       return appMouseEvent (object, event);
     }
-  }
+  //}
 
   return false;
 }
