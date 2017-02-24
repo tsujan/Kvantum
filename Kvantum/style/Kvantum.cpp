@@ -1424,8 +1424,19 @@ void Style::polish(QWidget *widget)
           widget->installEventFilter(this);
         }
       }
-      if (!widget->testAttribute(Qt::WA_TranslucentBackground))
-        widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+
+      if (tspec_.isX11)
+      {
+        if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+          widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+      }
+      else
+      { // see setSurfaceFormat() for an explanation
+        QPalette palette = widget->palette();
+        palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
+        widget->setPalette(palette);
+      }
+
       translucentWidgets_.insert(widget);
       connect(widget, SIGNAL(destroyed(QObject*)),
               SLOT(noTranslucency(QObject*)));
@@ -10337,6 +10348,37 @@ void Style::setSurfaceFormat(QWidget *widget) const
     /* we want translucency and/or shadow for menus and
        tooltips even if the main window isn't translucent */
     realWindow = false;
+
+    /* WARNING: For some reason unknown to me, if WA_TranslucentBackground
+                is set on wayland, menus will be rendered with artifacts.
+                Instead, the native handle should be created, the alpha
+                channel should be added to it, and the widget background
+                color should be made transparent (at polish()). */
+    if (!tspec_.isX11)
+    {
+      QWindow *window = widget->windowHandle();
+      if (!window)
+      {
+        bool noNativeSiblings = true;
+        if (!qApp->testAttribute(Qt::AA_DontCreateNativeWidgetSiblings))
+        {
+          noNativeSiblings = false;
+          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
+        }
+        widget->setAttribute(Qt::WA_NativeWindow, true);
+        window = widget->windowHandle();
+        /* reverse the changes */
+        widget->setAttribute(Qt::WA_NativeWindow, false);
+        if (!noNativeSiblings)
+          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, false);
+      }
+      if (window)
+      {
+        QSurfaceFormat format = window->format();
+        format.setAlphaBufferSize(8);
+        window->setFormat(format);
+      }
+    }
   }
   else
   {
@@ -10391,8 +10433,9 @@ void Style::setSurfaceFormat(QWidget *widget) const
       || (realWindow && !tspec_now.translucent_windows))
     return;
 
-  /* this will set the alpha buffer size to 8 in a safe way */
-  widget->setAttribute(Qt::WA_TranslucentBackground);
+  /* this will set the alpha buffer size to 8 in a safe way on X11 */
+  if (tspec_.isX11 || realWindow)
+    widget->setAttribute(Qt::WA_TranslucentBackground);
   /* distinguish forced translucency from hard-coded translucency */
   forcedTranslucency_.insert(widget);
   connect(widget, SIGNAL(destroyed(QObject*)),

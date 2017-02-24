@@ -33,6 +33,8 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   settings_(NULL),
   parentConfig_(NULL)
 {
+  /* For now, the lack of x11 means wayland.
+     Later, a better method should be found. */
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #if QT_VERSION < 0x050200
   isX11_ = true;
