@@ -16,6 +16,7 @@ tooltip_shadow_depth=6
 scroll_width=12
 scroll_arrows=false
 scroll_min_extent=50
+transient_scrollbar=true
 slider_width=4
 slider_handle_width=24
 slider_handle_length=20
