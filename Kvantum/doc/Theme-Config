@@ -379,6 +379,12 @@ translucent_windows               true/false          Translucent windows and di
                                                       element for windows. A false value,
                                                       its absence or a false value for
                                                       "composite" means no translucency.
+                                                      
+                                                      Window translucency is also disabled
+                                                      automatically when there is neither a
+                                                      "Window" nor a "WindowTranslucent"
+                                                      section or the value of "interior" is
+                                                      false for them.
 
 opaque                            string list         A comma-separated list of
                                                       executables, whose apps should not
