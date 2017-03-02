@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #include <QWhatsThis>
 #if QT_VERSION >= 0x050000
+#include <QWindow>
 #include <QFileDevice>
 #include <QTextStream>
 #endif
@@ -102,6 +103,15 @@ KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new
     ui->labelTooltipDelay->setEnabled (false);
     ui->spinTooltipDelay->setEnabled (false);
     ui->checkBoxTransient->setEnabled (false);
+#else
+    /* get ready for translucency */
+    setAttribute (Qt::WA_NativeWindow, true);
+    if (QWindow *window = windowHandle())
+    {
+        QSurfaceFormat format = window->format();
+        format.setAlphaBufferSize (8);
+        window->setFormat (format);
+    }
 #endif
 
     resize (sizeHint().expandedTo (QSize (600, 400)));

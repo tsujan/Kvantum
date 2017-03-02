@@ -8,10 +8,11 @@ int main(int argc, char *argv[])
     QApplication::setApplicationName ("KvantumManager");
     QApplication a (argc, argv);
 #if QT_VERSION >= 0x050500
-    a.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    a.setAttribute (Qt::AA_UseHighDpiPixmaps, true);
 #endif
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */
 #if QT_VERSION >= 0x050000
+    a.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true); // for translucency
     if (!QStyleFactory::keys().contains ("kvantum"))
 #else
     if (!QStyleFactory::keys().contains ("Kvantum"))
