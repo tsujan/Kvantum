@@ -315,7 +315,7 @@ class Style : public QCommonStyle {
     QMap<QWidget*,int> progressbars_;
     /* List of windows, tooltips and menus that are (made) translucent */
     QSet<const QWidget*> translucentWidgets_;
-    mutable QSet<const QWidget*> forcedTranslucency_;
+    mutable QSet<QWidget*> forcedTranslucency_;
 
     ShortcutHandler *itsShortcutHandler_;
     WindowManager *itsWindowManager_;
@@ -331,8 +331,7 @@ class Style : public QCommonStyle {
     bool joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
 
     /* LibreOffice and Plasma need workarounds. */
-    bool isLibreoffice_;
-    bool isPlasma_;
+    bool isLibreoffice_, isPlasma_;
     /* So far, only VirtualBox has introduced
        itself as "Qt-subapplication" and doesn't
        accept compositing. */

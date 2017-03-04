@@ -1049,18 +1049,37 @@ void Style::polish(QWidget *widget)
             forcedTranslucency_.insert(widget);
           }
 #endif
-          bool wasOpaque((forcedTranslucency_.contains(widget)
-                          /* WARNING:
-                             Unlike most Qt5 windows, there are some opaque ones
-                             that are polished BEFORE being created (as in Octopi).
-                             Also the theme may change from Kvantum and to it again. */
-                          || (!isOpaque_ && tspec_now.translucent_windows
-                              && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                              && !widget->testAttribute(Qt::WA_NoSystemBackground)))
-                         // no translucency for frameless windows (-> setSurfaceFormat)
-                         && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-                         && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint));
-          if ((wasOpaque
+          bool makeTranslucent(false);
+          if (!widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+              && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+          {
+            if (forcedTranslucency_.contains(widget))
+              makeTranslucent = true;
+            /* WARNING:
+               Unlike most Qt5 windows, there are some opaque ones
+               that are polished BEFORE being created (as in Octopi).
+               Also the theme may change from Kvantum and to it again. */
+            else if (!isOpaque_ && tspec_now.translucent_windows
+                     && !widget->testAttribute(Qt::WA_TranslucentBackground)
+                     && !widget->testAttribute(Qt::WA_NoSystemBackground))
+            {
+              makeTranslucent = true;
+#if QT_VERSION >= 0x050000
+              /* a Qt5 window couldn't be made translucent if it's
+                 already created without the alpha channel of its
+                 surface format being set (as in Spectacle) */
+              if (widget->testAttribute(Qt::WA_WState_Created))
+              {
+                if (QWindow *window = widget->windowHandle())
+                {
+                  if (window->format().alphaBufferSize() != 8)
+                    makeTranslucent = false;
+                } 
+              }
+#endif
+            }
+          }
+          if ((makeTranslucent
                /* enable blurring for hard-coded translucency */
                || (tspec_now.composite && hspec_.blur_translucent
                    && widget->testAttribute(Qt::WA_TranslucentBackground))))
@@ -1085,7 +1104,7 @@ void Style::polish(QWidget *widget)
 #endif
 
             /* enable blurring */
-            if (tspec_.isX11 && (!wasOpaque || tspec_now.blurring))
+            if (tspec_.isX11 && (!makeTranslucent || tspec_now.blurring))
             {
               if (!blurHelper_)
               {
@@ -1100,7 +1119,7 @@ void Style::polish(QWidget *widget)
                 blurHelper_->registerWidget(widget);
             }
 
-            if (wasOpaque)
+            if (makeTranslucent)
             {
               widget->removeEventFilter(this);
               widget->installEventFilter(this);
@@ -1494,13 +1513,8 @@ void Style::polish(QApplication *app)
            || appName == "kded4") // this is for the infamous appmenu
     isPlasma_ = true;
 
-  if (tspec_.opaque.contains(appName, Qt::CaseInsensitive)
-      /* to avoid total transparency, we don't force translucency
-         when the app has a stylesheet (as in qupzilla) */
-      || (app->style() && app->style()->inherits("QStyleSheetStyle")))
-  {
+  if (tspec_.opaque.contains(appName, Qt::CaseInsensitive))
     isOpaque_ = true;
-  }
 
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
@@ -1699,6 +1713,23 @@ void Style::unpolish(QWidget *widget)
 
 void Style::unpolish(QApplication *app)
 {
+#if QT_VERSION >= 0x050000
+  /* we clean up here because this method may be called due to setting
+     an app style sheet (as in QupZilla), in which case, main windows
+     might not be drawn at all if we don't remove translucency */
+  QSetIterator<QWidget*> i(forcedTranslucency_);
+  while (i.hasNext())
+  {
+    if (QWidget *w = i.next())
+    {
+      w->setAttribute(Qt::WA_NoSystemBackground, false);
+      w->setAttribute(Qt::WA_TranslucentBackground, false);
+    }
+  }
+  forcedTranslucency_.clear();
+  translucentWidgets_.clear();
+#endif
+
   if (itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);
   QCommonStyle::unpolish(app);
