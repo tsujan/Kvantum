@@ -996,10 +996,13 @@ void Style::polish(QWidget *widget)
     case Qt::Window:
     case Qt::Dialog:
     case Qt::Popup:
+    case Qt::ToolTip: // a window, not a tooltip
     case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
       /* popup, not menu (-> GoldenDict); also, although it may be
-         hard to believe, a menu can have the Dialog flag (-> qlipper) */
-      if (qobject_cast<QMenu*>(widget)) break;
+         hard to believe, a menu can have the Dialog flag (-> qlipper)
+         and a window can have the ToolTip flag (-> LXQtGroupPopup) */
+      if (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
+        break;
       widget->setAttribute(Qt::WA_StyledBackground);
       /* take all precautions */
       if (!isPlasma_ && !subApp_ && !isLibreoffice_
@@ -2760,10 +2763,17 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
         break;
       }
-      // only for windows and dialogs
-      if (widget // it's NULL with QML
-          && !widget->isWindow())
-        break;
+      if (widget) // it's NULL with QML
+      {
+        if (widget->windowType() == Qt::ToolTip)
+        {
+          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+          break;
+        }
+        // only for windows and dialogs
+        if (!widget->isWindow())
+          break;
+      }
 
       // we don't accept custom background colors for windows...
       if (!widget // QML
@@ -11974,9 +11984,68 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       return r;
     }
 
+    case SE_TabWidgetTabPane :
     case SE_TabWidgetTabContents : {
-      const frame_spec fspec = getFrameSpec("TabFrame");
-      return QCommonStyle::subElementRect(element,option,widget).adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);
+      QRect r;
+      if (const QStyleOptionTabWidgetFrame *twf = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
+      {
+        /* a 2px space between tab page and tab bar
+           but no spece between tab pane and tab bar */
+        int space = element == SE_TabWidgetTabContents ? 2 : 0;
+        int left = 0; int top = 0; int right = 0; int bottom = 0;
+        bool docMode(true);
+        if (element == SE_TabWidgetTabContents)
+        { // space for the frame
+          const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
+          if (!tw || !tw->documentMode())
+          {
+            docMode = false;
+            const frame_spec fspec = getFrameSpec("TabFrame");
+            left = fspec.left + 1;
+            top = fspec.top + 1;
+            right = fspec.right + 1;
+            bottom = fspec.bottom + 1;
+          }
+        }
+        switch (twf->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth:
+            r = QRect(QPoint(0, qMax(twf->tabBarSize.height() + space, 0)),
+                      QSize(twf->rect.width(),
+                            qMin(twf->rect.height() - twf->tabBarSize.height() - space,
+                                 twf->rect.height())));
+            if (top >= 2) top -= 2;
+            break;
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth:
+            r = QRect(QPoint(0, 0),
+                      QSize(twf->rect.width(),
+                            qMin(twf->rect.height() - twf->tabBarSize.height() - space,
+                                 twf->rect.height())));
+            if (bottom >= 2) bottom -= 2;
+            break;
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+            r = QRect(QPoint(0, 0),
+                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space,
+                                 twf->rect.width()),
+                            twf->rect.height()));
+            if (right >= 2) right -= 2;
+            break;
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+            r = QRect(QPoint(qMax(twf->tabBarSize.width() + space, 0), 0),
+                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space,
+                                 twf->rect.width()),
+                            twf->rect.height()));
+            if (left >= 2) left -= 2;
+            break;
+        }
+        if (!docMode)
+          r.adjust(left, top, -right, -bottom);
+      }
+      if (r.isValid()) return r;
+      else return QCommonStyle::subElementRect(element,option,widget);
     }
 
     case SE_TabWidgetLeftCorner : {
