@@ -246,8 +246,9 @@ class Style : public QCommonStyle {
                          const size_spec &sspec,
                          const QString &text,
                          const QSize iconSize,
-                         // text-icon alignment
-                         const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon) const;
+                         const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // text-icon alignment
+                         // use real heights of multiline texts?
+                         bool realHeight = false) const;
 
     /* Return a normalized rect, i.e. a square. */
     QRect squaredRect(const QRect &r) const;
