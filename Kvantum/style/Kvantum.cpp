@@ -1001,8 +1001,12 @@ void Style::polish(QWidget *widget)
       /* popup, not menu (-> GoldenDict); also, although it may be
          hard to believe, a menu can have the Dialog flag (-> qlipper)
          and a window can have the ToolTip flag (-> LXQtGroupPopup) */
-      if (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
+      if (qobject_cast<QMenu*>(widget)
+          || widget->inherits("QTipLabel")
+          || qobject_cast<QLabel*>(widget)) // a floating label, as in Filelight
+      {
         break;
+      }
       widget->setAttribute(Qt::WA_StyledBackground);
       /* take all precautions */
       if (!isPlasma_ && !subApp_ && !isLibreoffice_
@@ -10435,6 +10439,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
     if (widget->windowHandle() // too late
         || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
         || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
+        || qobject_cast<QFrame*>(widget) // a floating frame, as in Filelight
         || widget->windowType() == Qt::Desktop
         || widget->testAttribute(Qt::WA_PaintOnScreen)
         || widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
