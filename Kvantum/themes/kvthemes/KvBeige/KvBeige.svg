@@ -474,7 +474,7 @@
 </defs>
 <g style="stroke:none">
 <g id="g525">
-<text x="51" y="288.55786" style="font-family:Gill Sans;text-align:justify;line-height:125%;font-weight:bold;font-size:14px" id="text6990" xml:space="preserve"><tspan x="51" y="288.55786" id="tspan6992"/>
+<text x="51" y="288.55786" style="font-family:'Gill Sans';text-align:justify;line-height:0%;font-weight:bold;font-size:14px" id="text6990" xml:space="preserve"><tspan x="51" y="288.55786" id="tspan6992"/>
 </text>
 <rect width="16" x="252" y="-1246.75" height="16" style="fill:url(#linearGradient5576)" id="common-normal" d="m 495.50262,453.85937 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1176.01685,3 -1173.01685,0 m 1164.01685,-9 9,9 m -400.00562,-9 9,9 m -400.00561,-9 9,9 m -400.00562,-9 9,9" transform="scale(1,-1)"/>
 </g>
@@ -629,7 +629,7 @@
 <path style="opacity:.6" id="path6572" d="m 222.9062,667.5938 -.5,.0625 .3125,2.9688 .5,-.0312 -.3125,-3 z  m 4.1875,0 -.3125,3 .5,.0312 .3125,-2.9688 -.5,-.0625 z  m -8.8125,.9375 -.4688,.1562 .9375,2.8438 .4688,-.1562 -.9375,-2.8438 z  m 13.4375,0 -.9375,2.8438 .4688,.1562 .9375,-2.8438 -.4688,-.1562 z  m -21.5938,4.5938 -.375,.3125 2.0312,2.25 .3438,-.3438 -2,-2.2188 z  m 29.75,0 -2,2.2188 .3438,.3438 2.0312,-2.25 -.375,-.3125 z  m -32.9375,3.4375 -.2812,.4062 2.4062,1.7812 .3125,-.4062 -2.4375,-1.7812 z  m 36.125,0 -2.4375,1.7812 .3125,.4062 2.4062,-1.7812 -.2812,-.4062 z  m -38.5,4.0625 -.2188,.4375 2.75,1.25 .1875,-.4688 -2.7188,-1.2188 z  m 40.875,0 -2.7188,1.2188 .1875,.4688 2.75,-1.25 -.2188,-.4375 z  m -42.4062,4.4375 -.0937,.5 2.9375,.625 .0937,-.5 -2.9375,-.625 z  m 43.9375,0 -2.9375,.625 .0937,.5 2.9375,-.625 -.0937,-.5 z  m -41.0938,8.75 -2.9375,.625 .0937,.5 2.9375,-.625 -.0937,-.5 z  m 38.25,0 -.0937,.5 2.9375,.625 .0937,-.5 -2.9375,-.625 z  m -37.0312,3.875 -2.75,1.25 .2188,.4375 2.7188,-1.2188 -.1875,-.4688 z  m 35.8125,0 -.1875,.4688 2.7188,1.2188 .2188,-.4375 -2.75,-1.25 z  m -33.8438,3.5625 -2.4062,1.7812 .2812,.4062 2.4375,-1.7812 -.3125,-.4062 z  m 31.875,0 -.3125,.4062 2.4375,1.7812 .2812,-.4062 -2.4062,-1.7812 z  m -29.1562,3.0625 -2.0312,2.25 .375,.3125 2,-2.2188 -.3438,-.3438 z  m 26.4375,0 -.3438,.3438 2,2.2188 .375,-.3125 -2.0312,-2.25 z "/>
 </g>
 </g>
-<text x="1504.4144" y="264.18063" style="font-family:'Gill Sans';text-align:justify;line-height:125%;font-weight:bold;font-size:14px" id="text6990-2" xml:space="preserve"><tspan x="1504.4144" y="264.18063" id="tspan6992-2"/>
+<text x="1504.4144" y="264.18063" style="font-family:'Gill Sans';text-align:justify;line-height:0%;font-weight:bold;font-size:14px" id="text6990-2" xml:space="preserve"><tspan x="1504.4144" y="264.18063" id="tspan6992-2"/>
 </text>
 <g style="fill-rule:evenodd">
 <path style="fill:url(#linearGradient7745)" id="button-pressed" d="m 297.5,75 0,-32.5 -32.5,0 0,32.5 32.5,0 z"/>
@@ -1301,16 +1301,16 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#border-tab-toggled-bottomleft" id="border-tab-toggled-bottomright" transform="matrix(-1,0,0,1,550,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#border-tab-toggled-topleft" id="border-tab-toggled-topright" transform="matrix(-1,0,0,1,550,0)"/>
-<g style="stroke-linejoin:bevel;stroke-linecap:round;fill-rule:evenodd" id="tab-close-normal" transform="translate(110.30022,5)">
+<g style="stroke-linejoin:bevel;stroke-linecap:round;fill-rule:evenodd" id="tab-close-normal" transform="translate(110,5)">
 <rect width="10" x="280" y="865" height="10" style="stroke:none;fill-opacity:.004" id="rect5546"/>
-<circle cx="283" cy="870" style="fill:none;stroke:#786450;stroke-width:1.5" r="2.2502196" id="path5548"/>
+<circle cx="285" cy="870" style="fill:none;stroke:#786450;stroke-width:1.5" r="2.2502196" id="path5548"/>
 </g>
-<g style="stroke-linejoin:bevel;stroke-linecap:round;fill-rule:evenodd" id="tab-close-pressed" transform="translate(130.30022,5)">
+<g style="stroke-linejoin:bevel;stroke-linecap:round;fill-rule:evenodd" id="tab-close-pressed" transform="translate(130,5)">
 <rect width="10" x="280" y="865" height="10" style="stroke:none;fill-opacity:.004" id="rect5570"/>
-<circle cx="283" cy="870" style="fill:none;stroke:#1e1e1e;stroke-width:1.5" r="2.2502196" id="circle5572"/>
+<circle cx="285" cy="870." style="fill:none;stroke:#1e1e1e;stroke-width:1.5" r="2.2502196" id="circle5572"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(30,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-10,0)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(30)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-10)"/>
 <g style="stroke-linecap:round;stroke-linejoin:bevel;fill-rule:evenodd;stroke:none" id="tabframe-normal-top-leftjunct">
 <rect width="10" x="305" y="835" height="2" style="fill-opacity:.004" id="rect5352"/>
 <path style="fill:#d9cfc6" id="rect5354" d="m 305,835 2,0 -2,2 z"/>

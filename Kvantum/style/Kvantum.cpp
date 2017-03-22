@@ -3782,27 +3782,39 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameGroupBox : {
-      const QString group = "GroupBox";
-      frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
-      if (!tspec_.groupbox_top_label
-          || !widget) // WARNING: QML has anchoring!
-        fspec.expansion = 0;
-
-      if (!(option->state & State_Enabled))
+#if QT_VERSION < 0x050000
+      if (qstyleoption_cast<const QStyleOptionFrame*>(option))
       {
-        painter->save();
-        painter->setOpacity(DISABLED_OPACITY);
+        const QStyleOptionFrameV2 *frame2 = qstyleoption_cast<const QStyleOptionFrameV2 *>(option);
+        if (frame2 && (frame2->features & QStyleOptionFrameV2::Flat))
+#else
+      if (const QStyleOptionFrame *frame = qstyleoption_cast<const QStyleOptionFrame*>(option))
+      {
+        if (frame->features & QStyleOptionFrame::Flat)
+#endif
+          break;
+        const QString group = "GroupBox";
+        frame_spec fspec = getFrameSpec(group);
+        const interior_spec ispec = getInteriorSpec(group);
+        if (!tspec_.groupbox_top_label
+            || !widget) // WARNING: QML has anchoring!
+          fspec.expansion = 0;
+
+        if (!(option->state & State_Enabled))
+        {
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+        QString suffix = "-normal";
+        if (widget && !widget->isActiveWindow())
+          suffix = "-normal-inactive";
+        renderFrame(painter,option->rect,fspec,fspec.element+suffix,0,0,0,0,0,true);
+        if (tspec_.groupbox_top_label
+            && widget) // QML anchoring
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix,true);
+        if (!(option->state & State_Enabled))
+          painter->restore();
       }
-      QString suffix = "-normal";
-      if (widget && !widget->isActiveWindow())
-        suffix = "-normal-inactive";
-      renderFrame(painter,option->rect,fspec,fspec.element+suffix,0,0,0,0,0,true);
-      if (tspec_.groupbox_top_label
-          && widget) // QML anchoring
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix,true);
-      if (!(option->state & State_Enabled))
-        painter->restore();
 
       break;
     }
@@ -6223,10 +6235,10 @@ void Style::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec(group);
 
         int talign;
-        if (!widget) // QML
+        //if (!widget) // QML
           talign = Qt::AlignCenter;
-        else
-          talign = Qt::AlignLeft | Qt::AlignVCenter;
+        /*else
+          talign = Qt::AlignLeft | Qt::AlignVCenter;*/
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
         else
