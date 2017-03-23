@@ -4786,7 +4786,12 @@ void Style::drawPrimitive(PrimitiveElement element,
       break;
     }
 
+#if QT_VERSION < 0x050700
     case PE_IndicatorTabTear : {
+#else
+    case PE_IndicatorTabTearRight :
+    case PE_IndicatorTabTearLeft : {
+#endif
       indicator_spec dspec = getIndicatorSpec("Tab");
       renderElement(painter,dspec.element+"-tear",option->rect);
 
@@ -6340,7 +6345,8 @@ void Style::drawControl(ControlElement element,
           state = 2;
 
         bool closable = false;
-        if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
+        const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
+        if (tb)
         {
           if (tb->tabsClosable())
             closable = true;
@@ -6369,8 +6375,14 @@ void Style::drawControl(ControlElement element,
           QSize txtSize = textSize(F,txt,false);
           if (txtSize.width() > txtWidth)
           {
+            /* Even if the text is elided because of the size hint,
+               it might not fit into our available space. So, we always
+               elide it but respect the elide mode when present. */
             QFontMetrics fm(F);
-            txt = fm.elidedText(txt, Qt::ElideRight, txtWidth);
+            txt = fm.elidedText(txt, (tb && tb->elideMode() != Qt::ElideNone)
+                                       ? tb->elideMode() 
+                                       : Qt::ElideRight,
+                                txtWidth);
           }
           if (txtSize.height() > r.height()-lspec.top-lspec.bottom-fspec.top-fspec.bottom)
           { // try to work around design flaws as far as possible
@@ -10176,8 +10188,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarBaseHeight :
     case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
-    case PM_TabBarTabShiftVertical : return 0;
-    case PM_TabBar_ScrollButtonOverlap : return 1;
+    case PM_TabBarTabShiftVertical :
+    case PM_TabBar_ScrollButtonOverlap : return 0;
 
 #if QT_VERSION >= 0x050500
     /* With transient scrollbars, we've removed arrows and put
@@ -12148,6 +12160,56 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       }
       if (r.isValid()) return r;
       else return QCommonStyle::subElementRect(element,option,widget);
+    }
+
+#if QT_VERSION < 0x050700
+    case SE_TabBarTearIndicator : {
+#else
+    case SE_TabBarTearIndicatorRight :
+    case SE_TabBarTearIndicatorLeft : {
+#endif
+      QRect r;
+      if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab*>(option))
+      {
+        switch (tab->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth:
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth:
+#if QT_VERSION >= 0x050700
+            if (option->direction == Qt::RightToLeft)
+            {
+              if (element == SE_TabBarTearIndicatorLeft)
+                r.setRect(tab->rect.right() - 1, tab->rect.top(), 2, option->rect.height());
+              else
+                r.setRect(tab->rect.left(), tab->rect.top(), 2, option->rect.height());
+            }
+            else
+            {
+              if (element == SE_TabBarTearIndicatorRight)
+                r.setRect(tab->rect.right() - 1, tab->rect.top(), 2, option->rect.height());
+              else
+#endif
+                r.setRect(tab->rect.left(), tab->rect.top(), 2, option->rect.height());
+#if QT_VERSION >= 0x050700
+            }
+#endif
+            break;
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+#if QT_VERSION >= 0x050700
+            if (element == SE_TabBarTearIndicatorRight)
+              r.setRect(tab->rect.left(), tab->rect.bottom() - 1, option->rect.width(), 2);
+            else
+#endif
+              r.setRect(tab->rect.left(), tab->rect.top(), option->rect.width(), 2);
+            break;
+          default: break;
+        }
+      }
+      return r;
     }
 
     default : return QCommonStyle::subElementRect(element,option,widget);
