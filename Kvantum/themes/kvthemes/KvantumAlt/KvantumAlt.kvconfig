@@ -142,11 +142,6 @@ text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
 
-[Focus]
-inherits=PanelButtonCommand
-frame=false
-interior=false
-
 [GenericFrame]
 inherits=PanelButtonCommand
 frame=true

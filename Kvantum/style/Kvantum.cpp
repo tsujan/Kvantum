@@ -3467,12 +3467,14 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* this would be ugly, IMO */
           /*&& !qobject_cast<const QAbstractItemView*>(widget)*/)
       {
+        const interior_spec ispec = getInteriorSpec("Focus");
         frame_spec fspec = getFrameSpec("Focus");
         fspec.expansion = 0;
         fspec.left = qMin(fspec.left,2);
         fspec.right = qMin(fspec.right,2);
         fspec.top = qMin(fspec.top,2);
         fspec.bottom = qMin(fspec.bottom,2);
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element);
         renderFrame(painter,option->rect,fspec,fspec.element);
       }
 
@@ -5052,14 +5054,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.hasCapsule,true);
 
-      if (opt && opt->state & State_HasFocus)
-      {
-        QStyleOptionFocusRect fropt;
-        fropt.QStyleOption::operator=(*opt);
-        fropt.rect = interiorRect(opt->rect, fspec);
-        drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-      }
-
       break;
     }
 
@@ -5492,6 +5486,7 @@ void Style::drawControl(ControlElement element,
             }
           }
         }
+        /* the focus rect is drawn by QCommonStyle with SE_ItemViewItemFocusRect */
         QCommonStyle::drawControl(element,option,painter,widget);
       }
 
@@ -6250,6 +6245,7 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextShowMnemonic;
 
         QRect r = option->rect;
+        bool rtl(opt->direction == Qt::RightToLeft);
         bool verticalTabs = false;
         bool bottomTabs = false;
         bool mirror = true;
@@ -6266,12 +6262,16 @@ void Style::drawControl(ControlElement element,
           mirror = false;
         if (mirror && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
           bottomTabs = true;
-        
+
         if (verticalTabs)
         {
-          /* this wouldn't be needed if there
-             were always only a single tab */
           painter->save();
+          r.setRect(0, 0, h, w);
+          QTransform m;
+          if (rtl)
+          { // needed for the correct text-icon order
+            m.translate(w+2*x, h+2*y); m.scale(-1,-1);
+          }
           int X, Y, rot;
           if (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast)
           {
@@ -6294,8 +6294,6 @@ void Style::drawControl(ControlElement element,
             Y = y + h;
             rot = -90;
           }
-          r.setRect(0, 0, h, w);
-          QTransform m;
           m.translate(X, Y);
           m.rotate(rot);
           painter->setTransform(m, true);
@@ -6318,16 +6316,19 @@ void Style::drawControl(ControlElement element,
         {
           if (verticalTabs)
           {
-            ltb = subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).height();
-            rtb = subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).height();
+            ltb = qMax(0, subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).height());
+            rtb = qMax(0, subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).height());
           }
           else
           {
-            ltb = subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).width();
-            rtb = subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).width();
+            ltb = qMax(0, subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).width());
+            rtb = qMax(0, subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).width());
           }
         }
-        r.adjust(ltb, 0, -rtb, 0);
+        if (rtl)
+          r.adjust(rtb, 0, -ltb, 0);
+        else
+          r.adjust(ltb, 0, -rtb, 0);
 
         QStyleOptionTab_v2 tabV2(*opt);
         QSize iconSize;
@@ -6351,25 +6352,26 @@ void Style::drawControl(ControlElement element,
           if (tb->tabsClosable())
             closable = true;
         }
-
-        /* since we draw text and icon together as label,
-           for RTL we need to move the label to right */
-        if (opt->direction == Qt::RightToLeft && !verticalTabs && closable)
-          r = alignedRect(Qt::RightToLeft, Qt::AlignLeft,
-                          QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget), h),
-                          option->rect);
+        if (closable) // the close button area is always SE_TabBarTabRightButton
+        {
+          r = alignedRect(opt->direction, Qt::AlignLeft,
+                          !verticalTabs
+                            ? QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget)-lspec.tispace, h)
+                            : QSize(h-pixelMetric(PM_TabCloseIndicatorHeight,option,widget)-lspec.tispace, w),
+                          r);
+        }
 
         int icnSize = iconSize.isValid() ? 
                         qMax(iconSize.width(), iconSize.height())
                         : pixelMetric(PM_TabBarIconSize);
 
-        /* eliding */
+        /* eliding (WARNING: QML may report an empty text when there isn't
+                             enough space, so nothing can be done for it. */
         QString txt = opt->text;
         if (!txt.isEmpty())
         {
           int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
-                         - (closable ? lspec.tispace : 0)
-                         - (opt->icon.isNull() ? 0 : icnSize);
+                         - (opt->icon.isNull() ? 0 : icnSize + lspec.tispace);
           QFont F(painter->font());
           if (lspec.boldFont) F.setBold(true);
           QSize txtSize = textSize(F,txt,false);
@@ -6422,10 +6424,20 @@ void Style::drawControl(ControlElement element,
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
-          QRect FR = opt->rect;
-          if (verticalTabs)
-            FR.setRect(0, 0, h, w);
-          fropt.rect = interiorRect(FR, fspec);
+          if (fspec.expansion > 0)
+          {
+            if (rtl)
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(closable ? -lspec.tispace : 0, 0, 0, 0);
+            else
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(0, 0, closable ? lspec.tispace : 0, 0);
+          }
+          else
+          {
+            QRect FR = opt->rect;
+            if (verticalTabs)
+              FR.setRect(0, 0, h, w);
+            fropt.rect = interiorRect(FR, fspec);
+          }
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
 
@@ -7838,7 +7850,10 @@ void Style::drawControl(ControlElement element,
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
-          fropt.rect = interiorRect(subElementRect(SE_PushButtonFocusRect, opt, widget), fspec);
+          if (fspec.expansion > 0)
+            fropt.rect = labelRect(option->rect, fspec, lspec);
+          else
+            fropt.rect = interiorRect(option->rect, fspec);
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
       }
@@ -8447,6 +8462,7 @@ void Style::drawComplexControl(ComplexControl control,
         }
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
+        label_spec lspec = getLabelSpec(group);
         QStyleOptionToolButton o(*opt);
 
         QRect r = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
@@ -8499,7 +8515,7 @@ void Style::drawComplexControl(ComplexControl control,
               }
             }
             indicator_spec dspec = getIndicatorSpec(group1);
-            const label_spec lspec = getLabelSpec(group1);
+            lspec = getLabelSpec(group1);
 
             QString aStatus = getState(option,widget);
             if (aStatus.startsWith("focused")
@@ -8581,7 +8597,10 @@ void Style::drawComplexControl(ComplexControl control,
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
-          fropt.rect = interiorRect(opt->rect, fspec);
+          if (fspec.expansion > 0)
+            fropt.rect = labelRect(opt->rect, fspec, lspec);
+          else
+            fropt.rect = interiorRect(opt->rect, fspec);
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
       }
@@ -8994,13 +9013,16 @@ void Style::drawComplexControl(ComplexControl control,
             }
             if (libreoffice) painter->restore();
             /* draw focus rect */
-            if (!editable
+            if (tspec_.combo_focus_rect && !editable
                 && (option->state & State_Enabled) && !(option->state & State_On)
                 && ((option->state & State_Sunken) || (option->state & State_Selected)))
             {
               QStyleOptionFocusRect fropt;
               fropt.QStyleOption::operator=(*opt);
-              fropt.rect = interiorRect(r, fspec);
+              if (fspec.expansion > 0)
+                fropt.rect = labelRect(r, fspec, lspec);
+              else
+                fropt.rect = interiorRect(r, fspec);
               drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
             }
             /* force label color (as in Krusader) */
@@ -9881,7 +9903,7 @@ void Style::drawComplexControl(ComplexControl control,
           QRegion region(opt->rect);
           if (!opt->text.isEmpty())
           {
-            bool ltr = opt->direction == Qt::LeftToRight;
+            bool ltr = (opt->direction == Qt::LeftToRight);
             QRect finalRect;
             if (opt->subControls & QStyle::SC_GroupBoxCheckBox)
             {
@@ -11568,16 +11590,27 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         return QCommonStyle::subElementRect(element,option,widget);
     }
 
-    case SE_PushButtonFocusRect : {
-      const QStyleOptionButton *opt =
-          qstyleoption_cast<const QStyleOptionButton*>(option);
-      if (opt)
-        return opt->rect;
+    case SE_PushButtonFocusRect : { // this isn't used anywhere
+      QRect r;
+      if (const QStyleOptionButton *opt = qstyleoption_cast<const QStyleOptionButton*>(option))
+        r = opt->rect;
+      return r;
     }
 
     case SE_ComboBoxFocusRect :
-    case SE_SliderFocusRect :
-    case SE_ItemViewItemFocusRect : return QRect();
+    case SE_SliderFocusRect : return QRect();
+
+    /* this is needed for QCommonStyle to draw
+       the focus rect at CE_ItemViewItem */
+    case SE_ItemViewItemFocusRect : {
+      QRect r;
+      if (qstyleoption_cast<const QStyleOptionViewItem_v4*>(option))
+      {
+        const frame_spec fspec = getFrameSpec("ItemView");
+        r = interiorRect(option->rect, fspec);
+      }
+      return r;
+    }
 
     case SE_HeaderLabel : return option->rect;
 

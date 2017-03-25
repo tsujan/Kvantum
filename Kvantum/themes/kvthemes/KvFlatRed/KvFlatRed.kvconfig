@@ -148,11 +148,6 @@ inherits=PanelButtonCommand
 frame=false
 interior.element=checkbox
 
-[Focus]
-inherits=PanelButtonCommand
-frame=false
-interior=false
-
 [GenericFrame]
 inherits=PanelButtonCommand
 frame=true

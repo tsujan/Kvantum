@@ -41,6 +41,7 @@ combo_as_lineedit=true
 animate_states=true
 button_contents_shift=false
 combo_menu=true
+combo_focus_rect=true
 groupbox_top_label=true
 inline_spin_indicators=false
 joined_inactive_tabs=false

@@ -120,8 +120,14 @@ text.margin.right=3
 
 [Focus]
 inherits=PanelButtonCommand
-frame=false
 interior=false
+frame=true
+frame.element=focus
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+frame.patternsize=20
 
 [GenericFrame]
 inherits=PanelButtonCommand

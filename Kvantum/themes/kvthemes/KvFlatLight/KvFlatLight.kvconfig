@@ -37,6 +37,7 @@ animate_states=true
 button_contents_shift=true
 combo_as_lineedit=true
 combo_menu=false
+combo_focus_rect=true
 groupbox_top_label=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
@@ -152,11 +153,6 @@ frame=false
 interior.element=checkbox
 text.normal.color=black
 text.focus.color=#2B7EA8
-
-[Focus]
-inherits=PanelButtonCommand
-frame=false
-interior=false
 
 [GenericFrame]
 inherits=PanelButtonCommand

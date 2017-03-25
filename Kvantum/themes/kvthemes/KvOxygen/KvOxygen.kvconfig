@@ -154,11 +154,6 @@ interior.element=checkbox
 text.normal.color=black
 text.focus.color=#0052aa
 
-[Focus]
-inherits=PanelButtonCommand
-frame=false
-interior=false
-
 [GenericFrame]
 inherits=PanelButtonCommand
 frame=true

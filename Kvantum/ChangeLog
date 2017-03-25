@@ -12,7 +12,8 @@ V0.10.4
  * Don't crash on wayland (preparation for wayland).
  * Handle floating frames as well as windows with the ToolTip flag.
  * No frame for flat groupboxes.
- * Always center the tab text.
+ * Always center tab text (also the text position is corrected, especially for RTL).
+ * Added focus rectangle to all themes (also a variable is added for combo boxes without focus rectangle).
 
 V0.10.3
 ---------

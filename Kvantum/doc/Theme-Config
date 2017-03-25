@@ -244,6 +244,10 @@ combo_menu                        true/false          Should the popup of combo 
                                                       Gtk)? By default, they are shown below
                                                       the combo box.
 
+combo_focus_rect                  true/false          Should combo boxes have focus rectangle?
+                                                      The default is false because they usually
+                                                      have a special panel when focused.
+
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 
