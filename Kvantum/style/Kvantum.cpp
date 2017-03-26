@@ -3464,8 +3464,8 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     case PE_FrameFocusRect : {
       if (qstyleoption_cast<const QStyleOptionFocusRect*>(option)
-          /* this would be ugly, IMO */
-          /*&& !qobject_cast<const QAbstractItemView*>(widget)*/)
+          /* this would be not only useless but also ugly */
+          && !(widget && widget->inherits("QComboBoxListView")))
       {
         const interior_spec ispec = getInteriorSpec("Focus");
         frame_spec fspec = getFrameSpec("Focus");
@@ -6211,6 +6211,29 @@ void Style::drawControl(ControlElement element,
 
         if (verticalTabs || mirroredBottomTab)
           painter->restore();
+
+        /* When a top tab is attached to its tab widget, for example,
+           we should update a thin rectangle below it because if tabs
+           are moved by scroll buttons, the top side of the tab widget
+           rectangle won't be updated automatically. (A Qt design flaw?) */
+        if (!docMode && tspec_.attach_active_tab)
+        { // tw exists
+          fspec = getFrameSpec("TabFrame");
+          if (verticalTabs)
+          {
+            if (opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest)
+              tw->update(widget->x()+widget->width(), y, fspec.left, h);
+            else
+              tw->update(widget->x()+x-fspec.right , y, fspec.right, h);
+          }
+          else
+          {
+            if (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth)
+              tw->update(widget->x()+x, widget->y()-fspec.bottom, w, fspec.bottom);
+            else
+              tw->update(widget->x()+x, widget->y()+h, w, fspec.top);
+          }
+        }
       }
 
       break;
