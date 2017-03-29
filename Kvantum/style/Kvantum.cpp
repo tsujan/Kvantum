@@ -11629,8 +11629,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       QRect r;
       if (qstyleoption_cast<const QStyleOptionViewItem_v4*>(option))
       {
-        const frame_spec fspec = getFrameSpec("ItemView");
-        r = interiorRect(option->rect, fspec);
+        if (option->state & State_Selected)
+          r = interiorRect(option->rect, getFrameSpec("ItemView"));
+        else
+          r = option->rect.adjusted(1,1,-1,-1);
       }
       return r;
     }
