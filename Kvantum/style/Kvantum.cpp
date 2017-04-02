@@ -6450,9 +6450,9 @@ void Style::drawControl(ControlElement element,
           if (fspec.expansion > 0)
           {
             if (rtl)
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(closable ? -lspec.tispace : 0, 0, 0, 0);
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(closable ? -lspec.tispace : -1, -1, 1, 1);
             else
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(0, 0, closable ? lspec.tispace : 0, 0);
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(-1, -1, closable ? lspec.tispace : 1, 1);
           }
           else
           {
@@ -7874,7 +7874,7 @@ void Style::drawControl(ControlElement element,
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
           if (fspec.expansion > 0)
-            fropt.rect = labelRect(option->rect, fspec, lspec);
+            fropt.rect = labelRect(option->rect, fspec, lspec).adjusted(-1,-1,1,1);
           else
             fropt.rect = interiorRect(option->rect, fspec);
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
@@ -8621,7 +8621,7 @@ void Style::drawComplexControl(ComplexControl control,
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
           if (fspec.expansion > 0)
-            fropt.rect = labelRect(opt->rect, fspec, lspec);
+            fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-1,-1,1,1);
           else
             fropt.rect = interiorRect(opt->rect, fspec);
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
@@ -9043,7 +9043,7 @@ void Style::drawComplexControl(ComplexControl control,
               QStyleOptionFocusRect fropt;
               fropt.QStyleOption::operator=(*opt);
               if (fspec.expansion > 0)
-                fropt.rect = labelRect(r, fspec, lspec);
+                fropt.rect = labelRect(r, fspec, lspec).adjusted(-1,-1,1,1);
               else
                 fropt.rect = interiorRect(r, fspec);
               drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);

@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=The Kvantum default theme with some changes
+comment=The default Kvantum theme with some changes\n(including translucency support)
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -33,6 +33,7 @@ inline_spin_indicators=true
 combo_as_lineedit=true
 animate_states=true
 tree_branch_line=true
+transient_scrollbar=true
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -364,3 +365,7 @@ frame.element=tooltip
 
 [Window]
 interior=false
+
+[WindowTranslucent]
+interior=true
+interior.element=window
