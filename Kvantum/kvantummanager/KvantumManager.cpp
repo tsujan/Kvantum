@@ -720,7 +720,7 @@ void KvantumManager::defaultThemeButtons()
         theSize = defaultSettings.value ("button_icon_size").toInt();
     theSize = qMin(qMax(theSize,16), 64);
     ui->spinButton->setValue (theSize);
-    theSize = 24;
+    theSize = 22;
     if (defaultSettings.contains ("toolbar_icon_size"))
         theSize = defaultSettings.value ("toolbar_icon_size").toInt();
     else if (defaultSettings.value ("slim_toolbars").toBool())

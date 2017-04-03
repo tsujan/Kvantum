@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A theme inspired by KDE4's Oxygen
+comment=A theme that is inspired by KDE4's Oxygen\nand supports window translucency
 x11drag=all
 alt_mnemonic=true
 left_tabs=false
