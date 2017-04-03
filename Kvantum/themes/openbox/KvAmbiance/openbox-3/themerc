@@ -69,7 +69,7 @@ window.inactive.handle.bg.color: #3f3e3a
 window.inactive.grip.bg: parentrelative
 
 window.inactive.label.bg: parentrelative
-window.inactive.label.text.color: #bcbeb9
+window.inactive.label.text.color: #686c6f
 
 window.inactive.button.*.bg: parentrelative
 window.inactive.button.unpressed.image.color: #ffffff
