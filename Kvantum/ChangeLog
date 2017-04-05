@@ -15,6 +15,7 @@ V0.10.4
  * Always center tab text (also the text position is corrected, especially for RTL).
  * Added focus rectangle to all themes (also a variable is added for combo boxes without focus rectangle).
  * Update the small rectangles below attached tabs (when tab rectangles are moved by tab scroll buttons). This was needed because Kvantum attaches tabs to their tab widgets in a way different from (and better than) how other style engines do.
+ * Added Arch PKGBUILD files (because Arch has the best way of making installable packages).
 
 V0.10.3
 ---------

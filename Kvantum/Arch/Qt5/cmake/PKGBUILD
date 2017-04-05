@@ -1,0 +1,41 @@
+# Maintainer: Pedram Pourang <tsujan2000@gmail.com>
+pkgname=kvantum-qt5
+pluginname=kvantum
+gitname=Kvantum
+pkgver=0.10.4
+pkgrel=1
+epoch=
+pkgdesc="SVG-based Qt5 theme engine plus a config tool and extra themes"
+arch=('x86_64')
+url="https://github.com/tsujan/Kvantum"
+license=('GPL')
+groups=('qt')
+depends=('qt5-base>=5.7.0' 'qt5-svg>=5.7.0' 'qt5-x11extras>=5.7.0' 'libx11>=1.6.4' 'libxext>=1.3.3')
+makedepends=()
+checkdepends=()
+optdepends=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("https://github.com/tsujan/Kvantum/archive/master.zip")
+noextract=()
+md5sums=('SKIP')
+validpgpkeys=()
+
+build() {
+	cd "${srcdir}/${gitname}-master/${gitname}"
+	cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib
+	make
+}
+
+package() {
+	cd "${srcdir}/${gitname}-master/${gitname}"
+	make DESTDIR="$pkgdir/" install
+	mkdir -p $pkgdir/usr/share/doc/kvantum
+	cp ChangeLog $pkgdir/usr/share/doc/kvantum
+	cp COPYING $pkgdir/usr/share/doc/kvantum
+	cp -r doc $pkgdir/usr/share/doc/kvantum
+}
