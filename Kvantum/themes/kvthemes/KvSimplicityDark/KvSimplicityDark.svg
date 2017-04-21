@@ -851,7 +851,7 @@
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26,0)"/>
 <rect width="10" x="0" y="30" height="10" style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3.609" id="expand-itemview-normal"/>
 <rect width="14" x="226" y="-215" rx="1" height="14" ry="1" style="fill:url(#linearGradient4859);stroke:url(#linearGradient4861);color:#000;stroke-width:2" id="checkbox-focused" transform="scale(1,-1)"/>
-<rect width="40" x="387.5" y="640" height="40" style="fill:#3d3d3e;stroke:none;fill-opacity:.93" id="window-normal"/>
+<rect width="40" x="387.5" y="640" height="40" style="fill:#3d3d3e;stroke:none;fill-opacity:.92" id="window-normal"/>
 <g id="checkbox-checked-normal">
 <rect width="16" x="273" y="-215" rx="2" ry="2" height="16" style="opacity:.8;fill:url(#linearGradient5848);stroke:none;color:#000;stroke-width:2" id="rect4836" transform="scale(1,-1)"/>
 <rect width="12" x="275" y="-213" rx="1.5" height="12" ry="1.5" style="fill:url(#linearGradient9243);stroke:none;color:#000" id="checkbox-checked-normal1" transform="scale(1,-1)"/>
@@ -875,5 +875,15 @@
 <g id="radio-checked-focused">
 <use width="100%" x="0" y="0" height="100%" style="opacity:.8" id="use5872" xlink:href="#radio-normal" transform="translate(115,-1)"/>
 <circle cx="146" cy="207" style="fill:url(#linearGradient4845);stroke:none;color:#000;stroke-width:1.274" r="6" id="radio-checked-focused0"/>
+</g>
+<g style="opacity:.009" id="window-normal-pattern">
+<path style="opacity:1;fill:#c8c8c8" id="path5488" d="m 280,1060 v 12 l 12,-12 z"/>
+<path style="opacity:1;fill:#969696" id="path5486" d="m 292,1060 12,12 v -12 z"/>
+<path style="opacity:1;fill:#1e1e1e" id="path5484" d="m 304,1072 -12,12 h 12 z"/>
+<path style="opacity:1;fill:#323232" id="window-normal0" d="m 292,1084 -12,-12 v 12 z"/>
+<path style="opacity:1;fill:#c8c8c8" id="path5490" d="m 304,1072 -12,12 v -12 z"/>
+<path style="opacity:1;fill:#969696" id="path5492" d="m 280,1072 12,12 v -12 z"/>
+<path style="opacity:1;fill:#1e1e1e" id="path5494" d="m 280,1072 12,-12 v 12 z"/>
+<path style="opacity:1;fill:#323232" id="path5496" d="m 304,1072 -12,-12 v 12 z"/>
 </g>
 </svg>

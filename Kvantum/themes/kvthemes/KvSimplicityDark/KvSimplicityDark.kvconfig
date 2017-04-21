@@ -428,6 +428,8 @@ interior=false
 [WindowTranslucent]
 interior=true
 interior.element=window
+interior.x.patternsize=48
+interior.y.patternsize=48
 
 [DialogTranslucent]
 interior=true

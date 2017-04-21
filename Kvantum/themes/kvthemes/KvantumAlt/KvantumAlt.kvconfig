@@ -284,8 +284,8 @@ interior.element=menuitem
 indicator.element=menuitem
 size.minheight=22
 text.focus.color=#4DA6FF
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=3
+text.margin.bottom=3
 text.margin.left=3
 text.margin.right=3
 
