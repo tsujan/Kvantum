@@ -40,7 +40,7 @@
 <linearGradient gradientTransform="matrix(-0.3375,0,0,-0.3375,68.625,530.15625)" id="linearGradient9177" xlink:href="#linearGradient8928" y1="1552.5" y2="1555" x1="185" gradientUnits="userSpaceOnUse" x2="187.5"/>
 <linearGradient gradientTransform="matrix(0.2109375,0,0,0.28125,-43.169796,-524.72621)" id="linearGradient8841" xlink:href="#linearGradient8808" y1="1876.6935" y2="1876.6935" x1="204.65685" gradientUnits="userSpaceOnUse" x2="208.65685"/>
 </defs>
-<rect width="13.5" x="0" y="13.5" height="13.5" style="opacity:.95;fill:#3d3d3f" id="window-normal"/>
+<rect width="13.5" x="0" y="13.5" height="13.5" style="opacity:.935;fill:#3d3d3f" id="window-normal"/>
 <rect width="13.5" x="13.5" y="0" height="13.5" style="opacity:.3;fill:url(#linearGradient4491)" id="common-normal"/>
 <g id="common-focused-top">
 <rect width="0.84375" x="-5.8565909e-18" y="-5.34375" height="4.5" style="fill:url(#linearGradient9145);stroke:none;stroke-width:.244" id="common-normal-top0" transform="rotate(90)"/>
@@ -73,5 +73,15 @@
 <g id="common-focused-bottomright">
 <path style="fill:url(#linearGradient9177);stroke:none;stroke-width:.338" id="common-normal-bottomright0" d="M 6.1875,5.34375 A 0.84375,0.84375 0 0 1 5.34375,6.1875 V 5.34375 Z"/>
 <path style="fill:#2f69a3;stroke:none;stroke-width:.338" id="path4537" d="m 5.3437,6.1875 a 0.84375,0.84375 0 0,0 0.84375,-0.84375 h -0.28125 a 0.5625,0.5625 0 0,1 -0.5625,0.5625 Z "/>
+</g>
+<g style="opacity:.01" id="window-normal-pattern" transform="matrix(0.28125,0,0,0.28125,16.875,9)">
+<path style="opacity:1;fill:#c0c0c0" id="path5488" d="M 0,30 V 42 L 12,30 Z"/>
+<path style="opacity:1;fill:#8c8c8c" id="path5486" d="M 12,30 24,42 V 30 Z"/>
+<path style="opacity:1" id="path5484" d="M 24,42 12,54 h 12 z"/>
+<path style="opacity:1;fill:#2d2d2d" id="window-normal0" d="M 12,54 0,42 v 12 z"/>
+<path style="opacity:1;fill:#c0c0c0" id="path5490" d="M 24,42 12,54 V 42 Z"/>
+<path style="opacity:1;fill:#8c8c8c" id="path5492" d="M 0,42 12,54 V 42 Z"/>
+<path style="opacity:1" id="path5494" d="M 0,42 12,30 v 12 z"/>
+<path style="opacity:1;fill:#2d2d2d" id="path5496" d="M 24,42 12,30 v 12 z"/>
 </g>
 </svg>

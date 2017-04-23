@@ -169,6 +169,8 @@ inherits=PanelButtonCommand
 [Tab]
 inherits=PanelButtonCommand
 interior.element=tab
+text.margin.top=4
+text.margin.bottom=4
 text.margin.left=8
 text.margin.right=8
 frame.element=tab
@@ -369,3 +371,5 @@ interior=false
 [WindowTranslucent]
 interior=true
 interior.element=window
+interior.x.patternsize=48
+interior.y.patternsize=48

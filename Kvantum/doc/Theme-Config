@@ -459,9 +459,9 @@ transient_scrollbar               true/false          Should scrollbars appear o
                                                       
                                                       If this key is true, "scroll_arrows"
                                                       and "scrollbar_in_view" are considered
-                                                      false , scrollbars fade out when not
-                                                      needed and they usually take no extra
-                                                      space.
+                                                      false, the groove is not drawn,
+                                                      scrollbars fade out when not needed,
+                                                      and they usually take no extra space.
 
 tree_branch_line                  true/false          Draw tree branch lines? Ther are not
                                                       drawn by default.

@@ -9139,66 +9139,71 @@ void Style::drawComplexControl(ComplexControl control,
         qstyleoption_cast<const QStyleOptionSlider*>(option);
 
       if (opt) {
-        painter->save();
+        bool isTransient(false);
 #if QT_VERSION >= 0x050500
-        QObject *styleObject = option->styleObject;
-        if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
+        if (option->state & State_Enabled)
         {
-          qreal opacity = 0.0;
-          bool transient = !option->activeSubControls;
-
-          int oldPos = styleObject->property("_q_stylepos").toInt();
-          int oldMin = styleObject->property("_q_stylemin").toInt();
-          int oldMax = styleObject->property("_q_stylemax").toInt();
-          QRect oldRect = styleObject->property("_q_stylerect").toRect();
-          //int oldState = styleObject->property("_q_stylestate").toInt();
-          uint oldActiveControls = styleObject->property("_q_stylecontrols").toUInt();
-
-          if (!transient
-              || oldPos != opt->sliderPosition
-              || oldMin != opt->minimum
-              || oldMax != opt->maximum
-              || oldRect != opt->rect
-              //|| oldState != opt->state
-              || oldActiveControls != opt->activeSubControls)
+          QObject *styleObject = option->styleObject;
+          if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
           {
-            opacity = 1.0;
+            isTransient = true;
+            painter->save();
+            qreal opacity = 0.0;
+            bool transient = !option->activeSubControls;
 
-            styleObject->setProperty("_q_stylepos", opt->sliderPosition);
-            styleObject->setProperty("_q_stylemin", opt->minimum);
-            styleObject->setProperty("_q_stylemax", opt->maximum);
-            styleObject->setProperty("_q_stylerect", opt->rect);
-            styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
-            styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
+            int oldPos = styleObject->property("_q_stylepos").toInt();
+            int oldMin = styleObject->property("_q_stylemin").toInt();
+            int oldMax = styleObject->property("_q_stylemax").toInt();
+            QRect oldRect = styleObject->property("_q_stylerect").toRect();
+            //int oldState = styleObject->property("_q_stylestate").toInt();
+            uint oldActiveControls = styleObject->property("_q_stylecontrols").toUInt();
+
+            if (!transient
+                || oldPos != opt->sliderPosition
+                || oldMin != opt->minimum
+                || oldMax != opt->maximum
+                || oldRect != opt->rect
+                //|| oldState != opt->state
+                || oldActiveControls != opt->activeSubControls)
+            {
+              opacity = 1.0;
+
+              styleObject->setProperty("_q_stylepos", opt->sliderPosition);
+              styleObject->setProperty("_q_stylemin", opt->minimum);
+              styleObject->setProperty("_q_stylemax", opt->maximum);
+              styleObject->setProperty("_q_stylerect", opt->rect);
+              styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
+              styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
+
+             ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
+              if (transient)
+              {
+                if (!anim)
+                {
+                  anim = new ScrollbarAnimation(ScrollbarAnimation::Deactivating, styleObject);
+                  startAnimation(anim);
+                }
+                else if (anim->mode() == ScrollbarAnimation::Deactivating)
+                  anim->setCurrentTime(0); /* the scrollbar was already fading out 
+                                              but, for example, its position changed */
+              }
+              else if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
+                stopAnimation(styleObject);
+            }
 
             ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
-            if (transient)
-            {
-              if (!anim)
-              {
-                anim = new ScrollbarAnimation(ScrollbarAnimation::Deactivating, styleObject);
-                startAnimation(anim);
-              }
-              else if (anim->mode() == ScrollbarAnimation::Deactivating)
-                anim->setCurrentTime(0); /* the scrollbar was already fading out 
-                                            but, for example, its position changed */
-            }
-            else if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-              stopAnimation(styleObject);
+            if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
+              opacity = anim->currentValue();
+
+            painter->setOpacity(opacity);
           }
-
-          ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
-          if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-            opacity = anim->currentValue();
-
-          painter->setOpacity(opacity);
         }
 #endif
 
         QStyleOptionSlider o(*opt);
+        o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
 
-        o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarGroove,widget);
-        QRect r = o.rect;
+        QRect r = subControlRect(CC_ScrollBar,opt,SC_ScrollBarGroove,widget);
         bool horiz = (option->state & State_Horizontal);
         /* arrows may be forced by another style, as in Gwenview
           (-> CC_ScrollBar at drawComplexControl) */
@@ -9227,56 +9232,55 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          if (!(option->state & State_Enabled))
+          if (!isTransient)
           {
-            painter->save();
-            painter->setOpacity(DISABLED_OPACITY);
-          }
-
-          QString suffix = "-normal";
-          if (widget && !widget->isActiveWindow())
-            suffix = "-normal-inactive";
-          renderFrame(painter,r,fspec,fspec.element+suffix);
-          renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
-          if (!(option->state & State_Enabled))
-            painter->restore();
-
-          /* to not need any transformation for the
-             horizontal state later, we draw the slider
-             here, beforing restoring the painter */
-          o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
-
-          /* but we draw the glow first because the
-             slider may be rounded at top or bottom */
-          if (option->state & State_Enabled)
-          {
-            const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
-            int glowH = 2*extent;
-            int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
-            if (horiz)
+            if (!(option->state & State_Enabled))
             {
-              topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
-              bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
-              topGlowH = o.rect.x()+sFspec.top-topGlowY;
+              painter->save();
+              painter->setOpacity(DISABLED_OPACITY);
             }
-            else
+
+            QString suffix = "-normal";
+            if (widget && !widget->isActiveWindow())
+              suffix = "-normal-inactive";
+            renderFrame(painter,r,fspec,fspec.element+suffix);
+            renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
+            if (!(option->state & State_Enabled))
+              painter->restore();
+
+            /* to not need any transformation for the horizontal state later,
+               we draw the slider here, before restoring the painter, but we
+               we draw the glow first because the slider may be rounded */
+            if (option->state & State_Enabled)
             {
-              topGlowY = qMax(o.rect.y()-glowH, r.y()+fspec.top);
-              bottomGlowY = o.rect.y()+o.rect.height()-sFspec.bottom;
-              topGlowH = o.rect.y()+sFspec.top-topGlowY;
+              const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
+              int glowH = 2*extent;
+              int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
+              if (horiz)
+              {
+                topGlowY = qMax(o.rect.x()-glowH, r.y()+fspec.top);
+                bottomGlowY = o.rect.x()+o.rect.width()-sFspec.bottom;
+                topGlowH = o.rect.x()+sFspec.top-topGlowY;
+              }
+              else
+              {
+                topGlowY = qMax(o.rect.y()-glowH, r.y()+fspec.top);
+                bottomGlowY = o.rect.y()+o.rect.height()-sFspec.bottom;
+                topGlowH = o.rect.y()+sFspec.top-topGlowY;
+              }
+              bottomGlowH = glowH+sFspec.bottom
+                            - qMax(bottomGlowY+glowH+sFspec.bottom - (r.y()+r.height()-fspec.bottom), 0);
+              QRect topGlow(r.x()+fspec.left,
+                            topGlowY,
+                            r.width()-fspec.left-fspec.right,
+                            topGlowH);
+              QRect bottomGlow(r.x()+fspec.left,
+                               bottomGlowY,
+                               r.width()-fspec.left-fspec.right,
+                               bottomGlowH);
+              renderElement(painter,ispec.element+"-topglow"+suffix,topGlow);
+              renderElement(painter,ispec.element+"-bottomglow"+suffix,bottomGlow);
             }
-            bottomGlowH = glowH+sFspec.bottom
-                          - qMax(bottomGlowY+glowH+sFspec.bottom - (r.y()+r.height()-fspec.bottom), 0);
-            QRect topGlow(r.x()+fspec.left,
-                          topGlowY,
-                          r.width()-fspec.left-fspec.right,
-                          topGlowH);
-            QRect bottomGlow(r.x()+fspec.left,
-                             bottomGlowY,
-                             r.width()-fspec.left-fspec.right,
-                             bottomGlowH);
-            renderElement(painter,ispec.element+"-topglow"+suffix,topGlow);
-            renderElement(painter,ispec.element+"-bottomglow"+suffix,bottomGlow);
           }
 
           drawControl(CE_ScrollBarSlider,&o,painter,widget);
@@ -9327,7 +9331,8 @@ void Style::drawComplexControl(ComplexControl control,
           drawControl(CE_ScrollBarSubLine,&o,painter,widget);
         }
 
-        painter->restore();
+        if (isTransient)
+          painter->restore();
       }
 
       break;
