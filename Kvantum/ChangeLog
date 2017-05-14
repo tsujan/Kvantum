@@ -1,6 +1,8 @@
 V0.10.5
 ---------
  * Don't draw the groove of a transient scrollbar.
+ * Reduced the selection tint to 20%.
+ * No repeating pattern for menu separators.
 
 V0.10.4
 ---------

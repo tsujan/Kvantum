@@ -5157,7 +5157,7 @@ void Style::drawControl(ControlElement element,
         const label_spec lspec = getLabelSpec(group);
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
-          renderElement(painter,dspec.element+"-separator",option->rect,20,0);
+          renderElement(painter,dspec.element+"-separator",option->rect);
         //else if (opt->menuItemType == QStyleOptionMenuItem::TearOff)
           //renderElement(painter,dspec.element+"-tearoff",option->rect,20,0);
         else
@@ -11081,7 +11081,7 @@ QSize Style::sizeFromContents(ContentsType type,
         }
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
-          s = QSize(contentsSize.width(),10); /* FIXME there is no PM_MenuSeparatorHeight pixel metric */
+          s = QSize(contentsSize.width(),10); /* FIXME shouldn't it be optional? */
         else
         {
           const QStringList l = opt->text.split('\t');
@@ -13203,7 +13203,7 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
       if (hspec_.no_selection_tint) break;
       QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
       QColor color = opt->palette.color(QPalette::Normal, QPalette::Highlight);
-      color.setAlphaF(qreal(0.3));
+      color.setAlphaF(qreal(0.2)); // Qt sets it to 0.3
       QPainter painter(&img);
       painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
       painter.fillRect(0, 0, img.width(), img.height(), color);
