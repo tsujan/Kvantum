@@ -2,7 +2,7 @@
 pkgname=kvantum-qt4
 pluginname=kvantum
 gitname=Kvantum
-pkgver=0.10.4
+pkgver=0.10.5
 pkgrel=1
 epoch=
 pkgdesc="SVG-based Qt4 theme engine"

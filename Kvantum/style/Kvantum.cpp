@@ -10190,13 +10190,13 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       if (tspec_.center_toolbar_handle)
       {
         const indicator_spec dspec = getIndicatorSpec("Toolbar");
-        return dspec.size ? 2*dspec.size : 16;
+        return qMax(2*dspec.size,8);
       }
       return 8;
     }
     case PM_ToolBarSeparatorExtent : {
       const indicator_spec dspec = getIndicatorSpec("Toolbar");
-      return dspec.size ? dspec.size : 8;
+      return qMax(dspec.size,4);
     }
     case PM_ToolBarIconSize : return tspec_.toolbar_icon_size;
     case PM_ToolBarExtensionExtent : return 16;

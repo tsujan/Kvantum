@@ -6,6 +6,7 @@ alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
 group_toolbar_buttons=false
+toolbar_interior_spacing=2
 composite=true
 menu_shadow_depth=6
 tooltip_shadow_depth=6
