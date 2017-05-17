@@ -100,6 +100,7 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=black
 text.toggle.color=white
+frame.expansion=8
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -181,6 +182,7 @@ frame.left=4
 frame.right=4
 text.normal.color=#000000d2
 text.bold=true
+frame.expansion=0
 
 [TabBarFrame]
 inherits=GenericFrame
@@ -206,10 +208,12 @@ frame.right=3
 frame.top=0
 frame.bottom=2
 indicator.size=8
+frame.expansion=0
 
 [Scrollbar]
 inherits=PanelButtonCommand
 indicator.size=10
+frame.expansion=0
 
 [ScrollbarSlider]
 inherits=PanelButtonCommand
@@ -218,15 +222,18 @@ frame.top=6
 frame.bottom=6
 frame.left=6
 frame.right=6
+frame.expansion=0
 
 [Progressbar]
 inherits=PanelButtonCommand
 text.bold=true
+frame.expansion=0
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
+frame.expansion=0
 
 [ItemView]
 inherits=PanelButtonCommand
@@ -241,6 +248,7 @@ text.margin.left=1
 text.margin.right=1
 text.toggle.color=white
 text.press.color=white
+frame.expansion=0
 
 [Menu]
 inherits=PanelButtonCommand
@@ -259,6 +267,7 @@ text.margin.bottom=1
 text.margin.left=3
 text.margin.right=3
 text.normal.color=white
+frame.expansion=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -270,6 +279,7 @@ frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
+frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -279,6 +289,7 @@ frame.bottom=0
 frame.left=2
 frame.right=2
 frame.element=none
+frame.expansion=0
 
 [TitleBar]
 inherits=PanelButtonCommand

@@ -41,14 +41,15 @@ public:
   int delay() const;
   void setDelay(int delay);
 
-  QTime startTime() const;
-  void setStartTime(const QTime &time);
+  /*QTime startTime() const;
+  void setStartTime(const QTime &time);*/
 
+  /* Qt's doc isn't specific on this but it says that
+     there are "normally" 60 updates per second. */
   enum FrameRate {
       DefaultFps,
       SixtyFps,
-      ThirtyFps,
-      TwentyFps
+      ThirtyFps
   };
 
   FrameRate frameRate() const;
@@ -66,7 +67,7 @@ protected:
 private:
   int delay_;
   int duration_;
-  QTime startTime_;
+  //QTime startTime_;
   FrameRate fps_;
   int skip_;
 };
@@ -85,6 +86,7 @@ public:
   void setEndValue(qreal value);
 
   qreal currentValue() const;
+  bool isLastUpdate() const;
 
 protected:
   bool isUpdateNeeded() const Q_DECL_OVERRIDE;
@@ -92,7 +94,7 @@ protected:
 private:
   qreal start_;
   qreal end_;
-  mutable qreal prev;
+  mutable qreal prev_;
 };
 
 class ScrollbarAnimation : public NumberAnimation
@@ -100,7 +102,10 @@ class ScrollbarAnimation : public NumberAnimation
   Q_OBJECT
 
 public:
-  enum Mode { Activating, Deactivating };
+  enum Mode {
+      Activating,
+      Deactivating
+  };
 
   ScrollbarAnimation(Mode mode, QObject *target);
 
@@ -109,8 +114,8 @@ public:
   bool wasActive() const;
   void setActive(bool active);
 
-private slots:
-  void updateCurrentTime(int time) Q_DECL_OVERRIDE;
+/*private slots:
+  void updateCurrentTime(int time) Q_DECL_OVERRIDE;*/
 
 private:
   Mode mode_;

@@ -352,13 +352,10 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-focused" id="arrow-down-focused" transform="matrix(1,0,0,-1,0,418.71612)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-focused" id="arrow-right-focused" transform="matrix(0,1,-1,0,527.30983,121.40629)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-focused" id="arrow-left-focused" transform="matrix(0,-1,1,0,146.09375,314.80983)"/>
-<g style="stroke:none" id="arrow-up-disabled" transform="translate(144.20177,-404.19193)">
-<rect width="24" x="-607.49298" y="8" height="24" style="opacity:0;fill:#fff" id="rect4909" transform="rotate(-90)"/>
-<path style="fill:#c8c8c8" id="path4911" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
-</g>
-<use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-disabled" id="arrow-down-disabled" transform="matrix(1,0,0,-1,0,416.90912)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-disabled" id="arrow-right-disabled" transform="matrix(0,1,-1,0,610.50282,33.90629)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-disabled" id="arrow-left-disabled" transform="matrix(0,-1,1,0,227.90072,402.30983)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-pressed" id="arrow-up-disabled" transform="translate(50)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-pressed" id="arrow-down-disabled" transform="matrix(1,0,0,-1,50,417.6021)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-pressed" id="arrow-right-disabled" transform="rotate(90,267.89475,343.80105)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-pressed" id="arrow-left-disabled" transform="rotate(-90,293.89475,65.80105)"/>
 <g style="stroke:none;fill-rule:evenodd;fill:#323232">
 <path style="opacity:.9" id="menu-normal-top" d="m 165,657 0,5 -48,0 0,-5 z"/>
 <path style="opacity:.9" id="menu-normal-topright" d="m 170,662 0,-5 -5,0 0,5 z"/>
@@ -393,18 +390,17 @@
 <rect width="2.2727275" x="-6.5371137" y="57.29216" height="12.5" id="rect4577" transform="rotate(45)"/>
 <rect width="12.5" x="-11.65075" y="62.405796" height="2.2727296" id="rect4579" transform="rotate(45)"/>
 </g>
-<g style="stroke:none">
-<g style="fill-rule:evenodd">
-<g style="fill:#d2d2d2">
-<g style="opacity:.8" id="arrow-minus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,397.8342,278.00532)">
+<g style="opacity:.8;fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="arrow-minus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,397.8342,278.00532)">
 <rect width="2.2727275" x="-6.5371137" y="57.29216" height="12.5" style="fill:#323232" id="rect4583" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4585" transform="rotate(45)"/>
 </g>
-<g id="arrow-minus-pressed" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,497.8342,278.00532)">
+<g style="fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="arrow-minus-pressed" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,497.8342,278.00532)">
 <rect width="2.2727275" x="-6.5371137" y="57.29216" height="12.5" style="fill:#000" id="rect4589" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4591" transform="rotate(45)"/>
 </g>
-</g>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.26" xlink:href="#arrow-minus-pressed" id="arrow-minus-disabled" transform="translate(40)"/>
+<g style="stroke:none">
+<g style="fill-rule:evenodd">
 <g style="opacity:.8;fill:#dc6434" id="arrow-plus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,191.8342,275.50532)">
 <rect width="2.2727273" x="-6.5371137" y="57.29216" height="12.5" id="rect4595" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.405796" height="2.2727296" id="rect4597" transform="rotate(45)"/>
@@ -412,10 +408,6 @@
 <g style="opacity:.8;fill:#d2d2d2" id="arrow-minus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,452.8342,278.00532)">
 <rect width="2.2727275" x="-6.5371137" y="57.29216" height="12.5" style="fill:#dc6434" id="rect4601" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4603" transform="rotate(45)"/>
-</g>
-<g style="fill-opacity:.235" id="arrow-minus-disabled" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,532.8342,278.00532)">
-<rect width="2.2727273" x="-6.5371137" y="57.29216" height="12.5" id="rect4613" transform="rotate(45)"/>
-<rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4615" transform="rotate(45)"/>
 </g>
 </g>
 <rect width="30" x="175" y="872" height="30" style="fill:#e6e5e4" id="dock-normal"/>
@@ -495,7 +487,10 @@
 </g>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-focused" id="flat-arrow-down-focused" transform="matrix(1,0,0,-1,0.192982,514.90911)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="flat-arrow-down-pressed" transform="matrix(1,0,0,-1,2.5,513.6021)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-disabled" id="flat-arrow-down-disabled" transform="matrix(1,0,0,-1,2.69298,513.1021)"/>
+<g style="stroke:none" id="flat-arrow-down-disabled" transform="matrix(1,0,0,-1,146.89475,917.29403)">
+<rect width="24" x="-607.49298" y="8" height="24" style="opacity:0;fill:#fff" id="rect5474" transform="rotate(-90)"/>
+<path style="fill:#c8c8c8" id="path5476" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
+</g>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-up-normal" transform="matrix(1,0,0,-1,2.5,672.90911)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-up-focused" transform="matrix(1,0,0,-1,0,671.1021)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-pressed" id="flat-arrow-up-pressed" transform="matrix(1,0,0,-1,2.5,671.1021)"/>
@@ -503,11 +498,11 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-right-normal" transform="matrix(0,-1,1,0,-49.213309,353.6958)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-right-focused" transform="matrix(0,-1,1,0,-4.906299,394.38879)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-pressed" id="flat-arrow-right-pressed" transform="matrix(0,-1,1,0,42.593751,441.88879)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrow-right-disabled" transform="matrix(0,-1,1,0,85.093751,484.38879)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrow-right-disabled" transform="rotate(-90,284.74127,199.64752)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-left-normal" transform="matrix(0,1,-1,0,600.50281,319.21331)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-left-focused" transform="matrix(0,1,-1,0,641.1958,274.9063)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-pressed" id="flat-arrow-left-pressed" transform="matrix(0,1,-1,0,688.6958,227.4063)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrow-left-disabled" transform="matrix(0,1,-1,0,731.1958,184.9063)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrow-left-disabled" transform="rotate(90,273.14475,458.05105)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="menuitem-right-focused" transform="matrix(0,-1,1,0,73.391981,706.39481)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="menuitem-left-focused" transform="matrix(0,1,-1,0,750.60806,637.60531)"/>
 <rect width="5" x="155" y="839" height="1" style="fill:#5a5a5a;fill-rule:evenodd;stroke:none;stroke-linejoin:round" id="slider-tick-normal"/>

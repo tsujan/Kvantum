@@ -947,37 +947,34 @@ their scroll views only when needed.</string>
                   <string>Sizes</string>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_7">
-                  <item row="6" column="1">
-                   <widget class="QSpinBox" name="spinOverlap">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="labelSmall">
                     <property name="toolTip">
-                     <string>The horizontal overlap between a submenu and its parent.
--1 means automatic.</string>
+                     <string>Affects menu-items and headers.
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                     </property>
                     <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
-                    <property name="suffix">
-                     <string> px</string>
-                    </property>
-                    <property name="minimum">
-                     <number>-1</number>
-                    </property>
-                    <property name="maximum">
-                     <number>16</number>
-                    </property>
-                    <property name="value">
-                     <number>-1</number>
+                    <property name="text">
+                     <string>Small icon:</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="7" column="1">
-                   <widget class="QSpinBox" name="spinSpinBtnWidth">
+                  <item row="0" column="1">
+                   <widget class="QSpinBox" name="spinSmall">
                     <property name="toolTip">
-                     <string>The width of horizontal spin buttons.
-(Has no effect when spin indicators are vertical.)</string>
+                     <string>Affects menu-items and headers.
+The default value is 16 px.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                     </property>
                     <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -986,10 +983,25 @@ their scroll views only when needed.</string>
                      <number>16</number>
                     </property>
                     <property name="maximum">
-                     <number>32</number>
+                     <number>48</number>
                     </property>
-                    <property name="value">
-                     <number>16</number>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="labelLarge">
+                    <property name="toolTip">
+                     <string>Affects icon views.
+The default value is 32 px but
+some apps set it themselves.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Large icon:</string>
                     </property>
                    </widget>
                   </item>
@@ -1017,17 +1029,28 @@ Miscellaneous → Respect current DE if possible</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="1">
-                   <widget class="QSpinBox" name="spinSmall">
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="labelButton">
                     <property name="toolTip">
-                     <string>Affects menu-items and headers.
-The default value is 16 px.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+                     <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
                     </property>
                     <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Button icon:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QSpinBox" name="spinButton">
+                    <property name="toolTip">
+                     <string>Affects buttons, tab-bars and list-views.
+The default value is 16 px.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1036,21 +1059,7 @@ Miscellaneous → Respect current DE if possible</string>
                      <number>16</number>
                     </property>
                     <property name="maximum">
-                     <number>48</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="label_3">
-                    <property name="toolTip">
-                     <string>The horizontal overlap between a submenu and its parent.
--1 means automatic.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Submenu overlap: </string>
+                     <number>64</number>
                     </property>
                    </widget>
                   </item>
@@ -1067,39 +1076,6 @@ KDE apps get it from KDE setting.</string>
                     </property>
                     <property name="text">
                      <string>Toolbar icon:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="1">
-                   <widget class="QSpinBox" name="spinLayoutMargin">
-                    <property name="toolTip">
-                     <string>The default value is 4 px but some apps set it themeselves.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="suffix">
-                     <string> px</string>
-                    </property>
-                    <property name="minimum">
-                     <number>2</number>
-                    </property>
-                    <property name="maximum">
-                     <number>16</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="7" column="0">
-                   <widget class="QLabel" name="label_4">
-                    <property name="toolTip">
-                     <string>The width of horizontal spin buttons.
-(Has no effect when spin indicators are vertical.)</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Spin button width: </string>
                     </property>
                    </widget>
                   </item>
@@ -1139,23 +1115,6 @@ some apps set it themeselves.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="labelSmall">
-                    <property name="toolTip">
-                     <string>Affects menu-items and headers.
-The default value is 16 px.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Small icon:</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="4" column="1">
                    <widget class="QSpinBox" name="spinLayout">
                     <property name="toolTip">
@@ -1176,58 +1135,6 @@ some apps set it themeselves.</string>
                     </property>
                    </widget>
                   </item>
-                  <item row="2" column="1">
-                   <widget class="QSpinBox" name="spinButton">
-                    <property name="toolTip">
-                     <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="suffix">
-                     <string> px</string>
-                    </property>
-                    <property name="minimum">
-                     <number>16</number>
-                    </property>
-                    <property name="maximum">
-                     <number>64</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="labelLarge">
-                    <property name="toolTip">
-                     <string>Affects icon views.
-The default value is 32 px but
-some apps set it themselves.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Large icon:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="labelButton">
-                    <property name="toolTip">
-                     <string>Affects buttons, tab-bars and list-views.
-The default value is 16 px.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Button icon:</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="5" column="0">
                    <widget class="QLabel" name="labelMarging">
                     <property name="toolTip">
@@ -1238,6 +1145,134 @@ The default value is 16 px.</string>
                     </property>
                     <property name="text">
                      <string>Layout margin:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QSpinBox" name="spinLayoutMargin">
+                    <property name="toolTip">
+                     <string>The default value is 4 px but some apps set it themeselves.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>2</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="labelOverlap">
+                    <property name="toolTip">
+                     <string>The horizontal overlap between a submenu and its parent.
+-1 means automatic.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Submenu overlap: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QSpinBox" name="spinOverlap">
+                    <property name="toolTip">
+                     <string>The horizontal overlap between a submenu and its parent.
+-1 means automatic.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>-1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>16</number>
+                    </property>
+                    <property name="value">
+                     <number>-1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="labelSpinWidth">
+                    <property name="toolTip">
+                     <string>The width of horizontal spin buttons.
+(Has no effect when spin indicators are vertical.)</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Spin button width: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QSpinBox" name="spinSpinBtnWidth">
+                    <property name="toolTip">
+                     <string>The width of horizontal spin buttons.
+(Has no effect when spin indicators are vertical.)</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>32</number>
+                    </property>
+                    <property name="value">
+                     <number>16</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="labelMinScrollLength">
+                    <property name="toolTip">
+                     <string>The minimum length of scrollbars.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="text">
+                     <string>Minimum scrollbar length: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QSpinBox" name="spinMinScrollLength">
+                    <property name="toolTip">
+                     <string>The minimum length of scrollbars.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="suffix">
+                     <string> px</string>
+                    </property>
+                    <property name="minimum">
+                     <number>16</number>
+                    </property>
+                    <property name="maximum">
+                     <number>100</number>
+                    </property>
+                    <property name="value">
+                     <number>16</number>
                     </property>
                    </widget>
                   </item>
@@ -1384,15 +1419,18 @@ Zero means tooltips are shown instantly.
                 </spacer>
                </item>
                <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxAttachTab">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
                  <property name="toolTip">
-                  <string>Active tab is detached by default.</string>
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+Checking this box removes arrows as far as possible.
+
+If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The active tab is detached from the tab widget by default.&lt;/p&gt;&lt;p&gt;Checking this cuts the frame of the tab widget under the active tab, so that they will seem attached to each other if the active tab has an appropriate bottom frame.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;p&gt;If disabled, see Compositing &amp;amp; General Look → Transient scrollbars!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Attach active tab to tab widget</string>
+                  <string>No arrows for scrollbars</string>
                  </property>
                 </widget>
                </item>
@@ -1426,22 +1464,6 @@ Zero means tooltips are shown instantly.
                 </spacer>
                </item>
                <item row="10" column="1">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
-                 <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-Checking this box removes arrows as far as possible.
-
-If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;p&gt;If disabled, see Compositing &amp;amp; General Look → Transient scrollbars!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>No arrows for scrollbars</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="11" column="1">
                 <widget class="QCheckBox" name="checkBoxScrollIn">
                  <property name="toolTip">
                   <string>Draw scrollbars inside view frames?
@@ -1456,7 +1478,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="1" column="3" colspan="2">
+               <item row="11" column="1">
                 <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
                   <string>Draw tree branch lines?</string>
@@ -1469,7 +1491,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3" colspan="2">
+               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
                   <string>By default, the label is on the frame.</string>
@@ -1482,7 +1504,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
+               <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
@@ -1497,7 +1519,7 @@ option fills them with the highlight color.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3" colspan="2">
+               <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
                   <string>Mouse tracking is enabled
@@ -1511,7 +1533,7 @@ for menubars by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3" colspan="2">
+               <item row="4" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -1522,6 +1544,20 @@ the toolbar SVG element when they are adjacent to one another.</string>
                  </property>
                  <property name="text">
                   <string>Merge menubar with toolbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxGroupToolbar">
+                 <property name="toolTip">
+                  <string>If checked, toolbar buttons will be drawn grouped and raised
+between toolbar separators.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, toolbar buttons will be drawn grouped and raised between toolbar separators.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Group toolbar buttons</string>
                  </property>
                 </widget>
                </item>

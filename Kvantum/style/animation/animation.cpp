@@ -29,7 +29,11 @@ static const qreal ScrollBarFadeOutDuration = 500.0;
 static const qreal ScrollBarFadeOutDelay = 500.0;
 
 Animation::Animation(QObject *target) : QAbstractAnimation(target),
-    delay_(0), duration_(-1), startTime_(QTime::currentTime()), fps_(ThirtyFps), skip_(0)
+    delay_(0),
+    duration_(-1),
+    //startTime_(QTime::currentTime()),
+    fps_(ThirtyFps),
+    skip_(0)
 {
 }
 
@@ -62,7 +66,7 @@ void Animation::setDelay(int delay)
   delay_ = delay;
 }
 
-QTime Animation::startTime() const
+/*QTime Animation::startTime() const
 {
   return startTime_;
 }
@@ -70,7 +74,7 @@ QTime Animation::startTime() const
 void Animation::setStartTime(const QTime &time)
 {
   startTime_ = time;
-}
+}*/
 
 Animation::FrameRate Animation::frameRate() const
 {
@@ -112,8 +116,13 @@ void Animation::updateCurrentTime(int)
   }
 }
 
+/*************************/
+
 NumberAnimation::NumberAnimation(QObject *target) :
-    Animation(target), start_(0.0), end_(1.0), prev(0.0)
+    Animation(target),
+    start_(0.0),
+    end_(1.0),
+    prev_(0.0)
 {
   setDuration(250);
 }
@@ -144,21 +153,33 @@ qreal NumberAnimation::currentValue() const
   return start_ + qMax(qreal(0), step) * (end_ - start_);
 }
 
+bool NumberAnimation::isLastUpdate() const
+{
+  if (duration() < 0) return false;
+
+  int frameDuration = (frameRate() * 50) / 3 ;
+  return (duration() - currentTime() < frameDuration);
+}
+
 bool NumberAnimation::isUpdateNeeded() const
 {
   if (Animation::isUpdateNeeded())
   {
     qreal current = currentValue();
-    if (!qFuzzyCompare(prev, current))
+    if (!qFuzzyCompare(prev_, current))
     {
-      prev = current;
+      prev_ = current;
       return true;
     }
   }
   return false;
 }
 
-ScrollbarAnimation::ScrollbarAnimation(Mode mode, QObject *target) : NumberAnimation(target), mode_(mode)
+/*************************/
+
+ScrollbarAnimation::ScrollbarAnimation(Mode mode, QObject *target) :
+    NumberAnimation(target),
+    mode_(mode)
 {
   switch (mode) {
   case Activating:
@@ -180,11 +201,11 @@ ScrollbarAnimation::Mode ScrollbarAnimation::mode() const
   return mode_;
 }
 
-void ScrollbarAnimation::updateCurrentTime(int time)
+/*void ScrollbarAnimation::updateCurrentTime(int time)
 {
   NumberAnimation::updateCurrentTime(time);
   if (mode_ == Deactivating && qFuzzyIsNull(currentValue()))
     target()->setProperty("visible", QVariant(false));
-}
+}*/
 
 }

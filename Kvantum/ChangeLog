@@ -3,6 +3,9 @@ V0.10.5
  * Don't draw the groove of a transient scrollbar.
  * Reduced the selection tint to 20%.
  * No repeating pattern for menu separators.
+ * Removed "Attached active tab..." from Kvantum Manager because it may spoil the theme.
+ * Added keys for scrollbar extent and toolbar grouping to Kvantum Manager.
+ * Ensure total transparency for the last frame of the transient scrollbar animation.
 
 V0.10.4
 ---------

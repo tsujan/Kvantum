@@ -2842,9 +2842,19 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (const QStyleOptionTabBarBase_v2 *opt
               = qstyleoption_cast<const QStyleOptionTabBarBase_v2*>(option))
       {
+        bool verticalTabs = false;
+        if (opt->shape == QTabBar::RoundedEast
+            || opt->shape == QTabBar::RoundedWest
+            || opt->shape == QTabBar::TriangularEast
+            || opt->shape == QTabBar::TriangularWest)
+        {
+          verticalTabs = true;
+        }
         QRect r = option->rect;
-        // FIXME: Why does Qt draw redundant frames when there's a corner widget?
-        if (!r.contains(opt->tabBarRect) || r == opt->tabBarRect)
+        // FIXME: Why does Qt draw redundant frames when there's a corner widget (button)?
+        //if (!r.contains(opt->tabBarRect) || r == opt->tabBarRect)
+        if ((!verticalTabs && (r.top() != opt->tabBarRect.top() || r.bottom() != opt->tabBarRect.bottom()))
+             || (verticalTabs && (r.left() != opt->tabBarRect.left() || r.right() != opt->tabBarRect.right())))
           return;
 
         int l = 0; int d = 0;
@@ -2855,20 +2865,15 @@ void Style::drawPrimitive(PrimitiveElement element,
           d = tr.x();
           l = tr.width();
         }
-        bool verticalTabs = false;
         bool bottomTabs = false;
         // as with CE_TabBarTabShape
-        if (opt->shape == QTabBar::RoundedEast
-            || opt->shape == QTabBar::RoundedWest
-            || opt->shape == QTabBar::TriangularEast
-            || opt->shape == QTabBar::TriangularWest)
+        if (verticalTabs)
         {
           if (tspec_.attach_active_tab)
           {
             l = tr.height();
             d = tr.y();
           }
-          verticalTabs = true;
           painter->save();
           int X, Y, rot;
           int xTr = 0; int xScale = 1;
@@ -9146,8 +9151,6 @@ void Style::drawComplexControl(ComplexControl control,
           QObject *styleObject = option->styleObject;
           if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
           {
-            isTransient = true;
-            painter->save();
             qreal opacity = 0.0;
             bool transient = !option->activeSubControls;
 
@@ -9175,7 +9178,7 @@ void Style::drawComplexControl(ComplexControl control,
               styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
               styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
 
-             ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
+              ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
               if (transient)
               {
                 if (!anim)
@@ -9193,8 +9196,17 @@ void Style::drawComplexControl(ComplexControl control,
 
             ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
             if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-              opacity = anim->currentValue();
+            {
+              if (anim->isLastUpdate()) // ensure total transparency with the last frame
+                opacity = 0.0;
+              else
+                opacity = anim->currentValue();
+            }
 
+            if (opacity == 0.0) return;
+
+            isTransient = true;
+            painter->save();
             painter->setOpacity(opacity);
           }
         }

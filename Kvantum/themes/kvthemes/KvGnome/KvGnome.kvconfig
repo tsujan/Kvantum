@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A theme with a Gnome like look and feel
+comment=A theme with a Gnome like look and feel and support for translucency
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -8,9 +8,10 @@ attach_active_tab=false
 mirror_doc_tabs=false
 group_toolbar_buttons=false
 toolbar_item_spacing=1
+toolbar_interior_spacing=1
 spread_progressbar=true
 composite=true
-menu_shadow_depth=4
+menu_shadow_depth=5
 tooltip_shadow_depth=6
 scroll_width=12
 scroll_arrows=false
@@ -40,13 +41,15 @@ toolbar_icon_size=22
 combo_as_lineedit=true
 layout_spacing=3
 tooltip_delay=-1
-submenu_overlap=2
+submenu_overlap=3
 animate_states=true
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam
+tree_branch_line=true
 
 [GeneralColors]
 window.color=#e9e9e9
-base.color=white
-alt.base.color=#F0F0F0
+base.color=#FDFDFD
+alt.base.color=#EFEFEF
 button.color=#e9e9e9
 light.color=white
 mid.light.color=#ECECEC
@@ -229,8 +232,8 @@ frame.right=2
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
-indicator.element=arrow
+indicator.size=11
+indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -254,6 +257,9 @@ interior.element=menubar
 frame.element=menubar
 text.normal.color=black
 text.focus.color=black
+frame.left=0
+frame.right=0
+frame.top=0
 frame.bottom=1
 text.shadow=false
 
@@ -351,8 +357,8 @@ indicator.element=menuitem
 size.minheight=22
 text.normal.color=black
 text.focus.color=white
-text.margin.top=1
-text.margin.bottom=1
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=15
 text.margin.right=5
 frame.top=2
@@ -401,10 +407,10 @@ inherits=PanelButtonCommand
 
 [Menu]
 inherits=PanelButtonCommand
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame.element=menu
 interior.element=menu
 size.minheight=22
@@ -451,3 +457,7 @@ frame.element=tooltip
 inherits=GenericFrame
 frame=false
 interior=false
+
+[WindowTranslucent]
+interior=true
+interior.element=window

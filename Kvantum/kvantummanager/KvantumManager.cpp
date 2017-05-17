@@ -640,7 +640,6 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxPattern->setChecked (defaultSettings.value ("no_window_pattern").toBool());
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
-    ui->checkBoxAttachTab->setChecked (defaultSettings.value ("attach_active_tab").toBool());
     if (defaultSettings.contains ("scroll_arrows")) // it's true by default
       ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
@@ -656,6 +655,7 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
+    ui->checkBoxGroupToolbar->setChecked (defaultSettings.value ("group_toolbar_buttons").toBool());
     if (defaultSettings.contains ("button_contents_shift")) // it's true by default
         ui->checkBoxButtonShift->setChecked (defaultSettings.value ("button_contents_shift").toBool());
     else
@@ -705,21 +705,25 @@ void KvantumManager::defaultThemeButtons()
         if (!ui->checkBoxBlurWindow->isChecked())
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
+
     int theSize = 16;
     if (defaultSettings.contains ("small_icon_size"))
         theSize = defaultSettings.value ("small_icon_size").toInt();
     theSize = qMin(qMax(theSize,16), 48);
     ui->spinSmall->setValue (theSize);
+
     theSize = 32;
     if (defaultSettings.contains ("large_icon_size"))
         theSize = defaultSettings.value ("large_icon_size").toInt();
     theSize = qMin(qMax(theSize,24), 128);
     ui->spinLarge->setValue (theSize);
+
     theSize = 16;
     if (defaultSettings.contains ("button_icon_size"))
         theSize = defaultSettings.value ("button_icon_size").toInt();
     theSize = qMin(qMax(theSize,16), 64);
     ui->spinButton->setValue (theSize);
+
     theSize = 22;
     if (defaultSettings.contains ("toolbar_icon_size"))
         theSize = defaultSettings.value ("toolbar_icon_size").toInt();
@@ -727,26 +731,37 @@ void KvantumManager::defaultThemeButtons()
         theSize = 16;
     theSize = qMin(qMax(theSize,16), 64);
     ui->spinToolbar->setValue (theSize);
+
     theSize = 2;
     if (defaultSettings.contains ("layout_spacing"))
         theSize = defaultSettings.value ("layout_spacing").toInt();
     theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayout->setValue (theSize);
+
     theSize = 4;
     if (defaultSettings.contains ("layout_margin"))
         theSize = defaultSettings.value ("layout_margin").toInt();
     theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayoutMargin->setValue (theSize);
+
     theSize = -1;
     if (defaultSettings.contains ("submenu_overlap"))
         theSize = defaultSettings.value ("submenu_overlap").toInt();
     theSize = qMin(qMax(theSize,-1), 16);
     ui->spinOverlap->setValue (theSize);
+
     theSize = 16;
     if (defaultSettings.contains ("spin_button_width"))
         theSize = defaultSettings.value ("spin_button_width").toInt();
     theSize = qMin(qMax(theSize,16), 32);
     ui->spinSpinBtnWidth->setValue (theSize);
+
+    theSize = 36;
+    if (defaultSettings.contains ("scroll_min_extent"))
+        theSize = defaultSettings.value ("scroll_min_extent").toInt();
+    theSize = qMin(qMax(theSize,16), 100);
+    ui->spinMinScrollLength->setValue (theSize);
+
     defaultSettings.endGroup();
 
     respectDE (ui->checkBoxDE->isChecked());
@@ -868,8 +883,6 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_inactive_tabs").toBool());
                 if (themeSettings.contains ("joined_tabs")) // backward compatibility
                     ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_tabs").toBool());
-                if (themeSettings.contains ("attach_active_tab"))
-                    ui->checkBoxAttachTab->setChecked (themeSettings.value ("attach_active_tab").toBool());
                 if (themeSettings.contains ("scroll_arrows"))
                     ui->checkBoxNoScrollArrow->setChecked (!themeSettings.value ("scroll_arrows").toBool());
                 if (themeSettings.contains ("scrollbar_in_view"))
@@ -888,6 +901,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenubar->setChecked (themeSettings.value ("menubar_mouse_tracking").toBool());
                 if (themeSettings.contains ("merge_menubar_with_toolbar"))
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
+                if (themeSettings.contains ("group_toolbar_buttons"))
+                    ui->checkBoxGroupToolbar->setChecked (themeSettings.value ("group_toolbar_buttons").toBool());
                 if (themeSettings.contains ("button_contents_shift"))
                     ui->checkBoxButtonShift->setChecked (themeSettings.value ("button_contents_shift").toBool());
                 if (themeSettings.contains ("alt_mnemonic"))
@@ -988,6 +1003,12 @@ void KvantumManager::tabChanged (int index)
                     int theSize = themeSettings.value ("spin_button_width").toInt();
                     theSize = qMin(qMax(theSize,16), 32);
                     ui->spinSpinBtnWidth->setValue (theSize);
+                }
+                if (themeSettings.contains ("scroll_min_extent"))
+                {
+                    int theSize = themeSettings.value ("scroll_min_extent").toInt();
+                    theSize = qMin(qMax(theSize,16), 100);
+                    ui->spinMinScrollLength->setValue (theSize);
                 }
                 themeSettings.endGroup();
 
@@ -1645,7 +1666,6 @@ void KvantumManager::writeConfig()
         generalKeys.insert("no_window_pattern", boolToStr (ui->checkBoxPattern->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
         generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
-        generalKeys.insert("attach_active_tab", boolToStr (ui->checkBoxAttachTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
         generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
         generalKeys.insert("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
@@ -1655,6 +1675,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
         generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
+        generalKeys.insert("group_toolbar_buttons", boolToStr (ui->checkBoxGroupToolbar->isChecked()));
         generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
         generalKeys.insert("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
@@ -1678,6 +1699,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("layout_margin", str.setNum (ui->spinLayoutMargin->value()));
         generalKeys.insert("submenu_overlap", str.setNum (ui->spinOverlap->value()));
         generalKeys.insert("spin_button_width", str.setNum (ui->spinSpinBtnWidth->value()));
+        generalKeys.insert("scroll_min_extent", str.setNum (ui->spinMinScrollLength->value()));
 
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
@@ -1737,7 +1759,6 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("no_window_pattern").toBool() != ui->checkBoxPattern->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
-            || themeSettings.value ("attach_active_tab").toBool() != ui->checkBoxAttachTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()
             || themeSettings.value ("scrollbar_in_view").toBool() != ui->checkBoxScrollIn->isChecked()
             || themeSettings.value ("transient_scrollbar").toBool() != ui->checkBoxTransient->isChecked()
@@ -1746,7 +1767,8 @@ void KvantumManager::writeConfig()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
             || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),16) != ui->spinLayout->value()
             || qMin(qMax(themeSettings.value ("layout_margin").toInt(),2),16) != ui->spinLayoutMargin->value()
-            || qMin(qMax(themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value())
+            || qMin(qMax(themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value()
+            || qMin(qMax(themeSettings.value ("scroll_min_extent").toInt(),16),100) != ui->spinMinScrollLength->value())
         {
             restyle = true;
         }
@@ -1767,7 +1789,6 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("no_window_pattern", ui->checkBoxPattern->isChecked());
         themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
         themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
-        themeSettings.setValue ("attach_active_tab", ui->checkBoxAttachTab->isChecked());
         themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
         themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
         themeSettings.setValue ("transient_scrollbar", ui->checkBoxTransient->isChecked());
@@ -1777,6 +1798,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
         themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
         themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
+        themeSettings.setValue ("group_toolbar_buttons", ui->checkBoxGroupToolbar->isChecked());
         themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
         themeSettings.setValue ("alt_mnemonic", ui->checkBoxAlt->isChecked());
         themeSettings.setValue ("submenu_delay", ui->spinSubmenuDelay->value());
@@ -1799,6 +1821,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("layout_margin", ui->spinLayoutMargin->value());
         themeSettings.setValue ("submenu_overlap", ui->spinOverlap->value());
         themeSettings.setValue ("spin_button_width", ui->spinSpinBtnWidth->value());
+        themeSettings.setValue ("scroll_min_extent", ui->spinMinScrollLength->value());
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
