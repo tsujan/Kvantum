@@ -7144,6 +7144,23 @@ void Style::drawControl(ControlElement element,
            so no transformation here */
         r.setRect(y, x, h, w);
       }
+#if QT_VERSION >= 0x050500
+      if (styleHint(SH_ScrollBar_Transient,option,widget))
+      { // no overlap with the view frame
+        const frame_spec gfspec = getFrameSpec("GenericFrame");
+        int spacing = qMax(qMax(gfspec.left, gfspec.right),
+                           qMax(gfspec.top, gfspec.bottom));
+        if (option->direction == Qt::RightToLeft)
+        {
+          if (option->state & State_Horizontal) // because of the way we rotate it
+            r.adjust(0, spacing, -spacing, -spacing);
+          else
+            r.adjust(spacing, spacing, 0, -spacing);
+        }
+        else
+          r.adjust(0, spacing, -spacing, -spacing);
+      }
+#endif
 
       if (!(option->state & State_Enabled))
       {
@@ -10308,10 +10325,33 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_SplitterWidth :
       return tspec_.splitter_width;
 
+    /* don't let a transient scrollbar overlap with the view frame */
     case PM_ScrollBarExtent :
+    {
+#if QT_VERSION >= 0x050500
+      if (styleHint(SH_ScrollBar_Transient,option,widget))
+      {
+        const frame_spec gfspec = getFrameSpec("GenericFrame");
+        int spacing = qMax(qMax(gfspec.left, gfspec.right),
+                           qMax(gfspec.top, gfspec.bottom));
+        return tspec_.scroll_width + spacing;
+      }
+#endif
       return tspec_.scroll_width;
+    }
     case PM_ScrollBarSliderMin :
+    {
+#if QT_VERSION >= 0x050500
+      if (styleHint(SH_ScrollBar_Transient,option,widget))
+      {
+        const frame_spec gfspec = getFrameSpec("GenericFrame");
+        int spacing = qMax(qMax(gfspec.left, gfspec.right),
+                           qMax(gfspec.top, gfspec.bottom));
+        return tspec_.scroll_min_extent + 2*spacing;
+      }
+#endif
       return tspec_.scroll_min_extent;
+    }
 
     case PM_ProgressBarChunkWidth : return 20;
 

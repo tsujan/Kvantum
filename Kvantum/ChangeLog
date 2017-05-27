@@ -6,6 +6,7 @@ V0.10.5
  * Removed "Attached active tab..." from Kvantum Manager because it may spoil the theme.
  * Added keys for scrollbar extent and toolbar grouping to Kvantum Manager.
  * Ensure total transparency for the last frame of the transient scrollbar animation.
+ * Don't let transient scrollbars overlap the frames of their views.
 
 V0.10.4
 ---------
