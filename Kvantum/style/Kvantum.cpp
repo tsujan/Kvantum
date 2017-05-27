@@ -7137,28 +7137,31 @@ void Style::drawControl(ControlElement element,
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
 
+      /* for the extent, we can't rely on pixelMetric() because
+         it may not have a fixed value for transient scrollbars,
+         depending on whether its argument "widget" is null or not */
+      int extent = w;
       QRect r = option->rect;
       if (option->state & State_Horizontal)
       {
         /* the painter was saved at CC_ScrollBar,
            so no transformation here */
         r.setRect(y, x, h, w);
+        extent = h;
       }
 #if QT_VERSION >= 0x050500
-      if (styleHint(SH_ScrollBar_Transient,option,widget))
-      { // no overlap with the view frame
-        const frame_spec gfspec = getFrameSpec("GenericFrame");
-        int spacing = qMax(qMax(gfspec.left, gfspec.right),
-                           qMax(gfspec.top, gfspec.bottom));
+      int viewFrame = extent - tspec_.scroll_width; // see PM_ScrollBarExtent
+      if (viewFrame > 0)
+      { // don't let a transient scrollbar overlap with the view frame
         if (option->direction == Qt::RightToLeft)
         {
           if (option->state & State_Horizontal) // because of the way we rotate it
-            r.adjust(0, spacing, -spacing, -spacing);
+            r.adjust(0, viewFrame, -viewFrame, -viewFrame);
           else
-            r.adjust(spacing, spacing, 0, -spacing);
+            r.adjust(viewFrame, viewFrame, 0, -viewFrame);
         }
         else
-          r.adjust(0, spacing, -spacing, -spacing);
+          r.adjust(0, viewFrame, -viewFrame, -viewFrame);
       }
 #endif
 
@@ -7195,7 +7198,7 @@ void Style::drawControl(ControlElement element,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
                                 Qt::AlignCenter,
-                                QSize(pixelMetric(PM_ScrollBarExtent)-fspec.left-fspec.right,
+                                QSize(extent - fspec.left-fspec.right,
                                       qMin(dspec.size,r.height()-fspec.top-fspec.bottom)),
                                 r));
       if (!(option->state & State_Enabled))
