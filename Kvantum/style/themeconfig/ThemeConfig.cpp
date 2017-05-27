@@ -665,6 +665,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","transient_scrollbar");
   r.transient_scrollbar = v.toBool();
 
+  /* for technical reasons, we always set scrollbar_in_view
+     to false with transient scrollbars and (try to) put
+     them inside their scroll contents in another way */
   if (!r.transient_scrollbar)
   {
     v = getValue("General","scrollbar_in_view");

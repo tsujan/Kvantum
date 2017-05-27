@@ -10724,6 +10724,7 @@ int Style::styleHint(StyleHint hint,
 
     case SH_Slider_StopMouseOverSlider : return true;
 
+    /* scrollbar_in_view is always false when transient_scrollbar is true (see "ThemeConfig.cpp") */
     case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;
 
     case SH_UnderlineShortcut:
