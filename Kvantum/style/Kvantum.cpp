@@ -7137,20 +7137,18 @@ void Style::drawControl(ControlElement element,
       const interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
 
-      /* for the extent, we can't rely on pixelMetric() because
-         it may not have a fixed value for transient scrollbars,
-         depending on whether its argument "widget" is null or not */
-      int extent = w;
       QRect r = option->rect;
       if (option->state & State_Horizontal)
       {
         /* the painter was saved at CC_ScrollBar,
            so no transformation here */
         r.setRect(y, x, h, w);
-        extent = h;
       }
 #if QT_VERSION >= 0x050500
-      int viewFrame = extent - tspec_.scroll_width; // see PM_ScrollBarExtent
+      /* WARNING: We can't rely on pixelMetric() to know the extent
+         because it may not have a fixed value for transient scrollbars,
+         depending on whether its argument "widget" is null or not. */
+      int viewFrame = r.width() - tspec_.scroll_width; // see PM_ScrollBarExtent
       if (viewFrame > 0)
       { // don't let a transient scrollbar overlap with the view frame
         if (option->direction == Qt::RightToLeft)
@@ -7198,8 +7196,8 @@ void Style::drawControl(ControlElement element,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
                                 Qt::AlignCenter,
-                                QSize(extent - fspec.left-fspec.right,
-                                      qMin(dspec.size,r.height()-fspec.top-fspec.bottom)),
+                                QSize(r.width() - fspec.left-fspec.right,
+                                      qMin(dspec.size, r.height() - fspec.top-fspec.bottom)),
                                 r));
       if (!(option->state & State_Enabled))
         painter->restore();
