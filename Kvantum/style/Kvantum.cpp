@@ -9184,7 +9184,7 @@ void Style::drawComplexControl(ComplexControl control,
                 || oldMin != opt->minimum
                 || oldMax != opt->maximum
                 || oldRect != opt->rect
-                //|| oldState != opt->state
+                //|| oldState != opt->state // animation on focus change
                 || oldActiveControls != opt->activeSubControls)
             {
               opacity = 1.0;
@@ -10330,12 +10330,12 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ScrollBarExtent :
     {
 #if QT_VERSION >= 0x050500
-      if (styleHint(SH_ScrollBar_Transient,option,widget))
+      if (styleHint(SH_ScrollBar_Transient,option,widget)
+          /* compbo menus always give space to transient scrollbars */
+          && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
       {
-        const frame_spec gfspec = getFrameSpec("GenericFrame");
-        int spacing = qMax(qMax(gfspec.left, gfspec.right),
-                           qMax(gfspec.top, gfspec.bottom));
-        return tspec_.scroll_width + spacing;
+        return tspec_.scroll_width
+               + pixelMetric(PM_DefaultFrameWidth,option,widget);
       }
 #endif
       return tspec_.scroll_width;
@@ -10343,12 +10343,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ScrollBarSliderMin :
     {
 #if QT_VERSION >= 0x050500
-      if (styleHint(SH_ScrollBar_Transient,option,widget))
+      if (styleHint(SH_ScrollBar_Transient,option,widget)
+          && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
       {
-        const frame_spec gfspec = getFrameSpec("GenericFrame");
-        int spacing = qMax(qMax(gfspec.left, gfspec.right),
-                           qMax(gfspec.top, gfspec.bottom));
-        return tspec_.scroll_min_extent + 2*spacing;
+        return tspec_.scroll_min_extent
+                + 2*pixelMetric(PM_DefaultFrameWidth,option,widget);
       }
 #endif
       return tspec_.scroll_min_extent;
