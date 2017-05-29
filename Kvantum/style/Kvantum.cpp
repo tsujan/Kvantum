@@ -7151,15 +7151,33 @@ void Style::drawControl(ControlElement element,
       int viewFrame = r.width() - tspec_.scroll_width; // see PM_ScrollBarExtent
       if (viewFrame > 0)
       { // don't let a transient scrollbar overlap with the view frame
+        QWidget *gp = getParent(widget,2); // see Qt -> qabstractscrollarea.cpp
+        bool hasFrame(qobject_cast<QAbstractScrollArea*>(gp)
+                      && (qobject_cast<QAbstractScrollArea*>(gp)->frameStyle() & QFrame::StyledPanel));
         if (option->direction == Qt::RightToLeft)
         {
           if (option->state & State_Horizontal) // because of the way we rotate it
-            r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+          {
+            if (hasFrame)
+              r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+            else
+              r.adjust(viewFrame, 0, 0, 0);
+          }
           else
-            r.adjust(viewFrame, viewFrame, 0, -viewFrame);
+          {
+            if (hasFrame)
+              r.adjust(viewFrame, viewFrame, 0, -viewFrame);
+            else
+              r.adjust(0, 0, -viewFrame, 0);
+          }
         }
         else
-          r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+        {
+          if (hasFrame)
+            r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+          else
+            r.adjust(viewFrame, 0, 0, 0);
+        }
       }
 #endif
 
@@ -8437,6 +8455,7 @@ void Style::drawControl(ControlElement element,
         /* skip ugly frames */
         if (f->frameShape != QFrame::HLine
             && f->frameShape != QFrame::VLine
+            && f->frameShape != QFrame::WinPanel
             && (f->state & QStyle::State_Sunken || f->state & QStyle::State_Raised
                 || (!widget // it's NULL in the case of a QML combobox
                     || widget->inherits("QComboBoxPrivateContainer"))))
