@@ -7148,35 +7148,34 @@ void Style::drawControl(ControlElement element,
       /* WARNING: We can't rely on pixelMetric() to know the extent
          because it may not have a fixed value for transient scrollbars,
          depending on whether its argument "widget" is null or not. */
-      int viewFrame = r.width() - tspec_.scroll_width; // see PM_ScrollBarExtent
-      if (viewFrame > 0)
+      int space = r.width() - tspec_.scroll_width; // see PM_ScrollBarExtent
+      if (space > 0)
       { // don't let a transient scrollbar overlap with the view frame
-        QWidget *gp = getParent(widget,2); // see Qt -> qabstractscrollarea.cpp
-        bool hasFrame(qobject_cast<QAbstractScrollArea*>(gp)
-                      && (qobject_cast<QAbstractScrollArea*>(gp)->frameStyle() & QFrame::StyledPanel));
+        QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(getParent(widget,2));
+        bool hasFrame(sa && (sa->frameStyle() & QFrame::StyledPanel)); // see Qt -> qabstractscrollarea.cpp
         if (option->direction == Qt::RightToLeft)
         {
           if (option->state & State_Horizontal) // because of the way we rotate it
           {
             if (hasFrame)
-              r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+              r.adjust(0, space, -space, -space);
             else
-              r.adjust(viewFrame, 0, 0, 0);
+              r.adjust(space, 0, 0, 0);
           }
           else
           {
             if (hasFrame)
-              r.adjust(viewFrame, viewFrame, 0, -viewFrame);
+              r.adjust(space, space, 0, -space);
             else
-              r.adjust(0, 0, -viewFrame, 0);
+              r.adjust(0, 0, -space, 0);
           }
         }
         else
         {
           if (hasFrame)
-            r.adjust(0, viewFrame, -viewFrame, -viewFrame);
+            r.adjust(0, space, -space, -space);
           else
-            r.adjust(viewFrame, 0, 0, 0);
+            r.adjust(space, 0, 0, 0);
         }
       }
 #endif
@@ -10732,8 +10731,8 @@ int Style::styleHint(StyleHint hint,
 
 #if QT_VERSION >= 0x050500
     case SH_ScrollBar_Transient : {
-      if (widget && widget->hasMouseTracking())
-        return false; // prevent artifacts in widgets like QGraphicsView
+      if (qobject_cast<const QGraphicsView*>(widget) && widget->hasMouseTracking())
+        return false; // prevent artifacts in QGraphicsView
       return tspec_.transient_scrollbar;
     }
 #endif
