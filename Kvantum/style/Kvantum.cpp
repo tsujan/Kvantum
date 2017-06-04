@@ -9280,7 +9280,8 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          if (!isTransient)
+          if (!isTransient
+              && r.width() <= tspec_.scroll_width) // no disabled groove with transience
           {
             if (!(option->state & State_Enabled))
             {

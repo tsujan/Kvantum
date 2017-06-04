@@ -27,7 +27,7 @@ validpgpkeys=()
 
 build() {
 	cd "${srcdir}/${gitname}-master/${gitname}"
-	cmake -DENABLE_QT4=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib
+	cmake -DENABLE_QT4=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr
 	make
 }
 

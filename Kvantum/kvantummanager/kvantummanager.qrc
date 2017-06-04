@@ -4,6 +4,6 @@
     <file>data/preferences-desktop-theme.svg</file>
     <file>data/preferences-system.svg</file>
     <file>data/app.svg</file>
-    <file>../kvantumpreview/kvantum.svg</file>
+    <file>../kvantumpreview/data/kvantum.svg</file>
   </qresource>
 </RCC>

@@ -9,11 +9,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Kvantum Manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="kvantummanager.qrc">
-    <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
+    <normaloff>:/Icons/kvantumpreview/data/kvantum.svg</normaloff>:/Icons/kvantumpreview/data/kvantum.svg</iconset>
   </property>
   <widget class="QWidget" name="widget">
    <property name="sizePolicy">
@@ -122,9 +122,6 @@ theme folder</string>
            <string>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</string>
           </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add this theme to the list of themes that &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; can use in addition to its own themes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
           <property name="text">
            <string>Install this theme</string>
           </property>
@@ -196,10 +193,8 @@ Kvantum can use in addition to its own themes.</string>
 from all user installation paths.
 
 The root installation will still be
-available if present.</string>
-          </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the selected theme from all user installation paths.&lt;/p&gt;&lt;p&gt;The root installation will still be available if present; this button only removes user themes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+available if present; this button
+only removes user themes.</string>
           </property>
           <property name="text">
            <string>Delete this theme</string>
@@ -218,9 +213,6 @@ available if present.</string>
 
 A disabled button means that
 the theme is already used.</string>
-          </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If the button is clicked, &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; will use this theme (instead of its default theme).&lt;/p&gt;&lt;p&gt;A disabled button means that the theme is already used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Use this theme</string>
@@ -371,9 +363,6 @@ settings of this theme.
            <string>Save this configuration
 (Ctrl+S)</string>
           </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save and use this configuration!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
           <property name="text">
            <string>Save</string>
           </property>
@@ -426,10 +415,9 @@ widgets to appear as they are by default.</string>
                <item row="0" column="1">
                 <widget class="QCheckBox" name="checkBoxDolphin">
                  <property name="toolTip">
-                  <string>Merge Dolphin's view with its surroundings.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge Dolphin's view with its surroundings?&lt;/p&gt;&lt;p&gt;By default, it has the base background.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Merge Dolphin's view with its surroundings?
+
+By default, it has the base background.</string>
                  </property>
                  <property name="text">
                   <string>Transparent Dolphin view</string>
@@ -455,10 +443,9 @@ widgets to appear as they are by default.</string>
                <item row="0" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxNormalBtn">
                  <property name="toolTip">
-                  <string>No bold font for default push buttons.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No bold font for default push buttons?&lt;/p&gt;&lt;p&gt;Such push buttons have bold text by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>No bold font for default push buttons?
+
+Such push buttons have bold text by default.</string>
                  </property>
                  <property name="text">
                   <string>Normal font for default push buttons</string>
@@ -487,9 +474,6 @@ Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's sidepane with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
                  <property name="text">
                   <string>Transparent sidepane for PCManFM-qt</string>
                  </property>
@@ -498,13 +482,12 @@ with LXQt Session Settings.</string>
                <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxIconlessBtn">
                  <property name="toolTip">
-                  <string>No icon for push buttons that have text.
+                  <string>No icon for push buttons that have text?
+
+By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for push buttons that have text?&lt;/p&gt;&lt;p&gt;By default, most push buttons have icon.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Iconless push buttons</string>
@@ -520,9 +503,6 @@ Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Merge PCManFM-qt's view with its surroundings?&lt;/p&gt;&lt;p&gt;Under LXQt, it needs logging out and in or closing PCManFM-qt and then, stopping and starting Desktop with LXQt &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
                  <property name="text">
                   <string>Transparent view for PCManFM-qt</string>
                  </property>
@@ -533,11 +513,10 @@ with LXQt Session Settings.</string>
                  <property name="toolTip">
                   <string>No icon for menu-items?
 
+By default, some of them may have icon.
+
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No icon for menu-items?&lt;/p&gt;&lt;p&gt;By default, some of them may have icon.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Iconless  menus</string>
@@ -550,10 +529,9 @@ Miscellaneous → Respect current DE if possible</string>
                   <string>Blur the regions behind windows that are made
 translucent by their apps explicitly if possible.
 
+This needs the KDE blur effect.
+
 Konsole, QTerminal and LXQt panel are some examples.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blur the regions behind windows that are made translucent by their apps explicitly?&lt;/p&gt;&lt;p&gt;This needs the KDE blur effect.&lt;/p&gt;&lt;p&gt;Konsole, QTerminal and LXQt panel are some examples.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Blur explicitly translucent windows</string>
@@ -564,10 +542,10 @@ Konsole, QTerminal and LXQt panel are some examples.</string>
                 <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
                   <string>Only the top toolbar should be styled?
-By default, all toolbars are styled.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Only the top toolbar should be styled?&lt;/p&gt;&lt;p&gt;By default, all toolbars are styled, whether they are on the top or at any other position.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+
+By default, all toolbars are styled,
+whether they are on the top or at any
+other position.</string>
                  </property>
                  <property name="text">
                   <string>Single top toolbar</string>
@@ -632,12 +610,10 @@ the highlight color!</string>
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
-Mostly relevant with monochrome icons.
+
+This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The highlight color is used for tinting.&lt;/p&gt;&lt;p&gt;This is mostly relevant with monochrome icons.&lt;/p&gt;&lt;p&gt;Hard-coded icons/styles may not respect this key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Tint label icons on mouseover by </string>
@@ -648,12 +624,10 @@ Hard-coded icons/styles may not respect this key.</string>
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
-Mostly relevant with monochrome icons.
+
+This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The highlight color is used for tinting.&lt;/p&gt;&lt;p&gt;This is mostly relevant with monochrome icons.&lt;/p&gt;&lt;p&gt;Hard-coded icons/styles may not respect this key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="suffix">
                   <string> %</string>
@@ -667,10 +641,8 @@ Hard-coded icons/styles may not respect this key.</string>
                 <widget class="QCheckBox" name="checkBoxDark">
                  <property name="toolTip">
                   <string>Some apps may not respect dark themes.
-Kvantum can try to correct their behavior.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Some applications may not respect dark themes. &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt; can try to correct their behavior as far as possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+Kvantum can try to correct their behavior
+as far as possible.</string>
                  </property>
                  <property name="text">
                   <string>Respect dark themes</string>
@@ -700,7 +672,7 @@ when the opacity of disabled icons is not
 reduced by other means.</string>
                  </property>
                  <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option migh be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="suffix">
                   <string> %</string>
@@ -734,10 +706,8 @@ as far as possible.</string>
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQt panel to be restarted (or just log out and in again).</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQt.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQt panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+Needs LXQt panel to be restarted either by "Session Settings"
+or through logging out and in again.</string>
                  </property>
                  <property name="text">
                   <string>LXQt main menu icon size:</string>
@@ -751,10 +721,8 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQt panel to be restarted (or just log out and in again).</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This has effect only when the main menu is &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; styled by LXQt.&lt;/p&gt;&lt;p&gt;Values less than 16 mean the default menu icon size.&lt;/p&gt;&lt;p&gt;This needs LXQt panel to be restarted either by &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings&lt;/span&gt; or through logging out and in again.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+Needs LXQt panel to be restarted either by "Session Settings"
+or through logging out and in again.</string>
                  </property>
                  <property name="suffix">
                   <string> px</string>
@@ -780,23 +748,19 @@ Needs LXQt panel to be restarted (or just log out and in again).</string>
                   <string>A comma-separated list of executables,
 whose windows should not be translucent.
 
-(Some apps may have problems with translucency!)</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may have problems with translucency.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+(Some apps, like video players, may have
+problems with translucency!)</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="1">
                 <widget class="QLabel" name="opaqueLabel">
                  <property name="toolTip">
-                  <string>A comma-separated list of executables
+                  <string>A comma-separated list of executables,
 whose windows should not be translucent.
 
-(Some apps may have problems with translucency!)</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A comma-separated list of executables whose windows should not be translucent.&lt;/p&gt;&lt;p&gt;If the theme has a translucent background for windows, such a list will be important because some video players and other applications may have problems with translucency.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+(Some apps, like video players, may have
+problems with translucency!)</string>
                  </property>
                  <property name="text">
                   <string>Opaque apps:</string>
@@ -828,9 +792,6 @@ and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This needs KDE blur effect, a graphic card that supports it, and translucent menu/tooltip elements in the theme's SVG file.&lt;/p&gt;&lt;p&gt;It will be automatically checked if window blurring is enabled below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
                  <property name="text">
                   <string>Blurring for menus and tooltips</string>
                  </property>
@@ -840,9 +801,6 @@ Automatically checked if window blurring is enabled.</string>
                 <widget class="QCheckBox" name="checkBoxTrans">
                  <property name="toolTip">
                   <string>Needs a translucent SVG background for windows.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Needs a translucent SVG background for windows in the theme.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Translucent windows</string>
@@ -854,10 +812,7 @@ Automatically checked if window blurring is enabled.</string>
                  <property name="toolTip">
                   <string>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
-window SVG background.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Needs KDE blur effect, a graphic card that supports it, and a translucent window SVG background in the theme.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+window SVG background in the theme.</string>
                  </property>
                  <property name="text">
                   <string>Blurring for translucent windows</string>
@@ -910,9 +865,6 @@ some widgets is changed, mostly by the mouse.</string>
                   <string>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check this to remove all window/dialog tiling patterns!&lt;/p&gt;&lt;p&gt;Uncheck it if you want those patterns back!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
                  <property name="text">
                   <string>Remove window/dialog tiling patterns</string>
                  </property>
@@ -924,10 +876,8 @@ Uncheck it if you want those patterns back!</string>
                   <string>Make scrollbars transient!
 
 Transient scrollbars appear on top of
-their scroll views only when needed.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Make scrollbars transient!&lt;/p&gt;&lt;p&gt;Transient scrollbars appear only when needed and fade out when not needed. They usually take no extra space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+their scroll views only when needed.
+They usually take no extra space.</string>
                  </property>
                  <property name="text">
                   <string>Transient scrollbars</string>
@@ -951,13 +901,12 @@ their scroll views only when needed.</string>
                    <widget class="QLabel" name="labelSmall">
                     <property name="toolTip">
                      <string>Affects menu-items and headers.
-The default value is 16 px.
+
+The default value is 16 px but
+some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Small icon:</string>
@@ -968,13 +917,12 @@ Miscellaneous → Respect current DE if possible</string>
                    <widget class="QSpinBox" name="spinSmall">
                     <property name="toolTip">
                      <string>Affects menu-items and headers.
-The default value is 16 px.
+
+The default value is 16 px but
+some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects menu-items and headers.&lt;/p&gt;&lt;p&gt;The default value is 16 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -991,14 +939,12 @@ Miscellaneous → Respect current DE if possible</string>
                    <widget class="QLabel" name="labelLarge">
                     <property name="toolTip">
                      <string>Affects icon views.
+
 The default value is 32 px but
 some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Large icon:</string>
@@ -1009,14 +955,12 @@ Miscellaneous → Respect current DE if possible</string>
                    <widget class="QSpinBox" name="spinLarge">
                     <property name="toolTip">
                      <string>Affects icon views.
+
 The default value is 32 px but
 some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects icon views.&lt;/p&gt;&lt;p&gt;The default value is 32 px but some applications may set it themselves.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1033,10 +977,8 @@ Miscellaneous → Respect current DE if possible</string>
                    <widget class="QLabel" name="labelButton">
                     <property name="toolTip">
                      <string>Affects buttons, tab-bars and list-views.
+
 The default value is 16 px.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Button icon:</string>
@@ -1047,10 +989,8 @@ The default value is 16 px.</string>
                    <widget class="QSpinBox" name="spinButton">
                     <property name="toolTip">
                      <string>Affects buttons, tab-bars and list-views.
+
 The default value is 16 px.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects buttons, tab-bars and list-views.&lt;/p&gt;&lt;p&gt;The default value is 16 px.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1067,12 +1007,10 @@ The default value is 16 px.</string>
                    <widget class="QLabel" name="labelToolbar">
                     <property name="toolTip">
                      <string>Affects toolbars.
+
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Toolbar icon:</string>
@@ -1083,12 +1021,10 @@ KDE apps get it from KDE setting.</string>
                    <widget class="QSpinBox" name="spinToolbar">
                     <property name="toolTip">
                      <string>Affects toolbars.
+
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Affects toolbars.&lt;/p&gt;&lt;p&gt;The default value is 22 px but some applications set it themselves and KDE apps get it from KDE setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1107,9 +1043,6 @@ KDE apps get it from KDE setting.</string>
                      <string>The default value is 2 px but
 some apps set it themeselves.</string>
                     </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
                     <property name="text">
                      <string>Layout spacing:</string>
                     </property>
@@ -1120,9 +1053,6 @@ some apps set it themeselves.</string>
                     <property name="toolTip">
                      <string>The default value is 2 px but
 some apps set it themeselves.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 2 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1140,9 +1070,6 @@ some apps set it themeselves.</string>
                     <property name="toolTip">
                      <string>The default value is 4 px but some apps set it themeselves.</string>
                     </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
                     <property name="text">
                      <string>Layout margin:</string>
                     </property>
@@ -1152,9 +1079,6 @@ some apps set it themeselves.</string>
                    <widget class="QSpinBox" name="spinLayoutMargin">
                     <property name="toolTip">
                      <string>The default value is 4 px but some apps set it themeselves.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The default value is 4 px but some applications set it themeselves.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1171,10 +1095,8 @@ some apps set it themeselves.</string>
                    <widget class="QLabel" name="labelOverlap">
                     <property name="toolTip">
                      <string>The horizontal overlap between a submenu and its parent.
+
 -1 means automatic.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Submenu overlap: </string>
@@ -1185,10 +1107,8 @@ some apps set it themeselves.</string>
                    <widget class="QSpinBox" name="spinOverlap">
                     <property name="toolTip">
                      <string>The horizontal overlap between a submenu and its parent.
+
 -1 means automatic.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The horizontal overlap between a submenu and its parent.&lt;/p&gt;&lt;p&gt;-1 means automatic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1210,9 +1130,6 @@ some apps set it themeselves.</string>
                      <string>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</string>
                     </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
                     <property name="text">
                      <string>Spin button width: </string>
                     </property>
@@ -1223,9 +1140,6 @@ some apps set it themeselves.</string>
                     <property name="toolTip">
                      <string>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The width of horizontal spin buttons.&lt;/p&gt;&lt;p&gt;This has no effect when spin indicators are vertical.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
@@ -1304,10 +1218,8 @@ some apps set it themeselves.</string>
                      <string>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
+
 -1 means the default Qt behavior.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="text">
                      <string>Tooltip delay:</string>
@@ -1320,11 +1232,8 @@ Zero means tooltips are shown instantly.
                      <string>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
--1 means no poup (opening by clicking).
-0 means no delay.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, to wait before opening a submenu. It is 250 by default.&lt;/p&gt;&lt;p&gt;-1 means no poup, i.e. opening by clicking, while 0 means no delay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+-1 means no popup (opening by clicking),
+while 0 means no delay.</string>
                     </property>
                     <property name="text">
                      <string>Submenu delay: </string>
@@ -1337,10 +1246,8 @@ Zero means tooltips are shown instantly.
                      <string>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
+
 -1 means the default Qt behavior.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, before a tooltip is shown.&lt;/p&gt;&lt;p&gt;Zero means tooltips are shown instantly.&lt;/p&gt;&lt;p&gt;-1 means the default Qt behavior.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="suffix">
                      <string> ms</string>
@@ -1362,11 +1269,8 @@ Zero means tooltips are shown instantly.
                      <string>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
--1 means no poup (opening by clicking).
-0 means no delay.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The delay, in milliseconds, to wait before opening a submenu. It is 250 by default.&lt;/p&gt;&lt;p&gt;-1 means no poup, i.e. opening by clicking, while 0 means no delay.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+-1 means no popup (opening by clicking),
+while 0 means no delay.</string>
                     </property>
                     <property name="suffix">
                      <string> ms</string>
@@ -1422,12 +1326,10 @@ Zero means tooltips are shown instantly.
                 <widget class="QCheckBox" name="checkBoxNoScrollArrow">
                  <property name="toolTip">
                   <string>Scrollbars have add-line and sub-line arrows by default.
+
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Scrollbars have add-line and sub-line arrows by default.&lt;/p&gt;&lt;p&gt;Checking this box removes arrows as far as possible.&lt;/p&gt;&lt;p&gt;If disabled, see Compositing &amp;amp; General Look → Transient scrollbars!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>No arrows for scrollbars</string>
@@ -1468,10 +1370,9 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  <property name="toolTip">
                   <string>Draw scrollbars inside view frames?
 
+By default, scrollbars are drawn outide view frames.
+
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw scrollbars inside view frames?&lt;/p&gt;&lt;p&gt;By default, scrollbars are drawn ouside view frames.&lt;/p&gt;&lt;p&gt;If disabled, see Compositing &amp;amp; General Look → Transient scrollbars!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Scrollbars inside frames</string>
@@ -1482,9 +1383,8 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                 <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
                   <string>Draw tree branch lines?</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw tree branch lines?&lt;/p&gt;&lt;p&gt;By default, tree branches have indicators but no line.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+
+By default, tree branches have indicators but no line.
                  </property>
                  <property name="text">
                   <string>Tree branch lines</string>
@@ -1494,10 +1394,11 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
-                  <string>By default, the label is on the frame.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the label is on the frame and the frame is cut to contain it.&lt;/p&gt;&lt;p&gt;Checking this puts the label right above the frame, so that the frame isn't cut.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>By default, the label is on the frame
+and the frame is cut to contain it.
+
+Checking this puts the label right above
+the frame, so that the frame isn't cut.</string>
                  </property>
                  <property name="text">
                   <string>Group-box label above frame</string>
@@ -1508,11 +1409,10 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow. This
-option fills them with the highlight color.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, drop rectangles for movable toolbars and dock widgets are hollow.&lt;/p&gt;&lt;p&gt;This option fills drop rectangles with the highlight color.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+toolbars and dock widgets are hollow.
+
+This option fills drop rectangles with
+the highlight color.</string>
                  </property>
                  <property name="text">
                   <string>Fill rubber-band rectangles</string>
@@ -1537,10 +1437,7 @@ for menubars by default.</string>
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
-the toolbar SVG element when they are adjacent to one another.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, the menubar and toolbar will be drawn as a whole by the toolbar SVG element when they are adjacent to one another.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+the toolbar SVG element when they are adjacent to each another.</string>
                  </property>
                  <property name="text">
                   <string>Merge menubar with toolbar</string>
@@ -1553,9 +1450,6 @@ the toolbar SVG element when they are adjacent to one another.</string>
                   <string>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</string>
                  </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, toolbar buttons will be drawn grouped and raised between toolbar separators.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
                  <property name="text">
                   <string>Group toolbar buttons</string>
                  </property>
@@ -1565,10 +1459,9 @@ between toolbar separators.</string>
                 <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
                   <string>Shift the contents of push buttons when pressed?
-By default, the contents are shifted by 1px.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shift the contents of push buttons when pressed?&lt;/p&gt;&lt;p&gt;By default, the contents are shifted by 1px both horizontally and vertically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+
+By default, the contents are shifted by 1px
+both horizontally and vertically.</string>
                  </property>
                  <property name="text">
                   <string>Shift push-button contents</string>
@@ -1578,13 +1471,11 @@ By default, the contents are shifted by 1px.</string>
                <item row="11" column="3">
                 <widget class="QLabel" name="labelX11Drag">
                  <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
+                  <string>Drag windows from their menubars, primary toolbars
+or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Drag from:</string>
@@ -1594,13 +1485,11 @@ Miscellaneous → Respect current DE if possible</string>
                <item row="11" column="4">
                 <widget class="QComboBox" name="comboX11Drag">
                  <property name="toolTip">
-                  <string>Drag windows from anywhere possible?
+                  <string>Drag windows from their menubars, primary toolbars
+or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Drag windows from their menubars, primary toolbars or anywhere possible (and not only from their title bars)?&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -1608,11 +1497,9 @@ Miscellaneous → Respect current DE if possible</string>
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
                   <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+is not set by the app in its code.
+
+Default is "Follow Style".</string>
                  </property>
                  <property name="text">
                   <string>Toolbutton style:</string>
@@ -1629,11 +1516,9 @@ Default is Follow Style.</string>
                  </property>
                  <property name="toolTip">
                   <string>Will have effect only if style
-is not set by the app itself.
-Default is Follow Style.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This will have effect only if the style is not set by the application in its code.&lt;/p&gt;&lt;p&gt;The default is &lt;span style=&quot; font-style:italic;&quot;&gt;Follow Style&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+is not set by the app in its code.
+
+Default is "Follow Style".</string>
                  </property>
                 </widget>
                </item>
@@ -1641,9 +1526,6 @@ Default is Follow Style.</string>
                 <widget class="QCheckBox" name="checkBoxAlt">
                  <property name="toolTip">
                   <string>If unchecked, shortcuts will not be underlined at all.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If unchecked, shortcuts will not be underlined at all.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Underline shortcuts with Alt</string>
@@ -1653,11 +1535,11 @@ Default is Follow Style.</string>
                <item row="2" column="1">
                 <widget class="QCheckBox" name="checkBoxInlineSpin">
                  <property name="toolTip">
-                  <string>By default, spin indicators are drawn like buttons.
-Checking this puts them inside the spin line-edit.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, the spin indicators are drawn as two buttons with arrows or plus/minus signs.&lt;/p&gt;&lt;p&gt;Checking this integrates the spin indicators into the spin line-edit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>By default, spin indicators are drawn as
+two buttons with arrows or plus/minus signs.
+
+Checking this integrates the spin indicators
+into the spin line-edit..</string>
                  </property>
                  <property name="text">
                   <string>Inline spin indicators</string>
@@ -1682,13 +1564,11 @@ line-edit with arrow (and icon, if it exists)?</string>
                 <widget class="QCheckBox" name="checkBoxClick">
                  <property name="toolTip">
                   <string>Activate view items always on double clicking?
+
 When unchecked, single-click is preferred.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate view items always on double clicking?&lt;/p&gt;&lt;p&gt;When unchecked, single-click is preferred.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Double-click for view items</string>
@@ -1699,11 +1579,9 @@ Miscellaneous → Respect current DE if possible</string>
                 <widget class="QCheckBox" name="checkBoxVSpin">
                  <property name="toolTip">
                   <string>By default, spin indicators are drawn on adjacent buttons.
+
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, spin indicators are drawn on adjacent buttons.&lt;/p&gt;&lt;p&gt;Checking this puts the spin-up indicator above the spin-down one inside the spin line-edit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Vertical spin indicators</string>
@@ -1730,10 +1608,9 @@ Uncheck it if you want to use those options!</string>
                <item row="5" column="1">
                 <widget class="QCheckBox" name="checkBoxComboMenu">
                  <property name="toolTip">
-                  <string>Draw combo popups as menu popups?</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw combo popups as menu popups (i.e. like in Gtk)?&lt;/p&gt;&lt;p&gt;By default, combo popups do not cover the combo box.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Draw combo popups as menu popups (i.e. like in Gtk)?
+
+By default, combo popups do not cover the combo box.</string>
                  </property>
                  <property name="text">
                   <string>Combo popup as menu</string>
@@ -1743,10 +1620,7 @@ Uncheck it if you want to use those options!</string>
                <item row="6" column="1">
                 <widget class="QCheckBox" name="checkBoxleftTab">
                  <property name="toolTip">
-                  <string>Tabs are centered by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In &lt;span style=&quot; font-weight:600;&quot;&gt;Kvantum&lt;/span&gt;, tabs are centered by default.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>In Kvantum, tabs are centered by default.</string>
                  </property>
                  <property name="text">
                   <string>Left aligned tabs</string>
@@ -1756,10 +1630,8 @@ Uncheck it if you want to use those options!</string>
                <item row="7" column="1">
                 <widget class="QCheckBox" name="checkBoxJoinTab">
                  <property name="toolTip">
-                  <string>Inactive tabs are joined by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Inactive tabs are joined together by default, i.e., there is no border between them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Inactive tabs are joined together by default,
+i.e., there is no border between them.</string>
                  </property>
                  <property name="text">
                   <string>Join inactive tabs</string>
@@ -1769,11 +1641,10 @@ Uncheck it if you want to use those options!</string>
                <item row="0" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxScrollableMenu">
                  <property name="toolTip">
-                  <string>Should big menus be scrollable?
+                  <string>Should big menus be scrollable and have
+scroll arrows on their top and/or bottom?
+
 By default, all of their menu-items are shown.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Should big menus be scrollable and have scroll arrows on their top and/or bottom?&lt;/p&gt;&lt;p&gt;By default, all of their menu-items are shown.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
                   <string>Scrollable menus</string>
@@ -1909,10 +1780,8 @@ By default, all of their menu-items are shown.</string>
          <widget class="QPushButton" name="removeAppButton">
           <property name="toolTip">
            <string>Use the active theme for all apps!
-(Needs saving to take effect.)</string>
-          </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use the active theme for all applications!&lt;/p&gt;&lt;p&gt;This needs saving to take effect.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+
+This Needs saving to take effect.</string>
           </property>
           <property name="text">
            <string>Remove List</string>
@@ -1982,15 +1851,12 @@ By default, all of their menu-items are shown.</string>
        <string>Preview the active theme
 or update its preview.</string>
       </property>
-      <property name="whatsThis">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Preview the active theme or update its preview.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
       <property name="text">
        <string>Preview</string>
       </property>
       <property name="icon">
        <iconset resource="kvantummanager.qrc">
-        <normaloff>:/Icons/kvantumpreview/kvantum.svg</normaloff>:/Icons/kvantumpreview/kvantum.svg</iconset>
+        <normaloff>:/Icons/kvantumpreview/data/kvantum.svg</normaloff>:/Icons/kvantumpreview/data/kvantum.svg</iconset>
       </property>
      </widget>
     </item>

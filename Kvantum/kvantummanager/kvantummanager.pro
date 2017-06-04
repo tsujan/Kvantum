@@ -24,6 +24,16 @@ FORMS += \
     kvantummanager.ui
 
 unix {
+  #TRANSLATIONS
+  exists($$[QT_INSTALL_BINS]/lrelease) {
+    TRANSLATIONS = $$system("find data/translations/ -name 'kvantummanager_*.ts'")
+    updateqm.input = TRANSLATIONS
+    updateqm.output = data/translations/translations/${QMAKE_FILE_BASE}.qm
+    updateqm.commands = $$[QT_INSTALL_BINS]/lrelease ${QMAKE_FILE_IN} -qm data/translations/translations/${QMAKE_FILE_BASE}.qm
+    updateqm.CONFIG += no_link target_predeps
+    QMAKE_EXTRA_COMPILERS += updateqm
+  }
+
   #VARIABLES
   isEmpty(PREFIX) {
     PREFIX = /usr
@@ -35,11 +45,14 @@ unix {
 
   #MAKE INSTALL
   iconsvg.path = $$DATADIR/icons/hicolor/scalable/apps
-  iconsvg.files += ../kvantumpreview/kvantum.svg
+  iconsvg.files += ../kvantumpreview/data/kvantum.svg
 
   desktop.path = $$DATADIR/applications
   desktop.files += ./data/$${TARGET}.desktop
 
+  trans.path = $$DATADIR/kvantummanager
+  trans.files += ./data/translations/translations
+
   target.path =$$BINDIR
-  INSTALLS += target desktop iconsvg
+  INSTALLS += target desktop iconsvg trans
 }

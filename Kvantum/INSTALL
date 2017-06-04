@@ -10,13 +10,15 @@ First install X11 and Qt development packages. In Debian-based systems, they are
  * libx11-dev and libxext-dev (for X11)
  * qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
  * libqt4-dev (for Qt4 and if you want Qt4 support)
+ * qttools5-dev-tools (for localization if you need it)
 
-In Arch-based systems, the required package are:
+In Arch-based systems, the packages are:
 
  * gcc (or gcc-multilib for multilib systems)
  * libx11 and libxext (for X11)
  * qt5-base, qt5-svg and qt5-x11extras (for Qt5) 
  * qt4 (for Qt4 and if you want Qt4 support)
+ * qt5-tools (for localization if you need it)
 
 There are two ways to compile Kvantum: with qmake or with cmake.
 
@@ -121,7 +123,7 @@ Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
 	(2) The KDE color schemes should go to  '/usr/share/color-schemes/' for KF5 and '/usr/share/kde4/apps/color-schemes/' for KDE4.
 	(3) If a theme is installed both as root and as user, the latter installation will take priority.
 
-Please read the last section of "Theme-Making.pdf" for more information on theme installation paths and their priorities.
+Please see "Theme-Making.pdf" for more information on theme installation paths and their priorities.
 
 The default Qt5 installation adds several root themes, that can be selected by using Kvantum Manager. Their corresponding KDE color schemes and Openbox themes are also installed.
 
@@ -129,4 +131,4 @@ The default Qt5 installation adds several root themes, that can be selected by u
 *   GTK   *
 ***********
 
-Kvantum does not -- and will not -- have any relation to GTK. However, among its extra themes, it includes KvGnome and KvGnomeDark, which have Gnome-like looks and feels.
+Kvantum does not -- and will not -- have any relation to GTK. However, it includes some themes with Gnome-like looks and feels.

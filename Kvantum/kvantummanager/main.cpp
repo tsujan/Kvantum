@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <QStyleFactory>
 #include <QMessageBox>
+#include <QTranslator>
+#include <QLibraryInfo>
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +12,20 @@ int main(int argc, char *argv[])
 #if QT_VERSION >= 0x050500
     a.setAttribute (Qt::AA_UseHighDpiPixmaps, true);
 #endif
+
+    QStringList langs (QLocale::system().uiLanguages());
+    QString lang; // bcp47Name() doesn't work under vbox
+    if (!langs.isEmpty())
+        lang = langs.first().split (QLatin1Char ('-')).first();
+
+    QTranslator qtTranslator;
+    qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+    a.installTranslator (&qtTranslator);
+
+    QTranslator KMTranslator;
+    KMTranslator.load ("kvantummanager_" + lang, DATADIR "/kvantummanager/translations");
+    a.installTranslator (&KMTranslator);
+
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */
 #if QT_VERSION >= 0x050000
     a.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true); // for translucency
@@ -20,15 +36,15 @@ int main(int argc, char *argv[])
     {
         QMessageBox msgBox (QMessageBox::Critical,
                             QObject::tr ("Kvantum"),
-                            QObject::tr ("<center><b>Kvantum is not installed on your system.</b></center>"\
-                                         "<p><center>Please first install the Kvantum style plugin!</center><p>"),
+                            "<center><b>" + QObject::tr ("Kvantum is not installed on your system.") + "</b></center>\n"
+                            "<p><center>" + QObject::tr ("Please first install the Kvantum style plugin!") + "</center><p>",
                             QMessageBox::Close);
         msgBox.exec();
         return 1;
     }
     if (QApplication::style()->objectName() != "kvantum")
         QApplication::setStyle (QStyleFactory::create ("kvantum"));
-    KvManager::KvantumManager km (NULL);
+    KvManager::KvantumManager km (lang, NULL);
     km.show();
 
     return a.exec();

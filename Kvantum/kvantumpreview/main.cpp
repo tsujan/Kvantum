@@ -16,6 +16,8 @@
  */
 
 #include <QApplication>
+#include <QTranslator>
+#include <QLibraryInfo>
 
 #include "KvantumPreview.h"
 
@@ -26,6 +28,20 @@ int main (int argc, char *argv[])
 #if QT_VERSION >= 0x050500
   viewer.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 #endif
+
+  QStringList langs (QLocale::system().uiLanguages());
+  QString lang; // bcp47Name() doesn't work under vbox
+  if (!langs.isEmpty())
+      lang = langs.first().split (QLatin1Char ('-')).first();
+
+  QTranslator qtTranslator;
+  qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+  viewer.installTranslator (&qtTranslator);
+
+  QTranslator KPTranslator;
+  KPTranslator.load ("kvantumpreview_" + lang, DATADIR "/kvantumpreview/translations");
+  viewer.installTranslator (&KPTranslator);
+
   KvantumPreview k (NULL);
   k.show();
   QList<QTabWidget *> list = k.findChildren<QTabWidget*>();

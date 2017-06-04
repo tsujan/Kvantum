@@ -1,0 +1,11 @@
+The GUIs of "Kvantum Manager" and "Kvantum Preview" can be translated. An Esperanto translation is already added for them.
+
+Compiling Kvantum with localization requires "qttools5-dev-tools" in Debian-based systems or "qt5-tools" in Arch-based systems. Without that package, Kvantum can still be compiled but without localization support.
+
+The file 'Kvantum/kvantummanager/data/translations/kvantummanager.ts' can serve as the basis for translating "Kvantum Manager". The translated files should be saved in the same directory as "kvantummanager_ln.ts", where "ln" should be replaced by the abbreviation for the target languages, for example, "de", "fr", "pl", etc.
+
+The same is true of "Kvantum Preview", whose translation directory is 'Kvantum/kvantumpreview/data/translations/'.
+
+The comments of (new) themes can also be translated by adding a line like "comment[ln]=..." to their config files (replace "ln" with the target language abbreviation).
+
+If you have translated "Kvantum Manager" and/or "Kvantum Preview" into your language, please make a "Pull Request" (PR) at https://github.com/tsujan/Kvantum for your work to be merged!

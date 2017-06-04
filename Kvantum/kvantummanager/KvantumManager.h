@@ -19,7 +19,7 @@ class KvantumManager : public QMainWindow
     Q_OBJECT
 
 public:
-    KvantumManager (QWidget *parent = 0);
+    KvantumManager (const QString lang = QString(), QWidget *parent = 0);
     ~KvantumManager();
 
 private slots:
@@ -96,6 +96,9 @@ private:
     QByteArray desktop_;
     QHash<QString, QStringList> appThemes_, origAppThemes_;
     bool confPageVisited_;
+    QString lang_;
+    QString modifiedSuffix_;
+    QString kvDefault_;
 };
 
 }

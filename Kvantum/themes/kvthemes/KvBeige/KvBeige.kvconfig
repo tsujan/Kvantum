@@ -49,8 +49,8 @@ tree_branch_line=false
 
 [GeneralColors]
 window.color=#efebe7
-base.color=#ffffff
-alt.base.color=#F3F3F3
+base.color=#fdfdfd
+alt.base.color=#f1f1f1
 button.color=#efebe7
 light.color=#F3F3F3
 mid.light.color=#ECECEC

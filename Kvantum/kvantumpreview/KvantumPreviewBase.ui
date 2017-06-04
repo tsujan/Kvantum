@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="KvantumPreviewResources.qrc">
-    <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
+    <normaloff>:/Icons/data/kvantum.svg</normaloff>:/Icons/data/kvantum.svg</iconset>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="currentIndex">
@@ -450,7 +450,7 @@ and text below</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -471,7 +471,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -492,7 +492,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextUnderIcon</enum>
@@ -510,7 +510,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -531,7 +531,7 @@ and arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="toolButtonStyle">
           <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -550,7 +550,7 @@ and dropdown menu arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -578,7 +578,7 @@ and dropdown menu arrow</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -605,7 +605,7 @@ and text below</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -629,7 +629,7 @@ beside text</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -650,7 +650,7 @@ beside text</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.png</normaloff>:/Icons/icon.png</iconset>
+           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -678,7 +678,7 @@ width</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -871,7 +871,7 @@ radio button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -897,7 +897,7 @@ radio button</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -985,7 +985,7 @@ check box</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
         </widget>
        </item>
@@ -999,7 +999,7 @@ check box</string>
          </property>
          <property name="icon">
           <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
          </property>
          <property name="tristate">
           <bool>true</bool>
@@ -1100,7 +1100,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1136,7 +1136,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1172,7 +1172,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1241,7 +1241,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1277,7 +1277,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1316,7 +1316,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1355,7 +1355,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1427,7 +1427,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -2128,7 +2128,7 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </column>
          <column>
@@ -2143,31 +2143,31 @@ check box</string>
          </column>
          <item>
           <property name="text">
-           <string>Third Item</string>
+           <string>3rd Item</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Second Item</string>
+           <string>2nd Item</string>
           </property>
           <item>
            <property name="text">
-            <string>Second Child</string>
+            <string>2nd Child</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>First Child</string>
+            <string>1st Child</string>
            </property>
           </item>
          </item>
          <item>
           <property name="text">
-           <string>First Item</string>
+           <string>1st Item</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
           <property name="text">
            <string>Editable</string>
@@ -2177,28 +2177,28 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
           <property name="flags">
            <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
           <item>
            <property name="text">
-            <string>Third Child</string>
+            <string>3rd Child</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Second Child</string>
+            <string>2nd Child</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>First Child</string>
+            <string>1st Child</string>
            </property>
            <property name="icon">
             <iconset resource="KvantumPreviewResources.qrc">
-             <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+             <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
            </property>
            <property name="text">
             <string>Non-Editable</string>
@@ -2310,7 +2310,7 @@ check box</string>
            <widget class="QWidget" name="tab_16">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 2</string>
@@ -2344,7 +2344,7 @@ check box</string>
            <widget class="QWidget" name="tab_13">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2494,7 +2494,7 @@ check box</string>
             </property>
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="label">
              <string>Page 1</string>
@@ -2546,7 +2546,7 @@ check box</string>
             </property>
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="label">
              <string>Page 1</string>
@@ -2601,7 +2601,7 @@ check box</string>
            <widget class="QWidget" name="tab_8">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 2</string>
@@ -2660,7 +2660,7 @@ check box</string>
            <widget class="QWidget" name="tab_9">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2705,7 +2705,7 @@ check box</string>
            <widget class="QWidget" name="tab_12">
             <attribute name="icon">
              <iconset resource="KvantumPreviewResources.qrc">
-              <normaloff>:/Icons/icon.svg</normaloff>:/Icons/icon.svg</iconset>
+              <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
             </attribute>
             <attribute name="title">
              <string>Tab 1</string>
@@ -2856,7 +2856,7 @@ check box</string>
    </property>
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
+     <normaloff>:/Icons/data/kvantum.svg</normaloff>:/Icons/data/kvantum.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Doc Mode</string>
@@ -2871,7 +2871,7 @@ check box</string>
    </property>
    <property name="icon">
     <iconset resource="KvantumPreviewResources.qrc">
-     <normaloff>:/Icons/kvantum.svg</normaloff>:/Icons/kvantum.svg</iconset>
+     <normaloff>:/Icons/data/kvantum.svg</normaloff>:/Icons/data/kvantum.svg</iconset>
    </property>
    <property name="text">
     <string>Menu Button</string>
