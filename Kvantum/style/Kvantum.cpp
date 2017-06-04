@@ -12985,7 +12985,7 @@ QRect Style::subControlRect(ComplexControl control,
         int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
         int checkHeight = pixelMetric(PM_IndicatorHeight);
         fspec = getFrameSpec("GroupBox");
-        int labelMargin = (tspec_.groupbox_top_label ? 0 : (rtl ? fspec.right : fspec.left) + 10);
+        int labelMargin = (tspec_.groupbox_top_label || !fspec.hasFrame ? 0 : (rtl ? fspec.right : fspec.left) + 10);
 
         switch (subControl) {
           case SC_GroupBoxCheckBox : {
