@@ -369,7 +369,6 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-size.minheight=22
 text.normal.color=white
 text.focus.color=white
 text.margin.top=2
@@ -438,8 +437,6 @@ frame.left=1
 frame.right=1
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 text.normal.color=black
 text.shadow=false
 

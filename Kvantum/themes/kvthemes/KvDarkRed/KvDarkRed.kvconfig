@@ -31,9 +31,9 @@ button_icon_size=16
 toolbar_icon_size=16
 animate_states=true
 button_contents_shift=true
-combo_as_lineedit=false
+combo_as_lineedit=true
 groupbox_top_label=false
-inline_spin_indicators=false
+inline_spin_indicators=true
 joined_inactive_tabs=true
 layout_spacing=2
 submenu_overlap=-1
@@ -48,8 +48,8 @@ light.color=#6E6E6E
 mid.light.color=#555555
 dark.color=#171717
 mid.color=#282828
-highlight.color=#737373
-inactive.highlight.color=#4A4A4A
+highlight.color=#8c1011
+inactive.highlight.color=#730d0e
 text.color=white
 window.text.color=white
 button.text.color=white
@@ -73,7 +73,7 @@ iconless_menu=false
 iconless_pushbutton=false
 lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
-single_top_toolbar=true
+single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
 
@@ -90,6 +90,9 @@ text.press.color=white
 text.toggle.color=white
 text.focus.color=#FFCA00
 indicator.size=10
+frame.expansion=8
+min_width=+0.2font
+min_height=+0.2font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -103,10 +106,8 @@ inherits=PanelButtonCommand
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+interior.element=button
+frame.element=button
 
 [RadioButton]
 inherits=PanelButtonCommand
@@ -144,6 +145,8 @@ frame.left=5
 frame.right=5
 text.press.color=white
 indicator.size=8
+min_width=4font
+min_height=2.3font
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -152,6 +155,12 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
+
+[TreeExpander]
+inherits=PanelButtonCommand
+frame=false
+interior=false
+indicator.size=10
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -176,7 +185,7 @@ indicator.size=13
 [Toolbar]
 inherits=PanelButtonCommand
 frame.left=0
-frame.right=3
+frame.right=4
 frame.top=2
 frame.bottom=2
 
@@ -209,7 +218,7 @@ frame.right=4
 [Progressbar]
 text.bold=true
 text.focus.color=white
-frame.expansion=50
+frame.expansion=3.4font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -229,6 +238,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+min_height=0
 
 [Menu]
 inherits=PanelButtonCommand
@@ -252,6 +262,8 @@ frame.bottom=2
 frame.left=2
 frame.right=2
 text.focus.color=white
+min_width=0
+min_height=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -263,6 +275,8 @@ frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
+min_width=0
+min_height=0
 
 [TitleBar]
 inherits=PanelButtonCommand

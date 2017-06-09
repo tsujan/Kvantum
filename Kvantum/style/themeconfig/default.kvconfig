@@ -269,7 +269,7 @@ inherits=PanelButtonCommand
 frame=false
 interior.element=menuitem
 indicator.element=menuitem
-size.minheight=22
+min_height=22
 text.focus.color=#4DA6FF
 text.margin.top=2
 text.margin.bottom=2
@@ -320,8 +320,6 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 
 [GroupBox]
 inherits=GenericFrame

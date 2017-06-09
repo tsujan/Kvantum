@@ -208,7 +208,7 @@ frame.left=4
 frame.right=4
 frame.top=4
 frame.bottom=4
-frame.expansion=50
+frame.expansion=3.4font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand

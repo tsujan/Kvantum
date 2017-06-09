@@ -101,7 +101,7 @@ text.shadow.yshift=2
 text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
-frame.expansion=40
+frame.expansion=2.7font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -175,7 +175,7 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=4
 text.margin.right=4
-frame.expansion=50
+frame.expansion=3.4font
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -283,7 +283,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-frame.expansion=40
+frame.expansion=2.7font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -294,7 +294,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-frame.expansion=40
+frame.expansion=2.7font
 
 [ItemView]
 inherits=PanelButtonCommand
@@ -350,7 +350,6 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-size.minheight=22
 text.focus.color=white
 
 [MenuBarItem]
@@ -396,8 +395,6 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 frame.expansion=0
 
 [GroupBox]

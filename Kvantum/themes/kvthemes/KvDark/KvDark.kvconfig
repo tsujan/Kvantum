@@ -60,7 +60,7 @@ kcapacitybar_as_progressbar=true
 force_size_grip=false
 iconless_menu=false
 iconless_pushbutton=false
-single_top_toolbar=true
+single_top_toolbar=false
 
 [PanelButtonCommand]
 frame.top=3
@@ -178,7 +178,7 @@ text.shadow.color=black
 text.shadow.alpha=255
 text.shadow.depth=3
 text.bold=true
-frame.expansion=50
+frame.expansion=3.4font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand

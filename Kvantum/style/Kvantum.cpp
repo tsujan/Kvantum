@@ -2305,6 +2305,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       animationOpacity_ = 0;
       break;
     }
+    /* Falls through. */
   case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
     {
@@ -4013,9 +4014,11 @@ void Style::drawPrimitive(PrimitiveElement element,
           QString maxTxt = spinMaxText(sb);
           if (maxTxt.isEmpty()
               || option->rect.width() < textSize(sb->font(),maxTxt,false).width() + fspec.left
+                                        + (sspec.incrementW ? sspec.minW : 0)
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && sb->width() < widget->width() + 2*tspec_.spin_button_width + getFrameSpec("IndicatorSpinBox").right))
+                  && sb->width() < widget->width() + 2*tspec_.spin_button_width
+                                                   + getFrameSpec("IndicatorSpinBox").right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
@@ -5697,7 +5700,10 @@ void Style::drawControl(ControlElement element,
       if (opt) {
         frame_spec fspec;
         default_frame_spec(fspec);
-        const label_spec lspec = getLabelSpec("RadioButton");
+        label_spec lspec = getLabelSpec("RadioButton");
+        /* vertically centered */
+        lspec.top = qMin(lspec.top,2);
+        lspec.bottom = qMin(lspec.bottom,2);
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -5710,7 +5716,7 @@ void Style::drawControl(ControlElement element,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
-                    opt->iconSize);
+                    opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
 
       break;
@@ -5723,7 +5729,10 @@ void Style::drawControl(ControlElement element,
       if (opt) {
         frame_spec fspec;
         default_frame_spec(fspec);
-        const label_spec lspec = getLabelSpec("CheckBox");
+        label_spec lspec = getLabelSpec("CheckBox");
+        /* vertically centered */
+        lspec.top = qMin(lspec.top,2);
+        lspec.bottom = qMin(lspec.bottom,2);
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -5736,7 +5745,7 @@ void Style::drawControl(ControlElement element,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
-                    opt->iconSize);
+                    opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
 
       break;
@@ -5763,6 +5772,7 @@ void Style::drawControl(ControlElement element,
         const QString group = "ComboBox";
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
+        size_spec sspec = getSizeSpec(group);
 
         QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -5790,6 +5800,7 @@ void Style::drawControl(ControlElement element,
             int deltaR = 0; int deltaL = 0;
             int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
             if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                              + (sspec.incrementW ? sspec.minW : 0)
                 || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
             {
               deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
@@ -5805,6 +5816,8 @@ void Style::drawControl(ControlElement element,
               lspec.top = qMin(lspec.top,2);
               lspec.bottom = qMin(lspec.bottom,2);
               lspec.tispace = qMin(lspec.tispace,2);
+              
+              sspec.incrementW = false;
 
               /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
               iSize = qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9);
@@ -5817,6 +5830,18 @@ void Style::drawControl(ControlElement element,
           }
         }
 
+        if (sspec.incrementW)
+        {
+          if (opt->currentIcon.isNull())
+          {
+            if (opt->direction == Qt::RightToLeft)
+              lspec.right += sspec.minW;
+            else
+              lspec.left += sspec.minW;
+          }
+          else
+            lspec.tispace += sspec.minW;
+        }
         int vFrame = qMax(fspec.top,fspec.bottom);
         QStyleOptionComboBox o(*opt);
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
@@ -8742,9 +8767,11 @@ void Style::drawComplexControl(ComplexControl control,
             }
             if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
             {
+              const size_spec sspec = getSizeSpec("LineEdit");
               QString maxTxt = spinMaxText(sb);
               if (maxTxt.isEmpty()
                   || editRect.width() < textSize(sb->font(),maxTxt,false).width() + fspec.left
+                                        + (sspec.incrementW ? sspec.minW : 0)
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
                                              ? fspec.right : 0)
                   || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
@@ -10855,8 +10882,9 @@ QSize Style::sizeFromContents(ContentsType type,
 
   switch (type) {
     case CT_LineEdit : {
-      QFont f = QApplication::font();
+      QFont f;
       if (widget) f = widget->font();
+      else f = QApplication::font();
 
       const QString group = "LineEdit";
       const frame_spec fspec = getFrameSpec(group);
@@ -10886,6 +10914,7 @@ QSize Style::sizeFromContents(ContentsType type,
         fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
       }
       const label_spec lspec = getLabelSpec("LineEdit");
+      const size_spec sspecLE = getSizeSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
       const size_spec sspec = getSizeSpec("IndicatorSpinBox");
       if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
@@ -10895,7 +10924,10 @@ QSize Style::sizeFromContents(ContentsType type,
         {
           maxTxt = maxTxt + QLatin1Char(' ');
           s = textSize(sb->font(),maxTxt,false)
-              + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0 : lspec.left) + 2 // cursor padding
+              + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0
+                                      : lspec.left
+                                        + (sspecLE.incrementW ? sspecLE.minW : 0))
+                                        + 2 // cursor padding
                                  + 2*tspec_.spin_button_width
                                  + (tspec_.vertical_spin_indicators
                                     || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? // as in qpdfview
@@ -10915,7 +10947,8 @@ QSize Style::sizeFromContents(ContentsType type,
             s.rwidth() = sb->minimumWidth() + tspec_.spin_button_width;
         }
 
-        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
+        s = s.expandedTo(QSize(0, // minW doesn't have meaning here
+                               sspec.minH + (sspec.incrementH ? s.height() : 0)));
       }
 
       break;
@@ -10932,9 +10965,11 @@ QSize Style::sizeFromContents(ContentsType type,
         label_spec lspec = getLabelSpec(group);
         const frame_spec fspec1 = getFrameSpec("LineEdit");
         const label_spec lspec1 = getLabelSpec("LineEdit");
+        const size_spec sspec1 = getSizeSpec("LineEdit");
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
         bool hasIcon = false;
@@ -10962,7 +10997,7 @@ QSize Style::sizeFromContents(ContentsType type,
                                             fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
                                             : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
                                           : lspec.left+lspec.right)
-                                      + (hasIcon ? lspec.tispace : 0) ,
+                                      + (hasIcon ? lspec.tispace : 0),
                   sizeCalculated(f,fspec,lspec,sspec,"W",
                                  hasIcon ? opt->iconSize : QSize()).height());
 
@@ -10976,9 +11011,14 @@ QSize Style::sizeFromContents(ContentsType type,
             s.rwidth() += option->direction == Qt::RightToLeft ?
                            (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
                            : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
-        }
 
-        if (s.width() < sspec.minW)
+          s.rwidth() += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
+                                         : (sspec1.incrementW ? sspec1.minW : 0);
+        }
+        else if (sspec.incrementW)
+          s.rwidth() += sspec.minW;
+
+        if (!sspec.incrementW && s.width() < sspec.minW)
           s.setWidth(sspec.minW);
       }
 
@@ -10993,7 +11033,7 @@ QSize Style::sizeFromContents(ContentsType type,
         const QString group = "PanelButtonCommand";
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
-        const size_spec sspec = getSizeSpec(group);
+        size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
         const QString txt = opt->text;
 
@@ -11043,8 +11083,9 @@ QSize Style::sizeFromContents(ContentsType type,
              and also the possibility of boldness in general */
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
           {
-            QFont f = QApplication::font();
+            QFont f;
             if (widget) f = widget->font();
+            else f = QApplication::font();
             QSize s1 = textSize(f, txt, false);
             f.setBold(true);
             s = s + textSize(f, txt, false) - s1;
@@ -11054,8 +11095,14 @@ QSize Style::sizeFromContents(ContentsType type,
                                    + 6*QFontMetrics(QApplication::font()).width("W"),
                                  s.height()));
         }
+        else
+        { // don't let width < height
+          s = s.expandedTo(QSize(s.height(),0));
+          sspec.minW = qMax(sspec.minW,sspec.minH);
+        }
 
-        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
+        s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
+                               sspec.minH + (sspec.incrementH ? s.height() : 0)));
       }
 
       break;
@@ -11069,18 +11116,32 @@ QSize Style::sizeFromContents(ContentsType type,
         const QString group = "RadioButton";
         frame_spec fspec;
         default_frame_spec(fspec);
-        const label_spec lspec = getLabelSpec(group);
-        const size_spec sspec = getSizeSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        size_spec sspec;
+        if (isLibreoffice_
+            || !widget // QML
+            || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        { // see PM_IndicatorWidth (just for focus rectangle)
+          lspec.top = qMin(lspec.top,2);
+          lspec.bottom = qMin(lspec.bottom,2);
+          default_size_spec(sspec);
+        }
+        else
+        {
+          sspec = getSizeSpec(group);
+          sspec.minW = 0; // minW doesn't have meaning here
+        }
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
-        int ih = pixelMetric(PM_ExclusiveIndicatorHeight);
+        int ih = pixelMetric(PM_ExclusiveIndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
             + QSize(pixelMetric(PM_RadioButtonLabelSpacing), 0);
-        s = s + QSize(pixelMetric(PM_ExclusiveIndicatorWidth), (s.height() < ih ? ih : 0));
+        s = s + QSize(pixelMetric(PM_ExclusiveIndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
 
       break;
@@ -11094,18 +11155,32 @@ QSize Style::sizeFromContents(ContentsType type,
         const QString group = "CheckBox";
         frame_spec fspec;
         default_frame_spec(fspec);
-        const label_spec lspec = getLabelSpec(group);
-        const size_spec sspec = getSizeSpec(group);
+        label_spec lspec = getLabelSpec(group);
+        size_spec sspec;
+        if (isLibreoffice_
+            || !widget // QML
+            || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        { // see PM_IndicatorWidth (just for focus rectangle)
+          lspec.top = qMin(lspec.top,2);
+          lspec.bottom = qMin(lspec.bottom,2);
+          default_size_spec(sspec);
+        }
+        else
+        {
+          sspec = getSizeSpec(group);
+          sspec.minW = 0; // minW doesn't have meaning here
+        }
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
-        int ih = pixelMetric(PM_IndicatorHeight);
+        int ih = pixelMetric(PM_IndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
           s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
               + QSize(pixelMetric(PM_CheckBoxLabelSpacing), 0);
-        s = s + QSize(pixelMetric(PM_IndicatorWidth), (s.height() < ih ? ih : 0));
+        s = s + QSize(pixelMetric(PM_IndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
 
       break;
@@ -11121,8 +11196,9 @@ QSize Style::sizeFromContents(ContentsType type,
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
         int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
@@ -11209,8 +11285,9 @@ QSize Style::sizeFromContents(ContentsType type,
         /* needed for putting menubar-items inside menubar frame */
         fspec.top += fspec1.top+fspec1.bottom;
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
@@ -11228,7 +11305,7 @@ QSize Style::sizeFromContents(ContentsType type,
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
-        const size_spec sspec = getSizeSpec(group);
+        size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
 
         // -> CE_ToolButtonLabel
@@ -11311,7 +11388,17 @@ QSize Style::sizeFromContents(ContentsType type,
           }
         }
 
-        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
+        if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
+        { // don't let width < height
+          s = s.expandedTo(QSize(s.height(),0));
+          sspec.minW = qMax(sspec.minW,sspec.minH);
+        }
+
+        if (!qobject_cast<QAbstractItemView*>(getParent(widget,2))) // -> CE_ToolButtonLabel
+        {
+          s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
+                                 sspec.minH + (sspec.incrementH ? s.height() : 0)));
+        }
       }
 
       break;
@@ -11327,8 +11414,9 @@ QSize Style::sizeFromContents(ContentsType type,
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
         int iconSize = pixelMetric(PM_TabBarIconSize);
@@ -11407,8 +11495,9 @@ QSize Style::sizeFromContents(ContentsType type,
           fspec.bottom = t;
         }
 
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
         int iconSize = pixelMetric(PM_SmallIconSize);
@@ -11503,7 +11592,8 @@ QSize Style::sizeFromContents(ContentsType type,
         else if (!hasIcon)
           s.rheight() += lspec.top + lspec.bottom;
 
-        s = s.expandedTo(QSize(sspec.minW,sspec.minH));
+        s = s.expandedTo(QSize(0, // minW doesn't have meaning here
+                               sspec.minH + (sspec.incrementH ? s.height() : 0)));
       }
 
       // the item text may be inside a button like in Kate's font preferences (see SE_PushButtonContents)
@@ -11523,10 +11613,8 @@ QSize Style::sizeFromContents(ContentsType type,
 
     case CT_TabWidget : {
       const frame_spec fspec = getFrameSpec("TabFrame");
-      const size_spec sspec = getSizeSpec("TabFrame");
       s = defaultSize + QSize(fspec.left+fspec.right,
                               fspec.top+fspec.bottom);
-      s = s.expandedTo(QSize(sspec.minW,sspec.minH));
 
       break;
     }
@@ -11559,8 +11647,9 @@ QSize Style::sizeFromContents(ContentsType type,
           lspec.left = 0;
       }
 
-      QFont f = QApplication::font();
+      QFont f;
       if (widget) f = widget->font();
+      else f = QApplication::font();
       if (lspec.boldFont) f.setBold(true);
       QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt? opt->text : QString(),QSize());
       fspec = getFrameSpec(group);
@@ -11573,8 +11662,6 @@ QSize Style::sizeFromContents(ContentsType type,
                 defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
                   + (tspec_.groupbox_top_label ? 0
                      : qMax(pixelMetric(PM_IndicatorHeight),textSize.height())/2));
-      sspec = getSizeSpec(group);
-      s = s.expandedTo(QSize(sspec.minW,sspec.minH));
 
       break;
     }
@@ -11611,6 +11698,7 @@ QSize Style::sizeCalculated(const QFont &font,
                             // use real heights of multiline texts?
                             bool realHeight) const
 {
+  /* text margins are taken into account without text too */
   QSize s;
   s.setWidth(fspec.left+fspec.right+lspec.left+lspec.right);
   s.setHeight(fspec.top+fspec.bottom+lspec.top+lspec.bottom);
@@ -11664,10 +11752,8 @@ QSize Style::sizeCalculated(const QFont &font,
     }
   }
 
-  if (s.height() < sspec.minH)
-    s.setHeight(sspec.minH);
-  if (s.width() < sspec.minW)
-    s.setWidth(sspec.minW);
+  s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
+                         sspec.minH + (sspec.incrementH ? s.height() : 0)));
 
   return s;
 }
@@ -11680,12 +11766,53 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt)
-        return opt->rect.adjusted(opt->direction == Qt::RightToLeft ?
-                                    0 : pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing),
-                                  0,
-                                  opt->direction == Qt::RightToLeft ?
-                                    -(pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing)) : 0,
-                                  0);
+      { // adapted from Qt -> qcommonstyle.cpp to draw focus rect only around contents
+        bool isRadio = (element == SE_RadioButtonFocusRect); 
+        QRect r;
+        if (opt->icon.isNull() && opt->text.isEmpty())
+        {
+          return subElementRect(isRadio ? SE_RadioButtonIndicator : SE_CheckBoxIndicator,
+                                opt, widget).adjusted(1, 1, -1, -1);
+        }
+        QRect cr = visualRect(opt->direction,
+                              opt->rect,
+                              subElementRect(isRadio ? SE_RadioButtonContents : SE_CheckBoxContents,
+                                             opt, widget));
+        const label_spec lspec = getLabelSpec(isRadio ? "RadioButton" : "CheckBox");
+        if (opt->direction == Qt::RightToLeft)
+          cr.adjust(lspec.right, 0 , -lspec.left, 0);
+        else
+          cr.adjust(lspec.left, 0 , -lspec.right, 0);
+        if (!opt->text.isEmpty())
+        {
+          QFont f;
+          if (widget) f = widget->font();
+          else f = QApplication::font();
+          if (lspec.boldFont) f.setBold(true);
+          r = itemTextRect(QFontMetrics(f),
+                           cr, 
+                           Qt::AlignAbsolute | Qt::AlignLeft | Qt::AlignVCenter
+                             | (styleHint(SH_UnderlineShortcut, opt, widget) ?
+                                    Qt::TextShowMnemonic : Qt::TextHideMnemonic),
+                           opt->state & State_Enabled,
+                           opt->text);
+        }
+        if (!opt->icon.isNull())
+        { // because of visualRect() below, here we suppose the direction is LTR
+          QRect iconRect = alignedRect(Qt::LeftToRight,
+                                       Qt::AlignVCenter | Qt::AlignLeft,
+                                       opt->iconSize,
+                                       cr);
+          if (!opt->text.isEmpty())
+            r = r.adjusted(0, 0 , opt->iconSize.width() + lspec.tispace, 0) | iconRect;
+          else
+            r = iconRect;
+        }
+        r.adjust(-2, -2, 2, 2);
+        r = r.intersected(opt->rect);
+        r = visualRect(opt->direction, opt->rect, r);
+        return r;
+      }
       else
         return QCommonStyle::subElementRect(element,option,widget);
     }
@@ -11787,12 +11914,13 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
       label_spec lspec = getLabelSpec("LineEdit");
-      const size_spec sspec = getSizeSpec("LineEdit");
+      size_spec sspec = getSizeSpec("LineEdit");
       /* no frame when editing itemview texts */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+        sspec.incrementW = false;
       }
       else if (widget)
       {
@@ -11801,6 +11929,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           lspec.left = lspec.right = qMin(lspec.left,2);
+          sspec.incrementW = false;
         }
         else
         {
@@ -11809,6 +11938,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
             lspec.left = lspec.right = qMin(lspec.left,2);
+            sspec.incrementW = false;
           }
           if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
           {
@@ -11817,21 +11947,26 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           }
         }
       }
+      bool isSpinBox(false);
       if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
       {
+        isSpinBox = true;
         lspec.right = 0;
         if (!tspec_.vertical_spin_indicators)
         {
           QString maxTxt = spinMaxText(p);
           if (maxTxt.isEmpty() 
               || option->rect.width() < textSize(p->font(),maxTxt,false).width() + fspec.left
+                                        + (sspec.incrementW ? sspec.minW : 0)
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && p->width() < option->rect.width() + 2*tspec_.spin_button_width + getFrameSpec("IndicatorSpinBox").right))
+                  && p->width() < option->rect.width() + 2*tspec_.spin_button_width
+                                                       + getFrameSpec("IndicatorSpinBox").right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
             lspec.left = 0;
+            sspec.incrementW = false;
             if (p->buttonSymbols() == QAbstractSpinBox::NoButtons)
               lspec.right = 0;
           }
@@ -11845,21 +11980,27 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         {
           fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
           lspec.left = 0;
+          sspec.incrementW = false;
         }
       }
+      bool rtl(option->direction == Qt::RightToLeft);
       lspec.top = lspec.bottom = 0;
       QRect rect = labelRect(option->rect, fspec, lspec);
+      if (sspec.incrementW)
+      {
+        if (rtl && !isSpinBox)
+          rect.adjust(0,0,-sspec.minW,0);
+        else
+          rect.adjust(sspec.minW,0,0,0);
+      }
 
       /* in these cases there are capsules */
       if (widget)
       {
         if (QComboBox *cb = qobject_cast<QComboBox*>(widget->parentWidget()))
         {
-          rect.adjust(option->direction == Qt::RightToLeft ? -fspec.left : 0,
-                      0,
-                      option->direction == Qt::RightToLeft ? 0 : fspec.right,
-                      0);
-          if (option->direction == Qt::RightToLeft)
+          rect.adjust(rtl ? -fspec.left : 0, 0, rtl ? 0 : fspec.right, 0);
+          if (rtl)
           {
             const frame_spec fspec1 = getFrameSpec("ComboBox");
             if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
@@ -12399,6 +12540,7 @@ QRect Style::subControlRect(ComplexControl control,
       int sw = tspec_.spin_button_width;
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
+      const size_spec sspecLE = getSizeSpec("LineEdit");
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
@@ -12422,7 +12564,9 @@ QRect Style::subControlRect(ComplexControl control,
             {
               maxTxt = maxTxt + QLatin1Char(' ');
               int txtWidth = textSize(sb->font(),maxTxt,false).width();
-              int rightFrame = w-txtWidth-2*sw-fspecLE.left-2; // 2 for padding
+              int rightFrame = w - txtWidth - 2*sw
+                               - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
+                               - 2; // for padding
               if (fspec.right > rightFrame)
               {
                 sw = 16;
@@ -12704,6 +12848,7 @@ QRect Style::subControlRect(ComplexControl control,
             }
           }
         }
+        /* Falls through. */
 
         case SC_SliderHandle : {
           if (opt)
@@ -12723,6 +12868,7 @@ QRect Style::subControlRect(ComplexControl control,
           }
 
         }
+        /* Falls through. */
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
       }
@@ -12778,6 +12924,7 @@ QRect Style::subControlRect(ComplexControl control,
           }
 
         }
+        /* Falls through. */
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
       }
@@ -12978,8 +13125,9 @@ QRect Style::subControlRect(ComplexControl control,
           else
             lspec.left = 0;
         }
-        QFont f = QApplication::font();
+        QFont f;
         if (widget) f = widget->font();
+        else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
         QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
         int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
@@ -13030,6 +13178,7 @@ QRect Style::subControlRect(ComplexControl control,
         }
       }
     }
+    /* Falls through. */
 
     default : return QCommonStyle::subControlRect(control,option,subControl,widget);
   }
@@ -14096,14 +14245,15 @@ void Style::renderLabel(
                         int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
                         const QPixmap &px,
                         QSize iconSize,
-                        const Qt::ToolButtonStyle tialign // relative positions of text and icon
+                        const Qt::ToolButtonStyle tialign, // relative positions of text and icon
+                        bool centerLoneIcon // centered icon with empty text?
                        ) const
 {
   // compute text and icon rect
   QRect r;
   if (/*!isPlasma_ &&*/ // we ignore Plasma text margins just for push and tool buttons and menubars
       tialign != Qt::ToolButtonIconOnly
-      && !text.isEmpty())
+      && (!text.isEmpty() || !centerLoneIcon))
     r = labelRect(bounds,fspec,lspec);
   else
     r = interiorRect(bounds,fspec);
@@ -14150,7 +14300,7 @@ void Style::renderLabel(
                         r);
   }
 
-  if (text.isEmpty())
+  if (text.isEmpty() && centerLoneIcon)
   {
     ricon = alignedRect(ld,
                         Qt::AlignCenter,

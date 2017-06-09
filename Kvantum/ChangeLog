@@ -8,6 +8,9 @@ V0.10.5
  * Ensure total transparency for the last frame of the transient scrollbar animation.
  * Don't let transient scrollbars overlap the frames of their views.
  * Localization.
+ * Changed the keys "size.minwidth" and "size.minheight" to "min_width" and "min_height" respectively and added support for setting their values in terms of app font height and also as increments.
+ * Ability to set frame expansion in terms of app font height (for total roundness to be independent of font size).
+ * Suppressed GCC7 compilation warnings about "-Wimplicit-fallthrough=". (Red Hat again! Do they think people are stupid?)
 
 V0.10.4
 ---------

@@ -157,7 +157,7 @@ frame.expanded.left=1
 frame.expanded.right=1
 text.press.color=black
 text.toggle.color=black
-frame.expansion=54
+frame.expansion=3.6font
 indicator.size=10
 
 [TabFrame]

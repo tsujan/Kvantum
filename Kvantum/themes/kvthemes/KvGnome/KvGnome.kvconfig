@@ -110,6 +110,8 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+min_width=+0.2font
+min_height=+0.2font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -218,6 +220,8 @@ text.normal.color=#0000007d
 text.focus.color=#000000b4
 text.toggle.color=black
 text.bold=true
+min_width=4font
+min_height=2.3font
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -322,6 +326,7 @@ text.focus.color=black
 text.press.color=white
 text.toggle.color=white
 text.shadow=false
+min_height=0
 
 [Splitter]
 indicator.size=32
@@ -354,7 +359,6 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-size.minheight=22
 text.normal.color=black
 text.focus.color=white
 text.margin.top=2
@@ -366,6 +370,8 @@ frame.bottom=2
 frame.left=2
 frame.right=2
 text.shadow=false
+min_width=0
+min_height=0
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -390,6 +396,8 @@ text.margin.bottom=2
 text.normal.color=black
 text.focus.color=black
 text.shadow=false
+min_width=0
+min_height=0
 
 [TitleBar]
 inherits=PanelButtonCommand
@@ -413,8 +421,6 @@ frame.left=2
 frame.right=2
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 text.normal.color=black
 text.shadow=false
 

@@ -15,10 +15,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QVariant>
 #include <QSettings>
 #include <QFile>
-#include <QStringList>
+#include <QApplication>
 #include "ThemeConfig.h"
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
@@ -164,7 +163,17 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
       if (r.top || r.bottom || r.left || r.right)
       {
         v = getValue(name,"frame.expansion", i);
-        r.expansion = qMax(v.toInt(),0);
+        if (v.isValid())
+        {
+          QString value = v.toString();
+          if (value.endsWith("font"))
+          { // multiply by the app font height
+            r.expansion = qMax(value.left(value.length()-4).toFloat(), 0.0f)
+                          * QFontMetrics(QApplication::font()).height();
+          }
+          else
+            r.expansion = qMax(v.toInt(),0);
+        }
 
         if (r.expansion > 0)
         {
@@ -387,13 +396,35 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   QVariant v = getValue(name, "inherits");
   QString i = v.toString();
 
-  v = getValue(name,"size.minheight", i);
+  v = getValue(name,"min_height", i);
   if (v.isValid())
-    r.minH = qMax(v.toInt(),0);
+  {
+    QString value = v.toString();
+    if (value.startsWith("+"))
+      r.incrementH = true;
+    if (value.endsWith("font"))
+    { // multiply by the app font height
+      r.minH = qMax(value.left(value.length()-4).toFloat(), 0.0f)
+               * QFontMetrics(QApplication::font()).height();
+    }
+    else
+      r.minH = qMax(v.toInt(),0);
+  }
 
-  v = getValue(name,"size.minwidth", i);
+  v = getValue(name,"min_width", i);
   if (v.isValid())
-    r.minW = qMax(v.toInt(),0);
+  {
+    QString value = v.toString();
+    if (value.startsWith("+"))
+      r.incrementW = true;
+    if (value.endsWith("font"))
+    { // multiply by the app font height
+      r.minW = qMax(value.left(value.length()-4).toFloat(), 0.0f)
+               * QFontMetrics(QApplication::font()).height();
+    }
+    else
+      r.minW = qMax(v.toInt(),0);
+  }
 
   sSpecs_[elementName] = r;
   return r;

@@ -313,7 +313,6 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-size.minheight=22
 text.normal.color=black
 text.focus.color=white
 text.margin.top=0
@@ -370,8 +369,6 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 text.normal.color=black
 frame.expansion=0
 

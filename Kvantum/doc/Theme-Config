@@ -687,9 +687,9 @@ frame.expanded.right              integer             The same as above but for 
                                                       frame sizes, the ordinary frame sizes
                                                       will be used for expanded frames.
 
-frame.expansion                   integer             A positive value will expand the
-                                                      frames until the corner frames meet
-                                                      each other either vertically or
+frame.expansion                   integer             A positive value (in px) will expand the
+                                  or                  frames until the corner frames meet
+                                  DECIMALfont         each other either vertically or
                                                       horizontally, provided that at least
                                                       the height or the width of the widget
                                                       is not greater than it. With appropriate
@@ -697,6 +697,13 @@ frame.expansion                   integer             A positive value will expa
                                                       making corners completely rounded. Its
                                                       value is zero by default. Read the file
                                                       "Theme-Making.pdf" for more explanation.
+
+                                                      The string "font" can be appended to the
+                                                      value (without quotes and space), in
+                                                      which case, the value will be multiplied
+                                                      by the height of the app font (in px) and
+                                                      could also be a decimal (as in
+                                                      "frame.expansion=2.8font").
 
 frame.patternsize                 integer             The frame pattern size. Used for tiling
                                                       the frame of a widget with a pattern. A
@@ -771,9 +778,30 @@ text.shadow.alpha                 integer (0-255)     The opacity of the text sh
 
 text.shadow.depth                 integer             The text shadow depth.
 
-size.minwidth
-size.minheight                    integer             Minimum/fixed width or height
-                                                      of a menu/menuitem, for example.
+min_width
+min_height                        integer             Minimum width or height (in px). They
+                                  or                  have meaning only for menuitems, menubar
+                                  DECIMALfont         items, push and tool buttons, tabs,
+                                                      line-edits, combo boxes, spin boxes
+                                                      (only for their height) and, sometimes,
+                                                      view items (only for their height).
+                                                      
+                                                      The string "font" can be appended to the
+                                                      value (without quotes and space), in
+                                                      which case, the value will be multiplied
+                                                      by the height of the app font (in px)
+                                                      and could also be a decimal (as in
+                                                      "min_height=2.3font").
+                                                      
+                                                      If "+" is prepended to the value (without
+                                                      quotes and space), the value will be
+                                                      added to the width/height of the widget,
+                                                      instead of being considered as the
+                                                      minimum. For example, "min_width=+0.5font"
+                                                      adds half the font height to the widget
+                                                      width. Please do not mistake "+" for a
+                                                      positive value here; the values are
+                                                      always considered to be nonnegative.
 =============================================================
 
 

@@ -329,7 +329,6 @@ frame=true
 frame.element=progress-pattern
 interior.element=progress-pattern
 indicator.element=menuitem
-size.minheight=22
 text.normal.color=white
 text.focus.color=white
 text.margin.top=1
@@ -386,8 +385,6 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-size.minheight=22
-size.minwidth=22
 text.normal.color=white
 frame.expansion=0
 

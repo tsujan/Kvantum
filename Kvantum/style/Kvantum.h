@@ -212,7 +212,8 @@ class Style : public QCommonStyle {
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
                      const QPixmap &px = QPixmap(), // should have the correct size with HDPI
                      QSize iconSize = QSize(0,0),
-                     const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // relative positions of text and icon
+                     const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // relative positions of text and icon
+                     bool centerLoneIcon = true // centered icon with empty text?
                     ) const;
 
     /* Draws the lineedit of an editable combobox. */

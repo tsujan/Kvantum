@@ -63,6 +63,7 @@ inherits=PanelButtonCommand
 frame=true
 interior=true
 text.press.color=white
+min_height=1.5font
 
 [TreeExpander]
 indicator.size=10
@@ -232,8 +233,8 @@ text.margin.left=4
 text.margin.right=4
 text.margin.top=1
 text.margin.bottom=1
-size.minheight=30
 indicator.size=10
+min_height=2font
 
 [SizeGrip]
 inherits=PanelButtonCommand
