@@ -4994,6 +4994,16 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
+          if ((ivStatus.startsWith("pressed") || ivStatus.startsWith("toggled"))
+              && !enoughContrast(col, opt->palette.color(QPalette::HighlightedText)))
+          {
+            /* Wiresharksets sets the whole color of "QStyleOptionViewItem::backgroundBrush".
+               While there's no guarantee for a high contrast between that color and the
+               highlighted text color for active items, Wiresharksets doesn't style active
+               items itself. This workaround is for such cases of incomplete hard-coded styling. */
+            col = opt->palette.brush(QPalette::Normal, QPalette::Highlight).color();
+            brush.setColor(col);
+          }
           if (col.alpha() < 255)
           {
             /* this is for deciding on the text color at CE_ItemViewItem later */
