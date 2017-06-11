@@ -4997,9 +4997,9 @@ void Style::drawPrimitive(PrimitiveElement element,
           if ((ivStatus.startsWith("pressed") || ivStatus.startsWith("toggled"))
               && !enoughContrast(col, opt->palette.color(QPalette::HighlightedText)))
           {
-            /* Wiresharksets sets the whole color of "QStyleOptionViewItem::backgroundBrush".
+            /* Wireshark sets the whole color of "QStyleOptionViewItem::backgroundBrush".
                While there's no guarantee for a high contrast between that color and the
-               highlighted text color for active items, Wiresharksets doesn't style active
+               highlighted text color for active items, Wireshark doesn't style active
                items itself. This workaround is for such cases of incomplete hard-coded styling. */
             col = opt->palette.brush(QPalette::Normal, QPalette::Highlight).color();
             brush.setColor(col);
