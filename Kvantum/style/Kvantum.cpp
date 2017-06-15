@@ -5208,8 +5208,20 @@ void Style::drawControl(ControlElement element,
           int state = 1;
           if (!(option->state & State_Enabled))
             state = 0;
-          else if (status.startsWith("toggled") || status.startsWith("pressed"))
-            state = 2;
+          else if (status.startsWith("pressed"))
+          { // only if it exists (focus color seems more natural)
+            if (lspec.pressColor.isEmpty())
+              state = 2;
+            else
+              state = 3;
+          }
+          else if (status.startsWith("toggled"))
+          { // only if it exists (focus color seems more natural)
+            if (lspec.toggleColor.isEmpty())
+              state = 2;
+            else
+              state = 4;
+          }
 
           bool rtl(option->direction == Qt::RightToLeft);
 
@@ -5610,14 +5622,52 @@ void Style::drawControl(ControlElement element,
         int state = 1;
         if (!(option->state & State_Enabled))
           state = 0;
+        /* press and toggle text colors are used only if
+           they exist (focus color seems more natural) */
 #if QT_VERSION < 0x050000
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
+        else if (status.startsWith("pressed"))
+        {
+          if (lspec.pressColor.isEmpty())
+            state = 2;
+          else
+            state = 3;
+        }
+        else if (status.startsWith("toggled"))
+        {
+          if (lspec.toggleColor.isEmpty())
+            state = 2;
+          else
+            state = 4;
+        }
 #else
-        else if ((!styleHint(SH_MenuBar_MouseTracking, opt, widget) && status.startsWith("pressed"))
-                  || (styleHint(SH_MenuBar_MouseTracking, opt, widget)
-                      && (status.startsWith("toggled") || status.startsWith("pressed"))))
+        else
+        {
+          if (styleHint(SH_MenuBar_MouseTracking, opt, widget))
+          {
+            if (status.startsWith("pressed"))
+            {
+              if (lspec.pressColor.isEmpty())
+                state = 2;
+              else
+                state = 3;
+            }
+            else if (status.startsWith("toggled"))
+            {
+              if (lspec.toggleColor.isEmpty())
+                state = 2;
+              else
+                state = 4;
+            }
+          }
+          else if (status.startsWith("pressed"))
+          {
+            if (lspec.pressColor.isEmpty())
+              state = 2;
+            else
+              state = 3;
+          }
+        }
 #endif
-          state = 2;
         renderLabel(option,painter,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,

@@ -308,10 +308,21 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     r.normalColor = v.toString();
     v = getValue(elementName,"text.focus.color", i);
     r.focusColor = v.toString();
-    v = getValue(elementName,"text.press.color", i);
-    r.pressColor = v.toString();
-    v = getValue(elementName,"text.toggle.color", i);
-    r.toggleColor = v.toString();
+    if (elementName == "MenuItem" || elementName == "MenuBarItem")
+    { // no inheritance because the (fallback) focus color seems more natural
+      v = getValue(elementName,"text.press.color");
+      r.pressColor = v.toString();
+
+      v = getValue(elementName,"text.toggle.color");
+      r.toggleColor = v.toString();
+    }
+    else
+    {
+      v = getValue(elementName,"text.press.color", i);
+      r.pressColor = v.toString();
+      v = getValue(elementName,"text.toggle.color", i);
+      r.toggleColor = v.toString();
+    }
 
     v = getValue(elementName,"text.bold", i);
     r.boldFont = v.toBool();

@@ -11,6 +11,7 @@ V0.10.5
  * Changed the keys "size.minwidth" and "size.minheight" to "min_width" and "min_height" respectively and added support for setting their values in terms of app font height and also as increments.
  * Ability to set frame expansion in terms of app font height (for total roundness to be independent of font size).
  * Suppressed GCC7 compilation warnings about "-Wimplicit-fallthrough=". (Red Hat again! Do they think people are stupid?)
+ * Added optional toggle and press text colors for menu(-bar) items. The fallback is focus color.
 
 V0.10.4
 ---------
