@@ -7240,8 +7240,8 @@ void Style::drawControl(ControlElement element,
         bool hasFrame(sa && (sa->frameStyle() & QFrame::StyledPanel)); // see Qt -> qabstractscrollarea.cpp
         if (option->direction == Qt::RightToLeft)
         {
-          if (option->state & State_Horizontal) // because of the way we rotate it
-          {
+          if (option->state & State_Horizontal)
+          { // 90 degrees clockwise + horizontal mirroring
             if (hasFrame)
               r.adjust(0, space, -space, -space);
             else
@@ -9347,6 +9347,8 @@ void Style::drawComplexControl(ComplexControl control,
         if (!tspec_.scroll_arrows && (horiz ? r.width() == w-2*extent : r.height() == h-2*extent))
           arrowSize = extent;
 
+        bool rtl(option->direction == Qt::RightToLeft);
+
         /*******************
           Grrove and Slider
         ********************/
@@ -9367,8 +9369,64 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          if (!isTransient
-              && r.width() <= tspec_.scroll_width) // no disabled groove with transience
+          if (isTransient)
+          {
+            if (tspec_.transient_groove)
+            {
+              /* draw a translucent flat background appropriately
+                 (see CE_ScrollBarSlider for the same conditions) */
+              int space = r.width() - tspec_.scroll_width;
+              if (space > 0) // should be equal to PM_DefaultFrameWidth
+              {
+                QRect groove = r;
+                QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(getParent(widget,2));
+                if (sa && (sa->frameStyle() & QFrame::StyledPanel))
+                {
+                  if (!rtl
+                      || horiz) // 90 degrees clockwise + horizontal mirroring
+                  {
+                    groove.adjust(0, space, -space, -space);
+                  }
+                  else
+                    groove.adjust(space, space, 0, -space);
+
+                  /* a 1px line is drawn below */
+                  if (horiz)
+                    o.rect.adjust(0, 1, 0, 0);
+                  else
+                  {
+                    if (rtl)
+                      o.rect.adjust(0, 0, -1, 0);
+                    else
+                      o.rect.adjust(1, 0, 0, 0);
+                  }
+                }
+                else
+                { // without border, make the groove tighter
+                  --space;
+                  if (!rtl || horiz)
+                  {
+                    groove.adjust(space, 0, 0, 0);
+                  }
+                  else
+                    groove.adjust(0, 0, -space, 0);
+                }
+
+                QColor col = option->palette.color(QPalette::Base);
+                col.setAlphaF(0.75);
+                painter->fillRect(groove, col);
+
+                col = option->palette.color(QPalette::Text);
+                col.setAlphaF(0.2);
+                painter->setPen(col);
+                if (!rtl || horiz)
+                  painter->drawLine(groove.topLeft(), groove.bottomLeft());
+                else
+                  painter->drawLine(groove.topRight(), groove.bottomRight());
+              }
+            }
+          }
+          else if (r.width() <= tspec_.scroll_width) // no disabled groove with transience
           {
             if (!(option->state & State_Enabled))
             {
@@ -9440,7 +9498,7 @@ void Style::drawComplexControl(ComplexControl control,
           if (arrowSize > 0)
           {
             if (horiz)
-              o.rect = QRect(option->direction == Qt::RightToLeft ? x : x+w-arrowSize, y,
+              o.rect = QRect(rtl ? x : x+w-arrowSize, y,
                              arrowSize, arrowSize);
             else
               o.rect = QRect(x, y+h-arrowSize, arrowSize, arrowSize);
@@ -9457,7 +9515,7 @@ void Style::drawComplexControl(ComplexControl control,
           if (arrowSize > 0)
           {
             if (horiz)
-              o.rect = QRect(option->direction == Qt::RightToLeft ? x+w-arrowSize : x, y,
+              o.rect = QRect(rtl ? x+w-arrowSize : x, y,
                              arrowSize, arrowSize);
             else
               o.rect = QRect(x, y, arrowSize, arrowSize);

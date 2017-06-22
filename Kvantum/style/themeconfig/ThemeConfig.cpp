@@ -706,6 +706,8 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","transient_scrollbar");
   r.transient_scrollbar = v.toBool();
+  v = getValue("General","transient_groove");
+  r.transient_groove = v.toBool();
 
   /* for technical reasons, we always set scrollbar_in_view
      to false with transient scrollbars and (try to) put

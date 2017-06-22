@@ -12,6 +12,7 @@ V0.10.5
  * Ability to set frame expansion in terms of app font height (for total roundness to be independent of font size).
  * Suppressed GCC7 compilation warnings about "-Wimplicit-fallthrough=". (Red Hat again! Do they think people are stupid?)
  * Added optional toggle and press text colors for menu(-bar) items. The fallback is focus color.
+ * Added a key for a 25% translucent background for transient scrollbars.
 
 V0.10.4
 ---------
