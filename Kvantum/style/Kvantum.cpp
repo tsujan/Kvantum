@@ -1484,6 +1484,12 @@ void Style::polish(QWidget *widget)
       }
     }
   }
+
+  if (!noComposite_ && settings_->getCompositeSpec().menu_shadow_depth>0 && qobject_cast<QMenu*>(widget))
+  {
+    widget->removeEventFilter(this);
+    widget->installEventFilter(this);
+  }
 }
 
 #if QT_VERSION < 0x040806
@@ -1715,6 +1721,10 @@ void Style::unpolish(QWidget *widget)
       }
       //widget->clearMask();
     }
+  }
+  if (!noComposite_ && settings_->getCompositeSpec().menu_shadow_depth>0 && qobject_cast<QMenu*>(widget))
+  {
+    widget->removeEventFilter(this);
   }
 }
 
@@ -2240,13 +2250,32 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QMenu*>(o))
       {
-        if (!noComposite_ && w->layoutDirection() == Qt::RightToLeft
-            && menuHShadows_.count() == 2
-            && qobject_cast<QMenu*>(getParent(w,1)))
-        { // correct the submenu position
-          w->move(w->x() + menuHShadows_.at(0)
-                         - (getMenuMargin(true) - menuHShadows_.at(1)),
-                  w->y());
+        if (!noComposite_)
+        {
+          if(w->layoutDirection() == Qt::RightToLeft
+              && menuHShadows_.count() == 2
+              && qobject_cast<QMenu*>(getParent(w,1)))
+          { // correct the submenu position
+            w->move(w->x() + menuHShadows_.at(0)
+                           - (getMenuMargin(true) - menuHShadows_.at(1)),
+                    w->y());
+          }
+          else
+          {
+            // Issue #128 If using Kvantum's shadows, then the menu is
+            // not placed in the correct position - due to the shadows.
+            // To fix this, we move the menu.
+            const theme_spec tspec_now = settings_->getCompositeSpec();
+            if (tspec_now.menu_shadow_depth>0)
+            {
+              if (w->layoutDirection() == Qt::RightToLeft)
+                w->move(w->x()+tspec_now.menu_shadow_depth+1,
+                        w->y()-qMax(0, (tspec_now.menu_shadow_depth-2)));
+              else
+                w->move(w->x()-qMax(0, (tspec_now.menu_shadow_depth+1)),
+                        w->y()-qMax(0, (tspec_now.menu_shadow_depth-2)));
+            }
+          }
         }
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
@@ -10281,6 +10310,15 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         return 0; // RTL submenu positioning is a mess in Qt5
 #endif
       int so = tspec_.submenu_overlap;
+      // Issue #128 If we are going to move menus, then set overlap
+      // to 0??
+      if (!noComposite_)
+      {
+        const theme_spec tspec_now = settings_->getCompositeSpec();
+        if (tspec_now.menu_shadow_depth>0)
+          return 0;
+      }
+
       if (so >= 0)
       {
         /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
