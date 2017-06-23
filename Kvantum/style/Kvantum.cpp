@@ -221,10 +221,14 @@ Style::Style() : QCommonStyle()
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
       tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-      noComposite_ = true;
-      // without compositing, these keys should be corrected
-      tspec_.translucent_windows = false;
-      tspec_.blurring = false;
+      if (QByteArray("unity") == desktop)
+      {
+        // Link 'respect_DE' and composite settings only for Unity. Issue #128
+        noComposite_ = true;
+        // without compositing, these keys should be corrected
+        tspec_.translucent_windows = false;
+        tspec_.blurring = false;
+      }
     }
     else if (desktop == QByteArray("kde"))
     {
