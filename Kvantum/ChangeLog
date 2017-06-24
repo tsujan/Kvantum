@@ -13,6 +13,7 @@ V0.10.5
  * Suppressed GCC7 compilation warnings about "-Wimplicit-fallthrough=". (Red Hat again! Do they think people are stupid?)
  * Added optional toggle and press text colors for menu(-bar) items. The fallback is focus color.
  * Added a key for a 25% translucent background for transient scrollbars.
+ * Compensated for menu shadows when positioning menus (thanks to Craig Drummond).
 
 V0.10.4
 ---------

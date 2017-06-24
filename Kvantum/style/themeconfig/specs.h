@@ -413,7 +413,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.animate_states = false;
   tspec.no_window_pattern = false;
   tspec.menu_shadow_depth = 0;
-  tspec.submenu_overlap = -1;
+  tspec.submenu_overlap = 0;
   tspec.submenu_delay = 250;
   tspec.tooltip_shadow_depth = 0;
   tspec.splitter_width = 7;

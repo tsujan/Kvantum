@@ -340,12 +340,12 @@ Style::Style() : QCommonStyle()
 
   if (tspec_.blurring)
   {
-    QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+    getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
     const frame_spec fspec = getFrameSpec("ToolTip");
     int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
     thickness += tspec_.tooltip_shadow_depth;
     QList<int> tooltipS = getShadow("ToolTip", thickness);
-    blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+    blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
   }
 }
 
@@ -676,48 +676,13 @@ int Style::getMenuMargin(bool horiz) const
   return margin;
 }
 
-// This is also used to adjust submenu position horizontally when menus have shadow.
-void Style::getMenuHShadows()
+QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
-  if (menuHShadows_.count() == 2)
-    return;
-
-  QSvgRenderer *renderer = 0;
-  qreal divisor = 0;
-  menuHShadows_ << 0 << 0;  // [left, right]
-  QList<QString> direction;
-  direction << "left" << "right";
-  frame_spec fspec = getFrameSpec("Menu");
-  QString element = fspec.element;
-
-  for (int i = 0; i < 2; ++i)
+  if (widgetName == "Menu"
+      && menuShadows_.count() == 4)
   {
-    if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
-      renderer = themeRndr_;
-    else renderer = defaultRndr_;
-    if (renderer)
-    {
-      QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
-      divisor = br.width();
-      if (qRound(divisor))
-      {
-        if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-          renderer = themeRndr_;
-        else if (defaultRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
-          renderer = defaultRndr_;
-        else renderer = 0;
-        if (renderer)
-        {
-          br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-          menuHShadows_[i] = getMenuMargin(true)*(br.width()/divisor);
-        }
-      }
-    }
+      return menuShadows_;
   }
-}
-
-QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thicknessV)
-{
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
   QList<int> shadow;
@@ -729,12 +694,6 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
 
   for (int i = 0; i < 4; ++i)
   {
-    if (widgetName == "Menu" && i%2 == 0 // left and right
-        && menuHShadows_.count() == 2)
-    {
-      shadow[i] = menuHShadows_[i/2];
-      continue;
-    }
     if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-"+direction[i]))
       renderer = themeRndr_;
     else renderer = defaultRndr_;
@@ -758,10 +717,8 @@ QList<int> Style::getShadow (const QString &widgetName, int thicknessH, int thic
     }
   }
 
-  if (widgetName == "Menu" && menuHShadows_.isEmpty())
-  {
-    menuHShadows_ << shadow[0] << shadow[2];
-  }
+  if (widgetName == "Menu")
+    menuShadows_ = shadow;
 
   return shadow; // [left, top, right, bottom]
 }
@@ -1115,12 +1072,12 @@ void Style::polish(QWidget *widget)
             {
               if (!blurHelper_)
               {
-                QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+                getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
                 const frame_spec fspec = getFrameSpec("ToolTip");
                 int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
                 thickness += tspec_now.tooltip_shadow_depth;
                 QList<int> tooltipS = getShadow("ToolTip", thickness);
-                blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+                blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
               }
               if (blurHelper_)
                 blurHelper_->registerWidget(widget);
@@ -1441,14 +1398,12 @@ void Style::polish(QWidget *widget)
     {
       if (qobject_cast<QMenu*>(widget))
       {
-        getMenuHShadows();
-        /* RTL submenus aren't positioned correctly. To fix that,
-           we should move them but the RTL property isn't set yet. */
-        if (qobject_cast<QMenu*>(pw))
-        {
-          widget->removeEventFilter(this);
-          widget->installEventFilter(this);
-        }
+        getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
+        /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
+           the RTL property isn't set yet, we should move them later. On the other hand,
+           menus should be moved to compensate for the offset created by their shadows. */
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
       }
 
       if (tspec_.isX11)
@@ -1471,12 +1426,11 @@ void Style::polish(QWidget *widget)
       {
         if (!blurHelper_ && tspec_now.popup_blurring)
         {
-          QList<int> menuS = getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
           const frame_spec fspec = getFrameSpec("ToolTip");
           int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
           thickness += tspec_now.tooltip_shadow_depth;
           QList<int> tooltipS = getShadow("ToolTip", thickness);
-          blurHelper_ = new BlurHelper(this,menuS,tooltipS);
+          blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
         }
         /* blurHelper_ may exist because of blurring hard-coded translucency */
         if (blurHelper_ && tspec_now.popup_blurring)
@@ -1703,7 +1657,7 @@ void Style::unpolish(QWidget *widget)
         blurHelper_->unregisterWidget(widget);
       if (translucentWidgets_.contains(widget))
       {
-        if (qobject_cast<QMenu*>(widget) && qobject_cast<QMenu*>(getParent(widget,1)))
+        if (qobject_cast<QMenu*>(widget))
           widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_PaintOnScreen, false);
         widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -2240,13 +2194,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QMenu*>(o))
       {
-        if (!noComposite_ && w->layoutDirection() == Qt::RightToLeft
-            && menuHShadows_.count() == 2
-            && qobject_cast<QMenu*>(getParent(w,1)))
-        { // correct the submenu position
-          w->move(w->x() + menuHShadows_.at(0)
-                         - (getMenuMargin(true) - menuHShadows_.at(1)),
-                  w->y());
+        if (!noComposite_
+            && menuShadows_.count() == 4)
+        { // compensate for the offset created by the shadow
+          int X = w->x();
+          if (w->layoutDirection() == Qt::RightToLeft)
+          { // see explanations for ltr below
+            X += menuShadows_.at(2);
+            if (QApplication::activePopupWidget())
+            {
+              X += menuShadows_.at(0)
+                   - getMenuMargin(true); // workaround for an old Qt bug
+            }
+            w->move(X, w->y() - menuShadows_.at(1));
+          }
+          else // ltr
+          {
+            X -= menuShadows_.at(0); // left shadow
+            if (QApplication::activePopupWidget()) // "magical" condition for a submenu
+              X -= menuShadows_.at(2); // right shadow of the left menu
+            w->move(X,
+                    w->y() - menuShadows_.at(1)); // top shadow
+          }
         }
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
@@ -10281,35 +10250,10 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         return 0; // RTL submenu positioning is a mess in Qt5
 #endif
       int so = tspec_.submenu_overlap;
-      if (so >= 0)
-      {
-        /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
-           equal to PM_MenuHMargin. So, we make the overlap accurate here. */
-        so -= getMenuMargin(true);
-        if (!noComposite_
-            && settings_->getCompositeSpec().composite
-            && menuHShadows_.count() == 2
-            && (!qobject_cast<const QMenu*>(widget)
-                || translucentWidgets_.contains(widget)
-                || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
-        {
-          so += (menuHShadows_.at(0) + menuHShadows_.at(1));
-        }
-        return -so;
-      }
-      else
-      {
-        if (!noComposite_
-            && settings_->getCompositeSpec().composite
-            && (!qobject_cast<const QMenu*>(widget)
-                || translucentWidgets_.contains(widget)
-                || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)))
-        {
-          const frame_spec fspec = getFrameSpec("Menu");
-          return -qMax(fspec.left,fspec.right);
-        }
-        return 0;
-      }
+      /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
+         equal to PM_MenuHMargin. So, we make the overlap accurate here. */
+      so -= getMenuMargin(true);
+      return -so;
     }
 
     case PM_MenuHMargin : 

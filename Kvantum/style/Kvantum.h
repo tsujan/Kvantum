@@ -264,7 +264,6 @@ class Style : public QCommonStyle {
     /* Get menu margins, including its shadow. */
     int getMenuMargin(bool horiz) const;
     /* Get pure shadow dimensions of menus/tooltips. */
-    void getMenuHShadows();
     QList<int> getShadow(const QString &widgetName, int thicknessH, int thicknessV);
     QList<int> getShadow(const QString &widgetName, int thickness) {
       return getShadow(widgetName,thickness,thickness);
@@ -351,9 +350,9 @@ class Style : public QCommonStyle {
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
     int pixelRatio_;
 
-    /* For not getting the menu horizontal shadows repeatedly.
-       They're used to position submenus */
-    QList<int> menuHShadows_;
+    /* For not getting the menu shadows repeatedly.
+       They're used to position submenus correctly. */
+    QList<int> menuShadows_;
 
     /* Is this DE GTK-based? Currently Gnome, Unity and Pantheon are supported. */
     bool gtkDesktop_;

@@ -631,7 +631,7 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","submenu_overlap");
   if (v.isValid()) // -1 by default
-    r.submenu_overlap = qMin(qMax(v.toInt(),-1),16);
+    r.submenu_overlap = qMin(qMax(v.toInt(),0),16);
 
   v = getValue("General","submenu_delay");
   if (v.isValid()) // 250 by default
