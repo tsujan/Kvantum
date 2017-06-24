@@ -1096,7 +1096,7 @@ some apps set it themeselves.</string>
                     <property name="toolTip">
                      <string>The horizontal overlap between a submenu and its parent.
 
--1 means automatic.</string>
+0 by default.</string>
                     </property>
                     <property name="text">
                      <string>Submenu overlap: </string>
@@ -1108,19 +1108,16 @@ some apps set it themeselves.</string>
                     <property name="toolTip">
                      <string>The horizontal overlap between a submenu and its parent.
 
--1 means automatic.</string>
+0 by default.</string>
                     </property>
                     <property name="suffix">
                      <string> px</string>
-                    </property>
-                    <property name="minimum">
-                     <number>-1</number>
                     </property>
                     <property name="maximum">
                      <number>16</number>
                     </property>
                     <property name="value">
-                     <number>-1</number>
+                     <number>0</number>
                     </property>
                    </widget>
                   </item>

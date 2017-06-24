@@ -758,10 +758,10 @@ void KvantumManager::defaultThemeButtons()
     theSize = qMin(qMax(theSize,2), 16);
     ui->spinLayoutMargin->setValue (theSize);
 
-    theSize = -1;
+    theSize = 0;
     if (defaultSettings.contains ("submenu_overlap"))
         theSize = defaultSettings.value ("submenu_overlap").toInt();
-    theSize = qMin(qMax(theSize,-1), 16);
+    theSize = qMin(qMax(theSize,0), 16);
     ui->spinOverlap->setValue (theSize);
 
     theSize = 16;
@@ -1012,7 +1012,7 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("submenu_overlap"))
                 {
                     int theSize = themeSettings.value ("submenu_overlap").toInt();
-                    theSize = qMin(qMax(theSize,-1), 16);
+                    theSize = qMin(qMax(theSize,0), 16);
                     ui->spinOverlap->setValue (theSize);
                 }
                 if (themeSettings.contains ("spin_button_width"))

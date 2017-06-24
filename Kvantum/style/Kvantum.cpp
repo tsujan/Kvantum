@@ -2200,23 +2200,41 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (!noComposite_
             && menuShadows_.count() == 4)
-        { // compensate for the offset created by the shadow
+        {
+          /* compensate for the offset created by the shadow
+             (let's handle rtl separately) */
           int X = w->x();
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             X += menuShadows_.at(2);
-            if (QApplication::activePopupWidget())
+            if (QWidget *parentMenu = QApplication::activePopupWidget())
             {
-              X += menuShadows_.at(0)
-                   - getMenuMargin(true); // workaround for an old Qt bug
+              if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
+                  < w->mapToGlobal(QPoint(w->x(), w->y())).x())
+              {
+                X -= menuShadows_.at(2);
+              }
+              else
+              {
+                X += menuShadows_.at(0)
+                     - getMenuMargin(true); // workaround for an old Qt bug
+              }
             }
             w->move(X, w->y() - menuShadows_.at(1));
           }
           else // ltr
           {
             X -= menuShadows_.at(0); // left shadow
-            if (QApplication::activePopupWidget()) // "magical" condition for a submenu
-              X -= menuShadows_.at(2); // right shadow of the left menu
+            if (QWidget *parentMenu = QApplication::activePopupWidget()) // "magical" condition for a submenu
+            {
+              if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
+                  > w->mapToGlobal(QPoint(w->x(), w->y())).x())
+              { // there wasn't enough space to the right of the parent
+                X += menuShadows_.at(0);
+              }
+              else
+                X -= menuShadows_.at(2); // right shadow of the left menu
+            }
             w->move(X,
                     w->y() - menuShadows_.at(1)); // top shadow
           }
