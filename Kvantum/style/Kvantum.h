@@ -20,6 +20,8 @@
 
 #include <QCommonStyle>
 #include <QMap>
+#include <QItemDelegate>
+#include <QAbstractItemView>
 
 #include "shortcuthandler.h"
 #include "drag/windowmanager.h"
@@ -32,6 +34,49 @@
 class QSvgRenderer;
 
 namespace Kvantum {
+
+#if QT_VERSION >= 0x050000
+template <typename T> using WeakPointer = QPointer<T>;
+#else
+template <typename T> using WeakPointer = QWeakPointer<T>;
+#endif
+
+// Used only to give appropriate margins to combo popup items.
+// (Adapted from the Breeze style plugin.)
+class ComboBoxItemDelegate: public QItemDelegate
+{
+  public:
+    ComboBoxItemDelegate(int margin, QAbstractItemView *parent) :
+      QItemDelegate(parent),
+      proxy_(parent->itemDelegate())
+    {
+      margin_ = margin;
+    }
+
+    virtual ~ComboBoxItemDelegate(void) {}
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+    {
+      if (proxy_)
+        proxy_.data()->paint(painter, option, index);
+      else
+        QItemDelegate::paint(painter, option, index);
+    }
+
+    virtual QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index) const
+    {
+      QSize size(proxy_ ?  proxy_.data()->sizeHint(option, index)
+                        : QItemDelegate::sizeHint(option, index));
+      if (size.isValid())
+         size.rheight() += 2*margin_;
+      return size;
+    }
+
+  private:
+    WeakPointer<QAbstractItemDelegate> proxy_;
+    int margin_;
+};
+
 class Style : public QCommonStyle {
   Q_OBJECT
   Q_CLASSINFO("X-KDE-CustomElements","true")
@@ -113,6 +158,17 @@ class Style : public QCommonStyle {
     void forceButtonTextColor(const QWidget *widget, QColor col) const
     {
       forceButtonTextColor(const_cast<QWidget*>(widget), col);
+    }
+
+    bool hasParent(const QWidget *widget, const char *className) const
+    {
+      if (!widget) return false;
+      while ((widget = widget->parentWidget()))
+      {
+        if (widget->inherits(className))
+          return true;
+      }
+      return false;
     }
 
     enum CustomElements {

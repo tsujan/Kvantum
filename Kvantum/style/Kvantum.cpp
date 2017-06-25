@@ -35,7 +35,7 @@
 #include <QGroupBox>
 #include <QAbstractScrollArea>
 //#include <QAbstractButton>
-#include <QAbstractItemView>
+//#include <QAbstractItemView>
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
@@ -1191,6 +1191,23 @@ void Style::polish(QWidget *widget)
     {
       widget->removeEventFilter(this);
       widget->installEventFilter(this);
+    }
+    /* set an appropriate margin for combo popup items */
+    if (QComboBox *comboBox = qobject_cast<QComboBox*>(widget))
+    {
+      if(!hasParent(widget, "QWebView"))
+      {
+        QAbstractItemView *itemView(comboBox->view());
+        if(itemView && itemView->itemDelegate()
+           && itemView->itemDelegate()->inherits("QComboBoxDelegate"))
+        {
+          const frame_spec fspec = getFrameSpec("ItemView");
+          const label_spec lspec = getLabelSpec("ItemView");
+          int margin = qMax(qMax(fspec.top + lspec.top, fspec.bottom + lspec.bottom),
+                            qMax(fspec.left + lspec.left, fspec.right + lspec.right));
+          itemView->setItemDelegate(new ComboBoxItemDelegate(margin, itemView));
+        }
+      }
     }
   }
   else if (qobject_cast<QTabBar*>(widget))
