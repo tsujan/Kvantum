@@ -1009,6 +1009,18 @@ void Style::polish(QWidget *widget)
         if (!translucentWidgets_.contains(widget))
         {
           theme_spec tspec_now = settings_->getCompositeSpec();
+
+          if (widget->inherits("QComboBoxPrivateContainer")
+              && tspec_now.composite)
+          { // the generic frame may have round corners
+            if (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                /*&& !tspec_.combo_menu*/)
+            {
+              widget->setAttribute(Qt::WA_TranslucentBackground);
+            }
+            break;
+          }
+
 #if QT_VERSION < 0x050000
           if (!isOpaque_ && tspec_now.translucent_windows
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
@@ -1192,7 +1204,7 @@ void Style::polish(QWidget *widget)
       widget->removeEventFilter(this);
       widget->installEventFilter(this);
     }
-    /* set an appropriate margin for combo popup items */
+    /* set an appropriate vertical margin for combo popup items */
     if (QComboBox *comboBox = qobject_cast<QComboBox*>(widget))
     {
       if(!hasParent(widget, "QWebView"))
@@ -1200,12 +1212,9 @@ void Style::polish(QWidget *widget)
         QAbstractItemView *itemView(comboBox->view());
         if(itemView && itemView->itemDelegate()
            && itemView->itemDelegate()->inherits("QComboBoxDelegate"))
-        {
-          const frame_spec fspec = getFrameSpec("ItemView");
-          const label_spec lspec = getLabelSpec("ItemView");
-          int margin = qMax(qMax(fspec.top + lspec.top, fspec.bottom + lspec.bottom),
-                            qMax(fspec.left + lspec.left, fspec.right + lspec.right));
-          itemView->setItemDelegate(new ComboBoxItemDelegate(margin, itemView));
+        { // PM_FocusFrameVMargin is used for viewitems
+          itemView->setItemDelegate(new ComboBoxItemDelegate(pixelMetric(PM_FocusFrameVMargin),
+                                                             itemView));
         }
       }
     }
@@ -1630,9 +1639,11 @@ void Style::unpolish(QWidget *widget)
         if (qobject_cast<QMenu*>(widget)) break;
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
-        if (forcedTranslucency_.contains(widget)
-            && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-            && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+        if ((forcedTranslucency_.contains(widget)
+             && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
+             && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+            // was made translucent because of round corners
+            || widget->inherits("QComboBoxPrivateContainer"))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -1663,7 +1674,7 @@ void Style::unpolish(QWidget *widget)
              || qobject_cast<QSlider*>(widget)
              || qobject_cast<QLineEdit*>(widget)
              || qobject_cast<QAbstractScrollArea*>(widget)
-             || widget->inherits("QComboBoxPrivateContainer")
+             //|| widget->inherits("QComboBoxPrivateContainer") // done above
              || qobject_cast<QGroupBox*>(widget)
              || qobject_cast<QComboBox*>(widget))))
     {
@@ -3673,7 +3684,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!widget // it's NULL with QML
           || sa
           || widget->inherits("QWellArray") // color dialog's color rects
-          || widget->inherits("QComboBoxPrivateContainer")) // frame for combo menus
+          || widget->inherits("QComboBoxPrivateContainer")) // frame for combo popups
       {
         if (widget)
         {
@@ -3702,6 +3713,50 @@ void Style::drawPrimitive(PrimitiveElement element,
               }
             }
           }
+        }
+
+        if (widget->inherits("QComboBoxPrivateContainer")
+            && tspec_.combo_menu)
+        {
+          painter->fillRect(option->rect, option->palette.color(QPalette::Window));
+          painter->save();
+          QColor col = option->palette.color(QPalette::WindowText);
+          if (col.value() < 100)
+          {
+            col.setAlphaF(0.3);
+            painter->setPen(col);
+            painter->drawLine(option->rect.bottomLeft(), option->rect.bottomRight());
+
+            col.setAlphaF(0.3);
+            painter->setPen(col);
+            painter->drawLine(option->rect.topRight(), option->rect.bottomRight());
+
+            col.setAlphaF(0.15);
+            painter->setPen(col);
+            painter->drawLine(option->rect.topLeft(), option->rect.topRight());
+
+            col.setAlphaF(0.2);
+            painter->setPen(col);
+            painter->drawLine(option->rect.topLeft(), option->rect.bottomLeft());
+          }
+          else
+          {
+            col = option->palette.color(QPalette::Window);
+
+            painter->setPen(col.darker(150));
+            painter->drawLine(option->rect.bottomLeft(), option->rect.bottomRight());
+
+            painter->setPen(col.darker(140));
+            painter->drawLine(option->rect.topRight(), option->rect.bottomRight());
+
+            painter->setPen(col.lighter(140));
+            painter->drawLine(option->rect.topLeft(), option->rect.topRight());
+
+            painter->setPen(col.lighter(130));
+            painter->drawLine(option->rect.topLeft(), option->rect.bottomLeft());
+          }
+          painter->restore();
+          break;
         }
 
         frame_spec fspec = getFrameSpec("GenericFrame");

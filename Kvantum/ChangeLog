@@ -14,7 +14,7 @@ V0.10.5
  * Added optional toggle and press text colors for menu(-bar) items. The fallback is focus color.
  * Added a key for a 25% translucent background for transient scrollbars.
  * Compensated for menu shadows when positioning menus (thanks to Craig Drummond).
- * Give viewitem margins (frame width + text margin) to combo popup items.
+ * Give viewitem top and bottom margins (frame width + text margin) to combo popup items and make their background transparent.
 
 V0.10.4
 ---------

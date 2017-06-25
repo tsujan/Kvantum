@@ -41,8 +41,8 @@ template <typename T> using WeakPointer = QPointer<T>;
 template <typename T> using WeakPointer = QWeakPointer<T>;
 #endif
 
-// Used only to give appropriate margins to combo popup items.
-// (Adapted from the Breeze style plugin.)
+// Used only to give appropriate top and bottom margins to
+// combo popup items (adapted from the Breeze style plugin).
 class ComboBoxItemDelegate: public QItemDelegate
 {
   public:
@@ -63,9 +63,9 @@ class ComboBoxItemDelegate: public QItemDelegate
         QItemDelegate::paint(painter, option, index);
     }
 
-    virtual QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index) const
+    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
     {
-      QSize size(proxy_ ?  proxy_.data()->sizeHint(option, index)
+      QSize size(proxy_ ? proxy_.data()->sizeHint(option, index)
                         : QItemDelegate::sizeHint(option, index));
       if (size.isValid())
          size.rheight() += 2*margin_;
