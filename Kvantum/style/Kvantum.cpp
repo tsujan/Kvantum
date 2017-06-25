@@ -1205,16 +1205,21 @@ void Style::polish(QWidget *widget)
       widget->installEventFilter(this);
     }
     /* set an appropriate vertical margin for combo popup items */
-    if (QComboBox *comboBox = qobject_cast<QComboBox*>(widget))
+    if (QComboBox *combo = qobject_cast<QComboBox*>(widget))
     {
       if(!hasParent(widget, "QWebView"))
       {
-        QAbstractItemView *itemView(comboBox->view());
+        QAbstractItemView *itemView(combo->view());
         if(itemView && itemView->itemDelegate()
            && itemView->itemDelegate()->inherits("QComboBoxDelegate"))
         { // PM_FocusFrameVMargin is used for viewitems
-          itemView->setItemDelegate(new ComboBoxItemDelegate(pixelMetric(PM_FocusFrameVMargin),
-                                                             itemView));
+          itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
+                                                            itemView));
+          if (!tspec_.animate_states)
+          { // see eventFilter() -> QEvent::StyleChange
+            widget->removeEventFilter(this);
+            widget->installEventFilter(this);
+          }
         }
       }
     }
@@ -1665,6 +1670,7 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
         || qobject_cast<QToolButton*>(widget)
+        || qobject_cast<QComboBox*>(widget) // for both state anomation and delegate
         || (tspec_.active_tab_overlap > 0 && qobject_cast<QTabBar*>(widget))
         || (tspec_.animate_states &&
             (qobject_cast<QPushButton*>(widget)
@@ -1675,8 +1681,7 @@ void Style::unpolish(QWidget *widget)
              || qobject_cast<QLineEdit*>(widget)
              || qobject_cast<QAbstractScrollArea*>(widget)
              //|| widget->inherits("QComboBoxPrivateContainer") // done above
-             || qobject_cast<QGroupBox*>(widget)
-             || qobject_cast<QComboBox*>(widget))))
+             || qobject_cast<QGroupBox*>(widget))))
     {
       widget->removeEventFilter(this);
     }
@@ -2210,6 +2215,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
   }
+
+  case QEvent::StyleChange:
+  if (QComboBox *combo = qobject_cast<QComboBox*>(w))
+  {
+    if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
+    {
+      /* QComboBoxPrivate::updateDelegate() won't work correctly
+         on style change if the item delegate isn't restored here */
+      QList<QItemDelegate*> delegates = combo->findChildren<QItemDelegate*>();
+      for (int i = 0; i < delegates.count(); ++i)
+      {
+        if (delegates.at(i)->inherits("QComboBoxDelegate"))
+        {
+          combo->setItemDelegate(delegates.at(i));
+          /* we shouldn't delete the previous delegate here
+             because QComboBox::setItemDelegate() deletes it */
+          break;
+        }
+      }
+    }
+  }
+  break;
 
   case QEvent::Show:
     if (w)
@@ -3725,11 +3752,13 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             col.setAlphaF(0.3);
             painter->setPen(col);
-            painter->drawLine(option->rect.bottomLeft(), option->rect.bottomRight());
+            painter->drawLine(option->rect.bottomLeft() + QPoint(1,0),
+                              option->rect.bottomRight() - QPoint(1,0));
 
             col.setAlphaF(0.3);
             painter->setPen(col);
-            painter->drawLine(option->rect.topRight(), option->rect.bottomRight());
+            painter->drawLine(option->rect.topRight() + QPoint(0,1),
+                              option->rect.bottomRight());
 
             col.setAlphaF(0.15);
             painter->setPen(col);
@@ -3737,7 +3766,8 @@ void Style::drawPrimitive(PrimitiveElement element,
 
             col.setAlphaF(0.2);
             painter->setPen(col);
-            painter->drawLine(option->rect.topLeft(), option->rect.bottomLeft());
+            painter->drawLine(option->rect.topLeft() + QPoint(0,1),
+                              option->rect.bottomLeft());
           }
           else
           {
