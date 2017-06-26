@@ -9509,6 +9509,7 @@ void Style::drawComplexControl(ComplexControl control,
                 col.setAlphaF(0.75);
                 painter->fillRect(groove, col);
 
+                painter->save();
                 col = option->palette.color(QPalette::Text);
                 col.setAlphaF(0.2);
                 painter->setPen(col);
@@ -9516,6 +9517,7 @@ void Style::drawComplexControl(ComplexControl control,
                   painter->drawLine(groove.topLeft(), groove.bottomLeft());
                 else
                   painter->drawLine(groove.topRight(), groove.bottomRight());
+                painter->restore();
               }
             }
           }
