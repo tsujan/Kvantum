@@ -3742,7 +3742,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        if (widget->inherits("QComboBoxPrivateContainer")
+        if (widget && widget->inherits("QComboBoxPrivateContainer")
             && tspec_.combo_menu)
         {
           painter->fillRect(option->rect, option->palette.color(QPalette::Window));
