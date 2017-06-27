@@ -705,6 +705,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
     ui->checkBoxComboEdit->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
     ui->checkBoxComboMenu->setChecked (defaultSettings.value ("combo_menu").toBool());
+    ui->checkBoxHideComboCheckboxes->setChecked (defaultSettings.value ("hide_combo_checkboxes").toBool());
     if (composited)
     {
         bool translucency = defaultSettings.value ("translucent_windows").toBool();
@@ -954,6 +955,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxComboEdit->setChecked (themeSettings.value ("combo_as_lineedit").toBool());
                 if (themeSettings.contains ("combo_menu"))
                     ui->checkBoxComboMenu->setChecked (themeSettings.value ("combo_menu").toBool());
+                if (themeSettings.contains ("hide_combo_checkboxes"))
+                    ui->checkBoxHideComboCheckboxes->setChecked (themeSettings.value ("hide_combo_checkboxes").toBool());
                 if (composited)
                 {
                     bool translucency = false;
@@ -1714,6 +1717,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
         generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxComboEdit->isChecked()));
         generalKeys.insert("combo_menu", boolToStr (ui->checkBoxComboMenu->isChecked()));
+        generalKeys.insert("hide_combo_checkboxes", boolToStr (ui->checkBoxHideComboCheckboxes->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
@@ -1781,6 +1785,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
+            || themeSettings.value ("hide_combo_checkboxes").toBool() != ui->checkBoxHideComboCheckboxes->isChecked()
             || themeSettings.value ("animate_states").toBool() != ui->checkBoxAnimation->isChecked()
             || themeSettings.value ("no_window_pattern").toBool() != ui->checkBoxPattern->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
@@ -1836,6 +1841,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());
         themeSettings.setValue ("combo_as_lineedit", ui->checkBoxComboEdit->isChecked());
         themeSettings.setValue ("combo_menu", ui->checkBoxComboMenu->isChecked());
+        themeSettings.setValue ("hide_combo_checkboxes", ui->checkBoxHideComboCheckboxes->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());

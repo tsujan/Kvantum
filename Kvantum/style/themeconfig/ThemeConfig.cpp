@@ -688,6 +688,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","combo_menu");
   r.combo_menu = v.toBool();
 
+  v = getValue("General","hide_combo_checkboxes");
+  r.hide_combo_checkboxes = v.toBool();
+
   v = getValue("General","combo_focus_rect");
   r.combo_focus_rect = v.toBool();
 

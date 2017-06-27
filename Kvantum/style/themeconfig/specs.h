@@ -144,6 +144,8 @@ typedef struct {
   bool combo_as_lineedit;
   /* use popup menu for combo popup */
   bool combo_menu;
+  /* when using menu for combo popup, should checkboxes be hidden? */
+  bool hide_combo_checkboxes;
   /* should combo boxes have focus rect?
      (usually they don't need it) */
   bool combo_focus_rect;
@@ -431,6 +433,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.spin_button_width = 16;
   tspec.combo_as_lineedit = false;
   tspec.combo_menu = false;
+  tspec.hide_combo_checkboxes = false;
   tspec.combo_focus_rect = false;
   tspec.scrollable_menu = false;
   tspec.fill_rubberband = false;
