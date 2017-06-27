@@ -360,8 +360,8 @@ frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
-frame.element=none
-interior.element=none
+frame.element=menubar
+interior.element=menubar
 frame.bottom=0
 frame.expansion=0
 
