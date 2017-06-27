@@ -39,6 +39,7 @@ private slots:
     void restoreDefault();
     void isTranslucent (bool checked);
     void notCompisited (bool checked);
+    void comboMenu (bool checked);
     void popupBlurring (bool checked);
     void respectDE (bool checked);
     void trantsientScrollbarEnbled (bool checked);

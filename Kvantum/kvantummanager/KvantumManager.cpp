@@ -118,6 +118,7 @@ KvantumManager::KvantumManager (const QString lang, QWidget *parent) : QMainWind
     connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
     connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
     connect (ui->whatsthisButton, SIGNAL(clicked()), this, SLOT (showWhatsThis()));
+    connect (ui->checkBoxComboMenu, SIGNAL(clicked (bool)), this, SLOT (comboMenu (bool)));
 
 #if QT_VERSION < 0x050000
     ui->labelTooltipDelay->setEnabled (false);
@@ -706,6 +707,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxComboEdit->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
     ui->checkBoxComboMenu->setChecked (defaultSettings.value ("combo_menu").toBool());
     ui->checkBoxHideComboCheckboxes->setChecked (defaultSettings.value ("hide_combo_checkboxes").toBool());
+    comboMenu (ui->checkBoxComboMenu->isChecked());
     if (composited)
     {
         bool translucency = defaultSettings.value ("translucent_windows").toBool();
@@ -957,6 +959,7 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxComboMenu->setChecked (themeSettings.value ("combo_menu").toBool());
                 if (themeSettings.contains ("hide_combo_checkboxes"))
                     ui->checkBoxHideComboCheckboxes->setChecked (themeSettings.value ("hide_combo_checkboxes").toBool());
+                comboMenu (ui->checkBoxComboMenu->isChecked());
                 if (composited)
                 {
                     bool translucency = false;
@@ -2138,6 +2141,11 @@ void KvantumManager::isTranslucent (bool checked)
         if (!ui->checkBoxNoComposite->isChecked())
           ui->checkBoxBlurPopup->setEnabled (true);
     }
+}
+/*************************/
+void KvantumManager::comboMenu (bool checked)
+{
+    ui->checkBoxHideComboCheckboxes->setEnabled (checked);
 }
 /*************************/
 void KvantumManager::popupBlurring (bool checked)

@@ -1376,7 +1376,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="11" column="1">
+               <item row="0" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
                   <string>Draw tree branch lines?</string>
@@ -1389,6 +1389,19 @@ By default, tree branches have indicators but no line.
                 </widget>
                </item>
                <item row="1" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxScrollableMenu">
+                 <property name="toolTip">
+                  <string>Should big menus be scrollable and have
+scroll arrows on their top and/or bottom?
+
+By default, all of their menu-items are shown.</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollable menus</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
                   <string>By default, the label is on the frame
@@ -1402,7 +1415,7 @@ the frame, so that the frame isn't cut.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3" colspan="2">
+               <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
@@ -1416,7 +1429,7 @@ the highlight color.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
+               <item row="4" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
                   <string>Mouse tracking is enabled
@@ -1430,7 +1443,7 @@ for menubars by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3" colspan="2">
+               <item row="5" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -1441,7 +1454,7 @@ the toolbar SVG element when they are adjacent to each another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3" colspan="2">
+               <item row="6" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupToolbar">
                  <property name="toolTip">
                   <string>If checked, toolbar buttons will be drawn grouped and raised
@@ -1452,7 +1465,7 @@ between toolbar separators.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3" colspan="2">
+               <item row="7" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
                   <string>Shift the contents of push buttons when pressed?
@@ -1465,32 +1478,17 @@ both horizontally and vertically.</string>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="3">
-                <widget class="QLabel" name="labelX11Drag">
+               <item row="8" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxAlt">
                  <property name="toolTip">
-                  <string>Drag windows from their menubars, primary toolbars
-or anywhere possible (and not only from their title bars)?
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+                  <string>If unchecked, shortcuts will not be underlined at all.</string>
                  </property>
                  <property name="text">
-                  <string>Drag from:</string>
+                  <string>Underline shortcuts with Alt</string>
                  </property>
                 </widget>
                </item>
-               <item row="11" column="4">
-                <widget class="QComboBox" name="comboX11Drag">
-                 <property name="toolTip">
-                  <string>Drag windows from their menubars, primary toolbars
-or anywhere possible (and not only from their title bars)?
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="10" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
                   <string>Will have effect only if style
@@ -1503,7 +1501,7 @@ Default is "Follow Style".</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="4">
+               <item row="9" column="4">
                 <widget class="QComboBox" name="comboToolButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -1519,13 +1517,28 @@ Default is "Follow Style".</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxAlt">
+               <item row="10" column="3">
+                <widget class="QLabel" name="labelX11Drag">
                  <property name="toolTip">
-                  <string>If unchecked, shortcuts will not be underlined at all.</string>
+                  <string>Drag windows from their menubars, primary toolbars
+or anywhere possible (and not only from their title bars)?
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Underline shortcuts with Alt</string>
+                  <string>Drag from:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="4">
+                <widget class="QComboBox" name="comboX11Drag">
+                 <property name="toolTip">
+                  <string>Drag windows from their menubars, primary toolbars
+or anywhere possible (and not only from their title bars)?
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                 </widget>
                </item>
@@ -1617,12 +1630,13 @@ By default, combo popups do not cover the combo box.</string>
                <item row="6" column="1">
                 <widget class="QCheckBox" name="checkBoxHideComboCheckboxes">
                  <property name="toolTip">
-                  <string>When drawing combo popups as menus, there will be a checkbox next to each entry.
+                  <string>When drawing combo popups as menus,
+there will be a checkbox next to each entry.
 
 This option will hide these.</string>
                  </property>
                  <property name="text">
-                  <string>Hide checkboxes in combo popup menus</string>
+                  <string>No checkbox in combo menu</string>
                  </property>
                 </widget>
                </item>
@@ -1644,19 +1658,6 @@ i.e., there is no border between them.</string>
                  </property>
                  <property name="text">
                   <string>Join inactive tabs</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxScrollableMenu">
-                 <property name="toolTip">
-                  <string>Should big menus be scrollable and have
-scroll arrows on their top and/or bottom?
-
-By default, all of their menu-items are shown.</string>
-                 </property>
-                 <property name="text">
-                  <string>Scrollable menus</string>
                  </property>
                 </widget>
                </item>
