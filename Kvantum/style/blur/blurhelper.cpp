@@ -99,8 +99,11 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   if (!widget->isVisible()) return QRegion();
 
   QList<int> r;
-  if (qobject_cast<QMenu*>(widget))
+  if (qobject_cast<QMenu*>(widget)
+      || widget->inherits("QComboBoxPrivateContainer"))
+  {
     r = menuShadow_;
+  }
   else if (widget->inherits("QTipLabel"))
     r = tooltipShadow_;
   QRect rect = widget->rect();

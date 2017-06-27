@@ -1010,17 +1010,6 @@ void Style::polish(QWidget *widget)
         {
           theme_spec tspec_now = settings_->getCompositeSpec();
 
-          if (widget->inherits("QComboBoxPrivateContainer")
-              && tspec_now.composite)
-          { // the generic frame may have round corners
-            if (!widget->testAttribute(Qt::WA_TranslucentBackground)
-                /*&& !tspec_.combo_menu*/)
-            {
-              widget->setAttribute(Qt::WA_TranslucentBackground);
-            }
-            break;
-          }
-
 #if QT_VERSION < 0x050000
           if (!isOpaque_ && tspec_now.translucent_windows
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
@@ -1210,15 +1199,46 @@ void Style::polish(QWidget *widget)
       if(!hasParent(widget, "QWebView"))
       {
         QAbstractItemView *itemView(combo->view());
-        if(itemView && itemView->itemDelegate()
-           && itemView->itemDelegate()->inherits("QComboBoxDelegate"))
-        { // PM_FocusFrameVMargin is used for viewitems
-          itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
-                                                            itemView));
-          if (!tspec_.animate_states)
-          { // see eventFilter() -> QEvent::StyleChange
-            widget->removeEventFilter(this);
-            widget->installEventFilter(this);
+        if(itemView && itemView->itemDelegate())
+        {
+          if (itemView->itemDelegate()->inherits("QComboMenuDelegate"))
+          { // enforce translucency on the combo menu (all palettes needed)
+            QPalette palette = itemView->palette();
+            palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
+            itemView->setPalette(palette);
+
+            palette = itemView->viewport()->palette();
+            palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+            itemView->viewport()->setPalette(palette);
+
+            if (itemView->parentWidget())
+            {
+              palette = itemView->parentWidget()->palette();
+              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
+              itemView->parentWidget()->setPalette(palette);
+            }
+          }
+          else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
+          {
+            /* the combo menu setting may have been toggled in Kvantum Manager */
+            if (itemView->viewport())
+            {
+              QPalette palette = itemView->viewport()->palette();
+              if (palette.color(itemView->backgroundRole()) == QColor(Qt::transparent))
+              {
+                palette.setColor(itemView->viewport()->backgroundRole(),
+                                 QApplication::palette().color(QPalette::Base));
+                itemView->viewport()->setPalette(palette);
+              }
+            }
+            /* PM_FocusFrameVMargin is used for viewitems */
+            itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
+                                                              itemView));
+            if (!tspec_.animate_states)
+            { // see eventFilter() -> QEvent::StyleChange
+              widget->removeEventFilter(this);
+              widget->installEventFilter(this);
+            }
           }
         }
       }
@@ -1426,19 +1446,25 @@ void Style::polish(QWidget *widget)
                            || (widget->inherits("QTipLabel")
                                && !widget->testAttribute(Qt::WA_TranslucentBackground))));
 #endif
-  if (isMenuOrTooltip && !translucentWidgets_.contains(widget))
+  if ((isMenuOrTooltip
+          /* because of combo menus or round corners */
+       || (tspec_.isX11 && widget->inherits("QComboBoxPrivateContainer")))
+      && !translucentWidgets_.contains(widget))
   {
     theme_spec tspec_now = settings_->getCompositeSpec();
     if (tspec_now.composite)
     {
-      if (qobject_cast<QMenu*>(widget))
+      if (qobject_cast<QMenu*>(widget) || widget->inherits("QComboBoxPrivateContainer"))
       {
         getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-        /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
-           the RTL property isn't set yet, we should move them later. On the other hand,
-           menus should be moved to compensate for the offset created by their shadows. */
-        widget->removeEventFilter(this);
-        widget->installEventFilter(this);
+        if (qobject_cast<QMenu*>(widget))
+        {
+          /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
+             the RTL property isn't set yet, we should move them later. On the other hand,
+             menus should be moved to compensate for the offset created by their shadows. */
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+        }
       }
 
       if (tspec_.isX11)
@@ -1457,7 +1483,8 @@ void Style::polish(QWidget *widget)
       connect(widget, SIGNAL(destroyed(QObject*)),
               SLOT(noTranslucency(QObject*)));
 
-      if (tspec_.isX11)
+      if (tspec_.isX11
+          && (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu))
       {
         if (!blurHelper_ && tspec_now.popup_blurring)
         {
@@ -1647,8 +1674,9 @@ void Style::unpolish(QWidget *widget)
         if ((forcedTranslucency_.contains(widget)
              && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)
              && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
-            // was made translucent because of round corners
-            || widget->inherits("QComboBoxPrivateContainer"))
+            // was made translucent because of combo menu or round corners
+            || (widget->inherits("QComboBoxPrivateContainer")
+                && translucentWidgets_.contains(widget)))
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
@@ -3744,48 +3772,27 @@ void Style::drawPrimitive(PrimitiveElement element,
 
         if (widget && widget->inherits("QComboBoxPrivateContainer")
             && tspec_.combo_menu)
-        {
-          painter->fillRect(option->rect, option->palette.color(QPalette::Window));
-          painter->save();
-          QColor col = option->palette.color(QPalette::WindowText);
-          if (col.value() < 100)
+        { // as with PE_PanelMenu FIXME: calling it instead?
+          const QString group = "Menu";
+          frame_spec fspec = getFrameSpec(group);
+          fspec.expansion = 0;
+          const interior_spec ispec = getInteriorSpec(group);
+          fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
+          fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
+          theme_spec tspec_now = settings_->getCompositeSpec();
+          if (!noComposite_ && tspec_now.menu_shadow_depth > 0
+              && fspec.left >= tspec_now.menu_shadow_depth
+              && widget && translucentWidgets_.contains(widget))
           {
-            col.setAlphaF(0.3);
-            painter->setPen(col);
-            painter->drawLine(option->rect.bottomLeft() + QPoint(1,0),
-                              option->rect.bottomRight() - QPoint(1,0));
-
-            col.setAlphaF(0.3);
-            painter->setPen(col);
-            painter->drawLine(option->rect.topRight() + QPoint(0,1),
-                              option->rect.bottomRight());
-
-            col.setAlphaF(0.15);
-            painter->setPen(col);
-            painter->drawLine(option->rect.topLeft(), option->rect.topRight());
-
-            col.setAlphaF(0.2);
-            painter->setPen(col);
-            painter->drawLine(option->rect.topLeft() + QPoint(0,1),
-                              option->rect.bottomLeft());
+            renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
           }
           else
           {
-            col = option->palette.color(QPalette::Window);
-
-            painter->setPen(col.darker(150));
-            painter->drawLine(option->rect.bottomLeft(), option->rect.bottomRight());
-
-            painter->setPen(col.darker(140));
-            painter->drawLine(option->rect.topRight(), option->rect.bottomRight());
-
-            painter->setPen(col.lighter(140));
-            painter->drawLine(option->rect.topLeft(), option->rect.topRight());
-
-            painter->setPen(col.lighter(130));
-            painter->drawLine(option->rect.topLeft(), option->rect.bottomLeft());
+            if (!widget) // QML
+              painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+            renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
           }
-          painter->restore();
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
           break;
         }
 
@@ -10337,6 +10344,12 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_DefaultFrameWidth : {
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
         return 0; // not needed but logical (->CT_PushButton)
+      else if (widget && widget->inherits("QComboBoxPrivateContainer")
+               && tspec_.combo_menu)
+      {
+          return qMax(pixelMetric(PM_MenuHMargin,option,widget),
+                      pixelMetric(PM_MenuVMargin,option,widget));
+      }
       const frame_spec fspec = getFrameSpec("GenericFrame");
       return qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right));
     }
@@ -10385,15 +10398,13 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuHMargin : 
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      if (qobject_cast<const QComboBox*>(widget) && metric == PM_MenuVMargin)
-        return 0; // added to the height of combo menu in qcombobox.cpp -> showPopup()
-
       const frame_spec fspec = getFrameSpec("Menu");
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
       if (!noComposite_ && tspec_now.composite
-          && widget && translucentWidgets_.contains(widget)
+          && widget
+          && translucentWidgets_.contains(widget) // combo menus are included
           /* detached menus may come here because of setSurfaceFormat() */
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {

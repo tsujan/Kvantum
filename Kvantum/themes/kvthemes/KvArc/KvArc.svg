@@ -702,13 +702,13 @@
 <path id="menu-normal-left" d="m 107.4994,801.99979 4.9999,3e-4 0,48 -4.9999,-3e-4 z"/>
 <path id="menu-normal-topleft" d="m 112.4994,796.9998 -4.9989,.0003 -.001,5 4.9999,0 z "/>
 </g>
-<path style="opacity:.4;fill:url(#linearGradient6752-2)" id="menu-shadow-left" d="m 12.5005,796 0,60 4.9999,0 0,-60 z "/>
-<path style="opacity:.48;fill:url(#linearGradient6748-6)" id="menu-shadow-right" d="m 75.5003,796 0,60 5.0001,0 0,-60 z "/>
-<path style="opacity:.58;fill:url(#linearGradient6750-7)" id="menu-shadow-bottom" d="m 17.5005,855.9999 0,5.0001 58,0 0,-5.0001 z "/>
-<path style="opacity:.28;fill:url(#radialGradient6740-0)" id="menu-shadow-topleft" d="m 12.50035,791 1e-4,5 4.9999,-10e-5 0,-4.9999 z"/>
-<path style="opacity:.43;fill:url(#radialGradient6742-3)" id="menu-shadow-topright" d="m 75.5005,791 0,5 4.9999,0 .0001,-5 z "/>
-<path style="opacity:.48;fill:url(#radialGradient6746-6)" id="menu-shadow-bottomleft" d="m 12.50045,856 0,5 5,0 -5e-4,-5 z"/>
-<path style="opacity:.48;fill:url(#radialGradient6744-9)" id="menu-shadow-bottomright" d="m 75.50045,856 3e-4,5 4.9997,0 0,-5 z"/>
+<path style="opacity:.15;fill:url(#linearGradient6752-2)" id="menu-shadow-left" d="m 12.5005,796 0,60 4.9999,0 0,-60 z "/>
+<path style="opacity:.18;fill:url(#linearGradient6748-6)" id="menu-shadow-right" d="m 75.5003,796 0,60 5.0001,0 0,-60 z "/>
+<path style="opacity:.19;fill:url(#linearGradient6750-7)" id="menu-shadow-bottom" d="m 17.5005,855.9999 0,5.0001 58,0 0,-5.0001 z "/>
+<path style="opacity:.15;fill:url(#radialGradient6740-0)" id="menu-shadow-topleft" d="m 12.50035,791 1e-4,5 4.9999,-10e-5 0,-4.9999 z"/>
+<path style="opacity:.18;fill:url(#radialGradient6742-3)" id="menu-shadow-topright" d="m 75.5005,791 0,5 4.9999,0 .0001,-5 z "/>
+<path style="opacity:.15;fill:url(#radialGradient6746-6)" id="menu-shadow-bottomleft" d="m 12.50045,856 0,5 5,0 -5e-4,-5 z"/>
+<path style="opacity:.18;fill:url(#radialGradient6744-9)" id="menu-shadow-bottomright" d="m 75.50045,856 3e-4,5 4.9997,0 0,-5 z"/>
 </g>
 </g>
 <rect width="2.5" x="46.749313" y="856" height="5.000001" style="fill:#b74aff;stroke:none" id="menu-shadow-hint-bottom"/>
@@ -816,7 +816,7 @@
 <rect width="10" x="417.5" y="802.5" height="10" id="menubaritem-toggled-topright"/>
 </g>
 <g style="fill-rule:evenodd" id="menu-shadow-top">
-<path style="opacity:.3;fill:url(#linearGradient6754-0)" id="menu-shadow-top0" d="m 17.5005,791 0,2.5 58,0 0,-2.5 z "/>
+<path style="opacity:.2;fill:url(#linearGradient6754-0)" id="menu-shadow-top0" d="m 17.5005,791 0,2.5 58,0 0,-2.5 z "/>
 <path style="fill:#fff" id="path4856" d="m 17.5,793.5 0,2.5 58,0 0,-2.5 z"/>
 </g>
 </g>
