@@ -5324,16 +5324,18 @@ void Style::drawControl(ControlElement element,
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
+          bool hideCheckBoxes = tspec_.combo_menu && tspec_.hide_combo_checkboxes && qobject_cast<const QComboBox *>(widget);
 
           int iw = pixelMetric(PM_IndicatorWidth,option,widget);
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (l.size() > 0) // menu label
           {
             int checkSpace = 0;
-            if ((widget && opt->menuHasCheckableItems)
-                /* QML menus only use checkType, while
-                   the default value of menuHasCheckableItems is true. */
-                || opt->checkType != QStyleOptionMenuItem::NotCheckable)
+            if (!hideCheckBoxes &&
+                ((widget && opt->menuHasCheckableItems)
+                  /* QML menus only use checkType, while
+                     the default value of menuHasCheckableItems is true. */
+                  || opt->checkType != QStyleOptionMenuItem::NotCheckable))
               checkSpace = iw + lspec.tispace;
             if (opt->icon.isNull() || (hspec_.iconless_menu && !l[0].isEmpty()))
             {
@@ -5435,7 +5437,7 @@ void Style::drawControl(ControlElement element,
           }
 
           /* checkbox or radio button */
-          if (opt->checkType != QStyleOptionMenuItem::NotCheckable)
+          if (opt->checkType != QStyleOptionMenuItem::NotCheckable && !hideCheckBoxes)
           {
             o.rect = alignedRect(option->direction,
                                  Qt::AlignLeft | Qt::AlignVCenter,
@@ -12895,7 +12897,7 @@ QRect Style::subControlRect(ComplexControl control,
           }
           else
           { // take into account the space needed by checkbox and icon
-            int space = qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth)*pixelRatio_, tspec_.check_size)
+            int space = (tspec_.hide_combo_checkboxes ? 0 : qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth)*pixelRatio_, tspec_.check_size))
                         + tspec_.small_icon_size
                         + pixelMetric(PM_CheckBoxLabelSpacing);
             return option->rect.adjusted(-space, 0, 0, 0);
