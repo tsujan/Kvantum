@@ -12920,7 +12920,7 @@ QRect Style::subControlRect(ComplexControl control,
             const frame_spec fspec = getFrameSpec(group);
             const label_spec lspec = getLabelSpec(group);
             int space = fspec.left+lspec.left + fspec.right+lspec.right
-                        - 8; // supposing that Qt sets all of them to 2
+                        - 6; // assuming a maximum value forced by Qt
             r.adjust(-qMax(space,0), 0, 0, 0);
             /* compensate for the offset created by the shadow */
             if (!noComposite_ && menuShadows_.count() == 4)
