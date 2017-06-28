@@ -2281,6 +2281,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QMenu*>(o))
       {
+        /* WARNING: If compositing is stopped here, we aren't responsible.
+                    A check for the state of compositing at this very moment
+                    may be CPU-intensive. */
         if (!noComposite_
             && menuShadows_.count() == 4)
         {
@@ -5324,10 +5327,10 @@ void Style::drawControl(ControlElement element,
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
-          bool hideCheckBoxes = tspec_.combo_menu
-                                && tspec_.hide_combo_checkboxes
-                                // see Qt -> qcombobox_p.h -> QComboMenuDelegate
-                                && qobject_cast<const QComboBox*>(widget);
+          bool hideCheckBoxes(tspec_.combo_menu
+                              && tspec_.hide_combo_checkboxes
+                              // see Qt -> qcombobox_p.h -> QComboMenuDelegate
+                              && qobject_cast<const QComboBox*>(widget));
 
           int iw = pixelMetric(PM_IndicatorWidth,option,widget);
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
@@ -12905,12 +12908,17 @@ QRect Style::subControlRect(ComplexControl control,
           }
           else
           { // take into account the space needed by checkbox and icon
+            QRect r = option->rect;
             int space = (tspec_.hide_combo_checkboxes
                            ? 0
                            : qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth)*pixelRatio_, tspec_.check_size))
                         + tspec_.small_icon_size
                         + pixelMetric(PM_CheckBoxLabelSpacing);
-            return option->rect.adjusted(-space, 0, 0, 0);
+            r.adjust(-space, 0, 0, 0);
+            /* compensate for the offset created by the shadow */
+            if (!noComposite_ && menuShadows_.count() == 4)
+              r.translate(menuShadows_.at(2), -menuShadows_.at(1));
+            return r;
           }
         }
 
