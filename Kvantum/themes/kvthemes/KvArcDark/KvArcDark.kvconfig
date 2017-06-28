@@ -38,7 +38,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=22
 combo_as_lineedit=true
-animate_states=true
+animate_states=false
 button_contents_shift=false
 combo_menu=true
 hide_combo_checkboxes=true
@@ -51,7 +51,7 @@ layout_margin=9
 scrollbar_in_view=true
 transient_scrollbar=true
 transient_groove=true
-submenu_overlap=0
+submenu_overlap=3
 tooltip_delay=-1
 tree_branch_line=true
 
@@ -112,10 +112,12 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=4
-text.margin.bottom=4
-text.margin.left=4
-text.margin.right=4
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=2
+text.margin.right=2
+min_width=+0.3font
+min_height=+0.3font
 frame.expansion=6
 
 [PanelButtonTool]
