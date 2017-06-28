@@ -715,7 +715,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         if (renderer)
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-          shadow[i] = i%2 ? thicknessV*(br.height()/divisor) : thicknessH*(br.width()/divisor);
+          shadow[i] = i%2 ? qRound(thicknessV*br.height()/divisor) : qRound((qreal)thicknessH*br.width()/divisor);
         }
       }
     }
@@ -1203,23 +1203,35 @@ void Style::polish(QWidget *widget)
         {
           if (itemView->itemDelegate()->inherits("QComboMenuDelegate"))
           { // enforce translucency on the combo menu (all palettes needed)
-            QPalette palette = itemView->palette();
-            palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
-            itemView->setPalette(palette);
-
-            palette = itemView->viewport()->palette();
-            palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
-            itemView->viewport()->setPalette(palette);
-
-            if (itemView->parentWidget())
+            if (itemView->style() != this)
+            { // no mercy to intruding styles (as in SMPLayer pereferences)
+              itemView->setStyleSheet("background-color: transparent;");
+            }
+            else
             {
-              palette = itemView->parentWidget()->palette();
-              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
-              itemView->parentWidget()->setPalette(palette);
+              QPalette palette = itemView->palette();
+              palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
+              itemView->setPalette(palette);
+
+              palette = itemView->viewport()->palette();
+              palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+              itemView->viewport()->setPalette(palette);
+
+              if (itemView->parentWidget())
+              {
+                palette = itemView->parentWidget()->palette();
+                palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
+                itemView->parentWidget()->setPalette(palette);
+              }
             }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
           {
+            if (itemView->style() != this
+                && itemView->styleSheet() == "background-color: transparent;")
+            {
+              itemView->setStyleSheet("");
+            }
             /* the combo menu setting may have been toggled in Kvantum Manager */
             if (itemView->viewport())
             {
