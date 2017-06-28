@@ -5275,7 +5275,12 @@ void Style::drawControl(ControlElement element,
         const frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
-        const label_spec lspec = getLabelSpec(group);
+        label_spec lspec = getLabelSpec(group);
+
+        /* we should limit text-icon spacing for combo menu
+           because we can't know whether it has icon */
+        if (qobject_cast<const QComboBox*>(widget))
+          lspec.tispace = qMin(lspec.tispace, 6);
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
           renderElement(painter,dspec.element+"-separator",option->rect);
@@ -5342,7 +5347,9 @@ void Style::drawControl(ControlElement element,
                     /* QML menus only use checkType, while
                        the default value of menuHasCheckableItems is true. */
                     || opt->checkType != QStyleOptionMenuItem::NotCheckable))
-              checkSpace = iw + lspec.tispace;
+            {
+              checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
+            }
             if (opt->icon.isNull() || (hspec_.iconless_menu && !l[0].isEmpty()))
             {
               int iconSpace = 0;
@@ -10579,7 +10586,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     }
 
     case PM_CheckBoxLabelSpacing :
-    case PM_RadioButtonLabelSpacing : return 5;
+    case PM_RadioButtonLabelSpacing : return 6;
 
     case PM_SplitterWidth :
       return tspec_.splitter_width;
@@ -11467,7 +11474,7 @@ QSize Style::sizeFromContents(ContentsType type,
         if (opt->menuHasCheckableItems)
         {
           int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
-          s.rwidth() += cSize + lspec.tispace;
+          s.rwidth() += cSize + pixelMetric(PM_CheckBoxLabelSpacing);
           /* for the height, see if there's really a check/radio button */
           if (opt->checkType == QStyleOptionMenuItem::Exclusive
               || opt->checkType == QStyleOptionMenuItem::NonExclusive)
@@ -12907,14 +12914,14 @@ QRect Style::subControlRect(ComplexControl control,
             return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
           }
           else
-          { // take into account the space needed by checkbox and icon
+          { // take into account the space needed by our menuitem frame
             QRect r = option->rect;
-            int space = (tspec_.hide_combo_checkboxes
-                           ? 0
-                           : qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth)*pixelRatio_, tspec_.check_size))
-                        + tspec_.small_icon_size
-                        + pixelMetric(PM_CheckBoxLabelSpacing);
-            r.adjust(-space, 0, 0, 0);
+            const QString group = "MenuItem";
+            const frame_spec fspec = getFrameSpec(group);
+            const label_spec lspec = getLabelSpec(group);
+            int space = fspec.left+lspec.left + fspec.right+lspec.right
+                        - 8; // supposing that Qt sets all of them to 2
+            r.adjust(-qMax(space,0), 0, 0, 0);
             /* compensate for the offset created by the shadow */
             if (!noComposite_ && menuShadows_.count() == 4)
               r.translate(menuShadows_.at(2), -menuShadows_.at(1));
