@@ -2310,7 +2310,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
                   < w->mapToGlobal(QPoint(w->x(), w->y())).x())
               {
-                X -= menuShadows_.at(2);
+                X -= menuShadows_.at(2) + menuShadows_.at(0);
               }
               else
               {
@@ -2328,7 +2328,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
                   > w->mapToGlobal(QPoint(w->x(), w->y())).x())
               { // there wasn't enough space to the right of the parent
-                X += menuShadows_.at(0);
+                X += menuShadows_.at(0) + menuShadows_.at(2);
               }
               else
                 X -= menuShadows_.at(2); // right shadow of the left menu
