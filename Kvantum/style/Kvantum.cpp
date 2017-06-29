@@ -349,7 +349,7 @@ Style::Style() : QCommonStyle()
     int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
     thickness += tspec_.tooltip_shadow_depth;
     QList<int> tooltipS = getShadow("ToolTip", thickness);
-    blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
+    blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
   }
 }
 
@@ -683,9 +683,9 @@ int Style::getMenuMargin(bool horiz) const
 QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
   if (widgetName == "Menu"
-      && menuShadows_.count() == 4)
+      && menuShadow_.count() == 4)
   {
-      return menuShadows_;
+      return menuShadow_;
   }
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
@@ -722,7 +722,12 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
   }
 
   if (widgetName == "Menu")
-    menuShadows_ = shadow;
+  {
+    menuShadow_ = shadow;
+#if QT_VERSION >= 0x050000
+    setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
+#endif
+  }
 
   return shadow; // [left, top, right, bottom]
 }
@@ -1082,7 +1087,7 @@ void Style::polish(QWidget *widget)
                 int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
                 thickness += tspec_now.tooltip_shadow_depth;
                 QList<int> tooltipS = getShadow("ToolTip", thickness);
-                blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
+                blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
               }
               if (blurHelper_)
                 blurHelper_->registerWidget(widget);
@@ -1504,7 +1509,7 @@ void Style::polish(QWidget *widget)
           int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
           thickness += tspec_now.tooltip_shadow_depth;
           QList<int> tooltipS = getShadow("ToolTip", thickness);
-          blurHelper_ = new BlurHelper(this,menuShadows_,tooltipS);
+          blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
         }
         /* blurHelper_ may exist because of blurring hard-coded translucency */
         if (blurHelper_ && tspec_now.popup_blurring)
@@ -2297,44 +2302,44 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                     A check for the state of compositing at this very moment
                     may be CPU-intensive. */
         if (!noComposite_
-            && menuShadows_.count() == 4)
+            && menuShadow_.count() == 4)
         {
           /* compensate for the offset created by the shadow
              (let's handle rtl separately) */
           int X = w->x();
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
-            X += menuShadows_.at(2);
+            X += menuShadow_.at(2);
             if (QWidget *parentMenu = QApplication::activePopupWidget())
             {
               if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
                   < w->mapToGlobal(QPoint(w->x(), w->y())).x())
               {
-                X -= menuShadows_.at(2) + menuShadows_.at(0);
+                X -= menuShadow_.at(2) + menuShadow_.at(0);
               }
               else
               {
-                X += menuShadows_.at(0)
+                X += menuShadow_.at(0)
                      - getMenuMargin(true); // workaround for an old Qt bug
               }
             }
-            w->move(X, w->y() - menuShadows_.at(1));
+            w->move(X, w->y() - menuShadow_.at(1));
           }
           else // ltr
           {
-            X -= menuShadows_.at(0); // left shadow
+            X -= menuShadow_.at(0); // left shadow
             if (QWidget *parentMenu = QApplication::activePopupWidget()) // "magical" condition for a submenu
             {
               if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
                   > w->mapToGlobal(QPoint(w->x(), w->y())).x())
               { // there wasn't enough space to the right of the parent
-                X += menuShadows_.at(0) + menuShadows_.at(2);
+                X += menuShadow_.at(0) + menuShadow_.at(2);
               }
               else
-                X -= menuShadows_.at(2); // right shadow of the left menu
+                X -= menuShadow_.at(2); // right shadow of the left menu
             }
             w->move(X,
-                    w->y() - menuShadows_.at(1)); // top shadow
+                    w->y() - menuShadow_.at(1)); // top shadow
           }
         }
       }
@@ -12935,8 +12940,8 @@ QRect Style::subControlRect(ComplexControl control,
                         - 6; // assuming a maximum value forced by Qt
             r.adjust(-qMax(space,0), 0, 0, 0);
             /* compensate for the offset created by the shadow */
-            if (!noComposite_ && menuShadows_.count() == 4)
-              r.translate(menuShadows_.at(2), -menuShadows_.at(1));
+            if (!noComposite_ && menuShadow_.count() == 4)
+              r.translate(menuShadow_.at(2), -menuShadow_.at(1));
             return r;
           }
         }
