@@ -556,10 +556,10 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-right-rightjunct" transform="matrix(0,-1,1,0,-381,764)"/>
 <g style="stroke:none;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:bevel">
 <g style="fill:#adac2d">
-<rect width="4" x="50" y="455.74899" height="7.2509999" style="opacity:.891" id="menu-shadow-hint-bottom"/>
-<rect width="4.0004807" x="49.999519" y="390.49908" height="7.2509999" style="opacity:.891" id="menu-shadow-hint-top"/>
-<rect width="4" x="425" y="-21.002001" height="7.2509999" style="opacity:.891" id="menu-shadow-hint-left" transform="matrix(0,1,-1,0,0,0)"/>
-<rect width="4" x="425" y="-86.250999" height="7.2509999" style="opacity:.891" id="menu-shadow-hint-right" transform="matrix(0,1,-1,0,0,0)"/>
+<rect width="4" x="50" y="455.75" height="7.25" style="opacity:.891" id="menu-shadow-hint-bottom"/>
+<rect width="4.0004807" x="49.999519" y="390.5" height="7.25" style="opacity:.891" id="menu-shadow-hint-top"/>
+<rect width="4" x="425" y="-21.001001" height="7.25" style="opacity:.891" id="menu-shadow-hint-left" transform="rotate(90)"/>
+<rect width="4" x="425" y="-86.25" height="7.25" style="opacity:.891" id="menu-shadow-hint-right" transform="rotate(90)"/>
 </g>
 <g id="header-separator" transform="matrix(1,0,0,2,0,-90)">
 <rect width="4" x="190" y="85" height="10" style="fill-opacity:0" id="rect4890"/>

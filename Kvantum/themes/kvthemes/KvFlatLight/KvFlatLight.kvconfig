@@ -43,7 +43,7 @@ inline_spin_indicators=true
 joined_inactive_tabs=true
 layout_spacing=2
 scrollbar_in_view=false
-submenu_overlap=-1
+submenu_overlap=0
 tooltip_delay=-1
 
 [GeneralColors]

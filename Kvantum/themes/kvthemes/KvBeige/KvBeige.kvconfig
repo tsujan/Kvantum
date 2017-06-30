@@ -43,7 +43,7 @@ scroll_arrows=true
 scrollbar_in_view=false
 small_icon_size=16
 spin_button_width=16
-submenu_overlap=-1
+submenu_overlap=0
 tooltip_delay=-1
 tree_branch_line=false
 

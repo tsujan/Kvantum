@@ -715,7 +715,8 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         if (renderer)
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-          shadow[i] = i%2 ? qRound((qreal)thicknessV*br.height()/divisor) : qRound((qreal)thicknessH*br.width()/divisor);
+          shadow[i] = i%2 ? qRound((qreal)thicknessV*(br.height()/divisor))
+                          : qRound((qreal)thicknessH*(br.width()/divisor));
         }
       }
     }
