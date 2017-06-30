@@ -56,6 +56,7 @@
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QLayout> // only for forceSizeGrip
+#include <QDesktopWidget> // for positioning menus
 //#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 
@@ -2313,8 +2314,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             X += menuShadow_.at(2);
             if (QWidget *parentMenu = QApplication::activePopupWidget())
             {
-              if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
-                  < w->mapToGlobal(QPoint(w->x(), w->y())).x())
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x() - w->width()
+                  < QApplication::desktop()->availableGeometry().left())
               {
                 X -= menuShadow_.at(2) + menuShadow_.at(0);
               }
@@ -2331,8 +2332,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             X -= menuShadow_.at(0); // left shadow
             if (QWidget *parentMenu = QApplication::activePopupWidget()) // "magical" condition for a submenu
             {
-              if (parentMenu->mapToGlobal(QPoint(parentMenu->x(), parentMenu->y())).x()
-                  > w->mapToGlobal(QPoint(w->x(), w->y())).x())
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x() + parentMenu->width() + w->width()
+                  > QApplication::desktop()->availableGeometry().right() + 1)
               { // there wasn't enough space to the right of the parent
                 X += menuShadow_.at(0) + menuShadow_.at(2);
               }
