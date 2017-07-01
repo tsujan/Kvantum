@@ -283,6 +283,7 @@ Style::Style() : QCommonStyle()
   subApp_ = false;
   isOpaque_ = false;
   isKisSlider_ = false;
+  extraComboWidth_ = 0;
   pixelRatio_ = 1;
 
 #if QT_VERSION >= 0x050500
@@ -2309,10 +2310,23 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           /* compensate for the offset created by the shadow
              (let's handle rtl separately) */
           int X = w->x();
+          QWidget *parentMenu = QApplication::activePopupWidget(); // "magical" condition for a submenu
+          if (!parentMenu)
+          { // search for a detached menu with an active action
+            foreach (QWidget *topWidget, QApplication::topLevelWidgets())
+            {
+              if (qobject_cast<QMenu*>(topWidget)
+                  && qobject_cast<QMenu*>(topWidget)->activeAction())
+              {
+                parentMenu = topWidget;
+                break;
+              }
+            }
+          }
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             X += menuShadow_.at(2);
-            if (QWidget *parentMenu = QApplication::activePopupWidget())
+            if (parentMenu)
             {
               if (parentMenu->mapToGlobal(QPoint(0,0)).x() - w->width()
                   < QApplication::desktop()->availableGeometry().left())
@@ -2330,7 +2344,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           else // ltr
           {
             X -= menuShadow_.at(0); // left shadow
-            if (QWidget *parentMenu = QApplication::activePopupWidget()) // "magical" condition for a submenu
+            if (parentMenu)
             {
               if (parentMenu->mapToGlobal(QPoint(0,0)).x() + parentMenu->width() + w->width()
                   > QApplication::desktop()->availableGeometry().right() + 1)
@@ -5348,6 +5362,18 @@ void Style::drawControl(ControlElement element,
               state = 2;
             else
               state = 4;
+          }
+
+          /* some apps (like Qt Creator) may force a bad text color */
+          if (state == 1)
+          {
+            if (lspec.normalColor.isEmpty())
+              lspec.normalColor = cspec_.windowTextColor;
+          }
+          else if (state == 2)
+          {
+            if (lspec.normalColor.isEmpty())
+              lspec.focusColor = cspec_.windowTextColor;
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
@@ -11224,37 +11250,48 @@ QSize Style::sizeFromContents(ContentsType type,
         }
         else hasIcon = true;
 
-        /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
-           qMax(23,X) is already added to it in qcommonstyle.cpp.
-
-           We want that the left icon respect frame width,
-           text margin and text-icon spacing in the editable mode too. */
-        s = QSize(defaultSize.width() + fspec.left+fspec.right
-                                      + (opt->editable ? lspec1.left+lspec1.right +
-                                          (option->direction == Qt::RightToLeft ?
-                                            fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
-                                            : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
-                                          : lspec.left+lspec.right)
-                                      + (hasIcon ? lspec.tispace : 0),
+        s = QSize(defaultSize.width(),
                   sizeCalculated(f,fspec,lspec,sspec,"W",
                                  hasIcon ? opt->iconSize : QSize()).height());
-
-        /* consider the top and bottom frames
-           of lineedits inside editable combos */
         if (opt->editable)
         {
           s.rheight() += (fspec1.top > fspec.top ? fspec1.top-fspec.top : 0)
                          + (fspec1.bottom > fspec.bottom ? fspec1.bottom-fspec.bottom : 0);
-          if (tspec_.combo_as_lineedit)
-            s.rwidth() += option->direction == Qt::RightToLeft ?
-                           (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
-                           : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
-
-          s.rwidth() += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
-                                         : (sspec1.incrementW ? sspec1.minW : 0);
         }
-        else if (sspec.incrementW)
-          s.rwidth() += sspec.minW;
+
+        if (extraComboWidth_ == 0)
+        {
+          /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
+             qMax(23,X) is already added to it in qcommonstyle.cpp.
+
+             We want that the left icon respect frame width,
+             text margin and text-icon spacing in the editable mode too. */
+          extraComboWidth_ = fspec.left+fspec.right
+                             + (opt->editable ? lspec1.left+lspec1.right +
+                                 (option->direction == Qt::RightToLeft ?
+                                   fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
+                                   : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
+                                 : lspec.left+lspec.right)
+                             + (hasIcon ? lspec.tispace : 0);
+
+          /* consider the top and bottom frames
+             of lineedits inside editable combos */
+          if (opt->editable)
+          {
+            if (tspec_.combo_as_lineedit)
+            {
+              extraComboWidth_ += option->direction == Qt::RightToLeft ?
+                                   (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
+                                   : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
+            }
+            extraComboWidth_ += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
+                                                 : (sspec1.incrementW ? sspec1.minW : 0);
+          }
+          else if (sspec.incrementW)
+            extraComboWidth_ += sspec.minW;
+        }
+
+        s.rwidth() += extraComboWidth_;
 
         if (!sspec.incrementW && s.width() < sspec.minW)
           s.setWidth(sspec.minW);
@@ -12933,17 +12970,29 @@ QRect Style::subControlRect(ComplexControl control,
             return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
           }
           else
-          { // take into account the space needed by our menuitem frame
+          { // take into account the needed space
             QRect r = option->rect;
-            const QString group = "MenuItem";
-            const frame_spec fspec = getFrameSpec(group);
-            const label_spec lspec = getLabelSpec(group);
+            frame_spec fspec = getFrameSpec("MenuItem");
+            const label_spec lspec = getLabelSpec("MenuItem");
             int space = fspec.left+lspec.left + fspec.right+lspec.right
                         - 6; // assuming a maximum value forced by Qt
+
+            fspec = getFrameSpec("Menu");
+            space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
+                     + (!noComposite_ ? 2*settings_->getCompositeSpec().menu_shadow_depth : 0)
+                     - extraComboWidth_;
+
             r.adjust(-qMax(space,0), 0, 0, 0);
+
             /* compensate for the offset created by the shadow */
             if (!noComposite_ && menuShadow_.count() == 4)
+            {
+              /* the main width shouldn't be smaller than combo width */
+              r.adjust(-qMax(w - (r.width() - menuShadow_.at(0) - menuShadow_.at(2)), 0), 0, 0, 0);
               r.translate(menuShadow_.at(2), -menuShadow_.at(1));
+            }
+            else
+              r.adjust(-qMax(w-r.width(), 0), 0, 0, 0);
             return r;
           }
         }
