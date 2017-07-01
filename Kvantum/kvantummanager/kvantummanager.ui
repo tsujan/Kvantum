@@ -1631,12 +1631,13 @@ By default, combo popups do not cover the combo box.</string>
                 <widget class="QCheckBox" name="checkBoxHideComboCheckboxes">
                  <property name="toolTip">
                   <string>When drawing combo popups as menus,
-there will be a checkbox next to each entry.
+there will be a checkbox next to each entry
+(although Kvantum draws it as a radio button).
 
 This option will hide these.</string>
                  </property>
                  <property name="text">
-                  <string>No checkbox in combo menu</string>
+                  <string>Non-checkable combo menu</string>
                  </property>
                 </widget>
                </item>

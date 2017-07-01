@@ -109,7 +109,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="367"/>
-        <location filename="../../kvantummanager.ui" line="1813"/>
+        <location filename="../../kvantummanager.ui" line="1814"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -492,20 +492,7 @@ some apps set it themeselves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1633"/>
-        <source>When drawing combo popups as menus,
-there will be a checkbox next to each entry.
-
-This option will hide these.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="1639"/>
-        <source>No checkbox in combo menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="1792"/>
+        <location filename="../../kvantummanager.ui" line="1793"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -769,7 +756,7 @@ By default, combo popups do not cover the combo box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1646"/>
+        <location filename="../../kvantummanager.ui" line="1647"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -992,18 +979,18 @@ Uncheck it if you want to use those options!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1649"/>
+        <location filename="../../kvantummanager.ui" line="1650"/>
         <source>Left aligned tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1656"/>
+        <location filename="../../kvantummanager.ui" line="1657"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1660"/>
+        <location filename="../../kvantummanager.ui" line="1661"/>
         <source>Join inactive tabs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1013,84 +1000,98 @@ i.e., there is no border between them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1683"/>
+        <location filename="../../kvantummanager.ui" line="1633"/>
+        <source>When drawing combo popups as menus,
+there will be a checkbox next to each entry
+(although Kvantum draws it as a radio button).
+
+This option will hide these.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1640"/>
+        <source>Non-checkable combo menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1684"/>
         <source>Application Themes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1689"/>
+        <location filename="../../kvantummanager.ui" line="1690"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1724"/>
+        <location filename="../../kvantummanager.ui" line="1725"/>
         <source>Installed Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1740"/>
+        <location filename="../../kvantummanager.ui" line="1741"/>
         <source>Application(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1769"/>
+        <location filename="../../kvantummanager.ui" line="1770"/>
         <source>app1,app2,app3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1797"/>
+        <location filename="../../kvantummanager.ui" line="1798"/>
         <source>Remove List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1807"/>
+        <location filename="../../kvantummanager.ui" line="1808"/>
         <source>Save the current list of apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1810"/>
+        <location filename="../../kvantummanager.ui" line="1811"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1840"/>
-        <location filename="../../kvantummanager.ui" line="1851"/>
+        <location filename="../../kvantummanager.ui" line="1841"/>
+        <location filename="../../kvantummanager.ui" line="1852"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1843"/>
+        <location filename="../../kvantummanager.ui" line="1844"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1861"/>
+        <location filename="../../kvantummanager.ui" line="1862"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1865"/>
+        <location filename="../../kvantummanager.ui" line="1866"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1876"/>
+        <location filename="../../kvantummanager.ui" line="1877"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1904"/>
+        <location filename="../../kvantummanager.ui" line="1905"/>
         <source>What&apos;s This?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1907"/>
+        <location filename="../../kvantummanager.ui" line="1908"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1910"/>
+        <location filename="../../kvantummanager.ui" line="1911"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>

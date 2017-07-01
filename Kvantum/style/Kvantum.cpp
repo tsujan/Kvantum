@@ -5509,7 +5509,9 @@ void Style::drawControl(ControlElement element,
                                                                             0,
                                                                             rtl ? -lspec.right : 0,
                                                                             0));
-            if (opt->checkType == QStyleOptionMenuItem::Exclusive)
+            if (opt->checkType == QStyleOptionMenuItem::Exclusive
+                // combo menu checkboxes are exclusive
+                || qobject_cast<const QComboBox*>(widget))
             {
               if (opt->checked)
                 o.state |= State_On;
