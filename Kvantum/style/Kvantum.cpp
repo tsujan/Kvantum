@@ -12982,17 +12982,19 @@ QRect Style::subControlRect(ComplexControl control,
                      + (!noComposite_ ? 2*settings_->getCompositeSpec().menu_shadow_depth : 0)
                      - extraComboWidth_;
 
-            r.adjust(-qMax(space,0), 0, 0, 0);
+            /* The width might be increased by Qt -> qcombobox.cpp -> QComboBox::showPopup()
+               but the left border won't be moved. So, we align the left border.*/
+            r.adjust(0, 0, qMax(space,0), 0);
 
             /* compensate for the offset created by the shadow */
             if (!noComposite_ && menuShadow_.count() == 4)
             {
-              /* the main width shouldn't be smaller than combo width */
-              r.adjust(-qMax(w - (r.width() - menuShadow_.at(0) - menuShadow_.at(2)), 0), 0, 0, 0);
-              r.translate(menuShadow_.at(2), -menuShadow_.at(1));
+              /* menu width shouldn't be less than combo width */
+              r.adjust(0, 0, qMax(w - (r.width() - menuShadow_.at(0) - menuShadow_.at(2)), 0), 0);
+              r.translate(-menuShadow_.at(0), -menuShadow_.at(1));
             }
             else
-              r.adjust(-qMax(w-r.width(), 0), 0, 0, 0);
+              r.adjust(0, 0, qMax(w-r.width(), 0), 0);
             return r;
           }
         }

@@ -408,7 +408,7 @@ class Style : public QCommonStyle {
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
     int pixelRatio_;
 
-    /* For not calculating the extras combo width repeatedly. */
+    /* For not calculating the extra combo width repeatedly. */
     mutable int extraComboWidth_;
 
     /* For not getting the menu shadows repeatedly.
