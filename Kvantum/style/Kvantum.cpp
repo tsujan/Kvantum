@@ -1215,22 +1215,20 @@ void Style::polish(QWidget *widget)
             { // no mercy to intruding styles (as in SMPLayer pereferences)
               itemView->setStyleSheet("background-color: transparent;");
             }
-            else
+
+            QPalette palette = itemView->palette();
+            palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
+            itemView->setPalette(palette);
+
+            palette = itemView->viewport()->palette();
+            palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+            itemView->viewport()->setPalette(palette);
+
+            if (itemView->parentWidget())
             {
-              QPalette palette = itemView->palette();
-              palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
-              itemView->setPalette(palette);
-
-              palette = itemView->viewport()->palette();
-              palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
-              itemView->viewport()->setPalette(palette);
-
-              if (itemView->parentWidget())
-              {
-                palette = itemView->parentWidget()->palette();
-                palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
-                itemView->parentWidget()->setPalette(palette);
-              }
+              palette = itemView->parentWidget()->palette();
+              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
+              itemView->parentWidget()->setPalette(palette);
             }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
