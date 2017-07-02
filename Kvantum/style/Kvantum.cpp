@@ -2321,12 +2321,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
+
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             X += menuShadow_.at(2);
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x() - w->width()
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x()
+                  - w->width()
+                  + getMenuMargin(true)
                   < QApplication::desktop()->availableGeometry().left())
               {
                 X -= menuShadow_.at(2) + menuShadow_.at(0);
@@ -2344,7 +2347,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             X -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x() + parentMenu->width() + w->width()
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x() + parentMenu->width()
+                  + w->width()
+                  /* Qt tries to put the submenu to the right by making an
+                     overlap whose size isn't greater than the menu margin */
+                  - getMenuMargin(true)
+                  - 1 // FIXME: From where does Qt get this 1px?
                   > QApplication::desktop()->availableGeometry().right() + 1)
               { // there wasn't enough space to the right of the parent
                 X += menuShadow_.at(0) + menuShadow_.at(2);
