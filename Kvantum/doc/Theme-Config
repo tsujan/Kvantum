@@ -368,15 +368,17 @@ submenu_overlap                   integer             The horizontal overlap bet
                                                       default is 0. It cannot be greater than
                                                       16px.
 
-menu_shadow_depth                 integer             The depth of the shadow menus
-                                                      cast. A value of zero, its
-                                                      absence or a false value for
-                                                      "composite" means no shadow.
+menu_shadow_depth                 integer             The depth of the shadow menus cast.
+                                                      A value of zero, its absence or a false
+                                                      value for "composite" means no shadow.
+                                                      
+                                                      Also see "Theme-Making.pdf" ->
+                                                      Translucency and Shadow for Menus and
+                                                      Tooltips
 
-tooltip_shadow_depth              integer             The depth of the shadow tooltips
-                                                      cast. A value of zero, its
-                                                      absence or a false value for
-                                                      "composite" means no shadow.
+tooltip_shadow_depth              integer             The depth of the shadow tooltips cast.
+                                                      A value of zero, its absence or a false
+                                                      value for "composite" means no shadow.
 
 translucent_windows               true/false          Translucent windows and dialogs?
                                                       This requires a translucent SVG

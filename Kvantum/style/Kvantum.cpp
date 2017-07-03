@@ -2307,7 +2307,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* compensate for the offset created by the shadow
              (let's handle rtl separately) */
-          int X = w->x();
+
           QWidget *parentMenu = QApplication::activePopupWidget(); // "magical" condition for a submenu
           if (!parentMenu)
           { // search for a detached menu with an active action
@@ -2321,48 +2321,58 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
+          QRect ag(QApplication::desktop()->availableGeometry(w));
+          /* this gives the real position AFTER pending movements
+             because it's QWidgetData::crect (Qt -> qwidget.h) */
+          QRect g(w->geometry());
+          int X = g.left();
+          int Y = g.top();
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             X += menuShadow_.at(2);
+            Y -=  menuShadow_.at(1);
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x()
-                  - w->width()
-                  + getMenuMargin(true)
-                  < QApplication::desktop()->availableGeometry().left())
-              {
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x() < g.left())
                 X -= menuShadow_.at(2) + menuShadow_.at(0);
-              }
               else
               {
                 X += menuShadow_.at(0)
                      - getMenuMargin(true); // workaround for an old Qt bug
               }
             }
-            w->move(X, w->y() - menuShadow_.at(1));
+            else
+            {
+              if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                Y += menuShadow_.at(1) + menuShadow_.at(3);
+              if (g.left() == ag.left() && g.right() != ag.right())
+                X -= menuShadow_.at(2) + menuShadow_.at(0);
+            }
           }
           else // ltr
           {
             X -= menuShadow_.at(0); // left shadow
+            Y -=  menuShadow_.at(1); // top shadow
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x() + parentMenu->width()
-                  + w->width()
-                  /* Qt tries to put the submenu to the right by making an
-                     overlap whose size isn't greater than the menu margin */
-                  - getMenuMargin(true)
-                  - 1 // FIXME: From where does Qt get this 1px?
-                  > QApplication::desktop()->availableGeometry().right() + 1)
+              if (parentMenu->mapToGlobal(QPoint(0,0)).x() > g.left())
               { // there wasn't enough space to the right of the parent
                 X += menuShadow_.at(0) + menuShadow_.at(2);
               }
               else
                 X -= menuShadow_.at(2); // right shadow of the left menu
             }
-            w->move(X,
-                    w->y() - menuShadow_.at(1)); // top shadow
+            else // snap to the opposite screen edges if possible
+            {
+              if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                Y += menuShadow_.at(1) + menuShadow_.at(3);
+              if (g.right() == ag.right() && g.left() != ag.left())
+                X += menuShadow_.at(0) + menuShadow_.at(2);
+            }
           }
+
+          w->move(X,Y);
         }
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
