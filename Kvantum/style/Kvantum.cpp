@@ -2321,6 +2321,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
+          QWidget *parentMenubar = NULL;
+          if (!parentMenu)
+          { // search for a menubar with an active action
+            if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
+            {
+              if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
+              {
+                if (mb->activeAction())
+                  parentMenubar = mw->menuWidget();
+              }
+            }
+          }
+
           QRect ag(QApplication::desktop()->availableGeometry(w));
           /* this gives the real position AFTER pending movements
              because it's QWidgetData::crect (Qt -> qwidget.h) */
@@ -2344,6 +2357,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
             else
             {
+              if (parentMenubar
+                  && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+              {
+                Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+              }
               if (g.bottom() == ag.bottom() && g.top() != ag.top())
                 Y += menuShadow_.at(1) + menuShadow_.at(3);
               if (g.left() == ag.left() && g.right() != ag.right())
@@ -2365,6 +2383,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
             else // snap to the opposite screen edges if possible
             {
+              if (parentMenubar
+                  && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+              { // menu is above menubar
+                Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+              }
               if (g.bottom() == ag.bottom() && g.top() != ag.top())
                 Y += menuShadow_.at(1) + menuShadow_.at(3);
               if (g.right() == ag.right() && g.left() != ag.left())
