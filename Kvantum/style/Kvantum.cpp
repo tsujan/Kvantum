@@ -2305,8 +2305,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!noComposite_
             && menuShadow_.count() == 4)
         {
-          /* compensate for the offset created by the shadow
-             (let's handle rtl separately) */
+          /* compensate for the offset created by the shadow */
 
           QWidget *parentMenu = QApplication::activePopupWidget(); // "magical" condition for a submenu
           if (!parentMenu)
@@ -2355,18 +2354,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                      - getMenuMargin(true); // workaround for an old Qt bug
               }
             }
-            else
-            {
-              if (parentMenubar
-                  && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-              {
-                Y +=  menuShadow_.at(1) + menuShadow_.at(3);
-              }
-              if (g.bottom() == ag.bottom() && g.top() != ag.top())
-                Y += menuShadow_.at(1) + menuShadow_.at(3);
-              if (g.left() == ag.left() && g.right() != ag.right())
+            else if (g.left() == ag.left() && g.right() != ag.right())
                 X -= menuShadow_.at(2) + menuShadow_.at(0);
-            }
           }
           else // ltr
           {
@@ -2381,18 +2370,34 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               else
                 X -= menuShadow_.at(2); // right shadow of the left menu
             }
-            else // snap to the opposite screen edges if possible
-            {
-              if (parentMenubar
-                  && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-              { // menu is above menubar
+            else if (g.right() == ag.right() && g.left() != ag.left())
+                X += menuShadow_.at(0) + menuShadow_.at(2); // snap to the right screen edge if possible
+          }
+
+          if (!parentMenu)
+          {
+            if (parentMenubar
+                && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+            { // menu is above menubar
+              Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+            }
+            else if (QWidget *aw = QApplication::activeWindow())
+            { // see if the menu is exactly above a button (and not below another)
+              QPoint btnTopLeft = aw->mapFromGlobal(g.bottomLeft()); // Strange! Qt doesn't add 1px.
+              QPoint btnBottomLeft = aw->mapFromGlobal(g.topLeft()) - QPoint(0,1);
+              QWidget *bottomChild = aw->childAt(btnTopLeft);
+              QWidget *topChild = aw->childAt(btnBottomLeft);
+              if (qobject_cast<QAbstractButton*>(bottomChild)
+                  && bottomChild->mapTo(aw, QPoint(0,0)) == btnTopLeft
+                  && !(qobject_cast<QAbstractButton*>(topChild)
+                       && topChild->mapTo(aw, QPoint(0,topChild->height())) == btnBottomLeft + QPoint(0,1)))
+              {
                 Y +=  menuShadow_.at(1) + menuShadow_.at(3);
               }
-              if (g.bottom() == ag.bottom() && g.top() != ag.top())
-                Y += menuShadow_.at(1) + menuShadow_.at(3);
-              if (g.right() == ag.right() && g.left() != ag.left())
-                X += menuShadow_.at(0) + menuShadow_.at(2);
             }
+            /* snap to the screen bottom if possible */
+            if (g.bottom() == ag.bottom() && g.top() != ag.top())
+              Y += menuShadow_.at(1) + menuShadow_.at(3);
           }
 
           w->move(X,Y);
