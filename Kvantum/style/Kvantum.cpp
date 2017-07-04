@@ -2307,12 +2307,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* compensate for the offset created by the shadow */
 
-          QWidget *parentMenu = QApplication::activePopupWidget(); // "magical" condition for a submenu
+          /* "magical" condition for a submenu */
+          QWidget *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
           if (!parentMenu)
           { // search for a detached menu with an active action
             foreach (QWidget *topWidget, QApplication::topLevelWidgets())
             {
-              if (qobject_cast<QMenu*>(topWidget)
+              if (topWidget->isVisible()
+                  && qobject_cast<QMenu*>(topWidget)
+                  && topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
                   && qobject_cast<QMenu*>(topWidget)->activeAction())
               {
                 parentMenu = topWidget;
@@ -2320,7 +2323,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
-          QWidget *parentMenubar = NULL;
+          QMenuBar *parentMenubar = NULL;
           if (!parentMenu)
           { // search for a menubar with an active action
             if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
@@ -2328,7 +2331,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
               {
                 if (mb->activeAction())
-                  parentMenubar = mw->menuWidget();
+                  parentMenubar = mb;
               }
             }
           }
@@ -2338,12 +2341,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
              because it's QWidgetData::crect (Qt -> qwidget.h) */
           QRect g(w->geometry());
           int X = g.left();
-          int Y = g.top();
+          int Y = g.top()
+                  - menuShadow_.at(1); // top shadow
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             X += menuShadow_.at(2);
-            Y -=  menuShadow_.at(1);
             if (parentMenu)
             {
               if (parentMenu->mapToGlobal(QPoint(0,0)).x() < g.left())
@@ -2354,13 +2357,57 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                      - getMenuMargin(true); // workaround for an old Qt bug
               }
             }
-            else if (g.left() == ag.left() && g.right() != ag.right())
-                X -= menuShadow_.at(2) + menuShadow_.at(0);
+            else
+            {
+              if (parentMenubar)
+              {
+                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+                  Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+
+                QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
+                QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
+                if (g.right() + 1 > activeTopLeft.x() + activeG.width())
+                { // Qt positions the menu wrongly in this case but we don't add a workaround
+                  X -= menuShadow_.at(2);
+                  int delta = menuShadow_.at(2)
+                              - (g.right() + 1 - (activeTopLeft.x() + activeG.width()));
+                  if (delta > 0)
+                    X += delta;
+                  else
+                    X -= qMin(menuShadow_.at(0), -delta);
+                }
+              }
+              else
+              {
+                if (!sunkenButton_.isNull())
+                {
+                  QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
+                  if (wTopLeft.y() >= g.bottom())
+                    Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                  if (g.right() + 1 > wTopLeft.x() + sunkenButton_.data()->width())
+                  {
+                    X -= menuShadow_.at(2);
+                    int delta = menuShadow_.at(2)
+                                - (g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
+                    if (delta > 0)
+                      X += delta;
+                    else
+                      X -= qMin(menuShadow_.at(0), -delta);
+                  }
+                }
+                else
+                {
+                  if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                    Y += menuShadow_.at(1) + menuShadow_.at(3);
+                  if (g.left() == ag.left() && g.right() != ag.right())
+                    X -= menuShadow_.at(2) + menuShadow_.at(0);
+                }
+              }
+            }
           }
           else // ltr
           {
             X -= menuShadow_.at(0); // left shadow
-            Y -=  menuShadow_.at(1); // top shadow
             if (parentMenu)
             {
               if (parentMenu->mapToGlobal(QPoint(0,0)).x() > g.left())
@@ -2370,34 +2417,54 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               else
                 X -= menuShadow_.at(2); // right shadow of the left menu
             }
-            else if (g.right() == ag.right() && g.left() != ag.left())
-                X += menuShadow_.at(0) + menuShadow_.at(2); // snap to the right screen edge if possible
-          }
-
-          if (!parentMenu)
-          {
-            if (parentMenubar
-                && parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-            { // menu is above menubar
-              Y +=  menuShadow_.at(1) + menuShadow_.at(3);
-            }
-            else if (QWidget *aw = QApplication::activeWindow())
-            { // see if the menu is exactly above a button (and not below another)
-              QPoint btnTopLeft = aw->mapFromGlobal(g.bottomLeft()); // Strange! Qt doesn't add 1px.
-              QPoint btnBottomLeft = aw->mapFromGlobal(g.topLeft()) - QPoint(0,1);
-              QWidget *bottomChild = aw->childAt(btnTopLeft);
-              QWidget *topChild = aw->childAt(btnBottomLeft);
-              if (qobject_cast<QAbstractButton*>(bottomChild)
-                  && bottomChild->mapTo(aw, QPoint(0,0)) == btnTopLeft
-                  && !(qobject_cast<QAbstractButton*>(topChild)
-                       && topChild->mapTo(aw, QPoint(0,topChild->height())) == btnBottomLeft + QPoint(0,1)))
+            else
+            {
+              if (parentMenubar)
               {
-                Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+                  Y +=  menuShadow_.at(1) + menuShadow_.at(3); // menu is above menubar
+
+                QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
+                                                                   parentMenubar->activeAction())
+                                                                 .topLeft());
+                if (activeTopLeft.x() > g.left()) // because of the right screen border
+                {
+                  X += menuShadow_.at(0);
+                  int delta = menuShadow_.at(0) - (activeTopLeft.x() - g.left());
+                  if (delta > 0)
+                    X -= delta;
+                  else
+                    X += qMin(menuShadow_.at(2), -delta);
+                }
+              }
+              else
+              {
+                if (!sunkenButton_.isNull()) // the menu is triggered by a button
+                {
+                  QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
+                  if (wTopLeft.y() >= g.bottom()) // above the button (strange! Qt doesn't add 1px)
+                    Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                  if (wTopLeft.x() > g.left()) // because of the right screen border
+                  {
+                    X += menuShadow_.at(0);
+                    int delta = menuShadow_.at(0) - (wTopLeft.x() - g.left());
+                    if (delta > 0)
+                      X -= delta;
+                    else
+                      X += qMin(menuShadow_.at(2), -delta);
+                  }
+                }
+                else // probably a panel menu
+                {
+                  /* snap to the screen bottom if possible */
+                  if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                    Y += menuShadow_.at(1) + menuShadow_.at(3);
+                  /* snap to the right screen edge if possible */
+                  if (g.right() == ag.right() && g.left() != ag.left())
+                    X += menuShadow_.at(0) + menuShadow_.at(2);
+                }
               }
             }
-            /* snap to the screen bottom if possible */
-            if (g.bottom() == ag.bottom() && g.top() != ag.top())
-              Y += menuShadow_.at(1) + menuShadow_.at(3);
           }
 
           w->move(X,Y);
@@ -3122,6 +3189,13 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
+      if (widget)
+      {
+        if (option->state & State_Sunken)
+          sunkenButton_ = const_cast<QWidget*>(widget);
+        else if (sunkenButton_.data() == widget)
+          sunkenButton_.clear();
+      }
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
       bool autoraise(option->state & State_AutoRaise);
@@ -7980,6 +8054,13 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_PushButtonBevel : { // bevel and indicator
+      if (widget)
+      {
+        if (option->state & State_Sunken)
+          sunkenButton_ = const_cast<QWidget*>(widget);
+        else if (sunkenButton_.data() == widget)
+          sunkenButton_.clear();
+      }
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
 

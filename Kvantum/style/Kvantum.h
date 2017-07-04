@@ -36,9 +36,9 @@ class QSvgRenderer;
 namespace Kvantum {
 
 #if QT_VERSION >= 0x050000
-template <typename T> using WeakPointer = QPointer<T>;
+template <typename T> using KvPointer = QPointer<T>;
 #else
-template <typename T> using WeakPointer = QWeakPointer<T>;
+template <typename T> using KvPointer = QWeakPointer<T>;
 #endif
 
 // Used only to give appropriate top and bottom margins to
@@ -75,7 +75,7 @@ class KvComboItemDelegate : public QItemDelegate
     }
 
   private:
-    WeakPointer<QAbstractItemDelegate> proxy_;
+    KvPointer<QAbstractItemDelegate> proxy_;
     int margin_;
 };
 
@@ -410,6 +410,9 @@ class Style : public QCommonStyle {
 
     /* For not calculating the extra combo width repeatedly. */
     mutable int extraComboWidth_;
+
+    /* Keep track of the sunken button (used instead of a private header for menu positioning). */
+    mutable KvPointer<QWidget> sunkenButton_;
 
     /* For not getting the menu shadows repeatedly.
        They're used to position submenus correctly. */
