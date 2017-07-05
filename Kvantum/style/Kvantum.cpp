@@ -958,9 +958,22 @@ void Style::polish(QWidget *widget)
       /* popup, not menu (-> GoldenDict); also, although it may be
          hard to believe, a menu can have the Dialog flag (-> qlipper)
          and a window can have the ToolTip flag (-> LXQtGroupPopup) */
-      if (qobject_cast<QMenu*>(widget)
-          || widget->inherits("QTipLabel")
-          || qobject_cast<QLabel*>(widget)) // a floating label, as in Filelight
+      if (qobject_cast<QMenu*>(widget))
+      { // some apps (like QtAv Player) do weird things with menus
+        QColor menuTextColor = getFromRGBA(getLabelSpec("MenuItem").normalColor);
+        if (menuTextColor.isValid())
+        {
+          QPalette palette = widget->palette();
+          if (menuTextColor != palette.color(QPalette::WindowText))
+          {
+            palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
+            widget->setPalette(palette);
+          }
+        }
+        break;
+      }
+      else if (widget->inherits("QTipLabel")
+               || qobject_cast<QLabel*>(widget)) // a floating label, as in Filelight
       {
         break;
       }
@@ -1431,17 +1444,6 @@ void Style::polish(QWidget *widget)
         widget->removeEventFilter(this);
         widget->installEventFilter(this);
       }
-    }
-  }
-
-  if (qobject_cast<QMenu*>(widget))
-  { // Some apps (like QtAv Player) do weird things with menus
-    QColor menuTextColor = getFromRGBA(getLabelSpec("MenuItem").normalColor);
-    QPalette palette = widget->palette();
-    if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::WindowText))
-    {
-      palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
-      widget->setPalette(palette);
     }
   }
 
