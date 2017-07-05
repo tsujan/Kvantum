@@ -891,18 +891,6 @@ void Style::polish(QWidget *widget)
 
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
-  /* So far I haven't found any use for this: */
-  /*if (qobject_cast<QMenu*>(widget))
-  {
-    QColor menuTextColor = getFromRGBA(getLabelSpec("Menu").normalColor);
-    QPalette palette = widget->palette();
-    if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::Text))
-    {
-      palette.setColor(QPalette::Active,QPalette::Text,menuTextColor);
-      widget->setPalette(palette);
-    }
-  }*/
-
   /* respect the toolbar text color */
   QColor toolbarTextColor = getFromRGBA(getLabelSpec("Toolbar").normalColor);
   QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
@@ -1443,6 +1431,17 @@ void Style::polish(QWidget *widget)
         widget->removeEventFilter(this);
         widget->installEventFilter(this);
       }
+    }
+  }
+
+  if (qobject_cast<QMenu*>(widget))
+  { // Some apps (like QtAv Player) do weird things with menus
+    QColor menuTextColor = getFromRGBA(getLabelSpec("MenuItem").normalColor);
+    QPalette palette = widget->palette();
+    if (menuTextColor.isValid() && menuTextColor != palette.color(QPalette::WindowText))
+    {
+      palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
+      widget->setPalette(palette);
     }
   }
 
@@ -6049,6 +6048,14 @@ void Style::drawControl(ControlElement element,
         /* vertically centered */
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
+        if (widget && qobject_cast<QMenu*>(widget->window()))
+        {
+          /* in Style::polish(QWidget*), we set the window text color
+             of menus to the normal menuitem text color because some
+             apps (like QtAv) might do weird things with menus */
+          lspec.normalColor = lspec.focusColor
+          = widget->palette().color(QPalette::Active,QPalette::WindowText).name();
+        }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -6078,6 +6085,11 @@ void Style::drawControl(ControlElement element,
         /* vertically centered */
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
+        if (widget && qobject_cast<QMenu*>(widget->window()))
+        { // see the explanation at CE_RadioButtonLabel (above)
+          lspec.normalColor = lspec.focusColor
+          = widget->palette().color(QPalette::Active,QPalette::WindowText).name();
+        }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
