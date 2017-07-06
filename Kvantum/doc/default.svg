@@ -19,8 +19,8 @@
    width="450"
    version="1.0">
   <sodipodi:namedview
-     inkscape:window-height="1015"
-     inkscape:window-width="1920"
+     inkscape:window-height="1048"
+     inkscape:window-width="1884"
      inkscape:pageshadow="2"
      inkscape:pageopacity="1"
      guidetolerance="10.0"
@@ -32,9 +32,9 @@
      id="base"
      showgrid="true"
      inkscape:zoom="0.84171223"
-     inkscape:cx="226.61554"
-     inkscape:cy="963.39877"
-     inkscape:window-x="0"
+     inkscape:cx="74.190939"
+     inkscape:cy="911.62565"
+     inkscape:window-x="36"
      inkscape:window-y="0"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -4084,11 +4084,11 @@
        xlink:href="#linearGradient7127"
        id="linearGradient6734"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1,0,0,1.1162791,-223.99897,-336.90715)"
+       gradientTransform="matrix(1,0,0,1.1162791,-224,-336.90715)"
        x1="230"
        y1="1095"
-       x2="229.99896"
-       y2="1148" />
+       x2="230"
+       y2="1147.4792" />
     <linearGradient
        id="linearGradient7127">
       <stop
@@ -4411,9 +4411,9 @@
        id="linearGradient6756"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.10416666,0,0,1,-132.95885,-8.250112)"
-       x1="230"
-       y1="1092"
-       x2="230"
+       x1="278.00528"
+       y1="1094.4186"
+       x2="278.00497"
        y2="1153" />
     <linearGradient
        inkscape:collect="always"
@@ -4422,9 +4422,9 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(1,0,0,1.1162791,-186,-293.5524)"
        x1="82"
-       y1="1233.8335"
+       y1="1236"
        x2="82"
-       y2="1288.4792" />
+       y2="1288.4791" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient7127"
@@ -4432,7 +4432,7 @@
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-114,4.2500779)"
        x1="10"
-       y1="1079.5"
+       y1="1081.9183"
        x2="10"
        y2="1140.5" />
     <linearGradient
@@ -4441,19 +4441,19 @@
        id="linearGradient6762"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(1.6,0,0,0.45454545,-268,1127.3126)"
-       x1="132.5"
-       y1="-95.837502"
-       x2="132.5"
-       y2="38.362183" />
+       x1="102.5"
+       y1="-90.517097"
+       x2="102.5"
+       y2="38.362175" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient7127"
        id="linearGradient6764"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-114,4.2500779)"
-       x1="58"
-       y1="1079.5"
-       x2="58"
+       x1="10"
+       y1="1081.9183"
+       x2="10"
        y2="1140.5" />
     <linearGradient
        inkscape:collect="always"
@@ -4461,19 +4461,19 @@
        id="linearGradient6766"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(1,0,0,1.1162791,-186,-293.5524)"
-       x1="130"
-       y1="1233.8335"
-       x2="130"
-       y2="1288.4792" />
+       x1="82"
+       y1="1236"
+       x2="82"
+       y2="1288.4791" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient7127"
        id="linearGradient6768"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.10416666,0,0,1,-79.958854,-8.250112)"
-       x1="230"
-       y1="1092"
-       x2="230.00981"
+       x1="-230.79472"
+       y1="1094.4186"
+       x2="-230.79503"
        y2="1153" />
     <linearGradient
        inkscape:collect="always"
@@ -4481,8 +4481,8 @@
        id="linearGradient6770"
        gradientUnits="userSpaceOnUse"
        gradientTransform="translate(-334,-8.250112)"
-       x1="229.99898"
-       y1="1092"
+       x1="230"
+       y1="1094.4186"
        x2="230"
        y2="1153" />
     <linearGradient
@@ -10270,9 +10270,9 @@
        style="font-size:10px;line-height:0">Splitter Grip</tspan></text>
   <path
      inkscape:connector-curvature="0"
-     style="opacity:0.92;fill:url(#linearGradient6734);fill-rule:evenodd;stroke:none;fill-opacity:1.0"
+     style="opacity:0.92;fill:url(#linearGradient6734);fill-opacity:1;fill-rule:evenodd;stroke:none"
      id="menu-normal"
-     d="m 6.001,891 48,0 0,48 -48,0 z" />
+     d="m 6,891 h 48 v 48 H 6 Z" />
   <g
      style="opacity:0.92"
      id="menu-normal-top"

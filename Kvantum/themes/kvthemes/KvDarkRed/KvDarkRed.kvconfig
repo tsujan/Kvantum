@@ -3,6 +3,7 @@ author=Tsu Jan
 comment=A stylish dark theme with some red elements
 left_tabs=true
 attach_active_tab=true
+active_tab_overlap=2font
 group_toolbar_buttons=true
 spread_progressbar=true
 composite=true
@@ -32,9 +33,12 @@ toolbar_icon_size=16
 animate_states=true
 button_contents_shift=true
 combo_as_lineedit=true
+combo_menu=true
 groupbox_top_label=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
+no_inactive_tab_expansion=true
+transient_scrollbar=true
 layout_spacing=2
 submenu_overlap=0
 tooltip_delay=-1
@@ -135,18 +139,22 @@ text.margin.right=3
 
 [Tab]
 inherits=PanelButtonCommand
-text.margin.left=5
-text.margin.right=5
+text.margin.left=10
+text.margin.right=10
 text.margin.top=2
-text.margin.bottom=3
+text.margin.bottom=2
 frame.top=5
-frame.bottom=5
+frame.bottom=3
 frame.left=5
 frame.right=5
+frame.expanded.top=2
+frame.expanded.bottom=0
+frame.expanded.left=1
+frame.expanded.right=1
 text.press.color=white
-indicator.size=8
+indicator.size=10
 min_width=4font
-min_height=2.3font
+frame.expansion=3.6font
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -155,6 +163,16 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
+
+[TabBarFrame]
+inherits=GenericFrame
+frame=true
+frame.element=tabBarFrame
+interior=false
+frame.top=0
+frame.bottom=1
+frame.left=0
+frame.right=0
 
 [TreeExpander]
 inherits=PanelButtonCommand
@@ -252,8 +270,8 @@ text.margin.right=2
 inherits=PanelButtonCommand
 text.margin.top=1
 text.margin.bottom=1
-text.margin.left=2
-text.margin.right=2
+text.margin.left=3
+text.margin.right=3
 frame=true
 frame.element=menuitem
 interior.element=menuitem

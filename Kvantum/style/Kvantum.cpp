@@ -1899,8 +1899,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (tabHoverRect_.isNull()
             && diff == 1)
         {
-          /* the cursor has moved to a tab adjacent to
-             the active tab without leaving the tabbar */
+          /* the cursor has moved to a tab adjacent to the active tab */
           QRect r = tabbar->tabRect(indx);
           const frame_spec fspec = getFrameSpec("Tab");
           int overlap = tspec_.active_tab_overlap;
@@ -1920,12 +1919,20 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         else if (!tabHoverRect_.isNull()
                  && (diff == 0 || diff == 2))
         {
-          /* the cursor has left a tab adjacent to the active tab and moved to
-             the active or the next inactive tab without leaving the tabbar */
+          /* the cursor has left a tab adjacent to the active tab
+             and moved to the active tab or the next inactive tab */
           tabbar->update(tabHoverRect_);
           tabHoverRect_ = QRect();
         }
       }
+      else if (!tabHoverRect_.isNull())
+      {
+        /* the cursor has left a tab adjacent to the active tab
+           and moved to an empty place on the tabbar */
+        tabbar->update(tabHoverRect_);
+        tabHoverRect_ = QRect();
+      }
+        
     }
     break;
 

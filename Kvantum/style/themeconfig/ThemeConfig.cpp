@@ -578,7 +578,16 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","active_tab_overlap");
   if (v.isValid()) // 0 by default
-    r.active_tab_overlap = qMax(v.toInt(),0);
+  {
+    QString value = v.toString();
+    if (value.endsWith("font"))
+    { // multiply by the app font height
+      r.active_tab_overlap = qMax(value.left(value.length()-4).toFloat(), 0.0f)
+                             * QFontMetrics(QApplication::font()).height();
+    }
+    else
+      r.active_tab_overlap = qMax(v.toInt(),0);
+  }
 
   v = getValue("General","mirror_doc_tabs");
   if (v.isValid()) // true by default
