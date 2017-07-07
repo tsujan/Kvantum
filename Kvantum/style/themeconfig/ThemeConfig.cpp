@@ -268,20 +268,18 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
 
   v = getValue(elementName, "indicator.element", i);
   if (!v.toString().isEmpty())
-  {
     r.element = v.toString();
 
-    QString name = elementName;
-    if (name == "ToolbarButton")
-    {
-      name = "PanelButtonTool";
-      i = getValue(name, "inherits").toString();
-    }
-
-    v = getValue(name,"indicator.size", i);
-    if (v.isValid())
-      r.size = qMax(v.toInt(),0);
+  /* ToolbarButton gets its indicator size from PanelButtonTool */
+  QString name = elementName;
+  if (name == "ToolbarButton")
+  {
+    name = "PanelButtonTool";
+    i = getValue(name, "inherits").toString();
   }
+  v = getValue(name,"indicator.size", i);
+  if (v.isValid()) // 15 by default
+    r.size = qMax(v.toInt(),0);
 
   dSpecs_[elementName] = r;
   return r;

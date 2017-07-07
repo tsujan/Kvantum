@@ -4214,6 +4214,20 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QString group = "LineEdit";
       interior_spec ispec = getInteriorSpec(group);
       frame_spec fspec = getFrameSpec(group);
+
+      /* always draw a thin frame when editing itemview texts */
+      if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
+      {
+        painter->save();
+        painter->setPen(option->palette.color(QPalette::Highlight));
+        painter->drawRect(x, y, w-1, h-1);
+        painter->restore();
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 1;
+        fspec.expansion = 0;
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
+        return;
+      }
+
       const label_spec lspec = getLabelSpec(group);
       const size_spec sspec = getSizeSpec(group);
 
@@ -4246,11 +4260,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.bottom = qMin(fspec.bottom,3);
           }
         }
-      }
-      /* no frame when editing itemview texts */
-      if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
       }
       QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(p);
       const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
@@ -11294,6 +11303,9 @@ QSize Style::sizeFromContents(ContentsType type,
 
   switch (type) {
     case CT_LineEdit : {
+      if (qobject_cast<QAbstractItemView*>(getParent(widget,2))) // when editing itemview texts
+        return defaultSize;
+
       QFont f;
       if (widget) f = widget->font();
       else f = QApplication::font();
@@ -12338,10 +12350,11 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       frame_spec fspec = getFrameSpec("LineEdit");
       label_spec lspec = getLabelSpec("LineEdit");
       size_spec sspec = getSizeSpec("LineEdit");
-      /* no frame when editing itemview texts */
+      /* when editing itemview texts, a thin frame is always drawn
+         (see PE_PanelLineEdit) */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 1;
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
         sspec.incrementW = false;
       }
@@ -12497,6 +12510,16 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           if (!hasIcon || pos != QStyleOptionViewItem::Bottom)
             r.adjust(0, 0, 0, -lspec.bottom-fspec.bottom);
         }
+        else if (!hasIcon || (pos != QStyleOptionViewItem::Top
+                              && pos != QStyleOptionViewItem::Bottom))
+        {
+          /* give all the available vertical space to the text
+             (good when editing the item) */
+          if (r.top() > option->rect.top())
+            r.setTop(option->rect.top());
+          if (r.bottom() < option->rect.bottom())
+            r.setBottom(option->rect.bottom());
+        }
 
         if (hasIcon)
         {
@@ -12538,9 +12561,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                   txtHeight *= l.size();
                 }
                 r = alignedRect(option->direction,
-                    align | Qt::AlignVCenter,
-                    QSize(r.width(), txtHeight),
-                    r);
+                               align | Qt::AlignVCenter,
+                               QSize(r.width(), txtHeight),
+                               r);
               }
             }
           }

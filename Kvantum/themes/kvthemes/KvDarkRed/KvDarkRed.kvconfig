@@ -101,6 +101,12 @@ min_height=+0.2font
 [PanelButtonTool]
 inherits=PanelButtonCommand
 
+[ToolbarButton]
+inherits=PanelButtonCommand
+frame.element=tbutton
+interior.element=tbutton
+indicator.element=arrow
+
 [DockTitle]
 text.bold=true
 text.focus.color=white
