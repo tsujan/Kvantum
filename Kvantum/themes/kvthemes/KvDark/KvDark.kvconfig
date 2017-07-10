@@ -19,7 +19,6 @@ double_click=false
 vertical_spin_buttons=false
 translucent_windows=false
 blurring=false
-opaque=
 vertical_spin_indicators=false
 merge_menubar_with_toolbar=false
 button_icon_size=16

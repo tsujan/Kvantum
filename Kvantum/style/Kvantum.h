@@ -239,7 +239,7 @@ class Style : public QCommonStyle {
                     ) const;
 
     /* Generic method that draws an interior. */
-    void renderInterior(QPainter *painter,
+    bool renderInterior(QPainter *painter,
                         const QRect &bounds, // frame bounds
                         const frame_spec &fspec, // frame spec
                         const interior_spec &ispec, // interior spec

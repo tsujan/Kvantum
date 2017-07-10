@@ -470,12 +470,15 @@ theme_spec ThemeConfig::getCompositeSpec()
   /* no blurring or window translucency without compositing */
   if (isX11_ && r.composite)
   {
-    /* no window translucency or blurring
-       without window interior element */
+    /* no window translucency or blurring without
+       window interior element or reduced opacity */
+
     interior_spec ispec = getInteriorSpec("WindowTranslucent");
     if (ispec.element.isEmpty())
       ispec = getInteriorSpec("Window");
-    if (ispec.hasInterior)
+
+    if (ispec.hasInterior
+        || getValue("General","reduce_window_opacity").toInt() > 0)
     {
       v = getValue("General","translucent_windows");
       if (v.isValid())
@@ -532,6 +535,10 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","comment");
   if (!v.toString().isEmpty())
     r.comment = v.toString();
+
+  v = getValue("General","reduce_window_opacity");
+  if (v.isValid())
+    r.reduce_window_opacity = qMin(qMax(v.toInt(),0),90);
 
   v = getValue("General","x11drag");
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default

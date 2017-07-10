@@ -21,7 +21,6 @@ vertical_spin_indicators=false
 translucent_windows=false
 blurring=false
 popup_blurring=false
-opaque=
 toolbar_icon_size=16
 animate_states=true
 alt_mnemonic=true

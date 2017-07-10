@@ -635,15 +635,15 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
     ui->checkBoxTint->setChecked (defaultSettings.value ("no_selection_tint").toBool());
     int tmp = 0;
-    if (defaultSettings.contains ("tint_on_mouseover")) // it's false by default
+    if (defaultSettings.contains ("tint_on_mouseover")) // it's 0 by default
         tmp = qMin (qMax (defaultSettings.value ("tint_on_mouseover").toInt(), 0), 100);
     ui->spinTint->setValue (tmp);
     tmp = 100;
-    if (defaultSettings.contains ("disabled_icon_opacity")) // it's false by default
+    if (defaultSettings.contains ("disabled_icon_opacity")) // it's 100 by default
         tmp = qMin (qMax (defaultSettings.value ("disabled_icon_opacity").toInt(), 0), 100);
     ui->spinOpacity->setValue (tmp);
     tmp = 0;
-    if (defaultSettings.contains ("lxqtmainmenu_iconsize")) // it's false by default
+    if (defaultSettings.contains ("lxqtmainmenu_iconsize")) // it's 0 by default
         tmp = qMin (qMax (defaultSettings.value ("lxqtmainmenu_iconsize").toInt(), 0), 32);
     ui->spinLxqtMenu->setValue (tmp);
     defaultSettings.endGroup();
@@ -722,62 +722,66 @@ void KvantumManager::defaultThemeButtons()
         if (!ui->checkBoxBlurWindow->isChecked())
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
+    tmp = 0;
+    if (defaultSettings.contains ("reduce_window_opacity")) // it's 0 by default
+        tmp = qMin (qMax (defaultSettings.value ("reduce_window_opacity").toInt(), 0), 90);
+    ui->spinReduceOpacity->setValue (tmp);
 
-    int theSize = 16;
+    tmp = 16;
     if (defaultSettings.contains ("small_icon_size"))
-        theSize = defaultSettings.value ("small_icon_size").toInt();
-    theSize = qMin(qMax(theSize,16), 48);
-    ui->spinSmall->setValue (theSize);
+        tmp = defaultSettings.value ("small_icon_size").toInt();
+    tmp = qMin(qMax(tmp,16), 48);
+    ui->spinSmall->setValue (tmp);
 
-    theSize = 32;
+    tmp = 32;
     if (defaultSettings.contains ("large_icon_size"))
-        theSize = defaultSettings.value ("large_icon_size").toInt();
-    theSize = qMin(qMax(theSize,24), 128);
-    ui->spinLarge->setValue (theSize);
+        tmp = defaultSettings.value ("large_icon_size").toInt();
+    tmp = qMin(qMax(tmp,24), 128);
+    ui->spinLarge->setValue (tmp);
 
-    theSize = 16;
+    tmp = 16;
     if (defaultSettings.contains ("button_icon_size"))
-        theSize = defaultSettings.value ("button_icon_size").toInt();
-    theSize = qMin(qMax(theSize,16), 64);
-    ui->spinButton->setValue (theSize);
+        tmp = defaultSettings.value ("button_icon_size").toInt();
+    tmp = qMin(qMax(tmp,16), 64);
+    ui->spinButton->setValue (tmp);
 
-    theSize = 22;
+    tmp = 22;
     if (defaultSettings.contains ("toolbar_icon_size"))
-        theSize = defaultSettings.value ("toolbar_icon_size").toInt();
+        tmp = defaultSettings.value ("toolbar_icon_size").toInt();
     else if (defaultSettings.value ("slim_toolbars").toBool())
-        theSize = 16;
-    theSize = qMin(qMax(theSize,16), 64);
-    ui->spinToolbar->setValue (theSize);
+        tmp = 16;
+    tmp = qMin(qMax(tmp,16), 64);
+    ui->spinToolbar->setValue (tmp);
 
-    theSize = 2;
+    tmp = 2;
     if (defaultSettings.contains ("layout_spacing"))
-        theSize = defaultSettings.value ("layout_spacing").toInt();
-    theSize = qMin(qMax(theSize,2), 16);
-    ui->spinLayout->setValue (theSize);
+        tmp = defaultSettings.value ("layout_spacing").toInt();
+    tmp = qMin(qMax(tmp,2), 16);
+    ui->spinLayout->setValue (tmp);
 
-    theSize = 4;
+    tmp = 4;
     if (defaultSettings.contains ("layout_margin"))
-        theSize = defaultSettings.value ("layout_margin").toInt();
-    theSize = qMin(qMax(theSize,2), 16);
-    ui->spinLayoutMargin->setValue (theSize);
+        tmp = defaultSettings.value ("layout_margin").toInt();
+    tmp = qMin(qMax(tmp,2), 16);
+    ui->spinLayoutMargin->setValue (tmp);
 
-    theSize = 0;
+    tmp = 0;
     if (defaultSettings.contains ("submenu_overlap"))
-        theSize = defaultSettings.value ("submenu_overlap").toInt();
-    theSize = qMin(qMax(theSize,0), 16);
-    ui->spinOverlap->setValue (theSize);
+        tmp = defaultSettings.value ("submenu_overlap").toInt();
+    tmp = qMin(qMax(tmp,0), 16);
+    ui->spinOverlap->setValue (tmp);
 
-    theSize = 16;
+    tmp = 16;
     if (defaultSettings.contains ("spin_button_width"))
-        theSize = defaultSettings.value ("spin_button_width").toInt();
-    theSize = qMin(qMax(theSize,16), 32);
-    ui->spinSpinBtnWidth->setValue (theSize);
+        tmp = defaultSettings.value ("spin_button_width").toInt();
+    tmp = qMin(qMax(tmp,16), 32);
+    ui->spinSpinBtnWidth->setValue (tmp);
 
-    theSize = 36;
+    tmp = 36;
     if (defaultSettings.contains ("scroll_min_extent"))
-        theSize = defaultSettings.value ("scroll_min_extent").toInt();
-    theSize = qMin(qMax(theSize,16), 100);
-    ui->spinMinScrollLength->setValue (theSize);
+        tmp = defaultSettings.value ("scroll_min_extent").toInt();
+    tmp = qMin(qMax(tmp,16), 100);
+    ui->spinMinScrollLength->setValue (tmp);
 
     defaultSettings.endGroup();
 
@@ -976,6 +980,12 @@ void KvantumManager::tabChanged (int index)
                     popupBlurring (ui->checkBoxBlurWindow->isChecked());
                     if (!ui->checkBoxBlurWindow->isChecked() && themeSettings.contains ("popup_blurring"))
                         ui->checkBoxBlurPopup->setChecked (themeSettings.value ("popup_blurring").toBool());
+                }
+                if (themeSettings.contains ("reduce_window_opacity"))
+                {
+                    int rwo = themeSettings.value ("reduce_window_opacity").toInt();
+                    rwo = qMin (qMax (rwo, 0), 90);
+                    ui->spinReduceOpacity->setValue (rwo);
                 }
                 if (themeSettings.contains ("small_icon_size"))
                 {
@@ -1722,6 +1732,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("combo_menu", boolToStr (ui->checkBoxComboMenu->isChecked()));
         generalKeys.insert("hide_combo_checkboxes", boolToStr (ui->checkBoxHideComboCheckboxes->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
+        generalKeys.insert("reduce_window_opacity", str.setNum (ui->spinReduceOpacity->value()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
         generalKeys.insert("small_icon_size", str.setNum (ui->spinSmall->value()));
@@ -1784,6 +1795,7 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
+            || qMin(qMax(themeSettings.value ("reduce_window_opacity").toInt(),0),90) != ui->spinReduceOpacity->value()
             || toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
@@ -1846,6 +1858,7 @@ void KvantumManager::writeConfig()
         themeSettings.setValue ("combo_menu", ui->checkBoxComboMenu->isChecked());
         themeSettings.setValue ("hide_combo_checkboxes", ui->checkBoxHideComboCheckboxes->isChecked());
         themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
+        themeSettings.setValue ("reduce_window_opacity", ui->spinReduceOpacity->value());
         themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
         themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
         themeSettings.setValue ("small_icon_size", ui->spinSmall->value());
@@ -2135,6 +2148,8 @@ void KvantumManager::isTranslucent (bool checked)
     ui->opaqueLabel->setEnabled (checked);
     ui->opaqueEdit->setEnabled (checked);
     ui->checkBoxBlurWindow->setEnabled (checked);
+    ui->reduceOpacityLabel->setEnabled (checked);
+    ui->spinReduceOpacity->setEnabled (checked);
     if (!checked)
     {
         ui->checkBoxBlurWindow->setChecked (false);
@@ -2179,15 +2194,14 @@ void KvantumManager::respectDE (bool checked)
                                                && !ui->checkBoxBlurWindow->isChecked()
                                                && !checked);
             ui->checkBoxTrans->setEnabled (!ui->checkBoxNoComposite->isChecked() && !checked);
-            ui->opaqueLabel->setEnabled (!ui->checkBoxNoComposite->isChecked()
-                                         && ui->checkBoxTrans->isChecked()
-                                         && !checked);
-            ui->opaqueEdit->setEnabled (!ui->checkBoxNoComposite->isChecked()
-                                        && ui->checkBoxTrans->isChecked()
-                                        && !checked);
-            ui->checkBoxBlurWindow->setEnabled (!ui->checkBoxNoComposite->isChecked()
-                                                && ui->checkBoxTrans->isChecked()
-                                                && !checked);
+            bool enableTrans (!ui->checkBoxNoComposite->isChecked()
+                             && ui->checkBoxTrans->isChecked()
+                             && !checked);
+            ui->opaqueLabel->setEnabled (enableTrans);
+            ui->opaqueEdit->setEnabled (enableTrans);
+            ui->reduceOpacityLabel->setEnabled(enableTrans);
+            ui->spinReduceOpacity->setEnabled(enableTrans);
+            ui->checkBoxBlurWindow->setEnabled (enableTrans);
         }
         else ui->checkBoxDE->setEnabled (false);
     }

@@ -25,7 +25,6 @@ double_click=false
 translucent_windows=false
 blurring=false
 popup_blurring=false
-opaque=
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true

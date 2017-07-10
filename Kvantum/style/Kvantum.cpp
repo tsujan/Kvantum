@@ -1818,7 +1818,18 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
     ispec.px = -2; // no tiling pattern with translucency
 
   p->setClipRegion(bgndRect, Qt::IntersectClip);
-  renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix);
+  int ro = tspec_.reduce_window_opacity;
+  if (ro > 0)
+  {
+    p->save();
+    p->setOpacity(1.0 - (qreal)tspec_.reduce_window_opacity/100.0);
+  }
+  if (!renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix))
+  { // no window interior element but with reduced translucency
+    p->fillRect(bgndRect, QApplication::palette().color(QPalette::Window));
+  }
+  if (ro > 0)
+    p->restore();
 }
 
 bool Style::eventFilter(QObject *o, QEvent *e)
@@ -6598,13 +6609,13 @@ void Style::drawControl(ControlElement element,
               else
                 R.adjust(0,0,-r.width()/2,0);
             }
-            renderInterior(painter,R,fspec1,ispec,ispec.element+"-normal",fspec1.hasCapsule);
-            renderFrame(painter,R,fspec1,fspec1.element+"-normal",0,0,0,0,0,fspec1.hasCapsule);
+            renderInterior(painter,R,fspec1,ispec,ispec.element+"-normal",true);
+            renderFrame(painter,R,fspec1,fspec1.element+"-normal",0,0,0,0,0,true);
           }
         }
 
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,fspec.hasCapsule);
-        renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,fspec.hasCapsule);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
+        renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
         if (drawSep)
         {
           renderElement(painter,sepName,sep);
@@ -14628,7 +14639,7 @@ void Style::renderFrame(QPainter *painter,
   }
 }
 
-void Style::renderInterior(QPainter *painter,
+bool Style::renderInterior(QPainter *painter,
                            const QRect &bounds, // frame bounds
                            const frame_spec &fspec, // frame spec
                            const interior_spec &ispec, // interior spec
@@ -14638,7 +14649,7 @@ void Style::renderInterior(QPainter *painter,
                           ) const
 {
   if (!bounds.isValid() || !ispec.hasInterior || painter->opacity() == 0)
-    return;
+    return false;
 
   int w = bounds.width(); int h = bounds.height();
   if (!isLibreoffice_ && fspec.expansion > 0 && !ispec.element.isEmpty())
@@ -14662,7 +14673,7 @@ void Style::renderInterior(QPainter *painter,
         /* there's no right/left expanded element */
         && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
     {
-      return;
+      return false;
     }
   }
 
@@ -14673,11 +14684,11 @@ void Style::renderInterior(QPainter *painter,
           || (fspec.capsuleV == -1 && fspec.top >= h)
           || (fspec.capsuleV == 1 && fspec.bottom >= h)))
   {
-      return;
+      return false;
   }
 
-  renderElement(painter,element,interiorRect(bounds,fspec),
-                ispec.px,ispec.py,usePixmap);
+  return renderElement(painter,element,interiorRect(bounds,fspec),
+                       ispec.px,ispec.py,usePixmap);
 }
 
 void Style::renderIndicator(QPainter *painter,

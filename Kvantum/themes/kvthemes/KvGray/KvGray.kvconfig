@@ -20,7 +20,6 @@ translucent_windows=false
 blurring=false
 popup_blurring=false
 toolbar_icon_size=16
-opaque=
 
 [GeneralColors]
 window.color=#e6e6e6

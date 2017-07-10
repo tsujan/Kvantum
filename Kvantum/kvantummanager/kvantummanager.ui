@@ -706,7 +706,7 @@ as far as possible.</string>
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQt panel to be restarted either by "Session Settings"
+Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</string>
                  </property>
                  <property name="text">
@@ -721,7 +721,7 @@ or through logging out and in again.</string>
 
 Values less than 16 mean the default menu icon size.
 
-Needs LXQt panel to be restarted either by "Session Settings"
+Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</string>
                  </property>
                  <property name="suffix">
@@ -742,14 +742,44 @@ or through logging out and in again.</string>
                <string>Compositing &amp;&amp; General Look</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_9">
-               <item row="3" column="2">
-                <widget class="QLineEdit" name="opaqueEdit">
+               <item row="0" column="1" colspan="3">
+                <widget class="QCheckBox" name="checkBoxNoComposite">
                  <property name="toolTip">
-                  <string>A comma-separated list of executables,
-whose windows should not be translucent.
+                  <string>If checked, menus, tooltips and windows
+will not have translucency or shadow.
 
-(Some apps, like video players, may have
-problems with translucency!)</string>
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme's SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Disable composite effects</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1" colspan="3">
+                <widget class="QCheckBox" name="checkBoxBlurPopup">
+                 <property name="toolTip">
+                  <string>Needs KDE blur effect, a graphic card that supports it,
+and translucent menu/tooltip SVG elements.
+
+Automatically checked if window blurring is enabled.</string>
+                 </property>
+                 <property name="text">
+                  <string>Blurring for menus and tooltips</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1" colspan="3">
+                <widget class="QCheckBox" name="checkBoxTrans">
+                 <property name="toolTip">
+                  <string>Has effect only when there is a translucent SVG background
+for windows or the window opacity is reduced (see below).</string>
+                 </property>
+                 <property name="text">
+                  <string>Translucent windows</string>
                  </property>
                 </widget>
                </item>
@@ -767,47 +797,81 @@ problems with translucency!)</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNoComposite">
+               <item row="3" column="2">
+                <spacer name="horizontalSpacerOpaque">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="3">
+                <widget class="QLineEdit" name="opaqueEdit">
                  <property name="toolTip">
-                  <string>If checked, menus, tooltips and windows
-will not have translucency or shadow.
+                  <string>A comma-separated list of executables,
+whose windows should not be translucent.
 
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme's SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Disable composite effects</string>
+(Some apps, like video players, may have
+problems with translucency!)</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxBlurPopup">
+               <item row="4" column="1" alignment="Qt::AlignRight">
+                <widget class="QLabel" name="reduceOpacityLabel">
                  <property name="toolTip">
-                  <string>Needs KDE blur effect, a graphic card that supports it,
-and translucent menu/tooltip SVG elements.
+                  <string>This will reduce the window opacity
+if window translucency is enabled.
 
-Automatically checked if window blurring is enabled.</string>
+A translucent SVG background is NOT
+needed for this key to work.</string>
                  </property>
                  <property name="text">
-                  <string>Blurring for menus and tooltips</string>
+                  <string>Reduce window opacity by</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTrans">
+               <item row="4" column="2">
+                <spacer name="horizontalSpacerWinOpacity">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="3" alignment="Qt::AlignLeft">
+                <widget class="QSpinBox" name="spinReduceOpacity">
                  <property name="toolTip">
-                  <string>Needs a translucent SVG background for windows.</string>
+                  <string>This will reduce the window opacity
+if window translucency is enabled.
+
+A translucent SVG background is NOT
+needed for this key to work.</string>
                  </property>
-                 <property name="text">
-                  <string>Translucent windows</string>
+                 <property name="suffix">
+                  <string> %</string>
+                 </property>
+                 <property name="maximum">
+                  <number>90</number>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" colspan="2">
+               <item row="5" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxBlurWindow">
                  <property name="toolTip">
                   <string>Needs KDE blur effect, a graphic card
@@ -819,20 +883,7 @@ window SVG background in the theme.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3">
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>5</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="4" column="0">
+               <item row="5" column="0">
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -845,7 +896,20 @@ window SVG background in the theme.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="5" column="1" colspan="2">
+               <item row="5" column="4">
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="6" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxAnimation">
                  <property name="toolTip">
                   <string>A 200ms fading animation when the state of
@@ -859,7 +923,7 @@ some widgets is changed, mostly by the mouse.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1" colspan="2">
+               <item row="7" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxPattern">
                  <property name="toolTip">
                   <string>Check this to remove all window/dialog tiling patterns!
@@ -870,7 +934,7 @@ Uncheck it if you want those patterns back!</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1" colspan="2">
+               <item row="8" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxTransient">
                  <property name="toolTip">
                   <string>Make scrollbars transient!
@@ -1379,9 +1443,9 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                <item row="0" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxTree">
                  <property name="toolTip">
-                  <string>Draw tree branch lines?</string>
+                  <string>Draw tree branch lines?
 
-By default, tree branches have indicators but no line.
+By default, tree branches have indicators but no line.</string>
                  </property>
                  <property name="text">
                   <string>Tree branch lines</string>
@@ -1494,7 +1558,7 @@ both horizontally and vertically.</string>
                   <string>Will have effect only if style
 is not set by the app in its code.
 
-Default is "Follow Style".</string>
+Default is &quot;Follow Style&quot;.</string>
                  </property>
                  <property name="text">
                   <string>Toolbutton style:</string>
@@ -1513,7 +1577,7 @@ Default is "Follow Style".</string>
                   <string>Will have effect only if style
 is not set by the app in its code.
 
-Default is "Follow Style".</string>
+Default is &quot;Follow Style&quot;.</string>
                  </property>
                 </widget>
                </item>

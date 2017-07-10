@@ -90,6 +90,9 @@ typedef struct {
   bool composite;
   /* do we have translucent windows and dialogs? */
   bool translucent_windows;
+  /* reduce window opacity by this percentage
+     (if window translucency is enabled)? */
+  int reduce_window_opacity;
   /* list of apps that shouldn't have window translucency */
   QStringList opaque;
   /* blur what is behind translucent windows if possible? */
@@ -409,6 +412,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.menubar_mouse_tracking = true;
   tspec.composite = false;
   tspec.translucent_windows = false;
+  tspec.reduce_window_opacity = 0;
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";
   tspec.blurring = false;
   tspec.popup_blurring = false;

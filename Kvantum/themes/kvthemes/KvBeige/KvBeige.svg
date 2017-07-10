@@ -1136,15 +1136,19 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-10)"/>
 <g style="stroke-linecap:round;stroke-linejoin:bevel;fill-rule:evenodd;stroke:none" id="tabframe-normal-top-leftjunct">
 <rect width="10" x="305" y="835" height="2" style="fill-opacity:.004" id="rect5352"/>
-<path style="fill:#d9cfc6" id="rect5354" d="m 305,835 h 2 l -2,2 z"/>
+<path style="fill:#c9c3bd" id="rect5354" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-top-rightjunct" transform="matrix(-1,0,0,1,620,2)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-rightjunct" transform="matrix(0,1,1,0,-520,530)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-leftjunct" transform="matrix(0,-1,1,0,-518,1150)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-right-leftjunct" transform="matrix(0,1,-1,0,1156,530)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-right-rightjunct" transform="matrix(0,-1,-1,0,1158,1150)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-bottom-leftjunct" transform="matrix(1,0,0,-1,0,1676)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-bottom-rightjunct" transform="matrix(-1,0,0,-1,620,1678)"/>
+<g style="stroke-linecap:round;stroke-linejoin:bevel;fill-rule:evenodd;stroke:none" id="tabframe-normal-right-leftjunct" transform="rotate(90,313,843)">
+<rect width="10" x="305" y="835" height="2" style="fill-opacity:.004" id="rect5763"/>
+<path style="fill:#9a8f84" id="path5765" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
+</g>
+<g style="stroke-linecap:round;stroke-linejoin:bevel;fill-rule:evenodd;stroke:none" id="tabframe-normal-bottom-leftjunct" transform="matrix(1,0,0,-1,0,1676)">
+<rect width="10" x="305" y="835" height="2" style="fill-opacity:.004" id="rect5747"/>
+<path style="fill:#897d71" id="path5749" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
+</g>
 <g style="stroke:none;fill-rule:evenodd">
 <g id="group-normal-bottomleft">
 <path style="opacity:.2;fill:url(#linearGradient6370)" id="group-normal-bottomleft0" d="m 370,1256.2499 c 0,3.7212 3.6904,7.5 7.5,7.5 v -7.5 z"/>
@@ -1460,4 +1464,6 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.35" xlink:href="#arrow-plus-focused" id="arrow-plus-disabled" transform="translate(86)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.35" xlink:href="#arrow-minus-focused" id="arrow-minus-disabled" transform="translate(86)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-bottom-leftjunct" id="tabframe-normal-bottom-rightjunct" transform="matrix(-1,0,0,1,620,2)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-right-leftjunct" id="tabframe-normal-right-rightjunct" transform="matrix(1,0,0,-1,2,1680)"/>
 </svg>
