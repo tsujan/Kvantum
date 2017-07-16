@@ -35,11 +35,12 @@ class QSvgRenderer;
 
 namespace Kvantum {
 
-#if QT_VERSION >= 0x050000
+// older gcc versions don't understand these beautiful lines -- I wait a little more
+/*#if QT_VERSION >= 0x050000
 template <typename T> using KvPointer = QPointer<T>;
 #else
 template <typename T> using KvPointer = QWeakPointer<T>;
-#endif
+#endif*/
 
 // Used only to give appropriate top and bottom margins to
 // combo popup items (adapted from the Breeze style plugin).
@@ -75,7 +76,12 @@ class KvComboItemDelegate : public QItemDelegate
     }
 
   private:
-    KvPointer<QAbstractItemDelegate> proxy_;
+    //KvPointer<QAbstractItemDelegate> proxy_;
+#if QT_VERSION >= 0x050000
+    QPointer<QAbstractItemDelegate> proxy_;
+#else
+    QWeakPointer<QAbstractItemDelegate> proxy_;
+#endif
     int margin_;
 };
 
@@ -412,7 +418,12 @@ class Style : public QCommonStyle {
     mutable int extraComboWidth_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
-    mutable KvPointer<QWidget> sunkenButton_;
+    //mutable KvPointer<QWidget> sunkenButton_;
+#if QT_VERSION >= 0x050000
+    mutable QPointer<QWidget> sunkenButton_;
+#else
+    mutable QWeakPointer<QWidget> sunkenButton_;
+#endif
 
     /* For not getting the menu shadows repeatedly.
        They're used to position submenus correctly. */

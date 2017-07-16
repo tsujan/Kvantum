@@ -438,7 +438,7 @@ needed for this key to work.</source>
 la tralumebleco estus ebligita por la fenestroj.
 
 Tralumebla fono en la SVG-dosiero NE necesas
-por ke ĉi tio efeku.</translation>
+por ke ĉi tio efiku.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="837"/>
