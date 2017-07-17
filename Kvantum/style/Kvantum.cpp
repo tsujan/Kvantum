@@ -4063,14 +4063,13 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameGroupBox : {
-#if QT_VERSION < 0x050000
-      if (qstyleoption_cast<const QStyleOptionFrame*>(option))
+      const QStyleOptionFrame *frame = qstyleoption_cast<const QStyleOptionFrame*>(option);
+      if (frame)
       {
+#if QT_VERSION < 0x050000
         const QStyleOptionFrameV2 *frame2 = qstyleoption_cast<const QStyleOptionFrameV2 *>(option);
         if (frame2 && (frame2->features & QStyleOptionFrameV2::Flat))
 #else
-      if (const QStyleOptionFrame *frame = qstyleoption_cast<const QStyleOptionFrame*>(option))
-      {
         if (frame->features & QStyleOptionFrame::Flat)
 #endif
           break;
@@ -5079,11 +5078,12 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
 #if QT_VERSION < 0x050700
-    case PE_IndicatorTabTear : {
+    case PE_IndicatorTabTear :
 #else
     case PE_IndicatorTabTearRight :
-    case PE_IndicatorTabTearLeft : {
+    case PE_IndicatorTabTearLeft :
 #endif
+    {
       indicator_spec dspec = getIndicatorSpec("Tab");
       renderElement(painter,dspec.element+"-tear",option->rect);
 
@@ -12896,11 +12896,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     }
 
 #if QT_VERSION < 0x050700
-    case SE_TabBarTearIndicator : {
+    case SE_TabBarTearIndicator :
 #else
     case SE_TabBarTearIndicatorRight :
-    case SE_TabBarTearIndicatorLeft : {
+    case SE_TabBarTearIndicatorLeft :
 #endif
+    {
       QRect r;
       if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab*>(option))
       {
@@ -13671,7 +13672,7 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
 #else
 QIcon Style::standardIcon(StandardPixmap standardIcon,
                           const QStyleOption *option,
-                          const QWidget *widget ) const
+                          const QWidget *widget) const
 #endif
 {
   switch (standardIcon) {
