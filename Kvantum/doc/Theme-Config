@@ -399,6 +399,14 @@ translucent_windows               true/false          Translucent windows and di
                                                       section or the value of "interior" is
                                                       false for them.
 
+reduce_window_opacity             integer             If "translucent_windows" is set to true,
+                                                      this key will reduce the window opacity
+                                                      by the percentage of its value regardless
+                                                      of whether a translucent element for
+                                                      window background exists in the SVG image
+                                                      or not. The default value is 0 and the
+                                                      maximum is 90.
+
 opaque                            string list         A comma-separated list of
                                                       executables, whose apps should not
                                                       have window translucency. It has
