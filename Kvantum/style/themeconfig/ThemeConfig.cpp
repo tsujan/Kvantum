@@ -578,6 +578,12 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","attach_active_tab");
   r.attach_active_tab = v.toBool();
 
+  if (!r.attach_active_tab)
+  {
+    v = getValue("General","embedded_tabs");
+    r.embedded_tabs = v.toBool();
+  }
+
   v = getValue("General","no_active_tab_separator");
   r.no_active_tab_separator = v.toBool();
 

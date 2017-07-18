@@ -6,6 +6,7 @@ alt_mnemonic=true
 left_tabs=false
 joined_inactive_tabs=true
 attach_active_tab=false
+embedded_tabs=true
 mirror_doc_tabs=false
 group_toolbar_buttons=false
 toolbar_item_spacing=1
@@ -45,6 +46,7 @@ groupbox_top_label=false
 inline_spin_indicators=true
 button_contents_shift=true
 animate_states=true
+combo_menu=true
 
 [GeneralColors]
 window.color=#393f3f

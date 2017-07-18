@@ -261,6 +261,11 @@ attach_active_tab                 true/false          Attach the active tab to t
                                                       or the tab-bar base? It is detached
                                                       by default.
 
+embedded_tabs                     true/false          If "attach_active_tab" is false, should
+                                                      tabs be half embedded in their widgets
+                                                      (provided that it is not in the document
+                                                      mode)? This is false by default.
+
 joined_inactive_tabs              true/false          Join inactive tabs together? They are
                                                       joined by default. Also see
                                                       "Theme-Making.pdf" for tab separators.

@@ -48,6 +48,9 @@ typedef struct {
   /* attach the active tab to the tab widget or
      the tabbar base? (by default, it is detached) */
   bool attach_active_tab;
+  /* should tabs be half embedded in the tab widget
+     (if it isn't in the document mode)? */
+  bool embedded_tabs;
   /* when using tab separators, don't draw them for the active tab */
   bool no_active_tab_separator;
   /* number of pixels inactive tabs overlap the active one */
@@ -396,6 +399,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.center_doc_tabs = false;
   tspec.joined_inactive_tabs = true;
   tspec.attach_active_tab = false;
+  tspec.embedded_tabs = false;
   tspec.no_active_tab_separator = false;
   tspec.active_tab_overlap = 0;
   tspec.mirror_doc_tabs = true;

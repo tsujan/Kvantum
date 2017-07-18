@@ -3798,7 +3798,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (option->state & (State_Item | State_Children | State_Sibling))
         {
           const QLine line(QPoint(centerX, r.top()), QPoint(centerX, centerY - expanderAdjust));
-          painter->drawLine( line );
+          painter->drawLine(line);
         }
         // the right/left (depending on dir) line gets drawn if we have an item
         if (option->state & State_Item)
@@ -10742,9 +10742,32 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       else return 0;
     }
 
+    case PM_TabBarBaseOverlap :{
+      if (tspec_.embedded_tabs)
+      {
+        if (const QStyleOptionTabWidgetFrame *twf = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
+        {
+          switch (twf->shape) {
+          case QTabBar::RoundedNorth:
+          case QTabBar::TriangularNorth:
+          case QTabBar::RoundedSouth:
+          case QTabBar::TriangularSouth:
+            return twf->tabBarSize.height()/2;
+            break;
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+            return twf->tabBarSize.width()/2;
+            break;
+          }
+        }
+      }
+      return 0;
+    }
+
     case PM_TabBarTabOverlap :
     case PM_TabBarBaseHeight :
-    case PM_TabBarBaseOverlap :
     case PM_TabBarTabShiftHorizontal :
     case PM_TabBarTabShiftVertical :
     case PM_TabBar_ScrollButtonOverlap : return 0;
@@ -12754,9 +12777,14 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       QRect r;
       if (const QStyleOptionTabWidgetFrame *twf = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
       {
+        int space = 0;
+        int overlap = 0;
         /* a 2px space between tab page and tab bar
            but no spece between tab pane and tab bar */
-        int space = element == SE_TabWidgetTabContents ? 2 : 0;
+        if (element == SE_TabWidgetTabContents)
+          space = 2;
+        else
+          overlap = pixelMetric(PM_TabBarBaseOverlap, twf, widget);
         int left = 0; int top = 0; int right = 0; int bottom = 0;
         bool docMode(true);
         if (element == SE_TabWidgetTabContents)
@@ -12775,9 +12803,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         switch (twf->shape) {
           case QTabBar::RoundedNorth:
           case QTabBar::TriangularNorth:
-            r = QRect(QPoint(0, qMax(twf->tabBarSize.height() + space, 0)),
+            r = QRect(QPoint(0, qMax(twf->tabBarSize.height() + space - overlap, 0)),
                       QSize(twf->rect.width(),
-                            qMin(twf->rect.height() - twf->tabBarSize.height() - space,
+                            qMin(twf->rect.height() - twf->tabBarSize.height() - space + overlap,
                                  twf->rect.height())));
             if (top >= 2) top -= 2;
             break;
@@ -12785,22 +12813,22 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           case QTabBar::TriangularSouth:
             r = QRect(QPoint(0, 0),
                       QSize(twf->rect.width(),
-                            qMin(twf->rect.height() - twf->tabBarSize.height() - space,
+                            qMin(twf->rect.height() - twf->tabBarSize.height() - space + overlap,
                                  twf->rect.height())));
             if (bottom >= 2) bottom -= 2;
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
             r = QRect(QPoint(0, 0),
-                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space,
+                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space + overlap,
                                  twf->rect.width()),
                             twf->rect.height()));
             if (right >= 2) right -= 2;
             break;
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
-            r = QRect(QPoint(qMax(twf->tabBarSize.width() + space, 0), 0),
-                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space,
+            r = QRect(QPoint(twf->tabBarSize.width() + space - overlap, 0),
+                      QSize(qMin(twf->rect.width() - twf->tabBarSize.width() - space + overlap,
                                  twf->rect.width()),
                             twf->rect.height()));
             if (left >= 2) left -= 2;
