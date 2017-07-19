@@ -5,6 +5,7 @@ x11drag=true
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
+embedded_tabs=true
 group_toolbar_buttons=false
 toolbar_interior_spacing=2
 composite=true
@@ -32,6 +33,7 @@ translucent_windows=false
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
+combo_menu=true
 animate_states=true
 tree_branch_line=true
 transient_scrollbar=true
@@ -96,6 +98,8 @@ text.shadow.yshift=2
 text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
+min_width=+0.2font
+min_height=+0.2font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -135,6 +139,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+min_height=0
 
 [CheckBox]
 inherits=PanelButtonCommand
@@ -143,6 +148,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+min_height=0
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -244,6 +250,8 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+min_width=0
+min_height=0
 
 [Splitter]
 inherits=PanelButtonCommand
@@ -290,6 +298,8 @@ text.margin.top=3
 text.margin.bottom=3
 text.margin.left=3
 text.margin.right=3
+min_width=0
+min_height=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -301,6 +311,8 @@ frame.left=2
 frame.right=2
 text.margin.top=2
 text.margin.bottom=2
+min_width=0
+min_height=0
 
 [MenuBar]
 inherits=PanelButtonCommand

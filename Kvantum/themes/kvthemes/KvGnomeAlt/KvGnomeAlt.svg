@@ -1092,4 +1092,20 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menubar-normal-bottomleft" id="menubar-normal-bottomright" transform="translate(35)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menubar-normal-bottomleft" id="menubar-normal-bottom" transform="translate(6)"/>
+<g style="stroke:none" id="tframe-normal-left" transform="translate(-1,-302)">
+<rect width="2" x="270" y="1170" height="30" style="fill:#b4b4b4;stroke-width:.816" id="rect5315"/>
+<path style="opacity:.8;fill:#fff" id="path5317" d="m 272,1170 v 30 h 1 v -30 z"/>
+<path style="fill:#e9e9e9;fill-rule:evenodd" id="path5319" d="m 270,1170 v 30 h 1 v -30 z"/>
+</g>
+<g style="stroke:none" id="tframe-normal-topleft" transform="translate(-1,-302)">
+<path style="fill:#b4b4b4" id="rect5323" d="m 271,1168 h 2 v 1 c -0.75317,0 -1,0.2469 -1,1 h -1 z"/>
+<path style="opacity:.8;fill:#fff" id="path5325" d="m 273,1169 c -0.75,0 -1,0.25 -1,1 h 1 z"/>
+<path style="fill:#e9e9e9" id="path5327" d="m 273,1167 c -1.5,0 -3,1.5 -3,3 h 1 c 0,-1.125 0.875,-2 2,-2 z"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-left" id="tframe-normal-right" transform="matrix(-1,0,0,1,574,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-topleft" id="tframe-normal-topright" transform="matrix(-1,0,0,1,574,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-left" id="tframe-normal-top" transform="rotate(90,287,883)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-left" id="tframe-normal-bottom" transform="rotate(-90,287,883)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-topleft" id="tframe-normal-bottomleft" transform="rotate(-90,287,883)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tframe-normal-topleft" id="tframe-normal-bottomright" transform="rotate(-180,287,883)"/>
 </svg>

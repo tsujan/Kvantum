@@ -241,7 +241,7 @@ min_height=2.3font
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=common
+frame.element=tframe
 interior=true
 interior.element=tframe
 frame.top=4
