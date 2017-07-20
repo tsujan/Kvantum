@@ -309,10 +309,12 @@ Style::Style() : QCommonStyle()
   if (tspec_.alt_mnemonic)
     itsShortcutHandler_ = new ShortcutHandler(this);
 
-  // decide about connecting active tabs to others and using floating tabs once for all
-  joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
+  // decide, once for all, about active indicator, connecting active tabs to others and using floating tabs
+  hasActiveIndicator_ = joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
   if (themeRndr_ && themeRndr_->isValid())
   {
+    if (themeRndr_->elementExists(getIndicatorSpec("Tab").element+"-close-toggled"))
+      hasActiveIndicator_ = true;
     if (themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
       hasFloatingTabs_ = true;
     if (tspec_.joined_inactive_tabs)
@@ -5095,9 +5097,16 @@ void Style::drawPrimitive(PrimitiveElement element,
       default_frame_spec(fspec);
       const indicator_spec dspec = getIndicatorSpec("Tab");
 
-      QString status = !(option->state & State_Enabled) ? "disabled" :
-                         option->state & State_Sunken ? "pressed" :
-                           option->state & State_MouseOver ? "focused" : "normal";
+      QString status;
+      if (!(option->state & State_Enabled))
+        status = "disabled";
+      else if ((option->state & State_Selected) && hasActiveIndicator_)
+        status = "toggled";
+      else
+      {
+        status = option->state & State_Sunken ? "pressed" :
+                   option->state & State_MouseOver ? "focused" : "normal";
+      }
       if (widget && !widget->isActiveWindow())
         status.append("-inactive");
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status,option->direction);

@@ -393,7 +393,7 @@ class Style : public QCommonStyle {
     /* The color specification of the theme */
     color_spec cspec_;
     /* All general info about tabs */
-    bool joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
+    bool hasActiveIndicator_, joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
 
     /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice_, isPlasma_;

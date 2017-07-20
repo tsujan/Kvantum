@@ -5,8 +5,8 @@ x11drag=true
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
+embedded_tabs=true
 mirror_doc_tabs=false
-active_tab_overlap=10
 group_toolbar_buttons=true
 spread_progressbar=true
 composite=true
@@ -38,6 +38,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=true
+combo_menu=true
 groupbox_top_label=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
@@ -191,25 +192,27 @@ text.focus.color=#9bccff
 
 [Tab]
 inherits=PanelButtonCommand
-interior.element=tab
+interior.element=button
 text.margin.left=6
 text.margin.right=6
 text.margin.top=4
 text.margin.bottom=4
-frame.element=tab
+frame.element=button
 indicator.element=tab
+text.normal.color=white
+text.focus.color=#9bccff
+text.toggle.color=white
+min_width=4font
+min_height=2.3font
+
+[TabFrame]
+inherits=PanelButtonCommand
+frame=true
+frame.element=tframe
 frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.normal.color=white
-text.focus.color=#9bccff
-text.toggle.color=white
-frame.expansion=8
-
-[TabFrame]
-inherits=PanelButtonCommand
-frame=false
 interior=false
 
 [TreeExpander]
