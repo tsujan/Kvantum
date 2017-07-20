@@ -6669,14 +6669,12 @@ void Style::drawControl(ControlElement element,
         qstyleoption_cast<const QStyleOptionTab*>(option);
 
       if (opt) {
-        QString status =
+        int state =
             (option->state & State_Enabled) ?
-              (option->state & State_On) ? "toggled" :
-              (option->state & State_Selected) ? "toggled" :
-              (option->state & State_MouseOver) ? "focused" : "normal"
-            : "disabled";
-        if (widget && !widget->isActiveWindow())
-          status.append("-inactive");
+              (option->state & State_On) ? 4 :
+              (option->state & State_Selected) ? 4 :
+              (option->state & State_MouseOver) ? 2 : 1
+            : 0;
 
         const QString group = "Tab";
         frame_spec fspec = getFrameSpec(group);
@@ -6782,16 +6780,6 @@ void Style::drawControl(ControlElement element,
         QSize iconSize;
         if (!tabV2.icon.isNull())
           iconSize = tabV2.iconSize;
-
-        int state = 1;
-        if (!(option->state & State_Enabled))
-          state = 0;
-        else if (status.startsWith("pressed"))
-          state = 3;
-        else if (status.startsWith("toggled"))
-          state = 4;
-        else if (option->state & State_MouseOver)
-          state = 2;
 
         bool closable = false;
         const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
