@@ -37,6 +37,10 @@ public:
 #else
     tabWidget->tabBar()->setUsesScrollButtons (false);
 #endif
+    QPushButton *pb1 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
+    tabWidget_2->setCornerWidget (pb1, Qt::TopRightCorner);
+    QPushButton *pb2 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
+    tabWidget_5->setCornerWidget (pb2, Qt::BottomLeftCorner);
     //subwindow->setWindowState(Qt::WindowMaximized);
     connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
     connect (actionDocMode, SIGNAL (toggled (bool)), this, SLOT (KvDocMode (bool)));

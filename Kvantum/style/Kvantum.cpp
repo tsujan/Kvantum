@@ -10742,21 +10742,25 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarBaseOverlap :{
       if (tspec_.embedded_tabs)
       {
-        if (const QStyleOptionTabWidgetFrame *twf = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
+        const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
+        if (tw && !tw->documentMode()) // no doc mode and no QML
         {
-          switch (twf->shape) {
-          case QTabBar::RoundedNorth:
-          case QTabBar::TriangularNorth:
-          case QTabBar::RoundedSouth:
-          case QTabBar::TriangularSouth:
-            return twf->tabBarSize.height()/2;
-            break;
-          case QTabBar::RoundedEast:
-          case QTabBar::TriangularEast:
-          case QTabBar::RoundedWest:
-          case QTabBar::TriangularWest:
-            return twf->tabBarSize.width()/2;
-            break;
+          if (const QStyleOptionTabWidgetFrame *twf = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
+          {
+            switch (twf->shape) {
+            case QTabBar::RoundedNorth:
+            case QTabBar::TriangularNorth:
+            case QTabBar::RoundedSouth:
+            case QTabBar::TriangularSouth:
+              return twf->tabBarSize.height()/2;
+              break;
+            case QTabBar::RoundedEast:
+            case QTabBar::TriangularEast:
+            case QTabBar::RoundedWest:
+            case QTabBar::TriangularWest:
+              return twf->tabBarSize.width()/2;
+              break;
+            }
           }
         }
       }
@@ -12843,16 +12847,19 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (const QStyleOptionTabWidgetFrame *twf =
           qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
       {
+        int extra = pixelMetric(PM_TabBarBaseOverlap, twf, widget); // leveled with tabs
+        if (extra > 0)
+          extra = qMin(extra, twf->leftCornerWidgetSize.height()/2);
         QRect paneRect = subElementRect(SE_TabWidgetTabPane, twf, widget);
         switch (twf->shape) {
           case QTabBar::RoundedNorth:
           case QTabBar::TriangularNorth:
-            r = QRect(QPoint(paneRect.x(), paneRect.y()-twf->leftCornerWidgetSize.height()),
+            r = QRect(QPoint(paneRect.x(), paneRect.y()-twf->leftCornerWidgetSize.height() + extra),
                       twf->leftCornerWidgetSize);
             break;
           case QTabBar::RoundedSouth:
           case QTabBar::TriangularSouth:
-            r = QRect(QPoint(paneRect.x(), paneRect.y()+paneRect.height()),
+            r = QRect(QPoint(paneRect.x(), paneRect.y()+paneRect.height() - extra),
                       twf->leftCornerWidgetSize);
             break;
           /* WARNING: The Qt documentation says, "Corner widgets are designed for North
@@ -12884,18 +12891,21 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (const QStyleOptionTabWidgetFrame *twf =
           qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
       {
+        int extra = pixelMetric(PM_TabBarBaseOverlap, twf, widget); // leveled with tabs
+        if (extra > 0)
+          extra = qMin(extra, twf->rightCornerWidgetSize.height()/2);
         QRect paneRect = subElementRect(SE_TabWidgetTabPane, twf, widget);
         switch (twf->shape) {
           case QTabBar::RoundedNorth:
           case QTabBar::TriangularNorth:
             r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
-                             paneRect.y()-twf->rightCornerWidgetSize.height()),
+                             paneRect.y()-twf->rightCornerWidgetSize.height() + extra),
                       twf->rightCornerWidgetSize);
             break;
           case QTabBar::RoundedSouth:
           case QTabBar::TriangularSouth:
             r = QRect(QPoint(paneRect.x()+paneRect.width()-twf->rightCornerWidgetSize.width(),
-                             paneRect.y()+paneRect.height()),
+                             paneRect.y()+paneRect.height() - extra),
                       twf->rightCornerWidgetSize);
             break;
           /*case QTabBar::RoundedWest:
