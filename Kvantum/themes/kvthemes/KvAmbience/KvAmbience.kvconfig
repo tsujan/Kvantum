@@ -273,7 +273,7 @@ interior.element=menubar
 frame.element=menubar
 text.normal.color=white
 text.focus.color=white
-frame.bottom=2
+frame.bottom=3
 text.shadow=false
 frame.expansion=0
 
