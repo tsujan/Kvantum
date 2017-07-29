@@ -1,8 +1,9 @@
 *******************
 *   Compilation   *
 *******************
-
-(IF YOU USE "Arch" OR ONE OF ITS DERIVATIVES, YOU COULD USE THE "PKGBUILD" FILES IN THE "Arch" FOLDER TO MAKE INSTALLABLE PACKAGES. PLEASE CHOOSE BETWEEN "qmake" AND "cmake" COMPILATIONS!)
+IF YOU USE "Arch" OR ONE OF ITS DERIVATIVES, THE EASIEST WAY IS TO USE AN AUR-HELPER LIKE PACAUR AND: 
+ 	
+ 	$ pacaur -S kvantum-qt5 )
 
 First install X11 and Qt development packages. In Debian-based systems, they are:
 
