@@ -22,6 +22,7 @@ V0.10.5
  * If needed, set the window text color of menus to the normal menuitem text color because some apps may do weird things with menus.
  * Added a key (to Kvantum manager) to reduce window translucency or set it in themes that don't have a translucent SVG backround for windows.
  * Added a key for "embedded" tabs, which are half embedded in their widgets.
+ * Separated the Qt4 code from the Qt5 one.
 
 V0.10.4
 ---------

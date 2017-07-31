@@ -15,18 +15,24 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KVANTUMPLUGIN_H
-#define KVANTUMPLUGIN_H
-
-#include <QStylePlugin>
+#include "KvantumPlugin4.h"
+#include "Kvantum4.h"
 
 namespace Kvantum {
-class KvantumPlugin : public QStylePlugin {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "kvantum.json")
-  public:
-    QStyle *create(const QString &key);
-};
+
+QStringList KvantumPlugin::keys() const
+{
+  return QStringList() << "Kvantum";
 }
 
-#endif
+QStyle *KvantumPlugin::create(const QString &key)
+{
+  if (key.toLower() == "kvantum")
+    return new Style;
+
+  return 0;
+}
+
+Q_EXPORT_PLUGIN2(kvantum, KvantumPlugin)
+
+}

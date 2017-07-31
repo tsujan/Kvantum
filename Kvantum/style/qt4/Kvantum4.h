@@ -23,23 +23,14 @@
 #include <QItemDelegate>
 #include <QAbstractItemView>
 
-#include "shortcuthandler.h"
-#include "drag/windowmanager.h"
-#include "themeconfig/ThemeConfig.h"
-#include "blur/blurhelper.h"
-#if QT_VERSION >= 0x050500
-#include "animation/animation.h"
-#endif
+#include "../shortcuthandler.h"
+#include "windowmanager4.h"
+#include "../themeconfig/ThemeConfig.h"
+#include "blurhelper4.h"
 
 class QSvgRenderer;
 
 namespace Kvantum {
-
-/*#if QT_VERSION >= 0x050000
-template <typename T> using KvPointer = QPointer<T>;
-#else
-template <typename T> using KvPointer = QWeakPointer<T>;
-#endif*/
 
 // Used only to give appropriate top and bottom margins to
 // combo popup items (adapted from the Breeze style plugin).
@@ -75,8 +66,7 @@ class KvComboItemDelegate : public QItemDelegate
     }
 
   private:
-    //KvPointer<QAbstractItemDelegate> proxy_;
-    QPointer<QAbstractItemDelegate> proxy_;
+    QWeakPointer<QAbstractItemDelegate> proxy_;
     int margin_;
 };
 
@@ -146,16 +136,6 @@ class Style : public QCommonStyle {
                                         const QPixmap &pixmap,
                                         const QStyleOption *option) const;
 
-    /* A solution for Qt5's problem with translucent windows.*/
-    void setSurfaceFormat(QWidget *w) const;
-    void setSurfaceFormat(const QWidget *w) const
-    {
-      setSurfaceFormat(const_cast<QWidget*>(w));
-    }
-
-    /* A workaround for Qt5's QMenu window type bug. */
-    void setMenuType(const QWidget *widget) const;
-
     /* A method for forcing (push and tool) button text colors. */
     void forceButtonTextColor(QWidget *widget, QColor col) const;
     void forceButtonTextColor(const QWidget *widget, QColor col) const
@@ -178,9 +158,10 @@ class Style : public QCommonStyle {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };
 
-    QIcon standardIcon(StandardPixmap standardIcon,
-                       const QStyleOption *option = 0,
-                       const QWidget *widget = 0) const;
+  protected slots:
+    QIcon standardIconImplementation(StandardPixmap standardIcon,
+                                     const QStyleOption *option = 0,
+                                     const QWidget *widget = 0) const;
 
   private:
     /* Set theme dependencies. */
@@ -262,7 +243,7 @@ class Style : public QCommonStyle {
                      const QString &text,
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
-                     const QPixmap &px = QPixmap(), // should have the correct size with HDPI
+                     const QPixmap &px = QPixmap(),
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // relative positions of text and icon
                      bool centerLoneIcon = true // centered icon with empty text?
@@ -274,7 +255,7 @@ class Style : public QCommonStyle {
                             const QWidget *lineedit,
                             const QWidget *combo) const;
 
-    /* Gets a pixmap with a proper size from an icon considering HDPI. */
+    /* Gets a pixmap with a proper size from an icon. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
                               const QIcon::Mode iconmode,
                               const QIcon::State iconstate,
@@ -331,25 +312,13 @@ class Style : public QCommonStyle {
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;
 
-#if QT_VERSION >= 0x050500
-    /* For transient scrollbars: */
-    void startAnimation(Animation *animation) const;
-    void stopAnimation(const QObject *target) const;
-#endif
-
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
-    void setAnimationOpacity();
-    void setAnimationOpacityOut();
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
     /* Removes a button from all special lists. */
     void removeFromSet(QObject *o);
-
-#if QT_VERSION >= 0x050500
-    void removeAnimation(QObject *animation); // For transient scrollbars
-#endif
 
   private:
     QSvgRenderer *defaultRndr_, *themeRndr_;
@@ -357,12 +326,7 @@ class Style : public QCommonStyle {
 
     QString xdg_config_home;
 
-    QTimer *progressTimer_, *opacityTimer_, *opacityTimerOut_;
-    mutable int animationOpacity_, animationOpacityOut_; // A value >= 100 stops state change animation.
-    /* The start state for state change animation */
-    mutable QString animationStartState_, animationStartStateOut_;
-    /* The widget whose state change is animated */
-    QPointer<QWidget> animatedWidget_, animatedWidgetOut_;
+    QTimer *progressTimer_;
 
     /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;
@@ -399,15 +363,11 @@ class Style : public QCommonStyle {
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
 
-    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
-    int pixelRatio_;
-
     /* For not calculating the extra combo width repeatedly. */
     mutable int extraComboWidth_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
-    //mutable KvPointer<QWidget> sunkenButton_;
-    mutable QPointer<QWidget> sunkenButton_;
+    mutable QWeakPointer<QWidget> sunkenButton_;
 
     /* For not getting the menu shadows repeatedly.
        They're used to position submenus correctly. */
@@ -421,10 +381,6 @@ class Style : public QCommonStyle {
     bool noComposite_;
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;
-
-#if QT_VERSION >= 0x050500
-    mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars
-#endif
 };
 }
 

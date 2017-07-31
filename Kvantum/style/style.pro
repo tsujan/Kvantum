@@ -8,30 +8,42 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras
 
 TARGET = kvantum
 TEMPLATE = lib
+CONFIG += c++11
 
 VERSION = 0.1
 
 SOURCES += themeconfig/ThemeConfig.cpp \
-           Kvantum.cpp \
-           KvantumPlugin.cpp \
-           shortcuthandler.cpp \
-           drag/x11wmmove.cpp \
-           drag/windowmanager.cpp \
-           blur/blurhelper.cpp
+           shortcuthandler.cpp
 
 HEADERS += themeconfig/specs.h \
            themeconfig/ThemeConfig.h \
-           Kvantum.h \
-           KvantumPlugin.h \
-           shortcuthandler.h \
-           drag/x11wmmove.h \
-           drag/windowmanager.h \
-           blur/blurhelper.h
+           shortcuthandler.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-  SOURCES += animation/animation.cpp
-  HEADERS += animation/animation.h
+  SOURCES += Kvantum.cpp \
+             KvantumPlugin.cpp \
+             drag/x11wmmove.cpp \
+             drag/windowmanager.cpp \
+             blur/blurhelper.cpp \
+             animation/animation.cpp
+  HEADERS += Kvantum.h \
+             KvantumPlugin.h \
+             drag/x11wmmove.h \
+             drag/windowmanager.h \
+             blur/blurhelper.h \
+             animation/animation.h
   OTHER_FILES += kvantum.json
+} else {
+  SOURCES += qt4/Kvantum4.cpp \
+             qt4/KvantumPlugin4.cpp \
+             qt4/x11wmmove4.cpp \
+             qt4/windowmanager4.cpp \
+             qt4/blurhelper4.cpp
+  HEADERS += qt4/Kvantum4.h \
+             qt4/KvantumPlugin4.h \
+             qt4/x11wmmove4.h \
+             qt4/windowmanager4.h \
+             qt4/blurhelper4.h
 }
 
 RESOURCES += themeconfig/defaulttheme.qrc

@@ -19,7 +19,11 @@
 #define SPEC_H
 
 #include <QStringList>
+#if QT_VERSION >= 0x050000
 #include "drag/windowmanager.h"
+#else
+#include "qt4/windowmanager4.h"
+#endif
 
 namespace Kvantum {
 /* Generic information about a theme */

@@ -23,7 +23,7 @@
 
 #include <QBasicTimer>
 #include <QSet>
-#include <QPointer>
+#include <QWeakPointer>
 #include <QWidget>
 
 namespace Kvantum {
@@ -61,7 +61,7 @@ public:
     }
   }
 
-  explicit WindowManager (QObject *parent, Drag drag/*, bool isX11*/);
+  explicit WindowManager (QObject *parent, Drag drag);
   virtual ~WindowManager (void) {}
   // initialize
   /* read relevant options from OxygenStyleConfigData */
@@ -150,8 +150,6 @@ protected:
   }
   // @}
 private:
-  // the value of QT_DEVICE_PIXEL_RATIO
-  int pixelRatio_;
   // enability
   bool enabled_;
   // drag distance
@@ -204,7 +202,9 @@ private:
   // drag timer
   QBasicTimer dragTimer_;
   // target being dragged
-  QPointer<QWidget> target_;
+  /* QWeakPointer is used in case the target
+     gets deleted while drag is in progress */
+  QWeakPointer<QWidget> target_;
   // true if drag is about to start
   bool dragAboutToStart_;
   // true if drag is in progress
@@ -212,10 +212,6 @@ private:
   // true if drag is locked
   bool locked_;
   Drag drag_;
-  //bool isX11_;
-#if 0
-  bool cursorOverride_;
-#endif
 
   // provide application-wise event filter
   /*

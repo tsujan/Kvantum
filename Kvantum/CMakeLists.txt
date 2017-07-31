@@ -7,7 +7,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "/usr")
 endif()
 
-option(ENABLE_QT4 "Building Qt4 theme." OFF)
+option(ENABLE_QT4 "Building Qt4 plugin." OFF)
 
 add_subdirectory(style)
 if(NOT ENABLE_QT4)

@@ -56,12 +56,12 @@ if(NOT ENABLE_QT4)
       animation/animation.cpp)
 else()
   set(kvantum_SOURCES
-      Kvantum.cpp
-      KvantumPlugin.cpp
+      qt4/Kvantum4.cpp
+      qt4/KvantumPlugin4.cpp
       shortcuthandler.cpp
-      blur/blurhelper.cpp
-      drag/windowmanager.cpp
-      drag/x11wmmove.cpp
+      qt4/blurhelper4.cpp
+      qt4/windowmanager4.cpp
+      qt4/x11wmmove4.cpp
       themeconfig/ThemeConfig.cpp)
 endif()
 

@@ -5,7 +5,7 @@
     Qt5 doesn't need this but uses it for now.
 */
 
-#include "x11wmmove.h"
+#include "x11wmmove4.h"
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -16,6 +16,7 @@ namespace Kvantum {
 void X11MoveTrigger (WId wid, int x, int y)
 {
 #if defined Q_WS_X11 || defined Q_OS_LINUX
+  QX11Info info;
   Atom netMoveResize = XInternAtom (QX11Info::display(), "_NET_WM_MOVERESIZE", False);
   XEvent xev;
   xev.xclient.type = ClientMessage;
@@ -30,7 +31,7 @@ void X11MoveTrigger (WId wid, int x, int y)
   xev.xclient.data.l[4] = 0;
   XUngrabPointer (QX11Info::display(), QX11Info::appTime());
   XSendEvent (QX11Info::display(),
-              QX11Info::appRootWindow (QX11Info::appScreen()),
+              QX11Info::appRootWindow (info.screen()),
               False,
               SubstructureRedirectMask | SubstructureNotifyMask,
               &xev);

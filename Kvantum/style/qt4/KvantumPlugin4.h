@@ -22,9 +22,8 @@
 
 namespace Kvantum {
 class KvantumPlugin : public QStylePlugin {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "kvantum.json")
   public:
+    QStringList keys() const;
     QStyle *create(const QString &key);
 };
 }

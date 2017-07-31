@@ -15,7 +15,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Kvantum.h"
+#include "Kvantum4.h"
 
 #include <QProcess>
 #include <QDir>
@@ -34,19 +34,15 @@
 #include <QMenu>
 #include <QGroupBox>
 #include <QAbstractScrollArea>
-//#include <QAbstractButton>
-//#include <QAbstractItemView>
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
-//#include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QToolBox>
 #include <QLabel>
 #include <QDoubleSpinBox>
 #include <QDateTimeEdit>
 #include <QPixmapCache>
-//#include <QBitmap>
 #include <QPaintEvent>
 #include <QtCore/qmath.h>
 #include <QMenuBar>
@@ -58,12 +54,6 @@
 #include <QLayout> // only for forceSizeGrip
 #include <QDesktopWidget> // for positioning menus
 //#include <QDebug>
-//#include <QDialogButtonBox> // for dialog buttons layout
-#include <QSurfaceFormat>
-#include <QWindow>
-#if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
-#include <QtPlatformHeaders/QXcbWindowFunctions>
-#endif
 
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
@@ -73,8 +63,6 @@
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
 #define MIN_CONTRAST 78
-#define ANIMATION_FRAME 40 // in ms
-#define OPACITY_STEP 20 // percent
 
 namespace Kvantum
 {
@@ -87,8 +75,7 @@ static QString readDconfSetting(const QString &setting) // by Craig Drummond
   QString schemeToUse=QLatin1String("/org/gnome/desktop/interface/");
   QProcess *process=new QProcess();
   process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse+setting);
-  QObject::connect(process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                   [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
+  QObject::connect(process, SIGNAL(finished(int)), process, SLOT(deleteLater()));
 
   if (process->waitForFinished(1500)) {
     QString resp = process->readAllStandardOutput();
@@ -100,8 +87,7 @@ static QString readDconfSetting(const QString &setting) // by Craig Drummond
       schemeToUse=schemeToUse.mid(1, schemeToUse.length()-2).replace("/", ".");
       QProcess *gsettingsProc=new QProcess();
       gsettingsProc->start(QLatin1String("gsettings"), QStringList() << QLatin1String("get") << schemeToUse << setting);
-      QObject::connect(gsettingsProc, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                       [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
+      QObject::connect(gsettingsProc, SIGNAL(finished(int)), process, SLOT(deleteLater()));
       if (gsettingsProc->waitForFinished(1500)) {
         resp = gsettingsProc->readAllStandardOutput();
         resp = resp.trimmed();
@@ -137,13 +123,9 @@ static void setAppFont()
 Style::Style() : QCommonStyle()
 {
   progressTimer_ = new QTimer(this);
-  opacityTimer_ = opacityTimerOut_ = nullptr;
-  animationOpacity_ = animationOpacityOut_ = 100;
-  animationStartState_ = animationStartStateOut_ = "normal";
-  animatedWidget_ = animatedWidgetOut_ = nullptr;
 
-  settings_ = defaultSettings_ = themeSettings_ = nullptr;
-  defaultRndr_ = themeRndr_ = nullptr;
+  settings_ = defaultSettings_ = themeSettings_ = NULL;
+  defaultRndr_ = themeRndr_ = NULL;
 
   gtkDesktop_ = false;
   noComposite_ = false;
@@ -166,6 +148,7 @@ Style::Style() : QCommonStyle()
     {
       if (themeChooser.contains("theme"))
         theme = themeChooser.value("theme").toString();
+#if QT_VERSION >= 0x040806
       /* check if this app has a specific theme assigned to it */
       QString appName = qApp->applicationName();
       themeChooser.beginGroup ("Applications");
@@ -179,6 +162,7 @@ Style::Style() : QCommonStyle()
         }
       }
       themeChooser.endGroup();
+#endif
     }
   }
 
@@ -263,25 +247,11 @@ Style::Style() : QCommonStyle()
   isOpaque_ = false;
   isKisSlider_ = false;
   extraComboWidth_ = 0;
-  pixelRatio_ = 1;
 
-#if QT_VERSION >= 0x050500
-  int dpr = qApp->devicePixelRatio();
-  if (dpr > 1)
-    pixelRatio_ = dpr;
-#endif
+  connect(progressTimer_, SIGNAL(timeout()),
+          this, SLOT(advanceProgressbar()));
 
-  connect(progressTimer_, &QTimer::timeout, this, &Style::advanceProgressbar);
-
-  if (tspec_.animate_states)
-  {
-    opacityTimer_ = new QTimer(this);
-    opacityTimerOut_ = new QTimer(this);
-    connect(opacityTimer_, &QTimer::timeout, this, &Style::setAnimationOpacity);
-    connect(opacityTimerOut_, &QTimer::timeout, this, &Style::setAnimationOpacityOut);
-  }
-
-  itsShortcutHandler_ = nullptr;
+  itsShortcutHandler_ = NULL;
   if (tspec_.alt_mnemonic)
     itsShortcutHandler_ = new ShortcutHandler(this);
 
@@ -313,12 +283,12 @@ Style::Style() : QCommonStyle()
     }
   }
 
-  itsWindowManager_ = nullptr;
-  blurHelper_ = nullptr;
+  itsWindowManager_ = NULL;
+  blurHelper_ = NULL;
 
-  if (tspec_.x11drag && tspec_.isX11)
+  if (tspec_.x11drag)
   {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag/*, tspec_.isX11*/);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
     itsWindowManager_->initialize();
   }
 
@@ -335,36 +305,10 @@ Style::Style() : QCommonStyle()
 
 Style::~Style()
 {
-#if QT_VERSION >= 0x050500
-  QHash<const QObject*, Animation*>::iterator i = animations_.begin();
-  while (i != animations_.end())
-  {
-    QHash<const QObject*, Animation*>::iterator prev = i;
-    ++i;
-    Animation *animation = animations_.take(prev.key());
-    if (animation)
-    { // deleting should be done after stopping
-      animation->stop();
-      delete animation;
-      animation = nullptr;
-    }
-  }
-#endif
-
   if (progressTimer_)
   {
     progressTimer_->stop();
     delete progressTimer_;
-  }
-  if (opacityTimer_)
-  {
-    opacityTimer_->stop();
-    delete opacityTimer_;
-  }
-  if (opacityTimerOut_)
-  {
-    opacityTimerOut_->stop();
-    delete opacityTimerOut_;
   }
 
   delete defaultSettings_;
@@ -379,12 +323,12 @@ void Style::setBuiltinDefaultTheme()
   if (defaultSettings_)
   {
     delete defaultSettings_;
-    defaultSettings_ = nullptr;
+    defaultSettings_ = NULL;
   }
   if (defaultRndr_)
   {
     delete defaultRndr_;
-    defaultRndr_ = nullptr;
+    defaultRndr_ = NULL;
   }
 
   defaultSettings_ = new ThemeConfig(":/Kvantum/default.kvconfig");
@@ -397,12 +341,12 @@ void Style::setUserTheme(const QString &themename)
   if (themeSettings_)
   {
     delete themeSettings_;
-    themeSettings_ = nullptr;
+    themeSettings_ = NULL;
   }
   if (themeRndr_)
   {
     delete themeRndr_;
-    themeRndr_ = nullptr;
+    themeRndr_ = NULL;
   }
 
   if (!themename.isNull() && !themename.isEmpty()
@@ -595,61 +539,6 @@ void Style::advanceProgressbar()
   }
 }
 
-#if QT_VERSION >= 0x050500
-void Style::startAnimation(Animation *animation) const
-{
-  stopAnimation(animation->target());
-  connect(animation, &QObject::destroyed, this, &Style::removeAnimation, Qt::UniqueConnection);
-  animations_.insert(animation->target(), animation);
-  animation->start();
-}
-
-void Style::stopAnimation(const QObject *target) const
-{
-  Animation *animation = animations_.take(target);
-  if (animation)
-  {
-    animation->stop();
-    delete animation;
-    animation = nullptr;
-  }
-}
-
-void Style::removeAnimation(QObject *animation)
-{
-  if (animation)
-    animations_.remove(animation->parent());
-}
-#endif
-
-void Style::setAnimationOpacity()
-{ //qDebug() << animationOpacity_;
-  if (animationOpacity_ >= 100 || !animatedWidget_)
-    opacityTimer_->stop();
-  else
-  {
-    if (animationOpacity_ <= 100 - OPACITY_STEP)
-      animationOpacity_ += OPACITY_STEP;
-    else
-      animationOpacity_ = 100;
-    animatedWidget_->update();
-  }
-}
-
-void Style::setAnimationOpacityOut()
-{ //qDebug() << animatedWidgetOut_;
-  if (animationOpacityOut_ >= 100 || !animatedWidgetOut_)
-    opacityTimerOut_->stop();
-  else
-  {
-    if (animationOpacityOut_ <= 100 - OPACITY_STEP)
-      animationOpacityOut_ += OPACITY_STEP;
-    else
-      animationOpacityOut_ = 100;
-    animatedWidgetOut_->update();
-  }
-}
-
 int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
@@ -702,10 +591,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
   }
 
   if (widgetName == "Menu")
-  {
     menuShadow_ = shadow;
-    setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
-  }
 
   return shadow; // [left, top, right, bottom]
 }
@@ -713,7 +599,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
 // also checks for NULL widgets
 static inline QWidget *getParent (const QWidget *widget, int level)
 {
-  if (!widget || level <= 0) return nullptr;
+  if (!widget || level <= 0) return NULL;
   QWidget *w = widget->parentWidget();
   for (int i = 1; i < level && w; ++i)
     w = w->parentWidget();
@@ -815,12 +701,12 @@ QWidget* Style::getStylableToolbar(const QWidget *w) const
     for (int i = 1; i < 5; ++i)
     {
       p = p->parentWidget();
-      if (p == nullptr) return nullptr;
+      if (p == NULL) return NULL;
       if (isStylableToolbar(p))
         return p;
     }
   }
-  return nullptr;
+  return NULL;
 }
 
 void Style::polish(QWidget *widget)
@@ -995,47 +881,35 @@ void Style::polish(QWidget *widget)
           theme_spec tspec_now = settings_->getCompositeSpec();
 
           bool makeTranslucent(false);
-          if (!widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-              && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
+          if (!isOpaque_ && tspec_now.translucent_windows
+              && !widget->testAttribute(Qt::WA_TranslucentBackground)
+              && !widget->testAttribute(Qt::WA_NoSystemBackground))
           {
-            if (forcedTranslucency_.contains(widget))
-              makeTranslucent = true;
-            /* WARNING:
-               Unlike most Qt5 windows, there are some opaque ones
-               that are polished BEFORE being created (as in Octopi).
-               Also the theme may change from Kvantum and to it again. */
-            else if (!isOpaque_ && tspec_now.translucent_windows
-                     && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                     && !widget->testAttribute(Qt::WA_NoSystemBackground))
-            {
-              makeTranslucent = true;
-              /* a Qt5 window couldn't be made translucent if it's
-                 already created without the alpha channel of its
-                 surface format being set (as in Spectacle) */
-              if (widget->testAttribute(Qt::WA_WState_Created))
-              {
-                if (QWindow *window = widget->windowHandle())
-                {
-                  if (window->format().alphaBufferSize() != 8)
-                    makeTranslucent = false;
-                } 
-              }
-            }
+            forcedTranslucency_.insert(widget);
+            makeTranslucent = true;
           }
           if ((makeTranslucent
                /* enable blurring for hard-coded translucency */
                || (tspec_now.composite && hspec_.blur_translucent
                    && widget->testAttribute(Qt::WA_TranslucentBackground))))
           {
+            /* workaround for a Qt4 bug, which makes translucent windows
+               always appear at the top left corner (taken from QtCurve) */
+            bool was_visible = widget->isVisible();
+            bool moved = widget->testAttribute(Qt::WA_Moved);
+            if (was_visible) widget->hide();
 
             if (!widget->testAttribute(Qt::WA_TranslucentBackground))
             {
               widget->setAttribute(Qt::WA_TranslucentBackground);
-              forcedTranslucency_.insert(widget); // needed in unpolish() with Qt5
+              forcedTranslucency_.insert(widget); // needed in unpolish()
             }
 
+            if (!moved) widget->setAttribute(Qt::WA_Moved, false);
+            if (was_visible) widget->show();
+
             /* enable blurring */
-            if (tspec_.isX11 && (!makeTranslucent || tspec_now.blurring))
+            if (!makeTranslucent || tspec_now.blurring)
             {
               if (!blurHelper_)
               {
@@ -1056,7 +930,8 @@ void Style::polish(QWidget *widget)
               widget->installEventFilter(this);
             }
             translucentWidgets_.insert(widget);
-            connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
+            connect(widget, SIGNAL(destroyed(QObject*)),
+                    SLOT(noTranslucency(QObject*)));
           }
         }
       }
@@ -1138,22 +1013,11 @@ void Style::polish(QWidget *widget)
         widget->setPalette(palette);
       }
     }
-
-    if (qobject_cast<QLineEdit*>(widget) && tspec_.animate_states)
-    {
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-    }
   }
   else if (qobject_cast<QComboBox*>(widget)
            || qobject_cast<QSlider*>(widget))
   {
     widget->setAttribute(Qt::WA_Hover, true);
-    if (tspec_.animate_states)
-    {
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-    }
     /* set an appropriate vertical margin for combo popup items */
     if (QComboBox *combo = qobject_cast<QComboBox*>(widget))
     {
@@ -1205,11 +1069,9 @@ void Style::polish(QWidget *widget)
             /* PM_FocusFrameVMargin is used for viewitems */
             itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
                                                               itemView));
-            if (!tspec_.animate_states)
-            { // see eventFilter() -> QEvent::StyleChange
-              widget->removeEventFilter(this);
-              widget->installEventFilter(this);
-            }
+            /* see eventFilter() -> QEvent::StyleChange */
+            widget->removeEventFilter(this);
+            widget->installEventFilter(this);
           }
         }
       }
@@ -1235,24 +1097,12 @@ void Style::polish(QWidget *widget)
     if (gb->isCheckable())
     {
       widget->setAttribute(Qt::WA_Hover, true);
-      if (tspec_.animate_states)
-      {
-        widget->removeEventFilter(this);
-        widget->installEventFilter(this);
-      }
     }
   }
-  else if ((tspec_.animate_states &&
-            (qobject_cast<QPushButton*>(widget)
-             || (qobject_cast<QToolButton*>(widget)
-                 && !qobject_cast<QLineEdit*>(pw)) // exclude line-edit clear buttons
-             || qobject_cast<QCheckBox*>(widget)
-             || qobject_cast<QRadioButton*>(widget)
-             || widget->inherits("QComboBoxPrivateContainer")))
-            /* unfortunately, KisSliderSpinBox uses a null widget in drawing
-               its progressbar, so we can identify it only through eventFilter()
-               (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
-           || widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
+  else if (/* unfortunately, KisSliderSpinBox uses a null widget in drawing
+              its progressbar, so we can identify it only through eventFilter()
+              (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
+           widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
            /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
               for drawing its panel, but not if its state is normal. To force the
               normal text color on it, we need to make it use PE_PanelButtonTool
@@ -1275,12 +1125,6 @@ void Style::polish(QWidget *widget)
     /* without this, transparent backgrounds
        couldn't be used for scrollbar grooves */
     widget->setAttribute(Qt::WA_OpaquePaintEvent, false);
-
-    if (tspec_.animate_states)
-    {
-      widget->removeEventFilter(this);
-      widget->installEventFilter(this);
-    }
   }
   /* remove ugly flat backgrounds when the window backround is styled */
   else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
@@ -1303,13 +1147,6 @@ void Style::polish(QWidget *widget)
       }
       else
       {
-        // support animation only if the background is flat
-        if (tspec_.animate_states
-            && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
-        {
-          widget->removeEventFilter(this);
-          widget->installEventFilter(this);
-        }
         // set the background correctly when scrollbars are either inside the frame or inside a combo popup
         if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView") && !tspec_.combo_menu))
             && vp && vp->autoFillBackground()
@@ -1386,8 +1223,7 @@ void Style::polish(QWidget *widget)
     }
   }
   // update grouped toolbar buttons when one of them is shown/hidden
-  else if (!tspec_.animate_states // otherwise it already has event filter installed on it
-           && tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
+  else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
   {
     if (QToolBar *toolBar = qobject_cast<QToolBar*>(pw))
     {
@@ -1399,17 +1235,16 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  bool isMenuOrTooltip(!isLibreoffice_ // not required
+  bool isMenuOrTooltip(!isLibreoffice_
                        && !noComposite_
                        && !subApp_
-                       && (qobject_cast<QMenu*>(widget)
-                           /* no shadow for tooltips that are already translucent */
+                       && ((qobject_cast<QMenu*>(widget)
+                            && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
                            || (widget->inherits("QTipLabel")
-                               && (!widget->testAttribute(Qt::WA_TranslucentBackground)
-                                   || forcedTranslucency_.contains(widget)))));
+                               && !widget->testAttribute(Qt::WA_TranslucentBackground))));
   if ((isMenuOrTooltip
           /* because of combo menus or round corners */
-       || (tspec_.isX11 && widget->inherits("QComboBoxPrivateContainer")))
+       || widget->inherits("QComboBoxPrivateContainer"))
       && !translucentWidgets_.contains(widget))
   {
     theme_spec tspec_now = settings_->getCompositeSpec();
@@ -1428,23 +1263,14 @@ void Style::polish(QWidget *widget)
         }
       }
 
-      if (tspec_.isX11)
-      {
-        if (!widget->testAttribute(Qt::WA_TranslucentBackground))
-          widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
-      }
-      else
-      { // see setSurfaceFormat() for an explanation
-        QPalette palette = widget->palette();
-        palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
-        widget->setPalette(palette);
-      }
+      if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+        widget->setAttribute(Qt::WA_TranslucentBackground);
 
       translucentWidgets_.insert(widget);
-      connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
+      connect(widget, SIGNAL(destroyed(QObject*)),
+              SLOT(noTranslucency(QObject*)));
 
-      if (tspec_.isX11
-          && (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu))
+      if (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu)
       {
         if (!blurHelper_ && tspec_now.popup_blurring)
         {
@@ -1462,9 +1288,27 @@ void Style::polish(QWidget *widget)
   }
 }
 
+#if QT_VERSION < 0x040806
+static QString getAppName(const QString &file)
+{
+  QString appName(file);
+  int slashPos(appName.lastIndexOf('/'));
+  if(slashPos != -1)
+    appName.remove(0, slashPos+1);
+  return appName;
+}
+#endif
+
 void Style::polish(QApplication *app)
 {
+#if QT_VERSION < 0x040806
+  /* use this old-fashioned method to get the app name
+     because, apparently, QApplication::applicationName()
+     doesn't work correctly with all versions of Qt4 */
+  QString appName = getAppName(app->argv()[0]);
+#else
   const QString appName = app->applicationName();
+#endif
   if (appName == "Qt-subapplication")
     subApp_ = true;
   else if (appName == "dolphin")
@@ -1641,17 +1485,7 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
         || qobject_cast<QToolButton*>(widget)
         || qobject_cast<QComboBox*>(widget) // for both state anomation and delegate
-        || (tspec_.active_tab_overlap > 0 && qobject_cast<QTabBar*>(widget))
-        || (tspec_.animate_states &&
-            (qobject_cast<QPushButton*>(widget)
-             || qobject_cast<QCheckBox*>(widget)
-             || qobject_cast<QRadioButton*>(widget)
-             || qobject_cast<QScrollBar*>(widget)
-             || qobject_cast<QSlider*>(widget)
-             || qobject_cast<QLineEdit*>(widget)
-             || qobject_cast<QAbstractScrollArea*>(widget)
-             //|| widget->inherits("QComboBoxPrivateContainer") // done above
-             || qobject_cast<QGroupBox*>(widget))))
+        || (tspec_.active_tab_overlap > 0 && qobject_cast<QTabBar*>(widget)))
     {
       widget->removeEventFilter(this);
     }
@@ -1681,21 +1515,6 @@ void Style::unpolish(QWidget *widget)
 
 void Style::unpolish(QApplication *app)
 {
-  /* we clean up here because this method may be called due to setting
-     an app style sheet (as in QupZilla), in which case, main windows
-     might not be drawn at all if we don't remove translucency */
-  QSetIterator<QWidget*> i(forcedTranslucency_);
-  while (i.hasNext())
-  {
-    if (QWidget *w = i.next())
-    {
-      w->setAttribute(Qt::WA_NoSystemBackground, false);
-      w->setAttribute(Qt::WA_TranslucentBackground, false);
-    }
-  }
-  forcedTranslucency_.clear();
-  translucentWidgets_.clear();
-
   if (itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);
   QCommonStyle::unpolish(app);
@@ -1898,183 +1717,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else
         tabHoverRect_ = QRect();
     }
-    else if (w && w->isEnabled() && tspec_.animate_states
-             && !w->isWindow() // WARNING: Translucent (Qt5) windows have enter event!
-             && !qobject_cast<QAbstractSpinBox*>(o) && !qobject_cast<QProgressBar*>(o)
-             && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-             && !(tspec_.combo_as_lineedit
-                  && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
-    {
-      /* if another animation is in progress, end it */
-      if (animatedWidget_ && animatedWidget_ != w
-          && !w->inherits("QComboBoxPrivateContainer")) // Qt4
-      {
-        if (opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        animatedWidget_ = nullptr;
-      }
-      if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (!ab->isDown() && !ab->isChecked())
-        {
-          animationStartState_ = "normal";
-          if (!w->isActiveWindow())
-            animationStartState_.append("-inactive");
-          animatedWidget_ = w;
-          animationOpacity_ = 0;
-          opacityTimer_->start(ANIMATION_FRAME);
-        }
-        else if (ab->isChecked())
-        {
-          animationStartState_ = "toggled";
-          if (!w->isActiveWindow())
-            animationStartState_.append("-inactive");
-        }
-      }
-      else if (qobject_cast<QCheckBox*>(o) || qobject_cast<QRadioButton*>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (!ab->isChecked())
-          animationStartState_ = "-normal";
-        else
-        {
-          if (QCheckBox *cb = qobject_cast<QCheckBox*>(o))
-          {
-            if (cb->checkState() == Qt::PartiallyChecked)
-              animationStartState_ = "-tristate-normal";
-            else
-              animationStartState_ = "-checked-normal";
-          }
-          else
-           animationStartState_ = "-checked-normal";
-        }
-        if (!w->isActiveWindow())
-          animationStartState_.append("-inactive");
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-      else if (qobject_cast<QGroupBox*>(o))
-      { // no animation; just for getting the next start state
-        if (animatedWidget_ != w)
-        {
-          animatedWidget_ = w;
-          animationOpacity_ = 100;
-        }
-      }
-      else if (qobject_cast<QComboBox*>(o))
-      {
-        if (!w->hasFocus())
-          animationStartState_ = "normal";
-        else if (!animationStartState_.startsWith("c-toggled")) // the popup may have been closed (with Qt5)
-          animationStartState_ = "pressed";
-        if (!w->isActiveWindow())
-          animationStartState_.append("-inactive");
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-      else if (qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
-      {
-        animationStartState_ = "normal";
-        if (!w->isActiveWindow())
-          animationStartState_.append("-inactive");
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-    }
-    break;
-
-  case QEvent::FocusIn:
-    if (w && w->isEnabled() && tspec_.animate_states)
-    {
-      if (qobject_cast<QComboBox*>(o)
-          && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
-      { // QEvent::MouseButtonPress may follow this
-        if (animatedWidget_ // the cusror may have been on the popup scrollbar
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-      else
-      {
-        QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(o);
-        if ((sa && !w->inherits("QComboBoxListView")) // exclude combo popups
-            || (qobject_cast<QLineEdit*>(o)
-                // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
-                && !qobject_cast<QComboBox*>(w->parentWidget()))
-            || qobject_cast<QAbstractSpinBox*>(o)
-            || (tspec_.combo_as_lineedit
-                && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
-        {
-          if (animatedWidget_ && animatedWidget_ != w)
-          {
-            if (sa)
-            { // no animation when a scrollbar is going to be animated
-              if ((animatedWidget_ == sa->verticalScrollBar() || animatedWidget_ == sa->horizontalScrollBar())
-                  && animatedWidget_->rect().contains(animatedWidget_->mapFromGlobal(QCursor::pos())))
-              {
-                break;
-              }
-            }
-            if (opacityTimer_->isActive())
-            {
-              opacityTimer_->stop();
-              animationOpacity_ = 100;
-              animatedWidget_->update();
-            }
-          }
-          animationStartState_ = "normal";
-          animatedWidget_ = w;
-          animationOpacity_ = 0;
-          opacityTimer_->start(ANIMATION_FRAME);
-        }
-      }
-    }
-    break;
-
-  case QEvent::FocusOut:
-    if (w && w->isEnabled() && tspec_.animate_states)
-    {
-      QWidget *popup = QApplication::activePopupWidget();
-      if (popup && !popup->isAncestorOf(w))
-        break; // not due to a popup widget
-      if (qobject_cast<QComboBox*>(o)
-          || qobject_cast<QLineEdit*>(o)
-          || qobject_cast<QAbstractSpinBox*>(o)
-          || (qobject_cast<QAbstractScrollArea*>(o)
-              && !w->inherits("QComboBoxListView"))) // exclude combo popups
-      {
-        if (animatedWidgetOut_ && opacityTimerOut_->isActive())
-        {
-          opacityTimerOut_->stop();
-          animationOpacityOut_ = 100;
-          animatedWidgetOut_->update();
-        }
-        if (qobject_cast<QComboBox*>(o)
-            && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
-        {
-          animationStartStateOut_ = "pressed";
-        }
-        else
-          animationStartStateOut_ = "focused";
-        animatedWidgetOut_ = w;
-        animationOpacityOut_ = 0;
-        opacityTimerOut_->start(ANIMATION_FRAME);
-      }
-    }
     break;
 
   case QEvent::HoverLeave:
@@ -2086,121 +1728,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         tabHoverRect_ = QRect();
       }
     }
-    // we use HoverLeave and not Leave because of popups of comboxes
-    else if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w
-             && !qobject_cast<QAbstractSpinBox*>(o)
-             && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-             && !(tspec_.combo_as_lineedit
-                  && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
-    {
-      if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (ab->isCheckable() && ab->isChecked())
-          break;
-      }
-      if (!opacityTimer_->isActive() && !qobject_cast<QGroupBox*>(o))
-      {
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-    }
     break;
-
-  case QEvent::MouseButtonRelease: {
-    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(e);
-    if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
-      break;
-    if (w && w->isEnabled() && tspec_.animate_states)
-    {
-      if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
-      { // includes checkboxes and radio buttons too
-        if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
-        {
-          if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
-          {
-            if (!ab->isCheckable() && ab->isDown())
-              animationStartState_ = "pressed";
-            else
-              animationStartState_ = "toggled";
-          }
-          else
-            animationStartState_ = "pressed";
-          if (!w->isActiveWindow())
-            animationStartState_.append("-inactive");
-        }
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      } // FIXME: Also take "autoExclusive" into account?
-      else if (qobject_cast<QGroupBox*>(o))
-      {
-        if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-      else if ((qobject_cast<QComboBox*>(o) // impossible because of popup
-                && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
-               || qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
-      {
-        if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-    }
-    break;
-  }
-
-  case QEvent::MouseButtonPress: {
-    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(e);
-    if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
-      break;
-    if (w && w->isEnabled() && tspec_.animate_states
-        && animatedWidget_ == w
-        // these widget are dealt with in QEvent::FocusIn
-        && !qobject_cast<QAbstractSpinBox*>(o)
-        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o))
-    {
-      if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
-      {
-        if (qobject_cast<QCheckBox*>(o) || qobject_cast<QRadioButton*>(o)
-            || (ab->isCheckable() && ab->isChecked())) // from toggled to toggled
-        {
-          break;
-        }
-      }
-      else if (qobject_cast<QGroupBox*>(o))
-        break;
-      /* we don't need to stop animation here because
-         no other widget could have been animated */
-      animatedWidget_ = w;
-      animationOpacity_ = 0;
-      opacityTimer_->start(ANIMATION_FRAME);
-    }
-    break;
-  }
 
   case QEvent::StyleChange:
   if (QComboBox *combo = qobject_cast<QComboBox*>(w))
@@ -2263,7 +1791,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
-          QMenuBar *parentMenubar = nullptr;
+          QMenuBar *parentMenubar = NULL;
           if (!parentMenu)
           { // search for a menubar with an active action
             if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
@@ -2432,7 +1960,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             || qobject_cast<QDoubleSpinBox*>(o)
             || qobject_cast<QDateTimeEdit*>(o)))
     {
-      QSize size = sizeFromContents(CT_SpinBox,nullptr,QSize(),w);
+      QSize size = sizeFromContents(CT_SpinBox,NULL,QSize(),w);
       if (w->maximumWidth() > size.width())
         w->setMinimumWidth(size.width());
       if (w->maximumHeight() > size.height())
@@ -2448,25 +1976,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
       }
-      //break; // toolbuttons may be animated (see below)
     }
-    else if (w && w->isEnabled() && tspec_.animate_states
-             && w->inherits("QComboBoxPrivateContainer")
-             && qobject_cast<QComboBox*>(getParent(w, 1)))
-    {
-      /* start with an appropriate state on closing popup, considering
-         that lineedits only have normal and focused states in Kvantum */
-      if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
-        animationStartState_ = "normal"; // -> QEvent::FocusIn
-      else
-        animationStartState_ = "c-toggled"; // distinguish it from a toggled button
-      /* ensure that the combobox will be animated on closing popup
-         (especially needed if the cursor has been on the popup) */
-      animatedWidget_ = getParent(w, 1);
-      animationOpacity_ = 0;
-      break;
-    }
-    /* Falls through. */
+    break;
+
   case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
     {
@@ -2475,21 +1987,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         progressbars_.remove(w);
         if (progressbars_.size() == 0)
           progressTimer_->stop();
-      }
-      else
-      {
-        if (animatedWidget_ == w)
-        {
-          opacityTimer_->stop();
-          animatedWidget_ = nullptr;
-          animationOpacity_ = 100;
-        }
-        if (animatedWidgetOut_ == w)
-        {
-          opacityTimerOut_->stop();
-          animatedWidgetOut_ = nullptr;
-          animationOpacityOut_ = 100;
-        }
       }
     }
     break;
@@ -2537,9 +2034,9 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
 
     /* only direct children should be considered */
     if (left && left->parentWidget() != toolBar)
-      left = nullptr;
+      left = NULL;
     if (right && right->parentWidget() != toolBar)
-      right = nullptr;
+      right = NULL;
 
     if (left && g.height() == left->height())
     {
@@ -2759,7 +2256,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
       b->setPalette(palette);
       txtColForced.insert(widget,col);
-      connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
+      connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
     }
   }
 }
@@ -2831,9 +2328,6 @@ QString Style::getState(const QStyleOption *option, const QWidget *widget) const
   */
 }
 
-/* This method is used, instead of drawPrimitive(PE_PanelLineEdit,...), for drawing the lineedit
-   of an editable combobox because animatedWidget_ is always NULL for KUrlComboBox -> KLineEdit.
-   Although it's only needed in such special cases, it can always be used safely. */
 void Style::drawComboLineEdit(const QStyleOption *option,
                               QPainter *painter,
                               const QWidget *lineedit,
@@ -3001,8 +2495,8 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameTabBarBase : {
-      if (const QStyleOptionTabBarBase *opt
-              = qstyleoption_cast<const QStyleOptionTabBarBase*>(option))
+      if (const QStyleOptionTabBarBaseV2 *opt
+              = qstyleoption_cast<const QStyleOptionTabBarBaseV2*>(option))
       {
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast
@@ -3379,49 +2873,13 @@ void Style::drawPrimitive(PrimitiveElement element,
                    0);
         }
 
-        bool animate(widget->isEnabled() && animatedWidget_ == widget);
         if (tb->autoRaise())
           autoraise = true;
         if (!autoraise || !pbStatus.startsWith("normal") || drawRaised)
         {
-          if (animate)
-          {
-            if (animationStartState_ == pbStatus)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100
-                     && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
-            {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_,0,0,0,0,0,drawRaised);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_,drawRaised);
-            }
-            painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
-          }
           renderFrame(painter,r,fspec,fspec.element+"-"+pbStatus,0,0,0,0,0,drawRaised);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
-          if (animate)
-          {
-            painter->restore();
-            if (animationOpacity_ >= 100)
-              animationStartState_ = pbStatus;
-          }
           hasPanel = true;
-        }
-        // fade out animation
-        else if (animate)
-        {
-          if (animationStartState_ == pbStatus)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-          {
-            painter->save();
-            painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-            painter->restore();
-          }
-          if (animationOpacity_ >= 100)
-            animationStartState_ = pbStatus;
         }
 
         /*if (!isHorizontal && !withArrow)
@@ -3449,7 +2907,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (widget && hasPanel && !paneledButtons.contains(widget))
       {
         paneledButtons.insert(widget);
-        connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
+        connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
       }
 
       /* force text color if the button isn't drawn in a standard way */
@@ -3509,25 +2967,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        bool animate(widget && animatedWidget_ == widget
-                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-                     && !qobject_cast<const QAbstractScrollArea*>(widget));
-        if (animate)
-        {
-          if (animationStartState_ == suffix)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-            renderElement(painter, ispec.element+animationStartState_, option->rect);
-          painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
-        }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
-        if (animate)
-        {
-          painter->restore();
-          if (animationOpacity_ >= 100)
-            animationStartState_ = suffix;
-        }
       }
       else
       {
@@ -3588,25 +3028,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
-        bool animate(widget && animatedWidget_ == widget
-                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-                     && !qobject_cast<const QAbstractScrollArea*>(widget));
-        if (animate)
-        {
-          if (animationStartState_ == suffix)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-            renderElement(painter, ispec.element+animationStartState_, option->rect);
-          painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
-        }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
-        if (animate)
-        {
-          painter->restore();
-          if (animationOpacity_ >= 100)
-            animationStartState_ = suffix;
-        }
       }
       else
       {
@@ -3776,7 +3198,6 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!noComposite_ && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && widget && translucentWidgets_.contains(widget)
-          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
@@ -3899,7 +3320,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         QString fStatus = "normal";
-        // Can it be animated? (which means a flat background too -> polish(QWidget *widget))
         bool hasFlatBg(sa && themeRndr_ && themeRndr_->isValid()
                        && (sa->backgroundRole() == QPalette::Window
                            || sa->backgroundRole() == QPalette::Button)
@@ -3915,43 +3335,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           fStatus = "normal-inactive"; // the focus state is meaningless here
         if (!widget) // QML again!
           painter->fillRect(option->rect, QApplication::palette().color(QPalette::Base));
-        bool animate(widget && widget->isEnabled()
-                     && ((animatedWidget_ == widget && !fStatus.startsWith("normal"))
-                         || (animatedWidgetOut_ == widget && fStatus.startsWith("normal"))));
-        QString animationStartState(animationStartState_);
-        int animationOpacity = animationOpacity_;
-        if (animate)
-        {
-          if (fStatus.startsWith("normal")) // -> QEvent::FocusOut
-          {
-            animationStartState = animationStartStateOut_;
-            animationOpacity = animationOpacityOut_;
-          }
-          if (animationStartState == fStatus)
-          {
-            animationOpacity = 100;
-            if (fStatus.startsWith("normal"))
-              animationOpacityOut_ = 100;
-            else
-              animationOpacity_ = 100;
-          }
-          else if (animationOpacity < 100)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
-          painter->save();
-          painter->setOpacity((qreal)animationOpacity/100);
-        }
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+fStatus);
-        if (animate)
-        {
-          painter->restore();
-          if (animationOpacity >= 100)
-          {
-            if (fStatus.startsWith("normal"))
-              animationStartStateOut_ = fStatus;
-            else
-              animationStartState_ = fStatus;
-          }
-        }
         if (!(option->state & State_Enabled))
           painter->restore();
       }
@@ -3987,7 +3371,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QStyleOptionFrame *frame = qstyleoption_cast<const QStyleOptionFrame*>(option);
       if (frame)
       {
-        if (frame->features & QStyleOptionFrame::Flat)
+        const QStyleOptionFrameV2 *frame2 = qstyleoption_cast<const QStyleOptionFrameV2 *>(option);
+        if (frame2 && (frame2->features & QStyleOptionFrameV2::Flat))
           break;
         const QString group = "GroupBox";
         frame_spec fspec = getFrameSpec(group);
@@ -4038,14 +3423,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           QRect tr;
           tp = tw->tabPosition();
-          if (const QStyleOptionTabWidgetFrame *twf =
-              qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option))
+          if (const QStyleOptionTabWidgetFrameV2 *twf =
+              qstyleoption_cast<const QStyleOptionTabWidgetFrameV2*>(option))
           {
             if (!twf->tabBarSize.isEmpty()) // it's empty in Kdenlive
               tr = twf->selectedTabRect;
           }
           // as in GoldenDict's Preferences dialog
-          else if (QTabBar *tb = tw->tabBar())
+          else if (QTabBar *tb = widget->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar")))
           {
             int index = tw->currentIndex();
             if (index >= 0)
@@ -4252,39 +3637,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
-                       && ((animatedWidget_ == p && !leStatus.startsWith("normal"))
-                           || (animatedWidgetOut_ == p && leStatus.startsWith("normal"))));
-      bool animate(!isLibreoffice_ && widget && widget->isEnabled()
-                   && !qobject_cast<const QAbstractScrollArea*>(widget)
-                   && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
-                       || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))
-                       || animateSpin));
-      QString animationStartState(animationStartState_);
-      int animationOpacity = animationOpacity_;
-      if (animate)
-      {
-        if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
-        {
-          animationStartState = animationStartStateOut_;
-          animationOpacity = animationOpacityOut_;
-        }
-        if (animationStartState == leStatus)
-        {
-          animationOpacity = 100;
-          if (leStatus.startsWith("normal"))
-            animationOpacityOut_ = 100;
-          else
-            animationOpacity_ = 100;
-        }
-        else if (animationOpacity < 100)
-        {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
-        }
-        painter->save();
-        painter->setOpacity((qreal)animationOpacity/100);
-      }
       /* force frame */
       renderFrame(painter,
                   isLibreoffice_ && !sbOpt ?
@@ -4293,17 +3645,6 @@ void Style::drawPrimitive(PrimitiveElement element,
                   fspec,
                   fspec.element+"-"+leStatus);
       renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
-      if (animate)
-      {
-        painter->restore();
-        if (animationOpacity >= 100)
-        {
-          if (leStatus.startsWith("normal"))
-            animationStartStateOut_ = leStatus;
-          else
-            animationStartState_ = leStatus;
-        }
-      }
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -4439,7 +3780,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* now handle the button state */
 
           // the subcontrol
-          quint32 sc = QStyle::SC_SpinBoxUp;
+          int sc = QStyle::SC_SpinBoxUp;
           if (!up)
             sc = QStyle::SC_SpinBoxDown;
 
@@ -4595,7 +3936,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       QString group = "DropDownButton";
 
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
-      QWidget *stb = nullptr;
+      QWidget *stb = NULL;
       bool autoraise = false;
       if (tb)
       {
@@ -4776,46 +4117,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               painter->setOpacity(DISABLED_OPACITY);
             }
           }
-          bool animate(widget->isEnabled() && animatedWidget_ == widget);
           if (!autoraise || !status.startsWith("normal") || drawRaised)
           {
-            if (animate)
-            {
-              if (animationStartState_ == status)
-                animationOpacity_ = 100;
-              else if (animationOpacity_ < 100
-                       && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
-              {
-                renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-              }
-              painter->save();
-              painter->setOpacity((qreal)animationOpacity_/100);
-            }
             renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
             renderFrame(painter,r,fspec,fspec.element+"-"+status);
-            if (animate)
-            {
-              painter->restore();
-              if (animationOpacity_ >= 100)
-                animationStartState_ = status;
-            }
-          }
-          // fade out animation
-          else if (animate)
-          {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
-            {
-              painter->save();
-              painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-              painter->restore();
-            }
-            if (animationOpacity_ >= 100)
-              animationStartState_ = status;
           }
           if (!(option->state & State_Enabled))
           {
@@ -4842,7 +4147,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               col = QApplication::palette().color(QPalette::ButtonText);
             QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
-            QWidget* menubar = nullptr;
+            QWidget* menubar = NULL;
             if (qobject_cast<QMenuBar*>(gp))
               menubar = gp;
             else if (qobject_cast<QMenuBar*>(p))
@@ -4891,60 +4196,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        bool mouseAnimation(animatedWidget_ == widget
-                            && (!status.startsWith("normal")
-                                || ((!tspec_.combo_as_lineedit
-                                     || (cb && cb->view() && cb->view()->isVisible()))
-                                    && animationStartState_.startsWith("focused"))));
-        bool animate(cb && cb->isEnabled()
-                     && !qobject_cast<const QAbstractScrollArea*>(widget)
-                     && (mouseAnimation
-                         || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
-        QString animationStartState(animationStartState_);
-        if (animationStartState.startsWith("c-"))
-          animationStartState.remove(0, 2);
-        int animationOpacity = animationOpacity_;
-        if (animate)
-        {
-          if (!mouseAnimation) // -> QEvent::FocusOut
-          {
-            animationStartState = animationStartStateOut_;
-            animationOpacity = animationOpacityOut_;
-          }
-          if (animationStartState == status)
-          {
-            animationOpacity = 100;
-            if (!mouseAnimation)
-              animationOpacityOut_ = 100;
-            else
-              animationOpacity_ = 100;
-          }
-          else if (animationOpacity < 100)
-          {
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-          }
-          painter->save();
-          painter->setOpacity((qreal)animationOpacity/100);
-        }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
-        if (animate)
-        {
-          painter->restore();
-          if (animationOpacity >= 100)
-          {
-            if (animatedWidget_ == widget)
-            {
-              animationStartState_ = status;
-              // distinguish between toggled combo and toggled button
-              if (animationStartState_.startsWith("toggled"))
-                animationStartState_ = "c-" + animationStartState_;
-            }
-            if (!mouseAnimation)
-              animationStartStateOut_ = status;
-          }
-        }
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -4985,12 +4238,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-#if QT_VERSION < 0x050700
     case PE_IndicatorTabTear :
-#else
-    case PE_IndicatorTabTearRight :
-    case PE_IndicatorTabTearLeft :
-#endif
     {
       indicator_spec dspec = getIndicatorSpec("Tab");
       renderElement(painter,dspec.element+"-tear",option->rect);
@@ -5140,14 +4388,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         ivStatus.replace("focused","normal");
       }
 
-      const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option);
+      const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
       if (opt)
       {
         switch (opt->viewItemPosition) {
-          case QStyleOptionViewItem::OnlyOne:
-          case QStyleOptionViewItem::Invalid: break;
-          case QStyleOptionViewItem::Beginning: {
+          case QStyleOptionViewItemV4::OnlyOne:
+          case QStyleOptionViewItemV4::Invalid: break;
+          case QStyleOptionViewItemV4::Beginning: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             if (opt->direction == Qt::RightToLeft)
@@ -5157,7 +4405,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.expansion = 0;
             break;
           }
-          case QStyleOptionViewItem::End: {
+          case QStyleOptionViewItemV4::End: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             if (opt->direction == Qt::RightToLeft)
@@ -5167,7 +4415,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.expansion = 0;
             break;
           }
-          case QStyleOptionViewItem::Middle: {
+          case QStyleOptionViewItemV4::Middle: {
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = 0;
@@ -5599,7 +4847,7 @@ void Style::drawControl(ControlElement element,
           eliding and other calculations and just use our custom
           colors instead of the default ones whenever possible.
       */
-      if (const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
+      if (const QStyleOptionViewItemV4 *opt = qstyleoption_cast<const QStyleOptionViewItemV4*>(option))
       {
         QPalette palette(opt->palette);
         if (!opt->text.isEmpty()
@@ -5661,15 +4909,9 @@ void Style::drawControl(ControlElement element,
                    a minimum amount of contrast is needed */
                 && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
             {
-              QStyleOptionViewItem o(*opt);
+              QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::Text, normalColor);
               o.palette = palette;
-              if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
-              {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
-              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -5679,22 +4921,16 @@ void Style::drawControl(ControlElement element,
                          // supposing that the focus interior is translucent, take care of contrast
                          || enoughContrast(palette.color(QPalette::Base), focusColor)))
             {
-              QStyleOptionViewItem o(*opt);
+              QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::Text, focusColor);
               palette.setColor(QPalette::HighlightedText, focusColor);
               o.palette = palette;
               qreal tintPercentage = hspec_.tint_on_mouseover;
               if (tintPercentage > 0
-                  && (opt->features & QStyleOptionViewItem::HasDecoration)
+                  && (opt->features & QStyleOptionViewItemV2::HasDecoration)
                   && !opt->decorationSize.isEmpty())
               {
                 QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
-                o.icon = QIcon(px);
-              }
-              else if (pixelRatio_ > 1)
-              {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
                 o.icon = QIcon(px);
               }
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -5702,29 +4938,17 @@ void Style::drawControl(ControlElement element,
             }
             else if (state == 3 && pressColor.isValid())
             {
-              QStyleOptionViewItem o(*opt);
+              QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::HighlightedText, pressColor);
               o.palette = palette;
-              if (pixelRatio_ > 1)
-              {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
-              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
             else if (state == 4 && toggleColor.isValid())
             {
-              QStyleOptionViewItem o(*opt);
+              QStyleOptionViewItemV4 o(*opt);
               palette.setColor(QPalette::HighlightedText, toggleColor);
               o.palette = palette;
-              if (pixelRatio_ > 1)
-              {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
-              }
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
             }
@@ -5733,10 +4957,10 @@ void Style::drawControl(ControlElement element,
           {
             qreal opacityPercentage = hspec_.disabled_icon_opacity;
             if (opacityPercentage < 100
-                && (opt->features & QStyleOptionViewItem::HasDecoration)
+                && (opt->features & QStyleOptionViewItemV2::HasDecoration)
                 && !opt->decorationSize.isEmpty())
             {
-              QStyleOptionViewItem o(*opt);
+              QStyleOptionViewItemV4 o(*opt);
               QPixmap px = translucentPixmap(opt->icon.pixmap(opt->decorationSize), opacityPercentage);
               o.icon = QIcon(px);
               QCommonStyle::drawControl(element,&o,painter,widget);
@@ -5770,13 +4994,6 @@ void Style::drawControl(ControlElement element,
           qstyleoption_cast<const QStyleOptionMenuItem*>(option);
       if (opt) {
         QString status = getState(option,widget);
-        if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
-        {
-          if (status.startsWith("toggled"))
-            status.replace("toggled","normal");
-          if (status.startsWith("focused"))
-            status.replace("focused","normal");
-        }
 
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
@@ -5850,32 +5067,19 @@ void Style::drawControl(ControlElement element,
           state = 0;
         /* press and toggle text colors are used only if
            they exist (focus color seems more natural) */
-        else
+        else if (status.startsWith("pressed"))
         {
-          if (styleHint(SH_MenuBar_MouseTracking, opt, widget))
-          {
-            if (status.startsWith("pressed"))
-            {
-              if (lspec.pressColor.isEmpty())
-                state = 2;
-              else
-                state = 3;
-            }
-            else if (status.startsWith("toggled"))
-            {
-              if (lspec.toggleColor.isEmpty())
-                state = 2;
-              else
-                state = 4;
-            }
-          }
-          else if (status.startsWith("pressed"))
-          {
-            if (lspec.pressColor.isEmpty())
-              state = 2;
-            else
-              state = 3;
-          }
+          if (lspec.pressColor.isEmpty())
+            state = 2;
+          else
+            state = 3;
+        }
+        else if (status.startsWith("toggled"))
+        {
+          if (lspec.toggleColor.isEmpty())
+            state = 2;
+          else
+            state = 4;
         }
         renderLabel(option,painter,r,
                     fspec,lspec,
@@ -6663,7 +5867,7 @@ void Style::drawControl(ControlElement element,
         else
           r.adjust(ltb, 0, -rtb, 0);
 
-        QStyleOptionTab tabV2(*opt);
+        QStyleOptionTabV2 tabV2(*opt);
         QSize iconSize;
         if (!tabV2.icon.isNull())
           iconSize = tabV2.iconSize;
@@ -7156,8 +6360,8 @@ void Style::drawControl(ControlElement element,
     case CE_ProgressBarLabel : {
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar*>(option);
-      const QStyleOptionProgressBar *opt2 =
-          qstyleoption_cast<const QStyleOptionProgressBar*>(option);
+      const QStyleOptionProgressBarV2 *opt2 =
+          qstyleoption_cast<const QStyleOptionProgressBarV2*>(option);
 
       if (opt && opt->textVisible)
       {
@@ -7348,7 +6552,7 @@ void Style::drawControl(ControlElement element,
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option);
         if (opt)
         {
-          quint32 sc = QStyle::SC_ScrollBarAddLine;
+          int sc = QStyle::SC_ScrollBarAddLine;
           int limit = opt->maximum;
           if (!add)
           {
@@ -7395,7 +6599,6 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ScrollBarSlider : {
-      /* no toggled state (especially good with transient scrollbars) */
       QString status = (option->state & State_Enabled) ?
                        (option->state & State_Sunken) ? "pressed" :
                        (option->state & State_Selected) ? "pressed" :
@@ -7409,8 +6612,7 @@ void Style::drawControl(ControlElement element,
         status.replace("focused","normal");
       }
       QString sStatus = status; // slider state
-      if (!tspec_.animate_states // focus on entering the groove only with animation
-          && (option->state & State_Enabled))
+      if (option->state & State_Enabled)
       {
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option);
         if (opt && opt->activeSubControls != QStyle::SC_ScrollBarSlider)
@@ -7435,41 +6637,6 @@ void Style::drawControl(ControlElement element,
            so no transformation here */
         r.setRect(y, x, h, w);
       }
-#if QT_VERSION >= 0x050500
-      /* WARNING: We can't rely on pixelMetric() to know the extent
-         because it may not have a fixed value for transient scrollbars,
-         depending on whether its argument "widget" is null or not. */
-      int space = r.width() - tspec_.scroll_width; // see PM_ScrollBarExtent
-      if (space > 0)
-      { // don't let a transient scrollbar overlap with the view frame
-        QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(getParent(widget,2));
-        bool hasFrame(sa && (sa->frameStyle() & QFrame::StyledPanel)); // see Qt -> qabstractscrollarea.cpp
-        if (option->direction == Qt::RightToLeft)
-        {
-          if (option->state & State_Horizontal)
-          { // 90 degrees clockwise + horizontal mirroring
-            if (hasFrame)
-              r.adjust(0, space, -space, -space);
-            else
-              r.adjust(space, 0, 0, 0);
-          }
-          else
-          {
-            if (hasFrame)
-              r.adjust(space, space, 0, -space);
-            else
-              r.adjust(0, 0, -space, 0);
-          }
-        }
-        else
-        {
-          if (hasFrame)
-            r.adjust(0, space, -space, -space);
-          else
-            r.adjust(space, 0, 0, 0);
-        }
-      }
-#endif
 
       if (!(option->state & State_Enabled))
       {
@@ -7477,29 +6644,8 @@ void Style::drawControl(ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
-                   && !qobject_cast<const QAbstractScrollArea*>(widget));
-      if (animate)
-      {
-        qreal opacity = painter->opacity();
-        if (animationStartState_ == sStatus)
-          animationOpacity_ = 100;
-        else if (animationOpacity_ < 100)
-        {
-          renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-        }
-        painter->save();
-        painter->setOpacity(qMin((qreal)animationOpacity_/100, opacity));
-      }
       renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
-      if (animate)
-      {
-        painter->restore();
-        if (animationOpacity_ >= 100)
-          animationStartState_ = sStatus;
-      }
       renderElement(painter,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
@@ -7844,7 +6990,7 @@ void Style::drawControl(ControlElement element,
             && !standardButton.contains(widget))
         {
           standardButton.insert(widget);
-          connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
+          connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
         }
         drawControl(QStyle::CE_PushButtonBevel,opt,painter,widget);
         QStyleOptionButton subopt(*opt);
@@ -8098,48 +7244,10 @@ void Style::drawControl(ControlElement element,
             painter->save();
             painter->setOpacity(0.5);
           }
-          bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
-                       && !qobject_cast<const QAbstractScrollArea*>(widget));
           if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
           {
-            if (animate)
-            {
-              if (animationStartState_ == status)
-                animationOpacity_ = 100;
-              else if (animationOpacity_ < 100
-                       && (!(opt->features & QStyleOptionButton::Flat)
-                           || !animationStartState_.startsWith("normal")))
-              {
-                renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
-                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
-              }
-              painter->save();
-              painter->setOpacity((qreal)animationOpacity_/100);
-            }
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-            if (animate)
-            {
-              painter->restore();
-              if (animationOpacity_ >= 100)
-                animationStartState_ = status;
-            }
-          }
-          // fade out animation
-          else if (animate)
-          {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
-            {
-              painter->save();
-              painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-              renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
-              painter->restore();
-            }
-            if (animationOpacity_ >= 100)
-              animationStartState_ = status;
           }
           if (libreoffice) painter->restore();
         }
@@ -8233,7 +7341,7 @@ void Style::drawControl(ControlElement element,
         QString group = "PanelButtonTool";
         QWidget *p = getParent(widget,1);
         QWidget *gp = getParent(p,1);
-        QWidget *stb = nullptr;
+        QWidget *stb = NULL;
         bool autoraise = false;
         if (tb)
         {
@@ -8332,7 +7440,7 @@ void Style::drawControl(ControlElement element,
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
-            QWidget* menubar = nullptr;
+            QWidget* menubar = NULL;
             if (qobject_cast<QMenuBar*>(gp))
               menubar = gp;
             else if (qobject_cast<QMenuBar*>(p))
@@ -8747,7 +7855,7 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ShapedFrame : {
-      if (const QStyleOptionFrame *f = qstyleoption_cast<const QStyleOptionFrame*>(option))
+      if (const QStyleOptionFrameV3 *f = qstyleoption_cast<const QStyleOptionFrameV3*>(option))
       {
         /* skip ugly frames */
         if (f->frameShape != QFrame::HLine
@@ -8820,7 +7928,7 @@ void Style::drawComplexControl(ComplexControl control,
         if (tb && !standardButton.contains(widget))
         {
           standardButton.insert(widget);
-          connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
+          connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
         }
         const QString group = "PanelButtonTool";
         frame_spec fspec = getFrameSpec(group);
@@ -8895,7 +8003,7 @@ void Style::drawComplexControl(ComplexControl control,
               QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::ButtonText);
-              QWidget* menubar = nullptr;
+              QWidget* menubar = NULL;
               if (qobject_cast<QMenuBar*>(gp))
                 menubar = gp;
               else if (qobject_cast<QMenuBar*>(p))
@@ -9071,49 +8179,8 @@ void Style::drawComplexControl(ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          bool animate(widget && widget->isEnabled()
-                       && !qobject_cast<const QAbstractScrollArea*>(widget)
-                       && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
-                           || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))));
-
-          QString animationStartState(animationStartState_);
-          int animationOpacity = animationOpacity_;
-          if (animate)
-          {
-            if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
-            {
-              animationStartState = animationStartStateOut_;
-              animationOpacity = animationOpacityOut_;
-            }
-            if (animationStartState == leStatus)
-            {
-              animationOpacity = 100;
-              if (leStatus.startsWith("normal"))
-                animationOpacityOut_ = 100;
-              else
-                animationOpacity_ = 100;
-            }
-            else if (animationOpacity < 100)
-            {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-            }
-            painter->save();
-            painter->setOpacity((qreal)animationOpacity/100);
-          }
           renderFrame(painter,r,fspec,fspec.element+"-"+leStatus);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+leStatus);
-          if (animate)
-          {
-            painter->restore();
-            if (animationOpacity >= 100)
-            {
-              if (leStatus.startsWith("normal"))
-                animationStartStateOut_ = leStatus;
-              else
-                animationStartState_ = leStatus;
-            }
-          }
           if (!(option->state & State_Enabled))
             painter->restore();
         }
@@ -9305,49 +8372,6 @@ void Style::drawComplexControl(ComplexControl control,
                 leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
                                              rtl ? editWidth-o.rect.width() : 0);
               }
-              bool mouseAnimation(animatedWidget_ == widget
-                                  && (!status.startsWith("normal")
-                                      || ((!editable || !tspec_.combo_as_lineedit
-                                           || (cb->view() && cb->view()->isVisible()))
-                                          && animationStartState_.startsWith("focused"))));
-              bool animate(cb && cb->isEnabled()
-                           && (mouseAnimation
-                               || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
-              QString animationStartState(animationStartState_);
-              if (animationStartState.startsWith("c-"))
-                animationStartState.remove(0, 2);
-              int animationOpacity = animationOpacity_;
-              if (animate)
-              {
-                if (!mouseAnimation) // -> QEvent::FocusOut
-                {
-                  animationStartState = animationStartStateOut_;
-                  animationOpacity = animationOpacityOut_;
-                }
-                if (animationStartState == status)
-                {
-                  animationOpacity = 100;
-                  if (!mouseAnimation)
-                    animationOpacityOut_ = 100;
-                  else
-                    animationOpacity_ = 100;
-                }
-                else if (animationOpacity < 100)
-                {
-                  renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-                  renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-                  if (!tspec_.combo_as_lineedit && editable)
-                  {
-                    if (!mouseAnimation)
-                      leOpt.state = State_Enabled | State_Active | State_HasFocus;
-                    else
-                      leOpt.state = opt->state & (State_Enabled);
-                    drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
-                  }
-                }
-                painter->save();
-                painter->setOpacity((qreal)animationOpacity/100);
-              }
               renderFrame(painter,r,fspec,fspec.element+"-"+status);
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
               if (!tspec_.combo_as_lineedit && editable)
@@ -9355,24 +8379,6 @@ void Style::drawComplexControl(ComplexControl control,
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
                               | State_KeyboardFocusChange;
                 drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
-              }
-              if (animate)
-              {
-                painter->restore();
-                if (animationOpacity >= 100)
-                {
-                  if (!mouseAnimation)
-                  {
-                    animationStartStateOut_ = status;
-                    if (!editable && animatedWidget_ == widget)
-                      animationStartState_ = status;
-                  }
-                  else
-                    animationStartState_ = status;
-                  // distinguish between toggled combo and toggled button
-                  if (animationStartState_.startsWith("toggled"))
-                    animationStartState_ = "c-" + animationStartState_;
-                }
               }
             }
             if (libreoffice) painter->restore();
@@ -9448,7 +8454,7 @@ void Style::drawComplexControl(ComplexControl control,
                                      labelRect(option->rect,fspec,lspec));
             QRect iconRect = alignedRect(option->direction,
                                          Qt::AlignCenter,
-                                         QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+                                         QSize(icn.width(),icn.height()), ricn);
             if (!(option->state & State_Enabled))
             {
               qreal opacityPercentage = hspec_.disabled_icon_opacity;
@@ -9480,74 +8486,6 @@ void Style::drawComplexControl(ComplexControl control,
         qstyleoption_cast<const QStyleOptionSlider*>(option);
 
       if (opt) {
-        bool isTransient(false);
-#if QT_VERSION >= 0x050500
-        if (option->state & State_Enabled)
-        {
-          QObject *styleObject = option->styleObject;
-          if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
-          {
-            qreal opacity = 0.0;
-            bool transient = !option->activeSubControls;
-
-            int oldPos = styleObject->property("_q_stylepos").toInt();
-            int oldMin = styleObject->property("_q_stylemin").toInt();
-            int oldMax = styleObject->property("_q_stylemax").toInt();
-            QRect oldRect = styleObject->property("_q_stylerect").toRect();
-            //int oldState = styleObject->property("_q_stylestate").toInt();
-            uint oldActiveControls = styleObject->property("_q_stylecontrols").toUInt();
-
-            if (!transient
-                || oldPos != opt->sliderPosition
-                || oldMin != opt->minimum
-                || oldMax != opt->maximum
-                || oldRect != opt->rect
-                //|| oldState != opt->state // animation on focus change
-                || oldActiveControls != opt->activeSubControls)
-            {
-              opacity = 1.0;
-
-              styleObject->setProperty("_q_stylepos", opt->sliderPosition);
-              styleObject->setProperty("_q_stylemin", opt->minimum);
-              styleObject->setProperty("_q_stylemax", opt->maximum);
-              styleObject->setProperty("_q_stylerect", opt->rect);
-              styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
-              styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
-
-              ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
-              if (transient)
-              {
-                if (!anim)
-                {
-                  anim = new ScrollbarAnimation(ScrollbarAnimation::Deactivating, styleObject);
-                  startAnimation(anim);
-                }
-                else if (anim->mode() == ScrollbarAnimation::Deactivating)
-                  anim->setCurrentTime(0); /* the scrollbar was already fading out 
-                                              but, for example, its position changed */
-              }
-              else if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-                stopAnimation(styleObject);
-            }
-
-            ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
-            if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-            {
-              if (anim->isLastUpdate()) // ensure total transparency with the last frame
-                opacity = 0.0;
-              else
-                opacity = anim->currentValue();
-            }
-
-            if (opacity == 0.0) return;
-
-            isTransient = true;
-            painter->save();
-            painter->setOpacity(opacity);
-          }
-        }
-#endif
-
         QStyleOptionSlider o(*opt);
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
 
@@ -9582,66 +8520,7 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          if (isTransient)
-          {
-            if (tspec_.transient_groove)
-            {
-              /* draw a translucent flat background appropriately
-                 (see CE_ScrollBarSlider for the same conditions) */
-              int space = r.width() - tspec_.scroll_width;
-              if (space > 0) // should be equal to PM_DefaultFrameWidth
-              {
-                QRect groove = r;
-                QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(getParent(widget,2));
-                if (sa && (sa->frameStyle() & QFrame::StyledPanel))
-                {
-                  if (!rtl
-                      || horiz) // 90 degrees clockwise + horizontal mirroring
-                  {
-                    groove.adjust(0, space, -space, -space);
-                  }
-                  else
-                    groove.adjust(space, space, 0, -space);
-
-                  /* a 1px line is drawn below */
-                  if (horiz)
-                    o.rect.adjust(0, 1, 0, 0);
-                  else
-                  {
-                    if (rtl)
-                      o.rect.adjust(0, 0, -1, 0);
-                    else
-                      o.rect.adjust(1, 0, 0, 0);
-                  }
-                }
-                else
-                { // without border, make the groove tighter
-                  --space;
-                  if (!rtl || horiz)
-                  {
-                    groove.adjust(space, 0, 0, 0);
-                  }
-                  else
-                    groove.adjust(0, 0, -space, 0);
-                }
-
-                QColor col = option->palette.color(QPalette::Base);
-                col.setAlphaF(0.75);
-                painter->fillRect(groove, col);
-
-                painter->save();
-                col = option->palette.color(QPalette::Text);
-                col.setAlphaF(0.2);
-                painter->setPen(col);
-                if (!rtl || horiz)
-                  painter->drawLine(groove.topLeft(), groove.bottomLeft());
-                else
-                  painter->drawLine(groove.topRight(), groove.bottomRight());
-                painter->restore();
-              }
-            }
-          }
-          else if (r.width() <= tspec_.scroll_width) // no disabled groove with transience
+          if (r.width() <= tspec_.scroll_width)
           {
             if (!(option->state & State_Enabled))
             {
@@ -9739,9 +8618,6 @@ void Style::drawComplexControl(ComplexControl control,
             o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSubLine,widget);
           drawControl(CE_ScrollBarSubLine,&o,painter,widget);
         }
-
-        if (isTransient)
-          painter->restore();
       }
 
       break;
@@ -10020,28 +8896,8 @@ void Style::drawComplexControl(ComplexControl control,
           }
 
           QString status = getState(option,widget);
-          bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
-                       && !qobject_cast<const QAbstractScrollArea*>(widget));
-          if (animate)
-          {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
-            {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-            }
-            painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
-          }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-          if (animate)
-          {
-            painter->restore();
-            if (animationOpacity_ >= 100)
-              animationStartState_ = status;
-          }
 
           // a decorative indicator if its element exists
           const indicator_spec dspec = getIndicatorSpec(group);
@@ -10254,7 +9110,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarCloseButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size(), btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
       if (option->subControls & QStyle::SC_MdiNormalButton)
@@ -10284,7 +9140,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarNormalButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size(), btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
       if (option->subControls & QStyle::SC_MdiMinButton)
@@ -10314,7 +9170,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarMinButton,&btnOpt,widget),
                                                     iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size(), btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
 
@@ -10330,7 +9186,7 @@ void Style::drawComplexControl(ComplexControl control,
         QRect checkBoxRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxCheckBox, widget);
         if (opt->subControls & QStyle::SC_GroupBoxFrame)
         {
-          QStyleOptionFrame frame;
+          QStyleOptionFrameV3 frame;
           frame.QStyleOption::operator=(*opt);
           frame.features = opt->features;
           frame.lineWidth = opt->lineWidth;
@@ -10497,8 +9353,6 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuDesktopFrameWidth: return 0;
 
     case PM_SubMenuOverlap : {
-      if (QApplication::layoutDirection() == Qt::RightToLeft)
-        return 0; // RTL submenu positioning is a mess in Qt5
       int so = tspec_.submenu_overlap;
       /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
          equal to PM_MenuHMargin. So, we make the overlap accurate here. */
@@ -10516,7 +9370,6 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       if (!noComposite_ && tspec_now.composite
           && widget
           && translucentWidgets_.contains(widget) // combo menus are included
-          /* detached menus may come here because of setSurfaceFormat() */
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
         v += tspec_now.menu_shadow_depth;
@@ -10652,22 +9505,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarBaseHeight :
     case PM_TabBarTabShiftHorizontal :
     case PM_TabBarTabShiftVertical :
-    case PM_TabBar_ScrollButtonOverlap : return 0;
-
-#if QT_VERSION >= 0x050500
-    /* With transient scrollbars, we've removed arrows and put
-       their frame around their contents. Here, we put transient
-       scrollbars on top of scroll area by using a negative
-       spacing and a zero overlap (-> qabstractscrollarea.cpp). */
-    case PM_ScrollView_ScrollBarOverlap : return 0;
-    case PM_ScrollView_ScrollBarSpacing : {
-      if (styleHint(SH_ScrollBar_Transient,option,widget))
-        return -pixelMetric(PM_ScrollBarExtent,option,widget);
-      return 0;
-    }
-#else
+    case PM_TabBar_ScrollButtonOverlap :
     case PM_ScrollView_ScrollBarSpacing : return 0;
-#endif
 
     case PM_TabBarScrollButtonWidth : {
       const frame_spec fspec = getFrameSpec("Tab");
@@ -10709,32 +9548,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_SplitterWidth :
       return tspec_.splitter_width;
 
-    /* don't let a transient scrollbar overlap with the view frame */
-    case PM_ScrollBarExtent :
-    {
-#if QT_VERSION >= 0x050500
-      if (styleHint(SH_ScrollBar_Transient,option,widget)
-          /* compbo menus always give space to transient scrollbars */
-          && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
-      {
-        return tspec_.scroll_width
-               + pixelMetric(PM_DefaultFrameWidth,option,widget);
-      }
-#endif
-      return tspec_.scroll_width;
-    }
-    case PM_ScrollBarSliderMin :
-    {
-#if QT_VERSION >= 0x050500
-      if (styleHint(SH_ScrollBar_Transient,option,widget)
-          && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
-      {
-        return tspec_.scroll_min_extent
-                + 2*pixelMetric(PM_DefaultFrameWidth,option,widget);
-      }
-#endif
-      return tspec_.scroll_min_extent;
-    }
+    case PM_ScrollBarExtent : return tspec_.scroll_width;
+    case PM_ScrollBarSliderMin : return tspec_.scroll_min_extent;
 
     case PM_ProgressBarChunkWidth : return 20;
 
@@ -10842,7 +9657,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
           || qstyleoption_cast<const QStyleOptionMenuItem*>(option)
           || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
-        return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget)*pixelRatio_,
+        return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),
                     tspec_.check_size);
       }
       return tspec_.check_size;
@@ -10852,183 +9667,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
   }
 }
 
-/*
-  To make Qt windows translucent, we should set the surface format of
-  their native handles BEFORE they're created but Qt5 windows are
-  often polished AFTER they're created, so that setting the attribute
-  "WA_TranslucentBackground" in "Style::polish()" would have no effect.
-  
-  Early creation of native handles could have unpredictable side effects,
-  especially for menus. However, it seems that setting of the attribute
-  "WA_TranslucentBackground" in an early stage -- before the widget is
-  created -- sets the alpha buffer size to 8 safely and automatically.
-*/
-void Style::setSurfaceFormat(QWidget *widget) const
-{
-  if (!widget || noComposite_ || subApp_ || isLibreoffice_)
-    return;
-
-  /* The widget style may change while the app style is still Kvantum
-     (as in Qt Designer), in which case, we should remove our forced
-     translucency. It'll be up to the new style to restore
-     translucency if it supports translucent windows. */
-  QStyle *ws = widget->style();
-  bool otherStyle(ws && ws != this && !ws->objectName().isEmpty());
-  if (otherStyle
-      && !(isPlasma_ || isOpaque_)
-      && widget->testAttribute(Qt::WA_TranslucentBackground)
-      && forcedTranslucency_.contains(widget)
-      && !(widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget)))
-  {
-    widget->setAttribute(Qt::WA_TranslucentBackground, false);
-    widget->setAttribute(Qt::WA_NoSystemBackground, false);
-    widget->setAutoFillBackground(true); // Fusion needs this
-    return;
-  }
-
-  if (widget->testAttribute(Qt::WA_WState_Created)
-      || widget->testAttribute(Qt::WA_TranslucentBackground)
-      || widget->testAttribute(Qt::WA_NoSystemBackground)
-      || widget->autoFillBackground() // video players like kaffeine
-      || forcedTranslucency_.contains(widget))
-    return;
-  bool realWindow(true);
-  if (widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget))
-  {
-    /* we want translucency and/or shadow for menus and
-       tooltips even if the main window isn't translucent */
-    realWindow = false;
-
-    /* WARNING: For some reason unknown to me, if WA_TranslucentBackground
-                is set on wayland, menus will be rendered with artifacts.
-                Instead, the native handle should be created, the alpha
-                channel should be added to it, and the widget background
-                color should be made transparent (at polish()). */
-    if (!tspec_.isX11)
-    {
-      QWindow *window = widget->windowHandle();
-      if (!window)
-      {
-        bool noNativeSiblings = true;
-        if (!qApp->testAttribute(Qt::AA_DontCreateNativeWidgetSiblings))
-        {
-          noNativeSiblings = false;
-          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
-        }
-        widget->setAttribute(Qt::WA_NativeWindow, true);
-        window = widget->windowHandle();
-        /* reverse the changes */
-        widget->setAttribute(Qt::WA_NativeWindow, false);
-        if (!noNativeSiblings)
-          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, false);
-      }
-      if (window)
-      {
-        QSurfaceFormat format = window->format();
-        format.setAlphaBufferSize(8);
-        window->setFormat(format);
-      }
-    }
-  }
-  else
-  {
-    if (otherStyle || isPlasma_ || isOpaque_ || !widget->isWindow())
-      return;
-    switch (widget->windowFlags() & Qt::WindowType_Mask) {
-      case Qt::Window:
-      case Qt::Dialog:
-      case Qt::Popup:
-      case Qt::Sheet: break;
-      default: return;
-    }
-    if (widget->windowHandle() // too late
-        || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
-        || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
-        || qobject_cast<QFrame*>(widget) // a floating frame, as in Filelight
-        || widget->windowType() == Qt::Desktop
-        || widget->testAttribute(Qt::WA_PaintOnScreen)
-        || widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-        || widget->inherits("KScreenSaver")
-        || widget->inherits("QSplashScreen"))
-     return;
-
-    QWidget *p = widget->parentWidget();
-    if (p && (/*!p->testAttribute(Qt::WA_WState_Created) // FIXME: too soon?
-              ||*/ qobject_cast<QMdiSubWindow*>(p))) // as in linguist
-    {
-      return;
-    }
-    if (QMainWindow *mw = qobject_cast<QMainWindow*>(widget))
-    {
-      /* it's possible that a main window is inside another one
-         (like FormPreviewView in linguist), in which case,
-         translucency could cause weird effects */
-      if (p) return;
-      /* stylesheets with background can cause total transparency */
-      QString ss = mw->styleSheet();
-      if (!ss.isEmpty() && ss.contains("background"))
-        return;
-      if (QWidget *cw = mw->centralWidget())
-      { 
-        if (cw->autoFillBackground())
-          return;
-        ss = cw->styleSheet();
-        if (!ss.isEmpty() && ss.contains("background"))
-          return; // as in smplayer
-      }
-    }
-  }
-
-  theme_spec tspec_now = settings_->getCompositeSpec();
-  if (!tspec_now.composite
-      || (realWindow && !tspec_now.translucent_windows))
-    return;
-
-  /* this will set the alpha buffer size to 8 in a safe way on X11 */
-  if (tspec_.isX11 || realWindow)
-    widget->setAttribute(Qt::WA_TranslucentBackground);
-  /* distinguish forced translucency from hard-coded translucency */
-  forcedTranslucency_.insert(widget);
-  connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
-}
-
-/*
-  This is a workaround for a Qt5 bug (QTBUG-47043), because of which,
-  _NET_WM_WINDOW_TYPE is set to _NET_WM_WINDOW_TYPE_NORMAL for QMenu.
-*/
-void Style::setMenuType(const QWidget *widget) const
-{
-#if QT_VERSION < 0x050500 || !(defined Q_WS_X11 || defined Q_OS_LINUX)
-  Q_UNUSED(widget);
-  return;
-#else
-  if (!tspec_.isX11) return;
-
-  if (!qobject_cast<const QMenu*>(widget)
-      || widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
-      || !widget->windowHandle())
-    return;
-
-  int wmWindowType = 0;
-  if (widget->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
-    wmWindowType |= QXcbWindowFunctions::DropDownMenu;
-  if (widget->testAttribute(Qt::WA_X11NetWmWindowTypePopupMenu))
-    wmWindowType |= QXcbWindowFunctions::PopupMenu;
-  if (wmWindowType == 0) return;
-  QXcbWindowFunctions::setWmWindowType(widget->windowHandle(),
-                                       static_cast<QXcbWindowFunctions::WmWindowType>(wmWindowType));
-#endif
-}
-
 int Style::styleHint(StyleHint hint,
                      const QStyleOption *option,
                      const QWidget *widget,
                      QStyleHintReturn *returnData) const
 {
-  setSurfaceFormat(widget); /* FIXME Why here and nowhere else?
-                                     Perhaps because of its use in qapplication.cpp. */
-  setMenuType(widget);
-
   switch (hint) {
     case SH_EtchDisabledText :
     case SH_DitherDisabledText :
@@ -11043,18 +9686,6 @@ int Style::styleHint(StyleHint hint,
     case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;
     case SH_Menu_Scrollable : return tspec_.scrollable_menu;
     case SH_Menu_SloppySubMenus : return true;
-#if QT_VERSION >= 0x050500
-    /* QMenu has some bugs regarding this timeout. It's also
-       used when reentering a menuitem with submenu and even
-       when SH_Menu_SubMenuPopupDelay is negative. Here, we
-       set it to 20s for negative delays as a workaround. */
-    case SH_Menu_SubMenuSloppyCloseTimeout : {
-      return tspec_.submenu_delay < 0 ? 20000 : 1000;
-    }
-    case SH_Menu_SubMenuResetWhenReenteringParent : return false;
-    case SH_Menu_SubMenuDontStartSloppyOnLeave : return false;
-    case SH_Menu_SubMenuSloppySelectOtherActions : return true;
-#endif
     /* when set to true, only the last submenu is
        hidden on clicking anywhere outside the menu */
     case SH_Menu_FadeOutOnHide : return false;
@@ -11088,17 +9719,8 @@ int Style::styleHint(StyleHint hint,
     case SH_ScrollBar_ContextMenu :
     case SH_ScrollBar_LeftClickAbsolutePosition : return true;
 
-#if QT_VERSION >= 0x050500
-    case SH_ScrollBar_Transient : {
-      if (qobject_cast<const QGraphicsView*>(widget) && widget->hasMouseTracking())
-        return false; // prevent artifacts in QGraphicsView
-      return tspec_.transient_scrollbar;
-    }
-#endif
-
     case SH_Slider_StopMouseOverSlider : return true;
 
-    /* scrollbar_in_view is always false when transient_scrollbar is true (see "ThemeConfig.cpp") */
     case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;
 
     case SH_UnderlineShortcut:
@@ -11169,18 +9791,6 @@ int Style::styleHint(StyleHint hint,
     //case SH_DialogButtonLayout: return QDialogButtonBox::GnomeLayout;
 
     //case SH_SpinControls_DisableOnBounds: return true;
-
-    case SH_ToolTip_WakeUpDelay : {
-      int delay = tspec_.tooltip_delay;
-      if (tspec_.tooltip_delay >= 0)
-        return delay;
-      return QCommonStyle::styleHint(hint,option,widget,returnData);
-    }
-    case SH_ToolTip_FallAsleepDelay : {
-      if (tspec_.tooltip_delay >= 0)
-        return 0;
-      return QCommonStyle::styleHint(hint,option,widget,returnData);
-    }
 
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
@@ -11886,10 +10496,10 @@ QSize Style::sizeFromContents(ContentsType type,
         /* the width is already increased with PM_FocusFrameHMargin */
         //s.rwidth() += fspec.left + fspec.right;
 
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
+        const QStyleOptionViewItemV2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
         bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
+        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
           hasIcon = true;
 
         /* this isn't needed anymore because PM_FocusFrameHMargin and
@@ -12174,7 +10784,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
        the focus rect at CE_ItemViewItem */
     case SE_ItemViewItemFocusRect : {
       QRect r;
-      if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
+      if (qstyleoption_cast<const QStyleOptionViewItemV4*>(option))
       {
         if (option->state & State_Selected)
           r = interiorRect(option->rect, getFrameSpec("ItemView"));
@@ -12379,10 +10989,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
       if (opt)
       {
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
+        const QStyleOptionViewItemV2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
         bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
+        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
           hasIcon = true;
 
         Qt::Alignment align = opt->displayAlignment;
@@ -12452,8 +11062,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               || align == Qt::AlignHCenter
               || align == Qt::AlignJustify)
           {
-            const QStyleOptionViewItem *vopt1 =
-              qstyleoption_cast<const QStyleOptionViewItem*>(option);
+            const QStyleOptionViewItemV4 *vopt1 =
+              qstyleoption_cast<const QStyleOptionViewItemV4*>(option);
             if (vopt1)
             {
               QString txt = vopt1->text;
@@ -12489,9 +11099,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (opt)
       {
         // put the icon inside the frame
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
+        const QStyleOptionViewItemV2 *vopt =
+            qstyleoption_cast<const QStyleOptionViewItemV2*>(option);
+        if (vopt && (vopt->features & QStyleOptionViewItemV2::HasDecoration))
         {
           QStyleOptionViewItem::Position pos = opt->decorationPosition;
           const frame_spec fspec = getFrameSpec("ItemView");
@@ -12803,12 +11413,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       else return QCommonStyle::subElementRect(element,option,widget);
     }
 
-#if QT_VERSION < 0x050700
     case SE_TabBarTearIndicator :
-#else
-    case SE_TabBarTearIndicatorRight :
-    case SE_TabBarTearIndicatorLeft :
-#endif
     {
       QRect r;
       if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab*>(option))
@@ -12818,34 +11423,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           case QTabBar::TriangularNorth:
           case QTabBar::RoundedSouth:
           case QTabBar::TriangularSouth:
-#if QT_VERSION >= 0x050700
-            if (option->direction == Qt::RightToLeft)
-            {
-              if (element == SE_TabBarTearIndicatorLeft)
-                r.setRect(tab->rect.right() - 1, tab->rect.top(), 2, option->rect.height());
-              else
                 r.setRect(tab->rect.left(), tab->rect.top(), 2, option->rect.height());
-            }
-            else
-            {
-              if (element == SE_TabBarTearIndicatorRight)
-                r.setRect(tab->rect.right() - 1, tab->rect.top(), 2, option->rect.height());
-              else
-#endif
-                r.setRect(tab->rect.left(), tab->rect.top(), 2, option->rect.height());
-#if QT_VERSION >= 0x050700
-            }
-#endif
             break;
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
-#if QT_VERSION >= 0x050700
-            if (element == SE_TabBarTearIndicatorRight)
-              r.setRect(tab->rect.left(), tab->rect.bottom() - 1, option->rect.width(), 2);
-            else
-#endif
               r.setRect(tab->rect.left(), tab->rect.top(), option->rect.width(), 2);
             break;
           default: break;
@@ -13573,9 +12156,9 @@ QRect Style::subControlRect(ComplexControl control,
   return QCommonStyle::subControlRect(control,option,subControl,widget);
 }
 
-QIcon Style::standardIcon(StandardPixmap standardIcon,
-                          const QStyleOption *option,
-                          const QWidget *widget) const
+QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
+                                        const QStyleOption *option,
+                                        const QWidget *widget) const
 {
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
@@ -13632,7 +12215,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       return QIcon(pm);
     }
     case SP_TitleBarMinButton : {
-      int s = 12*pixelRatio_;
+      int s = 12;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -13649,7 +12232,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMaxButton : {
-      int s = 12*pixelRatio_;
+      int s = 12;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -13661,7 +12244,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     }
     case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
-      int s = 12*pixelRatio_;
+      int s = 12;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -13678,7 +12261,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMenuButton : {
-      int s = 12*pixelRatio_;
+      int s = 12;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -13689,7 +12272,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarNormalButton : {
-      int s = 12*pixelRatio_;
+      int s = 12;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -13732,7 +12315,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     default : break;
   }
 
-  return QCommonStyle::standardIcon(standardIcon,option,widget);
+  return QCommonStyle::standardIconImplementation(standardIcon,option,widget);
 }
 
 static inline uint qt_intensity(uint r, uint g, uint b)
@@ -14687,8 +13270,7 @@ void Style::renderLabel(
 
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
-    // the pixmap should have been enlarged by pixelRatio_
-    QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
+    QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size(), ricon);
 
     if (!(option->state & State_Enabled))
     {
@@ -14882,22 +13464,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
                                  QSize iconSize) const
 {
   if (icon.isNull()) return QPixmap();
-  /* We need a QPixmap whose size is pixelRatio_ times iconSize. However, with
-     an HDPI-enabled app, the size of the QPixmap returned by QIcon::pixmap()
-     is pixelRatio_*pixelRatio_*iconSize when the icon is taken from a theme
-     and is (almost) pixelRatio_*iconSize when the icon isn't taken from a
-     theme but has no fixed size. What follows covers both cases and also
-     the case of icons with fixed sizes. */
-  bool hdpi(false);
-#if QT_VERSION >= 0x050500
-  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
-    hdpi = true;
-#endif
-  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_
-                                : iconSize*pixelRatio_,iconmode,iconstate);
-  /* for an HDPI-enabled app and when the icon isn't taken from a theme */
-  if (hdpi && px.size().width() < pixelRatio_*(iconSize.width() - iconSize.width()%pixelRatio_))
-    px = icon.pixmap(iconSize,iconmode,iconstate);
+  QPixmap px = icon.pixmap(iconSize,iconmode,iconstate);
   return px;
 }
 

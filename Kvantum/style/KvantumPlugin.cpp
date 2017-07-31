@@ -19,13 +19,6 @@
 #include "Kvantum.h"
 
 namespace Kvantum {
-#if QT_VERSION < 0x050000
-QStringList KvantumPlugin::keys() const
-{
-  return QStringList() << "Kvantum";
-}
-#endif
-
 QStyle *KvantumPlugin::create(const QString &key)
 {
   if (key.toLower() == "kvantum")
@@ -33,8 +26,4 @@ QStyle *KvantumPlugin::create(const QString &key)
 
   return 0;
 }
-
-#if QT_VERSION < 0x050000
-Q_EXPORT_PLUGIN2(kvantum, KvantumPlugin)
-#endif
 }
