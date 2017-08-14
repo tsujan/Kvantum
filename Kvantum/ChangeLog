@@ -23,6 +23,8 @@ V0.10.5
  * Added a key (to Kvantum manager) to reduce window translucency or set it in themes that don't have a translucent SVG backround for windows.
  * Added a key for "embedded" tabs, which are half embedded in their widgets.
  * Separated the Qt4 code from the Qt5 one.
+ * Defined a few standard Qt icons.
+ * Fixed the size of tool buttons with just an arrow.
 
 V0.10.4
 ---------

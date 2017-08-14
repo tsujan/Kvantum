@@ -3195,8 +3195,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         return;
       }*/
       else if (opt && opt->text.size() == 0 && opt->icon.isNull()
+               // not a button with just an arrow
+               && (!(opt->features & QStyleOptionToolButton::Arrow)
+                   || opt->arrowType == Qt::NoArrow)
                && (!widget || !widget->inherits("QDockWidgetTitleButton")))
+      {
         fspec.expansion = 0; // color button
+      }
 
       // -> CE_MenuScroller and PE_PanelMenu
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
@@ -11683,17 +11688,12 @@ QSize Style::sizeFromContents(ContentsType type,
                     fspec.top+fspec.bottom+lspec.top+lspec.bottom)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
-                        || tialign == Qt::ToolButtonTextOnly ?
-                      0
+                        || tialign == Qt::ToolButtonTextOnly
+                        || (opt->text.isEmpty() && opt->icon.isNull()) // nothing or only an arrow
+                      ? 0
                       // also add a margin between indicator and text (-> CE_ToolButtonLabel)
                       : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
                     0);
-
-        /* add the text-icon spacing */
-        if (tialign == Qt::ToolButtonTextBesideIcon)
-          s = s + QSize(lspec.tispace, 0);
-        else if (tialign == Qt::ToolButtonTextUnderIcon)
-          s = s + QSize(0, lspec.tispace);
 
         if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
         {
@@ -11715,21 +11715,33 @@ QSize Style::sizeFromContents(ContentsType type,
           {
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
           }
+        }
 
-          /* extra space for shadow and bold text */
-          if (!opt->text.isEmpty())
+        /* consider text-icon spacing, shadow and bold text */
+        if (!opt->text.isEmpty())
+        {
+          if(!opt->icon.isNull())
           {
-            if (lspec.hasShadow)
-              s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
-            if (lspec.boldFont)
-            {
-              QFont f = tb->font();
-              QSize s1 = textSize(f, opt->text, false);
-              f.setBold(true);
-              s = s + textSize(f, opt->text, false) - s1;
-            }
+            if (tialign == Qt::ToolButtonTextBesideIcon)
+              s = s + QSize(lspec.tispace, 0);
+            else if (tialign == Qt::ToolButtonTextUnderIcon)
+              s = s + QSize(0, lspec.tispace);
+          }
+
+          if (lspec.hasShadow)
+            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+          if (lspec.boldFont)
+          {
+            QFont f;
+            if (widget) f = widget->font();
+            else f = QApplication::font();
+            QSize s1 = textSize(f, opt->text, false);
+            f.setBold(true);
+            s = s + textSize(f, opt->text, false) - s1;
           }
         }
+        else if(opt->icon.isNull()) // nothing or only an arrow
+            break;
 
         if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
         { // don't let width < height
@@ -13725,6 +13737,27 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     }
     case SP_DialogHelpButton : {
       QIcon icn = QIcon::fromTheme(QLatin1String("help-contents"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_FileDialogDetailedView : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-details"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    // these are for LXQt file dialog
+    case SP_FileDialogListView : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-text"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_FileDialogInfoView : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("dialog-information")); // document-properties
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_FileDialogContentsView : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-icons"));
       if (!icn.isNull()) return icn;
       else break;
     }
