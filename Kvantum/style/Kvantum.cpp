@@ -189,10 +189,9 @@ Style::Style() : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-  QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+  QSet<QByteArray> desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':').toSet();
   QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-  gtkDesktop_ = gtkDesktops.contains(desktop);
-
+  gtkDesktop_ = gtkDesktops.intersects(desktop);
 
   if (tspec_.respect_DE)
   {
@@ -201,7 +200,7 @@ Style::Style() : QCommonStyle()
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
       tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-      if (QByteArray("unity") == desktop)
+      if (desktop.contains("unity"))
       {
         // Link 'respect_DE' and composite settings only for Unity. Issue #128
         noComposite_ = true;
@@ -210,7 +209,7 @@ Style::Style() : QCommonStyle()
         tspec_.blurring = false;
       }
     }
-    else if (desktop == QByteArray("kde"))
+    else if (desktop.contains("kde"))
     {
       QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
       if (!QFile::exists(kdeGlobals))
