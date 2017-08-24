@@ -221,7 +221,7 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-up-normal" transform="matrix(1,0,0,-1,2.5,794.30701)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-up-focused" transform="matrix(1,0,0,-1,0,792.5)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-pressed" id="flat-arrow-up-pressed" transform="matrix(1,0,0,-1,2.5,792.5)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrowup-disabled" transform="matrix(1,0,0,-1,-2.5,792.5)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrow-up-disabled" transform="matrix(1,0,0,-1,-2.5,792.5)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-right-normal" transform="matrix(0,-1,1,0,-106.80701,417.5)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-right-focused" transform="matrix(0,-1,1,0,-62.499999,458.19299)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-pressed" id="flat-arrow-right-pressed" transform="matrix(0,-1,1,0,-14.999999,505.69299)"/>
@@ -956,7 +956,7 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="carrow-normal" transform="matrix(1,0,0,-1,144,521.69912)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="carrow-focused" transform="matrix(1,0,0,-1,144,522.80701)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-disabled" id="carrowdisabled" transform="matrix(1,0,0,-1,173.69298,521)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-disabled" id="carrow-disabled" transform="matrix(1,0,0,-1,173.69298,521)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="carrow-pressed" transform="matrix(1,0,0,-1,216,521.69912)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-pressed" id="carrow-toggled" transform="matrix(1,0,0,-1,174,521.5)"/>
 <g style="stroke:none" id="floating-tab-toggled-left" transform="matrix(0.8,0,0,0.98461538,155.5002,878.49842)">

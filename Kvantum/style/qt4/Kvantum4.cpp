@@ -633,6 +633,22 @@ static inline QColor getFromRGBA(const QString str)
   return col;
 }
 
+/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
+static inline QString getName(const QColor col)
+{
+  QString colName = col.name();
+  long alpha = col.alpha();
+  if (alpha < 255)
+    colName += QString::number(alpha, 16);
+  return colName;
+}
+
+static inline QRect widgetRect(const QWidget *w)
+{
+  if (!w) return QRect();
+  return QRect(w->mapTo(w->window(), w->rect().topLeft()), w->size());
+}
+
 void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
@@ -661,12 +677,13 @@ int Style::mergedToolbarHeight(const QWidget *menubar) const
   return 0;
 }
 
-bool Style::isStylableToolbar(const QWidget *w) const
+bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
 {
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
   if (!tb
       || w->autoFillBackground()
-      || w->findChild<QTabBar*>()) // practically not a toolbar (Kaffeine's sidebar)
+      || w->findChild<QTabBar*>() // practically not a toolbar (Kaffeine's sidebar)
+      || isPlasma_)
   {
     return false;
   }
@@ -682,31 +699,54 @@ bool Style::isStylableToolbar(const QWidget *w) const
         if (mb->y()+mb->height() == tb->y())
           return true;
       }
-      else if (tb->y() == 0 && tb->isVisible()) // FIXME: Why can KtoolBar be invisible here?
+      else if (tb->y() == 0
+               && (allowInvisible
+                   || tb->isVisible())) // FIXME: Why can KtoolBar be invisible here?
+      {
         return true;
+      }
     }
     else if (tb->y() == 0) return true;
   }
   return false;
 }
 
-QWidget* Style::getStylableToolbar(const QWidget *w) const
+QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisible) const
 {
-  if (QWidget *p = getParent(w,1))
+  /* Since it isn't known how deep a widget can be inside its parent toolbar,
+     the widget rectangles are examined instead of the parenthood relation. */
+  if (!w || w->window() == w) return NULL;
+  foreach (QToolBar *tb, w->window()->findChildren<QToolBar*>())
   {
-    if (isStylableToolbar(p))
-      return p;
-    /* pcmanfm-qt has toolbar buttons with a depth
-       of 5 and a deeper child doesn't make sense */
-    for (int i = 1; i < 5; ++i)
+    if (isStylableToolbar(tb, allowInvisible)
+        && widgetRect(tb).contains(widgetRect(w)))
     {
-      p = p->parentWidget();
-      if (p == NULL) return NULL;
-      if (isStylableToolbar(p))
-        return p;
+      return tb;
     }
   }
   return NULL;
+}
+
+bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) const
+{
+  QString container;
+  if (getStylableToolbarContainer(w))
+    container = QLatin1String("Toolbar");
+  /* check parent with menubar FIXME: isn't container approach needed here? */
+  else if (QWidget *p = getParent(w,1))
+  {
+    if (qobject_cast<QMenuBar*>(p)
+        || qobject_cast<QMenuBar*>(getParent(p,1)))
+    {
+      container = QLatin1String("MenuBar");
+    }
+  }
+  if(!container.isEmpty()
+     && enoughContrast(color, getFromRGBA(getLabelSpec(container).normalColor)))
+  {
+    return true;
+  }
+  return false;
 }
 
 void Style::polish(QWidget *widget)
@@ -1219,6 +1259,23 @@ void Style::polish(QWidget *widget)
       {
         if (mw->minimumSize() != mw->maximumSize())
           sb->setSizeGripEnabled(true);
+      }
+    }
+  }
+  /* labels on a stylable toolbar (as in Audacious) */
+  else if (isStylableToolbar(widget, true))
+  {
+    QColor tCol = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+    QPalette palette = widget->palette();
+    if (enoughContrast(palette.color(QPalette::WindowText), tCol))
+    {
+      foreach (QLabel *label, widget->findChildren<QLabel*>())
+      {
+        QPalette lPalette = label->palette();
+        palette.setColor(QPalette::ButtonText, tCol);
+        palette.setColor(QPalette::WindowText, tCol);
+        palette.setColor(QPalette::Text, tCol);
+        label->setPalette(palette);
       }
     }
   }
@@ -2345,13 +2402,19 @@ void Style::drawComboLineEdit(const QStyleOption *option,
 
   if (isLibreoffice_) // impossible because lineedit != NULL
   {
-    fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+    fspec.left = qMin(fspec.left,3);
+    fspec.right = qMin(fspec.right,3);
+    fspec.top = qMin(fspec.top,3);
+    fspec.bottom = qMin(fspec.bottom,3);
   }
   else
   {
     if (!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
     {
-      fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+      fspec.left = qMin(fspec.left,3);
+      fspec.right = qMin(fspec.right,3);
+      fspec.top = qMin(fspec.top,3);
+      fspec.bottom = qMin(fspec.bottom,3);
     }
     else
     {
@@ -2403,7 +2466,10 @@ void Style::drawComboLineEdit(const QStyleOption *option,
                 option->rect,
               fspec,
               fspec.element+leStatus);
-  renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
+  if (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text)))
+    renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
+  else
+    painter->fillRect(interiorRect(option->rect,fspec), lineedit->palette().brush(QPalette::Base));
   if (!(option->state & State_Enabled))
     painter->restore();
 }
@@ -2630,16 +2696,53 @@ void Style::drawPrimitive(PrimitiveElement element,
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
       }
+      interior_spec ispec;
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
       bool autoraise(option->state & State_AutoRaise);
-      if (getStylableToolbar(widget))
+      bool fillWidgetInterior(false);
+      if (getStylableToolbarContainer(widget))
       {
         autoraise = true; // we make all toolbuttons auto-raised inside toolbars
         if (!getFrameSpec("ToolbarButton").element.isEmpty()
             || !getInteriorSpec("ToolbarButton").element.isEmpty())
         {
           group = "ToolbarButton";
+        }
+        ispec = getInteriorSpec(group);
+        if (!ispec.hasInterior
+            && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
+                              getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+        { // high contrast on toolbar
+          fillWidgetInterior = true;
+        }
+      }
+      else
+      {
+        ispec = getInteriorSpec(group);
+        if (p && !ispec.hasInterior)
+        {
+          QString containerGroup;
+          if (qobject_cast<QMenuBar*>(p))
+          {
+            if (mergedToolbarHeight(p))
+              containerGroup = "Toolbar";
+            else
+              containerGroup = "MenuBar";
+          }
+          else if (QMenuBar *gp = qobject_cast<QMenuBar*>(getParent(p,1)))
+          {
+            if (mergedToolbarHeight(gp))
+              containerGroup = "Toolbar";
+            else
+              containerGroup = "MenuBar";
+          }
+          if (!containerGroup.isEmpty()
+              && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
+                                getFromRGBA(getLabelSpec(containerGroup).normalColor)))
+          { // high contrast on menubar
+            fillWidgetInterior = true;
+          }
         }
       }
 
@@ -2669,32 +2772,109 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       bool hasPanel = false;
 
-      interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       label_spec lspec = getLabelSpec(group);
+      QRect r = option->rect;
 
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
       //const QStyleOptionTitleBar *titleBar = qstyleoption_cast<const QStyleOptionTitleBar*>(option);
 
-      /* this is just for tabbar scroll buttons */
-      if (qobject_cast<QTabBar*>(p))
+      /*if (qobject_cast<QTabBar*>(p))
       {
         painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
         //fspec.expansion = 0;
       }
-      /*else if ((titleBar && (titleBar->titleBarFlags & Qt::WindowType_Mask) == Qt::Tool)
+      else if ((titleBar && (titleBar->titleBarFlags & Qt::WindowType_Mask) == Qt::Tool)
                || qobject_cast<QDockWidget*>(getParent(widget,1)))
       {
         return;
-      }*/
-      else if (opt && opt->text.size() == 0 && opt->icon.isNull()
-               // not a button with just an arrow
-               && (!(opt->features & QStyleOptionToolButton::Arrow)
-                   || opt->arrowType == Qt::NoArrow)
-               && (!widget || !widget->inherits("QDockWidgetTitleButton")))
+      }
+      else*/ if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly || tb->text().isEmpty())
+                  && tb->icon().isNull())
+                 || (opt && (opt->toolButtonStyle == Qt::ToolButtonIconOnly || opt->text.isEmpty())
+                     && opt->icon.isNull()))
       {
-        fspec.expansion = 0; // color button
+        if ((tb && tb->arrowType() != Qt::NoArrow)
+            || (opt && (opt->features & QStyleOptionToolButton::Arrow)
+                && opt->arrowType != Qt::NoArrow)) // a button with just arrows
+        {
+          if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
+          {
+            bool painterSaved = false;
+            painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+            const frame_spec fspec1 = getFrameSpec("Tab");
+            fspec.left = qMin(fspec.left, fspec1.left);
+            fspec.right = qMin(fspec.right, fspec1.right);
+            fspec.top = qMin(fspec.top, fspec1.top);
+            fspec.bottom = qMin(fspec.bottom, fspec1.bottom); 
+            fspec.hasCapsule = true;
+            Qt::ArrowType aType = opt ? opt->arrowType : tb->arrowType();
+            QTransform m;
+            switch (aType) {
+              case Qt::LeftArrow :
+                fspec.capsuleV = 2;
+                fspec.capsuleH = -1;
+                break;
+              case Qt::RightArrow :
+                fspec.capsuleV = 2;
+                fspec.capsuleH = 1;
+                break;
+              case Qt::UpArrow :
+                fspec.capsuleV = 2;
+                fspec.capsuleH = -1;
+                r.setRect(y, x, h, w);
+                painter->save();
+                painterSaved = true;
+                m.scale(1,-1);
+                m.rotate(-90);
+                painter->setTransform(m, true);
+                break;
+              case Qt::DownArrow :
+                fspec.capsuleV = 2;
+                fspec.capsuleH = 1;
+                r.setRect(y, x, h, w);
+                painter->save();
+                painterSaved = true;
+                m.scale(1,-1);
+                m.rotate(-90);
+                painter->setTransform(m, true);
+                break;
+              default :
+                fspec.capsuleV = 2;
+                fspec.capsuleH = 2;
+                break;
+            }
+            /* don't accept any state because some themes
+               may not have SVG elements suitable for grouping */
+            status = "normal";
+            if (widget && !widget->isActiveWindow())
+              status.append("-inactive");
+            renderFrame(painter,r,fspec,fspec.element+"-"+status);
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+            if(painterSaved)
+              painter->restore();
+            if (!paneledButtons.contains(widget))
+            {
+              paneledButtons.insert(widget);
+              connect(widget, SIGNAL(destroyed(QObject*)), SLOT(removeFromSet(QObject*)), Qt::UniqueConnection);
+            }
+            return;
+          }
+          /* a button with just one arrow */
+          else if (hspec_.transparent_arrow_button
+                   && !(opt && (opt->features & QStyleOptionToolButton::MenuButtonPopup))
+                   && !(tb
+                        && (tb->popupMode() == QToolButton::MenuButtonPopup
+                            || ((tb->popupMode() == QToolButton::InstantPopup
+                                 || tb->popupMode() == QToolButton::DelayedPopup)
+                                && opt && (opt->features & QStyleOptionToolButton::HasMenu)))))
+          {
+            return; // not in paneledButtons
+          }
+        }
+        else if (!widget || !widget->inherits("QDockWidgetTitleButton"))
+          fspec.expansion = 0; // color button
       }
 
       // -> CE_MenuScroller and PE_PanelMenu
@@ -2718,8 +2898,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         lspec.bottom = qMin(lspec.bottom,2);
         lspec.tispace = qMin(lspec.tispace,2);
       }
-
-      QRect r = option->rect;
 
       bool drawRaised = false;
       if (!(option->state & State_Enabled))
@@ -2883,7 +3061,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (!autoraise || !pbStatus.startsWith("normal") || drawRaised)
         {
           renderFrame(painter,r,fspec,fspec.element+"-"+pbStatus,0,0,0,0,0,drawRaised);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
+          if (!fillWidgetInterior)
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
+          else
+            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(QPalette::Button));
           hasPanel = true;
         }
 
@@ -2901,7 +3082,10 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->setOpacity(0.5);
         }
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        if (!fillWidgetInterior)
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        else // widget isn't null
+          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(QPalette::Button));
         if (libreoffice) painter->restore();
         hasPanel = true;
       }
@@ -3536,7 +3720,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->restore();
         fspec.left = fspec.right = fspec.top = fspec.bottom = 1;
         fspec.expansion = 0;
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
+        if (ispec.hasInterior)
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
+        else
+          painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Base));
         return;
       }
 
@@ -3551,13 +3738,19 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (isLibreoffice_)
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
       }
       else if (qobject_cast<const QLineEdit*>(widget))
       {
         if (!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
         }
         else
         {
@@ -3589,7 +3782,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         // the measure we used for CC_SpinBox at drawComplexControl()
         if (tspec_.vertical_spin_indicators || (!widget && sbOpt && sbOpt->frame))
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           fspec.expansion = 0;
         }
         else if (sb)
@@ -3633,6 +3829,9 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.capsuleV = 2;
       }
 
+      bool fillWidgetInterior(!ispec.hasInterior
+                              && hasHighContrastWithContainer(widget, QApplication::palette().color(QPalette::ButtonText)));
+
       // lineedits only have normal and focused states in Kvantum
       QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
       if (widget && !widget->isActiveWindow())
@@ -3649,7 +3848,10 @@ void Style::drawPrimitive(PrimitiveElement element,
                     option->rect,
                   fspec,
                   fspec.element+"-"+leStatus);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
+      if (!fillWidgetInterior)
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+leStatus);
+      else // widget isn't null
+        painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Base));
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -3726,13 +3928,18 @@ void Style::drawPrimitive(PrimitiveElement element,
       else
       {
         fspec = getFrameSpec("LineEdit");
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
         fspec.expansion = 0;
       }
 
       if (isLibreoffice_)
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
         fspec.expansion = 0;
       }
       // -> CC_SpinBox
@@ -3938,15 +4145,18 @@ void Style::drawPrimitive(PrimitiveElement element,
 
     case PE_IndicatorButtonDropDown : {
       QRect r = option->rect;
+      interior_spec ispec;
       QString group = "DropDownButton";
+      bool fillWidgetInterior(false);
 
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
+      QWidget *p = getParent(widget,1);
       QWidget *stb = NULL;
       bool autoraise = false;
       if (tb)
       {
         autoraise = tb->autoRaise();
-        stb = getStylableToolbar(widget);
+        stb = getStylableToolbarContainer(widget);
         if (stb)
         {
           autoraise = true;
@@ -3955,12 +4165,48 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             group = "ToolbarButton";
           }
+          ispec = getInteriorSpec(group);
+          if (!ispec.hasInterior
+              && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
+                                getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+          { // high contrast on toolbar
+            fillWidgetInterior = true;
+          }
+        }
+        else
+        {
+          ispec = getInteriorSpec(group);
+          if (p && !ispec.hasInterior)
+          {
+            QString containerGroup;
+            if (qobject_cast<QMenuBar*>(p))
+            {
+              if (mergedToolbarHeight(p))
+                containerGroup = "Toolbar";
+              else
+                containerGroup = "MenuBar";
+            }
+            else if (QMenuBar *gp = qobject_cast<QMenuBar*>(getParent(p,1)))
+            {
+              if (mergedToolbarHeight(gp))
+                containerGroup = "Toolbar";
+              else
+                containerGroup = "MenuBar";
+            }
+            if (!containerGroup.isEmpty()
+                && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
+                                  getFromRGBA(getLabelSpec(containerGroup).normalColor)))
+            { // high contrast on menubar
+              fillWidgetInterior = true;
+            }
+          }
         }
       }
+      else
+        ispec = getInteriorSpec(group);
 
       frame_spec fspec = getFrameSpec(group);
       fspec.expansion = 0; // depends on the containing widget
-      interior_spec ispec = getInteriorSpec(group);
       indicator_spec dspec = getIndicatorSpec(group);
       if (group == "ToolbarButton")
         dspec.element += "-down";
@@ -4124,7 +4370,10 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           if (!autoraise || !status.startsWith("normal") || drawRaised)
           {
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+            if (!fillWidgetInterior)
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+            else
+              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(QPalette::Button));
             renderFrame(painter,r,fspec,fspec.element+"-"+status);
           }
           if (!(option->state & State_Enabled))
@@ -4150,7 +4399,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             QColor col = getFromRGBA(getLabelSpec(group1).normalColor);
             if (!col.isValid())
               col = QApplication::palette().color(QPalette::ButtonText);
-            QWidget *p = tb->parentWidget();
             QWidget *gp = getParent(widget,2);
             QWidget* menubar = NULL;
             if (qobject_cast<QMenuBar*>(gp))
@@ -4183,6 +4431,11 @@ void Style::drawPrimitive(PrimitiveElement element,
                && (!(option->state & State_AutoRaise)
                    || (!status.startsWith("normal") && (option->state & State_Enabled))))
       {
+        /* fillWidgetInterior wasn't checked for combos  */
+        fillWidgetInterior = !ispec.hasInterior
+                             && hasHighContrastWithContainer(widget, tspec_.combo_as_lineedit
+                                                                     ? QApplication::palette().color(QPalette::ButtonText)
+                                                                     : getFromRGBA(getLabelSpec("ComboBox").normalColor));
         if (cb && tspec_.combo_as_lineedit)
         {
           if (cb->hasFocus())
@@ -4201,7 +4454,12 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        if (!fillWidgetInterior)
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        else // widget isn't null
+          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
+                                                                           ? QPalette::Base
+                                                                           : QPalette::Button));
         renderFrame(painter,r,fspec,fspec.element+"-"+status);
         if (!(option->state & State_Enabled))
         {
@@ -4277,6 +4535,29 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_IndicatorArrowDown :
     case PE_IndicatorArrowLeft :
     case PE_IndicatorArrowRight : {
+      if (qobject_cast<const QToolButton*>(widget))
+      {
+        /* if this is a tool button, the richer function
+           drawControl(CE_ToolButtonLabel,...) should be called instead */
+        QStyleOptionToolButton o;
+        o.initFrom(widget);
+        o.toolButtonStyle = Qt::ToolButtonIconOnly;
+        o.text = QString();
+        o.icon = QIcon();
+        o.features |= QStyleOptionToolButton::Arrow;
+        if (element == PE_IndicatorArrowUp)
+          o.arrowType = Qt::UpArrow;
+        else if (element == PE_IndicatorArrowDown)
+          o.arrowType = Qt::DownArrow;
+        else if (element == PE_IndicatorArrowLeft)
+          o.arrowType = Qt::LeftArrow;
+        else
+          o.arrowType = Qt::RightArrow;
+        o.state = option->state;
+        drawControl(CE_ToolButtonLabel,&o,painter,widget);
+        break;
+      }
+
       frame_spec fspec;
       default_frame_spec(fspec);
 
@@ -4316,12 +4597,32 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
 
-      if (aStatus == "normal"
-          && painter->pen().color() == QColor(Qt::white) // -> SP_ToolBarHorizontalExtensionButton
-          && themeRndr_ && themeRndr_->isValid()
-          && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+      /* take care of toolbar/menubar arrows in dark-and-light themes */
+      if (themeRndr_ && themeRndr_->isValid())
       {
-        dspec.element = "flat-"+dspec.element;
+        if (painter->pen().color() == QColor(Qt::white)) // -> SP_ToolBarHorizontalExtensionButton
+        {
+          if (themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+          {
+            dspec.element = "flat-"+dspec.element;
+          }
+        }
+        else // only theoretically
+        {
+          QColor col;
+          if (isStylableToolbar(widget)
+              || mergedToolbarHeight(widget) > 0)
+          {
+            col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+          }
+          else if (qobject_cast<const QMenuBar*>(widget))
+            col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
+          if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
+              && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+          {
+            dspec.element = "flat-"+dspec.element;
+          }
+        }
       }
 
       if (widget && !widget->isActiveWindow())
@@ -5037,7 +5338,10 @@ void Style::drawControl(ControlElement element,
         if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           fspec.expansion = 0;
         }
 
@@ -5059,7 +5363,7 @@ void Style::drawControl(ControlElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
           if (libreoffice) painter->restore();
         }
-        else
+        else // always get normal color from menubar
           lspec.normalColor = getLabelSpec(group).normalColor;
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter | Qt::TextSingleLine;
@@ -5188,7 +5492,7 @@ void Style::drawControl(ControlElement element,
              of menus to the normal menuitem text color because some
              apps (like QtAv) might do weird things with menus */
           lspec.normalColor = lspec.focusColor
-          = widget->palette().color(QPalette::Active,QPalette::WindowText).name();
+          = getName(widget->palette().color(QPalette::Active,QPalette::WindowText));
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -5222,7 +5526,7 @@ void Style::drawControl(ControlElement element,
         if (widget && qobject_cast<QMenu*>(widget->window()))
         { // see the explanation at CE_RadioButtonLabel (above)
           lspec.normalColor = lspec.focusColor
-          = widget->palette().color(QPalette::Active,QPalette::WindowText).name();
+          = getName(widget->palette().color(QPalette::Active,QPalette::WindowText));
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -5884,12 +6188,14 @@ void Style::drawControl(ControlElement element,
           if (tb->tabsClosable())
             closable = true;
         }
-        if (closable) // the close button area is always SE_TabBarTabRightButton
+        if (closable)
         {
+          /* the close button area is always SE_TabBarTabRightButton,
+             whose width is determined by PM_TabCloseIndicatorWidth and PM_TabBarTabHSpace */
           r = alignedRect(opt->direction, Qt::AlignLeft,
                           !verticalTabs
-                            ? QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget)-lspec.tispace, h)
-                            : QSize(h-pixelMetric(PM_TabCloseIndicatorHeight,option,widget)-lspec.tispace, w),
+                            ? QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget)-pixelMetric(PM_TabBarTabHSpace,option,widget), h)
+                            : QSize(h-pixelMetric(PM_TabCloseIndicatorHeight,option,widget)-pixelMetric(PM_TabBarTabHSpace,option,widget), w),
                           r);
         }
 
@@ -6101,7 +6407,10 @@ void Style::drawControl(ControlElement element,
         fspec.capsuleV = 2;
         if (tspec_.vertical_spin_indicators)
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           fspec.expansion = 0;
         }
       }
@@ -6190,7 +6499,10 @@ void Style::drawControl(ControlElement element,
         bool isRounded = false;
         if (tspec_.vertical_spin_indicators && isKisSlider_)
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           fspec.expansion = 0;
         }
         else
@@ -6879,7 +7191,7 @@ void Style::drawControl(ControlElement element,
 
     case CE_ToolBar : {
       /* QCommonStyle checks for QStyleOptionToolBar but we don't need it.
-         Moreover, we can't check for it in getStylableToolbar(). */
+         Moreover, we can't check for it in getStylableToolbarContainer(). */
 
       QRect r = option->rect;
 
@@ -7015,15 +7327,30 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
+        QWidget *p = qobject_cast<QTabWidget*>(getParent(widget,1));
         if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
         }
-        else if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        else if (QTabWidget *tw = qobject_cast<QTabWidget*>(p))
+        { // tab corner widget
+          if (opt->text.isEmpty()
+              && (tw->cornerWidget(Qt::TopLeftCorner) == widget
+                  || tw->cornerWidget(Qt::TopRightCorner) == widget
+                  || tw->cornerWidget(Qt::BottomLeftCorner) == widget
+                  || tw->cornerWidget(Qt::BottomRightCorner) == widget))
+          {
+            fspec.left = fspec.right = fspec.top = fspec.bottom = 1;
+          }
+        }
+        else if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
@@ -7095,7 +7422,7 @@ void Style::drawControl(ControlElement element,
           state = 2;
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
-          lspec.normalColor = QApplication::palette().color(QPalette::WindowText).name();
+          lspec.normalColor = getName(QApplication::palette().color(QPalette::WindowText));
 
         QStyleOptionButton o(*opt);
         if ((option->state & State_MouseOver) && state != 2)
@@ -7103,7 +7430,7 @@ void Style::drawControl(ControlElement element,
 
         /* center text+icon */
         QRect R = r;
-        if (txtSize.isValid() && !opt->icon.isNull())
+        if (!txtSize.isEmpty() && !opt->icon.isNull())
         {
           int margin = (r.width() - txtSize.width() - opt->iconSize.width()
                         - fspec.left - fspec.right - lspec.left - lspec.right - lspec.tispace
@@ -7169,10 +7496,29 @@ void Style::drawControl(ControlElement element,
           forceButtonTextColor(widget,col);
         }
 
-        if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+        QWidget *p = qobject_cast<QTabWidget*>(getParent(widget,1));
+        if (QTabWidget *tw = qobject_cast<QTabWidget*>(p))
+        { // tab corner widget
+          if (opt->text.isEmpty()
+              && (tw->cornerWidget(Qt::TopLeftCorner) == widget
+                  || tw->cornerWidget(Qt::TopRightCorner) == widget
+                  || tw->cornerWidget(Qt::BottomLeftCorner) == widget
+                  || tw->cornerWidget(Qt::BottomRightCorner) == widget))
+          {
+            lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+          }
+        }
+        else if (qobject_cast<QAbstractItemView*>(getParent(p,1)))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           //fspec.expansion = 0;
           lspec.tispace = qMin(lspec.tispace,3);
         }
@@ -7241,6 +7587,8 @@ void Style::drawControl(ControlElement element,
         }
         else
         {
+          bool fillWidgetInterior(!ispec.hasInterior
+                                  && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(group).normalColor)));
           bool libreoffice = false;
           if (isLibreoffice_ && (option->state & State_Enabled)
               && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
@@ -7252,7 +7600,10 @@ void Style::drawControl(ControlElement element,
           if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
           {
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            if (!fillWidgetInterior)
+              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            else // widget isn't null
+              painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Button));
           }
           if (libreoffice) painter->restore();
         }
@@ -7351,7 +7702,7 @@ void Style::drawControl(ControlElement element,
         if (tb)
         {
           autoraise = tb->autoRaise();
-          stb = getStylableToolbar(widget);
+          stb = getStylableToolbarContainer(widget);
           if (stb)
           {
             autoraise = true;
@@ -7439,7 +7790,8 @@ void Style::drawControl(ControlElement element,
           }
 
           /* respect the text color of the parent widget */
-          if (autoraise /*|| inPlasma*/ || !paneledButtons.contains(widget))
+          bool noPanel(!paneledButtons.contains(widget));
+          if (autoraise /*|| inPlasma*/ || noPanel)
           {
             bool isNormal(status.startsWith("normal"));
             QColor ncol = getFromRGBA(lspec.normalColor);
@@ -7452,7 +7804,7 @@ void Style::drawControl(ControlElement element,
               menubar = p;
             if (menubar)
             {
-              if (isNormal)
+              if (isNormal || noPanel)
               {
                 QString group1("MenuBar");
                 if (mergedToolbarHeight(menubar))
@@ -7464,12 +7816,13 @@ void Style::drawControl(ControlElement element,
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
-                lspec.normalColor = lspec1.normalColor;
+                if (isNormal)
+                  lspec.normalColor = lspec1.normalColor;
               }
             }
             else if (stb)
             {
-              if (isNormal)
+              if (isNormal || noPanel)
               {
                 if (!tspec_.group_toolbar_buttons
                     || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
@@ -7481,20 +7834,21 @@ void Style::drawControl(ControlElement element,
                   {
                     dspec.element = "flat-"+dspec.element;
                   }
-                  lspec.normalColor = lspec1.normalColor;
+                  if (isNormal)
+                    lspec.normalColor = lspec1.normalColor;
                 }
               }
             }
             else if (p)
             {
               QColor col;
-              if (!autoraise && !paneledButtons.contains(widget)) // an already styled toolbutton
-                col = opt->palette.color(QPalette::ButtonText);
+              if (!autoraise && noPanel) // an already styled toolbutton
+                col = opt->palette.color(QPalette::ButtonText); // p->palette()?
               else
                 col = p->palette().color(p->foregroundRole());
               if (!col.isValid())
                 col = QApplication::palette().color(QPalette::WindowText);
-              if (isNormal)
+              if (isNormal || noPanel)
               {
                 if (themeRndr_ && themeRndr_->isValid()
                     && enoughContrast(ncol, col)
@@ -7502,17 +7856,19 @@ void Style::drawControl(ControlElement element,
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
-                lspec.normalColor = col.name();
-              }
-              if (/*inPlasma ||*/ !paneledButtons.contains(widget))
-              {
-                lspec.focusColor = col.name();
-                lspec.toggleColor = col.name();
-                /* take care of Plasma menu titles */
-                if (!qobject_cast<QMenu*>(p))
-                  lspec.pressColor = col.name();
-                else if (transMenuTitle)
-                  lspec.pressColor = getLabelSpec("Menu").normalColor;
+                if (isNormal)
+                  lspec.normalColor = getName(col);
+
+                if (/*inPlasma ||*/ noPanel)
+                {
+                  lspec.focusColor = getName(col);
+                  lspec.toggleColor = getName(col);
+                  /* take care of Plasma menu titles */
+                  if (!qobject_cast<QMenu*>(p))
+                    lspec.pressColor = getName(col);
+                  else if (transMenuTitle)
+                    lspec.pressColor = getLabelSpec("Menu").normalColor;
+                }
               }
             }
           }
@@ -7528,7 +7884,10 @@ void Style::drawControl(ControlElement element,
               QSize txtSize = textSize(painter->font(), txt, false);
               if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
-                QSize availableSize = opt->rect.size() - opt->iconSize
+                QSize availableSize = opt->rect.size()
+                                      - (tialign == Qt::ToolButtonTextUnderIcon
+                                           ? QSize(opt->iconSize.height(),0)
+                                           : QSize(0,0))
                                       - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                                               fspec.top+fspec.bottom+lspec.top+lspec.bottom);
                 if (tialign == Qt::ToolButtonTextBesideIcon)
@@ -7640,7 +7999,7 @@ void Style::drawControl(ControlElement element,
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          lspec.normalColor = opt->palette.color(QPalette::ButtonText).name();
+          lspec.normalColor = getName(opt->palette.color(QPalette::ButtonText));
         }
 
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
@@ -7658,19 +8017,89 @@ void Style::drawControl(ControlElement element,
            because the button may have only an arrow inside it (which is
            treated as an icon, like in QtCreator's find widget):
 
-             (1) The button style is icon-only;
+             (1) The button style is icon-only or there's no text;
              (2) There's no icon; but
              (3) There's an arrow.
         */
         Qt::Alignment iAlignment = Qt::AlignVCenter;
-        if (tialign == Qt::ToolButtonIconOnly
+        if ((tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
             && opt->icon.isNull()
             && (opt->features & QStyleOptionToolButton::Arrow)
             && opt->arrowType != Qt::NoArrow)
         {
-          iAlignment |= Qt::AlignHCenter;
-          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
+          {
+            dspec.size = qMax(dspec.size, pixelMetric(PM_TabCloseIndicatorWidth));
+            const frame_spec fspec1 = getFrameSpec("Tab");
+            qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                          / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+            if (opt->arrowType == Qt::LeftArrow)
+            {
+              iAlignment |= Qt::AlignRight;
+              fspec.left = qMin(fspec.left, fspec1.left);
+              fspec.right = 1;
+              fspec.top = qMin(fspec.top, fspec1.top);
+              fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
+              int vOffset = 0;
+              if (lspec.top+lspec.bottom > 0 && h > fspec.top+fspec.bottom+dspec.size)
+                vOffset = qRound((qreal)(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
+              fspec.top += vOffset;
+              fspec.bottom -= vOffset;
+            }
+            else if (opt->arrowType == Qt::RightArrow)
+            {
+              iAlignment |= Qt::AlignLeft;
+              fspec.right = qMin(fspec.right, fspec1.right);
+              fspec.left = 1;
+              fspec.top = qMin(fspec.top, fspec1.top);
+              fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
+              int vOffset = 0;
+              if (lspec.top+lspec.bottom > 0 && h > fspec.top+fspec.bottom+dspec.size)
+                vOffset = qRound((qreal)(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
+              fspec.top += vOffset;
+              fspec.bottom -= vOffset;
+            }
+            else if (opt->arrowType == Qt::DownArrow)
+            { // panel rotated and mirrored at PE_PanelButtonTool
+              iAlignment = Qt::AlignHCenter | Qt::AlignTop;
+              fspec.right = qMin(fspec.bottom, fspec1.bottom);
+              fspec.bottom = qMin(fspec.left, fspec1.left);
+              fspec.left = qMin(fspec.top, fspec1.top);
+              fspec.top = 1;
+              int hOffset = 0;
+              if (lspec.top+lspec.bottom > 0 && w > fspec.left+fspec.right+dspec.size)
+                hOffset = qRound((qreal)(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
+              fspec.left += hOffset;
+              fspec.right -= hOffset;
+            }
+            else if (opt->arrowType == Qt::UpArrow)
+            { // panel rotated and mirrored at PE_PanelButtonTool
+              iAlignment = Qt::AlignHCenter | Qt::AlignBottom;
+              fspec.left = qMin(fspec.top, fspec1.top);
+              fspec.top = qMin(fspec.right, fspec1.right);
+              fspec.right = qMin(fspec.bottom, fspec1.bottom);
+              fspec.bottom = 1;
+              int hOffset = 0;
+              if (lspec.top+lspec.bottom > 0 && w > fspec.left+fspec.right+dspec.size)
+                hOffset = qRound((qreal)(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
+              fspec.left += hOffset;
+              fspec.right -= hOffset;
+            }
+            /* panel has no status at PE_PanelButtonTool */
+            if(option->state & State_Enabled)
+            {
+              status = "normal";
+              if (widget && !widget->isActiveWindow())
+                status.append("-inactive");
+            }
+            lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          }
+          else
+          {
+            iAlignment |= Qt::AlignHCenter;
+            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+            lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          }
         }
         else
         {
@@ -7709,8 +8138,12 @@ void Style::drawControl(ControlElement element,
         }
 
         /* we treat arrows as icons */
-        if (!(opt->features & QStyleOptionToolButton::Arrow) || tialign == Qt::ToolButtonTextOnly)
+        if (!(opt->features & QStyleOptionToolButton::Arrow)
+            || opt->arrowType == Qt::NoArrow
+            || tialign == Qt::ToolButtonTextOnly)
+        {
           break;
+        }
 
         if (status.startsWith("toggled")
             && (!themeRndr_ || !themeRndr_->isValid()
@@ -7978,7 +8411,7 @@ void Style::drawComplexControl(ComplexControl control,
             QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
             QString group1 = group;
-            QWidget *stb = getStylableToolbar(widget);
+            QWidget *stb = getStylableToolbarContainer(widget);
             bool autoraise(tb->autoRaise());
             if (stb)
             {
@@ -8114,7 +8547,10 @@ void Style::drawComplexControl(ComplexControl control,
           fspec.capsuleV = 2;
           if (verticalIndicators)
           {
-            fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
             fspec.expansion = 0;
           }
           QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
@@ -8126,7 +8562,10 @@ void Style::drawComplexControl(ComplexControl control,
             // exactly as in PE_PanelLineEdit
             if (isLibreoffice_)
             {
-              fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
               fspec.expansion = 0;
             }
             else if (QLineEdit *child = widget->findChild<QLineEdit*>())
@@ -8135,7 +8574,10 @@ void Style::drawComplexControl(ComplexControl control,
               const size_spec sspec = getSizeSpec("LineEdit");
               if (!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
               {
-                fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
               }
               else
               {
@@ -8174,6 +8616,10 @@ void Style::drawComplexControl(ComplexControl control,
               }
             }
           }
+          bool fillWidgetInterior(!ispec.hasInterior
+                                  && hasHighContrastWithContainer(widget,
+                                                                  QApplication::palette().color(QPalette::ButtonText)));
+
           QString leStatus;
           if (isKisSlider_) leStatus = "normal";
           else leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
@@ -8185,7 +8631,10 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setOpacity(DISABLED_OPACITY);
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+leStatus);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+leStatus);
+          if (!fillWidgetInterior)
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+leStatus);
+          else // widget isn't null
+            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(QPalette::Base));
           if (!(option->state & State_Enabled))
             painter->restore();
         }
@@ -8371,6 +8820,12 @@ void Style::drawComplexControl(ComplexControl control,
                 // nothing should be drawn here if the lineedit is transparent (as in Cantata)
                 || cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() != 0)
             {
+              bool fillWidgetInterior(!ispec.hasInterior
+                                      && hasHighContrastWithContainer(widget,
+                                                                      tspec_.combo_as_lineedit
+                                                                      ? QApplication::palette().color(QPalette::ButtonText)
+                                                                      : getFromRGBA(getLabelSpec(group).normalColor)));
+
               QStyleOptionComboBox leOpt(*opt);
               if (!tspec_.combo_as_lineedit && editable)
               {
@@ -8378,7 +8833,12 @@ void Style::drawComplexControl(ComplexControl control,
                                              rtl ? editWidth-o.rect.width() : 0);
               }
               renderFrame(painter,r,fspec,fspec.element+"-"+status);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+              if (!fillWidgetInterior)
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+              else // widget isn't null
+                painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
+                                                                                 ? QPalette::Base
+                                                                                 : QPalette::Button));
               if (!tspec_.combo_as_lineedit && editable)
               {
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
@@ -9451,8 +9911,10 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(v,h);
     }
 
-    /* PM_TabBarTabHSpace provides an appropriate space between the
-       close button and frame but PM_TabBarTabVSpace isn't needed */
+    /* PM_TabBarTabHSpace provides an appropriate horizontal space
+       around the close button but PM_TabBarTabVSpace isn't needed.
+       QCommonStyle uses it on the right and left tab sides equally
+       but we use it only around the close button. */
     case PM_TabBarTabHSpace : {
       const frame_spec fspec = getFrameSpec("Tab");
       int hSpace = fspec.left + fspec.right;
@@ -9463,7 +9925,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         hSpace += lspec.left + lspec.right;
         hSpace = qMax(hSpace, common);
       }
-      return hSpace;
+      return qMax(hSpace,12);
     }
     case PM_TabBarTabVSpace : {
       if (!widget) // QML
@@ -9514,9 +9976,18 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ScrollView_ScrollBarSpacing : return 0;
 
     case PM_TabBarScrollButtonWidth : {
-      const frame_spec fspec = getFrameSpec("Tab");
-      int extra = fspec.left + fspec.right - 4;
-      return (extra > 0 ? 24 + extra : 24);
+      const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+      const frame_spec fspec2 = getFrameSpec("Tab");
+      return qMax(pixelMetric(PM_TabCloseIndicatorWidth)
+                    + qMin(qMax(fspec1.left, fspec1.right),
+                           qMax(fspec2.left, fspec2.right))
+                    + 1,
+                  16);
+    }
+
+    case PM_TabCloseIndicatorWidth :
+    case PM_TabCloseIndicatorHeight : {
+       return getIndicatorSpec("Tab").size;
     }
 
     case PM_TabBarIconSize :
@@ -9858,7 +10329,10 @@ QSize Style::sizeFromContents(ContentsType type,
       frame_spec fspec = getFrameSpec("LineEdit");
       if (tspec_.vertical_spin_indicators)
       {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
       }
       const label_spec lspec = getLabelSpec("LineEdit");
       const size_spec sspecLE = getSizeSpec("LineEdit");
@@ -9998,7 +10472,10 @@ QSize Style::sizeFromContents(ContentsType type,
         if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           lspec.tispace = qMin(lspec.tispace,3);
         }
 
@@ -10299,7 +10776,8 @@ QSize Style::sizeFromContents(ContentsType type,
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
                         || opt->arrowType == Qt::NoArrow
                         || tialign == Qt::ToolButtonTextOnly
-                        || (opt->text.isEmpty() && opt->icon.isNull()) // nothing or only an arrow
+                        || ((opt->text.isEmpty() || tialign == Qt::ToolButtonIconOnly)
+                            && opt->icon.isNull()) // nothing or only arrows
                       ? 0
                       // also add a margin between indicator and text (-> CE_ToolButtonLabel)
                       : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
@@ -10328,7 +10806,7 @@ QSize Style::sizeFromContents(ContentsType type,
         }
 
         /* consider text-icon spacing, shadow and bold text */
-        if (!opt->text.isEmpty())
+        if (!opt->text.isEmpty() && tialign != Qt::ToolButtonIconOnly)
         {
           if(!opt->icon.isNull())
           {
@@ -10384,7 +10862,7 @@ QSize Style::sizeFromContents(ContentsType type,
         else f = QApplication::font();
         if (lspec.boldFont) f.setBold(true);
 
-        int iconSize = pixelMetric(PM_TabBarIconSize);
+        int iconSize = pixelMetric(PM_TabBarIconSize,option,widget);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                            opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize),
                            Qt::ToolButtonTextBesideIcon,
@@ -10405,9 +10883,24 @@ QSize Style::sizeFromContents(ContentsType type,
         if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
         {
           if (tb->tabsClosable())
-            s.rwidth() += pixelMetric(verticalTabs ? PM_TabCloseIndicatorHeight : PM_TabCloseIndicatorWidth,
-                                      option,widget)
-                          + lspec.tispace;
+          {
+            if (verticalTabs)
+            {
+              s.rwidth() += pixelMetric(PM_TabCloseIndicatorHeight,option,widget)
+                            + pixelMetric(PM_TabBarTabHSpace,option,widget);
+              s.rheight() += qMax(opt->icon.isNull()
+                                    ? 0 : pixelMetric(PM_TabCloseIndicatorWidth,option,widget) - iconSize,
+                                  0);
+            }
+            else
+            {
+              s.rwidth() += pixelMetric(PM_TabCloseIndicatorWidth,option,widget)
+                            + pixelMetric(PM_TabBarTabHSpace,option,widget);
+              s.rheight() += qMax(opt->icon.isNull()
+                                    ? 0 : pixelMetric(PM_TabCloseIndicatorHeight,option,widget) - iconSize,
+                                  0);
+            }
+          }
 
           // tabButtons
           /*int tbh = 0;
@@ -10893,7 +11386,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         if (qobject_cast<const QLineEdit*>(widget)
             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           lspec.left = lspec.right = qMin(lspec.left,2);
           sspec.incrementW = false;
         }
@@ -10944,7 +11440,10 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         }
         else
         {
-          fspec.left = fspec.right = fspec.top = fspec.bottom = qMin(fspec.left,3);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
           lspec.left = 0;
           sspec.incrementW = false;
         }
@@ -11444,6 +11943,77 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               r.setRect(tab->rect.left(), tab->rect.top(), option->rect.width(), 2);
             break;
           default: break;
+        }
+      }
+      return r;
+    }
+
+    case SE_TabBarTabLeftButton:
+    case SE_TabBarTabRightButton: {
+      QRect r;
+      if (const QStyleOptionTabV3 *tab = qstyleoption_cast<const QStyleOptionTabV3 *>(option))
+      {
+        bool selected = tab->state & State_Selected;
+        int verticalShift = pixelMetric(QStyle::PM_TabBarTabShiftVertical, tab, widget);
+        int horizontalShift = pixelMetric(QStyle::PM_TabBarTabShiftHorizontal, tab, widget);
+        int hpadding = pixelMetric(QStyle::PM_TabBarTabHSpace, option, widget) / 2
+                       + getFrameSpec("Tab").right;
+        hpadding = qMax(hpadding, 4); // FIXME: is this needed?
+
+        bool verticalTabs(tab->shape == QTabBar::RoundedEast
+                          || tab->shape == QTabBar::RoundedWest
+                          || tab->shape == QTabBar::TriangularEast
+                          || tab->shape == QTabBar::TriangularWest);
+
+        QRect tr = tab->rect;
+        if (tab->shape == QTabBar::RoundedSouth || tab->shape == QTabBar::TriangularSouth)
+          verticalShift = -verticalShift;
+        if (verticalTabs) {
+          qSwap(horizontalShift, verticalShift);
+          horizontalShift *= -1;
+          verticalShift *= -1;
+        }
+        if (tab->shape == QTabBar::RoundedWest || tab->shape == QTabBar::TriangularWest)
+          horizontalShift = -horizontalShift;
+
+        tr.adjust(0, 0, horizontalShift, verticalShift);
+        if (selected)
+        {
+          tr.setBottom(tr.bottom() - verticalShift);
+          tr.setRight(tr.right() - horizontalShift);
+        }
+
+        QSize size = (element == SE_TabBarTabLeftButton) ? tab->leftButtonSize : tab->rightButtonSize;
+        int w = size.width();
+        int h = size.height();
+        int midHeight = static_cast<int>(qCeil(float(tr.height() - h)/2));
+        int midWidth = (tr.width() - w)/2;
+
+        bool atTheTop = true;
+        switch (tab->shape) {
+          case QTabBar::RoundedWest:
+          case QTabBar::TriangularWest:
+            atTheTop = (element == SE_TabBarTabLeftButton);
+            break;
+          case QTabBar::RoundedEast:
+          case QTabBar::TriangularEast:
+            atTheTop = (element == SE_TabBarTabRightButton);
+            break;
+          default:
+            if (element == SE_TabBarTabLeftButton)
+              r = QRect(tab->rect.x() + hpadding, midHeight, w, h);
+            else
+              r = QRect(tab->rect.right() - w - hpadding, midHeight, w, h);
+            r = visualRect(tab->direction, tab->rect, r);
+        }
+        if (verticalTabs)
+        {
+          if (atTheTop)
+            r = QRect(midWidth,
+                      tr.y() + tab->rect.height() - hpadding - h,
+                      w, h);
+          else
+            r = QRect(midWidth, tr.y() + hpadding, w, h);
         }
       }
       return r;
@@ -12183,11 +12753,17 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
       /* If this is a dark-and-light theme, we set the pen color of
          the painter to white as a sign to use at PE_IndicatorArrowRight. */
       if (themeRndr_ && themeRndr_->isValid())
-      { // for toolbar, widget is NULL but for menubar, it isn't
+      {
+        /* for toolbar, widget is NULL but option isn't (Qt -> qtoolbarextension.cpp);
+           for menubar, widget isn't Null but option is (Qt -> qmenubar.cpp) */
         QColor col;
-        if (!widget || mergedToolbarHeight(widget) > 0)
+        if (!widget // unfortunately, there's no way to tell if it's a stylable toolbar :(
+            || isStylableToolbar(widget) // doesn't happen
+            || mergedToolbarHeight(widget) > 0)
+        {
           col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
-        else
+        }
+        else if (widget)
           col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
         if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor)))
           painter.setPen(QColor(Qt::white));
@@ -12195,11 +12771,12 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
 
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
-      opt.state |= State_Enabled; // other states don't work for toolbar FIXME: why?
+      opt.state |= State_Enabled; // there's no way to know the state :(
+      opt.direction = option ? option->direction : QApplication::layoutDirection();
 
       drawPrimitive(QApplication::layoutDirection() == Qt::RightToLeft ?
                       PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
-                    &opt,&painter,0);
+                    &opt,&painter,widget);
 
       return QIcon(pm);
     }
@@ -12221,8 +12798,9 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
       QStyleOption opt;
       opt.rect = QRect(0,0,s,s);
       opt.state |= State_Enabled;
+      opt.direction = option ? option->direction : QApplication::layoutDirection();
 
-      drawPrimitive(PE_IndicatorArrowDown,&opt,&painter,0);
+      drawPrimitive(PE_IndicatorArrowDown,&opt,&painter,widget);
 
       return QIcon(pm);
     }
@@ -13264,20 +13842,48 @@ void Style::renderLabel(
                   r.width(),
                   r.height()-ricon.height() - (px.isNull() ? 0 : lspec.tispace));
   }
-  else if (tialign == Qt::ToolButtonIconOnly)
+  else if (tialign == Qt::ToolButtonIconOnly && !px.isNull())
   {
+    /* center the icon considering text margins (r is the interior rect here) */
+    int horizOffset = 0, vertOffset = 0;
+    if (lspec.left+lspec.right > 0 && r.width() > iconSize.width())
+    {
+      qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
+                    / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
+      horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
+    }
+    if (lspec.top+lspec.bottom > 0 && r.height() > iconSize.height())
+    {
+      qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                    / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+      vertOffset = qRound((qreal)(r.height()-iconSize.height()) * rDiff / 2.0);
+    }
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
                         iconSize,
-                        r);
+                        r.adjusted(horizOffset, vertOffset, horizOffset, vertOffset));
   }
 
-  if (text.isEmpty() && centerLoneIcon)
+  if (tialign != Qt::ToolButtonIconOnly && text.isEmpty() && !px.isNull() && centerLoneIcon)
   {
+    /* center the icon considering text margins (r is the interior rect here) */
+    int horizOffset = 0, vertOffset = 0;
+    if (lspec.left+lspec.right > 0 && r.width() > iconSize.width())
+    {
+      qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
+                    / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
+      horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
+    }
+    if (lspec.top+lspec.bottom > 0 && r.height() > iconSize.height())
+    {
+      qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                    / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+      vertOffset = qRound((qreal)(r.height()-iconSize.height()) * rDiff / 2.0);
+    }
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
                         iconSize,
-                        r);
+                        r.adjusted(horizOffset, vertOffset, horizOffset, vertOffset));
   }
 
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
@@ -13509,7 +14115,7 @@ QPixmap Style::translucentPixmap(const QPixmap &px,
   return QPixmap::fromImage(img);
 }
 
-QRect Style::interiorRect(const QRect &bounds, frame_spec fspec) const
+QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
 {
   if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
     return bounds.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);

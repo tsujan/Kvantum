@@ -33,8 +33,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [Colors:Selection]
-BackgroundAlternate=82,148,226
-BackgroundNormal=82,148,226
+BackgroundAlternate=0,188,212
+BackgroundNormal=0,188,212
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -75,8 +75,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [Colors:Window]
-BackgroundAlternate=245,246,247
-BackgroundNormal=245,246,247
+BackgroundAlternate=250,251,252
+BackgroundNormal=250,251,252
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -89,17 +89,17 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [General]
-ColorScheme=KvArc
-Name=KvArc
+ColorScheme=KvAdapta
+Name=KvAdapta
 shadeSortColumn=true
 
 [KDE]
 contrast=0
 
 [WM]
-activeBackground=245,246,247
-activeBlend=245,246,247
+activeBackground=250,251,252
+activeBlend=250,251,252
 activeForeground=0,0,0
-inactiveBackground=245,246,247
-inactiveBlend=245,246,247
+inactiveBackground=250,251,252
+inactiveBlend=250,251,252
 inactiveForeground=104,108,111

@@ -646,10 +646,10 @@
 </g>
 <use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="b-arrow-up-pressed" transform="translate(95.692991,4.307009)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="b-arrow-down-pressed" transform="matrix(1,0,0,-1,95.692991,775)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="flat-b-arrow-up-pressed" transform="translate(95.692991,132.30701)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="flat-b-arrow-down-pressed" transform="matrix(1,0,0,-1,95.692991,905.69299)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="flat-b-arrow-right-pressed" transform="matrix(0,1,-1,0,745.69299,465.69299)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="flat-b-arrow-left-pressed" transform="matrix(0,-1,1,0,9.307008,574.30701)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-b-arrow-up-pressed" transform="translate(50.192982,244.19299)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-b-arrow-down-pressed" transform="matrix(1,0,0,-1,50.192982,793.80701)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-b-arrow-right-pressed" transform="rotate(90,106.80701,527)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-b-arrow-left-pressed" transform="rotate(-90,370.5,249.30702)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="s-arrow-up-normal" transform="translate(0.692991,210)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="s-arrow-down-normal" transform="matrix(1,0,0,-1,0.693021,973.20001)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#b-arrow-up-normal" id="s-arrow-up-pressed" transform="translate(90.692991,210)"/>

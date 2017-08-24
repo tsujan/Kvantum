@@ -248,6 +248,9 @@ typedef struct {
   bool normal_default_pushbutton;
   /* no icon for pushbuttons as far as possible? */
   bool iconless_pushbutton;
+  /* should tool buttons be transparent
+     when they contain only an arrow? */
+  bool transparent_arrow_button;
   /* no icon for menuitems? */
   bool iconless_menu;
   /* only style the top toolbar? */
@@ -503,6 +506,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.disabled_icon_opacity = 100;
   hspec.normal_default_pushbutton = false;
   hspec.iconless_pushbutton = false;
+  hspec.transparent_arrow_button=false;
   hspec.iconless_menu = false;
   hspec.single_top_toolbar = false;
 }

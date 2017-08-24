@@ -307,9 +307,9 @@ class Style : public QCommonStyle {
     QRect squaredRect(const QRect &r) const;
 
     /* Return the remaining QRect after subtracting the frames. */
-    QRect interiorRect(const QRect &bounds, frame_spec fspec) const;
+    QRect interiorRect(const QRect &bounds, const frame_spec &fspec) const;
     /* Return the remaining QRect after subtracting the frames and text margins. */
-    QRect labelRect(const QRect &bounds, frame_spec f,label_spec t) const {
+    QRect labelRect(const QRect &bounds, const frame_spec &f,const label_spec &t) const {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);
     }
 
@@ -324,9 +324,11 @@ class Style : public QCommonStyle {
     /* If this menubar is merged with a toolbar, return the toolbar height! */
     int mergedToolbarHeight(const QWidget *menubar) const;
     /* Is this a toolbar that should be styled? */
-    bool isStylableToolbar(const QWidget *w) const;
-    /* Get the stylable toolbar, of which this toolbutton is a child. */
-    QWidget* getStylableToolbar(const QWidget *w) const;
+    bool isStylableToolbar(const QWidget *w, bool allowInvisible = false) const;
+    /* Get the stylable toolbar containing this widget. */
+    QWidget* getStylableToolbarContainer(const QWidget *w, bool allowInvisible = false) const;
+    /* Does the widget have a high contrast with its container (toolbar/menubar)? */
+    bool hasHighContrastWithContainer(const QWidget *w, const QColor color) const;
 
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;

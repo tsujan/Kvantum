@@ -370,7 +370,74 @@ push button</string>
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_18">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2" rowspan="8">
+        <widget class="QToolButton" name="toolButton_18">
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::DownArrow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" rowspan="8">
+        <widget class="QToolButton" name="toolButton_17">
+         <property name="text">
+          <string>Toggle
+tool
+button
+
+with
+height
+greater
+than
+width</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KvantumPreviewResources.qrc">
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="4">
+        <spacer name="horizontalSpacer_19">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="5">
         <widget class="QToolButton" name="toolButton_16">
          <property name="enabled">
           <bool>false</bool>
@@ -388,7 +455,7 @@ toolbutton</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
+       <item row="1" column="5">
         <widget class="QToolButton" name="toolButton_15">
          <property name="enabled">
           <bool>false</bool>
@@ -419,7 +486,7 @@ with an arrow</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="4">
+       <item row="2" column="5">
         <widget class="QToolButton" name="toolButton_12">
          <property name="enabled">
           <bool>false</bool>
@@ -442,8 +509,77 @@ with an arrow</string>
          </property>
         </widget>
        </item>
+       <item row="3" column="0">
+        <widget class="QToolButton" name="toolButton_4">
+         <property name="text">
+          <string>Toolbutton with 32px PNG icon
+beside text</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KvantumPreviewResources.qrc">
+           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QToolButton" name="toolButton_9">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Toolbutton with 32px PNG icon
+beside text</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KvantumPreviewResources.qrc">
+           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0">
         <widget class="QToolButton" name="toolButton_5">
+         <property name="text">
+          <string>Toolbutton with 32px SVG icon
+and text below</string>
+         </property>
+         <property name="icon">
+          <iconset resource="KvantumPreviewResources.qrc">
+           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextUnderIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QToolButton" name="toolButton_14">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Toolbutton with 32px SVG icon
 and text below</string>
@@ -481,7 +617,7 @@ and arrow</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="4">
+       <item row="5" column="5">
         <widget class="QToolButton" name="toolButton_13">
          <property name="enabled">
           <bool>false</bool>
@@ -520,7 +656,7 @@ and arrow</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="4">
+       <item row="6" column="5">
         <widget class="QToolButton" name="toolButton_10">
          <property name="enabled">
           <bool>false</bool>
@@ -566,7 +702,7 @@ and dropdown menu arrow</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="4">
+       <item row="7" column="5">
         <widget class="QToolButton" name="toolButton_11">
          <property name="enabled">
           <bool>false</bool>
@@ -593,132 +729,6 @@ and dropdown menu arrow</string>
           <enum>Qt::RightArrow</enum>
          </property>
         </widget>
-       </item>
-       <item row="4" column="4">
-        <widget class="QToolButton" name="toolButton_14">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Toolbutton with 32px SVG icon
-and text below</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
-        <widget class="QToolButton" name="toolButton_9">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Toolbutton with 32px PNG icon
-beside text</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QToolButton" name="toolButton_4">
-         <property name="text">
-          <string>Toolbutton with 32px PNG icon
-beside text</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.png</normaloff>:/Icons/data/icon.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" rowspan="8">
-        <widget class="QToolButton" name="toolButton_17">
-         <property name="text">
-          <string>Toggle
-tool
-button
-
-with
-height
-greater
-than
-width</string>
-         </property>
-         <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextUnderIcon</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <spacer name="horizontalSpacer_18">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="3">
-        <spacer name="horizontalSpacer_19">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </item>

@@ -672,6 +672,10 @@ normal_default_pushbutton         true/false          No bold font for default p
 
 iconless_pushbutton               true/false          No icon for push buttons that have text?
 
+transparent_arrow_button          true/false          Should tool buttons be transparent
+                                                      (without a panel) when they contain only
+                                                      an arrow?
+
 iconless_menu                     true/false          No icon for menus?
 
 single_top_toolbar                true/false          Style only the top toolbar? If true,
@@ -771,12 +775,22 @@ text.normal.color                 string (#RRGGBBAA)  The color of the normal te
                                                       override the text colors defined under
                                                       the section "GeneralColors".
                                                       
-                                                      Note: State-specific text colors do not
+                                                      Note 1: "MenuBarItem" always gets its normal
+                                                      text color from the "MenuBar" section or, if
+                                                      menubar and toolbar are merged (see the key
+                                                      "merge_menubar_with_toolbar"), from the
+                                                      "Toolbar" section.
+                                                      
+                                                      Note 2: State-specific text colors do not
                                                       have meaning for Window, Dialog, Dock,
                                                       LineEdit and frame widgets (namely
                                                       GenericFrame, TabFrame and TabBarFrame).
 
 text.focus.color                  string (#RRGGBBAA)  The color of the focused/hover text.
+                                                      
+                                                      Note: For "MenuBarItem", it serves as a
+                                                      fallback color in case the press or toggle
+                                                      text colors are not set.
 
 text.press.color                  string (#RRGGBBAA)  The color of the pressed text.
 

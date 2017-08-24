@@ -113,6 +113,7 @@ private slots:
     toolButton_10->setAutoRaise (checked);
     toolButton_11->setAutoRaise (checked);
     toolButton_17->setAutoRaise (checked);
+    toolButton_18->setAutoRaise (checked);
   }
   void setDisabledState (int state) {
     checkBox_8->setCheckState((Qt::CheckState)state);

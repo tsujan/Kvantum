@@ -727,10 +727,14 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
+#if QT_VERSION < 0x050000
+  r.transient_scrollbar=false;
+#else
   v = getValue("General","transient_scrollbar");
   r.transient_scrollbar = v.toBool();
   v = getValue("General","transient_groove");
   r.transient_groove = v.toBool();
+#endif
 
   /* for technical reasons, we always set scrollbar_in_view
      to false with transient scrollbars and (try to) put
@@ -915,6 +919,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   v = getValue("Hacks","iconless_pushbutton");
   r.iconless_pushbutton = v.toBool();
+
+  v = getValue("Hacks","transparent_arrow_button");
+  r.transparent_arrow_button = v.toBool();
 
   v = getValue("Hacks","iconless_menu");
   r.iconless_menu = v.toBool();

@@ -25,6 +25,9 @@ V0.10.5
  * Separated the Qt4 code from the Qt5 one.
  * Defined a few standard Qt icons.
  * Fixed the size of tool buttons with just an arrow.
+ * A key for transparent arrow (tool) buttons.
+ * If the widget has no interior, check whether it has a high contrast with its container.
+ * Group tabbar scroll buttons together and remove their states.
 
 V0.10.4
 ---------

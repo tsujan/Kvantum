@@ -93,7 +93,7 @@ In LXQT:
 
 (2) Select a corresponding Openbox theme in any way you apply themes for Openbox (some of the installed Openbox themes can be used with different Kvantum themes). Afterward, the easiest way for all LXQT parts to see Kvantum is logging out and in again.
 
-Be sure to disable Compton's shadow and blurring for composited Qt menus by adding "argb && _NET_WM_WINDOW_TYPE@:a *= 'MENU'" to the "shadow-exclude" and "blur-background-exclude" sections of '~/.config/compton.conf'
+In case you use Compton as the X compositor, be sure to disable Compton's shadow and blurring for composited Qt menus by adding "argb && _NET_WM_WINDOW_TYPE@:a *= 'MENU'" to the "shadow-exclude" and "blur-background-exclude" sections of '~/.config/compton.conf'. If the active Kvantum theme shows combo popups as menus and does not have translucency, you could add "argb && _NET_WM_WINDOW_TYPE@:a *= 'NORMAL'" instead. Unfortunately, Compton does not work well with window translucency.
 
 In Other DEs and for Qt4:
 =========================

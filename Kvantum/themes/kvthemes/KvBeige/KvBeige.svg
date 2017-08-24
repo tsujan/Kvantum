@@ -1091,13 +1091,13 @@
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#itemview-toggled-bottomleft" id="itemview-focused-bottomleft" transform="translate(-76,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#itemview-toggled-bottomright" id="itemview-focused-bottomright" transform="translate(-76,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#itemview-toggled-right" id="itemview-focused-right" transform="translate(-76,0)"/>
-<g style="fill:#fff;stroke:none" id="arrow-uptoggled" transform="translate(174,-175.493)">
+<g style="fill:#fff;stroke:none" id="arrow-up-toggled" transform="translate(174,-175.493)">
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0" id="rect5373" transform="rotate(-90)"/>
 <path id="path5375" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-uptoggled" id="arrow-down-toggled" transform="matrix(1,0,0,-1,0,875)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-uptoggled" id="arrow-right-toggled" transform="matrix(0,1,-1,0,660,230)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-uptoggled" id="arrow-left-toggled" transform="matrix(0,-1,1,0,-180,654)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="arrow-down-toggled" transform="matrix(1,0,0,-1,0,875)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="arrow-right-toggled" transform="matrix(0,1,-1,0,660,230)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="arrow-left-toggled" transform="matrix(0,-1,1,0,-180,654)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-pressed-topright" transform="translate(41.5001,0.7498)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-pressed-topleft" transform="translate(41.5001,0.7498)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-pressed-left" transform="translate(41.5001,0.7498)"/>
@@ -1221,8 +1221,8 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-normal-bottomleft" id="menuitem-normal-bottomright" transform="matrix(-1,0,0,1,496,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-normal-topleft" id="menuitem-normal-topright" transform="matrix(-1,0,0,1,496,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-normal-left" id="menuitem-normal-right" transform="matrix(-1,0,0,1,496,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-uptoggled" id="menuitem-right-normal" transform="matrix(0,1,-1,0,806,582)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-uptoggled" id="menuitem-left-normal" transform="matrix(0,-1,1,0,-9,970)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="menuitem-right-normal" transform="matrix(0,1,-1,0,806,582)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="menuitem-left-normal" transform="matrix(0,-1,1,0,-9,970)"/>
 <g style="stroke-width:3.5;stroke:none" id="header-separator">
 <rect width="3" x="402.5" y="142.5" height="10" style="fill-opacity:0" id="header-separator0"/>
 <rect width="1" x="402.5" y="142.5" height="10" style="fill-opacity:.137" id="rect5280"/>
