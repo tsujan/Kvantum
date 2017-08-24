@@ -2873,8 +2873,12 @@ void Style::drawPrimitive(PrimitiveElement element,
             return; // not in paneledButtons
           }
         }
-        else if (!widget || !widget->inherits("QDockWidgetTitleButton"))
+        else if ((!widget || !widget->inherits("QDockWidgetTitleButton"))
+                 && (!tb || tb->text().isEmpty())
+                 && (!opt || opt->text.isEmpty()))
+        {
           fspec.expansion = 0; // color button
+        }
       }
 
       // -> CE_MenuScroller and PE_PanelMenu
@@ -10806,7 +10810,8 @@ QSize Style::sizeFromContents(ContentsType type,
         }
 
         /* consider text-icon spacing, shadow and bold text */
-        if (!opt->text.isEmpty() && tialign != Qt::ToolButtonIconOnly)
+        if (!opt->text.isEmpty()
+            && !(tialign == Qt::ToolButtonIconOnly && !opt->icon.isNull()))
         {
           if(!opt->icon.isNull())
           {
@@ -10829,7 +10834,7 @@ QSize Style::sizeFromContents(ContentsType type,
           }
         }
         else if(opt->icon.isNull()) // nothing or only an arrow
-            break;
+          break;
 
         if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
         { // don't let width < height
