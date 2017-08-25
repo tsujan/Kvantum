@@ -26,6 +26,7 @@ class KvantumPlugin : public QStylePlugin {
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "kvantum.json")
   public:
     QStyle *create(const QString &key);
+    QStringList keys() const;
 };
 }
 

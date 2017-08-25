@@ -22,8 +22,16 @@ namespace Kvantum {
 QStyle *KvantumPlugin::create(const QString &key)
 {
   if (key.toLower() == "kvantum")
-    return new Style;
+    return new Style(false);
+  if (key.toLower() == "kvantum-dark")
+    return new Style(true);
 
   return 0;
 }
+
+QStringList KvantumPlugin::keys() const
+{
+  return QStringList() << QStringLiteral( "kvantum" ) << QStringLiteral( "kvantum-dark" );
+}
+
 }

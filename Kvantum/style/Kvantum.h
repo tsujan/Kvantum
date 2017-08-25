@@ -85,14 +85,14 @@ class Style : public QCommonStyle {
   Q_CLASSINFO("X-KDE-CustomElements","true")
 
   public:
-    Style();
+    Style(bool useDark);
     ~Style();
 
     /*
        Set the name of the user specific theme. If there
        is no themename, the default config will be used.
      */
-    void setUserTheme(const QString &themename);
+    void setUserTheme(const QString &basethemename, bool useDark);
     /*
        Use the default config.
      */
