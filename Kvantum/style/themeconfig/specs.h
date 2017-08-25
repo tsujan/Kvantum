@@ -66,8 +66,8 @@ typedef struct {
   /* if tabs have frmae expansion, should only
      the frames of the active tab be expanded? */
   bool no_inactive_tab_expansion;
-  /* raise and group neighbor
-     toolbar buttons */
+  /* raise and group neighbor toolbar buttons
+     (which are the immediate children of their toolbar) */
   bool group_toolbar_buttons;
   /* the space between toolbar items */
   int toolbar_item_spacing;

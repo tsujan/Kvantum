@@ -828,8 +828,12 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
 {
   /* Since it isn't known how deep a widget can be inside its parent toolbar,
      the widget rectangles are examined instead of the parenthood relation. */
-  if (!w || w->window() == w) return nullptr;
-  foreach (QToolBar *tb, w->window()->findChildren<QToolBar*>())
+  if (!w) return nullptr;
+  QWidget *window = w->window();
+  if (window == w) return nullptr;
+  if (isStylableToolbar(window, allowInvisible)) // detached toolbar
+    return w->window();
+  foreach (QToolBar *tb, window->findChildren<QToolBar*>())
   {
     if (isStylableToolbar(tb, allowInvisible)
         && widgetRect(tb).contains(widgetRect(w)))
@@ -3294,11 +3298,31 @@ void Style::drawPrimitive(PrimitiveElement element,
                || qobject_cast<QDockWidget*>(getParent(widget,1)))
       {
         return;
+      }*/
+      if (widget && widget->inherits("QDockWidgetTitleButton"))
+      {
+        if (status.startsWith("focused"))
+        {
+          QColor col = widget->palette().color(QPalette::Active,QPalette::Highlight);
+          col.setAlpha(50);
+          painter->fillRect(r,col);
+        }
+        else if (status.startsWith("pressed"))
+        {
+          QColor col = widget->palette().color(QPalette::Active,QPalette::Highlight);
+          painter->save();
+          QRegion reg(r);
+          QRegion internalReg(r.adjusted(1,1,-1,-1));
+          painter->setClipRegion(reg.subtracted(internalReg));
+          painter->fillRect(r,col);
+          painter->restore();
+        }
+        return;
       }
-      else*/ if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly || tb->text().isEmpty())
-                  && tb->icon().isNull())
-                 || (opt && (opt->toolButtonStyle == Qt::ToolButtonIconOnly || opt->text.isEmpty())
-                     && opt->icon.isNull()))
+      if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly || tb->text().isEmpty())
+           && tb->icon().isNull())
+          || (opt && (opt->toolButtonStyle == Qt::ToolButtonIconOnly || opt->text.isEmpty())
+              && opt->icon.isNull()))
       {
         if ((tb && tb->arrowType() != Qt::NoArrow)
             || (opt && (opt->features & QStyleOptionToolButton::Arrow)
@@ -3378,8 +3402,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             return; // not in paneledButtons
           }
         }
-        else if ((!widget || !widget->inherits("QDockWidgetTitleButton"))
-                 && (!tb || tb->text().isEmpty())
+        else if ((!tb || tb->text().isEmpty())
                  && (!opt || opt->text.isEmpty()))
         {
           fspec.expansion = 0; // color button
@@ -5092,7 +5115,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         /* use the "flat" indicator with flat buttons if it exists */
-        if (status.startsWith("normal") && autoraise
+        if (status.startsWith("normal") && autoraise && !drawRaised
             && themeRndr_ && themeRndr_->isValid())
         {
           QString group1 = "PanelButtonTool";
@@ -5120,12 +5143,8 @@ void Style::drawPrimitive(PrimitiveElement element,
             }
             else if (stb)
             {
-              if ((!tspec_.group_toolbar_buttons
-                   || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
-                  && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
-              {
+              if (enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
                 dspec.element = "flat-"+dspec1.element+"-down";
-              }
             }
             else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
               dspec.element = "flat-"+dspec1.element+"-down";
@@ -8620,6 +8639,17 @@ void Style::drawControl(ControlElement element,
             }
           }
         }
+
+        bool drawRaised = false;
+        if (tspec_.group_toolbar_buttons)
+        {
+          if (QToolBar *toolBar = qobject_cast<QToolBar*>(p))
+          {
+            if (toolBar->orientation() != Qt::Vertical)
+              drawRaised = true;
+          }
+        }
+
         frame_spec fspec = getFrameSpec(group);
         indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
@@ -8698,7 +8728,7 @@ void Style::drawControl(ControlElement element,
 
           /* respect the text color of the parent widget */
           bool noPanel(!paneledButtons.contains(widget));
-          if (autoraise /*|| inPlasma*/ || noPanel)
+          if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
             bool isNormal(status.startsWith("normal"));
             QColor ncol = getFromRGBA(lspec.normalColor);
@@ -8731,25 +8761,21 @@ void Style::drawControl(ControlElement element,
             {
               if (isNormal || noPanel)
               {
-                if (!tspec_.group_toolbar_buttons
-                    || stb != p || qobject_cast<QToolBar*>(stb)->orientation() == Qt::Vertical)
+                const label_spec lspec1 = getLabelSpec("Toolbar");
+                if (themeRndr_ && themeRndr_->isValid()
+                    && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
+                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
                 {
-                  const label_spec lspec1 = getLabelSpec("Toolbar");
-                  if (themeRndr_ && themeRndr_->isValid()
-                      && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
-                      && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
-                  {
-                    dspec.element = "flat-"+dspec.element;
-                  }
-                  if (isNormal)
-                    lspec.normalColor = lspec1.normalColor;
+                  dspec.element = "flat-"+dspec.element;
                 }
+                if (isNormal)
+                  lspec.normalColor = lspec1.normalColor;
               }
             }
             else if (p)
             {
               QColor col;
-              if (!autoraise && noPanel) // an already styled toolbutton
+              if (!(autoraise && !drawRaised) && noPanel) // an already styled toolbutton
                 col = opt->palette.color(QPalette::ButtonText); // p->palette()?
               else
                 col = p->palette().color(p->foregroundRole());
@@ -9329,6 +9355,17 @@ void Style::drawComplexControl(ComplexControl control,
                 group1 = "ToolbarButton";
               }
             }
+
+            bool drawRaised = false;
+            if (tspec_.group_toolbar_buttons)
+            {
+              if (QToolBar *toolBar = qobject_cast<QToolBar*>(p))
+              {
+                if (toolBar->orientation() != Qt::Vertical)
+                  drawRaised = true;
+              }
+            }
+
             indicator_spec dspec = getIndicatorSpec(group1);
             lspec = getLabelSpec(group1);
 
@@ -9341,7 +9378,7 @@ void Style::drawComplexControl(ComplexControl control,
 
             /* use the "flat" indicator with flat buttons if it exists */
             if (aStatus.startsWith("normal")
-                && autoraise
+                && autoraise && !drawRaised
                 && themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
             {
@@ -9363,12 +9400,8 @@ void Style::drawComplexControl(ComplexControl control,
               }
               else if (stb)
               {
-                const QToolBar *toolBar = qobject_cast<QToolBar*>(p);
-                if ((!tspec_.group_toolbar_buttons || (toolBar && toolBar->orientation() == Qt::Vertical))
-                    && enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
-                {
+                if (enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
                   dspec.element = "flat-"+dspec.element;
-                }
               }
               else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
                 dspec.element = "flat-"+dspec.element;
@@ -14277,11 +14310,21 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       QString status("normal");
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
+      {
         status = (option->state & State_Enabled) ?
                    (option->state & State_Sunken) ? "pressed" :
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-"+status,QRect(0,0,s,s)))
+      }
+      bool rendered(false);
+      if (standardIcon == SP_DockWidgetCloseButton
+          || qobject_cast<const QDockWidget*>(widget))
+      {
+        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-close-"+status,QRect(0,0,s,s));
+      }
+      if (!rendered)
+        rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-"+status,QRect(0,0,s,s));
+      if (rendered)
         return QIcon(pm);
       else break;
     }
@@ -14305,11 +14348,18 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       QString status("normal");
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
+      {
         status = (option->state & State_Enabled) ?
                    (option->state & State_Sunken) ? "pressed" :
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-"+status,QRect(0,0,s,s)))
+      }
+      bool rendered(false);
+      if (qobject_cast<const QDockWidget*>(widget))
+        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-restore-"+status,QRect(0,0,s,s));
+      if (!rendered)
+        rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-"+status,QRect(0,0,s,s));
+      if (rendered)
         return QIcon(pm);
       else break;
     }

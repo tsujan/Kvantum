@@ -28,6 +28,7 @@ V0.10.5
  * A key for transparent arrow (tool) buttons.
  * If the widget has no interior, check whether it has a high contrast with its container.
  * Group tabbar scroll buttons together and remove their states.
+ * Optionally separate titlebar buttons for dock widgets.
 
 V0.10.4
 ---------

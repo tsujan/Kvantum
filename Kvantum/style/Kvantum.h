@@ -132,7 +132,7 @@ class Style : public QCommonStyle {
     virtual void drawComplexControl(ComplexControl control,
                                     const QStyleOptionComplex *option,
                                     QPainter *painter,
-                                    const QWidget *widget = 0 ) const;
+                                    const QWidget *widget = 0) const;
     virtual int styleHint(StyleHint hint,
                           const QStyleOption *option = 0,
                           const QWidget *widget = 0,
