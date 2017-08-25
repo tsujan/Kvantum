@@ -50,6 +50,7 @@ opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidem
 respect_DE=true
 scrollbar_in_view=false
 transient_scrollbar=true
+transient_groove=true
 spin_button_width=16
 tree_branch_line=false
 

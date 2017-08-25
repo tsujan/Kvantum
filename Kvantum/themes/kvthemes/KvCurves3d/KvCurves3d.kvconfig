@@ -33,6 +33,7 @@ combo_as_lineedit=true
 merge_menubar_with_toolbar=false
 scroll_arrows=false
 transient_scrollbar=true
+transient_groove=true
 fill_rubberband=false
 small_icon_size=16
 large_icon_size=32

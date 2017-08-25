@@ -17,6 +17,7 @@ scroll_width=12
 scroll_arrows=false
 scroll_min_extent=50
 transient_scrollbar=true
+transient_groove=true
 slider_width=4
 slider_handle_width=22
 slider_handle_length=18

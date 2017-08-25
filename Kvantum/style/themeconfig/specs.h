@@ -174,7 +174,7 @@ typedef struct {
   /* show scrollbars only when needed? */
   bool transient_scrollbar;
   /* should transient scrollbars have
-     translucent grooves behind them? */
+     translucent grooves behind them when needed? */
   bool transient_groove;
 
   int layout_spacing;

@@ -486,10 +486,10 @@ transient_scrollbar               true/false          Should scrollbars appear o
                                                       and they usually take no extra space.
 
 transient_groove                  true/false          Should transient scrollbars have
-                                                      translucent backgrounds? False by
-                                                      default but if true, the base color will
-                                                      be used for painting the background with
-                                                      25% translucency.
+                                                      translucent backgrounds when needed?
+                                                      False by default but if true, the base
+                                                      color willbe used for painting the
+                                                      background with 25% translucency.
 
 tree_branch_line                  true/false          Draw tree branch lines? Ther are not
                                                       drawn by default.

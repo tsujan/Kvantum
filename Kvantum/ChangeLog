@@ -13,7 +13,7 @@ V0.10.5
  * Ability to set active_tab_overlap in terms of app font height.
  * Suppressed GCC7 compilation warnings about "-Wimplicit-fallthrough=". (Red Hat again! Do they think people are stupid?)
  * Added optional toggle and press text colors for menu(-bar) items. The fallback is focus color.
- * Added a key for a 25% translucent background for transient scrollbars.
+ * Added a key for a 25% translucent background for transient scrollbars when needed.
  * Compensated for menu shadows when positioning menus (thanks to Craig Drummond).
  * Give viewitem top and bottom margins (frame width + text margin) to combo popup items and make their background transparent.
  * Made the combo menu (popup as menu) exactly like a menu.

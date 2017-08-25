@@ -10099,7 +10099,8 @@ void Style::drawComplexControl(ComplexControl control,
 
           if (isTransient)
           {
-            if (tspec_.transient_groove)
+            QWidget *gp = getParent(widget,2);
+            if (tspec_.transient_groove && qobject_cast<QAbstractItemView*>(gp))
             {
               /* draw a translucent flat background appropriately
                  (see CE_ScrollBarSlider for the same conditions) */
@@ -10107,7 +10108,7 @@ void Style::drawComplexControl(ComplexControl control,
               if (space > 0) // should be equal to PM_DefaultFrameWidth
               {
                 QRect groove = r;
-                QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(getParent(widget,2));
+                QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(gp);
                 if (sa && (sa->frameStyle() & QFrame::StyledPanel))
                 {
                   if (!rtl

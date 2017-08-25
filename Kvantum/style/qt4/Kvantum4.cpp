@@ -715,9 +715,9 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
 {
   /* Since it isn't known how deep a widget can be inside its parent toolbar,
      the widget rectangles are examined instead of the parenthood relation. */
-  if (!w) return nullptr;
+  if (!w) return NULL;
   QWidget *window = w->window();
-  if (window == w) return nullptr;
+  if (window == w) return NULL;
   if (isStylableToolbar(window, allowInvisible)) // detached toolbar
     return w->window();
   foreach (QToolBar *tb, window->findChildren<QToolBar*>())

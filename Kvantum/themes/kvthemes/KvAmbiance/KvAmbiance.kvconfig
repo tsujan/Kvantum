@@ -50,6 +50,7 @@ layout_margin=4
 respect_DE=true
 scrollbar_in_view=true
 transient_scrollbar=true
+transient_groove=true
 tree_branch_line=true
 
 [GeneralColors]
