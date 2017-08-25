@@ -783,6 +783,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","no_window_pattern");
   r.no_window_pattern = v.toBool();
 
+  v = getValue("General", "dark_titlebar");
+  r.dark_titlebar = v.toBool();
+
   return r;
 }
 
