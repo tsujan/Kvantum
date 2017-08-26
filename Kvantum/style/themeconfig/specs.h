@@ -176,6 +176,8 @@ typedef struct {
   /* should transient scrollbars have
      translucent grooves behind them when needed? */
   bool transient_groove;
+  /* should we request a dark titlebar under Gtk desktops? */
+  bool dark_titlebar;
 
   int layout_spacing;
   int layout_margin;
@@ -184,8 +186,6 @@ typedef struct {
   int large_icon_size;
   int button_icon_size;
   int toolbar_icon_size;
-  /* should we request a dark titlebar under Gtk desktops? */
-  bool dark_titlebar;
 } theme_spec;
 
 /* General colors */
@@ -459,13 +459,13 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.scrollbar_in_view = false;
   tspec.transient_scrollbar = false;
   tspec.transient_groove = false;
+  tspec.dark_titlebar = false;
   tspec.layout_spacing = 2;
   tspec.layout_margin = 4;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;
   tspec.toolbar_icon_size = 22;
-  tspec.dark_titlebar = false;
 }
 
 static inline void default_color_spec(color_spec &cspec) {

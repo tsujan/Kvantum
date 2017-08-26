@@ -90,7 +90,7 @@ class Style : public QCommonStyle {
 
     /*
        Set the name of the user specific theme. If there
-       is no themename, the default config will be used.
+       is no theme name, the default config will be used.
      */
     void setUserTheme(const QString &basethemename, bool useDark);
     /*

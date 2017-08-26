@@ -96,7 +96,7 @@ frame.right=3
 interior=true
 interior.element=button
 indicator.size=10
-text.normal.color=white
+text.normal.color=#ffffffeb
 text.focus.color=#7DEAFF
 text.press.color=white
 text.toggle.color=white
@@ -128,7 +128,7 @@ text.normal.color=black
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=black
+text.normal.color=#000000c8
 text.focus.color=black
 text.bold=true
 
@@ -183,7 +183,7 @@ indicator.size=10
 [ToolboxTab]
 inherits=PanelButtonCommand
 text.normal.color=black
-text.press.color=black
+text.press.color=#000000c8
 text.focus.color=#2B7EA8
 
 [Tab]
@@ -244,7 +244,7 @@ indicator.size=5
 text.margin=0
 interior.element=menubar
 frame.element=menubar
-text.normal.color=white
+text.normal.color=#ffffffeb
 text.focus.color=#41C3FF
 
 [Slider]
@@ -356,7 +356,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame=false
 interior.element=menubar
-text.normal.color=white
+text.normal.color=#ffffffeb
 frame.expansion=0
 
 [MenuBarItem]
@@ -369,7 +369,7 @@ frame.left=2
 frame.right=2
 text.margin.left=5
 text.margin.right=5
-text.normal.color=white
+text.normal.color=#ffffffeb
 text.focus.color=#41C3FF
 frame.expansion=0
 
@@ -379,7 +379,7 @@ frame=false
 interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
-text.normal.color=#C8C8C8
+text.normal.color=#ffffffba
 text.focus.color=white
 text.bold=true
 text.italic=true

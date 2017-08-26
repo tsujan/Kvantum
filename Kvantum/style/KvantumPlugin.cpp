@@ -31,7 +31,6 @@ QStyle *KvantumPlugin::create(const QString &key)
 
 QStringList KvantumPlugin::keys() const
 {
-  return QStringList() << QStringLiteral( "kvantum" ) << QStringLiteral( "kvantum-dark" );
+  return QStringList() << QStringLiteral("kvantum") << QStringLiteral("kvantum-dark");
 }
-
 }

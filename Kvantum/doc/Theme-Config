@@ -553,6 +553,11 @@ fill_rubberband                   true/false          Always fill the rubber-ban
                                                       drop rectangles for movable toolbars
                                                       and dock widgets are hollow.
 
+dark_titlebar                     true/false          Should a dark titlebar be requested
+                                                      under Gtk desktops like Gnome? Although
+                                                      the default is "false", it is good to
+                                                      set this key to "true" for dark themes.
+
                        *********************************
                        *** The GeneralColors Section ***
                        *********************************

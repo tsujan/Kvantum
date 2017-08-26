@@ -55,7 +55,7 @@
 #include <QStatusBar>
 #include <QCheckBox>
 #include <QRadioButton>
-#include <QLibrary>
+#include <QLibrary> // only for setGtkVariant()
 #include <QLayout> // only for forceSizeGrip
 #include <QDesktopWidget> // for positioning menus
 //#include <QDebug>
@@ -80,7 +80,7 @@
 namespace Kvantum
 {
 
-static void setGtkVariant(QWidget *widget, bool dark)
+static void setGtkVariant(QWidget *widget, bool dark) // by Craig Drummond
 {
   if (!widget || QLatin1String("xcb")!=qApp->platformName()) {
     return;
@@ -496,12 +496,18 @@ void Style::setUserTheme(const QString &basethemename, bool useDark)
       && !(basethemename.simplified()).contains (" ")
       /* "#" is reserved by Kvantum Manager as an ending for copied root themes */
       && (!basethemename.contains("#")
-          || (basethemename.count("#") == 1 && basethemename.endsWith("#"))))
+          || (basethemename.length() > 1
+              && basethemename.indexOf("#") == basethemename.size() - 1)))
   {
     QStringList themenames;
     if (useDark)
     {
-      themenames.append(basethemename+"Dark");
+      QString name = basethemename; 
+      if (name.endsWith("#"))
+        name.chop(1);
+      /* give priority to modified themes */
+      themenames.append(name + "Dark#");
+      themenames.append(name + "Dark");
     }
     themenames.append(basethemename);
     foreach (const QString &themename, themenames)
@@ -1199,13 +1205,13 @@ void Style::polish(QWidget *widget)
       }
 
       if (gtkDesktop_)
-      {
-         widget->removeEventFilter(this);
-         widget->installEventFilter(this);
+      { // under gtk DEs, set the titlebar according to dark_titlebar
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
       }
+
       break;
     }
-
     default: break;
   }
 
@@ -1785,6 +1791,8 @@ void Style::unpolish(QWidget *widget)
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
           widget->setAttribute(Qt::WA_TranslucentBackground, false);
         }
+        if (gtkDesktop_)
+          widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_StyledBackground, false); // FIXME is this needed?
         /* this is needed with tranlucent windows when
            the theme is changed from Kvantum and to it again */
@@ -2383,7 +2391,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
     }
   }
-  else if (gtkDesktop_ && (!w->parent() || !qobject_cast<QWidget *>(w->parent()) || qobject_cast<QDialog *>(w) || qobject_cast<QMainWindow *>(w)))
+  else if (gtkDesktop_
+           && (!w->parent() || !qobject_cast<QWidget*>(w->parent())
+               || qobject_cast<QDialog*>(w) || qobject_cast<QMainWindow*>(w)))
   {
     setGtkVariant(w, tspec_.dark_titlebar);
   }
@@ -2580,7 +2590,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
       }
-      else if (gtkDesktop_ && (!w->parent() || !qobject_cast<QWidget *>(w->parent()) || qobject_cast<QDialog *>(w) || qobject_cast<QMainWindow *>(w)))
+      else if (gtkDesktop_
+               && (!w->parent() || !qobject_cast<QWidget *>(w->parent())
+                   || qobject_cast<QDialog *>(w) || qobject_cast<QMainWindow *>(w)))
       {
         setGtkVariant(w, tspec_.dark_titlebar);
       }
@@ -10208,61 +10220,61 @@ void Style::drawComplexControl(ComplexControl control,
 
           if (isTransient)
           {
-            QWidget *gp = getParent(widget,2);
-            if (tspec_.transient_groove && qobject_cast<QAbstractItemView*>(gp))
+            if (tspec_.transient_groove)
             {
-              /* draw a translucent flat background appropriately
-                 (see CE_ScrollBarSlider for the same conditions) */
-              int space = r.width() - tspec_.scroll_width;
-              if (space > 0) // should be equal to PM_DefaultFrameWidth
+              QAbstractItemView *iv = qobject_cast<QAbstractItemView*>(getParent(widget,2));
+              if (iv && iv->viewport() && iv->viewport()->autoFillBackground())
               {
-                QRect groove = r;
-                QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(gp);
-                if (sa && (sa->frameStyle() & QFrame::StyledPanel))
+                /* draw a translucent flat background appropriately
+                   (see CE_ScrollBarSlider for the same conditions) */
+                int space = r.width() - tspec_.scroll_width;
+                if (space > 0) // should be equal to PM_DefaultFrameWidth
                 {
-                  if (!rtl
-                      || horiz) // 90 degrees clockwise + horizontal mirroring
+                  QRect groove = r;
+                  if (iv->frameStyle() & QFrame::StyledPanel)
                   {
-                    groove.adjust(0, space, -space, -space);
-                  }
-                  else
-                    groove.adjust(space, space, 0, -space);
-
-                  /* a 1px line is drawn below */
-                  if (horiz)
-                    o.rect.adjust(0, 1, 0, 0);
-                  else
-                  {
-                    if (rtl)
-                      o.rect.adjust(0, 0, -1, 0);
+                    if (!rtl
+                        || horiz) // 90 degrees clockwise + horizontal mirroring
+                    {
+                      groove.adjust(0, space, -space, -space);
+                    }
                     else
-                      o.rect.adjust(1, 0, 0, 0);
-                  }
-                }
-                else
-                { // without border, make the groove tighter
-                  --space;
-                  if (!rtl || horiz)
-                  {
-                    groove.adjust(space, 0, 0, 0);
+                      groove.adjust(space, space, 0, -space);
+
+                    /* a 1px line is drawn below */
+                    if (horiz)
+                      o.rect.adjust(0, 1, 0, 0);
+                    else
+                    {
+                      if (rtl)
+                        o.rect.adjust(0, 0, -1, 0);
+                      else
+                        o.rect.adjust(1, 0, 0, 0);
+                    }
                   }
                   else
-                    groove.adjust(0, 0, -space, 0);
+                  { // without border, make the groove tighter
+                    --space;
+                    if (!rtl || horiz)
+                      groove.adjust(space, 0, 0, 0);
+                    else
+                      groove.adjust(0, 0, -space, 0);
+                  }
+
+                  QColor col = option->palette.color(QPalette::Base);
+                  col.setAlphaF(0.75);
+                  painter->fillRect(groove, col);
+
+                  painter->save();
+                  col = option->palette.color(QPalette::Text);
+                  col.setAlphaF(0.2);
+                  painter->setPen(col);
+                  if (!rtl || horiz)
+                    painter->drawLine(groove.topLeft(), groove.bottomLeft());
+                  else
+                    painter->drawLine(groove.topRight(), groove.bottomRight());
+                  painter->restore();
                 }
-
-                QColor col = option->palette.color(QPalette::Base);
-                col.setAlphaF(0.75);
-                painter->fillRect(groove, col);
-
-                painter->save();
-                col = option->palette.color(QPalette::Text);
-                col.setAlphaF(0.2);
-                painter->setPen(col);
-                if (!rtl || horiz)
-                  painter->drawLine(groove.topLeft(), groove.bottomLeft());
-                else
-                  painter->drawLine(groove.topRight(), groove.bottomRight());
-                painter->restore();
               }
             }
           }
@@ -15807,4 +15819,5 @@ inline size_spec Style::getSizeSpec(const QString &widgetName) const
 {
   return settings_->getSizeSpec(widgetName);
 }
+
 }

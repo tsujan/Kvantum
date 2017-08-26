@@ -48,6 +48,7 @@ inline_spin_indicators=true
 button_contents_shift=true
 animate_states=true
 combo_menu=true
+dark_titlebar=true
 
 [GeneralColors]
 window.color=#393f3f
