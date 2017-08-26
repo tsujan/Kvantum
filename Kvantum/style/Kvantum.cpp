@@ -1545,9 +1545,16 @@ void Style::polish(QWidget *widget)
       foreach (QLabel *label, widget->findChildren<QLabel*>())
       {
         QPalette lPalette = label->palette();
-        palette.setColor(QPalette::ButtonText, tCol);
-        palette.setColor(QPalette::WindowText, tCol);
-        palette.setColor(QPalette::Text, tCol);
+        palette.setColor(QPalette::Active, QPalette::ButtonText, tCol);
+        palette.setColor(QPalette::Active, QPalette::WindowText, tCol);
+        palette.setColor(QPalette::Active, QPalette::Text, tCol);
+        palette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
+        palette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
+        palette.setColor(QPalette::Inactive, QPalette::Text, tCol);
+        tCol.setAlpha(0.7 * tCol.alpha());
+        palette.setColor(QPalette::Disabled, QPalette::Text,tCol);
+        palette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
+        palette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
         label->setPalette(palette);
       }
     }

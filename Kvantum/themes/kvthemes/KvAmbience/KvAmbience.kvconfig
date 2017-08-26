@@ -93,6 +93,7 @@ tint_on_mouseover=0
 lxqtmainmenu_iconsize=22
 transparent_pcmanfm_view=false
 no_selection_tint=true
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame=true
