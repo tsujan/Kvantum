@@ -43,6 +43,7 @@ layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=3
 animate_states=true
+dark_titlebar=true
 
 [GeneralColors]
 window.color=#393f3f

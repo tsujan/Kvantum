@@ -47,6 +47,7 @@ submenu_overlap=0
 tooltip_delay=-1
 button_contents_shift=true
 animate_states=true
+dark_titlebar=true
 
 [GeneralColors]
 window.color=#3D3D3E

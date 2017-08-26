@@ -27,6 +27,7 @@ large_icon_size=32
 scroll_arrows=true
 small_icon_size=16
 toolbar_icon_size=16
+dark_titlebar=true
 
 [GeneralColors]
 window.color=#3D3D3E
