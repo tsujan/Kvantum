@@ -1282,7 +1282,7 @@ void Style::polish(QWidget *widget)
         palette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
         palette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
         palette.setColor(QPalette::Inactive, QPalette::Text, tCol);
-        tCol.setAlpha(0.7 * tCol.alpha());
+        tCol.setAlpha(0.4 * tCol.alpha());
         palette.setColor(QPalette::Disabled, QPalette::Text,tCol);
         palette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
         palette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
@@ -14026,9 +14026,9 @@ void Style::renderLabel(
       painter->setFont(f);
     }
 
+    QColor normalColor = getFromRGBA(lspec.normalColor);
     if (state != 0 && !(isPlasma_ && tialign == Qt::ToolButtonIconOnly))
     {
-      QColor normalColor = getFromRGBA(lspec.normalColor);
       QColor focusColor = getFromRGBA(lspec.focusColor);
       QColor pressColor = getFromRGBA(lspec.pressColor);
       QColor toggleColor = getFromRGBA(lspec.toggleColor);
@@ -14120,6 +14120,22 @@ void Style::renderLabel(
         painter->restore();
         return;
       }
+    }
+    /* if this is a dark-and-light theme, the disabled color may not be suitable */
+    else if (state == 0
+             && enoughContrast(normalColor, option->palette.color(QPalette::Text)))
+    {
+      painter->save();
+      normalColor.setAlpha(0.4 * normalColor.alpha());
+      painter->setPen(normalColor);
+      painter->drawText(rtext,talign,text);
+      painter->restore();
+      if (lspec.boldFont)
+        painter->restore();
+      if (lspec.italicFont)
+        painter->restore();
+      painter->restore();
+      return;
     }
 
     QCommonStyle::drawItemText(painter,

@@ -345,7 +345,7 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-text.normal.color=black
+text.normal.color=white
 text.focus.color=white
 text.margin.top=0
 text.margin.bottom=0
@@ -374,7 +374,7 @@ frame.left=2
 frame.right=2
 text.margin.left=1
 text.margin.right=4
-text.margin.top=0
+text.margin.top=2
 text.normal.color=white
 text.focus.color=#7dd9ff
 frame.expansion=0
@@ -402,7 +402,6 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-text.normal.color=black
 frame.expansion=0
 
 [GroupBox]
