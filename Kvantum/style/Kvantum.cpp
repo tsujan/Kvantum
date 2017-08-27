@@ -8928,14 +8928,14 @@ void Style::drawControl(ControlElement element,
                   if (!qobject_cast<QMenu*>(p))
                     lspec.pressColor = getName(col);
                   else if (transMenuTitle)
-                    lspec.pressColor = getLabelSpec("Menu").normalColor;
+                    lspec.pressColor = getLabelSpec("MenuItem").normalColor;
                 }
               }
             }
           }
           /* KDE menu titles */
           else if (qobject_cast<QMenu*>(p) && transMenuTitle)
-            lspec.pressColor = getLabelSpec("Menu").normalColor;
+            lspec.pressColor = getLabelSpec("MenuItem").normalColor;
 
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
           if (tialign != Qt::ToolButtonIconOnly)
