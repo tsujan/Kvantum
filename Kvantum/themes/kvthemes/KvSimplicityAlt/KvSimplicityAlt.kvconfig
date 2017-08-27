@@ -1,7 +1,7 @@
 [%General]
 author=Tsu Jan
-comment=A light theme with an emphasis on elegant simplicity and support for translucency
-x11drag=true
+comment=Like KvSimplicity but with dark toolbar and toolbar buttons.\n\nIt looks best with an appropriate titlebar.
+x11drag=all
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
@@ -42,6 +42,22 @@ combo_as_lineedit=true
 combo_menu=true
 inline_spin_indicators=true
 animate_states=true
+button_contents_shift=true
+groupbox_top_label=false
+joined_inactive_tabs=true
+layout_margin=4
+layout_spacing=2
+no_window_pattern=false
+respect_DE=true
+scrollable_menu=false
+scrollbar_in_view=false
+spin_button_width=16
+submenu_delay=250
+submenu_overlap=0
+tooltip_delay=-1
+tree_branch_line=false
+hide_combo_checkboxes=false
+reduce_window_opacity=0
 
 [GeneralColors]
 window.color=#F0F0F0
@@ -75,6 +91,14 @@ kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
+disabled_icon_opacity=100
+lxqtmainmenu_iconsize=22
+no_selection_tint=true
+normal_default_pushbutton=false
+single_top_toolbar=true
+tint_on_mouseover=0
+transparent_pcmanfm_view=false
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame=true
@@ -102,6 +126,15 @@ frame.expansion=10
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
+
+[ToolbarButton]
+interior.element=tbutton
+frame.element=tbutton
+text.normal.color=white
+text.focus.color=#9be2ffff
+text.press.color=white
+text.toggle.color=white
+indicator.element=tarrow
 
 [Dock]
 inherits=PanelButtonCommand
@@ -224,7 +257,7 @@ indicator.size=5
 text.margin=0
 interior.element=menubar
 frame.element=menubar
-text.normal.color=black
+text.normal.color=white
 text.focus.color=#0052aa
 frame.top=0
 frame.bottom=5
@@ -326,8 +359,9 @@ frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
-frame.element=none
-interior.element=none
+frame.element=menubar
+interior.element=menubar
+text.normal.color=white
 frame.expansion=0
 
 [MenuBarItem]
@@ -341,8 +375,8 @@ frame.right=2
 text.margin.left=1
 text.margin.right=4
 text.margin.top=0
-text.normal.color=black
-text.focus.color=#0052aa
+text.normal.color=white
+text.focus.color=#7dd9ff
 frame.expansion=0
 
 [TitleBar]

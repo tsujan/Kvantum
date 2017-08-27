@@ -14551,14 +14551,14 @@ static inline uint qt_intensity(uint r, uint g, uint b)
 
 QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
                                    const QPixmap &pixmap,
-                                   const QStyleOption *opt) const
+                                   const QStyleOption *option) const
 {
   switch (iconMode) {
     case QIcon::Disabled: {
       QImage im = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
 
       // Create a colortable based on the background (black -> bg -> white)
-      QColor bg = opt->palette.color(QPalette::Disabled, QPalette::Window);
+      QColor bg = option->palette.color(QPalette::Disabled, QPalette::Window);
       int red = bg.red();
       int green = bg.green();
       int blue = bg.blue();
@@ -14608,7 +14608,7 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
     case QIcon::Selected: {
       if (hspec_.no_selection_tint) break;
       QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
-      QColor color = opt->palette.color(QPalette::Normal, QPalette::Highlight);
+      QColor color = option->palette.color(QPalette::Normal, QPalette::Highlight);
       color.setAlphaF(qreal(0.2)); // Qt sets it to 0.3
       QPainter painter(&img);
       painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
