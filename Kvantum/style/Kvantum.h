@@ -88,16 +88,6 @@ class Style : public QCommonStyle {
     Style(bool useDark);
     ~Style();
 
-    /*
-       Set the name of the user specific theme. If there
-       is no theme name, the default config will be used.
-     */
-    void setUserTheme(const QString &basethemename, bool useDark);
-    /*
-       Use the default config.
-     */
-    void setBuiltinDefaultTheme();
-
     void polish(QWidget *widget);
     void polish(QApplication *app);
     void polish(QPalette &palette);
@@ -183,6 +173,14 @@ class Style : public QCommonStyle {
                        const QWidget *widget = 0) const;
 
   private:
+    /* Set up a theme with the given name. If there is no name,
+       the default theme will be used. If the config or SVG file of
+       the theme is missing, that of the default theme will be used. */
+    void setTheme(const QString &baseThemeName, bool useDark);
+
+    /* Use the default config. */
+    void setBuiltinDefaultTheme();
+
     /* Set theme dependencies. */
     void setupThemeDeps();
 
