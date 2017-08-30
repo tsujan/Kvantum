@@ -136,34 +136,6 @@ class Style : public QCommonStyle {
                                         const QPixmap &pixmap,
                                         const QStyleOption *option) const;
 
-    /* A solution for Qt5's problem with translucent windows.*/
-    void setSurfaceFormat(QWidget *w) const;
-    void setSurfaceFormat(const QWidget *w) const
-    {
-      setSurfaceFormat(const_cast<QWidget*>(w));
-    }
-
-    /* A workaround for Qt5's QMenu window type bug. */
-    void setMenuType(const QWidget *widget) const;
-
-    /* A method for forcing (push and tool) button text colors. */
-    void forceButtonTextColor(QWidget *widget, QColor col) const;
-    void forceButtonTextColor(const QWidget *widget, QColor col) const
-    {
-      forceButtonTextColor(const_cast<QWidget*>(widget), col);
-    }
-
-    bool hasParent(const QWidget *widget, const char *className) const
-    {
-      if (!widget) return false;
-      while ((widget = widget->parentWidget()))
-      {
-        if (widget->inherits(className))
-          return true;
-      }
-      return false;
-    }
-
     enum CustomElements {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };
@@ -330,6 +302,35 @@ class Style : public QCommonStyle {
 
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;
+
+    /* A solution for Qt5's problem with translucent windows.*/
+    void setSurfaceFormat(QWidget *w) const;
+    void setSurfaceFormat(const QWidget *w) const
+    {
+      setSurfaceFormat(const_cast<QWidget*>(w));
+    }
+
+    /* A workaround for Qt5's QMenu window type bug. */
+    void setMenuType(const QWidget *widget) const;
+
+    /* A method for forcing (push and tool) button text colors. */
+    void forceButtonTextColor(QWidget *widget, QColor col) const;
+    void forceButtonTextColor(const QWidget *widget, QColor col) const
+    {
+      forceButtonTextColor(const_cast<QWidget*>(widget), col);
+    }
+
+    /* Used only with combo menus. */
+    bool hasParent(const QWidget *widget, const char *className) const
+    {
+      if (!widget) return false;
+      while ((widget = widget->parentWidget()))
+      {
+        if (widget->inherits(className))
+          return true;
+      }
+      return false;
+    }
 
 #if QT_VERSION >= 0x050500
     /* For transient scrollbars: */

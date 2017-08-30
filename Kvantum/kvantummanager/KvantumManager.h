@@ -49,8 +49,12 @@ private slots:
 private:
     void closeEvent (QCloseEvent *event);
     void notWritable (const QString &path);
-    bool isThemeDir (const QString &folderPath);
-    QString userThemeDir (const QString &themeName);
+    void canNotBeRemoved (const QString &path, bool isDir);
+    bool isThemeDir (const QString &folderPath) const;
+    bool fileBelongsToThemeDir (const QString &fileBaseName, const QString &folderPath) const;
+    QString userThemeDir (const QString &themeName) const;
+    QString rootThemeDir (const QString &themeName) const;
+    bool isLightWithDarkDir (const QString &folderPath) const;
     void updateThemeList (bool updateAppThemes = true);
     void showAnimated (QWidget *w, int duration);
     void defaultThemeButtons();

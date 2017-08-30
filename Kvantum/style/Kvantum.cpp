@@ -474,6 +474,25 @@ void Style::setBuiltinDefaultTheme()
   defaultRndr_->load(QString(":/Kvantum/default.svg"));
 }
 
+static inline bool isThemeDir(const QString &path, const QString &themeName)
+{
+  if (themeName.isEmpty()) return false;
+  if (path.endsWith("/Kvantum"))
+  {
+    if (QFile::exists (path + QString("/%1/%1.kvconfig").arg(themeName))
+        || QFile::exists (path + QString("/%1/%1.svg").arg(themeName)))
+    {
+      return true;
+    }
+  }
+  else if (QFile::exists (path + QString("/%1/Kvantum/%1.kvconfig").arg(themeName))
+           || QFile::exists (path + QString("/%1/Kvantum/%1.svg").arg(themeName)))
+  {
+    return true;
+  }
+  return false;
+}
+
 void Style::setTheme(const QString &baseThemeName, bool useDark)
 {
   if (themeSettings_)
@@ -512,7 +531,12 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
     themeMames.append(baseThemeName);
     foreach (const QString &themeName, themeMames)
     {
-      QString userConfig, userSvg, temp;
+      QString userConfig, userSvg, temp, lightName;
+
+      if (themeName.length() > 4 && themeName.endsWith("Dark"))
+      { // dark theme inside light theme folder
+        lightName = themeName.left(themeName.length() - 4);
+      }
 
       temp = QString("%1/Kvantum/%2/%2.kvconfig")
              .arg(xdg_config_home).arg(themeName);
@@ -523,10 +547,30 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
       if (QFile::exists(temp))
         userSvg = temp;
 
+      if (userConfig.isEmpty() && userSvg.isEmpty()
+          /* dark themes should be inside valid light directories */
+          && isThemeDir(QString("%1/Kvantum").arg(xdg_config_home), lightName))
+      {
+        temp = QString("%1/Kvantum/%2/%3.kvconfig")
+               .arg(xdg_config_home).arg(lightName).arg(themeName);
+        if (QFile::exists(temp))
+          userConfig = temp;
+        temp = QString("%1/Kvantum/%2/%3.svg")
+               .arg(xdg_config_home).arg(lightName).arg(themeName);
+        if (QFile::exists(temp))
+          userSvg = temp;
+      }
+
+      if (themeName.endsWith("#"))
+      {
+        if (themeName.length() > 5 && themeName.endsWith("Dark#"))
+        { // root dark theme inside root light theme folder
+          lightName = themeName.left(themeName.length() - 5);
+        }
+      }
       /* search in the alternative theme installation paths
          only if there's no such theme in the config folder */
-      if (!themeName.contains("#") // copied themes don't come here
-          && userConfig.isEmpty() && userSvg.isEmpty())
+      else if (userConfig.isEmpty() && userSvg.isEmpty()) // copied themes don't come here
       {
         QString homeDir = QDir::homePath();
         temp = QString("%1/.themes/%2/Kvantum/%2.kvconfig")
@@ -538,6 +582,19 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
         if (QFile::exists(temp))
           userSvg = temp;
 
+        if (userConfig.isEmpty() && userSvg.isEmpty()
+            && isThemeDir(QString("%1/.themes").arg(homeDir), lightName))
+        {
+          temp = QString("%1/.themes/%2/Kvantum/%3.kvconfig")
+                 .arg(homeDir).arg(lightName).arg(themeName);
+          if (QFile::exists(temp))
+            userConfig = temp;
+          temp = QString("%1/.themes/%2/Kvantum/%3.svg")
+                 .arg(homeDir).arg(lightName).arg(themeName);
+          if (QFile::exists(temp))
+            userSvg = temp;
+        }
+
         if (userConfig.isEmpty() && userSvg.isEmpty())
         {
           temp = QString("%1/.local/share/themes/%2/Kvantum/%2.kvconfig")
@@ -548,6 +605,19 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
                  .arg(homeDir).arg(themeName);
           if (QFile::exists(temp))
             userSvg = temp;
+
+          if (userConfig.isEmpty() && userSvg.isEmpty()
+              && isThemeDir(QString("%1/.local/share/themes").arg(homeDir), lightName))
+          {
+            temp = QString("%1/.local/share/themes/%2/Kvantum/%3.kvconfig")
+                   .arg(homeDir).arg(lightName).arg(themeName);
+            if (QFile::exists(temp))
+              userConfig = temp;
+            temp = QString("%1/.local/share/themes/%2/Kvantum/%3.svg")
+                   .arg(homeDir).arg(lightName).arg(themeName);
+            if (QFile::exists(temp))
+              userSvg = temp;
+          }
         }
 
         /* this can't be about a copied theme anymore */
@@ -573,13 +643,22 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
         themeSettings_ = new ThemeConfig(userConfig);
       }
       else if (userSvg.isEmpty() // otherwise it's a user theme without config file
-               && !themeName.contains("#")) // root theme names can't have the ending "#"
+               && !themeName.endsWith("#")) // root theme names can't have the ending "#"
       { // root theme
         temp = QString(DATADIR)
                + QString("/Kvantum/%1/%1.kvconfig").arg(themeName);
         if (QFile::exists(temp))
           themeSettings_ = new ThemeConfig(temp);
-        else
+        else if (!isThemeDir(QString(DATADIR) + "/Kvantum", themeName) // svg shouldn't be found
+                 && isThemeDir(QString(DATADIR) + "/Kvantum", lightName))
+        {
+          temp = QString(DATADIR)
+                 + QString("/Kvantum/%1/%2.kvconfig").arg(lightName).arg(themeName);
+          if (QFile::exists(temp))
+            themeSettings_ = new ThemeConfig(temp);
+        }
+
+        if (!QFile::exists(temp))
         {
           temp = QString(DATADIR)
                  + QString("/Kvantum/%1/%1.svg").arg(themeName);
@@ -589,6 +668,21 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
                    + QString("/themes/%1/Kvantum/%1.kvconfig").arg(themeName);
             if (QFile::exists(temp))
               themeSettings_ = new ThemeConfig(temp);
+          }
+
+          if (!QFile::exists(temp)
+              && !isThemeDir(QString(DATADIR) + "/themes", themeName)
+              && isThemeDir(QString(DATADIR) + "/themes", lightName))
+          {
+            temp = QString(DATADIR)
+                   + QString("/Kvantum/%1/%2.svg").arg(lightName).arg(themeName);
+            if (!QFile::exists(temp))
+            {
+              temp = QString(DATADIR)
+                     + QString("/themes/%1/Kvantum/%2.kvconfig").arg(lightName).arg(themeName);
+              if (QFile::exists(temp))
+                themeSettings_ = new ThemeConfig(temp);
+            }
           }
         }
       }
@@ -602,7 +696,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
       }
       else
       {
-        if (!themeName.contains("#"))
+        if (!themeName.endsWith("#"))
         {
           if (userConfig.isEmpty()) // otherwise it's a user theme without SVG image
           { // root theme
@@ -613,7 +707,19 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
               themeRndr_ = new QSvgRenderer();
               themeRndr_->load(temp);
             }
-            else
+            else if (!isThemeDir(QString(DATADIR) + "/Kvantum", themeName) // config shouldn't be found
+                     && isThemeDir(QString(DATADIR) + "/Kvantum", lightName))
+            {
+              temp = QString(DATADIR)
+                     + QString("/Kvantum/%1/%2.svg").arg(lightName).arg(themeName);
+              if (QFile::exists(temp))
+              {
+                themeRndr_ = new QSvgRenderer();
+                themeRndr_->load(temp);
+              }
+            }
+
+            if (!QFile::exists(temp))
             {
               temp = QString(DATADIR)
                      + QString("/Kvantum/%1/%1.kvconfig").arg(themeName);
@@ -625,6 +731,24 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
                 {
                   themeRndr_ = new QSvgRenderer();
                   themeRndr_->load(temp);
+                }
+              }
+
+              if (!QFile::exists(temp)
+                  && !isThemeDir(QString(DATADIR) + "/themes", themeName)
+                  && isThemeDir(QString(DATADIR) + "/themes", lightName))
+              {
+                temp = QString(DATADIR)
+                       + QString("/Kvantum/%1/%2.kvconfig").arg(lightName).arg(themeName);
+                if (!QFile::exists(temp))
+                {
+                  temp = QString(DATADIR)
+                         + QString("/themes/%1/Kvantum/%2.svg").arg(lightName).arg(themeName);
+                  if (QFile::exists(temp))
+                  {
+                    themeRndr_ = new QSvgRenderer();
+                    themeRndr_->load(temp);
+                  }
                 }
               }
             }
@@ -642,7 +766,18 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
               themeRndr_ = new QSvgRenderer();
               themeRndr_->load(temp);
             }
-            else
+            else if (isThemeDir(QString(DATADIR) + "/Kvantum", lightName))
+            {
+              temp = QString(DATADIR)
+                     + QString("/Kvantum/%1/%2.svg").arg(lightName).arg(_themeName);
+              if (QFile::exists(temp))
+              {
+                themeRndr_ = new QSvgRenderer();
+                themeRndr_->load(temp);
+              }
+            }
+
+            if (!QFile::exists(temp))
             {
               temp = QString(DATADIR)
                      + QString("/Kvantum/%1/%1.kvconfig").arg(_themeName);
@@ -654,6 +789,24 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
                 {
                   themeRndr_ = new QSvgRenderer();
                   themeRndr_->load(temp);
+                }
+              }
+
+              if (!QFile::exists(temp)
+                  && !isThemeDir(QString(DATADIR) + "/themes", _themeName)
+                  && isThemeDir(QString(DATADIR) + "/themes", lightName))
+              {
+                temp = QString(DATADIR)
+                       + QString("/Kvantum/%1/%2.kvconfig").arg(lightName).arg(_themeName);
+                if (!QFile::exists(temp))
+                {
+                  temp = QString(DATADIR)
+                         + QString("/themes/%1/Kvantum/%2.svg").arg(lightName).arg(_themeName);
+                  if (QFile::exists(temp))
+                  {
+                    themeRndr_ = new QSvgRenderer();
+                    themeRndr_->load(temp);
+                  }
                 }
               }
             }
@@ -1551,7 +1704,7 @@ void Style::polish(QWidget *widget)
         palette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
         palette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
         palette.setColor(QPalette::Inactive, QPalette::Text, tCol);
-        tCol.setAlpha(0.4 * tCol.alpha());
+        tCol.setAlpha(102); // 0.4 * tCol.alpha()
         palette.setColor(QPalette::Disabled, QPalette::Text,tCol);
         palette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
         palette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
@@ -15700,7 +15853,7 @@ void Style::renderLabel(
              && enoughContrast(normalColor, option->palette.color(QPalette::Text)))
     {
       painter->save();
-      normalColor.setAlpha(0.4 * normalColor.alpha());
+      normalColor.setAlpha(102); // 0.4 * normalColor.alpha()
       painter->setPen(normalColor);
       painter->drawText(rtext,talign,text);
       painter->restore();

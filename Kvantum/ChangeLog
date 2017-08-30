@@ -30,6 +30,7 @@ V0.10.5
  * Group tabbar scroll buttons together and remove their states.
  * Optionally separate titlebar buttons for dock widgets.
  * Make titlebars match the theme according to its lightness or darkness under GTK DEs like Gnome (by Craig Drummond). Now, the suffix "Dark" can have a practical meaning in the theme name.
+ * Accept dark themes inside light theme directories.
 
 V0.10.4
 ---------

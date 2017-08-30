@@ -126,24 +126,6 @@ class Style : public QCommonStyle {
                                         const QPixmap &pixmap,
                                         const QStyleOption *option) const;
 
-    /* A method for forcing (push and tool) button text colors. */
-    void forceButtonTextColor(QWidget *widget, QColor col) const;
-    void forceButtonTextColor(const QWidget *widget, QColor col) const
-    {
-      forceButtonTextColor(const_cast<QWidget*>(widget), col);
-    }
-
-    bool hasParent(const QWidget *widget, const char *className) const
-    {
-      if (!widget) return false;
-      while ((widget = widget->parentWidget()))
-      {
-        if (widget->inherits(className))
-          return true;
-      }
-      return false;
-    }
-
     enum CustomElements {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };
@@ -311,6 +293,24 @@ class Style : public QCommonStyle {
 
     /* Consider monochrome icons that reverse color when selected. */
     QIcon::Mode getIconMode(int state, label_spec lspec) const;
+
+    /* A method for forcing (push and tool) button text colors. */
+    void forceButtonTextColor(QWidget *widget, QColor col) const;
+    void forceButtonTextColor(const QWidget *widget, QColor col) const
+    {
+      forceButtonTextColor(const_cast<QWidget*>(widget), col);
+    }
+
+    bool hasParent(const QWidget *widget, const char *className) const
+    {
+      if (!widget) return false;
+      while ((widget = widget->parentWidget()))
+      {
+        if (widget->inherits(className))
+          return true;
+      }
+      return false;
+    }
 
   private slots:
     /* Called on timer timeout to advance busy progress bars. */

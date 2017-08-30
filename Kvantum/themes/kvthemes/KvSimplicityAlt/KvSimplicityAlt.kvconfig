@@ -161,7 +161,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-indicator.size=9
+indicator.size=10
 text.normal.color=black
 
 [RadioButton]
