@@ -2244,14 +2244,24 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
 {
   int res = tbAlone;
 
-  if (!tb || !toolBar)
+  if (!tb || !toolBar
+      /* Although the toolbar extension button can be on the immediate right of
+         the last toolbutton, there's a 1px gap between them. I see this as a
+         Qt bug but because of it, the extension button should be excluded here. */
+      || tb->objectName() == "qt_toolbar_ext_button")
+  {
     return res;
+  }
 
   if (toolBar->orientation() == Qt::Horizontal)
   {
     QRect g = tb->geometry();
     const QToolButton *left = qobject_cast<const QToolButton*>(toolBar->childAt (g.x()-1, g.y()));
+    if (left && left->objectName() == "qt_toolbar_ext_button")
+      left = NULL;
     const QToolButton *right =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x()+g.width()+1, g.y()));
+    if (right && right->objectName() == "qt_toolbar_ext_button")
+      right = nullptr;
 
     /* only direct children should be considered */
     if (left && left->parentWidget() != toolBar)
@@ -13439,17 +13449,19 @@ void Style::renderFrame(QPainter *painter,
   QString element1(realElement);
   QString element0(realElement); // used just for checking
   element0 = "expand-"+element0;
-  if (fspec.hasCapsule && fspec.capsuleH != 2)
+  bool hasHorizCapsule(fspec.hasCapsule && fspec.capsuleH != 2);
+  if (hasHorizCapsule)
     grouped = true;
   int e = grouped ? h : qMin(h,w);
   bool drawExpanded = false;
   /* still round the corners if the "expand-" element is found */
-  if (fspec.expansion > 0 &&
-      (e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                && (themeRndr_->elementExists(element0.remove("-inactive"))
-                                    // fall back to the normal state
-                                    || (!state.isEmpty()
-                                        && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
+  if (fspec.expansion > 0
+      && ((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : w >= h))
+          || (themeRndr_ && themeRndr_->isValid()
+              && (themeRndr_->elementExists(element0.remove("-inactive"))
+                  // fall back to the normal state
+                  || (!state.isEmpty()
+                      && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
   {
     drawExpanded = true;
     fspec.left = fspec.leftExpanded;
@@ -13941,7 +13953,8 @@ bool Style::renderInterior(QPainter *painter,
   int w = bounds.width(); int h = bounds.height();
   if (!isLibreoffice_ && fspec.expansion > 0 && !ispec.element.isEmpty())
   {
-    if (fspec.hasCapsule && fspec.capsuleH != 2)
+    bool hasHorizCapsule(fspec.hasCapsule && fspec.capsuleH != 2);
+    if (hasHorizCapsule)
       grouped = true;
     int e = grouped ? h : qMin(h,w);
     QString frameElement(fspec.expandedElement);
@@ -13951,11 +13964,12 @@ bool Style::renderInterior(QPainter *painter,
     /* the interior used for partial frame expansion has the frame name */
     element0 = element0.remove("-inactive").replace(ispec.element, frameElement);
     element0 = "expand-"+element0;
-    if ((e <= fspec.expansion || (themeRndr_ && themeRndr_->isValid()
-                                  && (themeRndr_->elementExists(element0)
-                                      || themeRndr_->elementExists(element0.replace("-toggled","-normal")
-                                                                           .replace("-pressed","-normal")
-                                                                           .replace("-focused","-normal")))))
+    if (((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : w >= h))
+         || (themeRndr_ && themeRndr_->isValid()
+             && (themeRndr_->elementExists(element0)
+                 || themeRndr_->elementExists(element0.replace("-toggled","-normal")
+                                                      .replace("-pressed","-normal")
+                                                      .replace("-focused","-normal")))))
         && (!fspec.hasCapsule || fspec.capsuleV == 2)
         /* there's no right/left expanded element */
         && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))

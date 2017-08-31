@@ -13,7 +13,7 @@ slider_handle_width=20
 slider_handle_length=15
 center_toolbar_handle=true
 slim_toolbars=true
-x11drag=true
+x11drag=all
 textless_progressbar=false
 progressbar_thickness=40
 check_size=16
@@ -30,17 +30,32 @@ fill_rubberband=false
 small_icon_size=16
 large_icon_size=32
 button_icon_size=16
-combo_as_lineedit=false
+combo_as_lineedit=true
 scroll_arrows=false
 scroll_min_extent=50
 toolbar_icon_size=16
 button_contents_shift=true
 groupbox_top_label=false
-inline_spin_indicators=false
+inline_spin_indicators=true
 joined_inactive_tabs=true
 layout_spacing=2
 submenu_overlap=0
 tooltip_delay=-1
+alt_mnemonic=true
+animate_states=true
+combo_menu=true
+hide_combo_checkboxes=false
+layout_margin=4
+no_window_pattern=false
+reduce_window_opacity=0
+respect_DE=true
+scrollable_menu=false
+scrollbar_in_view=false
+spin_button_width=16
+submenu_delay=250
+transient_groove=false
+transient_scrollbar=true
+tree_branch_line=false
 
 [GeneralColors]
 window.color=#D2D2D2
@@ -64,7 +79,7 @@ link.visited.color=#644A9B
 progress.indicator.text.color=white
 
 [Hacks]
-transparent_dolphin_view=true
+transparent_dolphin_view=false
 transparent_ktitle_label=true
 blur_translucent=true
 transparent_menutitle=false
@@ -79,21 +94,27 @@ lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
 single_top_toolbar=false
 tint_on_mouseover=0
-transparent_pcmanfm_view=true
+transparent_pcmanfm_view=false
+no_selection_tint=false
 
 [PanelButtonCommand]
 frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+frame.expanded.top=1
+frame.expanded.bottom=1
+frame.expanded.left=1
+frame.expanded.right=1
 text.margin.top=2
 text.margin.bottom=2
-text.margin.left=2
-text.margin.right=2
+text.margin.left=6
+text.margin.right=6
 text.press.color=black
 text.toggle.color=white
-frame.expansion=8
+frame.expansion=4font
 indicator.size=10
+min_height=1.8font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -104,6 +125,10 @@ frame.expansion=0
 
 [LineEdit]
 inherits=PanelButtonCommand
+frame.expanded.top=2
+frame.expanded.bottom=2
+frame.expanded.left=2
+frame.expanded.right=2
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -134,6 +159,8 @@ frame.right=5
 text.press.color=black
 text.toggle.color=black
 frame.expansion=0
+min_width=4font
+min_height=0
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -152,8 +179,10 @@ indicator.element=arrow
 
 [HeaderSection]
 inherits=PanelButtonCommand
+interior.element=button
 frame.element=button
 frame.expansion=0
+min_height=0
 
 [GroupBox]
 interior=false
@@ -208,7 +237,7 @@ frame.left=4
 frame.right=4
 frame.top=4
 frame.bottom=4
-frame.expansion=3.4font
+frame.expansion=3.5font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -220,10 +249,23 @@ frame.top=4
 frame.bottom=4
 
 [ItemView]
+inherits=PanelButtonCommand
+frame.element=itemview
+interior.element=itemview
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
+text.margin=1
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=2
+text.margin.right=2
 text.normal.color=black
 text.focus.color=black
 text.press.color=white
 text.toggle.color=white
+min_height=0
 
 [Menu]
 inherits=PanelButtonCommand
@@ -243,6 +285,7 @@ text.margin.bottom=1
 text.margin.left=3
 text.margin.right=3
 frame.expansion=0
+min_height=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -255,6 +298,7 @@ frame.right=2
 text.margin.left=4
 text.margin.right=4
 frame.expansion=0
+min_height=0
 
 [TitleBar]
 inherits=PanelButtonCommand
