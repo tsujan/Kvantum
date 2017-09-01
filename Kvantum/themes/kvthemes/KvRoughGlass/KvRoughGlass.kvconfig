@@ -287,6 +287,15 @@ text.margin.right=3
 frame.expansion=0
 min_height=0
 
+[MenuBar]
+inherits=PanelButtonCommand
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
+frame.element=menuitem
+interior.element=menuitem
+
 [MenuBarItem]
 inherits=PanelButtonCommand
 text.margin.top=2

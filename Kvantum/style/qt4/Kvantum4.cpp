@@ -13456,7 +13456,7 @@ void Style::renderFrame(QPainter *painter,
   bool drawExpanded = false;
   /* still round the corners if the "expand-" element is found */
   if (fspec.expansion > 0
-      && ((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : w >= h))
+      && ((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : (!grouped || w >= h)))
           || (themeRndr_ && themeRndr_->isValid()
               && (themeRndr_->elementExists(element0.remove("-inactive"))
                   // fall back to the normal state
@@ -13964,7 +13964,7 @@ bool Style::renderInterior(QPainter *painter,
     /* the interior used for partial frame expansion has the frame name */
     element0 = element0.remove("-inactive").replace(ispec.element, frameElement);
     element0 = "expand-"+element0;
-    if (((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : w >= h))
+    if (((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : (!grouped || w >= h)))
          || (themeRndr_ && themeRndr_->isValid()
              && (themeRndr_->elementExists(element0)
                  || themeRndr_->elementExists(element0.replace("-toggled","-normal")
