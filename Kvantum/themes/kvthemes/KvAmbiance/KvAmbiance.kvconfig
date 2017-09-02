@@ -44,6 +44,7 @@ submenu_overlap=0
 animate_states=true
 button_contents_shift=false
 combo_menu=false
+combo_focus_rect=true
 groupbox_top_label=false
 joined_inactive_tabs=true
 layout_margin=4
