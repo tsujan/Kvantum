@@ -3495,6 +3495,12 @@ void Style::drawPrimitive(PrimitiveElement element,
           sunkenButton_ = const_cast<QWidget*>(widget);
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
+        /* the extension button arrow has no state */
+        if (widget->objectName() == "qt_toolbar_ext_button"
+            || widget->objectName() == "qt_menubar_ext_button")
+        {
+          break;
+        }
       }
       interior_spec ispec;
       QString group = "PanelButtonTool";
@@ -3698,12 +3704,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           fspec.expansion = 0; // color button
         }
-      }
-
-      // -> CE_MenuScroller and PE_PanelMenu
-      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
-      {
-        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
       }
 
       // -> CE_ToolButtonLabel
@@ -5656,6 +5656,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         dir = "-right-";
 
       indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      bool painterSaved(false);
 
       /* menuitems may have their own right/left arrows */
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
@@ -5665,20 +5666,18 @@ void Style::drawPrimitive(PrimitiveElement element,
         dspec.size = dspec1.size;
         /* the arrow rectangle is set at CE_MenuItem appropriately */
         if (renderElement(painter, dspec1.element+dir+aStatus,option->rect))
-        {
           break;
-        }
       }
-
       /* take care of toolbar/menubar arrows in dark-and-light themes */
-      if (themeRndr_ && themeRndr_->isValid())
+      else if (themeRndr_ && themeRndr_->isValid())
       {
-        if (painter->pen().color() == QColor(Qt::white)) // -> SP_ToolBarHorizontalExtensionButton
+        if (painter->opacity() == 0) // -> SP_ToolBarHorizontalExtensionButton
         {
+          painter->save();
+          painterSaved = true;
+          painter->setOpacity(1.0);
           if (themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
-          {
             dspec.element = "flat-"+dspec.element;
-          }
         }
         else // only theoretically
         {
@@ -5701,6 +5700,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (widget && !widget->isActiveWindow())
         aStatus.append("-inactive");
       renderIndicator(painter,option->rect,fspec,dspec,dspec.element+dir+aStatus,option->direction);
+      if (painterSaved)
+        painter->restore();
 
       break;
     }
@@ -6554,7 +6555,11 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_MenuScroller : {
-      drawPrimitive(PE_PanelButtonTool,option,painter,widget);
+      if (enoughContrast(QApplication::palette().color(QPalette::WindowText),
+          getFromRGBA(getLabelSpec("MenuItem").normalColor)))
+      {
+        painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+      }
       if (option->state & State_DownArrow)
         drawPrimitive(PE_IndicatorArrowDown,option,painter,widget);
       else
@@ -14510,8 +14515,8 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      /* If this is a dark-and-light theme, we set the pen color of
-         the painter to white as a sign to use at PE_IndicatorArrowRight. */
+      /* If this is a dark-and-light theme, we make the painter
+         transparent as a sign to use at PE_IndicatorArrowRight. */
       if (themeRndr_ && themeRndr_->isValid())
       {
         /* for toolbar, widget is NULL but option isn't (Qt -> qtoolbarextension.cpp);
@@ -14526,7 +14531,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
         else if (widget)
           col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
         if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor)))
-          painter.setPen(QColor(Qt::white));
+          painter.setOpacity(0.0);
       }
 
       QStyleOption opt;
@@ -14552,7 +14557,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
           && enoughContrast(getFromRGBA(getLabelSpec("Toolbar").normalColor),
                             getFromRGBA(cspec_.windowTextColor)))
       {
-        painter.setPen(QColor(Qt::white));
+        painter.setOpacity(0.0);
       }
 
       QStyleOption opt;
