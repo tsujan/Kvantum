@@ -250,6 +250,7 @@ text.bold=true
 text.normal.color=#00000096
 text.focus.color=#5796e8
 text.toggle.color=black
+indicator.element=harrow
 frame.expansion=0
 
 [SizeGrip]
