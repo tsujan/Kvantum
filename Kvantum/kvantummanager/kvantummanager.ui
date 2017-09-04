@@ -155,7 +155,7 @@ Kvantum can use in addition to its own themes.</string>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="comboBox">
+         <widget class="KvManager::ComboBox" name="comboBox">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>

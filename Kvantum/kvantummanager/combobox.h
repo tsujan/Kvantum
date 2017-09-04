@@ -2,6 +2,7 @@
 #define COMBOBOX_H
 
 #include <QComboBox>
+#include <QCompleter>
 
 namespace KvManager {
 
@@ -11,6 +12,11 @@ class ComboBox : public QComboBox
 public:
     ComboBox (QWidget *parent = NULL) : QComboBox (parent)
     {
+        setEditable (true);
+        completer()->setCompletionMode (QCompleter::PopupCompletion);
+#if QT_VERSION >= 0x050200
+        completer()->setFilterMode (Qt::MatchContains);
+#endif
         connect (this, SIGNAL (currentIndexChanged (const QString&)),
                  this, SLOT (textChangedSlot (const QString&)));
     }
@@ -25,8 +31,25 @@ private slots:
         oldText_ = newText;
     }
 
+protected:
+    void focusOutEvent (QFocusEvent *e)
+    {
+        /* return to the current index on focusing out
+           if no item starts with the current text */
+#if QT_VERSION >= 0x050200
+        int indx = findText (currentText(), Qt::MatchContains);
+#else
+        int indx = findText (currentText(), Qt::MatchStartsWith);
+#endif
+        if (indx == -1)
+            setCurrentIndex (currentIndex());
+        else // needed because of the popup
+            setCurrentIndex (indx);
+        QComboBox::focusOutEvent (e);
+    }
+
 private:
-    QString oldText_;  
+    QString oldText_;
 };
 
 }
