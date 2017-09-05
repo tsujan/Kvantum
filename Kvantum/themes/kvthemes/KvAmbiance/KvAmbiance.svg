@@ -813,7 +813,7 @@
 <path style="font-family:Sans;fill:#000;text-align:start;line-height:normal;fill-opacity:.463;color:#000;text-indent:0;text-transform:none" id="path5063" d="m 21.2542,48.7516 0,32.5 1.2493,0 0,-32.5 z "/>
 </g>
 <g style="stroke:none;fill-rule:evenodd">
-<path style="fill:url(#linearGradient5005)" id="tbutton-normal" d="m 218.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
+<path style="fill:url(#linearGradient5005)" id="tbutton-focused" d="m 218.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
 <rect width="5" x="10" y="0" height="5" style="stroke-linejoin:round;stroke-linecap:round;stroke-width:3" id="expand-tbutton-normal"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-down-normal" transform="translate(188,-16)"/>
@@ -1167,51 +1167,51 @@
 <rect width="14.999739" x="340.5" y="600.5" rx="2.7691824" height="14.999739" ry="2.7691824" style="fill:url(#linearGradient6078);stroke:#dc6434" id="checkbox-focused"/>
 </g>
 <g style="stroke:none">
-<g id="tbutton-normal-right">
+<g id="tbutton-focused-right">
 <path style="fill:url(#linearGradient5002);fill-rule:evenodd" id="path4957" d="m 251,43.4998 0,-32.4998 5,0 0,32.5 z "/>
 <path style="font-family:Sans;fill:#fff;text-align:start;line-height:normal;fill-opacity:.078;color:#000;text-indent:0;text-transform:none" id="path4959" d="m 256.9999,11 0,32.5 -1,0 0,-32.5 z "/>
 <path style="opacity:.4;fill:url(#linearGradient5276);fill-rule:evenodd" id="path5260" d="m 251,43.4998 0,-32.4998 5,0 0,32.5 z "/>
 </g>
-<g id="tbutton-normal-left">
+<g id="tbutton-focused-left">
 <path style="fill:url(#linearGradient4991);fill-rule:evenodd" id="path4939" d="m 218.5,43.4998 0,-32.4998 -5,0 0,32.5 z "/>
 <path style="font-family:Sans;text-align:start;line-height:normal;fill-opacity:.392;color:#000;text-indent:0;text-transform:none" id="path4941" d="m 212.5,11 0,32.5 1,0 0,-32.5 z "/>
 <path style="opacity:.1;fill:url(#linearGradient5355);fill-rule:evenodd" id="path5316" d="m 218.5,43.4998 0,-32.4998 -5,0 0,32.5 z "/>
 </g>
-<g style="fill:url(#linearGradient5686)" id="tbutton-focused-top" transform="matrix(0,0.8,-1,0,349.75158,-12.000024)">
+<g style="fill:url(#linearGradient5686)" id="tbutton-normal-top" transform="matrix(0,0.8,-1,0,349.75158,-12.000024)">
 <path style="fill:url(#linearGradient5684);fill-rule:evenodd" id="path5623" d="m 28.75,81.2514 0,-32.4998 -6.25,0 0,32.5 z "/>
 <path style="font-family:Sans;fill:#000;text-align:start;line-height:normal;fill-opacity:.627;color:#000;text-indent:0;text-transform:none" id="path5625" d="m 21.2542,48.7516 0,32.5 1.25,0 0,-32.5 z "/>
 </g>
-<path style="fill:url(#linearGradient5688);fill-rule:evenodd" id="tbutton-focused" d="m 268.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
-<g style="fill:url(#linearGradient5692)" id="tbutton-focused-bottom" transform="matrix(0,-0.8,-1,0,349.75178,66.499976)">
+<path style="fill:url(#linearGradient5688);fill-rule:evenodd" id="tbutton-normal" d="m 268.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
+<g style="fill:url(#linearGradient5692)" id="tbutton-normal-bottom" transform="matrix(0,-0.8,-1,0,349.75178,66.499976)">
 <path style="fill:url(#linearGradient5690);fill-rule:evenodd" id="path5631" d="m 28.75,81.2514 0,-32.4998 -6.2458,0 0,32.5 z "/>
 <path style="font-family:Sans;fill:#fff;text-align:start;line-height:normal;fill-opacity:.157;color:#000;text-indent:0;text-transform:none" id="path5634" d="m 21.2542,48.7516 0,32.5 1.25,0 0,-32.5 z "/>
 </g>
-<g id="tbutton-focused-right">
+<g id="tbutton-normal-right">
 <path style="fill:url(#linearGradient5694);fill-rule:evenodd" id="path5638" d="m 301,43.4998 0,-32.4998 5,0 0,32.5 z "/>
 <path style="font-family:Sans;fill:#fff;text-align:start;line-height:normal;fill-opacity:.078;color:#000;text-indent:0;text-transform:none" id="path5640" d="m 306.9999,11 0,32.5 -1,0 0,-32.5 z "/>
 </g>
-<g id="tbutton-focused-bottomright">
+<g id="tbutton-normal-bottomright">
 <path style="fill:url(#linearGradient5704);fill-rule:evenodd" id="path5654" d="m 301,48.5 c 3.5,0 5,-1.5 4.99994,-5.00006 l -4.9998,0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5706);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5656" d="M 301.00018,49.499935 C 305,49.5 307,47.5 307.00014,43.499976 l -1,0 C 306,47 304.5,48.5 301.00022,48.500107 Z"/>
 </g>
-<g id="tbutton-focused-left">
+<g id="tbutton-normal-left">
 <path style="fill:url(#linearGradient5710);fill-rule:evenodd" id="path5662" d="m 268.5,43.4998 0,-32.4998 -5,0 0,32.5 z "/>
 <path style="font-family:Sans;text-align:start;line-height:normal;fill-opacity:.392;color:#000;text-indent:0;text-transform:none" id="path5664" d="m 262.5,11 0,32.5 1,0 0,-32.5 z "/>
 </g>
-<g id="tbutton-focused-topleft">
+<g id="tbutton-normal-topleft">
 <path style="fill:url(#linearGradient5714);fill-rule:evenodd" id="path5670" d="m 268.5,6 c -3.25693,0 -5,1.2735 -5,5 l 5,-0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5716);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5672" d="m 268.5,5 c -4.005,-2.4e-05 -5.99998,2 -5.99996,5.99996 h 1 c -2e-05,-3.732 1.75016,-4.99998 4.99996,-4.9966 z "/>
 </g>
-<g id="tbutton-focused-bottomleft">
+<g id="tbutton-normal-bottomleft">
 <path style="fill:url(#linearGradient5720);fill-rule:evenodd" id="path5678" d="m 268.5,48.5 c -3.5,0 -5,-1.5 -4.99998,-5.00008 l 5.0002,.0001 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5722);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5680" d="M 268.50018,49.499956 C 264.5,49.5 262.5,47.5 262.50022,43.499997 l 1,0 C 263.5,47 265,48.5 268.50018,48.496601 Z"/>
 </g>
-<g id="tbutton-normal-bottom">
+<g id="tbutton-focused-bottom">
 <path style="fill:url(#linearGradient5015);fill-rule:evenodd" id="path4980" d="m 218.5004,43.5 32.4998,0 0,5 -32.5,0 z "/>
 <path style="font-family:Sans;fill:#fff;text-align:start;line-height:normal;fill-opacity:.157;color:#000;text-indent:0;text-transform:none" id="path4982" d="m 251.0002,49.4966 -32.5,0 0,-1 32.5,0 z "/>
 <path style="opacity:.5;fill:url(#linearGradient5361);fill-rule:evenodd" id="path5359" d="m 218.5004,43.5 32.4998,0 0,4.9966 -32.5,0 z "/>
 </g>
-<g id="tbutton-normal-bottomright">
+<g id="tbutton-focused-bottomright">
 <path style="fill:url(#linearGradient5019);fill-rule:evenodd" id="path4987" d="M 251.00022,48.500107 C 254.5,48.5 256,47 256,43.5 l -4.99982,-2.4e-5 z"/>
 <path style="font-family:Sans;fill:url(#linearGradient5256);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path4989" d="M 251.00018,49.499935 C 255,49.5 257,47.5 257.00014,43.499976 l -1,0 C 256,47 254.5,48.5 251.00022,48.500107 Z"/>
 <g style="fill-rule:evenodd">
@@ -1219,7 +1219,7 @@
 <path style="opacity:.5;fill:url(#linearGradient5390)" id="path5371" d="m 251.0002,48.4996 c 3.54643,5.4e-05 4.99952,-1.47524 4.99964,-4.99964 h -4.99964 z "/>
 </g>
 </g>
-<g id="tbutton-normal-bottomleft">
+<g id="tbutton-focused-bottomleft">
 <path style="fill:url(#linearGradient5011);fill-rule:evenodd" id="path4973" d="m 218.5,48.5 c -3.5,0 -5,-1.5 -5,-5 l 5.0002,-0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5013);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path4975" d="M 218.50018,49.499956 C 214.5,49.5 212.5,47.5 212.50022,43.499997 l 1,0 C 213.5,47 215,48.5 218.50018,48.496601 Z"/>
 <g style="fill-rule:evenodd">
@@ -1227,12 +1227,12 @@
 <path style="opacity:.5;fill:url(#linearGradient5392)" id="path5382" d="m 218.5002,48.5 c -3.5405,3.7e-05 -5.00019,-1.45331 -5.00001,-5.00001 h 5.00001 z "/>
 </g>
 </g>
-<g id="tbutton-normal-top" transform="matrix(1,0,0,1.0005628,0,-0.00619134)">
+<g id="tbutton-focused-top" transform="matrix(1,0,0,1.0005628,0,-0.00619134)">
 <path style="fill:url(#linearGradient4998);fill-rule:evenodd" id="path4951" d="m 218.5002,11 32.4998,0 0,-4.9972 -32.5,0 z "/>
 <path style="font-family:Sans;text-align:start;line-height:normal;fill-opacity:.627;color:#000;text-indent:0;text-transform:none" id="path4953" d="m 251,5.0034 -32.5,0 0,.9994 32.5,0 z "/>
 <path style="opacity:.15;fill:url(#linearGradient5367);fill-rule:evenodd" id="path5364" d="m 218.5002,11 32.4998,0 0,-4.9972 -32.5,0 z "/>
 </g>
-<g id="tbutton-normal-topleft">
+<g id="tbutton-focused-topleft">
 <path style="fill:url(#linearGradient4993);fill-rule:evenodd" id="path4945" d="m 218.5,6 c -3.21073,0 -5,1.34532 -5,5 l 5,-0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient4996);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path4947" d="m 218.5,5 c -3.99998,-2e-07 -5.99998,2 -5.99996,5.99996 h 1 c -2e-05,-3.66571 1.79485,-4.99996 4.99996,-4.9966 Z "/>
 <g style="fill-rule:evenodd">
@@ -1240,7 +1240,7 @@
 <path style="opacity:.15;fill:url(#linearGradient5396)" id="path5377" d="m 218.5,6 c -3.20701,2e-05 -4.99998,1.33268 -4.99998,4.99998 h 4.99998 z "/>
 </g>
 </g>
-<g id="tbutton-normal-topright">
+<g id="tbutton-focused-topright">
 <path style="fill:url(#linearGradient5007);fill-rule:evenodd" id="path4965" d="m 251,6 c 3.5,0 5,1.5 5,5 l -5,-0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5009);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path4967" d="M 250.99998,5.0000202 C 255,5 257,7 256.99994,10.999979 l -1,0 C 256,7.4999999 254.5,5.9999998 251.00002,5.9998478 Z"/>
 <g style="fill-rule:evenodd">
@@ -1408,7 +1408,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-default-topleft" id="button-default-bottomleft" transform="matrix(0,-1,1,0,195.00006,459.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-default-left" id="button-default-right" transform="matrix(-1,0,0,1,654.50008,2.0424944e-4)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-default-topleft" id="button-default-bottomright" transform="matrix(-1,0,0,-1,654.50008,264.50026)"/>
-<g style="stroke:none" id="tbutton-focused-topright" transform="matrix(-1,0,0,1,569.48901,1.995621e-6)">
+<g style="stroke:none" id="tbutton-normal-topright" transform="matrix(-1,0,0,1,569.48901,1.995621e-6)">
 <path style="fill:url(#linearGradient5373);fill-rule:evenodd" id="path5363" d="m 268.5,6 c -3.25693,0 -5,1.5 -5,5 l 5,-0 z "/>
 <path style="font-family:Sans;fill:url(#linearGradient5377);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5365" d="m 268.5,5 c -4.005,-2.4e-05 -5.99998,2 -5.99996,5.99996 h 1 c 0,-3.49998 1.75016,-4.99998 4.99996,-4.9966 z "/>
 </g>
