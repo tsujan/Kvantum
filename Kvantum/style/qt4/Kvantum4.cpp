@@ -2589,6 +2589,16 @@ void Style::drawComboLineEdit(const QStyleOption *option,
       fspec.right = qMin(fspec.right,3);
       fspec.top = qMin(fspec.top,3);
       fspec.bottom = qMin(fspec.bottom,3);
+
+      if (!hasExpanddedBorder(fspec))
+        fspec.expansion = 0;
+      else
+      {
+        fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+        fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+        fspec.topExpanded = qMin(fspec.topExpanded,3);
+        fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+      }
     }
     else
     {
@@ -2596,6 +2606,18 @@ void Style::drawComboLineEdit(const QStyleOption *option,
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
+        fspec.top = qMin(fspec.top,3);
+        fspec.bottom = qMin(fspec.bottom,3);
+
+        if (!hasExpanddedBorder(fspec))
+          fspec.expansion = 0;
+        else
+        {
+          fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+          fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+          fspec.topExpanded = qMin(fspec.topExpanded,3);
+          fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+        }
       }
       if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
       {
@@ -3087,7 +3109,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
-        //fspec.expansion = 0;
+
+        if (!hasExpanddedBorder(fspec))
+          fspec.expansion = 0;
+        else
+        {
+          fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+          fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+          fspec.topExpanded = qMin(fspec.topExpanded,3);
+          fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+        }
 
         //lspec.left = qMin(lspec.left,2);
         //lspec.right = qMin(lspec.right,2);
@@ -3146,12 +3177,33 @@ void Style::drawPrimitive(PrimitiveElement element,
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
+
+                if (!hasExpanddedBorder(fspec))
+                  fspec.expansion = 0;
+                else
+                {
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+                }
               }
               if (tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
               {
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
-                //fspec.expansion = 0;
+
+                if (!hasExpanddedBorder(fspec))
+                  fspec.expansion = 0;
+                else
+                {
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+                }
               }
             }
           }
@@ -3164,7 +3216,18 @@ void Style::drawPrimitive(PrimitiveElement element,
             {
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
-              //fspec.expansion = 0;
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              if (!hasExpanddedBorder(fspec))
+                fspec.expansion = 0;
+              else
+              {
+                fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                fspec.topExpanded = qMin(fspec.topExpanded,3);
+                fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+              }
             }
           }
         }
@@ -3948,6 +4011,16 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
+
+          if (!hasExpanddedBorder(fspec))
+            fspec.expansion = 0;
+          else
+          {
+            fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+            fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+            fspec.topExpanded = qMin(fspec.topExpanded,3);
+            fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+          }
         }
         else
         {
@@ -3955,6 +4028,18 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+
+            if (!hasExpanddedBorder(fspec))
+              fspec.expansion = 0;
+            else
+            {
+              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+              fspec.topExpanded = qMin(fspec.topExpanded,3);
+              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+            }
           }
           if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
           {
@@ -3994,16 +4079,23 @@ void Style::drawPrimitive(PrimitiveElement element,
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && sb->width() < widget->width() + 2*tspec_.spin_button_width
-                                                   + getFrameSpec("IndicatorSpinBox").right))
+                                                   + getFrameSpec("IndicatorSpinBox").right)
+              || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
-          }
-          if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-          {
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
-            //fspec.expansion = 0;
+
+            if (!hasExpanddedBorder(fspec))
+              fspec.expansion = 0;
+            else
+            {
+              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+              fspec.topExpanded = qMin(fspec.topExpanded,3);
+              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+            }
           }
         }
       }
@@ -7714,8 +7806,17 @@ void Style::drawControl(ControlElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          //fspec.expansion = 0;
           lspec.tispace = qMin(lspec.tispace,3);
+
+          if (!hasExpanddedBorder(fspec))
+            fspec.expansion = 0;
+          else
+          {
+            fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+            fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+            fspec.topExpanded = qMin(fspec.topExpanded,3);
+            fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+          }
         }
 
         if (!opt->text.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
@@ -7740,12 +7841,36 @@ void Style::drawControl(ControlElement element,
             lspec.left = lspec.right = 0;
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+
+            if (!hasExpanddedBorder(fspec))
+              fspec.expansion = 0;
+            else
+            {
+              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+              fspec.topExpanded = qMin(fspec.topExpanded,3);
+              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+            }
           }
           if (pb->height() < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
           {
             lspec.top = lspec.bottom = 0;
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
+
+            if (!hasExpanddedBorder(fspec))
+              fspec.expansion = 0;
+            else
+            {
+              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+              fspec.topExpanded = qMin(fspec.topExpanded,3);
+              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+            }
           }
         }
 
@@ -8088,8 +8213,8 @@ void Style::drawControl(ControlElement element,
               {
                 QSize availableSize = opt->rect.size()
                                       - (tialign == Qt::ToolButtonTextUnderIcon
-                                           ? QSize(opt->iconSize.height(),0)
-                                           : QSize(0,0))
+                                           ? QSize(0, opt->iconSize.height())
+                                           : QSize(opt->iconSize.width(), 0))
                                       - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                                               fspec.top+fspec.bottom+lspec.top+lspec.bottom);
                 if (tialign == Qt::ToolButtonTextBesideIcon)
@@ -9002,7 +9127,16 @@ void Style::drawComplexControl(ComplexControl control,
                   fspec.right = qMin(fspec.right,3);
                   fspec.top = qMin(fspec.top,3);
                   fspec.bottom = qMin(fspec.bottom,3);
-                  //fspec.expansion = 0;
+
+                  if (!hasExpanddedBorder(fspec))
+                    fspec.expansion = 0;
+                  else
+                  {
+                    fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                    fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                    fspec.topExpanded = qMin(fspec.topExpanded,3);
+                    fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+                  }
 
                   lspec.left = qMin(lspec.left,2);
                   lspec.right = qMin(lspec.right,2);
@@ -13533,12 +13667,13 @@ void Style::renderFrame(QPainter *painter,
         Left = qMin(fspec.left,w/2);
       }
     }
-    element0 = "border-"+realElement;
-    if (drawBorder && themeRndr_ && themeRndr_->isValid()
-        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
+    if (drawBorder
+        && (element.endsWith("-default")
+              ? (themeRndr_ && themeRndr_->isValid()
+                 && themeRndr_->elementExists("border-"+realElement+"-top"))
+              : hasExpanddedBorder(fspec)))
     {
-      element1 = element0;
+      element1 = "border-"+realElement;
       if (isInactive)
         element1 = element1 + "-inactive";
     }
@@ -14389,6 +14524,27 @@ QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
     }
     return bounds.adjusted(left,top,-right,-bottom);
   }
+}
+
+bool Style::hasExpanddedBorder(const frame_spec fspec) const
+{
+  if (fspec.expansion > 0
+      && themeRndr_ && themeRndr_->isValid())
+  {
+    QString el = fspec.expandedElement;
+    if (el.isEmpty())
+      el = fspec.element;
+    if (hasExpanddedBorder_.contains(el))
+      return hasExpanddedBorder_.value(el);
+    if (themeRndr_->elementExists("border-" + el + "-normal-top"))
+    {
+      hasExpanddedBorder_.insert(el,true);
+      return true;
+    }
+    else
+      hasExpanddedBorder_.insert(el,false);
+  }
+  return false;
 }
 
 inline frame_spec Style::getFrameSpec(const QString &widgetName) const

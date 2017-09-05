@@ -283,6 +283,9 @@ class Style : public QCommonStyle {
       return interiorRect(bounds,f).adjusted(t.left,t.top,-t.right,-t.bottom);
     }
 
+    /* Can an expanded border be drawn for this frame? */
+    bool hasExpanddedBorder(const frame_spec fspec) const;
+
     /* Get menu margins, including its shadow. */
     int getMenuMargin(bool horiz) const;
     /* Get pure shadow dimensions of menus/tooltips. */
@@ -383,6 +386,10 @@ class Style : public QCommonStyle {
     color_spec cspec_;
     /* All general info about tabs */
     bool hasActiveIndicator_, joinedActiveTab_, joinedActiveFloatingTab_, hasFloatingTabs_;
+
+    /* Used for remembering whether there are expanded border elements
+       (because their existence may be checked on several occasions). */
+    mutable QHash<QString,bool> hasExpanddedBorder_; 
 
     /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice_, isPlasma_;
