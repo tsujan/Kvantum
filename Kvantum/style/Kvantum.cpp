@@ -3216,7 +3216,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
       fspec.top = qMin(fspec.top,3);
       fspec.bottom = qMin(fspec.bottom,3);
 
-      if (!hasExpanddedBorder(fspec))
+      if (!hasExpandedBorder(fspec))
         fspec.expansion = 0;
       else
       {
@@ -3235,7 +3235,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
 
-        if (!hasExpanddedBorder(fspec))
+        if (!hasExpandedBorder(fspec))
           fspec.expansion = 0;
         else
         {
@@ -3736,7 +3736,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
 
-        if (!hasExpanddedBorder(fspec))
+        if (!hasExpandedBorder(fspec))
           fspec.expansion = 0;
         else
         {
@@ -3776,88 +3776,6 @@ void Style::drawPrimitive(PrimitiveElement element,
 
         bool rtl(option->direction == Qt::RightToLeft);
 
-        // lack of space  (-> CE_ToolButtonLabel)
-        if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
-        {
-          if (tb->popupMode() != QToolButton::MenuButtonPopup)
-          {
-            if ((tb->popupMode() == QToolButton::InstantPopup
-                 || tb->popupMode() == QToolButton::DelayedPopup)
-                && (opt->features & QStyleOptionToolButton::HasMenu))
-            {
-              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
-              {
-                if (rtl)
-                  fspec.right = qMin(fspec.right,3);
-                else
-                  fspec.left = qMin(fspec.left,3);
-                //fspec.expansion = 0;
-                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
-                lspec.tispace=0;
-              }
-            }
-            else
-            {
-              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right)
-              {
-                fspec.left = qMin(fspec.left,3);
-                fspec.right = qMin(fspec.right,3);
-                fspec.top = qMin(fspec.top,3);
-                fspec.bottom = qMin(fspec.bottom,3);
-
-                if (!hasExpanddedBorder(fspec))
-                  fspec.expansion = 0;
-                else
-                {
-                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-                  fspec.topExpanded = qMin(fspec.topExpanded,3);
-                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-                }
-              }
-              if (tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
-              {
-                fspec.top = qMin(fspec.top,3);
-                fspec.bottom = qMin(fspec.bottom,3);
-
-                if (!hasExpanddedBorder(fspec))
-                  fspec.expansion = 0;
-                else
-                {
-                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-                  fspec.topExpanded = qMin(fspec.topExpanded,3);
-                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-                }
-              }
-            }
-          }
-          else
-          {
-            const frame_spec fspec1 = getFrameSpec("DropDownButton");
-            if (tb->width() < opt->iconSize.width()+fspec.left
-                              +(rtl ? fspec1.left : fspec1.right)
-                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
-            {
-              fspec.left = qMin(fspec.left,3);
-              fspec.right = qMin(fspec.right,3);
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
-
-              if (!hasExpanddedBorder(fspec))
-                fspec.expansion = 0;
-              else
-              {
-                fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-                fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-                fspec.topExpanded = qMin(fspec.topExpanded,3);
-                fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-              }
-            }
-          }
-        }
-
         /*bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;*/
         if (tspec_.group_toolbar_buttons)
@@ -3891,6 +3809,72 @@ void Style::drawPrimitive(PrimitiveElement element,
               m.rotate(-90);
               painter->setTransform(m, true);
             }*/
+          }
+        }
+
+        // lack of space  (-> CE_ToolButtonLabel)
+        if (!fspec.hasCapsule
+            && opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+        {
+          if (tb->popupMode() != QToolButton::MenuButtonPopup)
+          {
+            if ((tb->popupMode() == QToolButton::InstantPopup
+                 || tb->popupMode() == QToolButton::DelayedPopup)
+                && (opt->features & QStyleOptionToolButton::HasMenu))
+            {
+              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+              {
+                if (rtl)
+                  fspec.right = qMin(fspec.right,3);
+                else
+                  fspec.left = qMin(fspec.left,3);
+                //fspec.expansion = 0;
+                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                lspec.tispace=0;
+              }
+            }
+            else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                     || tb->height() < opt->iconSize.height()+fspec.top+fspec.bottom)
+            {
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              if (!hasExpandedBorder(fspec))
+                fspec.expansion = 0;
+              else
+              {
+                fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                fspec.topExpanded = qMin(fspec.topExpanded,3);
+                fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+              }
+            }
+          }
+          else
+          {
+            const frame_spec fspec1 = getFrameSpec("DropDownButton");
+            if (tb->width() < opt->iconSize.width()+fspec.left
+                              +(rtl ? fspec1.left : fspec1.right)
+                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+            {
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+
+              if (!hasExpandedBorder(fspec))
+                fspec.expansion = 0;
+              else
+              {
+                fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                fspec.topExpanded = qMin(fspec.topExpanded,3);
+                fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+              }
+            }
           }
         }
 
@@ -4751,7 +4735,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
 
-          if (!hasExpanddedBorder(fspec))
+          if (!hasExpandedBorder(fspec))
             fspec.expansion = 0;
           else
           {
@@ -4770,7 +4754,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
 
-            if (!hasExpanddedBorder(fspec))
+            if (!hasExpandedBorder(fspec))
               fspec.expansion = 0;
             else
             {
@@ -4826,7 +4810,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
 
-            if (!hasExpanddedBorder(fspec))
+            if (!hasExpandedBorder(fspec))
               fspec.expansion = 0;
             else
             {
@@ -8793,7 +8777,7 @@ void Style::drawControl(ControlElement element,
           fspec.bottom = qMin(fspec.bottom,3);
           lspec.tispace = qMin(lspec.tispace,3);
 
-          if (!hasExpanddedBorder(fspec))
+          if (!hasExpandedBorder(fspec))
             fspec.expansion = 0;
           else
           {
@@ -8819,35 +8803,27 @@ void Style::drawControl(ControlElement element,
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
             fnt.setBold(true);
           QSize txtSize = textSize(fnt,opt->text,false);
+          bool enoughSpace(true);
           if (pb->width() < txtSize.width()
                             +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
                             +lspec.left+lspec.right+fspec.left+fspec.right)
           {
             lspec.left = lspec.right = 0;
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
-
-            if (!hasExpanddedBorder(fspec))
-              fspec.expansion = 0;
-            else
-            {
-              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-              fspec.topExpanded = qMin(fspec.topExpanded,3);
-              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-            }
+            enoughSpace = false;
           }
           if (pb->height() < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
           {
             lspec.top = lspec.bottom = 0;
+            enoughSpace = false;
+          }
+          if (!enoughSpace)
+          {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
 
-            if (!hasExpanddedBorder(fspec))
+            if (!hasExpandedBorder(fspec))
               fspec.expansion = 0;
             else
             {
@@ -10197,7 +10173,7 @@ void Style::drawComplexControl(ComplexControl control,
                   fspec.top = qMin(fspec.top,3);
                   fspec.bottom = qMin(fspec.bottom,3);
 
-                  if (!hasExpanddedBorder(fspec))
+                  if (!hasExpandedBorder(fspec))
                     fspec.expansion = 0;
                   else
                   {
@@ -15243,13 +15219,12 @@ void Style::renderFrame(QPainter *painter,
         Left = qMin(fspec.left,w/2);
       }
     }
-    if (drawBorder
-        && (element.endsWith("-default")
-              ? (themeRndr_ && themeRndr_->isValid()
-                 && themeRndr_->elementExists("border-"+realElement+"-top"))
-              : hasExpanddedBorder(fspec)))
+    element0 = "border-"+realElement;
+    if (drawBorder && themeRndr_ && themeRndr_->isValid()
+        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
+            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
     {
-      element1 = "border-"+realElement;
+      element1 = element0;
       if (isInactive)
         element1 = element1 + "-inactive";
     }
@@ -16118,7 +16093,7 @@ QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
   }
 }
 
-bool Style::hasExpanddedBorder(const frame_spec fspec) const
+bool Style::hasExpandedBorder(const frame_spec fspec) const
 {
   if (fspec.expansion > 0
       && themeRndr_ && themeRndr_->isValid())
@@ -16126,15 +16101,8 @@ bool Style::hasExpanddedBorder(const frame_spec fspec) const
     QString el = fspec.expandedElement;
     if (el.isEmpty())
       el = fspec.element;
-    if (hasExpanddedBorder_.contains(el))
-      return hasExpanddedBorder_.value(el);
     if (themeRndr_->elementExists("border-" + el + "-normal-top"))
-    {
-      hasExpanddedBorder_.insert(el,true);
       return true;
-    }
-    else
-      hasExpanddedBorder_.insert(el,false);
   }
   return false;
 }

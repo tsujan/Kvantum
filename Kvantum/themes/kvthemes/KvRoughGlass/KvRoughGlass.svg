@@ -810,7 +810,7 @@
 <rect width="13" x="132" y="453.5" rx="2" height="13" ry="2" style="fill:url(#linearGradient6659);fill-rule:evenodd;stroke:none" id="checkbox-focused0"/>
 <rect width="12" x="132.49979" y="454" rx="1.5" ry="1.5" height="12" style="opacity:.3;fill:none;stroke:url(#linearGradient5583)" id="rect5576"/>
 </g>
-<g style="stroke-width:.819;color:#000">
+<g style="color:#000;stroke-width:.819">
 <g id="radio-normal" transform="matrix(0.98202307,0,0,0.99851377,4.3345997,0.61308569)">
 <path style="fill:url(#linearGradient6534);stroke:none" id="radio-normal0" d="m 61.7759,404.9888 a 7.6373,7.5 0 1,1 -15.2746,0 7.6373,7.5 0 1,1 15.2746,0 z "/>
 <path style="opacity:.35;fill:none;stroke:url(#linearGradient5650);stroke-width:1.009" id="path5638" d="m 61.2714,404.9887 a 7.1328,6.99616 0 1,1 -14.2656,0 7.1328,6.99616 0 1,1 14.2656,0 z "/>
@@ -1309,10 +1309,6 @@
 </g>
 </g>
 <circle cx="419" cy="29" style="stroke-width:3.464" r="0" id="path2747"/>
-<g id="button-default-indicator" transform="translate(-4,-87)">
-<rect width="10" x="414" y="132" height="10" style="opacity:0;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:round;stroke-width:3" id="rect1979"/>
-<path style="opacity:.5" id="path1981" d="m 421,132 0,7 h -7 z "/>
-</g>
 <text x="1669.4144" y="319.68054" style="font-family:'Gill Sans';text-align:justify;line-height:125%;font-weight:bold;font-size:14px" id="text6990-2-1" xml:space="preserve"><tspan x="1669.4144" y="319.68054" id="tspan6992-2-8"/>
 </text>
 <g style="fill-rule:evenodd">
@@ -1521,4 +1517,24 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="flat-arrow-down-normal" transform="matrix(1,0,0,-1,126,1004)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="flat-arrow-right-normal" transform="rotate(90,301,568)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="flat-arrow-left-normal" transform="rotate(-90,257,420)"/>
+<g style="stroke:none;fill:#61a9f3">
+<path style="opacity:.2;fill-rule:evenodd" id="expand-button-default-top" d="M 311,45.5 H 278.5 V 38 H 311 Z"/>
+<path style="opacity:.2" id="expand-button-default-topleft" d="m 278.5,38 c -4.14214,0 -7.5,3.35786 -7.5,7.5 h 7.5 z"/>
+<path style="opacity:.2;fill-rule:evenodd" id="expand-button-default-bottom" d="M 311,53 H 278.5 V 45.5 H 311 Z"/>
+<path style="opacity:.2" id="expand-button-default-bottomleft" d="m 278.5,53 c -4.14214,0 -7.5,-3.35786 -7.5,-7.5 h 7.5 z"/>
+<path style="opacity:.2" id="expand-button-default-topright" d="m 311,38 c 4.14214,0 7.5,3.35786 7.5,7.5 H 311 Z"/>
+<path style="opacity:.2" id="expand-button-default-bottomright" d="m 311,53 c 4.14214,0 7.5,-3.35786 7.5,-7.5 H 311 Z"/>
+</g>
+<rect width="9.2935266" x="424.35324" y="33.353237" height="9.2935257" style="opacity:0;stroke:#000;stroke-width:.706" id="button-default-indicator"/>
+<g style="stroke:none;fill-rule:evenodd;fill:#61a9f3;text-indent:0">
+<path style="opacity:.2" id="button-default" d="m 104.5,76.9999 v 32.5 h 32.5 v -32.5 Z "/>
+<path style="opacity:.2" id="button-default-top" d="m 104.5,69.4999 v 7.5 h 32.5 v -7.5 z "/>
+<path style="opacity:.2" id="button-default-topleft" d="m 104.5,69.5 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
+<path style="opacity:.2" id="button-default-left" d="M 104.5,109.5 V 77 H 97 v 32.5 z"/>
+<path style="opacity:.2" id="button-default-bottomleft" d="m 97,109.5 c 0,3.72124 3.6904,7.5 7.5,7.5 v -7.5 z"/>
+<path style="opacity:.2" id="button-default-bottom" d="M 137,109.5 H 104.5 V 117 H 137 Z"/>
+<path style="opacity:.2" id="button-default-topright" d="m 137,69.5 c 3.80963,0 7.5,3.69037 7.5,7.5 H 137 Z"/>
+<path style="opacity:.2" id="button-default-right" d="M 137,109.5 V 77 h 7.5 v 32.5 z"/>
+<path style="opacity:.2" id="button-default-bottomright" d="m 144.5,109.5 c 0,3.72124 -3.6904,7.5 -7.5,7.5 v -7.5 z"/>
+</g>
 </svg>
