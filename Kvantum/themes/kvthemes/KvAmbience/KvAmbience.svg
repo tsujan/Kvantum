@@ -1215,7 +1215,6 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-right-normal" transform="matrix(0,-1,1,0,-99.21333,370.00283)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-left-normal" transform="matrix(0,1,-1,0,548.00283,335.21333)"/>
-<rect width="32" x="390" y="870.5" height="32" style="opacity:.92;fill:#e6e5e4;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:round" id="window-normal"/>
 <g style="font-family:Sans;text-align:start;stroke:none;line-height:normal;color:#000;text-indent:0;text-transform:none" id="focus-top" transform="translate(232,768.5)">
 <path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
 <g style="fill-opacity:.137" id="g5475">

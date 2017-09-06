@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A theme inspired by Ubuntu's Ambiance but not a copy of it.\nIts windows can be made translucent by Kvantum Manager.
+comment=A theme inspired by Ubuntu's Ambiance but not a copy of it.
 x11drag=all
 alt_mnemonic=true
 left_tabs=false
@@ -26,6 +26,7 @@ menubar_mouse_tracking=true
 toolbutton_style=1
 double_click=false
 translucent_windows=false
+reduce_window_opacity=8
 blurring=false
 popup_blurring=true
 vertical_spin_indicators=false
@@ -476,7 +477,3 @@ frame.element=tooltip
 inherits=GenericFrame
 frame=false
 interior=false
-
-[WindowTranslucent]
-interior=true
-interior.element=window
