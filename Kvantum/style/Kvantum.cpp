@@ -12849,11 +12849,7 @@ QSize Style::sizeFromContents(ContentsType type,
         /* the width is already increased with PM_FocusFrameHMargin */
         //s.rwidth() += fspec.left + fspec.right;
 
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
-        bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
-          hasIcon = true;
+        bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration);
 
         /* this isn't needed anymore because PM_FocusFrameHMargin and
            PM_FocusFrameVMargin are adjusted to put icon inside frame */
