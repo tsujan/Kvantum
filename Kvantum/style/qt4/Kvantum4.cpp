@@ -104,13 +104,20 @@ static QString readDconfSetting(const QString &setting) // by Craig Drummond
 
 static void setAppFont()
 {
-  QString fontName=readDconfSetting("font-name");
+  // First check platform theme.
+  QByteArray qpa = qgetenv("QT_QPA_PLATFORMTHEME");
+
+  // QGnomePlatform already sets from from Gtk settings, so no need to repeat this!
+  if (qpa == "gnome")
+    return;
+
+  QString fontName = readDconfSetting("font-name");
   if (!fontName.isEmpty())
   {
-    QStringList parts=fontName.split(' ', QString::SkipEmptyParts);
+    QStringList parts = fontName.split(' ', QString::SkipEmptyParts);
     if (parts.length()>1)
     {
-      uint size=parts.takeLast().toUInt();
+      uint size = parts.takeLast().toUInt();
       if (size>5 && size<20)
       {
         QFont f(parts.join(" "), size);
@@ -184,7 +191,7 @@ Style::Style() : QCommonStyle()
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
-      tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
+      //tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
       if (QByteArray("unity") == desktop)
       {
         // Link 'respect_DE' and composite settings only for Unity. Issue #128

@@ -39,6 +39,7 @@ public:
 
     DRAG_COUNT
   };
+
   static Drag toDrag (const QString &str)
   {
     for (int i = 0; i < DRAG_COUNT; ++i)

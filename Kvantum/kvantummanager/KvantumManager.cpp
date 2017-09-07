@@ -2382,7 +2382,7 @@ void KvantumManager::respectDE (bool checked)
         if (gtkDesktops.contains(desktop_))
         {
             ui->labelX11Drag->setEnabled (!checked);
-            ui->comboX11Drag->setEnabled (!checked);
+            //ui->comboX11Drag->setEnabled (!checked);
             ui->checkBoxIconlessBtn->setEnabled (!checked);
             ui->checkBoxIconlessMenu->setEnabled (!checked);
             ui->checkBoxNoComposite->setEnabled (!checked);

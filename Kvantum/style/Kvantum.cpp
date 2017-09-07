@@ -205,17 +205,16 @@ static void setAppFont()
   QByteArray qpa = qgetenv("QT_QPA_PLATFORMTHEME");
 
   // QGnomePlatform already sets from from Gtk settings, so no need to repeat this!
-  if (qpa == "gnome") {
+  if (qpa == "gnome")
     return;
-  }
 
-  QString fontName=readDconfSetting("font-name");
+  QString fontName = readDconfSetting("font-name");
   if (!fontName.isEmpty())
   {
-    QStringList parts=fontName.split(' ', QString::SkipEmptyParts);
+    QStringList parts = fontName.split(' ', QString::SkipEmptyParts);
     if (parts.length()>1)
     {
-      uint size=parts.takeLast().toUInt();
+      uint size = parts.takeLast().toUInt();
       if (size>5 && size<20)
       {
         QFont f(parts.join(" "), size);
@@ -290,7 +289,7 @@ Style::Style(bool useDark) : QCommonStyle()
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
-      tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
+      //tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
       if (desktop.contains("unity"))
       {
         // Link 'respect_DE' and composite settings only for Unity. Issue #128
@@ -2356,6 +2355,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             || (tspec_.combo_as_lineedit
                 && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
         {
+          if (animatedWidgetOut_ == w && opacityTimerOut_->isActive())
+          { // no animation if focus-in happens immediately after focus-out
+            opacityTimerOut_->stop();
+            animationOpacityOut_ = 100;
+            animatedWidgetOut_ = nullptr;
+            break;
+          }
           if (animatedWidget_ && animatedWidget_ != w)
           {
             if (sa)
@@ -2388,6 +2394,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QWidget *popup = QApplication::activePopupWidget();
       if (popup && !popup->isAncestorOf(w))
         break; // not due to a popup widget
+      if (animatedWidget_ == w && opacityTimer_->isActive())
+      { // no animation if focus-out happens immediately after focus-in
+        opacityTimer_->stop();
+        animationOpacity_ = 100;
+        animatedWidget_ = nullptr;
+        break;
+      }
       if (qobject_cast<QComboBox*>(o)
           || qobject_cast<QLineEdit*>(o)
           || qobject_cast<QAbstractSpinBox*>(o)
