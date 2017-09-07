@@ -107,9 +107,9 @@ interior=true
 interior.element=button
 indicator.size=9
 text.normal.color=#4C4C4C
-text.focus.color=black
-text.press.color=black
-text.toggle.color=black
+text.focus.color=#4C4C4C
+text.press.color=#4C4C4C
+text.toggle.color=#4C4C4C
 text.shadow=false
 text.shadow.color=white
 text.shadow.alpha=190
@@ -158,7 +158,7 @@ frame.right=3
 frame=false
 interior=false
 text.normal.color=#000000be
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.bold=true
 text.shadow=false
 text.margin.top=2
@@ -172,14 +172,14 @@ frame.expandedElement=elineedit
 frame.left=1
 indicator.element=spin
 indicator.size=10
-text.normal.color=black
+text.normal.color=#4C4C4C
 
 [RadioButton]
 inherits=PanelButtonCommand
 frame=false
 interior.element=radio
 text.normal.color=#4C4C4C
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
@@ -189,7 +189,7 @@ inherits=PanelButtonCommand
 frame=false
 interior.element=checkbox
 text.normal.color=#4C4C4C
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
@@ -238,7 +238,7 @@ indicator.size=9
 inherits=PanelButtonCommand
 text.normal.color=#000000b4
 text.press.color=#000000be
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.shadow=false
 
 [Tab]
@@ -251,8 +251,8 @@ text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
 text.normal.color=#4C4C4C
-text.focus.color=black
-text.toggle.color=black
+text.focus.color=#4C4C4C
+text.toggle.color=#4C4C4C
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -279,8 +279,8 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-text.focus.color=black
-text.toggle.color=black
+text.focus.color=#4C4C4C
+text.toggle.color=#4C4C4C
 frame.expansion=0
 
 [SizeGrip]
@@ -324,9 +324,9 @@ frame.right=3
 frame.element=progress
 interior.element=progress
 text.margin=0
-text.focus.color=black
-text.press.color=black
-text.toggle.color=black
+text.focus.color=#4C4C4C
+text.press.color=#4C4C4C
+text.toggle.color=#4C4C4C
 text.shadow=false
 
 [ProgressbarContents]
@@ -353,7 +353,7 @@ text.margin.bottom=3
 text.margin.left=4
 text.margin.right=4
 text.normal.color=#4C4C4C
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.press.color=#fcfcfc
 text.toggle.color=#fcfcfc
 text.shadow=false
@@ -442,7 +442,7 @@ interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
 text.normal.color=#787878
-text.focus.color=black
+text.focus.color=#4C4C4C
 text.bold=true
 text.italic=true
 
@@ -473,8 +473,8 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.normal.color=#000000be
-text.press.color=black
-text.focus.color=black
+text.press.color=#4C4C4C
+text.focus.color=#4C4C4C
 text.bold=true
 
 [TabBarFrame]
