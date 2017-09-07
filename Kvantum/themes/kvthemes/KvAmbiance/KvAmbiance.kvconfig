@@ -391,7 +391,7 @@ frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 text.normal.color=#dfdbd2
-text.focus.color=#dfdbd2
+text.focus.color=#fcfcfc
 text.margin.top=2
 text.margin.bottom=2
 text.margin.left=15
@@ -431,7 +431,7 @@ text.margin.right=4
 text.margin.top=3
 text.margin.bottom=2
 text.normal.color=#dfdbd2
-text.focus.color=#dfdbd2
+text.focus.color=#fcfcfc
 text.shadow=false
 frame.expansion=0
 
