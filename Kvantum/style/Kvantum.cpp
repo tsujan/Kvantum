@@ -201,6 +201,14 @@ static QString readDconfSetting(const QString &setting) // by Craig Drummond
 
 static void setAppFont()
 {
+  // First check platform theme.
+  QByteArray qpa = qgetenv("QT_QPA_PLATFORMTHEME");
+
+  // QGnomePlatform already sets from from Gtk settings, so no need to repeat this!
+  if (qpa == "gnome") {
+    return;
+  }
+
   QString fontName=readDconfSetting("font-name");
   if (!fontName.isEmpty())
   {
