@@ -354,8 +354,8 @@ text.margin.left=4
 text.margin.right=4
 text.normal.color=#4C4C4C
 text.focus.color=black
-text.press.color=#dfdbd2
-text.toggle.color=#dfdbd2
+text.press.color=#fcfcfc
+text.toggle.color=#fcfcfc
 text.shadow=false
 frame.expansion=0
 
