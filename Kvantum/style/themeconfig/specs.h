@@ -208,6 +208,7 @@ typedef struct {
   QString disabledTextColor;
   QString tooltipTextColor;
   QString highlightTextColor;
+  QString inactiveHighlightTextColor;
   QString linkColor;
   QString linkVisitedColor;
   QString progressIndicatorTextColor;

@@ -615,6 +615,10 @@ tooltip.text.color                string (#RRGGBBAA)  Obvious.
 
 highlight.text.color              string (#RRGGBBAA)  The color of selected text.
 
+inactive.highlight.text.color     string (#RRGGBBAA)  The color of inactive selected text.
+                                                      If missing, it falls back to
+                                                      "highlight.text.color".
+
 link.color                        string (#RRGGBBAA)  Obvious.
 
 link.visited.color                string (#RRGGBBAA)  Obvious.

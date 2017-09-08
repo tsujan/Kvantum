@@ -1118,7 +1118,7 @@
 </g>
 <g style="fill:url(#linearGradient6302);stroke:none" id="button-normal-bottom" transform="matrix(0,-0.8,-1,0,97.25176,118)">
 <path style="fill:url(#linearGradient6583);fill-rule:evenodd" id="path5318" d="M 28.75,81.2514 V 48.7516 h -5 v 32.5 z"/>
-<path style="font-family:Sans;fill:#000;text-align:start;line-height:normal;fill-opacity:.463;color:#000;text-indent:0;text-transform:none" id="path5320" d="m 21.2542,48.7516 v 32.5 h 2.49594 v -32.5 z "/>
+<path style="font-family:Sans;fill:#000;text-align:start;line-height:normal;fill-opacity:.463;color:#000;text-indent:0;text-transform:none" id="path5320" d="m 21.25,48.7516 v 32.5 h 2.50016 v -32.5 z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-left" id="button-normal-right" transform="matrix(-1,0,0,1,64.500161,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-topleft" id="button-normal-topright" transform="matrix(-1,0,0,1,64.500161,0)"/>
@@ -1204,13 +1204,13 @@
 </g>
 <g id="tab-separator-toggled-bottom" transform="matrix(1,0,0,-1,0,1521)">
 <rect width="6" x="195" y="751.5" height="6" style="fill-opacity:0" id="rect5224"/>
-<rect width="2" x="199" y="753.5" height="4" style="fill:#c8c8c8" id="rect5226"/>
-<rect width="2" x="199" y="751.5" height="2" style="fill:#939292" id="rect5228"/>
+<rect width="2" x="199" y="753.5" height="4" style="fill:#bdbdbd" id="rect5226"/>
+<rect width="2" x="199" y="751.5" height="2" style="fill:#838181" id="rect5228"/>
 </g>
 <g id="tab-separator-toggled-top">
 <rect width="6" x="195" y="751.5" height="6" style="fill-opacity:0" id="rect5208"/>
 <rect width="2" x="199" y="753.5" height="4" style="fill:#969696" id="rect5215"/>
-<rect width="2" x="199" y="751.5" height="2" style="fill:#828181" id="rect5164"/>
+<rect width="2" x="199" y="751.5" height="2" style="fill:#737373" id="rect5164"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-right-normal" transform="matrix(0,-1,1,0,-99.21333,370.00283)"/>

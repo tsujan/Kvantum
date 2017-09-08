@@ -1650,7 +1650,12 @@ void Style::polish(QPalette &palette)
       palette.setColor(QPalette::ToolTipText,col);
     col = getFromRGBA(cspec_.highlightTextColor);
     if (col.isValid())
-      palette.setColor(QPalette::HighlightedText,col);
+      palette.setColor(QPalette::Active,QPalette::HighlightedText,col);
+    QColor col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
     col = getFromRGBA(cspec_.linkColor);
     if (col.isValid())
       palette.setColor(QPalette::Link,col);
@@ -2268,7 +2273,7 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
       left = NULL;
     const QToolButton *right =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x()+g.width()+1, g.y()));
     if (right && right->objectName() == "qt_toolbar_ext_button")
-      right = nullptr;
+      right = NULL;
 
     /* only direct children should be considered */
     if (left && left->parentWidget() != toolBar)
@@ -4560,8 +4565,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* when there isn't enough space */
           QSize txtSize = textSize(painter->font(),combo->currentText,false);
           const label_spec lspec1 = getLabelSpec("ComboBox");
-          if (cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
-              || cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
+          if (/*cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
+              ||*/ cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
             if (rtl)
               r.adjust(0,0,-qMax(fspec.left-3,0),0);
@@ -5609,8 +5614,11 @@ void Style::drawControl(ControlElement element,
           fspec.expansion = 0;
           ispec.px = ispec.py = 0;
         }
-        renderFrame(painter,r,fspec,fspec.element+"-normal");
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+        QString inactive;
+        if (widget && !widget->isActiveWindow())
+          inactive = "-inactive";
+        renderFrame(painter,r,fspec,fspec.element+"-normal"+inactive);
+        renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"+inactive);
 
         fspec = getFrameSpec("MenuBarItem");
         ispec = getInteriorSpec("MenuBarItem");
@@ -5710,8 +5718,11 @@ void Style::drawControl(ControlElement element,
         fspec.bottom = fspec1.bottom;
       }
 
-      renderFrame(painter,r,fspec,fspec.element+"-normal");
-      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+      QString inactive;
+      if (widget && !widget->isActiveWindow())
+        inactive = "-inactive";
+      renderFrame(painter,r,fspec,fspec.element+"-normal"+inactive);
+      renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"+inactive);
 
       break;
     }
@@ -5875,9 +5886,9 @@ void Style::drawControl(ControlElement element,
             const indicator_spec dspec = getIndicatorSpec("DropDownButton");
             int deltaR = 0; int deltaL = 0;
             int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
-            if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+            if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                               + (sspec.incrementW ? sspec.minW : 0)
-                || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
+                ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
             {
               deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
               deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
@@ -9106,8 +9117,8 @@ void Style::drawComplexControl(ComplexControl control,
               else // when there isn't enough space
               {
                 QSize txtSize = textSize(painter->font(),opt->currentText,false);
-                if (cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
-                    || cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
+                if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                    ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
                 {
                   fspec.left = qMin(fspec.left,3);
                   fspec.right = qMin(fspec.right,3);
@@ -13538,8 +13549,6 @@ void Style::renderFrame(QPainter *painter,
   Left = Top = Right = Bottom = 0;
 
   bool isInactive(false);
-  QStringList states;
-  states << "-normal" << "-focused" << "-pressed" << "-toggled";
   QString state;
   QStringList list = element.split("-");
   int count = list.count();
@@ -13551,6 +13560,8 @@ void Style::renderFrame(QPainter *painter,
   else if (count > 1)
   {
     state = "-" + list.at(count - 1);
+    QStringList states;
+    states << "-normal" << "-focused" << "-pressed" << "-toggled";
     if (!states.contains(state))
       state = QString();
   }

@@ -849,6 +849,9 @@ color_spec ThemeConfig::getColorSpec() const
   v = getValue("GeneralColors","highlight.text.color");
   r.highlightTextColor = v.toString();
 
+  v = getValue("GeneralColors","inactive.highlight.text.color");
+  r.inactiveHighlightTextColor = v.toString();
+
   v = getValue("GeneralColors","link.color");
   r.linkColor = v.toString();
 
