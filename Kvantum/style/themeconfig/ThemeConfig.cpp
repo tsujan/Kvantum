@@ -834,8 +834,14 @@ color_spec ThemeConfig::getColorSpec() const
   v = getValue("GeneralColors","text.color");
   r.textColor = v.toString();
 
+  v = getValue("GeneralColors","inactive.text.color");
+  r.inactiveTextColor = v.toString();
+
   v = getValue("GeneralColors","window.text.color");
   r.windowTextColor = v.toString();
+
+  v = getValue("GeneralColors","inactive.window.text.color");
+  r.inactiveWindowTextColor = v.toString();
 
   v = getValue("GeneralColors","button.text.color");
   r.buttonTextColor = v.toString();

@@ -1861,103 +1861,115 @@ void Style::polish(QApplication *app)
 
 void Style::polish(QPalette &palette)
 {
-    /* background colors */
-    QColor col = getFromRGBA(cspec_.windowColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Window,col);
-    col = getFromRGBA(cspec_.baseColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Base,col);
-    col = getFromRGBA(cspec_.altBaseColor);
-    if (col.isValid())
-      palette.setColor(QPalette::AlternateBase,col);
-    col = getFromRGBA(cspec_.buttonColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Button,col);
+  QColor col1;
 
-    col = getFromRGBA(cspec_.lightColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Light,col);
-    col = getFromRGBA(cspec_.midLightColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Midlight,col);
-    col = getFromRGBA(cspec_.darkColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Dark,col);
-    col = getFromRGBA(cspec_.midColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Mid,col);
-    col = getFromRGBA(cspec_.shadowColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Shadow,col);
+  /* background colors */
+  QColor col = getFromRGBA(cspec_.windowColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Window,col);
+  col = getFromRGBA(cspec_.baseColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Base,col);
+  col = getFromRGBA(cspec_.altBaseColor);
+  if (col.isValid())
+    palette.setColor(QPalette::AlternateBase,col);
+  col = getFromRGBA(cspec_.buttonColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Button,col);
 
-    col = getFromRGBA(cspec_.highlightColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Active,QPalette::Highlight,col);
-    col = getFromRGBA(cspec_.inactiveHighlightColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+  col = getFromRGBA(cspec_.lightColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Light,col);
+  col = getFromRGBA(cspec_.midLightColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Midlight,col);
+  col = getFromRGBA(cspec_.darkColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Dark,col);
+  col = getFromRGBA(cspec_.midColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Mid,col);
+  col = getFromRGBA(cspec_.shadowColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Shadow,col);
 
-    col = getFromRGBA(cspec_.tooltipBasetColor);
-    if (col.isValid())
-      palette.setColor(QPalette::ToolTipBase,col);
-    else
-    { // for backward compatibility
-      col = getFromRGBA(cspec_.tooltipTextColor);
-      if (col.isValid())
-      {
-        QColor col1 = QColor(Qt::white);
-        if (qGray(col.rgb()) >= 127)
-          col1 = QColor(Qt::black);
-        palette.setColor(QPalette::ToolTipBase,col1);
-      }
-    }
+  col = getFromRGBA(cspec_.highlightColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Active,QPalette::Highlight,col);
+  col = getFromRGBA(cspec_.inactiveHighlightColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
 
-    /* text colors */
-    col = getFromRGBA(cspec_.textColor);
-    if (col.isValid())
-    {
-      palette.setColor(QPalette::Active,QPalette::Text,col);
-      palette.setColor(QPalette::Inactive,QPalette::Text,col);
-    }
-    col = getFromRGBA(cspec_.windowTextColor);
-    if (col.isValid())
-    {
-      palette.setColor(QPalette::Active,QPalette::WindowText,col);
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
-    }
-    col = getFromRGBA(cspec_.buttonTextColor);
-    if (col.isValid())
-    {
-      palette.setColor(QPalette::Active,QPalette::ButtonText,col);
-      palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
-    }
+  col = getFromRGBA(cspec_.tooltipBasetColor);
+  if (col.isValid())
+    palette.setColor(QPalette::ToolTipBase,col);
+  else
+  { // for backward compatibility
     col = getFromRGBA(cspec_.tooltipTextColor);
     if (col.isValid())
-      palette.setColor(QPalette::ToolTipText,col);
-    col = getFromRGBA(cspec_.highlightTextColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Active,QPalette::HighlightedText,col);
-    QColor col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
+    {
+      col1 = QColor(Qt::white);
+      if (qGray(col.rgb()) >= 127)
+        col1 = QColor(Qt::black);
+      palette.setColor(QPalette::ToolTipBase,col1);
+    }
+  }
+
+  /* text colors */
+  col = getFromRGBA(cspec_.textColor);
+  if (col.isValid())
+  {
+    palette.setColor(QPalette::Active,QPalette::Text,col);
+    col1 = getFromRGBA(cspec_.inactiveTextColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Text,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Text,col);
+  }
+  col = getFromRGBA(cspec_.windowTextColor);
+  if (col.isValid())
+  {
+    palette.setColor(QPalette::Active,QPalette::WindowText,col);
+    col1 = getFromRGBA(cspec_.inactiveWindowTextColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
+  }
+  col = getFromRGBA(cspec_.buttonTextColor);
+  if (col.isValid())
+  {
+    palette.setColor(QPalette::Active,QPalette::ButtonText,col);
+    palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
+  }
+  col = getFromRGBA(cspec_.tooltipTextColor);
+  if (col.isValid())
+    palette.setColor(QPalette::ToolTipText,col);
+  col = getFromRGBA(cspec_.highlightTextColor);
+  if (col.isValid())
+  {
+    palette.setColor(QPalette::Active,QPalette::HighlightedText,col);
+    col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
-    col = getFromRGBA(cspec_.linkColor);
-    if (col.isValid())
-      palette.setColor(QPalette::Link,col);
-    col = getFromRGBA(cspec_.linkVisitedColor);
-    if (col.isValid())
-      palette.setColor(QPalette::LinkVisited,col);
+  }
+  col = getFromRGBA(cspec_.linkColor);
+  if (col.isValid())
+    palette.setColor(QPalette::Link,col);
+  col = getFromRGBA(cspec_.linkVisitedColor);
+  if (col.isValid())
+    palette.setColor(QPalette::LinkVisited,col);
 
-    /* disabled text */
-    col = getFromRGBA(cspec_.disabledTextColor);
-    if (col.isValid())
-    {
-      palette.setColor(QPalette::Disabled,QPalette::Text,col);
-      palette.setColor(QPalette::Disabled,QPalette::WindowText,col);
-      palette.setColor(QPalette::Disabled,QPalette::ButtonText,col);
-    }
+  /* disabled text */
+  col = getFromRGBA(cspec_.disabledTextColor);
+  if (col.isValid())
+  {
+    palette.setColor(QPalette::Disabled,QPalette::Text,col);
+    palette.setColor(QPalette::Disabled,QPalette::WindowText,col);
+    palette.setColor(QPalette::Disabled,QPalette::ButtonText,col);
+  }
 }
 
 void Style::unpolish(QWidget *widget)

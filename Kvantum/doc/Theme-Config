@@ -605,7 +605,15 @@ tooltip.base.color                string (#RRGGBBAA)  Tooltip background color (
 text.color                        string (#RRGGBBAA)  The foreground color used with
                                                       "base.color".
 
+inactive.text.color               string (#RRGGBBAA)  The inactive foreground color used
+                                                      with "base.color". It falls back to
+                                                      "text.color" if missing.
+
 window.text.color                 string (#RRGGBBAA)  A general foreground color.
+
+inactive.window.text.color        string (#RRGGBBAA)  A general foreground color for
+                                                      inactive windows. It falls back
+                                                      to "window.text.color" if missing.
 
 button.text.color                 string (#RRGGBBAA)  Obvious.
 
