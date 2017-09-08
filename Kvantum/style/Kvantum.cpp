@@ -1874,7 +1874,7 @@ void Style::polish(QPalette &palette)
   if (col1.isValid())
     palette.setColor(QPalette::Inactive,QPalette::Base,col1);
   else
-    palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
+    palette.setColor(QPalette::Inactive,QPalette::Base,col);
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
     palette.setColor(QPalette::AlternateBase,col);
