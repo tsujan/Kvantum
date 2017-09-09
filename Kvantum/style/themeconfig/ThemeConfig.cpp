@@ -304,8 +304,16 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
 
     v = getValue(elementName,"text.normal.color", i);
     r.normalColor = v.toString();
+
+    v = getValue(elementName,"text.normal.inactive.color", i);
+    r.normalInactiveColor = v.toString();
+
     v = getValue(elementName,"text.focus.color", i);
     r.focusColor = v.toString();
+
+    v = getValue(elementName,"text.focus.inactive.color", i);
+    r.focusInactiveColor = v.toString();
+
     if (elementName == "MenuItem" || elementName == "MenuBarItem")
     { // no inheritance because the (fallback) focus color seems more natural
       v = getValue(elementName,"text.press.color");
@@ -318,8 +326,15 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     {
       v = getValue(elementName,"text.press.color", i);
       r.pressColor = v.toString();
+
+      v = getValue(elementName,"text.press.inactive.color", i);
+      r.pressInactiveColor = v.toString();
+ 
       v = getValue(elementName,"text.toggle.color", i);
       r.toggleColor = v.toString();
+
+      v = getValue(elementName,"text.toggle.inactive.color", i);
+      r.toggleInactiveColor = v.toString();
     }
 
     v = getValue(elementName,"text.bold", i);
@@ -337,6 +352,9 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       v = getValue(elementName,"text.shadow.color", i);
       if (v.isValid())
         r.shadowColor = v.toString();
+      v = getValue(elementName,"text.inactive.shadow.color", i);
+      if (v.isValid())
+        r.inactiveShadowColor = v.toString();
       v = getValue(elementName,"text.shadow.alpha", i);
       if (v.isValid())
         r.a = qMax(v.toInt(),0);
@@ -797,8 +815,14 @@ color_spec ThemeConfig::getColorSpec() const
   QVariant v = getValue("GeneralColors","window.color");
   r.windowColor = v.toString();
 
+  v = getValue("GeneralColors","inactive.window.color");
+  r.inactiveWindowColor = v.toString();
+
   v = getValue("GeneralColors","base.color");
   r.baseColor = v.toString();
+
+  v = getValue("GeneralColors","inactive.base.color");
+  r.inactiveBaseColor = v.toString();
 
   v = getValue("GeneralColors","alt.base.color");
   r.altBaseColor = v.toString();
@@ -827,9 +851,6 @@ color_spec ThemeConfig::getColorSpec() const
 
   v = getValue("GeneralColors","inactive.highlight.color");
   r.inactiveHighlightColor = v.toString();
-
-  v = getValue("GeneralColors","inactive.base.color");
-  r.inactiveBaseColor = v.toString();
 
   v = getValue("GeneralColors","tooltip.base.color");
   r.tooltipBasetColor = v.toString();
@@ -869,6 +890,9 @@ color_spec ThemeConfig::getColorSpec() const
 
   v = getValue("GeneralColors","progress.indicator.text.color");
   r.progressIndicatorTextColor = v.toString();
+
+  v = getValue("GeneralColors","progress.inactive.indicator.text.color");
+  r.progressInactiveIndicatorTextColor = v.toString();
 
   return r;
 }

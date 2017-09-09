@@ -1195,7 +1195,8 @@ void Style::polish(QWidget *widget)
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
   /* respect the toolbar text color */
-  QColor toolbarTextColor = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+  const label_spec tLspec = getLabelSpec("Toolbar");
+  QColor toolbarTextColor = getFromRGBA(tLspec.normalColor);
   QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
   if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
   {
@@ -1205,11 +1206,14 @@ void Style::polish(QWidget *widget)
         || (widget->inherits("AnimatedLabelStack") // Amarok
             && isStylableToolbar(getParent(pw,1))))
     {
+      QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
+      if (!inactiveCol.isValid())
+        inactiveCol = toolbarTextColor;
       QPalette palette = widget->palette();
       palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
-      palette.setColor(QPalette::Inactive,widget->foregroundRole(),toolbarTextColor);
+      palette.setColor(QPalette::Inactive,widget->foregroundRole(),inactiveCol);
       palette.setColor(QPalette::Active,QPalette::WindowText,toolbarTextColor); // for KAction in locationbar as in K3b
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,toolbarTextColor);
+      palette.setColor(QPalette::Inactive,QPalette::WindowText,inactiveCol);
       widget->setPalette(palette);
     }
   }
@@ -1270,6 +1274,7 @@ void Style::polish(QWidget *widget)
           if (menuTextColor != palette.color(QPalette::WindowText))
           {
             palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
+            palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
             widget->setPalette(palette);
           }
         }
@@ -1866,18 +1871,31 @@ void Style::polish(QPalette &palette)
   /* background colors */
   QColor col = getFromRGBA(cspec_.windowColor);
   if (col.isValid())
-    palette.setColor(QPalette::Window,col);
+  {
+    palette.setColor(QPalette::Active,QPalette::Window,col);
+    col1 = getFromRGBA(cspec_.inactiveWindowColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Window,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Window,col);
+  }
+
   col = getFromRGBA(cspec_.baseColor);
   if (col.isValid())
-    palette.setColor(QPalette::Base,col);
-  col1 = getFromRGBA(cspec_.inactiveBaseColor);
-  if (col1.isValid())
-    palette.setColor(QPalette::Inactive,QPalette::Base,col1);
-  else
-    palette.setColor(QPalette::Inactive,QPalette::Base,col);
+  {
+    palette.setColor(QPalette::Active,QPalette::Base,col);
+    col1 = getFromRGBA(cspec_.inactiveBaseColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Base,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Base,col);
+  }
+
+  /* an "inactiveAltBaseColor" would be inconsistent */
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
     palette.setColor(QPalette::AlternateBase,col);
+
   col = getFromRGBA(cspec_.buttonColor);
   if (col.isValid())
     palette.setColor(QPalette::Button,col);
@@ -1900,10 +1918,14 @@ void Style::polish(QPalette &palette)
 
   col = getFromRGBA(cspec_.highlightColor);
   if (col.isValid())
+  {
     palette.setColor(QPalette::Active,QPalette::Highlight,col);
-  col = getFromRGBA(cspec_.inactiveHighlightColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+    col1 = getFromRGBA(cspec_.inactiveHighlightColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+  }
 
   col = getFromRGBA(cspec_.tooltipBasetColor);
   if (col.isValid())
@@ -1931,6 +1953,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::Text,col);
   }
+
   col = getFromRGBA(cspec_.windowTextColor);
   if (col.isValid())
   {
@@ -1941,6 +1964,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
   }
+
   col = getFromRGBA(cspec_.buttonTextColor);
   if (col.isValid())
   {
@@ -1950,6 +1974,7 @@ void Style::polish(QPalette &palette)
   col = getFromRGBA(cspec_.tooltipTextColor);
   if (col.isValid())
     palette.setColor(QPalette::ToolTipText,col);
+
   col = getFromRGBA(cspec_.highlightTextColor);
   if (col.isValid())
   {
@@ -1960,6 +1985,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
   }
+
   col = getFromRGBA(cspec_.linkColor);
   if (col.isValid())
     palette.setColor(QPalette::Link,col);
@@ -2130,7 +2156,10 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   }
   if (!renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency
-    p->fillRect(bgndRect, QApplication::palette().color(QPalette::Window));
+    p->fillRect(bgndRect, QApplication::palette().color(suffix.contains("-inactive")
+                                                          ? QPalette::Inactive
+                                                          : QPalette::Active,
+                                                        QPalette::Window));
   }
   if (ro > 0)
     p->restore();
@@ -3359,7 +3388,10 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   if (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text)))
     renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
   else
-    painter->fillRect(interiorRect(option->rect,fspec), lineedit->palette().brush(QPalette::Base));
+    painter->fillRect(interiorRect(option->rect,fspec), lineedit->palette().brush(leStatus.contains("-inactive")
+                                                                                    ? QPalette::Inactive
+                                                                                    : QPalette::Active,
+                                                                                  QPalette::Base));
   if (!(option->state & State_Enabled))
     painter->restore();
 }
@@ -3376,7 +3408,10 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_Widget : {
       if (qobject_cast<const QMdiSubWindow*>(widget))
       {
-        painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+        painter->fillRect(option->rect, QApplication::palette().color(isWidgetInactive(widget)
+                                                                       ? QPalette::Inactive
+                                                                       : QPalette::Active,
+                                                                      QPalette::Window));
         break;
       }
       if (widget) // it's NULL with QML
@@ -3397,10 +3432,16 @@ void Style::drawPrimitive(PrimitiveElement element,
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
       {
-        if (option->palette.color(QPalette::Window) == option->palette.color(QPalette::Base))
+        if (option->palette.color(QPalette::Window) == option->palette.color(isWidgetInactive(widget)
+                                                                               ? QPalette::Inactive
+                                                                               : QPalette::Active,
+                                                                             QPalette::Base))
           break; // ...but make an exception for apps like KNotes
         else
-          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+          painter->fillRect(option->rect, QApplication::palette().color(isWidgetInactive(widget)
+                                                                         ? QPalette::Inactive
+                                                                         : QPalette::Active,
+                                                                        QPalette::Window));
       }
 
       interior_spec ispec = getInteriorSpec("Dialog");
@@ -3643,6 +3684,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       frame_spec fspec = getFrameSpec(group);
+      QString status = getState(option,widget);
 
       /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
       if (const QPushButton *pb = qobject_cast<const QPushButton*>(widget))
@@ -3650,7 +3692,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         fspec.expansion = 0;
         if (pb->text().isEmpty())
         {
-          painter->fillRect(option->rect, option->palette.brush(QPalette::Button));
+          painter->fillRect(option->rect, option->palette.brush(status.contains("-inactive")
+                                                                  ? QPalette::Inactive
+                                                                  : QPalette::Active,
+                                                                QPalette::Button));
           break;
         }
       }
@@ -3659,7 +3704,6 @@ void Style::drawPrimitive(PrimitiveElement element,
          comboboxes and buttons will have the WA_UnderMouse attribute without the cursor
          being over them. Hence we use the following logic in several places. It has no
          effect on Qt4 apps and will be harmless if the bug is fixed. */
-      QString status = getState(option,widget);
       if (status.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
       {
@@ -3718,7 +3762,10 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
           {
             bool painterSaved = false;
-            painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+            painter->fillRect(option->rect, QApplication::palette().color(status.contains("-inactive")
+                                                                            ? QPalette::Inactive
+                                                                            : QPalette::Active,
+                                                                          QPalette::Window));
             const frame_spec fspec1 = getFrameSpec("Tab");
             fspec.left = qMin(fspec.left, fspec1.left);
             fspec.right = qMin(fspec.right, fspec1.right);
@@ -4023,7 +4070,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               animationStartState_ = pbStatus;
           }
           if (fillWidgetInterior)
-            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(QPalette::Button));
+            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(pbStatus.contains("-inactive")
+                                                                           ? QPalette::Inactive
+                                                                           : QPalette::Active,
+                                                                         QPalette::Button));
           hasPanel = true;
         }
         // fade out animation
@@ -4040,7 +4090,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
             painter->restore();
             if (fillWidgetInterior)
-              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(QPalette::Button));
+              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(pbStatus.contains("-inactive")
+                                                                             ? QPalette::Inactive
+                                                                             : QPalette::Active,
+                                                                           QPalette::Button));
           }
           if (animationOpacity_ >= 100)
             animationStartState_ = pbStatus;
@@ -4063,7 +4116,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (!fillWidgetInterior)
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
         else // widget isn't null
-          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(QPalette::Button));
+          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                             ? QPalette::Inactive
+                                                                             : QPalette::Active,
+                                                                           QPalette::Button));
         if (libreoffice) painter->restore();
         hasPanel = true;
       }
@@ -4590,6 +4646,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!tspec_.scrollbar_in_view)
         return;
       QColor col;
+      bool isInactive(isWidgetInactive(widget));
       if (const QAbstractScrollArea *sa = qobject_cast<const QAbstractScrollArea*>(widget))
       {
         if (QWidget *vp = sa->viewport())
@@ -4599,11 +4656,17 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             return;
           }
-          col = vp->palette().color(vp->backgroundRole());
+          col = vp->palette().color(isInactive
+                                      ? QPalette::Inactive
+                                      : QPalette::Active,
+                                    vp->backgroundRole());
         }
       }
       if (!col.isValid())
-        col = option->palette.color(QPalette::Window);
+        col = option->palette.color(isInactive
+                                      ? QPalette::Inactive
+                                      : QPalette::Active,
+                                    QPalette::Window);
       painter->fillRect(option->rect, col);
       break;
     }
@@ -4976,7 +5039,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
       if (fillWidgetInterior) // widget isn't null
-        painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Base));
+        painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(leStatus.contains("-inactive")
+                                                                                      ? QPalette::Inactive
+                                                                                      : QPalette::Active,
+                                                                                     QPalette::Base));
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -5250,8 +5316,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         QString aStatus = getState(option,widget);
-        if (isWidgetInactive(widget))
-          aStatus.append("-inactive");
         /* distinguish between the toggled and pressed states
            only if a toggled down arrow element exists */
         if (aStatus.startsWith("toggled")
@@ -5521,7 +5585,10 @@ void Style::drawPrimitive(PrimitiveElement element,
                 animationStartState_ = status;
             }
             if (fillWidgetInterior)
-              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(QPalette::Button));
+              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
+                                                                             ? QPalette::Inactive
+                                                                             : QPalette::Active,
+                                                                           QPalette::Button));
           }
           // fade out animation
           else if (animate)
@@ -5671,9 +5738,12 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
         if (fillWidgetInterior) // widget isn't null
-          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
-                                                                           ? QPalette::Base
-                                                                           : QPalette::Button));
+          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                             ? QPalette::Inactive
+                                                                             : QPalette::Active,
+                                                                           tspec_.combo_as_lineedit
+                                                                             ? QPalette::Base
+                                                                             : QPalette::Button));
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -5971,7 +6041,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                While there's no guarantee for a high contrast between that color and the
                highlighted text color for active items, Wireshark doesn't style active
                items itself. This workaround is for such cases of incomplete hard-coded styling. */
-            col = opt->palette.brush(QPalette::Normal, QPalette::Highlight).color();
+            col = opt->palette.brush(QPalette::Active, QPalette::Highlight).color();
             brush.setColor(col);
           }
           if (col.alpha() < 255)
@@ -6202,12 +6272,18 @@ void Style::drawControl(ControlElement element,
           if (state == 1)
           {
             if (lspec.normalColor.isEmpty())
+            {
               lspec.normalColor = cspec_.windowTextColor;
+              lspec.normalInactiveColor = cspec_.inactiveWindowTextColor;
+            }
           }
           else if (state == 2)
           {
             if (lspec.normalColor.isEmpty())
+            {
               lspec.focusColor = cspec_.windowTextColor;
+              lspec.focusInactiveColor = cspec_.inactiveWindowTextColor;
+            }
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
@@ -6249,7 +6325,8 @@ void Style::drawControl(ControlElement element,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state);
+                          state,
+                          status.contains("-inactive"));
             }
             else
             {
@@ -6291,6 +6368,7 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,
+                          status.contains("-inactive"),
                           getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                           iconSize);
             }
@@ -6308,7 +6386,8 @@ void Style::drawControl(ControlElement element,
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
-                        state);
+                        state,
+                        status.contains("-inactive"));
           }
 
           QStyleOptionMenuItem o(*opt);
@@ -6403,6 +6482,7 @@ void Style::drawControl(ControlElement element,
             QColor focusColor = getFromRGBA(lspec.focusColor);
             QColor pressColor = getFromRGBA(lspec.pressColor);
             QColor toggleColor = getFromRGBA(lspec.toggleColor);
+            bool isInactive;
             QColor col;
             if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
             {
@@ -6428,78 +6508,131 @@ void Style::drawControl(ControlElement element,
                 }
               }
               normalColor = focusColor = pressColor = toggleColor = col;
+              isInactive = false;
             }
-            if (state == 1 && normalColor.isValid()
-                /* since we don't draw the normal interior,
-                   a minimum amount of contrast is needed */
-                && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
+            else
+              isInactive = isWidgetInactive(widget);
+            if (state == 1)
             {
-              QStyleOptionViewItem o(*opt);
-              palette.setColor(QPalette::Text, normalColor);
-              o.palette = palette;
-              if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
+              QColor normalInactiveColor = getFromRGBA(lspec.normalInactiveColor);
+              if ((!isInactive || !normalInactiveColor.isValid())
+                  && normalColor.isValid()
+                  /* since we don't draw the normal interior,
+                     a minimum amount of contrast is needed */
+                  && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
               {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
+                col = normalColor;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              else if (isInactive
+                       && normalInactiveColor.isValid()
+                       && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalInactiveColor)))
+              {
+                col = normalInactiveColor;
+              }
+              else
+                col = QColor();
+              if (col.isValid())
+              {
+                QStyleOptionViewItem o(*opt);
+                palette.setColor(QPalette::Text, col);
+                o.palette = palette;
+                if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
+                {
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                                 iconstate, opt->decorationSize);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
-            else if (state == 2 && focusColor.isValid()
-                     && (col.isValid()
-                         || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
-                         // supposing that the focus interior is translucent, take care of contrast
-                         || enoughContrast(palette.color(QPalette::Base), focusColor)))
+            else if (state == 2)
             {
-              QStyleOptionViewItem o(*opt);
-              palette.setColor(QPalette::Text, focusColor);
-              palette.setColor(QPalette::HighlightedText, focusColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0
-                  && (opt->features & QStyleOptionViewItem::HasDecoration)
-                  && !opt->decorationSize.isEmpty())
+              QColor focusInactiveColor = getFromRGBA(lspec.focusInactiveColor);
+              if ((!isInactive || !focusInactiveColor.isValid())
+                  && focusColor.isValid()
+                  && (col.isValid()
+                      || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
+                      // supposing that the focus interior is translucent, take care of contrast
+                      || enoughContrast(palette.color(QPalette::Base), focusColor)))
               {
-                QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
-                o.icon = QIcon(px);
+                col = focusColor;
               }
-              else if (pixelRatio_ > 1)
+              else if (isInactive
+                       && focusInactiveColor.isValid()
+                       && (col.isValid()
+                           || enoughContrast(QApplication::palette().color(QPalette::Text), focusInactiveColor)
+                           || enoughContrast(palette.color(QPalette::Base), focusInactiveColor)))
               {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
+                col = focusInactiveColor;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              else
+                col = QColor();
+              if (col.isValid())
+              {
+                QStyleOptionViewItem o(*opt);
+                palette.setColor(QPalette::Text, col);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0
+                    && (opt->features & QStyleOptionViewItem::HasDecoration)
+                    && !opt->decorationSize.isEmpty())
+                {
+                  QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                else if (pixelRatio_ > 1)
+                {
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                                 iconstate, opt->decorationSize);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
-            else if (state == 3 && pressColor.isValid())
+            else if (state == 3)
             {
-              QStyleOptionViewItem o(*opt);
-              palette.setColor(QPalette::HighlightedText, pressColor);
-              o.palette = palette;
-              if (pixelRatio_ > 1)
+              QColor pressInactiveColor = getFromRGBA(lspec.pressInactiveColor);
+              col = (!isInactive || !pressInactiveColor.isValid())
+                      ? pressColor
+                      : pressInactiveColor;
+              if (col.isValid())
               {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
+                QStyleOptionViewItem o(*opt);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                if (pixelRatio_ > 1)
+                {
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                                 iconstate, opt->decorationSize);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
             }
-            else if (state == 4 && toggleColor.isValid())
+            else if (state == 4)
             {
-              QStyleOptionViewItem o(*opt);
-              palette.setColor(QPalette::HighlightedText, toggleColor);
-              o.palette = palette;
-              if (pixelRatio_ > 1)
+              QColor toggleInactiveColor = getFromRGBA(lspec.toggleInactiveColor);
+              col = (!isInactive || !toggleInactiveColor.isValid())
+                      ? toggleColor
+                      : toggleInactiveColor;
+              if (col.isValid())
               {
-                QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
-                                               iconstate, opt->decorationSize);
-                o.icon = QIcon(px);
+                QStyleOptionViewItem o(*opt);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                if (pixelRatio_ > 1)
+                {
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                                                 iconstate, opt->decorationSize);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
             }
           }
           else
@@ -6616,8 +6749,12 @@ void Style::drawControl(ControlElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
           if (libreoffice) painter->restore();
         }
-        else // always get normal color from menubar
-          lspec.normalColor = getLabelSpec(group).normalColor;
+        else // always get normal color from menubar (or toolbar if they're merged)
+        {
+          const label_spec lspec1 = getLabelSpec(group);
+          lspec.normalColor = lspec1.normalColor;
+          lspec.normalInactiveColor = lspec1.normalInactiveColor;
+        }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter | Qt::TextSingleLine;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -6659,7 +6796,8 @@ void Style::drawControl(ControlElement element,
         renderLabel(option,painter,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    state);
+                    state,
+                    status.contains("-inactive"));
       }
 
       break;
@@ -6766,6 +6904,8 @@ void Style::drawControl(ControlElement element,
              apps (like QtAv) might do weird things with menus */
           lspec.normalColor = lspec.focusColor
           = getName(widget->palette().color(QPalette::Active,QPalette::WindowText));
+          lspec.normalInactiveColor = lspec.focusInactiveColor
+          = getName(widget->palette().color(QPalette::Inactive,QPalette::WindowText));
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -6778,6 +6918,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    isWidgetInactive(widget),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
@@ -6800,6 +6941,8 @@ void Style::drawControl(ControlElement element,
         { // see the explanation at CE_RadioButtonLabel (above)
           lspec.normalColor = lspec.focusColor
           = getName(widget->palette().color(QPalette::Active,QPalette::WindowText));
+          lspec.normalInactiveColor = lspec.focusInactiveColor
+          = getName(widget->palette().color(QPalette::Inactive,QPalette::WindowText));
         }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
@@ -6812,6 +6955,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    isWidgetInactive(widget),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
@@ -6921,6 +7065,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
@@ -7528,6 +7673,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
                     state,
+                    isWidgetInactive(widget),
                     getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                     iconSize);
 
@@ -7597,51 +7743,84 @@ void Style::drawControl(ControlElement element,
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec("ToolboxTab");
-            QColor normalColor = getFromRGBA(lspec.normalColor);
-            QColor focusColor = getFromRGBA(lspec.focusColor);
-            QColor pressColor = getFromRGBA(lspec.pressColor);
-            if (state == 1 && normalColor.isValid())
+            if (state == 1)
             {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, normalColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
-            }
-            else if (state == 2 && focusColor.isValid())
-            {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, focusColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && !opt->icon.isNull())
+              QColor col;
+              if (isWidgetInactive(widget))
               {
-                QPixmap px = tintedPixmap(option,
-                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                          tintPercentage);
-                o.icon = QIcon(px);
+                col = getFromRGBA(lspec.normalInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.normalColor);
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
-            }
-            else if (state == 3 && pressColor.isValid())
-            {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, pressColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+              else
+                col = getFromRGBA(lspec.normalColor);
+              if (col.isValid())
               {
-                QPixmap px = tintedPixmap(option,
-                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                          tintPercentage);
-                o.icon = QIcon(px);
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, col);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+            }
+            else if (state == 2)
+            {
+              QColor col;
+              if (isWidgetInactive(widget))
+              {
+                col = getFromRGBA(lspec.focusInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.focusColor);
+              }
+              else
+                col = getFromRGBA(lspec.focusColor);
+              if (col.isValid())
+              {
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, col);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0 && !opt->icon.isNull())
+                {
+                  QPixmap px = tintedPixmap(option,
+                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                            tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
+            }
+            else if (state == 3)
+            {
+              QColor col;
+              if (isWidgetInactive(widget))
+              {
+                col = getFromRGBA(lspec.pressInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.pressColor);
+              }
+              else
+                col = getFromRGBA(lspec.pressColor);
+              if (col.isValid())
+              {
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, col);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+                {
+                  QPixmap px = tintedPixmap(option,
+                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                            tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
           }
           else
@@ -8046,6 +8225,7 @@ void Style::drawControl(ControlElement element,
           }
         }
 
+        bool isInactive(isWidgetInactive(widget));
         if (R.isValid())
         {
           painter->save();
@@ -8054,7 +8234,9 @@ void Style::drawControl(ControlElement element,
         renderLabel(option,painter,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,state);
+                    Qt::AlignCenter,txt,QPalette::WindowText,
+                    state,
+                    isInactive);
         if (R.isValid())
         {
           painter->restore();
@@ -8063,7 +8245,9 @@ void Style::drawControl(ControlElement element,
           renderLabel(option,painter,
                       r,
                       fspec,lspec,
-                      Qt::AlignCenter,txt,QPalette::WindowText,-1);
+                      Qt::AlignCenter,txt,QPalette::WindowText,
+                      -1,
+                      isInactive);
           painter->restore();
         }
       }
@@ -8516,6 +8700,7 @@ void Style::drawControl(ControlElement element,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
       }
@@ -8756,7 +8941,10 @@ void Style::drawControl(ControlElement element,
           state = 2;
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
-          lspec.normalColor = getName(QApplication::palette().color(QPalette::WindowText));
+        {
+          lspec.normalColor = getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
+          lspec.normalInactiveColor = getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+        }
 
         QStyleOptionButton o(*opt);
         if ((option->state & State_MouseOver) && state != 2)
@@ -8778,6 +8966,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
@@ -8985,7 +9174,10 @@ void Style::drawControl(ControlElement element,
                 animationStartState_ = status;
             }
             if (fillWidgetInterior) // widget isn't null
-              painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Button));
+              painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                                            ? QPalette::Inactive
+                                                                                            : QPalette::Active,
+                                                                                          QPalette::Button));
           }
           // fade out animation
           else if (animate)
@@ -9001,7 +9193,10 @@ void Style::drawControl(ControlElement element,
                 renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
               painter->restore();
               if (fillWidgetInterior)
-                painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Button));
+                painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                                              ? QPalette::Inactive
+                                                                                              : QPalette::Active,
+                                                                                            QPalette::Button));
             }
             if (animationOpacity_ >= 100)
               animationStartState_ = status;
@@ -9229,7 +9424,10 @@ void Style::drawControl(ControlElement element,
                   dspec.element = "flat-"+dspec.element;
                 }
                 if (isNormal)
+                {
                   lspec.normalColor = lspec1.normalColor;
+                  lspec.normalInactiveColor = lspec1.normalInactiveColor;
+                }
               }
             }
             else if (stb)
@@ -9244,18 +9442,30 @@ void Style::drawControl(ControlElement element,
                   dspec.element = "flat-"+dspec.element;
                 }
                 if (isNormal)
+                {
                   lspec.normalColor = lspec1.normalColor;
+                  lspec.normalInactiveColor = lspec1.normalInactiveColor;
+                }
               }
             }
             else if (p)
             {
               QColor col;
               if (!(autoraise && !drawRaised) && noPanel) // an already styled toolbutton
-                col = opt->palette.color(QPalette::ButtonText); // p->palette()?
+                col = opt->palette.color(status.contains("-inactive")
+                                           ? QPalette::Inactive
+                                           : QPalette::Active,
+                                         QPalette::ButtonText); // p->palette()?
               else
-                col = p->palette().color(p->foregroundRole());
+                col = p->palette().color(status.contains("-inactive")
+                                           ? QPalette::Inactive
+                                           : QPalette::Active,
+                                         p->foregroundRole());
               if (!col.isValid())
-                col = QApplication::palette().color(QPalette::WindowText);
+                col = QApplication::palette().color(status.contains("-inactive")
+                                                     ? QPalette::Inactive
+                                                     : QPalette::Active,
+                                                    QPalette::WindowText);
               if (isNormal || noPanel)
               {
                 if (themeRndr_ && themeRndr_->isValid()
@@ -9265,24 +9475,34 @@ void Style::drawControl(ControlElement element,
                   dspec.element = "flat-"+dspec.element;
                 }
                 if (isNormal)
-                  lspec.normalColor = getName(col);
+                {
+                  lspec.normalColor = lspec.normalInactiveColor = getName(col);
+                }
 
                 if (/*inPlasma ||*/ noPanel)
                 {
-                  lspec.focusColor = getName(col);
-                  lspec.toggleColor = getName(col);
+                  lspec.focusColor = lspec.focusInactiveColor = getName(col);
+                  lspec.toggleColor = lspec.toggleInactiveColor = getName(col);
                   /* take care of Plasma menu titles */
                   if (!qobject_cast<QMenu*>(p))
-                    lspec.pressColor = getName(col);
+                  {
+                    lspec.pressColor = lspec.pressInactiveColor = getName(col);
+                  }
                   else if (transMenuTitle)
+                  {
                     lspec.pressColor = getLabelSpec("MenuItem").normalColor;
+                    lspec.pressInactiveColor = getLabelSpec("MenuItem").normalInactiveColor;
+                  }
                 }
               }
             }
           }
           /* KDE menu titles */
           else if (qobject_cast<QMenu*>(p) && transMenuTitle)
+          {
             lspec.pressColor = getLabelSpec("MenuItem").normalColor;
+            lspec.pressInactiveColor = getLabelSpec("MenuItem").normalInactiveColor;
+          }
 
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
           if (tialign != Qt::ToolButtonIconOnly)
@@ -9407,7 +9627,8 @@ void Style::drawControl(ControlElement element,
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          lspec.normalColor = getName(opt->palette.color(QPalette::ButtonText));
+          lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
+          lspec.normalInactiveColor = getName(opt->palette.color(QPalette::Inactive,QPalette::ButtonText));
         }
 
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
@@ -9540,6 +9761,7 @@ void Style::drawControl(ControlElement element,
                       fspec,lspec,
                       talign,txt,QPalette::ButtonText,
                       state,
+                      status.contains("-inactive"),
                       getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
@@ -10091,7 +10313,10 @@ void Style::drawComplexControl(ComplexControl control,
             }
           }
           if (fillWidgetInterior) // widget isn't null
-            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(QPalette::Base));
+            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(leStatus.contains("-inctive")
+                                                                               ? QPalette::Inactive
+                                                                               : QPalette::Active,
+                                                                             QPalette::Base));
           if (!(option->state & State_Enabled))
             painter->restore();
         }
@@ -10372,9 +10597,12 @@ void Style::drawComplexControl(ComplexControl control,
                 }
               }
               if (fillWidgetInterior) // widget isn't null
-                painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
-                                                                                 ? QPalette::Base
-                                                                                 : QPalette::Button));
+                painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                                   ? QPalette::Inactive
+                                                                                   : QPalette::Active,
+                                                                                 tspec_.combo_as_lineedit
+                                                                                   ? QPalette::Base
+                                                                                   : QPalette::Button));
             }
             if (libreoffice) painter->restore();
             /* draw focus rect */
@@ -11133,6 +11361,7 @@ void Style::drawComplexControl(ComplexControl control,
                       fspec,lspec,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
+                      false,
                       getPixmapFromIcon(o.icon,QIcon::Normal,QIcon::Off,iconSize),
                       iconSize);
         }
@@ -11362,14 +11591,33 @@ void Style::drawComplexControl(ComplexControl control,
         // Draw title
         if ((opt->subControls & QStyle::SC_GroupBoxLabel) && !opt->text.isEmpty())
         {
+          bool isInactive(isWidgetInactive(widget));
           const label_spec lspec = getLabelSpec("GroupBox");
           QColor col;
           if (!(option->state & State_Enabled))
             col = getFromRGBA(cspec_.disabledTextColor);
           else if (option->state & State_MouseOver)
-            col = getFromRGBA(lspec.focusColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
+               col = getFromRGBA(lspec.focusColor);
+            }
+            else
+              col = getFromRGBA(lspec.focusColor);
+          }
           else
-            col = getFromRGBA(lspec.normalColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
+               col = getFromRGBA(lspec.normalColor);
+            }
+            else
+              col = getFromRGBA(lspec.normalColor);
+          }
           if (!col.isValid())
             col = option->palette.color(QPalette::Text);
 
@@ -11392,7 +11640,15 @@ void Style::drawComplexControl(ComplexControl control,
 
           if (lspec.hasShadow)
           {
-            QColor shadowColor = getFromRGBA(lspec.shadowColor);
+            QColor shadowColor;
+            if (isInactive)
+            {
+              shadowColor = getFromRGBA(lspec.inactiveShadowColor);
+              if (!shadowColor.isValid())
+                shadowColor = getFromRGBA(lspec.shadowColor);
+            }
+            else
+              shadowColor = getFromRGBA(lspec.shadowColor);
             /* the shadow should have enough contrast with the text */
             if (shadowColor.isValid() && enoughContrast(col, shadowColor))
             {
@@ -14962,7 +15218,7 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
     case QIcon::Selected: {
       if (hspec_.no_selection_tint) break;
       QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
-      QColor color = option->palette.color(QPalette::Normal, QPalette::Highlight);
+      QColor color = option->palette.color(QPalette::Active, QPalette::Highlight);
       color.setAlphaF(qreal(0.2)); // Qt sets it to 0.3
       QPainter painter(&img);
       painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
@@ -15786,6 +16042,7 @@ void Style::renderLabel(
                         const QString &text,
                         QPalette::ColorRole textRole, // text color role
                         int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
+                        bool isInactive,
                         const QPixmap &px,
                         QSize iconSize,
                         const Qt::ToolButtonStyle tialign, // relative positions of text and icon
@@ -15977,80 +16234,149 @@ void Style::renderLabel(
                 || (state == 4 && (!toggleColor.isValid() || enoughContrast(toggleColor, shadowColor)))
                 || (state == -1 && (!progColor.isValid() || enoughContrast(progColor, shadowColor)))))
         {
+          QColor col;
+          if (isInactive)
+          {
+            col = getFromRGBA(lspec.inactiveShadowColor);
+            if (!col.isValid())
+              col = shadowColor;
+          }
+          else
+            col = shadowColor;
           painter->save();
           if (lspec.a < 255)
-            shadowColor.setAlpha(lspec.a);
-          painter->setPen(QPen(shadowColor));
+            col.setAlpha(lspec.a);
+          painter->setPen(QPen(col));
           for (int i=0; i<lspec.depth; i++)
             painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
           painter->restore();
         }
       }
 
-      if (state == 1 && normalColor.isValid())
+      if (state == 1)
       {
-        painter->save();
-        painter->setPen(QPen(normalColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.normalInactiveColor);
+          if (!col.isValid())
+            col = normalColor;
+        }
+        else
+          col = normalColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 2 && focusColor.isValid())
+      else if (state == 2)
       {
-        painter->save();
-        painter->setPen(QPen(focusColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.focusInactiveColor);
+          if (!col.isValid())
+            col = focusColor;
+        }
+        else
+          col = focusColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 3 && pressColor.isValid())
+      else if (state == 3)
       {
-        painter->save();
-        painter->setPen(QPen(pressColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.pressInactiveColor);
+          if (!col.isValid())
+            col = pressColor;
+        }
+        else
+          col = pressColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 4 && toggleColor.isValid())
+      else if (state == 4)
       {
-        painter->save();
-        painter->setPen(QPen(toggleColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.toggleInactiveColor);
+          if (!col.isValid())
+            col = toggleColor;
+        }
+        else
+          col = toggleColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == -1 && progColor.isValid())
+      else if (state == -1)
       {
-        painter->save();
-        painter->setPen(progColor);
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(cspec_.progressInactiveIndicatorTextColor);
+          if (!col.isValid())
+            col = progColor;
+        }
+        else
+          col = progColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(col);
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
     }
     /* if this is a dark-and-light theme, the disabled color may not be suitable */

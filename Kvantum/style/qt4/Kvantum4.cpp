@@ -1032,6 +1032,7 @@ void Style::polish(QWidget *widget)
           if (menuTextColor != palette.color(QPalette::WindowText))
           {
             palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
+            palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
             widget->setPalette(palette);
           }
         }
@@ -4424,8 +4425,6 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         QString aStatus = getState(option,widget);
-        if (widget && !widget->isActiveWindow())
-          aStatus.append("-inactive");
         /* distinguish between the toggled and pressed states
            only if a toggled down arrow element exists */
         if (aStatus.startsWith("toggled")

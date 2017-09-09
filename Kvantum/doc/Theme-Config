@@ -566,8 +566,16 @@ window.color                      string (#RRGGBBAA)  A general background color
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc.
 
+inactive.window.color            string (#RRGGBBAA)   Background color of inactive windows.
+                                                      If missing, it falls backs to
+                                                      "window.color".
+
 base.color                        string (#RRGGBBAA)  Used mostly as the background
                                                       color for text entry widgets.
+
+inactive.base.color               string (#RRGGBBAA)  Background color of inactive
+                                                      text entry widgets. If missing,
+                                                      it falls backs to "base.color".
 
 alt.base.color                    string (#RRGGBBAA)  Used as the alternate background
                                                       color in views with alternating
@@ -636,6 +644,10 @@ progress.indicator.text.color     string (#RRGGBBAA)  The color of that part of 
                                                       indicator. Useful when the progress
                                                       text does not have enough contrast
                                                       with the progress indicator.
+
+progress.inactive.indicator.text.color
+                                  string (#RRGGBBAA)  like "progress.indicator.text.color"
+                                                      but for inactive progress bars.
 
                           *************************
                           *** The Hacks Section ***
@@ -813,6 +825,13 @@ text.press.color                  string (#RRGGBBAA)  The color of the pressed t
 
 text.toggle.color                 string (#RRGGBBAA)  The color of the toggled text.
 
+text.normal.inactive.color
+text.focus.inactive.color
+text.press.inactive.color
+text.toggle.inactive.color        string (#RRGGBBAA)  These keys are for text colors of inactive
+                                                      widgets and fall back to their
+                                                      corresponding ordinary keys if missing. 
+
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
 
@@ -828,6 +847,9 @@ text.shadow.yshift                integer             The vertical/horizontal sh
 text.shadow.color                 string (#RRGGBBAA)  The color of the text shadow as
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc.
+
+text.inactive.shadow.color        string (#RRGGBBAA)  Like "text.shadow.color" and falling back
+                                                      to it if missing but for inactive widgets.
 
 text.shadow.alpha                 integer (0-255)     The opacity of the text shadow. 255
                                                       means completely opaque. If the alpha

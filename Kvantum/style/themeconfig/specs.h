@@ -191,6 +191,7 @@ typedef struct {
 /* General colors */
 typedef struct {
   QString windowColor;
+  QString inactiveWindowColor;
   QString baseColor;
   QString inactiveBaseColor;
   QString altBaseColor;
@@ -215,6 +216,7 @@ typedef struct {
   QString linkColor;
   QString linkVisitedColor;
   QString progressIndicatorTextColor;
+  QString progressInactiveIndicatorTextColor;
 } color_spec;
 
 /* Hacks */
@@ -320,12 +322,16 @@ typedef struct {
 typedef struct {
   /* normal text color */
   QString normalColor;
+  QString normalInactiveColor;
   /* focused text color */
   QString focusColor;
+  QString focusInactiveColor;
   /* pressed text color */
   QString pressColor;
+  QString pressInactiveColor;
   /* toggled text color */
   QString toggleColor;
+  QString toggleInactiveColor;
   /* use bold font? */
   bool boldFont;
   /* use italic font? */
@@ -336,6 +342,7 @@ typedef struct {
   int xshift,yshift;
   /* shadow color */
   QString shadowColor;
+  QString inactiveShadowColor;
   /* shadow alpha */
   int a;
   /* shadow depth */
@@ -377,8 +384,12 @@ static inline void default_indicator_spec(indicator_spec &dspec) {
 /* Fills the label spec with default values */
 static inline void default_label_spec(label_spec &lspec) {
   lspec.normalColor = QString();
+  lspec.normalInactiveColor = QString();
   lspec.focusColor = QString();
+  lspec.focusInactiveColor = QString();
   lspec.pressColor = QString();
+  lspec.pressInactiveColor = QString();
+  lspec.toggleColor = QString();
   lspec.toggleColor = QString();
   lspec.boldFont = false;
   lspec.italicFont = false;
@@ -386,6 +397,7 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.xshift = 0;
   lspec.yshift = 1;
   lspec.shadowColor = QString("#000000");
+  lspec.inactiveShadowColor = QString();
   lspec.a = 255;
   lspec.depth = 1;
   lspec.hasMargin = false;
@@ -474,7 +486,9 @@ static inline void default_theme_spec(theme_spec &tspec) {
 
 static inline void default_color_spec(color_spec &cspec) {
   cspec.windowColor = QString();
+  cspec.inactiveWindowColor = QString();
   cspec.baseColor = QString();
+  cspec.inactiveBaseColor = QString();
   cspec.altBaseColor = QString();
   cspec.buttonColor = QString();
   cspec.lightColor = QString();
@@ -486,7 +500,9 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.inactiveHighlightColor = QString();
   cspec.tooltipBasetColor = QString();
   cspec.textColor = QString();
+  cspec.inactiveTextColor = QString();
   cspec.windowTextColor = QString();
+  cspec.inactiveWindowTextColor = QString();
   cspec.buttonTextColor = QString();
   cspec.disabledTextColor = QString();
   cspec.tooltipTextColor = QString();
@@ -494,6 +510,7 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.linkColor = QString();
   cspec.linkVisitedColor = QString();
   cspec.progressIndicatorTextColor = QString();
+  cspec.progressInactiveIndicatorTextColor = QString();
 }
 
 /* Fills the hacks spec with default values */
