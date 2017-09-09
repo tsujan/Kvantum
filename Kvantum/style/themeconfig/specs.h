@@ -192,6 +192,7 @@ typedef struct {
 typedef struct {
   QString windowColor;
   QString baseColor;
+  QString inactiveBaseColor;
   QString altBaseColor;
   QString buttonColor;
   QString lightColor;

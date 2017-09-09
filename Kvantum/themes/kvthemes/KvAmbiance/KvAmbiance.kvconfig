@@ -46,7 +46,7 @@ button_contents_shift=false
 combo_menu=true
 hide_combo_checkboxes=true
 combo_focus_rect=true
-groupbox_top_label=false
+groupbox_top_label=true
 joined_inactive_tabs=true
 layout_margin=9
 respect_DE=true
@@ -58,6 +58,7 @@ tree_branch_line=true
 [GeneralColors]
 window.color=#f2f1f0
 base.color=white
+inactive.base.color=#F2F1F0
 alt.base.color=#F0F0F0
 button.color=#e9e9e9
 light.color=white
@@ -466,17 +467,13 @@ text.shadow=false
 
 [GroupBox]
 inherits=GenericFrame
-frame=true
-frame.element=group
+frame=false
+text.shadow=0
 text.margin=0
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
-text.normal.color=#000000be
-text.press.color=#4C4C4C
+text.normal.color=#4C4C4C
 text.focus.color=#4C4C4C
 text.bold=true
+frame.expansion=0
 
 [TabBarFrame]
 inherits=PanelButtonCommand
