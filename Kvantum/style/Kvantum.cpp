@@ -5982,6 +5982,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         ivStatus.replace("focused","normal");
       }
+      bool isInactive(isWidgetInactive(widget));
 
       const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option);
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
@@ -6066,13 +6067,29 @@ void Style::drawPrimitive(PrimitiveElement element,
             QColor col;
             if (ivStatus == "normal")
             {
-              QColor tmpCol = getFromRGBA(lspec.normalColor);
+              QColor tmpCol;
+              if (isInactive)
+              {
+                tmpCol = getFromRGBA(lspec.normalInactiveColor);
+                if (!tmpCol.isValid())
+                  tmpCol = getFromRGBA(lspec.normalColor);
+              }
+              else
+                tmpCol = getFromRGBA(lspec.normalColor);
               if (enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
                 col = tmpCol;
             }
             else if (ivStatus == "focused")
             {
-              QColor tmpCol = getFromRGBA(lspec.focusColor);
+              QColor tmpCol;
+              if (isInactive)
+              {
+                tmpCol = getFromRGBA(lspec.focusInactiveColor);
+                if (!tmpCol.isValid())
+                  tmpCol = getFromRGBA(lspec.focusColor);
+              }
+              else
+                tmpCol = getFromRGBA(lspec.focusColor);
               if (enoughContrast(QApplication::palette().color(QPalette::Text), tmpCol)
                   // supposing that the focus interior is translucent, take care of contrast
                   || enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
@@ -6081,11 +6098,32 @@ void Style::drawPrimitive(PrimitiveElement element,
               }
             }
             else if (ivStatus == "pressed")
-              col = getFromRGBA(lspec.pressColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.pressInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.pressColor);
+              }
+              else
+                col = getFromRGBA(lspec.pressColor);
+            }
             else if (ivStatus == "toggled")
-              col = getFromRGBA(lspec.toggleColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.toggleInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.toggleColor);
+              }
+              else
+                col = getFromRGBA(lspec.toggleColor);
+            }
             if (!col.isValid())
-              col = QApplication::palette().color(QPalette::Text);
+            {
+              col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                                  QPalette::Text);
+            }
             if (col.isValid())
             {
               QPalette palette = iw->palette();
@@ -6100,7 +6138,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (ivStatus == "normal" || ivStatus == "disabled")
         break; // for the sake of consistency, we don't draw any background here
 
-      if (isWidgetInactive(widget))
+      if (isInactive)
         ivStatus.append("-inactive");
 
       /* this is needed for elegance */
