@@ -2685,7 +2685,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       const label_spec lspec = getLabelSpec("ItemView");
       /* set the toggled inactive text color to the toggled active one
-         (the main purpose of installing an event file on the view) */
+         (the main purpose of installing an event filter on the view) */
       palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
                        getFromRGBA(lspec.toggleColor));
       /* set the normal inactive text color to the normal active one
