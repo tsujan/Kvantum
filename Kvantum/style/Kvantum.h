@@ -427,6 +427,11 @@ class Style : public QCommonStyle {
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;
 
+    /* for enforcing the text color of inactive selected items */
+    bool hasInactiveSelItemCol_;
+    /* Does the toggled (active but unfocused) view-item have a high contrast with the pressed one? */
+    bool toggledItemHasContrast_;
+
 #if QT_VERSION >= 0x050500
     mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars
 #endif

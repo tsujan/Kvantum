@@ -224,6 +224,43 @@ static void setAppFont()
   }
 }
 
+static inline bool enoughContrast (QColor col1, QColor col2)
+{
+  if (!col1.isValid() || !col2.isValid()) return false;
+  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
+    return false;
+  return true;
+}
+
+/* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
+   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
+static inline QColor getFromRGBA(const QString str)
+{
+  QColor col(str);
+  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
+    return col;
+  bool ok;
+  int alpha = str.right(2).toInt(&ok, 16);
+  if (ok)
+  {
+    QString tmp(str);
+    tmp.remove(7, 2);
+    col = QColor(tmp);
+    col.setAlpha(alpha);
+  }
+  return col;
+}
+
+/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
+static inline QString getName(const QColor col)
+{
+  QString colName = col.name();
+  long alpha = col.alpha();
+  if (alpha < 255)
+    colName += QString::number(alpha, 16);
+  return colName;
+}
+
 Style::Style(bool useDark) : QCommonStyle()
 {
   progressTimer_ = new QTimer(this);
@@ -413,6 +450,21 @@ Style::Style(bool useDark) : QCommonStyle()
           joinedActiveFloatingTab_ = true;
         }
       }
+    }
+  }
+
+  // decide about view-item colors once for all
+  hasInactiveSelItemCol_ = toggledItemHasContrast_ = false;
+  const label_spec lspec = getLabelSpec("ItemView");
+  QColor toggleInactiveCol = getFromRGBA(lspec.toggleInactiveColor);
+  if (toggleInactiveCol.isValid())
+  {
+    QColor toggleActiveCol = getFromRGBA(lspec.toggleColor);
+    if (toggleActiveCol.isValid() && toggleActiveCol != toggleInactiveCol)
+    {
+      hasInactiveSelItemCol_ = true;
+      if (enoughContrast(toggleActiveCol, getFromRGBA(lspec.pressColor)))
+        toggledItemHasContrast_ = true;
     }
   }
 
@@ -1002,43 +1054,6 @@ static inline bool isWidgetInactive(const QWidget *widget)
     return true;
   }
   return false;
-}
-
-static inline bool enoughContrast (QColor col1, QColor col2)
-{
-  if (!col1.isValid() || !col2.isValid()) return false;
-  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
-    return false;
-  return true;
-}
-
-/* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
-   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
-static inline QColor getFromRGBA(const QString str)
-{
-  QColor col(str);
-  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
-    return col;
-  bool ok;
-  int alpha = str.right(2).toInt(&ok, 16);
-  if (ok)
-  {
-    QString tmp(str);
-    tmp.remove(7, 2);
-    col = QColor(tmp);
-    col.setAlpha(alpha);
-  }
-  return col;
-}
-
-/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
-static inline QString getName(const QColor col)
-{
-  QString colName = col.name();
-  long alpha = col.alpha();
-  if (alpha < 255)
-    colName += QString::number(alpha, 16);
-  return colName;
 }
 
 static inline QRect widgetRect(const QWidget *w)
@@ -1644,8 +1659,10 @@ void Style::polish(QWidget *widget)
       else
       {
         // support animation only if the background is flat
-        if (tspec_.animate_states
-            && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
+        if ((tspec_.animate_states
+             && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
+           || (hasInactiveSelItemCol_
+               && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items
         {
           widget->removeEventFilter(this);
           widget->installEventFilter(this);
@@ -2629,32 +2646,94 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   }
 
   case QEvent::StyleChange:
-  if (QComboBox *combo = qobject_cast<QComboBox*>(w))
-  {
-    if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
+    if (QComboBox *combo = qobject_cast<QComboBox*>(w))
     {
-      /* QComboBoxPrivate::updateDelegate() won't work correctly
-         on style change if the item delegate isn't restored here */
-      QList<QItemDelegate*> delegates = combo->findChildren<QItemDelegate*>();
-      for (int i = 0; i < delegates.count(); ++i)
+      if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
       {
-        if (delegates.at(i)->inherits("QComboBoxDelegate"))
+        /* QComboBoxPrivate::updateDelegate() won't work correctly
+           on style change if the item delegate isn't restored here */
+        QList<QItemDelegate*> delegates = combo->findChildren<QItemDelegate*>();
+        for (int i = 0; i < delegates.count(); ++i)
         {
-          combo->setItemDelegate(delegates.at(i));
-          /* we shouldn't delete the previous delegate here
-             because QComboBox::setItemDelegate() deletes it */
-          break;
+          if (delegates.at(i)->inherits("QComboBoxDelegate"))
+          {
+            combo->setItemDelegate(delegates.at(i));
+            /* we shouldn't delete the previous delegate here
+               because QComboBox::setItemDelegate() deletes it */
+            break;
+          }
         }
       }
     }
-  }
-  else if (gtkDesktop_
-           && (!w->parent() || !qobject_cast<QWidget*>(w->parent())
-               || qobject_cast<QDialog*>(w) || qobject_cast<QMainWindow*>(w)))
-  {
-    setGtkVariant(w, tspec_.dark_titlebar);
-  }
-  break;
+    else if (gtkDesktop_
+             && (!w->parent() || !qobject_cast<QWidget*>(w->parent())
+                 || qobject_cast<QDialog*>(w) || qobject_cast<QMainWindow*>(w)))
+    {
+      setGtkVariant(w, tspec_.dark_titlebar);
+    }
+    break;
+
+  case QEvent::WindowActivate:
+    if (hasInactiveSelItemCol_
+        && qobject_cast<QAbstractItemView*>(w))
+    {
+      QPalette palette = w->palette();
+      if (palette.color(QPalette::Active, QPalette::Text)
+          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+      { // Custom text color; don't set palettes! The app is responsible for all colors.
+        break;
+      }
+      const label_spec lspec = getLabelSpec("ItemView");
+      /* set the toggled inactive text color to the toggled active one
+         (the main purpose of installing an event file on the view) */
+      palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleColor));
+      /* set the normal inactive text color to the normal active one
+         (needed when the app sets it inactive) */
+      QColor normalCol = getFromRGBA(lspec.normalColor);
+      if (!normalCol.isValid())
+        normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+      palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+      /* use the active highlight color for the toggled (unfocused) item if there's
+         no contrast with the pressed state because some apps (like Qt Designer)
+         may not call PE_PanelItemViewItem but highlight the item instead */
+      if (!toggledItemHasContrast_)
+      {
+        palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                         QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+      }
+      w->setPalette(palette);
+    }
+    break;
+
+  case QEvent::WindowDeactivate:
+    if (hasInactiveSelItemCol_
+        && qobject_cast<QAbstractItemView*>(w))
+    {
+      QPalette palette = w->palette();
+      if (palette.color(QPalette::Active, QPalette::Text)
+          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+      { // custom text color
+        break;
+      }
+      const label_spec lspec = getLabelSpec("ItemView");
+      /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleInactiveColor));
+      /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
+      QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
+      if (!normalInactiveCol.isValid())
+        normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+      palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+      /* restore the inactive highlight color (which was changed at QEvent::WindowActivate) */
+      if (!toggledItemHasContrast_)
+      {
+        palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                         QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+      }
+      w->setPalette(palette);
+    }
+    break;
 
   case QEvent::Show:
     if (w)

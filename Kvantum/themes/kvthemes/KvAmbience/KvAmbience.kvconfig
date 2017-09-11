@@ -57,6 +57,7 @@ tree_branch_line=false
 
 [GeneralColors]
 window.color=#e6e5e4
+inactive.window.color=#dedddd
 base.color=#FAFAFA
 alt.base.color=#F0F0F0
 button.color=#e6e5e4
@@ -65,16 +66,20 @@ mid.light.color=#ECECEC
 dark.color=#BEBEBE
 mid.color=#D9D9D9
 highlight.color=#dc6434
-inactive.highlight.color=#dc6434
+inactive.highlight.color=#f5c6b5
 text.color=black
+inactive.text.color=#000000a0
 window.text.color=black
+inactive.window.text.color=#000000a0
 button.text.color=black
 disabled.text.color=#787878
 tooltip.text.color=white
 highlight.text.color=white
+inactive.highlight.text.color=black
 link.color=#0057AE
 link.visited.color=#452886
 progress.indicator.text.color=white
+progress.inactive.indicator.text.color=#ffffffc8
 
 [Hacks]
 transparent_ktitle_label=true
@@ -111,6 +116,9 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=black
 text.toggle.color=black
+text.normal.inactive.color=#000000a0
+text.press.inactive.color=#000000be
+text.toggle.inactive.color=#000000a0
 text.shadow=true
 text.shadow.color=white
 text.shadow.alpha=190
@@ -134,9 +142,11 @@ frame.expandedElement=ebutton
 frame.element=tbutton
 interior.element=tbutton
 text.normal.color=white
+text.normal.inactive.color=#ffffffc8
 text.focus.color=white
 text.press.color=white
 text.toggle.color=white
+text.toggle.inactive.color=#ffffffc8
 text.shadow=false
 indicator.element=tarrow
 
@@ -158,10 +168,10 @@ frame.left=3
 frame.right=3
 frame=false
 interior=false
-text.normal.color=#000000be
+text.normal.color=#000000aa
 text.focus.color=black
 text.bold=true
-text.shadow=false
+text.shadow=true
 text.margin.top=2
 text.margin.bottom=2
 
@@ -225,7 +235,9 @@ indicator.size=9
 [ToolboxTab]
 inherits=PanelButtonCommand
 text.normal.color=#000000b4
+text.normal.inactive.color=#000000a0
 text.press.color=#000000be
+text.press.inactive.color=#0000008c
 text.focus.color=black
 text.shadow=false
 
@@ -239,8 +251,10 @@ text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
 text.normal.color=#0000007d
+text.normal.inactive.color=#0000006e
 text.focus.color=#000000b4
 text.toggle.color=black
+text.toggle.inactive.color=#000000a0
 text.bold=true
 frame.expansion=0
 
@@ -258,9 +272,10 @@ indicator.element=arrow
 
 [HeaderSection]
 inherits=PanelButtonCommand
-text.shadow=false
+text.shadow=true
 text.bold=true
 text.normal.color=#000000be
+text.normal.inactive.color=#0000008c
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -275,6 +290,7 @@ frame=true
 interior.element=menubar
 frame.element=menubar
 text.normal.color=white
+text.normal.inactive.color=#ffffffc8
 text.focus.color=white
 frame.bottom=3
 text.shadow=false
@@ -304,6 +320,7 @@ frame.element=progress
 interior.element=progress
 text.margin=0
 text.normal.color=#000000be
+text.normal.inactive.color=#0000008c
 text.focus.color=black
 text.press.color=black
 text.toggle.color=black
@@ -338,6 +355,7 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=white
 text.toggle.color=white
+text.toggle.inactive.color=black
 text.shadow=false
 frame.expansion=0
 
@@ -373,6 +391,7 @@ frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 text.normal.color=white
+text.normal.inactive.color=#ffffffc8
 text.focus.color=white
 text.margin.top=2
 text.margin.bottom=2
@@ -398,6 +417,7 @@ frame.element=menubar
 frame.bottom=1
 frame.expansion=0
 text.normal.color=white
+text.normal.inactive.color=#ffffffc8
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -413,6 +433,7 @@ text.margin.right=4
 text.margin.top=3
 text.margin.bottom=2
 text.normal.color=white
+text.normal.inactive.color=#ffffffc8
 text.focus.color=white
 text.shadow=false
 frame.expansion=0
@@ -453,6 +474,7 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.normal.color=#000000be
+text.normal.inactive.color=#0000008c
 text.press.color=black
 text.focus.color=black
 text.bold=true
