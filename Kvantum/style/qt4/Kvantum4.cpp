@@ -127,6 +127,43 @@ static void setAppFont()
   }
 }
 
+static inline bool enoughContrast (QColor col1, QColor col2)
+{
+  if (!col1.isValid() || !col2.isValid()) return false;
+  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
+    return false;
+  return true;
+}
+
+/* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
+   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
+static inline QColor getFromRGBA(const QString str)
+{
+  QColor col(str);
+  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
+    return col;
+  bool ok;
+  int alpha = str.right(2).toInt(&ok, 16);
+  if (ok)
+  {
+    QString tmp(str);
+    tmp.remove(7, 2);
+    col = QColor(tmp);
+    col.setAlpha(alpha);
+  }
+  return col;
+}
+
+/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
+static inline QString getName(const QColor col)
+{
+  QString colName = col.name();
+  long alpha = col.alpha();
+  if (alpha < 255)
+    colName += QString::number(alpha, 16);
+  return colName;
+}
+
 Style::Style() : QCommonStyle()
 {
   progressTimer_ = new QTimer(this);
@@ -287,6 +324,21 @@ Style::Style() : QCommonStyle()
           joinedActiveFloatingTab_ = true;
         }
       }
+    }
+  }
+
+  // decide about view-item colors once for all
+  hasInactiveSelItemCol_ = toggledItemHasContrast_ = false;
+  const label_spec lspec = getLabelSpec("ItemView");
+  QColor toggleInactiveCol = getFromRGBA(lspec.toggleInactiveColor);
+  if (toggleInactiveCol.isValid())
+  {
+    QColor toggleActiveCol = getFromRGBA(lspec.toggleColor);
+    if (toggleActiveCol.isValid() && toggleActiveCol != toggleInactiveCol)
+    {
+      hasInactiveSelItemCol_ = true;
+      if (enoughContrast(toggleActiveCol, getFromRGBA(lspec.pressColor)))
+        toggledItemHasContrast_ = true;
     }
   }
 
@@ -764,43 +816,6 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   for (int i = 1; i < level && w; ++i)
     w = w->parentWidget();
   return w;
-}
-
-static inline bool enoughContrast (QColor col1, QColor col2)
-{
-  if (!col1.isValid() || !col2.isValid()) return false;
-  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
-    return false;
-  return true;
-}
-
-/* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
-   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
-static inline QColor getFromRGBA(const QString str)
-{
-  QColor col(str);
-  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
-    return col;
-  bool ok;
-  int alpha = str.right(2).toInt(&ok, 16);
-  if (ok)
-  {
-    QString tmp(str);
-    tmp.remove(7, 2);
-    col = QColor(tmp);
-    col.setAlpha(alpha);
-  }
-  return col;
-}
-
-/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
-static inline QString getName(const QColor col)
-{
-  QString colName = col.name();
-  long alpha = col.alpha();
-  if (alpha < 255)
-    colName += QString::number(alpha, 16);
-  return colName;
 }
 
 static inline QRect widgetRect(const QWidget *w)
@@ -1352,6 +1367,12 @@ void Style::polish(QWidget *widget)
       }
       else
       {
+        if (hasInactiveSelItemCol_
+            && qobject_cast<QAbstractItemView*>(widget)) // enforce the text color of inactive selected items
+        {
+          widget->removeEventFilter(this);
+          widget->installEventFilter(this);
+        }
         // set the background correctly when scrollbars are either inside the frame or inside a combo popup
         if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView") && !tspec_.combo_menu))
             && vp && vp->autoFillBackground()
@@ -1580,13 +1601,31 @@ void Style::polish(QPalette &palette)
   /* background colors */
   QColor col = getFromRGBA(cspec_.windowColor);
   if (col.isValid())
-    palette.setColor(QPalette::Window,col);
+  {
+    palette.setColor(QPalette::Active,QPalette::Window,col);
+    col1 = getFromRGBA(cspec_.inactiveWindowColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Window,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Window,col);
+  }
+
   col = getFromRGBA(cspec_.baseColor);
   if (col.isValid())
-    palette.setColor(QPalette::Base,col);
+  {
+    palette.setColor(QPalette::Active,QPalette::Base,col);
+    col1 = getFromRGBA(cspec_.inactiveBaseColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Base,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Base,col);
+  }
+
+  /* an "inactiveAltBaseColor" would be inconsistent */
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
     palette.setColor(QPalette::AlternateBase,col);
+
   col = getFromRGBA(cspec_.buttonColor);
   if (col.isValid())
     palette.setColor(QPalette::Button,col);
@@ -1609,10 +1648,14 @@ void Style::polish(QPalette &palette)
 
   col = getFromRGBA(cspec_.highlightColor);
   if (col.isValid())
+  {
     palette.setColor(QPalette::Active,QPalette::Highlight,col);
-  col = getFromRGBA(cspec_.inactiveHighlightColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+    col1 = getFromRGBA(cspec_.inactiveHighlightColor);
+    if (col1.isValid())
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+  }
 
   col = getFromRGBA(cspec_.tooltipBasetColor);
   if (col.isValid())
@@ -1640,6 +1683,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::Text,col);
   }
+
   col = getFromRGBA(cspec_.windowTextColor);
   if (col.isValid())
   {
@@ -1650,6 +1694,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
   }
+
   col = getFromRGBA(cspec_.buttonTextColor);
   if (col.isValid())
   {
@@ -1659,6 +1704,7 @@ void Style::polish(QPalette &palette)
   col = getFromRGBA(cspec_.tooltipTextColor);
   if (col.isValid())
     palette.setColor(QPalette::ToolTipText,col);
+
   col = getFromRGBA(cspec_.highlightTextColor);
   if (col.isValid())
   {
@@ -1669,6 +1715,7 @@ void Style::polish(QPalette &palette)
     else
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
   }
+
   col = getFromRGBA(cspec_.linkColor);
   if (col.isValid())
     palette.setColor(QPalette::Link,col);
@@ -1977,26 +2024,88 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::StyleChange:
-  if (QComboBox *combo = qobject_cast<QComboBox*>(w))
-  {
-    if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
+    if (QComboBox *combo = qobject_cast<QComboBox*>(w))
     {
-      /* QComboBoxPrivate::updateDelegate() won't work correctly
-         on style change if the item delegate isn't restored here */
-      QList<QItemDelegate*> delegates = combo->findChildren<QItemDelegate*>();
-      for (int i = 0; i < delegates.count(); ++i)
+      if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
       {
-        if (delegates.at(i)->inherits("QComboBoxDelegate"))
+        /* QComboBoxPrivate::updateDelegate() won't work correctly
+           on style change if the item delegate isn't restored here */
+        QList<QItemDelegate*> delegates = combo->findChildren<QItemDelegate*>();
+        for (int i = 0; i < delegates.count(); ++i)
         {
-          combo->setItemDelegate(delegates.at(i));
-          /* we shouldn't delete the previous delegate here
-             because QComboBox::setItemDelegate() deletes it */
-          break;
+          if (delegates.at(i)->inherits("QComboBoxDelegate"))
+          {
+            combo->setItemDelegate(delegates.at(i));
+            /* we shouldn't delete the previous delegate here
+               because QComboBox::setItemDelegate() deletes it */
+            break;
+          }
         }
       }
     }
-  }
-  break;
+    break;
+
+  case QEvent::WindowActivate:
+    if (hasInactiveSelItemCol_
+        && qobject_cast<QAbstractItemView*>(o))
+    {
+      QPalette palette = w->palette();
+      if (palette.color(QPalette::Active, QPalette::Text)
+          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+      { // Custom text color; don't set palettes! The app is responsible for all colors.
+        break;
+      }
+      const label_spec lspec = getLabelSpec("ItemView");
+      /* set the toggled inactive text color to the toggled active one
+         (the main purpose of installing an event filter on the view) */
+      palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleColor));
+      /* set the normal inactive text color to the normal active one
+         (needed when the app sets it inactive) */
+      QColor normalCol = getFromRGBA(lspec.normalColor);
+      if (!normalCol.isValid())
+        normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+      palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+      /* use the active highlight color for the toggled (unfocused) item if there's
+         no contrast with the pressed state because some apps (like Qt Designer)
+         may not call PE_PanelItemViewItem but highlight the item instead */
+      if (!toggledItemHasContrast_)
+      {
+        palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                         QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+      }
+      w->setPalette(palette);
+    }
+    break;
+
+  case QEvent::WindowDeactivate:
+    if (hasInactiveSelItemCol_
+        && qobject_cast<QAbstractItemView*>(o))
+    {
+      QPalette palette = w->palette();
+      if (palette.color(QPalette::Active, QPalette::Text)
+          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+      { // custom text color
+        break;
+      }
+      const label_spec lspec = getLabelSpec("ItemView");
+      /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleInactiveColor));
+      /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
+      QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
+      if (!normalInactiveCol.isValid())
+        normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+      palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+      /* restore the inactive highlight color (which was changed at QEvent::WindowActivate) */
+      if (!toggledItemHasContrast_)
+      {
+        palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                         QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+      }
+      w->setPalette(palette);
+    }
+    break;
 
   case QEvent::Show:
     if (w)
@@ -2188,6 +2297,50 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
+      }
+      else if (qobject_cast<QAbstractItemView*>(o))
+      {
+        /* view palettes should also be set when the view is shown
+           and not only when its window is activated/deactivated
+           (-> QEvent::WindowActivate and QEvent::WindowDeactivate) */
+        if (!hasInactiveSelItemCol_)
+          break;
+        QPalette palette = w->palette();
+        if (palette.color(QPalette::Active, QPalette::Text)
+            != QApplication::palette().color(QPalette::Active, QPalette::Text))
+        {
+          break;
+        }
+        const label_spec lspec = getLabelSpec("ItemView");
+        if (!w->isActiveWindow()) // FIXME: probably not needed with inactive window
+        {
+          palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleInactiveColor));
+          QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
+          if (!normalInactiveCol.isValid())
+            normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+          palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+          if (!toggledItemHasContrast_)
+          {
+            palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                             QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+          }
+        }
+        else
+        {
+          palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleColor));
+          QColor normalCol = getFromRGBA(lspec.normalColor);
+          if (!normalCol.isValid())
+            normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+          palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+          if (!toggledItemHasContrast_)
+          {
+            palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                             QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+          }
+        }
+        w->setPalette(palette);
       }
     }
     break;
@@ -5326,7 +5479,8 @@ void Style::drawControl(ControlElement element,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
-                          state);
+                          state,
+                          status.contains("-inactive"));
             }
             else
             {
@@ -5368,6 +5522,7 @@ void Style::drawControl(ControlElement element,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,
+                          status.contains("-inactive"),
                           getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                           iconSize);
             }
@@ -5385,7 +5540,8 @@ void Style::drawControl(ControlElement element,
                         fspec,lspec,
                         Qt::AlignRight | talign,
                         l[1],QPalette::Text,
-                        state);
+                        state,
+                        status.contains("-inactive"));
           }
 
           QStyleOptionMenuItem o(*opt);
@@ -5480,6 +5636,7 @@ void Style::drawControl(ControlElement element,
             QColor focusColor = getFromRGBA(lspec.focusColor);
             QColor pressColor = getFromRGBA(lspec.pressColor);
             QColor toggleColor = getFromRGBA(lspec.toggleColor);
+            bool isInactive;
             QColor col;
             if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
             {
@@ -5505,54 +5662,107 @@ void Style::drawControl(ControlElement element,
                 }
               }
               normalColor = focusColor = pressColor = toggleColor = col;
+              isInactive = false;
             }
-            if (state == 1 && normalColor.isValid()
-                /* since we don't draw the normal interior,
-                   a minimum amount of contrast is needed */
-                && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
+            else
+              isInactive = (widget != NULL && !widget->isActiveWindow());
+            if (state == 1)
             {
-              QStyleOptionViewItemV4 o(*opt);
-              palette.setColor(QPalette::Text, normalColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
-            }
-            else if (state == 2 && focusColor.isValid()
-                     && (col.isValid()
-                         || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
-                         // supposing that the focus interior is translucent, take care of contrast
-                         || enoughContrast(palette.color(QPalette::Base), focusColor)))
-            {
-              QStyleOptionViewItemV4 o(*opt);
-              palette.setColor(QPalette::Text, focusColor);
-              palette.setColor(QPalette::HighlightedText, focusColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0
-                  && (opt->features & QStyleOptionViewItemV2::HasDecoration)
-                  && !opt->decorationSize.isEmpty())
+              QColor normalInactiveColor = getFromRGBA(lspec.normalInactiveColor);
+              if ((!isInactive || !normalInactiveColor.isValid())
+                  && normalColor.isValid()
+                  /* since we don't draw the normal interior,
+                     a minimum amount of contrast is needed */
+                  && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
               {
-                QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
-                o.icon = QIcon(px);
+                col = normalColor;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              else if (isInactive
+                       && normalInactiveColor.isValid()
+                       && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalInactiveColor)))
+              {
+                col = normalInactiveColor;
+              }
+              else
+                col = QColor();
+              if (col.isValid())
+              {
+                QStyleOptionViewItemV4 o(*opt);
+                palette.setColor(QPalette::Text, col);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
-            else if (state == 3 && pressColor.isValid())
+            else if (state == 2)
             {
-              QStyleOptionViewItemV4 o(*opt);
-              palette.setColor(QPalette::HighlightedText, pressColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              QColor focusInactiveColor = getFromRGBA(lspec.focusInactiveColor);
+              if ((!isInactive || !focusInactiveColor.isValid())
+                  && focusColor.isValid()
+                  && (col.isValid()
+                      || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
+                      // supposing that the focus interior is translucent, take care of contrast
+                      || enoughContrast(palette.color(QPalette::Base), focusColor)))
+              {
+                col = focusColor;
+              }
+              else if (isInactive
+                       && focusInactiveColor.isValid()
+                       && (col.isValid()
+                           || enoughContrast(QApplication::palette().color(QPalette::Text), focusInactiveColor)
+                           || enoughContrast(palette.color(QPalette::Base), focusInactiveColor)))
+              {
+                col = focusInactiveColor;
+              }
+              else
+                col = QColor();
+              if (col.isValid())
+              {
+                QStyleOptionViewItemV4 o(*opt);
+                palette.setColor(QPalette::Text, col);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0
+                    && (opt->features & QStyleOptionViewItemV2::HasDecoration)
+                    && !opt->decorationSize.isEmpty())
+                {
+                  QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
-            else if (state == 4 && toggleColor.isValid())
+            else if (state == 3)
             {
-              QStyleOptionViewItemV4 o(*opt);
-              palette.setColor(QPalette::HighlightedText, toggleColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              QColor pressInactiveColor = getFromRGBA(lspec.pressInactiveColor);
+              col = (!isInactive || !pressInactiveColor.isValid())
+                      ? pressColor
+                      : pressInactiveColor;
+              if (col.isValid())
+              {
+                QStyleOptionViewItemV4 o(*opt);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
+            }
+            else if (state == 4)
+            {
+              QColor toggleInactiveColor = getFromRGBA(lspec.toggleInactiveColor);
+              col = (!isInactive || !toggleInactiveColor.isValid())
+                      ? toggleColor
+                      : toggleInactiveColor;
+              if (col.isValid())
+              {
+                QStyleOptionViewItemV4 o(*opt);
+                palette.setColor(QPalette::HighlightedText, col);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
           }
           else
@@ -5692,7 +5902,8 @@ void Style::drawControl(ControlElement element,
         renderLabel(option,painter,r,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    state);
+                    state,
+                    status.contains("-inactive"));
       }
 
       break;
@@ -5808,6 +6019,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    widget != NULL && !widget->isActiveWindow(),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
@@ -5842,6 +6054,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    widget != NULL && !widget->isActiveWindow(),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
@@ -5951,6 +6164,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
@@ -6558,6 +6772,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
                     state,
+                    widget != NULL && !widget->isActiveWindow(),
                     getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
                     iconSize);
 
@@ -7076,6 +7291,7 @@ void Style::drawControl(ControlElement element,
           }
         }
 
+        bool isInactive(widget != NULL && !widget->isActiveWindow());
         if (R.isValid())
         {
           painter->save();
@@ -7084,7 +7300,9 @@ void Style::drawControl(ControlElement element,
         renderLabel(option,painter,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,state);
+                    Qt::AlignCenter,txt,QPalette::WindowText,
+                    state,
+                    isInactive);
         if (R.isValid())
         {
           painter->restore();
@@ -7093,7 +7311,9 @@ void Style::drawControl(ControlElement element,
           renderLabel(option,painter,
                       r,
                       fspec,lspec,
-                      Qt::AlignCenter,txt,QPalette::WindowText,-1);
+                      Qt::AlignCenter,txt,QPalette::WindowText,
+                      -1,
+                      isInactive);
           painter->restore();
         }
       }
@@ -7485,6 +7705,7 @@ void Style::drawControl(ControlElement element,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
                     iconSize);
       }
@@ -7747,6 +7968,7 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
+                    status.contains("-inactive"),
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
@@ -8467,6 +8689,7 @@ void Style::drawControl(ControlElement element,
                       fspec,lspec,
                       talign,txt,QPalette::ButtonText,
                       state,
+                      status.contains("-inactive"),
                       getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
@@ -9803,6 +10026,7 @@ void Style::drawComplexControl(ComplexControl control,
                       fspec,lspec,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
+                      false,
                       getPixmapFromIcon(o.icon,QIcon::Normal,QIcon::Off,iconSize),
                       iconSize);
         }
@@ -14166,6 +14390,7 @@ void Style::renderLabel(
                         const QString &text,
                         QPalette::ColorRole textRole, // text color role
                         int state, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
+                        bool isInactive,
                         const QPixmap &px,
                         QSize iconSize,
                         const Qt::ToolButtonStyle tialign, // relative positions of text and icon
@@ -14356,80 +14581,149 @@ void Style::renderLabel(
                 || (state == 4 && (!toggleColor.isValid() || enoughContrast(toggleColor, shadowColor)))
                 || (state == -1 && (!progColor.isValid() || enoughContrast(progColor, shadowColor)))))
         {
+          QColor col;
+          if (isInactive)
+          {
+            col = getFromRGBA(lspec.inactiveShadowColor);
+            if (!col.isValid())
+              col = shadowColor;
+          }
+          else
+            col = shadowColor;
           painter->save();
           if (lspec.a < 255)
-            shadowColor.setAlpha(lspec.a);
-          painter->setPen(QPen(shadowColor));
+            col.setAlpha(lspec.a);
+          painter->setPen(QPen(col));
           for (int i=0; i<lspec.depth; i++)
             painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
           painter->restore();
         }
       }
 
-      if (state == 1 && normalColor.isValid())
+      if (state == 1)
       {
-        painter->save();
-        painter->setPen(QPen(normalColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.normalInactiveColor);
+          if (!col.isValid())
+            col = normalColor;
+        }
+        else
+          col = normalColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 2 && focusColor.isValid())
+      else if (state == 2)
       {
-        painter->save();
-        painter->setPen(QPen(focusColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.focusInactiveColor);
+          if (!col.isValid())
+            col = focusColor;
+        }
+        else
+          col = focusColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 3 && pressColor.isValid())
+      else if (state == 3)
       {
-        painter->save();
-        painter->setPen(QPen(pressColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.pressInactiveColor);
+          if (!col.isValid())
+            col = pressColor;
+        }
+        else
+          col = pressColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == 4 && toggleColor.isValid())
+      else if (state == 4)
       {
-        painter->save();
-        painter->setPen(QPen(toggleColor));
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(lspec.toggleInactiveColor);
+          if (!col.isValid())
+            col = toggleColor;
+        }
+        else
+          col = toggleColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(QPen(col));
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
-      else if (state == -1 && progColor.isValid())
+      else if (state == -1)
       {
-        painter->save();
-        painter->setPen(progColor);
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
+        QColor col;
+        if (isInactive)
+        {
+          col = getFromRGBA(cspec_.progressInactiveIndicatorTextColor);
+          if (!col.isValid())
+            col = progColor;
+        }
+        else
+          col = progColor;
+        if (col.isValid())
+        {
+          painter->save();
+          painter->setPen(col);
+          painter->drawText(rtext,talign,text);
           painter->restore();
-        if (lspec.italicFont)
+          if (lspec.boldFont)
+            painter->restore();
+          if (lspec.italicFont)
+            painter->restore();
           painter->restore();
-        painter->restore();
-        return;
+          return;
+        }
       }
     }
     /* if this is a dark-and-light theme, the disabled color may not be suitable */

@@ -1250,7 +1250,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomleft" transform="translate(-5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomright" transform="translate(5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-up-normal" transform="matrix(1,0,0,-1,188,585.21616)"/>
-<g style="stroke:none;fill-rule:evenodd;fill:#f2c4b2">
+<g style="stroke:none;fill-rule:evenodd;fill:#877b69">
 <rect width="8" x="71" y="894" height="4" id="itemview-toggled-inactive-top"/>
 <rect width="8" x="71" y="910" height="4" id="itemview-toggled-inactive-bottom"/>
 <path id="itemview-toggled-inactive" d="m 71,900 h 8 v 8 h -8 z"/>

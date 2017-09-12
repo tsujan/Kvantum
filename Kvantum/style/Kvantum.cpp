@@ -2077,7 +2077,8 @@ void Style::unpolish(QWidget *widget)
              || qobject_cast<QLineEdit*>(widget)
              || qobject_cast<QAbstractScrollArea*>(widget)
              //|| widget->inherits("QComboBoxPrivateContainer") // done above
-             || qobject_cast<QGroupBox*>(widget))))
+             || qobject_cast<QGroupBox*>(widget)))
+         || (hasInactiveSelItemCol_ && qobject_cast<QAbstractItemView*>(widget)))
     {
       widget->removeEventFilter(this);
     }

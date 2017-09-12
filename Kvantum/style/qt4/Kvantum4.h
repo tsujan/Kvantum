@@ -223,6 +223,7 @@ class Style : public QCommonStyle {
                      const QString &text,
                      QPalette::ColorRole textRole, // text color role
                      int state = 1, // widget state (0->disabled, 1->normal, 2->focused, 3->pressed, 4->toggled)
+                     bool isInactive = false,
                      const QPixmap &px = QPixmap(),
                      QSize iconSize = QSize(0,0),
                      const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // relative positions of text and icon
@@ -384,6 +385,11 @@ class Style : public QCommonStyle {
     bool noComposite_;
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;
+
+    /* for enforcing the text color of inactive selected items */
+    bool hasInactiveSelItemCol_;
+    /* Does the toggled (active but unfocused) view-item have a high contrast with the pressed one? */
+    bool toggledItemHasContrast_;
 };
 }
 
