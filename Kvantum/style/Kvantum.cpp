@@ -2675,7 +2675,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
 
   case QEvent::WindowActivate:
     if (hasInactiveSelItemCol_
-        && qobject_cast<QAbstractItemView*>(w))
+        && qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
@@ -2708,7 +2708,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
 
   case QEvent::WindowDeactivate:
     if (hasInactiveSelItemCol_
-        && qobject_cast<QAbstractItemView*>(w))
+        && qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
@@ -2925,6 +2925,50 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
+      }
+      else if (qobject_cast<QAbstractItemView*>(o))
+      {
+        /* view palettes should also be set when the view is shown
+           and not only when its window is activated/deactivated
+           (-> QEvent::WindowActivate and QEvent::WindowDeactivate) */
+        if (!hasInactiveSelItemCol_)
+          break;
+        QPalette palette = w->palette();
+        if (palette.color(QPalette::Active, QPalette::Text)
+            != QApplication::palette().color(QPalette::Active, QPalette::Text))
+        {
+          break;
+        }
+        const label_spec lspec = getLabelSpec("ItemView");
+        if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
+        {
+          palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleInactiveColor));
+          QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
+          if (!normalInactiveCol.isValid())
+            normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+          palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+          if (!toggledItemHasContrast_)
+          {
+            palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                             QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+          }
+        }
+        else
+        {
+          palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleColor));
+          QColor normalCol = getFromRGBA(lspec.normalColor);
+          if (!normalCol.isValid())
+            normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+          palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+          if (!toggledItemHasContrast_)
+          {
+            palette.setColor(QPalette::Inactive, QPalette::Highlight,
+                             QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+          }
+        }
+        w->setPalette(palette);
       }
       else if (gtkDesktop_
                && (!w->parent() || !qobject_cast<QWidget *>(w->parent())
