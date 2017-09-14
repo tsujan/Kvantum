@@ -2675,8 +2675,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::WindowActivate:
-    if (hasInactiveSelItemCol_
-        && qobject_cast<QAbstractItemView*>(o))
+    if (qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
@@ -2685,16 +2684,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         break;
       }
       const label_spec lspec = getLabelSpec("ItemView");
-      /* set the toggled inactive text color to the toggled active one
-         (the main purpose of installing an event filter on the view) */
-      palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
-                       getFromRGBA(lspec.toggleColor));
       /* set the normal inactive text color to the normal active one
          (needed when the app sets it inactive) */
       QColor normalCol = getFromRGBA(lspec.normalColor);
       if (!normalCol.isValid())
         normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
       palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+      if (!hasInactiveSelItemCol_)
+      {
+        w->setPalette(palette);
+        break;
+      }
+      /* set the toggled inactive text color to the toggled active one
+         (the main purpose of installing an event filter on the view) */
+      palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleColor));
       /* use the active highlight color for the toggled (unfocused) item if there's
          no contrast with the pressed state because some apps (like Qt Designer)
          may not call PE_PanelItemViewItem but highlight the item instead */
@@ -2708,24 +2712,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::WindowDeactivate:
-    if (hasInactiveSelItemCol_
-        && qobject_cast<QAbstractItemView*>(o))
+    if (qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
           != QApplication::palette().color(QPalette::Active, QPalette::Text))
-      { // custom text color
+      {
         break;
       }
       const label_spec lspec = getLabelSpec("ItemView");
-      /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
-      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
-                       getFromRGBA(lspec.toggleInactiveColor));
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
       QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
       if (!normalInactiveCol.isValid())
         normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
       palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+      if (!hasInactiveSelItemCol_)
+      { // custom text color
+        w->setPalette(palette);
+        break;
+      }
+      /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                       getFromRGBA(lspec.toggleInactiveColor));
       /* restore the inactive highlight color (which was changed at QEvent::WindowActivate) */
       if (!toggledItemHasContrast_)
       {
@@ -2932,8 +2940,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         /* view palettes should also be set when the view is shown
            and not only when its window is activated/deactivated
            (-> QEvent::WindowActivate and QEvent::WindowDeactivate) */
-        if (!hasInactiveSelItemCol_)
-          break;
         QPalette palette = w->palette();
         if (palette.color(QPalette::Active, QPalette::Text)
             != QApplication::palette().color(QPalette::Active, QPalette::Text))
@@ -2943,12 +2949,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         const label_spec lspec = getLabelSpec("ItemView");
         if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
         {
-          palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
-                           getFromRGBA(lspec.toggleInactiveColor));
           QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
           if (!normalInactiveCol.isValid())
             normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
           palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+          if (!hasInactiveSelItemCol_)
+          {
+            w->setPalette(palette);
+            break;
+          }
+          palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleInactiveColor));
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
@@ -2957,12 +2968,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         else
         {
-          palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
-                           getFromRGBA(lspec.toggleColor));
           QColor normalCol = getFromRGBA(lspec.normalColor);
           if (!normalCol.isValid())
             normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
           palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+          if (!hasInactiveSelItemCol_)
+          {
+            w->setPalette(palette);
+            break;
+          }
+          palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
+                           getFromRGBA(lspec.toggleColor));
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
@@ -5589,8 +5605,10 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (isWidgetInactive(widget))
             status.append("-inactive");
           /* when there isn't enough space */
-          QSize txtSize = textSize(painter->font(),combo->currentText,false);
           const label_spec lspec1 = getLabelSpec("ComboBox");
+          QFont F(painter->font());
+          if (lspec1.boldFont) F.setBold(true);
+          QSize txtSize = textSize(F,combo->currentText,false);
           if (/*cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
               ||*/ cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
@@ -7169,7 +7187,9 @@ void Style::drawControl(ControlElement element,
         { // when there isn't enough space
           if(!cb->lineEdit())
           {
-            QSize txtSize = textSize(painter->font(),opt->currentText,false);
+            QFont F(painter->font());
+            if (lspec.boldFont) F.setBold(true);
+            QSize txtSize = textSize(F,opt->currentText,false);
             const indicator_spec dspec = getIndicatorSpec("DropDownButton");
             int deltaR = 0; int deltaL = 0;
             int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
@@ -7190,6 +7210,7 @@ void Style::drawControl(ControlElement element,
               lspec.top = qMin(lspec.top,2);
               lspec.bottom = qMin(lspec.bottom,2);
               lspec.tispace = qMin(lspec.tispace,2);
+              lspec.boldFont = false;
               
               sspec.incrementW = false;
 
@@ -9061,6 +9082,7 @@ void Style::drawControl(ControlElement element,
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
               lspec.tispace = qMin(lspec.tispace,3);
+              lspec.boldFont = false;
             }
             if (pb->height() < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
             {
@@ -9068,6 +9090,7 @@ void Style::drawControl(ControlElement element,
               fspec.top = qMin(fspec.top,3);
               fspec.bottom = qMin(fspec.bottom,3);
               lspec.tispace = qMin(lspec.tispace,3);
+              lspec.boldFont = false;
             }
           }
         }
@@ -9671,7 +9694,9 @@ void Style::drawControl(ControlElement element,
           {
             if (!txt.isEmpty())
             {
-              QSize txtSize = textSize(painter->font(), txt, false);
+              QFont F(painter->font());
+              if (lspec.boldFont) F.setBold(true);
+              QSize txtSize = textSize(F, txt, false);
               if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
                 QSize availableSize = opt->rect.size()
@@ -9688,11 +9713,13 @@ void Style::drawControl(ControlElement element,
                 {
                   lspec.top = lspec.bottom = 0;
                   fspec.top = fspec.bottom = 0;
+                  lspec.boldFont = false;
                   if (tialign == Qt::ToolButtonTextUnderIcon)
                     lspec.tispace = 0;
                 }
                 if (txtSize.width() > availableSize.width())
                 {
+                  lspec.boldFont = false;
                   if (tialign == Qt::ToolButtonTextUnderIcon)
                   {
                     lspec.left = lspec.right = 0;
@@ -9718,11 +9745,13 @@ void Style::drawControl(ControlElement element,
                                               fspec.top+fspec.bottom+lspec.top+lspec.bottom);
                 if (txtSize.height() > availableSize.height())
                 {
+                  lspec.boldFont = false;
                   lspec.top = lspec.bottom = 0;
                   fspec.top = fspec.bottom = 0;
                 }
                 if (txtSize.width() > availableSize.width())
                 {
+                  lspec.boldFont = false;
                   if (txtSize.width() <= availableSize.width() + fspec.left + fspec.right
                                                                + lspec.left + lspec.right)
                   {
@@ -9787,6 +9816,7 @@ void Style::drawControl(ControlElement element,
         }
         else // because of a mess in kate5/new KMultiTabBarTab
         {
+          lspec.boldFont = false;
           lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
           fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
           lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
@@ -10631,7 +10661,9 @@ void Style::drawComplexControl(ComplexControl control,
               }
               else // when there isn't enough space
               {
-                QSize txtSize = textSize(painter->font(),opt->currentText,false);
+                QFont F(painter->font());
+                if (lspec.boldFont) F.setBold(true);
+                QSize txtSize = textSize(F,opt->currentText,false);
                 if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                     ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
                 {
