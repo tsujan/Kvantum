@@ -821,7 +821,7 @@
 <g style="stroke:none">
 <g style="fill:url(#linearGradient5089)" id="ebutton-focused-bottom" transform="matrix(0,-0.80045028,-1,0,144.7518,68.012945)">
 <path style="fill:url(#linearGradient5087);fill-rule:evenodd" id="path5061" d="M 28.75,81.2516 V 48.7518 h -6.246484 v 32.5 z"/>
-<path style="font-family:Sans;fill:#828282;text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5063" d="m 21.2542,48.7516 v 32.5 h 1.2493 v -32.5 z "/>
+<path style="font-family:Sans;fill:#000;text-align:start;line-height:normal;fill-opacity:.463;color:#000;text-indent:0;text-transform:none" id="path5063" d="m 21.2542,48.7516 v 32.5 h 1.2493 v -32.5 z "/>
 </g>
 <g id="tbutton-normal-left" transform="matrix(0.8,0,0,1,197.74984,-36.251621)">
 <path style="fill:url(#linearGradient4991);fill-rule:evenodd" id="path4939" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
