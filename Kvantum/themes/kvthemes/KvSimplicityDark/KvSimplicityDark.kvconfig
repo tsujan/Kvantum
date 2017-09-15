@@ -50,10 +50,10 @@ animate_states=true
 dark_titlebar=true
 
 [GeneralColors]
-window.color=#3D3D3E
+window.color=#3e3e3e
 base.color=#282828
 alt.base.color=#323232
-button.color=#3D3D3E
+button.color=#3e3e3e
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717

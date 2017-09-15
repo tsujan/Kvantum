@@ -119,7 +119,7 @@
 <stop offset="1" style="stop-color:#c0c0c2" id="stop4993"/>
 </linearGradient>
 <linearGradient id="linearGradient5223">
-<stop offset="0" style="stop-color:#282828" id="stop5225"/>
+<stop offset="0" style="stop-color:#343434" id="stop5225"/>
 <stop offset="1" style="stop-color:#141414" id="stop5227"/>
 </linearGradient>
 <linearGradient id="linearGradient5369">
@@ -176,8 +176,8 @@
 <linearGradient xlink:href="#linearGradient5095" id="linearGradient4622" y1="1055" x1="283.73743" y2="1055" x2="275" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(1,0,0,-1,213.75,98.751587)" xlink:href="#linearGradient6741" id="linearGradient4996" y1="41.25153" x1="28.75" y2="88.751526" gradientUnits="userSpaceOnUse" x2="28.75"/>
 <linearGradient id="linearGradient4963">
-<stop offset="0" style="stop-color:#3c3c3c" id="stop4965"/>
-<stop offset="1" style="stop-color:#272729" id="stop4967"/>
+<stop offset="0" style="stop-color:#3e3e3e" id="stop4965"/>
+<stop offset="1" style="stop-color:#343434" id="stop4967"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient4635" id="linearGradient4799" y1="81.251602" x1="22.749607" y2="81.251801" x2="58.749973" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5095" id="linearGradient5332" y1="1055" x1="312.5" y2="1055" gradientUnits="userSpaceOnUse" x2="307.5"/>
@@ -354,8 +354,8 @@
 </g>
 <rect width="20" x="305" y="805" height="20" style="fill:url(#linearGradient4969);stroke:none" id="menubar-normal"/>
 <rect width="20" x="805" y="-305" height="5" style="fill:url(#linearGradient5525);stroke:none" id="menubar-normal-left" transform="matrix(0,1,-1,0,0,0)"/>
-<rect width="5" x="800" y="-305" height="5" style="fill:#3c3c3c;stroke:none" id="menubar-normal-topleft" transform="matrix(0,1,-1,0,0,0)"/>
-<rect width="20" x="305" y="800" height="5" style="fill:#3c3c3c;stroke:none" id="menubar-normal-top"/>
+<rect width="5" x="800" y="-305" height="5" style="fill:#3e3e3e;stroke:none" id="menubar-normal-topleft" transform="matrix(0,1,-1,0,0,0)"/>
+<rect width="20" x="305" y="800" height="5" style="fill:#3e3e3e;stroke:none" id="menubar-normal-top"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#menubar-normal-left" id="menubar-normal-right" transform="translate(25,0)"/>
 <g style="stroke:none">
 <g style="fill:#7de8ff">

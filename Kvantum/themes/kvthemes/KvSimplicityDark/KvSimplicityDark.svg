@@ -92,7 +92,7 @@
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient4963" id="linearGradient4969" y1="805" x1="305" y2="825" x2="305" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient4635" id="linearGradient5074" y1="48.751537" x1="58.750366" y2="48.751339" x2="22.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient4963">
-<stop offset="0" style="stop-color:#3d3d3e" id="stop4965"/>
+<stop offset="0" style="stop-color:#3e3e3e" id="stop4965"/>
 <stop offset="1" style="stop-color:#343434" id="stop4967"/>
 </linearGradient>
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient6741" id="linearGradient5248" y1="742.5" x1="207" y2="742.5" gradientUnits="userSpaceOnUse" x2="183"/>
@@ -123,9 +123,9 @@
 <linearGradient xlink:href="#linearGradient5095" id="linearGradient5097" y1="729.50061" x1="84" y2="729.5" x2="100" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(0,-1,0.98461538,0,271.99842,200.74929)" xlink:href="#linearGradient4995" id="linearGradient5440" y1="48.751606" x1="20.749805" y2="48.751575" gradientUnits="userSpaceOnUse" x2="68.750992"/>
 <linearGradient id="linearGradient4965">
-<stop offset="0" style="stop-color:#3d3d3e" id="stop4968"/>
-<stop offset="0.3" style="stop-color:#3d3d3e;stop-opacity:.93" id="stop4835"/>
-<stop offset="1" style="stop-color:#3d3d3e;stop-opacity:.93" id="stop4970"/>
+<stop offset="0" style="stop-color:#3e3e3e" id="stop4968"/>
+<stop offset="0.3" style="stop-color:#3e3e3e;stop-opacity:.93" id="stop4835"/>
+<stop offset="1" style="stop-color:#3e3e3e;stop-opacity:.93" id="stop4970"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(1,0,0,1,94.997466,-443.00556)" xlink:href="#linearGradient5094" id="linearGradient6352" y1="782.49945" x1="330" y2="712.5" gradientUnits="userSpaceOnUse" x2="330"/>
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient5223" id="linearGradient5229" y1="825" x1="305" y2="830" x2="305" gradientUnits="userSpaceOnUse"/>
@@ -310,8 +310,8 @@
 <rect width="20" x="305" y="362" height="20" style="fill:url(#linearGradient4969)" id="menubar-normal"/>
 </g>
 <rect width="20" x="362" y="-305" height="5" style="fill:url(#linearGradient6924);stroke:none" id="menubar-normal-left" transform="matrix(0,1,-1,0,0,0)"/>
-<rect width="5" x="357" y="-305" height="5" style="fill:#3d3d3e;stroke:none" id="menubar-normal-topleft" transform="matrix(0,1,-1,0,0,0)"/>
-<rect width="20" x="305" y="357" height="5" style="fill:#3d3d3e;stroke:none" id="menubar-normal-top"/>
+<rect width="5" x="357" y="-305" height="5" style="fill:#3e3e3e;stroke:none" id="menubar-normal-topleft" transform="matrix(0,1,-1,0,0,0)"/>
+<rect width="20" x="305" y="357" height="5" style="fill:#3e3e3e;stroke:none" id="menubar-normal-top"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#menubar-normal-left" id="menubar-normal-right" transform="translate(25,0)"/>
 <g style="stroke:none">
 <rect width="30" x="355" y="727" height="30" style="fill:#3d3d3e" id="dock-normal"/>
@@ -717,7 +717,7 @@
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26,0)"/>
 <rect width="10" x="0" y="30" height="10" style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3.609" id="expand-itemview-normal"/>
 <rect width="14" x="226" y="-215" rx="1" height="14" ry="1" style="fill:url(#linearGradient4859);stroke:url(#linearGradient4861);color:#000;stroke-width:2" id="checkbox-focused" transform="scale(1,-1)"/>
-<rect width="40" x="387.5" y="640" height="40" style="fill:#3d3d3e;stroke:none;fill-opacity:.93" id="window-normal"/>
+<rect width="40" x="387.5" y="640" height="40" style="fill:#3e3e3e;stroke:none;fill-opacity:.93" id="window-normal"/>
 <g id="checkbox-checked-normal">
 <rect width="16" x="273" y="-215" rx="2" ry="2" height="16" style="opacity:.8;fill:url(#linearGradient5848);stroke:none;color:#000;stroke-width:2" id="rect4836" transform="scale(1,-1)"/>
 <rect width="12" x="275" y="-213" rx="1.5" height="12" ry="1.5" style="fill:url(#linearGradient9243);stroke:none;color:#000" id="checkbox-checked-normal1" transform="scale(1,-1)"/>
