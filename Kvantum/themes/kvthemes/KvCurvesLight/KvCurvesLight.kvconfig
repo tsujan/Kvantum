@@ -316,17 +316,17 @@ frame.expansion=2.7font
 inherits=PanelButtonCommand
 text.press.color=white
 text.toggle.color=white
-text.margin=0
+text.margin=1
 frame.element=itemview
 interior.element=itemview
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
-text.margin.left=4
-text.margin.right=4
-text.margin.top=3
-text.margin.bottom=3
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+text.margin.left=1
+text.margin.right=1
+text.margin.top=1
+text.margin.bottom=1
 frame.expansion=6
 
 [Splitter]
