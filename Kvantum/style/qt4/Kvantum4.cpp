@@ -8617,8 +8617,12 @@ void Style::drawControl(ControlElement element,
           {
             dspec.size = qMax(dspec.size, pixelMetric(PM_TabCloseIndicatorWidth));
             const frame_spec fspec1 = getFrameSpec("Tab");
-            qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                          / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+            qreal rDiff = 0;
+            if (lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
+            {
+              rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                      / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+            }
             if (opt->arrowType == Qt::LeftArrow)
             {
               iAlignment |= Qt::AlignRight;
@@ -12560,11 +12564,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       QRect r;
       if (const QStyleOptionTabV3 *tab = qstyleoption_cast<const QStyleOptionTabV3 *>(option))
       {
+        const frame_spec fspec = getFrameSpec("Tab");
         bool selected = tab->state & State_Selected;
         int verticalShift = pixelMetric(QStyle::PM_TabBarTabShiftVertical, tab, widget);
         int horizontalShift = pixelMetric(QStyle::PM_TabBarTabShiftHorizontal, tab, widget);
         int hpadding = pixelMetric(QStyle::PM_TabBarTabHSpace, option, widget) / 2
-                       + getFrameSpec("Tab").right;
+                       + fspec.right;
         hpadding = qMax(hpadding, 4); // FIXME: is this needed?
 
         bool verticalTabs(tab->shape == QTabBar::RoundedEast
@@ -12597,30 +12602,67 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         int midWidth = (tr.width() - w)/2;
 
         bool atTheTop = true;
+        int offset = 0;
+        const label_spec lspec = getLabelSpec("Tab");
         switch (tab->shape) {
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
             atTheTop = (element == SE_TabBarTabLeftButton);
+            if (tab->rect.width() > w
+                && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
+            {
+              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound((qreal)(tab->rect.width() - w) * rDiff / 2.0);
+              if (tspec_.mirror_doc_tabs
+                  && (tab->shape == QTabBar::RoundedSouth
+                      || tab->shape == QTabBar::TriangularSouth))
+              {
+                offset *= -1;
+              }
+            }
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
             atTheTop = (element == SE_TabBarTabRightButton);
+            if (tab->rect.width() > w
+                && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
+            {
+              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound((qreal)(tab->rect.width() - w) * rDiff / 2.0);
+              if (tspec_.mirror_doc_tabs)
+                offset *= -1;
+            }
             break;
           default:
+            if (tab->rect.height() > h
+                && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
+            {
+              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound((qreal)(tab->rect.height() - h) * rDiff / 2.0);
+              if (tspec_.mirror_doc_tabs
+                  && (tab->shape == QTabBar::RoundedSouth
+                      || tab->shape == QTabBar::TriangularSouth))
+              {
+                offset *= -1;
+              }
+            }
             if (element == SE_TabBarTabLeftButton)
-              r = QRect(tab->rect.x() + hpadding, midHeight, w, h);
+              r = QRect(tab->rect.x() + hpadding, midHeight + offset, w, h);
             else
-              r = QRect(tab->rect.right() - w - hpadding, midHeight, w, h);
+              r = QRect(tab->rect.right() - w - hpadding, midHeight + offset, w, h);
             r = visualRect(tab->direction, tab->rect, r);
         }
         if (verticalTabs)
         {
           if (atTheTop)
-            r = QRect(midWidth,
+            r = QRect(midWidth + offset,
                       tr.y() + tab->rect.height() - hpadding - h,
                       w, h);
           else
-            r = QRect(midWidth, tr.y() + hpadding, w, h);
+            r = QRect(midWidth + offset, tr.y() + hpadding, w, h);
         }
       }
       return r;
@@ -14475,13 +14517,15 @@ void Style::renderLabel(
   {
     /* center the icon considering text margins (r is the interior rect here) */
     int horizOffset = 0, vertOffset = 0;
-    if (lspec.left+lspec.right > 0 && r.width() > iconSize.width())
+    if (r.width() > iconSize.width()
+        && lspec.left+fspec.left + lspec.right+fspec.right > 0)
     {
       qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
                     / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
       horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
     }
-    if (lspec.top+lspec.bottom > 0 && r.height() > iconSize.height())
+    if (r.height() > iconSize.height()
+        && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
     {
       qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
                     / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
@@ -14497,13 +14541,15 @@ void Style::renderLabel(
   {
     /* center the icon considering text margins (r is the interior rect here) */
     int horizOffset = 0, vertOffset = 0;
-    if (lspec.left+lspec.right > 0 && r.width() > iconSize.width())
+    if (r.width() > iconSize.width()
+        && lspec.left+fspec.left + lspec.right+fspec.right > 0)
     {
       qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
                     / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
       horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
     }
-    if (lspec.top+lspec.bottom > 0 && r.height() > iconSize.height())
+    if (r.height() > iconSize.height()
+        && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
     {
       qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
                     / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
