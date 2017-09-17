@@ -7716,7 +7716,13 @@ void Style::drawControl(ControlElement element,
           r.setRect(0, 0, h, w);
           QTransform m;
           if (rtl)
-          { // needed for the correct text-icon order
+          { // needed for the correct text-icon order and leveling
+            int t = fspec.bottom;
+            fspec.bottom = fspec.top;
+            fspec.top = t;
+            t = lspec.bottom;
+            lspec.bottom = lspec.top;
+            lspec.top = t;
             m.translate(w+2*x, h+2*y); m.scale(-1,-1);
           }
           int X, Y, rot;
