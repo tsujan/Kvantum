@@ -30,6 +30,7 @@ opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidem
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
+combo_menu=true
 merge_menubar_with_toolbar=false
 scroll_arrows=false
 transient_scrollbar=true

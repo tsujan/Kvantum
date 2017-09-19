@@ -40,6 +40,7 @@ merge_menubar_with_toolbar=false
 respect_DE=true
 scroll_arrows=true
 scrollbar_in_view=false
+transient_scrollbar=true
 small_icon_size=16
 spin_button_width=16
 submenu_overlap=0
