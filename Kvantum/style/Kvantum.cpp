@@ -1056,12 +1056,6 @@ static inline bool isWidgetInactive(const QWidget *widget)
   return false;
 }
 
-static inline QRect widgetRect(const QWidget *w)
-{
-  if (!w) return QRect();
-  return QRect(w->mapTo(w->window(), w->rect().topLeft()), w->size());
-}
-
 void Style::noTranslucency(QObject *o)
 {
   QWidget *widget = static_cast<QWidget*>(o);
@@ -1126,8 +1120,6 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
 
 QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisible) const
 {
-  /* Since it isn't known how deep a widget can be inside its parent toolbar,
-     the widget rectangles are examined instead of the parenthood relation. */
   if (!w) return nullptr;
   QWidget *window = w->window();
   if (window == w) return nullptr;
@@ -1135,11 +1127,8 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
     return w->window();
   foreach (QToolBar *tb, window->findChildren<QToolBar*>())
   {
-    if (isStylableToolbar(tb, allowInvisible)
-        && widgetRect(tb).contains(widgetRect(w)))
-    {
+    if (isStylableToolbar(tb, allowInvisible) && tb->isAncestorOf(w))
       return tb;
-    }
   }
   return nullptr;
 }
