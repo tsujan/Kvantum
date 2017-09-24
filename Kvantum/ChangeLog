@@ -32,6 +32,7 @@ V0.10.5
  * Make titlebars match the theme according to its lightness or darkness under GTK DEs like Gnome (by Craig Drummond). Now, the suffix "Dark" can have a practical meaning in the theme name.
  * Accept dark themes inside light theme directories.
  * Editable theme combobox in Kvantum Manager for finding installed themes by typing.
+ * Put the progress text in front of the bar when "progressbar_thickness" is less than the text (font) height.
 
 V0.10.4
 ---------

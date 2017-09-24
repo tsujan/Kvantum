@@ -657,7 +657,16 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","progressbar_thickness");
   if (v.isValid()) // 0 by default
-    r.progressbar_thickness = v.toInt();
+  {
+    QString value = v.toString();
+    if (value.endsWith("font"))
+    { // multiply by the app font height
+      r.progressbar_thickness = qMax(value.left(value.length()-4).toFloat(), 0.0f)
+                                * QFontMetrics(QApplication::font()).height();
+    }
+    else
+      r.progressbar_thickness = qMax(v.toInt(),0);
+  }
 
   v = getValue("General","menubar_mouse_tracking");
   if (v.isValid()) //true by default

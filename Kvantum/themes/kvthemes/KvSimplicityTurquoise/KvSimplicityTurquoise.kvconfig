@@ -23,7 +23,7 @@ slider_handle_length=18
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
-progressbar_thickness=40
+progressbar_thickness=2font
 menubar_mouse_tracking=true
 toolbutton_style=0
 double_click=false
@@ -222,7 +222,7 @@ indicator.element=tab
 text.normal.color=black
 text.focus.color=#005161
 min_width=4font
-min_height=2font
+min_height=1.87font
 
 [TabFrame]
 inherits=PanelButtonCommand

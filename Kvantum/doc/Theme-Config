@@ -290,8 +290,8 @@ no_active_tab_separator           true/false          Do not draw tab separator 
                                                       of tab separators.
 
 active_tab_overlap                integer             Number of pixels inactive tabs overlap
-                                                      the active one. It is zero by default.
-                                                      The active tab is drawn in front of its
+                                  or                  the active one. It is zero by default.
+                                  DECIMALfont         The active tab is drawn in front of its
                                                       adjacent inactive tabs when the value of
                                                       this key is positive.
                                                       
@@ -347,14 +347,22 @@ spread_progressbar                true/false          Spread progressbar's indic
                                                       progressbar's frame.
 
 progressbar_thickness             integer             If positive, it sets the (maximum)
-                                                      progressbar thickness as far as
-                                                      possible. It is zero by default,
+                                  or                  progressbar thickness as far as
+                                  DECIMALfont         possible. It is zero by default,
                                                       which means there is no limit to
                                                       progressbar thickness.
                                                       
-                                                      Note: If it is positive but less
+                                                      Note 1: If it is positive but less
                                                       than the height of the progressbar
-                                                      text, the text will not be shown.
+                                                      text, the text will be put in front
+                                                      of the bar.
+
+                                                      Note 2: The string "font" can be appended
+                                                      to the value (without quotes and space),
+                                                      in which case, the value will be
+                                                      multiplied by the height of the app font
+                                                      (in px) and could also be a decimal (as
+                                                      in "progressbar_thickness=2.5font").
 
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
@@ -394,15 +402,17 @@ tooltip_shadow_depth              integer             The depth of the shadow to
 
 translucent_windows               true/false          Translucent windows and dialogs?
                                                       This requires a translucent SVG
-                                                      element for windows. A false value,
-                                                      its absence or a false value for
+                                                      element for windows or a positive value
+                                                      for "reduce_window_opacity". A false
+                                                      value, its absence or a false value for
                                                       "composite" means no translucency.
                                                       
                                                       Window translucency is also disabled
                                                       automatically when there is neither a
                                                       "Window" nor a "WindowTranslucent"
                                                       section or the value of "interior" is
-                                                      false for them.
+                                                      false for them and, at the same time,
+                                                      "reduce_window_opacity" is zero.
 
 reduce_window_opacity             integer             If "translucent_windows" is set to true,
                                                       this key will reduce the window opacity

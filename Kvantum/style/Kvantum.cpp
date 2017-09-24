@@ -3283,6 +3283,22 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
   return maxTxt;
 }
 
+static inline QString progressMaxText (const QProgressBar *pb, const QStyleOptionProgressBar *opt)
+{
+  QString maxTxt;
+  if (pb && !pb->text().isEmpty() && pb->isTextVisible())
+  {
+    QLocale l = QLocale::system();
+    maxTxt = pb->format();
+    maxTxt.replace("%p", l.toString(100));
+    maxTxt.replace("%v", l.toString(pb->maximum()));
+    maxTxt.replace("%m", l.toString(pb->maximum()));
+  }
+  else if (opt && opt->textVisible)
+    maxTxt = opt->text;
+  return maxTxt;
+}
+
 /* Does the (tool-)button have a panel drawn at PE_PanelButtonCommand?
    This is used for setting the text color of non-flat, panelless buttons that are
    already styled, like those in QtCreator's find bar or QupZilla's bookmark toolbar. */
@@ -8022,6 +8038,8 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_ProgressBarGroove : {
+      const QStyleOptionProgressBar *opt =
+          qstyleoption_cast<const QStyleOptionProgressBar*>(option);
       QString group;
       if (tspec_.vertical_spin_indicators && isKisSlider_)
         group = "LineEdit";
@@ -8043,17 +8061,63 @@ void Style::drawControl(ControlElement element,
           fspec.bottom = qMin(fspec.bottom,3);
           fspec.expansion = 0;
         }
+        else if (fspec.expansion != 0)
+        {
+          fspec.expansion = qMin(getFrameSpec("IndicatorSpinBox").expansion,
+                                 fspec.expansion);
+        }
       }
 
       QRect r = option->rect;
 
       /* checking State_Horizontal wouldn't work with
          Krita's progress-spin boxes (KisSliderSpinBox) */
+      bool isVertical = false;
+      bool inverted = false;
       const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-      bool isVertical(false);
-      if (pb && pb->orientation() == Qt::Vertical)
+      if (pb)
       {
-        isVertical = true;
+        if (pb->orientation() == Qt::Vertical)
+          isVertical = true;
+        if (pb->invertedAppearance())
+          inverted = true;
+      }
+
+      QFont f(painter->font());
+      const label_spec lspec = getLabelSpec("Progressbar");
+      if (lspec.boldFont) f.setBold(true);
+      if (tspec_.progressbar_thickness > 0
+          && QFontMetrics(f).height() >= (isVertical ? w : h)
+          && !isKisSlider_)
+      { // text is outside progressbar
+        QString maxText = progressMaxText(pb, opt);
+        if (!maxText.isEmpty())
+        {
+          int textWidth = QFontMetrics(f).width(maxText) + lspec.tispace;
+          if (isVertical)
+          {
+            if (inverted)
+              r.adjust(0, textWidth, 0, 0);
+            else
+            {
+              r.adjust(0, 0, 0, -textWidth);
+              y += textWidth;
+            }
+            h = r.height();
+          }
+          else
+          {
+            if (inverted)
+              r.adjust(textWidth, 0, 0, 0);
+            else
+              r.adjust(0, 0, -textWidth, 0);
+            w = r.width();
+          }
+        }
+      }
+      
+      if (isVertical)
+      {
         /* we don't save and restore the painter to draw
            the contents and the label correctly below */
         r.setRect(y, x, h, w);
@@ -8062,12 +8126,6 @@ void Style::drawControl(ControlElement element,
         m.rotate(90);
         painter->setTransform(m, true);
       }
-
-      /* When the maximum progressbar thickness isn't greater than
-         the frame expansion, it means that progressbars should be
-         always rounded. Here, we force this rule on KCapacityBar. */
-      if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness <= fspec.expansion)
-        fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
 
       if (!(option->state & State_Enabled))
       {
@@ -8114,6 +8172,8 @@ void Style::drawControl(ControlElement element,
         }
         const interior_spec ispec = getInteriorSpec(group);
 
+        QRect r = option->rect;
+
         bool isVertical = false;
         bool inverted = false;
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
@@ -8123,6 +8183,39 @@ void Style::drawControl(ControlElement element,
             isVertical = true;
           if (pb->invertedAppearance())
             inverted = true;
+        }
+
+        QFont f(painter->font());
+        const label_spec lspec = getLabelSpec("Progressbar");
+        if (lspec.boldFont) f.setBold(true);
+        if (tspec_.progressbar_thickness > 0
+            && QFontMetrics(f).height() >= (isVertical ? w : h)
+            && !isKisSlider_)
+        { // text is outside progressbar
+          QString maxText = progressMaxText(pb, opt);
+          if (!maxText.isEmpty())
+          {
+            int textWidth = QFontMetrics(f).width(maxText) + lspec.tispace;
+            if (isVertical)
+            {
+              if (inverted)
+                r.adjust(0, textWidth, 0, 0);
+              else
+              {
+                r.adjust(0, 0, 0, -textWidth);
+                y += textWidth;
+              }
+              h = r.height();
+            }
+            else
+            {
+              if (inverted)
+                r.adjust(textWidth, 0, 0, 0);
+              else
+                r.adjust(0, 0, -textWidth, 0);
+              w = r.width();
+            }
+          }
         }
 
         /* if the progressbar is rounded, its contents should be so too */
@@ -8138,14 +8231,10 @@ void Style::drawControl(ControlElement element,
         else
         {
           const frame_spec fspec1 = getFrameSpec("Progressbar");
-          fspec.expansion = fspec1.expansion - (tspec_.spread_progressbar? 0 : fspec1.top+fspec1.bottom);
-          // like in CE_ProgressBarGroove
-          if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness <= fspec1.expansion)
-            fspec.expansion = qMax(fspec.expansion, isVertical ? w : h);
+          fspec.expansion = fspec1.expansion - (tspec_.spread_progressbar ? 0 : fspec1.top+fspec1.bottom);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
         }
 
-        QRect r = option->rect;
         // after this, we could visualize horizontally...
         if (isVertical)
           r.setRect(y, x, h, w);
@@ -8307,8 +8396,6 @@ void Style::drawControl(ControlElement element,
     case CE_ProgressBarLabel : {
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar*>(option);
-      const QStyleOptionProgressBar *opt2 =
-          qstyleoption_cast<const QStyleOptionProgressBar*>(option);
 
       if (opt && opt->textVisible)
       {
@@ -8319,15 +8406,27 @@ void Style::drawControl(ControlElement element,
 
         QFont f(painter->font());
         if (lspec.boldFont) f.setBold(true);
-        bool isVertical = false;
-        if (opt2 && opt2->orientation == Qt::Vertical)
-          isVertical = true;
+        bool isVertical(opt->orientation == Qt::Vertical);
 
+        const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+        bool inverted(pb && pb->invertedAppearance());
+
+        bool outText(false);
         if (tspec_.progressbar_thickness > 0
-            && QFontMetrics(f).height() >= (isVertical ? w : h)
-            // KCapacityBar and KisSliderSpinBox don't obey thickness setting
-            && !(widget && widget->inherits("KCapacityBar")) && !isKisSlider_)
-          break;
+            && QFontMetrics(f).height() >= tspec_.progressbar_thickness
+            // KisSliderSpinBox doesn't obey thickness setting
+            && !isKisSlider_)
+        { // text is outside progressbar
+          outText = true;
+          if (enoughContrast(getFromRGBA(lspec.normalColor),
+              QApplication::palette().color(QPalette::WindowText)))
+          {
+            lspec.normalColor = lspec.focusColor = lspec.toggleColor =
+              getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
+            lspec.normalInactiveColor = lspec.focusInactiveColor = lspec.toggleInactiveColor =
+              getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+          }
+        }
 
         int length = w;
         QRect r = option->rect;
@@ -8336,7 +8435,7 @@ void Style::drawControl(ControlElement element,
           length = h;
           r.setRect(y, x, h, w);
           QTransform m;
-          if (!opt2->bottomToTop)
+          if (!opt->bottomToTop)
           {
             m.translate(0, w+2*x); m.scale(1,-1);
           }
@@ -8346,6 +8445,8 @@ void Style::drawControl(ControlElement element,
           }
           painter->setTransform(m, true);
         }
+        if (outText)
+          length -= lspec.tispace;
 
         QString txt = opt->text;
         if (!txt.isEmpty())
@@ -8357,47 +8458,47 @@ void Style::drawControl(ControlElement element,
 
         /* find the part inside the indicator */
         QRect R;
-        QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
-        if (state != 0 && !txt.isEmpty() && col.isValid())
+        if (!outText && state != 0 && !txt.isEmpty())
         {
-          QColor txtCol;
-          if (state == 1) txtCol = getFromRGBA(lspec.normalColor);
-          else if (state == 2) txtCol = getFromRGBA(lspec.focusColor);
-          else if (state == 4) txtCol = getFromRGBA(lspec.toggleColor);
-          // do nothing if the colors are the same
-          if ((!txtCol.isValid() || col != txtCol)
-              && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
+          QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
+          if (col.isValid())
           {
-            int full = sliderPositionFromValue(opt->minimum,
-                                               opt->maximum,
-                                               qMax(opt->progress,opt->minimum),
-                                               length,
-                                               false);
-            bool inverted = false;
-            const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-            if (pb && pb->invertedAppearance()) inverted = true;
-            if (!isVertical)
+            QColor txtCol;
+            if (state == 1) txtCol = getFromRGBA(lspec.normalColor);
+            else if (state == 2) txtCol = getFromRGBA(lspec.focusColor);
+            else if (state == 4) txtCol = getFromRGBA(lspec.toggleColor);
+            // do nothing if the colors are the same
+            if ((!txtCol.isValid() || col != txtCol)
+                && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
             {
-              if (inverted)
-                R = r.adjusted(w-full,0,0,0);
-              else
-                R = r.adjusted(0,0,full-w,0);
-            }
-            else
-            {
-              if (inverted)
+              int full = sliderPositionFromValue(opt->minimum,
+                                                 opt->maximum,
+                                                 qMax(opt->progress,opt->minimum),
+                                                 length,
+                                                 false);
+              if (!isVertical)
               {
-                if (!opt2 || !opt2->bottomToTop)
-                  R = r.adjusted(0,0,full-h,0);
+                if (inverted)
+                  R = r.adjusted(w-full,0,0,0);
                 else
-                  R = r.adjusted(h-full,0,0,0);
+                  R = r.adjusted(0,0,full-w,0);
               }
               else
               {
-                if (!opt2 || !opt2->bottomToTop)
-                  R = r.adjusted(h-full,0,0,0);
+                if (inverted)
+                {
+                  if (!opt || !opt->bottomToTop)
+                    R = r.adjusted(0,0,full-h,0);
+                  else
+                    R = r.adjusted(h-full,0,0,0);
+                }
                 else
-                  R = r.adjusted(0,0,full-h,0);
+                {
+                  if (!opt || !opt->bottomToTop)
+                    R = r.adjusted(h-full,0,0,0);
+                  else
+                    R = r.adjusted(0,0,full-h,0);
+                }
               }
             }
           }
@@ -8409,10 +8510,35 @@ void Style::drawControl(ControlElement element,
           painter->save();
           painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
         }
+        int talign;
+        if (outText)
+        {
+          int hAlignment = Qt::AlignRight;
+          if (inverted || isVertical)
+          {
+            if (inverted && isVertical)
+            {
+              if (opt->bottomToTop)
+                hAlignment = Qt::AlignLeft;
+            }
+            else if (inverted || !opt->bottomToTop)
+              hAlignment = Qt::AlignLeft;
+          }
+          if (option->direction == Qt::RightToLeft)
+          {
+            if (hAlignment == Qt::AlignRight)
+              hAlignment = Qt::AlignLeft;
+            else
+              hAlignment = Qt::AlignRight;
+          }
+          talign = hAlignment | Qt::AlignVCenter;
+        }
+        else
+          talign = Qt::AlignCenter;
         renderLabel(option,painter,
                     r,
                     fspec,lspec,
-                    Qt::AlignCenter,txt,QPalette::WindowText,
+                    talign,txt,QPalette::WindowText,
                     state,
                     isInactive);
         if (R.isValid())
@@ -10151,13 +10277,20 @@ void Style::drawControl(ControlElement element,
     case CE_Kv_KCapacityBar : {
       if (const QStyleOptionProgressBar *opt = qstyleoption_cast<const QStyleOptionProgressBar*>(option))
       {
+        QRect r = opt->rect;
         QStyleOptionProgressBar o(*opt);
         frame_spec fspec = getFrameSpec("Progressbar");
         fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+        if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness < r.height())
+          o.rect = alignedRect(o.direction,
+                               Qt::AlignCenter,
+                               QSize(r.width(), tspec_.progressbar_thickness),
+                               r);
         drawControl(CE_ProgressBarGroove, &o, painter, widget);
         if (!tspec_.spread_progressbar)
           o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
         drawControl(CE_ProgressBarContents, &o, painter, widget);
+        o.rect = r;
         drawControl(CE_ProgressBarLabel, &o, painter, widget);
       }
 
@@ -13700,20 +13833,21 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                          option->rect);
     }
 
-    case SE_ProgressBarGroove :
-    case SE_ProgressBarLabel : {
-       QRect r = option->rect;
-       if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
-       {
-         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-         QSize s;
-         if (pb && pb->orientation() == Qt::Vertical)
-           s = QSize(qMin(tspec_.progressbar_thickness,r.width()),r.height());
-         else
-           s = QSize(r.width(),qMin(tspec_.progressbar_thickness,r.height()));
-         r = alignedRect(option->direction,Qt::AlignCenter,s,r);
-       }
-       return r;
+    case SE_ProgressBarLabel : return option->rect;
+
+    case SE_ProgressBarGroove : {
+      QRect r = option->rect;
+      if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
+      {
+        const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+        QSize s;
+        if (pb && pb->orientation() == Qt::Vertical)
+          s = QSize(qMin(tspec_.progressbar_thickness,r.width()),r.height());
+        else
+          s = QSize(r.width(),qMin(tspec_.progressbar_thickness,r.height()));
+        r = alignedRect(option->direction,Qt::AlignCenter,s,r);
+      }
+      return r;
     }
 
     case SE_ProgressBarContents : {

@@ -79,7 +79,7 @@
 </g>
 <g style="stroke:none;fill-rule:evenodd">
 <rect width="15" x="427.99991" y="974.46002" height="15" style="fill:#00bcd4" id="tab-tear"/>
-<rect width="45" x="25" y="1030" rx="22.5" height="45" ry="22.5" style="fill:#eaedf4" id="dial"/>
+<rect width="45" x="25" y="1030" rx="22.5" height="45" ry="22.5" style="fill:#f2f3f8" id="dial"/>
 <g style="fill:#fff" id="dial-notches" transform="translate(-76.499996,366.75012)">
 <rect width="45" x="202.5" y="667.5" height="45" style="opacity:0" id="rect6567"/>
 <g style="fill:#5a5a5a" id="g189">
@@ -92,7 +92,7 @@
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0;fill:#fff" id="rect6725" transform="rotate(-90)"/>
 <path style="fill:#505050" id="path6728" d="M 8,602.986 20,588 32,602.986 c 0,0 -7.00002,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
 </g>
-<circle cx="98" cy="1063" style="fill:#00bcd4;fill-rule:evenodd;stroke:none" r="5" id="dial-handle"/>
+<circle cx="98" cy="1063" style="fill:#4db6ac;fill-rule:evenodd;stroke:none" r="5" id="dial-handle"/>
 <path style="fill:#4db6ac;fill-rule:evenodd;stroke:none" id="slider-toggled-topleft" d="m 194.9999,721.7499 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
 <path style="fill:#4db6ac;fill-rule:evenodd;stroke:none" id="slider-toggled-left" d="m 182.9999,733.7499 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
 <g style="stroke:none" id="common-normal-left" transform="translate(35,5)">
@@ -372,7 +372,7 @@
 <use width="450" x="0" y="0" height="1230" id="progress-pattern-disabled-bottomleft" xlink:href="#progress-pattern-disabled-topleft" transform="matrix(0,-1,1,0,67.5,368.5)"/>
 <use width="450" x="0" y="0" height="1230" id="progress-pattern-disabled" xlink:href="#progress-pattern-disabled-left" transform="matrix(2.1333333,0,0,1,-221.99999,0)"/>
 <g style="stroke:none;fill-rule:evenodd">
-<g style="fill:#dfe3ed">
+<g style="fill:#d7edec">
 <path id="progress-normal-left" d="m 320,171.9998 0,-31.9998 -10,0 .0006,32 z "/>
 <path id="progress-normal-topleft" d="m 319.9999,130 c -5.49989,-5e-05 -9.99989,4.49995 -9.99986,9.9999 l 9.9999,0 z "/>
 <path id="progress-normal" d="m 320,140 0,32 32,0 0,-32 -32,0 z"/>
@@ -410,11 +410,11 @@
 <use width="100%" x="0" y="0" height="100%" style="fill:#fff" xlink:href="#menuitem-toggled-bottomright" id="menuitem-pressed-bottomright" transform="translate(-50,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="fill:#fff" xlink:href="#menuitem-toggled-topright" id="menuitem-pressed-topright" transform="translate(-50,0)"/>
 <g style="stroke:none;fill-rule:evenodd">
-<g style="stroke-width:3.609;stroke-linecap:round;stroke-linejoin:round">
+<g style="stroke-width:3.609;stroke-linejoin:round;stroke-linecap:round">
 <rect width="10" x="0" y="0" height="10" id="expand-button-normal"/>
 <rect width="10" x="285" y="72.5" height="10" id="expand-lineedit-normal"/>
 </g>
-<g style="fill:#00bcd4">
+<g style="fill:#4db6ac">
 <path id="progress-pattern-normal-left" d="m 17.5,140.0003 0,32.4998 -7.5,0 0,-32.5 z"/>
 <path id="progress-pattern-normal-bottomleft" d="m 17.5,180.0001 c -4,0 -7.5,-3.5 -7.5,-7.5 h 7.5 z "/>
 <path id="progress-pattern-normal-topleft" d="m 10,140.0001 c 0,-4 3.5,-7.5 7.5,-7.5 v 7.5 z "/>
@@ -424,8 +424,8 @@
 <path id="progress-pattern-normal-right" d="m 50,140.0004 0,32.4998 7.5,0 0,-32.5 z"/>
 <path id="progress-pattern-normal-bottomright" d="m 50,180.0002 c 4,0 7.5,-3.5 7.5,-7.5 h -7.5 z "/>
 <path id="progress-pattern-normal-topright" d="m 57.5,140.0002 c 0,-4 -3.5,-7.5 -7.5,-7.5 v 7.5 z "/>
-<path id="button-toggled" d="M 179,52 V 20 h -32 v 32 z"/>
 </g>
+<path style="fill:#00bcd4" id="button-toggled" d="M 179,52 V 20 h -32 v 32 z"/>
 <path style="fill:#fff" id="tabframe-normal" d="m 285.5,883.5 0,32 32,0 0,-32 -32,0 z"/>
 </g>
 <g style="stroke:none" id="tabframe-normal-left" transform="matrix(0.8,0,0,0.98461538,264.5002,835.49842)">
@@ -581,7 +581,7 @@
 </g>
 </g>
 <rect width="2.5" x="45.487774" y="791" height="2.5" style="fill:#b74aff;stroke:none" id="menu-shadow-hint-top"/>
-<g style="color:#000;fill:none;stroke:#505050">
+<g style="color:#000;stroke:#505050;fill:none">
 <ellipse cx="30.500008" cy="232" rx="7.5000072" ry="7.5000076" id="menu-radio-normal"/>
 <rect width="15.000229" x="192.49988" y="-237.50024" rx="2" ry="2" height="15.000229" id="menu-checkbox-normal" transform="scale(1,-1)"/>
 </g>
