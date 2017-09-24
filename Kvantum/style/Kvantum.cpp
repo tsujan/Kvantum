@@ -3286,7 +3286,7 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
 static inline QString progressMaxText (const QProgressBar *pb, const QStyleOptionProgressBar *opt)
 {
   QString maxTxt;
-  if (pb && !pb->text().isEmpty() && pb->isTextVisible())
+  if (pb && pb->isTextVisible() && !pb->text().isEmpty())
   {
     QLocale l = QLocale::system();
     maxTxt = pb->format();
@@ -3294,8 +3294,15 @@ static inline QString progressMaxText (const QProgressBar *pb, const QStyleOptio
     maxTxt.replace("%v", l.toString(pb->maximum()));
     maxTxt.replace("%m", l.toString(pb->maximum()));
   }
-  else if (opt && opt->textVisible)
+  else if (opt && opt->textVisible && !opt->text.isEmpty())
+  {
     maxTxt = opt->text;
+    QLocale l = QLocale::system();
+    QString percentTxt = QString(l.percent()) + l.toString(100);
+    QFontMetrics fm = opt->fontMetrics;
+    if (fm.width(percentTxt) > fm.width(maxTxt))
+      maxTxt = percentTxt;
+  }
   return maxTxt;
 }
 
