@@ -8100,7 +8100,7 @@ void Style::drawControl(ControlElement element,
         QString maxText = progressMaxText(pb, opt);
         if (!maxText.isEmpty())
         {
-          int textWidth = QFontMetrics(f).width(maxText) + lspec.tispace;
+          int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
           if (isVertical)
           {
             if (inverted)
@@ -8202,7 +8202,7 @@ void Style::drawControl(ControlElement element,
           QString maxText = progressMaxText(pb, opt);
           if (!maxText.isEmpty())
           {
-            int textWidth = QFontMetrics(f).width(maxText) + lspec.tispace;
+            int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
             if (isVertical)
             {
               if (inverted)
@@ -8453,7 +8453,7 @@ void Style::drawControl(ControlElement element,
           painter->setTransform(m, true);
         }
         if (outText)
-          length -= lspec.tispace;
+          length -= 6; // fixed 3px space + fixed 3px margin
 
         QString txt = opt->text;
         if (!txt.isEmpty())
@@ -8539,6 +8539,11 @@ void Style::drawControl(ControlElement element,
               hAlignment = Qt::AlignRight;
           }
           talign = hAlignment | Qt::AlignVCenter;
+          /* consider a 3px margin */
+          if (hAlignment == Qt::AlignRight)
+            r.adjust(0,0,-3,0);
+          else
+            r.adjust(3,0,0,0);
         }
         else
           talign = Qt::AlignCenter;
