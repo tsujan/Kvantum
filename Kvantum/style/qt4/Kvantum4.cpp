@@ -2379,8 +2379,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
           toolBar->update();
       }
+      break;
     }
-    break;
+    /* Falls through. */
 
   case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
@@ -7027,6 +7028,9 @@ void Style::drawControl(ControlElement element,
           if (pb->invertedAppearance())
             inverted = true;
         }
+        /* always invert RTL horizontal bars */
+        if (!isVertical && option->direction == Qt::RightToLeft)
+          inverted = !inverted;
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
@@ -7063,10 +7067,21 @@ void Style::drawControl(ControlElement element,
                                                 qMax(opt->progress,opt->minimum),
                                                 length,
                                                 false);
-          if (isVertical ? inverted : !inverted)
-            r.adjust(0,0,-empty,0);
+          if (isVertical)
+          {
+            if (inverted)
+              r.adjust(empty,0,0,0);
+            else
+              r.adjust(0,0,-empty,0);
+          }
           else
-            r.adjust(empty,0,0,0);
+          {
+            if (inverted)
+              r.adjust(empty,0,0,0);
+            else
+              r.adjust(0,0,-empty,0);
+              
+          }
 
           // take care of thin indicators
           if (r.width() > 0)
@@ -7077,14 +7092,21 @@ void Style::drawControl(ControlElement element,
               {
                 painter->save();
                 painter->setClipRegion(r);
-                if (!isVertical && !inverted)
-                  r.setWidth(h);
-                else if (isVertical && inverted)
-                  r.setWidth(w);
-                else if (!isVertical && inverted)
-                  r.adjust(r.width()-h,0,0,0);
-                else// if (isVertical && !inverted)
-                  r.adjust(r.width()-w,0,0,0);
+                if (isVertical)
+                {
+                  if (inverted)
+                    r.adjust(r.width()-w,0,0,0);
+                  else
+                    r.setWidth(w);
+                }
+                else
+                {
+                  if (inverted)
+                    r.adjust(r.width()-h,0,0,0);
+                  else
+                    r.setWidth(h);
+                    
+                }
                 thin = true;
               }
             }
@@ -7092,10 +7114,21 @@ void Style::drawControl(ControlElement element,
             {
               painter->save();
               painter->setClipRegion(r);
-              if ((!isVertical && !inverted) || (isVertical && inverted))
-                r.setWidth(fspec.left+fspec.right);
+              if (isVertical)
+              {
+                if (inverted)
+                  r.adjust(r.width()-fspec.left-fspec.right,0,0,0);
+                else
+                  r.setWidth(fspec.left+fspec.right);
+              }
               else
-                r.adjust(r.width()-fspec.left-fspec.right,0,0,0);
+              {
+                if (inverted)
+                  r.adjust(r.width()-fspec.left-fspec.right,0,0,0);
+                else
+                  r.setWidth(fspec.left+fspec.right);
+                  
+              }
               thin = true;
             }
           }
@@ -7114,10 +7147,21 @@ void Style::drawControl(ControlElement element,
           int animcount = progressbars_[wi];
           int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);         
           QRect R = r.adjusted(animcount,0,0,0);
-          if (isVertical ? inverted : !inverted)
-            R.setX(r.x()+(animcount%r.width()));
+          if (isVertical)
+          {
+            if (inverted)
+              R.setX(r.x()+r.width()-(animcount%r.width()));
+            else
+              R.setX(r.x()+(animcount%r.width()));
+          }
           else
-            R.setX(r.x()+r.width()-(animcount%r.width()));
+          {
+            if (inverted)
+              R.setX(r.x()+r.width()-(animcount%r.width()));
+            else
+              R.setX(r.x()+(animcount%r.width()));
+              
+          }
           if (!isRounded)
             R.setWidth(pm);
           else
@@ -7239,7 +7283,7 @@ void Style::drawControl(ControlElement element,
           length = h;
           r.setRect(y, x, h, w);
           QTransform m;
-          if (!opt2->bottomToTop)
+          if (!opt2 || !opt2->bottomToTop)
           {
             m.translate(0, w+2*x); m.scale(1,-1);
           }
@@ -7276,32 +7320,26 @@ void Style::drawControl(ControlElement element,
                                                qMax(opt->progress,opt->minimum),
                                                length,
                                                false);
-            bool inverted = false;
             const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-            if (pb && pb->invertedAppearance()) inverted = true;
-            if (!isVertical)
+            bool inverted(pb && pb->invertedAppearance());
+            if ((!isVertical && option->direction == Qt::RightToLeft) // -> CE_ProgressBarContents
+                || (isVertical && opt2 && opt2->bottomToTop))
+            {
+              inverted = !inverted;
+            }
+            if (isVertical)
+            {
+              if (inverted)
+                R = r.adjusted(h-full,0,0,0);
+              else
+                R = r.adjusted(0,0,full-h,0);
+            }
+            else
             {
               if (inverted)
                 R = r.adjusted(w-full,0,0,0);
               else
                 R = r.adjusted(0,0,full-w,0);
-            }
-            else
-            {
-              if (inverted)
-              {
-                if (!opt2 || !opt2->bottomToTop)
-                  R = r.adjusted(0,0,full-h,0);
-                else
-                  R = r.adjusted(h-full,0,0,0);
-              }
-              else
-              {
-                if (!opt2 || !opt2->bottomToTop)
-                  R = r.adjusted(h-full,0,0,0);
-                else
-                  R = r.adjusted(0,0,full-h,0);
-              }
             }
           }
         }
@@ -13093,7 +13131,7 @@ QRect Style::subControlRect(ComplexControl control,
               const qreal fraction(qreal(opt->sliderValue - opt->minimum)/
                                    qreal(opt->maximum - opt->minimum));
               if(opt->dialWrapping)
-                angle = 1.5*M_PI - fraction*2*M_PI;
+                angle = M_PI*4/3 - fraction*2*M_PI; // angle = 1.5*M_PI - fraction*2*M_PI;
               else
                 angle = (M_PI*8 - fraction*10*M_PI)/6;
             }
