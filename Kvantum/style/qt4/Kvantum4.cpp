@@ -10040,13 +10040,15 @@ void Style::drawComplexControl(ComplexControl control,
             renderElement(painter,"dial-notches"+suffix,dial);
         }
 
-        if (opt->state & State_HasFocus)
+        /* don't draw any focus indicator because
+           even a focus circle may be ugly with some themes */
+        /*if (opt->state & State_HasFocus)
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
           fropt.rect = dial;
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-        }
+        }*/
       }
 
       break;
@@ -13112,11 +13114,13 @@ QRect Style::subControlRect(ComplexControl control,
 
     case CC_Dial : {
       switch (subControl) {
-        case SC_DialGroove : return alignedRect(option->direction,
-                                                Qt::AlignHCenter | Qt::AlignVCenter,
-                                                QSize(qMin(option->rect.width(),option->rect.height()),
-                                                      qMin(option->rect.width(),option->rect.height())),
-                                                option->rect);
+        case SC_DialGroove : {
+          int min = qMin(w,h);
+          return alignedRect(option->direction,
+                             Qt::AlignHCenter | Qt::AlignVCenter,
+                             QSize(min,min),
+                             option->rect);
+        }
         case SC_DialHandle : {
           const QStyleOptionSlider *opt =
             qstyleoption_cast<const QStyleOptionSlider*>(option);
