@@ -1048,6 +1048,8 @@ static inline QWidget *getParent (const QWidget *widget, int level)
 static inline bool isWidgetInactive(const QWidget *widget)
 {
   if (widget
+      /* some widgets (like KCapacityBar in kdf) may be drawn while still invisible */
+      && widget->isVisible()
       && !widget->window()->windowFlags().testFlag(Qt::WindowDoesNotAcceptFocus)
       && !widget->isActiveWindow())
   {
