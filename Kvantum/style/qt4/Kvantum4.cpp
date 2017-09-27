@@ -5343,13 +5343,6 @@ void Style::drawControl(ControlElement element,
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
 
-  const QIcon::Mode iconmode =
-        (option->state & State_Enabled) ?
-        (option->state & State_Selected) ? QIcon::Selected :
-        (option->state & State_Sunken) ? QIcon::Active :
-        (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-      : QIcon::Disabled;
-
   const QIcon::State iconstate =
       (option->state & State_On) ? QIcon::On : QIcon::Off;
 
@@ -6021,6 +6014,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -6056,6 +6055,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -7741,6 +7746,12 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?

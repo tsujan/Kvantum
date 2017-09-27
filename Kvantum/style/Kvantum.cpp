@@ -6339,26 +6339,47 @@ void Style::drawPrimitive(PrimitiveElement element,
   }
 }
 
-QIcon::Mode Style::getIconMode(int state, label_spec lspec) const
+QIcon::Mode Style::getIconMode(int state, bool isInactive, label_spec lspec) const
 {
   QIcon::Mode icnMode;
   if (state == 0)
     icnMode = QIcon::Disabled;
   else
+  {
     icnMode = QIcon::Normal;
+    QColor txtCol;
+    if (state == 1)
+    {
+      if (isInactive)
+        txtCol = getFromRGBA(lspec.normalInactiveColor);
+      if (!txtCol.isValid())
+        txtCol = getFromRGBA(lspec.normalColor);
+    }
+    else if (state == 2)
+    {
+      if (isInactive)
+        txtCol = getFromRGBA(lspec.focusInactiveColor);
+      if (!txtCol.isValid())
+        txtCol = getFromRGBA(lspec.focusColor);
+    }
+    else if (state == 3)
+    {
+      if (isInactive)
+        txtCol = getFromRGBA(lspec.pressInactiveColor);
+      if (!txtCol.isValid())
+        txtCol = getFromRGBA(lspec.pressColor);
+    }
+    else if (state == 4)
+    {
+      if (isInactive)
+        txtCol = getFromRGBA(lspec.toggleInactiveColor);
+      if (!txtCol.isValid())
+        txtCol = getFromRGBA(lspec.toggleColor);
+    }
 
-  QColor txtCol;
-  if (state == 1)
-    txtCol = getFromRGBA(lspec.normalColor);
-  if (state == 2)
-    txtCol = getFromRGBA(lspec.focusColor);
-  if (state == 3)
-    txtCol = getFromRGBA(lspec.pressColor);
-  else if (state == 4)
-    txtCol = getFromRGBA(lspec.toggleColor);
-
-  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
-    icnMode = QIcon::Selected;
+    if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
+      icnMode = QIcon::Selected;
+  }
 
   return icnMode;
 }
@@ -6370,13 +6391,6 @@ void Style::drawControl(ControlElement element,
 {
   int x,y,h,w;
   option->rect.getRect(&x,&y,&w,&h);
-
-  const QIcon::Mode iconmode =
-        (option->state & State_Enabled) ?
-        (option->state & State_Selected) ? QIcon::Selected :
-        (option->state & State_Sunken) ? QIcon::Active :
-        (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-      : QIcon::Disabled;
 
   const QIcon::State iconstate =
       (option->state & State_On) ? QIcon::On : QIcon::Off;
@@ -6558,13 +6572,14 @@ void Style::drawControl(ControlElement element,
               if (l[0].isEmpty()) // textless menuitem, as in Kdenlive's play button menu
                 r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
                                 iconSize,labelRect(r,fspec,lspec));
+              bool isInactive(status.contains("-inactive"));
               renderLabel(option,painter,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           l[0],QPalette::Text,
                           state,
-                          status.contains("-inactive"),
-                          getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
+                          isInactive,
+                          getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                           iconSize);
             }
           }
@@ -6733,7 +6748,7 @@ void Style::drawControl(ControlElement element,
                 o.palette = palette;
                 if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
                 {
-                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
@@ -6779,7 +6794,7 @@ void Style::drawControl(ControlElement element,
                 }
                 else if (pixelRatio_ > 1)
                 {
-                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
@@ -6800,7 +6815,7 @@ void Style::drawControl(ControlElement element,
                 o.palette = palette;
                 if (pixelRatio_ > 1)
                 {
-                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
@@ -6819,9 +6834,11 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
-                if (pixelRatio_ > 1)
+                /* because the inactive toggled bg may have contrast with the active one and
+                   since this can be a symbolic SVG icon, we use the pixmap with inactiveness */
+                if (isInactive || pixelRatio_ > 1)
                 {
-                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,lspec),
+                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
@@ -7108,6 +7125,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -7145,6 +7168,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -7256,6 +7285,7 @@ void Style::drawControl(ControlElement element,
         QStyleOptionComboBox o(*opt);
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+        bool isInactive(status.contains("-inactive"));
         renderLabel(&o,painter,
                     /* since the label is vertically centered inside the label rectangle,
                        this doesn't do any harm and is good for Qt Designer and similar cases */
@@ -7263,8 +7293,8 @@ void Style::drawControl(ControlElement element,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
-                    status.contains("-inactive"),
-                    getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize),
+                    isInactive,
+                    getPixmapFromIcon(opt->currentIcon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
 
@@ -7872,13 +7902,14 @@ void Style::drawControl(ControlElement element,
           }
         }
         iconSize = QSize(icnSize,icnSize);
+        bool isInactive(isWidgetInactive(widget));
         renderLabel(option,painter,
                     r,
                     fspec,lspec,
                     talign,txt,QPalette::WindowText,
                     state,
-                    isWidgetInactive(widget),
-                    getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, iconSize),
+                    isInactive,
+                    getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                     iconSize);
 
         if (tabV2.state & State_HasFocus)
@@ -9031,6 +9062,12 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
+        const QIcon::Mode iconmode =
+              (option->state & State_Enabled) ?
+              (option->state & State_Selected) ? QIcon::Selected :
+              (option->state & State_Sunken) ? QIcon::Active :
+              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
+            : QIcon::Disabled;
         renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
@@ -9311,14 +9348,15 @@ void Style::drawControl(ControlElement element,
             R.adjust(margin, 0, -margin, 0);
         }
 
+        bool isInactive(status.contains("-inactive"));
         renderLabel(&o,painter,
                     R,
                     fspec,lspec,
                     talign,opt->text,QPalette::ButtonText,
                     state,
-                    status.contains("-inactive"),
+                    isInactive,
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
-                      : getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
+                      : getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
       }
 
@@ -10105,6 +10143,7 @@ void Style::drawControl(ControlElement element,
           QStyleOptionToolButton o(*opt);
           if ((option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+          bool isInactive(status.contains("-inactive"));
           renderLabel(&o,painter,
                       !(opt->features & QStyleOptionToolButton::Arrow)
                           || opt->arrowType == Qt::NoArrow
@@ -10122,8 +10161,8 @@ void Style::drawControl(ControlElement element,
                       fspec,lspec,
                       talign,txt,QPalette::ButtonText,
                       state,
-                      status.contains("-inactive"),
-                      getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
+                      isInactive,
+                      getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                       opt->iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
         }
@@ -11040,7 +11079,9 @@ void Style::drawComplexControl(ComplexControl control,
 
             /*fspec.top = fspec.bottom = 0;
               lspec.top = lspec.bottom = 0;*/
-            QPixmap icn = getPixmapFromIcon(opt->currentIcon, getIconMode(state,lspec), iconstate, opt->iconSize);
+            QPixmap icn = getPixmapFromIcon(opt->currentIcon,
+                                            getIconMode(state,status.contains("-inactive"),lspec),
+                                            iconstate, opt->iconSize);
             QRect ricn = alignedRect(option->direction,
                                      Qt::AlignVCenter | Qt::AlignLeft,
                                      opt->iconSize,

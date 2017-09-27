@@ -305,7 +305,7 @@ class Style : public QCommonStyle {
     bool hasHighContrastWithContainer(const QWidget *w, const QColor color) const;
 
     /* Consider monochrome icons that reverse color when selected. */
-    QIcon::Mode getIconMode(int state, label_spec lspec) const;
+    QIcon::Mode getIconMode(int state, bool isInactive, label_spec lspec) const;
 
     /* A solution for Qt5's problem with translucent windows.*/
     void setSurfaceFormat(QWidget *w) const;

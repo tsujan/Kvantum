@@ -685,8 +685,7 @@ ordinary arrow
 and dropdown menu arrow</string>
          </property>
          <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -713,8 +712,7 @@ ordinary arrow
 and dropdown menu arrow</string>
          </property>
          <property name="icon">
-          <iconset resource="KvantumPreviewResources.qrc">
-           <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+          <iconset theme="folder"/>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -2186,8 +2184,7 @@ check box</string>
            <string>Editable</string>
           </property>
           <property name="icon">
-           <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+           <iconset theme="folder"/>
           </property>
           <property name="flags">
            <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
