@@ -1646,7 +1646,7 @@ void Style::polish(QPalette &palette)
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
   }
 
-  col = getFromRGBA(cspec_.tooltipBasetColor);
+  col = getFromRGBA(cspec_.tooltipBaseColor);
   if (col.isValid())
     palette.setColor(QPalette::ToolTipBase,col);
   else
@@ -1690,6 +1690,7 @@ void Style::polish(QPalette &palette)
     palette.setColor(QPalette::Active,QPalette::ButtonText,col);
     palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
   }
+
   col = getFromRGBA(cspec_.tooltipTextColor);
   if (col.isValid())
     palette.setColor(QPalette::ToolTipText,col);
