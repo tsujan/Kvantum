@@ -104,7 +104,9 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   {
     r = menuShadow_;
   }
-  else if (widget->inherits("QTipLabel"))
+  else if (widget->inherits("QTipLabel")
+           /* unusual tooltips */
+           || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
     r = tooltipShadow_;
   QRect rect = widget->rect();
 

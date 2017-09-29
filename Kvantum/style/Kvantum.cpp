@@ -1266,7 +1266,7 @@ void Style::polish(QWidget *widget)
     case Qt::Window:
     case Qt::Dialog:
     case Qt::Popup:
-    case Qt::ToolTip: // a window, not a tooltip
+    case Qt::ToolTip: // a window, not a real tooltip
     case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
       /* popup, not menu (-> GoldenDict); also, although it may be
          hard to believe, a menu can have the Dialog flag (-> qlipper)
@@ -1363,7 +1363,11 @@ void Style::polish(QWidget *widget)
           }
           if ((makeTranslucent
                /* enable blurring for hard-coded translucency */
-               || (tspec_now.composite && hspec_.blur_translucent
+               || (tspec_now.composite
+                   && (hspec_.blur_translucent
+                       /* let unusual tooltips with hard-coded translucency
+                          have shadow (like in KDE system settings) */
+                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
                    && widget->testAttribute(Qt::WA_TranslucentBackground))))
           {
 
