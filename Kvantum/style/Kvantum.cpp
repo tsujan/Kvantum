@@ -3161,19 +3161,26 @@ static int whichToolbarButton (const QToolButton *tb, const QToolBar *toolBar)
   return res;
 }
 
-/* get the widest day/month string if needed */
-static QString maxDay;
-static QString maxMonth;
-static QString maxFullDay;
-static QString maxFullMonth;
-static void getMaxDay(bool full)
+/* get the widest day/month string for the locale if needed */
+#if QT_VERSION >= 0x050700
+static QHash<const QLocale, QString> maxDay;
+static QHash<const QLocale, QString> maxMonth;
+static QHash<const QLocale, QString> maxFullDay;
+static QHash<const QLocale, QString> maxFullMonth;
+#else
+static QHash<const QString, QString> maxDay;
+static QHash<const QString, QString> maxMonth;
+static QHash<const QString, QString> maxFullDay;
+static QHash<const QString, QString> maxFullMonth;
+#endif
+static void getMaxDay(const QLocale l, bool full)
 {
   QString day;
   int max = 0;
   QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
   for (int i=1; i<=7 ; ++i)
   {
-    QString theDay = QLocale::system().dayName(i,format);
+    QString theDay = l.dayName(i,format);
     int size = QFontMetrics(QApplication::font()).width(theDay);
     if (max < size)
     {
@@ -3181,17 +3188,22 @@ static void getMaxDay(bool full)
       day = theDay;
     }
   }
-  if (full) maxFullDay = day;
-  else maxDay = day;
+#if QT_VERSION >= 0x050700
+  if (full) maxFullDay.insert(l, day);
+  else maxDay.insert(l, day);
+#else
+  if (full) maxFullDay.insert(l.bcp47Name(), day);
+  else maxDay.insert(l.bcp47Name(), day);
+#endif
 }
-static void getMaxMonth(bool full)
+static void getMaxMonth(const QLocale l, bool full)
 {
   QString month;
   int max = 0;
   QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
   for (int i=1; i<=12 ; ++i)
   {
-    QString theMonth = QLocale::system().monthName(i,format);
+    QString theMonth = l.monthName(i,format);
     int size = QFontMetrics(QApplication::font()).width(theMonth);
     if (max < size)
     {
@@ -3199,8 +3211,13 @@ static void getMaxMonth(bool full)
       month = theMonth;
     }
   }
-  if (full) maxFullMonth = month;
-  else maxMonth = month;
+#if QT_VERSION >= 0x050700
+  if (full) maxFullMonth.insert(l, month);
+  else maxMonth.insert(l, month);
+#else
+  if (full) maxFullMonth.insert(l.bcp47Name(), month);
+  else maxMonth.insert(l.bcp47Name(), month);
+#endif
 }
 
 static inline QString spinMaxText (const QAbstractSpinBox *sp)
@@ -3208,41 +3225,73 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
   QString maxTxt;
   if (const QSpinBox *sb = qobject_cast<const QSpinBox*>(sp))
   {
-    int max = sb->maximum();
-    int min = sb->minimum();
-    max = (max + min < 0 ? -min : max);
-    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(max).arg(sb->suffix());
-    if (min < 0) maxTxt = "-" + maxTxt;
+    QLocale l = sp->locale();
+#if QT_VERSION >= 0x050300
+    if (!sb->isGroupSeparatorShown())
+      l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+#else
+    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+#endif
+    QString maxStr = l.toString(sb->maximum());
+    QString minStr = l.toString(sb->minimum());
+    if (minStr.size() > maxStr.size())
+      maxStr = minStr;
+    /* Qt considers 18 at most in QAbstractSpinBox::sizeHint() */
+    maxStr.truncate(20);
+    maxTxt = sb->prefix() + maxStr + sb->suffix();
   }
   else if (const QDoubleSpinBox *sb = qobject_cast<const QDoubleSpinBox*>(sp))
   {
-    double max = sb->maximum();
-    double min = sb->minimum();
-    int Max = (max + min < 0 ? -min : max);
-    maxTxt = QString("%1%2%3").arg(sb->prefix()).arg(Max).arg(sb->suffix());
-    if (sb->decimals() > 0)
+    QLocale l = sp->locale();
+#if QT_VERSION >= 0x050300
+    if (!sb->isGroupSeparatorShown())
+      l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+#else
+    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+#endif
+    /* at first, only consider integers... */
+    int max = sb->maximum();
+    int min = sb->minimum();
+    QString maxStr = l.toString(max);
+    QString minStr = l.toString(min);
+    if (minStr.size() > maxStr.size())
+      maxStr = minStr;
+    maxTxt.truncate(20);
+    maxTxt = sb->prefix() + maxStr + sb->suffix();
+    /* ... then, take decimals into account */
+    int dec = sb->decimals();
+    if (dec > 0)
     {
-      maxTxt = maxTxt + ".";
-      for (int i = 0; i < sb->decimals() ; ++i) maxTxt = maxTxt + "0";
+      maxTxt = maxTxt + l.decimalPoint();
+      QString zero = l.toString(0);
+      for (int i = 0; i < dec ; ++i)
+        maxTxt += zero;
     }
-    if (min < 0) maxTxt = "-" + maxTxt;
   }
   else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit*>(sp))
   {
+    QLocale l = sp->locale();
+    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+#if QT_VERSION < 0x050700
+    QString L = l.bcp47Name();
+#endif
     maxTxt = sb->displayFormat();
+    QString twoDigits = l.toString(99);
     /* take into account leading zeros */
     QRegExp exp = QRegExp("hh|HH|mm|ss");
-    maxTxt.replace(exp,"00");
+    maxTxt.replace(exp,twoDigits);
     exp = QRegExp("h|H|m|s");
-    maxTxt.replace(exp,"00");
-    maxTxt.replace("zzz","000");
-    maxTxt.replace("z","000");
-    /* year ('0' is a little wider that 'y') */
-    maxTxt.replace("yy","00");
-    maxTxt.replace("yyyy","0000");
+    maxTxt.replace(exp,twoDigits);
+    maxTxt.replace("zzz",l.toString(999));
+    maxTxt.replace("z",l.toString(999));
+    /* year */
+    maxTxt.replace("yy",twoDigits);
+    maxTxt.replace("yyyy",l.toString(9999));
     /* am/pm */
-    maxTxt.replace("ap","pm",Qt::CaseInsensitive);
-    maxTxt.replace("a","pm",Qt::CaseInsensitive);
+    QString ap = l.pmText().size() > l.amText().size()
+                   ? l.pmText() : l.amText();
+    maxTxt.replace("ap",ap,Qt::CaseInsensitive);
+    maxTxt.replace("a",ap,Qt::CaseInsensitive);
     /* these will be replaced later */
     maxTxt.replace("dddd","eeee");
     maxTxt.replace("MMMM","ffff");
@@ -3250,33 +3299,57 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
     maxTxt.replace("MMM","fff");
     /* leading zeros */
     exp = QRegExp("dd|MM");
-    maxTxt.replace(exp,"00");
+    maxTxt.replace(exp,twoDigits);
     exp = QRegExp("d|M");
-    maxTxt.replace(exp,"00");
+    maxTxt.replace(exp,twoDigits);
     /* time zone */
     maxTxt.replace("t",sb->dateTime().toString("t"));
+#if QT_VERSION >= 0x050700
     /* full day/month name */
     if (maxTxt.contains("eeee"))
     {
-      if (maxFullDay.isNull()) getMaxDay(true);
-      maxTxt.replace("eeee",maxFullDay);
+      if (!maxFullDay.contains(l)) getMaxDay(l, true);
+      maxTxt.replace("eeee",maxFullDay.value(l));
     }
     if (maxTxt.contains("ffff"))
     {
-      if (maxFullMonth.isNull()) getMaxMonth(true);
-      maxTxt.replace("ffff",maxFullMonth);
+      if (!maxFullMonth.contains(l)) getMaxMonth(l, true);
+      maxTxt.replace("ffff",maxFullMonth.value(l));
     }
     /* short day/month name */
     if (maxTxt.contains("eee"))
     {
-      if (maxDay.isNull()) getMaxDay(false);
-      maxTxt.replace("eee",maxDay);
+      if (!maxDay.contains(l)) getMaxDay(l, false);
+      maxTxt.replace("eee",maxDay.value(l));
     }
     if (maxTxt.contains("fff"))
     {
-      if (maxMonth.isNull()) getMaxMonth(false);
-      maxTxt.replace("fff",maxMonth);
+      if (!maxMonth.contains(l)) getMaxMonth(l, false);
+      maxTxt.replace("fff",maxMonth.value(l));
     }
+#else
+    if (maxTxt.contains("eeee"))
+    {
+      if (!maxFullDay.contains(L)) getMaxDay(l, true);
+      maxTxt.replace("eeee",maxFullDay.value(L));
+    }
+    if (maxTxt.contains("ffff"))
+    {
+      if (!maxFullMonth.contains(L)) getMaxMonth(l, true);
+      maxTxt.replace("ffff",maxFullMonth.value(L));
+    }
+    /* short day/month name */
+    if (maxTxt.contains("eee"))
+    {
+      if (!maxDay.contains(L)) getMaxDay(l, false);
+      maxTxt.replace("eee",maxDay.value(L));
+    }
+    if (maxTxt.contains("fff"))
+    {
+      if (!maxMonth.contains(L)) getMaxMonth(l, false);
+      maxTxt.replace("fff",maxMonth.value(L));
+    }
+#endif
   }
   if (!maxTxt.isEmpty())
   {
@@ -3296,7 +3369,8 @@ static inline QString progressMaxText (const QProgressBar *pb, const QStyleOptio
   QString maxTxt;
   if (pb && pb->isTextVisible() && !pb->text().isEmpty())
   {
-    QLocale l = QLocale::system();
+    QLocale l = pb->locale();
+    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
     maxTxt = pb->format();
     maxTxt.replace("%p", l.toString(100));
     maxTxt.replace("%v", l.toString(pb->maximum()));
@@ -3306,6 +3380,7 @@ static inline QString progressMaxText (const QProgressBar *pb, const QStyleOptio
   {
     maxTxt = opt->text;
     QLocale l = QLocale::system();
+    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
     QString percentTxt = QString(l.percent()) + l.toString(100);
     QFontMetrics fm = opt->fontMetrics;
     if (fm.width(percentTxt) > fm.width(maxTxt))
@@ -10653,15 +10728,23 @@ void Style::drawComplexControl(ComplexControl control,
                                              ? fspec.right : 0)
                   || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                       && sb->width() < editRect.width() + 2*tspec_.spin_button_width
-                                                        + getFrameSpec("IndicatorSpinBox").right))
+                                                        + getFrameSpec("IndicatorSpinBox").right)
+                  || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
-              }
-              if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
-              {
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
+
+                if (!hasExpandedBorder(fspec))
+                  fspec.expansion = 0;
+                else
+                {
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+                }
               }
             }
           }
