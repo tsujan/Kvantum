@@ -3236,7 +3236,8 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
     QString minStr = l.toString(sb->minimum());
     if (minStr.size() > maxStr.size())
       maxStr = minStr;
-    /* Qt considers 18 at most in QAbstractSpinBox::sizeHint() */
+    /* QAbstractSpinBox::sizeHint() sets a maximum of 18 characters
+       but truncating isn't really needed here because of MAX_INT */
     maxStr.truncate(20);
     maxTxt = sb->prefix() + maxStr + sb->suffix();
   }
@@ -3256,13 +3257,13 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
     QString minStr = l.toString(min);
     if (minStr.size() > maxStr.size())
       maxStr = minStr;
-    maxTxt.truncate(20);
+    maxStr.truncate(20);
     maxTxt = sb->prefix() + maxStr + sb->suffix();
     /* ... then, take decimals into account */
     int dec = sb->decimals();
     if (dec > 0)
     {
-      maxTxt = maxTxt + l.decimalPoint();
+      maxTxt += l.decimalPoint();
       QString zero = l.toString(0);
       for (int i = 0; i < dec ; ++i)
         maxTxt += zero;
@@ -13027,7 +13028,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QString maxTxt = spinMaxText(sb);
         if (!maxTxt.isEmpty())
         {
-          maxTxt = maxTxt + QLatin1Char(' ');
+          maxTxt += QLatin1Char(' '); // QAbstractSpinBox::sizeHint() adds a space
           s = textSize(sb->font(),maxTxt,false)
               + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0
                                       : lspec.left
@@ -14840,7 +14841,7 @@ QRect Style::subControlRect(ComplexControl control,
             QString maxTxt = spinMaxText(sb);
             if (!maxTxt.isEmpty())
             {
-              maxTxt = maxTxt + QLatin1Char(' ');
+              maxTxt += QLatin1Char(' ');
               int txtWidth = textSize(sb->font(),maxTxt,false).width();
               int rightFrame = w - txtWidth - 2*sw
                                - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
