@@ -65,7 +65,7 @@ submenu_delay=250
 [GeneralColors]
 window.color=#fafbfc
 base.color=white
-alt.base.color=#F0F0F0
+alt.base.color=#fafafa
 button.color=#fafbfc
 light.color=white
 mid.light.color=#f0f0f0

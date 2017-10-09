@@ -1135,18 +1135,25 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
   return nullptr;
 }
 
+// This is only called when the widget doesn't have an interior SVG element.
 bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) const
 {
   QString container;
   if (getStylableToolbarContainer(w))
     container = QLatin1String("Toolbar");
-  /* check parent with menubar FIXME: isn't container approach needed here? */
   else if (QWidget *p = getParent(w,1))
   {
+    /* check parent with menubar FIXME: isn't the container approach needed here? */
     if (qobject_cast<QMenuBar*>(p)
         || qobject_cast<QMenuBar*>(getParent(p,1)))
     {
       container = QLatin1String("MenuBar");
+    }
+    else if (qobject_cast<QAbstractItemView*>(p)
+             || qobject_cast<QAbstractItemView*>(getParent(p,1))
+             || qobject_cast<QAbstractItemView*>(getParent(p,2)))
+    { // don't let view-item selection cover widgets without interior
+      return true;
     }
   }
   if(!container.isEmpty()
@@ -3540,49 +3547,23 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     fspec.top = qMin(fspec.top,3);
     fspec.bottom = qMin(fspec.bottom,3);
   }
-  else
+  else if ((!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+           || lineedit->minimumWidth() == lineedit->maximumWidth()
+           || lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
   {
-    if (!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
-    {
-      fspec.left = qMin(fspec.left,3);
-      fspec.right = qMin(fspec.right,3);
-      fspec.top = qMin(fspec.top,3);
-      fspec.bottom = qMin(fspec.bottom,3);
+    fspec.left = qMin(fspec.left,3);
+    fspec.right = qMin(fspec.right,3);
+    fspec.top = qMin(fspec.top,3);
+    fspec.bottom = qMin(fspec.bottom,3);
 
-      if (!hasExpandedBorder(fspec))
-        fspec.expansion = 0;
-      else
-      {
-        fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-        fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-        fspec.topExpanded = qMin(fspec.topExpanded,3);
-        fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-      }
-    }
+    if (!hasExpandedBorder(fspec))
+      fspec.expansion = 0;
     else
     {
-      if (lineedit->minimumWidth() == lineedit->maximumWidth())
-      {
-        fspec.left = qMin(fspec.left,3);
-        fspec.right = qMin(fspec.right,3);
-        fspec.top = qMin(fspec.top,3);
-        fspec.bottom = qMin(fspec.bottom,3);
-
-        if (!hasExpandedBorder(fspec))
-          fspec.expansion = 0;
-        else
-        {
-          fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-          fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-          fspec.topExpanded = qMin(fspec.topExpanded,3);
-          fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-        }
-      }
-      if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
-      {
-        fspec.top = qMin(fspec.top,3);
-        fspec.bottom = qMin(fspec.bottom,3);
-      }
+      fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+      fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+      fspec.topExpanded = qMin(fspec.topExpanded,3);
+      fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
     }
   }
 
@@ -5095,7 +5076,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       else if (qobject_cast<const QLineEdit*>(widget))
       {
-        if (!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+        if ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+            || widget->minimumWidth() == widget->maximumWidth()
+            || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -5110,31 +5093,6 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.rightExpanded = qMin(fspec.rightExpanded,3);
             fspec.topExpanded = qMin(fspec.topExpanded,3);
             fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-          }
-        }
-        else
-        {
-          if (widget->minimumWidth() == widget->maximumWidth())
-          {
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
-
-            if (!hasExpandedBorder(fspec))
-              fspec.expansion = 0;
-            else
-            {
-              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-              fspec.topExpanded = qMin(fspec.topExpanded,3);
-              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-            }
-          }
-          if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
-          {
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
           }
         }
       }
@@ -10697,24 +10655,23 @@ void Style::drawComplexControl(ComplexControl control,
             {
               const label_spec lspec = getLabelSpec("LineEdit");
               const size_spec sspec = getSizeSpec("LineEdit");
-              if (!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
+              if ((!child->styleSheet().isEmpty() && child->styleSheet().contains("padding"))
+                  || child->minimumWidth() == child->maximumWidth()
+                  || child->height() < sizeCalculated(child->font(),fspec,lspec,sspec,"W",QSize()).height())
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
                 fspec.top = qMin(fspec.top,3);
                 fspec.bottom = qMin(fspec.bottom,3);
-              }
-              else
-              {
-                if (child->minimumWidth() == child->maximumWidth())
+
+                if (!hasExpandedBorder(fspec))
+                  fspec.expansion = 0;
+                else
                 {
-                  fspec.left = qMin(fspec.left,3);
-                  fspec.right = qMin(fspec.right,3);
-                }
-                if (child->height() < sizeCalculated(child->font(),fspec,lspec,sspec,"W",QSize()).height())
-                {
-                  fspec.top = qMin(fspec.top,3);
-                  fspec.bottom = qMin(fspec.bottom,3);
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
                 }
               }
             }

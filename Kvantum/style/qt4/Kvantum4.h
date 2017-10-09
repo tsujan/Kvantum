@@ -292,7 +292,8 @@ class Style : public QCommonStyle {
     bool isStylableToolbar(const QWidget *w, bool allowInvisible = false) const;
     /* Get the stylable toolbar containing this widget. */
     QWidget* getStylableToolbarContainer(const QWidget *w, bool allowInvisible = false) const;
-    /* Does the widget have a high contrast with its container (toolbar/menubar)? */
+    /* Does a widget without interior SVG element have
+       a high contrast with its container (toolbar/menubar)? */
     bool hasHighContrastWithContainer(const QWidget *w, const QColor color) const;
 
     /* Consider monochrome icons that reverse color when selected. */

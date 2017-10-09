@@ -59,7 +59,7 @@ dark_titlebar=true
 [GeneralColors]
 window.color=#383c4a
 base.color=#404552
-alt.base.color=#343843
+alt.base.color=#3c434f
 button.color=#414654
 light.color=#5f677f
 mid.light.color=#313131
