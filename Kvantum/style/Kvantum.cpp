@@ -1294,7 +1294,8 @@ void Style::polish(QWidget *widget)
         break;
       }
       else if (widget->inherits("QTipLabel")
-               || qobject_cast<QLabel*>(widget)) // a floating label, as in Filelight
+               || qobject_cast<QLabel*>(widget) // a floating label, as in Filelight
+               || widget->inherits("QComboBoxPrivateContainer")) // at most, a menu
       {
         break;
       }
@@ -5495,18 +5496,12 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (option->direction == Qt::RightToLeft)
         {
           fspec.right = 0;
-          if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
-            fspec.left = lspec.left;
-          else
-            fspec.left += lspec.left;
+          fspec.left += lspec.left;
         }
         else
         {
           fspec.left = 0;
-          if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
-            fspec.right = lspec.right;
-          else
-            fspec.right += lspec.right;
+          fspec.right += lspec.right;
         }
 
         QString aStatus = getState(option,widget);
@@ -8917,48 +8912,48 @@ void Style::drawControl(ControlElement element,
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
+      bool rtl(option->direction == Qt::RightToLeft);
       bool horiz = true;
       QRect sep;
       if (const QStyleOptionHeader *opt = qstyleoption_cast<const QStyleOptionHeader*>(option))
       {
-        bool rtl(option->direction == Qt::RightToLeft);
         if (opt->orientation != Qt::Horizontal) horiz = false;
         switch (opt->position) {
           case QStyleOptionHeader::End:
             fspec.hasCapsule = true;
             fspec.capsuleV = 2;
             fspec.capsuleH = rtl ? -1 : 1;
+            if (!horiz && rtl) fspec.capsuleH = 1;
+            break;
+          case QStyleOptionHeader::Beginning:
+            fspec.hasCapsule = true;
+            fspec.capsuleV = 2;
+            fspec.capsuleH = rtl ? 1 : -1;
             if (horiz)
             {
               if (rtl)
-              {
-                sep.setRect(x+w-fspec.right,
-                            y+fspec.top,
-                            fspec.right,
-                            h-fspec.top-fspec.bottom);
-              }
-              else
               {
                 sep.setRect(x,
                             y+fspec.top,
                             fspec.left,
                             h-fspec.top-fspec.bottom);
               }
+              else
+              {
+                sep.setRect(x+w-fspec.right,
+                            y+fspec.top,
+                            fspec.right,
+                            h-fspec.top-fspec.bottom);
+              }
             }
             else
             {
-              if (rtl) fspec.capsuleH = 1;
+              if (rtl) fspec.capsuleH = -1;
               sep.setRect(x+fspec.top, // -> CT_HeaderSection
-                          y,
+                          y+h-fspec.right,
                           w-fspec.top-fspec.bottom,
-                          fspec.left);
+                          fspec.right);
             }
-            break;
-          case QStyleOptionHeader::Beginning:
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = rtl ? 1 : -1;
-            if (!horiz && rtl) fspec.capsuleH = 1;
             break;
           case QStyleOptionHeader::Middle:
             fspec.hasCapsule = true;
@@ -8967,22 +8962,26 @@ void Style::drawControl(ControlElement element,
             if (horiz)
             {
               if (rtl)
-                sep.setRect(x+w-fspec.right,
-                            y+fspec.top,
-                            fspec.right,
-                            h-fspec.top-fspec.bottom);
-              else
+              {
                 sep.setRect(x,
                             y+fspec.top,
                             fspec.left,
                             h-fspec.top-fspec.bottom);
+              }
+              else
+              {
+                sep.setRect(x+w-fspec.right,
+                            y+fspec.top,
+                            fspec.right,
+                            h-fspec.top-fspec.bottom);
+              }
             }
             else
             {
               sep.setRect(x+fspec.top, // -> CT_HeaderSection
-                          y,
+                          y+h-fspec.right,
                           w-fspec.top-fspec.bottom,
-                          fspec.left);
+                          fspec.right);
             }
             break;
          default: break;
@@ -9018,9 +9017,21 @@ void Style::drawControl(ControlElement element,
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
       if (themeRndr_ && themeRndr_->isValid() && !themeRndr_->elementExists("header-separator"))
-        renderElement(painter,fspec.element+"-"+status+"-left",sep);
+        renderElement(painter, fspec.element + "-" + status + (rtl ? "-left" : "-right"), sep);
       else
+      {
+        if (horiz && rtl)
+        { // just for the best alignment (WARNING: horizontal gradients will be reversed)
+          painter->save();
+          QTransform m;
+          m.translate(2*x+fspec.left, 0);
+          m.scale(-1,1);
+          painter->setTransform(m, true);
+        }
         renderElement(painter,"header-separator",sep);
+        if (horiz && rtl)
+          painter->restore();
+      }
       if (!(option->state & State_Enabled))
         painter->restore();
       if (!horiz)
@@ -9050,15 +9061,15 @@ void Style::drawControl(ControlElement element,
           fspec.right = fspec.bottom;
           fspec.bottom = t;
         }
-        if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
+        if (opt->position == QStyleOptionHeader::End || opt->position == QStyleOptionHeader::Middle)
         {
           if (opt->orientation == Qt::Horizontal)
           {
-            if (rtl) fspec.left = 0;
-            else fspec.right = 0;
+            if (rtl) fspec.right = 0;
+            else fspec.left = 0;
           }
           else
-            fspec.bottom = 0;
+            fspec.top = 0;
         }
         if (opt->textAlignment & Qt::AlignLeft)
         {
@@ -13942,19 +13953,13 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
     case SE_HeaderArrow : {
       const QString group = "HeaderSection";
-      frame_spec fspec = getFrameSpec(group);
+      const frame_spec fspec = getFrameSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
       const label_spec lspec = getLabelSpec(group);
       if (const QStyleOptionHeader *opt = qstyleoption_cast<const QStyleOptionHeader*>(option))
       {
-        if (opt->orientation != Qt::Horizontal) return QRect();
-        if (opt->position == QStyleOptionHeader::Beginning || opt->position == QStyleOptionHeader::Middle)
-        {
-          if (option->direction == Qt::RightToLeft)
-            fspec.left = 0;
-          else
-            fspec.right = 0;
-        }
+        if (opt->orientation != Qt::Horizontal)
+          return QRect();
       }
 
       return alignedRect(option->direction,

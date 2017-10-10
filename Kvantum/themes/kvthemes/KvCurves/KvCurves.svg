@@ -462,7 +462,7 @@
 <g style="stroke:none;fill-rule:evenodd">
 <g id="header-separator" transform="translate(0,0.35738373)">
 <rect width="2" x="-221" y="-48.642616" height="20" style="opacity:0" id="rect5064" transform="scale(-1,-1)"/>
-<rect width="1" x="-220" y="-44.642616" height="12" style="fill:#828282" id="header-separator0" transform="scale(-1,-1)"/>
+<rect width="1" x="-221" y="-44.642616" height="12" style="fill:#828282" id="header-separator0" transform="scale(-1,-1)"/>
 </g>
 <path style="fill:#646464" id="slider-normal-left" d="m 130,660 7.5,0 0,-7.5 -7.5,0 0,7.5 z"/>
 </g>

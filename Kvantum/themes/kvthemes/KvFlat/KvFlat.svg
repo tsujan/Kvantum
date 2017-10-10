@@ -785,6 +785,6 @@
 <use width="450" x="0" y="0" height="1230" id="floating-tab-toggled-bottomleft" xlink:href="#tab-toggled-topleft" transform="matrix(0,-1,1,0,-496.42192,956.93233)"/>
 <g style="fill-rule:evenodd;stroke:none" id="header-separator">
 <rect width="2" x="-372.5" y="-130" height="10" style="fill-opacity:0" id="rect4954" transform="scale(-1,-1)"/>
-<rect width="1" x="370.5" y="120" height="10" style="fill:#2e2e2e" id="rect4956"/>
+<rect width="1" x="371.5" y="120" height="10" style="fill:#2e2e2e" id="rect4956"/>
 </g>
 </svg>

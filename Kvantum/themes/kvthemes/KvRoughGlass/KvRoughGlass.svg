@@ -1449,7 +1449,7 @@
 <g style="stroke:none">
 <g id="header-separator" transform="translate(6)">
 <rect width="3" x="215" y="35" height="10" style="opacity:0;stroke-width:.775" id="header-separator0"/>
-<rect width="1" x="215" y="35" height="10" style="opacity:.15;stroke-width:.447" id="rect2039"/>
+<rect width="1" x="217" y="35" height="10" style="opacity:.15;stroke-width:.447" id="rect2039"/>
 </g>
 <g style="fill-rule:evenodd">
 <path style="fill:#fff" id="lineedit-focused" d="M 288.5,162.5 V 195 H 321 v -32.5 z"/>

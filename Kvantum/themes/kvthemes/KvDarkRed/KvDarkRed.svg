@@ -169,7 +169,7 @@
 <linearGradient gradientTransform="matrix(-1.1875,0,0,-1.1875,-88.4375,392.5)" xlink:href="#linearGradient7980" id="linearGradient7751" y1="266.3158" x1="-245" y2="322.10526" gradientUnits="userSpaceOnUse" x2="-245"/>
 <linearGradient gradientTransform="matrix(1,0,0,-1,317.5,341.25)" xlink:href="#linearGradient6949" id="linearGradient7863" y1="155" x1="-27.5" y2="155" gradientUnits="userSpaceOnUse" x2="-31.5"/>
 <linearGradient gradientTransform="matrix(-1.1875,0,0,-1.1875,-0.9375,541.25)" xlink:href="#linearGradient7980" id="linearGradient7873" y1="266.3158" x1="-245" y2="322.10526" gradientUnits="userSpaceOnUse" x2="-245"/>
-<linearGradient gradientTransform="matrix(0.5,0,0,1,42,0)" id="linearGradient5634" xlink:href="#linearGradient5646" y1="110" y2="100" x1="85" gradientUnits="userSpaceOnUse" x2="85"/>
+<linearGradient gradientTransform="matrix(0.5,0,0,1,44,0)" id="linearGradient5634" xlink:href="#linearGradient5646" y1="110" y2="100" x1="85" gradientUnits="userSpaceOnUse" x2="85"/>
 <linearGradient gradientTransform="translate(317.5,-341.25)" xlink:href="#linearGradient6949" id="linearGradient7871" y1="155" x1="-27.5" y2="155" gradientUnits="userSpaceOnUse" x2="-31.5"/>
 <linearGradient xlink:href="#linearGradient6949" id="linearGradient6342" y1="155" x1="-15" y2="155" gradientUnits="userSpaceOnUse" x2="-22.5"/>
 <linearGradient gradientTransform="rotate(180,107.5,170.625)" xlink:href="#linearGradient8855" id="linearGradient7879" y1="155" x1="-27.5" y2="155" gradientUnits="userSpaceOnUse" x2="-31.5"/>
@@ -957,7 +957,7 @@
 <g style="stroke:none">
 <g style="stroke-width:3.5" id="header-separator" transform="translate(42.5,105)">
 <rect width="3" x="84.5" y="100" height="10" style="fill-opacity:0" id="rect5624"/>
-<rect width="1" x="84.5" y="100" height="10" style="opacity:.5;fill:url(#linearGradient5634)" id="rect5626"/>
+<rect width="1" x="86.5" y="100" height="10" style="opacity:.5;fill:url(#linearGradient5634)" id="rect5626"/>
 </g>
 <rect width="32" x="26" y="1003" height="32" style="fill:#4d4d4d;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:square" id="tabframe-normal"/>
 </g>

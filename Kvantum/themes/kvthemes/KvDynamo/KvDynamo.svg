@@ -563,7 +563,7 @@
 </g>
 <g id="header-separator" transform="matrix(1,0,0,2,0,-90)">
 <rect width="4" x="190" y="85" height="10" style="fill-opacity:0" id="rect4890"/>
-<rect width="2" x="190" y="86.5" height="7" style="fill-opacity:.157" id="rect4892"/>
+<rect width="2" x="192" y="86.5" height="7" style="fill-opacity:.157" id="rect4892"/>
 </g>
 </g>
 <g id="mdi-maximize-focused" transform="translate(933.52545,-1063.6212)">

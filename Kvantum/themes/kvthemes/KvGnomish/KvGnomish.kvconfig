@@ -40,6 +40,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=22
 combo_as_lineedit=true
+combo_menu=true
 layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=3
@@ -47,7 +48,6 @@ groupbox_top_label=false
 inline_spin_indicators=true
 button_contents_shift=true
 animate_states=true
-combo_menu=true
 dark_titlebar=true
 
 [GeneralColors]
@@ -393,7 +393,7 @@ inherits=PanelButtonCommand
 interior=false
 frame=true
 frame.element=menubaritem
-frame.top=0
+frame.top=2
 frame.bottom=3
 frame.left=2
 frame.right=2

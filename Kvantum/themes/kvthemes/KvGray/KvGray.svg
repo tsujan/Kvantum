@@ -1350,7 +1350,7 @@
 <use width="450" x="0" y="0" height="1380" xlink:href="#mdi-minimize-disabled" id="mdi-shade-disabled" transform="translate(160.64054,-2.0633)"/>
 <g style="stroke-width:3.5;stroke:none" id="header-separator">
 <rect width="3" x="403" y="142" height="10" style="fill-opacity:.004" id="rect13093"/>
-<rect width="1" x="403" y="143" height="8" style="fill-opacity:.196" id="header-separator0"/>
+<rect width="1" x="405" y="143" height="8" style="fill-opacity:.196" id="header-separator0"/>
 </g>
 <g style="fill:#fff;stroke:none" id="flat-arrow-up-normal" transform="translate(0,-95.492981)">
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0" id="rect6041" transform="rotate(-90)"/>

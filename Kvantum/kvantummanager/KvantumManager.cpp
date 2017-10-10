@@ -9,6 +9,10 @@
 #include <QWindow>
 #include <QFileDevice>
 #include <QTextStream>
+#if QT_VERSION >= 0x050700
+#include <QTimer>
+#include <QScrollBar>
+#endif
 #endif
 //#include <QDebug>
 
@@ -972,14 +976,59 @@ void KvantumManager::defaultThemeButtons()
 /*************************/
 void KvantumManager::restyleWindow()
 {
-  QApplication::setStyle (QStyleFactory::create ("kvantum"));
+    QApplication::setStyle (QStyleFactory::create ("kvantum"));
 #if QT_VERSION >= 0x050000
-  // Qt5 has QEvent::ThemeChange
-  Q_FOREACH(QWidget *widget, QApplication::allWidgets())
-  {
-      QEvent event (QEvent::ThemeChange);
-      QApplication::sendEvent (widget, &event);
-  }
+    // Qt5 has QEvent::ThemeChange
+    Q_FOREACH(QWidget *widget, QApplication::allWidgets())
+    {
+        QEvent event (QEvent::ThemeChange);
+        QApplication::sendEvent (widget, &event);
+    }
+#if QT_VERSION >= 0x050700
+    /* For some reason (a Qt problem?), the palettes related to the
+       comboboxes aren't updated completely when the style changes. */
+    QTimer::singleShot(0, [this]() {
+        for (int i = 0; i < 2; ++i)
+        {
+            QComboBox *combo = (i == 0 ? ui->comboBox : ui->appCombo);
+            if (QAbstractItemView *itemView = combo->view())
+            {
+                if (itemView->itemDelegate()
+                    && itemView->itemDelegate()->inherits ("QComboBoxDelegate"))
+                {
+                    QPalette palette = itemView->palette();
+                    palette.setColor (QPalette::Text,
+                                      QApplication::palette().color (QPalette::Text));
+                    itemView->setPalette (palette);
+                    if (itemView->viewport())
+                    {
+                        palette = itemView->viewport()->palette();
+                        palette.setColor (QPalette::Base,
+                                         QApplication::palette().color (QPalette::Base));
+                        itemView->viewport()->setPalette (palette);
+                    }
+                }
+                QList<QScrollBar*> widgets = combo->findChildren<QScrollBar*>();
+                for (int j = 0; j < widgets.size(); ++j)
+                {
+                    QPalette palette = widgets.at (j)->palette();
+                    palette.setColor (QPalette::Window,
+                                      QApplication::palette().color (QPalette::Base));
+                    widgets.at (j)->setPalette (palette);
+                }
+                if (QAbstractItemView *cv = combo->completer()->popup())
+                {
+                    QPalette palette = cv->palette();
+                    palette.setColor (QPalette::Text,
+                                      QApplication::palette().color (QPalette::Text));
+                    palette.setColor (QPalette::Base,
+                                      QApplication::palette().color (QPalette::Base));
+                    cv->setPalette (palette);
+                }
+            }
+        }
+    });
+#endif
 #endif
 }
 /*************************/
