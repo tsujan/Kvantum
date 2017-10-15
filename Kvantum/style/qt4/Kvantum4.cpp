@@ -1744,6 +1744,7 @@ void Style::unpolish(QWidget *widget)
       case Qt::Window:
       case Qt::Dialog:
       case Qt::Popup:
+      case Qt::ToolTip:
       case Qt::Sheet: {
         if (qobject_cast<QMenu*>(widget)) break;
         if (blurHelper_)
@@ -1903,6 +1904,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           case Qt::Window:
           case Qt::Dialog:
           case Qt::Popup:
+          case Qt::ToolTip:
           case Qt::Sheet: {
             if (qobject_cast<QMenu*>(w)) break;
             QPainter p(w);

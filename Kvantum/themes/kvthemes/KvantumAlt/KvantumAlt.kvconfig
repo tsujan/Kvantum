@@ -22,6 +22,7 @@ button_icon_size=16
 double_click=false
 fill_rubberband=false
 large_icon_size=32
+progressbar_thickness=10
 menubar_mouse_tracking=true
 merge_menubar_with_toolbar=true
 popup_blurring=true
@@ -71,6 +72,8 @@ transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 transparent_menutitle=false
+transparent_arrow_button=true
+lxqtmainmenu_iconsize=22
 
 [PanelButtonCommand]
 frame=true

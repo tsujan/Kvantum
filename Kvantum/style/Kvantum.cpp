@@ -1369,6 +1369,15 @@ void Style::polish(QWidget *widget)
               }
             }
           }
+          /* the FramelessWindowHint or X11BypassWindowManagerHint flag
+             may be set after the window is created but before it's polished */
+          else if (forcedTranslucency_.contains(widget))
+          {
+            forcedTranslucency_.remove(widget);
+            widget->setAttribute(Qt::WA_NoSystemBackground, false);
+            widget->setAttribute(Qt::WA_TranslucentBackground, false);
+            break;
+          }
           if ((makeTranslucent
                /* enable blurring for hard-coded translucency */
                || (tspec_now.composite
@@ -2037,6 +2046,7 @@ void Style::unpolish(QWidget *widget)
       case Qt::Window:
       case Qt::Dialog:
       case Qt::Popup:
+      case Qt::ToolTip:
       case Qt::Sheet: {
         if (qobject_cast<QMenu*>(widget)) break;
         if (blurHelper_)
@@ -2227,6 +2237,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           case Qt::Window:
           case Qt::Dialog:
           case Qt::Popup:
+          case Qt::ToolTip:
           case Qt::Sheet: {
             if (qobject_cast<QMenu*>(w)) break;
             QPainter p(w);
