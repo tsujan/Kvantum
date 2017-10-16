@@ -466,7 +466,7 @@
 <use width="450" x="0" y="0" height="1380" id="mdi-shade-focused" xlink:href="#mdi-maximize-focused" transform="matrix(1,0,0,-1,315.81577,2351.3684)"/>
 <g style="fill-rule:evenodd;stroke:none" id="header-separator" transform="translate(0,-0.64261627)">
 <rect width="2" x="-221" y="-48.642616" height="20" style="opacity:0" id="rect5064" transform="scale(-1,-1)"/>
-<rect width="1" x="-221" y="-44.642616" height="12" style="fill:#828282" id="header-separator0" transform="scale(-1,-1)"/>
+<rect width="1" x="-221" y="-45.642616" height="14" style="fill:#fff;fill-opacity:.196" id="header-separator0" transform="scale(-1)"/>
 </g>
 <g style="fill:url(#linearGradient5032)" id="g5013">
 <path style="fill:url(#linearGradient5316);fill-rule:evenodd;stroke:none" id="slider-normal-left" d="m 130,660 7.5,0 0,-7.5 -7.5,0 0,7.5 z"/>

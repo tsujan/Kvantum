@@ -50,10 +50,10 @@ window.color=#3D3D3E
 base.color=#282828
 alt.base.color=#323232
 button.color=#3D3D3E
-light.color=#626262
+light.color=#606060
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#303030
+mid.color=#3c3c3c
 highlight.color=#8c1011
 inactive.highlight.color=#730d0e
 tooltip.base.color=black
@@ -213,6 +213,7 @@ indicator.element=tab
 indicator.size=9
 text.press.color=white
 text.toggle.color=white
+min_width=3font
 
 [TabFrame]
 inherits=PanelButtonCommand

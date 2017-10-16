@@ -220,6 +220,7 @@ indicator.element=tab
 indicator.size=9
 text.press.color=black
 text.toggle.color=black
+min_width=3font
 
 [TabFrame]
 inherits=PanelButtonCommand
