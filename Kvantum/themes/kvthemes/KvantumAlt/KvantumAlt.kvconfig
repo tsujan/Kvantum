@@ -165,7 +165,6 @@ interior.element=common
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
-min_width=0
 
 [DropDownButton]
 inherits=PanelButtonCommand

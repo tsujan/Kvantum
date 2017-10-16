@@ -12970,12 +12970,16 @@ QSize Style::sizeFromContents(ContentsType type,
 
       const QString group = "LineEdit";
       const frame_spec fspec = getFrameSpec(group);
-      const size_spec sspec = getSizeSpec(group);
+      size_spec sspec = getSizeSpec(group);
       /* the label spec is only used for vertical spacing */
       const label_spec lspec = getLabelSpec(group);
 
+      int minW = sspec.minW;
+      sspec.minW = 0;
       s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
-      s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2,0),
+      s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2, 0),
+                        s.width());
+      s.rwidth() = qMax(minW + (sspec.incrementW ? s.width() : 0),
                         s.width());
       /* defaultSize may be a bit thicker because of frame, which doesn't matter
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
@@ -14110,9 +14114,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (sspec.incrementW)
       {
         if (rtl && !isSpinBox)
-          rect.adjust(0,0,-sspec.minW,0);
+          rect.adjust(0,0,-sspec.minW/2,0);
         else
-          rect.adjust(sspec.minW,0,0,0);
+          rect.adjust(sspec.minW/2,0,0,0);
       }
 
       /* in these cases there are capsules */
