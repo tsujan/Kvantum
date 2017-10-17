@@ -1306,7 +1306,6 @@ void Style::polish(QWidget *widget)
           && widget->windowType() != Qt::Desktop
           && !widget->testAttribute(Qt::WA_PaintOnScreen)
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-          && !widget->inherits("QTipLabel")
           && !widget->inherits("KScreenSaver")
           && !widget->inherits("QSplashScreen"))
       {
@@ -2048,7 +2047,12 @@ void Style::unpolish(QWidget *widget)
       case Qt::Popup:
       case Qt::ToolTip:
       case Qt::Sheet: {
-        if (qobject_cast<QMenu*>(widget)) break;
+        if (qobject_cast<QMenu*>(widget)
+            || widget->inherits("QTipLabel")
+            || qobject_cast<QLabel*>(widget))
+        {
+          break;
+        }
         if (blurHelper_)
           blurHelper_->unregisterWidget(widget);
         if ((forcedTranslucency_.contains(widget)
