@@ -2468,8 +2468,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             || (tspec_.combo_as_lineedit
                 && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
         {
-          if (animatedWidgetOut_ == w && opacityTimerOut_->isActive())
-          { // no animation if focus-in happens immediately after focus-out
+          /* disable animation if focus-in happens immediately after focus-out
+             for exactly the same area to prevent flashing */
+          if (opacityTimerOut_->isActive()
+              && (animatedWidgetOut_ == w
+                  || (animatedWidgetOut_ != nullptr
+                      && !animatedWidgetOut_->isVisible()
+                      && animatedWidgetOut_->size() == w->size()
+                      && animatedWidgetOut_->mapToGlobal(QPoint(0,0)) == w->mapToGlobal(QPoint(0,0)))))
+          {
             opacityTimerOut_->stop();
             animationOpacityOut_ = 100;
             animatedWidgetOut_ = nullptr;
@@ -2507,19 +2514,26 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QWidget *popup = QApplication::activePopupWidget();
       if (popup && !popup->isAncestorOf(w))
         break; // not due to a popup widget
-      if (animatedWidget_ == w && opacityTimer_->isActive())
-      { // no animation if focus-out happens immediately after focus-in
-        opacityTimer_->stop();
-        animationOpacity_ = 100;
-        animatedWidget_ = nullptr;
-        break;
-      }
       if (qobject_cast<QComboBox*>(o)
           || qobject_cast<QLineEdit*>(o)
           || qobject_cast<QAbstractSpinBox*>(o)
           || (qobject_cast<QAbstractScrollArea*>(o)
               && !w->inherits("QComboBoxListView"))) // exclude combo popups
       {
+        /* disable animation if focus-out happens immediately after focus-in
+           for exactly the same area to prevent flashing */
+        if (opacityTimer_->isActive()
+            && (animatedWidget_ == w
+                || (animatedWidget_ != nullptr
+                    && !animatedWidget_->isVisible()
+                    && animatedWidget_->size() == w->size()
+                    && animatedWidget_->mapToGlobal(QPoint(0,0)) == w->mapToGlobal(QPoint(0,0)))))
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_ = nullptr;
+          break;
+        }
         if (animatedWidgetOut_ && opacityTimerOut_->isActive())
         {
           opacityTimerOut_->stop();
@@ -3047,21 +3061,30 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       //break; // toolbuttons may be animated (see below)
     }
-    else if (w && w->isEnabled() && tspec_.animate_states
-             && w->inherits("QComboBoxPrivateContainer")
-             && qobject_cast<QComboBox*>(getParent(w, 1)))
+    else if (w && w->isEnabled() && tspec_.animate_states)
     {
-      /* start with an appropriate state on closing popup, considering
-         that lineedits only have normal and focused states in Kvantum */
-      if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
-        animationStartState_ = "normal"; // -> QEvent::FocusIn
-      else
-        animationStartState_ = "c-toggled"; // distinguish it from a toggled button
-      /* ensure that the combobox will be animated on closing popup
-         (especially needed if the cursor has been on the popup) */
-      animatedWidget_ = getParent(w, 1);
-      animationOpacity_ = 0;
-      break;
+      if (w->inherits("QComboBoxPrivateContainer")
+          && qobject_cast<QComboBox*>(getParent(w, 1)))
+      {
+        /* start with an appropriate state on closing popup, considering
+           that lineedits only have normal and focused states in Kvantum */
+        if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
+          animationStartState_ = "normal"; // -> QEvent::FocusIn
+        else
+          animationStartState_ = "c-toggled"; // distinguish it from a toggled button
+        /* ensure that the combobox will be animated on closing popup
+           (especially needed if the cursor has been on the popup) */
+        animatedWidget_ = getParent(w, 1);
+        animationOpacity_ = 0;
+        break;
+      }
+      /* let the state animation continue (not necessary but useful
+         for better flash prevention -- see FocusIn and FocusOut) */
+      else if ((animatedWidget_ == w && opacityTimer_->isActive())
+               || (animatedWidgetOut_ == w && opacityTimerOut_->isActive()))
+      {
+        break;
+      }
     }
     /* Falls through. */
 
