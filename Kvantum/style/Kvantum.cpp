@@ -1919,7 +1919,10 @@ void Style::polish(QPalette &palette)
       palette.setColor(QPalette::Inactive,QPalette::Base,col);
   }
 
-  /* an "inactiveAltBaseColor" would be inconsistent */
+  /* An "inactiveAltBaseColor" would be inconsistent because
+     Qt would use it with inactive widgets inside active windows
+     while it uses the inactive base color only when the window
+     is inactive. This inconsistency is about a bug in Qt. */
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
     palette.setColor(QPalette::AlternateBase,col);
