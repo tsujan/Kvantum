@@ -135,8 +135,8 @@
 <stop offset="1" style="stop-color:#beb8b4" id="stop7730"/>
 </linearGradient>
 <linearGradient id="linearGradient5425-0">
-<stop offset="0" style="stop-color:#fff" id="stop7761"/>
-<stop offset="0.68081808" style="stop-color:#fff;stop-opacity:.498" id="stop7769"/>
+<stop offset="0" style="stop-color:#fff;stop-opacity:.784" id="stop7761"/>
+<stop offset="0.97" style="stop-color:#fff;stop-opacity:.392" id="stop7769"/>
 <stop offset="1" style="stop-color:#fff;stop-opacity:0" id="stop7763"/>
 </linearGradient>
 <linearGradient id="linearGradient5233">
@@ -254,14 +254,14 @@
 <radialGradient fx="17.5" fy="177.4998" cx="17.5" cy="177.4998" gradientTransform="matrix(-2,0,0,-0.66671892,52.497365,295.84321)" xlink:href="#linearGradient3837" id="radialGradient6180" r="3.75" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="99.994545" fy="969.04926" cx="99.994545" cy="969.04926" gradientTransform="matrix(-5.0004527,6.5245457e-4,-8.6994029e-4,-6.6672767,600.86373,7418.3505)" xlink:href="#linearGradient5084" id="radialGradient6424" r="6" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-73" fy="1084.5" cx="-73" cy="1084.5" gradientTransform="matrix(0,-2.9655174,2.6142242,0,-2803.1294,576.56035)" xlink:href="#linearGradient6732" id="radialGradient6740" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="33.730942" fy="133.68539" cx="33.730942" cy="133.68541" gradientTransform="matrix(-1.0429081,0,0,-0.88422122,68.937537,249.71254)" xlink:href="#linearGradient5425-0" id="radialGradient5152" r="23.75" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="33.737671" fy="132.53867" cx="33.737675" cy="132.5387" gradientTransform="matrix(-0.94743834,0,0,-0.84133668,65.704713,244.0314)" xlink:href="#linearGradient5425-0" id="radialGradient5152" r="23.75" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-25" fy="1132.5" cx="-25" cy="1132.5" gradientTransform="matrix(0,3.3792923,-3.2329886,0,3605.3609,1224.205)" xlink:href="#linearGradient6806" id="radialGradient6744" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="33.730942" fy="133.68567" cx="33.730942" cy="133.68568" gradientTransform="matrix(-1.0429081,0,0,-0.88422115,68.938383,249.71229)" xlink:href="#linearGradient5425-0" id="radialGradient5225" r="23.75" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="33.738487" fy="132.53839" cx="33.738491" cy="132.53844" gradientTransform="matrix(-0.94743839,0,0,-0.8413368,65.705502,244.0312)" xlink:href="#linearGradient5425-0" id="radialGradient5225" r="23.75" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-73.00103" fy="1132.5001" cx="-73.00103" cy="1132.5001" gradientTransform="matrix(-2.5536031,0,0,-3.3792965,-290.44036,4966.8026)" xlink:href="#linearGradient6806" id="radialGradient6746" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="27.343973" fy="47.709908" cx="28.750257" cy="48.751686" gradientTransform="matrix(0,-2,2.1,0,-73.629335,106.25092)" xlink:href="#linearGradient5744" id="radialGradient5523" r="3.7500844" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="33.730946" fy="133.68549" cx="33.730946" cy="133.6855" gradientTransform="matrix(-1.0429081,0,0,-0.88422123,68.937799,249.71246)" xlink:href="#linearGradient5425-0" id="radialGradient5284" r="23.75" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="33.737694" fy="132.53865" cx="33.737698" cy="132.53868" gradientTransform="matrix(-0.9474383,0,0,-0.84147248,65.70474,244.04938)" xlink:href="#linearGradient5425-0" id="radialGradient6471" r="23.75" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-79.991531" fy="1113.2505" cx="-79.991531" cy="1113.2505" gradientTransform="matrix(-25.599555,-0.00462121,0.00310521,-17.201524,-2131.1973,20240.978)" xlink:href="#linearGradient4965-3" id="radialGradient5110" r="2.5" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="33.730946" fy="133.68541" cx="33.730946" cy="133.68541" gradientTransform="matrix(-1.0429082,0,0,-0.88422094,68.937543,249.7125)" xlink:href="#linearGradient5425-0" id="radialGradient5310" r="23.75" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="33.737949" fy="132.53853" cx="33.737953" cy="132.53856" gradientTransform="matrix(-0.94743828,0,0,-0.84147243,65.704989,244.04927)" xlink:href="#linearGradient5425-0" id="radialGradient6475" r="23.75" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-79.991989" fy="1090.2501" cx="-79.991989" cy="1090.2501" gradientTransform="matrix(-25.599648,0.00593402,-0.00398705,-17.200334,-1987.431,19546.14)" xlink:href="#linearGradient4965-3" id="radialGradient5112" r="2.5" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-79.99144" fy="1091.7495" cx="-79.99144" cy="1091.7495" gradientTransform="matrix(-25.599541,-0.00545664,0.00366623,-17.2,-2131.7381,19869.342)" xlink:href="#linearGradient4965-3" id="radialGradient5116" r="2.5" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-79.991531" fy="1091.7496" cx="-79.991531" cy="1091.7496" gradientTransform="matrix(-25.599531,-0.00536538,0.00360481,-17.199413,-2131.6727,19868.774)" xlink:href="#linearGradient4965-3" id="radialGradient5114" r="2.5" gradientUnits="userSpaceOnUse"/>
@@ -1004,21 +1004,21 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-arrow-left-focused" transform="matrix(0,-1,1,0,89.38598,449.80702)"/>
 <g style="stroke:none;fill-rule:evenodd">
 <g id="progress-pattern-normal">
-<path style="fill:#4077b0" id="progress-pattern-normal0" d="m 17.5,172.5002 v -32.5 H 50 v 32.5 z"/>
-<path style="opacity:.23;fill:url(#radialGradient5152);stroke-linejoin:round;stroke-linecap:round" id="rect5141" d="m 17.5,140 v 32.5 H 50 V 140 Z"/>
+<path style="fill:#2d6caf" id="progress-pattern-normal0" d="m 17.5,172.5002 v -32.5 H 50 v 32.5 z"/>
+<path style="opacity:.2;fill:url(#radialGradient5152);stroke-linejoin:round;stroke-linecap:round" id="rect5141" d="m 17.5,140 v 32.5 H 50 V 140 Z"/>
 </g>
 <g id="progress-pattern-normal-top">
-<path style="fill:#4077b0" id="progress-pattern-normal-top0" d="M 50,140 H 17.5002 v -7.5 h 32.5 z"/>
-<path style="opacity:.23;fill:url(#radialGradient5225);stroke-linejoin:round;stroke-linecap:round" id="rect5221" d="M 17.5,132.5 V 140 H 50 v -7.5 z"/>
+<path style="fill:#2d6caf" id="progress-pattern-normal-top0" d="M 50,140 H 17.5002 v -7.5 h 32.5 z"/>
+<path style="opacity:.2;fill:url(#radialGradient5225);stroke-linejoin:round;stroke-linecap:round" id="rect5221" d="M 17.5,132.5 V 140 H 50 v -7.5 z"/>
 </g>
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="progress-pattern-normal-topleft">
-<path style="fill:#4077b0" id="progress-pattern-normal-topleft0" d="m 10,140 c 0,-4 3.5,-7.5 7.5,-7.5 v 7.5 z"/>
-<path style="opacity:.23;fill:url(#radialGradient5284);stroke-linejoin:round;stroke-linecap:round" id="rect5228" d="m 17.5,132.5 c -4,0 -7.5,3.5 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#2d6caf" id="progress-pattern-normal-topleft0" d="m 10,140 c 0,-4 3.5,-7.5 7.5,-7.5 v 7.5 z"/>
+<path style="opacity:.2;fill:url(#radialGradient6475);stroke-linejoin:round;stroke-linecap:round" id="rect5228" d="m 17.5,132.5 c -4,0 -7.5,3.5 -7.5,7.5 h 7.5 z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="progress-pattern-normal-left">
-<path style="fill:#4077b0" id="progress-pattern-normal-left0" d="m 17.5,140 v 32.4998 H 10 v -32.5 z"/>
-<path style="opacity:.23;fill:url(#radialGradient5310);stroke-linejoin:round;stroke-linecap:round" id="rect5254" d="m 10,140 v 32.5 h 7.5 V 140 Z"/>
+<path style="fill:#2d6caf" id="progress-pattern-normal-left0" d="m 17.5,140 v 32.4998 H 10 v -32.5 z"/>
+<path style="opacity:.2;fill:url(#radialGradient6471);stroke-linejoin:round;stroke-linecap:round" id="rect5254" d="m 10,140 v 32.5 h 7.5 V 140 Z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,67.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal-right" transform="matrix(-1,0,0,1,67.5,0)"/>
@@ -1057,11 +1057,11 @@
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottomleft">
 <path style="opacity:.4;fill:url(#radialGradient6180)" id="progress-pattern-normal-bottomleft0" d="m 17.5,180 c -4,0 -7.5,-3.5 -7.5,-7.5 h 7.5 z"/>
-<path style="fill:#4077b0" id="path5133" d="m 17.5,177.5 c -4,0 -7.5,-2.33329 -7.5,-5 h 7.5 z"/>
+<path style="fill:#2d6caf" id="path5133" d="m 17.5,177.5 c -4,0 -7.5,-2.33329 -7.5,-5 h 7.5 z"/>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="progress-pattern-normal-bottom">
 <path style="opacity:.4;fill:url(#linearGradient5154)" id="progress-pattern-normal-bottom0" d="M 17.5002,172.5002 H 50 v 7.5 H 17.5 Z"/>
-<path style="fill:#4077b0" id="path5135" d="M 17.5002,172.5002 H 50 v 5 H 17.5 Z"/>
+<path style="fill:#2d6caf" id="path5135" d="M 17.5002,172.5002 H 50 v 5 H 17.5 Z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,67.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused-bottomleft" id="button-focused-bottomright" transform="matrix(-1,0,0,1,216,0)"/>

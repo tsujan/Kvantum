@@ -37,6 +37,7 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=true
+combo_menu=true
 groupbox_top_label=true
 inline_spin_indicators=true
 joined_inactive_tabs=true
@@ -48,7 +49,7 @@ button_contents_shift=true
 
 [GeneralColors]
 window.color=#dedbda
-base.color=white
+base.color=#FAFAFA
 alt.base.color=#F0F0F0
 button.color=#e6e4e2
 light.color=#f5f4f4

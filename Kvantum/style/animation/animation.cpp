@@ -157,7 +157,7 @@ bool NumberAnimation::isLastUpdate() const
 {
   if (duration() < 0) return false;
 
-  int frameDuration = (frameRate() * 50) / 3 ;
+  int frameDuration = (qMax(frameRate(),SixtyFps) * 50) / 3; // 60 updates per 1000 ms.
   return (duration() - currentTime() < frameDuration);
 }
 
@@ -182,7 +182,7 @@ ScrollbarAnimation::ScrollbarAnimation(Mode mode, QObject *target) :
     mode_(mode)
 {
   switch (mode) {
-  case Activating:
+  case Activating: // not used
     setDuration(ScrollBarFadeOutDuration);
     setStartValue(0.01);
     setEndValue(1.0);
