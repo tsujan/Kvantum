@@ -10212,6 +10212,17 @@ void Style::drawControl(ControlElement element,
                 status.append("-inactive");
             }
             lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+            /* draw the focus rect around the arrow */
+            if (opt->state & State_HasFocus)
+            {
+              QStyleOptionFocusRect fropt;
+              fropt.QStyleOption::operator=(*opt);
+              fropt.rect = alignedRect(option->direction,
+                                       iAlignment,
+                                       QSize(dspec.size+2, dspec.size+2),
+                                       interiorRect(opt->rect, fspec).adjusted(-2,-2,2,2));
+              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            }
           }
           else
           {
@@ -10525,6 +10536,7 @@ void Style::drawComplexControl(ComplexControl control,
         o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
+        QWidget *p = getParent(widget,1);
         if (tb)
         {
           o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
@@ -10536,7 +10548,6 @@ void Style::drawComplexControl(ComplexControl control,
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-            QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
             QString group1 = group;
             QWidget *stb = getStylableToolbarContainer(widget);
@@ -10636,7 +10647,13 @@ void Style::drawComplexControl(ComplexControl control,
           }
         }
 
-        if (opt->state & State_HasFocus)
+        if (opt->state & State_HasFocus
+            /* drawn at CE_ToolButtonLabel for tabbar scroll buttons */
+            && (!qobject_cast<QTabBar*>(p)
+                || ((opt->toolButtonStyle != Qt::ToolButtonIconOnly && !opt->text.isEmpty())
+                    || !opt->icon.isNull()
+                    || !(opt->features & QStyleOptionToolButton::Arrow)
+                    || opt->arrowType == Qt::NoArrow)))
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);

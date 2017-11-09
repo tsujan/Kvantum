@@ -61,7 +61,7 @@ reduce_window_opacity=8
 
 [GeneralColors]
 window.color=#F0F0F0
-base.color=white
+base.color=#FAFAFA
 alt.base.color=#F0F0F0
 button.color=#F0F0F0
 light.color=white

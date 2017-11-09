@@ -4,6 +4,7 @@ V0.10.6
  * Fixed the minW key with line-edits.
  * Don't make a window translucent if the FramelessWindowHint or X11BypassWindowManagerHint flag is set for it after it's created but before it's polished.
  * Prevent redundant flashes with focus-in/out animations.
+ * Fixed the focus rectangles of tabbar scroll buttons.
 
 V0.10.5
 ---------
