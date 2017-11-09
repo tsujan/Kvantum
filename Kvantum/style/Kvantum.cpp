@@ -4649,7 +4649,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         const int centerY = center.y();
 
         QColor col;
-        if (qGray(option->palette.color(QPalette::Base).rgb()) <= 100)
+        if (qGray(option->palette.color(QPalette::Window).rgb()) <= 100)
           col = option->palette.color(QPalette::Light);
         else
           col = option->palette.color(QPalette::Dark);
