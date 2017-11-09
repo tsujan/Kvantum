@@ -820,7 +820,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-normal" id="menu-checkbox-checked-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-normal" id="menu-checkbox-tristate-focused" transform="translate(20,0)"/>
-<rect width="5" x="190" y="780" height="5" style="opacity:0;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:1.047" id="button-separator-normal"/>
+<rect width="5" x="190" y="780" height="5" style="opacity:0;fill-rule:evenodd;stroke:none" id="button-separator-normal"/>
 <g style="opacity:.6;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:1.047" id="tframe-normal-pattern" transform="translate(139,747)">
 <path style="fill:url(#linearGradient4571)" id="rect4180" d="m 23,18 0,2 3,0 0,-2 -3,0 z"/>
 <path style="fill:url(#linearGradient4667)" id="rect4621" d="m 16,27 0,3 2,0 0,-3 -2,0 z"/>
@@ -836,15 +836,15 @@
 <path style="fill:url(#linearGradient4647)" id="rect4641" d="m 23,27 0,3 3,0 0,-3 -3,0 z"/>
 <rect width="3" x="23" y="21" height="5" style="fill:url(#linearGradient4645)" id="rect4643"/>
 </g>
-<rect width="10" x="140" y="765" height="10" style="fill:url(#linearGradient4834);fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:1.047" id="tframe-normal"/>
+<rect width="10" x="140" y="765" height="10" style="fill:url(#linearGradient4834);fill-rule:evenodd;stroke:none" id="tframe-normal"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#splitter-grip-focused" id="splitter-grip-pressed" transform="translate(20,0)"/>
-<g style="stroke-linejoin:bevel;stroke-linecap:square;fill-rule:evenodd" id="tab-close-pressed" transform="translate(52,330)">
+<g style="fill-rule:evenodd" id="tab-close-pressed" transform="translate(52,330)">
 <circle cx="225" cy="460" style="opacity:0;stroke:none" r="9" id="path4835"/>
 <circle cx="225" cy="460" style="fill:none;stroke:#fff;stroke-width:3" id="circle4837" r="4.5000687"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.7" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-19,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-36,0)"/>
-<g style="opacity:.2;stroke-linejoin:bevel;stroke-linecap:square;fill-rule:evenodd" id="tab-close-disabled" transform="translate(71,330)">
+<g style="opacity:.2;fill-rule:evenodd" id="tab-close-disabled" transform="translate(71,330)">
 <circle cx="225" cy="460" style="opacity:0;stroke:none" id="circle4871" r="9"/>
 <circle cx="225" cy="460" style="opacity:1;fill:none;stroke:#fff;stroke-width:3" r="4.5" id="circle4873"/>
 </g>
@@ -857,7 +857,7 @@
 <ellipse cx="283" cy="587" rx="3" ry="3" style="fill:#fff;stroke:none;color:#000;stroke-width:1.274" id="ellipse4893"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(20,0)"/>
-<use width="100%" x="0" y="0" height="100%" style="opacity:.8" xlink:href="#tframe-normal-pattern" id="dialog-normal" transform="translate(0,21)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.8" xlink:href="#tframe-normal-pattern" id="dialog-normal-pattern" transform="translate(0,21)"/>
 <g style="fill-rule:evenodd;stroke:none" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,382,-274)">
 <path style="fill:#969696;fill-opacity:0" id="path6017" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 v -12 z "/>
 <path style="fill:url(#linearGradient11583)" id="path6019" d="m 155,1092.5 c -4,0.011 -4,2.7501 -4,8.4998 h 4 z "/>
@@ -881,4 +881,5 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,342,1766)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-left" id="common-focused-bottom" transform="matrix(0,-1,1,0,-712,1054)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(0,-1,1,0,-712,1054)"/>
+<rect width="10" x="140" y="786.00012" height="10" style="fill:#393f3f;fill-rule:evenodd;stroke:none" id="dialog-normal"/>
 </svg>
