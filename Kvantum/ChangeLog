@@ -5,6 +5,7 @@ V0.10.6
  * Don't make a window translucent if the FramelessWindowHint or X11BypassWindowManagerHint flag is set for it after it's created but before it's polished.
  * Prevent redundant flashes with focus-in/out animations.
  * Fixed the focus rectangles of tabbar scroll buttons.
+ * No space between the tab contents and a nonexistent tabbar.
 
 V0.10.5
 ---------
