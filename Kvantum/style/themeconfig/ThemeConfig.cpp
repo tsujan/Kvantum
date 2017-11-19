@@ -977,6 +977,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","single_top_toolbar");
   r.single_top_toolbar = v.toBool();
 
+  v = getValue("Hacks","middle_click_scroll");
+  r.middle_click_scroll = v.toBool();
+
   return r;
 }
 }

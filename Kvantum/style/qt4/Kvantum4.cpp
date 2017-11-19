@@ -10869,8 +10869,9 @@ int Style::styleHint(StyleHint hint,
 
     //case SH_ScrollBar_BackgroundMode : return Qt::OpaqueMode;
 
-    case SH_ScrollBar_ContextMenu :
-    case SH_ScrollBar_LeftClickAbsolutePosition : return true;
+    case SH_ScrollBar_ContextMenu : return true;
+    case SH_ScrollBar_LeftClickAbsolutePosition : return !hspec_.middle_click_scroll;
+    case SH_ScrollBar_MiddleClickAbsolutePosition : return hspec_.middle_click_scroll;
 
     case SH_Slider_StopMouseOverSlider : return true;
 

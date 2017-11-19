@@ -441,14 +441,13 @@ By default, it has the base background.</string>
                 </spacer>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNormalBtn">
+                <widget class="QCheckBox" name="checkBoxScrollJump">
                  <property name="toolTip">
-                  <string>No bold font for default push buttons?
-
-Such push buttons have bold text by default.</string>
+                  <string>By default, the scroll slider jumps to a position
+when the scrollbar is left clicked.</string>
                  </property>
                  <property name="text">
-                  <string>Normal font for default push buttons</string>
+                  <string>Scroll jump with middle click</string>
                  </property>
                 </widget>
                </item>
@@ -480,17 +479,14 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessBtn">
+                <widget class="QCheckBox" name="checkBoxNormalBtn">
                  <property name="toolTip">
-                  <string>No icon for push buttons that have text?
+                  <string>No bold font for default push buttons?
 
-By default, most push buttons have icon.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+Such push buttons have bold text by default.</string>
                  </property>
                  <property name="text">
-                  <string>Iconless push buttons</string>
+                  <string>Normal font for default push buttons</string>
                  </property>
                 </widget>
                </item>
@@ -509,17 +505,17 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessMenu">
+                <widget class="QCheckBox" name="checkBoxIconlessBtn">
                  <property name="toolTip">
-                  <string>No icon for menu-items?
+                  <string>No icon for push buttons that have text?
 
-By default, some of them may have icon.
+By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Iconless  menus</string>
+                  <string>Iconless push buttons</string>
                  </property>
                 </widget>
                </item>
@@ -539,16 +535,17 @@ Konsole, QTerminal and LXQt panel are some examples.</string>
                 </widget>
                </item>
                <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxToolbar">
+                <widget class="QCheckBox" name="checkBoxIconlessMenu">
                  <property name="toolTip">
-                  <string>Only the top toolbar should be styled?
+                  <string>No icon for menu-items?
 
-By default, all toolbars are styled,
-whether they are on the top or at any
-other position.</string>
+By default, some of them may have icon.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Single top toolbar</string>
+                  <string>Iconless  menus</string>
                  </property>
                 </widget>
                </item>
@@ -566,16 +563,16 @@ other position.</string>
                 </widget>
                </item>
                <item row="4" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTint">
+                 <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
-                  <string>Do not tint selected label icons with
-the highlight color!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Only the top toolbar should be styled?
+
+By default, all toolbars are styled,
+whether they are on the top or at any
+other position.</string>
                  </property>
                  <property name="text">
-                  <string>No selection tint</string>
+                  <string>Single top toolbar</string>
                  </property>
                 </widget>
                </item>
@@ -590,6 +587,20 @@ the highlight color!</string>
                  </property>
                  <property name="text">
                   <string>Transparent menu title</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxTint">
+                 <property name="toolTip">
+                  <string>Do not tint selected label icons with
+the highlight color!</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>No selection tint</string>
                  </property>
                 </widget>
                </item>

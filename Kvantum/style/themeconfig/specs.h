@@ -263,6 +263,9 @@ typedef struct {
   bool iconless_menu;
   /* only style the top toolbar? */
   bool single_top_toolbar;
+  /* should the scroll jump be done by middle clicking?
+     (By default, it's done by left clicking.) */
+  bool middle_click_scroll;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -533,6 +536,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_arrow_button=false;
   hspec.iconless_menu = false;
   hspec.single_top_toolbar = false;
+  hspec.middle_click_scroll = false;
 }
 }
 

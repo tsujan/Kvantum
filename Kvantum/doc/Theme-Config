@@ -721,8 +721,13 @@ single_top_toolbar                true/false          Style only the top toolbar
                                                       only the top horizontal toolbar, which
                                                       is immediately below the menubar or at
                                                       the top of the main window, will be
-                                                      styled. By default all toolbars are
+                                                      styled. By default, all toolbars are
                                                       styled, of course.
+
+middle_click_scroll               true/false          Should the scroll slider jump to a
+                                                      position when the scrollbar is middle
+                                                      clicked? The default is false and the
+                                                      jump is done by a left click.
 
                            **********************
                            *** Other Sections ***
