@@ -6,7 +6,7 @@ V0.10.6
  * Prevent redundant flashes with focus-in/out animations.
  * Fixed the focus rectangles of tabbar scroll buttons.
  * No space between the tab contents and a nonexistent tabbar.
- * Added a hacking key (to Kvantum Manager) for the middle-click scroll jump (with the left-click jump as the default)
+ * Added a hacking key (to Kvantum Manager) for the middle-click scroll jump (with the left-click jump as the default).
 
 V0.10.5
 ---------

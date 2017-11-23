@@ -1176,7 +1176,7 @@ Uncheck it if you want to use those options!</source>
         <translation>Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penas
 konsideri agordojn de la nuna labortabla medio.
 
-Ĉi tiu markbutono eblas malvalidigi iuj agordojn.
+Ĉi tiu markbutono eblas malvalidigi iujn agordojn.
 Malmarku ĝin se vi volus ŝanĝi tiujn agordojn!</translation>
     </message>
     <message>

@@ -8206,8 +8206,8 @@ void Style::drawControl(ControlElement element,
       const label_spec lspec = getLabelSpec("Progressbar");
       if (lspec.boldFont) f.setBold(true);
       if (tspec_.progressbar_thickness > 0
-          && QFontMetrics(f).height() >= (isVertical ? w : h)
-          && !isKisSlider_)
+          && !isKisSlider_
+          && QFontMetrics(f).height() > (isVertical ? w : h))
       { // text is outside progressbar
         QString maxText = progressMaxText(pb, opt);
         if (!maxText.isEmpty())
@@ -8311,8 +8311,12 @@ void Style::drawControl(ControlElement element,
         const label_spec lspec = getLabelSpec("Progressbar");
         if (lspec.boldFont) f.setBold(true);
         if (tspec_.progressbar_thickness > 0
-            && QFontMetrics(f).height() >= (isVertical ? w : h)
-            && !isKisSlider_)
+            && !isKisSlider_
+            /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
+            && QFontMetrics(f).height() > (isVertical ? tspec_.spread_progressbar
+                                                        ? w : w + fspec.top + fspec.bottom
+                                           : tspec_.spread_progressbar
+                                             ? h : h + fspec.top + fspec.bottom))
         { // text is outside progressbar
           QString maxText = progressMaxText(pb, opt);
           if (!maxText.isEmpty())
@@ -8580,9 +8584,9 @@ void Style::drawControl(ControlElement element,
 
         bool outText(false);
         if (tspec_.progressbar_thickness > 0
-            && QFontMetrics(f).height() >= tspec_.progressbar_thickness
             // KisSliderSpinBox doesn't obey thickness setting
-            && !isKisSlider_)
+            && !isKisSlider_
+            && QFontMetrics(f).height() > tspec_.progressbar_thickness)
         { // text is outside progressbar
           outText = true;
           if (enoughContrast(getFromRGBA(lspec.normalColor),
