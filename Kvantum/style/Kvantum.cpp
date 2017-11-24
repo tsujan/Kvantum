@@ -9368,27 +9368,29 @@ void Style::drawControl(ControlElement element,
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
             fnt.setBold(true);
           txtSize = textSize(fnt,opt->text,false);
-           /* in case there isn't enough space */
+          /* in case there isn't enough space */
           if (pb)
+          { // not needed; just for "nostalgic" reasons
+            w = pb->width();
+            h = pb->height();
+          }
+          if (w < txtSize.width()
+                  +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                  +lspec.left+lspec.right+fspec.left+fspec.right)
           {
-            if (pb->width() < txtSize.width()
-                              +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                              +lspec.left+lspec.right+fspec.left+fspec.right)
-            {
-              lspec.left = lspec.right = 0;
-              fspec.left = qMin(fspec.left,3);
-              fspec.right = qMin(fspec.right,3);
-              lspec.tispace = qMin(lspec.tispace,3);
-              lspec.boldFont = false;
-            }
-            if (pb->height() < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
-            {
-              lspec.top = lspec.bottom = 0;
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
-              lspec.tispace = qMin(lspec.tispace,3);
-              lspec.boldFont = false;
-            }
+            lspec.left = lspec.right = 0;
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            lspec.tispace = qMin(lspec.tispace,3);
+            lspec.boldFont = false;
+          }
+          if (h < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          {
+            lspec.top = lspec.bottom = 0;
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+            lspec.tispace = qMin(lspec.tispace,3);
+            lspec.boldFont = false;
           }
         }
 
@@ -9547,21 +9549,26 @@ void Style::drawControl(ControlElement element,
 
         const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
 
-        if (pb && !opt->text.isEmpty()) // -> CE_PushButtonLabel
+        if (!opt->text.isEmpty()) // -> CE_PushButtonLabel
         {
+          if (pb)
+          {
+            w = pb->width();
+            h = pb->height();
+          }
           QFont fnt(painter->font());
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
             fnt.setBold(true);
           QSize txtSize = textSize(fnt,opt->text,false);
           bool enoughSpace(true);
-          if (pb->width() < txtSize.width()
-                            +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                            +lspec.left+lspec.right+fspec.left+fspec.right)
+          if (w < txtSize.width()
+                  +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                  +lspec.left+lspec.right+fspec.left+fspec.right)
           {
             lspec.left = lspec.right = 0;
             enoughSpace = false;
           }
-          if (pb->height() < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
+          if (h < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
           {
             lspec.top = lspec.bottom = 0;
             enoughSpace = false;
