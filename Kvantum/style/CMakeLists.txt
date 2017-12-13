@@ -7,12 +7,13 @@ if(NOT ENABLE_QT4)
 else()
   find_package(Qt4 4.8.7 REQUIRED)
 
-include(${QT_USE_FILE})
-add_definitions(${QT_DEFINITIONS})
+  include(${QT_USE_FILE})
+  add_definitions(${QT_DEFINITIONS})
 endif()
 find_package (X11)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #if (NOT QT_CMAKE_PREFIX_PATH)
@@ -66,19 +67,14 @@ else()
 endif()
 
 set(kvantum_RESOURCES themeconfig/defaulttheme.qrc)
+
+add_library(kvantum SHARED ${kvantum_SOURCES} ${kvantum_RESOURCES})
+
 if(NOT ENABLE_QT4)
   set(KDE_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/color-schemes/")
 else()
   set(KDE_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/kde4/apps/color-schemes/")
 endif()
-
-if(NOT ENABLE_QT4)
-  qt5_add_resources(RESOURCES ${kvantum_RESOURCES})
-else()
-  qt4_add_resources(RESOURCES ${kvantum_RESOURCES})
-endif()
-
-add_library(kvantum SHARED ${kvantum_SOURCES} ${RESOURCES})
 
 if(NOT ENABLE_QT4)
  target_link_libraries(kvantum ${Qt5Core_LIBRARIES}

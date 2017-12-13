@@ -206,7 +206,7 @@
 </linearGradient>
 <radialGradient fx="-25" fy="1084.5" cx="-25" cy="1084.5" gradientTransform="matrix(3.25,0,0,2.9654751,25.246386,-2124.308)" xlink:href="#linearGradient6806" id="radialGradient6742" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-73.00103" fy="1132.5001" cx="-73.00103" cy="1132.5001" gradientTransform="matrix(-2.5536031,0,0,-3.3792965,-290.44036,4966.8026)" xlink:href="#linearGradient6806" id="radialGradient6746" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="306.52924" fy="656" cx="306.52924" cy="656" gradientTransform="matrix(1.6090406,0,0,1.5,-371.16063,-96.23963)" xlink:href="#linearGradient5070" id="radialGradient5010" r="8" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="306.52924" fy="656" cx="306.52924" cy="656" gradientTransform="matrix(1.6090406,0,0,1.5,-371.19054,-95.989142)" xlink:href="#linearGradient5070" id="radialGradient5010" r="8" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="306.52924" fy="656" cx="306.52924" cy="656" gradientTransform="matrix(1.6090406,0,0,1.5,-186.69032,-327.98914)" xlink:href="#linearGradient5020-1" id="radialGradient5278" r="8" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-73" fy="1084.5" cx="-73" cy="1084.5" gradientTransform="matrix(0,-2.9655174,2.6142242,0,-2939.1288,875.31047)" xlink:href="#linearGradient6732" id="radialGradient6740" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-25" fy="1132.5" cx="-25" cy="1132.5" gradientTransform="matrix(0,3.3792923,-3.2329886,0,3605.3609,1224.205)" xlink:href="#linearGradient6806" id="radialGradient6744" r="3.625" gradientUnits="userSpaceOnUse"/>
@@ -640,7 +640,6 @@
 <path id="expand-button-toggled-right" d="m -21.5,206 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <circle cx="306.50021" cy="660" style="fill:url(#radialGradient5278);stroke-width:2" r="7" id="slidercursor-normal"/>
-<circle cx="395" cy="659" style="fill:#646464" r="8" id="slidercursor-disabled"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#expand-progress-pattern-normal-topleft" id="expand-progress-pattern-normal-topright" transform="matrix(-1,0,0,1,103.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#path4884" id="use5143" transform="matrix(-1,0,0,1,103.5,0)"/>
@@ -875,14 +874,12 @@
 </g>
 </g>
 </g>
-<g style="fill:#1e1e1e;stroke-width:2;color:#000;stroke:#c86c00">
+<g style="fill:#1e1e1e;color:#000;stroke-width:2;stroke:#c86c00">
 <circle cx="150" cy="410" id="radio-focused" r="7"/>
 <rect width="14" x="98" y="-479.5" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
-<g style="stroke:none;fill-rule:evenodd">
-<circle cx="122.02991" cy="891.74951" style="fill:url(#radialGradient5010);stroke-width:2" id="dial-handle" r="7"/>
-<path style="fill:url(#linearGradient8962)" id="button-focused" d="m 301.25,18.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
-</g>
+<circle cx="122" cy="892" style="fill:url(#radialGradient5010);fill-rule:evenodd;stroke:none;stroke-width:2" id="dial-handle" r="7"/>
+<path style="fill:url(#linearGradient8962);fill-rule:evenodd;stroke:none" id="button-focused" d="m 301.25,18.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 <g style="fill-rule:evenodd;stroke:none;stroke-linecap:square" id="tab-close-normal" transform="translate(-15,-35)">
 <rect width="18" x="320" y="795" height="18" style="stroke-opacity:0;fill:#5a5a5a;fill-opacity:0;stroke-width:4" id="rect5097"/>
 <path style="fill:#878787;stroke-width:2.5" id="path5183" d="m 329,798.334 a 6,6 0 0 0 -6,6 6,6 0 0 0 6,6 6,6 0 0 0 6,-6 6,6 0 0 0 -6,-6 z m 0,3 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 z"/>
@@ -987,7 +984,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-topleft" id="button-pressed-bottomleft" transform="matrix(1,0,0,-1,95,70)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-bottomleft" id="button-pressed-topleft" transform="matrix(1,0,0,-1,95,70)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-left" id="button-pressed-left" transform="matrix(1,0,0,-1,95,70)"/>
-<g style="stroke:none;fill-rule:evenodd;stroke-width:3.609;stroke-linejoin:round;stroke-linecap:round">
+<g style="stroke:none;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.609">
 <g id="button-toggled-topleft" transform="translate(133.75,20.7453)">
 <path style="fill:url(#linearGradient5163)" id="path5153" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 v -7.5 z "/>
 <path style="fill:url(#linearGradient5165)" id="path5155" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z "/>
@@ -1149,4 +1146,5 @@
 <path style="opacity:1;fill:#1e1e1e" id="path5494" d="m 280,1072 12,-12 v 12 z"/>
 <path style="opacity:1;fill:#323232" id="path5496" d="m 304,1072 -12,-12 v 12 z"/>
 </g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#dial-handle" id="slidercursor-disabled" transform="translate(272,-231)"/>
 </svg>

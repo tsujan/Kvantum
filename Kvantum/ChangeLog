@@ -7,6 +7,7 @@ V0.10.6
  * Fixed the focus rectangles of tabbar scroll buttons.
  * No space between the tab contents and a nonexistent tabbar.
  * Added a hacking key (to Kvantum Manager) for the middle-click scroll jump (with the left-click jump as the default).
+ * Handle the CMP0071 policy of CMAKE >= 3.10 (let AUTOMOC and AUTOUIC process GENERATED files).
 
 V0.10.5
 ---------

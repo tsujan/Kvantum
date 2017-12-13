@@ -112,6 +112,7 @@ text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
 frame.expansion=2.8font
+min_height=+0.1font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -364,6 +365,7 @@ indicator.element=menuitem
 text.margin.top=2
 text.margin.bottom=2
 text.focus.color=white
+min_height=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand

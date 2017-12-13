@@ -4,9 +4,9 @@ find_package (Qt5Core REQUIRED)
 find_package (Qt5LinguistTools QUIET)
 
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
                     ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
@@ -18,9 +18,12 @@ set(KP_SOURCES main.cpp)
 set(KP_UI KvantumPreviewBase.ui)
 set(KP_RESOURCES KvantumPreviewResources.qrc)
 
-
 qt5_wrap_ui(KP_UIS_H ${KP_UI})
-qt5_wrap_cpp(KP_HEADER KvantumPreview.h) # needed by "main.cpp"
+if (CMAKE_VERSION VERSION_LESS "3.10.0") # CMP0071 in 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
+  qt5_wrap_cpp(KP_HEADER KvantumPreview.h) # needed by "main.cpp"
+else()
+  set(KP_HEADER KvantumPreview.h)
+endif()
 
 # Translations
 if(Qt5LinguistTools_FOUND)
