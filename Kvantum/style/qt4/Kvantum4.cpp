@@ -4043,7 +4043,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (tspec_.attach_active_tab)
       {
-        fspec.expansion = 0;
+        fspec1.expansion = fspec.expansion = 0;
         /* WARNING: We use "floating tabs" when QTabWidget is NULL because
            QStyleOptionTabWidgetFrame::selectedTabRect.x() is wrong for QML.
            For the sake of consistency, we don't draw tab widget frame either
