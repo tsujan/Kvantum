@@ -1090,9 +1090,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="button-toggled-right" transform="matrix(-1,0,0,1,544.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-bottomleft" id="button-toggled-bottomright" transform="matrix(-1,0,0,1,544.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-topleft" id="button-toggled-topright" transform="matrix(-1,0,0,1,544.5,0)"/>
-<g style="stroke:none">
-<rect width="40" x="387.5" y="1075" height="40" style="opacity:.9;fill:#385768" id="windowtr-normal"/>
-<g style="opacity:.012;stroke-width:.369" id="windowtr-normal-pattern" transform="translate(107.5,55)">
+<g style="opacity:.012;stroke:none;stroke-width:.369" id="window-normal-pattern" transform="translate(107.5,55)">
 <path style="opacity:1;fill:#c8c8c8" id="path5488" d="m 280,1060 v 12 l 12,-12 z"/>
 <path style="opacity:1;fill:#969696" id="path5486" d="m 292,1060 12,12 v -12 z"/>
 <path style="opacity:1;fill:#1e1e1e" id="path5484" d="m 304,1072 -12,12 h 12 z"/>
@@ -1101,6 +1099,5 @@
 <path style="opacity:1;fill:#969696" id="path5492" d="m 280,1072 12,12 v -12 z"/>
 <path style="opacity:1;fill:#1e1e1e" id="path5494" d="m 280,1072 12,-12 v 12 z"/>
 <path style="opacity:1;fill:#323232" id="path5496" d="m 304,1072 -12,-12 v 12 z"/>
-</g>
 </g>
 </svg>

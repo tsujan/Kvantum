@@ -112,6 +112,18 @@ text.focus.color=white
 
 [LineEdit]
 inherits=PanelButtonCommand
+frame.top=4
+frame.bottom=4
+frame.left=4
+frame.right=4
+frame.expanded.top=2
+frame.expanded.bottom=2
+frame.expanded.left=2
+frame.expanded.right=2
+frame.expansion=2.5font
+text.margin.left=6
+text.margin.right=6
+min_height=+0.3font
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -310,6 +322,9 @@ text.focus.color=white
 
 [ComboBox]
 inherits=PanelButtonCommand
+text.margin.left=6
+text.margin.right=6
+min_height=+0.3font
 
 [Splitter]
 indicator.size=32

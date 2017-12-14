@@ -51,10 +51,10 @@ window.color=#385768
 base.color=#232332
 alt.base.color=#313146
 button.color=#385768
-light.color=#7593a3
-mid.light.color=#628192
+light.color=#516f82
+mid.light.color=#476373
 dark.color=#131a1f
-mid.color=#1f2a31
+mid.color=#2f404b
 highlight.color=#007ca0
 inactive.highlight.color=#006d8c
 text.color=white
@@ -433,6 +433,6 @@ interior.element=window
 
 [WindowTranslucent]
 interior=true
-interior.element=windowtr
+interior.element=window
 interior.x.patternsize=48
 interior.y.patternsize=48

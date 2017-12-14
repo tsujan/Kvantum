@@ -506,20 +506,25 @@ Style::~Style()
   }
 #endif
 
+  /* all the following timers have "this" as their parent
+     but are explicitly deleted here only to be listed */
   if (progressTimer_)
   {
     progressTimer_->stop();
     delete progressTimer_;
+    progressTimer_ = nullptr;
   }
   if (opacityTimer_)
   {
     opacityTimer_->stop();
     delete opacityTimer_;
+    opacityTimer_ = nullptr;
   }
   if (opacityTimerOut_)
   {
     opacityTimerOut_->stop();
     delete opacityTimerOut_;
+    opacityTimerOut_ = nullptr;
   }
 
   delete defaultSettings_;

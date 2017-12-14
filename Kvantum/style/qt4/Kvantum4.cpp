@@ -365,9 +365,10 @@ Style::Style() : QCommonStyle()
 Style::~Style()
 {
   if (progressTimer_)
-  {
+  { // not needed
     progressTimer_->stop();
     delete progressTimer_;
+    progressTimer_ = NULL;
   }
 
   delete defaultSettings_;
