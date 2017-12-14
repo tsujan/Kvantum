@@ -4039,6 +4039,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       int d = 0;
       int l = 0;
       int tp = 0;
+      QRect attachmentRect;
 
       if (tspec_.attach_active_tab)
       {
@@ -4082,24 +4083,28 @@ void Style::drawPrimitive(PrimitiveElement element,
                 fspec1.top = 0;
                 d = tr.x();
                 l = tr.width();
+                attachmentRect = QRect(d, option->rect.y(), l, fspec.top);
                 break;
               }
               case QTabWidget::South: {
                 fspec1.bottom = 0;
                 d = tr.x();
                 l = tr.width();
+                attachmentRect = QRect(d, option->rect.y()+option->rect.height()-fspec.bottom, l, fspec.bottom);
                 break;
               }
               case QTabWidget::West: {
                 fspec1.left = 0;
                 d = tr.y();
                 l = tr.height();
+                attachmentRect = QRect(option->rect.x(), d, fspec.left, l);
                 break;
               }
               case QTabWidget::East: {
                 fspec1.right = 0;
                 d = tr.y();
                 l = tr.height();
+                attachmentRect = QRect(option->rect.x()+option->rect.width()-fspec.right, d, fspec.right, l);
                 break;
               }
               default : {
@@ -4120,7 +4125,14 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (widget && !widget->isActiveWindow())
         suffix = "-normal-inactive";
       if (widget) // WARNING: QML has anchoring!
+      {
+        /* The frame SVG elements may have translucency. So, instead of drawing the
+           interior inside the whole extended rectangle, we clip the painter region. */
+        painter->save();
+        painter->setClipRegion(QRegion(interiorRect(option->rect,fspec)).united(attachmentRect));
         renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix,true);
+        painter->restore();
+      }
       const frame_spec fspecT = getFrameSpec("Tab");
       renderFrame(painter,
                   option->rect,

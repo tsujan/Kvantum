@@ -1146,7 +1146,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled-bottomleft" id="tab-toggled-bottomright" transform="matrix(-1,0,0,1,224.5,0)"/>
 <g style="stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill-rule:evenodd;stroke:none" id="dock-normal-top-leftjunct" transform="translate(137.5,563.5)">
 <rect width="6" x="-52.5" y="166.5" height="6" style="fill-opacity:0" id="dock-normal-top-leftjunct0"/>
-<rect width="1" x="-52.5" y="166.5" height="6" style="fill:#b0afae" id="rect5455"/>
+<rect width="2" x="-52.5" y="166.5" height="6" style="fill:#b0afae" id="rect5455"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#dock-normal-top-leftjunct" id="dock-normal-top-rightjunct" transform="matrix(-1,0,0,1,182,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#dock-normal-top-leftjunct" id="dock-normal-bottom-leftjunct" transform="translate(0,6)"/>

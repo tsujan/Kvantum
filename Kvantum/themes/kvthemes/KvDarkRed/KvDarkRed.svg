@@ -138,9 +138,9 @@
 </linearGradient>
 <linearGradient id="linearGradient5148" xlink:href="#linearGradient6800-7" y1="1272.5" y2="1227.25" x1="302.5" x2="302.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient5170-6">
-<stop offset="0" style="stop-color:#4d4d4d" id="stop6802-3"/>
-<stop offset="0.3" style="stop-color:#4b4b4b" id="stop4598-2"/>
-<stop offset="1" style="stop-color:#2d2d2d" id="stop6804-0"/>
+<stop offset="0" style="stop-color:#5a5a5a;stop-opacity:.392" id="stop6802-3"/>
+<stop offset="0.3" style="stop-color:#585858;stop-opacity:.392" id="stop4598-2"/>
+<stop offset="1" style="stop-color:#323232" id="stop6804-0"/>
 </linearGradient>
 <linearGradient id="linearGradient5152" xlink:href="#linearGradient6800-7" y1="1272.5" y2="1227.25" x1="270" x2="270" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient8088-0" xlink:href="#linearGradient6650" y1="1232.5" y2="1272.5" x1="308.5" x2="308.5" gradientUnits="userSpaceOnUse"/>
@@ -975,7 +975,7 @@
 <rect width="3" x="84.5" y="100" height="10" style="fill-opacity:0" id="rect5624"/>
 <rect width="1" x="86.5" y="100" height="10" style="opacity:.5;fill:url(#linearGradient5634)" id="rect5626"/>
 </g>
-<rect width="32" x="26" y="1003" height="32" style="fill:#4d4d4d;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:square" id="tabframe-normal"/>
+<rect width="32" x="26" y="1003" height="32" style="fill:#5a5a5a;fill-rule:evenodd;stroke-linejoin:round;fill-opacity:.392;stroke-linecap:square" id="tabframe-normal"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-normal" id="floating-tab-normal" transform="translate(0,61.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-normal-left" id="floating-tab-normal-left" transform="translate(0,61.5)"/>
@@ -993,35 +993,35 @@
 <g style="fill-rule:evenodd">
 <g id="tabframe-normal-topleft" transform="translate(108,-445)">
 <path style="opacity:.15;fill:url(#linearGradient5490)" id="path5305" d="m 250,1260 c -1.98466,0 -4,2.0625 -4,4 h 2 c 0,-0.9687 1.00767,-2 2,-2 z"/>
-<path style="fill:#4d4d4d" id="path5382" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5382" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
 </g>
 <g id="tabframe-normal-top" transform="translate(108,-445)">
 <path style="opacity:.15;fill:#fff" id="path5287" d="m 250,1260 v 2 h 32 v -2 z"/>
-<path style="fill:#4d4d4d" id="path5384" d="m 250,1264 h 32 v -2 h -32 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5384" d="m 250,1264 h 32 v -2 h -32 z"/>
 </g>
 <g id="tabframe-normal-topright" transform="rotate(90,542.5,1111.5)">
 <path style="opacity:.3;fill:url(#linearGradient5451)" id="path5403" d="m 250,1260 c -1.98466,0 -4,2.0625 -4,4 h 2 c 0,-0.9687 1.00767,-2 2,-2 z"/>
-<path style="fill:#4d4d4d" id="path5405" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5405" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
 </g>
 <g id="tabframe-normal-right" transform="rotate(90,542.5,1111.5)">
 <path style="opacity:.3" id="path5409" d="m 250,1260 v 2 h 32 v -2 z"/>
-<path style="fill:#4d4d4d" id="path5411" d="m 250,1264 h 32 v -2 h -32 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5411" d="m 250,1264 h 32 v -2 h -32 z"/>
 </g>
 <g id="tabframe-normal-bottomleft" transform="rotate(-90,97.5,1003.5)">
 <path style="opacity:.4;fill:url(#linearGradient5459)" id="path5415" d="m 250,1260 c -1.98466,0 -4,2.0625 -4,4 h 2 c 0,-0.9687 1.00767,-2 2,-2 z"/>
-<path style="fill:#4d4d4d" id="path5417" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5417" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
 </g>
 <g id="tabframe-normal-left" transform="rotate(-90,97.5,1003.5)">
 <path style="opacity:.12;fill:#fff" id="path5421" d="m 250,1260 v 2 h 32 v -2 z"/>
-<path style="fill:#4d4d4d" id="path5423" d="m 250,1264 h 32 v -2 h -32 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5423" d="m 250,1264 h 32 v -2 h -32 z"/>
 </g>
 <g id="tabframe-normal-bottom" transform="matrix(1,0,0,-1,108,2115)">
 <path style="opacity:.4" id="path5427" d="m 250,1260 v 2 h 32 v -2 z"/>
-<path style="fill:#4d4d4d" id="path5429" d="m 250,1264 h 32 v -2 h -32 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5429" d="m 250,1264 h 32 v -2 h -32 z"/>
 </g>
 <g id="tabframe-normal-bottomright" transform="rotate(180,320,1057.5)">
 <path style="opacity:.35" id="path5433" d="m 250,1260 c -1.98466,0 -4,2.0625 -4,4 h 2 c 0,-0.9687 1.00767,-2 2,-2 z"/>
-<path style="fill:#4d4d4d" id="path5435" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
+<path style="fill:#5a5a5a;fill-opacity:.392" id="path5435" d="m 250,1264 v -2 c -0.99233,0 -2,1.0313 -2,2 z"/>
 </g>
 <g id="group-normal-bottomright" transform="matrix(-1,0,0,-1,586,2480)">
 <path style="opacity:.15;fill:url(#linearGradient5498)" id="path5164" d="m 250,1260 c -1.98466,0 -4,2.0625 -4,4 h 2 c 0,-0.9687 1.00767,-2 2,-2 v -2 z "/>
@@ -1073,21 +1073,21 @@
 <g style="stroke-linejoin:bevel;fill-rule:evenodd;stroke-linecap:round">
 <g id="tabframe-normal-top-leftjunct" transform="matrix(0.3,0,0,2,269,-881.25)">
 <path style="opacity:.001;stroke-width:1.225" id="rect5352" d="m 360.5,788.75 -0,4 h 7.5 v -4 z " transform="matrix(1.3333333,0,0,0.5,-175.66667,440.625)"/>
-<path style="opacity:.15;fill:#fff;stroke-width:1.291" id="rect5354" d="m 305,835 h 6.66667 c 0,0.5 -3.33334,1 -6.66667,1 z"/>
+<path style="opacity:.1;fill:#fff;stroke-width:1.291" id="rect5354" d="m 305,835 h 6.66667 c 0,0.5 -3.33334,1 -6.66667,1 z"/>
 </g>
 <g id="tabframe-normal-top-rightjunct" transform="matrix(-0.3,0,0,2,455,-877.25)">
 <path style="opacity:.001;stroke-width:1.414" id="rect5486" d="m 360.5,792.75 v 4 h 10 v -4 z" transform="matrix(-1,0,0,0.5,675.5,438.625)"/>
-<path style="opacity:.15;fill:#fff;stroke-width:.913" id="path5488" d="m 305,835 h 3.33333 c 0,0.5 -1.66666,1 -3.33333,1 z"/>
+<path style="opacity:.1;fill:#fff;stroke-width:.913" id="path5488" d="m 305,835 h 3.33333 c 0,0.5 -1.66666,1 -3.33333,1 z"/>
 </g>
 </g>
 </g>
 <g style="fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:round" id="tabframe-normal-bottom-leftjunct" transform="matrix(0.3,0,0,-2,269,2471.5)">
 <path style="opacity:.001;stroke-width:1.414" id="rect5466" d="m 360.5,797.5 v 4 h 10 v -4 z" transform="matrix(1,0,0,-0.5,-55.5,1235.75)"/>
-<path style="opacity:.3;stroke-width:.913" id="path5468" d="m 305,835 h 3.33333 c 0,0.375 -1.66666,1 -3.33333,1 z"/>
+<path style="opacity:.4;stroke-width:.913" id="path5468" d="m 305,835 h 3.33333 c 0,0.375 -1.66666,1 -3.33333,1 z"/>
 </g>
 <g style="fill-rule:evenodd;stroke:none;stroke-linejoin:bevel;stroke-linecap:round" id="tabframe-normal-bottom-rightjunct" transform="matrix(-0.3,0,0,-2,455,2475.5)">
 <path style="opacity:.001;stroke-width:1.225" id="rect5512" d="m 360.5,801.5 v 4 h 7.5 l -0,-4 z " transform="matrix(-1.3333333,0,0,-0.5,795.66667,1237.75)"/>
-<path style="opacity:.111;fill:#fff;stroke-width:1.291" id="path5514" d="m 305,835 h 6.66661 c 0,0.375 -3.33331,1 -6.66661,1 z"/>
+<path style="opacity:.07;fill:#fff;stroke-width:1.291" id="path5514" d="m 305,835 h 6.66661 c 0,0.375 -3.33331,1 -6.66661,1 z"/>
 </g>
 <g id="floating-tab-normal-bottom">
 <use width="100%" x="0" y="0" height="100%" id="use5419" xlink:href="#tab-normal-bottom" transform="matrix(1,0,0,0.8,0,231.5)"/>
@@ -1242,11 +1242,11 @@
 <g style="stroke:none;fill-rule:evenodd;stroke-linejoin:bevel;stroke-linecap:round">
 <g id="tabframe-normal-left-rightjunct" transform="matrix(0,0.3,2,0,-1295.75,706)">
 <path style="opacity:.001;stroke-width:1.225" id="path5506" d="m 360.5,788.75 -0,4 h 7.5 v -4 z " transform="matrix(1.3333333,0,0,0.5,-175.66667,440.625)"/>
-<path style="opacity:.12;fill:#fff;stroke-width:1.291" id="path5508" d="m 305,835 h 6.66669 c 0,0.5 -3.33335,1 -6.66669,1 z"/>
+<path style="opacity:.07;fill:#fff;stroke-width:1.291" id="path5508" d="m 305,835 h 6.66669 c 0,0.5 -3.33335,1 -6.66669,1 z"/>
 </g>
 <g id="tabframe-normal-left-leftjunct" transform="matrix(0,-0.3,2,0,-1295.75,895)">
 <path style="opacity:.001;stroke-width:1.414" id="path5500" d="m 360.5,792.75 v 4 h 10 v -4 z" transform="matrix(-1,0,0,0.5,675.5,438.625)"/>
-<path style="opacity:.12;fill:#fff;stroke-width:.913" id="path5502" d="m 305,835 h 3.33333 c 0,0.5 -1.66666,1 -3.33333,1 z"/>
+<path style="opacity:.08;fill:#fff;stroke-width:.913" id="path5502" d="m 305,835 h 3.33333 c 0,0.5 -1.66666,1 -3.33333,1 z"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tabframe-normal-bottom-rightjunct" id="tabframe-normal-right-leftjunct" transform="rotate(-90,370.875,790.125)"/>
