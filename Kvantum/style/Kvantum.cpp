@@ -10351,7 +10351,6 @@ void Style::drawControl(ControlElement element,
     case CE_DockWidgetTitle : {
       const QStyleOptionDockWidget *opt =
           qstyleoption_cast<const QStyleOptionDockWidget*>(option);
-      const QDockWidget *dw = qobject_cast<const QDockWidget*>(widget);
 
       if (opt) {
         const QString group = "DockTitle";
@@ -10362,8 +10361,9 @@ void Style::drawControl(ControlElement element,
         fspec.expansion = 0;
 
         QRect r = option->rect;
-        QRect tRect =subElementRect(SE_DockWidgetTitleBarText, option, widget);
+        QRect tRect = subElementRect(SE_DockWidgetTitleBarText, option, widget);
         bool hasVertTitle = false;
+        const QDockWidget *dw = qobject_cast<const QDockWidget*>(widget);
         if (dw && (dw->features() & QDockWidget::DockWidgetVerticalTitleBar))
           hasVertTitle = true;
 
@@ -16177,6 +16177,7 @@ void Style::renderFrame(QPainter *painter,
   }
   else
   {
+    element1 = element;
     drawBorder = false;
     drawExpanded = false;
     Left = fspec.left;
