@@ -221,6 +221,7 @@ frame.left=0
 frame.right=4
 frame.top=2
 frame.bottom=2
+indicator.size=5
 
 [Slider]
 inherits=PanelButtonCommand
