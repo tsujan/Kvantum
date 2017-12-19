@@ -4903,13 +4903,16 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
+        QString _status = status;
+        if (tspec_.combo_focus_rect)
+          _status.replace("pressed", "normal");
         if (!fillWidgetInterior)
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
         else // widget isn't null
           painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
                                                                            ? QPalette::Base
                                                                            : QPalette::Button));
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+_status);
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -9526,9 +9529,12 @@ void Style::drawComplexControl(ComplexControl control,
                 leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
                                              rtl ? editWidth-o.rect.width() : 0);
               }
-              renderFrame(painter,r,fspec,fspec.element+"-"+status);
+              QString _status = status;
+              if (tspec_.combo_focus_rect)
+                _status.replace("pressed", "normal");
+              renderFrame(painter,r,fspec,fspec.element+"-"+_status);
               if (!fillWidgetInterior)
-                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
               else // widget isn't null
                 painter->fillRect(interiorRect(r,fspec), widget->palette().brush(tspec_.combo_as_lineedit
                                                                                  ? QPalette::Base

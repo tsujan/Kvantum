@@ -33,6 +33,8 @@ translucent_windows=false
 blurring=false
 popup_blurring=true
 vertical_spin_indicators=false
+inline_spin_indicators=false
+spin_button_width=32
 fill_rubberband=false
 merge_menubar_with_toolbar=true
 small_icon_size=16
@@ -47,6 +49,7 @@ tooltip_delay=-1
 submenu_overlap=3
 animate_states=true
 dark_titlebar=true
+tree_branch_line=true
 
 [GeneralColors]
 window.color=#393f3f
@@ -144,8 +147,10 @@ text.margin.bottom=2
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
-indicator.element=arrow
-indicator.size=10
+frame.element=spin
+interior.element=spin
+indicator.element=iarrow
+indicator.size=11
 text.normal.color=white
 
 [RadioButton]
@@ -237,8 +242,8 @@ frame.right=2
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
-indicator.element=arrow
+indicator.size=11
+indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand

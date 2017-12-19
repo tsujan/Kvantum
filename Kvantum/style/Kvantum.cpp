@@ -5943,6 +5943,13 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (animationStartState.startsWith("c-"))
           animationStartState.remove(0, 2);
         int animationOpacity = animationOpacity_;
+        bool animatePanel(!(tspec_.combo_focus_rect
+                            && !tspec_.combo_as_lineedit
+                            && (status.startsWith("normal")
+                                || status.startsWith("pressed"))
+                            && (animationStartState.startsWith("normal")
+                                || animationStartState.startsWith("pressed"))));
+        QString _status;
         if (animate)
         {
           if (!mouseAnimation) // -> QEvent::FocusOut
@@ -5958,21 +5965,31 @@ void Style::drawPrimitive(PrimitiveElement element,
             else
               animationOpacity_ = 100;
           }
-          else if (animationOpacity < 100)
+          else if (animationOpacity < 100 && animatePanel)
           {
+            _status = animationStartState;
+            if (tspec_.combo_focus_rect)
+              _status.replace("pressed", "normal");
             if (!fillWidgetInterior)
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
+            renderFrame(painter,r,fspec,fspec.element+"-"+_status);
           }
-          painter->save();
-          painter->setOpacity((qreal)animationOpacity/100);
+          if (animatePanel)
+          {
+            painter->save();
+            painter->setOpacity((qreal)animationOpacity/100);
+          }
         }
+        _status = status;
+        if (tspec_.combo_focus_rect)
+          _status.replace("pressed", "normal");
         if (!fillWidgetInterior)
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
+        renderFrame(painter,r,fspec,fspec.element+"-"+_status);
         if (animate)
         {
-          painter->restore();
+          if (animatePanel)
+            painter->restore();
           if (animationOpacity >= 100)
           {
             if (animatedWidget_ == widget)
@@ -11089,6 +11106,13 @@ void Style::drawComplexControl(ComplexControl control,
               if (animationStartState.startsWith("c-"))
                 animationStartState.remove(0, 2);
               int animationOpacity = animationOpacity_;
+              bool animatePanel(!(tspec_.combo_focus_rect
+                                  && (!tspec_.combo_as_lineedit || !editable)
+                                  && (status.startsWith("normal")
+                                      || status.startsWith("pressed"))
+                                  && (animationStartState.startsWith("normal")
+                                      || animationStartState.startsWith("pressed"))));
+              QString _status;
               if (animate)
               {
                 if (!mouseAnimation) // -> QEvent::FocusOut
@@ -11106,9 +11130,15 @@ void Style::drawComplexControl(ComplexControl control,
                 }
                 else if (animationOpacity < 100)
                 {
-                  renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-                  if (!fillWidgetInterior)
-                    renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
+                  if (animatePanel)
+                  {
+                    _status = animationStartState;
+                    if (tspec_.combo_focus_rect)
+                      _status.replace("pressed", "normal");
+                    renderFrame(painter,r,fspec,fspec.element+"-"+_status);
+                    if (!fillWidgetInterior)
+                      renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
+                  }
                   if (!tspec_.combo_as_lineedit && editable)
                   {
                     if (!mouseAnimation)
@@ -11118,21 +11148,35 @@ void Style::drawComplexControl(ComplexControl control,
                     drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
                   }
                 }
-                painter->save();
-                painter->setOpacity((qreal)animationOpacity/100);
+                if (animatePanel)
+                {
+                  painter->save();
+                  painter->setOpacity((qreal)animationOpacity/100);
+                }
               }
-              renderFrame(painter,r,fspec,fspec.element+"-"+status);
+              _status = status;
+              if (tspec_.combo_focus_rect)
+                _status.replace("pressed", "normal");
+              renderFrame(painter,r,fspec,fspec.element+"-"+_status);
               if (!fillWidgetInterior)
-                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
               if (!tspec_.combo_as_lineedit && editable)
               {
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
                               | State_KeyboardFocusChange;
+                if (animate && !animatePanel)
+                {
+                  painter->save();
+                  painter->setOpacity((qreal)animationOpacity/100);
+                }
                 drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
+                if (animate && !animatePanel)
+                  painter->restore();
               }
               if (animate)
               {
-                painter->restore();
+                if (animatePanel)
+                  painter->restore();
                 if (animationOpacity >= 100)
                 {
                   if (!mouseAnimation)

@@ -50,7 +50,7 @@ Section                                      Meaning
 
 [CheckBox]                                   A check box.
 
-[Focus]                                      Generic focus frame.
+[Focus]                                      Generic focus frame/rectangle.
 
 [GenericFrame]                               Generic frame.
 
@@ -244,9 +244,15 @@ combo_menu                        true/false          Should the popup of combo 
                                                       Gtk)? By default, they are shown below
                                                       the combo box.
 
-combo_focus_rect                  true/false          Should combo boxes have focus rectangle?
-                                                      The default is false because they usually
-                                                      have a special panel when focused.
+combo_focus_rect                  true/false          Should combo boxes have focus rectangles?
+                                                      The default is false because combo boxes
+                                                      are drawn by the "pressed" SVG elements
+                                                      when they have the keyboard focus but, if
+                                                      set to true, this key draws them with the
+                                                      "normal" SVG elements and adds a focus
+                                                      rectangle to them in that state. (The
+                                                      focus rectangle is defined under the
+                                                      "Focus" section.)
 
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.

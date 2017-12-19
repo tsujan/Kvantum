@@ -358,26 +358,22 @@
 <rect width="25" x="375" y="87.5" height="25" style="opacity:0;fill:#7b7b7b" id="rect5404"/>
 <path style="fill:#505050" id="path5406" d="m 400,92.5 -20,20 h 20 z"/>
 </g>
-<g style="stroke:none">
-<g style="fill:#4a90d9">
+<g style="stroke:none;fill:#4a90d9">
 <rect width="20" x="275" y="680" height="5" id="menubaritem-pressed-bottom"/>
 <rect width="20" x="340" y="680" height="5" id="menubaritem-toggled-bottom"/>
 </g>
-<g style="opacity:.8;fill:#323232;fill-rule:evenodd" id="arrow-plus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,142.03596,258.61332)">
-<rect width="2.840909" x="-6.8212047" y="57.29216" height="12.5" id="rect4570" transform="rotate(45)"/>
-<rect width="12.5" x="-11.650752" y="62.121708" height="2.8409076" id="rect4573" transform="rotate(45)"/>
+<g style="opacity:.8;fill:#323232;fill-rule:evenodd;stroke:none" id="iarrow-plus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,129.8342,259.50532)">
+<path style="stroke-width:1.574" id="rect4570" d="m 16,239 v 9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 h -4 z " transform="matrix(0.40176523,-0.40176523,0.40176523,0.40176523,-156.42308,-52.097347)"/>
 </g>
+<g style="fill-rule:evenodd;stroke:none" id="iarrow-plus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,189.8342,259.50532)">
+<path style="stroke-width:1.574" id="rect4577" d="m 76,239 v 9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 h -4 z " transform="matrix(0.40176523,-0.40176523,0.40176523,0.40176523,-180.52899,-27.991433)"/>
 </g>
-<g style="fill-rule:evenodd;stroke:none" id="arrow-plus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,239.53596,256.11332)">
-<rect width="2.840909" x="-6.8212047" y="57.29216" height="12.5" id="rect4577" transform="rotate(45)"/>
-<rect width="12.5" x="-11.650752" y="62.121708" height="2.8409076" id="rect4579" transform="rotate(45)"/>
-</g>
-<g style="opacity:.8;fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="arrow-minus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,397.03596,258.61332)">
-<rect width="2.840909" x="-6.8212047" y="57.29216" height="12.5" style="fill:#323232" id="rect4583" transform="rotate(45)"/>
+<g style="opacity:.8;fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="iarrow-minus-normal" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,246.8342,259.50532)">
+<rect width="2.2727273" x="-6.5371146" y="57.29216" height="12.5" style="fill:#323232;stroke-width:.894" id="rect4583" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4585" transform="rotate(45)"/>
 </g>
-<g style="fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="arrow-minus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,497.03596,258.61332)">
-<rect width="2.840909" x="-6.8212047" y="57.29216" height="12.5" style="fill:#000" id="rect4589" transform="rotate(45)"/>
+<g style="fill:#d2d2d2;fill-rule:evenodd;stroke:none" id="iarrow-minus-focused" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,300.8342,259.50532)">
+<rect width="2.2727273" x="-6.5371127" y="57.29216" height="12.5" style="fill:#000;stroke-width:.894" id="rect4589" transform="rotate(45)"/>
 <rect width="12.5" x="-11.650752" y="62.29216" height="2.5" style="opacity:0" id="rect4591" transform="rotate(45)"/>
 </g>
 <rect width="30" x="167" y="872" height="30" style="fill:#e9e9e9;stroke:none" id="dock-normal"/>
@@ -453,17 +449,15 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal" id="button-pressed" transform="matrix(1,0,0,-1,120,57.50016)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-normal-left" id="button-pressed-right" transform="matrix(-1,0,0,-1,187.5,57.50021)"/>
-<g style="stroke:none">
-<g id="button-pressed-topright" transform="rotate(90,117.50074,101.25086)">
+<g style="stroke:none" id="button-pressed-topright" transform="rotate(90,117.50074,101.25086)">
 <path style="fill:url(#linearGradient5325);fill-rule:evenodd" id="path5320" d="m 28.75,41.2516 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
 <path style="font-family:Sans;fill:url(#linearGradient5327);text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5323" d="m 28.75,41.2516 c -4.00799,-0.01544 -7.47125,3.46991 -7.5,7.5 h 2.5 c 0,-2.00316 2.5,-5 5,-5 z"/>
 </g>
-<g style="fill-rule:evenodd">
-<path style="fill:url(#linearGradient5207)" id="lineedit-normal" d="m 387.5,12.5001 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
-<g id="menuitem-tearoff-focused" transform="translate(19.5,-6.5)">
+<path style="fill:url(#linearGradient5207);fill-rule:evenodd;stroke:none" id="lineedit-normal" d="m 387.5,12.5001 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
+<g style="stroke:none">
+<g style="fill-rule:evenodd" id="menuitem-tearoff-focused" transform="translate(19.5,-6.5)">
 <rect width="7" x="686.5" y="-229.5" height="9" style="opacity:0;fill:#141414" id="rect7888" transform="rotate(90)"/>
 <path style="fill:#4a90d9" id="path7945" d="m 227.2385,689 h -2.2462 v 2 h 2.2462 z m -4.4924,0 H 220.5 v 2 h 2.2461 z"/>
-</g>
 </g>
 <rect width="5" x="175" y="820" rx="2.5" height="32" ry="2.5" style="fill:url(#linearGradient4622)" id="splitter-grip-normal"/>
 </g>
@@ -797,20 +791,22 @@
 <path style="fill:url(#linearGradient5425)" id="path5415" d="m 59.5,50.5 c -0.0067,2.92523 -3.46991,4.97134 -7.5,5 v -1.5 c 2.00315,0 5,-2 5,-3.50012 z "/>
 </g>
 </g>
-<g id="lineedit-normal-bottom" transform="translate(368,-5.4998)">
+</g>
+<g style="stroke:none" id="lineedit-normal-bottom" transform="translate(368,-5.4998)">
 <path style="fill:url(#linearGradient5462);fill-rule:evenodd" id="path5440" d="M 52,50.5 H 19.5002 V 58 h 32.5 z"/>
 <g style="text-indent:0;text-align:start;text-transform:none;font-family:Sans;line-height:normal;color:#000">
 <path style="fill:#fff" id="path5442" d="M 19.5,58 H 52 V 55.5 H 19.5 Z"/>
 <path style="fill:#898989" id="path5444" d="M 19.5,55.5 H 52 V 54 H 19.5 Z"/>
 </g>
 </g>
-<g id="lineedit-normal-bottomright" transform="translate(368,-5.4997405)">
+<g style="stroke:none" id="lineedit-normal-bottomright" transform="translate(368,-5.4997405)">
 <path style="fill:url(#linearGradient5470);fill-rule:evenodd" id="path5456" d="M 59.5,50.5 C 59.5,54.30963 55.80963,58 52,58 V 50.5 Z"/>
 <g style="line-height:normal;color:#000;text-indent:0;text-align:start;text-transform:none;font-family:Sans">
 <path style="fill:#fff" id="path5458" d="m 59.5,50.5 c 0.01544,4.00799 -3.46991,7.47125 -7.5,7.5 v -2.5 c 2.00316,0 5,-2.5 5,-5 z"/>
 <path style="fill:url(#linearGradient5472)" id="path5460" d="m 59.5,50.5 c -0.0067,2.92523 -3.46991,4.97134 -7.5,5 v -1.5 c 2.00315,0 5,-2 5,-3.50012 z "/>
 </g>
 </g>
+<g style="stroke:none">
 <g id="lineedit-normal-bottomleft" transform="translate(-7.5402492,-67.4686)">
 <path style="fill:url(#linearGradient5464);fill-rule:evenodd" id="path5448" d="m 387.5403,112.4688 c 0,3.80963 3.69037,7.5 7.5,7.5 v -7.5 z "/>
 <g style="line-height:normal;color:#000;text-indent:0;text-align:start;font-family:Sans;text-transform:none">
@@ -839,7 +835,7 @@
 <path style="fill:url(#linearGradient5577);fill-rule:evenodd" id="path5527" d="m 28.75,41.2516 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
 <path style="font-family:Sans;fill:#4a90d9;text-align:start;line-height:normal;color:#000;text-indent:0;text-transform:none" id="path5529" d="m 28.75,41.2516 c -4.00799,-0.01544 -7.47125,3.46991 -7.5,7.5 h 4 c 0,-2.50011 1,-3.50011 3.5,-3.50011 z "/>
 </g>
-<path style="opacity:.12;fill:url(#linearGradient5579);fill-rule:evenodd" id="path5531" d="m 395.0403,76.469 c -2.5,0 -3.5,0.9996 -3.5,3.4997 h 3.5 z"/>
+<path style="opacity:.12;fill:url(#linearGradient5579);fill-rule:evenodd" id="path5531" d="m 395.0403,76.469 c -2.5,0 -3.5,1 -3.5,3.4997 h 3.5 z"/>
 </g>
 <g id="lineedit-focused-right" transform="matrix(-1,0,0,1,383.75,-36.2516)">
 <path style="fill:url(#linearGradient5601);fill-rule:evenodd" id="path5597" d="m 28.75,81.2516 v -32.5 h -7.5 v 32.5 z"/>
@@ -1140,14 +1136,42 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-arrow-up-pressed" transform="translate(-40,187.1)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-arrow-right-pressed" transform="rotate(90,142.89475,348.80099)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="flat-arrow-left-pressed" transform="rotate(-90,317.89475,165.80099)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-plus-focused" id="arrow-plus-pressed" transform="translate(-46)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-minus-focused" id="arrow-minus-pressed" transform="translate(-46)"/>
-<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-plus-focused" id="arrow-plus-disabled" transform="translate(38)"/>
-<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-minus-focused" id="arrow-minus-disabled" transform="translate(38)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="tree-plus-focused" transform="rotate(90,62.89475,230.80099)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="tree-minus-focused" transform="matrix(1,0,0,-1,240,461.60198)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="tree-plus-pressed" transform="rotate(90,41.89475,209.80099)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="tree-minus-pressed" transform="matrix(1,0,0,-1,196,461.60198)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.2" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(21)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.6" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-21)"/>
+<g style="stroke:none;fill-rule:evenodd;stroke-opacity:.6">
+<g id="iarrow-separator-normal">
+<rect width="3" x="141" y="102" height="10" style="opacity:0;stroke-width:2.236" id="rect1692"/>
+<rect width="1" x="141" y="102" height="10" style="opacity:.25;stroke-width:1.291" id="rect1694"/>
+</g>
+<g id="iarrow-separator-top-normal">
+<rect width="3" x="141" y="94.5" height="7.5" style="opacity:0;stroke-width:1.936" id="rect1702"/>
+<rect width="1" x="141" y="97" height="5" style="opacity:.25;stroke-width:.913" id="rect1704"/>
+</g>
+<g id="iarrow-separator-bottom-normal">
+<rect width="3" x="141" y="-119.5" height="7.5" style="opacity:0;stroke-width:1.936" id="rect1712" transform="scale(1,-1)"/>
+<rect width="1" x="141" y="-115.5" height="3.5" style="opacity:.25;stroke-width:.764" id="rect1714" transform="scale(1,-1)"/>
+</g>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal" id="spin-normal" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-top" id="spin-normal-top" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-right" id="spin-normal-right" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-topright" id="spin-normal-topright" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-bottom" id="spin-normal-bottom" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-normal-bottomright" id="spin-normal-bottomright" transform="translate(-239.5,71.499741)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-plus-focused" id="iarrow-plus-pressed" transform="translate(-28)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#iarrow-plus-focused" id="iarrow-plus-disabled" transform="translate(28)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-minus-focused" id="iarrow-minus-pressed" transform="translate(-26)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#iarrow-minus-focused" id="iarrow-minus-disabled" transform="translate(28)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-plus-normal" id="iarrow-up-normal" transform="translate(228)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-plus-focused" id="iarrow-up-pressed" transform="translate(194)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-plus-focused" id="iarrow-up-focused" transform="translate(220)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#iarrow-plus-focused" id="iarrow-up-disabled" transform="translate(246)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-minus-focused" id="iarrow-down-pressed" transform="translate(188)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-minus-focused" id="iarrow-down-focused" transform="translate(216)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#iarrow-minus-normal" id="iarrow-down-normal" transform="translate(214)"/>
+<use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#iarrow-minus-focused" id="iarrow-down-disabled" transform="translate(242)"/>
 </svg>
