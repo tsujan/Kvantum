@@ -1314,29 +1314,26 @@ void Style::polish(QWidget *widget)
           && !widget->inherits("KScreenSaver")
           && !widget->inherits("QSplashScreen"))
       {
-        if (widget->minimumSize() != widget->maximumSize())
+        if (hspec_.forceSizeGrip
+            && widget->minimumSize() != widget->maximumSize()
+            && !widget->windowFlags().testFlag(Qt::Popup)
+            && !widget->windowFlags().testFlag(Qt::CustomizeWindowHint))
         {
           /*if (QMainWindow* mw = qobject_cast<QMainWindow*>(widget))
           {
-            if (hspec_.forceSizeGrip)
-            {
-              QStatusBar *sb = mw->statusBar();
-              sb->setSizeGripEnabled(true);
-            }
+            QStatusBar *sb = mw->statusBar();
+            sb->setSizeGripEnabled(true);
           }
           else*/ if (QDialog *d = qobject_cast<QDialog*>(widget))
           {
-            if (hspec_.forceSizeGrip)
+            /* QProgressDialog has a bug that gives a wrong position to
+               its resize grip. It has no layout and there's no reason
+               to force resize grip on any dialog without layout. */
+            QLayout *lo = widget->layout();
+            if (lo && lo->sizeConstraint() != QLayout::SetFixedSize
+                && lo->sizeConstraint() != QLayout::SetNoConstraint)
             {
-              /* QProgressDialog has a bug that gives a wrong position to
-                 its resize grip. It has no layout and there's no reason
-                 to force resize grip on any dialog without layout. */
-              QLayout *lo = widget->layout();
-              if (lo && lo->sizeConstraint() != QLayout::SetFixedSize
-                  && lo->sizeConstraint() != QLayout::SetNoConstraint)
-              {
-                d->setSizeGripEnabled(true);
-              }
+              d->setSizeGripEnabled(true);
             }
           }
         }
