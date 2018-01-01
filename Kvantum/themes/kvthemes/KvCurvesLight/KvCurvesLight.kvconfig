@@ -150,7 +150,7 @@ frame.right=2
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
 indicator.element=s-arrow
-indicator.size=9
+indicator.size=10
 frame.element=lineedit
 interior.element=lineedit
 
@@ -237,7 +237,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=9
+indicator.size=10
 frame.expansion=0
 
 [HeaderSection]
