@@ -9,6 +9,7 @@ V0.10.6
  * Added a hacking key (to Kvantum Manager) for the middle-click scroll jump (with the left-click jump as the default).
  * Handle the CMP0071 policy of CMAKE >= 3.10 (let AUTOMOC and AUTOUIC process GENERATED files).
  * Make combo_focus_rect use the normal panel to draw a combo box with the keyboard focus.
+ * A workaround for a Qt5 mess in painting the "clear" button of line-edits (the issue is visible in Fusion too).
 
 V0.10.5
 ---------
