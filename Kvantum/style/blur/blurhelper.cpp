@@ -138,7 +138,8 @@ void BlurHelper::update (QWidget* widget) const
   else
   {
     QVector<unsigned long> data;
-    foreach (const QRect& rect, region.rects())
+    const QVector<QRect> allRects = region.rects();
+    for (const QRect& rect : allRects)
     {
       data << rect.x() << rect.y() << rect.width() << rect.height();
     }

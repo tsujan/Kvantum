@@ -130,7 +130,7 @@ void WindowManager::initializeWhiteList (const QStringList &list)
   whiteList_.insert (ExceptionId ("ViewSliders@kmix"));
   whiteList_.insert (ExceptionId ("Sidebar_Widget@konqueror"));
 
-  foreach (const QString& exception, list)
+  for (const QString& exception : list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
@@ -144,7 +144,7 @@ void WindowManager::initializeBlackList (const QStringList &list)
   blackList_.clear();
   blackList_.insert (ExceptionId ("CustomTrackView@kdenlive"));
   blackList_.insert (ExceptionId ("MuseScore"));
-  foreach (const QString& exception, list)
+  for (const QString& exception : list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
@@ -408,7 +408,7 @@ bool WindowManager::isBlackListed (QWidget* widget)
 
   // list-based blacklisted widgets
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, blackList_)
+  for (const ExceptionId& id : static_cast<const ExceptionSet&>(blackList_))
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;
@@ -429,7 +429,7 @@ bool WindowManager::isWhiteListed (QWidget* widget) const
 {
 
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, whiteList_)
+  for (const ExceptionId &id : static_cast<const ExceptionSet&>(whiteList_))
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;

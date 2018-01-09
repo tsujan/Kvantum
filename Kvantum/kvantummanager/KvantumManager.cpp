@@ -16,8 +16,8 @@
 
 namespace KvManager {
 
-static QStringList windowGroups = (QStringList() << "Window" << "WindowTranslucent"
-                                                 << "Dialog" << "DialogTranslucent");
+static const QStringList windowGroups = (QStringList() << "Window" << "WindowTranslucent"
+                                                       << "Dialog" << "DialogTranslucent");
 
 KvantumManager::KvantumManager (const QString lang, QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
 {
@@ -534,7 +534,11 @@ void KvantumManager::installTheme()
                 colorFiles.append (QString ("%1/%2.colors").arg (theme).arg (themeName + "Dark"));
             }
             /* also copy the color scheme file */
+#if QT_VERSION >= 0x050000
+            for (const QString &colorFile : static_cast<const QStringList&>(colorFiles))
+#else
             foreach (const QString &colorFile, colorFiles)
+#endif
             {
                 if (QFile::exists (colorFile))
                 {
@@ -583,9 +587,14 @@ static inline bool removeDir (const QString &dirName)
     QDir dir (dirName);
     if (dir.exists())
     {
-        Q_FOREACH (QFileInfo info, dir.entryInfoList (QDir::Files | QDir::AllDirs
-                                                      | QDir::NoDotAndDotDot | QDir::System | QDir::Hidden,
-                                                      QDir::DirsFirst))
+        const QFileInfoList infoList = dir.entryInfoList (QDir::Files | QDir::AllDirs
+                                                          | QDir::NoDotAndDotDot | QDir::System | QDir::Hidden,
+                                                          QDir::DirsFirst);
+#if QT_VERSION >= 0x050000
+        for (const QFileInfo& info : infoList)
+#else
+        Q_FOREACH (const QFileInfo& info, infoList)
+#endif
         {
             if (info.isDir())
                 res = removeDir (info.absoluteFilePath());
@@ -978,7 +987,8 @@ void KvantumManager::restyleWindow()
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
 #if QT_VERSION >= 0x050000
     // Qt5 has QEvent::ThemeChange
-    Q_FOREACH(QWidget *widget, QApplication::allWidgets())
+    const QWidgetList widgets = QApplication::allWidgets();
+    for (QWidget *widget : widgets)
     {
         QEvent event (QEvent::ThemeChange);
         QApplication::sendEvent (widget, &event);
@@ -1312,7 +1322,11 @@ void KvantumManager::tabChanged (int index)
                 respectDE (ui->checkBoxDE->isChecked());
 
                 bool hasWindowPattern (false);
+#if QT_VERSION >= 0x050000
+                for (const QString &windowGroup : windowGroups)
+#else
                 foreach (const QString &windowGroup, windowGroups)
+#endif
                 {
                     themeSettings.beginGroup (windowGroup);
                     if (themeSettings.value ("interior.x.patternsize", 0).toInt() > 0
@@ -1516,8 +1530,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     QDir kv = QDir (QString ("%1/Kvantum").arg (xdg_config_home));
     if (kv.exists())
     {
-        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+#if QT_VERSION >= 0x050000
+        for (const QString &folder : folders)
+#else
         foreach (const QString &folder, folders)
+#endif
         {
             QString path = QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (folder);
             if (isThemeDir (path))
@@ -1544,8 +1562,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     kv = QDir (QString ("%1/.themes").arg (homeDir));
     if (kv.exists())
     {
-        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+#if QT_VERSION >= 0x050000
+        for (const QString &folder : folders)
+#else
         foreach (const QString &folder, folders)
+#endif
         {
             QString path = QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (folder);
             if (isThemeDir (path) && !folder.contains ("#"))
@@ -1560,8 +1582,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     kv = QDir (QString ("%1/.local/share/themes").arg (homeDir));
     if (kv.exists())
     {
-        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+#if QT_VERSION >= 0x050000
+        for (const QString &folder : folders)
+#else
         foreach (const QString &folder, folders)
+#endif
         {
             QString path = QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (folder);
             if (isThemeDir (path) && !folder.contains ("#"))
@@ -1579,8 +1605,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     kv = QDir (QString (DATADIR) + QString ("/Kvantum"));
     if (kv.exists())
     {
-        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+#if QT_VERSION >= 0x050000
+        for (const QString &folder : folders)
+#else
         foreach (const QString &folder, folders)
+#endif
         {
             QString path = QString (DATADIR) + QString ("/Kvantum/%1").arg (folder);
             if (!folder.contains ("#") && isThemeDir (path))
@@ -1602,8 +1632,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     kv = QDir (QString (DATADIR) + QString ("/themes"));
     if (kv.exists())
     {
-        QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+        const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+#if QT_VERSION >= 0x050000
+        for (const QString &folder : folders)
+#else
         foreach (const QString &folder, folders)
+#endif
         {
             QString path = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (folder);
             if (!folder.contains ("#") && isThemeDir (path))

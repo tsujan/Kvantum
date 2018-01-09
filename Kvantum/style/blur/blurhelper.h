@@ -74,7 +74,7 @@ class BlurHelper: public QObject
     }
     void update (void)
     {
-      foreach (const WidgetPointer& widget, pendingWidgets_)
+      for (const WidgetPointer& widget : static_cast<const WidgetSet&>(pendingWidgets_))
       {
         if (widget)
           update (widget.data());
