@@ -5,12 +5,12 @@
 #include <QStyleFactory>
 #include <QDesktopWidget>
 #include <QWhatsThis>
+#include <QScrollBar>
 #if QT_VERSION >= 0x050000
 #include <QWindow>
 #include <QFileDevice>
 #include <QTextStream>
 #include <QTimer>
-#include <QScrollBar>
 #endif
 //#include <QDebug>
 
