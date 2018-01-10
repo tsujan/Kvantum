@@ -485,7 +485,7 @@ bool WindowManager::canDrag (QWidget* widget)
 bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& position)
 {
   // retrieve child at given position and check cursor again
-  if (!widget || !child || child->cursor().shape() != Qt::ArrowCursor)
+  if (!widget || (child && child->cursor().shape() != Qt::ArrowCursor))
     return false;
 
   /*
@@ -493,8 +493,9 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     even if mousePress/Move has been passed to the parent
     (FIXME: Should dragging from inside QAbstractScrollArea be disabled?)
   */
-  if (qobject_cast<QComboBox*>(child)
-      || qobject_cast<QProgressBar*>(child))
+  if (child
+     && (qobject_cast<QComboBox*>(child)
+         || qobject_cast<QProgressBar*>(child)))
   {
     return false;
   }

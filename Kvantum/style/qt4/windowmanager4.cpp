@@ -421,7 +421,7 @@ bool WindowManager::canDrag (QWidget* widget)
 bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& position)
 {
   // retrieve child at given position and check cursor again
-  if (!widget || !child || child->cursor().shape() != Qt::ArrowCursor)
+  if (!widget || (child && child->cursor().shape() != Qt::ArrowCursor))
     return false;
 
   /*
