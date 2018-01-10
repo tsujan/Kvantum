@@ -50,18 +50,20 @@ namespace Kvantum {
 
 static inline bool isPrimaryToolBar(QWidget *w)
 {
-  QToolBar *tb=qobject_cast<QToolBar*>(w);
-  if (tb || 0==strcmp(w->metaObject()->className(), "ToolBar"))
+  if (!w) return false;
+  QToolBar *tb = qobject_cast<QToolBar*>(w);
+  if (tb || 0 == strcmp(w->metaObject()->className(), "ToolBar"))
   {
-    if (!tb || Qt::Horizontal==tb->orientation())
+    if (!tb || Qt::Horizontal == tb->orientation())
     {
-      if (0==w->pos().y())
-      {
+      if (0 == w->pos().y())
         return true;
-      }
 
       if (QMainWindow *mw = qobject_cast<QMainWindow *>(w->window()))
-        return mw->menuWidget()->isVisible() && w->pos().y()<=mw->menuWidget()->height()+1;
+      {
+        if (QWidget *menuW = mw->menuWidget())
+          return menuW->isVisible() && w->pos().y() <= menuW->height()+1;
+      }
     }
   }
   return false;
@@ -207,6 +209,8 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
 
   // cast to widget
   QWidget *widget = static_cast<QWidget*>(object);
+  if (!widget)
+    return false;
 
   // check if widget can be dragged from current position
   if (isBlackListed (widget) || !canDrag (widget))
@@ -442,7 +446,8 @@ bool WindowManager::isWhiteListed (QWidget* widget) const
 bool WindowManager::canDrag (QWidget* widget)
 {
   // check if enabled
-  if (!enabled()) return false;
+  if (!widget || !enabled())
+    return false;
 
   // assume isDragable widget is already passed
   // check some special cases where drag should not be effective
@@ -480,7 +485,7 @@ bool WindowManager::canDrag (QWidget* widget)
 bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& position)
 {
   // retrieve child at given position and check cursor again
-  if (child && child->cursor().shape() != Qt::ArrowCursor)
+  if (!widget || !child || child->cursor().shape() != Qt::ArrowCursor)
     return false;
 
   /*
@@ -488,9 +493,8 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     even if mousePress/Move has been passed to the parent
     (FIXME: Should dragging from inside QAbstractScrollArea be disabled?)
   */
-  if (child
-     && (qobject_cast<QComboBox*>(child)
-         || qobject_cast<QProgressBar*>(child)))
+  if (qobject_cast<QComboBox*>(child)
+      || qobject_cast<QProgressBar*>(child))
   {
     return false;
   }
@@ -522,8 +526,8 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     return true;
   }
 
-  bool toolbar=isPrimaryToolBar(widget);
-  if (drag_< DRAG_MENUBAR_AND_PRIMARY_TOOLBAR && toolbar)
+  bool isToolbar = isPrimaryToolBar(widget);
+  if (drag_< DRAG_MENUBAR_AND_PRIMARY_TOOLBAR && isToolbar)
     return false;
 
   /*
@@ -531,7 +535,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
       and does not come from a toolbar is rejected
       */
   if (drag_ < DRAG_ALL)
-    return toolbar;
+    return isToolbar;
 
   /* following checks are relevant only for WD_FULL mode */
 
