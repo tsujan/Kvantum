@@ -6,6 +6,7 @@ alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
 mirror_doc_tabs=false
+embedded_tabs=true
 group_toolbar_buttons=false
 toolbar_item_spacing=1
 spread_progressbar=true
@@ -205,15 +206,19 @@ text.normal.color=black
 text.focus.color=#0052aa
 text.toggle.color=black
 frame.expansion=12
+min_width=3.0font
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=none
-interior=false
+frame=true
+interior=true
+frame.element=group
+interior.element=group
 frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
+frame.expansion=12
 
 [TreeExpander]
 inherits=PanelButtonCommand
