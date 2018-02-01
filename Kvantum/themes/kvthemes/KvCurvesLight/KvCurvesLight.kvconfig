@@ -49,7 +49,7 @@ submenu_overlap=0
 
 [GeneralColors]
 window.color=#E5E5E6
-base.color=white
+base.color=#FBFBFB
 alt.base.color=#F0F0F0
 button.color=#E5E5E6
 light.color=white

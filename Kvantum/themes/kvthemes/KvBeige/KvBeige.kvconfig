@@ -29,6 +29,7 @@ button_contents_shift=true
 button_icon_size=16
 combo_as_lineedit=false
 combo_menu=true
+combo_focus_rect=true
 fill_rubberband=false
 groupbox_top_label=false
 inline_spin_indicators=false
@@ -50,7 +51,7 @@ tree_branch_line=false
 
 [GeneralColors]
 window.color=#efebe7
-base.color=#fdfdfd
+base.color=#fbfbfb
 alt.base.color=#f1f1f1
 button.color=#efebe7
 light.color=#F3F3F3

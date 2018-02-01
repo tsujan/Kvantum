@@ -346,7 +346,7 @@
 <g style="stroke:none">
 <g style="fill-rule:evenodd">
 <path style="fill:url(#linearGradient5069)" id="lineedit-normal" d="m 230.5,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
-<path style="fill:#fff" id="lineedit-focused" d="m 283.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
+<path style="fill:#fbfbfb" id="lineedit-focused" d="m 283.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 </g>
 <g style="fill:#5d86c5">
 <rect width="30" x="320" y="680" height="2.5" id="menubaritem-pressed-bottom"/>
@@ -396,19 +396,15 @@
 <use width="100%" x="0" y="0" height="100%" style="opacity:.2" xlink:href="#itemview-toggled-left" id="itemview-focused-left" transform="translate(-81.01284,-1.237915)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.2" xlink:href="#itemview-toggled-topleft" id="itemview-focused-topleft" transform="translate(-81.01284,-1.237915)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.2" xlink:href="#itemview-toggled-bottomleft" id="itemview-focused-bottomleft" transform="translate(-81.01284,-1.237915)"/>
-<g style="stroke:none" id="group-normal-left" transform="translate(436.5009,-295.34896)">
-<g style="fill:#2b2b2b;fill-opacity:0" id="g423">
-<path id="path5178" d="m -26.5,1049.3438 v 30 h 1.5 v -30 z"/>
-<path id="path5180" d="m -24,1049.3438 v 30 h 1.5 v -30 z"/>
+<g style="stroke:none" id="group-normal-left">
+<path style="opacity:0" id="path5178" d="m 410,754 v 30 h 4 v -30 z"/>
+<rect width="1" x="411" y="754" height="30" style="opacity:.3" id="rect5182"/>
+<rect width="1" x="412" y="754" height="30" style="opacity:.6;fill:#fff" id="rect1811"/>
 </g>
-<rect width="1" x="-24.997759" y="1049.3541" height="30" style="fill:#8c8c8c" id="rect5182"/>
-</g>
-<g style="stroke:none" id="group-normal-topleft" transform="translate(436.5009,-295.34895)">
-<g style="fill:#2b2b2b;fill-opacity:0" id="g429">
-<path id="path5146" d="m -26.5,1045.3438 v 4 h 1.5 c 0,-1.2553 1.27604,-2.5 2.5,-2.5 v -1.5 z"/>
-<path id="path5148" d="m -22.5,1047.8438 c -0.745887,0 -1.5,0.7651 -1.5,1.5 h 1.5 z"/>
-</g>
-<path style="fill:#8c8c8c" id="path5150" d="m -22.5,1046.8541 c -1.22396,0 -2.5,1.2448 -2.5,2.5 h 1 c 0,-0.7349 0.754113,-1.5 1.5,-1.5 z"/>
+<g style="stroke:none" id="group-normal-topleft">
+<path style="opacity:0" id="path5146" d="m 410,750 v 4 l 4,-.01 v -3.9899 z "/>
+<path style="opacity:.3" id="path5150" d="m 414,751 c -1.63672,0 -3,1.3906 -3,3 h 1 c 0,-1.1133 0.88281,-2 2,-2 z"/>
+<path style="opacity:.6;fill:#fff" id="path1812" d="m 414,752 c -1.12109,0 -2,0.88279 -2,2 h 1 c 0,-0.64062 0.34375,-1 1,-1 z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd">
 <path style="fill:url(#linearGradient6258)" id="expand-button-normal-topleft" d="m 70,102 c 0,-6.64799 5.352,-12 12,-12 v 12 h -12 z "/>
@@ -497,7 +493,7 @@
 <path style="fill:url(#linearGradient5176);fill-rule:evenodd;stroke:none" id="border-progress-normal-bottomleft" d="m 289.75,339 c 0,6.64799 5.352,12 12,12 v -12 h -12 z "/>
 <g style="stroke:none;fill-rule:evenodd">
 <path style="fill:url(#linearGradient5178)" id="border-progress-normal-bottom" d="m 318.25,339 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<g style="fill:#fff">
+<g style="fill:#fbfbfb">
 <path id="lineedit-pressed" d="m 337.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 <path id="lineedit-toggled" d="m 389.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 </g>
@@ -605,12 +601,12 @@
 </g>
 </g>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-top" transform="matrix(0,1,-1,0,1198.0061,340.00201)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-topright" transform="matrix(0,1,-1,0,1198.0061,340.00201)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-right" transform="matrix(-1,0,0,1,858.01439,-0.002256)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-bottomright" transform="matrix(-1,0,0,-1,858.01439,1537.9875)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-bottom" transform="matrix(0,-1,1,0,-339.99394,1197.9957)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-bottomleft" transform="matrix(0,-1,1,0,-339.99394,1197.9957)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-top" transform="rotate(90,429,769)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-right" transform="matrix(-1,0,0,1,858,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-topright" transform="matrix(-1,0,0,1,858,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-left" id="group-normal-bottom" transform="rotate(-90,429,769)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-bottomleft" transform="rotate(-90,429,769)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#group-normal-topleft" id="group-normal-bottomright" transform="rotate(-180,429,769)"/>
 <g style="stroke:none;fill-rule:evenodd">
 <path style="fill:#5d86c5" id="border-tab-focused-topright" d="m 188.5,781 0,-6 c 0,-5 -1,-6 -6,-6 h -6 v 12 z "/>
 <path style="fill:url(#linearGradient5002)" id="border-tab-toggled-topleft" d="m 220,781 c 0,-7 5,-12 12,-12 v 12 z "/>
@@ -767,12 +763,12 @@
 <rect width="5" x="200" y="844" height="1" style="fill:#5a5a5a;fill-rule:evenodd;stroke:none;stroke-linecap:square;stroke-width:2.5" id="slider-tick-normal"/>
 <g style="stroke:none" id="common-normal-left" transform="translate(-225,-162)">
 <rect width="2" x="271" y="1170" height="30" style="fill:#b4b4b4" id="rect4962"/>
-<path style="fill:#fff" id="path5131" d="m 272,1170 v 30 h 1 v -30 z"/>
+<path style="fill:#fbfbfb" id="path5131" d="m 272,1170 v 30 h 1 v -30 z"/>
 <path style="fill-rule:evenodd;fill-opacity:0" id="rect5135" d="m 270,1170 v 30 h 1 v -30 z"/>
 </g>
 <g style="stroke:none" id="common-normal-topleft" transform="translate(-225,-162)">
 <path style="fill:#b4b4b4" id="rect5015" d="m 48,1006 c -1.125,0 -2,0.875 -2,2 h 2 z" transform="translate(225,162)"/>
-<path style="fill:#fff" id="path5157" d="m 273,1169 c -0.75,0 -1,0.25 -1,1 h 1 z"/>
+<path style="fill:#fbfbfb" id="path5157" d="m 273,1169 c -0.75,0 -1,0.25 -1,1 h 1 z"/>
 <path style="fill-opacity:0" id="path5159" d="m 273,1167 c -1.5,0 -3,1.5 -3,3 h 1 c 0,-1.125 0.875,-2 2,-2 z"/>
 </g>
 <use width="450" x="0" y="0" height="1230" id="common-normal-top" xlink:href="#common-normal-left" transform="matrix(0,1,-1,0,1086,960)"/>
@@ -1076,11 +1072,11 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-focused" id="button-pressed" transform="matrix(1,0,0,-1,47.5,69.5)"/>
 <g style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3.609" id="lineedit-focused-topleft" transform="translate(21.25,215.75)">
 <path style="fill:#5d86c5" id="path6133" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
-<path style="fill:#fff" id="path6135" d="m 262.5,-4.5 c -1.5,0 -2.5,1 -2.5,2.5 h 2.5 z"/>
+<path style="fill:#fbfbfb" id="path6135" d="m 262.5,-4.5 c -1.5,0 -2.5,1 -2.5,2.5 h 2.5 z"/>
 </g>
 <g style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3.609" id="lineedit-focused-top" transform="matrix(1.0833333,0,0,1,-0.62499075,215.75)">
 <rect width="7.5" x="2" y="262.5" height="30" style="fill:#5d86c5" id="rect6139" transform="rotate(-90)"/>
-<rect width="2.5" x="2" y="262.5" height="30" style="fill:#fff" id="rect6141" transform="rotate(-90)"/>
+<rect width="2.5" x="2" y="262.5" height="30" style="fill:#fbfbfb" id="rect6141" transform="rotate(-90)"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomleft" transform="matrix(1,0,0,-1,0,460)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-bottom" transform="matrix(1,0,0,-1,0,460)"/>
@@ -1155,12 +1151,12 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#splitter-grip-focused" id="splitter-grip-pressed" transform="translate(10,0)"/>
 <g style="stroke:none" id="common-focused-left" transform="translate(-180,-162)">
 <rect width="2.5" x="270.5" y="1170" height="30" style="fill:#5d86c5" id="rect5116"/>
-<path style="fill:#fff" id="path5118" d="m 272,1170 v 30 h 1 v -30 z"/>
+<path style="fill:#fbfbfb" id="path5118" d="m 272,1170 v 30 h 1 v -30 z"/>
 <path style="fill-rule:evenodd;fill-opacity:0" id="path5121" d="m 270,1170 v 30 h 1 v -30 z"/>
 </g>
 <g style="stroke:none" id="common-focused-topleft" transform="translate(-180,-162)">
 <path style="fill:#5d86c5" id="path5125" d="m 48,1005.5 c -1.525022,0 -2.503213,0.9771 -2.4982,2.5 H 48 Z" transform="translate(225,162)"/>
-<path style="fill:#fff" id="path5127" d="m 273,1169 c -0.75,0 -1,0.25 -1,1 h 1 z"/>
+<path style="fill:#fbfbfb" id="path5127" d="m 273,1169 c -0.75,0 -1,0.25 -1,1 h 1 z"/>
 <path style="fill-opacity:0" id="path5129" d="m 273,1167 c -1.5,0 -3,1.5 -3,3 h 1 c 0,-1.125 0.875,-2 2,-2 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-left" id="common-focused-top" transform="matrix(0,1,-1,0,1130.9982,915)"/>
@@ -1214,10 +1210,10 @@
 <g style="stroke:none;color:#000" id="focus-top" transform="translate(288,1068.5)">
 <path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
 <g style="fill-opacity:.137" id="g5490">
-<path style="fill:#969696;fill-opacity:1" id="path4914" d="m 90,109.5 h 2.5 v -2 H 90 Z"/>
-<path style="fill:#969696;fill-opacity:1" id="path4922" d="m 95,109.5 h 2.5 v -2 H 95 Z"/>
-<path style="fill:#969696;fill-opacity:1" id="path4924" d="m 99.75,109.5 h 2.5 v -2 h -2.5 z"/>
-<path style="fill:#969696;fill-opacity:1" id="path4926" d="m 105,109.5 h 2.5 v -2 H 105 Z"/>
+<path style="fill:#a0a0a0;fill-opacity:1" id="path4914" d="m 90,109.5 h 2.5 v -2 H 90 Z"/>
+<path style="fill:#a0a0a0;fill-opacity:1" id="path4922" d="m 95,109.5 h 2.5 v -2 H 95 Z"/>
+<path style="fill:#a0a0a0;fill-opacity:1" id="path4924" d="m 99.75,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="fill:#a0a0a0;fill-opacity:1" id="path4926" d="m 105,109.5 h 2.5 v -2 H 105 Z"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" id="focus-right" xlink:href="#focus-top" transform="rotate(90,388,1188)"/>
