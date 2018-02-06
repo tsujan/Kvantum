@@ -1215,9 +1215,10 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menuitem-normal-left" id="menuitem-normal-right" transform="matrix(-1,0,0,1,496,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="menuitem-right-normal" transform="matrix(0,1,-1,0,806,582)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-toggled" id="menuitem-left-normal" transform="matrix(0,-1,1,0,-9,970)"/>
-<g style="stroke-width:3.5;stroke:none" id="header-separator">
+<g style="stroke:none" id="header-separator">
 <rect width="3" x="402.5" y="142.5" height="10" style="fill-opacity:0" id="header-separator0"/>
-<rect width="1" x="404.5" y="142.5" height="10" style="fill-opacity:.137" id="rect5280"/>
+<rect width="1" x="404.5" y="142.5" height="10" style="fill:#fff;fill-opacity:.275" id="rect5280"/>
+<rect width="1" x="403.5" y="142.5" height="10" style="fill-opacity:.196" id="rect1994"/>
 </g>
 <g style="stroke:none;line-height:normal;color:#000" id="focus-top" transform="translate(-33,1188.5)">
 <path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
