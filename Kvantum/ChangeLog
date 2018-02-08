@@ -11,6 +11,7 @@ V0.10.6
  * Make combo_focus_rect use the normal panel to draw a combo box with the keyboard focus.
  * A workaround for a Qt5 mess in painting the "clear" button of line-edits (the issue is visible in Fusion too).
  * Remove "foreach" with Qt5.
+ * Don't add the icon size to the size of check boxes or radio buttons when there's no icon.
 
 V0.10.5
 ---------

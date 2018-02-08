@@ -11279,7 +11279,7 @@ QSize Style::sizeFromContents(ContentsType type,
 
         int ih = pixelMetric(PM_ExclusiveIndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
+        s = sizeCalculated(f,fspec,lspec,sspec,opt->text, opt->icon.isNull() ? QSize() : opt->iconSize)
             + QSize(pixelMetric(PM_RadioButtonLabelSpacing), 0);
         s = s + QSize(pixelMetric(PM_ExclusiveIndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
@@ -11318,7 +11318,7 @@ QSize Style::sizeFromContents(ContentsType type,
 
         int ih = pixelMetric(PM_IndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
-          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,opt->iconSize)
+          s = sizeCalculated(f,fspec,lspec,sspec,opt->text, opt->icon.isNull() ? QSize() : opt->iconSize)
               + QSize(pixelMetric(PM_CheckBoxLabelSpacing), 0);
         s = s + QSize(pixelMetric(PM_IndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
