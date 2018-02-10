@@ -12,6 +12,7 @@ V0.10.6
  * A workaround for a Qt5 mess in painting the "clear" button of line-edits (the issue is visible in Fusion too).
  * Remove "foreach" with Qt5.
  * Don't add the icon size to the size of check boxes or radio buttons when there's no icon.
+ * Replaced QRegExp with QRegularExpression.
 
 V0.10.5
 ---------

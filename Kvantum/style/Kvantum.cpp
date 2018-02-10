@@ -3334,9 +3334,10 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
     maxTxt = sb->displayFormat();
     QString twoDigits = l.toString(99);
     /* take into account leading zeros */
-    QRegExp exp = QRegExp("hh|HH|mm|ss");
+    QRegularExpression exp;
+    exp.setPattern("hh|HH|mm|ss");
     maxTxt.replace(exp,twoDigits);
-    exp = QRegExp("h|H|m|s");
+    exp.setPattern("h|H|m|s");
     maxTxt.replace(exp,twoDigits);
     maxTxt.replace("zzz",l.toString(999));
     maxTxt.replace("z",l.toString(999));
@@ -3354,9 +3355,9 @@ static inline QString spinMaxText (const QAbstractSpinBox *sp)
     maxTxt.replace("ddd","eee");
     maxTxt.replace("MMM","fff");
     /* leading zeros */
-    exp = QRegExp("dd|MM");
+    exp.setPattern("dd|MM");
     maxTxt.replace(exp,twoDigits);
-    exp = QRegExp("d|M");
+    exp.setPattern("d|M");
     maxTxt.replace(exp,twoDigits);
     /* time zone */
     maxTxt.replace("t",sb->dateTime().toString("t"));

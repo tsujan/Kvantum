@@ -2176,7 +2176,7 @@ void KvantumManager::writeConfig()
             {
                 for (it = hackKeys.begin(); it != hackKeys.end(); ++it)
                 {   /* one "\\b" is enough because if "keyA" is in the file, "key" isn't in hackKeys */
-                    if (line.contains (QRegExp ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                    if (line.contains (QRegularExpression ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (hackKeys.value (it.key()));
                         hackKeys.remove (it.key());
@@ -2189,7 +2189,7 @@ void KvantumManager::writeConfig()
             {
                 for (it = generalKeys.begin(); it != generalKeys.end(); ++it)
                 {
-                    if (line.contains (QRegExp ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                    if (line.contains (QRegularExpression ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (generalKeys.value (it.key()));
                         generalKeys.remove (it.key());
@@ -2206,7 +2206,7 @@ void KvantumManager::writeConfig()
         {
             for (i = 0; i < lines.count(); ++i)
             {
-                if (lines.at (i).contains (QRegExp ("^\\s*\\[\\s*\\bHacks\\b\\s*\\]")))
+                if (lines.at (i).contains (QRegularExpression ("^\\s*\\[\\s*\\bHacks\\b\\s*\\]")))
                     break;
             }
             if (i == lines.count())
@@ -2216,7 +2216,7 @@ void KvantumManager::writeConfig()
             }
             for (j = i+1; j < lines.count(); ++j)
             {
-                if (lines.at (j).contains (QRegExp("^\\s*\\[")))
+                if (lines.at (j).contains (QRegularExpression ("^\\s*\\[")))
                     break;
             }
             while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j;
@@ -2230,7 +2230,7 @@ void KvantumManager::writeConfig()
         {
             for (i = 0; i < lines.count(); ++i)
             {
-                if (lines.at (i).contains (QRegExp ("^\\s*\\[\\s*%\\bGeneral\\b\\s*\\]")))
+                if (lines.at (i).contains (QRegularExpression ("^\\s*\\[\\s*%\\bGeneral\\b\\s*\\]")))
                     break;
             }
             if (i == lines.count())
@@ -2240,7 +2240,7 @@ void KvantumManager::writeConfig()
             }
             for (j = i+1; j < lines.count(); ++j)
             {
-                if (lines.at (j).contains (QRegExp("^\\s*\\[")))
+                if (lines.at (j).contains (QRegularExpression ("^\\s*\\[")))
                     break;
             }
             while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j;
