@@ -16,6 +16,7 @@ public:
     ComboBox (QWidget *parent = NULL) : QComboBox (parent)
     {
         setEditable (true);
+        setInsertPolicy (QComboBox::NoInsert);
         completer()->setCompletionMode (QCompleter::PopupCompletion);
 #if QT_VERSION >= 0x050200
         completer()->setFilterMode (Qt::MatchContains);
@@ -46,7 +47,7 @@ protected:
         else
         {
             /* return to the current index on focusing out
-               if no item starts with the current text */
+               if no item contains the current text */
 #if QT_VERSION >= 0x050200
             int indx = findText (currentText(), Qt::MatchContains);
 #else
