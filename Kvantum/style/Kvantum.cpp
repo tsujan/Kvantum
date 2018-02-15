@@ -58,6 +58,7 @@
 #include <QLibrary> // only for setGtkVariant()
 #include <QLayout> // only for forceSizeGrip
 #include <QDesktopWidget> // for positioning menus
+#include <QStandardPaths>
 //#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 #include <QSurfaceFormat>
@@ -277,16 +278,31 @@ Style::Style(bool useDark) : QCommonStyle()
 
   QString homeDir = QDir::homePath();
 
+  /* this is just for protection against a bad sudo */
   char * _xdg_config_home = getenv("XDG_CONFIG_HOME");
   if (!_xdg_config_home)
     xdg_config_home = QString("%1/.config").arg(homeDir);
   else
     xdg_config_home = QString(_xdg_config_home);
 
-  // load global config file
   QString theme;
   QString themeChooserFile = QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home);
-  if (QFile::exists(themeChooserFile))
+  if (!QFile::exists(themeChooserFile))
+  { // go to a global config file
+    themeChooserFile = QString();
+    QStringList confList = QStandardPaths::standardLocations(QStandardPaths::ConfigLocation);
+    confList.removeOne(xdg_config_home);
+    for (const QString &thisConf : static_cast<const QStringList&>(confList))
+    {
+      QString thisFile = QString("%1/Kvantum/kvantum.kvconfig").arg(thisConf);
+      if (QFile::exists(thisFile))
+      {
+        themeChooserFile = thisFile;
+        break;
+      }
+    }
+  }
+  if (!themeChooserFile.isEmpty())
   {
     QSettings themeChooser (themeChooserFile,QSettings::NativeFormat);
     if (themeChooser.status() == QSettings::NoError)

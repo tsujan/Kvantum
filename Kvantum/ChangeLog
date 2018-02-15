@@ -13,6 +13,7 @@ V0.10.6
  * Remove "foreach" with Qt5.
  * Don't add the icon size to the size of check boxes or radio buttons when there's no icon.
  * Replaced QRegExp with QRegularExpression.
+ * Support the global config files "$XDG_CONFIG_DIRS/Kvantum/kvantum.kvconfig". (For distros.)
 
 V0.10.5
 ---------

@@ -11,6 +11,7 @@
 #include <QFileDevice>
 #include <QTextStream>
 #include <QTimer>
+#include <QStandardPaths>
 #endif
 //#include <QDebug>
 
@@ -44,6 +45,7 @@ KvantumManager::KvantumManager (const QString lang, QWidget *parent) : QMainWind
     lastPath_ = QDir::home().path();
     process_ = new QProcess (this);
 
+    /* this is just for protection against a bad sudo */
     char * _xdg_config_home = getenv ("XDG_CONFIG_HOME");
     if (!_xdg_config_home)
         xdg_config_home = QString ("%1/.config").arg (QDir::homePath());
@@ -1693,7 +1695,26 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     QString theme;
     QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
     bool noConfig = false;
-    if (QFile::exists (configFile))
+    bool isGlobalConfig = false;
+    if (!QFile::exists (configFile))
+    { // go to a global config file
+        configFile = QString();
+#if QT_VERSION >= 0x050000
+        QStringList confList = QStandardPaths::standardLocations (QStandardPaths::ConfigLocation);
+        confList.removeOne (xdg_config_home);
+        for (const QString &thisConf : static_cast<const QStringList&>(confList))
+        {
+            QString thisFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (thisConf);
+            if (QFile::exists (thisFile))
+            { // my be a user config seen by root because of a bad sudo but won't be written to
+                configFile = thisFile;
+                isGlobalConfig = true;
+                break;
+            }
+        }
+#endif
+    }
+    if (!configFile.isEmpty())
     {
         QSettings settings (configFile, QSettings::NativeFormat);
         if (settings.contains ("theme"))
@@ -1720,7 +1741,8 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                     kvconfigTheme_ += "#";
                     theme += modifiedSuffix_;
                     ui->comboBox->setCurrentIndex (index);
-                    settings.setValue ("theme", kvconfigTheme_); // correct the config file
+                    if (!isGlobalConfig)
+                        settings.setValue ("theme", kvconfigTheme_); // correct the config file
                     QCoreApplication::processEvents();
                     restyleWindow();
                     if (process_->state() == QProcess::Running)
@@ -1730,13 +1752,15 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                 {
                     if (list.contains ("Kvantum" + modifiedSuffix_))
                     {
-                        settings.setValue ("theme", "Default#");
+                        if (!isGlobalConfig)
+                            settings.setValue ("theme", "Default#");
                         kvconfigTheme_ = "Default#";
                         theme = "Kvantum" + modifiedSuffix_;
                     }
                     else
                     {
-                        settings.remove ("theme");
+                        if (!isGlobalConfig)
+                            settings.remove ("theme");
                         kvconfigTheme_ = QString();
                         theme = kvDefault_;
                     }
