@@ -1,16 +1,16 @@
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -940,7 +940,7 @@ void Style::polish(QWidget *widget)
   /*
      It's better to add the hover effect selectively and only to
      the following widgets (some of which are dealt with later):
-     
+
        QAbstractButton (all kinds of buttons)
        QAbstractSlider
        Direct children of QAbstractItemView (view items)
@@ -952,7 +952,7 @@ void Style::polish(QWidget *widget)
        QTabBar
        QAbstractSpinBox
        QScrollBar
-     
+
      We don't add the hover efffect to QLineEdit, QAbstractScrollArea
      and non-checkable QGroupBox.
   */
@@ -1452,17 +1452,17 @@ void Style::polish(QWidget *widget)
       foreach (QLabel *label, widget->findChildren<QLabel*>())
       {
         QPalette lPalette = label->palette();
-        palette.setColor(QPalette::Active, QPalette::ButtonText, tCol);
-        palette.setColor(QPalette::Active, QPalette::WindowText, tCol);
-        palette.setColor(QPalette::Active, QPalette::Text, tCol);
-        palette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
-        palette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
-        palette.setColor(QPalette::Inactive, QPalette::Text, tCol);
+        lPalette.setColor(QPalette::Active, QPalette::ButtonText, tCol);
+        lPalette.setColor(QPalette::Active, QPalette::WindowText, tCol);
+        lPalette.setColor(QPalette::Active, QPalette::Text, tCol);
+        lPalette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
+        lPalette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
+        lPalette.setColor(QPalette::Inactive, QPalette::Text, tCol);
         tCol.setAlpha(102); // 0.4 * tCol.alpha()
-        palette.setColor(QPalette::Disabled, QPalette::Text,tCol);
-        palette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
-        palette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
-        label->setPalette(palette);
+        lPalette.setColor(QPalette::Disabled, QPalette::Text,tCol);
+        lPalette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
+        lPalette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
+        label->setPalette(lPalette);
       }
     }
   }
@@ -1978,7 +1978,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         tabbar->update(tabHoverRect_);
         tabHoverRect_ = QRect();
       }
-        
+
     }
     break;
 
@@ -3220,7 +3220,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.left = qMin(fspec.left, fspec1.left);
             fspec.right = qMin(fspec.right, fspec1.right);
             fspec.top = qMin(fspec.top, fspec1.top);
-            fspec.bottom = qMin(fspec.bottom, fspec1.bottom); 
+            fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
             fspec.hasCapsule = true;
             Qt::ArrowType aType = opt ? opt->arrowType : tb->arrowType();
             QTransform m;
@@ -3806,7 +3806,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameMenu : {return;}
     case PE_PanelMenu : {
       /* At least toolbars may also use this, so continue
-         only if it's really a menu. LibreOffice's menuitems 
+         only if it's really a menu. LibreOffice's menuitems
          would have no background without this either. */
       if ((widget // it's NULL in the case of QML menus
            && !qobject_cast<const QMenu*>(widget))
@@ -6136,7 +6136,7 @@ void Style::drawControl(ControlElement element,
               lspec.bottom = qMin(lspec.bottom,2);
               lspec.tispace = qMin(lspec.tispace,2);
               lspec.boldFont = false;
-              
+
               sspec.incrementW = false;
 
               /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
@@ -6731,7 +6731,7 @@ void Style::drawControl(ControlElement element,
                           r);
         }
 
-        int icnSize = iconSize.isValid() ? 
+        int icnSize = iconSize.isValid() ?
                         qMax(iconSize.width(), iconSize.height())
                         : pixelMetric(PM_TabBarIconSize);
 
@@ -6752,7 +6752,7 @@ void Style::drawControl(ControlElement element,
                elide it but respect the elide mode when present. */
             QFontMetrics fm(F);
             txt = fm.elidedText(txt, (tb && tb->elideMode() != Qt::ElideNone)
-                                       ? tb->elideMode() 
+                                       ? tb->elideMode()
                                        : Qt::ElideRight,
                                 txtWidth);
           }
@@ -7079,7 +7079,7 @@ void Style::drawControl(ControlElement element,
               r.adjust(empty,0,0,0);
             else
               r.adjust(0,0,-empty,0);
-              
+
           }
 
           // take care of thin indicators
@@ -7104,7 +7104,7 @@ void Style::drawControl(ControlElement element,
                     r.adjust(r.width()-h,0,0,0);
                   else
                     r.setWidth(h);
-                    
+
                 }
                 thin = true;
               }
@@ -7126,7 +7126,7 @@ void Style::drawControl(ControlElement element,
                   r.adjust(r.width()-fspec.left-fspec.right,0,0,0);
                 else
                   r.setWidth(fspec.left+fspec.right);
-                  
+
               }
               thin = true;
             }
@@ -7144,7 +7144,7 @@ void Style::drawControl(ControlElement element,
         { // busy progressbar
           QWidget *wi = (QWidget *)widget;
           int animcount = progressbars_[wi];
-          int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);         
+          int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);
           QRect R = r.adjusted(animcount,0,0,0);
           if (isVertical)
           {
@@ -7159,7 +7159,7 @@ void Style::drawControl(ControlElement element,
               R.setX(r.x()+r.width()-(animcount%r.width()));
             else
               R.setX(r.x()+(animcount%r.width()));
-              
+
           }
           if (!isRounded)
             R.setWidth(pm);
@@ -7174,7 +7174,7 @@ void Style::drawControl(ControlElement element,
           {
             fspec.top = fspec.bottom = r.height()/2;
           }
-            
+
           if (R.x()+R.width() > r.x()+r.width())
           {
             R.setWidth(r.x() + r.width() - R.x());
@@ -8876,7 +8876,7 @@ void Style::drawControl(ControlElement element,
           tRect.setRect(tRect.y(), tRect.x(),
                         tRect.height(), tRect.width());
           painter->save();
-          QTransform m;          
+          QTransform m;
           m.scale(1,-1);
           m.rotate(-90);
           painter->setTransform(m, true);
@@ -8905,7 +8905,7 @@ void Style::drawControl(ControlElement element,
              if it isn't mirrored horizontally here */
           tRect.setRect(h-tRect.width()-tRect.x(), tRect.y(), tRect.width(), tRect.height());
         }
-        
+
         /* text margins are already taken into
            account with PM_DockWidgetTitleMargin */
         fspec.left=fspec.right=fspec.top=fspec.bottom=0;
@@ -10088,7 +10088,7 @@ void Style::drawComplexControl(ComplexControl control,
 
         renderElement(painter,"dial"+suffix,dial);
         renderElement(painter,"dial-handle"+suffix,handle);
-        
+
         if (const QDial *d = qobject_cast<const QDial*>(widget))
         {
           if (d->notchesVisible())
@@ -10525,7 +10525,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return -so;
     }
 
-    case PM_MenuHMargin : 
+    case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
       const frame_spec fspec = getFrameSpec("Menu");
@@ -10692,7 +10692,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_TabBarIconSize :
     case PM_ListViewIconSize :
-    case PM_ButtonIconSize : return tspec_.button_icon_size; 
+    case PM_ButtonIconSize : return tspec_.button_icon_size;
     case PM_SmallIconSize : return tspec_.small_icon_size;
 
     case PM_IconViewIconSize:
@@ -11230,7 +11230,7 @@ QSize Style::sizeFromContents(ContentsType type,
             f.setBold(true);
             s = s + textSize(f, txt, false) - s1;
           }
-          // consider a global min. width for push buttons as is done in "qcommonstyle.cpp" 
+          // consider a global min. width for push buttons as is done in "qcommonstyle.cpp"
           s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
                                    + 6*QFontMetrics(QApplication::font()).width("W"),
                                  s.height()));
@@ -11572,7 +11572,7 @@ QSize Style::sizeFromContents(ContentsType type,
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                            opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize),
                            Qt::ToolButtonTextBesideIcon,
-                           true); // for some reason, the real multiline text height is needed 
+                           true); // for some reason, the real multiline text height is needed
 
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast
@@ -11931,7 +11931,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt)
       { // adapted from Qt -> qcommonstyle.cpp to draw focus rect only around contents
-        bool isRadio = (element == SE_RadioButtonFocusRect); 
+        bool isRadio = (element == SE_RadioButtonFocusRect);
         QRect r;
         if (opt->icon.isNull() && opt->text.isEmpty())
         {
@@ -11954,7 +11954,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           else f = QApplication::font();
           if (lspec.boldFont) f.setBold(true);
           r = itemTextRect(QFontMetrics(f),
-                           cr, 
+                           cr,
                            Qt::AlignAbsolute | Qt::AlignLeft | Qt::AlignVCenter
                              | (styleHint(SH_UnderlineShortcut, opt, widget) ?
                                     Qt::TextShowMnemonic : Qt::TextHideMnemonic),
@@ -12117,7 +12117,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         if (!tspec_.vertical_spin_indicators)
         {
           QString maxTxt = spinMaxText(p);
-          if (maxTxt.isEmpty() 
+          if (maxTxt.isEmpty()
               || option->rect.width() < textSize(p->font(),maxTxt,false).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)

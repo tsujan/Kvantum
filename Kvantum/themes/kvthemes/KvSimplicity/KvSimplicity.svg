@@ -272,13 +272,13 @@
 <rect width="2.5" x="-815" y="19.749872" height="7.2489886" id="menu-shadow-hint-left" transform="rotate(-90)"/>
 </g>
 </g>
-<g style="fill:#3daee9;fill-rule:evenodd;stroke:none" id="group-normal-left" transform="matrix(0.66666667,0,0,1,87.333231,-148.03986)">
+<g style="fill:#3daee9;fill-rule:evenodd;stroke:none" id="group-normal-left" transform="matrix(0.66666667,0,0,1,87.333231,-147.49986)">
 <rect width="6" x="-106" y="-1148.5" height="30" style="fill-opacity:0" id="rect5991" transform="scale(-1)"/>
-<rect width="1.5" x="102.25" y="1118.5" height="30" style="fill:#828282" id="rect5993"/>
+<rect width="1.5" x="101.5" y="1118.5" height="30" style="opacity:.33;fill:#000" id="rect5993"/>
 </g>
-<g style="fill:#3daee9;stroke:none" id="group-normal-topleft" transform="matrix(0.66666667,0,0,0.66666667,87.333231,224.79347)">
+<g style="fill:#3daee9;stroke:none" id="group-normal-topleft" transform="matrix(0.66666667,0,0,0.66666667,87.333231,225.33347)">
 <rect width="6" x="-106" y="-1118.5" height="6" style="fill-rule:evenodd;fill-opacity:0" id="rect6009" transform="scale(-1)"/>
-<path style="fill:#828282" id="path6011" d="m 106,1114.75 c -1.89453,0 -3.75,1.8438 -3.75,3.75 h 1.5 c 0,-1.1953 1.125,-2.25 2.25,-2.25 z"/>
+<path style="opacity:.33;fill:#000" id="path6011" d="m 106,1114 c -2.62485,0 -4.49985,1.875 -4.49985,4.5002 h 1.5 c 0,-1.6875 1.32993,-3 3,-3 z"/>
 </g>
 <g style="fill-rule:evenodd">
 <circle cx="330" cy="743.5" style="fill:url(#radialGradient5109);stroke:url(#linearGradient5114)" id="slidercursor-normal" r="8.5"/>
@@ -304,12 +304,12 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-normal" id="arrow-left-normal" transform="matrix(0,-1,1,0,42.107909,333.91226)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="arrow-right-pressed" transform="matrix(0,1,-1,0,634.80701,133.80701)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#arrow-up-pressed" id="arrow-left-pressed" transform="matrix(0,-1,1,0,129.80703,423.80701)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-top" transform="matrix(0,1,-1,0,1158.46,812.46024)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-topright" transform="matrix(0,1,-1,0,1158.46,812.46024)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-right" transform="matrix(-1,0,0,-1,346,1970.9201)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-bottomright" transform="matrix(-1,0,0,-1,346,1970.9201)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-bottom" transform="matrix(0,-1,1,0,-812.4602,1158.4599)"/>
-<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-bottomleft" transform="matrix(0,-1,1,0,-812.4602,1158.4599)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-top" transform="rotate(90,173,986)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-topright" transform="rotate(90,173,986)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-right" transform="rotate(180,173,986)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-bottomright" transform="rotate(180,173,986)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-left" id="group-normal-bottom" transform="rotate(-90,173,986)"/>
+<use width="450" x="0" y="0" height="1230" xlink:href="#group-normal-topleft" id="group-normal-bottomleft" transform="rotate(-90,173,986)"/>
 <ellipse cx="68" cy="208" rx="7.5" ry="7.5" style="fill:#fafafa;stroke:#a0a0a0;color:#000" id="radio-focused"/>
 <rect width="15" x="224.49977" y="-215.50024" height="15" style="fill:#fafafa;stroke:#a0a0a0;color:#000" id="checkbox-focused" transform="scale(1,-1)"/>
 <g style="color:#000" id="checkbox-tristate-focused" transform="translate(38,-269.5)">

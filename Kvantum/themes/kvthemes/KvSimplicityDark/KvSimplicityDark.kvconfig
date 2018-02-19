@@ -39,6 +39,7 @@ button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=true
 combo_menu=true
+combo_focus_rect=true
 groupbox_top_label=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
@@ -58,8 +59,8 @@ light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
 mid.color=#303030
-highlight.color=#4a90d9
-inactive.highlight.color=#737373
+highlight.color=#416fa1
+inactive.highlight.color=#6e6e6e
 tooltip.base.color=black
 text.color=white
 window.text.color=white
@@ -341,8 +342,8 @@ frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
-frame.element=none
-interior.element=none
+frame.element=menubar
+interior.element=menubar
 frame.expansion=0
 
 [MenuBarItem]
