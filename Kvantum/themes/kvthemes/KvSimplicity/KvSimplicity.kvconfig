@@ -40,6 +40,7 @@ button_icon_size=16
 toolbar_icon_size=16
 combo_as_lineedit=true
 combo_menu=true
+combo_focus_rect=true
 inline_spin_indicators=true
 animate_states=true
 

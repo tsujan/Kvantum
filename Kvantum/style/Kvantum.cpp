@@ -15674,16 +15674,19 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       return QIcon(pm);
     }
     case SP_LineEditClearButton : {
-      /* Unfortunately, Qt does a weird thing in qlineedit_p.cpp -> QLineEditIconButton::paintEvent():
+      /* Unfortunately, Qt does an odd thing in qlineedit_p.cpp -> QLineEditIconButton::paintEvent():
          it sets the icon size to 32px when the line-edit height is greater than 34px. That's very
          wrong because it ignores the fact that margins may not be the same in different styles --
          not all of them are like Fusion and, even with Fusion, it can result in a blurred icon.
          To prevent a blurred 32-px "clear" icon, we explicitly set the size to 32px when needed. */
-      if (qobject_cast<const QLineEdit*>(widget)
-          /* Here, we can't even use the line-edit height because it isn't set yet. What a mess! */
-          && sizeFromContents(CT_LineEdit,nullptr,QSize(),widget).height() < 34)
+      if (qobject_cast<const QLineEdit*>(widget))
       {
-        break;
+        /* Here, we should consider the possibility that a line-edit may be inside a combo-box
+           and so, its height may be greater than that of a simple line-edit. Again, this isn't
+           considered by Qt devs; they really think all Qt styles should be as poor as Fusion! */
+        QWidget *p = qobject_cast<QComboBox*>(getParent(widget,1));
+        int wh = p != nullptr ? p->sizeHint().height() : widget->sizeHint().height();
+        if (wh < 34) break;
       }
       QIcon icn;
       QString str = QApplication::layoutDirection() == Qt::RightToLeft ? "edit-clear-locationbar-ltr"
