@@ -16,10 +16,17 @@ int main(int argc, char *argv[])
     QStringList langs (QLocale::system().uiLanguages());
     QString lang; // bcp47Name() doesn't work under vbox
     if (!langs.isEmpty())
-        lang = langs.first().split (QLatin1Char ('-')).first();
+        lang = langs.first().replace ('-', '_');
 
     QTranslator qtTranslator;
-    qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+    if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath)))
+    { // not needed; doesn't happen
+        if (!langs.isEmpty())
+        {
+            lang = langs.first().split (QLatin1Char ('-')).first();
+            qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+        }
+    }
     a.installTranslator (&qtTranslator);
 
     QTranslator KMTranslator;

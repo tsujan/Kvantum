@@ -1,16 +1,16 @@
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -109,7 +109,7 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
   /* go to the parent config if this key isn't found here
      but leave the text color to be set by the color scheme */
   if (parentConfig_
-      && key != "text.normal.color" && key != "text.focus.color" && key != "text.press.color" && key != "text.toggle.color"
+      && !key.contains(".normal.") && !key.contains(".focus.") && !key.contains(".press.") && !key.contains(".toggle.")
       && key != "text.bold" && key != "text.italic")
   {
     i = parentConfig_->getValue(group, "inherits").toString();
@@ -329,7 +329,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
 
       v = getValue(elementName,"text.press.inactive.color", i);
       r.pressInactiveColor = v.toString();
- 
+
       v = getValue(elementName,"text.toggle.color", i);
       r.toggleColor = v.toString();
 

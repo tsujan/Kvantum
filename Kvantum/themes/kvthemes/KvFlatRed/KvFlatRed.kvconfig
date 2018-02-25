@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark flat theme with reddish elements that supports window translucency
+comment=A dark flat theme with reddish elements
 x11drag=all
 alt_mnemonic=true
 left_tabs=false
@@ -58,7 +58,7 @@ button.color=#555555
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#303030
+mid.color=#3c3c3c
 highlight.color=#a21215
 inactive.highlight.color=#890f11
 tooltip.base.color=black
@@ -194,6 +194,8 @@ frame.left=4
 frame.right=4
 text.press.color=white
 text.toggle.color=white
+min_width=4font
+min_height=2.0font
 
 [TabFrame]
 inherits=PanelButtonCommand

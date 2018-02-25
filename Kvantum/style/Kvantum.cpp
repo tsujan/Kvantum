@@ -2173,7 +2173,7 @@ void Style::unpolish(QApplication *app)
 void Style::drawBg(QPainter *p, const QWidget *widget) const
 {
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
-    return; // Plasma FIXME needed?
+    return; // Plasma FIXME: needed?
   QRect bgndRect(widget->rect());
   interior_spec ispec = getInteriorSpec("DialogTranslucent");
   if (ispec.element.isEmpty())
@@ -2390,55 +2390,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         animatedWidget_ = nullptr;
       }
-      if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
+      if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (!ab->isDown() && !ab->isChecked())
-        {
-          animationStartState_ = "normal";
-          if (isWidgetInactive(w))
-            animationStartState_.append("-inactive");
-          animatedWidget_ = w;
-          animationOpacity_ = 0;
-          opacityTimer_->start(ANIMATION_FRAME);
-        }
-        else if (ab->isChecked())
-        {
-          animationStartState_ = "toggled";
-          if (isWidgetInactive(w))
-            animationStartState_.append("-inactive");
-        }
-      }
-      else if (qobject_cast<QCheckBox*>(o) || qobject_cast<QRadioButton*>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (!ab->isChecked())
-          animationStartState_ = "-normal";
-        else
-        {
-          if (QCheckBox *cb = qobject_cast<QCheckBox*>(o))
-          {
-            if (cb->checkState() == Qt::PartiallyChecked)
-              animationStartState_ = "-tristate-normal";
-            else
-              animationStartState_ = "-checked-normal";
-          }
-          else
-           animationStartState_ = "-checked-normal";
-        }
-        if (isWidgetInactive(w))
-          animationStartState_.append("-inactive");
         animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      }
-      else if (qobject_cast<QGroupBox*>(o))
-      { // no animation; just for getting the next start state
-        if (animatedWidget_ != w)
-        {
-          animatedWidget_ = w;
-          animationOpacity_ = 100;
-        }
+        /* the animations are started/stopped inside
+           the drawing functions by using styleObject */
       }
       else if (qobject_cast<QComboBox*>(o))
       {
@@ -2477,6 +2433,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
+        if (!animationStartState_.startsWith("c-toggled")
+            && !animationStartState_.startsWith("normal"))
+        { // it was hidden or another widget was interacted with  -- there's no other possibility
+          animationStartState_ = "normal";
+          if (isWidgetInactive(w))
+            animationStartState_.append("-inactive");
+        }
         animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
@@ -2504,6 +2467,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             opacityTimerOut_->stop();
             animationOpacityOut_ = 100;
             animatedWidgetOut_ = nullptr;
+            /* although there will be no animation after this, animationStartStateOut_ doesn't need
+               to be set here because it's only used with QEvent::FocusOut and will be set there */
             break;
           }
           if (animatedWidget_ && animatedWidget_ != w)
@@ -2556,6 +2521,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_ = nullptr;
+          animationStartState_ = "normal"; // should be set; no animation after this
           break;
         }
         if (animatedWidgetOut_ && opacityTimerOut_->isActive())
@@ -2594,17 +2560,16 @@ bool Style::eventFilter(QObject *o, QEvent *e)
              && !(tspec_.combo_as_lineedit
                   && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
-      if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
-      {
-        QAbstractButton *ab = qobject_cast<QAbstractButton*>(o);
-        if (ab->isCheckable() && ab->isChecked())
-          break;
-      }
-      if (!opacityTimer_->isActive() && !qobject_cast<QGroupBox*>(o))
+      if (!opacityTimer_->isActive())
       {
         animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        /* button animations are started/stopped inside their drawing functions
+           by using styleObject (groupboxes are always checkable here) */
+        if (!qobject_cast<QAbstractButton*>(o) && !qobject_cast<QGroupBox*>(o))
+        {
+          animationOpacity_ = 0;
+          opacityTimer_->start(ANIMATION_FRAME);
+        }
       }
     }
     break;
@@ -2615,34 +2580,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       break;
     if (w && w->isEnabled() && tspec_.animate_states)
     {
-      if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
-      { // includes checkboxes and radio buttons too
-        if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
-        }
-        if (qobject_cast<QPushButton*>(o) || qobject_cast<QToolButton*>(o))
-        {
-          if ((!ab->isCheckable() && ab->isDown()) || ab->isChecked())
-          {
-            if (!ab->isCheckable() && ab->isDown())
-              animationStartState_ = "pressed";
-            else
-              animationStartState_ = "toggled";
-          }
-          else
-            animationStartState_ = "pressed";
-          if (isWidgetInactive(w))
-            animationStartState_.append("-inactive");
-        }
-        animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
-      } // FIXME: Also take "autoExclusive" into account?
-      else if (qobject_cast<QGroupBox*>(o))
+      if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
         if (animatedWidget_ && animatedWidget_ != w
             && opacityTimer_->isActive())
@@ -2652,8 +2590,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animatedWidget_->update();
         }
         animatedWidget_ = w;
-        animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
       }
       else if ((qobject_cast<QComboBox*>(o) // impossible because of popup
                 && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
@@ -2684,21 +2620,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         && !qobject_cast<QAbstractSpinBox*>(o)
         && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o))
     {
-      if (QAbstractButton *ab = qobject_cast<QAbstractButton*>(o))
-      {
-        if (qobject_cast<QCheckBox*>(o) || qobject_cast<QRadioButton*>(o)
-            || (ab->isCheckable() && ab->isChecked())) // from toggled to toggled
-        {
-          break;
-        }
-      }
-      else if (qobject_cast<QGroupBox*>(o))
-        break;
       /* we don't need to stop animation here because
          no other widget could have been animated */
       animatedWidget_ = w;
-      animationOpacity_ = 0;
-      opacityTimer_->start(ANIMATION_FRAME);
+      if (!qobject_cast<QAbstractButton*>(o) && !qobject_cast<QGroupBox*>(o))
+      {
+        animationOpacity_ = 0;
+        opacityTimer_->start(ANIMATION_FRAME);
+      }
     }
     break;
   }
@@ -2804,6 +2733,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::Show:
     if (w)
     {
+      if (animatedWidget_ && (w->windowType() == Qt::Popup
+                              || w->windowType() == Qt::ToolTip))
+      {
+        popupOrigins_.insert(w, animatedWidget_);
+      }
+
       if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
       {
         if (pb->maximum() == 0 && pb->minimum() == 0)
@@ -3103,6 +3038,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
         break;
       }
+      else if (w->windowType() == Qt::Popup
+               || w->windowType() == Qt::ToolTip)
+      { // let the popup origin have a fade-out animation
+        animatedWidget_ = popupOrigins_.value(w);
+        popupOrigins_.remove(w);
+      }
       /* let the state animation continue (not necessary but useful
          for better flash prevention -- see FocusIn and FocusOut) */
       else if ((animatedWidget_ == w && opacityTimer_->isActive())
@@ -3122,19 +3063,27 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (progressbars_.size() == 0)
           progressTimer_->stop();
       }
-      else
+      else if (tspec_.animate_states)
       {
-        if (animatedWidget_ == w)
+        if (w->windowType() == Qt::Popup
+            || w->windowType() == Qt::ToolTip)
         {
-          opacityTimer_->stop();
-          animatedWidget_ = nullptr;
-          animationOpacity_ = 100;
+          popupOrigins_.remove(w);
         }
-        if (animatedWidgetOut_ == w)
+        else // popups aren't animated
         {
-          opacityTimerOut_->stop();
-          animatedWidgetOut_ = nullptr;
-          animationOpacityOut_ = 100;
+          if (animatedWidget_ == w)
+          {
+            opacityTimer_->stop();
+            animatedWidget_ = nullptr;
+            animationOpacity_ = 100;
+          }
+          if (animatedWidgetOut_ == w)
+          {
+            opacityTimerOut_->stop();
+            animatedWidgetOut_ = nullptr;
+            animationOpacityOut_ = 100;
+          }
         }
       }
     }
@@ -4275,7 +4224,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        QString pbStatus = status;
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
         {
           if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
@@ -4291,7 +4239,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               fspec.capsuleH = 0;
             else if (fspec.capsuleH == 2)
               fspec.capsuleH = rtl ? 1 : -1;
-            // don't press the button if only its arrow is pressed
+            /* NOTE: The following lines are commented out because separating the arrow
+                     and button states from each other creates an unnatural look. */
+
+            /*// don't press the button if only its arrow is pressed
             pbStatus = (option->state & State_Enabled) ?
                          (option->state & State_Sunken) && tb->isDown() ? "pressed" :
                            (option->state & State_Selected) && tb->isDown() ? "toggled" :
@@ -4309,7 +4260,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             if (option->state & State_On) // it may be checkable
               pbStatus = "toggled";
             if (isWidgetInactive(widget))
-              pbStatus.append("-inactive");
+              pbStatus.append("-inactive");*/
           }
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
@@ -4323,63 +4274,85 @@ void Style::drawPrimitive(PrimitiveElement element,
                    0);
         }
 
-        bool animate(widget->isEnabled() && animatedWidget_ == widget);
+        QObject *styleObject = option->styleObject;
+        QString animationStartState;
+        if (styleObject)
+          animationStartState = styleObject->property("_kv_state").toString();
+        bool animate(widget->isEnabled() && animatedWidget_ == widget
+                     && !animationStartState.isEmpty());
+        if (animate && animationStartState == status)
+        {
+          if (opacityTimer_->isActive())
+            opacityTimer_->stop();
+          animationOpacity_ = 0;
+          animate = false;
+        }
         if (tb->autoRaise())
           autoraise = true;
-        if (!autoraise || !pbStatus.startsWith("normal") || drawRaised)
+        if (!autoraise || !status.startsWith("normal") || drawRaised)
         {
           if (animate)
           {
-            if (animationStartState_ == pbStatus)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100
-                     && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
+            if (!opacityTimer_->isActive())
             {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_,0,0,0,0,0,drawRaised);
+              animationOpacity_ = 0;
+              opacityTimer_->start(ANIMATION_FRAME);
+            }
+            if (animationOpacity_ < 100
+                && (!autoraise || !animationStartState.startsWith("normal") || drawRaised))
+            {
+              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState,0,0,0,0,0,drawRaised);
               if (!fillWidgetInterior)
-                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_,drawRaised);
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState,drawRaised);
             }
             painter->save();
             painter->setOpacity((qreal)animationOpacity_/100);
           }
-          renderFrame(painter,r,fspec,fspec.element+"-"+pbStatus,0,0,0,0,0,drawRaised);
+          renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,drawRaised);
           if (!fillWidgetInterior)
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+pbStatus,drawRaised);
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,drawRaised);
           if (animate)
           {
             painter->restore();
             if (animationOpacity_ >= 100)
-              animationStartState_ = pbStatus;
+              styleObject->setProperty("_kv_state", status);
           }
+          else if (styleObject)
+            styleObject->setProperty("_kv_state", status);
           if (fillWidgetInterior)
-            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(pbStatus.contains("-inactive")
+            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
                                                                            ? QPalette::Inactive
                                                                            : QPalette::Active,
                                                                          QPalette::Button));
           hasPanel = true;
         }
-        // fade out animation
-        else if (animate)
+        // auto-raised fade out animation
+        else if (animate && !animationStartState.startsWith("normal"))
         {
-          if (animationStartState_ == pbStatus)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
+          if (!opacityTimer_->isActive())
+          {
+            animationOpacity_ = 0;
+            opacityTimer_->start(ANIMATION_FRAME);
+          }
+          if (animationOpacity_ < 100)
           {
             painter->save();
             painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
             if (!fillWidgetInterior)
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
             painter->restore();
             if (fillWidgetInterior)
-              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(pbStatus.contains("-inactive")
+              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
                                                                              ? QPalette::Inactive
                                                                              : QPalette::Active,
                                                                            QPalette::Button));
           }
           if (animationOpacity_ >= 100)
-            animationStartState_ = pbStatus;
+            styleObject->setProperty("_kv_state", status);
         }
+        else if (styleObject)
+          styleObject->setProperty("_kv_state", status);
 
         /*if (!isHorizontal && !withArrow)
           painter->restore();*/
@@ -4472,15 +4445,31 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+        QObject *styleObject = option->styleObject;
+        QString animationStartState;
+        if (styleObject)
+          animationStartState = styleObject->property("_kv_state").toString();
         bool animate(widget && animatedWidget_ == widget
+                     && !animationStartState.isEmpty()
+                     && animationStartState != suffix
                      && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
                      && !qobject_cast<const QAbstractScrollArea*>(widget));
+        if (animate && animationStartState == suffix)
+        {
+          if (opacityTimer_->isActive())
+            opacityTimer_->stop();
+          animationOpacity_ = 0;
+          animate = false;
+        }
         if (animate)
         {
-          if (animationStartState_ == suffix)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-            renderElement(painter, ispec.element+animationStartState_, option->rect);
+          if (!opacityTimer_->isActive())
+          {
+            animationOpacity_ = 0;
+            opacityTimer_->start(ANIMATION_FRAME);
+          }
+          if (animationOpacity_ < 100)
+            renderElement(painter, ispec.element+animationStartState, option->rect);
           painter->save();
           painter->setOpacity((qreal)animationOpacity_/100);
         }
@@ -4489,8 +4478,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           painter->restore();
           if (animationOpacity_ >= 100)
-            animationStartState_ = suffix;
+            styleObject->setProperty("_kv_state", suffix);
         }
+        else if (styleObject)
+          styleObject->setProperty("_kv_state", suffix);
       }
       else
       {
@@ -4551,15 +4542,30 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+        QObject *styleObject = option->styleObject;
+        QString animationStartState;
+        if (styleObject)
+          animationStartState = styleObject->property("_kv_state").toString();
         bool animate(widget && animatedWidget_ == widget
-                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+                     && !animationStartState.isEmpty()
+                     && animationStartState != suffix
                      && !qobject_cast<const QAbstractScrollArea*>(widget));
+        if (animate && animationStartState == suffix)
+        {
+          if (opacityTimer_->isActive())
+            opacityTimer_->stop();
+          animationOpacity_ = 0;
+          animate = false;
+        }
         if (animate)
         {
-          if (animationStartState_ == suffix)
-            animationOpacity_ = 100;
-          else if (animationOpacity_ < 100)
-            renderElement(painter, ispec.element+animationStartState_, option->rect);
+          if (!opacityTimer_->isActive())
+          {
+            animationOpacity_ = 0;
+            opacityTimer_->start(ANIMATION_FRAME);
+          }
+          if (animationOpacity_ < 100)
+            renderElement(painter, ispec.element+animationStartState, option->rect);
           painter->save();
           painter->setOpacity((qreal)animationOpacity_/100);
         }
@@ -4568,8 +4574,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           painter->restore();
           if (animationOpacity_ >= 100)
-            animationStartState_ = suffix;
+            styleObject->setProperty("_kv_state", suffix);
         }
+        else if (styleObject)
+          styleObject->setProperty("_kv_state", suffix);
       }
       else
       {
@@ -5825,19 +5833,24 @@ void Style::drawPrimitive(PrimitiveElement element,
               painter->setOpacity(DISABLED_OPACITY);
             }
           }
-          bool animate(widget->isEnabled() && animatedWidget_ == widget);
+          /* just follow the PE_PanelButtonTool animation */
+          QObject *styleObject = option->styleObject;
+          QString animationStartState;
+          if (styleObject)
+            animationStartState = styleObject->property("_kv_state").toString();
+          bool animate(widget->isEnabled() && animatedWidget_ == widget
+                       && !animationStartState.isEmpty()
+                       && animationStartState != status);
           if (!autoraise || !status.startsWith("normal") || drawRaised)
           {
             if (animate)
             {
-              if (animationStartState_ == status)
-                animationOpacity_ = 100;
-              else if (animationOpacity_ < 100
-                       && (!autoraise || !animationStartState_.startsWith("normal") || drawRaised))
+              if (animationOpacity_ < 100
+                  && (!autoraise || !animationStartState.startsWith("normal") || drawRaised))
               {
-                renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
+                renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
                 if (!fillWidgetInterior)
-                  renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
+                  renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
               }
               painter->save();
               painter->setOpacity((qreal)animationOpacity_/100);
@@ -5846,32 +5859,21 @@ void Style::drawPrimitive(PrimitiveElement element,
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
             renderFrame(painter,r,fspec,fspec.element+"-"+status);
             if (animate)
-            {
               painter->restore();
-              if (animationOpacity_ >= 100)
-                animationStartState_ = status;
-            }
             if (fillWidgetInterior)
               painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
                                                                              ? QPalette::Inactive
                                                                              : QPalette::Active,
                                                                            QPalette::Button));
           }
-          // fade out animation
-          else if (animate)
+          // auto-raised fade out animation
+          else if (animate && animationOpacity_ < 100  && !animationStartState.startsWith("normal"))
           {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
-            {
-              painter->save();
-              painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState_);
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
-              painter->restore();
-            }
-            if (animationOpacity_ >= 100)
-              animationStartState_ = status;
+            painter->save();
+            painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
+            painter->restore();
           }
           if (!(option->state & State_Enabled))
           {
@@ -7933,51 +7935,60 @@ void Style::drawControl(ControlElement element,
           lspec.top = t;
         }
 
-        /* tabButtons (as in Rekonq);
-           apparently the label rect includes them */
+        /* the close button area is always SE_TabBarTabRightButton,
+           whose width is determined by PM_TabCloseIndicatorWidth and PM_TabBarTabHSpace */
         int ltb = 0;
         int rtb = 0;
-        if (widget)
+        if (verticalTabs)
         {
-          if (verticalTabs)
-          {
-            ltb = qMax(0, subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).height());
-            rtb = qMax(0, subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).height());
-          }
-          else
-          {
-            ltb = qMax(0, subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget).width());
-            rtb = qMax(0, subElementRect(QStyle::SE_TabBarTabRightButton,option,widget).width());
-          }
+          ltb = qMax(0, opt->leftButtonSize.height());
+          rtb = qMax(0, opt->rightButtonSize.height());
         }
-        if (rtl)
-          r.adjust(rtb, 0, -ltb, 0);
         else
+        {
+          ltb = qMax(0, opt->leftButtonSize.width());
+          rtb = qMax(0, opt->rightButtonSize.width());
+        }
+        /* the tab is widened for TOOL_BUTTON_ARROW_MARGIN, PM_TabBarTabHSpace and tispace at CT_TabBarTab */
+        if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+        if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+        if (rtl)
+        {
+          r.adjust(rtb, 0, -ltb, 0);
+          if (rtb > 0)
+          {
+            fspec.left = 0;
+            if (!opt->icon.isNull())
+              lspec.left = lspec.tispace; // center the text between
+          }
+          if (ltb > 0)
+          {
+            fspec.right = 0;
+            if (!opt->icon.isNull())
+              lspec.right = lspec.tispace;
+          }
+        }
+        else
+        {
           r.adjust(ltb, 0, -rtb, 0);
+          if (!opt->icon.isNull())
+          if (rtb > 0)
+          {
+            fspec.right = 0;
+            if (!opt->icon.isNull())
+              lspec.right = lspec.tispace;
+          }
+          if (ltb > 0)
+          {
+            fspec.left = 0;
+            if (!opt->icon.isNull())
+              lspec.left = lspec.tispace;
+          }
+        }
 
-        QStyleOptionTab tabV2(*opt);
         QSize iconSize;
-        if (!tabV2.icon.isNull())
-          iconSize = tabV2.iconSize;
-
-        bool closable = false;
-        const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
-        if (tb)
-        {
-          if (tb->tabsClosable())
-            closable = true;
-        }
-        if (closable)
-        {
-          /* the close button area is always SE_TabBarTabRightButton,
-             whose width is determined by PM_TabCloseIndicatorWidth and PM_TabBarTabHSpace */
-          r = alignedRect(opt->direction, Qt::AlignLeft,
-                          !verticalTabs
-                            ? QSize(w-pixelMetric(PM_TabCloseIndicatorWidth,option,widget)-pixelMetric(PM_TabBarTabHSpace,option,widget), h)
-                            : QSize(h-pixelMetric(PM_TabCloseIndicatorHeight,option,widget)-pixelMetric(PM_TabBarTabHSpace,option,widget), w),
-                          r);
-        }
-
+        if (!opt->icon.isNull())
+          iconSize = opt->iconSize;
         int icnSize = iconSize.isValid() ?
                         qMax(iconSize.width(), iconSize.height())
                         : pixelMetric(PM_TabBarIconSize);
@@ -7987,7 +7998,7 @@ void Style::drawControl(ControlElement element,
         QString txt = opt->text;
         if (!txt.isEmpty())
         {
-          int txtWidth = r.width()-lspec.right-lspec.left-fspec.left-fspec.right
+          int txtWidth = r.width() - lspec.right-lspec.left-fspec.left-fspec.right
                          - (opt->icon.isNull() ? 0 : icnSize + lspec.tispace);
           QFont F(painter->font());
           if (lspec.boldFont) F.setBold(true);
@@ -7998,12 +8009,13 @@ void Style::drawControl(ControlElement element,
                it might not fit into our available space. So, we always
                elide it but respect the elide mode when present. */
             QFontMetrics fm(F);
+            const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
             txt = fm.elidedText(txt, (tb && tb->elideMode() != Qt::ElideNone)
                                        ? tb->elideMode()
                                        : Qt::ElideRight,
                                 txtWidth);
           }
-          if (txtSize.height() > r.height()-lspec.top-lspec.bottom-fspec.top-fspec.bottom)
+          if (txtSize.height() > r.height() - lspec.top-lspec.bottom-fspec.top-fspec.bottom)
           { // try to work around design flaws as far as possible
             lspec.top = lspec.bottom = 0;
           }
@@ -8039,23 +8051,23 @@ void Style::drawControl(ControlElement element,
                     getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                     iconSize);
 
-        if (tabV2.state & State_HasFocus)
+        if (opt->state & State_HasFocus)
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
           if (fspec.expansion > 0)
           {
             if (rtl)
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(closable ? -lspec.tispace : -2, -2, 2, 2);
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
             else
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(-2, -2, closable ? lspec.tispace : 2, 2);
+              fropt.rect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
           }
           else
           {
             QRect FR = opt->rect;
             if (verticalTabs)
               FR.setRect(0, 0, h, w);
-            fropt.rect = interiorRect(FR, fspec);
+            fropt.rect = interiorRect(FR, getFrameSpec(group)); // fspec may have been changed
           }
           drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
@@ -9687,21 +9699,36 @@ void Style::drawControl(ControlElement element,
             painter->save();
             painter->setOpacity(0.5);
           }
+          QObject *styleObject = option->styleObject;
+          QString animationStartState;
+          if (styleObject)
+            animationStartState = styleObject->property("_kv_state").toString();
           bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+                       && !animationStartState.isEmpty()
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
+          if (animate && animationStartState == status)
+          {
+            if (opacityTimer_->isActive())
+              opacityTimer_->stop();
+            animationOpacity_ = 0;
+            animate = false;
+          }
           if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
           {
             if (animate)
             {
-              if (animationStartState_ == status)
-                animationOpacity_ = 100;
-              else if (animationOpacity_ < 100
-                       && (!(opt->features & QStyleOptionButton::Flat)
-                           || !animationStartState_.startsWith("normal")))
+              if (!opacityTimer_->isActive())
               {
-                renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
+                animationOpacity_ = 0;
+                opacityTimer_->start(ANIMATION_FRAME);
+              }
+              if (animationOpacity_ < 100
+                  && (!(opt->features & QStyleOptionButton::Flat)
+                      || !animationStartState.startsWith("normal")))
+              {
+                renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
                 if (!fillWidgetInterior)
-                  renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
+                  renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
               }
               painter->save();
               painter->setOpacity((qreal)animationOpacity_/100);
@@ -9713,8 +9740,10 @@ void Style::drawControl(ControlElement element,
             {
               painter->restore();
               if (animationOpacity_ >= 100)
-                animationStartState_ = status;
+                styleObject->setProperty("_kv_state", status);
             }
+            else if (styleObject)
+              styleObject->setProperty("_kv_state", status);
             if (fillWidgetInterior) // widget isn't null
               painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
                                                                                             ? QPalette::Inactive
@@ -9722,17 +9751,20 @@ void Style::drawControl(ControlElement element,
                                                                                           QPalette::Button));
           }
           // fade out animation
-          else if (animate)
+          else if (animate && !animationStartState.startsWith("normal"))
           {
-            if (animationStartState_ == status)
-              animationOpacity_ = 100;
-            else if (animationOpacity_ < 100)
+            if (!opacityTimer_->isActive())
+            {
+              animationOpacity_ = 0;
+              opacityTimer_->start(ANIMATION_FRAME);
+            }
+            if (animationOpacity_ < 100)
             {
               painter->save();
               painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
-              renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState_);
+              renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
               if (!fillWidgetInterior)
-                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState_);
+                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
               painter->restore();
               if (fillWidgetInterior)
                 painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
@@ -9741,8 +9773,10 @@ void Style::drawControl(ControlElement element,
                                                                                             QPalette::Button));
             }
             if (animationOpacity_ >= 100)
-              animationStartState_ = status;
+              styleObject->setProperty("_kv_state", status);
           }
+          else if (styleObject)
+            styleObject->setProperty("_kv_state", status);
           if (libreoffice) painter->restore();
         }
         if (!(option->state & State_Enabled))
@@ -11356,7 +11390,7 @@ void Style::drawComplexControl(ComplexControl control,
               styleObject->setProperty("_q_stylemin", opt->minimum);
               styleObject->setProperty("_q_stylemax", opt->maximum);
               styleObject->setProperty("_q_stylerect", opt->rect);
-              styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
+              //styleObject->setProperty("_q_stylestate", static_cast<int>(opt->state));
               styleObject->setProperty("_q_stylecontrols", static_cast<uint>(opt->activeSubControls));
 
               ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
@@ -12469,18 +12503,18 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(v,h);
     }
 
-    /* PM_TabBarTabHSpace provides an appropriate horizontal space
+    /* PM_TabBarTabHSpace can provide an appropriate horizontal space
        around the close button but PM_TabBarTabVSpace isn't needed.
        QCommonStyle uses it on the right and left tab sides equally
-       but we use it only around the close button. */
+       but we do so only when the right and left tab buttons exist. */
     case PM_TabBarTabHSpace : {
       const frame_spec fspec = getFrameSpec("Tab");
-      int hSpace = fspec.left + fspec.right;
+      int hSpace = qMax(fspec.left,fspec.right)*2;
       if (!widget) // QML
       {
         const label_spec lspec = getLabelSpec("Tab");
         int common = QCommonStyle::pixelMetric(metric,option,widget);
-        hSpace += lspec.left + lspec.right;
+        hSpace += qMax(lspec.left,lspec.right)*2;
         hSpace = qMax(hSpace, common);
       }
       return qMax(hSpace,12);
@@ -13687,44 +13721,56 @@ QSize Style::sizeFromContents(ContentsType type,
         if (opt->text.isEmpty())
           s.rwidth() += lspec.left + lspec.right;
 
-        if (const QTabBar *tb = qobject_cast<const QTabBar*>(widget))
-        {
-          if (tb->tabsClosable())
-          {
-            if (verticalTabs)
-            {
-              s.rwidth() += pixelMetric(PM_TabCloseIndicatorHeight,option,widget)
-                            + pixelMetric(PM_TabBarTabHSpace,option,widget);
-              s.rheight() += qMax(opt->icon.isNull()
-                                    ? 0 : pixelMetric(PM_TabCloseIndicatorWidth,option,widget) - iconSize,
-                                  0);
-            }
-            else
-            {
-              s.rwidth() += pixelMetric(PM_TabCloseIndicatorWidth,option,widget)
-                            + pixelMetric(PM_TabBarTabHSpace,option,widget);
-              s.rheight() += qMax(opt->icon.isNull()
-                                    ? 0 : pixelMetric(PM_TabCloseIndicatorHeight,option,widget) - iconSize,
-                                  0);
-            }
-          }
-
-          // tabButtons
-          /*int tbh = 0;
-          QRect tbRect = subElementRect(QStyle::SE_TabBarTabLeftButton,option,widget);
-          s.rwidth() += tbRect.width();
-          tbh = tbRect.height();
-
-          tbRect = subElementRect(QStyle::SE_TabBarTabRightButton,option,widget)
-          s.rwidth() += tbRect.width();
-          int h = tbRect.height();
-          if (h > tbh) tbh= h;
-
-          if (tbh > s.height()) s.rheight() = tbh;*/
-        }
-
         if (verticalTabs)
           s.transpose();
+
+        bool rtl(opt->direction == Qt::RightToLeft);
+        if (opt->rightButtonSize.isValid()) // QSize(-1, -1) by default
+        {
+          /* Right or left frame and label spaces will be replaced by "lspec.tispace"
+             at CE_TabBarTabLabel if the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN
+             is added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton, and
+             PM_TabBarTabHSpace is added once, when a right or left button exists. */
+          if (verticalTabs)
+          {
+            s.rheight() += opt->rightButtonSize.height() + pixelMetric(PM_TabBarTabHSpace,option,widget)
+                                                         + TOOL_BUTTON_ARROW_MARGIN
+                                                         - fspec.right
+                                                         + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right);
+            s.rwidth() = qMax(s.width(), opt->rightButtonSize.width());
+          }
+          else
+          {
+            s.rwidth() += opt->rightButtonSize.width()
+                          + pixelMetric(PM_TabBarTabHSpace,option,widget)
+                          + TOOL_BUTTON_ARROW_MARGIN
+                          + (rtl ? - fspec.left  + (opt->icon.isNull() ? 0: lspec.tispace - lspec.left)
+                                 : - fspec.right + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right));
+            s.rheight() = qMax(s.height(), opt->rightButtonSize.height());
+          }
+        }
+        if (opt->leftButtonSize.isValid())
+        {
+          if (verticalTabs)
+          {
+            s.rheight() += opt->leftButtonSize.height() + TOOL_BUTTON_ARROW_MARGIN
+                                                        - fspec.left
+                                                        + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.left);
+            if (!opt->rightButtonSize.isValid())
+              s.rheight() += pixelMetric(PM_TabBarTabHSpace,option,widget);
+            s.rwidth() = qMax(s.width(), opt->leftButtonSize.width());
+          }
+          else
+          {
+            s.rwidth() += opt->leftButtonSize.width()
+                          + TOOL_BUTTON_ARROW_MARGIN
+                          + (rtl ? - fspec.right + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.right)
+                                 : - fspec.left + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.left));
+            if (!opt->rightButtonSize.isValid())
+              s.rwidth() += pixelMetric(PM_TabBarTabHSpace,option,widget);
+            s.rheight() = qMax(s.height(), opt->leftButtonSize.height());
+          }
+        }
 
         // for Calligra Words
         int dw = defaultSize.width() - s.width();
@@ -14777,18 +14823,71 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       return r;
     }
 
+    /* SE_TabBarTabText isn't used anywhere but some apps may need it.
+       It's exactly as in CE_TabBarTabLabel, except for the transformations. */
+    case SE_TabBarTabText: {
+      QRect r;
+      if (const QStyleOptionTab *opt = qstyleoption_cast<const QStyleOptionTab *>(option))
+      {
+        r = option->rect;
+        bool verticalTabs (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast
+                           || opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest);
+        int ltb = 0, rtb = 0;
+        if (verticalTabs)
+        {
+          ltb = qMax(0, opt->leftButtonSize.height());
+          rtb = qMax(0, opt->rightButtonSize.height());
+          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest)
+            r.adjust(0, rtb, 0, -ltb);
+          else
+            r.adjust(0, ltb, 0, -rtb);
+        }
+        else
+        {
+          ltb = qMax(0, opt->leftButtonSize.width());
+          rtb = qMax(0, opt->rightButtonSize.width());
+          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (opt->direction == Qt::RightToLeft)
+            r.adjust(rtb, 0, -ltb, 0);
+          else
+            r.adjust(ltb, 0, -rtb, 0);
+        }
+        if (!widget) // QML
+        {
+          if (!verticalTabs)
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedSouth || opt->shape == QTabBar::TriangularSouth))
+              r.adjust(0,0,0,-1);
+            else
+              r.adjust(0,1,0,0);
+          }
+          else
+          {
+            if (tspec_.mirror_doc_tabs
+                && (opt->shape == QTabBar::RoundedEast || opt->shape == QTabBar::TriangularEast))
+              r.adjust(0,0,0,-1);
+            else
+              r.adjust(0,1,0,0);
+          }
+        }
+      }
+      return r;
+    }
+
     case SE_TabBarTabLeftButton:
     case SE_TabBarTabRightButton: {
       QRect r;
       if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab *>(option))
       {
-        const frame_spec fspec = getFrameSpec("Tab");
         bool selected = tab->state & State_Selected;
         int verticalShift = pixelMetric(QStyle::PM_TabBarTabShiftVertical, tab, widget);
         int horizontalShift = pixelMetric(QStyle::PM_TabBarTabShiftHorizontal, tab, widget);
         int hpadding = pixelMetric(QStyle::PM_TabBarTabHSpace, option, widget) / 2
-                       + fspec.right;
-        hpadding = qMax(hpadding, 4); // FIXME: is this needed?
+                       + TOOL_BUTTON_ARROW_MARGIN;
 
         bool verticalTabs(tab->shape == QTabBar::RoundedEast
                           || tab->shape == QTabBar::RoundedWest
@@ -14819,13 +14918,14 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         int midHeight = static_cast<int>(qCeil(float(tr.height() - h)/2));
         int midWidth = (tr.width() - w)/2;
 
-        bool atTheTop = true;
+        bool atBottom = true;
         int offset = 0;
+        const frame_spec fspec = getFrameSpec("Tab");
         const label_spec lspec = getLabelSpec("Tab");
         switch (tab->shape) {
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
-            atTheTop = (element == SE_TabBarTabLeftButton);
+            atBottom = (element == SE_TabBarTabLeftButton);
             if (tab->rect.width() > w
                 && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
@@ -14842,7 +14942,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             break;
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
-            atTheTop = (element == SE_TabBarTabRightButton);
+            atBottom = (element == SE_TabBarTabRightButton);
             if (tab->rect.width() > w
                 && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
@@ -14875,7 +14975,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         }
         if (verticalTabs)
         {
-          if (atTheTop)
+          if (atBottom)
             r = QRect(midWidth + offset,
                       tr.y() + tab->rect.height() - hpadding - h,
                       w, h);

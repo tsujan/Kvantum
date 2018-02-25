@@ -25,7 +25,7 @@ slider_handle_length=18
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
-progressbar_thickness=3font
+progressbar_thickness=8
 menubar_mouse_tracking=true
 toolbutton_style=1
 double_click=false
@@ -39,10 +39,11 @@ merge_menubar_with_toolbar=true
 small_icon_size=16
 large_icon_size=32
 button_icon_size=16
-toolbar_icon_size=22
+toolbar_icon_size=16
 combo_as_lineedit=true
 combo_menu=true
 hide_combo_checkboxes=false
+combo_focus_rect=true
 layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=3
@@ -242,13 +243,12 @@ min_height=2.3font
 
 [TabFrame]
 inherits=PanelButtonCommand
-frame.element=tframe
-interior=true
-interior.element=tframe
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
+frame.element=button
+interior=false
+frame.top=3
+frame.bottom=5
+frame.left=3
+frame.right=3
 
 [TreeExpander]
 inherits=PanelButtonCommand
@@ -313,7 +313,7 @@ text.focus.color=black
 text.press.color=black
 text.toggle.color=black
 text.bold=true
-frame.expansion=8
+frame.expansion=16
 text.shadow=false
 
 [ProgressbarContents]

@@ -32,7 +32,7 @@ button.color=#555555
 light.color=#626262
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#303030
+mid.color=#3c3c3c
 highlight.color=#3f67a5
 inactive.highlight.color=#2e4c7a
 text.color=white
@@ -157,6 +157,8 @@ frame.left=4
 frame.right=4
 text.press.color=white
 text.toggle.color=white
+min_width=4font
+min_height=2.0font
 
 [TabFrame]
 inherits=PanelButtonCommand

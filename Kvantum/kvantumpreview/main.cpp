@@ -1,16 +1,16 @@
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,10 +32,16 @@ int main (int argc, char *argv[])
   QStringList langs (QLocale::system().uiLanguages());
   QString lang; // bcp47Name() doesn't work under vbox
   if (!langs.isEmpty())
-      lang = langs.first().split (QLatin1Char ('-')).first();
-
+      lang = langs.first().replace ('-', '_');
   QTranslator qtTranslator;
-  qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+  if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath)))
+  { // not needed; doesn't happen
+      if (!langs.isEmpty())
+      {
+          lang = langs.first().split (QLatin1Char ('-')).first();
+          qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
+      }
+  }
   viewer.installTranslator (&qtTranslator);
 
   QTranslator KPTranslator;

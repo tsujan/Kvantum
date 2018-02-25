@@ -14,6 +14,8 @@ V0.10.6
  * Don't add the icon size to the size of check boxes or radio buttons when there's no icon.
  * Replaced QRegExp with QRegularExpression.
  * Support the global config files "$XDG_CONFIG_DIRS/Kvantum/kvantum.kvconfig". (For distros.)
+ * Fixed an old miscalculation in drawing tab labels.
+ * Major enhancements and simplifications in the state change animation code through "QStyleOption::styleObject()". As a result, faulty animations are fixed and some missing animations are added, especially for all kinds of buttons.
 
 V0.10.5
 ---------
@@ -115,7 +117,7 @@ V0.10.2
 
 V0.10.1
 ---------
- * No label spacing for checkboxes and radiobuttons that have neither text nor icon. 
+ * No label spacing for checkboxes and radiobuttons that have neither text nor icon.
  * Added a dark cyan theme.
  * State change animation for line-edits and also for spin and combo boxes when they're drawn as line-edits.
  * Quietened compiler warnings with Qt-5.7.

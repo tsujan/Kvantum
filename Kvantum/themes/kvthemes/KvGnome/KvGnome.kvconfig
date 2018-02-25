@@ -43,6 +43,7 @@ toolbar_icon_size=22
 combo_as_lineedit=true
 combo_menu=true
 hide_combo_checkboxes=true
+combo_focus_rect=true
 layout_spacing=3
 tooltip_delay=-1
 submenu_overlap=3

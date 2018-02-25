@@ -59,7 +59,7 @@ Section                                      Meaning
 
 [DropDownButton]                             Indicator for a drop down button,
                                              for example, a tool button that
-                                             displays a menu                 
+                                             displays a menu
 
 [ToolboxTab]                                 Just text colors for tab labels of
                                              a toolbox.
@@ -188,7 +188,7 @@ comment                           string              Obvious.
 
 respect_DE                        true/false          Should some settings of the current
                                                       DE be respected? True by default.
-                                                      
+
                                                       KDE, Unity, Gnome and Pantheon are
                                                       supported. Under KDE, the keys
                                                       "small_icon_size", "large_icon_size" and
@@ -208,7 +208,7 @@ x11drag                           string              Drag windows from contents
                                                       Boolean values are also supported:
                                                         true (the same as "all" -- default)
                                                         false (the same as "none")
-                                                      
+
                                                       "x11drag" is independent of X11 on wayland.
 
 alt_mnemonic                      true/false          Show underlines when Alt is pressed?
@@ -291,7 +291,7 @@ no_active_tab_separator           true/false          Do not draw tab separator 
                                                       tab? False by default, which means that,
                                                       if tab separators exist in the SVG image,
                                                       they will be drawn for all tabs.
-                                                      
+
                                                       See "Theme-Making.pdf" for an explanation
                                                       of tab separators.
 
@@ -300,9 +300,9 @@ active_tab_overlap                integer             Number of pixels inactive 
                                   DECIMALfont         The active tab is drawn in front of its
                                                       adjacent inactive tabs when the value of
                                                       this key is positive.
-                                                      
+
                                                       It is safe to set a great value here.
-                                                      
+
                                                       The string "font" can be appended to the
                                                       value (without quotes and space), in
                                                       which case, the value will be multiplied
@@ -357,7 +357,7 @@ progressbar_thickness             integer             If positive, it sets the (
                                   DECIMALfont         possible. It is zero by default,
                                                       which means there is no limit to
                                                       progressbar thickness.
-                                                      
+
                                                       Note 1: If it is positive but less
                                                       than the height of the progressbar
                                                       text, the text will be put in front
@@ -397,7 +397,7 @@ submenu_overlap                   integer             The horizontal overlap bet
 menu_shadow_depth                 integer             The depth of the shadow menus cast.
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
-                                                      
+
                                                       Also see "Theme-Making.pdf" ->
                                                       Translucency and Shadow for Menus and
                                                       Tooltips
@@ -412,7 +412,7 @@ translucent_windows               true/false          Translucent windows and di
                                                       for "reduce_window_opacity". A false
                                                       value, its absence or a false value for
                                                       "composite" means no translucency.
-                                                      
+
                                                       Window translucency is also disabled
                                                       automatically when there is neither a
                                                       "Window" nor a "WindowTranslucent"
@@ -455,7 +455,7 @@ animate_states                    true/false          Animate the state change i
                                                       is set to true, there will be a 200-ms
                                                       fading animation on state change for
                                                       some widgets.
-                                                      
+
                                                       The default value is false. These
                                                       widgets are supported: all kinds of
                                                       buttons, combo boxes, line-edits and
@@ -494,7 +494,7 @@ scrollbar_in_view                 true/false          Should scrollbars be insid
 transient_scrollbar               true/false          Should scrollbars appear only when
                                                       needed and disappear when not needed?
                                                       False by default. (Not for Qt4.)
-                                                      
+
                                                       If this key is true, "scroll_arrows"
                                                       and "scrollbar_in_view" are considered
                                                       false, the SVG groove is not drawn,
@@ -750,7 +750,7 @@ frame.bottom
 frame.left
 frame.right                       integer             The height or width of the corresponding
                                                       frame part if there is any.
-                                                      
+
                                                       These values are mostly respected but
                                                       there are two exceptions: (1) Where there
                                                       is not enough space (because of a bad GUI
@@ -814,7 +814,7 @@ text.margin.bottom
 text.margin.left
 text.margin.right                 integer             The sizes of the text margins
                                                       if there is any.
-                                                      
+
                                                       These values are mostly respected but
                                                       not if there is a lack of space because
                                                       of a bad GUI design.
@@ -824,20 +824,20 @@ text.normal.color                 string (#RRGGBBAA)  The color of the normal te
                                                       name like white, black, red, etc. It may
                                                       override the text colors defined under
                                                       the section "GeneralColors".
-                                                      
+
                                                       Note 1: "MenuBarItem" always gets its normal
                                                       text color from the "MenuBar" section or, if
                                                       menubar and toolbar are merged (see the key
                                                       "merge_menubar_with_toolbar"), from the
                                                       "Toolbar" section.
-                                                      
+
                                                       Note 2: State-specific text colors do not
                                                       have meaning for Window, Dialog, Dock,
                                                       LineEdit and frame widgets (namely
                                                       GenericFrame, TabFrame and TabBarFrame).
 
 text.focus.color                  string (#RRGGBBAA)  The color of the focused/hover text.
-                                                      
+
                                                       Note: For "MenuBarItem", it serves as a
                                                       fallback color in case the press or toggle
                                                       text colors are not set.
@@ -851,7 +851,7 @@ text.focus.inactive.color
 text.press.inactive.color
 text.toggle.inactive.color        string (#RRGGBBAA)  These keys are for text colors of inactive
                                                       widgets and fall back to their
-                                                      corresponding ordinary keys if missing. 
+                                                      corresponding ordinary keys if missing.
 
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
@@ -876,7 +876,7 @@ text.shadow.alpha                 integer (0-255)     The opacity of the text sh
                                                       means completely opaque. If the alpha
                                                       is set in #RRGGBBAA as the shadow color
                                                       name, this key can be left to 255 (its
-                                                      default value). 
+                                                      default value).
 
 text.shadow.depth                 integer             The text shadow depth.
 
@@ -887,14 +887,14 @@ min_height                        integer             Minimum width or height (i
                                                       line-edits, combo boxes, spin boxes
                                                       (only for their height) and, sometimes,
                                                       view items (only for their height).
-                                                      
+
                                                       The string "font" can be appended to the
                                                       value (without quotes and space), in
                                                       which case, the value will be multiplied
                                                       by the height of the app font (in px)
                                                       and could also be a decimal (as in
                                                       "min_height=2.3font").
-                                                      
+
                                                       If "+" is prepended to the value (without
                                                       quotes and space), the value will be
                                                       added to the width/height of the widget,
