@@ -8437,7 +8437,11 @@ void Style::drawControl(ControlElement element,
           bool noPanel(!paneledButtons.contains(widget));
           if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
-            bool isNormal(status.startsWith("normal"));
+            /* cover the simple disabled state too */
+            bool isNormal(!(option->state & State_On)
+                          && !(option->state & State_Sunken)
+                          && !(option->state & State_Selected)
+                          && (!(option->state & State_MouseOver) || !(option->state & State_Enabled)));
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);

@@ -9976,7 +9976,11 @@ void Style::drawControl(ControlElement element,
           bool noPanel(!paneledButtons.contains(widget));
           if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
-            bool isNormal(status.startsWith("normal"));
+            /* cover the simple disabled state too */
+            bool isNormal(!(option->state & State_On)
+                          && !(option->state & State_Sunken)
+                          && !(option->state & State_Selected)
+                          && (!(option->state & State_MouseOver) || !(option->state & State_Enabled)));
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
@@ -17220,10 +17224,10 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (icon.isNull()) return QPixmap();
   /* We need a QPixmap whose size is pixelRatio_ times iconSize. However, with
      an HDPI-enabled app, the size of the QPixmap returned by QIcon::pixmap()
-     is pixelRatio_*pixelRatio_*iconSize when the icon is taken from a theme
-     and is (almost) pixelRatio_*iconSize when the icon isn't taken from a
-     theme but has no fixed size. What follows covers both cases and also
-     the case of icons with fixed sizes. */
+     may be pixelRatio_*pixelRatio_*iconSize when the icon is taken from a theme
+     (due to a bug in some icon engines) and is (almost) pixelRatio_*iconSize
+     when the icon isn't taken from a theme but has no fixed size. What follows
+     covers all cases by checking the pixmap width. */
   bool hdpi(false);
 #if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))

@@ -16,6 +16,7 @@ V0.10.6
  * Support the global config files "$XDG_CONFIG_DIRS/Kvantum/kvantum.kvconfig". (For distros.)
  * Fixed an old miscalculation in drawing tab labels.
  * Major enhancements and simplifications in the state change animation code through "QStyleOption::styleObject()". As a result, faulty animations are fixed and some missing animations are added, especially for all kinds of buttons.
+ * Fixed the disabled text color of auto-raised toolbuttons in dark-and-light themes.
 
 V0.10.5
 ---------
