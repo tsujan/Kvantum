@@ -17,6 +17,8 @@ V0.10.6
  * Fixed an old miscalculation in drawing tab labels.
  * Major enhancements and simplifications in the state change animation code through "QStyleOption::styleObject()". As a result, faulty animations are fixed and some missing animations are added, especially for all kinds of buttons.
  * Fixed the disabled text color of auto-raised toolbuttons in dark-and-light themes.
+ * Don't draw the interior of the focus rectangle but allow complete focus elements on the whole widget (button like widgets, tabs, group boxes and sliders are supported), so that if their names exist in the config file, their elements will be drawn instead of the focus rectangle.
+ * Don't rotate a rounded frame unless it has a top expanded (or border) element.
 
 V0.10.5
 ---------

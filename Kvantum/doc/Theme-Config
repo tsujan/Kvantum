@@ -792,6 +792,22 @@ frame.patternsize                 integer             The frame pattern size. Us
                                                       value of zero means no pattern (default).
                                                       Mostly useful for making dotted frames.
 
+focusFrame                       true/false           Draw a focus frame when the widget has
+                                                      the keyboard focus? This replaces the
+                                                      generic focus frame/rectangle (see Focus
+                                                      section) for button like widgets, tabs,
+                                                      group boxes and sliders. If it is true,
+                                                      the element name that is used for drawing
+                                                      the focus frame will be "frame.element"
+                                                      (see below) plus the string "-focus". All
+                                                      sizes will be those of the usual frame.
+
+                                                      This key will be ignored if there is no
+                                                      frame and is false by default. Also, note
+                                                      that a focus frame can be expanded like
+                                                      an ordinary frame when "frame.expansion"
+                                                      is positive.
+
 interior                          true/false          Draw an interior for the widget?
 
 interior.x.patternsize
@@ -802,6 +818,17 @@ interior.y.patternsize            integer             The interior pattern sizes
                                                       Their absence also means no pattern.
                                                       Some widget types may never accept
                                                       patterns.
+
+focusInterior                     true/false          Draw a focus interior when the widget
+                                                      has the keyboard focus? If it is true,
+                                                      the element name that is used for
+                                                      drawing the focus interior will be
+                                                      "interior.element" (see below) plus
+                                                      the string "-focus".
+
+                                                      This key will be ignored if "focusFrame"
+                                                      is false or there is no interior or frame
+                                                      and is false by default.
 
 indicator.size                    integer             Some widgets, like scrollbar arrows,
                                                       have indicators. This is their size.

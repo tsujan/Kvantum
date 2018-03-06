@@ -140,6 +140,9 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   r.hasFrame = v.toBool();
   if (r.hasFrame)
   {
+    v = getValue(name,"focusFrame", i);
+    r.hasFocusFrame = v.toBool();
+
     v = getValue(elementName, "frame.element", i);
     if (!v.toString().isEmpty())
     {
@@ -236,6 +239,9 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
 
   if (r.hasInterior)
   {
+    v = getValue(name,"focusInterior", i);
+    r.hasFocusInterior = v.toBool();
+
     v = getValue(elementName, "interior.element", i);
     if (!v.toString().isEmpty())
     {

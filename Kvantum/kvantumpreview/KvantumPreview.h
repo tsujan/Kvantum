@@ -1,16 +1,16 @@
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,12 +42,12 @@ public:
     QPushButton *pb2 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
     tabWidget_5->setCornerWidget (pb2, Qt::BottomLeftCorner);
     //subwindow->setWindowState(Qt::WindowMaximized);
-    connect (actionTest, SIGNAL (changed()), this, SLOT (toggleLayout()));
-    connect (actionDocMode, SIGNAL (toggled (bool)), this, SLOT (KvDocMode (bool)));
-    connect (checkBoxDocMode, SIGNAL (toggled (bool)), this, SLOT (docMode (bool)));
-    connect (checkBoxFlat, SIGNAL (toggled (bool)), this, SLOT (makeFlat (bool)));
-    connect (checkBoxRaise, SIGNAL (toggled (bool)), this, SLOT (makeAutoRaise (bool)));
-    connect (checkBox_7, SIGNAL (stateChanged (int)), this, SLOT (setDisabledState (int)));
+    connect (actionTest, &QAction::changed, this, &KvantumPreview::toggleLayout);
+    connect (actionDocMode, &QAction::toggled, this, &KvantumPreview::KvDocMode);
+    connect (checkBoxDocMode, &QAbstractButton::toggled, this, &KvantumPreview::docMode);
+    connect (checkBoxFlat, &QAbstractButton::toggled, this, &KvantumPreview::makeFlat);
+    connect (checkBoxRaise, &QAbstractButton::toggled, this, &KvantumPreview::makeAutoRaise);
+    connect (checkBox_7, &QCheckBox::stateChanged, this, &KvantumPreview::setDisabledState);
     QActionGroup *aGroup = new QActionGroup (this);
     actionMenu_radio->setActionGroup (aGroup);
     actionMenu_radio1->setActionGroup (aGroup);

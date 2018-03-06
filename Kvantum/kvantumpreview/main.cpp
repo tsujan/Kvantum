@@ -61,6 +61,6 @@ int main (int argc, char *argv[])
     tw->tabBar()->setUsesScrollButtons (true);
 #endif
   }
-  QObject::connect (&viewer, SIGNAL (lastWindowClosed()), &viewer, SLOT (quit()));
+  QObject::connect (&viewer, &QApplication::lastWindowClosed, &viewer, &QApplication::quit);
   return viewer.exec();
 }

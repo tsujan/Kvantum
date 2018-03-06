@@ -274,8 +274,10 @@ typedef struct {
   QString element;
   /* Element name for frame expansion */
   QString expandedElement;
-  /* has frame? */
+  /* has a frame? */
   bool hasFrame;
+  /* has a focus frame? */
+  bool hasFocusFrame;
   /* Allow capsule grouping ? (used internally) */
   bool hasCapsule;
   /* frame size */
@@ -295,8 +297,10 @@ typedef struct {
 typedef struct {
   /* Element name */
   QString element;
-  /* has interior */
+  /* has an interior? */
   bool hasInterior;
+  /* has a focus interior? */
+  bool hasFocusInterior;
   /* Pattern sizes. They're always nonnegative but, only internally,
      a negative px means no tiling pattern regardless of actual values
      and px=-2 means that, in addition, windows (dialogs) are translucent. */
@@ -361,6 +365,7 @@ typedef struct {
 /* Fills the frame spec with default values */
 static inline void default_frame_spec(frame_spec &fspec) {
   fspec.hasFrame = false;
+  fspec.hasFocusFrame = false;
   fspec.hasCapsule = false; // may change to true in Kvantum.cpp
   fspec.element = QString();
   fspec.expandedElement = QString();
@@ -374,6 +379,7 @@ static inline void default_frame_spec(frame_spec &fspec) {
 /* Fills the interior with default values */
 static inline void default_interior_spec(interior_spec &ispec) {
   ispec.hasInterior = true;
+  ispec.hasFocusInterior = false;
   ispec.element = QString();
   ispec.px = ispec.py = 0;
 }

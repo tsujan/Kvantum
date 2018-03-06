@@ -1,4 +1,25 @@
+/*
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2018 <tsujan2000@gmail.com>
+ *
+ * Kvantum is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Kvantum is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "KvantumManager.h"
+#include <QFileDevice>
+#include <QTextStream>
+#include <QTimer>
+#include <QStandardPaths>
 #include <QFileDialog>
 #include <QSettings>
 #include <QMessageBox>
@@ -6,13 +27,8 @@
 #include <QDesktopWidget>
 #include <QWhatsThis>
 #include <QScrollBar>
-#if QT_VERSION >= 0x050000
+#include <QAbstractItemView>
 #include <QWindow>
-#include <QFileDevice>
-#include <QTextStream>
-#include <QTimer>
-#include <QStandardPaths>
-#endif
 //#include <QDebug>
 
 namespace KvManager {
@@ -102,33 +118,28 @@ KvantumManager::KvantumManager (const QString lang, QWidget *parent) : QMainWind
     }
     showAnimated (ui->installLabel, 1500);
 
-    connect (ui->quit, SIGNAL (clicked()), this, SLOT (close()));
-    connect (ui->openTheme, SIGNAL (clicked()), this, SLOT (openTheme()));
-    connect (ui->installTheme, SIGNAL (clicked()), this, SLOT (installTheme()));
-    connect (ui->deleteTheme, SIGNAL (clicked()), this, SLOT (deleteTheme()));
-    connect (ui->useTheme, SIGNAL (clicked()), this, SLOT (useTheme()));
-    connect (ui->saveButton, SIGNAL (clicked()), this, SLOT (writeConfig()));
-    connect (ui->restoreButton, SIGNAL (clicked()), this, SLOT (restoreDefault()));
-    connect (ui->checkBoxNoComposite, SIGNAL (clicked (bool)), this, SLOT (notCompisited (bool)));
-    connect (ui->checkBoxTrans, SIGNAL (clicked (bool)), this, SLOT (isTranslucent (bool)));
-    connect (ui->checkBoxBlurWindow, SIGNAL (clicked (bool)), this, SLOT (popupBlurring (bool)));
-    connect (ui->checkBoxDE, SIGNAL (clicked (bool)), this, SLOT (respectDE (bool)));
-    connect (ui->checkBoxTransient, SIGNAL (clicked (bool)), this, SLOT (trantsientScrollbarEnbled (bool)));
-    connect (ui->lineEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
-    connect (ui->appsEdit, SIGNAL (textChanged (const QString &)), this, SLOT (txtChanged (const QString &)));
-    connect (ui->toolBox, SIGNAL (currentChanged (int)), this, SLOT (tabChanged (int)));
-    connect (ui->saveAppButton, SIGNAL (clicked()), this, SLOT (writeAppLists()));
-    connect (ui->removeAppButton, SIGNAL (clicked()), this, SLOT (removeAppList()));
-    connect (ui->preview, SIGNAL (clicked()), this, SLOT (preview()));
-    connect (ui->aboutButton, SIGNAL (clicked()), this, SLOT (aboutDialog()));
-    connect (ui->whatsthisButton, SIGNAL(clicked()), this, SLOT (showWhatsThis()));
-    connect (ui->checkBoxComboMenu, SIGNAL(clicked (bool)), this, SLOT (comboMenu (bool)));
+    connect (ui->quit, &QAbstractButton::clicked, this, &KvantumManager::close);
+    connect (ui->openTheme, &QAbstractButton::clicked, this, &KvantumManager::openTheme);
+    connect (ui->installTheme, &QAbstractButton::clicked, this, &KvantumManager::installTheme);
+    connect (ui->deleteTheme, &QAbstractButton::clicked, this, &KvantumManager::deleteTheme);
+    connect (ui->useTheme, &QAbstractButton::clicked, this, &KvantumManager::useTheme);
+    connect (ui->saveButton, &QAbstractButton::clicked, this, &KvantumManager::writeConfig);
+    connect (ui->restoreButton, &QAbstractButton::clicked, this, &KvantumManager::restoreDefault);
+    connect (ui->checkBoxNoComposite, &QAbstractButton::clicked, this, &KvantumManager::notCompisited);
+    connect (ui->checkBoxTrans, &QAbstractButton::clicked, this, &KvantumManager::isTranslucent);
+    connect (ui->checkBoxBlurWindow, &QAbstractButton::clicked, this, &KvantumManager::popupBlurring);
+    connect (ui->checkBoxDE, &QAbstractButton::clicked, this, &KvantumManager::respectDE);
+    connect (ui->checkBoxTransient, &QAbstractButton::clicked, this, &KvantumManager::trantsientScrollbarEnbled);
+    connect (ui->lineEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
+    connect (ui->appsEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
+    connect (ui->toolBox, &QToolBox::currentChanged, this, &KvantumManager::tabChanged);
+    connect (ui->saveAppButton, &QAbstractButton::clicked, this, &KvantumManager::writeAppLists);
+    connect (ui->removeAppButton, &QAbstractButton::clicked, this, &KvantumManager::removeAppList);
+    connect (ui->preview, &QAbstractButton::clicked, this, &KvantumManager::preview);
+    connect (ui->aboutButton, &QAbstractButton::clicked, this, &KvantumManager::aboutDialog);
+    connect (ui->whatsthisButton, &QAbstractButton::clicked, this, &KvantumManager::showWhatsThis);
+    connect (ui->checkBoxComboMenu, &QAbstractButton::clicked, this, &KvantumManager::comboMenu);
 
-#if QT_VERSION < 0x050000
-    ui->labelTooltipDelay->setEnabled (false);
-    ui->spinTooltipDelay->setEnabled (false);
-    ui->checkBoxTransient->setEnabled (false);
-#else
     /* get ready for translucency */
     setAttribute (Qt::WA_NativeWindow, true);
     if (QWindow *window = windowHandle())
@@ -137,7 +148,6 @@ KvantumManager::KvantumManager (const QString lang, QWidget *parent) : QMainWind
         format.setAlphaBufferSize (8);
         window->setFormat (format);
     }
-#endif
 
     resize (sizeHint().expandedTo (QSize (600, 400)));
 }
@@ -536,11 +546,7 @@ void KvantumManager::installTheme()
                 colorFiles.append (QString ("%1/%2.colors").arg (theme).arg (themeName + "Dark"));
             }
             /* also copy the color scheme file */
-#if QT_VERSION >= 0x050000
             for (const QString &colorFile : static_cast<const QStringList&>(colorFiles))
-#else
-            foreach (const QString &colorFile, colorFiles)
-#endif
             {
                 if (QFile::exists (colorFile))
                 {
@@ -592,11 +598,7 @@ static inline bool removeDir (const QString &dirName)
         const QFileInfoList infoList = dir.entryInfoList (QDir::Files | QDir::AllDirs
                                                           | QDir::NoDotAndDotDot | QDir::System | QDir::Hidden,
                                                           QDir::DirsFirst);
-#if QT_VERSION >= 0x050000
         for (const QFileInfo& info : infoList)
-#else
-        Q_FOREACH (const QFileInfo& info, infoList)
-#endif
         {
             if (info.isDir())
                 res = removeDir (info.absoluteFilePath());
@@ -876,11 +878,9 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->checkBoxAlt->setChecked (true);
     int delay = -1;
-#if QT_VERSION >= 0x050000
     if (defaultSettings.contains ("tooltip_delay")) // it's -1 by default
         delay = qMin (qMax (defaultSettings.value ("tooltip_delay").toInt(), -1), 9999);
     ui->spinTooltipDelay->setValue (delay);
-# endif
     delay = 250;
     if (defaultSettings.contains ("submenu_delay")) // it's 250 by default
         delay = qMin (qMax (defaultSettings.value ("submenu_delay").toInt(), -1), 1000);
@@ -987,7 +987,6 @@ void KvantumManager::defaultThemeButtons()
 void KvantumManager::restyleWindow()
 {
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
-#if QT_VERSION >= 0x050000
     // Qt5 has QEvent::ThemeChange
     const QWidgetList widgets = QApplication::allWidgets();
     for (QWidget *widget : widgets)
@@ -998,7 +997,6 @@ void KvantumManager::restyleWindow()
     /* For some reason (a Qt problem?), the palettes related to the
        comboboxes aren't updated completely when the style changes. */
     QTimer::singleShot(0, this, SLOT (updateCombos()));
-#endif
 }
 /*************************/
 void KvantumManager::updateCombos()
@@ -1066,13 +1064,7 @@ void KvantumManager::tabChanged (int index)
             if (ui->comboBox->currentText() == activeTheme)
                 showAnimated (ui->usageLabel, 1000);
             else
-            {
-#if QT_VERSION < 0x050000
-                ui->comboBox->setCurrentIndex (ui->comboBox->findText (activeTheme));
-#else
                 ui->comboBox->setCurrentText (activeTheme); // sets tooltip, animation, etc.
-#endif
-            }
         }
         else
             showAnimated (ui->appLabel, 1000);
@@ -1175,11 +1167,9 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("alt_mnemonic"))
                     ui->checkBoxAlt->setChecked (themeSettings.value ("alt_mnemonic").toBool());
                 int delay = -1;
-#if QT_VERSION >= 0x050000
                 if (themeSettings.contains ("tooltip_delay"))
                     delay = qMin (qMax (themeSettings.value ("tooltip_delay").toInt(), -1), 9999);
                 ui->spinTooltipDelay->setValue (delay);
-#endif
                 delay = 250;
                 if (themeSettings.contains ("submenu_delay"))
                     delay = qMin (qMax (themeSettings.value ("submenu_delay").toInt(), -1), 1000);
@@ -1324,11 +1314,7 @@ void KvantumManager::tabChanged (int index)
                 respectDE (ui->checkBoxDE->isChecked());
 
                 bool hasWindowPattern (false);
-#if QT_VERSION >= 0x050000
                 for (const QString &windowGroup : windowGroups)
-#else
-                foreach (const QString &windowGroup, windowGroups)
-#endif
                 {
                     themeSettings.beginGroup (windowGroup);
                     if (themeSettings.value ("interior.x.patternsize", 0).toInt() > 0
@@ -1346,9 +1332,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxPattern->setEnabled (false);
         }
 
-#if QT_VERSION >= 0x050000
         trantsientScrollbarEnbled(ui->checkBoxTransient->isChecked());
-#endif
 
         if (!confPageVisited_)
         { // here we try to avoid scrollbars as far as possible but there is no exact way for that
@@ -1514,14 +1498,18 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
 void KvantumManager::updateThemeList (bool updateAppThemes)
 {
     /* may be connected before */
-    disconnect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)),
-                this, SLOT (selectionChanged (const QString &)));
+#if QT_VERSION >= 0x050700
+    disconnect (ui->comboBox, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+                this, &KvantumManager::selectionChanged);
+#else
+    disconnect (ui->comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+                this, &KvantumManager::selectionChanged);
+#endif
     ui->comboBox->clear();
     QString curAppTheme;
     if (updateAppThemes)
     {
-        disconnect (ui->appCombo, SIGNAL (textChangedSignal (const QString &, const QString &)),
-                    this, SLOT (assignAppTheme (const QString &, const QString &)));
+        disconnect (ui->appCombo, &ComboBox::textChangedSignal, this, &KvantumManager::assignAppTheme);
         curAppTheme = ui->appCombo->currentText();
         ui->appCombo->clear();
     }
@@ -1533,11 +1521,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (kv.exists())
     {
         const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
-#if QT_VERSION >= 0x050000
         for (const QString &folder : folders)
-#else
-        foreach (const QString &folder, folders)
-#endif
         {
             QString path = QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (folder);
             if (isThemeDir (path))
@@ -1565,11 +1549,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (kv.exists())
     {
         const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
-#if QT_VERSION >= 0x050000
         for (const QString &folder : folders)
-#else
-        foreach (const QString &folder, folders)
-#endif
         {
             QString path = QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (folder);
             if (isThemeDir (path) && !folder.contains ("#"))
@@ -1585,11 +1565,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (kv.exists())
     {
         const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
-#if QT_VERSION >= 0x050000
         for (const QString &folder : folders)
-#else
-        foreach (const QString &folder, folders)
-#endif
         {
             QString path = QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (folder);
             if (isThemeDir (path) && !folder.contains ("#"))
@@ -1608,11 +1584,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (kv.exists())
     {
         const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
-#if QT_VERSION >= 0x050000
         for (const QString &folder : folders)
-#else
-        foreach (const QString &folder, folders)
-#endif
         {
             QString path = QString (DATADIR) + QString ("/Kvantum/%1").arg (folder);
             if (!folder.contains ("#") && isThemeDir (path))
@@ -1635,11 +1607,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (kv.exists())
     {
         const QStringList folders = kv.entryList (QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
-#if QT_VERSION >= 0x050000
         for (const QString &folder : folders)
-#else
-        foreach (const QString &folder, folders)
-#endif
         {
             QString path = QString (DATADIR) + QString ("/themes/%1/Kvantum").arg (folder);
             if (!folder.contains ("#") && isThemeDir (path))
@@ -1699,7 +1667,6 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (!QFile::exists (configFile))
     { // go to a global config file
         configFile = QString();
-#if QT_VERSION >= 0x050000
         QStringList confList = QStandardPaths::standardLocations (QStandardPaths::ConfigLocation);
         confList.removeOne (xdg_config_home);
         for (const QString &thisConf : static_cast<const QStringList&>(confList))
@@ -1712,7 +1679,6 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                 break;
             }
         }
-#endif
     }
     if (!configFile.isEmpty())
     {
@@ -1823,9 +1789,13 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     ui->comboBox->setWhatsThis (comment);
 
     /* connect to combobox signal */
-    connect (ui->comboBox, SIGNAL (currentIndexChanged (const QString &)),
-             this, SLOT (selectionChanged (const QString &)));
-
+#if QT_VERSION >= 0x050700
+    connect (ui->comboBox, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+             this, &KvantumManager::selectionChanged);
+#else
+    connect (ui->comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+             this, &KvantumManager::selectionChanged);
+#endif
     /* put the app themes list in the text edit */
     if (updateAppThemes)
     {
@@ -1843,8 +1813,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                 ui->appsEdit->setText (appThemes_.value (curTxt).join (","));
         }
 
-        connect (ui->appCombo, SIGNAL (textChangedSignal (const QString &, const QString &)),
-                 this, SLOT (assignAppTheme (const QString &, const QString &)));
+        connect (ui->appCombo, &ComboBox::textChangedSignal, this, &KvantumManager::assignAppTheme);
     }
 
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
@@ -1855,9 +1824,7 @@ void KvantumManager::preview()
 {
     QString binDir = QApplication::applicationDirPath();
     QString previewExe = binDir + "/kvantumpreview";
-#if QT_VERSION >= 0x050000
     previewExe += " -style kvantum";
-#endif
     process_->terminate();
     process_->waitForFinished();
     process_->start (previewExe);
@@ -1909,11 +1876,7 @@ bool KvantumManager::copyRootTheme (QString source, QString target)
         }
         if (QFile::copy (themeConfig, theCopy))
         {
-#if QT_VERSION < 0x050000
-            QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFile::WriteOwner);
-#else
             QFile::setPermissions (theCopy, QFile::permissions (theCopy) | QFileDevice::WriteOwner);
-#endif
             ui->statusBar->showMessage (tr ("A copy of the root config is created."), 10000);
         }
         else
@@ -1930,14 +1893,12 @@ bool KvantumManager::copyRootTheme (QString source, QString target)
 
     return true;
 }
-#if QT_VERSION >= 0x050000
 /*************************/
 static QString boolToStr (bool b)
 {
     if (b) return QString ("true");
     else return QString ("false");
 }
-#endif
 /*************************/
 void KvantumManager::writeConfig()
 {
@@ -1981,7 +1942,7 @@ void KvantumManager::writeConfig()
             notWritable (themeConfig);
             return;
         }
-#if QT_VERSION >= 0x050000
+
         /*************************************************************************
           WARNING! Damn! The Qt5 QSettings changes the order of keys on writing.
                          We should write the settings directly!
@@ -2054,7 +2015,7 @@ void KvantumManager::writeConfig()
         opaque = opaque.simplified();
         opaque.remove (" ");
         generalKeys.insert("opaque", opaque);
-#endif
+
         themeSettings.beginGroup ("Hacks");
         bool restyle = false;
         if (themeSettings.value ("normal_default_pushbutton").toBool() != ui->checkBoxNormalBtn->isChecked()
@@ -2065,7 +2026,6 @@ void KvantumManager::writeConfig()
         {
             restyle = true;
         }
-#if QT_VERSION >= 0x050000
         QMap<QString, QString>::iterator it;
         it = hackKeys.begin();
         while (!hackKeys.isEmpty() && it != hackKeys.end())
@@ -2077,26 +2037,6 @@ void KvantumManager::writeConfig()
             }
             else ++it;
         }
-#else
-        themeSettings.setValue ("transparent_dolphin_view", ui->checkBoxDolphin->isChecked());
-        themeSettings.setValue ("transparent_pcmanfm_sidepane", ui->checkBoxPcmanfmSide->isChecked());
-        themeSettings.setValue ("transparent_pcmanfm_view", ui->checkBoxPcmanfmView->isChecked());
-        themeSettings.setValue ("blur_translucent", ui->checkBoxBlurTranslucent->isChecked());
-        themeSettings.setValue ("transparent_ktitle_label", ui->checkBoxKtitle->isChecked());
-        themeSettings.setValue ("transparent_menutitle", ui->checkBoxMenuTitle->isChecked());
-        themeSettings.setValue ("kcapacitybar_as_progressbar", ui->checkBoxKCapacity->isChecked());
-        themeSettings.setValue ("respect_darkness", ui->checkBoxDark->isChecked());
-        themeSettings.setValue ("force_size_grip", ui->checkBoxGrip->isChecked());
-        themeSettings.setValue ("middle_click_scroll", ui->checkBoxScrollJump->isChecked());
-        themeSettings.setValue ("normal_default_pushbutton", ui->checkBoxNormalBtn->isChecked());
-        themeSettings.setValue ("iconless_pushbutton", ui->checkBoxIconlessBtn->isChecked());
-        themeSettings.setValue ("iconless_menu", ui->checkBoxIconlessMenu->isChecked());
-        themeSettings.setValue ("single_top_toolbar", ui->checkBoxToolbar->isChecked());
-        themeSettings.setValue ("no_selection_tint", ui->checkBoxTint->isChecked());
-        themeSettings.setValue ("tint_on_mouseover", ui->spinTint->value());
-        themeSettings.setValue ("disabled_icon_opacity", ui->spinOpacity->value());
-        themeSettings.setValue ("lxqtmainmenu_iconsize", ui->spinLxqtMenu->value());
-#endif
         themeSettings.endGroup();
 
         themeSettings.beginGroup ("General");
@@ -2126,7 +2066,6 @@ void KvantumManager::writeConfig()
         {
             restyle = true;
         }
-#if QT_VERSION >= 0x050000
         it = generalKeys.begin();
         while (!generalKeys.isEmpty() && it != generalKeys.end())
         {
@@ -2137,56 +2076,8 @@ void KvantumManager::writeConfig()
             }
             else ++it;
         }
-#else
-        themeSettings.setValue ("composite", !ui->checkBoxNoComposite->isChecked());
-        themeSettings.setValue ("animate_states", ui->checkBoxAnimation->isChecked());
-        themeSettings.setValue ("no_window_pattern", ui->checkBoxPattern->isChecked());
-        themeSettings.setValue ("left_tabs", ui->checkBoxleftTab->isChecked());
-        themeSettings.setValue ("joined_inactive_tabs", ui->checkBoxJoinTab->isChecked());
-        themeSettings.setValue ("scroll_arrows", !ui->checkBoxNoScrollArrow->isChecked());
-        themeSettings.setValue ("scrollbar_in_view", ui->checkBoxScrollIn->isChecked());
-        themeSettings.setValue ("transient_scrollbar", ui->checkBoxTransient->isChecked());
-        themeSettings.setValue ("transient_groove", ui->checkBoxTransientGroove->isChecked());
-        themeSettings.setValue ("scrollable_menu", ui->checkBoxScrollableMenu->isChecked());
-        themeSettings.setValue ("tree_branch_line", ui->checkBoxTree->isChecked());
-        themeSettings.setValue ("groupbox_top_label", ui->checkBoxGroupLabel->isChecked());
-        themeSettings.setValue ("fill_rubberband", ui->checkBoxRubber->isChecked());
-        themeSettings.setValue ("menubar_mouse_tracking", ui->checkBoxMenubar->isChecked());
-        themeSettings.setValue ("merge_menubar_with_toolbar", ui->checkBoxMenuToolbar->isChecked());
-        themeSettings.setValue ("group_toolbar_buttons", ui->checkBoxGroupToolbar->isChecked());
-        themeSettings.setValue ("button_contents_shift", ui->checkBoxButtonShift->isChecked());
-        themeSettings.setValue ("alt_mnemonic", ui->checkBoxAlt->isChecked());
-        themeSettings.setValue ("submenu_delay", ui->spinSubmenuDelay->value());
-        themeSettings.setValue ("toolbutton_style", ui->comboToolButton->currentIndex());
-        themeSettings.setValue ("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
-        themeSettings.setValue ("respect_DE", ui->checkBoxDE->isChecked());
-        themeSettings.setValue ("double_click", ui->checkBoxClick->isChecked());
-        themeSettings.setValue ("inline_spin_indicators", ui->checkBoxInlineSpin->isChecked());
-        themeSettings.setValue ("vertical_spin_indicators", ui->checkBoxVSpin->isChecked());
-        themeSettings.setValue ("combo_as_lineedit", ui->checkBoxComboEdit->isChecked());
-        themeSettings.setValue ("combo_menu", ui->checkBoxComboMenu->isChecked());
-        themeSettings.setValue ("hide_combo_checkboxes", ui->checkBoxHideComboCheckboxes->isChecked());
-        themeSettings.setValue ("translucent_windows", ui->checkBoxTrans->isChecked());
-        themeSettings.setValue ("reduce_window_opacity", ui->spinReduceOpacity->value());
-        themeSettings.setValue ("blurring", ui->checkBoxBlurWindow->isChecked());
-        themeSettings.setValue ("popup_blurring", ui->checkBoxBlurPopup->isChecked());
-        themeSettings.setValue ("small_icon_size", ui->spinSmall->value());
-        themeSettings.setValue ("large_icon_size", ui->spinLarge->value());
-        themeSettings.setValue ("button_icon_size", ui->spinButton->value());
-        themeSettings.setValue ("toolbar_icon_size", ui->spinToolbar->value());
-        themeSettings.setValue ("layout_spacing", ui->spinLayout->value());
-        themeSettings.setValue ("layout_margin", ui->spinLayoutMargin->value());
-        themeSettings.setValue ("submenu_overlap", ui->spinOverlap->value());
-        themeSettings.setValue ("spin_button_width", ui->spinSpinBtnWidth->value());
-        themeSettings.setValue ("scroll_min_extent", ui->spinMinScrollLength->value());
-        QString opaque = ui->opaqueEdit->text();
-        opaque = opaque.simplified();
-        opaque.remove (" ");
-        QStringList opaqueList = opaque.split (",", QString::SkipEmptyParts);
-        themeSettings.setValue ("opaque", opaqueList);
-#endif
         themeSettings.endGroup();
-#if QT_VERSION >= 0x050000
+
         QFile file (themeConfig);
         if (!file.open (QIODevice::ReadOnly | QIODevice::Text))
             return;
@@ -2284,7 +2175,7 @@ void KvantumManager::writeConfig()
                 out << lines.at(i) << "\n";
             file.close();
         }
-#endif
+
         ui->statusBar->showMessage (tr ("Configuration saved."), 10000);
         QString theme;
         if (kvconfigTheme_ == "Default#")
@@ -2381,7 +2272,7 @@ void KvantumManager::removeAppList()
 }
 /*************************/
 void KvantumManager::restoreDefault()
-{ 
+{
     /* The restore button is shown only when kvconfigTheme_ ends with "#" (-> tabChanged())
        but we're wise and so, cautious ;) */
     if (!kvconfigTheme_.endsWith ("#")) return;

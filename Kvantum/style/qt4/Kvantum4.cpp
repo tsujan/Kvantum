@@ -3689,15 +3689,13 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (qstyleoption_cast<const QStyleOptionFocusRect*>(option)
           /* this would be not only useless but also ugly */
           && !(widget && widget->inherits("QComboBoxListView")))
-      {
-        const interior_spec ispec = getInteriorSpec("Focus");
+      { // no interior
         frame_spec fspec = getFrameSpec("Focus");
         fspec.expansion = 0;
         fspec.left = qMin(fspec.left,2);
         fspec.right = qMin(fspec.right,2);
         fspec.top = qMin(fspec.top,2);
         fspec.bottom = qMin(fspec.bottom,2);
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element);
         renderFrame(painter,option->rect,fspec,fspec.element);
       }
 

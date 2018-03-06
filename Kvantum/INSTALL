@@ -25,7 +25,7 @@ In Arch-based systems, the packages are:
 
  * gcc (or gcc-multilib for multilib systems)
  * libx11 and libxext (for X11)
- * qt5-base, qt5-svg and qt5-x11extras (for Qt5) 
+ * qt5-base, qt5-svg and qt5-x11extras (for Qt5)
  * qt4 (for Qt4 and if you want Qt4 support)
  * qt5-tools (for localization if you need it)
 
@@ -69,9 +69,9 @@ If you have compiled Kvantum with qmake, the following command cleans the source
 
 If you have used cmake for compilation, to compile Kvantum again, first remove the contents of the build directory.
 
-Installation for your default Qt version (Qt5, in most distros) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4.
+Installation for your default Qt version (Qt5) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4.
 
-Kvantum Manager uses the Qt5 plugin but you could manually compile it against Qt4 by opening a terminal inside the folder "kvantummanager" and issuing the qmake compilation command using the Qt4 qmake.
+Kvantum Manager is based on Qt5 and cannot be compiled against Qt4.
 
 The main reason for including a cmake build is that a few distros (especially Fedora) may have problem with qmake.
 

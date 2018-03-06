@@ -2392,9 +2392,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        animatedWidget_ = w;
         /* the animations are started/stopped inside
            the drawing functions by using styleObject */
+        animatedWidget_ = w;
       }
       else if (qobject_cast<QComboBox*>(o))
       {
@@ -2560,16 +2560,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
              && !(tspec_.combo_as_lineedit
                   && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
-      if (!opacityTimer_->isActive())
+      if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        animatedWidget_ = w;
         /* button animations are started/stopped inside their drawing functions
            by using styleObject (groupboxes are always checkable here) */
-        if (!qobject_cast<QAbstractButton*>(o) && !qobject_cast<QGroupBox*>(o))
-        {
-          animationOpacity_ = 0;
-          opacityTimer_->start(ANIMATION_FRAME);
-        }
+        animatedWidget_ = w;
+      }
+      else if (!opacityTimer_->isActive())
+      {
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+        opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -2582,14 +2583,22 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
-        {
-          opacityTimer_->stop();
-          animationOpacity_ = 100;
-          animatedWidget_->update();
+        if (opacityTimer_->isActive() && animatedWidget_)
+        { // finish the previous animation, whether in this widget or not
+          if (animatedWidget_ == w)
+          {
+            animationOpacity_ = 100;
+            animatedWidget_->repaint();
+          }
+          else
+          {
+            opacityTimer_->stop();
+            animationOpacity_ = 100;
+            animatedWidget_->update();
+          }
         }
         animatedWidget_ = w;
+        animationOpacity_ = 0;
       }
       else if ((qobject_cast<QComboBox*>(o) // impossible because of popup
                 && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
@@ -2615,16 +2624,39 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
       break;
     if (w && w->isEnabled() && tspec_.animate_states
-        && animatedWidget_ == w
         // these widget are dealt with in QEvent::FocusIn
         && !qobject_cast<QAbstractSpinBox*>(o)
         && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o))
     {
-      /* we don't need to stop animation here because
-         no other widget could have been animated */
-      animatedWidget_ = w;
-      if (!qobject_cast<QAbstractButton*>(o) && !qobject_cast<QGroupBox*>(o))
+      if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
+        if (opacityTimer_->isActive() && animatedWidget_)
+        {
+          if (animatedWidget_ == w)
+          {
+            animationOpacity_ = 100;
+            animatedWidget_->repaint();
+          }
+          else
+          {
+            opacityTimer_->stop();
+            animationOpacity_ = 100;
+            animatedWidget_->update();
+          }
+        }
+        animatedWidget_ = w;
+        animationOpacity_ = 0;
+      }
+      else
+      {
+        if (animatedWidget_ && animatedWidget_ != w
+            && opacityTimer_->isActive())
+        {
+          opacityTimer_->stop();
+          animationOpacity_ = 100;
+          animatedWidget_->update();
+        }
+        animatedWidget_ = w;
         animationOpacity_ = 0;
         opacityTimer_->start(ANIMATION_FRAME);
       }
@@ -4611,15 +4643,13 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (qstyleoption_cast<const QStyleOptionFocusRect*>(option)
           /* this would be not only useless but also ugly */
           && !(widget && widget->inherits("QComboBoxListView")))
-      {
-        const interior_spec ispec = getInteriorSpec("Focus");
+      { // no interior
         frame_spec fspec = getFrameSpec("Focus");
         fspec.expansion = 0;
         fspec.left = qMin(fspec.left,2);
         fspec.right = qMin(fspec.right,2);
         fspec.top = qMin(fspec.top,2);
         fspec.bottom = qMin(fspec.bottom,2);
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element);
         renderFrame(painter,option->rect,fspec,fspec.element);
       }
 
@@ -7205,6 +7235,39 @@ void Style::drawControl(ControlElement element,
 
       if (opt) {
         bool isRadio = (element == CE_RadioButton);
+
+        if (opt->state & State_HasFocus)
+        {
+          QString group;
+          QRect fRect;
+          if (isRadio)
+          {
+            group = "RadioButton";
+            fRect = subElementRect(SE_RadioButtonFocusRect, opt, widget);
+          }
+          else
+          {
+            group = "CheckBox";
+            fRect = subElementRect(SE_CheckBoxFocusRect, opt, widget);
+          }
+          const frame_spec fspec = getFrameSpec(group);
+          if (fspec.hasFocusFrame)
+          {
+            renderFrame(painter,fRect,fspec,fspec.element+"-focus");
+            const interior_spec ispec = getInteriorSpec(group);
+            if (ispec.hasFocusInterior)
+              renderInterior(painter,fRect,fspec,ispec,ispec.element+"-focus");
+          }
+          else
+          {
+            QStyleOptionFocusRect fropt;
+            fropt.QStyleOption::operator=(*opt);
+            fropt.rect = subElementRect(isRadio ? SE_RadioButtonFocusRect
+                                                : SE_CheckBoxFocusRect, opt, widget);
+            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          }
+        }
+
         QStyleOptionButton subopt = *opt;
         subopt.rect = subElementRect(isRadio ? SE_RadioButtonIndicator
                                              : SE_CheckBoxIndicator, opt, widget);
@@ -7213,15 +7276,6 @@ void Style::drawControl(ControlElement element,
         subopt.rect = subElementRect(isRadio ? SE_RadioButtonContents
                                              : SE_CheckBoxContents, opt, widget);
         drawControl(isRadio ? CE_RadioButtonLabel : CE_CheckBoxLabel, &subopt, painter, widget);
-
-        if (opt->state & State_HasFocus)
-        {
-          QStyleOptionFocusRect fropt;
-          fropt.QStyleOption::operator=(*opt);
-          fropt.rect = subElementRect(isRadio ? SE_RadioButtonFocusRect
-                                              : SE_CheckBoxFocusRect, opt, widget);
-          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-        }
       }
 
       break;
@@ -7800,6 +7854,13 @@ void Style::drawControl(ControlElement element,
 
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+        if ((opt->state & State_HasFocus)
+            && fspec.hasFocusFrame) // otherwise -> CE_TabBarTabLabel
+        {
+          renderFrame(painter,r,fspec,fspec.element+"-focus");
+          if (ispec.hasFocusInterior)
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-focus");
+        }
         if (drawSep)
         {
           renderElement(painter,sepName,sep);
@@ -8051,7 +8112,8 @@ void Style::drawControl(ControlElement element,
                     getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                     iconSize);
 
-        if (opt->state & State_HasFocus)
+        if ((opt->state & State_HasFocus)
+            && !fspec.hasFocusFrame) // otherwise -> CE_TabBarTabShape
         {
           QStyleOptionFocusRect fropt;
           fropt.QStyleOption::operator=(*opt);
@@ -9845,13 +9907,22 @@ void Style::drawControl(ControlElement element,
 
         if (opt->state & State_HasFocus)
         {
-          QStyleOptionFocusRect fropt;
-          fropt.QStyleOption::operator=(*opt);
-          if (fspec.expansion > 0)
-            fropt.rect = labelRect(option->rect, fspec, lspec).adjusted(-2,-2,2,2);
+          if (fspec.hasFocusFrame)
+          {
+            renderFrame(painter,option->rect,fspec,fspec.element+"-focus");
+            if (ispec.hasFocusInterior)
+              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focus");
+          }
           else
-            fropt.rect = interiorRect(option->rect, fspec);
-          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          {
+            QStyleOptionFocusRect fropt;
+            fropt.QStyleOption::operator=(*opt);
+            if (fspec.expansion > 0)
+              fropt.rect = labelRect(option->rect, fspec, lspec).adjusted(-2,-2,2,2);
+            else
+              fropt.rect = interiorRect(option->rect, fspec);
+            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          }
         }
       }
 
@@ -10608,7 +10679,22 @@ void Style::drawComplexControl(ComplexControl control,
           standardButton.insert(widget);
           connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
         }
-        const QString group = "PanelButtonTool";
+        QString group = "PanelButtonTool";
+        bool autoraise(false);
+        QWidget *stb = getStylableToolbarContainer(widget);
+        if (tb)
+        {
+          autoraise = tb->autoRaise();
+          if (stb)
+          {
+            autoraise = true;
+            if (!getFrameSpec("ToolbarButton").element.isEmpty()
+                || !getInteriorSpec("ToolbarButton").element.isEmpty())
+            {
+              group = "ToolbarButton";
+            }
+          }
+        }
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
         QStyleOptionToolButton o(*opt);
@@ -10634,10 +10720,40 @@ void Style::drawComplexControl(ComplexControl control,
         if (!widget || !widget->inherits("QDockWidgetTitleButton"))
           drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
         //drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
+
+        QWidget *p = getParent(widget,1);
+
+        /* focus rect should be drawn before label and arrow because it may have an interior */
+        if (opt->state & State_HasFocus
+            /* drawn for tabbar scroll buttons at CE_ToolButtonLabel */
+            && (!qobject_cast<QTabBar*>(p)
+                || ((opt->toolButtonStyle != Qt::ToolButtonIconOnly && !opt->text.isEmpty())
+                    || !opt->icon.isNull()
+                    || !(opt->features & QStyleOptionToolButton::Arrow)
+                    || opt->arrowType == Qt::NoArrow)))
+        {
+          if (fspec.hasFocusFrame)
+          {
+            renderFrame(painter,opt->rect,fspec,fspec.element+"-focus");
+            const interior_spec ispec = getInteriorSpec(group);
+            if (ispec.hasFocusInterior)
+              renderInterior(painter,opt->rect,fspec,ispec,ispec.element+"-focus");
+          }
+          else
+          {
+            QStyleOptionFocusRect fropt;
+            fropt.QStyleOption::operator=(*opt);
+            if (fspec.expansion > 0)
+              fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
+            else
+              fropt.rect = interiorRect(opt->rect, fspec);
+            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          }
+        }
+
         o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
-        QWidget *p = getParent(widget,1);
         if (tb)
         {
           o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
@@ -10650,19 +10766,6 @@ void Style::drawComplexControl(ComplexControl control,
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
             QWidget *gp = getParent(p,1);
-            QString group1 = group;
-            QWidget *stb = getStylableToolbarContainer(widget);
-            bool autoraise(tb->autoRaise());
-            if (stb)
-            {
-              autoraise = true;
-              if (!getFrameSpec("ToolbarButton").element.isEmpty()
-                  || !getInteriorSpec("ToolbarButton").element.isEmpty())
-              {
-                group1 = "ToolbarButton";
-              }
-            }
-
             bool drawRaised = false;
             if (tspec_.group_toolbar_buttons)
             {
@@ -10673,8 +10776,8 @@ void Style::drawComplexControl(ComplexControl control,
               }
             }
 
-            indicator_spec dspec = getIndicatorSpec(group1);
-            lspec = getLabelSpec(group1);
+            indicator_spec dspec = getIndicatorSpec(group);
+            lspec = getLabelSpec(group);
 
             QString aStatus = getState(option,widget);
             if (aStatus.startsWith("focused")
@@ -10699,10 +10802,10 @@ void Style::drawComplexControl(ComplexControl control,
                 menubar = p;
               if (menubar)
               {
-                group1 = "MenuBar";
+                group = "MenuBar";
                 if (mergedToolbarHeight(menubar))
-                  group1 = "Toolbar";
-                if (enoughContrast(col, getFromRGBA(getLabelSpec(group1).normalColor)))
+                  group = "Toolbar";
+                if (enoughContrast(col, getFromRGBA(getLabelSpec(group).normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
               else if (stb)
@@ -10746,23 +10849,6 @@ void Style::drawComplexControl(ComplexControl control,
                             option->direction,
                             ialign);
           }
-        }
-
-        if (opt->state & State_HasFocus
-            /* drawn at CE_ToolButtonLabel for tabbar scroll buttons */
-            && (!qobject_cast<QTabBar*>(p)
-                || ((opt->toolButtonStyle != Qt::ToolButtonIconOnly && !opt->text.isEmpty())
-                    || !opt->icon.isNull()
-                    || !(opt->features & QStyleOptionToolButton::Arrow)
-                    || opt->arrowType == Qt::NoArrow)))
-        {
-          QStyleOptionFocusRect fropt;
-          fropt.QStyleOption::operator=(*opt);
-          if (fspec.expansion > 0)
-            fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
-          else
-            fropt.rect = interiorRect(opt->rect, fspec);
-          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
         }
       }
 
@@ -11262,13 +11348,22 @@ void Style::drawComplexControl(ComplexControl control,
                 && (option->state & State_Enabled) && !(option->state & State_On)
                 && ((option->state & State_Sunken) || (option->state & State_Selected)))
             {
-              QStyleOptionFocusRect fropt;
-              fropt.QStyleOption::operator=(*opt);
-              if (fspec.expansion > 0)
-                fropt.rect = labelRect(r, fspec, lspec).adjusted(-2,-2,2,2);
+              if (fspec.hasFocusFrame)
+              {
+                renderFrame(painter,r,fspec,fspec.element+"-focus");
+                if (ispec.hasFocusInterior)
+                  renderInterior(painter,r,fspec,ispec,ispec.element+"-focus");
+              }
               else
-                fropt.rect = interiorRect(r, fspec);
-              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+              {
+                QStyleOptionFocusRect fropt;
+                fropt.QStyleOption::operator=(*opt);
+                if (fspec.expansion > 0)
+                  fropt.rect = labelRect(r, fspec, lspec).adjusted(-2,-2,2,2);
+                else
+                  fropt.rect = interiorRect(r, fspec);
+                drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+              }
             }
             /* force label color (as in Krusader) */
             if (cb && (option->state & State_Enabled))
@@ -11578,7 +11673,7 @@ void Style::drawComplexControl(ComplexControl control,
 
           drawControl(CE_ScrollBarSlider,&o,painter,widget);
 
-          if (opt->state & State_HasFocus)
+          if ((opt->state & State_HasFocus) && !isTransient)
           {
             QStyleOptionFocusRect fropt;
             fropt.QStyleOption::operator=(*opt);
@@ -11721,7 +11816,30 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          /* now draw the groove */
+          /* first draw the focus rect */
+          if (opt && opt->state & State_HasFocus)
+          {
+            QRect FR = opt->rect;
+            if (horiz)
+              FR.setRect(0, 0, h, w);
+            const frame_spec fspec1 = getFrameSpec(group);
+            if (fspec1.hasFocusFrame)
+            {
+              renderFrame(painter,FR,fspec1,fspec1.element+"-focus");
+              const interior_spec ispec1 = getInteriorSpec(group);
+              if (ispec1.hasFocusInterior)
+                renderInterior(painter,FR,fspec1,ispec1,ispec1.element+"-focus");
+            }
+            else
+            {
+              QStyleOptionFocusRect fropt;
+              fropt.QStyleOption::operator=(*opt);
+              fropt.rect = FR;
+              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            }
+          }
+
+          /* then, draw the groove */
           QString suffix = "-normal";
           if (isWidgetInactive(widget))
             suffix = "-normal-inactive";
@@ -11751,17 +11869,6 @@ void Style::drawComplexControl(ComplexControl control,
             renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
             painter->restore();
-          }
-
-          if (opt && opt->state & State_HasFocus)
-          {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
-            QRect FR = opt->rect;
-            if (horiz)
-              FR.setRect(0, 0, h, w);
-            fropt.rect = FR;
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
           }
 
           if (horiz)
@@ -12247,6 +12354,25 @@ void Style::drawComplexControl(ComplexControl control,
         // Draw title
         if ((opt->subControls & QStyle::SC_GroupBoxLabel) && !opt->text.isEmpty())
         {
+          if (opt->state & State_HasFocus)
+          {
+            const frame_spec fspec = getFrameSpec("GroupBox");
+            if (fspec.hasFocusFrame)
+            {
+              renderFrame(painter,textRect,fspec,fspec.element+"-focus");
+              const interior_spec ispec = getInteriorSpec("GroupBox");
+              if (ispec.hasFocusInterior)
+                renderInterior(painter,textRect,fspec,ispec,ispec.element+"-focus");
+            }
+            else
+            {
+              QStyleOptionFocusRect fropt;
+              fropt.QStyleOption::operator=(*opt);
+              fropt.rect = textRect;
+              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            }
+          }
+
           bool isInactive(isWidgetInactive(widget));
           const label_spec lspec = getLabelSpec("GroupBox");
           QColor col;
@@ -12333,14 +12459,6 @@ void Style::drawComplexControl(ComplexControl control,
             painter->restore();
           if (lspec.boldFont || lspec.italicFont)
             painter->restore();
-
-          if (opt->state & State_HasFocus)
-          {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
-            fropt.rect = textRect;
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-          }
         }
 
         // Draw checkbox
@@ -16264,8 +16382,10 @@ void Style::renderFrame(QPainter *painter,
   }
   else if (element.endsWith("-default")) // default button
     realElement += "-default";
+  else if (element.endsWith("-focus")) // focus element
+    realElement += "-focus";
 
-  QString element1(realElement);
+  QString element1(realElement); // the element that will be drawn
   QString element0(realElement); // used just for checking
   element0 = "expand-"+element0;
   bool hasHorizCapsule(fspec.hasCapsule && fspec.capsuleH != 2);
@@ -16293,6 +16413,37 @@ void Style::renderFrame(QPainter *painter,
       /* there's no right/left expanded element */
       && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
   {
+    bool topElementMissing(!drawBorder);
+    /* find the element that should be drawn (element1) */
+    element0 = "border-"+realElement;
+    if (drawBorder && themeRndr_ && themeRndr_->isValid()
+        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
+            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
+    {
+      element1 = element0;
+      if (isInactive)
+        element1 = element1 + "-inactive";
+    }
+    else
+    {
+      element0 = "expand-"+realElement;
+      if (themeRndr_ && themeRndr_->isValid()
+          && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
+              || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
+      {
+        element1 = element0;
+        if (isInactive)
+          element1 = element1 + "-inactive";
+        drawBorder = false;
+      }
+      else
+      {
+        drawBorder = false; // don't waste CPU time
+        topElementMissing = true;
+      }
+    }
+
+    /* find the main sizes for drawing expanded frames */
     e = qMin(e,fspec.expansion);
     int H = h;
     if (grouped) H = e;
@@ -16300,8 +16451,8 @@ void Style::renderFrame(QPainter *painter,
     {
       /* to get smoother gradients, we use QTransform in this special case
          but not when the rect is grouped (as in grouped toolbuttons inside
-         vertical toolbars or small progressbar indicators */
-      if (h > w && !grouped)
+         vertical toolbars or small progressbar indicators) */
+      if (h > w && !grouped && !topElementMissing)
       {
         QRect r;
         r.setRect(y0, x0, h, w);
@@ -16314,7 +16465,7 @@ void Style::renderFrame(QPainter *painter,
         painter->restore();
         return;
       }
-      if (h > w && grouped)
+      if (h > w/* && grouped*/)
         e = qMin(e,w);  // only here e may be greater than w
       if (e%2 == 0)
       {
@@ -16349,29 +16500,6 @@ void Style::renderFrame(QPainter *painter,
         Right = X;
         Left = qMin(fspec.left,w/2);
       }
-    }
-    element0 = "border-"+realElement;
-    if (drawBorder && themeRndr_ && themeRndr_->isValid()
-        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
-    {
-      element1 = element0;
-      if (isInactive)
-        element1 = element1 + "-inactive";
-    }
-    else
-    {
-      element0 = "expand-"+realElement;
-      if (themeRndr_ && themeRndr_->isValid()
-          && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-              || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
-      {
-        element1 = element0;
-        if (isInactive)
-          element1 = element1 + "-inactive";
-        drawBorder = false;
-      }
-      else drawBorder = false; // don't waste CPU time
     }
   }
   else
@@ -17299,7 +17427,7 @@ QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
   }
 }
 
-bool Style::hasExpandedBorder(const frame_spec fspec) const
+bool Style::hasExpandedBorder(const frame_spec &fspec) const
 {
   if (fspec.expansion > 0
       && themeRndr_ && themeRndr_->isValid())

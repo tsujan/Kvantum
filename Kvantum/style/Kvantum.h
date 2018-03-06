@@ -285,7 +285,7 @@ class Style : public QCommonStyle {
     }
 
     /* Can an expanded border be drawn for this frame? */
-    bool hasExpandedBorder(const frame_spec fspec) const;
+    bool hasExpandedBorder(const frame_spec &fspec) const;
 
     /* Get menu margins, including its shadow. */
     int getMenuMargin(bool horiz) const;
