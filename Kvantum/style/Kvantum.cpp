@@ -2624,9 +2624,16 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     if (!mouseEvent || mouseEvent->button() != Qt::LeftButton)
       break;
     if (w && w->isEnabled() && tspec_.animate_states
+        && (qobject_cast<QAbstractButton*>(o)
+            || qobject_cast<QGroupBox*>(o)
+            || qobject_cast<QSlider*>(o)
+            || qobject_cast<QScrollBar*>(o)
+            || (qobject_cast<QComboBox*>(o)
+                && !((tspec_.combo_as_lineedit || tspec_.square_combo_button) && qobject_cast<QComboBox*>(o)->lineEdit())))
+        /* FIXME: Can't we just use the condition "animatedWidget_ == w" and exclude the widgets below? */
         // these widget are dealt with in QEvent::FocusIn
-        && !qobject_cast<QAbstractSpinBox*>(o)
-        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o))
+        /*&& !qobject_cast<QAbstractSpinBox*>(o)
+        && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)*/)
     {
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
