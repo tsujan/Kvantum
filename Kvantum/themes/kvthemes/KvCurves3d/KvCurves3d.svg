@@ -1165,4 +1165,10 @@
 <rect width="10" x="323" y="177" height="10" style="opacity:0" id="border-tab-focus-top"/>
 </g>
 </g>
+<path style="fill:#fff;fill-rule:evenodd;stroke:none;fill-opacity:.094" id="slider-focus-left" d="m 106,660 h 7.5 v -7.5 H 106 Z"/>
+<path style="fill:#fff;stroke:none;fill-opacity:.094" id="slider-focus-topleft" d="m 113.5,645 c -4.1421,0 -7.5,3.35786 -7.5,7.5 h 7.5 z"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-left" id="slider-focus-right" transform="matrix(-1,0,0,1,227,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-topright" transform="matrix(-1,0,0,1,227,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomleft" transform="matrix(1,0,0,-1,0,1312.5)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomright" transform="rotate(-180,113.5,656.25)"/>
 </svg>

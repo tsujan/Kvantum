@@ -19,6 +19,11 @@ V0.10.6
  * Fixed the disabled text color of auto-raised toolbuttons in dark-and-light themes.
  * Don't draw the interior of the focus rectangle but allow complete focus elements on the whole widget (button like widgets, tabs, group boxes and sliders are supported), so that if their names exist in the config file, their elements will be drawn instead of the focus rectangle.
  * Don't rotate a rounded frame unless it has a top expanded (or border) element.
+ * Added a key for an extra margin between tab frame and tab button.
+ * Added a 3px spacing between the top text of a groupbox and its top frame.
+ * Added optional icon/arrow separators for comboboxes in edit mode.
+ * Added a key for square arrow buttons in editable combo boxes. It also removes the combo panel behind the icon.
+ * Put the texts of thin progressbars above them as far as possible. If there isn't enough space above a thin progressbar, put its the text in front of it.
 
 V0.10.5
 ---------

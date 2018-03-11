@@ -6089,6 +6089,19 @@ void Style::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec(group);
         size_spec sspec = getSizeSpec(group);
 
+        /* there's no reason for a variable distance from the arrow
+            because the combobox length doesn't change with it */
+        if (opt->direction == Qt::RightToLeft)
+        {
+          fspec.left = 0;
+          lspec.left = 3;
+        }
+        else
+        {
+          fspec.right = 0;
+          lspec.right = 3;
+        }
+
         QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -6113,15 +6126,15 @@ void Style::drawControl(ControlElement element,
             QFont F(painter->font());
             if (lspec.boldFont) F.setBold(true);
             QSize txtSize = textSize(F,opt->currentText,false);
-            const indicator_spec dspec = getIndicatorSpec("DropDownButton");
-            int deltaR = 0; int deltaL = 0;
-            int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
+            //const indicator_spec dspec = getIndicatorSpec("DropDownButton");
+            //int deltaR = 0; int deltaL = 0;
+            //int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
             if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                               + (sspec.incrementW ? sspec.minW : 0)
                 ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
             {
-              deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
-              deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
+              //deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
+              //deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
 
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
@@ -6138,13 +6151,13 @@ void Style::drawControl(ControlElement element,
               sspec.incrementW = false;
 
               /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
-              iSize = qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9);
+              //iSize = qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9);
             }
             /* give all available space to the label */
-            if (opt->direction == Qt::RightToLeft)
+            /*if (opt->direction == Qt::RightToLeft)
               r.adjust(-deltaL-qMax(COMBO_ARROW_LENGTH-iSize,0), 0, 0, 0);
             else
-              r.adjust(0, 0, deltaR+qMax(COMBO_ARROW_LENGTH-iSize,0), 0);
+              r.adjust(0, 0, deltaR+qMax(COMBO_ARROW_LENGTH-iSize,0), 0);*/
           }
         }
 
@@ -8435,11 +8448,12 @@ void Style::drawControl(ControlElement element,
           bool noPanel(!paneledButtons.contains(widget));
           if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
-            /* cover the simple disabled state too */
-            bool isNormal(!(option->state & State_On)
-                          && !(option->state & State_Sunken)
-                          && !(option->state & State_Selected)
-                          && (!(option->state & State_MouseOver) || !(option->state & State_Enabled)));
+            bool isNormal(status.startsWith("normal")
+                          /* cover the simple disabled state too */
+                          || (status.startsWith("disabled")
+                              && !(option->state & State_On)
+                              && !(option->state & State_Sunken)
+                              && !(option->state & State_Selected)));
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
@@ -9525,8 +9539,8 @@ void Style::drawComplexControl(ComplexControl control,
               QStyleOptionComboBox leOpt(*opt);
               if (!tspec_.combo_as_lineedit && editable)
               {
-                leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
-                                             rtl ? editWidth-o.rect.width() : 0);
+                leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0,
+                                             rtl ? editWidth-o.rect.width() : 0, 0);
               }
               QString _status = status;
               if (tspec_.combo_focus_rect)

@@ -2375,7 +2375,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
              && !w->isWindow() // WARNING: Translucent (Qt5) windows have enter event!
              && !qobject_cast<QAbstractSpinBox*>(o) && !qobject_cast<QProgressBar*>(o)
              && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-             && !(tspec_.combo_as_lineedit
+             && !((tspec_.combo_as_lineedit || tspec_.square_combo_button)
                   && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
       /* if another animation is in progress, end it */
@@ -2424,7 +2424,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     if (w && w->isEnabled() && tspec_.animate_states)
     {
       if (qobject_cast<QComboBox*>(o)
-          && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
+          && !((tspec_.combo_as_lineedit || tspec_.square_combo_button) && qobject_cast<QComboBox*>(o)->lineEdit()))
       { // QEvent::MouseButtonPress may follow this
         if (animatedWidget_ // the cusror may have been on the popup scrollbar
             && opacityTimer_->isActive())
@@ -2452,7 +2452,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
                 && !qobject_cast<QComboBox*>(w->parentWidget()))
             || qobject_cast<QAbstractSpinBox*>(o)
-            || (tspec_.combo_as_lineedit
+            || ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
                 && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
         {
           /* disable animation if focus-in happens immediately after focus-out
@@ -2531,7 +2531,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animatedWidgetOut_->update();
         }
         if (qobject_cast<QComboBox*>(o)
-            && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
+            && !((tspec_.combo_as_lineedit || tspec_.square_combo_button) && qobject_cast<QComboBox*>(o)->lineEdit()))
         {
           animationStartStateOut_ = "pressed";
         }
@@ -2557,7 +2557,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     else if (w && w->isEnabled() && tspec_.animate_states && animatedWidget_ == w
              && !qobject_cast<QAbstractSpinBox*>(o)
              && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
-             && !(tspec_.combo_as_lineedit
+             && !((tspec_.combo_as_lineedit || tspec_.square_combo_button)
                   && qobject_cast<QComboBox*>(o) && qobject_cast<QComboBox*>(o)->lineEdit()))
     {
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
@@ -2601,7 +2601,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         animationOpacity_ = 0;
       }
       else if ((qobject_cast<QComboBox*>(o) // impossible because of popup
-                && !(tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(o)->lineEdit()))
+                && !((tspec_.combo_as_lineedit || tspec_.square_combo_button) && qobject_cast<QComboBox*>(o)->lineEdit()))
                || qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
       {
         if (animatedWidget_ && animatedWidget_ != w
@@ -3060,8 +3060,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         /* start with an appropriate state on closing popup, considering
            that lineedits only have normal and focused states in Kvantum */
-        if (tspec_.combo_as_lineedit && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
+        if ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
+            && qobject_cast<QComboBox*>(getParent(w, 1))->lineEdit())
+        {
           animationStartState_ = "normal"; // -> QEvent::FocusIn
+        }
         else
           animationStartState_ = "c-toggled"; // distinguish it from a toggled button
         /* ensure that the combobox will be animated on closing popup
@@ -3621,9 +3624,15 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   fspec.hasCapsule = true;
   if (option->direction == Qt::RightToLeft)
   {
-    if (lineedit->width() < combo->width() - COMBO_ARROW_LENGTH
-                            - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
+    int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left;
+    if (lineedit->width() < combo->width()
+                            - (tspec_.square_combo_button
+                               ? qMax(COMBO_ARROW_LENGTH, combo->height()-arrowFrameSize)
+                               : COMBO_ARROW_LENGTH)
+                            - arrowFrameSize)
+    {
       fspec.capsuleH = 0;
+    }
     else fspec.capsuleH = 1;
   }
   else
@@ -4468,7 +4477,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
+        if (!animate
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -4481,11 +4491,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         QString animationStartState;
         if (styleObject)
           animationStartState = styleObject->property("_kv_state").toString();
-        bool animate(widget && animatedWidget_ == widget
-                     && !animationStartState.isEmpty()
-                     && animationStartState != suffix
-                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-                     && !qobject_cast<const QAbstractScrollArea*>(widget));
+        animate = animate && widget && animatedWidget_ == widget
+                  && !animationStartState.isEmpty()
+                  && animationStartState != suffix
+                  && !qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+                  && !qobject_cast<const QAbstractScrollArea*>(widget);
         if (animate && animationStartState == suffix)
         {
           if (opacityTimer_->isActive())
@@ -4565,7 +4575,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
+        if (!animate
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -4578,10 +4589,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         QString animationStartState;
         if (styleObject)
           animationStartState = styleObject->property("_kv_state").toString();
-        bool animate(widget && animatedWidget_ == widget
-                     && !animationStartState.isEmpty()
-                     && animationStartState != suffix
-                     && !qobject_cast<const QAbstractScrollArea*>(widget));
+        animate =  animate && widget && animatedWidget_ == widget
+                   && !animationStartState.isEmpty()
+                   && animationStartState != suffix
+                   && !qobject_cast<const QAbstractScrollArea*>(widget);
         if (animate && animationStartState == suffix)
         {
           if (opacityTimer_->isActive())
@@ -5268,9 +5279,15 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          if (widget->width() < p->width() - COMBO_ARROW_LENGTH
-                                - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
-            fspec.capsuleH = 0;
+          int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left;
+          if (widget->width() < p->width()
+                               - (tspec_.square_combo_button
+                                  ? qMax(COMBO_ARROW_LENGTH, p->height()-arrowFrameSize)
+                                  : COMBO_ARROW_LENGTH)
+                                - arrowFrameSize)
+        {
+          fspec.capsuleH = 0;
+        }
           else fspec.capsuleH = 1;
         }
         else
@@ -5974,6 +5991,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           else if (status.startsWith("toggled"))
             status.replace("toggled","normal");
         }
+        else if (tspec_.square_combo_button) // the rest of the combo is like a lineedit
+          status.replace("focused","normal");
         if (!(option->state & State_Enabled))
         {
           status.replace("disabled","normal");
@@ -6036,6 +6055,30 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (!fillWidgetInterior)
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
         renderFrame(painter,r,fspec,fspec.element+"-"+_status);
+        if (!tspec_.combo_as_lineedit)
+        { // draw combo separator if it exists
+          const QString sepName = getIndicatorSpec("ComboBox").element + "-separator";
+          QRect sep;
+          if (rtl)
+          {
+            sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+            painter->save();
+            QTransform m;
+            m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
+            painter->setTransform(m, true);
+          }
+          else
+            sep = QRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+          if (renderElement(painter, sepName+"-"+_status, sep))
+          {
+            sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+            renderElement(painter, sepName+"-top-"+_status, sep);
+            sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+            renderElement(painter, sepName+"-bottom-"+_status, sep);
+          }
+          if (rtl)
+            painter->restore();
+        }
         if (animate)
         {
           if (animatePanel)
@@ -6080,8 +6123,12 @@ void Style::drawPrimitive(PrimitiveElement element,
       /* Konqueror may have added an icon to the right of lineedit (for LTR),
          in which case, the arrow rectangle whould be widened at CC_ComboBox */
       if (combo && combo->editable && cb && cb->lineEdit())
-      {
-        int extra = r.width()-COMBO_ARROW_LENGTH-(rtl ? fspec.left : fspec.right);
+      { // fspec is set above to that of line-edit when combo_as_lineedit is true
+        int extra = r.width()
+                    - (tspec_.square_combo_button
+                         ? qMax(COMBO_ARROW_LENGTH, cb->height()-(rtl ? fspec.left : fspec.right))
+                         : COMBO_ARROW_LENGTH)
+                    - (rtl ? fspec.left : fspec.right);
         if (extra > 0)
         {
           if (rtl) r.adjust(0,0,-extra,0);
@@ -7393,6 +7440,19 @@ void Style::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec(group);
         size_spec sspec = getSizeSpec(group);
 
+        /* there's no reason for a variable distance from the arrow
+            because the combobox length doesn't change with it */
+        if (opt->direction == Qt::RightToLeft)
+        {
+          fspec.left = 0;
+          lspec.left = 3;
+        }
+        else
+        {
+          fspec.right = 0;
+          lspec.right = 3;
+        }
+
         QRect r = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget);
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -7417,16 +7477,10 @@ void Style::drawControl(ControlElement element,
             QFont F(painter->font());
             if (lspec.boldFont) F.setBold(true);
             QSize txtSize = textSize(F,opt->currentText,false);
-            const indicator_spec dspec = getIndicatorSpec("DropDownButton");
-            int deltaR = 0; int deltaL = 0;
-            int iSize = qMin(dspec.size,cb->height()-fspec.top-fspec.bottom);
             if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                               + (sspec.incrementW ? sspec.minW : 0)
                 ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
             {
-              deltaR = fspec.right > 3 ? fspec.right - 3 : 0;
-              deltaL = fspec.left > 3 ? fspec.left - 3 : 0;
-
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
               fspec.top = qMin(fspec.top,3);
@@ -7440,15 +7494,7 @@ void Style::drawControl(ControlElement element,
               lspec.boldFont = false;
 
               sspec.incrementW = false;
-
-              /* indicator size is reduced to 9 at PE_IndicatorButtonDropDown */
-              iSize = qMin(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom),9);
             }
-            /* give all available space to the label */
-            if (opt->direction == Qt::RightToLeft)
-              r.adjust(-deltaL-qMax(COMBO_ARROW_LENGTH-iSize,0), 0, 0, 0);
-            else
-              r.adjust(0, 0, deltaR+qMax(COMBO_ARROW_LENGTH-iSize,0), 0);
           }
         }
 
@@ -8010,9 +8056,14 @@ void Style::drawControl(ControlElement element,
           ltb = qMax(0, opt->leftButtonSize.width());
           rtb = qMax(0, opt->rightButtonSize.width());
         }
-        /* the tab is widened for TOOL_BUTTON_ARROW_MARGIN, PM_TabBarTabHSpace and tispace at CT_TabBarTab */
-        if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-        if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+        /* the tab is widened for TOOL_BUTTON_ARROW_MARGIN, tab_button_extra_margin
+           PM_TabBarTabHSpace and tispace at CT_TabBarTab */
+        if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+                            + tspec_.tab_button_extra_margin
+                            + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+        if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+                            + tspec_.tab_button_extra_margin
+                            + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
         if (rtl)
         {
           r.adjust(rtb, 0, -ltb, 0);
@@ -8328,36 +8379,71 @@ void Style::drawControl(ControlElement element,
       if (!isVertical && option->direction == Qt::RightToLeft)
         inverted = !inverted;
 
-      QFont f(painter->font());
-      const label_spec lspec = getLabelSpec("Progressbar");
-      if (lspec.boldFont) f.setBold(true);
       if (tspec_.progressbar_thickness > 0
-          && !isKisSlider_
-          && QFontMetrics(f).height() > (isVertical ? w : h))
-      { // text is outside progressbar
-        QString maxText = progressMaxText(pb, opt);
-        if (!maxText.isEmpty())
+          && !isKisSlider_)
+      { // determine the text position relative to the bar
+        QFont f(painter->font());
+        const label_spec lspec = getLabelSpec("Progressbar");
+        if (lspec.boldFont) f.setBold(true);
+        bool topText;
+        QSize s;
+        if (isVertical)
         {
-          int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
-          if (isVertical)
+          s = QSize(qMin(tspec_.progressbar_thickness,w), h);
+          topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= w);
+        }
+        else
+        {
+          s = QSize(w ,qMin(tspec_.progressbar_thickness,h));
+          topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= h);
+        }
+
+        if (QFontMetrics(f).height() > (isVertical ? s.width() : s.height()))
+        {
+          r = alignedRect(option->direction,
+                          topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom
+                                  : Qt::AlignCenter,
+                          s,r);
+          x = r.x();
+          y = r.y();
+          h = r.height();
+          w = r.width();
+
+          if (!topText)
           {
-            if (inverted)
+            QString maxText = progressMaxText(pb, opt);
+            if (!maxText.isEmpty())
             {
-              r.adjust(0, 0, 0, -textWidth);
-              y += textWidth;
+              int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
+              if (isVertical)
+              {
+                if (inverted)
+                {
+                  r.adjust(0, 0, 0, -textWidth);
+                  y += textWidth;
+                }
+                else
+                  r.adjust(0, textWidth, 0, 0);
+                h = r.height();
+              }
+              else
+              {
+                if (inverted)
+                  r.adjust(textWidth, 0, 0, 0);
+                else
+                  r.adjust(0, 0, -textWidth, 0);
+                w = r.width();
+              }
             }
-            else
-              r.adjust(0, textWidth, 0, 0);
-            h = r.height();
           }
-          else
-          {
-            if (inverted)
-              r.adjust(textWidth, 0, 0, 0);
-            else
-              r.adjust(0, 0, -textWidth, 0);
-            w = r.width();
-          }
+        }
+        else
+        {
+          r = alignedRect(option->direction,Qt::AlignCenter,s,r);
+          x = r.x();
+          y = r.y();
+          h = r.height();
+          w = r.width();
         }
       }
 
@@ -8416,6 +8502,7 @@ void Style::drawControl(ControlElement element,
           fspec.left = fspec.right = qMin(fspec.left,fspec.right);
         }
         const interior_spec ispec = getInteriorSpec(group);
+        const frame_spec fspecPr = getFrameSpec("Progressbar");
 
         QRect r = option->rect;
 
@@ -8433,40 +8520,79 @@ void Style::drawControl(ControlElement element,
         if (!isVertical && option->direction == Qt::RightToLeft)
           inverted = !inverted;
 
-        QFont f(painter->font());
-        const label_spec lspec = getLabelSpec("Progressbar");
-        if (lspec.boldFont) f.setBold(true);
         if (tspec_.progressbar_thickness > 0
-            && !isKisSlider_
-            /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
-            && QFontMetrics(f).height() > (isVertical ? tspec_.spread_progressbar
-                                                        ? w : w + fspec.top + fspec.bottom
-                                           : tspec_.spread_progressbar
-                                             ? h : h + fspec.top + fspec.bottom))
-        { // text is outside progressbar
-          QString maxText = progressMaxText(pb, opt);
-          if (!maxText.isEmpty())
+            && !isKisSlider_)
+        { // determine the text position relative to the bar
+          QFont f(painter->font());
+          const label_spec lspec = getLabelSpec("Progressbar");
+          if (lspec.boldFont) f.setBold(true);
+          bool topText;
+          QSize s;
+          /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
+          int thickness = tspec_.progressbar_thickness - (tspec_.spread_progressbar
+                                                          ? 0
+                                                          : fspecPr.top + fspecPr.bottom);
+          if (isVertical)
           {
-            int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
-            if (isVertical)
+            s = QSize(qMin(thickness,w), h);
+            topText = (thickness + QFontMetrics(f).height()+3 <= w);
+          }
+          else
+          {
+            s = QSize(w , qMin(thickness,h));
+            topText = (thickness + QFontMetrics(f).height()+3 <= h);
+          }
+
+          thickness = isVertical ? tspec_.spread_progressbar
+                                   ? s.width() : s.width() + fspecPr.top + fspecPr.bottom
+                                 : tspec_.spread_progressbar
+                                   ? s.height() : s.height() + fspecPr.top + fspecPr.bottom;
+          if (QFontMetrics(f).height() > thickness)
+          {
+            r = alignedRect(option->direction,
+                            topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom
+                                    : Qt::AlignCenter,
+                            s,r);
+            x = r.x();
+            y = r.y();
+            h = r.height();
+            w = r.width();
+
+            if (!topText)
             {
-              if (inverted)
+              QString maxText = progressMaxText(pb, opt);
+              if (!maxText.isEmpty())
               {
-                r.adjust(0, 0, 0, -textWidth);
-                y += textWidth;
+                int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
+                if (isVertical)
+                {
+                  if (inverted)
+                  {
+                    r.adjust(0, 0, 0, -textWidth);
+                    y += textWidth;
+                  }
+                  else
+                    r.adjust(0, textWidth, 0, 0);
+                  h = r.height();
+                }
+                else
+                {
+                  if (inverted)
+                    r.adjust(textWidth, 0, 0, 0);
+                  else
+                    r.adjust(0, 0, -textWidth, 0);
+                  w = r.width();
+                }
               }
-              else
-                r.adjust(0, textWidth, 0, 0);
-              h = r.height();
             }
-            else
-            {
-              if (inverted)
-                r.adjust(textWidth, 0, 0, 0);
-              else
-                r.adjust(0, 0, -textWidth, 0);
-              w = r.width();
-            }
+          }
+          else
+          {
+            r = alignedRect(option->direction,Qt::AlignCenter,s,r);
+            x = r.x();
+            y = r.y();
+            h = r.height();
+            w = r.width();
           }
         }
 
@@ -8482,8 +8608,10 @@ void Style::drawControl(ControlElement element,
         }
         else
         {
-          const frame_spec fspec1 = getFrameSpec("Progressbar");
-          fspec.expansion = fspec1.expansion - (tspec_.spread_progressbar ? 0 : fspec1.top+fspec1.bottom);
+          fspec.expansion = (isKisSlider_
+                               ? qMin(fspecPr.expansion, getFrameSpec("IndicatorSpinBox").expansion)
+                               : fspecPr.expansion)
+                            - (tspec_.spread_progressbar ? 0 : fspecPr.top+fspecPr.bottom);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
         }
 
@@ -8699,7 +8827,6 @@ void Style::drawControl(ControlElement element,
         QFont f(painter->font());
         if (lspec.boldFont) f.setBold(true);
         bool isVertical(opt->orientation == Qt::Vertical);
-
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
         bool inverted(pb && pb->invertedAppearance());
         if ((!isVertical && option->direction == Qt::RightToLeft) // -> CE_ProgressBarGroove
@@ -8708,15 +8835,21 @@ void Style::drawControl(ControlElement element,
           inverted = !inverted;
         }
 
-        bool outText(false);
+        bool sideText(false);
+        bool topText(false);
         if (tspec_.progressbar_thickness > 0
             // KisSliderSpinBox doesn't obey thickness setting
             && !isKisSlider_
             && QFontMetrics(f).height() > tspec_.progressbar_thickness)
-        { // text is outside progressbar
-          outText = true;
-          if (enoughContrast(getFromRGBA(lspec.normalColor),
-              QApplication::palette().color(QPalette::WindowText)))
+        { // see if text can be outside progressbar
+          if (isVertical)
+            topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= w);
+          else
+            topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= h);
+          sideText = !topText;
+          if ((topText || sideText)
+              && enoughContrast(getFromRGBA(lspec.normalColor),
+                                QApplication::palette().color(QPalette::WindowText)))
           {
             lspec.normalColor = lspec.focusColor = lspec.toggleColor =
               getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
@@ -8742,7 +8875,7 @@ void Style::drawControl(ControlElement element,
           }
           painter->setTransform(m, true);
         }
-        if (outText)
+        if (sideText)
           length -= 6; // fixed 3px space + fixed 3px margin
 
         QString txt = opt->text;
@@ -8755,7 +8888,7 @@ void Style::drawControl(ControlElement element,
 
         /* find the part inside the indicator */
         QRect R;
-        if (!outText && state != 0 && !txt.isEmpty())
+        if (!sideText && !topText && state != 0 && !txt.isEmpty())
         {
           QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
           if (col.isValid())
@@ -8798,7 +8931,36 @@ void Style::drawControl(ControlElement element,
           painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
         }
         int talign;
-        if (outText)
+        if (topText)
+        {
+          if (isVertical && opt->bottomToTop)
+          {
+            if (option->direction == Qt::RightToLeft)
+            {
+              r.adjust(0,0,-tspec_.progressbar_thickness,0);
+              talign = Qt::AlignHCenter|Qt::AlignTop;
+            }
+            else
+            {
+              r.adjust(tspec_.progressbar_thickness,0,0,0);
+              talign = Qt::AlignHCenter|Qt::AlignBottom;
+            }
+          }
+          else
+          {
+            if (isVertical && option->direction == Qt::RightToLeft)
+            {
+              r.adjust(0,tspec_.progressbar_thickness,0,0);
+              talign = Qt::AlignHCenter|Qt::AlignBottom;
+            }
+            else
+            {
+              r.adjust(0,0,0,-tspec_.progressbar_thickness);
+              talign = Qt::AlignHCenter|Qt::AlignTop;
+            }
+          }
+        }
+        else if (sideText)
         {
           int hAlignment = Qt::AlignRight;
           if ((inverted && option->direction != Qt::RightToLeft)
@@ -10035,23 +10197,16 @@ void Style::drawControl(ControlElement element,
               fspec.right = 0;
           }
 
-          /* no pressed state if only the dropdown arrow is pressed */
-          if (fspec.expansion <= 0 // otherwise the drop-down part will be integrated
-              && tb->popupMode() == QToolButton::MenuButtonPopup && !tb->isDown()
-              && status.startsWith("pressed"))
-          {
-            status.replace("pressed","normal");
-          }
-
           /* respect the text color of the parent widget */
           bool noPanel(!paneledButtons.contains(widget));
           if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
-            /* cover the simple disabled state too */
-            bool isNormal(!(option->state & State_On)
-                          && !(option->state & State_Sunken)
-                          && !(option->state & State_Selected)
-                          && (!(option->state & State_MouseOver) || !(option->state & State_Enabled)));
+            bool isNormal(status.startsWith("normal")
+                          /* cover the simple disabled state too */
+                          || (status.startsWith("disabled")
+                              && !(option->state & State_On)
+                              && !(option->state & State_Sunken)
+                              && !(option->state & State_Selected)));
             QColor ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
@@ -10636,16 +10791,13 @@ void Style::drawControl(ControlElement element,
       {
         QRect r = opt->rect;
         QStyleOptionProgressBar o(*opt);
-        frame_spec fspec = getFrameSpec("Progressbar");
-        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-        if (tspec_.progressbar_thickness > 0 && tspec_.progressbar_thickness < r.height())
-          o.rect = alignedRect(o.direction,
-                               Qt::AlignCenter,
-                               QSize(r.width(), tspec_.progressbar_thickness),
-                               r);
         drawControl(CE_ProgressBarGroove, &o, painter, widget);
         if (!tspec_.spread_progressbar)
+        {
+          frame_spec fspec = getFrameSpec("Progressbar");
+          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
           o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
+        }
         drawControl(CE_ProgressBarContents, &o, painter, widget);
         o.rect = r;
         drawControl(CE_ProgressBarLabel, &o, painter, widget);
@@ -11074,12 +11226,16 @@ void Style::drawComplexControl(ComplexControl control,
           fspec.expansion = 0;
           ispec.px = ispec.py = 0;
         }
+        int arrowFrameSize = rtl ? fspec.left : fspec.right;
+        bool drwaAsLineEdit (tspec_.combo_as_lineedit || tspec_.square_combo_button);
         if (editable) // otherwise the arrow part will be integrated
         {
-          if (tspec_.combo_as_lineedit)
+          if (drwaAsLineEdit)
           {
             fspec = getFrameSpec("LineEdit");
             ispec = getInteriorSpec("LineEdit");
+            if (tspec_.combo_as_lineedit)
+              arrowFrameSize = rtl ? fspec.left : fspec.right;
           }
           fspec.hasCapsule = true;
           fspec.capsuleH = rtl ? 1 : -1;
@@ -11091,8 +11247,11 @@ void Style::drawComplexControl(ComplexControl control,
         {
           QLineEdit *le = cb->lineEdit();
           /* Konqueror may add an icon to the right of lineedit (for LTR) */
-          extra  = rtl ? le->x() - (COMBO_ARROW_LENGTH+fspec.left)
-                       : w - (COMBO_ARROW_LENGTH+fspec.right) - (le->x()+le->width());
+          int combo_arrow_length = tspec_.square_combo_button
+                                    ? qMax(COMBO_ARROW_LENGTH, cb->height()-arrowFrameSize)
+                                    : COMBO_ARROW_LENGTH;
+          extra  = rtl ? le->x() - (combo_arrow_length+arrowFrameSize)
+                       : w - (combo_arrow_length+arrowFrameSize) - (le->x()+le->width());
           if (extra > 0)
           {
             if (rtl) arrowRect.adjust(0,0,extra,0);
@@ -11118,7 +11277,7 @@ void Style::drawComplexControl(ComplexControl control,
           int margin = 0; // see CC_ComboBox at subControlRect
           if (opt->editable && !opt->currentIcon.isNull())
             margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
-                      - (tspec_.combo_as_lineedit ? 0
+                      - (drwaAsLineEdit ? 0
                          : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
           else if (isLibreoffice_)
             margin = fspec.left;
@@ -11149,13 +11308,13 @@ void Style::drawComplexControl(ComplexControl control,
             {
               if (editable)
               {
-                if (!tspec_.combo_as_lineedit) // otherwise, the frame and edit field are drawn together as a lineedit
+                if (!drwaAsLineEdit) // otherwise, the frame and edit field are drawn together as a lineedit
                   editWidth = cb->lineEdit()->width();
                 if (extra > 0)
                   editWidth += extra;
                 if (cb->hasFocus())
                 {
-                  if (tspec_.combo_as_lineedit)
+                  if (drwaAsLineEdit)
                   {
                     if (isWidgetInactive(widget))
                       status = "focused-inactive"; // impossible
@@ -11168,7 +11327,7 @@ void Style::drawComplexControl(ComplexControl control,
                     else status = "pressed";
                   }
                 }
-                else if (tspec_.combo_as_lineedit)
+                else if (drwaAsLineEdit)
                 {
                   if (status.startsWith("focused"))
                     status.replace("focused","normal");
@@ -11226,19 +11385,19 @@ void Style::drawComplexControl(ComplexControl control,
             {
               bool fillWidgetInterior(!ispec.hasInterior
                                       && hasHighContrastWithContainer(widget,
-                                                                      tspec_.combo_as_lineedit
+                                                                      drwaAsLineEdit
                                                                       ? QApplication::palette().color(QPalette::ButtonText)
                                                                       : getFromRGBA(getLabelSpec(group).normalColor)));
 
               QStyleOptionComboBox leOpt(*opt);
-              if (!tspec_.combo_as_lineedit && editable)
+              if (!drwaAsLineEdit && editable)
               {
-                leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0, 0,
-                                             rtl ? editWidth-o.rect.width() : 0);
+                leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0,
+                                             rtl ? editWidth-o.rect.width() : 0, 0);
               }
               bool mouseAnimation(animatedWidget_ == widget
                                   && (!status.startsWith("normal")
-                                      || ((!editable || !tspec_.combo_as_lineedit
+                                      || ((!editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
                                           && animationStartState_.startsWith("focused"))));
               bool animate(cb && cb->isEnabled()
@@ -11249,7 +11408,7 @@ void Style::drawComplexControl(ComplexControl control,
                 animationStartState.remove(0, 2);
               int animationOpacity = animationOpacity_;
               bool animatePanel(!(tspec_.combo_focus_rect
-                                  && (!tspec_.combo_as_lineedit || !editable)
+                                  && (!drwaAsLineEdit || !editable)
                                   && (status.startsWith("normal")
                                       || status.startsWith("pressed"))
                                   && (animationStartState.startsWith("normal")
@@ -11281,7 +11440,7 @@ void Style::drawComplexControl(ComplexControl control,
                     if (!fillWidgetInterior)
                       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
                   }
-                  if (!tspec_.combo_as_lineedit && editable)
+                  if (!drwaAsLineEdit && editable)
                   {
                     if (!mouseAnimation)
                       leOpt.state = State_Enabled | State_Active | State_HasFocus;
@@ -11302,8 +11461,31 @@ void Style::drawComplexControl(ComplexControl control,
               renderFrame(painter,r,fspec,fspec.element+"-"+_status);
               if (!fillWidgetInterior)
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
-              if (!tspec_.combo_as_lineedit && editable)
+              if (!drwaAsLineEdit && editable)
               {
+                /* draw combo icon separator if it exists */
+                const QString sepName = fspec.element + "-icon-separator";
+                QRect sep;
+                if (rtl)
+                {
+                  sep = QRect(r.x(), y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+                  painter->save();
+                  QTransform m;
+                  m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
+                  painter->setTransform(m, true);
+                }
+                else
+                  sep = QRect (x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+                if (renderElement(painter, sepName+"-"+_status, sep))
+                {
+                  sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+                  renderElement(painter, sepName+"-top-"+_status, sep);
+                  sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+                  renderElement(painter, sepName+"-bottom-"+_status, sep);
+                }
+                if (rtl)
+                  painter->restore();
+                /* draw the line-edit part */
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
                               | State_KeyboardFocusChange;
                 if (animate && !animatePanel)
@@ -11338,7 +11520,7 @@ void Style::drawComplexControl(ComplexControl control,
                 painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
                                                                                    ? QPalette::Inactive
                                                                                    : QPalette::Active,
-                                                                                 tspec_.combo_as_lineedit
+                                                                                 drwaAsLineEdit
                                                                                    ? QPalette::Base
                                                                                    : QPalette::Button));
             }
@@ -11770,20 +11952,26 @@ void Style::drawComplexControl(ComplexControl control,
           /* take into account the inversion */
           if (horiz)
           {
-            if (!opt->upsideDown) {
+            if (!opt->upsideDown)
+            {
               full.setWidth(sliderCenter.x());
               empty.adjust(sliderCenter.x(),0,0,0);
-            } else {
+            }
+            else
+            {
               empty.setWidth(sliderCenter.x());
               full.adjust(sliderCenter.x(),0,0,0);
             }
           }
           else
           {
-            if (!opt->upsideDown) {
+            if (!opt->upsideDown)
+            {
               full.setHeight(sliderCenter.y());
               empty.adjust(0,sliderCenter.y(),0,0);
-            } else {
+            }
+            else
+            {
               empty.setHeight(sliderCenter.y());
               full.adjust(0,sliderCenter.y(),0,0);
             }
@@ -11816,30 +12004,7 @@ void Style::drawComplexControl(ComplexControl control,
             painter->setTransform(m, true);
           }
 
-          /* first draw the focus rect */
-          if (opt && opt->state & State_HasFocus)
-          {
-            QRect FR = opt->rect;
-            if (horiz)
-              FR.setRect(0, 0, h, w);
-            const frame_spec fspec1 = getFrameSpec(group);
-            if (fspec1.hasFocusFrame)
-            {
-              renderFrame(painter,FR,fspec1,fspec1.element+"-focus");
-              const interior_spec ispec1 = getInteriorSpec(group);
-              if (ispec1.hasFocusInterior)
-                renderInterior(painter,FR,fspec1,ispec1,ispec1.element+"-focus");
-            }
-            else
-            {
-              QStyleOptionFocusRect fropt;
-              fropt.QStyleOption::operator=(*opt);
-              fropt.rect = FR;
-              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-            }
-          }
-
-          /* then, draw the groove */
+          /* now draw the groove */
           QString suffix = "-normal";
           if (isWidgetInactive(widget))
             suffix = "-normal-inactive";
@@ -11869,6 +12034,28 @@ void Style::drawComplexControl(ComplexControl control,
             renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
             painter->restore();
+          }
+
+          if (opt && opt->state & State_HasFocus)
+          {
+            const frame_spec fspec1 = getFrameSpec(group);
+            if (fspec1.hasFocusFrame)
+            {
+              renderFrame(painter,grooveRect,fspec1,fspec1.element+"-focus");
+              const interior_spec ispec1 = getInteriorSpec(group);
+              if (ispec1.hasFocusInterior)
+                renderInterior(painter,grooveRect,fspec1,ispec1,ispec1.element+"-focus");
+            }
+            else
+            {
+              QStyleOptionFocusRect fropt;
+              fropt.QStyleOption::operator=(*opt);
+              QRect FR = opt->rect;
+              if (horiz)
+                FR.setRect(0, 0, h, w);
+              fropt.rect = FR;
+              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            }
           }
 
           if (horiz)
@@ -12359,16 +12546,18 @@ void Style::drawComplexControl(ComplexControl control,
             const frame_spec fspec = getFrameSpec("GroupBox");
             if (fspec.hasFocusFrame)
             {
-              renderFrame(painter,textRect,fspec,fspec.element+"-focus");
+              int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
+              renderFrame(painter,textRect.adjusted(-spacing,0,spacing,0),fspec,fspec.element+"-focus");
               const interior_spec ispec = getInteriorSpec("GroupBox");
               if (ispec.hasFocusInterior)
-                renderInterior(painter,textRect,fspec,ispec,ispec.element+"-focus");
+                renderInterior(painter,textRect.adjusted(-spacing,0,spacing,0),fspec,ispec,ispec.element+"-focus");
             }
             else
             {
               QStyleOptionFocusRect fropt;
               fropt.QStyleOption::operator=(*opt);
-              fropt.rect = textRect;
+              int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
+              fropt.rect = textRect.adjusted(-spacing,0,spacing,0);
               drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
             }
           }
@@ -13373,34 +13562,35 @@ QSize Style::sizeFromContents(ContentsType type,
                   sizeCalculated(f,fspec,lspec,sspec,"W",
                                  hasIcon ? opt->iconSize : QSize()).height());
         if (opt->editable)
-        {
+        { // consider the top and bottom frames of lineedits inside editable combos
           s.rheight() += (fspec1.top > fspec.top ? fspec1.top-fspec.top : 0)
                          + (fspec1.bottom > fspec.bottom ? fspec1.bottom-fspec.bottom : 0);
         }
 
+        bool rtl(option->direction == Qt::RightToLeft);
         if (extraComboWidth_ == 0)
         {
           /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
-             qMax(23,X) is already added to it in qcommonstyle.cpp.
+             qMax(23,X) is already added to it in qcommonstyle.cpp but
+             will consider square arrows below.
 
              We want that the left icon respect frame width,
              text margin and text-icon spacing in the editable mode too. */
           extraComboWidth_ = fspec.left+fspec.right
-                             + (opt->editable ? lspec1.left+lspec1.right +
-                                 (option->direction == Qt::RightToLeft ?
-                                   fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
-                                   : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
-                                 : lspec.left+lspec.right)
+                             + (opt->editable
+                                  ? lspec1.left+lspec1.right
+                                    + (rtl
+                                         ? fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
+                                         : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
+                                  : lspec.left+lspec.right)
                              + (hasIcon ? lspec.tispace : 0);
 
-          /* consider the top and bottom frames
-             of lineedits inside editable combos */
           if (opt->editable)
           {
-            if (tspec_.combo_as_lineedit)
+            if (tspec_.combo_as_lineedit || tspec_.square_combo_button)
             {
-              extraComboWidth_ += option->direction == Qt::RightToLeft ?
-                                   (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
+              extraComboWidth_ += rtl
+                                   ? (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
                                    : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
             }
             extraComboWidth_ += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
@@ -13414,6 +13604,11 @@ QSize Style::sizeFromContents(ContentsType type,
 
         if (!sspec.incrementW && s.width() < sspec.minW)
           s.setWidth(sspec.minW);
+
+        int arrowFrameSize = rtl ? tspec_.combo_as_lineedit ? fspec1.left : fspec.left
+                                 : tspec_.combo_as_lineedit ? fspec1.right : fspec.right;
+        if (tspec_.square_combo_button && COMBO_ARROW_LENGTH + arrowFrameSize < s.height())
+          s.rwidth() += s.height() - COMBO_ARROW_LENGTH - arrowFrameSize;
       }
 
       break;
@@ -13849,14 +14044,15 @@ QSize Style::sizeFromContents(ContentsType type,
         bool rtl(opt->direction == Qt::RightToLeft);
         if (opt->rightButtonSize.isValid()) // QSize(-1, -1) by default
         {
-          /* Right or left frame and label spaces will be replaced by "lspec.tispace"
-             at CE_TabBarTabLabel if the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN
-             is added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton, and
-             PM_TabBarTabHSpace is added once, when a right or left button exists. */
+          /* Right or left frame and label spaces will be replaced by "lspec.tispace" at
+             CE_TabBarTabLabel if the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN and
+             tab_button_extra_margin are added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton,
+             and PM_TabBarTabHSpace is added once, when a right or left button exists. */
           if (verticalTabs)
           {
             s.rheight() += opt->rightButtonSize.height() + pixelMetric(PM_TabBarTabHSpace,option,widget)
                                                          + TOOL_BUTTON_ARROW_MARGIN
+                                                         + tspec_.tab_button_extra_margin
                                                          - fspec.right
                                                          + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right);
             s.rwidth() = qMax(s.width(), opt->rightButtonSize.width());
@@ -13866,6 +14062,7 @@ QSize Style::sizeFromContents(ContentsType type,
             s.rwidth() += opt->rightButtonSize.width()
                           + pixelMetric(PM_TabBarTabHSpace,option,widget)
                           + TOOL_BUTTON_ARROW_MARGIN
+                          + tspec_.tab_button_extra_margin
                           + (rtl ? - fspec.left  + (opt->icon.isNull() ? 0: lspec.tispace - lspec.left)
                                  : - fspec.right + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right));
             s.rheight() = qMax(s.height(), opt->rightButtonSize.height());
@@ -13876,6 +14073,7 @@ QSize Style::sizeFromContents(ContentsType type,
           if (verticalTabs)
           {
             s.rheight() += opt->leftButtonSize.height() + TOOL_BUTTON_ARROW_MARGIN
+                                                        + tspec_.tab_button_extra_margin
                                                         - fspec.left
                                                         + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.left);
             if (!opt->rightButtonSize.isValid())
@@ -13886,6 +14084,7 @@ QSize Style::sizeFromContents(ContentsType type,
           {
             s.rwidth() += opt->leftButtonSize.width()
                           + TOOL_BUTTON_ARROW_MARGIN
+                          + tspec_.tab_button_extra_margin
                           + (rtl ? - fspec.right + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.right)
                                  : - fspec.left + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.left));
             if (!opt->rightButtonSize.isValid())
@@ -14089,31 +14288,42 @@ QSize Style::sizeFromContents(ContentsType type,
       s = QSize(qMax(defaultSize.width(), textSize.width() + checkWidth + spacing)
                   + fspec.left + fspec.right + lspec.left + lspec.right,
                 defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
-                  + (tspec_.groupbox_top_label ? 0
+                  + (tspec_.groupbox_top_label
+                     ? 3 // 3 px spacing between text and top frame (-> CC_GroupBox in subControlRect)
                      : qMax(pixelMetric(PM_IndicatorHeight),textSize.height())/2));
 
       break;
     }
 
-    /*case CT_ProgressBar : {
-      s = defaultSize;
+    case CT_ProgressBar : {
       if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
       {
-        const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-        if (pb && pb->orientation() == Qt::Vertical)
-          s.rwidth() = qMin(tspec_.progressbar_thickness,s.width());
-        else
-          s.rheight() = qMin(tspec_.progressbar_thickness,s.height());
-        return s;
+        /* Set the size so that the text could be above the bar only if
+           there isn't enough space inside the bar. The are safeguards
+           in other places when a progressbar doesn't consult this function. */
+        QFont f;
+        if (widget) f = widget->font();
+        else f = QApplication::font();
+        const label_spec lspec = getLabelSpec("Progressbar");
+        if (lspec.boldFont) f.setBold(true);
+        if (QFontMetrics(f).height() > tspec_.progressbar_thickness)
+        {
+          s = defaultSize;
+          const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+          if (pb && pb->orientation() == Qt::Vertical)
+            s.rwidth() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
+          else
+            s.rheight() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
+          return s;
+        }
       }
-
       break;
-    }*/
+    }
 
     default : return defaultSize;
   }
 
-  // I'm too cautious to not add this:
+  // I'm too cautious not to add this:
   return s.expandedTo(defaultSize);
 }
 
@@ -14292,22 +14502,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                          option->rect);
     }
 
-    case SE_ProgressBarLabel : return option->rect;
-
-    case SE_ProgressBarGroove : {
-      QRect r = option->rect;
-      if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
-      {
-        const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-        QSize s;
-        if (pb && pb->orientation() == Qt::Vertical)
-          s = QSize(qMin(tspec_.progressbar_thickness,r.width()),r.height());
-        else
-          s = QSize(r.width(),qMin(tspec_.progressbar_thickness,r.height()));
-        r = alignedRect(option->direction,Qt::AlignCenter,s,r);
-      }
-      return r;
-    }
+    case SE_ProgressBarLabel :
+    case SE_ProgressBarGroove : return option->rect;
 
     case SE_ProgressBarContents : {
       if (tspec_.spread_progressbar)
@@ -14430,15 +14626,31 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       {
         if (QComboBox *cb = qobject_cast<QComboBox*>(widget->parentWidget()))
         {
-          rect.adjust(rtl ? -fspec.left : 0, 0, rtl ? 0 : fspec.right, 0);
           if (rtl)
           {
-            const frame_spec fspec1 = getFrameSpec("ComboBox");
-            if (widget->width() < cb->width() - COMBO_ARROW_LENGTH - fspec1.left)
-              rect.adjust(0,0,fspec.right,0);
+            rect.adjust(-fspec.left-lspec.left+3, 0, 0, 0);
+            int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left
+                                                          : getFrameSpec("ComboBox").left;
+            if (widget->width() < cb->width()
+                                  - (tspec_.square_combo_button
+                                       ? qMax(COMBO_ARROW_LENGTH, cb->height()-arrowFrameSize)
+                                       : COMBO_ARROW_LENGTH)
+                                  - arrowFrameSize)
+            {
+              rect.adjust(0, 0,
+                          fspec.right+lspec.right-(tspec_.combo_as_lineedit || tspec_.square_combo_button
+                                                     ? 0 : 3),
+                          0);
+            }
           }
-          else if (widget->x() > 0)
-              rect.adjust(-fspec.left,0,0,0);
+          else
+          {
+            rect.adjust(0, 0, fspec.right+lspec.right-3, 0); // spacing between the text and arrow (button)
+            if (widget->x() > 0) // without left frame, it can be widened to the left
+              rect.adjust(-fspec.left-lspec.left+(tspec_.combo_as_lineedit || tspec_.square_combo_button
+                                                    ? 0 : 3),
+                          0, 0, 0);
+          }
         }
         else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(widget->parentWidget()))
         {
@@ -14959,8 +15171,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         {
           ltb = qMax(0, opt->leftButtonSize.height());
           rtb = qMax(0, opt->rightButtonSize.height());
-          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+                              + tspec_.tab_button_extra_margin
+                              + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+                              + tspec_.tab_button_extra_margin
+                              + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
           if (opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest)
             r.adjust(0, rtb, 0, -ltb);
           else
@@ -14970,8 +15186,12 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         {
           ltb = qMax(0, opt->leftButtonSize.width());
           rtb = qMax(0, opt->rightButtonSize.width());
-          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+                              + tspec_.tab_button_extra_margin
+                              + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
+          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+                              + tspec_.tab_button_extra_margin
+                              + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
           if (opt->direction == Qt::RightToLeft)
             r.adjust(rtb, 0, -ltb, 0);
           else
@@ -15009,7 +15229,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         int verticalShift = pixelMetric(QStyle::PM_TabBarTabShiftVertical, tab, widget);
         int horizontalShift = pixelMetric(QStyle::PM_TabBarTabShiftHorizontal, tab, widget);
         int hpadding = pixelMetric(QStyle::PM_TabBarTabHSpace, option, widget) / 2
-                       + TOOL_BUTTON_ARROW_MARGIN;
+                       + TOOL_BUTTON_ARROW_MARGIN + tspec_.tab_button_extra_margin;
 
         bool verticalTabs(tab->shape == QTabBar::RoundedEast
                           || tab->shape == QTabBar::RoundedWest
@@ -15257,15 +15477,26 @@ QRect Style::subControlRect(ComplexControl control,
       switch (subControl) {
         case SC_ComboBoxFrame : return option->rect;
         case SC_ComboBoxEditField : {
+          bool rtl(option->direction == Qt::RightToLeft);
           const QStyleOptionComboBox *opt =
               qstyleoption_cast<const QStyleOptionComboBox*>(option);
           int margin = 0;
+          int arrowFrameSize = 0;
           frame_spec fspec;
-          if (tspec_.combo_as_lineedit && opt && opt->editable)
+          if (opt && opt->editable && (tspec_.combo_as_lineedit || tspec_.square_combo_button))
+          {
             fspec = getFrameSpec("LineEdit");
+            arrowFrameSize = tspec_.combo_as_lineedit
+                               ? rtl ? fspec.left : fspec.right
+                               : rtl ? getFrameSpec("ComboBox").left
+                                     : getFrameSpec("ComboBox").right;
+          }
           else
+          {
             fspec = getFrameSpec("ComboBox");
-          const label_spec lspec =  getLabelSpec("ComboBox");
+            arrowFrameSize = rtl ? fspec.left : fspec.right;
+          }
+          const label_spec combolspec =  getLabelSpec("ComboBox");
           if (isLibreoffice_)
           {
             const frame_spec Fspec = getFrameSpec("LineEdit");
@@ -15274,38 +15505,42 @@ QRect Style::subControlRect(ComplexControl control,
           else
           {
             /* The left icon should respect frame width, text margin
-               and text-icon spacing in the editable mode too */
+               and text-icon spacing in the editable mode too. */
             if (opt && opt->editable && !opt->currentIcon.isNull())
-              margin = (option->direction == Qt::RightToLeft ? fspec.right+lspec.right
-                                                             : fspec.left+lspec.left)
-                       + lspec.tispace
-                       - (tspec_.combo_as_lineedit ? 0
+              margin = (rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left)
+                       + combolspec.tispace
+                       - (tspec_.combo_as_lineedit || tspec_.square_combo_button ? 0
                           : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
           }
-          return QRect(option->direction == Qt::RightToLeft ?
-                         x+COMBO_ARROW_LENGTH+fspec.left
+          int combo_arrow_length = tspec_.square_combo_button
+                                    ? qMax(COMBO_ARROW_LENGTH, h-arrowFrameSize)
+                                    : COMBO_ARROW_LENGTH;
+          return QRect(rtl
+                         ? x+combo_arrow_length+arrowFrameSize
                          : x+margin,
                        y,
-                       option->direction == Qt::RightToLeft ?
-                         w-(COMBO_ARROW_LENGTH+fspec.left)-margin
-                         : w-(COMBO_ARROW_LENGTH+fspec.right)-margin,
+                       w-(combo_arrow_length+arrowFrameSize)-margin,
                        h);
         }
         case SC_ComboBoxArrow : {
+          bool rtl(option->direction == Qt::RightToLeft);
           const QStyleOptionComboBox *opt =
               qstyleoption_cast<const QStyleOptionComboBox*>(option);
           frame_spec fspec;
-          if (tspec_.combo_as_lineedit && opt && opt->editable)
+          if (opt && opt->editable && tspec_.combo_as_lineedit)
             fspec = getFrameSpec("LineEdit");
           else
             fspec = getFrameSpec("ComboBox");
-          return QRect(option->direction == Qt::RightToLeft ?
-                         x
-                         : x+w-(COMBO_ARROW_LENGTH+fspec.right),
+          int combo_arrow_length = tspec_.square_combo_button
+                                    ? qMax(COMBO_ARROW_LENGTH, h-(rtl ? fspec.left : fspec.right))
+                                    : COMBO_ARROW_LENGTH;
+          return QRect(rtl
+                         ? x
+                         : x+w-(combo_arrow_length+fspec.right),
                        y,
-                       option->direction == Qt::RightToLeft ?
-                         COMBO_ARROW_LENGTH+fspec.left
-                         : COMBO_ARROW_LENGTH+fspec.right,
+                       rtl
+                         ? combo_arrow_length+fspec.left
+                         : combo_arrow_length+fspec.right,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
@@ -15792,7 +16027,7 @@ QRect Style::subControlRect(ComplexControl control,
             int delta = 0;
             if (checkHeight > textSize.height())
               delta = (checkHeight - textSize.height())/2;
-            int spacing = (tspec_.groupbox_top_label ? 0 : 6); // 3px between text and frame
+            int spacing = (tspec_.groupbox_top_label ? 0 : 6); // 3px between text and cut frame
             return QRect(rtl ? x+w - labelMargin - checkWidth - textSize.width() - spacing
                              : x + labelMargin + checkWidth,
                          y + delta,
@@ -15809,8 +16044,13 @@ QRect Style::subControlRect(ComplexControl control,
           }
           case SC_GroupBoxFrame : {
             int top = qMax(checkHeight,textSize.height());
-            if (!tspec_.groupbox_top_label && fspec.top < top)
-              top = (top - fspec.top)/2;
+            if (!tspec_.groupbox_top_label)
+            {
+              if (fspec.top < top)
+                top = (top - fspec.top)/2;
+            }
+            else
+              top += 3; // 3 px spacing between text and top frame (-> CT_GroupBox)
             return QRect(x,
                          y + top,
                          w,

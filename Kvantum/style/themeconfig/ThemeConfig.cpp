@@ -631,6 +631,20 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","no_inactive_tab_expansion");
   r.no_inactive_tab_expansion = v.toBool();
 
+  v = getValue("General","tab_button_extra_margin");
+  if (v.isValid()) // 0 by default
+  {
+    int max = QFontMetrics(QApplication::font()).height();
+    QString value = v.toString();
+    if (value.endsWith("font"))
+    { // multiply by the app font height
+      r.tab_button_extra_margin = qMin(qMax(value.left(value.length()-4).toFloat(), 0.0f),1.0f)
+                                  * max;
+    }
+    else
+      r.tab_button_extra_margin = qMin(qMax(v.toInt(),0),max);
+  }
+
   v = getValue("General","group_toolbar_buttons");
   r.group_toolbar_buttons = v.toBool();
 
@@ -737,6 +751,11 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue("General","combo_as_lineedit");
   r.combo_as_lineedit = v.toBool();
+  if (!r.combo_as_lineedit)
+  {
+    v = getValue("General","square_combo_button");
+    r.square_combo_button = v.toBool();
+  }
 
   v = getValue("General","combo_menu");
   r.combo_menu = v.toBool();

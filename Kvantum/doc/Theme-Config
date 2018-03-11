@@ -254,6 +254,17 @@ combo_focus_rect                  true/false          Should combo boxes have fo
                                                       focus rectangle is defined under the
                                                       "Focus" section.)
 
+square_combo_button               true/false          Should the combo arrow buttons be square
+                                                      as far as possible? The default is false
+                                                      but if this key has a true value, editable
+                                                      combo boxes will be drawn as line-edits
+                                                      attached to square arrow buttons.
+
+                                                      Note that this key will have no effect if
+                                                      "combo_as_lineedit" is true because, in
+                                                      that case, the whole editable combo box
+                                                      will be drawn as a line-edit.
+
 left_tabs                         true/false          Align tabs to the left edge?
                                                       Tabs are centered by default.
 
@@ -313,6 +324,20 @@ active_tab_overlap                integer             Number of pixels inactive 
 no_inactive_tab_expansion         true/false          If tabs have frame expansion, setting
                                                       this key to true will disable frame
                                                       expansion for inactive tabs.
+
+tab_button_extra_margin           integer             The extra margin between the tab frame and
+                                                      tab buttons (the close button, for example).
+                                                      It is zero by default and its maximum is
+                                                      the font height (because some apps may not
+                                                      respect a greater value). Note that there is
+                                                      a default minimum margin without this key.
+
+                                                      The string "font" can be appended to the
+                                                      value (without quotes and space), in
+                                                      which case, the value will be multiplied
+                                                      by the height of the app font (in px)
+                                                      and could also be a decimal (as in
+                                                      "min_height=0.25font").
 
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
@@ -493,7 +518,7 @@ scrollbar_in_view                 true/false          Should scrollbars be insid
 
 transient_scrollbar               true/false          Should scrollbars appear only when
                                                       needed and disappear when not needed?
-                                                      False by default. (Not for Qt4.)
+                                                      False by default.
 
                                                       If this key is true, "scroll_arrows"
                                                       and "scrollbar_in_view" are considered
@@ -674,11 +699,11 @@ transparent_dolphin_view          true/false          No background or frame for
                                                       file manager of KDE)?
 
 transparent_pcmanfm_sidepane      true/false          No background or frame for
-                                                      PCManFM-qt's side-pane (PCManFM-qt
-                                                      is the file manager of LXQT)?
+                                                      PCManFM-Qt's side-pane (PCManFM-Qt
+                                                      is the file manager of LXQt)?
 
 transparent_pcmanfm_view          true/false          No background or frame for
-                                                      PCManFM-qt's folder-view?
+                                                      PCManFM-Qt's folder-view?
 
 blur_konsole                      true/false          Blur the region behind Konsole's
                                                       transparent background if possible?

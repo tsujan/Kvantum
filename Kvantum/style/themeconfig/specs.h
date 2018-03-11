@@ -66,6 +66,8 @@ typedef struct {
   /* if tabs have frmae expansion, should only
      the frames of the active tab be expanded? */
   bool no_inactive_tab_expansion;
+  /* extra margin between tab button(s) and tab frame */
+  int tab_button_extra_margin;
   /* raise and group neighbor toolbar buttons
      (which are the immediate children of their toolbar) */
   bool group_toolbar_buttons;
@@ -152,6 +154,8 @@ typedef struct {
   int spin_button_width;
   /* draw an editable combobox as a lineedit with arrow? */
   bool combo_as_lineedit;
+  /* should the combo arrow button be square? */
+  bool square_combo_button;
   /* use popup menu for combo popup */
   bool combo_menu;
   /* when using menu for combo popup, should checkboxes be hidden? */
@@ -438,6 +442,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.active_tab_overlap = 0;
   tspec.mirror_doc_tabs = true;
   tspec.no_inactive_tab_expansion = false;
+  tspec.tab_button_extra_margin = 0;
   tspec.group_toolbar_buttons = false;
   tspec.toolbar_item_spacing = 0;
   tspec.toolbar_interior_spacing = 0;
@@ -474,6 +479,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.inline_spin_indicators = false;
   tspec.spin_button_width = 16;
   tspec.combo_as_lineedit = false;
+  tspec.square_combo_button = false;
   tspec.combo_menu = false;
   tspec.hide_combo_checkboxes = false;
   tspec.combo_focus_rect = false;

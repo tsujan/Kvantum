@@ -21,7 +21,7 @@ blurring=false
 popup_blurring=false
 toolbar_icon_size=16
 alt_mnemonic=true
-animate_states=false
+animate_states=true
 button_contents_shift=true
 button_icon_size=16
 combo_as_lineedit=false
@@ -37,7 +37,7 @@ layout_spacing=2
 merge_menubar_with_toolbar=false
 respect_DE=true
 scroll_arrows=true
-scroll_min_extent=40
+scroll_min_extent=50
 scrollable_menu=false
 scrollbar_in_view=false
 small_icon_size=16
@@ -46,7 +46,7 @@ submenu_delay=250
 submenu_overlap=0
 tooltip_delay=-1
 transient_groove=false
-transient_scrollbar=false
+transient_scrollbar=true
 tree_branch_line=false
 
 [GeneralColors]
