@@ -115,7 +115,6 @@ text.margin.right=6
 text.press.color=black
 text.toggle.color=white
 focusFrame=true
-frame.focusElement=button-focus
 frame.expansion=3font
 indicator.size=10
 min_height=+0.18font
