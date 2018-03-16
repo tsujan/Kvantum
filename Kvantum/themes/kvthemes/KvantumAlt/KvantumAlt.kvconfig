@@ -41,6 +41,7 @@ animate_states=true
 tree_branch_line=true
 transient_scrollbar=true
 dark_titlebar=true
+groupbox_top_label=true
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -349,14 +350,14 @@ interior.element=menu
 inherits=GenericFrame
 frame=true
 frame.element=group
-interior=true
-interior.element=group
+interior=false
 text.shadow=0
 text.margin=0
 frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+text.bold=true
 
 [TabBarFrame]
 inherits=GenericFrame

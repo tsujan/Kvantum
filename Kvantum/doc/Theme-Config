@@ -385,8 +385,9 @@ progressbar_thickness             integer             If positive, it sets the (
 
                                                       Note 1: If it is positive but less
                                                       than the height of the progressbar
-                                                      text, the text will be put in front
-                                                      of the bar.
+                                                      text, the text will be put above the
+                                                      bar or, when there is not enough space
+                                                      above the bar, in front of it.
 
                                                       Note 2: The string "font" can be appended
                                                       to the value (without quotes and space),
@@ -539,9 +540,10 @@ groupbox_top_label                true/false          Draw the group-box label a
                                                       frame? It is false by default, which
                                                       means that the label is drawn ON the
                                                       top frame.
-                                                      If this key is set to false, group boxes
-                                                      will not have interior and frame
-                                                      expansion.
+
+                                                      If the value of this key is false,
+                                                      group boxes will not have interior or
+                                                      frame expansion.
 
 button_contents_shift             true/false          Shift the contents of push-buttons when
                                                       they are down? It is true by default.

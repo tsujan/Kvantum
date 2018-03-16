@@ -72,8 +72,11 @@ mid.color=#D9D9D9
 highlight.color=#386d78
 inactive.highlight.color=#828282
 text.color=black
+inactive.text.color=#000000b4
 window.text.color=black
+inactive.window.text.color=#000000aa
 button.text.color=black
+inactive.button.text.color=#000000aa
 disabled.text.color=#00000073
 tooltip.text.color=white
 highlight.text.color=white
@@ -112,9 +115,11 @@ interior=true
 interior.element=button
 indicator.size=10
 text.normal.color=black
+text.normal.inactive.color=#000000aa
 text.focus.color=#005161
 text.press.color=black
 text.toggle.color=white
+text.toggle.inactive.color=black
 text.shadow=0
 text.margin=1
 text.iconspacing=3
@@ -132,9 +137,11 @@ inherits=PanelButtonCommand
 interior.element=tbutton
 frame.element=tbutton
 text.normal.color=white
+text.normal.inactive.color=#ffffffb4
 text.focus.color=#9bedff
 text.press.color=white
 text.toggle.color=white
+text.toggle.inactive.color=black
 indicator.element=tarrow
 
 [Dock]
@@ -209,6 +216,7 @@ indicator.size=10
 inherits=PanelButtonCommand
 text.normal.color=black
 text.press.color=black
+text.press.inactive.color=#000000aa
 text.focus.color=#005161
 
 [Tab]
@@ -255,6 +263,7 @@ text.margin=0
 interior.element=menubar
 frame.element=menubar
 text.normal.color=white
+text.normal.inactive.color=#ffffffb4
 text.focus.color=#005161
 frame.top=0
 frame.bottom=5
@@ -287,6 +296,10 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=black
 text.toggle.color=black
+text.normal.inactive.color=#000000aa
+text.focus.inactive.color=#000000aa
+text.press.inactive.color=#000000aa
+text.toggle.inactive.color=#000000aa
 text.bold=true
 frame.expansion=10
 
@@ -317,6 +330,7 @@ text.normal.color=black
 text.focus.color=#005161
 text.press.color=white
 text.toggle.color=white
+text.toggle.inactive.color=white
 frame.expansion=6
 
 [Splitter]
@@ -351,6 +365,7 @@ frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 text.normal.color=white
+text.normal.inactive.color=#ffffffb4
 text.focus.color=white
 text.margin.top=0
 text.margin.bottom=0
@@ -367,6 +382,7 @@ inherits=PanelButtonCommand
 frame.element=menubar
 interior.element=menubar
 text.normal.color=white
+text.normal.inactive.color=#ffffffb4
 frame.expansion=0
 
 [MenuBarItem]

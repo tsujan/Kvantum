@@ -4147,13 +4147,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         lspec.tispace = qMin(lspec.tispace,2);
       }
 
+      bool isInactive(isWidgetInactive(widget));
       bool drawRaised = false;
       if (!(option->state & State_Enabled))
       {
         status = "normal";
         if (option->state & State_On)
           status = "toggled";
-        if (isWidgetInactive(widget))
+        if (isInactive)
           status.append("-inactive");
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
@@ -4443,18 +4444,56 @@ void Style::drawPrimitive(PrimitiveElement element,
         QColor col;
         if (hasPanel)
         {
-          col = getFromRGBA(lspec.normalColor);
           if (status.startsWith("pressed"))
-            col = getFromRGBA(lspec.pressColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.pressInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.pressColor);
+            }
+            else
+              col = getFromRGBA(lspec.pressColor);
+          }
           else if (status.startsWith("toggled"))
-            col = getFromRGBA(lspec.toggleColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.toggleInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.toggleColor);
+            }
+            else
+              col = getFromRGBA(lspec.toggleColor);
+          }
           else if (option->state & State_MouseOver)
-            col = getFromRGBA(lspec.focusColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.focusColor);
+            }
+            else
+              col = getFromRGBA(lspec.focusColor);
+          }
+          else
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.normalColor);
+            }
+            else
+              col = getFromRGBA(lspec.normalColor);
+          }
         }
         else
           /* FIXME: in fact, the foreground color of the parent widget should be
              used here (-> CE_ToolButtonLabel) but I've encountered no problem yet */
-          col = QApplication::palette().color(QPalette::WindowText);
+          col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                              QPalette::WindowText);
         forceButtonTextColor(widget,col);
       }
 
@@ -8527,6 +8566,11 @@ void Style::drawControl(ControlElement element,
         if (!isVertical && option->direction == Qt::RightToLeft)
           inverted = !inverted;
 
+        /* take care of bad designs (as in pavucontrol-qt) */
+        bool spreadProgressbar = tspec_.spread_progressbar;
+        if (!spreadProgressbar && (isVertical ? w : h) <= fspecPr.top + fspecPr.bottom)
+          spreadProgressbar = true;
+
         if (tspec_.progressbar_thickness > 0
             && !isKisSlider_)
         { // determine the text position relative to the bar
@@ -8536,7 +8580,7 @@ void Style::drawControl(ControlElement element,
           bool topText;
           QSize s;
           /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
-          int thickness = tspec_.progressbar_thickness - (tspec_.spread_progressbar
+          int thickness = tspec_.progressbar_thickness - (spreadProgressbar
                                                           ? 0
                                                           : fspecPr.top + fspecPr.bottom);
           if (isVertical)
@@ -8550,9 +8594,9 @@ void Style::drawControl(ControlElement element,
             topText = (thickness + QFontMetrics(f).height()+3 <= h);
           }
 
-          thickness = isVertical ? tspec_.spread_progressbar
+          thickness = isVertical ? spreadProgressbar
                                    ? s.width() : s.width() + fspecPr.top + fspecPr.bottom
-                                 : tspec_.spread_progressbar
+                                 : spreadProgressbar
                                    ? s.height() : s.height() + fspecPr.top + fspecPr.bottom;
           if (QFontMetrics(f).height() > thickness)
           {
@@ -8618,7 +8662,7 @@ void Style::drawControl(ControlElement element,
           fspec.expansion = (isKisSlider_
                                ? qMin(fspecPr.expansion, getFrameSpec("IndicatorSpinBox").expansion)
                                : fspecPr.expansion)
-                            - (tspec_.spread_progressbar ? 0 : fspecPr.top+fspecPr.bottom);
+                            - (spreadProgressbar ? 0 : fspecPr.top+fspecPr.bottom);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
         }
 
@@ -9783,19 +9827,58 @@ void Style::drawControl(ControlElement element,
         if (widget && !standardButton.contains(widget)
             && (option->state & State_Enabled))
         {
+          bool isInactive(status.contains("-inactive"));
           QColor col;
           if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
           {
-            col = getFromRGBA(lspec.normalColor);
             if (status.startsWith("pressed"))
-              col = getFromRGBA(lspec.pressColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.pressInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.pressColor);
+              }
+              else
+                col = getFromRGBA(lspec.pressColor);
+            }
             else if (status.startsWith("toggled"))
-              col = getFromRGBA(lspec.toggleColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.toggleInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.toggleColor);
+              }
+              else
+                col = getFromRGBA(lspec.toggleColor);
+            }
             else if (option->state & State_MouseOver)
-              col = getFromRGBA(lspec.focusColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.focusInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.focusColor);
+              }
+              else
+                col = getFromRGBA(lspec.focusColor);
+            }
+            else
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.normalInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.normalColor);
+              }
+              else
+                col = getFromRGBA(lspec.normalColor);
+            }
           }
           else // FIXME: the foreground color of the parent widget should be used
-            col = QApplication::palette().color(QPalette::WindowText);
+            col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                                QPalette::WindowText);
           forceButtonTextColor(widget,col);
         }
 
@@ -10730,7 +10813,8 @@ void Style::drawControl(ControlElement element,
                     tRect,
                     fspec,lspec,
                     talign,title,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0);
+                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    status.contains("-inactive"));
 
         if (hasVertTitle)
         {
@@ -10802,8 +10886,12 @@ void Style::drawControl(ControlElement element,
         if (!tspec_.spread_progressbar)
         {
           frame_spec fspec = getFrameSpec("Progressbar");
-          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-          o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
+          /* take care of bad designs (as in pavucontrol-qt) */
+          if (r.height() > fspec.top + fspec.bottom)
+          {
+            fspec.left = fspec.right = qMin(fspec.left,fspec.right);
+            o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
+          }
         }
         drawControl(CE_ProgressBarContents, &o, painter, widget);
         o.rect = r;
@@ -14513,10 +14601,17 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_ProgressBarGroove : return option->rect;
 
     case SE_ProgressBarContents : {
-      if (tspec_.spread_progressbar)
-        return subElementRect(SE_ProgressBarGroove,option,widget);
-
       frame_spec fspec = getFrameSpec("Progressbar");
+      const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+      bool isVertical(pb && pb->orientation() == Qt::Vertical);
+
+      if (tspec_.spread_progressbar
+          /* take care of bad designs (as in pavucontrol-qt) */
+          || (isVertical ? option->rect.width() : option->rect.height()) <= fspec.top + fspec.bottom)
+      {
+        return subElementRect(SE_ProgressBarGroove,option,widget);
+      }
+
       if (isKisSlider_)
         fspec.right = 0;
       else
@@ -14524,8 +14619,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         fspec.left = fspec.right = qMin(fspec.left,fspec.right);
       }
       // the vertical progressbar will be made out of the horizontal one
-      const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-      if (pb && pb->orientation() == Qt::Vertical)
+
+      if (isVertical)
       {
         int top = fspec.top;
         fspec.top = fspec.right;

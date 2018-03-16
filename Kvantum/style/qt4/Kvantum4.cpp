@@ -3318,13 +3318,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         lspec.tispace = qMin(lspec.tispace,2);
       }
 
+      bool isInactive(widget && !widget->isActiveWindow());
       bool drawRaised = false;
       if (!(option->state & State_Enabled))
       {
         status = "normal";
         if (option->state & State_On)
           status = "toggled";
-        if (widget && !widget->isActiveWindow())
+        if (isInactive)
           status.append("-inactive");
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
@@ -3479,7 +3480,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               pbStatus = "normal";
             if (option->state & State_On) // it may be checkable
               pbStatus = "toggled";
-            if (!widget->isActiveWindow())
+            if (isInactive)
               pbStatus.append("-inactive");
           }
         }
@@ -3544,18 +3545,56 @@ void Style::drawPrimitive(PrimitiveElement element,
         QColor col;
         if (hasPanel)
         {
-          col = getFromRGBA(lspec.normalColor);
           if (status.startsWith("pressed"))
-            col = getFromRGBA(lspec.pressColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.pressInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.pressColor);
+            }
+            else
+              col = getFromRGBA(lspec.pressColor);
+          }
           else if (status.startsWith("toggled"))
-            col = getFromRGBA(lspec.toggleColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.toggleInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.toggleColor);
+            }
+            else
+              col = getFromRGBA(lspec.toggleColor);
+          }
           else if (option->state & State_MouseOver)
-            col = getFromRGBA(lspec.focusColor);
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.focusColor);
+            }
+            else
+              col = getFromRGBA(lspec.focusColor);
+          }
+          else
+          {
+            if (isInactive)
+            {
+              col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.normalColor);
+            }
+            else
+              col = getFromRGBA(lspec.normalColor);
+          }
         }
         else
           /* FIXME: in fact, the foreground color of the parent widget should be
              used here (-> CE_ToolButtonLabel) but I've encountered no problem yet */
-          col = QApplication::palette().color(QPalette::WindowText);
+          col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                              QPalette::WindowText);
         forceButtonTextColor(widget,col);
       }
 
@@ -5864,8 +5903,12 @@ void Style::drawControl(ControlElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
           if (libreoffice) painter->restore();
         }
-        else // always get normal color from menubar
-          lspec.normalColor = getLabelSpec(group).normalColor;
+        else // always get normal color from menubar (or toolbar if they're merged)
+        {
+          const label_spec lspec1 = getLabelSpec(group);
+          lspec.normalColor = lspec1.normalColor;
+          lspec.normalInactiveColor = lspec1.normalInactiveColor;
+        }
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter | Qt::TextSingleLine;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -8094,19 +8137,58 @@ void Style::drawControl(ControlElement element,
         if (widget && !standardButton.contains(widget)
             && (option->state & State_Enabled))
         {
+          bool isInactive(status.contains("-inactive"));
           QColor col;
           if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
           {
-            col = getFromRGBA(lspec.normalColor);
             if (status.startsWith("pressed"))
-              col = getFromRGBA(lspec.pressColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.pressInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.pressColor);
+              }
+              else
+                col = getFromRGBA(lspec.pressColor);
+            }
             else if (status.startsWith("toggled"))
-              col = getFromRGBA(lspec.toggleColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.toggleInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.toggleColor);
+              }
+              else
+                col = getFromRGBA(lspec.toggleColor);
+            }
             else if (option->state & State_MouseOver)
-              col = getFromRGBA(lspec.focusColor);
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.focusInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.focusColor);
+              }
+              else
+                col = getFromRGBA(lspec.focusColor);
+            }
+            else
+            {
+              if (isInactive)
+              {
+                col = getFromRGBA(lspec.normalInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(lspec.normalColor);
+              }
+              else
+                col = getFromRGBA(lspec.normalColor);
+            }
           }
           else // FIXME: the foreground color of the parent widget should be used
-            col = QApplication::palette().color(QPalette::WindowText);
+            col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                                QPalette::WindowText);
           forceButtonTextColor(widget,col);
         }
 
@@ -8943,7 +9025,8 @@ void Style::drawControl(ControlElement element,
                     tRect,
                     fspec,lspec,
                     talign,title,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0);
+                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
+                    status.contains("-inactive"));
 
         if (hasVertTitle)
         {

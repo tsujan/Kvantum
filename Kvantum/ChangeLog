@@ -24,6 +24,8 @@ V0.10.6
  * Added optional icon/arrow separators for comboboxes in edit mode.
  * Added a key for square arrow buttons in editable combo boxes. It also removes the combo panel behind the icon.
  * Put the texts of thin progressbars above them as far as possible. If there isn't enough space above a thin progressbar, put its the text in front of it.
+ * Fixed inactive states of nonstandard buttons.
+ * A workaround for badly designed progressbars (as in pavucontrol-qt -- I didn't fix pavucontrol-qt because other developers might make the same mistake).
 
 V0.10.5
 ---------
