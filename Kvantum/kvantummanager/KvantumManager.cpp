@@ -1750,20 +1750,24 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                 appTheme = appThemes.at (i);
                 if (appTheme.endsWith ("#"))
                 {
-                    /* we remove # for simplicity and add it only at writeAppLists() */
+                    /* we remove # for simplicity and add it only at writeOrigAppLists() */
                     appTheme.remove (appTheme.count() - 1, 1);
-                    if (ui->comboBox->findText (appTheme + modifiedSuffix_) == -1)
+                    if (ui->comboBox->findText ((appTheme == "Default" ? "Kvantum" : appTheme) + modifiedSuffix_) == -1)
                     {
                         nonexistent = true;
                         continue;
                     }
                 }
                 /* see if the theme is incorrect but its modified version exists */
-                else if (ui->comboBox->findText (appTheme) == -1)
+                else
                 {
-                    nonexistent = true;
-                    if (ui->comboBox->findText (appTheme + modifiedSuffix_) == -1)
-                        continue;
+                    QString str = appTheme == "Default" ? kvDefault_ : appTheme;
+                    if (ui->comboBox->findText (str) == -1)
+                    {
+                        nonexistent = true;
+                        if (ui->comboBox->findText (str + modifiedSuffix_) == -1)
+                            continue;
+                    }
                 }
                 appThemes_.insert (appTheme, appList);
             }
@@ -2247,6 +2251,10 @@ void KvantumManager::writeOrigAppLists()
     settings.remove ("Applications");
     if (!origAppThemes_.isEmpty())
     {
+        /* first, add the theme name if its key doesn't exist */
+        if (!settings.contains ("theme") && !kvconfigTheme_.isEmpty())
+            settings.setValue ("theme", kvconfigTheme_);
+
         settings.beginGroup ("Applications");
         QHashIterator<QString, QStringList> i (origAppThemes_);
         QString appTheme;
@@ -2255,7 +2263,7 @@ void KvantumManager::writeOrigAppLists()
             i.next();
             appTheme = i.key();
             /* add # */
-            int indx = ui->comboBox->findText (appTheme + modifiedSuffix_);
+            int indx = ui->comboBox->findText ((appTheme == "Default" ? "Kvantum" : appTheme) + modifiedSuffix_);
             if (indx > -1)
                 appTheme += "#";
             settings.setValue (appTheme, i.value());
