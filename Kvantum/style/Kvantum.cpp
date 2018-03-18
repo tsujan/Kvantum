@@ -1922,6 +1922,7 @@ void Style::polish(QPalette &palette)
   if (col.isValid())
   {
     palette.setColor(QPalette::Active,QPalette::Window,col);
+    palette.setColor(QPalette::Disabled,QPalette::Window,col);
     col1 = getFromRGBA(cspec_.inactiveWindowColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Window,col1);
@@ -1933,6 +1934,7 @@ void Style::polish(QPalette &palette)
   if (col.isValid())
   {
     palette.setColor(QPalette::Active,QPalette::Base,col);
+    palette.setColor(QPalette::Disabled,QPalette::Base,col);
     col1 = getFromRGBA(cspec_.inactiveBaseColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Base,col1);
@@ -1972,6 +1974,7 @@ void Style::polish(QPalette &palette)
   if (col.isValid())
   {
     palette.setColor(QPalette::Active,QPalette::Highlight,col);
+    palette.setColor(QPalette::Disabled,QPalette::Highlight,col);
     col1 = getFromRGBA(cspec_.inactiveHighlightColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
@@ -6591,46 +6594,42 @@ void Style::drawPrimitive(PrimitiveElement element,
   }
 }
 
-QIcon::Mode Style::getIconMode(int state, bool isInactive, label_spec lspec) const
+Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspec) const
 {
-  QIcon::Mode icnMode;
-  if (state == 0)
-    icnMode = QIcon::Disabled;
-  else
+  KvIconMode icnMode = state == 0 ? Disabled : Normal;
+  QColor txtCol;
+  if (state == 1 || state == 0)
   {
-    icnMode = QIcon::Normal;
-    QColor txtCol;
-    if (state == 1)
-    {
-      if (isInactive)
-        txtCol = getFromRGBA(lspec.normalInactiveColor);
-      if (!txtCol.isValid())
-        txtCol = getFromRGBA(lspec.normalColor);
-    }
-    else if (state == 2)
-    {
-      if (isInactive)
-        txtCol = getFromRGBA(lspec.focusInactiveColor);
-      if (!txtCol.isValid())
-        txtCol = getFromRGBA(lspec.focusColor);
-    }
-    else if (state == 3)
-    {
-      if (isInactive)
-        txtCol = getFromRGBA(lspec.pressInactiveColor);
-      if (!txtCol.isValid())
-        txtCol = getFromRGBA(lspec.pressColor);
-    }
-    else if (state == 4)
-    {
-      if (isInactive)
-        txtCol = getFromRGBA(lspec.toggleInactiveColor);
-      if (!txtCol.isValid())
-        txtCol = getFromRGBA(lspec.toggleColor);
-    }
+    if (isInactive)
+      txtCol = getFromRGBA(lspec.normalInactiveColor);
+    if (!txtCol.isValid())
+      txtCol = getFromRGBA(lspec.normalColor);
+  }
+  else if (state == 2)
+  {
+    if (isInactive)
+      txtCol = getFromRGBA(lspec.focusInactiveColor);
+    if (!txtCol.isValid())
+      txtCol = getFromRGBA(lspec.focusColor);
+  }
+  else if (state == 3)
+  {
+    if (isInactive)
+      txtCol = getFromRGBA(lspec.pressInactiveColor);
+    if (!txtCol.isValid())
+      txtCol = getFromRGBA(lspec.pressColor);
+  }
+  else if (state == 4)
+  {
+    if (isInactive)
+      txtCol = getFromRGBA(lspec.toggleInactiveColor);
+    if (!txtCol.isValid())
+      txtCol = getFromRGBA(lspec.toggleColor);
+  }
 
-    if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
-      icnMode = QIcon::Selected;
+  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
+  {
+    icnMode = state == 0 ? DisabledSelected : Selected;
   }
 
   return icnMode;
@@ -7401,12 +7400,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        const QIcon::Mode iconmode =
+        const KvIconMode iconmode =
               (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? QIcon::Selected :
-              (option->state & State_Sunken) ? QIcon::Active :
-              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-            : QIcon::Disabled;
+              (option->state & State_Selected) ? Selected :
+              (option->state & State_Sunken) ? Active :
+              (option->state & State_MouseOver) ? Active : Normal
+            : Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -7444,12 +7443,12 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        const QIcon::Mode iconmode =
+        const KvIconMode iconmode =
               (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? QIcon::Selected :
-              (option->state & State_Sunken) ? QIcon::Active :
-              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-            : QIcon::Disabled;
+              (option->state & State_Selected) ? Selected :
+              (option->state & State_Sunken) ? Active :
+              (option->state & State_MouseOver) ? Active : Normal
+            : Disabled;
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
@@ -9496,12 +9495,12 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
-        const QIcon::Mode iconmode =
+        const KvIconMode iconmode =
               (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? QIcon::Selected :
-              (option->state & State_Sunken) ? QIcon::Active :
-              (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-            : QIcon::Disabled;
+              (option->state & State_Selected) ? Selected :
+              (option->state & State_Sunken) ? Active :
+              (option->state & State_MouseOver) ? Active : Normal
+            : Disabled;
         renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
@@ -12407,7 +12406,7 @@ void Style::drawComplexControl(ComplexControl control,
                       Qt::AlignCenter,title,QPalette::WindowText,
                       tbStatus == "normal" ? 1 : 2,
                       false,
-                      getPixmapFromIcon(o.icon,QIcon::Normal,QIcon::Off,iconSize),
+                      getPixmapFromIcon(o.icon,Normal,QIcon::Off,iconSize),
                       iconSize);
         }
 
@@ -12497,11 +12496,11 @@ void Style::drawComplexControl(ComplexControl control,
       QStyleOptionButton btnOpt;
       btnOpt.QStyleOption::operator=(*option);
       btnOpt.state &= ~State_MouseOver;
-      const QIcon::Mode iconmode =
+      const KvIconMode iconmode =
         (option->state & State_Enabled) ?
-        (option->state & State_Sunken) ? QIcon::Active :
-        (option->state & State_MouseOver) ? QIcon::Active : QIcon::Normal
-        : QIcon::Disabled;
+        (option->state & State_Sunken) ? Active :
+        (option->state & State_MouseOver) ? Active : Normal
+        : Disabled;
       const QIcon::State iconstate =
         (option->state & State_On) ? QIcon::On : QIcon::Off;
       if (option->subControls & QStyle::SC_MdiCloseButton)
@@ -17694,7 +17693,7 @@ void Style::renderLabel(
 }
 
 QPixmap Style::getPixmapFromIcon(const QIcon &icon,
-                                 const QIcon::Mode iconmode,
+                                 const KvIconMode iconmode,
                                  const QIcon::State iconstate,
                                  QSize iconSize) const
 {
@@ -17705,16 +17704,34 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
      (due to a bug in some icon engines) and is (almost) pixelRatio_*iconSize
      when the icon isn't taken from a theme but has no fixed size. What follows
      covers all cases by checking the pixmap width. */
+  QIcon::Mode icnMode;
+  /* since some icon engines (like that of KDE) don't consult generatedIconPixmap(),
+     we enforce it after ignoring the disabled state temporarily */
+  if (iconmode == Normal || iconmode == Disabled)
+    icnMode = QIcon::Normal;
+  else if (iconmode == Active)
+    icnMode = QIcon::Active;
+  else// if (iconmode == Selected || iconmode == DisabledSelected)
+    icnMode = QIcon::Selected;
+
   bool hdpi(false);
 #if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
 #endif
   QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_
-                                : iconSize*pixelRatio_,iconmode,iconstate);
+                                : iconSize*pixelRatio_,icnMode,iconstate);
   /* for an HDPI-enabled app and when the icon isn't taken from a theme */
   if (hdpi && px.size().width() < pixelRatio_*(iconSize.width() - iconSize.width()%pixelRatio_))
-    px = icon.pixmap(iconSize,iconmode,iconstate);
+    px = icon.pixmap(iconSize,icnMode,iconstate);
+
+  if (iconmode == Disabled || iconmode == DisabledSelected)
+  {
+    QStyleOption opt;
+    opt.palette = QApplication::palette();
+    px = generatedIconPixmap(QIcon::Disabled, px, &opt); // graying out
+    px = translucentPixmap(px, 50); // graying out is never enough
+  }
   return px;
 }
 

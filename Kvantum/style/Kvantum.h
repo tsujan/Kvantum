@@ -145,6 +145,15 @@ class Style : public QCommonStyle {
                        const QWidget *widget = 0) const;
 
   private:
+    /* For handling disabled icons with all icon engines: */
+    enum KvIconMode {
+      Normal,
+      Selected,
+      Active,
+      Disabled,
+      DisabledSelected
+    };
+
     /* Set up a theme with the given name. If there is no name,
        the default theme will be used. If the config or SVG file of
        the theme is missing, that of the default theme will be used. */
@@ -247,7 +256,7 @@ class Style : public QCommonStyle {
 
     /* Gets a pixmap with a proper size from an icon considering HDPI. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
-                              const QIcon::Mode iconmode,
+                              const KvIconMode iconmode,
                               const QIcon::State iconstate,
                               QSize iconSize) const;
 
@@ -306,7 +315,7 @@ class Style : public QCommonStyle {
     bool hasHighContrastWithContainer(const QWidget *w, const QColor color) const;
 
     /* Consider monochrome icons that reverse color when selected. */
-    QIcon::Mode getIconMode(int state, bool isInactive, label_spec lspec) const;
+    KvIconMode getIconMode(int state, bool isInactive, label_spec lspec) const;
 
     /* A solution for Qt5's problem with translucent windows.*/
     void setSurfaceFormat(QWidget *w) const;
