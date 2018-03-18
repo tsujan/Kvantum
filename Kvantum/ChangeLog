@@ -26,6 +26,7 @@ V0.10.6
  * Put the texts of thin progressbars above them as far as possible. If there isn't enough space above a thin progressbar, put its the text in front of it.
  * Fixed inactive states of nonstandard buttons.
  * A workaround for badly designed progressbars (as in pavucontrol-qt -- I didn't fix pavucontrol-qt because other developers might make the same mistake).
+ * Reverse the new default behavior of Qt5 submenus, due to which, submenus are closed when the cursor leaves all menus.
 
 V0.10.5
 ---------

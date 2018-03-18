@@ -13374,12 +13374,19 @@ int Style::styleHint(StyleHint hint,
     /* QMenu has some bugs regarding this timeout. It's also
        used when reentering a menuitem with submenu and even
        when SH_Menu_SubMenuPopupDelay is negative. Here, we
-       set it to 20s for negative delays as a workaround. */
+       set it to 20s for negative delays as a workaround.
+
+       NOTE: This has no effect with later versions of Qt5. */
     case SH_Menu_SubMenuSloppyCloseTimeout : {
       return tspec_.submenu_delay < 0 ? 20000 : 1000;
     }
+
     case SH_Menu_SubMenuResetWhenReenteringParent : return false;
-    case SH_Menu_SubMenuDontStartSloppyOnLeave : return false;
+
+    /* a false value for this closes submenus when the cursor
+       leaves all menus, which is an annoying behavior */
+    case SH_Menu_SubMenuDontStartSloppyOnLeave : return true;
+
     case SH_Menu_SubMenuSloppySelectOtherActions : return true;
 #endif
     /* when set to true, only the last submenu is
