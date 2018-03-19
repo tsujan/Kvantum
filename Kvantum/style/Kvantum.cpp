@@ -1690,7 +1690,7 @@ void Style::polish(QWidget *widget)
       {
         // support animation only if the background is flat
         if ((tspec_.animate_states
-             && (!vp || vp->autoFillBackground())
+             && (!vp || vp->autoFillBackground() || !vp->styleSheet().isEmpty())
              && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
            || (hasInactiveSelItemCol_
                && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items
@@ -4966,8 +4966,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                            || sa->backgroundRole() == QPalette::Button)
                        && (!sa->viewport()
                            || (sa->viewport()->backgroundRole() != QPalette::Window
-                               && sa->viewport()->backgroundRole() != QPalette::Button
-                               && sa->viewport()->autoFillBackground())));
+                               && sa->viewport()->backgroundRole() != QPalette::Button)));
         if (widget && widget->hasFocus() && hasFlatBg
             && !widget->inherits("QWellArray")) // color rects always have focus!
         {
