@@ -1667,7 +1667,6 @@ void Style::polish(QWidget *widget)
       widget->installEventFilter(this);
     }
   }
-  /* remove ugly flat backgrounds when the window backround is styled */
   else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
   {
     if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
@@ -1677,7 +1676,7 @@ void Style::polish(QWidget *widget)
       QWidget *vp = sa->viewport();
       if (vp && (vp->backgroundRole() == QPalette::Window
                  || vp->backgroundRole() == QPalette::Button))
-      {
+      { // remove ugly flat backgrounds (when the window backround is styled)
         vp->setAutoFillBackground(false);
         const QList<QWidget*> children = vp->findChildren<QWidget*>();
         for (QWidget *child : children)
@@ -1691,6 +1690,7 @@ void Style::polish(QWidget *widget)
       {
         // support animation only if the background is flat
         if ((tspec_.animate_states
+             && (!vp || vp->autoFillBackground())
              && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
            || (hasInactiveSelItemCol_
                && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items
@@ -1922,7 +1922,7 @@ void Style::polish(QPalette &palette)
   if (col.isValid())
   {
     palette.setColor(QPalette::Active,QPalette::Window,col);
-    palette.setColor(QPalette::Disabled,QPalette::Window,col);
+    palette.setColor(QPalette::Disabled,QPalette::Window,col); // used in generatedIconPixmap()
     col1 = getFromRGBA(cspec_.inactiveWindowColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Window,col1);
@@ -1934,7 +1934,7 @@ void Style::polish(QPalette &palette)
   if (col.isValid())
   {
     palette.setColor(QPalette::Active,QPalette::Base,col);
-    palette.setColor(QPalette::Disabled,QPalette::Base,col);
+    palette.setColor(QPalette::Disabled,QPalette::Base,col); // some apps may use it
     col1 = getFromRGBA(cspec_.inactiveBaseColor);
     if (col1.isValid())
       palette.setColor(QPalette::Inactive,QPalette::Base,col1);
@@ -4960,13 +4960,14 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         QString fStatus = "normal";
-        // Can it be animated? (which means a flat background too -> polish(QWidget *widget))
+        // -> polish(QWidget *widget))
         bool hasFlatBg(sa && themeRndr_ && themeRndr_->isValid()
                        && (sa->backgroundRole() == QPalette::Window
                            || sa->backgroundRole() == QPalette::Button)
                        && (!sa->viewport()
                            || (sa->viewport()->backgroundRole() != QPalette::Window
-                               && sa->viewport()->backgroundRole() != QPalette::Button)));
+                               && sa->viewport()->backgroundRole() != QPalette::Button
+                               && sa->viewport()->autoFillBackground())));
         if (widget && widget->hasFocus() && hasFlatBg
             && !widget->inherits("QWellArray")) // color rects always have focus!
         {
