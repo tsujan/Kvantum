@@ -5,7 +5,7 @@
     <name>KvManager::KvantumManager</name>
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
-        <location filename="../../KvantumManager.cpp" line="2431"/>
+        <location filename="../../KvantumManager.cpp" line="2433"/>
         <source>Kvantum Manager</source>
         <translation>Administrilo de Kvantum</translation>
     </message>
@@ -1338,7 +1338,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="468"/>
         <location filename="../../KvantumManager.cpp" line="622"/>
-        <location filename="../../KvantumManager.cpp" line="2289"/>
+        <location filename="../../KvantumManager.cpp" line="2291"/>
         <source>Confirmation</source>
         <translation>Konfirmo</translation>
     </message>
@@ -1527,8 +1527,8 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="777"/>
-        <location filename="../../KvantumManager.cpp" line="1824"/>
-        <location filename="../../KvantumManager.cpp" line="2192"/>
+        <location filename="../../KvantumManager.cpp" line="1826"/>
+        <location filename="../../KvantumManager.cpp" line="2194"/>
         <source>Active theme:</source>
         <translation>Aktiva etoso:</translation>
     </message>
@@ -1540,7 +1540,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1094"/>
-        <location filename="../../KvantumManager.cpp" line="2197"/>
+        <location filename="../../KvantumManager.cpp" line="2199"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Ĉi tiuj agordoj povas esti ŝanĝitaj senriske.&lt;br&gt;Por ŝanĝi la aliajn, redaktu la jenan dosieron:</translation>
     </message>
@@ -1550,52 +1550,52 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
         <translation>Sen priskribo</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1884"/>
+        <location filename="../../KvantumManager.cpp" line="1886"/>
         <source>A copy of the root config is created.</source>
         <translation>Kopio de la radika konfiguraĵo estiĝis.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1895"/>
+        <location filename="../../KvantumManager.cpp" line="1897"/>
         <source>A copy was already created.</source>
         <translation>Kopio jam ekzistas.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2183"/>
+        <location filename="../../KvantumManager.cpp" line="2185"/>
         <source>Configuration saved.</source>
         <translation>La konfiguro estas konservita.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2290"/>
+        <location filename="../../KvantumManager.cpp" line="2292"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Ĉu vi volas restaŭri la defaŭltajn (radikajn) agordojn de la etoso?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2293"/>
+        <location filename="../../KvantumManager.cpp" line="2295"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Vi perdos la ŝanĝoj, kiujn vi eble faris.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2432"/>
+        <location filename="../../KvantumManager.cpp" line="2434"/>
         <source>A tool for intsalling, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Ilo por instali, elekti&lt;br&gt;kaj agordi la etosojn de &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2433"/>
+        <location filename="../../KvantumManager.cpp" line="2435"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Verkinto: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (akk. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2328"/>
+        <location filename="../../KvantumManager.cpp" line="2330"/>
         <source>Restored the rool default settings of %1</source>
         <translation>La radikaj defaŭltaj agordoj de %1 estas restaŭritaj</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2329"/>
+        <location filename="../../KvantumManager.cpp" line="2331"/>
         <source>the default theme</source>
         <translation>la defaŭlta etoso</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2430"/>
+        <location filename="../../KvantumManager.cpp" line="2432"/>
         <source>About Kvantum Manager</source>
         <translation>Pri Kvantum-Adminsitrilo</translation>
     </message>

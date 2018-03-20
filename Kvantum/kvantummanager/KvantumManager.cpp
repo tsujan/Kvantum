@@ -1813,7 +1813,9 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
             curTxt = curTxt.split (" ").first();
             if (curTxt == "Kvantum")
                 curTxt = "Default";
-            if (!appThemes_.value (curTxt).isEmpty())
+            if (appThemes_.value (curTxt).isEmpty())
+                ui->appsEdit->clear();
+            else
                 ui->appsEdit->setText (appThemes_.value (curTxt).join (","));
         }
 
