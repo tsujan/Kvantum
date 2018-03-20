@@ -6389,7 +6389,13 @@ void Style::drawPrimitive(PrimitiveElement element,
                              cursor goes over the item. This is a simple workaround. */
                           && !(QApplication::mouseButtons() & Qt::LeftButton)) ? "focused"
                          : "normal" : "disabled";
-      if (ivStatus.startsWith("focused")
+      if (ivStatus.startsWith("disabled") && (option->state & State_Selected))
+      {
+        /* Disabled items aren't selectable but Qt Creator wrongly disables
+           the headers of a cmake project and let the user select them! */
+        ivStatus.replace("disabled","pressed");
+      }
+      else if (ivStatus.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
         ivStatus.replace("focused","normal");
