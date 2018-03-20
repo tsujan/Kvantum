@@ -6937,7 +6937,9 @@ void Style::drawControl(ControlElement element,
                       (option->state & State_Selected) ? 4 :
                       ((option->state & State_MouseOver)
                        && !(QApplication::mouseButtons() & Qt::LeftButton)) ? 2 : 1 : 0;
-          if (state == 2
+          if (state == 0 && (option->state & State_Selected))
+            state = 3; // see the workaround for Qt Creator in PE_PanelItemViewItem
+          else if (state == 2
               && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
           {
             state = 1;
