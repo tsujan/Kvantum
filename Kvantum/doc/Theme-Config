@@ -26,7 +26,9 @@ There are many sections and variables in the config file. That's intentional: un
 Section                                      Meaning
 =====================================================
 [%General]                                   General info on the theme and
-                                             some general variables.
+                                             some general variables. ("%" IS
+                                             REQUIRED because Qt uses [General]
+                                             for another purpose.)
 
 [GeneralColors]                              The most important colors used
                                              by the theme.
@@ -178,9 +180,9 @@ Exception No.3: Any variable related to compositing or hacking and also "frame.e
 Variable                          Value               Meaning
 ==============================================================
 
-                       ***************************
-                       *** The General Section ***
-                       ***************************
+                       ****************************
+                       *** The %General Section ***
+                       ****************************
 
 author                            string              Obvious.
 
@@ -284,7 +286,7 @@ embedded_tabs                     true/false          If "attach_active_tab" is 
                                                       mode)? This is false by default.
 
 joined_inactive_tabs              true/false          Join inactive tabs together? They are
-                                                      joined by default. Also see
+                                                      joined by default. Also, see
                                                       "Theme-Making.pdf" for tab separators.
 
 mirror_doc_tabs                   true/false          By default, bottom and right tab shapes
@@ -424,7 +426,7 @@ menu_shadow_depth                 integer             The depth of the shadow me
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
 
-                                                      Also see "Theme-Making.pdf" ->
+                                                      Also, see "Theme-Making.pdf" ->
                                                       Translucency and Shadow for Menus and
                                                       Tooltips
 
