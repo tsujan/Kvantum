@@ -8383,7 +8383,9 @@ void Style::drawControl(ControlElement element,
         }
         else if (fspec.expansion != 0)
         {
-          fspec.expansion = qMin(getFrameSpec("IndicatorSpinBox").expansion,
+          fspec.expansion = qMin(tspec_.inline_spin_indicators
+                                   ? getFrameSpec("LineEdit").expansion
+                                   : getFrameSpec("IndicatorSpinBox").expansion,
                                  fspec.expansion);
         }
       }
@@ -8640,7 +8642,10 @@ void Style::drawControl(ControlElement element,
         else
         {
           fspec.expansion = (isKisSlider_
-                               ? qMin(fspecPr.expansion, getFrameSpec("IndicatorSpinBox").expansion)
+                               ? qMin(fspecPr.expansion,
+                                      tspec_.inline_spin_indicators
+                                        ? getFrameSpec("LineEdit").expansion
+                                        : getFrameSpec("IndicatorSpinBox").expansion)
                                : fspecPr.expansion)
                             - (spreadProgressbar ? 0 : fspecPr.top+fspecPr.bottom);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
