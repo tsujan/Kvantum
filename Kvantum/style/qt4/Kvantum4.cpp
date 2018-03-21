@@ -2823,20 +2823,19 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     fspec.left = fspec.right = fspec.top = fspec.bottom = fspec.expansion = 0;
   }
 
-  fspec.hasCapsule = true;
+  fspec.isAttached = true;
   if (option->direction == Qt::RightToLeft)
   {
     if (lineedit->width() < combo->width() - COMBO_ARROW_LENGTH
                             - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
-      fspec.capsuleH = 0;
-    else fspec.capsuleH = 1;
+      fspec.HPos = 0;
+    else fspec.HPos = 1;
   }
   else
   {
-    if (lineedit->x() > 0) fspec.capsuleH = 0;
-    else fspec.capsuleH = -1;
+    if (lineedit->x() > 0) fspec.HPos = 0;
+    else fspec.HPos = -1;
   }
-  fspec.capsuleV = 2;
 
   // lineedits only have normal and focused states in Kvantum
   QString leStatus = (option->state & State_HasFocus) ? "-focused" : "-normal";
@@ -3221,21 +3220,18 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.right = qMin(fspec.right, fspec1.right);
             fspec.top = qMin(fspec.top, fspec1.top);
             fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
-            fspec.hasCapsule = true;
+            fspec.isAttached = true;
             Qt::ArrowType aType = opt ? opt->arrowType : tb->arrowType();
             QTransform m;
             switch (aType) {
               case Qt::LeftArrow :
-                fspec.capsuleV = 2;
-                fspec.capsuleH = -1;
+                fspec.HPos = -1;
                 break;
               case Qt::RightArrow :
-                fspec.capsuleV = 2;
-                fspec.capsuleH = 1;
+                fspec.HPos = 1;
                 break;
               case Qt::UpArrow :
-                fspec.capsuleV = 2;
-                fspec.capsuleH = -1;
+                fspec.HPos = -1;
                 r.setRect(y, x, h, w);
                 painter->save();
                 painterSaved = true;
@@ -3244,8 +3240,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 painter->setTransform(m, true);
                 break;
               case Qt::DownArrow :
-                fspec.capsuleV = 2;
-                fspec.capsuleH = 1;
+                fspec.HPos = 1;
                 r.setRect(y, x, h, w);
                 painter->save();
                 painterSaved = true;
@@ -3254,8 +3249,6 @@ void Style::drawPrimitive(PrimitiveElement element,
                 painter->setTransform(m, true);
                 break;
               default :
-                fspec.capsuleV = 2;
-                fspec.capsuleH = 2;
                 break;
             }
             /* don't accept any state because some themes
@@ -3360,9 +3353,8 @@ void Style::drawPrimitive(PrimitiveElement element,
               int kind = whichToolbarButton (tb, toolBar);
               if (kind != 2)
               {
-                fspec.hasCapsule = true;
-                fspec.capsuleV = 2;
-                fspec.capsuleH = kind;
+                fspec.isAttached = true;
+                fspec.HPos = kind;
               }
             }
 
@@ -3379,7 +3371,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         // lack of space  (-> CE_ToolButtonLabel)
-        if (!fspec.hasCapsule
+        if (!fspec.isAttached
             && opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
         {
           if (tb->popupMode() != QToolButton::MenuButtonPopup)
@@ -3453,16 +3445,15 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
           {
             // merge with drop down button
-            if (!fspec.hasCapsule)
+            if (!fspec.isAttached)
             {
-              fspec.capsuleV = 2;
-              fspec.hasCapsule = true;
-              fspec.capsuleH = rtl ? 1 : -1;
+              fspec.isAttached = true;
+              fspec.HPos = rtl ? 1 : -1;
             }
-            else if (fspec.capsuleH == 1)
-              fspec.capsuleH = 0;
-            else if (fspec.capsuleH == 2)
-              fspec.capsuleH = rtl ? 1 : -1;
+            else if (fspec.HPos == 1)
+              fspec.HPos = 0;
+            else if (fspec.HPos == 2)
+              fspec.HPos = rtl ? 1 : -1;
             // don't press the button if only its arrow is pressed
             pbStatus = (option->state & State_Enabled) ?
                          (option->state & State_Sunken) && tb->isDown() ? "pressed" :
@@ -4260,9 +4251,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         if (!sb || sb->buttonSymbols() != QAbstractSpinBox::NoButtons)
         {
-          fspec.hasCapsule = true;
-          fspec.capsuleH = -1;
-          fspec.capsuleV = 2;
+          fspec.isAttached = true;
+          fspec.HPos = -1;
         }
 
         // the measure we used for CC_SpinBox at drawComplexControl()
@@ -4305,21 +4295,20 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       else if (qobject_cast<QComboBox*>(p)) // FIXME: without being a QLineEdit?!
       {
-        fspec.hasCapsule = true;
+        fspec.isAttached = true;
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
           if (widget->width() < p->width() - COMBO_ARROW_LENGTH
                                 - (tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left))
-            fspec.capsuleH = 0;
-          else fspec.capsuleH = 1;
+            fspec.HPos = 0;
+          else fspec.HPos = 1;
         }
         else
         {
-          if (widget->x() > 0) fspec.capsuleH = 0;
-          else fspec.capsuleH = -1;
+          if (widget->x() > 0) fspec.HPos = 0;
+          else fspec.HPos = -1;
         }
-        fspec.capsuleV = 2;
       }
 
       bool fillWidgetInterior(!ispec.hasInterior
@@ -4406,17 +4395,11 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!verticalIndicators)
       {
         fspec = getFrameSpec(group);
-        fspec.hasCapsule = true;
+        fspec.isAttached = true;
         if (up)
-        {
-          fspec.capsuleH = 1;
-          fspec.capsuleV = 2;
-        }
+          fspec.HPos = 1;
         else
-        {
-          fspec.capsuleH = 0;
-          fspec.capsuleV = 2;
-        }
+          fspec.HPos = 0;
       }
       else
       {
@@ -4730,12 +4713,11 @@ void Style::drawPrimitive(PrimitiveElement element,
               // someone may want transparent lineedits (as the developer of Cantata does)
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
         {
-          fspec.hasCapsule = true;
+          fspec.isAttached = true;
           if (rtl)
-            fspec.capsuleH = -1;
+            fspec.HPos = -1;
           else
-            fspec.capsuleH = 1;
-          fspec.capsuleV = 2;
+            fspec.HPos = 1;
         }
 
         status = (option->state & State_Enabled) ?
@@ -4804,22 +4786,20 @@ void Style::drawPrimitive(PrimitiveElement element,
           int kind = whichToolbarButton (tb, toolBar);
           if (kind != 2)
           {
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = kind;
+            fspec.isAttached = true;
+            fspec.HPos = kind;
           }
         }
 
-        if (!fspec.hasCapsule)
+        if (!fspec.isAttached)
         {
-          fspec.hasCapsule = true;
-          fspec.capsuleH = rtl ? -1 : 1;
-          fspec.capsuleV = 2;
+          fspec.isAttached = true;
+          fspec.HPos = rtl ? -1 : 1;
         }
-        else if (fspec.capsuleH == -1)
-          fspec.capsuleH = 0;
-        else if (fspec.capsuleH == 2)
-          fspec.capsuleH = rtl ? -1 : 1;
+        else if (fspec.HPos == -1)
+          fspec.HPos = 0;
+        else if (fspec.HPos == 2)
+          fspec.HPos = rtl ? -1 : 1;
 
         /* lack of space */
         const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
@@ -5189,29 +5169,26 @@ void Style::drawPrimitive(PrimitiveElement element,
           case QStyleOptionViewItemV4::OnlyOne:
           case QStyleOptionViewItemV4::Invalid: break;
           case QStyleOptionViewItemV4::Beginning: {
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
+            fspec.isAttached = true;
             if (opt->direction == Qt::RightToLeft)
-              fspec.capsuleH = 1;
+              fspec.HPos = 1;
             else
-              fspec.capsuleH = -1;
+              fspec.HPos = -1;
             fspec.expansion = 0;
             break;
           }
           case QStyleOptionViewItemV4::End: {
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
+            fspec.isAttached = true;
             if (opt->direction == Qt::RightToLeft)
-              fspec.capsuleH = -1;
+              fspec.HPos = -1;
             else
-              fspec.capsuleH = 1;
+              fspec.HPos = 1;
             fspec.expansion = 0;
             break;
           }
           case QStyleOptionViewItemV4::Middle: {
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = 0;
+            fspec.isAttached = true;
+            fspec.HPos = 0;
             fspec.expansion = 0;
             break;
           }
@@ -5223,12 +5200,12 @@ void Style::drawPrimitive(PrimitiveElement element,
              (as in Konsole's color scheme editing dialog) */
           fspec.expansion = 0;
           if (opt->state & State_HasFocus)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.hasCapsule,true);
+            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.isAttached,true);
           else if (ivStatus != "normal" && ivStatus != "disabled")
           {
             if (widget && !widget->isActiveWindow())
               ivStatus.append("-inactive");
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.isAttached,true);
           }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
@@ -5307,8 +5284,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       else
         fspec.expansion = qMin(fspec.expansion,option->rect.height()/2);
       /* since Dolphin's view-items have problem with QSvgRenderer, we set usePixmap to true */
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.hasCapsule,true);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.hasCapsule,true);
+      renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.isAttached,true);
+      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+ivStatus,fspec.isAttached,true);
 
       break;
     }
@@ -6310,43 +6287,42 @@ void Style::drawControl(ControlElement element,
           if (tspec_.joined_inactive_tabs
               && opt->position != QStyleOptionTab::OnlyOneTab)
           {
-            int capsule = 2;
+            int hPos = 2;
             if (opt->position == QStyleOptionTab::Beginning)
             {
               if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
-                fspec.hasCapsule = true;
-                capsule = -1;
+                fspec.isAttached = true;
+                hPos = -1;
               }
             }
             else if (opt->position == QStyleOptionTab::Middle)
             {
-              fspec.hasCapsule = true;
+              fspec.isAttached = true;
               if ((joinedActiveTab && !noActiveTabSep))
-                capsule = 0;
+                hPos = 0;
               else if (opt->selectedPosition == QStyleOptionTab::NextIsSelected)
-                capsule = 1;
+                hPos = 1;
               else if (opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
-                capsule = -1;
+                hPos = -1;
               else
-                capsule = 0;
+                hPos = 0;
             }
             else if (opt->position == QStyleOptionTab::End)
             {
               if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
-                fspec.hasCapsule = true;
-                capsule = 1;
+                fspec.isAttached = true;
+                hPos = 1;
               }
             }
             /* will be flipped both vertically and horizontally */
             if (mirroredBottomTab)
-              capsule = -1*capsule;
+              hPos = -1*hPos;
             /* I've seen this only in KDevelop */
             if (rtl)
-              capsule = -1*capsule;
-            fspec.capsuleH = capsule;
-            fspec.capsuleV = 2;
+              hPos = -1*hPos;
+            fspec.HPos = hPos;
           }
         }
 
@@ -6488,7 +6464,7 @@ void Style::drawControl(ControlElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        if (fspec.hasCapsule)
+        if (fspec.isAttached)
         {
           ispec.px = ispec.py = 0;
         }
@@ -6580,9 +6556,8 @@ void Style::drawControl(ControlElement element,
             frame_spec fspec1 = fspec;
             if (tspec_.no_inactive_tab_expansion)
               fspec1.expansion = 0;
-            fspec1.hasCapsule = true;
-            fspec1.capsuleV = 2;
-            fspec1.capsuleH = 0;
+            fspec1.isAttached = true;
+            fspec1.HPos = 0;
             QRect R = r;
             if (opt->position == QStyleOptionTab::Beginning)
             {
@@ -6989,9 +6964,8 @@ void Style::drawControl(ControlElement element,
       const interior_spec ispec = getInteriorSpec(group);
       if (isKisSlider_)
       {
-        fspec.hasCapsule = true;
-        fspec.capsuleH = -1;
-        fspec.capsuleV = 2;
+        fspec.isAttached = true;
+        fspec.HPos = -1;
         if (tspec_.vertical_spin_indicators)
         {
           fspec.left = qMin(fspec.left,3);
@@ -7061,9 +7035,8 @@ void Style::drawControl(ControlElement element,
         if (isKisSlider_)
         {
           //fspec.right = 0;
-          fspec.hasCapsule = true;
-          fspec.capsuleH = -1;
-          fspec.capsuleV = 2;
+          fspec.isAttached = true;
+          fspec.HPos = -1;
         }
         else
         {
@@ -7618,15 +7591,13 @@ void Style::drawControl(ControlElement element,
         if (opt->orientation != Qt::Horizontal) horiz = false;
         switch (opt->position) {
           case QStyleOptionHeader::End:
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = rtl ? -1 : 1;
-            if (!horiz && rtl) fspec.capsuleH = 1;
+            fspec.isAttached = true;
+            fspec.HPos = rtl ? -1 : 1;
+            if (!horiz && rtl) fspec.HPos = 1;
             break;
           case QStyleOptionHeader::Beginning:
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = rtl ? 1 : -1;
+            fspec.isAttached = true;
+            fspec.HPos = rtl ? 1 : -1;
             if (horiz)
             {
               if (rtl)
@@ -7646,7 +7617,7 @@ void Style::drawControl(ControlElement element,
             }
             else
             {
-              if (rtl) fspec.capsuleH = -1;
+              if (rtl) fspec.HPos = -1;
               sep.setRect(x+fspec.top, // -> CT_HeaderSection
                           y+h-fspec.right,
                           w-fspec.top-fspec.bottom,
@@ -7654,9 +7625,8 @@ void Style::drawControl(ControlElement element,
             }
             break;
           case QStyleOptionHeader::Middle:
-            fspec.hasCapsule = true;
-            fspec.capsuleV = 2;
-            fspec.capsuleH = 0;
+            fspec.isAttached = true;
+            fspec.HPos = 0;
             if (horiz)
             {
               if (rtl)
@@ -9317,9 +9287,8 @@ void Style::drawComplexControl(ComplexControl control,
         {
           const interior_spec ispec = getInteriorSpec("LineEdit");
           frame_spec fspec = getFrameSpec("LineEdit");
-          fspec.hasCapsule = true;
-          fspec.capsuleH = 1;
-          fspec.capsuleV = 2;
+          fspec.isAttached = true;
+          fspec.HPos = 1;
           if (verticalIndicators)
           {
             fspec.left = qMin(fspec.left,3);
@@ -9472,9 +9441,8 @@ void Style::drawComplexControl(ComplexControl control,
             fspec = getFrameSpec("LineEdit");
             ispec = getInteriorSpec("LineEdit");
           }
-          fspec.hasCapsule = true;
-          fspec.capsuleH = rtl ? 1 : -1;
-          fspec.capsuleV = 2;
+          fspec.isAttached = true;
+          fspec.HPos = rtl ? 1 : -1;
         }
 
         int extra = 0;
@@ -9947,8 +9915,7 @@ void Style::drawComplexControl(ComplexControl control,
             }
           }
 
-          fspec.hasCapsule = true;
-          fspec.capsuleH = 2;
+          fspec.isAttached = true;
 
           /* with a bit of visualization, we can get the
              horizontal bars from the vertical ones */
@@ -9981,15 +9948,15 @@ void Style::drawComplexControl(ComplexControl control,
           if (option->state & State_Enabled)
           {
             if (!opt->upsideDown)
-              fspec.capsuleV = 1;
+              fspec.VPos = 1;
             else
-              fspec.capsuleV = -1;
+              fspec.VPos = -1;
             renderFrame(painter,empty,fspec,fspec.element+suffix);
             renderInterior(painter,empty,fspec,ispec,ispec.element+suffix);
             if (!opt->upsideDown)
-              fspec.capsuleV = -1;
+              fspec.VPos = -1;
             else
-              fspec.capsuleV = 1;
+              fspec.VPos = 1;
             suffix.replace("normal","toggled");
             renderFrame(painter,full,fspec,fspec.element+suffix);
             renderInterior(painter,full,fspec,ispec,ispec.element+suffix);
@@ -9999,7 +9966,7 @@ void Style::drawComplexControl(ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
 
-            fspec.hasCapsule = false;
+            fspec.isAttached = false;
             renderFrame(painter,grooveRect,fspec,fspec.element+suffix);
             renderInterior(painter,grooveRect,fspec,ispec,ispec.element+suffix);
 
@@ -11597,7 +11564,7 @@ QSize Style::sizeFromContents(ContentsType type,
             dspec1.size = qMin(dspec1.size,qMin(defaultSize.height(),defaultSize.width()));
             s.rwidth() += (opt->direction == Qt::RightToLeft ?
                              fspec1.left-fspec.left
-                             : fspec1.right-fspec.right) // there's a capsule
+                             : fspec1.right-fspec.right) // there's an attachment
                           +dspec1.size+2*TOOL_BUTTON_ARROW_MARGIN
                           -pixelMetric(PM_MenuButtonIndicator); // added in qcommonstyle.cpp
           }
@@ -12258,7 +12225,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           rect.adjust(sspec.minW/2,0,0,0);
       }
 
-      /* in these cases there are capsules */
+      /* in these cases there are attachments */
       if (widget)
       {
         if (QComboBox *cb = qobject_cast<QComboBox*>(widget->parentWidget()))
@@ -14084,35 +14051,34 @@ void Style::renderFrame(QPainter *painter,
   QString element1(realElement);
   QString element0(realElement); // used just for checking
   element0 = "expand-"+element0;
-  bool hasHorizCapsule(fspec.hasCapsule && fspec.capsuleH != 2);
-  if (hasHorizCapsule)
+  bool isHAttached(fspec.isAttached && fspec.HPos != 2);
+  if (isHAttached)
     grouped = true;
   int e = grouped ? h : qMin(h,w);
   bool drawExpanded = false;
   /* still round the corners if the "expand-" element is found */
   if (fspec.expansion > 0
-      && ((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : (!grouped || w >= h)))
+      && ((e <= fspec.expansion && (isHAttached ? 2*w >= h : (!grouped || w >= h)))
           || (themeRndr_ && themeRndr_->isValid()
               && (themeRndr_->elementExists(element0.remove("-inactive"))
                   // fall back to the normal state
                   || (!state.isEmpty()
                       && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
   {
-    drawExpanded = true;
+    drawExpanded = true; // can change below
     fspec.left = fspec.leftExpanded;
     fspec.right = fspec.rightExpanded;
     fspec.top = fspec.topExpanded;
     fspec.bottom = fspec.bottomExpanded;
   }
   if (!isLibreoffice_ && fspec.expansion > 0 && drawExpanded
-      && (!fspec.hasCapsule || fspec.capsuleV == 2)
-      /* there's no right/left expanded element */
-      && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
+      && (!fspec.isAttached || fspec.VPos == 2)
+      && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)))
   {
     e = qMin(e,fspec.expansion);
     int H = h;
     if (grouped) H = e;
-    if (!fspec.hasCapsule || fspec.capsuleH == 2)
+    if (!isHAttached)
     {
       /* to get smoother gradients, we use QTransform in this special case
          but not when the rect is grouped (as in grouped toolbuttons inside
@@ -14145,7 +14111,7 @@ void Style::renderFrame(QPainter *painter,
     else
     {
       int X = 0;
-      /* here, this is always true: (H <= 2*w || fspec.capsuleH == 0) */
+      /* here, this is always true: (H <= 2*w || fspec.HPos == 0) */
       if (H%2 == 0)
       {
         X = Top = Bottom = H/2;
@@ -14155,12 +14121,12 @@ void Style::renderFrame(QPainter *painter,
         X = Top = (H+1)/2;
         Bottom = (H-1)/2;
       }
-      if (fspec.capsuleH == -1)
+      if (fspec.HPos == -1)
       {
         Left = X;
         Right = qMin(fspec.right,w/2);
       }
-      else if (fspec.capsuleH == 1)
+      else if (fspec.HPos == 1)
       {
         Right = X;
         Left = qMin(fspec.left,w/2);
@@ -14203,13 +14169,13 @@ void Style::renderFrame(QPainter *painter,
     /* extreme cases */
     if (fspec.left + fspec.right > w)
     {
-      if (fspec.hasCapsule && fspec.capsuleH != 2)
+      if (isHAttached)
       {
-        if (fspec.capsuleH == -1)
+        if (fspec.HPos == -1)
         {
           if (fspec.left > w) Left = w;
         }
-        else if (fspec.capsuleH == 1)
+        else if (fspec.HPos == 1)
         {
           if (fspec.right > w) Right = w;
         }
@@ -14229,13 +14195,13 @@ void Style::renderFrame(QPainter *painter,
     }
     if (fspec.top + fspec.bottom > h)
     {
-      if (fspec.hasCapsule && fspec.capsuleV != 2)
+      if (fspec.isAttached && fspec.VPos != 2)
       {
-        if (fspec.capsuleV == -1)
+        if (fspec.VPos == -1)
         {
           if (fspec.top > h) Top = h;
         }
-        else if (fspec.capsuleV == 1)
+        else if (fspec.VPos == 1)
         {
           if (fspec.bottom > h) Bottom = h;
         }
@@ -14257,7 +14223,7 @@ void Style::renderFrame(QPainter *painter,
     if (Left == 0 && Top == 0 && Right == 0 && Bottom == 0) return;
   }
 
-  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
+  if (!fspec.isAttached || (fspec.HPos == 2 && fspec.VPos == 2))
   {
     /*********
      ** Top **
@@ -14468,20 +14434,20 @@ void Style::renderFrame(QPainter *painter,
                   QRect(x1-Right,y1-Bottom,Right,Bottom),
                   0,0,usePixmap);
   }
-  else // with capsule
+  else // with attachment
   {
-    if (fspec.capsuleH == 0 && fspec.capsuleV == 0)
+    if (fspec.HPos == 0 && fspec.VPos == 0)
       return;
 
     /* to simplify calculations, we first get margins */
     int left = 0, right = 0, top = 0, bottom = 0;
-    if (fspec.capsuleH == -1 || fspec.capsuleH == 2)
+    if (fspec.HPos == -1 || fspec.HPos == 2)
       left = Left;
-    if (fspec.capsuleH == 1 || fspec.capsuleH == 2)
+    if (fspec.HPos == 1 || fspec.HPos == 2)
       right = Right;
-    if (fspec.capsuleV == -1  || fspec.capsuleV == 2)
+    if (fspec.VPos == -1  || fspec.VPos == 2)
       top = Top;
-    if (fspec.capsuleV == 1 || fspec.capsuleV == 2)
+    if (fspec.VPos == 1 || fspec.VPos == 2)
       bottom = Bottom;
 
     /*********
@@ -14546,13 +14512,13 @@ void Style::renderFrame(QPainter *painter,
 
   if (drawExpanded && Top + Bottom != h) // when needed and there is space...
   { // ... draw the "interior"
-    if (grouped && fspec.hasCapsule)
+    if (grouped && fspec.isAttached)
     {
-      if (fspec.capsuleH == 0)
+      if (fspec.HPos == 0)
         Right = Left = 0;
-      else if (fspec.capsuleH == -1)
+      else if (fspec.HPos == -1)
         Right = 0;
-      else if (fspec.capsuleH == 1)
+      else if (fspec.HPos == 1)
         Left = 0;
     }
     renderElement(painter,element1,
@@ -14566,9 +14532,9 @@ void Style::renderFrame(QPainter *painter,
     Fspec.expansion = fspec.expansion - fspec.top - fspec.bottom;
     if (Fspec.expansion <= 0) Fspec.expansion = 1;
     renderFrame(painter,
-                bounds.adjusted((fspec.hasCapsule && (fspec.capsuleH == 1 || fspec.capsuleH == 0)) ? 0 : fspec.left,
+                bounds.adjusted((fspec.isAttached && (fspec.HPos == 1 || fspec.HPos == 0)) ? 0 : fspec.left,
                                 fspec.top,
-                                (fspec.hasCapsule && (fspec.capsuleH == -1 || fspec.capsuleH == 0)) ?  0: -fspec.right,
+                                (fspec.isAttached && (fspec.HPos == -1 || fspec.HPos == 0)) ?  0: -fspec.right,
                                 -fspec.bottom),
                 Fspec,element,d,l,f1,f2,tp,grouped,usePixmap,false); // this time, don't draw any border
   }
@@ -14589,8 +14555,8 @@ bool Style::renderInterior(QPainter *painter,
   int w = bounds.width(); int h = bounds.height();
   if (!isLibreoffice_ && fspec.expansion > 0 && !ispec.element.isEmpty())
   {
-    bool hasHorizCapsule(fspec.hasCapsule && fspec.capsuleH != 2);
-    if (hasHorizCapsule)
+    bool isHAttached(fspec.isAttached && fspec.HPos != 2);
+    if (isHAttached)
       grouped = true;
     int e = grouped ? h : qMin(h,w);
     QString frameElement(fspec.expandedElement);
@@ -14600,26 +14566,26 @@ bool Style::renderInterior(QPainter *painter,
     /* the interior used for partial frame expansion has the frame name */
     element0 = element0.remove("-inactive").replace(ispec.element, frameElement);
     element0 = "expand-"+element0;
-    if (((e <= fspec.expansion && (hasHorizCapsule ? 2*w >= h : (!grouped || w >= h)))
+    if (((e <= fspec.expansion && (isHAttached ? 2*w >= h : (!grouped || w >= h)))
          || (themeRndr_ && themeRndr_->isValid()
              && (themeRndr_->elementExists(element0)
                  || themeRndr_->elementExists(element0.replace("-toggled","-normal")
                                                       .replace("-pressed","-normal")
                                                       .replace("-focused","-normal")))))
-        && (!fspec.hasCapsule || fspec.capsuleV == 2)
+        && (!fspec.isAttached || fspec.VPos == 2)
         /* there's no right/left expanded element */
-        && (h <= 2*w || (fspec.capsuleH != 1 && fspec.capsuleH != -1)))
+        && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)))
     {
       return false;
     }
   }
 
   /* extreme cases */
-  if (fspec.hasCapsule// && (fspec.capsuleH != 2 || fspec.capsuleV != 2)
-      && ((fspec.capsuleH == -1 && fspec.left >= w)
-          || (fspec.capsuleH == 1 && fspec.right >= w)
-          || (fspec.capsuleV == -1 && fspec.top >= h)
-          || (fspec.capsuleV == 1 && fspec.bottom >= h)))
+  if (fspec.isAttached// && (fspec.HPos != 2 || fspec.VPos != 2)
+      && ((fspec.HPos == -1 && fspec.left >= w)
+          || (fspec.HPos == 1 && fspec.right >= w)
+          || (fspec.VPos == -1 && fspec.top >= h)
+          || (fspec.VPos == 1 && fspec.bottom >= h)))
   {
       return false;
   }
@@ -15072,25 +15038,25 @@ QPixmap Style::translucentPixmap(const QPixmap &px,
 
 QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
 {
-  if (!fspec.hasCapsule || (fspec.capsuleH == 2 && fspec.capsuleV == 2))
+  if (!fspec.isAttached || (fspec.HPos == 2 && fspec.VPos == 2))
     return bounds.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);
   else
   {
     int left = 0, right = 0, top = 0, bottom = 0;
-    if (fspec.capsuleH == -1)
+    if (fspec.HPos == -1)
       left = fspec.left;
-    else if (fspec.capsuleH == 1)
+    else if (fspec.HPos == 1)
       right = fspec.right;
-    else if (fspec.capsuleH == 2)
+    else if (fspec.HPos == 2)
     {
       left = fspec.left;
       right = fspec.right;
     }
-    if (fspec.capsuleV == -1)
+    if (fspec.VPos == -1)
       top = fspec.top;
-    else if (fspec.capsuleV == 1)
+    else if (fspec.VPos == 1)
       bottom = fspec.bottom;
-    else if (fspec.capsuleV == 2)
+    else if (fspec.VPos == 2)
     {
       top = fspec.top;
       bottom = fspec.bottom;

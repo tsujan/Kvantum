@@ -282,14 +282,18 @@ typedef struct {
   bool hasFrame;
   /* has a focus frame? */
   bool hasFocusFrame;
-  /* Allow capsule grouping ? (used internally) */
-  bool hasCapsule;
   /* frame size */
   int top,bottom,left,right;
   /* expanded frame size */
   int topExpanded,bottomExpanded,leftExpanded,rightExpanded;
-  /* widget position in a capsule (used internally) */
-  int capsuleH,capsuleV; // 0 -> middle, -1 -> left,top, 1 -> right,bottom, 2 -> left+right,top+bottom
+  /* should be attached to its adjacent widget? (used internally) */
+  bool isAttached;
+  /* position with horizontal and/or vertical attachement (used internally):
+     0 -> middle (totally attached),
+     -1 -> left/top, (attached to right/bottom)
+     1 -> right/bottom, (attached to left/top)
+     2 -> left+right/top+bottom (not attached horizontally/vertically) */
+  int HPos,VPos;
   /* pattern size */
   int ps;
   /* if a widget's smallest dimension isn't greater than this,
@@ -370,12 +374,12 @@ typedef struct {
 static inline void default_frame_spec(frame_spec &fspec) {
   fspec.hasFrame = false;
   fspec.hasFocusFrame = false;
-  fspec.hasCapsule = false; // may change to true in Kvantum.cpp
   fspec.element = QString();
   fspec.expandedElement = QString();
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
   fspec.topExpanded = fspec.bottomExpanded = fspec.leftExpanded = fspec.rightExpanded = 0;
-  fspec.capsuleH = fspec.capsuleV = 0;
+  fspec.isAttached = false;
+  fspec.HPos = fspec.VPos = 2; // not attached
   fspec.ps = 0;
   fspec.expansion = 0;
 }
