@@ -33,7 +33,7 @@ animate_states=true
 button_contents_shift=true
 combo_as_lineedit=true
 combo_menu=true
-groupbox_top_label=false
+groupbox_top_label=true
 inline_spin_indicators=true
 joined_inactive_tabs=true
 transient_scrollbar=true
@@ -207,6 +207,7 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.press.color=white
+text.bold=true
 
 [SizeGrip]
 inherits=PanelButtonCommand
