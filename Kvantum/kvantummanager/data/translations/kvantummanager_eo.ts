@@ -16,8 +16,8 @@
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="48"/>
-        <source>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used by Kvantum. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;La novaj etosoj devas esti &lt;i&gt;instalitaj&lt;/i&gt; por ke Kvantum uzu ilin. Jene vi povas elekti etosan dosierujon kaj poste premi la instalan butonon por instali ĝin en vian Hejmon.&lt;/center&gt;</translation>
+        <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; liveras multajn etosojn sed eksteraj etosoj ankaŭ povas esti instalitaj por esti uzitaj de ĝi. Jene vi povas elekti etosan dosierujon kaj poste premi la instalan butonon por instali ĝin en vian Hejmon.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="80"/>
@@ -68,11 +68,6 @@ tion ke la etoso jam estus uzata.</translation>
         <location filename="../../kvantummanager.ui" line="218"/>
         <source>Use this theme</source>
         <translation>Uzi la etoson</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="246"/>
-        <source>&lt;br&gt;&lt;br&gt;Since Kvantum is independent of KDE/LXQt, you first need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings → Application Style → Widget Style&lt;/i&gt;&lt;/b&gt; or &lt;i&gt;&lt;b&gt;Configuration Center → Appearance&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under KDE, also select and apply the color scheme of this theme in &lt;b&gt;&lt;i&gt;System Settings → Color → Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under LXQt, you could find and apply a matching &lt;b&gt;Openbox&lt;/b&gt; theme if this theme is included in Kvantum (i.e. not installed manually).&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Ĉar Kvantum ne dependas al KDE/LXQt, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per &lt;b&gt;&lt;i&gt;Systema agordo → Aplikaĵa stilo → Fenestarĵa stilo&lt;/i&gt;&lt;/b&gt; aŭ &lt;i&gt;&lt;b&gt;Konfigurada centro → Aspekto&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso per &lt;b&gt;&lt;i&gt;Systema agordo → Koloro → Skemo&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;En LXQt, vi povus trovi kaj apliki kongruan etoson por &lt;b&gt;Openbox&lt;/b&gt; se ĉi tiu etoso estus inkluzivita de Kvantum (t.e. ne instalita permane).&lt;br&gt;&lt;br&gt;La rulataj aplikaĵoj alprenos la novan etoson post ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="276"/>
@@ -372,6 +367,11 @@ kaj fenestroj ne estus tralumeblaj aŭ havus ombrojn.
 
 Se ĝi estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="246"/>
+        <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
+        <translation>&lt;br&gt;&lt;br&gt;Ĉar &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; ne dependas al iu labortabla medio, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per platform-integrigilo por Qt. KDE kaj LXQt havigas simplajn ilojn por ŝanĝi la aktivan stilan kromprogramon de Qt. Ĉe la aliaj platformoj, vi bezonas agordilon de Qt.&lt;br/&gt;&lt;br/&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso ĉar iuj KDE-aplikaĵoj eble akiras iliajn kolorojn senpere el la KDE-kolorskemo.&lt;br/&gt;&lt;br/&gt;La rulataj aplikaĵoj alprenos la novan etoson post ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="446"/>

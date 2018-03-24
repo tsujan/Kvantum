@@ -16,7 +16,7 @@
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="48"/>
-        <source>&lt;center&gt;New themes should be &lt;i&gt;installed&lt;/i&gt; before being used by Kvantum. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
+        <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68,11 +68,6 @@ Nieaktywny przycisk oznacza,
         <location filename="../../kvantummanager.ui" line="218"/>
         <source>Use this theme</source>
         <translation>Użyj tego motywu</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="246"/>
-        <source>&lt;br&gt;&lt;br&gt;Since Kvantum is independent of KDE/LXQt, you first need to &lt;i&gt;activate&lt;/i&gt; it from &lt;b&gt;&lt;i&gt;System Settings → Application Style → Widget Style&lt;/i&gt;&lt;/b&gt; or &lt;i&gt;&lt;b&gt;Configuration Center → Appearance&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under KDE, also select and apply the color scheme of this theme in &lt;b&gt;&lt;i&gt;System Settings → Color → Scheme&lt;/i&gt;&lt;/b&gt;.&lt;br&gt;&lt;br&gt;Under LXQt, you could find and apply a matching &lt;b&gt;Openbox&lt;/b&gt; theme if this theme is included in Kvantum (i.e. not installed manually).&lt;br&gt;&lt;br&gt;Running apps will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="276"/>
@@ -349,6 +344,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="246"/>
+        <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

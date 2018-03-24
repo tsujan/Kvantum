@@ -93,14 +93,14 @@
 <path style="fill:#fff" id="path3777" d="m 336.9643,1238.0357 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 <path style="fill:#bebebe" id="path3779" d="m 336.9643,1237.25 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 </g>
-<path style="fill:#eff0f1" id="menu-normal" d="m 122,792 h 48 v 48 h -48 z"/>
+<path style="opacity:.93;fill:#eff0f1" id="menu-normal" d="m 122,792 h 48 v 48 h -48 z"/>
 </g>
 <g style="stroke:none" id="menu-normal-left" transform="matrix(0.6,0,0,1,49.244405,88.24673)">
-<path style="fill:#eff0f1;fill-rule:evenodd" id="menu-normal-left0" d="m 116.257,703.753 5,0 v 48 h -5 z "/>
+<path style="opacity:.93;fill:#eff0f1;fill-rule:evenodd" id="menu-normal-left0" d="m 116.257,703.753 5,0 v 48 h -5 z "/>
 <path style="fill:#b4b4b4;color:#000" id="path6500" d="m 116.257,703.753 v 48 h 1.66655 v -48 z "/>
 </g>
 <g style="stroke:none" id="menu-normal-topleft" transform="matrix(0.6,0,0,0.6,49.245122,369.74383)">
-<path style="fill:#eff0f1;fill-rule:evenodd" id="menu-normal-topleft0" d="m 121.257,698.753 -4.9989,.0003 -.001,5 h 5 z "/>
+<path style="opacity:.93;fill:#eff0f1;fill-rule:evenodd" id="menu-normal-topleft0" d="m 121.257,698.753 -4.9989,.0003 -.001,5 h 5 z "/>
 <path style="fill:#b4b4b4;color:#000" id="path6494" d="m 121.257,698.753 -4.9989,.0003 -.001,5 1.6661,.0003 .001,-3.3334 3.3327,0 z "/>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="splitter-grip-focused" transform="translate(93.5,366.75004)">
@@ -494,7 +494,7 @@
 <use width="450" x="0" y="0" height="1230" style="fill:url(#linearGradient1515)" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,97.5,0)"/>
 <use width="450" x="0" y="0" height="1230" style="fill:url(#linearGradient1513)" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,97.5,0)"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd;stroke:none" id="button-normal" d="m 30.0051,15 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
-<path style="fill:#6e6e6e;fill-rule:evenodd;stroke:none" id="button-focused-topleft" d="M 97.5,8 C 93,8 90,11 90,15.5 h 7.5 z"/>
+<path style="fill:#6e6e6e;fill-rule:evenodd;stroke:none" id="button-focused-topleft" d="M 97.5,8 C 92,8 90,10 90,15.5 h 7.5 z"/>
 <path style="fill:#2d82ad;fill-rule:evenodd;stroke:none" id="button-toggled" d="m 234,15 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 <g style="fill-rule:evenodd;stroke:none" id="button-toggled-left" transform="matrix(1.0666668,0,0,1,203.33333,-33.746739)">
 <path style="fill:#4b4b4b;fill-opacity:0" id="path4826" d="m 21.25,48.7468 v 32.5 h 2.25 c -0.007,-0.13412 0,-0.27049 0,-0.40625 v -31.6875 c 0,-0.13576 -0.007,-0.27213 0,-0.40625 z"/>
