@@ -13144,8 +13144,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ExclusiveIndicatorWidth :
     case PM_ExclusiveIndicatorHeight : {
       /* make exception for menuitems and viewitems */
+      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+        return qMin(pixelMetric(PM_SmallIconSize), tspec_.check_size);
       if (isLibreoffice_
-          || qstyleoption_cast<const QStyleOptionMenuItem*>(option)
           || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget)*pixelRatio_,
@@ -16723,7 +16724,7 @@ void Style::renderFrame(QPainter *painter,
   bool drawExpanded = false;
 
   /* WARNING: The following conditions cover all cases
-              and should mot be changed without due care. */
+              and should not be changed without due care. */
 
   /* still round the corners if the "expand-" element is found */
   if (fspec.expansion > 0
