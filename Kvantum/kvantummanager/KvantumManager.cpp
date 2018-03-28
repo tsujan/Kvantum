@@ -773,6 +773,8 @@ void KvantumManager::useTheme()
     else if (settings.value ("theme").toString() != kvconfigTheme_)
         settings.setValue ("theme", kvconfigTheme_);
 
+    writeOrigAppLists(); // needed only when the list is in a global config file
+
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
     statusLabel->setText ("<b>" + tr ("Active theme:") + QString ("</b> %1").arg (theme));
     ui->statusBar->showMessage (tr ("Theme changed to %1.").arg (theme), 10000);
