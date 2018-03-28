@@ -1,0 +1,114 @@
+!! An Openbox theme for the KvBeige Kvantum theme
+
+menu.title.bg:  flat solid border
+menu.title.bg.color: #5c514a
+menu.title.bg.border.color: #5c514a
+menu.title.text.color: #000000
+
+menu.items.bg: flat solid border
+menu.items.bg.color: #5c514a
+menu.items.text.color: #000000
+menu.items.disabled.text.color: #737573
+menu.items.bg.border.color: #000000
+
+menu.items.active.bg: flat solid
+menu.items.active.bg.color: #464646
+menu.items.active.text.color: #ffffff
+
+!! General window settings
+*.justify: center
+
+!! focused window settings
+window.active.client.color: #5c514a
+
+window.active.title.bg: Gradient Vertical Flat
+window.active.title.bg.color: #5c514a
+window.active.title.bg.colorTo: #5c514a
+window.active.title.bg.border.color: Parentrelative
+window.active.title.bg.highlight: 256
+window.active.title.bg.shadow: 0
+
+window.active.handle.bg: flat solid border
+window.active.handle.bg.color: #5c514a
+window.active.handle.bg.border.color: #5c514a
+!window.active.handle.bg.color: #5c514a
+window.active.grip.bg: parentrelative
+
+window.active.label.bg: parentrelative
+window.active.label.text.color: #ffffff
+
+window.active.button.*.bg: parentrelative
+window.active.button.*.image.color: #ffffff
+
+window.active.button.pressed.bg: flat solid bevel1
+!window.active.button.pressed.bg.color: #5c514a
+window.active.button.pressed.bg.color: #5c514a
+window.active.button.pressed.image.color: #ffffff
+
+!#hover
+window.active.button.hover.bg: flat solid
+window.active.button.hover.image.color: #ffffff
+window.active.button.hover.bg.color: #5c514a
+
+window.active.button.disabled.bg: flat solid
+window.active.button.disabled.bg.color: #dfb454
+window.active.button.disabled.image.color: #ffffff
+
+
+!! unfocused window settings
+window.inactive.client.color: #5c514a
+
+window.inactive.title.bg: Gradient Vertical Flat
+window.inactive.title.bg.color: #5c514a
+window.inactive.title.bg.colorTo: #5c514a
+window.inactive.title.bg.border.color: #5c514a
+
+window.inactive.handle.bg: flat solid
+window.inactive.handle.bg.color: #5c514a
+
+window.inactive.grip.bg: parentrelative
+
+window.inactive.label.bg: parentrelative
+window.inactive.label.text.color: #c8c8c8
+
+window.inactive.button.*.bg: parentrelative
+window.inactive.button.unpressed.image.color: #ffffff
+
+window.inactive.button.pressed.bg: flat border solid
+window.inactive.button.pressed.bg.color: #5c514a
+window.inactive.button.pressed.bg.border.color: #5c514a
+
+window.inactive.button.hover.bg: flat solid
+window.inactive.button.hover.bg.color: #5c514a
+
+window.inactive.button.disabled.bg:flat solid
+window.inactive.button.disabled.bg.color:  #5c514a
+
+
+!! Global width settings
+border.Width: 0
+padding.width: 4
+padding.height:3
+window.handle.width: 0
+window.client.padding.width: 0
+window.client.padding.height: 0
+menu.overlap: 2
+
+!! Miscellaneous settings
+border.color: #5c514a
+
+!! fonts are empty
+window.active.label.text.font:
+window.inactive.label.text.font:
+menu.title.text.font:
+menu.items.font:
+
+!! osd (pop ups)
+osd.border.width: 2
+
+osd.hilight.bg: flat solid
+osd.hilight.bg.color: #614a38
+
+osd.unhilight.bg: flat solid border
+osd.unhilight.bg.color: #ffffff
+osd.unhilight.bg.border.color: #bab3ab

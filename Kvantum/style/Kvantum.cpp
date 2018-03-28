@@ -59,6 +59,7 @@
 #include <QLayout> // only for forceSizeGrip
 #include <QDesktopWidget> // for positioning menus
 #include <QStandardPaths>
+#include <QItemSelectionModel>
 //#include <QDebug>
 //#include <QDialogButtonBox> // for dialog buttons layout
 #include <QSurfaceFormat>
@@ -8883,14 +8884,24 @@ void Style::drawControl(ControlElement element,
           else
             topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= h);
           sideText = !topText;
-          if ((topText || sideText)
-              && enoughContrast(getFromRGBA(lspec.normalColor),
-                                QApplication::palette().color(QPalette::WindowText)))
+          if (topText || sideText)
           {
-            lspec.normalColor = lspec.focusColor = lspec.toggleColor =
-              getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
-            lspec.normalInactiveColor = lspec.focusInactiveColor = lspec.toggleInactiveColor =
-              getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+            if (enoughContrast(getFromRGBA(lspec.normalColor),
+                               QApplication::palette().color(QPalette::WindowText)))
+            {
+              lspec.normalColor = lspec.focusColor =
+                getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
+              lspec.normalInactiveColor = lspec.focusInactiveColor =
+                getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+            }
+            if (enoughContrast(getFromRGBA(lspec.toggleColor),
+                               QApplication::palette().color(QPalette::HighlightedText)))
+            {
+              lspec.toggleColor =
+                getName(QApplication::palette().color(QPalette::Active,QPalette::HighlightedText));
+              lspec.toggleInactiveColor =
+                getName(QApplication::palette().color(QPalette::Inactive,QPalette::HighlightedText));
+            }
           }
         }
 
@@ -8921,6 +8932,39 @@ void Style::drawControl(ControlElement element,
         int state = option->state & State_Enabled ?
                       (option->state & State_Selected) ? 4
                       : option->state & State_MouseOver ? 2 : 1 : 0;
+
+        /* Either the bar has a selected state or it's a child of an itemview;
+           otherwise, there will be no way to know about the selected state.
+           We don't go deeper than the third child. */
+        if ((topText || sideText) && state != 4)
+        {
+          if (QWidget *gp = getParent(widget,2))
+          {
+            QAbstractItemView *iv = nullptr;
+            if ((iv = qobject_cast<QAbstractItemView*>(gp))
+                || (iv = qobject_cast<QAbstractItemView*>(getParent(gp,1))))
+            {
+              if (QItemSelectionModel *sm = iv->selectionModel())
+              {
+                const QModelIndexList sList = sm->selectedIndexes();
+                for (const QModelIndex &sIndex : sList)
+                {
+                  if (sIndex.isValid())
+                  {
+                    if (QWidget *iw = iv->indexWidget(sIndex))
+                    {
+                      if (iw->isAncestorOf(widget))
+                      {
+                        state = 4;
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
 
         /* find the part inside the indicator */
         QRect R;
