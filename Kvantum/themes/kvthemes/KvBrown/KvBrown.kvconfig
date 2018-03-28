@@ -113,7 +113,7 @@ text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
 text.normal.color=white
-text.focus.color=white
+text.focus.color=#ffbd87
 text.press.color=white
 text.toggle.color=white
 frame.expansion=8
@@ -145,6 +145,12 @@ inherits=PanelButtonCommand
 frame.element=button
 interior.element=button
 indicator.size=10
+
+[RadioButton]
+text.focus.color=#ffbd87
+
+[CheckBox]
+text.focus.color=#ffbd87
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -178,6 +184,7 @@ frame.expansion=3.6font
 indicator.size=10
 min_width=+0.1font
 min_height=+0.2font
+focusFrame=true
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -201,6 +208,7 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.normal.color=white
+text.focus.color=#ffbd87
 text.bold=true
 frame.expansion=0
 
@@ -248,6 +256,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 text.bold=true
 text.normal.color=white
+text.focus.color=white
 text.toggle.color=black
 frame.expansion=3font
 
@@ -323,6 +332,7 @@ text.margin.right=3
 text.bold=true
 text.italic=true
 text.normal.color=#ffffff96
+text.focus.color=white
 
 [ComboBox]
 inherits=PanelButtonCommand
