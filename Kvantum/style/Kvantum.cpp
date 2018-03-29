@@ -6377,7 +6377,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         ivStatus.replace("disabled","pressed");
       }
       else if (ivStatus.startsWith("focused")
-          && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+               && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
         ivStatus.replace("focused","normal");
       }
@@ -6472,7 +6472,10 @@ void Style::drawPrimitive(PrimitiveElement element,
               }
               else
                 tmpCol = getFromRGBA(lspec.normalColor);
-              if (enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
+              QColor baseCol = opt->palette.color(QPalette::Base);
+              if (baseCol.alpha() == 0)
+                baseCol = QApplication::palette().color(QPalette::Base);
+              if (enoughContrast(baseCol, tmpCol))
                 col = tmpCol;
             }
             else if (ivStatus == "focused")
@@ -6486,9 +6489,12 @@ void Style::drawPrimitive(PrimitiveElement element,
               }
               else
                 tmpCol = getFromRGBA(lspec.focusColor);
+              QColor baseCol = opt->palette.color(QPalette::Base);
+              if (baseCol.alpha() == 0)
+                baseCol = QApplication::palette().color(QPalette::Base);
               if (enoughContrast(QApplication::palette().color(QPalette::Text), tmpCol)
                   // supposing that the focus interior is translucent, take care of contrast
-                  || enoughContrast(opt->palette.color(QPalette::Base), tmpCol))
+                  || enoughContrast(baseCol, tmpCol))
               {
                 col = tmpCol;
               }
@@ -6918,7 +6924,7 @@ void Style::drawControl(ControlElement element,
           if (state == 0 && (option->state & State_Selected))
             state = 3; // see the workaround for Qt Creator in PE_PanelItemViewItem
           else if (state == 2
-              && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+                   && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
           {
             state = 1;
           }
@@ -6962,17 +6968,20 @@ void Style::drawControl(ControlElement element,
             if (state == 1)
             {
               QColor normalInactiveColor = getFromRGBA(lspec.normalInactiveColor);
+              QColor baseCol = palette.color(QPalette::Base);
+              if (baseCol.alpha() == 0)
+                baseCol = QApplication::palette().color(QPalette::Base);
               if ((!isInactive || !normalInactiveColor.isValid())
                   && normalColor.isValid()
                   /* since we don't draw the normal interior,
                      a minimum amount of contrast is needed */
-                  && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalColor)))
+                  && (col.isValid() || enoughContrast(baseCol, normalColor)))
               {
                 col = normalColor;
               }
               else if (isInactive
                        && normalInactiveColor.isValid()
-                       && (col.isValid() || enoughContrast(palette.color(QPalette::Base), normalInactiveColor)))
+                       && (col.isValid() || enoughContrast(baseCol, normalInactiveColor)))
               {
                 col = normalInactiveColor;
               }
@@ -6996,12 +7005,15 @@ void Style::drawControl(ControlElement element,
             else if (state == 2)
             {
               QColor focusInactiveColor = getFromRGBA(lspec.focusInactiveColor);
+              QColor baseCol = palette.color(QPalette::Base);
+              if (baseCol.alpha() == 0)
+                baseCol = QApplication::palette().color(QPalette::Base);
               if ((!isInactive || !focusInactiveColor.isValid())
                   && focusColor.isValid()
                   && (col.isValid()
                       || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
                       // supposing that the focus interior is translucent, take care of contrast
-                      || enoughContrast(palette.color(QPalette::Base), focusColor)))
+                      || enoughContrast(baseCol, focusColor)))
               {
                 col = focusColor;
               }
@@ -7009,7 +7021,7 @@ void Style::drawControl(ControlElement element,
                        && focusInactiveColor.isValid()
                        && (col.isValid()
                            || enoughContrast(QApplication::palette().color(QPalette::Text), focusInactiveColor)
-                           || enoughContrast(palette.color(QPalette::Base), focusInactiveColor)))
+                           || enoughContrast(baseCol, focusInactiveColor)))
               {
                 col = focusInactiveColor;
               }
