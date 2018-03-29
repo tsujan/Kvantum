@@ -1112,28 +1112,28 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="arrow-left-toggled-inactive" transform="rotate(-90,157.10525,162.69912)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.55" xlink:href="#tab-close-pressed" id="tab-close-toggled-inactive" transform="translate(-102)"/>
 <g style="stroke:none" id="button-toggled-inactive-left">
-<path style="fill:url(#linearGradient3699)" id="button-toggled-inactive-left0" d="m 22.5,89 v 32.5 h -6 V 89 Z"/>
-<path style="fill:#aaa" id="path1756" d="m 16.5,89 v 32.5 H 15 V 89 Z"/>
+<path style="fill:url(#linearGradient3699)" id="button-toggled-inactive-left0" d="m 22.5,89 v 32.5 H 15 V 89 Z"/>
+<path style="opacity:.6;fill:#aaa" id="path1756" d="m 16.5,89 v 32.5 H 15 V 89 Z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-inactive-left" id="button-toggled-inactive-right" transform="matrix(-1,0,0,1,77.5,0)"/>
 <g style="stroke:none">
 <g id="button-toggled-inactive-top">
-<path style="fill:url(#linearGradient6836)" id="button-toggled-inactive-top0" d="M 55,89 H 22.5002 v -6 h 32.5 z"/>
-<path style="fill:#bbb" id="path1767" d="M 55,83 H 22.5002 v -1.5 h 32.5 z"/>
+<path style="fill:url(#linearGradient6836)" id="button-toggled-inactive-top0" d="M 55,89 H 22.5002 v -7.5 h 32.5 z"/>
+<path style="opacity:.6;fill:#bbb" id="path1767" d="M 55,83 H 22.5002 v -1.5 h 32.5 z"/>
 </g>
 <g id="button-toggled-inactive-bottom">
-<path style="fill:url(#linearGradient6842)" id="button-toggled-inactive-bottom0" d="M 22.5002,121.5 H 55 v 6 H 22.5 Z"/>
-<path style="fill:#828282" id="path1776" d="M 22.5002,127.5 H 55 V 129 H 22.5 Z"/>
+<path style="fill:url(#linearGradient6842)" id="button-toggled-inactive-bottom0" d="M 22.5002,121.5 H 55 V 129 H 22.5 Z"/>
+<path style="opacity:.6;fill:#828282" id="path1776" d="M 22.5002,127.5 H 55 V 129 H 22.5 Z"/>
 </g>
 </g>
 <g style="stroke:none" id="button-toggled-inactive-topleft">
-<path style="fill:url(#linearGradient3693)" id="button-toggled-inactive-topleft0" d="m 16.5,89 c 0,-4 2,-6 6,-6 v 6 z"/>
-<path style="fill:url(#linearGradient3775)" id="path1786" d="m 15,89 c 0,-5 2.5,-7.5 7.5,-7.5 v 1.5 c -4,0 -6,2 -6,6 Z "/>
+<path style="fill:url(#linearGradient3693)" id="button-toggled-inactive-topleft0" d="m 15,89 c 0,-5 2.5,-7.5 7.5,-7.5 V 89 Z"/>
+<path style="opacity:.6;fill:url(#linearGradient3775)" id="path1786" d="m 15,89 c 0,-5 2.5,-7.5 7.5,-7.5 v 1.5 c -4,0 -6,2 -6,6 Z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-inactive-topleft" id="button-toggled-inactive-topright" transform="matrix(-1,0,0,1,77.5002,0)"/>
 <g style="stroke:none" id="button-toggled-inactive-bottomleft">
-<path style="fill:url(#linearGradient3689)" id="button-toggled-inactive-bottomleft0" d="m 22.5,127.5 c -4,0 -6,-2 -6,-6 h 6 z"/>
-<path style="fill:url(#linearGradient3864)" id="path1796" d="m 22.5,129 c -5,0 -7.5,-2.5 -7.5,-7.5 h 1.5 c 0,4 2,6 6,6 z"/>
+<path style="fill:url(#linearGradient3689)" id="button-toggled-inactive-bottomleft0" d="m 22.5,129 c -5,0 -7.5,-2.5 -7.5,-7.5 h 7.5 z"/>
+<path style="opacity:.6;fill:url(#linearGradient3864)" id="path1796" d="m 22.5,129 c -5,0 -7.5,-2.5 -7.5,-7.5 h 1.5 c 0,4 2,6 6,6 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-inactive-bottomleft" id="button-toggled-inactive-bottomright" transform="matrix(-1,0,0,1,77.5,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="tarrow-down-pressed-inactive" transform="matrix(1,0,0,-1,212,577.39824)"/>
