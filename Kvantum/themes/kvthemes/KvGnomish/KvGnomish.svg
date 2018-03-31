@@ -789,26 +789,26 @@
 <use width="100%" x="0" y="0" height="100%" id="use8821" xlink:href="#progress-normal-bottomleft0" transform="matrix(-1,0,0,1,538,0)"/>
 <path style="opacity:.06;fill:url(#linearGradient8869);fill-rule:evenodd;stroke:none" id="path8827" d="m 285,148 c 1.68749,0 3,-1.3125 3,-3 h -3 z"/>
 </g>
-<ellipse cx="243" cy="587" rx="7.2497864" ry="7.2497869" style="stroke:#aaa;fill-opacity:0;color:#000;stroke-width:1.5" id="menu-radio-normal"/>
+<circle cx="243" cy="587" style="stroke:#aaa;fill-opacity:0;color:#000;stroke-width:1.2" id="menu-radio-normal" r="7.4"/>
 <g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd" id="menu-checkbox-normal">
 <rect width="16" x="320" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4907"/>
-<rect width="13.5" x="320.75003" y="580.75" rx="2.5" ry="2.5" height="13.5" style="stroke:#aaa;stroke-width:1.5" id="rect4910"/>
+<rect width="13.8" x="320.6" y="580.6" rx="2" ry="2" height="13.8" style="stroke:#aaa;stroke-width:1.2" id="rect4910"/>
 </g>
 <g style="fill-rule:evenodd;stroke-linecap:round" id="menu-checkbox-checked-normal">
 <g style="fill-opacity:0">
 <rect width="16" x="360" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4927"/>
-<rect width="13.500483" x="360.74976" y="580.74976" rx="2.5" height="13.500483" ry="2.5" style="stroke:#aaa;stroke-width:1.5" id="rect4947"/>
+<rect width="13.8" x="360.6" y="580.6" rx="2" height="13.8" ry="2" style="stroke:#aaa;stroke-width:1.2" id="rect4947"/>
 </g>
-<path style="fill:none;stroke:#fff;stroke-width:3" id="path4933" d="m 363.6268,586 2.7733,2.6997 8,-8"/>
+<path style="fill:#fff;stroke:none;color:#000;stroke-width:3" id="path4933" d="m 374.3711,579.1856 a 1.50015,1.50015 0 0,0 -1.03125,0.45312 l -6.9531,6.9531 -1.7129,-1.666 a 1.50015,1.50015 0 1,0 -2.09375,2.14844 l 3.834,3.7324 9.0469,-9.0469 a 1.50015,1.50015 0 0,0 -1.08985,-2.57422 z "/>
 </g>
 <g id="menu-checkbox-tristate-normal">
 <g style="fill-opacity:0;stroke-linecap:round;fill-rule:evenodd">
 <rect width="16" x="400" y="579" height="16" style="stroke:none;stroke-width:3" id="rect4967"/>
-<rect width="13.500483" x="400.74976" y="580.74976" rx="2.5" ry="2.5" height="13.500483" style="stroke:#aaa;stroke-width:1.5" id="rect4969"/>
+<rect width="13.8" x="400.6" y="580.6" rx="2" ry="2" height="13.8" style="stroke:#aaa;stroke-width:1.2" id="rect4969"/>
 </g>
 <rect width="10" x="402.5" y="-589" height="3" style="fill:#fff;stroke:none;color:#000" id="rect4960" transform="scale(1,-1)"/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20.276398,-0.27636719)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-normal" id="menu-checkbox-checked-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-normal" id="menu-checkbox-tristate-focused" transform="translate(20,0)"/>
@@ -845,7 +845,7 @@
 <path style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-linecap:round;stroke-width:3.375" id="path5051" d="m 364.0802,605.8751 3.12,3.0371 9,-9"/>
 </g>
 <g id="menu-radio-checked-normal">
-<use width="100%" x="0" y="0" height="100%" id="use4825" xlink:href="#menu-radio-normal" transform="translate(40,0)"/>
+<use width="100%" x="0" y="0" height="100%" id="use4825" xlink:href="#menu-radio-normal" transform="translate(40)"/>
 <ellipse cx="283" cy="587" rx="3" ry="3" style="fill:#fff;stroke:none;color:#000;stroke-width:1.274" id="ellipse4893"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(20,0)"/>

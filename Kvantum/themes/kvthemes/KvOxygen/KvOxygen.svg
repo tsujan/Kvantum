@@ -960,7 +960,7 @@
 </g>
 <g id="checkbox-checked-normal" transform="translate(-0.44046,-0.4113287)">
 <use width="100%" x="0" y="0" height="100%" id="use5138" xlink:href="#checkbox-normal" transform="translate(22.44046,0.4113287)"/>
-<path style="text-align:start;shape-rendering:auto;mix-blend-mode:normal;color-interpolation-filters:linearRGB;isolation:auto;white-space:normal;font-family:sans-serif;text-decoration-line:none;fill:#3c3c3c;solid-opacity:1;image-rendering:auto;text-decoration-style:solid;text-rendering:auto;solid-color:#000000;stroke:none;line-height:normal;text-decoration-color:#000000;color:#000;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;text-transform:none;stroke-width:2;color-rendering:auto;text-indent:0;color-interpolation:sRGB" id="path9006" d="m 101.6497,204.3912 -4.5988,5.9302 -3.0729,-1.0018 c -1.13372,-0.36961 -1.70779,0.64731 -0.84756,1.47311 l 3.7391,3.4147 c 0.4178,0.41868 1.12184,0.31169 1.3964,-0.2122 l 4.8189,-8.5995 c 0.68952,-1.23046 -0.65649,-2.00855 -1.43513,-1.00449 z "/>
+<path style="fill:#3c3c3c;fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:2" id="path9006" d="m 101.6497,204.3912 -4.5988,5.9302 -3.0729,-1.0018 c -1.13372,-0.36961 -1.70779,0.64731 -0.84756,1.47311 l 3.7391,3.4147 c 0.4178,0.41868 1.12184,0.31169 1.3964,-0.2122 l 4.8189,-8.5995 c 0.68952,-1.23046 -0.65649,-2.00855 -1.43513,-1.00449 z "/>
 </g>
 <g id="checkbox-tristate-normal">
 <use width="100%" x="0" y="0" height="100%" id="use5146" xlink:href="#checkbox-normal" transform="translate(45)"/>
@@ -982,10 +982,10 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,646,2304)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-left" id="common-focused-bottom" transform="matrix(0,-1,1,0,-829,1475)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(0,-1,1,0,-829,1475)"/>
-<ellipse cx="223" cy="210" rx="7.4998689" ry="7.4998693" style="stroke:#3c3c3c;fill-opacity:0;color:#000" id="menu-radio-normal"/>
+<ellipse cx="223" cy="210" rx="7.4" ry="7.4" style="stroke:#3c3c3c;fill-opacity:0;color:#000;stroke-width:1.2" id="menu-radio-normal"/>
 <g style="fill-rule:evenodd;fill-opacity:0;stroke-linecap:round" id="menu-checkbox-normal" transform="translate(-20.5,-378)">
 <rect width="16" x="320" y="580" height="16" style="stroke:none;stroke-width:3" id="rect5053"/>
-<rect width="14" x="320.50018" y="581.5" rx="2" height="14" ry="2" style="stroke:#3c3c3c" id="rect5055"/>
+<rect width="13.8" x="320.6" y="581.6" rx="2" height="13.8" ry="2" style="stroke:#3c3c3c;stroke-width:1.2" id="rect5055"/>
 </g>
 <g style="stroke:none;fill:#fff" id="flat-arrow-down-normal" transform="rotate(180,30,464.9)">
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0" id="rect5170" transform="rotate(-90)"/>
@@ -1085,11 +1085,11 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#progress-pattern-disabled-bottomleft" id="progress-pattern-disabled-topright" transform="matrix(-1,0,0,-1,469.5004,312.4998)"/>
 <g id="menu-radio-checked-normal">
 <use width="100%" x="0" y="0" height="100%" id="use5127" xlink:href="#menu-radio-normal" transform="translate(39.5)"/>
-<circle cx="262.5" cy="210" style="fill:#3c3c3c;stroke:none;color:#000;stroke-width:1.274" id="ellipse5042" r="3"/>
+<circle cx="262.5" cy="210" style="fill:#464646;stroke:none;color:#000;stroke-width:1.274" id="ellipse5042" r="3"/>
 </g>
 <g id="menu-checkbox-checked-normal">
 <use width="100%" x="0" y="0" height="100%" id="use5145" xlink:href="#menu-checkbox-normal" transform="translate(40)"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#3c3c3c;stroke-linecap:round;stroke-width:3" id="path5073-8" d="m 343.1268,209 2.7733,2.6997 8,-8"/>
+<path style="fill:#464646;fill-rule:evenodd;stroke:none" id="path5073-8" d="m 353.8711,202.1856 a 1.50015,1.50015 0 0,0 -1.03125,0.45312 l -6.9531,6.9531 -1.7129,-1.666 a 1.50015,1.50015 0 1,0 -2.09375,2.14844 l 3.834,3.7324 9.0469,-9.0469 a 1.50015,1.50015 0 0,0 -1.08985,-2.57422 z "/>
 </g>
 <g style="stroke:none;fill-rule:evenodd">
 <g id="dial">
@@ -1135,7 +1135,7 @@
 </g>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.44" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-50,0)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.23" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(22,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-normal" id="menu-checkbox-checked-focused" transform="translate(22,0)"/>
