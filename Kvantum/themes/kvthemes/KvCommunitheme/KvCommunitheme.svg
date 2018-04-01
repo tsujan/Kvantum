@@ -111,7 +111,7 @@
 </linearGradient>
 <linearGradient id="linearGradient2060">
 <stop offset="0" style="stop-color:#e27f58" id="stop2056"/>
-<stop offset="1" style="stop-color:#b0afae" id="stop2058"/>
+<stop offset="1" style="stop-color:#bebebe" id="stop2058"/>
 </linearGradient>
 <linearGradient id="linearGradient3902">
 <stop offset="0" style="stop-color:#d2d2d2" id="stop3898"/>
@@ -225,7 +225,7 @@
 <g style="stroke:none">
 <rect width="20" x="275" y="680" height="5" style="fill:#e95420" id="menubaritem-normal-bottom"/>
 <rect width="30" x="175" y="872" height="30" style="fill:#fdfdfd" id="dock-normal"/>
-<g style="fill:#bebebe">
+<g style="fill:#d3d2d1">
 <rect width="5" x="215" y="872" height="30" id="dock-focused-left"/>
 <rect width="5" x="-870" y="222" height="30" id="dock-focused-top" transform="matrix(0,-1,1,0,0,0)"/>
 <rect width="5" x="215" y="865" height="5" id="dock-focused-topleft"/>
@@ -235,7 +235,7 @@
 <rect width="5" x="254" y="904" height="5" id="dock-focused-bottomright"/>
 <rect width="5" x="215" y="904" height="5" id="dock-focused-bottomleft"/>
 </g>
-<g style="fill:#d2d2d2">
+<g style="fill:#bebebe">
 <rect width="5" x="168" y="872" height="30" id="dock-normal-left"/>
 <rect width="5" x="168" y="865" height="5" id="dock-normal-topleft"/>
 <rect width="5" x="865" y="-205" height="30" id="dock-normal-top" transform="matrix(0,1,-1,0,0,0)"/>
@@ -508,7 +508,7 @@
 <path style="fill:#fff;fill-rule:evenodd" id="path5447" d="M 353.4998,45 321,45 l 0,5 32.5,0 z"/>
 <path style="fill:#c7c7c7;line-height:normal;color:#000" id="path5449" d="m 353.5,50 -32.5,0 0,1 32.5,0 z"/>
 </g>
-<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-width:1.3;fill:#2b2929;stroke-linecap:square">
+<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:square;fill:#2b2929;stroke-width:1.3">
 <rect width="5" x="265" y="639" height="1" id="menubar-normal-top"/>
 <rect width="5" x="260" y="639" height="1" id="menubar-normal-topleft"/>
 <rect width="5" x="270" y="639" height="1" id="menubar-normal-topright"/>
@@ -664,7 +664,7 @@
 <path style="fill-rule:evenodd;stroke:none;fill-opacity:0" id="tab-toggled" d="m 130,796 v -32.5 h 32.5 V 796 Z"/>
 <g style="fill:#b0afae;stroke:none" id="tab-toggled-top" transform="rotate(90,-229.50011,575.50012)">
 <path style="opacity:0;fill:#000;fill-rule:evenodd;stroke-width:1.095" id="path2166" d="m -41.5,183.5002 v 32.4998 h -6 v -32.5 z "/>
-<path style="line-height:normal;color:#000" id="path2168" d="m -45.50023,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2168" d="m -45.50023,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd">
 <g style="fill-opacity:0">
@@ -685,7 +685,7 @@
 </g>
 <g style="stroke-linejoin:round;stroke-linecap:round;stroke:none;fill-rule:evenodd" id="dock-normal-top-leftjunct" transform="translate(137.5,563.5)">
 <rect width="6" x="-52.5" y="166.5" height="6" style="fill-opacity:0;stroke-width:3" id="dock-normal-top-leftjunct0"/>
-<path style="fill:#b0afae;stroke-width:3.674" id="rect5455" d="m -52.5,166.5 h 4 c 0,2.5 -2.875,5.25 -4,6 z"/>
+<path style="fill:#bebebe;stroke-width:3.674" id="rect5455" d="m -52.5,166.5 h 4 c 0,2.5 -2.875,5.25 -4,6 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#dock-normal-top-leftjunct" id="dock-normal-top-rightjunct" transform="matrix(-1,0,0,1,182,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#dock-normal-top-leftjunct" id="dock-normal-bottom-leftjunct" transform="translate(0,6)"/>
@@ -721,7 +721,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled" id="use5468" transform="translate(106,-35.500245)"/>
 <g style="stroke:none" id="floating-tab-toggled-bottomleft" transform="matrix(1,0,0,0.18461538,277.5,726.62285)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path1992" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path1994" d="m -47.5,216.00123 v -5.41666 l 2,0 V 183.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path1994" d="m -47.5,216.00123 v -5.41666 l 2,0 V 183.5 h 1 V 216 Z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd;fill-opacity:0">
 <rect width="32.5" x="236" y="760.49976" height="6" style="stroke-linejoin:round;stroke-linecap:round;stroke-width:3" id="floating-tab-toggled-bottom"/>
@@ -731,15 +731,15 @@
 <g style="stroke:none">
 <g id="floating-tab-normal-bottom" transform="rotate(-90,355,363.5)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2034" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2036" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2036" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g id="floating-tab-normal-bottomleft" transform="rotate(-90,358,366.5)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2040" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2042" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2042" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g id="floating-tab-normal-bottomright" transform="rotate(-90,361,369.5)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2046" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2048" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2048" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g style="fill-rule:evenodd">
 <g style="fill:#c8c8c8">
@@ -786,15 +786,15 @@
 <g style="stroke:none">
 <g id="tabBarFrame-normal-bottom" transform="matrix(0,-1,0.18461538,0,31.12309,700)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2004" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2006" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2006" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g id="tabBarFrame-normal-bottomright" transform="matrix(0,-1,0.18461538,0,37.12309,700)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2010" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2012" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2012" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <g id="tabBarFrame-normal-bottomleft" transform="matrix(0,-1,0.18461538,0,25.12309,700)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2016" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000" id="path2018" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2018" d="m -47.5,216 v -32.5 h 1 V 216 Z"/>
 </g>
 <rect width="4" x="195" y="680" height="8" style="fill:#e2e2e2;fill-rule:evenodd" id="menuitem-normal"/>
 </g>
@@ -986,11 +986,11 @@
 </g>
 <g style="fill:#b0afae;stroke:none" id="tab-focused-topleft" transform="translate(121.5,580)">
 <path style="opacity:0;fill:#000;fill-rule:evenodd" id="path2187" d="m -47.5,183.5 v -6 h 6 v 6 z"/>
-<path style="line-height:normal;color:#000" id="path2189" d="m -45.5,183.5 c 0,-2.25 1.75,-4 4,-4 v 1 c -1.75,0 -3,1.25 -3,3 z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000" id="path2189" d="m -45.5,183.5 c 0,-2.25 1.75,-4 4,-4 v 1 c -1.75,0 -3,1.25 -3,3 z"/>
 </g>
 <g style="stroke:none" id="tab-focused-bottomleft" transform="matrix(1.2,0,0,0.18461538,129.79989,762.12308)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2193" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000;stroke-width:.913" id="path2195" d="M -44.833332,216 V 183.5 H -44 V 216 Z"/>
+<path style="fill:#bebebe;line-height:normal;color:#000;stroke-width:.913" id="path2195" d="M -44.833332,216 V 183.5 H -44 V 216 Z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled-top" id="tab-focused-left" transform="rotate(-90,121.24995,804.75006)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled-top" id="tab-focused-top" transform="translate(-50,-1.15e-4)"/>
@@ -1004,7 +1004,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-toggled-top" id="floating-tab-focused-right" transform="rotate(90,279,771)"/>
 <g style="stroke:none" id="floating-tab-focused-bottomleft" transform="matrix(1.2,0,0,0.18461538,339.8,726.62308)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2224" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<g style="color:#000;line-height:normal;fill:#b0afae;stroke-width:.913">
+<g style="color:#000;line-height:normal;fill:#bebebe;stroke-width:.913">
 <path id="path2226" d="M -44.833332,216 V 183.5 H -44 V 216 Z"/>
 <path id="path2230" d="m -41.5,216 h -5 v -5.41666 h 5 z"/>
 </g>
@@ -1082,7 +1082,7 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled-top" id="tab-toggled-right" transform="rotate(90,146.24996,779.74995)"/>
 <g style="stroke:none" id="tab-toggled-bottomleft" transform="matrix(1.2,0,0,0.18461538,179.8,762.12308)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path2090" d="m -41.5,183.5002 v 32.4998 h -5 v -32.5 z "/>
-<path style="fill:#b0afae;line-height:normal;color:#000;stroke-width:.913" id="path2092" d="m -44.8333,216 -1.6667,0 c 0,0 1.66667,-1.35417 1.66667,-16.25 v -16.25 h 0.833342 v 16.25 c 0,12.1875 -0.833334,16.25 -0.833334,16.25 z "/>
+<path style="fill:#bebebe;line-height:normal;color:#000;stroke-width:.913" id="path2092" d="m -44.8333,216 -1.6667,0 c 0,0 1.66667,-1.35417 1.66667,-16.25 v -16.25 h 0.833342 v 16.25 c 0,12.1875 -0.833334,16.25 -0.833334,16.25 z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled-bottomleft" id="tab-toggled-bottomright" transform="matrix(-1,0,0,1,292.5,0)"/>
 <g style="fill:#b0afae;stroke:none" id="tab-focus-topleft" transform="translate(59.5,580)">
