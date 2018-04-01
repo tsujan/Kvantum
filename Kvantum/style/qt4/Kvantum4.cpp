@@ -3508,6 +3508,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
         {
           libreoffice = true;
+          painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
           painter->save();
           painter->setOpacity(0.5);
         }
@@ -5393,21 +5394,21 @@ void Style::drawControl(ControlElement element,
           //renderElement(painter,dspec.element+"-tearoff",option->rect,20,0);
         else
         {
-          bool libreoffice = false;
-          if (isLibreoffice_ && (option->state & State_Enabled)
-            && enoughContrast(getFromRGBA(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
-          {
-            libreoffice = true;
-            painter->save();
-            painter->setOpacity(0.5);
-          }
           /* don't draw panel for normal and disabled states */
           if (!status.startsWith("normal") && (option->state & State_Enabled))
           {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            if (isLibreoffice_)
+            {
+              painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
+              lspec.pressColor = lspec.toggleColor
+                               = getName(QApplication::palette().color(QPalette::HighlightedText));
+            }
+            else
+            {
+              renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            }
           }
-          if (libreoffice) painter->restore();
 
           const QStringList l = opt->text.split('\t');
 
@@ -5581,7 +5582,7 @@ void Style::drawControl(ControlElement element,
                                  Qt::AlignLeft | Qt::AlignVCenter,
                                  QSize(iw,ih),
                                  isLibreoffice_ ?
-                                   opt->rect.adjusted(6,-2,0,0) // FIXME why?
+                                   opt->rect.adjusted(2,-2,0,0) // FIXME why?
                                    : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
                                                                             0,
                                                                             rtl ? -lspec.right : 0,
@@ -5802,18 +5803,13 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_MenuBarItem : {
-      QString group = "MenuBarItem";
-      label_spec lspec = getLabelSpec(group);
-      if (isLibreoffice_
-          && enoughContrast(getFromRGBA(lspec.normalColor),
-                            QApplication::palette().color(QPalette::WindowText)))
-      {
-        break; // dark-and-light themes
-      }
       const QStyleOptionMenuItem *opt =
           qstyleoption_cast<const QStyleOptionMenuItem*>(option);
       if (opt) {
         QString status = getState(option,widget);
+
+        QString group = "MenuBarItem";
+        label_spec lspec = getLabelSpec(group);
 
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
@@ -5868,17 +5864,21 @@ void Style::drawControl(ControlElement element,
         /* draw a panel for the menubar-item only if it's focused or pressed */
         if (!status.startsWith("normal") && (option->state & State_Enabled))
         {
-          bool libreoffice = false;
-          if (isLibreoffice_ && (option->state & State_Enabled)
-            && enoughContrast(getFromRGBA(lspec.focusColor), QApplication::palette().color(QPalette::WindowText)))
+          if (isLibreoffice_)
           {
-            libreoffice = true;
+            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
             painter->save();
-            painter->setOpacity(0.5);
+            painter->setOpacity(0.6);
+            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
+            painter->restore();
+            lspec.pressColor = lspec.toggleColor
+                             = getName(QApplication::palette().color(QPalette::HighlightedText));
           }
-          renderFrame(painter,r,fspec,fspec.element+"-"+status);
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-          if (libreoffice) painter->restore();
+          else
+          {
+            renderFrame(painter,r,fspec,fspec.element+"-"+status);
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          }
         }
         else // always get normal color from menubar (or toolbar if they're merged)
         {
@@ -8290,6 +8290,7 @@ void Style::drawControl(ControlElement element,
               && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
           {
             libreoffice = true;
+            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
             painter->save();
             painter->setOpacity(0.5);
           }
@@ -9573,6 +9574,7 @@ void Style::drawComplexControl(ComplexControl control,
               if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
               {
                 libreoffice = true;
+                painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
                 painter->save();
                 painter->setOpacity(0.5);
               }

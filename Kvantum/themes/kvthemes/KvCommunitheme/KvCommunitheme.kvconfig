@@ -271,7 +271,7 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-frame.expansion=12
+frame.expansion=0
 
 [TreeExpander]
 inherits=PanelButtonCommand
@@ -326,30 +326,30 @@ interior.element=slidercursor
 
 [Progressbar]
 inherits=PanelButtonCommand
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame.element=progress
 interior.element=progress
 text.margin=0
-text.normal.color=#969696
-text.focus.color=#969696
-text.press.color=#969696
-text.toggle.color=#969696
+text.normal.color=#8c8c8c
+text.focus.color=#8c8c8c
+text.press.color=#8c8c8c
+text.toggle.color=#8c8c8c
 text.shadow=false
-frame.expansion=12
+frame.expansion=0
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame=true
 frame.element=progress-pattern
 interior.element=progress-pattern
-frame.expansion=12
+frame.expansion=0
 
 [ItemView]
 inherits=PanelButtonCommand
@@ -470,7 +470,7 @@ text.shadow=false
 [GroupBox]
 inherits=GenericFrame
 frame=true
-focusFrame=true
+focusFrame=false
 frame.element=group
 text.margin=0
 text.normal.color=#4C4C4C
