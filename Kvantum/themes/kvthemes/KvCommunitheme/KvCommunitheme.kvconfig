@@ -197,6 +197,7 @@ text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
+focusFrame=false
 
 [CheckBox]
 inherits=PanelButtonCommand
@@ -207,6 +208,7 @@ text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
+focusFrame=false
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -315,6 +317,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+focusFrame=false
 
 [SliderCursor]
 inherits=PanelButtonCommand
@@ -403,7 +406,7 @@ text.normal.color=#646464
 text.focus.color=#5a5a5a
 text.margin.top=2
 text.margin.bottom=2
-text.margin.left=20
+text.margin.left=12
 text.margin.right=6
 frame.top=1
 frame.bottom=1

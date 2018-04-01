@@ -42,7 +42,7 @@
 <linearGradient xlink:href="#linearGradient2208" id="linearGradient3508" y1="43.751263" x1="28.75" y2="47.813763" gradientUnits="userSpaceOnUse" x2="28.75"/>
 <linearGradient gradientTransform="matrix(1.2,0,0,1,-4.4985871,0)" xlink:href="#linearGradient2061" id="linearGradient2219" y1="48.751865" x1="22.49984" y2="48.751331" gradientUnits="userSpaceOnUse" x2="28.750208"/>
 <linearGradient xlink:href="#linearGradient3902" id="linearGradient5044" y1="85.251404" x1="28.750336" y2="44.7519" x2="28.750338" gradientUnits="userSpaceOnUse"/>
-<linearGradient gradientTransform="translate(-100,-219)" xlink:href="#linearGradient5095" id="linearGradient4622" y1="1055" x1="283.73743" y2="1055" x2="275" gradientUnits="userSpaceOnUse"/>
+<linearGradient gradientTransform="translate(-100,-219)" xlink:href="#linearGradient5095" id="linearGradient4622" y1="1055" x1="286.25" y2="1055" x2="275" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(1.0357277,0,0,0.68966345,101.75041,-68.492232)" xlink:href="#linearGradient3837" id="linearGradient6750" y1="1137.5001" x1="-73.00103" y2="1145.25" gradientUnits="userSpaceOnUse" x2="-73.01564"/>
 <linearGradient id="linearGradient5012-9">
 <stop offset="0" style="stop-color:#e6e6e6" id="stop5023"/>
@@ -52,7 +52,7 @@
 <linearGradient gradientTransform="matrix(0.68963586,0,0,1.1538462,75.791468,-593.03866)" xlink:href="#linearGradient3837" id="linearGradient6752" y1="1084.2335" x1="-70.749611" y2="1084.2335" gradientUnits="userSpaceOnUse" x2="-85.250015"/>
 <linearGradient gradientTransform="matrix(1.0357277,0,0,1.0526316,101.75042,-477.68421)" xlink:href="#linearGradient3837" id="linearGradient6754" y1="1078.9" x1="-24.862152" y2="1073.2" gradientUnits="userSpaceOnUse" x2="-24.862152"/>
 <linearGradient id="linearGradient5095">
-<stop offset="0" style="stop-color:#8c8c8c" id="stop5097"/>
+<stop offset="0" style="stop-color:#aaa" id="stop5097"/>
 <stop offset="1" style="stop-color:#fff" id="stop5099"/>
 </linearGradient>
 <linearGradient id="linearGradient5048">
@@ -178,7 +178,7 @@
 <rect width="2.5" x="-815" y="85" height="5.1" id="menu-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
 <rect width="2.5" x="-815" y="22" height="5.1" id="menu-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
 </g>
-<circle cx="80" cy="835" style="fill:#19b6ee;fill-rule:evenodd" r="5" id="dial-handle"/>
+<circle cx="80" cy="835" style="fill:#11b0e9;fill-rule:evenodd" r="5" id="dial-handle"/>
 </g>
 <path style="fill:#19b6ee;fill-rule:evenodd;stroke:none" id="slider-toggled-topleft" d="m 77,590 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
 <path style="fill:#19b6ee;fill-rule:evenodd;stroke:none" id="slider-toggled-left" d="m 65,602 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
@@ -530,7 +530,7 @@
 <path style="fill:#fff;fill-rule:evenodd" id="path5447" d="M 353.4998,45 321,45 l 0,5 32.5,0 z"/>
 <path style="fill:#c7c7c7;line-height:normal;color:#000" id="path5449" d="m 353.5,50 -32.5,0 0,1 32.5,0 z"/>
 </g>
-<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;fill:#2b2929;stroke-linecap:square;stroke-width:1.3">
+<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:square;fill:#2b2929;stroke-width:1.3">
 <rect width="5" x="265" y="639" height="1" id="menubar-normal-top"/>
 <rect width="5" x="260" y="639" height="1" id="menubar-normal-topleft"/>
 <rect width="5" x="270" y="639" height="1" id="menubar-normal-topright"/>
@@ -638,9 +638,9 @@
 <path style="fill:#b4b4b4;line-height:normal;color:#000" id="path5210" d="m 21.25,48.7516 0,32.5 2.5,0 0,-32.5 z"/>
 </g>
 <g style="fill-rule:evenodd">
-<g id="slidercursor-normal">
+<g id="slidercursor-normal" transform="translate(-28)">
 <rect width="24" x="126" y="604" height="14" style="opacity:.01;stroke:none;stroke-width:3.919" id="rect2134"/>
-<path style="fill:#fff;stroke:#b4b4b4;stroke-linejoin:round;stroke-linecap:round" id="slidercursor-normal0" d="m 142.7599,617.5 h -9.47168 c -2.02472,-0.004 -2.78398,-1.27919 -2.78835,-2.55432 v -7.90583 c 0.004,-1.53016 1.2698,-2.55027 2.78835,-2.53972 h 9.47168 l 6.7401,6.5 z "/>
+<path style="fill:#fff;stroke:#aaa;stroke-linejoin:round;stroke-linecap:round" id="slidercursor-normal0" d="m 142.7599,617.5 h -9.47168 c -2.02472,-0.004 -2.78398,-1.27919 -2.78835,-2.55432 v -7.90583 c 0.004,-1.53016 1.2698,-2.55027 2.78835,-2.53972 h 9.47168 l 6.7401,6.5 z "/>
 </g>
 <g style="stroke:none">
 <g style="fill:#f07746">
@@ -736,20 +736,9 @@
 <rect width="15" x="400" y="600" rx="2" ry="2" height="15" style="fill:url(#radialGradient5116);fill-rule:evenodd;stroke:#3eb34f;stroke-linecap:round" id="rect5829"/>
 <rect width="10" x="402.5" y="-608.5" height="2" style="fill:#fff;stroke:none;color:#000" id="rect5831" transform="scale(1,-1)"/>
 </g>
-<g style="fill-rule:evenodd">
-<g style="stroke-linecap:round;stroke:#bebebe">
+<g style="fill-rule:evenodd;stroke-linecap:round;stroke:#bebebe">
 <rect width="15" x="320.50012" y="600.50012" rx="2" ry="2" height="15" style="fill:#fff" id="checkbox-normal"/>
 <rect width="15" x="340.5" y="600.5" rx="2" height="15" ry="2" style="fill:#f2f2f2" id="checkbox-focused"/>
-</g>
-<g style="stroke:none">
-<path style="opacity:.01;stroke-width:.98" id="tbutton-normal-top" d="m 268.50018,11 h 32.4998 V 5 h -32.5 z"/>
-<path style="opacity:.01" id="tbutton-normal" d="m 268.5002,11 0,32.5 32.5,0 0,-32.5 -32.5,0 z "/>
-</g>
-</g>
-<path style="opacity:.01;stroke:none;line-height:normal;color:#000" id="tbutton-normal-topleft" d="m 268.5,5 c -5.25,0 -6,0.75 -6,6 h 6 z"/>
-<g style="stroke:none" id="tbutton-focused-bottom" transform="matrix(1,0,0,1,-0.5,4.4753443)">
-<path style="opacity:.01;fill-rule:evenodd;stroke-width:.895" id="path4980" d="m 218.5004,43.5 h 32.4998 v 4.00113 h -32.5 z "/>
-<path style="fill:#828080;line-height:normal;color:#000;stroke-width:1.414" id="path4982" d="m 251,49.4966 h -32.5 v -1.99887 h 32.5 Z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tab-toggled" id="use5468" transform="translate(106,-35.500245)"/>
 <g style="stroke:none" id="floating-tab-toggled-bottomleft" transform="matrix(1,0,0,0.18461538,277.5,726.62285)">
@@ -777,7 +766,6 @@
 <g style="fill-rule:evenodd">
 <g style="fill:#c8c8c8">
 <path id="header-normal-bottom" d="m 214,204 h -6 v 6 h 6 z"/>
-<path id="header-pressed-bottom" d="m 250,204 h -6 v 6 h 6 z"/>
 <path id="header-normal-bottomleft" d="m 220,204 h -6 v 6 h 6 z"/>
 <path id="header-normal-bottomright" d="m 226,204 h -6 v 6 h 6 z"/>
 <path id="header-normal-topright" d="m 226,198 v -6 h -6 v 6 z"/>
@@ -787,30 +775,13 @@
 </g>
 <path style="line-height:normal;fill-opacity:.118;color:#000" id="header-separator" d="m 205,189 v 20.5 h 1 v -20.5 z "/>
 <g style="fill-rule:evenodd">
-<g style="fill:#c8c8c8">
-<path id="header-pressed-bottomleft" d="m 256,204 h -6 v 6 h 6 z"/>
-<path id="header-pressed-bottomright" d="m 262,204 h -6 v 6 h 6 z"/>
-<path id="header-pressed-top" d="m 256,192 h -6 v 6 h 6 z"/>
-<path id="header-pressed-topleft" d="m 250,192 h -6 v 6 h 6 z"/>
-<path id="header-pressed-topright" d="m 262,192 h -6 v 6 h 6 z"/>
-<path id="header-normal-topleft" d="m 214,198 v -6 h -6 v 6 z"/>
-</g>
+<path style="fill:#c8c8c8" id="header-normal-topleft" d="m 214,198 v -6 h -6 v 6 z"/>
 <path style="fill:url(#linearGradient2443)" id="header-toggled" d="m 238,198 h -6 v 6 h 6 z"/>
 <g style="fill:#c8c8c8">
 <path id="header-normal-left" d="m 214,198 h -6 v 6 h 6 z"/>
 <path id="header-normal-right" d="m 226,198 h -6 v 6 h 6 z"/>
-<path id="header-toggled-bottomleft" d="m 232,204 h -6 v 6 h 6 z"/>
-<path id="header-toggled-bottom" d="m 238,204 h -6 v 6 h 6 z"/>
-<path id="header-toggled-bottomright" d="m 244,204 h -6 v 6 h 6 z"/>
-<path id="header-toggled-top" d="m 238,192 h -6 v 6 h 6 z"/>
-<path id="header-toggled-topleft" d="m 232,192 h -6 v 6 h 6 z"/>
-<path id="header-toggled-topright" d="m 244,192 h -6 v 6 h 6 z"/>
-<path id="header-toggled-left" d="m 232,198 h -6 v 6 h 6 z"/>
-<path id="header-toggled-right" d="m 244,198 h -6 v 6 h 6 z"/>
-<path id="header-pressed-left" d="m 250,198 h -6 v 6 h 6 z"/>
 </g>
-<path style="fill:#e6e6e6" id="header-pressed" d="m 256,198 h -6 v 6 h 6 z"/>
-<path style="fill:#c8c8c8" id="header-pressed-right" d="m 262,198 h -6 v 6 h 6 z"/>
+<path style="fill:#e6e6e6" id="header-pressed" d="m 244,198 h -6 v 6 h 6 z"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#button-toggled-left" id="button-toggled-right" transform="matrix(-1,0,0,1,230.4998,0)"/>
@@ -1064,28 +1035,14 @@
 <path style="opacity:0;fill:#000;fill-rule:evenodd;stroke-width:1.095" id="path2130" d="m -41.5,183.5002 v 32.4998 h -6 v -32.5 z "/>
 <path style="fill:#e27f58;line-height:normal;color:#000" id="path2132" d="m -45.50023,216 v -32.5 h 1 V 216 Z"/>
 </g>
-<g style="stroke:none;fill-rule:evenodd">
-<g style="stroke-linejoin:round;stroke-width:3;stroke-linecap:round">
+<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:round;stroke-width:3">
 <rect width="5" x="122.5" y="750" height="5" id="expand-tab-focus"/>
 <rect width="5" x="127.5" y="750" height="5" id="expand-floating-tab-focus"/>
-</g>
-<g style="stroke-width:.98">
-<path style="opacity:.01" id="tbutton-normal-left" d="M 268.5,43.4998 V 11 h -6 v 32.5 z"/>
-<path style="opacity:.01" id="tbutton-normal-right" d="M 300.98901,11 V 43.5 h 6 V 11 Z"/>
-<path style="opacity:.01" id="tbutton-normal-bottom" d="m 268.5004,43.5 h 32.4998 v 6 h -32.5 z "/>
-</g>
 </g>
 <g style="stroke:none" id="tbutton-toggled-bottom" transform="matrix(1,0,0,1,-0.5,-13.521256)">
 <path style="opacity:.01;fill-rule:evenodd;stroke-width:.895" id="path2210" d="m 218.5004,43.5 h 32.4998 v 4.00113 h -32.5 z "/>
 <path style="fill:#e95420;line-height:normal;color:#000;stroke-width:1.414" id="path2213" d="m 251,49.4966 h -32.5 v -1.99887 h 32.5 Z "/>
 </g>
-<g style="stroke:none" id="tbutton-pressed-bottom" transform="matrix(1,0,0,1,-0.5,-31.524656)">
-<path style="opacity:.01;fill-rule:evenodd;stroke-width:.895" id="path2217" d="m 218.5004,43.5 h 32.4998 v 4.00113 h -32.5 z "/>
-<path style="fill:#ccc;line-height:normal;color:#000;stroke-width:1.414" id="path2219" d="m 251,49.4966 h -32.5 v -1.99887 h 32.5 Z "/>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-normal-topleft" id="tbutton-normal-topright" transform="matrix(-1,0,0,1,569.50016,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-normal-topleft" id="tbutton-normal-bottomleft" transform="matrix(1,0,0,-1,0,54.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-normal-topleft" id="tbutton-normal-bottomright" transform="rotate(-180,284.74455,27.25)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-focused-bottomleft" id="floating-tab-focused-bottomright" transform="matrix(-1,0,0,1,612,0)"/>
 <g style="opacity:.7;stroke:none;color:#000" id="focus-top" transform="translate(249.5,745)">
 <path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
@@ -1250,12 +1207,8 @@
 <path style="opacity:0;fill-rule:evenodd;stroke-width:1.058" id="path2332" d="M -5.5,45 V 12.5 h -7 V 45 Z"/>
 <path style="fill:#f16e3b;line-height:normal;fill-opacity:.549;color:#000;stroke-width:.894" id="path2334" d="m -8.5,12.5268 v 32.5 h 1 v -32.5 z "/>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-focused-bottom" id="tbutton-focused-bottomleft" transform="translate(0,-6)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-focused-bottom" id="tbutton-focused-bottomright" transform="translate(0,-12)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-toggled-bottom" id="tbutton-toggled-bottomleft" transform="translate(0,-6.0033997)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-toggled-bottom" id="tbutton-toggled-bottomright" transform="translate(0,-12.0034)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-bottom" id="tbutton-pressed-bottomleft" transform="translate(0,-6)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-bottom" id="tbutton-pressed-bottomright" transform="translate(0,-12)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#elineedit-focused-top" id="elineedit-focused-bottom" transform="matrix(1,0,0,-1,-0.002114,57.501)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#elineedit-focused-topleft" id="elineedit-focused-bottomleft" transform="matrix(1,0,0,-1,-0.002114,57.501)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#elineedit-focused-top" id="elineedit-focused-left" transform="rotate(-90,381.25056,28.751557)"/>
@@ -1356,4 +1309,43 @@
 <rect width="6" x="360" y="143.5" height="4" style="fill:#969696" id="rect1869"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#spin-separator-bottom-focused" id="spin-separator-top-focused" transform="matrix(1,0,0,-1,0,301)"/>
+<g style="fill-rule:evenodd">
+<path style="fill:#f2f2f2;stroke:none" id="header-focused" d="m 232,198 h -6 v 6 h 6 z"/>
+<g id="slidercursor-focused" transform="translate(2)">
+<rect width="24" x="126" y="604" height="14" style="opacity:.01;stroke:none" id="rect1871"/>
+<path style="fill:#fff;stroke:#4ec7f2;stroke-linejoin:round;stroke-linecap:round" id="path1873" d="m 142.7599,617.5 h -9.47168 c -2.02472,-0.004 -2.78398,-1.27919 -2.78835,-2.55432 v -7.90583 c 0.004,-1.53016 1.2698,-2.55027 2.78835,-2.53972 h 9.47168 l 6.7401,6.5 z "/>
+</g>
+<g id="slidercursor-pressed" transform="translate(2,18)">
+<rect width="24" x="126" y="604" height="14" style="opacity:.01;stroke:none" id="rect1877"/>
+<path style="fill:#fff;stroke:#0f9bcd;stroke-linejoin:round;stroke-linecap:round" id="path1879" d="m 142.7599,617.5 h -9.47168 c -2.02472,-0.004 -2.78398,-1.27919 -2.78835,-2.55432 v -7.90583 c 0.004,-1.53016 1.2698,-2.55027 2.78835,-2.53972 h 9.47168 l 6.7401,6.5 z "/>
+</g>
+<path style="fill:#524e4e;stroke:none" id="tbutton-focused-left" d="M 264,14 V 8 h -6 v 6 z"/>
+</g>
+<path style="fill:#524e4e;fill-rule:evenodd;stroke:none" id="tbutton-focused-topleft" d="M 264,2 262.25,2 C 259,2 258,2.75 258,6.25 v 1.749782 l 6,0 z"/>
+<g style="stroke:none;fill-rule:evenodd;fill:#524e4e">
+<path id="tbutton-focused" d="M 270,14 V 8 h -6 v 6 z"/>
+<path id="tbutton-focused-top" d="M 270,8 V 2 h -6 v 6 z"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-focused-topleft" id="tbutton-focused-topright" transform="matrix(-1,0,0,1,534,0)"/>
+<g style="stroke:none;fill-rule:evenodd;fill:#524e4e">
+<path id="tbutton-focused-right" d="m 276,14 v -6 h -6 v 6 z"/>
+<path id="tbutton-focused-bottom" d="m 270,20 v -6 h -6 v 6 z"/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-focused-topleft" id="tbutton-focused-bottomleft" transform="matrix(1,0,0,-1,-2.5e-5,22)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-focused-topleft" id="tbutton-focused-bottomright" transform="rotate(-180,267,11)"/>
+<g style="stroke:none" id="tbutton-pressed-left">
+<path style="opacity:.07;fill:#fff;fill-rule:evenodd" id="path1943" d="M 283,14 V 8 h -5 v 6 z"/>
+<path style="line-height:normal;color:#000" id="path1945" d="m 277,8 v 6 h 1 V 8 Z"/>
+</g>
+<g style="stroke:none" id="tbutton-pressed-topleft" transform="translate(0,-0.028138)">
+<path style="opacity:.07;fill:#fff;fill-rule:evenodd" id="path1953" d="m 281.5,3.0281 c -2.75,0 -3.5,0.75 -3.5,3.5 v 1.5 h 5 v -5 z "/>
+<path style="line-height:normal;color:#000" id="path1955" d="m 281.5,2.0281 c -3.25,0 -4.5,1.25 -4.5,4.5 v 1.5 h 1 v -1.5 c 0,-2.75 0.75,-3.5 3.5,-3.5 h 1.5 v -1 z "/>
+</g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-left" id="tbutton-pressed-right" transform="matrix(-1,0,0,1,572,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-topleft" id="tbutton-pressed-topright" transform="matrix(-1,0,0,1,572,0)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-left" id="tbutton-pressed-top" transform="rotate(90,286,11)"/>
+<path style="opacity:.07;fill:#fff;fill-rule:evenodd;stroke:none" id="tbutton-pressed" d="M 289,14 V 8 h -6 v 6 z"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-left" id="tbutton-pressed-bottom" transform="rotate(-90,286,11)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-topleft" id="tbutton-pressed-bottomleft" transform="matrix(1,0,0,-1,-3e-5,22)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#tbutton-pressed-topleft" id="tbutton-pressed-bottomright" transform="rotate(-180,286,11)"/>
 </svg>
