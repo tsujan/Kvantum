@@ -8003,6 +8003,9 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
 
+        if (state == 4 && tspec_.bold_active_tab)
+          lspec.boldFont = true;
+
         int talign;
         //if (!widget) // QML
           talign = Qt::AlignCenter;
@@ -14158,7 +14161,8 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont || tspec_.bold_active_tab)
+          f.setBold(true);
 
         int iconSize = pixelMetric(PM_TabBarIconSize,option,widget);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,

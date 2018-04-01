@@ -30,6 +30,7 @@ V0.10.6
  * Handle disabled icons independently so that they're dim everywhere (even with KDE icon engine, which doesn't call generatedIconPixmap() with SVG symbolic icons).
  * Added a workaround for "selectable disabled view items" (Qt Creator can have such items with cmake projects).
  * Limit the menu check/redio box size to the small icon size and not to what QCommonStyle returns.
+ * Added a key for bold active tab text.
 
 V0.10.5
 ---------

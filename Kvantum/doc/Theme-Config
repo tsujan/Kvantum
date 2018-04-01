@@ -341,6 +341,10 @@ tab_button_extra_margin           integer             The extra margin between t
                                                       and could also be a decimal (as in
                                                       "min_height=0.25font").
 
+bold_active_tab                   true/false          Should the active tab text be bold? By
+                                                      default, the active tab text is like the
+                                                      inactive one.
+
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
 

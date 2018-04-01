@@ -645,6 +645,9 @@ theme_spec ThemeConfig::getThemeSpec()
       r.tab_button_extra_margin = qMin(qMax(v.toInt(),0),max);
   }
 
+  v = getValue("General","bold_active_tab");
+  r.bold_active_tab = v.toBool();
+
   v = getValue("General","group_toolbar_buttons");
   r.group_toolbar_buttons = v.toBool();
 

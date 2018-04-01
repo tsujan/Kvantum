@@ -7,6 +7,7 @@ left_tabs=true
 attach_active_tab=true
 no_active_tab_separator=true
 mirror_doc_tabs=true
+bold_active_tab=true
 group_toolbar_buttons=false
 toolbar_interior_spacing=1
 spread_progressbar=true
@@ -64,7 +65,9 @@ submenu_delay=250
 
 [GeneralColors]
 window.color=#FDFDFD
+inactive.window.color=#f0f0f0
 base.color=white
+inactive.base.color=#f7f7f7
 alt.base.color=#FAFAFA
 button.color=#FDFDFD
 light.color=white
@@ -73,9 +76,11 @@ dark.color=#C8C8C8
 mid.color=#DCDCDC
 highlight.color=#f07746
 inactive.highlight.color=#eb7344
-text.color=#4C4C4C
-window.text.color=#4C4C4C
-button.text.color=#4C4C4C
+text.color=#3D3D3D
+inactive.text.color=#2d2d2d
+window.text.color=#3D3D3D
+inactive.window.text.color=#2d2d2d
+button.text.color=#3D3D3D
 disabled.text.color=#00000064
 tooltip.text.color=white
 highlight.text.color=#fcfcfc
@@ -117,10 +122,10 @@ frame.right=3
 interior=true
 interior.element=button
 indicator.size=9
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
-text.press.color=#4C4C4C
-text.toggle.color=#4C4C4C
+text.press.color=#3D3D3D
+text.toggle.color=#3D3D3D
 text.shadow=false
 text.shadow.color=white
 text.shadow.alpha=190
@@ -160,7 +165,7 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 
 [DockTitle]
 inherits=PanelButtonCommand
@@ -170,7 +175,7 @@ frame.left=3
 frame.right=3
 frame=false
 interior=false
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.bold=true
 text.shadow=false
@@ -185,30 +190,30 @@ frame.expandedElement=espinbox
 frame.left=1
 indicator.element=spin
 indicator.size=10
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 frame.expansion=12
 
 [RadioButton]
 inherits=PanelButtonCommand
 frame=true
 interior.element=radio
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
-focusFrame=false
+focusFrame=true
 
 [CheckBox]
 inherits=PanelButtonCommand
 frame=true
 interior.element=checkbox
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
-focusFrame=false
+focusFrame=true
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -243,24 +248,25 @@ indicator.size=9
 
 [ToolboxTab]
 inherits=PanelButtonCommand
-text.normal.color=#4C4C4C
-text.press.color=#4C4C4C
+text.normal.color=#3D3D3D
+text.press.color=#3D3D3D
 text.focus.color=#141414
 text.shadow=false
 
 [Tab]
 inherits=PanelButtonCommand
 interior.element=tab
-text.margin.left=8
-text.margin.right=8
+text.margin.left=7
+text.margin.right=7
 text.margin.top=4
 text.margin.bottom=2
 frame.element=tab
 indicator.element=tab
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
-text.toggle.color=#4C4C4C
+text.toggle.color=#3D3D3D
 frame.expansion=12
+min_width=0
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -288,8 +294,9 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
+text.bold=true
 text.focus.color=#141414
-text.toggle.color=#4C4C4C
+text.toggle.color=#3D3D3D
 frame.expansion=0
 
 [SizeGrip]
@@ -317,7 +324,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-focusFrame=false
+focusFrame=true
 
 [SliderCursor]
 inherits=PanelButtonCommand
@@ -364,7 +371,7 @@ text.margin.top=3
 text.margin.bottom=3
 text.margin.left=4
 text.margin.right=4
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#232323
 text.press.color=#fcfcfc
 text.toggle.color=#fcfcfc
@@ -448,7 +455,7 @@ interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
 text.normal.color=#787878
-text.focus.color=#4C4C4C
+text.focus.color=#3D3D3D
 text.bold=true
 text.italic=true
 
@@ -470,10 +477,10 @@ text.shadow=false
 [GroupBox]
 inherits=GenericFrame
 frame=true
-focusFrame=false
+focusFrame=true
 frame.element=group
 text.margin=0
-text.normal.color=#4C4C4C
+text.normal.color=#3D3D3D
 text.focus.color=#141414
 frame.top=4
 frame.bottom=4
