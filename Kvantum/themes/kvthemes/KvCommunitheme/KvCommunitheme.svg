@@ -955,9 +955,18 @@
 <path style="opacity:1;fill:#b4b4b4;fill-opacity:1" id="path4926" d="m 105,109.5 h 2.5 v -2 H 105 Z"/>
 </g>
 </g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-right" transform="rotate(90,349.5,864.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-bottom" transform="rotate(180,349.5,864.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-left" transform="rotate(-90,349.5,864.5)"/>
+<g style="stroke:none;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:round">
+<rect width="2.5" x="418.5" y="131.5" height="2.5" style="fill:#dc6434;fill-opacity:.118" id="focus-bottomleft"/>
+<rect width="2.5" x="421" y="131.5" height="2.5" style="fill:#ff733b;fill-opacity:.235" id="focus-bottom"/>
+<rect width="2.5" x="423.5" y="131.5" height="2.5" style="fill:#dc6434;fill-opacity:.118" id="focus-bottomright"/>
+<g style="fill:#ff733b;fill-opacity:.235">
+<rect width="2.5" x="418.5" y="129" height="2.5" id="focus-left"/>
+<rect width="2.5" x="423.5" y="129" height="2.5" id="focus-right"/>
+</g>
+<rect width="2.5" x="418.5" y="126.5" height="2.5" style="fill:#dc6434;fill-opacity:.118" id="focus-topleft"/>
+<rect width="2.5" x="421" y="126.5" height="2.5" style="fill:#ff733b;fill-opacity:.235" id="focus-top"/>
+<rect width="2.5" x="423.5" y="126.5" height="2.5" style="fill:#dc6434;fill-opacity:.118" id="focus-topright"/>
+</g>
 <g style="fill:#3daee9;fill-rule:evenodd;stroke:none" id="group-focus-left" transform="matrix(0.66666667,0,0,1,318.33333,-296.5)">
 <rect width="6" x="-106" y="-1148.5" height="30" style="fill-opacity:0" id="rect2029" transform="scale(-1)"/>
 <rect width="1.5" x="100" y="1118.5" height="30" style="fill:#f57745;fill-opacity:.588" id="rect2031"/>
