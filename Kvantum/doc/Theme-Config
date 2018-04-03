@@ -562,6 +562,17 @@ slider_handle_length              integer             The width and the height o
                                                       handles. They cannot be greater than
                                                       48px. The default values are 16px.
 
+
+tickless_slider_handle_size       integer             The size (width and height) of the
+                                                      special slider handle used for sliders
+                                                      without tick marks, if the interior
+                                                      element of such a handle exists in the
+                                                      SVG file (with "-tickless" appended to
+                                                      its element name; See "Theme-Making.pdf"
+                                                       -> Indicators). Its value is never
+                                                      greater than "slider_handle_width",
+                                                      which is also its default value.
+
 check_size                        integer             The width and height of checkboxes
                                                       and radio buttons. The default
                                                       value is 13px.
@@ -915,6 +926,13 @@ text.toggle.inactive.color        string (#RRGGBBAA)  These keys are for text co
 
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
+
+text.boldness                     integer             The weight of bold texts (if any). Its value
+                                                      is from 1 to 5, with 3 (normally bold) as
+                                                      default.
+
+                                                      Note that some fonts may have only one
+                                                      degree of boldness.
 
 text.italic                       true/false          Italic font for text? The font
                                                       is not italic by default.

@@ -140,6 +140,7 @@ typedef struct {
   /* width and height of slider handle */
   int slider_handle_width;
   int slider_handle_length;
+  int tickless_slider_handle_size;
 
   /* width and height of checkbox
      and radio button indicators */
@@ -351,6 +352,8 @@ typedef struct {
   QString toggleInactiveColor;
   /* use bold font? */
   bool boldFont;
+  /* the weight of the bold font (if any) */
+  QFont::Weight boldness;
   /* use italic font? */
   bool italicFont;
   /* has shadow */
@@ -411,6 +414,7 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.toggleColor = QString();
   lspec.toggleColor = QString();
   lspec.boldFont = false;
+  lspec.boldness = QFont::Bold;
   lspec.italicFont = false;
   lspec.hasShadow = false;
   lspec.xshift = 0;
@@ -480,6 +484,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.slider_width = 8;
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;
+  tspec.tickless_slider_handle_size = 0;
   tspec.check_size = 13;
   tspec.tooltip_delay = -1;
   tspec.vertical_spin_indicators = false;

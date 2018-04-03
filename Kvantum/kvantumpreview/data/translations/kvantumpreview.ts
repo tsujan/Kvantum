@@ -352,294 +352,294 @@ check box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2114"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2105"/>
         <source>Containers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2135"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2126"/>
         <source>Header 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2144"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2135"/>
         <source>Header 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2149"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2140"/>
         <source>Header 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2154"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2145"/>
         <source>3rd Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2159"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2150"/>
         <source>2nd Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2163"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2199"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2154"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2190"/>
         <source>2nd Child</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2168"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2204"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2159"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2195"/>
         <source>1st Child</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2174"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2165"/>
         <source>1st Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2194"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2185"/>
         <source>3rd Child</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2452"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2443"/>
         <source>Row 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2457"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2448"/>
         <source>Row 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2462"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2453"/>
         <source>Column 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2467"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2458"/>
         <source>Column 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2472"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2463"/>
         <source>0-0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2480"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2471"/>
         <source>0-1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2488"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2479"/>
         <source>1-0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2496"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2487"/>
         <source>1-1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2181"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2184"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2172"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2175"/>
         <source>Editable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2211"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2202"/>
         <source>Non-Editable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2219"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2210"/>
         <source>Subwindow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2266"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2257"/>
         <source>Panel frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2285"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2426"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2515"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2276"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2417"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2506"/>
         <source>GroupBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2305"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2357"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2642"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2719"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2767"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2296"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2348"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2633"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2710"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2758"/>
         <source>Tab 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2311"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2302"/>
         <source>Page 1 (disabled)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2323"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2371"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2660"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2733"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2781"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2314"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2362"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2651"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2724"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2772"/>
         <source>Tab 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2329"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2320"/>
         <source>Page 2 (disabled)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2363"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2553"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2605"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2725"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2773"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2354"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2544"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2596"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2716"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2764"/>
         <source>Page 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2377"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2578"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2618"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2666"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2739"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2787"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2368"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2569"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2609"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2657"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2730"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2778"/>
         <source>Page 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2401"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2392"/>
         <source>Stack widget (page1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2415"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2406"/>
         <source>Stack Widget (page2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2432"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2423"/>
         <source>Group box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2507"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2498"/>
         <source>Dock Widget</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2524"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2515"/>
         <source>Checkable group box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2559"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2550"/>
         <source>Tool Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2648"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2639"/>
         <source>Document mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2686"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2677"/>
         <source>Box frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2816"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2807"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2820"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2811"/>
         <source>&amp;Submenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2840"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2831"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2857"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2848"/>
         <source>toolBar_2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2876"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2867"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2879"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2870"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2882"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2873"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2890"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2881"/>
         <source>&amp;Checkbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2903"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2894"/>
         <source>Toggle Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2906"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2897"/>
         <source>Toggle layout direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2918"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2909"/>
         <source>&amp;Doc Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2921"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2912"/>
         <source>Show tabs in the document mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2933"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2924"/>
         <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2936"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2927"/>
         <source>Hold pressed to show a menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2947"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2938"/>
         <source>C&amp;heckbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2955"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2946"/>
         <source>&amp;Radio button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2963"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2954"/>
         <source>Radio &amp;button</source>
         <translation type="unfinished"></translation>
     </message>

@@ -289,6 +289,7 @@ Style::Style() : QCommonStyle()
   isPcmanfm_ = false;
   subApp_ = false;
   isOpaque_ = false;
+  ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
   extraComboWidth_ = 0;
 
@@ -7980,10 +7981,14 @@ void Style::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
+        bool isDefaultBtn(false);
         if (!hspec_.normal_default_pushbutton
-            && (option->state & State_Enabled) && pb && pb->isDefault()) {
+            && (option->state & State_Enabled) && pb && pb->isDefault())
+        {
+          isDefaultBtn = true;
           QFont f(pb->font());
           f.setBold(true);
+          painter->save();
           painter->setFont(f);
         }
 
@@ -8077,6 +8082,8 @@ void Style::drawControl(ControlElement element,
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon, getIconMode(state,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
+        if(isDefaultBtn)
+          painter->restore();
       }
 
       break;
@@ -9870,8 +9877,12 @@ void Style::drawComplexControl(ComplexControl control,
 
         bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
         int ticks = opt->tickPosition;
-        const int len = pixelMetric(PM_SliderLength,option,widget);
-        const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
+        int len = pixelMetric(PM_SliderLength,option,widget);
+        int thick = pixelMetric(PM_SliderControlThickness,option,widget);
+        if (len == thick)
+        { // also, work around bad codes
+          thick = len = qMin(len, horiz ? h : w);
+        }
 
        /************
         ** Groove **
@@ -9901,10 +9912,13 @@ void Style::drawComplexControl(ComplexControl control,
           /* take into account the inversion */
           if (horiz)
           {
-            if (!opt->upsideDown) {
+            if (!opt->upsideDown)
+            {
               full.setWidth(sliderCenter.x());
               empty.adjust(sliderCenter.x(),0,0,0);
-            } else {
+            }
+            else
+            {
               empty.setWidth(sliderCenter.x());
               full.adjust(sliderCenter.x(),0,0,0);
             }
@@ -10026,7 +10040,6 @@ void Style::drawComplexControl(ComplexControl control,
           int available = r.height() - len;
           int min = opt->minimum;
           int max = opt->maximum;
-          if (max == 99) max = 100; // to get the end tick
           if (ticks & QSlider::TicksAbove)
           {
             QRect tickRect(r.x() + extra,
@@ -10096,6 +10109,14 @@ void Style::drawComplexControl(ComplexControl control,
               fspec.bottom = qMin(fspec.bottom,3);
             }
           }
+
+          if (ticks == QSlider::NoTicks
+              && ticklessSliderHandleSize_ > 0)
+          { // see pixelMetric() -> PM_SliderLength
+            ispec.element += "-tickless";
+            fspec.element += "-tickless";
+          }
+
           /* derive other handles from the main one only when necessary */
           bool derive = false;
           if (len != thick)
@@ -10814,10 +10835,68 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     }
 
     /* slider handle */
-    case PM_SliderLength :
-      return tspec_.slider_handle_length;
-    case PM_SliderControlThickness :
-      return tspec_.slider_handle_width;
+    case PM_SliderLength : {
+      int res = tspec_.slider_handle_length;
+      /* set it to the width if there is no tick and
+         a "-tickless" interior element exists */
+      if (themeRndr_ && themeRndr_->isValid())
+      {
+        const QStyleOptionSlider *opt =
+            qstyleoption_cast<const QStyleOptionSlider*>(option);
+        if (opt && opt->tickPosition == QSlider::NoTicks)
+        {
+          if (ticklessSliderHandleSize_ == -1)
+          {
+            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            if (themeRndr_ && themeRndr_->isValid()
+                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
+            {
+              if (tspec_.tickless_slider_handle_size > 0)
+              {
+                res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
+              }
+              else
+              {
+                res = ticklessSliderHandleSize_ = tspec_.slider_handle_width;
+              }
+            }
+            else
+              ticklessSliderHandleSize_ = 0;
+          }
+          else if (ticklessSliderHandleSize_ > 0)
+            res = ticklessSliderHandleSize_;
+        }
+      }
+      return res;
+    }
+    case PM_SliderControlThickness : {
+      int res = tspec_.slider_handle_width;
+      if (themeRndr_ && themeRndr_->isValid())
+      {
+        const QStyleOptionSlider *opt =
+            qstyleoption_cast<const QStyleOptionSlider*>(option);
+        if (opt && opt->tickPosition == QSlider::NoTicks)
+        {
+          if (ticklessSliderHandleSize_ == -1)
+          {
+            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            if (themeRndr_ && themeRndr_->isValid()
+                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
+            {
+              if (tspec_.tickless_slider_handle_size > 0)
+              {
+                res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
+              }
+            }
+            else
+              ticklessSliderHandleSize_ = 0;
+          }
+          else if (ticklessSliderHandleSize_ > 0)
+            res = ticklessSliderHandleSize_;
+        }
+      }
+      return res;
+    }
 
     /* the default is good, although we don't use it */
     /*case PM_SliderSpaceAvailable: {
@@ -13188,7 +13267,9 @@ QRect Style::subControlRect(ComplexControl control,
           {
             bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
             int ticks = opt->tickPosition;
-            const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
+            int handleThickness = pixelMetric(PM_SliderControlThickness,option,widget);
+            if (handleThickness == pixelMetric(PM_SliderLength,option,widget))
+              handleThickness = qMin(handleThickness, horiz ? h : w); // see drawComplexControl() -> CC_Slider
             if (horiz)
             {
               if (ticks == QSlider::TicksAbove)
@@ -13199,7 +13280,7 @@ QRect Style::subControlRect(ComplexControl control,
               return QRect(x,
                            y+(h-handleThickness)/2,
                            w,
-                           handleThickness);
+                           2*(handleThickness/2)); // it may be an odd number
             }
             else
             {
@@ -13209,7 +13290,7 @@ QRect Style::subControlRect(ComplexControl control,
                 x -= SLIDER_TICK_SIZE/2;
               return QRect(x+(w-handleThickness)/2,
                            y,
-                           handleThickness,
+                           2*(handleThickness/2),
                            h);
             }
           }
@@ -13221,7 +13302,9 @@ QRect Style::subControlRect(ComplexControl control,
           {
             bool horiz = opt->orientation == Qt::Horizontal;
             subControlRect(CC_Slider,option,SC_SliderGroove,widget).getRect(&x,&y,&w,&h);
-            const int len = pixelMetric(PM_SliderLength, option, widget);
+            int len = pixelMetric(PM_SliderLength,option,widget);
+            if (len == pixelMetric(PM_SliderControlThickness,option,widget))
+              len = qMin(len, horiz ? h : w); // see drawComplexControl() -> CC_Slider
             const int sliderPos = sliderPositionFromValue (opt->minimum,
                                                            opt->maximum,
                                                            opt->sliderPosition,

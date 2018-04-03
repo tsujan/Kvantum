@@ -2026,20 +2026,11 @@ check box</string>
         </widget>
        </item>
        <item row="0" column="4" rowspan="3">
-        <spacer name="horizontalSpacer_14">
+        <widget class="QSlider" name="verticalSlider_5">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
       </layout>
      </item>

@@ -31,6 +31,8 @@ V0.10.6
  * Added a workaround for "selectable disabled view items" (Qt Creator can have such items with cmake projects).
  * Limit the menu check/redio box size to the small icon size and not to what QCommonStyle returns.
  * Added a key for bold active tab text.
+ * Added a key for the degree of boldness (from 1 to 5; 3 means normally bold).
+ * An optional "-tickless" element for the slider handle when the slider has no tick marks.
 
 V0.10.5
 ---------

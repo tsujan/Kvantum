@@ -345,6 +345,34 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
 
     v = getValue(elementName,"text.bold", i);
     r.boldFont = v.toBool();
+
+#if QT_VERSION >= 0x050000
+    v = getValue(elementName,"text.boldness", i);
+    if (v.isValid()) // QFont::Bold by default
+    {
+      int b = qMin(qMax(v.toInt(),1),5);
+      switch (b) {
+        case 1:
+          r.boldness = QFont::Medium;
+          break;
+        case 2:
+          r.boldness = QFont::DemiBold;
+          break;
+        case 3:
+          r.boldness = QFont::Bold;
+          break;
+        case 4:
+          r.boldness = QFont::ExtraBold;
+          break;
+        case 5:
+          r.boldness = QFont::Black;
+          break;
+        default:
+          r.boldness = QFont::Bold;
+      }
+    }
+#endif
+
     v = getValue(elementName,"text.italic", i);
     r.italicFont = v.toBool();
 
@@ -733,6 +761,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue("General","slider_handle_length");
   if (v.isValid()) // 16 by default
     r.slider_handle_length = qMin(qMax(v.toInt(),0),48);
+
+  v = getValue("General","tickless_slider_handle_size");
+  r.tickless_slider_handle_size = qMin(qMax(v.toInt(),0),r.slider_handle_width);
 
   v = getValue("General","check_size");
   if (v.isValid()) //13 by default

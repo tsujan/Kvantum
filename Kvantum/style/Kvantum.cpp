@@ -418,6 +418,7 @@ Style::Style(bool useDark) : QCommonStyle()
   isPcmanfm_ = false;
   subApp_ = false;
   isOpaque_ = false;
+  ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
   extraComboWidth_ = 0;
   pixelRatio_ = 1;
@@ -5820,7 +5821,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* when there isn't enough space */
           const label_spec lspec1 = getLabelSpec("ComboBox");
           QFont F(painter->font());
-          if (lspec1.boldFont) F.setBold(true);
+          if (lspec1.boldFont) F.setWeight(lspec1.boldness);
           QSize txtSize = textSize(F,combo->currentText,false);
           if (/*cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
               ||*/ cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
@@ -6905,8 +6906,10 @@ void Style::drawControl(ControlElement element,
       */
       if (const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
       {
+        bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration
+                     && !opt->decorationSize.isEmpty());
         QPalette palette(opt->palette);
-        if (!opt->text.isEmpty()
+        if ((!opt->text.isEmpty() || hasIcon)
             /* If another color has been set intentionally,
                as in Akregator's unread feeds or in Kate's
                text style preferences, use it! */
@@ -6993,7 +6996,7 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::Text, col);
                 o.palette = palette;
-                if (pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
+                if (hasIcon && pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -7034,19 +7037,25 @@ void Style::drawControl(ControlElement element,
                 palette.setColor(QPalette::Text, col);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
-                qreal tintPercentage = hspec_.tint_on_mouseover;
-                if (tintPercentage > 0
-                    && (opt->features & QStyleOptionViewItem::HasDecoration)
-                    && !opt->decorationSize.isEmpty())
+                if (hasIcon)
                 {
-                  QPixmap px = tintedPixmap(option, opt->icon.pixmap(opt->decorationSize), tintPercentage);
-                  o.icon = QIcon(px);
-                }
-                else if (pixelRatio_ > 1)
-                {
-                  QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
-                                                 iconstate, opt->decorationSize);
-                  o.icon = QIcon(px);
+                  qreal tintPercentage = hspec_.tint_on_mouseover;
+                  if (tintPercentage > 0)
+                  {
+                    QPixmap px = tintedPixmap(option,
+                                              getPixmapFromIcon(opt->icon,
+                                                                getIconMode(state,isInactive,lspec),
+                                                                iconstate,
+                                                                opt->decorationSize),
+                                              tintPercentage);
+                    o.icon = QIcon(px);
+                  }
+                  else if (pixelRatio_ > 1)
+                  {
+                    QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
+                                                   iconstate, opt->decorationSize);
+                    o.icon = QIcon(px);
+                  }
                 }
                 QCommonStyle::drawControl(element,&o,painter,widget);
                 return;
@@ -7063,7 +7072,7 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
-                if (pixelRatio_ > 1)
+                if (hasIcon && pixelRatio_ > 1)
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -7086,7 +7095,7 @@ void Style::drawControl(ControlElement element,
                 o.palette = palette;
                 /* because the inactive toggled bg may have contrast with the active one and
                    since this can be a symbolic SVG icon, we use the pixmap with inactiveness */
-                if (isInactive || pixelRatio_ > 1)
+                if (hasIcon && (isInactive || pixelRatio_ > 1))
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -7097,15 +7106,20 @@ void Style::drawControl(ControlElement element,
               }
             }
           }
-          else
+          else if (hasIcon) // disabled
           {
             qreal opacityPercentage = hspec_.disabled_icon_opacity;
-            if (opacityPercentage < 100
-                && (opt->features & QStyleOptionViewItem::HasDecoration)
-                && !opt->decorationSize.isEmpty())
+            if (opacityPercentage < 100)
             {
               QStyleOptionViewItem o(*opt);
-              QPixmap px = translucentPixmap(opt->icon.pixmap(opt->decorationSize), opacityPercentage);
+              const label_spec lspec = getLabelSpec("ItemView");
+              QPixmap px = translucentPixmap(getPixmapFromIcon(opt->icon,
+                                                               getIconMode(state,
+                                                                           isWidgetInactive(widget),
+                                                                           lspec),
+                                                               iconstate,
+                                                               opt->decorationSize),
+                                             opacityPercentage);
               o.icon = QIcon(px);
               QCommonStyle::drawControl(element,&o,painter,widget);
               return;
@@ -7518,7 +7532,7 @@ void Style::drawControl(ControlElement element,
           if(!cb->lineEdit())
           {
             QFont F(painter->font());
-            if (lspec.boldFont) F.setBold(true);
+            if (lspec.boldFont) F.setWeight(lspec.boldness);
             QSize txtSize = textSize(F,opt->currentText,false);
             if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                               + (sspec.incrementW ? sspec.minW : 0)
@@ -8157,7 +8171,7 @@ void Style::drawControl(ControlElement element,
           int txtWidth = r.width() - lspec.right-lspec.left-fspec.left-fspec.right
                          - (opt->icon.isNull() ? 0 : icnSize + lspec.tispace);
           QFont F(painter->font());
-          if (lspec.boldFont) F.setBold(true);
+          if (lspec.boldFont) F.setWeight(lspec.boldness);
           QSize txtSize = textSize(F,txt,false);
           if (txtSize.width() > txtWidth)
           {
@@ -8255,120 +8269,134 @@ void Style::drawControl(ControlElement element,
     }*/
 
     case CE_ToolBoxTabLabel : {
-      /*
-          Here we rely on QCommonStyle::drawControl() and
-          just use our custom colors, knowing that QCommonStyle
-          uses QPalette::ButtonText for drawing the text.
-      */
       if (const QStyleOptionToolBox *opt = qstyleoption_cast<const QStyleOptionToolBox*>(option))
       {
-        if (!opt->text.isEmpty())
+        int state = 1;
+        if (!(option->state & State_Enabled))
+          state = 0;
+        else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
+          state = 3;
+        else if (option->state & State_MouseOver)
+          state = 2;
+
+        const label_spec lspec = getLabelSpec("ToolboxTab");
+        QPalette tBoxPalette(opt->palette);
+        int smallIconSize = pixelMetric(PM_SmallIconSize,opt,widget);
+        QPixmap px = getPixmapFromIcon(opt->icon,
+                                       getIconMode(state,isWidgetInactive(widget),lspec),
+                                       iconstate,
+                                       QSize(smallIconSize,smallIconSize));
+
+        /* first get the correct pixmap and palette */
+        if (state != 0)
         {
-          int state = 1;
-          if (!(option->state & State_Enabled))
-            state = 0;
-          else if ((option->state & State_On) || (option->state & State_Sunken) || (option->state & State_Selected))
-            state = 3;
-          else if (option->state & State_MouseOver)
-            state = 2;
-          if (state != 0)
+          QColor col;
+          const label_spec lspec = getLabelSpec("ToolboxTab");
+          if (state == 1)
           {
-            const label_spec lspec = getLabelSpec("ToolboxTab");
-            if (state == 1)
+            if (isWidgetInactive(widget))
             {
-              QColor col;
-              if (isWidgetInactive(widget))
-              {
-                col = getFromRGBA(lspec.normalInactiveColor);
-                if (!col.isValid())
-                  col = getFromRGBA(lspec.normalColor);
-              }
-              else
+              col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
                 col = getFromRGBA(lspec.normalColor);
-              if (col.isValid())
-              {
-                QStyleOptionToolBox o(*opt);
-                QPalette palette(opt->palette);
-                palette.setColor(QPalette::ButtonText, col);
-                o.palette = palette;
-                QCommonStyle::drawControl(element,&o,painter,widget);
-                return;
-              }
             }
-            else if (state == 2)
+            else
+              col = getFromRGBA(lspec.normalColor);
+            if (col.isValid())
+              tBoxPalette.setColor(QPalette::ButtonText, col);
+          }
+          else if (state == 2)
+          {
+            if (isWidgetInactive(widget))
             {
-              QColor col;
-              if (isWidgetInactive(widget))
-              {
-                col = getFromRGBA(lspec.focusInactiveColor);
-                if (!col.isValid())
-                  col = getFromRGBA(lspec.focusColor);
-              }
-              else
+              col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
                 col = getFromRGBA(lspec.focusColor);
-              if (col.isValid())
-              {
-                QStyleOptionToolBox o(*opt);
-                QPalette palette(opt->palette);
-                palette.setColor(QPalette::ButtonText, col);
-                o.palette = palette;
-                qreal tintPercentage = hspec_.tint_on_mouseover;
-                if (tintPercentage > 0 && !opt->icon.isNull())
-                {
-                  QPixmap px = tintedPixmap(option,
-                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                            tintPercentage);
-                  o.icon = QIcon(px);
-                }
-                QCommonStyle::drawControl(element,&o,painter,widget);
-                return;
-              }
             }
-            else if (state == 3)
+            else
+              col = getFromRGBA(lspec.focusColor);
+            if (col.isValid())
             {
-              QColor col;
-              if (isWidgetInactive(widget))
-              {
-                col = getFromRGBA(lspec.pressInactiveColor);
-                if (!col.isValid())
-                  col = getFromRGBA(lspec.pressColor);
-              }
-              else
-                col = getFromRGBA(lspec.pressColor);
-              if (col.isValid())
-              {
-                QStyleOptionToolBox o(*opt);
-                QPalette palette(opt->palette);
-                palette.setColor(QPalette::ButtonText, col);
-                o.palette = palette;
-                qreal tintPercentage = hspec_.tint_on_mouseover;
-                if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
-                {
-                  QPixmap px = tintedPixmap(option,
-                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                            tintPercentage);
-                  o.icon = QIcon(px);
-                }
-                QCommonStyle::drawControl(element,&o,painter,widget);
-                return;
-              }
+              tBoxPalette.setColor(QPalette::ButtonText, col);
+              qreal tintPercentage = hspec_.tint_on_mouseover;
+              if (tintPercentage > 0 && !opt->icon.isNull())
+                px = tintedPixmap(option, px,tintPercentage);
             }
           }
-          else
+          else if (state == 3)
           {
-            qreal opacityPercentage = hspec_.disabled_icon_opacity;
-            if (opacityPercentage < 100 && !opt->icon.isNull())
+            if (isWidgetInactive(widget))
             {
-              QStyleOptionToolBox o(*opt);
-              QPixmap px = translucentPixmap(opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                             opacityPercentage);
-              o.icon = QIcon(px);
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+              col = getFromRGBA(lspec.pressInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.pressColor);
+            }
+            else
+              col = getFromRGBA(lspec.pressColor);
+            if (col.isValid())
+            {
+              tBoxPalette.setColor(QPalette::ButtonText, col);
+              qreal tintPercentage = hspec_.tint_on_mouseover;
+              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+                px = tintedPixmap(option, px,tintPercentage);
+            }
+            if (styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
+            {
+              QFont f(painter->font());
+              f.setWeight(lspec.boldness);
+              painter->save();
+              painter->setFont(f);
             }
           }
         }
-        QCommonStyle::drawControl(element,option,painter,widget);
+        else if (!opt->icon.isNull()) // disabled
+        {
+          qreal opacityPercentage = hspec_.disabled_icon_opacity;
+          if (opacityPercentage < 100)
+            px = translucentPixmap(px, opacityPercentage);
+        }
+
+        /* then, draw the text and icon as in QCommonStyle::drawControl() */
+
+        QRect cr = subElementRect(QStyle::SE_ToolBoxTabContents, opt, widget);
+        QRect tr, ir;
+        int ih = 0;
+        if (px.isNull())
+        {
+          tr = cr;
+          tr.adjust(4, 0, -8, 0);
+        }
+        else
+        {
+          int iw = px.width() + 4;
+          ih = px.height();
+          ir = QRect(cr.left()+4, cr.top(), iw+2, ih);
+          tr = QRect(ir.right(), cr.top(), cr.width()-ir.right()-4, cr.height());
+        }
+
+        QString txt = QFontMetrics(painter->font()).elidedText(opt->text,Qt::ElideRight,tr.width());
+
+        if (ih)
+          painter->drawPixmap(ir.left(), (opt->rect.height() - ih) / 2, px);
+
+        int talign = Qt::AlignLeft | Qt::AlignVCenter;
+        if (!styleHint(SH_UnderlineShortcut, opt, widget))
+          talign |= Qt::TextHideMnemonic;
+        else
+          talign |= Qt::TextShowMnemonic;
+        drawItemText(painter, tr, talign, tBoxPalette, state != 0, txt, QPalette::ButtonText);
+
+        if (state == 3 && styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
+          painter->restore();
+
+        if (!txt.isEmpty() && opt->state & State_HasFocus)
+        {
+          QStyleOptionFocusRect o;
+          o.rect = tr;
+          o.palette = opt->palette;
+          o.state = QStyle::State_None;
+          drawPrimitive(QStyle::PE_FrameFocusRect, &o, painter, widget);
+        }
       }
 
       break;
@@ -8429,7 +8457,7 @@ void Style::drawControl(ControlElement element,
       { // determine the text position relative to the bar
         QFont f(painter->font());
         const label_spec lspec = getLabelSpec("Progressbar");
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
         bool topText;
         QSize s;
         if (isVertical)
@@ -8574,7 +8602,7 @@ void Style::drawControl(ControlElement element,
         { // determine the text position relative to the bar
           QFont f(painter->font());
           const label_spec lspec = getLabelSpec("Progressbar");
-          if (lspec.boldFont) f.setBold(true);
+          if (lspec.boldFont) f.setWeight(lspec.boldness);
           bool topText;
           QSize s;
           /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
@@ -8877,7 +8905,7 @@ void Style::drawControl(ControlElement element,
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
         QFont f(painter->font());
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
         bool isVertical(opt->orientation == Qt::Vertical);
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
         bool inverted(pb && pb->invertedAppearance());
@@ -9734,10 +9762,14 @@ void Style::drawControl(ControlElement element,
         }
 
         const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
+        bool isDefaultBtn(false);
         if (!hspec_.normal_default_pushbutton
-            && (option->state & State_Enabled) && pb && pb->isDefault()) {
+            && (option->state & State_Enabled) && pb && pb->isDefault())
+        {
+          isDefaultBtn = true;
           QFont f(pb->font());
-          f.setBold(true);
+          f.setWeight(lspec.boldness);
+          painter->save();
           painter->setFont(f);
         }
 
@@ -9746,7 +9778,7 @@ void Style::drawControl(ControlElement element,
         {
           QFont fnt(painter->font());
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
-            fnt.setBold(true);
+            fnt.setWeight(lspec.boldness);
           txtSize = textSize(fnt,opt->text,false);
           /* in case there isn't enough space */
           if (pb)
@@ -9835,6 +9867,8 @@ void Style::drawControl(ControlElement element,
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                     opt->iconSize);
+        if(isDefaultBtn)
+          painter->restore();
       }
 
       break;
@@ -9977,7 +10011,7 @@ void Style::drawControl(ControlElement element,
           }
           QFont fnt(painter->font());
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
-            fnt.setBold(true);
+            fnt.setWeight(lspec.boldness);
           QSize txtSize = textSize(fnt,opt->text,false);
           bool enoughSpace(true);
           if (w < txtSize.width()
@@ -10448,7 +10482,7 @@ void Style::drawControl(ControlElement element,
             if (!txt.isEmpty())
             {
               QFont F(painter->font());
-              if (lspec.boldFont) F.setBold(true);
+              if (lspec.boldFont) F.setWeight(lspec.boldness);
               QSize txtSize = textSize(F, txt, false);
               if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
@@ -10843,7 +10877,7 @@ void Style::drawControl(ControlElement element,
         if (!title.isEmpty())
         {
           QFont F(painter->font());
-          if (lspec.boldFont) F.setBold(true);
+          if (lspec.boldFont) F.setWeight(lspec.boldness);
           title = QFontMetrics(F).elidedText(title, Qt::ElideRight, tRect.width());
         }
         int talign = Qt::AlignHCenter | Qt::AlignVCenter;
@@ -11473,7 +11507,7 @@ void Style::drawComplexControl(ComplexControl control,
               else // when there isn't enough space
               {
                 QFont F(painter->font());
-                if (lspec.boldFont) F.setBold(true);
+                if (lspec.boldFont) F.setWeight(lspec.boldness);
                 QSize txtSize = textSize(F,opt->currentText,false);
                 if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                     ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
@@ -12057,8 +12091,12 @@ void Style::drawComplexControl(ComplexControl control,
 
         bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
         int ticks = opt->tickPosition;
-        const int len = pixelMetric(PM_SliderLength,option,widget);
-        const int thick = pixelMetric(PM_SliderControlThickness,option,widget);
+        int len = pixelMetric(PM_SliderLength,option,widget);
+        int thick = pixelMetric(PM_SliderControlThickness,option,widget);
+        if (len == thick)
+        { // also, work around bad codes
+          thick = len = qMin(len, horiz ? h : w);
+        }
 
        /************
         ** Groove **
@@ -12230,7 +12268,6 @@ void Style::drawComplexControl(ComplexControl control,
           int available = r.height() - len;
           int min = opt->minimum;
           int max = opt->maximum;
-          if (max == 99) max = 100; // to get the end tick
           if (ticks & QSlider::TicksAbove)
           {
             QRect tickRect(r.x() + extra,
@@ -12300,6 +12337,7 @@ void Style::drawComplexControl(ComplexControl control,
               fspec.bottom = qMin(fspec.bottom,3);
             }
           }
+
           /* derive other handles from the main one only when necessary */
           bool derive = false;
           if (len != thick)
@@ -12330,6 +12368,12 @@ void Style::drawComplexControl(ComplexControl control,
               m.scale(-1,1);
               painter->setTransform(m, true);
             }
+          }
+          else if (ticks == QSlider::NoTicks
+                   && ticklessSliderHandleSize_ > 0)
+          { // see pixelMetric() -> PM_SliderLength
+            ispec.element += "-tickless";
+            fspec.element += "-tickless";
           }
 
           QString status = getState(option,widget);
@@ -12432,7 +12476,7 @@ void Style::drawComplexControl(ComplexControl control,
           if (!title.isEmpty())
           {
             QFont F(painter->font());
-            if (lspec.boldFont) F.setBold(true);
+            if (lspec.boldFont) F.setWeight(lspec.boldness);
             QFontMetrics fm(F);
             title = fm.elidedText(title, Qt::ElideRight,
                                   o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
@@ -12737,7 +12781,7 @@ void Style::drawComplexControl(ComplexControl control,
           {
             QFont font(painter->font());
             if (lspec.boldFont)
-              font.setBold(true);
+              font.setWeight(lspec.boldness);
             if (lspec.italicFont)
               font.setItalic(true);
             painter->save();
@@ -13119,10 +13163,68 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     }
 
     /* slider handle */
-    case PM_SliderLength :
-      return tspec_.slider_handle_length;
-    case PM_SliderControlThickness :
-      return tspec_.slider_handle_width;
+    case PM_SliderLength : {
+      int res = tspec_.slider_handle_length;
+      /* set it to the width if there is no tick and
+         a "-tickless" interior element exists */
+      if (themeRndr_ && themeRndr_->isValid())
+      {
+        const QStyleOptionSlider *opt =
+            qstyleoption_cast<const QStyleOptionSlider*>(option);
+        if (opt && opt->tickPosition == QSlider::NoTicks)
+        {
+          if (ticklessSliderHandleSize_ == -1)
+          {
+            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            if (themeRndr_ && themeRndr_->isValid()
+                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
+            {
+              if (tspec_.tickless_slider_handle_size > 0)
+              {
+                res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
+              }
+              else
+              {
+                res = ticklessSliderHandleSize_ = tspec_.slider_handle_width;
+              }
+            }
+            else
+              ticklessSliderHandleSize_ = 0;
+          }
+          else if (ticklessSliderHandleSize_ > 0)
+            res = ticklessSliderHandleSize_;
+        }
+      }
+      return res;
+    }
+    case PM_SliderControlThickness : {
+      int res = tspec_.slider_handle_width;
+      if (themeRndr_ && themeRndr_->isValid())
+      {
+        const QStyleOptionSlider *opt =
+            qstyleoption_cast<const QStyleOptionSlider*>(option);
+        if (opt && opt->tickPosition == QSlider::NoTicks)
+        {
+          if (ticklessSliderHandleSize_ == -1)
+          {
+            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            if (themeRndr_ && themeRndr_->isValid()
+                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
+            {
+              if (tspec_.tickless_slider_handle_size > 0)
+              {
+                res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
+              }
+            }
+            else
+              ticklessSliderHandleSize_ = 0;
+          }
+          else if (ticklessSliderHandleSize_ > 0)
+            res = ticklessSliderHandleSize_;
+        }
+      }
+      return res;
+    }
 
     /* the default is good, although we don't use it */
     /*case PM_SliderSpaceAvailable: {
@@ -13165,7 +13267,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       {
         QFont f = widget->font();
         QSize s = textSize(f, "W", false);
-        f.setBold(true);
+        f.setWeight(lspec.boldness);
         b = (textSize(f, "W", false) - s).height();
       }
       return qMax(widget ? widget->fontMetrics().lineSpacing()+v+b
@@ -13558,6 +13660,8 @@ int Style::styleHint(StyleHint hint,
       return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
 
+    case SH_ToolBox_SelectedPageTitleBold : return true;
+
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
           && widget && widget->objectName() == "CE_CapacityBar")
@@ -13685,7 +13789,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         bool hasIcon = false;
         if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
@@ -13822,7 +13926,7 @@ QSize Style::sizeFromContents(ContentsType type,
             if (widget) f = widget->font();
             else f = QApplication::font();
             QSize s1 = textSize(f, txt, false);
-            f.setBold(true);
+            f.setWeight(lspec.boldness);
             s = s + textSize(f, txt, false) - s1;
           }
           // consider a global min. width for push buttons as is done in "qcommonstyle.cpp"
@@ -13870,7 +13974,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int ih = pixelMetric(PM_ExclusiveIndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
@@ -13909,7 +14013,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int ih = pixelMetric(PM_IndicatorHeight,option,widget);
         if (!opt->text.isEmpty() || !opt->icon.isNull())
@@ -13934,7 +14038,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
         int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
@@ -14023,7 +14127,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                            opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
@@ -14125,7 +14229,7 @@ QSize Style::sizeFromContents(ContentsType type,
             if (widget) f = widget->font();
             else f = QApplication::font();
             QSize s1 = textSize(f, opt->text, false);
-            f.setBold(true);
+            f.setWeight(lspec.boldness);
             s = s + textSize(f, opt->text, false) - s1;
           }
         }
@@ -14162,7 +14266,7 @@ QSize Style::sizeFromContents(ContentsType type,
         if (widget) f = widget->font();
         else f = QApplication::font();
         if (lspec.boldFont || tspec_.bold_active_tab)
-          f.setBold(true);
+          f.setWeight(lspec.boldness);
 
         int iconSize = pixelMetric(PM_TabBarIconSize,option,widget);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
@@ -14274,7 +14378,7 @@ QSize Style::sizeFromContents(ContentsType type,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int iconSize = pixelMetric(PM_SmallIconSize);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
@@ -14422,7 +14526,7 @@ QSize Style::sizeFromContents(ContentsType type,
       QFont f;
       if (widget) f = widget->font();
       else f = QApplication::font();
-      if (lspec.boldFont) f.setBold(true);
+      if (lspec.boldFont) f.setWeight(lspec.boldness);
       QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt? opt->text : QString(),QSize());
       fspec = getFrameSpec(group);
       lspec = getLabelSpec(group);
@@ -14449,7 +14553,7 @@ QSize Style::sizeFromContents(ContentsType type,
         if (widget) f = widget->font();
         else f = QApplication::font();
         const label_spec lspec = getLabelSpec("Progressbar");
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
         if (QFontMetrics(f).height() > tspec_.progressbar_thickness)
         {
           s = defaultSize;
@@ -14571,7 +14675,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           QFont f;
           if (widget) f = widget->font();
           else f = QApplication::font();
-          if (lspec.boldFont) f.setBold(true);
+          if (lspec.boldFont) f.setWeight(lspec.boldness);
           r = itemTextRect(QFontMetrics(f),
                            cr,
                            Qt::AlignAbsolute | Qt::AlignLeft | Qt::AlignVCenter
@@ -15849,7 +15953,9 @@ QRect Style::subControlRect(ComplexControl control,
           {
             bool horiz = opt->orientation == Qt::Horizontal; // this is more reliable than option->state
             int ticks = opt->tickPosition;
-            const int handleThickness = pixelMetric(PM_SliderControlThickness, option, widget);
+            int handleThickness = pixelMetric(PM_SliderControlThickness,option,widget);
+            if (handleThickness == pixelMetric(PM_SliderLength,option,widget))
+              handleThickness = qMin(handleThickness, horiz ? h : w); // see drawComplexControl() -> CC_Slider
             if (horiz)
             {
               if (ticks == QSlider::TicksAbove)
@@ -15860,7 +15966,7 @@ QRect Style::subControlRect(ComplexControl control,
               return QRect(x,
                            y+(h-handleThickness)/2,
                            w,
-                           handleThickness);
+                           2*(handleThickness/2)); // it may be an odd number
             }
             else
             {
@@ -15870,7 +15976,7 @@ QRect Style::subControlRect(ComplexControl control,
                 x -= SLIDER_TICK_SIZE/2;
               return QRect(x+(w-handleThickness)/2,
                            y,
-                           handleThickness,
+                           2*(handleThickness/2),
                            h);
             }
           }
@@ -15882,7 +15988,9 @@ QRect Style::subControlRect(ComplexControl control,
           {
             bool horiz = opt->orientation == Qt::Horizontal;
             subControlRect(CC_Slider,option,SC_SliderGroove,widget).getRect(&x,&y,&w,&h);
-            const int len = pixelMetric(PM_SliderLength, option, widget);
+            int len = pixelMetric(PM_SliderLength,option,widget);
+            if (len == pixelMetric(PM_SliderControlThickness,option,widget))
+              len = qMin(len, horiz ? h : w); // see drawComplexControl() -> CC_Slider
             const int sliderPos = sliderPositionFromValue (opt->minimum,
                                                            opt->maximum,
                                                            opt->sliderPosition,
@@ -16157,7 +16265,7 @@ QRect Style::subControlRect(ComplexControl control,
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
-        if (lspec.boldFont) f.setBold(true);
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
         QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
         int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
         int checkHeight = pixelMetric(PM_IndicatorHeight);
@@ -17529,7 +17637,7 @@ void Style::renderLabel(
     if (lspec.boldFont)
     {
       QFont f(painter->font());
-      f.setBold(true);
+      f.setWeight(lspec.boldness);
       painter->save();
       painter->setFont(f);
     }

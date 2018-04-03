@@ -412,6 +412,9 @@ class Style : public QCommonStyle {
     bool isDolphin_;
     bool isPcmanfm_;
 
+    /* The size of the slider handle with no tick mark (if it exists) */
+    mutable int ticklessSliderHandleSize_;
+
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
 
