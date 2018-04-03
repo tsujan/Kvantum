@@ -893,21 +893,7 @@
 <path style="fill:#cdcdcd;fill-rule:evenodd;stroke:none" id="slider-normal-right" d="m 41,602 v 16.4063 0.094 h 12 v -16.5 H 41 Z"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topleft" id="slider-normal-bottomleft" transform="matrix(1,0,0,-1,0,1220.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-normal-topright" id="slider-normal-bottomright" transform="matrix(1,0,0,-1,0,1220.5)"/>
-<g style="opacity:.8;stroke:none" id="slider-focus-left" transform="matrix(0.53333333,0,0,1,174.16667,539.9984)">
-<path style="fill-rule:evenodd;fill-opacity:0" id="path2104" d="M 28.75,81.2514 V 48.7516 H 22.5 v 32.5 z"/>
-<path style="fill:#f57745;line-height:normal;fill-opacity:.667;color:#000;stroke-width:1.414" id="path2106" d="m 21.25,48.7516 v 32.5 h 3.75 v -32.5 z"/>
-</g>
-<g style="opacity:.8;stroke:none" id="slider-focus-topleft" transform="matrix(0.53333333,0,0,0.53333333,174.16679,562.74915)">
-<path style="fill-rule:evenodd;fill-opacity:0" id="path2110" d="m 28.7501,42.5014 c -4.37503,0 -6.25004,1.87501 -6.25004,6.25004 l 6.25,.0001 Z "/>
-<path style="fill:#f57745;line-height:normal;fill-opacity:.667;color:#000" id="path2112" d="m 28.75,41.2516 c -4.37497,0 -7.5,3.125 -7.5,7.5 h 3.74977 c 0,-2.34376 1.40625,-3.75 3.75028,-3.75 z "/>
-</g>
 <rect width="5" x="20" y="0" height="5" style="fill-rule:evenodd;stroke:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:3" id="expand-slider-focus"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-left" id="slider-focus-right" transform="matrix(-1,0,0,1,411.5,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-topright" transform="matrix(-1,0,0,1,411.50015,0)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-left" id="slider-focus-top" transform="rotate(90,205.75,605)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-left" id="slider-focus-bottom" transform="rotate(-90,205.75002,605)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomleft" transform="rotate(-90,205.75012,605)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomright" transform="rotate(-180,205.75007,605)"/>
 <g style="fill:#b0afae;stroke:none" id="tab-focused-topleft" transform="translate(121.5,580)">
 <path style="opacity:0;fill:#000;fill-rule:evenodd" id="path2187" d="m -47.5,183.5 v -6 h 6 v 6 z"/>
 <path style="fill:#b4b4b4;line-height:normal;color:#000" id="path2189" d="m -45.5,183.5 c 0,-2.25 1.75,-4 4,-4 v 1 c -1.75,0 -3,1.25 -3,3 z"/>
@@ -946,18 +932,6 @@
 <path style="fill:#e95420;line-height:normal;color:#000;stroke-width:1.414" id="path2213" d="m 251,49.4966 h -32.5 v -1.99887 h 32.5 Z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#floating-tab-focused-bottomleft" id="floating-tab-focused-bottomright" transform="matrix(-1,0,0,1,612,0)"/>
-<g style="opacity:.7;stroke:none;color:#000" id="focus-top" transform="translate(249.5,745)">
-<path style="fill-opacity:0" id="focus-top0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
-<g style="fill-opacity:.137" id="g5475">
-<path style="opacity:1;fill:#b4b4b4;fill-opacity:1" id="path4914" d="m 90,109.5 h 2.5 v -2 H 90 Z"/>
-<path style="opacity:1;fill:#b4b4b4;fill-opacity:1" id="path4922-6" d="m 95,109.5 h 2.5 v -2 H 95 Z"/>
-<path style="opacity:1;fill:#b4b4b4;fill-opacity:1" id="path4924-2" d="m 99.75,109.5 h 2.5 v -2 h -2.5 z"/>
-<path style="opacity:1;fill:#b4b4b4;fill-opacity:1" id="path4926" d="m 105,109.5 h 2.5 v -2 H 105 Z"/>
-</g>
-</g>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-right" transform="rotate(90,349.5,864.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-bottom" transform="rotate(180,349.5,864.5)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#focus-top" id="focus-left" transform="rotate(-90,349.5,864.5)"/>
 <g style="fill:#3daee9;fill-rule:evenodd;stroke:none" id="group-focus-left" transform="matrix(0.66666667,0,0,1,318.33333,-296.5)">
 <rect width="6" x="-106" y="-1148.5" height="30" style="fill-opacity:0" id="rect2029" transform="scale(-1)"/>
 <rect width="1.5" x="100" y="1118.5" height="30" style="fill:#f57745;fill-opacity:.588" id="rect2031"/>
@@ -1509,6 +1483,16 @@
 <rect width="2.5" x="107.5" y="878.75" height="2.5" id="common-focused-right"/>
 <rect width="2.5" x="107.5" y="881.25" height="2.5" id="common-focused-bottomright"/>
 </g>
+<rect width="2.5" x="333" y="861.5" height="2.5" style="fill:#f5b29b;fill-opacity:.31" id="focus-bottomleft"/>
+<rect width="2.5" x="335.5" y="861.5" height="2.5" style="fill:#f3a489;fill-opacity:.55" id="focus-bottom"/>
+<rect width="2.5" x="338" y="861.5" height="2.5" style="fill:#f5b29b;fill-opacity:.31" id="focus-bottomright"/>
+<g style="fill:#f3a489;fill-opacity:.55">
+<rect width="2.5" x="333" y="859" height="2.5" id="focus-left"/>
+<rect width="2.5" x="338" y="859" height="2.5" id="focus-right"/>
+</g>
+<rect width="2.5" x="333" y="856.5" height="2.5" style="fill:#f5b29b;fill-opacity:.31" id="focus-topleft"/>
+<rect width="2.5" x="335.5" y="856.5" height="2.5" style="fill:#f3a489;fill-opacity:.55" id="focus-top"/>
+<rect width="2.5" x="338" y="856.5" height="2.5" style="fill:#f5b29b;fill-opacity:.31" id="focus-topright"/>
 </g>
 </g>
 </svg>
