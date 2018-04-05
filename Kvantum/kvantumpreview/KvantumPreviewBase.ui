@@ -2147,6 +2147,9 @@ check box</string>
           <property name="text">
            <string>Header 2</string>
           </property>
+          <property name="icon">
+           <iconset theme="folder"/>
+          </property>
          </column>
          <column>
           <property name="text">
@@ -2467,6 +2470,9 @@ check box</string>
            <column>
             <property name="text">
              <string>Column 0</string>
+            </property>
+            <property name="icon">
+             <iconset theme="folder"/>
             </property>
            </column>
            <column>

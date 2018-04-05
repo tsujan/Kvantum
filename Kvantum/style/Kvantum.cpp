@@ -9593,12 +9593,7 @@ void Style::drawControl(ControlElement element,
 
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
-        const KvIconMode iconmode =
-              (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? Selected :
-              (option->state & State_Sunken) ? Active :
-              (option->state & State_MouseOver) ? Active : Normal
-            : Disabled;
+        bool isInactive(status.contains("-inactive"));
         renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
@@ -9616,8 +9611,8 @@ void Style::drawControl(ControlElement element,
                     opt->icon.isNull() ? opt->textAlignment | Qt::AlignVCenter : opt->textAlignment,
                     opt->text,QPalette::ButtonText,
                     state,
-                    status.contains("-inactive"),
-                    getPixmapFromIcon(opt->icon,iconmode,iconstate,iconSize),
+                    isInactive,
+                    getPixmapFromIcon(opt->icon,getIconMode(state,isInactive,lspec),iconstate,iconSize),
                     iconSize);
       }
 

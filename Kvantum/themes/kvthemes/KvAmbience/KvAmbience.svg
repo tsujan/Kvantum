@@ -1256,4 +1256,7 @@
 <rect width="1" x="24.75" y="755" height="10" style="opacity:.25" id="rect1813"/>
 </g>
 </g>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-focused" id="item-checkbox-focused" transform="translate(0,-16)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-checked-focused" id="item-checkbox-checked-focused" transform="translate(0,-16)"/>
+<use width="100%" x="0" y="0" height="100%" xlink:href="#menu-checkbox-tristate-focused" id="item-checkbox-tristate-focused" transform="translate(0,-16)"/>
 </svg>
