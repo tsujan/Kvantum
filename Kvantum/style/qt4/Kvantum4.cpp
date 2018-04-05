@@ -62,7 +62,7 @@
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
-#define MIN_CONTRAST 78
+#define MIN_CONTRAST_RATIO 3.5
 
 namespace Kvantum
 {
@@ -127,10 +127,28 @@ static void setAppFont()
   }
 }
 
+// Taken from https://www.w3.org/TR/2008/REC-WCAG20-20081211/.
+// It isn't related to HSL lightness.
+static inline qreal luminance(QColor col)
+{
+  /* all divided by 255 */
+  qreal R = col.redF();
+  qreal G = col.greenF();
+  qreal B = col.blueF();
+
+  if(R <= 0.03928) R = R/12.92; else R = qPow((R + 0.055)/1.055, 2.4);
+  if(G <= 0.03928) G = G/12.92; else G = qPow((G + 0.055)/1.055, 2.4);
+  if(B <= 0.03928) B = B/12.92; else B = qPow((B + 0.055)/1.055, 2.4);
+
+  return 0.2126*R + 0.7152*G + 0.0722*B;
+}
+
 static inline bool enoughContrast (QColor col1, QColor col2)
 {
   if (!col1.isValid() || !col2.isValid()) return false;
-  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
+  qreal rl1 = luminance(col1);
+  qreal rl2 = luminance(col2);
+  if ((qMax(rl1,rl2) + 0.05) / (qMin(rl1,rl2) + 0.05) < (qreal)MIN_CONTRAST_RATIO)
     return false;
   return true;
 }
@@ -5339,8 +5357,11 @@ QIcon::Mode Style::getIconMode(int state, label_spec lspec) const
   else if (state == 4)
     txtCol = getFromRGBA(lspec.toggleColor);
 
-  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
+  if (txtCol.isValid()
+      && !enoughContrast(txtCol, QApplication::palette().color(QPalette::Window)))
+  {
     icnMode = QIcon::Selected;
+  }
 
   return icnMode;
 }
@@ -6893,48 +6914,57 @@ void Style::drawControl(ControlElement element,
             QColor normalColor = getFromRGBA(lspec.normalColor);
             QColor focusColor = getFromRGBA(lspec.focusColor);
             QColor pressColor = getFromRGBA(lspec.pressColor);
-            if (state == 1 && normalColor.isValid())
+            if (state == 1)
             {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, normalColor);
-              o.palette = palette;
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
-            }
-            else if (state == 2 && focusColor.isValid())
-            {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, focusColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && !opt->icon.isNull())
+              if (normalColor.isValid())
               {
-                QPixmap px = tintedPixmap(option,
-                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                          tintPercentage);
-                o.icon = QIcon(px);
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, normalColor);
+                o.palette = palette;
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
             }
-            else if (state == 3 && pressColor.isValid())
+            else if (state == 2)
             {
-              QStyleOptionToolBox o(*opt);
-              QPalette palette(opt->palette);
-              palette.setColor(QPalette::ButtonText, pressColor);
-              o.palette = palette;
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+              if (focusColor.isValid())
               {
-                QPixmap px = tintedPixmap(option,
-                                          opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
-                                          tintPercentage);
-                o.icon = QIcon(px);
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, focusColor);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0 && !opt->icon.isNull())
+                {
+                  QPixmap px = tintedPixmap(option,
+                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                            tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
               }
-              QCommonStyle::drawControl(element,&o,painter,widget);
-              return;
+            }
+            else if (state == 3)
+            {
+              if (pressColor.isValid())
+              {
+                QStyleOptionToolBox o(*opt);
+                QPalette palette(opt->palette);
+                palette.setColor(QPalette::ButtonText, pressColor);
+                o.palette = palette;
+                qreal tintPercentage = hspec_.tint_on_mouseover;
+                if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+                {
+                  QPixmap px = tintedPixmap(option,
+                                            opt->icon.pixmap(pixelMetric(QStyle::PM_SmallIconSize,opt,widget)),
+                                            tintPercentage);
+                  o.icon = QIcon(px);
+                }
+                QCommonStyle::drawControl(element,&o,painter,widget);
+                return;
+              }
             }
           }
           else

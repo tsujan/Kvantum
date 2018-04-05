@@ -1115,6 +1115,9 @@ check box</string>
           <property name="text">
            <string>Standard combo box 1</string>
           </property>
+          <property name="icon">
+           <iconset theme="folder"/>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -2578,6 +2581,9 @@ check box</string>
               <height>22</height>
              </rect>
             </property>
+            <attribute name="icon">
+             <iconset theme="folder"/>
+            </attribute>
             <attribute name="label">
              <string>Page 2</string>
             </attribute>

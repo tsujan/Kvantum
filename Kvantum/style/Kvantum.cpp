@@ -75,7 +75,7 @@
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
-#define MIN_CONTRAST 78
+#define MIN_CONTRAST_RATIO 3.5
 #define ANIMATION_FRAME 40 // in ms
 #define OPACITY_STEP 20 // percent
 
@@ -226,10 +226,28 @@ static void setAppFont()
   }
 }
 
+// Taken from https://www.w3.org/TR/2008/REC-WCAG20-20081211/.
+// It isn't related to HSL lightness.
+static inline qreal luminance(QColor col)
+{
+  /* all divided by 255 */
+  qreal R = col.redF();
+  qreal G = col.greenF();
+  qreal B = col.blueF();
+
+  if(R <= 0.03928) R = R/12.92; else R = qPow((R + 0.055)/1.055, 2.4);
+  if(G <= 0.03928) G = G/12.92; else G = qPow((G + 0.055)/1.055, 2.4);
+  if(B <= 0.03928) B = B/12.92; else B = qPow((B + 0.055)/1.055, 2.4);
+
+  return 0.2126*R + 0.7152*G + 0.0722*B;
+}
+
 static inline bool enoughContrast (QColor col1, QColor col2)
 {
   if (!col1.isValid() || !col2.isValid()) return false;
-  if (qAbs(qGray(col1.rgb()) - qGray(col2.rgb())) < MIN_CONTRAST)
+  qreal rl1 = luminance(col1);
+  qreal rl2 = luminance(col2);
+  if ((qMax(rl1,rl2) + 0.05) / (qMin(rl1,rl2) + 0.05) < (qreal)MIN_CONTRAST_RATIO)
     return false;
   return true;
 }
@@ -6663,7 +6681,8 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
       txtCol = getFromRGBA(lspec.toggleColor);
   }
 
-  if (enoughContrast(txtCol, QApplication::palette().color(QPalette::WindowText)))
+  if (txtCol.isValid() // because the lack of contrast should be checked
+      && !enoughContrast(txtCol, QApplication::palette().color(QPalette::Window)))
   {
     icnMode = state == 0 ? DisabledSelected : Selected;
   }
@@ -8360,12 +8379,10 @@ void Style::drawControl(ControlElement element,
             else
               col = getFromRGBA(lspec.focusColor);
             if (col.isValid())
-            {
               tBoxPalette.setColor(QPalette::ButtonText, col);
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && !opt->icon.isNull())
-                px = tintedPixmap(option, px,tintPercentage);
-            }
+            qreal tintPercentage = hspec_.tint_on_mouseover;
+            if (tintPercentage > 0 && !opt->icon.isNull())
+              px = tintedPixmap(option, px,tintPercentage);
           }
           else if (state == 3)
           {
@@ -8378,12 +8395,10 @@ void Style::drawControl(ControlElement element,
             else
               col = getFromRGBA(lspec.pressColor);
             if (col.isValid())
-            {
               tBoxPalette.setColor(QPalette::ButtonText, col);
-              qreal tintPercentage = hspec_.tint_on_mouseover;
-              if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
-                px = tintedPixmap(option, px,tintPercentage);
-            }
+            qreal tintPercentage = hspec_.tint_on_mouseover;
+            if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
+              px = tintedPixmap(option, px,tintPercentage);
             if (styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
             {
               QFont f(painter->font());

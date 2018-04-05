@@ -35,6 +35,7 @@ V0.10.6
  * An optional "-tickless" element for the slider handle when the slider has no tick marks.
  * Optionally separate checkboxes in view-items.
  * Updated RTL header drawing because of a recent change (or issue?) in Qt5.
+ * Standardized the color contrast calculation according to "Web Content Accessibility Guidelines".
 
 V0.10.5
 ---------

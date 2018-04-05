@@ -65,7 +65,7 @@
 <radialGradient fx="52.083897" fy="51.595207" cx="52.083897" cy="51.595207" gradientTransform="matrix(-2.1666667,0,0,-1.6666659,165.34847,139.99194)" r="3" id="radialGradient1987" xlink:href="#linearGradient2643-6" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="54.821804" fy="52.744892" cx="54.821804" cy="52.744892" gradientTransform="matrix(1,0,0,-2,34.178246,157.49005)" r="3" id="radialGradient1954" xlink:href="#linearGradient2643-6" gradientUnits="userSpaceOnUse"/>
 </defs>
-<g style="color:#000;fill:none;stroke-width:1.4;stroke:#646464">
+<g style="color:#000;fill:none;stroke-width:1.4;stroke:#8c8c8c">
 <rect width="14.600261" x="192.69987" y="-215.30013" rx="2" height="14.600261" ry="2" id="checkbox-normal" transform="scale(1,-1)"/>
 <ellipse cx="31" cy="208" rx="7.3001299" ry="7.3001304" id="radio-normal"/>
 </g>
@@ -211,26 +211,17 @@
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-right-focused" transform="rotate(-90,116.8465,319.34649)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-left-normal" transform="rotate(90,62.75,461.55701)"/>
 <use width="450" x="0" y="0" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-left-focused" transform="rotate(90,105.25,459.75)"/>
-<g style="fill-rule:evenodd">
-<g style="stroke:none;stroke-linejoin:round">
+<g style="stroke:none">
+<g style="fill-rule:evenodd;stroke-linejoin:round">
 <g style="fill-opacity:0;stroke-width:1.885">
 <rect width="10" x="350" y="1112" height="10" id="grip-focused"/>
 <rect width="10" x="365" y="1112" height="10" id="grip-pressed"/>
 </g>
 <rect width="5" x="210" y="1069" height="1" style="fill:#5a5a5a" id="slider-tick-normal"/>
 </g>
-<g id="mdi-menu-normal" transform="translate(5,0)">
-<rect width="32" x="399" y="519" height="32" style="stroke-opacity:.784;fill:#666;stroke:none;fill-opacity:0;stroke-width:5" id="rect5101"/>
-<g style="fill:none" id="g608">
-<g style="stroke-opacity:.784;stroke:#fff;stroke-width:4" id="g610">
-<path id="path5113" d="m 403.75,524.15 24.75,0 0,24.75 -24.75,0 z"/>
-<path id="path5115" d="m 403.8125,533.4 24.625,0"/>
-</g>
-<g style="stroke:#5a5a5a;stroke-width:3.5" id="g614">
-<path style="stroke:#b4b4b4" id="path5107" d="m 402.75,522.75 24.75,0 0,24.75 -24.75,0 z"/>
-<path style="stroke:#b4b4b4" id="path5109" d="m 402.8125,532 24.625,0"/>
-</g>
-</g>
+<g id="mdi-menu-normal">
+<rect width="32" x="404" y="519" height="32" style="fill:#666;fill-rule:evenodd;fill-opacity:0;stroke-width:5" id="rect5101"/>
+<path style="fill:#f0f0f0;color:#000;stroke-width:3.5" id="path5107" d="M 406.5,521.5 V 549 h 27 v -27.5 z m 3,3 h 21 v 5.5 h -21 z m 0,8.5 h 21 v 13 h -21 z"/>
 </g>
 </g>
 <g style="fill-rule:evenodd;stroke:none" id="slider-normal-topleft">
@@ -887,11 +878,9 @@
 <path style="fill:#00bcd4" id="path1560" d="m 352.1,-207 h 6.8 c 0.8864,0 1.6,0.669 1.6,1.5 0,0.831 -0.7136,1.5 -1.6,1.5 h -6.8 c -0.8864,0 -1.6,-0.669 -1.6,-1.5 0,-0.831 0.7136,-1.5 1.6,-1.5 z" transform="scale(1,-1)"/>
 </g>
 </g>
-<g style="fill:none;stroke-width:1.4">
-<ellipse cx="69" cy="208" rx="7.3001299" ry="7.3001304" style="stroke:#828282" id="radio-focused"/>
-<ellipse cx="69" cy="226" rx="7.3001299" ry="7.3001304" style="stroke:#646464" id="menu-radio-focused"/>
-<rect width="14.600261" x="234.69987" y="-215.30013" rx="2" ry="2" height="14.600261" style="stroke:#828282" id="checkbox-focused" transform="scale(1,-1)"/>
-<rect width="14.600261" x="234.69987" y="-235.30013" rx="2" height="14.600261" ry="2" style="stroke:#646464" id="menu-checkbox-focused" transform="scale(1,-1)"/>
+<g style="stroke-width:1.4;fill:none;stroke:#6e6e6e">
+<ellipse cx="69" cy="208" rx="7.3001299" ry="7.3001304" id="radio-focused"/>
+<rect width="14.600261" x="234.69987" y="-215.30013" rx="2" ry="2" height="14.600261" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="mdi-close-normal" transform="translate(62,79)">
@@ -910,20 +899,20 @@
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="mdi-maximize-normal" transform="translate(-184,79)">
 <circle cx="225" cy="460" style="fill:#fff;stroke-linejoin:round;stroke-linecap:round" r="16" id="circle1740"/>
-<path style="fill:#505050" id="path1742" d="m 222.5,448.5 v 9 h -9 v 5 h 9 v 9 h 5 v -9 h 9 v -5 h -9 v -9 z "/>
+<path style="fill:#505050" id="path1742" d="m 222.5,449.5 v 8 H 214 v 5 h 8.5 v 8.5 h 5 v -8.5 h 8.5 v -5 h -8.5 v -8 z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="mdi-minimize-normal" transform="translate(-20,79)">
 <circle cx="225" cy="460" style="fill:#fff;stroke-linejoin:round;stroke-linecap:round" id="circle1746" r="16"/>
-<path style="fill:#505050" id="path1748" d="m 213.5,457.5 v 5 l 23,7e-5 v -5 z"/>
+<path style="fill:#505050" id="path1748" d="m 214,457.5 v 5 l 22,7e-5 v -5 z"/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#mdi-minimize-normal" id="mdi-shade-normal" transform="translate(150)"/>
 <g style="stroke:none;fill-rule:evenodd" id="mdi-maximize-focused" transform="translate(-184,127)">
 <circle cx="225" cy="460" style="fill:#0cb400;stroke-linejoin:round;stroke-linecap:round" id="circle1775" r="16"/>
-<path style="fill:#fff" id="path1777" d="m 222,448.5 v 8.6 H 213.5 v 5.9 l 8.5,7e-5 V 471.5 H 228 v -8.5 h 8.5 v -5.9 H 228 v -8.6 z"/>
+<path style="fill:#fff" id="path1777" d="m 222,449 v 8.1 h -8 v 5.9 l 8,7e-5 V 471 h 6 v -8 h 8 v -5.9 h -8 V 449 Z"/>
 </g>
 <g style="stroke:none;fill-rule:evenodd" id="mdi-minimize-focused" transform="translate(-20,127)">
 <circle cx="225" cy="460" style="fill:#ff7a00;stroke-linejoin:round;stroke-linecap:round" r="16" id="circle1793"/>
-<path style="fill:#fff" id="path1795" d="m 213.5,457 v 6 l 23,7e-5 v -6 z"/>
+<path style="fill:#fff" id="path1795" d="m 214,457 v 6 h 22 v -6 z "/>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#mdi-minimize-focused" id="mdi-shade-focused" transform="translate(150)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#mdi-minimize-focused" id="mdi-minimize-pressed" transform="translate(0,38)"/>
