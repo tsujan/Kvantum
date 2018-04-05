@@ -33,6 +33,8 @@ V0.10.6
  * Added a key for bold active tab text.
  * Added a key for the degree of boldness (from 1 to 5; 3 means normally bold).
  * An optional "-tickless" element for the slider handle when the slider has no tick marks.
+ * Optionally separate checkboxes in view-items.
+ * Updated RTL header drawing because of a recent change (or issue?) in Qt5.
 
 V0.10.5
 ---------

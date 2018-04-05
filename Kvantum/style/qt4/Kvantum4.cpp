@@ -10981,6 +10981,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       /* make exception for menuitems and viewitems */
       if (isLibreoffice_
           || qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+          || qstyleoption_cast<const QStyleOptionViewItem*>(option)
           || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),

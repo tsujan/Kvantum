@@ -4600,29 +4600,64 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (option->state & State_Enabled)
       {
         QString suffix, prefix;
-        if (option->state & State_MouseOver)
+        if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
         {
-          if (option->state & State_On)
-            suffix = "-checked-focused";
-          else if (option->state & State_NoChange)
-            suffix = "-tristate-focused";
+          if (option->state & State_Selected)
+          {
+            if (option->state & State_On)
+              suffix = "-checked-focused";
+            else if (option->state & State_NoChange)
+              suffix = "-tristate-focused";
+            else
+              suffix = "-focused";
+          }
           else
-            suffix = "-focused";
+          {
+            if (option->state & State_On)
+              suffix = "-checked-normal";
+            else if (option->state & State_NoChange)
+              suffix = "-tristate-normal";
+            else
+              suffix = "-normal";
+          }
         }
         else
         {
-          if (option->state & State_On)
-            suffix = "-checked-normal";
-          else if (option->state & State_NoChange)
-            suffix = "-tristate-normal";
+          if (option->state & State_MouseOver) // covers menu checkboxes too
+          {
+            if (option->state & State_On)
+              suffix = "-checked-focused";
+            else if (option->state & State_NoChange)
+              suffix = "-tristate-focused";
+            else
+              suffix = "-focused";
+          }
           else
-            suffix = "-normal";
+          {
+            if (option->state & State_On)
+              suffix = "-checked-normal";
+            else if (option->state & State_NoChange)
+              suffix = "-tristate-normal";
+            else
+              suffix = "-normal";
+          }
         }
-        bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate
-            && themeRndr_ && themeRndr_->isValid()
-            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
-          prefix = "menu-"; // make exception for menuitems
+        bool animate(true);
+        if (themeRndr_ && themeRndr_->isValid())
+        {
+          if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+          {
+            animate = false;
+            if (themeRndr_->elementExists("menu-"+ispec.element+suffix))
+              prefix = "menu-"; // make exception for menuitems
+          }
+          else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
+          {
+            animate = false;
+            if (themeRndr_->elementExists("item-"+ispec.element+suffix))
+              prefix = "item-"; // make exception for viewitems
+          }
+        }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
         if (isLibreoffice_ && suffix == "-checked-focused"
@@ -4679,10 +4714,19 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix = "-tristate-normal";
         else
           suffix = "-normal";
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-            && themeRndr_ && themeRndr_->isValid()
-            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
-          prefix = "menu-";
+        if (themeRndr_ && themeRndr_->isValid())
+        {
+          if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+          {
+            if (themeRndr_->elementExists("menu-"+ispec.element+suffix))
+              prefix = "menu-";
+          }
+          else if (qstyleoption_cast<const QStyleOptionViewItem*>(option)
+                   && themeRndr_->elementExists("item-"+ispec.element+suffix))
+          {
+            prefix = "item-";
+          }
+        }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
@@ -9364,11 +9408,14 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_HeaderSection : {
+      /* WARNING: There is an issue in Qt5, which didn't exist in Qt4: The horizontal
+                  position is always from left to right, so that, for example,
+                  "QStyleOptionHeader::Beginning" is the leftmost section with RTL
+                  too. This isn't logical but simplifies the calculation a lot. */
       const QString group = "HeaderSection";
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
 
-      bool rtl(option->direction == Qt::RightToLeft);
       bool horiz = true;
       QRect sep;
       if (const QStyleOptionHeader *opt = qstyleoption_cast<const QStyleOptionHeader*>(option))
@@ -9377,32 +9424,20 @@ void Style::drawControl(ControlElement element,
         switch (opt->position) {
           case QStyleOptionHeader::End:
             fspec.isAttached = true;
-            fspec.HPos = rtl ? -1 : 1;
-            if (!horiz && rtl) fspec.HPos = 1;
+            fspec.HPos = 1;
             break;
           case QStyleOptionHeader::Beginning:
             fspec.isAttached = true;
-            fspec.HPos = rtl ? 1 : -1;
+            fspec.HPos = -1;
             if (horiz)
             {
-              if (rtl)
-              {
-                sep.setRect(x,
-                            y+fspec.top,
-                            fspec.left,
-                            h-fspec.top-fspec.bottom);
-              }
-              else
-              {
-                sep.setRect(x+w-fspec.right,
-                            y+fspec.top,
-                            fspec.right,
-                            h-fspec.top-fspec.bottom);
-              }
+              sep.setRect(x+w-fspec.right,
+                          y+fspec.top,
+                          fspec.right,
+                          h-fspec.top-fspec.bottom);
             }
             else
             {
-              if (rtl) fspec.HPos = -1;
               sep.setRect(x+fspec.top, // -> CT_HeaderSection
                           y+h-fspec.right,
                           w-fspec.top-fspec.bottom,
@@ -9414,20 +9449,10 @@ void Style::drawControl(ControlElement element,
             fspec.HPos = 0;
             if (horiz)
             {
-              if (rtl)
-              {
-                sep.setRect(x,
-                            y+fspec.top,
-                            fspec.left,
-                            h-fspec.top-fspec.bottom);
-              }
-              else
-              {
-                sep.setRect(x+w-fspec.right,
-                            y+fspec.top,
-                            fspec.right,
-                            h-fspec.top-fspec.bottom);
-              }
+              sep.setRect(x+w-fspec.right,
+                          y+fspec.top,
+                          fspec.right,
+                          h-fspec.top-fspec.bottom);
             }
             else
             {
@@ -9470,21 +9495,9 @@ void Style::drawControl(ControlElement element,
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
       if (themeRndr_ && themeRndr_->isValid() && !themeRndr_->elementExists("header-separator"))
-        renderElement(painter, fspec.element + "-" + status + (rtl ? "-left" : "-right"), sep);
+        renderElement(painter, fspec.element + "-" + status + "-right", sep);
       else
-      {
-        if (horiz && rtl)
-        { // just for the best alignment (WARNING: horizontal gradients will be reversed)
-          painter->save();
-          QTransform m;
-          m.translate(2*x+fspec.left, 0);
-          m.scale(-1,1);
-          painter->setTransform(m, true);
-        }
         renderElement(painter,"header-separator",sep);
-        if (horiz && rtl)
-          painter->restore();
-      }
       if (!(option->state & State_Enabled))
         painter->restore();
       if (!horiz)
@@ -12856,7 +12869,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_DefaultFrameWidth : {
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
-        return 0; // not needed but logical (->CT_PushButton)
+        return 0; // not needed but logical (-> CT_PushButton)
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
                && tspec_.combo_menu)
       {
@@ -12864,6 +12877,12 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
                       pixelMetric(PM_MenuVMargin,option,widget));
       }
       const frame_spec fspec = getFrameSpec("GenericFrame");
+      /* NOTE: There is an old RTL bug in Qt, due to which, some frames -- especially
+               those inside splitters -- may be cut at the right with RTL. Unfortunately,
+               here the layout direction may not be reported correctly. As a workaround,
+               we could add a 1-px invisible frame and draw the real frame inside it at
+               PE_Frame. However, the RTL left frame would still be positioned with a
+               1-px offset. So, the width isn't increased by 1 px here. */
       return qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right));
     }
 
@@ -13313,8 +13332,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget)*pixelRatio_,
                     tspec_.check_size);
       }
-      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+          || qstyleoption_cast<const QStyleOptionViewItem*>(option))
+      {
         return qMin(pixelMetric(PM_SmallIconSize), tspec_.check_size);
+      }
       return tspec_.check_size;
     }
 
