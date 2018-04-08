@@ -12449,6 +12449,8 @@ void Style::drawComplexControl(ComplexControl control,
           suffix = "-inactive";
 
         renderElement(painter,"dial"+suffix,dial);
+        if (opt->state & State_HasFocus)
+          renderElement(painter,"dial-focus",dial);
         renderElement(painter,"dial-handle"+suffix,handle);
 
         if (const QDial *d = qobject_cast<const QDial*>(widget))

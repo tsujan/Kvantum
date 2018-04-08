@@ -22,6 +22,7 @@ transient_groove=true
 slider_width=4
 slider_handle_width=24
 slider_handle_length=20
+tickless_slider_handle_size=20
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
