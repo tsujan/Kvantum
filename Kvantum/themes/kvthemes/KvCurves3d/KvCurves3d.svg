@@ -2,7 +2,7 @@
 <defs id="defs5">
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5215" y1="262.5" x1="7" y2="262.5" x2="-35.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5213" y1="-7" x1="262.5" y2="35.5" x2="262.5" gradientUnits="userSpaceOnUse"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1764" y1="970" x1="69.5" y2="897.5" x2="69.5" gradientUnits="userSpaceOnUse"/>
+<linearGradient gradientTransform="translate(0,-48)" xlink:href="#linearGradient5020-1" id="linearGradient1764" y1="970" x1="69.5" y2="897.5" x2="69.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient9025" y1="92" x1="14.5" y2="116" gradientUnits="userSpaceOnUse" x2="14.5"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient9023" y1="92" x1="14.5" y2="116" gradientUnits="userSpaceOnUse" x2="14.5"/>
 <linearGradient gradientTransform="translate(47.5,0)" xlink:href="#linearGradient6250-8" id="linearGradient8962" y1="13.75" x1="253.75" y2="56.25" gradientUnits="userSpaceOnUse" x2="253.75"/>
@@ -252,7 +252,6 @@
 <path style="fill:url(#linearGradient8038)" id="titlebar-focused" d="m 269,799 0,32 32,0 0,-32 z"/>
 <g style="fill-rule:evenodd">
 <path style="fill:#dc0003" id="tab-tear" d="m 230.5,805.4201 h 15 v 15 h -15 z"/>
-<rect width="45" x="47" y="870" rx="22.5" height="45" ry="22.5" style="fill:#464646" id="dial"/>
 <rect width="8" x="363.57144" y="887.26843" height="13" style="opacity:0;fill:#636363" id="grip-normal"/>
 <path style="opacity:.85;fill:#282828" id="menu-normal" d="m 121.2579,703.7533 48,0 0,48 -48,0 z"/>
 </g>
@@ -1165,10 +1164,17 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-topright" transform="matrix(-1,0,0,1,227,0)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomleft" transform="matrix(1,0,0,-1,0,1312.5)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomright" transform="rotate(-180,113.5,656.25)"/>
-<path style="fill:url(#linearGradient1764);fill-rule:evenodd;stroke:none" id="dial-focus" d="m 69.5,918 c -12.465,0 -22.5,10.035 -22.5,22.5 0,12.465 10.035,22.5 22.5,22.5 12.465,0 22.5,-10.035 22.5,-22.5 0,-12.465 -10.035,-22.5 -22.5,-22.5 z  m 0,1 c 11.911,0 21.5,9.589 21.5,21.5 0,11.911 -9.589,21.5 -21.5,21.5 -11.911,0 -21.5,-9.589 -21.5,-21.5 0,-11.911 9.589,-21.5 21.5,-21.5 z "/>
+<g style="stroke:none;fill-rule:evenodd" id="dial">
+<rect width="45" x="47" y="870" rx="22.5" ry="22.5" height="45" style="fill:#393939" id="dial0"/>
+<path style="fill:url(#linearGradient1764)" id="dial1" d="M 69.5,870 C 57.035,870 47,880.035 47,892.5 47,904.965 57.035,915 69.5,915 81.965,915 92,904.965 92,892.5 92,880.035 81.965,870 69.5,870 Z m 0,1 C 81.411,871 91,880.589 91,892.5 91,904.411 81.411,914 69.5,914 57.589,914 48,904.411 48,892.5 48,880.589 57.589,871 69.5,871 Z"/>
+</g>
 <g id="dial-notches">
 <path style="opacity:.001" id="rect2179" d="m 165,865 h 45 v 45 h -45 z"/>
 <path style="fill:#afafaf" id="rect1857" d="m 177.6152,868.3809 l -1.7305,1 1.75,3.0312 1.7305,-1 -1.75,-3.0312 z  m 19.7695,0 l -1.75,3.0312 1.7305,1 1.75,-3.0312 -1.7305,-1 z  m -31.3848,18.1191 v 2 h 3.5 v -2 h -3.5 z  m 39.5,0 v 2 h 3.5 v -2 h -3.5 z  m -27.8652,16.0879 l -1.75,3.0312 1.7305,1 1.75,-3.0312 -1.7305,-1 z  m 19.7305,0 l -1.7305,1 1.75,3.0312 1.7305,-1 -1.75,-3.0312 z "/>
 <path style="fill:#aaa" id="path1861" d="m 185.5019,866.0918 l -.498,.0527 .2617,2.4863 .4961,-.0527 -.2598,-2.4863 z  m 3.9961,0 l -.2598,2.4863 .4961,.0527 .2617,-2.4863 -.498,-.0527 z  m -8.4043,.8828 l -.4746,.1543 .7715,2.3789 .4766,-.1543 -.7734,-2.3789 z  m 12.8125,0 l -.7734,2.3789 .4766,.1543 .7715,-2.3789 -.4746,-.1543 z  m -20.6074,4.3809 l -.3711,.334 1.6738,1.8574 .3711,-.334 -1.6738,-1.8574 z  m 28.4023,0 l -1.6738,1.8574 .3711,.334 1.6738,-1.8574 -.3711,-.334 z  m -31.4473,3.3047 l -.2949,.4043 2.0234,1.4707 .293,-.4062 -2.0215,-1.4688 z  m 34.4922,0 l -2.0215,1.4688 .293,.4062 2.0234,-1.4707 -.2949,-.4043 z  m -36.7852,3.8672 l -.2031,.457 2.2832,1.0156 .2031,-.457 -2.2832,-1.0156 z  m 39.0781,0 l -2.2832,1.0156 .2031,.457 2.2832,-1.0156 -.2031,-.457 z  m -40.5176,4.2578 l -.1035,.4902 2.4453,.5195 .1035,-.4902 -2.4453,-.5195 z  m 41.957,0 l -2.4453,.5195 .1035,.4902 2.4453,-.5195 -.1035,-.4902 z  m -39.6152,8.4199 l -2.4453,.5195 .1035,.4902 2.4453,-.5195 -.1035,-.4902 z  m 37.2734,0 l -.1035,.4902 2.4453,.5195 .1035,-.4902 -2.4453,-.5195 z  m -36.0957,3.7949 l -2.2832,1.0156 .2031,.457 2.2832,-1.0156 -.2031,-.457 z  m 34.918,0 l -.2031,.457 2.2832,1.0156 .2031,-.457 -2.2832,-1.0156 z  m -32.9766,3.4648 l -2.0234,1.4707 .2949,.4043 2.0215,-1.4688 -.293,-.4062 z  m 31.0352,0 l -.293,.4062 2.0215,1.4688 .2949,-.4043 -2.0234,-1.4707 z  m -28.416,2.9883 l -1.6738,1.8574 .3711,.334 1.6738,-1.8574 -.3711,-.334 z  m 25.7969,0 l -.3711,.334 1.6738,1.8574 .3711,-.334 -1.6738,-1.8574 z "/>
+</g>
+<g style="fill-rule:evenodd;stroke:none" id="dial-focus" transform="translate(-155.5,327)">
+<path style="stroke-linejoin:round;fill-opacity:0;stroke-linecap:round" id="rect1781" d="m 202.5,592.5 h 45 v 45 h -45 z"/>
+<path style="fill:#434345" id="rect1764" d="m 225,593.5 c -11.911,0 -21.5,9.589 -21.5,21.5 0,11.911 9.589,21.5 21.5,21.5 11.911,0 21.5,-9.589 21.5,-21.5 0,-11.911 -9.589,-21.5 -21.5,-21.5 z"/>
 </g>
 </svg>
