@@ -3643,7 +3643,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix.append("-inactive");
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
-          painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
       }
       else
@@ -3704,7 +3704,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix.append("-inactive");
         if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
-          painter->fillRect(option->rect, option->palette.brush(QPalette::Window));
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
       }
       else
@@ -5604,7 +5604,7 @@ void Style::drawControl(ControlElement element,
                                  Qt::AlignLeft | Qt::AlignVCenter,
                                  QSize(iw,ih),
                                  isLibreoffice_ ?
-                                   opt->rect.adjusted(2,-2,0,0) // FIXME why?
+                                   opt->rect.adjusted(qMax(-opt->rect.x(),0),-2,0,0) // FIXME why?
                                    : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
                                                                             0,
                                                                             rtl ? -lspec.right : 0,

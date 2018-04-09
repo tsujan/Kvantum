@@ -143,6 +143,7 @@ text.margin.right=3
 frame.expansion=14
 min_height=+0.2font
 min_width=+0.2font
+text.boldness=2
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -179,6 +180,7 @@ interior=false
 text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.bold=true
+text.boldness=2
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
@@ -253,6 +255,7 @@ text.normal.color=#3D3D3D
 text.press.color=#3D3D3D
 text.focus.color=#141414
 text.shadow=false
+text.boldness=2
 
 [Tab]
 inherits=PanelButtonCommand
@@ -417,8 +420,8 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-text.normal.color=#646464
-text.focus.color=#5a5a5a
+text.normal.color=#3D3D3D
+text.focus.color=#3D3D3D
 text.margin.top=2
 text.margin.bottom=2
 text.margin.left=12
@@ -465,6 +468,7 @@ indicator.element=mdi
 text.normal.color=#d2d2d2
 text.focus.color=#fcfcfc
 text.bold=true
+text.boldness=2
 text.italic=true
 
 [ComboBox]
@@ -495,6 +499,7 @@ frame.bottom=4
 frame.left=4
 frame.right=4
 text.bold=true
+text.boldness=2
 
 [TabBarFrame]
 inherits=PanelButtonCommand
