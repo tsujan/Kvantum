@@ -29,6 +29,26 @@ In Arch-based systems, the packages are:
  * qt4 (for Qt4 and if you want Qt4 support)
  * qt5-tools (for localization if you need it)
 
+In Red Hat based systems like Fedora:
+
+ * gcc-c++
+ * libX11-devel
+ * libXext-devel
+ * qt5-qtx11extras-devel
+ * qt5-qtbase-devel
+ * qt5-qtsvg-devel
+ * qt5-qttools-devel
+
+And, finally, in OpenSUSE:
+
+ * gcc-c++
+ * libX11-devel
+ * libXext-devel
+ * libqt5-qtx11extras-devel
+ * libqt5-qtbase-devel
+ * libqt5-qtsvg-devel
+ * libqt5-qttools-devel
+
 There are two ways to compile Kvantum: with qmake or with cmake.
 
 With qmake
