@@ -11,7 +11,6 @@ There is two theme options available to install from the official Arch repo:
 	sudo pacman -S kvantum-theme-adapta
 	sudo pacman -S kvantum-theme-arc
 
-THERE ARE ALSO "PKGBUILD" FILES IN THE "Arch" FOLDER (FOR qmake AND cmake COMPILATIONS).
 ----------
 
 First install X11 and Qt development packages. In Debian-based systems, they are:
