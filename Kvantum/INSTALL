@@ -2,13 +2,14 @@
 *   Compilation   *
 *******************
 ----------
-IF YOU HAVE "Arch" OR ONE OF ITS DERIVATIVES, YOU COULD EASILY INSTALL Kvantum BY USING AN AUR-HELPER LIKE pacaur:
+IF YOU HAVE "Arch" OR ONE OF ITS DERIVATIVES, YOU COULD EASILY INSTALL Kvantum from the official repo:
 
-	pacaur -S kvantum-qt5-git
+	sudo pacman -S kvantum-qt5
 
-OR, WHEN YOU WANT THE LATEST RELEASED VERSION INSTEAD OF THE LATEST git:
+There is two theme options available to install from the official Arch repo:
 
-	pacaur -S kvantum-qt5
+	sudo pacman -S kvantum-theme-adapta
+	sudo pacman -S kvantum-theme-arc
 
 THERE ARE ALSO "PKGBUILD" FILES IN THE "Arch" FOLDER (FOR qmake AND cmake COMPILATIONS).
 ----------
