@@ -2432,7 +2432,7 @@ void KvantumManager::showWhatsThis()
 void KvantumManager::aboutDialog()
 {
     QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        "<center><b><big>" + tr ("Kvantum Manager") + " 0.10.6</big></b><br><br>"
+                        "<center><b><big>" + tr ("Kvantum Manager") + " 0.10.7</big></b><br><br>"
                         + tr ("A tool for intsalling, selecting<br>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes") + "<br><br>"
                         + tr ("Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><br>"));
 }

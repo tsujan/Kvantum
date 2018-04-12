@@ -12060,9 +12060,9 @@ void Style::drawComplexControl(ComplexControl control,
             painter->restore();
         }
         /***********
-          Sub-Line
+          Add-Line
         ************/
-        if (opt->subControls & SC_ScrollBarSubLine)
+        if (opt->subControls & SC_ScrollBarAddLine)
         {
           if (arrowSize > 0)
           {
@@ -12077,7 +12077,7 @@ void Style::drawComplexControl(ComplexControl control,
           drawControl(CE_ScrollBarAddLine,&o,painter,widget);
         }
         /***********
-          Add-Line
+          Sub-Line
         ************/
         if (opt->subControls & SC_ScrollBarSubLine)
         {
@@ -15889,9 +15889,11 @@ QRect Style::subControlRect(ComplexControl control,
       int arrowSize = 0;
       if (tspec_.scroll_arrows
           /* when arrows are present in a different style, as in Gwenview */
-          || (widget && widget->style() != this
+          /* WARNING: There's no way to know how app styles work. So, unfortunately, this
+                      workaround can't be used and such cases should be left as they are. */
+          /*|| (widget && widget->style() && widget->style() != this
               && subControl != SC_ScrollBarSubLine && subControl != SC_ScrollBarAddLine // no infinite loop
-              && widget->style()->subControlRect(CC_ScrollBar,option,SC_ScrollBarSubLine,widget).isValid()))
+              && widget->style()->subControlRect(CC_ScrollBar,option,SC_ScrollBarSubLine,widget).isValid())*/)
       {
         arrowSize = extent;
       }
