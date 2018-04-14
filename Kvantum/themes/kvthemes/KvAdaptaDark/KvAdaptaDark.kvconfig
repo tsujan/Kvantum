@@ -20,6 +20,7 @@ scroll_min_extent=60
 slider_width=2
 slider_handle_width=18
 slider_handle_length=15
+tickless_slider_handle_size=16
 center_toolbar_handle=true
 check_size=14
 textless_progressbar=false
