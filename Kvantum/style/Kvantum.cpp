@@ -15689,13 +15689,17 @@ QRect Style::subControlRect(ComplexControl control,
           else // when there isn't enough horizontal space (as in VLC and Pencil)
           {
             QString maxTxt = spinMaxText(sb);
-            if (!maxTxt.isEmpty())
+            if (!maxTxt.isEmpty()
+                /* some codes may wrongly add a special text
+                   only when the value is minimum */
+                && maxTxt != sb->specialValueText())
             {
               maxTxt += QLatin1Char(' ');
               int txtWidth = textSize(sb->font(),maxTxt,false).width();
               int rightFrame = w - txtWidth - 2*sw
                                - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
                                - 2; // for padding
+              if (rightFrame < 0) rightFrame = 1;
               if (fspec.right > rightFrame)
               {
                 sw = 16;
