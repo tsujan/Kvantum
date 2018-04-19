@@ -4539,7 +4539,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             suffix = "-normal";
         }
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate
+        if (!animate && !isLibreoffice_
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -4598,7 +4598,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix = "-checked-normal";
         else
           suffix = "-normal";
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!isLibreoffice_
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
@@ -4666,13 +4667,13 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
             animate = false;
-            if (themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (!isLibreoffice_ && themeRndr_->elementExists("menu-"+ispec.element+suffix))
               prefix = "menu-"; // make exception for menuitems
           }
           else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
           {
             animate = false;
-            if (themeRndr_->elementExists("item-"+ispec.element+suffix))
+            if (!isLibreoffice_ && themeRndr_->elementExists("item-"+ispec.element+suffix))
               prefix = "item-"; // make exception for viewitems
           }
         }
@@ -4736,10 +4737,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
-            if (themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (!isLibreoffice_ && themeRndr_->elementExists("menu-"+ispec.element+suffix))
               prefix = "menu-";
           }
-          else if (qstyleoption_cast<const QStyleOptionViewItem*>(option)
+          else if (!isLibreoffice_
+                   && qstyleoption_cast<const QStyleOptionViewItem*>(option)
                    && themeRndr_->elementExists("item-"+ispec.element+suffix))
           {
             prefix = "item-";

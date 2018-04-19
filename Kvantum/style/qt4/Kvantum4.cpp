@@ -3635,7 +3635,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!isLibreoffice_
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -3658,7 +3659,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix = "-checked-normal";
         else
           suffix = "-normal";
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!isLibreoffice_
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
@@ -3696,7 +3698,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!isLibreoffice_
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -3721,7 +3724,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           suffix = "-tristate-normal";
         else
           suffix = "-normal";
-        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!isLibreoffice_
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
