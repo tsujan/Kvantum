@@ -5913,7 +5913,7 @@ void Style::drawControl(ControlElement element,
           lspec.normalInactiveColor = lspec1.normalInactiveColor;
         }
 
-        int talign = Qt::AlignLeft | Qt::AlignVCenter | Qt::TextSingleLine;
+        int talign = Qt::AlignCenter | Qt::TextSingleLine;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
         else

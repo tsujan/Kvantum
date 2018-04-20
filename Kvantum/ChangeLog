@@ -2,6 +2,7 @@ V0.10.7
 ---------
  * Removed the workaround for Gwenview's scrollbar issue because it was potentially dangerous (actually, just in one case). Anyhow, Gwenview's bug was fixed a long time ago.
  * Cover a very rare case, where the special text of a spinbox is set when its value is minimum (which means a bad code).
+ * Center menubar-item texts horizontally (they were left-aligned before).
 
 V0.10.6
 ---------

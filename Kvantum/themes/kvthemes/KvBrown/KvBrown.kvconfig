@@ -59,6 +59,7 @@ scrollable_menu=false
 submenu_delay=250
 transient_groove=false
 check_size=14
+dark_titlebar=true
 
 [GeneralColors]
 window.color=#5c514a
