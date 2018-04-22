@@ -1996,10 +1996,18 @@ void Style::polish(QPalette &palette)
     palette.setColor(QPalette::Active,QPalette::Highlight,col);
     palette.setColor(QPalette::Disabled,QPalette::Highlight,col);
     col1 = getFromRGBA(cspec_.inactiveHighlightColor);
-    if (col1.isValid())
+    if (col1.isValid() && col1 != col)
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
     else
+    {
+      /* NOTE: Qt has a nasty bug which, sometimes, prevents updating of inactive widgets
+               when the active and inactive highlight colors are the same. As a workaround,
+               we make them just a little different from each other. */
+      int v = col.value();
+      if (v == 0) v++; else v--;
+      col.setHsv(col.hue(), col.saturation(), v, col.alpha());
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
+    }
   }
 
   col = getFromRGBA(cspec_.tooltipBaseColor);
