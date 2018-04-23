@@ -1,0 +1,18 @@
+Source: kvantum
+Section: libs
+Priority: optional
+Maintainer: Pedram Pourang <tsujan2000@gmail.com>
+Build-Depends: cdbs, debhelper (>= 9), libqt4-dev, qtbase5-dev, libqt5svg5-dev, libqt5x11extras5-dev, libx11-dev, libxext-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/tsujan/Kvantum
+#Vcs-Git: git://anonscm.debian.org/collab-maint/kvantum.git
+#Vcs-Browser: https://anonscm.debian.org/gitweb/?p=collab-maint/kvantum.git;a=summary
+
+Package: kvantum
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5core5a, libqt5gui5, libqt5svg5, libqt5widgets5, libqt5x11extras5
+Description: SVG-based theme engine for Qt4/Qt5, KDE and LXQt
+ Kvantum is an SVG-based theme engine for Qt4/Qt5, KDE and LXQt. It has
+ a default dark theme and several extra ones but goes far beyond them:
+ you could make themes with very different looks and feels for it and
+ Kvantum will let you control almost every aspect of Qt widgets.
