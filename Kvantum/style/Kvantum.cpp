@@ -6766,7 +6766,20 @@ void Style::drawControl(ControlElement element,
             }
           }
 
-          const QStringList l = opt->text.split('\t');
+          QStringList l;
+          bool hasLabel, haShortcut;
+          bool hasNewLine(opt->text.contains('\n')); // may happen with combos
+          if (hasNewLine)
+          {
+            hasLabel = true;
+            haShortcut = false;
+          }
+          else
+          {
+            l = opt->text.split('\t');
+            hasLabel = (l.size() > 0);
+            haShortcut = (l.size() > 1);
+          }
 
           int smallIconSize = pixelMetric(PM_SmallIconSize);
           int talign = Qt::AlignVCenter | Qt::TextSingleLine;
@@ -6819,8 +6832,15 @@ void Style::drawControl(ControlElement element,
 
           int iw = pixelMetric(PM_IndicatorWidth,option,widget);
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
-          if (l.size() > 0) // menu label
+          if (hasLabel) // menu label
           {
+            QString txt;
+            if (hasNewLine)
+            {
+              txt = opt->text;
+              txt.replace('\n', ' ');
+            }
+            else txt = l[0];
             int checkSpace = 0;
             if (!hideCheckBoxes
                 && ((widget && opt->menuHasCheckableItems)
@@ -6830,7 +6850,7 @@ void Style::drawControl(ControlElement element,
             {
               checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
             }
-            if (opt->icon.isNull() || (hspec_.iconless_menu && !l[0].isEmpty()))
+            if (opt->icon.isNull() || (hspec_.iconless_menu && !txt.isEmpty()))
             {
               int iconSpace = 0;
               if (((opt->maxIconWidth
@@ -6849,7 +6869,7 @@ void Style::drawControl(ControlElement element,
                                                 0),
                           fspec,lspec,
                           Qt::AlignLeft | talign,
-                          l[0],QPalette::Text,
+                          txt,QPalette::Text,
                           state,
                           status.contains("-inactive"));
             }
@@ -6885,21 +6905,21 @@ void Style::drawControl(ControlElement element,
                                               0,
                                               rtl ? -checkSpace : 0,
                                               0);
-              if (l[0].isEmpty()) // textless menuitem, as in Kdenlive's play button menu
+              if (txt.isEmpty()) // textless menuitem, as in Kdenlive's play button menu
                 r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
                                 iconSize,labelRect(r,fspec,lspec));
               bool isInactive(status.contains("-inactive"));
               renderLabel(option,painter,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
-                          l[0],QPalette::Text,
+                          txt,QPalette::Text,
                           state,
                           isInactive,
                           getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                           iconSize);
             }
           }
-          if (l.size() > 1) // shortcut
+          if (haShortcut) // shortcut
           {
             int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
@@ -14115,11 +14135,22 @@ QSize Style::sizeFromContents(ContentsType type,
           s = QSize(contentsSize.width(),10); /* FIXME shouldn't it be optional? */
         else
         {
-          const QStringList l = opt->text.split('\t');
-          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                             (opt->icon.isNull() || (hspec_.iconless_menu && !(l.size() > 0 && l[0].isEmpty())))
-                             ? QSize()
-                             : QSize(iconSize,iconSize));
+          QString txt = opt->text;
+          bool hasLabel;
+          if (txt.contains('\n')) // may happen with combos
+          {
+            hasLabel = true;
+            txt.replace('\n', ' ');
+          }
+          else
+          {
+            const QStringList l = txt.split('\t');
+            hasLabel = !(l.size() > 0 && l[0].isEmpty());
+          }
+          s = sizeCalculated(f,fspec,lspec,sspec,txt,
+                             (opt->icon.isNull() || (hspec_.iconless_menu && hasLabel))
+                               ? QSize()
+                               : QSize(iconSize,iconSize));
         }
 
         /* even when there's no icon, another menuitem may have icon

@@ -93,14 +93,14 @@
 <path style="fill:#fff" id="path3777" d="m 336.9643,1238.0357 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 <path style="fill:#bebebe" id="path3779" d="m 336.9643,1237.25 c 0,1.0848 -0.87944,1.9643 -1.96429,1.9643 -1.08484,0 -1.96428,-0.8795 -1.96428,-1.9643 0,-1.0849 0.87944,-1.9643 1.96428,-1.9643 1.08485,0 1.96429,0.8794 1.96429,1.9643 z"/>
 </g>
-<path style="opacity:.92;fill:#282828" id="menu-normal" d="m 122,792 h 48 v 48 h -48 z"/>
+<path style="opacity:.92;fill:#323232" id="menu-normal" d="m 122,792 h 48 v 48 h -48 z"/>
 </g>
 <g id="menu-normal-left" transform="matrix(0.6,0,0,1,49.244405,88.24673)">
-<path style="opacity:.92;fill:#282828;fill-rule:evenodd" id="menu-normal-left0" d="m 116.257,703.753 5,0 v 48 h -5 z "/>
+<path style="opacity:.92;fill:#323232;fill-rule:evenodd" id="menu-normal-left0" d="m 116.257,703.753 5,0 v 48 h -5 z "/>
 <path style="fill:#5a5a5a;color:#000" id="path6500" d="m 116.257,703.753 v 48 h 1.66655 v -48 z "/>
 </g>
 <g id="menu-normal-topleft" transform="matrix(0.6,0,0,0.6,49.245122,369.74383)">
-<path style="opacity:.92;fill:#282828;fill-rule:evenodd" id="menu-normal-topleft0" d="m 121.257,698.753 -4.9989,.0003 -.001,5 h 5 z "/>
+<path style="opacity:.92;fill:#323232;fill-rule:evenodd" id="menu-normal-topleft0" d="m 121.257,698.753 -4.9989,.0003 -.001,5 h 5 z "/>
 <path style="fill:#5a5a5a;color:#000" id="path6494" d="m 121.257,698.753 -4.9989,.0003 -.001,5 1.6661,.0003 .001,-3.3334 3.3327,0 z "/>
 </g>
 <g style="fill-rule:evenodd" id="splitter-grip-focused" transform="translate(93.5,366.75004)">
