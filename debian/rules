@@ -1,0 +1,69 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+ifeq ($(DEB_BUILD_ARCH),amd64)
+ARCH:=x86_64
+else
+ARCH:=i386
+endif
+
+APPNAME := kvantum
+
+builddir:
+	mkdir -p builddir
+
+builddir/Makefile: builddir
+	cd builddir && /usr/lib/$(ARCH)-linux-gnu/qt4/bin/qmake PREFIX=/usr ../$(APPNAME).pro
+
+build: build-stamp
+
+build-stamp: builddir/Makefile
+	dh_testdir
+	# Add here commands to compile the package.
+	cd builddir && $(MAKE)
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	# Add here commands to clean up after the build process.
+	rm -rf builddir
+	dh_clean
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Add here commands to install the package into debian/your_appname
+	cd builddir && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/$(APPNAME) install && $(MAKE) distclean
+	# Recompile against Qt5
+	cd builddir && /usr/lib/$(ARCH)-linux-gnu/qt5/bin/qmake PREFIX=/usr ../$(APPNAME).pro
+	cd builddir && $(MAKE) INSTALL_ROOT=$(CURDIR)/debian/$(APPNAME) install && $(MAKE) distclean
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installchangelogs
+	dh_installexamples
+	dh_installman
+	dh_link
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure
+

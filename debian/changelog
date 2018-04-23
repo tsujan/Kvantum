@@ -1,0 +1,11 @@
+kvantum (0.10.3ubuntu16.04) xenial; urgency=medium
+
+  * initial release
+
+ -- Alexey Varfolomeev <varlesh@gmail.com>  Tue, 17 Jan 2017 13:55:48 +0400
+
+kvantum (0.10.3) unstable; urgency=low
+
+  * See ChangeLog!
+
+ -- Pedram Pourang <tsujan2000@gmail.com>  Thu, 05 Jan 2017 09:09:07 +0330
