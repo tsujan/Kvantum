@@ -146,6 +146,18 @@ text.press.color=white
 text.toggle.color=white
 text.bold=true
 
+[ToolbarLineEdit]
+frame.element=lineedit
+
+[ToolbarComboBox]
+frame.element=combo
+indicator.element=flat-arrow-down
+text.normal.color=#ffffffb4
+text.focus.color=white
+text.press.color=white
+text.toggle.color=white
+text.bold=true
+
 [Dock]
 inherits=PanelButtonCommand
 interior.element=dock

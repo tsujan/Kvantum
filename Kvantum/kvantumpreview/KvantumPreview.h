@@ -53,6 +53,15 @@ public:
     actionMenu_radio1->setActionGroup (aGroup);
     actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
+
+    toolBar_2->addSeparator();
+    QComboBox *cb = new QComboBox();
+    cb->addItems (QStringList() << "Kvantum" << "Qt" << "C++");
+    toolBar_2->addWidget (cb);
+    toolBar_2->addSeparator();
+    toolBar_2->addWidget (new QLineEdit("Kvantum"));
+    toolBar_2->addSeparator();
+    toolBar_2->addWidget (new QSpinBox());
   }
   ~KvantumPreview() {}
 

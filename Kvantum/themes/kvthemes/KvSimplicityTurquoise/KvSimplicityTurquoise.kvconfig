@@ -144,6 +144,16 @@ text.toggle.color=white
 text.toggle.inactive.color=black
 indicator.element=tarrow
 
+[ToolbarComboBox]
+interior.element=tbutton
+frame.element=tbutton
+indicator.element=tarrow-down
+text.normal.color=white
+text.normal.inactive.color=#ffffffb4
+text.focus.color=#9bedff
+text.press.color=white
+text.toggle.color=white
+
 [Dock]
 inherits=PanelButtonCommand
 interior.element=dock

@@ -89,13 +89,28 @@ Section                                      Meaning
 [Toolbar]                                    A toolbar. Also its handle and
                                              separator.
 
-[ToolbarButton]                              Panel for a tool button on a toolbar.
-                                             This section is optional and can be
-                                             omitted. If present, it will take all
-                                             of its variables from PanelButtonTool,
-                                             except for its text colors, text
-                                             shadow, and (indicator, frame and
-                                             interior) elements.
+[ToolbarButton]                              Panel for a tool button on a stylable
+                                             toolbar. This section is optional and
+                                             can be omitted. If present, it will
+                                             take all of its variables from
+                                             PanelButtonTool, except for its text
+                                             colors, text shadow, and (indicator,
+                                             frame and interior) elements.
+
+[ToolbarComboBox]                            Exactly like ToolbarButton but for
+                                             combo boxes on stylable toolbars.
+
+[ToolbarLineEdit]                            Panel for a line-edit on a stylable
+                                             toolbar. This section is optional and
+                                             can be omitted. If present, it will take
+                                             all of its variables from LineEdit, except
+                                             for its frame and interior elements.
+
+                                             Also, note that the text color of such a
+                                             line-edit is always the text color of the
+                                             stylable toolbar behind it. Therefore,
+                                             its interior (if any) should have a good
+                                             contrast with that color.
 
 [Scrollbar]                                  Scrollbar increase/decrease
                                              indicators (arrows).

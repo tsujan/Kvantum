@@ -119,6 +119,10 @@ min_height=+0.1font
 [PanelButtonTool]
 inherits=PanelButtonCommand
 
+[ToolbarLineEdit]
+interior.element=tlineedit
+frame.element=tlineedit
+
 [Dock]
 inherits=PanelButtonCommand
 interior.element=dock

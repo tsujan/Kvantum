@@ -135,6 +135,12 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
+  /* and the same for ToolbarComboBox */
+  else if (name == "ToolbarComboBox")
+    name = "ComboBox";
+  /* and a similar thing is true for ToolbarLineEdit */
+  else if (name == "ToolbarLineEdit")
+    name = "LineEdit";
 
   v = getValue(name,"frame", i);
   r.hasFrame = v.toBool();
@@ -148,8 +154,11 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
     {
       r.element = v.toString();
 
-      if (elementName == "ToolbarButton")
+      if (elementName == "ToolbarButton" || elementName == "ToolbarComboBox"
+          || elementName == "ToolbarLineEdit")
+      {
         i = getValue(name, "inherits").toString();
+      }
 
       v = getValue(name,"frame.top", i);
       r.top = qMax(v.toInt(),0);
@@ -233,6 +242,10 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
+  else if (name == "ToolbarComboBox")
+    name = "ComboBox";
+  else if (name == "ToolbarLineEdit")
+    name = "LineEdit";
 
   v = getValue(name,"interior", i);
   r.hasInterior = v.toBool();
@@ -247,8 +260,11 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
     {
       r.element = v.toString();
 
-      if (elementName == "ToolbarButton")
+      if (elementName == "ToolbarButton" || elementName == "ToolbarComboBox"
+          || elementName == "ToolbarLineEdit")
+      {
         i = getValue(name, "inherits").toString();
+      }
 
       v = getValue(name,"interior.x.patternsize", i);
       r.px = qMax(v.toInt(),0);
@@ -281,6 +297,18 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   if (name == "ToolbarButton")
   {
     name = "PanelButtonTool";
+    i = getValue(name, "inherits").toString();
+  }
+  /* and the same for ToolbarComboBox */
+  else if (name == "ToolbarComboBox")
+  {
+    name = "ComboBox";
+    i = getValue(name, "inherits").toString();
+  }
+  /* and the same for ToolbarLineEdit */
+  else if (name == "ToolbarLineEdit")
+  {
+    name = "LineEdit";
     i = getValue(name, "inherits").toString();
   }
   v = getValue(name,"indicator.size", i);
@@ -404,6 +432,16 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     name = "PanelButtonTool";
     i = getValue(name, "inherits").toString();
   }
+  else if (name == "ToolbarComboBox")
+  {
+    name = "ComboBox";
+    i = getValue(name, "inherits").toString();
+  }
+  else if (name == "ToolbarLineEdit")
+  {
+    name = "LineEdit";
+    i = getValue(name, "inherits").toString();
+  }
 
   v = getValue(name,"text.margin", i);
   r.hasMargin = v.toBool();
@@ -453,6 +491,10 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   QString name = elementName;
   if (name == "ToolbarButton")
     name = "PanelButtonTool";
+  else if (name == "ToolbarComboBox")
+    name = "ComboBox";
+  else if (name == "ToolbarLineEdit")
+    name = "LineEdit";
 
   QVariant v = getValue(name, "inherits");
   QString i = v.toString();
