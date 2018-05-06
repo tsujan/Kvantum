@@ -6,6 +6,8 @@ V0.10.7
  * Added a workaround for an old Qt bug which, sometimes, prevents updating of inactive widgets when the active and inactive highlight colors are the same.
  * Handle multi-line combo-box menu-items by drawing them on a single line.
  * Optional sections for line-edits and combo-boxes inside toolbars.
+ * Don't enforce vertically centered labels for comboboxes and line-edits.
+ * Consider the top and bottom label spacings when drawing some indicators.
 
 V0.10.6
 ---------

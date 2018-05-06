@@ -3668,7 +3668,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     group = "LineEdit";
   interior_spec ispec = getInteriorSpec(group);
   frame_spec fspec = getFrameSpec(group);
-  const label_spec lspec = getLabelSpec(group);
+  label_spec lspec = getLabelSpec(group);
   const size_spec sspec = getSizeSpec(group);
 
   if (isLibreoffice_) // impossible because lineedit != NULL
@@ -3678,23 +3678,34 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     fspec.top = qMin(fspec.top,3);
     fspec.bottom = qMin(fspec.bottom,3);
   }
-  else if ((!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
-           || lineedit->minimumWidth() == lineedit->maximumWidth()
-           || lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+  else
   {
-    fspec.left = qMin(fspec.left,3);
-    fspec.right = qMin(fspec.right,3);
-    fspec.top = qMin(fspec.top,3);
-    fspec.bottom = qMin(fspec.bottom,3);
-
-    if (!hasExpandedBorder(fspec))
-      fspec.expansion = 0;
-    else
+    bool noSpace((!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+                 || lineedit->minimumWidth() == lineedit->maximumWidth());
+    if (!noSpace
+        && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+    { // the label spacing isn't added at CT_ComboBox
+      lspec.top = qMin(lspec.top,2);
+      lspec.bottom = qMin(lspec.bottom,2);
+      if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+        noSpace = true;
+    }
+    if (noSpace)
     {
-      fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-      fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-      fspec.topExpanded = qMin(fspec.topExpanded,3);
-      fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+      fspec.left = qMin(fspec.left,3);
+      fspec.right = qMin(fspec.right,3);
+      fspec.top = qMin(fspec.top,3);
+      fspec.bottom = qMin(fspec.bottom,3);
+
+      if (!hasExpandedBorder(fspec))
+        fspec.expansion = 0;
+      else
+      {
+        fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+        fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+        fspec.topExpanded = qMin(fspec.topExpanded,3);
+        fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
+      }
     }
   }
 
@@ -5596,6 +5607,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       frame_spec fspec;
+      int vOffset = 0;
       if (!verticalIndicators)
       {
         fspec = getFrameSpec(group);
@@ -5604,6 +5616,11 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.HPos = 1;
         else
           fspec.HPos = 0;
+        if (tspec_.inline_spin_indicators)
+        {
+          const label_spec lspec = getLabelSpec("LineEdit");
+          vOffset = (lspec.bottom-lspec.top)/2;
+        }
       }
       else
       {
@@ -5786,7 +5803,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                       fspec,dspec,
                       dspec.element+iString+iStatus,
                       option->direction,
-                      align);
+                      align,
+                      vOffset);
 
       break;
     }
@@ -5835,6 +5853,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_IndicatorButtonDropDown : {
       QRect r = option->rect;
       interior_spec ispec;
+      int vOffset = 0;
       QString group = "DropDownButton";
       bool fillWidgetInterior(false);
 
@@ -5890,6 +5909,8 @@ void Style::drawPrimitive(PrimitiveElement element,
             }
           }
         }
+        const label_spec lspec = getLabelSpec("PanelButtonTool");
+        vOffset = (lspec.bottom-lspec.top)/2;
       }
       else
         ispec = getInteriorSpec(group);
@@ -5945,6 +5966,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             dspec.element = "flat-"+dspec.element;
           }
+          const label_spec lspec = getLabelSpec("LineEdit");
+          vOffset = (lspec.bottom-lspec.top)/2;
         }
         else
         {
@@ -5956,6 +5979,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             dspec = dspec1;
           }
+          const label_spec lspec = getLabelSpec("ComboBox");
+          vOffset = (lspec.bottom-lspec.top)/2;
         }
         if (!(combo && combo->editable && cb->lineEdit()
               // someone may want transparent lineedits (as the developer of Cantata does)
@@ -6005,6 +6030,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             fspec.right = qMin(fspec.right,3);
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
+            vOffset = 0;
             if (rtl)
               r.adjust(0,0,-qMax(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom)-9,0),0);
             else
@@ -6341,7 +6367,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       renderIndicator(painter,
                       r,
                       fspec,dspec,dspec.element+"-"+status,
-                      option->direction);
+                      option->direction,
+                      Qt::AlignCenter,
+                      vOffset);
 
       break;
     }
@@ -7727,32 +7755,33 @@ void Style::drawControl(ControlElement element,
         else if (status.startsWith("focused"))
           state = 2;
 
+        /* when there isn't enough space */
+        int cbH = r.height();
         if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
-        { // when there isn't enough space
-          if(!cb->lineEdit())
-          {
-            QFont F(painter->font());
-            if (lspec.boldFont) F.setWeight(lspec.boldness);
-            QSize txtSize = textSize(F,opt->currentText,false);
-            if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
-                              + (sspec.incrementW ? sspec.minW : 0)
-                ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
-            {
-              fspec.left = qMin(fspec.left,3);
-              fspec.right = qMin(fspec.right,3);
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
+        {
+          if (!cb->lineEdit())
+            cbH = qMin(cb->height(), cbH);
+        }
+        QFont F(painter->font());
+        if (lspec.boldFont) F.setWeight(lspec.boldness);
+        QSize txtSize = textSize(F,opt->currentText,false);
+        if (/*r.width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                        + (sspec.incrementW ? sspec.minW : 0)
+            ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
+        {
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
 
-              lspec.left = qMin(lspec.left,2);
-              lspec.right = qMin(lspec.right,2);
-              lspec.top = qMin(lspec.top,2);
-              lspec.bottom = qMin(lspec.bottom,2);
-              lspec.tispace = qMin(lspec.tispace,2);
-              lspec.boldFont = false;
+          lspec.left = qMin(lspec.left,2);
+          lspec.right = qMin(lspec.right,2);
+          lspec.top = qMin(lspec.top,2);
+          lspec.bottom = qMin(lspec.bottom,2);
+          lspec.tispace = qMin(lspec.tispace,2);
+          lspec.boldFont = false;
 
-              sspec.incrementW = false;
-            }
-          }
+          sspec.incrementW = false;
         }
 
         if (sspec.incrementW)
@@ -7767,15 +7796,11 @@ void Style::drawControl(ControlElement element,
           else
             lspec.tispace += sspec.minW;
         }
-        int vFrame = qMax(fspec.top,fspec.bottom);
         QStyleOptionComboBox o(*opt);
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
         bool isInactive(status.contains("-inactive"));
-        renderLabel(&o,painter,
-                    /* since the label is vertically centered inside the label rectangle,
-                       this doesn't do any harm and is good for Qt Designer and similar cases */
-                    r.adjusted(0, -vFrame-lspec.top, 0, vFrame+lspec.bottom),
+        renderLabel(&o,painter,r,
                     fspec,lspec,
                     talign,opt->currentText,QPalette::ButtonText,
                     state,
@@ -10501,7 +10526,8 @@ void Style::drawControl(ControlElement element,
                                                 0),
                           fspec,dspec,dspec.element+"-down-"+aStatus,
                           option->direction,
-                          Qt::AlignRight | Qt::AlignVCenter);
+                          Qt::AlignRight | Qt::AlignVCenter,
+                          (lspec.bottom-lspec.top)/2);
         }
 
         if (pb && pb->isDefault() && (option->state & State_Enabled))
@@ -11461,7 +11487,8 @@ void Style::drawComplexControl(ComplexControl control,
                             fspec,dspec,
                             dspec.element+"-down-"+aStatus,
                             option->direction,
-                            ialign);
+                            ialign,
+                            (lspec.bottom-lspec.top)/2);
           }
         }
       }
@@ -11829,35 +11856,38 @@ void Style::drawComplexControl(ComplexControl control,
                     status.replace("toggled","normal");
                 }
               }
-              else // when there isn't enough space
+            }
+            if (!opt->editable)
+            { // when there isn't enough space (-> CE_ComboBoxLabel)
+              int cbH = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget).height();
+              if (cb && !cb->lineEdit())
+                cbH = qMin(cb->height(), cbH);
+              QFont F(painter->font());
+              if (lspec.boldFont) F.setWeight(lspec.boldness);
+              QSize txtSize = textSize(F,opt->currentText,false);
+              if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                  ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
               {
-                QFont F(painter->font());
-                if (lspec.boldFont) F.setWeight(lspec.boldness);
-                QSize txtSize = textSize(F,opt->currentText,false);
-                if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
-                    ||*/ cb->height() < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
+
+                if (!hasExpandedBorder(fspec))
+                  fspec.expansion = 0;
+                else
                 {
-                  fspec.left = qMin(fspec.left,3);
-                  fspec.right = qMin(fspec.right,3);
-                  fspec.top = qMin(fspec.top,3);
-                  fspec.bottom = qMin(fspec.bottom,3);
-
-                  if (!hasExpandedBorder(fspec))
-                    fspec.expansion = 0;
-                  else
-                  {
-                    fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-                    fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-                    fspec.topExpanded = qMin(fspec.topExpanded,3);
-                    fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-                  }
-
-                  lspec.left = qMin(lspec.left,2);
-                  lspec.right = qMin(lspec.right,2);
-                  lspec.top = qMin(lspec.top,2);
-                  lspec.bottom = qMin(lspec.bottom,2);
-                  lspec.tispace = qMin(lspec.tispace,2);
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
                 }
+
+                lspec.left = qMin(lspec.left,2);
+                lspec.right = qMin(lspec.right,2);
+                lspec.top = qMin(lspec.top,2);
+                lspec.bottom = qMin(lspec.bottom,2);
+                lspec.tispace = qMin(lspec.tispace,2);
               }
             }
             QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
@@ -12092,8 +12122,23 @@ void Style::drawComplexControl(ComplexControl control,
             else if (status.startsWith("focused"))
               state = 2;
 
-            /*fspec.top = fspec.bottom = 0;
-              lspec.top = lspec.bottom = 0;*/
+            if (editable && drwaAsLineEdit)
+            {
+              label_spec lspec1 = getLabelSpec(leGroup);
+              lspec.top = lspec1.top;
+              lspec.bottom = lspec1.bottom;
+              if (labelRect(option->rect,fspec,lspec).height()
+                  < QFontMetrics(cb->lineEdit()->font()).height())
+              { // -> SE_LineEditContents
+                lspec.top = lspec.bottom = 0;
+                if (labelRect(option->rect,fspec,lspec).height()
+                    < QFontMetrics(cb->lineEdit()->font()).height())
+                {
+                  fspec.top = qMin(fspec.left,3);
+                  fspec.bottom = qMin(fspec.bottom,3);
+                }
+              }
+            }
             QPixmap icn = getPixmapFromIcon(opt->currentIcon,
                                             getIconMode(state,status.contains("-inactive"),lspec),
                                             iconstate, opt->iconSize);
@@ -15154,7 +15199,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          lspec.left = lspec.right = qMin(lspec.left,2);
+          lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
           sspec.incrementW = false;
         }
         else
@@ -15163,13 +15208,26 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
-            lspec.left = lspec.right = qMin(lspec.left,2);
+            lspec.left = lspec.right = lspec.top = lspec.bottom = qMin(lspec.left,2);
             sspec.incrementW = false;
           }
-          if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+          if (qobject_cast<QComboBox*>(widget->parentWidget())
+              && widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+          { // the label spacing isn't added at CT_ComboBox
+            lspec.top = qMin(lspec.top,2);
+            lspec.bottom = qMin(lspec.bottom,2);
+            if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+            {
+              fspec.top = qMin(fspec.left,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+              lspec.top = lspec.bottom = 0;
+            }
+          }
+          else if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
           {
             fspec.top = qMin(fspec.left,3);
             fspec.bottom = qMin(fspec.bottom,3);
+            lspec.top = lspec.bottom = 0;
           }
         }
       }
@@ -15200,6 +15258,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           {
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
+            lspec.top = lspec.bottom = 0;
           }
         }
         else
@@ -15208,12 +15267,11 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          lspec.left = 0;
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           sspec.incrementW = false;
         }
       }
       bool rtl(option->direction == Qt::RightToLeft);
-      lspec.top = lspec.bottom = 0;
       QRect rect = labelRect(option->rect, fspec, lspec);
       if (sspec.incrementW)
       {
@@ -17002,11 +17060,6 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
   return pixmap;
 }
 
-QRect Style::squaredRect(const QRect &r) const {
-  int e = (r.width() > r.height()) ? r.height() : r.width();
-  return QRect(r.x(),r.y(),e,e);
-}
-
 /* Here, instead of using the render() method of QSvgRenderer
    directly, we first make a QPixmap for drawing SVG elements. */
 static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRect bounds, QString element)
@@ -17801,15 +17854,21 @@ void Style::renderIndicator(QPainter *painter,
                             const indicator_spec &dspec, // indicator spec
                             const QString &element, // indicator SVG element
                             Qt::LayoutDirection ld,
-                            Qt::Alignment alignment) const
+                            Qt::Alignment alignment,
+                            int vOffset) const
 {
   if (!bounds.isValid()) return;
-  const QRect interior = interiorRect(bounds,fspec);
-  QRect sq = squaredRect(interior);
-  if (!sq.isValid())
-    sq = squaredRect(bounds);
+  QRect interior = interiorRect(bounds,fspec);
+  int s;
+  if (!interior.isValid())
+    s = qMin(bounds.width(), bounds.height());
+  else
+    s = qMin(interior.width(), interior.height());
   /* make the indicator smaller if there isn't enough space */
-  int s = (sq.width() > dspec.size) ? dspec.size : sq.width();
+  s = qMin(s, dspec.size);
+
+  if (interior.height() - s >= vOffset)
+    interior.adjust(0,-vOffset,0,-vOffset);
 
   renderElement(painter,element,
                 alignedRect(ld,alignment,QSize(s,s),interior));

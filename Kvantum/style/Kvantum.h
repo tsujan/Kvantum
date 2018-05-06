@@ -228,7 +228,8 @@ class Style : public QCommonStyle {
                          const indicator_spec &dspec, // indicator spec
                          const QString &element, // indicator SVG element
                          Qt::LayoutDirection ld = Qt::LeftToRight,
-                         Qt::Alignment alignment = Qt::AlignCenter) const;
+                         Qt::Alignment alignment = Qt::AlignCenter,
+                         int vOffset = 0) const;
 
     /* Generic method that draws a label (text and/or icon) inside the frame. */
     void renderLabel(
@@ -282,9 +283,6 @@ class Style : public QCommonStyle {
                          const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // text-icon alignment
                          // use real heights of multiline texts?
                          bool realHeight = false) const;
-
-    /* Return a normalized rect, i.e. a square. */
-    QRect squaredRect(const QRect &r) const;
 
     /* Return the remaining QRect after subtracting the frames. */
     QRect interiorRect(const QRect &bounds, const frame_spec &fspec) const;
