@@ -4437,9 +4437,18 @@ void Style::drawPrimitive(PrimitiveElement element,
         else
           fspec.HPos = 0;
         if (tspec_.inline_spin_indicators)
-        {
+        { // only when there is enough space for the line-edit (-> SE_LineEditContents)
           const label_spec lspec = getLabelSpec("LineEdit");
           vOffset = (lspec.bottom-lspec.top)/2;
+          if (vOffset != 0
+              && option->rect.height() < sizeCalculated(widget ? widget->font() : painter->font(),
+                                                        getFrameSpec("LineEdit"),
+                                                        lspec,
+                                                        getSizeSpec("LineEdit"),
+                                                        "W",QSize()).height())
+          {
+            vOffset = 0;
+          }
         }
       }
       else
@@ -4812,6 +4821,16 @@ void Style::drawPrimitive(PrimitiveElement element,
             else
               r.adjust(qMax(qMin(dspec.size,cb->height()-fspec.top-fspec.bottom)-9,0),0,0,0);
             dspec.size = qMin(dspec.size,9);
+          }
+        }
+        else if (vOffset != 0)
+        { // -> drawComboLineEdit()
+          const label_spec lspec1 = getLabelSpec("LineEdit");
+          const size_spec sspec1 = getSizeSpec("LineEdit");
+          if (cb->lineEdit()->height()
+              < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
+          {
+            vOffset = 0;
           }
         }
       }
@@ -9751,19 +9770,20 @@ void Style::drawComplexControl(ComplexControl control,
               state = 2;
 
             if (editable && tspec_.combo_as_lineedit)
-            {
+            { // when there isn't enough space (-> SE_LineEditContents and drawComboLineEdit)
               label_spec lspec1 = getLabelSpec("LineEdit");
-              lspec.top = lspec1.top;
-              lspec.bottom = lspec1.bottom;
-              if (labelRect(option->rect,fspec,lspec).height()
-                  < QFontMetrics(cb->lineEdit()->font()).height())
-              { // -> SE_LineEditContents
-                lspec.top = lspec.bottom = 0;
-                if (labelRect(option->rect,fspec,lspec).height()
-                    < QFontMetrics(cb->lineEdit()->font()).height())
+              const size_spec sspec1 = getSizeSpec("LineEdit");
+              if (cb->lineEdit()->height()
+                  < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
+              {
+                lspec.top = qMin(lspec.top,2);
+                lspec.bottom = qMin(lspec.bottom,2);
+                if (cb->lineEdit()->height()
+                    < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
                 {
                   fspec.top = qMin(fspec.left,3);
                   fspec.bottom = qMin(fspec.bottom,3);
+                  lspec.top = lspec.bottom = 0;
                 }
               }
             }
