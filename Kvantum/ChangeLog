@@ -8,6 +8,7 @@ V0.10.7
  * Optional sections for line-edits and combo-boxes inside toolbars.
  * Don't enforce vertically centered labels for comboboxes and line-edits.
  * Consider the top and bottom label spacings when drawing some indicators.
+ * Smoother movement of dial handle.
 
 V0.10.6
 ---------

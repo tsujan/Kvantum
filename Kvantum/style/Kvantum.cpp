@@ -16462,8 +16462,8 @@ QRect Style::subControlRect(ComplexControl control,
               angle = M_PI/2;
             else
             {
-              const qreal fraction(qreal(opt->sliderValue - opt->minimum)/
-                                   qreal(opt->maximum - opt->minimum));
+              const qreal fraction(qreal(opt->sliderValue - opt->minimum)
+                                   / qreal(opt->maximum - opt->minimum));
               if(opt->dialWrapping)
                 angle = M_PI*4/3 - fraction*2*M_PI; // angle = 1.5*M_PI - fraction*2*M_PI;
               else
@@ -16482,10 +16482,10 @@ QRect Style::subControlRect(ComplexControl control,
               r.setHeight(r.width());
             }
             QPoint center = r.center();
-            int handleSize= r.width()/5;
-            //const qreal radius=0.5*(r.width() - handleSize);
-            const qreal radius=0.5*(r.width() - 2*handleSize);
-            center += QPoint(radius*qCos(angle), -radius*qSin(angle));
+            int handleSize = r.width()/5;
+            //const qreal radius = 0.5*(r.width() - handleSize);
+            const qreal radius = 0.5*(r.width() - 2*handleSize);
+            center += QPoint(qRound(radius*qCos(angle)), -qRound(radius*qSin(angle)));
             r = QRect(r.x(), r.y(), handleSize, handleSize);
             r.moveCenter(center);
             return r;
