@@ -13961,6 +13961,8 @@ int Style::styleHint(StyleHint hint,
         return Qt::AlignCenter;
     }
 
+    case SH_TabBar_ElideMode : return Qt::ElideNone; // don't interfere with CE_TabBarTabLabel
+
     //case SH_ScrollBar_BackgroundMode : return Qt::OpaqueMode;
 
     case SH_ScrollBar_ContextMenu : return true;
@@ -15837,9 +15839,11 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       return r;
     }
 
-    /* SE_TabBarTabText isn't used anywhere but some apps may need it.
-       It's exactly as in CE_TabBarTabLabel, except for the transformations. */
-    case SE_TabBarTabText: {
+    /* Logically, SE_TabBarTabText should return a vertical rectangle with vertical tabs as
+       follows (exactly like in CE_TabBarTabLabel, except for the transformations). However,
+       the rectangle is used in QTabBar::initStyleOption() as if it's always horizontal. Also,
+       QCommonStyle always gives a horizontal rectangle. So, we don't do the right thing here. */
+    /*case SE_TabBarTabText: {
       QRect r;
       if (const QStyleOptionTab *opt = qstyleoption_cast<const QStyleOptionTab *>(option))
       {
@@ -15898,7 +15902,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         }
       }
       return r;
-    }
+    }*/
 
     case SE_TabBarTabLeftButton:
     case SE_TabBarTabRightButton: {
