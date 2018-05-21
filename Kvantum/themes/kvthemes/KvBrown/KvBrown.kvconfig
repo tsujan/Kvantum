@@ -117,7 +117,9 @@ text.normal.color=white
 text.focus.color=#ffbd87
 text.press.color=white
 text.toggle.color=white
-frame.expansion=8
+min_width=+0.1font
+min_height=+0.1font
+frame.expansion=10
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -140,6 +142,7 @@ frame.right=2
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+frame.expansion=8
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -280,6 +283,8 @@ text.margin.left=1
 text.margin.right=1
 text.toggle.color=black
 text.press.color=black
+min_width=0
+min_height=0
 frame.expansion=0
 
 [Menu]
@@ -294,12 +299,14 @@ text.margin.right=2
 inherits=PanelButtonCommand
 frame=true
 frame.element=menuitem
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=1
+text.margin.bottom=1
 text.margin.left=3
 text.margin.right=3
 text.normal.color=white
 text.focus.color=black
+min_width=0
+min_height=0
 frame.expansion=0
 
 [MenuBarItem]
