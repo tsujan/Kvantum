@@ -40,7 +40,7 @@ small_icon_size=16
 large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=24
-combo_as_lineedit=true
+combo_as_lineedit=false
 square_combo_button=true
 layout_spacing=6
 tooltip_delay=-1
@@ -65,18 +65,18 @@ scrollable_menu=false
 submenu_delay=250
 
 [GeneralColors]
-window.color=#FDFDFD
+window.color=#fafafa
 inactive.window.color=#f0f0f0
 base.color=white
 inactive.base.color=#f7f7f7
 alt.base.color=#FAFAFA
-button.color=#FDFDFD
+button.color=#fafafa
 light.color=white
 mid.light.color=#E2E2E2
 dark.color=#C8C8C8
 mid.color=#DCDCDC
-highlight.color=#f07746
-inactive.highlight.color=#eb7344
+highlight.color=#e95420
+inactive.highlight.color=#e34b16
 text.color=#3D3D3D
 inactive.text.color=#2d2d2d
 window.text.color=#3D3D3D
@@ -115,7 +115,7 @@ transparent_arrow_button=true
 frame=true
 frame.element=button
 frame.expandedElement=ebutton
-focusFrame=true
+focusFrame=false
 frame.top=3
 frame.bottom=3
 frame.left=3
@@ -127,6 +127,7 @@ text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.press.color=#3D3D3D
 text.toggle.color=#3D3D3D
+text.toggle.inactive.color=#828282
 text.shadow=false
 text.shadow.color=white
 text.shadow.alpha=190
@@ -137,7 +138,7 @@ text.margin=1
 text.iconspacing=3
 indicator.element=arrow
 text.margin.top=3
-text.margin.bottom=5
+text.margin.bottom=4
 text.margin.left=3
 text.margin.right=3
 frame.expansion=14
@@ -156,6 +157,7 @@ text.normal.color=#dfdbd2
 text.focus.color=#f3efe6
 text.press.color=#dfdbd2
 text.toggle.color=#dfdbd2
+text.toggle.inactive.color=#dfdbd2
 text.shadow=false
 indicator.element=tarrow
 
@@ -194,7 +196,7 @@ frame.left=1
 indicator.element=spin
 indicator.size=10
 text.normal.color=#3D3D3D
-frame.expansion=12
+frame.expansion=14
 
 [RadioButton]
 inherits=PanelButtonCommand
@@ -205,7 +207,7 @@ text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
-focusFrame=true
+focusFrame=false
 
 [CheckBox]
 inherits=PanelButtonCommand
@@ -216,7 +218,7 @@ text.focus.color=#141414
 text.shadow=false
 text.margin.top=2
 text.margin.bottom=2
-focusFrame=true
+focusFrame=false
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -235,9 +237,9 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=1
 text.margin.right=1
-text.margin.bottom=3
+text.margin.bottom=4
 frame.expandedElement=elineedit
-frame.expansion=12
+frame.expansion=14
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -259,6 +261,7 @@ text.boldness=2
 
 [Tab]
 inherits=PanelButtonCommand
+focusFrame=true
 interior.element=tab
 text.margin.left=7
 text.margin.right=7
@@ -355,6 +358,7 @@ text.normal.color=#828282
 text.focus.color=#828282
 text.press.color=#828282
 text.toggle.color=#828282
+text.toggle.inactive.color=#828282
 text.shadow=false
 frame.expansion=0
 
@@ -386,6 +390,7 @@ text.normal.color=#3D3D3D
 text.focus.color=#232323
 text.press.color=#fcfcfc
 text.toggle.color=#fcfcfc
+text.toggle.inactive.color=#fcfcfc
 text.shadow=false
 frame.expansion=0
 
@@ -489,7 +494,7 @@ text.shadow=false
 [GroupBox]
 inherits=GenericFrame
 frame=true
-focusFrame=true
+focusFrame=false
 frame.element=group
 text.margin=0
 text.normal.color=#3D3D3D
@@ -526,3 +531,14 @@ frame.element=tooltip
 inherits=GenericFrame
 frame=false
 interior=false
+
+[Focus]
+inherits=PanelButtonCommand
+interior=false
+frame=true
+frame.element=focus
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+frame.patternsize=15
