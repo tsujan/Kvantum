@@ -102,7 +102,7 @@ force_size_grip=false
 iconless_pushbutton=false
 iconless_menu=false
 disabled_icon_opacity=100
-normal_default_pushbutton=false
+normal_default_pushbutton=true
 single_top_toolbar=true
 tint_on_mouseover=0
 lxqtmainmenu_iconsize=22
@@ -526,6 +526,7 @@ interior=true
 text.margin=0
 interior.element=tooltip
 frame.element=tooltip
+frame.expansion=0
 
 [StatusBar]
 inherits=GenericFrame
