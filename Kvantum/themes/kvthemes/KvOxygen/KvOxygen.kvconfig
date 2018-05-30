@@ -320,6 +320,11 @@ frame.left=6
 frame.right=6
 frame.expansion=0
 
+[ScrollbarTransientSlider]
+frame=true
+frame.element=tr
+interior=false
+
 [ScrollbarGroove]
 inherits=PanelButtonCommand
 frame.element=groove

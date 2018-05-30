@@ -9515,7 +9515,7 @@ void Style::drawControl(ControlElement element,
 
       frame_spec fspec = getFrameSpec(group);
       fspec.expansion = 0; // no need to frame expansion because the thickness is known
-      const interior_spec ispec = getInteriorSpec(group);
+      interior_spec ispec = getInteriorSpec(group);
       const indicator_spec dspec = getIndicatorSpec(group);
 
       QRect r = option->rect;
@@ -9557,6 +9557,16 @@ void Style::drawControl(ControlElement element,
             r.adjust(0, space, -space, -space);
           else
             r.adjust(space, 0, 0, 0);
+        }
+        /* use traansient elements if they exist */
+        const frame_spec fspec1 = getFrameSpec("ScrollbarTransientSlider");
+        const interior_spec ispec1 = getInteriorSpec("ScrollbarTransientSlider");
+        if (fspec1.hasFrame || ispec1.hasInterior)
+        {
+          fspec.hasFrame = fspec1.hasFrame;
+          ispec.hasInterior = ispec1.hasInterior;
+          fspec.element = fspec1.element;
+          ispec.element = ispec1.element;
         }
       }
 #endif

@@ -119,6 +119,14 @@ Section                                      Meaning
 
 [ScrollbarSlider]                            A scrollbar slider.
 
+[ScrollbarTransientSlider]                   An optional section for transient
+                                             scrollbars (see "transient_scrollbar" below).
+                                             It takes all of its values from
+                                             "ScrollbarSlider", except for its frame and
+                                             interior elements. It is useful when the
+                                             ordinary scrollbar slider elements are not good
+                                             enough with transient scrollbars.
+
 [Slider]                                     A slider (a classic widget for
                                              controlling a bounded value).
 
@@ -226,7 +234,7 @@ x11drag                           string              Drag windows from contents
                                                         true (the same as "all" -- default)
                                                         false (the same as "none")
 
-                                                      "x11drag" is independent of X11 on wayland.
+                                                      "x11drag" is disabled on wayland.
 
 alt_mnemonic                      true/false          Show underlines when Alt is pressed?
                                                       True by default.
