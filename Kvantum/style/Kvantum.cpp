@@ -2833,7 +2833,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
-      else if (qobject_cast<QMenu*>(o))
+      else if (QMenu *menu = qobject_cast<QMenu*>(o))
       {
         /* WARNING: If compositing is stopped here, we aren't responsible.
                     A check for the state of compositing at this very moment
@@ -2844,7 +2844,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           /* compensate for the offset created by the shadow */
 
           /* "magical" condition for a submenu */
-          QWidget *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
+          QPoint parentMenuCorner;
+          QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
           if (!parentMenu)
           { // search for a detached menu with an active action
             const QWidgetList topLevels = QApplication::topLevelWidgets();
@@ -2855,11 +2856,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                   && topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
                   && qobject_cast<QMenu*>(topWidget)->activeAction())
               {
-                parentMenu = topWidget;
+                parentMenu = qobject_cast<QMenu*>(topWidget);
+                parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
                 break;
               }
             }
           }
+          else
+            parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
           QMenuBar *parentMenubar = nullptr;
           if (!parentMenu)
           { // search for a menubar with an active action
@@ -2886,7 +2890,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             X += menuShadow_.at(2);
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x() < g.left())
+              if (parentMenuCorner.x() < g.left())
                 X -= menuShadow_.at(2) + menuShadow_.at(0);
               else
               {
@@ -2947,7 +2951,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             X -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
-              if (parentMenu->mapToGlobal(QPoint(0,0)).x() > g.left())
+              if (parentMenuCorner.x() > g.left())
               { // there wasn't enough space to the right of the parent
                 X += menuShadow_.at(0) + menuShadow_.at(2);
               }
@@ -3003,6 +3007,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+          /* compensate for an annoyance in Qt 5.11 -> QMenu::internalDelayedPopup() */
+          if (parentMenu)
+          {
+            QAction *activeAct = parentMenu->activeAction();
+            if (activeAct && activeAct == menu->menuAction() && activeAct->isEnabled()
+                && activeAct->menu() && activeAct->menu()->isEnabled() && activeAct->menu()->isVisible())
+            {
+              const auto &actions = w->actions();
+              if (!actions.isEmpty())
+              {
+                const auto topActionRect = menu->actionGeometry(actions.first());
+                if (g.top() + topActionRect.top() ==  parentMenu->actionGeometry(activeAct).top()
+                                                      + parentMenuCorner.y())
+                {
+                  Y += topActionRect.top();
+                }
+              }
+            }
+          }
+#endif
 
           w->move(X,Y);
         }
