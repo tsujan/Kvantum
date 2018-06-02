@@ -608,6 +608,10 @@ theme_spec ThemeConfig::getCompositeSpec()
   if (v.isValid() && r.composite)
     r.menu_shadow_depth = qMax(v.toInt(),0);
 
+  v = getValue("General","menu_separator_height");
+  if (v.isValid())
+    r.menu_separator_height = qMin(qMax(v.toInt(),1),16);
+
   v = getValue("General","tooltip_shadow_depth");
   if (v.isValid() && r.composite)
     r.tooltip_shadow_depth = qMax(v.toInt(),0);

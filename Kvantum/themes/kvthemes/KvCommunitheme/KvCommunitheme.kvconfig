@@ -13,6 +13,7 @@ toolbar_interior_spacing=1
 spread_progressbar=true
 composite=true
 menu_shadow_depth=5
+menu_separator_height=5
 tooltip_shadow_depth=6
 scroll_width=12
 scroll_arrows=false

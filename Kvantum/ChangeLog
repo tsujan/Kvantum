@@ -11,6 +11,7 @@ V0.10.7
  * Smoother movement of dial handle.
  * Added the optional section ScrollbarTransientSlider.
  * Compensate for a change in the vertical positioning of submenus with Qt 5.11.
+ * Added a key for menu separator height.
 
 V0.10.6
 ---------

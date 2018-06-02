@@ -14507,7 +14507,7 @@ QSize Style::sizeFromContents(ContentsType type,
         }
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
-          s = QSize(contentsSize.width(),10); /* FIXME shouldn't it be optional? */
+          s = QSize(contentsSize.width(), tspec_.menu_separator_height);
         else
         {
           QString txt = opt->text;

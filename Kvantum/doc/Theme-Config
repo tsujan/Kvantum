@@ -444,6 +444,9 @@ scrollable_menu                   true/false          Should (big) menus be scro
                                                       bottom? False by default, which means
                                                       all menu-items are shown.
 
+menu_separator_height             integer             The height of menu separators. 10 by
+                                                      default and always between 1 and 16 px.
+
 submenu_overlap                   integer             The horizontal overlap between a
                                                       submenu and its parent menu. The
                                                       default is 0. It cannot be greater than

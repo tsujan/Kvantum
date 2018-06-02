@@ -685,7 +685,7 @@ ordinary arrow
 and dropdown menu arrow</string>
          </property>
          <property name="icon">
-          <iconset theme="folder"/>
+          <iconset theme="user-home"/>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -712,7 +712,7 @@ ordinary arrow
 and dropdown menu arrow</string>
          </property>
          <property name="icon">
-          <iconset theme="folder"/>
+          <iconset theme="user-home"/>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1116,7 +1116,7 @@ check box</string>
            <string>Standard combo box 1</string>
           </property>
           <property name="icon">
-           <iconset theme="folder"/>
+           <iconset theme="user-home"/>
           </property>
          </item>
          <item>
@@ -2148,7 +2148,7 @@ check box</string>
            <string>Header 2</string>
           </property>
           <property name="icon">
-           <iconset theme="folder"/>
+           <iconset theme="user-home"/>
           </property>
          </column>
          <column>
@@ -2194,7 +2194,7 @@ check box</string>
            <string>Editable</string>
           </property>
           <property name="icon">
-           <iconset theme="folder"/>
+           <iconset theme="user-home"/>
           </property>
           <property name="flags">
            <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -2472,7 +2472,7 @@ check box</string>
              <string>Column 0</string>
             </property>
             <property name="icon">
-             <iconset theme="folder"/>
+             <iconset theme="user-home"/>
             </property>
            </column>
            <column>
@@ -2588,7 +2588,7 @@ check box</string>
              </rect>
             </property>
             <attribute name="icon">
-             <iconset theme="folder"/>
+             <iconset theme="user-home"/>
             </attribute>
             <attribute name="label">
              <string>Page 2</string>
