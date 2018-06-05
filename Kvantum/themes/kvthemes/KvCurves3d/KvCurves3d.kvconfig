@@ -105,8 +105,8 @@ text.iconspacing=3
 indicator.element=arrow
 text.margin.top=3
 text.margin.bottom=3
-text.margin.left=6
-text.margin.right=6
+text.margin.left=5
+text.margin.right=5
 text.shadow.xshift=2
 text.shadow.yshift=2
 text.shadow.color=#000000
@@ -403,6 +403,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+frame.expansion=3.4font
 
 [Menu]
 inherits=PanelButtonCommand

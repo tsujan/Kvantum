@@ -12,6 +12,7 @@ tooltip_shadow_depth=6
 scroll_width=10
 slider_handle_width=20
 slider_handle_length=15
+tickless_slider_handle_size=18
 center_toolbar_handle=true
 slim_toolbars=true
 x11drag=all
@@ -37,7 +38,7 @@ scroll_arrows=false
 scroll_min_extent=50
 toolbar_icon_size=16
 button_contents_shift=true
-groupbox_top_label=false
+groupbox_top_label=true
 inline_spin_indicators=true
 joined_inactive_tabs=true
 layout_spacing=2
@@ -60,9 +61,9 @@ transient_scrollbar=true
 tree_branch_line=false
 
 [GeneralColors]
-window.color=#D2D2D2
-base.color=#FFFFFF
-alt.base.color=#F0F0F0
+window.color=#dcdcdc
+base.color=#fbfbfb
+alt.base.color=#f1f1f1
 button.color=#E6E6E6
 light.color=#F3F3F3
 mid.light.color=#ECECEC
@@ -110,8 +111,8 @@ frame.expanded.left=1
 frame.expanded.right=1
 text.margin.top=2
 text.margin.bottom=2
-text.margin.left=6
-text.margin.right=6
+text.margin.left=4
+text.margin.right=4
 text.press.color=black
 text.toggle.color=white
 focusFrame=true
@@ -124,6 +125,7 @@ inherits=PanelButtonCommand
 
 [DockTitle]
 text.bold=true
+text.normal.color=#282828
 frame.expansion=0
 
 [LineEdit]
@@ -148,6 +150,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+text.press.color=#282828
 frame.expansion=0
 
 [Tab]
@@ -194,7 +197,9 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.press.color=black
+text.normal.color=#282828
+text.focus.color=black
+text.bold=true
 frame.expansion=0
 
 [SizeGrip]
@@ -234,6 +239,11 @@ frame.expansion=0
 inherits=PanelButtonCommand
 interior=false
 frame=false
+
+[ScrollbarTransientSlider]
+frame=true
+frame.element=tr
+interior=false
 
 [Progressbar]
 text.bold=true
@@ -321,6 +331,7 @@ text.margin.left=3
 text.margin.right=3
 text.bold=true
 text.italic=true
+text.normal.color=white
 frame.expansion=0
 
 [ComboBox]

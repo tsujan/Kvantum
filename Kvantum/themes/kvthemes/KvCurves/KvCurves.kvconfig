@@ -1,12 +1,13 @@
 [%General]
 author=Tsu Jan
-comment=A dark, flat theme with curved lines that supports translucency
+comment=A dark, flat theme with curved lines
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=false
 mirror_doc_tabs=true
 group_toolbar_buttons=true
+toolbar_interior_spacing=2
 spread_progressbar=true
 progressbar_thickness=3font
 composite=true
@@ -15,7 +16,7 @@ tooltip_shadow_depth=6
 splitter_width=7
 scroll_width=12
 scroll_min_extent=50
-slider_width=6
+slider_width=4
 slider_handle_width=16
 slider_handle_length=16
 center_toolbar_handle=true
@@ -31,7 +32,9 @@ vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
 merge_menubar_with_toolbar=false
+transient_scrollbar=true
 scroll_arrows=false
+animate_states=true
 fill_rubberband=false
 small_icon_size=16
 large_icon_size=32
@@ -103,6 +106,7 @@ text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
 frame.expansion=2.7font
+min_height=+0.1font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -299,17 +303,17 @@ frame.expansion=2.7font
 
 [ItemView]
 inherits=PanelButtonCommand
-text.margin=0
+text.margin=1
 frame.element=itemview
 interior.element=itemview
 frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-text.margin.top=3
-text.margin.bottom=3
-text.margin.left=7
-text.margin.right=7
+text.margin.top=1
+text.margin.bottom=1
+text.margin.left=1
+text.margin.right=1
 frame.expansion=10
 
 [Splitter]
@@ -342,8 +346,10 @@ frame.expansion=0
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand
-interior=0
-frame=0
+frame.element=scrollbargroove
+interior.element=scrollbargroove
+interior=false
+frame=false
 
 [MenuItem]
 inherits=PanelButtonCommand
@@ -352,6 +358,7 @@ frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 text.focus.color=white
+min_height=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -387,6 +394,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+frame.expansion=3.4font
 
 [Menu]
 inherits=PanelButtonCommand
