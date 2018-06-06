@@ -946,6 +946,17 @@ Uncheck it if you want those patterns back!</string>
                 </widget>
                </item>
                <item row="8" column="1" colspan="3">
+                <widget class="QCheckBox" name="checkBoxInactiveness">
+                 <property name="toolTip">
+                  <string>Use the same colors and shapes with active and inactive
+windows if this theme distinguishes between them?</string>
+                 </property>
+                 <property name="text">
+                  <string>Ignore inactive state</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="9" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxTransient">
                  <property name="toolTip">
                   <string>Make scrollbars transient!
@@ -959,7 +970,7 @@ They usually take no extra space.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="3">
+               <item row="10" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxTransientGroove">
                  <property name="enabled">
                   <bool>false</bool>

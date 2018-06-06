@@ -520,6 +520,11 @@ animate_states                    true/false          Animate the state change i
                                                       scroll views. For buttons, the animation
                                                       happens only under the mouse cursor.
 
+no_inactiveness                  true/false           Ignore the inactive state? The purpose
+                                                      of this key is more flexibility  with
+                                                      themes that distinguish between active
+                                                      and inactive states.
+
 no_window_pattern                 true/false          Do not draw window/dialog tiling
                                                       patterns? The purpose of this key is
                                                       more flexibility with themes that

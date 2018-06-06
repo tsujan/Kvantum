@@ -12,6 +12,7 @@ V0.10.7
  * Added the optional section ScrollbarTransientSlider.
  * Compensate for a change in the vertical positioning of submenus with Qt 5.11.
  * Added a key for menu separator height.
+ * Added a key (to Kvantum manager) for ignoring the inactive state.
 
 V0.10.6
 ---------

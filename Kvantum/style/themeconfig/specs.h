@@ -113,6 +113,8 @@ typedef struct {
   /* should buttons and comboboxes be animated
      under the cursor when their state changes? */
   bool animate_states;
+  /* disable inactiveness */
+  bool no_inactiveness;
   /* disable window/dialog patterns */
   bool no_window_pattern;
   /* depth of menu shadows */
@@ -472,6 +474,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.blurring = false;
   tspec.popup_blurring = false;
   tspec.animate_states = false;
+  tspec.no_inactiveness = false;
   tspec.no_window_pattern = false;
   tspec.menu_shadow_depth = 0;
   tspec.menu_separator_height = 10;

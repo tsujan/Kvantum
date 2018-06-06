@@ -852,6 +852,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxNoComposite->setChecked (!composited);
     ui->checkBoxAnimation->setChecked (defaultSettings.value ("animate_states").toBool());
     ui->checkBoxPattern->setChecked (defaultSettings.value ("no_window_pattern").toBool());
+    ui->checkBoxInactiveness->setChecked (defaultSettings.value ("no_inactiveness").toBool());
     ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
     if (defaultSettings.contains ("scroll_arrows")) // it's true by default
@@ -1136,6 +1137,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxAnimation->setChecked (themeSettings.value ("animate_states").toBool());
                 if (themeSettings.contains ("no_window_pattern"))
                     ui->checkBoxPattern->setChecked (themeSettings.value ("no_window_pattern").toBool());
+                if (themeSettings.contains ("no_inactiveness"))
+                    ui->checkBoxInactiveness->setChecked (themeSettings.value ("no_inactiveness").toBool());
                 if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
                 if (themeSettings.contains ("joined_inactive_tabs"))
@@ -1979,6 +1982,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
         generalKeys.insert("animate_states", boolToStr (ui->checkBoxAnimation->isChecked()));
         generalKeys.insert("no_window_pattern", boolToStr (ui->checkBoxPattern->isChecked()));
+        generalKeys.insert("no_inactiveness", boolToStr (ui->checkBoxInactiveness->isChecked()));
         generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
         generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
         generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
@@ -2058,6 +2062,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("hide_combo_checkboxes").toBool() != ui->checkBoxHideComboCheckboxes->isChecked()
             || themeSettings.value ("animate_states").toBool() != ui->checkBoxAnimation->isChecked()
             || themeSettings.value ("no_window_pattern").toBool() != ui->checkBoxPattern->isChecked()
+            || themeSettings.value ("no_inactiveness").toBool() != ui->checkBoxInactiveness->isChecked()
             || themeSettings.value ("left_tabs").toBool() != ui->checkBoxleftTab->isChecked()
             || themeSettings.value ("joined_inactive_tabs").toBool() != ui->checkBoxJoinTab->isChecked()
             || themeSettings.value ("scroll_arrows").toBool() == ui->checkBoxNoScrollArrow->isChecked()

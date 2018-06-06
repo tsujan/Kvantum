@@ -491,16 +491,19 @@ Style::Style(bool useDark) : QCommonStyle()
 
   // decide about view-item colors once for all
   hasInactiveSelItemCol_ = toggledItemHasContrast_ = false;
-  const label_spec lspec = getLabelSpec("ItemView");
-  QColor toggleInactiveCol = getFromRGBA(lspec.toggleInactiveColor);
-  if (toggleInactiveCol.isValid())
+  if (!tspec_.no_inactiveness)
   {
-    QColor toggleActiveCol = getFromRGBA(lspec.toggleColor);
-    if (toggleActiveCol.isValid() && toggleActiveCol != toggleInactiveCol)
+    const label_spec lspec = getLabelSpec("ItemView");
+    QColor toggleInactiveCol = getFromRGBA(lspec.toggleInactiveColor);
+    if (toggleInactiveCol.isValid())
     {
-      hasInactiveSelItemCol_ = true;
-      if (enoughContrast(toggleActiveCol, getFromRGBA(lspec.pressColor)))
-        toggledItemHasContrast_ = true;
+      QColor toggleActiveCol = getFromRGBA(lspec.toggleColor);
+      if (toggleActiveCol.isValid() && toggleActiveCol != toggleInactiveCol)
+      {
+        hasInactiveSelItemCol_ = true;
+        if (enoughContrast(toggleActiveCol, getFromRGBA(lspec.pressColor)))
+          toggledItemHasContrast_ = true;
+      }
     }
   }
 
@@ -1086,8 +1089,9 @@ static inline QWidget *getParent (const QWidget *widget, int level)
   return w;
 }
 
-static inline bool isWidgetInactive(const QWidget *widget)
+bool Style::isWidgetInactive(const QWidget *widget) const
 {
+  if (tspec_.no_inactiveness) return false;
   if (widget
       /* some widgets (like KCapacityBar in kdf) may be drawn while still invisible */
       && widget->isVisible()
@@ -1950,6 +1954,7 @@ void Style::polish(QApplication *app)
 void Style::polish(QPalette &palette)
 {
   QColor col1;
+  bool hasInactiveness (!tspec_.no_inactiveness);
 
   /* background colors */
   QColor col = getFromRGBA(cspec_.windowColor);
@@ -1958,7 +1963,7 @@ void Style::polish(QPalette &palette)
     palette.setColor(QPalette::Active,QPalette::Window,col);
     palette.setColor(QPalette::Disabled,QPalette::Window,col); // used in generatedIconPixmap()
     col1 = getFromRGBA(cspec_.inactiveWindowColor);
-    if (col1.isValid())
+    if (col1.isValid() && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::Window,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::Window,col);
@@ -1970,7 +1975,7 @@ void Style::polish(QPalette &palette)
     palette.setColor(QPalette::Active,QPalette::Base,col);
     palette.setColor(QPalette::Disabled,QPalette::Base,col); // some apps may use it
     col1 = getFromRGBA(cspec_.inactiveBaseColor);
-    if (col1.isValid())
+    if (col1.isValid() && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::Base,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::Base,col);
@@ -2010,7 +2015,7 @@ void Style::polish(QPalette &palette)
     palette.setColor(QPalette::Active,QPalette::Highlight,col);
     palette.setColor(QPalette::Disabled,QPalette::Highlight,col);
     col1 = getFromRGBA(cspec_.inactiveHighlightColor);
-    if (col1.isValid() && col1 != col)
+    if (col1.isValid() && col1 != col && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
     else
     {
@@ -2045,7 +2050,7 @@ void Style::polish(QPalette &palette)
   {
     palette.setColor(QPalette::Active,QPalette::Text,col);
     col1 = getFromRGBA(cspec_.inactiveTextColor);
-    if (col1.isValid())
+    if (col1.isValid() && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::Text,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::Text,col);
@@ -2056,7 +2061,7 @@ void Style::polish(QPalette &palette)
   {
     palette.setColor(QPalette::Active,QPalette::WindowText,col);
     col1 = getFromRGBA(cspec_.inactiveWindowTextColor);
-    if (col1.isValid())
+    if (col1.isValid() && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
@@ -2078,7 +2083,7 @@ void Style::polish(QPalette &palette)
   {
     palette.setColor(QPalette::Active,QPalette::HighlightedText,col);
     col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
-    if (col1.isValid())
+    if (col1.isValid() && hasInactiveness)
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
     else
       palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);

@@ -332,6 +332,9 @@ class Style : public QCommonStyle {
       forceButtonTextColor(const_cast<QWidget*>(widget), col);
     }
 
+    /* Is the window of this widget inactive? */
+    bool isWidgetInactive(const QWidget *widget) const;
+
     /* Used only with combo menus. */
     bool hasParent(const QWidget *widget, const char *className) const
     {
