@@ -158,7 +158,7 @@
 <radialGradient fx="368.03537" fy="607.96484" cx="368.03537" cy="607.96484" gradientTransform="translate(20)" xlink:href="#linearGradient5069-3" id="radialGradient5082" r="8" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-24.686094" fy="1133.5432" cx="-24.704655" cy="1133.2474" gradientTransform="matrix(0,1.7989906,-2.4827569,0,2882.578,763.97271)" xlink:href="#linearGradient6806" id="radialGradient6744-9" r="3.625" gradientUnits="userSpaceOnUse"/>
 </defs>
-<circle cx="243" cy="608" rx="7.50" ry="7.5" style="fill:#fff;stroke:#bebebe;color:#000" id="radio-normal"/>
+<circle cx="243" cy="608" style="fill:#fff;stroke:#bebebe;color:#000" id="radio-normal" r="7.5"/>
 <path style="fill:#dc6434;fill-rule:evenodd" id="tab-tear" d="m 330,780 h 15 v 15 h -15 z"/>
 <rect width="45" x="20" y="815" rx="22.5" height="45" style="fill-rule:evenodd;fill-opacity:.059" id="dial"/>
 <g id="arrow-up-normal" transform="translate(12,-415.89287)">
@@ -182,7 +182,7 @@
 <use width="450" height="1230" xlink:href="#arrow-up-pressed" id="arrow-left-pressed" transform="matrix(0,-1,1,0,198.099,341.89475)"/>
 <path style="fill:#e2e2e2;fill-rule:evenodd" id="menuitem-normal-top" d="m 675,-203 h 4 v 8 h -4 z" transform="matrix(0,1,-1,0,0,0)"/>
 <path style="fill:#e2e2e2;fill-rule:evenodd" id="menuitem-normal-bottom" d="m -693,195 h 4 v 8 h -4 z" transform="matrix(0,-1,1,0,0,0)"/>
-<circle cx="263" cy="608" rx="7.5" ry="7.5" style="fill:#f2f2f2;stroke:#bebebe;color:#000" id="radio-focused"/>
+<circle cx="263" cy="608" style="fill:#f2f2f2;stroke:#bebebe;color:#000" id="radio-focused" r="7.5"/>
 <g id="arrow-up-focused" transform="translate(56.25,-415.89298)">
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0;fill:#fff" transform="rotate(-90)"/>
 <path style="fill:#5a5a5a" d="m 8,600.986 12,-12.986 12,12.986 Z "/>
@@ -220,8 +220,8 @@
 <path style="fill:#8d8d8d;fill-opacity:.941" id="toolbar-handle" d="m 424,114 a 5,5 0 0 1 -10,0 5,5 0 1 1 10,0 z"/>
 <path style="fill:#fdfdfd" id="dock-focused" d="m 222,872 h 30 v 30 h -30 z"/>
 <g id="radio-checked-normal">
-<circle cx="283" cy="608" rx="7.5" ry="7.5" style="fill:#3eb34f;stroke:#3eb34f;color:#000"/>
-<circle cx="283" cy="608" rx="2.5" ry="2.5" style="fill:#fff;color:#000"/>
+<circle cx="283" cy="608" style="fill:#3eb34f;stroke:#3eb34f;color:#000" r="7.5"/>
+<circle cx="283" cy="608" style="fill:#fff;color:#000" r="2.5"/>
 </g>
 <g id="ebutton-normal-left" transform="matrix(0.8,0,0,1,-7.8,-36.2516)">
 <path style="fill:#f2f2f2;fill-rule:evenodd" d="M 29.75,81.2514 V 48.7516 H 21 v 32.5 z"/>
@@ -520,8 +520,8 @@
 <use width="100%" height="100%" xlink:href="#arrow-up-focused" id="arrow-minus-focused" transform="matrix(1,0,0,-1,257.14476,428.49211)"/>
 <use width="100%" height="100%" xlink:href="#arrow-up-disabled" id="arrow-minus-disabled" transform="matrix(1,0,0,-1,256.69299,429.60011)"/>
 <g id="radio-checked-focused" transform="translate(22,0)">
-<circle cx="283" cy="608" rx="7.5" ry="7.5" style="fill:url(#radialGradient5108);stroke:#3eb34f;color:#000"/>
-<circle cx="283" cy="608" rx="2.5" ry="2.5" style="fill:#fff;color:#000"/>
+<circle cx="283" cy="608" style="fill:url(#radialGradient5108);stroke:#3eb34f;color:#000" r="7.5"/>
+<circle cx="283" cy="608" style="fill:#fff;color:#000" r="2.5"/>
 </g>
 <g id="checkbox-tristate-focused" transform="translate(20.5,0.5)">
 <rect width="15" x="400" y="600" rx="2" height="15" style="fill:url(#radialGradient5116);fill-rule:evenodd;stroke:#3eb34f;stroke-linecap:round"/>
