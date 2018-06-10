@@ -2838,7 +2838,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
       else if (QMenu *menu = qobject_cast<QMenu*>(o))
+#else
+      else if (qobject_cast<QMenu*>(o))
+#endif
       {
         /* WARNING: If compositing is stopped here, we aren't responsible.
                     A check for the state of compositing at this very moment
