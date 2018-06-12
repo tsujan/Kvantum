@@ -7015,6 +7015,8 @@ void Style::drawControl(ControlElement element,
           int ih = pixelMetric(PM_IndicatorHeight,option,widget);
           if (hasLabel) // menu label
           {
+            painter->save();
+            painter->setFont(opt->font); // some apps (like TeXstudio) use special fonts
             QString txt;
             if (hasNewLine)
             {
@@ -7099,6 +7101,7 @@ void Style::drawControl(ControlElement element,
                           getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
                           iconSize);
             }
+            painter->restore();
           }
           if (haShortcut) // shortcut
           {
@@ -14484,8 +14487,7 @@ QSize Style::sizeFromContents(ContentsType type,
         const size_spec sspec = getSizeSpec(group);
 
         QFont f;
-        if (widget) f = widget->font();
-        else f = QApplication::font();
+        f = opt->font; // some apps (like TeXstudio) use special fonts (see CE_MenuItem)
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
