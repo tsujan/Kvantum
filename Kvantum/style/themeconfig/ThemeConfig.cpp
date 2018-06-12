@@ -512,6 +512,7 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
     }
     else
       r.minH = qMax(v.toInt(),0);
+    r.minH += r.minH % 2; // for vertical centering
   }
 
   v = getValue(name,"min_width", i);

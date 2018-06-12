@@ -14348,7 +14348,7 @@ QSize Style::sizeFromContents(ContentsType type,
            for auto-default (-> qcommonstyle.cpp). So, we set PM_ButtonMargin and
            PM_DefaultFrameWidth to zero for pushbuttons, add our frames and spacings
            instead, and take into account the indicator and auto-defaultness. */
-        s = contentsSize
+        s = contentsSize + QSize (0, contentsSize.height() % 2)
             + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                     fspec.top+fspec.bottom+lspec.top+lspec.bottom)
             + QSize(opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0, 0);
@@ -14630,7 +14630,7 @@ QSize Style::sizeFromContents(ContentsType type,
            how margins and frames are changed in such cases.
         */
 
-        s = contentsSize
+        s = contentsSize + QSize (0, contentsSize.height() % 2)
             /* Qt just adds 6 and 5 px to the width and height respectively
                (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint())
                but we add add our frames and spacings instead. */
@@ -15057,6 +15057,7 @@ QSize Style::sizeCalculated(const QFont &font,
   QSize ts = textSize(font, text, realHeight);
   int tw = ts.width();
   int th = ts.height();
+  th += th%2; // for vertical centering
 
   if (tialign == Qt::ToolButtonIconOnly)
   {
@@ -15076,7 +15077,7 @@ QSize Style::sizeCalculated(const QFont &font,
     if (iconSize.isValid())
     {
       s.rwidth() += iconSize.width() + (text.isEmpty() ? 0 : lspec.tispace) + tw;
-      s.rheight() += qMax(iconSize.height(), th);
+      s.rheight() += qMax(iconSize.height() + iconSize.height() % 2, th);
     }
     else
     {

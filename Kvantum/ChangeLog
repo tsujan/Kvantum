@@ -13,6 +13,7 @@ V0.10.7
  * Compensate for a change in the vertical positioning of submenus with Qt 5.11.
  * Added a key for menu separator height.
  * Added a key (to Kvantum manager) for ignoring the inactive state.
+ * For an exact vertical centering, give an even height to the bounding rectangle of the text and the icon beside it.
 
 V0.10.6
 ---------
