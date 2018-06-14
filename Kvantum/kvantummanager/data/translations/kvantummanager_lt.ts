@@ -7,23 +7,24 @@
         <location filename="../../kvantummanager.ui" line="12"/>
         <location filename="../../KvantumManager.cpp" line="2440"/>
         <source>Kvantum Manager</source>
-        <translation></translation>
+        <translation>Kvantum tvarkytuvė</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="42"/>
         <source>Install/Update Theme</source>
-        <translation></translation>
+        <translation>Įdiegti/Atnaujinti temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="48"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;Programa &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; pateikiama su daugeliu temų, tačiau naudojimui gali būti įdiegtos ir išorinės temos. Čia galite pasirinkti temos aplanką, o tuomet spustelėti mygtuką žemiau, kad įdiegtumėte ją į savo Namų aplanką.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="80"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation></translation>
+        <translation>Pasirinkti Kvantum
+temos aplanką</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
@@ -34,22 +35,22 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="126"/>
         <source>Install this theme</source>
-        <translation></translation>
+        <translation>Įdiegti šią temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="147"/>
         <source>Change/Delete Theme</source>
-        <translation></translation>
+        <translation>Keisti/Ištrinti temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="153"/>
         <source>Select a theme:</source>
-        <translation></translation>
+        <translation>Pasirinkite temą:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="200"/>
         <source>Delete this theme</source>
-        <translation></translation>
+        <translation>Ištrinti šią temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="212"/>
@@ -57,77 +58,84 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation></translation>
+        <translation>Padaryti, kad Kvantum naudotų šią temą!
+
+Išjungtas mygtukas reiškia, kad
+tema jau yra naudojama.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="218"/>
         <source>Use this theme</source>
-        <translation></translation>
+        <translation>Naudoti šią temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="276"/>
         <source>Configure Active Theme</source>
-        <translation></translation>
+        <translation>Konfigūruoti aktyvią temą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="340"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation></translation>
+        <translation>Sugrąžinti į numatytuosius (root)
+šios temos nustatymus.
+(Ctrl(Vald)+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="345"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sugrąžinti į numatytuosius (root) šios temos nustatymus!&lt;/p&gt;&lt;p&gt;Spustelėjus ir patvirtinus, visi konfigūracijos pakeitimai bus prarasti, tačiau galimas tinkintas SVG failas išliks nepaliestas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="348"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Atkurti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Ctrl+Z</source>
-        <translation></translation>
+        <translation>Ctrl(Vald)+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="363"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation></translation>
+        <translation>Įrašyti šią konfigūraciją
+(Ctrl(Vald)+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="367"/>
         <location filename="../../kvantummanager.ui" line="1914"/>
         <source>Save</source>
-        <translation></translation>
+        <translation>Įrašyti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="375"/>
         <source>Ctrl+S</source>
-        <translation></translation>
+        <translation>Ctrl(Vald)+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="382"/>
         <source>Safe Settings</source>
-        <translation></translation>
+        <translation>Saugūs nustatymai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="395"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation></translation>
+        <translation>Nuimkite žymėjimą nuo visų langelių, jei norite,
+kad visi valdikliai būtų numatytuoju pavidalu.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="399"/>
         <source>Hacks</source>
-        <translation></translation>
+        <translation>Patobulinimai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="423"/>
         <source>Transparent Dolphin view</source>
-        <translation></translation>
+        <translation>Permatomas Dolphin rodinys</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="489"/>
