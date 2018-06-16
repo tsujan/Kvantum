@@ -2400,7 +2400,7 @@ void KvantumManager::respectDE (bool checked)
         QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
         if (gtkDesktops.contains(desktop_))
         {
-            ui->labelX11Drag->setEnabled (!checked);
+            //ui->labelX11Drag->setEnabled (!checked);
             //ui->comboX11Drag->setEnabled (!checked);
             ui->checkBoxIconlessBtn->setEnabled (!checked);
             ui->checkBoxIconlessMenu->setEnabled (!checked);
@@ -2410,8 +2410,8 @@ void KvantumManager::respectDE (bool checked)
                                                && !checked);
             ui->checkBoxTrans->setEnabled (!ui->checkBoxNoComposite->isChecked() && !checked);
             bool enableTrans (!ui->checkBoxNoComposite->isChecked()
-                             && ui->checkBoxTrans->isChecked()
-                             && !checked);
+                              && ui->checkBoxTrans->isChecked()
+                              && !checked);
             ui->opaqueLabel->setEnabled (enableTrans);
             ui->opaqueEdit->setEnabled (enableTrans);
             ui->reduceOpacityLabel->setEnabled(enableTrans);

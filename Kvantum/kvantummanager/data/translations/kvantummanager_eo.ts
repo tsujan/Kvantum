@@ -1192,11 +1192,6 @@ konsideri agordojn de la nuna labortabla medio.
 Malmarku ĝin se vi volus ŝanĝi tiujn agordojn!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1711"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed), disables compositing to use DE menu shadows, and sets window dragging only for menubars and primary toolbars (although GTK does not have such a feature).&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penus konsideri agordojn de la nuna labortabla medio se ĝi estus KDE, Unity, Gnome aŭ Pantheon.&lt;/p&gt;&lt;p&gt;En KDE, ĉi tiu agordo igas Kvantum legi la KDE-agordojn pri la malgrandaj kaj grandaj ikonoj kaj ankaŭ pri la unuobla aŭ duobla klakado.&lt;/p&gt;&lt;p&gt;En Unity, Gnome kaj Pantheon, ĝi viŝas la ikonojn for la menuoj kaj prembutonoj (eĉ kiam la kongruaj dconf-klavoj estas ŝanĝitaj), malvalidigas la komponadon por utiligi la menuombrojn de la medio, kaj agordas la ŝovzonon tiel ke ĝi kovru nur la menubreton kaj primiaran ilbreton (kvankam GTK ne havas tian eblecon).&lt;/p&gt;&lt;p&gt;Ĉi tiu markbutono eblas malvalidigi iujn agordojn. Malmarku ĝin se vi volus ŝanĝi ilin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
         <source>Respect current DE if possible</source>
         <translation>Konsideru labortablajn mediojn</translation>
@@ -1227,6 +1222,11 @@ alidire, ne estas videblaj limoj inter ili.</translation>
         <location filename="../../kvantummanager.ui" line="1500"/>
         <source>Scrollable menus</source>
         <translation>Rulumebla menuo</translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1711"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penus konsideri agordojn de la nuna labortabla medio se ĝi estus KDE, Unity, Gnome aŭ Pantheon.&lt;/p&gt;&lt;p&gt;En KDE, ĉi tiu agordo igas Kvantum legi la KDE-agordojn pri la malgrandaj kaj grandaj ikonoj kaj ankaŭ pri la unuobla aŭ duobla klakado.&lt;/p&gt;&lt;p&gt;En Unity, Gnome kaj Pantheon, ĝi viŝas la ikonojn for la menuoj kaj prembutonoj (eĉ kiam la kongruaj dconf-klavoj estas ŝanĝitaj) kaj malvalidigas la fenestran tralumeblecon.&lt;/p&gt;&lt;p&gt;Ĉi tiu markbutono eblas malvalidigi iujn agordojn. Malmarku ĝin se vi volus ŝanĝi ilin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1733"/>
