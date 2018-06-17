@@ -1262,7 +1262,7 @@ void Style::polish(QWidget *widget)
           if (itemView->itemDelegate()->inherits("QComboMenuDelegate"))
           { // enforce translucency on the combo menu (all palettes needed)
             if (itemView->style() != this)
-            { // no mercy to intruding styles (as in SMPLayer pereferences)
+            { // no mercy to intruding styles (as in SMPLayer preferences)
               itemView->setStyleSheet("background-color: transparent;");
             }
 
