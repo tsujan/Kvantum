@@ -243,6 +243,8 @@ typedef struct {
   /* blur the region behind a window background that is
      explicitly made translucent by its app? */
   bool blur_translucent;
+  /* should all texts have opaque colors? */
+  bool opaque_colors;
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
   bool transparent_ktitle_label;
@@ -552,6 +554,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_pcmanfm_view = false;
   hspec.lxqtmainmenu_iconsize = 0;
   hspec.blur_translucent = false;
+  hspec.opaque_colors = false;
   hspec.transparent_ktitle_label = false;
   hspec.transparent_menutitle = false;
   hspec.kcapacitybar_as_progressbar = false;

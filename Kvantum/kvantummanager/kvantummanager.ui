@@ -441,13 +441,14 @@ By default, it has the base background.</string>
                 </spacer>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxScrollJump">
+                <widget class="QCheckBox" name="checkBoxNormalBtn">
                  <property name="toolTip">
-                  <string>By default, the scroll slider jumps to a position
-when the scrollbar is left clicked.</string>
+                  <string>No bold font for default push buttons?
+
+Such push buttons have bold text by default.</string>
                  </property>
                  <property name="text">
-                  <string>Scroll jump with middle click</string>
+                  <string>Normal font for default push buttons</string>
                  </property>
                 </widget>
                </item>
@@ -479,14 +480,17 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNormalBtn">
+                <widget class="QCheckBox" name="checkBoxIconlessBtn">
                  <property name="toolTip">
-                  <string>No bold font for default push buttons?
+                  <string>No icon for push buttons that have text?
 
-Such push buttons have bold text by default.</string>
+By default, most push buttons have icon.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Normal font for default push buttons</string>
+                  <string>Iconless push buttons</string>
                  </property>
                 </widget>
                </item>
@@ -505,17 +509,17 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessBtn">
+                <widget class="QCheckBox" name="checkBoxIconlessMenu">
                  <property name="toolTip">
-                  <string>No icon for push buttons that have text?
+                  <string>No icon for menu-items?
 
-By default, most push buttons have icon.
+By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Iconless push buttons</string>
+                  <string>Iconless  menus</string>
                  </property>
                 </widget>
                </item>
@@ -535,17 +539,16 @@ Konsole, QTerminal and LXQt panel are some examples.</string>
                 </widget>
                </item>
                <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessMenu">
+                 <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
-                  <string>No icon for menu-items?
+                  <string>Only the top toolbar should be styled?
 
-By default, some of them may have icon.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+By default, all toolbars are styled,
+whether they are on the top or at any
+other position.</string>
                  </property>
                  <property name="text">
-                  <string>Iconless  menus</string>
+                  <string>Single top toolbar</string>
                  </property>
                 </widget>
                </item>
@@ -563,16 +566,16 @@ Miscellaneous → Respect current DE if possible</string>
                 </widget>
                </item>
                <item row="4" column="3" colspan="2">
-                 <widget class="QCheckBox" name="checkBoxToolbar">
+                <widget class="QCheckBox" name="checkBoxTint">
                  <property name="toolTip">
-                  <string>Only the top toolbar should be styled?
-
-By default, all toolbars are styled,
-whether they are on the top or at any
-other position.</string>
+                  <string>Do not tint selected label icons with
+the highlight color!</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Single top toolbar</string>
+                  <string>No selection tint</string>
                  </property>
                 </widget>
                </item>
@@ -591,16 +594,16 @@ other position.</string>
                 </widget>
                </item>
                <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTint">
+                <widget class="QCheckBox" name="checkBoxOpaqueColors">
                  <property name="toolTip">
-                  <string>Do not tint selected label icons with
-the highlight color!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Text colors are defined by the theme
+and can have translucency.
+
+Checking this is not recommended unless
+as a workaround for bugs in applications.</string>
                  </property>
                  <property name="text">
-                  <string>No selection tint</string>
+                  <string>Opaque (text) colors</string>
                  </property>
                 </widget>
                </item>
@@ -617,7 +620,19 @@ the highlight color!</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3">
+               <item row="7" column="1">
+                <widget class="QCheckBox" name="checkBoxDark">
+                 <property name="toolTip">
+                  <string>Some apps may not respect dark themes.
+Kvantum can try to correct their behavior
+as far as possible.</string>
+                 </property>
+                 <property name="text">
+                  <string>Respect dark themes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="3">
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -631,7 +646,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="4">
+               <item row="7" column="4">
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -648,19 +663,21 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1">
-                <widget class="QCheckBox" name="checkBoxDark">
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxGrip">
                  <property name="toolTip">
-                  <string>Some apps may not respect dark themes.
-Kvantum can try to correct their behavior
+                  <string>Show size grips of dialogs and statusbars
 as far as possible.</string>
                  </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
-                  <string>Respect dark themes</string>
+                  <string>Force size grips</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="3">
+               <item row="8" column="3">
                 <widget class="QLabel" name="labelOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -675,7 +692,7 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="8" column="4">
                 <widget class="QSpinBox" name="spinOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -696,21 +713,18 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxGrip">
+               <item row="9" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollJump">
                  <property name="toolTip">
-                  <string>Show size grips of dialogs and statusbars
-as far as possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>By default, the scroll slider jumps to a position
+when the scrollbar is left clicked.</string>
                  </property>
                  <property name="text">
-                  <string>Force size grips</string>
+                  <string>Scroll jump with middle click</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -725,7 +739,7 @@ or through logging out and in again.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="4">
+               <item row="9" column="4">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.

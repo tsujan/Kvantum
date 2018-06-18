@@ -332,6 +332,9 @@ class Style : public QCommonStyle {
       forceButtonTextColor(const_cast<QWidget*>(widget), col);
     }
 
+    /* Gets color from #rrggbbaa. */
+    QColor getFromRGBA(const QString &str) const;
+
     /* Is the window of this widget inactive? */
     bool isWidgetInactive(const QWidget *widget) const;
 

@@ -810,6 +810,10 @@ middle_click_scroll               true/false          Should the scroll slider j
                                                       clicked? The default is false and the
                                                       jump is done by a left click.
 
+opaque_colors                     true/false          Should all (text) colors be opaque? By
+                                                      default, (text) colors are defined by
+                                                      the theme and can be translucent.
+
                            **********************
                            *** Other Sections ***
                            **********************

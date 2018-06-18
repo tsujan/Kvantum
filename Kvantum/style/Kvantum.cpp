@@ -254,7 +254,7 @@ static inline bool enoughContrast (QColor col1, QColor col2)
 
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
    Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
-static inline QColor getFromRGBA(const QString str)
+QColor Style::getFromRGBA(const QString &str) const
 {
   QColor col(str);
   if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
@@ -266,7 +266,8 @@ static inline QColor getFromRGBA(const QString str)
     QString tmp(str);
     tmp.remove(7, 2);
     col = QColor(tmp);
-    col.setAlpha(alpha);
+    if(!hspec_.opaque_colors)
+      col.setAlpha(alpha);
   }
   return col;
 }

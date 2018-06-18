@@ -1045,6 +1045,10 @@ hacks_spec ThemeConfig::getHacksSpec() const
     }
   }
 
+  v = getValue("Hacks","opaque_colors");
+  if (v.isValid())
+    r.opaque_colors = v.toBool();
+
   v = getValue("Hacks","transparent_ktitle_label");
   r.transparent_ktitle_label = v.toBool();
 
