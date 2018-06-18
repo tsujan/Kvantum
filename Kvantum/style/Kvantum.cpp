@@ -8451,10 +8451,17 @@ void Style::drawControl(ControlElement element,
         QString txt = opt->text;
         if (!txt.isEmpty())
         {
+          const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
           int txtWidth = r.width() - lspec.right-lspec.left-fspec.left-fspec.right
                          - (opt->icon.isNull() ? 0 : icnSize + lspec.tispace);
           QFont F(painter->font());
-          if (lspec.boldFont) F.setWeight(lspec.boldness);
+          if (lspec.boldFont)
+          {
+            if (!tb) // QML
+              lspec.boldFont = false;
+            else
+              F.setWeight(lspec.boldness);
+          }
           QSize txtSize = textSize(F,txt,false);
           if (txtSize.width() > txtWidth)
           {
@@ -8462,7 +8469,6 @@ void Style::drawControl(ControlElement element,
                it might not fit into our available space. So, we always
                elide it but respect the elide mode when present. */
             QFontMetrics fm(F);
-            const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
             txt = fm.elidedText(txt, (tb && tb->elideMode() != Qt::ElideNone)
                                        ? tb->elideMode()
                                        : Qt::ElideRight,
