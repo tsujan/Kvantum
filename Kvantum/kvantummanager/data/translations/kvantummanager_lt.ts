@@ -154,7 +154,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="477"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Permatomas PCManFM-qt šoninis polangis</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="518"/>
@@ -173,12 +173,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="503"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Permatomas PCManFM-qt rodinys</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="548"/>
         <source>Iconless  menus</source>
-        <translation></translation>
+        <translation>Meniu be piktogramų</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="533"/>
@@ -188,22 +188,22 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="575"/>
         <source>Single top toolbar</source>
-        <translation></translation>
+        <translation>Vienintelė viršutinė įrankių juosta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="555"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation></translation>
+        <translation>Nepiešti KTitles jokio fono.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="558"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepiešti KTitles jokio fono?&lt;/p&gt;&lt;p&gt;Ktitles yra naudojami kai kurių KDE programų, kad konfigūracijos dialoguose būtų parodytos skirtingos sekcijos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="561"/>
         <source>Transparent KTitle label</source>
-        <translation></translation>
+        <translation>Permatoma KTitle etiketė</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="596"/>
@@ -225,32 +225,33 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="582"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation></translation>
+        <translation>Nepiešti (KDE) meniu pavadinimams jokio fono.
+(Naudojant Plasma meniu, reikalauja atsijungti ir vėl prisijungti.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="586"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nepiešti (KDE) meniu pavadinimams jokio fono?&lt;/p&gt;&lt;p&gt;Meniu pavadinimai yra kaip meniu skirtukai tik su piktograma ir tekstu.&lt;/p&gt;&lt;p&gt;Naudojant Plasma meniu, tai reikalauja atsijungti ir vėl prisijungti. Naudojant LXQt skydelį, užtenka &lt;span style=&quot; font-style:italic;&quot;&gt;Seanso nustatymuose &lt;/span&gt;paleisti skydelį iš naujo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="589"/>
         <source>Transparent menu title</source>
-        <translation></translation>
+        <translation>Permatomi meniu pavadinimai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="610"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation></translation>
+        <translation>Stilizuoti KDE talpos juostas kaip eigos juostas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="613"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stilizuoti KDE talpos juostas kaip eigos juostas?&lt;/p&gt;&lt;p&gt;Talpos juostas, įprastai, naudoja kai kurios KDE programos tam, kad būtų rodomi talpų dydžiai ir jie turi savo asmeninį stilių.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="616"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation></translation>
+        <translation>Rodyti KCapacityBar kaip eigos juostas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="630"/>
@@ -267,7 +268,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="659"/>
         <source>Respect dark themes</source>
-        <translation></translation>
+        <translation>Gerbti tamsias temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="666"/>
@@ -275,24 +276,27 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation></translation>
+        <translation>Naudinga, naudojant vienspalvių piktogramų rinkinius ir
+kai išjungtų piktogramų nepermatomumas nėra
+sumažinamas jokiais kitais būdais.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="671"/>
         <location filename="../../kvantummanager.ui" line="686"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Naudinga, naudojant vienspalvių piktogramų rinkinius ir kai išjungtų piktogramų nepermatomumas nėra sumažinamas jokiais kitais būdais.&lt;/p&gt;&lt;p&gt;KDE automatiškai sumažina išjungtų piktogramų nepermatomumą. Todėl, ši parinktis gali labiau praversti, naudojant kitas darbalaukio aplinkas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="674"/>
         <source>Opacity of disabled icons:</source>
-        <translation></translation>
+        <translation>Išjungtų piktogramų nepermatomumas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="702"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation></translation>
+        <translation>Rodyti dialogų ir būsenos juostų dydžio rankenas
+kaip įmanoma toliau.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="706"/>
