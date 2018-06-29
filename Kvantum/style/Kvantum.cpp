@@ -8756,7 +8756,7 @@ void Style::drawControl(ControlElement element,
           topText = (tspec_.progressbar_thickness + QFontMetrics(f).height()+3 <= h);
         }
 
-        if (QFontMetrics(f).height() > (isVertical ? s.width() : s.height()))
+        if (opt && opt->textVisible && QFontMetrics(f).height() > (isVertical ? s.width() : s.height()))
         {
           r = alignedRect(option->direction,
                           topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom
@@ -8909,7 +8909,7 @@ void Style::drawControl(ControlElement element,
                                    ? s.width() : s.width() + fspecPr.top + fspecPr.bottom
                                  : spreadProgressbar
                                    ? s.height() : s.height() + fspecPr.top + fspecPr.bottom;
-          if (QFontMetrics(f).height() > thickness)
+          if (opt->textVisible && QFontMetrics(f).height() > thickness)
           {
             r = alignedRect(option->direction,
                             topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom

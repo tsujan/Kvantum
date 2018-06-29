@@ -16,6 +16,7 @@ V0.10.7
  * For an exact vertical centering, give an even height to the bounding rectangle of the text and the icon beside it.
  * Consider special fonts for menu-items (some apps may use them to show different things).
  * Added a key (to Kvantum Manager) for removing (text) color translucency.
+ * Vertically center textless slim (horizontal) progressbars.
 
 V0.10.6
 ---------
