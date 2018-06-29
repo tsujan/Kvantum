@@ -84,12 +84,12 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="348"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Ctrl+Z</source>
-        <translation></translation>
+        <translation>Strg+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="363"/>
@@ -101,12 +101,12 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="367"/>
         <location filename="../../kvantummanager.ui" line="1928"/>
         <source>Save</source>
-        <translation></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="375"/>
         <source>Ctrl+S</source>
-        <translation></translation>
+        <translation>Strg+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="382"/>
@@ -480,7 +480,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1011"/>
         <source>Sizes</source>
-        <translation></translation>
+        <translation>Größen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1026"/>
@@ -882,7 +882,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1420"/>
         <source>Miscellaneous</source>
-        <translation></translation>
+        <translation>Verschiedenes</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1446"/>
@@ -1118,12 +1118,12 @@ This option will hide these.</source>
         <location filename="../../kvantummanager.ui" line="1955"/>
         <location filename="../../kvantummanager.ui" line="1966"/>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Strg+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1958"/>
         <source>Quit</source>
-        <translation></translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1976"/>
@@ -1134,12 +1134,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1980"/>
         <source>Preview</source>
-        <translation></translation>
+        <translation>Vorschau</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1991"/>
         <source>About</source>
-        <translation></translation>
+        <translation>Über</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2019"/>
@@ -1154,7 +1154,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2025"/>
         <source>Help</source>
-        <translation></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="173"/>
@@ -1189,12 +1189,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="583"/>
         <source>%1 installed.</source>
-        <translation></translation>
+        <translation>%1 installiert.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="726"/>
         <source>%1 deleted.</source>
-        <translation></translation>
+        <translation>%1 gelöscht.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="780"/>
@@ -1259,7 +1259,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="375"/>
         <source>This file cannot be removed:</source>
-        <translation></translation>
+        <translation>Diese Datei kann nicht entfernt werden:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="394"/>
@@ -1302,7 +1302,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="459"/>
         <source>Please choose another directory!</source>
-        <translation></translation>
+        <translation>Bitte wählen Sie ein anderes Verzeichnis aus!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="469"/>
@@ -1312,7 +1312,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="470"/>
         <source>Do you want to overwrite it?</source>
-        <translation></translation>
+        <translation>Möchten Sie es überschreiben?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="505"/>
@@ -1337,7 +1337,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation></translation>
+        <translation>Möchten sie wirklich  &lt;i&gt;%1&lt;/i&gt; löschen?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="626"/>
@@ -1359,7 +1359,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1431"/>
         <source>No description</source>
-        <translation></translation>
+        <translation>Keine Beschreibung</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1893"/>
@@ -1369,12 +1369,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1904"/>
         <source>A copy was already created.</source>
-        <translation></translation>
+        <translation>Eine Kopie wurde bereits erstellt.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2196"/>
         <source>Configuration saved.</source>
-        <translation></translation>
+        <translation>Die Konfiguration wurde gespeichert.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2303"/>
@@ -1399,7 +1399,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2443"/>
         <source>About Kvantum Manager</source>
-        <translation></translation>
+        <translation>Über Kvantum Manager</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2445"/>
@@ -1409,12 +1409,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2446"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation></translation>
+        <translation>Autor: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="45"/>
         <source>modified</source>
-        <translation></translation>
+        <translation>geändert</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="46"/>
@@ -1424,7 +1424,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="373"/>
         <source>This directory cannot be removed:</source>
-        <translation></translation>
+        <translation>Dieses Verzeichnis kann nicht entfernt werden:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
@@ -1449,7 +1449,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="46"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation></translation>
+        <translation>Kvantum ist nicht auf Ihrem System installiert.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="47"/>
