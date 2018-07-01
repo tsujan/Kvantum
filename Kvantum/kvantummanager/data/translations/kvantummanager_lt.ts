@@ -402,7 +402,7 @@ arba atsijungiant ir vėl prisijungiant.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="780"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jei pažymėta, meniu, paaiškinimai ir langai neturės dalinio permatomumo ar šešėlio.&lt;/p&gt;&lt;p&gt;Nuėmus žymėjimą, dalinis permatomumas ir šešėlis bus prieinami tuomet, jei temos SVG faile bus tinkami elementai.&lt;/p&gt;&lt;p&gt;Jei tai yra išjungta, žiūrėkite Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="783"/>
@@ -425,7 +425,7 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="807"/>
         <source>Translucent windows</source>
-        <translation></translation>
+        <translation>Dalinai permatomi langai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="855"/>
@@ -435,7 +435,11 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation></translation>
+        <translation>Jeigu yra įjungtas dalinis langų permatomumas,
+tai sumažins langų nepermatomumą.
+
+Tam, kad veiktų šis raktas, dalinai permatomas
+SVG fonas NĖRA būtinas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="862"/>
@@ -472,7 +476,8 @@ some widgets is changed, mostly by the mouse.</source>
         <location filename="../../kvantummanager.ui" line="987"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation></translation>
+        <translation>Pažymėkite tai, norėdami pašalinti visus langų/dialogų išklojimo šablonus!
+Nuimkite žymėjimą, norėdami tuos šablonus sugrąžinti!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="991"/>
@@ -667,21 +672,28 @@ nesvarbu, ar jos yra apačioje ar kitoje vietoje.</translation>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation></translation>
+        <translation>Paryškinimo spalva yra naudojama atspalvio suteikimui.
+
+Tai labiausiai aktualu naudojant vienspalves piktogramas.
+Įkoduotos piktogramos/stiliai gali nepaisyti šio rakto.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation></translation>
+        <translation>Kai kurios programos gali negerbti tamsių temų.
+Kvantum, kiek tai įmanoma, gali bandyti pataisyti
+jų elgseną.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="935"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation></translation>
+        <translation>Reikalauja KDE suliejimo efekto, tai palaikančios
+grafikos plokštės ir temoje esančio dalinai permatomo
+SVG lango fono.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1026"/>
@@ -724,7 +736,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation></translation>
+        <translation>Paveikia mygtukus, kortelių juostas ir sąrašo rodinius.
+
+Numatytoji reikšmė yra16 pikselių.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
@@ -734,7 +748,11 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation></translation>
+        <translation>Paveikia įrankių juostas.
+
+Numatytoji reikšmė yra 22 pikseliai, tačiau
+kai kurios programos gali ją nusistatyti pačios.
+KDE programos gauna ją iš KDE nustatymo.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1305"/>
