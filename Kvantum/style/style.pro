@@ -21,6 +21,9 @@ HEADERS += themeconfig/specs.h \
 
 greaterThan(QT_MAJOR_VERSION, 4) {
   SOURCES += Kvantum.cpp \
+             eventFiltering.cpp \
+             polishing.cpp \
+             rendering.cpp \
              KvantumPlugin.cpp \
              drag/x11wmmove.cpp \
              drag/windowmanager.cpp \

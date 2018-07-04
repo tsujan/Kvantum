@@ -48,6 +48,9 @@ add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 if(NOT ENABLE_QT4)
   set(kvantum_SOURCES
       Kvantum.cpp
+      eventFiltering.cpp
+      polishing.cpp
+      rendering.cpp
       KvantumPlugin.cpp
       shortcuthandler.cpp
       blur/blurhelper.cpp
