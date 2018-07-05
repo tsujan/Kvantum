@@ -849,7 +849,7 @@ problems with translucency!)</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1" alignment="Qt::AlignRight">
+               <item row="4" column="1" alignment="Qt::AlignLeft">
                 <widget class="QLabel" name="reduceOpacityLabel">
                  <property name="toolTip">
                   <string>This will reduce the window opacity
@@ -896,7 +896,40 @@ needed for this key to work.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1" colspan="3">
+               <item row="5" column="1" alignment="Qt::AlignLeft">
+                <widget class="QLabel" name="reduceMenuOpacityLabel">
+                 <property name="text">
+                  <string>Reduce menu opacity by</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="2">
+                <spacer name="horizontalSpacerMenuOpacity">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="3" alignment="Qt::AlignLeft">
+                <widget class="QSpinBox" name="spinReduceMenuOpacity">
+                 <property name="suffix">
+                  <string> %</string>
+                 </property>
+                 <property name="maximum">
+                  <number>90</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxBlurWindow">
                  <property name="toolTip">
                   <string>Needs KDE blur effect, a graphic card
@@ -908,7 +941,7 @@ window SVG background in the theme.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="0">
+               <item row="6" column="0">
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -921,7 +954,7 @@ window SVG background in the theme.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="5" column="4">
+               <item row="6" column="4">
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -934,7 +967,7 @@ window SVG background in the theme.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="6" column="1" colspan="3">
+               <item row="7" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxAnimation">
                  <property name="toolTip">
                   <string>A 200ms fading animation when the state of
@@ -948,7 +981,7 @@ some widgets is changed, mostly by the mouse.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1" colspan="3">
+               <item row="8" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxPattern">
                  <property name="toolTip">
                   <string>Check this to remove all window/dialog tiling patterns!
@@ -959,7 +992,7 @@ Uncheck it if you want those patterns back!</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1" colspan="3">
+               <item row="9" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxInactiveness">
                  <property name="toolTip">
                   <string>Use the same colors and shapes with active and inactive
@@ -970,7 +1003,7 @@ windows if this theme distinguishes between them?</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1" colspan="3">
+               <item row="10" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxTransient">
                  <property name="toolTip">
                   <string>Make scrollbars transient!
@@ -984,7 +1017,7 @@ They usually take no extra space.</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1" colspan="3">
+               <item row="11" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxTransientGroove">
                  <property name="enabled">
                   <bool>false</bool>

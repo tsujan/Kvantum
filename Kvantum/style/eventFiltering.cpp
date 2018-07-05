@@ -37,7 +37,7 @@
 #include <QPaintEvent>
 #include <QMenuBar>
 #include <QDialog>
-#include <QDesktopWidget>
+#include <QDesktopWidget> // for positioning menus
 
 namespace Kvantum
 {

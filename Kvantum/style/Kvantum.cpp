@@ -51,7 +51,6 @@
 #include <QStatusBar>
 #include <QCheckBox>
 #include <QRadioButton>
-#include <QDesktopWidget> // for positioning menus
 #include <QStandardPaths>
 #include <QItemSelectionModel>
 //#include <QDebug>
@@ -2818,16 +2817,40 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* detached (Qt5) menus may come here because of setSurfaceFormat() */
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
       {
-        renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+        if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
+        {
+          QRect r = option->rect;
+          r = r.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
+                                        menuShadow_.at(2), menuShadow_.at(3)));
+          painter->save();
+          painter->setClipRegion(QRegion(option->rect).subtracted(QRegion(r)));
+          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+          painter->restore();
+
+          painter->save();
+          painter->setOpacity(1.0 - (qreal)tspec_.reduce_menu_opacity/100.0);
+
+          painter->save();
+          painter->setClipRegion(QRegion(r));
+          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+          painter->restore();
+
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+          painter->restore();
+        }
+        else
+        {
+          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+        }
       }
       else
       {
         if (!widget) // QML
           painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
       }
-
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
 
       break;
     }
@@ -2917,15 +2940,40 @@ void Style::drawPrimitive(PrimitiveElement element,
               && fspec.left >= tspec_now.menu_shadow_depth
               && widget && translucentWidgets_.contains(widget))
           {
-            renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+            if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
+            {
+              QRect r = option->rect;
+              r = r.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
+                                            menuShadow_.at(2), menuShadow_.at(3)));
+              painter->save();
+              painter->setClipRegion(QRegion(option->rect).subtracted(QRegion(r)));
+              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+              painter->restore();
+
+              painter->save();
+              painter->setOpacity(1.0 - (qreal)tspec_.reduce_menu_opacity/100.0);
+
+              painter->save();
+              painter->setClipRegion(QRegion(r));
+              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+              painter->restore();
+
+              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+              painter->restore();
+            }
+            else
+            {
+              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+            }
           }
           else
           {
             if (!widget) // QML
               painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
             renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
           }
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
           break;
         }
 

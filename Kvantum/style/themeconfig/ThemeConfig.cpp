@@ -639,6 +639,10 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid())
     r.reduce_window_opacity = qMin(qMax(v.toInt(),0),90);
 
+  v = getValue("General","reduce_menu_opacity");
+  if (v.isValid())
+    r.reduce_menu_opacity = qMin(qMax(v.toInt(),0),90);
+
   v = getValue("General","x11drag");
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default
   {

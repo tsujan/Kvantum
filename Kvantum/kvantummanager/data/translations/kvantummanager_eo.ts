@@ -5,7 +5,7 @@
     <name>KvManager::KvantumManager</name>
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
-        <location filename="../../KvantumManager.cpp" line="2444"/>
+        <location filename="../../KvantumManager.cpp" line="2459"/>
         <source>Kvantum Manager</source>
         <translation>Administrilo de Kvantum</translation>
     </message>
@@ -107,7 +107,7 @@ agordojn de la etoso.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="367"/>
-        <location filename="../../kvantummanager.ui" line="1928"/>
+        <location filename="../../kvantummanager.ui" line="1961"/>
         <source>Save</source>
         <translation>Konservi</translation>
     </message>
@@ -291,6 +291,7 @@ estus uzita kiel proviza solvo por cimoj en aplikaĵoj.</translation>
         <location filename="../../kvantummanager.ui" line="659"/>
         <location filename="../../kvantummanager.ui" line="706"/>
         <location filename="../../kvantummanager.ui" line="892"/>
+        <location filename="../../kvantummanager.ui" line="925"/>
         <source> %</source>
         <translation></translation>
     </message>
@@ -343,15 +344,15 @@ as far as possible.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="753"/>
-        <location filename="../../kvantummanager.ui" line="1042"/>
-        <location filename="../../kvantummanager.ui" line="1080"/>
-        <location filename="../../kvantummanager.ui" line="1110"/>
-        <location filename="../../kvantummanager.ui" line="1144"/>
-        <location filename="../../kvantummanager.ui" line="1172"/>
-        <location filename="../../kvantummanager.ui" line="1198"/>
-        <location filename="../../kvantummanager.ui" line="1228"/>
-        <location filename="../../kvantummanager.ui" line="1256"/>
-        <location filename="../../kvantummanager.ui" line="1291"/>
+        <location filename="../../kvantummanager.ui" line="1075"/>
+        <location filename="../../kvantummanager.ui" line="1113"/>
+        <location filename="../../kvantummanager.ui" line="1143"/>
+        <location filename="../../kvantummanager.ui" line="1177"/>
+        <location filename="../../kvantummanager.ui" line="1205"/>
+        <location filename="../../kvantummanager.ui" line="1231"/>
+        <location filename="../../kvantummanager.ui" line="1261"/>
+        <location filename="../../kvantummanager.ui" line="1289"/>
+        <location filename="../../kvantummanager.ui" line="1324"/>
         <source> px</source>
         <translation></translation>
     </message>
@@ -471,114 +472,119 @@ por ke ĉi tio efiku.</translation>
         <translation>Malpliigu la opakecon de fenestroj laŭ</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="907"/>
+        <location filename="../../kvantummanager.ui" line="902"/>
+        <source>Reduce menu opacity by</source>
+        <translation>Malpliigu la opakecon de menuoj laŭ</translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="940"/>
         <source>Blurring for translucent windows</source>
         <translation>Nebuligitaj tralumeblaj fenestroj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="940"/>
+        <location filename="../../kvantummanager.ui" line="973"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation>Dissolva animacio daŭranta 200 ms kiam la statoj
 de iuj fenestraĵoj estas ŝanĝitaj, pleje de la muso.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="944"/>
+        <location filename="../../kvantummanager.ui" line="977"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dissolva animacio daŭranta 200 ms kiam la statoj de iuj fenestraĵoj estas ŝanĝitaj, pleje de la muso.&lt;/p&gt;&lt;p&gt;La CPU-uzado estas neglektinda ĉar ofte nur unu fenestraĵo estas animaciata. La rezultata vida efekto dependas al la aktiva etoso.&lt;/p&gt;&lt;p&gt;La jenaj fenestraĵoj estas subtenitaj: butonoj (inkluzive radiobutonojn kaj markbutonojn), fallistiloj, ŝpinbutonoj, teniloj de ŝoviloj, liniredaktiloj kaj rulumvidoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="947"/>
+        <location filename="../../kvantummanager.ui" line="980"/>
         <source>Animation for state change under mouse</source>
         <translation>Animacio por la ŝveba statŝanĝo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="954"/>
+        <location filename="../../kvantummanager.ui" line="987"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation>Marku por viŝi ĉiujn fenestrajn/dialogajn kahelojn!
 Malmarku se vi volas tiujn kahelojn refoje!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="958"/>
+        <location filename="../../kvantummanager.ui" line="991"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation>Viŝu la fenestrajn/dialogajn kahelojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="965"/>
+        <location filename="../../kvantummanager.ui" line="998"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Uzi la samajn kolorojn kaj formojn ĉe la aktiva kaj neaktiva
 fenestroj se ĉi tiu etoso distingas ilin unu je la alia?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="969"/>
+        <location filename="../../kvantummanager.ui" line="1002"/>
         <source>Ignore inactive state</source>
         <translation>Ignoru la neaktivan staton</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="983"/>
+        <location filename="../../kvantummanager.ui" line="1016"/>
         <source>Transient scrollbars</source>
         <translation>Nedaŭraj rulumskaloj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1005"/>
+        <location filename="../../kvantummanager.ui" line="1038"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation>Grandoj &amp;&amp; Prokrastoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1011"/>
+        <location filename="../../kvantummanager.ui" line="1044"/>
         <source>Sizes</source>
         <translation>Grandoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1026"/>
+        <location filename="../../kvantummanager.ui" line="1059"/>
         <source>Small icon:</source>
         <translation>Malgranda ikono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1064"/>
+        <location filename="../../kvantummanager.ui" line="1097"/>
         <source>Large icon:</source>
         <translation>Granda ikono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1098"/>
+        <location filename="../../kvantummanager.ui" line="1131"/>
         <source>Button icon:</source>
         <translation>Butona ikono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1130"/>
+        <location filename="../../kvantummanager.ui" line="1163"/>
         <source>Toolbar icon:</source>
         <translation>Ilbreta ikono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1157"/>
-        <location filename="../../kvantummanager.ui" line="1168"/>
+        <location filename="../../kvantummanager.ui" line="1190"/>
+        <location filename="../../kvantummanager.ui" line="1201"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
         <translation>La defaŭlta valoro estas 2 px sed
 iuj aplikaĵoj determinas ĝin mem.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1161"/>
+        <location filename="../../kvantummanager.ui" line="1194"/>
         <source>Layout spacing:</source>
         <translation>Aranĝa spaco:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1185"/>
-        <location filename="../../kvantummanager.ui" line="1195"/>
+        <location filename="../../kvantummanager.ui" line="1218"/>
+        <location filename="../../kvantummanager.ui" line="1228"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation>La defaŭlta valoro estas 4 px sed
 iuj aplikaĵoj determinas ĝin mem.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1188"/>
+        <location filename="../../kvantummanager.ui" line="1221"/>
         <source>Layout margin:</source>
         <translation>Aranĝa marĝeno:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1211"/>
-        <location filename="../../kvantummanager.ui" line="1223"/>
+        <location filename="../../kvantummanager.ui" line="1244"/>
+        <location filename="../../kvantummanager.ui" line="1256"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
@@ -587,25 +593,25 @@ iuj aplikaĵoj determinas ĝin mem.</translation>
 La defaŭlto estas 0.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1216"/>
+        <location filename="../../kvantummanager.ui" line="1249"/>
         <source>Submenu overlap: </source>
         <translation>Submenua surmeto:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1241"/>
-        <location filename="../../kvantummanager.ui" line="1252"/>
+        <location filename="../../kvantummanager.ui" line="1274"/>
+        <location filename="../../kvantummanager.ui" line="1285"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation>La larĝo de la horizontala ŝpinbutono.
 (Ĝi ne efikas ĉe la vertikalaj ŝpinindikiloj.)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1245"/>
+        <location filename="../../kvantummanager.ui" line="1278"/>
         <source>Spin button width: </source>
         <translation>Larĝo de ŝpinbutono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1496"/>
+        <location filename="../../kvantummanager.ui" line="1529"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -614,7 +620,7 @@ By default, tree branches have indicators but no line.</source>
 Defaŭlte, la branĉoj havas indikilojn sed neniun linion.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1907"/>
+        <location filename="../../kvantummanager.ui" line="1940"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -736,7 +742,7 @@ as far as possible.</source>
 Kvantum povas peni korekti iliajn kondutojn laŭeble.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="902"/>
+        <location filename="../../kvantummanager.ui" line="935"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
@@ -745,20 +751,20 @@ subtenanta ĝin, kaj tralumebla fono por la fenestroj
 en la SVG-dosiero.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="993"/>
+        <location filename="../../kvantummanager.ui" line="1026"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation>Ĉu la nedaŭra rulumskalo havu
 tralumeblan fendon kiam bezonata?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="997"/>
+        <location filename="../../kvantummanager.ui" line="1030"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation>Nadaŭdaj rulumfendoj kiam bezonataj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1017"/>
-        <location filename="../../kvantummanager.ui" line="1033"/>
+        <location filename="../../kvantummanager.ui" line="1050"/>
+        <location filename="../../kvantummanager.ui" line="1066"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -775,8 +781,8 @@ Se ĉi tiu butono estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1055"/>
-        <location filename="../../kvantummanager.ui" line="1071"/>
+        <location filename="../../kvantummanager.ui" line="1088"/>
+        <location filename="../../kvantummanager.ui" line="1104"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -793,8 +799,8 @@ Se ĉi tiu butono estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1093"/>
-        <location filename="../../kvantummanager.ui" line="1105"/>
+        <location filename="../../kvantummanager.ui" line="1126"/>
+        <location filename="../../kvantummanager.ui" line="1138"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
@@ -803,8 +809,8 @@ The default value is 16 px.</source>
 La defaŭlto estas 16 px.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1123"/>
-        <location filename="../../kvantummanager.ui" line="1137"/>
+        <location filename="../../kvantummanager.ui" line="1156"/>
+        <location filename="../../kvantummanager.ui" line="1170"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -817,30 +823,30 @@ determinas ĝin memstare. La KDE-
 aplikaĵoj obeas la agordoj de KDE.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1272"/>
-        <location filename="../../kvantummanager.ui" line="1285"/>
+        <location filename="../../kvantummanager.ui" line="1305"/>
+        <location filename="../../kvantummanager.ui" line="1318"/>
         <source>The minimum length of scrollbars.</source>
         <translation>La minimuma longo de la rulumskalo.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1275"/>
-        <location filename="../../kvantummanager.ui" line="1288"/>
+        <location filename="../../kvantummanager.ui" line="1308"/>
+        <location filename="../../kvantummanager.ui" line="1321"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La minimuma alto de la vertikala rulumskalo kaj la minimuma larĝo de la horizontala.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1278"/>
+        <location filename="../../kvantummanager.ui" line="1311"/>
         <source>Minimum scrollbar length: </source>
         <translation>Minimuma longo de rulumskalo: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1323"/>
+        <location filename="../../kvantummanager.ui" line="1356"/>
         <source>Delays</source>
         <translation>Prokrastoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1329"/>
-        <location filename="../../kvantummanager.ui" line="1357"/>
+        <location filename="../../kvantummanager.ui" line="1362"/>
+        <location filename="../../kvantummanager.ui" line="1390"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -853,7 +859,7 @@ Nulo signifas tion ke la ŝpruchelpilo aperas senprokraste.
 -1 signifas la defaŭltan konduton de Qt.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1439"/>
+        <location filename="../../kvantummanager.ui" line="1472"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -867,7 +873,7 @@ Se ĝi estus malvalidigita, vidu:
 Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1521"/>
+        <location filename="../../kvantummanager.ui" line="1554"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -880,7 +886,7 @@ Marki ĉi tiun butonon igas la etikedon situi ĝuste
 super la kadro, tiel ke la kadro ne estas tranĉita.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1535"/>
+        <location filename="../../kvantummanager.ui" line="1568"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -893,7 +899,7 @@ ilbretoj kaj dokoj estas malplena.
 la emfazkoloro.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1563"/>
+        <location filename="../../kvantummanager.ui" line="1596"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation>Se ĉi tiu butono estus markita, la menubreto kaj ilbreto estus desegnitaj
@@ -901,7 +907,7 @@ kiel unusola tutaĵo per la ilbreta SVG-elemento kondiĉe ke ili estas unu
 apud la alia.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1585"/>
+        <location filename="../../kvantummanager.ui" line="1618"/>
         <source>Shift the contents of push buttons when pressed?
 
 By default, the contents are shifted by 1px
@@ -912,8 +918,8 @@ Defaŭlte, la enhavo estas ŝovita laŭ 1 px, kaj horizontale
 kaj vertikale.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1637"/>
-        <location filename="../../kvantummanager.ui" line="1651"/>
+        <location filename="../../kvantummanager.ui" line="1670"/>
+        <location filename="../../kvantummanager.ui" line="1684"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -927,8 +933,8 @@ Se ĉi tiu butono estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1608"/>
-        <location filename="../../kvantummanager.ui" line="1627"/>
+        <location filename="../../kvantummanager.ui" line="1641"/>
+        <location filename="../../kvantummanager.ui" line="1660"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -939,7 +945,7 @@ determinita de la aplikaĵo en ĝia kodo.
 La defaŭlto estas &quot;Laŭagu la Stilon&quot;.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1662"/>
+        <location filename="../../kvantummanager.ui" line="1695"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -952,7 +958,7 @@ Marki ĉi tiun butonon metas la ŝpinindikilojn en
 la ŝpinan liniredaktilon kaj eliminas la butonojn.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1690"/>
+        <location filename="../../kvantummanager.ui" line="1723"/>
         <source>Activate view items always on double clicking?
 
 When unchecked, single-click is preferred.
@@ -968,7 +974,7 @@ Se ĝi estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1738"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -979,7 +985,7 @@ Marki ĉi tiun butonon metas la supreniran indikilon super la
 malsupreniran, interne de la ŝpina liniredaktilon.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1735"/>
+        <location filename="../../kvantummanager.ui" line="1768"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
@@ -988,12 +994,12 @@ By default, combo popups do not cover the combo box.</source>
 Defaŭlte, la falmenuo ne kovras la liniredaktilon.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1761"/>
+        <location filename="../../kvantummanager.ui" line="1794"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation>En Kvantum, la folioj estas centritaj defaŭlte.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1508"/>
+        <location filename="../../kvantummanager.ui" line="1541"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1004,7 +1010,7 @@ havi rulumsagojn ĉe siaj supro kaj/aŭ malsupro?
 Defaŭlte, ĉiuj ĝiaj eroj estas montritaj.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1336"/>
+        <location filename="../../kvantummanager.ui" line="1369"/>
         <source>Tooltip delay:</source>
         <translation>Ŝpruchelpa prokrasto: </translation>
     </message>
@@ -1023,7 +1029,7 @@ kies fenestroj estu maldiafanaj.
 problemojn pri tralumebleco!)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="976"/>
+        <location filename="../../kvantummanager.ui" line="1009"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -1036,8 +1042,8 @@ de ĝia rulumvido nur kiam bezonata.
 Ĝi kutime ne okupas kroman spacon.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1343"/>
-        <location filename="../../kvantummanager.ui" line="1380"/>
+        <location filename="../../kvantummanager.ui" line="1376"/>
+        <location filename="../../kvantummanager.ui" line="1413"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -1050,28 +1056,28 @@ estas malfermita. La defaŭlto estas 250.
 per klako. 0 signifas ke estas neniu prokrasto.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1350"/>
+        <location filename="../../kvantummanager.ui" line="1383"/>
         <source>Submenu delay: </source>
         <translation>Submenua prokrasto: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1364"/>
-        <location filename="../../kvantummanager.ui" line="1387"/>
+        <location filename="../../kvantummanager.ui" line="1397"/>
+        <location filename="../../kvantummanager.ui" line="1420"/>
         <source> ms</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1420"/>
+        <location filename="../../kvantummanager.ui" line="1453"/>
         <source>Miscellaneous</source>
         <translation>Diversaĵoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1446"/>
+        <location filename="../../kvantummanager.ui" line="1479"/>
         <source>No arrows for scrollbars</source>
         <translation>Sensaga rulumskalo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1482"/>
+        <location filename="../../kvantummanager.ui" line="1515"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1085,119 +1091,119 @@ Se ĉi tiu butono estus malvalidigita, vidu:
 Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1489"/>
+        <location filename="../../kvantummanager.ui" line="1522"/>
         <source>Scrollbars inside frames</source>
         <translation>Enkadra rulumskalo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1501"/>
+        <location filename="../../kvantummanager.ui" line="1534"/>
         <source>Tree branch lines</source>
         <translation>Arbaj branĉlinioj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1528"/>
+        <location filename="../../kvantummanager.ui" line="1561"/>
         <source>Group-box label above frame</source>
         <translation>Etikedo super grupzono</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1542"/>
+        <location filename="../../kvantummanager.ui" line="1575"/>
         <source>Fill rubber-band rectangles</source>
         <translation>Plenigita rektangula rubando</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1549"/>
+        <location filename="../../kvantummanager.ui" line="1582"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation>La musospurado estas aktiva
 por la menubreto defaŭlte.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1553"/>
+        <location filename="../../kvantummanager.ui" line="1586"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La musospurado estas aktiva por la menubreto defaŭlte, t.e., post iu menubreta ero estas klakita kaj ĝia menuo estas montrita, la menuoj de la aliaj menubretaj eroj estus montritaj se la kursoro ŝvebus super ili.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1556"/>
+        <location filename="../../kvantummanager.ui" line="1589"/>
         <source>Mouse tracking for menubars</source>
         <translation>Musospurado por menubreto</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1567"/>
+        <location filename="../../kvantummanager.ui" line="1600"/>
         <source>Merge menubar with toolbar</source>
         <translation>Kunigitaj menubreto kaj ilbreto</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1574"/>
+        <location filename="../../kvantummanager.ui" line="1607"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>Se ĉi tiu butono estus markita, la ilbretaj butonoj
 estus grupigitaj altigite inter ilbretaj disigiloj.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1578"/>
+        <location filename="../../kvantummanager.ui" line="1611"/>
         <source>Group toolbar buttons</source>
         <translation>Grupigitaj ilbretaj butonoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1591"/>
+        <location filename="../../kvantummanager.ui" line="1624"/>
         <source>Shift push-button contents</source>
         <translation>Ŝoviĝema enhavo por prembutono</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1644"/>
+        <location filename="../../kvantummanager.ui" line="1677"/>
         <source>Drag from:</source>
         <translation>Ŝovzono:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1614"/>
+        <location filename="../../kvantummanager.ui" line="1647"/>
         <source>Toolbutton style:</source>
         <translation>Ilbutona stilo:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1598"/>
+        <location filename="../../kvantummanager.ui" line="1631"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation>Se ĉi tiu butono estus malmarkita,
 neniu fulmolitero estus substrekita.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1601"/>
+        <location filename="../../kvantummanager.ui" line="1634"/>
         <source>Underline shortcuts with Alt</source>
         <translation>Substreki fulmoliterojn per Alt</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1669"/>
+        <location filename="../../kvantummanager.ui" line="1702"/>
         <source>Inline spin indicators</source>
         <translation>Interna ŝpinbutona indikilo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1676"/>
+        <location filename="../../kvantummanager.ui" line="1709"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>Desegni la tutan redakteblan fallistilon kiel
 liniredaktilon kun sago (kaj ikono se estanta)?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1680"/>
+        <location filename="../../kvantummanager.ui" line="1713"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desegni la tutan redakteblan fallistilon kiel liniredaktilon kun sago (kaj ikono se estanta)?&lt;/p&gt;&lt;p&gt;Defaŭlte, la fallistilo konsistas el butono havanta sagon, ĉe unu flanko, kaj alia butono havanta ikonon, ĉe la alia.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1683"/>
+        <location filename="../../kvantummanager.ui" line="1716"/>
         <source>Editable combo as line-edit</source>
         <translation>Redaktebla fallistilo similas liniredaktilon</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1698"/>
+        <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Double-click for view items</source>
         <translation>Duobla klako por vidaj elementoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1711"/>
+        <location filename="../../kvantummanager.ui" line="1744"/>
         <source>Vertical spin indicators</source>
         <translation>Vertikala ŝpinbutona indikilo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1718"/>
+        <location filename="../../kvantummanager.ui" line="1751"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1210,44 +1216,44 @@ konsideri agordojn de la nuna labortabla medio.
 Malmarku ĝin se vi volus ŝanĝi tiujn agordojn!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1728"/>
+        <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Respect current DE if possible</source>
         <translation>Konsideru labortablajn mediojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1740"/>
+        <location filename="../../kvantummanager.ui" line="1773"/>
         <source>Combo popup as menu</source>
         <translation>Falmenuo similas menuon</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1764"/>
+        <location filename="../../kvantummanager.ui" line="1797"/>
         <source>Left aligned tabs</source>
         <translation>Maldekstre ĝisrandigitaj folioj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1771"/>
+        <location filename="../../kvantummanager.ui" line="1804"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation>La malaktivaj folioj estas kunigitaj defaŭlte;
 alidire, ne estas videblaj limoj inter ili.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1775"/>
+        <location filename="../../kvantummanager.ui" line="1808"/>
         <source>Join inactive tabs</source>
         <translation>Kunigitaj folioj neaktivaj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1514"/>
+        <location filename="../../kvantummanager.ui" line="1547"/>
         <source>Scrollable menus</source>
         <translation>Rulumebla menuo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1725"/>
+        <location filename="../../kvantummanager.ui" line="1758"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penus konsideri agordojn de la nuna labortabla medio se ĝi estus KDE, Unity, Gnome aŭ Pantheon.&lt;/p&gt;&lt;p&gt;En KDE, ĉi tiu agordo igas Kvantum legi la KDE-agordojn pri la malgrandaj kaj grandaj ikonoj kaj ankaŭ pri la unuobla aŭ duobla klakado.&lt;/p&gt;&lt;p&gt;En Unity, Gnome kaj Pantheon, ĝi viŝas la ikonojn for la menuoj kaj prembutonoj (eĉ kiam la kongruaj dconf-klavoj estas ŝanĝitaj) kaj malvalidigas la fenestran tralumeblecon.&lt;/p&gt;&lt;p&gt;Ĉi tiu markbutono eblas malvalidigi iujn agordojn. Malmarku ĝin se vi volus ŝanĝi ilin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1747"/>
+        <location filename="../../kvantummanager.ui" line="1780"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1260,90 +1266,90 @@ Kvantum desegnas ilin kiel radiobutonojn).
 Ĉi tiu opcio kaŝas ĉiajn butonojn.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1754"/>
+        <location filename="../../kvantummanager.ui" line="1787"/>
         <source>Non-checkable combo menu</source>
         <translation>Falmenuo nemarkebla</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1798"/>
+        <location filename="../../kvantummanager.ui" line="1831"/>
         <source>Application Themes</source>
         <translation>Aplikaĵaj Etosoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1804"/>
+        <location filename="../../kvantummanager.ui" line="1837"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Ĉi tie, vi povas atribui etosojn al iuj aplikaĵoj.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Po ĉiu etoso, vi povas aldoni perkome disigitan liston de ekzekveblaĵoj, kies aplikaĵoj uzu la etoson anstataŭ la aktivan etoson. Farinte tion por ĉiuj viaj elektitaj etosoj, konservu la rezulton per klako al la butono &lt;i&gt;&quot;Konservi&quot;&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1839"/>
+        <location filename="../../kvantummanager.ui" line="1872"/>
         <source>Installed Theme</source>
         <translation>instalita Etoso</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1855"/>
+        <location filename="../../kvantummanager.ui" line="1888"/>
         <source>Application(s)</source>
         <translation>Aplikaĵo(j)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1884"/>
+        <location filename="../../kvantummanager.ui" line="1917"/>
         <source>app1,app2,app3</source>
         <translation>ap1,ap2,ap3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1912"/>
+        <location filename="../../kvantummanager.ui" line="1945"/>
         <source>Remove List</source>
         <translation>Viŝi Liston</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1922"/>
+        <location filename="../../kvantummanager.ui" line="1955"/>
         <source>Save the current list of apps</source>
         <translation>Konservi la liston de aplikaĵoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1925"/>
+        <location filename="../../kvantummanager.ui" line="1958"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Konservi la nunan liston de aplikaĵoj kaj iliaj atribuitaj etosoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1955"/>
-        <location filename="../../kvantummanager.ui" line="1966"/>
+        <location filename="../../kvantummanager.ui" line="1988"/>
+        <location filename="../../kvantummanager.ui" line="1999"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1958"/>
+        <location filename="../../kvantummanager.ui" line="1991"/>
         <source>Quit</source>
         <translation>Eliri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1976"/>
+        <location filename="../../kvantummanager.ui" line="2009"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Antaŭrigardi la aktivan etoson
 aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1980"/>
+        <location filename="../../kvantummanager.ui" line="2013"/>
         <source>Preview</source>
         <translation>Rigardi</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1991"/>
+        <location filename="../../kvantummanager.ui" line="2024"/>
         <source>About</source>
         <translation>pri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2019"/>
+        <location filename="../../kvantummanager.ui" line="2052"/>
         <source>What&apos;s This?</source>
         <translation>Kio estas tio?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2022"/>
+        <location filename="../../kvantummanager.ui" line="2055"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klaku ĉi tiun butonon kaj poste alklaku grafikan interfaceron, kiu havas la ŝpruchelpilon de &amp;quot;&quot;What&apos;s This&quot;&amp;quot;, por akiri informon pri ĝia funkcio.&lt;/p&gt;&lt;p&gt;Ankaŭ estas kutimaj ŝpruchelpiloj sed ĉi tia helpilo ne malaperas ĝis vi klakas ie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2025"/>
+        <location filename="../../kvantummanager.ui" line="2058"/>
         <source>Help</source>
         <translation>Helpo</translation>
     </message>
@@ -1368,7 +1374,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="468"/>
         <location filename="../../KvantumManager.cpp" line="622"/>
-        <location filename="../../KvantumManager.cpp" line="2302"/>
+        <location filename="../../KvantumManager.cpp" line="2315"/>
         <source>Confirmation</source>
         <translation>Konfirmo</translation>
     </message>
@@ -1557,75 +1563,75 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="779"/>
-        <location filename="../../KvantumManager.cpp" line="1833"/>
-        <location filename="../../KvantumManager.cpp" line="2205"/>
+        <location filename="../../KvantumManager.cpp" line="1844"/>
+        <location filename="../../KvantumManager.cpp" line="2218"/>
         <source>Active theme:</source>
         <translation>Aktiva etoso:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1083"/>
-        <location filename="../../KvantumManager.cpp" line="1102"/>
+        <location filename="../../KvantumManager.cpp" line="1088"/>
+        <location filename="../../KvantumManager.cpp" line="1107"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Ĉi tiuj agordoj povas esti ŝanĝitaj senriske.&lt;br&gt;Por ŝanĝi la aliajn, klaku la butonon &lt;i&gt;&quot;Konservi&quot;&lt;/i&gt; kaj poste redaktu la jenan dosieron:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1098"/>
-        <location filename="../../KvantumManager.cpp" line="2210"/>
+        <location filename="../../KvantumManager.cpp" line="1103"/>
+        <location filename="../../KvantumManager.cpp" line="2223"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Ĉi tiuj agordoj povas esti ŝanĝitaj senriske.&lt;br&gt;Por ŝanĝi la aliajn, redaktu la jenan dosieron:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1431"/>
+        <location filename="../../KvantumManager.cpp" line="1442"/>
         <source>No description</source>
         <translation>Sen priskribo</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1893"/>
+        <location filename="../../KvantumManager.cpp" line="1904"/>
         <source>A copy of the root config is created.</source>
         <translation>Kopio de la radika konfiguraĵo estiĝis.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1904"/>
+        <location filename="../../KvantumManager.cpp" line="1915"/>
         <source>A copy was already created.</source>
         <translation>Kopio jam ekzistas.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2196"/>
+        <location filename="../../KvantumManager.cpp" line="2209"/>
         <source>Configuration saved.</source>
         <translation>La konfiguro estas konservita.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2303"/>
+        <location filename="../../KvantumManager.cpp" line="2316"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Ĉu vi volas restaŭri la defaŭltajn (radikajn) agordojn de la etoso?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2306"/>
+        <location filename="../../KvantumManager.cpp" line="2319"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Vi perdos la ŝanĝoj, kiujn vi eble faris.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2445"/>
+        <location filename="../../KvantumManager.cpp" line="2460"/>
         <source>A tool for intsalling, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Ilo por instali, elekti&lt;br&gt;kaj agordi la etosojn de &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2446"/>
+        <location filename="../../KvantumManager.cpp" line="2461"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Verkinto: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (akk. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2341"/>
+        <location filename="../../KvantumManager.cpp" line="2354"/>
         <source>Restored the rool default settings of %1</source>
         <translation>La radikaj defaŭltaj agordoj de %1 estas restaŭritaj</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2342"/>
+        <location filename="../../KvantumManager.cpp" line="2355"/>
         <source>the default theme</source>
         <translation>la defaŭlta etoso</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2443"/>
+        <location filename="../../KvantumManager.cpp" line="2458"/>
         <source>About Kvantum Manager</source>
         <translation>Pri Kvantum-Adminsitrilo</translation>
     </message>

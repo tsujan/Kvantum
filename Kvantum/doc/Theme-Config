@@ -486,6 +486,8 @@ reduce_window_opacity             integer             If "translucent_windows" i
                                                       or not. The default value is 0 and the
                                                       maximum is 90.
 
+reduce_menu_opacity               integer             As above but for menus.
+
 opaque                            string list         A comma-separated list of
                                                       executables, whose apps should not
                                                       have window translucency. It has

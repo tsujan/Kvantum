@@ -927,6 +927,11 @@ void KvantumManager::defaultThemeButtons()
         tmp = qMin (qMax (defaultSettings.value ("reduce_window_opacity").toInt(), 0), 90);
     ui->spinReduceOpacity->setValue (tmp);
 
+    tmp = 0;
+    if (defaultSettings.contains ("reduce_menu_opacity")) // it's 0 by default
+        tmp = qMin (qMax (defaultSettings.value ("reduce_menu_opacity").toInt(), 0), 90);
+    ui->spinReduceMenuOpacity->setValue (tmp);
+
     tmp = 16;
     if (defaultSettings.contains ("small_icon_size"))
         tmp = defaultSettings.value ("small_icon_size").toInt();
@@ -1225,6 +1230,12 @@ void KvantumManager::tabChanged (int index)
                     int rwo = themeSettings.value ("reduce_window_opacity").toInt();
                     rwo = qMin (qMax (rwo, 0), 90);
                     ui->spinReduceOpacity->setValue (rwo);
+                }
+                if (themeSettings.contains ("reduce_menu_opacity"))
+                {
+                    int rmo = themeSettings.value ("reduce_menu_opacity").toInt();
+                    rmo = qMin (qMax (rmo, 0), 90);
+                    ui->spinReduceMenuOpacity->setValue (rmo);
                 }
                 if (themeSettings.contains ("small_icon_size"))
                 {
@@ -2014,6 +2025,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("hide_combo_checkboxes", boolToStr (ui->checkBoxHideComboCheckboxes->isChecked()));
         generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
         generalKeys.insert("reduce_window_opacity", str.setNum (ui->spinReduceOpacity->value()));
+        generalKeys.insert("reduce_menu_opacity", str.setNum (ui->spinReduceMenuOpacity->value()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
         generalKeys.insert("small_icon_size", str.setNum (ui->spinSmall->value()));
@@ -2059,6 +2071,7 @@ void KvantumManager::writeConfig()
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
             || qMin(qMax(themeSettings.value ("reduce_window_opacity").toInt(),0),90) != ui->spinReduceOpacity->value()
+            || qMin(qMax(themeSettings.value ("reduce_menu_opacity").toInt(),0),90) != ui->spinReduceMenuOpacity->value()
             || toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
@@ -2352,6 +2365,8 @@ void KvantumManager::restoreDefault()
 /*************************/
 void KvantumManager::notCompisited (bool checked)
 {
+    ui->reduceMenuOpacityLabel->setEnabled (!checked);
+    ui->spinReduceMenuOpacity->setEnabled (!checked);
     ui->checkBoxBlurPopup->setEnabled (!checked && !ui->checkBoxBlurWindow->isChecked());
     ui->checkBoxTrans->setEnabled (!checked);
     isTranslucent (!checked && ui->checkBoxTrans->isChecked());
