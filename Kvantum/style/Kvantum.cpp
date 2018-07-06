@@ -12069,7 +12069,9 @@ QSize Style::sizeFromContents(ContentsType type,
         if (!maxTxt.isEmpty())
         {
           maxTxt += QLatin1Char(' '); // QAbstractSpinBox::sizeHint() adds a space
-          s = textSize(sb->font(),maxTxt,false)
+          QSize txtSize = textSize(sb->font(),maxTxt,false);
+          txtSize.rheight() += txtSize.height() % 2; // for vertical centering
+          s = txtSize
               + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0
                                       : lspec.left
                                         + (sspecLE.incrementW ? sspecLE.minW : 0))
