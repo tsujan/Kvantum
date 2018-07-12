@@ -105,8 +105,8 @@ text.shadow.yshift=2
 text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
-min_width=+0.2font
-min_height=+0.2font
+min_width=+0.19font
+min_height=+0.19font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -349,7 +349,7 @@ interior.element=menu
 [GroupBox]
 inherits=GenericFrame
 frame=true
-frame.element=group
+frame.element=common
 interior=false
 text.shadow=0
 text.margin=0
