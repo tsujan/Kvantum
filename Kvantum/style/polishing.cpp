@@ -238,7 +238,10 @@ void Style::polish(QWidget *widget)
       }
       else if (widget->inherits("QTipLabel")
                || qobject_cast<QLabel*>(widget) // a floating label, as in Filelight
-               || widget->inherits("QComboBoxPrivateContainer")) // at most, a menu
+               || widget->inherits("QComboBoxPrivateContainer") // at most, a menu
+               /* like Vokoscreen's QvkRegionChoise */
+               || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
+                   && widget->windowFlags().testFlag(Qt::WindowStaysOnTopHint)))
       {
         break;
       }
