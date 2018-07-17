@@ -17,7 +17,8 @@ add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 
 set(KM_SOURCES
     main.cpp
-    KvantumManager.cpp)
+    KvantumManager.cpp
+    KvCommand.cpp)
 
 #set(KM_UI kvantummanager.ui)
 

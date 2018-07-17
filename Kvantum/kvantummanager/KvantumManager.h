@@ -36,7 +36,7 @@ class KvantumManager : public QMainWindow
     Q_OBJECT
 
 public:
-    KvantumManager (const QString lang = QString(), QWidget *parent = 0);
+    KvantumManager (const QString& lang = QString(), QWidget *parent = 0);
     ~KvantumManager();
 
 private slots:
