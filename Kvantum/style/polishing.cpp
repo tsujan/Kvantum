@@ -760,7 +760,7 @@ void Style::polish(QWidget *widget)
                                    || forcedTranslucency_.contains(widget)))));
   if ((isMenuOrTooltip
           /* because of combo menus or round corners */
-       || (tspec_.isX11 && widget->inherits("QComboBoxPrivateContainer")))
+       || (/*tspec_.isX11 && */widget->inherits("QComboBoxPrivateContainer")))
       && !translucentWidgets_.contains(widget))
   {
     theme_spec tspec_now = settings_->getCompositeSpec();
@@ -779,7 +779,7 @@ void Style::polish(QWidget *widget)
         }
       }
 
-      if (tspec_.isX11)
+      if (tspec_.isX11 || widget->inherits("QTipLabel"))
       {
         if (!widget->testAttribute(Qt::WA_TranslucentBackground))
           widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too

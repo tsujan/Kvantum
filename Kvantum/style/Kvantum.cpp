@@ -11699,7 +11699,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
                 Instead, the native handle should be created, the alpha
                 channel should be added to it, and the widget background
                 color should be made transparent (at polish()). */
-    if (!tspec_.isX11)
+    if (!tspec_.isX11 && !widget->inherits("QTipLabel"))
     {
       QWindow *window = widget->windowHandle();
       if (!window)

@@ -20,6 +20,7 @@ V0.10.7
  * Split "Kvantum.cpp" logically.
  * Added a key (to Kvantum manager) for reducing menu opacity.
  * Added command-line options to kvantummanager.
+ * Enable window translucency under Wayland because Qt >= 5.11 supports it.
 
 V0.10.6
 ---------

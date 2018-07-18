@@ -563,7 +563,7 @@ theme_spec ThemeConfig::getCompositeSpec()
 #endif
 
   /* no blurring or window translucency without compositing */
-  if (isX11_ && r.composite)
+  if (/*isX11_ &&*/ r.composite)
   {
     /* no window translucency or blurring without
        window interior element or reduced opacity */
@@ -580,7 +580,7 @@ theme_spec ThemeConfig::getCompositeSpec()
         r.translucent_windows = v.toBool();
 
       /* no window blurring without window translucency */
-      if (r.translucent_windows)
+      if (isX11_ && r.translucent_windows)
       {
         v = getValue("General","blurring");
         if (v.isValid())
@@ -589,17 +589,20 @@ theme_spec ThemeConfig::getCompositeSpec()
     }
 
     /* "blurring" is sufficient but not necessary for "popup_blurring" */
-    if (r.blurring)
-      r.popup_blurring = true;
-    else
+    if (isX11_)
     {
-      interior_spec ispecM = getInteriorSpec("Menu");
-      interior_spec ispecT = getInteriorSpec("ToolTip");
-      if (ispecM.hasInterior || ispecT.hasInterior)
+      if (r.blurring)
+        r.popup_blurring = true;
+      else
       {
-        v = getValue("General","popup_blurring");
-        if (v.isValid())
-          r.popup_blurring = v.toBool();
+        interior_spec ispecM = getInteriorSpec("Menu");
+        interior_spec ispecT = getInteriorSpec("ToolTip");
+        if (ispecM.hasInterior || ispecT.hasInterior)
+        {
+          v = getValue("General","popup_blurring");
+          if (v.isValid())
+            r.popup_blurring = v.toBool();
+        }
       }
     }
   }
