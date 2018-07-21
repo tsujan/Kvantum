@@ -945,6 +945,7 @@ bool Style::isWidgetInactive(const QWidget *widget) const
       /* some widgets (like KCapacityBar in kdf) may be drawn while still invisible */
       && widget->isVisible()
       && !widget->window()->windowFlags().testFlag(Qt::WindowDoesNotAcceptFocus)
+      && !widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
       && !widget->isActiveWindow())
   {
     return true;
