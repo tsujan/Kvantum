@@ -295,6 +295,7 @@ frame.element=menubar
 text.normal.color=white
 text.normal.inactive.color=#ffffffc8
 text.focus.color=white
+frame.top=0
 frame.bottom=3
 text.shadow=false
 frame.expansion=0

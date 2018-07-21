@@ -243,6 +243,7 @@ interior.element=menubar
 frame.element=menubar
 text.normal.color=white
 text.focus.color=#9bccff
+frame.top=0
 frame.bottom=4
 frame.expansion=0
 
@@ -350,7 +351,7 @@ frame.expansion=0
 inherits=PanelButtonCommand
 interior=false
 frame.element=menubaritem
-frame.top=0
+frame.top=3
 frame.bottom=2
 frame.left=2
 frame.right=2
