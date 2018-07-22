@@ -149,6 +149,12 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
         window->setFormat (format);
     }
 
+    QIcon icn = QIcon::fromTheme ("kvantum");
+    if (icn.isNull())
+        icn = QIcon (":/Icons/kvantumpreview/data/kvantum.svg");
+    setWindowIcon (icn);
+    ui->preview->setIcon(icn);
+
     resize (sizeHint().expandedTo (QSize (600, 400)));
 }
 /*************************/

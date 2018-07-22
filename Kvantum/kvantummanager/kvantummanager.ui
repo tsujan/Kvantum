@@ -11,10 +11,6 @@
   <property name="windowTitle">
    <string>Kvantum Manager</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="kvantummanager.qrc">
-    <normaloff>:/Icons/kvantumpreview/data/kvantum.svg</normaloff>:/Icons/kvantumpreview/data/kvantum.svg</iconset>
-  </property>
   <widget class="QWidget" name="widget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -2012,10 +2008,6 @@ or update its preview.</string>
       <property name="text">
        <string>Preview</string>
       </property>
-      <property name="icon">
-       <iconset resource="kvantummanager.qrc">
-        <normaloff>:/Icons/kvantumpreview/data/kvantum.svg</normaloff>:/Icons/kvantumpreview/data/kvantum.svg</iconset>
-      </property>
      </widget>
     </item>
     <item row="2" column="2" alignment="Qt::AlignHCenter">
@@ -2075,8 +2067,5 @@ or update its preview.</string>
    <header>combobox.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="kvantummanager.qrc"/>
- </resources>
  <connections/>
 </ui>
