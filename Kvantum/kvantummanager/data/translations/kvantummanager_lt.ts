@@ -149,7 +149,11 @@ kad visi valdikliai būtų numatytuoju pavidalu.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation></translation>
+        <translation>Sulieti PCManFM-qt šoninį polangį su jo aplinka.
+
+Naudojant LXQt, reikia atsijungti ir prisijungti arba
+užverti PCManFM-qt, o tuomet, sustabdyti ir paleisti Darbalaukį,
+naudojant LXQt seanso nustatymus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
