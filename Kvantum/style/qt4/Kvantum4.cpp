@@ -906,7 +906,7 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
   QWidget *window = w->window();
   if (window == w) return NULL;
   if (isStylableToolbar(window, allowInvisible)) // detached toolbar
-    return w->window();
+    return window;
   foreach (QToolBar *tb, window->findChildren<QToolBar*>())
   {
     if (isStylableToolbar(tb, allowInvisible) && tb->isAncestorOf(w))
