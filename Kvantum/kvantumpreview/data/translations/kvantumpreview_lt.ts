@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation></translation>
+        <translation>Kvantum peržiūra</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation></translation>
+        <translation>Spustelėjimo mygtukai</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -24,96 +24,112 @@ height
 greater
 than
 width</source>
-        <translation></translation>
+        <translation>Perjungimo
+spustelėjimo
+mygtukas,
+
+kurio
+aukštis
+didesnis
+nei
+plotis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation></translation>
+        <translation>Paprastas spustelėjimo mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation></translation>
+        <translation>Perjungimo spustelėjimo mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation></translation>
+        <translation>Kelių eilučių
+ spustelėjimo mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation></translation>
+        <translation>Spustelėjimo mygtukas
+su 32piks. aplanko piktograma</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation></translation>
+        <translation>Numatytasis
+spustelėjimo mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation></translation>
+        <translation>Plokšti mygtukai</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation></translation>
+        <translation>Mygtukų langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation></translation>
+        <translation>Įrankių mygtukai</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
         <location filename="../../KvantumPreviewBase.ui" line="446"/>
         <source>Simple toolbutton</source>
-        <translation></translation>
+        <translation>Paprastas įrankių mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="453"/>
         <location filename="../../KvantumPreviewBase.ui" line="464"/>
         <source>Multi-line
 toolbutton</source>
-        <translation></translation>
+        <translation>Kelių eilučių
+įrankių mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="472"/>
         <location filename="../../KvantumPreviewBase.ui" line="495"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation></translation>
+        <translation>Perjungimo įrankių mygtukas
+su rodykle</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="560"/>
         <location filename="../../KvantumPreviewBase.ui" line="584"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation></translation>
+        <translation>Įrankių mygtukas su 32piks. SVG piktograma
+ir tekstu žemiau</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="605"/>
         <location filename="../../KvantumPreviewBase.ui" line="626"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation></translation>
+        <translation>Įrankių mygtukas su tekstu žemiau
+ir rodykle</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="644"/>
         <location filename="../../KvantumPreviewBase.ui" line="665"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation></translation>
+        <translation>Įrankių mygtukas su piktograma šone
+ir rodykle</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="683"/>
@@ -121,14 +137,17 @@ and arrow</source>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation></translation>
+        <translation>Perjungimo įrankių mygtukas
+su piktograma, įprasta rodykle
+ir išskleidžiamojo meniu rodykle</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="515"/>
         <location filename="../../KvantumPreviewBase.ui" line="539"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation></translation>
+        <translation>Įrankių mygtukas su 32piks. PNG piktograma
+šalia teksto</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="402"/>
@@ -141,7 +160,15 @@ height
 greater
 than
 width</source>
-        <translation></translation>
+        <translation>Perjungimo
+įrankių
+mygtukas,
+
+kurio 
+aukštis
+didesnis
+nei
+plotis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="791"/>
@@ -354,32 +381,32 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation></translation>
+        <translation>Konteineriai</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation></translation>
+        <translation>Antraštė 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation></translation>
+        <translation>Antraštė 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation></translation>
+        <translation>Antraštė 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <source>3rd Item</source>
-        <translation></translation>
+        <translation>3-ias elementas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
         <source>2nd Item</source>
-        <translation></translation>
+        <translation>2-as elementas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
@@ -396,7 +423,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
         <source>1st Item</source>
-        <translation></translation>
+        <translation>1-as elementas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
@@ -406,22 +433,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
         <source>Row 0</source>
-        <translation></translation>
+        <translation>Eilutė 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
         <source>Row 1</source>
-        <translation></translation>
+        <translation>Eilutė 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation></translation>
+        <translation>Stulpelis 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
         <source>Column 1</source>
-        <translation></translation>
+        <translation>Stulpelis 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
@@ -478,12 +505,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2735"/>
         <location filename="../../KvantumPreviewBase.ui" line="2783"/>
         <source>Tab 1</source>
-        <translation></translation>
+        <translation>Kortelė 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
         <source>Page 1 (disabled)</source>
-        <translation></translation>
+        <translation>Puslapis 1 (išjungtas)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2333"/>
@@ -492,12 +519,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2749"/>
         <location filename="../../KvantumPreviewBase.ui" line="2797"/>
         <source>Tab 2</source>
-        <translation></translation>
+        <translation>Kortelė 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
         <source>Page 2 (disabled)</source>
-        <translation></translation>
+        <translation>Puslapis 2 (išjungtas)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2373"/>
@@ -506,7 +533,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2741"/>
         <location filename="../../KvantumPreviewBase.ui" line="2789"/>
         <source>Page 1</source>
-        <translation></translation>
+        <translation>Puslapis 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2387"/>
@@ -516,7 +543,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2755"/>
         <location filename="../../KvantumPreviewBase.ui" line="2803"/>
         <source>Page 2</source>
-        <translation></translation>
+        <translation>Puslapis 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2411"/>
@@ -551,7 +578,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2664"/>
         <source>Document mode</source>
-        <translation></translation>
+        <translation>Dokumento veiksena</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2702"/>
@@ -561,12 +588,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>&amp;File</source>
-        <translation></translation>
+        <translation>&amp;Failas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2836"/>
         <source>&amp;Submenu</source>
-        <translation></translation>
+        <translation>&amp;Submeniu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2856"/>
@@ -581,17 +608,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>&amp;Išeiti</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2895"/>
         <source>Quit</source>
-        <translation></translation>
+        <translation>Išeiti</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2898"/>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Ctrl(Vald)+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2906"/>
@@ -601,12 +628,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>Toggle Layout</source>
-        <translation></translation>
+        <translation>Perjungti išdėstymą</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2922"/>
         <source>Toggle layout direction</source>
-        <translation></translation>
+        <translation>Perjungti išdėstymo kryptį</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2934"/>
@@ -616,17 +643,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2937"/>
         <source>Show tabs in the document mode</source>
-        <translation></translation>
+        <translation>Rodyti korteles dokumento veiksenoje</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2949"/>
         <source>Menu Button</source>
-        <translation></translation>
+        <translation>Meniu mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
         <source>Hold pressed to show a menu</source>
-        <translation></translation>
+        <translation>Laikykite paspaudę, norėdami rodyti meniu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2963"/>
