@@ -2,9 +2,11 @@
 Version=1.0
 Name=Kvantum Manager
 Name[eo]=Administrilo de Kvantum
+Name[lt]=Kvantum tvarkytuvė
 Name[pl]=Menedżer Kvantum
 Comment=A simple GUI for installing, selecting and manipulating Kvantum themes
 Comment[eo]=Simpla grafika interfaco por instali, elekti kaj agordi la etosojn de Kvantum
+Comment[lt]=Paprasta grafinė naudotojo sąsaja, skirta Kvantum temų diegimui, pasirinkimui ir manipuliavimui
 Comment[pl]=Proste GUI pozwalające na instalowanie, wybór i modyfikację motywów Kvantum
 Exec=kvantummanager
 Icon=kvantum
