@@ -3266,7 +3266,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (ispec.hasInterior)
           renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-focused");
         else
-          painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(QPalette::Base));
+        {
+          QColor baseCol = widget->palette().color(QPalette::Base);
+          baseCol.setAlpha(255);
+          painter->fillRect(interiorRect(option->rect,fspec), baseCol);
+        }
         return;
       }
 
@@ -3451,10 +3455,14 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
       }
       if (fillWidgetInterior) // widget isn't null
-        painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(leStatus.contains("-inactive")
-                                                                                      ? QPalette::Inactive
-                                                                                      : QPalette::Active,
-                                                                                     QPalette::Base));
+      {
+        QColor baseCol = widget->palette().color(leStatus.contains("-inactive")
+                                                   ? QPalette::Inactive
+                                                   : QPalette::Active,
+                                                 QPalette::Base);
+        baseCol.setAlpha(255);
+        painter->fillRect(interiorRect(option->rect,fspec), baseCol);
+      }
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -4251,12 +4259,16 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
         if (fillWidgetInterior) // widget isn't null
-          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                             ? QPalette::Inactive
-                                                                             : QPalette::Active,
-                                                                           tspec_.combo_as_lineedit
-                                                                             ? QPalette::Base
-                                                                             : QPalette::Button));
+        {
+          QColor comboCol = widget->palette().color(status.contains("-inactive")
+                                                      ? QPalette::Inactive
+                                                      : QPalette::Active,
+                                                    tspec_.combo_as_lineedit
+                                                      ? QPalette::Base
+                                                      : QPalette::Button);
+          comboCol.setAlpha(255);
+          painter->fillRect(interiorRect(r,fspec), comboCol);
+        }
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -9619,10 +9631,14 @@ void Style::drawComplexControl(ComplexControl control,
             }
           }
           if (fillWidgetInterior) // widget isn't null
-            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(leStatus.contains("-inctive")
-                                                                               ? QPalette::Inactive
-                                                                               : QPalette::Active,
-                                                                             QPalette::Base));
+          {
+            QColor baseCol = widget->palette().color(leStatus.contains("-inctive")
+                                                       ? QPalette::Inactive
+                                                       : QPalette::Active,
+                                                     QPalette::Base);
+            baseCol.setAlpha(255);
+            painter->fillRect(interiorRect(r,fspec), baseCol);
+          }
           if (!(option->state & State_Enabled))
             painter->restore();
         }
@@ -9986,12 +10002,16 @@ void Style::drawComplexControl(ComplexControl control,
                 }
               }
               if (fillWidgetInterior) // widget isn't null
-                painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                                   ? QPalette::Inactive
-                                                                                   : QPalette::Active,
-                                                                                 drwaAsLineEdit
-                                                                                   ? QPalette::Base
-                                                                                   : QPalette::Button));
+              {
+                QColor comboCol = widget->palette().color(status.contains("-inactive")
+                                                            ? QPalette::Inactive
+                                                            : QPalette::Active,
+                                                          drwaAsLineEdit
+                                                            ? QPalette::Base
+                                                            : QPalette::Button);
+                comboCol.setAlpha(255);
+                painter->fillRect(interiorRect(r,fspec), comboCol);
+              }
             }
             if (libreoffice) painter->restore();
             /* draw focus rect */

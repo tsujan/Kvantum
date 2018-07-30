@@ -212,6 +212,23 @@ void Style::polish(QWidget *widget)
     }
   }
 
+  if (widget->backgroundRole() == QPalette::Base
+      && (isOpaque_ || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")))
+  {
+    /* For preventing text widgets from showing texts "behind" them,
+       the base color translucency should be removed from them.
+       (The case of line-edits is dealt with separately, when needed.) */
+    QPalette palette = widget->palette();
+    QColor baseCol = palette.color(QPalette::Base);
+    if (baseCol.alpha() < 255)
+    {
+      baseCol.setAlpha(255);
+      palette.setColor(QPalette::Base,baseCol);
+      widget->setPalette(palette);
+    }
+  }
+
+
   switch (widget->windowFlags() & Qt::WindowType_Mask) {
     case Qt::Window:
     case Qt::Dialog:
@@ -387,6 +404,20 @@ void Style::polish(QWidget *widget)
       QPalette palette = widget->palette();
       palette.setColor(widget->backgroundRole(), col);
       widget->setPalette(palette);
+      if (col.alpha() < 255)
+      { // no base translucency with inline renaming
+        const QList<QWidget*> children = widget->findChildren<QWidget*>();
+        for (QWidget *child : children)
+        {
+          if(child->backgroundRole() == QPalette::Base)
+          {
+            col.setAlpha(255);
+            QPalette palette = child->palette();
+            palette.setColor(QPalette::Base,col);
+            child->setPalette(palette);
+          }
+        }
+      }
     }
     /* hack Dolphin's view */
     if (hspec_.transparent_dolphin_view && widget->autoFillBackground())
