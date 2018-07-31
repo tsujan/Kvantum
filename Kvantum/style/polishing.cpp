@@ -408,6 +408,7 @@ void Style::polish(QWidget *widget)
 
   if (isOpaque_
       || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
+      || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
       || widget->inherits("KSignalPlotter")) // probably has a bug
   {
     /* Text editors and some other widgets shouldn't have a translucent base color.

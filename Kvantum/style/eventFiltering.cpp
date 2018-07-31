@@ -165,7 +165,7 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (ro > 0)
   {
     p->save();
-    p->setOpacity(1.0 - (qreal)tspec_.reduce_window_opacity/100.0);
+    p->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_window_opacity)/100.0);
   }
   if (!renderInterior(p,bgndRect,fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency

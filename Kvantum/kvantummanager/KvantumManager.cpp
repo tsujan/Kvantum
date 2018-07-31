@@ -2023,7 +2023,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
-        generalKeys.insert("x11drag", toStr((Drag)ui->comboX11Drag->currentIndex()));
+        generalKeys.insert("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
         generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));

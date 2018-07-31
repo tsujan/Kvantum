@@ -906,16 +906,16 @@ void Style::renderLabel(
     if (r.width() > iconSize.width()
         && lspec.left+fspec.left + lspec.right+fspec.right > 0)
     {
-      qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
-                    / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
-      horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
+      qreal rDiff = static_cast<qreal>(lspec.left+fspec.left - lspec.right-fspec.right)
+                    / static_cast<qreal>(lspec.left+fspec.left + lspec.right+fspec.right);
+      horizOffset = qRound(static_cast<qreal>(r.width()-iconSize.width()) * rDiff / 2.0);
     }
     if (r.height() > iconSize.height()
         && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
     {
-      qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                    / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
-      vertOffset = qRound((qreal)(r.height()-iconSize.height()) * rDiff / 2.0);
+      qreal rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                    / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+      vertOffset = qRound(static_cast<qreal>(r.height()-iconSize.height()) * rDiff / 2.0);
     }
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
@@ -930,16 +930,16 @@ void Style::renderLabel(
     if (r.width() > iconSize.width()
         && lspec.left+fspec.left + lspec.right+fspec.right > 0)
     {
-      qreal rDiff = (qreal)(lspec.left+fspec.left - lspec.right-fspec.right)
-                    / (qreal)(lspec.left+fspec.left + lspec.right+fspec.right);
-      horizOffset = qRound((qreal)(r.width()-iconSize.width()) * rDiff / 2.0);
+      qreal rDiff = static_cast<qreal>(lspec.left+fspec.left - lspec.right-fspec.right)
+                    / static_cast<qreal>(lspec.left+fspec.left + lspec.right+fspec.right);
+      horizOffset = qRound(static_cast<qreal>(r.width()-iconSize.width()) * rDiff / 2.0);
     }
     if (r.height() > iconSize.height()
         && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
     {
-      qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                    / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
-      vertOffset = qRound((qreal)(r.height()-iconSize.height()) * rDiff / 2.0);
+      qreal rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                    / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+      vertOffset = qRound(static_cast<qreal>(r.height()-iconSize.height()) * rDiff / 2.0);
     }
     ricon = alignedRect(ld,
                         Qt::AlignCenter,
@@ -954,7 +954,7 @@ void Style::renderLabel(
 
     if (!(option->state & State_Enabled))
     {
-      qreal opacityPercentage = hspec_.disabled_icon_opacity;
+      qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
       if (opacityPercentage < 100)
         painter->drawPixmap(iconRect,translucentPixmap(px, opacityPercentage));
       else
@@ -962,7 +962,7 @@ void Style::renderLabel(
     }
     else
     {
-      qreal tintPercentage = hspec_.tint_on_mouseover;
+      qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
       if (tintPercentage > 0 && (option->state & State_MouseOver))
         painter->drawPixmap(iconRect, tintedPixmap(option,px,tintPercentage));
       else

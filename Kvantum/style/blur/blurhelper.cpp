@@ -48,7 +48,7 @@ BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) 
 /*************************/
 void BlurHelper::registerWidget (QWidget* widget)
 {
-  /* these conditions are taken care of in Kvantum.cpp -> polish(QWidget *widget) */
+  /* these conditions are taken care of in polishing.cpp -> polish(QWidget *widget) */
   /*if (widget->isWindow()
       && widget->testAttribute (Qt::WA_TranslucentBackground)
       && widget->windowType() != Qt::Desktop

@@ -90,8 +90,8 @@ private:
     };
     Drag toDrag (const QString &str) {
         for (int i = 0; i < DRAG_COUNT; ++i) {
-            if (toStr ((Drag)i) == str)
-                return (Drag)i;
+            if (toStr (static_cast<Drag>(i)) == str)
+                return static_cast<Drag>(i);
         }
         // backward compatibility
         return (str == "true" || str == "1") ? DRAG_ALL : DRAG_NONE;

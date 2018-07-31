@@ -95,7 +95,7 @@ bool Style::enoughContrast (const QColor& col1, const QColor& col2) const
   if (!col1.isValid() || !col2.isValid()) return false;
   qreal rl1 = luminance(col1);
   qreal rl2 = luminance(col2);
-  if ((qMax(rl1,rl2) + 0.05) / (qMin(rl1,rl2) + 0.05) < (qreal)MIN_CONTRAST_RATIO)
+  if ((qMax(rl1,rl2) + 0.05) / (qMin(rl1,rl2) + 0.05) < MIN_CONTRAST_RATIO)
     return false;
   return true;
 }
@@ -912,8 +912,8 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         if (renderer)
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-          shadow[i] = i%2 ? qRound((qreal)thicknessV*(br.height()/divisor))
-                          : qRound((qreal)thicknessH*(br.width()/divisor));
+          shadow[i] = i%2 ? qRound(static_cast<qreal>(thicknessV)*(br.height()/divisor))
+                          : qRound(static_cast<qreal>(thicknessH)*(br.width()/divisor));
         }
       }
     }
@@ -1609,10 +1609,14 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   if (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text)))
     renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
   else
-    painter->fillRect(interiorRect(option->rect,fspec), lineedit->palette().brush(leStatus.contains("-inactive")
-                                                                                    ? QPalette::Inactive
-                                                                                    : QPalette::Active,
-                                                                                  QPalette::Base));
+  {
+    QColor baseCol = lineedit->palette().color(leStatus.contains("-inactive")
+                                                 ? QPalette::Inactive
+                                                 : QPalette::Active,
+                                               QPalette::Base);
+    baseCol.setAlpha(255);
+    painter->fillRect(interiorRect(option->rect,fspec), baseCol);
+  }
   if (!(option->state & State_Enabled))
     painter->restore();
 }
@@ -2289,7 +2293,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState,drawRaised);
             }
             painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
+            painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,drawRaised);
           if (!fillWidgetInterior)
@@ -2320,7 +2324,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (animationOpacity_ < 100)
           {
             painter->save();
-            painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+            painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
             renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
             if (!fillWidgetInterior)
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
@@ -2494,7 +2498,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (animationOpacity_ < 100)
             renderElement(painter, ispec.element+animationStartState, option->rect);
           painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
+          painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
         }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
         if (animate)
@@ -2627,7 +2631,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (animationOpacity_ < 100)
             renderElement(painter, ispec.element+animationStartState, option->rect);
           painter->save();
-          painter->setOpacity((qreal)animationOpacity_/100);
+          painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
         }
         renderElement(painter, prefix+ispec.element+suffix, option->rect);
         if (animate)
@@ -2829,7 +2833,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->restore();
 
           painter->save();
-          painter->setOpacity(1.0 - (qreal)tspec_.reduce_menu_opacity/100.0);
+          painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
 
           painter->save();
           painter->setClipRegion(QRegion(r));
@@ -2952,7 +2956,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               painter->restore();
 
               painter->save();
-              painter->setOpacity(1.0 - (qreal)tspec_.reduce_menu_opacity/100.0);
+              painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
 
               painter->save();
               painter->setClipRegion(QRegion(r));
@@ -3002,7 +3006,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isWidgetInactive(widget))
           fStatus = "normal-inactive"; // the focus state is meaningless here
         if (!widget) // QML again!
-          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Base));
+        {
+          QColor baseCol = QApplication::palette().color(QPalette::Base);
+          baseCol.setAlpha(255);
+          painter->fillRect(option->rect, baseCol);
+        }
         bool animate(widget && widget->isEnabled()
                      && ((animatedWidget_ == widget && !fStatus.startsWith("normal"))
                          || (animatedWidgetOut_ == widget && fStatus.startsWith("normal"))));
@@ -3026,7 +3034,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           else if (animationOpacity < 100)
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
           painter->save();
-          painter->setOpacity((qreal)animationOpacity/100);
+          painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
         }
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+fStatus);
         if (animate)
@@ -3432,7 +3440,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
         }
         painter->save();
-        painter->setOpacity((qreal)animationOpacity/100);
+        painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
       }
       /* force frame */
       renderFrame(painter,
@@ -4062,7 +4070,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                   renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
               }
               painter->save();
-              painter->setOpacity((qreal)animationOpacity_/100);
+              painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
             }
             if (!fillWidgetInterior)
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
@@ -4079,7 +4087,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           else if (animate && animationOpacity_ < 100  && !animationStartState.startsWith("normal"))
           {
             painter->save();
-            painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+            painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
             renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
             renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
             painter->restore();
@@ -4208,7 +4216,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (animatePanel)
           {
             painter->save();
-            painter->setOpacity((qreal)animationOpacity/100);
+            painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
           }
         }
         _status = status;
@@ -4775,7 +4783,7 @@ void Style::drawControl(ControlElement element,
   const QIcon::State iconstate =
       (option->state & State_On) ? QIcon::On : QIcon::Off;
 
-  switch ((unsigned)element) { // unsigned because of CE_Kv_KCapacityBar
+  switch (static_cast<unsigned>(element)) { // unsigned because of CE_Kv_KCapacityBar
     case CE_MenuTearoff : {
       QString status = (option->state & State_Selected) ? "focused" : "normal";
       // see PM_MenuTearoffHeight and also PE_PanelMenu
@@ -5199,7 +5207,7 @@ void Style::drawControl(ControlElement element,
                 o.palette = palette;
                 if (hasIcon)
                 {
-                  qreal tintPercentage = hspec_.tint_on_mouseover;
+                  qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
                   if (tintPercentage > 0)
                   {
                     QPixmap px = tintedPixmap(option,
@@ -5268,8 +5276,8 @@ void Style::drawControl(ControlElement element,
           }
           else if (hasIcon) // disabled
           {
-            qreal opacityPercentage = hspec_.disabled_icon_opacity;
-            if (opacityPercentage < 100)
+            qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
+            if (opacityPercentage < 100.0)
             {
               QStyleOptionViewItem o(*opt);
               const label_spec lspec = getLabelSpec("ItemView");
@@ -6488,7 +6496,7 @@ void Style::drawControl(ControlElement element,
               col = getFromRGBA(lspec.focusColor);
             if (col.isValid())
               tBoxPalette.setColor(QPalette::ButtonText, col);
-            qreal tintPercentage = hspec_.tint_on_mouseover;
+            qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
             if (tintPercentage > 0 && !opt->icon.isNull())
               px = tintedPixmap(option, px,tintPercentage);
           }
@@ -6504,7 +6512,7 @@ void Style::drawControl(ControlElement element,
               col = getFromRGBA(lspec.pressColor);
             if (col.isValid())
               tBoxPalette.setColor(QPalette::ButtonText, col);
-            qreal tintPercentage = hspec_.tint_on_mouseover;
+            qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
             if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
               px = tintedPixmap(option, px,tintPercentage);
             if (styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
@@ -6518,8 +6526,8 @@ void Style::drawControl(ControlElement element,
         }
         else if (!opt->icon.isNull()) // disabled
         {
-          qreal opacityPercentage = hspec_.disabled_icon_opacity;
-          if (opacityPercentage < 100)
+          qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
+          if (opacityPercentage < 100.0)
             px = translucentPixmap(px, opacityPercentage);
         }
 
@@ -6952,7 +6960,7 @@ void Style::drawControl(ControlElement element,
         }
         else if (widget)
         { // busy progressbar
-          QWidget *wi = (QWidget *)widget;
+          QWidget *wi = const_cast<QWidget*>(widget);
           int animcount = progressbars_[wi];
           int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);
           QRect R = r.adjusted(animcount,0,0,0);
@@ -7517,7 +7525,7 @@ void Style::drawControl(ControlElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
         }
         painter->save();
-        painter->setOpacity(qMin((qreal)animationOpacity_/100, opacity));
+        painter->setOpacity(qMin(static_cast<qreal>(animationOpacity_)/100.0, opacity));
       }
       renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
@@ -8393,7 +8401,7 @@ void Style::drawControl(ControlElement element,
                   renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
               }
               painter->save();
-              painter->setOpacity((qreal)animationOpacity_/100);
+              painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
             }
             renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             if (!fillWidgetInterior)
@@ -8423,7 +8431,7 @@ void Style::drawControl(ControlElement element,
             if (animationOpacity_ < 100)
             {
               painter->save();
-              painter->setOpacity(1.0 - (qreal)animationOpacity_/100);
+              painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
               renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
               if (!fillWidgetInterior)
                 renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
@@ -8915,8 +8923,8 @@ void Style::drawControl(ControlElement element,
             qreal rDiff = 0;
             if (lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
-              rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                      / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                      / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
             }
             if (opt->arrowType == Qt::LeftArrow)
             {
@@ -8927,7 +8935,7 @@ void Style::drawControl(ControlElement element,
               fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
               int vOffset = 0;
               if (lspec.top+lspec.bottom > 0 && h > fspec.top+fspec.bottom+dspec.size)
-                vOffset = qRound((qreal)(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
+                vOffset = qRound(static_cast<qreal>(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
               fspec.top += vOffset;
               fspec.bottom -= vOffset;
             }
@@ -8940,7 +8948,7 @@ void Style::drawControl(ControlElement element,
               fspec.bottom = qMin(fspec.bottom, fspec1.bottom);
               int vOffset = 0;
               if (lspec.top+lspec.bottom > 0 && h > fspec.top+fspec.bottom+dspec.size)
-                vOffset = qRound((qreal)(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
+                vOffset = qRound(static_cast<qreal>(h-fspec.top-fspec.bottom-dspec.size) * rDiff / 2.0);
               fspec.top += vOffset;
               fspec.bottom -= vOffset;
             }
@@ -8953,7 +8961,7 @@ void Style::drawControl(ControlElement element,
               fspec.top = 1;
               int hOffset = 0;
               if (lspec.top+lspec.bottom > 0 && w > fspec.left+fspec.right+dspec.size)
-                hOffset = qRound((qreal)(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
+                hOffset = qRound(static_cast<qreal>(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
               fspec.left += hOffset;
               fspec.right -= hOffset;
             }
@@ -8966,7 +8974,7 @@ void Style::drawControl(ControlElement element,
               fspec.bottom = 1;
               int hOffset = 0;
               if (lspec.top+lspec.bottom > 0 && w > fspec.left+fspec.right+dspec.size)
-                hOffset = qRound((qreal)(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
+                hOffset = qRound(static_cast<qreal>(w-fspec.left-fspec.right-dspec.size) * rDiff / 2.0);
               fspec.left += hOffset;
               fspec.right -= hOffset;
             }
@@ -9614,7 +9622,7 @@ void Style::drawComplexControl(ComplexControl control,
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
             }
             painter->save();
-            painter->setOpacity((qreal)animationOpacity/100);
+            painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+leStatus);
           if (!fillWidgetInterior)
@@ -9937,7 +9945,7 @@ void Style::drawComplexControl(ComplexControl control,
                 if (animatePanel)
                 {
                   painter->save();
-                  painter->setOpacity((qreal)animationOpacity/100);
+                  painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
                 }
               }
               _status = status;
@@ -9976,7 +9984,7 @@ void Style::drawComplexControl(ComplexControl control,
                 if (animate && !animatePanel)
                 {
                   painter->save();
-                  painter->setOpacity((qreal)animationOpacity/100);
+                  painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
                 }
                 drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
                 if (animate && !animatePanel)
@@ -10116,13 +10124,13 @@ void Style::drawComplexControl(ComplexControl control,
                                          QSize(icn.width(),icn.height())/pixelRatio_, ricn);
             if (!(option->state & State_Enabled))
             {
-              qreal opacityPercentage = hspec_.disabled_icon_opacity;
-              if (opacityPercentage < 100)
+              qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
+              if (opacityPercentage < 100.0)
                 icn = translucentPixmap(icn, opacityPercentage);
             }
             else if (option->state & State_MouseOver)
             {
-              qreal tintPercentage = hspec_.tint_on_mouseover;
+              qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
               if (tintPercentage > 0)
                 icn = tintedPixmap(option, icn, tintPercentage);
             }
@@ -10724,7 +10732,7 @@ void Style::drawComplexControl(ComplexControl control,
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState_);
             }
             painter->save();
-            painter->setOpacity((qreal)animationOpacity_/100);
+            painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
           }
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
@@ -13902,9 +13910,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             if (tab->rect.width() > w
                 && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
-              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
-              offset = qRound((qreal)(tab->rect.width() - w) * rDiff / 2.0);
+              qreal rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound(static_cast<qreal>(tab->rect.width() - w) * rDiff / 2.0);
               if (tspec_.mirror_doc_tabs
                   && (tab->shape == QTabBar::RoundedSouth
                       || tab->shape == QTabBar::TriangularSouth))
@@ -13919,9 +13927,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             if (tab->rect.width() > w
                 && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
-              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
-              offset = qRound((qreal)(tab->rect.width() - w) * rDiff / 2.0);
+              qreal rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound(static_cast<qreal>(tab->rect.width() - w) * rDiff / 2.0);
               if (tspec_.mirror_doc_tabs)
                 offset *= -1;
             }
@@ -13930,9 +13938,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             if (tab->rect.height() > h
                 && lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
-              qreal rDiff = (qreal)(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
-                            / (qreal)(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
-              offset = qRound((qreal)(tab->rect.height() - h) * rDiff / 2.0);
+              qreal rDiff = static_cast<qreal>(lspec.top+fspec.top - lspec.bottom-fspec.bottom)
+                            / static_cast<qreal>(lspec.top+fspec.top + lspec.bottom+fspec.bottom);
+              offset = qRound(static_cast<qreal>(tab->rect.height() - h) * rDiff / 2.0);
               if (tspec_.mirror_doc_tabs
                   && (tab->shape == QTabBar::RoundedSouth
                       || tab->shape == QTabBar::TriangularSouth))
@@ -14413,8 +14421,8 @@ QRect Style::subControlRect(ComplexControl control,
               angle = M_PI/2;
             else
             {
-              const qreal fraction(qreal(opt->sliderValue - opt->minimum)
-                                   / qreal(opt->maximum - opt->minimum));
+              const qreal fraction(static_cast<qreal>(opt->sliderValue - opt->minimum)
+                                   / static_cast<qreal>(opt->maximum - opt->minimum));
               if(opt->dialWrapping)
                 angle = M_PI*4/3 - fraction*2*M_PI; // angle = 1.5*M_PI - fraction*2*M_PI;
               else
@@ -14435,7 +14443,7 @@ QRect Style::subControlRect(ComplexControl control,
             QPoint center = r.center();
             int handleSize = r.width()/5;
             //const qreal radius = 0.5*(r.width() - handleSize);
-            const qreal radius = 0.5*(r.width() - 2*handleSize);
+            const qreal radius = 0.5*static_cast<qreal>(r.width() - 2*handleSize);
             center += QPoint(qRound(radius*qCos(angle)), -qRound(radius*qSin(angle)));
             r = QRect(r.x(), r.y(), handleSize, handleSize);
             r.moveCenter(center);
@@ -14999,7 +15007,7 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
 
       for (int y=0; y<im.height(); ++y)
       {
-        QRgb *scanLine = (QRgb*)im.scanLine(y);
+        QRgb *scanLine = reinterpret_cast<QRgb*>(im.scanLine(y));
         for (int x=0; x<im.width(); ++x)
         {
           QRgb pixel = *scanLine;
@@ -15017,7 +15025,7 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
       if (hspec_.no_selection_tint) break;
       QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
       QColor color = option->palette.color(QPalette::Active, QPalette::Highlight);
-      color.setAlphaF(qreal(0.2)); // Qt sets it to 0.3
+      color.setAlphaF(0.2); // Qt sets it to 0.3
       QPainter painter(&img);
       painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
       painter.fillRect(0, 0, img.width(), img.height(), color);
@@ -15082,7 +15090,7 @@ QPixmap Style::tintedPixmap(const QStyleOption *option,
   if (tintPercentage <= 0) return px;
   QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
   QColor tintColor = option->palette.color(QPalette::Active, QPalette::Highlight);
-  tintColor.setAlphaF(tintPercentage/100);
+  tintColor.setAlphaF(tintPercentage/100.0);
   QPainter p(&img);
   p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
   p.fillRect(0, 0, img.width(), img.height(), tintColor);
@@ -15097,7 +15105,7 @@ QPixmap Style::translucentPixmap(const QPixmap &px,
   QImage img = px.toImage().convertToFormat(QImage::Format_ARGB32_Premultiplied);
   img.fill(Qt::transparent);
   QPainter p(&img);
-  p.setOpacity(opacityPercentage/100);
+  p.setOpacity(opacityPercentage/100.0);
   p.drawPixmap(0, 0, px);
   p.end();
   return QPixmap::fromImage(img);
