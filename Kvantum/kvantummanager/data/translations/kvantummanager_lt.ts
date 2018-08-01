@@ -140,7 +140,7 @@ kad visi valdikliai būtų numatytuoju pavidalu.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="447"/>
         <source>Normal font for default push buttons</source>
-        <translation></translation>
+        <translation>Normalus spustelėjimo mygtukų šriftas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
@@ -163,7 +163,7 @@ naudojant LXQt seanso nustatymus.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="489"/>
         <source>Iconless push buttons</source>
-        <translation></translation>
+        <translation>Spustelėjimo mygtukai be piktogramų</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
