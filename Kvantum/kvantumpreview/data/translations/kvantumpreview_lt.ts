@@ -173,7 +173,7 @@ plotis</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="791"/>
         <source>Auto-raise</source>
-        <translation></translation>
+        <translation>Automatiškai iškelti</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="812"/>
