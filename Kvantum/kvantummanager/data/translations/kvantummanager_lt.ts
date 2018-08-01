@@ -149,7 +149,11 @@ kad visi valdikliai būtų numatytuoju pavidalu.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation></translation>
+        <translation>Sulieti PCManFM-qt šoninį polangį su jo aplinka.
+
+Naudojant LXQt, reikia atsijungti ir prisijungti arba
+užverti PCManFM-qt, o tuomet, sustabdyti ir paleisti Darbalaukį,
+naudojant LXQt seanso nustatymus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
@@ -245,12 +249,16 @@ and can have translucency.
 
 Checking this is not recommended unless
 as a workaround for bugs in applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksto spalvos yra apibrėžiamos temos
+ir jose gali būti dalinis permatomumas.
+
+Tai žymėti nėra rekomenduojama, nebent
+kaip problemų apėjimą programose.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="602"/>
         <source>Opaque (text) colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepermatomos (teksto) spalvos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="609"/>
@@ -449,7 +457,7 @@ SVG fonas NĖRA būtinas.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Mažinti meniu nepermatomumą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
@@ -589,7 +597,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kai tai yra įjungta ir pažymėta, Kvantum bandys gerbti kai kuriuos esamos darbalaukio aplinkos nustatymus, jei tai būtų KDE, Unity, Gnome ar Pantheon.&lt;/p&gt;&lt;p&gt;Naudojant KDE, tai padaro, kad Kvantum skaitytų KDE nustatymus, skirtus mažiems ir dideliems piktogramų dydžiams, o taip pat vienkarčiam ar dvikarčiam spustelėjimui.&lt;/p&gt;&lt;p&gt;Naudojant Unity, Gnome ir Pantheon, tai pašalina piktogramas iš meniu ir spustelėjimo mygtukų (netgi jei atitinkami dconf raktai yra pakeisti) ir išjungia dalinį langų permatomumą.&lt;/p&gt;&lt;p&gt;Šis žymimasis langelis gali išjungti kai kurias parinktis. Nuimkite žymėjimą, jei norite tas parinktis naudoti!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1936"/>
