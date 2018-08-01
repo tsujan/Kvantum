@@ -902,7 +902,8 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
 
 QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisible) const
 {
-  if (!w) return NULL;
+  if (!w || qobject_cast<const QToolBar*>(w))
+    return NULL;
   QWidget *window = w->window();
   if (window == w) return NULL;
   if (isStylableToolbar(window, allowInvisible)) // detached toolbar

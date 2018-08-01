@@ -1017,12 +1017,13 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
 
 QWidget* Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisible) const
 {
-  if (!w) return nullptr;
+  if (w == nullptr || qobject_cast<const QToolBar*>(w))
+    return nullptr;
   QWidget *window = w->window();
   if (window == w) return nullptr;
   if (isStylableToolbar(window, allowInvisible)) // detached toolbar
     return window;
-  const QList<QToolBar*> toolbars = window->findChildren<QToolBar*>();
+  const QList<QToolBar*> toolbars = window->findChildren<QToolBar*>(QString(), Qt::FindDirectChildrenOnly);
   for (QToolBar *tb : toolbars)
   {
     if (isStylableToolbar(tb, allowInvisible) && tb->isAncestorOf(w))
