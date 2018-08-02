@@ -406,7 +406,7 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if (isOpaque_
+  if ((isOpaque_ && qobject_cast<QAbstractScrollArea*>(widget)) // like in VLC play list view
       || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
       || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
       || widget->inherits("KSignalPlotter")) // probably has a bug
@@ -415,7 +415,8 @@ void Style::polish(QWidget *widget)
        (line-edits are dealt with separately and only when needed.) */
     QPalette palette = widget->palette();
     QColor baseCol = palette.color(QPalette::Base);
-    if (baseCol.alpha() < 255)
+    if (baseCol.isValid() && baseCol != Qt::transparent // for rare cases, like that of Kaffeine's file widget
+        && baseCol.alpha() < 255)
     {
       baseCol.setAlpha(255);
       palette.setColor(QPalette::Base,baseCol);
