@@ -5,10 +5,11 @@ left_tabs=true
 attach_active_tab=true
 group_toolbar_buttons=true
 spread_progressbar=true
+progressbar_thickness=3font
 composite=true
 menu_shadow_depth=7
 tooltip_shadow_depth=6
-slider_handle_width=16
+slider_handle_width=18
 slider_handle_length=12
 center_toolbar_handle=true
 x11drag=all
@@ -24,17 +25,19 @@ alt_mnemonic=true
 animate_states=true
 button_contents_shift=true
 button_icon_size=16
-combo_as_lineedit=false
-combo_menu=false
+combo_as_lineedit=true
+combo_menu=true
+combo_focus_rect=true
 fill_rubberband=false
 groupbox_top_label=true
 hide_combo_checkboxes=false
-inline_spin_indicators=false
+inline_spin_indicators=true
 joined_inactive_tabs=true
 large_icon_size=32
 layout_margin=4
 layout_spacing=2
 merge_menubar_with_toolbar=false
+toolbar_interior_spacing=1
 respect_DE=true
 scroll_arrows=true
 scroll_min_extent=50
@@ -48,16 +51,21 @@ tooltip_delay=-1
 transient_groove=false
 transient_scrollbar=true
 tree_branch_line=false
+no_inactiveness=false
+no_window_pattern=false
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam
+reduce_menu_opacity=0
+reduce_window_opacity=0
 
 [GeneralColors]
-window.color=#e6e6e6
-base.color=#F0F0F0
-alt.base.color=#E6E6E6
+window.color=#ebebed
+base.color=#F0F0F0BE
+alt.base.color=#0000000a
 button.color=#e6e6e6
-light.color=#F3F3F3
-mid.light.color=#ECECEC
-dark.color=#BEBEBE
-mid.color=#D9D9D9
+light.color=#FFFFFFBE
+mid.light.color=#FFFFFF96
+dark.color=#0000001e
+mid.color=#D2D2D2
 highlight.color=#646464
 inactive.highlight.color=#828282
 text.color=black
@@ -70,10 +78,10 @@ link.color=#0057AE
 link.visited.color=#644A9B
 
 [Hacks]
-transparent_dolphin_view=false
+transparent_dolphin_view=true
 transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
-blur_translucent=false
+blur_translucent=true
 transparent_menutitle=false
 kcapacitybar_as_progressbar=true
 respect_darkness=false
@@ -86,7 +94,9 @@ lxqtmainmenu_iconsize=0
 no_selection_tint=false
 normal_default_pushbutton=false
 tint_on_mouseover=0
-transparent_pcmanfm_view=false
+transparent_pcmanfm_view=true
+middle_click_scroll=false
+opaque_colors=false
 
 [PanelButtonCommand]
 frame.top=3
@@ -98,6 +108,7 @@ text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
 text.press.color=black
+indicator.size=10
 frame.expansion=8
 
 [PanelButtonTool]
@@ -121,6 +132,13 @@ frame.right=2
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+frame.expanded.top=2
+frame.expanded.bottom=2
+frame.expanded.left=2
+frame.expanded.right=2
+frame.expansion=3.4font
+text.margin.left=6
+text.margin.right=6
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -130,6 +148,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+indicator.size=10
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -152,9 +171,10 @@ frame.top=5
 frame.bottom=3
 frame.left=5
 frame.right=5
+focusFrame=true
 text.press.color=black
 indicator.size=6
-min_height=+0.12font
+min_height=+0.1font
 min_width=+0.12font
 frame.expansion=0
 
@@ -162,6 +182,12 @@ frame.expansion=0
 inherits=PanelButtonCommand
 interior=false
 frame=false
+
+[TreeExpander]
+inherits=PanelButtonCommand
+frame=false
+interior=false
+indicator.size=10
 
 [HeaderSection]
 inherits=PanelButtonCommand
@@ -202,6 +228,11 @@ frame.right=6
 [Progressbar]
 inherits=PanelButtonCommand
 text.bold=true
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
+frame.expansion=3.5font
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
@@ -211,11 +242,19 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+frame.expanded.top=1
+frame.expanded.bottom=1
+frame.expanded.left=1
+frame.expanded.right=1
 
 [ItemView]
 inherits=PanelButtonCommand
 text.toggle.color=white
 text.press.color=white
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 
 [Menu]
 inherits=PanelButtonCommand
@@ -231,8 +270,13 @@ frame=true
 frame.element=menuitem
 text.margin.top=1
 text.margin.bottom=1
-text.margin.left=3
-text.margin.right=3
+text.margin.left=4
+text.margin.right=4
+frame.expanded.top=2
+frame.expanded.bottom=2
+frame.expanded.left=2
+frame.expanded.right=2
+frame.expansion=2.8font
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -266,6 +310,15 @@ text.normal.color=#e6e6e6
 
 [ComboBox]
 inherits=PanelButtonCommand
+frame.element=combo
+interor.element=combo
+frame.expanded.top=1
+frame.expanded.bottom=1
+frame.expanded.left=1
+frame.expanded.right=1
+text.margin.left=6
+text.margin.right=6
+frame.expansion=3.4font
 
 [Window]
 interior=true

@@ -49,8 +49,8 @@ submenu_overlap=0
 
 [GeneralColors]
 window.color=#E5E5E6
-base.color=#FBFBFB
-alt.base.color=#F0F0F0
+base.color=#FBFBFB96
+alt.base.color=#0000000a
 button.color=#E5E5E6
 light.color=white
 mid.light.color=#ECECEC
