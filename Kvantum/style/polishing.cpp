@@ -407,6 +407,7 @@ void Style::polish(QWidget *widget)
   }
 
   if ((isOpaque_ && qobject_cast<QAbstractScrollArea*>(widget)) // like in VLC play list view
+      || widget->inherits("QComboBoxPrivateContainer")
       || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
       || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
       || widget->inherits("KSignalPlotter")) // probably has a bug

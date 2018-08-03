@@ -1630,10 +1630,16 @@ void Style::polish(QPalette &palette)
   col = getFromRGBA(cspec_.baseColor);
   if (col.isValid())
   {
+    if (col != Qt::transparent)
+      col.setAlpha(255); // no translucent base color
     palette.setColor(QPalette::Active,QPalette::Base,col);
     col1 = getFromRGBA(cspec_.inactiveBaseColor);
     if (col1.isValid())
+    {
+      if (col1 != Qt::transparent)
+        col1.setAlpha(255);
       palette.setColor(QPalette::Inactive,QPalette::Base,col1);
+    }
     else
       palette.setColor(QPalette::Inactive,QPalette::Base,col);
   }
