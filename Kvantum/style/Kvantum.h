@@ -292,9 +292,8 @@ class Style : public QCommonStyle {
                          const size_spec &sspec,
                          const QString &text,
                          const QSize iconSize,
-                         const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon, // text-icon alignment
-                         // use real heights of multiline texts?
-                         bool realHeight = false) const;
+                         const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // text-icon alignment
+                        ) const;
 
     /* Return the remaining QRect after subtracting the frames. */
     QRect interiorRect(const QRect &bounds, const frame_spec &fspec) const;

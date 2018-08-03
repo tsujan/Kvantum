@@ -1435,7 +1435,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
 }
 
 /* Compute the size of a text. */
-static inline QSize textSize(const QFont &font, const QString &text, bool realHeight)
+static inline QSize textSize(const QFont &font, const QString &text)
 {
   int tw, th;
   tw = th = 0;
@@ -1456,19 +1456,16 @@ static inline QSize textSize(const QFont &font, const QString &text, bool realHe
     /* deal with newlines */
     QStringList l = t.split('\n');
 
-    if (l.size() == 1 || realHeight)
-      th = QFontMetrics(font).height()*(l.size());
-    else
-    {
-      /* For some fonts, e.g. Noto Sans, QFontMetrics(font)::height() returns
-         a too big height for multiline texts but QFontMetrics::boundingRect()
-         returns the correct height with character M. I don't know how they
-         found the so-called "magic constant" 1.6 but it seems to be correct. */
-      th = QFontMetrics(font).boundingRect(QLatin1Char('M')).height()*1.6;
-      th *= l.size();
-    }
+    th = QFontMetrics(font).height()*(l.size());
+
     for (int i=0; i<l.size(); i++)
       tw = qMax(tw,QFontMetrics(font).width(l[i]));
+
+    if (l.size() > 1)
+    {
+      QRect br = QFontMetrics(font).boundingRect(QRect(0,0,tw,th), Qt::AlignCenter, text);
+      th = br.height();
+    }
   }
 
   return QSize(tw,th);
@@ -3346,7 +3343,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           QString maxTxt = spinMaxText(sb);
           if (maxTxt.isEmpty()
-              || option->rect.width() < textSize(sb->font(),maxTxt,false).width() + fspec.left
+              || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
@@ -3950,7 +3947,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           const label_spec lspec1 = getLabelSpec("ComboBox");
           QFont F(painter->font());
           if (lspec1.boldFont) F.setWeight(lspec1.boldness);
-          QSize txtSize = textSize(F,combo->currentText,false);
+          QSize txtSize = textSize(F,combo->currentText);
           if (/*cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
               ||*/ cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
@@ -5713,7 +5710,7 @@ void Style::drawControl(ControlElement element,
         }
         QFont F(painter->font());
         if (lspec.boldFont) F.setWeight(lspec.boldness);
-        QSize txtSize = textSize(F,opt->currentText,false);
+        QSize txtSize = textSize(F,opt->currentText);
         if (/*r.width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                         + (sspec.incrementW ? sspec.minW : 0)
             ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
@@ -6353,7 +6350,7 @@ void Style::drawControl(ControlElement element,
             else
               F.setWeight(lspec.boldness);
           }
-          QSize txtSize = textSize(F,txt,false);
+          QSize txtSize = textSize(F,txt);
           if (txtSize.width() > txtWidth)
           {
             /* Even if the text is elided because of the size hint,
@@ -8060,7 +8057,7 @@ void Style::drawControl(ControlElement element,
           QFont fnt(painter->font());
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
             fnt.setWeight(lspec.boldness);
-          txtSize = textSize(fnt,opt->text,false);
+          txtSize = textSize(fnt,opt->text);
           /* in case there isn't enough space */
           if (pb)
           { // not needed; just for "nostalgic" reasons
@@ -8293,7 +8290,7 @@ void Style::drawControl(ControlElement element,
           QFont fnt(painter->font());
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
             fnt.setWeight(lspec.boldness);
-          QSize txtSize = textSize(fnt,opt->text,false);
+          QSize txtSize = textSize(fnt,opt->text);
           bool enoughSpace(true);
           if (w < txtSize.width()
                   +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
@@ -8765,7 +8762,7 @@ void Style::drawControl(ControlElement element,
             {
               QFont F(painter->font());
               if (lspec.boldFont) F.setWeight(lspec.boldness);
-              QSize txtSize = textSize(F, txt, false);
+              QSize txtSize = textSize(F, txt);
               if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
               {
                 QSize availableSize = opt->rect.size()
@@ -9553,7 +9550,7 @@ void Style::drawComplexControl(ComplexControl control,
               const size_spec sspec = getSizeSpec(leGroup);
               QString maxTxt = spinMaxText(sb);
               if (maxTxt.isEmpty()
-                  || editRect.width() < textSize(sb->font(),maxTxt,false).width() + fspec.left
+                  || editRect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
                                              ? fspec.right : 0)
@@ -9833,7 +9830,7 @@ void Style::drawComplexControl(ComplexControl control,
                 cbH = qMin(cb->height(), cbH);
               QFont F(painter->font());
               if (lspec.boldFont) F.setWeight(lspec.boldness);
-              QSize txtSize = textSize(F,opt->currentText,false);
+              QSize txtSize = textSize(F,opt->currentText);
               if (/*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
                   ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
               {
@@ -11618,9 +11615,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       if (widget && lspec.boldFont)
       {
         QFont f = widget->font();
-        QSize s = textSize(f, "W", false);
+        QSize s = textSize(f, "W");
         f.setWeight(lspec.boldness);
-        b = (textSize(f, "W", false) - s).height();
+        b = (textSize(f, "W") - s).height();
       }
       return qMax(widget ? widget->fontMetrics().lineSpacing()+v+b
                            : option ? option->fontMetrics.lineSpacing()+v : 0,
@@ -12099,7 +12096,7 @@ QSize Style::sizeFromContents(ContentsType type,
         if (!maxTxt.isEmpty())
         {
           maxTxt += QLatin1Char(' '); // QAbstractSpinBox::sizeHint() adds a space
-          QSize txtSize = textSize(sb->font(),maxTxt,false);
+          QSize txtSize = textSize(sb->font(),maxTxt);
           txtSize.rheight() += txtSize.height() % 2; // for vertical centering
           s = txtSize
               + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0
@@ -12284,9 +12281,9 @@ QSize Style::sizeFromContents(ContentsType type,
             QFont f;
             if (widget) f = widget->font();
             else f = QApplication::font();
-            QSize s1 = textSize(f, txt, false);
+            QSize s1 = textSize(f, txt);
             f.setWeight(lspec.boldness);
-            s = s + textSize(f, txt, false) - s1;
+            s = s + textSize(f, txt) - s1;
           }
           // consider a global min. width for push buttons as is done in "qcommonstyle.cpp"
           s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
@@ -12597,9 +12594,9 @@ QSize Style::sizeFromContents(ContentsType type,
             QFont f;
             if (widget) f = widget->font();
             else f = QApplication::font();
-            QSize s1 = textSize(f, opt->text, false);
+            QSize s1 = textSize(f, opt->text);
             f.setWeight(lspec.boldness);
-            s = s + textSize(f, opt->text, false) - s1;
+            s = s + textSize(f, opt->text) - s1;
           }
         }
         else if(opt->icon.isNull()) // nothing or only an arrow
@@ -12640,8 +12637,7 @@ QSize Style::sizeFromContents(ContentsType type,
         int iconSize = pixelMetric(PM_TabBarIconSize,option,widget);
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
                            opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize),
-                           Qt::ToolButtonTextBesideIcon,
-                           true); // for some reason, the real multiline text height is needed
+                           Qt::ToolButtonTextBesideIcon);
 
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast
@@ -12950,9 +12946,8 @@ QSize Style::sizeCalculated(const QFont &font,
                             const size_spec &sspec, // size spec
                             const QString &text,
                             const QSize iconSize,
-                            const Qt::ToolButtonStyle tialign, // text-icon alignment
-                            // use real heights of multiline texts?
-                            bool realHeight) const
+                            const Qt::ToolButtonStyle tialign // text-icon alignment
+                           ) const
 {
   /* text margins are taken into account without text too */
   QSize s;
@@ -12964,7 +12959,7 @@ QSize Style::sizeCalculated(const QFont &font,
     s.rheight() += qAbs(lspec.yshift)+lspec.depth;
   }
 
-  QSize ts = textSize(font, text, realHeight);
+  QSize ts = textSize(font, text);
   int tw = ts.width();
   int th = ts.height();
   th += th%2; // for vertical centering
@@ -13218,7 +13213,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         {
           QString maxTxt = spinMaxText(p);
           if (maxTxt.isEmpty()
-              || option->rect.width() < textSize(p->font(),maxTxt,false).width() + fspec.left
+              || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
@@ -14046,7 +14041,7 @@ QRect Style::subControlRect(ComplexControl control,
                 && maxTxt != sb->specialValueText())
             {
               maxTxt += QLatin1Char(' ');
-              int txtWidth = textSize(sb->font(),maxTxt,false).width();
+              int txtWidth = textSize(sb->font(),maxTxt).width();
               int rightFrame = w - txtWidth - 2*sw
                                - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
                                - 2; // for padding
