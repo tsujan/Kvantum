@@ -400,7 +400,7 @@ toolbutton_style                  integer             Sets the toolbutton style 
                                                       4: text under icon. The toolbutton
                                                       style is 0 by default.
 
-spread_progressbar                true/false          Spread progressbar's indicator
+spread_progressbar                true/false          Spread the progressbar's indicator
                                                       across its whole groove and not
                                                       just its interior? By default,
                                                       the indicator is drawn inside
@@ -424,6 +424,15 @@ progressbar_thickness             integer             If positive, it sets the (
                                                       multiplied by the height of the app font
                                                       (in px) and could also be a decimal (as
                                                       in "progressbar_thickness=2.5font").
+
+spread_header                     true/false          Spread the header's interior so that it
+                                                      meets the frame of its view as far as
+                                                      possible (good for drawing simple
+                                                      headers). Its value is false by default
+                                                      but if you set it to true, do not
+                                                      remove top, right or left header frames
+                                                      because they may be needed when the
+                                                      header is not stretched.
 
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
@@ -673,6 +682,8 @@ inactive.base.color               string (#RRGGBBAA)  Background color of inacti
 alt.base.color                    string (#RRGGBBAA)  Used as the alternate background
                                                       color in views with alternating
                                                       row colors.
+
+inactive.alt.base.color           string (#RRGGBBAA)  Like above but for inactive widgets.
 
 button.color                      string (#RRGGBBAA)  The general button background
                                                       color.

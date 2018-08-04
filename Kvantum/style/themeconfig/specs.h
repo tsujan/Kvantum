@@ -93,6 +93,8 @@ typedef struct {
   bool spread_progressbar;
   /* thin progressbars? */
   int progressbar_thickness;
+  /* spread a header so that its interior meets its view frame if possible? */
+  bool spread_header;
   /* enable mouse tracking in menubars? */
   bool menubar_mouse_tracking;
   /* use composite effects
@@ -207,6 +209,7 @@ typedef struct {
   QString baseColor;
   QString inactiveBaseColor;
   QString altBaseColor;
+  QString inactiveAltBaseColor;
   QString buttonColor;
   QString lightColor;
   QString midLightColor;
@@ -470,6 +473,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.toolbutton_style = 0;
   tspec.spread_progressbar = false;
   tspec.progressbar_thickness = 0;
+  tspec.spread_header = false;
   tspec.menubar_mouse_tracking = true;
   tspec.composite = false;
   tspec.translucent_windows = false;
@@ -527,6 +531,7 @@ static inline void default_color_spec(color_spec &cspec) {
   cspec.baseColor = QString();
   cspec.inactiveBaseColor = QString();
   cspec.altBaseColor = QString();
+  cspec.inactiveAltBaseColor = QString();
   cspec.buttonColor = QString();
   cspec.lightColor = QString();
   cspec.midLightColor = QString();

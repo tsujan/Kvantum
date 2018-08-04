@@ -773,6 +773,9 @@ theme_spec ThemeConfig::getThemeSpec()
       r.progressbar_thickness = qMax(v.toInt(),0);
   }
 
+  v = getValue("General","spread_header");
+  r.spread_header = v.toBool();
+
   v = getValue("General","menubar_mouse_tracking");
   if (v.isValid()) //true by default
     r.menubar_mouse_tracking = v.toBool();
@@ -951,6 +954,9 @@ color_spec ThemeConfig::getColorSpec() const
 
   v = getValue("GeneralColors","alt.base.color");
   r.altBaseColor = v.toString();
+
+  v = getValue("GeneralColors","inactive.alt.base.color");
+  r.inactiveAltBaseColor = v.toString();
 
   v = getValue("GeneralColors","button.color");
   r.buttonColor = v.toString();

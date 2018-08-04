@@ -35,6 +35,7 @@
 #include <QAbstractScrollArea>
 //#include <QAbstractButton>
 //#include <QAbstractItemView>
+#include <QHeaderView>
 #include <QDockWidget>
 #include <QDial>
 #include <QScrollBar>
@@ -4475,7 +4476,23 @@ void Style::drawPrimitive(PrimitiveElement element,
       break;
     }
 
-    //case PE_PanelItemViewRow :
+    case PE_PanelItemViewRow : {
+      if (const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
+      {
+        QPalette::ColorGroup cg = (widget ? widget->isEnabled() : (opt->state & QStyle::State_Enabled))
+                                    ? QPalette::Normal
+                                    : QPalette::Disabled;
+        if (cg == QPalette::Normal && isWidgetInactive(widget))
+          cg = QPalette::Inactive; // Qt checks QStyle::State_Active, which isn't consistent with inactive base color
+
+        if ((opt->state & QStyle::State_Selected) && styleHint(QStyle::SH_ItemView_ShowDecorationSelected, opt, widget))
+          painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::Highlight));
+        else if (opt->features & QStyleOptionViewItem::Alternate)
+          painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::AlternateBase));
+      }
+      break;
+    }
+
     case PE_PanelItemViewItem : {
       // this may be better for QML but I don't like it
       /*if (!widget)
@@ -6529,7 +6546,8 @@ void Style::drawControl(ControlElement element,
             px = translucentPixmap(px, opacityPercentage);
         }
 
-        /* then, draw the text and icon as in QCommonStyle::drawControl() */
+        /* then, draw the text and icon as in QCommonStyle::drawControl()
+           (but with corrections for RTL) */
 
         QRect cr = subElementRect(QStyle::SE_ToolBoxTabContents, opt, widget);
         QRect tr, ir;
@@ -6541,10 +6559,14 @@ void Style::drawControl(ControlElement element,
         }
         else
         {
-          int iw = px.width() + 4;
+          int iw = px.width();
           ih = px.height();
-          ir = QRect(cr.left()+4, cr.top(), iw+2, ih);
-          tr = QRect(ir.right(), cr.top(), cr.width()-ir.right()-4, cr.height());
+          bool rtl(option->direction == Qt::RightToLeft);
+          ir = QRect(rtl ? cr.right()-iw-3 : cr.left()+4, cr.top(), iw, ih);
+          if (rtl)
+            tr = QRect(cr.left()+3, cr.top(), cr.width()-iw-14, cr.height()); //  14 = 7 + 4 + 3 (spacing is 7)
+          else
+            tr = QRect(ir.right()+8, cr.top(), cr.width()-ir.right()-11, cr.height()); // 11 = 8 + 3
         }
 
         QString txt = QFontMetrics(painter->font()).elidedText(opt->text,Qt::ElideRight,tr.width());
@@ -6557,7 +6579,10 @@ void Style::drawControl(ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+        painter->save();
+        painter->setLayoutDirection(option->direction); // because of a bug in QToolBox?
         drawItemText(painter, tr, talign, tBoxPalette, state != 0, txt, QPalette::ButtonText);
+        painter->restore();
 
         if (state == 3 && styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
           painter->restore();
@@ -7554,6 +7579,10 @@ void Style::drawControl(ControlElement element,
       const QString group = "HeaderSection";
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
+      bool rtl(option->direction == Qt::RightToLeft);
+      bool stretched(false);
+      if (const QHeaderView *hv = qobject_cast<const QHeaderView*>(widget))
+        stretched = hv-> stretchLastSection();
 
       bool horiz = true;
       QRect sep;
@@ -7563,11 +7592,11 @@ void Style::drawControl(ControlElement element,
         switch (opt->position) {
           case QStyleOptionHeader::End:
             fspec.isAttached = true;
-            fspec.HPos = 1;
+            fspec.HPos = tspec_.spread_header && (stretched || (rtl && horiz)) ? 0 : 1;
             break;
           case QStyleOptionHeader::Beginning:
             fspec.isAttached = true;
-            fspec.HPos = -1;
+            fspec.HPos = tspec_.spread_header && (!(rtl && horiz)|| stretched) ? 0 : -1;
             if (horiz)
             {
               sep.setRect(x+w-fspec.right,
@@ -7601,8 +7630,24 @@ void Style::drawControl(ControlElement element,
                           fspec.right);
             }
             break;
+         case QStyleOptionHeader::OnlyOneSection:
+            if (tspec_.spread_header)
+            {
+              fspec.isAttached = true;
+              fspec.HPos = stretched ? 0 : rtl ? -1 : 1;
+            }
+           break;
          default: break;
         }
+      }
+
+      if (tspec_.spread_header)
+      {
+        fspec.isAttached = true;
+        if (horiz || !rtl)
+          fspec.VPos = 1;
+        else
+          fspec.VPos = -1;
       }
 
       QRect r = option->rect;
@@ -13091,6 +13136,13 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           r = option->rect.adjusted(1,1,-1,-1);
       }
       return r;
+    }
+
+    case SE_ToolBoxTabContents : {
+      if (option->direction == Qt::RightToLeft)
+        return option->rect.adjusted(30,0,0,0);
+      else
+        return option->rect.adjusted(0,0,-30,0);
     }
 
     case SE_HeaderLabel : return option->rect;

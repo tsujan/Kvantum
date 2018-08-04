@@ -107,6 +107,28 @@ static void setAppFont()
   }
 }
 
+/*static inline QColor overlayColor(QColor col, QColor overlayCol)
+{
+  if (!overlayCol.isValid()) return QColor(0,0,0);
+  if (!col.isValid()) return overlayCol;
+
+  qreal a1 = overlayCol.alphaF();
+  if (a1 == 1.0) return overlayCol;
+  qreal a0  = col.alphaF();
+
+  qreal a = (1.0 - a1) * a0 + a1;
+  qreal r = ((1.0 - a1) * a0 * col.redF() + a1 * overlayCol.redF()) / a;
+  qreal g = ((1.0 - a1) * a0 *col.greenF() + a1 * overlayCol.greenF()) / a;
+  qreal b = ((1.0 - a1) * a0 * col.blueF() + a1 * overlayCol.blueF()) / a;
+
+  QColor res;
+  res.setAlphaF(a);
+  res.setRedF(r);
+  res.setGreenF(g);
+  res.setBlueF(b);
+  return res;
+}*/
+
 void Style::polish(QWidget *widget)
 {
   if (!widget) return;
@@ -900,13 +922,17 @@ void Style::polish(QPalette &palette)
       palette.setColor(QPalette::Inactive,QPalette::Base,col);
   }
 
-  /* An "inactiveAltBaseColor" would be inconsistent because
-     Qt would use it with inactive widgets inside active windows
-     while it uses the inactive base color only when the window
-     is inactive. This inconsistency is about a bug in Qt. */
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
-    palette.setColor(QPalette::AlternateBase,col);
+  {
+    palette.setColor(QPalette::Active,QPalette::AlternateBase,col);
+    palette.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
+    col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
+    if (col1.isValid() && hasInactiveness)
+      palette.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
+    else
+      palette.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+  }
 
   col = getFromRGBA(cspec_.buttonColor);
   if (col.isValid())

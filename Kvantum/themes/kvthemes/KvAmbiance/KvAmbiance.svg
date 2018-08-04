@@ -1271,13 +1271,11 @@
 <g style="fill-opacity:.118">
 <path id="header-normal-bottomleft" d="m 220,204 h -6 v 6 h 6 z"/>
 <path id="header-normal-bottomright" d="m 226,204 h -6 v 6 h 6 z"/>
-</g>
-<g style="fill:#fff">
 <path id="header-normal-topright" d="m 226,198 v -6 h -6 v 6 z"/>
 <path id="header-normal-top" d="m 220,198 v -6 h -6 v 6 z"/>
 </g>
+<path style="fill:url(#linearGradient2162)" id="header-normal" d="m 220,198 h -6 v 6 h 6 z"/>
 </g>
-<path style="fill:url(#linearGradient2162);fill-rule:evenodd" id="header-normal" d="m 220,198 h -6 v 6 h 6 z"/>
 <path style="line-height:normal;fill-opacity:.118;color:#000" id="header-separator" d="m 205,189 v 20.5 h 1 v -20.5 z "/>
 <g style="fill-rule:evenodd">
 <g style="fill:#e0e0e0">
@@ -1287,12 +1285,14 @@
 <path id="header-pressed-topleft" d="m 250,192 h -6 v 6 h 6 z"/>
 <path id="header-pressed-topright" d="m 262,192 h -6 v 6 h 6 z"/>
 </g>
-<path style="fill:#fff" id="header-normal-topleft" d="m 214,198 v -6 h -6 v 6 z"/>
+<path style="fill-opacity:.118" id="header-normal-topleft" d="m 214,198 v -6 h -6 v 6 z"/>
 </g>
 <path style="fill:url(#linearGradient2158);fill-rule:evenodd" id="header-toggled" d="m 238,198 h -6 v 6 h 6 z"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#header-normal" id="header-normal-left" transform="translate(-6)"/>
-<use width="100%" x="0" y="0" height="100%" xlink:href="#header-normal" id="header-normal-right" transform="translate(6)"/>
 <g style="fill-rule:evenodd">
+<g style="fill-opacity:.118">
+<path id="header-normal-left" d="m 214,198 h -6 v 6 h 6 z"/>
+<path id="header-normal-right" d="m 226,198 h -6 v 6 h 6 z"/>
+</g>
 <g style="fill:#e0e0e0">
 <path id="header-toggled-bottomleft" d="m 232,204 h -6 v 6 h 6 z"/>
 <path id="header-toggled-bottom" d="m 238,204 h -6 v 6 h 6 z"/>

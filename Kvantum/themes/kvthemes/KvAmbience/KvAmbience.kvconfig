@@ -63,6 +63,7 @@ inactive.window.color=#dedddd
 base.color=#FAFAFA
 inactive.base.color=#F7F7F7
 alt.base.color=#f0f0f0
+inactive.alt.base.color=#ededed
 button.color=#e6e5e4
 light.color=white
 mid.light.color=#ECECEC
