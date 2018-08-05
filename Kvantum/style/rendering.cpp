@@ -48,7 +48,7 @@ bool Style::renderElement(QPainter *painter,
   if (element.isEmpty() || !bounds.isValid() || painter->opacity() == 0)
     return false;
 
-  QSvgRenderer *renderer = 0;
+  QSvgRenderer *renderer = nullptr;
   QString _element(element);
 
   if (themeRndr_ && themeRndr_->isValid()

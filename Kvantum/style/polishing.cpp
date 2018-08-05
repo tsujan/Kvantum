@@ -691,6 +691,7 @@ void Style::polish(QWidget *widget)
                          && (sa->inherits("Fm::DirTreeView") || (pw && pw->inherits("Fm::SidePane")))))))
         {
           QColor col = vp->palette().color(vp->backgroundRole());
+          QColor col1 = vp->palette().color(QPalette::Inactive, vp->backgroundRole());
           if (col.isValid())
           {
             QPalette palette;
@@ -699,6 +700,8 @@ void Style::polish(QWidget *widget)
               sb->setAutoFillBackground(true);
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
+              if (col1.isValid() && col1 != col)
+                palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
               sb->setPalette(palette);
             }
             if (QScrollBar *sb = sa->verticalScrollBar())
@@ -706,6 +709,8 @@ void Style::polish(QWidget *widget)
               sb->setAutoFillBackground(true);
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
+              if (col1.isValid() && col1 != col)
+                palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
               sb->setPalette(palette);
             }
             // FIXME: is this needed?

@@ -627,7 +627,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::StyleChange:
     if (QComboBox *combo = qobject_cast<QComboBox*>(w))
     {
-      if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
+      if (combo->style() == this // WARNING: Otherwise, no delegate should be set!
+          && qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
       {
         /* QComboBoxPrivate::updateDelegate() won't work correctly
            on style change if the item delegate isn't restored here */

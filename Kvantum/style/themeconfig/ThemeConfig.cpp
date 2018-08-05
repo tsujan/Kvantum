@@ -29,8 +29,8 @@
 
 namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
-  settings_(NULL),
-  parentConfig_(NULL)
+  settings_(nullptr),
+  parentConfig_(nullptr)
 {
   /* For now, the lack of x11 means wayland.
      Later, a better method should be found. */

@@ -7,6 +7,10 @@ V0.10.8
  * Added the key "spread_header" for making simple headers. Also, RTL headers are fixed.
  * Added "inactive.alt.base.color" because alternate rows are drawn by Kvantum now.
  * Corrected RTL for QToolBox (a bug in QCommonStyle).
+ * Consider inactiveness in setting scrollbar background.
+ * Fill header empty areas with the base color.
+ * If a combo isn't styled by Kvantum, never change its delegate (otherwise, a rare crash will happen).
+ * Fixed header icon position with RTL layouts.
 
 V0.10.7
 ---------

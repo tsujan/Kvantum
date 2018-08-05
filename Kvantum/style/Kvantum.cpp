@@ -7571,6 +7571,10 @@ void Style::drawControl(ControlElement element,
       break;
     }
 
+    case CE_HeaderEmptyArea:
+      painter->fillRect(option->rect, option->palette.brush(QPalette::Base));
+      break;
+
     case CE_HeaderSection : {
       /* WARNING: There is an issue in Qt5, which didn't exist in Qt4: The horizontal
                   position is always from left to right, so that, for example,
@@ -7704,20 +7708,19 @@ void Style::drawControl(ControlElement element,
 
         if (opt->orientation != Qt::Horizontal)
         { // -> CT_HeaderSection
-          int t = fspec.left;
+          //int t = fspec.left;
           fspec.left = fspec.top;
-          fspec.top = t;
-          t = fspec.right;
+          /*fspec.top = t;
+          t = fspec.right;*/
           fspec.right = fspec.bottom;
-          fspec.bottom = t;
+          //fspec.bottom = t;
+          /* unfortunately, vertical headers don't obey CT_HeaderSection vertically */
+          fspec.top = fspec.bottom = lspec.top = lspec.bottom = 0;
         }
         if (opt->position == QStyleOptionHeader::End || opt->position == QStyleOptionHeader::Middle)
         {
           if (opt->orientation == Qt::Horizontal)
-          {
-            if (rtl) fspec.right = 0;
-            else fspec.left = 0;
-          }
+            fspec.left = 0;
           else
             fspec.top = 0;
         }
@@ -7733,7 +7736,17 @@ void Style::drawControl(ControlElement element,
         }
         else if (opt->textAlignment & Qt::AlignHCenter)
         {
-          lspec.right = lspec.left = 0;
+          if (opt->icon.isNull())
+          {
+            lspec.right = lspec.left = 0;
+          }
+          else
+          {
+            if (rtl)
+              fspec.left = 0;
+            else
+              lspec.right = 0;
+          }
         }
         if (opt->sortIndicator != QStyleOptionHeader::None)
         { // the frame is taken care of at SE_HeaderArrow
@@ -7743,10 +7756,22 @@ void Style::drawControl(ControlElement element,
             fspec.right = 0;
         }
 
-        /* for thin headers, like in Dolphin's details view */
-        if (opt->icon.isNull())
+        int smallIconSize = pixelMetric(PM_SmallIconSize);
+
+        /* for thin horizontal headers, like in Dolphin's details view */
+        if (opt->orientation == Qt::Horizontal)
         {
-          fspec.top = fspec.bottom = lspec.top = lspec.bottom = 0;
+          QFont f;
+          if (widget) f = widget->font();
+          else f = QApplication::font();
+          if (lspec.boldFont) f.setWeight(lspec.boldness);
+          int contentsH = QFontMetrics(f).height();
+          if (!opt->icon.isNull())
+            contentsH = qMax(contentsH, smallIconSize);
+          if (h < contentsH + fspec.top + fspec.bottom + lspec.top + lspec.bottom)
+          {
+            fspec.top = fspec.bottom = lspec.top = lspec.bottom = 0;
+          }
         }
 
         QString status = getState(option,widget);
@@ -7760,7 +7785,6 @@ void Style::drawControl(ControlElement element,
         else if (status.startsWith("focused"))
           state = 2;
 
-        int smallIconSize = pixelMetric(PM_SmallIconSize);
         QSize iconSize = QSize(smallIconSize,smallIconSize);
         bool isInactive(status.contains("-inactive"));
         renderLabel(option,painter,

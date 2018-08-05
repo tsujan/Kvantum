@@ -1404,6 +1404,7 @@ void Style::polish(QWidget *widget)
                          && (sa->inherits("Fm::DirTreeView") || (pw && pw->inherits("Fm::SidePane")))))))
         {
           QColor col = vp->palette().color(vp->backgroundRole());
+          QColor col1 = vp->palette().color(QPalette::Inactive, vp->backgroundRole());
           if (col.isValid())
           {
             QPalette palette;
@@ -1412,6 +1413,8 @@ void Style::polish(QWidget *widget)
               sb->setAutoFillBackground(true);
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
+              if (col1.isValid() && col1 != col)
+                palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
               sb->setPalette(palette);
             }
             if (QScrollBar *sb = sa->verticalScrollBar())
@@ -1419,6 +1422,8 @@ void Style::polish(QWidget *widget)
               sb->setAutoFillBackground(true);
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
+              if (col1.isValid() && col1 != col)
+                palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
               sb->setPalette(palette);
             }
             // FIXME: is this needed?
@@ -2057,7 +2062,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::StyleChange:
     if (QComboBox *combo = qobject_cast<QComboBox*>(w))
     {
-      if (qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
+      if (combo->style() == this // WARNING: Otherwise, no delegate should be set!
+          && qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
       {
         /* QComboBoxPrivate::updateDelegate() won't work correctly
            on style change if the item delegate isn't restored here */
@@ -7669,6 +7675,10 @@ void Style::drawControl(ControlElement element,
 
       break;
     }
+
+    case CE_HeaderEmptyArea:
+      painter->fillRect(option->rect, option->palette.brush(QPalette::Base));
+      break;
 
     case CE_HeaderSection : {
       const QString group = "HeaderSection";
