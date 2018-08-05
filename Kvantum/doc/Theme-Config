@@ -432,7 +432,7 @@ spread_header                     true/false          Spread the header's interi
                                                       but if you set it to true, do not
                                                       remove top, right or left header frames
                                                       because they may be needed when the
-                                                      header is not stretched.
+                                                      header is RTL vertical or not stretched.
 
 menubar_mouse_tracking            true/false          Enable mouse tracking in menubars?
                                                       It is enabled by default.
