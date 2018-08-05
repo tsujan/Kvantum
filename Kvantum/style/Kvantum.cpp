@@ -7572,7 +7572,15 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_HeaderEmptyArea:
-      painter->fillRect(option->rect, option->palette.brush(QPalette::Base));
+      if (QAbstractItemView *iv = qobject_cast<QAbstractItemView*>(getParent(widget,1)))
+      {
+        if (iv->viewport() && iv->viewport()->autoFillBackground())
+        {
+          painter->fillRect(option->rect, option->palette.brush(iv->viewport()->backgroundRole()));
+          break;
+        }
+      }
+      painter->fillRect(option->rect, option->palette.background());
       break;
 
     case CE_HeaderSection : {
@@ -7679,6 +7687,14 @@ void Style::drawControl(ControlElement element,
       else
         fspec.expansion = qMin(fspec.expansion,r.height()/2);*/
       fspec.expansion = 0; // vertical headers have variable heights
+
+      /* merge the background of the header with that of its parent view, if any */
+      if (QAbstractItemView *iv = qobject_cast<QAbstractItemView*>(getParent(widget,1)))
+      {
+        if (iv->viewport() && iv->viewport()->autoFillBackground())
+          painter->fillRect(r, option->palette.brush(iv->viewport()->backgroundRole()));
+      }
+
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */

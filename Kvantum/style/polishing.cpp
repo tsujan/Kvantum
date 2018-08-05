@@ -691,7 +691,9 @@ void Style::polish(QWidget *widget)
                          && (sa->inherits("Fm::DirTreeView") || (pw && pw->inherits("Fm::SidePane")))))))
         {
           QColor col = vp->palette().color(vp->backgroundRole());
-          QColor col1 = vp->palette().color(QPalette::Inactive, vp->backgroundRole());
+          QColor col1;
+          if (!tspec_.no_inactiveness)
+            col1 = vp->palette().color(QPalette::Inactive, vp->backgroundRole());
           if (col.isValid())
           {
             QPalette palette;
