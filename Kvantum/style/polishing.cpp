@@ -334,7 +334,8 @@ void Style::polish(QWidget *widget)
             }
           }
           /* the FramelessWindowHint or X11BypassWindowManagerHint flag
-             may be set after the window is created but before it's polished */
+             may be set after the window is created but before it's polished
+             (like in lxqt-leave) */
           else if (forcedTranslucency_.contains(widget))
           {
             forcedTranslucency_.remove(widget);
@@ -657,12 +658,14 @@ void Style::polish(QWidget *widget)
                  || vp->backgroundRole() == QPalette::Button))
       { // remove ugly flat backgrounds (when the window backround is styled)
         vp->setAutoFillBackground(false);
-        const QList<QWidget*> children = vp->findChildren<QWidget*>();
+        const QList<QWidget*> children = vp->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
         for (QWidget *child : children)
         {
-          if (child->parent() == vp && (child->backgroundRole() == QPalette::Window
-                                        || child->backgroundRole() == QPalette::Button))
+          if (child->backgroundRole() == QPalette::Window
+              || child->backgroundRole() == QPalette::Button)
+          {
             child->setAutoFillBackground(false);
+          }
         }
       }
       else

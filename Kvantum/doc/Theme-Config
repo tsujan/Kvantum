@@ -1014,6 +1014,16 @@ min_height                        integer             Minimum width or height (i
                                                       (only for their height) and, sometimes,
                                                       view items (only for their height).
 
+                                                      They can also be used under Window and
+                                                      Dialog sections (and their translucent
+                                                      counterparts), in which case, they mean
+                                                      the minimum width/height of the drawn
+                                                      background (interior) SVG element,
+                                                      so that if the widget's width/height
+                                                      is smaller, the background will be cut
+                                                      from right/bottom. This can be useful
+                                                      with gradients.
+
                                                       The string "font" can be appended to the
                                                       value (without quotes and space), in
                                                       which case, the value will be multiplied

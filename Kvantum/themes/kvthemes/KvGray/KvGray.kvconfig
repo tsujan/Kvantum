@@ -323,6 +323,7 @@ frame.expansion=3.4font
 [Window]
 interior=true
 interior.element=window
+min_height=16font
 
 [Splitter]
 indicator.size=32

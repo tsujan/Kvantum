@@ -1669,17 +1669,24 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       interior_spec ispec = getInteriorSpec("Dialog");
+      size_spec sspec = getSizeSpec("Dialog");
       if (widget && !ispec.element.isEmpty()
           && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel)
       {
         if (QWidget *child = widget->childAt(0,0))
         {
           if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
+          {
             ispec = getInteriorSpec("Window");
+            sspec = getSizeSpec("Window");
+          }
         }
       }
       else
+      {
         ispec = getInteriorSpec("Window");
+        sspec = getSizeSpec("Window");
+      }
       frame_spec fspec;
       default_frame_spec(fspec);
 
@@ -1688,7 +1695,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         suffix = "-normal-inactive";
       if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
         ispec.px = -1; // no tiling pattern (without translucency)
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+suffix);
+      int dh = sspec.incrementH ? sspec.minH : qMax(sspec.minH - h, 0);
+      int dw = sspec.incrementW ? sspec.minW : qMax(sspec.minW - w, 0);
+      if (dh > 0 || dw > 0)
+      {
+        painter->save();
+        painter->setClipRegion(option->rect, Qt::IntersectClip);
+      }
+      renderInterior(painter,option->rect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix);
+      if (dh > 0 || dw > 0)
+        painter->restore();
 
       break;
     }
@@ -2839,21 +2855,22 @@ void Style::drawPrimitive(PrimitiveElement element,
           renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
           painter->restore();
 
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+          if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
+            painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
           painter->restore();
         }
         else
         {
           renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
-          renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+          if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
+            painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
         }
       }
       else
       {
-        if (!widget) // QML
+        if (!widget || !renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal")) // QML
           painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
         renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
       }
 
       break;
@@ -2962,21 +2979,22 @@ void Style::drawPrimitive(PrimitiveElement element,
               renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
               painter->restore();
 
-              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+              if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
+                painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
               painter->restore();
             }
             else
             {
               renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
-              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
+              if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
+                painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
             }
           }
           else
           {
-            if (!widget) // QML
+            if (!widget  || !renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal")) // QML
               painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
             renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
-            renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal");
           }
           break;
         }
