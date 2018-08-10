@@ -30,7 +30,8 @@ temos aplanką</translation>
         <location filename="../../kvantummanager.ui" line="118"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation></translation>
+        <translation>Pridėti šią temą į sąrašą temų, kurias Kvantum
+gali naudoti papildomai prie savo temų.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
@@ -373,7 +374,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Jei pažymėta, meniu, paaiškinimai ir langai
+neturės dalinio permatomumo ar šešėlio.
+
+Jei tai yra išjungta, žiūrėkite:
+Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="242"/>
@@ -415,7 +420,7 @@ arba atsijungiant ir vėl prisijungiant.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
         <source>Disable composite effects</source>
-        <translation></translation>
+        <translation>Išjungti komponavimo efektus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="786"/>
@@ -423,7 +428,10 @@ arba atsijungiant ir vėl prisijungiant.</translation>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation></translation>
+        <translation>Reikalauja KDE suliejimo efekto, tai palaikančios grafikos plokštės
+ir dalinai permatomų meniu/paaiškinimų SVG elementų.
+
+Automatiškai pažymėta, jei langų suliejimas yra įjungtas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
@@ -604,7 +612,9 @@ By default, tree branches have indicators but no line.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation></translation>
+        <translation>Naudoti aktyvią temą visoms programoms!
+
+Tam, kad įsigaliotų, reikia įrašyti.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="188"/>
@@ -614,7 +624,12 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation></translation>
+        <translation>Šalinti pasirinktą temą iš visų
+naudotojo diegimo kelių.
+
+Šaknies diegimas, jei toks yra, vis dar
+išliks prieinamas; šis mygtukas pašalina
+tik naudotojo temas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="414"/>
