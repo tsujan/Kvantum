@@ -34,6 +34,7 @@ My sincerest thanks go to all users whose bug reports, feature requests and sugg
 ![Default](screenshots/Default.png?raw=true "Default")
 ![KvAmbience](screenshots/KvAmbience.png?raw=true "KvAmbience")
 ![KvBeige](screenshots/KvBeige.png?raw=true "KvBeige")
+![KvGray](screenshots/KvGray.png?raw=true "KvGray")
 ![KvFlatLight](screenshots/KvFlatLight.png?raw=true "KvFlatLight")
 ![KvCurves3d](screenshots/KvCurves3d.png?raw=true "KvCurves3d")
 ![KvCurvesLight](screenshots/KvCurvesLight.png?raw=true "KvCurvesLight")
