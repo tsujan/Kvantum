@@ -82,7 +82,7 @@ link.visited.color=#644A9B
 progress.indicator.text.color=white
 
 [Hacks]
-transparent_dolphin_view=false
+transparent_dolphin_view=true
 transparent_ktitle_label=true
 blur_translucent=true
 transparent_menutitle=false
@@ -97,7 +97,7 @@ lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
 single_top_toolbar=false
 tint_on_mouseover=0
-transparent_pcmanfm_view=false
+transparent_pcmanfm_view=true
 no_selection_tint=false
 
 [PanelButtonCommand]

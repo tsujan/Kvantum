@@ -19,19 +19,19 @@ menu.items.active.text.color: #ffffff
 *.justify: center
 
 !! focused window settings
-window.active.client.color: #d2d2d2
+window.active.client.color: #dcdcdc
 
 window.active.title.bg: Gradient Vertical Flat
-window.active.title.bg.color: #d2d2d2
-window.active.title.bg.colorTo: #d2d2d2
+window.active.title.bg.color: #dcdcdc
+window.active.title.bg.colorTo: #dcdcdc
 window.active.title.bg.border.color: Parentrelative
 window.active.title.bg.highlight: 256
 window.active.title.bg.shadow: 0
 
 window.active.handle.bg: flat solid border
-window.active.handle.bg.color: #d2d2d2
-window.active.handle.bg.border.color: #d2d2d2
-!window.active.handle.bg.color: #d2d2d2
+window.active.handle.bg.color: #dcdcdc
+window.active.handle.bg.border.color: #dcdcdc
+!window.active.handle.bg.color: #dcdcdc
 window.active.grip.bg: parentrelative
 
 window.active.label.bg: parentrelative
@@ -41,14 +41,14 @@ window.active.button.*.bg: parentrelative
 window.active.button.*.image.color: #000000
 
 window.active.button.pressed.bg: flat solid bevel1
-!window.active.button.pressed.bg.color: #d2d2d2
-window.active.button.pressed.bg.color: #d2d2d2
+!window.active.button.pressed.bg.color: #dcdcdc
+window.active.button.pressed.bg.color: #dcdcdc
 window.active.button.pressed.image.color: #000000
 
 !#hover
 window.active.button.hover.bg: flat solid
 window.active.button.hover.image.color: #000000
-window.active.button.hover.bg.color: #d2d2d2
+window.active.button.hover.bg.color: #dcdcdc
 
 window.active.button.disabled.bg: flat solid
 window.active.button.disabled.bg.color: #dfb454
@@ -56,15 +56,15 @@ window.active.button.disabled.image.color: #000000
 
 
 !! unfocused window settings
-window.inactive.client.color: #d2d2d2
+window.inactive.client.color: #dcdcdc
 
 window.inactive.title.bg: Gradient Vertical Flat
-window.inactive.title.bg.color: #d2d2d2
-window.inactive.title.bg.colorTo: #d2d2d2
-window.inactive.title.bg.border.color: #d2d2d2
+window.inactive.title.bg.color: #dcdcdc
+window.inactive.title.bg.colorTo: #dcdcdc
+window.inactive.title.bg.border.color: #dcdcdc
 
 window.inactive.handle.bg: flat solid
-window.inactive.handle.bg.color: #d2d2d2
+window.inactive.handle.bg.color: #dcdcdc
 
 window.inactive.grip.bg: parentrelative
 
@@ -75,14 +75,14 @@ window.inactive.button.*.bg: parentrelative
 window.inactive.button.unpressed.image.color: #000000
 
 window.inactive.button.pressed.bg: flat border solid
-window.inactive.button.pressed.bg.color: #d2d2d2
-window.inactive.button.pressed.bg.border.color: #d2d2d2
+window.inactive.button.pressed.bg.color: #dcdcdc
+window.inactive.button.pressed.bg.border.color: #dcdcdc
 
 window.inactive.button.hover.bg: flat solid
-window.inactive.button.hover.bg.color: #d2d2d2
+window.inactive.button.hover.bg.color: #dcdcdc
 
 window.inactive.button.disabled.bg:flat solid
-window.inactive.button.disabled.bg.color:  #d2d2d2
+window.inactive.button.disabled.bg.color:  #dcdcdc
 
 
 !! Global width settings
@@ -95,7 +95,7 @@ window.client.padding.height: 0
 menu.overlap: 2
 
 !! Miscellaneous settings
-border.color: #d2d2d2
+border.color: #dcdcdc
 
 !! fonts are empty
 window.active.label.text.font:
