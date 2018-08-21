@@ -354,7 +354,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation></translation>
+        <translation>Container</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
@@ -374,24 +374,24 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <source>3rd Item</source>
-        <translation></translation>
+        <translation>3. Element</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
         <source>2nd Item</source>
-        <translation></translation>
+        <translation>2. Element</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation></translation>
+        <translation>2. Kind</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation></translation>
+        <translation>1. Kind</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -401,7 +401,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation>3. Kind-Element</translation>
+        <translation>3. Kind</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
@@ -478,7 +478,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2735"/>
         <location filename="../../KvantumPreviewBase.ui" line="2783"/>
         <source>Tab 1</source>
-        <translation></translation>
+        <translation>Reiter 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
@@ -492,7 +492,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2749"/>
         <location filename="../../KvantumPreviewBase.ui" line="2797"/>
         <source>Tab 2</source>
-        <translation></translation>
+        <translation>Reiter 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
@@ -571,12 +571,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2856"/>
         <source>toolBar</source>
-        <translation></translation>
+        <translation>Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2873"/>
         <source>toolBar_2</source>
-        <translation></translation>
+        <translation>Werkzeugleiste_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
