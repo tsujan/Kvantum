@@ -112,7 +112,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="378"/>
         <source>Safe Settings</source>
-        <translation></translation>
+        <translation>Sichere Einstellungen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
@@ -228,7 +228,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation></translation>
+        <translation>Transparenter Menütitel</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -507,7 +507,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1159"/>
         <source>Toolbar icon:</source>
-        <translation>Werkzeugleiste Symbol:</translation>
+        <translation>Werkzeugleistensymbol:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
@@ -831,7 +831,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1790"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation>Tabs sind in Kavntum zentriert als Vorgabe.</translation>
+        <translation type="unfinished">Tabs sind in Kavntum zentriert als Vorgabe.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1537"/>
@@ -844,7 +844,7 @@ By default, all of their menu-items are shown.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <source>Tooltip delay:</source>
-        <translation></translation>
+        <translation>Tooltip Verzögerung:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="810"/>
@@ -1109,12 +1109,12 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1941"/>
         <source>Remove List</source>
-        <translation></translation>
+        <translation>Entferne Liste</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1951"/>
         <source>Save the current list of apps</source>
-        <translation></translation>
+        <translation>Sichere die momentane Anwendungsliste</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1954"/>
@@ -1151,7 +1151,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
         <source>What&apos;s This?</source>
-        <translation></translation>
+        <translation>Was ist das?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2047"/>
@@ -1166,7 +1166,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="179"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation></translation>
+        <translation>Öffne Kvantum Themenverzeichnis...</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="366"/>
@@ -1241,7 +1241,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="81"/>
         <source>Titlebar</source>
-        <translation></translation>
+        <translation>Fenstertitel</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
@@ -1256,7 +1256,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="84"/>
         <source>Anywhere possible</source>
-        <translation></translation>
+        <translation>Überall möglich</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="369"/>
@@ -1272,7 +1272,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="400"/>
         <location filename="../../KvantumManager.cpp" line="411"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation>Das ist kein Kvantum Thema!</translation>
+        <translation>Das ist kein installierbares Kvantum Thema!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="401"/>
@@ -1284,7 +1284,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="413"/>
         <location filename="../../KvantumManager.cpp" line="423"/>
         <source>Please select another directory!</source>
-        <translation>Bitte wählen Sie ein anders Verzeichnis!</translation>
+        <translation>Bitte wählen Sie ein anders Verzeichnis aus!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="412"/>
@@ -1329,7 +1329,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="513"/>
         <source>The user installation will take priority.</source>
-        <translation></translation>
+        <translation>Die Benutzerinstallation wird Vorrang haben.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="527"/>
@@ -1339,7 +1339,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
         <source>This installation will take priority.</source>
-        <translation></translation>
+        <translation>Diese Installation wird Vorrang haben.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="629"/>
@@ -1391,7 +1391,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2327"/>
         <source>You will lose the changes you might have made.</source>
-        <translation></translation>
+        <translation>Sie werden die gemachten Änderungen verlieren.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2362"/>
@@ -1401,7 +1401,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2363"/>
         <source>the default theme</source>
-        <translation></translation>
+        <translation>das Vorgabethema</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2466"/>
@@ -1426,7 +1426,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="46"/>
         <source>default</source>
-        <translation></translation>
+        <translation>Vorgabe</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="379"/>
@@ -1443,7 +1443,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1852"/>
         <location filename="../../KvantumManager.cpp" line="2226"/>
         <source>Active theme:</source>
-        <translation></translation>
+        <translation>Aktives Thema:</translation>
     </message>
 </context>
 <context>
