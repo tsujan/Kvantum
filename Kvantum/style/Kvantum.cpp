@@ -1062,7 +1062,7 @@ bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) c
   return false;
 }
 
-enum toolbarButtonKind
+enum groupedTBtnKind
 {
   tbLeft = -1,
   tbMiddle,
@@ -1083,11 +1083,11 @@ enum toolbarButtonKind
   return false;
 }*/
 
-static int whichToolbarButton(const QToolButton *tb, const QToolBar *toolBar)
+static int whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar)
 {
   int res = tbAlone;
 
-  if (!tb || !toolBar
+  if (!tb || !parentBar
       /* Although the toolbar extension button can be on the immediate right of
          the last toolbutton, there's a 1px gap between them. I see this as a
          Qt bug but because of it, the extension button should be excluded here. */
@@ -1096,20 +1096,20 @@ static int whichToolbarButton(const QToolButton *tb, const QToolBar *toolBar)
     return res;
   }
 
-  if (toolBar->orientation() == Qt::Horizontal)
-  {
+  //if (toolBar->orientation() == Qt::Horizontal)
+  //{
     QRect g = tb->geometry();
-    const QToolButton *left = qobject_cast<const QToolButton*>(toolBar->childAt (g.x()-1, g.y()));
+    const QToolButton *left = qobject_cast<const QToolButton*>(parentBar->childAt (g.x()-1, g.y()));
     if (left && left->objectName() == "qt_toolbar_ext_button")
       left = nullptr;
-    const QToolButton *right =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x()+g.width()+1, g.y()));
+    const QToolButton *right =  qobject_cast<const QToolButton*>(parentBar->childAt (g.x()+g.width()+1, g.y()));
     if (right && right->objectName() == "qt_toolbar_ext_button")
       right = nullptr;
 
     /* only direct children should be considered */
-    if (left && left->parentWidget() != toolBar)
+    if (left && left->parentWidget() != parentBar)
       left = nullptr;
-    if (right && right->parentWidget() != toolBar)
+    if (right && right->parentWidget() != parentBar)
       right = nullptr;
 
     if (left && g.height() == left->height())
@@ -1121,7 +1121,7 @@ static int whichToolbarButton(const QToolButton *tb, const QToolBar *toolBar)
     }
     else if (right && g.height() == right->height())
       res = tbLeft;
-  }
+  //}
   // we don't group buttons on a vertical toolbar
   /*else
   {
@@ -1878,9 +1878,10 @@ void Style::drawPrimitive(PrimitiveElement element,
       QWidget *p = getParent(widget,1);
       bool autoraise(option->state & State_AutoRaise);
       bool fillWidgetInterior(false);
+      bool onToolBar(false);
       if (getStylableToolbarContainer(widget))
       {
-        autoraise = true; // we make all toolbuttons auto-raised inside toolbars
+        onToolBar = autoraise = true; // we make all toolbuttons auto-raised inside toolbars
         if (!getFrameSpec("ToolbarButton").element.isEmpty()
             || !getInteriorSpec("ToolbarButton").element.isEmpty())
         {
@@ -2128,9 +2129,9 @@ void Style::drawPrimitive(PrimitiveElement element,
 
         /*bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;*/
-        if (tspec_.group_toolbar_buttons)
+        if (const QToolBar *toolBar = qobject_cast<const QToolBar*>(p))
         {
-          if (const QToolBar *toolBar = qobject_cast<const QToolBar*>(tb->parentWidget()))
+          if (tspec_.group_toolbar_buttons)
           {
             /*if (toolBar->orientation() == Qt::Vertical)
               isHorizontal = false;*/
@@ -2141,7 +2142,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 painter->restore();
               drawRaised = true;
               ispec.px = ispec.py = 0;
-              int kind = whichToolbarButton (tb, toolBar);
+              int kind = whichGroupedTBtn (tb, toolBar);
               if (kind != 2)
               {
                 fspec.isAttached = true;
@@ -2159,6 +2160,24 @@ void Style::drawPrimitive(PrimitiveElement element,
               painter->setTransform(m, true);
             }*/
           }
+        }
+        /* group libfm-qt's path buttons when they aren't on a toolbar */
+        else if (!onToolBar && tb->inherits("Fm::PathButton"))
+        {
+            //if (QWidget *ancestor = getParent(p,3))
+            //{
+              //if (ancestor->inherits("Fm::PathBar"))
+              //{
+                drawRaised = true;
+                ispec.px = ispec.py = 0;
+                int kind = whichGroupedTBtn(tb, p);
+                if (kind != 2)
+                {
+                  fspec.isAttached = true;
+                  fspec.HPos = kind;
+                }
+              //}
+            //}
         }
 
         // lack of space  (-> CE_ToolButtonLabel)
@@ -2918,6 +2937,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           || widget->inherits("QWellArray") // color dialog's color rects
           || widget->inherits("QComboBoxPrivateContainer")) // frame for combo popups
       {
+        bool pcmanfmInactiveView(false);
         if (widget)
         {
           if (isDolphin_)
@@ -2938,8 +2958,21 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             if (QWidget *pw = widget->parentWidget())
             {
-              if ((hspec_.transparent_pcmanfm_view && pw->inherits("Fm::FolderView"))
-                  || (hspec_.transparent_pcmanfm_sidepane && pw->inherits("Fm::SidePane")))
+              if (hspec_.transparent_pcmanfm_view && pw->inherits("Fm::FolderView"))
+              {
+                /* fill in an inactive view frame of a split view with the base color */
+                if (pw->palette().color(QPalette::Active, QPalette::Base) != getFromRGBA(cspec_.baseColor))
+                {
+                   pcmanfmInactiveView = true;
+                   painter->fillRect(interiorRect(option->rect,getFrameSpec("GenericFrame")),
+                                     QApplication::palette().color(isWidgetInactive(widget)
+                                                                     ? QPalette::Inactive
+                                                                     : QPalette::Active,
+                                                                   QPalette::Base));
+                }
+                else break;
+              }
+              else if (hspec_.transparent_pcmanfm_sidepane && pw->inherits("Fm::SidePane"))
               {
                 break;
               }
@@ -3028,7 +3061,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           baseCol.setAlpha(255);
           painter->fillRect(option->rect, baseCol);
         }
-        bool animate(widget && widget->isEnabled()
+        bool animate(!pcmanfmInactiveView
+                     && widget && widget->isEnabled()
                      && ((animatedWidget_ == widget && !fStatus.startsWith("normal"))
                          || (animatedWidgetOut_ == widget && fStatus.startsWith("normal"))));
         QString animationStartState(animationStartState_);
@@ -4015,7 +4049,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           drawRaised = true;
 
           //const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
-          int kind = whichToolbarButton (tb, toolBar);
+          int kind = whichGroupedTBtn (tb, toolBar);
           if (kind != 2)
           {
             fspec.isAttached = true;
