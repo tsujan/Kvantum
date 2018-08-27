@@ -6599,11 +6599,10 @@ void Style::drawControl(ControlElement element,
         }
 
         /* then, draw the text and icon as in QCommonStyle::drawControl()
-           (but with corrections for RTL) */
+           but with corrections, especially for RTL */
 
         QRect cr = subElementRect(QStyle::SE_ToolBoxTabContents, opt, widget);
         QRect tr, ir;
-        int ih = 0;
         if (px.isNull())
         {
           tr = cr;
@@ -6611,20 +6610,26 @@ void Style::drawControl(ControlElement element,
         }
         else
         {
-          int iw = px.width();
-          ih = px.height();
           bool rtl(option->direction == Qt::RightToLeft);
-          ir = QRect(rtl ? cr.right()-iw-3 : cr.left()+4, cr.top(), iw, ih);
+          ir = alignedRect(option->direction,
+                           Qt::AlignLeft | Qt::AlignVCenter,
+                           QSize(smallIconSize,smallIconSize), cr);
           if (rtl)
-            tr = QRect(cr.left()+3, cr.top(), cr.width()-iw-14, cr.height()); //  14 = 7 + 4 + 3 (spacing is 7)
+          {
+            ir.adjust(-4, 0, -4, 0);
+            tr = QRect(cr.left()+3, cr.top(), cr.width()-smallIconSize-14, cr.height()); //  14 = 7 + 4 + 3 (spacing is 7)
+          }
           else
+          {
+            ir.adjust(4 , 0, 4, 0);
             tr = QRect(ir.right()+8, cr.top(), cr.width()-ir.right()-11, cr.height()); // 11 = 8 + 3
+          }
         }
 
         QString txt = QFontMetrics(painter->font()).elidedText(opt->text,Qt::ElideRight,tr.width());
 
-        if (ih)
-          painter->drawPixmap(ir.left(), (opt->rect.height() - ih) / 2, px);
+        if (!px.isNull())
+          painter->drawPixmap(ir, px);
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
