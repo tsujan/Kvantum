@@ -6657,6 +6657,26 @@ void Style::drawControl(ControlElement element,
       break;
     }
 
+    case CE_ProgressBar : {
+      const QStyleOptionProgressBar *opt =
+          qstyleoption_cast<const QStyleOptionProgressBar*>(option);
+      if (opt)
+      {
+        QStyleOptionProgressBar subopt = *opt;
+        subopt.rect = subElementRect(SE_ProgressBarGroove, opt, widget);
+        drawControl(CE_ProgressBarGroove, &subopt, painter, widget);
+        subopt.rect = subElementRect(SE_ProgressBarContents, opt, widget);
+        drawControl(CE_ProgressBarContents, &subopt, painter, widget);
+        if (opt->textVisible)
+        {
+          subopt.rect = subElementRect(SE_ProgressBarLabel, opt, widget);
+          drawControl(CE_ProgressBarLabel, &subopt, painter, widget);
+        }
+      }
+
+      break;
+    }
+
     case CE_ProgressBarGroove : {
       const QStyleOptionProgressBar *opt =
           qstyleoption_cast<const QStyleOptionProgressBar*>(option);
@@ -7154,6 +7174,9 @@ void Style::drawControl(ControlElement element,
 
       if (opt && opt->textVisible)
       {
+        QString txt = opt->text;
+        if (txt.isEmpty()) break;
+
         frame_spec fspec;
         default_frame_spec(fspec);
         label_spec lspec = getLabelSpec("Progressbar");
@@ -7222,10 +7245,16 @@ void Style::drawControl(ControlElement element,
         }
         if (sideText)
           length -= 6; // fixed 3px space + fixed 3px margin
+        else if (!topText)
+        { // ordinary progressbar (-> SE_ProgressBarContents)
+          const frame_spec fspec0 = getFrameSpec("Progressbar");
+          if (isKisSlider_)
+            length -= fspec0.left;
+          else
+            length -= 2*qMin(fspec0.left,fspec0.right);
+        }
 
-        QString txt = opt->text;
-        if (!txt.isEmpty())
-          txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length);
+        txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length);
 
         int state = option->state & State_Enabled ?
                       (option->state & State_Selected) ? 4
@@ -7264,39 +7293,50 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        /* find the part inside the indicator */
         QRect R;
-        if (!sideText && !topText && state != 0 && !txt.isEmpty())
+        if (!sideText && !topText)
         {
+          /* with ordinary progressbars, we put the text inside the frame horizontally,
+             hoping that it'll be completely inside the frame (-> SE_ProgressBarContents) */
+          QRect cr = subElementRect(QStyle::SE_ProgressBarContents,option,widget);
+          if (isVertical)
+          {
+            int hMargin = qMax(cr.top()-option->rect.top(), 0);
+            r.setRect(r.left()+hMargin, r.top(), r.width()-2*hMargin, r.height());
+          }
+          else
+            r.setRect(cr.left(), r.top(), cr.width(), r.height());
+
+          /* find the part inside the indicator */
           QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
-          if (col.isValid())
+          if (col.isValid() && state != 0)
           {
             QColor txtCol;
             if (state == 1) txtCol = getFromRGBA(lspec.normalColor);
             else if (state == 2) txtCol = getFromRGBA(lspec.focusColor);
             else if (state == 4) txtCol = getFromRGBA(lspec.toggleColor);
-            // do nothing if the colors are the same
+            /* do nothing if the colors are the same */
             if ((!txtCol.isValid() || col != txtCol)
                 && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
             {
               int full = sliderPositionFromValue(opt->minimum,
                                                  opt->maximum,
                                                  qMax(opt->progress,opt->minimum),
-                                                 length,
+                                                 r.width(),
                                                  false);
               if (isVertical)
               {
                 if (inverted)
-                  R = r.adjusted(h-full,0,0,0);
+                  R = r.adjusted(r.width()-full, 0, 0, 0);
                 else
-                  R = r.adjusted(0,0,full-h,0);
+                  R = r.adjusted(0, 0, full-r.width(), 0);
               }
               else
               {
                 if (inverted)
-                  R = r.adjusted(w-full,0,0,0);
+                  R = r.adjusted(r.width()-full, 0, 0, 0);
                 else
-                  R = r.adjusted(0,0,full-w,0);
+                  R = r.adjusted(0, 0, full-r.width(), 0);
               }
             }
           }
@@ -13051,26 +13091,37 @@ QSize Style::sizeFromContents(ContentsType type,
     }
 
     case CT_ProgressBar : {
+      const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+      bool isVertical(pb && pb->orientation() == Qt::Vertical);
+
+      QFont f;
+      if (widget) f = widget->font();
+      else f = QApplication::font();
+      const label_spec lspec = getLabelSpec("Progressbar");
+      if (lspec.boldFont) f.setWeight(lspec.boldness);
+
       if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
       {
         /* Set the size so that the text could be above the bar only if
            there isn't enough space inside the bar. The are safeguards
            in other places when a progressbar doesn't consult this function. */
-        QFont f;
-        if (widget) f = widget->font();
-        else f = QApplication::font();
-        const label_spec lspec = getLabelSpec("Progressbar");
-        if (lspec.boldFont) f.setWeight(lspec.boldness);
         if (QFontMetrics(f).height() > tspec_.progressbar_thickness)
         {
           s = defaultSize;
-          const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-          if (pb && pb->orientation() == Qt::Vertical)
+          if (isVertical)
             s.rwidth() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
           else
             s.rheight() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
           return s;
         }
+      }
+      else
+      { // the label of an ordianry progressbar should fit in its interior
+        const frame_spec fspec = getFrameSpec("Progressbar");
+        if (isVertical)
+          s.rwidth() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
+        else
+          s.rheight() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
       }
       break;
     }
@@ -13078,7 +13129,7 @@ QSize Style::sizeFromContents(ContentsType type,
     default : return defaultSize;
   }
 
-  // I'm too cautious not to add this:
+  /* set the minimum to the default size */
   return s.expandedTo(defaultSize);
 }
 
