@@ -4613,16 +4613,17 @@ void Style::drawPrimitive(PrimitiveElement element,
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  /* this may also be needed (as with pcmanfm-qt's first item in the compact mode) */
-                  if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                  /* NOTE: Unfortunately, too many apps have wrong visual rectangles for
+                           indexes, so that the checks on them are commented out below. */
+                  /*if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
                              == option->rect.topLeft())
-                  {
+                  {*/
                     fspec.isAttached = true;
                     fspec.HPos = 1;
-                  }
+                  //}
                 }
-                else if (!iv || option->rect.topRight() + QPoint(1,0)
-                                == iv->visualRect(siblingIndx).topLeft())
+                else/* if (!iv || option->rect.topRight() + QPoint(1,0)
+                                == iv->visualRect(siblingIndx).topLeft())*/
                 {
                   fspec.isAttached = true;
                   fspec.HPos = -1;
@@ -4636,15 +4637,15 @@ void Style::drawPrimitive(PrimitiveElement element,
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || option->rect.topRight() + QPoint(1,0)
+                  /*if (!iv || option->rect.topRight() + QPoint(1,0)
                              == iv->visualRect(siblingIndx).topLeft())
-                  {
+                  {*/
                     fspec.isAttached = true;
                     fspec.HPos = -1;
-                  }
+                  //}
                 }
-                else if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
-                                == option->rect.topLeft())
+                else/* if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                                == option->rect.topLeft())*/
                 {
                   fspec.isAttached = true;
                   fspec.HPos = 1;
@@ -4658,15 +4659,15 @@ void Style::drawPrimitive(PrimitiveElement element,
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                  /*if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
                              == option->rect.topLeft())
-                  {
+                  {*/
                     fspec.isAttached = true;
                     fspec.HPos = 1;
-                  }
+                  //}
                 }
-                else if (!iv || option->rect.topRight() + QPoint(1,0)
-                                == iv->visualRect(siblingIndx).topLeft())
+                else/* if (!iv || option->rect.topRight() + QPoint(1,0)
+                                == iv->visualRect(siblingIndx).topLeft())*/
                 {
                   fspec.isAttached = true;
                   fspec.HPos = -1;
@@ -4677,9 +4678,9 @@ void Style::drawPrimitive(PrimitiveElement element,
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || option->rect.topRight() + QPoint(1,0)
+                  /*if (!iv || option->rect.topRight() + QPoint(1,0)
                              == iv->visualRect(siblingIndx).topLeft())
-                  {
+                  {*/
                     if (fspec.isAttached)
                       fspec.HPos = 0;
                     else
@@ -4687,10 +4688,10 @@ void Style::drawPrimitive(PrimitiveElement element,
                       fspec.isAttached = true;
                       fspec.HPos = -1;
                     }
-                  }
+                  //}
                 }
-                else if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
-                                == option->rect.topLeft())
+                else/* if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                                == option->rect.topLeft())*/
                 {
                   if (fspec.isAttached)
                     fspec.HPos = 0;
