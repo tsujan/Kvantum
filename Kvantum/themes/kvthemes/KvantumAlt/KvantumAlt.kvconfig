@@ -214,8 +214,6 @@ inherits=PanelButtonCommand
 indicator.element=toolbar
 indicator.size=5
 frame.element=toolbar
-frame.left=0
-frame.right=0
 interior.element=toolbar
 
 [Slider]

@@ -4,6 +4,8 @@ V0.10.9
  * Style the split view of pcmanfm-qt appropriately when its view is transparent.
  * Fixed QToolBox with HDPI.
  * Don't let the text of an ordinary progressbar intersect its frame.
+ * Don't draw the left or right frame of a toolbar that is attached to the menubar but doesn't have the same width.
+ * Don't remove the frame expansion of view-items only because they are grouped together.
 
 V0.10.8
 ---------

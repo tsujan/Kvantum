@@ -4600,34 +4600,111 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QAbstractItemView *iv = qobject_cast<const QAbstractItemView*>(widget);
       if (opt)
       {
-        switch (opt->viewItemPosition) {
-          case QStyleOptionViewItem::OnlyOne:
-          case QStyleOptionViewItem::Invalid: break;
-          case QStyleOptionViewItem::Beginning: {
-            fspec.isAttached = true;
-            if (opt->direction == Qt::RightToLeft)
-              fspec.HPos = 1;
-            else
-              fspec.HPos = -1;
-            fspec.expansion = 0;
-            break;
+        QModelIndex indx = opt->index;
+        if (indx.isValid())
+        {
+          QModelIndex siblingIndx;
+          switch (opt->viewItemPosition) {
+            case QStyleOptionViewItem::OnlyOne:
+            case QStyleOptionViewItem::Invalid: break;
+            case QStyleOptionViewItem::Beginning: {
+              siblingIndx = indx.sibling(indx.row(), indx.column()+1); // not a vertical itemview
+              if (siblingIndx.isValid())
+              {
+                if (opt->direction == Qt::RightToLeft)
+                {
+                  /* this may also be needed (as with pcmanfm-qt's first item in the compact mode) */
+                  if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                             == option->rect.topLeft())
+                  {
+                    fspec.isAttached = true;
+                    fspec.HPos = 1;
+                  }
+                }
+                else if (!iv || option->rect.topRight() + QPoint(1,0)
+                                == iv->visualRect(siblingIndx).topLeft())
+                {
+                  fspec.isAttached = true;
+                  fspec.HPos = -1;
+                }
+              }
+              break;
+            }
+            case QStyleOptionViewItem::End: {
+              siblingIndx = indx.sibling(indx.row(), indx.column()-1);
+              if (siblingIndx.isValid())
+              {
+                if (opt->direction == Qt::RightToLeft)
+                {
+                  if (!iv || option->rect.topRight() + QPoint(1,0)
+                             == iv->visualRect(siblingIndx).topLeft())
+                  {
+                    fspec.isAttached = true;
+                    fspec.HPos = -1;
+                  }
+                }
+                else if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                                == option->rect.topLeft())
+                {
+                  fspec.isAttached = true;
+                  fspec.HPos = 1;
+                }
+              }
+              break;
+            }
+            case QStyleOptionViewItem::Middle: {
+              siblingIndx = indx.sibling(indx.row(), indx.column()+1);
+              if (siblingIndx.isValid())
+              {
+                if (opt->direction == Qt::RightToLeft)
+                {
+                  if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                             == option->rect.topLeft())
+                  {
+                    fspec.isAttached = true;
+                    fspec.HPos = 1;
+                  }
+                }
+                else if (!iv || option->rect.topRight() + QPoint(1,0)
+                                == iv->visualRect(siblingIndx).topLeft())
+                {
+                  fspec.isAttached = true;
+                  fspec.HPos = -1;
+                }
+              }
+              siblingIndx = indx.sibling(indx.row(), indx.column()-1);
+              if (siblingIndx.isValid())
+              {
+                if (opt->direction == Qt::RightToLeft)
+                {
+                  if (!iv || option->rect.topRight() + QPoint(1,0)
+                             == iv->visualRect(siblingIndx).topLeft())
+                  {
+                    if (fspec.isAttached)
+                      fspec.HPos = 0;
+                    else
+                    {
+                      fspec.isAttached = true;
+                      fspec.HPos = -1;
+                    }
+                  }
+                }
+                else if (!iv || iv->visualRect(siblingIndx).topRight() + QPoint(1,0)
+                                == option->rect.topLeft())
+                {
+                  if (fspec.isAttached)
+                    fspec.HPos = 0;
+                  else
+                  {
+                    fspec.isAttached = true;
+                    fspec.HPos = 1;
+                  }
+                }
+              }
+              break;
+            }
+            default: break;
           }
-          case QStyleOptionViewItem::End: {
-            fspec.isAttached = true;
-            if (opt->direction == Qt::RightToLeft)
-              fspec.HPos = -1;
-            else
-              fspec.HPos = 1;
-            fspec.expansion = 0;
-            break;
-          }
-          case QStyleOptionViewItem::Middle: {
-            fspec.isAttached = true;
-            fspec.HPos = 0;
-            fspec.expansion = 0;
-            break;
-          }
-          default: break;
         }
         if (opt->backgroundBrush.style() != Qt::NoBrush)
         {
@@ -7933,6 +8010,7 @@ void Style::drawControl(ControlElement element,
 
       /* update the menubar if needed */
       bool stylable(isStylableToolbar(widget));
+      int hPos = 2;
       if (tspec_.merge_menubar_with_toolbar)
       {
         if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
@@ -7946,6 +8024,17 @@ void Style::drawControl(ControlElement element,
                   && mb->y()+mb->height() == widget->y())
               {
                 r.adjust(0,-mb->height(),0,0);
+                if (mb->width() != widget->width())
+                {
+                  if (mb->x() != widget->x())
+                  {
+                    if (mb->x() + mb->width() != widget->x() + widget->width())
+                      hPos = 0;
+                    else
+                      hPos = 1;
+                  }
+                  else hPos = -1;
+                }
               }
             }
           }
@@ -8032,6 +8121,11 @@ void Style::drawControl(ControlElement element,
       const QString group = "Toolbar";
       frame_spec fspec = getFrameSpec(group);
       interior_spec ispec = getInteriorSpec(group);
+      if (hPos != 2)
+      {
+        fspec.isAttached = true;
+        fspec.HPos = hPos;
+      }
       if (!widget) // WARNING: QML has anchoring!
       {
         fspec.expansion = 0;

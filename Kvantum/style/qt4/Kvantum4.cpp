@@ -7921,6 +7921,7 @@ void Style::drawControl(ControlElement element,
 
       /* update the menubar if needed */
       bool stylable(isStylableToolbar(widget));
+      int hPos = 2;
       if (tspec_.merge_menubar_with_toolbar)
       {
         if (QMainWindow *mw = qobject_cast<QMainWindow*>(getParent(widget,1)))
@@ -7934,6 +7935,17 @@ void Style::drawControl(ControlElement element,
                   && mb->y()+mb->height() == widget->y())
               {
                 r.adjust(0,-mb->height(),0,0);
+                if (mb->width() != widget->width())
+                {
+                  if (mb->x() != widget->x())
+                  {
+                    if (mb->x() + mb->width() != widget->x() + widget->width())
+                      hPos = 0;
+                    else
+                      hPos = 1;
+                  }
+                  else hPos = -1;
+                }
               }
             }
           }
@@ -7958,6 +7970,11 @@ void Style::drawControl(ControlElement element,
       {
         fspec.expansion = 0;
         ispec.px = ispec.py = 0;
+      }
+      else if (hPos != 2)
+      {
+        fspec.isAttached = true;
+        fspec.HPos = hPos;
       }
 
       if (!(option->state & State_Enabled))
