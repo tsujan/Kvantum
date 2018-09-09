@@ -4608,20 +4608,21 @@ void Style::drawPrimitive(PrimitiveElement element,
             case QStyleOptionViewItem::OnlyOne:
             case QStyleOptionViewItem::Invalid: break;
             case QStyleOptionViewItem::Beginning: {
-              siblingIndx = indx.sibling(indx.row(), indx.column()+1); // not a vertical itemview
-              if (siblingIndx.isValid())
+              if (indx.sibling(indx.row(), indx.column()+1).isValid()) // not a vertical itemview
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  /* NOTE: Unfortunately, some apps have wrong item positions and
-                           some other have wrong visual rectangles for indexes. */
-                  if (!iv || iv->visualRect(siblingIndx).right() + 1 == option->rect.left())
+                  /* NOTE: Unfortunately, some apps have wrong item positions and some have wrong
+                           visual rectangles for indexes. Conditions like this cover all cases. */
+                  if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
+                              && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = 1;
                   }
                 }
-                else if (!iv || option->rect.right() + 1 == iv->visualRect(siblingIndx).left())
+                else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
+                                 && siblingIndx.row() == indx.row()))
                 {
                   fspec.isAttached = true;
                   fspec.HPos = -1;
@@ -4630,18 +4631,19 @@ void Style::drawPrimitive(PrimitiveElement element,
               break;
             }
             case QStyleOptionViewItem::End: {
-              siblingIndx = indx.sibling(indx.row(), indx.column()-1);
-              if (siblingIndx.isValid())
+              if (indx.sibling(indx.row(), indx.column()-1).isValid())
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || option->rect.right() + 1 == iv->visualRect(siblingIndx).left())
+                  if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
+                              && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = -1;
                   }
                 }
-                else if (!iv || iv->visualRect(siblingIndx).right() + 1 == option->rect.left())
+                else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
+                                 && siblingIndx.row() == indx.row()))
                 {
                   fspec.isAttached = true;
                   fspec.HPos = 1;
@@ -4650,29 +4652,30 @@ void Style::drawPrimitive(PrimitiveElement element,
               break;
             }
             case QStyleOptionViewItem::Middle: {
-              siblingIndx = indx.sibling(indx.row(), indx.column()+1);
-              if (siblingIndx.isValid())
+              if (indx.sibling(indx.row(), indx.column()+1).isValid()) // there is an item after this
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || iv->visualRect(siblingIndx).right() + 1 == option->rect.left())
+                  if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
+                              && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = 1;
                   }
                 }
-                else if (!iv || option->rect.right() + 1 == iv->visualRect(siblingIndx).left())
+                else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
+                                 && siblingIndx.row() == indx.row())) // there is an item on the right
                 {
                   fspec.isAttached = true;
                   fspec.HPos = -1;
                 }
               }
-              siblingIndx = indx.sibling(indx.row(), indx.column()-1);
-              if (siblingIndx.isValid())
+              if (indx.sibling(indx.row(), indx.column()-1).isValid()) // there is an item before this
               {
                 if (opt->direction == Qt::RightToLeft)
                 {
-                  if (!iv || option->rect.right() + 1 == iv->visualRect(siblingIndx).left())
+                  if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
+                              && siblingIndx.row() == indx.row())) // there is an item on the left
                   {
                     if (fspec.isAttached)
                       fspec.HPos = 0;
@@ -4683,7 +4686,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                     }
                   }
                 }
-                else if (!iv || iv->visualRect(siblingIndx).right() + 1 == option->rect.left())
+                else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
+                                 && siblingIndx.row() == indx.row()))
                 {
                   if (fspec.isAttached)
                     fspec.HPos = 0;

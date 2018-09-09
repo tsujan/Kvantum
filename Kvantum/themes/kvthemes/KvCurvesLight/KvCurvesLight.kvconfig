@@ -332,7 +332,7 @@ text.margin.left=1
 text.margin.right=1
 text.margin.top=1
 text.margin.bottom=1
-frame.expansion=6
+frame.expansion=10
 
 [Splitter]
 indicator.size=32
