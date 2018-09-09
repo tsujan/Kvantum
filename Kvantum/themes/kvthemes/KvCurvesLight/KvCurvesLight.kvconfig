@@ -405,6 +405,8 @@ frame.element=lineedit
 interior.element=lineedit
 indicator.element=s-arrow-down
 text.toggle.color=black
+text.margin.left=6
+text.margin.right=6
 frame.expansion=3.4font
 
 [Menu]

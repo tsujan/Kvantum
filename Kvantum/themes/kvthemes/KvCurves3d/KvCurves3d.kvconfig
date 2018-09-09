@@ -403,6 +403,8 @@ frame.expansion=0
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
+text.margin.left=6
+text.margin.right=6
 frame.expansion=3.4font
 
 [Menu]

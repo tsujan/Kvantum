@@ -938,6 +938,11 @@ text.margin.right                 integer             The sizes of the text marg
                                                       not if there is a lack of space because
                                                       of a bad GUI design.
 
+                                                      Also, in widgets like LineEdit, where
+                                                      texts are not drawn by Kvantum, the real
+                                                      left/right text margins may be a little
+                                                      greater than text.margin.left/right.
+
 text.normal.color                 string (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc. It may
