@@ -22,6 +22,7 @@ V0.10.8
  * Merge the background of a header with that of its parent view, if any.
  * Fill the menu interior with the window background color if there isn't an interior SVG element.
  * Gave meaning to min_height/min_width under Window and Dialog sections by making them the minimum height/width of the background (interior) SVG element (useful with gradients).
+ * Don't make windows translucent or blurry if they have partial masks.
 
 V0.10.7
 ---------

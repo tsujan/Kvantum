@@ -240,6 +240,9 @@ void Style::polish(QWidget *widget)
     case Qt::Popup:
     case Qt::ToolTip: // a window, not a real tooltip
     case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
+      QRegion wMask = widget->mask();
+      if(!wMask.isEmpty() && wMask != QRegion(widget->rect()))
+        break; // like Vokoscreen's QvkAnimateWindow
       /* popup, not menu (-> GoldenDict); also, although it may be
          hard to believe, a menu can have the Dialog flag (-> qlipper)
          and a window can have the ToolTip flag (-> LXQtGroupPopup) */

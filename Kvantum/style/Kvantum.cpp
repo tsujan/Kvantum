@@ -2470,6 +2470,34 @@ void Style::drawPrimitive(PrimitiveElement element,
         forceButtonTextColor(widget,col);
       }
 
+      /* focus rect should be drawn before label and arrow (-> drawComplexControl -> CC_ToolButton) */
+      if (opt && (opt->state & State_HasFocus)
+          /* drawn for tabbar scroll buttons at CE_ToolButtonLabel */
+          && (!qobject_cast<QTabBar*>(p)
+              || ((opt->toolButtonStyle != Qt::ToolButtonIconOnly && !opt->text.isEmpty())
+                  || !opt->icon.isNull()
+                  || !(opt->features & QStyleOptionToolButton::Arrow)
+                  || opt->arrowType == Qt::NoArrow)))
+      {
+        if (fspec.hasFocusFrame)
+        {
+          renderFrame(painter,opt->rect,fspec,fspec.element+"-focus");
+          const interior_spec ispec = getInteriorSpec(group);
+          if (ispec.hasFocusInterior)
+            renderInterior(painter,opt->rect,fspec,ispec,ispec.element+"-focus");
+        }
+        else
+        {
+          QStyleOptionFocusRect fropt;
+          fropt.QStyleOption::operator=(*opt);
+          if (fspec.expansion > 0)
+            fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
+          else
+            fropt.rect = interiorRect(opt->rect, fspec);
+          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+        }
+      }
+
       break;
     }
 
@@ -6718,7 +6746,7 @@ void Style::drawControl(ControlElement element,
         if (state == 3 && styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
           painter->restore();
 
-        if (!txt.isEmpty() && opt->state & State_HasFocus)
+        if (!txt.isEmpty() && (opt->state & State_HasFocus))
         {
           QStyleOptionFocusRect o;
           o.rect = tr;
@@ -9596,36 +9624,6 @@ void Style::drawComplexControl(ComplexControl control,
           drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
         //drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
 
-        QWidget *p = getParent(widget,1);
-
-        /* focus rect should be drawn before label and arrow because it may have an interior */
-        if (opt->state & State_HasFocus
-            /* drawn for tabbar scroll buttons at CE_ToolButtonLabel */
-            && (!qobject_cast<QTabBar*>(p)
-                || ((opt->toolButtonStyle != Qt::ToolButtonIconOnly && !opt->text.isEmpty())
-                    || !opt->icon.isNull()
-                    || !(opt->features & QStyleOptionToolButton::Arrow)
-                    || opt->arrowType == Qt::NoArrow)))
-        {
-          if (fspec.hasFocusFrame)
-          {
-            renderFrame(painter,opt->rect,fspec,fspec.element+"-focus");
-            const interior_spec ispec = getInteriorSpec(group);
-            if (ispec.hasFocusInterior)
-              renderInterior(painter,opt->rect,fspec,ispec,ispec.element+"-focus");
-          }
-          else
-          {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
-            if (fspec.expansion > 0)
-              fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
-            else
-              fropt.rect = interiorRect(opt->rect, fspec);
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-          }
-        }
-
         o.rect = r;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
 
@@ -9640,6 +9638,7 @@ void Style::drawComplexControl(ComplexControl control,
                     || tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
+            QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
             bool drawRaised = false;
             if (tspec_.group_toolbar_buttons)
@@ -10823,7 +10822,7 @@ void Style::drawComplexControl(ComplexControl control,
             painter->restore();
           }
 
-          if (opt && opt->state & State_HasFocus)
+          if (opt && (opt->state & State_HasFocus))
           {
             const frame_spec fspec1 = getFrameSpec(group);
             if (fspec1.hasFocusFrame)
