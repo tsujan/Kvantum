@@ -6595,7 +6595,7 @@ void Style::drawControl(ControlElement element,
 
         /* handle overlapping */
         int overlap = tspec_.active_tab_overlap;
-        if (overlap > 0 && !joinedActiveTab
+        if (overlap > 0 && (!joinedActiveTab || noActiveTabSep)
             && opt->position != QStyleOptionTab::OnlyOneTab)
         {
           if (!status.startsWith("toggled"))

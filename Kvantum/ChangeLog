@@ -7,6 +7,8 @@ V0.10.9
  * Don't draw the left or right frame of a toolbar that is attached to the menubar but doesn't have the same width.
  * Don't remove the frame expansion of view-items only because they are grouped together.
  * Don't make windows translucent or blurry if they have partial masks.
+ * Fixed toolbar/menubar extension arrows with HDPI.
+ * Fixed a bug that prevented active tab overlapping when tab separators existed but "no_active_tab_separator" was "true".
 
 V0.10.8
 ---------

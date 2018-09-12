@@ -4501,32 +4501,21 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (renderElement(painter, dspec1.element+dir+aStatus,option->rect))
           break;
       }
-      /* take care of toolbar/menubar arrows in dark-and-light themes */
+      /* only theoretically; toolbar/menubar arrows are drawn at SP_ToolBarHorizontalExtensionButton */
       else if (themeRndr_ && themeRndr_->isValid())
       {
-        if (painter->opacity() == 0) // -> SP_ToolBarHorizontalExtensionButton
+        QColor col;
+        if (isStylableToolbar(widget)
+            || mergedToolbarHeight(widget) > 0)
         {
-          painter->save();
-          painterSaved = true;
-          painter->setOpacity(1.0);
-          if (themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
-            dspec.element = "flat-"+dspec.element;
+          col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
         }
-        else // only theoretically
+        else if (qobject_cast<const QMenuBar*>(widget))
+          col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
+        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
+            && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
         {
-          QColor col;
-          if (isStylableToolbar(widget)
-              || mergedToolbarHeight(widget) > 0)
-          {
-            col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
-          }
-          else if (qobject_cast<const QMenuBar*>(widget))
-            col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
-          if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
-              && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
-          {
-            dspec.element = "flat-"+dspec.element;
-          }
+          dspec.element = "flat-"+dspec.element;
         }
       }
 
@@ -6226,7 +6215,7 @@ void Style::drawControl(ControlElement element,
 
         /* handle overlapping */
         int overlap = tspec_.active_tab_overlap;
-        if (overlap > 0 && !joinedActiveTab
+        if (overlap > 0 && (!joinedActiveTab || noActiveTabSep)
             && opt->position != QStyleOptionTab::OnlyOneTab)
         {
           if (!status.startsWith("toggled"))
@@ -11606,6 +11595,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return qMax(dspec.size,4);
     }
     case PM_ToolBarIconSize : return tspec_.toolbar_icon_size;
+    /* we don't use this in standardIcon() -> SP_ToolBarHorizontalExtensionButton
+       but it's used in Qt -> qtoolbarextension.cpp, qtoolbarlayout.cpp and qmenubar.cpp */
     case PM_ToolBarExtensionExtent : return 16;
     case PM_ToolBarItemMargin : {
       const frame_spec fspec = getFrameSpec("Toolbar");
@@ -15010,18 +15001,18 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 {
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
-      int s = pixelMetric(PM_ToolBarExtensionExtent);
+      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      int s = pixelRatio_*dspec.size;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
       QPainter painter(&pm);
 
-      /* If this is a dark-and-light theme, we make the painter
-         transparent as a sign to use at PE_IndicatorArrowRight. */
+      /* dark-and-light themes */
       if (themeRndr_ && themeRndr_->isValid())
       {
-        /* for toolbar, widget is NULL but option isn't (Qt -> qtoolbarextension.cpp);
-           for menubar, widget isn't Null but option is (Qt -> qmenubar.cpp) */
+        /* for toolbar, widget is null but option isn't (Qt -> qtoolbarextension.cpp);
+           for menubar, widget isn't null but option is (Qt -> qmenubar.cpp) */
         QColor col;
         if (!widget // unfortunately, there's no way to tell if it's a stylable toolbar :(
             || isStylableToolbar(widget) // doesn't happen
@@ -15031,23 +15022,26 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
         }
         else if (widget)
           col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
-        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor)))
-          painter.setOpacity(0.0);
+        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
+            && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+        {
+          dspec.element = "flat-"+dspec.element;
+        }
       }
 
-      QStyleOption opt;
-      opt.rect = QRect(0,0,s,s);
-      opt.state |= State_Enabled; // there's no way to know the state :(
-      opt.direction = option ? option->direction : QApplication::layoutDirection();
-
-      drawPrimitive(QApplication::layoutDirection() == Qt::RightToLeft ?
-                      PE_IndicatorArrowLeft : PE_IndicatorArrowRight,
-                    &opt,&painter,widget);
-
-      return QIcon(pm);
+      if (renderElement(&painter,
+                        dspec.element
+                          + (QApplication::layoutDirection() == Qt::RightToLeft ? "-left" : "-right")
+                          + "-normal",
+                        QRect(0,0,s,s)))
+      {
+        return QIcon(pm);
+      }
+      else break;
     }
     case SP_ToolBarVerticalExtensionButton : {
-      int s = pixelMetric(PM_ToolBarExtensionExtent);
+      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      int s = pixelRatio_*dspec.size;
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15058,17 +15052,12 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
           && enoughContrast(getFromRGBA(getLabelSpec("Toolbar").normalColor),
                             getFromRGBA(cspec_.windowTextColor)))
       {
-        painter.setOpacity(0.0);
+        dspec.element = "flat-"+dspec.element;
       }
 
-      QStyleOption opt;
-      opt.rect = QRect(0,0,s,s);
-      opt.state |= State_Enabled;
-      opt.direction = option ? option->direction : QApplication::layoutDirection();
-
-      drawPrimitive(PE_IndicatorArrowDown,&opt,&painter,widget);
-
-      return QIcon(pm);
+      if (renderElement(&painter, dspec.element+"-down-normal", QRect(0,0,s,s)))
+        return QIcon(pm);
+      else break;
     }
     case SP_LineEditClearButton : {
       /* Unfortunately, Qt does an odd thing in qlineedit_p.cpp -> QLineEditIconButton::paintEvent():
