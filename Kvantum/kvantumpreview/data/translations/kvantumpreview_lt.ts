@@ -178,51 +178,53 @@ plotis</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="812"/>
         <source>Radio/Check buttons</source>
-        <translation></translation>
+        <translation>Akutės/Žymėjimo mygtukai</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="833"/>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <source>Simple radio button</source>
-        <translation></translation>
+        <translation>Paprastas akutės mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="856"/>
         <location filename="../../KvantumPreviewBase.ui" line="867"/>
         <source>Multi-line
 radio button</source>
-        <translation></translation>
+        <translation>Kelių eilučių
+akutės mygtukas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="878"/>
         <location filename="../../KvantumPreviewBase.ui" line="904"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation></translation>
+        <translation>Akutės mygtukas su 32piks SVG piktograma</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="927"/>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
         <source>Simple check box</source>
-        <translation></translation>
+        <translation>Paprastas žymimasis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="950"/>
         <location filename="../../KvantumPreviewBase.ui" line="961"/>
         <source>Multi-line
 check box</source>
-        <translation></translation>
+        <translation>Kelių eilučių
+žymimasis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="969"/>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
         <source>Tri-state check box</source>
-        <translation></translation>
+        <translation>Trijų būsenų žymimasis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="992"/>
         <location filename="../../KvantumPreviewBase.ui" line="1006"/>
         <source>Check box with icon</source>
-        <translation></translation>
+        <translation>Žymimasis langelis su piktograma</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1062"/>
