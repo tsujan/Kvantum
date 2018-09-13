@@ -804,6 +804,9 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // 36 by default
     r.scroll_min_extent = qMin(qMax(v.toInt(),16),100);
 
+  v = getValue("General","center_scrollbar_indicator");
+  r.center_scrollbar_indicator = v.toBool();
+
   v = getValue("General","tree_branch_line");
   r.tree_branch_line = v.toBool();
 

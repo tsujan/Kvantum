@@ -137,6 +137,8 @@ typedef struct {
   int scroll_width;
   /* minimum scrollbar extent */
   int scroll_min_extent;
+  /* should the scrollbar indicator (grip) be centered? */
+  bool center_scrollbar_indicator;
   /* draw scroll arrows? */
   bool scroll_arrows;
   /* draw tree branch lines? */
@@ -493,6 +495,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;
   tspec.scroll_min_extent = 36;
+  tspec.center_scrollbar_indicator = false;
   tspec.scroll_arrows=true;
   tspec.tree_branch_line=false;
   tspec.slider_width = 8;

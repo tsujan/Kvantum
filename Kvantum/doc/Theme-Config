@@ -378,7 +378,7 @@ toolbar_item_spacing              integer             The space between toolbar 
 toolbar_interior_spacing          integer             The space around the interior of toolbars.
                                                       Zero by default.
 
-center_toolbar_handle             true/false          If true, the SVG element for the
+center_toolbar_handle             true/false          If "true", the SVG element for the
                                                       toolbar handle will be centered
                                                       and its size will be that of the
                                                       toolbar indicator. Otherwise, it
@@ -438,7 +438,7 @@ menubar_mouse_tracking            true/false          Enable mouse tracking in m
                                                       It is enabled by default.
 
 merge_menubar_with_toolbar        true/false          Draw adjacent menu and tool bars
-                                                      as a whole? If true, the toolbar
+                                                      as a whole? If "true", the toolbar
                                                       SVG interior and frame will be used
                                                       for drawing them.
 
@@ -556,6 +556,13 @@ scroll_min_extent                 integer             The minimum height of a ve
                                                       be greater that 100px or less than
                                                       16px. The default value is 36px.
 
+center_scrollbar_indicator        true/false          By default, the decorative indicator
+                                                      of (vertical) ScrollbarSlider is scaled
+                                                      to the width of the slider interior and
+                                                      only its height is "indicator.size".
+                                                      If "true", this key tries to set both
+                                                      width and height to "indicator.size".
+
 scroll_arrows                     true/false          Draw scrollbar add-line and sub-line
                                                       arrows? True by default. If set to
                                                       false, it will remove scroll arrows
@@ -577,8 +584,8 @@ transient_scrollbar               true/false          Should scrollbars appear o
 
 transient_groove                  true/false          Should transient scrollbars have
                                                       translucent backgrounds when needed?
-                                                      False by default but if true, the base
-                                                      color willbe used for painting the
+                                                      False by default but if "true", the
+                                                      base color willbe used for painting the
                                                       background with 25% translucency.
 
 tree_branch_line                  true/false          Draw tree branch lines? Ther are not
@@ -811,7 +818,7 @@ transparent_arrow_button          true/false          Should tool buttons be tra
 
 iconless_menu                     true/false          No icon for menus?
 
-single_top_toolbar                true/false          Style only the top toolbar? If true,
+single_top_toolbar                true/false          Style only the top toolbar? If "true",
                                                       only the top horizontal toolbar, which
                                                       is immediately below the menubar or at
                                                       the top of the main window, will be

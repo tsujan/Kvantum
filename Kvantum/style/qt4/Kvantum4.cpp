@@ -7663,12 +7663,18 @@ void Style::drawControl(ControlElement element,
       }
       renderFrame(painter,r,fspec,fspec.element+"-"+sStatus);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+sStatus);
+      QSize indicatorSize(r.width() - fspec.left-fspec.right,
+                          qMin(dspec.size, r.height() - fspec.top-fspec.bottom));
+      if (tspec_.center_scrollbar_indicator)
+      {
+        int squareW = qMin(qMin(dspec.size, indicatorSize.width()), indicatorSize.height());
+        indicatorSize = QSize(squareW,squareW);
+      }
       renderElement(painter,
                     dspec.element+"-"+status, // let the grip change on mouse-over for the whole scrollbar
                     alignedRect(option->direction,
                                 Qt::AlignCenter,
-                                QSize(r.width() - fspec.left-fspec.right,
-                                      qMin(dspec.size, r.height() - fspec.top-fspec.bottom)),
+                                indicatorSize,
                                 r));
       if (!(option->state & State_Enabled))
         painter->restore();
