@@ -107,13 +107,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
         {
             QString tip = w->toolTip();
             if (!tip.isEmpty())
-            {
-                QStringList simplified;
-                QStringList paragraphs = tip.split("\n\n");
-                for (int j = 0; j < paragraphs.size(); ++j)
-                    simplified.append (paragraphs.at (j).simplified());
-                w->setWhatsThis (simplified.join("\n\n"));
-            }
+                w->setWhatsThis (tooTipToWhatsThis (tip));
         }
     }
     showAnimated (ui->installLabel, 1500);
@@ -170,6 +164,16 @@ void KvantumManager::closeEvent (QCloseEvent *event)
     process_->terminate();
     process_->waitForFinished();
     event->accept();
+}
+/*************************/
+QString KvantumManager::tooTipToWhatsThis (const QString &tip)
+{
+    if (tip.isEmpty()) return QString();
+    QStringList simplified;
+    QStringList paragraphs = tip.split("\n\n");
+    for (int i = 0; i < paragraphs.size(); ++i)
+        simplified.append (paragraphs.at (i).simplified());
+    return simplified.join("\n\n");
 }
 /*************************/
 void KvantumManager::openTheme()
@@ -1479,7 +1483,7 @@ void KvantumManager::selectionChanged (const QString &txt)
 
     QString comment = getComment (txt);
     ui->comboBox->setToolTip (comment);
-    ui->comboBox->setWhatsThis (comment);
+    ui->comboBox->setWhatsThis (tooTipToWhatsThis (comment));
 }
 /*************************/
 void KvantumManager::assignAppTheme (const QString &previousTheme, const QString &newTheme)
@@ -1516,7 +1520,7 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
 
     QString comment = getComment (newTheme, false);
     ui->appCombo->setToolTip (comment);
-    ui->appCombo->setWhatsThis (comment);
+    ui->appCombo->setWhatsThis (tooTipToWhatsThis (comment));
 }
 /*************************/
 void KvantumManager::updateThemeList (bool updateAppThemes)
@@ -1816,7 +1820,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
 
     QString comment = getComment (ui->comboBox->currentText());
     ui->comboBox->setToolTip (comment);
-    ui->comboBox->setWhatsThis (comment);
+    ui->comboBox->setWhatsThis (tooTipToWhatsThis (comment));
 
     /* connect to combobox signal */
 #if QT_VERSION >= 0x050700
@@ -1834,7 +1838,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
         {
             comment = getComment (curTxt, false);
             ui->appCombo->setToolTip (comment);
-            ui->appCombo->setWhatsThis (comment);
+            ui->appCombo->setWhatsThis (tooTipToWhatsThis (comment));
 
             curTxt = curTxt.split (" ").first();
             if (curTxt == "Kvantum")

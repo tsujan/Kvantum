@@ -66,6 +66,7 @@ private slots:
 
 private:
     void closeEvent (QCloseEvent *event);
+    QString tooTipToWhatsThis (const QString &tip);
     void notWritable (const QString &path);
     void canNotBeRemoved (const QString &path, bool isDir);
     bool isThemeDir (const QString &folderPath) const;
