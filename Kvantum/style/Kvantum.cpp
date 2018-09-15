@@ -4632,14 +4632,14 @@ void Style::drawPrimitive(PrimitiveElement element,
                   /* NOTE: Unfortunately, some apps have wrong item positions and some have wrong
                            visual rectangles for indexes. Conditions like this cover all cases. */
                   if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
-                              && siblingIndx.row() == indx.row()))
+                              && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = 1;
                   }
                 }
                 else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
-                                 && siblingIndx.row() == indx.row()))
+                                 && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                 {
                   fspec.isAttached = true;
                   fspec.HPos = -1;
@@ -4653,14 +4653,14 @@ void Style::drawPrimitive(PrimitiveElement element,
                 if (opt->direction == Qt::RightToLeft)
                 {
                   if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
-                              && siblingIndx.row() == indx.row()))
+                              && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = -1;
                   }
                 }
                 else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
-                                 && siblingIndx.row() == indx.row()))
+                                 && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                 {
                   fspec.isAttached = true;
                   fspec.HPos = 1;
@@ -4674,15 +4674,15 @@ void Style::drawPrimitive(PrimitiveElement element,
                 if (opt->direction == Qt::RightToLeft)
                 {
                   if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
-                              && siblingIndx.row() == indx.row()))
+                              && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                   {
                     fspec.isAttached = true;
                     fspec.HPos = 1;
                   }
                 }
                 else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
-                                 && siblingIndx.row() == indx.row())) // there is an item on the right
-                {
+                                 && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
+                { // there is an item on the right
                   fspec.isAttached = true;
                   fspec.HPos = -1;
                 }
@@ -4692,7 +4692,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 if (opt->direction == Qt::RightToLeft)
                 {
                   if (!iv || ((siblingIndx = iv->indexAt(option->rect.topRight() + QPoint(2,0))).isValid()
-                              && siblingIndx.row() == indx.row())) // there is an item on the left
+                              && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
                   {
                     if (fspec.isAttached)
                       fspec.HPos = 0;
@@ -4704,8 +4704,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                   }
                 }
                 else if (!iv || ((siblingIndx = iv->indexAt(option->rect.topLeft() - QPoint(2,0))).isValid()
-                                 && siblingIndx.row() == indx.row()))
-                {
+                                 && siblingIndx.column() != indx.column() && siblingIndx.row() == indx.row()))
+                { // there is an item on the left
                   if (fspec.isAttached)
                     fspec.HPos = 0;
                   else
