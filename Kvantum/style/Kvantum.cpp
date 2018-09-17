@@ -6818,12 +6818,15 @@ void Style::drawControl(ControlElement element,
       if (!isVertical && option->direction == Qt::RightToLeft)
         inverted = !inverted;
 
-      if (tspec_.progressbar_thickness > 0
-          && !isKisSlider_)
+      QFont f(painter->font());
+      const label_spec lspec = getLabelSpec("Progressbar");
+      if (lspec.boldFont) f.setWeight(lspec.boldness);
+
+      /* This is the condition set at CT_ProgressBar for using thin progressbars.
+         It is independent of the real progressbar thickness. */
+      if (!isKisSlider_ && tspec_.progressbar_thickness > 0
+          && QFontMetrics(f).height() > tspec_.progressbar_thickness)
       { // determine the text position relative to the bar
-        QFont f(painter->font());
-        const label_spec lspec = getLabelSpec("Progressbar");
-        if (lspec.boldFont) f.setWeight(lspec.boldness);
         bool topText;
         QSize s;
         if (isVertical)
@@ -6963,12 +6966,13 @@ void Style::drawControl(ControlElement element,
         if (!spreadProgressbar && (isVertical ? w : h) <= fspecPr.top + fspecPr.bottom)
           spreadProgressbar = true;
 
-        if (tspec_.progressbar_thickness > 0
-            && !isKisSlider_)
+        QFont f(painter->font());
+        const label_spec lspec = getLabelSpec("Progressbar");
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
+
+        if (!isKisSlider_ && tspec_.progressbar_thickness > 0
+            && QFontMetrics(f).height() > tspec_.progressbar_thickness)
         { // determine the text position relative to the bar
-          QFont f(painter->font());
-          const label_spec lspec = getLabelSpec("Progressbar");
-          if (lspec.boldFont) f.setWeight(lspec.boldness);
           bool topText;
           QSize s;
           /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
@@ -7286,9 +7290,8 @@ void Style::drawControl(ControlElement element,
 
         bool sideText(false);
         bool topText(false);
-        if (tspec_.progressbar_thickness > 0
-            // KisSliderSpinBox doesn't obey thickness setting
-            && !isKisSlider_
+        if (!isKisSlider_ // KisSliderSpinBox doesn't obey thickness setting
+            && tspec_.progressbar_thickness > 0
             && QFontMetrics(f).height() > tspec_.progressbar_thickness)
         { // see if text can be outside progressbar
           if (isVertical)
@@ -13187,29 +13190,25 @@ QSize Style::sizeFromContents(ContentsType type,
       const label_spec lspec = getLabelSpec("Progressbar");
       if (lspec.boldFont) f.setWeight(lspec.boldness);
 
-      if (!isKisSlider_ && tspec_.progressbar_thickness > 0)
+      if (!isKisSlider_ && tspec_.progressbar_thickness > 0
+          && QFontMetrics(f).height() > tspec_.progressbar_thickness)
       {
         /* Set the size so that the text could be above the bar only if
            there isn't enough space inside the bar. The are safeguards
            in other places when a progressbar doesn't consult this function. */
-        if (QFontMetrics(f).height() > tspec_.progressbar_thickness)
-        {
-          s = defaultSize;
-          if (isVertical)
-            s.rwidth() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
-          else
-            s.rheight() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
-          return s;
-        }
-      }
-      else
-      { // the label of an ordianry progressbar should fit in its interior
-        const frame_spec fspec = getFrameSpec("Progressbar");
+        s = defaultSize;
         if (isVertical)
-          s.rwidth() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
+          s.rwidth() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
         else
-          s.rheight() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
+          s.rheight() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
+        return s;
       }
+      // the label of an ordianry progressbar should fit in its interior
+      const frame_spec fspec = getFrameSpec("Progressbar");
+      if (isVertical)
+        s.rwidth() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
+      else
+        s.rheight() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
       break;
     }
 
