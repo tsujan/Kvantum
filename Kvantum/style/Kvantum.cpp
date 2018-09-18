@@ -6842,6 +6842,14 @@ void Style::drawControl(ControlElement element,
 
         if (opt && opt->textVisible && QFontMetrics(f).height() > (isVertical ? s.width() : s.height()))
         {
+          if(topText)
+          { // when the space is more than enough (with an expanding vertical policy)
+            r = alignedRect(option->direction, Qt::AlignCenter,
+                            isVertical
+                              ? QSize(tspec_.progressbar_thickness + QFontMetrics(f).height()+3, h)
+                              : QSize(w, tspec_.progressbar_thickness + QFontMetrics(f).height()+3),
+                            r);
+          }
           r = alignedRect(option->direction,
                           topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom
                                   : Qt::AlignCenter,
@@ -6879,7 +6887,7 @@ void Style::drawControl(ControlElement element,
             }
           }
         }
-        else
+        else // thin progressbar without text
         {
           r = alignedRect(option->direction,Qt::AlignCenter,s,r);
           x = r.x();
@@ -6888,6 +6896,18 @@ void Style::drawControl(ControlElement element,
           w = r.width();
         }
       }
+      /*else
+      { // when the space is more than enough (with an expanding vertical policy)
+          r = alignedRect(option->direction, Qt::AlignCenter,
+                          isVertical
+                            ? QSize(qMin(QFontMetrics(f).height()+fspec.top+fspec.bottom, w), h)
+                            : QSize(w, qMin(QFontMetrics(f).height()+fspec.top+fspec.bottom, h)),
+                          r);
+          x = r.x();
+          y = r.y();
+          h = r.height();
+          w = r.width();
+      }*/
 
       if (isVertical)
       {
@@ -6930,23 +6950,6 @@ void Style::drawControl(ControlElement element,
         if (isWidgetInactive(widget))
           status.append("-inactive");
 
-        const QString group = "ProgressbarContents";
-        frame_spec fspec = getFrameSpec(group);
-        if (isKisSlider_)
-        {
-          //fspec.right = 0;
-          fspec.isAttached = true;
-          fspec.HPos = -1;
-        }
-        else
-        {
-          fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-        }
-        const interior_spec ispec = getInteriorSpec(group);
-        const frame_spec fspecPr = getFrameSpec("Progressbar");
-
-        QRect r = option->rect;
-
         bool isVertical = false;
         bool inverted = false;
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
@@ -6961,10 +6964,27 @@ void Style::drawControl(ControlElement element,
         if (!isVertical && option->direction == Qt::RightToLeft)
           inverted = !inverted;
 
+        frame_spec fspecPr = getFrameSpec("Progressbar");
+        if (isKisSlider_)
+          fspecPr.right = 0;
+        else
+        {
+          fspecPr.left = fspecPr.right = qMin(fspecPr.left,fspecPr.right); // -> CE_ProgressBarGroove
+        }
+
         /* take care of bad designs (as in pavucontrol-qt) */
         bool spreadProgressbar = tspec_.spread_progressbar;
         if (!spreadProgressbar && (isVertical ? w : h) <= fspecPr.top + fspecPr.bottom)
           spreadProgressbar = true;
+
+        QRect r = option->rect;
+        if (!spreadProgressbar)
+        {
+          if (isVertical)
+            r.adjust(fspecPr.top, fspecPr.right, -fspecPr.bottom, -fspecPr.left);
+          else
+            r.adjust(fspecPr.left, fspecPr.top, -fspecPr.right, -fspecPr.bottom);
+        }
 
         QFont f(painter->font());
         const label_spec lspec = getLabelSpec("Progressbar");
@@ -6975,19 +6995,19 @@ void Style::drawControl(ControlElement element,
         { // determine the text position relative to the bar
           bool topText;
           QSize s;
-          /* if it isn't spread, this is the interior rect (-> SE_ProgressBarContents) */
           int thickness = tspec_.progressbar_thickness - (spreadProgressbar
                                                           ? 0
                                                           : fspecPr.top + fspecPr.bottom);
+          if (thickness <= 0) return;
           if (isVertical)
           {
-            s = QSize(qMin(thickness,w), h);
-            topText = (thickness + QFontMetrics(f).height()+3 <= w);
+            s = QSize(qMin(thickness,r.width()), r.height());
+            topText = (thickness + QFontMetrics(f).height()+3 <= r.width());
           }
           else
           {
-            s = QSize(w , qMin(thickness,h));
-            topText = (thickness + QFontMetrics(f).height()+3 <= h);
+            s = QSize(r.width() , qMin(thickness,r.height()));
+            topText = (thickness + QFontMetrics(f).height()+3 <= r.height());
           }
 
           thickness = isVertical ? spreadProgressbar
@@ -6996,6 +7016,25 @@ void Style::drawControl(ControlElement element,
                                    ? s.height() : s.height() + fspecPr.top + fspecPr.bottom;
           if (opt->textVisible && QFontMetrics(f).height() > thickness)
           {
+            if(topText)
+            { // when the space is more than enough (with an expanding vertical policy)
+              if (isVertical)
+              {
+                r = alignedRect(option->direction, Qt::AlignCenter,
+                                QSize(tspec_.progressbar_thickness + QFontMetrics(f).height()+3, r.height()),
+                                option->rect);
+                if (!spreadProgressbar)
+                  r.adjust(fspecPr.top, 0, -fspecPr.bottom, 0);
+              }
+              else
+              {
+                r = alignedRect(option->direction, Qt::AlignCenter,
+                                QSize(r.width(), tspec_.progressbar_thickness + QFontMetrics(f).height()+3),
+                                option->rect);
+                if (!spreadProgressbar)
+                  r.adjust(0, fspecPr.top, 0, -fspecPr.bottom);
+              }
+            }
             r = alignedRect(option->direction,
                             topText ? isVertical ? Qt::AlignVCenter|Qt::AlignLeft : Qt::AlignHCenter|Qt::AlignBottom
                                     : Qt::AlignCenter,
@@ -7033,15 +7072,64 @@ void Style::drawControl(ControlElement element,
               }
             }
           }
-          else
+          else // thin progressbar without text
           {
-            r = alignedRect(option->direction,Qt::AlignCenter,s,r);
+            r = alignedRect(option->direction,Qt::AlignCenter,
+                            isVertical
+                              ? QSize(qMin(tspec_.progressbar_thickness, option->rect.width()),
+                                      option->rect.height())
+                              : QSize(option->rect.width(),
+                                      qMin(tspec_.progressbar_thickness, option->rect.height())),
+                            option->rect);
+            if (!spreadProgressbar)
+            {
+              if (isVertical)
+                r.adjust(fspecPr.top, fspecPr.right, -fspecPr.bottom, -fspecPr.left);
+              else
+                r.adjust(fspecPr.left, fspecPr.top, -fspecPr.right, -fspecPr.bottom);
+            }
             x = r.x();
             y = r.y();
             h = r.height();
             w = r.width();
           }
         }
+        else
+        {
+          /* when the space is more than enough (with an expanding vertical policy) */
+          /*r = alignedRect(option->direction, Qt::AlignCenter,
+                          isVertical
+                            ? QSize(qMin(QFontMetrics(f).height()+fspecPr.top+fspecPr.bottom, option->rect.width()),
+                                    option->rect.height())
+                            : QSize(option->rect.width(),
+                                    qMin(QFontMetrics(f).height()+fspecPr.top+fspecPr.bottom, option->rect.height())),
+                          option->rect);
+          if (!spreadProgressbar)
+          {
+            if (isVertical)
+              r.adjust(fspecPr.top, fspecPr.right, -fspecPr.bottom, -fspecPr.left);
+            else
+              r.adjust(fspecPr.left, fspecPr.top, -fspecPr.right, -fspecPr.bottom);
+          }*/
+          x = r.x();
+          y = r.y();
+          h = r.height();
+          w = r.width();
+        }
+
+        const QString group = "ProgressbarContents";
+        frame_spec fspec = getFrameSpec(group);
+        if (isKisSlider_)
+        {
+          //fspec.right = 0;
+          fspec.isAttached = true;
+          fspec.HPos = -1;
+        }
+        else
+        {
+          fspec.left = fspec.right = qMin(fspec.left,fspec.right); // as with Progressbar
+        }
+        const interior_spec ispec = getInteriorSpec(group);
 
         /* if the progressbar is rounded, its contents should be so too */
         bool isRounded = false;
@@ -7277,6 +7365,14 @@ void Style::drawControl(ControlElement element,
         label_spec lspec = getLabelSpec("Progressbar");
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
+        frame_spec fspecPr = getFrameSpec("Progressbar");
+        if (isKisSlider_)
+          fspecPr.right = 0;
+        else
+        {
+          fspecPr.left = fspecPr.right = qMin(fspecPr.left,fspecPr.right); // -> CE_ProgressBarContents
+        }
+
         QFont f(painter->font());
         if (lspec.boldFont) f.setWeight(lspec.boldness);
         bool isVertical(opt->orientation == Qt::Vertical);
@@ -7339,13 +7435,21 @@ void Style::drawControl(ControlElement element,
         }
         if (sideText)
           length -= 6; // fixed 3px space + fixed 3px margin
-        else if (!topText)
-        { // ordinary progressbar (-> SE_ProgressBarContents)
-          const frame_spec fspec0 = getFrameSpec("Progressbar");
-          if (isKisSlider_)
-            length -= fspec0.left;
-          else
-            length -= 2*qMin(fspec0.left,fspec0.right);
+        else if (!topText) // ordinary progressbar
+        {
+          length -= fspecPr.left + fspecPr.right;
+          /* with interior bars, only if there remains enough vertical space for the text,
+             consider top and bottom frame widths to move the text vertically when needed */
+          if (!tspec_.spread_progressbar
+              /* take care of bad designs (as in pavucontrol-qt; see CE_ProgressBarContents) */
+              && (isVertical ? w : h) > fspecPr.top + fspecPr.bottom
+              && QFontMetrics(f).height() <= r.height() - fspecPr.top - fspecPr.bottom)
+          {
+            if (isVertical && !opt->bottomToTop)
+              r.adjust(0,fspecPr.bottom,0,-fspecPr.top);
+            else
+              r.adjust(0,fspecPr.top,0,-fspecPr.bottom);
+          }
         }
 
         txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length);
@@ -7391,15 +7495,8 @@ void Style::drawControl(ControlElement element,
         if (!sideText && !topText)
         {
           /* with ordinary progressbars, we put the text inside the frame horizontally,
-             hoping that it'll be completely inside the frame (-> SE_ProgressBarContents) */
-          QRect cr = subElementRect(QStyle::SE_ProgressBarContents,option,widget);
-          if (isVertical)
-          {
-            int hMargin = qMax(cr.top()-option->rect.top(), 0);
-            r.setRect(r.left()+hMargin, r.top(), r.width()-2*hMargin, r.height());
-          }
-          else
-            r.setRect(cr.left(), r.top(), cr.width(), r.height());
+             hoping that it'll be completely inside the frame */
+          r.setRect(r.left()+fspecPr.left, r.top(), length, r.height());
 
           /* find the part inside the indicator */
           QColor col = getFromRGBA(cspec_.progressIndicatorTextColor);
@@ -7445,6 +7542,10 @@ void Style::drawControl(ControlElement element,
         int talign;
         if (topText)
         {
+          /*  when the space is more than enough (with an expanding vertical policy) */
+          r = alignedRect(option->direction, Qt::AlignCenter,
+                          QSize(r.width(), tspec_.progressbar_thickness + QFontMetrics(f).height()+3),
+                          r);
           if (isVertical && opt->bottomToTop)
           {
             if (option->direction == Qt::RightToLeft)
@@ -9534,21 +9635,9 @@ void Style::drawControl(ControlElement element,
     case CE_Kv_KCapacityBar : {
       if (const QStyleOptionProgressBar *opt = qstyleoption_cast<const QStyleOptionProgressBar*>(option))
       {
-        QRect r = opt->rect;
         QStyleOptionProgressBar o(*opt);
         drawControl(CE_ProgressBarGroove, &o, painter, widget);
-        if (!tspec_.spread_progressbar)
-        {
-          frame_spec fspec = getFrameSpec("Progressbar");
-          /* take care of bad designs (as in pavucontrol-qt) */
-          if (r.height() > fspec.top + fspec.bottom)
-          {
-            fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-            o.rect.adjust(fspec.left, fspec.top, -fspec.right, -fspec.bottom);
-          }
-        }
         drawControl(CE_ProgressBarContents, &o, painter, widget);
-        o.rect = r;
         drawControl(CE_ProgressBarLabel, &o, painter, widget);
       }
 
@@ -13402,40 +13491,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     }
 
     case SE_ProgressBarLabel :
+    case SE_ProgressBarContents :
     case SE_ProgressBarGroove : return option->rect;
-
-    case SE_ProgressBarContents : {
-      frame_spec fspec = getFrameSpec("Progressbar");
-      const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-      bool isVertical(pb && pb->orientation() == Qt::Vertical);
-
-      if (tspec_.spread_progressbar
-          /* take care of bad designs (as in pavucontrol-qt) */
-          || (isVertical ? option->rect.width() : option->rect.height()) <= fspec.top + fspec.bottom)
-      {
-        return subElementRect(SE_ProgressBarGroove,option,widget);
-      }
-
-      if (isKisSlider_)
-        fspec.right = 0;
-      else
-      {
-        fspec.left = fspec.right = qMin(fspec.left,fspec.right);
-      }
-      // the vertical progressbar will be made out of the horizontal one
-
-      if (isVertical)
-      {
-        int top = fspec.top;
-        fspec.top = fspec.right;
-        int bottom = fspec.bottom;
-        fspec.bottom = fspec.left;
-        fspec.left = top;
-        fspec.right = bottom;
-      }
-
-      return interiorRect(subElementRect(SE_ProgressBarGroove,option,widget), fspec);
-    }
 
     case SE_LineEditContents : {
       frame_spec fspec = getFrameSpec("LineEdit");
