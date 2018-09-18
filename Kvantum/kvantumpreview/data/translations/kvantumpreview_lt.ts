@@ -184,7 +184,7 @@ plotis</translation>
         <location filename="../../KvantumPreviewBase.ui" line="833"/>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <source>Simple radio button</source>
-        <translation>Paprastas akutės mygtukas</translation>
+        <translation>Paprasta akutė</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="856"/>
@@ -192,13 +192,13 @@ plotis</translation>
         <source>Multi-line
 radio button</source>
         <translation>Kelių eilučių
-akutės mygtukas</translation>
+akutė</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="878"/>
         <location filename="../../KvantumPreviewBase.ui" line="904"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation>Akutės mygtukas su 32piks SVG piktograma</translation>
+        <translation>Akutė su 32piks SVG piktograma</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="927"/>
@@ -229,7 +229,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1062"/>
         <source>Combos/Spins/Inputs</source>
-        <translation></translation>
+        <translation>Jungtiniai/Sukiniai/Įvestys</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1096"/>
@@ -239,37 +239,37 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1437"/>
         <location filename="../../KvantumPreviewBase.ui" line="1495"/>
         <source>Frameless (no difference)</source>
-        <translation></translation>
+        <translation>Be rėmelio (nesiskirianti)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1107"/>
         <location filename="../../KvantumPreviewBase.ui" line="1146"/>
         <source>Standard combo box</source>
-        <translation></translation>
+        <translation>Standartinis jungtinis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1116"/>
         <location filename="../../KvantumPreviewBase.ui" line="1155"/>
         <source>Standard combo box 1</source>
-        <translation></translation>
+        <translation>Standartinis jungtinis langelis 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1124"/>
         <location filename="../../KvantumPreviewBase.ui" line="1160"/>
         <source>Standard combo box 2</source>
-        <translation></translation>
+        <translation>Standartinis jungtinis langelis 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1129"/>
         <location filename="../../KvantumPreviewBase.ui" line="1165"/>
         <source>Standard combo box 3</source>
-        <translation></translation>
+        <translation>Standartinis jungtinis langelis 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1134"/>
         <location filename="../../KvantumPreviewBase.ui" line="1170"/>
         <source>Standard combo box 4</source>
-        <translation></translation>
+        <translation>Standartinis jungtinis langelis 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1191"/>
@@ -277,7 +277,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 1</source>
-        <translation></translation>
+        <translation>Be rėmelio 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1196"/>
@@ -285,7 +285,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1379"/>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <source>Frameless 2</source>
-        <translation></translation>
+        <translation>Be rėmelio 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1201"/>
@@ -293,7 +293,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <source>Frameless 3</source>
-        <translation></translation>
+        <translation>Be rėmelio 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -301,84 +301,84 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1389"/>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <source>Frameless 4</source>
-        <translation></translation>
+        <translation>Be rėmelio 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
         <location filename="../../KvantumPreviewBase.ui" line="1394"/>
         <source>Frameless 5</source>
-        <translation></translation>
+        <translation>Be rėmelio 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1399"/>
         <source>Frameless 6</source>
-        <translation></translation>
+        <translation>Be rėmelio 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1404"/>
         <source>Frameless 7</source>
-        <translation></translation>
+        <translation>Be rėmelio 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1409"/>
         <source>Frameless 8</source>
-        <translation></translation>
+        <translation>Be rėmelio 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1414"/>
         <source>Frameless 9</source>
-        <translation></translation>
+        <translation>Be rėmelio 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1419"/>
         <source>Frameless 10</source>
-        <translation></translation>
+        <translation>Be rėmelio 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
         <location filename="../../KvantumPreviewBase.ui" line="1326"/>
         <source>Editable combo box</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1296"/>
         <location filename="../../KvantumPreviewBase.ui" line="1335"/>
         <source>Editable combo box 1</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1301"/>
         <location filename="../../KvantumPreviewBase.ui" line="1340"/>
         <source>Editable combo box 2</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1306"/>
         <location filename="../../KvantumPreviewBase.ui" line="1345"/>
         <source>Editable combo box 3</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1311"/>
         <location filename="../../KvantumPreviewBase.ui" line="1350"/>
         <source>Editable combo box 4</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1469"/>
         <location filename="../../KvantumPreviewBase.ui" line="1482"/>
         <source>Line-edit</source>
-        <translation></translation>
+        <translation>Redaguojama eilutė</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1561"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation></translation>
+        <translation>Slinktukai/Slinktys/Eiga/Rinkimas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
@@ -414,13 +414,13 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation></translation>
+        <translation>2-as pavaldusis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation></translation>
+        <translation>1-as pavaldusis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -430,7 +430,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation></translation>
+        <translation>3-ias pavaldusis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
@@ -476,29 +476,29 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation></translation>
+        <translation>Redaguojama</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation></translation>
+        <translation>Neredaguojama</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2229"/>
         <source>Subwindow</source>
-        <translation></translation>
+        <translation>Polangis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2276"/>
         <source>Panel frame</source>
-        <translation></translation>
+        <translation>Skydelio rėmelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2295"/>
         <location filename="../../KvantumPreviewBase.ui" line="2436"/>
         <location filename="../../KvantumPreviewBase.ui" line="2528"/>
         <source>GroupBox</source>
-        <translation></translation>
+        <translation>Grupės langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2315"/>
@@ -550,32 +550,32 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2411"/>
         <source>Stack widget (page1)</source>
-        <translation></translation>
+        <translation>Dėklo valdiklis (puslapis1)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2425"/>
         <source>Stack Widget (page2)</source>
-        <translation></translation>
+        <translation>Dėklo valdiklis (puslapis2)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2442"/>
         <source>Group box</source>
-        <translation></translation>
+        <translation>Grupės langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Dock Widget</source>
-        <translation></translation>
+        <translation>Doko valdiklis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2537"/>
         <source>Checkable group box</source>
-        <translation></translation>
+        <translation>Žymimasis grupės langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2572"/>
         <source>Tool Box</source>
-        <translation></translation>
+        <translation>Įrankių langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2664"/>
@@ -585,7 +585,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2702"/>
         <source>Box frame</source>
-        <translation></translation>
+        <translation>Langelio rėmelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
@@ -600,12 +600,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2856"/>
         <source>toolBar</source>
-        <translation></translation>
+        <translation>Įrankių juosta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2873"/>
         <source>toolBar_2</source>
-        <translation></translation>
+        <translation>Irankių juosta_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
@@ -625,7 +625,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2906"/>
         <source>&amp;Checkbox</source>
-        <translation></translation>
+        <translation>&amp;Žymimasis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
@@ -660,17 +660,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2963"/>
         <source>C&amp;heckbox</source>
-        <translation></translation>
+        <translation>Ž&amp;ymimasis langelis</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>&amp;Radio button</source>
-        <translation></translation>
+        <translation>&amp;Akutė</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2979"/>
         <source>Radio &amp;button</source>
-        <translation></translation>
+        <translation>A&amp;kutė</translation>
     </message>
 </context>
 </TS>
