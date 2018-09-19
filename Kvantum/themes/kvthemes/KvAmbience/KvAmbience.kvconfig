@@ -163,6 +163,7 @@ frame.bottom=1
 frame.left=1
 frame.right=1
 text.normal.color=black
+indicator.element=dock
 
 [DockTitle]
 inherits=PanelButtonCommand
@@ -449,8 +450,9 @@ frame=false
 interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
-text.normal.color=#787878
-text.focus.color=black
+text.normal.color=#c8c8c8
+text.focus.color=white
+text.shadow.color=black
 text.bold=true
 text.italic=true
 

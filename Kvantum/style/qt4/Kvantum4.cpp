@@ -13913,7 +13913,7 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
       if (standardIcon == SP_DockWidgetCloseButton
           || qobject_cast<const QDockWidget*>(widget))
       {
-        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-close-"+status,QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-close",QRect(0,0,s,s));
       }
       if (!rendered)
         rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-"+status,QRect(0,0,s,s));
@@ -13949,7 +13949,7 @@ QIcon Style::standardIconImplementation(StandardPixmap standardIcon,
       }
       bool rendered(false);
       if (qobject_cast<const QDockWidget*>(widget))
-        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-restore-"+status,QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-restore",QRect(0,0,s,s));
       if (!rendered)
         rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-"+status,QRect(0,0,s,s));
       if (rendered)
