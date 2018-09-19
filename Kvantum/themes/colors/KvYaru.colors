@@ -19,8 +19,8 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=253,253,253
-BackgroundNormal=253,253,253
+BackgroundAlternate=245,246,247
+BackgroundNormal=245,246,247
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -33,8 +33,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [Colors:Selection]
-BackgroundAlternate=240,119,70
-BackgroundNormal=240,119,70
+BackgroundAlternate=233,84,32
+BackgroundNormal=233,84,32
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -75,8 +75,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [Colors:Window]
-BackgroundAlternate=253,253,253
-BackgroundNormal=253,253,253
+BackgroundAlternate=245,246,247
+BackgroundNormal=245,246,247
 DecorationFocus=61,174,233
 DecorationHover=142,203,233
 ForegroundActive=255,128,224
@@ -89,8 +89,8 @@ ForegroundPositive=0,110,40
 ForegroundVisited=69,40,134
 
 [General]
-ColorScheme=KvCommunitheme
-Name=KvCommunitheme
+ColorScheme=KvYaru
+Name=KvYaru
 shadeSortColumn=true
 
 [KDE]
