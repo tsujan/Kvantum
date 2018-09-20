@@ -7657,7 +7657,7 @@ void Style::drawControl(ControlElement element,
                     dspec.element+"-"+status,
                     alignedRect(option->direction,
                                 Qt::AlignCenter,
-                                QSize(iW,dspec.size),
+                                QSize(iW, qMin(dspec.size, qMax(w,h))),
                                 r));
       if (!(option->state & State_Enabled))
         painter->restore();
@@ -11946,6 +11946,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     /*case PM_SliderTickmarkOffset: {
       return SLIDER_TICK_SIZE;
     }*/
+
+    case PM_DockWidgetSeparatorExtent :
+      return tspec_.splitter_width; // the same as PM_SplitterWidth
 
     case PM_DockWidgetFrameWidth : {
       /*QString group = "Dock";
