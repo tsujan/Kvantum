@@ -23,7 +23,6 @@
 #include <QTimer>
 #include <QSvgRenderer>
 #include <QApplication>
-#include <QToolButton>
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>
@@ -1083,9 +1082,12 @@ enum groupedTBtnKind
   return false;
 }*/
 
-static int whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar)
+static QSet<QWidget*> btnSeparators;
+
+int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, bool &drawSeparator) const
 {
   int res = tbAlone;
+  drawSeparator = false;
 
   if (!tb || !parentBar
       /* Although the toolbar extension button can be on the immediate right of
@@ -1096,53 +1098,59 @@ static int whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar)
     return res;
   }
 
-  //if (toolBar->orientation() == Qt::Horizontal)
-  //{
-    QRect g = tb->geometry();
-    const QToolButton *left = qobject_cast<const QToolButton*>(parentBar->childAt (g.x()-1, g.y()));
-    if (left && left->objectName() == "qt_toolbar_ext_button")
-      left = nullptr;
-    const QToolButton *right =  qobject_cast<const QToolButton*>(parentBar->childAt (g.x()+g.width()+1, g.y()));
-    if (right && right->objectName() == "qt_toolbar_ext_button")
-      right = nullptr;
+  const QRect g = tb->geometry();
+  QToolButton *left = qobject_cast<QToolButton*>(parentBar->childAt (g.x()-1, g.y()));
+  if (left && left->objectName() == "qt_toolbar_ext_button")
+    left = nullptr;
+  const QToolButton *right =  qobject_cast<const QToolButton*>(parentBar->childAt (g.x()+g.width()+1, g.y()));
+  if (right && right->objectName() == "qt_toolbar_ext_button")
+    right = nullptr;
 
-    /* only direct children should be considered */
-    if (left && left->parentWidget() != parentBar)
-      left = nullptr;
-    if (right && right->parentWidget() != parentBar)
-      right = nullptr;
+  /* only direct children should be considered */
+  if (left && left->parentWidget() != parentBar)
+    left = nullptr;
+  if (right && right->parentWidget() != parentBar)
+    right = nullptr;
 
-    if (left && g.height() == left->height())
-    {
-      if (right && g.height() == right->height())
-        res = tbMiddle;
-      else
-        res = tbRight;
-    }
-    else if (right && g.height() == right->height())
-      res = tbLeft;
-  //}
-  // we don't group buttons on a vertical toolbar
-  /*else
+  if (left && g.height() == left->height())
   {
-    // opt was QStyleOptionToolButton*
-    if (hasArrow (tb, opt))
-      return res;
-
-    QRect g = tb->geometry();
-    const QToolButton *top = qobject_cast<const QToolButton*>(toolBar->childAt (g.x(), g.y()-1));
-    const QToolButton *bottom =  qobject_cast<const QToolButton*>(toolBar->childAt (g.x(), g.y()+g.height()+1));
-
-    if (top && !hasArrow (top, opt) && opt->icon.isNull() == top->icon().isNull())
+    if (right && g.height() == right->height())
     {
-      if (bottom && !hasArrow (bottom, opt) && opt->icon.isNull() == bottom->icon().isNull())
-        res = tbMiddle;
-      else
-        res = tbRight;
+      res = tbMiddle;
+      if ((tb->isChecked() && !right->isChecked()) || (!tb->isChecked() && right->isChecked()))
+        drawSeparator = true;
     }
-    else if (bottom && !hasArrow (bottom, opt) && opt->icon.isNull() == bottom->icon().isNull())
-      res = tbLeft;
-  }*/
+    else
+      res = tbRight;
+  }
+  else if (right && g.height() == right->height())
+  {
+    res = tbLeft;
+    if ((tb->isChecked() && !right->isChecked()) || (!tb->isChecked() && right->isChecked()))
+        drawSeparator = true;
+  }
+
+  if (drawSeparator)
+  {
+    btnSeparators.insert(const_cast<QToolButton*>(tb));
+    connect(tb, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
+  }
+  else
+    btnSeparators.remove(const_cast<QToolButton*>(tb));
+
+  if (left)
+  { // update the left button when needed
+    if ((tb->isChecked()
+         && ((!left->isChecked() && !btnSeparators.contains(left))
+             || (left->isChecked() && btnSeparators.contains(left))))
+        ||
+        (!tb->isChecked()
+          && ((!left->isChecked() && btnSeparators.contains(left))
+              || (left->isChecked() && !btnSeparators.contains(left)))))
+    {
+      left->update();
+    }
+  }
 
   return res;
 }
@@ -1398,6 +1406,7 @@ void Style::removeFromSet(QObject *o)
   paneledButtons.remove(widget);
   standardButton.remove(widget);
   txtColForced.remove(widget);
+  btnSeparators.remove(widget);
 }
 
 /* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text color
@@ -2104,7 +2113,9 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
 
       bool isInactive(isWidgetInactive(widget));
+      bool rtl(option->direction == Qt::RightToLeft);
       bool drawRaised = false;
+      bool drawSep(false);
       if (!(option->state & State_Enabled))
       {
         status = "normal";
@@ -2125,8 +2136,6 @@ void Style::drawPrimitive(PrimitiveElement element,
           status.replace("pressed","toggled");
         }
 
-        bool rtl(option->direction == Qt::RightToLeft);
-
         /*bool withArrow = hasArrow (tb, opt);
         bool isHorizontal = true;*/
         if (const QToolBar *toolBar = qobject_cast<const QToolBar*>(p))
@@ -2142,7 +2151,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 painter->restore();
               drawRaised = true;
               ispec.px = ispec.py = 0;
-              int kind = whichGroupedTBtn (tb, toolBar);
+              int kind = whichGroupedTBtn (tb, toolBar, drawSep);
               if (kind != 2)
               {
                 fspec.isAttached = true;
@@ -2170,7 +2179,7 @@ void Style::drawPrimitive(PrimitiveElement element,
               //{
                 drawRaised = true;
                 ispec.px = ispec.py = 0;
-                int kind = whichGroupedTBtn(tb, p);
+                int kind = whichGroupedTBtn(tb, p, drawSep);
                 if (kind != 2)
                 {
                   fspec.isAttached = true;
@@ -2468,6 +2477,17 @@ void Style::drawPrimitive(PrimitiveElement element,
           col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
                                               QPalette::WindowText);
         forceButtonTextColor(widget,col);
+      }
+
+      if (drawSep && (fspec.expansion > 0 || rtl // the rtl arrow is at the left
+                      || tb->popupMode() != QToolButton::MenuButtonPopup))
+      {
+        renderElement(painter,fspec.element + "-separator",
+                      QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom));
+        renderElement(painter,fspec.element + "-separator-top",
+                      QRect(x+r.width()-fspec.right, y, fspec.right, fspec.top));
+        renderElement(painter,fspec.element + "-separator-bottom",
+                      QRect(x+r.width()-fspec.right, y+h-fspec.bottom, fspec.right, fspec.bottom));
       }
 
       /* focus rect should be drawn before label and arrow (-> drawComplexControl -> CC_ToolButton) */
@@ -4062,6 +4082,7 @@ void Style::drawPrimitive(PrimitiveElement element,
 
       if (tb)
       {
+        bool drawSep(false);
         if (status.startsWith("focused")
             && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
         {
@@ -4077,7 +4098,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           drawRaised = true;
 
           //const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
-          int kind = whichGroupedTBtn (tb, toolBar);
+          int kind = whichGroupedTBtn (tb, toolBar, drawSep);
           if (kind != 2)
           {
             fspec.isAttached = true;
@@ -4178,6 +4199,18 @@ void Style::drawPrimitive(PrimitiveElement element,
               status.append("-inactive");
             if (!drawRaised)
               painter->restore();
+          }
+          if (drawSep && !rtl) // the rtl arrow is at the left
+          {
+            renderElement(painter,fspec.element + "-separator",
+                          QRect(r.x()+r.width()-fspec.right, r.y()+fspec.top,
+                                fspec.right, r.height()-fspec.top-fspec.bottom));
+            renderElement(painter,fspec.element + "-separator-top",
+                          QRect(r.x()+r.width()-fspec.right, r.y(),
+                                fspec.right, fspec.top));
+            renderElement(painter,fspec.element + "-separator-bottom",
+                          QRect(r.x()+r.width()-fspec.right, r.y()+r.height()-fspec.bottom,
+                                fspec.right, fspec.bottom));
           }
         }
 

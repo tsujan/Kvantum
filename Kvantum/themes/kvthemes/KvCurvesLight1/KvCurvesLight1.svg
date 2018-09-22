@@ -1127,4 +1127,14 @@
 <rect width="7.5" x="2" y="262.5" height="30" style="fill:url(#linearGradient1957)" transform="rotate(-90)"/>
 <rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient1834)" transform="rotate(-90)"/>
 </g>
+<g id="button-separator">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 117,39 h 3 v 3 h -3 z"/>
+<path style="paint-order:normal;fill:#b4b4b4;fill-rule:evenodd" d="m 119,39 h 1 v 3 h -1 z"/>
+</g>
+<g id="button-separator-top" transform="translate(0,-3)">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 117,39 h 3 v 3 h -3 z"/>
+<path style="paint-order:normal;fill:#969696;fill-rule:evenodd" d="m 119,39 h 1 v 2 h -1 z"/>
+<path style="paint-order:normal;fill:#b4b4b4;fill-rule:evenodd" d="m 119,41 h 1 v 1 h -1 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#button-separator-top" id="button-separator-bottom" transform="matrix(1,0,0,-1,0,81)"/>
 </svg>

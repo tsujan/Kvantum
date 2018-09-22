@@ -1182,4 +1182,15 @@
 <rect width="32" x="262.87665" y="390.56409" height="32" style="fill:#fff;fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd;color:#000" d="m 272.2715,396.1738 -3.543,3.5273 6.7246,6.748 -6.9707,6.9707 3.5352,3.5352 6.9629,-6.9629 6.748,6.7715 3.543,-3.5273 -6.7559,-6.7793 6.627,-6.627 -3.5352,-3.5352 -6.6191,6.6191 z "/>
 </g>
+<use width="100%" height="100%" xlink:href="#tab-separator-toggled" id="button-separator" transform="translate(8)"/>
+<g id="button-separator-bottom" transform="matrix(1,0,0,-1,8,1521)">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 195,751.5 h 6 v 6 h -6 z"/>
+<path style="fill:#bdbdbd;fill-rule:evenodd" d="m 199,753.5 h 2 v 4 h -2 z"/>
+<path style="fill:#828181;fill-rule:evenodd" d="m 199,751.5 h 2 v 2 h -2 z"/>
+</g>
+<g id="button-separator-top" transform="translate(8)">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 195,751.5 h 6 v 6 h -6 z"/>
+<path style="fill:#969696;fill-rule:evenodd" d="m 199,753.5 h 2 v 4 h -2 z"/>
+<path style="fill:#828181;fill-rule:evenodd" d="m 199,751.5 h 2 v 2 h -2 z"/>
+</g>
 </svg>

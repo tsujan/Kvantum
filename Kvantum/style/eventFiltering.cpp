@@ -21,7 +21,6 @@
 #include <QPainter>
 #include <QTimer>
 #include <QApplication>
-#include <QToolButton>
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>

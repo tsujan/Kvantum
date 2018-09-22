@@ -21,7 +21,6 @@
 #include <QSvgRenderer>
 #include <QApplication>
 #include <QMenu>
-#include <QToolButton>
 #include <QPushButton>
 #include <QCheckBox>
 #include <QRadioButton>

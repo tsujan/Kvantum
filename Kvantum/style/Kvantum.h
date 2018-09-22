@@ -22,6 +22,7 @@
 #include <QMap>
 #include <QItemDelegate>
 #include <QAbstractItemView>
+#include <QToolButton>
 
 #include "shortcuthandler.h"
 #include "drag/windowmanager.h"
@@ -363,6 +364,9 @@ class Style : public QCommonStyle {
       }
       return false;
     }
+
+    /* Find the kind of this tool-button among a group of tool-buttons (on a toolbar). */
+    int whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, bool &drawSeparator) const;
 
 #if QT_VERSION >= 0x050500
     /* For transient scrollbars: */
