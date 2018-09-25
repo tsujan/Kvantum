@@ -442,6 +442,16 @@ merge_menubar_with_toolbar        true/false          Draw adjacent menu and too
                                                       SVG interior and frame will be used
                                                       for drawing them.
 
+spread_menuitems                  true/false          By default, menu-items are drawn inside
+                                                      the frames of their menu. This key
+                                                      spreads them horizontally, so that they
+                                                      cover the left and right frames of the
+                                                      menu but not its shadow.
+
+                                                      Also, see "Theme-Making.pdf" ->
+                                                      Translucency and Shadow for Menus and
+                                                      Tooltips
+
 composite                         true/false          Use compositing to have
                                                       translucent menus or tooltips?
                                                       It is automatically set to false

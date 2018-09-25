@@ -1059,7 +1059,11 @@ void Style::renderLabel(
             col.setAlpha(lspec.a);
           painter->setPen(QPen(col));
           for (int i=0; i<lspec.depth; i++)
-            painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),talign,text);
+          {
+            painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,
+                                             lspec.xshift+i,lspec.yshift+i),
+                              talign,text);
+          }
           painter->restore();
         }
       }

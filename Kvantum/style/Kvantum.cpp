@@ -871,7 +871,8 @@ void Style::setAnimationOpacityOut()
 int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
-  int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
+  int margin = horiz ? (tspec_.spread_menuitems ? 2 : 1) * qMax(fspec.left,fspec.right)
+                     : qMax(fspec.top,fspec.bottom);
   if (!noComposite_) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
@@ -879,18 +880,24 @@ int Style::getMenuMargin(bool horiz) const
 
 QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
-  if (widgetName == "Menu"
-      && menuShadow_.count() == 4)
+  frame_spec fspec;
+  qreal hMargin = 0.0;
+  if (widgetName == "Menu")
   {
+    if (menuShadow_.count() == 4)
       return menuShadow_;
+    fspec = getFrameSpec(widgetName);
+    if (tspec_.spread_menuitems)
+      hMargin = static_cast<qreal>(qMax(fspec.top,fspec.bottom));
   }
+  else
+    fspec = getFrameSpec(widgetName);
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
   QList<int> shadow;
   shadow << 0 << 0 << 0 << 0;
   QList<QString> direction;
   direction << "left" << "top" << "right" << "bottom";
-  frame_spec fspec = getFrameSpec(widgetName);
   QString element = fspec.element;
 
   for (int i = 0; i < 4; ++i)
@@ -901,7 +908,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
     if (renderer)
     {
       QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
-      divisor = (i%2 ? br.height() : br.width());
+      divisor = (i%2 ? br.height() : br.width() + hMargin);
       if (divisor)
       {
         if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
@@ -913,7 +920,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
           shadow[i] = i%2 ? qRound(static_cast<qreal>(thicknessV)*(br.height()/divisor))
-                          : qRound(static_cast<qreal>(thicknessH)*(br.width()/divisor));
+                          : qRound(static_cast<qreal>(thicknessH)*((br.width()+hMargin)/divisor));
         }
       }
     }
@@ -2897,47 +2904,55 @@ void Style::drawPrimitive(PrimitiveElement element,
       fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
+      QRect r = option->rect;
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!noComposite_ && tspec_now.menu_shadow_depth > 0
-          && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
-          && widget && translucentWidgets_.contains(widget)
-          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
-          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      bool isTrasnalicent(!noComposite_ && widget && translucentWidgets_.contains(widget)
+                          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
+                          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
+      if (isTrasnalicent && tspec_now.menu_shadow_depth > 0
+          && fspec.left >= tspec_now.menu_shadow_depth) // otherwise shadow will have no meaning
       {
+        if (tspec_.spread_menuitems)
+        {
+          int margin = fspec.left - tspec_now.menu_shadow_depth;
+          r.adjust(margin,0,-margin,0);
+        }
         if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
         {
-          QRect r = option->rect;
-          r = r.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
+          QRect R = r;
+          R = R.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
                                         menuShadow_.at(2), menuShadow_.at(3)));
           painter->save();
-          painter->setClipRegion(QRegion(option->rect).subtracted(QRegion(r)));
-          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+          painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
+          renderFrame(painter,r,fspec,fspec.element+"-shadow");
           painter->restore();
 
           painter->save();
           painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
 
           painter->save();
-          painter->setClipRegion(QRegion(r));
-          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+          painter->setClipRegion(QRegion(R));
+          renderFrame(painter,r,fspec,fspec.element+"-shadow");
           painter->restore();
 
-          if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
-            painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
+          if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
+            painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
           painter->restore();
         }
         else
         {
-          renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
-          if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
-            painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
+          renderFrame(painter,r,fspec,fspec.element+"-shadow");
+          if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
+            painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
         }
       }
       else
       {
-        if (!widget || !renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal")) // QML
-          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
-        renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+        if (tspec_.spread_menuitems && isTrasnalicent)
+          r.adjust(fspec.left,0,-fspec.left,0);
+        if (!widget || !renderInterior(painter,r,fspec,ispec,ispec.element+"-normal")) // QML
+          painter->fillRect(r, QApplication::palette().color(QPalette::Window));
+        renderFrame(painter,r,fspec,fspec.element+"-normal");
       }
 
       break;
@@ -3037,45 +3052,55 @@ void Style::drawPrimitive(PrimitiveElement element,
           const interior_spec ispec = getInteriorSpec(group);
           fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
           fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
+          QRect r = option->rect;
           theme_spec tspec_now = settings_->getCompositeSpec();
-          if (!noComposite_ && tspec_now.menu_shadow_depth > 0
-              && fspec.left >= tspec_now.menu_shadow_depth
-              && widget && translucentWidgets_.contains(widget))
+          bool isTrasnalicent(!noComposite_ && widget && translucentWidgets_.contains(widget)
+                              /* detached (Qt5) menus may come here because of setSurfaceFormat() */
+                              && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
+          if (isTrasnalicent && tspec_now.menu_shadow_depth > 0
+              && fspec.left >= tspec_now.menu_shadow_depth) // otherwise shadow will have no meaning
           {
+            if (tspec_.spread_menuitems)
+            {
+              int margin = fspec.left - tspec_now.menu_shadow_depth;
+              r.adjust(margin,0,-margin,0);
+            }
             if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
             {
-              QRect r = option->rect;
-              r = r.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
+              QRect R = r;
+              R = R.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
                                             menuShadow_.at(2), menuShadow_.at(3)));
               painter->save();
-              painter->setClipRegion(QRegion(option->rect).subtracted(QRegion(r)));
-              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+              painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
+              renderFrame(painter,r,fspec,fspec.element+"-shadow");
               painter->restore();
 
               painter->save();
               painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
 
               painter->save();
-              painter->setClipRegion(QRegion(r));
-              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
+              painter->setClipRegion(QRegion(R));
+              renderFrame(painter,r,fspec,fspec.element+"-shadow");
               painter->restore();
 
-              if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
-                painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
+              if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
+                painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
               painter->restore();
             }
             else
             {
-              renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
-              if (!renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal"))
-                painter->fillRect(interiorRect(option->rect,fspec), QApplication::palette().color(QPalette::Window));
+              renderFrame(painter,r,fspec,fspec.element+"-shadow");
+              if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
+                painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
             }
           }
           else
           {
-            if (!widget  || !renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-normal")) // QML
-              painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
-            renderFrame(painter,option->rect,fspec,fspec.element+"-normal");
+            if (tspec_.spread_menuitems && isTrasnalicent)
+              r.adjust(fspec.left,0,-fspec.left,0);
+            if (!widget || !renderInterior(painter,r,fspec,ispec,ispec.element+"-normal")) // QML
+              painter->fillRect(r, QApplication::palette().color(QPalette::Window));
+            renderFrame(painter,r,fspec,fspec.element+"-normal");
           }
           break;
         }
@@ -11644,6 +11669,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
          equal to PM_MenuHMargin. So, we make the overlap accurate here. */
       so -= getMenuMargin(true);
+      if (tspec_.spread_menuitems)
+      {
+        const frame_spec fspec = getFrameSpec("Menu");
+        so += qMax(fspec.left,fspec.right);
+      }
       return -so;
     }
 
@@ -11669,7 +11699,10 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
           /*|| (qobject_cast<const QMenu*>(widget) && !translucentWidgets_.contains(widget))*/)
       {
         v = qMin(2,v);
-        h = qMin(2,h);
+        if (tspec_.spread_menuitems)
+          h = 0;
+        else
+          h = qMin(2,h);
       }
 
       /* Sometimes (like in VLC or SVG Cleaner), developers make this
@@ -11694,7 +11727,10 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         if (!css.isEmpty() && css.contains("padding") && !css.contains("{"))
         {
           v = qMin(2,v);
-          h = qMin(2,h);
+          if (tspec_.spread_menuitems)
+            h = 0;
+          else
+            h = qMin(2,h);
         }
       }
 

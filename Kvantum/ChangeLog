@@ -16,6 +16,9 @@ V0.10.9
  * Fixed Dock specific close and restore buttons.
  * Made dock splitters like other ones (by setting PM_DockWidgetSeparatorExtent) and dealt with too tall splitters.
  * Optional separators for toggled buttons in grouped toolbar buttons.
+ * Fixed an old bug in text shadows.
+ * Added a key for spreading menuitems across left and right menu frames.
+ * Added KvMojave.
 
 V0.10.8
 ---------

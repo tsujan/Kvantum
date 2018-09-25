@@ -407,7 +407,8 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     if (r.hasShadow)
     {
       v = getValue(elementName,"text.shadow.xshift", i);
-      r.xshift = v.toInt();
+      if (v.isValid())
+        r.xshift = v.toInt();
       v = getValue(elementName,"text.shadow.yshift", i);
       if (v.isValid())
         r.yshift = v.toInt();
@@ -615,6 +616,9 @@ theme_spec ThemeConfig::getCompositeSpec()
   v = getValue("General","menu_separator_height");
   if (v.isValid())
     r.menu_separator_height = qMin(qMax(v.toInt(),1),16);
+
+  v = getValue("General","spread_menuitems");
+  r.spread_menuitems = v.toBool();
 
   v = getValue("General","tooltip_shadow_depth");
   if (v.isValid() && r.composite)
