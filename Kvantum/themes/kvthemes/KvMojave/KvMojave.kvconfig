@@ -18,8 +18,8 @@ scroll_arrows=false
 scroll_min_extent=50
 transient_scrollbar=true
 slider_width=6
-slider_handle_width=18
-slider_handle_length=18
+slider_handle_width=16
+slider_handle_length=16
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
@@ -238,6 +238,7 @@ text.margin.top=2
 text.margin.bottom=2
 frame.element=button
 indicator.element=tab
+indicator.size=20
 text.normal.color=white
 text.focus.color=white
 text.toggle.color=white
@@ -269,6 +270,10 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=2
+text.margin.right=2
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -294,6 +299,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+focusFrame=true
 
 [SliderCursor]
 inherits=PanelButtonCommand
@@ -303,6 +309,10 @@ interior.element=slidercursor
 [Progressbar]
 inherits=PanelButtonCommand
 frame.element=progress
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 interior.element=progress
 text.margin=0
 text.normal.color=white
@@ -315,6 +325,10 @@ text.bold=true
 inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 interior.element=progress-pattern
 
 [ItemView]
@@ -375,8 +389,8 @@ text.margin.left=2
 text.margin.right=2
 frame.top=3
 frame.bottom=3
-frame.left=3
-frame.right=3
+frame.left=6
+frame.right=6
 text.shadow.alpha=80
 frame.expansion=0
 

@@ -452,7 +452,7 @@ class Style : public QCommonStyle {
 
     /* For not getting the menu shadows repeatedly.
        They're used to position submenus correctly. */
-    QList<int> menuShadow_;
+    QList<int> menuShadow_, realMenuShadow_;
 
     /* Is this DE GTK-based? Currently Gnome, Unity and Pantheon are supported. */
     bool gtkDesktop_;

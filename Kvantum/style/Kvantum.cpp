@@ -871,8 +871,7 @@ void Style::setAnimationOpacityOut()
 int Style::getMenuMargin(bool horiz) const
 {
   const frame_spec fspec = getFrameSpec("Menu");
-  int margin = horiz ? (tspec_.spread_menuitems ? 2 : 1) * qMax(fspec.left,fspec.right)
-                     : qMax(fspec.top,fspec.bottom);
+  int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
   if (!noComposite_) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
   return margin;
@@ -880,24 +879,18 @@ int Style::getMenuMargin(bool horiz) const
 
 QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
-  frame_spec fspec;
-  qreal hMargin = 0.0;
-  if (widgetName == "Menu")
+  if (widgetName == "Menu"
+      && menuShadow_.count() == 4)
   {
-    if (menuShadow_.count() == 4)
       return menuShadow_;
-    fspec = getFrameSpec(widgetName);
-    if (tspec_.spread_menuitems)
-      hMargin = static_cast<qreal>(qMax(fspec.top,fspec.bottom));
   }
-  else
-    fspec = getFrameSpec(widgetName);
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
   QList<int> shadow;
   shadow << 0 << 0 << 0 << 0;
   QList<QString> direction;
   direction << "left" << "top" << "right" << "bottom";
+  frame_spec fspec = getFrameSpec(widgetName);
   QString element = fspec.element;
 
   for (int i = 0; i < 4; ++i)
@@ -908,7 +901,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
     if (renderer)
     {
       QRectF br = renderer->boundsOnElement(element+"-shadow-"+direction[i]);
-      divisor = (i%2 ? br.height() : br.width() + hMargin);
+      divisor = (i%2 ? br.height() : br.width());
       if (divisor)
       {
         if (themeRndr_ && themeRndr_->isValid() && themeRndr_->elementExists(element+"-shadow-hint-"+direction[i]))
@@ -920,7 +913,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
           shadow[i] = i%2 ? qRound(static_cast<qreal>(thicknessV)*(br.height()/divisor))
-                          : qRound(static_cast<qreal>(thicknessH)*((br.width()+hMargin)/divisor));
+                          : qRound(static_cast<qreal>(thicknessH)*(br.width()/divisor));
         }
       }
     }
@@ -928,6 +921,11 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
 
   if (widgetName == "Menu")
   {
+    if (tspec_.spread_menuitems)
+    {
+      realMenuShadow_ = shadow; // don't lose the real info
+      shadow[0] = shadow[2] = thicknessH;
+    }
     menuShadow_ = shadow;
     setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
   }
@@ -2910,18 +2908,16 @@ void Style::drawPrimitive(PrimitiveElement element,
                           /* detached (Qt5) menus may come here because of setSurfaceFormat() */
                           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
       if (isTrasnalicent && tspec_now.menu_shadow_depth > 0
-          && fspec.left >= tspec_now.menu_shadow_depth) // otherwise shadow will have no meaning
+          && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
+          && menuShadow_.count() == 4)
       {
         if (tspec_.spread_menuitems)
-        {
-          int margin = fspec.left - tspec_now.menu_shadow_depth;
-          r.adjust(margin,0,-margin,0);
-        }
-        if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
+          r.adjust(fspec.left-realMenuShadow_.at(0) , 0, -fspec.right+realMenuShadow_.at(2), 0);
+        if (tspec_.reduce_menu_opacity > 0)
         {
           QRect R = r;
-          R = R.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
-                                        menuShadow_.at(2), menuShadow_.at(3)));
+          R = R.marginsRemoved(QMargins(realMenuShadow_.at(0), realMenuShadow_.at(1),
+                                        realMenuShadow_.at(2), realMenuShadow_.at(3)));
           painter->save();
           painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
           renderFrame(painter,r,fspec,fspec.element+"-shadow");
@@ -3058,18 +3054,16 @@ void Style::drawPrimitive(PrimitiveElement element,
                               /* detached (Qt5) menus may come here because of setSurfaceFormat() */
                               && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
           if (isTrasnalicent && tspec_now.menu_shadow_depth > 0
-              && fspec.left >= tspec_now.menu_shadow_depth) // otherwise shadow will have no meaning
+              && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
+              && menuShadow_.count() == 4)
           {
             if (tspec_.spread_menuitems)
-            {
-              int margin = fspec.left - tspec_now.menu_shadow_depth;
-              r.adjust(margin,0,-margin,0);
-            }
-            if (tspec_.reduce_menu_opacity > 0 && menuShadow_.count() == 4)
+              r.adjust(fspec.left-realMenuShadow_.at(0) , 0, -fspec.right+realMenuShadow_.at(2), 0);
+            if (tspec_.reduce_menu_opacity > 0)
             {
               QRect R = r;
-              R = R.marginsRemoved(QMargins(menuShadow_.at(0), menuShadow_.at(1),
-                                            menuShadow_.at(2), menuShadow_.at(3)));
+              R = R.marginsRemoved(QMargins(realMenuShadow_.at(0), realMenuShadow_.at(1),
+                                            realMenuShadow_.at(2), realMenuShadow_.at(3)));
               painter->save();
               painter->setClipRegion(QRegion(r).subtracted(QRegion(R)));
               renderFrame(painter,r,fspec,fspec.element+"-shadow");
@@ -5380,7 +5374,9 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::Text, col);
                 o.palette = palette;
-                if (hasIcon && pixelRatio_ > 1) // needed by HDPI-enabled apps (will have no effect otherwise)
+                /* getting the pixmap here and with other states is especially needed
+                   by HDPI-enabled apps but is always done for the sake of certainty */
+                if (hasIcon)
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -5434,7 +5430,7 @@ void Style::drawControl(ControlElement element,
                                               tintPercentage);
                     o.icon = QIcon(px);
                   }
-                  else if (pixelRatio_ > 1)
+                  else
                   {
                     QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                    iconstate, opt->decorationSize);
@@ -5456,7 +5452,7 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
-                if (hasIcon && pixelRatio_ > 1)
+                if (hasIcon)
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -5477,9 +5473,9 @@ void Style::drawControl(ControlElement element,
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
-                /* because the inactive toggled bg may have contrast with the active one and
-                   since this can be a symbolic SVG icon, we use the pixmap with inactiveness */
-                if (hasIcon && (isInactive || pixelRatio_ > 1))
+                /* A use case: because the inactive toggled bg may have contrast with the active one
+                   and since this can be a symbolic SVG icon, we use the pixmap with inactiveness. */
+                if (hasIcon)
                 {
                   QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),
                                                  iconstate, opt->decorationSize);
@@ -11669,11 +11665,6 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
          equal to PM_MenuHMargin. So, we make the overlap accurate here. */
       so -= getMenuMargin(true);
-      if (tspec_.spread_menuitems)
-      {
-        const frame_spec fspec = getFrameSpec("Menu");
-        so += qMax(fspec.left,fspec.right);
-      }
       return -so;
     }
 
