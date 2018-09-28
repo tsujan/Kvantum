@@ -95,7 +95,7 @@
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient5095" id="linearGradient4622" y1="1055" x1="281.5" y2="1055" x2="271.25" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient4963">
 <stop offset="0" style="stop-color:#3d3e43"/>
-<stop offset="1" style="stop-color:#353537"/>
+<stop offset="1" style="stop-color:#373739"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient2996" id="linearGradient4081" y1="59.50016" x1="27.001167" y2="13.5" gradientUnits="userSpaceOnUse" x2="27"/>
 <linearGradient xlink:href="#linearGradient2996" id="linearGradient4083" y1="59.50016" x1="27.001167" y2="13.5" gradientUnits="userSpaceOnUse" x2="27"/>
@@ -108,15 +108,15 @@
 <linearGradient xlink:href="#linearGradient2996" id="linearGradient4089" y1="48.752785" x1="23.749901" y2="48.751598" gradientUnits="userSpaceOnUse" x2="52.5"/>
 <linearGradient xlink:href="#linearGradient2996" id="linearGradient4087" y1="68.750038" x1="23.749901" y2="68.750771" gradientUnits="userSpaceOnUse" x2="52.5"/>
 <linearGradient id="linearGradient5223">
-<stop offset="0" style="stop-color:#353537"/>
-<stop offset="1" style="stop-color:#1b1b1b"/>
+<stop offset="0" style="stop-color:#373739"/>
+<stop offset="1" style="stop-color:#1e1e1e"/>
 </linearGradient>
 <linearGradient id="linearGradient1933">
 <stop offset="0" style="stop-color:#245fc4"/>
 <stop offset="1" style="stop-color:#286adc"/>
 </linearGradient>
 <linearGradient id="linearGradient1906">
-<stop offset="0" style="stop-color:#333230;stop-opacity:.92"/>
+<stop offset="0" style="stop-color:#302f2e;stop-opacity:.92"/>
 <stop offset="1" style="stop-color:#3d3e43"/>
 </linearGradient>
 <linearGradient id="linearGradient3837">
@@ -566,50 +566,50 @@
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-bottomleft" transform="matrix(1,0,0,-1,0,1344)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-focused-bottomright" transform="matrix(1,0,0,-1,0,1344)"/>
 <rect width="10" x="0" y="40" height="10" style="fill-rule:evenodd" id="expand-lineedit-normal"/>
-<path style="fill:#282828;fill-rule:evenodd" id="lineedit-normal" d="m 402.25,80.2494 v 32 h 32 v -32 Z "/>
+<path style="fill:#262626;fill-rule:evenodd" id="lineedit-normal" d="m 402.25,80.2494 v 32 h 32 v -32 Z "/>
 <g id="lineedit-normal-bottom" transform="matrix(0,-1.6,0.98461538,0,354.24834,158.25)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.75,81.2516 v -32.5 h -7.5 v 32.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.75,81.2516 v -32.5 h -7.5 v 32.5 z"/>
 <path style="fill:#575757;color:#000;stroke-width:.913" d="m 21.25,48.7516 v 32.5 h 1.25 v -32.5 z"/>
 </g>
 <g id="lineedit-normal-bottomright" transform="matrix(-1.6,0,0,-1.6,480.24992,190.25255)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12501,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12501,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient8547);color:#000" d="m 28.75,41.2516 c -4.12501,0 -7.5,3.37497 -7.5,7.5 h 1.24995 c 0,-3.125 3.125,-6.25 6.25,-6.25 z "/>
 </g>
 <g id="lineedit-normal-top" transform="matrix(0.98461478,0,0,1.6,13.327146,-47.75061)">
 <g transform="rotate(90,212.50079,263.75079)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.7504,81.2516 v -32.5 h -7.5 v 32.5 z "/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.7504,81.2516 v -32.5 h -7.5 v 32.5 z "/>
 <path style="fill:#1e1e1e;color:#000;stroke-width:.913" d="m 21.2504,48.7516 v 32.5 h 1.25 v -32.5 z "/>
 </g>
 <path style="opacity:.12;fill:url(#linearGradient5100);fill-rule:evenodd;stroke-width:1.021" d="m 395,80 h 32.5 v -6.25 H 395 Z"/>
 </g>
 <g id="lineedit-normal-left" transform="matrix(1.6,0,0,0.98461517,-229.70048,1.5116049)">
 <g transform="translate(366.29025,31.217107)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.6788,81.2516 v -32.5 H 21.25 v 32.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.6788,81.2516 v -32.5 H 21.25 v 32.5 z"/>
 <path style="fill:#393939;color:#000;stroke-width:.913" d="m 21.1788,48.7516 v 32.5 h 1.25 v -32.5 z"/>
 </g>
 <path style="opacity:.1;fill:url(#linearGradient5145);fill-rule:evenodd;stroke-width:1.021" d="m 394.969,112.4687 v -32.5 h -6.24995 v 32.5 z"/>
 </g>
 <g id="lineedit-normal-topleft" transform="matrix(1.6,0,0,1.6,-229.81445,-47.7)">
 <g transform="translate(366.29025,31.217107)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient8597);color:#000" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 1.25003 c 0,-3.125 3.125,-6.25 6.25,-6.25 z "/>
 </g>
 <path style="opacity:.1;fill:url(#linearGradient5180);fill-rule:evenodd" d="m 395.0403,73.7187 c -3.125,0 -6.25,3.125 -6.25,6.25 h 6.25002 z "/>
 </g>
 <g id="lineedit-normal-bottomleft" transform="matrix(1.6,0,0,1.6,-229.75008,-67.749978)">
 <g transform="matrix(1,0,0,-1,366.25,161.25158)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12499,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12499,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient8539);color:#000" d="m 28.75,41.2516 c -4.12499,0 -7.5,3.37497 -7.5,7.5 h 1.25005 c 0,-3.12501 3.125,-6.25 6.24995,-6.25 z "/>
 </g>
 <path style="opacity:.1;fill:url(#linearGradient5197);fill-rule:evenodd" d="m 395,118.75 c -3.125,0 -6.25,-3.125 -6.25,-6.25001 l 6.25,0 Z "/>
 </g>
 <g id="lineedit-normal-right" transform="matrix(-1.6,0,0,0.98461538,480.136,32.248415)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.6788,81.2516 v -32.5 H 21.25 v 32.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.6788,81.2516 v -32.5 H 21.25 v 32.5 z"/>
 <path style="fill:#464646;color:#000;stroke-width:.913" d="m 21.1788,48.7516 v 32.5 h 1.24995 v -32.5 Z "/>
 </g>
 <g id="lineedit-normal-topright" transform="matrix(1.6,0,0,1.6,-249.75,-47.750074)">
 <g transform="matrix(-1,0,0,1,456.25,31.248446)">
-<path style="fill:#282828;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#262626;fill-rule:evenodd" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient8607);color:#000" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 1.25 c 0,-3.125 3.125,-6.25 6.25004,-6.25 z "/>
 </g>
 <path style="opacity:.12;fill:url(#linearGradient5230);fill-rule:evenodd" d="m 427.5,73.75 c 3.12503,0 6.25003,3.125 6.25003,6.25 l -6.25,-0 Z "/>
@@ -628,7 +628,7 @@
 <use width="100%" height="100%" id="lineedit-focused-right" xlink:href="#lineedit-focused-left" transform="matrix(-1,0,0,1,708,0)"/>
 <use width="100%" height="100%" id="lineedit-focused-bottomright" xlink:href="#lineedit-focused-topleft" transform="rotate(180,354,96)"/>
 <use width="100%" height="100%" id="lineedit-focused-bottom" xlink:href="#lineedit-focused-left" transform="rotate(-90,354,96)"/>
-<path style="fill:#282828;fill-rule:evenodd" id="lineedit-focused" d="m 338,80 v 32 h 32 V 80 Z"/>
+<path style="fill:#262626;fill-rule:evenodd" id="lineedit-focused" d="m 338,80 v 32 h 32 V 80 Z"/>
 <g style="line-height:normal;color:#000" id="focus-top" transform="translate(90,571.5)">
 <path style="fill-opacity:0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
 <g style="fill-opacity:.137">
@@ -929,7 +929,7 @@
 <rect width="2.5" x="81.25" y="272.5" height="4.2500219" style="fill:#b74aff" id="menu-shadow-hint-top"/>
 <rect width="2.5" x="-306.75009" y="111.25" height="7.25" style="fill:#b74aff" id="menu-shadow-hint-right" transform="rotate(-90)"/>
 <rect width="2.5" x="-306.75009" y="46" height="7.25" style="fill:#b74aff" id="menu-shadow-hint-left" transform="rotate(-90)"/>
-<path style="opacity:.93;paint-order:normal;fill:#333230;fill-rule:evenodd" id="window-normal" d="m 395,595 h 30 v 30 h -30 z"/>
+<path style="opacity:.93;paint-order:normal;fill:#302f2e;fill-rule:evenodd" id="window-normal" d="m 395,595 h 30 v 30 h -30 z"/>
 <path style="paint-order:normal;fill:url(#linearGradient1908);fill-rule:evenodd" id="dialog-normal" d="m 363,596.25 h 30 v 30 h -30 z"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-pressed-topleft" transform="translate(36)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-pressed-left" transform="translate(36)"/>
