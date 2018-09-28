@@ -21,7 +21,7 @@ slider_width=6
 slider_handle_width=16
 slider_handle_length=16
 center_toolbar_handle=true
-check_size=16
+check_size=18
 textless_progressbar=false
 progressbar_thickness=6
 menubar_mouse_tracking=true
@@ -67,8 +67,8 @@ reduce_menu_opacity=0
 
 [GeneralColors]
 window.color=#333230
-base.color=#282828
-alt.base.color=#323232
+base.color=#262626cc
+alt.base.color=#303030
 button.color=#3e3e3e
 light.color=#5a5a5a
 mid.light.color=#555555
@@ -202,10 +202,10 @@ frame=true
 interior=false
 frame.element=common
 interior.element=common
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 
 [LineEdit]
 inherits=PanelButtonCommand
@@ -238,7 +238,7 @@ text.margin.top=2
 text.margin.bottom=2
 frame.element=button
 indicator.element=tab
-indicator.size=20
+indicator.size=16
 text.normal.color=white
 text.focus.color=white
 text.toggle.color=white
@@ -470,10 +470,10 @@ text.shadow=0
 
 [ToolTip]
 inherits=GenericFrame
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=6
+frame.bottom=6
+frame.left=6
+frame.right=6
 interior=true
 text.shadow=0
 text.margin=0

@@ -6998,7 +6998,7 @@ void Style::drawControl(ControlElement element,
       {
         QString status =
                  (option->state & State_Enabled) ?
-                   (option->state & State_Selected) ? "toggled" :
+                   //(option->state & State_Selected) ? "toggled" :
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
         if (isWidgetInactive(widget))
@@ -7508,8 +7508,9 @@ void Style::drawControl(ControlElement element,
 
         txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length);
 
+        bool isInactive(isWidgetInactive(widget));
         int state = option->state & State_Enabled ?
-                      (option->state & State_Selected) ? 4
+                      (option->state & State_Selected) && (topText || sideText) ? 4
                       : option->state & State_MouseOver ? 2 : 1 : 0;
 
         /* Either the bar has a selected state or it's a child of an itemview;
@@ -7543,6 +7544,13 @@ void Style::drawControl(ControlElement element,
               }
             }
           }
+        }
+        if (state == 4)
+        {
+          lspec.toggleColor = getName(QApplication::palette().color(isInactive
+                                                                      ? QPalette::Inactive
+                                                                      : QPalette::Active,
+                                                                    QPalette::HighlightedText));
         }
 
         QRect R;
@@ -7587,7 +7595,6 @@ void Style::drawControl(ControlElement element,
           }
         }
 
-        bool isInactive(isWidgetInactive(widget));
         if (R.isValid())
         {
           painter->save();

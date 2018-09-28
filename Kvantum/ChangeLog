@@ -19,6 +19,7 @@ V0.10.9
  * Fixed an old bug in text shadows.
  * Added a key for spreading menuitems across left and right menu frames.
  * Added KvMojave.
+ * No toggled state for progress bars.
 
 V0.10.8
 ---------
