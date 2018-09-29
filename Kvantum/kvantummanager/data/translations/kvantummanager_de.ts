@@ -429,7 +429,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Menüdeckkraft reduzieren um</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
