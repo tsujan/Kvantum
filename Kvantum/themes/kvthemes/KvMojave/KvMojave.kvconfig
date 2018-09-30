@@ -67,8 +67,11 @@ reduce_menu_opacity=0
 
 [GeneralColors]
 window.color=#302f2e
+inactive.window.color=#2c2b2a
 base.color=#242424cc
+inactive.base.color=#1f1f1fcc
 alt.base.color=#2d2d2d
+inactive.alt.base.color=#282828
 button.color=#3e3e3e
 light.color=#5a5a5a
 mid.light.color=#555555
@@ -76,13 +79,16 @@ dark.color=#171717
 mid.color=#3c3c3c
 highlight.color=#c3c3c6
 inactive.highlight.color=#adadaf
-tooltip.base.color=black
-text.color=white
-window.text.color=white
-button.text.color=white
+tooltip.base.color=#313237
+text.color=#fafafa
+inactive.text.color=#e1e1e1
+window.text.color=#fafafa
+inactive.window.text.color=#e1e1e1
+button.text.color=#f5f5f5
 disabled.text.color=#A0A0A0
-tooltip.text.color=white
+tooltip.text.color=#fafafa
 highlight.text.color=black
+inactive.highlight.text.color=#141414
 link.color=#2EB8E6
 link.visited.color=#FF6666
 
@@ -118,10 +124,12 @@ frame.right=3
 interior=true
 interior.element=button
 indicator.size=11
-text.normal.color=white
+text.normal.color=#fdfdfd
 text.focus.color=white
-text.press.color=white
-text.toggle.color=white
+text.press.color=#fdfdfd
+text.toggle.color=#fdfdfd
+text.normal.inactive.color=#ebebeb
+text.toggle.inactive.color=#ebebeb
 text.shadow=true
 text.shadow.color=black
 text.shadow.xshift=1
@@ -147,6 +155,7 @@ frame.element=tbutton
 interior.element=tbutton
 text.press.color=black
 text.toggle.color=black
+text.toggle.inactive.color=#191919
 indicator.element=tarrow
 
 [ToolbarLineEdit]
@@ -161,15 +170,15 @@ frame.top=1
 frame.bottom=1
 frame.left=1
 frame.right=1
-text.normal.color=white
 indicator.element=dock
 
 [DockTitle]
 inherits=PanelButtonCommand
 frame=false
 interior=false
-text.normal.color=white
-text.focus.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
+text.normal.inactive.color=#e1e1e1
 text.bold=true
 
 [IndicatorSpinBox]
@@ -180,21 +189,29 @@ frame.bottom=3
 frame.left=3
 frame.right=3
 indicator.size=11
-text.normal.color=white
+text.normal.color=#fafafa
 
 [RadioButton]
 inherits=PanelButtonCommand
 frame=false
 interior.element=radio
-text.normal.color=white
+text.normal.color=#fafafa
 text.focus.color=#9bccff
+text.press.color=#fdfdfd
+text.toggle.color=#fafafa
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#e1e1e1
 
 [CheckBox]
 inherits=PanelButtonCommand
 frame=false
 interior.element=checkbox
-text.normal.color=white
+text.normal.color=#fafafa
 text.focus.color=#9bccff
+text.press.color=#fdfdfd
+text.toggle.color=#fafafa
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#e1e1e1
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -224,9 +241,11 @@ indicator.size=11
 
 [ToolboxTab]
 inherits=PanelButtonCommand
-text.normal.color=white
-text.press.color=white
+text.normal.color=#fafafa
+text.press.color=#fafafa
 text.focus.color=#9bccff
+text.normal.inactive.color=#e1e1e1
+text.press.inactive.color=#e1e1e1
 text.boldness=2
 
 [Tab]
@@ -239,9 +258,11 @@ text.margin.bottom=2
 frame.element=button
 indicator.element=tab
 indicator.size=16
-text.normal.color=white
-text.focus.color=white
-text.toggle.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
+text.toggle.color=#fafafa
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#e1e1e1
 text.bold=true
 text.boldness=2
 min_width=+0.2font
@@ -285,8 +306,9 @@ indicator.size=5
 text.margin=0
 interior.element=menubar
 frame.element=menubar
-text.normal.color=white
-text.focus.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
+text.normal.inactive.color=#e1e1e1
 frame.top=0
 frame.bottom=3
 frame.expansion=0
@@ -315,10 +337,12 @@ frame.left=3
 frame.right=3
 interior.element=progress
 text.margin=0
-text.normal.color=white
-text.focus.color=white
-text.press.color=white
-text.toggle.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
+text.press.color=#fafafa
+text.toggle.color=#fafafa
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#e1e1e1
 text.bold=true
 
 [ProgressbarContents]
@@ -344,10 +368,12 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=4
 text.margin.right=4
-text.normal.color=white
-text.focus.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
 text.press.color=black
 text.toggle.color=black
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#191919
 frame.expansion=0
 
 [Splitter]
@@ -381,7 +407,7 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-text.normal.color=white
+text.normal.color=#fafafa
 text.focus.color=white
 text.margin.top=0
 text.margin.bottom=0
@@ -414,8 +440,9 @@ text.margin.left=4
 text.margin.right=4
 text.margin.top=3
 text.margin.bottom=3
-text.normal.color=white
-text.focus.color=white
+text.normal.color=#fafafa
+text.focus.color=#fafafa
+text.normal.inactive.color=#e1e1e1
 text.shadow=false
 frame.expansion=0
 
@@ -425,8 +452,8 @@ frame=false
 interior.element=titlebar
 indicator.size=12
 indicator.element=mdi
-text.normal.color=#787878
-text.focus.color=white
+text.normal.color=#969696
+text.focus.color=#fafafa
 text.bold=true
 text.italic=true
 frame.expansion=0
@@ -442,7 +469,7 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-text.normal.color=white
+text.normal.color=#fafafa
 frame.expansion=0
 
 [GroupBox]
@@ -455,9 +482,11 @@ frame.top=4
 frame.bottom=4
 frame.left=4
 frame.right=4
-text.normal.color=white
-text.press.color=white
+text.normal.color=#fafafa
+text.press.color=#fafafa
 text.focus.color=#9bccff
+text.normal.inactive.color=#e1e1e1
+text.toggle.inactive.color=#e1e1e1
 text.bold=true
 text.boldness=2
 frame.expansion=0
