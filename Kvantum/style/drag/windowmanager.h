@@ -62,36 +62,26 @@ public:
     }
   }
 
-  explicit WindowManager (QObject *parent, Drag drag/*, bool isX11*/);
+  explicit WindowManager (QObject *parent, Drag drag);
   virtual ~WindowManager (void) {}
-  // initialize
-  /* read relevant options from OxygenStyleConfigData */
+
   void initialize (const QStringList &whiteList=QStringList(),
                    const QStringList &blackList=QStringList());
-  // register widget
+
   void registerWidget (QWidget*);
-  // unregister widget
   void unregisterWidget (QWidget*);
-  // event filter [reimplemented]
   virtual bool eventFilter (QObject*, QEvent*);
 protected:
   // timer event,
   /* used to start drag if button is pressed for a long enough time */
   void timerEvent (QTimerEvent*);
-  // mouse press event
   bool mousePressEvent (QObject*, QEvent*);
-  // mouse move event
   bool mouseMoveEvent (QObject*, QEvent*);
-  // mouse release event
   bool mouseReleaseEvent (QObject*, QEvent*);
-  // @name configuration
-  // @{
-  // enable state
   bool enabled() const
   {
     return enabled_;
   }
-  // enable state
   void setEnabled (bool value)
   {
     enabled_ = value;
@@ -107,59 +97,31 @@ protected:
     dragDelay_ = value;
   }
 
-  // set list of whiteListed widgets
-  /*
-    white list is read from options and is used to adjust
-    per-app window dragging issues
-  */
   void initializeWhiteList (const QStringList &list);
-
-  // set list of blackListed widgets
-  /*
-    black list is read from options and is used to adjust
-    per-app window dragging issues
-  */
   void initializeBlackList (const QStringList &list);
-  // @}
-  // returns true if widget is dragable
   bool isDragable (QWidget*);
-  // returns true if widget is dragable
   bool isBlackListed (QWidget*);
-  // returns true if widget is dragable
   bool isWhiteListed (QWidget*) const;
   // returns true if drag can be started from current widget
   bool canDrag (QWidget*);
-  // returns true if drag can be started from current widget and position
-  /* child at given position is passed as second argument */
   bool canDrag (QWidget*, QWidget*, const QPoint&);
-  // reset drag
   void resetDrag();
-  // start drag
   void startDrag (QWidget*, const QPoint&);
-  // utility function
   bool isDockWidgetTitle (const QWidget*) const;
-  // @name lock
-  // @{
+
   void setLocked (bool value)
   {
     locked_ = value;
   }
-  // lock
   bool isLocked() const
   {
     return locked_;
   }
-  // @}
 private:
   // the value of QT_DEVICE_PIXEL_RATIO
   int pixelRatio_;
-  // enability
   bool enabled_;
-  // drag distance
-  /* this is copied from kwin::geometry */
   int dragDistance_;
-  // drag delay
-  /* this is copied from kwin::geometry */
   int dragDelay_;
 
   // wrapper for exception id
@@ -185,42 +147,25 @@ private:
     }
   };
 
-  // exception set
   typedef QSet<ExceptionId> ExceptionSet;
-  // list of white listed special widgets
-  /*
-    it is read from options and is used to adjust
-    per-app window dragging issues
-  */
   ExceptionSet whiteList_;
-  // list of black listed special widgets
-  /*
-    it is read from options and is used to adjust
-    per-app window dragging issues
-  */
   ExceptionSet blackList_;
-  // ! drag point
+
   QPoint dragPoint_;
   QPoint globalDragPoint_;
-  // drag timer
   QBasicTimer dragTimer_;
-  // target being dragged
   QPointer<QWidget> target_;
-  // true if drag is about to start
   bool dragAboutToStart_;
-  // true if drag is in progress
   bool dragInProgress_;
-  // true if drag is locked
   bool locked_;
   Drag drag_;
-  //bool isX11_;
 #if 0
   bool cursorOverride_;
 #endif
 
   // provide application-wise event filter
   /*
-    it us used to unlock dragging and make sure event look
+    it is used to unlock dragging and make sure event look
     is properly restored after a drag has occurred
   */
   class AppEventFilter: public QObject
@@ -236,11 +181,9 @@ private:
     /* needed to catch end of XMoveResize events */
     bool appMouseEvent (QObject*, QEvent*);
   private:
-    // parent
     WindowManager *parent_;
   };
 
-  // application event filter
   AppEventFilter *_appEventFilter;
   // allow access of all private members to the app event filter
   friend class AppEventFilter;

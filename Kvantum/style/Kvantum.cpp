@@ -361,7 +361,7 @@ Style::Style(bool useDark) : QCommonStyle()
 
   if (tspec_.x11drag && tspec_.isX11)
   {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag/*, tspec_.isX11*/);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
     itsWindowManager_->initialize();
   }
 
