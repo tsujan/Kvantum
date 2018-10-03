@@ -63,7 +63,7 @@ public:
   }
 
   explicit WindowManager (QObject *parent, Drag drag);
-  virtual ~WindowManager (void) {}
+  virtual ~WindowManager() {}
 
   void initialize (const QStringList &whiteList=QStringList(),
                    const QStringList &blackList=QStringList());
@@ -159,7 +159,7 @@ private:
   bool dragInProgress_;
   bool locked_;
   Drag drag_;
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   bool cursorOverride_;
 #endif
 

@@ -36,10 +36,11 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
-/* All cases of "#if 0" are about dragging with QWidget::move(),
-   which doesn't work fine because of Qt bugs related to X11. */
-#if 0
-#include <QDesktopWidget>
+/* Qt got a new X11 bug since Qt5.11 and, as a result, the X11 drag
+   started to have a problem. However, dragging is still possible by
+   using QWindow::setFramePosition(); hence, these cases of "#if". */
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+#include <QWindow>
 #include "windowmanager.h"
 #else
 #include "windowmanager.h"
@@ -79,7 +80,7 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                dragInProgress_ (false),
                locked_ (false),
                drag_ (drag)
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
                , cursorOverride_ (false)
 #endif
 {
@@ -217,7 +218,7 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
 
   // retrieve widget's child at event position
   QPoint position;
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   position = widget->mapFromGlobal (mouseEvent->globalPos()); // see WindowManager::mouseMoveEvent for the reason
 #else
   position = mouseEvent->pos();
@@ -281,33 +282,21 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
   }
   else
   {
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     if (target_)
-    { // use QWidget::move() for the grabbing
+    { // use QWindow::setFramePosition (or QWidget::move) for the dragging
       QWidget* window = target_.data()->window();
-      QRect ag = QApplication::desktop()->availableGeometry();
-      QRect fg = window->frameGeometry();
       /* FIXME: For some unknown reason, mapping from the global position
          results in smoother movements than mouseEvent->pos() does,
          especially when the window is translucent. */
       QPoint pos = target_.data()->mapFromGlobal (mouseEvent->globalPos());
-      QPoint winPos = window->pos();
-      QPoint newWinPos = winPos + pos - dragPoint_;
-      /* if the window is completely inside the screen, don't try to
-         move it offscreen because some WM's (like KWin) don't allow that */
-      if (ag.contains (fg))
-      {
-        if (newWinPos.x() < ag.x())
-          pos = QPoint (ag.x() + (dragPoint_ - winPos).x(), pos.y());
-        else if (newWinPos.x() + fg.width() > ag.x() + ag.width())
-          pos = QPoint (ag.x() + ag.width() - fg.width() + (dragPoint_ - winPos).x(), pos.y());
-        if (newWinPos.y() < ag.y())
-          pos = QPoint (pos.x(), ag.y() + (dragPoint_ - winPos).y());
-        else if (newWinPos.y() + fg.height() > ag.y() + ag.height())
-          pos = QPoint (pos.x(), ag.y() + ag.height() - fg.height() + (dragPoint_ - winPos).y());
-      }
-
-      window->move (winPos + pos - dragPoint_);
+      /* FIXME: Again, for some unknown reason, QWidget::move() could result
+         in a choppy movement with some apps, while QWindow::setFramePosition()
+         is always smooth, provided that the window is native. */
+      if (QWindow* w = window->windowHandle())
+        w->setFramePosition (w->framePosition() + pos - dragPoint_);
+      else
+        window->move (window->pos() + pos - dragPoint_); // should not happen
       return true;
     }
 #endif
@@ -463,7 +452,7 @@ bool WindowManager::canDrag (QWidget* widget)
   if (widget->cursor().shape() != Qt::ArrowCursor)
     return false;
 
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   // X11BypassWindowManagerHint can be used to have fixed position
   if (widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
     return false;
@@ -642,9 +631,9 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
   return true;
 }
 /*************************/
-void WindowManager::resetDrag (void)
+void WindowManager::resetDrag()
 {
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   if (target_ && cursorOverride_)
   {
     qApp->restoreOverrideCursor();
@@ -663,7 +652,7 @@ void WindowManager::resetDrag (void)
 /*************************/
 void WindowManager::startDrag (QWidget *widget, const QPoint &position)
 {
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   Q_UNUSED(position);
 #endif
 
@@ -671,7 +660,7 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
     return;
 
 
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   if (!cursorOverride_)
   {
     qApp->setOverrideCursor (Qt::DragMoveCursor);
@@ -697,7 +686,7 @@ bool WindowManager::isDockWidgetTitle (const QWidget* widget) const
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 {
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   Q_UNUSED(object);
 #endif
 
@@ -712,7 +701,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
       parent_->setLocked (false);
   }
 
-#if 0
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   return false;
 #else
   if (!parent_->enabled()) return false;
