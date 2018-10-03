@@ -7,49 +7,51 @@
         <location filename="../../kvantummanager.ui" line="12"/>
         <location filename="../../KvantumManager.cpp" line="2467"/>
         <source>Kvantum Manager</source>
-        <translation></translation>
+        <translation>Pengelola Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation></translation>
+        <translation>Pasan/Perbaharui Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; hadir dengan banyak tema namun tema lain (eksternal) juga dapat dipasang untuk digunakan dengannya. Di sini anda dapat memilih sebuah folder tema, lalu kemudian tekan tombol di bawah untuk memasangnya di Home (folder Beranda anda).&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation></translation>
+        <translation>Pilih sebuah folder
+tema Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="118"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation></translation>
+        <translation>Tambahkan tema ini ke daftar tema yang
+Kvantum dapat gunakan sebagai tambahan bagi tema miliknya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
         <source>Install this theme</source>
-        <translation></translation>
+        <translation>Pasang tema ini</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="143"/>
         <source>Change/Delete Theme</source>
-        <translation></translation>
+        <translation>Ganti/Hapus Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="149"/>
         <source>Select a theme:</source>
-        <translation></translation>
+        <translation>Pilih sebuah tema:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="196"/>
         <source>Delete this theme</source>
-        <translation></translation>
+        <translation>Hapus tema ini</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="208"/>
