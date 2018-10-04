@@ -59,34 +59,39 @@ Kvantum dapat gunakan sebagai tambahan bagi tema miliknya.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation></translation>
+        <translation>Jadikan Kvantum menggunakan tema ini!
+
+Sebuah tombol yang dinonaktifkan berarti bahwa
+temanya sudah digunakan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="214"/>
         <source>Use this theme</source>
-        <translation></translation>
+        <translation>Gunaka tema ini</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="272"/>
         <source>Configure Active Theme</source>
-        <translation></translation>
+        <translation>Atur Tema Aktif</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="336"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation></translation>
+        <translation>Kembalikan ke pengaturan 
+semula (root) dari tema ini.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="341"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kembaliken ke pengaturan semula (root) dari tema ini!&lt;/p&gt;&lt;p&gt;Saat diKlik dan diKonfirmasi, semua perubahan terhadap pengaturan akan hilang tetapi kemungkinan kustom berakas SVG akan tetap utuh.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="344"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Pulihkan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="352"/>
@@ -97,13 +102,14 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="359"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation></translation>
+        <translation>Simpan pengaturan ini
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="363"/>
         <location filename="../../kvantummanager.ui" line="1957"/>
         <source>Save</source>
-        <translation></translation>
+        <translation>Simpan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="371"/>
@@ -113,28 +119,29 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="378"/>
         <source>Safe Settings</source>
-        <translation></translation>
+        <translation>Pengaturan Aman</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation></translation>
+        <translation>Hapus centang  semua kotak-kotak ini jika anda ingin semua
+widget tampil sebagaimana bawaannya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="395"/>
         <source>Hacks</source>
-        <translation></translation>
+        <translation>Peretasan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="419"/>
         <source>Transparent Dolphin view</source>
-        <translation></translation>
+        <translation>Tampilan Dolphin transparan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="447"/>
         <source>Normal font for default push buttons</source>
-        <translation></translation>
+        <translation>Huruf normal untuk Tombol Tekan bawaan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
@@ -143,17 +150,21 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation></translation>
+        <translation>Menggabungkan Panel Samping PCManFM-qt dengan keaadaan sekelilingnya.
+
+Di bawah LXQt, diperlukan Log Keluar dan Masuk atau menutup 
+PCManFM-qt lalu kemudian, hentikan dan mulai Desktop
+dengan Pengaturan Sesi LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Panel Samping transparan untuk PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="489"/>
         <source>Iconless push buttons</source>
-        <translation></translation>
+        <translation>Tombol Tekan tanpa Ikon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
@@ -162,74 +173,80 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation></translation>
+        <translation>Menggabungkan tampilan PCManFM-qt dengan keadaan sekitarnya.
+
+Di bawah LXQt, diperlukan Log Keluar dan Masuk atau Menutup
+PCManFM-qt lalu kemudian, hentikan dan mulai Desktop
+dengan Pengaturan Sesi LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="503"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Tampilan Transparan untuk PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="518"/>
         <source>Iconless  menus</source>
-        <translation></translation>
+        <translation>Menu tanpa ikon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="533"/>
         <source>Blur explicitly translucent windows</source>
-        <translation></translation>
+        <translation>Buramkan secara eksplisit jendela tembus pandang</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Single top toolbar</source>
-        <translation></translation>
+        <translation>Bilah alat tunggal</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation></translation>
+        <translation>Jangan gambar latar belakang apapun untuk KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jangan gambar latar belakang apapun untuk?&lt;/p&gt;&lt;p&gt;Ktitles digunakn oleh beberapa aplikasi KDE untuk menunjukan perbedaan bagian - bagin dalam pengaturan dialog.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation></translation>
+        <translation>Label KTitle transparan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation></translation>
+        <translation>Jangan warnai ikon label dengan
+warna sorotan!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Secara bawaan, ikon - ikon label yang terpilih akan diwarnai oleh warna sorotan.&lt;/p&gt;&lt;p&gt;Mencentang kotak ini akan membuang pewarnaannya.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>No selection tint</source>
-        <translation></translation>
+        <translation>Tidak ada pewarnaan sorotan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation></translation>
+        <translation>Jangan gambar latar belakang apapun untuk (KDE) judul menu.
+(Memerlukan Log Keluar dan Masuk untuk menu Plasma.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jangan gambar latar belakang apapun untuk (KDE) judul menu?&lt;/p&gt;&lt;p&gt;Judul menu seperti layaknya pembatas menu tapi dengan ikon dan teks.&lt;/p&gt;&lt;p&gt;Ini memerlukan Log Keluar dan Masuk untuk menu KDE Plasma. Untuk panel LXQt, sudah cukup hanya dengan memulai ulang &lt;span style=&quot; font-style:italic;&quot;&gt;Pengaturan Sesi&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation></translation>
+        <translation>Judul memu transparan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -284,39 +301,42 @@ as a workaround for bugs in applications.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation></translation>
+        <translation>Berguna dengan set ikon monochrome dan
+ketika keburaman ikon tidak
+tidak dikurangi dengan cara lain.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="684"/>
         <location filename="../../kvantummanager.ui" line="699"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Berguna dengan set ikon monochrome dan ketika keburaman dari ikon yang dinonaktifkan tidak dikurangi dengan cara lain.&lt;/p&gt;&lt;p&gt;KDE akan secara otomatis mengurangi keburaman dari ikon yang dinonaktifkan. Oleh karena itu, opsi ini mungkin saja lebih berguna daripada bagi Lingkungan Desktop yang lain.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="687"/>
         <source>Opacity of disabled icons:</source>
-        <translation></translation>
+        <translation>Keburaman ikon yang dinonaktifkan:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation></translation>
+        <translation>Perlihatkan pegangan ukuran dari dialog dan bilah status
+sejauh mungkin.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="669"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Perlihatkan pegangan ukuran dari dialog dan bilah status sejauh mungkin?&lt;/p&gt;&lt;p&gt;Secara bawaan, aplikasi yang memutuskan apakah mereka seharusnya ditampilkan, tapi peretasan ini dapat saja berguna untuk mengubah ukuran jendela dengan mudah ketika tidak ada pembatas jendela.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="672"/>
         <source>Force size grips</source>
-        <translation></translation>
+        <translation>Paksa pegangan ukuran</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="734"/>
         <source>LXQt main menu icon size:</source>
-        <translation></translation>
+        <translation>Ukuran ikon menu utama LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="749"/>
@@ -335,18 +355,19 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation></translation>
+        <translation>Pengkomposisian &amp;&amp; Tampilan Umum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="799"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation></translation>
+        <translation>Mempunyai efek hanya ketika adanya latar belakang SVG tembus pandang
+untuk jendela atau keburaman jendela dikurangi (lihat di bawah).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="817"/>
         <source>Opaque apps:</source>
-        <translation></translation>
+        <translation>Aplikasi buram:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="769"/>
@@ -355,7 +376,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Jika di centang, menu, tip alat dan jendela
+tidak akan memiliki ketembus cahayaan atau bayangan.
+
+Jika ini dinonaktifkan, lihat:
+Bermacam - macam → Menghormati DE saat ini jika memungkinkan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="242"/>
@@ -371,7 +396,7 @@ when the scrollbar is left clicked.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
         <source>Scroll jump with middle click</source>
-        <translation></translation>
+        <translation>Gulir melompat dengan klik tengah</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="726"/>
@@ -392,7 +417,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
         <source>Disable composite effects</source>
-        <translation></translation>
+        <translation>Nonaktifkan efek pengkomposisian</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="786"/>
@@ -425,23 +450,24 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Reduce window opacity by</source>
-        <translation></translation>
+        <translation>Kurangi keburaman jendela dengan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Reduce menu opacity by</source>
-        <translation></translation>
+        <translation>Kurangi keburaman menu dengan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Blurring for translucent windows</source>
-        <translation></translation>
+        <translation>Keburaman untuk jendela tembus pandang</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="969"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation></translation>
+        <translation>Sebuah 200ms animasi pudar keetika keaadaan dari beberapa widget diganti,  when the state of
+some widgets is changed, kebanyakannya dengan mouse.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="973"/>
@@ -473,65 +499,66 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="998"/>
         <source>Ignore inactive state</source>
-        <translation></translation>
+        <translation>Abaikan keadaan tidak aktif</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1012"/>
         <source>Transient scrollbars</source>
-        <translation></translation>
+        <translation>bilah gulir sementara</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1034"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation></translation>
+        <translation>Ukuran &amp;&amp; Penundaan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1040"/>
         <source>Sizes</source>
-        <translation></translation>
+        <translation>Ukuran</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1055"/>
         <source>Small icon:</source>
-        <translation></translation>
+        <translation>Ikon kecil:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1093"/>
         <source>Large icon:</source>
-        <translation></translation>
+        <translation>Ikon besar:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1127"/>
         <source>Button icon:</source>
-        <translation></translation>
+        <translation>Ikon Tombol:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1159"/>
         <source>Toolbar icon:</source>
-        <translation></translation>
+        <translation>Ikon bilah alat:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
         <location filename="../../kvantummanager.ui" line="1197"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation></translation>
+        <translation>Nilai bawaannya adalah 2 px tetapi
+beberapa aplikasi mengaturnya sendiri.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
         <source>Layout spacing:</source>
-        <translation></translation>
+        <translation>Tata letak spasi:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <location filename="../../kvantummanager.ui" line="1224"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation></translation>
+        <translation>Nilai bawaannya adalah 4 px tetapi beberapa aplikasi mengaturnya sendiri.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1217"/>
         <source>Layout margin:</source>
-        <translation></translation>
+        <translation>Tata letak batas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1240"/>
@@ -544,7 +571,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1245"/>
         <source>Submenu overlap: </source>
-        <translation></translation>
+        <translation>Submenu tumpang tindih: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1270"/>
@@ -1462,7 +1489,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="131"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation></translation>
+        <translation>Silakan pasang terlebih dahulu Plugin Tampilan Kvantum!</translation>
     </message>
 </context>
 </TS>
