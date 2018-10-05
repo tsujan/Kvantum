@@ -12,7 +12,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Pasan/Perbaharui Tema</translation>
+        <translation>Pasang/Perbaharui Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -270,12 +270,12 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beri gaya Bilah Kapasitas KDE sebagai Bilah Kemajuan&lt;/p&gt;&lt;p&gt;Bilah Kapasitas biasanya digunakan oleh beberapa aplikasi KDE untuk memperlihatkan ukuran isi dan memiliki gaya mereka sendiri.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="615"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation></translation>
+        <translation>Perlihatkan KCapacityBar sebagai Bilah Kemajuan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="641"/>
@@ -293,7 +293,7 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="627"/>
         <source>Respect dark themes</source>
-        <translation></translation>
+        <translation>Hormati tema - tema gelap</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="679"/>
@@ -301,9 +301,9 @@ as a workaround for bugs in applications.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation>Berguna dengan set ikon monochrome dan
+        <translation>Berguna dengan set ikon monokrom dan
 ketika keburaman ikon tidak
-tidak dikurangi dengan cara lain.</translation>
+dikurangi dengan cara lain.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="684"/>
@@ -367,7 +367,7 @@ untuk jendela atau keburaman jendela dikurangi (lihat di bawah).</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="817"/>
         <source>Opaque apps:</source>
-        <translation>Aplikasi buram:</translation>
+        <translation>Aplikasi tidak tembus cahaya (filter):</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="769"/>
@@ -385,13 +385,14 @@ Bermacam - macam → Menghormati DE saat ini jika memungkinkan</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="242"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Karena &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; bersifat independen dari semua Lingkungan Desktop, pertama anda harus &lt;i&gt;mengaktifkan&lt;/i&gt; nya dengan sebuah program integrasi Platform Qt. KDE dan LXQt menyediakan alat - alat sederhana untuk mengganti plugin Gaya Qt yang aktif. Untuk platform lain, anda perlu sebuah alat pengaturan Qt.&lt;br/&gt;&lt;br/&gt;Di bawah KDE, pilih dan terapkan juga skema warna dari tema ini karena beberapa aplikasi KDE mungkin mendapat warna mereka secara langsung dari skema warna KDE.&lt;br/&gt;&lt;br/&gt;Aplikasi yang sedang berjalan akan mendapat tema baru setelah ditutup dan dibuka kembali. Log keluar dan masuk akan baik untuk semua bagian KDE/LXQt terlihat secara sepenuhnya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="715"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation></translation>
+        <translation>Secara bawaan, slider gulir melompat ke sebuah posisi
+ketika bilah gulir diklik kiri.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
@@ -407,12 +408,17 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation></translation>
+        <translation>Memili efek hanya ketika menu utama TIDAK diberi gaya oleh LXQt.
+
+Nilai kurang dari 16 artinya ukuran bawaan ikon menu.
+
+Memerlukan panel LXQt untuk dimulai ulang oleh &quot;Pengaturan Sesi&quot;
+atau melalui Log keluar dan masuk lagi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jika dicentang, menu - menu, tip alat dan jendela tidak akan memiliki ketembus cahayaan atau bayangan.&lt;/p&gt;&lt;p&gt;Ketika tidak dicentang, ketembus cahayaan dan bayangan akan tersedia jika ada unsur - unsur yang sesuai di dalam berkas SVG dari tema.&lt;/p&gt;&lt;p&gt;Jika ini dinonaktifkan, Lihat Bermacam - macam → Hormati DE sekarang jika memungkinkan.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
@@ -425,17 +431,21 @@ or through logging out and in again.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation></translation>
+        <translation>Memerlukan efek buram KDE, sebuah kartu grafis yang mendukungnya,
+dan unsur SVG menu/tip alat tembus cahaya.
+
+
+Secara otomatis dicentang jika pemburaman jendela diaktifkan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Blurring for menus and tooltips</source>
-        <translation></translation>
+        <translation>Pemburaman untuk menu dan tip alat</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="803"/>
         <source>Translucent windows</source>
-        <translation></translation>
+        <translation>Jendela temabus cahaya</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="851"/>
@@ -445,17 +455,21 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation></translation>
+        <translation>Ini akan mengurangi kekaburan jendela
+jika ketembus cahayaan jendela diaktifkan.
+
+Sebuah latar belakang SVG tembus cahaya TIDAK
+diperlukan untuk ini agar bisa bekerja.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Reduce window opacity by</source>
-        <translation>Kurangi keburaman jendela dengan</translation>
+        <translation>Kurangi keburaman jendela sebanyak</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Reduce menu opacity by</source>
-        <translation>Kurangi keburaman menu dengan</translation>
+        <translation>Kurangi keburaman menu sebanyak</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
@@ -477,24 +491,26 @@ some widgets is changed, kebanyakannya dengan mouse.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="976"/>
         <source>Animation for state change under mouse</source>
-        <translation></translation>
+        <translation>Animasi untuk pergantian keadaan di bawah mouse</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="983"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation></translation>
+        <translation>Centang ini untuk membuang pola pengubinan semua jendela/dialog!
+Jangan centang jika anda ingin mereka memiliki pola kembali!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="987"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation></translation>
+        <translation>Buang pola pengubinan jendela/dialog</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="994"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation></translation>
+        <translation>Gunakan warna dan bentuk yang sama dengan jendela
+aktif dan nonaktif jika tema ini memperbedakan antara mereka?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="998"/>
@@ -566,7 +582,9 @@ beberapa aplikasi mengaturnya sendiri.</translation>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation></translation>
+        <translation>Tumpang tindih horisontal antara sebmenu dan induknya.
+
+0 secara bawaan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1245"/>
@@ -578,26 +596,31 @@ beberapa aplikasi mengaturnya sendiri.</translation>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation></translation>
+        <translation>Lebar dari tombol putar horisontal.
+(Tidak memiliki efek ketika indikator putar adalah vertikal.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1274"/>
         <source>Spin button width: </source>
-        <translation></translation>
+        <translation>Lebar Tombol putar: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1525"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation></translation>
+        <translation>Gambar garis cabang pohon?
+
+Secara bawaan, cabang pohon memiliki indikator tetapi tidak ada garis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1936"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation></translation>
+        <translation>Gunakan tema yang aktif untuk semua aplikasi!
+
+Ini perlu disimpanan supaya dapat berlaku.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="188"/>
@@ -607,21 +630,30 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation></translation>
+        <translation>Buang tema yang terpilih
+dari seluruh jalur pemasangan pengguna.
+
+Pemasangan Root akan tetap
+tersedia jika ada; tombol ini
+hanya membuang tema pengguna.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="414"/>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation></translation>
+        <translation>Menggabungkan tampilan Dolphin dengan area sekitarnya?
+
+Secara bawaan, dia memiliki latar belakang dasar.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation></translation>
+        <translation>Tidak ada ketebalan huruf untuk tombol tekan bawaan?
+
+Beberapa tombol tekan memiliki teks tebal secara bawaan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
@@ -631,7 +663,12 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Tidak ada ikon untuk tombol tekan yang memiliki teks?
+
+Secara bawaan, semua tombol tekan memiliki ikon.
+
+Jika ini dinonaktifkan, lihat:
+Bermacam - macam → Hormati DE sekarang jika memungkinkan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
@@ -641,7 +678,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Tidak ada ikon untuk item-menu?
+
+Secara bawaan, beberapa diantaranya mungkin memiliki ikon.
+
+Jika ini dinonaktifkan, lihat:
+Bermacam - macam → Hormati DE saat ini jika memungkinkan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
@@ -651,7 +693,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation></translation>
+        <translation>Buramkan daerah di bawah jendela yang dibuat
+tembus cahaya oleh aplikasi - aplikasi mereka secara eksplisit jika memungkinkan.
+
+Ini memerlukan efek buram KDE.
+
+Konsole, QTerminal dan panel LXQt adalah contohnya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="540"/>
@@ -660,7 +707,11 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation></translation>
+        <translation>Hanya bilah alat atas yang harus diberi gaya?
+
+Secara bawaan, semua bilah alat diberi gaya,
+baik mereka di atas atau di posisi
+manapun.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>
@@ -670,32 +721,41 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation></translation>
+        <translation>Warna sorotan digunakan untuk pewarnaan.
+
+ini sebagian besar relevan dengan ikon monokrom.
+
+ikon/gaya berkode keras (hard-coded) munkin tidak menghormati kunci ini.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="622"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation></translation>
+        <translation>Beberapa aplikasi mungkin tidak menghormati tema gelap.
+Kvantum dapat mencoba untuk memperbaiki perilaku mereka
+sejauh mungkin.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="931"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation></translation>
+        <translation>Memerlukan efek buram KDE, sebuah kartu grafis
+yang mendukungnya, dan sebuah latar belakang
+SVG jendela tembus cahaya di temanya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1022"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation></translation>
+        <translation>Haruskah bilah gulir sementara memiliki
+alur semi-transparan ketika diprlukan?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1026"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation></translation>
+        <translation>Alur bilah gulir sementara (transien) saat diperlukan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1046"/>
