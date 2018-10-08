@@ -378,79 +378,79 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1561"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation></translation>
+        <translation>Deslizantes/Rolagens/Progressos/Discagem</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation></translation>
+        <translation>Recipientes</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation></translation>
+        <translation>Cabeçalho 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation></translation>
+        <translation>Cabeçalho 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation></translation>
+        <translation>Cabeçalho 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <source>3rd Item</source>
-        <translation></translation>
+        <translation>3º Item</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
         <source>2nd Item</source>
-        <translation></translation>
+        <translation>2º Item</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation></translation>
+        <translation>2º Filho</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation></translation>
+        <translation>1º Filho</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
         <source>1st Item</source>
-        <translation></translation>
+        <translation>1º Item</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation></translation>
+        <translation>3º Filho</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
         <source>Row 0</source>
-        <translation></translation>
+        <translation>Linha 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
         <source>Row 1</source>
-        <translation></translation>
+        <translation>Linha 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation></translation>
+        <translation>Coluna 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
         <source>Column 1</source>
-        <translation></translation>
+        <translation>Coluna 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
@@ -476,29 +476,29 @@ caixa de seleção</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation></translation>
+        <translation>Editável</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation></translation>
+        <translation>Não Editável</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2229"/>
         <source>Subwindow</source>
-        <translation></translation>
+        <translation>Janela inferior</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2276"/>
         <source>Panel frame</source>
-        <translation></translation>
+        <translation>Moldura do painel</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2295"/>
         <location filename="../../KvantumPreviewBase.ui" line="2436"/>
         <location filename="../../KvantumPreviewBase.ui" line="2528"/>
         <source>GroupBox</source>
-        <translation></translation>
+        <translation>Grupo de Caixa</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2315"/>
@@ -507,12 +507,12 @@ caixa de seleção</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2735"/>
         <location filename="../../KvantumPreviewBase.ui" line="2783"/>
         <source>Tab 1</source>
-        <translation></translation>
+        <translation>Aba 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
         <source>Page 1 (disabled)</source>
-        <translation></translation>
+        <translation>Página 1 (desabilitado)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2333"/>
@@ -521,12 +521,12 @@ caixa de seleção</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2749"/>
         <location filename="../../KvantumPreviewBase.ui" line="2797"/>
         <source>Tab 2</source>
-        <translation></translation>
+        <translation>Aba 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
         <source>Page 2 (disabled)</source>
-        <translation></translation>
+        <translation>Página 2 (desabilitada)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2373"/>
@@ -535,7 +535,7 @@ caixa de seleção</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2741"/>
         <location filename="../../KvantumPreviewBase.ui" line="2789"/>
         <source>Page 1</source>
-        <translation></translation>
+        <translation>Página 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2387"/>
@@ -545,52 +545,52 @@ caixa de seleção</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2755"/>
         <location filename="../../KvantumPreviewBase.ui" line="2803"/>
         <source>Page 2</source>
-        <translation></translation>
+        <translation>Página 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2411"/>
         <source>Stack widget (page1)</source>
-        <translation></translation>
+        <translation>Widget de pilha (Página1)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2425"/>
         <source>Stack Widget (page2)</source>
-        <translation></translation>
+        <translation>Widget de Pilha (página2)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2442"/>
         <source>Group box</source>
-        <translation></translation>
+        <translation>Grupo de caixa</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Dock Widget</source>
-        <translation></translation>
+        <translation>Widget de Doca</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2537"/>
         <source>Checkable group box</source>
-        <translation></translation>
+        <translation>Grupo de caixa selecionável</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2572"/>
         <source>Tool Box</source>
-        <translation></translation>
+        <translation>Caixa de Ferramenta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2664"/>
         <source>Document mode</source>
-        <translation></translation>
+        <translation>Modo de Documento</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2702"/>
         <source>Box frame</source>
-        <translation></translation>
+        <translation>Moldura da caixa</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>&amp;File</source>
-        <translation></translation>
+        <translation>&amp;Arquivo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2836"/>
@@ -600,22 +600,22 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2856"/>
         <source>toolBar</source>
-        <translation></translation>
+        <translation>Barra de ferramenta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2873"/>
         <source>toolBar_2</source>
-        <translation></translation>
+        <translation>Barra de ferramenta_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>&amp;Sair</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2895"/>
         <source>Quit</source>
-        <translation></translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2898"/>
@@ -625,52 +625,52 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2906"/>
         <source>&amp;Checkbox</source>
-        <translation></translation>
+        <translation>&amp;Caixa de seleção</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>Toggle Layout</source>
-        <translation></translation>
+        <translation>Alternar o Leiaute</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2922"/>
         <source>Toggle layout direction</source>
-        <translation></translation>
+        <translation>Alternar direção do leiaute</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2934"/>
         <source>&amp;Doc Mode</source>
-        <translation></translation>
+        <translation>&amp;Modo Doc</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2937"/>
         <source>Show tabs in the document mode</source>
-        <translation></translation>
+        <translation>Exibir abas no modo documento</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2949"/>
         <source>Menu Button</source>
-        <translation></translation>
+        <translation>Botão  de Menu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
         <source>Hold pressed to show a menu</source>
-        <translation></translation>
+        <translation>Mantenha pressionado para exibir um menu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2963"/>
         <source>C&amp;heckbox</source>
-        <translation></translation>
+        <translation>C&amp;aixa de seleção</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>&amp;Radio button</source>
-        <translation></translation>
+        <translation>Botão de &amp;rádio</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2979"/>
         <source>Radio &amp;button</source>
-        <translation></translation>
+        <translation>&amp;Botão de rádio</translation>
     </message>
 </context>
 </TS>
