@@ -921,11 +921,9 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
 
   if (widgetName == "Menu")
   {
+    realMenuShadow_ = shadow; // don't lose the real info
     if (tspec_.spread_menuitems)
-    {
-      realMenuShadow_ = shadow; // don't lose the real info
       shadow[0] = shadow[2] = thicknessH;
-    }
     menuShadow_ = shadow;
     setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
   }
