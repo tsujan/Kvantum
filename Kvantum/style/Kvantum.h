@@ -441,7 +441,7 @@ class Style : public QCommonStyle {
     bool isKisSlider_;
 
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
-    int pixelRatio_;
+    qreal pixelRatio_;
 
     /* For not calculating the extra combo width repeatedly. */
     mutable int extraComboWidth_;

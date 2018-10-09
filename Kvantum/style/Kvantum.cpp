@@ -288,11 +288,11 @@ Style::Style(bool useDark) : QCommonStyle()
   ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
   extraComboWidth_ = 0;
-  pixelRatio_ = 1;
+  pixelRatio_ = 1.0;
 
 #if QT_VERSION >= 0x050500
-  int dpr = qApp->devicePixelRatio();
-  if (dpr > 1)
+  qreal dpr = qApp->devicePixelRatio();
+  if (dpr > 1.0)
     pixelRatio_ = dpr;
 #endif
 
@@ -10537,7 +10537,7 @@ void Style::drawComplexControl(ComplexControl control,
                                      labelRect(option->rect,fspec,lspec));
             QRect iconRect = alignedRect(option->direction,
                                          Qt::AlignCenter,
-                                         QSize(icn.width(),icn.height())/pixelRatio_, ricn);
+                                         (QSizeF(icn.size())/pixelRatio_).toSize(), ricn);
             if (!(option->state & State_Enabled))
             {
               qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
@@ -11375,7 +11375,9 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarCloseButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
+                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
+                                     btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
       if (option->subControls & QStyle::SC_MdiNormalButton)
@@ -11405,7 +11407,9 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarNormalButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
+                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
+                                     btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
       if (option->subControls & QStyle::SC_MdiMinButton)
@@ -11435,7 +11439,9 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarMinButton,&btnOpt,widget),
                                                     iconmode,iconstate,QSize(16,16));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter, pm.size()/pixelRatio_, btnOpt.rect);
+        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
+                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
+                                     btnOpt.rect);
         painter->drawPixmap(iconRect,pm);
       }
 
@@ -12088,7 +12094,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       if (isLibreoffice_
           || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
-        return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget)*pixelRatio_,
+        return qMin(qRound(static_cast<qreal>(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget))*pixelRatio_),
                     tspec_.check_size);
       }
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
@@ -15132,7 +15138,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
       indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
-      int s = pixelRatio_*dspec.size;
+      int s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15171,7 +15177,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     }
     case SP_ToolBarVerticalExtensionButton : {
       indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
-      int s = pixelRatio_*dspec.size;
+      int s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15217,13 +15223,13 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       }
       if (!icn.isNull())
       {
-        QPixmap pm = icn.pixmap(32*pixelRatio_);
+        QPixmap pm = icn.pixmap(qRound(32.0*pixelRatio_));
         return QIcon(pm);
       }
       else break;
     }
     case SP_TitleBarMinButton : {
-      int s = 12*pixelRatio_;
+      int s = qRound(12.0*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15240,7 +15246,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMaxButton : {
-      int s = 12*pixelRatio_;
+      int s = qRound(12.0*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15252,7 +15258,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     }
     case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
-      int s = 12*pixelRatio_;
+      int s = qRound(12.0*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15279,7 +15285,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMenuButton : {
-      int s = 12*pixelRatio_;
+      int s = qRound(12.0*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15290,7 +15296,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarNormalButton : {
-      int s = 12*pixelRatio_;
+      int s = qRound(12.0*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15471,11 +15477,18 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
 #endif
-  QPixmap px = icon.pixmap(hdpi ? iconSize/pixelRatio_
-                                : iconSize*pixelRatio_,icnMode,iconstate);
+  QPixmap px = icon.pixmap(hdpi ? (QSizeF(iconSize)/pixelRatio_).toSize()
+                                : (QSizeF(iconSize)*pixelRatio_).toSize(),
+                           icnMode,iconstate);
   /* for an HDPI-enabled app and when the icon isn't taken from a theme */
-  if (hdpi && px.size().width() < pixelRatio_*(iconSize.width() - iconSize.width()%pixelRatio_))
+  if (hdpi && px.size().width() < qRound(pixelRatio_
+                                         // the part of iconSize.width() that is a multiple of pixelRatio_
+                                         * pixelRatio_
+                                         * static_cast<qreal>(static_cast<int>(static_cast<qreal>(iconSize.width())
+                                                                               / pixelRatio_))))
+  {
     px = icon.pixmap(iconSize,icnMode,iconstate);
+  }
 
   if (iconmode == Disabled || iconmode == DisabledSelected)
   {

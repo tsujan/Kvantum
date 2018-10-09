@@ -27,15 +27,16 @@ namespace Kvantum
 
 /* Here, instead of using the render() method of QSvgRenderer
    directly, we first make a QPixmap for drawing SVG elements. */
-static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRect bounds, QString element)
+static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRect bounds, QString element,
+                                  qreal pixelRatio)
 {
-  QPixmap pixmap = QPixmap(bounds.width(), bounds.height());
+  QPixmap pixmap = QPixmap((QSizeF(bounds.size())*pixelRatio).toSize());
   pixmap.fill(QColor(Qt::transparent));
   QPainter p;
   p.begin(&pixmap);
   renderer->render(&p,element);
   p.end();
-  painter->drawPixmap(bounds,pixmap);
+  painter->drawPixmap(bounds,pixmap,pixmap.rect());
 }
 
 bool Style::renderElement(QPainter *painter,
@@ -77,12 +78,19 @@ bool Style::renderElement(QPainter *painter,
   }
   if (!renderer) return false;
 
+  if (static_cast<qreal>(qRound(pixelRatio_)) != pixelRatio_)
+  { // in this special case, we prevent one-pixel gaps between rectangles as far as possible
+    painter->save();
+    painter->setRenderHint(QPainter::SmoothPixmapTransform);
+    usePixmap = true;
+  }
+
   if (hsize < 0) // means no tiling pattern (for windows/dialogs)
   {
     if (renderer->elementExists(_element+"-pattern"))
     {
       if (usePixmap)
-        drawSvgElement(renderer,painter,bounds,_element);
+        drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
       else
         renderer->render(painter,_element,bounds);
     }
@@ -100,7 +108,7 @@ bool Style::renderElement(QPainter *painter,
     if (renderer->elementExists(_element+"-pattern"))
     {
       if (usePixmap)
-        drawSvgElement(renderer,painter,bounds,_element);
+        drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
       else
         renderer->render(painter,_element,bounds);
       _element = _element+"-pattern";
@@ -127,10 +135,13 @@ bool Style::renderElement(QPainter *painter,
   else
   {
     if (usePixmap)
-      drawSvgElement(renderer,painter,bounds,_element);
+      drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
     else
       renderer->render(painter,_element,bounds);
   }
+
+  if (static_cast<qreal>(qRound(pixelRatio_)) != pixelRatio_)
+    painter->restore();
 
   return true;
 }
@@ -950,7 +961,7 @@ void Style::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
     // the pixmap should have been enlarged by pixelRatio_
-    QRect iconRect = alignedRect(ld, Qt::AlignCenter, px.size()/pixelRatio_, ricon);
+    QRect iconRect = alignedRect(ld, Qt::AlignCenter, (QSizeF(px.size())/pixelRatio_).toSize(), ricon);
 
     if (!(option->state & State_Enabled))
     {

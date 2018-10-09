@@ -119,7 +119,7 @@ protected:
   }
 private:
   // the value of QT_DEVICE_PIXEL_RATIO
-  int pixelRatio_;
+  qreal pixelRatio_;
   bool enabled_;
   int dragDistance_;
   int dragDelay_;

@@ -107,22 +107,27 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   else if (widget->inherits("QTipLabel")
            /* unusual tooltips */
            || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
+  {
     r = tooltipShadow_;
+  }
   QRect rect = widget->rect();
 
-  int dpr = 1;
+  qreal dpr = 1.0;
 #if QT_VERSION >= 0x050500
   dpr = qApp->devicePixelRatio();
-  if (dpr < 1) dpr = 1;
-  if (dpr > 1)
-    rect.setSize (rect.size() * dpr);
+  if (dpr < 1.0) dpr = 1.0;
+  if (dpr > 1.0)
+    rect.setSize ((QSizeF(rect.size()) * dpr).toSize());
 #endif
 
   /* trimming the region isn't good for us */
-  return (widget->mask().isEmpty() ?
-            r.isEmpty() ?
-              rect
-              : rect.adjusted (dpr*r.at(0), dpr*r.at(1), -dpr*r.at(2), -dpr*r.at(3))
+  return (widget->mask().isEmpty()
+            ? r.isEmpty()
+                ? rect
+                : rect.adjusted (qRound(dpr * static_cast<qreal>(r.at(0))),
+                                 qRound(dpr * static_cast<qreal>(r.at(1))),
+                                 -qRound(dpr * static_cast<qreal>(r.at(2))),
+                                 -qRound(dpr * static_cast<qreal>(r.at(3))))
             : widget->mask());
 }
 /*************************/
