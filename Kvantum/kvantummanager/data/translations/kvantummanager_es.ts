@@ -17,7 +17,9 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; 
+viene con muchos temas pero también se pueden instalar temas externos para que los use. 
+Aquí puede elegir una carpeta de temas y luego presionar el botón de abajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -34,17 +36,17 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
         <source>Install this theme</source>
-        <translation></translation>
+        <translation>Instalar este tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="143"/>
         <source>Change/Delete Theme</source>
-        <translation></translation>
+        <translation>Cambiar/Borrar Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="149"/>
         <source>Select a theme:</source>
-        <translation></translation>
+        <translation>Seleccionar un tema:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="196"/>
