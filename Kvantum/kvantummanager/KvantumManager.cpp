@@ -642,10 +642,14 @@ void KvantumManager::deleteTheme()
     }
 
     QString theme_ = theme;
+    bool customThemeDeleted (false);
     if (theme == "Kvantum" + modifiedSuffix_)
         theme = "Default#";
     else if (theme.endsWith (modifiedSuffix_))
+    {
         theme.replace (modifiedSuffix_, "#");
+        customThemeDeleted = true;
+    }
     else if (theme == kvDefault_)
         return;
 
@@ -658,7 +662,7 @@ void KvantumManager::deleteTheme()
     QString homeDir = QDir::homePath();
     QString file;
     QString dir = QString ("%1/Kvantum/%2").arg (xdg_config_home).arg (theme);
-    if (!removeDir (dir))
+    if (!removeDir (dir)) // removeDir() returns true if dir doesn't exist
     {
         canNotBeRemoved (dir, true);
         return;
@@ -668,11 +672,17 @@ void KvantumManager::deleteTheme()
         file = QString ("%1/Kvantum/%2/%3.kvconfig")
                .arg (xdg_config_home).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
         file  = QString ("%1/Kvantum/%2/%3.svg")
                 .arg (xdg_config_home).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
     }
 
     dir = QString ("%1/.themes/%2/Kvantum").arg (homeDir).arg (theme);
@@ -686,11 +696,17 @@ void KvantumManager::deleteTheme()
         file = QString ("%1/.themes/%2/Kvantum/%3.kvconfig")
                .arg (homeDir).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
         file = QString ("%1/.themes/%2/Kvantum/%3.svg")
                .arg (homeDir).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
     }
 
     dir = QString ("%1/.local/share/themes/%2/Kvantum").arg (homeDir).arg (theme);
@@ -704,11 +720,17 @@ void KvantumManager::deleteTheme()
         file = QString ("%1/.local/share/themes/%2/Kvantum/%3.kvconfig")
                .arg (homeDir).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
         file = QString ("%1/.local/share/themes/%2/Kvantum/%3.svg")
                .arg (homeDir).arg (lightTheme).arg (theme);
         if (QFile::exists (file) && !QFile::remove (file))
+        {
             canNotBeRemoved (file, false);
+            customThemeDeleted = false;
+        }
     }
 
     QString configFile = QString ("%1/Kvantum/kvantum.kvconfig").arg (xdg_config_home);
@@ -716,8 +738,13 @@ void KvantumManager::deleteTheme()
     {
         QSettings settings (configFile, QSettings::NativeFormat);
         if (settings.contains ("theme") && theme == settings.value ("theme").toString())
-        {
-            if (isThemeDir (QString ("%1/Kvantum/Default#").arg (xdg_config_home)))
+        { // the active theme is removed...
+            if (customThemeDeleted)
+            { // ... if it was customized, go to its root version
+                kvconfigTheme_ = theme.left (theme.length() - 1);
+                settings.setValue ("theme", kvconfigTheme_);
+            }
+            else if (isThemeDir (QString ("%1/Kvantum/Default#").arg (xdg_config_home)))
             {
                 settings.setValue ("theme", "Default#");
                 kvconfigTheme_ = "Default#";
