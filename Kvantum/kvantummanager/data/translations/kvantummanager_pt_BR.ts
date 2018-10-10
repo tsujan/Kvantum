@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="id">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>KvManager::KvantumManager</name>
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
-        <location filename="../../KvantumManager.cpp" line="2467"/>
+        <location filename="../../KvantumManager.cpp" line="2471"/>
         <source>Kvantum Manager</source>
-        <translation>Pengelola Kvantum</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Pasang/Perbaharui Tema</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; hadir dengan banyak tema namun tema lain (eksternal) juga dapat dipasang untuk digunakan dengannya. Di sini anda dapat memilih sebuah folder tema, lalu kemudian tekan tombol di bawah untuk memasangnya di Home (folder Beranda anda).&lt;/center&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Pilih sebuah folder
-tema Kvantum</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="118"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>Tambahkan tema ini ke daftar tema yang
-Kvantum dapat gunakan sebagai tambahan bagi tema miliknya.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
         <source>Install this theme</source>
-        <translation>Pasang tema ini</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="143"/>
         <source>Change/Delete Theme</source>
-        <translation>Ganti/Hapus Tema</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="149"/>
         <source>Select a theme:</source>
-        <translation>Pilih sebuah tema:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="196"/>
         <source>Delete this theme</source>
-        <translation>Hapus tema ini</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="208"/>
@@ -59,39 +57,34 @@ Kvantum dapat gunakan sebagai tambahan bagi tema miliknya.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Jadikan Kvantum menggunakan tema ini!
-
-Sebuah tombol yang dinonaktifkan berarti bahwa
-temanya sudah digunakan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="214"/>
         <source>Use this theme</source>
-        <translation>Gunaka tema ini</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="272"/>
         <source>Configure Active Theme</source>
-        <translation>Atur Tema Aktif</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="336"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>Kembalikan ke pengaturan 
-semula (root) dari tema ini.
-(Ctrl+Z)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="341"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kembaliken ke pengaturan semula (root) dari tema ini!&lt;/p&gt;&lt;p&gt;Saat diKlik dan diKonfirmasi, semua perubahan terhadap pengaturan akan hilang tetapi kemungkinan kustom berakas SVG akan tetap utuh.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="344"/>
         <source>Restore</source>
-        <translation>Pulihkan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="352"/>
@@ -102,14 +95,13 @@ semula (root) dari tema ini.
         <location filename="../../kvantummanager.ui" line="359"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>Simpan pengaturan ini
-(Ctrl+S)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="363"/>
         <location filename="../../kvantummanager.ui" line="1957"/>
         <source>Save</source>
-        <translation>Simpan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="371"/>
@@ -119,29 +111,28 @@ semula (root) dari tema ini.
     <message>
         <location filename="../../kvantummanager.ui" line="378"/>
         <source>Safe Settings</source>
-        <translation>Pengaturan Aman</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>Hapus centang  semua kotak-kotak ini jika anda ingin semua
-widget tampil sebagaimana bawaannya.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="395"/>
         <source>Hacks</source>
-        <translation>Peretasan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="419"/>
         <source>Transparent Dolphin view</source>
-        <translation>Tampilan Dolphin transparan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="447"/>
         <source>Normal font for default push buttons</source>
-        <translation>Huruf normal untuk Tombol Tekan bawaan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
@@ -150,21 +141,17 @@ widget tampil sebagaimana bawaannya.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Menggabungkan Panel Samping PCManFM-qt dengan keaadaan sekelilingnya.
-
-Di bawah LXQt, diperlukan Log Keluar dan Masuk atau menutup 
-PCManFM-qt lalu kemudian, hentikan dan mulai Desktop
-dengan Pengaturan Sesi LXQt.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation>Panel Samping transparan untuk PCManFM-qt</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="489"/>
         <source>Iconless push buttons</source>
-        <translation>Tombol Tekan tanpa Ikon</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
@@ -173,80 +160,74 @@ dengan Pengaturan Sesi LXQt.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Menggabungkan tampilan PCManFM-qt dengan keadaan sekitarnya.
-
-Di bawah LXQt, diperlukan Log Keluar dan Masuk atau Menutup
-PCManFM-qt lalu kemudian, hentikan dan mulai Desktop
-dengan Pengaturan Sesi LXQt.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="503"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation>Tampilan Transparan untuk PCManFM-qt</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="518"/>
         <source>Iconless  menus</source>
-        <translation>Menu tanpa ikon</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="533"/>
         <source>Blur explicitly translucent windows</source>
-        <translation>Buramkan secara eksplisit jendela tembus pandang</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Single top toolbar</source>
-        <translation>Bilah alat tunggal</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation>Jangan gambar latar belakang apapun untuk KTitles.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jangan gambar latar belakang apapun untuk?&lt;/p&gt;&lt;p&gt;Ktitles digunakn oleh beberapa aplikasi KDE untuk menunjukan perbedaan bagian - bagin dalam pengaturan dialog.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation>Label KTitle transparan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation>Jangan warnai ikon label dengan
-warna sorotan!</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Secara bawaan, ikon - ikon label yang terpilih akan diwarnai oleh warna sorotan.&lt;/p&gt;&lt;p&gt;Mencentang kotak ini akan membuang pewarnaannya.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>No selection tint</source>
-        <translation>Tidak ada pewarnaan sorotan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation>Jangan gambar latar belakang apapun untuk (KDE) judul menu.
-(Memerlukan Log Keluar dan Masuk untuk menu Plasma.)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jangan gambar latar belakang apapun untuk (KDE) judul menu?&lt;/p&gt;&lt;p&gt;Judul menu seperti layaknya pembatas menu tapi dengan ikon dan teks.&lt;/p&gt;&lt;p&gt;Ini memerlukan Log Keluar dan Masuk untuk menu KDE Plasma. Untuk panel LXQt, sudah cukup hanya dengan memulai ulang &lt;span style=&quot; font-style:italic;&quot;&gt;Pengaturan Sesi&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation>Judul memu transparan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -270,12 +251,12 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beri gaya Bilah Kapasitas KDE sebagai Bilah Kemajuan&lt;/p&gt;&lt;p&gt;Bilah Kapasitas biasanya digunakan oleh beberapa aplikasi KDE untuk memperlihatkan ukuran isi dan memiliki gaya mereka sendiri.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="615"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation>Perlihatkan KCapacityBar sebagai Bilah Kemajuan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="641"/>
@@ -293,7 +274,7 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="627"/>
         <source>Respect dark themes</source>
-        <translation>Hormati tema - tema gelap</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="679"/>
@@ -301,42 +282,39 @@ as a workaround for bugs in applications.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation>Berguna dengan set ikon monokrom dan
-ketika keburaman ikon tidak
-dikurangi dengan cara lain.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="684"/>
         <location filename="../../kvantummanager.ui" line="699"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Berguna dengan set ikon monochrome dan ketika keburaman dari ikon yang dinonaktifkan tidak dikurangi dengan cara lain.&lt;/p&gt;&lt;p&gt;KDE akan secara otomatis mengurangi keburaman dari ikon yang dinonaktifkan. Oleh karena itu, opsi ini mungkin saja lebih berguna daripada bagi Lingkungan Desktop yang lain.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="687"/>
         <source>Opacity of disabled icons:</source>
-        <translation>Keburaman ikon yang dinonaktifkan:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation>Perlihatkan pegangan ukuran dari dialog dan bilah status
-sejauh mungkin.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="669"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Perlihatkan pegangan ukuran dari dialog dan bilah status sejauh mungkin?&lt;/p&gt;&lt;p&gt;Secara bawaan, aplikasi yang memutuskan apakah mereka seharusnya ditampilkan, tapi peretasan ini dapat saja berguna untuk mengubah ukuran jendela dengan mudah ketika tidak ada pembatas jendela.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="672"/>
         <source>Force size grips</source>
-        <translation>Paksa pegangan ukuran</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="734"/>
         <source>LXQt main menu icon size:</source>
-        <translation>Ukuran ikon menu utama LXQt:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="749"/>
@@ -355,19 +333,18 @@ sejauh mungkin.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>Pengkomposisian &amp;&amp; Tampilan Umum</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="799"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation>Mempunyai efek hanya ketika adanya latar belakang SVG tembus pandang
-untuk jendela atau keburaman jendela dikurangi (lihat di bawah).</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="817"/>
         <source>Opaque apps:</source>
-        <translation>Aplikasi tidak tembus cahaya (filter):</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="769"/>
@@ -376,28 +353,23 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Jika di centang, menu, tip alat dan jendela
-tidak akan memiliki ketembus cahayaan atau bayangan.
-
-Jika ini dinonaktifkan, lihat:
-Bermacam - macam → Menghormati DE saat ini jika memungkinkan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="242"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Karena &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; bersifat independen dari semua Lingkungan Desktop, pertama anda harus &lt;i&gt;mengaktifkan&lt;/i&gt; nya dengan sebuah program integrasi Platform Qt. KDE dan LXQt menyediakan alat - alat sederhana untuk mengganti plugin Gaya Qt yang aktif. Untuk platform lain, anda perlu sebuah alat pengaturan Qt.&lt;br/&gt;&lt;br/&gt;Di bawah KDE, pilih dan terapkan juga skema warna dari tema ini karena beberapa aplikasi KDE mungkin mendapat warna mereka secara langsung dari skema warna KDE.&lt;br/&gt;&lt;br/&gt;Aplikasi yang sedang berjalan akan mendapat tema baru setelah ditutup dan dibuka kembali. Log keluar dan masuk akan baik untuk semua bagian KDE/LXQt terlihat secara sepenuhnya.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="715"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation>Secara bawaan, slider gulir melompat ke sebuah posisi
-ketika bilah gulir diklik kiri.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
         <source>Scroll jump with middle click</source>
-        <translation>Gulir melompat dengan klik tengah</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="726"/>
@@ -408,22 +380,17 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation>Memili efek hanya ketika menu utama TIDAK diberi gaya oleh LXQt.
-
-Nilai kurang dari 16 artinya ukuran bawaan ikon menu.
-
-Memerlukan panel LXQt untuk dimulai ulang oleh &quot;Pengaturan Sesi&quot;
-atau melalui Log keluar dan masuk lagi.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jika dicentang, menu - menu, tip alat dan jendela tidak akan memiliki ketembus cahayaan atau bayangan.&lt;/p&gt;&lt;p&gt;Ketika tidak dicentang, ketembus cahayaan dan bayangan akan tersedia jika ada unsur - unsur yang sesuai di dalam berkas SVG dari tema.&lt;/p&gt;&lt;p&gt;Jika ini dinonaktifkan, Lihat Bermacam - macam → Hormati DE sekarang jika memungkinkan.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
         <source>Disable composite effects</source>
-        <translation>Nonaktifkan efek pengkomposisian</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="786"/>
@@ -431,21 +398,17 @@ atau melalui Log keluar dan masuk lagi.</translation>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation>Memerlukan efek buram KDE, sebuah kartu grafis yang mendukungnya,
-dan unsur SVG menu/tip alat tembus cahaya.
-
-
-Secara otomatis dicentang jika pemburaman jendela diaktifkan.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Blurring for menus and tooltips</source>
-        <translation>Pemburaman untuk menu dan tip alat</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="803"/>
         <source>Translucent windows</source>
-        <translation>Jendela temabus cahaya</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="851"/>
@@ -455,33 +418,28 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation>Ini akan mengurangi kekaburan jendela
-jika ketembus cahayaan jendela diaktifkan.
-
-Sebuah latar belakang SVG tembus cahaya TIDAK
-diperlukan untuk ini agar bisa bekerja.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Reduce window opacity by</source>
-        <translation>Kurangi keburaman jendela sebanyak</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Reduce menu opacity by</source>
-        <translation>Kurangi keburaman menu sebanyak</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Blurring for translucent windows</source>
-        <translation>Keburaman untuk jendela tembus pandang</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="969"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation>Sebuah 200ms animasi pudar keetika keaadaan dari beberapa widget diganti,  when the state of
-some widgets is changed, kebanyakannya dengan mouse.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="973"/>
@@ -491,90 +449,87 @@ some widgets is changed, kebanyakannya dengan mouse.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="976"/>
         <source>Animation for state change under mouse</source>
-        <translation>Animasi untuk pergantian keadaan di bawah mouse</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="983"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation>Centang ini untuk membuang pola pengubinan semua jendela/dialog!
-Jangan centang jika anda ingin mereka memiliki pola kembali!</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="987"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation>Buang pola pengubinan jendela/dialog</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="994"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation>Gunakan warna dan bentuk yang sama dengan jendela
-aktif dan nonaktif jika tema ini memperbedakan antara mereka?</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="998"/>
         <source>Ignore inactive state</source>
-        <translation>Abaikan keadaan tidak aktif</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1012"/>
         <source>Transient scrollbars</source>
-        <translation>bilah gulir sementara</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1034"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation>Ukuran &amp;&amp; Penundaan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1040"/>
         <source>Sizes</source>
-        <translation>Ukuran</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1055"/>
         <source>Small icon:</source>
-        <translation>Ikon kecil:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1093"/>
         <source>Large icon:</source>
-        <translation>Ikon besar:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1127"/>
         <source>Button icon:</source>
-        <translation>Ikon Tombol:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1159"/>
         <source>Toolbar icon:</source>
-        <translation>Ikon bilah alat:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
         <location filename="../../kvantummanager.ui" line="1197"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation>Nilai bawaannya adalah 2 px tetapi
-beberapa aplikasi mengaturnya sendiri.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
         <source>Layout spacing:</source>
-        <translation>Tata letak spasi:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <location filename="../../kvantummanager.ui" line="1224"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Nilai bawaannya adalah 4 px tetapi beberapa aplikasi mengaturnya sendiri.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1217"/>
         <source>Layout margin:</source>
-        <translation>Tata letak batas:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1240"/>
@@ -582,45 +537,38 @@ beberapa aplikasi mengaturnya sendiri.</translation>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation>Tumpang tindih horisontal antara sebmenu dan induknya.
-
-0 secara bawaan.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1245"/>
         <source>Submenu overlap: </source>
-        <translation>Submenu tumpang tindih: </translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1270"/>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation>Lebar dari tombol putar horisontal.
-(Tidak memiliki efek ketika indikator putar adalah vertikal.)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1274"/>
         <source>Spin button width: </source>
-        <translation>Lebar Tombol putar: </translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1525"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation>Gambar garis cabang pohon?
-
-Secara bawaan, cabang pohon memiliki indikator tetapi tidak ada garis.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1936"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>Gunakan tema yang aktif untuk semua aplikasi!
-
-Ini perlu disimpanan supaya dapat berlaku.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="188"/>
@@ -630,30 +578,21 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Buang tema yang terpilih
-dari seluruh jalur pemasangan pengguna.
-
-Pemasangan Root akan tetap
-tersedia jika ada; tombol ini
-hanya membuang tema pengguna.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="414"/>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation>Menggabungkan tampilan Dolphin dengan area sekitarnya?
-
-Secara bawaan, dia memiliki latar belakang dasar.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation>Tidak ada ketebalan huruf untuk tombol tekan bawaan?
-
-Beberapa tombol tekan memiliki teks tebal secara bawaan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
@@ -663,12 +602,7 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Tidak ada ikon untuk tombol tekan yang memiliki teks?
-
-Secara bawaan, semua tombol tekan memiliki ikon.
-
-Jika ini dinonaktifkan, lihat:
-Bermacam - macam → Hormati DE sekarang jika memungkinkan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
@@ -678,12 +612,7 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Tidak ada ikon untuk item-menu?
-
-Secara bawaan, beberapa diantaranya mungkin memiliki ikon.
-
-Jika ini dinonaktifkan, lihat:
-Bermacam - macam → Hormati DE saat ini jika memungkinkan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
@@ -693,12 +622,7 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation>Buramkan daerah di bawah jendela yang dibuat
-tembus cahaya oleh aplikasi - aplikasi mereka secara eksplisit jika memungkinkan.
-
-Ini memerlukan efek buram KDE.
-
-Konsole, QTerminal dan panel LXQt adalah contohnya.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="540"/>
@@ -707,11 +631,7 @@ Konsole, QTerminal dan panel LXQt adalah contohnya.</translation>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation>Hanya bilah alat atas yang harus diberi gaya?
-
-Secara bawaan, semua bilah alat diberi gaya,
-baik mereka di atas atau di posisi
-manapun.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>
@@ -721,41 +641,32 @@ manapun.</translation>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation>Warna sorotan digunakan untuk pewarnaan.
-
-ini sebagian besar relevan dengan ikon monokrom.
-
-ikon/gaya berkode keras (hard-coded) munkin tidak menghormati kunci ini.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="622"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation>Beberapa aplikasi mungkin tidak menghormati tema gelap.
-Kvantum dapat mencoba untuk memperbaiki perilaku mereka
-sejauh mungkin.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="931"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation>Memerlukan efek buram KDE, sebuah kartu grafis
-yang mendukungnya, dan sebuah latar belakang
-SVG jendela tembus cahaya di temanya.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1022"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation>Haruskah bilah gulir sementara memiliki
-alur semi-transparan ketika diprlukan?</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1026"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation>Alur bilah gulir sementara (transien) saat diperlukan</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1046"/>
@@ -1252,52 +1163,52 @@ or update its preview.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="179"/>
+        <location filename="../../KvantumManager.cpp" line="183"/>
         <source>Open Kvantum Theme Folder...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="366"/>
-        <location filename="../../KvantumManager.cpp" line="383"/>
-        <location filename="../../KvantumManager.cpp" line="399"/>
-        <location filename="../../KvantumManager.cpp" line="410"/>
-        <location filename="../../KvantumManager.cpp" line="421"/>
-        <location filename="../../KvantumManager.cpp" line="448"/>
-        <location filename="../../KvantumManager.cpp" line="463"/>
-        <location filename="../../KvantumManager.cpp" line="510"/>
-        <location filename="../../KvantumManager.cpp" line="526"/>
+        <location filename="../../KvantumManager.cpp" line="370"/>
+        <location filename="../../KvantumManager.cpp" line="387"/>
+        <location filename="../../KvantumManager.cpp" line="403"/>
+        <location filename="../../KvantumManager.cpp" line="414"/>
+        <location filename="../../KvantumManager.cpp" line="425"/>
+        <location filename="../../KvantumManager.cpp" line="452"/>
+        <location filename="../../KvantumManager.cpp" line="467"/>
+        <location filename="../../KvantumManager.cpp" line="514"/>
+        <location filename="../../KvantumManager.cpp" line="530"/>
         <source>Kvantum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="450"/>
+        <location filename="../../KvantumManager.cpp" line="454"/>
         <source>First you have to delete its modified version!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="474"/>
-        <location filename="../../KvantumManager.cpp" line="628"/>
-        <location filename="../../KvantumManager.cpp" line="2323"/>
+        <location filename="../../KvantumManager.cpp" line="478"/>
+        <location filename="../../KvantumManager.cpp" line="632"/>
+        <location filename="../../KvantumManager.cpp" line="2327"/>
         <source>Confirmation</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="589"/>
+        <location filename="../../KvantumManager.cpp" line="593"/>
         <source>%1 installed.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="732"/>
+        <location filename="../../KvantumManager.cpp" line="736"/>
         <source>%1 deleted.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="786"/>
+        <location filename="../../KvantumManager.cpp" line="790"/>
         <source>Theme changed to %1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="367"/>
+        <location filename="../../KvantumManager.cpp" line="371"/>
         <source>You have no permission to write here:</source>
         <translation></translation>
     </message>
@@ -1347,162 +1258,162 @@ or update its preview.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="369"/>
+        <location filename="../../KvantumManager.cpp" line="373"/>
         <source>Please fix that first!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="381"/>
+        <location filename="../../KvantumManager.cpp" line="385"/>
         <source>This file cannot be removed:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="400"/>
-        <location filename="../../KvantumManager.cpp" line="411"/>
+        <location filename="../../KvantumManager.cpp" line="404"/>
+        <location filename="../../KvantumManager.cpp" line="415"/>
         <source>This is not an installable Kvantum theme!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="401"/>
+        <location filename="../../KvantumManager.cpp" line="405"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="402"/>
-        <location filename="../../KvantumManager.cpp" line="413"/>
-        <location filename="../../KvantumManager.cpp" line="423"/>
+        <location filename="../../KvantumManager.cpp" line="406"/>
+        <location filename="../../KvantumManager.cpp" line="417"/>
+        <location filename="../../KvantumManager.cpp" line="427"/>
         <source>Please select another directory!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="412"/>
+        <location filename="../../KvantumManager.cpp" line="416"/>
         <source>Installable themes should not have # in their names.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="422"/>
+        <location filename="../../KvantumManager.cpp" line="426"/>
         <source>This is not a Kvantum theme folder!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="449"/>
+        <location filename="../../KvantumManager.cpp" line="453"/>
         <source>The theme already exists in modified form.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="464"/>
+        <location filename="../../KvantumManager.cpp" line="468"/>
         <source>You have selected an installed theme folder.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="465"/>
+        <location filename="../../KvantumManager.cpp" line="469"/>
         <source>Please choose another directory!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="475"/>
+        <location filename="../../KvantumManager.cpp" line="479"/>
         <source>The theme already exists.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="476"/>
+        <location filename="../../KvantumManager.cpp" line="480"/>
         <source>Do you want to overwrite it?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="511"/>
+        <location filename="../../KvantumManager.cpp" line="515"/>
         <source>This theme is also installed as root in:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="513"/>
+        <location filename="../../KvantumManager.cpp" line="517"/>
         <source>The user installation will take priority.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="527"/>
+        <location filename="../../KvantumManager.cpp" line="531"/>
         <source>This theme is also installed as user in:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="529"/>
+        <location filename="../../KvantumManager.cpp" line="533"/>
         <source>This installation will take priority.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="629"/>
+        <location filename="../../KvantumManager.cpp" line="633"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="632"/>
+        <location filename="../../KvantumManager.cpp" line="636"/>
         <source>It could not be restored unless you have a copy of it.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1094"/>
-        <location filename="../../KvantumManager.cpp" line="1113"/>
+        <location filename="../../KvantumManager.cpp" line="1098"/>
+        <location filename="../../KvantumManager.cpp" line="1117"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1109"/>
-        <location filename="../../KvantumManager.cpp" line="2231"/>
+        <location filename="../../KvantumManager.cpp" line="1113"/>
+        <location filename="../../KvantumManager.cpp" line="2235"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1448"/>
+        <location filename="../../KvantumManager.cpp" line="1452"/>
         <source>No description</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1912"/>
+        <location filename="../../KvantumManager.cpp" line="1916"/>
         <source>A copy of the root config is created.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1923"/>
+        <location filename="../../KvantumManager.cpp" line="1927"/>
         <source>A copy was already created.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2217"/>
+        <location filename="../../KvantumManager.cpp" line="2221"/>
         <source>Configuration saved.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2324"/>
+        <location filename="../../KvantumManager.cpp" line="2328"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2327"/>
+        <location filename="../../KvantumManager.cpp" line="2331"/>
         <source>You will lose the changes you might have made.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2362"/>
+        <location filename="../../KvantumManager.cpp" line="2366"/>
         <source>Restored the rool default settings of %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2363"/>
+        <location filename="../../KvantumManager.cpp" line="2367"/>
         <source>the default theme</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2466"/>
+        <location filename="../../KvantumManager.cpp" line="2470"/>
         <source>About Kvantum Manager</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2469"/>
-        <source>A tool for intsalling, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
+        <location filename="../../KvantumManager.cpp" line="2473"/>
+        <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2470"/>
+        <location filename="../../KvantumManager.cpp" line="2474"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation></translation>
     </message>
@@ -1517,19 +1428,19 @@ or update its preview.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="379"/>
+        <location filename="../../KvantumManager.cpp" line="383"/>
         <source>This directory cannot be removed:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="386"/>
+        <location filename="../../KvantumManager.cpp" line="390"/>
         <source>You might want to investigate the cause.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="785"/>
-        <location filename="../../KvantumManager.cpp" line="1852"/>
-        <location filename="../../KvantumManager.cpp" line="2226"/>
+        <location filename="../../KvantumManager.cpp" line="789"/>
+        <location filename="../../KvantumManager.cpp" line="1856"/>
+        <location filename="../../KvantumManager.cpp" line="2230"/>
         <source>Active theme:</source>
         <translation></translation>
     </message>
@@ -1549,7 +1460,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="131"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation>Silakan pasang terlebih dahulu Plugin Tampilan Kvantum!</translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

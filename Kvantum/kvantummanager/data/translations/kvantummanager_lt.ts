@@ -963,7 +963,11 @@ Jei tai išjungta, žiūrėkite:
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation></translation>
+        <translation>Pagal numatymą, sukimosi indikatoriai yra atvaizduojami ant
+gretimų mygtukų.
+
+Tai pažymėjus, sukimosi indikatoriai sukimosi eilutėje bus
+apkeisti vietomis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1764"/>
@@ -978,7 +982,7 @@ Pagal numatymą, jungtiniai iškylantieji langai neuždengia jungtinių langeli�
     <message>
         <location filename="../../kvantummanager.ui" line="1790"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation></translation>
+        <translation>Kvantum, pagal numatymą, kortelės yra centruojamos.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1537"/>
@@ -1065,7 +1069,11 @@ tuo tarpu 0 reiškia jokios delsos.</translation>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation>Atvaizduoti slankjuostes rodinio rėmelių viduje?
+
+Pagal numatymą, slankjuostės yra atvaizduojamos rodinio rėmelių išorėje.
+
+Jei išjungta, žiūrėkite Komponavimas ir bendra išvaizda → Laikinosios slankjuostės!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
@@ -1084,33 +1092,38 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation></translation>
+        <translation>Pagal numatymą, etiketė yra ant rėmelio
+ir rėmelis yra apkerpamas, kad rodytų etiketę.
+
+Tai pažymėjus, etiketė bus išdėstyta virš rėmelio,
+kad rėmelis nebūtų apkerpamas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1557"/>
         <source>Group-box label above frame</source>
-        <translation></translation>
+        <translation>Valdiklių grupės etiketė virš rėmelio</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1571"/>
         <source>Fill rubber-band rectangles</source>
-        <translation></translation>
+        <translation>Užpildyti guminių juostelių stačiakampius</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1578"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation></translation>
+        <translation>Pagal numatymą, pelės sekimas
+meniu juostoms yra įjungtas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1582"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pagal numatymą, pelės sekimas meniu juostoms yra įjungtas, t.y. spustelėjus ant meniu juostos elemento ir parodžius jo meniu, o tuomet perkėlus rodyklę į kitą meniu juostą, jos turinys bus rodomas net ir nespustelėjus pelės mygtuką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1585"/>
         <source>Mouse tracking for menubars</source>
-        <translation></translation>
+        <translation>Pelės sekimas meniu juostose</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1596"/>
@@ -1147,33 +1160,35 @@ tarp įrankių juostos skirtukų.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1627"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation></translation>
+        <translation>Jei nepažymėta, spartieji klavišai iš viso nebus pabraukiami.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1630"/>
         <source>Underline shortcuts with Alt</source>
-        <translation></translation>
+        <translation>Pabraukti sparčiuosius klavišus, naudojant Alt klavišą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Inline spin indicators</source>
-        <translation></translation>
+        <translation>Įterpti sukimosi indikatoriai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation></translation>
+        <translation>Atvaizduoti visą redaguojamą jungtinį langelį
+kaip redaguojamą eilutę su rodykle (ir piktograma,
+jeigu ji yra)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Atvaizduoti visą redaguojamą jungtinį langelį kaip redaguojamą eilutę su rodykle (ir piktograma, jeigu ji yra)?&lt;/p&gt;&lt;p&gt;Pagal numatymą, jungtinį langelį sudaro redaguojama eilutė, vienoje pusėje šone mygtukas su rodykle, o kitoje pusėje mygtukas su piktograma.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1712"/>
         <source>Editable combo as line-edit</source>
-        <translation></translation>
+        <translation>Redaguojamas jungtinis langelis kaip redaguojama eilutė</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1727"/>
@@ -1183,7 +1198,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1740"/>
         <source>Vertical spin indicators</source>
-        <translation></translation>
+        <translation>Vertikalūs sukimosi indikatoriai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1747"/>
@@ -1192,7 +1207,11 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation></translation>
+        <translation>Tai įjungus ir pažymėjus, Kvantum bandys gerbti
+kai kuriuos esamos darbalaukio aplinkos nustatymus.
+
+Šis žymimasis langelis gali išjungti kai kurias parinktis.
+Jeigu jums reikia tų parinkčių, nuimkite žymėjimą nuo šio langelio!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
@@ -1233,12 +1252,16 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation></translation>
+        <translation>Atvaizduojant jungtinius iškylančiuosius langus kaip meniu,
+šalia kiekvieno įrašo yra žymimasis langelis
+(nors Kvantum juos atvaizduoja kaip akutes).
+
+Ši parinktis juos paslėps.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1783"/>
         <source>Non-checkable combo menu</source>
-        <translation></translation>
+        <translation>Nežymimieji jungtiniai meniu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1827"/>
@@ -1248,7 +1271,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1833"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;Čia, jūs galėtumėte priskirti temas tam tikroms programoms.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Kiekvienai temai galite pridėti sąrašą su kableliais atskirtais vykdomaisiais tų programų, kurios vietoj aktyvios temos, turėtų naudoti šią temą. Atlikę tai visoms pasirinktoms temoms, įrašykite rezultatą, spusteldami mygtuką &lt;i&gt;Įrašyti&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1868"/>
@@ -1278,7 +1301,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1954"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Įrašykite esamą programų, su jų atitinkamomis temomis, sąrašą!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1984"/>
@@ -1316,7 +1339,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2047"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Spustelėkite ant šio mygtuko, o tuomet spustelėkite ant grafinės naudotojo sąsajos elemento, kuris turi &amp;quot;Kas tai yra&amp;quot; paaiškinimą, kad sužinotumėte ką tas elementas daro.&lt;/p&gt;&lt;p&gt;Taip pat yra ir įprasti paaiškinimai, tačiau šie paaiškinimai neišnyks tol, kol nespustelėsite kur nors kitur.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2050"/>
@@ -1432,12 +1455,12 @@ arba atnaujinti jos peržiūrą.</translation>
         <location filename="../../KvantumManager.cpp" line="404"/>
         <location filename="../../KvantumManager.cpp" line="415"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation></translation>
+        <translation>Tai nėra Kvantum tema, kurią galima įdiegti!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="405"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation></translation>
+        <translation>Galimų įdiegti temų pavadinimai neturėtų būti &quot;Default&quot;.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="406"/>
@@ -1449,7 +1472,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="416"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation></translation>
+        <translation>Galimų įdiegti temų pavadinimuose neturėtų būti &quot;#&quot; simbolio.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="426"/>
@@ -1484,22 +1507,22 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="515"/>
         <source>This theme is also installed as root in:</source>
-        <translation></translation>
+        <translation>Ši tema taip pat yra įdiegta kaip šaknis ties:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="517"/>
         <source>The user installation will take priority.</source>
-        <translation></translation>
+        <translation>Pirmenybė bus teikiama naudotojo įdiegimui.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="531"/>
         <source>This theme is also installed as user in:</source>
-        <translation></translation>
+        <translation>Ši tema taip pat yra įdiegta kaip naudotojas ties:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="533"/>
         <source>This installation will take priority.</source>
-        <translation></translation>
+        <translation>Pirmenybė bus teikiama šiam įdiegimui.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="633"/>
@@ -1509,7 +1532,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="636"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation></translation>
+        <translation>Jos negalima bus atkurti nebent turėsite jos kopiją.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1098"/>
@@ -1531,7 +1554,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="1916"/>
         <source>A copy of the root config is created.</source>
-        <translation></translation>
+        <translation>Yra sukurta šaknies konfigūcijos kopija.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1927"/>
@@ -1546,7 +1569,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2328"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation></translation>
+        <translation>Ar norite sugrąžinti į numatytuosius (šaknies) šios temos nustatymus?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2331"/>
@@ -1556,7 +1579,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2366"/>
         <source>Restored the rool default settings of %1</source>
-        <translation></translation>
+        <translation>Atkurti numatytieji %1 šaknies nustatymai</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2367"/>
