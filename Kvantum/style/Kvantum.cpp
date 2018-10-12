@@ -4474,7 +4474,28 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (!(option->state & State_Enabled))
         status = "disabled";
       else if ((option->state & State_Selected) && hasActiveIndicator_)
+      {
+        if (option->state & State_Sunken)
+        {
+          if (renderIndicator(painter, option->rect, fspec, dspec,
+                              dspec.element+"-close-toggledPressed",
+                              option->direction))
+          {
+            break;
+          }
+        }
+        else if (option->state & State_MouseOver)
+        {
+          if (renderIndicator(painter, option->rect, fspec, dspec,
+                              dspec.element+"-close-toggledFocused" + (isWidgetInactive(widget)
+                                                                       ? "-inactive" : QString()),
+                              option->direction))
+          {
+            break;
+          }
+        }
         status = "toggled";
+      }
       else
       {
         status = option->state & State_Sunken ? "pressed" :

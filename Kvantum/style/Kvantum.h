@@ -235,7 +235,7 @@ class Style : public QCommonStyle {
                        ) const;
 
     /* Generic method that draws an indicator. */
-    void renderIndicator(QPainter *painter,
+    bool renderIndicator(QPainter *painter,
                          const QRect &bounds, // frame bounds
                          const frame_spec &fspec, // frame spec
                          const indicator_spec &dspec, // indicator spec

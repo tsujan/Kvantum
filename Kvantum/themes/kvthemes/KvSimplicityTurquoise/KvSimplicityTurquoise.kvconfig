@@ -21,6 +21,7 @@ slider_width=6
 slider_handle_width=18
 slider_handle_length=18
 center_toolbar_handle=true
+toolbar_interior_spacing=1
 check_size=16
 textless_progressbar=false
 progressbar_thickness=8
@@ -238,6 +239,7 @@ text.margin.top=3
 text.margin.bottom=3
 frame.element=button
 indicator.element=tab
+indicator.size=14
 text.normal.color=black
 text.focus.color=#005161
 min_width=4font
@@ -276,7 +278,7 @@ text.normal.color=white
 text.normal.inactive.color=#ffffffb4
 text.focus.color=#005161
 frame.top=0
-frame.bottom=5
+frame.bottom=4
 frame.expansion=0
 
 [Slider]

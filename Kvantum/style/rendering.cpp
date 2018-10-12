@@ -47,7 +47,7 @@ bool Style::renderElement(QPainter *painter,
                          ) const
 {
   if (element.isEmpty() || !bounds.isValid() || painter->opacity() == 0)
-    return false;
+    return true;
 
   QSvgRenderer *renderer = nullptr;
   QString _element(element);
@@ -824,7 +824,7 @@ bool Style::renderInterior(QPainter *painter,
                        ispec.px,ispec.py,usePixmap);
 }
 
-void Style::renderIndicator(QPainter *painter,
+bool Style::renderIndicator(QPainter *painter,
                             const QRect &bounds, // frame bounds
                             const frame_spec &fspec, // frame spec
                             const indicator_spec &dspec, // indicator spec
@@ -833,7 +833,7 @@ void Style::renderIndicator(QPainter *painter,
                             Qt::Alignment alignment,
                             int vOffset) const
 {
-  if (!bounds.isValid()) return;
+  if (!bounds.isValid()) return true;
   QRect interior = interiorRect(bounds,fspec);
   int s;
   if (!interior.isValid())
@@ -846,8 +846,8 @@ void Style::renderIndicator(QPainter *painter,
   if (interior.height() - s >= vOffset)
     interior.adjust(0,-vOffset,0,-vOffset);
 
-  renderElement(painter,element,
-                alignedRect(ld,alignment,QSize(s,s),interior));
+  return renderElement(painter,element,
+                       alignedRect(ld,alignment,QSize(s,s),interior));
 }
 
 void Style::renderLabel(
