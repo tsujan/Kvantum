@@ -345,16 +345,15 @@ void Style::polish(QWidget *widget)
             widget->setAttribute(Qt::WA_TranslucentBackground, false);
             break;
           }
-          if ((makeTranslucent
-               /* enable blurring for hard-coded translucency */
-               || (tspec_now.composite
-                   && (hspec_.blur_translucent
-                       /* let unusual tooltips with hard-coded translucency
-                          have shadow (like in KDE system settings) */
-                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
-                   && widget->testAttribute(Qt::WA_TranslucentBackground))))
+          if (makeTranslucent
+              /* enable blurring for hard-coded translucency */
+              || (tspec_now.composite
+                  && (hspec_.blur_translucent
+                      /* let unusual tooltips with hard-coded translucency
+                         have shadow (like in KDE system settings) */
+                      || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
+                  && widget->testAttribute(Qt::WA_TranslucentBackground)))
           {
-
             if (!widget->testAttribute(Qt::WA_TranslucentBackground))
             {
               widget->setAttribute(Qt::WA_TranslucentBackground);

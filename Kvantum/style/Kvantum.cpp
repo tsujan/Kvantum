@@ -9132,9 +9132,25 @@ void Style::drawControl(ControlElement element,
                               && !(option->state & State_On)
                               && !(option->state & State_Sunken)
                               && !(option->state & State_Selected)));
-            QColor ncol = getFromRGBA(lspec.normalColor);
+
+            /* get the color used for checking the contrast (normal color with auto-raise)*/
+            QColor ncol;
+            if (noPanel && (option->state & State_Enabled))
+            {
+              if (status.startsWith("normal"))
+                ncol = getFromRGBA(lspec.normalColor);
+              else if (status.startsWith("focused"))
+                ncol = getFromRGBA(lspec.focusColor);
+              else if (status.startsWith("pressed"))
+                ncol = getFromRGBA(lspec.pressColor);
+              else// if (status.startsWith("toggled"))
+                ncol = getFromRGBA(lspec.toggleColor);
+            }
+            else // auto-raise
+              ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
               ncol = QApplication::palette().color(QPalette::ButtonText);
+
             QWidget* menubar = nullptr;
             if (qobject_cast<QMenuBar*>(gp))
               menubar = gp;

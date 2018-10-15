@@ -951,15 +951,16 @@
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-pressed-topright" transform="translate(36)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-bottomleft" id="scrollbarslider-pressed-bottomleft" transform="translate(36)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-bottomright" id="scrollbarslider-pressed-bottomright" transform="translate(36)"/>
-<g style="fill:#d2d2d2;stroke:#000" id="dock-restore" transform="matrix(0.72048675,0.71886942,-0.72048675,0.71886942,722.57143,-18.574275)">
-<path d="m 173.7,636 3,3 -9.2,9.1 -9.2,-9.1 3,-3 6.2,6.1 z"/>
-<path d="m 173.7,666.6 3,-3 -9.2,-9.2 -9.2,9.2 3,3 6.2,-6.2 z"/>
-<path d="m 182.8,645.1 -3,-3 -9.2,9.2 9.2,9.1 3,-3 -6.2,-6.1 z"/>
-<path d="m 152.1,645.1 3,-3 9.2,9.2 -9.2,9.1 -3,-3 6.2,-6.1 z"/>
+<g id="dock-restore" transform="translate(-1)">
+<path style="opacity:0" d="m 358,554 h 32 v 32 h -32 z"/>
+<path style="opacity:.6;fill:#fff;color-interpolation-filters:linearRGB" d="m 368.75,559.75 15.5,15.5 v -15.5 z"/>
+<path style="opacity:.6;fill:#fff;color-interpolation-filters:linearRGB" d="m 379.25,580.25 -15.5,-15.5 v 15.5 z"/>
 </g>
-<g style="fill:#d2d2d2" id="dock-close" transform="translate(-13.506744,-981.49316)">
-<rect width="32" x="422.50674" y="1535.4932" height="32" style="opacity:0;fill-rule:evenodd"/>
-<path style="stroke:#000;stroke-width:1.649" d="m 444.6943,1540.5245 -6.1875,6.2187 -6.1875,-6.1875 -4.7812,4.75 6.2188,6.1875 -6.1875,6.1875 4.75,4.7813 6.1875,-6.2188 6.1875,6.1875 4.7812,-4.75 -6.2188,-6.1875 6.1875,-6.1875 z"/>
+<g style="fill-rule:evenodd" id="dock-close" transform="translate(190,170)">
+<path style="opacity:0" d="m 209,384 h 32 v 32 h -32 z"/>
+<g transform="matrix(0.5,0,0,0.5,112.5,170)">
+<path style="opacity:.65;fill:#fff" d="m 225,391.5 a 8.5,8.5 0 0 0 -8.5,8.5 8.5,8.5 0 0 0 8.5,8.5 8.5,8.5 0 0 0 8.5,-8.5 8.5,8.5 0 0 0 -8.5,-8.5 z m 0,4 a 4.5,4.5 0 0 1 4.5,4.5 4.5,4.5 0 0 1 -4.5,4.5 4.5,4.5 0 0 1 -4.5,-4.5 4.5,4.5 0 0 1 4.5,-4.5 z" transform="matrix(2,0,0,2,-225,-340)"/>
+</g>
 </g>
 <circle cx="291" cy="659" style="paint-order:normal;fill:#f35059;fill-rule:evenodd" id="mdi-close-normal" r="16"/>
 <circle cx="325" cy="659" style="paint-order:normal;fill:#f8c636;fill-rule:evenodd" r="16" id="mdi-minimize-normal"/>
