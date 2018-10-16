@@ -7,12 +7,12 @@
         <location filename="../../kvantummanager.ui" line="12"/>
         <location filename="../../KvantumManager.cpp" line="2498"/>
         <source>Kvantum Manager</source>
-        <translation></translation>
+        <translation>Gerenciador Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation></translation>
+        <translation>Instalar/Atualizar Temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
