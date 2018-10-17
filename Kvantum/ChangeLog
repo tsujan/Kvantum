@@ -18,7 +18,7 @@ V0.10.9
  * Optional separators for toggled buttons in grouped toolbar buttons.
  * Fixed an old bug in text shadows.
  * Added a key for spreading menuitems across left and right menu frames.
- * Added KvMojave.
+ * Added KvMojave and KvMojaveLight.
  * No toggled state for progress bars.
  * Made the X11 drag independent of X11 by using the QWindow method "setFramePosition()". The reason was a new bug in X11 codes of Qt5.11, which had damaged the X11 drag.
  * Support non-integer scale factors with HDPI.

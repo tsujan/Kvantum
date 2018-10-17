@@ -1040,14 +1040,14 @@ bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) c
 {
   QString container;
   if (getStylableToolbarContainer(w))
-    container = QLatin1String("Toolbar");
+    container = "Toolbar";
   else if (QWidget *p = getParent(w,1))
   {
     /* check parent with menubar FIXME: isn't the container approach needed here? */
     if (qobject_cast<QMenuBar*>(p)
         || qobject_cast<QMenuBar*>(getParent(p,1)))
     {
-      container = QLatin1String("MenuBar");
+      container = "MenuBar";
     }
     else if (qobject_cast<QAbstractItemView*>(p)
              || qobject_cast<QAbstractItemView*>(getParent(p,1))

@@ -99,7 +99,8 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   if (!widget->isVisible()) return QRegion();
 
   QList<int> r;
-  if (qobject_cast<QMenu*>(widget)
+  if ((qobject_cast<QMenu*>(widget)
+       && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not a detached menu
       || widget->inherits("QComboBoxPrivateContainer"))
   {
     r = menuShadow_;
