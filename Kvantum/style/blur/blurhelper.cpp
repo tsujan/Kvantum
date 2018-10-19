@@ -26,7 +26,9 @@
 #include <QApplication> // for hdpi
 #endif
 
-#if defined Q_WS_X11 || defined Q_OS_LINUX
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+#include <KWindowEffects>
+#elif defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -36,8 +38,10 @@
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
 {
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
+#endif
 #endif
 
   if (!menuS.isEmpty() && menuS.size() >= 4)
@@ -134,13 +138,16 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 /*************************/
 void BlurHelper::update (QWidget* widget) const
 {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
   if (!(widget->testAttribute (Qt::WA_WState_Created) || widget->internalWinId()))
     return;
 
   const QRegion region (blurRegion (widget));
   if (region.isEmpty())
     clear (widget);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+  else
+    KWindowEffects::enableBlurBehind (widget->winId(), true, region);
+#elif defined Q_WS_X11 || defined Q_OS_LINUX
   else
   {
     QVector<unsigned long> data;
@@ -162,9 +169,11 @@ void BlurHelper::update (QWidget* widget) const
 /*************************/
 void BlurHelper::clear (QWidget* widget) const
 {
-#if defined Q_WS_X11 || defined Q_OS_LINUX
   // WARNING never use winId()
   if (widget->internalWinId())
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    KWindowEffects::enableBlurBehind (widget->winId(), false);
+#elif defined Q_WS_X11 || defined Q_OS_LINUX
     XDeleteProperty (QX11Info::display(), widget->internalWinId(), atom_blur_);
 #else
   Q_UNUSED (widget);

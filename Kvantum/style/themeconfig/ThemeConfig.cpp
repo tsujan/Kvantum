@@ -561,6 +561,9 @@ theme_spec ThemeConfig::getCompositeSpec()
     v = getValue("General","composite");
     r.composite = v.toBool();
   }
+#elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+  v = getValue("General","composite");
+  r.composite = v.toBool();
 #endif
 
   /* no blurring or window translucency without compositing */
@@ -581,7 +584,11 @@ theme_spec ThemeConfig::getCompositeSpec()
         r.translucent_windows = v.toBool();
 
       /* no window blurring without window translucency */
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+      if (r.translucent_windows)
+#else
       if (isX11_ && r.translucent_windows)
+#endif
       {
         v = getValue("General","blurring");
         if (v.isValid())
@@ -590,8 +597,10 @@ theme_spec ThemeConfig::getCompositeSpec()
     }
 
     /* "blurring" is sufficient but not necessary for "popup_blurring" */
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
     if (isX11_)
     {
+#endif
       if (r.blurring)
         r.popup_blurring = true;
       else
@@ -605,7 +614,9 @@ theme_spec ThemeConfig::getCompositeSpec()
             r.popup_blurring = v.toBool();
         }
       }
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
     }
+#endif
   }
 
   /* no menu/tooltip shadow without compositing */
@@ -1053,8 +1064,10 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (v.isValid())
     r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
   if (isX11_)
   {
+#endif
     v = getValue("Hacks","blur_translucent");
     if (v.isValid())
       r.blur_translucent = v.toBool();
@@ -1063,7 +1076,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
       v = getValue("Hacks","blur_konsole");
       r.blur_translucent = v.toBool();
     }
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
   }
+#endif
 
   v = getValue("Hacks","opaque_colors");
   if (v.isValid())

@@ -103,9 +103,11 @@ class BlurHelper: public QObject
     QList<int> menuShadow_;
     QList<int> tooltipShadow_;
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
 #if defined Q_WS_X11 || defined Q_OS_LINUX
     /* The required atom. */
     Atom atom_blur_;
+#endif
 #endif
 };
 }

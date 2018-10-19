@@ -20,6 +20,9 @@ HEADERS += themeconfig/specs.h \
            shortcuthandler.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
+  greaterThan(QT_MINOR_VERSION, 10) {
+    QT += KWindowSystem
+  }
   SOURCES += Kvantum.cpp \
              eventFiltering.cpp \
              polishing.cpp \

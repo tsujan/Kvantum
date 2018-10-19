@@ -4,6 +4,9 @@ if(NOT ENABLE_QT4)
   find_package (Qt5Core REQUIRED)
   find_package (Qt5Svg REQUIRED)
   find_package (Qt5X11Extras REQUIRED)
+  if((Qt5Widgets_VERSION GREATER 5.11.0) OR (Qt5Widgets_VERSION EQUAL 5.11.0))
+    find_package(KF5WindowSystem REQUIRED)
+  endif()
 else()
   find_package(Qt4 4.8.7 REQUIRED)
 
@@ -80,17 +83,27 @@ else()
 endif()
 
 if(NOT ENABLE_QT4)
- target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                               ${Qt5Gui_LIBRARIES}
-                               ${Qt5Widgets_LIBRARIES}
-                               ${Qt5Svg_LIBRARIES}
-                               ${Qt5X11Extras_LIBRARIES}
-                               ${X11_LIBRARIES})
+  if((Qt5Widgets_VERSION GREATER 5.11.0) OR (Qt5Widgets_VERSION EQUAL 5.11.0))
+    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                  ${Qt5Gui_LIBRARIES}
+                                  ${Qt5Widgets_LIBRARIES}
+                                  ${Qt5Svg_LIBRARIES}
+                                  ${Qt5X11Extras_LIBRARIES}
+                                  ${X11_LIBRARIES}
+                                  KF5::WindowSystem)
+  else()
+    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                  ${Qt5Gui_LIBRARIES}
+                                  ${Qt5Widgets_LIBRARIES}
+                                  ${Qt5Svg_LIBRARIES}
+                                  ${Qt5X11Extras_LIBRARIES}
+                                  ${X11_LIBRARIES})
+  endif()
 else()
- target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}
-                               ${QT_QTGUI_LIBRARY}
-                               ${QT_QTSVG_LIBRARY}
-                               ${X11_LIBRARIES})
+  target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}
+                                ${QT_QTGUI_LIBRARY}
+                                ${QT_QTSVG_LIBRARY}
+                                ${X11_LIBRARIES})
 endif()
 
 install(TARGETS kvantum LIBRARY DESTINATION ${KVANTUM_STYLE_DIR})

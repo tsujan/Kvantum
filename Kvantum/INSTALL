@@ -6,7 +6,7 @@ IF YOU HAVE Arch OR ONE OF ITS DERIVATIVES, YOU COULD EASILY INSTALL Kvantum FRO
 
 	sudo pacman -S kvantum-qt5
 
-OR YOU COULD INSTALL THE LATEST git PACKAGE FROM THE Arch-User-Repository BY USING THE AUR HELPER OF YOUR CHOICE, FOR EXAMPLE:
+OR, PREFERABLY, YOU COULD INSTALL THE LATEST git PACKAGE FROM THE Arch-User-Repository BY USING THE AUR HELPER OF YOUR CHOICE, FOR EXAMPLE:
 
 	yaourt -S kvantum-qt5-git
 ----------
@@ -16,7 +16,7 @@ First install X11 and Qt development packages. In Debian-based systems, they are
  * g++
  * libx11-dev and libxext-dev (for X11)
  * qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
- * libqt4-dev (for Qt4 and if you want Qt4 support)
+ * libkf5windowsystem-dev (required with Qt >= 5.11)
  * qttools5-dev-tools (for localization if you need it)
 
 In Arch-based systems, the packages are:
@@ -24,7 +24,7 @@ In Arch-based systems, the packages are:
  * gcc (or gcc-multilib for multilib systems)
  * libx11 and libxext (for X11)
  * qt5-base, qt5-svg and qt5-x11extras (for Qt5)
- * qt4 (for Qt4 and if you want Qt4 support)
+ * kwindowsystem (required with Qt >= 5.11)
  * qt5-tools (for localization if you need it)
 
 In Red Hat based systems like Fedora:
@@ -36,6 +36,7 @@ In Red Hat based systems like Fedora:
  * qt5-qtbase-devel
  * qt5-qtsvg-devel
  * qt5-qttools-devel
+ * kf5-kwindowsystem-devel (required with Qt >= 5.11)
 
 And, finally, in OpenSUSE:
 
@@ -46,6 +47,7 @@ And, finally, in OpenSUSE:
  * libqt5-qtbase-devel
  * libqt5-qtsvg-devel
  * libqt5-qttools-devel
+ * kwindowsystem-devel (required with Qt >= 5.11)
 
 There are two ways to compile Kvantum: with qmake or with cmake.
 
@@ -55,20 +57,14 @@ Just open a terminal inside this folder and issue the following command:
 
 	qmake && make
 
-You might need to put the full path of qmake in the above command (especially for a second compilation against your non-default Qt installation). For example, in 64-bit Debian, it is /usr/lib/x86_64-linux-gnu/qt4/bin/qmake for Qt4 and /usr/lib/x86_64-linux-gnu/qt5/bin/qmake for Qt5.
+With some distros, you might need to put the full path of qmake in the above command.
 
 With cmake
 ==========
-Open a terminal inside this folder and issue the following commands for Qt5:
+Open a terminal inside this folder and issue the following commands:
 
 	mkdir build && cd build
 	cmake ..
-	make
-
-For Qt4, just add the option "-DENABLE_QT4=ON" to the cmake command in this way:
-
-	mkdir build && cd build
-	cmake .. -DENABLE_QT4=ON
 	make
 
 If you want to install Kvantum in a nonstandard path (which is not recommended), you could add the option "-DCMAKE_INSTALL_PREFIX=YOUR_SELECTED_PATH" to the cmake command.
@@ -77,21 +73,17 @@ If you want to install Kvantum in a nonstandard path (which is not recommended),
 *   Installation   *
 ********************
 
-Then, use this commands for installation:
+Then, use this command for installation:
 
 	sudo make install
 
-If you have compiled Kvantum with qmake, the following command cleans the source completely and makes it ready for another compilation (against another version of Qt, for example):
+If you have compiled Kvantum with qmake, the following command cleans the source completely and makes it ready for another compilation:
 
 	make distclean
 
 If you have used cmake for compilation, to compile Kvantum again, first remove the contents of the build directory.
 
-Installation for your default Qt version (Qt5) is necessary but you could compile and install Kvantum twice, once for Qt5 and then for Qt4.
-
-Kvantum Manager is based on Qt5 and cannot be compiled against Qt4.
-
-The main reason for including a cmake build is that a few distros (especially Fedora) may have problem with qmake.
+The main reason for including a cmake build was that a few distros (especially Fedora) had problem with qmake.
 
 *************
 *   Usage   *
@@ -109,26 +101,22 @@ In LXQt:
 ========
 Just select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
 
-In case you use Compton as the X compositor, be sure to disable Compton's shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
+In case you use Compton as the X compositor (not recommended), be sure to disable Compton's shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
 
 shadow-exclude = [ "argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
 blur-background-exclude = [ "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
 
-In Other DEs and for Qt4:
-=========================
-Select Kvantum from 'qtconfig-qt4 > Appearance > Select GUI Style' and then, save the result with 'File > Save'.
-
-In Other DEs and for Qt5:
-=========================
-Unfortunately, there is no qtconfig for Qt5. In environments that do not have a Qt5 configuration utility, you could use this command to run a Qt5 application APP:
+In Other DEs:
+=============
+In desktop environments that do not have a Qt5 configuration utility, you could use this command to run a Qt5 application APP:
 
 	APP -style kvantum
 
-Or, better, add this to your '~/.profile' or '~/.bashrc':
+Or, better, set the environment variable "QT_STYLE_OVERRIDE" to "kvantum". For example, you could add this line to your '~/.profile' or '~/.bashrc':
 
 	export QT_STYLE_OVERRIDE=kvantum
 
-If the display manager you use does not source '~/.profile', you could probably add the above line to '~/.xsessionrc'.
+If the display manager you use does not source '~/.profile', you could probably add the above line to '~/.xsessionrc'. The last resort is `/etc/environment` but most desktop environments have GUI tools for setting environment variables.
 
 **************************
 *   Using Other Themes   *
@@ -153,7 +141,7 @@ Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
 
 Please see "Theme-Making.pdf" for more information on theme installation paths and their priorities.
 
-The default Qt5 installation adds several root themes, that can be selected by using Kvantum Manager. Their corresponding KDE color schemes and Openbox themes are also installed.
+The default Qt5 installation adds several root themes, that can be selected by using Kvantum Manager. Their corresponding KDE color schemes are also installed.
 
 ***********
 *   GTK   *

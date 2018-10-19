@@ -361,7 +361,7 @@ void Style::polish(QWidget *widget)
             }
 
             /* enable blurring */
-            if (tspec_.isX11 && (!makeTranslucent || tspec_now.blurring))
+            if (!makeTranslucent || tspec_now.blurring)
             {
               if (!blurHelper_)
               {
@@ -846,8 +846,7 @@ void Style::polish(QWidget *widget)
       translucentWidgets_.insert(widget);
       connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
 
-      if (tspec_.isX11
-          && (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu))
+      if (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu)
       {
         if (!blurHelper_ && tspec_now.popup_blurring)
         {
