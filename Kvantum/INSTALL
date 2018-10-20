@@ -48,6 +48,13 @@ And, finally, in OpenSUSE:
  * libqt5-qtsvg-devel
  * libqt5-qttools-devel
  * kwindowsystem-devel (required with Qt >= 5.11)
+----------
+Tumbleweed users can also install Kvantum in this way (thanks to trmdi at GitHub):
+
+	zypper addrepo https://download.opensuse.org/repositories/home:trmdi/openSUSE_Tumbleweed/home:trmdi.repo
+	zypper refresh
+	zypper install kvantum
+----------
 
 There are two ways to compile Kvantum: with qmake or with cmake.
 
