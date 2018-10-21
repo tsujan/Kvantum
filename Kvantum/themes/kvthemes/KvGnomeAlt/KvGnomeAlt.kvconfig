@@ -228,9 +228,10 @@ interior.element=button
 text.margin.left=8
 text.margin.right=8
 text.margin.top=2
-text.margin.bottom=3
+text.margin.bottom=2
 frame.element=button
 indicator.element=tab
+indicator.size=11
 frame.top=3
 frame.bottom=5
 frame.left=3
@@ -240,7 +241,6 @@ text.focus.color=#000000b4
 text.toggle.color=black
 text.bold=true
 min_width=4font
-min_height=2.3font
 
 [TabFrame]
 inherits=PanelButtonCommand

@@ -19,7 +19,7 @@
    width="450"
    version="1.0">
   <sodipodi:namedview
-     inkscape:window-height="1052"
+     inkscape:window-height="1047"
      inkscape:window-width="1884"
      inkscape:pageshadow="2"
      inkscape:pageopacity="1"
@@ -31,9 +31,9 @@
      pagecolor="#3e3e3e"
      id="base"
      showgrid="true"
-     inkscape:zoom="16"
-     inkscape:cx="171.98926"
-     inkscape:cy="-437.58051"
+     inkscape:zoom="0.70710681"
+     inkscape:cx="47.761466"
+     inkscape:cy="814.41461"
      inkscape:window-x="36"
      inkscape:window-y="0"
      inkscape:current-layer="svg2"
@@ -5662,50 +5662,9 @@
      id="layer1"
      transform="translate(-1473,31.195767)" />
   <g
-     style="display:inline"
-     id="layer2"
-     transform="translate(-1473,31.195767)" />
-  <g
      style="display:none"
      id="g2424"
      transform="translate(956.061,-1448.6838)" />
-  <g
-     style="display:inline"
-     id="g2426"
-     transform="translate(956.061,-1448.6838)" />
-  <g
-     id="g3429"
-     transform="translate(1002.0388,-479.82101)" />
-  <g
-     id="g19758"
-     transform="translate(2788.3293,-96.362938)" />
-  <g
-     id="g3935"
-     transform="translate(3893.1545,-974.63246)" />
-  <g
-     id="g8459"
-     transform="translate(1495.2848,-989.97966)" />
-  <g
-     id="g28391"
-     transform="translate(144.4673,338.63215)" />
-  <g
-     id="g28393"
-     transform="translate(1249.2925,-539.63721)" />
-  <g
-     id="g28395"
-     transform="translate(-1148.5772,-554.98441)" />
-  <g
-     id="g6598"
-     transform="translate(2290.9673,330.63215)" />
-  <g
-     id="g6640"
-     transform="translate(3395.7925,-547.63721)" />
-  <g
-     id="g6716"
-     transform="translate(997.9228,-562.98444)" />
-  <g
-     id="g6850"
-     transform="matrix(1,0,0,-1,-173,791.58915)" />
   <text
      style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;line-height:0%;font-family:'Gill Sans';text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
      xml:space="preserve"
@@ -7270,27 +7229,12 @@
        d="m 102.5,27.362183 h 30 v 11 h -30 z"
        id="rect8344" />
   </g>
-  <g
+  <path
+     inkscape:connector-curvature="0"
+     d="m 336.30204,1120.0143 4.58422,4.5955 -4.29513,4.2912 -4.58422,-4.5956 -4.61307,4.6088 -4.30887,-4.3195 4.61307,-4.6088 -4.58422,-4.5956 4.29513,-4.2911 4.58422,4.5955 4.61307,-4.6088 4.3089,4.3196 z"
      id="tab-close-normal"
-     transform="matrix(0.26434829,0,0,0.26434829,311.65805,1098.021)"
-     inkscape:label="#g8021">
-    <g
-       id="layer1-2" />
-    <g
-       id="g1879"
-       transform="translate(172.5387,-33.08264)" />
-    <g
-       id="g1463"
-       transform="translate(150)" />
-    <g
-       id="g1506"
-       transform="translate(322.5387,-33.08264)" />
-    <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;font-family:'Bitstream Vera Sans';writing-mode:lr-tb;text-anchor:start;fill:#323232;fill-opacity:1;stroke:#ffffff;stroke-width:5.99725533;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="text1928"
-       d="M 114.8,62.047533 96.77713,80.055424 114.68719,98.011545 97.906561,114.77831 79.996499,96.822195 61.97372,114.83008 45.139395,97.952473 63.162175,79.944579 45.252113,61.988459 62.032743,45.221687 79.942805,63.177808 97.965584,45.169916 114.8,62.047533"
-       inkscape:connector-curvature="0" />
-  </g>
+     style="fill:#323232;fill-opacity:1;stroke:#ffffff;stroke-width:1.53496754;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     inkscape:label="#text1928" />
   <text
      xml:space="preserve"
      style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
@@ -9278,69 +9222,24 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
   </g>
-  <g
-     inkscape:label="#g8021"
-     transform="matrix(0.26434829,0,0,0.26434829,368.06716,1099.6452)"
-     id="tab-close-pressed">
-    <g
-       id="g8051" />
-    <g
-       transform="translate(172.5387,-33.08264)"
-       id="g8053" />
-    <g
-       transform="translate(150)"
-       id="g8055" />
-    <g
-       transform="translate(322.5387,-33.08264)"
-       id="g8057" />
-    <path
-       inkscape:connector-curvature="0"
-       d="M 120.79836,57.501863 101.22396,77.060195 120.67594,96.562301 102.45063,114.77265 82.998641,95.27055 63.424233,114.82888 45.140598,96.498143 64.715006,76.939807 45.26302,57.437702 63.488338,39.227346 82.940324,58.729452 102.51473,39.171118 120.79836,57.501863"
-       id="path8064"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;font-family:'Bitstream Vera Sans';writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none" />
-  </g>
-  <g
-     inkscape:label="#g8021"
-     transform="matrix(0.26434829,0,0,0.26434829,338.86016,1098.8521)"
-     id="tab-close-focused">
-    <g
-       id="g8044" />
-    <g
-       transform="translate(172.5387,-33.08264)"
-       id="g8046" />
-    <g
-       transform="translate(150)"
-       id="g8048" />
-    <g
-       transform="translate(322.5387,-33.08264)"
-       id="g8050" />
-    <path
-       inkscape:connector-curvature="0"
-       d="M 114.8,62.047533 96.77713,80.055424 114.68719,98.011545 97.906561,114.77831 79.996499,96.822195 61.97372,114.83008 45.139395,97.952473 63.162175,79.944579 45.252113,61.988459 62.032743,45.221687 79.942805,63.177808 97.965584,45.169916 114.8,62.047533"
-       id="path8054"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;font-family:'Bitstream Vera Sans';writing-mode:lr-tb;text-anchor:start;fill:#5a5a5a;fill-opacity:1;stroke:#ffffff;stroke-width:5.99725533;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-  </g>
-  <g
+  <path
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1"
+     id="tab-close-pressed"
+     d="m 400,1114.8457 -5.17446,5.1702 5.1421,5.1554 -4.81783,4.8139 -5.1421,-5.1554 -5.17446,5.1702 -4.83325,-4.8457 5.17446,-5.1702 -5.1421,-5.1553 4.81783,-4.8139 5.1421,5.1553 5.17446,-5.1702 4.83325,4.8457"
+     inkscape:connector-curvature="0"
+     inkscape:label="#path8064" />
+  <path
+     style="fill:#5a5a5a;fill-opacity:1;stroke:#ffffff;stroke-width:1.53496754;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="tab-close-focused"
+     d="m 363.30204,1121.0143 4.58422,4.5955 -4.29513,4.2912 -4.58422,-4.5956 -4.61307,4.6088 -4.30887,-4.3195 4.61307,-4.6088 -4.58422,-4.5956 4.29513,-4.2911 4.58422,4.5955 4.61307,-4.6088 4.3089,4.3196 z"
+     inkscape:connector-curvature="0"
+     inkscape:label="#path8054" />
+  <path
+     inkscape:connector-curvature="0"
+     d="m 430,1114.8457 -5.17446,5.1702 5.1421,5.1554 -4.81783,4.8139 -5.1421,-5.1554 -5.17446,5.1702 -4.83325,-4.8457 5.17446,-5.1702 -5.1421,-5.1553 4.81783,-4.8139 5.1421,5.1553 5.17446,-5.1702 4.83325,4.8457"
      id="tab-close-disabled"
-     transform="matrix(0.26434829,0,0,0.26434829,398.06716,1099.6452)"
-     inkscape:label="#g8021">
-    <g
-       id="g8699" />
-    <g
-       id="g8701"
-       transform="translate(172.5387,-33.08264)" />
-    <g
-       id="g8704"
-       transform="translate(150)" />
-    <g
-       id="g8706"
-       transform="translate(322.5387,-33.08264)" />
-    <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;font-family:'Bitstream Vera Sans';writing-mode:lr-tb;text-anchor:start;fill:#7b7b7b;fill-opacity:1;stroke:none"
-       id="path8708"
-       d="M 120.79836,57.501863 101.22396,77.060195 120.67594,96.562301 102.45063,114.77265 82.998641,95.27055 63.424233,114.82888 45.140598,96.498143 64.715006,76.939807 45.26302,57.437702 63.488338,39.227346 82.940324,58.729452 102.51473,39.171118 120.79836,57.501863"
-       inkscape:connector-curvature="0" />
-  </g>
+     style="fill:#7b7b7b;fill-opacity:1;stroke:none;stroke-width:1"
+     inkscape:label="#path8708" />
   <g
      style="fill-rule:evenodd;stroke:none"
      id="menuitem-tearoff-normal"

@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=The default Kvantum theme with some changes\n(including translucency support)
+comment=The default Kvantum theme with some changes\n(including translucency)
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -11,6 +11,7 @@ group_toolbar_buttons=false
 toolbar_interior_spacing=1
 composite=true
 menu_shadow_depth=6
+spread_menuitems=true
 tooltip_shadow_depth=6
 splitter_width=7
 scroll_width=12
@@ -18,7 +19,7 @@ scroll_min_extent=50
 slider_width=8
 slider_handle_width=16
 slider_handle_length=16
-blurring=false
+blurring=true
 button_icon_size=16
 double_click=false
 fill_rubberband=false
@@ -31,7 +32,7 @@ scroll_arrows=false
 small_icon_size=16
 toolbar_icon_size=16
 toolbutton_style=0
-translucent_windows=false
+translucent_windows=true
 vertical_spin_indicators=false
 inline_spin_indicators=true
 combo_as_lineedit=true
@@ -42,6 +43,8 @@ tree_branch_line=true
 transient_scrollbar=true
 dark_titlebar=true
 groupbox_top_label=true
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam
+reduce_window_opacity=4
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -71,7 +74,8 @@ force_size_grip=true
 iconless_menu=false
 iconless_pushbutton=false
 kcapacitybar_as_progressbar=true
-transparent_dolphin_view=false
+transparent_dolphin_view=true
+transparent_pcmanfm_view=true
 transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 transparent_menutitle=false
@@ -106,7 +110,7 @@ text.shadow.color=#000000
 text.shadow.alpha=255
 text.shadow.depth=1
 min_width=+0.19font
-min_height=+0.19font
+min_height=+0.1font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -290,7 +294,12 @@ frame=false
 
 [MenuItem]
 inherits=PanelButtonCommand
-frame=false
+frame=true
+frame.top=0
+frame.bottom=0
+frame.left=4
+frame.right=4
+frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
 text.focus.color=#4DA6FF

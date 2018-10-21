@@ -114,6 +114,9 @@ frame.expansion=8
 [PanelButtonTool]
 inherits=PanelButtonCommand
 
+[Dock]
+indicator.element=dock
+
 [DockTitle]
 text.bold=true
 
@@ -173,8 +176,8 @@ frame.left=5
 frame.right=5
 focusFrame=true
 text.press.color=black
-indicator.size=6
-min_height=+0.1font
+indicator.size=12
+min_height=+0.05font
 min_width=+0.12font
 frame.expansion=0
 
