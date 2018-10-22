@@ -876,13 +876,19 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation></translation>
+        <translation>Por padrão, os retângulos de queda para
+barras de ferramentas móveis e widgets
+do dock são vazios.
+
+Essa opção preenche retângulos de queda
+com a cor de destaque.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1592"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation></translation>
+        <translation>Se marcada, a barra de menus e a barra de ferramentas serão desenhadas
+como um todo pelo elemento SVG da barra de ferramentas quando estiverem adjacentes entre si.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1614"/>
@@ -890,7 +896,10 @@ the toolbar SVG element when they are adjacent to each another.</source>
 
 By default, the contents are shifted by 1px
 both horizontally and vertically.</source>
-        <translation></translation>
+        <translation>Deslocar o conteúdo dos botões quando pressionado?
+
+Por padrão, o conteúdo é deslocado por 1px
+na horizontal e na vertical.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1666"/>
@@ -900,7 +909,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Arrastar janelas de suas barras de menus, barras de ferramentas
+primárias ou em qualquer lugar possível (e não apenas de suas barras de título)?
+
+Se isso estiver desabilitado, consulte:
+Diversos → Respeitar a DE atual se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1637"/>
@@ -909,7 +922,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation></translation>
+        <translation>Terá efeito somente se o estilo
+não for definido pelo aplicativo em seu código.
+
+O Padrão é &quot;Seguir Estilo&quot;.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
@@ -918,7 +934,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation></translation>
+        <translation>Por padrão, os indicadores de rotação são desenhados
+como dois botões com setas ou sinais de mais/menos.
+
+Marcar isso integra os indicadores de rotação
+na edição de linha de rotação.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1719"/>
@@ -928,7 +948,12 @@ When unchecked, single-click is preferred.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Ativar itens de visualização sempre clicando duas vezes?
+
+Quando desmarcado, o clique único é o preferido.
+
+Se isso estiver desabilitado, consulte:
+Diversos → Respeitar a DE atual se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1734"/>
@@ -936,19 +961,24 @@ Miscellaneous → Respect current DE if possible</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation></translation>
+        <translation>Por padrão, os indicadores de rotação são desenhados nos botões adjacentes.
+
+Marcar isso coloca o indicador de rotação-máxima acima da
+rotação-mínima dentro da linha de edição de rotação.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1764"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation></translation>
+        <translation>Desenhar pop-ups de combinação como pop-ups de menu (ou seja, como no Gtk)?
+
+Por padrão, os pop-ups de combinação não cobrem a caixa de combinação.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1790"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation></translation>
+        <translation>No Kvantum, as abas são centralizadas por padrão.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1537"/>
@@ -956,12 +986,15 @@ By default, combo popups do not cover the combo box.</source>
 scroll arrows on their top and/or bottom?
 
 By default, all of their menu-items are shown.</source>
-        <translation></translation>
+        <translation>Os menus grandes devem ser roláveis e ter
+setas de rolagem na parte superior e/ou inferior?
+
+Por padrão, todos os seus itens de menu são exibidos.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <source>Tooltip delay:</source>
-        <translation></translation>
+        <translation>Atraso de dica de ferramenta:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="810"/>
@@ -971,7 +1004,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation></translation>
+        <translation>Uma lista separada por vírgula de executáveis,
+do qual as janelas não devem ser translúcidas.
+
+(Alguns aplicativos, como players de vídeo, podem ter
+problemas com a translucidez!)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1005"/>
@@ -980,7 +1017,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation></translation>
+        <translation>Fazer as barras de rolagem transitórias!
+
+Barras de rolagem transitórias aparecem no topo de
+suas exibições de rolagem apenas quando necessário.
+Eles geralmente não ocupam espaço extra.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1372"/>
@@ -990,12 +1031,16 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation></translation>
+        <translation>O atraso, em milissegundos, para aguardar antes de abrir um submenu.
+250 por padrão.
+
+-1 significa que não há pop-up (abrir com clique),
+enquanto 0 significa sem atraso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1379"/>
         <source>Submenu delay: </source>
-        <translation></translation>
+        <translation>Atraso do submenu: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1393"/>
@@ -1006,12 +1051,12 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1449"/>
         <source>Miscellaneous</source>
-        <translation></translation>
+        <translation>Diversos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1475"/>
         <source>No arrows for scrollbars</source>
-        <translation></translation>
+        <translation>Nenhuma seta para as barras de rolagem</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1511"/>
@@ -1020,17 +1065,21 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation>Desenhar barras de rolagem dentro de quadros de visualização?
+
+Por padrão, as barras de rolagem são desenhadas em quadros de visualização externas.
+
+Se desabilitado, consulte Composição e Aparência Geral → Barras de rolagem transitórias!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
         <source>Scrollbars inside frames</source>
-        <translation></translation>
+        <translation>Barras de rolagem dentro de quadros</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1530"/>
         <source>Tree branch lines</source>
-        <translation></translation>
+        <translation>Linhas de ramificação de árvore</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1550"/>
@@ -1039,105 +1088,109 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation></translation>
+        <translation>Por padrão, o rótulo está no quadro e o quadro é cortado para contê-lo.
+
+Marcar isso coloca o rótulo logo acima do quadro, para que o quadro não seja cortado.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1557"/>
         <source>Group-box label above frame</source>
-        <translation></translation>
+        <translation>Rótulo de caixa de grupo acima do quadro</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1571"/>
         <source>Fill rubber-band rectangles</source>
-        <translation></translation>
+        <translation>Preencher retângulos de seleção</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1578"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation></translation>
+        <translation>O rastreamento de mouse está habilitado
+para barras de menu por padrão.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1582"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;O rastreamento de mouse é habilitado para barras de menu por padrão, ou seja, depois que um item da barra de menu é clicado e seu menu é exibido, os menus dos outros itens da barra de menus serão exibidos se o cursor for colocado sobre eles sem clicar.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1585"/>
         <source>Mouse tracking for menubars</source>
-        <translation></translation>
+        <translation>Rastreamento de mouse para barras de menu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1596"/>
         <source>Merge menubar with toolbar</source>
-        <translation></translation>
+        <translation>Mesclar barra de menu com barra de ferramenta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1603"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation></translation>
+        <translation>Se marcado, os botões da barra de ferramenta serão desenhados,
+agrupados e aumentados entre os separadores da barra de ferramenta.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1607"/>
         <source>Group toolbar buttons</source>
-        <translation></translation>
+        <translation>Grupo de botões da barra de ferramenta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1620"/>
         <source>Shift push-button contents</source>
-        <translation></translation>
+        <translation>Deslocar conteúdos de botão</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
         <source>Drag from:</source>
-        <translation></translation>
+        <translation>Arrastar de:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1643"/>
         <source>Toolbutton style:</source>
-        <translation></translation>
+        <translation>Estilo de botão de ferramenta:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1627"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation></translation>
+        <translation>Se desmarcado, os atalhos não serão sublinhados em tudo.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1630"/>
         <source>Underline shortcuts with Alt</source>
-        <translation></translation>
+        <translation>Sublinhar atalhos com Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Inline spin indicators</source>
-        <translation></translation>
+        <translation>Indicadores de rotação alinhados</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation></translation>
+        <translation>Desenhar toda a caixa de combinação editável como uma linha de edição com seta (e ícone, se existir)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desenhar toda a caixa de combinação editável como uma linha de edição com seta (e ícone, se existir)?&lt;/p&gt;&lt;p&gt;Por padrão, uma caixa de combinação consiste de uma linha de edição, um botão com a seta de um lado e outro botão com o ícone do outro lado.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1712"/>
         <source>Editable combo as line-edit</source>
-        <translation></translation>
+        <translation>Combinação editável como linha de edição</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1727"/>
         <source>Double-click for view items</source>
-        <translation></translation>
+        <translation>Clique duas vezes para visualizar os itens</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1740"/>
         <source>Vertical spin indicators</source>
-        <translation></translation>
+        <translation>Indicadores de rotação verticais</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1747"/>
@@ -1146,17 +1199,21 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation></translation>
+        <translation>Quando isto é habilitado e marcado, o Kvantum tentará
+respeitar algumas configurações do ambiente da área de trabalho atual.
+
+Esta caixa de seleção pode desabilitar algumas opções.
+Desmarque se você quiser usar essas opções!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
         <source>Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Respeitar a DE atual se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1769"/>
         <source>Combo popup as menu</source>
-        <translation></translation>
+        <translation>Pop-up de combinação como menu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1793"/>
