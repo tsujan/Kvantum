@@ -72,8 +72,10 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
+text.normal.color=white
 text.press.color=white
 text.toggle.color=white
+text.focus.color=white
 
 [PanelButtonTool]
 inherits=PanelButtonCommand

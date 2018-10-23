@@ -190,7 +190,7 @@ indicator.element=tab
 text.normal.color=black
 text.focus.color=#0052aa
 min_width=4font
-min_height=2font
+min_height=1.87font
 
 [TabFrame]
 inherits=PanelButtonCommand

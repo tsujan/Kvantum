@@ -31,9 +31,9 @@
      pagecolor="#3e3e3e"
      id="base"
      showgrid="true"
-     inkscape:zoom="0.70710681"
-     inkscape:cx="47.761466"
-     inkscape:cy="814.41461"
+     inkscape:zoom="1"
+     inkscape:cx="149.14967"
+     inkscape:cy="1006.2967"
      inkscape:window-x="36"
      inkscape:window-y="0"
      inkscape:current-layer="svg2"
@@ -11436,23 +11436,23 @@
       <path
          inkscape:connector-curvature="0"
          id="path4914"
-         d="m 90,109.5 h 2.5 v -2 H 90 Z"
-         style="fill:#ffffff;fill-opacity:0.21568628" />
+         d="m 91.25,109.5 h 2.5 v -2 h -2.5 z"
+         style="fill:#ffffff;fill-opacity:0.21568627" />
       <path
          inkscape:connector-curvature="0"
          id="path4922"
-         d="m 95,109.5 h 2.5 v -2 H 95 Z"
-         style="fill:#ffffff;fill-opacity:0.21568628" />
+         d="m 96.25,109.5 h 2.5 v -2 h -2.5 z"
+         style="fill:#ffffff;fill-opacity:0.21568627" />
       <path
          inkscape:connector-curvature="0"
          id="path4924"
-         d="m 99.75,109.5 h 2.5 v -2 h -2.5 z"
-         style="fill:#ffffff;fill-opacity:0.21568628" />
+         d="m 101.25,109.5 h 2.5 v -2 h -2.5 z"
+         style="fill:#ffffff;fill-opacity:0.21568627" />
       <path
          inkscape:connector-curvature="0"
          id="path4926"
-         d="m 105,109.5 h 2.5 v -2 H 105 Z"
-         style="fill:#ffffff;fill-opacity:0.21568628" />
+         d="m 106.25,109.5 h 2.5 v -2 h -2.5 z"
+         style="fill:#ffffff;fill-opacity:0.21568627" />
     </g>
   </g>
   <use

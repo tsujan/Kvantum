@@ -146,7 +146,7 @@ void BlurHelper::update (QWidget* widget) const
     clear (widget);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   else
-    KWindowEffects::enableBlurBehind (widget->winId(), true, region);
+    KWindowEffects::enableBlurBehind (widget->internalWinId(), true, region);
 #elif defined Q_WS_X11 || defined Q_OS_LINUX
   else
   {

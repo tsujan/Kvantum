@@ -2473,6 +2473,12 @@ void Style::drawPrimitive(PrimitiveElement element,
             else
               col = getFromRGBA(lspec.normalColor);
           }
+
+          if (!col.isValid())
+          {
+            col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                                QPalette::ButtonText);
+          }
         }
         else
           /* FIXME: in fact, the foreground color of the parent widget should be
@@ -8707,6 +8713,12 @@ void Style::drawControl(ControlElement element,
               }
               else
                 col = getFromRGBA(lspec.normalColor);
+            }
+
+            if (!col.isValid())
+            {
+              col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                                  QPalette::ButtonText);
             }
           }
           else // FIXME: the foreground color of the parent widget should be used

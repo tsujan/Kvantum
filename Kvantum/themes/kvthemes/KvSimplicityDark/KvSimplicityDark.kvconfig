@@ -197,15 +197,15 @@ inherits=PanelButtonCommand
 interior.element=button
 text.margin.left=6
 text.margin.right=6
-text.margin.top=4
-text.margin.bottom=4
+text.margin.top=5
+text.margin.bottom=5
 frame.element=button
 indicator.element=tab
 text.normal.color=white
 text.focus.color=#9bccff
 text.toggle.color=white
 min_width=4font
-min_height=2.3font
+min_height=1.87font
 
 [TabFrame]
 inherits=PanelButtonCommand
