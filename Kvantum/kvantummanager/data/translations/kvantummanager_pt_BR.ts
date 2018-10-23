@@ -1218,18 +1218,19 @@ Desmarque se você quiser usar essas opções!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1793"/>
         <source>Left aligned tabs</source>
-        <translation></translation>
+        <translation>Abas alinhadas à esquerda</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1800"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation></translation>
+        <translation>Por padrão, abas inativas são agrupadas,
+isto é, não existem bordas entre elas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1804"/>
         <source>Join inactive tabs</source>
-        <translation></translation>
+        <translation>Juntar abas inativas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1543"/>
@@ -1239,7 +1240,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando isto está habilitado e selecionado, Kvantum tentará respeitar algumas configurações do ambiente desktop atual, se ele for KDS, Unity, Gnome ou Pantheon.&lt;/p&gt;&lt;p&gt;No KDE, isto fará o Kvantum usar as configurações do KDE para o tamanho dos ícones e também para o clique simples ou duplo.&lt;/p&gt;&lt;p&gt;Se for Unity, Gnome and Pantheon, isto remove os ícones dos menus e dos botões (mesmo se a configuração correspondente no dconf forem alteradas) e desabilita a transparência das janelas.&lt;/p&gt;&lt;p&gt;Este checkbox pode desabilitar algumas opções. Remova a seleção se você quiser usar essas opções!!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1776"/>
