@@ -1571,59 +1571,59 @@ ou atualizar sua visualização.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2358"/>
         <source>You will lose the changes you might have made.</source>
-        <translation></translation>
+        <translation>Você perderá as alterações que você fez.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2393"/>
         <source>Restored the rool default settings of %1</source>
-        <translation></translation>
+        <translation>Restaurado as configurações padrão de root de %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2394"/>
         <source>the default theme</source>
-        <translation></translation>
+        <translation>o tema padrão</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2497"/>
         <source>About Kvantum Manager</source>
-        <translation></translation>
+        <translation>Sobre Kvantum Manager</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2500"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation></translation>
+        <translation>Uma ferramenta para instalar, selecionar&lt;br&gt;e configurar temas&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2501"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation></translation>
+        <translation>Autor: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="45"/>
         <source>modified</source>
-        <translation></translation>
+        <translation>modificado</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="46"/>
         <source>default</source>
-        <translation></translation>
+        <translation>padrão</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="383"/>
         <source>This directory cannot be removed:</source>
-        <translation></translation>
+        <translation>Este diretório não pode ser removido:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="390"/>
         <source>You might want to investigate the cause.</source>
-        <translation></translation>
+        <translation>Você pode desejar investigar a causa.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="816"/>
         <location filename="../../KvantumManager.cpp" line="1883"/>
         <location filename="../../KvantumManager.cpp" line="2257"/>
         <source>Active theme:</source>
-        <translation></translation>
+        <translation>Tema ativo:</translation>
     </message>
 </context>
 <context>
@@ -1636,12 +1636,12 @@ ou atualizar sua visualização.</translation>
     <message>
         <location filename="../../main.cpp" line="130"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation></translation>
+        <translation>Kvantum não está instalado no seu sistema.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="131"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation></translation>
+        <translation>Por favor, primeiro instale o plugin de estilo Kvantum!</translation>
     </message>
 </context>
 </TS>
