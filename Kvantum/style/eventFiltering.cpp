@@ -828,8 +828,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               if (parentMenubar)
               {
+                QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
                 if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                  Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                  Y +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                else
+                  Y -= getFrameSpec(group).bottom;
 
                 QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
@@ -888,8 +891,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               if (parentMenubar)
               {
-                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                  Y +=  menuShadow_.at(1) + menuShadow_.at(3); // menu is above menubar
+                QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
+                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
+                  Y +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                else
+                  Y -= getFrameSpec(group).bottom;
 
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
                                                                    parentMenubar->activeAction())
