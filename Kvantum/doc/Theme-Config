@@ -601,6 +601,11 @@ transient_groove                  true/false          Should transient scrollbar
 tree_branch_line                  true/false          Draw tree branch lines? Ther are not
                                                       drawn by default.
 
+                                                      If this key is true, the color of
+                                                      branch lines will be "light.color" for
+                                                      dark themes and "dark.color" for light
+                                                      ones.
+
 groupbox_top_label                true/false          Draw the group-box label above the top
                                                       frame? It is false by default, which
                                                       means that the label is drawn ON the

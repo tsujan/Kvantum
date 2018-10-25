@@ -2793,7 +2793,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       const indicator_spec dspec = getIndicatorSpec("TreeExpander");
       QRect r = option->rect;
       bool rtl(option->direction == Qt::RightToLeft);
-      int expanderAdjust = 0;
+      qreal expanderAdjust = 0.0;
 
       if (option->state & State_Children)
       {
@@ -2831,16 +2831,17 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (tspec_.tree_branch_line)
         {
           int sizeLimit = qMin(qMin(r.width(), r.height()), dspec.size);
-          if(!( sizeLimit&1)) --sizeLimit; // make it odd
-          expanderAdjust = sizeLimit/2 + 1;
+          //if(!( sizeLimit&1)) --sizeLimit; // make it odd
+          expanderAdjust = static_cast<qreal>(sizeLimit)/2 + static_cast<qreal>(1);
         }
       }
 
-      if (tspec_.tree_branch_line) // taken from Oxygen
+      if (tspec_.tree_branch_line) // adapted from Oxygen
       {
-        const QPoint center(r.center());
-        const int centerX = center.x();
-        const int centerY = center.y();
+        const QRectF rf(r); // maximum precision
+        const QPointF center(rf.center());
+        const qreal centerX = center.x();
+        const qreal centerY = center.y();
 
         QColor col;
         if (qGray(option->palette.color(QPalette::Window).rgb()) <= 100)
@@ -2852,21 +2853,21 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->setPen(col);
         if (option->state & (State_Item | State_Children | State_Sibling))
         {
-          const QLine line(QPoint(centerX, r.top()), QPoint(centerX, centerY - expanderAdjust));
+          const QLineF line(QPointF(centerX, rf.top()), QPointF(centerX, centerY - expanderAdjust));
           painter->drawLine(line);
         }
-        // the right/left (depending on dir) line gets drawn if we have an item
+        // the right/left (depending on dir) line will be drawn if there is an item
         if (option->state & State_Item)
         {
-          const QLine line = rtl ?
-                QLine(QPoint(r.left(), centerY), QPoint(centerX - expanderAdjust, centerY)) :
-                QLine(QPoint(centerX + expanderAdjust, centerY), QPoint(r.right(), centerY));
+          const QLineF line = rtl ?
+                QLineF(QPointF(rf.left(), centerY), QPointF(centerX - expanderAdjust, centerY)) :
+                QLineF(QPointF(centerX + expanderAdjust, centerY), QPointF(rf.right(), centerY));
           painter->drawLine(line);
         }
         // the bottom if we have a sibling
         if (option->state & State_Sibling)
         {
-          const QLine line(QPoint(centerX, centerY + expanderAdjust), QPoint(centerX, r.bottom()));
+          const QLineF line(QPointF(centerX, centerY + expanderAdjust), QPointF(centerX, rf.bottom()));
           painter->drawLine(line);
         }
         painter->restore();
