@@ -775,11 +775,11 @@
 <use width="100%" height="100%" xlink:href="#mdi-minimize-normal" id="mdi-minimize-disabled" transform="translate(0,128)"/>
 <use width="100%" height="100%" xlink:href="#mdi-close-normal" id="mdi-close-disabled" transform="translate(0,124)"/>
 <use width="100%" height="100%" xlink:href="#mdi-shade-normal" id="mdi-shade-disabled" transform="translate(0,124)"/>
-<g id="btn-restore-normal" transform="translate(0,190)">
+<g id="btn-restore" transform="translate(0,190)">
 <rect width="32" x="602" y="827" height="32" style="opacity:0"/>
 <rect width="14.142136" x="-166.17012" y="1026.012" height="14.142136" style="fill:none;fill-rule:evenodd;stroke:#646464;stroke-width:4" transform="rotate(-45)"/>
 </g>
-<g id="btn-close-normal" transform="translate(-105,187)">
+<g id="btn-close" transform="translate(-105,187)">
 <rect width="32" x="764" y="829" height="32" style="opacity:0;fill:#d2d2d2;fill-rule:evenodd"/>
 <path style="fill:#646464" d="m 787.6021,833.5314 -7.6021,7.6333 -7.5314,-7.5314 -3.3666,3.3354 7.5627,7.5313 -7.6021,7.6021 3.3361,3.3674 7.6021,-7.6334 7.6014,7.6014 3.3666,-3.3354 -7.6327,-7.6014 7.6021,-7.6021 z "/>
 </g>
@@ -852,11 +852,13 @@
 <path style="fill:#a0a0a0;fill-rule:evenodd" d="m 380,928 h 20 v 1 h -20 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(62)"/>
-<g id="tab-close-pressed" transform="matrix(0.26423894,0,0,0.2643528,309.86487,958.85188)">
-<path style="fill:#ff2d2d" d="M 114.8,62.0475 96.7771,80.0554 114.6872,98.0115 97.9066,114.7783 79.9965,96.8222 61.9737,114.8301 45.1394,97.9525 63.1622,79.9446 45.2521,61.9885 62.0327,45.2217 79.9428,63.1778 97.9656,45.1699 114.8,62.0475"/>
+<g id="tab-close-focused" transform="translate(84,365)">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 216,606 h 18 v 18 h -18 z"/>
+<path style="fill:#2f8ab7" d="m 232.3745,611.199 -3.8159,3.8128 3.792,3.8018 -3.5529,3.55 -3.792,-3.8018 -3.8159,3.8128 -3.5643,-3.5734 3.8159,-3.8128 -3.792,-3.8018 3.5529,-3.55 3.792,3.8018 3.8159,-3.8128 3.5643,3.5735"/>
 </g>
-<g id="tab-close-focused" transform="matrix(0.26423894,0,0,0.2643528,289.86487,958.85188)">
-<path style="fill:#2f8ab7" d="M 114.8,62.0475 96.7771,80.0554 114.6872,98.0115 97.9066,114.7783 79.9965,96.8222 61.9737,114.8301 45.1394,97.9525 63.1622,79.9446 45.2521,61.9885 62.0327,45.2217 79.9428,63.1778 97.9656,45.1699 114.8,62.0475"/>
+<g id="tab-close-pressed" transform="translate(106,365)">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 216,606 h 18 v 18 h -18 z"/>
+<path style="fill:#ff2d2d" d="m 232.3745,611.199 -3.8159,3.8128 3.792,3.8018 -3.5529,3.55 -3.792,-3.8018 -3.8159,3.8128 -3.5643,-3.5735 3.8159,-3.8128 -3.792,-3.8018 3.5529,-3.55 3.792,3.8018 3.8159,-3.8128 3.5643,3.5735"/>
 </g>
 <g style="opacity:.85" id="focus-top">
 <path style="opacity:0;color:#000" d="m 378,1108 h 20 v -2 h -20 z"/>
