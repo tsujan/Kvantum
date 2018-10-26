@@ -1208,7 +1208,7 @@ Desmarque se você quiser usar essas opções!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
         <source>Respect current DE if possible</source>
-        <translation>Respeitar a DE atual se possível</translation>
+        <translation>Respeitar o Ambiente Desktop atual se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1769"/>
@@ -1283,7 +1283,7 @@ Esta opção irá ocultar isso.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1913"/>
         <source>app1,app2,app3</source>
-        <translation></translation>
+        <translation>app1, app2, app3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1941"/>
