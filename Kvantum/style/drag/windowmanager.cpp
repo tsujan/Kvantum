@@ -668,7 +668,8 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   }
 #else
   X11MoveTrigger (widget->window()->internalWinId(),
-                  (QPointF(position.x())*pixelRatio_).toPoint(), (QPointF(position.y())*pixelRatio_).toPoint());
+                  qRound(static_cast<qreal>(position.x())*pixelRatio_),
+                  qRound(static_cast<qreal>(position.y())*pixelRatio_));
 #endif
 
   dragInProgress_ = true;

@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A dark theme with translucency similar to the style of macOS Mojave
+comment=A light theme with translucency similar to the style of macOS Mojave
 x11drag=all
 alt_mnemonic=true
 left_tabs=false
