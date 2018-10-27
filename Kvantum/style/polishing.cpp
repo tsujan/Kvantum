@@ -861,6 +861,11 @@ void Style::polish(QWidget *widget)
           blurHelper_->registerWidget(widget);
       }
     }
+    else if (qobject_cast<QMenu*>(widget))
+    { // only for menubar items (see eventFilter -> case QEvent::Show)
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
+    }
   }
 }
 
@@ -1136,10 +1141,10 @@ void Style::unpolish(QWidget *widget)
     {
       if (blurHelper_)
         blurHelper_->unregisterWidget(widget);
+      if (qobject_cast<QMenu*>(widget))
+        widget->removeEventFilter(this);
       if (translucentWidgets_.contains(widget))
       {
-        if (qobject_cast<QMenu*>(widget))
-          widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_PaintOnScreen, false);
         widget->setAttribute(Qt::WA_NoSystemBackground, false);
         widget->setAttribute(Qt::WA_TranslucentBackground, false);

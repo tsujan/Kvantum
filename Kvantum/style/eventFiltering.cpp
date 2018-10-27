@@ -761,6 +761,46 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (qobject_cast<QMenu*>(o))
 #endif
       {
+        /* "magical" condition for a submenu */
+        QPoint parentMenuCorner;
+        QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
+        if (!parentMenu)
+        { // search for a detached menu with an active action
+          const QWidgetList topLevels = QApplication::topLevelWidgets();
+          for (QWidget *topWidget : topLevels)
+          {
+            if (topWidget->isVisible()
+                && qobject_cast<QMenu*>(topWidget)
+                && topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
+                && qobject_cast<QMenu*>(topWidget)->activeAction())
+            {
+              parentMenu = qobject_cast<QMenu*>(topWidget);
+              parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
+              break;
+            }
+          }
+        }
+        else
+          parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
+        QMenuBar *parentMenubar = nullptr;
+        if (!parentMenu)
+        { // search for a menubar with an active action
+          if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
+          {
+            if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
+            {
+              if (mb->activeAction())
+                parentMenubar = mb;
+            }
+          }
+        }
+        QRect ag(QApplication::desktop()->availableGeometry(w));
+        /* this gives the real position AFTER pending movements
+           because it's QWidgetData::crect (Qt -> qwidget.h) */
+        QRect g(w->geometry());
+        int X = g.left();
+        int Y = g.top();
+
         /* WARNING: If compositing is stopped here, we aren't responsible.
                     A check for the state of compositing at this very moment
                     may be CPU-intensive. */
@@ -769,47 +809,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* compensate for the offset created by the shadow */
 
-          /* "magical" condition for a submenu */
-          QPoint parentMenuCorner;
-          QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
-          if (!parentMenu)
-          { // search for a detached menu with an active action
-            const QWidgetList topLevels = QApplication::topLevelWidgets();
-            for (QWidget *topWidget : topLevels)
-            {
-              if (topWidget->isVisible()
-                  && qobject_cast<QMenu*>(topWidget)
-                  && topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
-                  && qobject_cast<QMenu*>(topWidget)->activeAction())
-              {
-                parentMenu = qobject_cast<QMenu*>(topWidget);
-                parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
-                break;
-              }
-            }
-          }
-          else
-            parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
-          QMenuBar *parentMenubar = nullptr;
-          if (!parentMenu)
-          { // search for a menubar with an active action
-            if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
-            {
-              if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
-              {
-                if (mb->activeAction())
-                  parentMenubar = mb;
-              }
-            }
-          }
-
-          QRect ag(QApplication::desktop()->availableGeometry(w));
-          /* this gives the real position AFTER pending movements
-             because it's QWidgetData::crect (Qt -> qwidget.h) */
-          QRect g(w->geometry());
-          int X = g.left();
-          int Y = g.top()
-                  - menuShadow_.at(1); // top shadow
+          Y -= menuShadow_.at(1); // top shadow
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
@@ -962,6 +962,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
 #endif
 
+          w->move(X,Y);
+        }
+        else if (!parentMenu && parentMenubar)
+        {
+          QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
+          if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
+            Y += getFrameSpec(group).top;
+          else
+            Y -= getFrameSpec(group).bottom;
           w->move(X,Y);
         }
       }

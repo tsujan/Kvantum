@@ -4326,44 +4326,44 @@
        xlink:href="#linearGradient6732"
        id="radialGradient6740"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0,-2.9655174,2.6142242,0,-2939.1288,875.31047)"
-       cx="-73"
-       cy="1084.5"
-       fx="-73"
-       fy="1084.5"
+       gradientTransform="matrix(2.8178394e-5,-3.1034467,2.6142242,2.3736396e-5,-2939.1267,865.2179)"
+       cx="-72.985451"
+       cy="1084.501"
+       fx="-74.032654"
+       fy="1086.8917"
        r="3.625" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6806"
        id="radialGradient6742"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(3.25,0,0,2.9654751,25.246386,-2124.308)"
+       gradientTransform="matrix(3.3803074,0,-9.7062275e-5,3.1033784,28.609336,-2273.8615)"
        cx="-25"
        cy="1084.5"
-       fx="-25"
-       fy="1084.5"
+       fx="-25.51664"
+       fy="1084.339"
        r="3.625" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6806"
        id="radialGradient6744"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0,3.3792923,-3.2329886,0,3605.3609,1224.205)"
-       cx="-25"
-       cy="1132.5"
-       fx="-25"
-       fy="1132.5"
+       gradientTransform="matrix(0,3.3792923,-3.3792754,0,3771.0308,1224.205)"
+       cx="-24.99189"
+       cy="1132.5004"
+       fx="-25.36179"
+       fy="1134.054"
        r="3.625" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6806"
        id="radialGradient6746"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(-2.5536031,0,0,-3.3792965,-290.44036,4966.8026)"
-       cx="-73.00103"
-       cy="1132.5001"
-       fx="-73.00103"
-       fy="1132.5001"
+       gradientTransform="matrix(-2.6206897,0,0,-3.3792965,-295.35402,4966.8018)"
+       cx="-73.016663"
+       cy="1132.4995"
+       fx="-74.298523"
+       fy="1132.903"
        r="3.625" />
     <linearGradient
        inkscape:collect="always"
@@ -4383,8 +4383,8 @@
        gradientTransform="translate(-31,7.25)"
        x1="-73.00103"
        y1="1137.5001"
-       x2="-73.01564"
-       y2="1145.25" />
+       x2="-73"
+       y2="1144.7501" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3837-8"
@@ -10538,13 +10538,13 @@
        inkscape:connector-curvature="0"
        style="opacity:0.92;fill:url(#linearGradient6756);fill-opacity:1"
        id="path6540"
-       d="m -104,1083.7501 c -1.499,0 -5,2.25 -5,4.7612 v 3.2388 h 5 z"
+       d="m -104,1083.7501 c -2.76072,0 -5,2.2349 -5,5 v 3 h 5 z"
        sodipodi:nodetypes="ccccc" />
     <path
        inkscape:connector-curvature="0"
-       style="opacity:0.25;fill:url(#radialGradient6740);fill-opacity:1"
+       style="opacity:0.37;fill:url(#radialGradient6740);fill-opacity:1"
        id="path6705"
-       d="m -116.2495,1079.5 v 12.25 h 7.25 v -3.2388 c 0,-2.5111 3.5,-4.7612 5,-4.7612 v -4.25 z"
+       d="m -116.2495,1079.5 v 12.25 h 7.25 l -5e-4,-3 c 0,-2.7689 2.23544,-5 5,-5 v -4.25 z"
        sodipodi:nodetypes="cccsccc" />
   </g>
   <g
@@ -10555,13 +10555,13 @@
        inkscape:connector-curvature="0"
        style="opacity:0.92;fill:url(#linearGradient6768);fill-opacity:1"
        id="path6546"
-       d="m -56,1083.7501 v 8 h 5 v -3.2388 c 10e-4,-2.5112 -3.62466,-4.7613 -5,-4.7612 z"
+       d="m -56,1083.7501 v 8 h 5 v -3 c 0,-2.7612 -2.222316,-5 -5,-5 z"
        sodipodi:nodetypes="ccccc" />
     <path
        inkscape:connector-curvature="0"
-       style="opacity:0.4;fill:url(#radialGradient6742);fill-opacity:1"
+       style="opacity:0.44;fill:url(#radialGradient6742);fill-opacity:1"
        id="path6700"
-       d="m -56,1079.5 v 4.25 c 1.36467,0 5,2.2501 5,4.7609 v 3.2391 h 7.25 v -12.25 z"
+       d="m -56,1079.5 v 4.25 c 2.77092,0 5,2.2315 5,5 v 3 h 7.25 v -12.25 z"
        sodipodi:nodetypes="ccscccc" />
   </g>
   <g
@@ -10575,7 +10575,7 @@
        d="m -109,1139.7501 c 0,2.77 2.23001,5 5,5 v -5 z" />
     <path
        inkscape:connector-curvature="0"
-       style="opacity:0.45;fill:url(#radialGradient6746);fill-opacity:1"
+       style="opacity:0.54;fill:url(#radialGradient6746);fill-opacity:1"
        id="path6697"
        d="M -116.2495,1139.75 V 1152 h 12.25 v -7.25 c -2.77001,0 -5,-2.23 -5,-5 z" />
   </g>
@@ -10590,7 +10590,7 @@
        d="m -56,1139.7501 v 5 c 2.77,0 5,-2.23 5,-5 z" />
     <path
        inkscape:connector-curvature="0"
-       style="opacity:0.45;fill:url(#radialGradient6744);fill-opacity:1"
+       style="opacity:0.54;fill:url(#radialGradient6744);fill-opacity:1"
        id="rect6587"
        d="m -51,1139.75 c 0,2.77 -2.23,5 -5,5 v 7.25 h 12.25 v -12.25 z" />
   </g>
