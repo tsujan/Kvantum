@@ -120,10 +120,10 @@ text.press.color=#4C4C4C
 text.toggle.color=#4C4C4C
 text.shadow=false
 text.shadow.color=white
-text.shadow.alpha=190
-text.shadow.xshift=0
+text.shadow.alpha=210
+text.shadow.xshift=1
 text.shadow.yshift=1
-text.shadow.depth=2
+text.shadow.depth=1
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
@@ -415,10 +415,10 @@ frame.left=0
 frame.right=0
 text.shadow=true
 text.shadow.color=black
-text.shadow.alpha=70
-text.shadow.yshift=-2
+text.shadow.alpha=90
+text.shadow.yshift=-1
 text.shadow.xshift=-1
-text.shadow.depth=2
+text.shadow.depth=1
 
 [MenuBar]
 inherits=PanelButtonCommand

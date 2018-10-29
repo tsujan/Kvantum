@@ -15089,8 +15089,10 @@ void Style::renderLabel(
           painter->setPen(QPen(col));
           for (int i=0; i<lspec.depth; i++)
           {
-            painter->drawText(rtext.adjusted(lspec.xshift+i,lspec.yshift+i,
-                                             lspec.xshift+i,lspec.yshift+i),
+            int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
+            int yShift = lspec.yshift + i * (lspec.yshift < 0 ? -1 : 1);
+            painter->drawText(rtext.adjusted(xShift,yShift,
+                                             xShift,yShift),
                               talign,text);
           }
           painter->restore();

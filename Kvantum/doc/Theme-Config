@@ -1033,6 +1033,11 @@ text.shadow.alpha                 integer (0-255)     The opacity of the text sh
 
 text.shadow.depth                 integer             The text shadow depth.
 
+                                                      NOTE: For technical reasons, depths > 1
+                                                      are considered as 1. It is kept until Qt
+                                                      supports a better way of adding text shadows
+                                                      by using its painter.
+
 min_width
 min_height                        integer             Minimum width or height (in px). They
                                   or                  have meaning only for menuitems, menubar

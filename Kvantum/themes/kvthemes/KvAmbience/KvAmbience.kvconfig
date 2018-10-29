@@ -125,10 +125,10 @@ text.press.inactive.color=#000000be
 text.toggle.inactive.color=#000000a0
 text.shadow=true
 text.shadow.color=white
-text.shadow.alpha=190
-text.shadow.xshift=0
+text.shadow.alpha=210
+text.shadow.xshift=1
 text.shadow.yshift=1
-text.shadow.depth=2
+text.shadow.depth=1
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
@@ -408,10 +408,10 @@ frame.bottom=1
 frame.left=3
 frame.right=3
 text.shadow.color=black
-text.shadow.alpha=40
-text.shadow.yshift=-2
+text.shadow.alpha=70
+text.shadow.yshift=-1
 text.shadow.xshift=-1
-text.shadow.depth=2
+text.shadow.depth=1
 text.shadow=true
 
 [MenuBar]

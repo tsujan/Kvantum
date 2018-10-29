@@ -423,7 +423,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
         r.a = qMax(v.toInt(),0);
       v = getValue(elementName,"text.shadow.depth", i);
       if (v.isValid())
-        r.depth = qMax(v.toInt(),0);
+        r.depth = qMin(qMax(v.toInt(),0),1); // drawing more than once would be ugly
     }
   }
 
