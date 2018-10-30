@@ -255,6 +255,7 @@ text.margin.top=3
 text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
+indicator.size=12
 text.normal.color=#0000007d
 text.normal.inactive.color=#0000006e
 text.focus.color=#000000b4

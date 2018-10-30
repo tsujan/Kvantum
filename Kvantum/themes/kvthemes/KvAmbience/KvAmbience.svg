@@ -255,9 +255,9 @@
 <radialGradient fx="275.008" fy="722.24231" cx="275.008" cy="722.24231" gradientTransform="matrix(0.72,0,0,0.8,-118.00647,250.20566)" xlink:href="#linearGradient1835" id="radialGradient1865" r="12.5" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="112.5" fy="625" cx="112.5" cy="625" gradientTransform="matrix(1.6666668,0,0,1.6666737,-76.00488,-438.67012)" xlink:href="#linearGradient5116-5" id="radialGradient5175" r="9" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="275.008" fy="722.24231" cx="275.008" cy="722.24231" gradientTransform="matrix(0.72,0,0,0.8,-118.00647,262.20566)" xlink:href="#linearGradient6741" id="radialGradient5079" r="12.5" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-25.523649" fy="1081.6692" cx="-25.400589" cy="1081.9109" gradientTransform="matrix(2.6206887,-2.0038685e-4,1.5819655e-4,2.0689178,142.89646,-1582.39)" xlink:href="#linearGradient3837" id="radialGradient6742" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-25.718468" fy="1132.953" cx="-25.718468" cy="1132.953" gradientTransform="matrix(0,2.7586199,-2.7586281,0,3201.8969,784.41056)" xlink:href="#linearGradient3837" id="radialGradient6744" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="-70.212746" fy="1086.8833" cx="-71.183853" cy="1086.8833" gradientTransform="matrix(0,-1.9310343,2.2068724,0,-2372.6112,518.03685)" xlink:href="#linearGradient3837" id="radialGradient6740" r="3.625" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-25.496183" fy="1081.5485" cx="-25.400589" cy="1081.9109" gradientTransform="matrix(2.6206887,-2.0038685e-4,1.5819655e-4,2.0689178,142.89646,-1582.39)" xlink:href="#linearGradient3837" id="radialGradient6742" r="3.625" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-25.43321" fy="1133.4181" cx="-25.705086" cy="1132.9534" gradientTransform="matrix(-3.0932413e-7,2.7586199,-2.6896828,-3.0159421e-7,3123.7851,784.4109)" xlink:href="#linearGradient3837" id="radialGradient6744" r="3.625" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-69.860847" fy="1086.6562" cx="-71.183853" cy="1086.8833" gradientTransform="matrix(-4.2993518e-4,-1.9987068,2.2068723,-4.7471299e-4,-2372.6417,513.73562)" xlink:href="#linearGradient3837" id="radialGradient6740" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-74.709541" fy="1132.1482" cx="-74.709541" cy="1132.1482" gradientTransform="matrix(-0.96554639,1.9310132,-1.8831234,-0.94160633,2085.8393,1926.3031)" xlink:href="#linearGradient3837" id="radialGradient6746" r="3.625" gradientUnits="userSpaceOnUse"/>
 </defs>
 <ellipse cx="243" cy="608" rx="7.5" ry="7.5" style="fill:url(#linearGradient5105);stroke:#8c8c8c;color:#000" id="radio-normal"/>
@@ -283,19 +283,19 @@
 </g>
 <g id="menu-shadow-top" transform="matrix(1,0,0,1.4,0,-262.4)">
 <path style="opacity:.9;fill:#41403b;fill-rule:evenodd" d="M 22,653.14286 V 656 h 58 v -2.85714 z"/>
-<path style="opacity:.5;fill:url(#linearGradient6754);fill-rule:evenodd" d="m 22,651 v 2.14286 H 80 V 651 Z"/>
+<path style="opacity:.51;fill:url(#linearGradient6754);fill-rule:evenodd" d="m 22,651 v 2.14286 H 80 V 651 Z"/>
 </g>
 <path style="opacity:.5;fill:url(#linearGradient6752);fill-rule:evenodd" id="menu-shadow-left" d="m 15,656 0,60 7,0 0,-60 z"/>
 <path style="opacity:.5;fill:url(#linearGradient6748);fill-rule:evenodd" id="menu-shadow-right" d="m 80,656 0,60 7,0 0,-60 z"/>
 <path style="opacity:.5;fill:url(#linearGradient6750);fill-rule:evenodd" id="menu-shadow-bottom" d="m 22,716 0,7 58,0 0,-7 z"/>
 <path style="opacity:.5;fill:url(#radialGradient6740);fill-rule:evenodd" id="menu-shadow-topleft" d="m 15,649 0,7 7,0 0,-7 z"/>
 <path style="opacity:.5;fill:url(#radialGradient6742);fill-rule:evenodd" id="menu-shadow-topright" d="m 80,649 0,7 7,0 0,-7 z"/>
-<path style="opacity:.5;fill:url(#radialGradient6746);fill-rule:evenodd" id="menu-shadow-bottomleft" d="m 15,716 0,7 7,0 v -7 Z "/>
-<path style="opacity:.5;fill:url(#radialGradient6744);fill-rule:evenodd" id="menu-shadow-bottomright" d="m 80,716 0,7 7,0 0,-7 z"/>
-<rect width="2.5" x="50" y="716" height="7.1" style="fill:#b74aff" id="menu-shadow-hint-bottom"/>
-<rect width="2.5" x="50" y="649" height="3.1" style="fill:#b74aff" id="menu-shadow-hint-top"/>
-<rect width="2.5" x="-685" y="80" height="7.1" style="fill:#b74aff" id="menu-shadow-hint-right" transform="matrix(0,-1,1,0,0,0)"/>
-<rect width="2.5" x="-685" y="15" height="7.1" style="fill:#b74aff" id="menu-shadow-hint-left" transform="matrix(0,-1,1,0,0,0)"/>
+<path style="opacity:.52;fill:url(#radialGradient6746);fill-rule:evenodd" id="menu-shadow-bottomleft" d="m 15,716 0,7 7,0 v -7 Z "/>
+<path style="opacity:.56;fill:url(#radialGradient6744);fill-rule:evenodd" id="menu-shadow-bottomright" d="m 80,716 0,7 7,0 0,-7 z"/>
+<path style="fill:#b74aff" id="menu-shadow-hint-bottom" d="m 50,716 h 2.5 v 7 H 50 Z"/>
+<path style="fill:#b74aff" id="menu-shadow-hint-top" d="m 50,649 h 2.5 v 3 H 50 Z"/>
+<path style="fill:#b74aff" id="menu-shadow-hint-right" d="m -685,80 h 2.5 v 7 h -2.5 z" transform="rotate(-90)"/>
+<path style="fill:#b74aff" id="menu-shadow-hint-left" d="m -685,15 h 2.5 v 7 h -2.5 z" transform="rotate(-90)"/>
 <g style="fill:#3daee9;fill-rule:evenodd" id="group-normal-left" transform="matrix(0.66666667,0,0,1,318.33333,-344.5)">
 <path style="fill-opacity:0" d="m -106,-1148.5 h 6 v 30 h -6 z" transform="scale(-1)"/>
 <path style="opacity:.3;fill:#000" d="m 101.5,1118.5 h 1.5 v 30 h -1.5 z"/>
@@ -1052,21 +1052,18 @@
 <use width="100%" height="100%" xlink:href="#tab-toggled-left" id="button-toggled-right" transform="matrix(-1,0,0,1,317.75,-678.49955)"/>
 <use width="100%" height="100%" xlink:href="#tab-toggled-topleft" id="button-toggled-topright" transform="matrix(-1,0,0,1,317.75,-678.49955)"/>
 <use width="100%" height="100%" xlink:href="#tab-toggled-bottomleft" id="button-toggled-bottomright" transform="matrix(-1,0,0,1,317.75,-678.49955)"/>
-<g id="tab-close-normal" transform="translate(45,27.5)">
+<g id="tab-close-normal" transform="translate(41,27.5)">
 <rect width="18" x="195" y="752.5" height="18" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill-rule:evenodd;fill-opacity:.392;color:#000" d="m 203.7451,755.26634 c -3.29598,0 -6,2.70401 -6,6 0,3.29598 2.70402,6 6,6 3.29599,0 6,-2.70402 6,-6 0,-3.29599 -2.70401,-6 -6,-6 z m 0,3 c 1.67467,0 3,1.32533 3,3 0,1.67466 -1.32533,3 -3,3 -1.67466,0 -3,-1.32534 -3,-3 0,-1.67467 1.32534,-3 3,-3 z"/>
+<path style="fill-rule:evenodd;fill-opacity:.392;color:#000" d="m 204,756.5 c -2.74665,0 -5,2.25334 -5,5 0,2.74665 2.25335,5 5,5 2.74666,0 5,-2.25335 5,-5 0,-2.74666 -2.25334,-5 -5,-5 z m 0,2.5 c 1.39556,0 2.5,1.10444 2.5,2.5 0,1.39555 -1.10444,2.5 -2.5,2.5 -1.39555,0 -2.5,-1.10445 -2.5,-2.5 0,-1.39556 1.10445,-2.5 2.5,-2.5 z"/>
 </g>
-<g style="opacity:.5" id="tab-close-disabled" transform="translate(100.5,27.5)">
-<rect width="18" x="195" y="752.5" height="18" style="opacity:1;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill-rule:evenodd;fill-opacity:.353;color:#000" d="m 203.7451,755.26634 c -3.29598,0 -6,2.70401 -6,6 0,3.29598 2.70402,6 6,6 3.29599,0 6,-2.70402 6,-6 0,-3.29599 -2.70401,-6 -6,-6 z m 0,3 c 1.67467,0 3,1.32533 3,3 0,1.67466 -1.32533,3 -3,3 -1.67466,0 -3,-1.32534 -3,-3 0,-1.67467 1.32534,-3 3,-3 z"/>
-</g>
-<g id="tab-close-focused" transform="translate(63.5,27.5)">
+<use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(60)"/>
+<g id="tab-close-focused" transform="translate(63,27.5)">
 <rect width="18" x="195" y="752.5" height="18" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#dc6434;fill-rule:evenodd;color:#000" d="m 203.7451,755.26634 c -3.29598,0 -6,2.70401 -6,6 0,3.29598 2.70402,6 6,6 3.29599,0 6,-2.70402 6,-6 0,-3.29599 -2.70401,-6 -6,-6 z m 0,3 c 1.67467,0 3,1.32533 3,3 0,1.67466 -1.32533,3 -3,3 -1.67466,0 -3,-1.32534 -3,-3 0,-1.67467 1.32534,-3 3,-3 z"/>
+<path style="fill:#dc6434;fill-rule:evenodd;color:#000" d="m 204,756.5 c -2.74665,0 -5,2.25334 -5,5 0,2.74665 2.25335,5 5,5 2.74666,0 5,-2.25335 5,-5 0,-2.74666 -2.25334,-5 -5,-5 z m 0,2.5 c 1.39556,0 2.5,1.10444 2.5,2.5 0,1.39555 -1.10444,2.5 -2.5,2.5 -1.39555,0 -2.5,-1.10445 -2.5,-2.5 0,-1.39556 1.10445,-2.5 2.5,-2.5 z"/>
 </g>
-<g id="tab-close-pressed" transform="translate(82,27.5)">
+<g id="tab-close-pressed" transform="translate(81,27.5)">
 <rect width="18" x="195" y="752.5" height="18" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#dc6434;fill-rule:evenodd;color:#000" d="m 203.7451,755.2663 c -3.29598,0 -6,2.70401 -6,6 0,3.29598 2.70402,6 6,6 3.29599,0 6,-2.70402 6,-6 0,-3.29599 -2.70401,-6 -6,-6 z "/>
+<path style="fill:#dc6434;fill-rule:evenodd;color:#000" d="m 204,756.5 c -2.74665,0 -5,2.25334 -5,5 0,2.74665 2.25335,5 5,5 2.74666,0 5,-2.25335 5,-5 0,-2.74666 -2.25334,-5 -5,-5 z"/>
 </g>
 <circle cx="111.5" cy="609" style="fill:url(#radialGradient5175);fill-rule:evenodd;stroke:url(#linearGradient5185);stroke-linejoin:round;stroke-linecap:round" id="slidercursor-normal" r="8.5"/>
 <circle cx="131.5" cy="609" style="fill:#f0f0f0;fill-rule:evenodd;stroke:url(#linearGradient5253);stroke-linejoin:round;stroke-linecap:round" r="8.5" id="slidercursor-focused"/>
