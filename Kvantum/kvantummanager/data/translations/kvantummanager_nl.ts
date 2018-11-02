@@ -17,7 +17,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar je kunt ook externe thema&apos;s installeren. Hier kun je een themamap kiezen - druk daarna op de knop hieronder om het thema te installeren in je Persoonlijke map.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar u kunt ook externe thema&apos;s installeren. Hier kunt u een themamap kiezen - druk daarna op de knop hieronder om het thema te installeren in uw Persoonlijke map.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -31,12 +31,12 @@ themamap</translation>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
         <translation>Voeg dit thema toe aan de lijst met thema&apos;s die
-Kvantum kan gebruiken, naast de ingebouwde.</translation>
+Kvantum kan gebruiken, naast de standaardthema&apos;s.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="122"/>
         <source>Install this theme</source>
-        <translation>Thema installeren</translation>
+        <translation>Dit thema installeren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="143"/>
@@ -79,8 +79,8 @@ is het thema al in gebruik.</translation>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>Standaarwaarden van
-dit thema herstellen.
+        <translation>Standaardinstellingen van
+dit thema terugzetten.
 (Ctrl+Z)</translation>
     </message>
     <message>
