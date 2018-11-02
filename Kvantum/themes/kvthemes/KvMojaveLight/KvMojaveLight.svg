@@ -1317,7 +1317,7 @@
 <path style="opacity:.75;fill:#fff;stroke-width:.5" d="m 300,527 a 8,8 0 0,0 -8,8 8,8 0 0,0 8,8 8,8 0 0,0 8,-8 8,8 0 0,0 -8,-8 z  m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z " transform="matrix(2,0,0,2,-375,-610)"/>
 </g>
 <use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-toggledPressed" transform="translate(-120)"/>
-<g id="dock-restore" transform="translate(14,10)">
+<g style="opacity:.65" id="dock-restore" transform="translate(14,10)">
 <path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 358,554 h 32 v 32 h -32 z"/>
 <path style="color-rendering:auto;color:#000" d="m 368.75,559.75 15.5,15.5 v -15.5 z"/>
 <path style="color-rendering:auto;color:#000" d="m 379.25,580.25 -15.5,-15.5 v 15.5 z"/>
@@ -1391,9 +1391,11 @@
 </g>
 <use width="100%" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomleft" transform="translate(4)"/>
 <use width="100%" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomright" transform="translate(8)"/>
-<g id="mdi-menu-normal" transform="translate(-76,78)">
-<rect width="32" x="404" y="519" height="32" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="opacity:.6;color:#000" d="M 406.5,521.5 V 549 h 27 v -27.5 z m 3,3 h 21 v 5.5 h -21 z m 0,8.5 h 21 v 13 h -21 z"/>
+<g style="opacity:.6" id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 332,594 h 32 v 32 h -32 z"/>
+<path d="m 361.5,607.25 v 4.5 h -27 v -4.5 z"/>
+<path d="m 361.5,616 v 4.5 h -27 V 616 Z"/>
+<path d="m 361.5,598.5 v 4.5 h -27 v -4.5 z"/>
 </g>
 <path style="paint-order:normal;fill:url(#linearGradient1980);fill-rule:evenodd" id="dialog-normal" d="m 230,640 h 30 v 30 h -30 z"/>
 <path style="paint-order:normal;fill:url(#linearGradient1992);fill-rule:evenodd" id="dialog-normal-inactive" d="m 198,640 h 30 v 30 h -30 z"/>

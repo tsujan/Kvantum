@@ -507,17 +507,17 @@
 </g>
 </g>
 </g>
-<g style="fill-rule:evenodd" id="mdi-menu-normal" transform="translate(0,-130)">
-<rect width="32" x="399" y="519" height="32" style="fill:#666;fill-opacity:0" id="rect5101"/>
-<g style="fill:none" id="g608">
-<g style="stroke-opacity:.784;stroke:#fff;stroke-width:4" id="g610">
-<path id="path5113" d="M 403.75,524.15 H 428.5 V 548.9 H 403.75 Z"/>
-<path id="path5115" d="m 403.8125,533.4 h 24.625"/>
+<g id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" id="rect2798" d="m 396,398 h 32 v 32 h -32 z"/>
+<g style="fill-opacity:.784;fill:#fff">
+<path id="path2778" d="m 425.5,413.25 v 4.5 h -27 v -4.5 z"/>
+<path id="path2786" d="m 425.5,422 v 4.5 h -27 V 422 Z"/>
+<path id="path2788" d="m 425.5,404.5 v 4.5 h -27 v -4.5 z"/>
 </g>
-<g style="stroke:#5a5a5a;stroke-width:3.5" id="g614">
-<path id="path5107" d="M 402.75,522.75 H 427.5 V 547.5 H 402.75 Z"/>
-<path id="path5109" d="m 402.8125,532 h 24.625"/>
-</g>
+<g style="fill:#5a5a5a">
+<path id="path1697" d="m 425.5,411.25 v 4.5 h -27 v -4.5 z"/>
+<path id="path1699" d="m 425.5,420 v 4.5 h -27 V 420 Z"/>
+<path id="path1701" d="m 425.5,402.5 v 4.5 h -27 v -4.5 z"/>
 </g>
 </g>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#mdi-close-normal" id="mdi-close-disabled" transform="translate(-4.0976998,134.14682)"/>

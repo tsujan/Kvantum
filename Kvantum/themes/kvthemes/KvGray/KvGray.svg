@@ -560,9 +560,11 @@
 <path style="opacity:0" d="m 209,674 h 32 v 32 h -32 z"/>
 <path style="opacity:.7;fill:none;stroke:#000;stroke-width:4.5" d="m 211.2113,697.6897 13.7886,-13.7886 13.7887,13.7887"/>
 </g>
-<g id="mdi-menu-normal">
-<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 967,1099 h 32 v 32 h -32 z"/>
-<path style="opacity:.7" d="m 968.5,1100.5 v 29 h 29 v -29 z m 3,3 h 23 v 5.5 h -23 z m 0,8.5 h 23 v 14.5 h -23 z"/>
+<g style="opacity:.7" id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 958,1102 h 32 v 32 h -32 z"/>
+<path d="m 987.5,1114.85 v 3.7 h -27 v -3.7 z"/>
+<path d="m 987.5,1123.2 v 3.7 h -27 v -3.7 z"/>
+<path d="m 987.5,1106.5 v 3.7 h -27 v -3.7 z"/>
 </g>
 <g id="mdi-close-normal" transform="translate(-0.16115,51.8388)">
 <path style="opacity:0" d="m 825.1612,1045.1612 h 32 v 32 h -32 z "/>

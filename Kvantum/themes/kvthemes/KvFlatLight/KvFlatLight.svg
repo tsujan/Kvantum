@@ -372,7 +372,18 @@
 <use width="450" height="1230" xlink:href="#common-normal-topleft" id="common-normal-bottomright" transform="matrix(-1,0,0,-1,378,2380)"/>
 <use width="450" height="1230" xlink:href="#common-normal-left" id="common-normal-bottom" transform="matrix(0,-1,1,0,-1001,1379)"/>
 <use width="450" height="1230" xlink:href="#common-normal-topleft" id="common-normal-bottomleft" transform="matrix(0,-1,1,0,-1001,1379)"/>
-<path style="fill:#bebebe" id="mdi-menu-normal" d="m 915,827 v 32 h 32 v -32 z m 3,3 h 26 v 8 h -26 z m 0,11 26,10e-5 V 856 h -26 z"/>
+<g id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 923,832 h 32 v 32 h -32 z"/>
+<path style="fill:#bebebe" d="m 952.5,845.25 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#bebebe" d="m 952.5,854 v 4.5 h -27 V 854 Z"/>
+<path style="fill:#bebebe" d="m 952.5,836.5 v 4.5 h -27 v -4.5 z"/>
+</g>
+<g id="g339">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 923,832 h 32 v 32 h -32 z"/>
+<path style="fill:#bebebe" d="m 952.5,845.25 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#bebebe" d="m 952.5,854 v 4.5 h -27 V 854 Z"/>
+<path style="fill:#bebebe" d="m 952.5,836.5 v 4.5 h -27 v -4.5 z"/>
+</g>
 <path style="fill:url(#linearGradient5400)" id="titlebar-normal" d="m 698,740 v 32 h 32 v -32 z"/>
 <g id="mdi-close-normal">
 <rect width="32" x="764" y="829" height="32" style="opacity:0;fill:#d2d2d2;fill-rule:evenodd"/>

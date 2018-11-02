@@ -519,9 +519,10 @@
 <path style="fill:none;fill-rule:evenodd;stroke:#dcdcdc;stroke-width:5" d="m 275.25,545.1875 17.125,-17.125"/>
 </g>
 <g id="mdi-menu-normal">
-<rect width="32" x="404" y="519" height="32" style="fill:#666;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#dcdcdc;stroke-width:3.5" d="m 407.75,522.75 24.75,0 0,24.75 -24.75,0 z"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#dcdcdc;stroke-width:3.5" d="m 407.8125,532 24.625,0"/>
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 405,521 h 32 v 32 h -32 z"/>
+<path style="fill:#dcdcdc" d="m 434.5,534.25 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#dcdcdc" d="m 434.5,543 v 4.5 h -27 V 543 Z"/>
+<path style="fill:#dcdcdc" d="m 434.5,525.5 v 4.5 h -27 v -4.5 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#mdi-maximize-focused" id="mdi-maximize-pressed" transform="translate(-1.1842344,44.023346)"/>
 <use width="100%" height="100%" xlink:href="#mdi-close-focused" id="mdi-close-pressed" transform="translate(-1.1842344,44.023346)"/>

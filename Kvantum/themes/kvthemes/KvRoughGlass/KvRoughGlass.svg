@@ -371,8 +371,8 @@
 <stop offset="1" style="stop-color:#fff;stop-opacity:0"/>
 </linearGradient>
 <linearGradient id="linearGradient4863">
-<stop offset="0" style="stop-color:#646464"/>
-<stop offset="1" style="stop-color:#a0a0a0"/>
+<stop offset="0" style="stop-color:#787878"/>
+<stop offset="1" style="stop-color:#b4b4b4"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient8855" id="linearGradient8891" y1="2156.5" x1="241" y2="2156.5" x2="237" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient7390">
@@ -506,7 +506,12 @@
 <rect width="32" x="-412" y="1414.8866" height="32" style="opacity:0;fill-rule:evenodd"/>
 <path style="fill:#323232" d="m -406.2267,1440.9483 -4.9485,-4.9486 10.2267,-10.2267 4.9485,-4.9483 4.9485,4.9483 10.2267,10.2269 -4.9485,4.9484 -10.2267,-10.2268 z "/>
 </g>
-<path style="fill:#323232" id="mdi-menu-normal" d="m 970.3334,1100.2627 v 3.6292 7.5802 h -0.0622 v 16.1808 l .0622,3.5362 3.5157,.062 6.1914,-.062 17.5786,.062 h 3.5779 v -3.5982 -6.1419 -1.3338 l .062,-16.2853 -.062,-3.5672 -3.5157,-.062 h -6.1292 -1.3067 -16.334 z  m 3.5779,3.6292 h 16.334 1.3067 l 6.067,.062 v 5.4089 h -23.7077 z  m -.0622,9.0691 h 23.7699 v 7.2161 1.3339 6.1419 h -16.3341 l -7.3737,-.062 -.0622,-7.4138 z "/>
+<g style="opacity:.72" id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 959,1097 h 32 v 32 h -32 z"/>
+<path d="m 988.5,1110.25 v 4.5 h -27 v -4.5 z"/>
+<path d="m 988.5,1119 v 4.5 h -27 v -4.5 z"/>
+<path d="m 988.5,1101.5 v 4.5 h -27 v -4.5 z"/>
+</g>
 <g style="fill:#323232" id="mdi-restore-normal" transform="matrix(0.7205167,0.71884497,-0.7205167,0.71884497,1027.7701,523.42236)">
 <path d="m 173.7,636 3,3 -6.2,6.1 -3,3 -3,-3 -6.2,-6.1 3,-3 6.2,6.1 z"/>
 <path d="m 173.7,666.6 3,-3 -6.2,-6.2 -3,-3 -3,3 -6.2,6.2 3,3 6.2,-6.2 z"/>

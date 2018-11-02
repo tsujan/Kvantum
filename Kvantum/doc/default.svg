@@ -7997,13 +7997,32 @@
        style="fill:#d2d2d2;fill-opacity:1;stroke:#000000;stroke-width:1.64948654"
        sodipodi:nodetypes="ccccccc" />
   </g>
-  <path
-     style="fill:#d2d2d2;fill-opacity:1;stroke:#000000;stroke-width:1.01397157;stroke-miterlimit:4;stroke-dasharray:none"
-     d="m 970.33443,1100.2641 0,30.924 30.98607,0.062 0,-30.924 z m 3.59213,3.6289 23.80182,0.062 0,5.4085 -23.80182,0 z m -0.0624,9.0684 23.86426,0 0,14.6908 -23.80181,-0.062 z"
+  <g
      id="mdi-menu-normal"
-     inkscape:label="#path4489"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccccccccccccccc" />
+     inkscape:label="#g2805">
+    <path
+       id="rect2798"
+       d="m 962,1097 h 32 v 32 h -32 z"
+       style="opacity:0;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.20000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       style="fill:#d2d2d2;fill-opacity:1;stroke:#000000;stroke-width:1"
+       inkscape:connector-curvature="0"
+       id="path2778"
+       d="m 992.25,1109.7092 v 4.51 l -28.54,0 v -4.51 z" />
+    <path
+       d="m 992.25,1118.2092 v 4.51 l -28.54,0 v -4.51 z"
+       id="path2786"
+       inkscape:connector-curvature="0"
+       style="fill:#d2d2d2;fill-opacity:1;stroke:#000000;stroke-width:1"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       d="m 992.25,1101.2092 v 4.51 l -28.54,0 v -4.51 z"
+       id="path2788"
+       inkscape:connector-curvature="0"
+       style="fill:#d2d2d2;fill-opacity:1;stroke:#000000;stroke-width:1"
+       sodipodi:nodetypes="ccccc" />
+  </g>
   <text
      xml:space="preserve"
      style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"

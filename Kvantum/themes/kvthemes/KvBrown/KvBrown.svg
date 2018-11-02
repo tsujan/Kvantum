@@ -547,7 +547,12 @@
 <path style="opacity:.1;fill:url(#linearGradient7407)" id="dock-normal" d="m 25,955 h 30 v 30 H 25 Z"/>
 <path style="opacity:.5;fill:#60544c" id="progress-normal" d="M 297.5,272.49957 H 330 v 32.5 h -32.5 z"/>
 <path style="opacity:.6;fill:url(#linearGradient7901);fill-rule:evenodd" id="slider-normal" d="m 56,638.55609 h 16 v 16 H 56 Z"/>
-<path style="fill:#fff" id="mdi-menu-normal" d="m 969.5,1100.5014 v 30.9356 l 31,.062 v -30.9356 z  m 3.5937,3.6303 23.8125,.062 v 5.4105 h -23.8125 z  m -.0625,9.0718 h 23.875 v 14.6962 l -23.8126,-.062 z "/>
+<g style="opacity:.9" id="mdi-menu-normal">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 974,1098 h 32 v 32 h -32 z"/>
+<path style="fill:#fff" d="m 1003.5,1111.25 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#fff" d="m 1003.5,1120 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#fff" d="m 1003.5,1102.5 v 4.5 h -27 v -4.5 z"/>
+</g>
 <path style="fill:url(#linearGradient5941)" id="slider-toggled" d="m -653,122 h 16 v 16 h -16 z" transform="matrix(0,-1,1,0,0,0)"/>
 <path style="fill:url(#linearGradient8944);fill-rule:evenodd" id="itemview-pressed-top" d="m 76,1227 h 8 v 4 h -8 z"/>
 <g style="fill:#5a5a5a" id="itemview-pressed-bottom" transform="matrix(0.26666667,0,0,0.36363636,48.666666,1229.0501)">

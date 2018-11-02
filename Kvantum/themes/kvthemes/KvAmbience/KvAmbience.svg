@@ -492,8 +492,10 @@
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.784;color:#000" d="m 272.2715,396.1738 l -3.543,3.5273 6.7246,6.7481 -6.9707,6.9707 3.5352,3.5352 6.9629,-6.9629 6.748,6.7715 3.543,-3.5273 -6.7559,-6.7793 6.627,-6.6269 -3.5352,-3.5352 -6.6191,6.6191 -6.7168,-6.7402 z "/>
 </g>
 <g id="mdi-menu-normal">
-<path style="fill:#666;fill-rule:evenodd;fill-opacity:0" d="m 399,389 h 32 v 32 h -32 z"/>
-<path style="fill:#fff;fill-rule:evenodd;fill-opacity:.784;color:#000" d="m 401,391 v 28.25 h 28.25 V 391 Z m 3.5,3.5 h 21.25 v 5 H 404.5 Z m 0,9 h 21.25 v 12.25 H 404.5 Z"/>
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 397,395 h 32 v 32 h -32 z"/>
+<path style="fill:#fff;fill-opacity:.784" d="m 426.5,408.25 v 4.5 h -27 v -4.5 z"/>
+<path style="fill:#fff;fill-opacity:.784" d="m 426.5,417 v 4.5 h -27 V 417 Z"/>
+<path style="fill:#fff;fill-opacity:.784" d="m 426.5,399.5 v 4.5 h -27 v -4.5 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#mdi-maximize-focused" id="mdi-maximize-pressed" transform="translate(-1.1842344,44.02335)"/>
 <use width="100%" height="100%" xlink:href="#mdi-close-focused" id="mdi-close-pressed" transform="translate(-1,44)"/>

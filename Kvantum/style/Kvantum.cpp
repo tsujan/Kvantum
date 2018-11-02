@@ -2960,35 +2960,27 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_FrameWindow : {
-      QColor col = QApplication::palette().color(QPalette::Window);
-      if (!col.isValid()) break;
-      QRect r = option->rect;
+      /* QPainter::drawLine() isn't reliable with pixelRatio_>1. Also, note
+         that QRect::bottomRight() is one pixel short in both directions. */
 
-      painter->save();
+      QRect r = option->rect;
+      QColor shadow(0,0,0,55);
 
       // left
-      painter->setPen(QPen(col.lighter(130), 0));
-      painter->drawLine(QPoint(r.left()+1, r.top()+1),
-                        QPoint(r.left()+1, r.bottom()-1));
-      painter->setPen(QPen(col.darker(120), 0));
-      painter->drawLine(QPoint(r.left(), r.top()),
-                        QPoint(r.left(), r.bottom()));
+      painter->fillRect(QRect(QPoint(r.left()+1, r.top()), QPoint(r.left()+1, r.bottom()-1)),
+                        QColor(255,255,255,15));
+      painter->fillRect(QRect(QPoint(r.left(), r.top()), QPoint(r.left(), r.bottom()-1)),
+                        shadow);
       // bottom
-      painter->setPen(QPen(col.darker(120), 0));
-      painter->drawLine(QPoint(r.left()+1, r.bottom()-1),
-                        QPoint(r.right()-1, r.bottom()-1));
-      painter->setPen(QPen(col.darker(140), 0));
-      painter->drawLine(QPoint(r.left(), r.bottom()),
-                        QPoint(r.right(), r.bottom()));
+      painter->fillRect(QRect(QPoint(r.left()+2, r.bottom()-1), QPoint(r.right()-2, r.bottom()-1)),
+                        QColor(0,0,0,25));
+      painter->fillRect(QRect(QPoint(r.left(), r.bottom()), QPoint(r.right()-1, r.bottom())),
+                        shadow);
       // right
-      painter->setPen(QPen(col.darker(110), 0));
-      painter->drawLine(QPoint(r.right()-1, r.top()+1),
-                        QPoint(r.right()-1, r.bottom()-1));
-      painter->setPen(QPen(col.darker(120), 0));
-      painter->drawLine(QPoint(r.right(), r.top()),
-                        QPoint(r.right(), r.bottom()));
-
-      painter->restore();
+      painter->fillRect(QRect(QPoint(r.right()-1, r.top()), QPoint(r.right()-1, r.bottom()-1)),
+                        QColor(0,0,0,15));
+      painter->fillRect(QRect(QPoint(r.right(), r.top()), QPoint(r.right(), r.bottom())),
+                        shadow);
 
       break;
     }
@@ -5138,8 +5130,8 @@ void Style::drawControl(ControlElement element,
                               // see Qt -> qcombobox_p.h -> QComboMenuDelegate
                               && qobject_cast<const QComboBox*>(widget));
 
-          int iw = pixelMetric(PM_IndicatorWidth,option,widget);
-          int ih = pixelMetric(PM_IndicatorHeight,option,widget);
+          int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
+          int ih = qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget));
           if (hasLabel) // menu label
           {
             painter->save();
@@ -6667,23 +6659,64 @@ void Style::drawControl(ControlElement element,
       break;
     }
 
-    /*
-       Toolboxes are good as they are. A separate style for them
-       would have this disadvantage that their heights wouldn't
-       be adjusted to values of frame widths and other spacings.
-    */
-    /*case CE_ToolBoxTabShape : {
-      QString status = getState(option,widget);
-      const QString group = "ToolboxTab";
+    /* as in QCommonStyle but with more precision */
+    case CE_ToolBoxTabShape: {
+      /* Anti-aliasing is terrible with QPainter::drawPolyline().
+         So, we use QPainter::drawPolygon() instead. */
+      if (const QStyleOptionToolBox *opt = qstyleoption_cast<const QStyleOptionToolBox *>(option)) {
+        painter->save();
 
-      const frame_spec fspec = getFrameSpec(group);
-      const interior_spec ispec = getInteriorSpec(group);
+        painter->setRenderHints(QPainter::Antialiasing, true);
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(opt->palette.mid().color().darker(150));
+        QRectF R(opt->rect);
+        qreal d = 20.0 + R.height() - 3.0;
+        if (opt->direction != Qt::RightToLeft)
+        { // the shape is -----\__
+          painter->drawPolygon(QPolygonF() << QPointF(-1.0, 1.0)
+                                           << QPointF(R.width() - d, 1.0)
+                                           << QPointF(R.width() - 20.0, R.height() - 2.0)
+                                           << QPointF(R.width() - 1.0, R.height() - 2.0)
+                                           << QPointF(R.width() - 1.0, R.height() - 1.0)//
+                                           << QPointF(R.width() - 20.5, R.height() - 1.0)
+                                           << QPointF(R.width() - d - 0.5, 2.0)
+                                           << QPointF(-1.0, 2.0));
+          painter->setBrush(opt->palette.light().color());
+          painter->drawPolygon(QPolygonF() << QPointF(-1.0, 2.0)
+                                           << QPointF(R.width() - d - 0.5, 2.0)
+                                           << QPointF(R.width() - 20.5, R.height() - 1.0)
+                                           << QPointF(R.width() - 1.0, R.height() - 1.0)
+                                           << QPointF(R.width() - 1.0, R.height())//
+                                           << QPointF(R.width() - 21.0, R.height())
+                                           << QPointF(R.width() - d - 1.0, 3.0)
+                                           << QPointF(-1.0, 3.0));
+        }
+        else
+        { // the shape is __/-----
+          painter->drawPolygon(QPolygonF() << QPointF(R.width(), 1.0)
+                                           << QPointF(d - 1.0, 1.0)
+                                           << QPointF(19.0, R.height() - 2.0)
+                                           << QPointF(0.0, R.height() - 2.0)
+                                           << QPointF(0.0, R.height() - 1.0)//
+                                           << QPointF(19.5, R.height() - 1.0)
+                                           << QPointF(d - 0.5, 2.0)
+                                           << QPointF(R.width(), 2.0));
+          painter->setBrush(opt->palette.light().color());
+          painter->drawPolygon(QPolygonF() << QPointF(R.width(), 2.0)
+                                           << QPointF(d - 0.5, 2.0)
+                                           << QPointF(19.5, R.height() - 1.0)
+                                           << QPointF(0.0, R.height() - 1.0)
+                                           << QPointF(0.0, R.height())//
+                                           << QPointF(20.0, R.height())
+                                           << QPointF(d + 0.5, 3.0)
+                                           << QPointF(R.width(), 3.0));
+        }
 
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+        painter->restore();
+     }
 
       break;
-    }*/
+    }
 
     case CE_ToolBoxTabLabel : {
       if (const QStyleOptionToolBox *opt = qstyleoption_cast<const QStyleOptionToolBox*>(option))
@@ -11282,6 +11315,19 @@ void Style::drawComplexControl(ComplexControl control,
           //renderFrame(painter,o.rect,fspec,fspec.element+"-"+status);
           renderInterior(painter,o.rect,fspec,ispec,ispec.element+"-"+tbStatus);
 
+          /* do what's done in PE_FrameWindow */
+          QColor shadow(0,0,0,55);
+          // left
+          painter->fillRect(QRect(QPoint(o.rect.left()+1, o.rect.top()), QPoint(o.rect.left()+1, o.rect.bottom())),
+                            QColor(255,255,255,15));
+          painter->fillRect(QRect(QPoint(o.rect.left(), o.rect.top()), QPoint(o.rect.left(), o.rect.bottom())),
+                            shadow);
+          // right
+          painter->fillRect(QRect(QPoint(o.rect.right()-1, o.rect.top()), QPoint(o.rect.right()-1, o.rect.bottom())),
+                            QColor(0,0,0,15));
+          painter->fillRect(QRect(QPoint(o.rect.right(), o.rect.top()), QPoint(o.rect.right(), o.rect.bottom())),
+                            shadow);
+
           o.rect = subControlRect(CC_TitleBar,opt,SC_TitleBarLabel,widget);
           QString title = o.text;
           if (!title.isEmpty())
@@ -11371,7 +11417,8 @@ void Style::drawComplexControl(ComplexControl control,
                           option->direction);
         if ((opt->subControls & SC_TitleBarContextHelpButton)&& (ts & Qt::WindowContextHelpButtonHint))
           break;
-        /* FIXME Why is SP_TitleBarMenuButton used here? */
+        /* NOTE: Unfortunately, SP_TitleBarMenuButton is used directly, without a QStyleOption,
+                 in qmdisubwindow.cpp -> ControlLabel::updateWindowIcon() */
         if ((opt->subControls & SC_TitleBarSysMenu) && (tf & Qt::WindowSystemMenuHint))
         {
           /*if (!opt->icon.isNull())
@@ -11399,6 +11446,7 @@ void Style::drawComplexControl(ComplexControl control,
         : Disabled;
       const QIcon::State iconstate =
         (option->state & State_On) ? QIcon::On : QIcon::Off;
+      const int btnSize = pixelMetric(PM_TitleBarButtonIconSize, &btnOpt, widget);
       if (option->subControls & QStyle::SC_MdiCloseButton)
       {
         if (option->activeSubControls & QStyle::SC_MdiCloseButton)
@@ -11424,7 +11472,7 @@ void Style::drawComplexControl(ComplexControl control,
         btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiCloseButton, widget);
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarCloseButton,&btnOpt,widget),
-                                       iconmode,iconstate,QSize(16,16));
+                                       iconmode,iconstate,QSize(btnSize,btnSize));
         QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
                                      (QSizeF(pm.size())/pixelRatio_).toSize(),
                                      btnOpt.rect);
@@ -11456,7 +11504,7 @@ void Style::drawComplexControl(ComplexControl control,
         btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiNormalButton, widget);
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarNormalButton,&btnOpt,widget),
-                                       iconmode,iconstate,QSize(16,16));
+                                       iconmode,iconstate,QSize(btnSize,btnSize));
         QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
                                      (QSizeF(pm.size())/pixelRatio_).toSize(),
                                      btnOpt.rect);
@@ -11488,7 +11536,7 @@ void Style::drawComplexControl(ComplexControl control,
         btnOpt.rect = subControlRect(CC_MdiControls, option, SC_MdiMinButton, widget);
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarMinButton,&btnOpt,widget),
-                                                    iconmode,iconstate,QSize(16,16));
+                                                    iconmode,iconstate,QSize(btnSize,btnSize));
         QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
                                      (QSizeF(pm.size())/pixelRatio_).toSize(),
                                      btnOpt.rect);
@@ -12090,6 +12138,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       int h = qMax(lspec.left+fspec.left, lspec.right+fspec.right);
       return qMax(v,h);
     }
+
+    case PM_TitleBarButtonSize : return 16; // sets the space on menubar
+    case PM_TitleBarButtonIconSize : return 12; // sets the real button size on menubar
 
     case PM_TitleBarHeight : {
       // respect the text margins
@@ -12880,7 +12931,8 @@ QSize Style::sizeFromContents(ContentsType type,
         f = opt->font; // some apps (like TeXstudio) use special fonts (see CE_MenuItem)
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
-        int iconSize = qMax(pixelMetric(PM_SmallIconSize), opt->maxIconWidth);
+        int smallIconSize = pixelMetric(PM_SmallIconSize);
+        int iconSize = qMax(smallIconSize, opt->maxIconWidth);
         int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
         if (lxqtMenuIconSize >= 16
             && lxqtMenuIconSize != iconSize
@@ -12944,7 +12996,7 @@ QSize Style::sizeFromContents(ContentsType type,
 
         if (opt->menuHasCheckableItems)
         {
-          int cSize = pixelMetric(PM_IndicatorWidth,option,widget);
+          int cSize = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           s.rwidth() += cSize + pixelMetric(PM_CheckBoxLabelSpacing);
           /* for the height, see if there's really a check/radio button */
           if (opt->checkType == QStyleOptionMenuItem::Exclusive
@@ -15279,7 +15331,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMinButton : {
-      int s = qRound(12.0*pixelRatio_);
+      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15296,7 +15348,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMaxButton : {
-      int s = qRound(12.0*pixelRatio_);
+      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15308,7 +15360,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     }
     case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
-      int s = qRound(12.0*pixelRatio_);
+      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15335,7 +15387,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMenuButton : {
-      int s = qRound(12.0*pixelRatio_);
+      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -15346,7 +15398,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarNormalButton : {
-      int s = qRound(12.0*pixelRatio_);
+      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
