@@ -849,6 +849,11 @@ opaque_colors                     true/false          Should all (text) colors b
                                                       default, (text) colors are defined by
                                                       the theme and can be translucent.
 
+scroll_jump_workaround            true/false          Qt5 has a bug that causes annoying mouse
+                                                      wheel scroll jumps when mouse gestures
+                                                      are enabled. This key provides a
+                                                      workaround.
+
                            **********************
                            *** Other Sections ***
                            **********************

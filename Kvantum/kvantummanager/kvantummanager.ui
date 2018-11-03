@@ -621,7 +621,8 @@ as a workaround for bugs in applications.</string>
                  <property name="toolTip">
                   <string>This is not a complete fix but prevents
 annoying scroll jumps that may happen
-when mouse gestures are enabled.</string>
+with the mouse wheel when mouse gestures
+are enabled.</string>
                  </property>
                  <property name="text">
                   <string>Workaround for Qt's scroll jump bug</string>
