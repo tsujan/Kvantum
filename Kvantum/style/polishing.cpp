@@ -395,7 +395,14 @@ void Style::polish(QWidget *widget)
 
       break;
     }
-    default: break;
+    default: {
+      if (hspec_.scroll_jump_workaround)
+      {
+        widget->removeEventFilter(this);
+        widget->installEventFilter(this);
+      }
+      break;
+    }
   }
 
   if (isDolphin_
@@ -1109,7 +1116,11 @@ void Style::unpolish(QWidget *widget)
         forcedTranslucency_.remove(widget);
         break;
       }
-      default: break;
+      default: {
+        if (hspec_.scroll_jump_workaround)
+          widget->removeEventFilter(this);
+        break;
+      }
     }
 
     if (widget->inherits("KisAbstractSliderSpinBox")

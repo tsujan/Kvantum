@@ -450,6 +450,9 @@ class Style : public QCommonStyle {
     //mutable KvPointer<QWidget> sunkenButton_;
     mutable QPointer<QWidget> sunkenButton_;
 
+    /* Keep track of the widget in which the mouse cursor is entered (to work around Qt scroll jumps). */
+    QPointer<QWidget> enteredWidget_;
+
     /* For not getting the menu shadows repeatedly.
        They're used to position submenus correctly. */
     QList<int> menuShadow_, realMenuShadow_;

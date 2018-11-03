@@ -535,7 +535,7 @@ Konsole, QTerminal and LXQt panel are some examples.</string>
                 </widget>
                </item>
                <item row="3" column="3" colspan="2">
-                 <widget class="QCheckBox" name="checkBoxToolbar">
+                <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
                   <string>Only the top toolbar should be styled?
 
@@ -613,6 +613,18 @@ as a workaround for bugs in applications.</string>
                  </property>
                  <property name="text">
                   <string>Show KCapacityBar as progressbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxJumpWorkaround">
+                 <property name="toolTip">
+                  <string>This is not a complete fix but prevents
+annoying scroll jumps that may happen
+when mouse gestures are enabled.</string>
+                 </property>
+                 <property name="text">
+                  <string>Workaround for Qt's scroll jump bug</string>
                  </property>
                 </widget>
                </item>

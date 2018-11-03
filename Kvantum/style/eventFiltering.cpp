@@ -224,7 +224,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                && w->testAttribute(Qt::WA_StyledBackground)
                && w->testAttribute(Qt::WA_TranslucentBackground)
                && !isPlasma_ && !isOpaque_ && !subApp_ && !isLibreoffice_
-               /*&& tspec_.translucent_windows*/ // this could have weird effects with style or settings_ change
+               /*&& tspec_.translucent_windows*/ // this could have weird effects with style or settings change
               )
       {
         switch (w->windowFlags() & Qt::WindowType_Mask) {
@@ -256,6 +256,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
         }
       }
+    }
+    break;
+
+  case QEvent::Enter:
+    if (w && hspec_.scroll_jump_workaround)
+    {
+      if (qobject_cast<QLineEdit*>(o))
+      { // consider the special case of a spin box
+        if (QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(w->parentWidget()))
+        {
+          enteredWidget_ = sb;
+          break;
+        }
+      }
+      enteredWidget_ = w;
     }
     break;
 
@@ -1078,6 +1093,18 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         col.setAlpha(102); // 0.4 * disabledCol.alpha()
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         w->setPalette(palette);
+      }
+    }
+    break;
+
+  case QEvent::Wheel :
+    if (w && enteredWidget_.data() == w/* && hspec_.scroll_jump_workaround*/)
+    {
+      if (QWheelEvent *we = static_cast<QWheelEvent*>(e))
+      {
+        enteredWidget_.clear();
+        if (we->angleDelta().manhattanLength() > 240)
+          return true;
       }
     }
     break;

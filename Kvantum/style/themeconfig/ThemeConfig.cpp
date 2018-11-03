@@ -1128,6 +1128,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue("Hacks","middle_click_scroll");
   r.middle_click_scroll = v.toBool();
 
+  v = getValue("Hacks","scroll_jump_workaround");
+  r.scroll_jump_workaround = v.toBool();
+
   return r;
 }
 }

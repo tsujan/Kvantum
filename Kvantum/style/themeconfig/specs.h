@@ -287,6 +287,8 @@ typedef struct {
   /* should the scroll jump be done by middle clicking?
      (By default, it's done by left clicking.) */
   bool middle_click_scroll;
+  /* workaround for annoying Qt5 scroll jumps? */
+  bool scroll_jump_workaround;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -583,6 +585,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.iconless_menu = false;
   hspec.single_top_toolbar = false;
   hspec.middle_click_scroll = false;
+  hspec.scroll_jump_workaround = false;
 }
 }
 
