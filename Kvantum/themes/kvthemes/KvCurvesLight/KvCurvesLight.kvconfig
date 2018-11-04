@@ -50,7 +50,7 @@ submenu_overlap=0
 [GeneralColors]
 window.color=#E5E5E6
 base.color=#FBFBFB96
-alt.base.color=#0000000a
+alt.base.color=#F5F5F596
 button.color=#E5E5E6
 light.color=white
 mid.light.color=#ECECEC
@@ -219,7 +219,7 @@ text.margin.top=2
 text.margin.bottom=2
 frame.element=tab
 indicator.element=tab
-indicator.size=9
+indicator.size=12
 text.press.color=black
 text.toggle.color=black
 min_width=3font

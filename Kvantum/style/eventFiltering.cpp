@@ -1103,7 +1103,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (QWheelEvent *we = static_cast<QWheelEvent*>(e))
       {
         enteredWidget_.clear();
-        if (we->angleDelta().manhattanLength() > 240)
+        if (we->angleDelta().manhattanLength() >= 240)
           return true;
       }
     }

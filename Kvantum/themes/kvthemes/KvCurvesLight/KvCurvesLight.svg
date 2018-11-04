@@ -837,19 +837,19 @@
 <use width="100%" height="100%" xlink:href="#expand-tab-normal-bottomright" id="expand-tab-focused-bottomright" transform="translate(68,0)"/>
 <g id="tab-close-normal">
 <rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#6e6e6e;fill-rule:evenodd" d="m 329,798.334 a 6,6 0 0,0 -6,6 6,6 0 0,0 6,6 6,6 0 0,0 6,-6 6,6 0 0,0 -6,-6 z  m 0,3 a 3,3 0 0,1 3,3 3,3 0 0,1 -3,3 3,3 0 0,1 -3,-3 3,3 0 0,1 3,-3 z "/>
+<path style="fill:#6e6e6e;fill-rule:evenodd" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <g id="tab-close-focused" transform="translate(20)">
 <rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#5d86c5;fill-rule:evenodd" d="m 329,798.334 a 6,6 0 0,0 -6,6 6,6 0 0,0 6,6 6,6 0 0,0 6,-6 6,6 0 0,0 -6,-6 z  m 0,3 a 3,3 0 0,1 3,3 3,3 0 0,1 -3,3 3,3 0 0,1 -3,-3 3,3 0 0,1 3,-3 z "/>
+<path style="fill:#5d86c5;fill-rule:evenodd" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <g id="tab-close-pressed" transform="translate(40)">
 <rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill-rule:evenodd" d="m 329,798.334 a 6,6 0 0,0 -6,6 6,6 0 0,0 6,6 6,6 0 0,0 6,-6 6,6 0 0,0 -6,-6 z  m 0,3 a 3,3 0 0,1 3,3 3,3 0 0,1 -3,3 3,3 0 0,1 -3,-3 3,3 0 0,1 3,-3 z "/>
+<path style="fill:#373737;fill-rule:evenodd" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <g id="tab-close-disabled" transform="translate(60)">
 <rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill-rule:evenodd;fill-opacity:.275" d="m 329,798.334 a 6,6 0 0,0 -6,6 6,6 0 0,0 6,6 6,6 0 0,0 6,-6 6,6 0 0,0 -6,-6 z  m 0,3 a 3,3 0 0,1 3,3 3,3 0 0,1 -3,3 3,3 0 0,1 -3,-3 3,3 0 0,1 3,-3 z "/>
+<path style="fill-rule:evenodd;fill-opacity:.275" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-toggled-bottomleft" transform="matrix(1,0,0,-1,180,273)"/>
 <use width="100%" height="100%" xlink:href="#border-button-normal-top" id="border-button-toggled-bottom" transform="matrix(1,0,0,-1,180,273)"/>

@@ -703,7 +703,8 @@ inactive.base.color               string (#RRGGBBAA)  Background color of inacti
 
 alt.base.color                    string (#RRGGBBAA)  Used as the alternate background
                                                       color in views with alternating
-                                                      row colors.
+                                                      row colors. It should not have a
+                                                      high contrast with "base.color".
 
 inactive.alt.base.color           string (#RRGGBBAA)  Like above but for inactive widgets.
 
