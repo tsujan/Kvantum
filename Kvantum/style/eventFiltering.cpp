@@ -270,6 +270,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           break;
         }
       }
+      /* In the case of Dolphin, first KItemListContainerViewport is entered
+         and then only a QWidget, which ruins our workaround. Fortunately,
+         KItemListContainerViewport is the parent of that QWidget. */
+      if (enteredWidget_ && enteredWidget_.data()->inherits("KItemListContainerViewport")
+          && w->parentWidget() == enteredWidget_)
+      {
+        break;
+      }
       enteredWidget_ = w;
     }
     break;
