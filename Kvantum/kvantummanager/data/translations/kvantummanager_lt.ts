@@ -287,12 +287,14 @@ kaip problemų apėjimą programose.</translation>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai nėra pilnas pataisymas, tačiau jis neleidžia
+erzinančių slinkimo peršokimų, kurie gali nutikti
+su pelės ratuku, kuomet yra įjungti pelės gestai.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="628"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt slinkimo peršokimų problemos apėjimas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="654"/>
