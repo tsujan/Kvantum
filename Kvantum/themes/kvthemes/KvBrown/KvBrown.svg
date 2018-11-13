@@ -996,7 +996,7 @@
 <path style="fill:url(#linearGradient5461);fill-rule:evenodd" id="expand-tab-toggled-top" d="m 220,820 h 10 v 15 h -10 z"/>
 <path style="fill:url(#linearGradient5469);fill-rule:evenodd" id="expand-tab-toggled-bottom" d="m 220,835 h 10 v 15 h -10 z"/>
 <g id="expand-tab-toggled-topleft">
-<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:url(#linearGradient6038);fill-rule:evenodd" d="m 220,820 v 15 h -10 c 2.25,-13.25 1.7,-15 7.7,-15 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#expand-tab-toggled-bottomleft" id="expand-tab-toggled-bottomright" transform="matrix(-1,0,0,1,450,0)"/>
@@ -1005,34 +1005,34 @@
 <path style="fill:#6e625a;fill-rule:evenodd" id="border-tab-toggled-top" d="m 270,820 h 10 v 15 h -10 z"/>
 <path style="fill:#6e625a;fill-rule:evenodd" id="border-tab-toggled-bottom" d="m 270,835 h 10 v 15 h -10 z"/>
 <g id="border-tab-toggled-topleft" transform="translate(50)">
-<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#6e625a;fill-rule:evenodd" d="m 220,820 v 15 h -10 c 2,-12.25 1.7,-15 7.7,-15 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-bottomleft" id="border-tab-toggled-bottomright" transform="matrix(-1,0,0,1,550,0)"/>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-topleft" id="border-tab-toggled-topright" transform="matrix(-1,0,0,1,550,0)"/>
-<g id="tab-close-normal" transform="translate(110,5)">
-<path style="fill-rule:evenodd;fill-opacity:.004" d="m 280,865 h 10 v 10 h -10 z"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#d3c8bd;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.5" d="m 287.2502,870 a 2.25022,2.25022 0 0,1 -2.25022,2.25022 2.25022,2.25022 0 0,1 -2.25022,-2.25022 2.25022,2.25022 0 0,1 2.25022,-2.25022 2.25022,2.25022 0 0,1 2.25022,2.25022 Z "/>
+<g id="tab-close-normal" transform="matrix(1.2,0,0,1.2,45,-170)">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 280,865 h 10 v 10 h -10 z"/>
+<path style="fill:none;fill-rule:evenodd;stroke:#d3c8bd;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" d="m 286.875,870 a 1.87505,1.87505 0 0,1 -1.87505,1.87505 1.87505,1.87505 0 0,1 -1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,1.87505 Z "/>
 </g>
-<g id="tab-close-pressed" transform="translate(130,5)">
-<path style="fill-rule:evenodd;fill-opacity:.004" d="m 280,865 h 10 v 10 h -10 z"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.5" d="m 287.2502,870 a 2.25022,2.25022 0 0,1 -2.25022,2.25022 2.25022,2.25022 0 0,1 -2.25022,-2.25022 2.25022,2.25022 0 0,1 2.25022,-2.25022 2.25022,2.25022 0 0,1 2.25022,2.25022 Z "/>
+<g id="tab-close-pressed" transform="matrix(1.2,0,0,1.2,74,-170)">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 280,865 h 10 v 10 h -10 z"/>
+<path style="fill:none;fill-rule:evenodd;stroke:#ffbd87;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" d="m 286.875,870 a 1.87505,1.87505 0 0,1 -1.87505,1.87505 1.87505,1.87505 0 0,1 -1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,1.87505 Z "/>
 </g>
-<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(30)"/>
-<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-10)"/>
+<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(43)"/>
+<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-14)"/>
 <g id="tabframe-normal-top-leftjunct">
-<path style="fill-rule:evenodd;fill-opacity:.004" d="m 305,835 h 10 v 2 h -10 z"/>
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 305,835 h 10 v 2 h -10 z"/>
 <path style="fill:#6f6259;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-top-rightjunct" transform="matrix(-1,0,0,1,620,2)"/>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-rightjunct" transform="matrix(0,1,1,0,-520,530)"/>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-leftjunct" transform="matrix(0,-1,1,0,-518,1150)"/>
 <g id="tabframe-normal-right-leftjunct" transform="rotate(90,313,843)">
-<path style="fill-rule:evenodd;fill-opacity:.004" d="m 305,835 h 10 v 2 h -10 z"/>
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 305,835 h 10 v 2 h -10 z"/>
 <path style="fill:#6f6259;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <g id="tabframe-normal-bottom-leftjunct" transform="matrix(1,0,0,-1,0,1676)">
-<path style="fill-rule:evenodd;fill-opacity:.004" d="m 305,835 h 10 v 2 h -10 z"/>
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 305,835 h 10 v 2 h -10 z"/>
 <path style="fill:#6f6259;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <g id="group-normal-bottomleft">
@@ -1433,7 +1433,7 @@
 <use width="100%" height="100%" xlink:href="#expand-tab-toggled-topright" id="expand-tab-focus-topright" transform="translate(-78,128)"/>
 <path style="opacity:.35;fill:url(#linearGradient2651);fill-rule:evenodd" id="border-tab-focus-top" d="m 184,948 h 10 v 15 h -10 z"/>
 <g id="border-tab-focus-topleft" transform="translate(-36,128)">
-<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="opacity:.35;fill:url(#linearGradient2956);fill-rule:evenodd" d="m 220,820 v 15 h -10 c 2,-12.25 1.7,-15 7.7,-15 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-tab-focus-topleft" id="border-tab-focus-topright" transform="matrix(-1,0,0,1,378,0)"/>

@@ -1060,7 +1060,7 @@
 <rect width="10" x="220" y="820" height="15" style="fill:url(#linearGradient5461);fill-rule:evenodd" id="expand-tab-toggled-top"/>
 <rect width="10" x="220" y="835" height="15" style="fill:url(#linearGradient5469);fill-rule:evenodd" id="expand-tab-toggled-bottom"/>
 <g id="expand-tab-toggled-topleft">
-<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:url(#linearGradient6038);fill-rule:evenodd" d="m 220,820 v 15 h -10 c 1.72969,-12.9894 1,-15 7,-15 z "/>
 </g>
 <use width="100%" height="100%" xlink:href="#expand-tab-toggled-bottomleft" id="expand-tab-toggled-bottomright" transform="matrix(-1,0,0,1,450,0)"/>
@@ -1069,34 +1069,34 @@
 <rect width="10" x="270" y="820" height="15" style="fill:#aba095;fill-rule:evenodd" id="border-tab-toggled-top"/>
 <rect width="10" x="270" y="835" height="15" style="fill:#aba095;fill-rule:evenodd" id="border-tab-toggled-bottom"/>
 <g id="border-tab-toggled-topleft" transform="translate(50)">
-<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="15" x="205" y="820" height="15" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#aba095;fill-rule:evenodd" d="m 220,820 v 15 h -10 c 1.5,-12 1,-15 7,-15 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-bottomleft" id="border-tab-toggled-bottomright" transform="matrix(-1,0,0,1,550,0)"/>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-topleft" id="border-tab-toggled-topright" transform="matrix(-1,0,0,1,550,0)"/>
-<g id="tab-close-normal" transform="translate(110,5)">
-<rect width="10" x="280" y="865" height="10" style="fill-rule:evenodd;fill-opacity:.004"/>
-<circle cx="285" cy="870" style="fill:none;fill-rule:evenodd;stroke:#786450;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.5" r="2.2502196"/>
+<g id="tab-close-normal" transform="matrix(1.2,0,0,1.2,44,-170)">
+<rect width="10" x="280" y="865" height="10" style="fill-rule:evenodd;fill-opacity:0"/>
+<circle cx="285" cy="870" style="fill:none;fill-rule:evenodd;stroke:#786450;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" r="1.875"/>
 </g>
-<g id="tab-close-pressed" transform="translate(130,5)">
-<rect width="10" x="280" y="865" height="10" style="fill-rule:evenodd;fill-opacity:.004"/>
-<circle cx="285" cy="870" style="fill:none;fill-rule:evenodd;stroke:#1e1e1e;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.5" r="2.2502196"/>
+<g id="tab-close-pressed" transform="matrix(1.2,0,0,1.2,73,-170)">
+<rect width="10" x="280" y="865" height="10" style="fill-rule:evenodd;fill-opacity:0"/>
+<circle cx="285" cy="870" style="fill:none;fill-rule:evenodd;stroke:#1e1e1e;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" r="1.875"/>
 </g>
-<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(30)"/>
-<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-10)"/>
+<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(44)"/>
+<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-13)"/>
 <g id="tabframe-normal-top-leftjunct">
-<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#c9c3bd;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-top-rightjunct" transform="matrix(-1,0,0,1,620,2)"/>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-rightjunct" transform="matrix(0,1,1,0,-520,530)"/>
 <use width="100%" height="100%" xlink:href="#tabframe-normal-top-leftjunct" id="tabframe-normal-left-leftjunct" transform="matrix(0,-1,1,0,-518,1150)"/>
 <g id="tabframe-normal-right-leftjunct" transform="rotate(90,313,843)">
-<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#9a8f84;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <g id="tabframe-normal-bottom-leftjunct" transform="matrix(1,0,0,-1,0,1676)">
-<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:.004"/>
+<rect width="10" x="305" y="835" height="2" style="fill-rule:evenodd;fill-opacity:0"/>
 <path style="fill:#897d71;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
 </g>
 <g id="group-normal-bottomleft">

@@ -36,7 +36,7 @@ groupbox_top_label=true
 inline_spin_indicators=false
 joined_inactive_tabs=true
 no_inactive_tab_expansion=true
-tab_button_extra_margin=0.25font
+tab_button_extra_margin=0.15font
 large_icon_size=32
 layout_margin=4
 layout_spacing=2
@@ -163,7 +163,7 @@ frame.expanded.right=1
 text.press.color=black
 text.toggle.color=black
 frame.expansion=3.6font
-indicator.size=10
+indicator.size=12
 
 [TabFrame]
 inherits=PanelButtonCommand

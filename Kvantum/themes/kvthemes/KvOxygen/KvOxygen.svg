@@ -632,11 +632,11 @@
 <path style="fill-rule:evenodd" id="expand-progress-normal" d="m 410,150 0,10 10,0 0,-10 -10,0 z"/>
 <g id="tab-close-focused" transform="translate(40,20)">
 <rect width="18" x="250" y="950" height="18" style="opacity:0;fill-rule:evenodd"/>
-<path style="fill:#206ebc;fill-rule:evenodd" d="m 259,953 a 6,6 0 0 0 -6,6 6,6 0 0 0 6,6 6,6 0 0 0 6,-6 6,6 0 0 0 -6,-6 z m 0,3 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 z"/>
+<path style="fill:#206ebc;fill-rule:evenodd" d="m 259,954.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <g id="tab-close-pressed" transform="translate(65,20)">
 <rect width="18" x="250" y="950" height="18" style="opacity:0;fill-rule:evenodd"/>
-<path style="fill-rule:evenodd" d="m 259,953 a 6,6 0 0 0 -6,6 6,6 0 0 0 6,6 6,6 0 0 0 6,-6 6,6 0 0 0 -6,-6 z m 0,3 a 3,3 0 0 1 3,3 3,3 0 0 1 -3,3 3,3 0 0 1 -3,-3 3,3 0 0 1 3,-3 z"/>
+<path style="fill-rule:evenodd" d="m 259,954.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <path style="fill-rule:evenodd" id="expand-button-normal" d="M 0,10 H 10 V 20 H 0 Z"/>
 <path style="fill-rule:evenodd" id="expand-lineedit-normal" d="m 285,72.5 h 10 v 10 h -10 z"/>
@@ -1011,8 +1011,8 @@
 <path style="opacity:.44;fill:url(#radialGradient6742);fill-rule:evenodd" d="m 80,780.74988 v 4.25 C 82.75,785 85,787.25 85,790 v 2.99988 h 7.25 v -12.25 z"/>
 <path style="fill:url(#linearGradient5246);color:#000" d="m 80,785 c 2.75,0 5,2.25 5,5 v 2.99988 L 83.5,793 v -3 c 0,-2.25 -1.25,-3.5 -3.50014,-3.5 z"/>
 </g>
-<use width="100%" height="100%" style="opacity:.44" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-50,0)"/>
-<use width="100%" height="100%" style="opacity:.23" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26,0)"/>
+<use width="100%" height="100%" style="opacity:.44" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-50)"/>
+<use width="100%" height="100%" style="opacity:.23" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(26)"/>
 <use width="100%" height="100%" xlink:href="#menu-radio-normal" id="menu-radio-focused" transform="translate(20)"/>
 <use width="100%" height="100%" xlink:href="#menu-radio-checked-normal" id="menu-radio-checked-focused" transform="translate(22,0)"/>
 <use width="100%" height="100%" xlink:href="#menu-checkbox-normal" id="menu-checkbox-focused" transform="translate(20,0)"/>
