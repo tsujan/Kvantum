@@ -1010,16 +1010,13 @@
 </g>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-bottomleft" id="border-tab-toggled-bottomright" transform="matrix(-1,0,0,1,550,0)"/>
 <use width="100%" height="100%" xlink:href="#border-tab-toggled-topleft" id="border-tab-toggled-topright" transform="matrix(-1,0,0,1,550,0)"/>
-<g id="tab-close-normal" transform="matrix(1.2,0,0,1.2,45,-170)">
+<g id="tab-close-normal" transform="matrix(1.2,0,0,1.2,33,-170)">
 <path style="fill-rule:evenodd;fill-opacity:0" d="m 280,865 h 10 v 10 h -10 z"/>
 <path style="fill:none;fill-rule:evenodd;stroke:#d3c8bd;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" d="m 286.875,870 a 1.87505,1.87505 0 0,1 -1.87505,1.87505 1.87505,1.87505 0 0,1 -1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,1.87505 Z "/>
 </g>
-<g id="tab-close-pressed" transform="matrix(1.2,0,0,1.2,74,-170)">
-<path style="fill-rule:evenodd;fill-opacity:0" d="m 280,865 h 10 v 10 h -10 z"/>
-<path style="fill:none;fill-rule:evenodd;stroke:#ffbd87;stroke-linejoin:bevel;stroke-linecap:round;stroke-width:1.25" d="m 286.875,870 a 1.87505,1.87505 0 0,1 -1.87505,1.87505 1.87505,1.87505 0 0,1 -1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,-1.87505 1.87505,1.87505 0 0,1 1.87505,1.87505 Z "/>
-</g>
-<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(43)"/>
-<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-14)"/>
+<path style="fill:#ffc391;fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 395,865 a 8,8 0 0 0 -8,8 8,8 0 0 0 8,8 8,8 0 0 0 8,-8 8,8 0 0 0 -8,-8 z m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z"/>
+<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(67)"/>
+<use width="100%" height="100%" style="opacity:.7" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(24)"/>
 <g id="tabframe-normal-top-leftjunct">
 <path style="fill-rule:evenodd;fill-opacity:0" d="m 305,835 h 10 v 2 h -10 z"/>
 <path style="fill:#6f6259;fill-rule:evenodd" d="m 305,835 h 2 c 0,1.11049 -0.90056,2 -2,2 z"/>
@@ -1628,4 +1625,17 @@
 <path style="fill:#b74aff" id="menu-shadow-hint-top" d="m 55.8936,697.75 h 2.5 v 3.75 h -2.5 z "/>
 <path style="fill:#b74aff" id="menu-shadow-hint-right" d="m 85.8936,732 v -2.5 h 7.25 v 2.5 z "/>
 <path style="fill:#b74aff" id="menu-shadow-hint-left" d="m 20.6436,732 v -2.5 h 7.25 v 2.5 z "/>
+<g style="opacity:.7" id="arrow-restore" transform="translate(4,344)">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 358,554 h 32 v 32 h -32 z"/>
+<g style="color-rendering:auto;color:#000">
+<path style="fill:#fff" d="m 368.75,559.75 15.5,15.5 v -15.5 z"/>
+<path style="fill:#fff" d="m 379.25,580.25 -15.5,-15.5 v 15.5 z"/>
+</g>
+</g>
+<g style="fill-rule:evenodd" id="arrow-close" transform="translate(195,514)">
+<path style="opacity:0" d="m 209,384 h 32 v 32 h -32 z"/>
+<g transform="matrix(0.5,0,0,0.5,112.5,170)">
+<path style="opacity:.7;fill:#fff;stroke-width:.531" d="m 225,391.5 a 8.5,8.5 0 0 0 -8.5,8.5 8.5,8.5 0 0 0 8.5,8.5 8.5,8.5 0 0 0 8.5,-8.5 8.5,8.5 0 0 0 -8.5,-8.5 z m 0,4 a 4.5,4.5 0 0 1 4.5,4.5 4.5,4.5 0 0 1 -4.5,4.5 4.5,4.5 0 0 1 -4.5,-4.5 4.5,4.5 0 0 1 4.5,-4.5 z" transform="matrix(2,0,0,2,-225,-340)"/>
+</g>
+</g>
 </svg>

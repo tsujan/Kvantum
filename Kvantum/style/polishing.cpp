@@ -621,6 +621,7 @@ void Style::polish(QWidget *widget)
                  && !qobject_cast<QLineEdit*>(pw)) // exclude line-edit clear buttons
              || qobject_cast<QCheckBox*>(widget)
              || qobject_cast<QRadioButton*>(widget)
+             || (qobject_cast<QAbstractButton*>(widget) && qobject_cast<QTabBar*>(pw)) // tab close button
              || widget->inherits("QComboBoxPrivateContainer")))
             /* unfortunately, KisSliderSpinBox uses a null widget in drawing
                its progressbar, so we can identify it only through eventFilter()
@@ -1135,6 +1136,7 @@ void Style::unpolish(QWidget *widget)
             (qobject_cast<QPushButton*>(widget)
              || qobject_cast<QCheckBox*>(widget)
              || qobject_cast<QRadioButton*>(widget)
+             || (qobject_cast<QAbstractButton*>(widget) && qobject_cast<QTabBar*>(widget->parentWidget()))
              || qobject_cast<QScrollBar*>(widget)
              || qobject_cast<QSlider*>(widget)
              || qobject_cast<QLineEdit*>(widget)

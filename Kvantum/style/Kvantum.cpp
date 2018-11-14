@@ -4469,6 +4469,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       default_frame_spec(fspec);
       const indicator_spec dspec = getIndicatorSpec("Tab");
 
+      bool pseudoState(false);
       QString status;
       if (!(option->state & State_Enabled))
         status = "disabled";
@@ -4476,24 +4477,16 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         if (option->state & State_Sunken)
         {
-          if (renderIndicator(painter, option->rect, fspec, dspec,
-                              dspec.element+"-close-toggledPressed",
-                              option->direction))
-          {
-            break;
-          }
+          pseudoState = true;
+          status = "toggledPressed";
         }
         else if (option->state & State_MouseOver)
         {
-          if (renderIndicator(painter, option->rect, fspec, dspec,
-                              dspec.element+"-close-toggledFocused" + (isWidgetInactive(widget)
-                                                                       ? "-inactive" : QString()),
-                              option->direction))
-          {
-            break;
-          }
+          pseudoState = true;
+          status = "toggledFocused";
         }
-        status = "toggled";
+        else
+          status = "toggled";
       }
       else
       {
@@ -4502,7 +4495,57 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       if (isWidgetInactive(widget))
         status.append("-inactive");
-      renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status,option->direction);
+
+      QObject *styleObject = option->styleObject;
+      QString animationStartState;
+      if (styleObject)
+        animationStartState = styleObject->property("_kv_state").toString();
+      bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+                   && !animationStartState.isEmpty()
+                   && qobject_cast<const QAbstractButton*>(widget));
+      if (animate && animationStartState == status)
+      {
+        if (opacityTimer_->isActive())
+          opacityTimer_->stop();
+        animationOpacity_ = 0;
+        animate = false;
+      }
+
+      if (animate)
+      {
+        if (!opacityTimer_->isActive())
+        {
+          animationOpacity_ = 0;
+          opacityTimer_->start(ANIMATION_FRAME);
+        }
+        if (animationOpacity_ < 100)
+        {
+          renderIndicator(painter,option->rect,fspec,dspec,
+                                  dspec.element+"-close-"+animationStartState,option->direction);
+        }
+        painter->save();
+        painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
+      }
+
+      if (pseudoState)
+      {
+        if(!renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status,option->direction))
+        { // the "toggledX" pseudo-state doesn't exist
+          status = "toggled" + (isWidgetInactive(widget) ? "-inactive" : QString());
+          renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status,option->direction);
+        }
+      }
+      else
+        renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-close-"+status,option->direction);
+
+      if (animate)
+      {
+          painter->restore();
+          if (animationOpacity_ >= 100)
+            styleObject->setProperty("_kv_state", status);
+      }
+      else if (styleObject)
+          styleObject->setProperty("_kv_state", status);
 
       break;
     }
