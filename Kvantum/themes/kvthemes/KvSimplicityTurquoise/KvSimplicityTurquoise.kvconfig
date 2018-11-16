@@ -270,7 +270,7 @@ indicator.element=resize-grip
 [Toolbar]
 inherits=PanelButtonCommand
 indicator.element=toolbar
-indicator.size=5
+indicator.size=6
 text.margin=0
 interior.element=menubar
 frame.element=menubar

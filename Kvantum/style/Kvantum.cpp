@@ -13326,7 +13326,9 @@ QSize Style::sizeFromContents(ContentsType type,
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         int iconSize = pixelMetric(PM_SmallIconSize);
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+        QString txt = opt->text;
+        if (txt.isEmpty()) txt = "W"; // QML doesn't provide contentsSize, so we make one
+        s = sizeCalculated(f,fspec,lspec,sspec,txt,
                            opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize));
         if (opt->sortIndicator != QStyleOptionHeader::None)
           s.rwidth() += dspec.size + pixelMetric(PM_HeaderMargin);
