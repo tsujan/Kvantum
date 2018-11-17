@@ -13327,7 +13327,7 @@ QSize Style::sizeFromContents(ContentsType type,
 
         int iconSize = pixelMetric(PM_SmallIconSize);
         QString txt = opt->text;
-        if (txt.isEmpty()) txt = "W"; // QML doesn't provide contentsSize, so we make one
+        if (txt.isEmpty()) txt = "W"; // QML doesn't give a good contentsSize for empty sections
         s = sizeCalculated(f,fspec,lspec,sspec,txt,
                            opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize));
         if (opt->sortIndicator != QStyleOptionHeader::None)
