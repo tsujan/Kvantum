@@ -400,6 +400,11 @@ toolbutton_style                  integer             Sets the toolbutton style 
                                                       4: text under icon. The toolbutton
                                                       style is 0 by default.
 
+dialog_button_layout              integer             The layout of dialog buttons. 0: follow,
+                                                      1: KDE layout, 2: Gnome layout,
+                                                      3: Mac layout, 4: Windows layout, and
+                                                      5: Android layout. The default is 0.
+
 spread_progressbar                true/false          Spread the progressbar's indicator
                                                       across its whole groove and not
                                                       just its interior? By default,

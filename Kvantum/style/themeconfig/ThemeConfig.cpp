@@ -912,6 +912,10 @@ theme_spec ThemeConfig::getThemeSpec()
   else
     r.scroll_arrows = false;
 
+  v = getValue("General","dialog_button_layout");
+  if (v.isValid()) // 0 by default
+    r.dialog_button_layout = qMin(qMax(v.toInt(),0), 5);
+
   v = getValue("General","layout_spacing");
   if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);

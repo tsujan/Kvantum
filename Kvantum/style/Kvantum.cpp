@@ -53,8 +53,8 @@
 #include <QRadioButton>
 #include <QStandardPaths>
 #include <QItemSelectionModel>
+#include <QDialogButtonBox> // for dialog buttons layout
 //#include <QDebug>
-//#include <QDialogButtonBox> // for dialog buttons layout
 #include <QSurfaceFormat>
 #include <QWindow>
 #if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
@@ -12577,7 +12577,19 @@ int Style::styleHint(StyleHint hint,
       return false;
     }
 
-    //case SH_DialogButtonLayout: return QDialogButtonBox::GnomeLayout;
+    case SH_DialogButtonLayout: {
+      switch (tspec_.dialog_button_layout) {
+        case 0 : return QCommonStyle::styleHint(hint,option,widget,returnData);
+        case 1 : return QDialogButtonBox::KdeLayout;
+        case 2 : return QDialogButtonBox::GnomeLayout;
+        case 3 : return QDialogButtonBox::MacLayout;
+        case 4 : return QDialogButtonBox::WinLayout;
+#if (QT_VERSION >= QT_VERSION_CHECK(5,10,0))
+        case 5 : return QDialogButtonBox::AndroidLayout;
+#endif
+        default :return QCommonStyle::styleHint(hint,option,widget,returnData);
+      }
+    }
 
     //case SH_SpinControls_DisableOnBounds: return true;
 
@@ -13948,27 +13960,20 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
               || align == Qt::AlignHCenter
               || align == Qt::AlignJustify)
           {
-            const QStyleOptionViewItem *vopt1 =
-              qstyleoption_cast<const QStyleOptionViewItem*>(option);
-            if (vopt1)
+            QString txt = opt->text;
+            if (!txt.isEmpty())
             {
-              QString txt = vopt1->text;
-              if (!txt.isEmpty())
+              QStringList l = txt.split('\n');
+              int txtHeight = QFontMetrics(opt->font).height()*(l.size());
+              if (l.size() > 1)
               {
-                QStringList l = txt.split('\n');
-                int txtHeight = 0;
-                if (l.size() == 1)
-                  txtHeight = QFontMetrics(opt->font).height()*(l.size());
-                else
-                {
-                  txtHeight = QFontMetrics(opt->font).boundingRect(QLatin1Char('M')).height()*1.6;
-                  txtHeight *= l.size();
-                }
-                r = alignedRect(option->direction,
-                               align | Qt::AlignVCenter,
-                               QSize(r.width(), txtHeight),
-                               r);
+                QRect br = QFontMetrics(opt->font).boundingRect(QRect(0,0,r.width(),txtHeight), Qt::AlignCenter, txt);
+                txtHeight = br.height();
               }
+              r = alignedRect(option->direction,
+                             align | Qt::AlignVCenter,
+                             QSize(r.width(), txtHeight),
+                             r);
             }
           }
         }

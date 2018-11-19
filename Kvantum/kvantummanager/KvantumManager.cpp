@@ -78,6 +78,13 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                                                        << tr ("Text Beside Icon")
                                                        << tr ("Text Under Icon"));
 
+    ui->comboDialogButton->insertItems (0, QStringList() << tr ("Follow Style")
+                                                         << tr ("KDE Layout")
+                                                         << tr ("Gnome Layout")
+                                                         << tr ("Mac Layout")
+                                                         << tr ("Windows Layout")
+                                                         << tr ("Android Layout"));
+
     ui->comboX11Drag->insertItems (0, QStringList() << tr ("Titlebar")
                                                     << tr ("Menubar")
                                                     << tr ("Menubar and primary toolbar")
@@ -934,6 +941,12 @@ void KvantumManager::defaultThemeButtons()
         if (index > 4 || index < 0) index = 0;
     }
     ui->comboToolButton->setCurrentIndex (index);
+    if (defaultSettings.contains ("dialog_button_layout"))
+    {
+        index = defaultSettings.value ("dialog_button_layout").toInt();
+        if (index > 5 || index < 0) index = 0;
+    }
+    ui->comboDialogButton->setCurrentIndex (index);
     ui->comboX11Drag->setCurrentIndex(toDrag(defaultSettings.value("x11drag").toString()));
     if (defaultSettings.contains ("respect_DE"))
         ui->checkBoxDE->setChecked (defaultSettings.value ("respect_DE").toBool());
@@ -1228,6 +1241,12 @@ void KvantumManager::tabChanged (int index)
                     int index = themeSettings.value ("toolbutton_style").toInt();
                     if (index > 4 || index < 0) index = 0;
                     ui->comboToolButton->setCurrentIndex (index);
+                }
+                if (themeSettings.contains ("dialog_button_layout"))
+                {
+                    int index = themeSettings.value ("dialog_button_layout").toInt();
+                    if (index > 5 || index < 0) index = 0;
+                    ui->comboDialogButton->setCurrentIndex (index);
                 }
                 if (themeSettings.contains ("x11drag"))
                     ui->comboX11Drag->setCurrentIndex(toDrag(themeSettings.value("x11drag").toString()));
@@ -2057,6 +2076,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
+        generalKeys.insert("dialog_button_layout", str.setNum (ui->comboDialogButton->currentIndex()));
         generalKeys.insert("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
         generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
         generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));

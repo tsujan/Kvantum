@@ -1462,6 +1462,238 @@ while 0 means no delay.</string>
                <string>Miscellaneous</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_11">
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBoxDE">
+                 <property name="toolTip">
+                  <string>When this is enabled and checked, Kvantum will try to
+respect some settings of the current desktop environment.
+
+This checkbox may disable some options.
+Uncheck it if you want to use those options!</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Respect current DE if possible</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxTree">
+                 <property name="toolTip">
+                  <string>Draw tree branch lines?
+
+By default, tree branches have indicators but no line.</string>
+                 </property>
+                 <property name="text">
+                  <string>Tree branch lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="checkBoxClick">
+                 <property name="toolTip">
+                  <string>Activate view items always on double clicking?
+
+When unchecked, single-click is preferred.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="text">
+                  <string>Double-click for view items</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxScrollableMenu">
+                 <property name="toolTip">
+                  <string>Should big menus be scrollable and have
+scroll arrows on their top and/or bottom?
+
+By default, all of their menu-items are shown.</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollable menus</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QCheckBox" name="checkBoxInlineSpin">
+                 <property name="toolTip">
+                  <string>By default, spin indicators are drawn as
+two buttons with arrows or plus/minus signs.
+
+Checking this integrates the spin indicators
+into the spin line-edit..</string>
+                 </property>
+                 <property name="text">
+                  <string>Inline spin indicators</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxGroupLabel">
+                 <property name="toolTip">
+                  <string>By default, the label is on the frame
+and the frame is cut to contain it.
+
+Checking this puts the label right above
+the frame, so that the frame isn't cut.</string>
+                 </property>
+                 <property name="text">
+                  <string>Group-box label above frame</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QCheckBox" name="checkBoxVSpin">
+                 <property name="toolTip">
+                  <string>By default, spin indicators are drawn on adjacent buttons.
+
+Checking this puts the spin-up indicator above the
+spin-down one inside the spin line-edit.</string>
+                 </property>
+                 <property name="text">
+                  <string>Vertical spin indicators</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxRubber">
+                 <property name="toolTip">
+                  <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow.
+
+This option fills drop rectangles with
+the highlight color.</string>
+                 </property>
+                 <property name="text">
+                  <string>Fill rubber-band rectangles</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QCheckBox" name="checkBoxComboEdit">
+                 <property name="toolTip">
+                  <string>Draw the whole editable combo-box as a
+line-edit with arrow (and icon, if it exists)?</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Editable combo as line-edit</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxMenubar">
+                 <property name="toolTip">
+                  <string>Mouse tracking is enabled
+for menubars by default.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Mouse tracking for menubars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QCheckBox" name="checkBoxComboMenu">
+                 <property name="toolTip">
+                  <string>Draw combo popups as menu popups (i.e. like in Gtk)?
+
+By default, combo popups do not cover the combo box.</string>
+                 </property>
+                 <property name="text">
+                  <string>Combo popup as menu</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxMenuToolbar">
+                 <property name="toolTip">
+                  <string>If checked, the menubar and toolbar will be drawn as a whole by
+the toolbar SVG element when they are adjacent to each another.</string>
+                 </property>
+                 <property name="text">
+                  <string>Merge menubar with toolbar</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QCheckBox" name="checkBoxHideComboCheckboxes">
+                 <property name="toolTip">
+                  <string>When drawing combo popups as menus,
+there will be a checkbox next to each entry
+(although Kvantum draws it as a radio button).
+
+This option will hide these.</string>
+                 </property>
+                 <property name="text">
+                  <string>Non-checkable combo menu</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxGroupToolbar">
+                 <property name="toolTip">
+                  <string>If checked, toolbar buttons will be drawn grouped and raised
+between toolbar separators.</string>
+                 </property>
+                 <property name="text">
+                  <string>Group toolbar buttons</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QCheckBox" name="checkBoxleftTab">
+                 <property name="toolTip">
+                  <string>In Kvantum, tabs are centered by default.</string>
+                 </property>
+                 <property name="text">
+                  <string>Left aligned tabs</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxButtonShift">
+                 <property name="toolTip">
+                  <string>Shift the contents of push buttons when pressed?
+
+By default, the contents are shifted by 1px
+both horizontally and vertically.</string>
+                 </property>
+                 <property name="text">
+                  <string>Shift push-button contents</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxJoinTab">
+                 <property name="toolTip">
+                  <string>Inactive tabs are joined together by default,
+i.e., there is no border between them.</string>
+                 </property>
+                 <property name="text">
+                  <string>Join inactive tabs</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxAlt">
+                 <property name="toolTip">
+                  <string>If unchecked, shortcuts will not be underlined at all.</string>
+                 </property>
+                 <property name="text">
+                  <string>Underline shortcuts with Alt</string>
+                 </property>
+                </widget>
+               </item>
                <item row="9" column="0">
                 <spacer name="horizontalSpacer_8">
                  <property name="orientation">
@@ -1505,145 +1737,6 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </spacer>
                </item>
-               <item row="9" column="5">
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>5</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="10" column="1">
-                <widget class="QCheckBox" name="checkBoxScrollIn">
-                 <property name="toolTip">
-                  <string>Draw scrollbars inside view frames?
-
-By default, scrollbars are drawn outide view frames.
-
-If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
-                 </property>
-                 <property name="text">
-                  <string>Scrollbars inside frames</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTree">
-                 <property name="toolTip">
-                  <string>Draw tree branch lines?
-
-By default, tree branches have indicators but no line.</string>
-                 </property>
-                 <property name="text">
-                  <string>Tree branch lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxScrollableMenu">
-                 <property name="toolTip">
-                  <string>Should big menus be scrollable and have
-scroll arrows on their top and/or bottom?
-
-By default, all of their menu-items are shown.</string>
-                 </property>
-                 <property name="text">
-                  <string>Scrollable menus</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGroupLabel">
-                 <property name="toolTip">
-                  <string>By default, the label is on the frame
-and the frame is cut to contain it.
-
-Checking this puts the label right above
-the frame, so that the frame isn't cut.</string>
-                 </property>
-                 <property name="text">
-                  <string>Group-box label above frame</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxRubber">
-                 <property name="toolTip">
-                  <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow.
-
-This option fills drop rectangles with
-the highlight color.</string>
-                 </property>
-                 <property name="text">
-                  <string>Fill rubber-band rectangles</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenubar">
-                 <property name="toolTip">
-                  <string>Mouse tracking is enabled
-for menubars by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Mouse tracking for menubars</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenuToolbar">
-                 <property name="toolTip">
-                  <string>If checked, the menubar and toolbar will be drawn as a whole by
-the toolbar SVG element when they are adjacent to each another.</string>
-                 </property>
-                 <property name="text">
-                  <string>Merge menubar with toolbar</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGroupToolbar">
-                 <property name="toolTip">
-                  <string>If checked, toolbar buttons will be drawn grouped and raised
-between toolbar separators.</string>
-                 </property>
-                 <property name="text">
-                  <string>Group toolbar buttons</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxButtonShift">
-                 <property name="toolTip">
-                  <string>Shift the contents of push buttons when pressed?
-
-By default, the contents are shifted by 1px
-both horizontally and vertically.</string>
-                 </property>
-                 <property name="text">
-                  <string>Shift push-button contents</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxAlt">
-                 <property name="toolTip">
-                  <string>If unchecked, shortcuts will not be underlined at all.</string>
-                 </property>
-                 <property name="text">
-                  <string>Underline shortcuts with Alt</string>
-                 </property>
-                </widget>
-               </item>
                <item row="9" column="3">
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
@@ -1673,7 +1766,44 @@ Default is &quot;Follow Style&quot;.</string>
                  </property>
                 </widget>
                </item>
+               <item row="9" column="5">
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="10" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollIn">
+                 <property name="toolTip">
+                  <string>Draw scrollbars inside view frames?
+
+By default, scrollbars are drawn outide view frames.
+
+If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollbars inside frames</string>
+                 </property>
+                </widget>
+               </item>
                <item row="10" column="3">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Dialog button layout:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="10" column="4">
+                <widget class="QComboBox" name="comboDialogButton"/>
+               </item>
+               <item row="11" column="3">
                 <widget class="QLabel" name="labelX11Drag">
                  <property name="toolTip">
                   <string>Drag windows from their menubars, primary toolbars
@@ -1687,7 +1817,7 @@ Miscellaneous → Respect current DE if possible</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="4">
+               <item row="11" column="4">
                 <widget class="QComboBox" name="comboX11Drag">
                  <property name="toolTip">
                   <string>Drag windows from their menubars, primary toolbars
@@ -1695,126 +1825,6 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QCheckBox" name="checkBoxInlineSpin">
-                 <property name="toolTip">
-                  <string>By default, spin indicators are drawn as
-two buttons with arrows or plus/minus signs.
-
-Checking this integrates the spin indicators
-into the spin line-edit..</string>
-                 </property>
-                 <property name="text">
-                  <string>Inline spin indicators</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="1">
-                <widget class="QCheckBox" name="checkBoxComboEdit">
-                 <property name="toolTip">
-                  <string>Draw the whole editable combo-box as a
-line-edit with arrow (and icon, if it exists)?</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Editable combo as line-edit</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="checkBoxClick">
-                 <property name="toolTip">
-                  <string>Activate view items always on double clicking?
-
-When unchecked, single-click is preferred.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="text">
-                  <string>Double-click for view items</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="QCheckBox" name="checkBoxVSpin">
-                 <property name="toolTip">
-                  <string>By default, spin indicators are drawn on adjacent buttons.
-
-Checking this puts the spin-up indicator above the
-spin-down one inside the spin line-edit.</string>
-                 </property>
-                 <property name="text">
-                  <string>Vertical spin indicators</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QCheckBox" name="checkBoxDE">
-                 <property name="toolTip">
-                  <string>When this is enabled and checked, Kvantum will try to
-respect some settings of the current desktop environment.
-
-This checkbox may disable some options.
-Uncheck it if you want to use those options!</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="text">
-                  <string>Respect current DE if possible</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="1">
-                <widget class="QCheckBox" name="checkBoxComboMenu">
-                 <property name="toolTip">
-                  <string>Draw combo popups as menu popups (i.e. like in Gtk)?
-
-By default, combo popups do not cover the combo box.</string>
-                 </property>
-                 <property name="text">
-                  <string>Combo popup as menu</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QCheckBox" name="checkBoxHideComboCheckboxes">
-                 <property name="toolTip">
-                  <string>When drawing combo popups as menus,
-there will be a checkbox next to each entry
-(although Kvantum draws it as a radio button).
-
-This option will hide these.</string>
-                 </property>
-                 <property name="text">
-                  <string>Non-checkable combo menu</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="1">
-                <widget class="QCheckBox" name="checkBoxleftTab">
-                 <property name="toolTip">
-                  <string>In Kvantum, tabs are centered by default.</string>
-                 </property>
-                 <property name="text">
-                  <string>Left aligned tabs</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxJoinTab">
-                 <property name="toolTip">
-                  <string>Inactive tabs are joined together by default,
-i.e., there is no border between them.</string>
-                 </property>
-                 <property name="text">
-                  <string>Join inactive tabs</string>
                  </property>
                 </widget>
                </item>

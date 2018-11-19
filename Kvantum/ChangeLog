@@ -29,6 +29,7 @@ V0.10.9
  * Removed text shadow depths > 1 until Qt supports a better way of adding text shadows with QPainter.
  * Added a workaround for Qt scroll jump with mouse gestures (as a hacking option in Kvantum Manager).
  * Animation for tab close buttons.
+ * Added an option (to Kvantum Manager) for setting the dialog button layout.
 
 V0.10.8
 ---------

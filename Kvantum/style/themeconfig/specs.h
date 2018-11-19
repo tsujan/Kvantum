@@ -196,6 +196,8 @@ typedef struct {
   bool transient_groove;
   /* should we request a dark titlebar under Gtk desktops? */
   bool dark_titlebar;
+  /* the layout of dialog buttons */
+  int dialog_button_layout;
 
   int layout_spacing;
   int layout_margin;
@@ -525,6 +527,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.transient_scrollbar = false;
   tspec.transient_groove = false;
   tspec.dark_titlebar = false;
+  tspec.dialog_button_layout = 0;
   tspec.layout_spacing = 2;
   tspec.layout_margin = 4;
   tspec.small_icon_size = 16;
