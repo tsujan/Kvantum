@@ -55,7 +55,6 @@ hide_combo_checkboxes=false
 no_window_pattern=false
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam
 reduce_window_opacity=0
-scrollable_menu=false
 submenu_delay=250
 transient_groove=false
 check_size=14

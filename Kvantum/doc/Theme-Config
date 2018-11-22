@@ -463,10 +463,10 @@ composite                         true/false          Use compositing to have
                                                       if no compositing is available.
                                                       Its absence also means false.
 
-scrollable_menu                   true/false          Should (big) menus be scrollable and
+scrollable_menu                   true/false          Should big menus be scrollable and
                                                       have scroll arrows on their top and/or
-                                                      bottom? False by default, which means
-                                                      all menu-items are shown.
+                                                      bottom? True by default. With a false
+                                                      value, all menu-items are shown.
 
 menu_separator_height             integer             The height of menu separators. 10 by
                                                       default and always between 1 and 16 px.

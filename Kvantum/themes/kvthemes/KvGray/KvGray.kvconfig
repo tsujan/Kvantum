@@ -41,7 +41,6 @@ toolbar_interior_spacing=1
 respect_DE=true
 scroll_arrows=true
 scroll_min_extent=50
-scrollable_menu=false
 scrollbar_in_view=false
 small_icon_size=16
 spin_button_width=18

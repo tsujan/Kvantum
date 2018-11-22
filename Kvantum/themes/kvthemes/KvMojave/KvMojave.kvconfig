@@ -56,7 +56,6 @@ layout_margin=4
 no_window_pattern=false
 reduce_window_opacity=0
 respect_DE=true
-scrollable_menu=false
 scrollbar_in_view=false
 spin_button_width=16
 submenu_delay=250

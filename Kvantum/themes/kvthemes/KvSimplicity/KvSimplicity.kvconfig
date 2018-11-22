@@ -76,6 +76,7 @@ kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame=true

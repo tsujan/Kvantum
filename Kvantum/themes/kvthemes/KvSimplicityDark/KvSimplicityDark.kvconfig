@@ -48,6 +48,7 @@ submenu_overlap=0
 tooltip_delay=-1
 button_contents_shift=true
 animate_states=true
+no_window_pattern=true
 dark_titlebar=true
 
 [GeneralColors]
@@ -55,10 +56,10 @@ window.color=#3e3e3e
 base.color=#282828
 alt.base.color=#323232
 button.color=#3e3e3e
-light.color=#626262
+light.color=#606060
 mid.light.color=#555555
 dark.color=#171717
-mid.color=#303030
+mid.color=#3c3c3c
 highlight.color=#416fa1
 inactive.highlight.color=#6e6e6e
 tooltip.base.color=black
@@ -87,6 +88,7 @@ lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
 single_top_toolbar=true
 tint_on_mouseover=0
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame=true

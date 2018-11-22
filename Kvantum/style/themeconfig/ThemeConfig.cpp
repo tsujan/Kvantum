@@ -876,7 +876,8 @@ theme_spec ThemeConfig::getThemeSpec()
   r.combo_focus_rect = v.toBool();
 
   v = getValue("General","scrollable_menu");
-  r.scrollable_menu = v.toBool();
+  if (v.isValid()) // true by default
+    r.scrollable_menu = v.toBool();
 
   v = getValue("General","fill_rubberband");
   r.fill_rubberband = v.toBool();

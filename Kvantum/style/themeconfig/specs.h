@@ -519,7 +519,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.combo_menu = false;
   tspec.hide_combo_checkboxes = false;
   tspec.combo_focus_rect = false;
-  tspec.scrollable_menu = false;
+  tspec.scrollable_menu = true;
   tspec.fill_rubberband = false;
   tspec.groupbox_top_label = false;
   tspec.button_contents_shift = true;

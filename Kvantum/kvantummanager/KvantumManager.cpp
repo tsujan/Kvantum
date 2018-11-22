@@ -908,7 +908,10 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
     ui->checkBoxTransient->setChecked (defaultSettings.value ("transient_scrollbar").toBool());
     ui->checkBoxTransientGroove->setChecked (defaultSettings.value ("transient_groove").toBool());
-    ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
+    if (defaultSettings.contains ("scrollable_menu")) // it's true by default
+      ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
+    else
+      ui->checkBoxScrollableMenu->setChecked (true);
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
