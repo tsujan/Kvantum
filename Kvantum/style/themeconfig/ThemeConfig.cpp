@@ -619,6 +619,20 @@ theme_spec ThemeConfig::getCompositeSpec()
 #endif
   }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+  /* NOTE: The contrast effect is applied by BlurHelper, so that the following values have
+           effect only for windows that can be blurred, whether they are blurred or not. */
+  v = getValue("General","contrast");
+  if (v.isValid()) // 1 by default
+    r.contrast = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+  v = getValue("General","intensity");
+  if (v.isValid()) // 1 by default
+    r.intensity = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+  v = getValue("General","saturation");
+  if (v.isValid()) // 1 by default
+    r.saturation = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+#endif
+
   /* no menu/tooltip shadow without compositing */
   v = getValue("General","menu_shadow_depth");
   if (v.isValid() && r.composite)

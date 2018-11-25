@@ -530,6 +530,15 @@ popup_blurring                    true/false          Blur the regions behind tr
                                                       blur effect and a graphic card that
                                                       supports it. It will automatically
                                                       be set to true if blurring is true.
+contrast
+intensity
+saturation                        decimal             If not equal to 1, the values of these
+                                                      keys are used by the (KDE) contrast
+                                                      effect (when enabled) for translucent
+                                                      windows that support the blur effect,
+                                                      although the presence of the (KDE) blur
+                                                      effect is not needed. Their default value
+                                                      is 1 and they are always between 0 and 2.
 
 animate_states                    true/false          Animate the state change in some
                                                       widgets, especially when they are under

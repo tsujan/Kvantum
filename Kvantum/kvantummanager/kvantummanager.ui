@@ -793,6 +793,113 @@ Miscellaneous → Respect current DE if possible</string>
                  </property>
                 </widget>
                </item>
+               <item row="0" column="5" rowspan="12">
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                 <item>
+                  <widget class="QGroupBox" name="contrastBox">
+                   <property name="toolTip">
+                    <string>This needs the KDE contrast effect with Qt ≥ 5.11
+and is applied only to translucent windows that
+support the blur effect (but the KDE blur effect
+can be disabled).
+
+A value of 1.00 means no change.</string>
+                   </property>
+                   <property name="title">
+                    <string>Contrast Effect</string>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_13">
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_9">
+                      <property name="text">
+                       <string>Saturation:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_8">
+                      <property name="text">
+                       <string>Intensity:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_4">
+                      <property name="text">
+                       <string>Contrast:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QDoubleSpinBox" name="spinContrast">
+                      <property name="maximum">
+                       <double>2.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>1.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QDoubleSpinBox" name="spinIntensity">
+                      <property name="maximum">
+                       <double>2.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>1.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QDoubleSpinBox" name="spinSaturation">
+                      <property name="maximum">
+                       <double>2.000000000000000</double>
+                      </property>
+                      <property name="singleStep">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="value">
+                       <double>1.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_14">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="6">
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
                <item row="1" column="1" colspan="3">
                 <widget class="QCheckBox" name="checkBoxBlurPopup">
                  <property name="toolTip">
@@ -857,6 +964,22 @@ whose windows should not be translucent.
 problems with translucency!)</string>
                  </property>
                 </widget>
+               </item>
+               <item row="3" column="4">
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
                <item row="4" column="1" alignment="Qt::AlignLeft">
                 <widget class="QLabel" name="reduceOpacityLabel">
@@ -958,19 +1081,6 @@ window SVG background in the theme.</string>
                  <property name="sizeHint" stdset="0">
                   <size>
                    <width>10</width>
-                   <height>5</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="6" column="4">
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>5</width>
                    <height>5</height>
                   </size>
                  </property>

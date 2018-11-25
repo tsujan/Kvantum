@@ -334,6 +334,7 @@ text.margin.right=3
 text.bold=true
 text.italic=true
 text.normal.color=white
+indicator.size=12
 frame.expansion=0
 
 [ComboBox]

@@ -39,7 +39,10 @@ class BlurHelper: public QObject
 
   public:
 
-    BlurHelper (QObject*, QList<int> menuS, QList<int> tooltipS);
+    BlurHelper (QObject*, QList<int> menuS, QList<int> tooltipS,
+                qreal contrast = static_cast<qreal>(1),
+                qreal intensity = static_cast<qreal>(1),
+                qreal saturation = static_cast<qreal>(1));
 
     virtual ~BlurHelper (void) {}
 
@@ -108,6 +111,8 @@ class BlurHelper: public QObject
     /* The required atom. */
     Atom atom_blur_;
 #endif
+#else
+    qreal contrast_, intensity_, saturation_;
 #endif
 };
 }

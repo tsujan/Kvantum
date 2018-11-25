@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=An elegantly simple dark theme that supports translucency
+comment=An elegantly simple dark theme that supports\ntranslucency with a rough-glass texture
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -48,7 +48,7 @@ submenu_overlap=0
 tooltip_delay=-1
 button_contents_shift=true
 animate_states=true
-no_window_pattern=true
+no_window_pattern=false
 dark_titlebar=true
 
 [GeneralColors]
@@ -83,7 +83,7 @@ kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
-disabled_icon_opacity=100
+disabled_icon_opacity=80
 lxqtmainmenu_iconsize=22
 normal_default_pushbutton=false
 single_top_toolbar=true
@@ -433,9 +433,11 @@ interior=false
 [WindowTranslucent]
 interior=true
 interior.element=window
-interior.x.patternsize=48
-interior.y.patternsize=48
+interior.x.patternsize=128
+interior.y.patternsize=128
 
 [DialogTranslucent]
 interior=true
 interior.element=dialog
+interior.x.patternsize=128
+interior.y.patternsize=128

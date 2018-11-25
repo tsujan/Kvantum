@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A light, nont-flat theme with curved elements that supports translucency
+comment=A light, nont-flat theme with curved elements
 x11drag=true
 alt_mnemonic=true
 left_tabs=false

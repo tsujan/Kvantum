@@ -114,6 +114,8 @@ typedef struct {
   bool blurring;
   /* blur what is behind menus/tooltips if possible? */
   bool popup_blurring;
+  /* values needed for the KDE contrast effect: */
+  qreal contrast, intensity, saturation;
   /* should buttons and comboboxes be animated
      under the cursor when their state changes? */
   bool animate_states;
@@ -490,6 +492,9 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.opaque = QStringList() << "kscreenlocker" << "wine";
   tspec.blurring = false;
   tspec.popup_blurring = false;
+  tspec.contrast = static_cast<qreal>(1);
+  tspec.intensity = static_cast<qreal>(1);
+  tspec.saturation = static_cast<qreal>(1);
   tspec.animate_states = false;
   tspec.no_inactiveness = false;
   tspec.no_window_pattern = false;

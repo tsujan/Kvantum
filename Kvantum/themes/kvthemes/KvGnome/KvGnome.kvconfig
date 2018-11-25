@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A theme with a Gnome like look and feel and support for translucency
+comment=A theme with a Gnome like look and feel
 x11drag=true
 alt_mnemonic=true
 left_tabs=false

@@ -997,7 +997,7 @@
 <use width="100%" height="100%" xlink:href="#button-toggled-left" id="button-toggled-right" transform="matrix(-1,0,0,1,544.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-toggled-bottomleft" id="button-toggled-bottomright" transform="matrix(-1,0,0,1,544.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-toggled-topleft" id="button-toggled-topright" transform="matrix(-1,0,0,1,544.5,0)"/>
-<g style="opacity:.012" id="window-normal-pattern" transform="translate(107.5,55)">
+<g style="opacity:.01" id="window-normal-pattern" transform="translate(107.5,55)">
 <path style="opacity:1;fill:#c8c8c8" d="m 280,1060 v 12 l 12,-12 z"/>
 <path style="opacity:1;fill:#969696" d="m 292,1060 12,12 v -12 z"/>
 <path style="opacity:1;fill:#1e1e1e" d="m 304,1072 -12,12 h 12 z"/>

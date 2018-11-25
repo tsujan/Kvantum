@@ -460,5 +460,5 @@ frame.expansion=0
 [WindowTranslucent]
 interior=true
 interior.element=window
-interior.x.patternsize=48
-interior.y.patternsize=48
+interior.x.patternsize=64
+interior.y.patternsize=64

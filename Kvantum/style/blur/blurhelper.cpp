@@ -36,12 +36,20 @@
 
 // BlurHelper is never called on wayland or without x11.
 namespace Kvantum {
-BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS) : QObject (parent)
+BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS,
+                        qreal contrast, qreal intensity, qreal saturation) : QObject (parent)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
+  Q_UNUSED (contrast);
+  Q_UNUSED (intensity);
+  Q_UNUSED (saturation);
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
 #endif
+#else
+  contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
+  intensity_ = qBound (static_cast<qreal>(0), intensity, static_cast<qreal>(2));
+  saturation_ = qBound (static_cast<qreal>(0), saturation, static_cast<qreal>(2));
 #endif
 
   if (!menuS.isEmpty() && menuS.size() >= 4)
@@ -146,7 +154,22 @@ void BlurHelper::update (QWidget* widget) const
     clear (widget);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   else
+  {
     KWindowEffects::enableBlurBehind (widget->internalWinId(), true, region);
+    /*NOTE: The contrast effect isn't used with menus and tooltips
+            because their borders may be anti-aliased. */
+    if ((contrast_ != static_cast<qreal>(1)
+         || intensity_ != static_cast<qreal>(1)
+         || saturation_ != static_cast<qreal>(1))
+        && !qobject_cast<QMenu*>(widget)
+        && !widget->inherits("QTipLabel")
+        && (widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip)
+    {
+      KWindowEffects::enableBackgroundContrast (widget->internalWinId(), true,
+                                                contrast_, intensity_, saturation_,
+                                                region);
+    }
+  }
 #elif defined Q_WS_X11 || defined Q_OS_LINUX
   else
   {
@@ -172,7 +195,18 @@ void BlurHelper::clear (QWidget* widget) const
   // WARNING never use winId()
   if (widget->internalWinId())
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-    KWindowEffects::enableBlurBehind (widget->winId(), false);
+  {
+    KWindowEffects::enableBlurBehind (widget->internalWinId(), false);
+    if ((contrast_ != static_cast<qreal>(1)
+         || intensity_ != static_cast<qreal>(1)
+         || saturation_ != static_cast<qreal>(1))
+        && !qobject_cast<QMenu*>(widget)
+        && !widget->inherits("QTipLabel")
+        && (widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip)
+    {
+      KWindowEffects::enableBackgroundContrast (widget->internalWinId(), false);
+    }
+  }
 #elif defined Q_WS_X11 || defined Q_OS_LINUX
     XDeleteProperty (QX11Info::display(), widget->internalWinId(), atom_blur_);
 #else

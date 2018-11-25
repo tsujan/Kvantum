@@ -372,7 +372,8 @@ Style::Style(bool useDark) : QCommonStyle()
     int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
     thickness += tspec_.tooltip_shadow_depth;
     QList<int> tooltipS = getShadow("ToolTip", thickness);
-    blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
+    blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+                                 tspec_.contrast, tspec_.intensity, tspec_.saturation);
   }
 }
 

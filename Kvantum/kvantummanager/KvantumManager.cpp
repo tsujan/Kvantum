@@ -976,6 +976,26 @@ void KvantumManager::defaultThemeButtons()
         if (!ui->checkBoxBlurWindow->isChecked())
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
+
+    if (defaultSettings.contains ("contrast"))
+    {
+        ui->spinContrast->setValue (qBound (static_cast<qreal>(0),
+                                            defaultSettings.value ("contrast").toReal(),
+                                            static_cast<qreal>(2)));
+    }
+    if (defaultSettings.contains ("intensity"))
+    {
+        ui->spinIntensity->setValue (qBound (static_cast<qreal>(0),
+                                             defaultSettings.value ("intensity").toReal(),
+                                             static_cast<qreal>(2)));
+    }
+    if (defaultSettings.contains ("saturation"))
+    {
+        ui->spinSaturation->setValue (qBound (static_cast<qreal>(0),
+                                              defaultSettings.value ("saturation").toReal(),
+                                              static_cast<qreal>(2)));
+    }
+
     tmp = 0;
     if (defaultSettings.contains ("reduce_window_opacity")) // it's 0 by default
         tmp = qMin (qMax (defaultSettings.value ("reduce_window_opacity").toInt(), 0), 90);
@@ -1285,6 +1305,26 @@ void KvantumManager::tabChanged (int index)
                     if (!ui->checkBoxBlurWindow->isChecked() && themeSettings.contains ("popup_blurring"))
                         ui->checkBoxBlurPopup->setChecked (themeSettings.value ("popup_blurring").toBool());
                 }
+
+                if (themeSettings.contains ("contrast"))
+                {
+                    ui->spinContrast->setValue (qBound (static_cast<qreal>(0),
+                                                        themeSettings.value ("contrast").toReal(),
+                                                        static_cast<qreal>(2)));
+                }
+                if (themeSettings.contains ("intensity"))
+                {
+                    ui->spinIntensity->setValue (qBound (static_cast<qreal>(0),
+                                                        themeSettings.value ("intensity").toReal(),
+                                                        static_cast<qreal>(2)));
+                }
+                if (themeSettings.contains ("saturation"))
+                {
+                    ui->spinSaturation->setValue (qBound (static_cast<qreal>(0),
+                                                        themeSettings.value ("saturation").toReal(),
+                                                        static_cast<qreal>(2)));
+                }
+
                 if (themeSettings.contains ("reduce_window_opacity"))
                 {
                     int rwo = themeSettings.value ("reduce_window_opacity").toInt();
@@ -2093,6 +2133,11 @@ void KvantumManager::writeConfig()
         generalKeys.insert("reduce_menu_opacity", str.setNum (ui->spinReduceMenuOpacity->value()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
+
+        generalKeys.insert("contrast", str.setNum (ui->spinContrast->value(), 'f', 2));
+        generalKeys.insert("intensity", str.setNum (ui->spinIntensity->value(), 'f', 2));
+        generalKeys.insert("saturation", str.setNum (ui->spinSaturation->value(), 'f', 2));
+
         generalKeys.insert("small_icon_size", str.setNum (ui->spinSmall->value()));
         generalKeys.insert("large_icon_size", str.setNum (ui->spinLarge->value()));
         generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
@@ -2137,6 +2182,16 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
             || qMin(qMax(themeSettings.value ("reduce_window_opacity").toInt(),0),90) != ui->spinReduceOpacity->value()
             || qMin(qMax(themeSettings.value ("reduce_menu_opacity").toInt(),0),90) != ui->spinReduceMenuOpacity->value()
+            || themeSettings.value ("blurring").toBool() != ui->checkBoxBlurWindow->isChecked()
+            || themeSettings.value ("popup_blurring").toBool() != ui->checkBoxBlurPopup->isChecked()
+
+            || qBound(static_cast<qreal>(0), themeSettings.value ("contrast").toReal(), static_cast<qreal>(2))
+               != static_cast<qreal>(ui->spinContrast->value())
+            || qBound(static_cast<qreal>(0), themeSettings.value ("intensity").toReal(), static_cast<qreal>(2))
+               != static_cast<qreal>(ui->spinIntensity->value())
+            || qBound(static_cast<qreal>(0), themeSettings.value ("saturation").toReal(), static_cast<qreal>(2))
+               != static_cast<qreal>(ui->spinSaturation->value())
+
             || toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
@@ -2434,6 +2489,7 @@ void KvantumManager::notCompisited (bool checked)
     ui->spinReduceMenuOpacity->setEnabled (!checked);
     ui->checkBoxBlurPopup->setEnabled (!checked && !ui->checkBoxBlurWindow->isChecked());
     ui->checkBoxTrans->setEnabled (!checked);
+    ui->contrastBox->setEnabled (!checked);
     isTranslucent (!checked && ui->checkBoxTrans->isChecked());
     if (checked)
     {

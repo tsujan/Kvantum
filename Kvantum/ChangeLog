@@ -31,6 +31,7 @@ V0.10.9
  * Animation for tab close buttons.
  * Added an option (to Kvantum Manager) for setting the dialog button layout.
  * Made big menus scrollable by default.
+ * Support the KDE contrast effect with Qt ≥ 5.11 for windows that support the blur effect (the KDE blur effect itself can be disabled).
 
 V0.10.8
 ---------

@@ -370,7 +370,8 @@ void Style::polish(QWidget *widget)
                 int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
                 thickness += tspec_now.tooltip_shadow_depth;
                 QList<int> tooltipS = getShadow("ToolTip", thickness);
-                blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
+                blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+                                             tspec_.contrast, tspec_.intensity, tspec_.saturation);
               }
               if (blurHelper_)
                 blurHelper_->registerWidget(widget);
@@ -862,7 +863,8 @@ void Style::polish(QWidget *widget)
           int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
           thickness += tspec_now.tooltip_shadow_depth;
           QList<int> tooltipS = getShadow("ToolTip", thickness);
-          blurHelper_ = new BlurHelper(this,menuShadow_,tooltipS);
+          blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+                                       tspec_.contrast, tspec_.intensity, tspec_.saturation);
         }
         /* blurHelper_ may exist because of blurring hard-coded translucency */
         if (blurHelper_ && tspec_now.popup_blurring)
