@@ -452,27 +452,32 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai reikalauja KDE kontrasto efekto su Qt ≥ 5.11
+ir yra taikoma tik dalinai permatomiems langams,
+kurie palaiko suliejimo efektą (tačiau KDE suliejimo
+efektas gali būti ir išjungtas).
+
+Reikšmė 1.00 reiškia jokių pakeitimų.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrasto efektas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="815"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grynis:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensyvumas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrastas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="906"/>
