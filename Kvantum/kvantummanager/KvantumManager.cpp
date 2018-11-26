@@ -977,24 +977,28 @@ void KvantumManager::defaultThemeButtons()
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
 
+    /* all contrast effect values are 1 by default */
     if (defaultSettings.contains ("contrast"))
     {
         ui->spinContrast->setValue (qBound (static_cast<qreal>(0),
                                             defaultSettings.value ("contrast").toReal(),
                                             static_cast<qreal>(2)));
     }
+    else ui->spinContrast->setValue (static_cast<qreal>(1));
     if (defaultSettings.contains ("intensity"))
     {
         ui->spinIntensity->setValue (qBound (static_cast<qreal>(0),
                                              defaultSettings.value ("intensity").toReal(),
                                              static_cast<qreal>(2)));
     }
+    else ui->spinIntensity->setValue (static_cast<qreal>(1));
     if (defaultSettings.contains ("saturation"))
     {
         ui->spinSaturation->setValue (qBound (static_cast<qreal>(0),
                                               defaultSettings.value ("saturation").toReal(),
                                               static_cast<qreal>(2)));
     }
+    else ui->spinSaturation->setValue (static_cast<qreal>(1));
 
     tmp = 0;
     if (defaultSettings.contains ("reduce_window_opacity")) // it's 0 by default
