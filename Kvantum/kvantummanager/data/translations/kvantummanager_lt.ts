@@ -1311,7 +1311,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1909"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialogo mygtukų išdėstymas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1960"/>
@@ -1475,27 +1475,27 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE išdėstymas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="83"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Gnome išdėstymas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="84"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Mac išdėstymas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows išdėstymas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="86"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Android išdėstymas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="88"/>
