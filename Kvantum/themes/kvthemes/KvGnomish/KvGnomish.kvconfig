@@ -193,8 +193,8 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=1
 text.margin.right=1
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=1
+text.margin.bottom=1
 
 [DropDownButton]
 inherits=PanelButtonCommand

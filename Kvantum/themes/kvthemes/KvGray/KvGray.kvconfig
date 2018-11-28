@@ -37,7 +37,7 @@ large_icon_size=32
 layout_margin=4
 layout_spacing=2
 merge_menubar_with_toolbar=false
-toolbar_interior_spacing=1
+toolbar_interior_spacing=3
 respect_DE=true
 scroll_arrows=true
 scroll_min_extent=50
@@ -214,8 +214,8 @@ indicator.size=13
 [Toolbar]
 inherits=PanelButtonCommand
 frame.left=0
-frame.right=3
-frame.top=0
+frame.right=0
+frame.top=2
 frame.bottom=2
 indicator.size=8
 

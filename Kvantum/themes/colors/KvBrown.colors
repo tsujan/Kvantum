@@ -19,10 +19,10 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=92,81,74
-BackgroundNormal=92,81,74
-DecorationFocus=92,81,74
-DecorationHover=92,81,74
+BackgroundAlternate=80,70,64
+BackgroundNormal=80,70,64
+DecorationFocus=80,70,64
+DecorationHover=80,70,64
 ForegroundActive=255,255,255
 ForegroundInactive=230,230,230
 ForegroundLink=0,213,255
@@ -35,8 +35,8 @@ ForegroundVisited=3,255,108
 [Colors:Selection]
 BackgroundAlternate=180,175,156
 BackgroundNormal=200,194,174
-DecorationFocus=92,81,74
-DecorationHover=92,81,74
+DecorationFocus=80,70,64
+DecorationHover=80,70,64
 ForegroundActive=0,0,0
 ForegroundInactive=0,0,0
 ForegroundLink=0,213,255
@@ -49,8 +49,8 @@ ForegroundVisited=3,255,108
 [Colors:Tooltip]
 BackgroundAlternate=0,0,0
 BackgroundNormal=0,0,0
-DecorationFocus=92,81,74
-DecorationHover=92,81,74
+DecorationFocus=80,70,64
+DecorationHover=80,70,64
 ForegroundActive=255,255,255
 ForegroundInactive=225,225,225
 ForegroundLink=0,213,255
@@ -63,8 +63,8 @@ ForegroundVisited=3,255,108
 [Colors:View]
 BackgroundAlternate=50,42,37
 BackgroundNormal=40,34,30
-DecorationFocus=92,81,74
-DecorationHover=92,81,74
+DecorationFocus=80,70,64
+DecorationHover=80,70,64
 ForegroundActive=255,255,255
 ForegroundInactive=230,230,230
 ForegroundLink=0,213,255
@@ -75,10 +75,10 @@ ForegroundPositive=0,110,40
 ForegroundVisited=3,255,108
 
 [Colors:Window]
-BackgroundAlternate=92,81,74
-BackgroundNormal=92,81,74
-DecorationFocus=92,81,74
-DecorationHover=92,81,74
+BackgroundAlternate=80,70,64
+BackgroundNormal=80,70,64
+DecorationFocus=80,70,64
+DecorationHover=80,70,64
 ForegroundActive=255,255,255
 ForegroundInactive=230,230,230
 ForegroundLink=0,213,255
@@ -97,9 +97,9 @@ shadeSortColumn=true
 contrast=0
 
 [WM]
-activeBackground=92,81,74
-activeBlend=92,81,74
+activeBackground=80,70,64
+activeBlend=80,70,64
 activeForeground=255,255,255
-inactiveBackground=92,81,74
-inactiveBlend=92,81,74
-inactiveForeground=230,230,230
+inactiveBackground=80,70,64
+inactiveBlend=80,70,64
+inactiveForeground=190,190,190

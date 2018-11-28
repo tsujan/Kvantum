@@ -1103,10 +1103,10 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
   }
 
   const QRect g = tb->geometry();
-  QToolButton *left = qobject_cast<QToolButton*>(parentBar->childAt (g.x()-1, g.y()));
+  QToolButton *left = qobject_cast<QToolButton*>(parentBar->childAt(g.x()-1, g.y()));
   if (left && left->objectName() == "qt_toolbar_ext_button")
     left = nullptr;
-  const QToolButton *right =  qobject_cast<const QToolButton*>(parentBar->childAt (g.x()+g.width()+1, g.y()));
+  const QToolButton *right =  qobject_cast<const QToolButton*>(parentBar->childAt(g.x()+g.width()+1, g.y()));
   if (right && right->objectName() == "qt_toolbar_ext_button")
     right = nullptr;
 
@@ -1760,7 +1760,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         // FIXME: Why does Qt draw redundant frames when there's a corner widget (button)?
         //if (!r.contains(opt->tabBarRect) || r == opt->tabBarRect)
         if ((!verticalTabs && (r.top() != opt->tabBarRect.top() || r.bottom() != opt->tabBarRect.bottom()))
-             || (verticalTabs && (r.left() != opt->tabBarRect.left() || r.right() != opt->tabBarRect.right())))
+            || (verticalTabs && (r.left() != opt->tabBarRect.left() || r.right() != opt->tabBarRect.right())))
           return;
 
         int l = 0; int d = 0;
@@ -1817,7 +1817,36 @@ void Style::drawPrimitive(PrimitiveElement element,
           painter->setTransform(m, true);
         }
 
-        frame_spec fspec = getFrameSpec("TabBarFrame");
+        frame_spec fspec;
+
+        /* consider overlap, as in CE_TabBarTabShape */
+        if (l > 0)
+        {
+          int overlap = tspec_.active_tab_overlap;
+          if (overlap > 0)
+          {
+            bool joinedActiveTab = hasFloatingTabs_ ? joinedActiveFloatingTab_ : joinedActiveTab_;
+            if (!joinedActiveTab || tspec_.no_active_tab_separator)
+            {
+              fspec = getFrameSpec("Tab");
+              int exp = qMin(fspec.expansion, qMin(tr.width(), tr.height())) / 2 + 1;
+              overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
+              if (d == 0) // at the beginning
+                l -= overlap;
+              else
+              {
+                if (d == r.width() - l) // at the end
+                  l -= overlap;
+                else
+                  l -= 2*overlap;
+                d += overlap;
+              }
+              if (l < 0) l = 0;
+            }
+          }
+        }
+
+        fspec = getFrameSpec("TabBarFrame");
         const interior_spec ispec = getInteriorSpec("TabBarFrame");
         fspec.expansion = 0;
 
@@ -1891,10 +1920,10 @@ void Style::drawPrimitive(PrimitiveElement element,
       QWidget *p = getParent(widget,1);
       bool autoraise(option->state & State_AutoRaise);
       bool fillWidgetInterior(false);
-      bool onToolBar(false);
-      if (getStylableToolbarContainer(widget))
+      QWidget *stb = getStylableToolbarContainer(widget);
+      if (stb)
       {
-        onToolBar = autoraise = true; // we make all toolbuttons auto-raised inside toolbars
+        autoraise = true; // we make all toolbuttons auto-raised inside toolbars
         if (!getFrameSpec("ToolbarButton").element.isEmpty()
             || !getInteriorSpec("ToolbarButton").element.isEmpty())
         {
@@ -2004,6 +2033,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
         return;
       }
+      QToolBar *toolBar = qobject_cast<QToolBar*>(p);
       if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly || tb->text().isEmpty())
            && tb->icon().isNull())
           || (opt && (opt->toolButtonStyle == Qt::ToolButtonIconOnly || opt->text.isEmpty())
@@ -2073,7 +2103,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             return;
           }
           /* a button with just one arrow */
-          else if (hspec_.transparent_arrow_button
+          else if (toolBar == nullptr && hspec_.transparent_arrow_button
                    && !(opt && (opt->features & QStyleOptionToolButton::MenuButtonPopup))
                    && !(tb
                         && (tb->popupMode() == QToolButton::MenuButtonPopup
@@ -2140,47 +2170,37 @@ void Style::drawPrimitive(PrimitiveElement element,
           status.replace("pressed","toggled");
         }
 
-        /*bool withArrow = hasArrow (tb, opt);
-        bool isHorizontal = true;*/
-        if (const QToolBar *toolBar = qobject_cast<const QToolBar*>(p))
+        /* only group tool buttons whose immediate parent is a horizontal toolbar */
+        if ((toolBar && toolBar->orientation() != Qt::Vertical)
+            /* but make an exception for libfm-qt's path buttons on a stylable toolbar */
+            || (qobject_cast<QToolBar*>(stb)
+                && qobject_cast<QToolBar*>(stb)->orientation() != Qt::Vertical
+                && tb->inherits("Fm::PathButton")))
         {
           if (tspec_.group_toolbar_buttons)
           {
-            /*if (toolBar->orientation() == Qt::Vertical)
-              isHorizontal = false;*/
-            if (toolBar->orientation() != Qt::Vertical)
+            /* the disabled state is ugly for grouped tool buttons */
+            if (!(option->state & State_Enabled))
+              painter->restore();
+            drawRaised = true;
+            ispec.px = ispec.py = 0;
+            int kind = whichGroupedTBtn(tb, p, drawSep);
+            if (kind != 2)
             {
-              /* the disabled state is ugly for grouped tool buttons */
-              if (!(option->state & State_Enabled))
-                painter->restore();
-              drawRaised = true;
-              ispec.px = ispec.py = 0;
-              int kind = whichGroupedTBtn (tb, toolBar, drawSep);
-              if (kind != 2)
-              {
-                fspec.isAttached = true;
-                fspec.HPos = kind;
-              }
+              fspec.isAttached = true;
+              fspec.HPos = kind;
             }
-
-            /*if (!isHorizontal && !withArrow)
-            {
-              r.setRect(0, 0, h, w);
-              painter->save();
-              QTransform m;
-              m.scale(1,-1);
-              m.rotate(-90);
-              painter->setTransform(m, true);
-            }*/
           }
         }
         /* group libfm-qt's path buttons when they aren't on a toolbar */
-        else if (!onToolBar && tb->inherits("Fm::PathButton"))
+        else if (tb->inherits("Fm::PathButton"))
         {
             //if (QWidget *ancestor = getParent(p,3))
             //{
               //if (ancestor->inherits("Fm::PathBar"))
               //{
+                if (!(option->state & State_Enabled))
+                  painter->restore();
                 drawRaised = true;
                 ispec.px = ispec.py = 0;
                 int kind = whichGroupedTBtn(tb, p, drawSep);
@@ -2414,6 +2434,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         hasPanel = true;
       }
 
+      /* the disabled painter is already restored when drawRaised is true */
       if (!(option->state & State_Enabled) && !drawRaised)
         painter->restore();
 
@@ -8694,7 +8715,7 @@ void Style::drawControl(ControlElement element,
         {
           int margin = (r.width() - txtSize.width() - opt->iconSize.width()
                         - fspec.left - fspec.right - lspec.left - lspec.right - lspec.tispace
-                        - (lspec.hasShadow ? qAbs(lspec.xshift)+lspec.depth : 0)) / 2;
+                        - (lspec.hasShadow ? qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0) : 0)) / 2;
           if (margin > 0)
             R.adjust(margin, 0, -margin, 0);
         }
@@ -11716,8 +11737,12 @@ void Style::drawComplexControl(ComplexControl control,
                 shadowColor.setAlpha(lspec.a);
               painter->setPen(QPen(shadowColor));
               for (int i=0; i<lspec.depth; i++)
-                painter->drawText(textRect.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),
+              {
+                int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
+                int yShift = lspec.yshift + i * (lspec.yshift < 0 ? -1 : 1);
+                painter->drawText(textRect.adjusted(xShift,yShift, xShift,yShift),
                                   talign,opt->text);
+              }
               painter->restore();
             }
           }
@@ -12863,7 +12888,8 @@ QSize Style::sizeFromContents(ContentsType type,
         if (!txt.isEmpty())
         {
           if (lspec.hasShadow)
-            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+            s = s + QSize(qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0),
+                          qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0));
           if (!opt->icon.isNull())
             s = s + QSize(lspec.tispace, 0);
           /* take in to account the boldness of default button text
@@ -13181,7 +13207,8 @@ QSize Style::sizeFromContents(ContentsType type,
           }
 
           if (lspec.hasShadow)
-            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+            s = s + QSize(qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0),
+                          qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0));
           if (lspec.boldFont)
           {
             QFont f;
@@ -13557,8 +13584,8 @@ QSize Style::sizeCalculated(const QFont &font,
   s.setHeight(fspec.top+fspec.bottom+lspec.top+lspec.bottom);
   if (!text.isEmpty() && lspec.hasShadow)
   {
-    s.rwidth() += qAbs(lspec.xshift)+lspec.depth;
-    s.rheight() += qAbs(lspec.yshift)+lspec.depth;
+    s.rwidth() += qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0);
+    s.rheight() += qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0);
   }
 
   QSize ts = textSize(font, text);

@@ -227,8 +227,8 @@ frame.right=3
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
-text.margin.top=3
-text.margin.bottom=3
+text.margin.top=2
+text.margin.bottom=2
 
 [DropDownButton]
 inherits=PanelButtonCommand

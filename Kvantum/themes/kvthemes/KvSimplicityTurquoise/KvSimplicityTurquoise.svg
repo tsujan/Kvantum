@@ -496,7 +496,7 @@
 </g>
 <g id="flat-arrow-down-disabled" transform="matrix(1,0,0,-1,150,977.99298)">
 <rect width="24" x="-607.49298" y="8" height="24" style="opacity:0;fill:#fff" transform="rotate(-90)"/>
-<path style="fill:#c8c8c8" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
+<path style="fill:#969696" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
 </g>
 <use width="450" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-up-normal" transform="matrix(1,0,0,-1,2.5,794.30701)"/>
 <use width="450" height="1230" xlink:href="#flat-arrow-down-disabled" id="flat-arrowup-disabled" transform="matrix(1,0,0,-1,-2.5,792.5)"/>
@@ -1118,4 +1118,8 @@
 <path style="opacity:.65;stroke-width:.531" d="m 225,391.5 a 8.5,8.5 0 0 0 -8.5,8.5 8.5,8.5 0 0 0 8.5,8.5 8.5,8.5 0 0 0 8.5,-8.5 8.5,8.5 0 0 0 -8.5,-8.5 z m 0,4 a 4.5,4.5 0 0 1 4.5,4.5 4.5,4.5 0 0 1 -4.5,4.5 4.5,4.5 0 0 1 -4.5,-4.5 4.5,4.5 0 0 1 4.5,-4.5 z" transform="matrix(2,0,0,2,-225,-340)"/>
 </g>
 </g>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-down-disabled" transform="translate(234,104)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-up-disabled" transform="matrix(1,0,0,-1,234,833)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-right-disabled" transform="rotate(-90,337,285.5)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-left-disabled" transform="rotate(90,251,563.5)"/>
 </svg>

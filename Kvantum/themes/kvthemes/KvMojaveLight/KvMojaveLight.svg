@@ -366,7 +366,7 @@
 </g>
 <g id="button-default-indicator" transform="translate(42,-64.5)">
 <path style="opacity:0;fill:#7b7b7b" d="m 375,87.5 h 25 v 25 h -25 z"/>
-<path style="opacity:.6;fill:#a0a0a0" d="m 396,88.5 -20,20 h 20 z"/>
+<path style="opacity:.6;fill:#a0a0a0" d="m 400,92.5 -20,20 h 20 z"/>
 </g>
 <path style="fill:url(#linearGradient4969)" id="menubar-normal" d="m 405,362 h 20 v 20 h -20 z"/>
 <path style="fill:url(#linearGradient3561)" id="menubar-normal-left" d="m 362,-405 h 20 v 5 h -20 z" transform="rotate(90)"/>

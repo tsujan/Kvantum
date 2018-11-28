@@ -461,7 +461,7 @@
 <use width="450" height="1230" xlink:href="#arrow-up-focused" id="flat-arrow-down-focused" transform="matrix(1,0,0,-1,0.192982,514.90911)"/>
 <g id="flat-arrow-down-disabled" transform="matrix(1,0,0,-1,146.89475,917.29403)">
 <path style="opacity:0;fill:#fff" d="m -607.493,8 h 24 v 24 h -24 z " transform="rotate(-90)"/>
-<path style="fill:#c8c8c8" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
+<path style="fill:#a0a0a0" d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
 </g>
 <use width="450" height="1230" xlink:href="#flat-arrow-down-normal" id="flat-arrow-up-normal" transform="matrix(1,0,0,-1,2.5,672.90911)"/>
 <use width="450" height="1230" xlink:href="#flat-arrow-down-focused" id="flat-arrow-up-focused" transform="matrix(1,0,0,-1,0,671.1021)"/>
@@ -787,7 +787,7 @@
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.157" id="tbutton-focused-bottomleft" d="m 268.75,51 c -5.50016,0 -6,-0.500111 -6,-6 h 6 z "/>
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.157" id="tbutton-focused-bottom" d="m 268.7502,45 32.4998,0 0,6 -32.5,0 z"/>
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.157" id="tbutton-focused-bottomright" d="m 301.25,51 c 5.49984,0 6,-0.5 6,-6 h -6 Z "/>
-<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-down-normal" transform="translate(188,-22)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-down-normal" transform="translate(180,-22)"/>
 <g id="common-focused-left" transform="matrix(1.3333333,0,0,1,-233,-302)">
 <rect width="3" x="270" y="1170" height="30" style="fill:#dc6434"/>
 <path style="fill:#fafafa" d="m 271.87501,1170 v 30 H 273 v -30 z"/>
@@ -1104,8 +1104,8 @@
 <path style="fill:#969696;fill-rule:evenodd" d="m 199,753.5 h 2 v 4 h -2 z"/>
 <path style="fill:#737373;fill-rule:evenodd" d="m 199,751.5 h 2 v 2 h -2 z"/>
 </g>
-<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-right-normal" transform="matrix(0,-1,1,0,-99.21333,370.00283)"/>
-<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-left-normal" transform="matrix(0,1,-1,0,548.00283,335.21333)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-right-normal" transform="rotate(-90,131.39475,238.60808)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-left-normal" transform="rotate(90,102.39475,437.60808)"/>
 <g style="color:#000" id="focus-top" transform="translate(232,768.5)">
 <path style="fill-opacity:0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
 <g style="fill-opacity:.137">
@@ -1130,7 +1130,7 @@
 </g>
 <use width="100%" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomleft" transform="translate(-5)"/>
 <use width="100%" height="100%" xlink:href="#menubar-normal-bottom" id="menubar-normal-bottomright" transform="translate(5)"/>
-<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-up-normal" transform="matrix(1,0,0,-1,188,585.21616)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="tarrow-up-normal" transform="matrix(1,0,0,-1,180,585.21616)"/>
 <path style="fill:#877b69;fill-rule:evenodd" id="itemview-toggled-inactive-top" d="m 71,894 h 8 v 4 h -8 z"/>
 <path style="fill:#877b69;fill-rule:evenodd" id="itemview-toggled-inactive-bottom" d="m 71,910 h 8 v 4 h -8 z"/>
 <path style="fill:#877b69;fill-rule:evenodd" id="itemview-toggled-inactive" d="m 71,900 h 8 v 8 h -8 z"/>
@@ -1192,4 +1192,8 @@
 <path style="fill:#969696;fill-rule:evenodd" d="m 199,753.5 h 2 v 4 h -2 z"/>
 <path style="fill:#828181;fill-rule:evenodd" d="m 199,751.5 h 2 v 2 h -2 z"/>
 </g>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-down-disabled" transform="translate(78,-20)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-up-disabled" transform="matrix(1,0,0,-1,78,583.6021)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-right-disabled" transform="rotate(-90,212.89475,287.80105)"/>
+<use width="100%" height="100%" xlink:href="#flat-arrow-down-disabled" id="tarrow-left-disabled" transform="rotate(90,181.89475,384.80105)"/>
 </svg>

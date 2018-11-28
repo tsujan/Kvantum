@@ -1000,7 +1000,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
       {
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
-          toolBar->update();
+        {
+          if (toolBar->orientation() != Qt::Vertical)
+            toolBar->update();
+        }
       }
       else if (qobject_cast<QAbstractItemView*>(o))
       {
@@ -1123,7 +1126,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (tspec_.group_toolbar_buttons)
       {
         if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
-          toolBar->update();
+        {
+          if (toolBar->orientation() != Qt::Vertical)
+            toolBar->update();
+        }
       }
       //break; // toolbuttons may be animated (see below)
     }

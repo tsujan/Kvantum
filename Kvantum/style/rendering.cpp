@@ -1073,8 +1073,7 @@ void Style::renderLabel(
           {
             int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
             int yShift = lspec.yshift + i * (lspec.yshift < 0 ? -1 : 1);
-            painter->drawText(rtext.adjusted(xShift,yShift,
-                                             xShift,yShift),
+            painter->drawText(rtext.adjusted(xShift,yShift,xShift,yShift),
                               talign,text);
           }
           painter->restore();

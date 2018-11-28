@@ -32,6 +32,9 @@ V0.10.9
  * Added an option (to Kvantum Manager) for setting the dialog button layout.
  * Made big menus scrollable by default.
  * Support the KDE contrast effect with Qt ≥ 5.11 for windows that support the blur effect (the KDE blur effect itself can be disabled).
+ * Make libfm-qt's path buttons follow group_toolbar_buttons.
+ * Consider active_tab_overlap in drawing tab-bar frames (because the active tab interior should be opaque when there's an overlap).
+ * Don't give too much space to text shadows.
 
 V0.10.8
 ---------

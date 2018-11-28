@@ -1165,4 +1165,13 @@
 <path style="opacity:.14;fill:url(#linearGradient2471);fill-rule:evenodd" d="m 172,19.5002 h 32 v -10 h -32 z "/>
 </g>
 <use width="100%" height="100%" xlink:href="#button-toggled-topleft" id="button-toggled-topright" transform="matrix(-1,0,0,1,536,0)"/>
+<g id="button-separator">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 302,37 h 3 v 3 h -3 z"/>
+<path style="paint-order:normal;fill:#a8a4a2;fill-rule:evenodd" d="m 304,37 h 1 v 3 h -1 z"/>
+</g>
+<g id="button-separator-top" transform="translate(0,-3)">
+<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 302,37 h 3 v 3 h -3 z"/>
+<path style="paint-order:normal;fill:#a8a4a2;fill-rule:evenodd" d="m 304,38 h 1 v 2 h -1 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#button-separator-top" id="button-separator-bottom" transform="matrix(1,0,0,-1,0,77)"/>
 </svg>
