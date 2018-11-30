@@ -12903,7 +12903,7 @@ QSize Style::sizeFromContents(ContentsType type,
             f.setWeight(lspec.boldness);
             s = s + textSize(f, txt) - s1;
           }
-          // consider a global min. width for push buttons as is done in "qcommonstyle.cpp"
+          // consider a global min. width for push buttons as is done in "qpushbutton.cpp"
           s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
                                    + 6*QFontMetrics(QApplication::font()).width("W"),
                                  s.height()));

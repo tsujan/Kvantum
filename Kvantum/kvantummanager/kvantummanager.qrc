@@ -1,9 +1,17 @@
 <RCC>
   <qresource prefix="Icons">
-    <file>data/system-software-install.svg</file>
+    <file>data/application-exit.svg</file>
+    <file>data/applications-system.svg</file>
+    <file>data/dialog-ok.svg</file>
+    <file>data/document-open.svg</file>
+    <file>data/document-revert.svg</file>
+    <file>data/document-save.svg</file>
+    <file>data/edit-delete.svg</file>
+    <file>data/help-about.svg</file>
+    <file>data/help-whatsthis.svg</file>
     <file>data/preferences-desktop-theme.svg</file>
     <file>data/preferences-system.svg</file>
-    <file>data/app.svg</file>
+    <file>data/system-software-install.svg</file>
     <file>../kvantumpreview/data/kvantum.svg</file>
   </qresource>
 </RCC>

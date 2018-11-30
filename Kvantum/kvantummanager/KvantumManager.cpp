@@ -16,6 +16,7 @@
  */
 
 #include "KvantumManager.h"
+#include "svgicons.h"
 #include <QFileDevice>
 #include <QTextStream>
 #include <QTimer>
@@ -45,18 +46,21 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     modifiedSuffix_ = " (" + tr ("modified") + ")";
     kvDefault_ = "Kvantum (" + tr ("default") + ")";
 
-    ui->toolBox->setItemIcon (0,
-                              QIcon::fromTheme ("system-software-install",
-                                                QIcon (":/Icons/data/system-software-install.svg")));
-    ui->toolBox->setItemIcon (1,
-                              QIcon::fromTheme ("preferences-desktop-theme",
-                                                QIcon (":/Icons/data/preferences-desktop-theme.svg")));
-    ui->toolBox->setItemIcon (2,
-                              QIcon::fromTheme ("preferences-system",
-                                                QIcon (":/Icons/data/preferences-system.svg")));
-    ui->toolBox->setItemIcon (3,
-                              QIcon::fromTheme ("unknownapp",
-                                                QIcon (":/Icons/data/app.svg")));
+    ui->openTheme->setIcon(symbolicIcon::icon (":/Icons/data/document-open.svg"));
+    ui->deleteTheme->setIcon(symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
+    ui->useTheme->setIcon(symbolicIcon::icon (":/Icons/data/dialog-ok.svg"));
+    ui->restoreButton->setIcon(symbolicIcon::icon (":/Icons/data/document-revert.svg"));
+    ui->saveButton->setIcon(symbolicIcon::icon (":/Icons/data/document-save.svg"));
+    ui->removeAppButton->setIcon(symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
+    ui->saveAppButton->setIcon(symbolicIcon::icon (":/Icons/data/document-save.svg"));
+    ui->whatsthisButton->setIcon(symbolicIcon::icon (":/Icons/data/help-whatsthis.svg"));
+    ui->aboutButton->setIcon(symbolicIcon::icon (":/Icons/data/help-about.svg"));
+    ui->quit->setIcon(symbolicIcon::icon (":/Icons/data/application-exit.svg"));
+
+    ui->toolBox->setItemIcon (0, symbolicIcon::icon (":/Icons/data/system-software-install.svg"));
+    ui->toolBox->setItemIcon (1, symbolicIcon::icon (":/Icons/data/preferences-desktop-theme.svg"));
+    ui->toolBox->setItemIcon (2, symbolicIcon::icon (":/Icons/data/preferences-system.svg"));
+    ui->toolBox->setItemIcon (3, symbolicIcon::icon (":/Icons/data/applications-system.svg"));
 
     lastPath_ = QDir::home().path();
     process_ = new QProcess (this);

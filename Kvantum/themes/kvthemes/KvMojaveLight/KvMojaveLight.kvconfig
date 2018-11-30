@@ -231,8 +231,10 @@ frame.right=3
 
 [LineEdit]
 inherits=PanelButtonCommand
-frame.element=lineedit
-interior.element=lineedit
+frame.element=le
+interior.element=le
+frame.expandedElement=lineedit
+interior.expandedElement=lineedit
 text.margin.top=2
 text.margin.bottom=2
 

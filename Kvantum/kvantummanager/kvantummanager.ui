@@ -76,11 +76,6 @@
            <string>Select a Kvantum
 theme folder</string>
           </property>
-          <property name="icon">
-           <iconset theme="document-open-folder">
-            <normaloff/>
-           </iconset>
-          </property>
          </widget>
         </item>
         <item row="2" column="1">
@@ -195,11 +190,6 @@ only removes user themes.</string>
           <property name="text">
            <string>Delete this theme</string>
           </property>
-          <property name="icon">
-           <iconset theme="edit-delete">
-            <normaloff/>
-           </iconset>
-          </property>
          </widget>
         </item>
         <item row="2" column="1" alignment="Qt::AlignRight">
@@ -212,11 +202,6 @@ the theme is already used.</string>
           </property>
           <property name="text">
            <string>Use this theme</string>
-          </property>
-          <property name="icon">
-           <iconset theme="dialog-ok">
-            <normaloff/>
-           </iconset>
           </property>
          </widget>
         </item>
@@ -343,11 +328,6 @@ settings of this theme.
           <property name="text">
            <string>Restore</string>
           </property>
-          <property name="icon">
-           <iconset theme="document-revert">
-            <normaloff/>
-           </iconset>
-          </property>
           <property name="shortcut">
            <string>Ctrl+Z</string>
           </property>
@@ -361,11 +341,6 @@ settings of this theme.
           </property>
           <property name="text">
            <string>Save</string>
-          </property>
-          <property name="icon">
-           <iconset theme="document-save">
-            <normaloff/>
-           </iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+S</string>
@@ -2073,9 +2048,6 @@ This Needs saving to take effect.</string>
           <property name="text">
            <string>Remove List</string>
           </property>
-          <property name="icon">
-           <iconset theme="edit-delete"/>
-          </property>
          </widget>
         </item>
         <item row="6" column="1" alignment="Qt::AlignRight">
@@ -2088,9 +2060,6 @@ This Needs saving to take effect.</string>
           </property>
           <property name="text">
            <string>Save</string>
-          </property>
-          <property name="icon">
-           <iconset theme="document-save"/>
           </property>
          </widget>
         </item>
@@ -2119,11 +2088,6 @@ This Needs saving to take effect.</string>
       <property name="text">
        <string>Quit</string>
       </property>
-      <property name="icon">
-       <iconset theme="application-exit">
-        <normaloff/>
-       </iconset>
-      </property>
       <property name="shortcut">
        <string>Ctrl+Q</string>
       </property>
@@ -2147,11 +2111,6 @@ or update its preview.</string>
      <widget class="QPushButton" name="aboutButton">
       <property name="text">
        <string>About</string>
-      </property>
-      <property name="icon">
-       <iconset theme="help-about">
-        <normaloff/>
-       </iconset>
       </property>
      </widget>
     </item>
@@ -2181,11 +2140,6 @@ or update its preview.</string>
       </property>
       <property name="text">
        <string>Help</string>
-      </property>
-      <property name="icon">
-       <iconset theme="help-contextual">
-        <normaloff/>
-       </iconset>
       </property>
      </widget>
     </item>

@@ -8189,7 +8189,7 @@ void Style::drawControl(ControlElement element,
         {
           int margin = (r.width() - txtSize.width() - opt->iconSize.width()
                         - fspec.left - fspec.right - lspec.left - lspec.right - lspec.tispace
-                        - (lspec.hasShadow ? qAbs(lspec.xshift)+lspec.depth : 0)) / 2;
+                        - (lspec.hasShadow ? qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0) : 0)) / 2;
           if (margin > 0)
             R.adjust(margin, 0, -margin, 0);
         }
@@ -11512,7 +11512,8 @@ QSize Style::sizeFromContents(ContentsType type,
         if (!txt.isEmpty())
         {
           if (lspec.hasShadow)
-            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+            s = s + QSize(qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0),
+                          qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0));
           if (!opt->icon.isNull())
             s = s + QSize(lspec.tispace, 0);
           /* take in to account the boldness of default button text
@@ -11819,7 +11820,8 @@ QSize Style::sizeFromContents(ContentsType type,
           }
 
           if (lspec.hasShadow)
-            s = s + QSize(qAbs(lspec.xshift)+lspec.depth, qAbs(lspec.yshift)+lspec.depth);
+            s = s + QSize(qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0),
+                          qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0));
           if (lspec.boldFont)
           {
             QFont f;
@@ -12165,8 +12167,8 @@ QSize Style::sizeCalculated(const QFont &font,
   s.setHeight(fspec.top+fspec.bottom+lspec.top+lspec.bottom);
   if (!text.isEmpty() && lspec.hasShadow)
   {
-    s.rwidth() += qAbs(lspec.xshift)+lspec.depth;
-    s.rheight() += qAbs(lspec.yshift)+lspec.depth;
+    s.rwidth() += qMax(qAbs(lspec.xshift)-1,0)+qMax(lspec.depth-1,0);
+    s.rheight() += qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0);
   }
 
   QSize ts = textSize(font, text, realHeight);
@@ -15091,8 +15093,7 @@ void Style::renderLabel(
           {
             int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
             int yShift = lspec.yshift + i * (lspec.yshift < 0 ? -1 : 1);
-            painter->drawText(rtext.adjusted(xShift,yShift,
-                                             xShift,yShift),
+            painter->drawText(rtext.adjusted(xShift,yShift,xShift,yShift),
                               talign,text);
           }
           painter->restore();
