@@ -136,6 +136,8 @@ frame.expanded.left=2
 frame.expanded.right=2
 indicator.element=combo
 indicator.size=11
+text.margin.left=3
+text.margin.right=3
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand

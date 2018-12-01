@@ -4417,7 +4417,16 @@ void Style::drawPrimitive(PrimitiveElement element,
         painter->setTransform(m, true);
       }
       if (element == PE_IndicatorToolBarHandle && tspec_.center_toolbar_handle)
-        renderIndicator(painter,r,fspec,dspec,dspec.element+"-handle",option->direction);
+      {
+        int margin = qMax(3 - pixelMetric(PM_ToolBarItemMargin,option,widget)
+                            - tspec_.toolbar_interior_spacing,
+                          0); // -> PM_ToolBarHandleExtent
+        renderIndicator(painter,
+                        option->direction == Qt::RightToLeft ? r.adjusted(0,0,-margin,0)
+                                                             : r.adjusted(margin,0,0,0),
+                        fspec,dspec,dspec.element+"-handle",option->direction,
+                        Qt::AlignVCenter | Qt::AlignLeft);
+      }
       else
         renderInterior(painter,r,fspec,ispec,
                        dspec.element
@@ -10828,7 +10837,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       if (tspec_.center_toolbar_handle)
       {
         const indicator_spec dspec = getIndicatorSpec("Toolbar");
-        return qMax(2*dspec.size,8);
+        return dspec.size + 3
+               /* a minimum margin of 3 px */
+               + qMax(3 - pixelMetric(PM_ToolBarItemMargin,option,widget)
+                        - tspec_.toolbar_interior_spacing,
+                      0);
       }
       return 8;
     }

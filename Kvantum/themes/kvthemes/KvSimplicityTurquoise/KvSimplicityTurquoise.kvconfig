@@ -21,7 +21,7 @@ slider_width=6
 slider_handle_width=18
 slider_handle_length=18
 center_toolbar_handle=true
-toolbar_interior_spacing=1
+toolbar_interior_spacing=2
 check_size=16
 textless_progressbar=false
 progressbar_thickness=8
@@ -86,7 +86,7 @@ progress.indicator.text.color=white
 
 [Hacks]
 transparent_ktitle_label=true
-transparent_dolphin_view=false
+transparent_dolphin_view=true
 transparent_pcmanfm_sidepane=true
 blur_translucent=true
 transparent_menutitle=true
@@ -101,7 +101,7 @@ no_selection_tint=true
 normal_default_pushbutton=false
 single_top_toolbar=true
 tint_on_mouseover=0
-transparent_pcmanfm_view=false
+transparent_pcmanfm_view=true
 transparent_arrow_button=true
 
 [PanelButtonCommand]
@@ -124,11 +124,12 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=3
-text.margin.bottom=3
-text.margin.left=3
-text.margin.right=3
+text.margin.top=2
+text.margin.bottom=2
+text.margin.left=2
+text.margin.right=2
 frame.expansion=10
+min_width=+2
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -188,6 +189,7 @@ frame=false
 interior.element=radio
 text.normal.color=black
 text.focus.color=#005161
+min_width=0
 
 [CheckBox]
 inherits=PanelButtonCommand
@@ -195,6 +197,7 @@ frame=false
 interior.element=checkbox
 text.normal.color=black
 text.focus.color=#005161
+min_width=0
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -213,6 +216,7 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.left=1
 text.margin.right=1
+min_width=0
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -262,6 +266,7 @@ indicator.element=arrow
 
 [HeaderSection]
 inherits=PanelButtonCommand
+min_width=0
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -387,6 +392,7 @@ frame.bottom=3
 frame.left=3
 frame.right=3
 frame.expansion=0
+min_width=0
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -410,6 +416,7 @@ text.margin.top=2
 text.normal.color=white
 text.focus.color=#7de8ff
 frame.expansion=0
+min_width=0
 
 [TitleBar]
 inherits=PanelButtonCommand
@@ -425,6 +432,9 @@ frame.expansion=0
 
 [ComboBox]
 inherits=PanelButtonCommand
+text.margin.left=3
+text.margin.right=3
+min_width=0
 
 [Menu]
 inherits=PanelButtonCommand

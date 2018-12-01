@@ -36,6 +36,7 @@ V0.10.9
  * Consider active_tab_overlap in drawing tab-bar frames (because the active tab interior should be opaque when there's an overlap).
  * Don't give too much space to text shadows.
  * Added SVG symbolic icons to Kvantum Manager because the system symbolic icons didn't change their color when the theme was changed from light to dark or conversely.
+ * 3-px margin for centered toolbar handles.
 
 V0.10.8
 ---------

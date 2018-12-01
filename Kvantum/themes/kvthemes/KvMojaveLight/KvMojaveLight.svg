@@ -656,27 +656,27 @@
 </g>
 <use width="100%" height="100%" xlink:href="#button-separator-normal-bottom" id="button-separator-normal-top" transform="matrix(1,0,0,-1,0,1152)"/>
 <g id="tbutton-focused-right" transform="matrix(-1.6,0,0,0.98461538,169,-28.001575)">
-<path style="fill:#f2f2f2;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 H 22.5 v 32.5 z"/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 H 22.5 v 32.5 z"/>
 <path style="fill-opacity:.098;color:#000" d="m 21.25,48.7516 v 32.5 h 1.25 v -32.5 z"/>
 </g>
 <g id="tbutton-focused-bottom" transform="matrix(0,-1.6,0.98461538,0,42.998425,98)">
-<path style="fill:#f2f2f2;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 H 22.5 v 32.5 z"/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 H 22.5 v 32.5 z"/>
 <path style="fill-opacity:.235;color:#000" d="m 21.25,48.7516 v 32.5 h 1.25 v -32.5 z"/>
 </g>
-<path style="fill:#f2f2f2;fill-rule:evenodd" id="tbutton-focused" d="m 91,20 v 32 h 32 V 20 Z"/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" id="tbutton-focused" d="m 91,20 v 32 h 32 V 20 Z"/>
 <g id="tbutton-focused-bottomright" transform="matrix(0,-1.6,-1.6,0,201.00123,98)">
-<path style="fill:#f2f2f2;fill-rule:evenodd" d="m 28.7499,42.5007 c -3.59365,0 -6.2499,2.6563 -6.24985,6.25078 h 6.24985 z "/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" d="m 28.7499,42.5007 c -3.59365,0 -6.2499,2.6563 -6.24985,6.25078 h 6.24985 z "/>
 <path style="fill:url(#linearGradient2586);color:#000" d="m 28.75,41.2516 c -4.12497,0 -7.5,3.37497 -7.5,7.5 h 1.24995 c 0,-3.59458 2.6563,-6.25083 6.24985,-6.25078 z "/>
 </g>
 <g id="tbutton-focused-top" transform="translate(64,0.5)">
-<path style="fill:#f2f2f2;fill-rule:evenodd" d="M 27,19.5 H 59 V 9.5 H 27 Z"/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" d="M 27,19.5 H 59 V 9.5 H 27 Z"/>
 <g style="color:#000">
 <path style="fill-opacity:.059" d="M 59,7.5 H 27 v 2 h 32 z"/>
 <path style="opacity:.16;fill:#fff;stroke-width:.707" d="M 59,9.5001 H 27 V 11.5 h 32 z"/>
 </g>
 </g>
 <g id="tbutton-focused-topright" transform="translate(64,0.5)">
-<path style="fill:#f2f2f2;fill-rule:evenodd" d="m 59,9.5 c 5.75,0 10,4.25 10,10 H 59 Z"/>
+<path style="fill:#f1f1f1;fill-rule:evenodd" d="m 59,9.5 c 5.75,0 10,4.25 10,10 H 59 Z"/>
 <g style="color:#000">
 <path style="fill:url(#linearGradient2790)" d="m 59,7.5 c 6.6,0 12,5.4 12,12 h -2 c 0,-5.75 -4.25,-10 -10,-10 z"/>
 <path style="opacity:.16;fill:#fff" d="m 59,9.5 c 5.75,0 10,4.25 10,10 -0.5,-5.5 -6.25,-8 -10,-8 z"/>
