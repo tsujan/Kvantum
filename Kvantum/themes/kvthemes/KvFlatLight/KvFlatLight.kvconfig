@@ -114,7 +114,6 @@ text.margin.left=3
 text.margin.right=3
 frame.expansion=8
 min_width=+0.1font
-min_height=+0.1font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -181,6 +180,8 @@ inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
 indicator.element=flat-s-arrow-down
+text.margin.left=2
+text.margin.right=2
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -409,6 +410,8 @@ frame.expansion=0
 [ComboBox]
 inherits=PanelButtonCommand
 indicator.element=none
+text.margin.left=4
+text.margin.right=4
 
 [Menu]
 inherits=PanelButtonCommand

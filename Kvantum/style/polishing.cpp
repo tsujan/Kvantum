@@ -549,6 +549,12 @@ void Style::polish(QWidget *widget)
 
             palette = itemView->viewport()->palette();
             palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+            if (itemView->viewport()->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly).isEmpty())
+            { // font menus use the palette text color, so we set it to the menu text color when needed
+              QColor menuTextColor = getFromRGBA(getLabelSpec("MenuItem").normalColor);
+              if (enoughContrast(palette.color(QPalette::Text), menuTextColor))
+                palette.setColor(QPalette::Text, menuTextColor);
+            }
             itemView->viewport()->setPalette(palette);
 
             if (itemView->parentWidget())

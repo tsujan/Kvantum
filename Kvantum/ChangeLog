@@ -37,6 +37,9 @@ V0.10.9
  * Don't give too much space to text shadows.
  * Added SVG symbolic icons to Kvantum Manager because the system symbolic icons didn't change their color when the theme was changed from light to dark or conversely.
  * 3-px margin for centered toolbar handles.
+ * Fixed a mistake in calculating combo box widths (the existence of icons wasn't considered correctly).
+ * Enforce the menu-item text color on font combo popups when needed.
+ * Fixed drawing of buttonless spin-boxes.
 
 V0.10.8
 ---------

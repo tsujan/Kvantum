@@ -362,7 +362,7 @@ tab_button_extra_margin           integer             The extra margin between t
                                                       which case, the value will be multiplied
                                                       by the height of the app font (in px)
                                                       and could also be a decimal (as in
-                                                      "min_height=0.25font").
+                                                      "tab_button_extra_margin=0.25font").
 
 bold_active_tab                   true/false          Should the active tab text be bold? By
                                                       default, the active tab text is like the
@@ -1062,9 +1062,10 @@ min_width
 min_height                        integer             Minimum width or height (in px). They
                                   or                  have meaning only for menuitems, menubar
                                   DECIMALfont         items, push and tool buttons, tabs,
-                                                      line-edits, combo boxes, spin boxes
-                                                      (only for their height) and, sometimes,
-                                                      view items (only for their height).
+                                                      combo boxes, line-edits, spin boxes
+                                                      (only for their height), check and radio
+                                                      buttons (only the height) and, sometimes,
+                                                      view items (only the height).
 
                                                       They can also be used under Window and
                                                       Dialog sections (and their translucent
@@ -1092,6 +1093,10 @@ min_height                        integer             Minimum width or height (i
                                                       width. Please do not mistake "+" for a
                                                       positive value here; the values are
                                                       always considered to be nonnegative.
+
+                                                      NOTE: For combo boxes and line-edits, when "+"
+                                                      is used with min_width, the horizontal
+                                                      text margins are also increased.
 =============================================================
 
 

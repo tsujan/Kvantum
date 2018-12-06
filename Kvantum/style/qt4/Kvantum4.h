@@ -315,6 +315,9 @@ class Style : public QCommonStyle {
       return false;
     }
 
+    /* The extra combo box width needed by frames and spacings. */
+    int extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const;
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
@@ -368,9 +371,6 @@ class Style : public QCommonStyle {
 
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
-
-    /* For not calculating the extra combo width repeatedly. */
-    mutable int extraComboWidth_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
     mutable QWeakPointer<QWidget> sunkenButton_;

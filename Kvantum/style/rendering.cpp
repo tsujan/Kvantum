@@ -961,7 +961,9 @@ void Style::renderLabel(
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
     // the pixmap should have been enlarged by pixelRatio_
-    QRect iconRect = alignedRect(ld, Qt::AlignCenter, (QSizeF(px.size())/pixelRatio_).toSize(), ricon);
+    QRect iconRect = alignedRect(ld, Qt::AlignCenter,
+                                 (QSizeF(px.size())/pixelRatio_).toSize().boundedTo(ricon.size()),
+                                 ricon);
 
     if (!(option->state & State_Enabled))
     {

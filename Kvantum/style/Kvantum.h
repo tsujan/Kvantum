@@ -368,6 +368,9 @@ class Style : public QCommonStyle {
     /* Find the kind of this tool-button among a group of tool-buttons (on a toolbar). */
     int whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, bool &drawSeparator) const;
 
+    /* The extra combo box width needed by frames and spacings. */
+    int extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const;
+
 #if QT_VERSION >= 0x050500
     /* For transient scrollbars: */
     void startAnimation(Animation *animation) const;
@@ -442,9 +445,6 @@ class Style : public QCommonStyle {
 
     /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
     qreal pixelRatio_;
-
-    /* For not calculating the extra combo width repeatedly. */
-    mutable int extraComboWidth_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
     //mutable KvPointer<QWidget> sunkenButton_;

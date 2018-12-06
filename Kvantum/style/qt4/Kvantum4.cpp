@@ -309,7 +309,6 @@ Style::Style() : QCommonStyle()
   isOpaque_ = false;
   ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
-  extraComboWidth_ = 0;
 
   connect(progressTimer_, SIGNAL(timeout()),
           this, SLOT(advanceProgressbar()));
@@ -4307,7 +4306,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
 
         // the measure we used for CC_SpinBox at drawComplexControl()
-        if (tspec_.vertical_spin_indicators || (!widget && sbOpt && sbOpt->frame))
+        if (fspec.HPos == -1 && (tspec_.vertical_spin_indicators || (!widget && sbOpt && sbOpt->frame)))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -6285,12 +6284,12 @@ void Style::drawControl(ControlElement element,
           if (opt->currentIcon.isNull())
           {
             if (opt->direction == Qt::RightToLeft)
-              lspec.right += sspec.minW;
+              lspec.right += sspec.minW/2;
             else
-              lspec.left += sspec.minW;
+              lspec.left += sspec.minW/2;
           }
           else
-            lspec.tispace += sspec.minW;
+            lspec.tispace += sspec.minW/2;
         }
         QStyleOptionComboBox o(*opt);
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
@@ -11297,6 +11296,49 @@ QCommonStyle::SubControl Style::hitTestComplexControl(ComplexControl control,
   return QCommonStyle::hitTestComplexControl(control,option,position,widget);
 }
 
+int Style::extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const
+{
+  if (!opt) return 0;
+  int res = 0;
+
+  const frame_spec fspec = getFrameSpec("ComboBox");
+  const size_spec sspec = getSizeSpec("ComboBox");
+  const label_spec lspec = getLabelSpec("ComboBox");
+  const frame_spec fspec1 = getFrameSpec("LineEdit");
+  const label_spec lspec1 = getLabelSpec("LineEdit");
+  const size_spec sspec1 = getSizeSpec("LineEdit");
+  bool rtl(opt->direction == Qt::RightToLeft);
+
+  /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
+     qMax(23,X) is already added to it in qcommonstyle.cpp but
+     will consider square arrows below.
+
+     We want that the left icon respect frame width,
+     text margin and text-icon spacing in the editable mode too. */
+  res = fspec.left+fspec.right
+        + (opt->editable
+             ? lspec1.left+lspec1.right
+               + (rtl ? fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
+                      : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
+             : lspec.left+lspec.right)
+        + (hasIcon ? lspec.tispace : 0);
+
+  if (opt->editable)
+  {
+    if (tspec_.combo_as_lineedit || tspec_.square_combo_button)
+    {
+      res += rtl ? (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
+                 : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
+    }
+    res += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
+                            : (sspec1.incrementW ? sspec1.minW : 0);
+  }
+  else if (sspec.incrementW)
+    res += sspec.minW;
+
+  return res;
+}
+
 QSize Style::sizeFromContents(ContentsType type,
                               const QStyleOption *option,
                               const QSize &contentsSize,
@@ -11340,8 +11382,10 @@ QSize Style::sizeFromContents(ContentsType type,
       /* Here we don't use defaultSize because, for Qt4, it's based on spinbox size hint,
          which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
          corrected in Qt5 but the following method works for both. */
+      const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
       frame_spec fspec = getFrameSpec("LineEdit");
-      if (tspec_.vertical_spin_indicators)
+      if (tspec_.vertical_spin_indicators
+          && !(sb && sb->buttonSymbols() == QAbstractSpinBox::NoButtons))
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -11352,7 +11396,7 @@ QSize Style::sizeFromContents(ContentsType type,
       const size_spec sspecLE = getSizeSpec("LineEdit");
       const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
       const size_spec sspec = getSizeSpec("IndicatorSpinBox");
-      if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
+      if (sb)
       {
         QString maxTxt = spinMaxText(sb);
         if (!maxTxt.isEmpty())
@@ -11430,39 +11474,7 @@ QSize Style::sizeFromContents(ContentsType type,
                          + (fspec1.bottom > fspec.bottom ? fspec1.bottom-fspec.bottom : 0);
         }
 
-        if (extraComboWidth_ == 0)
-        {
-          /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
-             qMax(23,X) is already added to it in qcommonstyle.cpp.
-
-             We want that the left icon respect frame width,
-             text margin and text-icon spacing in the editable mode too. */
-          extraComboWidth_ = fspec.left+fspec.right
-                             + (opt->editable ? lspec1.left+lspec1.right +
-                                 (option->direction == Qt::RightToLeft ?
-                                   fspec1.right + fspec.right + (hasIcon ? lspec.right : 0)
-                                   : fspec1.left + fspec.left + (hasIcon ? lspec.left : 0))
-                                 : lspec.left+lspec.right)
-                             + (hasIcon ? lspec.tispace : 0);
-
-          /* consider the top and bottom frames
-             of lineedits inside editable combos */
-          if (opt->editable)
-          {
-            if (tspec_.combo_as_lineedit)
-            {
-              extraComboWidth_ += option->direction == Qt::RightToLeft ?
-                                   (fspec1.right > fspec.right ? fspec1.right-fspec.right : 0)
-                                   : (fspec1.left > fspec.left ? fspec1.left-fspec.left : 0);
-            }
-            extraComboWidth_ += sspec.incrementW ? qMax(sspec.minW, sspec1.incrementW ? sspec1.minW : 0)
-                                                 : (sspec1.incrementW ? sspec1.minW : 0);
-          }
-          else if (sspec.incrementW)
-            extraComboWidth_ += sspec.minW;
-        }
-
-        s.rwidth() += extraComboWidth_;
+        s.rwidth() += extraComboWidth(opt, hasIcon);
 
         if (!sspec.incrementW && s.width() < sspec.minW)
           s.setWidth(sspec.minW);
@@ -12439,7 +12451,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       {
         isSpinBox = true;
         lspec.right = 0;
-        if (!tspec_.vertical_spin_indicators)
+        if (!tspec_.vertical_spin_indicators || p->buttonSymbols() == QAbstractSpinBox::NoButtons)
         {
           QString maxTxt = spinMaxText(p);
           if (maxTxt.isEmpty()
@@ -12499,11 +12511,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           else if (widget->x() > 0)
               rect.adjust(-fspec.left,0,0,0);
         }
-        else if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(widget->parentWidget()))
-        {
-          if (p->buttonSymbols() != QAbstractSpinBox::NoButtons)
-            rect.adjust(0,0,fspec.right,0);
-        }
+        else if (qobject_cast<QAbstractSpinBox*>(widget->parentWidget()))
+          rect.adjust(0,0,fspec.right,0);
       }
 
       /* this is for editable view items */
@@ -13136,6 +13145,7 @@ QRect Style::subControlRect(ComplexControl control,
 
     case CC_SpinBox : {
       int sw = tspec_.spin_button_width;
+      const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
       frame_spec fspec = getFrameSpec("IndicatorSpinBox");
       frame_spec fspecLE = getFrameSpec("LineEdit");
       const size_spec sspecLE = getSizeSpec("LineEdit");
@@ -13149,47 +13159,44 @@ QRect Style::subControlRect(ComplexControl control,
         sw = 12;
         fspec.right = qMin(fspec.right,3);
       }
-      else if (!verticalIndicators)
+      else if (sb)
       {
-        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
-        {
-          if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
-            sw = 0;
-          else // when there isn't enough horizontal space (as in VLC and Pencil)
+        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+          sw = 0;
+        else if (!verticalIndicators)
+        { // when there isn't enough horizontal space (as in VLC and Pencil)
+          QString maxTxt = spinMaxText(sb);
+          if (!maxTxt.isEmpty()
+              /* some codes may wrongly add a special text
+                 only when the value is minimum */
+              && maxTxt != sb->specialValueText())
           {
-            QString maxTxt = spinMaxText(sb);
-            if (!maxTxt.isEmpty()
-                /* some codes may wrongly add a special text
-                   only when the value is minimum */
-                && maxTxt != sb->specialValueText())
+            maxTxt += QLatin1Char(' ');
+            int txtWidth = textSize(sb->font(),maxTxt,false).width();
+            int rightFrame = w - txtWidth - 2*sw
+                             - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
+                             - 2; // for padding
+            if (rightFrame < 0) rightFrame = 1;
+            if (fspec.right > rightFrame)
             {
-              maxTxt += QLatin1Char(' ');
-              int txtWidth = textSize(sb->font(),maxTxt,false).width();
-              int rightFrame = w - txtWidth - 2*sw
-                               - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
-                               - 2; // for padding
-              if (rightFrame < 0) rightFrame = 1;
+              sw = 16;
+              // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
+              rightFrame = w-txtWidth-2*sw-3-2;
               if (fspec.right > rightFrame)
               {
-                sw = 16;
-                // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
-                rightFrame = w-txtWidth-2*sw-3-2;
-                if (fspec.right > rightFrame)
+                rightFrame = qMax(rightFrame,2);
+                if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
                 {
-                  rightFrame = qMax(rightFrame,2);
-                  if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
-                  {
-                    if (rightFrame == 2) // see PE_IndicatorSpinUp
-                      sw = 8;
-                    fspec.right = qMin(fspec.right,
-                                       qMin(rightFrame,3)); // for a uniform look
-                  }
-                  else fspec.right = qMin(fspec.right,3); // better than nothing
+                  if (rightFrame == 2) // see PE_IndicatorSpinUp
+                    sw = 8;
+                  fspec.right = qMin(fspec.right,
+                                     qMin(rightFrame,3)); // for a uniform look
                 }
+                else fspec.right = qMin(fspec.right,3); // better than nothing
               }
             }
-            else fspec.right = qMin(fspec.right,3);
           }
+          else fspec.right = qMin(fspec.right,3);
         }
       }
 
@@ -13205,6 +13212,7 @@ QRect Style::subControlRect(ComplexControl control,
         case SC_SpinBoxFrame :
           return option->rect;
         case SC_SpinBoxEditField : {
+          if (sw == 0) return option->rect; // no button
           int margin = 0;
           if (isLibreoffice_)
             margin = qMin(fspecLE.left,3);
@@ -13214,11 +13222,13 @@ QRect Style::subControlRect(ComplexControl control,
                        h);
         }
         case SC_SpinBoxUp :
+          if (sw == 0) return QRect();
           return QRect(x + w - (sw + fspec.right),
                        y,
                        sw + fspec.right,
                        verticalIndicators ? h/2 + (h%2 ? 1 : 0) : h);
         case SC_SpinBoxDown :
+          if (sw == 0) return QRect();
           if (!verticalIndicators)
             return QRect(x + w - (sw + fspec.right) - sw,
                          y,
@@ -13304,10 +13314,29 @@ QRect Style::subControlRect(ComplexControl control,
             int space = fspec.left+lspec.left + fspec.right+lspec.right
                         - 6; // assuming a maximum value forced by Qt
 
+            bool hasIcon = false;
+            const QStyleOptionComboBox *opt =
+                qstyleoption_cast<const QStyleOptionComboBox*>(option);
+            if (opt)
+            {
+              if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
+              {
+                for (int i = 0; i < cb->count(); i++)
+                {
+                  if (!cb->itemIcon(i).isNull())
+                  {
+                    hasIcon = true;
+                    break;
+                  }
+                }
+              }
+              else hasIcon = true;
+            }
+
             fspec = getFrameSpec("Menu");
             space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
                      + (!noComposite_ ? 2*settings_->getCompositeSpec().menu_shadow_depth : 0)
-                     - extraComboWidth_;
+                     - extraComboWidth(opt, hasIcon);
 
             /* The width might be increased by Qt -> qcombobox.cpp -> QComboBox::showPopup()
                but the left border won't be moved. So, we align the left border.*/

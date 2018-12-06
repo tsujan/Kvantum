@@ -279,6 +279,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         break;
       }
       enteredWidget_ = w;
+      /* NOTE: Qt doc says, "If multiple event filters are installed on a single object,
+               the filter that was installed last is activated first." Because an event
+               filter can be installed by the app without polishing the widget (like when
+               the view is switched in pcmanfm-qt between the icon and thumbnail modes),
+               we need to reinstall the event filter here to catch the wheel event always
+               before it's processed by the app. */
+      w->removeEventFilter(this);
+      w->installEventFilter(this);
     }
     break;
 

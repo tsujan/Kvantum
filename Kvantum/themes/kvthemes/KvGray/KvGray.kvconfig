@@ -139,8 +139,8 @@ frame.expanded.bottom=2
 frame.expanded.left=2
 frame.expanded.right=2
 frame.expansion=3.4font
-text.margin.left=6
-text.margin.right=6
+text.margin.left=4
+text.margin.right=4
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
