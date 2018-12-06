@@ -266,12 +266,15 @@ as a workaround for bugs in applications.</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto no es una solución completa, pero previene saltos
+de desplazamientos molestos que pueden suceder con
+la rueda del ratón cuando están habilitados los gestos
+de ratón.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="603"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Solución temporal para el fallo de saltos de desplazamiento de Qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
@@ -415,27 +418,32 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es necesario el efecto de contraste de KDE con Qt ≥ 5.11
+y solo se aplica a ventanas translúcidas que admitan el
+efecto de difuminado (pero el efecto de difuminado de
+KDE se puede deshabilitar).
+
+Un valor de 1.00 significa que no hay cambios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="784"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto de contraste</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Saturación:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="797"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensidad:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="804"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraste:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="881"/>
@@ -611,7 +619,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1884"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposición del botón del diálogo:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
@@ -1291,27 +1299,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="86"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño de KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="87"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño de GNOME</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="88"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño de Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="89"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño de Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="90"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseño de Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="92"/>
@@ -1486,7 +1494,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2590"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Una herramienta para instalar, seleccionar&lt;br&gt;y configurar temas de &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2591"/>
