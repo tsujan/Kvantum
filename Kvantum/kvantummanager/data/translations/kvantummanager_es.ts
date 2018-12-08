@@ -12,7 +12,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Instalar/actualizar el tema</translation>
+        <translation>Instalar/actualizar temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -42,12 +42,12 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Cambiar/borrar el tema</translation>
+        <translation>Cambiar/borrar temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Seleccionar un tema:</translation>
+        <translation>Seleccione un tema:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
@@ -120,7 +120,7 @@ defecto (original) del tema.
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation>Configuración a prueba de fallos</translation>
+        <translation>Configuración segura</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
@@ -495,7 +495,7 @@ Se marca automáticamente si el difuminado de ventanas está habilitado.</transl
     <message>
         <location filename="../../kvantummanager.ui" line="887"/>
         <source>Blurring for menus and tooltips</source>
-        <translation>Difuminar menús y descripciones emergentes</translation>
+        <translation>Difuminar los menús y las descripciones emergentes</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
@@ -677,7 +677,7 @@ Por defecto, las ramas de los árboles tienen indicadores pero no líneas.</tran
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>¡Usar el tema activo en todas las aplicaciones!
+        <translation>Usa el tema activo en todas las aplicaciones.
 
 Es necesario guardar esto para que tenga efecto.</translation>
     </message>
@@ -689,7 +689,7 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Borrar el tema seleccionado de todas
+        <translation>Borra el tema seleccionado de todas
 las rutas de instalación de usuario.
 
 La instalación original seguirá disponible
@@ -1025,7 +1025,7 @@ spin-down one inside the spin line-edit.</source>
 By default, combo popups do not cover the combo box.</source>
         <translation>¿Quiere dibujar los cuadro de lista como los menús (es decir, como en Gtk)?
 
-Por defecto, los cuadro de lista no cubren la caja.</translation>
+Por defecto, las listas de los cuadro de lista no cubren la caja.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
@@ -1269,7 +1269,7 @@ Esta casilla puede inhabilitar algunas opciones.
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Combo popup as menu</source>
-        <translation>Elementos emergentes de cuadros de lista como los de menús</translation>
+        <translation>Listas de los cuadros de lista como los menús</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1744"/>
@@ -1344,7 +1344,7 @@ Esta opción las oculta.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2049"/>
         <source>Remove List</source>
-        <translation></translation>
+        <translation>Borrar la lista</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2056"/>
@@ -1518,7 +1518,7 @@ o actualizar su vista previa.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="95"/>
         <source>Anywhere possible</source>
-        <translation>Desde cualquier lugar</translation>
+        <translation>Cualquier lugar</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="384"/>
