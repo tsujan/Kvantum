@@ -24,6 +24,9 @@
 #if QT_VERSION >= 0x050000
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#define KSL(x) QStringLiteral(x)
+#else
+#define KSL(x) QString(x)
 #endif
 #endif
 
@@ -58,7 +61,7 @@ void ThemeConfig::load(const QString& theme)
   if (settings_)
   {
     delete settings_;
-    settings_ = NULL;
+    settings_ = nullptr;
   }
 
   if (!QFile::exists(theme))
@@ -100,7 +103,7 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
     if (r.isValid())
       return r;
     l << i;
-    i = getValue(i, "inherits").toString();
+    i = getValue(i, KSL("inherits")).toString();
     // no infinite loop
     if (l.contains(i))
       break;
@@ -112,7 +115,7 @@ QVariant ThemeConfig::getValue(const QString& group, const QString& key, const Q
       && !key.contains(".normal.") && !key.contains(".focus.") && !key.contains(".press.") && !key.contains(".toggle.")
       && key != "text.bold" && key != "text.italic")
   {
-    i = parentConfig_->getValue(group, "inherits").toString();
+    i = parentConfig_->getValue(group, KSL("inherits")).toString();
     r = parentConfig_->getValue(group, key, i);
   }
 
@@ -127,7 +130,7 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   frame_spec r;
   default_frame_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QVariant v = getValue(elementName, KSL("inherits"));
   QString i = v.toString();
 
   /* except for text colors and indicator, frame and interior elements,
@@ -142,14 +145,14 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
   else if (name == "ToolbarLineEdit")
     name = "LineEdit";
 
-  v = getValue(name,"frame", i);
+  v = getValue(name,KSL("frame"), i);
   r.hasFrame = v.toBool();
   if (r.hasFrame)
   {
-    v = getValue(name,"focusFrame", i);
+    v = getValue(name,KSL("focusFrame"), i);
     r.hasFocusFrame = v.toBool();
 
-    v = getValue(elementName, "frame.element", i);
+    v = getValue(elementName, KSL("frame.element"), i);
     if (!v.toString().isEmpty())
     {
       r.element = v.toString();
@@ -157,24 +160,24 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
       if (elementName == "ToolbarButton" || elementName == "ToolbarComboBox"
           || elementName == "ToolbarLineEdit")
       {
-        i = getValue(name, "inherits").toString();
+        i = getValue(name, KSL("inherits")).toString();
       }
 
-      v = getValue(name,"frame.top", i);
+      v = getValue(name,KSL("frame.top"), i);
       r.top = qMax(v.toInt(),0);
-      v = getValue(name,"frame.bottom", i);
+      v = getValue(name,KSL("frame.bottom"), i);
       r.bottom = qMax(v.toInt(),0);
-      v = getValue(name,"frame.left", i);
+      v = getValue(name,KSL("frame.left"), i);
       r.left = qMax(v.toInt(),0);
-      v = getValue(name,"frame.right", i);
+      v = getValue(name,KSL("frame.right"), i);
       r.right = qMax(v.toInt(),0);
 
-      v = getValue(name,"frame.patternsize", i);
+      v = getValue(name,KSL("frame.patternsize"), i);
       r.ps = qMax(v.toInt(),0);
 
       if (r.top || r.bottom || r.left || r.right)
       {
-        v = getValue(name,"frame.expansion", i);
+        v = getValue(name,KSL("frame.expansion"), i);
         if (v.isValid())
         {
           QString value = v.toString();
@@ -189,28 +192,28 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
 
         if (r.expansion > 0)
         {
-          v = getValue(name,"frame.expanded.top", i);
+          v = getValue(name,KSL("frame.expanded.top"), i);
           if (v.isValid())
           {
             r.topExpanded = qMin(v.toInt(),r.top);
             if (r.topExpanded < 0) r.topExpanded = r.top;
           }
           else r.topExpanded = r.top;
-          v = getValue(name,"frame.expanded.bottom", i);
+          v = getValue(name,KSL("frame.expanded.bottom"), i);
           if (v.isValid())
           {
             r.bottomExpanded = qMin(v.toInt(),r.bottom);
             if (r.bottomExpanded < 0) r.bottomExpanded = r.bottom;
           }
           else r.bottomExpanded = r.bottom;
-          v = getValue(name,"frame.expanded.left", i);
+          v = getValue(name,KSL("frame.expanded.left"), i);
           if (v.isValid())
           {
             r.leftExpanded = qMin(v.toInt(),r.left);
             if (r.leftExpanded < 0) r.leftExpanded = r.left;
           }
           else r.leftExpanded = r.left;
-          v = getValue(name,"frame.expanded.right", i);
+          v = getValue(name,KSL("frame.expanded.right"), i);
           if (v.isValid())
           {
             r.rightExpanded = qMin(v.toInt(),r.right);
@@ -220,7 +223,7 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
         }
       }
     }
-    v = getValue(elementName, "frame.expandedElement");
+    v = getValue(elementName, KSL("frame.expandedElement"));
     r.expandedElement = v.toString();
   }
 
@@ -236,7 +239,7 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
   interior_spec r;
   default_interior_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QVariant v = getValue(elementName, KSL("inherits"));
   QString i = v.toString();
 
   QString name = elementName;
@@ -247,7 +250,7 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
   else if (name == "ToolbarLineEdit")
     name = "LineEdit";
 
-  v = getValue(name,"interior", i);
+  v = getValue(name,KSL("interior"), i);
   r.hasInterior = v.toBool();
 
   if (r.hasInterior)
@@ -255,7 +258,7 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
     v = getValue(name,"focusInterior", i);
     r.hasFocusInterior = v.toBool();
 
-    v = getValue(elementName, "interior.element", i);
+    v = getValue(elementName, KSL("interior.element"), i);
     if (!v.toString().isEmpty())
     {
       r.element = v.toString();
@@ -263,12 +266,12 @@ interior_spec ThemeConfig::getInteriorSpec(const QString &elementName)
       if (elementName == "ToolbarButton" || elementName == "ToolbarComboBox"
           || elementName == "ToolbarLineEdit")
       {
-        i = getValue(name, "inherits").toString();
+        i = getValue(name, KSL("inherits")).toString();
       }
 
-      v = getValue(name,"interior.x.patternsize", i);
+      v = getValue(name,KSL("interior.x.patternsize"), i);
       r.px = qMax(v.toInt(),0);
-      v = getValue(name,"interior.y.patternsize", i);
+      v = getValue(name,KSL("interior.y.patternsize"), i);
       r.py = qMax(v.toInt(),0);
     }
   }
@@ -285,10 +288,10 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   indicator_spec r;
   default_indicator_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QVariant v = getValue(elementName, KSL("inherits"));
   QString i = v.toString();
 
-  v = getValue(elementName, "indicator.element", i);
+  v = getValue(elementName, KSL("indicator.element"), i);
   if (!v.toString().isEmpty())
     r.element = v.toString();
 
@@ -297,21 +300,21 @@ indicator_spec ThemeConfig::getIndicatorSpec(const QString &elementName)
   if (name == "ToolbarButton")
   {
     name = "PanelButtonTool";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
   /* and the same for ToolbarComboBox */
   else if (name == "ToolbarComboBox")
   {
     name = "ComboBox";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
   /* and the same for ToolbarLineEdit */
   else if (name == "ToolbarLineEdit")
   {
     name = "LineEdit";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
-  v = getValue(name,"indicator.size", i);
+  v = getValue(name,KSL("indicator.size"), i);
   if (v.isValid()) // 15 by default
     r.size = qMax(v.toInt(),0);
 
@@ -327,55 +330,55 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
   label_spec r;
   default_label_spec(r);
 
-  QVariant v = getValue(elementName, "inherits");
+  QVariant v = getValue(elementName, KSL("inherits"));
   QString i = v.toString();
 
   /* LineEdit is excluded for its size calculation to be correct */
   if (elementName != "LineEdit")
   {
-    v = getValue(elementName,"text.shadow", i);
+    v = getValue(elementName,KSL("text.shadow"), i);
     r.hasShadow = v.toBool();
 
-    v = getValue(elementName,"text.normal.color", i);
+    v = getValue(elementName,KSL("text.normal.color"), i);
     r.normalColor = v.toString();
 
-    v = getValue(elementName,"text.normal.inactive.color", i);
+    v = getValue(elementName,KSL("text.normal.inactive.color"), i);
     r.normalInactiveColor = v.toString();
 
-    v = getValue(elementName,"text.focus.color", i);
+    v = getValue(elementName,KSL("text.focus.color"), i);
     r.focusColor = v.toString();
 
-    v = getValue(elementName,"text.focus.inactive.color", i);
+    v = getValue(elementName,KSL("text.focus.inactive.color"), i);
     r.focusInactiveColor = v.toString();
 
     if (elementName == "MenuItem" || elementName == "MenuBarItem")
     { // no inheritance because the (fallback) focus color seems more natural
-      v = getValue(elementName,"text.press.color");
+      v = getValue(elementName,KSL("text.press.color"));
       r.pressColor = v.toString();
 
-      v = getValue(elementName,"text.toggle.color");
+      v = getValue(elementName,KSL("text.toggle.color"));
       r.toggleColor = v.toString();
     }
     else
     {
-      v = getValue(elementName,"text.press.color", i);
+      v = getValue(elementName,KSL("text.press.color"), i);
       r.pressColor = v.toString();
 
-      v = getValue(elementName,"text.press.inactive.color", i);
+      v = getValue(elementName,KSL("text.press.inactive.color"), i);
       r.pressInactiveColor = v.toString();
 
-      v = getValue(elementName,"text.toggle.color", i);
+      v = getValue(elementName,KSL("text.toggle.color"), i);
       r.toggleColor = v.toString();
 
-      v = getValue(elementName,"text.toggle.inactive.color", i);
+      v = getValue(elementName,KSL("text.toggle.inactive.color"), i);
       r.toggleInactiveColor = v.toString();
     }
 
-    v = getValue(elementName,"text.bold", i);
+    v = getValue(elementName,KSL("text.bold"), i);
     r.boldFont = v.toBool();
 
 #if QT_VERSION >= 0x050000
-    v = getValue(elementName,"text.boldness", i);
+    v = getValue(elementName,KSL("text.boldness"), i);
     if (v.isValid()) // QFont::Bold by default
     {
       int b = qMin(qMax(v.toInt(),1),5);
@@ -401,27 +404,27 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     }
 #endif
 
-    v = getValue(elementName,"text.italic", i);
+    v = getValue(elementName,KSL("text.italic"), i);
     r.italicFont = v.toBool();
 
     if (r.hasShadow)
     {
-      v = getValue(elementName,"text.shadow.xshift", i);
+      v = getValue(elementName,KSL("text.shadow.xshift"), i);
       if (v.isValid())
         r.xshift = v.toInt();
-      v = getValue(elementName,"text.shadow.yshift", i);
+      v = getValue(elementName,KSL("text.shadow.yshift"), i);
       if (v.isValid())
         r.yshift = v.toInt();
-      v = getValue(elementName,"text.shadow.color", i);
+      v = getValue(elementName,KSL("text.shadow.color"), i);
       if (v.isValid())
         r.shadowColor = v.toString();
-      v = getValue(elementName,"text.inactive.shadow.color", i);
+      v = getValue(elementName,KSL("text.inactive.shadow.color"), i);
       if (v.isValid())
         r.inactiveShadowColor = v.toString();
-      v = getValue(elementName,"text.shadow.alpha", i);
+      v = getValue(elementName,KSL("text.shadow.alpha"), i);
       if (v.isValid())
         r.a = qMax(v.toInt(),0);
-      v = getValue(elementName,"text.shadow.depth", i);
+      v = getValue(elementName,KSL("text.shadow.depth"), i);
       if (v.isValid())
         r.depth = qMin(qMax(v.toInt(),0),1); // drawing more than once would be ugly
     }
@@ -431,30 +434,30 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
   if (name == "ToolbarButton")
   {
     name = "PanelButtonTool";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
   else if (name == "ToolbarComboBox")
   {
     name = "ComboBox";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
   else if (name == "ToolbarLineEdit")
   {
     name = "LineEdit";
-    i = getValue(name, "inherits").toString();
+    i = getValue(name, KSL("inherits")).toString();
   }
 
-  v = getValue(name,"text.margin", i);
+  v = getValue(name,KSL("text.margin"), i);
   r.hasMargin = v.toBool();
   if (r.hasMargin)
   {
-    v = getValue(name,"text.margin.top", i);
+    v = getValue(name,KSL("text.margin.top"), i);
     r.top = qMax(v.toInt(),0);
-    v = getValue(name,"text.margin.bottom", i);
+    v = getValue(name,KSL("text.margin.bottom"), i);
     r.bottom = qMax(v.toInt(),0);
-    v = getValue(name,"text.margin.left", i);
+    v = getValue(name,KSL("text.margin.left"), i);
     r.left = qMax(v.toInt(),0);
-    v = getValue(name,"text.margin.right", i);
+    v = getValue(name,KSL("text.margin.right"), i);
     r.right = qMax(v.toInt(),0);
 
     /* let's be more precise */
@@ -474,7 +477,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     }
   }
 
-  v = getValue(name,"text.iconspacing", i);
+  v = getValue(name,KSL("text.iconspacing"), i);
   r.tispace = qMax(v.toInt(),0);
 
   lSpecs_[elementName] = r;
@@ -497,10 +500,10 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   else if (name == "ToolbarLineEdit")
     name = "LineEdit";
 
-  QVariant v = getValue(name, "inherits");
+  QVariant v = getValue(name, KSL("inherits"));
   QString i = v.toString();
 
-  v = getValue(name,"min_height", i);
+  v = getValue(name,KSL("min_height"), i);
   if (v.isValid())
   {
     QString value = v.toString();
@@ -516,7 +519,7 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
     r.minH += r.minH % 2; // for vertical centering
   }
 
-  v = getValue(name,"min_width", i);
+  v = getValue(name,KSL("min_width"), i);
   if (v.isValid())
   {
     QString value = v.toString();
@@ -558,11 +561,11 @@ theme_spec ThemeConfig::getCompositeSpec()
   if (compositing)
 #endif
   {
-    v = getValue("General","composite");
+    v = getValue(KSL("General"),KSL("composite"));
     r.composite = v.toBool();
   }
 #elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  v = getValue("General","composite");
+  v = getValue(KSL("General"),KSL("composite"));
   r.composite = v.toBool();
 #endif
 
@@ -572,14 +575,14 @@ theme_spec ThemeConfig::getCompositeSpec()
     /* no window translucency or blurring without
        window interior element or reduced opacity */
 
-    interior_spec ispec = getInteriorSpec("WindowTranslucent");
+    interior_spec ispec = getInteriorSpec(KSL("WindowTranslucent"));
     if (ispec.element.isEmpty())
-      ispec = getInteriorSpec("Window");
+      ispec = getInteriorSpec(KSL("Window"));
 
     if (ispec.hasInterior
-        || getValue("General","reduce_window_opacity").toInt() > 0)
+        || getValue(KSL("General"),KSL("reduce_window_opacity")).toInt() > 0)
     {
-      v = getValue("General","translucent_windows");
+      v = getValue(KSL("General"),KSL("translucent_windows"));
       if (v.isValid())
         r.translucent_windows = v.toBool();
 
@@ -590,7 +593,7 @@ theme_spec ThemeConfig::getCompositeSpec()
       if (isX11_ && r.translucent_windows)
 #endif
       {
-        v = getValue("General","blurring");
+        v = getValue(KSL("General"),KSL("blurring"));
         if (v.isValid())
           r.blurring = v.toBool();
       }
@@ -605,11 +608,11 @@ theme_spec ThemeConfig::getCompositeSpec()
         r.popup_blurring = true;
       else
       {
-        interior_spec ispecM = getInteriorSpec("Menu");
-        interior_spec ispecT = getInteriorSpec("ToolTip");
+        interior_spec ispecM = getInteriorSpec(KSL("Menu"));
+        interior_spec ispecT = getInteriorSpec(KSL("ToolTip"));
         if (ispecM.hasInterior || ispecT.hasInterior)
         {
-          v = getValue("General","popup_blurring");
+          v = getValue(KSL("General"),KSL("popup_blurring"));
           if (v.isValid())
             r.popup_blurring = v.toBool();
         }
@@ -622,30 +625,30 @@ theme_spec ThemeConfig::getCompositeSpec()
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   /* NOTE: The contrast effect is applied by BlurHelper, so that the following values have
            effect only for windows that can be blurred, whether they are blurred or not. */
-  v = getValue("General","contrast");
+  v = getValue(KSL("General"),KSL("contrast"));
   if (v.isValid()) // 1 by default
     r.contrast = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue("General","intensity");
+  v = getValue(KSL("General"),KSL("intensity"));
   if (v.isValid()) // 1 by default
     r.intensity = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue("General","saturation");
+  v = getValue(KSL("General"),KSL("saturation"));
   if (v.isValid()) // 1 by default
     r.saturation = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
 #endif
 
   /* no menu/tooltip shadow without compositing */
-  v = getValue("General","menu_shadow_depth");
+  v = getValue(KSL("General"),KSL("menu_shadow_depth"));
   if (v.isValid() && r.composite)
     r.menu_shadow_depth = qMax(v.toInt(),0);
 
-  v = getValue("General","menu_separator_height");
+  v = getValue(KSL("General"),KSL("menu_separator_height"));
   if (v.isValid())
     r.menu_separator_height = qMin(qMax(v.toInt(),1),16);
 
-  v = getValue("General","spread_menuitems");
+  v = getValue(KSL("General"),KSL("spread_menuitems"));
   r.spread_menuitems = v.toBool();
 
-  v = getValue("General","tooltip_shadow_depth");
+  v = getValue(KSL("General"),KSL("tooltip_shadow_depth"));
   if (v.isValid() && r.composite)
     r.tooltip_shadow_depth = qMax(v.toInt(),0);
 
@@ -659,23 +662,23 @@ theme_spec ThemeConfig::getThemeSpec()
 
   r.isX11 = isX11_;
 
-  QVariant v = getValue("General","author");
+  QVariant v = getValue(KSL("General"),KSL("author"));
   if (!v.toString().isEmpty())
     r.author = v.toString();
 
-  v = getValue("General","comment");
+  v = getValue(KSL("General"),KSL("comment"));
   if (!v.toString().isEmpty())
     r.comment = v.toString();
 
-  v = getValue("General","reduce_window_opacity");
+  v = getValue(KSL("General"),KSL("reduce_window_opacity"));
   if (v.isValid())
     r.reduce_window_opacity = qMin(qMax(v.toInt(),0),90);
 
-  v = getValue("General","reduce_menu_opacity");
+  v = getValue(KSL("General"),KSL("reduce_menu_opacity"));
   if (v.isValid())
     r.reduce_menu_opacity = qMin(qMax(v.toInt(),0),90);
 
-  v = getValue("General","x11drag");
+  v = getValue(KSL("General"),KSL("x11drag"));
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default
   {
     // backward compatibility
@@ -683,46 +686,46 @@ theme_spec ThemeConfig::getThemeSpec()
       r.x11drag = WindowManager::toDrag(v.toString());
   }
 
-  v = getValue("General","respect_DE");
+  v = getValue(KSL("General"),KSL("respect_DE"));
   if (v.isValid()) // true by default
     r.respect_DE = v.toBool();
 
-  v = getValue("General","alt_mnemonic");
+  v = getValue(KSL("General"),KSL("alt_mnemonic"));
   if (v.isValid()) // true by default
     r.alt_mnemonic = v.toBool();
 
-  v = getValue("General","double_click");
+  v = getValue(KSL("General"),KSL("double_click"));
   r.double_click = v.toBool();
 
-  v = getValue("General","left_tabs");
+  v = getValue(KSL("General"),KSL("left_tabs"));
   r.left_tabs = v.toBool();
 
-  v = getValue("General","center_doc_tabs");
+  v = getValue(KSL("General"),KSL("center_doc_tabs"));
   r.center_doc_tabs = v.toBool();
 
-  v = getValue("General","joined_inactive_tabs");
+  v = getValue(KSL("General"),KSL("joined_inactive_tabs"));
   if (v.isValid()) // true by default
     r.joined_inactive_tabs = v.toBool();
   else // backward compatibility
   {
-    v = getValue("General","joined_tabs");
+    v = getValue(KSL("General"),KSL("joined_tabs"));
     if (v.isValid())
       r.joined_inactive_tabs = v.toBool();
   }
 
-  v = getValue("General","attach_active_tab");
+  v = getValue(KSL("General"),KSL("attach_active_tab"));
   r.attach_active_tab = v.toBool();
 
   if (!r.attach_active_tab)
   {
-    v = getValue("General","embedded_tabs");
+    v = getValue(KSL("General"),KSL("embedded_tabs"));
     r.embedded_tabs = v.toBool();
   }
 
-  v = getValue("General","no_active_tab_separator");
+  v = getValue(KSL("General"),KSL("no_active_tab_separator"));
   r.no_active_tab_separator = v.toBool();
 
-  v = getValue("General","active_tab_overlap");
+  v = getValue(KSL("General"),KSL("active_tab_overlap"));
   if (v.isValid()) // 0 by default
   {
     QString value = v.toString();
@@ -735,14 +738,14 @@ theme_spec ThemeConfig::getThemeSpec()
       r.active_tab_overlap = qMax(v.toInt(),0);
   }
 
-  v = getValue("General","mirror_doc_tabs");
+  v = getValue(KSL("General"),KSL("mirror_doc_tabs"));
   if (v.isValid()) // true by default
     r.mirror_doc_tabs = v.toBool();
 
-  v = getValue("General","no_inactive_tab_expansion");
+  v = getValue(KSL("General"),KSL("no_inactive_tab_expansion"));
   r.no_inactive_tab_expansion = v.toBool();
 
-  v = getValue("General","tab_button_extra_margin");
+  v = getValue(KSL("General"),KSL("tab_button_extra_margin"));
   if (v.isValid()) // 0 by default
   {
     int max = QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
@@ -756,40 +759,40 @@ theme_spec ThemeConfig::getThemeSpec()
       r.tab_button_extra_margin = qMin(qMax(v.toInt(),0),max);
   }
 
-  v = getValue("General","bold_active_tab");
+  v = getValue(KSL("General"),KSL("bold_active_tab"));
   r.bold_active_tab = v.toBool();
 
-  v = getValue("General","group_toolbar_buttons");
+  v = getValue(KSL("General"),KSL("group_toolbar_buttons"));
   r.group_toolbar_buttons = v.toBool();
 
   if (!r.group_toolbar_buttons)
   {
-    v = getValue("General","toolbar_item_spacing");
+    v = getValue(KSL("General"),KSL("toolbar_item_spacing"));
     if (v.isValid()) // 0 by default
       r.toolbar_item_spacing = qMax(v.toInt(),0);
   }
 
-  v = getValue("General","toolbar_interior_spacing");
+  v = getValue(KSL("General"),KSL("toolbar_interior_spacing"));
   if (v.isValid()) // 0 by default
     r.toolbar_interior_spacing = qMax(v.toInt(),0);
 
-  v = getValue("General","center_toolbar_handle");
+  v = getValue(KSL("General"),KSL("center_toolbar_handle"));
   r.center_toolbar_handle = v.toBool();
 
-  v = getValue("General","slim_toolbars");
+  v = getValue(KSL("General"),KSL("slim_toolbars"));
   r.slim_toolbars = v.toBool();
 
-  v = getValue("General","merge_menubar_with_toolbar");
+  v = getValue(KSL("General"),KSL("merge_menubar_with_toolbar"));
   r.merge_menubar_with_toolbar = v.toBool();
 
-  v = getValue("General","toolbutton_style");
+  v = getValue(KSL("General"),KSL("toolbutton_style"));
   if (v.isValid()) // 0 by default
     r.toolbutton_style = v.toInt();
 
-  v = getValue("General","spread_progressbar");
+  v = getValue(KSL("General"),KSL("spread_progressbar"));
   r.spread_progressbar = v.toBool();
 
-  v = getValue("General","progressbar_thickness");
+  v = getValue(KSL("General"),KSL("progressbar_thickness"));
   if (v.isValid()) // 0 by default
   {
     QString value = v.toString();
@@ -802,113 +805,113 @@ theme_spec ThemeConfig::getThemeSpec()
       r.progressbar_thickness = qMax(v.toInt(),0);
   }
 
-  v = getValue("General","spread_header");
+  v = getValue(KSL("General"),KSL("spread_header"));
   r.spread_header = v.toBool();
 
-  v = getValue("General","menubar_mouse_tracking");
+  v = getValue(KSL("General"),KSL("menubar_mouse_tracking"));
   if (v.isValid()) //true by default
     r.menubar_mouse_tracking = v.toBool();
 
-  v = getValue("General","opaque", QString()); // for going to the parent
+  v = getValue(KSL("General"),KSL("opaque"), QString()); // for going to the parent
   if (v.isValid())
     r.opaque << v.toStringList();
 
-  v = getValue("General","submenu_overlap");
+  v = getValue(KSL("General"),KSL("submenu_overlap"));
   if (v.isValid()) // -1 by default
     r.submenu_overlap = qMin(qMax(v.toInt(),0),16);
 
-  v = getValue("General","submenu_delay");
+  v = getValue(KSL("General"),KSL("submenu_delay"));
   if (v.isValid()) // 250 by default
     r.submenu_delay = qMin(qMax(v.toInt(),-1),1000);
 
-  v = getValue("General","splitter_width");
+  v = getValue(KSL("General"),KSL("splitter_width"));
   if (v.isValid()) // 7 by default
     r.splitter_width = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("General","scroll_width");
+  v = getValue(KSL("General"),KSL("scroll_width"));
   if (v.isValid()) // 12 by default
     r.scroll_width = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue("General","scroll_min_extent");
+  v = getValue(KSL("General"),KSL("scroll_min_extent"));
   if (v.isValid()) // 36 by default
     r.scroll_min_extent = qMin(qMax(v.toInt(),16),100);
 
-  v = getValue("General","center_scrollbar_indicator");
+  v = getValue(KSL("General"),KSL("center_scrollbar_indicator"));
   r.center_scrollbar_indicator = v.toBool();
 
-  v = getValue("General","tree_branch_line");
+  v = getValue(KSL("General"),KSL("tree_branch_line"));
   r.tree_branch_line = v.toBool();
 
-  v = getValue("General","slider_width");
+  v = getValue(KSL("General"),KSL("slider_width"));
   if (v.isValid()) // 8 by default
     r.slider_width = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","slider_handle_width");
+  v = getValue(KSL("General"),KSL("slider_handle_width"));
   if (v.isValid()) // 16 by default
     r.slider_handle_width = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","slider_handle_length");
+  v = getValue(KSL("General"),KSL("slider_handle_length"));
   if (v.isValid()) // 16 by default
     r.slider_handle_length = qMin(qMax(v.toInt(),0),48);
 
-  v = getValue("General","tickless_slider_handle_size");
+  v = getValue(KSL("General"),KSL("tickless_slider_handle_size"));
   r.tickless_slider_handle_size = qMin(qMax(v.toInt(),0),r.slider_handle_width);
 
-  v = getValue("General","check_size");
+  v = getValue(KSL("General"),KSL("check_size"));
   if (v.isValid()) //13 by default
     r.check_size = qMax(v.toInt(),0);
 
-  v = getValue("General","tooltip_delay");
+  v = getValue(KSL("General"),KSL("tooltip_delay"));
   if (v.isValid()) // -1 by default
     r.tooltip_delay = v.toInt();
 
-  v = getValue("General","vertical_spin_indicators");
+  v = getValue(KSL("General"),KSL("vertical_spin_indicators"));
   r.vertical_spin_indicators = v.toBool();
 
-  v = getValue("General","inline_spin_indicators");
+  v = getValue(KSL("General"),KSL("inline_spin_indicators"));
   r.inline_spin_indicators = v.toBool();
 
-  v = getValue("General","spin_button_width");
+  v = getValue(KSL("General"),KSL("spin_button_width"));
   if (v.isValid()) // 16 by default
     r.spin_button_width = qMin(qMax(v.toInt(),16), 32);
 
-  v = getValue("General","combo_as_lineedit");
+  v = getValue(KSL("General"),KSL("combo_as_lineedit"));
   r.combo_as_lineedit = v.toBool();
   if (!r.combo_as_lineedit)
   {
-    v = getValue("General","square_combo_button");
+    v = getValue(KSL("General"),KSL("square_combo_button"));
     r.square_combo_button = v.toBool();
   }
 
-  v = getValue("General","combo_menu");
+  v = getValue(KSL("General"),KSL("combo_menu"));
   r.combo_menu = v.toBool();
 
-  v = getValue("General","hide_combo_checkboxes");
+  v = getValue(KSL("General"),KSL("hide_combo_checkboxes"));
   r.hide_combo_checkboxes = v.toBool();
 
-  v = getValue("General","combo_focus_rect");
+  v = getValue(KSL("General"),KSL("combo_focus_rect"));
   r.combo_focus_rect = v.toBool();
 
-  v = getValue("General","scrollable_menu");
+  v = getValue(KSL("General"),KSL("scrollable_menu"));
   if (v.isValid()) // true by default
     r.scrollable_menu = v.toBool();
 
-  v = getValue("General","fill_rubberband");
+  v = getValue(KSL("General"),KSL("fill_rubberband"));
   r.fill_rubberband = v.toBool();
 
-  v = getValue("General","groupbox_top_label");
+  v = getValue(KSL("General"),KSL("groupbox_top_label"));
   r.groupbox_top_label = v.toBool();
 
-  v = getValue("General","button_contents_shift");
+  v = getValue(KSL("General"),KSL("button_contents_shift"));
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
 #if QT_VERSION < 0x050000
   r.transient_scrollbar=false;
 #else
-  v = getValue("General","transient_scrollbar");
+  v = getValue(KSL("General"),KSL("transient_scrollbar"));
   r.transient_scrollbar = v.toBool();
-  v = getValue("General","transient_groove");
+  v = getValue(KSL("General"),KSL("transient_groove"));
   r.transient_groove = v.toBool();
 #endif
 
@@ -917,56 +920,56 @@ theme_spec ThemeConfig::getThemeSpec()
      them inside their scroll contents in another way */
   if (!r.transient_scrollbar)
   {
-    v = getValue("General","scrollbar_in_view");
+    v = getValue(KSL("General"),KSL("scrollbar_in_view"));
     r.scrollbar_in_view = v.toBool(); // false by default
 
-    v = getValue("General","scroll_arrows");
+    v = getValue(KSL("General"),KSL("scroll_arrows"));
     if (v.isValid()) // true by default
       r.scroll_arrows = v.toBool();
   }
   else
     r.scroll_arrows = false;
 
-  v = getValue("General","dialog_button_layout");
+  v = getValue(KSL("General"),KSL("dialog_button_layout"));
   if (v.isValid()) // 0 by default
     r.dialog_button_layout = qMin(qMax(v.toInt(),0), 5);
 
-  v = getValue("General","layout_spacing");
+  v = getValue(KSL("General"),KSL("layout_spacing"));
   if (v.isValid()) // 2 by default
     r.layout_spacing = qMin(qMax(v.toInt(),2), 16);
 
-  v = getValue("General","layout_margin");
+  v = getValue(KSL("General"),KSL("layout_margin"));
   if (v.isValid()) // 4 by default
     r.layout_margin = qMin(qMax(v.toInt(),2), 16);
 
-  v = getValue("General","small_icon_size");
+  v = getValue(KSL("General"),KSL("small_icon_size"));
   if (v.isValid()) // 16 by default
     r.small_icon_size = qMin(qMax(v.toInt(),16), 48);
 
-  v = getValue("General","large_icon_size");
+  v = getValue(KSL("General"),KSL("large_icon_size"));
   if (v.isValid()) // 32 by default
     r.large_icon_size = qMin(qMax(v.toInt(),24), 128);
 
-  v = getValue("General","button_icon_size");
+  v = getValue(KSL("General"),KSL("button_icon_size"));
   if (v.isValid()) // 16 by default
     r.button_icon_size = qMin(qMax(v.toInt(),16), 64);
 
-  v = getValue("General","toolbar_icon_size");
+  v = getValue(KSL("General"),KSL("toolbar_icon_size"));
   if (v.isValid()) // 22 by default
     r.toolbar_icon_size = qMin(qMax(v.toInt(),16), 64);
   else if (r.slim_toolbars)
     r.toolbar_icon_size = 16;
 
-  v = getValue("General","animate_states");
+  v = getValue(KSL("General"),KSL("animate_states"));
   r.animate_states = v.toBool();
 
-  v = getValue("General","no_inactiveness");
+  v = getValue(KSL("General"),KSL("no_inactiveness"));
   r.no_inactiveness = v.toBool();
 
-  v = getValue("General","no_window_pattern");
+  v = getValue(KSL("General"),KSL("no_window_pattern"));
   r.no_window_pattern = v.toBool();
 
-  v = getValue("General", "dark_titlebar");
+  v = getValue(KSL("General"),KSL("dark_titlebar"));
   r.dark_titlebar = v.toBool();
 
   return r;
@@ -977,89 +980,89 @@ color_spec ThemeConfig::getColorSpec() const
   color_spec r;
   default_color_spec(r);
 
-  QVariant v = getValue("GeneralColors","window.color");
+  QVariant v = getValue(KSL("GeneralColors"),KSL("window.color"));
   r.windowColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.window.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.window.color"));
   r.inactiveWindowColor = v.toString();
 
-  v = getValue("GeneralColors","base.color");
+  v = getValue(KSL("GeneralColors"),KSL("base.color"));
   r.baseColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.base.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.base.color"));
   r.inactiveBaseColor = v.toString();
 
-  v = getValue("GeneralColors","alt.base.color");
+  v = getValue(KSL("GeneralColors"),KSL("alt.base.color"));
   r.altBaseColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.alt.base.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.alt.base.color"));
   r.inactiveAltBaseColor = v.toString();
 
-  v = getValue("GeneralColors","button.color");
+  v = getValue(KSL("GeneralColors"),KSL("button.color"));
   r.buttonColor = v.toString();
 
-  v = getValue("GeneralColors","light.color");
+  v = getValue(KSL("GeneralColors"),KSL("light.color"));
   r.lightColor = v.toString();
 
-  v = getValue("GeneralColors","mid.light.color");
+  v = getValue(KSL("GeneralColors"),KSL("mid.light.color"));
   r.midLightColor = v.toString();
 
-  v = getValue("GeneralColors","dark.color");
+  v = getValue(KSL("GeneralColors"),KSL("dark.color"));
   r.darkColor = v.toString();
 
-  v = getValue("GeneralColors","mid.color");
+  v = getValue(KSL("GeneralColors"),KSL("mid.color"));
   r.midColor = v.toString();
 
-  v = getValue("GeneralColors","shadow.color");
+  v = getValue(KSL("GeneralColors"),KSL("shadow.color"));
   if (v.isValid())
     r.shadowColor = v.toString();
 
-  v = getValue("GeneralColors","highlight.color");
+  v = getValue(KSL("GeneralColors"),KSL("highlight.color"));
   r.highlightColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.highlight.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.highlight.color"));
   r.inactiveHighlightColor = v.toString();
 
-  v = getValue("GeneralColors","tooltip.base.color");
+  v = getValue(KSL("GeneralColors"),KSL("tooltip.base.color"));
   r.tooltipBaseColor = v.toString();
 
-  v = getValue("GeneralColors","text.color");
+  v = getValue(KSL("GeneralColors"),KSL("text.color"));
   r.textColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.text.color"));
   r.inactiveTextColor = v.toString();
 
-  v = getValue("GeneralColors","window.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("window.text.color"));
   r.windowTextColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.window.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.window.text.color"));
   r.inactiveWindowTextColor = v.toString();
 
-  v = getValue("GeneralColors","button.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("button.text.color"));
   r.buttonTextColor = v.toString();
 
-  v = getValue("GeneralColors","disabled.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("disabled.text.color"));
   r.disabledTextColor = v.toString();
 
-  v = getValue("GeneralColors","tooltip.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("tooltip.text.color"));
   r.tooltipTextColor = v.toString();
 
-  v = getValue("GeneralColors","highlight.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("highlight.text.color"));
   r.highlightTextColor = v.toString();
 
-  v = getValue("GeneralColors","inactive.highlight.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("inactive.highlight.text.color"));
   r.inactiveHighlightTextColor = v.toString();
 
-  v = getValue("GeneralColors","link.color");
+  v = getValue(KSL("GeneralColors"),KSL("link.color"));
   r.linkColor = v.toString();
 
-  v = getValue("GeneralColors","link.visited.color");
+  v = getValue(KSL("GeneralColors"),KSL("link.visited.color"));
   r.linkVisitedColor = v.toString();
 
-  v = getValue("GeneralColors","progress.indicator.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("progress.indicator.text.color"));
   r.progressIndicatorTextColor = v.toString();
 
-  v = getValue("GeneralColors","progress.inactive.indicator.text.color");
+  v = getValue(KSL("GeneralColors"),KSL("progress.inactive.indicator.text.color"));
   r.progressInactiveIndicatorTextColor = v.toString();
 
   return r;
@@ -1070,16 +1073,16 @@ hacks_spec ThemeConfig::getHacksSpec() const
   hacks_spec r;
   default_hacks_spec(r);
 
-  QVariant v = getValue("Hacks","transparent_dolphin_view");
+  QVariant v = getValue(KSL("Hacks"),KSL("transparent_dolphin_view"));
   r.transparent_dolphin_view = v.toBool();
 
-  v = getValue("Hacks","transparent_pcmanfm_sidepane");
+  v = getValue(KSL("Hacks"),KSL("transparent_pcmanfm_sidepane"));
   r.transparent_pcmanfm_sidepane = v.toBool();
 
-  v = getValue("Hacks","transparent_pcmanfm_view");
+  v = getValue(KSL("Hacks"),KSL("transparent_pcmanfm_view"));
   r.transparent_pcmanfm_view = v.toBool();
 
-  v = getValue("Hacks","lxqtmainmenu_iconsize");
+  v = getValue(KSL("Hacks"),KSL("lxqtmainmenu_iconsize"));
   if (v.isValid())
     r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
 
@@ -1087,67 +1090,67 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (isX11_)
   {
 #endif
-    v = getValue("Hacks","blur_translucent");
+    v = getValue(KSL("Hacks"),KSL("blur_translucent"));
     if (v.isValid())
       r.blur_translucent = v.toBool();
     else // backward compatibility
     {
-      v = getValue("Hacks","blur_konsole");
+      v = getValue(KSL("Hacks"),KSL("blur_konsole"));
       r.blur_translucent = v.toBool();
     }
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
   }
 #endif
 
-  v = getValue("Hacks","opaque_colors");
+  v = getValue(KSL("Hacks"),KSL("opaque_colors"));
   if (v.isValid())
     r.opaque_colors = v.toBool();
 
-  v = getValue("Hacks","transparent_ktitle_label");
+  v = getValue(KSL("Hacks"),KSL("transparent_ktitle_label"));
   r.transparent_ktitle_label = v.toBool();
 
-  v = getValue("Hacks","transparent_menutitle");
+  v = getValue(KSL("Hacks"),KSL("transparent_menutitle"));
   r.transparent_menutitle = v.toBool();
 
-  v = getValue("Hacks","kcapacitybar_as_progressbar");
+  v = getValue(KSL("Hacks"),KSL("kcapacitybar_as_progressbar"));
   r.kcapacitybar_as_progressbar = v.toBool();
 
-  v = getValue("Hacks","respect_darkness");
+  v = getValue(KSL("Hacks"),KSL("respect_darkness"));
   r.respect_darkness = v.toBool();
 
-  v = getValue("Hacks","force_size_grip");
+  v = getValue(KSL("Hacks"),KSL("force_size_grip"));
   r.forceSizeGrip = v.toBool();
 
-  v = getValue("Hacks","tint_on_mouseover");
+  v = getValue(KSL("Hacks"),KSL("tint_on_mouseover"));
   if (v.isValid())
     r.tint_on_mouseover = qMin(qMax(v.toInt(),0),100);
 
-  v = getValue("Hacks","no_selection_tint");
+  v = getValue(KSL("Hacks"),KSL("no_selection_tint"));
   r.no_selection_tint = v.toBool();
 
-  v = getValue("Hacks","disabled_icon_opacity");
+  v = getValue(KSL("Hacks"),KSL("disabled_icon_opacity"));
   if (v.isValid())
     r.disabled_icon_opacity = qMin(qMax(v.toInt(),0),100);
 
-  v = getValue("Hacks","normal_default_pushbutton");
+  v = getValue(KSL("Hacks"),KSL("normal_default_pushbutton"));
   r.normal_default_pushbutton = v.toBool();
 
-  v = getValue("Hacks","iconless_pushbutton");
+  v = getValue(KSL("Hacks"),KSL("iconless_pushbutton"));
   r.iconless_pushbutton = v.toBool();
 
-  v = getValue("Hacks","transparent_arrow_button");
+  v = getValue(KSL("Hacks"),KSL("transparent_arrow_button"));
   r.transparent_arrow_button = v.toBool();
 
-  v = getValue("Hacks","iconless_menu");
+  v = getValue(KSL("Hacks"),KSL("iconless_menu"));
   r.iconless_menu = v.toBool();
 
-  v = getValue("Hacks","single_top_toolbar");
+  v = getValue(KSL("Hacks"),KSL("single_top_toolbar"));
   r.single_top_toolbar = v.toBool();
 
-  v = getValue("Hacks","middle_click_scroll");
+  v = getValue(KSL("Hacks"),KSL("middle_click_scroll"));
   r.middle_click_scroll = v.toBool();
 
-  v = getValue("Hacks","scroll_jump_workaround");
+  v = getValue(KSL("Hacks"),KSL("scroll_jump_workaround"));
   r.scroll_jump_workaround = v.toBool();
 
   return r;

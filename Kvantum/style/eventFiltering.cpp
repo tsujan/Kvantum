@@ -127,12 +127,12 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
     return; // Plasma FIXME: needed?
   QRect bgndRect(widget->rect());
-  interior_spec ispec = getInteriorSpec("DialogTranslucent");
-  size_spec sspec = getSizeSpec("DialogTranslucent");
+  interior_spec ispec = getInteriorSpec(QStringLiteral("DialogTranslucent"));
+  size_spec sspec = getSizeSpec(QStringLiteral("DialogTranslucent"));
   if (ispec.element.isEmpty())
   {
-    ispec = getInteriorSpec("Dialog");
-    sspec = getSizeSpec("Dialog");
+    ispec = getInteriorSpec(QStringLiteral("Dialog"));
+    sspec = getSizeSpec(QStringLiteral("Dialog"));
   }
   if (!ispec.element.isEmpty()
       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel
@@ -141,24 +141,24 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
     { // even dialogs may have menubar or toolbar (as in Qt Designer)
       if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
       {
-        ispec = getInteriorSpec("WindowTranslucent");
-        sspec = getSizeSpec("WindowTranslucent");
+        ispec = getInteriorSpec(QStringLiteral("WindowTranslucent"));
+        sspec = getSizeSpec(QStringLiteral("WindowTranslucent"));
         if (ispec.element.isEmpty())
         {
-          ispec = getInteriorSpec("Window");
-          sspec = getSizeSpec("Window");
+          ispec = getInteriorSpec(QStringLiteral("Window"));
+          sspec = getSizeSpec(QStringLiteral("Window"));
         }
       }
     }
   }
   else
   {
-    ispec = getInteriorSpec("WindowTranslucent");
-    sspec = getSizeSpec("WindowTranslucent");
+    ispec = getInteriorSpec(QStringLiteral("WindowTranslucent"));
+    sspec = getSizeSpec(QStringLiteral("WindowTranslucent"));
     if (ispec.element.isEmpty())
     {
-      ispec = getInteriorSpec("Window");
-      sspec = getSizeSpec("Window");
+      ispec = getInteriorSpec(QStringLiteral("Window"));
+      sspec = getSizeSpec(QStringLiteral("Window"));
     }
   }
   frame_spec fspec;
@@ -285,7 +285,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                the view is switched in pcmanfm-qt between the icon and thumbnail modes),
                we need to reinstall the event filter here to catch the wheel event always
                before it's processed by the app. */
-      w->removeEventFilter(this);
       w->installEventFilter(this);
     }
     break;
@@ -303,7 +302,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* the cursor has moved to a tab adjacent to the active tab */
           QRect r = tabbar->tabRect(indx);
-          const frame_spec fspec = getFrameSpec("Tab");
+          const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
           int overlap = tspec_.active_tab_overlap;
           int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
           overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
@@ -350,7 +349,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (indx > -1 && qAbs(indx - tabbar->currentIndex()) == 1)
       {
         QRect r = tabbar->tabRect(indx);
-        const frame_spec fspec = getFrameSpec("Tab");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
         int overlap = tspec_.active_tab_overlap;
         int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
         overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
@@ -706,7 +705,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       { // Custom text color; don't set palettes! The app is responsible for all colors.
         break;
       }
-      const label_spec lspec = getLabelSpec("ItemView");
+      const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* set the normal inactive text color to the normal active one
          (needed when the app sets it inactive) */
       QColor normalCol = getFromRGBA(lspec.normalColor);
@@ -743,7 +742,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         break;
       }
-      const label_spec lspec = getLabelSpec("ItemView");
+      const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
       QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
       if (!normalInactiveCol.isValid())
@@ -1024,7 +1023,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           break;
         }
-        const label_spec lspec = getLabelSpec("ItemView");
+        const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
         if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
         {
           QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
@@ -1096,8 +1095,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     /* correct line-edit palettes on stylable toolbars if needed */
     else if (qobject_cast<QLineEdit*>(o)
-             && (!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-                 || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+             && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                 || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
              && getStylableToolbarContainer(w, true))
     {
       QPalette palette = w->palette();

@@ -22,6 +22,7 @@
 #include <QEvent>
 #include <QVector>
 #include <QMenu>
+#include <QFrame>
 #if QT_VERSION >= 0x050500
 #include <QApplication> // for hdpi
 #endif
@@ -71,14 +72,16 @@ void BlurHelper::registerWidget (QWidget* widget)
       && !widget->inherits ("QSplashScreen")
       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
 
-    widget->removeEventFilter (this);
     widget->installEventFilter (this);
 }
 /*************************/
 void BlurHelper::unregisterWidget (QWidget* widget)
 {
-  widget->removeEventFilter (this);
-  clear (widget);
+  if (widget)
+  {
+    widget->removeEventFilter (this);
+    clear (widget);
+  }
 }
 /*************************/
 bool BlurHelper::eventFilter (QObject* object, QEvent* event)
@@ -118,8 +121,9 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
     r = menuShadow_;
   }
   else if (widget->inherits("QTipLabel")
-           /* unusual tooltips */
-           || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
+           /* unusual tooltips (like in KDE system settings) */
+           || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
+               && !qobject_cast<QFrame*>(widget)))
   {
     r = tooltipShadow_;
   }
@@ -163,7 +167,8 @@ void BlurHelper::update (QWidget* widget) const
          || saturation_ != static_cast<qreal>(1))
         && !qobject_cast<QMenu*>(widget)
         && !widget->inherits("QTipLabel")
-        && (widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip)
+        && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
+            && !qobject_cast<QFrame*>(widget)))
     {
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), true,
                                                 contrast_, intensity_, saturation_,
@@ -202,7 +207,8 @@ void BlurHelper::clear (QWidget* widget) const
          || saturation_ != static_cast<qreal>(1))
         && !qobject_cast<QMenu*>(widget)
         && !widget->inherits("QTipLabel")
-        && (widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip)
+        && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
+            && !qobject_cast<QFrame*>(widget)))
     {
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), false);
     }

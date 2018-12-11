@@ -109,10 +109,7 @@ void WindowManager::registerWidget (QWidget* widget)
     the drag to happen
   */
   if (isBlackListed (widget) || isDragable (widget))
-  {
-    widget->removeEventFilter (this);
     widget->installEventFilter (this);
-  }
 
 }
 /*************************/
@@ -127,10 +124,10 @@ void WindowManager::initializeWhiteList (const QStringList &list)
   whiteList_.clear();
 
   // add user specified whitelisted classnames
-  whiteList_.insert (ExceptionId ("MplayerWindow"));
-  whiteList_.insert (ExceptionId ("Screen@smplayer"));
-  whiteList_.insert (ExceptionId ("ViewSliders@kmix"));
-  whiteList_.insert (ExceptionId ("Sidebar_Widget@konqueror"));
+  whiteList_.insert (ExceptionId (QStringLiteral("MplayerWindow")));
+  whiteList_.insert (ExceptionId (QStringLiteral("Screen@smplayer")));
+  whiteList_.insert (ExceptionId (QStringLiteral("ViewSliders@kmix")));
+  whiteList_.insert (ExceptionId (QStringLiteral("Sidebar_Widget@konqueror")));
 
   for (const QString& exception : list)
   {
@@ -144,8 +141,8 @@ void WindowManager::initializeBlackList (const QStringList &list)
 {
 
   blackList_.clear();
-  blackList_.insert (ExceptionId ("CustomTrackView@kdenlive"));
-  blackList_.insert (ExceptionId ("MuseScore"));
+  blackList_.insert (ExceptionId (QStringLiteral("CustomTrackView@kdenlive")));
+  blackList_.insert (ExceptionId (QStringLiteral("MuseScore")));
   for (const QString& exception : list)
   {
     ExceptionId id (exception);
@@ -581,9 +578,9 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
   }
 
   // abstract item views
-  QAbstractItemView* itemView (NULL);
-  if ((itemView = qobject_cast<QListView*>( widget->parentWidget()))
-      || (itemView = qobject_cast<QTreeView*>( widget->parentWidget())))
+  QAbstractItemView* itemView (nullptr);
+  if ((itemView = qobject_cast<QListView*>(widget->parentWidget()))
+      || (itemView = qobject_cast<QTreeView*>(widget->parentWidget())))
   {
     if (widget == itemView->viewport())
     {

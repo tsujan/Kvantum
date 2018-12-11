@@ -52,7 +52,6 @@ transient_scrollbar=true
 tree_branch_line=false
 no_inactiveness=false
 no_window_pattern=false
-opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,trojita,dragon,digikam
 reduce_menu_opacity=0
 reduce_window_opacity=0
 

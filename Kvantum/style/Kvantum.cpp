@@ -246,15 +246,15 @@ Style::Style(bool useDark) : QCommonStyle()
         QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
         QVariant v;
         int iconSize;
-        KDESettings.beginGroup("KDE");
-        v = KDESettings.value ("SingleClick");
+        KDESettings.beginGroup(QStringLiteral("KDE"));
+        v = KDESettings.value (QStringLiteral("SingleClick"));
         KDESettings.endGroup();
         if (v.isValid())
           tspec_.double_click = !v.toBool();
         else
           tspec_.double_click = false;
-        KDESettings.beginGroup("DialogIcons");
-        v = KDESettings.value ("Size");
+        KDESettings.beginGroup(QStringLiteral("DialogIcons"));
+        v = KDESettings.value (QStringLiteral("Size"));
         KDESettings.endGroup();
         if (v.isValid())
         {
@@ -264,8 +264,8 @@ Style::Style(bool useDark) : QCommonStyle()
         }
         else
           tspec_.large_icon_size = 32;
-        KDESettings.beginGroup("SmallIcons");
-        v = KDESettings.value ("Size");
+        KDESettings.beginGroup(QStringLiteral("SmallIcons"));
+        v = KDESettings.value (QStringLiteral("Size"));
         KDESettings.endGroup();
         if (v.isValid())
         {
@@ -313,13 +313,13 @@ Style::Style(bool useDark) : QCommonStyle()
   hasActiveIndicator_ = joinedActiveTab_ = joinedActiveFloatingTab_ = hasFloatingTabs_ = false;
   if (themeRndr_ && themeRndr_->isValid())
   {
-    if (themeRndr_->elementExists(getIndicatorSpec("Tab").element+"-close-toggled"))
+    if (themeRndr_->elementExists(getIndicatorSpec(QStringLiteral("Tab")).element+"-close-toggled"))
       hasActiveIndicator_ = true;
-    if (themeRndr_->elementExists("floating-"+getInteriorSpec("Tab").element+"-normal"))
+    if (themeRndr_->elementExists("floating-"+getInteriorSpec(QStringLiteral("Tab")).element+"-normal"))
       hasFloatingTabs_ = true;
     if (tspec_.joined_inactive_tabs)
     {
-      QString sepName = getFrameSpec("Tab").element + "-separator";
+      QString sepName = getFrameSpec(QStringLiteral("Tab")).element + "-separator";
       if (themeRndr_->elementExists(sepName+"-normal")
           || themeRndr_->elementExists(sepName+"-toggled"))
       {
@@ -341,7 +341,7 @@ Style::Style(bool useDark) : QCommonStyle()
   hasInactiveSelItemCol_ = toggledItemHasContrast_ = false;
   if (!tspec_.no_inactiveness)
   {
-    const label_spec lspec = getLabelSpec("ItemView");
+    const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
     QColor toggleInactiveCol = getFromRGBA(lspec.toggleInactiveColor);
     if (toggleInactiveCol.isValid())
     {
@@ -366,11 +366,11 @@ Style::Style(bool useDark) : QCommonStyle()
 
   if (tspec_.blurring)
   {
-    getShadow("Menu", getMenuMargin(true), getMenuMargin(false));
-    const frame_spec fspec = getFrameSpec("ToolTip");
+    getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+    const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
     int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
     thickness += tspec_.tooltip_shadow_depth;
-    QList<int> tooltipS = getShadow("ToolTip", thickness);
+    QList<int> tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
     blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
                                  tspec_.contrast, tspec_.intensity, tspec_.saturation);
   }
@@ -435,9 +435,9 @@ void Style::setBuiltinDefaultTheme()
     defaultRndr_ = nullptr;
   }
 
-  defaultSettings_ = new ThemeConfig(":/Kvantum/default.kvconfig");
+  defaultSettings_ = new ThemeConfig(QStringLiteral(":/Kvantum/default.kvconfig"));
   defaultRndr_ = new QSvgRenderer();
-  defaultRndr_->load(QString(":/Kvantum/default.svg"));
+  defaultRndr_->load(QStringLiteral(":/Kvantum/default.svg"));
 }
 
 static inline bool isThemeDir(const QString &path, const QString &themeName)
@@ -870,7 +870,7 @@ void Style::setAnimationOpacityOut()
 
 int Style::getMenuMargin(bool horiz) const
 {
-  const frame_spec fspec = getFrameSpec("Menu");
+  const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
   int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
   if (!noComposite_) // used without compositing at PM_SubMenuOverlap
     margin += settings_->getCompositeSpec().menu_shadow_depth;
@@ -889,7 +889,7 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
   QList<int> shadow;
   shadow << 0 << 0 << 0 << 0;
   QList<QString> direction;
-  direction << "left" << "top" << "right" << "bottom";
+  direction << QStringLiteral("left") << QStringLiteral("top") << QStringLiteral("right") << QStringLiteral("bottom");
   frame_spec fspec = getFrameSpec(widgetName);
   QString element = fspec.element;
 
@@ -1277,9 +1277,9 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     QString twoDigits = l.toString(99);
     /* take into account leading zeros */
     QRegularExpression exp;
-    exp.setPattern("hh|HH|mm|ss");
+    exp.setPattern(QStringLiteral("hh|HH|mm|ss"));
     maxTxt.replace(exp,twoDigits);
-    exp.setPattern("h|H|m|s");
+    exp.setPattern(QStringLiteral("h|H|m|s"));
     maxTxt.replace(exp,twoDigits);
     maxTxt.replace("zzz",l.toString(999));
     maxTxt.replace("z",l.toString(999));
@@ -1297,9 +1297,9 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     maxTxt.replace("ddd","eee");
     maxTxt.replace("MMM","fff");
     /* leading zeros */
-    exp.setPattern("dd|MM");
+    exp.setPattern(QStringLiteral("dd|MM"));
     maxTxt.replace(exp,twoDigits);
-    exp.setPattern("d|M");
+    exp.setPattern(QStringLiteral("d|M"));
     maxTxt.replace(exp,twoDigits);
     /* time zone */
     maxTxt.replace("t",sb->dateTime().toString("t"));
@@ -1524,11 +1524,11 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     return;
 
   QString group;
-  if ((!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-       || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+  if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+       || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
       && getStylableToolbarContainer(lineedit, true)
       && !enoughContrast(lineedit->palette().color(QPalette::Active, QPalette::Text),
-                         getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                         getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
   {
     group = "ToolbarLineEdit";
   }
@@ -1551,11 +1551,11 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     bool noSpace((!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
-        && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+        && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
     { // the label spacing isn't added at CT_ComboBox
       lspec.top = qMin(lspec.top,2);
       lspec.bottom = qMin(lspec.bottom,2);
-      if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,"W",QSize()).height())
+      if (lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         noSpace = true;
     }
     if (noSpace)
@@ -1585,7 +1585,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   fspec.isAttached = true;
   if (option->direction == Qt::RightToLeft)
   {
-    int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left;
+    int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec(QStringLiteral("ComboBox")).left;
     if (lineedit->width() < combo->width()
                             - (tspec_.square_combo_button
                                ? qMax(COMBO_ARROW_LENGTH, combo->height()-arrowFrameSize)
@@ -1680,8 +1680,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                                                                         QPalette::Window));
       }
 
-      interior_spec ispec = getInteriorSpec("Dialog");
-      size_spec sspec = getSizeSpec("Dialog");
+      interior_spec ispec = getInteriorSpec(QStringLiteral("Dialog"));
+      size_spec sspec = getSizeSpec(QStringLiteral("Dialog"));
       if (widget && !ispec.element.isEmpty()
           && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel)
       {
@@ -1689,15 +1689,15 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
           {
-            ispec = getInteriorSpec("Window");
-            sspec = getSizeSpec("Window");
+            ispec = getInteriorSpec(QStringLiteral("Window"));
+            sspec = getSizeSpec(QStringLiteral("Window"));
           }
         }
       }
       else
       {
-        ispec = getInteriorSpec("Window");
-        sspec = getSizeSpec("Window");
+        ispec = getInteriorSpec(QStringLiteral("Window"));
+        sspec = getSizeSpec(QStringLiteral("Window"));
       }
       frame_spec fspec;
       default_frame_spec(fspec);
@@ -1724,8 +1724,8 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameStatusBar : {return;} // simple is elegant
 
     case PE_FrameDockWidget : {
-      frame_spec fspec = getFrameSpec("Dock");
-      const interior_spec ispec = getInteriorSpec("Dock");
+      frame_spec fspec = getFrameSpec(QStringLiteral("Dock"));
+      const interior_spec ispec = getInteriorSpec(QStringLiteral("Dock"));
       fspec.expansion = 0;
 
       QString status = getState(option,widget);
@@ -1827,7 +1827,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             bool joinedActiveTab = hasFloatingTabs_ ? joinedActiveFloatingTab_ : joinedActiveTab_;
             if (!joinedActiveTab || tspec_.no_active_tab_separator)
             {
-              fspec = getFrameSpec("Tab");
+              fspec = getFrameSpec(QStringLiteral("Tab"));
               int exp = qMin(fspec.expansion, qMin(tr.width(), tr.height())) / 2 + 1;
               overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
               if (d == 0) // at the beginning
@@ -1845,8 +1845,8 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
         }
 
-        fspec = getFrameSpec("TabBarFrame");
-        const interior_spec ispec = getInteriorSpec("TabBarFrame");
+        fspec = getFrameSpec(QStringLiteral("TabBarFrame"));
+        const interior_spec ispec = getInteriorSpec(QStringLiteral("TabBarFrame"));
         fspec.expansion = 0;
 
         QString status = getState(option,widget);
@@ -1923,15 +1923,15 @@ void Style::drawPrimitive(PrimitiveElement element,
       if (stb)
       {
         autoraise = true; // we make all toolbuttons auto-raised inside toolbars
-        if (!getFrameSpec("ToolbarButton").element.isEmpty()
-            || !getInteriorSpec("ToolbarButton").element.isEmpty())
+        if (!getFrameSpec(QStringLiteral("ToolbarButton")).element.isEmpty()
+            || !getInteriorSpec(QStringLiteral("ToolbarButton")).element.isEmpty())
         {
           group = "ToolbarButton";
         }
         ispec = getInteriorSpec(group);
         if (!ispec.hasInterior
             && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
-                              getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                              getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
         { // high contrast on toolbar
           fillWidgetInterior = true;
         }
@@ -2049,7 +2049,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                                                                             ? QPalette::Inactive
                                                                             : QPalette::Active,
                                                                           QPalette::Window));
-            const frame_spec fspec1 = getFrameSpec("Tab");
+            const frame_spec fspec1 = getFrameSpec(QStringLiteral("Tab"));
             fspec.left = qMin(fspec.left, fspec1.left);
             fspec.right = qMin(fspec.right, fspec1.right);
             fspec.top = qMin(fspec.top, fspec1.top);
@@ -2255,7 +2255,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           else
           {
-            const frame_spec fspec1 = getFrameSpec("DropDownButton");
+            const frame_spec fspec1 = getFrameSpec(QStringLiteral("DropDownButton"));
             if (tb->width() < opt->iconSize.width()+fspec.left
                               +(rtl ? fspec1.left : fspec1.right)
                               +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
@@ -2555,7 +2555,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_FrameButtonTool : {return;}
 
     case PE_IndicatorRadioButton : {
-      const interior_spec ispec = getInteriorSpec("RadioButton");
+      const interior_spec ispec = getInteriorSpec(QStringLiteral("RadioButton"));
 
       if (option->state & State_Enabled)
       {
@@ -2650,7 +2650,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorCheckBox : {
-      const interior_spec ispec = getInteriorSpec("CheckBox");
+      const interior_spec ispec = getInteriorSpec(QStringLiteral("CheckBox"));
 
       if (option->state & State_Enabled)
       {
@@ -2798,7 +2798,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           /* this would be not only useless but also ugly */
           && !(widget && widget->inherits("QComboBoxListView")))
       { // no interior
-        frame_spec fspec = getFrameSpec("Focus");
+        frame_spec fspec = getFrameSpec(QStringLiteral("Focus"));
         fspec.expansion = 0;
         fspec.left = qMin(fspec.left,2);
         fspec.right = qMin(fspec.right,2);
@@ -2811,7 +2811,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     }
 
     case PE_IndicatorBranch : {
-      const indicator_spec dspec = getIndicatorSpec("TreeExpander");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("TreeExpander"));
       QRect r = option->rect;
       bool rtl(option->direction == Qt::RightToLeft);
       qreal expanderAdjust = 0.0;
@@ -3041,7 +3041,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                 if (pw->palette().color(QPalette::Active, QPalette::Base) != getFromRGBA(cspec_.baseColor))
                 {
                    pcmanfmInactiveView = true;
-                   painter->fillRect(interiorRect(option->rect,getFrameSpec("GenericFrame")),
+                   painter->fillRect(interiorRect(option->rect,getFrameSpec(QStringLiteral("GenericFrame"))),
                                      QApplication::palette().color(isWidgetInactive(widget)
                                                                      ? QPalette::Inactive
                                                                      : QPalette::Active,
@@ -3117,7 +3117,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           break;
         }
 
-        frame_spec fspec = getFrameSpec("GenericFrame");
+        frame_spec fspec = getFrameSpec(QStringLiteral("GenericFrame"));
         fspec.expansion = 0;
 
         if (!(option->state & State_Enabled))
@@ -3357,7 +3357,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix,true);
         painter->restore();
       }
-      const frame_spec fspecT = getFrameSpec("Tab");
+      const frame_spec fspecT = getFrameSpec(QStringLiteral("Tab"));
       renderFrame(painter,
                   option->rect,
                   fspec,fspec.element+suffix,
@@ -3385,11 +3385,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         break;
 
       QString group;
-      if ((!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-           || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+      if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+           || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
           && getStylableToolbarContainer(widget, true)
           && !enoughContrast(widget->palette().color(QPalette::Active, QPalette::Text),
-                             getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                             getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
       {
         group = "ToolbarLineEdit";
       }
@@ -3438,7 +3438,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       {
         if ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
-            || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+            || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -3486,7 +3486,7 @@ void Style::drawPrimitive(PrimitiveElement element,
                                         + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && sb->width() < widget->width() + 2*tspec_.spin_button_width
-                                                   + getFrameSpec("IndicatorSpinBox").right)
+                                                   + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right)
               || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.left = qMin(fspec.left,3);
@@ -3512,7 +3512,7 @@ void Style::drawPrimitive(PrimitiveElement element,
         /* see if there is any icon on the left of the combo box (for LTR) */
         if (option->direction == Qt::RightToLeft)
         {
-          int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec("ComboBox").left;
+          int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec(QStringLiteral("ComboBox")).left;
           if (widget->width() < p->width()
                                - (tspec_.square_combo_button
                                   ? qMax(COMBO_ARROW_LENGTH, p->height()-arrowFrameSize)
@@ -3685,14 +3685,14 @@ void Style::drawPrimitive(PrimitiveElement element,
           fspec.HPos = 0;
         if (tspec_.inline_spin_indicators)
         { // only when there is enough space for the line-edit (-> SE_LineEditContents)
-          const label_spec lspec = getLabelSpec("LineEdit");
+          const label_spec lspec = getLabelSpec(QStringLiteral("LineEdit"));
           vOffset = (lspec.bottom-lspec.top)/2;
           if (vOffset != 0
               && option->rect.height() < sizeCalculated(widget ? widget->font() : painter->font(),
-                                                        getFrameSpec("LineEdit"),
+                                                        getFrameSpec(QStringLiteral("LineEdit")),
                                                         lspec,
-                                                        getSizeSpec("LineEdit"),
-                                                        "W",QSize()).height())
+                                                        getSizeSpec(QStringLiteral("LineEdit")),
+                                                        QStringLiteral("W"),QSize()).height())
           {
             vOffset = 0;
           }
@@ -3700,7 +3700,7 @@ void Style::drawPrimitive(PrimitiveElement element,
       }
       else
       {
-        fspec = getFrameSpec("LineEdit");
+        fspec = getFrameSpec(QStringLiteral("LineEdit"));
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
@@ -3858,11 +3858,11 @@ void Style::drawPrimitive(PrimitiveElement element,
             && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
           dspec.element = "flat-"+dspec.element;
 
-        if ((!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-             || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+        if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
             && getStylableToolbarContainer(widget, true))
         {
-          QColor tCol = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+          QColor tCol = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
           QLineEdit *le = widget->findChild<QLineEdit*>();
           if (enoughContrast(getFromRGBA(cspec_.textColor), tCol)
               && !enoughContrast(le->palette().color(QPalette::Active, QPalette::Text), tCol))
@@ -3944,15 +3944,15 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (stb)
         {
           autoraise = true;
-          if (!getFrameSpec("ToolbarButton").element.isEmpty()
-              || !getInteriorSpec("ToolbarButton").element.isEmpty())
+          if (!getFrameSpec(QStringLiteral("ToolbarButton")).element.isEmpty()
+              || !getInteriorSpec(QStringLiteral("ToolbarButton")).element.isEmpty())
           {
             group = "ToolbarButton";
           }
           ispec = getInteriorSpec(group);
           if (!ispec.hasInterior
               && enoughContrast(getFromRGBA(getLabelSpec(group).normalColor),
-                                getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                                getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           { // high contrast on toolbar
             fillWidgetInterior = true;
           }
@@ -3985,7 +3985,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             }
           }
         }
-        const label_spec lspec = getLabelSpec("PanelButtonTool");
+        const label_spec lspec = getLabelSpec(QStringLiteral("PanelButtonTool"));
         vOffset = (lspec.bottom-lspec.top)/2;
       }
       else
@@ -4005,8 +4005,8 @@ void Style::drawPrimitive(PrimitiveElement element,
       const QComboBox *cb = qobject_cast<const QComboBox*>(widget);
 
       QString cGroup;
-      if ((!getFrameSpec("ToolbarComboBox").element.isEmpty()
-           || !getInteriorSpec("ToolbarComboBox").element.isEmpty())
+      if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+           || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
           && getStylableToolbarContainer(cb, true))
       {
         cGroup = "ToolbarComboBox";
@@ -4018,11 +4018,11 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
         {
           QString leGroup;
-          if ((!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-               || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+          if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               && getStylableToolbarContainer(cb->lineEdit(), true)
               && !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                                 getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
             leGroup = "ToolbarLineEdit";
           }
@@ -4030,7 +4030,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             leGroup = "LineEdit";
           fspec = getFrameSpec(leGroup);
           ispec = getInteriorSpec(leGroup);
-          const indicator_spec dspec1 = getIndicatorSpec("LineEdit");
+          const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
           if (themeRndr_ && themeRndr_->isValid()
               && themeRndr_->elementExists(dspec1.element+"-normal"))
           {
@@ -4038,11 +4038,11 @@ void Style::drawPrimitive(PrimitiveElement element,
           }
           if (leGroup == "ToolbarLineEdit"
               && enoughContrast(getFromRGBA(cspec_.textColor),
-                                getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                                getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
             dspec.element = "flat-"+dspec.element;
           }
-          const label_spec lspec = getLabelSpec("LineEdit");
+          const label_spec lspec = getLabelSpec(QStringLiteral("LineEdit"));
           vOffset = (lspec.bottom-lspec.top)/2;
         }
         else
@@ -4055,7 +4055,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           {
             dspec = dspec1;
           }
-          const label_spec lspec = getLabelSpec("ComboBox");
+          const label_spec lspec = getLabelSpec(QStringLiteral("ComboBox"));
           vOffset = (lspec.bottom-lspec.top)/2;
         }
         if (!(combo && combo->editable && cb->lineEdit()
@@ -4091,7 +4091,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           if (isWidgetInactive(widget))
             status.append("-inactive");
           /* when there isn't enough space */
-          const label_spec lspec1 = getLabelSpec("ComboBox");
+          const label_spec lspec1 = getLabelSpec(QStringLiteral("ComboBox"));
           QFont F(painter->font());
           if (lspec1.boldFont) F.setWeight(lspec1.boldness);
           QSize txtSize = textSize(F,combo->currentText);
@@ -4116,10 +4116,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         }
         else if (vOffset != 0)
         { // -> drawComboLineEdit()
-          const label_spec lspec1 = getLabelSpec("LineEdit");
-          const size_spec sspec1 = getSizeSpec("LineEdit");
+          const label_spec lspec1 = getLabelSpec(QStringLiteral("LineEdit"));
+          const size_spec sspec1 = getSizeSpec(QStringLiteral("LineEdit"));
           if (cb->lineEdit()->height()
-              < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
+              < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
           {
             vOffset = 0;
           }
@@ -4135,7 +4135,7 @@ void Style::drawPrimitive(PrimitiveElement element,
           status.replace("focused","normal");
         }
         const QToolBar *toolBar = qobject_cast<const QToolBar*>(tb->parentWidget());
-        const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+        const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
         fspec.top = fspec1.top; fspec.bottom = fspec1.bottom;
         bool drawRaised = false;
         if (tspec_.group_toolbar_buttons
@@ -4289,7 +4289,7 @@ void Style::drawPrimitive(PrimitiveElement element,
             }
             else if (stb)
             {
-              if (enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+              if (enoughContrast(col, getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
                 dspec.element = "flat-"+dspec1.element+"-down";
             }
             else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
@@ -4488,7 +4488,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_IndicatorTabTearLeft :
 #endif
     {
-      indicator_spec dspec = getIndicatorSpec("Tab");
+      indicator_spec dspec = getIndicatorSpec(QStringLiteral("Tab"));
       renderElement(painter,dspec.element+"-tear",option->rect);
 
       break;
@@ -4497,7 +4497,7 @@ void Style::drawPrimitive(PrimitiveElement element,
     case PE_IndicatorTabClose : {
       frame_spec fspec;
       default_frame_spec(fspec);
-      const indicator_spec dspec = getIndicatorSpec("Tab");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Tab"));
 
       bool pseudoState(false);
       QString status;
@@ -4631,13 +4631,13 @@ void Style::drawPrimitive(PrimitiveElement element,
       else
         dir = "-right-";
 
-      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
 
       /* menuitems may have their own right/left arrows */
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
           && (element == PE_IndicatorArrowLeft || element == PE_IndicatorArrowRight))
       {
-        const indicator_spec dspec1 = getIndicatorSpec("MenuItem");
+        const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("MenuItem"));
         dspec.size = dspec1.size;
         /* the arrow rectangle is set at CE_MenuItem appropriately */
         if (renderElement(painter, dspec1.element+dir+aStatus,option->rect))
@@ -4650,10 +4650,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         if (isStylableToolbar(widget)
             || mergedToolbarHeight(widget) > 0)
         {
-          col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+          col = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
         }
         else if (qobject_cast<const QMenuBar*>(widget))
-          col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
+          col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
         if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
             && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
         {
@@ -5090,7 +5090,7 @@ void Style::drawControl(ControlElement element,
               option->rect.y() + pixelMetric(PM_MenuVMargin,option,widget),
               option->rect.width() - 2*marginH,
               8);
-      const indicator_spec dspec = getIndicatorSpec("MenuItem");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("MenuItem"));
       renderElement(painter,dspec.element+"-tearoff-"+status,r,20,0);
 
       break;
@@ -5400,7 +5400,7 @@ void Style::drawControl(ControlElement element,
           }
           if (state != 0)
           {
-            const label_spec lspec = getLabelSpec("ItemView");
+            const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
             QColor normalColor = getFromRGBA(lspec.normalColor);
             QColor focusColor = getFromRGBA(lspec.focusColor);
             QColor pressColor = getFromRGBA(lspec.pressColor);
@@ -5580,7 +5580,7 @@ void Style::drawControl(ControlElement element,
             if (opacityPercentage < 100.0)
             {
               QStyleOptionViewItem o(*opt);
-              const label_spec lspec = getLabelSpec("ItemView");
+              const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
               QPixmap px = translucentPixmap(getPixmapFromIcon(opt->icon,
                                                                getIconMode(state,
                                                                            isWidgetInactive(widget),
@@ -5635,7 +5635,7 @@ void Style::drawControl(ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         if (tspec_.merge_menubar_with_toolbar && group != "Toolbar")
         {
-          const frame_spec fspec1 = getFrameSpec("Toolbar");
+          const frame_spec fspec1 = getFrameSpec(QStringLiteral("Toolbar"));
           fspec.left = fspec1.left;
           fspec.top = fspec1.top;
           fspec.right = fspec1.right;
@@ -5657,8 +5657,8 @@ void Style::drawControl(ControlElement element,
         renderFrame(painter,r,fspec,fspec.element+"-normal"+inactive);
         renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"+inactive);
 
-        fspec = getFrameSpec("MenuBarItem");
-        ispec = getInteriorSpec("MenuBarItem");
+        fspec = getFrameSpec(QStringLiteral("MenuBarItem"));
+        ispec = getInteriorSpec(QStringLiteral("MenuBarItem"));
 
         if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
@@ -5748,7 +5748,7 @@ void Style::drawControl(ControlElement element,
 
     case CE_MenuBarEmptyArea : {
       if (isLibreoffice_
-          && enoughContrast(getFromRGBA(getLabelSpec("MenuBarItem").normalColor),
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuBarItem")).normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
         break;
@@ -5770,7 +5770,7 @@ void Style::drawControl(ControlElement element,
       }
       if (tspec_.merge_menubar_with_toolbar && group != "Toolbar")
       {
-        const frame_spec fspec1 = getFrameSpec("Toolbar");
+        const frame_spec fspec1 = getFrameSpec(QStringLiteral("Toolbar"));
         fspec.left = fspec1.left;
         fspec.top = fspec1.top;
         fspec.right = fspec1.right;
@@ -5788,7 +5788,7 @@ void Style::drawControl(ControlElement element,
 
     case CE_MenuScroller : {
       if (enoughContrast(QApplication::palette().color(QPalette::WindowText),
-          getFromRGBA(getLabelSpec("MenuItem").normalColor)))
+          getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor)))
       {
         painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
       }
@@ -5860,7 +5860,7 @@ void Style::drawControl(ControlElement element,
       if (opt) {
         frame_spec fspec;
         default_frame_spec(fspec);
-        label_spec lspec = getLabelSpec("RadioButton");
+        label_spec lspec = getLabelSpec(QStringLiteral("RadioButton"));
         /* vertically centered */
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
@@ -5906,7 +5906,7 @@ void Style::drawControl(ControlElement element,
       if (opt) {
         frame_spec fspec;
         default_frame_spec(fspec);
-        label_spec lspec = getLabelSpec("CheckBox");
+        label_spec lspec = getLabelSpec(QStringLiteral("CheckBox"));
         /* vertically centered */
         lspec.top = qMin(lspec.top,2);
         lspec.bottom = qMin(lspec.bottom,2);
@@ -5961,8 +5961,8 @@ void Style::drawControl(ControlElement element,
           status.append("-inactive");
 
         QString group;
-        if ((!getFrameSpec("ToolbarComboBox").element.isEmpty()
-             || !getInteriorSpec("ToolbarComboBox").element.isEmpty())
+        if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
             && getStylableToolbarContainer(widget, true))
         {
           group = "ToolbarComboBox";
@@ -6066,8 +6066,8 @@ void Style::drawControl(ControlElement element,
 
       if (opt)
       {
-        frame_spec fspec = getFrameSpec("Tab");
-        interior_spec ispec = getInteriorSpec("Tab");
+        frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
+        interior_spec ispec = getInteriorSpec(QStringLiteral("Tab"));
 
         /* Let's forget about the pressed state. It's useless here and
            makes trouble in KDevelop. The disabled state is useless too. */
@@ -6453,7 +6453,7 @@ void Style::drawControl(ControlElement element,
            rectangle won't be updated automatically. (A Qt design flaw?) */
         if (!docMode && tspec_.attach_active_tab)
         { // tw exists
-          fspec = getFrameSpec("TabFrame");
+          fspec = getFrameSpec(QStringLiteral("TabFrame"));
           if (verticalTabs)
           {
             if (opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest)
@@ -6799,7 +6799,7 @@ void Style::drawControl(ControlElement element,
         else if (option->state & State_MouseOver)
           state = 2;
 
-        const label_spec lspec = getLabelSpec("ToolboxTab");
+        const label_spec lspec = getLabelSpec(QStringLiteral("ToolboxTab"));
         QPalette tBoxPalette(opt->palette);
         int smallIconSize = pixelMetric(PM_SmallIconSize,opt,widget);
         QPixmap px = getPixmapFromIcon(opt->icon,
@@ -6811,7 +6811,7 @@ void Style::drawControl(ControlElement element,
         if (state != 0)
         {
           QColor col;
-          const label_spec lspec = getLabelSpec("ToolboxTab");
+          const label_spec lspec = getLabelSpec(QStringLiteral("ToolboxTab"));
           if (state == 1)
           {
             if (isWidgetInactive(widget))
@@ -6977,8 +6977,8 @@ void Style::drawControl(ControlElement element,
         else if (fspec.expansion != 0)
         {
           fspec.expansion = qMin(tspec_.inline_spin_indicators
-                                   ? getFrameSpec("LineEdit").expansion
-                                   : getFrameSpec("IndicatorSpinBox").expansion,
+                                   ? getFrameSpec(QStringLiteral("LineEdit")).expansion
+                                   : getFrameSpec(QStringLiteral("IndicatorSpinBox")).expansion,
                                  fspec.expansion);
         }
       }
@@ -7002,7 +7002,7 @@ void Style::drawControl(ControlElement element,
         inverted = !inverted;
 
       QFont f(painter->font());
-      const label_spec lspec = getLabelSpec("Progressbar");
+      const label_spec lspec = getLabelSpec(QStringLiteral("Progressbar"));
       if (lspec.boldFont) f.setWeight(lspec.boldness);
 
       /* This is the condition set at CT_ProgressBar for using thin progressbars.
@@ -7147,7 +7147,7 @@ void Style::drawControl(ControlElement element,
         if (!isVertical && option->direction == Qt::RightToLeft)
           inverted = !inverted;
 
-        frame_spec fspecPr = getFrameSpec("Progressbar");
+        frame_spec fspecPr = getFrameSpec(QStringLiteral("Progressbar"));
         if (isKisSlider_)
           fspecPr.right = 0;
         else
@@ -7170,7 +7170,7 @@ void Style::drawControl(ControlElement element,
         }
 
         QFont f(painter->font());
-        const label_spec lspec = getLabelSpec("Progressbar");
+        const label_spec lspec = getLabelSpec(QStringLiteral("Progressbar"));
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
         if (!isKisSlider_ && tspec_.progressbar_thickness > 0
@@ -7329,8 +7329,8 @@ void Style::drawControl(ControlElement element,
           fspec.expansion = (isKisSlider_
                                ? qMin(fspecPr.expansion,
                                       tspec_.inline_spin_indicators
-                                        ? getFrameSpec("LineEdit").expansion
-                                        : getFrameSpec("IndicatorSpinBox").expansion)
+                                        ? getFrameSpec(QStringLiteral("LineEdit")).expansion
+                                        : getFrameSpec(QStringLiteral("IndicatorSpinBox")).expansion)
                                : fspecPr.expansion)
                             - (spreadProgressbar ? 0 : fspecPr.top+fspecPr.bottom);
           if (fspec.expansion >= qMin(h,w)) isRounded = true;
@@ -7545,10 +7545,10 @@ void Style::drawControl(ControlElement element,
 
         frame_spec fspec;
         default_frame_spec(fspec);
-        label_spec lspec = getLabelSpec("Progressbar");
+        label_spec lspec = getLabelSpec(QStringLiteral("Progressbar"));
         lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
-        frame_spec fspecPr = getFrameSpec("Progressbar");
+        frame_spec fspecPr = getFrameSpec(QStringLiteral("Progressbar"));
         if (isKisSlider_)
           fspecPr.right = 0;
         else
@@ -7867,7 +7867,7 @@ void Style::drawControl(ControlElement element,
 
       frame_spec fspec;
       default_frame_spec(fspec);
-      const indicator_spec dspec = getIndicatorSpec("Scrollbar");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Scrollbar"));
 
       QString iStatus = getState(option,widget); // indicator state
       if (option->state & State_Enabled)
@@ -7999,8 +7999,8 @@ void Style::drawControl(ControlElement element,
             r.adjust(space, 0, 0, 0);
         }
         /* use traansient elements if they exist */
-        const frame_spec fspec1 = getFrameSpec("ScrollbarTransientSlider");
-        const interior_spec ispec1 = getInteriorSpec("ScrollbarTransientSlider");
+        const frame_spec fspec1 = getFrameSpec(QStringLiteral("ScrollbarTransientSlider"));
+        const interior_spec ispec1 = getInteriorSpec(QStringLiteral("ScrollbarTransientSlider"));
         if (fspec1.hasFrame || ispec1.hasInterior)
         {
           fspec.hasFrame = fspec1.hasFrame;
@@ -8186,10 +8186,10 @@ void Style::drawControl(ControlElement element,
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
-      if (themeRndr_ && themeRndr_->isValid() && !themeRndr_->elementExists("header-separator"))
+      if (themeRndr_ && themeRndr_->isValid() && !themeRndr_->elementExists(QStringLiteral("header-separator")))
         renderElement(painter, fspec.element + "-" + status + "-right", sep);
       else
-        renderElement(painter,"header-separator",sep);
+        renderElement(painter,QStringLiteral("header-separator"),sep);
       if (!(option->state & State_Enabled))
         painter->restore();
       if (!horiz)
@@ -8358,11 +8358,11 @@ void Style::drawControl(ControlElement element,
       {
         if (widget && option->styleObject)
         { // correct line-edit palettes if needed
-          bool toolbarLineEdit(!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-                               || !getInteriorSpec("ToolbarLineEdit").element.isEmpty());
+          bool toolbarLineEdit(!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty());
           if (toolbarLineEdit
-              || !getFrameSpec("ToolbarComboBox").element.isEmpty()
-              || !getInteriorSpec("ToolbarComboBox").element.isEmpty())
+              || !getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+              || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
           {
             QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
             if (toolbarState.isEmpty() // no child palette checked
@@ -8394,7 +8394,7 @@ void Style::drawControl(ControlElement element,
               }
               else
               {
-                QColor col = getFromRGBA(getLabelSpec("ComboBox").normalColor);
+                QColor col = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
                 if (col.isValid())
                 {
                   QColor disabledCol = col;
@@ -8447,12 +8447,12 @@ void Style::drawControl(ControlElement element,
       }
       else if (option->styleObject)
       {// correct line-edit palettes if needed
-        bool toolbarLineEdit(!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-                             || !getInteriorSpec("ToolbarLineEdit").element.isEmpty());
+        bool toolbarLineEdit(!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty());
 
         if (toolbarLineEdit
-            || !getFrameSpec("ToolbarComboBox").element.isEmpty()
-            || !getInteriorSpec("ToolbarComboBox").element.isEmpty())
+            || !getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+            || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
         {
           QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
           if (toolbarState.isEmpty() // no child palette checked
@@ -8485,7 +8485,7 @@ void Style::drawControl(ControlElement element,
             }
             else
             {
-              QColor col = getFromRGBA(getLabelSpec("ToolbarComboBox").normalColor);
+              QColor col = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
               if (col.isValid())
               {
                 QColor disabledCol = col;
@@ -8531,7 +8531,7 @@ void Style::drawControl(ControlElement element,
     }
 
     case CE_SizeGrip : {
-      const indicator_spec dspec = getIndicatorSpec("SizeGrip");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("SizeGrip"));
       frame_spec fspec;
       default_frame_spec(fspec);
 
@@ -9097,7 +9097,7 @@ void Style::drawControl(ControlElement element,
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
           }
           else if (themeRndr_ && themeRndr_->isValid()
-                   && themeRndr_->elementExists("flat-button-default-indicator"))
+                   && themeRndr_->elementExists(QStringLiteral("flat-button-default-indicator")))
           {
             di = "flat-button-default-indicator";
           }
@@ -9152,8 +9152,8 @@ void Style::drawControl(ControlElement element,
           if (stb)
           {
             autoraise = true;
-            if (!getFrameSpec("ToolbarButton").element.isEmpty()
-                || !getInteriorSpec("ToolbarButton").element.isEmpty())
+            if (!getFrameSpec(QStringLiteral("ToolbarButton")).element.isEmpty()
+                || !getInteriorSpec(QStringLiteral("ToolbarButton")).element.isEmpty())
             {
               group = "ToolbarButton";
             }
@@ -9297,7 +9297,7 @@ void Style::drawControl(ControlElement element,
             {
               if (isNormal || noPanel)
               {
-                const label_spec lspec1 = getLabelSpec("Toolbar");
+                const label_spec lspec1 = getLabelSpec(QStringLiteral("Toolbar"));
                 if (themeRndr_ && themeRndr_->isValid()
                     && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
                     && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
@@ -9353,8 +9353,8 @@ void Style::drawControl(ControlElement element,
                   }
                   else if (transMenuTitle)
                   {
-                    lspec.pressColor = getLabelSpec("MenuItem").normalColor;
-                    lspec.pressInactiveColor = getLabelSpec("MenuItem").normalInactiveColor;
+                    lspec.pressColor = getLabelSpec(QStringLiteral("MenuItem")).normalColor;
+                    lspec.pressInactiveColor = getLabelSpec(QStringLiteral("MenuItem")).normalInactiveColor;
                   }
                 }
               }
@@ -9363,8 +9363,8 @@ void Style::drawControl(ControlElement element,
           /* KDE menu titles */
           else if (qobject_cast<QMenu*>(p) && transMenuTitle)
           {
-            lspec.pressColor = getLabelSpec("MenuItem").normalColor;
-            lspec.pressInactiveColor = getLabelSpec("MenuItem").normalInactiveColor;
+            lspec.pressColor = getLabelSpec(QStringLiteral("MenuItem")).normalColor;
+            lspec.pressInactiveColor = getLabelSpec(QStringLiteral("MenuItem")).normalInactiveColor;
           }
 
           /* when there isn't enough space (as in Qupzilla's bookmark toolbar) */
@@ -9481,7 +9481,7 @@ void Style::drawControl(ControlElement element,
             }
             else
             {
-              const frame_spec fspec1 = getFrameSpec("DropDownButton");
+              const frame_spec fspec1 = getFrameSpec(QStringLiteral("DropDownButton"));
               if (tb->width() < opt->iconSize.width()+fspec.left
                                 +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
                                 +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
@@ -9529,7 +9529,7 @@ void Style::drawControl(ControlElement element,
           if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
           {
             dspec.size = qMax(dspec.size, pixelMetric(PM_TabCloseIndicatorWidth));
-            const frame_spec fspec1 = getFrameSpec("Tab");
+            const frame_spec fspec1 = getFrameSpec(QStringLiteral("Tab"));
             qreal rDiff = 0;
             if (lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
             {
@@ -9890,8 +9890,8 @@ void Style::drawComplexControl(ComplexControl control,
           if (stb)
           {
             autoraise = true;
-            if (!getFrameSpec("ToolbarButton").element.isEmpty()
-                || !getInteriorSpec("ToolbarButton").element.isEmpty())
+            if (!getFrameSpec(QStringLiteral("ToolbarButton")).element.isEmpty()
+                || !getInteriorSpec(QStringLiteral("ToolbarButton")).element.isEmpty())
             {
               group = "ToolbarButton";
             }
@@ -9983,7 +9983,7 @@ void Style::drawComplexControl(ComplexControl control,
               }
               else if (stb)
               {
-                if (enoughContrast(col, getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                if (enoughContrast(col, getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
                   dspec.element = "flat-"+dspec.element;
               }
               else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
@@ -10055,11 +10055,11 @@ void Style::drawComplexControl(ComplexControl control,
         {
           QString leGroup;
           QLineEdit *le = widget->findChild<QLineEdit*>();
-          if ((!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-               || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+          if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               && getStylableToolbarContainer(le, true)
               && !enoughContrast(le->palette().color(QPalette::Active, QPalette::Text),
-                                 getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
             leGroup = "ToolbarLineEdit";
           }
@@ -10098,7 +10098,7 @@ void Style::drawComplexControl(ComplexControl control,
               const size_spec sspec = getSizeSpec(leGroup);
               if ((!le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
                   || le->minimumWidth() == le->maximumWidth()
-                  || le->height() < sizeCalculated(le->font(),fspec,lspec,sspec,"W",QSize()).height())
+                  || le->height() < sizeCalculated(le->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
@@ -10127,7 +10127,7 @@ void Style::drawComplexControl(ComplexControl control,
                                              ? fspec.right : 0)
                   || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                       && sb->width() < editRect.width() + 2*tspec_.spin_button_width
-                                                        + getFrameSpec("IndicatorSpinBox").right)
+                                                        + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right)
                   || sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
               {
                 fspec.left = qMin(fspec.left,3);
@@ -10256,8 +10256,8 @@ void Style::drawComplexControl(ComplexControl control,
         bool editable(opt->editable && cb && cb->lineEdit());
 
         QString group;
-        if ((!getFrameSpec("ToolbarComboBox").element.isEmpty()
-             || !getInteriorSpec("ToolbarComboBox").element.isEmpty())
+        if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
             && getStylableToolbarContainer(cb, true))
         {
           group = "ToolbarComboBox";
@@ -10266,11 +10266,11 @@ void Style::drawComplexControl(ComplexControl control,
 
         QString leGroup;
         if (cb
-            && (!getFrameSpec("ToolbarLineEdit").element.isEmpty()
-                || !getInteriorSpec("ToolbarLineEdit").element.isEmpty())
+            && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
             && getStylableToolbarContainer(cb->lineEdit(), true)
             && !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                               getFromRGBA(getLabelSpec("Toolbar").normalColor)))
+                               getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
         {
           leGroup = "ToolbarLineEdit";
         }
@@ -10668,12 +10668,12 @@ void Style::drawComplexControl(ComplexControl control,
               label_spec lspec1 = getLabelSpec(leGroup);
               const size_spec sspec1 = getSizeSpec(leGroup);
               if (cb->lineEdit()->height()
-                  < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
+                  < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
               {
                 lspec.top = qMin(lspec.top,2);
                 lspec.bottom = qMin(lspec.bottom,2);
                 if (cb->lineEdit()->height()
-                    < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,"W",QSize()).height())
+                    < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
                 {
                   fspec.top = qMin(fspec.left,3);
                   fspec.bottom = qMin(fspec.bottom,3);
@@ -10905,7 +10905,7 @@ void Style::drawComplexControl(ComplexControl control,
                we draw the glow first because the slider may be rounded */
             if (option->state & State_Enabled)
             {
-              const frame_spec sFspec = getFrameSpec("ScrollbarSlider");
+              const frame_spec sFspec = getFrameSpec(QStringLiteral("ScrollbarSlider"));
               int glowH = 2*extent;
               int topGlowY, bottomGlowY, topGlowH, bottomGlowH;
               if (horiz)
@@ -11339,7 +11339,7 @@ void Style::drawComplexControl(ComplexControl control,
 
         renderElement(painter,"dial"+suffix,dial);
         if (opt->state & State_HasFocus)
-          renderElement(painter,"dial-focus",dial);
+          renderElement(painter,QStringLiteral("dial-focus"),dial);
         renderElement(painter,"dial-handle"+suffix,handle);
 
         if (const QDial *d = qobject_cast<const QDial*>(widget))
@@ -11657,12 +11657,12 @@ void Style::drawComplexControl(ComplexControl control,
         {
           if (opt->state & State_HasFocus)
           {
-            const frame_spec fspec = getFrameSpec("GroupBox");
+            const frame_spec fspec = getFrameSpec(QStringLiteral("GroupBox"));
             if (fspec.hasFocusFrame)
             {
               int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
               renderFrame(painter,textRect.adjusted(-spacing,0,spacing,0),fspec,fspec.element+"-focus");
-              const interior_spec ispec = getInteriorSpec("GroupBox");
+              const interior_spec ispec = getInteriorSpec(QStringLiteral("GroupBox"));
               if (ispec.hasFocusInterior)
                 renderInterior(painter,textRect.adjusted(-spacing,0,spacing,0),fspec,ispec,ispec.element+"-focus");
             }
@@ -11677,7 +11677,7 @@ void Style::drawComplexControl(ComplexControl control,
           }
 
           bool isInactive(isWidgetInactive(widget));
-          const label_spec lspec = getLabelSpec("GroupBox");
+          const label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
           QColor col;
           if (!(option->state & State_Enabled))
             col = getFromRGBA(cspec_.disabledTextColor);
@@ -11802,7 +11802,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
           return qMax(pixelMetric(PM_MenuHMargin,option,widget),
                       pixelMetric(PM_MenuVMargin,option,widget));
       }
-      const frame_spec fspec = getFrameSpec("GenericFrame");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("GenericFrame"));
       /* NOTE: There is an old RTL bug in Qt, due to which, some frames -- especially
                those inside splitters -- may be cut at the right with RTL. Unfortunately,
                here the layout direction may not be reported correctly. As a workaround,
@@ -11833,9 +11833,9 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuBarItemSpacing : {
       /* needed for putting menubar-items inside menubar frame */
       if (tspec_.merge_menubar_with_toolbar)
-        return getFrameSpec("Toolbar").left;
+        return getFrameSpec(QStringLiteral("Toolbar")).left;
       else
-        return getFrameSpec("MenuBar").left;
+        return getFrameSpec(QStringLiteral("MenuBar")).left;
     }
 
     case PM_MenuPanelWidth :
@@ -11854,7 +11854,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      const frame_spec fspec = getFrameSpec("Menu");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       theme_spec tspec_now = settings_->getCompositeSpec();
@@ -11917,7 +11917,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     }
 
     case PM_MenuScrollerHeight : {
-      const indicator_spec dspec = getIndicatorSpec("MenuItem");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("MenuItem"));
       return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
 
@@ -11926,7 +11926,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ToolBarHandleExtent : {
       if (tspec_.center_toolbar_handle)
       {
-        const indicator_spec dspec = getIndicatorSpec("Toolbar");
+        const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Toolbar"));
         return dspec.size + 3
                /* a minimum margin of 3 px */
                + qMax(3 - pixelMetric(PM_ToolBarItemMargin,option,widget)
@@ -11936,7 +11936,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
       return 8;
     }
     case PM_ToolBarSeparatorExtent : {
-      const indicator_spec dspec = getIndicatorSpec("Toolbar");
+      const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Toolbar"));
       return qMax(dspec.size,4);
     }
     case PM_ToolBarIconSize : return tspec_.toolbar_icon_size;
@@ -11944,7 +11944,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
        but it's used in Qt -> qtoolbarextension.cpp, qtoolbarlayout.cpp and qmenubar.cpp */
     case PM_ToolBarExtensionExtent : return 16;
     case PM_ToolBarItemMargin : {
-      const frame_spec fspec = getFrameSpec("Toolbar");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("Toolbar"));
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
       return qMax(v,h);
@@ -11955,11 +11955,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
        QCommonStyle uses it on the right and left tab sides equally
        but we do so only when the right and left tab buttons exist. */
     case PM_TabBarTabHSpace : {
-      const frame_spec fspec = getFrameSpec("Tab");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
       int hSpace = qMax(fspec.left,fspec.right)*2;
       if (!widget) // QML
       {
-        const label_spec lspec = getLabelSpec("Tab");
+        const label_spec lspec = getLabelSpec(QStringLiteral("Tab"));
         int common = QCommonStyle::pixelMetric(metric,option,widget);
         hSpace += qMax(lspec.left,lspec.right)*2;
         hSpace = qMax(hSpace, common);
@@ -11969,8 +11969,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarTabVSpace : {
       if (!widget) // QML
       {
-        const frame_spec fspec = getFrameSpec("Tab");
-        const label_spec lspec = getLabelSpec("Tab");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
+        const label_spec lspec = getLabelSpec(QStringLiteral("Tab"));
         int common = QCommonStyle::pixelMetric(metric,option,widget);
         return qMax(fspec.top+fspec.bottom + lspec.top+lspec.bottom
                       + 1, // WARNING: Why QML tabs are cut by 1px from below?
@@ -12029,8 +12029,8 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 #endif
 
     case PM_TabBarScrollButtonWidth : {
-      const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
-      const frame_spec fspec2 = getFrameSpec("Tab");
+      const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
+      const frame_spec fspec2 = getFrameSpec(QStringLiteral("Tab"));
       return qMax(pixelMetric(PM_TabCloseIndicatorWidth)
                     + qMin(qMax(fspec1.left, fspec1.right),
                            qMax(fspec2.left, fspec2.right))
@@ -12040,7 +12040,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_TabCloseIndicatorWidth :
     case PM_TabCloseIndicatorHeight : {
-       return getIndicatorSpec("Tab").size;
+       return getIndicatorSpec(QStringLiteral("Tab")).size;
     }
 
     case PM_TabBarIconSize :
@@ -12132,7 +12132,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         {
           if (ticklessSliderHandleSize_ == -1)
           {
-            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            const interior_spec ispec = getInteriorSpec(QStringLiteral("SliderCursor"));
             if (themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
             {
@@ -12164,7 +12164,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         {
           if (ticklessSliderHandleSize_ == -1)
           {
-            const interior_spec ispec = getInteriorSpec("SliderCursor");
+            const interior_spec ispec = getInteriorSpec(QStringLiteral("SliderCursor"));
             if (themeRndr_ && themeRndr_->isValid()
                 && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
             {
@@ -12222,16 +12222,15 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 
     case PM_TitleBarHeight : {
       // respect the text margins
-      QString group = "TitleBar";
-      const label_spec lspec = getLabelSpec("TitleBar");
+      const label_spec lspec = getLabelSpec(QStringLiteral("TitleBar"));
       int v = lspec.top + lspec.bottom;
       int b = 0;
       if (widget && lspec.boldFont)
       {
         QFont f = widget->font();
-        QSize s = textSize(f, "W");
+        QSize s = textSize(f, QStringLiteral("W"));
         f.setWeight(lspec.boldness);
-        b = (textSize(f, "W") - s).height();
+        b = (textSize(f, QStringLiteral("W")) - s).height();
       }
       return qMax(widget ? widget->fontMetrics().lineSpacing()+v+b
                            : option ? option->fontMetrics.lineSpacing()+v : 0,
@@ -12243,7 +12242,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_HeaderMargin : return 2;
 
     case PM_ToolTipLabelFrameWidth : {
-      const frame_spec fspec = getFrameSpec("ToolTip");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
@@ -12561,7 +12560,7 @@ int Style::styleHint(StyleHint hint,
     }
 
     case SH_GroupBox_TextLabelColor: {
-      const label_spec lspec = getLabelSpec("GroupBox");
+      const label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
       QColor col;
       if (!(option->state & State_Enabled))
       {
@@ -12666,12 +12665,12 @@ int Style::extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const
   if (opt == nullptr) return 0;
   int res = 0;
 
-  const frame_spec fspec = getFrameSpec("ComboBox");
-  const size_spec sspec = getSizeSpec("ComboBox");
-  const label_spec lspec = getLabelSpec("ComboBox");
-  const frame_spec fspec1 = getFrameSpec("LineEdit");
-  const label_spec lspec1 = getLabelSpec("LineEdit");
-  const size_spec sspec1 = getSizeSpec("LineEdit");
+  const frame_spec fspec = getFrameSpec(QStringLiteral("ComboBox"));
+  const size_spec sspec = getSizeSpec(QStringLiteral("ComboBox"));
+  const label_spec lspec = getLabelSpec(QStringLiteral("ComboBox"));
+  const frame_spec fspec1 = getFrameSpec(QStringLiteral("LineEdit"));
+  const label_spec lspec1 = getLabelSpec(QStringLiteral("LineEdit"));
+  const size_spec sspec1 = getSizeSpec(QStringLiteral("LineEdit"));
   bool rtl(opt->direction == Qt::RightToLeft);
 
   /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
@@ -12729,7 +12728,7 @@ QSize Style::sizeFromContents(ContentsType type,
 
       int minW = sspec.minW;
       sspec.minW = 0;
-      s = sizeCalculated(f,fspec,lspec,sspec,"W",QSize());
+      s = sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),QSize());
       s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2, 0),
                         s.width());
       s.rwidth() = qMax(minW + (sspec.incrementW ? s.width() : 0),
@@ -12748,7 +12747,7 @@ QSize Style::sizeFromContents(ContentsType type,
          which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
          corrected in Qt5 but the following method works for both. */
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
-      frame_spec fspec = getFrameSpec("LineEdit");
+      frame_spec fspec = getFrameSpec(QStringLiteral("LineEdit"));
       if (tspec_.vertical_spin_indicators
           && !(sb && sb->buttonSymbols() == QAbstractSpinBox::NoButtons))
       {
@@ -12757,10 +12756,10 @@ QSize Style::sizeFromContents(ContentsType type,
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
       }
-      const label_spec lspec = getLabelSpec("LineEdit");
-      const size_spec sspecLE = getSizeSpec("LineEdit");
-      const frame_spec fspec1 = getFrameSpec("IndicatorSpinBox");
-      const size_spec sspec = getSizeSpec("IndicatorSpinBox");
+      const label_spec lspec = getLabelSpec(QStringLiteral("LineEdit"));
+      const size_spec sspecLE = getSizeSpec(QStringLiteral("LineEdit"));
+      const frame_spec fspec1 = getFrameSpec(QStringLiteral("IndicatorSpinBox"));
+      const size_spec sspec = getSizeSpec(QStringLiteral("IndicatorSpinBox"));
       if (sb)
       {
         QString maxTxt = spinMaxText(sb);
@@ -12809,7 +12808,7 @@ QSize Style::sizeFromContents(ContentsType type,
         const frame_spec fspec = getFrameSpec(group);
         const size_spec sspec = getSizeSpec(group);
         label_spec lspec = getLabelSpec(group);
-        const frame_spec fspec1 = getFrameSpec("LineEdit");
+        const frame_spec fspec1 = getFrameSpec(QStringLiteral("LineEdit"));
 
         QFont f;
         if (widget) f = widget->font();
@@ -12831,7 +12830,7 @@ QSize Style::sizeFromContents(ContentsType type,
         else hasIcon = true;
 
         s = QSize(defaultSize.width(),
-                  sizeCalculated(f,fspec,lspec,sspec,"W",
+                  sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),
                                  hasIcon ? opt->iconSize : QSize()).height());
         if (opt->editable)
         { // consider the top and bottom frames of lineedits inside editable combos
@@ -13123,9 +13122,9 @@ QSize Style::sizeFromContents(ContentsType type,
         const size_spec sspec = getSizeSpec(group);
         frame_spec fspec1;
         if (tspec_.merge_menubar_with_toolbar)
-          fspec1 = getFrameSpec("Toolbar");
+          fspec1 = getFrameSpec(QStringLiteral("Toolbar"));
         else
-          fspec1 = getFrameSpec("MenuBar");
+          fspec1 = getFrameSpec(QStringLiteral("MenuBar"));
         /* needed for putting menubar-items inside menubar frame */
         fspec.top += fspec1.top+fspec1.bottom;
 
@@ -13484,8 +13483,8 @@ QSize Style::sizeFromContents(ContentsType type,
           qstyleoption_cast<const QStyleOptionViewItem*>(option);
       if (opt)
       {
-        const frame_spec fspec = getFrameSpec("ItemView");
-        const frame_spec fspec1 = getFrameSpec("PanelButtonCommand");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
+        const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonCommand"));
         int h = opt->font.pointSize() + fspec.top + fspec.bottom + fspec1.top + fspec1.bottom;
         if (h > s.height())
           s.setHeight(h);
@@ -13495,7 +13494,7 @@ QSize Style::sizeFromContents(ContentsType type,
     }
 
     case CT_TabWidget : {
-      const frame_spec fspec = getFrameSpec("TabFrame");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("TabFrame"));
       s = defaultSize + QSize(fspec.left+fspec.right,
                               fspec.top+fspec.bottom);
 
@@ -13557,7 +13556,7 @@ QSize Style::sizeFromContents(ContentsType type,
       QFont f;
       if (widget) f = widget->font();
       else f = QApplication::font();
-      const label_spec lspec = getLabelSpec("Progressbar");
+      const label_spec lspec = getLabelSpec(QStringLiteral("Progressbar"));
       if (lspec.boldFont) f.setWeight(lspec.boldness);
 
       if (!isKisSlider_ && tspec_.progressbar_thickness > 0
@@ -13574,7 +13573,7 @@ QSize Style::sizeFromContents(ContentsType type,
         return s;
       }
       // the label of an ordianry progressbar should fit in its interior
-      const frame_spec fspec = getFrameSpec("Progressbar");
+      const frame_spec fspec = getFrameSpec(QStringLiteral("Progressbar"));
       if (isVertical)
         s.rwidth() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
       else
@@ -13679,7 +13678,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                               opt->rect,
                               subElementRect(isRadio ? SE_RadioButtonContents : SE_CheckBoxContents,
                                              opt, widget));
-        const label_spec lspec = getLabelSpec(isRadio ? "RadioButton" : "CheckBox");
+        const label_spec lspec = getLabelSpec(isRadio ? QStringLiteral("RadioButton") : QStringLiteral("CheckBox"));
         if (opt->direction == Qt::RightToLeft)
           cr.adjust(lspec.right, 0 , -lspec.left, 0);
         else
@@ -13735,7 +13734,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
       if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
       {
         if (option->state & State_Selected)
-          r = interiorRect(option->rect, getFrameSpec("ItemView"));
+          r = interiorRect(option->rect, getFrameSpec(QStringLiteral("ItemView")));
         else
           r = option->rect.adjusted(1,1,-1,-1);
       }
@@ -13776,9 +13775,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_ProgressBarGroove : return option->rect;
 
     case SE_LineEditContents : {
-      frame_spec fspec = getFrameSpec("LineEdit");
-      label_spec lspec = getLabelSpec("LineEdit");
-      size_spec sspec = getSizeSpec("LineEdit");
+      frame_spec fspec = getFrameSpec(QStringLiteral("LineEdit"));
+      label_spec lspec = getLabelSpec(QStringLiteral("LineEdit"));
+      size_spec sspec = getSizeSpec(QStringLiteral("LineEdit"));
       /* when editing itemview texts, a thin frame is always drawn
          (see PE_PanelLineEdit) */
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
@@ -13809,18 +13808,18 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
             sspec.incrementW = false;
           }
           if (qobject_cast<QComboBox*>(widget->parentWidget())
-              && widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+              && widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
           { // the label spacing isn't added at CT_ComboBox
             lspec.top = qMin(lspec.top,2);
             lspec.bottom = qMin(lspec.bottom,2);
-            if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+            if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
             {
               fspec.top = qMin(fspec.left,3);
               fspec.bottom = qMin(fspec.bottom,3);
               lspec.top = lspec.bottom = 0;
             }
           }
-          else if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,"W",QSize()).height())
+          else if (widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
           {
             fspec.top = qMin(fspec.left,3);
             fspec.bottom = qMin(fspec.bottom,3);
@@ -13842,7 +13841,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
                                         + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
               || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && p->width() < option->rect.width() + 2*tspec_.spin_button_width
-                                                       + getFrameSpec("IndicatorSpinBox").right))
+                                                       + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
@@ -13887,7 +13886,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           {
             rect.adjust(-fspec.left-lspec.left+3, 0, 0, 0);
             int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left
-                                                          : getFrameSpec("ComboBox").left;
+                                                          : getFrameSpec(QStringLiteral("ComboBox")).left;
             if (widget->width() < cb->width()
                                   - (tspec_.square_combo_button
                                        ? qMax(COMBO_ARROW_LENGTH, cb->height()-arrowFrameSize)
@@ -13943,7 +13942,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
         Qt::Alignment align = opt->displayAlignment;
         QStyleOptionViewItem::Position pos = opt->decorationPosition;
-        const label_spec lspec = getLabelSpec("ItemView");
+        const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
 
         /* The right and left text margins are added in
            PM_FocusFrameHMargin, so there's no need to this.
@@ -13963,7 +13962,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
         /* also add the top and bottom frame widths
            because they aren't added in qcommonstyle.cpp */
-        const frame_spec fspec = getFrameSpec("ItemView");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
         if (align & Qt::AlignTop)
         {
           if (!hasIcon || pos != QStyleOptionViewItem::Top)
@@ -14043,7 +14042,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
         {
           QStyleOptionViewItem::Position pos = opt->decorationPosition;
-          const frame_spec fspec = getFrameSpec("ItemView");
+          const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
           if (pos == QStyleOptionViewItem::Left)
             r.adjust(fspec.left, 0, fspec.left, 0);
           else if (pos == QStyleOptionViewItem::Right)
@@ -14063,8 +14062,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt && !opt->text.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
       { // as in Kate's preferences for its default text style
-        const frame_spec fspec = getFrameSpec("PanelButtonCommand");
-        const label_spec lspec = getLabelSpec("PanelButtonCommand");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("PanelButtonCommand"));
+        const label_spec lspec = getLabelSpec(QStringLiteral("PanelButtonCommand"));
         r.adjust(-fspec.left-lspec.left,
                  -fspec.top-lspec.top,
                  fspec.right+lspec.right,
@@ -14216,7 +14215,7 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
           if (!tw || !tw->documentMode())
           {
             docMode = false;
-            const frame_spec fspec = getFrameSpec("TabFrame");
+            const frame_spec fspec = getFrameSpec(QStringLiteral("TabFrame"));
             left = fspec.left + 1;
             top = fspec.top + 1;
             right = fspec.right + 1;
@@ -14514,8 +14513,8 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
 
         bool atBottom = true;
         int offset = 0;
-        const frame_spec fspec = getFrameSpec("Tab");
-        const label_spec lspec = getLabelSpec("Tab");
+        const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
+        const label_spec lspec = getLabelSpec(QStringLiteral("Tab"));
         switch (tab->shape) {
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
@@ -14619,7 +14618,7 @@ QRect Style::subControlRect(ComplexControl control,
         case SC_TitleBarSysMenu :
         case SC_TitleBarContextHelpButton : {
           // level the buttons with the title
-          const label_spec lspec = getLabelSpec("TitleBar");
+          const label_spec lspec = getLabelSpec(QStringLiteral("TitleBar"));
           int v = (lspec.top - lspec.bottom)/2;
           return QCommonStyle::subControlRect(control,option,subControl,widget).adjusted(0, v, 0, v);
         }
@@ -14631,9 +14630,9 @@ QRect Style::subControlRect(ComplexControl control,
     case CC_SpinBox : {
       int sw = tspec_.spin_button_width;
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
-      frame_spec fspec = getFrameSpec("IndicatorSpinBox");
-      frame_spec fspecLE = getFrameSpec("LineEdit");
-      const size_spec sspecLE = getSizeSpec("LineEdit");
+      frame_spec fspec = getFrameSpec(QStringLiteral("IndicatorSpinBox"));
+      frame_spec fspecLE = getFrameSpec(QStringLiteral("LineEdit"));
+      const size_spec sspecLE = getSizeSpec(QStringLiteral("LineEdit"));
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
@@ -14742,21 +14741,21 @@ QRect Style::subControlRect(ComplexControl control,
           frame_spec fspec;
           if (opt && opt->editable && (tspec_.combo_as_lineedit || tspec_.square_combo_button))
           {
-            fspec = getFrameSpec("LineEdit");
+            fspec = getFrameSpec(QStringLiteral("LineEdit"));
             arrowFrameSize = tspec_.combo_as_lineedit
                                ? rtl ? fspec.left : fspec.right
-                               : rtl ? getFrameSpec("ComboBox").left
-                                     : getFrameSpec("ComboBox").right;
+                               : rtl ? getFrameSpec(QStringLiteral("ComboBox")).left
+                                     : getFrameSpec(QStringLiteral("ComboBox")).right;
           }
           else
           {
-            fspec = getFrameSpec("ComboBox");
+            fspec = getFrameSpec(QStringLiteral("ComboBox"));
             arrowFrameSize = rtl ? fspec.left : fspec.right;
           }
-          const label_spec combolspec =  getLabelSpec("ComboBox");
+          const label_spec combolspec =  getLabelSpec(QStringLiteral("ComboBox"));
           if (isLibreoffice_)
           {
-            const frame_spec Fspec = getFrameSpec("LineEdit");
+            const frame_spec Fspec = getFrameSpec(QStringLiteral("LineEdit"));
             margin = qMin(Fspec.left,3);
           }
           else
@@ -14785,9 +14784,9 @@ QRect Style::subControlRect(ComplexControl control,
               qstyleoption_cast<const QStyleOptionComboBox*>(option);
           frame_spec fspec;
           if (opt && opt->editable && tspec_.combo_as_lineedit)
-            fspec = getFrameSpec("LineEdit");
+            fspec = getFrameSpec(QStringLiteral("LineEdit"));
           else
-            fspec = getFrameSpec("ComboBox");
+            fspec = getFrameSpec(QStringLiteral("ComboBox"));
           int combo_arrow_length = tspec_.square_combo_button
                                     ? qMax(COMBO_ARROW_LENGTH, h-(rtl ? fspec.left : fspec.right))
                                     : COMBO_ARROW_LENGTH;
@@ -14809,8 +14808,8 @@ QRect Style::subControlRect(ComplexControl control,
           else
           { // take into account the needed space
             QRect r = option->rect;
-            frame_spec fspec = getFrameSpec("MenuItem");
-            const label_spec lspec = getLabelSpec("MenuItem");
+            frame_spec fspec = getFrameSpec(QStringLiteral("MenuItem"));
+            const label_spec lspec = getLabelSpec(QStringLiteral("MenuItem"));
             int space = fspec.left+lspec.left + fspec.right+lspec.right
                         - 6; // assuming a maximum value forced by Qt
 
@@ -14833,7 +14832,7 @@ QRect Style::subControlRect(ComplexControl control,
               else hasIcon = true;
             }
 
-            fspec = getFrameSpec("Menu");
+            fspec = getFrameSpec(QStringLiteral("Menu"));
             space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
                      + (!noComposite_ ? 2*settings_->getCompositeSpec().menu_shadow_depth : 0)
                      - extraComboWidth(opt, hasIcon);
@@ -15113,7 +15112,7 @@ QRect Style::subControlRect(ComplexControl control,
                 /* lack of space */
                 if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
-                  const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+                  const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
                   if (w < opt->iconSize.width()+fspec1.left
                           +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
@@ -15197,7 +15196,7 @@ QRect Style::subControlRect(ComplexControl control,
                 /* lack of space */
                 if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
-                  const frame_spec fspec1 = getFrameSpec("PanelButtonTool");
+                  const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
                   if (w < opt->iconSize.width()+fspec1.left
                           +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
                   {
@@ -15265,7 +15264,7 @@ QRect Style::subControlRect(ComplexControl control,
       {
         frame_spec fspec;
         default_frame_spec(fspec);
-        label_spec lspec = getLabelSpec("GroupBox");
+        label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
         size_spec sspec;
         default_size_spec(sspec);
 
@@ -15292,7 +15291,7 @@ QRect Style::subControlRect(ComplexControl control,
         QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
         int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
         int checkHeight = pixelMetric(PM_IndicatorHeight);
-        fspec = getFrameSpec("GroupBox");
+        fspec = getFrameSpec(QStringLiteral("GroupBox"));
         int labelMargin = (tspec_.groupbox_top_label ? 0 : (rtl ? fspec.right : fspec.left) + 10);
 
         switch (subControl) {
@@ -15320,7 +15319,7 @@ QRect Style::subControlRect(ComplexControl control,
             int top = 0;
             if (!tspec_.groupbox_top_label)
               top = qMax(checkHeight,textSize.height())/2;
-            lspec = getLabelSpec("GroupBox");
+            lspec = getLabelSpec(QStringLiteral("GroupBox"));
             return labelRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec, lspec)
                    .adjusted(0,top,0,0);
           }
@@ -15357,7 +15356,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 {
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
-      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
       int s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -15374,10 +15373,10 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
             || isStylableToolbar(widget) // doesn't happen
             || mergedToolbarHeight(widget) > 0)
         {
-          col = getFromRGBA(getLabelSpec("Toolbar").normalColor);
+          col = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
         }
         else if (widget)
-          col = getFromRGBA(getLabelSpec("MenuBar").normalColor);
+          col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
         if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
             && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
         {
@@ -15396,7 +15395,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       else break;
     }
     case SP_ToolBarVerticalExtensionButton : {
-      indicator_spec dspec = getIndicatorSpec("IndicatorArrow");
+      indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
       int s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -15405,7 +15404,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       if (!hspec_.single_top_toolbar
           && themeRndr_ && themeRndr_->isValid()
-          && enoughContrast(getFromRGBA(getLabelSpec("Toolbar").normalColor),
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor),
                             getFromRGBA(cspec_.windowTextColor)))
       {
         dspec.element = "flat-"+dspec.element;
@@ -15461,7 +15460,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
                    (option->state & State_Sunken) ? "pressed" :
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-minimize-"+status,QRect(0,0,s,s)))
+      if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-minimize-"+status,QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -15472,7 +15471,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-maximize-normal",QRect(0,0,s,s)))
+      if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-maximize-normal",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -15496,10 +15495,10 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       if (standardIcon == SP_DockWidgetCloseButton
           || qobject_cast<const QDockWidget*>(widget))
       {
-        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-close",QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec(QStringLiteral("Dock")).element+"-close",QRect(0,0,s,s));
       }
       if (!rendered)
-        rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-close-"+status,QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-close-"+status,QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);
       else break;
@@ -15511,7 +15510,7 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec("TitleBar").element+"-menu-normal",QRect(0,0,s,s)))
+      if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-menu-normal",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -15532,9 +15531,9 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
       }
       bool rendered(false);
       if (qobject_cast<const QDockWidget*>(widget))
-        rendered = renderElement(&painter,getIndicatorSpec("Dock").element+"-restore",QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec(QStringLiteral("Dock")).element+"-restore",QRect(0,0,s,s));
       if (!rendered)
-        rendered = renderElement(&painter,getIndicatorSpec("TitleBar").element+"-restore-"+status,QRect(0,0,s,s));
+        rendered = renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-restore-"+status,QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);
       else break;
@@ -15542,44 +15541,44 @@ QIcon Style::standardIcon(StandardPixmap standardIcon,
     /* in these cases too, Qt sets the size to 24 in standardPixmap() */
     case SP_DialogCancelButton :
     case SP_DialogNoButton : {
-       QIcon icn = QIcon::fromTheme(QLatin1String("dialog-cancel"),
-                                    QIcon::fromTheme(QLatin1String("process-stop")));
+       QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-cancel"),
+                                    QIcon::fromTheme(QStringLiteral("process-stop")));
        if (!icn.isNull()) return icn;
        else break;
     }
     case SP_DialogSaveButton : {
-       QIcon icn = QIcon::fromTheme(QLatin1String("document-save"));
+       QIcon icn = QIcon::fromTheme(QStringLiteral("document-save"));
        if (!icn.isNull()) return icn;
        else break;
     }
     case SP_DialogResetButton : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("edit-clear"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("edit-clear"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogHelpButton : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("help-contents"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("help-contents"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogDetailedView : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-details"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-details"));
       if (!icn.isNull()) return icn;
       else break;
     }
     // these are for LXQt file dialog
     case SP_FileDialogListView : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-text"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-text"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogInfoView : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("dialog-information")); // document-properties
+      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-information")); // document-properties
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogContentsView : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("view-list-icons"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-icons"));
       if (!icn.isNull()) return icn;
       else break;
     }

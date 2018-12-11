@@ -235,7 +235,7 @@ void Style::renderFrame(QPainter *painter,
 
   bool isInactive(false);
   QString state;
-  QStringList list = element.split("-");
+  QStringList list = element.split(QStringLiteral("-"));
   int count = list.count();
   if (count > 2 && list.at(count - 1) == "inactive")
   {
@@ -246,7 +246,7 @@ void Style::renderFrame(QPainter *painter,
   {
     state = "-" + list.at(count - 1);
     QStringList states;
-    states << "-normal" << "-focused" << "-pressed" << "-toggled";
+    states << QStringLiteral("-normal") << QStringLiteral("-focused") << QStringLiteral("-pressed") << QStringLiteral("-toggled");
     if (!states.contains(state))
       state = QString();
   }

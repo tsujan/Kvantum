@@ -25,8 +25,7 @@
 #include <QMenuBar>
 
 namespace Kvantum {
-ShortcutHandler::ShortcutHandler(QObject *parent) : QObject(parent),
-                                                    itsAltDown_(false)
+ShortcutHandler::ShortcutHandler(QObject *parent) : QObject(parent), itsAltDown_(false)
 {
 }
 

@@ -130,7 +130,7 @@ private:
   public:
     ExceptionId (const QString &value)
     {
-      const QStringList args (value.split ("@"));
+      const QStringList args (value.split (QStringLiteral("@")));
       if (args.isEmpty())
         return;
       second = args[0].trimmed();
