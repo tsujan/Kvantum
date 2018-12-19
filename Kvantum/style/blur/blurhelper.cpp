@@ -113,6 +113,14 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
   if (!widget->isVisible()) return QRegion();
 
+  QRect rect = widget->rect();
+  QRegion wMask = widget->mask();
+
+  /* blurring may not be suitable when the available
+     painting area is restricted by a widget mask */
+  if (!wMask.isEmpty() && wMask != QRegion(rect))
+    return QRegion();
+
   QList<int> r;
   if ((qobject_cast<QMenu*>(widget)
        && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not a detached menu
@@ -127,7 +135,6 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   {
     r = tooltipShadow_;
   }
-  QRect rect = widget->rect();
 
   qreal dpr = 1.0;
 #if QT_VERSION >= 0x050500
@@ -138,14 +145,14 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 #endif
 
   /* trimming the region isn't good for us */
-  return (widget->mask().isEmpty()
+  return (wMask.isEmpty()
             ? r.isEmpty()
                 ? rect
                 : rect.adjusted (qRound(dpr * static_cast<qreal>(r.at(0))),
                                  qRound(dpr * static_cast<qreal>(r.at(1))),
                                  -qRound(dpr * static_cast<qreal>(r.at(2))),
                                  -qRound(dpr * static_cast<qreal>(r.at(3))))
-            : widget->mask());
+            : wMask); // is the same as rect (see above)
 }
 /*************************/
 void BlurHelper::update (QWidget* widget) const
