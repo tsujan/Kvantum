@@ -968,7 +968,7 @@ int Style::mergedToolbarHeight(const QWidget *menubar) const
   if (!tspec_.merge_menubar_with_toolbar || isPlasma_) return 0;
   QWidget *p = getParent(menubar,1);
   if (!p) return 0;
-  QList<QToolBar*> tList = p->findChildren<QToolBar*>();
+  QList<QToolBar*> tList = p->findChildren<QToolBar*>(QString(), Qt::FindDirectChildrenOnly);
   if (!tList.isEmpty())
   {
     for (int i = 0; i < tList.count(); ++i)

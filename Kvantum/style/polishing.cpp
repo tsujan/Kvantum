@@ -747,25 +747,32 @@ void Style::polish(QWidget *widget)
   /* labels on a stylable toolbar (as in Audacious) */
   else if (isStylableToolbar(widget, true))
   {
-    QColor tCol = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
     QPalette palette = widget->palette();
-    if (enoughContrast(palette.color(QPalette::WindowText), tCol))
+    if (enoughContrast(palette.color(QPalette::WindowText), toolbarTextColor))
     {
-      const QList<QLabel*> labels = widget->findChildren<QLabel*>();
-      for (QLabel *label : labels)
+      const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
+      if (!labels.isEmpty())
       {
-        QPalette lPalette = label->palette();
-        lPalette.setColor(QPalette::Active, QPalette::ButtonText, tCol);
-        lPalette.setColor(QPalette::Active, QPalette::WindowText, tCol);
-        lPalette.setColor(QPalette::Active, QPalette::Text, tCol);
-        lPalette.setColor(QPalette::Inactive, QPalette::ButtonText, tCol);
-        lPalette.setColor(QPalette::Inactive, QPalette::WindowText, tCol);
-        lPalette.setColor(QPalette::Inactive, QPalette::Text, tCol);
-        tCol.setAlpha(102); // 0.4 * tCol.alpha()
-        lPalette.setColor(QPalette::Disabled, QPalette::Text,tCol);
-        lPalette.setColor(QPalette::Disabled, QPalette::WindowText,tCol);
-        lPalette.setColor(QPalette::Disabled, QPalette::ButtonText,tCol);
-        label->setPalette(lPalette);
+        QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
+        if (!inactiveCol.isValid())
+          inactiveCol = toolbarTextColor;
+        QColor disabledCol = toolbarTextColor;
+        disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+
+        for (QLabel *label : labels)
+        {
+          QPalette lPalette = label->palette();
+          lPalette.setColor(QPalette::Active, QPalette::ButtonText, toolbarTextColor);
+          lPalette.setColor(QPalette::Active, QPalette::WindowText, toolbarTextColor);
+          lPalette.setColor(QPalette::Active, QPalette::Text, toolbarTextColor);
+          lPalette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
+          lPalette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
+          lPalette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
+          lPalette.setColor(QPalette::Disabled, QPalette::Text,disabledCol);
+          lPalette.setColor(QPalette::Disabled, QPalette::WindowText,disabledCol);
+          lPalette.setColor(QPalette::Disabled, QPalette::ButtonText,disabledCol);
+          label->setPalette(lPalette);
+        }
       }
     }
   }
