@@ -419,22 +419,22 @@ A value of 1.00 means no change.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="784"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrasteffekt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sättigung:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="797"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensität:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="804"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrast:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="881"/>
@@ -610,7 +610,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1884"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialogschaltflächen-Layout:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
