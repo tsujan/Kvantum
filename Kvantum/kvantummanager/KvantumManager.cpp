@@ -114,12 +114,14 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     for (int i = 0; i < widgets.count(); ++i)
     {
         QWidget *w = widgets.at (i);
+        QString tip = w->toolTip();
+        if (tip.isEmpty()) continue;
         if (w != ui->tab && w->whatsThis().isEmpty())
-        {
-            QString tip = w->toolTip();
-            if (!tip.isEmpty())
-                w->setWhatsThis (tooTipToWhatsThis (tip));
-        }
+            w->setWhatsThis (tooTipToWhatsThis (tip));
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+        /* sadly, Qt 5.12 sees most tooltip texts as rich texts */
+        w->setToolTip ("<p style='white-space:pre'>" + tip + "</p>");
+#endif
     }
     showAnimated (ui->installLabel, 1500);
 
@@ -1581,8 +1583,12 @@ void KvantumManager::selectionChanged (const QString &txt)
     }
 
     QString comment = getComment (txt);
-    ui->comboBox->setToolTip (comment);
     ui->comboBox->setWhatsThis (tooTipToWhatsThis (comment));
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    ui->comboBox->setToolTip ("<p style='white-space:pre'>" + comment + "</p>");
+#else
+    ui->comboBox->setToolTip (comment);
+#endif
 }
 /*************************/
 void KvantumManager::assignAppTheme (const QString &previousTheme, const QString &newTheme)
@@ -1618,8 +1624,12 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
     ui->removeAppButton->setDisabled (appThemes_.isEmpty());
 
     QString comment = getComment (newTheme, false);
-    ui->appCombo->setToolTip (comment);
     ui->appCombo->setWhatsThis (tooTipToWhatsThis (comment));
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    ui->appCombo->setToolTip ("<p style='white-space:pre'>" + comment + "</p>");
+#else
+    ui->appCombo->setToolTip (comment);
+#endif
 }
 /*************************/
 void KvantumManager::updateThemeList (bool updateAppThemes)
@@ -1918,8 +1928,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     }
 
     QString comment = getComment (ui->comboBox->currentText());
-    ui->comboBox->setToolTip (comment);
     ui->comboBox->setWhatsThis (tooTipToWhatsThis (comment));
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    ui->comboBox->setToolTip ("<p style='white-space:pre'>" + comment + "</p>");
+#else
+    ui->comboBox->setToolTip (comment);
+#endif
 
     /* connect to combobox signal */
 #if QT_VERSION >= 0x050700
@@ -1936,8 +1950,12 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
         if (!curTxt.isEmpty())
         {
             comment = getComment (curTxt, false);
-            ui->appCombo->setToolTip (comment);
             ui->appCombo->setWhatsThis (tooTipToWhatsThis (comment));
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+            ui->appCombo->setToolTip ("<p style='white-space:pre'>" + comment + "</p>");
+#else
+            ui->appCombo->setToolTip (comment);
+#endif
 
             curTxt = curTxt.split (" ").first();
             if (curTxt == "Kvantum")
