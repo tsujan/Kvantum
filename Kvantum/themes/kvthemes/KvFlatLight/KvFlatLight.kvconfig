@@ -22,6 +22,7 @@ slider_handle_width=22
 slider_handle_length=18
 tickless_slider_handle_size=18
 center_toolbar_handle=true
+toolbar_interior_spacing=2
 check_size=16
 menubar_mouse_tracking=true
 toolbutton_style=0

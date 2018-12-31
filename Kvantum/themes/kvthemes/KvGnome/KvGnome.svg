@@ -254,9 +254,9 @@
 <path style="opacity:.35;fill:url(#radialGradient6744)" id="menu-shadow-bottomright" d="m 80,716 v 7 h 7 v -7 z"/>
 </g>
 <g style="fill:#b74aff">
-<rect width="2.5" x="51" y="715.9" height="7.1" id="menu-shadow-hint-bottom"/>
-<rect width="2.5" x="49.987324" y="648.9" height="7.1" id="menu-shadow-hint-top"/>
-<rect width="2.5" x="-685" y="80" height="7.1" id="menu-shadow-hint-right" transform="rotate(-90)"/>
+<rect width="2.5" x="51" y="716" height="7" id="menu-shadow-hint-bottom"/>
+<rect width="2.5" x="49.987324" y="649" height="7" id="menu-shadow-hint-top"/>
+<rect width="2.5" x="-685" y="80" height="7" id="menu-shadow-hint-right" transform="rotate(-90)"/>
 </g>
 <g style="fill:#3daee9;fill-rule:evenodd" id="group-normal-left" transform="matrix(0.66666667,0,0,1,318.33333,-344.5)">
 <rect width="6" x="-106" y="-1148.5" height="30" style="fill-opacity:0" id="rect5991" transform="scale(-1)"/>
@@ -1086,7 +1086,7 @@
 <path style="opacity:.3;fill:url(#linearGradient6752)" id="menu-shadow-left0" d="m 16,656 v 60 h 6 v -60 z"/>
 <path style="fill:#4a90d9" id="path5403" d="m 19.428572,656 v 60 H 22 v -60 z"/>
 </g>
-<rect width="2.5" x="-685" y="15" height="4.1" style="fill:#b74aff" id="menu-shadow-hint-left" transform="rotate(-90)"/>
+<rect width="2.5" x="-685" y="15" height="4" style="fill:#b74aff" id="menu-shadow-hint-left" transform="rotate(-90)"/>
 <path style="opacity:.93;fill:#e9e9e9;fill-rule:evenodd" id="window-normal" d="m 330,870 h 32 v 32 h -32 z"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-focused" id="arrow-up-disabled" transform="translate(40)"/>
 <use width="100%" x="0" y="0" height="100%" style="opacity:.3" xlink:href="#arrow-up-focused" id="arrow-down-disabled" transform="matrix(1,0,0,-1,40,377.60198)"/>

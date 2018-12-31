@@ -57,10 +57,13 @@ static inline bool isPrimaryToolBar(QWidget *w)
   {
     if (!tb || Qt::Horizontal == tb->orientation())
     {
+      QWidget *p = w->parentWidget();
+      if (p != w->window()) return false; // inside a dock
+
       if (0 == w->pos().y())
         return true;
 
-      if (QMainWindow *mw = qobject_cast<QMainWindow *>(w->window()))
+      if (QMainWindow *mw = qobject_cast<QMainWindow *>(p))
       {
         if (QWidget *menuW = mw->menuWidget())
           return menuW->isVisible() && w->pos().y() <= menuW->height()+1;

@@ -747,16 +747,13 @@
 </g>
 <path style="fill:url(#linearGradient4834);fill-rule:evenodd" id="tframe-normal" d="m 140,765 h 10 v 10 h -10 z"/>
 <use width="100%" height="100%" xlink:href="#splitter-grip-focused" id="splitter-grip-pressed" transform="translate(20,0)"/>
-<g id="tab-close-pressed" transform="translate(52,330)">
-<circle cx="225" cy="460" style="opacity:0;fill-rule:evenodd" r="9"/>
-<circle cx="225" cy="460" style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-width:3" r="4.5000687"/>
-</g>
-<use width="100%" height="100%" style="opacity:.7" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-19,0)"/>
-<use width="100%" height="100%" style="opacity:.3" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-36,0)"/>
-<g style="opacity:.2" id="tab-close-disabled" transform="translate(71,330)">
+<g style="opacity:.3" id="tab-close-normal" transform="translate(16,330)">
 <circle cx="225" cy="460" style="opacity:0;fill-rule:evenodd" r="9"/>
 <circle cx="225" cy="460" style="opacity:1;fill:none;fill-rule:evenodd;stroke:#fff;stroke-width:3" r="4.5"/>
 </g>
+<use width="100%" height="100%" style="opacity:.67" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(56)"/>
+<path style="opacity:.95;fill:#fff;fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 261.125,782 c -4.41827,0 -8,3.58172 -8,8 0,4.41827 3.58172,8 8,8 4.41827,0 8,-3.58172 8,-8 0,-4.41827 -3.58172,-8 -8,-8 z  m -2.9691,3.4752 2.9691,2.9692 2.9691,-2.9692 1.5556,1.5556 -2.9692,2.9691 2.9692,2.9691 -1.5556,1.5556 -2.9691,-2.9692 -2.9691,2.9692 -1.5556,-1.5556 2.9692,-2.9691 -2.9692,-2.9691 z "/>
+<use width="100%" height="100%" style="opacity:.6" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(18)"/>
 <g id="checkbox-checked-normal">
 <use width="100%" height="100%" xlink:href="#checkbox-normal" transform="translate(40.069195,0.0431468)"/>
 <path style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-linecap:round;stroke-width:3.375" d="m 364.0802,605.8751 3.12,3.0371 9,-9"/>
@@ -776,20 +773,6 @@
 <path style="fill:url(#linearGradient11585)" d="m 151,1101 v 16.5004 h 4 v -16.5 h -4 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topright" id="scrollbarslider-normal-bottomright" transform="matrix(1,0,0,-1,0,1670.5006)"/>
-<g id="common-focused-left" transform="matrix(1.3333333,0,0,1,-208,-302)">
-<path style="fill:#215d9c" d="m 271.5,1170 0,30 1.5,0 0,-30 z"/>
-<path style="fill:#282828;fill-rule:evenodd" d="m 270,1170 0,30 1.5,0 0,-30 z"/>
-</g>
-<g id="common-focused-topleft" transform="matrix(1.3333333,0,0,1.3333333,-208,-692)">
-<path style="fill:#215d9c" d="m 273,1168.5 c -0.79457,0 -1.5,0.75 -1.5,1.5 h 1.5 z "/>
-<path style="fill:#282828" d="m 273,1167 c -1.5,0 -3,1.5 -3,3 h 1.5 c 0,-0.75 0.70444,-1.5 1.5,-1.5 z "/>
-</g>
-<use width="100%" height="100%" xlink:href="#common-focused-left" id="common-focused-top" transform="matrix(0,1,-1,0,1054,712)"/>
-<use width="100%" height="100%" xlink:href="#common-focused-topleft" id="common-focused-topright" transform="matrix(0,1,-1,0,1054,712)"/>
-<use width="100%" height="100%" xlink:href="#common-focused-left" id="common-focused-right" transform="matrix(-1,0,0,1,342,0)"/>
-<use width="100%" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,342,1766)"/>
-<use width="100%" height="100%" xlink:href="#common-focused-left" id="common-focused-bottom" transform="matrix(0,-1,1,0,-712,1054)"/>
-<use width="100%" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(0,-1,1,0,-712,1054)"/>
 <rect width="10" x="140" y="786" height="10" style="fill:#393f3f;fill-rule:evenodd" id="dialog-normal"/>
 <circle cx="110" cy="585" style="fill:url(#radialGradient1508);fill-rule:evenodd;stroke:#2e3636;stroke-linejoin:round;stroke-linecap:round" id="slidercursor-tickless-normal" r="9.5"/>
 <circle cx="140" cy="585" style="fill:url(#radialGradient1563);fill-rule:evenodd;stroke:#2e3636;stroke-linejoin:round;stroke-linecap:round" r="9.5" id="slidercursor-tickless-focused"/>

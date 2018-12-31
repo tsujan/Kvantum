@@ -171,27 +171,68 @@ void Style::polish(QWidget *widget)
 
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
-  /* respect the toolbar text color */
+  /* respect the toolbar text color if the widget is shown after
+     its parent toolbar and without repainting it (unlike in CE_ToolBar) */
   const label_spec tLspec = getLabelSpec(QStringLiteral("Toolbar"));
-  QColor toolbarTextColor = getFromRGBA(tLspec.normalColor);
-  QColor windowTextColor = getFromRGBA(cspec_.windowTextColor);
-  if (toolbarTextColor.isValid() && toolbarTextColor != windowTextColor)
+  QColor tColor = getFromRGBA(tLspec.normalColor);
+  if (enoughContrast(getFromRGBA(cspec_.textColor), tColor)
+      && !qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+      && isStylableToolbar(pw))
   {
-    if ((!qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
-         && !qobject_cast<QLineEdit*>(widget)
-         && isStylableToolbar(pw)) // Krita, Amarok
-        || (widget->inherits("AnimatedLabelStack") // Amarok
-            && isStylableToolbar(getParent(pw,1))))
+    QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
+    if (!inactiveCol.isValid())
+      inactiveCol = tColor;
+    QColor disabledCol = tColor;
+    disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+
+    /* as in Cantata (previously, also Krita and Amarok) */
+    QPalette palette = widget->palette();
+    palette.setColor(QPalette::Active, QPalette::ButtonText, tColor);
+    palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
+    palette.setColor(QPalette::Active, QPalette::WindowText, tColor);
+    palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
+    palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledCol);
+    if (qobject_cast<QLabel*>(widget))
     {
-      QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
-      if (!inactiveCol.isValid())
-        inactiveCol = toolbarTextColor;
-      QPalette palette = widget->palette();
-      palette.setColor(QPalette::Active,widget->foregroundRole(),toolbarTextColor);
-      palette.setColor(QPalette::Inactive,widget->foregroundRole(),inactiveCol);
-      palette.setColor(QPalette::Active,QPalette::WindowText,toolbarTextColor); // for KAction in locationbar as in K3b
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,inactiveCol);
-      widget->setPalette(palette);
+      palette.setColor(QPalette::Active, QPalette::Text, tColor);
+      palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
+      palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+    }
+    widget->setPalette(palette);
+
+    if (qobject_cast<QLineEdit*>(widget))
+    {
+      if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+          || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+      {
+        QPalette palette = widget->palette();
+        if (palette.color(QPalette::Active, QPalette::Text) != tColor)
+        {
+          palette.setColor(QPalette::Active, QPalette::Text, tColor);
+          palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
+          palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+          widget->setPalette(palette);
+        }
+      }
+    }
+    else if (qobject_cast<QComboBox*>(widget)
+             && (!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+                 || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()))
+    {
+      tColor = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
+      if (tColor.isValid())
+      {
+        QColor disabledCol = tColor;
+        disabledCol.setAlpha(102);
+        QPalette palette = widget->palette();
+        if (tColor != palette.color(QPalette::ButtonText))
+        {
+          palette.setColor(QPalette::ButtonText, tColor);
+          palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledCol);
+          widget->setPalette(palette);
+        }
+      }
     }
   }
 
@@ -741,38 +782,6 @@ void Style::polish(QWidget *widget)
       {
         if (mw->minimumSize() != mw->maximumSize())
           sb->setSizeGripEnabled(true);
-      }
-    }
-  }
-  /* labels on a stylable toolbar (as in Audacious) */
-  else if (isStylableToolbar(widget, true))
-  {
-    QPalette palette = widget->palette();
-    if (enoughContrast(palette.color(QPalette::WindowText), toolbarTextColor))
-    {
-      const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
-      if (!labels.isEmpty())
-      {
-        QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
-        if (!inactiveCol.isValid())
-          inactiveCol = toolbarTextColor;
-        QColor disabledCol = toolbarTextColor;
-        disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
-
-        for (QLabel *label : labels)
-        {
-          QPalette lPalette = label->palette();
-          lPalette.setColor(QPalette::Active, QPalette::ButtonText, toolbarTextColor);
-          lPalette.setColor(QPalette::Active, QPalette::WindowText, toolbarTextColor);
-          lPalette.setColor(QPalette::Active, QPalette::Text, toolbarTextColor);
-          lPalette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
-          lPalette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
-          lPalette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
-          lPalette.setColor(QPalette::Disabled, QPalette::Text,disabledCol);
-          lPalette.setColor(QPalette::Disabled, QPalette::WindowText,disabledCol);
-          lPalette.setColor(QPalette::Disabled, QPalette::ButtonText,disabledCol);
-          label->setPalette(lPalette);
-        }
       }
     }
   }
