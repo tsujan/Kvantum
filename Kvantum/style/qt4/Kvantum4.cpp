@@ -10631,8 +10631,6 @@ void Style::drawComplexControl(ComplexControl control,
             col = getFromRGBA(lspec.focusColor);
           else
             col = getFromRGBA(lspec.normalColor);
-          if (!col.isValid())
-            col = option->palette.color(QPalette::Text);
 
           int talign = Qt::AlignHCenter | Qt::AlignVCenter;
           if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -10655,12 +10653,12 @@ void Style::drawComplexControl(ComplexControl control,
           {
             QColor shadowColor = getFromRGBA(lspec.shadowColor);
             /* the shadow should have enough contrast with the text */
-            if (shadowColor.isValid() && enoughContrast(col, shadowColor))
+            if (enoughContrast(col, shadowColor))
             {
               painter->save();
               if (lspec.a < 255)
                 shadowColor.setAlpha(lspec.a);
-              painter->setPen(QPen(shadowColor));
+              painter->setPen(shadowColor);
               for (int i=0; i<lspec.depth; i++)
                 painter->drawText(textRect.adjusted(lspec.xshift+i,lspec.yshift+i,0,0),
                                   talign,opt->text);
@@ -15102,35 +15100,59 @@ void Style::renderLabel(
     QColor normalColor = getFromRGBA(lspec.normalColor);
     if (state != 0 && !(isPlasma_ && tialign == Qt::ToolButtonIconOnly))
     {
-      QColor focusColor = getFromRGBA(lspec.focusColor);
-      QColor pressColor = getFromRGBA(lspec.pressColor);
-      QColor toggleColor = getFromRGBA(lspec.toggleColor);
-      QColor progColor = getFromRGBA(cspec_.progressIndicatorTextColor);
+      QColor txtCol;
+      switch (state) {
+        case 1:
+          if (isInactive)
+            txtCol = getFromRGBA(lspec.normalInactiveColor);
+          if (!txtCol.isValid())
+            txtCol = normalColor;
+          break;
+        case 2 :
+          if (isInactive)
+            txtCol = getFromRGBA(lspec.focusInactiveColor);
+          if (!txtCol.isValid())
+            txtCol = getFromRGBA(lspec.focusColor);
+          break;
+        case 3 :
+          if (isInactive)
+            txtCol = getFromRGBA(lspec.pressInactiveColor);
+          if (!txtCol.isValid())
+            txtCol = getFromRGBA(lspec.pressColor);
+          break;
+        case 4 :
+          if (isInactive)
+            txtCol = getFromRGBA(lspec.toggleInactiveColor);
+          if (!txtCol.isValid())
+            txtCol = getFromRGBA(lspec.toggleColor);
+          break;
+        default : // -1
+          if (isInactive)
+            txtCol = getFromRGBA(cspec_.progressInactiveIndicatorTextColor);
+          if (!txtCol.isValid())
+            txtCol = getFromRGBA(cspec_.progressIndicatorTextColor);
+          break;
+      }
 
       if (lspec.hasShadow)
       {
-        QColor shadowColor = getFromRGBA(lspec.shadowColor);
-        /* the shadow should have enough contrast with the text */
-        if (shadowColor.isValid()
-            && ((state == 1 && (!normalColor.isValid() || enoughContrast(normalColor, shadowColor)))
-                || (state == 2 && (!focusColor.isValid() || enoughContrast(focusColor, shadowColor)))
-                || (state == 3 && (!pressColor.isValid() || enoughContrast(pressColor, shadowColor)))
-                || (state == 4 && (!toggleColor.isValid() || enoughContrast(toggleColor, shadowColor)))
-                || (state == -1 && (!progColor.isValid() || enoughContrast(progColor, shadowColor)))))
+        QColor shadowColor;
+        if (isInactive)
         {
-          QColor col;
-          if (isInactive)
-          {
-            col = getFromRGBA(lspec.inactiveShadowColor);
-            if (!col.isValid())
-              col = shadowColor;
-          }
-          else
-            col = shadowColor;
+          shadowColor = getFromRGBA(lspec.inactiveShadowColor);
+          if (!shadowColor.isValid())
+            shadowColor = getFromRGBA(lspec.shadowColor);
+        }
+        else
+          shadowColor = getFromRGBA(lspec.shadowColor);
+
+        /* the shadow should have enough contrast with the text */
+        if (enoughContrast(txtCol, shadowColor))
+        {
           painter->save();
           if (lspec.a < 255)
-            col.setAlpha(lspec.a);
-          painter->setPen(QPen(col));
+            shadowColor.setAlpha(lspec.a);
+          painter->setPen(shadowColor);
           for (int i=0; i<lspec.depth; i++)
           {
             int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
@@ -15142,130 +15164,18 @@ void Style::renderLabel(
         }
       }
 
-      if (state == 1)
+      if (txtCol.isValid())
       {
-        QColor col;
-        if (isInactive)
-        {
-          col = getFromRGBA(lspec.normalInactiveColor);
-          if (!col.isValid())
-            col = normalColor;
-        }
-        else
-          col = normalColor;
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(QPen(col));
-          painter->drawText(rtext,talign,text);
+        painter->save();
+        painter->setPen(txtCol);
+        painter->drawText(rtext,talign,text);
+        painter->restore();
+        if (lspec.boldFont)
           painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
+        if (lspec.italicFont)
           painter->restore();
-          return;
-        }
-      }
-      else if (state == 2)
-      {
-        QColor col;
-        if (isInactive)
-        {
-          col = getFromRGBA(lspec.focusInactiveColor);
-          if (!col.isValid())
-            col = focusColor;
-        }
-        else
-          col = focusColor;
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(QPen(col));
-          painter->drawText(rtext,talign,text);
-          painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
-          painter->restore();
-          return;
-        }
-      }
-      else if (state == 3)
-      {
-        QColor col;
-        if (isInactive)
-        {
-          col = getFromRGBA(lspec.pressInactiveColor);
-          if (!col.isValid())
-            col = pressColor;
-        }
-        else
-          col = pressColor;
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(QPen(col));
-          painter->drawText(rtext,talign,text);
-          painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
-          painter->restore();
-          return;
-        }
-      }
-      else if (state == 4)
-      {
-        QColor col;
-        if (isInactive)
-        {
-          col = getFromRGBA(lspec.toggleInactiveColor);
-          if (!col.isValid())
-            col = toggleColor;
-        }
-        else
-          col = toggleColor;
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(QPen(col));
-          painter->drawText(rtext,talign,text);
-          painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
-          painter->restore();
-          return;
-        }
-      }
-      else if (state == -1)
-      {
-        QColor col;
-        if (isInactive)
-        {
-          col = getFromRGBA(cspec_.progressInactiveIndicatorTextColor);
-          if (!col.isValid())
-            col = progColor;
-        }
-        else
-          col = progColor;
-        if (col.isValid())
-        {
-          painter->save();
-          painter->setPen(col);
-          painter->drawText(rtext,talign,text);
-          painter->restore();
-          if (lspec.boldFont)
-            painter->restore();
-          if (lspec.italicFont)
-            painter->restore();
-          painter->restore();
-          return;
-        }
+        painter->restore();
+        return;
       }
     }
     /* if this is a dark-and-light theme, the disabled color may not be suitable */

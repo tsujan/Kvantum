@@ -11768,8 +11768,6 @@ void Style::drawComplexControl(ComplexControl control,
             else
               col = getFromRGBA(lspec.normalColor);
           }
-          if (!col.isValid())
-            col = option->palette.color(QPalette::Text);
 
           int talign = Qt::AlignHCenter | Qt::AlignVCenter;
           if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -11799,13 +11797,14 @@ void Style::drawComplexControl(ComplexControl control,
             }
             else
               shadowColor = getFromRGBA(lspec.shadowColor);
+
             /* the shadow should have enough contrast with the text */
-            if (shadowColor.isValid() && enoughContrast(col, shadowColor))
+            if (enoughContrast(col, shadowColor))
             {
               painter->save();
               if (lspec.a < 255)
                 shadowColor.setAlpha(lspec.a);
-              painter->setPen(QPen(shadowColor));
+              painter->setPen(shadowColor);
               for (int i=0; i<lspec.depth; i++)
               {
                 int xShift = lspec.xshift + i * (lspec.xshift < 0 ? -1 : 1);
