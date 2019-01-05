@@ -141,6 +141,10 @@ class Style : public QCommonStyle {
                                         const QPixmap &pixmap,
                                         const QStyleOption *option) const;
 
+    virtual void drawItemText(QPainter *painter, const QRect &rect, int flags,
+                              const QPalette &pal, bool enabled, const QString &text,
+                              QPalette::ColorRole textRole = QPalette::NoRole) const;
+
     enum CustomElements {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };

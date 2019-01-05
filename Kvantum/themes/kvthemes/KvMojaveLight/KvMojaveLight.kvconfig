@@ -274,6 +274,7 @@ text.normal.inactive.color=#464646
 text.toggle.inactive.color=#ebebeb
 text.bold=true
 text.boldness=2
+text.shadow.alpha=50
 min_width=+0.2font
 
 [TabFrame]

@@ -15733,6 +15733,18 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
   return pixmap;
 }
 
+void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
+                         const QPalette &pal, bool enabled, const QString &text,
+                         QPalette::ColorRole textRole) const
+{
+  /* Ensure a centered vertical alignment if vertical alignment
+     isn't defined when this function isn't directly called by us.
+     (A bad vertical alignment started to happen with tooltips of Qt 5.12.) */
+  if (!(flags&Qt::AlignVertical_Mask))
+    flags |= Qt::AlignVCenter;
+  QCommonStyle::drawItemText(painter, rect, flags, pal, enabled, text, textRole);
+}
+
 QPixmap Style::getPixmapFromIcon(const QIcon &icon,
                                  const KvIconMode iconmode,
                                  const QIcon::State iconstate,
