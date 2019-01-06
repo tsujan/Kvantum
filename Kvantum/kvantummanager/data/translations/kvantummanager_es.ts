@@ -651,12 +651,13 @@ aplicaciones lo fijan ellas mismas.</translation>
         <location filename="../../kvantummanager.ui" line="1379"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation></translation>
+        <translation type="unfinished">Ancho de los «spin buttons» horizontales.
+(No tiene efecto cuando los indicadores del «spin» están en vertical)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1372"/>
         <source>Spin button width: </source>
-        <translation></translation>
+        <translation>Ancho de los «spin buttons»: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
@@ -993,7 +994,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation></translation>
+        <translation>Por defecto, los indicadores del «spin» se dibujan
+como dos botones con flechas o signos de suma/resta.
+
+Marcando esto se integran los indicadores del «spin»
+en el campo de texto del «spin».</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1582"/>
@@ -1016,7 +1021,10 @@ Miscelánea → Respetar el escritorio si es posible</translation>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation></translation>
+        <translation>Por defecto, los indicadores del «spin» se dibujan en botones adyacentes.
+
+Marcando esto se pone el «spin» de incremento sobre el «spin» de
+decremento sobre el campo de texto del «spin».</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1693"/>
@@ -1155,7 +1163,7 @@ del marco, de forma que no se recorta.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1658"/>
         <source>Fill rubber-band rectangles</source>
-        <translation></translation>
+        <translation>Rellenar los rectángulos de selección (rubber-band)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1679"/>
@@ -1219,7 +1227,7 @@ agrupados y elevados entre separadores de barra de herramientas.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1617"/>
         <source>Inline spin indicators</source>
-        <translation></translation>
+        <translation>Indicadores del «spin» en línea</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1665"/>
@@ -1246,7 +1254,7 @@ un campo de texto con flecha (e icono, si existe)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1644"/>
         <source>Vertical spin indicators</source>
-        <translation></translation>
+        <translation>Indicadores del «spin» en vertical</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1553"/>
