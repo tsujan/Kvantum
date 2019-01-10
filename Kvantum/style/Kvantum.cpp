@@ -6906,7 +6906,7 @@ void Style::drawControl(ControlElement element,
         QString txt = QFontMetrics(painter->font()).elidedText(opt->text,Qt::ElideRight,tr.width());
 
         if (!px.isNull())
-          painter->drawPixmap(ir, px);
+          drawItemPixmap(painter, ir, Qt::AlignCenter, px);
 
         int talign = Qt::AlignLeft | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -10749,13 +10749,10 @@ void Style::drawComplexControl(ComplexControl control,
             QPixmap icn = getPixmapFromIcon(opt->currentIcon,
                                             getIconMode(state,status.contains("-inactive"),lspec),
                                             iconstate, opt->iconSize);
-            QRect ricn = alignedRect(option->direction,
-                                     Qt::AlignVCenter | Qt::AlignLeft,
-                                     opt->iconSize,
-                                     labelRect(option->rect,fspec,lspec));
             QRect iconRect = alignedRect(option->direction,
-                                         Qt::AlignCenter,
-                                         (QSizeF(icn.size())/pixelRatio_).toSize(), ricn);
+                                         Qt::AlignVCenter | Qt::AlignLeft,
+                                         opt->iconSize,
+                                         labelRect(option->rect,fspec,lspec));
             if (!(option->state & State_Enabled))
             {
               qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
@@ -10768,7 +10765,7 @@ void Style::drawComplexControl(ComplexControl control,
               if (tintPercentage > 0)
                 icn = tintedPixmap(option, icn, tintPercentage);
             }
-            painter->drawPixmap(iconRect,icn);
+            drawItemPixmap(painter, iconRect, Qt::AlignCenter, icn);
           }
         } // end of frame
 
@@ -11608,10 +11605,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarCloseButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(btnSize,btnSize));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
-                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
-                                     btnOpt.rect);
-        painter->drawPixmap(iconRect,pm);
+        drawItemPixmap(painter, btnOpt.rect, Qt::AlignCenter, pm);
       }
       if (option->subControls & QStyle::SC_MdiNormalButton)
       {
@@ -11640,10 +11634,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarNormalButton,&btnOpt,widget),
                                        iconmode,iconstate,QSize(btnSize,btnSize));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
-                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
-                                     btnOpt.rect);
-        painter->drawPixmap(iconRect,pm);
+        drawItemPixmap(painter, btnOpt.rect, Qt::AlignCenter, pm);
       }
       if (option->subControls & QStyle::SC_MdiMinButton)
       {
@@ -11672,10 +11663,7 @@ void Style::drawComplexControl(ComplexControl control,
         //drawPrimitive(PE_PanelButtonCommand, &btnOpt, painter, widget);
         QPixmap pm = getPixmapFromIcon(standardIcon(SP_TitleBarMinButton,&btnOpt,widget),
                                                     iconmode,iconstate,QSize(btnSize,btnSize));
-        QRect iconRect = alignedRect(option->direction, Qt::AlignCenter,
-                                     (QSizeF(pm.size())/pixelRatio_).toSize(),
-                                     btnOpt.rect);
-        painter->drawPixmap(iconRect,pm);
+        drawItemPixmap(painter, btnOpt.rect, Qt::AlignCenter, pm);
       }
 
       break;
@@ -15751,12 +15739,6 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
                                  QSize iconSize) const
 {
   if (icon.isNull()) return QPixmap();
-  /* We need a QPixmap whose size is pixelRatio_ times iconSize. However, with
-     an HDPI-enabled app, the size of the QPixmap returned by QIcon::pixmap()
-     may be pixelRatio_*pixelRatio_*iconSize when the icon is taken from a theme
-     (due to a bug in some icon engines) and is (almost) pixelRatio_*iconSize
-     when the icon isn't taken from a theme but has no fixed size. What follows
-     covers all cases by checking the pixmap width. */
   QIcon::Mode icnMode;
   /* since some icon engines (like that of KDE) don't consult generatedIconPixmap(),
      we enforce it after ignoring the disabled state temporarily */
@@ -15772,16 +15754,15 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
 #endif
-  QPixmap px = icon.pixmap(hdpi ? (QSizeF(iconSize)/pixelRatio_).toSize()
+  QPixmap px = icon.pixmap(hdpi ? iconSize
                                 : (QSizeF(iconSize)*pixelRatio_).toSize(),
                            icnMode,iconstate);
-  /* for an HDPI-enabled app and when the icon isn't taken from a theme */
-  if (hdpi && px.size().width() < qRound(pixelRatio_
-                                         // the part of iconSize.width() that is a multiple of pixelRatio_
-                                         * pixelRatio_*static_cast<int>(iconSize.width()/pixelRatio_)))
+  /*if (hdpi)
   {
-    px = icon.pixmap(iconSize,icnMode,iconstate);
-  }
+    qreal r = static_cast<qreal>(px.size().width()) / qRound(pixelRatio_*iconSize.width());
+    if (r > static_cast<qreal>(1))
+      px = icon.pixmap(QSizeF(iconSize/r).toSize(),icnMode,iconstate);
+  }*/
 
   if (iconmode == Disabled || iconmode == DisabledSelected)
   {
