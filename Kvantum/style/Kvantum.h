@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -101,41 +101,41 @@ class Style : public QCommonStyle {
 
     virtual bool eventFilter(QObject *o, QEvent *e);
 
-    virtual int pixelMetric(PixelMetric metric,
+    virtual int pixelMetric(QStyle::PixelMetric metric,
                             const QStyleOption *option = 0,
                             const QWidget *widget = 0) const;
-    virtual QRect subElementRect(SubElement element,
+    virtual QRect subElementRect(QStyle::SubElement element,
                                  const QStyleOption *option,
                                  const QWidget *widget = 0) const;
-    virtual QRect subControlRect(ComplexControl control,
+    virtual QRect subControlRect(QStyle::ComplexControl control,
                                  const QStyleOptionComplex *option,
-                                 SubControl subControl,
+                                 QStyle::SubControl subControl,
                                  const QWidget *widget = 0) const;
-    QSize sizeFromContents(ContentsType type,
+    QSize sizeFromContents(QStyle::ContentsType type,
                            const QStyleOption *option,
                            const QSize &contentsSize,
                            const QWidget *widget = 0) const;
 
-    virtual void drawPrimitive(PrimitiveElement element,
+    virtual void drawPrimitive(QStyle::PrimitiveElement element,
                                const QStyleOption *option,
                                QPainter *painter,
                                const QWidget *widget = 0) const;
-    virtual void drawControl(ControlElement element,
+    virtual void drawControl(QStyle::ControlElement element,
                              const QStyleOption *option,
                              QPainter *painter,
                              const QWidget *widget = 0) const;
-    virtual void drawComplexControl(ComplexControl control,
+    virtual void drawComplexControl(QStyle::ComplexControl control,
                                     const QStyleOptionComplex *option,
                                     QPainter *painter,
                                     const QWidget *widget = 0) const;
-    virtual int styleHint(StyleHint hint,
+    virtual int styleHint(QStyle::StyleHint hint,
                           const QStyleOption *option = 0,
                           const QWidget *widget = 0,
                           QStyleHintReturn *returnData = 0) const;
-    virtual SubControl hitTestComplexControl(ComplexControl control,
-                                             const QStyleOptionComplex *option,
-                                             const QPoint &position,
-                                             const QWidget *widget = 0) const;
+    virtual QStyle::SubControl hitTestComplexControl(QStyle::ComplexControl control,
+                                                     const QStyleOptionComplex *option,
+                                                     const QPoint &position,
+                                                     const QWidget *widget = 0) const;
 
     virtual QPixmap generatedIconPixmap(QIcon::Mode iconMode,
                                         const QPixmap &pixmap,
@@ -145,13 +145,16 @@ class Style : public QCommonStyle {
                               const QPalette &pal, bool enabled, const QString &text,
                               QPalette::ColorRole textRole = QPalette::NoRole) const;
 
+    virtual void drawItemPixmap(QPainter *painter, const QRect &rect,
+                                int alignment, const QPixmap &pixmap) const;
+
+    QIcon standardIcon(QStyle::StandardPixmap standardIcon,
+                       const QStyleOption *option = 0,
+                       const QWidget *widget = 0) const;
+
     enum CustomElements {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
     };
-
-    QIcon standardIcon(StandardPixmap standardIcon,
-                       const QStyleOption *option = 0,
-                       const QWidget *widget = 0) const;
 
   private:
     /* For handling disabled icons with all icon engines: */

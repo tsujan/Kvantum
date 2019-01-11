@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -960,53 +960,21 @@ void Style::renderLabel(
 
   if (tialign != Qt::ToolButtonTextOnly && !px.isNull())
   {
-  bool hdpi(false);
-#if QT_VERSION >= 0x050500
-  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
-    hdpi = true;
-#endif
-    if (hdpi)
+    if (!(option->state & State_Enabled))
     {
-      if (!(option->state & State_Enabled))
-      {
-        qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
-        if (opacityPercentage < 100)
-          drawItemPixmap(painter, ricon, Qt::AlignCenter, translucentPixmap(px, opacityPercentage));
-        else
-          drawItemPixmap(painter, ricon, Qt::AlignCenter, px);
-      }
+      qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
+      if (opacityPercentage < 100)
+        drawItemPixmap(painter, ricon, Qt::AlignCenter, translucentPixmap(px, opacityPercentage));
       else
-      {
-        qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
-        if (tintPercentage > 0 && (option->state & State_MouseOver))
-          drawItemPixmap(painter, ricon, Qt::AlignCenter, tintedPixmap(option,px,tintPercentage));
-        else
-          drawItemPixmap(painter, ricon, Qt::AlignCenter, px);
-      }
+        drawItemPixmap(painter, ricon, Qt::AlignCenter, px);
     }
     else
     {
-      // the pixmap should have been enlarged by pixelRatio_
-      QRect iconRect = alignedRect(ld, Qt::AlignCenter,
-                                   QSizeF(px.size()/pixelRatio_).toSize().boundedTo(ricon.size()),
-                                   ricon);
-
-      if (!(option->state & State_Enabled))
-      {
-        qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
-        if (opacityPercentage < 100)
-          painter->drawPixmap(iconRect,translucentPixmap(px, opacityPercentage));
-        else
-          painter->drawPixmap(iconRect,px);
-      }
+      qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
+      if (tintPercentage > 0 && (option->state & State_MouseOver))
+        drawItemPixmap(painter, ricon, Qt::AlignCenter, tintedPixmap(option,px,tintPercentage));
       else
-      {
-        qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
-        if (tintPercentage > 0 && (option->state & State_MouseOver))
-          painter->drawPixmap(iconRect, tintedPixmap(option,px,tintPercentage));
-        else
-          painter->drawPixmap(iconRect,px);
-      }
+        drawItemPixmap(painter, ricon, Qt::AlignCenter, px);
     }
   }
 

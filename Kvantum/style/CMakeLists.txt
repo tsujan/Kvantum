@@ -54,6 +54,7 @@ if(NOT ENABLE_QT4)
       eventFiltering.cpp
       polishing.cpp
       rendering.cpp
+      standardIcons.cpp
       KvantumPlugin.cpp
       shortcuthandler.cpp
       blur/blurhelper.cpp

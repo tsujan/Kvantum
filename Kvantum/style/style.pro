@@ -27,6 +27,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              eventFiltering.cpp \
              polishing.cpp \
              rendering.cpp \
+             standardIcons.cpp \
              KvantumPlugin.cpp \
              drag/x11wmmove.cpp \
              drag/windowmanager.cpp \
