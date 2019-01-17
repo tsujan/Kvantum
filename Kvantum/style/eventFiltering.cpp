@@ -36,7 +36,8 @@
 #include <QPaintEvent>
 #include <QMenuBar>
 #include <QDialog>
-#include <QDesktopWidget> // for positioning menus
+#include <QWindow> // for positioning menus
+#include <QScreen> // for positioning menus
 
 namespace Kvantum
 {
@@ -190,6 +191,8 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (ro > 0)
     p->restore();
 }
+
+static QSet<const QWidget*> movedMenus;
 
 bool Style::eventFilter(QObject *o, QEvent *e)
 {
@@ -791,6 +794,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (qobject_cast<QMenu*>(o))
 #endif
       {
+        if (movedMenus.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
@@ -824,7 +828,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
           }
         }
-        QRect ag(QApplication::desktop()->availableGeometry(w));
+        /* get the available geometry (Qt menus don't
+           spread across the available virtual geometry) */
+        QRect ag;
+        if (QWindow *win = w->windowHandle())
+        {
+          if (QScreen *sc = win->screen())
+            ag = sc->availableGeometry();
+        }
         /* this gives the real position AFTER pending movements
            because it's QWidgetData::crect (Qt -> qwidget.h) */
         QRect g(w->geometry());
@@ -895,7 +906,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                       X -= qMin(menuShadow_.at(0), -delta);
                   }
                 }
-                else
+                else if (!ag.isEmpty())
                 {
                   if (g.bottom() == ag.bottom() && g.top() != ag.top())
                     Y += menuShadow_.at(1) + menuShadow_.at(3);
@@ -957,7 +968,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                       X += qMin(menuShadow_.at(2), -delta);
                   }
                 }
-                else // probably a panel menu
+                else if (!ag.isEmpty()) // probably a panel menu
                 {
                   /* snap to the screen bottom if possible */
                   if (g.bottom() == ag.bottom() && g.top() != ag.top())
@@ -1003,6 +1014,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             Y -= getFrameSpec(group).bottom;
           w->move(X,Y);
         }
+        movedMenus.insert(w);
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
       {
@@ -1179,6 +1191,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
   case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
     {
+      if (qobject_cast<QMenu*>(w))
+        movedMenus.remove(w);
+
       if (!progressbars_.isEmpty() && qobject_cast<QProgressBar*>(o))
       {
         progressbars_.remove(w);

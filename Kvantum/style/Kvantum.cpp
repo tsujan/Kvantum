@@ -1768,7 +1768,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QRect tr = opt->selectedTabRect;
         if (tspec_.attach_active_tab)
         {
-          if (tr.isNull()) return;
+          if (tr.isEmpty()) return;
           d = tr.x();
           l = tr.width();
         }
@@ -5628,7 +5628,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
         group = "MenuBar";
         QRect r = opt->menuRect; // menubar svg element may not be simple
-        if (r.isNull()) r = option->rect;
+        if (r.isEmpty()) r = option->rect;
         if (int th = mergedToolbarHeight(widget))
         {
           group = "Toolbar";
