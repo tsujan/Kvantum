@@ -11682,7 +11682,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         // Draw frame
         QRect textRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxLabel, widget);
         QRect checkBoxRect = subControlRect(CC_GroupBox, opt, SC_GroupBoxCheckBox, widget);
-        if (opt->subControls & QStyle::SC_GroupBoxFrame)
+        if (!(opt->features & QStyleOptionFrame::Flat) && (opt->subControls & QStyle::SC_GroupBoxFrame))
         {
           QStyleOptionFrame frame;
           frame.QStyleOption::operator=(*opt);
@@ -11692,20 +11692,21 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           frame.rect = subControlRect(CC_GroupBox, opt, SC_GroupBoxFrame, widget);
           painter->save();
           QRegion region(opt->rect);
-          if (!opt->text.isEmpty())
-          {
-            bool ltr = (opt->direction == Qt::LeftToRight);
-            QRect finalRect;
-            if (opt->subControls & QStyle::SC_GroupBoxCheckBox)
-            {
-              finalRect = checkBoxRect.united(textRect);
-              finalRect.adjust(ltr ? -4 : 0, 0, ltr ? 0 : 4, 0);
-            }
-            else
-              finalRect = textRect;
 
-            region -= finalRect;
+          bool ltr = (opt->direction == Qt::LeftToRight);
+          QRect finalRect;
+          if (opt->subControls & QStyle::SC_GroupBoxCheckBox)
+          {
+            finalRect = checkBoxRect.united(textRect);
+            if (!opt->text.isEmpty())
+              finalRect.adjust(ltr ? -3 : 0, 0, ltr ? 0 : 3, 0);
+            else
+              finalRect.adjust(-3, 0, 3, 0);
           }
+          else
+            finalRect = textRect;
+
+          region -= finalRect;
           painter->setClipRegion(region);
           drawPrimitive(PE_FrameGroupBox, &frame, painter, widget);
           painter->restore();
@@ -13564,9 +13565,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
       frame_spec fspec;
       default_frame_spec(fspec);
-      label_spec lspec = getLabelSpec(group);
       size_spec sspec;
       default_size_spec(sspec);
+      label_spec lspec = getLabelSpec(group);
 
       const QStyleOptionGroupBox *opt =
         qstyleoption_cast<const QStyleOptionGroupBox*>(option);
@@ -13579,21 +13580,28 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       }
       if (!checkable && opt && (opt->subControls & QStyle::SC_GroupBoxCheckBox)) // QML
         checkable = true;
-      if (checkable)
-      { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
-        if (option && option->direction == Qt::RightToLeft)
-          lspec.right = 0;
-        else
-          lspec.left = 0;
+
+      QSize textSize(0, 0);
+      if (opt && !opt->text.isEmpty())
+      {
+        if (checkable)
+        { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
+          if (option && option->direction == Qt::RightToLeft)
+            lspec.right = 0;
+          else
+            lspec.left = 0;
+        }
+        QFont f;
+        if (widget) f = widget->font();
+        else f = QApplication::font();
+        if (lspec.boldFont) f.setWeight(lspec.boldness);
+        textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
       }
 
-      QFont f;
-      if (widget) f = widget->font();
-      else f = QApplication::font();
-      if (lspec.boldFont) f.setWeight(lspec.boldness);
-      QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt? opt->text : QString(),QSize());
-      fspec = getFrameSpec(group);
-      lspec = getLabelSpec(group);
+      lspec = getLabelSpec(group); // restore the label spec because it's used by contents too
+      /* see CC_GroupBox in subControlRect() for why the following condition can't be used */
+      //if (opt && !(opt->features & QStyleOptionFrame::Flat))
+        fspec = getFrameSpec(group);
       int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
       int spacing = (tspec_.groupbox_top_label ? 0 : 6 + 10); /* 3px between text and frame and
                                                                  text starts at 10px after the left frame */
@@ -13602,7 +13610,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                 defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
                   + (tspec_.groupbox_top_label
                      ? 3 // 3 px spacing between text and top frame (-> CC_GroupBox in subControlRect)
-                     : qMax(pixelMetric(PM_IndicatorHeight),textSize.height())/2));
+                     : qMax(checkable ? pixelMetric(PM_IndicatorHeight) : 0, textSize.height())/2));
 
       break;
     }
@@ -15322,9 +15330,9 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       {
         frame_spec fspec;
         default_frame_spec(fspec);
-        label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
         size_spec sspec;
         default_size_spec(sspec);
+        label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
 
         bool rtl(option->direction == Qt::RightToLeft);
         bool checkable = false;
@@ -15335,21 +15343,29 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
         }
         if (!checkable && (opt->subControls & QStyle::SC_GroupBoxCheckBox)) // QML
           checkable = true;
-        if (checkable)
-        { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
-          if (rtl)
-            lspec.right = 0;
-          else
-            lspec.left = 0;
+
+        QSize textSize(0, 0);
+        if (!opt->text.isEmpty())
+        {
+          if (checkable)
+          { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
+            if (rtl)
+              lspec.right = 0;
+            else
+              lspec.left = 0;
+          }
+          QFont f;
+          if (widget) f = widget->font();
+          else f = QApplication::font();
+          if (lspec.boldFont) f.setWeight(lspec.boldness);
+          textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
         }
-        QFont f;
-        if (widget) f = widget->font();
-        else f = QApplication::font();
-        if (lspec.boldFont) f.setWeight(lspec.boldness);
-        QSize textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
+
         int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
-        int checkHeight = pixelMetric(PM_IndicatorHeight);
-        fspec = getFrameSpec(QStringLiteral("GroupBox"));
+        int checkHeight = (checkable ? pixelMetric(PM_IndicatorHeight) : 0);
+        /* because of a bug in Qt, the flat feature may not be set here when a flat groupbox is shown */
+        //if (!(opt->features & QStyleOptionFrame::Flat))
+          fspec = getFrameSpec(QStringLiteral("GroupBox"));
         int labelMargin = (tspec_.groupbox_top_label ? 0 : (rtl ? fspec.right : fspec.left) + 10);
 
         switch (subControl) {
@@ -15363,6 +15379,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                          checkHeight);
           }
           case SC_GroupBoxLabel : {
+            if (opt->text.isEmpty()) return QRect();
             int delta = 0;
             if (checkHeight > textSize.height())
               delta = (checkHeight - textSize.height())/2;
@@ -15374,10 +15391,10 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                          textSize.height());
           }
           case SC_GroupBoxContents : {
+            lspec = getLabelSpec(QStringLiteral("GroupBox")); // restore the label spec
             int top = 0;
             if (!tspec_.groupbox_top_label)
               top = qMax(checkHeight,textSize.height())/2;
-            lspec = getLabelSpec(QStringLiteral("GroupBox"));
             return labelRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec, lspec)
                    .adjusted(0,top,0,0);
           }

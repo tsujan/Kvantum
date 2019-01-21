@@ -365,7 +365,7 @@ text.press.color=white
 text.toggle.color=white
 text.toggle.inactive.color=white
 text.shadow=false
-frame.expansion=0
+frame.expansion=6
 
 [Splitter]
 indicator.size=32
