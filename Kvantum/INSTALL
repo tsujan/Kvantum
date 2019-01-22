@@ -18,6 +18,8 @@ First install X11 and Qt development packages. In Debian-based systems, they are
  * qtbase5-dev, libqt5svg5-dev and libqt5x11extras5-dev (for Qt5)
  * libkf5windowsystem-dev (required with Qt >= 5.11)
  * qttools5-dev-tools (for localization if you need it)
+ * libqt5svg5-dev
+ * libqt5x11extras5-dev
 
 In Arch-based systems, the packages are:
 
