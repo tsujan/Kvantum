@@ -285,6 +285,7 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=white
 text.toggle.color=white
+frame.expansion=6
 min_height=0
 
 [Menu]

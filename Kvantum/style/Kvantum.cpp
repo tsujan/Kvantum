@@ -12601,6 +12601,8 @@ int Style::styleHint(QStyle::StyleHint hint,
 #endif
 
     case SH_Slider_StopMouseOverSlider : return true;
+    case SH_Slider_AbsoluteSetButtons : return Qt::LeftButton;
+    case SH_Slider_PageSetButtons : return Qt::MidButton;
 
     /* scrollbar_in_view is always false when transient_scrollbar is true (see "ThemeConfig.cpp") */
     case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;

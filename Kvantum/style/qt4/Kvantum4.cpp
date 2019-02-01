@@ -11203,6 +11203,8 @@ int Style::styleHint(StyleHint hint,
     case SH_ScrollBar_MiddleClickAbsolutePosition : return hspec_.middle_click_scroll;
 
     case SH_Slider_StopMouseOverSlider : return true;
+    case SH_Slider_AbsoluteSetButtons : return Qt::LeftButton;
+    case SH_Slider_PageSetButtons : return Qt::MidButton;
 
     case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;
 

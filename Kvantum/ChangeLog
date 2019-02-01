@@ -46,6 +46,7 @@ V0.10.9
  * Don't move a menu twice to compensate for its shadow width (it happens with LXQt main menu after a style change).
  * Dropped QDesktopWidget.
  * No redundant space for groupboxes without text/checkbox.
+ * Left mouse button sets slider position (middle button was a bad default).
 
 V0.10.8
 ---------
