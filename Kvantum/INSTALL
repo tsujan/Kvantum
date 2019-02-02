@@ -51,9 +51,9 @@ And, finally, in OpenSUSE:
 ----------
 Tumbleweed users can also install Kvantum in this way (thanks to trmdi at GitHub):
 
-	zypper addrepo https://download.opensuse.org/repositories/home:trmdi/openSUSE_Tumbleweed/home:trmdi.repo
-	zypper refresh
-	zypper install kvantum
+	sudo zypper ar obs://home:trmdi trmdi
+	sudo zypper in -r trmdi kvantum
+
 ----------
 
 There are two ways to compile Kvantum: with qmake or with cmake.
