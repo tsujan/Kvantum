@@ -219,7 +219,7 @@ frame.expansion=0
 [Toolbar]
 inherits=PanelButtonCommand
 interior=false
-indicator.size=8
+indicator.size=5
 frame.left=0
 frame.right=0
 frame.top=2
