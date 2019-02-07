@@ -399,7 +399,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (!w->hasFocus())
           animationStartState_ = "normal";
-        else if (!animationStartState_.startsWith("c-toggled")) // the popup may have been closed (with Qt5)
+        /* the popup may have been closed (with Qt5) */
+        else if (!(animatedWidget_ == w && animationStartState_.startsWith("c-toggled")))
           animationStartState_ = "pressed";
         if (isWidgetInactive(w))
           animationStartState_.append("-inactive");
@@ -432,8 +433,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
-        if (!animationStartState_.startsWith("c-toggled")
-            && !animationStartState_.startsWith("normal"))
+        if (!(animatedWidget_ == w
+              && (animationStartState_.startsWith("c-toggled")
+                  || animationStartState_.startsWith("normal"))))
         { // it was hidden or another widget was interacted with  -- there's no other possibility
           animationStartState_ = "normal";
           if (isWidgetInactive(w))
