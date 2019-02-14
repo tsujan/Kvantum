@@ -270,7 +270,7 @@ are enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="603"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Umgehung für &amp;Qt5&apos;s Scroll Sprung Fehler</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
