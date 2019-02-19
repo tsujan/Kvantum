@@ -961,7 +961,7 @@ void Style::noTranslucency(QObject *o)
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets_.remove(widget);
   forcedTranslucency_.remove(widget);
-  drawnMenus_.remove(widget);
+  //drawnMenus_.remove(widget);
 }
 
 int Style::mergedToolbarHeight(const QWidget *menubar) const
@@ -13080,16 +13080,16 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       break;
     }
 
-    case CT_Menu : {
+    /*case CT_Menu : {
       if (widget && !drawnMenus_.contains(widget))
       {
-        /* The menu size is determined before the menu is shown. Because
-           drawnMenus_ is used in QEvent::Show, its contents can be set here. */
+        // The menu size is determined before the menu is shown. Because
+        // drawnMenus_ is used in QEvent::Show, its contents can be set here.
         drawnMenus_.insert(widget);
         connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
       }
       break;
-    }
+    }*/
 
     case CT_MenuItem : {
       const QStyleOptionMenuItem *opt =

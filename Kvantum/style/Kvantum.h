@@ -419,7 +419,7 @@ class Style : public QCommonStyle {
     mutable QSet<QWidget*> forcedTranslucency_;
     /* List of menus drawn by Kvantum
        (for knowing if a menu has shadow and should be moved on showing) */
-    mutable QSet<const QWidget*> drawnMenus_;
+    //mutable QSet<const QWidget*> drawnMenus_;
 
     ShortcutHandler *itsShortcutHandler_;
     WindowManager *itsWindowManager_;
