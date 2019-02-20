@@ -796,7 +796,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (qobject_cast<QMenu*>(o))
 #endif
       {
-        if (isLibreoffice_) break;
+        //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (movedMenus.contains(w)) break; // already moved
         /* "magical" condition for a submenu */

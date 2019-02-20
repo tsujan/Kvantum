@@ -3,7 +3,7 @@ V0.10.10
  * Don't move a menu that isn't drawn by kvantum (when a menu is drawn by a stylesheet, Qt lets QStyle polish it; hence the problem).
  * Reversed the above-mentioned workaround for now because, unfortunately, Qt doesn't provide a reliable way of distinguishing stylesheet menus at the moment they're shown.
  * Don't move detached menus when they're shown.
- * Workarounds for LibreOffice's new Qt5 skin.
+ * Support LibreOffice's new Qt5 skin (that's much better than the old Qt4 skin).
 
 V0.10.9
 ---------

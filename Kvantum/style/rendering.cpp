@@ -293,7 +293,7 @@ void Style::renderFrame(QPainter *painter,
     fspec.top = fspec.topExpanded;
     fspec.bottom = fspec.bottomExpanded;
   }
-  if (!isLibreoffice_ && fspec.expansion > 0 && drawExpanded
+  if (/*!isLibreoffice_ &&*/ fspec.expansion > 0 && drawExpanded
       && (!fspec.isAttached || fspec.VPos == 2)
       && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)))
   {
@@ -783,7 +783,7 @@ bool Style::renderInterior(QPainter *painter,
     return false;
 
   int w = bounds.width(); int h = bounds.height();
-  if (!isLibreoffice_ && fspec.expansion > 0 && !ispec.element.isEmpty())
+  if (/*!isLibreoffice_ &&*/ fspec.expansion > 0 && !ispec.element.isEmpty())
   {
     bool isHAttached(fspec.isAttached && fspec.HPos != 2);
     if (isHAttached)

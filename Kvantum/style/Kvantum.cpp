@@ -1541,7 +1541,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   label_spec lspec = getLabelSpec(group);
   const size_spec sspec = getSizeSpec(group);
 
-  if (isLibreoffice_) // impossible because lineedit != NULL
+  /*if (isLibreoffice_) // impossible because lineedit != NULL
   {
     fspec.left = qMin(fspec.left,3);
     fspec.right = qMin(fspec.right,3);
@@ -1549,7 +1549,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     fspec.bottom = qMin(fspec.bottom,3);
   }
   else
-  {
+  {*/
     bool noSpace((!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
@@ -1577,7 +1577,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
         fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
       }
     }
-  }
+  //}
 
   if (qobject_cast<QAbstractItemView*>(getParent(combo,1)))
   {
@@ -1614,8 +1614,8 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     painter->setOpacity(DISABLED_OPACITY);
   }
   renderFrame(painter,
-              isLibreoffice_ ? // impossible
-                option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
+              /*isLibreoffice_ ? // impossible
+                option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :*/
                 option->rect,
               fspec,
               fspec.element+leStatus);
@@ -2415,7 +2415,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       else if (!autoraise || !status.startsWith("normal"))
       {
         bool libreoffice = false;
-        if (isLibreoffice_ && (option->state & State_Enabled) && !status.startsWith("toggled")
+        if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled) && !status.startsWith("toggled")
             && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
         {
           libreoffice = true;
@@ -2577,15 +2577,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             suffix = "-normal";
         }
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate && !isLibreoffice_
+        if (!animate //&& !isLibreoffice_
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
-        if (isLibreoffice_ && suffix == "-checked-focused"
+        /*if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
-          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));*/
         QObject *styleObject = option->styleObject;
         QString animationStartState;
         if (styleObject)
@@ -2636,8 +2636,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           suffix = "-checked-normal";
         else
           suffix = "-normal";
-        if (!isLibreoffice_
-            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (/*!isLibreoffice_
+            &&*/ qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
@@ -2705,21 +2705,21 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
             animate = false;
-            if (!isLibreoffice_ && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("menu-"+ispec.element+suffix))
               prefix = "menu-"; // make exception for menuitems
           }
           else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
           {
             animate = false;
-            if (!isLibreoffice_ && themeRndr_->elementExists("item-"+ispec.element+suffix))
+            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("item-"+ispec.element+suffix))
               prefix = "item-"; // make exception for viewitems
           }
         }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
-        if (isLibreoffice_ && suffix == "-checked-focused"
+        /*if (isLibreoffice_ && suffix == "-checked-focused"
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
-          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));
+          painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));*/
         QObject *styleObject = option->styleObject;
         QString animationStartState;
         if (styleObject)
@@ -2775,11 +2775,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
-            if (!isLibreoffice_ && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("menu-"+ispec.element+suffix))
               prefix = "menu-";
           }
-          else if (!isLibreoffice_
-                   && qstyleoption_cast<const QStyleOptionViewItem*>(option)
+          else if (/*!isLibreoffice_
+                   &&*/ qstyleoption_cast<const QStyleOptionViewItem*>(option)
                    && themeRndr_->elementExists("item-"+ispec.element+suffix))
           {
             prefix = "item-";
@@ -2919,7 +2919,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
          would have no background without this either. */
       if ((widget // it's NULL in the case of QML menus
            && !qobject_cast<const QMenu*>(widget))
-          || isLibreoffice_) // LibreOffice's menus can be styled but not well
+          /*|| isLibreoffice_*/) // LibreOffice's menus can be styled but not well
         break;
 
       const QString group = "Menu";
@@ -3060,7 +3060,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
 
         if (widget && widget->inherits("QComboBoxPrivateContainer")
-            && tspec_.combo_menu && !isLibreoffice_)
+            && tspec_.combo_menu /*&& !isLibreoffice_*/)
         { // as with PE_PanelMenu FIXME: calling it instead?
           const QString group = "Menu";
           frame_spec fspec = getFrameSpec(group);
@@ -3429,14 +3429,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         ispec.px = ispec.py = 0;
       }
 
-      if (isLibreoffice_)
+      /*if (isLibreoffice_)
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
       }
-      else if (qobject_cast<const QLineEdit*>(widget))
+      else*/ if (qobject_cast<const QLineEdit*>(widget))
       {
         if ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
@@ -3462,7 +3462,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       if (sb || sbOpt
           || (p && (p->inherits("KisAbstractSliderSpinBox") || p->inherits("Digikam::DAbstractSliderSpinBox")))
-          || (isLibreoffice_ && sbOpt))
+          /*|| (isLibreoffice_ && sbOpt)*/)
       {
         if (!sb || sb->buttonSymbols() != QAbstractSpinBox::NoButtons)
         {
@@ -3549,7 +3549,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
                        && ((animatedWidget_ == p && !leStatus.startsWith("normal"))
                            || (animatedWidgetOut_ == p && leStatus.startsWith("normal"))));
-      bool animate(!isLibreoffice_ && widget && widget->isEnabled()
+      bool animate(/*!isLibreoffice_ &&*/ widget && widget->isEnabled()
                    && !qobject_cast<const QAbstractScrollArea*>(widget)
                    && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
                        || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))
@@ -3582,8 +3582,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       /* force frame */
       renderFrame(painter,
-                  isLibreoffice_ && !sbOpt ?
-                    option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :
+                  /*isLibreoffice_ && !sbOpt ?
+                    option->rect.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom) :*/
                     option->rect,
                   fspec,
                   fspec.element+"-"+leStatus);
@@ -3710,7 +3710,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.expansion = 0;
       }
 
-      if (isLibreoffice_)
+      /*if (isLibreoffice_)
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -3719,7 +3719,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.expansion = 0;
       }
       // -> CC_SpinBox
-      else if (opt && !verticalIndicators)
+      else*/ if (opt && !verticalIndicators)
       {
         if (up)
         {
@@ -3794,12 +3794,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       /* a workaround for LibreOffice;
          also see subControlRect() -> CC_SpinBox */
-      if (isLibreoffice_)
-      {
-        bStatus = iStatus = "normal";
+      //if (isLibreoffice_)
+      //{
+        //bStatus = iStatus = "normal";
         /*if (up) iString = "-plus-";
         else iString = "-minus-";*/
-      }
+      //}
 
       QString iString; // indicator string
       if (element == PE_IndicatorSpinPlus) iString = "-plus-";
@@ -4642,7 +4642,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("MenuItem"));
         dspec.size = dspec1.size;
         /* the arrow rectangle is set at CE_MenuItem appropriately */
-        if (renderElement(painter, (isLibreoffice_ && aStatus.startsWith("normal") ? dspec.element : dspec1.element)
+        if (renderElement(painter, (/*isLibreoffice_ && aStatus.startsWith("normal") ? dspec.element :*/ dspec1.element)
                                    + dir+aStatus,
                           option->rect))
           break;
@@ -5128,17 +5128,17 @@ void Style::drawControl(QStyle::ControlElement element,
           /* don't draw panel for normal and disabled states */
           if (!status.startsWith("normal") && (option->state & State_Enabled))
           {
-            if (isLibreoffice_)
+            /*if (isLibreoffice_)
             {
               painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
               lspec.pressColor = lspec.toggleColor
                                = getName(QApplication::palette().color(QPalette::HighlightedText));
             }
             else
-            {
+            {*/
               renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
               renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-            }
+            //}
           }
 
           QStringList l;
@@ -5184,7 +5184,7 @@ void Style::drawControl(QStyle::ControlElement element,
           /* some apps (like Qt Creator) may force a bad text color */
           if (state == 1 || state == 0)
           {
-            if (isLibreoffice_ || lspec.normalColor.isEmpty())
+            if (/*isLibreoffice_ ||*/ lspec.normalColor.isEmpty())
             {
               lspec.normalColor = cspec_.windowTextColor;
               lspec.normalInactiveColor = cspec_.inactiveWindowTextColor;
@@ -5200,7 +5200,7 @@ void Style::drawControl(QStyle::ControlElement element,
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
-          bool hideCheckBoxes(tspec_.combo_menu && !isLibreoffice_
+          bool hideCheckBoxes(tspec_.combo_menu //&& !isLibreoffice_
                               && tspec_.hide_combo_checkboxes
                               // see Qt -> qcombobox_p.h -> QComboMenuDelegate
                               && qobject_cast<const QComboBox*>(widget));
@@ -5342,9 +5342,9 @@ void Style::drawControl(QStyle::ControlElement element,
             o.rect = alignedRect(option->direction,
                                  Qt::AlignLeft | Qt::AlignVCenter,
                                  QSize(iw,ih),
-                                 isLibreoffice_ ?
+                                 /*isLibreoffice_ ?
                                    opt->rect.adjusted(qMax(-opt->rect.x(),0),-2,0,0) // FIXME why?
-                                   : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
+                                   :*/ interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
                                                                             0,
                                                                             rtl ? -lspec.right : 0,
                                                                             0));
@@ -5681,7 +5681,7 @@ void Style::drawControl(QStyle::ControlElement element,
         /* draw a panel for the menubar-item only if it's focused or pressed */
         if (!status.startsWith("normal") && (option->state & State_Enabled))
         {
-          if (isLibreoffice_)
+          if (isLibreoffice_ && widget == nullptr)
           {
             painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
             painter->save();
@@ -5752,7 +5752,7 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_MenuBarEmptyArea : {
-      /*if (isLibreoffice_
+      /*if (isLibreoffice_ // shouldn't be used with the Qt5 skin
           && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuBarItem")).normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
@@ -9022,7 +9022,7 @@ void Style::drawControl(QStyle::ControlElement element,
           bool fillWidgetInterior(!ispec.hasInterior
                                   && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(group).normalColor)));
           bool libreoffice = false;
-          if (isLibreoffice_ && (option->state & State_Enabled)
+          if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled)
               && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
           {
             libreoffice = true;
@@ -10116,8 +10116,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
         /* The field is automatically drawn as lineedit at PE_PanelLineEdit.
            So, we don't duplicate it here but there are some exceptions. */
-        if (isLibreoffice_
-            || (!widget && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
+        if (/*isLibreoffice_
+            ||*/ (!widget && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
@@ -10157,7 +10157,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             r.setLeft(subControlRect(CC_SpinBox,opt,SC_SpinBoxDown,widget).left());
 
             // exactly as in PE_PanelLineEdit
-            if (isLibreoffice_)
+            /*if (isLibreoffice_)
             {
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
@@ -10165,7 +10165,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               fspec.bottom = qMin(fspec.bottom,3);
               fspec.expansion = 0;
             }
-            else if (le)
+            else*/ if (le)
             {
               const label_spec lspec = getLabelSpec(leGroup);
               const size_spec sspec = getSizeSpec(leGroup);
@@ -10410,7 +10410,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
                       - (drwaAsLineEdit ? 0
                          : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
-          else if (isLibreoffice_)
+          else if (isLibreoffice_ && widget == nullptr)
             margin = fspec.left;
           // SC_ComboBoxEditField includes the icon too
           o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget)
@@ -10425,7 +10425,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          if (isLibreoffice_ && opt->editable)
+          if (isLibreoffice_ && widget == nullptr && opt->editable)
           {
             painter->fillRect(o.rect, option->palette.brush(QPalette::Base));
             const frame_spec fspec1 = getFrameSpec(leGroup);
@@ -10504,7 +10504,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             /* integrate the arrow part if the combo isn't editable */
             if (!opt->editable || (cb && !cb->lineEdit())) r = r.united(arrowRect);
             bool libreoffice = false;
-            if (isLibreoffice_ && (option->state & State_Enabled))
+            if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled))
             {
               if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
               {
@@ -11858,7 +11858,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
         return 0; // not needed but logical (-> CT_PushButton)
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
-               && tspec_.combo_menu && !isLibreoffice_)
+               && tspec_.combo_menu /*&& !isLibreoffice_*/)
       {
           return qMax(pixelMetric(PM_MenuHMargin,option,widget),
                       pixelMetric(PM_MenuVMargin,option,widget));
@@ -11903,7 +11903,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuDesktopFrameWidth: return 0;
 
     case PM_SubMenuOverlap : {
-      if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
+      //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
         return 0; // RTL submenu positioning is a mess in Qt5
       int so = tspec_.submenu_overlap;
@@ -11916,7 +11916,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
+      //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
@@ -12332,8 +12332,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_ExclusiveIndicatorWidth :
     case PM_ExclusiveIndicatorHeight : {
       /* make exception for menuitems and viewitems */
-      if (isLibreoffice_
-          || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
+      if (/*isLibreoffice_
+          ||*/ qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
         return qMin(qRound(static_cast<qreal>(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget))*pixelRatio_),
                     tspec_.check_size);
@@ -12568,7 +12568,7 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_Menu_MouseTracking : return true;
 
     case SH_ComboBox_PopupFrameStyle: return QFrame::StyledPanel | QFrame::Plain;
-    case SH_ComboBox_Popup : return tspec_.combo_menu && !isLibreoffice_;
+    case SH_ComboBox_Popup : return tspec_.combo_menu /*&& !isLibreoffice_*/;
 
     case SH_MenuBar_MouseTracking :
       return tspec_.menubar_mouse_tracking;
@@ -13015,8 +13015,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         default_frame_spec(fspec);
         label_spec lspec = getLabelSpec(group);
         size_spec sspec;
-        if (isLibreoffice_
-            || !widget // QML
+        if (/*isLibreoffice_
+            ||*/ !widget // QML
             || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         { // see PM_IndicatorWidth (just for focus rectangle)
           lspec.top = qMin(lspec.top,2);
@@ -13054,8 +13054,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         default_frame_spec(fspec);
         label_spec lspec = getLabelSpec(group);
         size_spec sspec;
-        if (isLibreoffice_
-            || !widget // QML
+        if (/*isLibreoffice_
+            ||*/ !widget // QML
             || qobject_cast<QAbstractItemView*>(getParent(widget,2)))
         { // see PM_IndicatorWidth (just for focus rectangle)
           lspec.top = qMin(lspec.top,2);
@@ -14710,12 +14710,12 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
       // a workaround for LibreOffice
-      if (isLibreoffice_)
+      /*if (isLibreoffice_)
       {
         sw = 12;
         fspec.right = qMin(fspec.right,3);
       }
-      else if (sb)
+      else*/ if (sb)
       {
         if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
           sw = 0;
@@ -14770,8 +14770,8 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
         case SC_SpinBoxEditField : {
           if (sw == 0) return option->rect; // no button
           int margin = 0;
-          if (isLibreoffice_)
-            margin = qMin(fspecLE.left,3);
+          //if (isLibreoffice_)
+            //margin = qMin(fspecLE.left,3);
           return QRect(x + margin,
                        y,
                        w - (sw + fspec.right) - (verticalIndicators ? 0 : sw),
@@ -14825,7 +14825,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             arrowFrameSize = rtl ? fspec.left : fspec.right;
           }
           const label_spec combolspec =  getLabelSpec(QStringLiteral("ComboBox"));
-          if (isLibreoffice_)
+          if (isLibreoffice_ && widget == nullptr)
           {
             const frame_spec Fspec = getFrameSpec(QStringLiteral("LineEdit"));
             margin = qMin(Fspec.left,3);
@@ -14872,7 +14872,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
-          if (!tspec_.combo_menu || isLibreoffice_)
+          if (!tspec_.combo_menu/* || isLibreoffice_*/)
           { // level the popup list with the bottom or top edge of the combobox
             int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
             return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
