@@ -704,11 +704,12 @@ void Style::polish(QWidget *widget)
           widget->installEventFilter(this);
         }
         // set the background correctly when scrollbars are either inside the frame or inside a combo popup
-        if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView") && !tspec_.combo_menu))
+        if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView")
+                                          && (!tspec_.combo_menu || isLibreoffice_)))
             && vp && vp->autoFillBackground()
             && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
             // but not when the combo popup is drawn as a menu
-            && !(tspec_.combo_menu && widget->inherits("QComboBoxListView"))
+            && !(tspec_.combo_menu && !isLibreoffice_ && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys
             && !(isPcmanfm_
                  && ((hspec_.transparent_pcmanfm_view && pw
@@ -796,7 +797,7 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  bool isMenuOrTooltip(!isLibreoffice_ // not required
+  bool isMenuOrTooltip(!isLibreoffice_
                        && !noComposite_
                        && !subApp_
                        && (qobject_cast<QMenu*>(widget)

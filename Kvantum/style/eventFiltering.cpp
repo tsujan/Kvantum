@@ -796,9 +796,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (qobject_cast<QMenu*>(o))
 #endif
       {
+        if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (movedMenus.contains(w)) break; // already moved
-        //bool drawnMenu (drawnMenus_.contains(w));
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
@@ -854,11 +854,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* compensate for the offset created by the shadow */
 
-          /*if (drawnMenu)*/ Y -= menuShadow_.at(1); // top shadow
+          Y -= menuShadow_.at(1); // top shadow
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
-            /*if (drawnMenu)*/ X += menuShadow_.at(2);
+            X += menuShadow_.at(2);
             if (parentMenu)
             {
               if (parentMenuCorner.x() < g.left())
@@ -922,7 +922,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           else // ltr
           {
-            /*if (drawnMenu)*/ X -= menuShadow_.at(0); // left shadow
+            X -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
               if (parentMenuCorner.x() > g.left())

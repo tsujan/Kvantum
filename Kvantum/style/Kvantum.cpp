@@ -961,7 +961,6 @@ void Style::noTranslucency(QObject *o)
   QWidget *widget = static_cast<QWidget*>(o);
   translucentWidgets_.remove(widget);
   forcedTranslucency_.remove(widget);
-  //drawnMenus_.remove(widget);
 }
 
 int Style::mergedToolbarHeight(const QWidget *menubar) const
@@ -2920,7 +2919,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
          would have no background without this either. */
       if ((widget // it's NULL in the case of QML menus
            && !qobject_cast<const QMenu*>(widget))
-          || isLibreoffice_) // really not needed
+          || isLibreoffice_) // LibreOffice's menus can be styled but not well
         break;
 
       const QString group = "Menu";
@@ -3061,7 +3060,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
 
         if (widget && widget->inherits("QComboBoxPrivateContainer")
-            && tspec_.combo_menu)
+            && tspec_.combo_menu && !isLibreoffice_)
         { // as with PE_PanelMenu FIXME: calling it instead?
           const QString group = "Menu";
           frame_spec fspec = getFrameSpec(group);
@@ -4643,7 +4642,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("MenuItem"));
         dspec.size = dspec1.size;
         /* the arrow rectangle is set at CE_MenuItem appropriately */
-        if (renderElement(painter, dspec1.element+dir+aStatus,option->rect))
+        if (renderElement(painter, (isLibreoffice_ && aStatus.startsWith("normal") ? dspec.element : dspec1.element)
+                                   + dir+aStatus,
+                          option->rect))
           break;
       }
       /* only theoretically; toolbar/menubar arrows are drawn at SP_ToolBarHorizontalExtensionButton */
@@ -5181,9 +5182,9 @@ void Style::drawControl(QStyle::ControlElement element,
           }
 
           /* some apps (like Qt Creator) may force a bad text color */
-          if (state == 1)
+          if (state == 1 || state == 0)
           {
-            if (lspec.normalColor.isEmpty())
+            if (isLibreoffice_ || lspec.normalColor.isEmpty())
             {
               lspec.normalColor = cspec_.windowTextColor;
               lspec.normalInactiveColor = cspec_.inactiveWindowTextColor;
@@ -5199,7 +5200,7 @@ void Style::drawControl(QStyle::ControlElement element,
           }
 
           bool rtl(option->direction == Qt::RightToLeft);
-          bool hideCheckBoxes(tspec_.combo_menu
+          bool hideCheckBoxes(tspec_.combo_menu && !isLibreoffice_
                               && tspec_.hide_combo_checkboxes
                               // see Qt -> qcombobox_p.h -> QComboMenuDelegate
                               && qobject_cast<const QComboBox*>(widget));
@@ -5751,12 +5752,12 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_MenuBarEmptyArea : {
-      if (isLibreoffice_
+      /*if (isLibreoffice_
           && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuBarItem")).normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
         break;
-      }
+      }*/
       QString group = "MenuBar";
       QRect r = option->rect;
       if (int th = mergedToolbarHeight(widget))
@@ -11857,7 +11858,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
         return 0; // not needed but logical (-> CT_PushButton)
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
-               && tspec_.combo_menu)
+               && tspec_.combo_menu && !isLibreoffice_)
       {
           return qMax(pixelMetric(PM_MenuHMargin,option,widget),
                       pixelMetric(PM_MenuVMargin,option,widget));
@@ -11902,6 +11903,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuDesktopFrameWidth: return 0;
 
     case PM_SubMenuOverlap : {
+      if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
         return 0; // RTL submenu positioning is a mess in Qt5
       int so = tspec_.submenu_overlap;
@@ -11914,6 +11916,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
+      if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
@@ -11928,8 +11931,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         h += tspec_now.menu_shadow_depth;
       }
       /* a margin > 2px could create ugly corners without compositing */
-      if (/*!tspec_now.composite ||*/ isLibreoffice_
-          || (!widget && option) // QML menus (see PE_PanelMenu)
+      if (/*!tspec_now.composite || isLibreoffice_
+          ||*/ (!widget && option) // QML menus (see PE_PanelMenu)
           /*|| (qobject_cast<const QMenu*>(widget) && !translucentWidgets_.contains(widget))*/)
       {
         v = qMin(2,v);
@@ -12565,7 +12568,7 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_Menu_MouseTracking : return true;
 
     case SH_ComboBox_PopupFrameStyle: return QFrame::StyledPanel | QFrame::Plain;
-    case SH_ComboBox_Popup : return tspec_.combo_menu;
+    case SH_ComboBox_Popup : return tspec_.combo_menu && !isLibreoffice_;
 
     case SH_MenuBar_MouseTracking :
       return tspec_.menubar_mouse_tracking;
@@ -13079,17 +13082,6 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
       break;
     }
-
-    /*case CT_Menu : {
-      if (widget && !drawnMenus_.contains(widget))
-      {
-        // The menu size is determined before the menu is shown. Because
-        // drawnMenus_ is used in QEvent::Show, its contents can be set here.
-        drawnMenus_.insert(widget);
-        connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
-      }
-      break;
-    }*/
 
     case CT_MenuItem : {
       const QStyleOptionMenuItem *opt =
@@ -14880,7 +14872,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                        h);
         }
         case SC_ComboBoxListBoxPopup : {
-          if (!tspec_.combo_menu)
+          if (!tspec_.combo_menu || isLibreoffice_)
           { // level the popup list with the bottom or top edge of the combobox
             int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
             return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
