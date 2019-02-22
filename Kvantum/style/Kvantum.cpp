@@ -5342,9 +5342,9 @@ void Style::drawControl(QStyle::ControlElement element,
             o.rect = alignedRect(option->direction,
                                  Qt::AlignLeft | Qt::AlignVCenter,
                                  QSize(iw,ih),
-                                 /*isLibreoffice_ ?
-                                   opt->rect.adjusted(qMax(-opt->rect.x(),0),-2,0,0) // FIXME why?
-                                   :*/ interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
+                                 isLibreoffice_ && widget == nullptr ? // LibreOffice's unstyled menus
+                                   opt->rect.adjusted(qMax(-opt->rect.x(),0),0,0,0)
+                                   : interiorRect(opt->rect,fspec).adjusted(rtl ? 0 : lspec.left,
                                                                             0,
                                                                             rtl ? -lspec.right : 0,
                                                                             0));
