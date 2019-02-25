@@ -62,7 +62,7 @@ the theme is already used.</source>
         <translation>Jadikan Kvantum menggunakan tema ini!
 
 Sebuah tombol yang dinonaktifkan berarti bahwa
-temanya sudah digunakan</translation>
+temanya sudah digunakan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
@@ -255,12 +255,16 @@ and can have translucency.
 
 Checking this is not recommended unless
 as a workaround for bugs in applications.</source>
-        <translation></translation>
+        <translation>Warna teks ditentukan oleh tema
+dan dapat memiliki efek transparansi.
+
+Pilihan ini tidak disarankan kecuali
+sebagai solusi untuk bug dalam aplikasi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="577"/>
         <source>Opaque (text) colors</source>
-        <translation></translation>
+        <translation>Warna buram (teks)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
@@ -283,12 +287,12 @@ as a workaround for bugs in applications.</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini bukan perbaikan total tetapi mencegah lompatan gulir yang mengganggu yang mungkin terjadi dengan roda mouse saat gerakan mouse diaktifkan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="603"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Solusi untuk bug lompat gulir Qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
@@ -446,27 +450,32 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ini membutuhkan efek kontras KDE dengan Qt ≥ 5.11
+dan hanya diterapkan pada jendela transparan yang
+mendukung efek blur (tetapi efek blur KDE dapat 
+dinonaktifkan). 
+
+Nilai 1,00 berarti tidak ada perubahan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="784"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efek Kontras</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Saturasi:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="797"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensitas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="804"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontras:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="881"/>
@@ -659,7 +668,7 @@ Secara bawaan, cabang pohon memiliki indikator tetapi tidak ada garis.</translat
     <message>
         <location filename="../../kvantummanager.ui" line="1884"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak tombol dialog:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
@@ -701,7 +710,7 @@ Secara bawaan, dia memiliki latar belakang dasar.</translation>
 Such push buttons have bold text by default.</source>
         <translation>Tidak ada ketebalan huruf untuk tombol tekan bawaan?
 
-Beberapa tombol tekan memiliki teks tebal secara bawaan</translation>
+Beberapa tombol tekan memiliki teks tebal secara bawaan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="456"/>
@@ -1378,27 +1387,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="86"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="87"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak Gnome</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="88"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="89"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="90"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Tata letak Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="92"/>
