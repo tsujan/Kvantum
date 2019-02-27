@@ -802,7 +802,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
-        if (!parentMenu)
+        /* this is a workaround for KDE global menu */
+        if (parentMenu && parentMenu->activeAction() == nullptr) parentMenu = nullptr;
+        if (parentMenu == nullptr)
         { // search for a detached menu with an active action
           const QWidgetList topLevels = QApplication::topLevelWidgets();
           for (QWidget *topWidget : topLevels)
