@@ -1064,31 +1064,29 @@
 <path style="fill:#080808" d="m 17.5,943.5 v 0.5 h 58 v -0.5 z"/>
 </g>
 <path style="fill:#b74aff" id="tooltip-shadow-hint-bottom" d="m 400,852 h 2.5 v 3 H 400 Z"/>
-<g style="fill-rule:evenodd" id="g1757" transform="translate(-6,386)">
-<g transform="translate(359.49965,-480)">
+<g style="fill-rule:evenodd" id="tooltip-shadow-topleft" transform="translate(353.49965,-94)">
 <path style="opacity:.28;fill:url(#radialGradient4966)" d="m 12.5003,877 v 6 h 6 v -6 z"/>
 <path style="fill:#0a0a0a" d="m 15.5003,880 v 3 h 3 v -3 z"/>
 <path style="fill:#313133" d="m 375,400 .5,.5 h 2.5 v -0.5 Z " transform="translate(-359.49965,480)"/>
 <path style="fill:#2f2f31" d="m 15.5003,880 v 3 h 0.5 v -2.5 z"/>
 </g>
-<g transform="translate(361.49965,-480)">
+<g style="fill-rule:evenodd" id="tooltip-shadow-topright" transform="translate(355.49965,-94)">
 <path style="opacity:.43;fill:url(#radialGradient4962)" d="m 74.5004,877 v 6 h 6 v -6 z"/>
 <path style="fill:#0a0a0a" d="m 74.5004,880 v 3 h 3 v -3 z"/>
 <path style="fill:#313133" d="m 436,400 v 0.5 h 2.5 l .5,-.5 Z " transform="translate(-361.49965,480)"/>
 <path style="fill:#0f0f0f" d="m 77,880.5 v 2.5 h 0.5 v -3 z"/>
 </g>
-<g transform="translate(359.49965,-478)">
+<g style="fill-rule:evenodd" id="tooltip-shadow-bottomleft" transform="translate(353.49965,-92)">
 <path style="opacity:.48;fill:url(#radialGradient4949)" d="m 12.5005,941 v 6 h 6 v -6 z"/>
 <path style="fill:#0a0a0a" d="m 15.5003,941 v 3 h 3 v -3 z"/>
 <path style="fill:#2f2f31" d="m 375,463 v 3 l .5,-.5 v -2.5 Z " transform="translate(-359.49965,478)"/>
 <path style="fill:#080808" d="m 15.50035,944 h 3 v -0.5 H 16 Z"/>
 </g>
-<g transform="translate(361.49965,-478)">
+<g style="fill-rule:evenodd" id="tooltip-shadow-bottomright" transform="translate(355.49965,-92)">
 <path style="opacity:.48;fill:url(#radialGradient4940)" d="m 74.5004,941 v 6 h 6 v -6 z"/>
 <path style="fill:#0a0a0a" d="m 74.5004,941 v 3 h 3 v -3 z"/>
 <path style="fill:#0f0f0f" d="m 438.5,463 v 2.5 l .5,.5 v -3 z " transform="translate(-361.49965,478)"/>
 <path style="fill:#080808" d="m 74.5003,943.5 v 0.5 h 3 l -.5,-.5 z "/>
-</g>
 </g>
 <g style="fill-rule:evenodd" id="tooltip-normal-left" transform="translate(-7,386)">
 <path style="fill:#0a0a0a" d="m 377,476 h 6 v 48 h -6 z"/>
