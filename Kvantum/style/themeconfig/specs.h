@@ -166,6 +166,8 @@ typedef struct {
   /* draw spin indicators horizontally
      but inside the spin line-edit? */
   bool inline_spin_indicators;
+  /* draw the spin separator for inline spin indicators too? */
+  bool inline_spin_separator;
   /* width of a horizontal spin button */
   int spin_button_width;
   /* draw an editable combobox as a lineedit with arrow? */
@@ -518,6 +520,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.tooltip_delay = -1;
   tspec.vertical_spin_indicators = false;
   tspec.inline_spin_indicators = false;
+  tspec.inline_spin_separator = false;
   tspec.spin_button_width = 16;
   tspec.combo_as_lineedit = false;
   tspec.square_combo_button = false;

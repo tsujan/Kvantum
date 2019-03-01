@@ -871,6 +871,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("inline_spin_indicators"));
   r.inline_spin_indicators = v.toBool();
 
+  v = getValue(KSL("General"),KSL("inline_spin_separator"));
+  r.inline_spin_separator = v.toBool();
+
   v = getValue(KSL("General"),KSL("spin_button_width"));
   if (v.isValid()) // 16 by default
     r.spin_button_width = qMin(qMax(v.toInt(),16), 32);

@@ -246,13 +246,32 @@ double_click                      true/false          Activate view items on dou
                                                       over the default.
 
 inline_spin_indicators            true/false          Draw spin indicators inside the spin
-                                                      line-edit? By default, they are drawn
-                                                      as buttons.
-
-vertical_spin_indicators          true/false          Draw spin indicators vertically
-                                                      and inside the spin line-edit?
-                                                      By default, they are drawn on
+                                                      line-edit, without drawing any spin
+                                                      button? By default, they are drawn on
                                                       adjacent buttons.
+
+inline_spin_separator             true/false          If the spin box has separator SVG
+                                                      elements, they will be drawn between
+                                                      its line-edit and horizontal buttons
+                                                      (See "Theme-Making.pdf"). However, if
+                                                      this key is true, the separator will
+                                                      also be drawn when there is no button,
+                                                      i.e. when "inline_spin_indicators" is
+                                                      true.
+
+                                                      Usually, "inline_spin_indicators" is
+                                                      set to true to integrate the indicators
+                                                      into the line-edit and so, the default
+                                                      value of this key is false.
+
+vertical_spin_indicators          true/false          Draw spin indicators vertically and
+                                                      inside the spin line-edit? By default,
+                                                      they are drawn on adjacent buttons.
+
+                                                      Note: If this key is set to true, the
+                                                      keys "inline_spin_indicators" and
+                                                      "inline_spin_separator" will have no
+                                                      effect.
 
 spin_button_width                integer              The width of horizontal spin buttons.
                                                       It is 16px by default and is always

@@ -2514,11 +2514,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       if (drawSep && (fspec.expansion > 0 || rtl // the rtl arrow is at the left
                       || tb->popupMode() != QToolButton::MenuButtonPopup))
       {
-        renderElement(painter,fspec.element + "-separator",
+        const QString inactiveStr = isInactive ? "-inactive" : QString();
+        renderElement(painter,fspec.element + "-separator" + inactiveStr,
                       QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom));
-        renderElement(painter,fspec.element + "-separator-top",
+        renderElement(painter,fspec.element + "-separator" + inactiveStr + "-top",
                       QRect(x+r.width()-fspec.right, y, fspec.right, fspec.top));
-        renderElement(painter,fspec.element + "-separator-bottom",
+        renderElement(painter,fspec.element + "-separator" + inactiveStr + "-bottom",
                       QRect(x+r.width()-fspec.right, y+h-fspec.bottom, fspec.right, fspec.bottom));
       }
 
@@ -3640,6 +3641,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         m.rotate(-90);
         painter->setTransform(m, true);
       }
+      const QString inactiveStr = isWidgetInactive(widget) ? "-inactive" : QString();
       if (element == PE_IndicatorToolBarHandle && tspec_.center_toolbar_handle)
       {
         int margin = qMax(3 - pixelMetric(PM_ToolBarItemMargin,option,widget)
@@ -3648,13 +3650,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         renderIndicator(painter,
                         option->direction == Qt::RightToLeft ? r.adjusted(0,0,-margin,0)
                                                              : r.adjusted(margin,0,0,0),
-                        fspec,dspec,dspec.element+"-handle",option->direction,
+                        fspec,dspec,dspec.element+"-handle"+inactiveStr,option->direction,
                         Qt::AlignVCenter | Qt::AlignLeft);
       }
       else
         renderInterior(painter,r,fspec,ispec,
                        dspec.element
-                         +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator"));
+                         +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator")+inactiveStr);
 
       if (!(option->state & State_Horizontal))
         painter->restore();
@@ -3810,7 +3812,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       QRect r = option->rect;
       indicator_spec dspec = getIndicatorSpec(group);
 
-      if (!verticalIndicators && !tspec_.inline_spin_indicators)
+      if (!verticalIndicators && (!tspec_.inline_spin_indicators || tspec_.inline_spin_separator))
       {
         if (bStatus.startsWith("disabled"))
         {
@@ -3818,10 +3820,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        interior_spec ispec = getInteriorSpec(group);
-        ispec.px = ispec.py = 0;
-        renderFrame(painter,r,fspec,fspec.element+"-"+bStatus,0,0,0,0,0,true);
-        renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus,true);
+        if (!verticalIndicators && !tspec_.inline_spin_indicators)
+        {
+          interior_spec ispec = getInteriorSpec(group);
+          ispec.px = ispec.py = 0;
+          renderFrame(painter,r,fspec,fspec.element+"-"+bStatus,0,0,0,0,0,true);
+          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus,true);
+        }
         if (element == PE_IndicatorSpinDown || element == PE_IndicatorSpinMinus)
         { // draw spinbox separator if it exists
           QString sepName = dspec.element + "-separator";
@@ -6114,6 +6119,8 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           ispec.element="floating-"+ispec.element;
           fspec.element="floating-"+fspec.element;
+          if (!fspec.expandedElement.isEmpty())
+            fspec.expandedElement="floating-"+fspec.expandedElement;
           joinedActiveTab = joinedActiveFloatingTab_;
           sepName = "floating-"+sepName;
         }
@@ -6133,6 +6140,8 @@ void Style::drawControl(QStyle::ControlElement element,
           else
             sepName = sepName+"-normal";
         }
+        if (isWidgetInactive(widget))
+          sepName += "-inactive";
 
         if ((joinedActiveTab && !noActiveTabSep)
             || status.startsWith("normal") || status.startsWith("focused"))

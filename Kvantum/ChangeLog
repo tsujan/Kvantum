@@ -5,6 +5,7 @@ V0.10.10
  * Don't move detached menus when they're shown.
  * Support LibreOffice's new Qt5 skin (that's much better than the old Qt4 skin).
  * Also check the active action of active popup when determining whether a submenu is going to be shown.
+ * Added a key for drawing the spinbox separator also with inline indicators.
 
 V0.10.9
 ---------
