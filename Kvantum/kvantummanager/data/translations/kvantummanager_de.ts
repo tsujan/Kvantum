@@ -521,7 +521,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1110"/>
         <source>Transient scrollbars</source>
-        <translation></translation>
+        <translation>Vorübergehende Bildlaufleisten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1132"/>
@@ -546,7 +546,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1225"/>
         <source>Button icon:</source>
-        <translation></translation>
+        <translation>Schaltflächensymbol:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1257"/>
