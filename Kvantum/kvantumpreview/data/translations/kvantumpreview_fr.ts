@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation>Aperçu de Kvantum</translation>
+        <translation>Aperçu Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
@@ -414,13 +414,13 @@ case à cocher</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation>2ème enfant</translation>
+        <translation>2ème fils</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation>1er enfant</translation>
+        <translation>1er fils</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -430,7 +430,7 @@ case à cocher</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation>3ème enfant</translation>
+        <translation>3ème fils</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
@@ -565,7 +565,7 @@ case à cocher</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Dock Widget</source>
-        <translation>Dock Widget</translation>
+        <translation>Widget Dock</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2537"/>
