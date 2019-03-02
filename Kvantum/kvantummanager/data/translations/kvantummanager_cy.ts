@@ -169,7 +169,7 @@ with LXQt Session Settings.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation></translation>
     </message>
     <message>

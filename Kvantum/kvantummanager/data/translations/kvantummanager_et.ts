@@ -183,7 +183,7 @@ LXQt seansi seadetes.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation>Ikoonideta menüüd</translation>
     </message>
     <message>

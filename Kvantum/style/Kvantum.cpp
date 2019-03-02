@@ -2578,7 +2578,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             suffix = "-normal";
         }
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate //&& !isLibreoffice_
+        if (!animate && !(isLibreoffice_ && widget == nullptr)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -2637,8 +2637,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           suffix = "-checked-normal";
         else
           suffix = "-normal";
-        if (/*!isLibreoffice_
-            &&*/ qstyleoption_cast<const QStyleOptionMenuItem*>(option)
+        if (!(isLibreoffice_ && widget == nullptr)
+            && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && themeRndr_->elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
@@ -2706,14 +2706,20 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
             animate = false;
-            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (!(isLibreoffice_ && widget == nullptr)
+                && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            {
               prefix = "menu-"; // make exception for menuitems
+            }
           }
           else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
           {
             animate = false;
-            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("item-"+ispec.element+suffix))
+            if (!(isLibreoffice_ && widget == nullptr)
+                && themeRndr_->elementExists("item-"+ispec.element+suffix))
+            {
               prefix = "item-"; // make exception for viewitems
+            }
           }
         }
         if (isWidgetInactive(widget))
@@ -2776,11 +2782,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
-            if (/*!isLibreoffice_ &&*/ themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            if (!(isLibreoffice_ && widget == nullptr)
+                && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            {
               prefix = "menu-";
+            }
           }
-          else if (/*!isLibreoffice_
-                   &&*/ qstyleoption_cast<const QStyleOptionViewItem*>(option)
+          else if (!(isLibreoffice_ && widget == nullptr)
+                   && qstyleoption_cast<const QStyleOptionViewItem*>(option)
                    && themeRndr_->elementExists("item-"+ispec.element+suffix))
           {
             prefix = "item-";

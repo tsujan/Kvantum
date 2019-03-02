@@ -186,7 +186,7 @@ naudojant LXQt seanso nustatymus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation>Meniu be piktogramų</translation>
     </message>
     <message>

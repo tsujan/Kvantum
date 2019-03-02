@@ -186,7 +186,7 @@ via de LXQt-sessie-instellingen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation>Geen pictogrammen in menu&apos;s</translation>
     </message>
     <message>

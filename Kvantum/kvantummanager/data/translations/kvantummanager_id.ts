@@ -186,7 +186,7 @@ dengan Pengaturan Sesi LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation>Menu tanpa ikon</translation>
     </message>
     <message>
@@ -452,8 +452,8 @@ can be disabled).
 A value of 1.00 means no change.</source>
         <translation>Ini membutuhkan efek kontras KDE dengan Qt ≥ 5.11
 dan hanya diterapkan pada jendela transparan yang
-mendukung efek blur (tetapi efek blur KDE dapat 
-dinonaktifkan). 
+mendukung efek blur (tetapi efek blur KDE dapat
+dinonaktifkan).
 
 Nilai 1,00 berarti tidak ada perubahan.</translation>
     </message>

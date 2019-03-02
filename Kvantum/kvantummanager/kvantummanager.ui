@@ -490,7 +490,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Iconless  menus</string>
+                  <string>Iconless menus</string>
                  </property>
                 </widget>
                </item>

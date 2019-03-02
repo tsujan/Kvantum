@@ -186,7 +186,7 @@ avec les paramètres de session LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
-        <source>Iconless  menus</source>
+        <source>Iconless menus</source>
         <translation>Menus sans icône</translation>
     </message>
     <message>
