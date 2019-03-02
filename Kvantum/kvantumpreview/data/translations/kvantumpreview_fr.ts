@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation>Kvantum Preview</translation>
+        <translation>Aperçu de Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
@@ -378,7 +378,7 @@ case à cocher</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1561"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation>Sliders/Scrolls/Progress/Dial</translation>
+        <translation>Coulissantes/Défilements/Progressions/Dialogues</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
