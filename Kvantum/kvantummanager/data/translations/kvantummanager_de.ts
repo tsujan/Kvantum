@@ -12,7 +12,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation></translation>
+        <translation>Thema installieren/aktualisieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -23,7 +23,8 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation></translation>
+        <translation>Wählen Sie einen Kvantum-
+Themenordner aus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -34,22 +35,22 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation></translation>
+        <translation>Dieses Thema installieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation></translation>
+        <translation>Thema ändern/löschen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation></translation>
+        <translation>Wählen Sie ein Thema aus:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation></translation>
+        <translation>Dieses Thema löschen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -62,12 +63,12 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation></translation>
+        <translation type="unfinished">Dieses Thema verwenden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation></translation>
+        <translation>Aktives Thema konfigurieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -128,7 +129,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation></translation>
+        <translation>Transparente Dolphin-Ansicht</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
@@ -147,7 +148,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Transparente Seitenleiste für PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
@@ -166,7 +167,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation></translation>
+        <translation>Transparente Ansicht für PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
@@ -181,7 +182,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation></translation>
+        <translation>Einzelne obere Werkzeugleiste</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
@@ -242,7 +243,7 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="577"/>
         <source>Opaque (text) colors</source>
-        <translation></translation>
+        <translation>Undurchsichtige (Text-)Farben</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
@@ -257,7 +258,7 @@ as a workaround for bugs in applications.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="590"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation></translation>
+        <translation>KCapacityBar als Fortschrittsleiste anzeigen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="597"/>
@@ -288,7 +289,7 @@ are enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="615"/>
         <source>Respect dark themes</source>
-        <translation></translation>
+        <translation>Dunkle Themen beachten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="667"/>
@@ -307,7 +308,7 @@ reduced by other means.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
         <source>Opacity of disabled icons:</source>
-        <translation></translation>
+        <translation>Deckkraft deaktivierter Symbole:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="653"/>
@@ -328,7 +329,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="722"/>
         <source>LXQt main menu icon size:</source>
-        <translation></translation>
+        <translation>LXQt-Hauptmenü-Symbolgröße:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="737"/>
@@ -447,12 +448,12 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="887"/>
         <source>Blurring for menus and tooltips</source>
-        <translation></translation>
+        <translation>Unschärfe bei Menüs und Kurzinfos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Translucent windows</source>
-        <translation></translation>
+        <translation>Lichtdurchlässige Fenster</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="962"/>
@@ -467,7 +468,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="969"/>
         <source>Reduce window opacity by</source>
-        <translation></translation>
+        <translation>Fensterdeckkraft reduzieren um</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1009"/>
@@ -477,7 +478,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1047"/>
         <source>Blurring for translucent windows</source>
-        <translation></translation>
+        <translation type="unfinished">Unschärfe für lichtdurchlässige Fenster</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1067"/>
@@ -493,7 +494,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1074"/>
         <source>Animation for state change under mouse</source>
-        <translation></translation>
+        <translation>Animation zum Zustandswechsel unter der Maus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1081"/>
@@ -515,7 +516,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1096"/>
         <source>Ignore inactive state</source>
-        <translation></translation>
+        <translation type="unfinished">Inaktiven Status ignorieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1110"/>
@@ -1265,7 +1266,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="79"/>
         <location filename="../../KvantumManager.cpp" line="85"/>
         <source>Follow Style</source>
-        <translation></translation>
+        <translation>Stil folgen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="80"/>
