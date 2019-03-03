@@ -152,8 +152,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
       if (renderElement(&painter,
-                        getIndicatorSpec(QStringLiteral("TitleBar")).element+"-minimize-"
-                          + (isWidgetInactive(widget) ? "disabled" : status),
+                        getIndicatorSpec(QStringLiteral("TitleBar")).element+"-minimize-"+status,
                         QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
@@ -193,20 +192,17 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
       }
-      bool isInactive(isWidgetInactive(widget));
       bool rendered(false);
       if (standardIcon == SP_DockWidgetCloseButton
           || qobject_cast<const QDockWidget*>(widget))
       {
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-close"
-                                   + (isInactive ? "-inactive" : QString()),
+                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-close",
                                  QRect(0,0,s,s));
       }
       if (!rendered)
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-close-"
-                                   + (isInactive ? "disabled" : status),
+                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-close-"+status,
                                  QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);
@@ -246,17 +242,14 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
       }
-      bool isInactive(isWidgetInactive(widget));
       bool rendered(false);
       if (qobject_cast<const QDockWidget*>(widget))
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-restore"
-                                   + (isInactive ? "-inactive" : QString()),
+                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-restore",
                                  QRect(0,0,s,s));
       if (!rendered)
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-restore-"
-                                   + (isInactive ? "disabled" : status),
+                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-restore-"+status,
                                  QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);

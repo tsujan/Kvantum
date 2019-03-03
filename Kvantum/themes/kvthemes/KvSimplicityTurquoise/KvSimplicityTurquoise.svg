@@ -136,15 +136,15 @@
 </linearGradient>
 <linearGradient id="linearGradient5024">
 <stop offset="0" style="stop-color:#6e6e6e"/>
-<stop offset="1" style="stop-color:#8b8b8b"/>
+<stop offset="1" style="stop-color:#858585"/>
 </linearGradient>
 <linearGradient id="linearGradient5116">
 <stop offset="0" style="stop-color:#6e6e6e"/>
 <stop offset="1" style="stop-color:#505050"/>
 </linearGradient>
 <linearGradient id="linearGradient5369">
-<stop offset="0" style="stop-color:#7d7d7d"/>
-<stop offset="1" style="stop-color:#8b8b8b"/>
+<stop offset="0" style="stop-color:#787878"/>
+<stop offset="1" style="stop-color:#858585"/>
 </linearGradient>
 <linearGradient id="linearGradient5469">
 <stop offset="0" style="stop-color:#464646"/>
@@ -166,7 +166,7 @@
 </linearGradient>
 <linearGradient id="linearGradient2076">
 <stop offset="0" style="stop-color:#5a5a5a"/>
-<stop offset="1" style="stop-color:#7d7d7d"/>
+<stop offset="1" style="stop-color:#787878"/>
 </linearGradient>
 <linearGradient id="linearGradient2084">
 <stop offset="0" style="stop-color:#505050"/>
@@ -843,7 +843,7 @@
 </g>
 <g style="fill:url(#linearGradient2029)" id="tbutton-normal-top" transform="matrix(0,1.3333333,-0.98461538,0,160.00152,48.666571)">
 <path style="fill:url(#linearGradient2027)" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
-<path style="fill:#8b8b8b;line-height:normal;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
+<path style="fill:#858585;line-height:normal;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
 </g>
 <g id="tbutton-normal-right" transform="matrix(-1.3333333,0,0,0.98461538,150.33331,38.998422)">
 <path style="fill:url(#linearGradient2031)" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
@@ -940,7 +940,7 @@
 </g>
 <g style="fill:url(#linearGradient1730)" id="tbutton-focused-top" transform="matrix(0,1.3333333,-0.98461538,0,378.00152,48.666571)">
 <path style="fill:url(#linearGradient1728);fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
-<path style="fill:#8b8b8b;line-height:normal;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
+<path style="fill:#858585;line-height:normal;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
 </g>
 <g id="tbutton-focused-right" transform="matrix(-1.3333333,0,0,0.98461538,368.33331,38.998422)">
 <path style="fill:url(#linearGradient1732);fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
