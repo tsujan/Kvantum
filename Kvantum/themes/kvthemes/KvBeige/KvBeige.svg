@@ -913,7 +913,7 @@
 <path style="opacity:.8;fill:url(#linearGradient6034);fill-rule:evenodd" id="menuitem-normal-left" d="m -244,-738.5 h 4 v 8 h -4 z" transform="scale(-1,-1)"/>
 <path style="stroke-opacity:.494;fill:url(#linearGradient1988);stroke:#000;stroke-width:.387" id="slidercursor-focused" d="m 272.0534,646.2352 c -2.5082,-2.22011 -2.45144,-8.1771 0,-10.4413 2.51242,-2.32049 13.7535,2.61634 13.7535,5.22063 0,2.60429 -11.2411,7.44448 -13.7535,5.22064 z "/>
 <path style="stroke-opacity:.494;fill:url(#linearGradient5705);stroke:#000;stroke-width:.387" id="slidercursor-disabled" d="m 362.0534,646.2352 c -2.5082,-2.22011 -2.45144,-8.1771 0,-10.4413 2.51242,-2.32049 13.7535,2.61634 13.7535,5.22063 0,2.60429 -11.2411,7.44448 -13.7535,5.22064 z "/>
-<path style="fill:#5a5a5a" id="button-default-indicator" d="m 442.3445,47.3558 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
+<path style="opacity:.4" id="button-default-indicator" d="m 442.3445,47.3558 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
 <path style="fill:url(#linearGradient5595)" id="toolbar-normal" d="m 250,140 h 30 v 30 h -30 z"/>
 <path style="opacity:0" id="toolbar-normal-bottomright" d="m 285,170 -5,0 0,5 5,0 z"/>
 <path style="opacity:0;fill-rule:evenodd" id="scrollbarslider-focused-top" d="m 62,1125.25 h 5 v 5 h -5 z"/>

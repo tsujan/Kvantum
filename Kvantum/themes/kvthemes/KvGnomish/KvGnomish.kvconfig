@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A fancier version of KvGnomeDark
+comment=A dark theme inspired by Gnome
 x11drag=true
 alt_mnemonic=true
 left_tabs=false
@@ -13,7 +13,7 @@ toolbar_item_spacing=1
 toolbar_interior_spacing=2
 spread_progressbar=true
 composite=true
-menu_shadow_depth=6
+menu_shadow_depth=7
 tooltip_shadow_depth=6
 scroll_width=12
 scroll_arrows=false
@@ -428,10 +428,10 @@ inherits=PanelButtonCommand
 
 [Menu]
 inherits=PanelButtonCommand
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+frame.top=1
+frame.bottom=1
+frame.left=1
+frame.right=1
 frame.element=menu
 interior.element=menu
 text.normal.color=white
