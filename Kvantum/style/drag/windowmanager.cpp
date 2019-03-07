@@ -663,7 +663,7 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   if (!cursorOverride_)
   {
-    qApp->setOverrideCursor (Qt::DragMoveCursor);
+    qApp->setOverrideCursor (Qt::OpenHandCursor);
     cursorOverride_ = true;
   }
 #else

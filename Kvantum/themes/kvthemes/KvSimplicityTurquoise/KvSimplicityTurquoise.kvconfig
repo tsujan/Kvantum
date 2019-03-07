@@ -241,6 +241,7 @@ text.margin.right=6
 text.margin.top=3
 text.margin.bottom=3
 frame.element=button
+focusFrame=true
 indicator.element=tab
 indicator.size=14
 text.normal.color=black
