@@ -1257,4 +1257,9 @@
 <use width="100%" height="100%" xlink:href="#le-normal-topleft" id="le-normal-topright" transform="matrix(-1,0,0,1,682,0)"/>
 <use width="100%" height="100%" xlink:href="#le-normal-bottomleft" id="le-normal-bottomright" transform="matrix(-1,0,0,1,682,0)"/>
 <use width="100%" height="100%" xlink:href="#le-normal-left" id="le-normal-right" transform="matrix(-1,0,0,1,682,0)"/>
+<g style="fill-rule:evenodd" id="button-focus-bottom" transform="translate(-76,107)">
+<path style="opacity:0" d="m 369,50 h -32 v 12 h 32 z"/>
+<path style="opacity:.33;fill:#fff" d="m 369,54 h -32 c 0,0 5,2 16,2 11,0 16,-2 16,-2 z"/>
+</g>
+<path style="fill-rule:evenodd" id="expand-button-focus" d="M 0,50 H 10 V 60 H 0 Z"/>
 </svg>

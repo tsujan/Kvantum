@@ -1423,4 +1423,9 @@
 <use width="100%" height="100%" xlink:href="#le-focused-top" id="le-focused-right" transform="rotate(90,441,-44)"/>
 <use width="100%" height="100%" xlink:href="#le-focused-topleft" id="le-focused-topright" transform="rotate(90,441,-44)"/>
 <use width="100%" height="100%" xlink:href="#le-focused-topleft" id="le-focused-bottomright" transform="rotate(-180,441,-44)"/>
+<g id="button-focus-bottom">
+<path style="opacity:0;fill-rule:evenodd" d="M 369,50 H 337 v 12 h 32 z"/>
+<path style="opacity:.35;fill:#fff;fill-rule:evenodd" d="m 369,54 h -32 c 0,0 3.5,2 16,2 12.5,0 16,-2 16,-2 z"/>
+</g>
+<path style="fill-rule:evenodd" id="expand-button-focus" d="M 0,50 H 10 V 60 H 0 Z"/>
 </svg>
