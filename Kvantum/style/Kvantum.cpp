@@ -5142,17 +5142,20 @@ void Style::drawControl(QStyle::ControlElement element,
           /* don't draw panel for normal and disabled states */
           if (!status.startsWith("normal") && (option->state & State_Enabled))
           {
-            /*if (isLibreoffice_)
+            if (isLibreoffice_ && widget == nullptr)
             {
+              painter->save();
+              painter->setOpacity(0.6);
               painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
+              painter->restore();
               lspec.pressColor = lspec.toggleColor
                                = getName(QApplication::palette().color(QPalette::HighlightedText));
             }
             else
-            {*/
+            {
               renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
               renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-            //}
+            }
           }
 
           QStringList l;
