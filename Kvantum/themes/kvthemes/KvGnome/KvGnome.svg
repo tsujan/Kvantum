@@ -10,7 +10,7 @@
 <linearGradient xlink:href="#linearGradient3251" id="linearGradient3305" y1="45" x1="12.5" y2="49" gradientUnits="userSpaceOnUse" x2="17.5"/>
 <linearGradient xlink:href="#linearGradient2155" id="linearGradient2469" y1="85.251549" x1="28.749973" y2="43.751507" gradientUnits="userSpaceOnUse" x2="28.749866"/>
 <linearGradient xlink:href="#linearGradient2155" id="linearGradient2571" y1="94.376846" x1="28.750025" y2="42.501442" gradientUnits="userSpaceOnUse" x2="28.749918"/>
-<linearGradient xlink:href="#linearGradient3837" id="linearGradient3237" y1="50" x1="17.5" y2="51" gradientUnits="userSpaceOnUse" x2="17.5"/>
+<linearGradient xlink:href="#linearGradient3837" id="linearGradient3237" y1="50" x1="79.5" y2="51" gradientUnits="userSpaceOnUse" x2="79.5"/>
 <linearGradient xlink:href="#linearGradient2155" id="linearGradient2721" y1="49" x1="17.5" y2="7.5" gradientUnits="userSpaceOnUse" x2="17.5"/>
 <linearGradient xlink:href="#linearGradient1914" id="linearGradient1916" y1="678" x1="469" y2="648" x2="469" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5116" id="linearGradient3229" y1="50" x1="-55" y2="50" gradientUnits="userSpaceOnUse" x2="-7.5"/>
@@ -112,7 +112,7 @@
 <radialGradient fx="-74.544167" fy="1130.9204" cx="-74.545135" cy="1132.2249" gradientTransform="matrix(-2.7586164,-0.0018357,0.00114705,-1.7237388,-184.43564,2893.0246)" xlink:href="#linearGradient3837" id="radialGradient4949" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-24.51774" fy="1082.5682" cx="-24.517733" cy="1082.0504" gradientTransform="matrix(1.7931003,0,0,1.3103803,118.21047,-535.38762)" xlink:href="#linearGradient3837" id="radialGradient4962" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-70.794022" fy="1083.957" cx="-71.133865" cy="1085.1805" gradientTransform="matrix(0,-1.6559583,2.7585754,-0.00129655,-2971.1045,766.11512)" xlink:href="#linearGradient3837" id="radialGradient4966" r="3.625" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="17.5" fy="50" cx="17.5" cy="50" gradientTransform="matrix(-1,0,0,-0.3333335,35,66.666675)" xlink:href="#linearGradient3837" id="radialGradient3233" r="3" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="-44.5" fy="50" cx="-44.5" cy="50" gradientTransform="matrix(-1,0,0,-0.3333335,35,66.666675)" xlink:href="#linearGradient3837" id="radialGradient3233" r="3" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="-24.132002" fy="1084.2577" cx="-24.132002" cy="1084.2577" gradientTransform="matrix(2.757452,-4.5123521e-6,0,4.137926,145.54227,-3820.5782)" xlink:href="#linearGradient6806" id="radialGradient6742" r="3.625" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="17.5" fy="50" cx="17.5" cy="50" gradientTransform="matrix(-1,0,0,-0.3333335,215,66.666675)" xlink:href="#linearGradient3837" id="radialGradient3115" r="3" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="17.5" fy="50" cx="17.5" cy="50" gradientTransform="matrix(-1,0,0,-0.3333335,215,66.666675)" xlink:href="#linearGradient3837" id="radialGradient1964" r="3" gradientUnits="userSpaceOnUse"/>
@@ -555,13 +555,13 @@
 <use width="100%" height="100%" xlink:href="#button-normal-left" id="button-normal-right" transform="matrix(-1,0,0,1,67.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-normal-topleft" id="button-normal-topright" transform="matrix(-1,0,0,1,67.5,0)"/>
 <g id="button-normal-bottomleft">
-<path style="opacity:.14;paint-order:normal;fill:url(#radialGradient3021);fill-rule:evenodd" d="m 11.5,45 h 6 v 6 h -6 z"/>
+<path style="opacity:.14;paint-order:normal;fill:url(#radialGradient3021);fill-rule:evenodd" d="m 11.5,45 v 6 h 6 v -1 h -1 c -3,0 -5,-2.25 -5,-5 z"/>
 <path style="fill:url(#linearGradient2721);fill-rule:evenodd" d="m 17.5,50 c -3.04768,0 -6,-1.95241 -6,-5 h 6 z "/>
 <path style="fill:url(#linearGradient3305);color:#000" d="m 16.5,50 c -3,0 -5,-2.25 -5,-5 h 1 c 0,2.25 1.5,4 4,4 h 1 v 1 z "/>
 </g>
 <g id="button-normal-bottom">
-<path style="opacity:.14;fill:url(#linearGradient2731);fill-rule:evenodd" d="m 17.5002,45 h 32.4998 v 6 h -32.5 z "/>
-<path style="fill:url(#linearGradient2313);fill-rule:evenodd" d="m 17.5002,45 h 32.4998 v 5 h -32.5 z "/>
+<path style="opacity:.14;fill:url(#linearGradient2731);fill-rule:evenodd" d="m 17.5,50 v 1 H 50 v -1 z"/>
+<path style="fill:url(#linearGradient2313);fill-rule:evenodd" d="m 17.5,45 h 32.5 v 5 h -32.5 z "/>
 <path style="fill:#c3beb9;color:#000" d="M 50,50 H 17.5 V 49 H 50 Z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#button-normal-bottomleft" id="button-normal-bottomright" transform="matrix(-1,0,0,1,67.5,0)"/>
@@ -616,14 +616,14 @@
 </g>
 <path style="fill:#f8f8f7;fill-rule:evenodd" id="button-focused" d="M 79.5,12.5 V 45 H 112 V 12.5 Z"/>
 <g id="button-focused-bottomleft" transform="translate(62)">
-<path style="opacity:.11;paint-order:normal;fill:url(#radialGradient3233);fill-rule:evenodd" d="m 11.5,45 h 6 v 6 h -6 z"/>
+<path style="opacity:.11;paint-order:normal;fill:url(#radialGradient3233);fill-rule:evenodd" d="m 73.5,45 v 6 h 6 v -1 h -1 c -3,0 -5,-2.25 -5,-5 z" transform="translate(-62)"/>
 <path style="fill:#f8f8f7;fill-rule:evenodd" d="m 17.5,50 c -3.04768,0 -6,-1.95241 -6,-5 h 6 z "/>
 <path style="fill:#c9c4bf;color:#000" d="m 16.5,50 c -3,0 -5,-2.25 -5,-5 h 1 c 0,2.25 1.5,4 4,4 h 1 v 1 z "/>
 </g>
 <g id="button-focused-bottom" transform="translate(62)">
-<path style="opacity:.11;fill:url(#linearGradient3237);fill-rule:evenodd" d="m 17.5002,45 h 32.4998 v 6 h -32.5 z "/>
-<path style="fill:#f8f8f7;fill-rule:evenodd" d="m 17.5002,45 h 32.4998 v 5 h -32.5 z "/>
-<path style="fill:#c3beb9;color:#000" d="M 50,50 H 17.5 V 49 H 50 Z"/>
+<path style="opacity:.11;fill:url(#linearGradient3237);fill-rule:evenodd" d="m 79.5,50 v 1 H 112 v -1 z" transform="translate(-62)"/>
+<path style="fill:#f8f8f7;fill-rule:evenodd" d="m 17.5,45 h 32.5 v 5 h -32.5 z "/>
+<path style="fill:#c9c4bf;color:#000" d="M 50,50 H 17.5 V 49 H 50 Z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#button-focused-left" id="button-focused-right" transform="matrix(-1,0,0,1,191.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-focused-topleft" id="button-focused-topright" transform="matrix(-1,0,0,1,191.5,0)"/>
