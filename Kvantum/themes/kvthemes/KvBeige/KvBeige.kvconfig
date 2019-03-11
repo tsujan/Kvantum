@@ -162,6 +162,7 @@ frame.expanded.top=2
 frame.expanded.bottom=0
 frame.expanded.left=1
 frame.expanded.right=1
+focusFrame=true
 text.press.color=black
 text.toggle.color=black
 frame.expansion=3.6font
