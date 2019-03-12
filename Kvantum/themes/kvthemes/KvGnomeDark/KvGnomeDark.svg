@@ -1141,7 +1141,7 @@
 <path style="fill:#1b1b1b;fill-rule:evenodd" id="menubar-normal-inactive-bottomleft" d="m 464,678 h 5 v 1 h -5 z"/>
 <path style="fill:#1b1b1b;fill-rule:evenodd" id="menubar-normal-inactive-bottomright" d="m 499,678 h 5 v 1 h -5 z"/>
 <use width="100%" height="100%" xlink:href="#menubar-normal-inactive-left" id="menubar-normal-inactive-right" transform="translate(35)"/>
-<path style="opacity:.25;fill:#323232;fill-rule:evenodd;stroke-width:.5" id="tab-close-normal-inactive" d="m 236,796 a 8,8 0 0 0 -8,8 8,8 0 0 0 8,8 8,8 0 0 0 8,-8 8,8 0 0 0 -8,-8 z m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z"/>
+<use width="100%" height="100%" style="opacity:.25" xlink:href="#tab-close-pressed" id="tab-close-normal-inactive" transform="translate(0,18)"/>
 <g id="tabbarframe-normal-inactive-bottom" transform="matrix(1,0,0,1.25,435,-432.50016)">
 <path style="fill:#202020;fill-rule:evenodd" d="m 29,989.2 v 0.8 h 32 v -0.8 z"/>
 <path style="fill:#2e2e2e;fill-rule:evenodd" d="m 29,986 h 32 v 3.2 H 29 Z"/>
