@@ -22,7 +22,7 @@ menu.items.active.text.color: #ffffff
 window.active.client.color: #f6f5f4
 
 window.active.title.bg: Gradient Vertical Flat
-window.active.title.bg.color: #ebe9e6
+window.active.title.bg.color: #e6e4e1
 window.active.title.bg.colorTo: #e1dedb
 window.active.title.bg.border.color: Parentrelative
 window.active.title.bg.highlight: 256

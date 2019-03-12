@@ -6,7 +6,7 @@ V0.10.10
  * Support LibreOffice's new Qt5 skin (that's much better than the old Qt4 skin).
  * Also check the active action of active popup when determining whether a submenu is going to be shown.
  * Added a key for drawing the spinbox separator also with inline indicators.
- * Changed KvGnome for it to match the latest default GTK+ theme.
+ * Changed KvGnome and KvGnomeDark for them to match the latest default GTK+ theme.
  * Changed the drag cursor from drag-move to open-hand.
  * Don't draw title-bar icons on subwindow menu if there isn't enough contrast.
 
