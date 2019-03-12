@@ -17,6 +17,7 @@
 
 #include "KvantumManager.h"
 #include "svgicons.h"
+#include "ui_about.h"
 #include <QFileDevice>
 #include <QTextStream>
 #include <QTimer>
@@ -2602,11 +2603,41 @@ void KvantumManager::showWhatsThis()
 /*************************/
 void KvantumManager::aboutDialog()
 {
-    QMessageBox::about (this, tr ("About Kvantum Manager"),
-                        "<center><b><big>" + tr ("Kvantum Manager") + " "
-                        + qApp->applicationVersion() + "</big></b><br><br>"
-                        + tr ("A tool for installing, selecting<br>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes") + "<br><br>"
+    class AboutDialog : public QDialog {
+    public:
+        explicit AboutDialog (QWidget* parent = nullptr, Qt::WindowFlags f = nullptr) : QDialog (parent, f) {
+            aboutUi.setupUi (this);
+            aboutUi.textLabel->setOpenExternalLinks (true);
+        }
+        void setTabTexts (const QString& first, const QString& sec) {
+            aboutUi.tabWidget->setTabText (0, first);
+            aboutUi.tabWidget->setTabText (1, sec);
+        }
+        void setMainIcon (const QIcon& icn) {
+            aboutUi.iconLabel->setPixmap (icn.pixmap (64, 64));
+        }
+        void settMainTitle (const QString& title) {
+            aboutUi.titleLabel->setText (title);
+        }
+        void setMainText (const QString& txt) {
+            aboutUi.textLabel->setText (txt);
+        }
+    private:
+        Ui::AboutDialog aboutUi;
+    };
+
+    AboutDialog dialog (this);
+    QIcon icn = QIcon::fromTheme ("kvantum");
+    if (icn.isNull())
+        icn = QIcon (":/Icons/kvantumpreview/data/kvantum.svg");
+    dialog.setMainIcon (icn);
+    dialog.settMainTitle (QString ("<center><b><big>%1 %2</big></b></center><br>").arg (qApp->applicationName()).arg (qApp->applicationVersion()));
+    dialog.setMainText ("<center> " + tr ("A tool for installing, selecting<br>and configuring <a href='https://github.com/tsujan/Kvantum'>Kvantum</a> themes") + " </center>\n<center> "
                         + tr ("Author: <a href='mailto:tsujan2000@gmail.com?Subject=My%20Subject'>Pedram Pourang (aka. Tsu Jan)</a> </center><br>"));
+    dialog.setTabTexts (tr ("About Kvantum Manager"), tr ("Translators"));
+    dialog.setWindowTitle (tr ("About Kvantum Manager"));
+    dialog.setWindowModality (Qt::WindowModal);
+    dialog.exec();
 }
 
 }

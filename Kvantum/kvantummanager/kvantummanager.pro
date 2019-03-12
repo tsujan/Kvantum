@@ -26,7 +26,8 @@ HEADERS +=  KvantumManager.h \
             svgicons.h
 
 FORMS += \
-    kvantummanager.ui
+    kvantummanager.ui \
+    about.ui
 
 unix {
   #TRANSLATIONS

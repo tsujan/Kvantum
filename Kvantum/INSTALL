@@ -9,6 +9,8 @@ IF YOU HAVE Arch OR ONE OF ITS DERIVATIVES, YOU COULD EASILY INSTALL Kvantum FRO
 OR, PREFERABLY, YOU COULD INSTALL THE LATEST git PACKAGE FROM THE Arch-User-Repository BY USING THE AUR HELPER OF YOUR CHOICE, FOR EXAMPLE:
 
 	yaourt -S kvantum-qt5-git
+
+NOTE: "yaourt" is discontinued and only serves as an example here.
 ----------
 
 First install X11 and Qt development packages. In Debian-based systems, they are:
