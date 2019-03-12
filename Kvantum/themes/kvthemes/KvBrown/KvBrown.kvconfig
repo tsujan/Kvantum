@@ -342,6 +342,8 @@ text.focus.color=white
 
 [ComboBox]
 inherits=PanelButtonCommand
+text.margin.left=3
+text.margin.right=3
 
 [Splitter]
 indicator.size=32

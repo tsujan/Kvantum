@@ -8,6 +8,7 @@ V0.10.10
  * Added a key for drawing the spinbox separator also with inline indicators.
  * Changed KvGnome for it to match the latest default GTK+ theme.
  * Changed the drag cursor from drag-move to open-hand.
+ * Don't draw title-bar icons on subwindow menu if there isn't enough contrast.
 
 V0.10.9
 ---------

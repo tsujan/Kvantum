@@ -24,6 +24,7 @@
 #include <QComboBox>
 #include <QDockWidget>
 #include <QSvgRenderer>
+#include <QMdiSubWindow>
 
 namespace Kvantum
 {
@@ -143,6 +144,13 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
+      /* no menu icon without enough contrast (see Qt ->
+         qmdisubwindow.cpp -> QMdiSubWindowPrivate::createSystemMenu) */
+      if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+       return QIcon(pm);
+
       QPainter painter(&pm);
 
       QString status("normal");
@@ -166,6 +174,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
+      if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+       return QIcon(pm); // no menu icon without enough contrast
+
       QPainter painter(&pm);
 
       if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-maximize-normal",QRect(0,0,s,s)))
@@ -181,6 +194,12 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
+
+      if (standardIcon == SP_TitleBarCloseButton
+          && option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+       return QIcon(pm); // no menu icon without enough contrast
 
       QPainter painter(&pm);
 
@@ -231,6 +250,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
+
+      if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+       return QIcon(pm); // no menu icon without enough contrast
 
       QPainter painter(&pm);
 
