@@ -2281,8 +2281,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
 
         if (tb->popupMode() == QToolButton::MenuButtonPopup)
-        {
-          if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
+        {;
+          /* NOTE: The following lines are commented out because
+                   the arrow and button are always drawn together. */
+          /*if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
           {
             // merge with drop down button
             if (!fspec.isAttached)
@@ -2294,10 +2296,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               fspec.HPos = 0;
             else if (fspec.HPos == 2)
               fspec.HPos = rtl ? 1 : -1;
-            /* NOTE: The following lines are commented out because separating the arrow
-                     and button states from each other creates an unnatural look. */
 
-            /*// don't press the button if only its arrow is pressed
+            // WARNING: separating the arrow and button states
+                        from each other creates an unnatural look
+
+            // don't press the button if only its arrow is pressed
             pbStatus = (option->state & State_Enabled) ?
                          (option->state & State_Sunken) && tb->isDown() ? "pressed" :
                            (option->state & State_Selected) && tb->isDown() ? "toggled" :
@@ -2315,8 +2318,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             if (option->state & State_On) // it may be checkable
               pbStatus = "toggled";
             if (isWidgetInactive(widget))
-              pbStatus.append("-inactive");*/
-          }
+              pbStatus.append("-inactive");
+          }*/
         }
         else if ((tb->popupMode() == QToolButton::InstantPopup
                   || tb->popupMode() == QToolButton::DelayedPopup)
@@ -2511,8 +2514,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         forceButtonTextColor(widget,col);
       }
 
-      if (drawSep && (fspec.expansion > 0 || rtl // the rtl arrow is at the left
-                      || tb->popupMode() != QToolButton::MenuButtonPopup))
+      if (drawSep)
       {
         const QString inactiveStr = isInactive ? "-inactive" : QString();
         renderElement(painter,fspec.element + "-separator" + inactiveStr,
@@ -4194,85 +4196,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               fspec.right = qMin(fspec.right,3);
             }
             dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
-          }
-        }
-
-        if (fspec1.expansion <= 0) // otherwise drawn at PE_PanelButtonTool
-        {
-          if (!(option->state & State_Enabled))
-          {
-            status = "normal";
-            if (option->state & State_On)
-              status = "toggled";
-            if (isWidgetInactive(widget))
-              status.append("-inactive");
-            if (!drawRaised)
-            {
-              painter->save();
-              painter->setOpacity(DISABLED_OPACITY);
-            }
-          }
-          /* just follow the PE_PanelButtonTool animation */
-          QObject *styleObject = option->styleObject;
-          QString animationStartState;
-          if (styleObject)
-            animationStartState = styleObject->property("_kv_state").toString();
-          bool animate(widget->isEnabled() && animatedWidget_ == widget
-                       && !animationStartState.isEmpty()
-                       && animationStartState != status);
-          if (!autoraise || !status.startsWith("normal") || drawRaised)
-          {
-            if (animate)
-            {
-              if (animationOpacity_ < 100
-                  && (!autoraise || !animationStartState.startsWith("normal") || drawRaised))
-              {
-                renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-                if (!fillWidgetInterior)
-                  renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-              }
-              painter->save();
-              painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
-            }
-            if (!fillWidgetInterior)
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
-            renderFrame(painter,r,fspec,fspec.element+"-"+status);
-            if (animate)
-              painter->restore();
-            if (fillWidgetInterior)
-              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
-                                                                             ? QPalette::Inactive
-                                                                             : QPalette::Active,
-                                                                           QPalette::Button));
-          }
-          // auto-raised fade out animation
-          else if (animate && animationOpacity_ < 100  && !animationStartState.startsWith("normal"))
-          {
-            painter->save();
-            painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
-            painter->restore();
-          }
-          if (!(option->state & State_Enabled))
-          {
-            status = "disabled";
-            if (isWidgetInactive(widget))
-              status.append("-inactive");
-            if (!drawRaised)
-              painter->restore();
-          }
-          if (drawSep && !rtl) // the rtl arrow is at the left
-          {
-            renderElement(painter,fspec.element + "-separator",
-                          QRect(r.x()+r.width()-fspec.right, r.y()+fspec.top,
-                                fspec.right, r.height()-fspec.top-fspec.bottom));
-            renderElement(painter,fspec.element + "-separator-top",
-                          QRect(r.x()+r.width()-fspec.right, r.y(),
-                                fspec.right, fspec.top));
-            renderElement(painter,fspec.element + "-separator-bottom",
-                          QRect(r.x()+r.width()-fspec.right, r.y()+r.height()-fspec.bottom,
-                                fspec.right, fspec.bottom));
           }
         }
 
@@ -9233,6 +9156,7 @@ void Style::drawControl(QStyle::ControlElement element,
         QWidget *gp = getParent(p,1);
         QWidget *stb = nullptr;
         bool autoraise = false;
+        bool drawRaised = false;
         if (tb)
         {
           autoraise = tb->autoRaise();
@@ -9246,16 +9170,19 @@ void Style::drawControl(QStyle::ControlElement element,
               group = "ToolbarButton";
             }
           }
-        }
 
-        bool drawRaised = false;
-        if (tspec_.group_toolbar_buttons)
-        {
-          if (QToolBar *toolBar = qobject_cast<QToolBar*>(p))
+          /* as in PE_PanelButtonCommand */
+          QToolBar *toolBar = qobject_cast<QToolBar*>(p);
+          if ((toolBar && toolBar->orientation() != Qt::Vertical)
+              || (qobject_cast<QToolBar*>(stb)
+                  && qobject_cast<QToolBar*>(stb)->orientation() != Qt::Vertical
+                  && tb->inherits("Fm::PathButton")))
           {
-            if (toolBar->orientation() != Qt::Vertical)
+            if (tspec_.group_toolbar_buttons)
               drawRaised = true;
           }
+          else if (tb->inherits("Fm::PathButton"))
+            drawRaised = true;
         }
 
         frame_spec fspec = getFrameSpec(group);
@@ -10007,9 +9934,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           break;
         }
 
-        /* to have a consistent look, integrate the drop-down part
-           with the rest of the tool button if it's maximally rounded */
-        if (fspec.expansion > 0 && tb && tb->popupMode() == QToolButton::MenuButtonPopup)
+        /* to have a consistent look, integrate the drop-down part */
+        if (tb && tb->popupMode() == QToolButton::MenuButtonPopup)
           o.rect = r.united(subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget));
         /* when SH_DockWidget_ButtonsHaveFrame is set to true (default), dock button panels
            are also drawn at PE_PanelButtonTool with all needed states (-> qdockwidget.cpp) */
@@ -10023,8 +9949,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         if (tb)
         {
           o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
-          /* for a maximally rounded button, only the indicator
-             will be drawn at PE_IndicatorButtonDropDown */
+          /* only the indicator will be drawn at PE_IndicatorButtonDropDown */
           if (tb->popupMode() == QToolButton::MenuButtonPopup)
             drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
           else if ((tb->popupMode() == QToolButton::InstantPopup
@@ -10033,15 +9958,20 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           {
             QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
+
+            /* as in PE_PanelButtonCommand */
             bool drawRaised = false;
-            if (tspec_.group_toolbar_buttons)
+            QToolBar *toolBar = qobject_cast<QToolBar*>(p);
+            if ((toolBar && toolBar->orientation() != Qt::Vertical)
+                || (qobject_cast<QToolBar*>(stb)
+                    && qobject_cast<QToolBar*>(stb)->orientation() != Qt::Vertical
+                    && tb->inherits("Fm::PathButton")))
             {
-              if (QToolBar *toolBar = qobject_cast<QToolBar*>(p))
-              {
-                if (toolBar->orientation() != Qt::Vertical)
-                  drawRaised = true;
-              }
+              if (tspec_.group_toolbar_buttons)
+                drawRaised = true;
             }
+            else if (tb->inherits("Fm::PathButton"))
+              drawRaised = true;
 
             indicator_spec dspec = getIndicatorSpec(group);
             lspec = getLabelSpec(group);

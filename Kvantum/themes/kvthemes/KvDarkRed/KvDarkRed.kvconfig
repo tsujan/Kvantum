@@ -38,6 +38,7 @@ groupbox_top_label=true
 inline_spin_indicators=true
 joined_inactive_tabs=true
 transient_scrollbar=true
+transient_groove=true
 layout_spacing=2
 submenu_overlap=0
 tooltip_delay=-1
@@ -97,7 +98,7 @@ text.focus.color=#FFCA00
 indicator.size=10
 frame.expansion=8
 min_width=+0.2font
-min_height=+0.2font
+min_height=+0.15font
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -167,10 +168,12 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+focusFrame=true
 frame.expansion=10
 text.press.color=white
 indicator.size=12
 min_width=+0.35font
+min_height=+0.2font
 
 [TabFrame]
 inherits=PanelButtonCommand
