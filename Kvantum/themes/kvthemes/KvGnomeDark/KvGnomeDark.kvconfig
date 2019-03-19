@@ -447,9 +447,13 @@ min_height=0
 
 [MenuBar]
 inherits=PanelButtonCommand
-interior=false
+interior=true
+interior.element=menubar
 frame=true
-frame.element=none
+frame.element=menubar
+frame.left=2
+frame.right=2
+frame.top=0
 frame.bottom=1
 
 [MenuBarItem]
