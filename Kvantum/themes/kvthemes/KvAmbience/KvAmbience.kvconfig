@@ -1,6 +1,6 @@
 [%General]
 author=Tsu Jan
-comment=A theme inspired by Ubuntu's Ambiance but not a copy of it.
+comment=A theme inspired by Ubuntu's old Ambiance
 x11drag=all
 alt_mnemonic=true
 left_tabs=false
