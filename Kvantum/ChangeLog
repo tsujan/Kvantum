@@ -10,6 +10,7 @@ V0.10.10
  * Changed the drag cursor from drag-move to open-hand.
  * Don't draw title-bar icons on subwindow menu if there isn't enough contrast.
  * Always integrate the drop-down part of a tool button (not only when it has frame expansion).
+ * Fixed the text alignment of QCommandLinkButton and added a workaround for the color Qt gave to its text.
 
 V0.10.9
 ---------

@@ -26,6 +26,7 @@
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QCommandLinkButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
@@ -15466,10 +15467,54 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
                          const QPalette &pal, bool enabled, const QString &text,
                          QPalette::ColorRole textRole) const
 {
+  /* correct the text color of QCommandLinkButton (as a workaround for a Qt bug) */
+  if (const QCommandLinkButton *cbtn = static_cast<const QCommandLinkButton*>(painter->device()))
+  {
+    QColor col;
+    const label_spec lspec = getLabelSpec("PanelButtonCommand");
+    if (cbtn->isDown())
+    {
+      if (isWidgetInactive(cbtn))
+        col = getFromRGBA(lspec.pressInactiveColor);
+      if (!col.isValid())
+        col = getFromRGBA(lspec.pressColor);
+    }
+    else if (cbtn->isCheckable() && cbtn->isChecked())
+    {
+      if (isWidgetInactive(cbtn))
+        col = getFromRGBA(lspec.toggleInactiveColor);
+      if (!col.isValid())
+        col = getFromRGBA(lspec.toggleColor);
+    }
+    else
+    {
+      if (cbtn->underMouse())
+      {
+        if (isWidgetInactive(cbtn))
+          col = getFromRGBA(lspec.focusInactiveColor);
+        if (!col.isValid())
+          col = getFromRGBA(lspec.focusColor);
+      }
+      else
+      {
+        if (isWidgetInactive(cbtn))
+          col = getFromRGBA(lspec.normalInactiveColor);
+        if (!col.isValid())
+          col = getFromRGBA(lspec.normalColor);
+      }
+    }
+    if (col.isValid())
+    {
+      QPalette pPalette = cbtn->palette();
+      pPalette.setColor(QPalette::ButtonText, col); // see Qt -> QCommandLinkButton::paintEvent()
+      QCommonStyle::drawItemText(painter, rect, flags, pPalette, enabled, text, textRole);
+      return;
+    }
+  }
   /* Ensure a centered vertical alignment if vertical alignment
      isn't defined when this function isn't directly called by us.
      (A bad vertical alignment started to happen with tooltips of Qt 5.12.) */
-  if (!(flags&Qt::AlignVertical_Mask))
+  else if (!(flags & Qt::AlignVertical_Mask))
     flags |= Qt::AlignVCenter;
   QCommonStyle::drawItemText(painter, rect, flags, pal, enabled, text, textRole);
 }
