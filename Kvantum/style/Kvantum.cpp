@@ -3644,34 +3644,42 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const indicator_spec dspec = getIndicatorSpec(group);
 
       QRect r = option->rect;
-      if (!(option->state & State_Horizontal))
-      {
-        r.setRect(y, x, h, w);
-        painter->save();
-        QTransform m;
-        m.scale(1,-1);
-        m.rotate(-90);
-        painter->setTransform(m, true);
-      }
       const QString inactiveStr = isWidgetInactive(widget) ? "-inactive" : QString();
       if (element == PE_IndicatorToolBarHandle && tspec_.center_toolbar_handle)
       {
         int margin = qMax(3 - pixelMetric(PM_ToolBarItemMargin,option,widget)
                             - tspec_.toolbar_interior_spacing,
                           0); // -> PM_ToolBarHandleExtent
-        renderIndicator(painter,
-                        option->direction == Qt::RightToLeft ? r.adjusted(0,0,-margin,0)
-                                                             : r.adjusted(margin,0,0,0),
-                        fspec,dspec,dspec.element+"-handle"+inactiveStr,option->direction,
-                        Qt::AlignVCenter | Qt::AlignLeft);
+        if (option->state & State_Horizontal)
+          renderIndicator(painter,
+                          option->direction == Qt::RightToLeft ? r.adjusted(0,0,-margin,0)
+                                                               : r.adjusted(margin,0,0,0),
+                          fspec,dspec,dspec.element+"-handle"+inactiveStr,option->direction,
+                          Qt::AlignVCenter | Qt::AlignLeft);
+        else
+          renderIndicator(painter,
+                          r.adjusted(0,margin,0,0),
+                          fspec,dspec,dspec.element+"-handle"+inactiveStr,option->direction,
+                          Qt::AlignHCenter | Qt::AlignTop);
       }
       else
+      {
+        if (!(option->state & State_Horizontal))
+        {
+          r.setRect(y, x, h, w);
+          painter->save();
+          QTransform m;
+          m.scale(1,-1);
+          m.rotate(-90);
+          painter->setTransform(m, true);
+        }
         renderInterior(painter,r,fspec,ispec,
                        dspec.element
                          +(element == PE_IndicatorToolBarHandle ? "-handle" : "-separator")+inactiveStr);
 
-      if (!(option->state & State_Horizontal))
-        painter->restore();
+        if (!(option->state & State_Horizontal))
+          painter->restore();
+      }
 
       break;
     }
@@ -15467,48 +15475,51 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
                          const QPalette &pal, bool enabled, const QString &text,
                          QPalette::ColorRole textRole) const
 {
-  /* correct the text color of QCommandLinkButton (as a workaround for a Qt bug) */
+  /* set the text color of QCommandLinkButton (see eventFiltering.cpp -> QEvent::Paint) */
   if (const QCommandLinkButton *cbtn = static_cast<const QCommandLinkButton*>(painter->device()))
   {
-    QColor col;
-    const label_spec lspec = getLabelSpec("PanelButtonCommand");
-    if (cbtn->isDown())
+    if (enabled)
     {
-      if (isWidgetInactive(cbtn))
-        col = getFromRGBA(lspec.pressInactiveColor);
-      if (!col.isValid())
-        col = getFromRGBA(lspec.pressColor);
-    }
-    else if (cbtn->isCheckable() && cbtn->isChecked())
-    {
-      if (isWidgetInactive(cbtn))
-        col = getFromRGBA(lspec.toggleInactiveColor);
-      if (!col.isValid())
-        col = getFromRGBA(lspec.toggleColor);
-    }
-    else
-    {
-      if (cbtn->underMouse())
+      QColor col;
+      const label_spec lspec = getLabelSpec("PanelButtonCommand");
+      if (cbtn->isCheckable() && cbtn->isChecked())
       {
         if (isWidgetInactive(cbtn))
-          col = getFromRGBA(lspec.focusInactiveColor);
+          col = getFromRGBA(lspec.toggleInactiveColor);
         if (!col.isValid())
-          col = getFromRGBA(lspec.focusColor);
+          col = getFromRGBA(lspec.toggleColor);
+      }
+      else if (cbtn->isDown())
+      {
+        if (isWidgetInactive(cbtn))
+          col = getFromRGBA(lspec.pressInactiveColor);
+        if (!col.isValid())
+          col = getFromRGBA(lspec.pressColor);
       }
       else
       {
-        if (isWidgetInactive(cbtn))
-          col = getFromRGBA(lspec.normalInactiveColor);
-        if (!col.isValid())
-          col = getFromRGBA(lspec.normalColor);
+        if (cbtn->underMouse())
+        {
+          if (isWidgetInactive(cbtn))
+            col = getFromRGBA(lspec.focusInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.focusColor);
+        }
+        else
+        {
+          if (isWidgetInactive(cbtn))
+            col = getFromRGBA(lspec.normalInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.normalColor);
+        }
       }
-    }
-    if (col.isValid())
-    {
-      QPalette pPalette = cbtn->palette();
-      pPalette.setColor(QPalette::ButtonText, col); // see Qt -> QCommandLinkButton::paintEvent()
-      QCommonStyle::drawItemText(painter, rect, flags, pPalette, enabled, text, textRole);
-      return;
+      if (col.isValid())
+      {
+        QPalette pPalette = cbtn->palette();
+        pPalette.setColor(QPalette::ButtonText, col); // see Qt -> QCommandLinkButton::paintEvent()
+        QCommonStyle::drawItemText(painter, rect, flags, pPalette, true, text, textRole);
+        return;
+      }
     }
   }
   /* Ensure a centered vertical alignment if vertical alignment
@@ -15516,6 +15527,7 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
      (A bad vertical alignment started to happen with tooltips of Qt 5.12.) */
   else if (!(flags & Qt::AlignVertical_Mask))
     flags |= Qt::AlignVCenter;
+
   QCommonStyle::drawItemText(painter, rect, flags, pal, enabled, text, textRole);
 }
 

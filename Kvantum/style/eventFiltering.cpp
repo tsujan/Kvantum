@@ -24,6 +24,7 @@
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QCommandLinkButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
@@ -38,6 +39,7 @@
 #include <QDialog>
 #include <QWindow> // for positioning menus
 #include <QScreen> // for positioning menus
+#include <QStylePainter>
 
 namespace Kvantum
 {
@@ -258,6 +260,96 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             drawPrimitive(QStyle::PE_PanelButtonTool,&opt,&p,w);
           }
         }
+      }
+      else if (QCommandLinkButton *cbtn = qobject_cast<QCommandLinkButton*>(o))
+      {
+        /* as in Qt -> qcommandlinkbutton.cpp -> QCommandLinkButton::paintEvent()
+           but with modification for taking into account icon states */
+
+        QStylePainter p(cbtn);
+        p.save();
+
+        QStyleOptionButton option;
+        option.initFrom(cbtn);
+        option.features |= QStyleOptionButton::CommandLinkButton;
+        option.text = QString();
+        option.icon = QIcon(); // we draw the icon ourself
+        if (cbtn->isChecked())
+          option.state |= State_On;
+        else if (cbtn->isDown())
+          option.state |= State_Sunken;
+        else if (cbtn->underMouse())
+          option.state |= State_MouseOver;
+
+        /* panel */
+        p.drawControl(QStyle::CE_PushButton, option);
+
+        const int leftMargin = 7;
+        const int topMargin = 10;
+        const int rightMargin = 4;
+        const int bottomMargin = 10;
+
+        int vOffset = 0, hOffset = 0;
+        if (cbtn->isDown() && !cbtn->isChecked())
+        {
+          vOffset = pixelMetric(QStyle::PM_ButtonShiftVertical);
+          hOffset = pixelMetric(QStyle::PM_ButtonShiftHorizontal);
+        }
+
+        int state = 1;
+        if (!cbtn->isEnabled())
+          state = 0;
+        else if (cbtn->isChecked())
+          state = 4;
+        else if (cbtn->isDown())
+          state = 3;
+        else if (cbtn->underMouse())
+          state = 2;
+
+        /* icon */
+        const label_spec lspec = getLabelSpec("PanelButtonCommand");
+        if (!cbtn->icon().isNull())
+          p.drawPixmap(leftMargin + hOffset, topMargin + vOffset,
+                       getPixmapFromIcon(cbtn->icon(),
+                                         getIconMode(state, isWidgetInactive(cbtn), lspec),
+                                         cbtn->isChecked() ? QIcon::On : QIcon::Off,
+                                         cbtn->iconSize()));
+
+        int textflags = Qt::TextShowMnemonic;
+        if (!styleHint(QStyle::SH_UnderlineShortcut, &option, cbtn))
+          textflags |= Qt::TextHideMnemonic;
+
+        QFont titleFont = cbtn->font();
+        titleFont.setBold(true);
+        titleFont.setPointSizeF(9.0);
+
+        /* title */
+        p.setFont(titleFont);
+        int textOffset = cbtn->icon().actualSize(cbtn->iconSize()).width() + leftMargin + 6;
+        QRect titleRect = cbtn->rect().adjusted(textOffset, topMargin, -rightMargin, 0);
+        if (cbtn->description().isEmpty())
+        {
+          QFontMetrics fm(titleFont);
+          titleRect.setTop(titleRect.top()
+                           + qMax(0, (cbtn->icon().actualSize(cbtn->iconSize()).height()
+                           - fm.height()) / 2));
+        }
+        p.drawItemText(titleRect.translated(hOffset, vOffset),
+                       textflags, option.palette, cbtn->isEnabled(), cbtn->text(), QPalette::ButtonText);
+
+        /* description */
+        textflags |= Qt::TextWordWrap | Qt::ElideRight;
+        QFont descriptionFont = cbtn->font();
+        descriptionFont.setPointSizeF(9.0);
+        p.setFont(descriptionFont);
+        QFontMetrics fm(titleFont);
+        int descriptionOffset = topMargin + fm.height();
+        QRect descriptionRect = cbtn->rect().adjusted(textOffset, descriptionOffset,
+                                                      -rightMargin, -bottomMargin);
+        p.drawItemText(descriptionRect.translated(hOffset, vOffset), textflags,
+                       option.palette, cbtn->isEnabled(), cbtn->description(), QPalette::ButtonText);
+        p.restore();
+        return true; // don't let QCommandLinkButton::paintEvent() be called
       }
     }
     break;

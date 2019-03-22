@@ -1,3 +1,8 @@
+V0.11.0
+---------
+ * Paint QCommandLinkButton completely in the code (panel + icon + texts) to remove discrepancies between it and other kinds of buttons.
+ * Don't rotate the toolbar handle on vertical toolbars if it's centered.
+
 V0.10.10
 ---------
  * Don't move a menu that isn't drawn by kvantum (when a menu is drawn by a stylesheet, Qt lets QStyle polish it; hence the problem).

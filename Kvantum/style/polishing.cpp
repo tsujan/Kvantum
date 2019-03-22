@@ -22,6 +22,7 @@
 #include <QApplication>
 #include <QMenu>
 #include <QPushButton>
+#include <QCommandLinkButton>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QToolBox>
@@ -635,6 +636,8 @@ void Style::polish(QWidget *widget)
         widget->installEventFilter(this);
     }
   }
+  else if (qobject_cast<QCommandLinkButton*>(widget))
+    widget->installEventFilter(this); // to paint it
   else if ((tspec_.animate_states &&
             (qobject_cast<QPushButton*>(widget)
              || (qobject_cast<QToolButton*>(widget)
@@ -1110,6 +1113,7 @@ void Style::unpolish(QWidget *widget)
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
         || qobject_cast<QToolButton*>(widget)
+        || qobject_cast<QCommandLinkButton*>(widget) // we paint it
         || qobject_cast<QComboBox*>(widget) // for both state anomation and delegate
         || (tspec_.active_tab_overlap > 0 && qobject_cast<QTabBar*>(widget))
         || (tspec_.animate_states &&
