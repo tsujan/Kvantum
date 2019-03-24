@@ -15481,8 +15481,11 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
                          const QPalette &pal, bool enabled, const QString &text,
                          QPalette::ColorRole textRole) const
 {
-  /* WARNING: Applying qobject_cast to painter->device() may cause a crash with QML
-              (used by KDE Plasma). */
+  /* WARNING: Applying static_cast and then qobject_cast to painter->device()
+              causes a crash  with QML (= QQC2 -- used by KDE Plasma) because,
+              in that case, the paint device isn't a QWidget. There may also be
+              other valid uses of this function without QWidget as paint device. */
+
   /* Ensure a centered vertical alignment if vertical alignment
      isn't defined when this function isn't directly called by us.
      (A bad vertical alignment started to happen with tooltips of Qt 5.12.) */
