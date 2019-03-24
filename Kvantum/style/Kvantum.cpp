@@ -1123,8 +1123,11 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
     if (right && g.height() == right->height())
     {
       res = tbMiddle;
-      if ((tb->isChecked() && !right->isChecked()) || (!tb->isChecked() && right->isChecked()))
+      if ((tb->isChecked() && !right->isChecked() && !right->isDown())
+          || (!tb->isChecked() && !tb->isDown() && right->isChecked()))
+      {
         drawSeparator = true;
+      }
     }
     else
       res = tbRight;
@@ -1132,8 +1135,11 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
   else if (right && g.height() == right->height())
   {
     res = tbLeft;
-    if ((tb->isChecked() && !right->isChecked()) || (!tb->isChecked() && right->isChecked()))
-        drawSeparator = true;
+    if ((tb->isChecked() && !right->isChecked() && !right->isDown())
+        || (!tb->isChecked() && !tb->isDown() && right->isChecked()))
+    {
+      drawSeparator = true;
+    }
   }
 
   if (drawSeparator)
@@ -1147,11 +1153,11 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
   if (left)
   { // update the left button when needed
     if ((tb->isChecked()
-         && ((!left->isChecked() && !btnSeparators.contains(left))
-             || (left->isChecked() && btnSeparators.contains(left))))
+         && ((!left->isChecked() && !left->isDown() && !btnSeparators.contains(left))
+             || ((left->isChecked() || left->isDown()) && btnSeparators.contains(left))))
         ||
         (!tb->isChecked()
-          && ((!left->isChecked() && btnSeparators.contains(left))
+          && (((!left->isChecked() || tb->isDown()) && btnSeparators.contains(left))
               || (left->isChecked() && !btnSeparators.contains(left)))))
     {
       left->update();
