@@ -264,7 +264,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (QCommandLinkButton *cbtn = qobject_cast<QCommandLinkButton*>(o))
       {
         /* as in Qt -> qcommandlinkbutton.cpp -> QCommandLinkButton::paintEvent()
-           but with modification for taking into account icon states */
+           but with modifications for taking into account icon states and text colors */
 
         QStylePainter p(cbtn);
         p.save();
@@ -296,20 +296,51 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           hOffset = pixelMetric(QStyle::PM_ButtonShiftHorizontal);
         }
 
-        int state = 1;
+        bool isInactive(isWidgetInactive(cbtn));
+        const label_spec lspec = getLabelSpec("PanelButtonCommand");
+
+        /* find the state and set the text color accordingly */
+        int state;
+        QPalette pPalette = option.palette;
+        QColor col;
         if (!cbtn->isEnabled())
           state = 0;
         else if (cbtn->isChecked())
+        {
           state = 4;
+          if (isInactive)
+            col = getFromRGBA(lspec.toggleInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.toggleColor);
+        }
         else if (cbtn->isDown())
+        {
           state = 3;
+          if (isInactive)
+            col = getFromRGBA(lspec.pressInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.pressColor);
+        }
         else if (cbtn->underMouse())
+        {
           state = 2;
-
-        bool isInactive(isWidgetInactive(cbtn));
+          if (isInactive)
+            col = getFromRGBA(lspec.focusInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.focusColor);
+        }
+        else
+        {
+          state = 1;
+          if (isInactive)
+            col = getFromRGBA(lspec.normalInactiveColor);
+          if (!col.isValid())
+            col = getFromRGBA(lspec.normalColor);
+        }
+        if (col.isValid())
+          pPalette.setColor(QPalette::ButtonText, col);
 
         /* icon */
-        const label_spec lspec = getLabelSpec("PanelButtonCommand");
         if (!cbtn->icon().isNull())
           p.drawPixmap(leftMargin + hOffset, topMargin + vOffset,
                        getPixmapFromIcon(cbtn->icon(),
@@ -325,46 +356,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         QFont titleFont = cbtn->font();
         titleFont.setBold(true);
         titleFont.setPointSizeF(9.0);
-
-        /* set the text color */
-        QPalette pPalette = option.palette;
-        if (state != 0)
-        {
-          QColor col;
-          if (state == 4)
-          {
-            if (isInactive)
-              col = getFromRGBA(lspec.toggleInactiveColor);
-            if (!col.isValid())
-              col = getFromRGBA(lspec.toggleColor);
-          }
-          else if (state == 3)
-          {
-            if (isInactive)
-              col = getFromRGBA(lspec.pressInactiveColor);
-            if (!col.isValid())
-              col = getFromRGBA(lspec.pressColor);
-          }
-          else
-          {
-            if (state == 2)
-            {
-              if (isInactive)
-                col = getFromRGBA(lspec.focusInactiveColor);
-              if (!col.isValid())
-                col = getFromRGBA(lspec.focusColor);
-            }
-            else
-            {
-              if (isInactive)
-                col = getFromRGBA(lspec.normalInactiveColor);
-              if (!col.isValid())
-                col = getFromRGBA(lspec.normalColor);
-            }
-          }
-          if (col.isValid())
-            pPalette.setColor(QPalette::ButtonText, col);
-        }
 
         /* title */
         p.setFont(titleFont);
