@@ -306,22 +306,65 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         else if (cbtn->underMouse())
           state = 2;
 
+        bool isInactive(isWidgetInactive(cbtn));
+
         /* icon */
         const label_spec lspec = getLabelSpec("PanelButtonCommand");
         if (!cbtn->icon().isNull())
           p.drawPixmap(leftMargin + hOffset, topMargin + vOffset,
                        getPixmapFromIcon(cbtn->icon(),
-                                         getIconMode(state, isWidgetInactive(cbtn), lspec),
+                                         getIconMode(state, isInactive, lspec),
                                          cbtn->isChecked() ? QIcon::On : QIcon::Off,
                                          cbtn->iconSize()));
 
         int textflags = Qt::TextShowMnemonic;
         if (!styleHint(QStyle::SH_UnderlineShortcut, &option, cbtn))
           textflags |= Qt::TextHideMnemonic;
+        textflags |= Qt::AlignTop; // (see Kvantum.cpp -> Style::drawItemText)
 
         QFont titleFont = cbtn->font();
         titleFont.setBold(true);
         titleFont.setPointSizeF(9.0);
+
+        /* set the text color */
+        QPalette pPalette = option.palette;
+        if (state != 0)
+        {
+          QColor col;
+          if (state == 4)
+          {
+            if (isInactive)
+              col = getFromRGBA(lspec.toggleInactiveColor);
+            if (!col.isValid())
+              col = getFromRGBA(lspec.toggleColor);
+          }
+          else if (state == 3)
+          {
+            if (isInactive)
+              col = getFromRGBA(lspec.pressInactiveColor);
+            if (!col.isValid())
+              col = getFromRGBA(lspec.pressColor);
+          }
+          else
+          {
+            if (state == 2)
+            {
+              if (isInactive)
+                col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.focusColor);
+            }
+            else
+            {
+              if (isInactive)
+                col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.normalColor);
+            }
+          }
+          if (col.isValid())
+            pPalette.setColor(QPalette::ButtonText, col);
+        }
 
         /* title */
         p.setFont(titleFont);
@@ -335,7 +378,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                            - fm.height()) / 2));
         }
         p.drawItemText(titleRect.translated(hOffset, vOffset),
-                       textflags, option.palette, cbtn->isEnabled(), cbtn->text(), QPalette::ButtonText);
+                       textflags, pPalette, cbtn->isEnabled(), cbtn->text(), QPalette::ButtonText);
 
         /* description */
         textflags |= Qt::TextWordWrap | Qt::ElideRight;
@@ -347,7 +390,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         QRect descriptionRect = cbtn->rect().adjusted(textOffset, descriptionOffset,
                                                       -rightMargin, -bottomMargin);
         p.drawItemText(descriptionRect.translated(hOffset, vOffset), textflags,
-                       option.palette, cbtn->isEnabled(), cbtn->description(), QPalette::ButtonText);
+                       pPalette, cbtn->isEnabled(), cbtn->description(), QPalette::ButtonText);
         p.restore();
         return true; // don't let QCommandLinkButton::paintEvent() be called
       }
