@@ -26,7 +26,6 @@
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>
-#include <QCommandLinkButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
@@ -15578,29 +15577,27 @@ QRect Style::interiorRect(const QRect &bounds, const frame_spec &fspec) const
 {
   if (!fspec.isAttached || (fspec.HPos == 2 && fspec.VPos == 2))
     return bounds.adjusted(fspec.left,fspec.top,-fspec.right,-fspec.bottom);
-  else
+
+  int left = 0, right = 0, top = 0, bottom = 0;
+  if (fspec.HPos == -1)
+    left = fspec.left;
+  else if (fspec.HPos == 1)
+    right = fspec.right;
+  else if (fspec.HPos == 2)
   {
-    int left = 0, right = 0, top = 0, bottom = 0;
-    if (fspec.HPos == -1)
-      left = fspec.left;
-    else if (fspec.HPos == 1)
-      right = fspec.right;
-    else if (fspec.HPos == 2)
-    {
-      left = fspec.left;
-      right = fspec.right;
-    }
-    if (fspec.VPos == -1)
-      top = fspec.top;
-    else if (fspec.VPos == 1)
-      bottom = fspec.bottom;
-    else if (fspec.VPos == 2)
-    {
-      top = fspec.top;
-      bottom = fspec.bottom;
-    }
-    return bounds.adjusted(left,top,-right,-bottom);
+    left = fspec.left;
+    right = fspec.right;
   }
+  if (fspec.VPos == -1)
+    top = fspec.top;
+  else if (fspec.VPos == 1)
+    bottom = fspec.bottom;
+  else if (fspec.VPos == 2)
+  {
+    top = fspec.top;
+    bottom = fspec.bottom;
+  }
+  return bounds.adjusted(left,top,-right,-bottom);
 }
 
 bool Style::hasExpandedBorder(const frame_spec &fspec) const
