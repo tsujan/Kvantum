@@ -785,7 +785,11 @@ void Style::polish(QWidget *widget)
       if (QMainWindow *mw = qobject_cast<QMainWindow*>(pw))
       {
         if (mw->minimumSize() != mw->maximumSize())
-          sb->setSizeGripEnabled(true);
+        {
+          QLayout *lo = mw->layout();
+          if (lo == nullptr || lo->sizeConstraint() != QLayout::SetFixedSize)
+            sb->setSizeGripEnabled(true);
+        }
       }
     }
   }
@@ -885,7 +889,7 @@ void Style::polish(QApplication *app)
   /* general colors
      FIXME Is this needed? Can't polish(QPalette&) alone do the job?
      The documentation for QApplication::setPalette() is ambiguous
-     but, at least outside KDE and with Qt4, it's sometimes needed. */
+     but, at least outside KDE and with Qt4, it was sometimes needed. */
   QPalette palette = app->palette();
   polish(palette);
   app->setPalette(palette);

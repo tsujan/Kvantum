@@ -359,7 +359,7 @@
 <path style="fill:url(#linearGradient4736);fill-rule:evenodd" id="slider-toggled-left" d="m 176,647.2502 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
 <g id="resize-grip-normal" transform="translate(15,57.5)">
 <path style="opacity:0;fill:#7b7b7b" id="rect5042" d="m 375,87.5 h 25 v 25 h -25 z"/>
-<path style="fill:#646464" id="path5044" d="m 400,92.5 -20,20 20,0 z"/>
+<path style="opacity:.19;fill:#fff" id="path5044" d="m 400,92.5 -20,20 20,0 z"/>
 </g>
 <path style="opacity:0;fill:#1e1e1e" id="toolbar-normal-top" d="m 394,88 h 16 v 8 h -16 z"/>
 <path style="opacity:0;fill:#5a5a5a" id="toolbar-normal-bottom" d="m 394,118 h 16 v 8 h -16 z"/>

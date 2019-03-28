@@ -324,7 +324,7 @@
 <path style="fill:url(#linearGradient4736);fill-rule:evenodd" id="slider-toggled-left" d="m 176,597.2502 v 16.5003 h 12 v -16.5 z"/>
 <g id="resize-grip-normal" transform="translate(15,57.5)">
 <rect width="25" x="375" y="87.5" height="25" style="opacity:0;fill:#7b7b7b"/>
-<path style="fill:#aaa" d="m 400,92.5 -20,20 h 20 z"/>
+<path style="opacity:.15" d="m 400,92.5 -20,20 h 20 z"/>
 </g>
 <path style="opacity:0;fill:#1e1e1e" id="toolbar-normal-top" d="m 394,88 h 16 v 8 h -16 z"/>
 <path style="opacity:0;fill:#5a5a5a" id="toolbar-normal-bottom" d="m 394,118 h 16 v 8 h -16 z"/>

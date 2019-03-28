@@ -3,6 +3,7 @@ V0.11.0
  * Paint QCommandLinkButton completely in the code (panel + icon + texts) to remove discrepancies between it and other kinds of buttons.
  * Don't rotate the toolbar handle on vertical toolbars if it's centered.
  * No separator between toggled and pressed grouped toolbuttons.
+ * Don't enforce window size grip with fixed size layouts.
 
 V0.10.10
 ---------
