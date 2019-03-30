@@ -1,3 +1,9 @@
+V0.11.1
+---------
+ * Added a key for removing Kvantum shadows from composited menus and tooltips (under DEs that give them shadow).
+ * Fill opaque combo menus with the window color (because transparency is enforced on combo menus while polishing them).
+ * When spreading menuitems across menus, do it for non-composited menus too.
+
 V0.11.0
 ---------
  * Paint QCommandLinkButton completely in the code (panel + icon + texts) to remove discrepancies between it and other kinds of buttons.

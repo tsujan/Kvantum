@@ -549,6 +549,14 @@ popup_blurring                    true/false          Blur the regions behind tr
                                                       blur effect and a graphic card that
                                                       supports it. It will automatically
                                                       be set to true if blurring is true.
+
+shadowless_popup                  true/false          Should the shadows that Kvantum adds
+                                                      to menus and tooltips with compositing
+                                                      be removed?
+
+                                                      May be useful under a DE that gives
+                                                      shadow to tooltips and menus.
+
 contrast
 intensity
 saturation                        decimal             If not equal to 1, the values of these

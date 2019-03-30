@@ -110,7 +110,7 @@ In LXQt:
 ========
 Just select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
 
-In case you use Compton as the X compositor (not recommended), be sure to disable Compton's shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
+In case you use Compton as the X compositor (not recommended), be sure to disable either Kvantum's popup shadows with Kvantum Manager or Compton's shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
 
 shadow-exclude = [ "argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
 blur-background-exclude = [ "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
@@ -131,7 +131,7 @@ If the display manager you use does not source '~/.profile', you could probably 
 *   Using Other Themes   *
 **************************
 
-To select or install (as user) Kvantum themes, use "Kvantum Manager", which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could not only switch between themes easily but also select themes for specific applications.
+To select or install (as user) Kvantum themes, use Kvantum Manager, which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could not only switch between themes easily but also select themes for specific applications.
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 

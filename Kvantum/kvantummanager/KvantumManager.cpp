@@ -984,6 +984,8 @@ void KvantumManager::defaultThemeButtons()
             ui->checkBoxBlurPopup->setChecked (defaultSettings.value ("popup_blurring").toBool());
     }
 
+    ui->checkBoxShadowlessPopup->setChecked (defaultSettings.value ("shadowless_popup").toBool());
+
     /* all contrast effect values are 1 by default */
     if (defaultSettings.contains ("contrast"))
     {
@@ -1316,6 +1318,8 @@ void KvantumManager::tabChanged (int index)
                     if (!ui->checkBoxBlurWindow->isChecked() && themeSettings.contains ("popup_blurring"))
                         ui->checkBoxBlurPopup->setChecked (themeSettings.value ("popup_blurring").toBool());
                 }
+
+                ui->checkBoxShadowlessPopup->setChecked (themeSettings.value ("shadowless_popup").toBool());
 
                 if (themeSettings.contains ("contrast"))
                 {
@@ -2159,6 +2163,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("reduce_window_opacity", str.setNum (ui->spinReduceOpacity->value()));
         generalKeys.insert("reduce_menu_opacity", str.setNum (ui->spinReduceMenuOpacity->value()));
         generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
+        generalKeys.insert("shadowless_popup", boolToStr (ui->checkBoxShadowlessPopup->isChecked()));
         generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
 
         generalKeys.insert("contrast", str.setNum (ui->spinContrast->value(), 'f', 2));
@@ -2211,6 +2216,7 @@ void KvantumManager::writeConfig()
             || qMin(qMax(themeSettings.value ("reduce_menu_opacity").toInt(),0),90) != ui->spinReduceMenuOpacity->value()
             || themeSettings.value ("blurring").toBool() != ui->checkBoxBlurWindow->isChecked()
             || themeSettings.value ("popup_blurring").toBool() != ui->checkBoxBlurPopup->isChecked()
+            || themeSettings.value ("shadowless_popup").toBool() != ui->checkBoxShadowlessPopup->isChecked()
 
             || qBound(static_cast<qreal>(0), themeSettings.value ("contrast").toReal(), static_cast<qreal>(2))
                != static_cast<qreal>(ui->spinContrast->value())
@@ -2515,6 +2521,7 @@ void KvantumManager::notCompisited (bool checked)
     ui->reduceMenuOpacityLabel->setEnabled (!checked);
     ui->spinReduceMenuOpacity->setEnabled (!checked);
     ui->checkBoxBlurPopup->setEnabled (!checked && !ui->checkBoxBlurWindow->isChecked());
+    ui->checkBoxShadowlessPopup->setEnabled (!checked);
     ui->checkBoxTrans->setEnabled (!checked);
     ui->contrastBox->setEnabled (!checked);
     isTranslucent (!checked && ui->checkBoxTrans->isChecked());
@@ -2575,6 +2582,7 @@ void KvantumManager::respectDE (bool checked)
             ui->checkBoxBlurPopup->setEnabled (!ui->checkBoxNoComposite->isChecked()
                                                && !ui->checkBoxBlurWindow->isChecked()
                                                && !checked);
+            ui->checkBoxShadowlessPopup->setEnabled (!ui->checkBoxNoComposite->isChecked());
             ui->checkBoxTrans->setEnabled (!ui->checkBoxNoComposite->isChecked() && !checked);
             bool enableTrans (!ui->checkBoxNoComposite->isChecked()
                               && ui->checkBoxTrans->isChecked()

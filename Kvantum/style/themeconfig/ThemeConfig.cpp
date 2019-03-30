@@ -620,37 +620,16 @@ theme_spec ThemeConfig::getCompositeSpec()
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
     }
 #endif
+
+    /* no menu/tooltip shadow without compositing */
+    v = getValue(KSL("General"),KSL("menu_shadow_depth"));
+    if (v.isValid())
+      r.menu_shadow_depth = qMax(v.toInt(),0);
+
+    v = getValue(KSL("General"),KSL("tooltip_shadow_depth"));
+    if (v.isValid())
+      r.tooltip_shadow_depth = qMax(v.toInt(),0);
   }
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  /* NOTE: The contrast effect is applied by BlurHelper, so that the following values have
-           effect only for windows that can be blurred, whether they are blurred or not. */
-  v = getValue(KSL("General"),KSL("contrast"));
-  if (v.isValid()) // 1 by default
-    r.contrast = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue(KSL("General"),KSL("intensity"));
-  if (v.isValid()) // 1 by default
-    r.intensity = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue(KSL("General"),KSL("saturation"));
-  if (v.isValid()) // 1 by default
-    r.saturation = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-#endif
-
-  /* no menu/tooltip shadow without compositing */
-  v = getValue(KSL("General"),KSL("menu_shadow_depth"));
-  if (v.isValid() && r.composite)
-    r.menu_shadow_depth = qMax(v.toInt(),0);
-
-  v = getValue(KSL("General"),KSL("menu_separator_height"));
-  if (v.isValid())
-    r.menu_separator_height = qMin(qMax(v.toInt(),1),16);
-
-  v = getValue(KSL("General"),KSL("spread_menuitems"));
-  r.spread_menuitems = v.toBool();
-
-  v = getValue(KSL("General"),KSL("tooltip_shadow_depth"));
-  if (v.isValid() && r.composite)
-    r.tooltip_shadow_depth = qMax(v.toInt(),0);
 
   return r;
 }
@@ -671,12 +650,36 @@ theme_spec ThemeConfig::getThemeSpec()
     r.comment = v.toString();
 
   v = getValue(KSL("General"),KSL("reduce_window_opacity"));
-  if (v.isValid())
+  if (v.isValid()) // compositing will be checked by the code
     r.reduce_window_opacity = qMin(qMax(v.toInt(),0),90);
 
   v = getValue(KSL("General"),KSL("reduce_menu_opacity"));
-  if (v.isValid())
+  if (v.isValid()) // compositing will be checked by the code
     r.reduce_menu_opacity = qMin(qMax(v.toInt(),0),90);
+
+  v = getValue(KSL("General"),KSL("menu_separator_height"));
+  if (v.isValid())
+    r.menu_separator_height = qMin(qMax(v.toInt(),1),16);
+
+  v = getValue(KSL("General"),KSL("spread_menuitems"));
+  r.spread_menuitems = v.toBool();
+
+  v = getValue(KSL("General"),KSL("shadowless_popup"));
+  r.shadowless_popup = v.toBool();
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    /* NOTE: The contrast effect is applied by BlurHelper, so that the following values have
+             effect only for windows that can be blurred, whether they are blurred or not. */
+  v = getValue(KSL("General"),KSL("contrast"));
+  if (v.isValid()) // 1 by default
+    r.contrast = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+  v = getValue(KSL("General"),KSL("intensity"));
+  if (v.isValid()) // 1 by default
+    r.intensity = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+  v = getValue(KSL("General"),KSL("saturation"));
+  if (v.isValid()) // 1 by default
+    r.saturation = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
+#endif
 
   v = getValue(KSL("General"),KSL("x11drag"));
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default

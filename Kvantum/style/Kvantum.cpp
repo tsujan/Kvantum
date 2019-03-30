@@ -870,24 +870,41 @@ void Style::setAnimationOpacityOut()
 
 int Style::getMenuMargin(bool horiz) const
 {
-  const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
-  int margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
-  if (!noComposite_) // used without compositing at PM_SubMenuOverlap
-    margin += settings_->getCompositeSpec().menu_shadow_depth;
+  int margin = 0;
+  theme_spec tspec_now = settings_->getCompositeSpec();
+  /* NOTE: No horizontal margin when menu items are spread across an opaque or shadowless menu. */
+  if (!horiz || !(tspec_.spread_menuitems
+                  && (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite)))
+  {
+    const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
+    margin = horiz ? qMax(fspec.left,fspec.right) : qMax(fspec.top,fspec.bottom);
+  }
+  if (!tspec_.shadowless_popup && !noComposite_) // used without compositing at PM_SubMenuOverlap
+    margin += tspec_now.menu_shadow_depth;
   return margin;
 }
 
 QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
+  QList<int> shadow;
+  shadow << 0 << 0 << 0 << 0;
+  if (tspec_.shadowless_popup)
+  {
+    if (widgetName == "Menu")
+    {
+      realMenuShadow_ = menuShadow_ = shadow;
+      setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
+    }
+    return shadow;
+  }
   if (widgetName == "Menu"
       && menuShadow_.count() == 4)
   {
-      return menuShadow_;
+    return menuShadow_;
   }
+
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
-  QList<int> shadow;
-  shadow << 0 << 0 << 0 << 0;
   QList<QString> direction;
   direction << QStringLiteral("left") << QStringLiteral("top") << QStringLiteral("right") << QStringLiteral("bottom");
   frame_spec fspec = getFrameSpec(widgetName);
@@ -2945,15 +2962,25 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       fspec.expansion = 0;
       const interior_spec ispec = getInteriorSpec(group);
 
-      fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
-      fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
-
       QRect r = option->rect;
       theme_spec tspec_now = settings_->getCompositeSpec();
       bool isTranslucent(!noComposite_ && widget && translucentWidgets_.contains(widget)
                          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
                          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
-      if (isTranslucent && tspec_now.menu_shadow_depth > 0
+
+      if (tspec_.spread_menuitems
+          && (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite))
+      { // PM_MenuHMargin is zero but we draw the frame (this condition was used in getMenuMargin())
+        fspec.left = fspec.right = qMax(fspec.left,fspec.right);
+      }
+      else
+      {
+        fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
+      }
+      fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
+
+      if (!tspec_.shadowless_popup
+          && isTranslucent && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
           && menuShadow_.count() == 4)
       {
@@ -2990,11 +3017,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       else
       {
-        if (tspec_.spread_menuitems && isTranslucent)
-          r.adjust(fspec.left,0,-fspec.left,0);
+        if (isTranslucent)
+        {
+          painter->save();
+          painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
+        }
         if (!widget || !renderInterior(painter,r,fspec,ispec,ispec.element+"-normal")) // QML
           painter->fillRect(r, QApplication::palette().color(QPalette::Window));
         renderFrame(painter,r,fspec,fspec.element+"-normal");
+        if (isTranslucent)
+          painter->restore();
       }
 
       break;
@@ -3084,14 +3116,23 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           frame_spec fspec = getFrameSpec(group);
           fspec.expansion = 0;
           const interior_spec ispec = getInteriorSpec(group);
-          fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
           fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
           QRect r = option->rect;
           theme_spec tspec_now = settings_->getCompositeSpec();
           bool isTranslucent(!noComposite_ && widget && translucentWidgets_.contains(widget)
                              /* detached (Qt5) menus may come here because of setSurfaceFormat() */
                              && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu));
-          if (isTranslucent && tspec_now.menu_shadow_depth > 0
+          if (tspec_.spread_menuitems
+              && (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite))
+          { // PM_MenuHMargin is zero but we draw the frame (this condition was used in getMenuMargin())
+            fspec.left = fspec.right = qMax(fspec.left,fspec.right);
+          }
+          else
+          {
+            fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
+          }
+          if (!tspec_.shadowless_popup
+              && isTranslucent && tspec_now.menu_shadow_depth > 0
               && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
               && menuShadow_.count() == 4)
           {
@@ -3128,11 +3169,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           else
           {
-            if (tspec_.spread_menuitems && isTranslucent)
-              r.adjust(fspec.left,0,-fspec.left,0);
-            if (!widget || !renderInterior(painter,r,fspec,ispec,ispec.element+"-normal")) // QML
+            if (isTranslucent)
+            {
+              painter->save();
+              painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
+            }
+            else // we enforced translucency on the combo menu at polish(QWidget*)
               painter->fillRect(r, QApplication::palette().color(QPalette::Window));
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
             renderFrame(painter,r,fspec,fspec.element+"-normal");
+            if (isTranslucent)
+              painter->restore();
           }
           break;
         }
@@ -4964,7 +5011,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!noComposite_ && tspec_now.tooltip_shadow_depth > 0
+      if (!tspec_.shadowless_popup && !noComposite_ && tspec_now.tooltip_shadow_depth > 0
           && fspec.left >= tspec_now.tooltip_shadow_depth
           && widget && translucentWidgets_.contains(widget))
       {
@@ -11825,6 +11872,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
                && tspec_.combo_menu /*&& !isLibreoffice_*/)
       {
+          if (tspec_.spread_menuitems && (tspec_.shadowless_popup || noComposite_ || !tspec_.composite))
+            return 0; // fairly similar to what was done in getMenuMargin()
           return qMax(pixelMetric(PM_MenuHMargin,option,widget),
                       pixelMetric(PM_MenuVMargin,option,widget));
       }
@@ -11884,16 +11933,22 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
       int v = qMax(fspec.top,fspec.bottom);
-      int h = qMax(fspec.left,fspec.right);
+      int h = 0;
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!noComposite_ && tspec_now.composite
-          && widget
-          && translucentWidgets_.contains(widget) // combo menus are included
-          /* detached menus may come here because of setSurfaceFormat() */
-          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-      {
-        v += tspec_now.menu_shadow_depth;
-        h += tspec_now.menu_shadow_depth;
+      if (!(tspec_.spread_menuitems
+            && (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite)))
+      { // this condition was used in getMenuMargin()
+        const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
+        h = qMax(fspec.left,fspec.right);
+        if (!tspec_.shadowless_popup && !noComposite_ && tspec_now.composite
+            && widget
+            && translucentWidgets_.contains(widget) // combo menus are included
+            /* detached menus may come here because of setSurfaceFormat() */
+            && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+        {
+          v += tspec_now.menu_shadow_depth;
+          h += tspec_now.menu_shadow_depth;
+        }
       }
       /* a margin > 2px could create ugly corners without compositing */
       if (/*!tspec_now.composite || isLibreoffice_
@@ -12274,12 +12329,15 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
       int v = qMax(fspec.top,fspec.bottom);
       int h = qMax(fspec.left,fspec.right);
-      theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!noComposite_ && tspec_now.composite
-          && (!widget || translucentWidgets_.contains(widget)))
+      if (!tspec_.shadowless_popup && !noComposite_)
       {
-        v += tspec_now.tooltip_shadow_depth;
-        h += tspec_now.tooltip_shadow_depth;
+        theme_spec tspec_now = settings_->getCompositeSpec();
+        if (tspec_now.composite
+            && (!widget || translucentWidgets_.contains(widget)))
+        {
+          v += tspec_now.tooltip_shadow_depth;
+          h += tspec_now.tooltip_shadow_depth;
+        }
       }
       /* a margin > 2px could create ugly
          corners without compositing */
@@ -14871,7 +14929,9 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
 
             fspec = getFrameSpec(QStringLiteral("Menu"));
             space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
-                     + (!noComposite_ ? 2*settings_->getCompositeSpec().menu_shadow_depth : 0)
+                     + (!tspec_.shadowless_popup && !noComposite_
+                          ? 2*settings_->getCompositeSpec().menu_shadow_depth
+                          : 0)
                      - extraComboWidth(opt, hasIcon);
 
             /* The width might be increased by Qt -> qcombobox.cpp -> QComboBox::showPopup()
@@ -14879,7 +14939,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             r.adjust(0, 0, qMax(space,0), 0);
 
             /* compensate for the offset created by the shadow */
-            if (!noComposite_ && menuShadow_.count() == 4)
+            if (!tspec_.shadowless_popup && !noComposite_ && menuShadow_.count() == 4)
             {
               /* menu width shouldn't be less than combo width */
               r.adjust(0, 0, qMax(w - (r.width() - menuShadow_.at(0) - menuShadow_.at(2)), 0), 0);

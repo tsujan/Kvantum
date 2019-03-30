@@ -135,6 +135,8 @@ typedef struct {
   int submenu_delay;
   /* depth of tooltip shadows */
   int tooltip_shadow_depth;
+  /* no menu or tooltip shadow with compositing? */
+  bool shadowless_popup;
   /* splitter width */
   int splitter_width;
   /* scrollbar width */
@@ -506,6 +508,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.submenu_overlap = 0;
   tspec.submenu_delay = 250;
   tspec.tooltip_shadow_depth = 0;
+  tspec.shadowless_popup = false;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;
   tspec.scroll_min_extent = 36;

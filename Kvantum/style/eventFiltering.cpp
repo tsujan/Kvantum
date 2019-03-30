@@ -968,11 +968,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (QScreen *sc = win->screen())
             ag = sc->availableGeometry();
         }
+        int dX = 0, dY = 0;
         /* this gives the real position AFTER pending movements
            because it's QWidgetData::crect (Qt -> qwidget.h) */
         QRect g(w->geometry());
-        int X = g.left();
-        int Y = g.top();
 
         /* WARNING: If compositing is stopped here, we aren't responsible.
                     A check for the state of compositing at this very moment
@@ -982,19 +981,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* compensate for the offset created by the shadow */
 
-          Y -= menuShadow_.at(1); // top shadow
+          dY -= menuShadow_.at(1); // top shadow
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
-            X += menuShadow_.at(2);
+            dX += menuShadow_.at(2);
             if (parentMenu)
             {
               if (parentMenuCorner.x() < g.left())
-                X -= menuShadow_.at(2) + menuShadow_.at(0);
+                dX -= menuShadow_.at(2) + menuShadow_.at(0);
               else
               {
-                X += menuShadow_.at(0)
-                     - getMenuMargin(true); // workaround for an old Qt bug
+                dX += menuShadow_.at(0)
+                      - getMenuMargin(true); // workaround for an old Qt bug
               }
             }
             else
@@ -1003,21 +1002,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               {
                 QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
                 if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                  Y +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
                 else
-                  Y -= getFrameSpec(group).bottom;
+                  dY -= getFrameSpec(group).bottom;
 
                 QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
                 if (g.right() + 1 > activeTopLeft.x() + activeG.width())
                 { // Qt positions the menu wrongly in this case but we don't add a workaround
-                  X -= menuShadow_.at(2);
+                  dX -= menuShadow_.at(2);
                   int delta = menuShadow_.at(2)
                               - (g.right() + 1 - (activeTopLeft.x() + activeG.width()));
                   if (delta > 0)
-                    X += delta;
+                    dX += delta;
                   else
-                    X -= qMin(menuShadow_.at(0), -delta);
+                    dX -= qMin(menuShadow_.at(0), -delta);
                 }
               }
               else
@@ -1026,39 +1025,39 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 {
                   QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
                   if (wTopLeft.y() >= g.bottom())
-                    Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                    dY +=  menuShadow_.at(1) + menuShadow_.at(3);
                   if (g.right() + 1 > wTopLeft.x() + sunkenButton_.data()->width())
                   {
-                    X -= menuShadow_.at(2);
+                    dX -= menuShadow_.at(2);
                     int delta = menuShadow_.at(2)
                                 - (g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
                     if (delta > 0)
-                      X += delta;
+                      dX += delta;
                     else
-                      X -= qMin(menuShadow_.at(0), -delta);
+                      dX -= qMin(menuShadow_.at(0), -delta);
                   }
                 }
                 else if (!ag.isEmpty())
                 {
                   if (g.bottom() == ag.bottom() && g.top() != ag.top())
-                    Y += menuShadow_.at(1) + menuShadow_.at(3);
+                    dY += menuShadow_.at(1) + menuShadow_.at(3);
                   if (g.left() == ag.left() && g.right() != ag.right())
-                    X -= menuShadow_.at(2) + menuShadow_.at(0);
+                    dX -= menuShadow_.at(2) + menuShadow_.at(0);
                 }
               }
             }
           }
           else // ltr
           {
-            X -= menuShadow_.at(0); // left shadow
+            dX -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
               if (parentMenuCorner.x() > g.left())
               { // there wasn't enough space to the right of the parent
-                X += menuShadow_.at(0) + menuShadow_.at(2);
+                dX += menuShadow_.at(0) + menuShadow_.at(2);
               }
               else
-                X -= menuShadow_.at(2); // right shadow of the left menu
+                dX -= menuShadow_.at(2); // right shadow of the left menu
             }
             else
             {
@@ -1066,21 +1065,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               {
                 QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
                 if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-                  Y +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
                 else
-                  Y -= getFrameSpec(group).bottom;
+                  dY -= getFrameSpec(group).bottom;
 
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
                                                                    parentMenubar->activeAction())
                                                                  .topLeft());
                 if (activeTopLeft.x() > g.left()) // because of the right screen border
                 {
-                  X += menuShadow_.at(0);
+                  dX += menuShadow_.at(0);
                   int delta = menuShadow_.at(0) - (activeTopLeft.x() - g.left());
                   if (delta > 0)
-                    X -= delta;
+                    dX -= delta;
                   else
-                    X += qMin(menuShadow_.at(2), -delta);
+                    dX += qMin(menuShadow_.at(2), -delta);
                 }
               }
               else
@@ -1089,25 +1088,25 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 {
                   QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
                   if (wTopLeft.y() >= g.bottom()) // above the button (strange! Qt doesn't add 1px)
-                    Y +=  menuShadow_.at(1) + menuShadow_.at(3);
+                    dY +=  menuShadow_.at(1) + menuShadow_.at(3);
                   if (wTopLeft.x() > g.left()) // because of the right screen border
                   {
-                    X += menuShadow_.at(0);
+                    dX += menuShadow_.at(0);
                     int delta = menuShadow_.at(0) - (wTopLeft.x() - g.left());
                     if (delta > 0)
-                      X -= delta;
+                      dX -= delta;
                     else
-                      X += qMin(menuShadow_.at(2), -delta);
+                      dX += qMin(menuShadow_.at(2), -delta);
                   }
                 }
                 else if (!ag.isEmpty()) // probably a panel menu
                 {
                   /* snap to the screen bottom if possible */
                   if (g.bottom() == ag.bottom() && g.top() != ag.top())
-                    Y += menuShadow_.at(1) + menuShadow_.at(3);
+                    dY += menuShadow_.at(1) + menuShadow_.at(3);
                   /* snap to the right screen edge if possible */
                   if (g.right() == ag.right() && g.left() != ag.left())
-                    X += menuShadow_.at(0) + menuShadow_.at(2);
+                    dX += menuShadow_.at(0) + menuShadow_.at(2);
                 }
               }
             }
@@ -1128,24 +1127,24 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 if (g.top() + topActionRect.top() ==  parentMenu->actionGeometry(activeAct).top()
                                                       + parentMenuCorner.y())
                 {
-                  Y += topActionRect.top();
+                  dY += topActionRect.top();
                 }
               }
             }
           }
 #endif
-
-          w->move(X,Y);
         }
         else if (!parentMenu && parentMenubar)
         {
           QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
           if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-            Y += getFrameSpec(group).top;
+            dY += getFrameSpec(group).top;
           else
-            Y -= getFrameSpec(group).bottom;
-          w->move(X,Y);
+            dY -= getFrameSpec(group).bottom;
         }
+
+        if (dX == 0 && dY == 0) break;
+        w->move(g.left() + dX, g.top() + dY);
         movedMenus.insert(w);
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
