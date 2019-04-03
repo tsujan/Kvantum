@@ -67,6 +67,7 @@
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
+#define LIMITED_EXPANSION 12 // when the frame expansion should be limited
 #define MIN_CONTRAST_RATIO 3.5
 
 #define OPACITY_STEP 20 // percent
@@ -1591,7 +1592,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
       fspec.bottom = qMin(fspec.bottom,3);
 
       if (!hasExpandedBorder(fspec))
-        fspec.expansion = 0;
+        fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
       else
       {
         fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -2154,7 +2155,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.bottom = qMin(fspec.bottom,3);
 
         if (!hasExpandedBorder(fspec))
-          fspec.expansion = 0;
+          fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         else
         {
           fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -2268,7 +2269,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               fspec.bottom = qMin(fspec.bottom,3);
 
               if (!hasExpandedBorder(fspec))
-                fspec.expansion = 0;
+                fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
               else
               {
                 fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -2291,7 +2292,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               fspec.bottom = qMin(fspec.bottom,3);
 
               if (!hasExpandedBorder(fspec))
-                fspec.expansion = 0;
+                fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
               else
               {
                 fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -2605,7 +2606,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
         if (!animate && !(isLibreoffice_ && widget == nullptr)
             && themeRndr_ && themeRndr_->isValid()
-            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            && specialCheckBoxExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
@@ -2665,7 +2666,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (!(isLibreoffice_ && widget == nullptr)
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
-            && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+            && specialCheckBoxExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
@@ -2732,7 +2733,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             animate = false;
             if (!(isLibreoffice_ && widget == nullptr)
-                && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+                && specialCheckBoxExists("menu-"+ispec.element+suffix))
             {
               prefix = "menu-"; // make exception for menuitems
             }
@@ -2741,7 +2742,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             animate = false;
             if (!(isLibreoffice_ && widget == nullptr)
-                && themeRndr_->elementExists("item-"+ispec.element+suffix))
+                && specialCheckBoxExists("item-"+ispec.element+suffix))
             {
               prefix = "item-"; // make exception for viewitems
             }
@@ -2808,14 +2809,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
             if (!(isLibreoffice_ && widget == nullptr)
-                && themeRndr_->elementExists("menu-"+ispec.element+suffix))
+                && specialCheckBoxExists("menu-"+ispec.element+suffix))
             {
               prefix = "menu-";
             }
           }
           else if (!(isLibreoffice_ && widget == nullptr)
                    && qstyleoption_cast<const QStyleOptionViewItem*>(option)
-                   && themeRndr_->elementExists("item-"+ispec.element+suffix))
+                   && specialCheckBoxExists("item-"+ispec.element+suffix))
           {
             prefix = "item-";
           }
@@ -3490,7 +3491,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       if (!widget) // WARNING: QML has anchoring!
       {
-        fspec.expansion = 0;
+        if (hasExpandedBorder(fspec))
+          fspec.expansion = 0;
+        else
+          fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         ispec.px = ispec.py = 0;
       }
 
@@ -3500,8 +3504,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
-      }
-      else*/ if (qobject_cast<const QLineEdit*>(widget))
+      }*/
+      else if (qobject_cast<const QLineEdit*>(widget))
       {
         if ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
@@ -3513,7 +3517,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           fspec.bottom = qMin(fspec.bottom,3);
 
           if (!hasExpandedBorder(fspec))
-            fspec.expansion = 0;
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           else
           {
             fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -3542,7 +3546,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          fspec.expansion = 0;
+
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         }
         else if (sb)
         {
@@ -3562,7 +3570,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             fspec.bottom = qMin(fspec.bottom,3);
 
             if (!hasExpandedBorder(fspec))
-              fspec.expansion = 0;
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
             else
             {
               fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -3773,6 +3781,44 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             vOffset = 0;
           }
         }
+
+        // -> CC_SpinBox
+        if (opt)
+        {
+          if (up)
+          {
+            int m = opt->rect.width() - tspec_.spin_button_width;
+            if (fspec.right > m)
+            {
+              m = qMax(m,2);
+              fspec.right = qMin(fspec.right,m);
+              if (hasExpandedBorder(fspec))
+                fspec.expansion = 0;
+              else
+                fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+            }
+          }
+          else if (w < tspec_.spin_button_width)
+          {
+            if (hasExpandedBorder(fspec))
+              fspec.expansion = 0;
+            else
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+          }
+          if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
+          {
+            if (spinMaxText(sb).isEmpty())
+            {
+              fspec.right = qMin(fspec.right,3);
+              //fspec.expansion = 0;
+            }
+          }
+          if (opt->rect.height() < fspec.top + fspec.bottom)
+          {
+            fspec.top = fspec.bottom = qMin(fspec.top,3);
+            //fspec.expansion = 0;
+          }
+        }
       }
       else
       {
@@ -3781,7 +3827,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.right = qMin(fspec.right,3);
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
-        fspec.expansion = 0;
+
+        if (hasExpandedBorder(fspec))
+          fspec.expansion = 0;
+        else
+          fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
       }
 
       /*if (isLibreoffice_)
@@ -3791,35 +3841,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.top = qMin(fspec.top,3);
         fspec.bottom = qMin(fspec.bottom,3);
         fspec.expansion = 0;
-      }
-      // -> CC_SpinBox
-      else*/ if (opt && !verticalIndicators)
-      {
-        if (up)
-        {
-          int m = opt->rect.width() - tspec_.spin_button_width;
-          if (fspec.right > m)
-          {
-            m = qMax(m,2);
-            fspec.right = qMin(fspec.right,m);
-            fspec.expansion = 0;
-          }
-        }
-        else if (w < tspec_.spin_button_width) fspec.expansion = 0;
-        if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
-        {
-          if (spinMaxText(sb).isEmpty())
-          {
-            fspec.right = qMin(fspec.right,3);
-            //fspec.expansion = 0;
-          }
-        }
-        if (opt->rect.height() < fspec.top + fspec.bottom)
-        {
-          fspec.top = fspec.bottom = qMin(fspec.top,3);
-          //fspec.expansion = 0;
-        }
-      }
+      } */
 
       QString iStatus = getState(option,widget);; // indicator state
       QString bStatus = iStatus; // button state
@@ -3934,7 +3956,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (!col.isValid())
           col = QApplication::palette().color(QPalette::ButtonText);
         if (enoughContrast(col, QApplication::palette().color(QPalette::Text))
-            && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+            && flatArrowExists(dspec.element))
           dspec.element = "flat-"+dspec.element;
 
         if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
@@ -4268,7 +4290,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (group == "ToolbarButton")
             group1 = group;
           const indicator_spec dspec1 = getIndicatorSpec(group1);
-          if (themeRndr_->elementExists("flat-"+dspec1.element+"-down-normal"))
+          if (flatArrowExists(dspec1.element))
           {
             QColor col = getFromRGBA(getLabelSpec(group1).normalColor);
             if (!col.isValid())
@@ -4297,29 +4319,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
       }
-      else if ((combo && combo->editable && !(cb && !cb->lineEdit())) // otherwise drawn at CC_ComboBox
+      else if ((combo && combo->editable && !(cb && !cb->lineEdit())
+                && !tspec_.combo_as_lineedit) // otherwise drawn at CC_ComboBox
                && (!(option->state & State_AutoRaise)
                    || (!status.startsWith("normal") && (option->state & State_Enabled))))
       {
         /* fillWidgetInterior wasn't checked for combos  */
         fillWidgetInterior = !ispec.hasInterior
-                             && hasHighContrastWithContainer(widget, tspec_.combo_as_lineedit && cb && cb->lineEdit()
-                                                                     ? cb->lineEdit()->palette().color(QPalette::Text)
-                                                                     : getFromRGBA(getLabelSpec(cGroup).normalColor));
-        if (cb && tspec_.combo_as_lineedit)
-        {
-          if (cb->hasFocus())
-          {
-            if (isWidgetInactive(widget))
-              status = "focused-inactive";
-            else status = "focused";
-          }
-          else if (status.startsWith("focused"))
-            status.replace("focused","normal");
-          else if (status.startsWith("toggled"))
-            status.replace("toggled","normal");
-        }
-        else if (tspec_.square_combo_button) // the rest of the combo is like a lineedit
+                             && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(cGroup).normalColor));
+        if (tspec_.square_combo_button) // the rest of the combo is like a lineedit
           status.replace("focused","normal");
         if (!(option->state & State_Enabled))
         {
@@ -4329,9 +4337,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         bool mouseAnimation(animatedWidget_ == widget
                             && (!status.startsWith("normal")
-                                || ((!tspec_.combo_as_lineedit
-                                     || (cb && cb->view() && cb->view()->isVisible()))
-                                    && animationStartState_.startsWith("focused"))));
+                                || animationStartState_.startsWith("focused")));
         bool animate(cb && cb->isEnabled()
                      && !qobject_cast<const QAbstractScrollArea*>(widget)
                      && (mouseAnimation
@@ -4341,7 +4347,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           animationStartState.remove(0, 2);
         int animationOpacity = animationOpacity_;
         bool animatePanel(!(tspec_.combo_focus_rect
-                            && !tspec_.combo_as_lineedit
                             && (status.startsWith("normal")
                                 || status.startsWith("pressed"))
                             && (animationStartState.startsWith("normal")
@@ -4383,30 +4388,30 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (!fillWidgetInterior)
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
         renderFrame(painter,r,fspec,fspec.element+"-"+_status);
-        if (!tspec_.combo_as_lineedit)
-        { // draw combo separator if it exists
-          const QString sepName = getIndicatorSpec(cGroup).element + "-separator";
-          QRect sep;
-          if (rtl)
-          {
-            sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
-            painter->save();
-            QTransform m;
-            m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
-            painter->setTransform(m, true);
-          }
-          else
-            sep = QRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
-          if (renderElement(painter, sepName+"-"+_status, sep))
-          {
-            sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
-            renderElement(painter, sepName+"-top-"+_status, sep);
-            sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
-            renderElement(painter, sepName+"-bottom-"+_status, sep);
-          }
-          if (rtl)
-            painter->restore();
+
+        /* draw combo separator if it exists */
+        const QString sepName = getIndicatorSpec(cGroup).element + "-separator";
+        QRect sep;
+        if (rtl)
+        {
+          sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+          painter->save();
+          QTransform m;
+          m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
+          painter->setTransform(m, true);
         }
+        else
+          sep = QRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+        if (renderElement(painter, sepName+"-"+_status, sep))
+        {
+          sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+          renderElement(painter, sepName+"-top-"+_status, sep);
+          sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+          renderElement(painter, sepName+"-bottom-"+_status, sep);
+        }
+        if (rtl)
+          painter->restore();
+
         if (animate)
         {
           if (animatePanel)
@@ -4429,9 +4434,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           QColor comboCol = widget->palette().color(status.contains("-inactive")
                                                       ? QPalette::Inactive
                                                       : QPalette::Active,
-                                                    tspec_.combo_as_lineedit
-                                                      ? QPalette::Base
-                                                      : QPalette::Button);
+                                                    QPalette::Button);
           comboCol.setAlpha(255);
           painter->fillRect(interiorRect(r,fspec), comboCol);
         }
@@ -4658,7 +4661,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         else if (qobject_cast<const QMenuBar*>(widget))
           col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
         if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
-            && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+            && flatArrowExists(dspec.element))
         {
           dspec.element = "flat-"+dspec.element;
         }
@@ -5112,9 +5115,11 @@ void Style::drawControl(QStyle::ControlElement element,
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
 
+        bool isComboMenu(qobject_cast<const QComboBox*>(widget));
+
         /* we should limit text-icon spacing for combo menu
            because we can't know whether it has icon */
-        if (qobject_cast<const QComboBox*>(widget))
+        if (isComboMenu)
           lspec.tispace = qMin(lspec.tispace, 6);
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
@@ -5203,8 +5208,7 @@ void Style::drawControl(QStyle::ControlElement element,
           bool rtl(option->direction == Qt::RightToLeft);
           bool hideCheckBoxes(tspec_.combo_menu //&& !isLibreoffice_
                               && tspec_.hide_combo_checkboxes
-                              // see Qt -> qcombobox_p.h -> QComboMenuDelegate
-                              && qobject_cast<const QComboBox*>(widget));
+                              && isComboMenu); // as in CT_MenuItem
 
           int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           int ih = qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget));
@@ -5222,9 +5226,7 @@ void Style::drawControl(QStyle::ControlElement element,
             int checkSpace = 0;
             if (!hideCheckBoxes
                 && ((widget && opt->menuHasCheckableItems)
-                    /* QML menus only use checkType, while
-                       the default value of menuHasCheckableItems is true. */
-                    || opt->checkType != QStyleOptionMenuItem::NotCheckable))
+                    || opt->checkType != QStyleOptionMenuItem::NotCheckable)) // as in CT_MenuItem
             {
               checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
             }
@@ -5234,7 +5236,7 @@ void Style::drawControl(QStyle::ControlElement element,
               if (((opt->maxIconWidth
                     /* combobox always announces the existence of an icon,
                        so we don't care about aligning its menu texts */
-                    && !qobject_cast<const QComboBox*>(widget))
+                    && !isComboMenu)
                    || !widget) // QML menus set maxIconWidth to 0, although they have icon
                   && !hspec_.iconless_menu)
               {
@@ -5351,7 +5353,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                                             0));
             if (opt->checkType == QStyleOptionMenuItem::Exclusive
                 // combo menu checkboxes are exclusive
-                || qobject_cast<const QComboBox*>(widget))
+                || isComboMenu)
             {
               if (opt->checked)
                 o.state |= State_On;
@@ -5654,7 +5656,10 @@ void Style::drawControl(QStyle::ControlElement element,
         /* fill the non-empty regions of the menubar */
         if (!widget) // WARNING: QML has anchoring!
         {
-          fspec.expansion = 0;
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           ispec.px = ispec.py = 0;
         }
         QString inactive;
@@ -5673,7 +5678,10 @@ void Style::drawControl(QStyle::ControlElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          fspec.expansion = 0;
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         }
 
         /* topFrame and bottomFrame are added at CT_MenuBarItem */
@@ -6982,7 +6990,10 @@ void Style::drawControl(QStyle::ControlElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          fspec.expansion = 0;
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         }
         else if (fspec.expansion != 0)
         {
@@ -7332,7 +7343,10 @@ void Style::drawControl(QStyle::ControlElement element,
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          fspec.expansion = 0;
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         }
         else
         {
@@ -8929,7 +8943,7 @@ void Style::drawControl(QStyle::ControlElement element,
           lspec.tispace = qMin(lspec.tispace,3);
 
           if (!hasExpandedBorder(fspec))
-            fspec.expansion = 0;
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           else
           {
             fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -8980,7 +8994,7 @@ void Style::drawControl(QStyle::ControlElement element,
             fspec.bottom = qMin(fspec.bottom,3);
 
             if (!hasExpandedBorder(fspec))
-              fspec.expansion = 0;
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
             else
             {
               fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -9133,7 +9147,7 @@ void Style::drawControl(QStyle::ControlElement element,
               if (!ncol.isValid())
                 ncol = QApplication::palette().color(QPalette::ButtonText);
               if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText))
-                  && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                  && flatArrowExists(dspec.element))
                 dspec.element = "flat-"+dspec.element;
             }
           }
@@ -9358,7 +9372,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 const label_spec lspec1 = getLabelSpec(group1);
                 if (themeRndr_ && themeRndr_->isValid()
                     && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
-                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                    && flatArrowExists(dspec.element))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -9376,7 +9390,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 const label_spec lspec1 = getLabelSpec(QStringLiteral("Toolbar"));
                 if (themeRndr_ && themeRndr_->isValid()
                     && enoughContrast(ncol, getFromRGBA(lspec1.normalColor))
-                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                    && flatArrowExists(dspec.element))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -9409,7 +9423,7 @@ void Style::drawControl(QStyle::ControlElement element,
               {
                 if (themeRndr_ && themeRndr_->isValid()
                     && enoughContrast(ncol, col)
-                    && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                    && flatArrowExists(dspec.element))
                 {
                   dspec.element = "flat-"+dspec.element;
                 }
@@ -10048,7 +10062,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (aStatus.startsWith("normal")
                 && autoraise && !drawRaised
                 && themeRndr_ && themeRndr_->isValid()
-                && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
+                && flatArrowExists(dspec.element))
             {
               QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
@@ -10160,7 +10174,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             fspec.right = qMin(fspec.right,3);
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
-            fspec.expansion = 0;
+            if (hasExpandedBorder(fspec))
+              fspec.expansion = 0;
+            else
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           }
           QRect r = subControlRect(CC_SpinBox,opt,SC_SpinBoxUp,widget);
           r.setHeight(editRect.height());
@@ -10191,7 +10208,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 fspec.bottom = qMin(fspec.bottom,3);
 
                 if (!hasExpandedBorder(fspec))
-                  fspec.expansion = 0;
+                  fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
                 else
                 {
                   fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -10221,7 +10238,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 fspec.bottom = qMin(fspec.bottom,3);
 
                 if (!hasExpandedBorder(fspec))
-                  fspec.expansion = 0;
+                  fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
                 else
                 {
                   fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -10365,9 +10382,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         label_spec lspec = getLabelSpec(group);
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
+
         if (!widget) // WARNING: QML has anchoring!
         {
-          fspec.expansion = 0;
+          if (hasExpandedBorder(fspec))
+            fspec.expansion = 0;
+          else
+            fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           ispec.px = ispec.py = 0;
         }
         int arrowFrameSize = rtl ? fspec.left : fspec.right;
@@ -10381,8 +10402,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (tspec_.combo_as_lineedit)
               arrowFrameSize = rtl ? fspec.left : fspec.right;
           }
-          fspec.isAttached = true;
-          fspec.HPos = rtl ? 1 : -1;
+          if (!tspec_.combo_as_lineedit)
+          {
+            fspec.isAttached = true;
+            fspec.HPos = rtl ? 1 : -1;
+          }
         }
 
         int extra = 0;
@@ -10496,7 +10520,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 fspec.bottom = qMin(fspec.bottom,3);
 
                 if (!hasExpandedBorder(fspec))
-                  fspec.expansion = 0;
+                  fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
                 else
                 {
                   fspec.leftExpanded = qMin(fspec.leftExpanded,3);
@@ -10513,8 +10537,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               }
             }
             QRect r = o.rect.adjusted(rtl ? editWidth : 0, 0, rtl ? 0 : -editWidth, 0);
-            /* integrate the arrow part if the combo isn't editable */
-            if (!opt->editable || (cb && !cb->lineEdit())) r = r.united(arrowRect);
+            /* integrate the arrow part if the combo isn't editable or is fully drawn as a lineedit */
+            if (!opt->editable || (cb && !cb->lineEdit()) || tspec_.combo_as_lineedit)
+              r = r.united(arrowRect);
             bool libreoffice = false;
             if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled))
             {
@@ -12762,8 +12787,8 @@ int Style::extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const
   bool rtl(opt->direction == Qt::RightToLeft);
 
   /* We don't add COMBO_ARROW_LENGTH (=20) to the width because
-     qMax(23,X) is already added to it in qcommonstyle.cpp but
-     will consider square arrows below.
+     we've already added qMax(23,X) to it (as in qcommonstyle.cpp)
+     but will consider square arrows below.
 
      We want that the left icon respect frame width,
      text margin and text-icon spacing in the editable mode too. */
@@ -12917,7 +12942,13 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
         else hasIcon = true;
 
-        s = QSize(defaultSize.width(),
+        /* exactly as in QCommonStyle (needed in subControlRect -> CC_ComboBox)*/
+        int comboWidth = contentsSize.width()
+                         + qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                    + pixelMetric(PM_ScrollBarExtent,option,widget))
+                         + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
+
+        s = QSize(comboWidth,
                   sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),
                                  hasIcon ? opt->iconSize : QSize()).height());
         if (opt->editable)
@@ -13183,7 +13214,13 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s.rheight() += (dspec.size > s.height() ? dspec.size : 0);
         }
 
-        if (opt->menuHasCheckableItems)
+        if (!(tspec_.combo_menu
+              && tspec_.hide_combo_checkboxes
+              && qobject_cast<const QComboBox*>(widget)) // see Qt -> qcombobox_p.h -> QComboMenuDelegate
+            && ((widget && opt->menuHasCheckableItems)
+                /* QML menus only use checkType, while
+                   the default value of menuHasCheckableItems is true. */
+                || opt->checkType != QStyleOptionMenuItem::NotCheckable))
         {
           int cSize = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           s.rwidth() += cSize + pixelMetric(PM_CheckBoxLabelSpacing);
@@ -14903,14 +14940,26 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           else
           { // take into account the needed space
             QRect r = option->rect;
+            const QStyleOptionComboBox *opt =
+                qstyleoption_cast<const QStyleOptionComboBox*>(option);
             frame_spec fspec = getFrameSpec(QStringLiteral("MenuItem"));
             const label_spec lspec = getLabelSpec(QStringLiteral("MenuItem"));
             int space = fspec.left+lspec.left + fspec.right+lspec.right
-                        - 6; // assuming a maximum value forced by Qt
+                        + (tspec_.hide_combo_checkboxes
+                             ? 0 // assuming a maximum value forced by Qt
+                             : qMin(pixelMetric(PM_SmallIconSize), pixelMetric(PM_IndicatorWidth,option,widget))
+                               + pixelMetric(PM_CheckBoxLabelSpacing))
+                        /* NOTE: We added this to combobox width (as QCommonStyle does):
+                                  qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                           + pixelMetric(PM_ScrollBarExtent))
+                                           + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth)*2 : 0)
+                                 But We don't need it here. As for reserving space for scrollbar,
+                                 it shouldn't be needed with a menu and special cases can be ignored. */
+                        - qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                   + pixelMetric(PM_ScrollBarExtent,option,widget))
+                        - (opt && opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
 
             bool hasIcon = false;
-            const QStyleOptionComboBox *opt =
-                qstyleoption_cast<const QStyleOptionComboBox*>(option);
             if (opt)
             {
               if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
@@ -15668,9 +15717,41 @@ bool Style::hasExpandedBorder(const frame_spec &fspec) const
     QString el = fspec.expandedElement;
     if (el.isEmpty())
       el = fspec.element;
+    if (expandedBorders_.contains(el))
+      return expandedBorders_.value(el);
     if (themeRndr_->elementExists("border-" + el + "-normal-top"))
+    {
+      expandedBorders_.insert(el, true);
       return true;
+    }
+    expandedBorders_.insert(el, false);
   }
+  return false;
+}
+
+bool Style::flatArrowExists(const QString &indicatorElement) const
+{
+  if (flatArrows_.contains(indicatorElement))
+    return flatArrows_.value(indicatorElement);
+  if (themeRndr_->elementExists("flat-"+indicatorElement+"-down-normal"))
+  {
+    flatArrows_.insert(indicatorElement, true);
+    return true;
+  }
+  flatArrows_.insert(indicatorElement, false);
+  return false;
+}
+
+bool Style::specialCheckBoxExists(const QString &checkBoxName) const
+{
+  if (specialCheckBoxes_.contains(checkBoxName))
+    return specialCheckBoxes_.value(checkBoxName);
+  if (themeRndr_->elementExists(checkBoxName))
+  {
+    specialCheckBoxes_.insert(checkBoxName, true);
+    return true;
+  }
+  specialCheckBoxes_.insert(checkBoxName, false);
   return false;
 }
 

@@ -262,7 +262,7 @@
 </g>
 </g>
 </g>
-<g id="resize-grip-normal" transform="translate(33,47.5)">
+<g id="resize-grip-normal" transform="translate(17,47.5)">
 <path style="opacity:0;fill:#7b7b7b" d="m 375,87.5 h 25 v 25 h -25 z"/>
 <path style="fill:#505050" d="m 400,92.5 -20,20 h 20 z"/>
 </g>
@@ -424,14 +424,14 @@
 <path style="opacity:.2;fill:#f07746;fill-rule:evenodd" id="itemview-focused-left" d="m 15,876 h 4 v 8 h -4 z"/>
 <path style="opacity:.2;fill:#f07746;fill-rule:evenodd" id="itemview-focused-topleft" d="m 19,870 0,4 -4,0 0,-4 z"/>
 <path style="opacity:.2;fill:#f07746;fill-rule:evenodd" id="itemview-focused-bottomleft" d="m 15,886 4,0 0,4 -4,0 z"/>
-<path style="fill:#ccc;fill-rule:evenodd" id="spin-separator-normal" d="m 434,147.5 h 6 v 6 h -6 z"/>
-<g id="spin-separator-top-normal" transform="matrix(1,0,0,1.1666667,74,-24.583333)">
+<path style="fill:#ccc;fill-rule:evenodd" id="spin-separator-normal" d="m 418,147.5 h 6 v 6 h -6 z"/>
+<g id="spin-separator-top-normal" transform="matrix(1,0,0,0.5,58,73.75)">
 <rect width="6" x="360" y="141.5" height="6" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#ccc;fill-rule:evenodd" d="m 360,144.07142 h 6 V 147.5 h -6 z"/>
+<path style="fill:#ccc;fill-rule:evenodd" d="m 360,143.5 h 6 v 4 h -6 z"/>
 </g>
-<g id="spin-separator-bottom-normal" transform="matrix(1,0,0,-1.1666667,74,325.58333)">
+<g id="spin-separator-bottom-normal" transform="matrix(1,0,0,-0.5,58,227.25)">
 <rect width="6" x="360" y="141.5" height="6" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#ccc;fill-rule:evenodd" d="m 360,144.92856 h 6 V 147.5 h -6 z"/>
+<path style="fill:#ccc;fill-rule:evenodd" d="m 360,145.5 h 6 v 2 h -6 z"/>
 </g>
 <g style="fill-rule:evenodd" id="spin-up-pressed" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,243.83361,350.50473)">
 <path style="stroke-width:1.76" d="m 130.7988,328.8926 v 9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 z " transform="matrix(0.40176523,-0.40176523,0.40176523,0.40176523,-238.6605,-42.090882)"/>
@@ -814,15 +814,24 @@
 <use width="100%" height="100%" xlink:href="#ebutton-toggled-bottom" id="ebutton-pressed-bottom" transform="translate(-50)"/>
 <use width="100%" height="100%" xlink:href="#ebutton-toggled-bottomleft" id="ebutton-pressed-bottomleft" transform="translate(-50)"/>
 <use width="100%" height="100%" xlink:href="#ebutton-toggled-bottomright" id="ebutton-pressed-bottomright" transform="translate(-50)"/>
-<path style="fill:#969696;fill-rule:evenodd" id="spin-separator-focused" d="m 440,147.5 h 6 v 6 h -6 z"/>
-<g id="spin-separator-bottom-focused" transform="matrix(1,0,0,-1.1666667,80,325.58333)">
+<path style="fill:#969696;fill-rule:evenodd" id="spin-separator-focused" d="m 424,147.5 h 6 v 6 h -6 z"/>
+<g id="spin-separator-bottom-focused" transform="matrix(1,0,0,-0.5,64,227.25)">
 <rect width="6" x="360" y="141.5" height="6" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#969696;fill-rule:evenodd" d="m 360,144.92856 h 6 V 147.5 h -6 z"/>
+<path style="fill:#969696;fill-rule:evenodd" d="m 360,145.5 h 6 v 2 h -6 z"/>
 </g>
-<g id="spin-separator-top-focused" transform="matrix(1,0,0,1.1666667,80,-24.58333)">
+<g id="spin-separator-top-focused" transform="matrix(1,0,0,0.5,64,73.75)">
 <rect width="6" x="360" y="141.5" height="6" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="fill:#969696;fill-rule:evenodd" d="m 360,144.07142 h 6 V 147.5 h -6 z"/>
+<path style="fill:#969696;fill-rule:evenodd" d="m 360,143.5 h 6 v 4 h -6 z"/>
 </g>
+<use width="100%" height="100%" xlink:href="#spin-separator-focused" id="spin-separator-pressed" transform="translate(6)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-bottom-focused" id="spin-separator-bottom-pressed" transform="translate(6)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-top-focused" id="spin-separator-top-pressed" transform="translate(6)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-normal" id="spin-separator-normal-inactive" transform="translate(18)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-top-normal" id="spin-separator-top-normal-inactive" transform="translate(18)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-top-normal-inactive" id="spin-separator-bottom-normal-inactive" transform="matrix(1,0,0,-1,0,301)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-focused" id="spin-separator-focused-inactive" transform="translate(18)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-top-focused" id="spin-separator-top-focused-inactive" transform="translate(18)"/>
+<use width="100%" height="100%" xlink:href="#spin-separator-top-focused-inactive" id="spin-separator-bottom-focused-inactive" transform="matrix(1,0,0,-1,0,301)"/>
 <path style="fill:#f5f6f7;fill-rule:evenodd" id="header-focused" d="m 232,198 h -6 v 6 h 6 z"/>
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.055" id="tbutton-focused-left" d="M 229,14 V 7 h -7 v 7 z"/>
 <path style="fill:#fff;fill-rule:evenodd;fill-opacity:.055" id="tbutton-focused-topleft" d="m 229,0 h -2.33333 C 222.875,0 222,0.875 222,4.6666667 V 7 h 7 z"/>

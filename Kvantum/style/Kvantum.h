@@ -315,6 +315,10 @@ class Style : public QCommonStyle {
 
     /* Can an expanded border be drawn for this frame? */
     bool hasExpandedBorder(const frame_spec &fspec) const;
+    /* Does a flat downward arrow exist? */
+    bool flatArrowExists(const QString &indicatorElement) const;
+    /* Does a checkbox/radio-button for menu/view-item exit? */
+    bool specialCheckBoxExists(const QString &checkBoxName) const;
 
     /* Get menu margins, including its shadow. */
     int getMenuMargin(bool horiz) const;
@@ -473,10 +477,15 @@ class Style : public QCommonStyle {
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;
 
-    /* for enforcing the text color of inactive selected items */
+    /* For enforcing the text color of inactive selected items. */
     bool hasInactiveSelItemCol_;
     /* Does the toggled (active but unfocused) view-item have a high contrast with the pressed one? */
     bool toggledItemHasContrast_;
+
+    // For not searching the SVG file too often:
+    mutable QHash<const QString, bool>expandedBorders_;
+    mutable QHash<const QString, bool>flatArrows_;
+    mutable QHash<const QString, bool>specialCheckBoxes_;
 
 #if QT_VERSION >= 0x050500
     mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars

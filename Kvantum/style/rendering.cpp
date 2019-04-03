@@ -230,8 +230,7 @@ void Style::renderFrame(QPainter *painter,
   x1 = bounds.bottomRight().x() + 1;
   y1 = bounds.bottomRight().y() + 1;
 
-  int Left,Top,Right,Bottom;
-  Left = Top = Right = Bottom = 0;
+  int Left = 0, Top = 0, Right = 0, Bottom = 0;
 
   bool isInactive(false);
   QString state;
@@ -293,9 +292,11 @@ void Style::renderFrame(QPainter *painter,
     fspec.top = fspec.topExpanded;
     fspec.bottom = fspec.bottomExpanded;
   }
-  if (/*!isLibreoffice_ &&*/ fspec.expansion > 0 && drawExpanded
-      && (!fspec.isAttached || fspec.VPos == 2)
-      && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)))
+  if (/*!isLibreoffice_ &&*/ drawExpanded
+      && (!fspec.isAttached || fspec.VPos == 2) // no vertical attachment
+      && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)
+          /* when there's enough space for a small frame expansion */
+          || fspec.expansion < 2*qMin(h,w)))
   {
     bool topElementMissing(!drawBorder);
     /* find the element that should be drawn (element1) */
@@ -363,27 +364,19 @@ void Style::renderFrame(QPainter *painter,
     }
     else
     {
-      int X = 0;
-      /* here, this is always true: (H <= 2*w || fspec.HPos == 0) */
       if (H%2 == 0)
       {
-        X = Top = Bottom = H/2;
+        Top = Bottom = H/2;
       }
       else
       {
-        X = Top = (H+1)/2;
+        Top = (H+1)/2;
         Bottom = (H-1)/2;
       }
       if (fspec.HPos == -1)
-      {
-        Left = X;
-        Right = qMin(fspec.right,w/2);
-      }
+        Left = Top;
       else if (fspec.HPos == 1)
-      {
-        Right = X;
-        Left = qMin(fspec.left,w/2);
-      }
+        Right = Top;
     }
   }
   else
@@ -803,8 +796,8 @@ bool Style::renderInterior(QPainter *painter,
                                                       .replace("-pressed","-normal")
                                                       .replace("-focused","-normal")))))
         && (!fspec.isAttached || fspec.VPos == 2)
-        /* there's no right/left expanded element */
-        && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)))
+        && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)
+            || fspec.expansion < 2*qMin(h,w)))
     {
       return false;
     }

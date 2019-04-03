@@ -86,6 +86,7 @@ normal_default_pushbutton=false
 single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame=true
@@ -162,10 +163,10 @@ frame=true
 interior=false
 frame.element=common
 interior.element=common
-frame.top=4
-frame.bottom=4
-frame.left=4
-frame.right=4
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 
 [LineEdit]
 inherits=PanelButtonCommand
@@ -202,6 +203,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+focusFrame=true
 text.normal.color=black
 text.focus.color=#0052aa
 text.toggle.color=black

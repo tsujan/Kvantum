@@ -862,7 +862,7 @@ void Style::polish(QWidget *widget)
           blurHelper_->registerWidget(widget);
       }
     }
-    else if (qobject_cast<QMenu*>(widget)) // only for menubar items (see eventFilter -> case QEvent::Show)
+    else if (qobject_cast<QMenu*>(widget)) // for menubars and submenus (eventFilter -> case QEvent::Show)
         widget->installEventFilter(this);
   }
 }

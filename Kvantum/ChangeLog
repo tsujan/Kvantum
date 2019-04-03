@@ -3,6 +3,10 @@ V0.11.1
  * Added a key for removing Kvantum shadows from composited menus and tooltips (under DEs that give them shadow).
  * Fill opaque combo menus with the window color (because transparency is enforced on combo menus while polishing them).
  * When spreading menuitems across menus, do it for non-composited menus too.
+ * Always integrate the drop-down part of a combo box if it's drawn as a lineedit.
+ * Keep (partial) frame expansion as far as possible (previously, it was removed in all special cases).
+ * Remember whether some elements exist in the SVG file, instead of searching for them again and again.
+ * Imported QCommonStyle's combo width calculation (with no change in the final result).
 
 V0.11.0
 ---------

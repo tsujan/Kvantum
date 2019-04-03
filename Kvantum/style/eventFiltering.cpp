@@ -1111,28 +1111,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
             }
           }
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-          /* compensate for an annoyance in Qt 5.11 -> QMenu::internalDelayedPopup() */
-          if (parentMenu)
-          {
-            QAction *activeAct = parentMenu->activeAction();
-            if (activeAct && activeAct == menu->menuAction() && activeAct->isEnabled()
-                && activeAct->menu() && activeAct->menu()->isEnabled() && activeAct->menu()->isVisible())
-            {
-              const auto &actions = w->actions();
-              if (!actions.isEmpty())
-              {
-                const auto topActionRect = menu->actionGeometry(actions.first());
-                if (g.top() + topActionRect.top() ==  parentMenu->actionGeometry(activeAct).top()
-                                                      + parentMenuCorner.y())
-                {
-                  dY += topActionRect.top();
-                }
-              }
-            }
-          }
-#endif
         }
         else if (!parentMenu && parentMenubar)
         {
@@ -1142,6 +1120,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           else
             dY -= getFrameSpec(group).bottom;
         }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+        /* compensate for an annoyance in Qt 5.11 -> QMenu::internalDelayedPopup() */
+        if (parentMenu)
+        {
+          QAction *activeAct = parentMenu->activeAction();
+          if (activeAct && activeAct == menu->menuAction() && activeAct->isEnabled()
+              && activeAct->menu() && activeAct->menu()->isEnabled() && activeAct->menu()->isVisible())
+          {
+            const auto &actions = w->actions();
+            if (!actions.isEmpty())
+            {
+              const auto topActionRect = menu->actionGeometry(actions.first());
+              if (g.top() + topActionRect.top() ==  parentMenu->actionGeometry(activeAct).top()
+                                                    + parentMenuCorner.y())
+              {
+                dY += topActionRect.top();
+              }
+            }
+          }
+        }
+#endif
 
         if (dX == 0 && dY == 0) break;
         w->move(g.left() + dX, g.top() + dY);
