@@ -1050,6 +1050,10 @@ text.toggle.inactive.color        string (#RRGGBBAA)  These keys are for text co
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
 
+                                                      Note: For technical reasons, texts of combo
+                                                      boxes, menu-items and view items are not made
+                                                      bold by Kvantum.
+
 text.boldness                     integer             The weight of bold texts (if any). Its value
                                                       is from 1 to 5, with 3 (normally bold) as
                                                       default.
@@ -1059,6 +1063,10 @@ text.boldness                     integer             The weight of bold texts (
 
 text.italic                       true/false          Italic font for text? The font
                                                       is not italic by default.
+
+                                                      Note: For technical reasons, texts of combo
+                                                      boxes, menu-items and view items are not made
+                                                      italic by Kvantum.
 
 text.shadow                       true/false          Draw a shadow for the text?
 

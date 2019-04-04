@@ -374,38 +374,44 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       r.toggleInactiveColor = v.toString();
     }
 
-    v = getValue(elementName,KSL("text.bold"), i);
-    r.boldFont = v.toBool();
+    /* because finding longest texts of combo boxes isn't CPU-friendly and since
+       combos can have menu popups, we don't make menu and combo texts bold or italic */
+    if (elementName != "MenuItem"
+        && elementName != "ComboBox" && elementName != "ToolbarComboBox")
+    {
+      v = getValue(elementName,KSL("text.bold"), i);
+      r.boldFont = v.toBool();
 
 #if QT_VERSION >= 0x050000
-    v = getValue(elementName,KSL("text.boldness"), i);
-    if (v.isValid()) // QFont::Bold by default
-    {
-      int b = qMin(qMax(v.toInt(),1),5);
-      switch (b) {
-        case 1:
-          r.boldness = QFont::Medium;
-          break;
-        case 2:
-          r.boldness = QFont::DemiBold;
-          break;
-        case 3:
-          r.boldness = QFont::Bold;
-          break;
-        case 4:
-          r.boldness = QFont::ExtraBold;
-          break;
-        case 5:
-          r.boldness = QFont::Black;
-          break;
-        default:
-          r.boldness = QFont::Bold;
+      v = getValue(elementName,KSL("text.boldness"), i);
+      if (v.isValid()) // QFont::Bold by default
+      {
+        int b = qMin(qMax(v.toInt(),1),5);
+        switch (b) {
+          case 1:
+            r.boldness = QFont::Medium;
+            break;
+          case 2:
+            r.boldness = QFont::DemiBold;
+            break;
+          case 3:
+            r.boldness = QFont::Bold;
+            break;
+          case 4:
+            r.boldness = QFont::ExtraBold;
+            break;
+          case 5:
+            r.boldness = QFont::Black;
+            break;
+          default:
+            r.boldness = QFont::Bold;
+        }
       }
-    }
 #endif
 
-    v = getValue(elementName,KSL("text.italic"), i);
-    r.italicFont = v.toBool();
+      v = getValue(elementName,KSL("text.italic"), i);
+      r.italicFont = v.toBool();
+    }
 
     if (r.hasShadow)
     {

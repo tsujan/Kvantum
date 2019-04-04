@@ -4159,6 +4159,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           const label_spec lspec = getLabelSpec(QStringLiteral("ComboBox"));
           vOffset = (lspec.bottom-lspec.top)/2;
         }
+
         if (!(combo && combo->editable && cb->lineEdit()
               // someone may want transparent lineedits (as the developer of Cantata does)
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
@@ -4215,30 +4216,32 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             dspec.size = qMin(dspec.size,9);
           }
         }
-        else if (vOffset != 0)
-        { // -> drawComboLineEdit()
-          const label_spec lspec1 = getLabelSpec(QStringLiteral("LineEdit"));
-          const size_spec sspec1 = getSizeSpec(QStringLiteral("LineEdit"));
-          if (cb->lineEdit()->height()
-              < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
-          {
-            vOffset = 0;
-          }
-        }
-
-        /* correct the state for an editabe combo that's drawn as lineedit */
-        if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
+        else
         {
-          if (cb->hasFocus())
-          {
-            if (isWidgetInactive(widget))
-              status = "focused-inactive";
-            else status = "focused";
+          if (vOffset != 0)
+          { // -> drawComboLineEdit()
+            const label_spec lspec1 = getLabelSpec(QStringLiteral("LineEdit"));
+            const size_spec sspec1 = getSizeSpec(QStringLiteral("LineEdit"));
+            if (cb->lineEdit()->height()
+                < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
+            {
+              vOffset = 0;
+            }
           }
-          else if (status.startsWith("focused"))
-            status.replace("focused","normal");
-          else if (status.startsWith("toggled"))
-            status.replace("toggled","normal");
+
+          if (combo && tspec_.combo_as_lineedit)
+          { // correct the state for an editabe combo that's drawn as lineedit
+            if (cb->hasFocus())
+            {
+              if (isWidgetInactive(widget))
+              status = "focused-inactive";
+              else status = "focused";
+            }
+            else if (status.startsWith("focused"))
+              status.replace("focused","normal");
+            else if (status.startsWith("toggled"))
+              status.replace("toggled","normal");
+          }
         }
       }
 
@@ -11912,7 +11915,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
                && tspec_.combo_menu /*&& !isLibreoffice_*/)
       {
-          if (tspec_.spread_menuitems && (tspec_.shadowless_popup || noComposite_ || !tspec_.composite))
+          if (tspec_.spread_menuitems && (tspec_.shadowless_popup || noComposite_ /*|| !tspec_.composite*/))
             return 0; // fairly similar to what was done in getMenuMargin()
           return qMax(pixelMetric(PM_MenuHMargin,option,widget),
                       pixelMetric(PM_MenuVMargin,option,widget));
@@ -12957,7 +12960,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
         else hasIcon = true;
 
-        /* exactly as in QCommonStyle (needed in subControlRect -> CC_ComboBox)*/
+        /* exactly as in QCommonStyle (needed in subControlRect -> CC_ComboBox) */
         int comboWidth = contentsSize.width()
                          + qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
                                     + pixelMetric(PM_ScrollBarExtent,option,widget))
