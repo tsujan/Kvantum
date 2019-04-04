@@ -4225,6 +4225,21 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             vOffset = 0;
           }
         }
+
+        /* correct the state for an editabe combo that's drawn as lineedit */
+        if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
+        {
+          if (cb->hasFocus())
+          {
+            if (isWidgetInactive(widget))
+              status = "focused-inactive";
+            else status = "focused";
+          }
+          else if (status.startsWith("focused"))
+            status.replace("focused","normal");
+          else if (status.startsWith("toggled"))
+            status.replace("toggled","normal");
+        }
       }
 
       if (tb)
@@ -4321,8 +4336,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       else if ((combo && combo->editable && !(cb && !cb->lineEdit())
                 && !tspec_.combo_as_lineedit) // otherwise drawn at CC_ComboBox
-               && (!(option->state & State_AutoRaise)
-                   || (!status.startsWith("normal") && (option->state & State_Enabled))))
+               /*&& (!(option->state & State_AutoRaise)
+                   || (!status.startsWith("normal") && (option->state & State_Enabled)))*/)
       {
         /* fillWidgetInterior wasn't checked for combos  */
         fillWidgetInterior = !ispec.hasInterior

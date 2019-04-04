@@ -172,6 +172,7 @@ text.margin.bottom=0
 text.margin.left=0
 text.margin.right=0
 frame.expansion=0
+indicator.size=11
 min_width=+0.4font
 min_height=0
 

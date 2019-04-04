@@ -1049,13 +1049,19 @@
 <path style="opacity:.01;fill:url(#linearGradient3269);fill-rule:evenodd" d="m 372.5,75 v 7.5 c 4,0 7.5,-3.86715 7.5,-7.5 z"/>
 </g>
 <rect width="5" x="285" y="960" rx="2.5" height="32" style="fill:url(#linearGradient5435)" id="splitter-grip-normal"/>
-<g id="tab-close-pressed" transform="translate(50,-25)">
+<g id="tab-close-normal" transform="translate(0,-25)">
 <circle cx="329" cy="899" style="opacity:0;fill-rule:evenodd" r="9"/>
-<circle cx="329" cy="899" style="fill:none;fill-rule:evenodd;stroke:#000;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:3" r="4.5001373"/>
+<circle cx="329" cy="899" style="opacity:.5;fill:none;fill-rule:evenodd;stroke:#000;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:2.75" r="4.125"/>
 </g>
-<use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-pressed" id="tab-close-normal" transform="translate(-50,0)"/>
-<use width="100%" height="100%" style="opacity:.8" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-25,0)"/>
-<use width="100%" height="100%" style="opacity:.25" xlink:href="#tab-close-pressed" id="tab-close-disabled" transform="translate(25,0)"/>
+<path style="fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 378,866 a 8,8 0 0,0 -8,8 8,8 0 0,0 8,8 8,8 0 0,0 8,-8 8,8 0 0,0 -8,-8 z  m -2.8281,3.7578 l 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 1.4141,-1.4141 z "/>
+<path style="fill:#fff;fill-rule:evenodd;stroke-width:.5" id="tab-close-toggledPressed" d="m 306,866 a 8,8 0 0,0 -8,8 8,8 0 0,0 8,8 8,8 0 0,0 8,-8 8,8 0 0,0 -8,-8 z  m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z "/>
+<use width="100%" height="100%" style="opacity:.65" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-24)"/>
+<use width="100%" height="100%" style="opacity:.85" xlink:href="#tab-close-toggledPressed" id="tab-close-toggledFocused" transform="translate(-54)"/>
+<use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(74)"/>
+<g id="tab-close-toggled" transform="translate(-52,-25)">
+<circle cx="329" cy="899" style="opacity:0;fill-rule:evenodd" r="9"/>
+<circle cx="329" cy="899" style="opacity:.65;fill:none;fill-rule:evenodd;stroke:#fff;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:2.75" r="4.125"/>
+</g>
 <g id="checkbox-checked-normal">
 <rect width="13" x="210" y="453.49957" rx="2" height="13" style="fill:url(#linearGradient5622);fill-rule:evenodd"/>
 <rect width="12" x="210.5" y="454" rx="1.5" height="12" style="opacity:.35;fill:none;stroke:url(#linearGradient5608)"/>
@@ -1072,7 +1078,7 @@
 </g>
 <g id="resize-grip-normal">
 <rect width="10" x="414" y="132" height="10" style="opacity:0;fill-rule:evenodd"/>
-<path style="opacity:.5" d="m 424,135 0,7 -7,0 z"/>
+<path style="opacity:.3" d="m 424,135 0,7 -7,0 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.3" xlink:href="#itemview-toggled-top" id="itemview-focused-top" transform="translate(-78,0)"/>
 <use width="100%" height="100%" style="opacity:.3" xlink:href="#itemview-toggled" id="itemview-focused" transform="translate(-78,0)"/>
@@ -1477,12 +1483,6 @@
 <path style="opacity:.4;fill:url(#linearGradient6368);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
 <path style="opacity:.5;fill:url(#linearGradient2128);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
 </g>
-<g id="tab-close-toggledPressed" transform="translate(-26,-25)">
-<circle cx="329" cy="899" style="opacity:0;fill-rule:evenodd" r="9"/>
-<circle cx="329" cy="899" style="fill:none;fill-rule:evenodd;stroke:#fff;stroke-linejoin:bevel;stroke-linecap:square;stroke-width:3" r="4.5001373"/>
-</g>
-<use width="100%" height="100%" style="opacity:.65" xlink:href="#tab-close-toggledPressed" id="tab-close-toggled" transform="translate(-24)"/>
-<use width="100%" height="100%" style="opacity:.9" xlink:href="#tab-close-toggledPressed" id="tab-close-toggledFocused" transform="translate(-50)"/>
 <path style="opacity:.16;fill:#61a9f3;fill-rule:evenodd" id="button-focus" d="M 348.5,24 V 56.5 H 381 V 24 Z"/>
 <path style="opacity:.16;fill:#61a9f3;fill-rule:evenodd" id="button-focus-top" d="M 348.5,16.5 V 24 H 381 v -7.5 z"/>
 <path style="opacity:.16;fill:#61a9f3;fill-rule:evenodd" id="button-focus-topleft" d="m 348.5,16.5 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
