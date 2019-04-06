@@ -11915,10 +11915,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       else if (widget && widget->inherits("QComboBoxPrivateContainer")
                && tspec_.combo_menu /*&& !isLibreoffice_*/)
       {
-          if (tspec_.spread_menuitems && (tspec_.shadowless_popup || noComposite_ /*|| !tspec_.composite*/))
-            return 0; // fairly similar to what was done in getMenuMargin()
-          return qMax(pixelMetric(PM_MenuHMargin,option,widget),
-                      pixelMetric(PM_MenuVMargin,option,widget));
+          int hMargin = pixelMetric(PM_MenuHMargin,option,widget);
+          if (hMargin == 0) return 0; /* either menu items are spread and there's no shadow or compossiting
+                                         or, improbably, shadow and horizontal menu frames are both zero */
+          return qMax(hMargin, pixelMetric(PM_MenuVMargin,option,widget));
       }
       const frame_spec fspec = getFrameSpec(QStringLiteral("GenericFrame"));
       /* NOTE: There is an old RTL bug in Qt, due to which, some frames -- especially
