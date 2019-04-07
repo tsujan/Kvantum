@@ -38,7 +38,7 @@
 #include <QGraphicsView>
 /* Qt got a new X11 bug since Qt5.11 and, as a result, the X11 drag
    started to have a problem. However, dragging is still possible by
-   using QWindow::setFramePosition(); hence, these cases of "#if". */
+   using QWindow::setPosition(); hence, these cases of "#if". */
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
 #include <QWindow>
 #include "windowmanager.h"
@@ -284,17 +284,17 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
   {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     if (target_)
-    { // use QWindow::setFramePosition (or QWidget::move) for the dragging
+    { // use QWindow::setPosition (or QWidget::move) for the dragging
       QWidget* window = target_.data()->window();
       /* FIXME: For some unknown reason, mapping from the global position
          results in smoother movements than mouseEvent->pos() does,
          especially when the window is translucent. */
       QPoint pos = target_.data()->mapFromGlobal (mouseEvent->globalPos());
       /* FIXME: Again, for some unknown reason, QWidget::move() could result
-         in a choppy movement with some apps, while QWindow::setFramePosition()
+         in a choppy movement with some apps, while QWindow::setPosition()
          is always smooth, provided that the window is native. */
       if (QWindow* w = window->windowHandle())
-        w->setFramePosition (w->framePosition() + pos - dragPoint_);
+        w->setPosition (w->position() + pos - dragPoint_);
       else
         window->move (window->pos() + pos - dragPoint_); // should not happen
       return true;

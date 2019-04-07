@@ -8,6 +8,7 @@ V0.11.1
  * Remember whether some elements exist in the SVG file, instead of searching for them again and again.
  * Imported QCommonStyle's combo width calculation (with no change in the final result).
  * Don't force bold or italic font on combo or menu-item texts (because finding longest texts of combos isn't CPU-friendly and combos can have menu popups).
+ * Ignore window frame with dragging (less calculation for Qt and no jump under Enlightenment).
 
 V0.11.0
 ---------

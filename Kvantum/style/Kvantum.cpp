@@ -102,7 +102,7 @@ bool Style::enoughContrast (const QColor& col1, const QColor& col2) const
 }
 
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
-   Here we get the alpha from #RGBA if it exists (and include Qt < 5.2). */
+   Here we get the alpha from #RGBA if it exists. */
 QColor Style::getFromRGBA(const QString &str) const
 {
   QColor col(str);
@@ -121,7 +121,7 @@ QColor Style::getFromRGBA(const QString &str) const
   return col;
 }
 
-/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA (and include Qt < 5.2). */
+/* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA. */
 static inline QString getName(const QColor col)
 {
   QString colName = col.name();
@@ -15559,8 +15559,8 @@ QPixmap Style::generatedIconPixmap(QIcon::Mode iconMode,
       int intensity = qt_intensity(red, green, blue);
       const int factor = 191;
 
-      // High intensity colors needs dark shifting in the color table, while
-      // low intensity colors needs light shifting. This is to increase the
+      // High intensity colors need dark shifting in the color table, while
+      // low intensity colors need light shifting. This is to increase the
       // percieved contrast.
       if ((red - factor > green && red - factor > blue)
           || (green - factor > red && green - factor > blue)
