@@ -12438,10 +12438,8 @@ void Style::setSurfaceFormat(QWidget *widget) const
      translucency. It'll be up to the new style to restore
      translucency if it supports translucent windows. */
   QStyle *ws = widget->style();
-  if(ws && ws->inherits("QProxyStyle"))
-  {
+  if (qobject_cast<QProxyStyle *>(ws))
       ws = qobject_cast<QProxyStyle *>(ws)->baseStyle();
-  }
   bool otherStyle(ws && ws != this && !ws->objectName().isEmpty());
   if (otherStyle
       && !(isPlasma_ || isOpaque_)
