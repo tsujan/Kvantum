@@ -98,6 +98,7 @@ class Style : public QCommonStyle {
     void polish(QPalette &palette);
     void unpolish(QWidget *widget);
     void unpolish(QApplication *app);
+    QPalette standardPalette() const;
 
     virtual bool eventFilter(QObject *o, QEvent *e);
 
@@ -165,6 +166,9 @@ class Style : public QCommonStyle {
       Disabled,
       DisabledSelected
     };
+
+    /* Set all palette colors to the Kvantum theme colors. */
+    void polishPalette(QPalette &palette) const;
 
     /* Set up a theme with the given name. If there is no name,
        the default theme will be used. If the config or SVG file of

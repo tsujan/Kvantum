@@ -904,6 +904,11 @@ void Style::polish(QApplication *app)
 
 void Style::polish(QPalette &palette)
 {
+  polishPalette(palette);
+}
+
+void Style::polishPalette(QPalette &palette) const
+{
   QColor col1;
   bool hasInactiveness (!tspec_.no_inactiveness);
 
@@ -1179,6 +1184,15 @@ void Style::unpolish(QApplication *app)
   if (app && itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);
   QCommonStyle::unpolish(app);
+}
+
+/* Set the standard palette to the Kvantum theme palette
+   (because some apps, like Qt Designer, may wrongly refer to the former). */
+QPalette Style::standardPalette() const
+{
+  QPalette palette = QApplication::palette();
+  polishPalette(palette);
+  return palette;
 }
 
 }

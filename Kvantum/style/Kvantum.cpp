@@ -32,7 +32,6 @@
 #include <QMenu>
 #include <QGroupBox>
 #include <QAbstractScrollArea>
-#include <QProxyStyle>
 //#include <QAbstractButton>
 //#include <QAbstractItemView>
 #include <QHeaderView>
@@ -58,6 +57,7 @@
 //#include <QDebug>
 #include <QSurfaceFormat>
 #include <QWindow>
+#include <QProxyStyle> // only inside setSurfaceFormat()
 #if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
 #include <QtPlatformHeaders/QXcbWindowFunctions>
 #endif
@@ -12438,8 +12438,8 @@ void Style::setSurfaceFormat(QWidget *widget) const
      translucency. It'll be up to the new style to restore
      translucency if it supports translucent windows. */
   QStyle *ws = widget->style();
-  if (qobject_cast<QProxyStyle *>(ws))
-      ws = qobject_cast<QProxyStyle *>(ws)->baseStyle();
+  if (qobject_cast<QProxyStyle *>(ws)) // qt5ct uses QProxyStyle
+    ws = qobject_cast<QProxyStyle*>(ws)->baseStyle();
   bool otherStyle(ws && ws != this && !ws->objectName().isEmpty());
   if (otherStyle
       && !(isPlasma_ || isOpaque_)
