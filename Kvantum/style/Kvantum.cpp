@@ -1454,7 +1454,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
   QAbstractButton *b = qobject_cast<QAbstractButton*>(widget);
   if (!b) return;
   if (!col.isValid())
-    col = QApplication::palette().color(QPalette::ButtonText);
+    col = standardPalette().color(QPalette::ButtonText);
   //QPushButton *pb = qobject_cast<QPushButton*>(b);
   //QToolButton *tb = qobject_cast<QToolButton*>(b);
   if (col.isValid()
@@ -1671,17 +1671,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     case PE_Widget : {
       if (qobject_cast<const QMdiSubWindow*>(widget))
       {
-        painter->fillRect(option->rect, QApplication::palette().color(isWidgetInactive(widget)
-                                                                       ? QPalette::Inactive
-                                                                       : QPalette::Active,
-                                                                      QPalette::Window));
+        painter->fillRect(option->rect, standardPalette().color(isWidgetInactive(widget)
+                                                                  ? QPalette::Inactive
+                                                                  : QPalette::Active,
+                                                                QPalette::Window));
         break;
       }
       if (widget) // it's NULL with QML
       {
         if (widget->windowType() == Qt::ToolTip)
         {
-          painter->fillRect(option->rect, QApplication::palette().color(QPalette::Window));
+          painter->fillRect(option->rect, standardPalette().color(QPalette::Window));
           break;
         }
         // only for windows and dialogs
@@ -1691,7 +1691,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       // we don't accept custom background colors for windows...
       if (!widget // QML
-          || (option->palette.color(QPalette::Window) != QApplication::palette().color(QPalette::Window)
+          || (option->palette.color(QPalette::Window) != standardPalette().color(QPalette::Window)
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
       {
@@ -1700,11 +1700,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                                                                                : QPalette::Active,
                                                                              QPalette::Base))
           break; // ...but make an exception for apps like KNotes
-        else
-          painter->fillRect(option->rect, QApplication::palette().color(isWidgetInactive(widget)
-                                                                         ? QPalette::Inactive
-                                                                         : QPalette::Active,
-                                                                        QPalette::Window));
+        painter->fillRect(option->rect, standardPalette().color(isWidgetInactive(widget)
+                                                                  ? QPalette::Inactive
+                                                                  : QPalette::Active,
+                                                                QPalette::Window));
       }
 
       interior_spec ispec = getInteriorSpec(QStringLiteral("Dialog"));
@@ -2072,10 +2071,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
           {
             bool painterSaved = false;
-            painter->fillRect(option->rect, QApplication::palette().color(status.contains("-inactive")
-                                                                            ? QPalette::Inactive
-                                                                            : QPalette::Active,
-                                                                          QPalette::Window));
+            painter->fillRect(option->rect, standardPalette().color(status.contains("-inactive")
+                                                                      ? QPalette::Inactive
+                                                                      : QPalette::Active,
+                                                                    QPalette::Window));
             const frame_spec fspec1 = getFrameSpec(QStringLiteral("Tab"));
             fspec.left = qMin(fspec.left, fspec1.left);
             fspec.right = qMin(fspec.right, fspec1.right);
@@ -2443,11 +2442,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       else if (!autoraise || !status.startsWith("normal"))
       {
         bool libreoffice = false;
-        if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled) && !status.startsWith("toggled")
-            && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+        if (isLibreoffice_ && widget == nullptr
+            && (option->state & State_Enabled) && !status.startsWith("toggled")
+            && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
         {
           libreoffice = true;
-          painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+          painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
           painter->save();
           painter->setOpacity(0.5);
         }
@@ -2527,15 +2527,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
           if (!col.isValid())
           {
-            col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
-                                                QPalette::ButtonText);
+            col = standardPalette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                          QPalette::ButtonText);
           }
         }
         else
           /* FIXME: in fact, the foreground color of the parent widget should be
              used here (-> CE_ToolButtonLabel) but I've encountered no problem yet */
-          col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
-                                              QPalette::WindowText);
+          col = standardPalette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                        QPalette::WindowText);
         forceButtonTextColor(widget,col);
       }
 
@@ -3007,14 +3007,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->restore();
 
           if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
-            painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
+            painter->fillRect(interiorRect(r,fspec), standardPalette().color(QPalette::Window));
           painter->restore();
         }
         else
         {
           renderFrame(painter,r,fspec,fspec.element+"-shadow");
           if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
-            painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
+            painter->fillRect(interiorRect(r,fspec), standardPalette().color(QPalette::Window));
         }
       }
       else
@@ -3025,7 +3025,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
         }
         if (!widget || !renderInterior(painter,r,fspec,ispec,ispec.element+"-normal")) // QML
-          painter->fillRect(r, QApplication::palette().color(QPalette::Window));
+          painter->fillRect(r, standardPalette().color(QPalette::Window));
         renderFrame(painter,r,fspec,fspec.element+"-normal");
         if (isTranslucent)
           painter->restore();
@@ -3096,10 +3096,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 {
                    pcmanfmInactiveView = true;
                    painter->fillRect(interiorRect(option->rect,getFrameSpec(QStringLiteral("GenericFrame"))),
-                                     QApplication::palette().color(isWidgetInactive(widget)
-                                                                     ? QPalette::Inactive
-                                                                     : QPalette::Active,
-                                                                   QPalette::Base));
+                                     standardPalette().color(isWidgetInactive(widget)
+                                                               ? QPalette::Inactive
+                                                               : QPalette::Active,
+                                                             QPalette::Base));
                 }
                 else break;
               }
@@ -3159,14 +3159,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               painter->restore();
 
               if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
-                painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
+                painter->fillRect(interiorRect(r,fspec), standardPalette().color(QPalette::Window));
               painter->restore();
             }
             else
             {
               renderFrame(painter,r,fspec,fspec.element+"-shadow");
               if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal"))
-                painter->fillRect(interiorRect(r,fspec), QApplication::palette().color(QPalette::Window));
+                painter->fillRect(interiorRect(r,fspec), standardPalette().color(QPalette::Window));
             }
           }
           else
@@ -3177,7 +3177,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               painter->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_menu_opacity)/100.0);
             }
             else // we enforced translucency on the combo menu at polish(QWidget*)
-              painter->fillRect(r, QApplication::palette().color(QPalette::Window));
+              painter->fillRect(r, standardPalette().color(QPalette::Window));
             renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
             renderFrame(painter,r,fspec,fspec.element+"-normal");
             if (isTranslucent)
@@ -3211,7 +3211,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           fStatus = "normal-inactive"; // the focus state is meaningless here
         if (!widget) // QML again!
         {
-          QColor baseCol = QApplication::palette().color(QPalette::Base);
+          QColor baseCol = standardPalette().color(QPalette::Base);
           baseCol.setAlpha(255);
           painter->fillRect(option->rect, baseCol);
         }
@@ -3609,7 +3609,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       bool fillWidgetInterior(!ispec.hasInterior
                               && hasHighContrastWithContainer(widget,
                                                               widget ? widget->palette().color(QPalette::Text)
-                                                              : QApplication::palette().color(QPalette::Text)));
+                                                              : standardPalette().color(QPalette::Text)));
 
       // lineedits only have normal and focused states in Kvantum
       QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
@@ -3955,8 +3955,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         QColor col = getFromRGBA(getLabelSpec(group).normalColor);
         if (!col.isValid())
-          col = QApplication::palette().color(QPalette::ButtonText);
-        if (enoughContrast(col, QApplication::palette().color(QPalette::Text))
+          col = standardPalette().color(QPalette::ButtonText);
+        if (enoughContrast(col, standardPalette().color(QPalette::Text))
             && flatArrowExists(dspec.element))
           dspec.element = "flat-"+dspec.element;
 
@@ -4313,7 +4313,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             QColor col = getFromRGBA(getLabelSpec(group1).normalColor);
             if (!col.isValid())
-              col = QApplication::palette().color(QPalette::ButtonText);
+              col = standardPalette().color(QPalette::ButtonText);
             QWidget *gp = getParent(widget,2);
             QWidget* menubar = nullptr;
             if (qobject_cast<QMenuBar*>(gp))
@@ -4943,7 +4943,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 tmpCol = getFromRGBA(lspec.normalColor);
               QColor baseCol = opt->palette.color(QPalette::Base);
               if (baseCol.alpha() == 0)
-                baseCol = QApplication::palette().color(QPalette::Base);
+                baseCol = standardPalette().color(QPalette::Base);
               if (enoughContrast(baseCol, tmpCol))
                 col = tmpCol;
             }
@@ -4960,8 +4960,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 tmpCol = getFromRGBA(lspec.focusColor);
               QColor baseCol = opt->palette.color(QPalette::Base);
               if (baseCol.alpha() == 0)
-                baseCol = QApplication::palette().color(QPalette::Base);
-              if (enoughContrast(QApplication::palette().color(QPalette::Text), tmpCol)
+                baseCol = standardPalette().color(QPalette::Base);
+              if (enoughContrast(standardPalette().color(QPalette::Text), tmpCol)
                   // supposing that the focus interior is translucent, take care of contrast
                   || enoughContrast(baseCol, tmpCol))
               {
@@ -4992,8 +4992,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
             if (!col.isValid())
             {
-              col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
-                                                  QPalette::Text);
+              col = standardPalette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                            QPalette::Text);
             }
             if (col.isValid())
             {
@@ -5087,7 +5087,7 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
   }
 
   if (txtCol.isValid() // because the lack of contrast should be checked
-      && !enoughContrast(txtCol, QApplication::palette().color(QPalette::Window)))
+      && !enoughContrast(txtCol, standardPalette().color(QPalette::Window)))
   {
     icnMode = state == 0 ? DisabledSelected : Selected;
   }
@@ -5154,10 +5154,10 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               painter->save();
               painter->setOpacity(0.6);
-              painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
+              painter->fillRect(option->rect, standardPalette().brush(QPalette::Highlight));
               painter->restore();
               lspec.pressColor = lspec.toggleColor
-                               = getName(QApplication::palette().color(QPalette::HighlightedText));
+                               = getName(standardPalette().color(QPalette::HighlightedText));
             }
             else
             {
@@ -5467,7 +5467,7 @@ void Style::drawControl(QStyle::ControlElement element,
               QColor normalInactiveColor = getFromRGBA(lspec.normalInactiveColor);
               QColor baseCol = palette.color(QPalette::Base);
               if (baseCol.alpha() == 0)
-                baseCol = QApplication::palette().color(QPalette::Base);
+                baseCol = standardPalette().color(QPalette::Base);
               if ((!isInactive || !normalInactiveColor.isValid())
                   && normalColor.isValid()
                   /* since we don't draw the normal interior,
@@ -5506,11 +5506,11 @@ void Style::drawControl(QStyle::ControlElement element,
               QColor focusInactiveColor = getFromRGBA(lspec.focusInactiveColor);
               QColor baseCol = palette.color(QPalette::Base);
               if (baseCol.alpha() == 0)
-                baseCol = QApplication::palette().color(QPalette::Base);
+                baseCol = standardPalette().color(QPalette::Base);
               if ((!isInactive || !focusInactiveColor.isValid())
                   && focusColor.isValid()
                   && (col.isValid()
-                      || enoughContrast(QApplication::palette().color(QPalette::Text), focusColor)
+                      || enoughContrast(standardPalette().color(QPalette::Text), focusColor)
                       // supposing that the focus interior is translucent, take care of contrast
                       || enoughContrast(baseCol, focusColor)))
               {
@@ -5519,7 +5519,7 @@ void Style::drawControl(QStyle::ControlElement element,
               else if (isInactive
                        && focusInactiveColor.isValid()
                        && (col.isValid()
-                           || enoughContrast(QApplication::palette().color(QPalette::Text), focusInactiveColor)
+                           || enoughContrast(standardPalette().color(QPalette::Text), focusInactiveColor)
                            || enoughContrast(baseCol, focusInactiveColor)))
               {
                 col = focusInactiveColor;
@@ -5711,13 +5711,13 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           if (isLibreoffice_ && widget == nullptr)
           {
-            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+            painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
             painter->save();
             painter->setOpacity(0.6);
-            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Highlight));
+            painter->fillRect(option->rect, standardPalette().brush(QPalette::Highlight));
             painter->restore();
             lspec.pressColor = lspec.toggleColor
-                             = getName(QApplication::palette().color(QPalette::HighlightedText));
+                             = getName(standardPalette().color(QPalette::HighlightedText));
           }
           else
           {
@@ -5820,10 +5820,10 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_MenuScroller : {
-      if (enoughContrast(QApplication::palette().color(QPalette::WindowText),
+      if (enoughContrast(standardPalette().color(QPalette::WindowText),
           getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor)))
       {
-        painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+        painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
       }
       if (option->state & State_DownArrow)
         drawPrimitive(PE_IndicatorArrowDown,option,painter,widget);
@@ -7624,20 +7624,20 @@ void Style::drawControl(QStyle::ControlElement element,
           if (topText || sideText)
           {
             if (enoughContrast(getFromRGBA(lspec.normalColor),
-                               QApplication::palette().color(QPalette::WindowText)))
+                               standardPalette().color(QPalette::WindowText)))
             {
               lspec.normalColor = lspec.focusColor =
-                getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
+                getName(standardPalette().color(QPalette::Active,QPalette::WindowText));
               lspec.normalInactiveColor = lspec.focusInactiveColor =
-                getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+                getName(standardPalette().color(QPalette::Inactive,QPalette::WindowText));
             }
             if (enoughContrast(getFromRGBA(lspec.toggleColor),
-                               QApplication::palette().color(QPalette::HighlightedText)))
+                               standardPalette().color(QPalette::HighlightedText)))
             {
               lspec.toggleColor =
-                getName(QApplication::palette().color(QPalette::Active,QPalette::HighlightedText));
+                getName(standardPalette().color(QPalette::Active,QPalette::HighlightedText));
               lspec.toggleInactiveColor =
-                getName(QApplication::palette().color(QPalette::Inactive,QPalette::HighlightedText));
+                getName(standardPalette().color(QPalette::Inactive,QPalette::HighlightedText));
             }
           }
         }
@@ -7719,10 +7719,10 @@ void Style::drawControl(QStyle::ControlElement element,
         }
         if (state == 4)
         {
-          lspec.toggleColor = getName(QApplication::palette().color(isInactive
-                                                                      ? QPalette::Inactive
-                                                                      : QPalette::Active,
-                                                                    QPalette::HighlightedText));
+          lspec.toggleColor = getName(standardPalette().color(isInactive
+                                                                ? QPalette::Inactive
+                                                                : QPalette::Active,
+                                                              QPalette::HighlightedText));
         }
 
         QRect R;
@@ -7742,7 +7742,7 @@ void Style::drawControl(QStyle::ControlElement element,
             else if (state == 4) txtCol = getFromRGBA(lspec.toggleColor);
             /* do nothing if the colors are the same */
             if ((!txtCol.isValid() || col != txtCol)
-                && (txtCol.isValid() || col != QApplication::palette().color(QPalette::WindowText)))
+                && (txtCol.isValid() || col != standardPalette().color(QPalette::WindowText)))
             {
               int full = sliderPositionFromValue(opt->minimum,
                                                  opt->maximum,
@@ -8811,8 +8811,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
         {
-          lspec.normalColor = getName(QApplication::palette().color(QPalette::Active,QPalette::WindowText));
-          lspec.normalInactiveColor = getName(QApplication::palette().color(QPalette::Inactive,QPalette::WindowText));
+          lspec.normalColor = getName(standardPalette().color(QPalette::Active,QPalette::WindowText));
+          lspec.normalInactiveColor = getName(standardPalette().color(QPalette::Inactive,QPalette::WindowText));
         }
 
         QStyleOptionButton o(*opt);
@@ -8926,13 +8926,13 @@ void Style::drawControl(QStyle::ControlElement element,
 
             if (!col.isValid())
             {
-              col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
-                                                  QPalette::ButtonText);
+              col = standardPalette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                            QPalette::ButtonText);
             }
           }
           else // FIXME: the foreground color of the parent widget should be used
-            col = QApplication::palette().color(isInactive ? QPalette::Inactive : QPalette::Active,
-                                                QPalette::WindowText);
+            col = standardPalette().color(isInactive ? QPalette::Inactive : QPalette::Active,
+                                          QPalette::WindowText);
           forceButtonTextColor(widget,col);
         }
 
@@ -8975,7 +8975,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (!opt->text.isEmpty() && qobject_cast<const QAbstractItemView*>(widget))
         { // as in Kate's preferences for its default text style
           painter->fillRect(option->rect.adjusted(1,1,-1,-1),
-                            QApplication::palette().color(QPalette::Button));
+                            standardPalette().color(QPalette::Button));
           return;
         }
 
@@ -9028,7 +9028,7 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           QColor optCol = opt->palette.color(QPalette::Button);
           // KDE Partition Manager
-          if (optCol.isValid() && optCol != QApplication::palette().color(QPalette::Button))
+          if (optCol.isValid() && optCol != standardPalette().color(QPalette::Button))
             painter->fillRect(opt->rect, optCol);
           else // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
             drawPrimitive(PE_Frame,option,painter,widget);
@@ -9049,7 +9049,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (widget && !(opt->features & QStyleOptionButton::Flat)
             && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
                 || (opt->icon.isNull()
-                    && widget->palette().color(QPalette::Button) != QApplication::palette().color(QPalette::Button))))
+                    && widget->palette().color(QPalette::Button) != standardPalette().color(QPalette::Button))))
         { // color button!?
           fspec.expansion = 0;
           renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
@@ -9061,10 +9061,10 @@ void Style::drawControl(QStyle::ControlElement element,
                                   && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(group).normalColor)));
           bool libreoffice = false;
           if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled)
-              && enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+              && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
           {
             libreoffice = true;
-            painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+            painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
             painter->save();
             painter->setOpacity(0.5);
           }
@@ -9164,8 +9164,8 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               QColor ncol = getFromRGBA(lspec.normalColor);
               if (!ncol.isValid())
-                ncol = QApplication::palette().color(QPalette::ButtonText);
-              if (enoughContrast(ncol, QApplication::palette().color(QPalette::WindowText))
+                ncol = standardPalette().color(QPalette::ButtonText);
+              if (enoughContrast(ncol, standardPalette().color(QPalette::WindowText))
                   && flatArrowExists(dspec.element))
                 dspec.element = "flat-"+dspec.element;
             }
@@ -9374,7 +9374,7 @@ void Style::drawControl(QStyle::ControlElement element,
             else // auto-raise
               ncol = getFromRGBA(lspec.normalColor);
             if (!ncol.isValid())
-              ncol = QApplication::palette().color(QPalette::ButtonText);
+              ncol = standardPalette().color(QPalette::ButtonText);
 
             QWidget* menubar = nullptr;
             if (qobject_cast<QMenuBar*>(gp))
@@ -9434,10 +9434,10 @@ void Style::drawControl(QStyle::ControlElement element,
                                            : QPalette::Active,
                                          p->foregroundRole());
               if (!col.isValid())
-                col = QApplication::palette().color(status.contains("-inactive")
-                                                     ? QPalette::Inactive
-                                                     : QPalette::Active,
-                                                    QPalette::WindowText);
+                col = standardPalette().color(status.contains("-inactive")
+                                               ? QPalette::Inactive
+                                               : QPalette::Active,
+                                              QPalette::WindowText);
               if (isNormal || noPanel)
               {
                 if (themeRndr_ && themeRndr_->isValid()
@@ -10085,7 +10085,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             {
               QColor col = getFromRGBA(lspec.normalColor);
               if (!col.isValid())
-                col = QApplication::palette().color(QPalette::ButtonText);
+                col = standardPalette().color(QPalette::ButtonText);
               QWidget* menubar = nullptr;
               if (qobject_cast<QMenuBar*>(gp))
                 menubar = gp;
@@ -10271,7 +10271,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           bool fillWidgetInterior(!ispec.hasInterior
                                   && hasHighContrastWithContainer(widget,
                                                                   le ? le->palette().color(QPalette::Text)
-                                                                  : QApplication::palette().color(QPalette::Text)));
+                                                                  : standardPalette().color(QPalette::Text)));
 
           QString leStatus;
           if (isKisSlider_) leStatus = "normal";
@@ -10562,10 +10562,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             bool libreoffice = false;
             if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled))
             {
-              if (enoughContrast(getFromRGBA(lspec.normalColor), QApplication::palette().color(QPalette::ButtonText)))
+              if (enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
               {
                 libreoffice = true;
-                painter->fillRect(option->rect, QApplication::palette().brush(QPalette::Window));
+                painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
                 painter->save();
                 painter->setOpacity(0.5);
               }
@@ -12039,7 +12039,19 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         /* we set the height of tearoff indicator to be 8px */
         return v + 8;
       else if (metric == PM_MenuHMargin)
+      {
+        /* NOTE: Luckily, Qt comes here before showing a menu that's styled
+           by QStyle but not when it's styled by a stylesheet. So, we use
+           that, in the show event, to know which menu is drawn by Kvantum. */
+        if (widget && !drawnMenus_.contains(widget))
+        {
+          drawnMenus_.insert(widget);
+          connect(widget, &QObject::destroyed, this, [this, widget]() {
+            drawnMenus_.remove(widget);
+          });
+        }
         return h;
+      }
       else return v;
     }
 
@@ -15667,7 +15679,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (iconmode == Disabled || iconmode == DisabledSelected)
   {
     QStyleOption opt;
-    opt.palette = QApplication::palette();
+    opt.palette = standardPalette();
     px = generatedIconPixmap(QIcon::Disabled, px, &opt); // graying out
     px = translucentPixmap(px, 50); // graying out is never enough
   }

@@ -167,8 +167,8 @@ class Style : public QCommonStyle {
       DisabledSelected
     };
 
-    /* Set all palette colors to the Kvantum theme colors. */
-    void polishPalette(QPalette &palette) const;
+    /* Set standard palette colors to the Kvantum theme colors. */
+    void polishStandardPalette() const;
 
     /* Set up a theme with the given name. If there is no name,
        the default theme will be used. If the config or SVG file of
@@ -485,6 +485,13 @@ class Style : public QCommonStyle {
     bool hasInactiveSelItemCol_;
     /* Does the toggled (active but unfocused) view-item have a high contrast with the pressed one? */
     bool toggledItemHasContrast_;
+
+    /* The standard palette (for not setting it frequently): */
+    mutable QPalette standardPalette_;
+
+    /* List of menus drawn by Kvantum
+       (for knowing if a menu has shadow and should be moved on showing) */
+    mutable QSet<const QWidget*> drawnMenus_;
 
     // For not searching the SVG file too often:
     mutable QHash<const QString, bool>expandedBorders_;

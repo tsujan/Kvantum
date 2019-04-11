@@ -480,6 +480,7 @@ text.margin.right=2
 text.focus.color=#007e8c
 text.press.color=#005a64
 text.toggle.color=black
+indicator.element=carrow
 frame.expansion=0
 
 [Menu]

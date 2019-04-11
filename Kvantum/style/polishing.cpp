@@ -602,7 +602,7 @@ void Style::polish(QWidget *widget)
               if (palette.color(itemView->backgroundRole()) == QColor(Qt::transparent))
               {
                 palette.setColor(itemView->viewport()->backgroundRole(),
-                                 QApplication::palette().color(QPalette::Base));
+                                 standardPalette().color(QPalette::Base));
                 itemView->viewport()->setPalette(palette);
               }
             }
@@ -904,166 +904,7 @@ void Style::polish(QApplication *app)
 
 void Style::polish(QPalette &palette)
 {
-  polishPalette(palette);
-}
-
-void Style::polishPalette(QPalette &palette) const
-{
-  QColor col1;
-  bool hasInactiveness (!tspec_.no_inactiveness);
-
-  /* background colors */
-  QColor col = getFromRGBA(cspec_.windowColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::Window,col);
-    palette.setColor(QPalette::Disabled,QPalette::Window,col); // used in generatedIconPixmap()
-    col1 = getFromRGBA(cspec_.inactiveWindowColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::Window,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::Window,col);
-  }
-
-  col = getFromRGBA(cspec_.baseColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::Base,col);
-    palette.setColor(QPalette::Disabled,QPalette::Base,col); // some apps may use it
-    col1 = getFromRGBA(cspec_.inactiveBaseColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::Base,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::Base,col);
-  }
-
-  col = getFromRGBA(cspec_.altBaseColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::AlternateBase,col);
-    palette.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
-    col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
-  }
-
-  col = getFromRGBA(cspec_.buttonColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Button,col);
-
-  col = getFromRGBA(cspec_.lightColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Light,col);
-  col = getFromRGBA(cspec_.midLightColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Midlight,col);
-  col = getFromRGBA(cspec_.darkColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Dark,col);
-  col = getFromRGBA(cspec_.midColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Mid,col);
-  col = getFromRGBA(cspec_.shadowColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Shadow,col);
-
-  col = getFromRGBA(cspec_.highlightColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::Highlight,col);
-    palette.setColor(QPalette::Disabled,QPalette::Highlight,col);
-    col1 = getFromRGBA(cspec_.inactiveHighlightColor);
-    if (col1.isValid() && col1 != col && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::Highlight,col1);
-    else
-    {
-      /* NOTE: Qt has a nasty bug which, sometimes, prevents updating of inactive widgets
-               when the active and inactive highlight colors are the same. As a workaround,
-               we make them just a little different from each other. */
-      int v = col.value();
-      if (v == 0) v++; else v--;
-      col.setHsv(col.hue(), col.saturation(), v, col.alpha());
-      palette.setColor(QPalette::Inactive,QPalette::Highlight,col);
-    }
-  }
-
-  col = getFromRGBA(cspec_.tooltipBaseColor);
-  if (col.isValid())
-    palette.setColor(QPalette::ToolTipBase,col);
-  else
-  { // for backward compatibility
-    col = getFromRGBA(cspec_.tooltipTextColor);
-    if (col.isValid())
-    {
-      col1 = QColor(Qt::white);
-      if (qGray(col.rgb()) >= 127)
-        col1 = QColor(Qt::black);
-      palette.setColor(QPalette::ToolTipBase,col1);
-    }
-  }
-
-  /* text colors */
-  col = getFromRGBA(cspec_.textColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::Text,col);
-    col1 = getFromRGBA(cspec_.inactiveTextColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::Text,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::Text,col);
-  }
-
-  col = getFromRGBA(cspec_.windowTextColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::WindowText,col);
-    col1 = getFromRGBA(cspec_.inactiveWindowTextColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
-  }
-
-  col = getFromRGBA(cspec_.buttonTextColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::ButtonText,col);
-    palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
-  }
-
-  col = getFromRGBA(cspec_.tooltipTextColor);
-  if (col.isValid())
-    palette.setColor(QPalette::ToolTipText,col);
-
-  col = getFromRGBA(cspec_.highlightTextColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Active,QPalette::HighlightedText,col);
-    col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
-    if (col1.isValid() && hasInactiveness)
-      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
-    else
-      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
-  }
-
-  col = getFromRGBA(cspec_.linkColor);
-  if (col.isValid())
-    palette.setColor(QPalette::Link,col);
-  col = getFromRGBA(cspec_.linkVisitedColor);
-  if (col.isValid())
-    palette.setColor(QPalette::LinkVisited,col);
-
-  /* disabled text */
-  col = getFromRGBA(cspec_.disabledTextColor);
-  if (col.isValid())
-  {
-    palette.setColor(QPalette::Disabled,QPalette::Text,col);
-    palette.setColor(QPalette::Disabled,QPalette::WindowText,col);
-    palette.setColor(QPalette::Disabled,QPalette::ButtonText,col);
-  }
+  palette = standardPalette();
 }
 
 void Style::unpolish(QWidget *widget)
@@ -1187,12 +1028,172 @@ void Style::unpolish(QApplication *app)
 }
 
 /* Set the standard palette to the Kvantum theme palette
-   (because some apps, like Qt Designer, may wrongly refer to the former). */
+   (to be used in the code because QApplication::palette()
+   may not be reliable with apps like Qt Designer). */
 QPalette Style::standardPalette() const
 {
-  QPalette palette = QApplication::palette();
-  polishPalette(palette);
-  return palette;
+  if (standardPalette_.isBrushSet(QPalette::Active,QPalette::Base))
+    return standardPalette_;
+
+  QColor col1;
+  bool hasInactiveness (!tspec_.no_inactiveness);
+
+  /* background colors */
+  QColor col = getFromRGBA(cspec_.windowColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::Window,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::Window,col); // used in generatedIconPixmap()
+    col1 = getFromRGBA(cspec_.inactiveWindowColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Window,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Window,col);
+  }
+
+  col = getFromRGBA(cspec_.baseColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::Base,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::Base,col); // some apps may use it
+    col1 = getFromRGBA(cspec_.inactiveBaseColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Base,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Base,col);
+  }
+  else // just to know that all brushes are set
+    standardPalette_.setColor(QPalette::Active,QPalette::Base,QColor(Qt::white));
+
+  col = getFromRGBA(cspec_.altBaseColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
+    col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+  }
+
+  col = getFromRGBA(cspec_.buttonColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Button,col);
+
+  col = getFromRGBA(cspec_.lightColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Light,col);
+  col = getFromRGBA(cspec_.midLightColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Midlight,col);
+  col = getFromRGBA(cspec_.darkColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Dark,col);
+  col = getFromRGBA(cspec_.midColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Mid,col);
+  col = getFromRGBA(cspec_.shadowColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Shadow,col);
+
+  col = getFromRGBA(cspec_.highlightColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::Highlight,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::Highlight,col);
+    col1 = getFromRGBA(cspec_.inactiveHighlightColor);
+    if (col1.isValid() && col1 != col && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Highlight,col1);
+    else
+    {
+      /* NOTE: Qt has a nasty bug which, sometimes, prevents updating of inactive widgets
+               when the active and inactive highlight colors are the same. As a workaround,
+               we make them just a little different from each other. */
+      int v = col.value();
+      if (v == 0) v++; else v--;
+      col.setHsv(col.hue(), col.saturation(), v, col.alpha());
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Highlight,col);
+    }
+  }
+
+  col = getFromRGBA(cspec_.tooltipBaseColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::ToolTipBase,col);
+  else
+  { // for backward compatibility
+    col = getFromRGBA(cspec_.tooltipTextColor);
+    if (col.isValid())
+    {
+      col1 = QColor(Qt::white);
+      if (qGray(col.rgb()) >= 127)
+        col1 = QColor(Qt::black);
+      standardPalette_.setColor(QPalette::ToolTipBase,col1);
+    }
+  }
+
+  /* text colors */
+  col = getFromRGBA(cspec_.textColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::Text,col);
+    col1 = getFromRGBA(cspec_.inactiveTextColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Text,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::Text,col);
+  }
+
+  col = getFromRGBA(cspec_.windowTextColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::WindowText,col);
+    col1 = getFromRGBA(cspec_.inactiveWindowTextColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::WindowText,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::WindowText,col);
+  }
+
+  col = getFromRGBA(cspec_.buttonTextColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::ButtonText,col);
+    standardPalette_.setColor(QPalette::Inactive,QPalette::ButtonText,col);
+  }
+
+  col = getFromRGBA(cspec_.tooltipTextColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::ToolTipText,col);
+
+  col = getFromRGBA(cspec_.highlightTextColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Active,QPalette::HighlightedText,col);
+    col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
+    if (col1.isValid() && hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
+    else
+      standardPalette_.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
+  }
+
+  col = getFromRGBA(cspec_.linkColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::Link,col);
+  col = getFromRGBA(cspec_.linkVisitedColor);
+  if (col.isValid())
+    standardPalette_.setColor(QPalette::LinkVisited,col);
+
+  /* disabled text */
+  col = getFromRGBA(cspec_.disabledTextColor);
+  if (col.isValid())
+  {
+    standardPalette_.setColor(QPalette::Disabled,QPalette::Text,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::WindowText,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::ButtonText,col);
+  }
+
+  return standardPalette_;
 }
 
 }

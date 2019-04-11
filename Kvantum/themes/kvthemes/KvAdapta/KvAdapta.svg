@@ -537,10 +537,6 @@
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-focused" id="carrow-focused" transform="matrix(1,0,0,-1,144.80702,522)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-disabled" id="carrow-disabled" transform="matrix(1,0,0,-1,174,522)"/>
 <use width="100%" x="0" y="0" height="100%" xlink:href="#arrow-up-normal" id="carrow-pressed" transform="matrix(1,0,0,-1,217.10525,522)"/>
-<g style="fill:#fff" id="carrow-toggled" transform="matrix(1,0,0,-1,157,864.49298)">
-<path style="opacity:0" id="rect2092" d="m -607.493,98 h 24 v 24 h -24 z " transform="rotate(-90)"/>
-<path id="path2094" d="M 98,602.986 110,588 l 12,14.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
-</g>
 <g id="tabBarFrame-normal-bottom" transform="matrix(0,-1,0.66666667,0,-533.83334,1084)">
 <path style="fill-rule:evenodd;fill-opacity:0" id="path1767" d="m 174,921.5 h -4 l 1.3e-4,-6 H 174 Z"/>
 <path style="fill:#e7ebed;color:#000" id="path1769" d="M 172,921.5 H 170 l 1e-4,-6 h 2 z"/>

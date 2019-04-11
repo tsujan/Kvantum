@@ -185,10 +185,10 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   int dw = sspec.incrementW ? sspec.minW : qMax(sspec.minW - bgndRect.width(), 0);
   if (!renderInterior(p,bgndRect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency
-    p->fillRect(bgndRect, QApplication::palette().color(suffix.contains("-inactive")
-                                                          ? QPalette::Inactive
-                                                          : QPalette::Active,
-                                                        QPalette::Window));
+    p->fillRect(bgndRect, standardPalette().color(suffix.contains("-inactive")
+                                                    ? QPalette::Inactive
+                                                    : QPalette::Active,
+                                                  QPalette::Window));
   }
   if (ro > 0)
     p->restore();
@@ -832,7 +832,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
-          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+          != standardPalette().color(QPalette::Active, QPalette::Text))
       { // Custom text color; don't set palettes! The app is responsible for all colors.
         break;
       }
@@ -841,7 +841,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
          (needed when the app sets it inactive) */
       QColor normalCol = getFromRGBA(lspec.normalColor);
       if (!normalCol.isValid())
-        normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+        normalCol = standardPalette().color(QPalette::Active,QPalette::Text);
       palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
       if (!hasInactiveSelItemCol_)
       {
@@ -858,7 +858,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (!toggledItemHasContrast_)
       {
         palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                         QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+                         standardPalette().color(QPalette::Active,QPalette::Highlight));
       }
       w->setPalette(palette);
     }
@@ -869,7 +869,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
-          != QApplication::palette().color(QPalette::Active, QPalette::Text))
+          != standardPalette().color(QPalette::Active, QPalette::Text))
       {
         break;
       }
@@ -877,7 +877,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
       QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
       if (!normalInactiveCol.isValid())
-        normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+        normalInactiveCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
       palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
       if (!hasInactiveSelItemCol_)
       { // custom text color
@@ -891,7 +891,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (!toggledItemHasContrast_)
       {
         palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                         QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+                         standardPalette().color(QPalette::Inactive,QPalette::Highlight));
       }
       w->setPalette(palette);
     }
@@ -925,6 +925,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (movedMenus.contains(w)) break; // already moved
+        bool drawnMenu(drawnMenus_.contains(w)); // drawn by Kvantum? (see PM_MenuHMargin)
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
@@ -978,14 +979,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                     may be CPU-intensive. */
         if (!noComposite_
             && menuShadow_.count() == 4)
-        {
-          /* compensate for the offset created by the shadow */
-
-          dY -= menuShadow_.at(1); // top shadow
+        { // compensate for the offset created by the shadow
+          if (drawnMenu) dY -= menuShadow_.at(1); // top shadow
 
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
-            dX += menuShadow_.at(2);
+            if (drawnMenu) dX += menuShadow_.at(2);
             if (parentMenu)
             {
               if (parentMenuCorner.x() < g.left())
@@ -1049,7 +1048,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           else // ltr
           {
-            dX -= menuShadow_.at(0); // left shadow
+            if (drawnMenu) dX -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
               if (parentMenuCorner.x() > g.left())
@@ -1162,7 +1161,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
            (-> QEvent::WindowActivate and QEvent::WindowDeactivate) */
         QPalette palette = w->palette();
         if (palette.color(QPalette::Active, QPalette::Text)
-            != QApplication::palette().color(QPalette::Active, QPalette::Text))
+            != standardPalette().color(QPalette::Active, QPalette::Text))
         {
           break;
         }
@@ -1171,7 +1170,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
           if (!normalInactiveCol.isValid())
-            normalInactiveCol = QApplication::palette().color(QPalette::Inactive,QPalette::Text);
+            normalInactiveCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
           palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
           if (!hasInactiveSelItemCol_)
           {
@@ -1183,14 +1182,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                             QApplication::palette().color(QPalette::Inactive,QPalette::Highlight));
+                             standardPalette().color(QPalette::Inactive,QPalette::Highlight));
           }
         }
         else
         {
           QColor normalCol = getFromRGBA(lspec.normalColor);
           if (!normalCol.isValid())
-            normalCol = QApplication::palette().color(QPalette::Active,QPalette::Text);
+            normalCol = standardPalette().color(QPalette::Active,QPalette::Text);
           palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
           if (!hasInactiveSelItemCol_)
           {
@@ -1202,7 +1201,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                             QApplication::palette().color(QPalette::Active,QPalette::Highlight));
+                             standardPalette().color(QPalette::Active,QPalette::Highlight));
           }
         }
         w->setPalette(palette);

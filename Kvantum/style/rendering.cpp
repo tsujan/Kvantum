@@ -18,7 +18,6 @@
 #include "Kvantum.h"
 
 #include <QSvgRenderer>
-#include <QApplication>
 #include <QPixmapCache>
 #include <QPainter>
 
@@ -96,7 +95,7 @@ bool Style::renderElement(QPainter *painter,
     }
     else if (hsize == -2) // translucency without overlay pattern
     {
-      QColor wc = QApplication::palette().color(QPalette::Window);
+      QColor wc = standardPalette().color(QPalette::Window);
       wc.setAlpha(240);
       painter->fillRect(bounds, wc);
     }
