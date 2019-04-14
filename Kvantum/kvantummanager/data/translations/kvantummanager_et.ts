@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="131"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Litsents</translation>
     </message>
 </context>
 <context>
@@ -449,27 +449,31 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>See vajab KDE kontrastiefekti Qt ≥ 5.11
+ ja seda rakendatakse ainult läbipaistvatele akendele, mis toetavad hägususe efekti 
+(kuid KDE hägususe efekti saab keelata).
+
+Väärtus 1,00 tähendab, et midagi ei muudetud.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="784"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrastiefekt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Küllastatus:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="797"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensiivsus:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="804"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrast:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="881"/>
@@ -490,12 +494,15 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ära joonista varju menüüde ja tööriistade jaoks.
+
+See võib olla kasulik töölauakeskondade puhul, 
+mis kasutavad varju menüüdel ja vihjetel.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Varjuta menüüd ja vihjed</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -514,7 +521,7 @@ needed for this key to work.</source>
 kui akna läbipaistvus on lubatud.
 
 Selle valiku töötamiseks pole
-läbipaistev SVG taust vajalik</translation>
+läbipaistev SVG taust vajalik.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="982"/>
@@ -572,7 +579,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1123"/>
         <source>Transient scrollbars</source>
-        <translation></translation>
+        <translation>Hääbuvad kerimisribad</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1145"/>
@@ -666,7 +673,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1897"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialoogi nupu paigutus:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2057"/>
@@ -692,7 +699,9 @@ only removes user themes.</source>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation></translation>
+        <translation>Kas ühendada Dolphini välimus seda ümbritsevaga?
+
+Vaikimsi on kasutuses põhitaust.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="417"/>
@@ -762,7 +771,8 @@ Hard-coded icons/styles may not respect this key.</source>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation></translation>
+        <translation>Mõned rakendused ei pruugi austada tumedaid teemasid.
+Kvantum võib proovida seda võimalikult palju parandada.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1055"/>
@@ -804,7 +814,13 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation type="unfinished">Mõjutab ikoonivaateid.
+
+Vaikeväärtus on 32 px, kuid mõned
+rakendused seavad selle ise. 
+
+Kui see on keelatud, vaata: 
+Mitmesugust → Võimalusel järgi töölaua sätteid</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1233"/>
@@ -812,7 +828,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation></translation>
+        <translation>Mõjutab nuppe, vahekaarte ja loendivaateid.
+
+Vaikeväärtus on 16 px.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1263"/>
@@ -822,7 +840,11 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation></translation>
+        <translation type="unfinished">Mõjutab tööriistaribasid.
+
+Vaikeväärtus on 22 px, kuid mõned
+rakendused seavad selle ise.
+KDE rakendused saavad selle KDE seadistusest.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -839,7 +861,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1418"/>
         <source>Minimum scrollbar length: </source>
-        <translation></translation>
+        <translation type="unfinished">Minimaalne kerimisriba pikkus: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1463"/>
@@ -854,7 +876,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation></translation>
+        <translation type="unfinished">Viivitus millisekundites enne näpunäite näitamist.
+
+Null tähendab, et näpunäited kuvatakse koheselt.
+
+-1 tähendab Qt vaikimisi käitumist.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
@@ -872,7 +898,10 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation></translation>
+        <translation type="unfinished">Vaikimisi on liikuvate tööriistaribade
+ja doki vidinate rippuvad ristkülikud tühjad.
+
+See valik täidab rippmenüüd esiletõstmise värviga.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
@@ -1355,27 +1384,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="87"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE paigutus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="88"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Gnome paigutus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="89"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Maci paigutus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="90"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Windowsi paigutus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="91"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Androidi paigutus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="93"/>
@@ -1551,7 +1580,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2645"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Tõlkijad</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2643"/>
