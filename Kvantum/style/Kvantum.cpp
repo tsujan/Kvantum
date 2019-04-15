@@ -2605,7 +2605,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             suffix = "-normal";
         }
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate && !(isLibreoffice_ && widget == nullptr)
+        if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
             && themeRndr_ && themeRndr_->isValid()
             && specialCheckBoxExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -2664,7 +2664,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           suffix = "-checked-normal";
         else
           suffix = "-normal";
-        if (!(isLibreoffice_ && widget == nullptr)
+        if (widget != nullptr // not QML
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
             && themeRndr_ && themeRndr_->isValid()
             && specialCheckBoxExists("menu-"+ispec.element+suffix))
@@ -2733,7 +2733,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
             animate = false;
-            if (!(isLibreoffice_ && widget == nullptr)
+            if (widget != nullptr // not QML
                 && specialCheckBoxExists("menu-"+ispec.element+suffix))
             {
               prefix = "menu-"; // make exception for menuitems
@@ -2742,7 +2742,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
           {
             animate = false;
-            if (!(isLibreoffice_ && widget == nullptr)
+            if (widget != nullptr // not QML
                 && specialCheckBoxExists("item-"+ispec.element+suffix))
             {
               prefix = "item-"; // make exception for viewitems
@@ -2809,13 +2809,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           {
-            if (!(isLibreoffice_ && widget == nullptr)
+            if (widget != nullptr // not QML
                 && specialCheckBoxExists("menu-"+ispec.element+suffix))
             {
               prefix = "menu-";
             }
           }
-          else if (!(isLibreoffice_ && widget == nullptr)
+          else if (widget != nullptr // not QML
                    && qstyleoption_cast<const QStyleOptionViewItem*>(option)
                    && specialCheckBoxExists("item-"+ispec.element+suffix))
           {
@@ -3178,7 +3178,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
             else // we enforced translucency on the combo menu at polish(QWidget*)
               painter->fillRect(r, standardPalette().color(QPalette::Window));
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-normal");
+            if (!renderInterior(painter,r,fspec,ispec,ispec.element+"-normal") && isTranslucent)
+              painter->fillRect(r, standardPalette().color(QPalette::Window));
             renderFrame(painter,r,fspec,fspec.element+"-normal");
             if (isTranslucent)
               painter->restore();
@@ -5109,12 +5110,9 @@ void Style::drawControl(QStyle::ControlElement element,
   switch (static_cast<unsigned>(element)) { // unsigned because of CE_Kv_KCapacityBar
     case CE_MenuTearoff : {
       QString status = (option->state & State_Selected) ? "focused" : "normal";
-      // see PM_MenuTearoffHeight and also PE_PanelMenu
-      int marginH = pixelMetric(PM_MenuHMargin,option,widget);
-      QRect r(option->rect.x() + marginH,
-              option->rect.y() + pixelMetric(PM_MenuVMargin,option,widget),
-              option->rect.width() - 2*marginH,
-              8);
+      /* see PM_MenuTearoffHeight and also PE_PanelMenu
+         (PM_MenuHMargin is already taken into account in option->rect) */
+      QRect r(x, y+h-8, w, 8);
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("MenuItem"));
       renderElement(painter,dspec.element+"-tearoff-"+status,r,20,0);
 
@@ -5209,7 +5207,8 @@ void Style::drawControl(QStyle::ControlElement element,
           /* some apps (like Qt Creator) may force a bad text color */
           if (state == 1 || state == 0)
           {
-            if (/*isLibreoffice_ ||*/ lspec.normalColor.isEmpty())
+            if (widget == nullptr // QML; see PE_PanelMenu
+                || lspec.normalColor.isEmpty())
             {
               lspec.normalColor = cspec_.windowTextColor;
               lspec.normalInactiveColor = cspec_.inactiveWindowTextColor;
@@ -5256,7 +5255,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     /* combobox always announces the existence of an icon,
                        so we don't care about aligning its menu texts */
                     && !isComboMenu)
-                   || !widget) // QML menus set maxIconWidth to 0, although they have icon
+                   || widget == nullptr) // QML menus set maxIconWidth to 0, although they have icon
                   && !hspec_.iconless_menu)
               {
                 iconSpace = smallIconSize + lspec.tispace;
@@ -11974,17 +11973,30 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
+      if (widget && drawnMenus_.contains(widget))
+      { // return a stored value if any exists
+        QList<int> l = drawnMenus_.value(widget);
+        if (l.size() >= 2)
+        {
+          if (metric == PM_MenuTearoffHeight)
+            return l.at(1) + 8;
+          else if (metric == PM_MenuHMargin)
+            return l.at(0);
+          else
+            return l.at(1);
+        }
+      }
+
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
       int v = qMax(fspec.top,fspec.bottom);
       int h = 0;
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!(tspec_.spread_menuitems
-            && (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite)))
+      bool shadowDecided (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite);
+      if (!(tspec_.spread_menuitems && shadowDecided))
       { // this condition was used in getMenuMargin()
-        const frame_spec fspec = getFrameSpec(QStringLiteral("Menu"));
         h = qMax(fspec.left,fspec.right);
-        if (!tspec_.shadowless_popup && !noComposite_ && tspec_now.composite
+        if (!shadowDecided
             && widget
             && translucentWidgets_.contains(widget) // combo menus are included
             /* detached menus may come here because of setSurfaceFormat() */
@@ -11992,6 +12004,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         {
           v += tspec_now.menu_shadow_depth;
           h += tspec_now.menu_shadow_depth;
+          shadowDecided = true;
         }
       }
       /* a margin > 2px could create ugly corners without compositing */
@@ -12035,23 +12048,28 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         }
       }
 
-      if (metric == PM_MenuTearoffHeight)
-        /* we set the height of tearoff indicator to be 8px */
-        return v + 8;
-      else if (metric == PM_MenuHMargin)
+      /* NOTE: Luckily, Qt comes here before showing a menu that's styled
+         by QStyle but not when it's styled by a stylesheet. So, we use
+         that, in the show event, to know which menu is drawn by Kvantum. */
+      if (widget)
       {
-        /* NOTE: Luckily, Qt comes here before showing a menu that's styled
-           by QStyle but not when it's styled by a stylesheet. So, we use
-           that, in the show event, to know which menu is drawn by Kvantum. */
-        if (widget && !drawnMenus_.contains(widget))
+        if (!drawnMenus_.contains(widget))
         {
-          drawnMenus_.insert(widget);
+          if (shadowDecided)
+            drawnMenus_.insert(widget, QList<int>() << h << v);
           connect(widget, &QObject::destroyed, this, [this, widget]() {
             drawnMenus_.remove(widget);
           });
         }
-        return h;
+        else if (shadowDecided)
+          drawnMenus_.insert(widget, QList<int>() << h << v);
       }
+
+      if (metric == PM_MenuTearoffHeight)
+        /* we set the height of tearoff indicator to be 8px */
+        return v + 8;
+      else if (metric == PM_MenuHMargin)
+        return h;
       else return v;
     }
 
@@ -13236,8 +13254,12 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
         /* even when there's no icon, another menuitem may have icon
            and that isn't taken into account with sizeCalculated() */
-        if(opt->icon.isNull() && !hspec_.iconless_menu && opt->maxIconWidth)
+        if(opt->icon.isNull() && !hspec_.iconless_menu
+           /* QML menus set maxIconWidth to 0, although they have icon */
+           && (opt->maxIconWidth || widget == nullptr))
+        {
           s.rwidth() += iconSize + lspec.tispace;
+        }
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
         {
@@ -15006,7 +15028,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                   }
                 }
               }
-              else hasIcon = true;
+              else hasIcon = true; // QML
             }
 
             fspec = getFrameSpec(QStringLiteral("Menu"));

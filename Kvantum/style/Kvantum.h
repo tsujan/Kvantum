@@ -441,9 +441,8 @@ class Style : public QCommonStyle {
 
     /* LibreOffice and Plasma need workarounds. */
     bool isLibreoffice_, isPlasma_;
-    /* So far, only VirtualBox has introduced
-       itself as "Qt-subapplication" and doesn't
-       accept compositing. */
+    /* So far, only VirtualBox has introduced itself as "Qt-subapplication" and
+       doesn't accept compositing. */
     bool subApp_;
     /* Some apps shouldn't have translucent windows. */
     bool isOpaque_;
@@ -458,7 +457,7 @@ class Style : public QCommonStyle {
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
 
-    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 but without AA_UseHighDpiPixmaps */
+    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 */
     qreal pixelRatio_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
@@ -489,9 +488,10 @@ class Style : public QCommonStyle {
     /* The standard palette (for not setting it frequently): */
     mutable QPalette standardPalette_;
 
-    /* List of menus drawn by Kvantum
-       (for knowing if a menu has shadow and should be moved on showing) */
-    mutable QSet<const QWidget*> drawnMenus_;
+    /* List of menus drawn by Kvantum and their margins
+       (for knowing if a menu has shadow and should be moved on showing
+       and also for preventing redundant computations): */
+    mutable QHash<const QWidget*, QList<int>> drawnMenus_;
 
     // For not searching the SVG file too often:
     mutable QHash<const QString, bool>expandedBorders_;

@@ -97,6 +97,8 @@ typedef struct {
   bool spread_header;
   /* enable mouse tracking in menubars? */
   bool menubar_mouse_tracking;
+  /* is compositing available (used internally) */
+  bool hasCompositor;
   /* use composite effects
      (for now, only translucent menus
      or tooltips and their shadows) */
@@ -489,6 +491,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.progressbar_thickness = 0;
   tspec.spread_header = false;
   tspec.menubar_mouse_tracking = true;
+  tspec.hasCompositor = false;
   tspec.composite = false;
   tspec.translucent_windows = false;
   tspec.reduce_window_opacity = 0;

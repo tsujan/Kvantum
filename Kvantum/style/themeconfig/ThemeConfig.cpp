@@ -48,6 +48,7 @@ ThemeConfig::ThemeConfig(const QString& theme) :
 #endif
 
   load(theme);
+  default_theme_spec(compositeSpecs_);
 }
 
 ThemeConfig::~ThemeConfig()
@@ -546,16 +547,14 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
 
 theme_spec ThemeConfig::getCompositeSpec()
 {
-  theme_spec r;
-  default_theme_spec(r);
-  QVariant v;
+  bool compositing(false);
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */
 #if QT_VERSION < 0x050200
   if (QX11Info::isCompositingManagerRunning())
+    compositing = true;
 #else
-  bool compositing = false;
   if (isX11_)
   {
     Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
@@ -564,79 +563,87 @@ theme_spec ThemeConfig::getCompositeSpec()
   }
   else
     compositing = true; // wayland is always composited
-  if (compositing)
 #endif
-  {
-    v = getValue(KSL("General"),KSL("composite"));
-    r.composite = v.toBool();
-  }
-#elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  v = getValue(KSL("General"),KSL("composite"));
-  r.composite = v.toBool();
+/*#elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+  compositing = true; // presuppose a compositor without Linux and X11*/
 #endif
 
   /* no blurring or window translucency without compositing */
-  if (/*isX11_ &&*/ r.composite)
+  if (compositing)
   {
+    if (compositeSpecs_.hasCompositor)
+      return compositeSpecs_;
+
+    compositeSpecs_.hasCompositor = true;
+
+    QVariant v = getValue(KSL("General"),KSL("composite"));
+    compositeSpecs_.composite = v.toBool();
+
     /* no window translucency or blurring without
        window interior element or reduced opacity */
-
-    interior_spec ispec = getInteriorSpec(KSL("WindowTranslucent"));
-    if (ispec.element.isEmpty())
-      ispec = getInteriorSpec(KSL("Window"));
-
-    if (ispec.hasInterior
-        || getValue(KSL("General"),KSL("reduce_window_opacity")).toInt() > 0)
+    if (compositeSpecs_.composite)
     {
-      v = getValue(KSL("General"),KSL("translucent_windows"));
-      if (v.isValid())
-        r.translucent_windows = v.toBool();
+      interior_spec ispec = getInteriorSpec(KSL("WindowTranslucent"));
+      if (ispec.element.isEmpty())
+        ispec = getInteriorSpec(KSL("Window"));
 
-      /* no window blurring without window translucency */
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-      if (r.translucent_windows)
-#else
-      if (isX11_ && r.translucent_windows)
-#endif
+      if (ispec.hasInterior
+          || getValue(KSL("General"),KSL("reduce_window_opacity")).toInt() > 0)
       {
-        v = getValue(KSL("General"),KSL("blurring"));
+        v = getValue(KSL("General"),KSL("translucent_windows"));
         if (v.isValid())
-          r.blurring = v.toBool();
-      }
-    }
+          compositeSpecs_.translucent_windows = v.toBool();
 
-    /* "blurring" is sufficient but not necessary for "popup_blurring" */
-#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
-    if (isX11_)
-    {
+        /* no window blurring without window translucency */
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+        if (compositeSpecs_.translucent_windows)
+#else
+        if (isX11_ && compositeSpecs_.translucent_windows)
 #endif
-      if (r.blurring)
-        r.popup_blurring = true;
-      else
-      {
-        interior_spec ispecM = getInteriorSpec(KSL("Menu"));
-        interior_spec ispecT = getInteriorSpec(KSL("ToolTip"));
-        if (ispecM.hasInterior || ispecT.hasInterior)
         {
-          v = getValue(KSL("General"),KSL("popup_blurring"));
+          v = getValue(KSL("General"),KSL("blurring"));
           if (v.isValid())
-            r.popup_blurring = v.toBool();
+            compositeSpecs_.blurring = v.toBool();
         }
       }
+
+      /* "blurring" is sufficient but not necessary for "popup_blurring" */
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
-    }
+      if (isX11_)
+      {
+#endif
+        if (compositeSpecs_.blurring)
+          compositeSpecs_.popup_blurring = true;
+        else
+        {
+          interior_spec ispecM = getInteriorSpec(KSL("Menu"));
+          interior_spec ispecT = getInteriorSpec(KSL("ToolTip"));
+          if (ispecM.hasInterior || ispecT.hasInterior)
+          {
+            v = getValue(KSL("General"),KSL("popup_blurring"));
+            if (v.isValid())
+              compositeSpecs_.popup_blurring = v.toBool();
+          }
+        }
+#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
+      }
 #endif
 
-    /* no menu/tooltip shadow without compositing */
-    v = getValue(KSL("General"),KSL("menu_shadow_depth"));
-    if (v.isValid())
-      r.menu_shadow_depth = qMax(v.toInt(),0);
+      /* no menu/tooltip shadow without compositing */
+      v = getValue(KSL("General"),KSL("menu_shadow_depth"));
+      if (v.isValid())
+        compositeSpecs_.menu_shadow_depth = qMax(v.toInt(),0);
 
-    v = getValue(KSL("General"),KSL("tooltip_shadow_depth"));
-    if (v.isValid())
-      r.tooltip_shadow_depth = qMax(v.toInt(),0);
+      v = getValue(KSL("General"),KSL("tooltip_shadow_depth"));
+      if (v.isValid())
+        compositeSpecs_.tooltip_shadow_depth = qMax(v.toInt(),0);
+    }
+
+    return compositeSpecs_;
   }
 
+  theme_spec r;
+  default_theme_spec(r);
   return r;
 }
 
