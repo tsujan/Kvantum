@@ -11957,9 +11957,17 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
 
     case PM_MenuPanelWidth :
-    case PM_MenuDesktopFrameWidth: return 0;
+    case PM_MenuDesktopFrameWidth: {
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
+        return QCommonStyle::pixelMetric(metric,option,widget);
+
+      return 0;
+    }
 
     case PM_SubMenuOverlap : {
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
+        return QCommonStyle::pixelMetric(metric,option,widget);
+
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
         return 0; // RTL submenu positioning is a mess in Qt5
@@ -11973,8 +11981,14 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
+      /* WARNING: It's a nasty Qt issue that, also when a menu
+                  is drawn by stylesheet, this block is called. */
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget))
+        return QCommonStyle::pixelMetric(metric,option,widget);
+
+      /* return the stored value if it exists */
       if (widget && drawnMenus_.contains(widget))
-      { // return a stored value if any exists
+      {
         QList<int> l = drawnMenus_.value(widget);
         if (l.size() >= 2)
         {
@@ -12019,50 +12033,13 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
           h = qMin(2,h);
       }
 
-      /* Sometimes (like in VLC or SVG Cleaner), developers make this
-         mistake that they give a stylesheet to a subclassed lineedit
-         but forget to prevent its propagation to the context menu.
-         What follows is a simple workaround for such cases. */
-      if (qobject_cast<const QMenu*>(widget)
-          && widget->style() != this
-          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      /* remember the margins if it's decided whether the menu has shadow or not */
+      if (shadowDecided && widget && !drawnMenus_.contains(widget))
       {
-        QString css;
-        if (QWidget *p = widget->parentWidget())
-        {
-          if (qobject_cast<QLineEdit*>(p))
-            css = p->styleSheet();
-          else if (qobject_cast<QMenu*>(p))
-          {
-            if (QLineEdit *pp = qobject_cast<QLineEdit*>(p->parentWidget()))
-              css = pp->styleSheet();
-          }
-        }
-        if (!css.isEmpty() && css.contains("padding") && !css.contains("{"))
-        {
-          v = qMin(2,v);
-          if (tspec_.spread_menuitems)
-            h = 0;
-          else
-            h = qMin(2,h);
-        }
-      }
-
-      /* NOTE: Luckily, Qt comes here before showing a menu that's styled
-         by QStyle but not when it's styled by a stylesheet. So, we use
-         that, in the show event, to know which menu is drawn by Kvantum. */
-      if (widget)
-      {
-        if (!drawnMenus_.contains(widget))
-        {
-          if (shadowDecided)
-            drawnMenus_.insert(widget, QList<int>() << h << v);
-          connect(widget, &QObject::destroyed, this, [this, widget]() {
-            drawnMenus_.remove(widget);
-          });
-        }
-        else if (shadowDecided)
-          drawnMenus_.insert(widget, QList<int>() << h << v);
+        drawnMenus_.insert(widget, QList<int>() << h << v);
+        connect(widget, &QObject::destroyed, this, [this, widget]() {
+          drawnMenus_.remove(widget);
+        });
       }
 
       if (metric == PM_MenuTearoffHeight)

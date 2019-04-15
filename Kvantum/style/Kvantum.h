@@ -489,8 +489,7 @@ class Style : public QCommonStyle {
     mutable QPalette standardPalette_;
 
     /* List of menus drawn by Kvantum and their margins
-       (for knowing if a menu has shadow and should be moved on showing
-       and also for preventing redundant computations): */
+       (for preventing redundant computations): */
     mutable QHash<const QWidget*, QList<int>> drawnMenus_;
 
     // For not searching the SVG file too often:
