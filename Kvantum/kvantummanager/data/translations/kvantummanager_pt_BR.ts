@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="131"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença</translation>
     </message>
 </context>
 <context>
@@ -508,12 +508,15 @@ Verificado automaticamente se o desfoque da janela estiver habilitado.</translat
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não criar sombras para menus e dicas de ferramentas.
+
+Isso pode ser útil em DEs que fornecem
+sombra para menus e dicas de ferramentas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Menus e dicas de ferramenta sem sombra</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -1694,7 +1697,7 @@ ou atualizar sua visualização.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2645"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Tradutores</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2643"/>
