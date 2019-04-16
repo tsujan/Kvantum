@@ -11462,6 +11462,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         if (isWidgetInactive(widget))
           suffix = "-inactive";
 
+        if (!(option->state & State_Enabled))
+        {
+          painter->save();
+          painter->setOpacity(DISABLED_OPACITY);
+        }
+
         renderElement(painter,"dial"+suffix,dial);
         if (opt->state & State_HasFocus)
           renderElement(painter,QStringLiteral("dial-focus"),dial);
@@ -11472,6 +11478,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           if (d->notchesVisible())
             renderElement(painter,"dial-notches"+suffix,dial);
         }
+
+        if (!(option->state & State_Enabled))
+          painter->restore();
 
         /* don't draw any focus indicator because
            even a focus circle may be ugly with some themes */
