@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="131"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencija</translation>
     </message>
 </context>
 <context>
@@ -508,12 +508,15 @@ Automatiškai pažymėta, jei langų suliejimas yra įjungtas.</translation>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepiešti šešėlių meniu ir paaiškinimams.
+
+Tai gali būti naudinga darbalaukio aplinkoje,
+kuri meniu ir paaiškinimams suteikia šešėlius.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Bešešėliniai meniu ir paaiškinimai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -1696,7 +1699,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2645"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertėjai</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2643"/>
