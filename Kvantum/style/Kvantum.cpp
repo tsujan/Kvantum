@@ -4014,11 +4014,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QString aStatus = getState(option,widget);
         /* distinguish between the toggled and pressed states
            only if a toggled down arrow element exists */
-        if (aStatus.startsWith("toggled")
-            && !(themeRndr_ && themeRndr_->isValid()
-                 && themeRndr_->elementExists(dspec.element+"-down-toggled")))
+        if (aStatus.startsWith("toggled"))
         {
-          aStatus.replace("toggled","pressed");
+          static const bool hasToogledArrow(themeRndr_ && themeRndr_->isValid()
+                                            && themeRndr_->elementExists(dspec.element+"-down-toggled"));
+          if (!hasToogledArrow)
+            aStatus.replace("toggled","pressed");
         }
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-down-"+aStatus,option->direction);
@@ -4134,11 +4135,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           fspec = getFrameSpec(leGroup);
           ispec = getInteriorSpec(leGroup);
           const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
-          if (themeRndr_ && themeRndr_->isValid()
-              && themeRndr_->elementExists(dspec1.element+"-normal"))
-          {
+          static bool const hasLineEditArrow(themeRndr_ && themeRndr_->isValid()
+                                             && themeRndr_->elementExists(dspec1.element+"-normal"));
+          if (hasLineEditArrow)
             dspec = dspec1;
-          }
           if (leGroup == "ToolbarLineEdit"
               && enoughContrast(getFromRGBA(cspec_.textColor),
                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
@@ -8228,7 +8228,9 @@ void Style::drawControl(QStyle::ControlElement element,
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
-      if (themeRndr_ && themeRndr_->isValid() && !themeRndr_->elementExists(QStringLiteral("header-separator")))
+      static const bool noHeaderSep(themeRndr_ && themeRndr_->isValid()
+                                    && !themeRndr_->elementExists(QStringLiteral("header-separator")));
+      if (noHeaderSep)
         renderElement(painter, fspec.element + "-" + status + "-right", sep);
       else
         renderElement(painter,QStringLiteral("header-separator"),sep);
@@ -9200,10 +9202,13 @@ void Style::drawControl(QStyle::ControlElement element,
             renderFrame(painter,option->rect,fspec,fspec.element+"-default");
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
           }
-          else if (themeRndr_ && themeRndr_->isValid()
-                   && themeRndr_->elementExists(QStringLiteral("flat-button-default-indicator")))
+          else
           {
-            di = "flat-button-default-indicator";
+            static const bool hasFlatDefaultInd(themeRndr_ && themeRndr_->isValid()
+                                                && themeRndr_->elementExists(
+                                                   QStringLiteral("flat-button-default-indicator")));
+            if (hasFlatDefaultInd)
+              di = "flat-button-default-indicator";
           }
           renderIndicator(painter,
                           option->rect,
@@ -11966,17 +11971,13 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
 
     case PM_MenuPanelWidth :
-    case PM_MenuDesktopFrameWidth: {
-      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
-        return QCommonStyle::pixelMetric(metric,option,widget);
-
-      return 0;
-    }
+    case PM_MenuDesktopFrameWidth : return 0;
 
     case PM_SubMenuOverlap : {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
-        return QCommonStyle::pixelMetric(metric,option,widget);
-
+        return 0;
+#endif
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
         return 0; // RTL submenu positioning is a mess in Qt5
@@ -11990,10 +11991,12 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-      /* WARNING: It's a nasty Qt issue that, also when a menu
-                  is drawn by stylesheet, this block is called. */
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      /* WARNING: It's a nasty Qt issue that, also when a menu is drawn by a stylesheet,
+                  this block is called. Luckily, this workaround exists with Qt >= 5.12. */
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget))
         return QCommonStyle::pixelMetric(metric,option,widget);
+#endif
 
       /* return the stored value if it exists */
       if (widget && drawnMenus_.contains(widget))
@@ -12042,6 +12045,37 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
           h = qMin(2,h);
       }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
+      /* Sometimes (like in VLC or SVG Cleaner), developers make this
+         mistake that they give a stylesheet to a subclassed lineedit
+         but forget to prevent its propagation to the context menu.
+         What follows is a simple workaround for such cases. */
+      if (qobject_cast<const QMenu*>(widget)
+          && widget->style() != this
+          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+      {
+        QString css;
+        if (QWidget *p = widget->parentWidget())
+        {
+          if (qobject_cast<QLineEdit*>(p))
+            css = p->styleSheet();
+          else if (qobject_cast<QMenu*>(p))
+          {
+            if (QLineEdit *pp = qobject_cast<QLineEdit*>(p->parentWidget()))
+              css = pp->styleSheet();
+          }
+        }
+        if (!css.isEmpty() && css.contains("padding") && !css.contains("{"))
+        {
+          v = qMin(2,v);
+          if (tspec_.spread_menuitems)
+            h = 0;
+          else
+            h = qMin(2,h);
+        }
+      }
+#endif
+
       /* remember the margins if it's decided whether the menu has shadow or not */
       if (shadowDecided && widget && !drawnMenus_.contains(widget))
       {
@@ -12060,6 +12094,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
 
     case PM_MenuScrollerHeight : {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
+        return QCommonStyle::pixelMetric(metric,option,widget);
+#endif
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("MenuItem"));
       return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
@@ -12263,42 +12301,13 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
 
     /* slider handle */
-    case PM_SliderLength : {
-      int res = tspec_.slider_handle_length;
-      /* set it to the width if there is no tick and
-         a "-tickless" interior element exists */
-      if (themeRndr_ && themeRndr_->isValid())
-      {
-        const QStyleOptionSlider *opt =
-            qstyleoption_cast<const QStyleOptionSlider*>(option);
-        if (opt && opt->tickPosition == QSlider::NoTicks)
-        {
-          if (ticklessSliderHandleSize_ == -1)
-          {
-            const interior_spec ispec = getInteriorSpec(QStringLiteral("SliderCursor"));
-            if (themeRndr_ && themeRndr_->isValid()
-                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
-            {
-              if (tspec_.tickless_slider_handle_size > 0)
-              {
-                res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
-              }
-              else
-              {
-                res = ticklessSliderHandleSize_ = tspec_.slider_handle_width;
-              }
-            }
-            else
-              ticklessSliderHandleSize_ = 0;
-          }
-          else if (ticklessSliderHandleSize_ > 0)
-            res = ticklessSliderHandleSize_;
-        }
-      }
-      return res;
-    }
+    case PM_SliderLength :
     case PM_SliderControlThickness : {
-      int res = tspec_.slider_handle_width;
+      int res;
+      if (metric == PM_SliderLength)
+        res = tspec_.slider_handle_length;
+      else
+        res = tspec_.slider_handle_width;
       if (themeRndr_ && themeRndr_->isValid())
       {
         const QStyleOptionSlider *opt =
@@ -12308,12 +12317,17 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
           if (ticklessSliderHandleSize_ == -1)
           {
             const interior_spec ispec = getInteriorSpec(QStringLiteral("SliderCursor"));
-            if (themeRndr_ && themeRndr_->isValid()
-                && themeRndr_->elementExists(ispec.element+"-tickless-normal"))
+            static const bool hasTicklessInd(themeRndr_ && themeRndr_->isValid()
+                                             && themeRndr_->elementExists(ispec.element+"-tickless-normal"));
+            if (hasTicklessInd)
             {
               if (tspec_.tickless_slider_handle_size > 0)
               {
                 res = ticklessSliderHandleSize_ = tspec_.tickless_slider_handle_size;
+              }
+              else if (metric == PM_SliderLength)
+              { // set it to the width if there is no tick and a "-tickless" interior element exists
+                res = ticklessSliderHandleSize_ = tspec_.slider_handle_width;
               }
             }
             else
@@ -12624,7 +12638,13 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_ToolButton_PopupDelay : return 250;
     case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;
-    case SH_Menu_Scrollable : return tspec_.scrollable_menu;
+    case SH_Menu_Scrollable : {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
+        return QCommonStyle::styleHint(hint,option,widget,returnData);
+#endif
+      return tspec_.scrollable_menu;
+    }
     case SH_Menu_SloppySubMenus : return true;
 #if QT_VERSION >= 0x050500
     /* QMenu has some bugs regarding this timeout. It's also
@@ -12790,6 +12810,10 @@ int Style::styleHint(QStyle::StyleHint hint,
     }
 
     case SH_ToolBox_SelectedPageTitleBold : return true;
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    case SH_SpinBox_ButtonsInsideFrame : return true;
+#endif
 
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar

@@ -923,11 +923,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
 #endif
       {
         //if (isLibreoffice_) break;
-        if (w->testAttribute(Qt::WA_StyleSheetTarget) // not drawn by Kvantum (see PM_MenuHMargin)
-            || w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // detached menu
-        {
-          break;
-        }
+        if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+        if (w->testAttribute(Qt::WA_StyleSheetTarget)) break; // not drawn by Kvantum (see PM_MenuHMargin)
+#endif
         if (movedMenus.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;

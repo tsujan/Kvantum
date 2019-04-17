@@ -10,7 +10,7 @@ V0.11.1
  * Don't force bold or italic font on combo or menu-item texts (because finding longest texts of combos isn't CPU-friendly and combos can have menu popups).
  * Ignore window frame with dragging (less calculation for Qt and no jump under Enlightenment).
  * Set QStyle's standard palette to the Kvantum theme palette and make use of it instead of app palette (because app palette may not be reliable with some apps, like Qt Designer).
- * An effective way of finding menus that aren't drawn by kvantum (for excluding them from compensating for shadows by moving on showing).
+ * An effective way of finding menus that aren't drawn by kvantum (for excluding them from compensating for shadows). It works with Qt ≥ 5.12.
  * Removed redundant computations after showing a menu. Their results are remembered instead.
  * Added the missing disabled state of dials.
 
