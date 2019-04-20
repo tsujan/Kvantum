@@ -368,11 +368,16 @@ Style::Style(bool useDark) : QCommonStyle()
 
   if (tspec_.blurring)
   {
-    getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-    const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
-    int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
-    thickness += tspec_.tooltip_shadow_depth;
-    QList<int> tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+    if (tspec_.menu_shadow_depth > 0)
+      getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+    QList<int> tooltipS;
+    if (tspec_.tooltip_shadow_depth > 0)
+    {
+      const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
+      int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+      thickness += tspec_.tooltip_shadow_depth;
+      tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+    }
     blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
                                  tspec_.contrast, tspec_.intensity, tspec_.saturation);
   }

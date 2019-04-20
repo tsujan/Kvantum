@@ -405,13 +405,18 @@ void Style::polish(QWidget *widget)
             /* enable blurring */
             if (!makeTranslucent || tspec_now.blurring)
             {
-              if (!blurHelper_)
+              if (blurHelper_ == nullptr)
               {
-                getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-                const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
-                int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
-                thickness += tspec_now.tooltip_shadow_depth;
-                QList<int> tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+                if (tspec_.menu_shadow_depth > 0)
+                  getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+                QList<int> tooltipS;
+                if (tspec_.tooltip_shadow_depth > 0)
+                {
+                  const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
+                  int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+                  thickness += tspec_now.tooltip_shadow_depth;
+                  tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+                }
                 blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
                                              tspec_.contrast, tspec_.intensity, tspec_.saturation);
               }
@@ -821,7 +826,8 @@ void Style::polish(QWidget *widget)
     {
       if (qobject_cast<QMenu*>(widget) || widget->inherits("QComboBoxPrivateContainer"))
       {
-        getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+        if (tspec_now.menu_shadow_depth > 0)
+          getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
         if (qobject_cast<QMenu*>(widget))
         {
           /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
@@ -848,12 +854,16 @@ void Style::polish(QWidget *widget)
 
       if (!widget->inherits("QComboBoxPrivateContainer") || tspec_.combo_menu)
       {
-        if (!blurHelper_ && tspec_now.popup_blurring)
+        if (blurHelper_ == nullptr && tspec_now.popup_blurring)
         {
-          const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
-          int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
-          thickness += tspec_now.tooltip_shadow_depth;
-          QList<int> tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+          QList<int> tooltipS;
+          if (tspec_now.tooltip_shadow_depth > 0)
+          {
+            const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
+            int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
+            thickness += tspec_now.tooltip_shadow_depth;
+            tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+          }
           blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
                                        tspec_.contrast, tspec_.intensity, tspec_.saturation);
         }
