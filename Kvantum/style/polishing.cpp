@@ -407,10 +407,10 @@ void Style::polish(QWidget *widget)
             {
               if (blurHelper_ == nullptr)
               {
-                if (tspec_.menu_shadow_depth > 0)
+                if (tspec_now.menu_shadow_depth > 0)
                   getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
                 QList<int> tooltipS;
-                if (tspec_.tooltip_shadow_depth > 0)
+                if (tspec_now.tooltip_shadow_depth > 0)
                 {
                   const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
                   int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
