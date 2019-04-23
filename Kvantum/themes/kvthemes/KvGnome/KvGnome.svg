@@ -1222,8 +1222,8 @@
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#arrow-separator-top-normal" id="arrow-separator-top-normal-inactive" transform="translate(14)"/>
 <use width="100%" height="100%" style="opacity:.8" xlink:href="#iarrow-separator-normal" id="iarrow-separator-normal-inactive" transform="translate(14)"/>
 <use width="100%" height="100%" style="opacity:.8" xlink:href="#iarrow-separator-top-normal" id="iarrow-separator-top-normal-inactive" transform="translate(14)"/>
-<use width="100%" height="100%" xlink:href="#arrow-separator-top-normal-inactive" id="arrow-separator-bottom-normal-inactive" transform="translate(0,14)"/>
-<use width="100%" height="100%" xlink:href="#iarrow-separator-top-normal-inactive" id="iarrow-separator-bottom-normal-inactive" transform="translate(0,14)"/>
+<use width="100%" height="100%" xlink:href="#arrow-separator-top-normal-inactive" id="arrow-separator-bottom-normal-inactive" transform="matrix(1,0,0,-1,0,290)"/>
+<use width="100%" height="100%" xlink:href="#iarrow-separator-top-normal-inactive" id="iarrow-separator-bottom-normal-inactive" transform="matrix(1,0,0,-1,0,290)"/>
 <use width="100%" height="100%" style="opacity:.7" xlink:href="#button-separator-normal" id="button-separator-normal-inactive" transform="translate(20)"/>
 <use width="100%" height="100%" style="opacity:.7" xlink:href="#button-separator-normal-top" id="button-separator-normal-inactive-top" transform="translate(20)"/>
 <use width="100%" height="100%" style="opacity:.7" xlink:href="#button-separator-toggled" id="button-separator-toggled-inactive" transform="translate(20)"/>
