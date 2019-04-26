@@ -263,7 +263,7 @@
 <stop offset="1" style="stop-color:#b3b3b3"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient3837" id="linearGradient5230" y1="74" x1="427.87506" y2="79.5" x2="429" gradientUnits="userSpaceOnUse"/>
-<linearGradient gradientTransform="matrix(0.66666667,0,0,-0.66666667,375.83333,145.00105)" xlink:href="#linearGradient3837" id="linearGradient5197" y1="48.751606" x1="19.75" y2="47.251575" gradientUnits="userSpaceOnUse" x2="28"/>
+<linearGradient gradientTransform="matrix(0.66666667,0,0,-0.66666667,375.83333,145.00105)" xlink:href="#linearGradient3837" id="linearGradient5197" y1="48.751606" x1="19.75" y2="47.626598" gradientUnits="userSpaceOnUse" x2="26.5"/>
 <linearGradient xlink:href="#linearGradient4635" id="linearGradient5189" y1="78.752144" x1="28.75009" y2="42.751564" gradientUnits="userSpaceOnUse" x2="28.750029"/>
 <linearGradient xlink:href="#linearGradient5094" id="linearGradient5114" y1="752.5" x1="330" y2="734.5" x2="330" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="330" fy="729.35443" cx="330" cy="729.35443" gradientTransform="matrix(4.1666779,0,0,5.1666683,-950.00205,-3046.8331)" xlink:href="#linearGradient5012" id="radialGradient6350" r="9" gradientUnits="userSpaceOnUse"/>
@@ -633,7 +633,7 @@
 <path style="fill:url(#linearGradient5218);fill-rule:evenodd" d="m 28.75,41.2516 c -4.12499,0 -7.5,3.37497 -7.5,7.5 h 7.5 z "/>
 <path style="fill:#9d9d9d;line-height:normal;color:#000" d="m 28.75,41.2516 c -4.12499,0 -7.5,3.37497 -7.5,7.5 h 1.5 c 0,-3.18752 2.81252,-6 6,-6 z "/>
 </g>
-<path style="opacity:.1;fill:url(#linearGradient5197);fill-rule:evenodd" d="m 395,118.5 c -3.18748,0 -6,-2.8125 -6,-6 h 6 z"/>
+<path style="opacity:.08;fill:url(#linearGradient5197);fill-rule:evenodd" d="m 395,118.5 c -3.18748,0 -6,-2.8125 -6,-6 h 6 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#lineedit-normal-left0" id="lineedit-normal-right" transform="matrix(-1.3333244,0,0,0.98461538,965.62187,1.2615793)"/>
 <g id="lineedit-normal-topright" transform="matrix(1.3333146,0,0,1.3333146,-130.99208,-26.665249)">

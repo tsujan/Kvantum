@@ -254,6 +254,7 @@ text.margin.left=8
 text.margin.right=8
 text.margin.top=3
 text.margin.bottom=3
+frame.expandedElement=ebutton
 frame.element=tab
 indicator.element=tab
 indicator.size=12
@@ -263,7 +264,6 @@ text.focus.color=#000000b4
 text.toggle.color=black
 text.toggle.inactive.color=#000000a0
 text.bold=true
-frame.expansion=0
 
 [TabFrame]
 inherits=PanelButtonCommand
