@@ -1907,18 +1907,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     /* PE_PanelButtonCommand is used by QCommonStyle only inside CE_PushButtonBevel
        and CC_MdiControls but we don't use it. It's here for special cases. */
     case PE_PanelButtonCommand : {
-      const QStyleOptionButton *opt =
-          qstyleoption_cast<const QStyleOptionButton*>(option);
-      if (widget == nullptr
-          && (opt == nullptr
-              || (!(opt->features & QStyleOptionButton::Flat) || (option->state & State_Enabled)))
-          && enoughContrast(option->palette.color(QPalette::ButtonText),
-                            standardPalette().color(QPalette::ButtonText)))
-      { // QML colorized button
-        QCommonStyle::drawPrimitive(element,option,painter,widget);
-        break;
-      }
-
       const QString group = "PanelButtonCommand";
 
       frame_spec fspec = getFrameSpec(group);
@@ -1937,8 +1925,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt == nullptr
-          || (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal")))
+          || !(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
       {
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
@@ -1963,14 +1953,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
       }
-      else if ((!(option->state & State_AutoRaise) || (option->state & State_Enabled))
-               && enoughContrast(option->palette.color(QPalette::ButtonText),
-                                 standardPalette().color(QPalette::ButtonText)))
-      { // QML colorized button
-        QCommonStyle::drawPrimitive(element,option,painter,widget);
-        break;
-      }
-
       interior_spec ispec;
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
@@ -2482,14 +2464,34 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->save();
           painter->setOpacity(0.5);
         }
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
         if (!fillWidgetInterior)
-          renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        {
+          if (widget == nullptr
+              && enoughContrast(option->palette.color(QPalette::ButtonText),
+                                standardPalette().color(QPalette::ButtonText)))
+          { // QML colorized button
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+            if (hasExpandedBorder(fspec))
+              fspec.expansion = 0;
+            else
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+            painter->fillRect(interiorRect(r,fspec),
+                              option->palette.brush((option->state & State_Enabled
+                                                      ? QPalette::Active : QPalette::Disabled),
+                                                    QPalette::Button));
+          }
+          else
+            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+        }
         else // widget isn't null
           painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
                                                                              ? QPalette::Inactive
                                                                              : QPalette::Active,
                                                                            QPalette::Button));
+        renderFrame(painter,r,fspec,fspec.element+"-"+status);
         if (libreoffice) painter->restore();
         hasPanel = true;
       }
@@ -8888,8 +8890,6 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_PushButtonBevel : { // bevel and indicator
-      const QStyleOptionButton *opt =
-          qstyleoption_cast<const QStyleOptionButton*>(option);
       if (widget != nullptr)
       {
         if (option->state & State_Sunken)
@@ -8897,14 +8897,8 @@ void Style::drawControl(QStyle::ControlElement element,
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
       }
-      else if ((opt == nullptr
-                || (!(opt->features & QStyleOptionButton::Flat) || (option->state & State_Enabled)))
-               && enoughContrast(option->palette.color(QPalette::ButtonText),
-                                 standardPalette().color(QPalette::ButtonText)))
-      { // QML colorized button
-        QCommonStyle::drawControl(element,option,painter,widget);
-        break;
-      }
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton*>(option);
 
       if (opt) {
         QString status = getState(option,widget);
@@ -9150,9 +9144,29 @@ void Style::drawControl(QStyle::ControlElement element,
               painter->save();
               painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
             }
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             if (!fillWidgetInterior)
-              renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            {
+              if (widget == nullptr
+                  && enoughContrast(option->palette.color(QPalette::ButtonText),
+                                    standardPalette().color(QPalette::ButtonText)))
+              { // QML colorized button
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+                fspec.top = qMin(fspec.top,3);
+                fspec.bottom = qMin(fspec.bottom,3);
+                if (hasExpandedBorder(fspec))
+                  fspec.expansion = 0;
+                else
+                  fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+                painter->fillRect(interiorRect(option->rect,fspec),
+                                  option->palette.brush((option->state & State_Enabled
+                                                          ? QPalette::Active : QPalette::Disabled),
+                                                        QPalette::Button));
+              }
+              else
+                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+            }
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
             if (animate)
             {
               painter->restore();
