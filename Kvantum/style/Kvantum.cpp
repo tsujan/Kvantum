@@ -1420,7 +1420,7 @@ static inline QString progressMaxText(const QProgressBar *pb, const QStyleOption
   return maxTxt;
 }
 
-/* Does the (tool-)button have a panel drawn at PE_PanelButtonCommand?
+/* Does the (tool-)button have a panel drawn at PE_PanelButtonTool?
    This is used for setting the text color of non-flat, panelless buttons that are
    already styled, like those in QtCreator's find bar or QupZilla's bookmark toolbar. */
 static QSet<const QWidget*> paneledButtons;
@@ -1904,7 +1904,21 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       break;
     }
 
+    /* PE_PanelButtonCommand is used by QCommonStyle only inside CE_PushButtonBevel
+       and CC_MdiControls but we don't use it. It's here for special cases. */
     case PE_PanelButtonCommand : {
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton*>(option);
+      if (widget == nullptr
+          && (opt == nullptr
+              || (!(opt->features & QStyleOptionButton::Flat) || (option->state & State_Enabled)))
+          && enoughContrast(option->palette.color(QPalette::ButtonText),
+                            standardPalette().color(QPalette::ButtonText)))
+      { // QML colorized button
+        QCommonStyle::drawPrimitive(element,option,painter,widget);
+        break;
+      }
+
       const QString group = "PanelButtonCommand";
 
       frame_spec fspec = getFrameSpec(group);
@@ -1923,8 +1937,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
-      renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+      if (opt == nullptr
+          || (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal")))
+      {
+        renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
+        renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
+      }
       if (!(option->state & State_Enabled))
         painter->restore();
 
@@ -1932,7 +1950,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
-      if (widget)
+      if (widget != nullptr)
       {
         if (option->state & State_Sunken)
           sunkenButton_ = const_cast<QWidget*>(widget);
@@ -1945,6 +1963,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
       }
+      else if ((!(option->state & State_AutoRaise) || (option->state & State_Enabled))
+               && enoughContrast(option->palette.color(QPalette::ButtonText),
+                                 standardPalette().color(QPalette::ButtonText)))
+      { // QML colorized button
+        QCommonStyle::drawPrimitive(element,option,painter,widget);
+        break;
+      }
+
       interior_spec ispec;
       QString group = "PanelButtonTool";
       QWidget *p = getParent(widget,1);
@@ -8705,6 +8731,14 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_PushButtonLabel : {
+      if (widget == nullptr && option != nullptr
+          && enoughContrast(option->palette.color(QPalette::ButtonText),
+                            standardPalette().color(QPalette::ButtonText)))
+      { // QML colorized button
+        QCommonStyle::drawControl(element,option,painter,widget);
+        break;
+      }
+
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
 
@@ -8854,15 +8888,23 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_PushButtonBevel : { // bevel and indicator
-      if (widget)
+      const QStyleOptionButton *opt =
+          qstyleoption_cast<const QStyleOptionButton*>(option);
+      if (widget != nullptr)
       {
         if (option->state & State_Sunken)
           sunkenButton_ = const_cast<QWidget*>(widget);
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
       }
-      const QStyleOptionButton *opt =
-          qstyleoption_cast<const QStyleOptionButton*>(option);
+      else if ((opt == nullptr
+                || (!(opt->features & QStyleOptionButton::Flat) || (option->state & State_Enabled)))
+               && enoughContrast(option->palette.color(QPalette::ButtonText),
+                                 standardPalette().color(QPalette::ButtonText)))
+      { // QML colorized button
+        QCommonStyle::drawControl(element,option,painter,widget);
+        break;
+      }
 
       if (opt) {
         QString status = getState(option,widget);
@@ -9247,6 +9289,14 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_ToolButtonLabel : {
+      if (widget == nullptr && option != nullptr
+          && enoughContrast(option->palette.color(QPalette::ButtonText),
+                            standardPalette().color(QPalette::ButtonText)))
+      { // QML colorized button
+        QCommonStyle::drawControl(element,option,painter,widget);
+        break;
+      }
+
       const QStyleOptionToolButton *opt =
           qstyleoption_cast<const QStyleOptionToolButton*>(option);
 
@@ -9274,7 +9324,7 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
 
-          /* as in PE_PanelButtonCommand */
+          /* as in PE_PanelButtonTool */
           QToolBar *toolBar = qobject_cast<QToolBar*>(p);
           if ((toolBar && toolBar->orientation() != Qt::Vertical)
               || (qobject_cast<QToolBar*>(stb)
@@ -10062,7 +10112,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             QWidget *p = getParent(widget,1);
             QWidget *gp = getParent(p,1);
 
-            /* as in PE_PanelButtonCommand */
+            /* as in PE_PanelButtonTool */
             bool drawRaised = false;
             QToolBar *toolBar = qobject_cast<QToolBar*>(p);
             if ((toolBar && toolBar->orientation() != Qt::Vertical)
