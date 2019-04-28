@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; omab kohe palju teemasi, kuid võimalik on neid ka ise paigaldada. Siin saab valida teemat sisaldava kataloogi ja allolevale nupule vajutadaes selle paigaldada.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sisaldab palju teemasid, kuid neid on võimalik ka ise paigaldada. Siin saab valida teemakataloogi ja allolevat nuppu kasutades selle paigaldada.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -814,7 +814,7 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished">Mõjutab ikoonivaateid.
+        <translation>Mõjutab ikoonivaateid.
 
 Vaikeväärtus on 32 px, kuid mõned
 rakendused seavad selle ise. 
@@ -840,7 +840,7 @@ Vaikeväärtus on 16 px.</translation>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation type="unfinished">Mõjutab tööriistaribasid.
+        <translation>Mõjutab tööriistaribasid.
 
 Vaikeväärtus on 22 px, kuid mõned
 rakendused seavad selle ise.
@@ -861,7 +861,7 @@ KDE rakendused saavad selle KDE seadistusest.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1418"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished">Minimaalne kerimisriba pikkus: </translation>
+        <translation>Minimaalne kerimisriba pikkus: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1463"/>
@@ -876,7 +876,7 @@ KDE rakendused saavad selle KDE seadistusest.</translation>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished">Viivitus millisekundites enne näpunäite näitamist.
+        <translation>Viivitus millisekundites enne näpunäite näitamist.
 
 Null tähendab, et näpunäited kuvatakse koheselt.
 
@@ -898,7 +898,7 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished">Vaikimisi on liikuvate tööriistaribade
+        <translation>Vaikimisi on liigutavate tööriistaribade
 ja doki vidinate rippuvad ristkülikud tühjad.
 
 See valik täidab rippmenüüd esiletõstmise värviga.</translation>
