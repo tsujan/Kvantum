@@ -13,6 +13,7 @@ V0.11.1
  * An effective way of finding menus that aren't drawn by kvantum (for excluding them from compensating for shadows). It works with Qt ≥ 5.12.
  * Removed redundant computations after showing a menu. Their results are remembered instead.
  * Added the missing disabled state of dials.
+ * Since HDPI is supported by KDE's blur effect with Qt ≥ 5.12, disable Kvantum's workaround for those versions.
 
 V0.11.0
 ---------

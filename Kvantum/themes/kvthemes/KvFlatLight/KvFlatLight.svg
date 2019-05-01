@@ -503,90 +503,90 @@
 <g style="fill-rule:evenodd" id="button-toggled-left" transform="matrix(1.0666668,0,0,1,203.33333,-33.746739)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 21.25,48.7468 v 32.5 h 2.25 c -0.007,-0.13412 0,-0.27049 0,-0.40625 v -31.6875 c 0,-0.13576 -0.007,-0.27213 0,-0.40625 z"/>
 <path style="fill:#2d82ad" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
-<path style="opacity:.15;fill:url(#linearGradient1850)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
+<path style="opacity:.1;fill:url(#linearGradient1850)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
 </g>
 <g id="button-toggled-topleft" transform="matrix(1.0666667,0,0,1.0666667,210,-3.6666671)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 15,10 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#2d82ad;fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1832);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1840);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.15;fill:url(#linearGradient1832);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1840);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
 </g>
 <g style="fill-rule:evenodd" id="button-toggled-top" transform="matrix(0,1.0666668,-1,0,315.24674,-15.66667)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 21.25,48.7468 v 32.5 h 2.25 c -0.007,-0.13412 0,-0.27049 0,-0.40625 v -31.6875 c 0,-0.13576 -0.007,-0.27213 0,-0.40625 z"/>
 <path style="fill:#2d82ad" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
-<path style="opacity:.2;fill:url(#linearGradient1836)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
+<path style="opacity:.15;fill:url(#linearGradient1836)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
 </g>
 <g id="button-toggled-topright" transform="matrix(0,1.0666667,-1.0666667,0,285.16667,-9)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 15,10 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#2d82ad;fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1834);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1872);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.15;fill:url(#linearGradient1834);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1872);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
 </g>
 <g style="fill-rule:evenodd" id="button-toggled-right" transform="matrix(-1.0666668,0,0,-1,297.16667,96.246739)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 21.25,48.7468 v 32.5 h 2.25 c -0.007,-0.13412 0,-0.27049 0,-0.40625 v -31.6875 c 0,-0.13576 -0.007,-0.27213 0,-0.40625 z"/>
 <path style="fill:#2d82ad" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
-<path style="opacity:.15;fill:url(#linearGradient1880)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
+<path style="opacity:.1;fill:url(#linearGradient1880)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
 </g>
 <g id="button-toggled-bottomright" transform="matrix(-1.0666667,0,0,-1.0666667,290.5,66.166667)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 15,10 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#2d82ad;fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1862);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1870);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.15;fill:url(#linearGradient1862);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1870);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
 </g>
 <g style="fill-rule:evenodd" id="button-toggled-bottom" transform="matrix(0,-1.0666668,1,0,185.25326,78.16667)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 21.25,48.7468 v 32.5 h 2.25 c -0.007,-0.13412 0,-0.27049 0,-0.40625 v -31.6875 c 0,-0.13576 -0.007,-0.27213 0,-0.40625 z"/>
 <path style="fill:#2d82ad" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
-<path style="opacity:.2;fill:url(#linearGradient1864)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
+<path style="opacity:.15;fill:url(#linearGradient1864)" d="m 23.125,48.7468 v 32.5 h 5.625 v -32.5 z "/>
 </g>
 <g id="button-toggled-bottomleft" transform="matrix(0,-1.0666667,1.0666667,0,215.33333,71.5)">
 <path style="fill:#4b4b4b;fill-opacity:0" d="m 15,10 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#2d82ad;fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1848);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1854);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1848);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
+<path style="opacity:.15;fill:url(#linearGradient1854);fill-rule:evenodd" d="m 22.5,11.875 c -3.28125,0 -5.625,2.34375 -5.625,5.625 h 5.625 Z "/>
 </g>
 <g id="button-normal-topleft" transform="matrix(1.0666667,0,0,1.0666667,6,-3.671725)">
 <path style="fill-opacity:0" d="m 15,10.004742 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.1;fill:url(#linearGradient1732);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.13;fill:url(#linearGradient1764);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.07;fill:url(#linearGradient1732);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.08;fill:url(#linearGradient1764);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
 </g>
 <g id="button-normal-left" transform="matrix(1.0666667,0,0,0.98456554,6,-1.7329454)">
 <path style="fill-opacity:0" d="m 15,17.504742 h 7.5 v 32.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
-<path style="opacity:.1;fill:url(#linearGradient1708);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
+<path style="opacity:.07;fill:url(#linearGradient1708);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
 </g>
 <g id="button-normal-top" transform="matrix(0,1.0666667,-0.98456554,0,79.232945,-9)">
 <path style="fill-opacity:0" d="m 15,17.504742 h 7.5 v 32.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
-<path style="opacity:.13;fill:url(#linearGradient1684);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
+<path style="opacity:.08;fill:url(#linearGradient1684);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
 </g>
 <g id="button-normal-topright" transform="matrix(0,1.0666667,-1.0666667,0,81.171725,-9)">
 <path style="fill-opacity:0" d="m 15,10.004742 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1740);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.13;fill:url(#linearGradient1760);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1740);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.08;fill:url(#linearGradient1760);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
 </g>
 <g id="button-normal-right" transform="matrix(-1.0666667,0,0,0.98456554,86.5,-1.7329454)">
 <path style="fill-opacity:0" d="m 15,17.504742 h 7.5 v 32.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1700);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1700);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
 </g>
 <g id="button-normal-bottomright" transform="matrix(-1.0666667,0,0,-1.0666667,86.5,66.171725)">
 <path style="fill-opacity:0" d="m 15,10.004742 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.15;fill:url(#linearGradient1748);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1772);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.1;fill:url(#linearGradient1748);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.12;fill:url(#linearGradient1772);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
 </g>
 <g id="button-normal-bottom" transform="matrix(0,-1.0666667,0.98456554,0,13.267055,71.5)">
 <path style="fill-opacity:0" d="m 15,17.504742 h 7.5 v 32.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1692);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
+<path style="opacity:.12;fill:url(#linearGradient1692);fill-rule:evenodd" d="m 16.875,16.9953 v 33.0095 h 5.625 v -33.0095 Z "/>
 </g>
 <g id="button-normal-bottomleft" transform="matrix(0,-1.0666667,1.0666667,0,11.328275,71.5)">
 <path style="fill-opacity:0" d="m 15,10.004742 h 7.5 v 7.5 H 15 Z"/>
 <path style="fill:#5a5a5a;fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.1;fill:url(#linearGradient1756);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
-<path style="opacity:.2;fill:url(#linearGradient1768);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.07;fill:url(#linearGradient1756);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
+<path style="opacity:.12;fill:url(#linearGradient1768);fill-rule:evenodd" d="m 22.5,11.8797 c -3.28125,0 -5.625,2.34375 -5.625,5.625 l 5.625,-.0047 Z "/>
 </g>
 <path style="fill:#6e6e6e" id="button-focused-left" d="m 90,15.5 h 7.5 V 48 H 90 Z"/>
 <path style="fill:#6e6e6e" id="button-focused-right" d="m 130,15.5 h 7.5 V 48 H 130 Z"/>
@@ -736,7 +736,7 @@
 <path style="fill-rule:evenodd" id="expand-lineedit-normal" d="m 300,70 h 10 v 10 h -10 z"/>
 <g id="tab-close-normal">
 <rect width="18" x="280" y="970" height="18" style="fill-rule:evenodd;fill-opacity:0"/>
-<path style="opacity:.5;fill-rule:evenodd" d="m 289,974 a 5,5 0 0 0 -5,5 5,5 0 0 0 5,5 5,5 0 0 0 5,-5 5,5 0 0 0 -5,-5 z m 0,2.5 a 2.5,2.5 0 0 1 2.5,2.5 2.5,2.5 0 0 1 -2.5,2.5 2.5,2.5 0 0 1 -2.5,-2.5 2.5,2.5 0 0 1 2.5,-2.5 z"/>
+<path style="opacity:.5;fill-rule:evenodd" d="m 289,974.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
 </g>
 <g id="mdi-restore-normal">
 <rect width="32" x="602" y="827" height="32" style="opacity:0"/>
@@ -844,13 +844,13 @@
 <path style="fill:#a0a0a0;fill-rule:evenodd" d="m 380,928 h 20 v 1 h -20 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(62)"/>
-<g id="tab-close-focused" transform="translate(84,365)">
-<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 216,606 h 18 v 18 h -18 z"/>
-<path style="fill:#2f8ab7" d="m 232.3745,611.199 -3.8159,3.8128 3.792,3.8018 -3.5529,3.55 -3.792,-3.8018 -3.8159,3.8128 -3.5643,-3.5734 3.8159,-3.8128 -3.792,-3.8018 3.5529,-3.55 3.792,3.8018 3.8159,-3.8128 3.5643,3.5735"/>
+<g id="tab-close-focused" transform="translate(-20)">
+<circle cx="330" cy="978" style="fill:#29789f;fill-rule:evenodd;stroke-width:.5" r="8"/>
+<path style="fill:#fff;fill-rule:evenodd;stroke-width:.5" d="m 332.8284,973.7573 -2.8284,2.8284 -2.8284,-2.8284 -1.4142,1.4142 2.8284,2.8284 -2.8284,2.8284 1.4142,1.4142 2.8284,-2.8284 2.8284,2.8284 1.4142,-1.4142 -2.8284,-2.8284 2.8284,-2.8284 z "/>
 </g>
-<g id="tab-close-pressed" transform="translate(106,365)">
-<path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 216,606 h 18 v 18 h -18 z"/>
-<path style="fill:#ff2d2d" d="m 232.3745,611.199 -3.8159,3.8128 3.792,3.8018 -3.5529,3.55 -3.792,-3.8018 -3.8159,3.8128 -3.5643,-3.5735 3.8159,-3.8128 -3.792,-3.8018 3.5529,-3.55 3.792,3.8018 3.8159,-3.8128 3.5643,3.5735"/>
+<g id="tab-close-pressed">
+<circle cx="330" cy="978" style="fill:#f02200;fill-rule:evenodd;stroke-width:.5" r="8"/>
+<path style="fill:#fff;fill-rule:evenodd;stroke-width:.5" d="m 332.8284,973.7573 -2.8284,2.8284 -2.8284,-2.8284 -1.4142,1.4142 2.8284,2.8284 -2.8284,2.8284 1.4142,1.4142 2.8284,-2.8284 2.8284,2.8284 1.4142,-1.4142 -2.8284,-2.8284 2.8284,-2.8284 z "/>
 </g>
 <g style="opacity:.85" id="focus-top">
 <path style="opacity:0;color:#000" d="m 378,1108 h 20 v -2 h -20 z"/>

@@ -137,7 +137,8 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   }
 
   qreal dpr = 1.0;
-#if QT_VERSION >= 0x050500
+  /* KDE blur effect supports HDPI after Qt 5.11 */
+#if (QT_VERSION <= QT_VERSION_CHECK(5,11,0))
   dpr = qApp->devicePixelRatio();
   if (dpr < 1.0) dpr = 1.0;
   if (dpr > 1.0)
