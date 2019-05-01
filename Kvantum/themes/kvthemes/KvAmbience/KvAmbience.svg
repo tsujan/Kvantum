@@ -1280,4 +1280,9 @@
 <use width="100%" height="100%" xlink:href="#button-focused-left" id="button-focused-right" transform="matrix(-1,0,0,1,160.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-focused-topleft" id="button-focused-topright" transform="matrix(-1,0,0,1,160.5,0)"/>
 <use width="100%" height="100%" xlink:href="#button-focused-bottomleft" id="button-focused-bottomright" transform="matrix(-1,0,0,1,160.5,0)"/>
+<g id="ebutton-focus-bottom" transform="translate(-15,313.75)">
+<path style="opacity:0;fill-rule:evenodd" d="m 173,476 h -32 v 12 h 32 z"/>
+<path style="opacity:.23;color:#000" d="m 157,480 c 13,0 16,-2 16,-2 h -32 c 0,0 3,2 16,2 z"/>
+</g>
+<path style="fill-rule:evenodd" id="expand-ebutton-focus" d="m 15,0 h 5 v 5 h -5 z"/>
 </svg>

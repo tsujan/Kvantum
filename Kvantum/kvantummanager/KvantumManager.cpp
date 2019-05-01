@@ -1113,7 +1113,9 @@ void KvantumManager::updateCombos()
                 {
                     palette = itemView->viewport()->palette();
                     palette.setColor (QPalette::Base,
-                                     QApplication::palette().color (QPalette::Base));
+                                      QApplication::palette().color (QPalette::Base));
+                    palette.setColor (QPalette::Window,
+                                      QApplication::palette().color (QPalette::Window));
                     itemView->viewport()->setPalette (palette);
                 }
             }
@@ -1122,6 +1124,8 @@ void KvantumManager::updateCombos()
             {
                 QPalette palette = widgets.at (j)->palette();
                 palette.setColor (QPalette::Window,
+                                  QApplication::palette().color (QPalette::Window));
+                palette.setColor (QPalette::Base,
                                   QApplication::palette().color (QPalette::Base));
                 widgets.at (j)->setPalette (palette);
             }
@@ -1132,6 +1136,8 @@ void KvantumManager::updateCombos()
                                   QApplication::palette().color (QPalette::Text));
                 palette.setColor (QPalette::Base,
                                   QApplication::palette().color (QPalette::Base));
+                palette.setColor (QPalette::Window,
+                                  QApplication::palette().color (QPalette::Window));
                 cv->setPalette (palette);
             }
         }

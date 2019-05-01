@@ -2639,8 +2639,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
         if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
-            && themeRndr_ && themeRndr_->isValid()
-            && specialCheckBoxExists("menu-"+ispec.element+suffix))
+            && elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
@@ -2699,8 +2698,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           suffix = "-normal";
         if (widget != nullptr // not QML
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-            && themeRndr_ && themeRndr_->isValid()
-            && specialCheckBoxExists("menu-"+ispec.element+suffix))
+            && elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-";
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
@@ -2761,25 +2759,22 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
         bool animate(true);
-        if (themeRndr_ && themeRndr_->isValid())
+        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
         {
-          if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+          animate = false;
+          if (widget != nullptr // not QML
+              && elementExists("menu-"+ispec.element+suffix))
           {
-            animate = false;
-            if (widget != nullptr // not QML
-                && specialCheckBoxExists("menu-"+ispec.element+suffix))
-            {
-              prefix = "menu-"; // make exception for menuitems
-            }
+            prefix = "menu-"; // make exception for menuitems
           }
-          else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
+        }
+        else if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
+        {
+          animate = false;
+          if (widget != nullptr // not QML
+              && elementExists("item-"+ispec.element+suffix))
           {
-            animate = false;
-            if (widget != nullptr // not QML
-                && specialCheckBoxExists("item-"+ispec.element+suffix))
-            {
-              prefix = "item-"; // make exception for viewitems
-            }
+            prefix = "item-"; // make exception for viewitems
           }
         }
         if (isWidgetInactive(widget))
@@ -2838,22 +2833,19 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           suffix = "-tristate-normal";
         else
           suffix = "-normal";
-        if (themeRndr_ && themeRndr_->isValid())
+        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
         {
-          if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
+          if (widget != nullptr // not QML
+              && elementExists("menu-"+ispec.element+suffix))
           {
-            if (widget != nullptr // not QML
-                && specialCheckBoxExists("menu-"+ispec.element+suffix))
-            {
-              prefix = "menu-";
-            }
+            prefix = "menu-";
           }
-          else if (widget != nullptr // not QML
-                   && qstyleoption_cast<const QStyleOptionViewItem*>(option)
-                   && specialCheckBoxExists("item-"+ispec.element+suffix))
-          {
-            prefix = "item-";
-          }
+        }
+        else if (widget != nullptr // not QML
+                 && qstyleoption_cast<const QStyleOptionViewItem*>(option)
+                 && elementExists("item-"+ispec.element+suffix))
+        {
+          prefix = "item-";
         }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
@@ -4049,9 +4041,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
            only if a toggled down arrow element exists */
         if (aStatus.startsWith("toggled"))
         {
-          static const bool hasToogledArrow(themeRndr_ && themeRndr_->isValid()
-                                            && themeRndr_->elementExists(dspec.element+"-down-toggled"));
-          if (!hasToogledArrow)
+          if (!elementExists(dspec.element+"-down-toggled"))
             aStatus.replace("toggled","pressed");
         }
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
@@ -4168,9 +4158,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           fspec = getFrameSpec(leGroup);
           ispec = getInteriorSpec(leGroup);
           const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
-          static bool const hasLineEditArrow(themeRndr_ && themeRndr_->isValid()
-                                             && themeRndr_->elementExists(dspec1.element+"-normal"));
-          if (hasLineEditArrow)
+          if (elementExists(dspec1.element+"-normal"))
             dspec = dspec1;
           if (leGroup == "ToolbarLineEdit"
               && enoughContrast(getFromRGBA(cspec_.textColor),
@@ -8261,9 +8249,7 @@ void Style::drawControl(QStyle::ControlElement element,
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
       /* if there's no header separator, use the right frame */
-      static const bool noHeaderSep(themeRndr_ && themeRndr_->isValid()
-                                    && !themeRndr_->elementExists(QStringLiteral("header-separator")));
-      if (noHeaderSep)
+      if (themeRndr_ && themeRndr_->isValid() && !elementExists(QStringLiteral("header-separator")))
         renderElement(painter, fspec.element + "-" + status + "-right", sep);
       else
         renderElement(painter,QStringLiteral("header-separator"),sep);
@@ -9263,14 +9249,8 @@ void Style::drawControl(QStyle::ControlElement element,
             renderFrame(painter,option->rect,fspec,fspec.element+"-default");
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
           }
-          else
-          {
-            static const bool hasFlatDefaultInd(themeRndr_ && themeRndr_->isValid()
-                                                && themeRndr_->elementExists(
-                                                   QStringLiteral("flat-button-default-indicator")));
-            if (hasFlatDefaultInd)
-              di = "flat-button-default-indicator";
-          }
+          else if (elementExists(QStringLiteral("flat-button-default-indicator")))
+            di = "flat-button-default-indicator";
           renderIndicator(painter,
                           option->rect,
                           fspec,dspec,di,option->direction,
@@ -12386,9 +12366,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
           if (ticklessSliderHandleSize_ == -1)
           {
             const interior_spec ispec = getInteriorSpec(QStringLiteral("SliderCursor"));
-            static const bool hasTicklessInd(themeRndr_ && themeRndr_->isValid()
-                                             && themeRndr_->elementExists(ispec.element+"-tickless-normal"));
-            if (hasTicklessInd)
+            if (elementExists(ispec.element+"-tickless-normal"))
             {
               if (tspec_.tickless_slider_handle_size > 0)
               {
@@ -15876,16 +15854,19 @@ bool Style::flatArrowExists(const QString &indicatorElement) const
   return false;
 }
 
-bool Style::specialCheckBoxExists(const QString &checkBoxName) const
+bool Style::elementExists(const QString &elementName) const
 {
-  if (specialCheckBoxes_.contains(checkBoxName))
-    return specialCheckBoxes_.value(checkBoxName);
-  if (themeRndr_->elementExists(checkBoxName))
+  if (themeRndr_ && themeRndr_->isValid())
   {
-    specialCheckBoxes_.insert(checkBoxName, true);
-    return true;
+    if (elements_.contains(elementName))
+      return elements_.value(elementName);
+    if (themeRndr_->elementExists(elementName))
+    {
+      elements_.insert(elementName, true);
+      return true;
+    }
+    elements_.insert(elementName, false);
   }
-  specialCheckBoxes_.insert(checkBoxName, false);
   return false;
 }
 
