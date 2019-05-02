@@ -14,6 +14,7 @@ V0.11.1
  * Removed redundant computations after showing a menu. Their results are remembered instead.
  * Added the missing disabled state of dials.
  * Since HDPI is supported by KDE's blur effect with Qt ≥ 5.12, disable Kvantum's workaround for those versions.
+ * Explicitly set the minimum Qt version to 5.9.0.
 
 V0.11.0
 ---------

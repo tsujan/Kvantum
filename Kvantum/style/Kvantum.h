@@ -28,9 +28,7 @@
 #include "drag/windowmanager.h"
 #include "themeconfig/ThemeConfig.h"
 #include "blur/blurhelper.h"
-#if QT_VERSION >= 0x050500
 #include "animation/animation.h"
-#endif
 
 // definitions shared by source files
 #define SLIDER_TICK_SIZE 5 // 10 at most
@@ -386,11 +384,9 @@ class Style : public QCommonStyle {
     /* The extra combo box width needed by frames and spacings. */
     int extraComboWidth(const QStyleOptionComboBox *opt, bool hasIcon) const;
 
-#if QT_VERSION >= 0x050500
     /* For transient scrollbars: */
     void startAnimation(Animation *animation) const;
     void stopAnimation(const QObject *target) const;
-#endif
 
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
@@ -402,9 +398,7 @@ class Style : public QCommonStyle {
     /* Removes a button from all special lists. */
     void removeFromSet(QObject *o);
 
-#if QT_VERSION >= 0x050500
     void removeAnimation(QObject *animation); // For transient scrollbars
-#endif
 
   private:
     QSvgRenderer *defaultRndr_, *themeRndr_;
@@ -497,9 +491,7 @@ class Style : public QCommonStyle {
     mutable QHash<const QString, bool>flatArrows_;
     mutable QHash<const QString, bool>elements_;
 
-#if QT_VERSION >= 0x050500
     mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars
-#endif
 };
 }
 

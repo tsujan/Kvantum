@@ -58,7 +58,7 @@
 #include <QSurfaceFormat>
 #include <QWindow>
 #include <QProxyStyle> // only inside setSurfaceFormat()
-#if QT_VERSION >= 0x050500 && (defined Q_WS_X11 || defined Q_OS_LINUX)
+#if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QtPlatformHeaders/QXcbWindowFunctions>
 #endif
 
@@ -202,15 +202,9 @@ Style::Style(bool useDark) : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-#if QT_VERSION >= 0x050600
   QSet<QByteArray> desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':').toSet();
   QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
   gtkDesktop_ = gtkDesktops.intersects(desktop);
-#else
-  QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
-  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-  gtkDesktop_ = gtkDesktops.contains(desktop);
-#endif
 
   if (tspec_.respect_DE)
   {
@@ -219,11 +213,7 @@ Style::Style(bool useDark) : QCommonStyle()
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
       //tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-#if QT_VERSION >= 0x050600
       if (desktop.contains("unity"))
-#else
-      if (QByteArray("unity") == desktop)
-#endif
       {
         // Link 'respect_DE' and composite settings only for Unity. Issue #128
         noComposite_ = true;
@@ -232,11 +222,7 @@ Style::Style(bool useDark) : QCommonStyle()
         tspec_.blurring = false;
       }
     }
-#if QT_VERSION >= 0x050600
     else if (desktop.contains("kde"))
-#else
-    else if (desktop == QByteArray("kde"))
-#endif
     {
       QString kdeGlobals = QString("%1/kdeglobals").arg(xdg_config_home);
       if (!QFile::exists(kdeGlobals))
@@ -291,11 +277,9 @@ Style::Style(bool useDark) : QCommonStyle()
   isKisSlider_ = false;
   pixelRatio_ = 1.0;
 
-#if QT_VERSION >= 0x050500
   qreal dpr = qApp->devicePixelRatio();
   if (dpr > 1.0)
     pixelRatio_ = dpr;
-#endif
 
   connect(progressTimer_, &QTimer::timeout, this, &Style::advanceProgressbar);
 
@@ -385,7 +369,6 @@ Style::Style(bool useDark) : QCommonStyle()
 
 Style::~Style()
 {
-#if QT_VERSION >= 0x050500
   QHash<const QObject*, Animation*>::iterator i = animations_.begin();
   while (i != animations_.end())
   {
@@ -399,7 +382,6 @@ Style::~Style()
       animation = nullptr;
     }
   }
-#endif
 
   /* all the following timers have "this" as their parent
      but are explicitly deleted here only to be listed */
@@ -820,7 +802,6 @@ void Style::advanceProgressbar()
   }
 }
 
-#if QT_VERSION >= 0x050500
 void Style::startAnimation(Animation *animation) const
 {
   stopAnimation(animation->target());
@@ -845,7 +826,6 @@ void Style::removeAnimation(QObject *animation)
   if (animation)
     animations_.remove(animation->parent());
 }
-#endif
 
 void Style::setAnimationOpacity()
 { //qDebug() << animationOpacity_;
@@ -1191,17 +1171,10 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
 }
 
 /* get the widest day/month string for the locale if needed */
-#if QT_VERSION >= 0x050700
 static QHash<const QLocale, QString> maxDay;
 static QHash<const QLocale, QString> maxMonth;
 static QHash<const QLocale, QString> maxFullDay;
 static QHash<const QLocale, QString> maxFullMonth;
-#else
-static QHash<const QString, QString> maxDay;
-static QHash<const QString, QString> maxMonth;
-static QHash<const QString, QString> maxFullDay;
-static QHash<const QString, QString> maxFullMonth;
-#endif
 static void getMaxDay(const QLocale l, bool full)
 {
   QString day;
@@ -1217,13 +1190,8 @@ static void getMaxDay(const QLocale l, bool full)
       day = theDay;
     }
   }
-#if QT_VERSION >= 0x050700
   if (full) maxFullDay.insert(l, day);
   else maxDay.insert(l, day);
-#else
-  if (full) maxFullDay.insert(l.bcp47Name(), day);
-  else maxDay.insert(l.bcp47Name(), day);
-#endif
 }
 static void getMaxMonth(const QLocale l, bool full)
 {
@@ -1240,13 +1208,8 @@ static void getMaxMonth(const QLocale l, bool full)
       month = theMonth;
     }
   }
-#if QT_VERSION >= 0x050700
   if (full) maxFullMonth.insert(l, month);
   else maxMonth.insert(l, month);
-#else
-  if (full) maxFullMonth.insert(l.bcp47Name(), month);
-  else maxMonth.insert(l.bcp47Name(), month);
-#endif
 }
 
 static inline QString spinMaxText(const QAbstractSpinBox *sp)
@@ -1255,12 +1218,8 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
   if (const QSpinBox *sb = qobject_cast<const QSpinBox*>(sp))
   {
     QLocale l = sp->locale();
-#if QT_VERSION >= 0x050300
     if (!sb->isGroupSeparatorShown())
       l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
-#else
-    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
-#endif
     QString maxStr = l.toString(sb->maximum());
     QString minStr = l.toString(sb->minimum());
     if (minStr.size() > maxStr.size())
@@ -1273,12 +1232,8 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
   else if (const QDoubleSpinBox *sb = qobject_cast<const QDoubleSpinBox*>(sp))
   {
     QLocale l = sp->locale();
-#if QT_VERSION >= 0x050300
     if (!sb->isGroupSeparatorShown())
       l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
-#else
-    l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
-#endif
     /* at first, only consider integers... */
     int max = sb->maximum();
     int min = sb->minimum();
@@ -1302,9 +1257,6 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
   {
     QLocale l = sp->locale();
     l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
-#if QT_VERSION < 0x050700
-    QString L = l.bcp47Name();
-#endif
     maxTxt = sb->displayFormat();
     QString twoDigits = l.toString(99);
     /* take into account leading zeros */
@@ -1335,7 +1287,6 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     maxTxt.replace(exp,twoDigits);
     /* time zone */
     maxTxt.replace("t",sb->dateTime().toString("t"));
-#if QT_VERSION >= 0x050700
     /* full day/month name */
     if (maxTxt.contains("eeee"))
     {
@@ -1358,29 +1309,6 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
       if (!maxMonth.contains(l)) getMaxMonth(l, false);
       maxTxt.replace("fff",maxMonth.value(l));
     }
-#else
-    if (maxTxt.contains("eeee"))
-    {
-      if (!maxFullDay.contains(L)) getMaxDay(l, true);
-      maxTxt.replace("eeee",maxFullDay.value(L));
-    }
-    if (maxTxt.contains("ffff"))
-    {
-      if (!maxFullMonth.contains(L)) getMaxMonth(l, true);
-      maxTxt.replace("ffff",maxFullMonth.value(L));
-    }
-    /* short day/month name */
-    if (maxTxt.contains("eee"))
-    {
-      if (!maxDay.contains(L)) getMaxDay(l, false);
-      maxTxt.replace("eee",maxDay.value(L));
-    }
-    if (maxTxt.contains("fff"))
-    {
-      if (!maxMonth.contains(L)) getMaxMonth(l, false);
-      maxTxt.replace("fff",maxMonth.value(L));
-    }
-#endif
   }
   if (!maxTxt.isEmpty())
   {
@@ -4525,12 +4453,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       break;
     }
 
-#if QT_VERSION < 0x050700
-    case PE_IndicatorTabTear :
-#else
     case PE_IndicatorTabTearRight :
     case PE_IndicatorTabTearLeft :
-#endif
     {
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("Tab"));
       renderElement(painter,dspec.element+"-tear",option->rect);
@@ -8028,7 +7952,6 @@ void Style::drawControl(QStyle::ControlElement element,
            so no transformation here */
         r.setRect(y, x, h, w);
       }
-#if QT_VERSION >= 0x050500
       /* WARNING: We can't rely on pixelMetric() to know the extent
          because it may not have a fixed value for transient scrollbars,
          depending on whether its argument "widget" is null or not. */
@@ -8072,7 +7995,6 @@ void Style::drawControl(QStyle::ControlElement element,
           ispec.element = ispec1.element;
         }
       }
-#endif
 
       if (!(option->state & State_Enabled))
       {
@@ -10902,7 +10824,6 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
       if (opt) {
         bool isTransient(false);
-#if QT_VERSION >= 0x050500
         if (option->state & State_Enabled)
         {
           QObject *styleObject = option->styleObject;
@@ -10967,7 +10888,6 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->setOpacity(opacity);
           }
         }
-#endif
 
         QStyleOptionSlider o(*opt);
         o.rect = subControlRect(CC_ScrollBar,opt,SC_ScrollBarSlider,widget);
@@ -12243,7 +12163,6 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_TabBarTabShiftVertical :
     case PM_TabBar_ScrollButtonOverlap : return 0;
 
-#if QT_VERSION >= 0x050500
     /* With transient scrollbars, we've removed arrows and put
        their frame around their contents. Here, we put transient
        scrollbars on top of scroll area by using a negative
@@ -12254,9 +12173,6 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         return -pixelMetric(PM_ScrollBarExtent,option,widget);
       return 0;
     }
-#else
-    case PM_ScrollView_ScrollBarSpacing : return 0;
-#endif
 
     case PM_TabBarScrollButtonWidth : {
       const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
@@ -12310,7 +12226,6 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     /* don't let a transient scrollbar overlap with the view frame */
     case PM_ScrollBarExtent :
     {
-#if QT_VERSION >= 0x050500
       if (styleHint(SH_ScrollBar_Transient,option,widget)
           /* compbo menus always give space to transient scrollbars */
           && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
@@ -12318,19 +12233,16 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         return tspec_.scroll_width
                + pixelMetric(PM_DefaultFrameWidth,option,widget);
       }
-#endif
       return tspec_.scroll_width;
     }
     case PM_ScrollBarSliderMin :
     {
-#if QT_VERSION >= 0x050500
       if (styleHint(SH_ScrollBar_Transient,option,widget)
           && (!widget || !widget->window()->inherits("QComboBoxPrivateContainer")))
       {
         return tspec_.scroll_min_extent
                 + 2*pixelMetric(PM_DefaultFrameWidth,option,widget);
       }
-#endif
       return tspec_.scroll_min_extent;
     }
 
@@ -12642,7 +12554,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
 */
 void Style::setMenuType(const QWidget *widget) const
 {
-#if QT_VERSION < 0x050500 || !(defined Q_WS_X11 || defined Q_OS_LINUX)
+#if !(defined Q_WS_X11 || defined Q_OS_LINUX)
   Q_UNUSED(widget);
   return;
 #else
@@ -12693,7 +12605,6 @@ int Style::styleHint(QStyle::StyleHint hint,
       return tspec_.scrollable_menu;
     }
     case SH_Menu_SloppySubMenus : return true;
-#if QT_VERSION >= 0x050500
     /* QMenu has some bugs regarding this timeout. It's also
        used when reentering a menuitem with submenu and even
        when SH_Menu_SubMenuPopupDelay is negative. Here, we
@@ -12711,7 +12622,6 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_Menu_SubMenuDontStartSloppyOnLeave : return true;
 
     case SH_Menu_SubMenuSloppySelectOtherActions : return true;
-#endif
     /* when set to true, only the last submenu is
        hidden on clicking anywhere outside the menu */
     case SH_Menu_FadeOutOnHide : return false;
@@ -12748,13 +12658,11 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_ScrollBar_LeftClickAbsolutePosition : return !hspec_.middle_click_scroll;
     case SH_ScrollBar_MiddleClickAbsolutePosition : return hspec_.middle_click_scroll;
 
-#if QT_VERSION >= 0x050500
     case SH_ScrollBar_Transient : {
       if (qobject_cast<const QGraphicsView*>(widget) && widget->hasMouseTracking())
         return false; // prevent artifacts in QGraphicsView
       return tspec_.transient_scrollbar;
     }
-#endif
 
     case SH_Slider_StopMouseOverSlider : return true;
     case SH_Slider_AbsoluteSetButtons : return Qt::LeftButton;
@@ -14599,12 +14507,8 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       else return QCommonStyle::subElementRect(element,option,widget);
     }
 
-#if QT_VERSION < 0x050700
-    case SE_TabBarTearIndicator :
-#else
     case SE_TabBarTearIndicatorRight :
     case SE_TabBarTearIndicatorLeft :
-#endif
     {
       QRect r;
       if (const QStyleOptionTab *tab = qstyleoption_cast<const QStyleOptionTab*>(option))
@@ -14614,7 +14518,6 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           case QTabBar::TriangularNorth:
           case QTabBar::RoundedSouth:
           case QTabBar::TriangularSouth:
-#if QT_VERSION >= 0x050700
             if (option->direction == Qt::RightToLeft)
             {
               if (element == SE_TabBarTearIndicatorLeft)
@@ -14627,21 +14530,16 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
               if (element == SE_TabBarTearIndicatorRight)
                 r.setRect(tab->rect.right() - 1, tab->rect.top(), 2, option->rect.height());
               else
-#endif
                 r.setRect(tab->rect.left(), tab->rect.top(), 2, option->rect.height());
-#if QT_VERSION >= 0x050700
             }
-#endif
             break;
           case QTabBar::RoundedWest:
           case QTabBar::TriangularWest:
           case QTabBar::RoundedEast:
           case QTabBar::TriangularEast:
-#if QT_VERSION >= 0x050700
             if (element == SE_TabBarTearIndicatorRight)
               r.setRect(tab->rect.left(), tab->rect.bottom() - 1, option->rect.width(), 2);
             else
-#endif
               r.setRect(tab->rect.left(), tab->rect.top(), option->rect.width(), 2);
             break;
           default: break;
@@ -15719,10 +15617,8 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
                            int alignment, const QPixmap &pixmap) const
 {
   qreal scale = pixelRatio_;
-#if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     scale = pixmap.devicePixelRatio();
-#endif
 
   QRect pixRect = alignedRect(QApplication::layoutDirection(), QFlag(alignment),
                               QSizeF(pixmap.size()/scale).toSize().boundedTo(rect.size()),
@@ -15747,10 +15643,8 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
     icnMode = QIcon::Selected;
 
   bool hdpi(false);
-#if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
-#endif
   QPixmap px = icon.pixmap(hdpi ? iconSize
                                 : (QSizeF(iconSize)*pixelRatio_).toSize(),
                            icnMode,iconstate);

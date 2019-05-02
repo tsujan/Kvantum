@@ -34,10 +34,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                           const QWidget *widget) const
 {
   bool hdpi(false);
-#if QT_VERSION >= 0x050500
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
-#endif
   const bool rtl(option != nullptr ? option->direction == Qt::RightToLeft
                                    : QApplication::layoutDirection() == Qt::RightToLeft);
   switch (standardIcon) {

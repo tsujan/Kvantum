@@ -4,7 +4,14 @@ CONFIG += qt \
           warn_on
 
 QT += svg
-greaterThan(QT_MAJOR_VERSION, 4): QT += x11extras
+greaterThan(QT_MAJOR_VERSION, 4) {
+  lessThan(QT_MAJOR_VERSION, 6) {
+    lessThan(QT_MINOR_VERSION, 9) {
+      error("Kvantum needs at least Qt 5.9.0")
+    }
+  }
+  QT += x11extras
+}
 
 TARGET = kvantum
 TEMPLATE = lib

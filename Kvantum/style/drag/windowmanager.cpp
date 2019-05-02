@@ -87,11 +87,9 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                , cursorOverride_ (false)
 #endif
 {
-#if QT_VERSION >= 0x050500
   qreal dpr = qApp->devicePixelRatio();
   if (dpr > 1.0)
     pixelRatio_ = dpr;
-#endif
   _appEventFilter = new AppEventFilter( this );
   qApp->installEventFilter (_appEventFilter);
 }
