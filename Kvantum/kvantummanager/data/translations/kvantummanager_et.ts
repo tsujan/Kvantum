@@ -1549,7 +1549,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2368"/>
         <source>Configuration saved.</source>
-        <translation>Seadistus on salvestatud</translation>
+        <translation>Seadistus on salvestatud.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2475"/>
