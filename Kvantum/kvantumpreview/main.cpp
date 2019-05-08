@@ -45,7 +45,7 @@ int main (int argc, char *argv[])
   viewer.installTranslator (&qtTranslator);
 
   QTranslator KPTranslator;
-  KPTranslator.load ("kvantumpreview_" + lang, DATADIR "/kvantumpreview/translations");
+  KPTranslator.load ("kvantumpreview_" + lang, QStringLiteral (DATADIR) + "/kvantumpreview/translations");
   viewer.installTranslator (&KPTranslator);
 
   KvantumPreview k (NULL);

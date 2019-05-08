@@ -1795,7 +1795,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
     if (hasDefaultThenme)
     {
         ui->comboBox->insertSeparator (1);
-        ui->comboBox->insertSeparator (1);
+        ui->comboBox->insertSeparator (1); // too short without combo menu
         if (updateAppThemes)
         {
             ui->appCombo->insertSeparator (1);

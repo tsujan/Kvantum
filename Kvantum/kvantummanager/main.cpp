@@ -114,7 +114,7 @@ int main (int argc, char *argv[])
     a.installTranslator (&qtTranslator);
 
     QTranslator KMTranslator;
-    KMTranslator.load ("kvantummanager_" + lang, DATADIR "/kvantummanager/translations");
+    KMTranslator.load ("kvantummanager_" + lang, QStringLiteral (DATADIR) + "/kvantummanager/translations");
     a.installTranslator (&KMTranslator);
 
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */
