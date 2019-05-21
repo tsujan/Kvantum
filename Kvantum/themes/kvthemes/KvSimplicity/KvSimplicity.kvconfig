@@ -47,7 +47,7 @@ animate_states=true
 
 [GeneralColors]
 window.color=#F0F0F0
-base.color=white
+base.color=#FAFAFA
 alt.base.color=#F0F0F0
 button.color=#F0F0F0
 light.color=white
@@ -188,7 +188,9 @@ text.margin.right=6
 text.margin.top=3
 text.margin.bottom=3
 frame.element=button
+focusFrame=true
 indicator.element=tab
+indicator.size=12
 text.normal.color=black
 text.focus.color=#0052aa
 min_width=4font

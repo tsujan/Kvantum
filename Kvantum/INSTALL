@@ -145,7 +145,7 @@ The contents of theme folders (if valid) can also be installed manually in the u
 
 Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
 	(1) The possible root installation paths are '/usr/share/Kvantum/$THEME_NAME/' and '/usr/share/themes/$THEME_NAME/Kvantum/' (if PREFIX=/usr). The first path will take priority over the second one if a theme is installed in both.
-	(2) The KDE color schemes should go to  '/usr/share/color-schemes/' for KF5 and '/usr/share/kde4/apps/color-schemes/' for KDE4.
+	(2) The KDE color schemes should go to  '/usr/share/color-schemes/'.
 	(3) If a theme is installed both as root and as user, the latter installation will take priority.
 
 Please see "Theme-Making.pdf" for more information on theme installation paths and their priorities.

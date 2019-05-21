@@ -75,7 +75,7 @@ Section                                      Meaning
 [TabFrame]                                   The frame for tab widgets.
 
 [TabBarFrame]                                The frame that is drawn for a
-                                             tab bar, ususally for a tab bar
+                                             tab bar, usually for a tab bar
                                              that isn't part of a tab widget.
 
 [TreeExpander]                               Indicators used to represent the
@@ -636,10 +636,10 @@ transient_scrollbar               true/false          Should scrollbars appear o
 transient_groove                  true/false          Should transient scrollbars have
                                                       translucent backgrounds when needed?
                                                       False by default but if "true", the
-                                                      base color willbe used for painting the
+                                                      base color will be used for painting the
                                                       background with 25% translucency.
 
-tree_branch_line                  true/false          Draw tree branch lines? Ther are not
+tree_branch_line                  true/false          Draw tree branch lines? They are not
                                                       drawn by default.
 
                                                       If this key is true, the color of
@@ -692,7 +692,7 @@ tooltip_delay                     integer             The delay, in milliseconds
 
 submenu_delay                     integer             The delay, in milliseconds, before
                                                       opening a submenu. 250 by default.
-                                                      -1 means opening submens only by
+                                                      -1 means opening submenus only by
                                                       clicking, while 0 means showing them
                                                       immediately.
 
@@ -901,7 +901,7 @@ scroll_jump_workaround            true/false          Qt5 has a bug that causes 
                            *** Other Sections ***
                            **********************
 
-inherits                          string              The name of a secion (in the same config
+inherits                          string              The name of a section (in the same config
                                                       file and without brackets) whose
                                                       configuration is also used for this one.
 

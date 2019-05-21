@@ -1,3 +1,7 @@
+V0.11.2
+---------
+ * Use native file dialog in Kvantum Manager.
+
 V0.11.1
 ---------
  * Added a key for removing Kvantum shadows from composited menus and tooltips (under DEs that give them shadow).
@@ -10,7 +14,7 @@ V0.11.1
  * Don't force bold or italic font on combo or menu-item texts (because finding longest texts of combos isn't CPU-friendly and combos can have menu popups).
  * Ignore window frame with dragging (less calculation for Qt and no jump under Enlightenment).
  * Set QStyle's standard palette to the Kvantum theme palette and make use of it instead of app palette (because app palette may not be reliable with some apps, like Qt Designer).
- * An effective way of finding menus that aren't drawn by kvantum (for excluding them from compensating for shadows). It works with Qt ≥ 5.12.
+ * An effective way of finding menus that aren't drawn by Kvantum (for excluding them from compensating for shadows). It works with Qt ≥ 5.12.
  * Removed redundant computations after showing a menu. Their results are remembered instead.
  * Added the missing disabled state of dials.
  * Since HDPI is supported by KDE's blur effect with Qt ≥ 5.12, disable Kvantum's workaround for those versions.
@@ -26,7 +30,7 @@ V0.11.0
 
 V0.10.10
 ---------
- * Don't move a menu that isn't drawn by kvantum (when a menu is drawn by a stylesheet, Qt lets QStyle polish it; hence the problem).
+ * Don't move a menu that isn't drawn by Kvantum (when a menu is drawn by a stylesheet, Qt lets QStyle polish it; hence the problem).
  * Reversed the above-mentioned workaround for now because, unfortunately, Qt doesn't provide a reliable way of distinguishing stylesheet menus at the moment they're shown.
  * Don't move detached menus when they're shown.
  * Support LibreOffice's new Qt5 skin (that's much better than the old Qt4 skin).
@@ -159,7 +163,7 @@ V0.10.6
  * Reverse the new default behavior of Qt5 submenus, due to which, submenus are closed when the cursor leaves all menus.
  * Handle disabled icons independently so that they're dim everywhere (even with KDE icon engine, which doesn't call generatedIconPixmap() with SVG symbolic icons).
  * Added a workaround for "selectable disabled view items" (Qt Creator can have such items with cmake projects).
- * Limit the menu check/redio box size to the small icon size and not to what QCommonStyle returns.
+ * Limit the menu check/radio box size to the small icon size and not to what QCommonStyle returns.
  * Added a key for bold active tab text.
  * Added a key for the degree of boldness (from 1 to 5; 3 means normally bold).
  * An optional "-tickless" element for the slider handle when the slider has no tick marks.
@@ -189,7 +193,7 @@ V0.10.5
  * A key for removing checkboxes from combo menus.
  * Set the QObject property "menu_shadow", which is a QList<int> containing left, top, right and bottom menu shadow thicknesses in that order.
  * If needed, set the window text color of menus to the normal menuitem text color because some apps may do weird things with menus.
- * Added a key (to Kvantum manager) to reduce window translucency or set it in themes that don't have a translucent SVG backround for windows.
+ * Added a key (to Kvantum manager) to reduce window translucency or set it in themes that don't have a translucent SVG background for windows.
  * Added a key for "embedded" tabs, which are half embedded in their widgets.
  * Separated the Qt4 code from the Qt5 one.
  * Defined a few standard Qt icons.
@@ -311,9 +315,9 @@ V0.9.6
  * Removed scrollbar add-line and sub-line frame and interior.
  * Add a key to join the active tab to its (inactive) adjacent tab(s). Also added support for tab separators.
  * Added a key for drawing spin indicators inside the spin line-edit.
- * When toobar buttons are grouped and one of the buttons is shown or hidden, update the toolbar.
+ * When toolbar buttons are grouped and one of the buttons is shown or hidden, update the toolbar.
  * Corrections to the states of toolbuttons with menu arrow.
- * Corrected blurring with HDPI because the HDPI tranlucency bug is fixed in Qt-5.6. Also tried to correct icon sizes for odd DPRs.
+ * Corrected blurring with HDPI because the HDPI translucency bug is fixed in Qt-5.6. Also tried to correct icon sizes for odd DPRs.
  * Set tab horizontal and vertical spaces according to tab frame thickness (which results in an appropriate space between close button and right frame).
  * Added an experimental hacking key for setting the icon size of LXQT's main menu when it isn't styled by LXQT.
  * Added "What's This?" to Kvantum Manager.
@@ -329,7 +333,7 @@ V0.9.5
  * Use the pressed state for focused non-editable comboboxes.
  * Don't enforce darkness on text editors.
  * Moved the Kvantum icon to the standard hicolor directory.
- * Made the submenu overlap accurate. (As a result, a hidden mistake in the calculation of menu/tootip shadow thickness is fixed too.)
+ * Made the submenu overlap accurate. (As a result, a hidden mistake in the calculation of menu/tooltip shadow thickness is fixed too.)
  * A workaround for Qt's messy RTL submenu positioning.
 
 V0.9.4
@@ -366,7 +370,7 @@ V0.9.2
  * Added a hacking key for not using bold font for the text of a default push button (to Kvantum Manager).
  * Added a general key for layout spacing, with a value between 2 and 10px (to Kvantum Manager).
  * Added two other extra themes (KvCurves3d and KvCurvesLight).
- * Used a more reliable boolean for determining whether a slider is horizontal.
+ * Used a more reliable Boolean for determining whether a slider is horizontal.
  * Support the #RRGGBBAA format for color names.
  * Use the combobox indicator element if its normal state exists.
  * Respect darkness only when the window color is dark enough.
@@ -376,7 +380,7 @@ V0.9.2
 V0.9.1
 ---------
  * A workaround for the rare occasion when the background of a Qt5 composited tooltip is filled by the window background color.
- * In the case of menus and tooltips, check compositing at the moment of their creaton (this fixes shadowless menus of KF5 desktop and panel).
+ * In the case of menus and tooltips, check compositing at the moment of their creation (this fixes shadowless menus of KF5 desktop and panel).
  * Always show text in KCapacityBar.
  * Added a general key for setting tooltip display delay.
  * Consider the possibility of color gradients in the case of view-items with hard-coded backgrounds when setting their texts.
@@ -506,7 +510,7 @@ V0.8.17
 
 V0.8.16
 ---------
- * A new key for drawng spin indicators vertically inside the spin line-edit.
+ * A new key for drawing spin indicators vertically inside the spin line-edit.
  * The left (or right for RTL) text margin of menuitems also includes their checkboxes and radiobuttons now.
  * Removed the 2-px frame thickness limit from menus and tooltips without compositing.
  * Allow different thicknesses for horizontal and vertical menu frames.
@@ -553,7 +557,7 @@ V0.8.13
 
 V0.8.12
 ---------
- * Added optional tab widget junctions for attachimg active tabs.
+ * Added optional tab widget junctions for attaching active tabs.
  * Draw disabled active tabs correctly.
  * Don't try to attach empty tabs (as in Kdenlive's track widget).
  * Try to attach the active tab to its tab widget even when the QStyle option of the tab widget frame doesn't exist (as in GoldenDict).
@@ -583,7 +587,7 @@ V0.8.10
 
 V0.8.9
 ---------
- * Added a workaround for menu paddings inherited from parent stylesheets (as in the context menu of VLC's palylist search lineedit).
+ * Added a workaround for menu paddings inherited from parent stylesheets (as in the context menu of VLC's playlist search lineedit).
  * No shadow for tooltips/menus that are already translucent (and keep track of those made translucent).
  * Added a key for double-click.
  * Blur the regions behind translucent menus/tooltips appropriately if blurring is enabled.
@@ -593,10 +597,10 @@ V0.8.9
 V0.8.8
 ---------
  * Changed the layout of the config page of Kvantum Manager.
- * Removed custom icons, except those for MDI titlebars (Kavntum isn't an icon theme after all).
+ * Removed custom icons, except those for MDI titlebars (Kvantum isn't an icon theme after all).
  * Added a key for slim toolbars.
  * Fixed the appearance of Konqueror's security icon on the right of its URL bar.
- * Enable/disable the compositing items of Kvatum Manager's config page correctly.
+ * Enable/disable the compositing items of Kvantum Manager's config page correctly.
 
 V0.8.7
 ---------
@@ -713,7 +717,7 @@ V0.6
 ---------
  * Whole windows and dialogs can be styled with an interior element now. The section [Window] is added for that.
  * Removed the redundant section [Widget].
- * Removed ugly flat backgrounds as far as possible when the window backround is styled.
+ * Removed ugly flat backgrounds as far as possible when the window background is styled.
 
 V0.5.3
 ---------
@@ -831,7 +835,7 @@ V0.1.2
  * Don't remove tab bottom frames; users could remove them if they want to.
  * Fixed the transparency problem of scrollbars.
  * Fixed tabbar scroll buttons by adjusting PM_TabBar_ScrollButtonOverlap and PM_TabBarScrollButtonWidth.
- * Don't press a tool buttton if only its arrow is pressed.
+ * Don't press a tool button if only its arrow is pressed.
  * A separate pressed or focused (hover) state for each spin button.
  * Treat arrows as icons for tool buttons.
  * Don't draw the interior of a Plasma spinbox.

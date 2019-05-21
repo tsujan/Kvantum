@@ -198,7 +198,7 @@ void KvantumManager::openTheme()
                                                           lastPath_,
                                                           QFileDialog::ShowDirsOnly
                                                           | QFileDialog::ReadOnly
-                                                          | QFileDialog::DontUseNativeDialog);
+                                                          /*| QFileDialog::DontUseNativeDialog*/);
     ui->lineEdit->setText (filePath);
     lastPath_ = filePath;
 }
