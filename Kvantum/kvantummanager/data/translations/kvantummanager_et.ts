@@ -407,7 +407,7 @@ Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation></translation>
+        <translation type="unfinished">&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="703"/>
@@ -429,7 +429,12 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation></translation>
+        <translation type="unfinished">Has effect only when the main menu is NOT styled by LXQt.
+
+Values less than 16 mean the default menu icon size.
+
+Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
+or through logging out and in again.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="764"/>
@@ -542,7 +547,8 @@ läbipaistev SVG taust vajalik.</translation>
         <location filename="../../kvantummanager.ui" line="1080"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation></translation>
+        <translation>Animatsiooni hääbumine 200 ms,
+kui mõne vidina olekut muudetakse, enamasti hiire abil.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1084"/>
@@ -692,7 +698,11 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation></translation>
+        <translation>Eemalda valitud teema kõigist
+kasutaja poolt kasutatud asukohtadest.
+
+See eemaldab ainult kasutaja teemad,
+juurkasutaja paigaldatu säilib.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="389"/>
@@ -735,7 +745,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Ikoonideta menüüelemendid?
+
+Vaikimisi võivad mõned olla ikooniga.
+
+Kui see on keelatud, vaata: 
+Mitmesugust → Võimalusel järgi töölaua sätteid</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="500"/>
@@ -802,7 +817,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Mõjutab menüüelemente ja päiseid.
+
+Vaikeväärtus on 16 px, aga
+mõned rakendused määravad selle ise.
+
+Kui see on keelatud, vaata: 
+Mitmesugust → Võimalusel järgi töölaua sätteid</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1195"/>
@@ -816,8 +837,8 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Mõjutab ikoonivaateid.
 
-Vaikeväärtus on 32 px, kuid mõned
-rakendused seavad selle ise. 
+Vaikeväärtus on 32 px, aga
+mõned rakendused seavad selle ise. 
 
 Kui see on keelatud, vaata: 
 Mitmesugust → Võimalusel järgi töölaua sätteid</translation>
@@ -953,7 +974,12 @@ When unchecked, single-click is preferred.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Kas aktiveerida vaateelemensid alati topeltklõpsuga?
+
+Kui märkimata, on eelistus üksikklõpsul.
+
+Kui see on keelatud, vaata: 
+Mitmesugust → Võimalusel järgi töölaua sätteid</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1651"/>
