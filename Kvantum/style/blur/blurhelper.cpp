@@ -33,7 +33,6 @@
 #include <X11/Xatom.h>
 #endif
 
-// BlurHelper is never called on wayland or without x11.
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS,
                         qreal contrast, qreal intensity, qreal saturation) : QObject (parent)
@@ -89,7 +88,7 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
     case QEvent::Show:
     case QEvent::Hide:
     case QEvent::Resize:
-    /* the theme may changed from
+    /* the theme may change from
        Kvantum and to it again */
     case QEvent::StyleChange: {
       QWidget* widget (qobject_cast<QWidget*>(object));
