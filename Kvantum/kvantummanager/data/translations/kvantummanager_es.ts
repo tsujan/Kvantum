@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="131"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencia</translation>
     </message>
 </context>
 <context>
@@ -510,12 +510,15 @@ Se marca automáticamente si el difuminado de ventanas está habilitado.</transl
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar sombras en menús ni la información sobre herramientas.
+
+Esto puede ser útil en las DEs que dan sombra a los menús y la
+información sobre herramientas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Menús e información sobre herramientas sin sombras</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
