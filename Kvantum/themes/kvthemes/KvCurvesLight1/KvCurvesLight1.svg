@@ -8,10 +8,10 @@
 <stop offset="1" style="stop-color:#fcfdfe"/>
 </linearGradient>
 <linearGradient id="linearGradient6250">
-<stop offset="0" style="stop-color:#ebebeb"/>
+<stop offset="0" style="stop-color:#e6e6e6"/>
 <stop offset="0.255" style="stop-color:#d7d7d7"/>
 <stop offset="0.75" style="stop-color:#cdcdcd"/>
-<stop offset="1" style="stop-color:#b4b4b4"/>
+<stop offset="1" style="stop-color:#bebebe"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(1,0,0,-1,-117,1896)" xlink:href="#linearGradient5042" id="linearGradient5026" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="340"/>
 <linearGradient gradientTransform="translate(-31,7.25)" xlink:href="#linearGradient3837" id="linearGradient6754" y1="1076.5001" x1="-25.001015" y2="1073.25" gradientUnits="userSpaceOnUse" x2="-25"/>
@@ -784,16 +784,16 @@
 <path style="fill:#fcfdfe;fill-rule:evenodd" d="m 115.25,703.75 h 6 v 48 h -6 z"/>
 <path style="fill:#c8c8c8;color:#000" d="m 115.25,703.75 v 48 h 2 v -48 z"/>
 </g>
+<g style="opacity:.95" id="menu-normal-bottomleft" transform="rotate(-90,135.25,684)">
+<path style="fill:#e2e3e4;fill-rule:evenodd" d="m 121.25,697.75 h -6 v 6 h 6 z"/>
+<path style="fill:#c8c8c8;color:#000" d="m 121.25,697.75 h -6 v 6 h 2 v -4 h 4 z"/>
+</g>
 <use width="450" height="1230" id="menu-normal-topright" xlink:href="#menu-normal-topleft" transform="rotate(90,179,674)"/>
 <use width="450" height="1230" id="menu-normal-right" xlink:href="#menu-normal-left" transform="matrix(-1,0,0,1,358,0)"/>
 <use width="450" height="1230" id="menu-normal-bottomright" xlink:href="#menu-normal-bottomleft" transform="matrix(-1,0,0,1,358,0)"/>
 <g style="opacity:.95" id="menu-normal-bottom" transform="rotate(-90,135.25,684)">
 <path style="fill:#e2e3e4;fill-rule:evenodd" d="m 115.25,703.75 h 6 v 48 h -6 z"/>
 <path style="fill:#c8c8c8;color:#000" d="m 115.25,703.75 v 48 h 2 v -48 z"/>
-</g>
-<g style="opacity:.95" id="menu-normal-bottomleft" transform="rotate(-90,135.25,684)">
-<path style="fill:#e2e3e4;fill-rule:evenodd" d="m 121.25,697.75 h -6 v 6 h 6 z"/>
-<path style="fill:#c8c8c8;color:#000" d="m 121.25,697.75 h -6 v 6 h 2 v -4 h 4 z"/>
 </g>
 <g id="mdi-maximize-focused" transform="translate(441.0515,-305.773)">
 <rect width="32" x="-412" y="1414.8866" height="32" style="opacity:0;fill-rule:evenodd"/>
