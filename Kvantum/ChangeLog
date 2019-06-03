@@ -1,6 +1,7 @@
 V0.11.2
 ---------
  * Use native file dialog in Kvantum Manager.
+ * Fixed toolbar horizontal extension indicator with HDPI.
 
 V0.11.1
 ---------

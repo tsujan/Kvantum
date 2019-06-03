@@ -41,7 +41,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
-      int s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
+      int s;
+      if (hdpi)
+        s = qRound(pixelRatio_*pixelRatio_*static_cast<qreal>(dspec.size));
+      else
+        s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
