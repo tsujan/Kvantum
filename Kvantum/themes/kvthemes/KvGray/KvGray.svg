@@ -422,7 +422,7 @@
 </linearGradient>
 <linearGradient id="linearGradient7025">
 <stop offset="0" style="stop-color:#f0f0f0;stop-opacity:.275"/>
-<stop offset="1" style="stop-color:#969696"/>
+<stop offset="1" style="stop-color:#afafaf"/>
 </linearGradient>
 <linearGradient id="linearGradient7980">
 <stop offset="0" style="stop-color:#f0f0f0"/>
@@ -472,7 +472,7 @@
 <stop offset="1" style="stop-color:#d2d2d2"/>
 </linearGradient>
 <linearGradient id="linearGradient7045">
-<stop offset="0" style="stop-color:#969696"/>
+<stop offset="0" style="stop-color:#afafaf"/>
 <stop offset="1" style="stop-color:#828282"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient6560" id="linearGradient7052" y1="247.77303" x1="660.96808" y2="262.3606" gradientUnits="userSpaceOnUse" x2="660.96808"/>
@@ -1098,7 +1098,7 @@
 </g>
 <ellipse cx="660.96808" cy="255.0668" rx="4.5078058" ry="7.2937827" style="opacity:.35;fill:none;stroke:url(#linearGradient5688);color:#000;stroke-width:.819" transform="matrix(1.5528926,0,0,0.95973988,-826.16244,159.45222)"/>
 </g>
-<path style="fill:#5a5a5a" id="button-default-indicator" d="m 442.3445,107.3558 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
+<path style="opacity:.35" id="button-default-indicator" d="m 442.3445,107.3558 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
 <path style="fill:url(#linearGradient5561)" id="window-normal" d="M 60,1317.5 H 92.5 V 1350 H 60 Z"/>
 <path style="fill:url(#linearGradient5595)" id="toolbar-normal" d="m 280,98 h 30 v 30 h -30 z"/>
 <path style="opacity:0" id="toolbar-normal-bottomright" d="m 315,128 h -5 v 5 h 5 z"/>

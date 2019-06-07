@@ -26,6 +26,7 @@
 #include <QToolBar>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QCommandLinkButton>
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProgressBar>
@@ -68,7 +69,7 @@
 #define TOOL_BUTTON_ARROW_MARGIN 2
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
-#define LIMITED_EXPANSION 12 // when the frame expansion should be limited
+#define LIMITED_EXPANSION 14 // when the frame expansion should be limited
 #define MIN_CONTRAST_RATIO 3.5
 
 #define OPACITY_STEP 20 // percent
@@ -8984,8 +8985,18 @@ void Style::drawControl(QStyle::ControlElement element,
             drawPrimitive(PE_Frame,option,painter,widget);
           break;
         }
-        // KColorButton (color button in general)
-        if (opt->text.size() == 0 && opt->icon.isNull()) fspec.expansion = 0;
+
+        if (opt->text.size() == 0 && opt->icon.isNull())
+        {
+          if (qobject_cast<const QCommandLinkButton*>(widget))
+          { // see eventFiltering.cpp -> Style::eventFilter()
+            if (hasExpandedBorder(fspec))
+              fspec.expansion = 0;
+            else
+              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+          }
+          else fspec.expansion = 0; // KColorButton (color button in general)
+        }
         if (!(option->state & State_Enabled))
         {
           status = "normal";

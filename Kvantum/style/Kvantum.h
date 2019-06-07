@@ -101,40 +101,40 @@ class Style : public QCommonStyle {
     virtual bool eventFilter(QObject *o, QEvent *e);
 
     virtual int pixelMetric(QStyle::PixelMetric metric,
-                            const QStyleOption *option = 0,
-                            const QWidget *widget = 0) const;
+                            const QStyleOption *option = nullptr,
+                            const QWidget *widget = nullptr) const;
     virtual QRect subElementRect(QStyle::SubElement element,
                                  const QStyleOption *option,
-                                 const QWidget *widget = 0) const;
+                                 const QWidget *widget = nullptr) const;
     virtual QRect subControlRect(QStyle::ComplexControl control,
                                  const QStyleOptionComplex *option,
                                  QStyle::SubControl subControl,
-                                 const QWidget *widget = 0) const;
+                                 const QWidget *widget = nullptr) const;
     QSize sizeFromContents(QStyle::ContentsType type,
                            const QStyleOption *option,
                            const QSize &contentsSize,
-                           const QWidget *widget = 0) const;
+                           const QWidget *widget = nullptr) const;
 
     virtual void drawPrimitive(QStyle::PrimitiveElement element,
                                const QStyleOption *option,
                                QPainter *painter,
-                               const QWidget *widget = 0) const;
+                               const QWidget *widget = nullptr) const;
     virtual void drawControl(QStyle::ControlElement element,
                              const QStyleOption *option,
                              QPainter *painter,
-                             const QWidget *widget = 0) const;
+                             const QWidget *widget = nullptr) const;
     virtual void drawComplexControl(QStyle::ComplexControl control,
                                     const QStyleOptionComplex *option,
                                     QPainter *painter,
-                                    const QWidget *widget = 0) const;
+                                    const QWidget *widget = nullptr) const;
     virtual int styleHint(QStyle::StyleHint hint,
-                          const QStyleOption *option = 0,
-                          const QWidget *widget = 0,
-                          QStyleHintReturn *returnData = 0) const;
+                          const QStyleOption *option = nullptr,
+                          const QWidget *widget = nullptr,
+                          QStyleHintReturn *returnData = nullptr) const;
     virtual QStyle::SubControl hitTestComplexControl(QStyle::ComplexControl control,
                                                      const QStyleOptionComplex *option,
                                                      const QPoint &position,
-                                                     const QWidget *widget = 0) const;
+                                                     const QWidget *widget = nullptr) const;
 
     virtual QPixmap generatedIconPixmap(QIcon::Mode iconMode,
                                         const QPixmap &pixmap,
@@ -148,8 +148,8 @@ class Style : public QCommonStyle {
                                 int alignment, const QPixmap &pixmap) const;
 
     QIcon standardIcon(QStyle::StandardPixmap standardIcon,
-                       const QStyleOption *option = 0,
-                       const QWidget *widget = 0) const;
+                       const QStyleOption *option = nullptr,
+                       const QWidget *widget = nullptr) const;
 
     enum CustomElements {
       CE_Kv_KCapacityBar = CE_CustomBase + 0x00FFFF00,
