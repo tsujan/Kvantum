@@ -718,6 +718,11 @@ fill_rubberband                   true/false          Always fill the rubber-ban
                                                       drop rectangles for movable toolbars
                                                       and dock widgets are hollow.
 
+remove_extra_frames               true/false          Some apps may draw extra generic frames
+                                                      around some contents. They will be
+                                                      removed if this key is set to true. Its
+                                                      default value is false.
+
 dark_titlebar                     true/false          Should a dark titlebar be requested
                                                       under Gtk desktops like Gnome? Although
                                                       the default is "false", it is good to

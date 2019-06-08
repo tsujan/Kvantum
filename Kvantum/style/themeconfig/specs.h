@@ -70,6 +70,8 @@ typedef struct {
   int tab_button_extra_margin;
   /* should the active tab text be bold */
   bool bold_active_tab;
+  /* don't draw extra frames (some apps may have them)*/
+  bool remove_extra_frames;
   /* raise and group neighbor toolbar buttons
      (which are the immediate children of their toolbar) */
   bool group_toolbar_buttons;
@@ -480,6 +482,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.no_inactive_tab_expansion = false;
   tspec.tab_button_extra_margin = 0;
   tspec.bold_active_tab = false;
+  tspec.remove_extra_frames = false;
   tspec.group_toolbar_buttons = false;
   tspec.toolbar_item_spacing = 0;
   tspec.toolbar_interior_spacing = 0;

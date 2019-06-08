@@ -778,6 +778,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("bold_active_tab"));
   r.bold_active_tab = v.toBool();
 
+  v = getValue(KSL("General"),KSL("remove_extra_frames"));
+  r.remove_extra_frames = v.toBool();
+
   v = getValue(KSL("General"),KSL("group_toolbar_buttons"));
   r.group_toolbar_buttons = v.toBool();
 

@@ -3157,6 +3157,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                        && (!sa->viewport()
                            || (sa->viewport()->backgroundRole() != QPalette::Window
                                && sa->viewport()->backgroundRole() != QPalette::Button)));
+        if (!hasFlatBg && tspec_.remove_extra_frames) break;
         if (widget && widget->hasFocus() && hasFlatBg
             && !widget->inherits("QWellArray")) // color rects always have focus!
         {

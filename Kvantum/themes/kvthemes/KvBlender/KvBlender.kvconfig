@@ -49,6 +49,7 @@ button_contents_shift=false
 groupbox_top_label=false
 hide_combo_checkboxes=false
 joined_inactive_tabs=true
+remove_extra_frames=true
 layout_margin=4
 layout_spacing=2
 no_inactiveness=false

@@ -3,6 +3,7 @@ V0.11.2
  * Use native file dialog in Kvantum Manager.
  * Fixed toolbar horizontal extension indicator with HDPI.
  * Added a low-contrast theme (KvBlender) inspired by Blender.
+ * Added a key to remove extra generic frames that some apps may draw.
 
 V0.11.1
 ---------
