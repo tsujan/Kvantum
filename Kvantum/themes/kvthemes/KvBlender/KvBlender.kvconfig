@@ -27,7 +27,7 @@ textless_progressbar=false
 progressbar_thickness=8
 menubar_mouse_tracking=true
 toolbutton_style=0
-spread_header=true
+spread_header=false
 double_click=false
 translucent_windows=false
 blurring=false
@@ -105,7 +105,7 @@ transparent_arrow_button=true
 disabled_icon_opacity=100
 lxqtmainmenu_iconsize=0
 middle_click_scroll=false
-no_selection_tint=false
+no_selection_tint=true
 normal_default_pushbutton=false
 opaque_colors=false
 single_top_toolbar=false
@@ -199,12 +199,11 @@ text.focus.color=#e1e1e1
 inherits=PanelButtonCommand
 frame=true
 interior=false
-frame.element=dock
-interior.element=dock
-frame.top=1
-frame.bottom=1
-frame.left=1
-frame.right=1
+frame.element=common
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 
 [LineEdit]
 inherits=PanelButtonCommand
@@ -393,17 +392,15 @@ frame.expansion=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
-interior=false
-frame.element=menubaritem
-frame.top=0
-frame.bottom=2
-frame.left=2
-frame.right=2
-text.margin.left=1
-text.margin.right=4
-text.margin.top=2
+interior=true
+frame=false
+interior.element=menubaritem
+text.margin.left=5
+text.margin.right=5
+text.margin.top=3
+text.margin.bottom=3
 text.normal.color=black
-text.focus.color=#e6e6e6
+text.focus.color=black
 frame.expansion=0
 
 [TitleBar]
