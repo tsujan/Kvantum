@@ -78,6 +78,7 @@ force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false
 transparent_arrow_button=true
+lxqtmainmenu_iconsize=22
 
 [PanelButtonCommand]
 frame=true

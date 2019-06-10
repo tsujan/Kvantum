@@ -58,7 +58,7 @@ class KvComboItemDelegate : public QItemDelegate
       margin_ = margin;
     }
 
-    virtual ~KvComboItemDelegate(void) {}
+    virtual ~KvComboItemDelegate() {}
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
     {
@@ -68,12 +68,12 @@ class KvComboItemDelegate : public QItemDelegate
         QItemDelegate::paint(painter, option, index);
     }
 
-    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const
+    virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
     {
       QSize size(proxy_ ? proxy_.data()->sizeHint(option, index)
                         : QItemDelegate::sizeHint(option, index));
       if (size.isValid())
-         size.rheight() += 2*margin_;
+        size.rheight() += 2*margin_;
       return size;
     }
 

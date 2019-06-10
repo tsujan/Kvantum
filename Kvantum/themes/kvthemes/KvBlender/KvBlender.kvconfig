@@ -104,7 +104,7 @@ iconless_pushbutton=false
 iconless_menu=false
 transparent_arrow_button=true
 disabled_icon_opacity=100
-lxqtmainmenu_iconsize=0
+lxqtmainmenu_iconsize=22
 middle_click_scroll=false
 no_selection_tint=true
 normal_default_pushbutton=false
@@ -216,6 +216,8 @@ frame.expanded.left=1
 frame.expanded.right=1
 text.margin.left=5
 text.margin.right=5
+indicator.size=14
+indicator.element=carrow
 frame.expansion=3.4font
 
 [DropDownButton]
@@ -421,7 +423,6 @@ inherits=LineEdit
 text.focus.color=black
 text.toggle.color=black
 text.press.color=black
-indicator.element=carrow
 
 [Menu]
 inherits=PanelButtonCommand
