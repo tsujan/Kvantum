@@ -318,6 +318,11 @@ inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
 interior.element=progress-pattern
+frame.expandedElement=progressP
+frame.expanded.top=1
+frame.expanded.bottom=1
+frame.expanded.left=1
+frame.expanded.right=1
 
 [ItemView]
 inherits=PanelButtonCommand

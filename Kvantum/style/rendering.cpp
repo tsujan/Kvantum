@@ -243,8 +243,7 @@ void Style::renderFrame(QPainter *painter,
   else if (count > 1)
   {
     state = "-" + list.at(count - 1);
-    QStringList states;
-    states << QStringLiteral("-normal") << QStringLiteral("-focused") << QStringLiteral("-pressed") << QStringLiteral("-toggled");
+    static const QStringList states = {QStringLiteral("-normal"), QStringLiteral("-focused"), QStringLiteral("-pressed"), QStringLiteral("-toggled"), QStringLiteral("-disabled")}; // the disabled state is for CE_ProgressBarContents
     if (!states.contains(state))
       state = QString();
   }

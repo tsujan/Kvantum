@@ -14331,7 +14331,7 @@ void Style::renderFrame(QPainter *painter,
   {
     state = "-" + list.at(count - 1);
     QStringList states;
-    states << "-normal" << "-focused" << "-pressed" << "-toggled";
+    states << "-normal" << "-focused" << "-pressed" << "-toggled" << "-disabled";
     if (!states.contains(state))
       state = QString();
   }

@@ -4,6 +4,7 @@ V0.11.2
  * Fixed toolbar horizontal extension indicator with HDPI.
  * Added a low-contrast theme (KvBlender) inspired by Blender.
  * Added a key to remove extra generic frames that some apps may draw.
+ * Also consider the "disabled" state when drawing rounded frames with separate expanded frame elements (it's used by progressbar indicator).
 
 V0.11.1
 ---------
