@@ -5,6 +5,7 @@ V0.11.2
  * Added a low-contrast theme (KvBlender) inspired by Blender.
  * Added a key to remove extra generic frames that some apps may draw.
  * Also consider the "disabled" state when drawing rounded frames with separate expanded frame elements (it's used by progressbar indicator).
+ * Exclude toolbars whose appearances are modified by stylesheets from stylable toolbars.
 
 V0.11.1
 ---------

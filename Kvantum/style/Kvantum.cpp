@@ -995,6 +995,9 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
   if (!tb
       || w->autoFillBackground()
       || w->findChild<QTabBar*>() // practically not a toolbar (Kaffeine's sidebar)
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      || w->testAttribute(Qt::WA_StyleSheetTarget) // not drawn by Kvantum (CE_ToolBar may not be called)
+#endif
       || isPlasma_)
   {
     return false;
