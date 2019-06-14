@@ -15214,11 +15214,9 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                              option->rect);
         }
         case SC_DialHandle : {
-          const QStyleOptionSlider *opt =
-            qstyleoption_cast<const QStyleOptionSlider*>(option);
-
-          if (opt) // taken from Qtcurve
-          {
+          if (const QStyleOptionSlider *opt =
+              qstyleoption_cast<const QStyleOptionSlider*>(option))
+          { // adapted from Qtcurve
             qreal angle(0);
             if (opt->maximum == opt->minimum)
               angle = M_PI/2;
@@ -15232,7 +15230,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 angle = (M_PI*8 - fraction*10*M_PI)/6;
             }
             QRect r(option->rect);
-            // Outer circle...
+            /* containing rectangle */
             if (r.width() > r.height())
             {
               r.setLeft(r.x() + (r.width()-r.height())/2);
@@ -15246,13 +15244,13 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             QPoint center = r.center();
             int handleSize = r.width()/5;
             //const qreal radius = 0.5*(r.width() - handleSize);
+            /* give 1/10 of the width to notches */
             const qreal radius = 0.5*static_cast<qreal>(r.width() - 2*handleSize);
             center += QPoint(qRound(radius*qCos(angle)), -qRound(radius*qSin(angle)));
             r = QRect(r.x(), r.y(), handleSize, handleSize);
             r.moveCenter(center);
             return r;
           }
-
         }
         /* Falls through. */
 

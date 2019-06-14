@@ -105,7 +105,7 @@ transparent_arrow_button=true
 frame=true
 frame.element=button
 frame.top=3
-frame.bottom=5
+frame.bottom=4
 frame.left=3
 frame.right=3
 interior=true
@@ -130,6 +130,7 @@ text.margin.left=3
 text.margin.right=3
 min_width=+0.2font
 min_height=+0.2font
+frame.expansion=10
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
@@ -249,6 +250,7 @@ frame.top=3
 frame.bottom=5
 frame.left=3
 frame.right=3
+frame.expansion=0
 
 [TreeExpander]
 inherits=PanelButtonCommand
@@ -259,11 +261,14 @@ indicator.element=tree
 
 [HeaderSection]
 inherits=PanelButtonCommand
-frame.top=2
+frame.element=header
+interior.element=header
+frame.top=3
 frame.bottom=3
-frame.left=2
-frame.right=2
+frame.left=3
+frame.right=3
 text.shadow=false
+frame.expansion=0
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -284,6 +289,7 @@ frame.right=0
 frame.top=0
 frame.bottom=2
 text.shadow=false
+frame.expansion=0
 
 [Slider]
 inherits=PanelButtonCommand
@@ -293,6 +299,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+frame.expansion=0
 
 [SliderCursor]
 inherits=PanelButtonCommand
@@ -345,6 +352,7 @@ text.press.color=white
 text.toggle.color=white
 text.shadow=false
 min_height=0
+frame.expansion=0
 
 [Splitter]
 indicator.size=32
@@ -390,6 +398,7 @@ frame.right=2
 text.shadow=false
 min_width=0
 min_height=0
+frame.expansion=0
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -397,6 +406,7 @@ interior=false
 frame=true
 frame.element=none
 frame.bottom=1
+frame.expansion=0
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -416,6 +426,7 @@ text.focus.color=black
 text.shadow=false
 min_width=0
 min_height=0
+frame.expansion=0
 
 [TitleBar]
 inherits=PanelButtonCommand
