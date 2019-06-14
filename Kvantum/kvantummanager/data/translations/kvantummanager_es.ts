@@ -19,13 +19,13 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Instalar/actualizar temas</translation>
+        <translation>Instalar/Actualizar temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; viene con muchos temas, pero también se pueden instalar temas externos para que los use.
-Aquí puede elegir una carpeta de temas y luego pulsar el botón de abajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; viene con una gran variedad de temas, pero también se pueden instalarse temas externos.
+Aquí puede elegir una carpeta de temas y luego pulsar el botón ubicado debajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -49,7 +49,7 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Cambiar/borrar temas</translation>
+        <translation>Cambiar/Borrar tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
@@ -59,7 +59,7 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Borrar el tema</translation>
+        <translation>Borrar este tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -67,15 +67,15 @@ Kvantum puede usar además de los suyos propios.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Hace que Kvantum use este tema.
+        <translation>Utilizar este tema en Kvantum!
 
-El botón inhabilitado indica que el
-tema ya está siendo usado.</translation>
+Si el botón se encuentra inhabilitado
+significa que el tema ya está en uso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Usar el tema</translation>
+        <translation>Usar este tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
