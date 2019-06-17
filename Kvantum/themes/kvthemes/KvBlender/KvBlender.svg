@@ -613,17 +613,12 @@
 <use width="100%" height="100%" style="opacity:.68" id="tab-close-focused" xlink:href="#tab-close-pressed" transform="translate(-24)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(78)"/>
 <g id="menubar-normal-bottomleft">
-<rect width="5" x="825" y="-305" height="5" style="fill:#505050" transform="matrix(0,1,-1,0,0,0)"/>
+<path style="opacity:0" d="m 300,829 v 1 h 5 v -1 h -5 z "/>
 <path style="fill:#6e6e6e" d="m 825,-305 h 4 v 5 h -4 z" transform="rotate(90)"/>
+<path style="fill:#505050" d="m 300,828 v 1 h 5 v -1 z"/>
 </g>
-<g id="menubar-normal-bottom" transform="translate(5)">
-<rect width="5" x="825" y="-305" height="5" style="fill:#505050" transform="rotate(90)"/>
-<path style="fill:#6e6e6e" d="m 825,-305 h 4 v 5 h -4 z" transform="rotate(90)"/>
-</g>
-<g id="menubar-normal-bottomright" transform="translate(10)">
-<rect width="5" x="825" y="-305" height="5" style="fill:#505050" transform="rotate(90)"/>
-<path style="fill:#6e6e6e" d="m 825,-305 h 4 v 5 h -4 z" transform="rotate(90)"/>
-</g>
+<use width="100%" height="100%" xlink:href="#menubar-normal-bottomleft" id="menubar-normal-bottom" transform="translate(5)"/>
+<use width="100%" height="100%" xlink:href="#menubar-normal-bottomleft" id="menubar-normal-bottomright" transform="translate(10)"/>
 <g id="button-focus-bottom">
 <path style="opacity:0;paint-order:normal;fill-rule:evenodd" d="m 135,865 h 30 v 3 h -30 z"/>
 <path style="opacity:.3;paint-order:normal;fill:#fff;fill-rule:evenodd" d="m 135,865 h 30 c 0,0 -8.75,1 -15,1 -6.25,0 -15,-1 -15,-1 z"/>

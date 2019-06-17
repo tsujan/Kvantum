@@ -33,6 +33,7 @@ groupbox_top_label=true
 hide_combo_checkboxes=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
+remove_extra_frames=true
 large_icon_size=32
 layout_margin=4
 layout_spacing=2
@@ -88,13 +89,14 @@ disabled_icon_opacity=100
 force_size_grip=false
 iconless_menu=false
 iconless_pushbutton=false
-lxqtmainmenu_iconsize=0
+lxqtmainmenu_iconsize=22
 no_selection_tint=false
 normal_default_pushbutton=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=true
 middle_click_scroll=false
 opaque_colors=false
+transparent_arrow_button=true
 
 [PanelButtonCommand]
 frame.top=3
