@@ -3144,6 +3144,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
 
+        // -> polish(QWidget *widget))
+        bool hasFlatBg(sa && themeRndr_ && themeRndr_->isValid()
+                       && (sa->backgroundRole() == QPalette::Window
+                           || sa->backgroundRole() == QPalette::Button)
+                       && (!sa->viewport()
+                           || (sa->viewport()->backgroundRole() != QPalette::Window
+                               && sa->viewport()->backgroundRole() != QPalette::Button)));
+        if (!hasFlatBg && tspec_.remove_extra_frames) break;
+
         frame_spec fspec = getFrameSpec(QStringLiteral("GenericFrame"));
         fspec.expansion = 0;
 
@@ -3153,14 +3162,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         QString fStatus = "normal";
-        // -> polish(QWidget *widget))
-        bool hasFlatBg(sa && themeRndr_ && themeRndr_->isValid()
-                       && (sa->backgroundRole() == QPalette::Window
-                           || sa->backgroundRole() == QPalette::Button)
-                       && (!sa->viewport()
-                           || (sa->viewport()->backgroundRole() != QPalette::Window
-                               && sa->viewport()->backgroundRole() != QPalette::Button)));
-        if (!hasFlatBg && tspec_.remove_extra_frames) break;
         if (widget && widget->hasFocus() && hasFlatBg
             && !widget->inherits("QWellArray")) // color rects always have focus!
         {
