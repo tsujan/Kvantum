@@ -203,6 +203,7 @@ frame.right=3
 text.normal.color=white
 text.focus.color=#00e6ff
 text.toggle.color=white
+focusFrame=true
 frame.expansion=12
 
 [TabFrame]

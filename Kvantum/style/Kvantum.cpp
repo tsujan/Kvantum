@@ -3163,7 +3163,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         QString fStatus = "normal";
         if (widget && widget->hasFocus() && hasFlatBg
-            && !widget->inherits("QWellArray")) // color rects always have focus!
+            && !widget->inherits("QWellArray") // color rects always have focus!
+            && elementExists(fspec.element+"-focused-top"))
         {
           fStatus = "focused";
         }

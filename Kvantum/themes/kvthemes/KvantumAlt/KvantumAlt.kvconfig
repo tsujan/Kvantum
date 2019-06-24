@@ -197,6 +197,7 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+focusFrame=true
 
 [TabFrame]
 inherits=PanelButtonCommand

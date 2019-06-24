@@ -105,7 +105,7 @@
 <linearGradient gradientTransform="matrix(1,0,0,-1,42,1946)" xlink:href="#linearGradient5041" id="linearGradient5017" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="341.5"/>
 <linearGradient gradientTransform="matrix(0,1,1,0,-626,211.5)" xlink:href="#linearGradient4729" id="linearGradient6877" y1="669.5" x1="102.5" y2="669.5" gradientUnits="userSpaceOnUse" x2="126.5"/>
 <linearGradient id="linearGradient6250">
-<stop offset="0" style="stop-color:#4f4f51" id="stop6252"/>
+<stop offset="0" style="stop-color:#4b4b4d" id="stop6252"/>
 <stop offset="0.25" style="stop-color:#414143" id="stop5102"/>
 <stop offset="0.75" style="stop-color:#373739" id="stop5104"/>
 <stop offset="1" style="stop-color:#2c2c2c" id="stop6254"/>
@@ -148,13 +148,13 @@
 <linearGradient gradientTransform="translate(-31,7.25)" xlink:href="#linearGradient3837" id="linearGradient6748" y1="1084.5" x1="-20" y2="1084.5" gradientUnits="userSpaceOnUse" x2="-12.750015"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5316" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5314" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4993" y1="126" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4993" y1="125.5" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5032" y1="652.5" x1="130" y2="652.5" gradientUnits="userSpaceOnUse" x2="145"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4997" y1="126" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4995" y1="126" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4999" y1="126" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4997" y1="125.5" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4995" y1="125.5" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient4999" y1="125.5" x1="14.5" y2="150" gradientUnits="userSpaceOnUse" x2="14.5"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7667" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5052" y1="818" x1="29.75" y2="842" x2="29.75" gradientUnits="userSpaceOnUse"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5052" y1="817.5" x1="29.75" y2="842" x2="29.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5036" y1="784" x1="95.75" y2="808" x2="95.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7669" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5016" y1="784" x1="29.75" y2="808" x2="29.75" gradientUnits="userSpaceOnUse"/>
@@ -591,20 +591,20 @@
 <circle cx="225" cy="615" style="fill:#ff6a00;color:#000" id="path6309-3" r="3.5"/>
 </g>
 <g style="fill-rule:evenodd">
-<g style="fill:#323232">
+<g style="fill:#313131">
 <path id="border-button-normal-left" d="m -54.5,158 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal" d="m -38,158 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal-right" d="m -21.5,158 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <path style="fill:#4b4b4b" id="border-button-focused-left" d="m -54.5,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled-left" d="m -54.5,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#323232" id="border-button-pressed-left" d="m -54.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#313131" id="border-button-pressed-left" d="m -54.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#4b4b4b" id="border-button-focused" d="m -38,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled" d="m -38,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#323232" id="border-button-pressed" d="m -38,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#313131" id="border-button-pressed" d="m -38,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#4b4b4b" id="border-button-focused-right" d="m -21.5,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled-right" d="m -21.5,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#323232" id="border-button-pressed-right" d="m -21.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#313131" id="border-button-pressed-right" d="m -21.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#3b3b3d">
 <path id="expand-button-pressed-left" d="m -54.5,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-button-pressed" d="m -38,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -644,7 +644,7 @@
 <path id="border-tab-toggled" d="m -38.25,835 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-toggled-right" d="m -21.75,835 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<g style="fill:#323232">
+<g style="fill:#313131">
 <path id="border-tab-normal-left" d="m -54.75,799 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal" d="m -38.25,799 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal-right" d="m -21.75,799 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -852,7 +852,7 @@
 <path id="expand-lineedit-focused-bottom" d="m 92,216 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 </g>
-<g style="fill:#1e1e1e;color:#000;stroke-width:2;stroke:#c86c00">
+<g style="fill:#1e1e1e;color:#000;stroke:#c86c00;stroke-width:2">
 <circle cx="150" cy="410" id="radio-focused" r="7"/>
 <rect width="14" x="98" y="-479.5" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>

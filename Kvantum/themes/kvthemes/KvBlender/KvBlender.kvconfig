@@ -341,7 +341,7 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=#e1e1e1
 text.toggle.color=#e1e1e1
-frame.expansion=6
+frame.expansion=8
 
 [Splitter]
 indicator.size=32

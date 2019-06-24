@@ -229,4 +229,7 @@
 </g>
 <use width="100%" height="100%" xlink:href="#menuitem-normal" id="menuitem-normal-left" transform="translate(0,2.8125013)"/>
 <use width="100%" height="100%" xlink:href="#menuitem-normal" id="menuitem-normal-right" transform="translate(0,5.6250013)"/>
+<path style="opacity:.35;paint-order:normal;fill:#fff;fill-rule:evenodd" id="tab-focus-bottomleft" d="m 13.5,13.5 h 1.125 v 1.125 H 13.5 Z"/>
+<path style="opacity:.35;paint-order:normal;fill:#fff;fill-rule:evenodd" id="tab-focus-bottom" d="m 14.625,13.5 h 1.125 v 1.125 h -1.125 z"/>
+<path style="opacity:.35;paint-order:normal;fill:#fff;fill-rule:evenodd" id="tab-focus-bottomright" d="m 15.75,13.5 h 1.125 v 1.125 H 15.75 Z"/>
 </svg>
