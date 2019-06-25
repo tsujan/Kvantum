@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="133"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence</translation>
     </message>
 </context>
 <context>
@@ -506,12 +506,15 @@ Vérifier automatiquement si le flou de fenêtre est activé.</translation>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne dessinez pas d&apos;ombres pour les menus et les info-bulles.
+
+Cela peut être utile sous les DE qui donnent
+une ombre aux menus et aux infobulles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Menus et infobulles sans ombres</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -1692,7 +1695,7 @@ ou mettre à jour son aperçu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2651"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Traducteurs</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2649"/>

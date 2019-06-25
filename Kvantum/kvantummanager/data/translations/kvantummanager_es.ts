@@ -19,13 +19,13 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Instalar/actualizar temas</translation>
+        <translation>Instalar/Actualizar temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; viene con muchos temas, pero también se pueden instalar temas externos para que los use.
-Aquí puede elegir una carpeta de temas y luego pulsar el botón de abajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; viene con una gran variedad de temas, pero también se pueden instalarse temas externos.
+Aquí puede elegir una carpeta de temas y luego pulsar el botón ubicado debajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -49,7 +49,7 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Cambiar/borrar temas</translation>
+        <translation>Cambiar/Borrar tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
@@ -59,7 +59,7 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Borrar el tema</translation>
+        <translation>Borrar este tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -67,15 +67,15 @@ Kvantum puede usar además de los suyos propios.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Hace que Kvantum use este tema.
+        <translation>Utilizar este tema en Kvantum!
 
-El botón inhabilitado indica que el
-tema ya está siendo usado.</translation>
+Si el botón se encuentra inhabilitado
+significa que el tema ya está en uso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Usar el tema</translation>
+        <translation>Usar este tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
@@ -149,7 +149,7 @@ los controles se muestren como son por defecto.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished">Fuente normal para los pulsadores por defecto</translation>
+        <translation>Fuente normal para los pulsadores por defecto</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -564,7 +564,7 @@ de algunos controles cambia, principalmente con el ratón.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1084"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Una animación de desvanecimiento de 200ms cuando el estado de algunos controles cambia, principalmente con el ratón.&lt;/p&gt;&lt;p&gt;El uso de CPU es insignificante porque normalmente solo se anima un solo control. El efecto visual resultante depende del tema activo.&lt;/p&gt;&lt;p&gt;Lo admiten los siguientes controles: botones (incluidos los de radio y casillas de verificación), cuadros de lista, «spin boxes», asas de controles deslizantes, campos de texto y vistas desplazables .&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Una animación de desvanecimiento de 200ms cuando el estado de algunos controles cambia, principalmente con el ratón.&lt;/p&gt;&lt;p&gt;El uso de CPU es insignificante porque normalmente solo se anima un solo widget. El efecto visual resultante depende del tema activo.&lt;/p&gt;&lt;p&gt;Estos widgets son compatibles con: botones (incluidos los de radio y casillas de verificación), cuadros de lista, «spin boxes», asas de controles deslizantes, campos de texto y vistas desplazables .&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1087"/>
@@ -674,7 +674,7 @@ aplicaciones lo fijan ellas mismas.</translation>
         <location filename="../../kvantummanager.ui" line="1392"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished">Ancho de los «spin buttons» horizontales.
+        <translation>Ancho de los «spin buttons» horizontales.
 (No tiene efecto cuando los indicadores del «spin» están en vertical)</translation>
     </message>
     <message>
@@ -1689,7 +1689,7 @@ o actualizar su vista previa.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2513"/>
         <source>Restored the rool default settings of %1</source>
-        <translation type="unfinished">Se ha restaurado la configuración original de %1</translation>
+        <translation>Se ha restaurado la configuración original de %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2514"/>
@@ -1705,7 +1705,7 @@ o actualizar su vista previa.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2651"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Traductores</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2649"/>
