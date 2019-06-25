@@ -107,28 +107,6 @@ static void setAppFont()
   }
 }
 
-/*static inline QColor overlayColor(QColor col, QColor overlayCol)
-{
-  if (!overlayCol.isValid()) return QColor(0,0,0);
-  if (!col.isValid()) return overlayCol;
-
-  qreal a1 = overlayCol.alphaF();
-  if (a1 == 1.0) return overlayCol;
-  qreal a0  = col.alphaF();
-
-  qreal a = (1.0 - a1) * a0 + a1;
-  qreal r = ((1.0 - a1) * a0 * col.redF() + a1 * overlayCol.redF()) / a;
-  qreal g = ((1.0 - a1) * a0 *col.greenF() + a1 * overlayCol.greenF()) / a;
-  qreal b = ((1.0 - a1) * a0 * col.blueF() + a1 * overlayCol.blueF()) / a;
-
-  QColor res;
-  res.setAlphaF(a);
-  res.setRedF(r);
-  res.setGreenF(g);
-  res.setBlueF(b);
-  return res;
-}*/
-
 void Style::polish(QWidget *widget)
 {
   if (!widget) return;
@@ -483,13 +461,15 @@ void Style::polish(QWidget *widget)
       || widget->inherits("KSignalPlotter")) // probably has a bug
   {
     /* Text editors and some other widgets shouldn't have a translucent base color.
-       (line-edits are dealt with separately and only when needed.) */
+       (line-edits are dealt with separately and only when needed in "Kvantum.cpp".) */
     QPalette palette = widget->palette();
     QColor baseCol = palette.color(QPalette::Base);
     if (baseCol.isValid() && baseCol != Qt::transparent // for rare cases, like that of Kaffeine's file widget
         && baseCol.alpha() < 255)
     {
-      baseCol.setAlpha(255);
+      QColor winCol = palette.color(QPalette::Window);
+      winCol.setAlpha(255);
+      baseCol = overlayColor(winCol,baseCol);
       palette.setColor(QPalette::Base,baseCol);
       widget->setPalette(palette);
     }
@@ -1046,7 +1026,7 @@ QPalette Style::standardPalette() const
     return standardPalette_;
 
   QColor col1;
-  bool hasInactiveness (!tspec_.no_inactiveness);
+  bool hasInactiveness(!tspec_.no_inactiveness);
 
   /* background colors */
   QColor col = getFromRGBA(cspec_.windowColor);
@@ -1078,13 +1058,43 @@ QPalette Style::standardPalette() const
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
   {
+    if (col.alpha() < 255)
+    {
+      /* make the alternate base color opaque by applying it over the base color
+         because some apps (like Krusader) may ignore its translucency */
+      QColor baseCol = standardPalette().color(QPalette::Active,QPalette::Base);
+      baseCol.setAlpha(255);
+      col = overlayColor(baseCol,col);
+    }
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
     col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
     if (col1.isValid() && hasInactiveness)
+    {
+      if (col1.alpha() < 255)
+      {
+        QColor baseCol = standardPalette().color(QPalette::Inactive,QPalette::Base);
+        baseCol.setAlpha(255);
+        col1 = overlayColor(baseCol,col1);
+      }
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
+    }
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+  }
+  else
+  {
+    col = standardPalette().color(QPalette::Active,QPalette::Base);
+    int v = col.value();
+    if (v < 127) v += 5; else v -= 5;
+    col.setHsv(col.hue(), col.saturation(), v);
+    standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
+
+    col = standardPalette().color(QPalette::Inactive,QPalette::Base);
+    v = col.value();
+    if (v < 127) v += 5; else v -= 5;
+    col.setHsv(col.hue(), col.saturation(), v);
+    standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
   }
 
   col = getFromRGBA(cspec_.buttonColor);

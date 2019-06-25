@@ -207,9 +207,9 @@ Variable                          Value               Meaning
                        *** The %General Section ***
                        ****************************
 
-author                            string              Obvious.
+author                            String              Obvious.
 
-comment                           string              Obvious.
+comment                           String              Obvious.
 
 respect_DE                        true/false          Should some settings of the current
                                                       DE be respected? True by default.
@@ -224,7 +224,7 @@ respect_DE                        true/false          Should some settings of th
                                                       false, and "x11drag" is set to
                                                       "menubar_and_primary_toolbar".
 
-x11drag                           string              Drag windows from contents? Values:
+x11drag                           String              Drag windows from contents? Values:
                                                         none
                                                         menubar
                                                         menubar_and_primary_toolbar
@@ -273,7 +273,7 @@ vertical_spin_indicators          true/false          Draw spin indicators verti
                                                       "inline_spin_separator" will have no
                                                       effect.
 
-spin_button_width                integer              The width of horizontal spin buttons.
+spin_button_width                Integer              The width of horizontal spin buttons.
                                                       It is 16px by default and is always
                                                       between 16 and 32px.
 
@@ -350,7 +350,7 @@ no_active_tab_separator           true/false          Do not draw tab separator 
                                                       See "Theme-Making.pdf" for an explanation
                                                       of tab separators.
 
-active_tab_overlap                integer             Number of pixels inactive tabs overlap
+active_tab_overlap                Integer             Number of pixels inactive tabs overlap
                                   or                  the active one. It is zero by default.
                                   DECIMALfont         The active tab is drawn in front of its
                                                       adjacent inactive tabs when the value of
@@ -369,7 +369,7 @@ no_inactive_tab_expansion         true/false          If tabs have frame expansi
                                                       this key to true will disable frame
                                                       expansion for inactive tabs.
 
-tab_button_extra_margin           integer             The extra margin between the tab frame and
+tab_button_extra_margin           Integer             The extra margin between the tab frame and
                                                       tab buttons (the close button, for example).
                                                       It is zero by default and its maximum is
                                                       the font height (because some apps may not
@@ -390,11 +390,11 @@ bold_active_tab                   true/false          Should the active tab text
 group_toolbar_buttons             true/false          Raise and group neighbor toolbar buttons?
                                                       By default, they are not raised.
 
-toolbar_item_spacing              integer             The space between toolbar buttons. Zero
+toolbar_item_spacing              Integer             The space between toolbar buttons. Zero
                                                       by default. It is also zero if the key
                                                       group_toolbar_buttons is set to true.
 
-toolbar_interior_spacing          integer             The space around the interior of toolbars.
+toolbar_interior_spacing          Integer             The space around the interior of toolbars.
                                                       Zero by default.
 
 center_toolbar_handle             true/false          If "true", the SVG element for the
@@ -412,14 +412,14 @@ slim_toolbars                     true/false          When true, the size of too
                                                       You could use "toolbar_icon_size"
                                                       instead of this key (see below).
 
-toolbutton_style                  integer             Sets the toolbutton style when it
+toolbutton_style                  Integer             Sets the toolbutton style when it
                                                       is not set by the app. 0: follow,
                                                       1: icon only, 2: text only,
                                                       3: text beside icon, and
                                                       4: text under icon. The toolbutton
                                                       style is 0 by default.
 
-dialog_button_layout              integer             The layout of dialog buttons. 0: follow,
+dialog_button_layout              Integer             The layout of dialog buttons. 0: follow,
                                                       1: KDE layout, 2: Gnome layout,
                                                       3: Mac layout, 4: Windows layout, and
                                                       5: Android layout. The default is 0.
@@ -430,7 +430,7 @@ spread_progressbar                true/false          Spread the progressbar's i
                                                       the indicator is drawn inside
                                                       progressbar's frame.
 
-progressbar_thickness             integer             If positive, it sets the (maximum)
+progressbar_thickness             Integer             If positive, it sets the (maximum)
                                   or                  progressbar thickness as far as
                                   DECIMALfont         possible. It is zero by default,
                                                       which means there is no limit to
@@ -487,15 +487,15 @@ scrollable_menu                   true/false          Should big menus be scroll
                                                       bottom? True by default. With a false
                                                       value, all menu-items are shown.
 
-menu_separator_height             integer             The height of menu separators. 10 by
+menu_separator_height             Integer             The height of menu separators. 10 by
                                                       default and always between 1 and 16 px.
 
-submenu_overlap                   integer             The horizontal overlap between a
+submenu_overlap                   Integer             The horizontal overlap between a
                                                       submenu and its parent menu. The
                                                       default is 0. It cannot be greater than
                                                       16px.
 
-menu_shadow_depth                 integer             The depth of the shadow menus cast.
+menu_shadow_depth                 Integer             The depth of the shadow menus cast.
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
 
@@ -503,7 +503,7 @@ menu_shadow_depth                 integer             The depth of the shadow me
                                                       Translucency and Shadow for Menus and
                                                       Tooltips
 
-tooltip_shadow_depth              integer             The depth of the shadow tooltips cast.
+tooltip_shadow_depth              Integer             The depth of the shadow tooltips cast.
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
 
@@ -521,7 +521,7 @@ translucent_windows               true/false          Translucent windows and di
                                                       false for them and, at the same time,
                                                       "reduce_window_opacity" is zero.
 
-reduce_window_opacity             integer             If "translucent_windows" is set to true,
+reduce_window_opacity             Integer             If "translucent_windows" is set to true,
                                                       this key will reduce the window opacity
                                                       by the percentage of its value regardless
                                                       of whether a translucent element for
@@ -529,9 +529,9 @@ reduce_window_opacity             integer             If "translucent_windows" i
                                                       or not. The default value is 0 and the
                                                       maximum is 90.
 
-reduce_menu_opacity               integer             As above but for menus.
+reduce_menu_opacity               Integer             As above but for menus.
 
-opaque                            string list         A comma-separated list of
+opaque                            String list         A comma-separated list of
                                                       executables, whose apps should not
                                                       have window translucency. It has
                                                       meaning only if translucent_windows
@@ -559,7 +559,7 @@ shadowless_popup                  true/false          Should the shadows that Kv
 
 contrast
 intensity
-saturation                        decimal             If not equal to 1, the values of these
+saturation                        Decimal             If not equal to 1, the values of these
                                                       keys are used by the (KDE) contrast
                                                       effect (when enabled) for translucent
                                                       windows that support the blur effect,
@@ -593,15 +593,15 @@ no_window_pattern                 true/false          Do not draw window/dialog 
                                                       include tiling patterns for windows
                                                       and/or dialogs.
 
-splitter_width                    integer             The width of splitter handles. It
+splitter_width                    Integer             The width of splitter handles. It
                                                       cannot be greater than 32px and is
                                                       7px by default.
 
-scroll_width                      integer             The thickness of scrollbars. It
+scroll_width                      Integer             The thickness of scrollbars. It
                                                       cannot be greater than 32px. The
                                                       default value is 12px.
 
-scroll_min_extent                 integer             The minimum height of a vertical
+scroll_min_extent                 Integer             The minimum height of a vertical
                                                       scrollbar slider and the minimum
                                                       width of a horizontal one. It cannot
                                                       be greater that 100px or less than
@@ -659,16 +659,16 @@ groupbox_top_label                true/false          Draw the group-box label a
 button_contents_shift             true/false          Shift the contents of push-buttons when
                                                       they are down? It is true by default.
 
-slider_width                      integer             The width of sliders. It cannot be
+slider_width                      Integer             The width of sliders. It cannot be
                                                       greater than 48px and is 8px by default.
 
 slider_handle_width
-slider_handle_length              integer             The width and the height of slider
+slider_handle_length              Integer             The width and the height of slider
                                                       handles. They cannot be greater than
                                                       48px. The default values are 16px.
 
 
-tickless_slider_handle_size       integer             The size (width and height) of the
+tickless_slider_handle_size       Integer             The size (width and height) of the
                                                       special slider handle used for sliders
                                                       without tick marks, if the interior
                                                       element of such a handle exists in the
@@ -678,11 +678,11 @@ tickless_slider_handle_size       integer             The size (width and height
                                                       greater than "slider_handle_width",
                                                       which is also its default value.
 
-check_size                        integer             The width and height of checkboxes
+check_size                        Integer             The width and height of checkboxes
                                                       and radio buttons. The default
                                                       value is 13px.
 
-tooltip_delay                     integer             The delay, in milliseconds, before
+tooltip_delay                     Integer             The delay, in milliseconds, before
                                                       a tooltip is shown. If set to zero,
                                                       tooltips will be shown instantly. If
                                                       missing or set to any negative integer,
@@ -690,24 +690,24 @@ tooltip_delay                     integer             The delay, in milliseconds
                                                       showing tooltips. (This key has NO
                                                       effect on Qt4 applications!)
 
-submenu_delay                     integer             The delay, in milliseconds, before
+submenu_delay                     Integer             The delay, in milliseconds, before
                                                       opening a submenu. 250 by default.
                                                       -1 means opening submenus only by
                                                       clicking, while 0 means showing them
                                                       immediately.
 
-layout_spacing                    integer             Obvious. Its value is between 2 and 16
+layout_spacing                    Integer             Obvious. Its value is between 2 and 16
                                                       (px), and will have no effect if set in
                                                       the code of an app. It is 2 by default.
 
-layout_margin                     integer             Obvious. Its value is between 2 and 16
+layout_margin                     Integer             Obvious. Its value is between 2 and 16
                                                       (px), and will have no effect if set in
                                                       the code of an app. It is 4 by default.
 
 small_icon_size
 large_icon_size
 button_icon_size
-toolbar_icon_size                 integer             These affect menu-items/headers,
+toolbar_icon_size                 Integer             These affect menu-items/headers,
                                                       icon-views, buttons/tabbars/listviews
                                                       and toolbars respectively. KDE setting
                                                       will have priority over these values
@@ -732,95 +732,108 @@ dark_titlebar                     true/false          Should a dark titlebar be 
                        *** The GeneralColors Section ***
                        *********************************
 
-window.color                      string (#RRGGBBAA)  A general background color as
+window.color                      String (#RRGGBBAA)  A general background color as
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc.
 
-inactive.window.color            string (#RRGGBBAA)   Background color of inactive windows.
+                                                      If it has translucency, the keys
+                                                      "composite" and "translucent_windows"
+                                                      should be set to true under the General
+                                                      section and compositing should be
+                                                      available for windows to really look
+                                                      translucent.
+
+inactive.window.color            String (#RRGGBBAA)   Background color of inactive windows.
                                                       If missing, it falls backs to
                                                       "window.color".
 
-base.color                        string (#RRGGBBAA)  Used mostly as the background
-                                                      color for text entry widgets.
+base.color                        String (#RRGGBBAA)  Used mostly as the background
+                                                      color for text entry widgets. It
+                                                      should not have a high contrast
+                                                      with "window.color".
 
-inactive.base.color               string (#RRGGBBAA)  Background color of inactive
+inactive.base.color               String (#RRGGBBAA)  Background color of inactive
                                                       text entry widgets. If missing,
                                                       it falls backs to "base.color".
 
-alt.base.color                    string (#RRGGBBAA)  Used as the alternate background
+alt.base.color                    String (#RRGGBBAA)  Used as the alternate background
                                                       color in views with alternating
                                                       row colors. It should not have a
                                                       high contrast with "base.color".
 
-inactive.alt.base.color           string (#RRGGBBAA)  Like above but for inactive widgets.
+                                                      If it has translucency, it will be
+                                                      made opaque by being applied over
+                                                      "base.color".
 
-button.color                      string (#RRGGBBAA)  The general button background color
+inactive.alt.base.color           String (#RRGGBBAA)  Like above but for inactive widgets.
+
+button.color                      String (#RRGGBBAA)  The general button background color
                                                       (usually, the same as "window.color").
 
-light.color                       string (#RRGGBBAA)  Lighter than "button.color"
+light.color                       String (#RRGGBBAA)  Lighter than "button.color"
                                                       (used mostly for 3D bevels).
 
-mid.light.color                   string (#RRGGBBAA)  Between "button.color" and
+mid.light.color                   String (#RRGGBBAA)  Between "button.color" and
                                                       "light.color". It is the color of
                                                       box frames but is also used in
                                                       drawing toolbox tabs.
 
-dark.color                        string (#RRGGBBAA)  Darker than "button.color"
+dark.color                        String (#RRGGBBAA)  Darker than "button.color"
                                                       (used mostly for 3D bevels).
 
-mid.color                         string (#RRGGBBAA)  Between "button.color" and
+mid.color                         String (#RRGGBBAA)  Between "button.color" and
                                                       "dark.color". It is the color of
                                                       table grid lines but is also used
                                                       in drawing toolbox tabs.
 
-shadow.color                      string (#RRGGBBAA)  A very dark color. By default,
+shadow.color                      String (#RRGGBBAA)  A very dark color. By default,
                                                       it is black (can be ignored).
 
-highlight.color                   string (#RRGGBBAA)  A color for text selection.
+highlight.color                   String (#RRGGBBAA)  A color for text selection.
 
-inactive.highlight.color          string (#RRGGBBAA)  Like "highlight.color" but when
+inactive.highlight.color          String (#RRGGBBAA)  Like "highlight.color" but when
                                                       the text widget does not have focus.
 
-tooltip.base.color                string (#RRGGBBAA)  Tooltip background color (used in
+tooltip.base.color                String (#RRGGBBAA)  Tooltip background color (used in
                                                       "WhatsThis" tooltips).
 
-text.color                        string (#RRGGBBAA)  The foreground color used with
+text.color                        String (#RRGGBBAA)  The foreground color used with
                                                       "base.color".
 
-inactive.text.color               string (#RRGGBBAA)  The inactive foreground color used
+inactive.text.color               String (#RRGGBBAA)  The inactive foreground color used
                                                       with "base.color". It falls back to
                                                       "text.color" if missing.
 
-window.text.color                 string (#RRGGBBAA)  A general foreground color.
+window.text.color                 String (#RRGGBBAA)  A general foreground color.
 
-inactive.window.text.color        string (#RRGGBBAA)  A general foreground color for
+inactive.window.text.color        String (#RRGGBBAA)  A general foreground color for
                                                       inactive windows. It falls back
                                                       to "window.text.color" if missing.
 
-button.text.color                 string (#RRGGBBAA)  Obvious.
+button.text.color                 String (#RRGGBBAA)  Obvious.
 
-disabled.text.color               string (#RRGGBBAA)  Obvious.
+disabled.text.color               String (#RRGGBBAA)  Obvious.
 
-tooltip.text.color                string (#RRGGBBAA)  Obvious.
+tooltip.text.color                String (#RRGGBBAA)  Obvious.
 
-highlight.text.color              string (#RRGGBBAA)  The color of selected text.
+highlight.text.color              String (#RRGGBBAA)  The color of selected text.
 
-inactive.highlight.text.color     string (#RRGGBBAA)  The color of inactive selected text.
+inactive.highlight.text.color     String (#RRGGBBAA)  The color of inactive selected text.
                                                       If missing, it falls back to
                                                       "highlight.text.color".
 
-link.color                        string (#RRGGBBAA)  Obvious.
+link.color                        String (#RRGGBBAA)  Obvious.
 
-link.visited.color                string (#RRGGBBAA)  Obvious.
+link.visited.color                String (#RRGGBBAA)  Obvious.
 
-progress.indicator.text.color     string (#RRGGBBAA)  The color of that part of the progress
+progress.indicator.text.color     String (#RRGGBBAA)  The color of that part of the progress
                                                       text, which is inside the progress
                                                       indicator. Useful when the progress
                                                       text does not have enough contrast
                                                       with the progress indicator.
 
 progress.inactive.indicator.text.color
-                                  string (#RRGGBBAA)  like "progress.indicator.text.color"
+                                  String (#RRGGBBAA)  like "progress.indicator.text.color"
                                                       but for inactive progress bars.
 
                           *************************
@@ -857,7 +870,7 @@ respect_darkness                  true/false          Some apps don't respect da
 force_size_grip                   true/false          Show the size grips of dialogs and
                                                       statusbars as far as possible?
 
-tint_on_mouseover                 integer             Tint the label icons with the highlight
+tint_on_mouseover                 Integer             Tint the label icons with the highlight
                                                       color on mouseover by this percentage?
                                                       This will not work if the containing
                                                       widget is not styled by Kvantum.
@@ -865,7 +878,7 @@ tint_on_mouseover                 integer             Tint the label icons with 
 no_selection_tint                 true/false          Do not tint selected label icons with
                                                       the highlight color! False by default.
 
-disabled_icon_opacity             integer             Set the opacity of disabled icons by
+disabled_icon_opacity             Integer             Set the opacity of disabled icons by
                                                       this percentage? It is useful with
                                                       monochrome icons and when the opacity
                                                       of disabled icons is not reduced by
@@ -906,7 +919,7 @@ scroll_jump_workaround            true/false          Qt5 has a bug that causes 
                            *** Other Sections ***
                            **********************
 
-inherits                          string              The name of a section (in the same config
+inherits                          String              The name of a section (in the same config
                                                       file and without brackets) whose
                                                       configuration is also used for this one.
 
@@ -915,7 +928,7 @@ frame                             true/false          Draw a frame around the wi
 frame.top
 frame.bottom
 frame.left
-frame.right                       integer             The height or width of the corresponding
+frame.right                       Integer             The height or width of the corresponding
                                                       frame part if there is any.
 
                                                       These values are mostly respected but
@@ -929,14 +942,14 @@ frame.right                       integer             The height or width of the
 frame.expanded.top
 frame.expanded.bottom
 frame.expanded.left
-frame.expanded.right              integer             The same as above but for expanded frames
+frame.expanded.right              Integer             The same as above but for expanded frames
                                                       (see "frame.expansion" below).
                                                       If they are set to zero, missing or
                                                       greater than their corresponding ordinary
                                                       frame sizes, the ordinary frame sizes
                                                       will be used for expanded frames.
 
-frame.expansion                   integer             A positive value (in px) will expand the
+frame.expansion                   Integer             A positive value (in px) will expand the
                                   or                  frames until the corner frames meet
                                   DECIMALfont         each other either vertically or
                                                       horizontally, provided that at least
@@ -954,7 +967,7 @@ frame.expansion                   integer             A positive value (in px) w
                                                       could also be a decimal (as in
                                                       "frame.expansion=2.8font").
 
-frame.patternsize                 integer             The frame pattern size. Used for tiling
+frame.patternsize                 Integer             The frame pattern size. Used for tiling
                                                       the frame of a widget with a pattern. A
                                                       value of zero means no pattern (default).
                                                       Mostly useful for making dotted frames.
@@ -978,7 +991,7 @@ focusFrame                       true/false           Draw a focus frame when th
 interior                          true/false          Draw an interior for the widget?
 
 interior.x.patternsize
-interior.y.patternsize            integer             The interior pattern sizes. Used for
+interior.y.patternsize            Integer             The interior pattern sizes. Used for
                                                       tiling the interior of a widget with
                                                       a pattern. A value of zero means no
                                                       tiling in the corresponding direction.
@@ -997,7 +1010,7 @@ focusInterior                     true/false          Draw a focus interior when
                                                       is false or there is no interior or frame
                                                       and is false by default.
 
-indicator.size                    integer             Some widgets, like scrollbar arrows,
+indicator.size                    Integer             Some widgets, like scrollbar arrows,
                                                       have indicators. This is their size.
 
 text.margin                       true/false          Put a margin around the text
@@ -1006,7 +1019,7 @@ text.margin                       true/false          Put a margin around the te
 text.margin.top
 text.margin.bottom
 text.margin.left
-text.margin.right                 integer             The sizes of the text margins
+text.margin.right                 Integer             The sizes of the text margins
                                                       if there is any.
 
                                                       These values are mostly respected but
@@ -1018,7 +1031,7 @@ text.margin.right                 integer             The sizes of the text marg
                                                       left/right text margins may be a little
                                                       greater than text.margin.left/right.
 
-text.normal.color                 string (#RRGGBBAA)  The color of the normal text as
+text.normal.color                 String (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc. It may
                                                       override the text colors defined under
@@ -1035,20 +1048,20 @@ text.normal.color                 string (#RRGGBBAA)  The color of the normal te
                                                       LineEdit and frame widgets (namely
                                                       GenericFrame, TabFrame and TabBarFrame).
 
-text.focus.color                  string (#RRGGBBAA)  The color of the focused/hover text.
+text.focus.color                  String (#RRGGBBAA)  The color of the focused/hover text.
 
                                                       Note: For "MenuBarItem", it serves as a
                                                       fallback color in case the press or toggle
                                                       text colors are not set.
 
-text.press.color                  string (#RRGGBBAA)  The color of the pressed text.
+text.press.color                  String (#RRGGBBAA)  The color of the pressed text.
 
-text.toggle.color                 string (#RRGGBBAA)  The color of the toggled text.
+text.toggle.color                 String (#RRGGBBAA)  The color of the toggled text.
 
 text.normal.inactive.color
 text.focus.inactive.color
 text.press.inactive.color
-text.toggle.inactive.color        string (#RRGGBBAA)  These keys are for text colors of inactive
+text.toggle.inactive.color        String (#RRGGBBAA)  These keys are for text colors of inactive
                                                       widgets and fall back to their
                                                       corresponding ordinary keys if missing.
 
@@ -1059,7 +1072,7 @@ text.bold                         true/false          Bold font for text? The fo
                                                       boxes, menu-items and view items are not made
                                                       bold by Kvantum.
 
-text.boldness                     integer             The weight of bold texts (if any). Its value
+text.boldness                     Integer             The weight of bold texts (if any). Its value
                                                       is from 1 to 5, with 3 (normally bold) as
                                                       default.
 
@@ -1076,23 +1089,23 @@ text.italic                       true/false          Italic font for text? The 
 text.shadow                       true/false          Draw a shadow for the text?
 
 text.shadow.xshift
-text.shadow.yshift                integer             The vertical/horizontal shifts
+text.shadow.yshift                Integer             The vertical/horizontal shifts
                                                       of the text shadow if it exists.
 
-text.shadow.color                 string (#RRGGBBAA)  The color of the text shadow as
+text.shadow.color                 String (#RRGGBBAA)  The color of the text shadow as
                                                       #RRGGBB or #RRGGBBAA or with a valid
                                                       name like white, black, red, etc.
 
-text.inactive.shadow.color        string (#RRGGBBAA)  Like "text.shadow.color" and falling back
+text.inactive.shadow.color        String (#RRGGBBAA)  Like "text.shadow.color" and falling back
                                                       to it if missing but for inactive widgets.
 
-text.shadow.alpha                 integer (0-255)     The opacity of the text shadow. 255
+text.shadow.alpha                 Integer (0-255)     The opacity of the text shadow. 255
                                                       means completely opaque. If the alpha
                                                       is set in #RRGGBBAA as the shadow color
                                                       name, this key can be left to 255 (its
                                                       default value).
 
-text.shadow.depth                 integer             The text shadow depth.
+text.shadow.depth                 Integer             The text shadow depth.
 
                                                       NOTE: For technical reasons, depths > 1
                                                       are considered as 1. It is kept until Qt
@@ -1100,11 +1113,11 @@ text.shadow.depth                 integer             The text shadow depth.
                                                       by using its painter.
 
 min_width
-min_height                        integer             Minimum width or height (in px). They
+min_height                        Integer             Minimum width or height (in px). They
                                   or                  have meaning only for menuitems, menubar
                                   DECIMALfont         items, push and tool buttons, tabs,
-                                                      combo boxes, line-edits, spin boxes
-                                                      (only for their height), check and radio
+                                  or                  combo boxes, line-edits, spin boxes
+                                  +DECIMALfont        (only for their height), check and radio
                                                       buttons (only the height) and, sometimes,
                                                       view items (only the height).
 
@@ -1147,19 +1160,19 @@ If you want to make your own theme (see the file "Theme-Making"), you'll also ne
 =============================================================
 Variable                Value                Meaning
 =============================================================
-interior.element               string                The SVG element to be used for
+interior.element               String                The SVG element to be used for
                                                      drawing the interior of a widget.
 
-frame.element                  string                The SVG element to be used for
+frame.element                  String                The SVG element to be used for
                                                      drawing the frame of a widget.
 
-frame.expandedElement          string                The optional SVG element to be used
+frame.expandedElement          String                The optional SVG element to be used
                                                      only for drawing the expanded frame.
                                                      If not present, "frame.element"
                                                      will be used for expanded frames too.
                                                      See "frame.expansion"!
 
-indicator.element              string                The SVG element to be used for
+indicator.element              String                The SVG element to be used for
                                                      drawing the indicator of a widget.
 =============================================================
 

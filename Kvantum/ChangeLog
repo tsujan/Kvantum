@@ -7,6 +7,8 @@ V0.11.2
  * Also consider the "disabled" state when drawing rounded frames with separate expanded frame elements (it's used by progressbar indicator).
  * Exclude toolbars whose appearances are modified by stylesheets from stylable toolbars.
  * Don't animate the state change of generic frames if there is no top focused frame (to prevent probable flashes).
+ * When removing translucency from the base color in special cases, also consider the window color behind it.
+ * Make the alternate base color opaque by applying it over the base color because some apps may ignore its translucency.
 
 V0.11.1
 ---------

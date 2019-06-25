@@ -103,6 +103,25 @@ bool Style::enoughContrast (const QColor& col1, const QColor& col2) const
   return true;
 }
 
+QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
+{
+  if (!overlayCol.isValid()) return QColor(0,0,0);
+  if (!bgCol.isValid()) return overlayCol;
+
+  qreal a1 = overlayCol.alphaF();
+  if (a1 == 1.0) return overlayCol;
+  qreal a0  = bgCol.alphaF();
+  qreal a = (1.0 - a1) * a0 + a1;
+
+  QColor res;
+  res.setAlphaF(a);
+  res.setRedF(((1.0 - a1) * a0 * bgCol.redF() + a1 * overlayCol.redF()) / a);
+  res.setGreenF(((1.0 - a1) * a0 *bgCol.greenF() + a1 * overlayCol.greenF()) / a);
+  res.setBlueF(((1.0 - a1) * a0 * bgCol.blueF() + a1 * overlayCol.blueF()) / a);
+
+  return res;
+}
+
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
    Here we get the alpha from #RGBA if it exists. */
 QColor Style::getFromRGBA(const QString &str) const
@@ -10983,12 +11002,18 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                       groove.adjust(0, 0, -space, 0);
                   }
 
-                  QColor col = option->palette.color(QPalette::Base);
+                  QColor col = standardPalette().color(QPalette::Base);
+                  if (col.alphaF() < 1.0)
+                  {
+                    QColor winCol = standardPalette().color(QPalette::Window);
+                    winCol.setAlphaF(1.0);
+                    col = overlayColor(winCol,col);
+                  }
                   col.setAlphaF(0.75);
                   painter->fillRect(groove, col);
 
                   painter->save();
-                  col = option->palette.color(QPalette::Text);
+                  col = standardPalette().color(QPalette::Text);
                   col.setAlphaF(0.2);
                   painter->setPen(col);
                   if (!rtl || horiz)

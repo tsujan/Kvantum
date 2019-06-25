@@ -31,6 +31,7 @@ public:
     splitter->setSizes (sizes);
     splitter_2->setSizes (sizes);
     treeWidget->sortItems (0, Qt::AscendingOrder);
+    treeWidget->setAlternatingRowColors (true);
 #if QT_VERSION < 0x050000
     QTabBar *tb = tabWidget->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar"));
     if (tb) tb->setUsesScrollButtons (false);

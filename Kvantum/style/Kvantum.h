@@ -314,6 +314,7 @@ class Style : public QCommonStyle {
 
     QWidget* getParent(const QWidget *widget, int level) const;
     bool enoughContrast (const QColor& col1, const QColor& col2) const;
+    QColor overlayColor(const QColor& bgCol, const QColor& overlayCol) const;
 
     /* Can an expanded border be drawn for this frame? */
     bool hasExpandedBorder(const frame_spec &fspec) const;
