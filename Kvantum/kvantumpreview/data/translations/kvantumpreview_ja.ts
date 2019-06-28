@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum プレビュー</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
@@ -591,7 +591,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2898"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2906"/>
