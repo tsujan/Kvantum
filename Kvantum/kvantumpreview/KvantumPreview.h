@@ -56,6 +56,9 @@ public:
     toolButton_8->setMenu (menuFile);
 
     toolBar_2->addSeparator();
+    QLabel *label = new QLabel ("<center><b><i>Kvantum</i></b></center>");
+    toolBar_2->addWidget (label);
+    toolBar_2->addSeparator();
     QComboBox *cb = new QComboBox();
     cb->addItems (QStringList() << "Kvantum" << "Qt" << "C++");
     toolBar_2->addWidget (cb);

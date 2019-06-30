@@ -65,7 +65,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         }
         else if (widget)
           col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
-        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
+        if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::WindowText))
             && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
         {
           dspec.element = "flat-"+dspec.element;
@@ -97,7 +97,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!hspec_.single_top_toolbar
           && themeRndr_ && themeRndr_->isValid()
           && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor),
-                            getFromRGBA(cspec_.windowTextColor)))
+                            standardPalette().color(QPalette::Active,QPalette::WindowText)))
       {
         dspec.element = "flat-"+dspec.element;
       }

@@ -35,6 +35,7 @@ square_combo_button=true
 fill_rubberband=false
 groupbox_top_label=true
 inline_spin_indicators=false
+remove_extra_frames=true
 joined_inactive_tabs=true
 no_inactive_tab_expansion=true
 tab_button_extra_margin=0.15font

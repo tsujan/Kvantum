@@ -3068,7 +3068,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               if (hspec_.transparent_pcmanfm_view && pw->inherits("Fm::FolderView"))
               {
                 /* fill in an inactive view frame of a split view with the base color */
-                if (pw->palette().color(QPalette::Active, QPalette::Base) != getFromRGBA(cspec_.baseColor))
+                if (pw->palette().color(QPalette::Active, QPalette::Base)
+                    != standardPalette().color(QPalette::Active,QPalette::Base))
                 {
                    pcmanfmInactiveView = true;
                    painter->fillRect(interiorRect(option->rect,getFrameSpec(QStringLiteral("GenericFrame"))),
@@ -3946,7 +3947,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           QColor tCol = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
           QLineEdit *le = widget->findChild<QLineEdit*>();
-          if (enoughContrast(getFromRGBA(cspec_.textColor), tCol)
+          if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), tCol)
               && !enoughContrast(le->palette().color(QPalette::Active, QPalette::Text), tCol))
           {
             if (dspec.element.startsWith("flat-"))
@@ -4115,7 +4116,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (elementExists(dspec1.element+"-normal"))
             dspec = dspec1;
           if (leGroup == "ToolbarLineEdit"
-              && enoughContrast(getFromRGBA(cspec_.textColor),
+              && enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text),
                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
             dspec.element = "flat-"+dspec.element;
@@ -4651,7 +4652,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         else if (qobject_cast<const QMenuBar*>(widget))
           col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
-        if (enoughContrast(col, getFromRGBA(cspec_.windowTextColor))
+        if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::WindowText))
             && flatArrowExists(dspec.element))
         {
           dspec.element = "flat-"+dspec.element;
@@ -8369,98 +8370,104 @@ void Style::drawControl(QStyle::ControlElement element,
       if (!stylable)
       {
         if (widget && option->styleObject)
-        { // correct foreground colors if needed
-          bool toolbarLineEdit(!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty());
-          bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
-                               || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
-          QColor col = getFromRGBA(cspec_.textColor);
-          QColor toolbarTxtCol(getFromRGBA(getLabelSpec(group).normalColor));
-          bool contrast(enoughContrast(col, toolbarTxtCol));
-          if (contrast || toolbarLineEdit || toolbarComboBox)
+        { // correct foreground colors if needed (see the case of stylable toolbar below)
+          QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
+          if (toolbarState.isEmpty() // no child palette checked
+              || toolbarState == "styled") // the toolbar was styled before
           {
-            QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
-            if (toolbarState.isEmpty() // no child palette checked
-                || toolbarState == "styled") // the toolbar was styled before
-            {
-              QColor inactiveCol, disabledCol;
-              if (col.isValid())
-              {
-                inactiveCol = getFromRGBA(cspec_.inactiveTextColor);
-                if (!inactiveCol.isValid()) inactiveCol = col;
-                disabledCol = getFromRGBA(cspec_.disabledTextColor);
+            QColor txtCol = standardPalette().color(QPalette::Active,QPalette::Text);
+            QColor toolbarTxtCol(getFromRGBA(getLabelSpec(group).normalColor));
 
-                if (contrast)
+            if (enoughContrast(txtCol, toolbarTxtCol))
+            {
+              bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+                                   || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
+              QColor inactiveTxtCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
+              QColor disabledTxtCol = standardPalette().color(QPalette::Disabled,QPalette::Text);
+
+              const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
+              for (QWidget *child : children)
+              {
+                QPalette palette = child->palette();
+                if (!qobject_cast<QToolButton*>(child)
+                    && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
+                    && palette.color(QPalette::Active, QPalette::WindowText) == toolbarTxtCol)
                 {
-                  const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
-                  for (QWidget *child : children)
+                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
+                  palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
+                  if (qobject_cast<QLabel*>(child))
                   {
-                    QPalette palette = child->palette();
-                    if (!qobject_cast<QToolButton*>(child)
-                        && palette.color(QPalette::Active, QPalette::WindowText) == toolbarTxtCol)
-                    {
-                      palette.setColor(QPalette::Active, QPalette::WindowText, col);
-                      palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
-                      palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledCol);
-                      palette.setColor(QPalette::Active, QPalette::ButtonText, col);
-                      palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
-                      palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
-                      if (qobject_cast<QLabel*>(child))
-                      {
-                        palette.setColor(QPalette::Active, QPalette::Text, col);
-                        palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
-                        palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
-                      }
-                      child->setPalette(palette);
-                    }
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
                   }
+                  child->setPalette(palette);
                 }
               }
-              if (toolbarLineEdit)
+
+              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               {
-                if (col.isValid())
+                const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
+                for (QLineEdit *le : lineEdits)
                 {
-                  const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
-                  for (QLineEdit *le : lineEdits)
+                  QPalette palette = le->palette();
+                  if (txtCol != palette.color(QPalette::Active,QPalette::Text))
                   {
-                    QPalette palette = le->palette();
-                    if (col != palette.color(QPalette::Active,QPalette::Text))
-                    {
-                      palette.setColor(QPalette::Active, QPalette::Text, col);
-                      palette.setColor(QPalette::Inactive,QPalette::Text, inactiveCol);
-                      if (disabledCol.isValid())
-                        palette.setColor(QPalette::Disabled,QPalette::Text, disabledCol);
-                      le->setPalette(palette);
-                    }
-                    else break; // all or nothing
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive,QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled,QPalette::Text, disabledTxtCol);
+                    le->setPalette(palette);
                   }
+                  else break; // all or nothing
                 }
               }
-              else if (toolbarComboBox)
+
+              if (toolbarComboBox)
               {
-                col = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
-                if (col.isValid())
+                txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
+                if (txtCol.isValid())
                 {
-                  QColor disabledCol = col;
-                  disabledCol.setAlpha(102);
+                  disabledTxtCol = txtCol;
+                  disabledTxtCol.setAlpha(102);
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
                     QPalette palette = cb->palette();
-                    if (col != palette.color(QPalette::ButtonText))
+                    if (txtCol != palette.color(QPalette::ButtonText))
                     {
-                      palette.setColor(QPalette::ButtonText, col);
-                      palette.setColor(QPalette::WindowText, col);
-                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledCol);
-                      palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledCol);
+                      palette.setColor(QPalette::ButtonText, txtCol);
+                      palette.setColor(QPalette::WindowText, txtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledTxtCol);
                       cb->setPalette(palette);
                     }
                     else break;
                   }
                 }
               }
-              option->styleObject->setProperty("_kv_toolbar", "unstyled");
             }
+            else
+            {
+              const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
+              for (QLabel *label : labels)
+              {
+                QPalette palette = label->palette();
+                palette.setColor(QPalette::Active, QPalette::ButtonText,
+                                 standardPalette().color(QPalette::Active,QPalette::WindowText));
+                palette.setColor(QPalette::Inactive, QPalette::ButtonText,
+                                 standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                                 standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+                label->setPalette(palette);
+              }
+            }
+
+            option->styleObject->setProperty("_kv_toolbar", "unstyled");
           }
         }
         break;
@@ -8490,113 +8497,122 @@ void Style::drawControl(QStyle::ControlElement element,
       }
       else if (option->styleObject)
       { // correct foreground colors if needed
-        bool toolbarLineEdit(!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty());
-        bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
-                             || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
-        const label_spec tlspec = getLabelSpec(group);
-        QColor col = getFromRGBA(tlspec.normalColor);
-        bool contrast(enoughContrast(getFromRGBA(cspec_.textColor), col));
-        if (contrast || toolbarLineEdit || toolbarComboBox)
+        QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
+        if (toolbarState.isEmpty() // no child palette checked
+            || toolbarState == "unstyled") // the toolbar wasn't styled before
         {
-          QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
-          if (toolbarState.isEmpty() // no child palette checked
-              || toolbarState == "unstyled") // the toolbar wasn't styled before
-          {
-            QColor inactiveCol, disabledCol;
-            if (col.isValid())
-            {
-              inactiveCol = getFromRGBA(tlspec.normalInactiveColor);
-              if (!inactiveCol.isValid()) inactiveCol = col;
-              disabledCol = col;
-              disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+          const label_spec tlspec = getLabelSpec(group);
+          QColor txtCol = getFromRGBA(tlspec.normalColor);
 
-              if (contrast)
+          if (txtCol.isValid())
+          {
+            QColor inactiveTxtCol = getFromRGBA(tlspec.normalInactiveColor);
+            if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
+            QColor disabledTxtCol = txtCol;
+            disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
+
+            if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), txtCol))
+            {
+              bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+                                   || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
+
+              const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
+              for (QWidget *child : children)
               {
-                const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
-                for (QWidget *child : children)
-                {
-                  QPalette palette = child->palette();
-                  if (!qobject_cast<QToolButton*>(child) // flat toolbuttons are dealt with at CE_ToolButtonLabel
-                      && palette.color(QPalette::Active, QPalette::WindowText) != col)
-                  { // like labels on a stylable toolbar (as in Audacious), or in K3b or Amarok
-                    palette.setColor(QPalette::Active, QPalette::WindowText, col);
-                    palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
-                    palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledCol);
-                    palette.setColor(QPalette::Active, QPalette::ButtonText, col);
-                    palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
-                    palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
-                    if (qobject_cast<QLabel*>(child))
-                    {
-                      palette.setColor(QPalette::Active, QPalette::Text, col);
-                      palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
-                      palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
-                    }
-                    child->setPalette(palette);
+                QPalette palette = child->palette();
+                if (!qobject_cast<QToolButton*>(child) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+                    && (!toolbarComboBox || !qobject_cast<QComboBox*>(child)) // handled below
+                    && palette.color(QPalette::Active, QPalette::WindowText) != txtCol)
+                { // like labels on a stylable toolbar (as in Audacious), or in K3b or Amarok
+                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
+                  palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
+                  if (qobject_cast<QLabel*>(child))
+                  {
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
                   }
+                  child->setPalette(palette);
                 }
               }
-            }
-            if (toolbarLineEdit)
-            {
-              if (col.isValid())
+
+              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               {
                 const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
                 for (QLineEdit *le : lineEdits)
                 {
                   QPalette palette = le->palette();
-                  if (palette.color(QPalette::Active, QPalette::Text) != col)
+                  if (palette.color(QPalette::Active, QPalette::Text) != txtCol)
                   {
-                    palette.setColor(QPalette::Active, QPalette::Text, col);
-                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
-                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
                     le->setPalette(palette);
                   }
                   else break; // all or nothing
                 }
               }
-            }
-            else if (toolbarComboBox)
-            {
-              col = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
-              if (col.isValid())
+
+              if (toolbarComboBox)
               {
-                QColor disabledCol = col;
-                disabledCol.setAlpha(102);
-                const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
-                for (QComboBox *cb : combos)
+                txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
+                if (txtCol.isValid())
                 {
-                  QPalette palette = cb->palette();
-                  if (col != palette.color(QPalette::ButtonText))
+                  QColor disabledTxtCol = txtCol;
+                  disabledTxtCol.setAlpha(102);
+                  const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
+                  for (QComboBox *cb : combos)
                   {
-                    palette.setColor(QPalette::ButtonText, col);
-                    palette.setColor(QPalette::WindowText, col);
-                    palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledCol);
-                    palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledCol);
-                    cb->setPalette(palette);
+                    QPalette palette = cb->palette();
+                    if (txtCol != palette.color(QPalette::ButtonText))
+                    {
+                      palette.setColor(QPalette::ButtonText, txtCol);
+                      palette.setColor(QPalette::WindowText, txtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledTxtCol);
+                      cb->setPalette(palette);
+                    }
+                    else break;
                   }
-                  else break;
                 }
               }
             }
+            else
+            { // on toolbars, labels get the button text color; that's corrected here
+              const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
+              for (QLabel *label : labels)
+              {
+                QPalette palette = label->palette();
+                palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
+                palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
+                palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
+                label->setPalette(palette);
+              }
+            }
           }
+
+          option->styleObject->setProperty("_kv_toolbar", "styled");
         }
-        option->styleObject->setProperty("_kv_toolbar", "styled");
       }
 
-      if (!(option->state & State_Enabled))
+      /*if (!(option->state & State_Enabled))
       {
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
-      }
+      }*/
       QString suffix = "-normal";
       if (isWidgetInactive(widget))
         suffix = "-normal-inactive";
 
       renderFrame(painter,r,fspec,fspec.element+suffix);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
-      if (!(option->state & State_Enabled))
-        painter->restore();
+      /*if (!(option->state & State_Enabled))
+        painter->restore();*/
       if (!(option->state & State_Horizontal))
         painter->restore();
 
@@ -11822,7 +11838,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           const label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
           QColor col;
           if (!(option->state & State_Enabled))
-            col = getFromRGBA(cspec_.disabledTextColor);
+            col = standardPalette().color(QPalette::Disabled,QPalette::Text);
           else if (option->state & State_MouseOver)
           {
             if (isInactive)
@@ -12731,9 +12747,8 @@ int Style::styleHint(QStyle::StyleHint hint,
       QColor col;
       if (!(option->state & State_Enabled))
       {
-        col = getFromRGBA(cspec_.disabledTextColor);
-        if (col.isValid())
-          return col.rgba();
+        col = standardPalette().color(QPalette::Disabled,QPalette::Text);
+        return col.rgba();
       }
       else if (option->state & State_MouseOver)
       {

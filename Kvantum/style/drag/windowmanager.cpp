@@ -51,11 +51,11 @@ namespace Kvantum {
 
 static inline bool isPrimaryToolBar(QWidget *w)
 {
-  if (!w) return false;
+  if (w == nullptr) return false;
   QToolBar *tb = qobject_cast<QToolBar*>(w);
-  if (tb || 0 == strcmp(w->metaObject()->className(), "ToolBar"))
+  if (tb || strcmp(w->metaObject()->className(), "ToolBar") == 0)
   {
-    if (!tb || Qt::Horizontal == tb->orientation())
+    if (tb == nullptr || Qt::Horizontal == tb->orientation())
     {
       QWidget *p = w->parentWidget();
       if (p != w->window()) return false; // inside a dock

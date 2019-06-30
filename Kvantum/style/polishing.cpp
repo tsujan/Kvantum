@@ -150,13 +150,15 @@ void Style::polish(QWidget *widget)
 
   //widget->setAttribute(Qt::WA_MouseTracking, true);
 
+  bool respectDarkness(hspec_.respect_darkness);
+
   /* respect the toolbar text color if the widget is shown after
      its parent toolbar and without repainting it (unlike in CE_ToolBar) */
   const label_spec tLspec = getLabelSpec(QStringLiteral("Toolbar"));
   QColor tColor = getFromRGBA(tLspec.normalColor);
-  if (enoughContrast(getFromRGBA(cspec_.textColor), tColor)
+  if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), tColor)
       && !qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
-      && isStylableToolbar(pw))
+      && getStylableToolbarContainer(widget))
   {
     QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
     if (!inactiveCol.isValid())
@@ -164,21 +166,25 @@ void Style::polish(QWidget *widget)
     QColor disabledCol = tColor;
     disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
 
-    /* as in Cantata (previously, also Krita and Amarok) */
-    QPalette palette = widget->palette();
-    palette.setColor(QPalette::Active, QPalette::ButtonText, tColor);
-    palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
-    palette.setColor(QPalette::Active, QPalette::WindowText, tColor);
-    palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
-    palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledCol);
-    if (qobject_cast<QLabel*>(widget))
+    if (isStylableToolbar(pw)) // an immediate child of a stylable toolbar
     {
-      palette.setColor(QPalette::Active, QPalette::Text, tColor);
-      palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
-      palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+      /* as in Cantata (previously, also Krita and Amarok) */
+      QPalette palette = widget->palette();
+      palette.setColor(QPalette::Active, QPalette::ButtonText, tColor);
+      palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveCol);
+      palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
+      palette.setColor(QPalette::Active, QPalette::WindowText, tColor);
+      palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveCol);
+      palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledCol);
+      if (qobject_cast<QLabel*>(widget))
+      {
+        palette.setColor(QPalette::Active, QPalette::Text, tColor);
+        palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
+        palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+        respectDarkness = false; // we don't want to change its text color again
+      }
+      widget->setPalette(palette);
     }
-    widget->setPalette(palette);
 
     if (qobject_cast<QLineEdit*>(widget))
     {
@@ -196,8 +202,8 @@ void Style::polish(QWidget *widget)
       }
     }
     else if (qobject_cast<QComboBox*>(widget)
-             && (!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
-                 || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()))
+            && (!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+                || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()))
     {
       tColor = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
       if (tColor.isValid())
@@ -214,11 +220,23 @@ void Style::polish(QWidget *widget)
       }
     }
   }
+  else if (qobject_cast<QToolBar*>(pw) && qobject_cast<QLabel*>(widget))
+  { // on toolbars, labels get the button text color; that's corrected here
+    QPalette palette = widget->palette();
+    palette.setColor(QPalette::Active, QPalette::ButtonText,
+                     standardPalette().color(QPalette::Active,QPalette::WindowText));
+    palette.setColor(QPalette::Inactive, QPalette::ButtonText,
+                     standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                     standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+    widget->setPalette(palette);
+    respectDarkness = false;
+  }
 
-  if (hspec_.respect_darkness)
+  if (respectDarkness)
   {
-    QColor winCol = getFromRGBA(cspec_.windowColor);
-    if (winCol.isValid() && qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
+    QColor winCol = standardPalette().color(QPalette::Active,QPalette::Window);
+    if (qGray(winCol.rgb()) <= 100 // there should be darkness to be respected
         // it's usual to define custom colors in text edits
         && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit"))
     {
@@ -429,13 +447,12 @@ void Style::polish(QWidget *widget)
     /* Dolphin sets the background of its KItemListContainer's viewport
        to KColorScheme::View (-> kde-baseapps -> dolphinview.cpp).
        We force our base color here. */
-    QColor col = getFromRGBA(cspec_.baseColor);
-    if (col.isValid())
-    {
-      QPalette palette = widget->palette();
-      palette.setColor(widget->backgroundRole(), col);
-      widget->setPalette(palette);
-    }
+    QPalette palette = widget->palette();
+    palette.setColor(QPalette::Active, widget->backgroundRole(),
+                     standardPalette().color(QPalette::Active,QPalette::Base));
+    palette.setColor(QPalette::Inactive, widget->backgroundRole(),
+                     standardPalette().color(QPalette::Inactive,QPalette::Base));
+    widget->setPalette(palette);
     /* hack Dolphin's view */
     if (hspec_.transparent_dolphin_view && widget->autoFillBackground())
       widget->setAutoFillBackground(false);
@@ -515,16 +532,14 @@ void Style::polish(QWidget *widget)
     }
     else // in rare cases like KNotes' font combos or Kcalc
     {
-      QColor col = getFromRGBA(cspec_.textColor);
-      if (col.isValid())
+      QColor col = standardPalette().color(QPalette::Active,QPalette::Text);
+      QPalette palette = widget->palette();
+      if (col != palette.color(QPalette::Active,QPalette::Text))
       {
-        QPalette palette = widget->palette();
-        if (col != palette.color(QPalette::Active,QPalette::Text))
-        {
-          palette.setColor(QPalette::Active,QPalette::Text,col);
-          palette.setColor(QPalette::Inactive,QPalette::Text,col);
-          widget->setPalette(palette);
-        }
+        palette.setColor(QPalette::Active,QPalette::Text,col);
+        palette.setColor(QPalette::Inactive,QPalette::Text,
+                         standardPalette().color(QPalette::Inactive,QPalette::Text));
+        widget->setPalette(palette);
       }
     }
 
