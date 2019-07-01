@@ -907,7 +907,8 @@ QWidget *Style::getStylableToolbarContainer(const QWidget *w, bool allowInvisibl
   if (window == w) return NULL;
   if (isStylableToolbar(window, allowInvisible)) // detached toolbar
     return window;
-  foreach (QToolBar *tb, window->findChildren<QToolBar*>())
+  const QList<QToolBar*> toolbars = window->findChildren<QToolBar*>();
+  for (QToolBar *tb : toolbars)
   {
     if (isStylableToolbar(tb, allowInvisible) && tb->isAncestorOf(w))
       return tb;
@@ -1374,7 +1375,8 @@ void Style::polish(QWidget *widget)
                  || vp->backgroundRole() == QPalette::Button))
       {
         vp->setAutoFillBackground(false);
-        foreach (QWidget *child, vp->findChildren<QWidget*>())
+        const QList<QWidget*> children = vp->findChildren<QWidget*>();
+        for (QWidget *child : children)
         {
           if (child->parent() == vp && (child->backgroundRole() == QPalette::Window
                                         || child->backgroundRole() == QPalette::Button))
@@ -1476,7 +1478,8 @@ void Style::polish(QWidget *widget)
     QPalette palette = widget->palette();
     if (enoughContrast(palette.color(QPalette::WindowText), tCol))
     {
-      foreach (QLabel *label, widget->findChildren<QLabel*>())
+      const QList<QLabel*> labels = widget->findChildren<QLabel*>();
+      for (QLabel *label : labels)
       {
         QPalette lPalette = label->palette();
         lPalette.setColor(QPalette::Active, QPalette::ButtonText, tCol);
@@ -2177,7 +2180,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           QWidget *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
           if (!parentMenu)
           { // search for a detached menu with an active action
-            foreach (QWidget *topWidget, QApplication::topLevelWidgets())
+            const QWidgetList topLevels = QApplication::topLevelWidgets();
+            for (QWidget *topWidget : topLevels)
             {
               if (topWidget->isVisible()
                   && qobject_cast<QMenu*>(topWidget)

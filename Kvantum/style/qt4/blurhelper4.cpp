@@ -2,17 +2,17 @@
 
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -106,7 +106,7 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   QRect rect = widget->rect();
 
   /* trimming the region isn't good for us */
-  return (widget->mask().isEmpty() ? 
+  return (widget->mask().isEmpty() ?
             r.isEmpty() ?
               rect
               : rect.adjusted (r.at(0), r.at(1), -r.at(2), -r.at(3))
@@ -125,7 +125,8 @@ void BlurHelper::update (QWidget* widget) const
   else
   {
     QVector<unsigned long> data;
-    foreach (const QRect& rect, region.rects())
+    const QVector<QRect> allRects = region.rects();
+    for (const QRect& rect : allRects)
     {
       data << rect.x() << rect.y() << rect.width() << rect.height();
     }

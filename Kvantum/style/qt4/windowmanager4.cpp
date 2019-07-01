@@ -3,17 +3,17 @@
 
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
- * 
+ *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Kvantum is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -119,7 +119,7 @@ void WindowManager::initializeWhiteList (const QStringList &list)
   whiteList_.insert (ExceptionId ("ViewSliders@kmix"));
   whiteList_.insert (ExceptionId ("Sidebar_Widget@konqueror"));
 
-  foreach (const QString& exception, list)
+  for (const QString& exception : list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
@@ -133,7 +133,7 @@ void WindowManager::initializeBlackList (const QStringList &list)
   blackList_.clear();
   blackList_.insert (ExceptionId ("CustomTrackView@kdenlive"));
   blackList_.insert (ExceptionId ("MuseScore"));
-  foreach (const QString& exception, list)
+  for (const QString& exception : list)
   {
     ExceptionId id (exception);
     if (!id.className().isEmpty())
@@ -363,7 +363,7 @@ bool WindowManager::isBlackListed (QWidget* widget)
 
   // list-based blacklisted widgets
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, blackList_)
+  for (const ExceptionId &id : blackList_)
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;
@@ -384,7 +384,7 @@ bool WindowManager::isWhiteListed (QWidget* widget) const
 {
 
   QString appName (qApp->applicationName());
-  foreach (const ExceptionId &id, whiteList_)
+  for (const ExceptionId &id : whiteList_)
   {
     if (!id.appName().isEmpty() && id.appName() != appName)
       continue;
