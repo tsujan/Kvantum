@@ -100,17 +100,17 @@ The main reason for including a cmake build was that a few distros (especially F
 
 In KDE:
 =======
-(1) Select Kvantum from 'System Settings > Application Style > Widget Style' and apply it.
+(1) Select Kvantum from 'System Settings → Application Style → Widget Style' and apply it.
 
-(2) Select Kvantum from 'System Settings > Color > Scheme' and click Apply. You could change the color scheme later if you choose another Kvantum theme with Kvantum Manager (see "Using Other Themes" below).
+(2) Select Kvantum from 'System Settings → Color → Scheme' and click Apply. You could change the color scheme later if you choose another Kvantum theme with Kvantum Manager (see "Using Other Themes" below).
 
 Logging out and in would be good for Plasma to see the new theme.
 
 In LXQt:
 ========
-Just select "kvantum" from Configuration Center > Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
+Just select "kvantum" from Configuration Center → Widget Style. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
 
-In case you use Compton as the X compositor (not recommended), be sure to disable either Kvantum's popup shadows with Kvantum Manager or Compton's shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
+In case you use Compton as the X compositor (not recommended), be sure to disable its shadow and blurring for composited Qt menus with lines like these in '~/.config/compton.conf':
 
 shadow-exclude = [ "argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
 blur-background-exclude = [ "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
@@ -134,6 +134,16 @@ If the display manager you use does not source '~/.profile', you could probably 
 To select or install (as user) Kvantum themes, use Kvantum Manager, which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could not only switch between themes easily but also select themes for specific applications.
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
+
+**************************
+*   (KWin) Blur Effect   *
+**************************
+
+The blur effect of any compositor can be used with Kvantum when its active theme has translucent backgrounds. However, Kvantum can control KWin's blur effect with translucent menus and tooltips as well as explicitly translucent windows (like those of QTerminal, Konsole or LXQt Panel). Enabling blur options in Kvantum Manager has effect only when KWin's blur effect is enabled; otherwise, there will be no blurring or another compositor will control how translucent backgrounds are blurred.
+
+In the case of compositors other than KWin, it is preferable that menus and tooltips have neither shadow nor blurring because those compositors cannot distinguish the shadows that Kvantum gives to menus and tooltips. But, if disabling menu/tooltip shadow and blurring is not possible with them, "Kvantum Manager → Compositing & General Look → Shadowless menus and tooltips" could be checked as a workaround.
+
+Make sure that you never have two compositors running together! KWin is highly recommended, whether with KDE or with LXQt. It supports both X11 and Wayland and has a decent blur effect.
 
 *****************************
 *   Notes for Theme Makers  *

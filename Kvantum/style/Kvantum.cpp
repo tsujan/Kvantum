@@ -7457,17 +7457,9 @@ void Style::drawControl(QStyle::ControlElement element,
               R.setX(r.x()+r.width()-(animcount%r.width()));
             else
               R.setX(r.x()+(animcount%r.width()));
-
           }
-          if (!isRounded)
-            R.setWidth(pm);
-          else
-          {
-            if (!isVertical)
-              R.setWidth(h);
-            else
-              R.setWidth(w);
-          }
+          int W = !isRounded ? pm : !isVertical ? qMax(h,pm) : qMax(w,pm);
+          R.setWidth(W);
           if (R.height() < fspec.top+fspec.bottom)
           {
             fspec.top = fspec.bottom = r.height()/2;
@@ -7484,13 +7476,16 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               if (isRounded)
               {
-                painter->save();
-                painter->setClipRegion(R);
-                if (!isVertical)
-                  R1.adjust(R.width()-h,0,0,0);
-                else
-                  R1.adjust(R.width()-w,0,0,0);
-                thin = true;
+                if (R1.width() < (!isVertical ? h : w))
+                {
+                  painter->save();
+                  painter->setClipRegion(R);
+                  if (!isVertical)
+                    R1.adjust(R.width()-h,0,0,0);
+                  else
+                    R1.adjust(R.width()-w,0,0,0);
+                  thin = true;
+                }
               }
               else if (R1.width() < fspec.left+fspec.right)
               {
@@ -7506,20 +7501,23 @@ void Style::drawControl(QStyle::ControlElement element,
             if (thin)
               painter->restore();
 
-            R = QRect(r.x(), r.y(), (!isRounded ? pm : !isVertical? h : w)-R.width(), r.height());
+            R = QRect(r.x(), r.y(), W-R.width(), r.height());
 
             thin = false;
             if (R.width() > 0)
             {
               if (isRounded)
               {
-                painter->save();
-                painter->setClipRegion(R);
-                if (!isVertical)
-                  R.setWidth(h);
-                else
-                  R.setWidth(w);
-                thin = true;
+                if (R.width() < (!isVertical ? h : w))
+                {
+                  painter->save();
+                  painter->setClipRegion(R);
+                  if (!isVertical)
+                    R.setWidth(h);
+                  else
+                    R.setWidth(w);
+                  thin = true;
+                }
               }
               else if (R.width() < fspec.left+fspec.right)
               {
@@ -12256,7 +12254,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_LargeIconSize : return tspec_.large_icon_size;
 
     case PM_FocusFrameVMargin :
-    case PM_FocusFrameHMargin :  {
+    case PM_FocusFrameHMargin : {
       int margin = 0;
       /* This is for putting the viewitem's text and icon inside
          its (forced) frame. It also sets the text-icon spacing
