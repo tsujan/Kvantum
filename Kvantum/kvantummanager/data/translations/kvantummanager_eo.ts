@@ -38,7 +38,7 @@ dosierujon de Kvantum</translation>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
         <translation>Aldoni ĉi tiun etoson al la listo de etosoj,
-kiujn Kvantum povas uszi krom siajn etosojn.</translation>
+kiujn Kvantum povas uszi krom siaj etosoj.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -242,14 +242,14 @@ por la elektita elemento.</translation>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation>Ne desegnu fonon por la menutitolo de KDE.
+        <translation>Ne aldonu fonon al la menutitolo de KDE.
 (Elsaluti kaj ensaluti necesas por ke la menuoj
 de Plasmo vidu ĉi tiun agordon.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne desegni fonon por la menutitolo de KDE?&lt;/p&gt;&lt;p&gt;La menutitolo similas menudisigilon sed havas ikonon kaj tekston.&lt;/p&gt;&lt;p&gt;La menuoj de Plasmo bezonas elsaluton kaj ensaluton por vidi ĉi tiun agordon. Ĉe LXQt, la panelo povas esti restartigita per &lt;span style=&quot; font-style:italic;&quot;&gt;Seancaj agordoj&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne aldonu fonon al la menutitolo de KDE?&lt;/p&gt;&lt;p&gt;La menutitolo similas menudisigilon sed havas ikonon kaj tekston.&lt;/p&gt;&lt;p&gt;La menuoj de Plasmo bezonas elsaluton kaj ensaluton por vidi ĉi tiun agordon. Ĉe LXQt, la panelo povas esti restartigita per &lt;span style=&quot; font-style:italic;&quot;&gt;Seancaj agordoj&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -412,7 +412,7 @@ Diversaĵoj → Konsideru labortablajn mediojn</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Ĉar &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; ne dependas al iu labortabla medio, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per platform-integrigilo por Qt. KDE kaj LXQt havigas simplajn ilojn por ŝanĝi la aktivan stilan kromprogramon de Qt. Ĉe la aliaj platformoj, vi bezonas agordilon de Qt.&lt;br/&gt;&lt;br/&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso ĉar iuj KDE-aplikaĵoj eble akiras iliajn kolorojn senpere el la KDE-kolorskemo.&lt;br/&gt;&lt;br/&gt;La rulataj aplikaĵoj alprenos la novan etoson post ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Ĉar &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; ne dependas al iu labortabla medio, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per platform-integrigilo por Qt. KDE kaj LXQt havigas simplajn ilojn por ŝanĝi la aktivan stilan kromprogramon de Qt. Ĉe la aliaj platformoj, vi bezonas agordilon de Qt.&lt;br/&gt;&lt;br/&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso ĉar iuj KDE-aplikaĵoj eble akiras iliajn kolorojn senpere el la KDE-kolorskemo.&lt;br/&gt;&lt;br/&gt;La rulataj aplikaĵoj alprenos la novan etoson post kiam ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="703"/>
@@ -510,7 +510,7 @@ La butono estus aŭtomate markita se la fenestroj estus nebuligitaj.</translatio
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation>Ne desegnu ombrojn por la menuoj kaj ŝpruchelpiloj.
+        <translation>Ne aldonu ombrojn al la menuoj kaj ŝpruchelpiloj.
 
 Ĉi tio povas esti utila ĉe labortablaj medioj, kiuj donas
 ombrojn al la menuoj kaj ŝpruchelpiloj.</translation>
@@ -1176,7 +1176,7 @@ Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1588"/>
         <source>Tree branch lines</source>
-        <translation>Arbaj branĉlinioj</translation>
+        <translation>Branĉlinioj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1644"/>
@@ -1198,7 +1198,7 @@ por la menubreto defaŭlte.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1696"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La musospurado estas aktiva por la menubreto defaŭlte, t.e., post iu menubreta ero estas klakita kaj ĝia menuo estas montrita, la menuoj de la aliaj menubretaj eroj estus montritaj se la kursoro ŝvebus super ili.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La musospurado estas aktiva por la menubreto defaŭlte, t.e., post kiam iu menubreta ero estas klakita kaj ĝia menuo estas montrita, la menuoj de la aliaj menubretaj eroj estus montritaj se la kursoro ŝvebus super ili.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1699"/>
