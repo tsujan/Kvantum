@@ -34,7 +34,7 @@
 #endif
 
 namespace Kvantum {
-BlurHelper::BlurHelper (QObject* parent, QList<int> menuS, QList<int> tooltipS,
+BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
                         qreal contrast, qreal intensity, qreal saturation) : QObject (parent)
 {
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
@@ -106,6 +106,14 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
   return false;
 }
 /*************************/
+static inline int ceilingInt (const qreal r)
+{ // to prevent 1-px blurred strips outside menu/tooltip borders
+  int res = qRound(r);
+  if (r - static_cast<qreal>(res) > static_cast<qreal>(0.1))
+    res += 1;
+  return res;
+}
+
 QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
   if (!widget->isVisible()) return QRegion();
@@ -118,7 +126,7 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   if (!wMask.isEmpty() && wMask != QRegion(rect))
     return QRegion();
 
-  QList<int> r;
+  QList<qreal> r;
   if ((qobject_cast<QMenu*>(widget)
        && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not a detached menu
       || widget->inherits("QComboBoxPrivateContainer"))
@@ -142,14 +150,13 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
     rect.setSize ((QSizeF(rect.size()) * dpr).toSize());
 #endif
 
-  /* trimming the region isn't good for us */
   return (wMask.isEmpty()
             ? r.isEmpty()
                 ? rect
-                : rect.adjusted (qRound(dpr * static_cast<qreal>(r.at(0))),
-                                 qRound(dpr * static_cast<qreal>(r.at(1))),
-                                 -qRound(dpr * static_cast<qreal>(r.at(2))),
-                                 -qRound(dpr * static_cast<qreal>(r.at(3))))
+                : rect.adjusted (ceilingInt(dpr * r.at(0)),
+                                 ceilingInt(dpr * r.at(1)),
+                                 -ceilingInt(dpr * r.at(2)),
+                                 -ceilingInt(dpr * r.at(3)))
             : wMask); // is the same as rect (see above)
 }
 /*************************/

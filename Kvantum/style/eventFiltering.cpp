@@ -975,7 +975,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (QScreen *sc = win->screen())
             ag = sc->availableGeometry();
         }
-        int dX = 0, dY = 0;
+        qreal dX = 0, dY = 0;
         /* this gives the real position AFTER pending movements
            because it's QWidgetData::crect (Qt -> qwidget.h) */
         QRect g(w->geometry());
@@ -1000,7 +1000,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               else
               {
                 dX += menuShadow_.at(0)
-                      - getMenuMargin(true); // workaround for an old Qt bug
+                      - static_cast<qreal>(getMenuMargin(true)); // workaround for an old Qt bug
               }
             }
             else
@@ -1009,17 +1009,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               {
                 QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
                 if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
                 else
-                  dY -= getFrameSpec(group).bottom;
+                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
 
                 QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
                 if (g.right() + 1 > activeTopLeft.x() + activeG.width())
                 { // Qt positions the menu wrongly in this case but we don't add a workaround
                   dX -= menuShadow_.at(2);
-                  int delta = menuShadow_.at(2)
-                              - (g.right() + 1 - (activeTopLeft.x() + activeG.width()));
+                  qreal delta = menuShadow_.at(2)
+                                - static_cast<qreal>(g.right() + 1 - (activeTopLeft.x() + activeG.width()));
                   if (delta > 0)
                     dX += delta;
                   else
@@ -1036,8 +1036,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                   if (g.right() + 1 > wTopLeft.x() + sunkenButton_.data()->width())
                   {
                     dX -= menuShadow_.at(2);
-                    int delta = menuShadow_.at(2)
-                                - (g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
+                    qreal delta = menuShadow_.at(2)
+                                  - static_cast<qreal>(g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
                     if (delta > 0)
                       dX += delta;
                     else
@@ -1072,9 +1072,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               {
                 QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
                 if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + getFrameSpec(group).top;
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
                 else
-                  dY -= getFrameSpec(group).bottom;
+                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
 
                 QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
                                                                    parentMenubar->activeAction())
@@ -1082,7 +1082,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 if (activeTopLeft.x() > g.left()) // because of the right screen border
                 {
                   dX += menuShadow_.at(0);
-                  int delta = menuShadow_.at(0) - (activeTopLeft.x() - g.left());
+                  qreal delta = menuShadow_.at(0) - static_cast<qreal>(activeTopLeft.x() - g.left());
                   if (delta > 0)
                     dX -= delta;
                   else
@@ -1099,7 +1099,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                   if (wTopLeft.x() > g.left()) // because of the right screen border
                   {
                     dX += menuShadow_.at(0);
-                    int delta = menuShadow_.at(0) - (wTopLeft.x() - g.left());
+                    qreal delta = menuShadow_.at(0) - static_cast<qreal>(wTopLeft.x() - g.left());
                     if (delta > 0)
                       dX -= delta;
                     else
@@ -1123,9 +1123,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
           if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-            dY += getFrameSpec(group).top;
+            dY += static_cast<qreal>(getFrameSpec(group).top);
           else
-            dY -= getFrameSpec(group).bottom;
+            dY -= static_cast<qreal>(getFrameSpec(group).bottom);
         }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
@@ -1143,15 +1143,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               if (g.top() + topActionRect.top() ==  parentMenu->actionGeometry(activeAct).top()
                                                     + parentMenuCorner.y())
               {
-                dY += topActionRect.top();
+                dY += static_cast<qreal>(topActionRect.top());
               }
             }
           }
         }
 #endif
 
-        if (dX == 0 && dY == 0) break;
-        w->move(g.left() + dX, g.top() + dY);
+        int DX = qRound(dX);
+        int DY = qRound(dY);
+        if (DX == 0 && DY == 0) break;
+        w->move(g.left() + DX, g.top() + DY);
         movedMenus.insert(w);
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))

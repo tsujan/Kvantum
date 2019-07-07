@@ -326,8 +326,8 @@ class Style : public QCommonStyle {
     /* Get menu margins, including its shadow. */
     int getMenuMargin(bool horiz) const;
     /* Get pure shadow dimensions of menus/tooltips. */
-    QList<int> getShadow(const QString &widgetName, int thicknessH, int thicknessV);
-    QList<int> getShadow(const QString &widgetName, int thickness) {
+    QList<qreal> getShadow(const QString &widgetName, int thicknessH, int thicknessV);
+    QList<qreal> getShadow(const QString &widgetName, int thickness) {
       return getShadow(widgetName,thickness,thickness);
     }
 
@@ -463,8 +463,9 @@ class Style : public QCommonStyle {
     QPointer<QWidget> enteredWidget_;
 
     /* For not getting the menu shadows repeatedly.
-       They're used to position submenus correctly. */
-    QList<int> menuShadow_, realMenuShadow_;
+       They're used to position menus correctly and also to find blurred regions. */
+    QList<qreal> menuShadow_;
+    QList<int> realMenuShadow_;
 
     /* Is this DE GTK-based? Currently Gnome, Unity and Pantheon are supported. */
     bool gtkDesktop_;

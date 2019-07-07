@@ -54,7 +54,10 @@ Section                                      Meaning
 
 [Focus]                                      Generic focus frame/rectangle.
 
-[GenericFrame]                               Generic frame.
+[GenericFrame]                               Generic frame. Mostly drawn around
+                                             item/text views but some apps may draw
+                                             it in other places too (see the key
+                                             "remove_extra_frames" in General section).
 
 [LineEdit]                                   A line edit (one-line text editor).
 

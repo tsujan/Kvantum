@@ -318,7 +318,7 @@
 <rect width="15" x="224.49977" y="-215.50024" height="15" style="fill:#fafafa;stroke:#a0a0a0;color:#000" id="checkbox-focused" transform="scale(1,-1)"/>
 <g style="color:#000" id="checkbox-tristate-focused" transform="translate(38,-269.5)">
 <rect width="15" x="354.49976" y="-485" height="15" style="fill:#fcfcfc;stroke:#a0a0a0" id="rect4572" transform="scale(1,-1)"/>
-<rect width="12" x="356" y="-479" height="3" style="fill:#3176bf" id="rect7319" transform="scale(1,-1)"/>
+<path style="fill:#3176bf" id="rect7319" d="m 357,482.5 h 10 v -10 z"/>
 </g>
 <g id="arrow-up-focused" transform="translate(59.807018,-341.68597)">
 <path style="opacity:0;fill:#fff" id="rect4881" d="m -607.493,8 h 24 v 24 h -24 z " transform="rotate(-90)"/>
@@ -434,15 +434,15 @@
 </g>
 <g id="checkbox-checked-normal">
 <use width="450" height="1230" id="use3879" xlink:href="#checkbox-normal" transform="translate(80)"/>
-<rect width="8" x="276" y="-212" height="8" style="fill:#3176bf;color:#000" id="rect7291" transform="scale(1,-1)"/>
+<path style="fill:#3176bf;color:#000" id="rect7291" d="m 276,-212 h 8 v 8 h -8 z" transform="scale(1,-1)"/>
 </g>
 <g id="checkbox-checked-focused">
 <use width="450" height="1230" id="use3885" xlink:href="#checkbox-focused" transform="translate(88,-2)"/>
-<rect width="10" x="315" y="-211" height="10" style="fill:#3176bf;color:#000" id="rect7331" transform="scale(1,-1)"/>
+<path style="fill:#3176bf;color:#000" id="rect7331" d="m 315,-211 h 10 v 10 h -10 z" transform="scale(1,-1)"/>
 </g>
 <g id="checkbox-tristate-normal">
 <use width="450" height="1230" id="use3893" xlink:href="#checkbox-normal" transform="translate(155,-1.5002441)"/>
-<rect width="10" x="350" y="-208" height="3" style="fill:#3176bf;color:#000" id="rect7313" transform="scale(1,-1)"/>
+<path style="fill:#3176bf;color:#000" id="rect7313" d="m 351,210.5 h 8 v -8 z"/>
 </g>
 <g id="button-normal-left" transform="matrix(1.3333333,0,0,0.98461538,-13.333313,-28.001642)">
 <path style="fill:url(#linearGradient9495);fill-rule:evenodd" id="path4266" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
@@ -911,11 +911,11 @@
 </g>
 <g id="checkbox-checked-normal-inactive" transform="translate(0,18)">
 <use width="450" height="1230" xlink:href="#checkbox-normal" id="use1572" transform="translate(80)"/>
-<rect width="8" x="276" y="-212" height="8" style="fill:#828282;color:#000" id="rect1574" transform="scale(1,-1)"/>
+<path style="fill:#828282;color:#000" id="rect1574" d="m 276,-212 h 8 v 8 h -8 z" transform="scale(1,-1)"/>
 </g>
 <g id="checkbox-tristate-normal-inactive" transform="translate(0,18)">
 <use width="450" height="1230" xlink:href="#checkbox-normal" id="use1578" transform="translate(155,-1.5002441)"/>
-<rect width="10" x="350" y="-208" height="3" style="fill:#828282;color:#000" id="rect1580" transform="scale(1,-1)"/>
+<path style="fill:#828282;color:#000" id="rect1580" d="m 351,210.5 h 8 v -8 z"/>
 </g>
 <path style="fill:url(#linearGradient4390);fill-rule:evenodd" id="slider-toggled-inactive-topleft" d="m 221,721.7499 c -6.648,0 -12,5.352 -12,12 h 12 z"/>
 <path style="fill:url(#linearGradient1594);fill-rule:evenodd" id="slider-toggled-inactive-left" d="m 209,733.7499 v 16.4063 0.094 h 12 v -16.5 h -12 z"/>

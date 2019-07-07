@@ -374,7 +374,7 @@ Style::Style(bool useDark) : QCommonStyle()
   {
     if (tspec_.menu_shadow_depth > 0)
       getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-    QList<int> tooltipS;
+    QList<qreal> tooltipS;
     if (tspec_.tooltip_shadow_depth > 0)
     {
       const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
@@ -891,24 +891,26 @@ int Style::getMenuMargin(bool horiz) const
   return margin;
 }
 
-QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
+QList<qreal> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
-  QList<int> shadow;
-  shadow << 0 << 0 << 0 << 0;
   if (tspec_.shadowless_popup)
   {
     if (widgetName == "Menu")
     {
-      realMenuShadow_ = menuShadow_ = shadow;
-      setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
+      menuShadow_ = {0,0,0,0};
+      realMenuShadow_ = {0,0,0,0};
+      setProperty("menu_shadow", QVariant::fromValue(realMenuShadow_));
     }
-    return shadow;
+    return menuShadow_;
   }
   if (widgetName == "Menu"
       && menuShadow_.count() == 4)
   {
     return menuShadow_;
   }
+
+  QList<qreal> s;
+  s << 0 << 0 << 0 << 0;
 
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
@@ -936,8 +938,8 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
         if (renderer)
         {
           br = renderer->boundsOnElement(element+"-shadow-hint-"+direction[i]);
-          shadow[i] = i%2 ? qRound(static_cast<qreal>(thicknessV)*(br.height()/divisor))
-                          : qRound(static_cast<qreal>(thicknessH)*(br.width()/divisor));
+          s[i] = i%2 ? static_cast<qreal>(thicknessV)*(br.height()/divisor)
+                     : static_cast<qreal>(thicknessH)*(br.width()/divisor);
         }
       }
     }
@@ -945,14 +947,20 @@ QList<int> Style::getShadow(const QString &widgetName, int thicknessH, int thick
 
   if (widgetName == "Menu")
   {
+    menuShadow_ = s;
+    QList<int> shadow;
+    shadow << qRound(s[0]) << qRound(s[1]) << qRound(s[2]) << qRound(s[3]);
     realMenuShadow_ = shadow; // don't lose the real info
     if (tspec_.spread_menuitems)
+    {
       shadow[0] = shadow[2] = thicknessH;
-    menuShadow_ = shadow;
-    setProperty("menu_shadow", QVariant::fromValue(menuShadow_));
+      menuShadow_[0] = menuShadow_[2] = static_cast<qreal>(thicknessH);
+    }
+    setProperty("menu_shadow", QVariant::fromValue(shadow));
+    return menuShadow_;
   }
 
-  return shadow; // [left, top, right, bottom]
+  return s; // [left, top, right, bottom]
 }
 
 // also checks for NULL widgets
@@ -3164,13 +3172,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
 
-        // -> polish(QWidget *widget))
-        bool hasFlatBg(sa && themeRndr_ && themeRndr_->isValid()
-                       && (sa->backgroundRole() == QPalette::Window
-                           || sa->backgroundRole() == QPalette::Button)
-                       && (!sa->viewport()
-                           || (sa->viewport()->backgroundRole() != QPalette::Window
-                               && sa->viewport()->backgroundRole() != QPalette::Button)));
+        /* -> polish(QWidget *widget)) */
+        bool hasFlatBg = !(sa
+                           && (sa->backgroundRole() == QPalette::Window
+                               || sa->backgroundRole() == QPalette::Button)
+                           && sa->viewport()
+                           && (sa->viewport()->backgroundRole() == QPalette::Window
+                               || sa->viewport()->backgroundRole() == QPalette::Button));
         if (!hasFlatBg && tspec_.remove_extra_frames) break;
 
         frame_spec fspec = getFrameSpec(QStringLiteral("GenericFrame"));
@@ -15056,7 +15064,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             if (!tspec_.shadowless_popup && !noComposite_ && menuShadow_.count() == 4)
             {
               /* menu width shouldn't be less than combo width */
-              r.adjust(0, 0, qMax(w - (r.width() - menuShadow_.at(0) - menuShadow_.at(2)), 0), 0);
+              r.adjust(0, 0, qMax(w - (r.width() - qRound(menuShadow_.at(0) + menuShadow_.at(2))), 0), 0);
               r.translate(-menuShadow_.at(0), -menuShadow_.at(1));
             }
             else

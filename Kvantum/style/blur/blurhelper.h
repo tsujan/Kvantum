@@ -39,7 +39,7 @@ class BlurHelper: public QObject
 
   public:
 
-    BlurHelper (QObject*, QList<int> menuS, QList<int> tooltipS,
+    BlurHelper (QObject*, QList<qreal> menuS, QList<qreal> tooltipS,
                 qreal contrast = static_cast<qreal>(1),
                 qreal intensity = static_cast<qreal>(1),
                 qreal saturation = static_cast<qreal>(1));
@@ -103,8 +103,8 @@ class BlurHelper: public QObject
 
     /* Dimensions of pure shadows of menus and tooltips.
        (left, top, right, bottom) */
-    QList<int> menuShadow_;
-    QList<int> tooltipShadow_;
+    QList<qreal> menuShadow_;
+    QList<qreal> tooltipShadow_;
 
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
 #if defined Q_WS_X11 || defined Q_OS_LINUX

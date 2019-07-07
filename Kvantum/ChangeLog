@@ -11,6 +11,7 @@ V0.11.2
  * Make the alternate base color opaque by applying it over the base color because some apps may ignore its translucency.
  * No disabled state for toolbars because, otherwise, it would be both ugly and useless.
  * Prevent tiny busy indicators with rounded progressbars.
+ * More precise calculations related to shadows and blurring of menus/tooltips, especially for preventing 1-px blurred strips outside menu/tooltip borders.
 
 V0.11.1
 ---------

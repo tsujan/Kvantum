@@ -405,7 +405,7 @@ void Style::polish(QWidget *widget)
               {
                 if (tspec_now.menu_shadow_depth > 0)
                   getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-                QList<int> tooltipS;
+                QList<qreal> tooltipS;
                 if (tspec_now.tooltip_shadow_depth > 0)
                 {
                   const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
@@ -851,7 +851,7 @@ void Style::polish(QWidget *widget)
       {
         if (blurHelper_ == nullptr && tspec_now.popup_blurring)
         {
-          QList<int> tooltipS;
+          QList<qreal> tooltipS;
           if (tspec_now.tooltip_shadow_depth > 0)
           {
             const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
