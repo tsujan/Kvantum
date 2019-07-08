@@ -1214,7 +1214,11 @@ static void getMaxDay(const QLocale l, bool full)
   for (int i=1; i<=7 ; ++i)
   {
     QString theDay = l.dayName(i,format);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    int size = QFontMetrics(QApplication::font()).horizontalAdvance(theDay);
+#else
     int size = QFontMetrics(QApplication::font()).width(theDay);
+#endif
     if (max < size)
     {
       max = size;
@@ -1232,7 +1236,11 @@ static void getMaxMonth(const QLocale l, bool full)
   for (int i=1; i<=12 ; ++i)
   {
     QString theMonth = l.monthName(i,format);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    int size = QFontMetrics(QApplication::font()).horizontalAdvance(theMonth);
+#else
     int size = QFontMetrics(QApplication::font()).width(theMonth);
+#endif
     if (max < size)
     {
       max = size;
@@ -1347,7 +1355,11 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     if (!svt.isEmpty())
     {
       QFontMetrics fm(sp->font());
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+      if (fm.horizontalAdvance(svt) > fm.horizontalAdvance(maxTxt))
+#else
       if (fm.width(svt) > fm.width(maxTxt))
+#endif
         maxTxt = svt;
     }
   }
@@ -1373,7 +1385,11 @@ static inline QString progressMaxText(const QProgressBar *pb, const QStyleOption
     l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
     QString percentTxt = QString(l.percent()) + l.toString(100);
     QFontMetrics fm = opt->fontMetrics;
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+    if (fm.horizontalAdvance(percentTxt) > fm.horizontalAdvance(maxTxt))
+#else
     if (fm.width(percentTxt) > fm.width(maxTxt))
+#endif
       maxTxt = percentTxt;
   }
   return maxTxt;
@@ -1463,7 +1479,11 @@ static inline QSize textSize(const QFont &font, const QString &text)
     th = QFontMetrics(font).height()*(l.size());
 
     for (int i=0; i<l.size(); i++)
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+      tw = qMax(tw,QFontMetrics(font).horizontalAdvance(l[i]));
+#else
       tw = qMax(tw,QFontMetrics(font).width(l[i]));
+#endif
 
     if (l.size() > 1)
     {
@@ -7066,7 +7086,11 @@ void Style::drawControl(QStyle::ControlElement element,
             QString maxText = progressMaxText(pb, opt);
             if (!maxText.isEmpty())
             {
-              int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+              int textWidth = QFontMetrics(f).horizontalAdvance(maxText) + 6; // 3px space + margin
+#else
+              int textWidth = QFontMetrics(f).width(maxText) + 6;
+#endif
               if (isVertical)
               {
                 if (inverted)
@@ -7251,7 +7275,11 @@ void Style::drawControl(QStyle::ControlElement element,
               QString maxText = progressMaxText(pb, opt);
               if (!maxText.isEmpty())
               {
-                int textWidth = QFontMetrics(f).width(maxText) + 6; // 3px space + margin
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+                int textWidth = QFontMetrics(f).horizontalAdvance(maxText) + 6; // 3px space + margin
+#else
+                int textWidth = QFontMetrics(f).width(maxText) + 6;
+#endif
                 if (isVertical)
                 {
                   if (inverted)
@@ -8086,7 +8114,7 @@ void Style::drawControl(QStyle::ControlElement element,
           break;
         }
       }
-      painter->fillRect(option->rect, option->palette.background());
+      painter->fillRect(option->rect, option->palette.window());
       break;
 
     case CE_HeaderSection : {
@@ -13122,7 +13150,11 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           }
           // consider a global min. width for push buttons as is done in "qpushbutton.cpp"
           s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+                                   + 6*QFontMetrics(QApplication::font()).horizontalAdvance("W"),
+#else
                                    + 6*QFontMetrics(QApplication::font()).width("W"),
+#endif
                                  s.height()));
         }
         else

@@ -12,6 +12,7 @@ V0.11.2
  * No disabled state for toolbars because, otherwise, it would be both ugly and useless.
  * Prevent tiny busy indicators with rounded progressbars.
  * More precise calculations related to shadows and blurring of menus/tooltips, especially for preventing 1-px blurred strips outside menu/tooltip borders.
+ * Replaced the Qt methods that were deprecated by Qt 5.13.
 
 V0.11.1
 ---------

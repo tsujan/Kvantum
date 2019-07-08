@@ -46,7 +46,7 @@ private slots:
     void useTheme();
     void txtChanged (const QString &txt);
     void tabChanged (int index);
-    void selectionChanged (const QString &txt);
+    void selectionChanged (int index);
     void assignAppTheme (const QString &previousTheme, const QString &newTheme);
     void preview();
     bool copyRootTheme (QString source, QString target);

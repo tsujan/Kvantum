@@ -26,7 +26,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QStyleFactory>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QWhatsThis>
 #include <QScrollBar>
 #include <QAbstractItemView>
@@ -1489,7 +1489,19 @@ void KvantumManager::tabChanged (int index)
                                          + (4+3)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)
                                          + 6*textIconHeight
                                          + (ui->restoreButton->isEnabled() ? textIconHeight : 0)));
-            newSize = newSize.boundedTo (QApplication::desktop()->availableGeometry().size());
+            QRect sr;
+            if (QWindow *win = windowHandle())
+            {
+                if (QScreen *sc = win->screen())
+                    sr = sc->virtualGeometry();
+            }
+            if (sr.isNull())
+            {
+                if (QScreen *pScreen = QApplication::primaryScreen())
+                    sr = pScreen->virtualGeometry();
+            }
+            if (!sr.isNull())
+                newSize = newSize.boundedTo (sr.size());
             resize (newSize);
             confPageVisited_ = true;
         }
@@ -1566,8 +1578,9 @@ QString KvantumManager::getComment (const QString &comboText, bool setState)
     return comment;
 }
 /*************************/
-void KvantumManager::selectionChanged (const QString &txt)
+void KvantumManager::selectionChanged (int /*index*/)
 {
+    QString txt = ui->comboBox->currentText();
     if (txt.isEmpty()) return; // not needed
 
     ui->statusBar->clearMessage();
@@ -1647,10 +1660,10 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
 {
     /* may be connected before */
 #if QT_VERSION >= 0x050700
-    disconnect (ui->comboBox, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    disconnect (ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
                 this, &KvantumManager::selectionChanged);
 #else
-    disconnect (ui->comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    disconnect (ui->comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                 this, &KvantumManager::selectionChanged);
 #endif
     ui->comboBox->clear();
@@ -1948,10 +1961,10 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
 
     /* connect to combobox signal */
 #if QT_VERSION >= 0x050700
-    connect (ui->comboBox, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect (ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
              this, &KvantumManager::selectionChanged);
 #else
-    connect (ui->comboBox, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+    connect (ui->comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
              this, &KvantumManager::selectionChanged);
 #endif
     /* put the app themes list in the text edit */

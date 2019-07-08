@@ -40,10 +40,10 @@ public:
         lineEdit()->setClearButtonEnabled (true);
 #endif
 #if QT_VERSION >= 0x050700
-        connect (this, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+        connect (this, QOverload<int>::of(&QComboBox::currentIndexChanged),
                  this, &ComboBox::textChangedSlot);
 #else
-        connect (this, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect (this, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                  this, &ComboBox::textChangedSlot);
 #endif
     }
@@ -52,8 +52,9 @@ signals:
     void textChangedSignal (const QString &oldText, const QString &newText);
 
 private slots:
-    void textChangedSlot (const QString &newText)
+    void textChangedSlot (int /*index*/)
     {
+        QString newText = currentText();
         emit textChangedSignal (oldText_, newText);
         oldText_ = newText;
     }
