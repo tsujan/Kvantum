@@ -25,9 +25,7 @@ int main (int argc, char *argv[])
 {
   QApplication::setApplicationName ("KvantumViewer");
   QApplication viewer (argc,argv);
-#if QT_VERSION >= 0x050500
   viewer.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-#endif
 
   QStringList langs (QLocale::system().uiLanguages());
   QString lang; // bcp47Name() doesn't work under vbox
@@ -54,12 +52,7 @@ int main (int argc, char *argv[])
   if (!list.isEmpty())
   {
     QTabWidget *tw = list.at (0);
-#if QT_VERSION < 0x050000
-    QTabBar *tb = tw->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar"));
-    if (tb) tb->setUsesScrollButtons (true);
-#else
     tw->tabBar()->setUsesScrollButtons (true);
-#endif
   }
   QObject::connect (&viewer, &QApplication::lastWindowClosed, &viewer, &QApplication::quit);
   return viewer.exec();

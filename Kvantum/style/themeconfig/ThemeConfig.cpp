@@ -21,7 +21,7 @@
 #include "ThemeConfig.h"
 #if defined Q_WS_X11 || defined Q_OS_LINUX
 #include <QX11Info>
-#if QT_VERSION >= 0x050000
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #define KSL(x) QStringLiteral(x)
@@ -38,10 +38,10 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   /* For now, the lack of x11 means wayland.
      Later, a better method should be found. */
 #if defined Q_WS_X11 || defined Q_OS_LINUX
-#if QT_VERSION < 0x050200
-  isX11_ = true;
-#else
+#if (QT_VERSION >= QT_VERSION_CHECK(5,2,0))
   isX11_ = QX11Info::isPlatformX11();
+#else
+  isX11_ = true;
 #endif
 #else
   isX11_ = false;
@@ -383,7 +383,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       v = getValue(elementName,KSL("text.bold"), i);
       r.boldFont = v.toBool();
 
-#if QT_VERSION >= 0x050000
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
       v = getValue(elementName,KSL("text.boldness"), i);
       if (v.isValid()) // QFont::Bold by default
       {
@@ -551,10 +551,7 @@ theme_spec ThemeConfig::getCompositeSpec()
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX
   /* set to false if no compositing manager is running */
-#if QT_VERSION < 0x050200
-  if (QX11Info::isCompositingManagerRunning())
-    compositing = true;
-#else
+#if (QT_VERSION >= QT_VERSION_CHECK(5,2,0))
   if (isX11_)
   {
     Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
@@ -563,6 +560,9 @@ theme_spec ThemeConfig::getCompositeSpec()
   }
   else
     compositing = true; // wayland is always composited
+#else
+  if (QX11Info::isCompositingManagerRunning())
+    compositing = true;
 #endif
 /*#elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   compositing = true; // presuppose a compositor without Linux and X11*/
@@ -928,13 +928,13 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
-#if QT_VERSION < 0x050000
-  r.transient_scrollbar=false;
-#else
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
   v = getValue(KSL("General"),KSL("transient_scrollbar"));
   r.transient_scrollbar = v.toBool();
   v = getValue(KSL("General"),KSL("transient_groove"));
   r.transient_groove = v.toBool();
+#else
+  r.transient_scrollbar=false;
 #endif
 
   /* for technical reasons, we always set scrollbar_in_view

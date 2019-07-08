@@ -95,9 +95,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                                                     << tr ("Menubar and primary toolbar")
                                                     << tr ("Anywhere possible"));
 
-#if QT_VERSION >= 0x050200
     ui->appsEdit->setClearButtonEnabled (true);
-#endif
 
     QLabel *statusLabel = new QLabel();
     statusLabel->setTextInteractionFlags (Qt::TextSelectableByMouse);
@@ -1659,13 +1657,8 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
 void KvantumManager::updateThemeList (bool updateAppThemes)
 {
     /* may be connected before */
-#if QT_VERSION >= 0x050700
     disconnect (ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
                 this, &KvantumManager::selectionChanged);
-#else
-    disconnect (ui->comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                this, &KvantumManager::selectionChanged);
-#endif
     ui->comboBox->clear();
     QString curAppTheme;
     if (updateAppThemes)
@@ -1960,13 +1953,8 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
 #endif
 
     /* connect to combobox signal */
-#if QT_VERSION >= 0x050700
     connect (ui->comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
              this, &KvantumManager::selectionChanged);
-#else
-    connect (ui->comboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-             this, &KvantumManager::selectionChanged);
-#endif
     /* put the app themes list in the text edit */
     if (updateAppThemes)
     {

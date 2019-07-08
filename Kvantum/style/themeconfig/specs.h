@@ -19,7 +19,7 @@
 #define SPEC_H
 
 #include <QStringList>
-#if QT_VERSION >= 0x050000
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
 #include "drag/windowmanager.h"
 #else
 #include "qt4/windowmanager4.h"

@@ -93,9 +93,7 @@ int main (int argc, char *argv[])
         }
     }
 
-#if QT_VERSION >= 0x050500
     a.setAttribute (Qt::AA_UseHighDpiPixmaps, true);
-#endif
 
     QStringList langs (QLocale::system().uiLanguages());
     QString lang; // bcp47Name() doesn't work under vbox
@@ -118,12 +116,8 @@ int main (int argc, char *argv[])
     a.installTranslator (&KMTranslator);
 
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */
-#if QT_VERSION >= 0x050000
     a.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true); // for translucency
     if (!QStyleFactory::keys().contains ("kvantum"))
-#else
-    if (!QStyleFactory::keys().contains ("Kvantum"))
-#endif
     {
         QMessageBox msgBox (QMessageBox::Critical,
                             QObject::tr ("Kvantum"),

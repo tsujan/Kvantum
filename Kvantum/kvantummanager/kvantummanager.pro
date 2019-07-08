@@ -4,10 +4,16 @@
 #
 #-------------------------------------------------
 
-QT += core gui \
+QT += core gui widgets \
       svg
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4) {
+  lessThan(QT_MAJOR_VERSION, 6) {
+    lessThan(QT_MINOR_VERSION, 9) {
+      error("Kvantum Manager needs at least Qt 5.9.0")
+    }
+  }
+}
 
 TARGET = kvantummanager
 TEMPLATE = app

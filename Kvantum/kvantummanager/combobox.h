@@ -20,9 +20,7 @@
 
 #include <QComboBox>
 #include <QCompleter>
-#if QT_VERSION >= 0x050200
 #include <QLineEdit>
-#endif
 
 namespace KvManager {
 
@@ -35,17 +33,10 @@ public:
         setEditable (true);
         setInsertPolicy (QComboBox::NoInsert);
         completer()->setCompletionMode (QCompleter::PopupCompletion);
-#if QT_VERSION >= 0x050200
         completer()->setFilterMode (Qt::MatchContains);
         lineEdit()->setClearButtonEnabled (true);
-#endif
-#if QT_VERSION >= 0x050700
         connect (this, QOverload<int>::of(&QComboBox::currentIndexChanged),
                  this, &ComboBox::textChangedSlot);
-#else
-        connect (this, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-                 this, &ComboBox::textChangedSlot);
-#endif
     }
 
 signals:
@@ -71,11 +62,7 @@ protected:
         {
             /* return to the current index on focusing out
                if no item contains the current text */
-#if QT_VERSION >= 0x050200
             int indx = findText (currentText(), Qt::MatchContains);
-#else
-            int indx = findText (currentText(), Qt::MatchStartsWith);
-#endif
             if (indx == -1)
             {
                 if (currentIndex() > -1)

@@ -64,10 +64,10 @@ void ShortcutHandler::updateWidget(QWidget *w)
     {
         itsUpdated_.insert(w);
         w->update();
-#if QT_VERSION < 0x050000
-        connect(w, SIGNAL(destroyed(QObject *)), this, SLOT(widgetDestroyed(QObject *)));
-#else
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
         connect(w, &QObject::destroyed, this, &ShortcutHandler::widgetDestroyed);
+#else
+        connect(w, SIGNAL(destroyed(QObject *)), this, SLOT(widgetDestroyed(QObject *)));
 #endif
     }
 }
@@ -126,10 +126,10 @@ bool ShortcutHandler::eventFilter(QObject *o, QEvent *e)
             itsOpenMenus_.append(widget);
             if (itsAltDown_ && prev)
                 prev->update();
-#if QT_VERSION < 0x050000
-            connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(widgetDestroyed(QObject*)));
-#else
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
             connect(widget, &QObject::destroyed, this, &ShortcutHandler::widgetDestroyed);
+#else
+            connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(widgetDestroyed(QObject*)));
 #endif
         }
         break;

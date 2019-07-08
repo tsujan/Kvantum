@@ -32,12 +32,7 @@ public:
     splitter_2->setSizes (sizes);
     treeWidget->sortItems (0, Qt::AscendingOrder);
     treeWidget->setAlternatingRowColors (true);
-#if QT_VERSION < 0x050000
-    QTabBar *tb = tabWidget->findChild<QTabBar*>(QLatin1String("qt_tabwidget_tabbar"));
-    if (tb) tb->setUsesScrollButtons (false);
-#else
-    tabWidget->tabBar()->setUsesScrollButtons (false);
-#endif
+    tabWidget->tabBar()->setUsesScrollButtons (false); // to prevent tab scroll buttons at startup (-> main.cpp)
     QPushButton *pb1 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
     tabWidget_2->setCornerWidget (pb1, Qt::TopRightCorner);
     QPushButton *pb2 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
