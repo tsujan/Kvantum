@@ -114,7 +114,7 @@ paramètres de ce thème.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
-        <location filename="../../kvantummanager.ui" line="2075"/>
+        <location filename="../../kvantummanager.ui" line="2086"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -693,7 +693,18 @@ Par défaut, les branches des arbres ont des indicateurs mais pas de ligne.</tra
         <translation>Disposition des boutons de dialogue :</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2057"/>
+        <location filename="../../kvantummanager.ui" line="1907"/>
+        <source>They may look like dotted rectangles
+on focused buttons and other widgets.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1911"/>
+        <source>Remove focus rectangles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="2068"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -976,8 +987,8 @@ Par défaut, le contenu est décalé de 1px
 horizontalement et verticalement.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1907"/>
-        <location filename="../../kvantummanager.ui" line="1921"/>
+        <location filename="../../kvantummanager.ui" line="1918"/>
+        <location filename="../../kvantummanager.ui" line="1932"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -1218,7 +1229,7 @@ entre les séparateurs de la barre d’outils.</translation>
         <translation>Contenu du bouton poussoir</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1914"/>
+        <location filename="../../kvantummanager.ui" line="1925"/>
         <source>Drag from:</source>
         <translation>Faites glisser de :</translation>
     </message>
@@ -1338,85 +1349,85 @@ Cette option les cachera.</translation>
         <translation>Menu combo non contrôlable</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1948"/>
+        <location filename="../../kvantummanager.ui" line="1959"/>
         <source>Application Themes</source>
         <translation>Thèmes d&apos;application</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1954"/>
+        <location filename="../../kvantummanager.ui" line="1965"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Vous pouvez ici affecter des thèmes à des applications spécifiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt; Pour chaque thème, vous pouvez ajouter une liste d&apos;exécutables séparés par des virgules dont les applications doivent utiliser ce thème au lieu du thème actif. Après cela, pour tous les thèmes choisis, sauvegardez le résultat en cliquant sur le bouton &lt;i&gt;Enregistrer&lt;/i&gt;&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1989"/>
+        <location filename="../../kvantummanager.ui" line="2000"/>
         <source>Installed Theme</source>
         <translation>Thème installé</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2005"/>
+        <location filename="../../kvantummanager.ui" line="2016"/>
         <source>Application(s)</source>
         <translation>Application(s)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2034"/>
+        <location filename="../../kvantummanager.ui" line="2045"/>
         <source>app1,app2,app3</source>
         <translation>app1, app2, app3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2062"/>
+        <location filename="../../kvantummanager.ui" line="2073"/>
         <source>Remove List</source>
         <translation>Supprimer la liste</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2069"/>
+        <location filename="../../kvantummanager.ui" line="2080"/>
         <source>Save the current list of apps</source>
         <translation>Enregistrer la liste actuelle des applications</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2072"/>
+        <location filename="../../kvantummanager.ui" line="2083"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enregistrer la liste actuelle des applications avec les thèmes correspondants !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2099"/>
-        <location filename="../../kvantummanager.ui" line="2105"/>
+        <location filename="../../kvantummanager.ui" line="2110"/>
+        <location filename="../../kvantummanager.ui" line="2116"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2102"/>
+        <location filename="../../kvantummanager.ui" line="2113"/>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2115"/>
+        <location filename="../../kvantummanager.ui" line="2126"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Prévisualiser le thème actif
 ou mettre à jour son aperçu.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2119"/>
+        <location filename="../../kvantummanager.ui" line="2130"/>
         <source>Preview</source>
         <translation>Aperçu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2126"/>
+        <location filename="../../kvantummanager.ui" line="2137"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2149"/>
+        <location filename="../../kvantummanager.ui" line="2160"/>
         <source>What&apos;s This?</source>
         <translation>Qu&apos;est-ce que c&apos;est ça ?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2152"/>
+        <location filename="../../kvantummanager.ui" line="2163"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cliquer sur ce bouton, puis sélectionner un élément de l&apos;interface graphique contenant l&apos;infobulle&amp;quot;Qu&apos;est-ce que c&apos;est ça&amp;quot; pour obtenir des informations sur ce qu&apos;il fait.&lt;/p&gt;&lt;p&gt; Il existe également des infobulles ordinaires, mais ce type d’infobulle ne disparaîtra que lorsque vous aurez cliqué quelque part.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2155"/>
+        <location filename="../../kvantummanager.ui" line="2166"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
@@ -1446,7 +1457,7 @@ ou mettre à jour son aperçu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="490"/>
         <location filename="../../KvantumManager.cpp" line="644"/>
-        <location filename="../../KvantumManager.cpp" line="2475"/>
+        <location filename="../../KvantumManager.cpp" line="2480"/>
         <source>Confirmation</source>
         <translation>Confirmation</translation>
     </message>
@@ -1635,75 +1646,75 @@ ou mettre à jour son aperçu.</translation>
         <translation>Il ne peut être restauré que si vous en avez une copie.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1179"/>
-        <location filename="../../KvantumManager.cpp" line="1198"/>
+        <location filename="../../KvantumManager.cpp" line="1180"/>
+        <location filename="../../KvantumManager.cpp" line="1199"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Ce sont les paramètres qui peuvent être modifiés en toute sécurité. &lt;br&gt;Pour les autres, cliquer sur &lt;i&gt;Enregistrer&lt;/ i&gt;, puis modifier ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1194"/>
-        <location filename="../../KvantumManager.cpp" line="2383"/>
+        <location filename="../../KvantumManager.cpp" line="1195"/>
+        <location filename="../../KvantumManager.cpp" line="2388"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Les paramètres suivants peuvent être modifiés en toute sécurité. &lt;br&gt;Pour les autres, modifier ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1574"/>
+        <location filename="../../KvantumManager.cpp" line="1577"/>
         <source>No description</source>
         <translation>Pas de description</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2045"/>
+        <location filename="../../KvantumManager.cpp" line="2048"/>
         <source>A copy of the root config is created.</source>
         <translation>Une copie de la configuration racine a été créée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2056"/>
+        <location filename="../../KvantumManager.cpp" line="2059"/>
         <source>A copy was already created.</source>
         <translation>Une copie a déjà été créée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2369"/>
+        <location filename="../../KvantumManager.cpp" line="2374"/>
         <source>Configuration saved.</source>
         <translation>Configuration sauvegardée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2476"/>
+        <location filename="../../KvantumManager.cpp" line="2481"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Voulez-vous revenir aux paramètres par défaut (root) de ce thème ?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2479"/>
+        <location filename="../../KvantumManager.cpp" line="2484"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Vous perdrez les modifications que vous auriez pu faire.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2514"/>
+        <location filename="../../KvantumManager.cpp" line="2519"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Restauré les paramètres root par défaut de %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2515"/>
+        <location filename="../../KvantumManager.cpp" line="2520"/>
         <source>the default theme</source>
         <translation>le thème par défaut</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2652"/>
-        <location filename="../../KvantumManager.cpp" line="2653"/>
+        <location filename="../../KvantumManager.cpp" line="2657"/>
+        <location filename="../../KvantumManager.cpp" line="2658"/>
         <source>About Kvantum Manager</source>
         <translation>À propos du Manager Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2652"/>
+        <location filename="../../KvantumManager.cpp" line="2657"/>
         <source>Translators</source>
         <translation>Traducteurs</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2650"/>
+        <location filename="../../KvantumManager.cpp" line="2655"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Un outil pour installer, sélectionner&lt;br&gt;et configurer les thèmes Kvantum &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2651"/>
+        <location filename="../../KvantumManager.cpp" line="2656"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Auteur : &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt;&lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1729,8 +1740,8 @@ ou mettre à jour son aperçu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="828"/>
-        <location filename="../../KvantumManager.cpp" line="1985"/>
-        <location filename="../../KvantumManager.cpp" line="2378"/>
+        <location filename="../../KvantumManager.cpp" line="1988"/>
+        <location filename="../../KvantumManager.cpp" line="2383"/>
         <source>Active theme:</source>
         <translation>Thème actif :</translation>
     </message>

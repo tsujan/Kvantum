@@ -1901,6 +1901,17 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                <item row="10" column="4">
                 <widget class="QComboBox" name="comboDialogButton"/>
                </item>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="checkBoxFocusRect">
+                 <property name="toolTip">
+                  <string>They may look like dotted rectangles
+on focused buttons and other widgets.</string>
+                 </property>
+                 <property name="text">
+                  <string>Remove focus rectangles</string>
+                 </property>
+                </widget>
+               </item>
                <item row="11" column="3">
                 <widget class="QLabel" name="labelX11Drag">
                  <property name="toolTip">

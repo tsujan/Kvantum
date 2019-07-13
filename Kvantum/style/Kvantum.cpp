@@ -2837,7 +2837,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     case PE_FrameFocusRect : {
-      if (qstyleoption_cast<const QStyleOptionFocusRect*>(option)
+      if (!tspec_.no_focus_rect
+          && qstyleoption_cast<const QStyleOptionFocusRect*>(option)
           /* this would be not only useless but also ugly */
           && !(widget && widget->inherits("QComboBoxListView")))
       { // no interior

@@ -917,6 +917,7 @@ void KvantumManager::defaultThemeButtons()
       ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
     else
       ui->checkBoxScrollableMenu->setChecked (true);
+    ui->checkBoxFocusRect->setChecked (defaultSettings.value ("no_focus_rect").toBool());
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
@@ -1252,6 +1253,8 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxTransientGroove->setChecked (themeSettings.value ("transient_groove").toBool());
                 if (themeSettings.contains ("scrollable_menu"))
                     ui->checkBoxScrollableMenu->setChecked (themeSettings.value ("scrollable_menu").toBool());
+                if (themeSettings.contains ("no_focus_rect"))
+                    ui->checkBoxFocusRect->setChecked (themeSettings.value ("no_focus_rect").toBool());
                 if (themeSettings.contains ("tree_branch_line"))
                     ui->checkBoxTree->setChecked (themeSettings.value ("tree_branch_line").toBool());
                 if (themeSettings.contains ("groupbox_top_label"))
@@ -2146,6 +2149,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
         generalKeys.insert("transient_groove", boolToStr (ui->checkBoxTransientGroove->isChecked()));
         generalKeys.insert("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
+        generalKeys.insert("no_focus_rect", boolToStr (ui->checkBoxFocusRect->isChecked()));
         generalKeys.insert("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
         generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
@@ -2246,6 +2250,7 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("scrollbar_in_view").toBool() != ui->checkBoxScrollIn->isChecked()
             || themeSettings.value ("transient_scrollbar").toBool() != ui->checkBoxTransient->isChecked()
             || themeSettings.value ("transient_groove").toBool() != ui->checkBoxTransientGroove->isChecked()
+            || themeSettings.value ("no_focus_rect").toBool() != ui->checkBoxFocusRect->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
