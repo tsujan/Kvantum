@@ -14,6 +14,7 @@ V0.11.2
  * More precise calculations related to shadows and blurring of menus/tooltips, especially for preventing 1-px blurred strips outside menu/tooltip borders.
  * Replaced the Qt methods that were deprecated by Qt 5.13.
  * Added a key (to Kvantum Manager) for removing all focus rectangles.
+ * Disable the context menu for transient scrollbars (because of the hover bug in Qt5).
 
 V0.11.1
 ---------
