@@ -1,3 +1,7 @@
+V0.11.3
+---------
+ * Basic support for FreeBSD.
+
 V0.11.2
 ---------
  * Use native file dialog in Kvantum Manager.
