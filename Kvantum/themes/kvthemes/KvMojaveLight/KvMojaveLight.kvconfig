@@ -45,6 +45,7 @@ combo_focus_rect=true
 groupbox_top_label=false
 inline_spin_indicators=true
 joined_inactive_tabs=true
+remove_extra_frames=true
 layout_spacing=2
 submenu_overlap=0
 tooltip_delay=-1
