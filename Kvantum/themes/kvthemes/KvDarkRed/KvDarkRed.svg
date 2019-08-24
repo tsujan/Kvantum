@@ -1007,16 +1007,13 @@
 <path style="fill-rule:evenodd;fill-opacity:0" d="m 250,1264 0,-2 c -0.99233,0 -2,1.0313 -2,2 h 2 z "/>
 </g>
 <path id="expand-button-normal" d="M 0,0 H 5 V 5 H 0 Z"/>
-<g style="fill-rule:evenodd;stroke-linejoin:bevel;stroke-linecap:round" id="tab-close-normal" transform="translate(83,15)">
+<g style="fill-rule:evenodd;stroke-linejoin:bevel;stroke-linecap:round" id="tab-close-normal" transform="translate(71,15)">
 <rect width="10" x="280" y="865" height="10" style="fill-opacity:.004"/>
 <circle cx="285" cy="870" style="opacity:.35;fill:none;stroke:#fff;stroke-width:1.5" r="2.2502196"/>
 </g>
-<g style="fill-rule:evenodd;stroke-linejoin:bevel;stroke-linecap:round" id="tab-close-pressed" transform="translate(103,15)">
-<rect width="10" x="280" y="865" height="10" style="fill-opacity:.004"/>
-<circle cx="285" cy="870" style="fill:none;stroke:#ffca00;stroke-width:1.5" r="2.2502196"/>
-</g>
-<use width="100%" height="100%" style="opacity:.5" id="tab-close-disabled" xlink:href="#tab-close-normal" transform="translate(30)"/>
-<use width="100%" height="100%" id="tab-close-focused" xlink:href="#tab-close-pressed" transform="translate(-10)"/>
+<path style="fill:#ffca00;fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 394,878 a 8,8 0 0 0 -8,8 8,8 0 0 0 8,8 8,8 0 0 0 8,-8 8,8 0 0 0 -8,-8 z m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z"/>
+<use width="100%" height="100%" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-20)"/>
+<use width="100%" height="100%" style="opacity:.5" id="tab-close-disabled" xlink:href="#tab-close-normal" transform="translate(54)"/>
 <path style="fill:#fff;fill-opacity:.141" id="tabBarFrame-normal-bottom" d="m 330,875 h 10 v 5 h -10 z"/>
 <g style="fill-rule:evenodd" id="tabframe-normal-top-leftjunct" transform="matrix(0.3,0,0,2,269,-881.25)">
 <path style="opacity:.001;stroke-width:1.225" d="m 360.5,788.75 v 4 h 7.5 v -4 z" transform="matrix(1.3333333,0,0,0.5,-175.66667,440.625)"/>
@@ -1253,7 +1250,7 @@
 <use width="100%" height="100%" id="focus-left" xlink:href="#focus-top" transform="rotate(-90,380,1198)"/>
 <g style="fill-rule:evenodd" id="tab-focus-bottom" transform="translate(-108,770)">
 <path style="opacity:0" d="m 369,50 h -32 v 10 h 32 z"/>
-<path style="opacity:.15;fill:#fff" d="m 368.5,50 h -31 c 0,0 6.66551,2 15.5,2 8.83449,0 15.5,-2 15.5,-2 z"/>
+<path style="opacity:.1;fill:#fff" d="m 367,50 h -28 c 0,0 5.16551,2 14,2 8.83449,0 14,-2 14,-2 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#tab-focus-bottom" id="floating-tab-focus-bottom" transform="translate(0,10)"/>
 <path id="expand-tab-focus" d="m 10,5 h 5 v 5 h -5 z"/>
