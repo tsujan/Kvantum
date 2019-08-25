@@ -1345,12 +1345,13 @@ This option will hide these.</source>
         <location filename="../../kvantummanager.ui" line="1907"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ant fokusuotų mygtukų ir kitų valdiklių
+jie gali atrodyti kaip stačiakampiai su taškeliais.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1911"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Šalinti fokusavimo stačiakampius</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
