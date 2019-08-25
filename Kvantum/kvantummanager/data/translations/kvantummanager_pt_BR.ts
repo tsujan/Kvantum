@@ -698,12 +698,13 @@ Por padrão, as ramificações de árvore têm indicadores, mas não linha.</tra
         <location filename="../../kvantummanager.ui" line="1907"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eles podem se parecer com retângulos
+pontilhados em botões focados e outros widgets.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1911"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover retângulos de foco</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2068"/>
