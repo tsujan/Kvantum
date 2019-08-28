@@ -11,7 +11,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>プッシュボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -72,7 +72,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
@@ -354,22 +354,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation type="unfinished"></translation>
+        <translation>コンテナー</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘッダー 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘッダー 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘッダー 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
@@ -406,42 +406,42 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>行 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>行 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>列 </translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>列 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2493"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2501"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2509"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
@@ -457,7 +457,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2229"/>
         <source>Subwindow</source>
-        <translation type="unfinished"></translation>
+        <translation>サブウィンドウ</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2276"/>
@@ -469,7 +469,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2436"/>
         <location filename="../../KvantumPreviewBase.ui" line="2528"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>グループボックス</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2315"/>
@@ -478,7 +478,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2735"/>
         <location filename="../../KvantumPreviewBase.ui" line="2783"/>
         <source>Tab 1</source>
-        <translation type="unfinished"></translation>
+        <translation>タブ 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
@@ -492,7 +492,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2749"/>
         <location filename="../../KvantumPreviewBase.ui" line="2797"/>
         <source>Tab 2</source>
-        <translation type="unfinished"></translation>
+        <translation>タブ 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
@@ -506,7 +506,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2741"/>
         <location filename="../../KvantumPreviewBase.ui" line="2789"/>
         <source>Page 1</source>
-        <translation type="unfinished"></translation>
+        <translation>ページ 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2387"/>
@@ -516,7 +516,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2755"/>
         <location filename="../../KvantumPreviewBase.ui" line="2803"/>
         <source>Page 2</source>
-        <translation type="unfinished"></translation>
+        <translation>ページ 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2411"/>
@@ -531,7 +531,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2442"/>
         <source>Group box</source>
-        <translation type="unfinished"></translation>
+        <translation>グループボックス</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
@@ -546,7 +546,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2572"/>
         <source>Tool Box</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールボックス</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2664"/>
@@ -561,17 +561,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル(&amp;F)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2836"/>
         <source>&amp;Submenu</source>
-        <translation type="unfinished"></translation>
+        <translation>サブメニュー(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2856"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールバー</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2873"/>
@@ -581,12 +581,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了(&amp;Q)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2895"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2898"/>
@@ -596,17 +596,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2906"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>チェックボックス(&amp;C)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>Toggle Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>レイアウト切替</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2922"/>
         <source>Toggle layout direction</source>
-        <translation type="unfinished"></translation>
+        <translation>レイアウト方向の切替</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2934"/>
@@ -621,7 +621,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2949"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>メニューボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
@@ -631,17 +631,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2963"/>
         <source>C&amp;heckbox</source>
-        <translation type="unfinished"></translation>
+        <translation>チェックボックス(&amp;H)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>&amp;Radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>ラジオボタン(&amp;R)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2979"/>
         <source>Radio &amp;button</source>
-        <translation type="unfinished"></translation>
+        <translation>ラジオボタン(&amp;B)</translation>
     </message>
 </context>
 </TS>
