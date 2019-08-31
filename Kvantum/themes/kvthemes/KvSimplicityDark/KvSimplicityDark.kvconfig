@@ -109,10 +109,10 @@ text.shadow=0
 text.margin=1
 text.iconspacing=3
 indicator.element=arrow
-text.margin.top=5
-text.margin.bottom=5
-text.margin.left=5
-text.margin.right=5
+text.margin.top=4
+text.margin.bottom=4
+text.margin.left=4
+text.margin.right=4
 frame.expansion=12
 
 [PanelButtonTool]
@@ -175,8 +175,8 @@ frame.right=4
 inherits=PanelButtonCommand
 frame.element=lineedit
 interior.element=lineedit
-text.margin.top=4
-text.margin.bottom=4
+text.margin.top=3
+text.margin.bottom=3
 text.margin.left=1
 text.margin.right=1
 frame.expansion=10
@@ -200,8 +200,8 @@ inherits=PanelButtonCommand
 interior.element=button
 text.margin.left=6
 text.margin.right=6
-text.margin.top=5
-text.margin.bottom=5
+text.margin.top=4
+text.margin.bottom=4
 frame.element=button
 focusFrame=true
 indicator.element=tab
@@ -231,10 +231,10 @@ indicator.element=arrow
 
 [HeaderSection]
 inherits=PanelButtonCommand
-frame.top=2
-frame.bottom=2
-frame.left=2
-frame.right=2
+text.margin.top=3
+text.margin.bottom=3
+text.margin.left=3
+text.margin.right=3
 
 [SizeGrip]
 indicator.element=resize-grip
@@ -301,7 +301,7 @@ text.normal.color=white
 text.focus.color=#9bccff
 text.press.color=white
 text.toggle.color=white
-frame.expansion=0
+frame.expansion=6
 
 [Splitter]
 indicator.size=32
