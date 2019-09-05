@@ -950,7 +950,7 @@ void KvantumManager::defaultThemeButtons()
     int index = 0;
     if (defaultSettings.contains ("click_behavior"))
     {
-        index = defaultSettings.value ("toolbutton_style").toInt();
+        index = defaultSettings.value ("click_behavior").toInt();
         if (index > 2 || index < 0) index = 0;
     }
     ui->comboClick->setCurrentIndex (index);
