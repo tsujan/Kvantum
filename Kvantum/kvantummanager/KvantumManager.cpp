@@ -954,12 +954,14 @@ void KvantumManager::defaultThemeButtons()
         if (index > 2 || index < 0) index = 0;
     }
     ui->comboClick->setCurrentIndex (index);
+    index = 0;
     if (defaultSettings.contains ("toolbutton_style"))
     {
         index = defaultSettings.value ("toolbutton_style").toInt();
         if (index > 4 || index < 0) index = 0;
     }
     ui->comboToolButton->setCurrentIndex (index);
+    index = 0;
     if (defaultSettings.contains ("dialog_button_layout"))
     {
         index = defaultSettings.value ("dialog_button_layout").toInt();
