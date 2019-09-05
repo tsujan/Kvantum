@@ -710,8 +710,8 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.alt_mnemonic = v.toBool();
 
-  v = getValue(KSL("General"),KSL("double_click"));
-  r.double_click = v.toBool();
+  v = getValue(KSL("General"),KSL("click_behavior"));
+  r.click_behavior = v.toInt();
 
   v = getValue(KSL("General"),KSL("left_tabs"));
   r.left_tabs = v.toBool();

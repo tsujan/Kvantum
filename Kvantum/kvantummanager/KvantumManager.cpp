@@ -77,6 +77,10 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
     ui->useTheme->setEnabled (false);
 
+    ui->comboClick->insertItems (0, QStringList() << tr ("Follow Style")
+                                                  << tr ("Single Click")
+                                                  << tr ("Double Click"));
+
     ui->comboToolButton->insertItems (0, QStringList() << tr ("Follow Style")
                                                        << tr ("Icon Only")
                                                        << tr ("Text Only")
@@ -944,6 +948,12 @@ void KvantumManager::defaultThemeButtons()
         delay = qMin (qMax (defaultSettings.value ("submenu_delay").toInt(), -1), 1000);
     ui->spinSubmenuDelay->setValue (delay);
     int index = 0;
+    if (defaultSettings.contains ("click_behavior"))
+    {
+        index = defaultSettings.value ("toolbutton_style").toInt();
+        if (index > 2 || index < 0) index = 0;
+    }
+    ui->comboClick->setCurrentIndex (index);
     if (defaultSettings.contains ("toolbutton_style"))
     {
         index = defaultSettings.value ("toolbutton_style").toInt();
@@ -961,7 +971,6 @@ void KvantumManager::defaultThemeButtons()
         ui->checkBoxDE->setChecked (defaultSettings.value ("respect_DE").toBool());
     else
         ui->checkBoxDE->setChecked (true);
-    ui->checkBoxClick->setChecked (defaultSettings.value ("double_click").toBool());
     ui->checkBoxInlineSpin->setChecked (defaultSettings.value ("inline_spin_indicators").toBool());
     ui->checkBoxVSpin->setChecked (defaultSettings.value ("vertical_spin_indicators").toBool());
     ui->checkBoxComboEdit->setChecked (defaultSettings.value ("combo_as_lineedit").toBool());
@@ -1279,6 +1288,12 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("submenu_delay"))
                     delay = qMin (qMax (themeSettings.value ("submenu_delay").toInt(), -1), 1000);
                 ui->spinSubmenuDelay->setValue (delay);
+                if (themeSettings.contains ("click_behavior"))
+                {
+                    int index = themeSettings.value ("click_behavior").toInt();
+                    if (index > 2 || index < 0) index = 0;
+                    ui->comboClick->setCurrentIndex (index);
+                }
                 if (themeSettings.contains ("toolbutton_style"))
                 {
                     int index = themeSettings.value ("toolbutton_style").toInt();
@@ -1295,8 +1310,6 @@ void KvantumManager::tabChanged (int index)
                     ui->comboX11Drag->setCurrentIndex(toDrag(themeSettings.value("x11drag").toString()));
                 if (themeSettings.contains ("respect_DE"))
                     ui->checkBoxDE->setChecked (themeSettings.value ("respect_DE").toBool());
-                if (themeSettings.contains ("double_click"))
-                    ui->checkBoxClick->setChecked (themeSettings.value ("double_click").toBool());
                 if (themeSettings.contains ("inline_spin_indicators"))
                     ui->checkBoxInlineSpin->setChecked (themeSettings.value ("inline_spin_indicators").toBool());
                 if (themeSettings.contains ("vertical_spin_indicators"))
@@ -2160,11 +2173,11 @@ void KvantumManager::writeConfig()
         generalKeys.insert("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
         generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
+        generalKeys.insert("click_behavior", str.setNum (ui->comboClick->currentIndex()));
         generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert("dialog_button_layout", str.setNum (ui->comboDialogButton->currentIndex()));
         generalKeys.insert("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
         generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
-        generalKeys.insert("double_click", boolToStr (ui->checkBoxClick->isChecked()));
         generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
         generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
         generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxComboEdit->isChecked()));
@@ -2579,7 +2592,6 @@ void KvantumManager::respectDE (bool checked)
         ui->spinSmall->setEnabled (!checked);
         ui->labelLarge->setEnabled (!checked);
         ui->spinLarge->setEnabled (!checked);
-        ui->checkBoxClick->setEnabled (!checked);
     }
     else
     {

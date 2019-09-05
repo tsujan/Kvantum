@@ -268,13 +268,6 @@ Style::Style() : QCommonStyle()
         QSettings KDESettings(kdeGlobals, QSettings::NativeFormat);
         QVariant v;
         int iconSize;
-        KDESettings.beginGroup("KDE");
-        v = KDESettings.value ("SingleClick");
-        KDESettings.endGroup();
-        if (v.isValid())
-          tspec_.double_click = !v.toBool();
-        else
-          tspec_.double_click = false;
         KDESettings.beginGroup("DialogIcons");
         v = KDESettings.value ("Size");
         KDESettings.endGroup();
@@ -11174,7 +11167,14 @@ int Style::styleHint(StyleHint hint,
     case SH_ItemView_ShowDecorationSelected :
     case SH_ItemView_ArrowKeysNavigateIntoChildren : return false;
 
-    case SH_ItemView_ActivateItemOnSingleClick : return !tspec_.double_click;
+    case SH_ItemView_ActivateItemOnSingleClick : {
+      switch (tspec_.click_behavior) {
+        case 0 : return QCommonStyle::styleHint(hint,option,widget,returnData);
+        case 1 : return true;
+        case 2 : return false;
+        default :return QCommonStyle::styleHint(hint,option,widget,returnData);
+      }
+    }
 
     case SH_ToolButton_PopupDelay : return 250;
     case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;

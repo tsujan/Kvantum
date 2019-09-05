@@ -39,8 +39,9 @@ typedef struct {
   bool respect_DE;
   /* show mnemonics only if Alt is pressed? */
   bool alt_mnemonic;
-  /* always activate view items on double clicking? */
-  bool double_click;
+  /* click behavior for activating view items
+     0 -> follow, 1-> single 2 -> double  */
+  int click_behavior;
   /* align tabs with the left edge?
      (by default, they are centered) */
   bool left_tabs;
@@ -472,7 +473,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.x11drag = WindowManager::DRAG_ALL;
   tspec.respect_DE = true;
   tspec.alt_mnemonic = true;
-  tspec.double_click = false;
+  tspec.click_behavior = 0;
   tspec.left_tabs = false;
   tspec.center_doc_tabs = false;
   tspec.joined_inactive_tabs = true;

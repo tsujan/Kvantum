@@ -1578,33 +1578,6 @@ Uncheck it if you want to use those options!</string>
                 </widget>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxTree">
-                 <property name="toolTip">
-                  <string>Draw tree branch lines?
-
-By default, tree branches have indicators but no line.</string>
-                 </property>
-                 <property name="text">
-                  <string>Tree branch lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QCheckBox" name="checkBoxClick">
-                 <property name="toolTip">
-                  <string>Activate view items always on double clicking?
-
-When unchecked, single-click is preferred.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
-                 </property>
-                 <property name="text">
-                  <string>Double-click for view items</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxScrollableMenu">
                  <property name="toolTip">
                   <string>Should big menus be scrollable and have
@@ -1617,7 +1590,7 @@ By default, all of their menu-items are shown.</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
+               <item row="1" column="1">
                 <widget class="QCheckBox" name="checkBoxInlineSpin">
                  <property name="toolTip">
                   <string>By default, spin indicators are drawn as
@@ -1631,7 +1604,7 @@ into the spin line-edit..</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="3" colspan="2">
+               <item row="1" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
                   <string>By default, the label is on the frame
@@ -1645,7 +1618,7 @@ the frame, so that the frame isn't cut.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
+               <item row="2" column="1">
                 <widget class="QCheckBox" name="checkBoxVSpin">
                  <property name="toolTip">
                   <string>By default, spin indicators are drawn on adjacent buttons.
@@ -1658,7 +1631,7 @@ spin-down one inside the spin line-edit.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
+               <item row="2" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
                   <string>By default, drop rectangles for movable
@@ -1672,7 +1645,7 @@ the highlight color.</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
+               <item row="3" column="1">
                 <widget class="QCheckBox" name="checkBoxComboEdit">
                  <property name="toolTip">
                   <string>Draw the whole editable combo-box as a
@@ -1686,7 +1659,7 @@ line-edit with arrow (and icon, if it exists)?</string>
                  </property>
                 </widget>
                </item>
-               <item row="4" column="3" colspan="2">
+               <item row="3" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
                   <string>Mouse tracking is enabled
@@ -1700,7 +1673,7 @@ for menubars by default.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="1">
+               <item row="4" column="1">
                 <widget class="QCheckBox" name="checkBoxComboMenu">
                  <property name="toolTip">
                   <string>Draw combo popups as menu popups (i.e. like in Gtk)?
@@ -1712,7 +1685,7 @@ By default, combo popups do not cover the combo box.</string>
                  </property>
                 </widget>
                </item>
-               <item row="5" column="3" colspan="2">
+               <item row="4" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
                   <string>If checked, the menubar and toolbar will be drawn as a whole by
@@ -1723,7 +1696,7 @@ the toolbar SVG element when they are adjacent to each another.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="1">
+               <item row="5" column="1">
                 <widget class="QCheckBox" name="checkBoxHideComboCheckboxes">
                  <property name="toolTip">
                   <string>When drawing combo popups as menus,
@@ -1737,7 +1710,7 @@ This option will hide these.</string>
                  </property>
                 </widget>
                </item>
-               <item row="6" column="3" colspan="2">
+               <item row="5" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxGroupToolbar">
                  <property name="toolTip">
                   <string>If checked, toolbar buttons will be drawn grouped and raised
@@ -1748,7 +1721,7 @@ between toolbar separators.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="1">
+               <item row="6" column="1">
                 <widget class="QCheckBox" name="checkBoxleftTab">
                  <property name="toolTip">
                   <string>In Kvantum, tabs are centered by default.</string>
@@ -1758,7 +1731,7 @@ between toolbar separators.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="3" colspan="2">
+               <item row="6" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
                   <string>Shift the contents of push buttons when pressed?
@@ -1771,7 +1744,7 @@ both horizontally and vertically.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1">
+               <item row="7" column="1">
                 <widget class="QCheckBox" name="checkBoxJoinTab">
                  <property name="toolTip">
                   <string>Inactive tabs are joined together by default,
@@ -1782,13 +1755,44 @@ i.e., there is no border between them.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3" colspan="2">
+               <item row="7" column="3" colspan="2">
                 <widget class="QCheckBox" name="checkBoxAlt">
                  <property name="toolTip">
                   <string>If unchecked, shortcuts will not be underlined at all.</string>
                  </property>
                  <property name="text">
                   <string>Underline shortcuts with Alt</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
+                 <property name="toolTip">
+                  <string>Scrollbars have add-line and sub-line arrows by default.
+
+Checking this box removes arrows as far as possible.
+
+If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
+                 </property>
+                 <property name="text">
+                  <string>No arrows for scrollbars</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3">
+                <widget class="QLabel" name="label_10">
+                 <property name="toolTip">
+                  <string>How to activate view items?</string>
+                 </property>
+                 <property name="text">
+                  <string>Click behavior:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="4">
+                <widget class="QComboBox" name="comboClick">
+                 <property name="toolTip">
+                  <string>How to activate view items?</string>
                  </property>
                 </widget>
                </item>
@@ -1804,20 +1808,6 @@ i.e., there is no border between them.</string>
                   </size>
                  </property>
                 </spacer>
-               </item>
-               <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxNoScrollArrow">
-                 <property name="toolTip">
-                  <string>Scrollbars have add-line and sub-line arrows by default.
-
-Checking this box removes arrows as far as possible.
-
-If disabled, see Compositing &amp; General Look → Transient scrollbars!</string>
-                 </property>
-                 <property name="text">
-                  <string>No arrows for scrollbars</string>
-                 </property>
-                </widget>
                </item>
                <item row="9" column="2">
                 <spacer name="horizontalSpacer_9">
@@ -1877,7 +1867,7 @@ Default is &quot;Follow Style&quot;.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="10" column="1">
+               <item row="9" column="1">
                 <widget class="QCheckBox" name="checkBoxScrollIn">
                  <property name="toolTip">
                   <string>Draw scrollbars inside view frames?
@@ -1901,7 +1891,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                <item row="10" column="4">
                 <widget class="QComboBox" name="comboDialogButton"/>
                </item>
-               <item row="11" column="1">
+               <item row="10" column="1">
                 <widget class="QCheckBox" name="checkBoxFocusRect">
                  <property name="toolTip">
                   <string>They may look like dotted rectangles
@@ -1909,6 +1899,18 @@ on focused buttons and other widgets.</string>
                  </property>
                  <property name="text">
                   <string>Remove focus rectangles</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="11" column="1">
+                <widget class="QCheckBox" name="checkBoxTree">
+                 <property name="toolTip">
+                  <string>Draw tree branch lines?
+
+By default, tree branches have indicators but no line.</string>
+                 </property>
+                 <property name="text">
+                  <string>Tree branch lines</string>
                  </property>
                 </widget>
                </item>

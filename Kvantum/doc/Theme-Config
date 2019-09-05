@@ -219,9 +219,9 @@ respect_DE                        true/false          Should some settings of th
 
                                                       KDE, Unity, Gnome and Pantheon are
                                                       supported. Under KDE, the keys
-                                                      "small_icon_size", "large_icon_size" and
-                                                      "double_click" are overridden by KDE
-                                                      settings. Under Unity, Gnome and Pantheon,
+                                                      "small_icon_size" and "large_icon_size"
+                                                      are overridden by KDE settings. Under
+                                                      Unity, Gnome and Pantheon,
                                                       "iconless_pushbutton" and "iconless_menu"
                                                       are set to true, "composite" is set to
                                                       false, and "x11drag" is set to
@@ -242,11 +242,12 @@ x11drag                           String              Drag windows from contents
 alt_mnemonic                      true/false          Show underlines when Alt is pressed?
                                                       True by default.
 
-double_click                      true/false          Activate view items on double
-                                                      clicking? They are activated on
-                                                      single clicking by default but
-                                                      the KDE setting has priority
-                                                      over the default.
+click_behavior                    integer             How to activate view items? They are
+                                                      activated according to the current DE's
+                                                      setting when the value of this key is 0,
+                                                      which is the default. 1 or 2 mean single
+                                                      and double click respectively. Any
+                                                      other value means 0.
 
 inline_spin_indicators            true/false          Draw spin indicators inside the spin
                                                       line-edit, without drawing any spin
@@ -276,11 +277,11 @@ vertical_spin_indicators          true/false          Draw spin indicators verti
                                                       "inline_spin_separator" will have no
                                                       effect.
 
-spin_button_width                Integer              The width of horizontal spin buttons.
+spin_button_width                 Integer             The width of horizontal spin buttons.
                                                       It is 16px by default and is always
                                                       between 16 and 32px.
 
-combo_as_lineedit                true/false           Draw an editable combo box as a
+combo_as_lineedit                 true/false          Draw an editable combo box as a
                                                       line-edit with an arrow (and an icon
                                                       if any)? By default, editable combo
                                                       boxes consist of combo, line-edit and
