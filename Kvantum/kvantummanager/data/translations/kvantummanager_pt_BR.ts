@@ -684,12 +684,12 @@ aplicativos definem temas próprios.</translation>
         <location filename="../../kvantummanager.ui" line="1785"/>
         <location filename="../../kvantummanager.ui" line="1795"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Como ativar os itens de visualização?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamento do clique:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
@@ -1485,12 +1485,12 @@ ou atualizar sua visualização.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="81"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique Único</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique Duplo</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
