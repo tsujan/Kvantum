@@ -1290,7 +1290,7 @@ Desmarque se você quiser usar essas opções!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1576"/>
         <source>Respect current DE if possible</source>
-        <translation>Respeitar o Ambiente Desktop atual se possível</translation>
+        <translation>Respeitar o ambiente desktop se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
