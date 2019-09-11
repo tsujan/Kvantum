@@ -24,14 +24,14 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; は多くのテーマが付属していますが、外部のテーマを使用するためにインストールすることも出来ます。ここでテーマのフォルダーを選択し、次のボタンを押して Home にインストールします。&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Kvantum テーマの
-フォルダーを選択</translation>
+        <translation>Kvantum テーマ
+フォルダーの選択</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -382,7 +382,9 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; は全てのデスクトップ環境から独立しているため、最初に Qt プラットフォームの統合プログラムを &lt;i&gt;アクティブ化&lt;/i&gt; して下さい。KDE と LXQt は、アクティブな Qt スタイルのプラグインを変更するシンプルなツールが提供されています。他のプラットフォームでは、Qt 設定ツールが必要になります。
+&lt;br/&gt;&lt;br/&gt;KDE では、いくつかの KDE アプリケーションは、KDE カラースキームからそのディレクトリを取得し、そのテーマの配色を選択して適用することも出来ます。&lt;br/&gt;&lt;br/&gt;実行中のアプリケーションは、閉じて再び開くと新しいテーマが取得されます。すべての KDE/LXQt パーツが、完全にテーマを表示されるようにするためには、ログイン・ログアウトが便利です。
+</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="703"/>
@@ -1167,7 +1169,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1967"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;ここではテーマを特定のアプリケーションに割り当てることが出来ます。&lt;/center&gt;&lt;br&gt;&lt;center&gt;各テーマごとに、アクティブなテーマの代わりにそのテーマを使用したい実行可能アプリケーションをカンマ区切りリストに追加します。選択したテーマすべてに対して行った後、&lt;i&gt;保存&lt;/i&gt; ボタンをクリックして結果を保存します。&lt;/cente&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2002"/>
@@ -1399,7 +1401,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="433"/>
         <location filename="../../KvantumManager.cpp" line="443"/>
         <source>Please select another directory!</source>
-        <translation>別のディレクトリを選択してください！</translation>
+        <translation>別のディレクトリを選択して下さい！</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="432"/>
@@ -1424,7 +1426,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="485"/>
         <source>Please choose another directory!</source>
-        <translation>別のディレクトリを選択してください！</translation>
+        <translation>別のディレクトリを選択して下さい！</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="495"/>
@@ -1470,13 +1472,13 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1191"/>
         <location filename="../../KvantumManager.cpp" line="1210"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>これらは安全に変更できる設定です。&lt;br&gt;その他は、&lt;i&gt;保存&lt;/i&gt; をクリックしてから次のファイルを編集します:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1206"/>
         <location filename="../../KvantumManager.cpp" line="2403"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>これらは安全に変更できる設定です。&lt;br&gt;その他の場合は、このファイルを編集します。</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1592"/>
@@ -1582,7 +1584,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="125"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation>始めに Kvantum スタイルのプラグインをインストールしてください！</translation>
+        <translation>始めに Kvantum スタイルのプラグインをインストールして下さい！</translation>
     </message>
 </context>
 </TS>
