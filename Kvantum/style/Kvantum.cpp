@@ -2438,7 +2438,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         if (!fillWidgetInterior)
         {
-          if (widget == nullptr
+          if ((option->state & State_Enabled) // Damn! QML has a bad text color for the diabled state.
+              && widget == nullptr
               && enoughContrast(option->palette.color(QPalette::ButtonText),
                                 standardPalette().color(QPalette::ButtonText)))
           { // QML colorized button
@@ -2451,9 +2452,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             else
               fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
             painter->fillRect(interiorRect(r,fspec),
-                              option->palette.brush((option->state & State_Enabled
-                                                      ? QPalette::Active : QPalette::Disabled),
-                                                    QPalette::Button));
+                              option->palette.brush(QPalette::Active, QPalette::Button));
           }
           else
             renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
@@ -8711,7 +8710,7 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_PushButtonLabel : {
-      if (widget == nullptr && option != nullptr
+      if ((option->state & State_Enabled) && widget == nullptr && option != nullptr
           && enoughContrast(option->palette.color(QPalette::ButtonText),
                             standardPalette().color(QPalette::ButtonText)))
       { // QML colorized button
@@ -9134,7 +9133,8 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             if (!fillWidgetInterior)
             {
-              if (widget == nullptr
+              if ((option->state & State_Enabled)
+                  && widget == nullptr
                   && enoughContrast(option->palette.color(QPalette::ButtonText),
                                     standardPalette().color(QPalette::ButtonText)))
               { // QML colorized button
@@ -9147,9 +9147,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 else
                   fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
                 painter->fillRect(interiorRect(option->rect,fspec),
-                                  option->palette.brush((option->state & State_Enabled
-                                                          ? QPalette::Active : QPalette::Disabled),
-                                                        QPalette::Button));
+                                  option->palette.brush(QPalette::Active, QPalette::Button));
               }
               else
                 renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
@@ -9285,7 +9283,7 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_ToolButtonLabel : {
-      if (widget == nullptr && option != nullptr
+      if ((option->state & State_Enabled) && widget == nullptr && option != nullptr
           && enoughContrast(option->palette.color(QPalette::ButtonText),
                             standardPalette().color(QPalette::ButtonText)))
       { // QML colorized button
