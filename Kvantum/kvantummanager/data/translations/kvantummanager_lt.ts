@@ -684,12 +684,12 @@ Pagal numatymą 0.</translation>
         <location filename="../../kvantummanager.ui" line="1785"/>
         <location filename="../../kvantummanager.ui" line="1795"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaip aktyvuoti rodinio elementus?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustelėjimo elgsena:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
@@ -1487,12 +1487,12 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="81"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienkartis spustelėjimas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvikartis spustelėjimas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
