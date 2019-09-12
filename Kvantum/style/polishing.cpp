@@ -395,7 +395,7 @@ void Style::polish(QWidget *widget)
             if (!widget->testAttribute(Qt::WA_TranslucentBackground))
             {
               widget->setAttribute(Qt::WA_TranslucentBackground);
-              forcedTranslucency_.insert(widget); // needed in unpolish() with Qt5
+              forcedTranslucency_.insert(widget); // needed in unpolish()
             }
 
             /* enable blurring */
@@ -1012,9 +1012,9 @@ void Style::unpolish(QWidget *widget)
 
 void Style::unpolish(QApplication *app)
 {
-  /* we clean up here because this method may be called due to setting
-     an app style sheet (as in QupZilla), in which case, main windows
-     might not be drawn at all if we don't remove translucency */
+  /* WARNING: We clean up here because this method may be called due to setting
+              an app style sheet (as in QupZilla), in which case, main windows
+              might not be drawn at all if we don't remove translucency. */
   QSetIterator<QWidget*> i(forcedTranslucency_);
   while (i.hasNext())
   {
@@ -1026,6 +1026,7 @@ void Style::unpolish(QApplication *app)
   }
   forcedTranslucency_.clear();
   translucentWidgets_.clear();
+  isOpaque_ = true;
 
   if (app && itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);

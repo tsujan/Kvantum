@@ -2,6 +2,7 @@ V0.11.3
 ---------
  * Basic support for FreeBSD.
  * Added a new option for the click behavior with 3 values for following the current DE or using single or double click (and removed the old click option).
+ * No window translucency with app style sheets (because of problems started with Qt 5.13.1).
 
 V0.11.2
 ---------
