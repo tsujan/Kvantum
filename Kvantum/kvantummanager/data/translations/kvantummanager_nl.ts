@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="135"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licentie</translation>
     </message>
 </context>
 <context>
@@ -294,12 +294,14 @@ noodzakelijk is als probleemoplossing voor bepaalde applicaties.</translation>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is geen volwaardige oplossing, maar
+voorkomt vervelende scrollverspringingen
+als muisgebaren zijn ingeschakeld.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="603"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Tussenoplossing voor Qt&apos;s scrollverspringingen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
@@ -457,27 +459,32 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit vereist het KDE-contrasteffect en Qt 5.11 of hoger,
+en wordt toegepast op doorzichtige vensters die het
+vervagingseffect ondersteunen (maar dat effect
+kun je uitschakelen in de systeeminstellingen).
+
+Een waarde van 1.00 betekent &apos;geen aanpassingen&apos;.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="784"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrasteffect</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzadiging:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="797"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensiteit:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="804"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrast:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="881"/>
@@ -501,12 +508,15 @@ Dit wordt automatisch aangevinkt als venstervervaging is ingeschakeld.</translat
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen schaduwen tekenen onder menu&apos;s en hulpballonnen.
+
+Dit is nuttig als je werkomgeving menu&apos;s en hulpballonnen
+voorziet van schaduwen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaduwloze menu&apos;s en hulpballonnen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -668,12 +678,12 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1785"/>
         <location filename="../../kvantummanager.ui" line="1795"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoe activeer ik weergave-items?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikgedrag:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
@@ -685,18 +695,19 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1887"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling van vensterknoppen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1897"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ze zien er mogelijk uit als gestippelde rechthoeken
+op gefocuste knoppen en andere widgets.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1901"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Focusrechthoeken uitschakelen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2070"/>
@@ -1342,12 +1353,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="81"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Eenmaal klikken</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbel klikken</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
@@ -1372,27 +1383,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="91"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="92"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>GNOME-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="93"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>macOS-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="94"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="95"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Android-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="97"/>
@@ -1568,7 +1579,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2671"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertalers</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2669"/>
