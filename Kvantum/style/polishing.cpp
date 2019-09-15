@@ -355,20 +355,30 @@ void Style::polish(QWidget *widget)
                Unlike most Qt5 windows, there are some opaque ones
                that are polished BEFORE being created (as in Octopi).
                Also the theme may change from Kvantum and to it again. */
-            else if (!isOpaque_ && tspec_now.translucent_windows
-                     && !widget->testAttribute(Qt::WA_TranslucentBackground)
-                     && !widget->testAttribute(Qt::WA_NoSystemBackground))
+            else if (!isOpaque_ && tspec_now.translucent_windows)
             {
-              makeTranslucent = true;
-              /* a Qt5 window couldn't be made translucent if it's
-                 already created without the alpha channel of its
-                 surface format being set (as in Spectacle) */
-              if (widget->testAttribute(Qt::WA_WState_Created))
+              if (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                  && !widget->testAttribute(Qt::WA_NoSystemBackground))
               {
-                if (QWindow *window = widget->windowHandle())
+                makeTranslucent = true;
+              }
+              else if (widget->property("_kv_translucency").toString() == "true")
+              { // the widget was made translucent before and the style is reapplied
+                makeTranslucent = true;
+                widget->setProperty("_kv_translucency", QVariant()); // remove the property
+              }
+              if (makeTranslucent)
+              {
+                /* a Qt5 window couldn't be made translucent if it's
+                   already created without the alpha channel of its
+                   surface format being set (as in Spectacle) */
+                if (widget->testAttribute(Qt::WA_WState_Created))
                 {
-                  if (window->format().alphaBufferSize() != 8)
-                    makeTranslucent = false;
+                  if (QWindow *window = widget->windowHandle())
+                  {
+                    if (window->format().alphaBufferSize() != 8)
+                      makeTranslucent = false;
+                  }
                 }
               }
             }
@@ -1012,21 +1022,20 @@ void Style::unpolish(QWidget *widget)
 
 void Style::unpolish(QApplication *app)
 {
-  /* WARNING: We clean up here because this method may be called due to setting
-              an app style sheet (as in QupZilla), in which case, main windows
-              might not be drawn at all if we don't remove translucency. */
+  /* WARNING: This method is also called when an app style sheet is set (as in QupZilla),
+              in which case, main windows might not be drawn at all if translucency isn't
+              removed here. However, due to a bug in Qt 5.13.1 -> QWidget::setAttribute(),
+              setting WA_TranslucentBackground and WA_NoSystemBackground to false here
+              might cause a mess. Since Qt's bug tracker is unresponsive most of the time,
+              I add a workaround by marking windows that have Kvantum translucency. */
   QSetIterator<QWidget*> i(forcedTranslucency_);
   while (i.hasNext())
   {
     if (QWidget *w = i.next())
-    {
-      w->setAttribute(Qt::WA_NoSystemBackground, false);
-      w->setAttribute(Qt::WA_TranslucentBackground, false);
-    }
+      w->setProperty("_kv_translucency", "true");
   }
   forcedTranslucency_.clear();
   translucentWidgets_.clear();
-  isOpaque_ = true;
 
   if (app && itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);
