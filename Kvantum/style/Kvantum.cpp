@@ -2860,9 +2860,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
         QString status = getState(option,widget);
         QString eStatus = "normal";
-        if (!(option->state & State_Enabled))
+        /* some apps (like Dolphin) don't set the state to enabled; moreover,
+           we don't consider the disabled state in drawing branch lines either */
+        /*if (!(option->state & State_Enabled))
           eStatus = "disabled";
-        else if (option->state & State_MouseOver)
+        else */if (option->state & State_MouseOver)
           eStatus = "focused";
         else if (status.startsWith("toggled") || status.startsWith("pressed"))
           eStatus = "pressed";

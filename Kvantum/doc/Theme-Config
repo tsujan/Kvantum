@@ -770,8 +770,7 @@ alt.base.color                    String (#RRGGBBAA)  Used as the alternate back
                                                       high contrast with "base.color".
 
                                                       If it has translucency, it will be
-                                                      made opaque by being applied over
-                                                      "base.color".
+                                                      applied over "base.color".
 
 inactive.alt.base.color           String (#RRGGBBAA)  Like above but for inactive widgets.
 

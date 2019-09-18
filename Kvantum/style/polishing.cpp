@@ -1083,25 +1083,25 @@ QPalette Style::standardPalette() const
   col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
   {
-    if (col.alpha() < 255)
+    /* make the alternate base color opaque by applying it over the base color
+       because some apps (like Krusader) may ignore its translucency */
+    /*if (col.alpha() < 255)
     {
-      /* make the alternate base color opaque by applying it over the base color
-         because some apps (like Krusader) may ignore its translucency */
       QColor baseCol = standardPalette().color(QPalette::Active,QPalette::Base);
       baseCol.setAlpha(255);
       col = overlayColor(baseCol,col);
-    }
+    }*/
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
     col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
     if (col1.isValid() && hasInactiveness)
     {
-      if (col1.alpha() < 255)
+      /*if (col1.alpha() < 255)
       {
         QColor baseCol = standardPalette().color(QPalette::Inactive,QPalette::Base);
         baseCol.setAlpha(255);
         col1 = overlayColor(baseCol,col1);
-      }
+      }*/
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
     }
     else

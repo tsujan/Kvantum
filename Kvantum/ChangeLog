@@ -3,6 +3,7 @@ V0.11.3
  * Basic support for FreeBSD.
  * Added a new option for the click behavior with 3 values for following the current DE or using single or double click (and removed the old click option).
  * A workaround for the bug in Qt 5.13.1 → QWidget::setAttribute(), when the app style is changed.
+ * Ignore the disabled state of tree expanders (because some apps, like Dolphin, don't set the state to enabled).
 
 V0.11.2
 ---------
