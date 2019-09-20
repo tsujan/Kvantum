@@ -365,7 +365,6 @@ void Style::polish(QWidget *widget)
               else if (widget->property("_kv_translucency").toString() == "true")
               { // the widget was made translucent before and the style is reapplied
                 makeTranslucent = true;
-                widget->setProperty("_kv_translucency", QVariant()); // remove the property
               }
               if (makeTranslucent)
               {
@@ -406,6 +405,11 @@ void Style::polish(QWidget *widget)
             {
               widget->setAttribute(Qt::WA_TranslucentBackground);
               forcedTranslucency_.insert(widget); // needed in unpolish()
+            }
+            else if (widget->property("_kv_translucency").toString() == "true")
+            {
+              forcedTranslucency_.insert(widget);
+              widget->setProperty("_kv_translucency", QVariant()); // remove the property
             }
 
             /* enable blurring */
