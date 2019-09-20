@@ -968,11 +968,6 @@ void Style::unpolish(QWidget *widget)
            the theme is changed from Kvantum and to it again */
         translucentWidgets_.remove(widget);
         forcedTranslucency_.remove(widget);
-
-        /* because of a bug in Qt 5.13.1, this is possible; see unpolish(QApplication*) */
-        if (widget->testAttribute(Qt::WA_TranslucentBackground))
-          widget->setProperty("_kv_translucency", "true");
-
         break;
       }
       default: {
