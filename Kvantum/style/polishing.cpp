@@ -591,12 +591,13 @@ void Style::polish(QWidget *widget)
             }
             itemView->viewport()->setPalette(palette);
 
-            if (itemView->parentWidget())
+            /* this isn't good for Lyx and doesn't seem to be needed elsewhere */
+            /*if (itemView->parentWidget()) // QComboBoxPrivateContainer
             {
               palette = itemView->parentWidget()->palette();
               palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
               itemView->parentWidget()->setPalette(palette);
-            }
+            }*/
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
           {
@@ -842,10 +843,13 @@ void Style::polish(QWidget *widget)
         }
       }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
       if (tspec_.isX11 || widget->inherits("QTipLabel"))
       {
+#endif
         if (!widget->testAttribute(Qt::WA_TranslucentBackground))
           widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
       }
       else
       { // see "Kvantum.cpp" -> setSurfaceFormat() for an explanation
@@ -853,6 +857,7 @@ void Style::polish(QWidget *widget)
         palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
         widget->setPalette(palette);
       }
+#endif
 
       translucentWidgets_.insert(widget);
       connect(widget, &QObject::destroyed, this, &Style::noTranslucency);

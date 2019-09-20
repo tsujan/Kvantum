@@ -12541,6 +12541,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
        tooltips even if the main window isn't translucent */
     realWindow = false;
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
     /* WARNING: For some reason unknown to me, if WA_TranslucentBackground
                 is set on wayland, menus will be rendered with artifacts.
                 Instead, the native handle should be created, the alpha
@@ -12571,6 +12572,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
         window->setFormat(format);
       }
     }
+#endif
   }
   else
   {
@@ -12627,7 +12629,9 @@ void Style::setSurfaceFormat(QWidget *widget) const
     return;
 
   /* this will set the alpha buffer size to 8 in a safe way on X11 */
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
   if (tspec_.isX11 || realWindow)
+#endif
     widget->setAttribute(Qt::WA_TranslucentBackground);
   /* distinguish forced translucency from hard-coded translucency */
   forcedTranslucency_.insert(widget);
