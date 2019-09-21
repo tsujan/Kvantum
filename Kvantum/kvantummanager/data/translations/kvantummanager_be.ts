@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; пастаўляецца з вялікай колькасцю тэм. Вы таксама можаце ўсталяваць дадатковыя тэмы. Тут вы можаце абраць каталог з тэмамі і націснуць кнопку ніжэй, каб усталяваць іх.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -90,60 +90,62 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Аднавіць прадвызначаныя (root) налады гэтай тэмы!&lt;/p&gt;&lt;p&gt;Калі націснуць і пацвердзіць, усе змены ў канфігурацыі адкінуцца, але,  верагодна, файл SVG з наладамі застанецца.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Аднавіць</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваць гэтую канфігурацыю
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
         <location filename="../../kvantummanager.ui" line="2088"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваць</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Захаваць налады</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Прыбярыце адзнаку, калі хочаце
+каб усе віджэты выглядалі прадвызначана.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Хакі</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Празрыстасць Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Звычайны шрыфт для прадвызначаных кнопак</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -152,17 +154,19 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Аб’яднаць бакавую панэль PCManFM-qt з яго асяроддзем.
+
+Ва LXQt спатрэбіцца завяршыць сеанс і ўвайсці зноў, альбо закрыць PCManFM-qt і перазапусціць працоўны стол з наладамі сеанса LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Празрыстая бакавая панэль для PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопкі без значкоў</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -171,32 +175,34 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Аб’яднаць PCManFM-qt з яго асяроддзем.
+
+Ва LXQt спатрэбіцца завяршыць сеанс і ўвайсці зноў, альбо закрыць PCManFM-qt і перазапусціць працоўны стол з наладамі сеанса LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Празрыстасць PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню без значкоў</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Размыццё яўна паўпразрыстых акон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Адзіная верхняя панэль інструментаў</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не адмалёўваць фон для KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
