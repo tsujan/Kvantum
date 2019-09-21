@@ -345,12 +345,16 @@ void Style::polish(QWidget *widget)
         {
           theme_spec tspec_now = settings_->getCompositeSpec();
 
+          bool hasForcedTranslucency(false);
           bool makeTranslucent(false);
           if (!widget->windowFlags().testFlag(Qt::FramelessWindowHint)
               && !widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
           {
             if (forcedTranslucency_.contains(widget))
+            {
               makeTranslucent = true;
+              hasForcedTranslucency = true;
+            }
             /* WARNING:
                Unlike most Qt5 windows, there are some opaque ones
                that are polished BEFORE being created (as in Octopi).
@@ -434,7 +438,8 @@ void Style::polish(QWidget *widget)
             if (makeTranslucent)
               widget->installEventFilter(this);
             translucentWidgets_.insert(widget);
-            connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
+            if (!hasForcedTranslucency) // no duplicate connection (unimportant)
+              connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
           }
         }
       }
@@ -592,13 +597,17 @@ void Style::polish(QWidget *widget)
             }
             itemView->viewport()->setPalette(palette);
 
-            /* this isn't good for Lyx and doesn't seem to be needed elsewhere */
-            /*if (itemView->parentWidget()) // QComboBoxPrivateContainer
+            /* This is needed for menu scrollers to have transparent backgrounds. But Lyx interprets
+               "Qt::transparent" as pitch black, ignoring the alpha. As a workaround, we get a
+               transparent color by setting the alpha of the real background color to zero. */
+            if (itemView->parentWidget()) // QComboBoxPrivateContainer
             {
               palette = itemView->parentWidget()->palette();
-              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
+              QColor bg = palette.color(itemView->parentWidget()->backgroundRole());
+              bg.setAlpha(0);
+              palette.setColor(itemView->parentWidget()->backgroundRole(), bg);
               itemView->parentWidget()->setPalette(palette);
-            }*/
+            }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
           {

@@ -5,7 +5,7 @@ V0.11.3
  * A workaround for the bug in Qt 5.13.1 → QWidget::setAttribute(), when the app style is changed.
  * Ignore the disabled state of tree expanders (because some apps, like Dolphin, don't set the state to enabled).
  * Removed the wayland menu translucency workaround for Qt ≥ 5.12.
- * Don't give a translucent background to QComboBoxPrivateContainer with combo menus.
+ * When giving a transparent background to QComboBoxPrivateContainer with combo menus, create the transparency by setting the alpha of the real background color to zero. This works around the problem in Lyx's combo menu.
 
 V0.11.2
 ---------
