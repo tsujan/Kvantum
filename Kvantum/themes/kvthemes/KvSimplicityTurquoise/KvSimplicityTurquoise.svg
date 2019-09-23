@@ -189,7 +189,7 @@
 <stop offset="1" style="stop-color:#141414"/>
 </linearGradient>
 <linearGradient id="linearGradient4635">
-<stop offset="0" style="stop-color:#e1e1e1"/>
+<stop offset="0" style="stop-color:#e6e6e6"/>
 <stop offset="0.35" style="stop-color:#f0f0f0"/>
 <stop offset="1" style="stop-color:#fff"/>
 </linearGradient>
@@ -611,7 +611,7 @@
 <path style="fill:url(#linearGradient4799);fill-rule:evenodd" d="m 28.75,81.2516 v -32.5 h -7.5 v 32.5 z"/>
 <path style="fill:#9d9d9d;line-height:normal;color:#000" d="m 21.25,48.7516 v 32.5 h 1.49961 v -32.5 z "/>
 </g>
-<path style="opacity:.1;fill:url(#linearGradient5100);fill-rule:evenodd" d="m 395,80 h 32.5 V 74 H 395 Z"/>
+<path style="opacity:.08;fill:url(#linearGradient5100);fill-rule:evenodd" d="m 395,80 h 32.5 V 74 H 395 Z"/>
 </g>
 <g id="lineedit-normal-left" transform="matrix(1.3333244,0,0,0.98461517,-119.62189,1.2616049)">
 <g id="lineedit-normal-left0" transform="translate(366.29025,31.217107)">
@@ -626,7 +626,7 @@
 <path style="fill:#9d9d9d;line-height:normal;color:#000" d="m 28.75,41.2516 c -4.12498,0 -7.5,3.37497 -7.5,7.5 h 1.5 c 0,-3.18752 2.81253,-6 6,-6 z "/>
 </g>
 <path style="opacity:.08;fill:url(#linearGradient5180)" d="m 395.0403,73.9683 c -3.18752,0 -6,2.81288 -6,6 h 6 z "/>
-<path style="opacity:.1;fill:url(#linearGradient1782)" d="m 395.0403,73.9683 c -3.18752,0 -6,2.81288 -6,6 h 6 z "/>
+<path style="opacity:.08;fill:url(#linearGradient1782)" d="m 395.0403,73.9683 c -3.18752,0 -6,2.81288 -6,6 h 6 z "/>
 </g>
 <g id="lineedit-normal-bottomleft" transform="matrix(1.3333242,0,0,1.3333242,-119.66311,-37.998946)">
 <g transform="matrix(1,0,0,-1,366.25,161.25158)">
@@ -638,7 +638,7 @@
 <use width="100%" height="100%" xlink:href="#lineedit-normal-left0" id="lineedit-normal-right" transform="matrix(-1.3333244,0,0,0.98461538,965.62187,1.2615793)"/>
 <g id="lineedit-normal-topright" transform="matrix(1.3333146,0,0,1.3333146,-130.99208,-26.665249)">
 <use width="100%" height="100%" xlink:href="#lineedit-normal-topleft0" transform="matrix(-1,0,0,1,822.54025,0.03133855)"/>
-<path style="opacity:.1;fill:url(#linearGradient5230)" d="m 427.5,74 c 3.18761,0 6,2.81252 6,6 h -6 z "/>
+<path style="opacity:.08;fill:url(#linearGradient5230)" d="m 427.5,74 c 3.18761,0 6,2.81252 6,6 h -6 z "/>
 </g>
 <path style="fill:#c8c8c8" id="progress-pattern-disabled-topleft" d="M 72,146.5 V 139 c -4.25,0 -7.5,3.25 -7.5,7.5 z"/>
 <path style="fill:#c8c8c8" id="progress-pattern-disabled-left" d="M 64.5,146.5 H 72 v 16 h -7.5 z"/>
