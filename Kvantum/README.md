@@ -15,7 +15,7 @@ For instructions on how to change configuration or make new themes, read the fil
 
 ## Credits:
 
-The core idea of Kvantum, namely using of SVG images for drawing Qt widgets, is taken from QuantumStyle (not developed anymore but continued as QSvgStyle at https://github.com/DexterMagnific/QSvgStyle).
+The core idea of Kvantum, namely using of SVG images for drawing Qt widgets, was taken from QuantumStyle (not developed anymore but continued as QSvgStyle at https://github.com/DexterMagnific/QSvgStyle).
 
 Some code parts are adapted from:
 

@@ -100,6 +100,8 @@ class ThemeConfig {
     theme_spec compositeSpecs_;
 
     bool isX11_;
+
+    bool nonIntegerScale;
 };
 }
 

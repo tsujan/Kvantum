@@ -7,6 +7,7 @@ V0.11.3
  * Removed the wayland menu translucency workaround for Qt ≥ 5.12.
  * When giving a transparent background to QComboBoxPrivateContainer with combo menus, create the transparency by setting the alpha of the real background color to zero. This works around the problem in Lyx's combo menu.
  * Milder gradient for the default theme's tab frame interior.
+ * A workaround for a Qt bug that causes drawing problems with non-integer scale factors. They can be seen with Fusion too but become intense with window SVG gradient and/or translucency.
 
 V0.11.2
 ---------
