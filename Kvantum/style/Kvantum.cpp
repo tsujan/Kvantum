@@ -4667,8 +4667,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
         /* -> CE_MenuScroller */
-        if (enoughContrast(standardPalette().color(QPalette::WindowText),
-                           getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor))
+        if (themeRndr_ && themeRndr_->isValid()
+            && enoughContrast(standardPalette().color(QPalette::WindowText),
+                              getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor))
             && flatArrowExists(dspec.element))
         {
           dspec.element = "flat-"+dspec.element;
