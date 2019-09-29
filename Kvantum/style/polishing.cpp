@@ -284,7 +284,7 @@ void Style::polish(QWidget *widget)
          hard to believe, a menu can have the Dialog flag (-> qlipper)
          and a window can have the ToolTip flag (-> LXQtGroupPopup) */
       if (qobject_cast<QMenu*>(widget))
-      { // some apps (like QtAv Player) do weird things with menus
+      { // some apps (like QtAV Player) do weird things with menus
         QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
         if (menuTextColor.isValid())
         {
@@ -487,7 +487,9 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if ((isOpaque_ && qobject_cast<QAbstractScrollArea*>(widget)) // like in VLC play list view
+  if ((isOpaque_ && qobject_cast<QAbstractItemView*>(widget)) // like in VLC play list view
+      /* Without combo menu, "QComboBoxPrivateContainer" should be opaque.
+         With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
       || widget->inherits("QComboBoxPrivateContainer")
       || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
       || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
@@ -497,10 +499,9 @@ void Style::polish(QWidget *widget)
        (line-edits are dealt with separately and only when needed in "Kvantum.cpp".) */
     QPalette palette = widget->palette();
     QColor baseCol = palette.color(QPalette::Base);
-    if (baseCol.isValid() && baseCol != Qt::transparent // for rare cases, like that of Kaffeine's file widget
-        && baseCol.alpha() < 255)
+    if (baseCol.isValid() && baseCol.alpha() < 255)
     {
-      QColor winCol = palette.color(QPalette::Window);
+      QColor winCol = standardPalette().color(QPalette::Window);
       winCol.setAlpha(255);
       baseCol = overlayColor(winCol,baseCol);
       palette.setColor(QPalette::Base,baseCol);
@@ -597,15 +598,11 @@ void Style::polish(QWidget *widget)
             }
             itemView->viewport()->setPalette(palette);
 
-            /* This is needed for menu scrollers to have transparent backgrounds. But Lyx interprets
-               "Qt::transparent" as pitch black, ignoring the alpha. As a workaround, we get a
-               transparent color by setting the alpha of the real background color to zero. */
+            /* needed for menu scrollers to have transparent backgrounds */
             if (itemView->parentWidget()) // QComboBoxPrivateContainer
             {
               palette = itemView->parentWidget()->palette();
-              QColor bg = palette.color(itemView->parentWidget()->backgroundRole());
-              bg.setAlpha(0);
-              palette.setColor(itemView->parentWidget()->backgroundRole(), bg);
+              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
               itemView->parentWidget()->setPalette(palette);
             }
           }
