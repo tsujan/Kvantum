@@ -306,8 +306,8 @@ void Style::polish(QWidget *widget)
                 altBaseCol = overlayColor(baseCol,altBaseCol);
                 palette.setColor(QPalette::AlternateBase,altBaseCol);
               }
-              widget->setPalette(palette);
             }
+            widget->setPalette(palette);
           }
         }
         break;
