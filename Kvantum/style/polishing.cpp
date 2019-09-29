@@ -293,7 +293,21 @@ void Style::polish(QWidget *widget)
           {
             palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
             palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
-            widget->setPalette(palette);
+            QColor baseCol = palette.color(QPalette::Base);
+            if (baseCol.isValid() && baseCol.alpha() < 255)
+            {
+              QColor winCol = standardPalette().color(QPalette::Window);
+              winCol.setAlpha(255);
+              baseCol = overlayColor(winCol,baseCol);
+              palette.setColor(QPalette::Base,baseCol);
+              QColor altBaseCol = palette.color(QPalette::AlternateBase);
+              if (altBaseCol.isValid() && altBaseCol.alpha() < 255)
+              {
+                altBaseCol = overlayColor(baseCol,altBaseCol);
+                palette.setColor(QPalette::AlternateBase,altBaseCol);
+              }
+              widget->setPalette(palette);
+            }
           }
         }
         break;
@@ -505,6 +519,12 @@ void Style::polish(QWidget *widget)
       winCol.setAlpha(255);
       baseCol = overlayColor(winCol,baseCol);
       palette.setColor(QPalette::Base,baseCol);
+      QColor altBaseCol = palette.color(QPalette::AlternateBase);
+      if (altBaseCol.isValid() && altBaseCol.alpha() < 255)
+      {
+        altBaseCol = overlayColor(baseCol,altBaseCol);
+        palette.setColor(QPalette::AlternateBase,altBaseCol);
+      }
       widget->setPalette(palette);
     }
   }
