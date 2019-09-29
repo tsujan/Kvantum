@@ -4651,17 +4651,28 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
 
-      /* menuitems may have their own right/left arrows */
-      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
-          && (element == PE_IndicatorArrowLeft || element == PE_IndicatorArrowRight))
+      if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
       {
-        const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("MenuItem"));
-        dspec.size = dspec1.size;
-        /* the arrow rectangle is set at CE_MenuItem appropriately */
-        if (renderElement(painter, (/*isLibreoffice_ && aStatus.startsWith("normal") ? dspec.element :*/ dspec1.element)
-                                   + dir+aStatus,
-                          option->rect))
-          break;
+        /* menuitems may have their own right/left arrows */
+        if (element == PE_IndicatorArrowLeft || element == PE_IndicatorArrowRight)
+        {
+          const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("MenuItem"));
+          dspec.size = dspec1.size;
+          /* the arrow rectangle is set at CE_MenuItem appropriately */
+          if (renderElement(painter, (/*isLibreoffice_ && aStatus.startsWith("normal") ? dspec.element :*/ dspec1.element)
+                                     + dir+aStatus,
+                            option->rect))
+          {
+            break;
+          }
+        }
+        /* -> CE_MenuScroller */
+        if (enoughContrast(standardPalette().color(QPalette::WindowText),
+                           getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor))
+            && flatArrowExists(dspec.element))
+        {
+          dspec.element = "flat-"+dspec.element;
+        }
       }
       /* only theoretically; toolbar/menubar arrows are drawn at SP_ToolBarHorizontalExtensionButton */
       else if (themeRndr_ && themeRndr_->isValid())
@@ -4675,8 +4686,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         else if (qobject_cast<const QMenuBar*>(widget))
           col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
-        else if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)) // -> CE_MenuScroller
-          col = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
         if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::WindowText))
             && flatArrowExists(dspec.element))
         {
