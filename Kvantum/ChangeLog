@@ -9,6 +9,7 @@ V0.11.3
  * Milder gradient for the default theme's tab frame interior.
  * A workaround for a Qt bug that causes drawing problems with non-integer scale factors. They can be seen with Fusion too but become intense with window SVG gradient and/or translucency.
  * Avoid ugly backgrounds behind menu scroller arrows.
+ * Forcefully prevent stylesheets from ruining combo menus.
 
 V0.11.2
 ---------

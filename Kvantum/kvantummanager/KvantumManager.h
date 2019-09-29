@@ -62,7 +62,6 @@ private slots:
     void trantsientScrollbarEnbled (bool checked);
     void showWhatsThis();
     void aboutDialog();
-    void updateCombos();
 
 private:
     void closeEvent (QCloseEvent *event);

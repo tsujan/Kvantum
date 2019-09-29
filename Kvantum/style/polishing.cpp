@@ -40,6 +40,7 @@
 #include <QWindow>
 #include <QDialog>
 #include <QLayout> // only for forceSizeGrip
+#include <QCompleter> // only for combo menu change in  Kvantum Manager
 
 namespace Kvantum
 {
@@ -599,24 +600,38 @@ void Style::polish(QWidget *widget)
         {
           if (itemView->itemDelegate()->inherits("QComboMenuDelegate"))
           { // enforce translucency on the combo menu (all palettes needed)
+            QPalette vPalette = itemView->viewport()->palette();
+            QColor menuTextColor;
+            bool baseContrast(false);
+            if (itemView->viewport()->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly).isEmpty())
+            {
+              menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+              baseContrast = enoughContrast(vPalette.color(QPalette::Text), menuTextColor);
+            }
+
             if (itemView->style() != this)
             { // no mercy to intruding styles (as in SMPLayer preferences)
-              itemView->setStyleSheet(QStringLiteral("background-color: transparent;"));
+              QString ss;
+              if (baseContrast)
+              {
+                ss = QStringLiteral("QAbstractItemView{background-color: transparent; color: %1}")
+                     .arg(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+              }
+              else
+                ss = QStringLiteral("QAbstractItemView{background-color: transparent;}");
+              itemView->setStyleSheet(ss);
             }
 
             QPalette palette = itemView->palette();
             palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
             itemView->setPalette(palette);
 
-            palette = itemView->viewport()->palette();
-            palette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
-            if (itemView->viewport()->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly).isEmpty())
+            vPalette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+            if (baseContrast)
             { // font menus use the palette text color, so we set it to the menu text color when needed
-              QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
-              if (enoughContrast(palette.color(QPalette::Text), menuTextColor))
-                palette.setColor(QPalette::Text, menuTextColor);
+              vPalette.setColor(QPalette::Text, menuTextColor);
             }
-            itemView->viewport()->setPalette(palette);
+            itemView->viewport()->setPalette(vPalette);
 
             /* needed for menu scrollers to have transparent backgrounds */
             if (itemView->parentWidget()) // QComboBoxPrivateContainer
@@ -626,29 +641,84 @@ void Style::polish(QWidget *widget)
               itemView->parentWidget()->setPalette(palette);
             }
           }
-          else if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
+          else if (itemView->itemDelegate()->inherits("QComboBoxDelegate")
+                   || qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
           {
-            if (itemView->style() != this
-                && itemView->styleSheet() == "background-color: transparent;")
-            {
-              itemView->setStyleSheet(QString());
-            }
             /* the combo menu setting may have been toggled in Kvantum Manager */
-            if (itemView->viewport())
+            QPalette palette = itemView->palette();
+            if (palette.color(itemView->backgroundRole()) == QColor(Qt::transparent))
             {
-              QPalette palette = itemView->viewport()->palette();
-              if (palette.color(itemView->backgroundRole()) == QColor(Qt::transparent))
+              if (itemView->styleSheet() == QStringLiteral("QAbstractItemView{background-color: transparent;}")
+                  || itemView->styleSheet()
+                       == QStringLiteral("QAbstractItemView{background-color: transparent; color: %1}")
+                          .arg(getLabelSpec(QStringLiteral("MenuItem")).normalColor))
               {
-                palette.setColor(itemView->viewport()->backgroundRole(),
-                                 standardPalette().color(QPalette::Base));
-                itemView->viewport()->setPalette(palette);
+                itemView->setStyleSheet(QString());
+              }
+
+              QColor winCol = standardPalette().color(QPalette::Window);
+              winCol.setAlpha(255);
+              QColor baseCol = standardPalette().color(QPalette::Base);
+              if (baseCol.alpha() < 255)
+                baseCol = overlayColor(winCol,baseCol);
+
+              palette.setColor(QPalette::Base, baseCol);
+              palette.setColor(QPalette::Window, winCol);
+              itemView->setPalette(palette);
+              QColor vBgCol;
+              if (itemView->viewport())
+              {
+                palette = itemView->viewport()->palette();
+                if (palette.color(itemView->viewport()->backgroundRole()) == QColor(Qt::transparent))
+                {
+                  palette.setColor(QPalette::Base, baseCol);
+                  palette.setColor(QPalette::Window, winCol);
+                  palette.setColor(QPalette::Text, standardPalette().color(QPalette::Text));
+                  itemView->viewport()->setPalette(palette);
+                }
+                vBgCol = palette.color(itemView->viewport()->backgroundRole());
+              }
+              else // impossible
+                vBgCol = baseCol;
+              if (itemView->parentWidget())
+              {
+                palette = itemView->parentWidget()->palette();
+                if (palette.color(itemView->parentWidget()->backgroundRole()) == QColor(Qt::transparent))
+                {
+                  palette.setColor(QPalette::Window, winCol);
+                  palette.setColor(QPalette::Base, baseCol);
+                  itemView->parentWidget()->setPalette(palette);
+                }
+              }
+              QList<QScrollBar*> scrollbars = combo->findChildren<QScrollBar*>();
+              for (int i = 0; i < scrollbars.size(); ++i)
+              {
+                  QScrollBar *sb = scrollbars.at(i);
+                  sb->setAutoFillBackground(true);
+                  palette = sb->palette();
+                  palette.setColor(sb->backgroundRole(), vBgCol);
+                  sb->setPalette(palette);
+              }
+              if (combo->completer())
+              {
+                if (QAbstractItemView *cv = combo->completer()->popup())
+                {
+                    palette = cv->palette();
+                    palette.setColor(QPalette::Text, standardPalette().color(QPalette::Text));
+                    palette.setColor(QPalette::Base, baseCol);
+                    palette.setColor(QPalette::Window, winCol);
+                    cv->setPalette(palette);
+                }
               }
             }
-            /* PM_FocusFrameVMargin is used for viewitems */
-            itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
-                                                              itemView));
-            if (!tspec_.animate_states) // see eventFilter() -> QEvent::StyleChange
-              widget->installEventFilter(this);
+            if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
+            {
+              /* PM_FocusFrameVMargin is used for viewitems */
+              itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
+                                                                itemView));
+              if (!tspec_.animate_states) // see eventFilter() -> QEvent::StyleChange
+                widget->installEventFilter(this);
+            }
           }
         }
       }

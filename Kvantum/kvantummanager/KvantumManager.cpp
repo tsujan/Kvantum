@@ -1100,58 +1100,6 @@ void KvantumManager::restyleWindow()
         QEvent event (QEvent::ThemeChange);
         QApplication::sendEvent (widget, &event);
     }
-    /* For some reason (a Qt problem?), the palettes related to the
-       comboboxes aren't updated completely when the style changes. */
-    QTimer::singleShot(0, this, SLOT (updateCombos()));
-}
-/*************************/
-void KvantumManager::updateCombos()
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        QComboBox *combo = (i == 0 ? ui->comboBox : ui->appCombo);
-        if (QAbstractItemView *itemView = combo->view())
-        {
-            if (itemView->itemDelegate()
-                && itemView->itemDelegate()->inherits ("QComboBoxDelegate"))
-            {
-                QPalette palette = itemView->palette();
-                palette.setColor (QPalette::Text,
-                                  QApplication::palette().color (QPalette::Text));
-                itemView->setPalette (palette);
-                if (itemView->viewport())
-                {
-                    palette = itemView->viewport()->palette();
-                    palette.setColor (QPalette::Base,
-                                      QApplication::palette().color (QPalette::Base));
-                    palette.setColor (QPalette::Window,
-                                      QApplication::palette().color (QPalette::Window));
-                    itemView->viewport()->setPalette (palette);
-                }
-            }
-            QList<QScrollBar*> widgets = combo->findChildren<QScrollBar*>();
-            for (int j = 0; j < widgets.size(); ++j)
-            {
-                QPalette palette = widgets.at (j)->palette();
-                palette.setColor (QPalette::Window,
-                                  QApplication::palette().color (QPalette::Window));
-                palette.setColor (QPalette::Base,
-                                  QApplication::palette().color (QPalette::Base));
-                widgets.at (j)->setPalette (palette);
-            }
-            if (QAbstractItemView *cv = combo->completer()->popup())
-            {
-                QPalette palette = cv->palette();
-                palette.setColor (QPalette::Text,
-                                  QApplication::palette().color (QPalette::Text));
-                palette.setColor (QPalette::Base,
-                                  QApplication::palette().color (QPalette::Base));
-                palette.setColor (QPalette::Window,
-                                  QApplication::palette().color (QPalette::Window));
-                cv->setPalette (palette);
-            }
-        }
-    }
 }
 /*************************/
 void KvantumManager::tabChanged (int index)
