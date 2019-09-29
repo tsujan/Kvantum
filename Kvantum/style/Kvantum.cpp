@@ -4675,6 +4675,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         else if (qobject_cast<const QMenuBar*>(widget))
           col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
+        else if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)) // -> CE_MenuScroller
+          col = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
         if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::WindowText))
             && flatArrowExists(dspec.element))
         {
@@ -5814,11 +5816,11 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_MenuScroller : {
-      if (enoughContrast(standardPalette().color(QPalette::WindowText),
+      /*if (enoughContrast(standardPalette().color(QPalette::WindowText),
           getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor)))
       {
         painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
-      }
+      }*/
       if (option->state & State_DownArrow)
         drawPrimitive(PE_IndicatorArrowDown,option,painter,widget);
       else
