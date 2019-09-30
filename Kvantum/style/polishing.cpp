@@ -295,14 +295,14 @@ void Style::polish(QWidget *widget)
             palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
             palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
             QColor baseCol = palette.color(QPalette::Base);
-            if (baseCol.isValid() && baseCol.alpha() < 255)
+            if (baseCol.alpha() < 255 && baseCol == standardPalette().color(QPalette::Base))
             {
               QColor winCol = standardPalette().color(QPalette::Window);
               winCol.setAlpha(255);
               baseCol = overlayColor(winCol,baseCol);
               palette.setColor(QPalette::Base,baseCol);
-              QColor altBaseCol = palette.color(QPalette::AlternateBase);
-              if (altBaseCol.isValid() && altBaseCol.alpha() < 255)
+              QColor altBaseCol = standardPalette().color(QPalette::AlternateBase);
+              if (altBaseCol.alpha() < 255)
               {
                 altBaseCol = overlayColor(baseCol,altBaseCol);
                 palette.setColor(QPalette::AlternateBase,altBaseCol);
@@ -502,32 +502,30 @@ void Style::polish(QWidget *widget)
     }
   }
 
-  if ((isOpaque_ && qobject_cast<QAbstractItemView*>(widget)) // like in VLC play list view
-      /* Without combo menu, "QComboBoxPrivateContainer" should be opaque.
-         With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
-      || widget->inherits("QComboBoxPrivateContainer")
-      || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
-      || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
-      || widget->inherits("KSignalPlotter")) // probably has a bug
+  /* Text editors and some other widgets shouldn't have a translucent base color.
+     (line-edits are dealt with separately and only when needed in "Kvantum.cpp".) */
+  QPalette wp = widget->palette();
+  QColor wBaseCol = wp.color(QPalette::Base);
+  if (wBaseCol.alpha() < 255 && wBaseCol == standardPalette().color(QPalette::Base)
+      && ((isOpaque_ && qobject_cast<QAbstractItemView*>(widget)) // like in VLC play list view
+          /* Without combo menu, "QComboBoxPrivateContainer" should be opaque.
+            With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
+          || widget->inherits("QComboBoxPrivateContainer")
+          || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
+          || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
+          || widget->inherits("KSignalPlotter"))) // probably has a bug
   {
-    /* Text editors and some other widgets shouldn't have a translucent base color.
-       (line-edits are dealt with separately and only when needed in "Kvantum.cpp".) */
-    QPalette palette = widget->palette();
-    QColor baseCol = palette.color(QPalette::Base);
-    if (baseCol.isValid() && baseCol.alpha() < 255)
+    QColor winCol = standardPalette().color(QPalette::Window);
+    winCol.setAlpha(255);
+    wBaseCol = overlayColor(winCol,wBaseCol);
+    wp.setColor(QPalette::Base,wBaseCol);
+    QColor altBaseCol = standardPalette().color(QPalette::AlternateBase);
+    if (altBaseCol.alpha() < 255)
     {
-      QColor winCol = standardPalette().color(QPalette::Window);
-      winCol.setAlpha(255);
-      baseCol = overlayColor(winCol,baseCol);
-      palette.setColor(QPalette::Base,baseCol);
-      QColor altBaseCol = palette.color(QPalette::AlternateBase);
-      if (altBaseCol.isValid() && altBaseCol.alpha() < 255)
-      {
-        altBaseCol = overlayColor(baseCol,altBaseCol);
-        palette.setColor(QPalette::AlternateBase,altBaseCol);
-      }
-      widget->setPalette(palette);
+      altBaseCol = overlayColor(wBaseCol,altBaseCol);
+      wp.setColor(QPalette::AlternateBase,altBaseCol);
     }
+    widget->setPalette(wp);
   }
 
   // -> ktitlewidget.cpp
@@ -599,12 +597,12 @@ void Style::polish(QWidget *widget)
         if(itemView && itemView->itemDelegate())
         {
           if (itemView->itemDelegate()->inherits("QComboMenuDelegate"))
-          { // enforce translucency on the combo menu (all palettes needed)
+          { // enforce translucency on the combo menu in every possible way
             QPalette vPalette = itemView->viewport()->palette();
             QColor menuTextColor;
             bool baseContrast(false);
             if (itemView->viewport()->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly).isEmpty())
-            {
+            { // font menus use the palette text color, so we set it to the menu text color when needed
               menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
               baseContrast = enoughContrast(vPalette.color(QPalette::Text), menuTextColor);
             }
@@ -626,12 +624,12 @@ void Style::polish(QWidget *widget)
             palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
             itemView->setPalette(palette);
 
-            vPalette.setColor(itemView->viewport()->backgroundRole(), QColor(Qt::transparent));
+            itemView->viewport()->setAutoFillBackground(false);
             if (baseContrast)
-            { // font menus use the palette text color, so we set it to the menu text color when needed
+            {
               vPalette.setColor(QPalette::Text, menuTextColor);
+              itemView->viewport()->setPalette(vPalette);
             }
-            itemView->viewport()->setPalette(vPalette);
 
             /* needed for menu scrollers to have transparent backgrounds */
             if (itemView->parentWidget()) // QComboBoxPrivateContainer
@@ -639,6 +637,8 @@ void Style::polish(QWidget *widget)
               palette = itemView->parentWidget()->palette();
               palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
               itemView->parentWidget()->setPalette(palette);
+              if (itemView->parentWidget()->style() != this)
+                itemView->parentWidget()->setStyleSheet(QStringLiteral("background-color: transparent;"));
             }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate")
@@ -668,20 +668,15 @@ void Style::polish(QWidget *widget)
               QColor vBgCol;
               if (itemView->viewport())
               {
-                palette = itemView->viewport()->palette();
-                if (palette.color(itemView->viewport()->backgroundRole()) == QColor(Qt::transparent))
-                {
-                  palette.setColor(QPalette::Base, baseCol);
-                  palette.setColor(QPalette::Window, winCol);
-                  palette.setColor(QPalette::Text, standardPalette().color(QPalette::Text));
-                  itemView->viewport()->setPalette(palette);
-                }
+                itemView->viewport()->setAutoFillBackground(true);
                 vBgCol = palette.color(itemView->viewport()->backgroundRole());
               }
               else // impossible
                 vBgCol = baseCol;
               if (itemView->parentWidget())
               {
+                if (itemView->parentWidget()->styleSheet() == QStringLiteral("background-color: transparent;"))
+                  itemView->parentWidget()->setStyleSheet(QString());
                 palette = itemView->parentWidget()->palette();
                 if (palette.color(itemView->parentWidget()->backgroundRole()) == QColor(Qt::transparent))
                 {
