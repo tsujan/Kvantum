@@ -511,6 +511,7 @@ void Style::polish(QWidget *widget)
           /* Without combo menu, "QComboBoxPrivateContainer" should be opaque.
             With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
           || widget->inherits("QComboBoxPrivateContainer")
+          || (!tspec_.combo_menu && widget->inherits("QComboBoxListView")) // simple combo popup
           || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
           || qobject_cast<QAbstractItemView*>(getParent(widget,2)) // inside view-items
           || widget->inherits("KSignalPlotter"))) // probably has a bug
@@ -833,6 +834,7 @@ void Style::polish(QWidget *widget)
             if (QScrollBar *sb = sa->horizontalScrollBar())
             {
               sb->setAutoFillBackground(true);
+              sb->setBackgroundRole(vp->backgroundRole()); // sometimes needed
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
               if (col1.isValid() && col1 != col)
@@ -842,6 +844,7 @@ void Style::polish(QWidget *widget)
             if (QScrollBar *sb = sa->verticalScrollBar())
             {
               sb->setAutoFillBackground(true);
+              sb->setBackgroundRole(vp->backgroundRole());
               palette = sb->palette();
               palette.setColor(sb->backgroundRole(), col);
               if (col1.isValid() && col1 != col)
