@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="139"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisensi</translation>
     </message>
 </context>
 <context>
@@ -507,12 +507,15 @@ Secara otomatis dicentang jika pemburaman jendela diaktifkan.</translation>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jangan menaruh bayangan untuk menu dan tooltip.
+
+Ini dapat digunakan pada DE yang memberikan
+shadow di menu dan tooltips.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="900"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu dan tooltip tanpa bayangan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -680,12 +683,12 @@ beberapa aplikasi mengaturnya sendiri.</translation>
         <location filename="../../kvantummanager.ui" line="1785"/>
         <location filename="../../kvantummanager.ui" line="1795"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bagaimana cara melihat item?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Efek klik:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
@@ -705,12 +708,13 @@ Secara bawaan, cabang pohon memiliki indikator tetapi tidak ada garis.</translat
         <location filename="../../kvantummanager.ui" line="1897"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mereka memang terlihat seperti kotak bergaris
+pada tombol dan widget lainnya.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1901"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Hapus kotak yang difokuskan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2070"/>
@@ -1395,12 +1399,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="81"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik sekali</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="82"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik dua kali</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
@@ -1621,7 +1625,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2619"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Penerjemah</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2617"/>
