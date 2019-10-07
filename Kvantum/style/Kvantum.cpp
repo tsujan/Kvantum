@@ -12538,8 +12538,10 @@ void Style::setSurfaceFormat(QWidget *widget) const
       && forcedTranslucency_.contains(widget)
       && !(widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget)))
   {
-    widget->setAttribute(Qt::WA_TranslucentBackground, false);
     widget->setAttribute(Qt::WA_NoSystemBackground, false);
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
+    widget->setAttribute(Qt::WA_TranslucentBackground, false);
+#endif
     widget->setAutoFillBackground(true); // Fusion needs this
     return;
   }

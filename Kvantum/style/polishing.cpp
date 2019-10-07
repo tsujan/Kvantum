@@ -376,16 +376,15 @@ void Style::polish(QWidget *widget)
                Also the theme may change from Kvantum and to it again. */
             else if (!isOpaque_ && tspec_now.translucent_windows)
             {
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
               if (!widget->testAttribute(Qt::WA_TranslucentBackground)
                   && !widget->testAttribute(Qt::WA_NoSystemBackground))
+#else
+              if (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                  || !widget->testAttribute(Qt::WA_NoSystemBackground))
+#endif
               {
                 makeTranslucent = true;
-              }
-              else if (widget->property("_kv_translucency").toString() == "true")
-              { // the widget was made translucent before and the style is reapplied
-                makeTranslucent = true;
-                forcedTranslucency_.insert(widget);
-                widget->setProperty("_kv_translucency", QVariant()); // remove the property
               }
               if (makeTranslucent)
               {
@@ -410,7 +409,9 @@ void Style::polish(QWidget *widget)
           {
             forcedTranslucency_.remove(widget);
             widget->setAttribute(Qt::WA_NoSystemBackground, false);
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
             widget->setAttribute(Qt::WA_TranslucentBackground, false);
+#endif
             break;
           }
           if (makeTranslucent
@@ -422,9 +423,19 @@ void Style::polish(QWidget *widget)
                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
                   && widget->testAttribute(Qt::WA_TranslucentBackground)))
           {
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
             if (!widget->testAttribute(Qt::WA_TranslucentBackground))
             {
               widget->setAttribute(Qt::WA_TranslucentBackground);
+#else
+            if (!widget->testAttribute(Qt::WA_TranslucentBackground)
+                || !widget->testAttribute(Qt::WA_NoSystemBackground))
+            {
+              if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+                widget->setAttribute(Qt::WA_TranslucentBackground);
+              else
+                widget->setAttribute(Qt::WA_NoSystemBackground);
+#endif
               forcedTranslucency_.insert(widget); // needed in unpolish()
             }
 
@@ -916,6 +927,9 @@ void Style::polish(QWidget *widget)
                            /* no shadow for tooltips that are already translucent */
                            || (widget->inherits("QTipLabel") && !isLibreoffice_
                                && (!widget->testAttribute(Qt::WA_TranslucentBackground)
+#if (QT_VERSION >= QT_VERSION_CHECK(5,13,1))
+                                   || !widget->testAttribute(Qt::WA_NoSystemBackground)
+#endif
                                    || forcedTranslucency_.contains(widget)))));
   if ((isMenuOrTooltip
           /* because of combo menus or round corners */
@@ -944,6 +958,10 @@ void Style::polish(QWidget *widget)
 #endif
         if (!widget->testAttribute(Qt::WA_TranslucentBackground))
           widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+#if (QT_VERSION >= QT_VERSION_CHECK(5,13,1))
+        else if (!widget->testAttribute(Qt::WA_NoSystemBackground))
+          widget->setAttribute(Qt::WA_NoSystemBackground);
+#endif
 #if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
       }
       else
@@ -1054,7 +1072,11 @@ void Style::unpolish(QWidget *widget)
         {
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
+          /* see unpolish(QApplication*) below for why we don't set
+             WA_TranslucentBackground to false for Qt >= 5.13.1 */
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
           widget->setAttribute(Qt::WA_TranslucentBackground, false);
+#endif
         }
         if (gtkDesktop_)
           widget->removeEventFilter(this);
@@ -1109,7 +1131,9 @@ void Style::unpolish(QWidget *widget)
       {
         widget->setAttribute(Qt::WA_PaintOnScreen, false);
         widget->setAttribute(Qt::WA_NoSystemBackground, false);
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
         widget->setAttribute(Qt::WA_TranslucentBackground, false);
+#endif
         /* menus may be cached, so that if not removed from the list,
            they might lack translucency the next time they appear */
         translucentWidgets_.remove(widget);
@@ -1125,14 +1149,20 @@ void Style::unpolish(QApplication *app)
   /* WARNING: This method is also called when an app style sheet is set (as in QupZilla),
               in which case, main windows might not be drawn at all if translucency isn't
               removed here. However, due to a bug in Qt 5.13.1 -> QWidget::setAttribute(),
-              setting WA_TranslucentBackground and WA_NoSystemBackground to false here
-              might cause a mess. Since Qt's bug tracker is unresponsive most of the time,
-              I add a workaround by marking windows that have Kvantum translucency. */
+              setting WA_TranslucentBackground to false might cause a mess later.
+              Since Qt's bug tracker is unresponsive most of the time, I only set
+              WA_NoSystemBackground to false. */
   QSetIterator<QWidget*> i(forcedTranslucency_);
   while (i.hasNext())
   {
     if (QWidget *w = i.next())
-      w->setProperty("_kv_translucency", "true");
+    {
+      w->setAttribute(Qt::WA_NoSystemBackground, false);
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
+      w->setAttribute(Qt::WA_TranslucentBackground, false);
+
+#endif
+    }
   }
   forcedTranslucency_.clear();
   translucentWidgets_.clear();
