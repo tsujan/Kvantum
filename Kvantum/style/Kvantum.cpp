@@ -12060,13 +12060,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       /* WARNING: It's a nasty Qt issue that, also when a menu is drawn by a stylesheet,
                   this block is called. Luckily, this workaround exists with Qt >= 5.12. */
-      if (widget
-          && widget->testAttribute(Qt::WA_StyleSheetTarget)
-          && (!widget->inherits("QComboBoxPrivateContainer") // see polish(QWidget*)
-              || widget->styleSheet() != QStringLiteral("background-color: transparent;")))
-      {
+      if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget))
         return QCommonStyle::pixelMetric(metric,option,widget);
-      }
 #endif
 
       /* return the stored value if it exists */

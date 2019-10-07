@@ -540,17 +540,13 @@ void Style::polish(QWidget *widget)
     widget->setPalette(wp);
   }
 
-  // -> ktitlewidget.cpp
-  if (widget->inherits("KTitleWidget"))
-  {
-    if (hspec_.transparent_ktitle_label)
-    {
-      /*QPalette palette = widget->palette();
-      palette.setColor(QPalette::Base,QColor(Qt::transparent));
-      widget->setPalette(palette);*/
-      if (QFrame *titleFrame = widget->findChild<QFrame*>())
-        titleFrame->setAutoFillBackground(false);
-    }
+  if (widget->inherits("KTitleWidget") && hspec_.transparent_ktitle_label)
+  { // -> ktitlewidget.cpp
+    /*QPalette palette = widget->palette();
+    palette.setColor(QPalette::Base,QColor(Qt::transparent));
+    widget->setPalette(palette);*/
+    if (QFrame *titleFrame = widget->findChild<QFrame*>())
+      titleFrame->setAutoFillBackground(false);
   }
 
   /*if (widget->autoFillBackground()
@@ -562,7 +558,13 @@ void Style::polish(QWidget *widget)
     widget->setAutoFillBackground(false);
   }*/
 
-  if (qobject_cast<QMdiSubWindow*>(widget))
+  if (widget->inherits("QComboBoxPrivateScroller"))
+  { // needed for combo menu scrollers to have transparent backgrounds
+    QPalette palette = widget->palette();
+    palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
+    widget->setPalette(palette);
+  }
+  else if (qobject_cast<QMdiSubWindow*>(widget))
     /* to integrate the corner area, autoFillBackground isn't set
        for QMdiArea, so QMdiSubWindow should be drawn at PE_Widget */
     widget->setAttribute(Qt::WA_StyledBackground);
@@ -642,16 +644,6 @@ void Style::polish(QWidget *widget)
               vPalette.setColor(QPalette::Text, menuTextColor);
               itemView->viewport()->setPalette(vPalette);
             }
-
-            /* needed for menu scrollers to have transparent backgrounds */
-            if (itemView->parentWidget()) // QComboBoxPrivateContainer
-            {
-              palette = itemView->parentWidget()->palette();
-              palette.setColor(itemView->parentWidget()->backgroundRole(), QColor(Qt::transparent));
-              itemView->parentWidget()->setPalette(palette);
-              if (itemView->parentWidget()->style() != this)
-                itemView->parentWidget()->setStyleSheet(QStringLiteral("background-color: transparent;"));
-            }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate")
                    || qobject_cast<KvComboItemDelegate*>(combo->itemDelegate()))
@@ -685,18 +677,6 @@ void Style::polish(QWidget *widget)
               }
               else // impossible
                 vBgCol = baseCol;
-              if (itemView->parentWidget())
-              {
-                if (itemView->parentWidget()->styleSheet() == QStringLiteral("background-color: transparent;"))
-                  itemView->parentWidget()->setStyleSheet(QString());
-                palette = itemView->parentWidget()->palette();
-                if (palette.color(itemView->parentWidget()->backgroundRole()) == QColor(Qt::transparent))
-                {
-                  palette.setColor(QPalette::Window, winCol);
-                  palette.setColor(QPalette::Base, baseCol);
-                  itemView->parentWidget()->setPalette(palette);
-                }
-              }
               QList<QScrollBar*> scrollbars = combo->findChildren<QScrollBar*>();
               for (int i = 0; i < scrollbars.size(); ++i)
               {
