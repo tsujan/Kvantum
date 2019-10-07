@@ -1,4 +1,4 @@
-V0.11.3
+V0.12.0
 ---------
  * Basic support for FreeBSD.
  * Added a new option for the click behavior with 3 values for following the current DE or using single or double click (and removed the old click option).
