@@ -47,6 +47,7 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   isX11_ = false;
 #endif
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
   /* WARNING: Qt has a bug that causes drawing problems with a non-integer
      scale factor. Those problems can be seen with Fusion too but they become
      intense with an SVG window gradient and/or window translucency. As a
@@ -60,6 +61,9 @@ ThemeConfig::ThemeConfig(const QString& theme) :
     r.hasInterior = false;
     iSpecs_[KSL("WindowTranslucent")] = iSpecs_[KSL("Window")] = iSpecs_[KSL("Dialog")] = r;
   }
+#else
+  nonIntegerScale = false;
+#endif
 
   load(theme);
   default_theme_spec(compositeSpecs_);
