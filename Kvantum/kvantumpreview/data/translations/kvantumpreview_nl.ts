@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation>Kvantum - Voorbeeld</translation>
+        <translation>Kvantum-voorbeeld</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
@@ -122,7 +122,7 @@ en tekst eronder</translation>
         <location filename="../../KvantumPreviewBase.ui" line="626"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation>Hulpmiddelknop met tekst eronder
+        <translation>Hulpmiddelknop met tekst eronder,
 en pijl</translation>
     </message>
     <message>
@@ -130,7 +130,7 @@ en pijl</translation>
         <location filename="../../KvantumPreviewBase.ui" line="665"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation>Hulpmiddelknop met pictogram ernaast
+        <translation>Hulpmiddelknop met pictogram ernaast,
 en pijl</translation>
     </message>
     <message>
@@ -243,7 +243,7 @@ meerdere regels</translation>
         <location filename="../../KvantumPreviewBase.ui" line="1437"/>
         <location filename="../../KvantumPreviewBase.ui" line="1495"/>
         <source>Frameless (no difference)</source>
-        <translation>Zonder rand (geen verschil)</translation>
+        <translation>Naadloos (geen verschil)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1107"/>
@@ -281,7 +281,7 @@ meerdere regels</translation>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 1</source>
-        <translation>Zonder rand 1</translation>
+        <translation>Naadloos 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1196"/>
@@ -289,7 +289,7 @@ meerdere regels</translation>
         <location filename="../../KvantumPreviewBase.ui" line="1379"/>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <source>Frameless 2</source>
-        <translation>Zonder rand 2</translation>
+        <translation>Naadloos 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1201"/>
@@ -297,7 +297,7 @@ meerdere regels</translation>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <source>Frameless 3</source>
-        <translation>Zonder rand 3</translation>
+        <translation>Naadloos 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -305,73 +305,73 @@ meerdere regels</translation>
         <location filename="../../KvantumPreviewBase.ui" line="1389"/>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <source>Frameless 4</source>
-        <translation>Zonder rand 4</translation>
+        <translation>Naadloos 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
         <location filename="../../KvantumPreviewBase.ui" line="1394"/>
         <source>Frameless 5</source>
-        <translation>Zonder rand 5</translation>
+        <translation>Naadloos 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1399"/>
         <source>Frameless 6</source>
-        <translation>Zonder rand 6</translation>
+        <translation>Naadloos 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1404"/>
         <source>Frameless 7</source>
-        <translation>Zonder rand 7</translation>
+        <translation>Naadloos 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1409"/>
         <source>Frameless 8</source>
-        <translation>Zonder rand 8</translation>
+        <translation>Naadloos 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1414"/>
         <source>Frameless 9</source>
-        <translation>Zonder rand 9</translation>
+        <translation>Naadloos 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1419"/>
         <source>Frameless 10</source>
-        <translation>Zonder rand 10</translation>
+        <translation>Naadloos 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
         <location filename="../../KvantumPreviewBase.ui" line="1326"/>
         <source>Editable combo box</source>
-        <translation>Bewerkbaar combomenu</translation>
+        <translation>Aanpasbaar combomenu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1296"/>
         <location filename="../../KvantumPreviewBase.ui" line="1335"/>
         <source>Editable combo box 1</source>
-        <translation>Bewerkbaar combomenu 1</translation>
+        <translation>Aanpasbaar combomenu 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1301"/>
         <location filename="../../KvantumPreviewBase.ui" line="1340"/>
         <source>Editable combo box 2</source>
-        <translation>Bewerkbaar combomenu 2</translation>
+        <translation>Aanpasbaar combomenu 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1306"/>
         <location filename="../../KvantumPreviewBase.ui" line="1345"/>
         <source>Editable combo box 3</source>
-        <translation>Bewerkbaar combomenu 3</translation>
+        <translation>Aanpasbaar combomenu 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1311"/>
         <location filename="../../KvantumPreviewBase.ui" line="1350"/>
         <source>Editable combo box 4</source>
-        <translation>Bewerkbaar combomenu 4</translation>
+        <translation>Aanpasbaar combomenu 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1469"/>
