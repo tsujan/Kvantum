@@ -47,6 +47,10 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     modifiedSuffix_ = " (" + tr ("modified") + ")";
     kvDefault_ = "Kvantum (" + tr ("default") + ")";
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
+    ui->checkBoxKineticScrolling->setEnabled (false);
+#endif
+
     ui->openTheme->setIcon(symbolicIcon::icon (":/Icons/data/document-open.svg"));
     ui->deleteTheme->setIcon(symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
     ui->useTheme->setIcon(symbolicIcon::icon (":/Icons/data/dialog-ok.svg"));
@@ -881,6 +885,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
     ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
     ui->checkBoxScrollJump->setChecked (defaultSettings.value ("middle_click_scroll").toBool());
+    ui->checkBoxKineticScrolling->setChecked (defaultSettings.value ("kinetic_scrolling").toBool());
     ui->checkBoxJumpWorkaround->setChecked (defaultSettings.value ("scroll_jump_workaround").toBool());
     ui->checkBoxNormalBtn->setChecked (defaultSettings.value ("normal_default_pushbutton").toBool());
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
@@ -1394,6 +1399,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
                 ui->checkBoxScrollJump->setChecked (themeSettings.value ("middle_click_scroll").toBool());
+                ui->checkBoxKineticScrolling->setChecked (themeSettings.value ("kinetic_scrolling").toBool());
                 ui->checkBoxJumpWorkaround->setChecked (themeSettings.value ("scroll_jump_workaround").toBool());
                 ui->checkBoxNormalBtn->setChecked (themeSettings.value ("normal_default_pushbutton").toBool());
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
@@ -2090,6 +2096,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
         hackKeys.insert("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
         hackKeys.insert("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));
+        hackKeys.insert("kinetic_scrolling", boolToStr (ui->checkBoxKineticScrolling->isChecked()));
         hackKeys.insert("scroll_jump_workaround", boolToStr (ui->checkBoxJumpWorkaround->isChecked()));
         hackKeys.insert("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
         hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
@@ -2164,6 +2171,7 @@ void KvantumManager::writeConfig()
         if (themeSettings.value ("normal_default_pushbutton").toBool() != ui->checkBoxNormalBtn->isChecked()
             || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked()
             || themeSettings.value ("middle_click_scroll").toBool() != ui->checkBoxScrollJump->isChecked()
+            || themeSettings.value ("kinetic_scrolling").toBool() != ui->checkBoxKineticScrolling->isChecked()
             || themeSettings.value ("opaque_colors").toBool() != ui->checkBoxOpaqueColors->isChecked()
             || qMin(qMax(themeSettings.value ("tint_on_mouseover").toInt(),0),100) != ui->spinTint->value()
             || qMin(qMax(themeSettings.value ("disabled_icon_opacity").toInt(),0),100) != ui->spinOpacity->value())

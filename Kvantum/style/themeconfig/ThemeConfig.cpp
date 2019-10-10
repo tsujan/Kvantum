@@ -1194,6 +1194,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue(KSL("Hacks"),KSL("middle_click_scroll"));
   r.middle_click_scroll = v.toBool();
 
+  v = getValue(KSL("Hacks"),KSL("kinetic_scrolling"));
+  r.kinetic_scrolling = v.toBool();
+
   v = getValue(KSL("Hacks"),KSL("scroll_jump_workaround"));
   r.scroll_jump_workaround = v.toBool();
 

@@ -616,7 +616,21 @@ as far as possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="3">
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxGrip">
+                 <property name="toolTip">
+                  <string>Show size grips of dialogs and statusbars
+as far as possible.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Force size grips</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3">
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -630,7 +644,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="8" column="4">
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -647,21 +661,18 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxGrip">
+               <item row="9" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollJump">
                  <property name="toolTip">
-                  <string>Show size grips of dialogs and statusbars
-as far as possible.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>By default, the scroll slider jumps to a position
+when the scrollbar is left clicked.</string>
                  </property>
                  <property name="text">
-                  <string>Force size grips</string>
+                  <string>Scroll jump with middle click</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="labelOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -676,7 +687,7 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="4">
+               <item row="9" column="4">
                 <widget class="QSpinBox" name="spinOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -697,18 +708,21 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxScrollJump">
+               <item row="10" column="1">
+                <widget class="QCheckBox" name="checkBoxKineticScrolling">
                  <property name="toolTip">
-                  <string>By default, the scroll slider jumps to a position
-when the scrollbar is left clicked.</string>
+                  <string>Scroll some scrollable widgets by flicking them
+with the left mouse button.
+
+Warning: Qt's kinetic scrolling has bugs and may
+seriously interfere with other jobs.</string>
                  </property>
                  <property name="text">
-                  <string>Scroll jump with middle click</string>
+                  <string>Kinetic scrolling</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="3">
+               <item row="10" column="3">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -723,7 +737,7 @@ or through logging out and in again.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="4">
+               <item row="10" column="4">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.

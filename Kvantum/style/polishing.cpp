@@ -41,6 +41,7 @@
 #include <QDialog>
 #include <QLayout> // only for forceSizeGrip
 #include <QCompleter> // only for combo menu change in  Kvantum Manager
+#include <QScroller>
 
 namespace Kvantum
 {
@@ -771,11 +772,26 @@ void Style::polish(QWidget *widget)
   }
   else if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
   {
+    QWidget *vp = sa->viewport();
+#if (QT_VERSION >= QT_VERSION_CHECK(5,13,1))
+    if(hspec_.kinetic_scrolling
+       && vp && !vp->testAttribute(Qt::WA_StyleSheetTarget) && !QScroller::hasScroller(vp)
+       && !widget->autoFillBackground() && !widget->inherits("QComboBoxListView")
+       && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
+       && !widget->inherits("KSignalPlotter"))
+    {
+      QScroller::grabGesture(vp, QScroller::LeftMouseButtonGesture);
+      auto sp = QScroller::scroller(vp)->scrollerProperties();
+      sp.setScrollMetric(QScrollerProperties::OvershootScrollTime, static_cast<qreal>(0.3));
+      sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, static_cast<qreal>(0.1));
+      sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, static_cast<qreal>(0.1));
+      QScroller::scroller(vp)->setScrollerProperties(sp);
+    }
+#endif
     if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this
         sa->backgroundRole() == QPalette::Window
         || sa->backgroundRole() == QPalette::Button) // inside toolbox
     {
-      QWidget *vp = sa->viewport();
       if (vp && (vp->backgroundRole() == QPalette::Window
                  || vp->backgroundRole() == QPalette::Button))
       { // remove ugly flat backgrounds (when the window backround is styled)
@@ -1100,6 +1116,23 @@ void Style::unpolish(QWidget *widget)
     }
     else if (qobject_cast<QToolBox*>(widget))
       widget->setBackgroundRole(QPalette::Button);
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,13,1))
+    if (hspec_.kinetic_scrolling)
+    {
+      if (QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(widget))
+      {
+        QWidget *vp = sa->viewport();
+        if (vp && !vp->testAttribute(Qt::WA_StyleSheetTarget)
+            && !widget->autoFillBackground() && !widget->inherits("QComboBoxListView")
+            && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
+            && !widget->inherits("KSignalPlotter"))
+        {
+          QScroller::ungrabGesture(vp);
+        }
+      }
+    }
+#endif
 
     if (qobject_cast<QMenu*>(widget) || widget->inherits("QTipLabel"))
     {
