@@ -1,6 +1,7 @@
 V0.12.1
 ---------
  * Added a hacking option for kinetic scrolling to Kvantum Manager. Although Qt's kinetic scrolling has bugs, it doesn't cause crashes with Qt ≥ 5.13.1.
+ * Fixed problems in updating the GUI of Kvantum Manager on theme change.
 
 V0.12.0
 ---------

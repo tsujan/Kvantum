@@ -1467,7 +1467,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="498"/>
         <location filename="../../KvantumManager.cpp" line="652"/>
-        <location filename="../../KvantumManager.cpp" line="2451"/>
+        <location filename="../../KvantumManager.cpp" line="2489"/>
         <source>Confirmation</source>
         <translation>Patvirtinimas</translation>
     </message>
@@ -1667,75 +1667,75 @@ arba atnaujinti jos peržiūrą.</translation>
         <translation>Jos negalima bus atkurti nebent turėsite jos kopiją.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1144"/>
-        <location filename="../../KvantumManager.cpp" line="1163"/>
+        <location filename="../../KvantumManager.cpp" line="1182"/>
+        <location filename="../../KvantumManager.cpp" line="1201"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Tai yra nustatymai, kurie gali būti saugiai keičiami.&lt;br&gt;Kitiems nustatymams, spustelėkite &lt;i&gt;Įrašyti&lt;/i&gt;, o tuomet redaguokite šį failą:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1159"/>
-        <location filename="../../KvantumManager.cpp" line="2359"/>
+        <location filename="../../KvantumManager.cpp" line="1197"/>
+        <location filename="../../KvantumManager.cpp" line="2397"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Tai yra nustatymai, kurie gali būti saugiai keičiami.&lt;br&gt;Kitiems nustatymams, redaguokite šį failą:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1546"/>
+        <location filename="../../KvantumManager.cpp" line="1584"/>
         <source>No description</source>
         <translation>Aprašo nėra</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2017"/>
+        <location filename="../../KvantumManager.cpp" line="2055"/>
         <source>A copy of the root config is created.</source>
         <translation>Yra sukurta šaknies konfigūcijos kopija.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2028"/>
+        <location filename="../../KvantumManager.cpp" line="2066"/>
         <source>A copy was already created.</source>
         <translation>Kopija jau buvo sukurta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2345"/>
+        <location filename="../../KvantumManager.cpp" line="2383"/>
         <source>Configuration saved.</source>
         <translation>Konfigūracija įrašyta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2452"/>
+        <location filename="../../KvantumManager.cpp" line="2490"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Ar norite sugrąžinti į numatytuosius (šaknies) šios temos nustatymus?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2455"/>
+        <location filename="../../KvantumManager.cpp" line="2493"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Jūs prarasite pakeitimus, kuriuos, galbūt, atlikote.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2490"/>
+        <location filename="../../KvantumManager.cpp" line="2528"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Atkurti numatytieji %1 šaknies nustatymai</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2491"/>
+        <location filename="../../KvantumManager.cpp" line="2529"/>
         <source>the default theme</source>
         <translation>numatytoji tema</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2627"/>
-        <location filename="../../KvantumManager.cpp" line="2628"/>
+        <location filename="../../KvantumManager.cpp" line="2665"/>
+        <location filename="../../KvantumManager.cpp" line="2666"/>
         <source>About Kvantum Manager</source>
         <translation>Apie Kvantum tvarkytuvę</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2627"/>
+        <location filename="../../KvantumManager.cpp" line="2665"/>
         <source>Translators</source>
         <translation>Vertėjai</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2625"/>
+        <location filename="../../KvantumManager.cpp" line="2663"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Įrankis, skirtas diegti, pasirinkti&lt;br&gt;ir konfigūruoti &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; temas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2626"/>
+        <location filename="../../KvantumManager.cpp" line="2664"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Autorius: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (dar žinomas kaip Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1761,8 +1761,8 @@ arba atnaujinti jos peržiūrą.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="836"/>
-        <location filename="../../KvantumManager.cpp" line="1957"/>
-        <location filename="../../KvantumManager.cpp" line="2354"/>
+        <location filename="../../KvantumManager.cpp" line="1995"/>
+        <location filename="../../KvantumManager.cpp" line="2392"/>
         <source>Active theme:</source>
         <translation>Aktyvi tema:</translation>
     </message>

@@ -1097,6 +1097,12 @@ void KvantumManager::defaultThemeButtons()
 /*************************/
 void KvantumManager::restyleWindow()
 {
+    const QWidgetList topLevels = QApplication::topLevelWidgets();
+    for (QWidget *widget : topLevels)
+    { // this is needed with Qt >= 5.13.1 but is harmless otherwise
+        widget->setAttribute (Qt::WA_NoSystemBackground, false);
+        widget->setAttribute (Qt::WA_TranslucentBackground, false);
+    }
     QApplication::setStyle (QStyleFactory::create ("kvantum"));
     // Qt5 has QEvent::ThemeChange
     const QWidgetList widgets = QApplication::allWidgets();
@@ -1105,6 +1111,38 @@ void KvantumManager::restyleWindow()
         QEvent event (QEvent::ThemeChange);
         QApplication::sendEvent (widget, &event);
     }
+    /* this may be needed if the previous theme didn't have combo menus */
+    QTimer::singleShot (0, this, [this] {
+        for (int i = 0; i < 2; ++i)
+        {
+            QComboBox *combo = (i == 0 ? ui->comboBox : ui->appCombo);
+            QList<QScrollBar*> widgets = combo->findChildren<QScrollBar*>();
+            for (int j = 0; j < widgets.size(); ++j)
+            {
+                QPalette palette = widgets.at (j)->palette();
+                palette.setColor (QPalette::Window,
+                                  QApplication::palette().color (QPalette::Window));
+                palette.setColor (QPalette::Base,
+                                  QApplication::palette().color (QPalette::Base));
+                widgets.at (j)->setPalette (palette);
+            }
+            if (QAbstractItemView *cv = combo->completer()->popup())
+            {
+                QPalette palette = cv->palette();
+                palette.setColor (QPalette::Text,
+                                  QApplication::palette().color (QPalette::Text));
+                palette.setColor (QPalette::HighlightedText,
+                                  QApplication::palette().color (QPalette::HighlightedText));
+                palette.setColor (QPalette::Base,
+                                  QApplication::palette().color (QPalette::Base));
+                palette.setColor (QPalette::Window,
+                                  QApplication::palette().color (QPalette::Window));
+                palette.setColor (QPalette::Highlight,
+                                  QApplication::palette().color (QPalette::Highlight));
+                cv->setPalette (palette);
+            }
+        }
+    });
 }
 /*************************/
 void KvantumManager::tabChanged (int index)

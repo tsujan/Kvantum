@@ -699,6 +699,8 @@ void Style::polish(QWidget *widget)
                 }
               }
             }
+            else if (itemView->viewport())
+              itemView->viewport()->setAutoFillBackground(true);
             if (itemView->itemDelegate()->inherits("QComboBoxDelegate"))
             {
               /* PM_FocusFrameVMargin is used for viewitems */
