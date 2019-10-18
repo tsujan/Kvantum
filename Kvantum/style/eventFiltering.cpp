@@ -1239,7 +1239,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             || qobject_cast<QDoubleSpinBox*>(o)
             || qobject_cast<QDateTimeEdit*>(o)))
     {
-      QSize size = sizeFromContents(CT_SpinBox,nullptr,QSize(),w);
+      QSize size = sizeFromContents(CT_SpinBox,nullptr,QSize(),w).expandedTo(w->minimumSize());
       if (w->maximumWidth() > size.width())
         w->setMinimumWidth(size.width());
       if (w->maximumHeight() > size.height())
