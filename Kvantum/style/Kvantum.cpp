@@ -6676,7 +6676,7 @@ void Style::drawControl(QStyle::ControlElement element,
           iconSize = opt->iconSize;
         int icnSize = iconSize.isValid() ?
                         qMax(iconSize.width(), iconSize.height())
-                        : pixelMetric(PM_TabBarIconSize);
+                        : pixelMetric(PM_TabBarIconSize,option,widget);
 
         /* eliding (WARNING: QML may report an empty text when there isn't
                              enough space, so nothing can be done for it. */
@@ -13531,9 +13531,15 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         if (lspec.boldFont || tspec_.bold_active_tab)
           f.setWeight(lspec.boldness);
 
-        int iconSize = pixelMetric(PM_TabBarIconSize,option,widget);
+        QSize iconSize;
+        if (!opt->icon.isNull())
+          iconSize = opt->iconSize;
+        int icnSize = iconSize.isValid() ?
+                        qMax(iconSize.width(), iconSize.height())
+                        : pixelMetric(PM_TabBarIconSize,option,widget); // as in CE_TabBarTabLabel
+
         s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                           opt->icon.isNull() ? QSize() : QSize(iconSize,iconSize),
+                           opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
                            Qt::ToolButtonTextBesideIcon);
 
         bool verticalTabs = false;
