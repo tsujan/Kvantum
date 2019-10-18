@@ -700,12 +700,12 @@ aplicaciones lo fijan ellas mismas.</translation>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <location filename="../../kvantummanager.ui" line="1809"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Cómo activar items de vista?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1802"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportamiento de click:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1922"/>
@@ -725,7 +725,8 @@ Por defecto, las ramas de los árboles tienen indicadores pero no líneas.</tran
         <location filename="../../kvantummanager.ui" line="1911"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pueden aparecer como rectángulos puntuados
+en botones activos y otros elementos visuales.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1915"/>
@@ -1506,12 +1507,12 @@ o actualizar su vista previa.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Un solo clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="86"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble Clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="89"/>

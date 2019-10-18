@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar u kunt ook externe thema&apos;s installeren. Hier kunt u een themamap kiezen - druk daarna op de knop hieronder om het thema te installeren in uw Persoonlijke map.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar je kunt ook je eigen thema&apos;s installeren. Hier kun je een themamap kiezen. Klik daarna op de knop hieronder om het thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -43,7 +43,7 @@ Kvantum kan gebruiken, naast de standaardthema&apos;s.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation>Dit thema installeren</translation>
+        <translation>Thema installeren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
@@ -58,7 +58,7 @@ Kvantum kan gebruiken, naast de standaardthema&apos;s.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Dit thema verwijderen</translation>
+        <translation>Thema verwijderen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -74,12 +74,12 @@ is het thema al in gebruik.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Dit thema gebruiken</translation>
+        <translation>Thema gebruiken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Actief thema instellen</translation>
+        <translation>Huidig thema instellen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -109,7 +109,7 @@ dit thema terugzetten.
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>Configuratie opslaan
+        <translation>Instellingen opslaan
 (Ctrl+S)</translation>
     </message>
     <message>
@@ -159,7 +159,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Voeg PCManFM-qt&apos;s zijbalk samen met alles eromheen.
 
-Onder LXQt moet je uitloggen en weer inloggen of
+Als je LXQt gebruikt, dan moet je uit- en inloggen, of
 PCManFM-qt sluiten en daarna het Bureaublad sluiten
 via de LXQt-sessie-instellingen.</translation>
     </message>
@@ -182,7 +182,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Voeg PCManFM-qt&apos;s zijbalk samen met alles eromheen.
 
-Onder LXQt moet je uitloggen en weer inloggen of
+Als je LXQt gebruikt, dan moet je uit- en inloggen, of
 PCManFM-qt sluiten en daarna het Bureaublad sluiten
 via de LXQt-sessie-instellingen.</translation>
     </message>
@@ -266,7 +266,7 @@ as a workaround for bugs in applications.</source>
 thema en kunnen doorzichtig zijn.
 
 Wij raden af om dit aan te vinken, tenzij het strikt
-noodzakelijk is als probleemoplossing voor bepaalde applicaties.</translation>
+noodzakelijk is als probleemoplossing voor bepaalde programma&apos;s.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="577"/>
