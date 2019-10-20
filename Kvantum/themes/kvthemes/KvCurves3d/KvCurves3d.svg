@@ -105,7 +105,7 @@
 <linearGradient gradientTransform="matrix(1,0,0,-1,42,1946)" xlink:href="#linearGradient5041" id="linearGradient5017" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="341.5"/>
 <linearGradient gradientTransform="matrix(0,1,1,0,-626,211.5)" xlink:href="#linearGradient4729" id="linearGradient6877" y1="669.5" x1="102.5" y2="669.5" gradientUnits="userSpaceOnUse" x2="126.5"/>
 <linearGradient id="linearGradient6250">
-<stop offset="0" style="stop-color:#4b4b4d" id="stop6252"/>
+<stop offset="0" style="stop-color:#49494b" id="stop6252"/>
 <stop offset="0.25" style="stop-color:#414143" id="stop5102"/>
 <stop offset="0.75" style="stop-color:#373739" id="stop5104"/>
 <stop offset="1" style="stop-color:#2c2c2c" id="stop6254"/>
@@ -532,7 +532,7 @@
 <path id="border-lineedit-toggled-topright" d="m 208.25,250 c 0,-6.64799 -5.352,-12 -12,-12 v 12 h 12 z "/>
 <path id="border-lineedit-toggled-bottomright" d="m 208.25,250 c 0,6.64799 -5.352,12 -12,12 v -12 h 12 z "/>
 </g>
-<g style="fill-opacity:.094;fill:#fff">
+<g style="fill-opacity:.078;fill:#fff">
 <path id="expand-button-focus-topleft" d="m 311.5,98 c 0,-6.64799 5.352,-12 12,-12 v 12 z"/>
 <path id="expand-button-focus-top" d="M 340,86 H 323.5 V 98 H 340 Z"/>
 </g>
@@ -560,7 +560,7 @@
 <path id="lineedit-pressed" d="m 337.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 <path id="lineedit-toggled" d="m 389.75,213.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
 </g>
-<g style="fill:#fff;fill-opacity:.094">
+<g style="fill:#fff;fill-opacity:.078">
 <path id="expand-button-focus-bottomleft" d="m 311.5001,98 c 0,6.64799 5.352,12 12,12 V 98 Z"/>
 <path id="expand-button-focus-bottom" d="M 340,110 H 323.5 V 98 H 340 Z"/>
 <path id="expand-button-focus-topright" d="m 352,98 c 0,-6.64799 -5.352,-12 -12,-12 v 12 z"/>
@@ -598,13 +598,10 @@
 </g>
 <path style="fill:#4b4b4b" id="border-button-focused-left" d="m -54.5,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled-left" d="m -54.5,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#313131" id="border-button-pressed-left" d="m -54.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#4b4b4b" id="border-button-focused" d="m -38,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled" d="m -38,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#313131" id="border-button-pressed" d="m -38,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#4b4b4b" id="border-button-focused-right" d="m -21.5,170 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#9c1416" id="border-button-toggled-right" d="m -21.5,218 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#313131" id="border-button-pressed-right" d="m -21.5,182 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#3b3b3d">
 <path id="expand-button-pressed-left" d="m -54.5,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-button-pressed" d="m -38,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -852,7 +849,7 @@
 <path id="expand-lineedit-focused-bottom" d="m 92,216 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 </g>
-<g style="fill:#1e1e1e;color:#000;stroke:#c86c00;stroke-width:2">
+<g style="fill:#1e1e1e;color:#000;stroke-width:2;stroke:#c86c00">
 <circle cx="150" cy="410" id="radio-focused" r="7"/>
 <rect width="14" x="98" y="-479.5" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
@@ -882,16 +879,10 @@
 <use width="100%" height="100%" xlink:href="#expand-button-normal-top" id="expand-button-pressed-bottom" transform="matrix(1,0,0,-1,126,208)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-bottomleft" id="expand-button-pressed-topleft" transform="matrix(1,0,0,-1,126,208)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-bottom" id="expand-button-pressed-top" transform="matrix(1,0,0,-1,126,208)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-pressed-bottomleft" transform="matrix(1,0,0,-1,128,276)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-top" id="border-button-pressed-bottom" transform="matrix(1,0,0,-1,128,276)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-bottomleft" id="border-button-pressed-topleft" transform="matrix(1,0,0,-1,128,276)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-bottom" id="border-button-pressed-top" transform="matrix(1,0,0,-1,128,276)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-topleft" id="expand-button-normal-topright" transform="matrix(-1,0,0,1,69.5,0)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-bottomleft" id="expand-button-normal-bottomright" transform="matrix(-1,0,0,1,69.5,0)"/>
 <use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-normal-topright" transform="matrix(-1,0,0,1,69.5,0)"/>
 <use width="100%" height="100%" xlink:href="#border-button-normal-bottomleft" id="border-button-normal-bottomright" transform="matrix(-1,0,0,1,69.5,0)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-pressed-bottomright" transform="matrix(-1,0,0,-1,197.5,276)"/>
-<use width="100%" height="100%" xlink:href="#border-button-normal-bottomleft" id="border-button-pressed-topright" transform="matrix(-1,0,0,-1,197.5,276)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-topleft" id="expand-button-pressed-bottomright" transform="matrix(-1,0,0,-1,195.5,208)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-normal-bottomleft" id="expand-button-pressed-topright" transform="matrix(-1,0,0,-1,195.5,208)"/>
 <use width="100%" height="100%" xlink:href="#expand-button-focused-topleft" id="expand-button-focused-topright" transform="matrix(-1,0,0,1,205.5,0)"/>
@@ -1110,12 +1101,12 @@
 <use width="100%" height="100%" xlink:href="#dial-handle" id="slidercursor-disabled" transform="translate(272,-231)"/>
 <g style="fill-rule:evenodd">
 <g style="fill:#fff">
-<g style="fill-opacity:.094">
+<g style="fill-opacity:.078">
 <path id="expand-button-focus-left" d="M -54.5,230 H -71 v 12 h 16.5 z"/>
 <path id="expand-button-focus" d="m -38,230 h -16.5 v 12 H -38 Z"/>
 <path id="expand-button-focus-right" d="M -21.5,230 H -38 v 12 h 16.5 z"/>
 </g>
-<g style="fill-opacity:.066">
+<g style="fill-opacity:.059">
 <path id="expand-tab-focus-left" d="M -54.5,242 H -71 v 12 h 16.5 z"/>
 <path id="expand-tab-focus" d="m -38,242 h -16.5 v 12 H -38 Z"/>
 <path id="expand-tab-focus-right" d="M -21.5,242 H -38 v 12 h 16.5 z"/>
