@@ -108,7 +108,7 @@
 <stop offset="0" style="stop-color:#49494b" id="stop6252"/>
 <stop offset="0.25" style="stop-color:#414143" id="stop5102"/>
 <stop offset="0.75" style="stop-color:#373739" id="stop5104"/>
-<stop offset="1" style="stop-color:#2c2c2c" id="stop6254"/>
+<stop offset="1" style="stop-color:#303030" id="stop6254"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(1,0,0,-1,42,1946)" xlink:href="#linearGradient5041" id="linearGradient5013" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="341.5"/>
 <linearGradient id="linearGradient5070">
@@ -124,16 +124,16 @@
 <stop offset="1" style="stop-color:#fff;stop-opacity:.098" id="stop1755"/>
 </linearGradient>
 <linearGradient id="linearGradient4729-4">
-<stop offset="0" style="stop-color:#be0002" id="stop5011"/>
-<stop offset="0.25" style="stop-color:#a3070a" id="stop5015"/>
-<stop offset="0.75" style="stop-color:#8c0a0c" id="stop5017"/>
-<stop offset="1" style="stop-color:#7e0e10" id="stop5013"/>
+<stop offset="0" style="stop-color:#a00002" id="stop5011"/>
+<stop offset="0.25" style="stop-color:#900609" id="stop5015"/>
+<stop offset="0.75" style="stop-color:#7d090b" id="stop5017"/>
+<stop offset="1" style="stop-color:#700c0e" id="stop5013"/>
 </linearGradient>
 <linearGradient id="linearGradient6250-8">
-<stop offset="0" style="stop-color:#636365" id="stop8959"/>
+<stop offset="0" style="stop-color:#5b5b5d" id="stop8959"/>
 <stop offset="0.25" style="stop-color:#555557" id="stop8961"/>
 <stop offset="0.75" style="stop-color:#4b4b4d" id="stop8963"/>
-<stop offset="1" style="stop-color:#404040" id="stop8965"/>
+<stop offset="1" style="stop-color:#464646" id="stop8965"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(1,0,0,-1,0,1946)" xlink:href="#linearGradient5042" id="linearGradient5026" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="341.5"/>
 <linearGradient gradientTransform="matrix(-1,0,0,1,690,0)" xlink:href="#linearGradient5042" id="linearGradient5018" y1="961" x1="353.25009" y2="985" gradientUnits="userSpaceOnUse" x2="348.50015"/>
@@ -607,7 +607,7 @@
 <path id="expand-button-pressed" d="m -38,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-button-pressed-right" d="m -21.5,194 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<g style="fill:#98080b">
+<g style="fill:#87070a">
 <path id="expand-button-toggled-left" d="m -54.5,206 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-button-toggled" d="m -38,206 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-button-toggled-right" d="m -21.5,206 -16.5,0 0,12 16.5,0 0,-12 z"/>

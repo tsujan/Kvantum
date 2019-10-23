@@ -43,6 +43,7 @@ toolbar_icon_size=16
 tooltip_delay=-1
 animate_states=true
 no_window_pattern=false
+button_contents_shift=false
 dark_titlebar=true
 
 [GeneralColors]

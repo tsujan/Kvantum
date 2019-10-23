@@ -9578,8 +9578,10 @@ void Style::drawControl(QStyle::ControlElement element,
                     lspec.left = lspec.right = 0;
                     fspec.left = fspec.right = 0;
                   }
-                  else if (txtSize.width() <= availableSize.width() + fspec.left + fspec.right
-                                                                    + lspec.left + lspec.right + lspec.tispace)
+                  else if (QCoreApplication::applicationName() != "lxqt-panel" // not a task button
+                           && txtSize.width() <= availableSize.width()
+                                                 + fspec.left + fspec.right
+                                                 + lspec.left + lspec.right + lspec.tispace)
                   {
                     lspec.left = lspec.right = lspec.tispace = 0;
                     fspec.left = fspec.right = 0;
@@ -9605,8 +9607,9 @@ void Style::drawControl(QStyle::ControlElement element,
                 if (txtSize.width() > availableSize.width())
                 {
                   lspec.boldFont = false;
-                  if (txtSize.width() <= availableSize.width() + fspec.left + fspec.right
-                                                               + lspec.left + lspec.right)
+                  if (QCoreApplication::applicationName() != "lxqt-panel" // not a task button
+                      && txtSize.width() <= availableSize.width() + fspec.left + fspec.right
+                                                                  + lspec.left + lspec.right)
                   {
                     lspec.left = lspec.right = 0;
                     fspec.left = fspec.right = 0;
