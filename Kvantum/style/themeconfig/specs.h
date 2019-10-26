@@ -80,6 +80,8 @@ typedef struct {
   int toolbar_item_spacing;
   /* the space between toolbar items and toolbar frame */
   int toolbar_interior_spacing;
+  /* the thickness of toolbar separators */
+  int toolbar_separator_thickness;
   /* center toolbar handle
      instead of scaling it vertically? */
   bool center_toolbar_handle;
@@ -491,6 +493,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.group_toolbar_buttons = false;
   tspec.toolbar_item_spacing = 0;
   tspec.toolbar_interior_spacing = 0;
+  tspec.toolbar_separator_thickness = 0;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;
   tspec.merge_menubar_with_toolbar = false;

@@ -12187,7 +12187,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
     case PM_ToolBarSeparatorExtent : {
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Toolbar"));
-      return qMax(dspec.size,4);
+      return qMax(tspec_.toolbar_separator_thickness, qMax(dspec.size,4));
     }
     case PM_ToolBarIconSize : return tspec_.toolbar_icon_size;
     /* we don't use this in standardIcon() -> SP_ToolBarHorizontalExtensionButton

@@ -264,7 +264,7 @@
 <path style="fill:#000" d="m -6.6507,57.2922 h 2.5 v 12.5 h -2.5 z " transform="rotate(45)"/>
 <path style="opacity:0" d="m -11.6508,62.2922 h 12.5 v 2.5 h -12.5 Z " transform="rotate(45)"/>
 </g>
-<rect width="14" x="91" y="-400" height="14" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
+<rect width="14" x="91" y="-400" rx="3" height="14" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
 <g style="fill-rule:evenodd">
 <path style="fill:#98b2da" id="itemview-pressed-top" d="m 260.4872,953.2621 h 8 v 4 h -8 z "/>
 <path style="fill:#3b63a1" id="itemview-pressed-bottom" d="m 260.4872,969.262 h 8 v 4 h -8 z "/>
@@ -312,22 +312,22 @@
 <path style="fill:#5d86c5;stroke-width:1.274" d="m 665.4759,255.0668 a 4.50781,7.29378 0 0 1 -4.5078,7.29379 4.50781,7.29378 0 0 1 -4.50781,-7.29379 4.50781,7.29378 0 0 1 4.50781,-7.29378 4.50781,7.29378 0 0 1 4.5078,7.29378 z" transform="matrix(1.0398623,0,0,0.64266985,-344.81573,248.57618)"/>
 </g>
 <g id="checkbox-tristate-focused" transform="matrix(1.2307692,0,0,1.2307692,-159.23076,-211.9489)">
-<rect width="13" x="332.5" y="-498.021" height="13" style="fill:#fff" transform="scale(1,-1)"/>
+<rect width="13" x="332.5" y="-498.021" rx="2.4375" height="13" style="fill:#fff" transform="scale(1,-1)"/>
 <path style="fill:#5d86c5" d="m 334.9375,495.5835 h 8.125 v -8.125 z"/>
 </g>
 <g id="checkbox-checked-focused" transform="matrix(1.0666666,0,0,1.0666666,-32,-343)">
-<path style="fill:#fff" d="m 217.5,-697.5 h 15 v 15 h -15 z" transform="scale(1,-1)"/>
-<path style="fill:#5d86c5" d="m 220.3125,-694.6875 h 9.375 v 9.375 h -9.375 z" transform="scale(1,-1)"/>
+<rect width="15" x="217.5" y="-697.5" rx="2.8125" height="15" style="fill:#fff" transform="scale(1,-1)"/>
+<rect width="9.375" x="220.31252" y="-694.68756" rx="1.7578127" height="9.375" style="fill:#5d86c5" transform="scale(1,-1)"/>
 </g>
 </g>
 <circle cx="98" cy="373" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="radio-normal" r="7"/>
-<g id="checkbox-checked-normal" transform="translate(-16.49988,-79.49988)">
-<use width="100%" height="100%" xlink:href="#checkbox-normal" transform="translate(96.49988,79.499894)"/>
-<path style="fill:#5d86c5;color:#000" d="m 190.4999,-476.4999 h 8 v 8 h -8 z " transform="scale(1,-1)"/>
+<g id="checkbox-checked-normal" transform="translate(-16.5,-79.5)">
+<use width="100%" height="100%" xlink:href="#checkbox-normal" transform="translate(96.5,79.5)"/>
+<rect width="8" x="190.5" y="-476.5" rx="1.5" height="8" style="fill:#5d86c5" transform="scale(1,-1)"/>
 </g>
 <g id="checkbox-tristate-normal" transform="translate(-80,-84.499873)">
 <use width="100%" height="100%" xlink:href="#checkbox-normal" transform="translate(215,84.499887)"/>
-<path style="fill:#5d86c5;color:#000" d="m 309,481.4999 h 8 v -8 z "/>
+<path style="fill:#5d86c5;color:#000" d="m 309,481.5 h 8 v -8 z"/>
 </g>
 <g style="fill:#fff" id="menuitem-right-focused" transform="translate(90,75)">
 <path style="opacity:0" d="m 273,588 h 24 v 24 h -24 z"/>
@@ -709,7 +709,7 @@
 </g>
 <g style="color:#000;stroke:#5d86c5;stroke-width:2;fill:#f0f0f0">
 <circle cx="146" cy="373" id="radio-focused" r="7"/>
-<rect width="14" x="141" y="-400" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
+<rect width="14" x="141" y="-400" rx="3" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
 <g style="fill-rule:evenodd">
 <circle cx="122.03081" cy="841.74951" style="fill:url(#radialGradient5010)" id="dial-handle" r="7"/>
@@ -775,10 +775,10 @@
 </g>
 </g>
 <g style="fill:#b74aff">
-<path id="menu-shadow-hint-bottom" d="m 90,705.12512 h 2.5 v 7.25002 H 90 Z"/>
-<path id="menu-shadow-hint-top" d="m 90,639.87506 h 2.5 v 4.25002 H 90 Z"/>
+<path id="menu-shadow-hint-bottom" d="m 90,705.12512 h 2.5 v 7.25 H 90 Z"/>
+<path id="menu-shadow-hint-top" d="m 90,639.87506 h 2.5 v 4.25 H 90 Z"/>
 <path id="menu-shadow-hint-right" d="m -675,120 h 2.5 v 7.25 h -2.5 z" transform="rotate(-90)"/>
-<path id="menu-shadow-hint-left" d="m -675,54.7499 h 2.5 v 7.24899 h -2.5 z " transform="rotate(-90)"/>
+<path id="menu-shadow-hint-left" d="m 54.75,675 v -2.5 h 7.25 v 2.5 z"/>
 </g>
 <g style="opacity:.95" id="menu-normal-top" transform="rotate(90,189,717.75)">
 <path style="fill:#fcfdfe;fill-rule:evenodd" d="m 115.25,703.75 h 6 v 48 h -6 z"/>

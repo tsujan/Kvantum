@@ -23,6 +23,7 @@ slider_handle_width=18
 slider_handle_length=18
 center_toolbar_handle=true
 toolbar_interior_spacing=2
+toolbar_separator_thickness=8
 check_size=16
 textless_progressbar=false
 progressbar_thickness=8
