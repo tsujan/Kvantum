@@ -4,6 +4,7 @@ V0.12.2
  * Don't decrease the minimum size of a spinbox if it's more than enough for its text.
  * Don't avoid elided texts in task buttons of LXQt Panel.
  * Added a key for the thickness of toolbar separators.
+ * Ensure correct menu blurring if the compositor starts with a short delay.
 
 V0.12.1
 ---------

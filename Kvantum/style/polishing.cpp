@@ -937,17 +937,14 @@ void Style::polish(QWidget *widget)
     theme_spec tspec_now = settings_->getCompositeSpec();
     if (tspec_now.composite)
     {
-      if (qobject_cast<QMenu*>(widget) || widget->inherits("QComboBoxPrivateContainer"))
+      if (tspec_now.menu_shadow_depth > 0)
+        getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+      if (qobject_cast<QMenu*>(widget))
       {
-        if (tspec_now.menu_shadow_depth > 0)
-          getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-        if (qobject_cast<QMenu*>(widget))
-        {
-          /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
-             the RTL property isn't set yet, we should move them later. On the other hand,
-             menus should be moved to compensate for the offset created by their shadows. */
-          widget->installEventFilter(this);
-        }
+        /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
+            the RTL property isn't set yet, we should move them later. On the other hand,
+            menus should be moved to compensate for the offset created by their shadows. */
+        widget->installEventFilter(this);
       }
 
 #if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
