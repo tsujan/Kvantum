@@ -1995,8 +1995,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       /* Due to a Qt5 bug (which I call "the hover bug"), after their menus are closed,
          comboboxes and buttons will have the WA_UnderMouse attribute without the cursor
-         being over them. Hence we use the following logic in several places. It has no
-         effect on Qt4 apps and will be harmless if the bug is fixed. */
+         being over them. Hence we use the following logic in several places. It will
+         be harmless if the bug is fixed. */
       if (status.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
       {
@@ -7873,7 +7873,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
       QRect r = option->rect;
       /* we don't check State_Horizontal because it may
-         lead to wrong results (like in Qt4 Designer) */
+         lead to wrong results (like in Qt Designer) */
       if (h < w)
       {
         /* we enter x and y into our calculations because
@@ -9062,7 +9062,7 @@ void Style::drawControl(QStyle::ControlElement element,
           // KDE Partition Manager
           if (optCol.isValid() && optCol != standardPalette().color(QPalette::Button))
             painter->fillRect(opt->rect, optCol);
-          else // FIXME why does Qt4 designer use CE_PushButtonBevel for its Widget Box headers?
+          else // FIXME why does Qt Designer use CE_PushButtonBevel for its Widget Box headers?
             drawPrimitive(PE_Frame,option,painter,widget);
           break;
         }
@@ -12984,9 +12984,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
     }
 
     case CT_SpinBox : {
-      /* Here we don't use defaultSize because, for Qt4, it's based on spinbox size hint,
-         which in turn is based on SC_SpinBoxEditField (-> qabstractspinbox.cpp). That's
-         corrected in Qt5 but the following method works for both. */
+      /* Here we don't use defaultSize because, for Qt4, it was based on spinbox size hint,
+         which in turn was based on SC_SpinBoxEditField (Qt4 -> qabstractspinbox.cpp).
+         That's corrected in Qt5 but the following method is always reliable. */
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
       frame_spec fspec = getFrameSpec(QStringLiteral("LineEdit"));
       if (tspec_.vertical_spin_indicators

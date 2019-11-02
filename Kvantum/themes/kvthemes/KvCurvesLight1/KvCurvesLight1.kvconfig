@@ -19,6 +19,7 @@ slider_width=6
 slider_handle_width=16
 slider_handle_length=16
 center_toolbar_handle=true
+toolbar_item_spacing=1
 check_size=16
 menubar_mouse_tracking=true
 toolbutton_style=0
