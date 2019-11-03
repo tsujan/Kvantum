@@ -969,11 +969,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         /* get the available geometry (Qt menus don't
            spread across the available virtual geometry) */
-        QRect ag;
+        QRect sg, ag;
         if (QWindow *win = w->windowHandle())
         {
           if (QScreen *sc = win->screen())
+          {
+            sg = sc->geometry();
             ag = sc->availableGeometry();
+          }
         }
         qreal dX = 0, dY = 0;
         /* this gives the real position AFTER pending movements
@@ -1153,6 +1156,51 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         int DX = qRound(dX);
         int DY = qRound(dY);
         if (DX == 0 && DY == 0) break;
+
+        // prevent the menu from switching to another screen
+        if (!sg.isEmpty())
+        {
+          if (g.top() + DY < sg.top())
+          {
+            const auto screens = qApp->screens();
+            for (const auto &screen : screens)
+            {
+              if (screen->geometry().top() < sg.top())
+              {
+                DY = sg.top() - g.top();
+                break;
+              }
+            }
+          }
+          if (w->layoutDirection() == Qt::RightToLeft)
+          {
+            if (g.right() + DX > sg.right())
+            {
+              const auto screens = qApp->screens();
+              for (const auto &screen : screens)
+              {
+                if (screen->geometry().right() > sg.right())
+                {
+                  DX = sg.right() - g.right();
+                  break;
+                }
+              }
+            }
+          }
+          else if (g.left() + DX < sg.left())
+          {
+            const auto screens = qApp->screens();
+            for (const auto &screen : screens)
+            {
+              if (screen->geometry().left() < sg.left())
+              {
+                DX = sg.left() - g.left();
+                break;
+              }
+            }
+          }
+        }
+
         w->move(g.left() + DX, g.top() + DY);
         movedMenus.insert(w);
       }

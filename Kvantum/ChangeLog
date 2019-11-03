@@ -5,6 +5,7 @@ V0.12.2
  * Don't avoid elided texts in task buttons of LXQt Panel.
  * Added a key for the thickness of toolbar separators.
  * Ensure correct menu blurring if the compositor starts with a short delay.
+ * Prevent menus from switching to another screen with a multi-screen setup.
 
 V0.12.1
 ---------
