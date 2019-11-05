@@ -432,12 +432,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Slinkti kai kuriuos slenkamus valdiklius naudojant
+staigų judesį kairiuoju pelės mygtuku.
+
+Įspėjimas: Qt kinetinis slinkimas turi daug klaidų ir
+gali rimtai trukdyti kitiems darbams.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="721"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinetinis slinkimas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="728"/>
