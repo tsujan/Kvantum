@@ -24,7 +24,7 @@ slider_handle_length=18
 center_toolbar_handle=true
 check_size=16
 textless_progressbar=false
-progressbar_thickness=3font
+progressbar_thickness=8
 menubar_mouse_tracking=true
 toolbutton_style=0
 click_behavior=0
@@ -250,6 +250,7 @@ interior.element=slidercursor
 [Progressbar]
 inherits=PanelButtonCommand
 frame.element=progress
+frame.expandedElement=eprogress
 interior.element=progress
 text.margin=0
 text.normal.color=black
@@ -263,6 +264,7 @@ frame.expansion=10
 inherits=PanelButtonCommand
 frame=true
 frame.element=progress-pattern
+frame.expandedElement=eprogress-pattern
 interior.element=progress-pattern
 
 [ItemView]
