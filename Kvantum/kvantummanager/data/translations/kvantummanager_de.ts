@@ -70,7 +70,7 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished">Dieses Thema verwenden</translation>
+        <translation>Dieses Thema verwenden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
@@ -273,7 +273,10 @@ as a workaround for bugs in applications.</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist keine vollständige Korrektur,
+verhindert jedoch lästige Bildlaufsprünge, 
+die mit dem Mausrad auftreten können, 
+wenn Mausgesten aktiviert sind.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="603"/>
@@ -405,7 +408,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="721"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Sanfter Bildlauf</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="728"/>
@@ -482,7 +485,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="914"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Schattenfreie Menüs und Tooltipps</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="925"/>
@@ -512,7 +515,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1074"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished">Unschärfe für lichtdurchlässige Fenster</translation>
+        <translation>Unschärfe für lichtdurchlässige Fenster</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1094"/>
@@ -550,7 +553,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1123"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished">Inaktiven Status ignorieren</translation>
+        <translation>Inaktiven Status ignorieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1137"/>
@@ -639,12 +642,12 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <location filename="../../kvantummanager.ui" line="1809"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wie werden Ansichtselemente aktiviert?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1802"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klickverhalten:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1922"/>
@@ -662,12 +665,13 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1911"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie können wie gepunktete Rechtecke auf fokussierten
+Schaltflächen und anderen Widgets aussehen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1915"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Fokusrechtecke entfernen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2084"/>
@@ -926,7 +930,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished">Tabs sind in Kavntum zentriert als Vorgabe.</translation>
+        <translation>Tabs sind in Kvantum standardmäßig zentriert.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1597"/>
@@ -1313,12 +1317,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="85"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfacher Klick</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="86"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppelklick</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="89"/>
@@ -1343,27 +1347,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="95"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE-Layout</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="96"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Gnome-Layout</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="97"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Mac-Layout</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="98"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows-Layout</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="99"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Android-Layout</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="101"/>
@@ -1539,12 +1543,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2665"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Übersetzer</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2663"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ein Werkzeug um &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum-Themes&lt;/a&gt;&lt;br&gt; zu installieren, auszuwählen und zu konfigurieren</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2664"/>
