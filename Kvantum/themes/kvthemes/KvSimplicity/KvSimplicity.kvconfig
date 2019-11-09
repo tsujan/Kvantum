@@ -80,6 +80,7 @@ iconless_pushbutton=false
 iconless_menu=false
 transparent_arrow_button=true
 lxqtmainmenu_iconsize=22
+single_top_toolbar=true
 
 [PanelButtonCommand]
 frame=true

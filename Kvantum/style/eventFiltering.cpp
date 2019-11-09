@@ -1158,47 +1158,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (DX == 0 && DY == 0) break;
 
         // prevent the menu from switching to another screen
-        if (!sg.isEmpty())
+        if (!sg.isEmpty() && QApplication::screens().size() > 1)
         {
           if (g.top() + DY < sg.top())
-          {
-            const auto screens = qApp->screens();
-            for (const auto &screen : screens)
-            {
-              if (screen->geometry().top() < sg.top())
-              {
-                DY = sg.top() - g.top();
-                break;
-              }
-            }
-          }
+            DY = sg.top() - g.top();
           if (w->layoutDirection() == Qt::RightToLeft)
           {
             if (g.right() + DX > sg.right())
-            {
-              const auto screens = qApp->screens();
-              for (const auto &screen : screens)
-              {
-                if (screen->geometry().right() > sg.right())
-                {
-                  DX = sg.right() - g.right();
-                  break;
-                }
-              }
-            }
+              DX = sg.right() - g.right();
           }
           else if (g.left() + DX < sg.left())
-          {
-            const auto screens = qApp->screens();
-            for (const auto &screen : screens)
-            {
-              if (screen->geometry().left() < sg.left())
-              {
-                DX = sg.left() - g.left();
-                break;
-              }
-            }
-          }
+            DX = sg.left() - g.left();
         }
 
         w->move(g.left() + DX, g.top() + DY);
