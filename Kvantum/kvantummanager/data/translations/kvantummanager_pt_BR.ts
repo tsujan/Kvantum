@@ -30,8 +30,8 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Selecione um Kvantum
-pasta de temas</translation>
+        <translation>Selecione uma pasta
+de tema Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -66,7 +66,7 @@ o Kvantum pode usar além de seus próprios temas.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Fazer Kvantum usar este tema!
+        <translation>Fazer o Kvantum usar este tema!
 
 Um botão desativado significa que
 o tema já está sendo usado.</translation>
@@ -79,7 +79,7 @@ o tema já está sendo usado.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Configurar Tema Ativo</translation>
+        <translation>Configurar o Tema Ativo</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -92,7 +92,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reverta para as configurações padrão (root) deste tema!&lt;/p&gt;&lt;p&gt;Quando clicado e confirmado, todas as alterações na configuração serão perdidas, mas o arquivo SVG provavelmente personalizado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reverter para as configurações padrão (root) deste tema!&lt;/p&gt;&lt;p&gt;Quando clicado e confirmado, todas as alterações na configuração serão perdidas, mas o arquivo SVG provavelmente personalizado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -131,7 +131,8 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>Desmarque todas essas caixas se quiser que
+        <translation>Desmarque todas essas caixas se
+você desejar que
 todos os widgets apareçam como são por padrão.</translation>
     </message>
     <message>
@@ -156,11 +157,12 @@ todos os widgets apareçam como são por padrão.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Mesclar o painel lateral do PCManFM-qt&apos;s com seus arredores.
+        <translation>Mesclar o painel lateral do PCManFM-qt com seus arredores. 
 
-No LXQt, é necessário efetuar logoff e encerrar o
-PCManFM-qt e, em seguida, parar e iniciar a Área de Trabalho
-com as Configurações da Sessão do LXQt.</translation>
+No LXQt, é necessário sair
+e entrar na sessão ou fechando
+PCManFM-qt e, em seguida, parando e iniciando a Área de Trabalho
+nas Configurações de Sessão LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
@@ -179,11 +181,11 @@ com as Configurações da Sessão do LXQt.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Mesclar a visualização do PCManFM-qt&apos;s com seus arredores.
+        <translation>Mesclar a visualização do PCManFM-qt com seus arredores.
 
-No LXQt, é necessário efetuar logoff e encerrar
+No LXQt, é necessário sair e entrar na sessão ou fechando
 o PCManFM-qt e, em seguida, parar e iniciar a Área de Trabalho
-com as Configurações da Sessão do LXQt.</translation>
+nas Configurações da Sessão do LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
@@ -203,17 +205,17 @@ com as Configurações da Sessão do LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation>Barra de ferramentas única superior</translation>
+        <translation>Barra de ferramenta superior única</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation>Não desenhar nenhum fundo para KTitles.</translation>
+        <translation>Não desenhar qualquer plano de fundo para KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar nenhum fundo para KTitles?&lt;/p&gt;&lt;p&gt;Ktitles são usados por alguns aplicativos do KDE para exibir diferentes seções nos diálogos de configuração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar qualquer plano de fundo para KTitles?&lt;/p&gt;&lt;p&gt;Ktitles são usados por alguns aplicativos do KDE para exibir diferentes seções nos diálogos de configuração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -431,12 +433,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Role alguns widgets roláveis invertendo-os com
+o botão esquerdo do mouse.
+
+Aviso: A rolagem cinética do Qt tem bugs e pode interferir
+seriamente com outros trabalhos.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="721"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolagem cinética</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="728"/>
