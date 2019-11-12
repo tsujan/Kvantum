@@ -3,13 +3,16 @@ author=Tsu Jan
 comment=A Kvantum theme matching Ubuntu's Yaru\n(formerly known as Communitheme)
 x11drag=menubar_and_primary_toolbar
 alt_mnemonic=true
-left_tabs=true
-attach_active_tab=true
-no_active_tab_separator=true
+left_tabs=false
+attach_active_tab=false
+no_active_tab_separator=false
 mirror_doc_tabs=true
 bold_active_tab=true
-group_toolbar_buttons=true
-toolbar_interior_spacing=1
+joined_inactive_tabs=true
+group_toolbar_buttons=false
+toolbar_interior_spacing=3
+toolbar_item_spacing=1
+toolbar_separator_thickness=6
 spread_progressbar=true
 spread_header=true
 composite=true
@@ -21,10 +24,10 @@ scroll_arrows=false
 scroll_min_extent=50
 slider_width=4
 slider_handle_width=22
-slider_handle_length=14
+slider_handle_length=18
 tickless_slider_handle_size=20
 center_toolbar_handle=true
-check_size=18
+check_size=17
 textless_progressbar=false
 progressbar_thickness=4
 menubar_mouse_tracking=true
@@ -38,14 +41,14 @@ inline_spin_indicators=true
 inline_spin_separator=true
 spin_button_width=26
 fill_rubberband=false
-merge_menubar_with_toolbar=true
+merge_menubar_with_toolbar=false
 small_icon_size=16
 large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=24
 combo_as_lineedit=false
 square_combo_button=true
-layout_spacing=6
+layout_spacing=5
 tooltip_delay=-1
 submenu_overlap=0
 animate_states=true
@@ -54,8 +57,7 @@ combo_menu=true
 hide_combo_checkboxes=true
 combo_focus_rect=true
 groupbox_top_label=true
-joined_inactive_tabs=false
-layout_margin=9
+layout_margin=7
 respect_DE=true
 scrollbar_in_view=true
 transient_scrollbar=true
@@ -69,16 +71,16 @@ reduce_menu_opacity=0
 
 [GeneralColors]
 window.color=#f5f6f7
-inactive.window.color=#edeef0
+inactive.window.color=#f5f6f7
 base.color=white
-inactive.base.color=#f2f2f2
+inactive.base.color=#fcfcfc
 alt.base.color=#FAFAFA
-inactive.alt.base.color=#f2f2f2
+inactive.alt.base.color=#f7f7f7
 button.color=#fafafa
 light.color=white
-mid.light.color=#D2D2D2
+mid.light.color=#f5f5f5
 dark.color=#C8C8C8
-mid.color=#DCDCDC
+mid.color=#f0f0f0
 highlight.color=#e95420
 inactive.highlight.color=#eb6637
 text.color=#3D3D3D
@@ -115,6 +117,8 @@ no_selection_tint=true
 middle_click_scroll=false
 transparent_arrow_button=true
 opaque_colors=false
+kinetic_scrolling=false
+scroll_jump_workaround=false
 
 [PanelButtonCommand]
 frame=true
@@ -155,17 +159,6 @@ text.boldness=2
 [PanelButtonTool]
 inherits=PanelButtonCommand
 frame.expandedElement=ebutton
-
-[ToolbarButton]
-frame.element=tbutton
-interior.element=tbutton
-text.normal.color=#dfdbd2
-text.focus.color=#f3efe6
-text.press.color=#dfdbd2
-text.toggle.color=#dfdbd2
-text.toggle.inactive.color=#dfdbd2
-text.shadow=false
-indicator.element=tarrow
 
 [Dock]
 inherits=PanelButtonCommand
@@ -250,7 +243,7 @@ frame.expansion=14
 [DropDownButton]
 inherits=PanelButtonCommand
 indicator.element=arrow-down
-indicator.size=10
+indicator.size=9
 frame.expandedElement=ebutton
 
 [IndicatorArrow]
@@ -267,26 +260,31 @@ text.boldness=2
 
 [Tab]
 inherits=PanelButtonCommand
-focusFrame=true
-interior.element=tab
-text.margin.left=7
-text.margin.right=7
-text.margin.top=4
-text.margin.bottom=2
-frame.element=tab
+interior.element=button
+text.margin.left=8
+text.margin.right=8
+text.margin.top=3
+text.margin.bottom=4
+frame.element=button
+frame.expandedElement=ebutton
+focusFrame=false
 indicator.element=tab
+indicator.size=12
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 text.boldness=2
 text.normal.color=#3D3D3D
 text.focus.color=#141414
 text.toggle.color=#3D3D3D
-frame.expansion=12
 min_width=4font
 
 [TabFrame]
 inherits=PanelButtonCommand
 frame=true
-frame.element=dock
-interior.element=dock
+frame=false
+interior=false
 frame.top=1
 frame.bottom=1
 frame.left=1
@@ -326,13 +324,8 @@ inherits=PanelButtonCommand
 indicator.element=toolbar
 indicator.size=5
 text.margin=0
-interior=true
-frame=true
-interior.element=menubar
-frame.element=menubar
-text.normal.color=#F7F7F7
-text.normal.inactive.color=#c8c8c8
-frame.bottom=2
+interior=false
+frame=false
 text.shadow=false
 frame.expansion=0
 
@@ -446,14 +439,9 @@ frame.right=0
 
 [MenuBar]
 inherits=PanelButtonCommand
-interior=true
-interior.element=menubar
-frame=true
-frame.element=menubar
-frame.bottom=1
+interior=false
+frame=false
 frame.expansion=0
-text.normal.color=#dfdbd2
-text.normal.inactive.color=#969696
 
 [MenuBarItem]
 inherits=PanelButtonCommand
@@ -461,15 +449,13 @@ interior=false
 frame=true
 frame.element=menubaritem
 frame.top=0
-frame.bottom=2
+frame.bottom=3
 frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
-text.margin.top=3
+text.margin.top=2
 text.margin.bottom=2
-text.normal.color=#F7F7F7
-text.focus.color=#fcfcfc
 text.shadow=false
 frame.expansion=0
 
@@ -517,13 +503,14 @@ text.boldness=2
 
 [TabBarFrame]
 inherits=PanelButtonCommand
+frame.top=3
+frame.bottom=3
+frame.left=3
+frame.right=3
 frame=true
-frame.element=tabBarFrame
-interior=false
-frame.top=6
-frame.bottom=6
-frame.left=6
-frame.right=6
+interior=true
+frame.element=tabbarframe
+interior.element=tabbarframe
 
 [ToolTip]
 inherits=GenericFrame

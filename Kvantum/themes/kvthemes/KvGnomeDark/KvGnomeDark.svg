@@ -1339,4 +1339,19 @@
 <use width="100%" height="100%" style="opacity:.45" xlink:href="#checkbox-checked-normal" id="checkbox-checked-normal-inactive" transform="translate(130,24)"/>
 <use width="100%" height="100%" style="opacity:.45" xlink:href="#checkbox-normal" id="checkbox-normal-inactive" transform="translate(150,24)"/>
 <use width="100%" height="100%" style="opacity:.45" xlink:href="#checkbox-tristate-normal" id="checkbox-tristate-normal-inactive" transform="translate(112,24)"/>
+<g id="button-focused-inactive-left" transform="matrix(0.8,0,0,1,-185.5,-36.251508)">
+<path style="fill:#373737;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -7.5 v 32.5 z"/>
+<path style="fill:#1e1e1e;color:#000;stroke-width:.707" d="m 21.25,48.7516 v 32.5 h 1.24988 v -32.5 z "/>
+</g>
+<g id="button-focused-inactive-topleft" transform="translate(-114)">
+<path style="fill:#373737;fill-rule:evenodd" d="m -48.5,6.5 c -3,0 -6,3 -6,6 h 6 z"/>
+<path style="fill:#1e1e1e;color:#000" d="m -48.5,6.5 -1,0 c -2.75,0 -5,2.25 -5,5 v 1 h 1 v -1 c 0,-2.25 1.8,-4 4,-4 h 1 z "/>
+</g>
+<path style="fill:#373737;fill-rule:evenodd" id="button-focused-inactive" d="M -162.5,12.5 V 45 H -130 V 12.5 Z"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-top" transform="rotate(90,-146.25,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-right" transform="matrix(-1,0,0,1,-292.5,0)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-topright" transform="matrix(-1,0,0,1,-292.5,0)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-bottom" transform="rotate(-90,-146.25,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-bottomleft" transform="rotate(-90,-146.25,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-bottomright" transform="rotate(-180,-146.25,28.75)"/>
 </svg>

@@ -1340,4 +1340,19 @@
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#item-checkbox-tristate-normal" id="item-checkbox-tristate-normal-inactive" transform="translate(140,62)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#item-checkbox-normal" id="item-checkbox-normal-inactive" transform="translate(242,62)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#item-checkbox-checked-normal" id="item-checkbox-checked-normal-inactive" transform="translate(222,62)"/>
+<g id="button-focused-inactive-left" transform="matrix(0.8,0,0,1,-185.5,-36.25)">
+<path style="fill:#f8f8f7;fill-rule:evenodd" d="M 28.75,81.25 V 48.75 h -7.5 v 32.5 z"/>
+<path style="fill:#d5d0cc;color:#000;stroke-width:.707" d="m 21.25,48.75 v 32.5 h 1.25 v -32.5 z"/>
+</g>
+<g id="button-focused-inactive-topleft" transform="translate(-114)">
+<path style="fill:#f8f8f7;fill-rule:evenodd" d="m -48.5,6.5 c -3,0 -6,3 -6,6 h 6 z"/>
+<path style="fill:#d5d0cc;color:#000" d="m -48.5,6.5 -1,0 c -2.75,0 -5,2.25 -5,5 v 1 h 1 v -1 c 0,-2.25 1.8,-4 4,-4 h 1 z "/>
+</g>
+<path style="fill:#f8f8f7;fill-rule:evenodd" id="button-focused-inactive" d="M -162.5,12.5 V 45 H -130 V 12.5 Z"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-top" transform="rotate(90,-146.25002,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-right" transform="matrix(-1,0,0,1,-292.5,0)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-topright" transform="matrix(-1,0,0,1,-292.5,0)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-left" id="button-focused-inactive-bottom" transform="rotate(-90,-146.25,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-bottomleft" transform="rotate(-90,-146.25,28.75)"/>
+<use width="100%" height="100%" xlink:href="#button-focused-inactive-topleft" id="button-focused-inactive-bottomright" transform="rotate(-180,-146.25,28.75)"/>
 </svg>
