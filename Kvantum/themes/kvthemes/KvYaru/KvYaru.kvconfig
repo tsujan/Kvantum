@@ -7,7 +7,7 @@ left_tabs=false
 attach_active_tab=false
 no_active_tab_separator=false
 mirror_doc_tabs=true
-bold_active_tab=true
+bold_active_tab=false
 joined_inactive_tabs=true
 group_toolbar_buttons=false
 toolbar_interior_spacing=3
@@ -274,10 +274,13 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
+text.bold=true
 text.boldness=2
-text.normal.color=#3D3D3D
-text.focus.color=#141414
+text.normal.color=#8c898c
+text.focus.color=#646464
 text.toggle.color=#3D3D3D
+text.normal.inactive.color=#969696
+text.toggle.inactive.color=#969696
 min_width=4font
 
 [TabFrame]
