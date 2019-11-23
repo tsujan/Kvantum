@@ -439,7 +439,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="721"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplazamiento cinético</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="728"/>
@@ -731,7 +731,7 @@ en botones activos y otros elementos visuales.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1915"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar los rectángulos del foco</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2084"/>
