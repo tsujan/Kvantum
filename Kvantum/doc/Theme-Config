@@ -781,13 +781,13 @@ inactive.alt.base.color           String (#RRGGBBAA)  Like above but for inactiv
 button.color                      String (#RRGGBBAA)  The general button background color
                                                       (usually, the same as "window.color").
 
-light.color                       String (#RRGGBBAA)  Lighter than "button.color"
-                                                      (used mostly for 3D bevels).
+light.color                       String (#RRGGBBAA)  Lighter than "button.color". It
+                                                      is used in 3D bevels and also in
+                                                      drawing toolbox tabs.
 
 mid.light.color                   String (#RRGGBBAA)  Between "button.color" and
                                                       "light.color". It is the color of
-                                                      box frames but is also used in
-                                                      drawing toolbox tabs.
+                                                      box frames.
 
 dark.color                        String (#RRGGBBAA)  Darker than "button.color"
                                                       (used mostly for 3D bevels).

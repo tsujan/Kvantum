@@ -91,8 +91,8 @@ button.text.color=#3D3D3D
 disabled.text.color=#00000064
 tooltip.text.color=white
 highlight.text.color=#fcfcfc
-link.color=#18b9ee
-link.visited.color=#1393be
+link.color=#1397c3
+link.visited.color=#e95420
 progress.indicator.text.color=white
 progress.inactive.indicator.text.color=#fffffff0
 

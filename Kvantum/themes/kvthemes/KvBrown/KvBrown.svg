@@ -305,7 +305,7 @@
 </linearGradient>
 <linearGradient id="linearGradient2035-3">
 <stop offset="0"/>
-<stop offset="1" style="stop-color:#fff;stop-opacity:.413"/>
+<stop offset="1" style="stop-color:#fff;stop-opacity:.231"/>
 </linearGradient>
 <linearGradient id="linearGradient2030">
 <stop offset="0" style="stop-color:#312c29"/>
@@ -313,7 +313,7 @@
 </linearGradient>
 <linearGradient id="linearGradient2035">
 <stop offset="0"/>
-<stop offset="1" style="stop-color:#fff;stop-opacity:.641"/>
+<stop offset="1" style="stop-color:#fff;stop-opacity:.394"/>
 </linearGradient>
 <linearGradient gradientTransform="translate(-31,7.25)" xlink:href="#linearGradient8855" id="linearGradient6355" y1="1076" x1="-25.001015" y2="1073.25" gradientUnits="userSpaceOnUse" x2="-25"/>
 <linearGradient gradientTransform="translate(-114,4.2500779)" xlink:href="#linearGradient5639" id="linearGradient6377" y1="1079" x1="10" y2="1140.5" gradientUnits="userSpaceOnUse" x2="10"/>
@@ -442,9 +442,9 @@
 </linearGradient>
 <linearGradient xlink:href="#linearGradient6800" id="linearGradient8090" y1="1272.5" x1="270" y2="1228.5" gradientUnits="userSpaceOnUse" x2="270"/>
 <linearGradient id="linearGradient7390">
-<stop offset="0" style="stop-color:#504640"/>
-<stop offset="0.85" style="stop-color:#504640"/>
-<stop offset="1" style="stop-color:#5c5048"/>
+<stop offset="0" style="stop-color:#463d38"/>
+<stop offset="0.85" style="stop-color:#463d38"/>
+<stop offset="1" style="stop-color:#504640"/>
 </linearGradient>
 <linearGradient id="linearGradient8946">
 <stop offset="0" style="stop-color:#b4a9a0"/>
@@ -664,7 +664,7 @@
 <path style="fill:url(#linearGradient6005)" d="m 282.5,208.75 v -7.5 h 7.5 c 0,4.04343 -3.51846,7.5 -7.5,7.5 z"/>
 </g>
 <path style="fill:url(#linearGradient2257);fill-rule:evenodd" id="progress-pattern-normal-top" d="m 44,269.4996 h 16 v -7.5 H 44 Z"/>
-<path style="fill:#6e553f" id="progress-pattern-normal-left" d="M 36.5,269.5 H 44 v 16 h -7.5 z"/>
+<path style="fill:#7a5332" id="progress-pattern-normal-left" d="M 36.5,269.5 H 44 v 16 h -7.5 z"/>
 <use width="100%" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal" transform="translate(12)"/>
 <path style="fill:url(#linearGradient2253);fill-rule:evenodd" id="progress-pattern-normal-bottom" d="m 60,277 v -7.5 H 44 v 7.5 z"/>
 <path style="fill:url(#linearGradient2249);fill-rule:evenodd" id="progress-pattern-normal-bottomleft" d="m 44,277 v -7.5 h -7.5 c 0,3.80963 3.7788,7.5 7.5,7.5 z"/>
@@ -746,8 +746,8 @@
 <path style="fill:#2d2823;fill-rule:evenodd" id="tabframe-normal-bottom" d="m 977.5,-105 h 15 v 10 h -15 z" transform="matrix(0,1,-1,0,0,0)"/>
 <path style="fill:#38322c;fill-rule:evenodd" id="tabframe-normal-bottomright" d="m 120,992.5003 -15,0 0,-15 15,0 z "/>
 <path style="fill:#433935;fill-rule:evenodd" id="tabframe-normal-bottomleft" d="m -95,-992.5 h 15 v 15 h -15 z" transform="scale(-1,-1)"/>
-<path style="opacity:.2;fill:url(#linearGradient6366);fill-rule:evenodd" id="group-normal-bottom" d="m 410,1256.2499 -32.5,0 0,7.5 32.5,0 0,-7.5 z"/>
-<path style="opacity:.18;fill:url(#linearGradient6376);fill-rule:evenodd" id="group-normal-right" d="m 410,1223.75 0,32.5 7.5,0 0,-32.5 -7.5,0 z"/>
+<path style="opacity:.15;fill:url(#linearGradient6366);fill-rule:evenodd" id="group-normal-bottom" d="m 410,1256.2499 -32.5,0 0,7.5 32.5,0 0,-7.5 z"/>
+<path style="opacity:.1;fill:url(#linearGradient6376);fill-rule:evenodd" id="group-normal-right" d="m 410,1223.75 0,32.5 7.5,0 0,-32.5 -7.5,0 z"/>
 <path style="opacity:.2;fill:url(#linearGradient6378);fill-rule:evenodd" id="group-normal-left" d="m 377.5,1256.25 0,-32.5 -7.5,0 0,32.5 7.5,0 z"/>
 <path style="opacity:.25;fill:url(#linearGradient6380);fill-rule:evenodd" id="group-normal-top" d="m 377.5,1216.25 0,7.5 32.5,0 0,-7.5 -32.5,0 z"/>
 <g style="opacity:.8;fill:#323232;fill-rule:evenodd" id="arrow-plus-normal" transform="matrix(1.2559221,1.2559221,-1.2559221,1.2559221,143.3599,589.5925)">
@@ -1033,7 +1033,7 @@
 </g>
 <g id="group-normal-bottomleft">
 <path style="opacity:.2;fill:url(#linearGradient6370);fill-rule:evenodd" d="m 370,1256.2499 c 0,3.7212 3.6904,7.5 7.5,7.5 v -7.5 z"/>
-<path style="opacity:.18;fill:url(#linearGradient5311);fill-rule:evenodd" d="m 370,1256.2499 c 0,3.7212 3.6904,7.5 7.5,7.5 v -7.5 z"/>
+<path style="opacity:.13;fill:url(#linearGradient5311);fill-rule:evenodd" d="m 370,1256.2499 c 0,3.7212 3.6904,7.5 7.5,7.5 v -7.5 z"/>
 </g>
 <path style="fill:#706258;fill-rule:evenodd" id="tabBarFrame-normal-bottom" d="m 360,840 h 10 v 5 h -10 z"/>
 <use width="100%" height="100%" xlink:href="#tab-normal" id="floating-tab-normal" transform="translate(0,63)"/>
@@ -1286,12 +1286,12 @@
 <use width="100%" height="100%" xlink:href="#menuitem-right-focused" id="menuitem-left-focused" transform="matrix(-1,0,0,1,686,0)"/>
 <use width="100%" height="100%" xlink:href="#splitter-grip-focused" id="splitter-grip-pressed" transform="translate(16)"/>
 <g id="group-normal-bottomright">
-<path style="opacity:.2;fill:url(#linearGradient6368);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
-<path style="opacity:.18;fill:url(#linearGradient2018);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
+<path style="opacity:.15;fill:url(#linearGradient6368);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
+<path style="opacity:.1;fill:url(#linearGradient2018);fill-rule:evenodd" d="m 410,1256.2499 0,7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 h -7.5 z "/>
 </g>
 <g id="group-normal-topright">
 <path style="opacity:.25;fill:url(#linearGradient6374);fill-rule:evenodd" d="m 410,1216.25 0,7.5 7.5,0 c 0,-3.8097 -3.77876,-7.5 -7.5,-7.5 z"/>
-<path style="opacity:.18;fill:url(#linearGradient2026);fill-rule:evenodd" d="m 410,1216.25 0,7.5 7.5,0 c 0,-3.8097 -3.77876,-7.5 -7.5,-7.5 z"/>
+<path style="opacity:.1;fill:url(#linearGradient2026);fill-rule:evenodd" d="m 410,1216.25 0,7.5 7.5,0 c 0,-3.8097 -3.77876,-7.5 -7.5,-7.5 z"/>
 </g>
 <g id="group-normal-topleft">
 <path style="opacity:.25;fill:url(#linearGradient6372);fill-rule:evenodd" d="m 377.5,1216.25 c -3.80963,0 -7.5,3.6903 -7.5,7.5 h 7.5 v -7.5 z "/>
@@ -1353,12 +1353,12 @@
 <path style="opacity:.03;fill:url(#linearGradient2323);fill-rule:evenodd" d="m 189,83.7498 c -2.75,0 -10,0 -10,0 0,0 0,-7.25017 0,-10 h 10 z "/>
 <path style="fill:#4d443d;line-height:normal;color:#000" d="m 189,83.7498 -10,.0002 v -10.0002 h 2 v 8.00017 h 8 z "/>
 </g>
-<path style="opacity:.12;fill:#fff;fill-rule:evenodd" id="common-normal-bottom" d="m 276,1256.2499 h -32.5 v 7.5 H 276 Z"/>
-<path style="opacity:.1;fill:#fff;fill-rule:evenodd" id="common-normal-right" d="m 276,1223.75 v 32.5 h 7.5 v -32.5 z"/>
+<path style="opacity:.08;fill:#fff;fill-rule:evenodd" id="common-normal-bottom" d="m 276,1256.2499 h -32.5 v 7.5 H 276 Z"/>
+<path style="opacity:.06;fill:#fff;fill-rule:evenodd" id="common-normal-right" d="m 276,1223.75 v 32.5 h 7.5 v -32.5 z"/>
 <path style="opacity:.2;fill-rule:evenodd" id="common-normal-left" d="m 243.5,1256.25 v -32.5 H 236 v 32.5 z"/>
 <path style="opacity:.25;fill-rule:evenodd" id="common-normal-top" d="m 243.5,1216.25 v 7.5 H 276 v -7.5 z"/>
 <path style="opacity:.2;fill:url(#linearGradient2049);fill-rule:evenodd" id="common-normal-bottomleft" d="m 236,1256.2499 c 0,3.7212 3.6904,7.5 7.5,7.5 v -7.5 z"/>
-<path style="opacity:.11;fill:#fff;fill-rule:evenodd" id="common-normal-bottomright" d="m 276,1256.2499 v 7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 z"/>
+<path style="opacity:.07;fill:#fff;fill-rule:evenodd" id="common-normal-bottomright" d="m 276,1256.2499 v 7.5 c 3.7212,0 7.5,-3.8671 7.5,-7.5 z"/>
 <path style="opacity:.25;fill:url(#linearGradient2037);fill-rule:evenodd" id="common-normal-topright" d="m 276,1216.25 v 7.5 h 7.5 c 0,-3.8097 -3.77876,-7.5 -7.5,-7.5 z"/>
 <path style="opacity:.25;fill:url(#linearGradient2029);fill-rule:evenodd" id="common-normal-topleft" d="m 243.5,1216.25 c -3.80963,0 -7.5,3.6903 -7.5,7.5 h 7.5 z"/>
 <g style="fill-rule:evenodd" id="arrow-separator-normal" transform="translate(174.5,-6.5)">
