@@ -697,7 +697,7 @@
 <radialGradient fx="8" fy="8" cx="8" cy="8" gradientTransform="translate(369.5,404.5)" xlink:href="#linearGradient3771-3" id="radialGradient6524" r="7.5" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="582" fy="1472.1924" cx="582" cy="1472.1924" gradientTransform="matrix(1,0,0,12,0,-16184.583)" xlink:href="#linearGradient9265-0" id="radialGradient6490" r="2" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="173.41933" fy="262.17508" cx="173.41933" cy="262.17508" gradientTransform="matrix(2,0,0,-2,-154.33969,784.34778)" xlink:href="#linearGradient9265" id="radialGradient6580" r="2" gradientUnits="userSpaceOnUse"/>
-<radialGradient fx="150.9382" fy="254.1123" cx="150.9382" cy="254.1123" gradientTransform="matrix(0,0.79686817,-2.0000014,-2.2156646e-5,659.16452,133.8401)" xlink:href="#linearGradient8855" id="radialGradient6505" r="2" gradientUnits="userSpaceOnUse"/>
+<radialGradient fx="150.9382" fy="254.1123" cx="150.9382" cy="254.1123" gradientTransform="matrix(-6.8023553e-4,0.79686788,-2.2802226,-0.00197528,730.47484,134.33646)" xlink:href="#linearGradient8855" id="radialGradient6505" r="2" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="355" fy="-54.5" cx="355" cy="-54.5" gradientTransform="matrix(0.26666683,0,0,0.4,-299.66673,1285.8)" xlink:href="#linearGradient3759" id="radialGradient9432" r="15" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="150.9382" fy="254.1123" cx="150.9382" cy="254.1123" gradientTransform="matrix(0,2,-2,0,659.16348,-47.76278)" xlink:href="#linearGradient6492" id="radialGradient6494" r="2" gradientUnits="userSpaceOnUse"/>
 <radialGradient fx="174.2162" fy="262.70288" cx="174.2162" cy="262.70288" gradientTransform="matrix(-1.2031316,0,0,-1.4441886,383.01309,639.39151)" xlink:href="#linearGradient3961-9" id="radialGradient6571" r="2" gradientUnits="userSpaceOnUse"/>
@@ -1828,7 +1828,7 @@
 <path style="opacity:.4;fill:url(#linearGradient6630);fill-rule:evenodd" d="m 152.532,254.1123 a 1.594,1.594 0 0,1 -1.59376,1.59376 v -1.59376 z "/>
 <path style="opacity:.4;fill:url(#linearGradient6633);fill-rule:evenodd" d="m 152.532,254.1123 a 1.594,1.594 0 0,1 -1.59376,1.59376 v -1.59376 z "/>
 <path style="fill:url(#radialGradient6494);fill-rule:evenodd" d="m 154.9382,254.1123 a 4,4 0 0 1 -4,4 v -2.40624 a 1.594,1.594 0 0 0 1.59376,-1.59376 z"/>
-<path style="opacity:.5;fill:url(#radialGradient6505);fill-rule:evenodd" d="m 154.9382,254.1123 a 4,4 0 0 1 -4,4 v -2.40624 a 1.594,1.594 0 0 0 1.59376,-1.59376 z"/>
+<path style="opacity:.4;fill:url(#radialGradient6505);fill-rule:evenodd" d="m 154.9382,254.1123 a 4,4 0 0 1 -4,4 v -2.40624 a 1.594,1.594 0 0 0 1.59376,-1.59376 z"/>
 </g>
 <g id="lineedit-normal-topright">
 <path style="fill:#232323;fill-rule:evenodd" d="m 152.532,214.1123 a 1.594,1.594 0 0,0 -1.59376,-1.59376 v 1.59376 z "/>
