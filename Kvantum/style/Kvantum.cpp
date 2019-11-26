@@ -5708,7 +5708,8 @@ void Style::drawControl(QStyle::ControlElement element,
             fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
         }
 
-        /* topFrame and bottomFrame are added at CT_MenuBarItem */
+        /* topFrame and bottomFrame were added at CT_MenuBarItem
+           (also, see PM_MenuBarItemSpacing for the reason) */
         r = option->rect.adjusted(0,topFrame,0,-bottomFrame);
 
         /* draw a panel for the menubar-item only if it's focused or pressed */
@@ -12029,10 +12030,13 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
     case PM_MenuBarPanelWidth :
     case PM_MenuBarVMargin :
-    case PM_MenuBarHMargin :  return 0;
+    case PM_MenuBarHMargin : return 0;
 
     case PM_MenuBarItemSpacing : {
-      /* needed for putting menubar-items inside menubar frame */
+      /* This is needed for putting menubar-items inside menubar frame.
+         FIXME: Actually, PM_MenuBarHMargin and PM_MenuBarVMargin should
+                be used but Qt has a bug about menubar corner widgets,
+                that would show up badly if they were used. */
       if (tspec_.merge_menubar_with_toolbar)
         return getFrameSpec(QStringLiteral("Toolbar")).left;
       else
@@ -13386,7 +13390,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           fspec1 = getFrameSpec(QStringLiteral("Toolbar"));
         else
           fspec1 = getFrameSpec(QStringLiteral("MenuBar"));
-        /* needed for putting menubar-items inside menubar frame */
+        /* needed for putting menubar-items inside menubar frame
+           (see PM_MenuBarItemSpacing for the reason) */
         fspec.top += fspec1.top+fspec1.bottom;
 
         QFont f;
@@ -13853,6 +13858,33 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       else
         s.rheight() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
       break;
+    }
+
+    case CT_MdiControls : {
+      /* make the size larger to put buttons inside menubar frame (-> CC_MdiControls) */
+      frame_spec fspec;
+      if (tspec_.merge_menubar_with_toolbar)
+        fspec = getFrameSpec(QStringLiteral("Toolbar"));
+      else
+        fspec = getFrameSpec(QStringLiteral("MenuBar"));
+      const int frameWidth = (option->direction == Qt::RightToLeft ? fspec.left : fspec.right);
+      if (const QStyleOptionComplex *styleOpt = qstyleoption_cast<const QStyleOptionComplex *>(option))
+      {
+        const int buttonSize = pixelMetric(PM_TitleBarButtonSize, styleOpt, widget);
+        int width = frameWidth + 1;
+        if (styleOpt->subControls & SC_MdiMinButton)
+          width += buttonSize + 1;
+        if (styleOpt->subControls & SC_MdiNormalButton)
+          width += buttonSize + 1;
+        if (styleOpt->subControls & SC_MdiCloseButton)
+          width += buttonSize + 1;
+        return QSize(width, buttonSize+fspec.top);
+      }
+      else
+      {
+        const int buttonSize = pixelMetric(PM_TitleBarButtonSize, option, widget);
+        return QSize(frameWidth + 1 + 3*(buttonSize + 1), buttonSize+fspec.top);
+      }
     }
 
     default : return defaultSize;
@@ -15136,13 +15168,47 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       }
       break;
 
-     /*case CC_MdiControls :
-       switch (subControl) {
-         case SC_MdiCloseButton : return QRect(0,0,30,30);
+    case CC_MdiControls : {
+      int numSubControls = 0;
+      if (option->subControls & SC_MdiCloseButton)
+        ++numSubControls;
+      if (option->subControls & SC_MdiMinButton)
+        ++numSubControls;
+      if (option->subControls & SC_MdiNormalButton)
+        ++numSubControls;
+      if (numSubControls == 0)
+        break;
 
-         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
-       }
-       break;*/
+      // -> CT_MdiControls
+      frame_spec fspec;
+      if (tspec_.merge_menubar_with_toolbar)
+        fspec = getFrameSpec(QStringLiteral("Toolbar"));
+      else
+        fspec = getFrameSpec(QStringLiteral("MenuBar"));
+
+      int buttonWidth = (option->rect.width()
+                         - (option->direction == Qt::RightToLeft ? fspec.left : fspec.right) - 1)
+                        / numSubControls
+                        - 1;
+      int offset = option->direction == Qt::RightToLeft ? fspec.left : 0;
+      switch (subControl) {
+        case SC_MdiCloseButton:
+          if (numSubControls == 1)
+            break;
+          offset += buttonWidth + 1;
+        /* Falls through. */
+        case SC_MdiNormalButton:
+          if (numSubControls == 1 || (numSubControls == 2 && !(option->subControls & SC_MdiMinButton)))
+            break;
+          if (option->subControls & SC_MdiNormalButton)
+            offset += buttonWidth + 1;
+          break;
+        default:
+          break;
+      }
+
+      return QRect(offset, fspec.top, buttonWidth, option->rect.height()-fspec.top);
+    }
 
     case CC_ScrollBar : {
       const QStyleOptionSlider *opt =

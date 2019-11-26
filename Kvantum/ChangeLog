@@ -6,6 +6,8 @@ V0.12.2
  * Added a key for the thickness of toolbar separators.
  * Ensure correct menu blurring if the compositor starts with a short delay.
  * Prevent menus from switching to another screen with a multi-screen setup.
+ * Avoid scrollbars in the third page of Kvantum Manager the first time it's shown.
+ * Put menubar MDI buttons inside menubar frame.
 
 V0.12.1
 ---------

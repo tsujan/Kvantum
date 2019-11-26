@@ -39,6 +39,12 @@ public:
     KvantumManager (const QString& lang = QString(), QWidget *parent = 0);
     ~KvantumManager();
 
+    void showWindow();
+
+protected:
+    void closeEvent (QCloseEvent *event);
+    bool eventFilter (QObject *watched, QEvent *event);
+
 private slots:
     void openTheme();
     void installTheme();
@@ -64,7 +70,7 @@ private slots:
     void aboutDialog();
 
 private:
-    void closeEvent (QCloseEvent *event);
+    void fitThirdPageToContents();
     QString tooTipToWhatsThis (const QString &tip);
     void notWritable (const QString &path);
     void canNotBeRemoved (const QString &path, bool isDir);

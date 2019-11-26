@@ -45,6 +45,7 @@ dark_titlebar=true
 groupbox_top_label=true
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,VirtualBoxVM,trojita,dragon,digikam,lyx
 reduce_window_opacity=4
+remove_extra_frames=true
 
 [GeneralColors]
 window.color=#3D3D3E

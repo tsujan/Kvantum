@@ -19,6 +19,8 @@
 #define KVANTUMPREVIEW_H
 
 #include "ui_KvantumPreviewBase.h"
+#include <QScreen>
+#include <QWindow>
 
 class KvantumPreview : public QMainWindow, private Ui::KvantumPreviewBase {
   Q_OBJECT
@@ -32,7 +34,6 @@ public:
     splitter_2->setSizes (sizes);
     treeWidget->sortItems (0, Qt::AscendingOrder);
     treeWidget->setAlternatingRowColors (true);
-    tabWidget->tabBar()->setUsesScrollButtons (false); // to prevent tab scroll buttons at startup (-> main.cpp)
     QPushButton *pb1 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
     tabWidget_2->setCornerWidget (pb1, Qt::TopRightCorner);
     QPushButton *pb2 = new QPushButton (QIcon (":/Icons/data/icon.svg"), QString());
@@ -61,7 +62,26 @@ public:
     toolBar_2->addWidget (new QLineEdit("Kvantum"));
     toolBar_2->addSeparator();
     toolBar_2->addWidget (new QSpinBox());
+
+    int availableWidth = 0;
+    if (QWindow *win = windowHandle()) {
+      if (QScreen *sc = win->screen())
+        availableWidth = sc->availableGeometry().width() - 50;
+    }
+    if (availableWidth <= 0) {
+      if (QScreen *pScreen = QApplication::primaryScreen())
+        availableWidth = pScreen->availableGeometry().width() - 50;
+    }
+    if (availableWidth > 0) {
+      int tabBarWidth = tabWidget->tabBar()->sizeHint().width() + 20;
+      if (tabBarWidth > availableWidth)
+        tabWidget->tabBar()->setUsesScrollButtons (true);
+      else
+        tabWidget->tabBar()->setUsesScrollButtons (false); // to prevent tab scroll buttons at startup (-> main.cpp)
+      resize (QSize (qMin (qMax (tabBarWidth, size().width()), availableWidth), size().height()));
+    }
   }
+
   ~KvantumPreview() {}
 
 private slots:

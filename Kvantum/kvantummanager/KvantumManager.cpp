@@ -51,16 +51,16 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     ui->checkBoxKineticScrolling->setEnabled (false);
 #endif
 
-    ui->openTheme->setIcon(symbolicIcon::icon (":/Icons/data/document-open.svg"));
-    ui->deleteTheme->setIcon(symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
-    ui->useTheme->setIcon(symbolicIcon::icon (":/Icons/data/dialog-ok.svg"));
-    ui->restoreButton->setIcon(symbolicIcon::icon (":/Icons/data/document-revert.svg"));
-    ui->saveButton->setIcon(symbolicIcon::icon (":/Icons/data/document-save.svg"));
-    ui->removeAppButton->setIcon(symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
-    ui->saveAppButton->setIcon(symbolicIcon::icon (":/Icons/data/document-save.svg"));
-    ui->whatsthisButton->setIcon(symbolicIcon::icon (":/Icons/data/help-whatsthis.svg"));
-    ui->aboutButton->setIcon(symbolicIcon::icon (":/Icons/data/help-about.svg"));
-    ui->quit->setIcon(symbolicIcon::icon (":/Icons/data/application-exit.svg"));
+    ui->openTheme->setIcon (symbolicIcon::icon (":/Icons/data/document-open.svg"));
+    ui->deleteTheme->setIcon (symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
+    ui->useTheme->setIcon (symbolicIcon::icon (":/Icons/data/dialog-ok.svg"));
+    ui->restoreButton->setIcon (symbolicIcon::icon (":/Icons/data/document-revert.svg"));
+    ui->saveButton->setIcon (symbolicIcon::icon (":/Icons/data/document-save.svg"));
+    ui->removeAppButton->setIcon (symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
+    ui->saveAppButton->setIcon (symbolicIcon::icon (":/Icons/data/document-save.svg"));
+    ui->whatsthisButton->setIcon (symbolicIcon::icon (":/Icons/data/help-whatsthis.svg"));
+    ui->aboutButton->setIcon (symbolicIcon::icon (":/Icons/data/help-about.svg"));
+    ui->quit->setIcon (symbolicIcon::icon (":/Icons/data/application-exit.svg"));
 
     ui->toolBox->setItemIcon (0, symbolicIcon::icon (":/Icons/data/system-software-install.svg"));
     ui->toolBox->setItemIcon (1, symbolicIcon::icon (":/Icons/data/preferences-desktop-theme.svg"));
@@ -154,6 +154,9 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->whatsthisButton, &QAbstractButton::clicked, this, &KvantumManager::showWhatsThis);
     connect (ui->checkBoxComboMenu, &QAbstractButton::clicked, this, &KvantumManager::comboMenu);
 
+    if (auto viewport = ui->toolBox->widget (2)->parentWidget())
+        viewport->installEventFilter (this); // see eventFilter()
+
     /* get ready for translucency */
     setAttribute (Qt::WA_NativeWindow, true);
     if (QWindow *window = windowHandle())
@@ -167,9 +170,13 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     if (icn.isNull())
         icn = QIcon (":/Icons/kvantumpreview/data/kvantum.svg");
     setWindowIcon (icn);
-    ui->preview->setIcon(icn);
+    ui->preview->setIcon (icn);
 
-    resize (sizeHint().expandedTo (QSize (600, 400)));
+    /* The conf page is the largest and we want to avoid scrollbars in it
+       the first time it is shown. So, we force a layout calculation for it,
+       knowing that it is the current page in the ui file. */
+    setAttribute (Qt::WA_DontShowOnScreen);
+    show();
 }
 /*************************/
 KvantumManager::~KvantumManager()
@@ -179,6 +186,55 @@ KvantumManager::~KvantumManager()
     delete effect_;
 }
 /*************************/
+void KvantumManager::showWindow()
+{ // set the first page as the current page and really show the window
+    ui->toolBox->setCurrentIndex (0);
+    resize (minimumSizeHint().expandedTo (QSize (600, 400)));
+    hide();
+    setAttribute (Qt::WA_DontShowOnScreen, false);
+    QTimer::singleShot (0, this, [this] {
+        show();
+        raise();
+        activateWindow();
+    });
+}
+/*************************/
+void KvantumManager::fitThirdPageToContents()
+{
+     /* Avoid scrollbars in the conf page.
+        NOTE: The layout of the conf page should be completely
+              calculated when this function is called. */
+    if (auto viewport = ui->toolBox->widget (2)->parentWidget())
+    {
+        if (auto scrollArea = qobject_cast<QAbstractScrollArea*>(viewport->parentWidget()))
+        {
+            QSize diff = viewport->childrenRect().size() - scrollArea->size();
+            if (diff.width() > 0 || diff.height() > 0)
+            {
+                QSize newSize = size().expandedTo (size() + diff);
+                QRect sr;
+                if (QWindow *win = windowHandle())
+                {
+                    if (QScreen *sc = win->screen())
+                        sr = sc->availableGeometry();
+                }
+                if (sr.isNull())
+                {
+                    if (QScreen *pScreen = QApplication::primaryScreen())
+                        sr = pScreen->availableGeometry();
+                }
+                if (!sr.isNull())
+                {
+                    newSize = newSize.boundedTo (sr.size()
+                                                 // the window frame size
+                                                 - (frameGeometry().size() - size()));
+                }
+                resize (newSize);
+            }
+        }
+    }
+}
+/*************************/
 void KvantumManager::closeEvent (QCloseEvent *event)
 {
     process_->terminate();
@@ -186,14 +242,28 @@ void KvantumManager::closeEvent (QCloseEvent *event)
     event->accept();
 }
 /*************************/
+bool KvantumManager::eventFilter (QObject *watched, QEvent *event)
+{
+    /* prevent the conf from being scrolled
+       when its tab bar is scrolled by the mouse wheel
+       (actually, this is a workaround for a Qt problem) */
+    if (event->type() == QEvent::Wheel
+        && watched == ui->toolBox->widget (2)->parentWidget()
+        && ui->tabWidget->tabBar()->underMouse())
+    {
+        return true;
+    }
+    return QMainWindow::eventFilter (watched, event);
+}
+/*************************/
 QString KvantumManager::tooTipToWhatsThis (const QString &tip)
 {
     if (tip.isEmpty()) return QString();
     QStringList simplified;
-    QStringList paragraphs = tip.split("\n\n");
+    QStringList paragraphs = tip.split ("\n\n");
     for (int i = 0; i < paragraphs.size(); ++i)
         simplified.append (paragraphs.at (i).simplified());
-    return simplified.join("\n\n");
+    return simplified.join ("\n\n");
 }
 /*************************/
 void KvantumManager::openTheme()
@@ -270,8 +340,8 @@ bool KvantumManager::fileBelongsToThemeDir (const QString &fileBaseName, const Q
             return false;
         if ((fileBaseName == themeName
              || fileBaseName == themeName + "Dark") // dark theme inside light theme folder
-            && (QFile::exists (folderPath + QString("/%1.kvconfig").arg (fileBaseName))
-                || QFile::exists (folderPath + QString("/%1.svg").arg (fileBaseName))))
+            && (QFile::exists (folderPath + QString ("/%1.kvconfig").arg (fileBaseName))
+                || QFile::exists (folderPath + QString ("/%1.svg").arg (fileBaseName))))
         {
             return true;
         }
@@ -674,9 +744,9 @@ void KvantumManager::deleteTheme()
         return;
 
     QString lightTheme;
-    if (theme.length() > 4 && theme.endsWith("Dark"))
+    if (theme.length() > 4 && theme.endsWith ("Dark"))
     { // dark theme inside light theme folder
-      lightTheme = theme.left(theme.length() - 4);
+      lightTheme = theme.left (theme.length() - 4);
     }
 
     QString homeDir = QDir::homePath();
@@ -973,7 +1043,7 @@ void KvantumManager::defaultThemeButtons()
         if (index > 5 || index < 0) index = 0;
     }
     ui->comboDialogButton->setCurrentIndex (index);
-    ui->comboX11Drag->setCurrentIndex(toDrag(defaultSettings.value("x11drag").toString()));
+    ui->comboX11Drag->setCurrentIndex (toDrag (defaultSettings.value ("x11drag").toString()));
     if (defaultSettings.contains ("respect_DE"))
         ui->checkBoxDE->setChecked (defaultSettings.value ("respect_DE").toBool());
     else
@@ -1037,19 +1107,19 @@ void KvantumManager::defaultThemeButtons()
     tmp = 16;
     if (defaultSettings.contains ("small_icon_size"))
         tmp = defaultSettings.value ("small_icon_size").toInt();
-    tmp = qMin(qMax(tmp,16), 48);
+    tmp = qMin (qMax (tmp,16), 48);
     ui->spinSmall->setValue (tmp);
 
     tmp = 32;
     if (defaultSettings.contains ("large_icon_size"))
         tmp = defaultSettings.value ("large_icon_size").toInt();
-    tmp = qMin(qMax(tmp,24), 128);
+    tmp = qMin (qMax (tmp,24), 128);
     ui->spinLarge->setValue (tmp);
 
     tmp = 16;
     if (defaultSettings.contains ("button_icon_size"))
         tmp = defaultSettings.value ("button_icon_size").toInt();
-    tmp = qMin(qMax(tmp,16), 64);
+    tmp = qMin (qMax (tmp,16), 64);
     ui->spinButton->setValue (tmp);
 
     tmp = 22;
@@ -1057,37 +1127,37 @@ void KvantumManager::defaultThemeButtons()
         tmp = defaultSettings.value ("toolbar_icon_size").toInt();
     else if (defaultSettings.value ("slim_toolbars").toBool())
         tmp = 16;
-    tmp = qMin(qMax(tmp,16), 64);
+    tmp = qMin (qMax (tmp,16), 64);
     ui->spinToolbar->setValue (tmp);
 
     tmp = 2;
     if (defaultSettings.contains ("layout_spacing"))
         tmp = defaultSettings.value ("layout_spacing").toInt();
-    tmp = qMin(qMax(tmp,2), 16);
+    tmp = qMin (qMax (tmp,2), 16);
     ui->spinLayout->setValue (tmp);
 
     tmp = 4;
     if (defaultSettings.contains ("layout_margin"))
         tmp = defaultSettings.value ("layout_margin").toInt();
-    tmp = qMin(qMax(tmp,2), 16);
+    tmp = qMin (qMax (tmp,2), 16);
     ui->spinLayoutMargin->setValue (tmp);
 
     tmp = 0;
     if (defaultSettings.contains ("submenu_overlap"))
         tmp = defaultSettings.value ("submenu_overlap").toInt();
-    tmp = qMin(qMax(tmp,0), 16);
+    tmp = qMin (qMax (tmp,0), 16);
     ui->spinOverlap->setValue (tmp);
 
     tmp = 16;
     if (defaultSettings.contains ("spin_button_width"))
         tmp = defaultSettings.value ("spin_button_width").toInt();
-    tmp = qMin(qMax(tmp,16), 32);
+    tmp = qMin (qMax (tmp,16), 32);
     ui->spinSpinBtnWidth->setValue (tmp);
 
     tmp = 36;
     if (defaultSettings.contains ("scroll_min_extent"))
         tmp = defaultSettings.value ("scroll_min_extent").toInt();
-    tmp = qMin(qMax(tmp,16), 100);
+    tmp = qMin (qMax (tmp,16), 100);
     ui->spinMinScrollLength->setValue (tmp);
 
     defaultSettings.endGroup();
@@ -1111,8 +1181,9 @@ void KvantumManager::restyleWindow()
         QEvent event (QEvent::ThemeChange);
         QApplication::sendEvent (widget, &event);
     }
-    /* this may be needed if the previous theme didn't have combo menus */
+
     QTimer::singleShot (0, this, [this] {
+        /* this may be needed if the previous theme didn't have combo menus */
         for (int i = 0; i < 2; ++i)
         {
             QComboBox *combo = (i == 0 ? ui->comboBox : ui->appCombo);
@@ -1142,6 +1213,9 @@ void KvantumManager::restyleWindow()
                 cv->setPalette (palette);
             }
         }
+        /* avoid scrollbars in the conf page */
+        if (ui->toolBox->currentIndex() == 2)
+            fitThirdPageToContents();
     });
 }
 /*************************/
@@ -1216,7 +1290,7 @@ void KvantumManager::tabChanged (int index)
                     copyRootTheme (QString(), kvconfigTheme_);
                 else // a root theme
                 {
-                    QString rootDir = rootThemeDir(kvconfigTheme_);
+                    QString rootDir = rootThemeDir (kvconfigTheme_);
                     themeConfig = QString ("%1/%2.kvconfig").arg (rootDir).arg (kvconfigTheme_);
                 }
             }
@@ -1300,7 +1374,7 @@ void KvantumManager::tabChanged (int index)
                     ui->comboDialogButton->setCurrentIndex (index);
                 }
                 if (themeSettings.contains ("x11drag"))
-                    ui->comboX11Drag->setCurrentIndex(toDrag(themeSettings.value("x11drag").toString()));
+                    ui->comboX11Drag->setCurrentIndex(toDrag (themeSettings.value ("x11drag").toString()));
                 if (themeSettings.contains ("respect_DE"))
                     ui->checkBoxDE->setChecked (themeSettings.value ("respect_DE").toBool());
                 if (themeSettings.contains ("inline_spin_indicators"))
@@ -1368,25 +1442,25 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("small_icon_size"))
                 {
                     int icnSize = themeSettings.value ("small_icon_size").toInt();
-                    icnSize = qMin(qMax(icnSize,16), 48);
+                    icnSize = qMin (qMax (icnSize,16), 48);
                     ui->spinSmall->setValue (icnSize);
                 }
                 if (themeSettings.contains ("large_icon_size"))
                 {
                     int icnSize = themeSettings.value ("large_icon_size").toInt();
-                    icnSize = qMin(qMax(icnSize,24), 128);
+                    icnSize = qMin (qMax (icnSize,24), 128);
                     ui->spinLarge->setValue (icnSize);
                 }
                 if (themeSettings.contains ("button_icon_size"))
                 {
                     int icnSize = themeSettings.value ("button_icon_size").toInt();
-                    icnSize = qMin(qMax(icnSize,16), 64);
+                    icnSize = qMin (qMax (icnSize,16), 64);
                     ui->spinButton->setValue (icnSize);
                 }
                 if (themeSettings.contains ("toolbar_icon_size"))
                 {
                     int icnSize = themeSettings.value ("toolbar_icon_size").toInt();
-                    icnSize = qMin(qMax(icnSize,16), 64);
+                    icnSize = qMin (qMax (icnSize,16), 64);
                     ui->spinToolbar->setValue (icnSize);
                 }
                 else if (themeSettings.contains ("slim_toolbars"))
@@ -1394,31 +1468,31 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("layout_spacing"))
                 {
                     int theSize = themeSettings.value ("layout_spacing").toInt();
-                    theSize = qMin(qMax(theSize,2), 16);
+                    theSize = qMin (qMax (theSize,2), 16);
                     ui->spinLayout->setValue (theSize);
                 }
                 if (themeSettings.contains ("layout_margin"))
                 {
                     int theSize = themeSettings.value ("layout_margin").toInt();
-                    theSize = qMin(qMax(theSize,2), 16);
+                    theSize = qMin (qMax (theSize,2), 16);
                     ui->spinLayoutMargin->setValue (theSize);
                 }
                 if (themeSettings.contains ("submenu_overlap"))
                 {
                     int theSize = themeSettings.value ("submenu_overlap").toInt();
-                    theSize = qMin(qMax(theSize,0), 16);
+                    theSize = qMin (qMax (theSize,0), 16);
                     ui->spinOverlap->setValue (theSize);
                 }
                 if (themeSettings.contains ("spin_button_width"))
                 {
                     int theSize = themeSettings.value ("spin_button_width").toInt();
-                    theSize = qMin(qMax(theSize,16), 32);
+                    theSize = qMin (qMax (theSize,16), 32);
                     ui->spinSpinBtnWidth->setValue (theSize);
                 }
                 if (themeSettings.contains ("scroll_min_extent"))
                 {
                     int theSize = themeSettings.value ("scroll_min_extent").toInt();
-                    theSize = qMin(qMax(theSize,16), 100);
+                    theSize = qMin (qMax (theSize,16), 100);
                     ui->spinMinScrollLength->setValue (theSize);
                 }
                 themeSettings.endGroup();
@@ -1480,38 +1554,12 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxPattern->setEnabled (false);
         }
 
-        trantsientScrollbarEnbled(ui->checkBoxTransient->isChecked());
+        trantsientScrollbarEnbled (ui->checkBoxTransient->isChecked());
 
-        if (!confPageVisited_)
-        { // here we try to avoid scrollbars as far as possible but there is no exact way for that
-            QStyle *style = QApplication::style();
-            int textIconHeight = qMax (style->pixelMetric (QStyle::PM_SmallIconSize),
-                                       QFontMetrics(font()).height());
-            QSize newSize = size().expandedTo (ui->groupBox->sizeHint()
-                              + QSize (4*style->pixelMetric (QStyle::PM_LayoutLeftMargin)
-                                           + style->pixelMetric (QStyle::PM_ScrollBarExtent),
-                                       2*ui->saveButton->sizeHint().height()
-                                         + ui->statusBar->sizeHint().height()
-                                         + ui->configLabel->sizeHint().height()
-                                         + (2+3)*style->pixelMetric (QStyle::PM_LayoutBottomMargin)
-                                         + (4+3)*style->pixelMetric (QStyle::PM_LayoutVerticalSpacing)
-                                         + 6*textIconHeight
-                                         + (ui->restoreButton->isEnabled() ? textIconHeight : 0)));
-            QRect sr;
-            if (QWindow *win = windowHandle())
-            {
-                if (QScreen *sc = win->screen())
-                    sr = sc->virtualGeometry();
-            }
-            if (sr.isNull())
-            {
-                if (QScreen *pScreen = QApplication::primaryScreen())
-                    sr = pScreen->virtualGeometry();
-            }
-            if (!sr.isNull())
-                newSize = newSize.boundedTo (sr.size());
-            resize (newSize);
+        if (!confPageVisited_ )
+        {
             confPageVisited_ = true;
+            fitThirdPageToContents();
         }
     }
 }
@@ -1911,7 +1959,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
             bool nonexistent = false;
             for (int i = 0; i < appThemes.count(); ++i)
             {
-                appList = settings.value (appThemes.at(i)).toStringList();
+                appList = settings.value (appThemes.at (i)).toStringList();
                 appList.removeDuplicates();
                 appTheme = appThemes.at (i);
                 if (appTheme.endsWith ("#"))
@@ -2124,85 +2172,85 @@ void KvantumManager::writeConfig()
         **************************************************************************/
         QMap<QString, QString> hackKeys, hackKeysMissing, generalKeys, generalKeysMissing;
         QString str;
-        hackKeys.insert("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
-        hackKeys.insert("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfmSide->isChecked()));
-        hackKeys.insert("transparent_pcmanfm_view", boolToStr (ui->checkBoxPcmanfmView->isChecked()));
-        hackKeys.insert("blur_translucent", boolToStr (ui->checkBoxBlurTranslucent->isChecked()));
-        hackKeys.insert("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
-        hackKeys.insert("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
-        hackKeys.insert("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
-        hackKeys.insert("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
-        hackKeys.insert("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
-        hackKeys.insert("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));
-        hackKeys.insert("kinetic_scrolling", boolToStr (ui->checkBoxKineticScrolling->isChecked()));
-        hackKeys.insert("scroll_jump_workaround", boolToStr (ui->checkBoxJumpWorkaround->isChecked()));
-        hackKeys.insert("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
-        hackKeys.insert("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
-        hackKeys.insert("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
-        hackKeys.insert("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
-        hackKeys.insert("no_selection_tint", boolToStr (ui->checkBoxTint->isChecked()));
-        hackKeys.insert("opaque_colors", boolToStr (ui->checkBoxOpaqueColors->isChecked()));
-        hackKeys.insert("tint_on_mouseover", str.setNum (ui->spinTint->value()));
-        hackKeys.insert("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
-        hackKeys.insert("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
+        hackKeys.insert ("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
+        hackKeys.insert ("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfmSide->isChecked()));
+        hackKeys.insert ("transparent_pcmanfm_view", boolToStr (ui->checkBoxPcmanfmView->isChecked()));
+        hackKeys.insert ("blur_translucent", boolToStr (ui->checkBoxBlurTranslucent->isChecked()));
+        hackKeys.insert ("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
+        hackKeys.insert ("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
+        hackKeys.insert ("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
+        hackKeys.insert ("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
+        hackKeys.insert ("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
+        hackKeys.insert ("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));
+        hackKeys.insert ("kinetic_scrolling", boolToStr (ui->checkBoxKineticScrolling->isChecked()));
+        hackKeys.insert ("scroll_jump_workaround", boolToStr (ui->checkBoxJumpWorkaround->isChecked()));
+        hackKeys.insert ("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
+        hackKeys.insert ("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
+        hackKeys.insert ("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
+        hackKeys.insert ("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
+        hackKeys.insert ("no_selection_tint", boolToStr (ui->checkBoxTint->isChecked()));
+        hackKeys.insert ("opaque_colors", boolToStr (ui->checkBoxOpaqueColors->isChecked()));
+        hackKeys.insert ("tint_on_mouseover", str.setNum (ui->spinTint->value()));
+        hackKeys.insert ("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
+        hackKeys.insert ("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
 
-        generalKeys.insert("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
-        generalKeys.insert("animate_states", boolToStr (ui->checkBoxAnimation->isChecked()));
-        generalKeys.insert("no_window_pattern", boolToStr (ui->checkBoxPattern->isChecked()));
-        generalKeys.insert("no_inactiveness", boolToStr (ui->checkBoxInactiveness->isChecked()));
-        generalKeys.insert("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
-        generalKeys.insert("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
-        generalKeys.insert("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
-        generalKeys.insert("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
-        generalKeys.insert("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
-        generalKeys.insert("transient_groove", boolToStr (ui->checkBoxTransientGroove->isChecked()));
-        generalKeys.insert("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
-        generalKeys.insert("no_focus_rect", boolToStr (ui->checkBoxFocusRect->isChecked()));
-        generalKeys.insert("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
-        generalKeys.insert("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
-        generalKeys.insert("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
-        generalKeys.insert("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
-        generalKeys.insert("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
-        generalKeys.insert("group_toolbar_buttons", boolToStr (ui->checkBoxGroupToolbar->isChecked()));
-        generalKeys.insert("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
-        generalKeys.insert("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
-        generalKeys.insert("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
-        generalKeys.insert("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
-        generalKeys.insert("click_behavior", str.setNum (ui->comboClick->currentIndex()));
-        generalKeys.insert("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
-        generalKeys.insert("dialog_button_layout", str.setNum (ui->comboDialogButton->currentIndex()));
-        generalKeys.insert("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
-        generalKeys.insert("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
-        generalKeys.insert("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
-        generalKeys.insert("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
-        generalKeys.insert("combo_as_lineedit", boolToStr (ui->checkBoxComboEdit->isChecked()));
-        generalKeys.insert("combo_menu", boolToStr (ui->checkBoxComboMenu->isChecked()));
-        generalKeys.insert("hide_combo_checkboxes", boolToStr (ui->checkBoxHideComboCheckboxes->isChecked()));
-        generalKeys.insert("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
-        generalKeys.insert("reduce_window_opacity", str.setNum (ui->spinReduceOpacity->value()));
-        generalKeys.insert("reduce_menu_opacity", str.setNum (ui->spinReduceMenuOpacity->value()));
-        generalKeys.insert("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
-        generalKeys.insert("shadowless_popup", boolToStr (ui->checkBoxShadowlessPopup->isChecked()));
-        generalKeys.insert("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
+        generalKeys.insert ("composite", boolToStr (!ui->checkBoxNoComposite->isChecked()));
+        generalKeys.insert ("animate_states", boolToStr (ui->checkBoxAnimation->isChecked()));
+        generalKeys.insert ("no_window_pattern", boolToStr (ui->checkBoxPattern->isChecked()));
+        generalKeys.insert ("no_inactiveness", boolToStr (ui->checkBoxInactiveness->isChecked()));
+        generalKeys.insert ("left_tabs", boolToStr (ui->checkBoxleftTab->isChecked()));
+        generalKeys.insert ("joined_inactive_tabs", boolToStr (ui->checkBoxJoinTab->isChecked()));
+        generalKeys.insert ("scroll_arrows", boolToStr (!ui->checkBoxNoScrollArrow->isChecked()));
+        generalKeys.insert ("scrollbar_in_view", boolToStr (ui->checkBoxScrollIn->isChecked()));
+        generalKeys.insert ("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
+        generalKeys.insert ("transient_groove", boolToStr (ui->checkBoxTransientGroove->isChecked()));
+        generalKeys.insert ("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
+        generalKeys.insert ("no_focus_rect", boolToStr (ui->checkBoxFocusRect->isChecked()));
+        generalKeys.insert ("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
+        generalKeys.insert ("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
+        generalKeys.insert ("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
+        generalKeys.insert ("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
+        generalKeys.insert ("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
+        generalKeys.insert ("group_toolbar_buttons", boolToStr (ui->checkBoxGroupToolbar->isChecked()));
+        generalKeys.insert ("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
+        generalKeys.insert ("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
+        generalKeys.insert ("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
+        generalKeys.insert ("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
+        generalKeys.insert ("click_behavior", str.setNum (ui->comboClick->currentIndex()));
+        generalKeys.insert ("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
+        generalKeys.insert ("dialog_button_layout", str.setNum (ui->comboDialogButton->currentIndex()));
+        generalKeys.insert ("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
+        generalKeys.insert ("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
+        generalKeys.insert ("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
+        generalKeys.insert ("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
+        generalKeys.insert ("combo_as_lineedit", boolToStr (ui->checkBoxComboEdit->isChecked()));
+        generalKeys.insert ("combo_menu", boolToStr (ui->checkBoxComboMenu->isChecked()));
+        generalKeys.insert ("hide_combo_checkboxes", boolToStr (ui->checkBoxHideComboCheckboxes->isChecked()));
+        generalKeys.insert ("translucent_windows", boolToStr (ui->checkBoxTrans->isChecked()));
+        generalKeys.insert ("reduce_window_opacity", str.setNum (ui->spinReduceOpacity->value()));
+        generalKeys.insert ("reduce_menu_opacity", str.setNum (ui->spinReduceMenuOpacity->value()));
+        generalKeys.insert ("popup_blurring", boolToStr (ui->checkBoxBlurPopup->isChecked()));
+        generalKeys.insert ("shadowless_popup", boolToStr (ui->checkBoxShadowlessPopup->isChecked()));
+        generalKeys.insert ("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
 
-        generalKeys.insert("contrast", str.setNum (ui->spinContrast->value(), 'f', 2));
-        generalKeys.insert("intensity", str.setNum (ui->spinIntensity->value(), 'f', 2));
-        generalKeys.insert("saturation", str.setNum (ui->spinSaturation->value(), 'f', 2));
+        generalKeys.insert ("contrast", str.setNum (ui->spinContrast->value(), 'f', 2));
+        generalKeys.insert ("intensity", str.setNum (ui->spinIntensity->value(), 'f', 2));
+        generalKeys.insert ("saturation", str.setNum (ui->spinSaturation->value(), 'f', 2));
 
-        generalKeys.insert("small_icon_size", str.setNum (ui->spinSmall->value()));
-        generalKeys.insert("large_icon_size", str.setNum (ui->spinLarge->value()));
-        generalKeys.insert("button_icon_size", str.setNum (ui->spinButton->value()));
-        generalKeys.insert("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
-        generalKeys.insert("layout_spacing", str.setNum (ui->spinLayout->value()));
-        generalKeys.insert("layout_margin", str.setNum (ui->spinLayoutMargin->value()));
-        generalKeys.insert("submenu_overlap", str.setNum (ui->spinOverlap->value()));
-        generalKeys.insert("spin_button_width", str.setNum (ui->spinSpinBtnWidth->value()));
-        generalKeys.insert("scroll_min_extent", str.setNum (ui->spinMinScrollLength->value()));
+        generalKeys.insert ("small_icon_size", str.setNum (ui->spinSmall->value()));
+        generalKeys.insert ("large_icon_size", str.setNum (ui->spinLarge->value()));
+        generalKeys.insert ("button_icon_size", str.setNum (ui->spinButton->value()));
+        generalKeys.insert ("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
+        generalKeys.insert ("layout_spacing", str.setNum (ui->spinLayout->value()));
+        generalKeys.insert ("layout_margin", str.setNum (ui->spinLayoutMargin->value()));
+        generalKeys.insert ("submenu_overlap", str.setNum (ui->spinOverlap->value()));
+        generalKeys.insert ("spin_button_width", str.setNum (ui->spinSpinBtnWidth->value()));
+        generalKeys.insert ("scroll_min_extent", str.setNum (ui->spinMinScrollLength->value()));
 
         QString opaque = ui->opaqueEdit->text();
         opaque = opaque.simplified();
         opaque.remove (" ");
-        generalKeys.insert("opaque", opaque);
+        generalKeys.insert ("opaque", opaque);
 
         themeSettings.beginGroup ("Hacks");
         bool restyle = false;
@@ -2211,8 +2259,8 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("middle_click_scroll").toBool() != ui->checkBoxScrollJump->isChecked()
             || themeSettings.value ("kinetic_scrolling").toBool() != ui->checkBoxKineticScrolling->isChecked()
             || themeSettings.value ("opaque_colors").toBool() != ui->checkBoxOpaqueColors->isChecked()
-            || qMin(qMax(themeSettings.value ("tint_on_mouseover").toInt(),0),100) != ui->spinTint->value()
-            || qMin(qMax(themeSettings.value ("disabled_icon_opacity").toInt(),0),100) != ui->spinOpacity->value())
+            || qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(),0),100) != ui->spinTint->value()
+            || qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(),0),100) != ui->spinOpacity->value())
         {
             restyle = true;
         }
@@ -2232,20 +2280,20 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
-            || qMin(qMax(themeSettings.value ("reduce_window_opacity").toInt(),0),90) != ui->spinReduceOpacity->value()
-            || qMin(qMax(themeSettings.value ("reduce_menu_opacity").toInt(),0),90) != ui->spinReduceMenuOpacity->value()
+            || qMin (qMax (themeSettings.value ("reduce_window_opacity").toInt(),0),90) != ui->spinReduceOpacity->value()
+            || qMin (qMax (themeSettings.value ("reduce_menu_opacity").toInt(),0),90) != ui->spinReduceMenuOpacity->value()
             || themeSettings.value ("blurring").toBool() != ui->checkBoxBlurWindow->isChecked()
             || themeSettings.value ("popup_blurring").toBool() != ui->checkBoxBlurPopup->isChecked()
             || themeSettings.value ("shadowless_popup").toBool() != ui->checkBoxShadowlessPopup->isChecked()
 
-            || qBound(static_cast<qreal>(0), themeSettings.value ("contrast").toReal(), static_cast<qreal>(2))
+            || qBound (static_cast<qreal>(0), themeSettings.value ("contrast").toReal(), static_cast<qreal>(2))
                != static_cast<qreal>(ui->spinContrast->value())
-            || qBound(static_cast<qreal>(0), themeSettings.value ("intensity").toReal(), static_cast<qreal>(2))
+            || qBound (static_cast<qreal>(0), themeSettings.value ("intensity").toReal(), static_cast<qreal>(2))
                != static_cast<qreal>(ui->spinIntensity->value())
-            || qBound(static_cast<qreal>(0), themeSettings.value ("saturation").toReal(), static_cast<qreal>(2))
+            || qBound (static_cast<qreal>(0), themeSettings.value ("saturation").toReal(), static_cast<qreal>(2))
                != static_cast<qreal>(ui->spinSaturation->value())
 
-            || toDrag(themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
+            || toDrag (themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
@@ -2262,11 +2310,11 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("no_focus_rect").toBool() != ui->checkBoxFocusRect->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
-            || qMin(qMax(themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
-            || qMin(qMax(themeSettings.value ("layout_spacing").toInt(),2),16) != ui->spinLayout->value()
-            || qMin(qMax(themeSettings.value ("layout_margin").toInt(),2),16) != ui->spinLayoutMargin->value()
-            || qMin(qMax(themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value()
-            || qMin(qMax(themeSettings.value ("scroll_min_extent").toInt(),16),100) != ui->spinMinScrollLength->value())
+            || qMin (qMax (themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
+            || qMin (qMax (themeSettings.value ("layout_spacing").toInt(),2),16) != ui->spinLayout->value()
+            || qMin (qMax (themeSettings.value ("layout_margin").toInt(),2),16) != ui->spinLayoutMargin->value()
+            || qMin (qMax (themeSettings.value ("spin_button_width").toInt(),16),32) != ui->spinSpinBtnWidth->value()
+            || qMin (qMax (themeSettings.value ("scroll_min_extent").toInt(),16),100) != ui->spinMinScrollLength->value())
         {
             restyle = true;
         }
@@ -2376,7 +2424,7 @@ void KvantumManager::writeConfig()
                 return;
             QTextStream out (&file);
             for (int i = 0; i < lines.count(); ++i)
-                out << lines.at(i) << "\n";
+                out << lines.at (i) << "\n";
             file.close();
         }
 
@@ -2476,7 +2524,7 @@ void KvantumManager::removeAppList()
 {
     appThemes_.clear();
     ui->removeAppButton->setEnabled (false);
-    ui->appsEdit->setText("");
+    ui->appsEdit->setText ("");
 }
 /*************************/
 void KvantumManager::restoreDefault()
@@ -2507,7 +2555,7 @@ void KvantumManager::restoreDefault()
     }
     else
     {
-        _kvconfigTheme_.remove (QString("#"));
+        _kvconfigTheme_.remove (QString ("#"));
         QString rootDir = rootThemeDir (_kvconfigTheme_);
         QString _themeConfig = QString ("%1/%2.kvconfig").arg (rootDir).arg (_kvconfigTheme_);
         if (!rootDir.isEmpty() && QFile::exists (_themeConfig))
@@ -2592,7 +2640,7 @@ void KvantumManager::respectDE (bool checked)
     else
     {
         QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-        if (gtkDesktops.contains(desktop_))
+        if (gtkDesktops.contains (desktop_))
         {
             //ui->labelX11Drag->setEnabled (!checked);
             //ui->comboX11Drag->setEnabled (!checked);
@@ -2609,8 +2657,8 @@ void KvantumManager::respectDE (bool checked)
                               && !checked);
             ui->opaqueLabel->setEnabled (enableTrans);
             ui->opaqueEdit->setEnabled (enableTrans);
-            ui->reduceOpacityLabel->setEnabled(enableTrans);
-            ui->spinReduceOpacity->setEnabled(enableTrans);
+            ui->reduceOpacityLabel->setEnabled (enableTrans);
+            ui->spinReduceOpacity->setEnabled (enableTrans);
             ui->checkBoxBlurWindow->setEnabled (enableTrans);
         }
         else ui->checkBoxDE->setEnabled (false);
