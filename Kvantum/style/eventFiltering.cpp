@@ -1160,14 +1160,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         // prevent the menu from switching to another screen
         if (!sg.isEmpty() && QApplication::screens().size() > 1)
         {
-          if (g.top() + DY < sg.top())
+          if (g.top() + DY < sg.top() && g.top() >= sg.top())
             DY = sg.top() - g.top();
           if (w->layoutDirection() == Qt::RightToLeft)
           {
-            if (g.right() + DX > sg.right())
+            if (g.right() + DX > sg.right() && g.right() <= sg.right())
               DX = sg.right() - g.right();
           }
-          else if (g.left() + DX < sg.left())
+          else if (g.left() + DX < sg.left() && g.left() >= sg.left())
             DX = sg.left() - g.left();
         }
 
