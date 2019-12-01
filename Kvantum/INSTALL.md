@@ -58,6 +58,12 @@ Tumbleweed users can also install Kvantum in this way (thanks to trmdi at GitHub
     sudo zypper in -r trmdi kvantum
 
 ----------
+Fedora (29-31)/Rawhide users can install Kvantum in this way:
+
+    sudo dnf copr enable ashahir05/kvantum
+    sudo dnf install Kvantum
+
+----------
 
 There are two ways to compile Kvantum: with `qmake` or with `cmake`.
 
