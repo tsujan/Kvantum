@@ -40,6 +40,14 @@ In Red Hat based systems like Fedora:
  * qt5-qttools-devel
  * kf5-kwindowsystem-devel (required with Qt >= 5.11)
 
+----------
+Fedora (29-31)/Rawhide users can also install Kvantum in this way:
+
+    sudo dnf copr enable ashahir05/kvantum
+    sudo dnf install Kvantum
+
+----------
+
 And, finally, in OpenSUSE:
 
  * gcc-c++
@@ -56,12 +64,6 @@ Tumbleweed users can also install Kvantum in this way (thanks to trmdi at GitHub
 
     sudo zypper ar obs://home:trmdi trmdi
     sudo zypper in -r trmdi kvantum
-
-----------
-Fedora (29-31)/Rawhide users can install Kvantum in this way:
-
-    sudo dnf copr enable ashahir05/kvantum
-    sudo dnf install Kvantum
 
 ----------
 
@@ -99,14 +101,14 @@ If you have used `cmake` for compilation, to compile Kvantum again, first remove
 
 # Usage
 
-## In KDE:
+### In KDE:
 
  1. Select Kvantum from *System Settings → Application Style → Widget Style* and apply it.
  2. Select Kvantum from *System Settings → Color → Scheme* and click Apply. You could change the color scheme later if you choose another Kvantum theme with *Kvantum Manager* (see "Using Other Themes" below).
 
 Logging out and in would be good for Plasma to see the new theme.
 
-## In LXQt:
+### In LXQt:
 
 Just select *kvantum* from *Configuration Center → Appearance → Widget Style*. Kvantum Manager is also shown in Configuration Center for changing the Kvantum theme.
 
@@ -115,7 +117,7 @@ In case you use Compton as the X compositor (not recommended), be sure to disabl
     shadow-exclude = [ "argb && (_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
     blur-background-exclude = [ "(_NET_WM_WINDOW_TYPE@:a *= 'MENU' || _NET_WM_WINDOW_TYPE@:a *= 'COMBO')" ];
 
-## In Other DEs:
+### In Other DEs:
 
 In desktop environments that do not have a Qt5 configuration utility, you could use this command to run a Qt5 application APP:
 
@@ -127,13 +129,13 @@ Or, better, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For e
 
 If the display manager you use does not source `~/.profile`, you could probably add the above line to `~/.xsessionrc`. The last resort is `/etc/environment` but most desktop environments have GUI tools for setting environment variables.
 
-## Using Other Themes
+### Using Other Themes
 
 To select or install (as user) Kvantum themes, use *Kvantum Manager*, which is already installed and is available in the start menu as a utility app. It explains each step in a straightforward way. With it, you could not only switch between themes easily but also select themes for specific applications.
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 
-## (KWin) Blur Effect
+### (KWin) Blur Effect
 
 The blur effect of any compositor can be used with Kvantum when its active theme has translucent backgrounds. However, Kvantum can control KWin's blur effect with translucent menus and tooltips as well as explicitly translucent windows (like those of QTerminal, Konsole or LXQt Panel). Enabling blur options in *Kvantum Manager* has effect only when KWin's blur effect is enabled; otherwise, there will be no blurring or another compositor will control how translucent backgrounds are blurred.
 

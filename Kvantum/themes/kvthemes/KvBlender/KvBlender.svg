@@ -996,6 +996,7 @@
 <path style="fill:#505050" d="m 227,295 7,9 7,-9 z"/>
 <path style="fill:#505050" d="m 227,291 7,-9 7,9 z"/>
 </g>
+<use width="100%" height="100%" style="opacity:.5" xlink:href="#carrow-normal" id="carrow-disabled" transform="translate(30)"/>
 <use width="100%" height="100%" style="opacity:.8" xlink:href="#arrow-down-normal" id="sarrow-down-normal" transform="translate(0,76)"/>
 <use width="100%" height="100%" xlink:href="#sarrow-down-normal" id="sarrow-up-normal" transform="matrix(1,0,0,-1,114,724.614)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#sarrow-down-normal" id="sarrow-down-disabled" transform="translate(56)"/>
