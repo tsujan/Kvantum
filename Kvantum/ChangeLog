@@ -1,4 +1,4 @@
-V0.12.2
+V0.13.0
 ---------
  * In tab size calculation, consider the actual tab icon size instead of PM_TabBarIconSize if it exists.
  * Don't decrease the minimum size of a spinbox if it's more than enough for its text.
@@ -8,6 +8,7 @@ V0.12.2
  * Prevent menus from switching to another screen with a multi-screen setup.
  * Avoid scrollbars in the third page of Kvantum Manager the first time it's shown.
  * Put menubar MDI buttons inside menubar frame.
+ * Don't show the arrow of a tool button with instant popup.
 
 V0.12.1
 ---------

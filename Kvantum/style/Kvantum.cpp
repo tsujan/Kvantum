@@ -2117,8 +2117,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                    && !(opt && (opt->features & QStyleOptionToolButton::MenuButtonPopup))
                    && !(tb
                         && (tb->popupMode() == QToolButton::MenuButtonPopup
-                            || ((tb->popupMode() == QToolButton::InstantPopup
-                                 || tb->popupMode() == QToolButton::DelayedPopup)
+                            || ((/*tb->popupMode() == QToolButton::InstantPopup
+                                 || */tb->popupMode() == QToolButton::DelayedPopup)
                                 && opt && (opt->features & QStyleOptionToolButton::HasMenu)))))
           {
             return; // not in paneledButtons
@@ -2229,8 +2229,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (tb->popupMode() != QToolButton::MenuButtonPopup)
           {
-            if ((tb->popupMode() == QToolButton::InstantPopup
-                 || tb->popupMode() == QToolButton::DelayedPopup)
+            if ((/*tb->popupMode() == QToolButton::InstantPopup
+                 || */tb->popupMode() == QToolButton::DelayedPopup)
                 && (opt->features & QStyleOptionToolButton::HasMenu))
             {
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
@@ -2330,8 +2330,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               pbStatus.append("-inactive");
           }*/
         }
-        else if ((tb->popupMode() == QToolButton::InstantPopup
-                  || tb->popupMode() == QToolButton::DelayedPopup)
+        else if ((/*tb->popupMode() == QToolButton::InstantPopup
+                  || */tb->popupMode() == QToolButton::DelayedPopup)
                  && opt && (opt->features & QStyleOptionToolButton::HasMenu))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
@@ -9404,8 +9404,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
           /* the right arrow is attached */
           if (tb->popupMode() == QToolButton::MenuButtonPopup
-              || ((tb->popupMode() == QToolButton::InstantPopup
-                   || tb->popupMode() == QToolButton::DelayedPopup)
+              || ((/*tb->popupMode() == QToolButton::InstantPopup
+                   || */tb->popupMode() == QToolButton::DelayedPopup)
                   && (opt->features & QStyleOptionToolButton::HasMenu)))
           {
             if (opt->direction == Qt::RightToLeft)
@@ -9629,8 +9629,8 @@ void Style::drawControl(QStyle::ControlElement element,
           {
             if (tb->popupMode() != QToolButton::MenuButtonPopup)
             {
-              if ((tb->popupMode() == QToolButton::InstantPopup
-                   || tb->popupMode() == QToolButton::DelayedPopup)
+              if ((/*tb->popupMode() == QToolButton::InstantPopup
+                   || */tb->popupMode() == QToolButton::DelayedPopup)
                   && (opt->features & QStyleOptionToolButton::HasMenu))
               {
                 if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
@@ -10116,8 +10116,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           /* only the indicator will be drawn at PE_IndicatorButtonDropDown */
           if (tb->popupMode() == QToolButton::MenuButtonPopup)
             drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
-          else if ((tb->popupMode() == QToolButton::InstantPopup
-                    || tb->popupMode() == QToolButton::DelayedPopup)
+          else if ((/*tb->popupMode() == QToolButton::InstantPopup
+                    || */tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
             QWidget *p = getParent(widget,1);
@@ -13471,8 +13471,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                           +dspec1.size+2*TOOL_BUTTON_ARROW_MARGIN
                           -pixelMetric(PM_MenuButtonIndicator); // added in qcommonstyle.cpp
           }
-          else if ((tb->popupMode() == QToolButton::InstantPopup
-                    || tb->popupMode() == QToolButton::DelayedPopup)
+          else if ((/*tb->popupMode() == QToolButton::InstantPopup
+                    || */tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
               s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
@@ -15470,8 +15470,8 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                                              rtl ? 0 : -fspec.right-dspec.size-2*TOOL_BUTTON_ARROW_MARGIN,
                                              0);
               }
-              else if ((tb->popupMode() == QToolButton::InstantPopup
-                        || tb->popupMode() == QToolButton::DelayedPopup)
+              else if ((/*tb->popupMode() == QToolButton::InstantPopup
+                        || */tb->popupMode() == QToolButton::DelayedPopup)
                        && (opt->features & QStyleOptionToolButton::HasMenu))
               {
                 const QString group = "PanelButtonTool";
@@ -15553,8 +15553,8 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 return QRect(rtl ? x : x+w-l,
                              y,l,h);
               }
-              else if ((tb->popupMode() == QToolButton::InstantPopup
-                        || tb->popupMode() == QToolButton::DelayedPopup)
+              else if ((/*tb->popupMode() == QToolButton::InstantPopup
+                        || */tb->popupMode() == QToolButton::DelayedPopup)
                        && (opt->features & QStyleOptionToolButton::HasMenu))
               {
                 const QString group = "PanelButtonTool";

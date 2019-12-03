@@ -1269,7 +1269,7 @@ void KvantumManager::tabChanged (int index)
                the default config below and this message will be correct. If neither themeConfig
                nor userSvg exists, this message will be replaced by the one that follows it. */
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
-                                      + QString ("<br><i>%1</b></i>").arg (themeConfig));
+                                      + QString ("<br><i>%1").arg (themeDir) + QString ("/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
             if (!QFile::exists (themeConfig) && !QFile::exists (userSvg))
             { // no user theme but a root one
                 ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
