@@ -1361,10 +1361,6 @@
 <path d="M 8,602.986 20,588 32,602.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#sarrow-up-pressed" id="sarrow-down-pressed" transform="matrix(1,0,0,-1,0,978)"/>
-<use width="100%" height="100%" xlink:href="#sarrow-down-normal" id="carrow-normal" transform="translate(170)"/>
-<use width="100%" height="100%" xlink:href="#sarrow-down-focused" id="carrow-focused" transform="translate(166)"/>
-<use width="100%" height="100%" xlink:href="#sarrow-down-disabled" id="carrow-disabled" transform="translate(149)"/>
-<use width="100%" height="100%" xlink:href="#arrow-down-pressed" id="carrow-toggled" transform="translate(156,64)"/>
 <use width="100%" height="100%" xlink:href="#sarrow-up-pressed" id="flat-arrow-up-pressed" transform="translate(0,-132)"/>
 <use width="100%" height="100%" xlink:href="#sarrow-down-pressed" id="flat-arrow-down-pressed" transform="translate(0,-132)"/>
 <g id="flat-arrow-up-focused" transform="translate(-0.507,-255.493)">
@@ -1428,4 +1424,20 @@
 <path style="opacity:.35;fill:#fff;fill-rule:evenodd" d="m 369,54 h -32 c 0,0 3.5,2 16,2 12.5,0 16,-2 16,-2 z"/>
 </g>
 <path style="fill-rule:evenodd" id="expand-button-focus" d="M 0,50 H 10 V 60 H 0 Z"/>
+<g id="carrow-normal" transform="translate(16,-1)">
+<path style="opacity:0" d="m 178,518 v -24 h 24 v 24 z"/>
+<path style="opacity:.75;color:#000" id="path2147" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
+<use width="100%" height="100%" xlink:href="#path2147" transform="matrix(1,0,0,-1,0,1011.9786)"/>
+</g>
+<g id="carrow-focused" transform="translate(48,-1)">
+<path style="opacity:0" d="m 178,518 v -24 h 24 v 24 z"/>
+<path style="fill:#0073e6;color:#000" id="path1898" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
+<use width="100%" height="100%" xlink:href="#path1898" transform="matrix(1,0,0,-1,0,1011.9786)"/>
+</g>
+<use width="100%" height="100%" style="opacity:.5" id="carrow-disabled" xlink:href="#carrow-normal" transform="translate(96)"/>
+<g id="carrow-toggled" transform="translate(80,-1)">
+<path style="opacity:0" d="m 178,518 v -24 h 24 v 24 z"/>
+<path style="opacity:.8;fill:#fff;color:#000" id="path4258" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
+<use width="100%" height="100%" xlink:href="#path4258" transform="matrix(1,0,0,-1,0,1011.9786)"/>
+</g>
 </svg>

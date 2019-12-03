@@ -234,6 +234,7 @@ text.margin.left=2
 text.margin.right=2
 text.margin.top=2
 text.margin.bottom=2
+indicator.element=larrow
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -465,6 +466,7 @@ frame.expansion=0
 
 [ComboBox]
 inherits=PanelButtonCommand
+indicator.element=carrow
 
 [Menu]
 inherits=PanelButtonCommand
