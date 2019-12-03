@@ -9,6 +9,7 @@ V0.13.0
  * Avoid scrollbars in the third page of Kvantum Manager the first time it's shown.
  * Put menubar MDI buttons inside menubar frame.
  * Don't show the arrow of a tool button with instant popup.
+ * Fixed an old problem in toolbars of dark-and-light themes.
 
 V0.12.1
 ---------

@@ -161,6 +161,7 @@ indicator.element=tarrow
 [ToolbarLineEdit]
 frame.element=tlineedit
 interior.element=tlineedit
+indicator.element=carrow
 
 [Dock]
 inherits=PanelButtonCommand

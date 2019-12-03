@@ -4121,27 +4121,36 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
         {
-          QString leGroup;
           if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
                || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               && getStylableToolbarContainer(cb->lineEdit(), true)
               && !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
                                  getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
-            leGroup = "ToolbarLineEdit";
+            fspec = getFrameSpec(QStringLiteral("ToolbarLineEdit"));
+            ispec = getInteriorSpec(QStringLiteral("ToolbarLineEdit"));
+            indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("ToolbarLineEdit"));
+            if (elementExists(dspec1.element+"-normal"))
+              dspec = dspec1;
+            else
+            { // fall back to LineEdit for backward compatibility
+              dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
+              if (elementExists(dspec1.element+"-normal"))
+                dspec = dspec1;
+            }
+            if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text),
+                               getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
+            {
+              dspec.element = "flat-"+dspec.element;
+            }
           }
           else
-            leGroup = "LineEdit";
-          fspec = getFrameSpec(leGroup);
-          ispec = getInteriorSpec(leGroup);
-          const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
-          if (elementExists(dspec1.element+"-normal"))
-            dspec = dspec1;
-          if (leGroup == "ToolbarLineEdit"
-              && enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text),
-                                getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
-            dspec.element = "flat-"+dspec.element;
+            fspec = getFrameSpec(QStringLiteral("LineEdit"));
+            ispec = getInteriorSpec(QStringLiteral("LineEdit"));
+            const indicator_spec dspec1 = getIndicatorSpec(QStringLiteral("LineEdit"));
+            if (elementExists(dspec1.element+"-normal"))
+              dspec = dspec1;
           }
           const label_spec lspec = getLabelSpec(QStringLiteral("LineEdit"));
           vOffset = (lspec.bottom-lspec.top)/2;
@@ -8450,24 +8459,6 @@ void Style::drawControl(QStyle::ControlElement element,
                 }
               }
 
-              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-              {
-                const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
-                for (QLineEdit *le : lineEdits)
-                {
-                  QPalette palette = le->palette();
-                  if (txtCol != palette.color(QPalette::Active,QPalette::Text))
-                  {
-                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
-                    palette.setColor(QPalette::Inactive,QPalette::Text, inactiveTxtCol);
-                    palette.setColor(QPalette::Disabled,QPalette::Text, disabledTxtCol);
-                    le->setPalette(palette);
-                  }
-                  else break; // all or nothing
-                }
-              }
-
               if (toolbarComboBox)
               {
                 txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
@@ -8487,8 +8478,26 @@ void Style::drawControl(QStyle::ControlElement element,
                       palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledTxtCol);
                       cb->setPalette(palette);
                     }
-                    else break;
+                    else break; // all or nothing
                   }
+                }
+              }
+
+              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+              {
+                const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
+                for (QLineEdit *le : lineEdits)
+                {
+                  QPalette palette = le->palette();
+                  if (txtCol != palette.color(QPalette::Active,QPalette::Text))
+                  {
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive,QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled,QPalette::Text, disabledTxtCol);
+                    le->setPalette(palette);
+                  }
+                  /* all of them should be checked because some may be inside combos */
                 }
               }
             }
@@ -8581,24 +8590,6 @@ void Style::drawControl(QStyle::ControlElement element,
                 }
               }
 
-              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-              {
-                const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
-                for (QLineEdit *le : lineEdits)
-                {
-                  QPalette palette = le->palette();
-                  if (palette.color(QPalette::Active, QPalette::Text) != txtCol)
-                  {
-                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
-                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
-                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-                    le->setPalette(palette);
-                  }
-                  else break; // all or nothing
-                }
-              }
-
               if (toolbarComboBox)
               {
                 txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
@@ -8619,6 +8610,23 @@ void Style::drawControl(QStyle::ControlElement element,
                       cb->setPalette(palette);
                     }
                     else break;
+                  }
+                }
+              }
+
+              if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+              {
+                const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
+                for (QLineEdit *le : lineEdits)
+                {
+                  QPalette palette = le->palette();
+                  if (palette.color(QPalette::Active, QPalette::Text) != txtCol)
+                  {
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+                    le->setPalette(palette);
                   }
                 }
               }
