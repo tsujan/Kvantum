@@ -12834,13 +12834,16 @@ int Style::styleHint(QStyle::StyleHint hint,
     }
 
     case SH_ToolButtonStyle : {
+      int res = QCommonStyle::styleHint(hint,option,widget,returnData);
+      if (res < 0 || res >= Qt::ToolButtonFollowStyle) // a bug in qt5ct
+        res = Qt::ToolButtonIconOnly;
       switch (tspec_.toolbutton_style) {
-        case 0 : return QCommonStyle::styleHint(hint,option,widget,returnData);
+        case 0 : return res;
         case 1 : return Qt::ToolButtonIconOnly;
         case 2 : return Qt::ToolButtonTextOnly;
         case 3 : return Qt::ToolButtonTextBesideIcon;
         case 4 : return Qt::ToolButtonTextUnderIcon;
-        default :return QCommonStyle::styleHint(hint,option,widget,returnData);
+        default :return res;
       }
     }
 

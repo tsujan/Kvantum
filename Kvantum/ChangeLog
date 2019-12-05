@@ -10,6 +10,7 @@ V0.13.0
  * Put menubar MDI buttons inside menubar frame.
  * Don't show the arrow of a tool button with instant popup.
  * Fixed an old problem in toolbars of dark-and-light themes.
+ * A safeguard against buggy Qt plugins that don't handle the tool-button style correctly. (So far, only qt5ct has had bugs.)
 
 V0.12.1
 ---------
