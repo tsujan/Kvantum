@@ -1058,6 +1058,8 @@ text.normal.color                 String (#RRGGBBAA)  The color of the normal te
                                                       have meaning for Window, Dialog, Dock,
                                                       LineEdit and frame widgets (namely
                                                       GenericFrame, TabFrame and TabBarFrame).
+                                                      In the case of LineEdit, the text color is
+                                                      "text.color".
 
 text.focus.color                  String (#RRGGBBAA)  The color of the focused/hover text.
 

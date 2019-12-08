@@ -44,7 +44,7 @@ In Red Hat based systems like Fedora:
 Fedora (29-31)/Rawhide users can also install Kvantum in this way:
 
     sudo dnf copr enable ashahir05/kvantum
-    sudo dnf install Kvantum
+    sudo dnf install kvantum
 
 ----------
 
