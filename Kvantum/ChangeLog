@@ -1,3 +1,7 @@
+V0.13.1
+---------
+ * Prevent toolbar arrow in kvantumpreview.
+
 V0.13.0
 ---------
  * In tab size calculation, consider the actual tab icon size instead of PM_TabBarIconSize if it exists.

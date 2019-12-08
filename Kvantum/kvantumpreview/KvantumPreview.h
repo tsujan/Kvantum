@@ -63,22 +63,27 @@ public:
     toolBar_2->addSeparator();
     toolBar_2->addWidget (new QSpinBox());
 
-    int availableWidth = 0;
+    QSize ag;
     if (QWindow *win = windowHandle()) {
       if (QScreen *sc = win->screen())
-        availableWidth = sc->availableGeometry().width() - 50;
+        ag = sc->availableGeometry().size() - QSize (50, 70);
     }
-    if (availableWidth <= 0) {
+    if (ag.isEmpty()) {
       if (QScreen *pScreen = QApplication::primaryScreen())
-        availableWidth = pScreen->availableGeometry().width() - 50;
+        ag = pScreen->availableGeometry().size() - QSize (50, 70);
     }
-    if (availableWidth > 0) {
+    if (!ag.isEmpty()) {
       int tabBarWidth = tabWidget->tabBar()->sizeHint().width() + 20;
-      if (tabBarWidth > availableWidth)
+      if (tabBarWidth > ag.width())
         tabWidget->tabBar()->setUsesScrollButtons (true);
       else
         tabWidget->tabBar()->setUsesScrollButtons (false); // to prevent tab scroll buttons at startup (-> main.cpp)
-      resize (QSize (qMin (qMax (tabBarWidth, size().width()), availableWidth), size().height()));
+      resize (QSize (qMin (qMax (tabBarWidth,
+                                 /* also, prevent toolbar arrow */
+                                 qMax (size().width(),
+                                       toolBar->sizeHint().width() + toolBar_2->sizeHint().width())),
+                           ag.width()),
+                     qMin (size().height(), ag.height())));
     }
   }
 
