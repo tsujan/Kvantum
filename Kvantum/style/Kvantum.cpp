@@ -15108,71 +15108,67 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
         }
         case SC_ComboBoxListBoxPopup : {
           if (!tspec_.combo_menu/* || isLibreoffice_*/)
-          { // level the popup list with the bottom or top edge of the combobox
-            int popupMargin = QCommonStyle::pixelMetric(PM_FocusFrameVMargin);
-            return option->rect.adjusted(0, -popupMargin, 0, popupMargin);
-          }
-          else
-          { // take into account the needed space
-            QRect r = option->rect;
-            const QStyleOptionComboBox *opt =
-                qstyleoption_cast<const QStyleOptionComboBox*>(option);
-            frame_spec fspec = getFrameSpec(QStringLiteral("MenuItem"));
-            const label_spec lspec = getLabelSpec(QStringLiteral("MenuItem"));
-            int space = fspec.left+lspec.left + fspec.right+lspec.right
-                        + (tspec_.hide_combo_checkboxes
-                             ? 0 // assuming a maximum value forced by Qt
-                             : qMin(pixelMetric(PM_SmallIconSize), pixelMetric(PM_IndicatorWidth,option,widget))
-                               + pixelMetric(PM_CheckBoxLabelSpacing))
-                        /* NOTE: We added this to combobox width (as QCommonStyle does):
-                                  qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
-                                           + pixelMetric(PM_ScrollBarExtent))
-                                           + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth)*2 : 0)
-                                 But We don't need it here. As for reserving space for scrollbar,
-                                 it shouldn't be needed with a menu and special cases can be ignored. */
-                        - qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
-                                   + pixelMetric(PM_ScrollBarExtent,option,widget))
-                        - (opt && opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
+            return option->rect;
 
-            bool hasIcon = false;
-            if (opt)
+          /* take into account the needed space */
+          QRect r = option->rect;
+          const QStyleOptionComboBox *opt =
+              qstyleoption_cast<const QStyleOptionComboBox*>(option);
+          frame_spec fspec = getFrameSpec(QStringLiteral("MenuItem"));
+          const label_spec lspec = getLabelSpec(QStringLiteral("MenuItem"));
+          int space = fspec.left+lspec.left + fspec.right+lspec.right
+                      + (tspec_.hide_combo_checkboxes
+                           ? 0 // assuming a maximum value forced by Qt
+                           : qMin(pixelMetric(PM_SmallIconSize), pixelMetric(PM_IndicatorWidth,option,widget))
+                             + pixelMetric(PM_CheckBoxLabelSpacing))
+                      /* NOTE: We added this to combobox width (as QCommonStyle does):
+                                qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                         + pixelMetric(PM_ScrollBarExtent))
+                                         + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth)*2 : 0)
+                               But We don't need it here. As for reserving space for scrollbar,
+                               it shouldn't be needed with a menu and special cases can be ignored. */
+                      - qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                 + pixelMetric(PM_ScrollBarExtent,option,widget))
+                      - (opt && opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
+
+          bool hasIcon = false;
+          if (opt)
+          {
+            if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
             {
-              if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
+              for (int i = 0; i < cb->count(); i++)
               {
-                for (int i = 0; i < cb->count(); i++)
+                if (!cb->itemIcon(i).isNull())
                 {
-                  if (!cb->itemIcon(i).isNull())
-                  {
-                    hasIcon = true;
-                    break;
-                  }
+                  hasIcon = true;
+                  break;
                 }
               }
-              else hasIcon = true; // QML
             }
-
-            fspec = getFrameSpec(QStringLiteral("Menu"));
-            space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
-                     + (!tspec_.shadowless_popup && !noComposite_
-                          ? 2*settings_->getCompositeSpec().menu_shadow_depth
-                          : 0)
-                     - extraComboWidth(opt, hasIcon);
-
-            /* The width might be increased by Qt -> qcombobox.cpp -> QComboBox::showPopup()
-               but the left border won't be moved. So, we align the left border.*/
-            r.adjust(0, 0, qMax(space,0), 0);
-
-            /* compensate for the offset created by the shadow */
-            if (!tspec_.shadowless_popup && !noComposite_ && menuShadow_.count() == 4)
-            {
-              /* menu width shouldn't be less than combo width */
-              r.adjust(0, 0, qMax(w - (r.width() - qRound(menuShadow_.at(0) + menuShadow_.at(2))), 0), 0);
-              r.translate(-menuShadow_.at(0), -menuShadow_.at(1));
-            }
-            else
-              r.adjust(0, 0, qMax(w-r.width(), 0), 0);
-            return r;
+            else hasIcon = true; // QML
           }
+
+          fspec = getFrameSpec(QStringLiteral("Menu"));
+          space += 2*qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right))
+                   + (!tspec_.shadowless_popup && !noComposite_
+                        ? 2*settings_->getCompositeSpec().menu_shadow_depth
+                        : 0)
+                   - extraComboWidth(opt, hasIcon);
+
+          /* The width might be increased by Qt -> qcombobox.cpp -> QComboBox::showPopup()
+             but the left border won't be moved. So, we align the left border.*/
+          r.adjust(0, 0, qMax(space,0), 0);
+
+          /* compensate for the offset created by the shadow */
+          if (!tspec_.shadowless_popup && !noComposite_ && menuShadow_.count() == 4)
+          {
+            /* menu width shouldn't be less than combo width */
+            r.adjust(0, 0, qMax(w - (r.width() - qRound(menuShadow_.at(0) + menuShadow_.at(2))), 0), 0);
+            r.translate(-menuShadow_.at(0), -menuShadow_.at(1));
+          }
+          else
+            r.adjust(0, 0, qMax(w-r.width(), 0), 0);
+          return r;
         }
 
         default : return QCommonStyle::subControlRect(control,option,subControl,widget);
