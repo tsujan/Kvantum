@@ -1,6 +1,7 @@
 V0.13.1
 ---------
- * Prevent toolbar arrow in kvantumpreview.
+ * Prevent toolbar arrow on showing kvantumpreview.
+ * Guarantee correct symbolic icon colors for combos inside toolbars.
 
 V0.13.0
 ---------

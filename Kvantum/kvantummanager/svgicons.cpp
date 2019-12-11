@@ -53,17 +53,7 @@ public:
 
         QColor col;
         if (mode == QIcon::Disabled)
-        {
-            /* With disabled icons, neither reducing the painter opacity nor the method
-               used in QCommonStyle::generatedIconPixmap() works fine with all styles.
-               Instead, we choose a disabled color that's good enough everywhere. */
-            int g = qGray (QApplication::palette().windowText().color().rgb());
-            if (g < 130)
-                g += 120;
-            else
-                g -= 110;
-            col = QColor (g, g, g);
-        }
+            col = QApplication::palette().color (QPalette::Disabled, QPalette::WindowText);
         else if (mode == QIcon::Selected)
             col = QApplication::palette().highlightedText().color();
         else

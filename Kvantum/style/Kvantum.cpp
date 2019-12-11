@@ -10871,7 +10871,22 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               state = 2;
 
             if (editable && drwaAsLineEdit)
-            { // when there isn't enough space (-> SE_LineEditContents and drawComboLineEdit)
+            {
+              /* correct the state and colors */
+              if (state > 1) state = 1;
+              if (leGroup == "LineEdit")
+              {
+                lspec.normalColor = getName(widget->palette().color(QPalette::Active,QPalette::Text));
+                lspec.normalInactiveColor = getName(widget->palette().color(QPalette::Inactive,QPalette::Text));
+              }
+              else
+              {
+                const label_spec tlspec = getLabelSpec(QStringLiteral("Toolbar"));
+                lspec.normalColor = tlspec.normalColor;
+                lspec.normalInactiveColor = tlspec.normalInactiveColor;
+              }
+
+              /* when there isn't enough space (-> SE_LineEditContents and drawComboLineEdit) */
               label_spec lspec1 = getLabelSpec(leGroup);
               const size_spec sspec1 = getSizeSpec(leGroup);
               if (cb->lineEdit()->height()
