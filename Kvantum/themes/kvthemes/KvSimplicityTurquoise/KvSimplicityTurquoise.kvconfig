@@ -158,6 +158,11 @@ text.focus.color=#9bedff
 text.press.color=white
 text.toggle.color=white
 
+[ToolbarLineEdit]
+inherits=PanelButtonCommand
+frame.element=tlineedit
+interior.element=tlineedit
+
 [Dock]
 inherits=PanelButtonCommand
 interior.element=dock

@@ -12094,6 +12094,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         return QCommonStyle::pixelMetric(metric,option,widget);
 #endif
 
+      /* In Qt -> qcombobox.cpp, PM_MenuVMargin is used to add a
+         vertical margin to the combo menu but we don't want it. */
+      if (qobject_cast<const QComboBox*>(widget)) return 0;
+
       /* return the stored value if it exists */
       if (widget && drawnMenus_.contains(widget))
       {
