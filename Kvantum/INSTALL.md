@@ -40,14 +40,6 @@ In Red Hat based systems like Fedora:
  * qt5-qttools-devel
  * kf5-kwindowsystem-devel (required with Qt >= 5.11)
 
-----------
-Fedora (29-31)/Rawhide users can also install Kvantum in this way:
-
-    sudo dnf copr enable ashahir05/kvantum
-    sudo dnf install kvantum
-
-----------
-
 And, finally, in OpenSUSE:
 
  * gcc-c++

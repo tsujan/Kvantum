@@ -1191,7 +1191,7 @@
 <use width="100%" height="100%" style="opacity:.33" xlink:href="#flat-arrow-minus-normal" id="flat-arrow-minus-disabled" transform="translate(100)"/>
 <g id="carrow-normal" transform="translate(-307,-181)">
 <path style="opacity:0" d="m 178,518 v -24 h 24 v 24 z"/>
-<path style="fill:#505050;color:#000" id="path2147" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
+<path style="opacity:.65;color:#000" id="path2147" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
 <use width="100%" height="100%" xlink:href="#path2147" transform="matrix(1,0,0,-1,0,1011.9786)"/>
 </g>
 <use width="100%" height="100%" style="opacity:.44" xlink:href="#carrow-normal" id="carrow-disabled" transform="translate(96)"/>
@@ -1200,7 +1200,7 @@
 <path style="opacity:.9;fill:#fff;color:#000" id="path4258" d="m 182.1227,500.5651 c -1.57142,1.40579 0.23773,3.00995 1.98734,2.28308 l 4.56,-1.8944 c 1.23591,-0.51345 1.41681,-0.5179 2.54642,-0.0455 l 4.5114,1.8867 c 2.00859,0.84 3.68576,-0.86236 2.14431,-2.24022 l -6.8224,-6.0984 c -0.31253,-0.27937 -0.71001,-0.44501 -1.09886,-0.43077 -0.38887,0.0142 -0.73721,0.1959 -0.96464,0.39936 z"/>
 <use width="100%" height="100%" xlink:href="#path4258" transform="matrix(1,0,0,-1,0,1011.9786)"/>
 </g>
-<use width="100%" height="100%" style="opacity:.875" xlink:href="#carrow-normal" id="carrow-focused" transform="translate(32)"/>
+<use width="100%" height="100%" style="opacity:.89" xlink:href="#carrow-normal" id="carrow-focused" transform="translate(32)"/>
 <use width="100%" height="100%" xlink:href="#carrow-toggled" id="flat-carrow-normal" transform="translate(-64,30)"/>
 <g id="flat-carrow-focused" transform="translate(-275,-151)">
 <path style="opacity:0" d="m 178,518 v -24 h 24 v 24 z"/>
