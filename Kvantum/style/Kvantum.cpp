@@ -8469,6 +8469,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
+                    if (!widget->isAncestorOf(cb)) continue; // not within another window
                     QPalette palette = cb->palette();
                     if (txtCol != palette.color(QPalette::ButtonText))
                     {
@@ -8489,6 +8490,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
                 for (QLineEdit *le : lineEdits)
                 {
+                  if (!widget->isAncestorOf(le)) continue;
                   QPalette palette = le->palette();
                   if (txtCol != palette.color(QPalette::Active,QPalette::Text))
                   {
@@ -8600,6 +8602,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
+                    if (!widget->isAncestorOf(cb)) continue;
                     QPalette palette = cb->palette();
                     if (txtCol != palette.color(QPalette::ButtonText))
                     {
@@ -8620,6 +8623,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 const QList<QLineEdit*> lineEdits = widget->findChildren<QLineEdit*>();
                 for (QLineEdit *le : lineEdits)
                 {
+                  if (!widget->isAncestorOf(le)) continue;
                   QPalette palette = le->palette();
                   if (palette.color(QPalette::Active, QPalette::Text) != txtCol)
                   {

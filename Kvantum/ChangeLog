@@ -3,6 +3,7 @@ V0.13.1
  * Prevent toolbar arrow on showing kvantumpreview.
  * Guarantee correct symbolic icon colors for combos inside toolbars.
  * Don't let combo menus have a greater height that ordinary menus (Qt increases their height).
+ * Never change the palette of toolbar buttons/combos/line-edits that are within a separate window.
 
 V0.13.0
 ---------
