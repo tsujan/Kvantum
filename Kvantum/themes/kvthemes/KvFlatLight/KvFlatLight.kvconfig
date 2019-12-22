@@ -119,6 +119,15 @@ min_width=+0.1font
 [PanelButtonTool]
 inherits=PanelButtonCommand
 
+[ToolbarButton]
+inherits=PanelButtonCommand
+focusRectElement=tfocus
+
+[ToolbarComboBox]
+inherits=PanelButtonCommand
+indicator.element=none
+focusRectElement=tfocus
+
 [ToolbarLineEdit]
 interior.element=tlineedit
 frame.element=tlineedit

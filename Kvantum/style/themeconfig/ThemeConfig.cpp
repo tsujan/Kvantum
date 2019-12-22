@@ -244,6 +244,9 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
     }
     v = getValue(elementName, KSL("frame.expandedElement"));
     r.expandedElement = v.toString();
+
+    v = getValue(elementName, KSL("focusRectElement"));
+    r.focusRectElement = v.toString();
   }
 
   fSpecs_[elementName] = r;
@@ -741,12 +744,6 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("joined_inactive_tabs"));
   if (v.isValid()) // true by default
     r.joined_inactive_tabs = v.toBool();
-  else // backward compatibility
-  {
-    v = getValue(KSL("General"),KSL("joined_tabs"));
-    if (v.isValid())
-      r.joined_inactive_tabs = v.toBool();
-  }
 
   v = getValue(KSL("General"),KSL("attach_active_tab"));
   r.attach_active_tab = v.toBool();
@@ -1139,13 +1136,7 @@ hacks_spec ThemeConfig::getHacksSpec() const
   {
 #endif
     v = getValue(KSL("Hacks"),KSL("blur_translucent"));
-    if (v.isValid())
-      r.blur_translucent = v.toBool();
-    else // backward compatibility
-    {
-      v = getValue(KSL("Hacks"),KSL("blur_konsole"));
-      r.blur_translucent = v.toBool();
-    }
+    r.blur_translucent = v.toBool();
 #if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
   }
 #endif

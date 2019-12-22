@@ -271,6 +271,9 @@ class Style : public QCommonStyle {
                      bool centerLoneIcon = true // centered icon with empty text?
                     ) const;
 
+    /* Draws a focus rectangle. */
+    void drawFocusRect(QPainter *painter, const QRect &rect, const QString &element) const;
+
     /* Draws the lineedit of an editable combobox. */
     void drawComboLineEdit (const QStyleOption *option,
                             QPainter *painter,

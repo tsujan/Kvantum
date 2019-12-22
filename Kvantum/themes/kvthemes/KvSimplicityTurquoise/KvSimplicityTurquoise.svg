@@ -790,10 +790,10 @@
 <g style="line-height:normal;color:#000" id="focus-top" transform="translate(79,1073.5)">
 <path style="fill-opacity:0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
 <g style="fill-opacity:.137">
-<path style="opacity:.7;fill:#a0a0a0;fill-opacity:1" d="m 91.25,109.5 h 2.5 v -2 h -2.5 z"/>
-<path style="opacity:.7;fill:#a0a0a0;fill-opacity:1" d="m 96.25,109.5 h 2.5 v -2 h -2.5 z"/>
-<path style="opacity:.7;fill:#a0a0a0;fill-opacity:1" d="m 101,109.5 h 2.5 v -2 H 101 Z"/>
-<path style="opacity:.7;fill:#a0a0a0;fill-opacity:1" d="m 106.25,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.8;fill:#aaa;fill-opacity:1" d="m 91.25,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.8;fill:#aaa;fill-opacity:1" d="m 96.25,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.8;fill:#aaa;fill-opacity:1" d="m 101,109.5 h 2.5 v -2 H 101 Z"/>
+<path style="opacity:.8;fill:#aaa;fill-opacity:1" d="m 106.25,109.5 h 2.5 v -2 h -2.5 z"/>
 </g>
 </g>
 <use width="100%" height="100%" id="focus-right" xlink:href="#focus-top" transform="rotate(90,179,1193)"/>
@@ -1208,4 +1208,16 @@
 <use width="100%" height="100%" xlink:href="#path1858" transform="matrix(1,0,0,-1,0,1011.9786)"/>
 </g>
 <use width="100%" height="100%" style="opacity:.4" xlink:href="#flat-carrow-normal" id="flat-carrow-disabled" transform="translate(96)"/>
+<g style="line-height:normal;color:#000" id="tfocus-top" transform="translate(109,1073.5)">
+<path style="fill-opacity:0" d="m 90,109.5 h 20 v -2 H 90 Z"/>
+<g style="fill-opacity:.137">
+<path style="opacity:.2;fill:#fff;fill-opacity:1" d="m 91.25,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.2;fill:#fff;fill-opacity:1" d="m 96.25,109.5 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.2;fill:#fff;fill-opacity:1" d="m 101,109.5 h 2.5 v -2 H 101 Z"/>
+<path style="opacity:.2;fill:#fff;fill-opacity:1" d="m 106.25,109.5 h 2.5 v -2 h -2.5 z"/>
+</g>
+</g>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-right" transform="rotate(90,209,1193)"/>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-bottom" transform="translate(0,22)"/>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-left" transform="rotate(-90,209,1193)"/>
 </svg>

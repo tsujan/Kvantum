@@ -147,6 +147,7 @@ text.press.color=white
 text.toggle.color=white
 text.toggle.inactive.color=black
 indicator.element=tarrow
+focusRectElement=tfocus
 
 [ToolbarComboBox]
 interior.element=tbutton
@@ -157,6 +158,7 @@ text.normal.inactive.color=#ffffffb4
 text.focus.color=#9bedff
 text.press.color=white
 text.toggle.color=white
+focusRectElement=tfocus
 
 [ToolbarLineEdit]
 inherits=PanelButtonCommand

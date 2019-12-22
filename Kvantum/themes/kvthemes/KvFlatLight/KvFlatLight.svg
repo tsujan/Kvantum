@@ -969,4 +969,14 @@
 <use width="100%" height="100%" xlink:href="#tlineedit-focused-topleft" id="tlineedit-focused-bottomright" transform="rotate(-180,425.25,150.7475)"/>
 <use width="100%" height="100%" xlink:href="#b-arrow-up-normal" id="flat-flat-s-arrow-up-normal" transform="translate(190,212)"/>
 <use width="100%" height="100%" xlink:href="#b-arrow-up-normal" id="flat-flat-s-arrow-down-normal" transform="matrix(1,0,0,-1,190,977.38596)"/>
+<g style="opacity:.85" id="tfocus-top" transform="translate(26)">
+<path style="opacity:0;color:#000" d="m 378,1108 h 20 v -2 h -20 z"/>
+<path style="opacity:.2;fill:#fff;color:#000" d="m 379.25,1108 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.2;fill:#fff;color:#000" d="m 384.25,1108 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.2;fill:#fff;color:#000" d="m 389.25,1108 h 2.5 v -2 h -2.5 z"/>
+<path style="opacity:.2;fill:#fff;color:#000" d="m 394.25,1108 h 2.5 v -2 h -2.5 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-right" transform="rotate(90,414,1118)"/>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-bottom" transform="translate(0,22)"/>
+<use width="100%" height="100%" xlink:href="#tfocus-top" id="tfocus-left" transform="rotate(90,403,1107)"/>
 </svg>

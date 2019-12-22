@@ -52,7 +52,8 @@ Section                                      Meaning
 
 [CheckBox]                                   A check box.
 
-[Focus]                                      Generic focus frame/rectangle.
+[Focus]                                      Generic focus frame/rectangle, drawn on a
+                                             widget that has keyboard focus.
 
 [GenericFrame]                               Generic frame. Mostly drawn around
                                              item/text views but some apps may draw
@@ -545,18 +546,19 @@ opaque                            String list         A comma-separated list of
                                                       meaning only if translucent_windows
                                                       is set to true.
 
-blurring                          true/false          Blur the screen area behind
-                                                      translucent windows in KDE? This
-                                                      needs KDE blur effect and also a
-                                                      graphic card that supports it. It
-                                                      has no effect when "composite" or
-                                                      "translucent_windows" is false.
+blurring                          true/false          Blur the screen area behind windows that
+                                                      are made translucent by Kvantum? This
+                                                      needs KDE blur effect and also a graphic
+                                                      card that supports it. It has no effect
+                                                      when "composite" or "translucent_windows"
+                                                      is false.
 
-popup_blurring                    true/false          Blur the regions behind translucent
-                                                      menus and tooltips? This needs KDE
-                                                      blur effect and a graphic card that
-                                                      supports it. It will automatically
-                                                      be set to true if blurring is true.
+popup_blurring                    true/false          Blur the regions behind menus and
+                                                      tooltips that are made translucent by
+                                                      Kvantum? This needs KDE blur effect and
+                                                      a graphic card that supports it. It will
+                                                      automatically be set to true if
+                                                      "blurring" is true.
 
 shadowless_popup                  true/false          Should the shadows that Kvantum adds
                                                       to menus and tooltips with compositing
@@ -862,8 +864,9 @@ transparent_pcmanfm_sidepane      true/false          No background or frame for
 transparent_pcmanfm_view          true/false          No background or frame for
                                                       PCManFM-Qt's folder-view?
 
-blur_konsole                      true/false          Blur the region behind Konsole's
-                                                      transparent background if possible?
+blur_translucent                  true/false          Blur the regions behind windows that
+                                                      are made translucent by their apps,
+                                                      if possible?
 
 transparent_ktitle_label          true/false          No background for the label of
                                                       KtitleWidget (a KDE widget with
@@ -982,6 +985,19 @@ frame.patternsize                 Integer             The frame pattern size. Us
                                                       the frame of a widget with a pattern. A
                                                       value of zero means no pattern (default).
                                                       Mostly useful for making dotted frames.
+
+focusRectElement                 string               If present, to draw the generic focus
+                                                      rectangle of the current widget, this
+                                                      element will be used instead of the
+                                                      frame element of the Focus section.
+
+                                                      Some widgets may need separate elements
+                                                      for their generic focus rectangles
+                                                      because of their background colors. If
+                                                      so, this key can be used. It has effect
+                                                      for button like widgets, tabs, group
+                                                      boxes and sliders. All other parameters
+                                                      will be taken from the Focus section.
 
 focusFrame                       true/false           Draw a focus frame when the widget has
                                                       the keyboard focus? This replaces the

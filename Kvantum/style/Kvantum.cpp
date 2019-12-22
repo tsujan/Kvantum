@@ -1515,6 +1515,19 @@ QString Style::getState(const QStyleOption *option, const QWidget *widget) const
   */
 }
 
+void Style::drawFocusRect(QPainter *painter, const QRect &rect, const QString &element) const
+{
+  frame_spec fspec = getFrameSpec(QStringLiteral("Focus"));
+  fspec.expansion = 0;
+  fspec.left = qMin(fspec.left,2);
+  fspec.right = qMin(fspec.right,2);
+  fspec.top = qMin(fspec.top,2);
+  fspec.bottom = qMin(fspec.bottom,2);
+  if (!element.isEmpty())
+    fspec.element = element;
+  renderFrame(painter,rect,fspec,fspec.element);
+}
+
 /* This method is used, instead of drawPrimitive(PE_PanelLineEdit,...), for drawing the lineedit
    of an editable combobox because animatedWidget_ is always NULL for KUrlComboBox -> KLineEdit.
    Although it's only needed in such special cases, it can always be used safely. */
@@ -2572,13 +2585,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         else
         {
-          QStyleOptionFocusRect fropt;
-          fropt.QStyleOption::operator=(*opt);
+          QRect focusRect;
           if (fspec.expansion > 0)
-            fropt.rect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
+            focusRect = labelRect(opt->rect, fspec, lspec).adjusted(-2,-2,2,2);
           else
-            fropt.rect = interiorRect(opt->rect, fspec);
-          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            focusRect = interiorRect(opt->rect, fspec);
+          drawFocusRect(painter, focusRect, fspec.focusRectElement);
         }
       }
 
@@ -5880,11 +5892,9 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           else
           {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
-            fropt.rect = subElementRect(isRadio ? SE_RadioButtonFocusRect
-                                                : SE_CheckBoxFocusRect, opt, widget);
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+            QRect focusRect = subElementRect(isRadio ? SE_RadioButtonFocusRect
+                                                     : SE_CheckBoxFocusRect, opt, widget);
+            drawFocusRect(painter, focusRect, fspec.focusRectElement);
           }
         }
 
@@ -6755,23 +6765,22 @@ void Style::drawControl(QStyle::ControlElement element,
         if ((opt->state & State_HasFocus)
             && !fspec.hasFocusFrame) // otherwise -> CE_TabBarTabShape
         {
-          QStyleOptionFocusRect fropt;
-          fropt.QStyleOption::operator=(*opt);
+          QRect focusRect;
           if (fspec.expansion > 0)
           {
             if (rtl)
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
+              focusRect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
             else
-              fropt.rect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
+              focusRect = labelRect(r, fspec, lspec).adjusted(-2, -2, 2, 2);
           }
           else
           {
             QRect FR = opt->rect;
             if (verticalTabs)
               FR.setRect(0, 0, h, w);
-            fropt.rect = interiorRect(FR, getFrameSpec(group)); // fspec may have been changed
+            focusRect= interiorRect(FR, getFrameSpec(group)); // fspec may have been changed
           }
-          drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+          drawFocusRect(painter, focusRect, fspec.focusRectElement);
         }
 
         if (verticalTabs)
@@ -9294,13 +9303,12 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           else
           {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
+            QRect focusRect;
             if (fspec.expansion > 0)
-              fropt.rect = labelRect(option->rect, fspec, lspec).adjusted(-2,-2,2,2);
+              focusRect = labelRect(option->rect, fspec, lspec).adjusted(-2,-2,2,2);
             else
-              fropt.rect = interiorRect(option->rect, fspec);
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+              focusRect = interiorRect(option->rect, fspec);
+            drawFocusRect(painter, focusRect, fspec.focusRectElement);
           }
         }
       }
@@ -9790,13 +9798,11 @@ void Style::drawControl(QStyle::ControlElement element,
             /* draw the focus rect around the arrow */
             if (opt->state & State_HasFocus)
             {
-              QStyleOptionFocusRect fropt;
-              fropt.QStyleOption::operator=(*opt);
-              fropt.rect = alignedRect(option->direction,
-                                       iAlignment,
-                                       QSize(dspec.size+2, dspec.size+2),
-                                       interiorRect(opt->rect, fspec).adjusted(-2,-2,2,2));
-              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+              QRect focusRect = alignedRect(option->direction,
+                                            iAlignment,
+                                            QSize(dspec.size+2, dspec.size+2),
+                                            interiorRect(opt->rect, fspec).adjusted(-2,-2,2,2));
+              drawFocusRect(painter, focusRect, fspec.focusRectElement);
             }
           }
           else
@@ -10815,13 +10821,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               }
               else
               {
-                QStyleOptionFocusRect fropt;
-                fropt.QStyleOption::operator=(*opt);
+                QRect focusRect;
                 if (fspec.expansion > 0)
-                  fropt.rect = labelRect(r, fspec, lspec).adjusted(-2,-2,2,2);
+                  focusRect = labelRect(r, fspec, lspec).adjusted(-2,-2,2,2);
                 else
-                  fropt.rect = interiorRect(r, fspec);
-                drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+                  focusRect = interiorRect(r, fspec);
+                drawFocusRect(painter, focusRect, fspec.focusRectElement);
               }
             }
             /* force label color (as in Krusader) */
@@ -11165,12 +11170,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           drawControl(CE_ScrollBarSlider,&o,painter,widget);
 
           if ((opt->state & State_HasFocus) && !isTransient)
-          {
-            QStyleOptionFocusRect fropt;
-            fropt.QStyleOption::operator=(*opt);
-            fropt.rect = r;
-            drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
-          }
+            drawFocusRect(painter, r, fspec.focusRectElement);
 
           if (horiz)
             painter->restore();
@@ -11360,13 +11360,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
             else
             {
-              QStyleOptionFocusRect fropt;
-              fropt.QStyleOption::operator=(*opt);
-              QRect FR = opt->rect;
+              QRect focusRect = opt->rect;
               if (horiz)
-                FR.setRect(0, 0, h, w);
-              fropt.rect = FR;
-              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+                focusRect.setRect(0, 0, h, w);
+              drawFocusRect(painter, focusRect, fspec1.focusRectElement);
             }
           }
 
@@ -11886,9 +11883,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           if (opt->state & State_HasFocus)
           {
             const frame_spec fspec = getFrameSpec(QStringLiteral("GroupBox"));
+            int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
             if (fspec.hasFocusFrame)
             {
-              int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
               renderFrame(painter,textRect.adjusted(-spacing,0,spacing,0),fspec,fspec.element+"-focus");
               const interior_spec ispec = getInteriorSpec(QStringLiteral("GroupBox"));
               if (ispec.hasFocusInterior)
@@ -11896,11 +11893,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
             else
             {
-              QStyleOptionFocusRect fropt;
-              fropt.QStyleOption::operator=(*opt);
-              int spacing = tspec_.groupbox_top_label ? pixelMetric(PM_CheckBoxLabelSpacing)/2 : 0;
-              fropt.rect = textRect.adjusted(-spacing,0,spacing,0);
-              drawPrimitive(PE_FrameFocusRect, &fropt, painter, widget);
+              QRect focusRect = textRect.adjusted(-spacing,0,spacing,0);
+              drawFocusRect(painter, focusRect, fspec.focusRectElement);
             }
           }
 

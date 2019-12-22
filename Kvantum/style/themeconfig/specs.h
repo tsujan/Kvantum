@@ -316,6 +316,8 @@ typedef struct {
   QString element;
   /* Element name for frame expansion */
   QString expandedElement;
+  /* custom element name of the focus rectangle */
+  QString focusRectElement;
   /* has a frame? */
   bool hasFrame;
   /* has a focus frame? */
@@ -410,12 +412,11 @@ typedef struct {
   int tispace;
 } label_spec;
 
-/* Fills the frame spec with default values */
+/* Fill the specs with their default values */
+
 static inline void default_frame_spec(frame_spec &fspec) {
   fspec.hasFrame = false;
   fspec.hasFocusFrame = false;
-  fspec.element = QString();
-  fspec.expandedElement = QString();
   fspec.top = fspec.bottom = fspec.left = fspec.right = 0;
   fspec.topExpanded = fspec.bottomExpanded = fspec.leftExpanded = fspec.rightExpanded = 0;
   fspec.isAttached = false;
@@ -424,30 +425,17 @@ static inline void default_frame_spec(frame_spec &fspec) {
   fspec.expansion = 0;
 }
 
-/* Fills the interior with default values */
 static inline void default_interior_spec(interior_spec &ispec) {
   ispec.hasInterior = true;
   ispec.hasFocusInterior = false;
-  ispec.element = QString();
   ispec.px = ispec.py = 0;
 }
 
-/* Fills the indicator spec with default values */
 static inline void default_indicator_spec(indicator_spec &dspec) {
-  dspec.element = QString();
   dspec.size = 15;
 }
 
-/* Fills the label spec with default values */
 static inline void default_label_spec(label_spec &lspec) {
-  lspec.normalColor = QString();
-  lspec.normalInactiveColor = QString();
-  lspec.focusColor = QString();
-  lspec.focusInactiveColor = QString();
-  lspec.pressColor = QString();
-  lspec.pressInactiveColor = QString();
-  lspec.toggleColor = QString();
-  lspec.toggleColor = QString();
   lspec.boldFont = false;
   lspec.boldness = QFont::Bold;
   lspec.italicFont = false;
@@ -455,7 +443,6 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.xshift = 0;
   lspec.yshift = 1;
   lspec.shadowColor = QString("#000000");
-  lspec.inactiveShadowColor = QString();
   lspec.a = 255;
   lspec.depth = 1;
   lspec.hasMargin = false;
@@ -463,16 +450,12 @@ static inline void default_label_spec(label_spec &lspec) {
   lspec.tispace = 0;
 }
 
-/* Fills the size spec with default values */
 static inline void default_size_spec(size_spec &sspec) {
   sspec.minH = sspec.minW = 0;
   sspec.incrementW = sspec.incrementH = false;
 }
 
-/* Fills the widget spec with default values */
 static inline void default_theme_spec(theme_spec &tspec) {
-  tspec.author = QString();
-  tspec.comment = QString();
   tspec.isX11 = false;
   tspec.x11drag = WindowManager::DRAG_ALL;
   tspec.respect_DE = true;
@@ -563,36 +546,9 @@ static inline void default_theme_spec(theme_spec &tspec) {
 }
 
 static inline void default_color_spec(color_spec &cspec) {
-  cspec.windowColor = QString();
-  cspec.inactiveWindowColor = QString();
-  cspec.baseColor = QString();
-  cspec.inactiveBaseColor = QString();
-  cspec.altBaseColor = QString();
-  cspec.inactiveAltBaseColor = QString();
-  cspec.buttonColor = QString();
-  cspec.lightColor = QString();
-  cspec.midLightColor = QString();
-  cspec.darkColor = QString();
-  cspec.midColor = QString();
   cspec.shadowColor = QString("#000000");
-  cspec.highlightColor = QString();
-  cspec.inactiveHighlightColor = QString();
-  cspec.tooltipBaseColor = QString();
-  cspec.textColor = QString();
-  cspec.inactiveTextColor = QString();
-  cspec.windowTextColor = QString();
-  cspec.inactiveWindowTextColor = QString();
-  cspec.buttonTextColor = QString();
-  cspec.disabledTextColor = QString();
-  cspec.tooltipTextColor = QString();
-  cspec.highlightTextColor = QString();
-  cspec.linkColor = QString();
-  cspec.linkVisitedColor = QString();
-  cspec.progressIndicatorTextColor = QString();
-  cspec.progressInactiveIndicatorTextColor = QString();
 }
 
-/* Fills the hacks spec with default values */
 static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_dolphin_view = false;
   hspec.transparent_pcmanfm_sidepane = false;
