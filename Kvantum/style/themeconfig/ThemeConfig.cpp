@@ -881,9 +881,6 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("tree_branch_line"));
   r.tree_branch_line = v.toBool();
 
-  v = getValue(KSL("General"),KSL("no_focus_rect"));
-  r.no_focus_rect = v.toBool();
-
   v = getValue(KSL("General"),KSL("slider_width"));
   if (v.isValid()) // 8 by default
     r.slider_width = qMin(qMax(v.toInt(),0),48);

@@ -156,8 +156,6 @@ typedef struct {
   bool scroll_arrows;
   /* draw tree branch lines? */
   bool tree_branch_line;
-  /* should focus rectangles be removed altogether? */
-  bool no_focus_rect;
 
   /* slider width */
   int slider_width;
@@ -512,7 +510,6 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.center_scrollbar_indicator = false;
   tspec.scroll_arrows=true;
   tspec.tree_branch_line=false;
-  tspec.no_focus_rect=false;
   tspec.slider_width = 8;
   tspec.slider_handle_width = 16;
   tspec.slider_handle_length = 16;

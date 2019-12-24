@@ -944,6 +944,10 @@ void KvantumManager::defaultThemeButtons()
     QString defaultConfig = ":/Kvantum/default.kvconfig";
     QSettings defaultSettings (defaultConfig, QSettings::NativeFormat);
 
+    defaultSettings.beginGroup ("Focus");
+    ui->checkBoxFocusRect->setChecked (!defaultSettings.value ("frame").toBool());
+    defaultSettings.endGroup();
+
     defaultSettings.beginGroup ("Hacks");
     ui->checkBoxDolphin->setChecked (defaultSettings.value ("transparent_dolphin_view").toBool());
     ui->checkBoxPcmanfmSide->setChecked (defaultSettings.value ("transparent_pcmanfm_sidepane").toBool());
@@ -996,7 +1000,6 @@ void KvantumManager::defaultThemeButtons()
       ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
     else
       ui->checkBoxScrollableMenu->setChecked (true);
-    ui->checkBoxFocusRect->setChecked (defaultSettings.value ("no_focus_rect").toBool());
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
@@ -1329,8 +1332,6 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxTransientGroove->setChecked (themeSettings.value ("transient_groove").toBool());
                 if (themeSettings.contains ("scrollable_menu"))
                     ui->checkBoxScrollableMenu->setChecked (themeSettings.value ("scrollable_menu").toBool());
-                if (themeSettings.contains ("no_focus_rect"))
-                    ui->checkBoxFocusRect->setChecked (themeSettings.value ("no_focus_rect").toBool());
                 if (themeSettings.contains ("tree_branch_line"))
                     ui->checkBoxTree->setChecked (themeSettings.value ("tree_branch_line").toBool());
                 if (themeSettings.contains ("groupbox_top_label"))
@@ -1495,6 +1496,11 @@ void KvantumManager::tabChanged (int index)
                     theSize = qMin (qMax (theSize,16), 100);
                     ui->spinMinScrollLength->setValue (theSize);
                 }
+                themeSettings.endGroup();
+
+                themeSettings.beginGroup ("Focus");
+                ui->checkBoxFocusRect->setChecked (themeSettings.contains ("frame")
+                                                   && !themeSettings.value ("frame").toBool());
                 themeSettings.endGroup();
 
                 themeSettings.beginGroup ("Hacks");
@@ -2170,7 +2176,7 @@ void KvantumManager::writeConfig()
           WARNING! Damn! The Qt5 QSettings changes the order of keys on writing.
                          We should write the settings directly!
         **************************************************************************/
-        QMap<QString, QString> hackKeys, hackKeysMissing, generalKeys, generalKeysMissing;
+        QMap<QString, QString> hackKeys, hackKeysMissing, generalKeys, generalKeysMissing, focusKeys, focusKeysMissing;
         QString str;
         hackKeys.insert ("transparent_dolphin_view", boolToStr (ui->checkBoxDolphin->isChecked()));
         hackKeys.insert ("transparent_pcmanfm_sidepane", boolToStr (ui->checkBoxPcmanfmSide->isChecked()));
@@ -2205,7 +2211,6 @@ void KvantumManager::writeConfig()
         generalKeys.insert ("transient_scrollbar", boolToStr (ui->checkBoxTransient->isChecked()));
         generalKeys.insert ("transient_groove", boolToStr (ui->checkBoxTransientGroove->isChecked()));
         generalKeys.insert ("scrollable_menu", boolToStr (ui->checkBoxScrollableMenu->isChecked()));
-        generalKeys.insert ("no_focus_rect", boolToStr (ui->checkBoxFocusRect->isChecked()));
         generalKeys.insert ("tree_branch_line", boolToStr (ui->checkBoxTree->isChecked()));
         generalKeys.insert ("groupbox_top_label", boolToStr (ui->checkBoxGroupLabel->isChecked()));
         generalKeys.insert ("fill_rubberband", boolToStr (ui->checkBoxRubber->isChecked()));
@@ -2252,8 +2257,27 @@ void KvantumManager::writeConfig()
         opaque.remove (" ");
         generalKeys.insert ("opaque", opaque);
 
-        themeSettings.beginGroup ("Hacks");
+        focusKeys.insert ("frame", boolToStr (!ui->checkBoxFocusRect->isChecked()));
+
         bool restyle = false;
+        QMap<QString, QString>::iterator it;
+
+        themeSettings.beginGroup ("Focus");
+        if (themeSettings.value ("frame").toBool() == ui->checkBoxFocusRect->isChecked())
+          restyle = true;
+        it = focusKeys.begin();
+        while (!focusKeys.isEmpty() && it != focusKeys.end())
+        {
+            if (!themeSettings.contains (it.key()))
+            {
+                focusKeysMissing.insert (it.key(), focusKeys.value (it.key()));
+                it = focusKeys.erase (it);
+            }
+            else ++it;
+        }
+        themeSettings.endGroup();
+
+        themeSettings.beginGroup ("Hacks");
         if (themeSettings.value ("normal_default_pushbutton").toBool() != ui->checkBoxNormalBtn->isChecked()
             || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked()
             || themeSettings.value ("middle_click_scroll").toBool() != ui->checkBoxScrollJump->isChecked()
@@ -2264,7 +2288,6 @@ void KvantumManager::writeConfig()
         {
             restyle = true;
         }
-        QMap<QString, QString>::iterator it;
         it = hackKeys.begin();
         while (!hackKeys.isEmpty() && it != hackKeys.end())
         {
@@ -2307,7 +2330,6 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("scrollbar_in_view").toBool() != ui->checkBoxScrollIn->isChecked()
             || themeSettings.value ("transient_scrollbar").toBool() != ui->checkBoxTransient->isChecked()
             || themeSettings.value ("transient_groove").toBool() != ui->checkBoxTransientGroove->isChecked()
-            || themeSettings.value ("no_focus_rect").toBool() != ui->checkBoxFocusRect->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
             || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin (qMax (themeSettings.value ("button_icon_size").toInt(),16),64) != ui->spinButton->value()
@@ -2335,31 +2357,55 @@ void KvantumManager::writeConfig()
             return;
         QStringList lines;
         QTextStream in (&file);
+        QString section;
+        QRegularExpressionMatch match;
         while (!in.atEnd())
         {
             bool found = false;
             QString line = in.readLine();
-            if (!hackKeys.isEmpty())
+
+            /* first, find the current section */
+            if (line.indexOf (QRegularExpression ("^\\s*\\[(.*)\\]"), 0, &match) > -1)
             {
-                for (it = hackKeys.begin(); it != hackKeys.end(); ++it)
-                {   /* one "\\b" is enough because if "keyA" is in the file, "key" isn't in hackKeys */
-                    if (line.contains (QRegularExpression ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                section = match.captured (1);
+                section = section.simplified();
+            }
+
+            /* modify the existing key-value pair, considering the current section */
+            if (section == "Focus" && !focusKeys.isEmpty())
+            {
+                for (it = focusKeys.begin(); it != focusKeys.end(); ++it)
+                {
+                    if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
                     {
-                        line = QString ("%1=%2").arg (it.key()).arg (hackKeys.value (it.key()));
-                        hackKeys.remove (it.key());
+                        line = QString ("%1=%2").arg (it.key()).arg (focusKeys.value (it.key()));
+                        //focusKeys.remove (it.key()); // shouldn't be removed because it may be repeated
                         found = true;
                         break;
                     }
                 }
             }
-            if (!found && !generalKeys.isEmpty())
+            if (!found && section == "Hacks" && !hackKeys.isEmpty())
+            {
+                for (it = hackKeys.begin(); it != hackKeys.end(); ++it)
+                {
+                    if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
+                    {
+                        line = QString ("%1=%2").arg (it.key()).arg (hackKeys.value (it.key()));
+                        //hackKeys.remove (it.key());
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found && section == "%General" && !generalKeys.isEmpty())
             {
                 for (it = generalKeys.begin(); it != generalKeys.end(); ++it)
                 {
-                    if (line.contains (QRegularExpression ("^\\s*\\b" + it.key() + "(?=\\s*\\=)")))
+                    if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (generalKeys.value (it.key()));
-                        generalKeys.remove (it.key());
+                        //generalKeys.remove (it.key());
                         break;
                     }
                 }
@@ -2369,11 +2415,36 @@ void KvantumManager::writeConfig()
         file.close();
 
         int i, j;
+        if (!generalKeysMissing.isEmpty())
+        {
+            for (i = 0; i < lines.count(); ++i)
+            { // the last section overrides the previous ones if they exist
+                if (lines.at (lines.count() - i - 1).contains (QRegularExpression ("^\\s*\\[\\s*%General\\s*\\]")))
+                    break;
+            }
+            if (i == lines.count())
+            { // the section doesn't exist; add it to the end of the file
+                lines << "" << QString ("[%General]");
+                ++i; // the line of the created section
+            }
+            else i = lines.count() - i - 1; // the line of the found section
+            for (j = i+1; j < lines.count(); ++j)
+            { // find the next section
+                if (lines.at (j).contains (QRegularExpression ("^\\s*\\[")))
+                    break;
+            }
+            while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j; // after the last key of the current section
+            for (it = generalKeysMissing.begin(); it != generalKeysMissing.end(); ++it)
+            { // add the missing keys to the found/created section (in the alphabetical order)
+                lines.insert (j, QString ("%1=%2").arg (it.key()).arg (generalKeysMissing.value (it.key())));
+                ++j;
+            }
+        }
         if (!hackKeysMissing.isEmpty())
         {
             for (i = 0; i < lines.count(); ++i)
             {
-                if (lines.at (i).contains (QRegularExpression ("^\\s*\\[\\s*\\bHacks\\b\\s*\\]")))
+                if (lines.at (lines.count() - i - 1).contains (QRegularExpression ("^\\s*\\[\\s*Hacks\\s*\\]")))
                     break;
             }
             if (i == lines.count())
@@ -2381,6 +2452,7 @@ void KvantumManager::writeConfig()
                 lines << "" << QString ("[Hacks]");
                 ++i;
             }
+            else i = lines.count() - i - 1;
             for (j = i+1; j < lines.count(); ++j)
             {
                 if (lines.at (j).contains (QRegularExpression ("^\\s*\\[")))
@@ -2393,27 +2465,28 @@ void KvantumManager::writeConfig()
                 ++j;
             }
         }
-        if (!generalKeysMissing.isEmpty())
+        if (!focusKeysMissing.isEmpty())
         {
             for (i = 0; i < lines.count(); ++i)
             {
-                if (lines.at (i).contains (QRegularExpression ("^\\s*\\[\\s*%\\bGeneral\\b\\s*\\]")))
+                if (lines.at (lines.count() - i - 1).contains (QRegularExpression ("^\\s*\\[\\s*Focus\\s*\\]")))
                     break;
             }
             if (i == lines.count())
             {
-                lines << "" << QString ("[%General]");
+                lines << "" << QString ("[Focus]");
                 ++i;
             }
+            else i = lines.count() - i - 1;
             for (j = i+1; j < lines.count(); ++j)
             {
                 if (lines.at (j).contains (QRegularExpression ("^\\s*\\[")))
                     break;
             }
             while (j-1 >= 0 && lines.at (j-1).isEmpty()) --j;
-            for (it = generalKeysMissing.begin(); it != generalKeysMissing.end(); ++it)
+            for (it = focusKeysMissing.begin(); it != focusKeysMissing.end(); ++it)
             {
-                lines.insert (j, QString ("%1=%2").arg (it.key()).arg (generalKeysMissing.value (it.key())));
+                lines.insert (j, QString ("%1=%2").arg (it.key()).arg (focusKeysMissing.value (it.key())));
                 ++j;
             }
         }

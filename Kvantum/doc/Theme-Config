@@ -649,10 +649,6 @@ transient_groove                  true/false          Should transient scrollbar
                                                       base color will be used for painting the
                                                       background with 25% translucency.
 
-no_focus_rect                     true/false          Should all (dotted) focus rectangles be
-                                                      removed? By default, they exist to show
-                                                      widgets with keyboard focus.
-
 tree_branch_line                  true/false          Draw tree branch lines? They are not
                                                       drawn by default.
 
