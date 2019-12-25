@@ -1080,6 +1080,18 @@ void Style::renderLabel(
           painter->save();
           if (lspec.a < 255)
             shadowColor.setAlpha(lspec.a);
+          if (hspec_.opaque_colors)
+          {
+            int gray = qGray(shadowColor.rgb());
+            if (gray <= 100)
+              gray += 100;
+            else
+            {
+              gray -= 100;
+              gray = qMax(0, gray);
+            }
+            shadowColor = overlayColor(QColor(gray,gray,gray), shadowColor);
+          }
           painter->setPen(shadowColor);
           for (int i=0; i<lspec.depth; i++)
           {
@@ -1112,6 +1124,21 @@ void Style::renderLabel(
     {
       painter->save();
       normalColor.setAlpha(102); // 0.4 * normalColor.alpha()
+      if (hspec_.opaque_colors)
+      {
+        int gray = qGray(normalColor.rgb());
+        if (gray <= 100)
+        {
+          gray += 200;
+          gray = qMin(255,gray);
+        }
+        else
+        {
+          gray -= 200;
+          gray = qMax(0, gray);
+        }
+        normalColor = overlayColor(QColor(gray,gray,gray), normalColor);
+      }
       painter->setPen(normalColor);
       painter->drawText(rtext,talign,text);
       painter->restore();

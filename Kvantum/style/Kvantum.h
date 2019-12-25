@@ -165,9 +165,6 @@ class Style : public QCommonStyle {
       DisabledSelected
     };
 
-    /* Set standard palette colors to the Kvantum theme colors. */
-    void polishStandardPalette() const;
-
     /* Set up a theme with the given name. If there is no name,
        the default theme will be used. If the config or SVG file of
        the theme is missing, that of the default theme will be used. */
@@ -365,7 +362,7 @@ class Style : public QCommonStyle {
     }
 
     /* Gets color from #rrggbbaa. */
-    QColor getFromRGBA(const QString &str, bool ignoreOpaqueness = false) const;
+    QColor getFromRGBA(const QString &str, bool isTextColor = true, bool ignoreOpaqueness = false) const;
 
     /* Is the window of this widget inactive? */
     bool isWidgetInactive(const QWidget *widget) const;

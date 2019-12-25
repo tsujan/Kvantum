@@ -124,7 +124,7 @@ QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
 
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
    Here we get the alpha from #RGBA if it exists. */
-QColor Style::getFromRGBA(const QString &str, bool ignoreOpaqueness) const
+QColor Style::getFromRGBA(const QString &str, bool isTextColor, bool ignoreOpaqueness) const
 {
   QColor col(str);
   if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
@@ -136,8 +136,24 @@ QColor Style::getFromRGBA(const QString &str, bool ignoreOpaqueness) const
     QString tmp(str);
     tmp.remove(7, 2);
     col = QColor(tmp);
-    if(ignoreOpaqueness || !hspec_.opaque_colors)
+    if (ignoreOpaqueness || !hspec_.opaque_colors)
       col.setAlpha(alpha);
+    else if (isTextColor && hspec_.opaque_colors)
+    {
+      col.setAlpha(alpha);
+      int gray = qGray(col.rgb());
+      if (gray <= 100)
+      {
+        gray += 200;
+        gray = qMin(255,gray);
+      }
+      else
+      {
+        gray -= 200;
+        gray = qMax(0, gray);
+      }
+      col = overlayColor(QColor(gray,gray,gray), col);
+    }
   }
   return col;
 }
@@ -8474,6 +8490,21 @@ void Style::drawControl(QStyle::ControlElement element,
                 {
                   disabledTxtCol = txtCol;
                   disabledTxtCol.setAlpha(102);
+                  if (hspec_.opaque_colors)
+                  {
+                    int gray = qGray(disabledTxtCol.rgb());
+                    if (gray <= 100)
+                    {
+                      gray += 200;
+                      gray = qMin(255,gray);
+                    }
+                    else
+                    {
+                      gray -= 200;
+                      gray = qMax(0, gray);
+                    }
+                    disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
+                  }
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
@@ -8570,6 +8601,21 @@ void Style::drawControl(QStyle::ControlElement element,
             if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
             QColor disabledTxtCol = txtCol;
             disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
+            if (hspec_.opaque_colors)
+            {
+              int gray = qGray(disabledTxtCol.rgb());
+              if (gray <= 100)
+              {
+                gray += 200;
+                gray = qMin(255,gray);
+              }
+              else
+              {
+                gray -= 200;
+                gray = qMax(0, gray);
+              }
+              disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
+            }
 
             if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), txtCol))
             {
@@ -8607,6 +8653,21 @@ void Style::drawControl(QStyle::ControlElement element,
                 {
                   QColor disabledTxtCol = txtCol;
                   disabledTxtCol.setAlpha(102);
+                  if (hspec_.opaque_colors)
+                  {
+                    int gray = qGray(disabledTxtCol.rgb());
+                    if (gray <= 100)
+                    {
+                      gray += 200;
+                      gray = qMin(255,gray);
+                    }
+                    else
+                    {
+                      gray -= 200;
+                      gray = qMax(0, gray);
+                    }
+                    disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
+                  }
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
@@ -11960,6 +12021,18 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               painter->save();
               if (lspec.a < 255)
                 shadowColor.setAlpha(lspec.a);
+              if (hspec_.opaque_colors)
+              {
+                int gray = qGray(shadowColor.rgb());
+                if (gray <= 100)
+                  gray += 100;
+                else
+                {
+                  gray -= 100;
+                  gray = qMax(0, gray);
+                }
+                shadowColor = overlayColor(QColor(gray,gray,gray), shadowColor);
+              }
               painter->setPen(shadowColor);
               for (int i=0; i<lspec.depth; i++)
               {

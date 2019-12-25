@@ -1138,9 +1138,14 @@ hacks_spec ThemeConfig::getHacksSpec() const
   }
 #endif
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+  /* a workaround for a nasty bug about text translucency in Qt 5.14.0 */
+  r.opaque_colors = true;
+#else
   v = getValue(KSL("Hacks"),KSL("opaque_colors"));
   if (v.isValid())
     r.opaque_colors = v.toBool();
+#endif
 
   v = getValue(KSL("Hacks"),KSL("transparent_ktitle_label"));
   r.transparent_ktitle_label = v.toBool();

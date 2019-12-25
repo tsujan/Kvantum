@@ -8,6 +8,7 @@ V0.14.0
  * Removed the redundant key "no_focus_rect".
  * Safeguard against a badly edited kvconfig file when writing to it with Kvantum Manager.
  * When the "opaque_colors" workaround is used, apply the translucent alternate base color over the base color.
+ * Added a (temporary) workaround for a nasty bug about text translucency in Qt 5.14.0.
 
 V0.13.0
 ---------
