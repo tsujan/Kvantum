@@ -12008,12 +12008,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             QColor shadowColor;
             if (isInactive)
             {
-              shadowColor = getFromRGBA(lspec.inactiveShadowColor);
+              shadowColor = getFromRGBA(lspec.inactiveShadowColor, true, true);
               if (!shadowColor.isValid())
-                shadowColor = getFromRGBA(lspec.shadowColor);
+                shadowColor = getFromRGBA(lspec.shadowColor, true, true);
             }
             else
-              shadowColor = getFromRGBA(lspec.shadowColor);
+              shadowColor = getFromRGBA(lspec.shadowColor, true, true);
 
             /* the shadow should have enough contrast with the text */
             if (enoughContrast(col, shadowColor))
@@ -12023,10 +12023,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 shadowColor.setAlpha(lspec.a);
               if (hspec_.opaque_colors)
               {
-                int gray = qGray(shadowColor.rgb());
-                if (gray <= 100) gray += 100;
-                else gray -= 100;
-                shadowColor = overlayColor(QColor(gray,gray,gray), shadowColor);
+                painter->setOpacity(shadowColor.alphaF());
+                shadowColor.setAlpha(255);
               }
               painter->setPen(shadowColor);
               for (int i=0; i<lspec.depth; i++)
