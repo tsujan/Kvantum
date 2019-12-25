@@ -138,7 +138,7 @@ QColor Style::getFromRGBA(const QString &str, bool isTextColor, bool ignoreOpaqu
     col = QColor(tmp);
     if (ignoreOpaqueness || !hspec_.opaque_colors)
       col.setAlpha(alpha);
-    else if (isTextColor && hspec_.opaque_colors)
+    else if (isTextColor && alpha < 255)
     {
       col.setAlpha(alpha);
       int gray = qGray(col.rgb());
