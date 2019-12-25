@@ -1083,13 +1083,8 @@ void Style::renderLabel(
           if (hspec_.opaque_colors)
           {
             int gray = qGray(shadowColor.rgb());
-            if (gray <= 100)
-              gray += 100;
-            else
-            {
-              gray -= 100;
-              gray = qMax(0, gray);
-            }
+            if (gray <= 100) gray += 100;
+            else gray -= 100;
             shadowColor = overlayColor(QColor(gray,gray,gray), shadowColor);
           }
           painter->setPen(shadowColor);
