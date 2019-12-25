@@ -1222,28 +1222,28 @@ QPalette Style::standardPalette() const
   else // just to know that all brushes are set
     standardPalette_.setColor(QPalette::Active,QPalette::Base,QColor(Qt::white));
 
-  col = getFromRGBA(cspec_.altBaseColor);
+  col = getFromRGBA(cspec_.altBaseColor, true);
   if (col.isValid())
   {
-    /* make the alternate base color opaque by applying it over the base color
-       because some apps (like Krusader) may ignore its translucency */
-    /*if (col.alpha() < 255)
+    /* if opaqueness is forced, make the alternate base color opaque
+       by applying it over the base color */
+    if (hspec_.opaque_colors && col.alpha() < 255)
     {
       QColor baseCol = standardPalette().color(QPalette::Active,QPalette::Base);
       baseCol.setAlpha(255);
       col = overlayColor(baseCol,col);
-    }*/
+    }
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
-    col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
+    col1 = getFromRGBA(cspec_.inactiveAltBaseColor, true);
     if (col1.isValid() && hasInactiveness)
     {
-      /*if (col1.alpha() < 255)
+      if (hspec_.opaque_colors && col1.alpha() < 255)
       {
         QColor baseCol = standardPalette().color(QPalette::Inactive,QPalette::Base);
         baseCol.setAlpha(255);
         col1 = overlayColor(baseCol,col1);
-      }*/
+      }
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
     }
     else

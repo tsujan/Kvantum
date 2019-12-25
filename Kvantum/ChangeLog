@@ -7,6 +7,7 @@ V0.14.0
  * Allow custom elements for focus rectangles of some widgets.
  * Removed the redundant key "no_focus_rect".
  * Safeguard against a badly edited kvconfig file when writing to it with Kvantum Manager.
+ * When the "opaque_colors" workaround is used, apply the translucent alternate base color over the base color.
 
 V0.13.0
 ---------

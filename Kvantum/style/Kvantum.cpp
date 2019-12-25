@@ -124,7 +124,7 @@ QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
 
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
    Here we get the alpha from #RGBA if it exists. */
-QColor Style::getFromRGBA(const QString &str) const
+QColor Style::getFromRGBA(const QString &str, bool ignoreOpaqueness) const
 {
   QColor col(str);
   if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
@@ -136,7 +136,7 @@ QColor Style::getFromRGBA(const QString &str) const
     QString tmp(str);
     tmp.remove(7, 2);
     col = QColor(tmp);
-    if(!hspec_.opaque_colors)
+    if(ignoreOpaqueness || !hspec_.opaque_colors)
       col.setAlpha(alpha);
   }
   return col;
