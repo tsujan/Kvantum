@@ -1067,12 +1067,12 @@ void Style::renderLabel(
         QColor shadowColor;
         if (isInactive)
         {
-          shadowColor = getFromRGBA(lspec.inactiveShadowColor, true, true);
+          shadowColor = getFromRGBA(lspec.inactiveShadowColor);
           if (!shadowColor.isValid())
-            shadowColor = getFromRGBA(lspec.shadowColor, true, true);
+            shadowColor = getFromRGBA(lspec.shadowColor);
         }
         else
-          shadowColor = getFromRGBA(lspec.shadowColor, true, true);
+          shadowColor = getFromRGBA(lspec.shadowColor);
 
         /* the shadow should have enough contrast with the text */
         if (enoughContrast(txtCol, shadowColor))
@@ -1100,6 +1100,11 @@ void Style::renderLabel(
       if (txtCol.isValid())
       {
         painter->save();
+        if (hspec_.opaque_colors)
+        {
+          painter->setOpacity(txtCol.alphaF());
+          txtCol.setAlpha(255);
+        }
         painter->setPen(txtCol);
         painter->drawText(rtext,talign,text);
         painter->restore();
@@ -1119,18 +1124,8 @@ void Style::renderLabel(
       normalColor.setAlpha(102); // 0.4 * normalColor.alpha()
       if (hspec_.opaque_colors)
       {
-        int gray = qGray(normalColor.rgb());
-        if (gray <= 100)
-        {
-          gray += 200;
-          gray = qMin(255,gray);
-        }
-        else
-        {
-          gray -= 200;
-          gray = qMax(0, gray);
-        }
-        normalColor = overlayColor(QColor(gray,gray,gray), normalColor);
+        painter->setOpacity(normalColor.alphaF());
+        normalColor.setAlpha(255);
       }
       painter->setPen(normalColor);
       painter->drawText(rtext,talign,text);

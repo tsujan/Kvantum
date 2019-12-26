@@ -361,8 +361,11 @@ class Style : public QCommonStyle {
       forceButtonTextColor(const_cast<QWidget*>(widget), col);
     }
 
+    /* Opacifies a translucent color if opaciry is forced. */
+    void opacifyColor(QColor& col) const;
+
     /* Gets color from #rrggbbaa. */
-    QColor getFromRGBA(const QString &str, bool isTextColor = true, bool ignoreOpaqueness = false) const;
+    QColor getFromRGBA(const QString &str, bool isTextColor = true, bool ignoreOpaqueness = true) const;
 
     /* Is the window of this widget inactive? */
     bool isWidgetInactive(const QWidget *widget) const;

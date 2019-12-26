@@ -122,6 +122,28 @@ QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
   return res;
 }
 
+/* NOTE: This method should be called before a foreground palette is set
+         to make opaque text colors out of translucent ones if needed.
+         However, Kvantum always uses real text colors to draw labels. */
+void Style::opacifyColor(QColor& col) const
+{
+  if (hspec_.opaque_colors && col.alpha() < 255)
+  {
+    int gray = qGray(col.rgb());
+    if (gray <= 100)
+    {
+      gray += 200;
+      gray = qMin(255,gray);
+    }
+    else
+    {
+      gray -= 200;
+      gray = qMax(0, gray);
+    }
+    col = overlayColor(QColor(gray,gray,gray), col);
+  }
+}
+
 /* Qt >= 5.2 accepts #ARGB as the color name but most apps use #RGBA.
    Here we get the alpha from #RGBA if it exists. */
 QColor Style::getFromRGBA(const QString &str, bool isTextColor, bool ignoreOpaqueness) const
@@ -141,18 +163,7 @@ QColor Style::getFromRGBA(const QString &str, bool isTextColor, bool ignoreOpaqu
     else if (isTextColor && alpha < 255)
     {
       col.setAlpha(alpha);
-      int gray = qGray(col.rgb());
-      if (gray <= 100)
-      {
-        gray += 200;
-        gray = qMin(255,gray);
-      }
-      else
-      {
-        gray -= 200;
-        gray = qMax(0, gray);
-      }
-      col = overlayColor(QColor(gray,gray,gray), col);
+      opacifyColor(col);
     }
   }
   return col;
@@ -238,7 +249,12 @@ Style::Style(bool useDark) : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+  QList<QByteArray> desktopList = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':');
+  QSet<QByteArray> desktop(desktopList.begin(), desktopList.end());
+#else
   QSet<QByteArray> desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':').toSet();
+#endif
   QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
   gtkDesktop_ = gtkDesktops.intersects(desktop);
 
@@ -1451,6 +1467,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
       //&& (!tb || paneledButtons.contains(widget))
       && !b->text().isEmpty()) // make exception for the cursor-like KUrlNavigatorToggleButton
   {
+    opacifyColor(col);
     QPalette palette = b->palette();
     if (col != palette.color(QPalette::ButtonText))
     {
@@ -5040,6 +5057,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
             if (col.isValid())
             {
+              opacifyColor(col);
               QPalette palette = iw->palette();
               palette.setColor(QPalette::Active,QPalette::Text,col);
               palette.setColor(QPalette::Inactive,QPalette::Text,col);
@@ -5527,6 +5545,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 col = QColor();
               if (col.isValid())
               {
+                opacifyColor(col);
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::Text, col);
                 o.palette = palette;
@@ -5569,6 +5588,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 col = QColor();
               if (col.isValid())
               {
+                opacifyColor(col);
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::Text, col);
                 palette.setColor(QPalette::HighlightedText, col);
@@ -5605,6 +5625,7 @@ void Style::drawControl(QStyle::ControlElement element,
                       : pressInactiveColor;
               if (col.isValid())
               {
+                opacifyColor(col);
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
@@ -5626,6 +5647,7 @@ void Style::drawControl(QStyle::ControlElement element,
                       : toggleInactiveColor;
               if (col.isValid())
               {
+                opacifyColor(col);
                 QStyleOptionViewItem o(*opt);
                 palette.setColor(QPalette::HighlightedText, col);
                 o.palette = palette;
@@ -6875,22 +6897,23 @@ void Style::drawControl(QStyle::ControlElement element,
         else if (option->state & State_MouseOver)
           state = 2;
 
+        bool isInactive(isWidgetInactive(widget));
+
         const label_spec lspec = getLabelSpec(QStringLiteral("ToolboxTab"));
-        QPalette tBoxPalette(opt->palette);
         int smallIconSize = pixelMetric(PM_SmallIconSize,opt,widget);
         QPixmap px = getPixmapFromIcon(opt->icon,
-                                       getIconMode(state,isWidgetInactive(widget),lspec),
+                                       getIconMode(state,isInactive,lspec),
                                        iconstate,
                                        QSize(smallIconSize,smallIconSize));
 
         /* first get the correct pixmap and palette */
+        QColor col;
         if (state != 0)
         {
-          QColor col;
           const label_spec lspec = getLabelSpec(QStringLiteral("ToolboxTab"));
           if (state == 1)
           {
-            if (isWidgetInactive(widget))
+            if (isInactive)
             {
               col = getFromRGBA(lspec.normalInactiveColor);
               if (!col.isValid())
@@ -6898,12 +6921,10 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             else
               col = getFromRGBA(lspec.normalColor);
-            if (col.isValid())
-              tBoxPalette.setColor(QPalette::ButtonText, col);
           }
           else if (state == 2)
           {
-            if (isWidgetInactive(widget))
+            if (isInactive)
             {
               col = getFromRGBA(lspec.focusInactiveColor);
               if (!col.isValid())
@@ -6911,15 +6932,13 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             else
               col = getFromRGBA(lspec.focusColor);
-            if (col.isValid())
-              tBoxPalette.setColor(QPalette::ButtonText, col);
             qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
             if (tintPercentage > 0 && !opt->icon.isNull())
               px = tintedPixmap(option, px,tintPercentage);
           }
           else if (state == 3)
           {
-            if (isWidgetInactive(widget))
+            if (isInactive)
             {
               col = getFromRGBA(lspec.pressInactiveColor);
               if (!col.isValid())
@@ -6927,8 +6946,6 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             else
               col = getFromRGBA(lspec.pressColor);
-            if (col.isValid())
-              tBoxPalette.setColor(QPalette::ButtonText, col);
             qreal tintPercentage = static_cast<qreal>(hspec_.tint_on_mouseover);
             if (tintPercentage > 0 && (option->state & State_MouseOver) && !opt->icon.isNull())
               px = tintedPixmap(option, px,tintPercentage);
@@ -6941,11 +6958,15 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
         }
-        else if (!opt->icon.isNull()) // disabled
+        else // disabled
         {
-          qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
-          if (opacityPercentage < 100.0)
-            px = translucentPixmap(px, opacityPercentage);
+          col = standardPalette().color(QPalette::Disabled,QPalette::Text);
+          if (!opt->icon.isNull())
+          {
+            qreal opacityPercentage = static_cast<qreal>(hspec_.disabled_icon_opacity);
+            if (opacityPercentage < 100.0)
+              px = translucentPixmap(px, opacityPercentage);
+          }
         }
 
         /* then, draw the text and icon as in QCommonStyle::drawControl()
@@ -6986,9 +7007,20 @@ void Style::drawControl(QStyle::ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
+
         painter->save();
+        if (col.isValid())
+        {
+          if (hspec_.opaque_colors)
+          {
+            painter->setOpacity(col.alphaF());
+            col.setAlpha(255);
+          }
+          painter->setPen(col);
+        }
         painter->setLayoutDirection(option->direction); // because of a bug in QToolBox?
-        drawItemText(painter, tr, talign, tBoxPalette, state != 0, txt, QPalette::ButtonText);
+        drawItemText(painter, tr, talign, opt->palette, state != 0, txt,
+                     col.isValid() ? QPalette::NoRole : QPalette::ButtonText);
         painter->restore();
 
         if (state == 3 && styleHint(QStyle::SH_ToolBox_SelectedPageTitleBold, opt, widget))
@@ -8454,6 +8486,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
             if (enoughContrast(txtCol, toolbarTxtCol))
             {
+              opacifyColor(toolbarTxtCol);
               bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
                                    || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
               QColor inactiveTxtCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
@@ -8485,37 +8518,24 @@ void Style::drawControl(QStyle::ControlElement element,
 
               if (toolbarComboBox)
               {
-                txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
-                if (txtCol.isValid())
+                QColor comboTxtCol = getFromRGBA(getLabelSpec(QStringLiteral("ComboBox")).normalColor);
+                if (comboTxtCol.isValid())
                 {
-                  disabledTxtCol = txtCol;
-                  disabledTxtCol.setAlpha(102);
-                  if (hspec_.opaque_colors)
-                  {
-                    int gray = qGray(disabledTxtCol.rgb());
-                    if (gray <= 100)
-                    {
-                      gray += 200;
-                      gray = qMin(255,gray);
-                    }
-                    else
-                    {
-                      gray -= 200;
-                      gray = qMax(0, gray);
-                    }
-                    disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
-                  }
+                  QColor comboDisabledTxtCol = comboTxtCol;
+                  comboDisabledTxtCol.setAlpha(102);
+                  opacifyColor(comboTxtCol);
+                  opacifyColor(comboDisabledTxtCol);
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
                     if (!widget->isAncestorOf(cb)) continue; // not within another window
                     QPalette palette = cb->palette();
-                    if (txtCol != palette.color(QPalette::ButtonText))
+                    if (comboTxtCol != palette.color(QPalette::ButtonText))
                     {
-                      palette.setColor(QPalette::ButtonText, txtCol);
-                      palette.setColor(QPalette::WindowText, txtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledTxtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledTxtCol);
+                      palette.setColor(QPalette::ButtonText, comboTxtCol);
+                      palette.setColor(QPalette::WindowText, comboTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, comboDisabledTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::WindowText, comboDisabledTxtCol);
                       cb->setPalette(palette);
                     }
                     else break; // all or nothing
@@ -8601,24 +8621,12 @@ void Style::drawControl(QStyle::ControlElement element,
             if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
             QColor disabledTxtCol = txtCol;
             disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
-            if (hspec_.opaque_colors)
-            {
-              int gray = qGray(disabledTxtCol.rgb());
-              if (gray <= 100)
-              {
-                gray += 200;
-                gray = qMin(255,gray);
-              }
-              else
-              {
-                gray -= 200;
-                gray = qMax(0, gray);
-              }
-              disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
-            }
+            opacifyColor(disabledTxtCol);
+            opacifyColor(inactiveTxtCol);
 
             if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), txtCol))
             {
+              opacifyColor(txtCol); // after determining the contrast
               bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
                                    || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
 
@@ -8648,37 +8656,24 @@ void Style::drawControl(QStyle::ControlElement element,
 
               if (toolbarComboBox)
               {
-                txtCol = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
-                if (txtCol.isValid())
+                QColor comboTxtCol = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
+                if (comboTxtCol.isValid())
                 {
-                  QColor disabledTxtCol = txtCol;
-                  disabledTxtCol.setAlpha(102);
-                  if (hspec_.opaque_colors)
-                  {
-                    int gray = qGray(disabledTxtCol.rgb());
-                    if (gray <= 100)
-                    {
-                      gray += 200;
-                      gray = qMin(255,gray);
-                    }
-                    else
-                    {
-                      gray -= 200;
-                      gray = qMax(0, gray);
-                    }
-                    disabledTxtCol = overlayColor(QColor(gray,gray,gray), disabledTxtCol);
-                  }
+                  QColor comboDisabledTxtCol = comboTxtCol;
+                  comboDisabledTxtCol.setAlpha(102);
+                  opacifyColor(comboTxtCol);
+                  opacifyColor(comboDisabledTxtCol);
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
                     if (!widget->isAncestorOf(cb)) continue;
                     QPalette palette = cb->palette();
-                    if (txtCol != palette.color(QPalette::ButtonText))
+                    if (comboTxtCol != palette.color(QPalette::ButtonText))
                     {
-                      palette.setColor(QPalette::ButtonText, txtCol);
-                      palette.setColor(QPalette::WindowText, txtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledTxtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::WindowText, disabledTxtCol);
+                      palette.setColor(QPalette::ButtonText, comboTxtCol);
+                      palette.setColor(QPalette::WindowText, comboTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, comboDisabledTxtCol);
+                      palette.setColor(QPalette::Disabled,QPalette::WindowText, comboDisabledTxtCol);
                       cb->setPalette(palette);
                     }
                     else break;
@@ -8706,6 +8701,7 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             else
             { // on toolbars, labels get the button text color; that's corrected here
+              opacifyColor(txtCol);
               const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
               for (QLabel *label : labels)
               {
@@ -10905,6 +10901,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   col = getFromRGBA(lspec.focusColor);
                 if (col.isValid())
                 {
+                  opacifyColor(col);
                   for (int i = 0; i < llist.count(); ++i)
                   {
                     QPalette palette = llist.at(i)->palette();
@@ -12008,12 +12005,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             QColor shadowColor;
             if (isInactive)
             {
-              shadowColor = getFromRGBA(lspec.inactiveShadowColor, true, true);
+              shadowColor = getFromRGBA(lspec.inactiveShadowColor);
               if (!shadowColor.isValid())
-                shadowColor = getFromRGBA(lspec.shadowColor, true, true);
+                shadowColor = getFromRGBA(lspec.shadowColor);
             }
             else
-              shadowColor = getFromRGBA(lspec.shadowColor, true, true);
+              shadowColor = getFromRGBA(lspec.shadowColor);
 
             /* the shadow should have enough contrast with the text */
             if (enoughContrast(col, shadowColor))
@@ -12041,6 +12038,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           if (col.isValid())
           {
             painter->save();
+            if (hspec_.opaque_colors)
+            {
+              painter->setOpacity(col.alphaF());
+              col.setAlpha(255);
+            }
             painter->setPen(col);
           }
 
@@ -12903,13 +12905,19 @@ int Style::styleHint(QStyle::StyleHint hint,
       {
         col = getFromRGBA(lspec.focusColor);
         if (col.isValid())
+        {
+          opacifyColor(col);
           return col.rgba();
+        }
       }
       else
       {
         col = getFromRGBA(lspec.normalColor);
         if (col.isValid())
+        {
+          opacifyColor(col);
           return col.rgba();
+        }
       }
 
       return QCommonStyle::styleHint(hint,option,widget,returnData);

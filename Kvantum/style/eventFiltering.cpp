@@ -338,7 +338,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             col = getFromRGBA(lspec.normalColor);
         }
         if (col.isValid())
+        {
+          opacifyColor(col);
           pPalette.setColor(QPalette::ButtonText, col);
+        }
 
         /* icon */
         if (!cbtn->icon().isNull())
@@ -843,10 +846,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* set the normal inactive text color to the normal active one
          (needed when the app sets it inactive) */
-      QColor normalCol = getFromRGBA(lspec.normalColor);
-      if (!normalCol.isValid())
-        normalCol = standardPalette().color(QPalette::Active,QPalette::Text);
-      palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+      QColor col = getFromRGBA(lspec.normalColor);
+      if (!col.isValid())
+        col = standardPalette().color(QPalette::Active,QPalette::Text);
+      else
+        opacifyColor(col);
+      palette.setColor(QPalette::Inactive, QPalette::Text, col);
       if (!hasInactiveSelItemCol_)
       {
         w->setPalette(palette);
@@ -854,8 +859,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       /* set the toggled inactive text color to the toggled active one
          (the main purpose of installing an event filter on the view) */
-      palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
-                       getFromRGBA(lspec.toggleColor));
+      col = getFromRGBA(lspec.toggleColor);
+      opacifyColor(col);
+      palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
       /* use the active highlight color for the toggled (unfocused) item if there's
          no contrast with the pressed state because some apps (like Qt Designer)
          may not call PE_PanelItemViewItem but highlight the item instead */
@@ -879,18 +885,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
-      QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
-      if (!normalInactiveCol.isValid())
-        normalInactiveCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
-      palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+      QColor col = getFromRGBA(lspec.normalInactiveColor);
+      if (!col.isValid())
+        col = standardPalette().color(QPalette::Inactive,QPalette::Text);
+      else
+        opacifyColor(col);
+      palette.setColor(QPalette::Inactive, QPalette::Text, col);
       if (!hasInactiveSelItemCol_)
       { // custom text color
         w->setPalette(palette);
         break;
       }
       /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
-      palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
-                       getFromRGBA(lspec.toggleInactiveColor));
+      col = getFromRGBA(lspec.toggleInactiveColor);
+      opacifyColor(col);
+      palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
       /* restore the inactive highlight color (which was changed at QEvent::WindowActivate) */
       if (!toggledItemHasContrast_)
       {
@@ -1196,17 +1205,20 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
         if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
         {
-          QColor normalInactiveCol = getFromRGBA(lspec.normalInactiveColor);
-          if (!normalInactiveCol.isValid())
-            normalInactiveCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
-          palette.setColor(QPalette::Inactive, QPalette::Text, normalInactiveCol);
+          QColor col = getFromRGBA(lspec.normalInactiveColor);
+          if (!col.isValid())
+            col = standardPalette().color(QPalette::Inactive,QPalette::Text);
+          else
+            opacifyColor(col);
+          palette.setColor(QPalette::Inactive, QPalette::Text, col);
           if (!hasInactiveSelItemCol_)
           {
             w->setPalette(palette);
             break;
           }
-          palette.setColor(QPalette::Inactive,QPalette::HighlightedText,
-                           getFromRGBA(lspec.toggleInactiveColor));
+          col = getFromRGBA(lspec.toggleInactiveColor);
+          opacifyColor(col);
+          palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
@@ -1215,17 +1227,20 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         else
         {
-          QColor normalCol = getFromRGBA(lspec.normalColor);
-          if (!normalCol.isValid())
-            normalCol = standardPalette().color(QPalette::Active,QPalette::Text);
-          palette.setColor(QPalette::Inactive, QPalette::Text, normalCol);
+          QColor col = getFromRGBA(lspec.normalColor);
+          if (!col.isValid())
+            col = standardPalette().color(QPalette::Active,QPalette::Text);
+          else
+            opacifyColor(col);
+          palette.setColor(QPalette::Inactive, QPalette::Text, col);
           if (!hasInactiveSelItemCol_)
           {
             w->setPalette(palette);
             break;
           }
-          palette.setColor(QPalette::Inactive, QPalette::HighlightedText,
-                           getFromRGBA(lspec.toggleColor));
+          col = getFromRGBA(lspec.toggleColor);
+          opacifyColor(col);
+          palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
           if (!toggledItemHasContrast_)
           {
             palette.setColor(QPalette::Inactive, QPalette::Highlight,
@@ -1272,13 +1287,16 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QPalette palette = w->palette();
       const label_spec tlspec = getLabelSpec("Toolbar");
       QColor col = getFromRGBA(tlspec.normalColor);
+      opacifyColor(col);
       if (col.isValid() && palette.color(QPalette::Active, QPalette::Text) != col)
       {
         palette.setColor(QPalette::Active, QPalette::Text, col);
         QColor col1 = getFromRGBA(tlspec.normalInactiveColor);
         if (!col1.isValid()) col1 = col;
+        opacifyColor(col1);
         palette.setColor(QPalette::Inactive, QPalette::Text, col1);
         col.setAlpha(102); // 0.4 * disabledCol.alpha()
+        opacifyColor(col);
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         w->setPalette(palette);
       }
