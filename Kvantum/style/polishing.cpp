@@ -1214,70 +1214,40 @@ QPalette Style::standardPalette() const
   bool hasInactiveness(!tspec_.no_inactiveness);
 
   /* background colors */
-  QColor col = getFromRGBA(cspec_.windowColor, false, false);
+  QColor col = getFromRGBA(cspec_.windowColor);
   if (col.isValid())
   {
     standardPalette_.setColor(QPalette::Active,QPalette::Window,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::Window,col); // used in generatedIconPixmap()
-    col1 = getFromRGBA(cspec_.inactiveWindowColor, false, false);
+    col1 = getFromRGBA(cspec_.inactiveWindowColor);
     if (col1.isValid() && hasInactiveness)
       standardPalette_.setColor(QPalette::Inactive,QPalette::Window,col1);
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::Window,col);
   }
 
-  col = getFromRGBA(cspec_.baseColor, false, true);
+  col = getFromRGBA(cspec_.baseColor);
   if (col.isValid())
   {
-    if (hspec_.opaque_colors && col.alpha() < 255)
-    { // if opaqueness is forced, apply it over the window color
-      QColor winCol = standardPalette_.color(QPalette::Active,QPalette::Window);
-      winCol.setAlpha(255);
-      col = overlayColor(winCol,col);
-    }
     standardPalette_.setColor(QPalette::Active,QPalette::Base,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::Base,col); // some apps may use it
-    col1 = getFromRGBA(cspec_.inactiveBaseColor, false, true);
+    col1 = getFromRGBA(cspec_.inactiveBaseColor);
     if (col1.isValid() && hasInactiveness)
-    {
-      if (hspec_.opaque_colors && col1.alpha() < 255)
-      {
-        QColor winCol = standardPalette_.color(QPalette::Inactive,QPalette::Window);
-        winCol.setAlpha(255);
-        col1 = overlayColor(winCol,col1);
-      }
       standardPalette_.setColor(QPalette::Inactive,QPalette::Base,col1);
-    }
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::Base,col);
   }
   else // just to know that all brushes are set
     standardPalette_.setColor(QPalette::Active,QPalette::Base,QColor(Qt::white));
 
-  col = getFromRGBA(cspec_.altBaseColor, false, true);
+  col = getFromRGBA(cspec_.altBaseColor);
   if (col.isValid())
   {
-    /* if opaqueness is forced, make the alternate base color opaque
-       by applying it over the base color */
-    if (hspec_.opaque_colors && col.alpha() < 255)
-    {
-      QColor baseCol = standardPalette_.color(QPalette::Active,QPalette::Base);
-      baseCol.setAlpha(255);
-      col = overlayColor(baseCol,col);
-    }
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
-    col1 = getFromRGBA(cspec_.inactiveAltBaseColor, false, true);
+    col1 = getFromRGBA(cspec_.inactiveAltBaseColor);
     if (col1.isValid() && hasInactiveness)
-    {
-      if (hspec_.opaque_colors && col1.alpha() < 255)
-      {
-        QColor baseCol = standardPalette_.color(QPalette::Inactive,QPalette::Base);
-        baseCol.setAlpha(255);
-        col1 = overlayColor(baseCol,col1);
-      }
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col1);
-    }
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
   }
@@ -1296,32 +1266,32 @@ QPalette Style::standardPalette() const
     standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
   }
 
-  col = getFromRGBA(cspec_.buttonColor, false, true);
+  col = getFromRGBA(cspec_.buttonColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Button,col);
 
-  col = getFromRGBA(cspec_.lightColor, false, true);
+  col = getFromRGBA(cspec_.lightColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Light,col);
-  col = getFromRGBA(cspec_.midLightColor, false, true);
+  col = getFromRGBA(cspec_.midLightColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Midlight,col);
-  col = getFromRGBA(cspec_.darkColor, false, true);
+  col = getFromRGBA(cspec_.darkColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Dark,col);
-  col = getFromRGBA(cspec_.midColor, false, true);
+  col = getFromRGBA(cspec_.midColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Mid,col);
-  col = getFromRGBA(cspec_.shadowColor, false, true);
+  col = getFromRGBA(cspec_.shadowColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::Shadow,col);
 
-  col = getFromRGBA(cspec_.highlightColor, false, false);
+  col = getFromRGBA(cspec_.highlightColor);
   if (col.isValid())
   {
     standardPalette_.setColor(QPalette::Active,QPalette::Highlight,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::Highlight,col);
-    col1 = getFromRGBA(cspec_.inactiveHighlightColor, false, false);
+    col1 = getFromRGBA(cspec_.inactiveHighlightColor);
     if (col1.isValid() && col1 != col && hasInactiveness)
       standardPalette_.setColor(QPalette::Inactive,QPalette::Highlight,col1);
     else
@@ -1336,12 +1306,12 @@ QPalette Style::standardPalette() const
     }
   }
 
-  col = getFromRGBA(cspec_.tooltipBaseColor, false, false);
+  col = getFromRGBA(cspec_.tooltipBaseColor);
   if (col.isValid())
     standardPalette_.setColor(QPalette::ToolTipBase,col);
   else
   { // for backward compatibility
-    col = getFromRGBA(cspec_.tooltipTextColor, true, false);
+    col = getFromRGBA(cspec_.tooltipTextColor);
     if (col.isValid())
     {
       col1 = QColor(Qt::white);
@@ -1413,39 +1383,54 @@ QPalette Style::standardPalette() const
       standardPalette_.setColor(QPalette::Inactive,QPalette::WindowText,col);
   }
 
-  col = getFromRGBA(cspec_.buttonTextColor, true, false);
+  col = getFromRGBA(cspec_.buttonTextColor);
   if (col.isValid())
   {
+    opacifyColor(col);
     standardPalette_.setColor(QPalette::Active,QPalette::ButtonText,col);
     standardPalette_.setColor(QPalette::Inactive,QPalette::ButtonText,col);
   }
 
-  col = getFromRGBA(cspec_.tooltipTextColor, true, false);
-  if (col.isValid())
-    standardPalette_.setColor(QPalette::ToolTipText,col);
-
-  col = getFromRGBA(cspec_.highlightTextColor, true, false);
+  col = getFromRGBA(cspec_.tooltipTextColor);
   if (col.isValid())
   {
+    opacifyColor(col);
+    standardPalette_.setColor(QPalette::ToolTipText,col);
+  }
+
+  col = getFromRGBA(cspec_.highlightTextColor);
+  if (col.isValid())
+  {
+    opacifyColor(col);
     standardPalette_.setColor(QPalette::Active,QPalette::HighlightedText,col);
-    col1 = getFromRGBA(cspec_.inactiveHighlightTextColor, true, false);
+    col1 = getFromRGBA(cspec_.inactiveHighlightTextColor);
     if (col1.isValid() && hasInactiveness)
+    {
+      opacifyColor(col1);
       standardPalette_.setColor(QPalette::Inactive,QPalette::HighlightedText,col1);
+    }
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
   }
 
-  col = getFromRGBA(cspec_.linkColor, true, false);
-  if (col.isValid())
-    standardPalette_.setColor(QPalette::Link,col);
-  col = getFromRGBA(cspec_.linkVisitedColor, true, false);
-  if (col.isValid())
-    standardPalette_.setColor(QPalette::LinkVisited,col);
-
-  /* disabled text */
-  col = getFromRGBA(cspec_.disabledTextColor, true, false);
+  col = getFromRGBA(cspec_.linkColor);
   if (col.isValid())
   {
+    opacifyColor(col);
+    standardPalette_.setColor(QPalette::Link,col);
+  }
+  col = getFromRGBA(cspec_.linkVisitedColor);
+  if (col.isValid())
+  {
+    opacifyColor(col);
+    standardPalette_.setColor(QPalette::LinkVisited,col);
+  }
+
+  /* disabled text */
+  col = getFromRGBA(cspec_.disabledTextColor);
+  if (col.isValid())
+  {
+    opacifyColor(col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::Text,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::WindowText,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::ButtonText,col);

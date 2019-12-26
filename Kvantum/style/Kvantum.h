@@ -365,7 +365,7 @@ class Style : public QCommonStyle {
     void opacifyColor(QColor& col) const;
 
     /* Gets color from #rrggbbaa. */
-    QColor getFromRGBA(const QString &str, bool isTextColor = true, bool ignoreOpaqueness = true) const;
+    QColor getFromRGBA(const QString &str) const;
 
     /* Is the window of this widget inactive? */
     bool isWidgetInactive(const QWidget *widget) const;
