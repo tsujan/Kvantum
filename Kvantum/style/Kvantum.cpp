@@ -8481,7 +8481,10 @@ void Style::drawControl(QStyle::ControlElement element,
           if (toolbarState.isEmpty() // no child palette checked
               || toolbarState == "styled") // the toolbar was styled before
           {
-            QColor txtCol = standardPalette().color(QPalette::Active,QPalette::Text);
+            QColor txtCol = standardPalette().color(QPalette::Active, QPalette::Text);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+            QColor pTxtCol = standardPalette().color(QPalette::PlaceholderText);
+#endif
             QColor toolbarTxtCol(getFromRGBA(getLabelSpec(group).normalColor));
 
             if (enoughContrast(txtCol, toolbarTxtCol))
@@ -8489,8 +8492,8 @@ void Style::drawControl(QStyle::ControlElement element,
               opacifyColor(toolbarTxtCol);
               bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
                                    || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
-              QColor inactiveTxtCol = standardPalette().color(QPalette::Inactive,QPalette::Text);
-              QColor disabledTxtCol = standardPalette().color(QPalette::Disabled,QPalette::Text);
+              QColor inactiveTxtCol = standardPalette().color(QPalette::Inactive, QPalette::Text);
+              QColor disabledTxtCol = standardPalette().color(QPalette::Disabled, QPalette::Text);
 
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
@@ -8511,6 +8514,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+#endif
                   }
                   child->setPalette(palette);
                 }
@@ -8534,8 +8540,8 @@ void Style::drawControl(QStyle::ControlElement element,
                     {
                       palette.setColor(QPalette::ButtonText, comboTxtCol);
                       palette.setColor(QPalette::WindowText, comboTxtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::ButtonText, comboDisabledTxtCol);
-                      palette.setColor(QPalette::Disabled,QPalette::WindowText, comboDisabledTxtCol);
+                      palette.setColor(QPalette::Disabled, QPalette::ButtonText, comboDisabledTxtCol);
+                      palette.setColor(QPalette::Disabled, QPalette::WindowText, comboDisabledTxtCol);
                       cb->setPalette(palette);
                     }
                     else break; // all or nothing
@@ -8551,11 +8557,14 @@ void Style::drawControl(QStyle::ControlElement element,
                 {
                   if (!widget->isAncestorOf(le)) continue;
                   QPalette palette = le->palette();
-                  if (txtCol != palette.color(QPalette::Active,QPalette::Text))
+                  if (txtCol != palette.color(QPalette::Active, QPalette::Text))
                   {
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
-                    palette.setColor(QPalette::Inactive,QPalette::Text, inactiveTxtCol);
-                    palette.setColor(QPalette::Disabled,QPalette::Text, disabledTxtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+#endif
                     le->setPalette(palette);
                   }
                   /* all of them should be checked because some may be inside combos */
@@ -8621,6 +8630,11 @@ void Style::drawControl(QStyle::ControlElement element,
             if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
             QColor disabledTxtCol = txtCol;
             disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+            QColor pTxtCol = txtCol; // placeholder
+            pTxtCol.setAlpha(128);
+            opacifyColor(pTxtCol);
+#endif
             opacifyColor(disabledTxtCol);
             opacifyColor(inactiveTxtCol);
 
@@ -8649,6 +8663,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+#endif
                   }
                   child->setPalette(palette);
                 }
@@ -8694,6 +8711,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+#endif
                     le->setPalette(palette);
                   }
                 }

@@ -59,7 +59,9 @@ public:
     cb->addItems (QStringList() << "Kvantum" << "Qt" << "C++");
     toolBar_2->addWidget (cb);
     toolBar_2->addSeparator();
-    toolBar_2->addWidget (new QLineEdit("Kvantum"));
+    QLineEdit *lineedit = new QLineEdit("Kvantum");
+    lineedit->setPlaceholderText ("Placeholder");
+    toolBar_2->addWidget (lineedit);
     toolBar_2->addSeparator();
     toolBar_2->addWidget (new QSpinBox());
 

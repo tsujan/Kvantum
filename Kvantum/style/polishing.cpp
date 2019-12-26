@@ -167,6 +167,11 @@ void Style::polish(QWidget *widget)
       inactiveCol = tColor;
     QColor disabledCol = tColor;
     disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    QColor ptColor = tColor; // placeholder
+    ptColor.setAlpha(128);
+    opacifyColor(ptColor);
+#endif
     opacifyColor(tColor);
     opacifyColor(inactiveCol);
     opacifyColor(disabledCol);
@@ -186,6 +191,9 @@ void Style::polish(QWidget *widget)
         palette.setColor(QPalette::Active, QPalette::Text, tColor);
         palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
         palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+        palette.setColor(QPalette::PlaceholderText, ptColor);
+#endif
         respectDarkness = false; // we don't want to change its text color again
       }
       widget->setPalette(palette);
@@ -202,6 +210,9 @@ void Style::polish(QWidget *widget)
           palette.setColor(QPalette::Active, QPalette::Text, tColor);
           palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
           palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+          palette.setColor(QPalette::PlaceholderText, ptColor);
+#endif
           widget->setPalette(palette);
         }
       }
@@ -1344,13 +1355,24 @@ QPalette Style::standardPalette() const
   col = getFromRGBA(cspec_.textColor);
   if (col.isValid())
   {
-    if (hspec_.opaque_colors && col.alpha() < 255)
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    QColor placeholderTextColor = col;
+    placeholderTextColor.setAlpha(128);
+#endif
+    if (hspec_.opaque_colors)
     { // if opaqueness is forced, apply it over the base color
       QColor baseCol = standardPalette_.color(QPalette::Active,QPalette::Base);
       baseCol.setAlpha(255);
-      col = overlayColor(baseCol,col);
+      if (col.alpha() < 255)
+        col = overlayColor(baseCol,col);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      placeholderTextColor = overlayColor(baseCol,placeholderTextColor);
+#endif
     }
     standardPalette_.setColor(QPalette::Active,QPalette::Text,col);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+    standardPalette_.setColor(QPalette::PlaceholderText,placeholderTextColor);
+#endif
     col1 = getFromRGBA(cspec_.inactiveTextColor);
     if (col1.isValid() && hasInactiveness)
     {

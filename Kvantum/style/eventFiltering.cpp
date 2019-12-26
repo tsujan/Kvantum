@@ -1287,18 +1287,28 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QPalette palette = w->palette();
       const label_spec tlspec = getLabelSpec("Toolbar");
       QColor col = getFromRGBA(tlspec.normalColor);
-      opacifyColor(col);
-      if (col.isValid() && palette.color(QPalette::Active, QPalette::Text) != col)
+      if (col.isValid())
       {
-        palette.setColor(QPalette::Active, QPalette::Text, col);
-        QColor col1 = getFromRGBA(tlspec.normalInactiveColor);
-        if (!col1.isValid()) col1 = col;
+        QColor col1 = col;
         opacifyColor(col1);
-        palette.setColor(QPalette::Inactive, QPalette::Text, col1);
-        col.setAlpha(102); // 0.4 * disabledCol.alpha()
-        opacifyColor(col);
-        palette.setColor(QPalette::Disabled, QPalette::Text,col);
-        w->setPalette(palette);
+        if (palette.color(QPalette::Active, QPalette::Text) != col1)
+        {
+          palette.setColor(QPalette::Active, QPalette::Text, col1);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+          col1 = col; // placeholder
+          col1.setAlpha(128);
+          opacifyColor(col1);
+          palette.setColor(QPalette::PlaceholderText, col1);
+#endif
+          col1 = getFromRGBA(tlspec.normalInactiveColor);
+          if (!col1.isValid()) col1 = col;
+          opacifyColor(col1);
+          palette.setColor(QPalette::Inactive, QPalette::Text, col1);
+          col.setAlpha(102); // 0.4 * disabledCol.alpha()
+          opacifyColor(col);
+          palette.setColor(QPalette::Disabled, QPalette::Text,col);
+          w->setPalette(palette);
+        }
       }
     }
     break;
