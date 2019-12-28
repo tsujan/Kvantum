@@ -49,6 +49,8 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
 #if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
     ui->checkBoxKineticScrolling->setEnabled (false);
+#elif  (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+    ui->checkBoxOpaqueColors->setEnabled (false); // Qt's text rendering bug
 #endif
 
     ui->openTheme->setIcon (symbolicIcon::icon (":/Icons/data/document-open.svg"));

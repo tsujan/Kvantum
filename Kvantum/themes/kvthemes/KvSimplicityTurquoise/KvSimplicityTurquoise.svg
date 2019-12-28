@@ -54,13 +54,13 @@
 <linearGradient xlink:href="#linearGradient2084" id="linearGradient2086" y1="81.251686" x1="22.750042" y2="48.751598" x2="22.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient2076" id="linearGradient2078" y1="81.251755" x1="21.25004" y2="48.751667" x2="21.250011" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(0.66668,0,0,0.66668,9.58295,16.249883)" xlink:href="#linearGradient4995" id="linearGradient2050" y1="39.751659" x1="28.75" y2="93.75132" gradientUnits="userSpaceOnUse" x2="28.750025"/>
-<linearGradient id="linearGradient8607" xlink:href="#linearGradient5024-3" y1="55.126637" y2="42.751556" x1="15.81226" x2="28.75" gradientUnits="userSpaceOnUse"/>
+<linearGradient id="linearGradient8607" xlink:href="#linearGradient5024-3" y1="53.814117" y2="42.751556" x1="16.937275" x2="28.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="matrix(0.66666667,0,0,0.66666667,9.5833339,16.250533)" xlink:href="#linearGradient4995" id="linearGradient2052" y1="93.752602" x1="28.750088" y2="39.751499" gradientUnits="userSpaceOnUse" x2="28.750059"/>
 <linearGradient id="linearGradient8539" xlink:href="#linearGradient5024-3" y1="42.751579" y2="48.751667" x1="28.75" gradientUnits="userSpaceOnUse" x2="22.75"/>
 <linearGradient id="linearGradient5180-9" xlink:href="#linearGradient3837" y1="76.031105" y2="79.968689" x1="390.72775" gradientUnits="userSpaceOnUse" x2="395.04025"/>
 <linearGradient id="linearGradient8547" xlink:href="#linearGradient5024-3" y1="42.751564" y2="56.06422" x1="28.750025" gradientUnits="userSpaceOnUse" x2="13.937428"/>
 <linearGradient id="linearGradient5024-3">
-<stop offset="0" style="stop-color:#666"/>
+<stop offset="0" style="stop-color:#646464"/>
 <stop offset="1" style="stop-color:#575757"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient5041" id="linearGradient3786" y1="1187" x1="85" y2="1197.75" gradientUnits="userSpaceOnUse" x2="85"/>
@@ -1116,7 +1116,7 @@
 <path style="fill:url(#linearGradient1858);fill-rule:evenodd" id="tlineedit-normal" d="m 542,79 v 32 h 32 V 79 Z"/>
 <g id="tlineedit-normal-bottom" transform="matrix(0,-1.3333333,0.98461538,0,493.99843,149.33342)">
 <path style="fill:url(#linearGradient1852);fill-rule:evenodd" d="m 28.75,81.2516 v -32.5 h -7.5 v 32.5 z"/>
-<path style="fill:#666;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
+<path style="fill:#646464;color:#000" d="m 21.25,48.7516 v 32.5 h 1.5 v -32.5 z"/>
 </g>
 <g id="tlineedit-normal-bottomright" transform="matrix(-1.3333242,0,0,-1.3333242,612.33311,176.00178)">
 <path style="fill:url(#linearGradient1850);fill-rule:evenodd" d="m 28.75,41.2516 c -4.12501,0 -7.5,3.37497 -7.5,7.5 h 7.5 z"/>
