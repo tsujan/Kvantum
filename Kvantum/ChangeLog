@@ -1,3 +1,7 @@
+V0.14.1
+---------
+ * Enforce contrast between symbolic clear icon and background of toolbar lineedits in dark-and-light themes if possible.
+
 V0.14.0
 ---------
  * Prevent toolbar arrow on showing kvantumpreview.

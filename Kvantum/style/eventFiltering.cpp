@@ -1284,31 +1284,33 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
              && getStylableToolbarContainer(w, true))
     {
-      QPalette palette = w->palette();
       const label_spec tlspec = getLabelSpec("Toolbar");
       QColor col = getFromRGBA(tlspec.normalColor);
-      if (col.isValid())
+      if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::Text)))
       {
         QColor col1 = col;
         opacifyColor(col1);
-        if (palette.color(QPalette::Active, QPalette::Text) != col1)
-        {
-          palette.setColor(QPalette::Active, QPalette::Text, col1);
+        QPalette palette = w->palette();
+        palette.setColor(QPalette::Active, QPalette::Text, col1);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-          col1 = col; // placeholder
-          col1.setAlpha(128);
-          opacifyColor(col1);
-          palette.setColor(QPalette::PlaceholderText, col1);
+        col1 = col; // placeholder
+        col1.setAlpha(128);
+        opacifyColor(col1);
+        palette.setColor(QPalette::PlaceholderText, col1);
 #endif
-          col1 = getFromRGBA(tlspec.normalInactiveColor);
-          if (!col1.isValid()) col1 = col;
-          opacifyColor(col1);
-          palette.setColor(QPalette::Inactive, QPalette::Text, col1);
-          col.setAlpha(102); // 0.4 * disabledCol.alpha()
-          opacifyColor(col);
-          palette.setColor(QPalette::Disabled, QPalette::Text,col);
-          w->setPalette(palette);
-        }
+        col1 = getFromRGBA(tlspec.normalInactiveColor);
+        if (!col1.isValid()) col1 = col;
+        opacifyColor(col1);
+        palette.setColor(QPalette::Inactive, QPalette::Text, col1);
+        col.setAlpha(102); // 0.4 * disabledCol.alpha()
+        opacifyColor(col);
+        palette.setColor(QPalette::Disabled, QPalette::Text,col);
+        w->setPalette(palette);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+        /* also correct the color of the symbolic clear icon (-> CE_ToolBar) */
+        if (QAction *clearAction = w->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+          clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, w));
+#endif
       }
     }
     break;

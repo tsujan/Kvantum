@@ -124,7 +124,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       }
 #endif
       QIcon icn;
-      QString str = rtl ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl";
+      QString str = (option ? rtl : widget ? widget->layoutDirection() == Qt::RightToLeft : rtl)
+                      ? "edit-clear-locationbar-ltr" : "edit-clear-locationbar-rtl";
       if (QIcon::hasThemeIcon(str))
         icn = QIcon::fromTheme(str);
       else
@@ -134,7 +135,25 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
           icn = QIcon::fromTheme(str);
       }
       if (!icn.isNull())
+      {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+        if (option || widget)
+        { // also correct the color of the symbolic clear icon  (-> CE_ToolBar)
+          if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text),
+                             option ? option->palette.color(QPalette::Active,QPalette::Text)
+                                    : widget->palette().color(QPalette::Active,QPalette::Text)))
+          {
+            const int s = pixelMetric(PM_SmallIconSize);
+            QPixmap px = getPixmapFromIcon(icn,
+                                           (option ? (option->state & State_Enabled) : widget->isEnabled())
+                                             ? Selected : DisabledSelected,
+                                           QIcon::On, QSize(s,s));
+            icn = QIcon(px);
+          }
+        }
+#endif
         return icn;
+      }
       else break;
     }
     case SP_TitleBarMinButton : {

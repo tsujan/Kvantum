@@ -61,6 +61,7 @@ public:
     toolBar_2->addSeparator();
     QLineEdit *lineedit = new QLineEdit("Kvantum");
     lineedit->setPlaceholderText ("Placeholder");
+    lineedit->setClearButtonEnabled (true);
     toolBar_2->addWidget (lineedit);
     toolBar_2->addSeparator();
     toolBar_2->addWidget (new QSpinBox());

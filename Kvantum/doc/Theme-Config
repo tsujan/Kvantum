@@ -1090,6 +1090,11 @@ text.toggle.inactive.color        String (#RRGGBBAA)  These keys are for text co
                                                       widgets and fall back to their
                                                       corresponding ordinary keys if missing.
 
+                                                      NOTE: Except for button like widgets and,
+                                                      probably, view items, the normal and
+                                                      inactive colors should not have high
+                                                      contrast with each other.
+
 text.bold                         true/false          Bold font for text? The font
                                                       is not bold by default.
 

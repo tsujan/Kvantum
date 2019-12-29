@@ -214,6 +214,11 @@ void Style::polish(QWidget *widget)
           palette.setColor(QPalette::PlaceholderText, ptColor);
 #endif
           widget->setPalette(palette);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+          /* also correct the color of the symbolic clear icon */
+          if (QAction *clearAction = widget->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+            clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, widget));
+#endif
         }
       }
     }

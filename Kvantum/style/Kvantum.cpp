@@ -8561,7 +8561,13 @@ void Style::drawControl(QStyle::ControlElement element,
 #endif
                     le->setPalette(palette);
                   }
-                  /* all of them should be checked because some may be inside combos */
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                  /* if this line-edit is inside a combo, its palette is
+                     already set but its icon still needs to be updated */
+                  if (QAction *clearAction = le->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+                    clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, le));
+#endif
+                  /* all line-edits should be checked because some may be inside combos */
                 }
               }
             }
@@ -8632,6 +8638,8 @@ void Style::drawControl(QStyle::ControlElement element,
             opacifyColor(disabledTxtCol);
             opacifyColor(inactiveTxtCol);
 
+            /* NOTE: Only the active colors are compared, which means that the active and
+                     inactive toolbars shouldn't have a hight contrast with each other. */
             if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), txtCol))
             {
               opacifyColor(txtCol); // after determining the contrast
@@ -8709,6 +8717,11 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
 #endif
                     le->setPalette(palette);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                    /* also correct the color of the symbolic clear icon */
+                    if (QAction *clearAction = le->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+                      clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, le));
+#endif
                   }
                 }
               }
