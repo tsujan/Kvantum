@@ -156,6 +156,25 @@ text.toggle.inactive.color=#ffffffc8
 text.shadow=false
 indicator.element=tarrow
 
+[ToolbarLineEdit]
+inherits=PanelButtonCommand
+frame.element=tlineedit
+interior.element=tlineedit
+
+[ToolbarComboBox]
+inherits=PanelButtonCommand
+frame.element=tcombo
+interior.element=tcombo
+text.normal.color=white
+text.normal.inactive.color=#ffffffc8
+text.focus.color=white
+text.press.color=white
+text.toggle.color=white
+text.toggle.inactive.color=#ffffffc8
+text.shadow=false
+indicator.element=tarrow-down
+focusRectElement=tfocus
+
 [Dock]
 inherits=PanelButtonCommand
 interior.element=dock

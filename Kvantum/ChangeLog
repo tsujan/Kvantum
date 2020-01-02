@@ -1,6 +1,7 @@
 V0.14.1
 ---------
  * Enforce contrast between symbolic clear icon and background of toolbar lineedits in dark-and-light themes if possible.
+ * Consider the size of lineedit clear icons to be PM_SmallIconSize.
 
 V0.14.0
 ---------

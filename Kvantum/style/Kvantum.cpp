@@ -13099,16 +13099,23 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       /* the label spec is only used for vertical spacing */
       const label_spec lspec = getLabelSpec(group);
 
+      int clearBtnSize = 0;
+      const QLineEdit *le = qobject_cast<const QLineEdit*>(widget);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+      if (le && le->isClearButtonEnabled())
+        clearBtnSize = pixelMetric(PM_SmallIconSize);
+#endif
+
       int minW = sspec.minW;
       sspec.minW = 0;
-      s = sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),QSize());
+      s = sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),QSize(clearBtnSize,clearBtnSize));
       s.rwidth() = qMax(defaultSize.width() + lspec.left+lspec.right + qMax(fspec.left+fspec.right-2, 0),
                         s.width());
       s.rwidth() = qMax(minW + (sspec.incrementW ? s.width() : 0),
                         s.width());
       /* defaultSize may be a bit thicker because of frame, which doesn't matter
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
-      if (s.height() < defaultSize.height() && !qobject_cast<const QLineEdit*>(widget))
+      if (s.height() < defaultSize.height() && le == nullptr)
         s.rheight() = defaultSize.height();
       return s;
 
@@ -13188,9 +13195,15 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         else f = QApplication::font();
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
+        int clearBtnSize = 0;
         bool hasIcon = false;
         if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
         {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+          const QLineEdit *le = cb->lineEdit();
+          if (le && le->isClearButtonEnabled())
+            clearBtnSize = pixelMetric(PM_SmallIconSize);
+#endif
           for (int i = 0; i < cb->count(); i++)
           {
             if (!cb->itemIcon(i).isNull())
@@ -13210,7 +13223,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
         s = QSize(comboWidth,
                   sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),
-                                 hasIcon ? opt->iconSize : QSize()).height());
+                                 (hasIcon ? opt->iconSize : QSize())
+                                   .expandedTo(QSize(clearBtnSize, clearBtnSize))).height());
         if (opt->editable)
         { // consider the top and bottom frames of lineedits inside editable combos
           s.rheight() += (fspec1.top > fspec.top ? fspec1.top-fspec.top : 0)
@@ -14048,7 +14062,7 @@ QSize Style::sizeCalculated(const QFont &font,
 
   if (tialign == Qt::ToolButtonIconOnly)
   {
-    if (iconSize.isValid())
+    if (!iconSize.isEmpty())
     {
       s.rwidth() += iconSize.width();
       s.rheight() += iconSize.height();
@@ -14061,7 +14075,7 @@ QSize Style::sizeCalculated(const QFont &font,
   }
   else if (tialign == Qt::ToolButtonTextBesideIcon)
   {
-    if (iconSize.isValid())
+    if (!iconSize.isEmpty())
     {
       s.rwidth() += iconSize.width() + (text.isEmpty() ? 0 : lspec.tispace) + tw;
       s.rheight() += qMax(iconSize.height() + iconSize.height() % 2, th);
@@ -14074,7 +14088,7 @@ QSize Style::sizeCalculated(const QFont &font,
   }
   else if (tialign == Qt::ToolButtonTextUnderIcon)
   {
-    if (iconSize.isValid())
+    if (!iconSize.isEmpty())
     {
       s.rwidth() += qMax(iconSize.width(), tw);
       s.rheight() += iconSize.height() + (text.isEmpty() ? 0 : lspec.tispace) + th;
