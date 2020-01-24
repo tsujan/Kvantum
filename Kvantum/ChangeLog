@@ -1,3 +1,7 @@
+V0.14.2
+---------
+ * Set the clear icons of Kvantum Manager's combo boxes because the default icons don't follow the color scheme when the theme is changed.
+
 V0.14.1
 ---------
  * Enforce contrast between symbolic clear icon and background of toolbar lineedits in dark-and-light themes if possible.

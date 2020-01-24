@@ -6,6 +6,8 @@
     <file>data/document-open.svg</file>
     <file>data/document-revert.svg</file>
     <file>data/document-save.svg</file>
+    <file>data/edit-clear.svg</file>
+    <file>data/edit-clear-rtl.svg</file>
     <file>data/edit-delete.svg</file>
     <file>data/help-about.svg</file>
     <file>data/help-whatsthis.svg</file>

@@ -1437,300 +1437,300 @@ ou mettre à jour son aperçu.</translation>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="275"/>
+        <location filename="../../KvantumManager.cpp" line="295"/>
         <source>Open Kvantum Theme Folder...</source>
         <translation>Ouvrir le dossier de thème Kvantum...</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="462"/>
-        <location filename="../../KvantumManager.cpp" line="479"/>
-        <location filename="../../KvantumManager.cpp" line="495"/>
-        <location filename="../../KvantumManager.cpp" line="506"/>
-        <location filename="../../KvantumManager.cpp" line="517"/>
-        <location filename="../../KvantumManager.cpp" line="544"/>
-        <location filename="../../KvantumManager.cpp" line="559"/>
-        <location filename="../../KvantumManager.cpp" line="606"/>
-        <location filename="../../KvantumManager.cpp" line="622"/>
+        <location filename="../../KvantumManager.cpp" line="482"/>
+        <location filename="../../KvantumManager.cpp" line="499"/>
+        <location filename="../../KvantumManager.cpp" line="515"/>
+        <location filename="../../KvantumManager.cpp" line="526"/>
+        <location filename="../../KvantumManager.cpp" line="537"/>
+        <location filename="../../KvantumManager.cpp" line="564"/>
+        <location filename="../../KvantumManager.cpp" line="579"/>
+        <location filename="../../KvantumManager.cpp" line="626"/>
+        <location filename="../../KvantumManager.cpp" line="642"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="546"/>
+        <location filename="../../KvantumManager.cpp" line="566"/>
         <source>First you have to delete its modified version!</source>
         <translation>Vous devez d&apos;abord supprimer sa version modifiée !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="570"/>
-        <location filename="../../KvantumManager.cpp" line="724"/>
-        <location filename="../../KvantumManager.cpp" line="2612"/>
+        <location filename="../../KvantumManager.cpp" line="590"/>
+        <location filename="../../KvantumManager.cpp" line="744"/>
+        <location filename="../../KvantumManager.cpp" line="2632"/>
         <source>Confirmation</source>
         <translation>Confirmation</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="685"/>
+        <location filename="../../KvantumManager.cpp" line="705"/>
         <source>%1 installed.</source>
         <translation>%1 installé.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="855"/>
+        <location filename="../../KvantumManager.cpp" line="875"/>
         <source>%1 deleted.</source>
         <translation>%1 supprimé.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="909"/>
+        <location filename="../../KvantumManager.cpp" line="929"/>
         <source>Theme changed to %1.</source>
         <translation>Le thème a été remplacé par %1.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="463"/>
+        <location filename="../../KvantumManager.cpp" line="483"/>
         <source>You have no permission to write here:</source>
         <translation>Vous n&apos;avez pas la permission d&apos;écrire ici :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="86"/>
-        <location filename="../../KvantumManager.cpp" line="90"/>
-        <location filename="../../KvantumManager.cpp" line="96"/>
+        <location filename="../../KvantumManager.cpp" line="106"/>
+        <location filename="../../KvantumManager.cpp" line="110"/>
+        <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Follow Style</source>
         <translation>Suivre le style</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="87"/>
+        <location filename="../../KvantumManager.cpp" line="107"/>
         <source>Single Click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="88"/>
+        <location filename="../../KvantumManager.cpp" line="108"/>
         <source>Double Click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="91"/>
+        <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Icon Only</source>
         <translation>Icône seulement</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="92"/>
+        <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Only</source>
         <translation>Texte seulement</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="93"/>
+        <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Text Beside Icon</source>
         <translation>Texte à côté de l&apos;icône</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="94"/>
+        <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Text Under Icon</source>
         <translation>Texte sous icône</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="97"/>
+        <location filename="../../KvantumManager.cpp" line="117"/>
         <source>KDE Layout</source>
         <translation>Disposition de KDE</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="98"/>
+        <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Gnome Layout</source>
         <translation>Disposition de Gnome</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="99"/>
+        <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Mac Layout</source>
         <translation>Disposition de Mac</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="100"/>
+        <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Windows Layout</source>
         <translation>Disposition de Windows</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="101"/>
+        <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Android Layout</source>
         <translation>Disposition d&apos;Android</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="103"/>
+        <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Titlebar</source>
         <translation>Barre de titre</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="104"/>
+        <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Menubar</source>
         <translation>Barre de menu</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="105"/>
+        <location filename="../../KvantumManager.cpp" line="125"/>
         <source>Menubar and primary toolbar</source>
         <translation>Barre de menu et barre d&apos;outils principale</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="106"/>
+        <location filename="../../KvantumManager.cpp" line="126"/>
         <source>Anywhere possible</source>
         <translation>N&apos;importe où possible</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="465"/>
+        <location filename="../../KvantumManager.cpp" line="485"/>
         <source>Please fix that first!</source>
         <translation>S&apos;il vous plaît résoudre ce problème en premier !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="477"/>
+        <location filename="../../KvantumManager.cpp" line="497"/>
         <source>This file cannot be removed:</source>
         <translation>Ce fichier ne peut pas être supprimé :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="496"/>
-        <location filename="../../KvantumManager.cpp" line="507"/>
+        <location filename="../../KvantumManager.cpp" line="516"/>
+        <location filename="../../KvantumManager.cpp" line="527"/>
         <source>This is not an installable Kvantum theme!</source>
         <translation>Ce n&apos;est pas un thème Kvantum installable !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="497"/>
+        <location filename="../../KvantumManager.cpp" line="517"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
         <translation>Le nom d&apos;un thème pouvant être installé ne doit pas être &quot;Par défaut&quot;.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="498"/>
-        <location filename="../../KvantumManager.cpp" line="509"/>
-        <location filename="../../KvantumManager.cpp" line="519"/>
+        <location filename="../../KvantumManager.cpp" line="518"/>
+        <location filename="../../KvantumManager.cpp" line="529"/>
+        <location filename="../../KvantumManager.cpp" line="539"/>
         <source>Please select another directory!</source>
         <translation>Veuillez sélectionner un autre répertoire !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="508"/>
+        <location filename="../../KvantumManager.cpp" line="528"/>
         <source>Installable themes should not have # in their names.</source>
         <translation>Les thèmes installables ne doivent pas avoir # dans leurs noms.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="518"/>
+        <location filename="../../KvantumManager.cpp" line="538"/>
         <source>This is not a Kvantum theme folder!</source>
         <translation>Ce n&apos;est pas un dossier de thèmes Kvantum !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="545"/>
+        <location filename="../../KvantumManager.cpp" line="565"/>
         <source>The theme already exists in modified form.</source>
         <translation>Le thème existe déjà sous une forme modifiée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="560"/>
+        <location filename="../../KvantumManager.cpp" line="580"/>
         <source>You have selected an installed theme folder.</source>
         <translation>Vous avez sélectionné un dossier de thème installé.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="561"/>
+        <location filename="../../KvantumManager.cpp" line="581"/>
         <source>Please choose another directory!</source>
         <translation>Veuillez choisir un autre répertoire !</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="571"/>
+        <location filename="../../KvantumManager.cpp" line="591"/>
         <source>The theme already exists.</source>
         <translation>Le thème existe déjà.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="572"/>
+        <location filename="../../KvantumManager.cpp" line="592"/>
         <source>Do you want to overwrite it?</source>
         <translation>Voulez-vous l&apos;écraser ?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="607"/>
+        <location filename="../../KvantumManager.cpp" line="627"/>
         <source>This theme is also installed as root in:</source>
         <translation>Ce thème est également installé en tant que root dans :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="609"/>
+        <location filename="../../KvantumManager.cpp" line="629"/>
         <source>The user installation will take priority.</source>
         <translation>L&apos;installation de l&apos;utilisateur sera prioritaire.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="623"/>
+        <location filename="../../KvantumManager.cpp" line="643"/>
         <source>This theme is also installed as user in:</source>
         <translation>Ce thème est également installé en tant qu&apos;utilisateur dans :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="625"/>
+        <location filename="../../KvantumManager.cpp" line="645"/>
         <source>This installation will take priority.</source>
         <translation>Cette installation sera prioritaire.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="725"/>
+        <location filename="../../KvantumManager.cpp" line="745"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation>Voulez-vous vraiment supprimer &lt;i&gt;%1&lt;/i&gt; ?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="728"/>
+        <location filename="../../KvantumManager.cpp" line="748"/>
         <source>It could not be restored unless you have a copy of it.</source>
         <translation>Il ne peut être restauré que si vous en avez une copie.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1261"/>
-        <location filename="../../KvantumManager.cpp" line="1280"/>
+        <location filename="../../KvantumManager.cpp" line="1281"/>
+        <location filename="../../KvantumManager.cpp" line="1300"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Ce sont les paramètres qui peuvent être modifiés en toute sécurité. &lt;br&gt;Pour les autres, cliquer sur &lt;i&gt;Enregistrer&lt;/ i&gt;, puis modifier ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1276"/>
-        <location filename="../../KvantumManager.cpp" line="2520"/>
+        <location filename="../../KvantumManager.cpp" line="1296"/>
+        <location filename="../../KvantumManager.cpp" line="2540"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Les paramètres suivants peuvent être modifiés en toute sécurité. &lt;br&gt;Pour les autres, modifier ce fichier :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1640"/>
+        <location filename="../../KvantumManager.cpp" line="1660"/>
         <source>No description</source>
         <translation>Pas de description</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2111"/>
+        <location filename="../../KvantumManager.cpp" line="2131"/>
         <source>A copy of the root config is created.</source>
         <translation>Une copie de la configuration racine a été créée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2122"/>
+        <location filename="../../KvantumManager.cpp" line="2142"/>
         <source>A copy was already created.</source>
         <translation>Une copie a déjà été créée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2506"/>
+        <location filename="../../KvantumManager.cpp" line="2526"/>
         <source>Configuration saved.</source>
         <translation>Configuration sauvegardée.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2613"/>
+        <location filename="../../KvantumManager.cpp" line="2633"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Voulez-vous revenir aux paramètres par défaut (root) de ce thème ?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2616"/>
+        <location filename="../../KvantumManager.cpp" line="2636"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Vous perdrez les modifications que vous auriez pu faire.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2651"/>
+        <location filename="../../KvantumManager.cpp" line="2671"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Restauré les paramètres root par défaut de %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2652"/>
+        <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>the default theme</source>
         <translation>le thème par défaut</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2788"/>
-        <location filename="../../KvantumManager.cpp" line="2789"/>
+        <location filename="../../KvantumManager.cpp" line="2808"/>
+        <location filename="../../KvantumManager.cpp" line="2809"/>
         <source>About Kvantum Manager</source>
         <translation>À propos du Manager Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2788"/>
+        <location filename="../../KvantumManager.cpp" line="2808"/>
         <source>Translators</source>
         <translation>Traducteurs</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2786"/>
+        <location filename="../../KvantumManager.cpp" line="2806"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Un outil pour installer, sélectionner&lt;br&gt;et configurer les thèmes Kvantum &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2787"/>
+        <location filename="../../KvantumManager.cpp" line="2807"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Auteur : &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt;&lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1745,19 +1745,19 @@ ou mettre à jour son aperçu.</translation>
         <translation>défaut</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="475"/>
+        <location filename="../../KvantumManager.cpp" line="495"/>
         <source>This directory cannot be removed:</source>
         <translation>Ce répertoire ne peut pas être supprimé :</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="482"/>
+        <location filename="../../KvantumManager.cpp" line="502"/>
         <source>You might want to investigate the cause.</source>
         <translation>Vous voudrez peut-être enquêter sur la cause.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="908"/>
-        <location filename="../../KvantumManager.cpp" line="2051"/>
-        <location filename="../../KvantumManager.cpp" line="2515"/>
+        <location filename="../../KvantumManager.cpp" line="928"/>
+        <location filename="../../KvantumManager.cpp" line="2071"/>
+        <location filename="../../KvantumManager.cpp" line="2535"/>
         <source>Active theme:</source>
         <translation>Thème actif :</translation>
     </message>

@@ -482,6 +482,8 @@ text.italic=true
 [ComboBox]
 inherits=PanelButtonCommand
 frame.expandedElement=ebutton
+text.margin.left=4
+text.margin.right=4
 
 [Menu]
 inherits=PanelButtonCommand

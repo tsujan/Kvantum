@@ -31,7 +31,7 @@
 #include <QScrollBar>
 #include <QAbstractItemView>
 #include <QWindow>
-//#include <QDebug>
+#include <QToolButton>
 
 namespace KvManager {
 
@@ -68,6 +68,26 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     ui->toolBox->setItemIcon (1, symbolicIcon::icon (":/Icons/data/preferences-desktop-theme.svg"));
     ui->toolBox->setItemIcon (2, symbolicIcon::icon (":/Icons/data/preferences-system.svg"));
     ui->toolBox->setItemIcon (3, symbolicIcon::icon (":/Icons/data/applications-system.svg"));
+
+    /* The default clear icon doesn't follow the color scheme when the theme is changed.
+       So, we replace it with our SVG icon. */
+    const bool rtl (QApplication::layoutDirection() == Qt::RightToLeft);
+    QList<QToolButton*> list = ui->comboBox->lineEdit()->findChildren<QToolButton*>();
+    if (!list.isEmpty())
+    {
+        QToolButton *clearButton = list.at (0);
+        if (clearButton)
+            clearButton->setIcon (symbolicIcon::icon (rtl ? ":/Icons/data/edit-clear-rtl.svg"
+                                                          : ":/Icons/data/edit-clear.svg"));
+    }
+    list = ui->appCombo->lineEdit()->findChildren<QToolButton*>();
+    if (!list.isEmpty())
+    {
+        QToolButton *clearButton = list.at (0);
+        if (clearButton)
+            clearButton->setIcon (symbolicIcon::icon (rtl ? ":/Icons/data/edit-clear-rtl.svg"
+                                                          : ":/Icons/data/edit-clear.svg"));
+    }
 
     lastPath_ = QDir::home().path();
     process_ = new QProcess (this);

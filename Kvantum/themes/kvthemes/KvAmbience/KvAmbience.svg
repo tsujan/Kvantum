@@ -1342,9 +1342,9 @@
 <path style="opacity:.3;fill-opacity:.278;color:#000" d="m 21.25,48.75 v 32.5 h 1.25 v -32.5 z"/>
 </g>
 <g id="tcombo-normal-topleft" transform="matrix(0.8,0,0,0.8,-73,-26.5)">
-<path style="fill:url(#linearGradient3034);fill-rule:evenodd" d="m 28.75,42.5 c -3.4375,0 -6.25,2.8125 -6.25,6.25 h 6.25 z"/>
-<path style="opacity:.3;fill:url(#linearGradient2432);color:#000" d="m 28.75,41.25 c -4.375,0 -7.5,3.125 -7.5,7.5 h 1.25 c 0,-3.4375 2.8125,-6.25 6.25,-6.245 z"/>
-<path style="opacity:.1;fill:#fff;fill-rule:evenodd" d="m 28.75,42.5 c -3.4375,0 -6.25,2.8125 -6.25,6.25 0,-3.4375 3.125,-5 6.25,-5 z"/>
+<path style="fill:url(#linearGradient3034);fill-rule:evenodd" d="m 28.75,42.5 c -4.0625,0 -6.25,2.1875 -6.25,6.25 h 6.25 z"/>
+<path style="opacity:.3;fill:url(#linearGradient2432);color:#000" d="m 28.75,41.25 c -5,0 -7.5,2.5 -7.5,7.5 h 1.25 c 0,-4.0625 2.1875,-6.25 6.25,-6.245 z"/>
+<path style="opacity:.1;fill:#fff;fill-rule:evenodd" d="m 28.75,42.5 c -4.0625,0 -6.25,2.1875 -6.25,6.25 0,-4.0625 3.125,-5 6.25,-5 z"/>
 </g>
 <g style="fill:url(#linearGradient1993)" id="tcombo-normal-top" transform="matrix(0,0.8,-1,0,31.25,-10.5)">
 <path style="fill:url(#linearGradient1998);fill-rule:evenodd" d="M 28.75,81.25 V 48.75 H 22.5 v 32.5 z"/>
@@ -1353,8 +1353,8 @@
 </g>
 <path style="fill:url(#linearGradient2000);fill-rule:evenodd" id="tcombo-normal" d="m -50,12.5001 v 32.5 h 32.5 v -32.5 z "/>
 <g id="tcombo-normal-bottomleft" transform="matrix(0.8,0,0,-0.8,-73,84)">
-<path style="fill:url(#linearGradient3032);fill-rule:evenodd" d="m 28.75,42.5 c -3.4375,0 -6.25,2.8125 -6.25,6.25 h 6.25 z"/>
-<path style="opacity:.3;fill:url(#linearGradient2430);color:#000" d="m 28.75,41.25 c -4.375,0 -7.5,3.125 -7.5,7.5 h 1.25 c 0,-3.4375 2.8125,-6.25 6.25,-6.25 z"/>
+<path style="fill:url(#linearGradient3032);fill-rule:evenodd" d="m 28.75,42.5 c -4.0625,0 -6.25,2.1875 -6.25,6.25 h 6.25 z"/>
+<path style="opacity:.3;fill:url(#linearGradient2430);color:#000" d="m 28.75,41.25 c -5,0 -7.5,2.5 -7.5,7.5 h 1.25 c 0,-4.0625 2.1875,-6.25 6.25,-6.25 z"/>
 </g>
 <g style="fill:url(#linearGradient2003)" id="tcombo-normal-bottom" transform="matrix(0,-0.8,-1,0,31.25,68)">
 <path style="fill:url(#linearGradient1992);fill-rule:evenodd" d="M 28.75,81.25 V 48.75 H 22.5 v 32.5 z"/>
