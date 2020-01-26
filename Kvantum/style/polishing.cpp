@@ -605,19 +605,28 @@ void Style::polish(QWidget *widget)
     }
     else // in rare cases like KNotes' font combos or Kcalc
     {
-      QColor col = standardPalette().color(QPalette::Active,QPalette::Text);
       QPalette palette = widget->palette();
-      if (col != palette.color(QPalette::Active,QPalette::Text))
+      if (palette.color(QPalette::Base) == standardPalette().color(QPalette::Base))
       {
-        palette.setColor(QPalette::Active,QPalette::Text,col);
-        palette.setColor(QPalette::Inactive,QPalette::Text,
-                         standardPalette().color(QPalette::Inactive,QPalette::Text));
-        widget->setPalette(palette);
+        QColor col = standardPalette().color(QPalette::Active,QPalette::Text);
+        if (col != palette.color(QPalette::Active,QPalette::Text))
+        {
+          palette.setColor(QPalette::Active,QPalette::Text,col);
+          palette.setColor(QPalette::Inactive,QPalette::Text,
+                          standardPalette().color(QPalette::Inactive,QPalette::Text));
+          widget->setPalette(palette);
+        }
       }
     }
 
-    if (qobject_cast<QLineEdit*>(widget) && tspec_.animate_states)
+    if (qobject_cast<QLineEdit*>(widget)
+        && (tspec_.animate_states
+            /* a workaround for bad codes that change line-edit base color */
+            || ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
+                && qobject_cast<QComboBox*>(pw))))
+    {
       widget->installEventFilter(this);
+    }
   }
   else if (qobject_cast<QComboBox*>(widget)
            || qobject_cast<QSlider*>(widget))

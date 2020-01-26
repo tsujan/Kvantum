@@ -69,7 +69,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     ui->toolBox->setItemIcon (2, symbolicIcon::icon (":/Icons/data/preferences-system.svg"));
     ui->toolBox->setItemIcon (3, symbolicIcon::icon (":/Icons/data/applications-system.svg"));
 
-    /* The default clear icon doesn't follow the color scheme when the theme is changed.
+    /* The default clear icon doesn't follow the color palette when the theme is changed.
        So, we replace it with our SVG icon. */
     const bool rtl (QApplication::layoutDirection() == Qt::RightToLeft);
     QList<QToolButton*> list = ui->comboBox->lineEdit()->findChildren<QToolButton*>();

@@ -1327,6 +1327,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
+  case QEvent::PaletteChange :
+    if (qobject_cast<QLineEdit*>(o) && (tspec_.combo_as_lineedit || tspec_.square_combo_button))
+    {
+      if (QComboBox *cb = qobject_cast<QComboBox*>(w->parentWidget()))
+      {
+        if (cb->isVisible())
+          cb->update(); // a workaround for bad codes that change line-edit base color
+      }
+    }
+    break;
+
   case QEvent::Hide:
     if (qobject_cast<QToolButton*>(o))
     {
