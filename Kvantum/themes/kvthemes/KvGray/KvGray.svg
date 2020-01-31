@@ -203,7 +203,7 @@
 <linearGradient gradientTransform="matrix(1,0,0,-1,67.5,201)" xlink:href="#linearGradient5105-6" id="linearGradient3159" y1="175" x1="-50.5" y2="160" gradientUnits="userSpaceOnUse" x2="-50.5"/>
 <linearGradient id="linearGradient5105">
 <stop offset="0" style="stop-color:#b4b4b4"/>
-<stop offset="0.44" style="stop-color:#878787"/>
+<stop offset="0.44" style="stop-color:#8c8c8c"/>
 <stop offset="0.64444417" style="stop-color:#d2d2d2"/>
 <stop offset="1" style="stop-color:#fff"/>
 </linearGradient>
