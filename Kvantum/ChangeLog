@@ -2,6 +2,7 @@ V0.14.2
 ---------
  * Set the clear icons of Kvantum Manager's combo boxes because the default icons don't follow the color palette when the theme is changed.
  * Added a workaround for bad codes that change a line-edit's base color (like that of Kate or Konsole).
+ * Don't remove text shadow if widget text colors aren't specified.
 
 V0.14.1
 ---------

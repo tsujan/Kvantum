@@ -59,7 +59,7 @@ reduce_window_opacity=0
 [GeneralColors]
 window.color=#ebebed
 base.color=#F0F0F0BE
-alt.base.color=#EBEBEBBE
+alt.base.color=#0000000a
 button.color=#e6e6e6
 light.color=#FFFFFFBE
 mid.light.color=#FFFFFF96
@@ -114,11 +114,17 @@ frame.expansion=8
 [PanelButtonTool]
 inherits=PanelButtonCommand
 
+[ToolbarButton]
+interior.element=tbutton
+frame.element=tbutton
+indicator.element=arrow
+
 [Dock]
 indicator.element=dock
 
 [DockTitle]
 text.bold=true
+text.normal.color=#000000d2
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -175,7 +181,16 @@ frame.bottom=3
 frame.left=5
 frame.right=5
 focusFrame=true
-text.press.color=black
+text.normal.color=#000000be
+text.toggle.color=#000000d2
+text.bold=true
+text.boldness=2
+text.shadow=true
+text.shadow.color=white
+text.shadow.xshift=1
+text.shadow.yshift=1
+text.shadow.depth=1
+text.shadow.alpha=110
 indicator.size=12
 min_height=+0.05font
 min_width=+0.12font

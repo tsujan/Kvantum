@@ -12061,6 +12061,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               col = getFromRGBA(lspec.normalColor);
           }
 
+          if (!col.isValid()) // make it always valid
+            col = standardPalette().color(QPalette::WindowText);
+
           int talign = Qt::AlignHCenter | Qt::AlignVCenter;
           if (!styleHint(SH_UnderlineShortcut, opt, widget))
             talign |= Qt::TextHideMnemonic;
@@ -12113,23 +12116,19 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
           }
 
-          if (col.isValid())
+          painter->save();
+          if (hspec_.opaque_colors)
           {
-            painter->save();
-            if (hspec_.opaque_colors)
-            {
-              painter->setOpacity(col.alphaF());
-              col.setAlpha(255);
-            }
-            painter->setPen(col);
+            painter->setOpacity(col.alphaF());
+            col.setAlpha(255);
           }
+          painter->setPen(col);
 
           drawItemText(painter, textRect, talign,
                        opt->palette, opt->state & State_Enabled, opt->text,
-                       col.isValid() ? QPalette::NoRole : QPalette::WindowText);
+                       QPalette::NoRole);
 
-          if (col.isValid())
-            painter->restore();
+          painter->restore();
           if (lspec.boldFont || lspec.italicFont)
             painter->restore();
         }

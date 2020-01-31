@@ -1062,6 +1062,11 @@ void Style::renderLabel(
           break;
       }
 
+      if (!txtCol.isValid())
+          txtCol = standardPalette().color(isInactive ? QPalette::Inactive
+                                                      : QPalette::Active,
+                                           textRole);
+
       if (lspec.hasShadow)
       {
         QColor shadowColor;
@@ -1097,24 +1102,21 @@ void Style::renderLabel(
         }
       }
 
-      if (txtCol.isValid())
+      painter->save();
+      if (hspec_.opaque_colors)
       {
-        painter->save();
-        if (hspec_.opaque_colors)
-        {
-          painter->setOpacity(txtCol.alphaF());
-          txtCol.setAlpha(255);
-        }
-        painter->setPen(txtCol);
-        painter->drawText(rtext,talign,text);
-        painter->restore();
-        if (lspec.boldFont)
-          painter->restore();
-        if (lspec.italicFont)
-          painter->restore();
-        painter->restore();
-        return;
+        painter->setOpacity(txtCol.alphaF());
+        txtCol.setAlpha(255);
       }
+      painter->setPen(txtCol);
+      painter->drawText(rtext,talign,text);
+      painter->restore();
+      if (lspec.boldFont)
+        painter->restore();
+      if (lspec.italicFont)
+        painter->restore();
+      painter->restore();
+      return;
     }
     /* if this is a dark-and-light theme, the disabled color may not be suitable */
     else if (state == 0
