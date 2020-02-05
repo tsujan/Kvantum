@@ -432,12 +432,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrol bepaalde scrolwidgets door ze met
+de linker muistoets een duwtje te geven.
+
+Waarschuwing: kinetisch scrollen in Qt heeft bugs en
+kan andere taken in de interface verstoren.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="721"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinetisch scrollen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="728"/>
