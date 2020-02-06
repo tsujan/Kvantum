@@ -114,7 +114,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
-        <location filename="../../kvantummanager.ui" line="2102"/>
+        <location filename="../../kvantummanager.ui" line="2099"/>
         <source>Save</source>
         <translation>Įrašyti</translation>
     </message>
@@ -256,40 +256,22 @@ paryškinimo spalvos atspalvį!</translation>
         <translation>Permatomi meniu pavadinimai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="570"/>
-        <source>Text colors are defined by the theme
-and can have translucency.
-
-Checking this is not recommended unless
-as a workaround for bugs in applications.</source>
-        <translation>Teksto spalvos yra apibrėžiamos temos
-ir jose gali būti dalinis permatomumas.
-
-Tai žymėti nėra rekomenduojama, nebent
-kaip problemų apėjimą programose.</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="577"/>
-        <source>Opaque (text) colors</source>
-        <translation>Nepermatomos (teksto) spalvos</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="584"/>
+        <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
         <translation>Stilizuoti KDE talpos juostas kaip eigos juostas.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="587"/>
+        <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stilizuoti KDE talpos juostas kaip eigos juostas?&lt;/p&gt;&lt;p&gt;Talpos juostas, įprastai, naudoja kai kurios KDE programos tam, kad būtų rodomi talpų dydžiai ir jie turi savo asmeninį stilių.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="590"/>
+        <location filename="../../kvantummanager.ui" line="587"/>
         <source>Show KCapacityBar as progressbar</source>
         <translation>Rodyti KCapacityBar kaip eigos juostas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="597"/>
+        <location filename="../../kvantummanager.ui" line="594"/>
         <source>This is not a complete fix but prevents
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
@@ -299,31 +281,31 @@ erzinančių slinkimo peršokimų, kurie gali nutikti
 su pelės ratuku, kuomet yra įjungti pelės gestai.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="603"/>
+        <location filename="../../kvantummanager.ui" line="600"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
         <translation>Qt slinkimo peršokimų problemos apėjimas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="643"/>
+        <location filename="../../kvantummanager.ui" line="640"/>
         <source>Tint label icons on mouseover by </source>
         <translation>Užvedus pelę, padidinti etikečių piktogramų atspalvį </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="657"/>
-        <location filename="../../kvantummanager.ui" line="701"/>
-        <location filename="../../kvantummanager.ui" line="1026"/>
-        <location filename="../../kvantummanager.ui" line="1059"/>
+        <location filename="../../kvantummanager.ui" line="654"/>
+        <location filename="../../kvantummanager.ui" line="698"/>
+        <location filename="../../kvantummanager.ui" line="1023"/>
+        <location filename="../../kvantummanager.ui" line="1056"/>
         <source> %</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="615"/>
+        <location filename="../../kvantummanager.ui" line="612"/>
         <source>Respect dark themes</source>
         <translation>Gerbti tamsias temas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="678"/>
-        <location filename="../../kvantummanager.ui" line="693"/>
+        <location filename="../../kvantummanager.ui" line="675"/>
+        <location filename="../../kvantummanager.ui" line="690"/>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
@@ -332,71 +314,71 @@ kai išjungtų piktogramų nepermatomumas nėra
 sumažinamas jokiais kitais būdais.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="683"/>
-        <location filename="../../kvantummanager.ui" line="698"/>
+        <location filename="../../kvantummanager.ui" line="680"/>
+        <location filename="../../kvantummanager.ui" line="695"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Naudinga, naudojant vienspalvių piktogramų rinkinius ir kai išjungtų piktogramų nepermatomumas nėra sumažinamas jokiais kitais būdais.&lt;/p&gt;&lt;p&gt;KDE automatiškai sumažina išjungtų piktogramų nepermatomumą. Todėl, ši parinktis gali labiau praversti, naudojant kitas darbalaukio aplinkas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="686"/>
+        <location filename="../../kvantummanager.ui" line="683"/>
         <source>Opacity of disabled icons:</source>
         <translation>Išjungtų piktogramų nepermatomumas:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="622"/>
+        <location filename="../../kvantummanager.ui" line="619"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
         <translation>Rodyti dialogų ir būsenos juostų dydžio rankenas
 kaip įmanoma toliau.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="626"/>
+        <location filename="../../kvantummanager.ui" line="623"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rodyti dialogų ir būsenos juostų dydžio rankenas kaip įmanoma toliau?&lt;/p&gt;&lt;p&gt;Pagal numatymą, programa sprendžia ar jos turėtų būti rodomos, tačiau šis patobulinimas gali praversti lengvai keičiant langų dydžius tais atvejais, kai nėra jokio lango krašto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="629"/>
+        <location filename="../../kvantummanager.ui" line="626"/>
         <source>Force size grips</source>
         <translation>Priverstinai naudoti dydžio rankenas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="736"/>
+        <location filename="../../kvantummanager.ui" line="733"/>
         <source>LXQt main menu icon size:</source>
         <translation>LXQt pagrindinio meniu piktogramos dydis:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="751"/>
-        <location filename="../../kvantummanager.ui" line="1196"/>
-        <location filename="../../kvantummanager.ui" line="1234"/>
-        <location filename="../../kvantummanager.ui" line="1264"/>
-        <location filename="../../kvantummanager.ui" line="1298"/>
-        <location filename="../../kvantummanager.ui" line="1326"/>
-        <location filename="../../kvantummanager.ui" line="1352"/>
-        <location filename="../../kvantummanager.ui" line="1382"/>
-        <location filename="../../kvantummanager.ui" line="1410"/>
-        <location filename="../../kvantummanager.ui" line="1445"/>
+        <location filename="../../kvantummanager.ui" line="748"/>
+        <location filename="../../kvantummanager.ui" line="1193"/>
+        <location filename="../../kvantummanager.ui" line="1231"/>
+        <location filename="../../kvantummanager.ui" line="1261"/>
+        <location filename="../../kvantummanager.ui" line="1295"/>
+        <location filename="../../kvantummanager.ui" line="1323"/>
+        <location filename="../../kvantummanager.ui" line="1349"/>
+        <location filename="../../kvantummanager.ui" line="1379"/>
+        <location filename="../../kvantummanager.ui" line="1407"/>
+        <location filename="../../kvantummanager.ui" line="1442"/>
         <source> px</source>
         <translation> piks</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="765"/>
+        <location filename="../../kvantummanager.ui" line="762"/>
         <source>Compositing &amp;&amp; General Look</source>
         <translation>Komponavimas ir bendra išvaizda</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="921"/>
+        <location filename="../../kvantummanager.ui" line="918"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
         <translation>Veikia tik tuomet, kai yra dalinai permatomas langų SVG fonas,
 arba yra sumažinamas langų nepermatomumas (žiūrėkite žemiau).</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="939"/>
+        <location filename="../../kvantummanager.ui" line="936"/>
         <source>Opaque apps:</source>
         <translation>Nepermatomos programos:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="771"/>
+        <location filename="../../kvantummanager.ui" line="768"/>
         <source>If checked, menus, tooltips and windows
 will not have translucency or shadow.
 
@@ -414,19 +396,30 @@ Jei tai yra išjungta, žiūrėkite:
         <translation>&lt;br&gt;&lt;br&gt;Kadangi &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; yra nepriklausoma nuo visų darbalaukio aplinkų, visų pirma, turite ją &lt;i&gt;aktyvuoti&lt;/i&gt;, naudodami Qt platformos integravimo programą. KDE ir LXQt pateikia paprastus įrankius, skirtus keisti aktyvaus Qt stiliaus įskiepį. Kitose platformose, jums reikia Qt konfigūravimo įrankio.&lt;br/&gt;&lt;br/&gt;Naudojant KDE, taip pat pasirinkite ir taikykite šios temos spalvų rinkinį, nes kai kurios KDE programos gali imti spalvas tiesiogiai iš KDE spalvų rinkinio.&lt;br/&gt;&lt;br/&gt;Paleistos programos įgaus naują temą, jas užvėrus ir atvėrus iš naujo. Atsijungimas ir prisijungimas pravers visoms KDE/LXQt dalims, kad galėtumėte pilnai matyti naują temą.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="667"/>
+        <location filename="../../kvantummanager.ui" line="570"/>
+        <source>If checked, the contents of a form will be
+horizontally centered as far as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="574"/>
+        <source>Centered form layouts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="664"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
         <translation>Pagal numatymą, slinkimo slinktukas peršoka į poziciją,
 kai ant slankjuostės yra spustelėjama kairiuoju pelės mygtuku.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="671"/>
+        <location filename="../../kvantummanager.ui" line="668"/>
         <source>Scroll jump with middle click</source>
         <translation>Peršokti per slinkimą viduriniuoju pelės mygtuku</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="714"/>
+        <location filename="../../kvantummanager.ui" line="711"/>
         <source>Scroll some scrollable widgets by flicking them
 with the left mouse button.
 
@@ -439,13 +432,13 @@ staigų judesį kairiuoju pelės mygtuku.
 gali rimtai trukdyti kitiems darbams.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="721"/>
+        <location filename="../../kvantummanager.ui" line="718"/>
         <source>Kinetic scrolling</source>
         <translation>Kinetinis slinkimas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="728"/>
-        <location filename="../../kvantummanager.ui" line="743"/>
+        <location filename="../../kvantummanager.ui" line="725"/>
+        <location filename="../../kvantummanager.ui" line="740"/>
         <source>Has effect only when the main menu is NOT styled by LXQt.
 
 Values less than 16 mean the default menu icon size.
@@ -460,17 +453,17 @@ Reikalauja, kad LXQt skydelis būtų paleistas iš naujo per &quot;Seanso nustat
 arba atsijungiant ir vėl prisijungiant.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="778"/>
+        <location filename="../../kvantummanager.ui" line="775"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jei pažymėta, meniu, paaiškinimai ir langai neturės dalinio permatomumo ar šešėlio.&lt;/p&gt;&lt;p&gt;Nuėmus žymėjimą, dalinis permatomumas ir šešėlis bus prieinami tuomet, jei temos SVG faile bus tinkami elementai.&lt;/p&gt;&lt;p&gt;Jei tai yra išjungta, žiūrėkite Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="781"/>
+        <location filename="../../kvantummanager.ui" line="778"/>
         <source>Disable composite effects</source>
         <translation>Išjungti komponavimo efektus</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="790"/>
+        <location filename="../../kvantummanager.ui" line="787"/>
         <source>This needs the KDE contrast effect with Qt ≥ 5.11
 and is applied only to translucent windows that
 support the blur effect (but the KDE blur effect
@@ -485,27 +478,27 @@ efektas gali būti ir išjungtas).
 Reikšmė 1.00 reiškia jokių pakeitimų.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="798"/>
+        <location filename="../../kvantummanager.ui" line="795"/>
         <source>Contrast Effect</source>
         <translation>Kontrasto efektas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="804"/>
+        <location filename="../../kvantummanager.ui" line="801"/>
         <source>Saturation:</source>
         <translation>Grynis:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="811"/>
+        <location filename="../../kvantummanager.ui" line="808"/>
         <source>Intensity:</source>
         <translation>Intensyvumas:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="818"/>
+        <location filename="../../kvantummanager.ui" line="815"/>
         <source>Contrast:</source>
         <translation>Kontrastas:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="895"/>
+        <location filename="../../kvantummanager.ui" line="892"/>
         <source>Needs KDE blur effect, a graphic card that supports it,
 and translucent menu/tooltip SVG elements.
 
@@ -516,12 +509,12 @@ ir dalinai permatomų meniu/paaiškinimų SVG elementų.
 Automatiškai pažymėta, jei langų suliejimas yra įjungtas.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="901"/>
+        <location filename="../../kvantummanager.ui" line="898"/>
         <source>Blurring for menus and tooltips</source>
         <translation>Meniu ir paaiškinimų suliejimas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="908"/>
+        <location filename="../../kvantummanager.ui" line="905"/>
         <source>Do not draw shadows for menus and tooltips.
 
 This may be useful under DEs that give
@@ -532,18 +525,18 @@ Tai gali būti naudinga darbalaukio aplinkoje,
 kuri meniu ir paaiškinimams suteikia šešėlius.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="914"/>
+        <location filename="../../kvantummanager.ui" line="911"/>
         <source>Shadowless menus and tooltips</source>
         <translation>Bešešėliniai meniu ir paaiškinimai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="925"/>
+        <location filename="../../kvantummanager.ui" line="922"/>
         <source>Translucent windows</source>
         <translation>Dalinai permatomi langai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="989"/>
-        <location filename="../../kvantummanager.ui" line="1019"/>
+        <location filename="../../kvantummanager.ui" line="986"/>
+        <location filename="../../kvantummanager.ui" line="1016"/>
         <source>This will reduce the window opacity
 if window translucency is enabled.
 
@@ -556,123 +549,123 @@ Tam, kad veiktų šis raktas, dalinai permatomas
 SVG fonas NĖRA būtinas.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="996"/>
+        <location filename="../../kvantummanager.ui" line="993"/>
         <source>Reduce window opacity by</source>
         <translation>Sumažinti langų nepermatomumą</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1036"/>
+        <location filename="../../kvantummanager.ui" line="1033"/>
         <source>Reduce menu opacity by</source>
         <translation>Mažinti meniu nepermatomumą</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1074"/>
+        <location filename="../../kvantummanager.ui" line="1071"/>
         <source>Blurring for translucent windows</source>
         <translation>Dalinai permatomų langų suliejimas</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1094"/>
+        <location filename="../../kvantummanager.ui" line="1091"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation>200ms išblukimo animacija, kuomet pasikeičia
 kai kurių valdiklių būsena, daugiausiai dėl pelės.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1098"/>
+        <location filename="../../kvantummanager.ui" line="1095"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200ms išblukimo animacija, kuomet pasikeičia kai kurių valdiklių būsena, daugiausiai dėl pelės.&lt;/p&gt;&lt;p&gt;Procesoriaus naudojimas yra nedidelis, nes, dažnai, yra animuojamas tik vienas valdiklis. Galutinis vaizdinis efektas priklauso nuo aktyvios temos.&lt;/p&gt;&lt;p&gt;Yra palaikomi šie valdikliai: mygtukai (įskaitant akutes ir žymimuosius langelius), jungtiniai langeliai, sukimosi langeliai, slinktuko rankenos, redaguojamos eilutės ir slinkimo rodiniai.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1101"/>
+        <location filename="../../kvantummanager.ui" line="1098"/>
         <source>Animation for state change under mouse</source>
         <translation>Animacija būsenos pasikeitimui po pele</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1108"/>
+        <location filename="../../kvantummanager.ui" line="1105"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation>Pažymėkite tai, norėdami pašalinti visus langų/dialogų išklojimo šablonus!
 Nuimkite žymėjimą, norėdami tuos šablonus sugrąžinti!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1112"/>
+        <location filename="../../kvantummanager.ui" line="1109"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation>Šalinti langų/dialogų išklojimo šablonus</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1119"/>
+        <location filename="../../kvantummanager.ui" line="1116"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Naudoti tas pačias spalvas ir formas su aktyviais ir pasyviais
 langais, jei ši tema juos atskiria?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1123"/>
+        <location filename="../../kvantummanager.ui" line="1120"/>
         <source>Ignore inactive state</source>
         <translation>Nepaisyti neaktyvios būsenos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1137"/>
+        <location filename="../../kvantummanager.ui" line="1134"/>
         <source>Transient scrollbars</source>
         <translation>Laikinosios slankjuostės</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1159"/>
+        <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation>Dydžiai ir delsos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1165"/>
+        <location filename="../../kvantummanager.ui" line="1162"/>
         <source>Sizes</source>
         <translation>Dydžiai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1180"/>
+        <location filename="../../kvantummanager.ui" line="1177"/>
         <source>Small icon:</source>
         <translation>Maža piktograma:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1218"/>
+        <location filename="../../kvantummanager.ui" line="1215"/>
         <source>Large icon:</source>
         <translation>Didelė piktograma:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1252"/>
+        <location filename="../../kvantummanager.ui" line="1249"/>
         <source>Button icon:</source>
         <translation>Mygtuko piktograma:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1284"/>
+        <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Toolbar icon:</source>
         <translation>Įrankių juostos piktograma:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1311"/>
-        <location filename="../../kvantummanager.ui" line="1322"/>
+        <location filename="../../kvantummanager.ui" line="1308"/>
+        <location filename="../../kvantummanager.ui" line="1319"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
         <translation>Numatytoji reikšmė yra 2 pikseliai,
 tačiau kai kurios programos juos nustato pačios.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1315"/>
+        <location filename="../../kvantummanager.ui" line="1312"/>
         <source>Layout spacing:</source>
         <translation>Išdėstymo tarpai:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1339"/>
-        <location filename="../../kvantummanager.ui" line="1349"/>
+        <location filename="../../kvantummanager.ui" line="1336"/>
+        <location filename="../../kvantummanager.ui" line="1346"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation>Numatytoji reikšmė yra 4 pikseliai, tačiau kai kurios programos ją nustato pačios.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1342"/>
+        <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Layout margin:</source>
         <translation>Išdėstymo paraštė:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1365"/>
-        <location filename="../../kvantummanager.ui" line="1377"/>
+        <location filename="../../kvantummanager.ui" line="1362"/>
+        <location filename="../../kvantummanager.ui" line="1374"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
@@ -681,36 +674,36 @@ tačiau kai kurios programos juos nustato pačios.</translation>
 Pagal numatymą 0.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1370"/>
+        <location filename="../../kvantummanager.ui" line="1367"/>
         <source>Submenu overlap: </source>
         <translation>Submeniu persiklojimas: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1395"/>
-        <location filename="../../kvantummanager.ui" line="1406"/>
+        <location filename="../../kvantummanager.ui" line="1392"/>
+        <location filename="../../kvantummanager.ui" line="1403"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation>Horizontalių sukimosi mygtukų plotis.
 (Neveikia, kai sukimosi indikatoriai yra vertikalūs.)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1399"/>
+        <location filename="../../kvantummanager.ui" line="1396"/>
         <source>Spin button width: </source>
         <translation>Sukimosi mygtukų plotis: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1799"/>
-        <location filename="../../kvantummanager.ui" line="1809"/>
+        <location filename="../../kvantummanager.ui" line="1796"/>
+        <location filename="../../kvantummanager.ui" line="1806"/>
         <source>How to activate view items?</source>
         <translation>Kaip aktyvuoti rodinio elementus?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1802"/>
+        <location filename="../../kvantummanager.ui" line="1799"/>
         <source>Click behavior:</source>
         <translation>Spustelėjimo elgsena:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1922"/>
+        <location filename="../../kvantummanager.ui" line="1919"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -719,12 +712,12 @@ By default, tree branches have indicators but no line.</source>
 Pagal numatymą, medžio atšakose yra indikatoriai, tačiau jokios linijos.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1587"/>
+        <location filename="../../kvantummanager.ui" line="1584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kai tai yra įjungta ir pažymėta, Kvantum bandys gerbti kai kuriuos esamos darbalaukio aplinkos nustatymus, jei tai būtų KDE, Unity, Gnome ar Pantheon.&lt;/p&gt;&lt;p&gt;Naudojant KDE, tai padaro, kad Kvantum skaitytų KDE nustatymus, skirtus mažiems ir dideliems piktogramų dydžiams, o taip pat vienkarčiam ar dvikarčiam spustelėjimui.&lt;/p&gt;&lt;p&gt;Naudojant Unity, Gnome ir Pantheon, tai pašalina piktogramas iš meniu ir spustelėjimo mygtukų (netgi jei atitinkami dconf raktai yra pakeisti) ir išjungia dalinį langų permatomumą.&lt;/p&gt;&lt;p&gt;Šis žymimasis langelis gali išjungti kai kurias parinktis. Nuimkite žymėjimą, jei norite tas parinktis naudoti!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2084"/>
+        <location filename="../../kvantummanager.ui" line="2081"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -823,8 +816,8 @@ Pagal numatymą, yra stilizuojamos visos įrankių juostos,
 nesvarbu, ar jos yra apačioje ar kitoje vietoje.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="636"/>
-        <location filename="../../kvantummanager.ui" line="650"/>
+        <location filename="../../kvantummanager.ui" line="633"/>
+        <location filename="../../kvantummanager.ui" line="647"/>
         <source>The highlight color is used for tinting.
 
 This is mostly relevant with monochrome icons.
@@ -836,7 +829,7 @@ Tai labiausiai aktualu naudojant vienspalves piktogramas.
 Įkoduotos piktogramos/stiliai gali nepaisyti šio rakto.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="610"/>
+        <location filename="../../kvantummanager.ui" line="607"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
@@ -845,7 +838,7 @@ Kvantum, kiek tai įmanoma, gali bandyti pataisyti
 jų elgseną.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1069"/>
+        <location filename="../../kvantummanager.ui" line="1066"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
@@ -854,20 +847,20 @@ grafikos plokštės ir temoje esančio dalinai permatomo
 SVG lango fono.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1147"/>
+        <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation>Ar laikinosios slankjuostės, kai reikia, turėtų
 turėti pusiau permatomus griovelius?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1151"/>
+        <location filename="../../kvantummanager.ui" line="1148"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation>Laikinųjų slankjuosčių grioveliai, kai prireikia</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1171"/>
-        <location filename="../../kvantummanager.ui" line="1187"/>
+        <location filename="../../kvantummanager.ui" line="1168"/>
+        <location filename="../../kvantummanager.ui" line="1184"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -884,8 +877,8 @@ Jei tai išjungta, žiūrėkite:
 Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1209"/>
-        <location filename="../../kvantummanager.ui" line="1225"/>
+        <location filename="../../kvantummanager.ui" line="1206"/>
+        <location filename="../../kvantummanager.ui" line="1222"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -902,8 +895,8 @@ Jei tai išjungta, žiūrėkite:
 Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1247"/>
-        <location filename="../../kvantummanager.ui" line="1259"/>
+        <location filename="../../kvantummanager.ui" line="1244"/>
+        <location filename="../../kvantummanager.ui" line="1256"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
@@ -912,8 +905,8 @@ The default value is 16 px.</source>
 Numatytoji reikšmė yra16 pikselių.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1277"/>
-        <location filename="../../kvantummanager.ui" line="1291"/>
+        <location filename="../../kvantummanager.ui" line="1274"/>
+        <location filename="../../kvantummanager.ui" line="1288"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -926,30 +919,30 @@ kai kurios programos gali ją nusistatyti pačios.
 KDE programos gauna ją iš KDE nustatymo.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1426"/>
-        <location filename="../../kvantummanager.ui" line="1439"/>
+        <location filename="../../kvantummanager.ui" line="1423"/>
+        <location filename="../../kvantummanager.ui" line="1436"/>
         <source>The minimum length of scrollbars.</source>
         <translation>Mažiausias slankjuosčių ilgis.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1429"/>
-        <location filename="../../kvantummanager.ui" line="1442"/>
+        <location filename="../../kvantummanager.ui" line="1426"/>
+        <location filename="../../kvantummanager.ui" line="1439"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mažiausias vertikalių slankjuosčių aukštis ir horizontalių slankjuosčių plotis.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1432"/>
+        <location filename="../../kvantummanager.ui" line="1429"/>
         <source>Minimum scrollbar length: </source>
         <translation>Mažiausias slankjuostės ilgis: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1477"/>
+        <location filename="../../kvantummanager.ui" line="1474"/>
         <source>Delays</source>
         <translation>Delsos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1483"/>
-        <location filename="../../kvantummanager.ui" line="1511"/>
+        <location filename="../../kvantummanager.ui" line="1480"/>
+        <location filename="../../kvantummanager.ui" line="1508"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -962,7 +955,7 @@ Nulis reiškia, kad paaiškinimai bus rodomi nedelsiant.
 -1 reiškia numatytąją Qt elgseną.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1785"/>
+        <location filename="../../kvantummanager.ui" line="1782"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -975,7 +968,7 @@ Pažymėjus šį langelį, rodyklės bus pašalintos kaip įmanoma toliau.
 Jei išjungta, žiūrėkite Komponavimas ir bendra išvaizda → Laikinosios slankjuostės!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1651"/>
+        <location filename="../../kvantummanager.ui" line="1648"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -988,14 +981,14 @@ ir doko valdiklių vilkimo stačiakampiai yra tuščiaviduriai.
 paryškinimo spalva.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1702"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation>Jei pažymėta, įrankių juostos SVG elementas atvaizduos
 meniu juostą ir įrankių juostą, jiems būnant šalia, kaip vieną visumą.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1751"/>
+        <location filename="../../kvantummanager.ui" line="1748"/>
         <source>Shift the contents of push buttons when pressed?
 
 By default, the contents are shifted by 1px
@@ -1006,8 +999,8 @@ Pagal numatymą, turinys yra sutraukiamas 1 pikseliu
 tiek horizontaliai, tiek vertikaliai.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1934"/>
-        <location filename="../../kvantummanager.ui" line="1948"/>
+        <location filename="../../kvantummanager.ui" line="1931"/>
+        <location filename="../../kvantummanager.ui" line="1945"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -1020,8 +1013,8 @@ Jeigu tai išjungta, žiūrėkite:
 Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1845"/>
-        <location filename="../../kvantummanager.ui" line="1864"/>
+        <location filename="../../kvantummanager.ui" line="1842"/>
+        <location filename="../../kvantummanager.ui" line="1861"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -1032,7 +1025,7 @@ neturi nustatyto stiliaus savo kode.
 Numatytasis yra &quot;Sekti stiliumi&quot;.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1610"/>
+        <location filename="../../kvantummanager.ui" line="1607"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -1045,7 +1038,7 @@ Tai pažymėjus, sukimosi indikatoriai bus integruoti
 į sukimosi redaguojamą eilutę.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1638"/>
+        <location filename="../../kvantummanager.ui" line="1635"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -1057,7 +1050,7 @@ Tai pažymėjus, sukimosi indikatoriai sukimosi eilutėje bus
 apkeisti vietomis.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1693"/>
+        <location filename="../../kvantummanager.ui" line="1690"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
@@ -1067,12 +1060,12 @@ langus (t. y. kaip Gtk)?
 Pagal numatymą, jungtiniai iškylantieji langai neuždengia jungtinių langelių.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1741"/>
+        <location filename="../../kvantummanager.ui" line="1738"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation>Kvantum, pagal numatymą, kortelės yra centruojamos.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1597"/>
+        <location filename="../../kvantummanager.ui" line="1594"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1083,13 +1076,13 @@ ir, ar rodyti slinkimo rodykles jų viršuje ir/ar apačioje?
 Pagal numatymą, yra rodomi visi meniu elementai.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1490"/>
+        <location filename="../../kvantummanager.ui" line="1487"/>
         <source>Tooltip delay:</source>
         <translation>Paaiškinimų delsa:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="932"/>
-        <location filename="../../kvantummanager.ui" line="962"/>
+        <location filename="../../kvantummanager.ui" line="929"/>
+        <location filename="../../kvantummanager.ui" line="959"/>
         <source>A comma-separated list of executables,
 whose windows should not be translucent.
 
@@ -1102,7 +1095,7 @@ neturėtų būti dalinai permatomi, sąrašas.
 dėl dalinio permatomumo gali būti problemų!)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1130"/>
+        <location filename="../../kvantummanager.ui" line="1127"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -1115,8 +1108,8 @@ slinkimo rodinių viršuje.
 Jos, dažniausiai, neužima jokios papildomos vietos.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1497"/>
-        <location filename="../../kvantummanager.ui" line="1534"/>
+        <location filename="../../kvantummanager.ui" line="1494"/>
+        <location filename="../../kvantummanager.ui" line="1531"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -1129,28 +1122,28 @@ Numatytoji yra 250.
 tuo tarpu 0 reiškia jokios delsos.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1504"/>
+        <location filename="../../kvantummanager.ui" line="1501"/>
         <source>Submenu delay: </source>
         <translation>Submeniu delsa: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1518"/>
-        <location filename="../../kvantummanager.ui" line="1541"/>
+        <location filename="../../kvantummanager.ui" line="1515"/>
+        <location filename="../../kvantummanager.ui" line="1538"/>
         <source> ms</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1574"/>
+        <location filename="../../kvantummanager.ui" line="1571"/>
         <source>Miscellaneous</source>
         <translation>Įvairūs</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1792"/>
+        <location filename="../../kvantummanager.ui" line="1789"/>
         <source>No arrows for scrollbars</source>
         <translation>Slankjuostėse nerodyti jokių rodyklių</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1887"/>
+        <location filename="../../kvantummanager.ui" line="1884"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1163,17 +1156,17 @@ Pagal numatymą, slankjuostės yra atvaizduojamos rodinio rėmelių išorėje.
 Jei išjungta, žiūrėkite Komponavimas ir bendra išvaizda → Laikinosios slankjuostės!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1894"/>
+        <location filename="../../kvantummanager.ui" line="1891"/>
         <source>Scrollbars inside frames</source>
         <translation>Slankjuostės rėmelių viduje</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1927"/>
+        <location filename="../../kvantummanager.ui" line="1924"/>
         <source>Tree branch lines</source>
         <translation>Medžio atšakų linijos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1624"/>
+        <location filename="../../kvantummanager.ui" line="1621"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -1186,81 +1179,81 @@ Tai pažymėjus, etiketė bus išdėstyta virš rėmelio,
 kad rėmelis nebūtų apkerpamas.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1631"/>
+        <location filename="../../kvantummanager.ui" line="1628"/>
         <source>Group-box label above frame</source>
         <translation>Valdiklių grupės etiketė virš rėmelio</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1658"/>
+        <location filename="../../kvantummanager.ui" line="1655"/>
         <source>Fill rubber-band rectangles</source>
         <translation>Užpildyti guminių juostelių stačiakampius</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1679"/>
+        <location filename="../../kvantummanager.ui" line="1676"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation>Pagal numatymą, pelės sekimas
 meniu juostoms yra įjungtas.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1683"/>
+        <location filename="../../kvantummanager.ui" line="1680"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pagal numatymą, pelės sekimas meniu juostoms yra įjungtas, t.y. spustelėjus ant meniu juostos elemento ir parodžius jo meniu, o tuomet perkėlus rodyklę į kitą meniu juostą, jos turinys bus rodomas net ir nespustelėjus pelės mygtuką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1686"/>
+        <location filename="../../kvantummanager.ui" line="1683"/>
         <source>Mouse tracking for menubars</source>
         <translation>Pelės sekimas meniu juostose</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1709"/>
+        <location filename="../../kvantummanager.ui" line="1706"/>
         <source>Merge menubar with toolbar</source>
         <translation>Sulieti meniu juostą su įrankių juosta</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1730"/>
+        <location filename="../../kvantummanager.ui" line="1727"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>Jei pažymėta, įrankių juostos mygtukai bus rodomi, grupuojami ir iškeliami
 tarp įrankių juostos skirtukų.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1734"/>
+        <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Group toolbar buttons</source>
         <translation>Grupuoti įrankių juostos mygtukus</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1757"/>
+        <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Shift push-button contents</source>
         <translation>Sutraukti spustelėjimo mygtukų turinį</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1941"/>
+        <location filename="../../kvantummanager.ui" line="1938"/>
         <source>Drag from:</source>
         <translation>Vilkti spustelėjus ant:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1851"/>
+        <location filename="../../kvantummanager.ui" line="1848"/>
         <source>Toolbutton style:</source>
         <translation>Įrankių mygtukų stilius:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1775"/>
+        <location filename="../../kvantummanager.ui" line="1772"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation>Jei nepažymėta, spartieji klavišai iš viso nebus pabraukiami.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1778"/>
+        <location filename="../../kvantummanager.ui" line="1775"/>
         <source>Underline shortcuts with Alt</source>
         <translation>Pabraukti sparčiuosius klavišus, naudojant Alt klavišą</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1617"/>
+        <location filename="../../kvantummanager.ui" line="1614"/>
         <source>Inline spin indicators</source>
         <translation>Įterpti sukimosi indikatoriai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1665"/>
+        <location filename="../../kvantummanager.ui" line="1662"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>Atvaizduoti visą redaguojamą jungtinį langelį
@@ -1268,22 +1261,22 @@ kaip redaguojamą eilutę su rodykle (ir piktograma,
 jeigu ji yra)?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1669"/>
+        <location filename="../../kvantummanager.ui" line="1666"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Atvaizduoti visą redaguojamą jungtinį langelį kaip redaguojamą eilutę su rodykle (ir piktograma, jeigu ji yra)?&lt;/p&gt;&lt;p&gt;Pagal numatymą, jungtinį langelį sudaro redaguojama eilutė, vienoje pusėje šone mygtukas su rodykle, o kitoje pusėje mygtukas su piktograma.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1672"/>
+        <location filename="../../kvantummanager.ui" line="1669"/>
         <source>Editable combo as line-edit</source>
         <translation>Redaguojamas jungtinis langelis kaip redaguojama eilutė</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1644"/>
+        <location filename="../../kvantummanager.ui" line="1641"/>
         <source>Vertical spin indicators</source>
         <translation>Vertikalūs sukimosi indikatoriai</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1580"/>
+        <location filename="../../kvantummanager.ui" line="1577"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1296,39 +1289,39 @@ kai kuriuos esamos darbalaukio aplinkos nustatymus.
 Jeigu jums reikia tų parinkčių, nuimkite žymėjimą nuo šio langelio!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1590"/>
+        <location filename="../../kvantummanager.ui" line="1587"/>
         <source>Respect current DE if possible</source>
         <translation>Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1698"/>
+        <location filename="../../kvantummanager.ui" line="1695"/>
         <source>Combo popup as menu</source>
         <translation>Jungtinis iškylantysis langas kaip meniu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1744"/>
+        <location filename="../../kvantummanager.ui" line="1741"/>
         <source>Left aligned tabs</source>
         <translation>Lygiuoti korteles kairėje</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1764"/>
+        <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation>Pagal numatymą, neaktyvios kortelės yra sujungiamos kartu,
 t. y., tarp jų nėra jokio rėmelio.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1768"/>
+        <location filename="../../kvantummanager.ui" line="1765"/>
         <source>Join inactive tabs</source>
         <translation>Sujungti neaktyvias korteles</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1603"/>
+        <location filename="../../kvantummanager.ui" line="1600"/>
         <source>Scrollable menus</source>
         <translation>Slenkami meniu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1716"/>
+        <location filename="../../kvantummanager.ui" line="1713"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1341,405 +1334,405 @@ This option will hide these.</source>
 Ši parinktis juos paslėps.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1723"/>
+        <location filename="../../kvantummanager.ui" line="1720"/>
         <source>Non-checkable combo menu</source>
         <translation>Nežymimieji jungtiniai meniu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1901"/>
+        <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Dialog button layout:</source>
         <translation>Dialogo mygtukų išdėstymas:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1911"/>
+        <location filename="../../kvantummanager.ui" line="1908"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation>Ant fokusuotų mygtukų ir kitų valdiklių
 jie gali atrodyti kaip stačiakampiai su taškeliais.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1915"/>
+        <location filename="../../kvantummanager.ui" line="1912"/>
         <source>Remove focus rectangles</source>
         <translation>Šalinti fokusavimo stačiakampius</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1975"/>
+        <location filename="../../kvantummanager.ui" line="1972"/>
         <source>Application Themes</source>
         <translation>Programų temos</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1981"/>
+        <location filename="../../kvantummanager.ui" line="1978"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Čia, jūs galėtumėte priskirti temas tam tikroms programoms.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Kiekvienai temai galite pridėti sąrašą su kableliais atskirtais vykdomaisiais tų programų, kurios vietoj aktyvios temos, turėtų naudoti šią temą. Atlikę tai visoms pasirinktoms temoms, įrašykite rezultatą, spusteldami mygtuką &lt;i&gt;Įrašyti&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2016"/>
+        <location filename="../../kvantummanager.ui" line="2013"/>
         <source>Installed Theme</source>
         <translation>Įdiegta tema</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2032"/>
+        <location filename="../../kvantummanager.ui" line="2029"/>
         <source>Application(s)</source>
         <translation>Programa(-os)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2061"/>
+        <location filename="../../kvantummanager.ui" line="2058"/>
         <source>app1,app2,app3</source>
         <translation>programa1,programa2,programa3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2089"/>
+        <location filename="../../kvantummanager.ui" line="2086"/>
         <source>Remove List</source>
         <translation>Šalinti sąrašą</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2096"/>
+        <location filename="../../kvantummanager.ui" line="2093"/>
         <source>Save the current list of apps</source>
         <translation>Įrašyti esamą programų sąrašą</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2099"/>
+        <location filename="../../kvantummanager.ui" line="2096"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Įrašykite esamą programų, su jų atitinkamomis temomis, sąrašą!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2126"/>
-        <location filename="../../kvantummanager.ui" line="2132"/>
+        <location filename="../../kvantummanager.ui" line="2123"/>
+        <location filename="../../kvantummanager.ui" line="2129"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl(Vald)+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2129"/>
+        <location filename="../../kvantummanager.ui" line="2126"/>
         <source>Quit</source>
         <translation>Išeiti</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2142"/>
+        <location filename="../../kvantummanager.ui" line="2139"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Peržiūrėti aktyvią temą
 arba atnaujinti jos peržiūrą.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2146"/>
+        <location filename="../../kvantummanager.ui" line="2143"/>
         <source>Preview</source>
         <translation>Peržiūra</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2153"/>
+        <location filename="../../kvantummanager.ui" line="2150"/>
         <source>About</source>
         <translation>Apie</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2176"/>
+        <location filename="../../kvantummanager.ui" line="2173"/>
         <source>What&apos;s This?</source>
         <translation>Kas tai?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2179"/>
+        <location filename="../../kvantummanager.ui" line="2176"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Spustelėkite ant šio mygtuko, o tuomet spustelėkite ant grafinės naudotojo sąsajos elemento, kuris turi &amp;quot;Kas tai yra&amp;quot; paaiškinimą, kad sužinotumėte ką tas elementas daro.&lt;/p&gt;&lt;p&gt;Taip pat yra ir įprasti paaiškinimai, tačiau šie paaiškinimai neišnyks tol, kol nespustelėsite kur nors kitur.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2182"/>
+        <location filename="../../kvantummanager.ui" line="2179"/>
         <source>Help</source>
         <translation>Žinynas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="295"/>
+        <location filename="../../KvantumManager.cpp" line="293"/>
         <source>Open Kvantum Theme Folder...</source>
         <translation>Atverti Kvantum temos aplanką...</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="482"/>
-        <location filename="../../KvantumManager.cpp" line="499"/>
-        <location filename="../../KvantumManager.cpp" line="515"/>
-        <location filename="../../KvantumManager.cpp" line="526"/>
-        <location filename="../../KvantumManager.cpp" line="537"/>
-        <location filename="../../KvantumManager.cpp" line="564"/>
-        <location filename="../../KvantumManager.cpp" line="579"/>
-        <location filename="../../KvantumManager.cpp" line="626"/>
-        <location filename="../../KvantumManager.cpp" line="642"/>
+        <location filename="../../KvantumManager.cpp" line="480"/>
+        <location filename="../../KvantumManager.cpp" line="497"/>
+        <location filename="../../KvantumManager.cpp" line="513"/>
+        <location filename="../../KvantumManager.cpp" line="524"/>
+        <location filename="../../KvantumManager.cpp" line="535"/>
+        <location filename="../../KvantumManager.cpp" line="562"/>
+        <location filename="../../KvantumManager.cpp" line="577"/>
+        <location filename="../../KvantumManager.cpp" line="624"/>
+        <location filename="../../KvantumManager.cpp" line="640"/>
         <source>Kvantum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="566"/>
+        <location filename="../../KvantumManager.cpp" line="564"/>
         <source>First you have to delete its modified version!</source>
         <translation>Iš pradžių, turite ištrinti jos modifikuotą versiją!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="590"/>
-        <location filename="../../KvantumManager.cpp" line="744"/>
-        <location filename="../../KvantumManager.cpp" line="2632"/>
+        <location filename="../../KvantumManager.cpp" line="588"/>
+        <location filename="../../KvantumManager.cpp" line="742"/>
+        <location filename="../../KvantumManager.cpp" line="2627"/>
         <source>Confirmation</source>
         <translation>Patvirtinimas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="705"/>
+        <location filename="../../KvantumManager.cpp" line="703"/>
         <source>%1 installed.</source>
         <translation>%1 įdiegta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="875"/>
+        <location filename="../../KvantumManager.cpp" line="873"/>
         <source>%1 deleted.</source>
         <translation>%1 ištrinta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="929"/>
+        <location filename="../../KvantumManager.cpp" line="927"/>
         <source>Theme changed to %1.</source>
         <translation>Tema pakeista į %1.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="483"/>
+        <location filename="../../KvantumManager.cpp" line="481"/>
         <source>You have no permission to write here:</source>
         <translation>Jūs neturite leidimų čia rašyti:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="106"/>
-        <location filename="../../KvantumManager.cpp" line="110"/>
-        <location filename="../../KvantumManager.cpp" line="116"/>
+        <location filename="../../KvantumManager.cpp" line="104"/>
+        <location filename="../../KvantumManager.cpp" line="108"/>
+        <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Follow Style</source>
         <translation>Sekti stiliumi</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="107"/>
+        <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Single Click</source>
         <translation>Vienkartis spustelėjimas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="108"/>
+        <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Double Click</source>
         <translation>Dvikartis spustelėjimas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="111"/>
+        <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
         <translation>Tik piktogramos</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="112"/>
+        <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Only</source>
         <translation>Tik tekstas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="113"/>
+        <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Beside Icon</source>
         <translation>Tekstas šalia piktogramų</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="114"/>
+        <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Under Icon</source>
         <translation>Tekstas po piktogramomis</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="117"/>
+        <location filename="../../KvantumManager.cpp" line="115"/>
         <source>KDE Layout</source>
         <translation>KDE išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="118"/>
+        <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Gnome Layout</source>
         <translation>Gnome išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="119"/>
+        <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Mac Layout</source>
         <translation>Mac išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="120"/>
+        <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Windows Layout</source>
         <translation>Windows išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="121"/>
+        <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Android Layout</source>
         <translation>Android išdėstymas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="123"/>
+        <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Titlebar</source>
         <translation>Pavadinimo juostos</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="124"/>
+        <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar</source>
         <translation>Meniu juostos</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="125"/>
+        <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Menubar and primary toolbar</source>
         <translation>Meniu juostos ir pirminės įrankių juostos</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="126"/>
+        <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Anywhere possible</source>
         <translation>Bet kur, kur įmanoma</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="485"/>
+        <location filename="../../KvantumManager.cpp" line="483"/>
         <source>Please fix that first!</source>
         <translation>Prašome, iš pradžių, tai pataisyti!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="497"/>
+        <location filename="../../KvantumManager.cpp" line="495"/>
         <source>This file cannot be removed:</source>
         <translation>Nepavyksta pašalinti šio failo:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="516"/>
-        <location filename="../../KvantumManager.cpp" line="527"/>
+        <location filename="../../KvantumManager.cpp" line="514"/>
+        <location filename="../../KvantumManager.cpp" line="525"/>
         <source>This is not an installable Kvantum theme!</source>
         <translation>Tai nėra Kvantum tema, kurią galima įdiegti!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="517"/>
+        <location filename="../../KvantumManager.cpp" line="515"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
         <translation>Galimų įdiegti temų pavadinimai neturėtų būti &quot;Default&quot;.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="518"/>
-        <location filename="../../KvantumManager.cpp" line="529"/>
-        <location filename="../../KvantumManager.cpp" line="539"/>
+        <location filename="../../KvantumManager.cpp" line="516"/>
+        <location filename="../../KvantumManager.cpp" line="527"/>
+        <location filename="../../KvantumManager.cpp" line="537"/>
         <source>Please select another directory!</source>
         <translation>Pasirinkite kitą katalogą!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="528"/>
+        <location filename="../../KvantumManager.cpp" line="526"/>
         <source>Installable themes should not have # in their names.</source>
         <translation>Galimų įdiegti temų pavadinimuose neturėtų būti &quot;#&quot; simbolio.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="538"/>
+        <location filename="../../KvantumManager.cpp" line="536"/>
         <source>This is not a Kvantum theme folder!</source>
         <translation>Tai nėra Kvantum temos aplankas!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="565"/>
+        <location filename="../../KvantumManager.cpp" line="563"/>
         <source>The theme already exists in modified form.</source>
         <translation>Tema jau yra modifikuotu pavidalu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="580"/>
+        <location filename="../../KvantumManager.cpp" line="578"/>
         <source>You have selected an installed theme folder.</source>
         <translation>Jūs pasirinkote įdiegtos temos aplanką.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="581"/>
+        <location filename="../../KvantumManager.cpp" line="579"/>
         <source>Please choose another directory!</source>
         <translation>Pasirinkite kitą katalogą!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="591"/>
+        <location filename="../../KvantumManager.cpp" line="589"/>
         <source>The theme already exists.</source>
         <translation>Tema jau yra.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="592"/>
+        <location filename="../../KvantumManager.cpp" line="590"/>
         <source>Do you want to overwrite it?</source>
         <translation>Ar norite ją perrašyti?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="627"/>
+        <location filename="../../KvantumManager.cpp" line="625"/>
         <source>This theme is also installed as root in:</source>
         <translation>Ši tema taip pat yra įdiegta kaip šaknis ties:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="629"/>
+        <location filename="../../KvantumManager.cpp" line="627"/>
         <source>The user installation will take priority.</source>
         <translation>Pirmenybė bus teikiama naudotojo įdiegimui.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="643"/>
+        <location filename="../../KvantumManager.cpp" line="641"/>
         <source>This theme is also installed as user in:</source>
         <translation>Ši tema taip pat yra įdiegta kaip naudotojas ties:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="645"/>
+        <location filename="../../KvantumManager.cpp" line="643"/>
         <source>This installation will take priority.</source>
         <translation>Pirmenybė bus teikiama šiam įdiegimui.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="745"/>
+        <location filename="../../KvantumManager.cpp" line="743"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation>Ar tikrai norite ištrinti &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="748"/>
+        <location filename="../../KvantumManager.cpp" line="746"/>
         <source>It could not be restored unless you have a copy of it.</source>
         <translation>Jos negalima bus atkurti nebent turėsite jos kopiją.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1281"/>
-        <location filename="../../KvantumManager.cpp" line="1300"/>
+        <location filename="../../KvantumManager.cpp" line="1279"/>
+        <location filename="../../KvantumManager.cpp" line="1298"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Tai yra nustatymai, kurie gali būti saugiai keičiami.&lt;br&gt;Kitiems nustatymams, spustelėkite &lt;i&gt;Įrašyti&lt;/i&gt;, o tuomet redaguokite šį failą:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1296"/>
-        <location filename="../../KvantumManager.cpp" line="2540"/>
+        <location filename="../../KvantumManager.cpp" line="1294"/>
+        <location filename="../../KvantumManager.cpp" line="2535"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Tai yra nustatymai, kurie gali būti saugiai keičiami.&lt;br&gt;Kitiems nustatymams, redaguokite šį failą:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1660"/>
+        <location filename="../../KvantumManager.cpp" line="1658"/>
         <source>No description</source>
         <translation>Aprašo nėra</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2131"/>
+        <location filename="../../KvantumManager.cpp" line="2129"/>
         <source>A copy of the root config is created.</source>
         <translation>Yra sukurta šaknies konfigūcijos kopija.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2142"/>
+        <location filename="../../KvantumManager.cpp" line="2140"/>
         <source>A copy was already created.</source>
         <translation>Kopija jau buvo sukurta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2526"/>
+        <location filename="../../KvantumManager.cpp" line="2521"/>
         <source>Configuration saved.</source>
         <translation>Konfigūracija įrašyta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2633"/>
+        <location filename="../../KvantumManager.cpp" line="2628"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Ar norite sugrąžinti į numatytuosius (šaknies) šios temos nustatymus?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2636"/>
+        <location filename="../../KvantumManager.cpp" line="2631"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Jūs prarasite pakeitimus, kuriuos, galbūt, atlikote.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2671"/>
+        <location filename="../../KvantumManager.cpp" line="2666"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Atkurti numatytieji %1 šaknies nustatymai</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2672"/>
+        <location filename="../../KvantumManager.cpp" line="2667"/>
         <source>the default theme</source>
         <translation>numatytoji tema</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2808"/>
-        <location filename="../../KvantumManager.cpp" line="2809"/>
+        <location filename="../../KvantumManager.cpp" line="2803"/>
+        <location filename="../../KvantumManager.cpp" line="2804"/>
         <source>About Kvantum Manager</source>
         <translation>Apie Kvantum tvarkytuvę</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2808"/>
+        <location filename="../../KvantumManager.cpp" line="2803"/>
         <source>Translators</source>
         <translation>Vertėjai</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2806"/>
+        <location filename="../../KvantumManager.cpp" line="2801"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Įrankis, skirtas diegti, pasirinkti&lt;br&gt;ir konfigūruoti &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; temas</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2807"/>
+        <location filename="../../KvantumManager.cpp" line="2802"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Autorius: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (dar žinomas kaip Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1754,19 +1747,19 @@ arba atnaujinti jos peržiūrą.</translation>
         <translation>numatytoji</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="495"/>
+        <location filename="../../KvantumManager.cpp" line="493"/>
         <source>This directory cannot be removed:</source>
         <translation>Nepavyksta pašalinti šio katalogo:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="502"/>
+        <location filename="../../KvantumManager.cpp" line="500"/>
         <source>You might want to investigate the cause.</source>
         <translation>Jūs turėtumėte ištirti priežastį.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="928"/>
-        <location filename="../../KvantumManager.cpp" line="2071"/>
-        <location filename="../../KvantumManager.cpp" line="2535"/>
+        <location filename="../../KvantumManager.cpp" line="926"/>
+        <location filename="../../KvantumManager.cpp" line="2069"/>
+        <location filename="../../KvantumManager.cpp" line="2530"/>
         <source>Active theme:</source>
         <translation>Aktyvi tema:</translation>
     </message>

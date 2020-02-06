@@ -565,16 +565,13 @@ the highlight color!</string>
                 </widget>
                </item>
                <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxOpaqueColors">
+                <widget class="QCheckBox" name="checkBoxCenteredForms">
                  <property name="toolTip">
-                  <string>Text colors are defined by the theme
-and can have translucency.
-
-Checking this is not recommended unless
-as a workaround for bugs in applications.</string>
+                  <string>If checked, the contents of a form will be
+horizontally centered as far as possible.</string>
                  </property>
                  <property name="text">
-                  <string>Opaque (text) colors</string>
+                  <string>Centered form layouts</string>
                  </property>
                 </widget>
                </item>

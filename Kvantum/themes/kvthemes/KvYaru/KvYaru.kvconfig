@@ -116,7 +116,6 @@ transparent_pcmanfm_view=false
 no_selection_tint=true
 middle_click_scroll=false
 transparent_arrow_button=true
-opaque_colors=false
 kinetic_scrolling=false
 scroll_jump_workaround=false
 

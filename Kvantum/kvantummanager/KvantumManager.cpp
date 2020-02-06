@@ -49,8 +49,6 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
 #if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
     ui->checkBoxKineticScrolling->setEnabled (false);
-#elif  (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
-    ui->checkBoxOpaqueColors->setEnabled (false); // Qt's text rendering bug
 #endif
 
     ui->openTheme->setIcon (symbolicIcon::icon (":/Icons/data/document-open.svg"));
@@ -988,7 +986,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
     ui->checkBoxTint->setChecked (defaultSettings.value ("no_selection_tint").toBool());
-    ui->checkBoxOpaqueColors->setChecked (defaultSettings.value ("opaque_colors").toBool());
+    ui->checkBoxCenteredForms->setChecked (defaultSettings.value ("centered_forms").toBool());
     int tmp = 0;
     if (defaultSettings.contains ("tint_on_mouseover")) // it's 0 by default
         tmp = qMin (qMax (defaultSettings.value ("tint_on_mouseover").toInt(), 0), 100);
@@ -1546,7 +1544,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
                 ui->checkBoxToolbar->setChecked (themeSettings.value ("single_top_toolbar").toBool());
                 ui->checkBoxTint->setChecked (themeSettings.value ("no_selection_tint").toBool());
-                ui->checkBoxOpaqueColors->setChecked (themeSettings.value ("opaque_colors").toBool());
+                ui->checkBoxCenteredForms->setChecked (themeSettings.value ("centered_forms").toBool());
                 int tmp = 0;
                 if (themeSettings.contains ("tint_on_mouseover"))
                     tmp = qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(), 0), 100);
@@ -2217,7 +2215,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert ("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
         hackKeys.insert ("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
         hackKeys.insert ("no_selection_tint", boolToStr (ui->checkBoxTint->isChecked()));
-        hackKeys.insert ("opaque_colors", boolToStr (ui->checkBoxOpaqueColors->isChecked()));
+        hackKeys.insert ("centered_forms", boolToStr (ui->checkBoxCenteredForms->isChecked()));
         hackKeys.insert ("tint_on_mouseover", str.setNum (ui->spinTint->value()));
         hackKeys.insert ("disabled_icon_opacity", str.setNum (ui->spinOpacity->value()));
         hackKeys.insert ("lxqtmainmenu_iconsize", str.setNum (ui->spinLxqtMenu->value()));
@@ -2304,7 +2302,6 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("iconless_pushbutton").toBool() != ui->checkBoxIconlessBtn->isChecked()
             || themeSettings.value ("middle_click_scroll").toBool() != ui->checkBoxScrollJump->isChecked()
             || themeSettings.value ("kinetic_scrolling").toBool() != ui->checkBoxKineticScrolling->isChecked()
-            || themeSettings.value ("opaque_colors").toBool() != ui->checkBoxOpaqueColors->isChecked()
             || qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(),0),100) != ui->spinTint->value()
             || qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(),0),100) != ui->spinOpacity->value())
         {
@@ -2401,7 +2398,7 @@ void KvantumManager::writeConfig()
                     if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (focusKeys.value (it.key()));
-                        //focusKeys.remove (it.key()); // shouldn't be removed because it may be repeated
+                        /* it.key() shouldn't be removed because it may be repeated */
                         found = true;
                         break;
                     }
@@ -2414,7 +2411,6 @@ void KvantumManager::writeConfig()
                     if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (hackKeys.value (it.key()));
-                        //hackKeys.remove (it.key());
                         found = true;
                         break;
                     }
@@ -2427,7 +2423,6 @@ void KvantumManager::writeConfig()
                     if (line.contains (QRegularExpression ("^\\s*" + it.key() + "(?=\\s*\\=)")))
                     {
                         line = QString ("%1=%2").arg (it.key()).arg (generalKeys.value (it.key()));
-                        //generalKeys.remove (it.key());
                         break;
                     }
                 }

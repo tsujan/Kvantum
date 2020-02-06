@@ -108,7 +108,6 @@ lxqtmainmenu_iconsize=22
 middle_click_scroll=false
 no_selection_tint=true
 normal_default_pushbutton=false
-opaque_colors=false
 single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=false

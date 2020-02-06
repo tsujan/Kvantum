@@ -55,6 +55,7 @@
 #include <QStandardPaths>
 #include <QItemSelectionModel>
 #include <QDialogButtonBox> // for dialog buttons layout
+#include <QFormLayout>
 //#include <QDebug>
 #include <QSurfaceFormat>
 #include <QWindow>
@@ -13063,6 +13064,21 @@ int Style::styleHint(QStyle::StyleHint hint,
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     case SH_SpinBox_ButtonsInsideFrame : return true;
 #endif
+
+    /* forms */
+    case SH_FormLayoutFieldGrowthPolicy : {
+      if (hspec_.centered_forms)
+        return QFormLayout::FieldsStayAtSizeHint;
+      else
+        return QFormLayout::AllNonFixedFieldsGrow;
+    }
+    case SH_FormLayoutFormAlignment : return Qt::AlignLeft | Qt::AlignTop;
+    case SH_FormLayoutLabelAlignment : {
+      if (hspec_.centered_forms)
+        return Qt::AlignRight;
+      else
+        return Qt::AlignLeft;
+    }
 
     default : {
       if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar

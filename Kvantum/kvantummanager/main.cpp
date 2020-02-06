@@ -102,10 +102,10 @@ int main (int argc, char *argv[])
 
     QTranslator qtTranslator;
     if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath)))
-    { // not needed; doesn't happen
+    { // shouldn't be needed
         if (!langs.isEmpty())
         {
-            lang = langs.first().split (QLatin1Char ('-')).first();
+            lang = langs.first().split (QLatin1Char ('_')).first();
             qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
         }
     }

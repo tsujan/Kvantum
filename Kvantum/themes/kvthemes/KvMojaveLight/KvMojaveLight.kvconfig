@@ -113,7 +113,6 @@ middle_click_scroll=false
 no_selection_tint=true
 transparent_pcmanfm_view=true
 transparent_arrow_button=true
-opaque_colors=false
 
 [PanelButtonCommand]
 frame=true

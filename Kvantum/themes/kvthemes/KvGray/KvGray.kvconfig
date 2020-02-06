@@ -95,7 +95,6 @@ normal_default_pushbutton=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=true
 middle_click_scroll=false
-opaque_colors=false
 transparent_arrow_button=true
 
 [PanelButtonCommand]

@@ -267,7 +267,8 @@ typedef struct {
   /* blur the region behind a window background that is
      explicitly made translucent by its app? */
   bool blur_translucent;
-  /* should all texts have opaque colors? */
+  /* should all texts have opaque colors?
+     (used internally as a workaround) */
   bool opaque_colors;
   /* transparent background for the label of KTitleWidget
      (nice when the window bg has a gradient) */
@@ -302,10 +303,13 @@ typedef struct {
   /* should the scroll jump be done by middle clicking?
      (By default, it's done by left clicking.) */
   bool middle_click_scroll;
+  /* should forms be drawn centered? */
+  bool centered_forms;
   /* enable kinetic scrolling? */
   bool kinetic_scrolling;
   /* workaround for annoying Qt5 scroll jumps? */
   bool scroll_jump_workaround;
+
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -567,6 +571,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.iconless_menu = false;
   hspec.single_top_toolbar = false;
   hspec.middle_click_scroll = false;
+  hspec.centered_forms = false;
   hspec.kinetic_scrolling = false;
   hspec.scroll_jump_workaround = false;
 }

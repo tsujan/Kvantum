@@ -100,7 +100,6 @@ tint_on_mouseover=0
 transparent_pcmanfm_view=true
 middle_click_scroll=false
 no_selection_tint=false
-opaque_colors=false
 
 [PanelButtonCommand]
 frame=true

@@ -1143,9 +1143,10 @@ hacks_spec ThemeConfig::getHacksSpec() const
      The bug was fixed in Qt 5.14.1 but better safe than sorry. */
   r.opaque_colors = true;
 #else
-  v = getValue(KSL("Hacks"),KSL("opaque_colors"));
+  /*v = getValue(KSL("Hacks"),KSL("opaque_colors"));
   if (v.isValid())
-    r.opaque_colors = v.toBool();
+    r.opaque_colors = v.toBool();*/
+  r.opaque_colors = false;
 #endif
 
   v = getValue(KSL("Hacks"),KSL("transparent_ktitle_label"));
@@ -1191,6 +1192,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   v = getValue(KSL("Hacks"),KSL("middle_click_scroll"));
   r.middle_click_scroll = v.toBool();
+
+  v = getValue(KSL("Hacks"),KSL("centered_forms"));
+  r.centered_forms = v.toBool();
 
   v = getValue(KSL("Hacks"),KSL("kinetic_scrolling"));
   r.kinetic_scrolling = v.toBool();
