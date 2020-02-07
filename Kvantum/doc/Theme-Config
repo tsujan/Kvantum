@@ -872,7 +872,8 @@ transparent_menutitle             true/false          No background for (KDE) me
 
 kcapacitybar_as_progressbar       true/false          Draw KCapacityBar as progressbar?
                                                       KCapacityBar has its hard-coded
-                                                      style by default.
+                                                      style but is drawn as a progressbar
+                                                      by default.
 
 respect_darkness                  true/false          Some apps don't respect dark themes.
                                                       Fix that as far as possible?
@@ -915,10 +916,6 @@ middle_click_scroll               true/false          Should the scroll slider j
                                                       position when the scrollbar is middle
                                                       clicked? The default is false and the
                                                       jump is done by a left click.
-
-opaque_colors                     true/false          Should all (text) colors be opaque? By
-                                                      default, (text) colors are defined by
-                                                      the theme and can be translucent.
 
 scroll_jump_workaround            true/false          Qt5 has a bug that causes annoying mouse
                                                       wheel scroll jumps when mouse gestures

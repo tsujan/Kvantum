@@ -309,7 +309,6 @@ typedef struct {
   bool kinetic_scrolling;
   /* workaround for annoying Qt5 scroll jumps? */
   bool scroll_jump_workaround;
-
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -559,7 +558,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.opaque_colors = false;
   hspec.transparent_ktitle_label = false;
   hspec.transparent_menutitle = false;
-  hspec.kcapacitybar_as_progressbar = false;
+  hspec.kcapacitybar_as_progressbar = true;
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
   hspec.tint_on_mouseover = 0;

@@ -13069,15 +13069,13 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_FormLayoutFieldGrowthPolicy : {
       if (hspec_.centered_forms)
         return QFormLayout::FieldsStayAtSizeHint;
-      else
-        return QFormLayout::AllNonFixedFieldsGrow;
+      return QFormLayout::AllNonFixedFieldsGrow;
     }
     case SH_FormLayoutFormAlignment : return Qt::AlignLeft | Qt::AlignTop;
     case SH_FormLayoutLabelAlignment : {
       if (hspec_.centered_forms)
         return Qt::AlignRight;
-      else
-        return Qt::AlignLeft;
+      return Qt::AlignLeft;
     }
 
     default : {
