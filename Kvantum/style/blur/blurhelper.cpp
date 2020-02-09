@@ -230,6 +230,5 @@ void BlurHelper::clear (QWidget* widget) const
 #else
   Q_UNUSED (widget);
 #endif
-  return;
 }
 }

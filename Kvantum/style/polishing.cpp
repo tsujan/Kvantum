@@ -340,8 +340,10 @@ void Style::polish(QWidget *widget)
                || qobject_cast<QLabel*>(widget) // a floating label, as in Filelight
                || widget->inherits("QComboBoxPrivateContainer") // at most, a menu
                /* like Vokoscreen's (old) QvkRegionChoise */
-               || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
-                   && widget->windowFlags().testFlag(Qt::WindowStaysOnTopHint)))
+               || (widget->windowFlags().testFlag(Qt::WindowStaysOnTopHint)
+                   && widget->testAttribute(Qt::WA_NoSystemBackground)
+                   && ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
+                       || (widget->windowState() & Qt::WindowFullScreen))))
       {
         break;
       }
@@ -440,10 +442,7 @@ void Style::polish(QWidget *widget)
           if (makeTranslucent
               /* enable blurring for hard-coded translucency */
               || (tspec_now.composite
-                  && ((hspec_.blur_translucent
-                       /* Konsole has a bug that's never fixed (I fixed a similar bug in
-                          QTerminal a long time ago) but it doesn't need our blurring */
-                       && !isKonsole_)
+                  && (hspec_.blur_translucent
                       /* let unusual tooltips with hard-coded translucency
                          have shadow (like in LXQtGroupPopup or KDE system settings) */
                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
@@ -455,7 +454,7 @@ void Style::polish(QWidget *widget)
               widget->setAttribute(Qt::WA_TranslucentBackground);
 #else
             if (!widget->testAttribute(Qt::WA_TranslucentBackground)
-                || !widget->testAttribute(Qt::WA_NoSystemBackground))
+                || (makeTranslucent && !widget->testAttribute(Qt::WA_NoSystemBackground)))
             {
               if (!widget->testAttribute(Qt::WA_TranslucentBackground))
                 widget->setAttribute(Qt::WA_TranslucentBackground);
@@ -1039,8 +1038,6 @@ void Style::polish(QApplication *app)
     isDolphin_ = true;
   else if (appName == "pcmanfm-qt")
     isPcmanfm_ = true;
-  else if (appName == "konsole")
-    isKonsole_ = true;
   else if (appName == "soffice.bin")
     isLibreoffice_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")

@@ -448,7 +448,6 @@ class Style : public QCommonStyle {
     /* Hacks */
     bool isDolphin_;
     bool isPcmanfm_;
-    bool isKonsole_;
 
     /* The size of the slider handle with no tick mark (if it exists) */
     mutable int ticklessSliderHandleSize_;
