@@ -440,7 +440,10 @@ void Style::polish(QWidget *widget)
           if (makeTranslucent
               /* enable blurring for hard-coded translucency */
               || (tspec_now.composite
-                  && (hspec_.blur_translucent
+                  && ((hspec_.blur_translucent
+                       /* Konsole has a bug that's never fixed (I fixed a similar bug in
+                          QTerminal a long time ago) but it doesn't need our blurring */
+                       && !isKonsole_)
                       /* let unusual tooltips with hard-coded translucency
                          have shadow (like in LXQtGroupPopup or KDE system settings) */
                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
@@ -1036,6 +1039,8 @@ void Style::polish(QApplication *app)
     isDolphin_ = true;
   else if (appName == "pcmanfm-qt")
     isPcmanfm_ = true;
+  else if (appName == "konsole")
+    isKonsole_ = true;
   else if (appName == "soffice.bin")
     isLibreoffice_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")

@@ -5,6 +5,7 @@ V0.14.2
  * Don't remove text shadow if widget text colors aren't specified.
  * Fixed a potential issue in translations.
  * Added an option (to Kvantum Manager) for centered forms.
+ * Don't apply "blur_translucent" to Konsole because, first, it has an old bug and, second, it has an option for blurring.
 
 V0.14.1
 ---------
