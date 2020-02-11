@@ -6,7 +6,7 @@ Table of contents
  * [Distributions](#distributions)
     * [Debian-based distributions](#debian-based-distributions)
     * [Arch-based distributions](#arch-based-distributions)
-    * [Red Hat based distributions](red-hat-based-distributions)
+    * [Red Hat based distributions](#red-hat-based-distributions)
     * [openSUSE](#opensuse)
  * [Compilation](#compilation)
     * [qmake](#with-qmake)
