@@ -2,7 +2,7 @@
 
 ## Overview
 
-Kvantum (by [Pedram Pourang, a.k.a. Tsu Jan](#contact)) is an SVG-based theme engine for Qt, tuned to KDE and LXQt, with an emphasis on elegance, usability and practicality.
+Kvantum (by [Pedram Pourang, a.k.a. Tsu Jan](#contact)) is an SVG-based theme engine for Qt, tuned to KDE and LXQt, with an emphasis on elegance, usability and practicality. Its homepage is <https://github.com/tsujan/Kvantum>.
 
 Kvantum has a default dark theme, which is inspired by the default theme of Enlightenment. Creation of realistic themes like that for KDE was my first reason to make Kvantum but it goes far beyond its default theme: you could make themes with very different looks and feels for it, whether they be photorealistic or cartoonish, 3D or flat, embellished or minimalistic, or something in between, and Kvantum will let you control almost every aspect of Qt widgets.
 
