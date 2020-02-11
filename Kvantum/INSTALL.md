@@ -4,10 +4,12 @@ Table of contents
 =================
  * [Prerequisites](#prerequisites)
  * [Distributions](#distributions)
-    * [Debian-based distributions](#debian-based-distributions)
     * [Arch-based distributions](#arch-based-distributions)
-    * [Red Hat based distributions](#red-hat-based-distributions)
+    * [Debian-based distributions](#debian-based-distributions)
+    * [Gentoo-based distributions](#gentoo-based-distributions)
     * [openSUSE](#opensuse)
+    * [Red Hat based distributions](#red-hat-based-distributions)
+
  * [Compilation](#compilation)
     * [qmake](#with-qmake)
     * [cmake](#with-cmake)
@@ -34,20 +36,6 @@ Before installing Kvantum, you will need:
 
 ## Distributions
 
-### Debian-based distributions
-
-Before installing Kvantum, install the required packages:
-
- * `g++`
- * `libx11-dev` and `libxext-dev` (for X11)
- * `qtbase5-dev`, `libqt5svg5-dev` and `libqt5x11extras5-dev` (for Qt5)
- * `libkf5windowsystem-dev` (required with Qt >= 5.11)
- * `qttools5-dev-tools` (for localization if you need it)
-
-Then, to install Kvantum, execute:
-
-    sudo apt install qt5-style-kvantum
-
 ### Arch-based distributions
 
 Before installing Kvantum, install the required packages:
@@ -68,22 +56,25 @@ Or:
 
 NOTE: `yay` only serves as an example, as it is the most common used pacman wrapper.
 
-### Red Hat based distributions
+### Debian-based distributions
 
-Before installing Kvantum in Red Hat based distributions like Fedora, install the required packages:
+Before installing Kvantum, install the required packages:
 
- * `gcc-c++`
- * `libX11-devel`
- * `libXext-devel`
- * `qt5-qtx11extras-devel`
- * `qt5-qtbase-devel`
- * `qt5-qtsvg-devel`
- * `qt5-qttools-devel`
- * `kf5-kwindowsystem-devel` (required with Qt >= 5.11)
+ * `g++`
+ * `libx11-dev` and `libxext-dev` (for X11)
+ * `qtbase5-dev`, `libqt5svg5-dev` and `libqt5x11extras5-dev` (for Qt5)
+ * `libkf5windowsystem-dev` (required with Qt >= 5.11)
+ * `qttools5-dev-tools` (for localization if you need it)
 
 Then, to install Kvantum, execute:
 
-    sudo dnf install kvantum
+    sudo apt install qt5-style-kvantum
+
+### Gentoo-based distributions
+
+If using the stable branch (e.g. `amd64`), you will have to [unmask](https://wiki.gentoo.org/wiki/Knowledge_Base:Unmasking_a_package) `x11-themes/kvantum`, and then execute:
+
+    sudo emerge --ask --verbose x11-themes/kvantum
 
 ### openSUSE
 
@@ -104,6 +95,23 @@ Before installing Kvantum, install the required packages:
     sudo zypper in -r trmdi kvantum
 
 For Leap users, see [#Compilation](#compilation) on how to compile and install Kvantum.
+
+### Red Hat based distributions
+
+Before installing Kvantum in Red Hat based distributions like Fedora, install the required packages:
+
+ * `gcc-c++`
+ * `libX11-devel`
+ * `libXext-devel`
+ * `qt5-qtx11extras-devel`
+ * `qt5-qtbase-devel`
+ * `qt5-qtsvg-devel`
+ * `qt5-qttools-devel`
+ * `kf5-kwindowsystem-devel` (required with Qt >= 5.11)
+
+Then, to install Kvantum, execute:
+
+    sudo dnf install kvantum
 
 ## Compilation
 
