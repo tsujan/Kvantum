@@ -18,7 +18,7 @@ See [Theme-Config](doc/Theme-Config) for instructions on how to install and conf
 
 ### Theme making
 
-See [Theme-Making](doc/Theme-Making) for instructions on how to create themes.
+See [Theme-Making](doc/Theme-Making.pdf) for instructions on how to create themes.
 
 ## Contact
 
