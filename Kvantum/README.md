@@ -32,7 +32,7 @@ Some code parts are adapted from [QtCurve](https://projects.kde.org/projects/pla
 
 [TheMainOne](https://github.com/TheEvilSkeleton) kindly improved the current file (README) as well as [INSTALL](INSTALL.md).
 
-My sincerest thanks go to all users whose bug reports, feature requests and suggestions have been crucial for improving Kvantum.=
+My sincerest thanks go to all users whose bug reports, feature requests and suggestions have been crucial for improving Kvantum.
 
 ## Some Screenshots:
 
