@@ -8,6 +8,8 @@ Table of contents
     * [Debian-based distributions](#debian-based-distributions)
     * [Gentoo-based distributions](#gentoo-based-distributions)
     * [openSUSE](#opensuse)
+      * [Leap](#leap)
+      * [Tumbleweed](#tumbleweed)
     * [Red Hat based distributions](#red-hat-based-distributions)
 
  * [Compilation](#compilation)
@@ -26,7 +28,7 @@ Table of contents
 
 ## Prerequisites
 
-Before compiling Kvantum, you need:
+Before compiling Kvantum, you will need:
 
  * GCC
  * X11
@@ -54,7 +56,7 @@ Or:
 
     yay -S kvantum-qt5-git
 
-NOTE: `yay` only serves as an example, as it is the most common used pacman wrapper.
+NOTE: `yay` only serves as an example here.
 
 ### Debian-based distributions
 
@@ -72,9 +74,11 @@ To install Kvantum directly, execute:
 
 ### Gentoo-based distributions
 
-If using the stable branch (e.g. `amd64`), you will have to [unmask](https://wiki.gentoo.org/wiki/Knowledge_Base:Unmasking_a_package) `x11-themes/kvantum`, and then execute:
+Only if you are using a stable branch (e.g. [`KEYWORD="amd64"`](https://wiki.gentoo.org/wiki/KEYWORDS)), you will have to [unmask](https://wiki.gentoo.org/wiki/Knowledge_Base:Unmasking_a_package) `x11-themes/kvantum`. After that, execute:
 
     sudo emerge --ask --verbose x11-themes/kvantum
+
+NOTE: All of Kvantum's dependencies will be automatically installed when emerging `x11-themes/kvantum`.
 
 ### openSUSE
 
@@ -89,12 +93,14 @@ If you want to compile Kvantum from its source, install these packages:
  * `libqt5-qttools-devel`
  * `kwindowsystem-devel` (required with Qt >= 5.11)
 
-**Only for Tumblweed users!** Thanks to [trmdi](https://github.com/trmdi), you can install Kvantum directly, by executing:
+#### Leap
+see [Compilation](#compilation) on how to compile and install Kvantum.
+
+#### Tumbleweed
+Thanks to [trmdi](https://github.com/trmdi), you can install Kvantum directly, by executing:
 
     sudo zypper ar obs://home:trmdi trmdi
     sudo zypper in -r trmdi kvantum
-
-For Leap users, see [Compilation](#compilation) on how to compile and install Kvantum.
 
 ### Red Hat based distributions
 
@@ -205,7 +211,7 @@ Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
   2. The KDE color schemes should go to  `/usr/share/color-schemes/`.
   3. If a theme is installed both as root and as user, the latter installation will take priority.
 
-Please see "Theme-Making.pdf" for more information on theme installation paths and their priorities.
+Please see [Theme-Making](doc/Theme-Making.pdf) for more information on theme installation paths and their priorities.
 
 The default Qt5 installation adds several root themes, that can be selected by using *Kvantum Manager*. Their corresponding KDE color schemes are also installed.
 

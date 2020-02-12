@@ -28,17 +28,11 @@ You can contact me at <tsujan2000@gmail.com>.
 
 The core idea of Kvantum, namely using of SVG images for drawing Qt widgets, was taken from QuantumStyle (not developed anymore but continued as [QSvgStyle](https://github.com/DexterMagnific/QSvgStyle)).
 
-Some code parts are adapted from:
+Some code parts are adapted from [QtCurve](https://projects.kde.org/projects/playground/artwork/qtcurve/repository), [Oxygen](https://projects.kde.org/projects/playground/artwork/oxygen/repository), [Oxygen-Transparent](https://projects.kde.org/projects/playground/artwork/oxygen-transparent/repository) and [Bespin](http://cloudcity.sourceforge.net/download.php).
 
-[QtCurve](https://projects.kde.org/projects/playground/artwork/qtcurve/repository)
+[TheMainOne](https://github.com/TheEvilSkeleton) kindly improved the current file (README) as well as [INSTALL](INSTALL.md).
 
-[Oxygen](https://projects.kde.org/projects/playground/artwork/oxygen/repository)
-
-[Oxygen-Transparent](https://projects.kde.org/projects/playground/artwork/oxygen-transparent/repository)
-
-[Bespin](http://cloudcity.sourceforge.net/download.php)
-
-My sincerest thanks go to all users whose bug reports, feature requests and suggestions have been crucial for improving Kvantum.
+My sincerest thanks go to all users whose bug reports, feature requests and suggestions have been crucial for improving Kvantum.=
 
 ## Some Screenshots:
 
