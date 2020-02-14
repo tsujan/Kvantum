@@ -846,7 +846,11 @@ void Style::polish(QWidget *widget)
       {
         // support animation only if the background is flat
         if ((tspec_.animate_states
-             && (!vp || vp->autoFillBackground() || !vp->styleSheet().isEmpty())
+             && (!vp || vp->autoFillBackground() || (!vp->styleSheet().isEmpty()
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                 && vp->testAttribute(Qt::WA_StyleSheetTarget)
+#endif
+                ))
              && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
            || (hasInactiveSelItemCol_
                && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items
@@ -857,7 +861,11 @@ void Style::polish(QWidget *widget)
         if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView")
                                           && (!tspec_.combo_menu /*|| isLibreoffice_*/)))
             && vp && vp->autoFillBackground()
-            && (vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
+            && (
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                !vp->testAttribute(Qt::WA_StyleSheetTarget) ||
+#endif
+                vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
             // but not when the combo popup is drawn as a menu
             && !(tspec_.combo_menu /*&& !isLibreoffice_*/ && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys

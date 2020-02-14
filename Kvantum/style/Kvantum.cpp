@@ -1598,7 +1598,11 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   else
   {*/
     bool noSpace(colored
-                 || (!lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+                 || (
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                     lineedit->testAttribute(Qt::WA_StyleSheetTarget) &&
+#endif
+                     !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
         && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
@@ -3327,7 +3331,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (QWidget *vp = sa->viewport())
         {
           if (!vp->autoFillBackground()
-              || (!vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
+              || (
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                  vp->testAttribute(Qt::WA_StyleSheetTarget) &&
+#endif
+                  !vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
           {
             return;
           }
@@ -3575,7 +3583,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         colored = !insideSpinBox && group == "LineEdit"
                   && widget->palette().color(QPalette::Base) != standardPalette().color(QPalette::Base);
         if (colored
-            || (!widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+            || (
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                widget->testAttribute(Qt::WA_StyleSheetTarget) &&
+#endif
+                !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
             || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         {
@@ -9222,7 +9234,11 @@ void Style::drawControl(QStyle::ControlElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         if (widget && !(opt->features & QStyleOptionButton::Flat)
-            && ((!widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
+            && ((
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                 widget->testAttribute(Qt::WA_StyleSheetTarget) &&
+#endif
+                 !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
                 || (opt->icon.isNull()
                     && widget->palette().color(QPalette::Button) != standardPalette().color(QPalette::Button))))
         { // color button!?
@@ -10416,7 +10432,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             {
               const label_spec lspec = getLabelSpec(leGroup);
               const size_spec sspec = getSizeSpec(leGroup);
-              if ((!le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
+              if ((
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+                   le->testAttribute(Qt::WA_StyleSheetTarget) &&
+#endif
+                   !le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
                   || le->minimumWidth() == le->maximumWidth()
                   || le->height() < sizeCalculated(le->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
               {
@@ -14301,6 +14321,9 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       else if (widget)
       {
         if (qobject_cast<const QLineEdit*>(widget)
+#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
+            && widget->testAttribute(Qt::WA_StyleSheetTarget)
+#endif
             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
         {
           fspec.left = qMin(fspec.left,3);
