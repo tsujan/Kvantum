@@ -869,6 +869,8 @@ void KvantumManager::deleteTheme()
             if (process_->state() == QProcess::Running)
                 preview();
         }
+        else // the user had changed combobox selection to remove an inactive theme
+            ui->useTheme->setEnabled (false);
     }
     ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme_), 10000);
 

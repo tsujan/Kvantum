@@ -1372,7 +1372,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="588"/>
         <location filename="../../KvantumManager.cpp" line="742"/>
-        <location filename="../../KvantumManager.cpp" line="2631"/>
+        <location filename="../../KvantumManager.cpp" line="2633"/>
         <source>Confirmation</source>
         <translation></translation>
     </message>
@@ -1382,12 +1382,12 @@ or update its preview.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="873"/>
+        <location filename="../../KvantumManager.cpp" line="875"/>
         <source>%1 deleted.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="927"/>
+        <location filename="../../KvantumManager.cpp" line="929"/>
         <source>Theme changed to %1.</source>
         <translation></translation>
     </message>
@@ -1572,75 +1572,75 @@ or update its preview.</source>
         <translation>Ini tidak dapat dipulihkan kecuali Anda memiliki salinannya.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1282"/>
-        <location filename="../../KvantumManager.cpp" line="1301"/>
+        <location filename="../../KvantumManager.cpp" line="1284"/>
+        <location filename="../../KvantumManager.cpp" line="1303"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Ini adalah pengaturan yang dapat diubah dengan aman.&lt;br&gt;Untuk yang lain, klik &lt;i&gt;Simpan&lt;/i&gt; sunting berkas ini:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1297"/>
-        <location filename="../../KvantumManager.cpp" line="2539"/>
+        <location filename="../../KvantumManager.cpp" line="1299"/>
+        <location filename="../../KvantumManager.cpp" line="2541"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Ini adalah pengaturan yang dapat diubah dengan aman.&lt;br&gt;Untuk yang lain, sunting berkas ini:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1662"/>
+        <location filename="../../KvantumManager.cpp" line="1664"/>
         <source>No description</source>
         <translation>Tidak ada deskripsi</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2133"/>
+        <location filename="../../KvantumManager.cpp" line="2135"/>
         <source>A copy of the root config is created.</source>
         <translation>Salinan konfig root dibuat.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2144"/>
+        <location filename="../../KvantumManager.cpp" line="2146"/>
         <source>A copy was already created.</source>
         <translation>Salinan telah dibuat sebelumnya.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2525"/>
+        <location filename="../../KvantumManager.cpp" line="2527"/>
         <source>Configuration saved.</source>
         <translation>Konfigurasi disimpan.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2632"/>
+        <location filename="../../KvantumManager.cpp" line="2634"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Apakah Anda ingin mengembalikan pengaturan (root) baku untuk tema ini?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2635"/>
+        <location filename="../../KvantumManager.cpp" line="2637"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Anda akan kehilangan perubahan yang telah dibuat.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2670"/>
+        <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Pengaturan %1 baku untuk rool dipulihkan</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2671"/>
+        <location filename="../../KvantumManager.cpp" line="2673"/>
         <source>the default theme</source>
         <translation>tema baku</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2807"/>
-        <location filename="../../KvantumManager.cpp" line="2808"/>
+        <location filename="../../KvantumManager.cpp" line="2809"/>
+        <location filename="../../KvantumManager.cpp" line="2810"/>
         <source>About Kvantum Manager</source>
         <translation>Tentang Manajer Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2807"/>
+        <location filename="../../KvantumManager.cpp" line="2809"/>
         <source>Translators</source>
         <translation>Penerjemah</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2805"/>
+        <location filename="../../KvantumManager.cpp" line="2807"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Alat untuk memasang, memilih&lt;br&gt;dan mengkonfigurasi tema &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2806"/>
+        <location filename="../../KvantumManager.cpp" line="2808"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Penulis: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1665,9 +1665,9 @@ or update its preview.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="926"/>
-        <location filename="../../KvantumManager.cpp" line="2073"/>
-        <location filename="../../KvantumManager.cpp" line="2534"/>
+        <location filename="../../KvantumManager.cpp" line="928"/>
+        <location filename="../../KvantumManager.cpp" line="2075"/>
+        <location filename="../../KvantumManager.cpp" line="2536"/>
         <source>Active theme:</source>
         <translation>Tema aktif::</translation>
     </message>
