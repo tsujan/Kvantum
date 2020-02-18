@@ -399,12 +399,13 @@ Jei tai yra išjungta, žiūrėkite:
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei pažymėta, formos turinys bus kaip įmanoma
+labiau horizontaliai centruotas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Centruoti formų išdėstymai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
