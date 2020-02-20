@@ -7,7 +7,7 @@ V0.14.2
  * Added an option (to Kvantum Manager) for centered forms.
  * Don't set "WA_NoSystemBackground" with hard-coded translucency. (This solves the problem of Konsole's transparent menubar.)
  * Milder gradient for menus of the default theme.
- * Don't enable the button "Use this theme" when the user removes an inactive theme.
+ * Fixed the enabled/disabled states of the buttons "Use this theme" and "Delete this theme" in Kvantum Manager.
 
 V0.14.1
 ---------

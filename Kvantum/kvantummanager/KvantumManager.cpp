@@ -99,8 +99,6 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
     desktop_ = qgetenv ("XDG_CURRENT_DESKTOP").toLower();
 
-    ui->useTheme->setEnabled (false);
-
     ui->comboClick->insertItems (0, QStringList() << tr ("Follow Style")
                                                   << tr ("Single Click")
                                                   << tr ("Double Click"));
@@ -869,8 +867,6 @@ void KvantumManager::deleteTheme()
             if (process_->state() == QProcess::Running)
                 preview();
         }
-        else // the user had changed combobox selection to remove an inactive theme
-            ui->useTheme->setEnabled (false);
     }
     ui->statusBar->showMessage (tr ("%1 deleted.").arg (theme_), 10000);
 
@@ -1269,7 +1265,11 @@ void KvantumManager::tabChanged (int index)
             if (ui->comboBox->currentText() == activeTheme)
                 showAnimated (ui->usageLabel, 1000);
             else
-                ui->comboBox->setCurrentText (activeTheme); // sets tooltip, animation, etc.
+            { // WARNING: QComboBox::setCurrentText() doesn't set the current index.
+                int index = ui->comboBox->findText (activeTheme);
+                if (index > -1)
+                    ui->comboBox->setCurrentIndex (index); // sets tooltip, animation, etc.
+            }
         }
         else
             showAnimated (ui->appLabel, 1000);
@@ -2034,6 +2034,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
         QFile::remove (theCopy);
     }
 
+    ui->useTheme->setEnabled (false); // the current theme is selected
     QString comment = getComment (ui->comboBox->currentText());
     ui->comboBox->setWhatsThis (tooTipToWhatsThis (comment));
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
