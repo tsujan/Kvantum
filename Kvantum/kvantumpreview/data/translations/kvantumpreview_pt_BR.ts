@@ -650,7 +650,7 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2949"/>
         <source>Menu Button</source>
-        <translation>Botão  de Menu</translation>
+        <translation>Botão de Menu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
