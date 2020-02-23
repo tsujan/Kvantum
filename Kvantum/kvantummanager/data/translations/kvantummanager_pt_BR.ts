@@ -401,12 +401,13 @@ Diversos → Respeitar o DE atual se possível</translation>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se marcado, o conteúdo de um formulário será
+centralizado horizontalmente, na medida do possível.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Layouts de formulário centralizados</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
