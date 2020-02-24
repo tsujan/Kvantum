@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="141"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>许可</translation>
     </message>
 </context>
 <context>
@@ -14,49 +14,50 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum管理器</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>安装/更新主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;除Kvantum自带的大量主题外，您还可以选择安装其他第三方开发的主题。点击下方的按钮，选择一个主题集进行安装。&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个Kvantum
+主题集</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>添加此主题至Kvantum可用主题列表。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>安装此主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>变更/删除主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个主题：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>删除此主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,82 +65,86 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>应用此主题！
+
+不可用按钮意味着此主题当前已应用。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>应用此主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>配置当前主题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>还原至此主题的默认（root）配置
+（Ctrl+Z）</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;还原至此主题的默认（root）配置！&lt;/p&gt;&lt;p&gt;点击确认后，除定制化的SVG文件外，所有配置变更都将丢失。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>还原</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>保存此配置
+（Ctrl+S）</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
         <location filename="../../kvantummanager.ui" line="2099"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>安全设置</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>保持所有控件的默认样式，所有选项均应取消勾选。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>技巧</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>透明Dolphin视图</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>默认按钮的普通字体</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -148,17 +153,19 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>合并PCManFM-qt侧栏面板。
+在LXQt中，您需要先注销登录或关闭PCManFM-qt ，
+才能停止并重新开始桌面及LXQt 会话设置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>PCManFM-qt透明侧栏面板</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>无图标按钮</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -167,27 +174,29 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>合并PCManFM-qt视图。
+在LXQt中，您需要先注销登录或关闭PCManFM-qt ，
+才能停止并重新开始桌面及LXQt 会话设置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>PCManFM-qt透明视图</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>无图标菜单</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>窗口虚化</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>单一顶部工具栏</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
@@ -234,7 +243,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>透明菜单标题</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
