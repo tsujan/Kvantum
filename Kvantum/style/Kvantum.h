@@ -455,9 +455,6 @@ class Style : public QCommonStyle {
     /* For identifying KisSliderSpinBox */
     bool isKisSlider_;
 
-    /* For having clear label icons with QT_DEVICE_PIXEL_RATIO > 1 */
-    qreal pixelRatio_;
-
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
     //mutable KvPointer<QWidget> sunkenButton_;
     mutable QPointer<QWidget> sunkenButton_;

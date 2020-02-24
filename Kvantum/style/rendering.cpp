@@ -20,6 +20,7 @@
 #include <QSvgRenderer>
 #include <QPixmapCache>
 #include <QPainter>
+#include <QApplication>
 
 namespace Kvantum
 {
@@ -77,7 +78,11 @@ bool Style::renderElement(QPainter *painter,
   }
   if (!renderer) return false;
 
-  if (static_cast<qreal>(qRound(pixelRatio_)) != pixelRatio_)
+  qreal pixelRatio = qApp->devicePixelRatio();
+  if (painter->device())
+    pixelRatio = painter->device()->devicePixelRatioF();
+  pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
+  if (static_cast<qreal>(qRound(pixelRatio)) != pixelRatio)
   { // in this special case, we prevent one-pixel gaps between rectangles as far as possible
     painter->save();
     painter->setRenderHint(QPainter::SmoothPixmapTransform);
@@ -89,7 +94,7 @@ bool Style::renderElement(QPainter *painter,
     if (renderer->elementExists(_element+"-pattern"))
     {
       if (usePixmap)
-        drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
+        drawSvgElement(renderer,painter,bounds,_element,pixelRatio);
       else
         renderer->render(painter,_element,bounds);
     }
@@ -107,7 +112,7 @@ bool Style::renderElement(QPainter *painter,
     if (renderer->elementExists(_element+"-pattern"))
     {
       if (usePixmap)
-        drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
+        drawSvgElement(renderer,painter,bounds,_element,pixelRatio);
       else
         renderer->render(painter,_element,bounds);
       _element = _element+"-pattern";
@@ -134,12 +139,12 @@ bool Style::renderElement(QPainter *painter,
   else
   {
     if (usePixmap)
-      drawSvgElement(renderer,painter,bounds,_element,pixelRatio_);
+      drawSvgElement(renderer,painter,bounds,_element,pixelRatio);
     else
       renderer->render(painter,_element,bounds);
   }
 
-  if (static_cast<qreal>(qRound(pixelRatio_)) != pixelRatio_)
+  if (static_cast<qreal>(qRound(pixelRatio)) != pixelRatio)
     painter->restore();
 
   return true;

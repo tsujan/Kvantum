@@ -53,7 +53,7 @@ ThemeConfig::ThemeConfig(const QString& theme) :
      intense with an SVG window gradient and/or window translucency. As a
      workaround, we remove the window interior and translucency in this case. */
   const qreal dpr = qApp->devicePixelRatio();
-  nonIntegerScale = (dpr > 1.0 && static_cast<qreal>(qRound(dpr)) != dpr);
+  nonIntegerScale = (dpr > static_cast<qreal>(1) && static_cast<qreal>(qRound(dpr)) != dpr);
   if (nonIntegerScale)
   {
     interior_spec r;

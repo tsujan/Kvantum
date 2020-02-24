@@ -315,11 +315,6 @@ Style::Style(bool useDark) : QCommonStyle()
   isOpaque_ = false;
   ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
-  pixelRatio_ = 1.0;
-
-  qreal dpr = qApp->devicePixelRatio();
-  if (dpr > 1.0)
-    pixelRatio_ = dpr;
 
   connect(progressTimer_, &QTimer::timeout, this, &Style::advanceProgressbar);
 
@@ -3089,7 +3084,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     case PE_FrameWindow : {
-      /* QPainter::drawLine() isn't reliable with pixelRatio_>1. Also, note
+      /* QPainter::drawLine() isn't reliable with devicePixelRatio>1. Also, note
          that QRect::bottomRight() is one pixel short in both directions. */
 
       QRect r = option->rect;
@@ -12685,7 +12680,14 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       if (/*isLibreoffice_
           ||*/ qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
-        return qMin(qRound(static_cast<qreal>(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget))*pixelRatio_),
+        qreal pixelRatio = qApp->devicePixelRatio();
+        if (widget)
+        {
+          if (QWindow *winHandle = widget->windowHandle())
+            pixelRatio = winHandle->devicePixelRatio();
+        }
+        pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
+        return qMin(qRound(static_cast<qreal>(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget))*pixelRatio),
                     tspec_.check_size);
       }
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
@@ -16027,9 +16029,10 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
 void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
                            int alignment, const QPixmap &pixmap) const
 {
-  qreal scale = pixelRatio_;
-  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
+  qreal scale = qApp->devicePixelRatio();
+  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) && !pixmap.isNull())
     scale = pixmap.devicePixelRatio();
+  scale = qMax(scale, static_cast<qreal>(1));
 
   QRect pixRect = alignedRect(QApplication::layoutDirection(), QFlag(alignment),
                               QSizeF(pixmap.size()/scale).toSize().boundedTo(rect.size()),
@@ -16057,7 +16060,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
   QPixmap px = icon.pixmap(hdpi ? iconSize
-                                : (QSizeF(iconSize)*pixelRatio_).toSize(),
+                                : (QSizeF(iconSize)*qMax(qApp->devicePixelRatio(), static_cast<qreal>(1))).toSize(),
                            icnMode,iconstate);
 
   if (iconmode == Disabled || iconmode == DisabledSelected)

@@ -36,6 +36,13 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
   bool hdpi(false);
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
+  qreal pixelRatio = qApp->devicePixelRatio();
+  if (widget)
+  {
+    if (QWindow *win = widget->windowHandle())
+      pixelRatio = win->devicePixelRatio();
+  }
+  pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   const bool rtl(option != nullptr ? option->direction == Qt::RightToLeft
                                    : QApplication::layoutDirection() == Qt::RightToLeft);
   switch (standardIcon) {
@@ -43,9 +50,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
       int s;
       if (hdpi)
-        s = qRound(pixelRatio_*pixelRatio_*static_cast<qreal>(dspec.size));
+        s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
       else
-        s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
+        s = qRound(pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -86,9 +93,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
       int s;
       if (hdpi)
-        s = qRound(pixelRatio_*pixelRatio_*static_cast<qreal>(dspec.size));
+        s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
       else
-        s = qRound(pixelRatio_*static_cast<qreal>(dspec.size));
+        s = qRound(pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -159,9 +166,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_TitleBarMinButton : {
       int s;
       if (hdpi)
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
       else
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -189,9 +196,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_TitleBarMaxButton : {
       int s;
       if (hdpi)
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
       else
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -210,9 +217,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_TitleBarCloseButton : {
       int s;
       if (hdpi)
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
       else
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -251,9 +258,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_TitleBarMenuButton : {
       int s;
       if (hdpi)
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
       else
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -266,9 +273,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_TitleBarNormalButton : {
       int s;
       if (hdpi)
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
       else
-        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio_);
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 

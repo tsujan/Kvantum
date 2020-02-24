@@ -75,7 +75,6 @@ static inline bool isPrimaryToolBar(QWidget *w)
 
 WindowManager::WindowManager (QObject* parent, Drag drag) :
                QObject (parent),
-               pixelRatio_ (1.0),
                enabled_ (true),
                dragDistance_ (QApplication::startDragDistance()),
                dragDelay_ (QApplication::startDragTime()),
@@ -87,9 +86,6 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                , cursorOverride_ (false)
 #endif
 {
-  qreal dpr = qApp->devicePixelRatio();
-  if (dpr > 1.0)
-    pixelRatio_ = dpr;
   _appEventFilter = new AppEventFilter( this );
   qApp->installEventFilter (_appEventFilter);
 }
@@ -665,9 +661,13 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
     cursorOverride_ = true;
   }
 #else
+  qreal pixelRatio = qApp->devicePixelRatio();
+  if (QWindow *winHandle = widget->windowHandle())
+    pixelRatio = winHandle->devicePixelRatio();
+  pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   X11MoveTrigger (widget->window()->internalWinId(),
-                  qRound(static_cast<qreal>(position.x())*pixelRatio_),
-                  qRound(static_cast<qreal>(position.y())*pixelRatio_));
+                  qRound(static_cast<qreal>(position.x())*pixelRatio),
+                  qRound(static_cast<qreal>(position.y())*pixelRatio));
 #endif
 
   dragInProgress_ = true;

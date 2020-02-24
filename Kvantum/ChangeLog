@@ -8,6 +8,7 @@ V0.14.2
  * Don't set "WA_NoSystemBackground" with hard-coded translucency. (This solves the problem of Konsole's transparent menubar.)
  * Milder gradient for menus of the default theme.
  * Fixed the enabled/disabled states of the buttons "Use this theme" and "Delete this theme" in Kvantum Manager.
+ * Try to handle the device pixel ratio more locally.
 
 V0.14.1
 ---------
