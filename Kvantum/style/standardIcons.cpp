@@ -39,8 +39,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
   qreal pixelRatio = qApp->devicePixelRatio();
   if (widget)
   {
-    if (QWindow *win = widget->windowHandle())
-      pixelRatio = win->devicePixelRatio();
+    if (QWindow *winhandle = widget->windowHandle())
+      pixelRatio = winhandle->devicePixelRatio();
   }
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   const bool rtl(option != nullptr ? option->direction == Qt::RightToLeft

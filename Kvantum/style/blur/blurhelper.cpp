@@ -23,6 +23,7 @@
 #include <QVector>
 #include <QMenu>
 #include <QFrame>
+#include <QWindow> // for hdpi
 #include <QApplication> // for hdpi
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))

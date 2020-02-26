@@ -19,6 +19,7 @@
  */
 
 #include <QApplication>
+#include <QWindow>
 #include <QProgressBar>
 #include <QComboBox>
 #include <QDialog>
@@ -40,7 +41,6 @@
    started to have a problem. However, dragging is still possible by
    using QWindow::setPosition(); hence, these cases of "#if". */
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-#include <QWindow>
 #include "windowmanager.h"
 #else
 #include "windowmanager.h"
