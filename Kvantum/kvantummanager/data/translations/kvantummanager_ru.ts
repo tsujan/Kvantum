@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;поставляется с набором уже предустановленных тем, но можно устанавливать и внешние темы. Выберите папку с темой, затем нажмите на кнопку ниже, для её установки в вашей системе.&lt;/Center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; поставляется с набором уже предустановленных тем, но можно устанавливать и внешние темы. Выберите папку с темой, затем нажмите на кнопку ниже, для её установки в вашей системе.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -1277,7 +1277,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1978"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Здесь вы можете настроить оформление некоторых приложений.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Для каждой темы вы можете добавить список исполняемых файлов приложений, разделенных запятыми, которым следует использовать эту тему вместо активной. Проделав это со всеми выбранными темами, сохраните результат, нажав  на кнопку &lt;i&gt; Сохранить&lt;/i&gt;!&lt;/Center&gt;</translation>
+        <translation>&lt;center&gt;Здесь вы можете настроить оформление некоторых приложений.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Для каждой темы вы можете добавить список исполняемых файлов приложений, разделенных запятыми, которым следует использовать эту тему вместо активной. Проделав это со всеми выбранными темами, сохраните результат, нажав  на кнопку &lt;i&gt;Сохранить&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2013"/>
@@ -1345,7 +1345,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2176"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на кнопку &amp;quot;Справка&amp;quot;, указатель приобретёт форму вопросительного знака, теперь нажмите на элемент для получения дополнительных сведений о нём, в виде всплывающей подсказки. Для того чтобы подсказка исчезла щёлкните в любом пустом месте&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Нажмите на кнопку &amp;quot;Справка&amp;quot;, указатель приобретёт форму вопросительного знака, затем нажмите на элемент для получения дополнительных сведений о нём, в виде всплывающей подсказки.&lt;/p&gt;&lt;p&gt;Для того чтобы подсказка исчезла щёлкните в любом пустом месте&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2179"/>
