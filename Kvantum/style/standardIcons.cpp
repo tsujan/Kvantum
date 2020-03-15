@@ -347,6 +347,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
+    case SP_DirOpenIcon : {
+      QIcon icn = QIcon::fromTheme(QLatin1String("folder-open"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
 
     /* arrow icons */
     case SP_ArrowUp : {
@@ -488,9 +493,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
-    case SP_DirOpenIcon :
     case SP_DialogOpenButton : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("folder-open"));
+      QIcon icn = QIcon::fromTheme(QLatin1String("document-open"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -500,12 +504,20 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
+#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+    case SP_DialogYesToAllButton :
+#endif
     case SP_DialogYesButton :
     case SP_DialogOkButton : {
       QIcon icn = QIcon::fromTheme(QLatin1String("dialog-ok"));
       if (!icn.isNull()) return icn;
       else break;
     }
+#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+    case SP_DialogNoToAllButton :
+    case SP_DialogAbortButton :
+    case SP_DialogIgnoreButton :
+#endif
     case SP_DialogCancelButton :
     case SP_DialogNoButton : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-cancel"),
@@ -533,6 +545,23 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
+#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
+    case SP_DialogSaveAllButton : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("document-save-all"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_DialogRetryButton : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("view-refresh"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_RestoreDefaultsButton : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("edit-undo"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+#endif
     // these are for LXQt file dialog
     case SP_FileDialogListView : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-text"));
