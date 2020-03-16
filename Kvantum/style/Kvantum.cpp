@@ -12996,12 +12996,12 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_GroupBox_TextLabelColor: {
       const label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
       QColor col;
-      if (!(option->state & State_Enabled))
+      if (option && !(option->state & State_Enabled))
       {
         col = standardPalette().color(QPalette::Disabled,QPalette::Text);
         return col.rgba();
       }
-      else if (option->state & State_MouseOver)
+      else if (option && (option->state & State_MouseOver))
       {
         col = getFromRGBA(lspec.focusColor);
         if (col.isValid())
