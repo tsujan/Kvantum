@@ -11,7 +11,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation>下压式按钮</translation>
+        <translation>按压式按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -28,96 +28,104 @@ width</source>
 状态按钮
 
 按钮高度
-高于宽度</translation>
+大于宽度</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>简单下压按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>状态开关按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished"></translation>
+        <translation>多行
+按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>带有 32px 目录
+图标的按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>默认
+按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>扁平化按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮组</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
         <location filename="../../KvantumPreviewBase.ui" line="446"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>简单工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="453"/>
         <location filename="../../KvantumPreviewBase.ui" line="464"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>多行
+工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="472"/>
         <location filename="../../KvantumPreviewBase.ui" line="495"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>带箭头的
+状态按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="560"/>
         <location filename="../../KvantumPreviewBase.ui" line="584"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation type="unfinished"></translation>
+        <translation>带有 32px SVG 图标和
+下方文本的工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="605"/>
         <location filename="../../KvantumPreviewBase.ui" line="626"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>带有下方文本和
+箭头的工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="644"/>
         <location filename="../../KvantumPreviewBase.ui" line="665"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>侧方图标并带箭
+头的工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="683"/>
@@ -125,14 +133,17 @@ and arrow</source>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>带有图标，方向箭头
+以及下拉菜单箭头
+的工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="515"/>
         <location filename="../../KvantumPreviewBase.ui" line="539"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation type="unfinished"></translation>
+        <translation>文字旁带有 32px PNG
+图标的工具按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="402"/>
@@ -145,17 +156,21 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>状态切换
+工具按钮
+
+按钮高度
+大于宽度</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="791"/>
         <source>Auto-raise</source>
-        <translation type="unfinished"></translation>
+        <translation>自动弹起</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="812"/>
         <source>Radio/Check buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>单选/复选 按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="833"/>
