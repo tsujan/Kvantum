@@ -201,44 +201,45 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>不要为 KTitles 绘制任何背景。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;不为 KTitles 绘制任何背景？&lt;/p&gt;&lt;p&gt;某些 KDE 应用程序使用 Ktitles 在配置对话框中显示不同的部分。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>透明化 KTitle 标签</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>不要给选定的标签图标使用高亮颜色着色！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;默认情况下，选中的标签图标使用高亮颜色着色&lt;/p&gt;&lt;p&gt;选中此选项删除着色。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>无选中着色</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>不要为(KDE)菜单标题绘制任何背景。
+(需要注销重新登录 Plasma 菜单。)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;不为任何(KDE)菜单标题绘制背景？&lt;/p&gt;&lt;p&gt;菜单标题类似于独立的菜单，但是带有图标和文本。&lt;/p&gt;&lt;p&gt;对KDE Plasma 菜单需要注销重新登录。对于 LXQt 面板，只需要重启 &lt;span style=&quot; font-style:italic;&quot;&gt;会话设置&lt;/span&gt;就可以了。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -248,17 +249,17 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>将 KDE 容量条样式改为进度条。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;将 KDE 容量条样式改为进度条？&lt;/p&gt;&lt;p&gt;某些KDE应用程序通常使用容量条来显示卷大小并具有自己的样式。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation type="unfinished"></translation>
+        <translation>将 KCapacity 栏显示为进度栏</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="594"/>
@@ -266,17 +267,17 @@ the highlight color!</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">这不是一个完整的修复，但可以在鼠标手势启用时防止鼠标滚动造成的烦人的滚动条乱跳。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="600"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt 滚动条跳转 bug 的解决方法</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>当鼠标悬停在标签图标时进行着色 </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="654"/>
@@ -284,12 +285,12 @@ are enabled.</source>
         <location filename="../../kvantummanager.ui" line="1023"/>
         <location filename="../../kvantummanager.ui" line="1056"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>遵守暗黑主题风格</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -297,39 +298,40 @@ are enabled.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">对于单色图标集，以及不能通过其他方式
+降低未启用的图标的不透明度的场景下很有用。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="680"/>
         <location filename="../../kvantummanager.ui" line="695"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;对于单色图标集，以及不能通过其他方式降低未启用的图标的不透明度的场景下很有用。&lt;/p&gt;&lt;p&gt;KDE 会自动降低未启用的图标的不透明度。因此，此选项可能对于其他桌面环境会有些用。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>未启用的图标的不透明度:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>尽可能展示对话框和状态栏的尺寸伸缩柄。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;尽可能完整的显示对话框和状态栏？&lt;/p&gt;&lt;p&gt;默认情况下，应用程序自行决定它们是否应该显示，但是此选项对于没有窗体边框时可以很容易的调整大小。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>强制尺寸伸缩柄</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="733"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>LXQt 主菜单图标大小:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="748"/>
@@ -343,12 +345,12 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1407"/>
         <location filename="../../kvantummanager.ui" line="1442"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> px</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>合成 &amp;&amp; 一般外观</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="918"/>
