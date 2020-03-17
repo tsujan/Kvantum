@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum 预览器</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>下压式按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -24,7 +24,11 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>切换按压
+状态按钮
+
+按钮高度
+高于宽度</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
