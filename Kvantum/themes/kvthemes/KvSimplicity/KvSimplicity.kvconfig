@@ -420,3 +420,4 @@ interior=false
 [Window]
 interior=true
 interior.element=window
+min_height=16font
