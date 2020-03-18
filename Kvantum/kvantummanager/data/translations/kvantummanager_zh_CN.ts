@@ -139,7 +139,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation>透明Dolphin视图</translation>
+        <translation>透明化Dolphin视图</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
@@ -267,7 +267,9 @@ the highlight color!</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished">这不是一个完整的修复，但可以在鼠标手势启用时防止鼠标滚动造成的烦人的滚动条乱跳。</translation>
+        <translation>这不是一个完整的修复，但可以在
+鼠标手势启用时防止鼠标滚动造成
+烦人的滚动条乱跳。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="600"/>
@@ -298,7 +300,7 @@ are enabled.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished">对于单色图标集，以及不能通过其他方式
+        <translation>对于单色图标集，以及不能通过其他方式
 降低未启用的图标的不透明度的场景下很有用。</translation>
     </message>
     <message>
@@ -356,12 +358,13 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="918"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translation>只在窗体有半透明的 SVG 背景时，或窗体
+不透明度降低时有影响（参看下方说明）。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>不透明的应用：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="768"/>
@@ -370,7 +373,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>如果选中，菜单，提示框和窗口
+不会有半透明或阴影效果。
+
+如果未选中，则参考：
+杂项 → 尽可能遵守当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -475,7 +482,7 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Blurring for menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>虚化菜单和提示框</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="905"/>
@@ -518,7 +525,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1071"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>模糊化半透明窗体</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1091"/>
@@ -697,7 +704,9 @@ only removes user themes.</source>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation type="unfinished"></translation>
+        <translation>将 Dolphin 的视图和背景融合吗？
+
+默认情况下，视图有自己的基础背景。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="417"/>
@@ -734,7 +743,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果可能，模糊化被app窗体
+半透明的背景部分。
+
+该特性需要 KDE 模糊化特效。
+
+如 Konsole, QTerminal 和 LXQt 面板等。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="515"/>
@@ -767,7 +781,9 @@ as far as possible.</source>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation type="unfinished"></translation>
+        <translation>需要启用 KDE 模糊化特效，和支持
+该特效的显卡，以及主题中包含
+半透明的SVG 窗口背景图。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1144"/>
