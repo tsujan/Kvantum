@@ -382,29 +382,31 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;因为 &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;独立运行于所有的桌面环境，所以你首先需要用 Qt 平台集成程序&lt;i&gt;激活&lt;/i&gt;。KDE 和 LXQt 提供了简单的用于修改应用 Qt 样式插件的工具。在其他平台上，您需要 Qt 配置工具。&lt;br/&gt;&lt;br/&gt;在 KDE 环境下，还需要选择和应用色彩方案，因为一些 KDE 应用可能直接从 KDE 色彩方案获取自己的配色。 &lt;br/&gt;&lt;br/&gt;运行中的应用程序需要关闭重开之后应该可以应用新的主题。重新登录将会看到所有完整的修改后的 KDE/LXQt 主题。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果选中，表单中的内容会
+尽可能的垂直居中。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>居中表单布局</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，左键单击滚动条时，
+滚动滑块会跳到指定位置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="668"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>使用中键跳转滚动条</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="711"/>
@@ -413,12 +415,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>通过鼠标左键拨动可以
+滚动某些可滚动的小部件
+
+警告：Qt 的动力学滚动可能有BUG，
+可能会干扰其他作业。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="718"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>动力学滚动</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
@@ -429,17 +435,22 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅当主菜单是非 LXQt 设置的样式时才生效。
+
+小于 16 的值表示使用默认菜单图标大小。
+
+需要通过“会话设置”重启 LXQt 面板或
+重新登录生效。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="775"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如果选中，菜单，提示框和窗体禁用半透明和阴影。&lt;/p&gt;&lt;p&gt;未选中时，当主题中包含的 SVG 文件中如果有适当的元素，则可以使用半透明和阴影。&lt;/p&gt;&lt;p&gt;如果该选项禁用，则参见 杂项 → 尽可能遵守当前桌面环境&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="778"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用符合效果</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="787"/>
@@ -449,27 +460,31 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>该特性需要 KDE 对比度特效并且Qt &gt;= 5.11
+仅可用于支持模糊特效的半透明窗体
+（但是 KDE 模糊特效可以不用开启）
+
+1.00 表示不作修改。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="795"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>对比度特效</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>饱和度：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>亮度：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="815"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>对比度：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="892"/>
@@ -477,7 +492,10 @@ A value of 1.00 means no change.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>需要 KDE 模糊特效，支持该特效的显卡，
+以及半透明的 菜单/提示框 的 SVG 元素。
+
+如果启用了窗体模糊化则会自动选中。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
@@ -490,17 +508,20 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>不要为菜单和提示框绘制阴影。
+
+可能对于桌面环境已经给定
+菜单和提示框阴影效果时有用。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>无阴影菜单和提示框</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
         <source>Translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>半透明窗口</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
@@ -510,17 +531,21 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果窗口半透明启用，
+将会减少窗口的不透明度。
+
+不需要半透明的 SVG 背景
+就能让这个选项起作用。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
         <source>Reduce window opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>降低窗口的不透明度</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1033"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>降低菜单的不透明度</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1071"/>
@@ -531,44 +556,47 @@ needed for this key to work.</source>
         <location filename="../../kvantummanager.ui" line="1091"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished"></translation>
+        <translation>某些小部件状态发生变化（主要通过鼠标）时
+提供一个 200ms 的淡入淡出动画。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1095"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;某些部件状态发生变化（主要通过鼠标）时提供一个 200ms 的淡入淡出动画。&lt;/p&gt;&lt;p&gt;CPU 使用率可以忽略不计，因为只有一个部件有动画效果。最终视觉效果取决于当前主题。&lt;/p&gt;&lt;p&gt;支持以下部件：按钮（包含单选按钮和复选按钮），组合下拉框，带数值调节的输入框，滑块，单行输入框以及滚动视图。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1098"/>
         <source>Animation for state change under mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>通过鼠标改变状态时添加动画效果</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1105"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation type="unfinished"></translation>
+        <translation>选中此选项删除所有窗口/对话框平铺模式！
+如果你想还原平铺模式，取消选中！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1109"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>删除 窗口/对话框 平铺模式</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1116"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果该主题区分活动和非活动窗口的话，
+是否使用相同的颜色和形状？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1120"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略非活动状态</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1134"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>瞬态化滚动条</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
@@ -578,50 +606,51 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>尺寸</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1177"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>小图标：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1215"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>大图标：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1249"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>按钮图标：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏图标：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1308"/>
         <location filename="../../kvantummanager.ui" line="1319"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认值为 2px，但是
+一些 app 会自行设置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1312"/>
         <source>Layout spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>布局间距：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1336"/>
         <location filename="../../kvantummanager.ui" line="1346"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认值是 4px， 但是一些 app 会自行设置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Layout margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>布局边距：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1362"/>
@@ -629,58 +658,64 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单与父菜单之间的水平重叠。
+
+默认 0。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1367"/>
         <source>Submenu overlap: </source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单重叠： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1392"/>
         <location filename="../../kvantummanager.ui" line="1403"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished"></translation>
+        <translation>数值调节钮的水平宽度。
+（当调节指示是垂直方向时不起作用。）</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1396"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>数值调节钮宽度： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1796"/>
         <location filename="../../kvantummanager.ui" line="1806"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>如何激活查看项？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>点击行为：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1919"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation type="unfinished"></translation>
+        <translation>绘制树状层级线？
+
+默认情况下，树状层级有提示符，但没有线。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>对话框按钮布局：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>聚焦在按钮和其他部件
+时有类似虚框效果。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>删除焦点矩形</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2081"/>
@@ -868,7 +903,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>显示提示框之前的延迟，以毫秒为单位。
+
+0 表示提示框立即显示。
+
+-1 表示 Qt 的默认行为。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1782"/>
@@ -928,7 +967,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，调节指示按钮将绘制为
+带上下箭头或加/减号的两个按钮。
+
+选中此选项将会把两个按钮左右排开到
+带数值调节功能的单行文本编辑框中..</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1635"/>
@@ -936,7 +979,10 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，调节指示按钮将绘制为相邻的按钮。
+
+选中该选项将会把上调节按钮和下调节按钮叠放
+在一起后放置在带数值调节的单行文本编辑器旁。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1690"/>
@@ -961,7 +1007,7 @@ By default, all of their menu-items are shown.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1487"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>提示框延迟：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="929"/>
@@ -1111,7 +1157,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1614"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>并排数值调节钮</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1662"/>
@@ -1132,7 +1178,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1641"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>叠放数值调节钮</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1577"/>
@@ -1268,7 +1314,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2176"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;点击此按钮，然后点击 GUI 元素上的&amp;quot;这是什么&amp;quot; 工具提示可以获取解释说明信息。&lt;/p&gt;&lt;p&gt;也同样有普通的提示信息，但是这种提示在你点击别处前不会消失。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2179"/>
