@@ -176,50 +176,52 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="833"/>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <source>Simple radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>简单的单选按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="856"/>
         <location filename="../../KvantumPreviewBase.ui" line="867"/>
         <source>Multi-line
 radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>多行的
+单选按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="878"/>
         <location filename="../../KvantumPreviewBase.ui" line="904"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation type="unfinished"></translation>
+        <translation>带有 32 px SVG 图标的单选按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="927"/>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
         <source>Simple check box</source>
-        <translation type="unfinished"></translation>
+        <translation>简单的复选框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="950"/>
         <location filename="../../KvantumPreviewBase.ui" line="961"/>
         <source>Multi-line
 check box</source>
-        <translation type="unfinished"></translation>
+        <translation>多行的
+复选框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="969"/>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
         <source>Tri-state check box</source>
-        <translation type="unfinished"></translation>
+        <translation>三态复选框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="992"/>
         <location filename="../../KvantumPreviewBase.ui" line="1006"/>
         <source>Check box with icon</source>
-        <translation type="unfinished"></translation>
+        <translation>带图标的复选框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1062"/>
         <source>Combos/Spins/Inputs</source>
-        <translation type="unfinished"></translation>
+        <translation>组合下拉框/调节框/输入框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1096"/>
@@ -229,37 +231,37 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1437"/>
         <location filename="../../KvantumPreviewBase.ui" line="1495"/>
         <source>Frameless (no difference)</source>
-        <translation type="unfinished"></translation>
+        <translation>无边框（无差别）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1107"/>
         <location filename="../../KvantumPreviewBase.ui" line="1146"/>
         <source>Standard combo box</source>
-        <translation type="unfinished"></translation>
+        <translation>标准下拉框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1116"/>
         <location filename="../../KvantumPreviewBase.ui" line="1155"/>
         <source>Standard combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>标准下拉框 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1124"/>
         <location filename="../../KvantumPreviewBase.ui" line="1160"/>
         <source>Standard combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>标准下拉框 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1129"/>
         <location filename="../../KvantumPreviewBase.ui" line="1165"/>
         <source>Standard combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>标准下拉框 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1134"/>
         <location filename="../../KvantumPreviewBase.ui" line="1170"/>
         <source>Standard combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>标准下拉框 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1191"/>
@@ -333,7 +335,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
         <location filename="../../KvantumPreviewBase.ui" line="1326"/>
         <source>Editable combo box</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的下拉框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1296"/>
@@ -363,32 +365,32 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1469"/>
         <location filename="../../KvantumPreviewBase.ui" line="1482"/>
         <source>Line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>单行输入框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1561"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation type="unfinished"></translation>
+        <translation>滑块/滚动条/进度条/刻度盘</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation type="unfinished"></translation>
+        <translation>容器</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation type="unfinished"></translation>
+        <translation>表头 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation type="unfinished"></translation>
+        <translation>表头 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation type="unfinished"></translation>
+        <translation>表头 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
@@ -570,7 +572,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2664"/>
         <source>Document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>文档模式</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2702"/>
@@ -635,7 +637,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2937"/>
         <source>Show tabs in the document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>以文档模式展示选项卡</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2949"/>
@@ -645,7 +647,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
         <source>Hold pressed to show a menu</source>
-        <translation type="unfinished"></translation>
+        <translation>按住不放显示菜单</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2963"/>
