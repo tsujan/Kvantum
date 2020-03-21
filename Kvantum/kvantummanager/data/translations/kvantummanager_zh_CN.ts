@@ -292,7 +292,7 @@ are enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Respect dark themes</source>
-        <translation>遵守暗黑主题风格</translation>
+        <translation>遵循暗黑主题风格</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -377,7 +377,7 @@ Miscellaneous → Respect current DE if possible</source>
 不会有半透明或阴影效果。
 
 如果未选中，则参考：
-杂项 → 尽可能遵守当前桌面环境</translation>
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -445,7 +445,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="775"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如果选中，菜单，提示框和窗体禁用半透明和阴影。&lt;/p&gt;&lt;p&gt;未选中时，当主题中包含的 SVG 文件中如果有适当的元素，则可以使用半透明和阴影。&lt;/p&gt;&lt;p&gt;如果该选项禁用，则参见 杂项 → 尽可能遵守当前桌面环境&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;如果选中，菜单，提示框和窗体禁用半透明和阴影。&lt;/p&gt;&lt;p&gt;未选中时，当主题中包含的 SVG 文件中如果有适当的元素，则可以使用半透明和阴影。&lt;/p&gt;&lt;p&gt;如果该选项禁用，则参见 杂项 → 尽可能遵循当前桌面环境&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="778"/>
@@ -601,7 +601,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>尺寸 &amp;&amp; 延迟</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
@@ -722,7 +722,9 @@ on focused buttons and other widgets.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>对所有的 app 使用当前激活的主题
+
+需要保存才能生效。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -732,7 +734,12 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>从所有的用户安装路径中
+删除选中的主题。
+
+如果root安装路径存在的话
+主题依旧可用；这个按钮
+指示删除普通用户的主题。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="389"/>
@@ -748,7 +755,9 @@ By default, it has the base background.</source>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认按钮样式没有粗体文字？
+
+这些按钮默认是有粗体文字的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="456"/>
@@ -758,7 +767,12 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>带文字的按钮去掉图标？
+
+默认情况下，大部分按钮都有图标。
+
+如果该选项禁用，会参考：
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="485"/>
@@ -768,7 +782,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>菜单项去掉图标？
+
+默认情况下，一些菜单项可能带图标。
+
+如果该选项禁用，会参考：
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="500"/>
@@ -792,7 +811,10 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation type="unfinished"></translation>
+        <translation>只有顶级工具栏应用样式？
+
+默认情况下，所有层级的工具栏
+都会应用样式，无论何种层级何种方位。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="633"/>
@@ -802,14 +824,19 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation type="unfinished"></translation>
+        <translation>用高亮颜色进行着色。
+
+主要用于单色图标。
+
+硬编码的 图标/样式 可能不遵循此项。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="607"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>某些 app 可能不遵循暗黑主题风格。
+Kvantum 可以尝试尽量纠正这些行为。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1066"/>
@@ -824,12 +851,13 @@ window SVG background in the theme.</source>
         <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation type="unfinished"></translation>
+        <translation>瞬态滚动条是否在必要时
+拥有半透明的凹槽？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation type="unfinished"></translation>
+        <translation>瞬态滚动条必要时可以有凹槽</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
@@ -841,7 +869,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>影响菜单项和菜单首。
+
+默认值是 16 px，但是
+一些 app 可能自行设置。
+
+如果禁用，会参考：
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1206"/>
@@ -853,7 +887,13 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>影响图标视图。
+
+默认值是 32 px，但是
+一些 app 会自行设置
+
+如果禁用，会参考：
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1244"/>
@@ -861,7 +901,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation type="unfinished"></translation>
+        <translation>影响图标，标签栏和列表视图。
+
+默认值是 16 px。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1274"/>
@@ -871,29 +913,33 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>影响工具栏。
+
+默认值是 22 px，但是
+一些 app 会自行设置。
+KDE app 会从 KDE 设置获取。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1423"/>
         <location filename="../../kvantummanager.ui" line="1436"/>
         <source>The minimum length of scrollbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>滚动条的最小长度。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1426"/>
         <location filename="../../kvantummanager.ui" line="1439"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;垂直滚动条的最小高度和水平滚动条的最小宽度。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1429"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished"></translation>
+        <translation>最小滚动条长度： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1474"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>延迟</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1480"/>
@@ -916,7 +962,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>滚动条默认情况下有添加线和子线箭头。
+
+选中此项会尽可能删除箭头。
+
+如果禁用，会参考 合成 &amp; 一般外观 → 瞬态化进度条!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1648"/>
@@ -925,13 +975,17 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，为可移动工具栏和 dock
+组件绘制的矩形框是空心的。
+
+此选项会用高亮颜色填充矩形框。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1702"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果选中，则当菜单栏和工具栏彼此相临时，
+会使用工具栏 SVG 元素整体绘制。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
@@ -939,7 +993,10 @@ the toolbar SVG element when they are adjacent to each another.</source>
 
 By default, the contents are shifted by 1px
 both horizontally and vertically.</source>
-        <translation type="unfinished"></translation>
+        <translation>按下按钮时偏移文本内容？
+
+默认情况下，文本内容会在
+水平和垂直方向各偏移 1px。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1931"/>
@@ -949,7 +1006,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>可以从主菜单栏，主要工具栏，或任何可能的地方
+（不只是标题栏）拖拽窗口？
+
+如果禁用，会参考：
+杂项 → 尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1842"/>
@@ -958,7 +1019,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>只有样式没有被 app
+强行指定时生效。
+
+默认“跟随样式”。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1607"/>
@@ -989,12 +1053,14 @@ spin-down one inside the spin line-edit.</source>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>将组合弹出框绘制为菜单弹出框（比如像 GTK 那样）？
+
+默认情况下，组合弹出框不会覆盖组合下拉框。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1738"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>在 Kvantum 中，选项卡默认居中。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1594"/>
@@ -1002,7 +1068,10 @@ By default, combo popups do not cover the combo box.</source>
 scroll arrows on their top and/or bottom?
 
 By default, all of their menu-items are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>大型菜单应该可滚动并且在首尾
+具有滚动箭头吗？
+
+默认情况下，所有的菜单项都会展示。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1487"/>
@@ -1017,7 +1086,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation>逗号分隔的可执行程序列表，
+整个窗体都不会半透明化。
+
+（一些app，如视频播放器，
+可能半透明会有问题！）</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1127"/>
@@ -1026,7 +1099,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>是滚动条瞬态化！
+
+瞬态滚动条出现在滚动栏顶部，
+仅当需要时才显示。通常不占用
+额外的空间。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1494"/>
@@ -1036,28 +1113,31 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished"></translation>
+        <translation>打开子菜单的延迟，以毫秒为单位。
+默认 250。
+
+-1 表示没有弹出延迟（点击打开）。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1501"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单延迟： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1515"/>
         <location filename="../../kvantummanager.ui" line="1538"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1571"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>杂项</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1789"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>滚动条无箭头</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1884"/>
@@ -1066,17 +1146,21 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>在可视框架内绘制滚动条？
+
+默认情况下，滚动条是在可视框架外绘制。
+
+如果禁用，会参考 合成 &amp; 一般外观 → 瞬态化滚动条！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1891"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>滚动条在框架内</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1924"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>树形层级线</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1621"/>
@@ -1085,74 +1169,79 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，文本标签在框架上，
+并且框架会切割以包容文本标签。
+
+选中此项会将文本标签放置在框架
+右上方，这样框架不会被裁剪。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1628"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Group-box 文本标签在框架之上</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1655"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>填充摇摆矩形</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1676"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，菜单栏
+启用了鼠标追踪。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1680"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;默认情况下菜单栏启用了鼠标追踪，比如点击其中一个菜单项之后，子菜单会展开，此时鼠标放到其余菜单项上一样会自动展开，不需要点击。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1683"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>菜单栏启用鼠标追踪</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1706"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>合并带有工具栏的菜单栏</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1727"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果选中，将在工具栏分隔符之间分组绘制并升高工具栏按钮。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>组工具栏按钮</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Shift push-button contents</source>
-        <translation type="unfinished"></translation>
+        <translation>偏移按钮文本内容</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>可拖拽点：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1848"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏按钮样式：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1772"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果取消选中，快捷方式不会加下划线。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1775"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>带Alt的下划线快捷方式</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1614"/>
@@ -1163,17 +1252,18 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1662"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>将整个可编辑的组合下拉框绘制为带箭头的单行编辑器
+（如果图标存在的话一并绘制）？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1666"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;将整个可编辑的组合下拉框绘制为带箭头的单行编辑器（如果图标存在的话一并绘制）？&lt;/p&gt;&lt;p&gt;默认情况下，组合下拉框是有一个单行编辑器，一个带箭头的按钮，以及另一侧带图标的按钮组成。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1669"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的组合框用行编辑样式</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1641"/>
@@ -1187,43 +1277,48 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation>当启用此选项时，Kvantum 会尝试
+遵循当前桌面环境的某些设置。
+
+这个复选框会禁用某些选项，如果
+你想使用那些选项时请取消选中！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1587"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>尽可能遵循当前桌面环境</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1695"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>组合弹出框用菜单样式</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>左对齐选项卡</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，非活动选项卡会合并在一起，
+也就是说，它们之间没有边界线。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1765"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>合并非活跃选项卡</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1600"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>可滚动菜单</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;当勾选此选项，如果当前桌面环境是 KDE，Gnome，或 Pantheon 时，Kvantum 会尝试遵循某些桌面环境的配置。&lt;/p&gt;&lt;p&gt;KDE 环境下，会使 Kvantum 读取 KDE 的大小图标尺寸，以及单击双击选项。&lt;/p&gt;&lt;p&gt;在 Unity，Gnome 和 Pantheon 环境下，会从菜单和按钮上移除图标（即使相应的 dconf 配置项改变了），并且禁用窗口半透明。&lt;/p&gt;&lt;p&gt;此复选框会禁用某些选项。如果你想使用这些选项的话请取消选中！&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1713"/>
