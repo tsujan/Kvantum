@@ -382,7 +382,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;因为 &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;独立运行于所有的桌面环境，所以你首先需要用 Qt 平台集成程序&lt;i&gt;激活&lt;/i&gt;。KDE 和 LXQt 提供了简单的用于修改应用 Qt 样式插件的工具。在其他平台上，您需要 Qt 配置工具。&lt;br/&gt;&lt;br/&gt;在 KDE 环境下，还需要选择和应用色彩方案，因为一些 KDE 应用可能直接从 KDE 色彩方案获取自己的配色。 &lt;br/&gt;&lt;br/&gt;运行中的应用程序需要关闭重开之后应该可以应用新的主题。重新登录将会看到所有完整的修改后的 KDE/LXQt 主题。</translation>
+        <translation>&lt;br&gt;&lt;br&gt;因为 &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;独立运行于所有的桌面环境，所以你首先需要用 Qt 平台集成程序&lt;i&gt;激活&lt;/i&gt;。KDE 和 LXQt 提供了简单的用于修改当前 Qt 样式插件的工具。在其他平台上，您需要 Qt 配置工具。&lt;br/&gt;&lt;br/&gt;在 KDE 环境下，还需要选择和应用色彩方案，因为一些 KDE 应用可能直接从 KDE 色彩方案获取自己的配色。 &lt;br/&gt;&lt;br/&gt;运行中的应用程序需要关闭重开之后应该可以应用新的主题。重新登录将会看到所有完整的修改后的 KDE/LXQt 主题。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -722,7 +722,7 @@ on focused buttons and other widgets.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>对所有的 app 使用当前激活的主题
+        <translation>对所有的 app 使用当前主题
 
 需要保存才能生效。</translation>
     </message>
@@ -1308,7 +1308,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1765"/>
         <source>Join inactive tabs</source>
-        <translation>合并非活跃选项卡</translation>
+        <translation>合并非活动选项卡</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1600"/>
@@ -1342,7 +1342,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1978"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;这里你可以分配主题给特定的应用程序。&lt;/center&gt;对于每一个主题，您可以添加一个逗号分隔的应用对应的可执行程序列表，这些应用程序将使用对应的主题而不是当前主题。配置完选定的主题后，需要保存结果，记得点击&lt;br&gt;&lt;center&gt;&lt;i&gt;保存&lt;/i&gt; 按钮！&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2013"/>
@@ -1389,7 +1389,8 @@ This option will hide these.</source>
         <location filename="../../kvantummanager.ui" line="2139"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>预览当前主题
+或者刷新预览。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2143"/>
@@ -1739,7 +1740,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2076"/>
         <location filename="../../KvantumManager.cpp" line="2537"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>当前主题：</translation>
     </message>
 </context>
 <context>
