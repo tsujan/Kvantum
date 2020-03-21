@@ -163,11 +163,11 @@ inherits=PanelButtonCommand
 frame.element=tbutton
 interior.element=tbutton
 text.normal.color=#fdfdfd
-text.normal.inactive.color=#ebebeb
+text.normal.inactive.color=#f0f0f0
 text.focus.color=white
 text.press.color=black
 text.toggle.color=black
-text.toggle.inactive.color=#191919
+text.toggle.inactive.color=#0f0f0f
 indicator.element=flat-arrow
 
 [ToolbarComboBox]
@@ -175,11 +175,11 @@ interior.element=tbutton
 frame.element=tbutton
 indicator.element=flat-carrow
 text.normal.color=#fdfdfd
-text.normal.inactive.color=#ebebeb
+text.normal.inactive.color=#f0f0f0
 text.focus.color=white
 text.press.color=white
 text.toggle.color=black
-text.toggle.inactive.color=#191919
+text.toggle.inactive.color=#0f0f0f
 
 [ToolbarLineEdit]
 frame.element=tlineedit
