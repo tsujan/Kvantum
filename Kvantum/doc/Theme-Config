@@ -198,7 +198,7 @@ There are three exceptions to these rules:
 
 Exception No.1: The "inherits" variable will not be taken from the default config file if it is not present in a section.
 
-Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color scheme. Also font boldness/italicity will be ignored if omitted.
+Exception No.2: If colors are omitted or not valid or if a section they could belong to is not present, they will be taken from the currently used color palette. Also font boldness/italicity will be ignored if omitted.
 
 Exception No.3: Any variable related to compositing or hacking and also "frame.expandedElement" will be ignored if omitted.
 
@@ -1220,7 +1220,7 @@ THEME2=app3
 Some Examples
 =============
 
-If you don’t want menus and tooltips to be translucent or cast shadow and want the color scheme to be used for all texts, you could use a blank configuration or a very basic one with just this in it:
+If you don’t want menus and tooltips to be translucent or cast shadow and want the current color palette to be used for all texts, you could use a blank configuration or a very basic one with just this in it:
 
 [%General]
 
@@ -1235,7 +1235,7 @@ text.focus.color=none
 text.press.color=none
 text.toggle.color=none
 
-Here "none" is not a valid color, so text colors will be taken from the currently used color scheme.
+Here "none" is not a valid color, so text colors will be taken from the currently used color palette.
 
 If you want to have bigger buttons without increasing your font sizes, you could use this:
 
