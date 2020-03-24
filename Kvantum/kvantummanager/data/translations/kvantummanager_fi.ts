@@ -1470,7 +1470,7 @@ tai päivitä sen esikatselu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="586"/>
         <location filename="../../KvantumManager.cpp" line="740"/>
-        <location filename="../../KvantumManager.cpp" line="2634"/>
+        <location filename="../../KvantumManager.cpp" line="2635"/>
         <source>Confirmation</source>
         <translation>Vahvistus</translation>
     </message>
@@ -1677,7 +1677,7 @@ tai päivitä sen esikatselu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1299"/>
-        <location filename="../../KvantumManager.cpp" line="2542"/>
+        <location filename="../../KvantumManager.cpp" line="2543"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Nämä ovat asetukset, joita voidaan turvallisesti muuttaa.&lt;br&gt;Muokkaa muille tätä tiedostoa:</translation>
     </message>
@@ -1697,48 +1697,48 @@ tai päivitä sen esikatselu.</translation>
         <translation>Kopio oli jo luotu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2528"/>
+        <location filename="../../KvantumManager.cpp" line="2529"/>
         <source>Configuration saved.</source>
         <translation>Kokoonpano tallennettu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2635"/>
+        <location filename="../../KvantumManager.cpp" line="2636"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Haluatko palata tämän teeman oletusasetuksiin (root)?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2638"/>
+        <location filename="../../KvantumManager.cpp" line="2639"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Menetät mahdolliset muutokset.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2673"/>
+        <location filename="../../KvantumManager.cpp" line="2674"/>
         <source>Restored the rool default settings of %1</source>
         <translation>Palautettiin %1 roolin oletusasetukset</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2674"/>
+        <location filename="../../KvantumManager.cpp" line="2675"/>
         <source>the default theme</source>
         <translation>oletusteema</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2810"/>
         <location filename="../../KvantumManager.cpp" line="2811"/>
+        <location filename="../../KvantumManager.cpp" line="2812"/>
         <source>About Kvantum Manager</source>
         <translation>Tietoja Kvantum Managerista</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2810"/>
+        <location filename="../../KvantumManager.cpp" line="2811"/>
         <source>Translators</source>
         <translation>Kääntäjät</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2808"/>
+        <location filename="../../KvantumManager.cpp" line="2809"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Työkalu asennusta, valintaa&lt;br&gt;ja muokkausta varten &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2809"/>
+        <location filename="../../KvantumManager.cpp" line="2810"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Tekijä: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1765,7 +1765,7 @@ tai päivitä sen esikatselu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="924"/>
         <location filename="../../KvantumManager.cpp" line="2076"/>
-        <location filename="../../KvantumManager.cpp" line="2537"/>
+        <location filename="../../KvantumManager.cpp" line="2538"/>
         <source>Active theme:</source>
         <translation>Aktiivinen teema:</translation>
     </message>

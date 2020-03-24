@@ -2,6 +2,7 @@ V0.15.1
 ---------
  * Added some dialog button icons for Qt ≥ 5.14.
  * Fixed a missing case of checking null style option in styleHint().
+ * Restyle Kvantum Manager when tooltip delay is changed.
 
 V0.15.0
 ---------
