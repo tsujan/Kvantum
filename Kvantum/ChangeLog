@@ -1,8 +1,12 @@
+V0.15.2
+---------
+ * Restyle Kvantum Manager when tooltip delay is changed.
+ * When compensating for menu shadows, consider the cursor position as the last resort.
+
 V0.15.1
 ---------
  * Added some dialog button icons for Qt ≥ 5.14.
  * Fixed a missing case of checking null style option in styleHint().
- * Restyle Kvantum Manager when tooltip delay is changed.
 
 V0.15.0
 ---------

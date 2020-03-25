@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2020 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -979,9 +979,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         /* get the available geometry (Qt menus don't
            spread across the available virtual geometry) */
         QRect sg, ag;
+        QScreen *sc = nullptr;
         if (QWindow *win = w->windowHandle())
         {
-          if (QScreen *sc = win->screen())
+          sc = win->screen();
+          if (sc)
           {
             sg = sc->geometry();
             ag = sc->availableGeometry();
@@ -1058,10 +1060,16 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 }
                 else if (!ag.isEmpty())
                 {
-                  if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                  if ((g.bottom() == ag.bottom() && g.top() != ag.top())
+                      || QCursor::pos(sc).y() >= g.bottom())
+                  {
                     dY += menuShadow_.at(1) + menuShadow_.at(3);
-                  if (g.left() == ag.left() && g.right() != ag.right())
+                  }
+                  if ((g.left() == ag.left() && g.right() != ag.right())
+                      || QCursor::pos(sc).x() <= g.left())
+                  {
                     dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                  }
                 }
               }
             }
@@ -1120,12 +1128,18 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 }
                 else if (!ag.isEmpty()) // probably a panel menu
                 {
-                  /* snap to the screen bottom if possible */
-                  if (g.bottom() == ag.bottom() && g.top() != ag.top())
+                  /* snap to the screen bottom/right if possible and,
+                     as the last resort, consider the cursor position */
+                  if ((g.bottom() == ag.bottom() && g.top() != ag.top())
+                      || QCursor::pos(sc).y() >= g.bottom())
+                  {
                     dY += menuShadow_.at(1) + menuShadow_.at(3);
-                  /* snap to the right screen edge if possible */
-                  if (g.right() == ag.right() && g.left() != ag.left())
+                  }
+                  if ((g.right() == ag.right() && g.left() != ag.left())
+                      || QCursor::pos(sc).x() >= g.right() + 1)
+                  {
                     dX += menuShadow_.at(0) + menuShadow_.at(2);
+                  }
                 }
               }
             }

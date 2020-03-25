@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2020 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -3766,9 +3766,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     /* toolbar is drawn at CE_ToolBar */
-    /*case PE_PanelToolBar : {
+    case PE_PanelToolBar : {
       return;
-    }*/
+    }
 
     case PE_IndicatorToolBarHandle :
     case PE_IndicatorToolBarSeparator : {
@@ -13070,9 +13070,8 @@ int Style::styleHint(QStyle::StyleHint hint,
     //case SH_SpinControls_DisableOnBounds: return true;
 
     case SH_ToolTip_WakeUpDelay : {
-      int delay = tspec_.tooltip_delay;
       if (tspec_.tooltip_delay >= 0)
-        return delay;
+        return tspec_.tooltip_delay;
       return QCommonStyle::styleHint(hint,option,widget,returnData);
     }
     case SH_ToolTip_FallAsleepDelay : {
