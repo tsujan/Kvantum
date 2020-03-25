@@ -256,12 +256,12 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Стилизовать виджеты наполнения KDE как индикаторы выполнения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Стилизовать индикаторы наполненности KDE как индикаторы выполнения?&lt;/p&gt;&lt;p&gt;Индикаторы заполненности обычно используются для отображения занятого пространства на дисках и имеют собственный стиль.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
@@ -274,12 +274,16 @@ the highlight color!</source>
 annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это не полноценное решение,
+но оно позволяет избежать
+надоедливые скачки при скролле,
+которые могут возникать,
+когда жесты мыши активированы.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="600"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Обход бага Qt, который даёт скачки при скролле</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
@@ -402,12 +406,13 @@ horizontally centered as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="664"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию, скролл происходит
+при нажатии левой кнопки мыши.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="668"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>Скормить по нажатию средней кнопки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="711"/>
@@ -656,7 +661,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1367"/>
         <source>Submenu overlap: </source>
-        <translation type="unfinished"></translation>
+        <translation>Перекрытие подменю: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1392"/>
