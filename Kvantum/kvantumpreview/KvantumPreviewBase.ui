@@ -2654,6 +2654,9 @@ check box</string>
             <bool>true</bool>
            </property>
            <widget class="QWidget" name="tab_7">
+            <attribute name="icon">
+             <iconset theme="user-home"/>
+            </attribute>
             <attribute name="title">
              <string>Tab 1</string>
             </attribute>

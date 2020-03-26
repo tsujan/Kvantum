@@ -275,11 +275,11 @@ frame.left=3
 frame.right=3
 text.bold=true
 text.boldness=2
-text.normal.color=#8c898c
+text.normal.color=#3d3d3d91
 text.focus.color=#646464
 text.toggle.color=#3D3D3D
-text.normal.inactive.color=#969696
-text.toggle.inactive.color=#969696
+text.normal.inactive.color=#3d3d3d83
+text.toggle.inactive.color=#3d3d3d83
 min_width=4font
 
 [TabFrame]
