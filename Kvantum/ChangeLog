@@ -2,6 +2,7 @@ V0.15.2
 ---------
  * Restyle Kvantum Manager when tooltip delay is changed.
  * When compensating for menu shadows, consider the cursor position as the last resort.
+ * Consider RTL in QCommandLinkButton (although Qt doesn't).
 
 V0.15.1
 ---------

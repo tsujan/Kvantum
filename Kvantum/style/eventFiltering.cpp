@@ -355,7 +355,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!styleHint(QStyle::SH_UnderlineShortcut, &option, cbtn))
           textflags |= Qt::TextHideMnemonic;
         textflags |= Qt::AlignTop; // (see Kvantum.cpp -> Style::drawItemText)
+        if (cbtn->layoutDirection() == Qt::RightToLeft)
+          textflags |= Qt::AlignRight;
+        else
+          textflags |= Qt::AlignLeft;
 
+        /* This is what QCommandLinkButtonPrivate::titleFont() does.
+           It's bad because the font shouldn't be fixed. */
         QFont titleFont = cbtn->font();
         titleFont.setBold(true);
         titleFont.setPointSizeF(9.0);
@@ -377,7 +383,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         /* description */
         textflags |= Qt::TextWordWrap | Qt::ElideRight;
         QFont descriptionFont = cbtn->font();
-        descriptionFont.setPointSizeF(9.0);
+        descriptionFont.setPointSizeF(9.0); // -> QCommandLinkButtonPrivate::descriptionFont()
         p.setFont(descriptionFont);
         QFontMetrics fm(titleFont);
         int descriptionOffset = topMargin + fm.height();
