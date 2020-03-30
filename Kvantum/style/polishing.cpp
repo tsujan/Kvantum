@@ -615,7 +615,7 @@ void Style::polish(QWidget *widget)
         {
           palette.setColor(QPalette::Active,QPalette::Text,col);
           palette.setColor(QPalette::Inactive,QPalette::Text,
-                          standardPalette().color(QPalette::Inactive,QPalette::Text));
+                           standardPalette().color(QPalette::Inactive,QPalette::Text));
           widget->setPalette(palette);
         }
       }

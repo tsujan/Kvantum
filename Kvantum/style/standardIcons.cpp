@@ -433,6 +433,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
+    case SP_CommandLink :
     case SP_ArrowForward : {
       if (rtl)
         return QCommonStyle::standardIcon(SP_ArrowLeft, option, widget);
@@ -542,6 +543,16 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     }
     case SP_FileDialogDetailedView : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-details"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_FileDialogToParent : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("go-up"));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+    case SP_FileDialogNewFolder : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("folder-new"));
       if (!icn.isNull()) return icn;
       else break;
     }
