@@ -326,7 +326,8 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="619"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда показывать уголок для изменения размера
+окна, если доступно.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
@@ -336,7 +337,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Force size grips</source>
-        <translation>Форсировать размер ручки</translation>
+        <translation>Показывать ручку для ресайза</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="733"/>
@@ -412,7 +413,7 @@ when the scrollbar is left clicked.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="668"/>
         <source>Scroll jump with middle click</source>
-        <translation>Скормить по нажатию средней кнопки</translation>
+        <translation>Скроллить по нажатию средней кнопки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="711"/>
