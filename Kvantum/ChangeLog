@@ -1,5 +1,10 @@
 V0.15.2
 ---------
+ * A better calculation of the part of a progressbar's internal text which is inside the indicator (this also fixes a small offset in KisSliderSpinBox).
+ * Don't draw a progressbar's busy indicator if it's wider than the progressbar (although that never happens in practice).
+
+V0.15.2
+---------
  * Restyle Kvantum Manager when tooltip delay is changed.
  * When compensating for menu shadows, consider the cursor position as the last resort.
  * Consider RTL in QCommandLinkButton (although Qt doesn't).

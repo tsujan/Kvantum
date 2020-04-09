@@ -831,7 +831,10 @@ void Style::advanceProgressbar()
     QWidget *widget = it.key();
     if (widget && widget->isVisible())
     {
-      it.value() += 2;
+      if (it.value() > INT_MAX - 2)
+        it.value() = 0;
+      else
+        it.value() += 2;
       widget->update();
     }
   }
@@ -3479,10 +3482,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         /* The frame SVG elements may have translucency. So, instead of drawing the
            interior inside the whole extended rectangle, we clip the painter region. */
-        painter->save();
-        painter->setClipRegion(QRegion(interiorRect(option->rect,fspec)).united(attachmentRect));
-        renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix,true);
-        painter->restore();
+        QRegion reg = QRegion(interiorRect(option->rect,fspec)).united(attachmentRect);
+        if (!reg.isEmpty())
+        {
+          painter->save();
+          painter->setClipRegion(reg);
+          renderInterior(painter,option->rect,fspec1,ispec,ispec.element+suffix,true);
+          painter->restore();
+        }
       }
       const frame_spec fspecT = getFrameSpec(QStringLiteral("Tab"));
       renderFrame(painter,
@@ -7518,7 +7525,7 @@ void Style::drawControl(QStyle::ControlElement element,
           }
 
           // take care of thin indicators
-          if (r.width() > 0)
+          if (r.isValid())
           {
             if (isRounded)
             {
@@ -7566,7 +7573,7 @@ void Style::drawControl(QStyle::ControlElement element,
               thin = true;
             }
           }
-          if (r.height() < fspec.top+fspec.bottom)
+          if (r.height() >= 0 && r.height() < fspec.top+fspec.bottom)
           {
             fspec.top = fspec.bottom = r.height()/2;
           }
@@ -7577,6 +7584,7 @@ void Style::drawControl(QStyle::ControlElement element,
         }
         else if (widget)
         { // busy progressbar
+          if (!r.isValid()) return;
           QWidget *wi = const_cast<QWidget*>(widget);
           int animcount = progressbars_[wi];
           int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);
@@ -7584,20 +7592,21 @@ void Style::drawControl(QStyle::ControlElement element,
           if (isVertical)
           {
             if (inverted)
-              R.setX(r.x()+r.width()-(animcount%r.width()));
+              R.setX(r.x()+r.width()-(animcount % r.width()));
             else
-              R.setX(r.x()+(animcount%r.width()));
+              R.setX(r.x()+(animcount % r.width()));
           }
           else
           {
             if (inverted)
-              R.setX(r.x()+r.width()-(animcount%r.width()));
+              R.setX(r.x()+r.width()-(animcount % r.width()));
             else
-              R.setX(r.x()+(animcount%r.width()));
+              R.setX(r.x()+(animcount % r.width()));
           }
           int W = !isRounded ? pm : !isVertical ? qMax(h,pm) : qMax(w,pm);
+          if (W <= 0 || W > r.width()) return;
           R.setWidth(W);
-          if (R.height() < fspec.top+fspec.bottom)
+          if (R.height() >= 0 && R.height() < fspec.top+fspec.bottom)
           {
             fspec.top = fspec.bottom = r.height()/2;
           }
@@ -7609,7 +7618,7 @@ void Style::drawControl(QStyle::ControlElement element,
             // keep external corners rounded
             thin = false;
             QRect R1(R);
-            if (R1.width() > 0)
+            if (R1.isValid())
             {
               if (isRounded)
               {
@@ -7641,7 +7650,7 @@ void Style::drawControl(QStyle::ControlElement element,
             R = QRect(r.x(), r.y(), W-R.width(), r.height());
 
             thin = false;
-            if (R.width() > 0)
+            if (R.isValid())
             {
               if (isRounded)
               {
@@ -7831,7 +7840,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                               QPalette::HighlightedText));
         }
 
-        QRect R;
+        QRect R; // the indicator part
         if (!sideText && !topText)
         {
           /* with ordinary progressbars, we put the text inside the frame horizontally,
@@ -7850,24 +7859,39 @@ void Style::drawControl(QStyle::ControlElement element,
             if ((!txtCol.isValid() || col != txtCol)
                 && (txtCol.isValid() || col != standardPalette().color(QPalette::WindowText)))
             {
-              int full = sliderPositionFromValue(opt->minimum,
-                                                 opt->maximum,
-                                                 qMax(opt->progress,opt->minimum),
-                                                 r.width(),
-                                                 false);
+              /* find the empty part exactly as in CE_ProgressBarContents */
+              int L, margin;
+              if (tspec_.spread_progressbar || (isVertical ? w : h) <= fspecPr.top + fspecPr.bottom)
+              {
+                L = isVertical ? h : w;
+                margin = (!isKisSlider_ || inverted ? fspecPr.left : 0);
+              }
+              else
+              {
+                L = r.width();
+                margin = 0;
+              }
+              int empty = L
+                          - sliderPositionFromValue(opt->minimum,
+                                                    opt->maximum,
+                                                    qMax(opt->progress,opt->minimum),
+                                                    L,
+                                                    false);
+              empty = qMax(0, empty-margin);
+
               if (isVertical)
               {
                 if (inverted)
-                  R = r.adjusted(r.width()-full, 0, 0, 0);
+                  R = r.adjusted(empty, 0, 0, 0);
                 else
-                  R = r.adjusted(0, 0, full-r.width(), 0);
+                  R = r.adjusted(0, 0, -empty, 0);
               }
               else
               {
                 if (inverted)
-                  R = r.adjusted(r.width()-full, 0, 0, 0);
+                  R = r.adjusted(empty, 0, 0, 0);
                 else
-                  R = r.adjusted(0, 0, full-r.width(), 0);
+                  R = r.adjusted(0, 0, -empty, 0);
               }
             }
           }
@@ -12006,7 +12030,6 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           frame.lineWidth = opt->lineWidth;
           frame.midLineWidth = opt->midLineWidth;
           frame.rect = subControlRect(CC_GroupBox, opt, SC_GroupBoxFrame, widget);
-          painter->save();
           QRegion region(opt->rect);
 
           bool ltr = (opt->direction == Qt::LeftToRight);
@@ -12023,9 +12046,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             finalRect = textRect;
 
           region -= finalRect;
-          painter->setClipRegion(region);
-          drawPrimitive(PE_FrameGroupBox, &frame, painter, widget);
-          painter->restore();
+          if (!region.isEmpty())
+          {
+            painter->save();
+            painter->setClipRegion(region);
+            drawPrimitive(PE_FrameGroupBox, &frame, painter, widget);
+            painter->restore();
+          }
         }
 
         // Draw title
