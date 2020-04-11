@@ -24,14 +24,15 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; contient de nombreux thèmes, mais des thèmes externes peuvent également être installés pour pouvoir être utilisés par celui-ci. Ici, vous pouvez choisir un dossier de thèmes, puis appuyer sur le bouton ci-dessous pour l’installer dans votre accueil.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; contient de nombreux thèmes, mais des thèmes externes peuvent également être installés pour pouvoir être utilisés par celui-ci.
+            Ici, vous pouvez choisir un dossier de thèmes, puis appuyer sur le bouton ci-dessous pour l’installer dans votre accueil.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Sélectionner un Kvantum
-dossier de thème</translation>
+        <translation>Sélectionner un 
+dossier de thème Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -248,7 +249,7 @@ la couleur de surbrillance !</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne dessiner pas d&apos;arrière-plan pour les titres de menu (KDE) ? &lt;/p&gt;&lt;p&gt;Les titres de menu sont comme des séparateurs de menu, mais avec une icône et du texte. &lt;/p&gt;&lt;p&gt;Ceci nécessite une déconnexion pour les menus KDE Plasma. Pour le panneau LXQt, un redémarrage du panneau avec &lt;span style=&quot; font-style:italic;&quot;&gt;les paramètres de la session &lt;/span&gt;est suffisant.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne dessiner pas d&apos;arrière-plan pour les titres de menu (KDE) ? &lt;/p&gt;&lt;p&gt;Les titres de menu sont comme des séparateurs de menu, mais avec un icône et du texte. &lt;/p&gt;&lt;p&gt;Ceci nécessite une déconnexion pour les menus KDE Plasma. Pour le panneau LXQt, un redémarrage du panneau avec &lt;span style=&quot; font-style:italic;&quot;&gt;les paramètres de la session &lt;/span&gt;est suffisant.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -398,12 +399,13 @@ Divers → Respecter le DE actuel si possible</translation>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>S'il est coché, le contenu d'un formulaire sera
+centré horizontalement autant que possible.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositions de formulaire centrées</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
@@ -424,12 +426,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Faites défiler certains widgets déroulants en les feuilletant
+avec le bouton gauche de la souris.
+
+Avertissement : le défilement cinétique de Qt a des bugs et peut
+interférer sérieusement avec d'autres emplois.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="718"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Défilement cinétique</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
@@ -689,12 +695,12 @@ certaines applications la définissent elles-mêmes.</translation>
         <location filename="../../kvantummanager.ui" line="1796"/>
         <location filename="../../kvantummanager.ui" line="1806"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Comment activer les éléments d'affichage ?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportement du clic :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1919"/>
@@ -714,12 +720,13 @@ Par défaut, les branches des arbres ont des indicateurs mais pas de ligne.</tra
         <location filename="../../kvantummanager.ui" line="1908"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ils peuvent ressembler à des rectangles en pointillés
+sur les boutons focalisés et autres widgets.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les rectangles de focus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2081"/>
@@ -773,7 +780,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Pas d&apos;icône pour les boutons qui ont du texte ?
 
-Par défaut, la plupart des boutons poussoirs ont une icône.
+Par défaut, la plupart des boutons poussoirs ont un icône.
 
 Si ceci est désactivé, voir :
 Divers → Respecter le DE actuel si possible</translation>
@@ -788,7 +795,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Aucune icône pour les éléments de menu ?
 
-Par défaut, certains d&apos;entre eux peuvent avoir une icône.
+Par défaut, certains d&apos;entre eux peuvent avoir un icône.
 
 Si ceci est désactivé, voir :
 Divers → Respecter le DE actuel si possible</translation>
@@ -1261,7 +1268,7 @@ entre les séparateurs de la barre d’outils.</translation>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>Dessiner la zone de liste modifiable complète en tant que
-modification de ligne avec une flèche (et une icône, si elle existe) ?</translation>
+modification de ligne avec une flèche (et un icône, si elle existe) ?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1666"/>
@@ -1489,12 +1496,12 @@ ou mettre à jour son aperçu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="103"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Un seul clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Double clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="107"/>
