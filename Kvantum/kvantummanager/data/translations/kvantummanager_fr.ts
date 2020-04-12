@@ -425,7 +425,7 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation">Faites défiler certains widgets déroulants en les feuilletant
+        <translation>Faites défiler certains widgets déroulants en les feuilletant
 avec le bouton gauche de la souris.
 
 Avertissement : le défilement cinétique de Qt a des bugs et peut
