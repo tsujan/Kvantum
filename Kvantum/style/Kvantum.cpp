@@ -8708,6 +8708,16 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
               {
+                /* this is only a workaround for a new bug in Audacious 4.0 but is
+                   harmless in other places because the whole stylesheet is checked */
+                if (child->styleSheet() == QStringLiteral("font-weight: bold"))
+                {
+                  child->setStyleSheet(QString());
+                  QFont f = widget->font();
+                  f.setWeight(QFont::Bold);
+                  child->setFont(f);
+                }
+
                 QPalette palette = child->palette();
                 if (!qobject_cast<QToolButton*>(child) // flat toolbuttons are dealt with at CE_ToolButtonLabel
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child)) // handled below

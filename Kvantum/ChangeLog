@@ -1,7 +1,8 @@
-V0.15.2
+V0.15.3
 ---------
  * A better calculation of the part of a progressbar's internal text which is inside the indicator (this also fixes a small offset in KisSliderSpinBox).
  * Don't draw a progressbar's busy indicator if it's wider than the progressbar (although that never happens in practice).
+ * Added a workaround for a new but small bug in the toolbar timer of Audacious 4.0.
 
 V0.15.2
 ---------
