@@ -398,12 +398,13 @@ Divers → Respecter le DE actuel si possible</translation>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>S'il est coché, le contenu d'un formulaire sera
+centré horizontalement autant que possible.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositions de formulaire centrées</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
@@ -424,12 +425,16 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation">Faites défiler certains widgets déroulants en les feuilletant
+avec le bouton gauche de la souris.
+
+Avertissement : le défilement cinétique de Qt a des bugs et peut
+interférer sérieusement avec d'autres emplois.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="718"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Défilement cinétique</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
@@ -689,12 +694,12 @@ certaines applications la définissent elles-mêmes.</translation>
         <location filename="../../kvantummanager.ui" line="1796"/>
         <location filename="../../kvantummanager.ui" line="1806"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Comment activer les éléments d'affichage ?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comportement du clic :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1919"/>
@@ -714,12 +719,13 @@ Par défaut, les branches des arbres ont des indicateurs mais pas de ligne.</tra
         <location filename="../../kvantummanager.ui" line="1908"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ils peuvent ressembler à des rectangles en pointillés
+sur les boutons focalisés et autres widgets.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer les rectangles de focus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2081"/>
@@ -1489,12 +1495,12 @@ ou mettre à jour son aperçu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="103"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Simple clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Double clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="107"/>
