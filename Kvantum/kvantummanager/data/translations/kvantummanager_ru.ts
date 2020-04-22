@@ -14,7 +14,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation>Менеджер Kvantum</translation>
+        <translation>Диспетчер Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; поставляется с набором уже предустановленных тем, но можно устанавливать и внешние темы. Выберите папку с темой, затем нажмите на кнопку ниже, для её установки в вашей системе.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; поставляется с набором предустановленных тем, но позволяет устанавливать и внешние темы. Выберите папку с темой и нажмите кнопку ниже для её установки в системе.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -37,8 +37,8 @@ theme folder</source>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>Добавьте эту тему в список тем, которые Kvantum
-будет использовать в дополнение к своим темам.</translation>
+        <translation>Добавить эту тему к списку тем, доступных
+для использования в программе Kvantum.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -53,7 +53,7 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Выбрать тему:</translation>
+        <translation>Выбор темы:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
@@ -66,10 +66,10 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Заставь Квантум использовать эту тему!
+        <translation>Использовать тему в Kvantum.
 
-Неактивная кнопка означает, что тема 
-уже используется.</translation>
+Неактивная кнопка означает, что
+данная тема уже используется.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
@@ -79,21 +79,21 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Настройки активной темы</translation>
+        <translation>Настройка активной темы</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>Возврат этой темы к
-исходным значениям
+        <translation>Вернуть параметры темы
+к исходным значениям
 (Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Возврат к настройкам по умолчанию!&lt;/p&gt;&lt;p&gt;После щелчка и подтверждения все изменения в конфигурации будут потеряны, но SVG файл может остаться без изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Возврат к значениям параметров по умолчанию.&lt;/p&gt;&lt;p&gt;После щелчка и подтверждения все изменения в конфигурации будут потеряны, но файл SVG останется без изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -109,7 +109,7 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>Сохранить настройки
+        <translation>Сохранить конфигурацию
 (Ctrl+S)</translation>
     </message>
     <message>
@@ -126,19 +126,19 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation>Безопасные настройки</translation>
+        <translation>Безопасные параметры</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>Снятие всех флажков вернёт в настройки
-вкладок к настройкам по умолчанию.</translation>
+        <translation>Снимите все флажки, чтобы вернуться
+к стандартному отображению виджетов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation>Хаки</translation>
+        <translation>Полезные функции</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
@@ -157,7 +157,7 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Объединение боковой панели PCManFM-qt с окружением.
+        <translation>Объединить боковую панель PCManFM-qt с её окружением.
 
 Под LXQt необходимо перезапустить PCManFM-qt или выйти
 из системы и войти в неё снова.</translation>
@@ -179,7 +179,7 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Обьединение окна просмотра PCManFM-qt с окружением.
+        <translation>Обьединить окно просмотра PCManFM-qt с его окружением.
 
 Под LXQt необходимо перезапустить PCManFM-qt или выйти
 из системы и войти в неё снова.</translation>
@@ -197,7 +197,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation>Размывание полупрозрачных окон</translation>
+        <translation>Размытие полупрозрачных окон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
@@ -207,29 +207,29 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation>Не прорисовывать фон KTitles.</translation>
+        <translation>Не показывать фон в KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не прорисовывать фон KTitles?&lt;/p&gt;&lt;p&gt;Ktitles используются некоторыми приложениями KDE для отображения различных разделов в диалоговых окнах настроек.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не показывать фон в KTitles?&lt;/p&gt;&lt;p&gt;KTitles используются некоторыми приложениями от KDE для отображения различных разделов в диалоговых окнах настройки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation>Прозрачность в KTitle</translation>
+        <translation>Прозрачность в KTitles</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation>Выбранные значки не будут окрашиваться
-в цвет подсветки!</translation>
+        <translation>Не окрашивать выбранные значки
+в цвет подсветки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию выбранные значки окрашиваются в цвет подсветки.&lt;/p&gt;&lt;p&gt;Установка этого флажка устранит оттенок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию выбранные значки окрашиваются в цвет подсветки.&lt;/p&gt;&lt;p&gt;Установка этого флажка выключает окрашивание.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
@@ -240,13 +240,13 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation>Не прорисовывать фон в заголовках меню (KDE).
+        <translation>Не показывать фон в заголовках меню (KDE).
 (Требуется перезапуск Plasma.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не прорисовывать фон в заголовках меню (KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но со значком и текстом. &lt;/p&gt;&lt;p&gt;Для этого необходимо перезапустить KDE Plasma. Для панели LXQt достаточно перезапустить панель в&lt;span style=&quot; font-style:italic;&quot;&gt;&lt;/span&gt; настройках сеанса &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не показывать фон в заголовках меню (KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но со значком и текстом.&lt;/p&gt;&lt;p&gt;Для применения изменений необходим перезапуск KDE Plasma. Для панели LXQt достаточно перезапустить панель с &lt;span style=&quot; font-style:italic;&quot;&gt;параметрами сеанса&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -256,17 +256,17 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation>Стилизовать виджеты наполнения KDE как индикаторы выполнения.</translation>
+        <translation>Отображать объекты класса KCapacityBar в виде индикаторов выполнения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Стилизовать индикаторы наполненности KDE как индикаторы выполнения?&lt;/p&gt;&lt;p&gt;Индикаторы заполненности обычно используются для отображения занятого пространства на дисках и имеют собственный стиль.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отображать объекты класса kcapacityBar в виде индикаторов выполнения?&lt;/p&gt;&lt;p&gt;Объекты класса KCapacityBar обычно используются приложениями KDE для отображения размера томов и имеют собственный стиль.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation>KCapacityBar как индикатор прогресса</translation>
+        <translation>KCapacityBar как индикатор выполнения</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="594"/>
@@ -276,19 +276,18 @@ with the mouse wheel when mouse gestures
 are enabled.</source>
         <translation>Это не полноценное решение,
 но оно позволяет избежать
-надоедливые скачки при скролле,
-которые могут возникать,
-когда жесты мыши активированы.</translation>
+скачков при прокрутке, возникающих
+при включённых жестах мышью.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="600"/>
         <source>Workaround for Qt&apos;s scroll jump bug</source>
-        <translation>Обход бага Qt, который даёт скачки при скролле</translation>
+        <translation>Обходное решение проблемы скачков при прокрутке</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>Окрашивание значков при наведении курсора:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="654"/>
@@ -301,7 +300,7 @@ are enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Respect dark themes</source>
-        <translation>Предпочитать тёмные темы</translation>
+        <translation>Учитывать тёмные темы</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -309,7 +308,8 @@ are enabled.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Полезно при использовании наборов монохромных значков
+и когда </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="680"/>
