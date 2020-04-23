@@ -308,41 +308,43 @@ are enabled.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished">Полезно при использовании наборов монохромных значков
-и когда </translation>
+        <translation>Полезно при использовании монохромных наборов значков
+и когда непрозрачность отключенных значков
+не уменьшается другими способами.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="680"/>
         <location filename="../../kvantummanager.ui" line="695"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Полезно при использовании монохромных наборов значков и когда непрозрачность отключенных значков не уменьшается другими способами.&lt;/p&gt;&lt;p&gt;KDE автоматически уменьшает непрозрачность отключенных значков, поэтому этот параметр скорее будет полезен в других средах рабочего стола.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <source>Opacity of disabled icons:</source>
-        <translation>Непрозрачность неактивных значков:</translation>
+        <translation>Непрозрачность отключенных значков:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation>Всегда показывать уголок для изменения размера
-окна, если доступно.</translation>
+        <translation>Показывать захваты для изменения размера
+диалоговых окон и строк состояния
+как можно дальше.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показывать захваты для изменения размера диалоговых окон и строк состояния как можно дальше?&lt;/p&gt;&lt;p&gt;По умолчанию приложение определяет, показывать ли их, но данная функция может быть полезна для лёгкого изменения размера окон, у которых отсутствуют границы.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Force size grips</source>
-        <translation>Показывать ручку для ресайза</translation>
+        <translation>Показывать захваты для изменения размера</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="733"/>
         <source>LXQt main menu icon size:</source>
-        <translation>Размер иконки главного меню LXQt:</translation>
+        <translation>Размер значков в главном меню LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="748"/>
@@ -356,23 +358,25 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1407"/>
         <location filename="../../kvantummanager.ui" line="1442"/>
         <source> px</source>
-        <translation> пикс</translation>
+        <translation> пикс.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>Композитинг и Общий вид</translation>
+        <translation>Компоновка и общий вид</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="918"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Эффект проявляется только при наличии у окон полупрозрачного
+фона SVG или уменьшении непрозрачности окон (см. ниже).</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Opaque apps:</source>
-        <translation>Приложения без прозрачности:</translation>
+        <translation>Приложения с непрозрачностью:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="768"/>
@@ -381,8 +385,8 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Если активно, меню, всплывающие подсказки и
-окна не смогут иметь прозрачности или тени.
+        <translation>Если флажок установлен, меню, всплывающие подсказки
+и окна не смогут иметь прозрачности или тени.
 
 Если эта функция недоступна, смотрите:
 Разное→Предпочитать настройки текущего DE</translation>
