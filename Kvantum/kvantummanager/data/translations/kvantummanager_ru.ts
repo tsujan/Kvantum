@@ -321,7 +321,7 @@ reduced by other means.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <source>Opacity of disabled icons:</source>
-        <translation>Непрозрачность отключенных значков:</translation>
+        <translation>Непрозрачность отключённых значков:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
@@ -369,9 +369,8 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="918"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translatorcomment>Эффект проявляется только при наличии у окон полупрозрачного
-фона SVG или уменьшении непрозрачности окон (см. ниже).</translatorcomment>
-        <translation></translation>
+        <translation>Эффект проявляется только при наличии у окон полупрозрачного
+фона SVG или уменьшении непрозрачности окон (см. ниже).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
@@ -385,39 +384,40 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Если флажок установлен, меню, всплывающие подсказки
-и окна не смогут иметь прозрачности или тени.
+        <translation>Если флажок установлен, тени и эффекты полупрозрачности
+будут отключены для меню, окон и всплывающих подсказок.
 
-Если эта функция недоступна, смотрите:
-Разное→Предпочитать настройки текущего DE</translation>
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Поскольку &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; не зависит ни от одной среды рабочего стола, сперва необходимо &lt;i&gt;активировать&lt;/i&gt; его с помощью программы интеграции платформы Qt. KDE и LXQt предоставляют простые инструменты для изменения активного модуля стилей Qt. Для других платформ требуется средство настройки Qt.&lt;br/&gt;&lt;br/&gt;В среде KDE следует также выбрать и применить цветовую схему темы, поскольку некоторые приложения от KDE могут использовать цвета напрямую из цветовой схемы KDE.&lt;br/&gt;&lt;br/&gt;Необходимо перезапустить приложение или элемент KDE/LXQt, чтобы применить новую тему.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флажок установлен, содержимое форм
+будет центрироваться по горизонтали.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Центрировать содержимое форм</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation>По умолчанию, скролл происходит
-при нажатии левой кнопки мыши.</translation>
+        <translation>По умолчанию моментальная прокрутка осуществляется
+щелчком левой кнопки мыши по полосе прокрутки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="668"/>
         <source>Scroll jump with middle click</source>
-        <translation>Скроллить по нажатию средней кнопки</translation>
+        <translation>Прокрутка средней кнопкой мыши</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="711"/>
@@ -426,7 +426,12 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Возможность прокручивать виджеты,
+щёлкая их левой кнопкой мыши.
+
+Предупреждение: функция кинетической
+прокрутки Qt работает с ошибками и может
+мешать выполнению других задач.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="718"/>
@@ -442,17 +447,21 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эффект не действует для стиля LXQt.
+
+Значения меньше 16 означают размер значков меню по умолчанию.
+
+Для применения изменений требуется перезапуск среды LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="775"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, меню, всплывающие подсказки и окна не смогут иметь прозрачности или тени.&lt;/p&gt;&lt;p&gt;Если флажок не установлен, прозрачность и тень будут доступны, если они присутствуют в SVG файле темы.&lt;/p&gt;&lt;p&gt;Если функция неактивна, см. Разное→Предпочитать настройки текущего DE.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, тени и эффекты полупрозрачности будут отключены для меню, окон и всплывающих подсказок.&lt;/p&gt;&lt;p&gt;В противном случае тени и эффекты полупрозрачности будут включены, если они присутствуют в SVG-файле темы.&lt;/p&gt;&lt;p&gt;При отключенном параметре смотрите пункт меню: Разное → Учитывать параметры текущей DE (среды рабочего стола)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="778"/>
         <source>Disable composite effects</source>
-        <translation>Отключить эффекты композитинга</translation>
+        <translation>Отключить эффекты компоновки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="787"/>
@@ -462,12 +471,12 @@ support the blur effect (but the KDE blur effect
 can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation>Требуется эффект контраста KDE с Qt ≥ 5.11
-и применяется только к полупрозрачным окнам,
-поддерживающим эффект размывания (эффект
-размывания в KDE можно отключить).
+        <translation>Эффект контраста KDE необходим для Qt версии 5.11
+и новее и применяется только к полупрозрачным окнам,
+поддерживающим размытие (данный эффект
+в KDE можно отключить).
 
-Значение 1,00 означает отсутствие изменений.</translation>
+Значение 1,00 соответствует отсутствию изменений.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="795"/>
@@ -495,15 +504,17 @@ A value of 1.00 means no change.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation>Требуется эффект размывание KDE, поддержка графической картой,
-и полупрозрачные элементы меню/подсказки SVG.
+        <translation>Необходим включённый эффект размытия KDE,
+поддерживающая его видеокарта и наличие
+SVG-элементов полупрозрачности меню/подсказок.
 
-Автоматически проверяется, включено ли размывание окна.</translation>
+Флажок устанавливается автоматически,
+если включено размытие окон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Blurring for menus and tooltips</source>
-        <translation>Размывание меню и подсказок</translation>
+        <translation>Размытие меню и подсказок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="905"/>
@@ -511,20 +522,20 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation>Не прорисовать тени под меню и подсказками.
+        <translation>Не отображать тени меню и всплывающих подсказок.
 
-Это может быть полезно если DE прорисовывает
-тени под меню и всплывающими подсказками.</translation>
+Это может быть полезно для сред рабочего стола,
+отображающих тени меню и всплывающих подсказок.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
         <source>Shadowless menus and tooltips</source>
-        <translation>Убрать тени под меню и подсказками</translation>
+        <translation>Отключить тени меню и подсказок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
         <source>Translucent windows</source>
-        <translation>Прозрачность окон</translation>
+        <translation>Полупрозрачные окна</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
