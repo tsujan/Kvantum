@@ -5344,9 +5344,9 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
             }
+            int iconSpace = 0;
             if (opt->icon.isNull() || (hspec_.iconless_menu && !txt.isEmpty()))
             {
-              int iconSpace = 0;
               if (((opt->maxIconWidth
                     /* combobox always announces the existence of an icon,
                        so we don't care about aligning its menu texts */
@@ -5395,21 +5395,24 @@ void Style::drawControl(QStyle::ControlElement element,
                 }
               }
               QSize iconSize = QSize(smallIconSize,smallIconSize);
-              QRect r = option->rect.adjusted(rtl ? 0 : checkSpace,
+              bool isInactive(status.contains("-inactive"));
+              QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
+              if (px.isNull()) // with a non-null icon
+                iconSpace = smallIconSize + lspec.tispace;
+              QRect r = option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                               0,
-                                              rtl ? -checkSpace : 0,
+                                              rtl ? -iconSpace-checkSpace : 0,
                                               0);
               if (txt.isEmpty()) // textless menuitem, as in Kdenlive's play button menu
                 r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
                                 iconSize,labelRect(r,fspec,lspec));
-              bool isInactive(status.contains("-inactive"));
               renderLabel(option,painter,r,
                           fspec,lspec,
                           Qt::AlignLeft | talign,
                           txt,QPalette::Text,
                           state,
                           isInactive,
-                          getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
+                          px,
                           iconSize);
             }
             painter->restore();
