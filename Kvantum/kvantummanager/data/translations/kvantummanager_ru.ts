@@ -535,7 +535,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
         <source>Translucent windows</source>
-        <translation>Полупрозрачные окна</translation>
+        <translation>Полупрозрачность окон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
@@ -545,8 +545,8 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation>Уменьшение непрозрачности окна
-при включённой прозрачности.
+        <translation>Уменьшение непрозрачности окон при
+включённой функции прозрачности.
 
 Для работы этого параметра
 полупрозрачный фон SVG НЕ
@@ -555,7 +555,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
         <source>Reduce window opacity by</source>
-        <translation>Уменьшить непрозрачность окна на</translation>
+        <translation>Уменьшить непрозрачность окон на</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1033"/>
@@ -565,41 +565,45 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1071"/>
         <source>Blurring for translucent windows</source>
-        <translation>Размывание полупрозрачных окон</translation>
+        <translation>Размытие полупрозрачных окон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1091"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Анимация плавного перехода длительностью
+200 мс при изменении (как правило, с помощью
+мыши) состояния некоторых виджетов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1095"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анимация плавного перехода длительностью 200 мс при изменении (как правило, с помощью мыши) состояния некоторых виджетов.&lt;/p&gt;&lt;p&gt;Загрузкой процессора можно пренебречь, потому что часто анимируется только один виджет. Результирующий визуальный эффект зависит от текущей темы.&lt;/p&gt;&lt;p&gt;Поддерживаются следующие виджеты: кнопки (включая переключатели и флажки), поля со списком, регуляторы, маркеры ползунков, строки ввода и полосы прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1098"/>
         <source>Animation for state change under mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Анимация изменения состояния под указателем мыши</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1105"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите флажок, чтобы удалить все шаблоны
+размещения диалоговых окон. Снимите флажок,
+чтобы восстановить шаблоны.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1109"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation>Удалить шаблоны окна/диалога</translation>
+        <translation>Удалить шаблоны размещения окон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1116"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Использовать одни и те же цвета и формы для активных
-и неактивных окон, если эта тема различает их?</translation>
+и неактивных окон, если данная тема их разделяет.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1120"/>
@@ -609,12 +613,12 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1134"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Временные полосы прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation>Размеры и Задержки</translation>
+        <translation>Размеры и задержки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
@@ -646,8 +650,9 @@ windows if this theme distinguishes between them?</source>
         <location filename="../../kvantummanager.ui" line="1319"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation>Значением по умолчанию является 2 пикселя, но 
-некоторые приложения используют свои значения.</translation>
+        <translation>Значение по умолчанию — 2 пиксела,
+но некоторые приложения используют
+свои значения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1312"/>
@@ -658,13 +663,14 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1336"/>
         <location filename="../../kvantummanager.ui" line="1346"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Значением по умолчанию является 4 пикселя, но 
-некоторые приложения используют свои значения.</translation>
+        <translation>Значение по умолчанию — 4 пиксела,
+но некоторые приложения используют
+свои значения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Layout margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внешние поля:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1362"/>
@@ -672,7 +678,9 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекрытие меню и его подменю по горизонтали.
+
+Значение по умолчанию — 0.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1367"/>
@@ -684,18 +692,19 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1403"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина горизонтальных счётчиков.
+Не распространяется на вертикальные счётчики.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1396"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина счётчиков: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1796"/>
         <location filename="../../kvantummanager.ui" line="1806"/>
         <source>How to activate view items?</source>
-        <translation>Как активировать просмотр элементов?</translation>
+        <translation>Способ активации просмотра элементов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1799"/>
@@ -712,7 +721,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Dialog button layout:</source>
-        <translation>Расположение кнопок диалога:</translation>
+        <translation>Расположение кнопок в окне:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
