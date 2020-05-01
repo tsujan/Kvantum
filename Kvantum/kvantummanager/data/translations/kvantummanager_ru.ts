@@ -716,7 +716,10 @@ some apps set it themeselves.</source>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение линий ветвей деревьев.
+
+По умолчанию у ветвей деревьев имеются
+индикаторы, но отсутствуют линии.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
@@ -728,7 +731,7 @@ By default, tree branches have indicators but no line.</source>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation>Они могут выглядеть как пунктирные прямоугольники
-на сфокусированных кнопках и различных вкладках.</translation>
+на кнопках и различных виджетах с фокусом.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
@@ -740,9 +743,9 @@ on focused buttons and other widgets.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>Использовать активную тему для всех приложений!
+        <translation>Использовать активную тему для всех приложений.
 
-Сохраните, для вступления изменений в силу.</translation>
+Необходимо сохранить изменения для их применения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -755,16 +758,16 @@ only removes user themes.</source>
         <translation>Удалить выбранную тему из всех
 пользовательских путей установки.
 
-Исходные темы останутся доступны
-удалению подлежат только темы
-пользователя.</translation>
+Исходные темы останутся доступны,
+будут удалены только пользовательские
+темы.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="389"/>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation>Объединить вид Dolphin с его окружением?
+        <translation>Объединение вида Dolphin с его окружением.
 
 По умолчанию он имеет базовый фон.</translation>
     </message>
@@ -773,7 +776,11 @@ By default, it has the base background.</source>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не использовать полужирное начертание
+для текста кнопок.
+
+По умолчанию к тексту кнопок применяется
+полужирное начертание.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="456"/>
@@ -783,12 +790,12 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Убрать значки из кнопок с текстом?
+        <translation>Убрать значки из кнопок с текстом.
 
-По умолчанию большинство кнопок имеют значок.
+По умолчанию большинство кнопок имеют значки.
 
-Если эта функция недоступна, смотрите:
-Разное→ Предпочитать настройки текущего DE</translation>
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="485"/>
@@ -798,12 +805,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Убрать значки из элементов меню?
+        <translation>Убрать значки из пунктов меню.
 
-По умолчанию некоторые из них могут иметь значок.
+По умолчанию некоторые из них имеют значки.
 
-Если эта функция недоступна, смотрите:
-Разное→ Предпочитать настройки текущего DE</translation>
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="500"/>
