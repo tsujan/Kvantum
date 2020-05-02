@@ -4,6 +4,7 @@ V0.15.3
  * Don't draw a progressbar's busy indicator if it's wider than the progressbar (although that never happens in practice).
  * Added a workaround for a new but small bug in the toolbar timer of Audacious 4.0.
  * Align a menu-item's text with others' if its icon isn't null but its pixmap is.
+ * Removed Qt4 related stuff with the default installation, at last.
 
 V0.15.2
 ---------

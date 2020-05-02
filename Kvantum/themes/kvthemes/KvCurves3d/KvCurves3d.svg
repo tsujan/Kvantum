@@ -232,7 +232,7 @@
 </g>
 </g>
 </g>
-<rect width="14" x="31" y="-479.5" height="14" style="fill:#1e1e1e;stroke:#969696;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
+<rect width="14" x="31" y="-479.5" rx="3" height="14" style="fill:#1e1e1e;stroke:#969696;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
 <g style="fill-rule:evenodd" id="g142">
 <path style="fill:#d8181b" id="itemview-pressed-top" d="m 377.4872,1003.2621 h 8 v 4 h -8 z "/>
 <path style="fill:#7e0e10" id="itemview-pressed-bottom" d="m 377.4872,1019.262 h 8 v 4 h -8 z "/>
@@ -324,19 +324,17 @@
 <path style="fill:#ad1316;fill-rule:evenodd" id="itemview-toggled-left" d="m 414,1010 h 4 v 8 h -4 z"/>
 <path style="fill:#bf1518;fill-rule:evenodd" id="itemview-toggled-topleft" d="m 418,1004 0,4 -4,0 z "/>
 <path style="fill:#700c0e;fill-rule:evenodd" id="itemview-toggled-bottomleft" d="m 414,1020 4,0 0,4 z "/>
-<g style="color:#000">
-<g id="radio-checked-focused" transform="matrix(1.0666673,0,0,1.0666673,28.666288,-29.5)">
+<g style="color:#000" id="radio-checked-focused" transform="matrix(1.0666673,0,0,1.0666673,28.666288,-29.5)">
 <path style="fill:#1e1e1e;stroke-width:.819" id="path7234" d="m 665.4759,255.0668 a 4.50781,7.29378 0 0 1 -4.5078,7.29379 4.50781,7.29378 0 0 1 -4.50781,-7.29379 4.50781,7.29378 0 0 1 4.50781,-7.29378 4.50781,7.29378 0 0 1 4.5078,7.29378 z" transform="matrix(1.6637806,0,0,1.0282724,-757.20581,150.22177)"/>
 <path style="fill:#ff6a00;stroke-width:1.274" id="path7236" d="m 665.4759,255.0668 a 4.50781,7.29378 0 0 1 -4.5078,7.29379 4.50781,7.29378 0 0 1 -4.50781,-7.29379 4.50781,7.29378 0 0 1 4.50781,-7.29378 4.50781,7.29378 0 0 1 4.5078,7.29378 z" transform="matrix(1.0398623,0,0,0.64266985,-344.81573,248.57618)"/>
 </g>
-<g id="checkbox-tristate-focused" transform="matrix(1.2307692,0,0,1.2307692,-55.23088,-132.4489)">
-<rect width="13" x="332.5" y="-498.021" height="13" style="fill:#1e1e1e" id="rect7317" transform="scale(1,-1)"/>
-<path style="fill:#ff6a00;stroke-width:1.667" id="rect7319" d="m 334.9376,495.5835 h 8.125 v -8.125 z "/>
+<g id="checkbox-tristate-focused">
+<rect width="16" x="354" y="-480.5" rx="3" height="16" style="fill:#1e1e1e" id="rect7317" transform="scale(1,-1)"/>
+<path style="fill:#ff6a00" id="rect7319" d="m 357,477.5 h 10 v -10 z"/>
 </g>
-<g id="checkbox-checked-focused" transform="matrix(1.0666666,0,0,1.0666666,16,-263.5)">
-<rect width="15" x="217.5" y="-697.5" height="15" style="fill:#1e1e1e" id="rect7329" transform="scale(1,-1)"/>
-<path style="fill:#ff6a00" id="rect7331" d="m 220.3125,-694.6875 h 9.375 v 9.375 h -9.375 z" transform="scale(1,-1)"/>
-</g>
+<g id="checkbox-checked-focused">
+<rect width="16" x="248" y="-480.5" rx="3" height="16" style="fill:#1e1e1e" id="rect7329" transform="scale(1,-1)"/>
+<path style="fill:#ff6a00" id="rect7331" d="m 251,477.5 h 10 v -10 h -10 z"/>
 </g>
 <circle cx="102" cy="410" style="fill:#1e1e1e;stroke:#969696;color:#000;stroke-width:2" id="radio-normal" r="7"/>
 <g id="checkbox-checked-normal">
@@ -851,7 +849,7 @@
 </g>
 <g style="fill:#1e1e1e;color:#000;stroke-width:2;stroke:#c86c00">
 <circle cx="150" cy="410" id="radio-focused" r="7"/>
-<rect width="14" x="98" y="-479.5" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
+<rect width="14" x="98" y="-479.5" rx="3" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
 <circle cx="122" cy="892" style="fill:url(#radialGradient5010);fill-rule:evenodd" id="dial-handle" r="7"/>
 <path style="fill:url(#linearGradient8962);fill-rule:evenodd" id="button-focused" d="m 301.25,18.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"/>
