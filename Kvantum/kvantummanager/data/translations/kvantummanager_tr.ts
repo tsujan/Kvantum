@@ -148,7 +148,7 @@ gibi görünmesini istiyorsanız, tüm bu kutuların işaretini kaldırın.</tra
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished">Varsayılan basma düğmeleri için normal yazı tipi</translation>
+        <translation>Varsayılan basma düğmeleri için normal yazı tipi</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
