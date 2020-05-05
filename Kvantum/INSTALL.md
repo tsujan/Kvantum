@@ -11,6 +11,7 @@ Table of contents
      - [Leap](#leap)
      - [Tumbleweed](#tumbleweed)
    - [Red Hat based distributions](#red-hat-based-distributions)
+   - [Solus](#solus)
 - [Compilation](#compilation)
    - [qmake](#with-qmake)
    - [cmake](#with-cmake)
@@ -117,6 +118,14 @@ If you want to compile Kvantum from its source in Red Hat based distributions li
 To install Kvantum directly, execute:
 
     sudo dnf install kvantum
+
+### Solus
+
+To compile Kvantum from source on Solus, you would need the `system.devel` component installed:
+
+* `sudo eopkg install -c system.devel`
+
+There are no pre-built Kvantum eopkg installers avaialble, so proceed to [Compilation](#compilation) to compile Kvantum yourself.
 
 ## Compilation
 
