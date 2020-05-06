@@ -821,7 +821,7 @@ This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
         <translation>По возможности размывать области
-ставших прозрачными окон приложений. 
+ставших прозрачными окон приложений.
 
 Для этого нужен эффект размывания KDE.
 
