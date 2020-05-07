@@ -823,9 +823,9 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
         <translation>По возможности размывать области
 ставших прозрачными окон приложений.
 
-Для этого нужен эффект размывания KDE.
+Необходим включённый эффект размытия KDE.
 
-Konsole, QTerminal и LXQt Panel - в качестве примера.</translation>
+Примерами могут служить Konsole, QTerminal и панель LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="515"/>
@@ -834,9 +834,9 @@ Konsole, QTerminal и LXQt Panel - в качестве примера.</translat
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation>Стилизовать только верхнюю панель инструментов?
+        <translation>Только верхняя панель инструментов будет иметь стиль.
 
-По умолчанию все панели инструментов стилизованы,
+По умолчанию все панели инструментов имеют стили,
 независимо от того, находятся ли они сверху или в
 любом другом положении.</translation>
     </message>
@@ -848,7 +848,12 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation type="unfinished"></translation>
+        <translation>При окрашивании используется цвет выделения.
+
+Актуально в основном для монохромных значков.
+
+Жёстко запрограммированные значки/стили могут
+игнорировать этот параметр.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="607"/>
@@ -856,28 +861,29 @@ Hard-coded icons/styles may not respect this key.</source>
 Kvantum can try to correct their behavior
 as far as possible.</source>
         <translation>В некоторых приложениях тёмные темы
-могут быть не учтены. Kvantum, по возможности,
-может попытаться исправить эту ситуацию.</translation>
+могут быть не учтены. Kvantum попытается
+исправить эту ситуацию.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1066"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation>Требуется эффект размывания KDE,
-поддерживаемая графическая карта
-и полупрозрачный фон окна SVG в теме.</translation>
+        <translation>Необходим включённый эффект размытия KDE,
+поддерживающая его видеокарта и наличие
+полупрозрачности фона SVG окон в теме.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Наличие у временных полос прокрутки
+полупрозрачных желобков при необходимости.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Желобки у временных полос прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
@@ -891,11 +897,12 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Влияет на пункты меню и заголовки.
 
-Значением по умолчанию является 16 пикселей, но
-некоторые приложения используют свои значения.
+Значение по умолчанию — 16 пикселов,
+но некоторые приложения используют
+свои значения.
 
-Если эта функция недоступна, смотрите:
-Разное→ Предпочитать настройки текущего DE</translation>
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1206"/>
@@ -907,11 +914,14 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Значением по умолчанию является 32 пикселя, но
-некоторые приложения используют свои значения.
+        <translation>Влияет на представление значками.
 
-Если эта функция недоступна, смотрите:
-Разное→ Предпочитать настройки текущего DE</translation>
+Значение по умолчанию — 32 пиксела,
+но некоторые приложения используют
+свои значения.
+
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1244"/>
@@ -921,7 +931,7 @@ Miscellaneous → Respect current DE if possible</source>
 The default value is 16 px.</source>
         <translation>Влияет на кнопки, вкладки и списки.
 
-Значение по умолчанию составляет 16 пикс.</translation>
+Значение по умолчанию — 16 пикселов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1274"/>
@@ -933,9 +943,10 @@ some apps set it themselves.
 KDE apps get it from KDE setting.</source>
         <translation>Влияет на панели инструментов.
 
-Значением по умолчанию является 22 пикселя, но
-некоторые приложения используют свои значения.
-Приложения KDE получают их из настроек KDE.</translation>
+Значение по умолчанию — 22 пиксела,
+но некоторые приложения используют
+свои значения. Приложения от KDE
+используют значение из параметров KDE.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1423"/>
@@ -952,7 +963,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1429"/>
         <source>Minimum scrollbar length: </source>
-        <translation>Минимальная длина полосы прокрутки: </translation>
+        <translation>Минимальная длина полос прокрутки: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1474"/>
@@ -967,11 +978,13 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation>Задержка в миллисекундах перед отображением всплывающей подсказки.
+        <translation>Задержка в миллисекундах перед
+отображением всплывающих подсказкок.
 
-Ноль означает, что всплывающие подсказки отображаются мгновенно.
+Значение, равное нулю, соответствует
+мгновенному отображению подсказок.
 
--1 означает поведение Qt по умолчанию.</translation>
+Значение -1 означает поведение Qt по умолчанию.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1782"/>
@@ -980,7 +993,12 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию полосы прокрутки имеют стрелки.
+
+Установка данного флажка приводит к их удалению.
+
+Если флажок снят, смотрите пункт меню:
+Компоновка и общий вид → Временные полосы прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1648"/>
