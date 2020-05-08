@@ -1007,13 +1007,18 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию рамки перетаскиваемых
+панелей инструментов и закреплённых
+виджетов пустые.
+
+Включение данного параметра приводит
+к их заливке цветом выделения.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1702"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флажок установлен, строка меню </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
