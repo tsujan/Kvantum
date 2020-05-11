@@ -2109,7 +2109,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             || (opt && (opt->features & QStyleOptionToolButton::Arrow)
                 && opt->arrowType != Qt::NoArrow)) // a button with just arrows
         {
-          if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
+          if (qobject_cast<QTabBar*>(p)) // tabbar scroll button (-> PM_TabBarScrollButtonWidth)
           {
             bool painterSaved = false;
             painter->fillRect(option->rect, standardPalette().color(status.contains("-inactive")
@@ -9886,7 +9886,6 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           if (qobject_cast<QTabBar*>(p)) // tabbar scroll button
           {
-            dspec.size = qMax(dspec.size, pixelMetric(PM_TabCloseIndicatorWidth));
             const frame_spec fspec1 = getFrameSpec(QStringLiteral("Tab"));
             qreal rDiff = 0;
             if (lspec.top+fspec.top + lspec.bottom+fspec.bottom > 0)
