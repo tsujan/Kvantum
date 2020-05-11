@@ -12506,11 +12506,11 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_TabBarScrollButtonWidth : {
       const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
       const frame_spec fspec2 = getFrameSpec(QStringLiteral("Tab"));
-      return qMax(pixelMetric(PM_TabCloseIndicatorWidth)
+      return qMax(qMin(getIndicatorSpec(QStringLiteral("PanelButtonTool")).size, 12)
                     + qMin(qMax(fspec1.left, fspec1.right),
                            qMax(fspec2.left, fspec2.right))
-                    + 1,
-                  16);
+                    + 2,
+                  12);
     }
 
     case PM_TabCloseIndicatorWidth :

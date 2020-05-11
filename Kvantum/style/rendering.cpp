@@ -290,10 +290,6 @@ void Style::renderFrame(QPainter *painter,
                       && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
   {
     drawExpanded = true; // can change below
-    fspec.left = fspec.leftExpanded;
-    fspec.right = fspec.rightExpanded;
-    fspec.top = fspec.topExpanded;
-    fspec.bottom = fspec.bottomExpanded;
   }
   if (/*!isLibreoffice_ &&*/ drawExpanded
       && (!fspec.isAttached || fspec.VPos == 2) // no vertical attachment
@@ -301,6 +297,12 @@ void Style::renderFrame(QPainter *painter,
           /* when there's enough space for a small frame expansion */
           || fspec.expansion < 2*qMin(h,w)))
   {
+    /* drawExpanded remains true */
+    fspec.left = fspec.leftExpanded;
+    fspec.right = fspec.rightExpanded;
+    fspec.top = fspec.topExpanded;
+    fspec.bottom = fspec.bottomExpanded;
+
     bool topElementMissing(!drawBorder);
     /* find the element that should be drawn (element1) */
     element0 = "border-"+realElement;
