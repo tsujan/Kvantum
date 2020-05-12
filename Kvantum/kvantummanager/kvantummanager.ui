@@ -613,6 +613,18 @@ as far as possible.</string>
                  </property>
                 </widget>
                </item>
+               <item row="7" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxNoninteger">
+                 <property name="toolTip">
+                  <string>You might see annoying artifacts that are caused
+by bugs in Qt's handling of non-integer scaling
+with window translucency or gradient.</string>
+                 </property>
+                 <property name="text">
+                  <string>Disable translucency with non-integer scaling</string>
+                 </property>
+                </widget>
+               </item>
                <item row="8" column="1">
                 <widget class="QCheckBox" name="checkBoxGrip">
                  <property name="toolTip">

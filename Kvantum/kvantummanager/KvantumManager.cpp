@@ -172,6 +172,17 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->whatsthisButton, &QAbstractButton::clicked, this, &KvantumManager::showWhatsThis);
     connect (ui->checkBoxComboMenu, &QAbstractButton::clicked, this, &KvantumManager::comboMenu);
 
+    /* in this special case, show a message box */
+    connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
+        if (checked) return;
+        QMessageBox msgBox (QMessageBox::Warning,
+                            tr ("Kvantum"),
+                            "<center>" + ui->checkBoxNoninteger->toolTip() + "</center>\n",
+                            QMessageBox::Close,
+                            this);
+        msgBox.exec();
+    });
+
     if (auto viewport = ui->toolBox->widget (2)->parentWidget())
         viewport->installEventFilter (this); // see eventFilter()
 
@@ -982,6 +993,7 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxScrollJump->setChecked (defaultSettings.value ("middle_click_scroll").toBool());
     ui->checkBoxKineticScrolling->setChecked (defaultSettings.value ("kinetic_scrolling").toBool());
     ui->checkBoxJumpWorkaround->setChecked (defaultSettings.value ("scroll_jump_workaround").toBool());
+    ui->checkBoxNoninteger->setChecked (!defaultSettings.value ("noninteger_translucency").toBool());
     ui->checkBoxNormalBtn->setChecked (defaultSettings.value ("normal_default_pushbutton").toBool());
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
@@ -1545,6 +1557,7 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxScrollJump->setChecked (themeSettings.value ("middle_click_scroll").toBool());
                 ui->checkBoxKineticScrolling->setChecked (themeSettings.value ("kinetic_scrolling").toBool());
                 ui->checkBoxJumpWorkaround->setChecked (themeSettings.value ("scroll_jump_workaround").toBool());
+                ui->checkBoxNoninteger->setChecked (!themeSettings.value ("noninteger_translucency").toBool());
                 ui->checkBoxNormalBtn->setChecked (themeSettings.value ("normal_default_pushbutton").toBool());
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
@@ -2217,6 +2230,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert ("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));
         hackKeys.insert ("kinetic_scrolling", boolToStr (ui->checkBoxKineticScrolling->isChecked()));
         hackKeys.insert ("scroll_jump_workaround", boolToStr (ui->checkBoxJumpWorkaround->isChecked()));
+        hackKeys.insert ("noninteger_translucency", boolToStr (!ui->checkBoxNoninteger->isChecked()));
         hackKeys.insert ("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
         hackKeys.insert ("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert ("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
@@ -2310,7 +2324,8 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("middle_click_scroll").toBool() != ui->checkBoxScrollJump->isChecked()
             || themeSettings.value ("kinetic_scrolling").toBool() != ui->checkBoxKineticScrolling->isChecked()
             || qMin (qMax (themeSettings.value ("tint_on_mouseover").toInt(), 0), 100) != ui->spinTint->value()
-            || qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(), 0), 100) != ui->spinOpacity->value())
+            || qMin (qMax (themeSettings.value ("disabled_icon_opacity").toInt(), 0), 100) != ui->spinOpacity->value()
+            || themeSettings.value ("noninteger_translucency").toBool() == ui->checkBoxNoninteger->isChecked())
         {
             restyle = true;
         }

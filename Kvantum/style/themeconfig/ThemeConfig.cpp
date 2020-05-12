@@ -47,6 +47,8 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   isX11_ = false;
 #endif
 
+  load(theme);
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
   /* WARNING: Qt has a bug that causes drawing problems with a non-integer
      scale factor. Those problems can be seen with Fusion too but they become
@@ -56,16 +58,19 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   nonIntegerScale = (dpr > static_cast<qreal>(1) && static_cast<qreal>(qRound(dpr)) != dpr);
   if (nonIntegerScale)
   {
-    interior_spec r;
-    default_interior_spec(r);
-    r.hasInterior = false;
-    iSpecs_[KSL("WindowTranslucent")] = iSpecs_[KSL("Window")] = iSpecs_[KSL("Dialog")] = r;
+    nonIntegerScale = !getValue(KSL("Hacks"),KSL("noninteger_translucency")).toBool();
+    if (nonIntegerScale)
+    {
+      interior_spec r;
+      default_interior_spec(r);
+      r.hasInterior = false;
+      iSpecs_[KSL("WindowTranslucent")] = iSpecs_[KSL("Window")] = iSpecs_[KSL("Dialog")] = r;
+    }
   }
 #else
   nonIntegerScale = false;
 #endif
 
-  load(theme);
   default_theme_spec(compositeSpecs_);
 }
 
@@ -1202,6 +1207,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   v = getValue(KSL("Hacks"),KSL("scroll_jump_workaround"));
   r.scroll_jump_workaround = v.toBool();
+
+  v = getValue(KSL("Hacks"),KSL("noninteger_translucency"));
+  r.noninteger_translucency = v.toBool();
 
   return r;
 }
