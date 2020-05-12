@@ -1018,7 +1018,9 @@ the highlight color.</source>
         <location filename="../../kvantummanager.ui" line="1702"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation>Если флажок установлен, строка меню </translation>
+        <translation>Если флажок установлен, строка меню и панель инструментов
+будут отображаться SVG-элементом панели инструментов
+как единое целое, когда они находятся радом друг с другом.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
@@ -1026,7 +1028,10 @@ the toolbar SVG element when they are adjacent to each another.</source>
 
 By default, the contents are shifted by 1px
 both horizontally and vertically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение содержимого кнопок при их нажатии.
+
+По умолчанию содержимое смещается на 1 пиксел
+по горизонтали и по вертикали.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1931"/>
@@ -1036,7 +1041,12 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетаскивание окон из строк меню, основных
+панелей инструментов или других мест,
+а не только из заголовков окон.
+
+Если флажок снят, смотрите пункт меню:
+Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1842"/>
@@ -1045,7 +1055,11 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эффект применяется только тогда,
+когда стиль не задан в приложении.
+
+По умолчанию используется
+параметр «Согласно стилю».</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1607"/>
@@ -1054,7 +1068,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию счётчики выглядят как две кнопки
+со стрелками или символами плюса/минуса.
+
+Установка этого флажка встраивает счётчики
+в строку задания прокрутки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1635"/>
@@ -1062,19 +1080,27 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию счётчики располагаются
+на соседних кнопках.
+
+Установка этого флажка помещает кнопки прокрутки
+друг над другом в строку задания прокрутки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1690"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение всплывающих подсказок полей со списком
+в виде всплывающих меню (как в Gtk).
+
+По умолчанию всплывающие подсказки
+не перекрывают поля со списком.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1738"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation>В Kvantum вкладки отцентрированы по умолчанию.</translation>
+        <translation>По умолчанию в Kvantum используется выравнивание вкладок по центру.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1594"/>
@@ -1082,12 +1108,16 @@ By default, combo popups do not cover the combo box.</source>
 scroll arrows on their top and/or bottom?
 
 By default, all of their menu-items are shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Следует ли обеспечивать возможность
+прокрутки больших меню, снабжая их
+стрелками прокрутки сверху и/или снизу.
+
+По умолчанию показываются все пункты меню.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1487"/>
         <source>Tooltip delay:</source>
-        <translation>Задержка уведомлений:</translation>
+        <translation>Задержка подсказок:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="929"/>
@@ -1097,7 +1127,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделённый запятыми список исполняемых файлов,
+окна которых не должны быть полупрозрачными.
+
+(У некоторых приложений, например, видеопроигрывателей,
+могут наблюдаться проблемы с полупрозрачностью.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1127"/>
@@ -1106,7 +1140,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включение временных полос прокрутки,
+появляющихся при необходимости
+поверх прокручиваемого содержимого.
+Как правило, они не занимают дополнительного
+пространства.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1494"/>
@@ -1116,11 +1154,12 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation>Задержка в миллисекундах для ожидания перед открытием подменю.
-250 по умолчанию.
+        <translation>Задержка в миллисекундах перед открытием подменю.
+Значение по умолчанию: 250.
 
--1 означает отсутствие всплывающего окна (открытие при нажатии),
-в то время как 0 означает отсутствие задержки.</translation>
+Значение -1 означает отсутствие всплывающих окон
+(открытие при нажатии), в то время как значени 0
+означает отсутствие задержки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1501"/>
@@ -1150,17 +1189,23 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение полос прокрутки внутри поля содержимого.
+
+По умолчанию полосы прокрутки отображаются вне поля
+содержимого.
+
+Если флажок снят, смотрите пункт меню:
+Компоновка и общий вид → Временные полосы прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1891"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Полосы прокрутки внутри полей</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1924"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Линии ветвей деревьев</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1621"/>
