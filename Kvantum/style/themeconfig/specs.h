@@ -309,6 +309,9 @@ typedef struct {
   bool kinetic_scrolling;
   /* workaround for annoying Qt5 scroll jumps? */
   bool scroll_jump_workaround;
+  /* enable window translucency and gradient with
+     non-integer scale factors? (disabled because of Qt's bugs) */
+  bool noninteger_translucency;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -573,6 +576,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.centered_forms = false;
   hspec.kinetic_scrolling = false;
   hspec.scroll_jump_workaround = false;
+  hspec.noninteger_translucency = false;
 }
 }
 

@@ -2,6 +2,7 @@ V0.15.4
 ---------
  * Set the scroll indicator size of tabs to that of toolbar buttons.
  * Fixed a rare issue in the frame size of grouped elements.
+ * Added an option to Kvantum Manager for enabling window translucency with non-integer scale factors after showing a warning.
 
 V0.15.3
 ---------
