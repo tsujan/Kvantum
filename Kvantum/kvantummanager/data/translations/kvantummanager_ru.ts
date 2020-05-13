@@ -412,12 +412,15 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Могут наблюдаться раздражающие артефакты,
+вызванные ошибками в обработке Qt нецелочисленного
+масштабирования градиентных или полупрозрачных
+окон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="624"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить прозрачность при нецелочисленном масштабировании</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="676"/>
@@ -1226,44 +1229,52 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию метка помещается
+в разрыв рамки.
+
+Установка этого флажка приводит
+к размещению метки над рамкой,
+в результате чего рамка остаётся целой.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1640"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка группы над рамкой</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1667"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Заливка изменяемых прямоугольников</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию отслеживание мыши
+включено для строк меню.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1692"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию отслеживание мыши для строк меню включено: после щелчка по элементу строки меню и отображения соответствующего меню, меню других элементов будут показаны при наведении на них указателя мыши.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1695"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Отслеживание мыши для строк меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Объединить строку меню и панель инструментов</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флажок установлен, кнопки на панели инструментов
+будут сгруппированными и приподнятыми между
+разделителями панели инструментов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
@@ -1273,12 +1284,12 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1766"/>
         <source>Shift push-button contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение содержимого кнопок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1950"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетаскивание из:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1860"/>
@@ -1288,38 +1299,41 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1784"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если флажок снят, сочетания клавиш никогда
+не будут подчёркиваться.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Подчёркивание сочетаний с помощью Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1626"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Встроенные счётчики</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1674"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображение изменяемых полей со списками
+в виде строки для ввода со стрелкой (и значком,
+если он существует).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1678"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отображение изменяемых полей со списками в виде строки для ввода со стрелкой (и значком, если он существует).&lt;/p&gt;&lt;p&gt;По умолчанию поля со списками содержат строку для ввода, кнопку со стрелкой с одной стороны и ещё одну кнопку со значком с другой стороны.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1681"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Поля со списками в виде строки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальные счётчики</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1589"/>
@@ -1329,43 +1343,44 @@ respect some settings of the current desktop environment.
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
         <translation>Если флажок установлен, Kvantum попытается
-соблюдать некоторые параметры текущей среды
+учесть некоторые параметры текущей среды
 рабочего стола.
 
-Эта функция может отключить некоторые параметры.
-Снимите флажок если вы используете эти параметры!</translation>
+Включение данного параметра может привести
+к отключению некоторых других параметров.
+Снимите его, чтобы предотвратить это.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1599"/>
         <source>Respect current DE if possible</source>
-        <translation>Предпочитать настройки текущего DE</translation>
+        <translation>Учитывать параметры текущей DE (среды рабочего стола)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1707"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Всплывающие подсказки списков в виде меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1753"/>
         <source>Left aligned tabs</source>
-        <translation>Выравнивать вкладки по левому краю</translation>
+        <translation>Выравнивание вкладок по левому краю</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1773"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation>Неактивные вкладки объединятся по умолчанию,
-то есть между ними не будет границы.</translation>
+        <translation>Неактивные вкладки объединяются по умолчанию,
+то есть между ними отсутствует граница.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1777"/>
         <source>Join inactive tabs</source>
-        <translation>Объединить неактивные вкладки</translation>
+        <translation>Объединение неактивных вкладок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1612"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Прокручиваемые меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1596"/>
