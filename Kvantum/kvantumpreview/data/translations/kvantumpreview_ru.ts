@@ -359,17 +359,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
@@ -406,42 +406,42 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Строка 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Строка 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Столбец 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Столбец 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2493"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2501"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2509"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
@@ -478,12 +478,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2738"/>
         <location filename="../../KvantumPreviewBase.ui" line="2786"/>
         <source>Tab 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладка 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
         <source>Page 1 (disabled)</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница 1 (отключена)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2333"/>
@@ -492,12 +492,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2752"/>
         <location filename="../../KvantumPreviewBase.ui" line="2800"/>
         <source>Tab 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладка 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
         <source>Page 2 (disabled)</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница 2 (отключена)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2373"/>
@@ -506,7 +506,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2744"/>
         <location filename="../../KvantumPreviewBase.ui" line="2792"/>
         <source>Page 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2387"/>
@@ -516,7 +516,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2758"/>
         <location filename="../../KvantumPreviewBase.ui" line="2806"/>
         <source>Page 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2411"/>
@@ -561,37 +561,37 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2835"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2839"/>
         <source>&amp;Submenu</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Подменю</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2859"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель инструментов</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2876"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель инструментов 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2895"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выход</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2898"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти из программы</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2901"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2909"/>
