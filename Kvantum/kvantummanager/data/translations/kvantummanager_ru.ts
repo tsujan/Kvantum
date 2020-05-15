@@ -148,7 +148,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation>Обычный шрифт кнопок</translation>
+        <translation>Обычный шрифт для стандартных кнопок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -157,9 +157,9 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Объединить боковую панель PCManFM-qt с её окружением.
+        <translation>Объединение боковой панели PCManFM-qt с её окружением.
 
-Под LXQt необходимо перезапустить PCManFM-qt или выйти
+В среде LXQt необходимо перезапустить PCManFM-qt или выйти
 из системы и войти в неё снова.</translation>
     </message>
     <message>
@@ -179,9 +179,9 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Обьединить окно просмотра PCManFM-qt с его окружением.
+        <translation>Объединение окна просмотра PCManFM-qt с его окружением.
 
-Под LXQt необходимо перезапустить PCManFM-qt или выйти
+В среде LXQt необходимо перезапустить PCManFM-qt или выйти
 из системы и войти в неё снова.</translation>
     </message>
     <message>
@@ -212,7 +212,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не показывать фон в KTitles?&lt;/p&gt;&lt;p&gt;KTitles используются некоторыми приложениями от KDE для отображения различных разделов в диалоговых окнах настройки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отключение отображения фона в KTitles.&lt;/p&gt;&lt;p&gt;KTitles используются некоторыми приложениями от KDE для отображения различных разделов в диалоговых окнах настройки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -240,18 +240,18 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation>Не показывать фон в заголовках меню (KDE).
+        <translation>Не показывать фон в заголовках меню (в среде KDE).
 (Требуется перезапуск Plasma.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не показывать фон в заголовках меню (KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но со значком и текстом.&lt;/p&gt;&lt;p&gt;Для применения изменений необходим перезапуск KDE Plasma. Для панели LXQt достаточно перезапустить панель с &lt;span style=&quot; font-style:italic;&quot;&gt;параметрами сеанса&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выключение отображения фона в заголовках меню (в среде KDE).&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но имеют значки и текст.&lt;/p&gt;&lt;p&gt;Для применения изменений необходим перезапуск KDE Plasma. Для панели LXQt достаточно перезапустить панель с &lt;span style=&quot; font-style:italic;&quot;&gt;параметрами сеанса&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
         <source>Transparent menu title</source>
-        <translation>Прозрачный заголовок меню</translation>
+        <translation>Прозрачные заголовки меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
@@ -261,12 +261,12 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отображать объекты класса kcapacityBar в виде индикаторов выполнения?&lt;/p&gt;&lt;p&gt;Объекты класса KCapacityBar обычно используются приложениями KDE для отображения размера томов и имеют собственный стиль.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Отображение объектов класса KCapacityBar в виде индикаторов выполнения.&lt;/p&gt;&lt;p&gt;Объекты класса KCapacityBar обычно используются приложениями от KDE для отображения размера томов и имеют собственный стиль.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation>KCapacityBar как индикатор выполнения</translation>
+        <translation>KCapacityBar как индикаторы выполнения</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="594"/>
@@ -287,7 +287,7 @@ are enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="652"/>
         <source>Tint label icons on mouseover by </source>
-        <translation>Окрашивание значков при наведении курсора:</translation>
+        <translation>Окрашивание значков при наведении курсора: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="666"/>
@@ -308,15 +308,16 @@ are enabled.</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation>Полезно при использовании монохромных наборов значков
-и когда непрозрачность отключенных значков
-не уменьшается другими способами.</translation>
+        <translation>Полезно при использовании монохромных
+наборов значков и когда непрозрачность
+отключённых значков невозможно уменьшить
+другими способами.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="692"/>
         <location filename="../../kvantummanager.ui" line="707"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Полезно при использовании монохромных наборов значков и когда непрозрачность отключенных значков не уменьшается другими способами.&lt;/p&gt;&lt;p&gt;KDE автоматически уменьшает непрозрачность отключенных значков, поэтому этот параметр скорее будет полезен в других средах рабочего стола.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Полезно при использовании монохромных наборов значков и когда непрозрачность отключённых значков невозможно уменьшить другими способами.&lt;/p&gt;&lt;p&gt;KDE автоматически уменьшает непрозрачность отключённых значков, поэтому этот параметр скорее будет полезен в других средах рабочего стола.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="695"/>
@@ -327,14 +328,14 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="631"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation>Показывать захваты для изменения размера
-диалоговых окон и строк состояния
-как можно дальше.</translation>
+        <translation>По возможности показывать захваты
+для изменения размера диалоговых окон
+и строк состояния.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="635"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показывать захваты для изменения размера диалоговых окон и строк состояния как можно дальше?&lt;/p&gt;&lt;p&gt;По умолчанию приложение определяет, показывать ли их, но данная функция может быть полезна для лёгкого изменения размера окон, у которых отсутствуют границы.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Включение отображения захватов для изменения размера диалоговых окон и строк состояния.&lt;/p&gt;&lt;p&gt;По умолчанию приложение определяет, показывать ли их, но данная функция может быть полезна для лёгкого изменения размера окон, у которых отсутствуют границы.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="638"/>
@@ -388,12 +389,12 @@ Miscellaneous → Respect current DE if possible</source>
 будут отключены для меню, окон и всплывающих подсказок.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Поскольку &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; не зависит ни от одной среды рабочего стола, сперва необходимо &lt;i&gt;активировать&lt;/i&gt; его с помощью программы интеграции платформы Qt. KDE и LXQt предоставляют простые инструменты для изменения активного модуля стилей Qt. Для других платформ требуется средство настройки Qt.&lt;br/&gt;&lt;br/&gt;В среде KDE следует также выбрать и применить цветовую схему темы, поскольку некоторые приложения от KDE могут использовать цвета напрямую из цветовой схемы KDE.&lt;br/&gt;&lt;br/&gt;Необходимо перезапустить приложение или элемент KDE/LXQt, чтобы применить новую тему.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Поскольку программа &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; не зависит ни от одной среды рабочего стола, сперва необходимо &lt;i&gt;активировать&lt;/i&gt; её с помощью программы интеграции платформы Qt. KDE и LXQt предоставляют простые инструменты для изменения активного модуля стилей Qt. Для других платформ требуется средство настройки Qt.&lt;br/&gt;&lt;br/&gt;В среде KDE следует также выбрать и применить цветовую схему темы, поскольку некоторые приложения от KDE могут использовать цвета напрямую из цветовой схемы KDE.&lt;br/&gt;&lt;br/&gt;Необходимо перезапустить приложение или элемент KDE/LXQt, чтобы применить новую тему.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -462,7 +463,7 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation>Эффект не действует для стиля LXQt.
+        <translation>Эффект не действует для главного меню в стиле LXQt.
 
 Значения меньше 16 означают размер значков меню по умолчанию.
 
@@ -471,7 +472,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="787"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, тени и эффекты полупрозрачности будут отключены для меню, окон и всплывающих подсказок.&lt;/p&gt;&lt;p&gt;В противном случае тени и эффекты полупрозрачности будут включены, если они присутствуют в SVG-файле темы.&lt;/p&gt;&lt;p&gt;При отключенном параметре смотрите пункт меню: Разное → Учитывать параметры текущей DE (среды рабочего стола)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, тени и эффекты полупрозрачности будут отключены для меню, окон и всплывающих подсказок.&lt;/p&gt;&lt;p&gt;В противном случае тени и эффекты полупрозрачности будут включены, если они присутствуют в SVG-файле темы.&lt;/p&gt;&lt;p&gt;При отключённом параметре смотрите пункт меню: Разное → Учитывать параметры текущей среды.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
@@ -561,7 +562,7 @@ if window translucency is enabled.
 A translucent SVG background is NOT
 needed for this key to work.</source>
         <translation>Уменьшение непрозрачности окон при
-включённой функции прозрачности.
+включённой прозрачности.
 
 Для работы этого параметра
 полупрозрачный фон SVG НЕ
@@ -593,7 +594,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1107"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анимация плавного перехода длительностью 200 мс при изменении (как правило, с помощью мыши) состояния некоторых виджетов.&lt;/p&gt;&lt;p&gt;Загрузкой процессора можно пренебречь, потому что часто анимируется только один виджет. Результирующий визуальный эффект зависит от текущей темы.&lt;/p&gt;&lt;p&gt;Поддерживаются следующие виджеты: кнопки (включая переключатели и флажки), поля со списком, регуляторы, маркеры ползунков, строки ввода и полосы прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анимация плавного перехода длительностью 200 мс при изменении (как правило, с помощью мыши) состояния некоторых виджетов.&lt;/p&gt;&lt;p&gt;Загрузкой процессора можно пренебречь, потому что часто анимируется только один виджет. Результирующий визуальный эффект зависит от текущей темы.&lt;/p&gt;&lt;p&gt;Поддерживаются следующие виджеты: кнопки (включая переключатели и флажки), поля со списками, регуляторы, маркеры ползунков, строки ввода и полосы прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1110"/>
@@ -707,8 +708,8 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1415"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation>Ширина горизонтальных счётчиков.
-Не распространяется на вертикальные счётчики.</translation>
+        <translation>Ширина горизонтальных счётчиков. Действие эффекта
+не распространяется на вертикальные счётчики.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1408"/>
@@ -745,8 +746,9 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1920"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation>Они могут выглядеть как пунктирные прямоугольники
-на кнопках и различных виджетах с фокусом.</translation>
+        <translation>Прямоугольники фокуса могут выглядеть
+как пунктирные прямоугольники на кнопках
+и различных виджетах с фокусом.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1924"/>
@@ -784,7 +786,7 @@ only removes user themes.</source>
 By default, it has the base background.</source>
         <translation>Объединение вида Dolphin с его окружением.
 
-По умолчанию он имеет базовый фон.</translation>
+По умолчанию установлен базовый фон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="417"/>
@@ -810,7 +812,7 @@ Miscellaneous → Respect current DE if possible</source>
 По умолчанию большинство кнопок имеют значки.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Разное → Учитывать параметры текущей среды.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="485"/>
@@ -825,7 +827,7 @@ Miscellaneous → Respect current DE if possible</source>
 По умолчанию некоторые из них имеют значки.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Разное → Учитывать параметры текущей среды.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="500"/>
@@ -910,14 +912,15 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Влияет на пункты меню и заголовки.
+        <translation>Эффект применяется к пунктам меню
+и заголовкам.
 
 Значение по умолчанию — 16 пикселов,
 но некоторые приложения используют
 свои значения.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Разное → Учитывать параметры текущей среды.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1218"/>
@@ -929,14 +932,14 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Влияет на представление значками.
+        <translation>Эффект влияет на представление значками.
 
 Значение по умолчанию — 32 пиксела,
 но некоторые приложения используют
 свои значения.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Разное → Учитывать параметры текущей среды.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1256"/>
@@ -944,7 +947,8 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation>Влияет на кнопки, вкладки и списки.
+        <translation>Эффект применяется к кнопкам,
+вкладкам и спискам.
 
 Значение по умолчанию — 16 пикселов.</translation>
     </message>
@@ -956,7 +960,7 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation>Влияет на панели инструментов.
+        <translation>Эффект применяется к панели инструментов.
 
 Значение по умолчанию — 22 пиксела,
 но некоторые приложения используют
@@ -1060,8 +1064,8 @@ Miscellaneous → Respect current DE if possible</source>
 панелей инструментов или других мест,
 а не только из заголовков окон.
 
-Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей DE (среды рабочего стола)</translation>
+Если параметр отключён, смотрите пункт меню:
+Разное → Учитывать параметры текущей среды.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1854"/>
@@ -1074,7 +1078,7 @@ Default is &quot;Follow Style&quot;.</source>
 когда стиль не задан в приложении.
 
 По умолчанию используется
-параметр «Согласно стилю».</translation>
+значение «Согласно стилю».</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1619"/>
@@ -1123,8 +1127,8 @@ By default, combo popups do not cover the combo box.</source>
 scroll arrows on their top and/or bottom?
 
 By default, all of their menu-items are shown.</source>
-        <translation>Следует ли обеспечивать возможность
-прокрутки больших меню, снабжая их
+        <translation>Включение возможности прокрутки
+больших меню путём снабжения их
 стрелками прокрутки сверху и/или снизу.
 
 По умолчанию показываются все пункты меню.</translation>
@@ -1173,7 +1177,7 @@ while 0 means no delay.</source>
 Значение по умолчанию: 250.
 
 Значение -1 означает отсутствие всплывающих окон
-(открытие при нажатии), в то время как значени 0
+(открытие при нажатии), в то время как значение 0
 означает отсутствие задержки.</translation>
     </message>
     <message>
@@ -1229,8 +1233,8 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation>По умолчанию метка помещается
-в разрыв рамки.
+        <translation>По умолчанию метка находится
+в разрыве рамки.
 
 Установка этого флажка приводит
 к размещению метки над рамкой,
@@ -1273,13 +1277,13 @@ for menubars by default.</source>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>Если флажок установлен, кнопки на панели инструментов
-будут сгруппированными и приподнятыми между
+будут сгруппированными и приподнятыми над
 разделителями панели инструментов.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
         <source>Group toolbar buttons</source>
-        <translation>Сгруппировать кнопки на панели инструментов</translation>
+        <translation>Группировать кнопки на панели инструментов</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1766"/>
@@ -1294,7 +1298,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1860"/>
         <source>Toolbutton style:</source>
-        <translation>Стиль кнопки:</translation>
+        <translation>Стиль кнопок:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1784"/>
@@ -1353,7 +1357,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1599"/>
         <source>Respect current DE if possible</source>
-        <translation>Учитывать параметры текущей DE (среды рабочего стола)</translation>
+        <translation>Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1707"/>
@@ -1385,7 +1389,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1596"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, Kvantum попытается учесть некоторые параметры среды рабочего стола, если это KDE, Unity, Gnome или Pantheon.&lt;/p&gt;&lt;p&gt;В среде KDE Kvantum считывает параметры KDE для маленьких и больших значков, а также параметры одиночных или двойных щелчков мышью.&lt;/p&gt;&lt;p&gt;В средах Unity, Gnome и Pantheon программа удаляет значки из меню и кнопок (даже если изменены соответствующие ключи в dconf) и отключает полупрозрачность окон.&lt;/p&gt;&lt;p&gt;Включение данного параметра может привести к отключению некоторых других параметров. Выключите его, чтобы предотвратить это.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, Kvantum попытается учесть некоторые параметры среды рабочего стола, если это среда KDE, Unity, Gnome или Pantheon.&lt;/p&gt;&lt;p&gt;В среде KDE Kvantum считывает параметры KDE для маленьких и больших значков, а также параметры одиночных или двойных щелчков мышью.&lt;/p&gt;&lt;p&gt;В средах Unity, Gnome и Pantheon программа удаляет значки из меню и кнопок (даже если изменены соответствующие ключи в dconf) и отключает полупрозрачность окон.&lt;/p&gt;&lt;p&gt;Включение данного параметра может привести к отключению некоторых других параметров. Выключите его, чтобы предотвратить это.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1725"/>
@@ -1445,7 +1449,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2108"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Сохранить текущий список приложений с соответствующими им темами.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Сохранение текущего списка приложений с соответствующими им темами.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2135"/>
@@ -1643,7 +1647,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="524"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation>Имена устанавливаемых тем должны отличаться от имени «По умолчанию».</translation>
+        <translation>Имена устанавливаемых тем должны отличаться от имени «Default».</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="525"/>
@@ -1762,12 +1766,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2689"/>
         <source>Restored the rool default settings of %1</source>
-        <translation>Восстановлены корневые параметры %1</translation>
+        <translation>Восстановлены корневые параметры темы %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2690"/>
         <source>the default theme</source>
-        <translation>темы по умолчанию</translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2826"/>
