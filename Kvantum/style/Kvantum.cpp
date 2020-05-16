@@ -10404,6 +10404,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
            KisSliderSpinBox never fulfills this condition. */
         bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt->frame));
         QRect editRect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
+        QLineEdit *le = nullptr;
 
         /* The field is automatically drawn as lineedit at PE_PanelLineEdit.
            So, we don't duplicate it here but there are some exceptions. */
@@ -10413,12 +10414,23 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
+        else if (widget)
+        {
+          le = widget->findChild<QLineEdit*>();
+          if (le && le->width() < editRect.width())
+          { // rarely happens, because of bugs in how Qt draws spin boxes
+            o.rect = editRect;
+            painter->save();
+            painter->setClipRegion(QRegion(editRect).subtracted(QRegion(le->rect())));
+            drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
+            painter->restore();
+          }
+        }
 
         if ((verticalIndicators || tspec_.inline_spin_indicators)
             && opt->subControls & SC_SpinBoxUp)
         {
           QString leGroup;
-          QLineEdit *le = widget->findChild<QLineEdit*>();
           if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
                || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
               && getStylableToolbarContainer(le, true)
@@ -13288,7 +13300,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
         else
         {
-          /* This is a for some apps (like Kdenlive with its
+          /* This is for some apps (like Kdenlive with its
              TimecodeDisplay) that subclass only QAbstractSpinBox. */
           if (tspec_.vertical_spin_indicators || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
             s.rwidth() = sb->minimumWidth();
@@ -15217,7 +15229,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           QString maxTxt = spinMaxText(sb);
           if (!maxTxt.isEmpty()
               /* some codes may wrongly add a special text
-                only when the value is minimum */
+                 only when the value is minimum */
               && maxTxt != sb->specialValueText())
           {
             maxTxt += QLatin1Char(' ');
