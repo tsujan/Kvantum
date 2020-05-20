@@ -85,7 +85,7 @@ progress.indicator.text.color=white
 blur_translucent=true
 transparent_dolphin_view=true
 transparent_ktitle_label=true
-transparent_menutitle=false
+transparent_menutitle=true
 kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_menu=false
@@ -474,3 +474,4 @@ frame.expansion=0
 [Window]
 interior=true
 interior.element=window
+min_height=16font

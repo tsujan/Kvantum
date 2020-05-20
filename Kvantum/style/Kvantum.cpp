@@ -11230,7 +11230,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         bool rtl(option->direction == Qt::RightToLeft);
 
         /*******************
-          Grrove and Slider
+          Groove and Slider
         ********************/
         if (opt->subControls & SC_ScrollBarSlider)
         {
