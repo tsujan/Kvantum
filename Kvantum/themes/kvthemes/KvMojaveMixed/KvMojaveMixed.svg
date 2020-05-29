@@ -894,7 +894,7 @@
 <use width="100%" height="100%" xlink:href="#slider-focus-topleft" id="slider-focus-bottomleft" transform="matrix(1,0,0,-1,0,561.5)"/>
 <rect width="14.5" x="190.75" y="-236.25" rx="2" height="14.5" style="opacity:.55;fill:none;stroke:#232323;color:#000;stroke-width:1.5" id="menu-checkbox-normal" transform="scale(1,-1)"/>
 <path style="opacity:.45;fill:none;stroke:#000;color:#000;stroke-width:1.5" id="menu-radio-normal" d="M 38.25,229 A 7.25,7.25 0 0 1 31,236.25 7.25,7.25 0 0 1 23.75,229 7.25,7.25 0 0 1 31,221.75 7.25,7.25 0 0 1 38.25,229 Z"/>
-<path style="opacity:.6;fill:none;stroke:#fff;color:#000;stroke-width:1.5" id="menu-radio-focused" d="M 58.25,229 A 7.25,7.25 0 0 1 51,236.25 7.25,7.25 0 0 1 43.75,229 7.25,7.25 0 0 1 51,221.75 7.25,7.25 0 0 1 58.25,229 Z"/>
+<path style="opacity:.8;fill:none;stroke:#fff;color:#000;stroke-width:1.5" id="menu-radio-focused" d="M 58.25,229 A 7.25,7.25 0 0 1 51,236.25 7.25,7.25 0 0 1 43.75,229 7.25,7.25 0 0 1 51,221.75 7.25,7.25 0 0 1 58.25,229 Z"/>
 <use width="100%" height="100%" xlink:href="#menu-checkbox-normal" id="item-checkbox-normal" transform="translate(36)"/>
 <rect width="14.5" x="244.75" y="-236.25" rx="2" height="14.5" style="opacity:.8;fill:none;stroke:#fff;color:#000;stroke-width:1.5" id="item-checkbox-focused" transform="scale(1,-1)"/>
 <g id="checkbox-normal" transform="matrix(1.125,0,0,1.125,-23.75,-27)">
@@ -932,24 +932,27 @@
 <circle cx="71" cy="229" style="fill:#fff;color:#000;stroke-width:1.2" r="3"/>
 </g>
 <g id="menu-radio-checked-focused">
-<path style="opacity:.6;fill:none;stroke:#fff;color:#000;stroke-width:1.5" d="M 98.25,229 A 7.25,7.25 0 0 1 91,236.25 7.25,7.25 0 0 1 83.75,229 7.25,7.25 0 0 1 91,221.75 7.25,7.25 0 0 1 98.25,229 Z"/>
+<path style="opacity:.8;fill:none;stroke:#fff;color:#000;stroke-width:1.5" d="M 98.25,229 A 7.25,7.25 0 0 1 91,236.25 7.25,7.25 0 0 1 83.75,229 7.25,7.25 0 0 1 91,221.75 7.25,7.25 0 0 1 98.25,229 Z"/>
 <circle cx="91" cy="229" style="fill:#fff;color:#000;stroke-width:1.2" r="3"/>
 </g>
 <g id="menu-checkbox-checked-normal">
 <path style="fill:#3273c3;color:#000" d="m 192.75,255 c -1.51053,0 -2.75,-1.23947 -2.75,-2.75 v -10.5 c 0,-1.51053 1.23947,-2.75 2.75,-2.75 h 10.5 c 1.51053,0 2.75,1.23947 2.75,2.75 v 10.5 c 0,1.51053 -1.23947,2.75 -2.75,2.75 z"/>
-<path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2" d="m 194,247.7305 2.3466,2.5 5.6534,-6.9697"/>
+<path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2" id="path1884" d="m 194,247.7305 2.3466,2.5 5.6534,-6.9697"/>
 </g>
 <g id="menu-checkbox-checked-focused">
-<path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2" d="m 212,247.7305 2.3466,2.5 5.6534,-6.9697"/>
-<rect width="14.5" x="208.75" y="-254.25" rx="2" height="14.5" style="opacity:.6;fill:none;stroke:#fff;color:#000;stroke-width:1.5" transform="scale(1,-1)"/>
+<use width="100%" height="100%" xlink:href="#item-checkbox-focused" transform="translate(-36.5,17.75)"/>
+<use width="100%" height="100%" xlink:href="#path1884" transform="translate(17.5,-0.25)"/>
 </g>
 <use width="100%" height="100%" xlink:href="#menu-checkbox-checked-normal" id="item-checkbox-checked-normal" transform="translate(36)"/>
-<use width="100%" height="100%" xlink:href="#item-checkbox-checked-normal" id="item-checkbox-checked-focused" transform="translate(18)"/>
+<use width="100%" height="100%" xlink:href="#menu-checkbox-checked-focused" id="item-checkbox-checked-focused" transform="translate(37)"/>
 <g id="item-checkbox-tristate-normal">
 <path style="fill:#3273c3;color:#000" d="m 264.75,255 c -1.51053,0 -2.75,-1.23947 -2.75,-2.75 v -10.5 c 0,-1.51053 1.23947,-2.75 2.75,-2.75 h 10.5 c 1.51053,0 2.75,1.23947 2.75,2.75 v 10.5 c 0,1.51053 -1.23947,2.75 -2.75,2.75 z"/>
-<path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2" d="m 266.014,247 h 7.97191"/>
+<path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2" id="use1968" d="m 266.014,247 h 7.97191"/>
 </g>
-<use width="100%" height="100%" xlink:href="#item-checkbox-tristate-normal" id="item-checkbox-tristate-focused" transform="translate(18)"/>
+<g id="item-checkbox-tristate-focused">
+<use width="100%" height="100%" xlink:href="#item-checkbox-focused" transform="translate(36,18)"/>
+<use width="100%" height="100%" xlink:href="#use1968" transform="translate(18)"/>
+</g>
 <g id="checkbox-focused" transform="matrix(1.125,0,0,1.125,-1.75,-27)">
 <path style="fill:#afafaf;isolation:auto;solid-opacity:1;mix-blend-mode:normal;color-interpolation-filters:linearRGB;vector-effect:none;color-interpolation:sRGB;color:#000;solid-color:#000000" d="M 194.03311,216 C 191.77778,216 190,214.22222 190,211.96689 v -7.93311 C 190,201.77778 191.77778,200 194.03378,200 h 7.93244 c 2.256,0 4.03378,1.77778 4.03378,4.03378 v 7.93311 C 206,214.22222 204.22222,216 201.96622,216 Z"/>
 <path style="fill:#fafafa;color:#000" d="m 193.9224,215.1111 h 8.04378 c 1.81156,0 3.14489,-1.33333 3.14489,-3.03355 v -8.1549 c 0,-1.5 -1.33333,-3.03377 -3.14489,-3.03377 h -8.04355 c -1.92267,0 -3.03378,1.33333 -3.03378,3.03377 v 8.1549 c 0,1.70022 1.33333,3.03355 3.03355,3.03355 z "/>
