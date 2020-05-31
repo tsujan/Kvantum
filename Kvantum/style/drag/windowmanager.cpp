@@ -537,7 +537,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     QStyleOptionGroupBox opt;
     opt.initFrom (groupBox);
     if (groupBox->isFlat())
-      opt.features |= QStyleOptionFrameV2::Flat;
+      opt.features |= QStyleOptionFrame::Flat;
     opt.lineWidth = 1;
     opt.midLineWidth = 0;
     opt.text = groupBox->title();

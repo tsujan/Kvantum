@@ -12220,6 +12220,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
 {
   switch (metric) {
+    case PM_ButtonDefaultIndicator :
     case PM_ButtonMargin : return 0;
 
     case PM_ButtonShiftHorizontal :
@@ -13643,8 +13644,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           int cSize = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           s.rwidth() += cSize + pixelMetric(PM_CheckBoxLabelSpacing);
           /* for the height, see if there's really a check/radio button */
-          if (opt->checkType == QStyleOptionMenuItem::Exclusive
-              || opt->checkType == QStyleOptionMenuItem::NonExclusive)
+          if (opt->menuItemType != QStyleOptionMenuItem::Separator // exclude combo menu separators
+              && (opt->checkType == QStyleOptionMenuItem::Exclusive
+                  || opt->checkType == QStyleOptionMenuItem::NonExclusive))
           {
             s.rheight() += (cSize > s.height() ? cSize : 0);
           }
@@ -14642,6 +14644,14 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       }
       return r;
     }*/
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+    case SE_PushButtonBevel: {
+      QRect r = opt->rect;
+      r = visualRect(opt->direction, opt->rect, r);
+      return r;
+    }
+#endif
 
     case SE_PushButtonContents : {
       QRect r = QCommonStyle::subElementRect(element,option,widget);
