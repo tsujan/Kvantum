@@ -14646,7 +14646,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
     }*/
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-    case SE_PushButtonBevel: {
+    case SE_PushButtonBevel : {
       QRect r = option->rect;
       r = visualRect(option->direction, option->rect, r);
       return r;
