@@ -9271,7 +9271,7 @@ void Style::drawControl(QStyle::ControlElement element,
                  widget->testAttribute(Qt::WA_StyleSheetTarget) &&
 #endif
                  !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
-                || (opt->icon.isNull()
+                || (opt->text.size() == 0 && opt->icon.isNull()
                     && widget->palette().color(QPalette::Button) != standardPalette().color(QPalette::Button))))
         { // color button!?
           fspec.expansion = 0;
