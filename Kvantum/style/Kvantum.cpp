@@ -1013,6 +1013,12 @@ void Style::noTranslucency(QObject *o)
   forcedTranslucency_.remove(widget);
 }
 
+void Style::forcePalette(QWidget *widget, const QPalette &p) const
+{
+  widget->setPalette(p);
+  widget->setProperty("_kv_fPalette", true);
+}
+
 int Style::mergedToolbarHeight(const QWidget *menubar) const
 {
   if (!tspec_.merge_menubar_with_toolbar || isPlasma_) return 0;
@@ -1466,7 +1472,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
     {
       palette.setColor(QPalette::Active,QPalette::ButtonText,col);
       palette.setColor(QPalette::Inactive,QPalette::ButtonText,col);
-      b->setPalette(palette);
+      forcePalette(b, palette);
       txtColForced.insert(widget,col);
       connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
     }
@@ -5097,7 +5103,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               QPalette palette = iw->palette();
               palette.setColor(QPalette::Active,QPalette::Text,col);
               palette.setColor(QPalette::Inactive,QPalette::Text,col);
-              iw->setPalette(palette);
+              forcePalette(iw, palette);
             }
           }
         }
@@ -8574,7 +8580,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
 #endif
                   }
-                  child->setPalette(palette);
+                  forcePalette(child, palette);
                 }
               }
 
@@ -8598,7 +8604,7 @@ void Style::drawControl(QStyle::ControlElement element,
                       palette.setColor(QPalette::WindowText, comboTxtCol);
                       palette.setColor(QPalette::Disabled, QPalette::ButtonText, comboDisabledTxtCol);
                       palette.setColor(QPalette::Disabled, QPalette::WindowText, comboDisabledTxtCol);
-                      cb->setPalette(palette);
+                      forcePalette(cb, palette);
                     }
                     else break; // all or nothing
                   }
@@ -8621,7 +8627,7 @@ void Style::drawControl(QStyle::ControlElement element,
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
 #endif
-                    le->setPalette(palette);
+                    forcePalette(le, palette);
                   }
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                   /* if this line-edit is inside a combo, its palette is
@@ -8645,7 +8651,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                  standardPalette().color(QPalette::Inactive,QPalette::WindowText));
                 palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                                  standardPalette().color(QPalette::Disabled,QPalette::WindowText));
-                label->setPalette(palette);
+                forcePalette(label, palette);
               }
             }
 
@@ -8741,7 +8747,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
 #endif
                   }
-                  child->setPalette(palette);
+                  forcePalette(child, palette);
                 }
               }
 
@@ -8765,7 +8771,7 @@ void Style::drawControl(QStyle::ControlElement element,
                       palette.setColor(QPalette::WindowText, comboTxtCol);
                       palette.setColor(QPalette::Disabled,QPalette::ButtonText, comboDisabledTxtCol);
                       palette.setColor(QPalette::Disabled,QPalette::WindowText, comboDisabledTxtCol);
-                      cb->setPalette(palette);
+                      forcePalette(cb, palette);
                     }
                     else break;
                   }
@@ -8788,7 +8794,7 @@ void Style::drawControl(QStyle::ControlElement element,
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
 #endif
-                    le->setPalette(palette);
+                    forcePalette(le, palette);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     /* also correct the color of the symbolic clear icon */
                     if (QAction *clearAction = le->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
@@ -8808,7 +8814,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
                 palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
                 palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
-                label->setPalette(palette);
+                forcePalette(label, palette);
               }
             }
           }
@@ -11051,7 +11057,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     {
                       palette.setColor(QPalette::Active,QPalette::WindowText,col);
                       palette.setColor(QPalette::Inactive,QPalette::WindowText,col);
-                      llist.at(i)->setPalette(palette);
+                      forcePalette(llist.at(i), palette);
                     }
                   }
                 }

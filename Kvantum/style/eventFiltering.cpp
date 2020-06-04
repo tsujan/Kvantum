@@ -860,7 +860,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       palette.setColor(QPalette::Inactive, QPalette::Text, col);
       if (!hasInactiveSelItemCol_)
       {
-        w->setPalette(palette);
+        forcePalette(w, palette);
         break;
       }
       /* set the toggled inactive text color to the toggled active one
@@ -876,7 +876,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         palette.setColor(QPalette::Inactive, QPalette::Highlight,
                          standardPalette().color(QPalette::Active,QPalette::Highlight));
       }
-      w->setPalette(palette);
+      forcePalette(w, palette);
     }
     break;
 
@@ -899,7 +899,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       palette.setColor(QPalette::Inactive, QPalette::Text, col);
       if (!hasInactiveSelItemCol_)
       { // custom text color
-        w->setPalette(palette);
+        forcePalette(w, palette);
         break;
       }
       /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
@@ -912,7 +912,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         palette.setColor(QPalette::Inactive, QPalette::Highlight,
                          standardPalette().color(QPalette::Inactive,QPalette::Highlight));
       }
-      w->setPalette(palette);
+      forcePalette(w, palette);
     }
     break;
 
@@ -1237,7 +1237,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           palette.setColor(QPalette::Inactive, QPalette::Text, col);
           if (!hasInactiveSelItemCol_)
           {
-            w->setPalette(palette);
+            forcePalette(w, palette);
             break;
           }
           col = getFromRGBA(lspec.toggleInactiveColor);
@@ -1259,7 +1259,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           palette.setColor(QPalette::Inactive, QPalette::Text, col);
           if (!hasInactiveSelItemCol_)
           {
-            w->setPalette(palette);
+            forcePalette(w, palette);
             break;
           }
           col = getFromRGBA(lspec.toggleColor);
@@ -1271,7 +1271,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                              standardPalette().color(QPalette::Active,QPalette::Highlight));
           }
         }
-        w->setPalette(palette);
+        forcePalette(w, palette);
       }
       else if (gtkDesktop_
                && (!w->parent() || !qobject_cast<QWidget *>(w->parent())
@@ -1329,7 +1329,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         col.setAlpha(102); // 0.4 * disabledCol.alpha()
         opacifyColor(col);
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
-        w->setPalette(palette);
+        forcePalette(w, palette);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
         /* also correct the color of the symbolic clear icon (-> CE_ToolBar) */
         if (QAction *clearAction = w->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))

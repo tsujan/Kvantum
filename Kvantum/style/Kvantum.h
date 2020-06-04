@@ -392,6 +392,9 @@ class Style : public QCommonStyle {
     void startAnimation(Animation *animation) const;
     void stopAnimation(const QObject *target) const;
 
+    /* Forcing palettes when needed: */
+    void forcePalette(QWidget *widget, const QPalette &p) const;
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();

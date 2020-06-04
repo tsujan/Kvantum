@@ -1,10 +1,11 @@
-V0.15.4
+V0.16.0
 ---------
  * Set the scroll indicator size of tabs to that of toolbar buttons.
  * Fixed a rare issue in the frame size of grouped elements.
  * Added an option to Kvantum Manager for enabling window translucency with non-integer scale factors after showing a warning.
  * A workaround for a rare case of Qt's contradicting QStyle in drawing spin boxes.
  * Fixed the height of combo menu separators.
+ * Reset widget palettes on changing style from and to Kvantum. This fixes several problems with on-the-fly style changes, so that an app restart won't be needed in most cases.
 
 V0.15.3
 ---------

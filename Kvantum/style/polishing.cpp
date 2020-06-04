@@ -113,6 +113,11 @@ void Style::polish(QWidget *widget)
 {
   if (!widget) return;
 
+  /* Reset the palette if the widget doesn't have a separate palette.
+     This will be useful if the style changes to Kvantum in runtime. */
+  if (!widget->testAttribute(Qt::WA_SetPalette))
+    widget->setPalette(QPalette());
+
   // for moving the window containing this widget
   if (itsWindowManager_)
     itsWindowManager_->registerWidget(widget);
@@ -196,7 +201,7 @@ void Style::polish(QWidget *widget)
 #endif
         respectDarkness = false; // we don't want to change its text color again
       }
-      widget->setPalette(palette);
+      forcePalette(widget, palette);
     }
 
     if (qobject_cast<QLineEdit*>(widget))
@@ -213,7 +218,7 @@ void Style::polish(QWidget *widget)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
           palette.setColor(QPalette::PlaceholderText, ptColor);
 #endif
-          widget->setPalette(palette);
+          forcePalette(widget, palette);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
           /* also correct the color of the symbolic clear icon */
           if (QAction *clearAction = widget->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
@@ -238,7 +243,7 @@ void Style::polish(QWidget *widget)
         {
           palette.setColor(QPalette::ButtonText, tColor);
           palette.setColor(QPalette::Disabled,QPalette::ButtonText, disabledCol);
-          widget->setPalette(palette);
+          forcePalette(widget, palette);
         }
       }
     }
@@ -252,7 +257,7 @@ void Style::polish(QWidget *widget)
                      standardPalette().color(QPalette::Inactive,QPalette::WindowText));
     palette.setColor(QPalette::Disabled, QPalette::ButtonText,
                      standardPalette().color(QPalette::Disabled,QPalette::WindowText));
-    widget->setPalette(palette);
+    forcePalette(widget, palette);
     respectDarkness = false;
   }
 
@@ -288,7 +293,7 @@ void Style::polish(QWidget *widget)
                 && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
         {
           polish(palette);
-          widget->setPalette(palette);
+          forcePalette(widget, palette);
         }
       }
     }
@@ -331,7 +336,7 @@ void Style::polish(QWidget *widget)
                 palette.setColor(QPalette::AlternateBase,altBaseCol);
               }
             }
-            widget->setPalette(palette);
+            forcePalette(widget, palette);
           }
         }
         break;
@@ -519,7 +524,7 @@ void Style::polish(QWidget *widget)
                      standardPalette().color(QPalette::Active,QPalette::Base));
     palette.setColor(QPalette::Inactive, widget->backgroundRole(),
                      standardPalette().color(QPalette::Inactive,QPalette::Base));
-    widget->setPalette(palette);
+    forcePalette(widget, palette);
     /* hack Dolphin's view */
     if (hspec_.transparent_dolphin_view && widget->autoFillBackground())
       widget->setAutoFillBackground(false);
@@ -562,14 +567,14 @@ void Style::polish(QWidget *widget)
       altBaseCol = overlayColor(wBaseCol,altBaseCol);
       wp.setColor(QPalette::AlternateBase,altBaseCol);
     }
-    widget->setPalette(wp);
+    forcePalette(widget, wp);
   }
 
   if (widget->inherits("KTitleWidget") && hspec_.transparent_ktitle_label)
   { // -> ktitlewidget.cpp
     /*QPalette palette = widget->palette();
     palette.setColor(QPalette::Base,QColor(Qt::transparent));
-    widget->setPalette(palette);*/
+    forcePalette(widget, palette);*/
     if (QFrame *titleFrame = widget->findChild<QFrame*>())
       titleFrame->setAutoFillBackground(false);
   }
@@ -587,7 +592,7 @@ void Style::polish(QWidget *widget)
   { // needed for combo menu scrollers to have transparent backgrounds
     QPalette palette = widget->palette();
     palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
-    widget->setPalette(palette);
+    forcePalette(widget, palette);
   }
   else if (qobject_cast<QMdiSubWindow*>(widget))
     /* to integrate the corner area, autoFillBackground isn't set
@@ -616,7 +621,7 @@ void Style::polish(QWidget *widget)
           palette.setColor(QPalette::Active,QPalette::Text,col);
           palette.setColor(QPalette::Inactive,QPalette::Text,
                            standardPalette().color(QPalette::Inactive,QPalette::Text));
-          widget->setPalette(palette);
+          forcePalette(widget, palette);
         }
       }
     }
@@ -670,14 +675,14 @@ void Style::polish(QWidget *widget)
 
             QPalette palette = itemView->palette();
             palette.setColor(itemView->backgroundRole(), QColor(Qt::transparent));
-            itemView->setPalette(palette);
+            forcePalette(itemView, palette);
 
             itemView->viewport()->setAutoFillBackground(false);
             if (baseContrast)
             {
               opacifyColor(menuTextColor);
               vPalette.setColor(QPalette::Text, menuTextColor);
-              itemView->viewport()->setPalette(vPalette);
+              forcePalette(itemView->viewport(), vPalette);
             }
           }
           else if (itemView->itemDelegate()->inherits("QComboBoxDelegate")
@@ -703,7 +708,7 @@ void Style::polish(QWidget *widget)
 
               palette.setColor(QPalette::Base, baseCol);
               palette.setColor(QPalette::Window, winCol);
-              itemView->setPalette(palette);
+              forcePalette(itemView, palette);
               QColor vBgCol;
               if (itemView->viewport())
               {
@@ -719,7 +724,7 @@ void Style::polish(QWidget *widget)
                   sb->setAutoFillBackground(true);
                   palette = sb->palette();
                   palette.setColor(sb->backgroundRole(), vBgCol);
-                  sb->setPalette(palette);
+                  forcePalette(sb, palette);
               }
               if (combo->completer())
               {
@@ -729,7 +734,7 @@ void Style::polish(QWidget *widget)
                     palette.setColor(QPalette::Text, standardPalette().color(QPalette::Text));
                     palette.setColor(QPalette::Base, baseCol);
                     palette.setColor(QPalette::Window, winCol);
-                    cv->setPalette(palette);
+                    forcePalette(cv, palette);
                 }
               }
             }
@@ -890,7 +895,7 @@ void Style::polish(QWidget *widget)
               palette.setColor(sb->backgroundRole(), col);
               if (col1.isValid() && col1 != col)
                 palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
-              sb->setPalette(palette);
+              forcePalette(sb, palette);
             }
             if (QScrollBar *sb = sa->verticalScrollBar())
             {
@@ -900,14 +905,14 @@ void Style::polish(QWidget *widget)
               palette.setColor(sb->backgroundRole(), col);
               if (col1.isValid() && col1 != col)
                 palette.setColor(QPalette::Inactive, sb->backgroundRole(), col1);
-              sb->setPalette(palette);
+              forcePalette(sb, palette);
             }
             // FIXME: is this needed?
             palette = widget->palette();
             if (palette.color(vp->backgroundRole()) != col)
             {
               palette.setColor(widget->backgroundRole(), col);
-              widget->setPalette(palette);
+              forcePalette(widget, palette);
             }
           }
         }
@@ -933,7 +938,7 @@ void Style::polish(QWidget *widget)
     QColor shadow = palette.shadow().color();
     shadow.setAlpha(0);
     palette.setColor(QPalette::Shadow, shadow);
-    widget->setPalette(palette);
+    forcePalette(widget, palette);
   }
   else if (QStatusBar *sb = qobject_cast<QStatusBar*>(widget))
   {
@@ -1005,7 +1010,7 @@ void Style::polish(QWidget *widget)
       { // see "Kvantum.cpp" -> setSurfaceFormat() for an explanation
         QPalette palette = widget->palette();
         palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
-        widget->setPalette(palette);
+        forcePalette(widget, palette);
       }
 #endif
 
@@ -1220,6 +1225,18 @@ void Style::unpolish(QApplication *app)
   }
   forcedTranslucency_.clear();
   translucentWidgets_.clear();
+
+  /* Reset all forced palettes.
+     This will be useful if the style changes from Kvantum in runtime. */
+  const auto widgets = app->allWidgets();
+  for (const auto &widget : widgets)
+  {
+    if (widget->property("_kv_fPalette").toBool())
+    {
+      widget->setPalette(QPalette());
+      widget->setProperty("_kv_fPalette", QVariant());
+    }
+  }
 
   if (app && itsShortcutHandler_)
     app->removeEventFilter(itsShortcutHandler_);
