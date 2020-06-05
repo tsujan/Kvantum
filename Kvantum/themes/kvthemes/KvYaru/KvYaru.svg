@@ -521,7 +521,6 @@
 <use width="100%" height="100%" id="scrollbarslider-pressed-right" xlink:href="#scrollbarslider-pressed-left" transform="matrix(-1,0,0,1,586,0)"/>
 <use width="100%" height="100%" id="scrollbarslider-pressed-bottomleft" xlink:href="#scrollbarslider-pressed-topleft" transform="matrix(1,0,0,-1,0,1677)"/>
 <use width="100%" height="100%" id="scrollbarslider-pressed-bottomright" xlink:href="#scrollbarslider-pressed-topleft" transform="rotate(-180,293,838.5)"/>
-<path style="fill-rule:evenodd" id="expand-slider-focus" d="m 20,0 h 5 v 5 h -5 z"/>
 <path style="opacity:0;fill-rule:evenodd" id="group-normal-bottomleft" d="m 326.25,842.5 v -5 h 5 v 5 z"/>
 <path style="opacity:0;fill-rule:evenodd" id="group-normal-bottom" d="m 331.25,842.5 v -5 h 5 v 5 z"/>
 <path style="opacity:0;fill-rule:evenodd" id="group-normal-bottomright" d="m 336.25,842.5 v -5 h 5 v 5 z"/>
@@ -792,18 +791,6 @@
 <path style="fill:#555" d="m 111.6152,818.3809 l -1.7305,1 1.75,3.0312 1.7305,-1 -1.75,-3.0312 z  m 19.7695,0 l -1.75,3.0312 1.7305,1 1.75,-3.0312 -1.7305,-1 z  m -31.3848,18.1191 v 2 h 3.5 v -2 h -3.5 z  m 39.5,0 v 2 h 3.5 v -2 h -3.5 z  m -27.8652,16.0879 l -1.75,3.0312 1.7305,1 1.75,-3.0312 -1.7305,-1 z  m 19.7305,0 l -1.7305,1 1.75,3.0312 1.7305,-1 -1.75,-3.0312 z "/>
 <path style="fill:#5a5a5a" d="m 119.5019,816.0918 l -.498,.0527 .2617,2.4863 .4961,-.0527 -.2598,-2.4863 z  m 3.9961,0 l -.2598,2.4863 .4961,.0527 .2617,-2.4863 -.498,-.0527 z  m -8.4043,.8828 l -.4746,.1543 .7715,2.3789 .4766,-.1543 -.7734,-2.3789 z  m 12.8125,0 l -.7734,2.3789 .4766,.1543 .7715,-2.3789 -.4746,-.1543 z  m -20.6074,4.3809 l -.3711,.334 1.6738,1.8574 .3711,-.334 -1.6738,-1.8574 z  m 28.4023,0 l -1.6738,1.8574 .3711,.334 1.6738,-1.8574 -.3711,-.334 z  m -31.4473,3.3047 l -.2949,.4043 2.0234,1.4707 .293,-.4062 -2.0215,-1.4688 z  m 34.4922,0 l -2.0215,1.4688 .293,.4062 2.0234,-1.4707 -.2949,-.4043 z  m -36.7852,3.8672 l -.2031,.457 2.2832,1.0156 .2031,-.457 -2.2832,-1.0156 z  m 39.0781,0 l -2.2832,1.0156 .2031,.457 2.2832,-1.0156 -.2031,-.457 z  m -40.5176,4.2578 l -.1035,.4902 2.4453,.5195 .1035,-.4902 -2.4453,-.5195 z  m 41.957,0 l -2.4453,.5195 .1035,.4902 2.4453,-.5195 -.1035,-.4902 z  m -39.6152,8.4199 l -2.4453,.5195 .1035,.4902 2.4453,-.5195 -.1035,-.4902 z  m 37.2734,0 l -.1035,.4902 2.4453,.5195 .1035,-.4902 -2.4453,-.5195 z  m -36.0957,3.7949 l -2.2832,1.0156 .2031,.457 2.2832,-1.0156 -.2031,-.457 z  m 34.918,0 l -.2031,.457 2.2832,1.0156 .2031,-.457 -2.2832,-1.0156 z  m -32.9766,3.4648 l -2.0234,1.4707 .2949,.4043 2.0215,-1.4688 -.293,-.4062 z  m 31.0352,0 l -.293,.4062 2.0215,1.4688 .2949,-.4043 -2.0234,-1.4707 z  m -28.416,2.9883 l -1.6738,1.8574 .3711,.334 1.6738,-1.8574 -.3711,-.334 z  m 25.7969,0 l -.3711,.334 1.6738,1.8574 .3711,-.334 -1.6738,-1.8574 z "/>
 </g>
-<g id="slider-focus-left">
-<path style="opacity:.001;fill-rule:evenodd" d="m 3,602 v 16.4063 0.094 h 12 v -16.5 H 3 Z"/>
-<path style="opacity:.5;fill:#e95420;fill-rule:evenodd" d="m 3,602 v 16.4063 0.094 h 6 v -16.5 H 3 Z"/>
-</g>
-<g id="slider-focus-topleft">
-<path style="opacity:.001;fill-rule:evenodd" d="M 15,590 C 8.352,590 3,595.352 3,602 H 15 Z"/>
-<path style="opacity:.5;fill:#e95420;fill-rule:evenodd" d="m 15,590 c -6.648,0 -12,5.352 -12,12 h 6 c 0,-3.25 2.75,-6 6,-6 z"/>
-</g>
-<use width="100%" height="100%" id="slider-focus-right" xlink:href="#slider-focus-left" transform="matrix(-1,0,0,1,30,0)"/>
-<use width="100%" height="100%" id="slider-focus-topright" xlink:href="#slider-focus-topleft" transform="matrix(-1,0,0,1,30,0)"/>
-<use width="100%" height="100%" id="slider-focus-bottomleft" xlink:href="#slider-focus-topleft" transform="matrix(1,0,0,-1,0,1220.5003)"/>
-<use width="100%" height="100%" id="slider-focus-bottomright" xlink:href="#slider-focus-topright" transform="matrix(1,0,0,-1,0,1220.5003)"/>
 <g id="ebutton-focused-left" transform="matrix(0.8,0,0,1,42.2,-36.2516)">
 <path style="fill:#fcfcfc;fill-rule:evenodd" d="M 29.75,81.2514 V 48.7516 H 21 v 32.5 z"/>
 <path style="fill:#c4c4c4;line-height:normal;color:#000" d="m 21,48.7516 v 32.5 h 1.25 v -32.5 z"/>
@@ -1337,9 +1324,17 @@
 <path style="opacity:.3;fill:#e95420;line-height:normal;color:#000" d="M -19.5,56 -28,55 h 8.5 z"/>
 </g>
 <g id="floating-button-focus-topleft">
-<path style="opacity:0;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:round;stroke-width:.802" d="m -55,53 h 3 v 3 h -3 z"/>
-<path style="opacity:.3;fill:#e95420;fill-rule:evenodd;stroke-linejoin:round;stroke-linecap:round;stroke-width:.267" d="m -53,55 h 1 v 1 h -1 z"/>
+<path style="opacity:0" d="m -55,53 h 3 v 3 h -3 z"/>
+<path style="opacity:.3;fill:#e95420" d="m -53,55 h 1 v 1 h -1 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#floating-button-focus-topleft" id="floating-button-focus-topright" transform="matrix(-1,0,0,1,-71.5,0)"/>
 <use width="100%" height="100%" xlink:href="#floating-button-focus-left" id="floating-button-focus-right" transform="matrix(-1,0,0,1,-71.5002,0)"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-top" d="m 310,879 h 10 v 1 h -10 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-bottom" d="m 310,890 h 10 v 1 h -10 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-right" d="m 321,880 v 10 h -1 v -10 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-left" d="m 309,890 v -10 h 1 v 10 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-topleft" d="m 309,879 h 1 v 1 h -1 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-topright" d="m 320,879 h 1 v 1 h -1 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-bottomleft" d="m 309,890 h 1 v 1 h -1 z"/>
+<path style="opacity:.3;fill:#e95420" id="sliderFocus-bottomright" d="m 320,890 h 1 v 1 h -1 z"/>
 </svg>

@@ -341,7 +341,8 @@ frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-focusFrame=true
+focusFrame=false
+focusRectElement=sliderFocus
 
 [SliderCursor]
 inherits=PanelButtonCommand
