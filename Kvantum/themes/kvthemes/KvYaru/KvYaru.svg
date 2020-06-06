@@ -296,7 +296,7 @@
 <use width="100%" height="100%" id="scrollbarslider-focused-bottomleft" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(1,0,0,-1,0,1677)"/>
 <path style="fill:#e95420" id="menubaritem-pressed-bottomleft" d="m 255,680 h 20 v 5 h -20 z"/>
 <path style="fill:#e95420" id="menubaritem-pressed-bottomright" d="m 295,680 h 20 v 5 h -20 z"/>
-<path style="fill:#00000e;fill-rule:evenodd" id="expand-ebutton-normal" d="M 0,0 H 5 V 5 H 0 Z"/>
+<path id="expand-ebutton-normal" d="M 0,0 H 5 V 5 H 0 Z"/>
 <path style="fill-rule:evenodd" id="expand-tbutton-normal" d="m 10,0 h 5 v 5 h -5 z"/>
 <path style="fill-rule:evenodd" id="expand-elineedit-normal" d="m 5,0 h 5 V 5 H 5 Z"/>
 <g id="ebutton-toggled-right" transform="matrix(-0.8,0,0,-1,221.5,93.7516)">
@@ -449,7 +449,8 @@
 <use width="100%" height="100%" id="button-toggled-right" xlink:href="#button-toggled-left" transform="matrix(-1,0,0,1,230.4998,0)"/>
 <use width="100%" height="100%" id="button-toggled-topright" xlink:href="#button-toggled-topleft" transform="matrix(-1,0,0,1,230.4998,0)"/>
 <use width="100%" height="100%" id="button-toggled-bottomright" xlink:href="#button-toggled-bottomleft" transform="matrix(-1,0,0,1,230.4998,0)"/>
-<path style="fill-rule:evenodd" id="expand-ebutton-focus" d="m 15,0 h 5 v 5 h -5 z"/>
+<path id="expand-ebutton-focus" d="m 15,0 h 5 v 5 h -5 z"/>
+<path id="expand-floating-ebutton-focus" d="m 20,0 h 5 v 5 h -5 z"/>
 <rect width="10" x="437" y="117.5" height="10" style="fill-rule:evenodd;fill-opacity:0" id="button-default-indicator"/>
 <path style="fill:#dedede;fill-rule:evenodd" id="menuitem-normal" d="m 195,680 h 4 v 8 h -4 z"/>
 <use width="100%" height="100%" id="lineedit-normal-right" xlink:href="#lineedit-normal-left" transform="matrix(-1,0,0,1,849.5,0)"/>
@@ -465,7 +466,7 @@
 <use width="100%" height="100%" id="button-pressed-right" xlink:href="#button-toggled-left" transform="matrix(-1,0,0,1,185.50027,0)"/>
 <use width="100%" height="100%" id="button-pressed-topright" xlink:href="#button-toggled-topleft" transform="matrix(-1,0,0,1,185.50027,0)"/>
 <use width="100%" height="100%" id="button-pressed-bottomright" xlink:href="#button-toggled-bottomleft" transform="matrix(-1,0,0,1,185.50027,0)"/>
-<path style="fill:#00000e;fill-rule:evenodd" id="expand-espinbox-normal" d="m 25,0 h 5 v 5 h -5 z"/>
+<path id="expand-espinbox-normal" d="m 25,0 h 5 v 5 h -5 z"/>
 <use width="100%" height="100%" id="spinbox-normal-top" xlink:href="#lineedit-normal-top" transform="translate(-203.5,57)"/>
 <use width="100%" height="100%" id="spinbox-normal-right" xlink:href="#lineedit-normal-left" transform="matrix(-1,0,0,1,646,57)"/>
 <use width="100%" height="100%" id="spinbox-normal-topright" xlink:href="#lineedit-normal-topleft" transform="matrix(-1,0,0,1,646,57)"/>
@@ -949,7 +950,7 @@
 <use width="100%" height="100%" style="opacity:.6" id="arrow-down-pressed-inactive" xlink:href="#arrow-up-normal" transform="matrix(1,0,0,-1,-114,391.20022)"/>
 <use width="100%" height="100%" style="opacity:.6" id="arrow-right-pressed-inactive" xlink:href="#arrow-up-normal" transform="rotate(90,-3,144.60011)"/>
 <use width="100%" height="100%" style="opacity:.6" id="arrow-left-pressed-inactive" xlink:href="#arrow-up-normal" transform="rotate(-90,13,230.6)"/>
-<path style="fill:#00000e;fill-rule:evenodd" id="expand-ebutton-default" d="m 0,20 h 5 v 5 H 0 Z"/>
+<path id="expand-ebutton-default" d="m 0,20 h 5 v 5 H 0 Z"/>
 <g style="fill-rule:evenodd" id="tooltip-shadow-top" transform="translate(364.5,-93)">
 <path style="opacity:.3;fill:url(#linearGradient4963)" d="m 17.5005,877 v 3 h 58 v -3 z"/>
 <path style="fill:#151515" d="m 17.5,879 v 3 h 58 v -3 z"/>
@@ -1311,24 +1312,33 @@
 <path style="opacity:0;fill-rule:evenodd" d="m 226,660 h 10 v 10 h -10 z"/>
 <path style="fill:#d4d4d4;fill-rule:evenodd" d="m 226,664.5 h 10 v 1 h -10 z"/>
 </g>
-<g id="ebutton-focus-bottom" transform="matrix(1,0,0,-1,0,57.5)">
-<path style="opacity:0;fill-rule:evenodd" d="m -52,12.5 h 32.4998 v -7 h -32.5 z"/>
-<path style="opacity:.4;fill:#e95420;line-height:normal;color:#000" d="m -20,11.5 h -31.5 v 1 H -20 Z"/>
+<g id="ebutton-focus-bottom">
+<path style="opacity:0" d="m -52,39 h 32.5 v 7 h -32.5 z"/>
+<path style="opacity:.4;fill:#e95420;line-height:normal;color:#000" d="M -20.5,41 H -51 v -1 h 30.5 z"/>
 </g>
-<g id="floating-button-focus-top">
-<path style="opacity:0;fill-rule:evenodd" d="m -52,53 h 32.4998 v 3 h -32.5 z"/>
-<path style="opacity:.3;fill:#e95420;line-height:normal;color:#000" d="M -19.5,56 H -52 v -1 h 32.5 z"/>
+<g id="floating-ebutton-focus-top">
+<path style="opacity:0" d="m -52,49 h 32.5 v 7 h -32.5 z"/>
+<path style="opacity:.2;fill:#e95420;line-height:normal;color:#000" d="M -19.5,54 H -52 v -1 h 32.5 z"/>
 </g>
-<g id="floating-button-focus-left" transform="rotate(-90,-35.75,72.25)">
-<path style="opacity:0;fill-rule:evenodd" d="m -52,53 h 32.4998 v 3 h -32.5 z"/>
-<path style="opacity:.3;fill:#e95420;line-height:normal;color:#000" d="M -19.5,56 -28,55 h 8.5 z"/>
+<g id="floating-ebutton-focus-topleft">
+<path style="opacity:0" d="m -59,49 h 7 v 7 h -7 z"/>
+<path style="opacity:.2;fill:#e95420" d="m -59,53 h 7 v 1 h -6 v 2 h -1 z"/>
 </g>
-<g id="floating-button-focus-topleft">
-<path style="opacity:0" d="m -55,53 h 3 v 3 h -3 z"/>
-<path style="opacity:.3;fill:#e95420" d="m -53,55 h 1 v 1 h -1 z"/>
+<g id="floating-ebutton-focus-left">
+<path style="opacity:0" d="M -59,88.5 V 56 h 7 v 32.5 z"/>
+<path style="opacity:.2;fill:#e95420;line-height:normal;color:#000" d="m -58,55.9998 -2e-4,32.5 H -59 v -32.5 z"/>
 </g>
-<use width="100%" height="100%" xlink:href="#floating-button-focus-topleft" id="floating-button-focus-topright" transform="matrix(-1,0,0,1,-71.5,0)"/>
-<use width="100%" height="100%" xlink:href="#floating-button-focus-left" id="floating-button-focus-right" transform="matrix(-1,0,0,1,-71.5002,0)"/>
+<use width="100%" height="100%" id="floating-ebutton-focus-topright" xlink:href="#floating-ebutton-focus-topleft" transform="matrix(-1,0,0,1,-71.5,0)"/>
+<use width="100%" height="100%" xlink:href="#floating-ebutton-focus-left" id="floating-ebutton-focus-right" transform="matrix(-1,0,0,1,-71.5002,2e-4)"/>
+<g id="floating-ebutton-focus-bottomleft">
+<path style="opacity:0" d="m -59,95.5 h 7 v -7 h -7 z"/>
+<path style="opacity:.2;fill:#e95420" d="m -59,90.5 h 7 v -1 h -6 v -1 h -1 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#floating-ebutton-focus-bottomleft" id="floating-ebutton-focus-bottomright" transform="matrix(-1,0,0,1,-71.5,0)"/>
+<g id="floating-ebutton-focus-bottom">
+<path style="opacity:0" d="m -52,95.5 h 32.5 v -7 h -32.5 z"/>
+<path style="opacity:.2;fill:#e95420;line-height:normal;color:#000" d="M -19.5,89.5 H -52 v 1 h 32.5 z"/>
+</g>
 <path style="opacity:.3;fill:#e95420" id="sliderFocus-top" d="m 310,879 h 10 v 1 h -10 z"/>
 <path style="opacity:.3;fill:#e95420" id="sliderFocus-bottom" d="m 310,890 h 10 v 1 h -10 z"/>
 <path style="opacity:.3;fill:#e95420" id="sliderFocus-right" d="m 321,880 v 10 h -1 v -10 z"/>
