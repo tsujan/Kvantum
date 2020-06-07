@@ -96,7 +96,11 @@ static void setAppFont()
   QString fontName = readDconfSetting("font-name");
   if (!fontName.isEmpty())
   {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+    QStringList parts = fontName.split(' ', Qt::SkipEmptyParts);
+#else
     QStringList parts = fontName.split(' ', QString::SkipEmptyParts);
+#endif
     if (parts.length()>1)
     {
       uint size = parts.takeLast().toUInt();

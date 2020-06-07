@@ -1730,7 +1730,11 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
     {
         editTxt = editTxt.simplified();
         editTxt.remove (" ");
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+        QStringList appList = editTxt.split (",", Qt::SkipEmptyParts);
+#else
         QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
+#endif
         appList.removeDuplicates();
         appThemes_.insert (appTheme, appList);
     }
@@ -2091,12 +2095,9 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
 /*************************/
 void KvantumManager::preview()
 {
-    QString binDir = QApplication::applicationDirPath();
-    QString previewExe = binDir + "/kvantumpreview";
-    previewExe += " -style kvantum";
     process_->terminate();
     process_->waitForFinished();
-    process_->start (previewExe);
+    process_->start ("kvantumpreview", QStringList() << "-style" << "kvantum");
 }
 /*************************/
 /* This either copies the default config to a user theme without config
@@ -2586,7 +2587,11 @@ void KvantumManager::writeAppLists()
         {
             editTxt = editTxt.simplified();
             editTxt.remove (" ");
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+            QStringList appList = editTxt.split (",", Qt::SkipEmptyParts);
+#else
             QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
+#endif
             appList.removeDuplicates();
             appThemes_.insert (appTheme, appList);
         }
@@ -2794,7 +2799,11 @@ void KvantumManager::aboutDialog()
 {
     class AboutDialog : public QDialog {
     public:
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+        explicit AboutDialog (QWidget* parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags()) : QDialog (parent, f) {
+#else
         explicit AboutDialog (QWidget* parent = nullptr, Qt::WindowFlags f = nullptr) : QDialog (parent, f) {
+#endif
             aboutUi.setupUi (this);
             aboutUi.textLabel->setOpenExternalLinks (true);
         }

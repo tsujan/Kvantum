@@ -1461,7 +1461,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="597"/>
         <location filename="../../KvantumManager.cpp" line="751"/>
-        <location filename="../../KvantumManager.cpp" line="2650"/>
+        <location filename="../../KvantumManager.cpp" line="2655"/>
         <source>Confirmation</source>
         <translation>确认</translation>
     </message>
@@ -1668,7 +1668,7 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1311"/>
-        <location filename="../../KvantumManager.cpp" line="2558"/>
+        <location filename="../../KvantumManager.cpp" line="2559"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>这些设置项可以安全的修改。&lt;br&gt;对于其他项，编辑该文件：</translation>
     </message>
@@ -1678,58 +1678,58 @@ or update its preview.</source>
         <translation>无描述信息</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2149"/>
+        <location filename="../../KvantumManager.cpp" line="2150"/>
         <source>A copy of the root config is created.</source>
         <translation>已创建 root 配置副本。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2160"/>
+        <location filename="../../KvantumManager.cpp" line="2161"/>
         <source>A copy was already created.</source>
         <translation>副本已创建。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2544"/>
+        <location filename="../../KvantumManager.cpp" line="2545"/>
         <source>Configuration saved.</source>
         <translation>配置保存成功。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2651"/>
+        <location filename="../../KvantumManager.cpp" line="2656"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>是否要还原该主题的默认（root）设置？</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2654"/>
+        <location filename="../../KvantumManager.cpp" line="2659"/>
         <source>You will lose the changes you might have made.</source>
         <translation>您将可能丢失已修改过的项。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2689"/>
+        <location filename="../../KvantumManager.cpp" line="2694"/>
         <source>Restored the rool default settings of %1</source>
         <translation>已还原为默认设置 %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2690"/>
+        <location filename="../../KvantumManager.cpp" line="2695"/>
         <source>the default theme</source>
         <translation>默认主题</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2826"/>
-        <location filename="../../KvantumManager.cpp" line="2827"/>
+        <location filename="../../KvantumManager.cpp" line="2835"/>
+        <location filename="../../KvantumManager.cpp" line="2836"/>
         <source>About Kvantum Manager</source>
         <translation>关于 Kvantum 管理器</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2826"/>
+        <location filename="../../KvantumManager.cpp" line="2835"/>
         <source>Translators</source>
         <translation>翻译者</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2824"/>
+        <location filename="../../KvantumManager.cpp" line="2833"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>一个用于安装，选择和配置 &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; 主题的工具</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2825"/>
+        <location filename="../../KvantumManager.cpp" line="2834"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>作者：: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1755,8 +1755,8 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="935"/>
-        <location filename="../../KvantumManager.cpp" line="2089"/>
-        <location filename="../../KvantumManager.cpp" line="2553"/>
+        <location filename="../../KvantumManager.cpp" line="2093"/>
+        <location filename="../../KvantumManager.cpp" line="2554"/>
         <source>Active theme:</source>
         <translation>当前主题：</translation>
     </message>
@@ -1764,17 +1764,17 @@ or update its preview.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="123"/>
+        <location filename="../../main.cpp" line="133"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
+        <location filename="../../main.cpp" line="134"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>您的系统尚未安装 Kvantum。</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="135"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation>请先安装 Kvantum 样式插件！</translation>
     </message>

@@ -51,13 +51,23 @@ int main (int argc, char *argv[])
                    "NOTE2: The GUI will be shown in the case of errors.\n"\
                    "NOTE3: Please close the GUI of Kvantum Manager\n"\
                    "       while using command-line options because\n"\
-                   "       it will not be updated automatically!" << endl;
+                   "       it will not be updated automatically!"
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+                << Qt::endl;
+#else
+                << endl;
+#endif
             return 0;
         }
         if (options.at (0) == "--version" || options.at (0) == "-v")
         {
             QTextStream out (stdout);
-            out << name << " " << version <<  endl;
+            out << name << " " << version
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+                << Qt::endl;
+#else
+                << endl;
+#endif
             return 0;
         }
     }

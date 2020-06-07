@@ -6,6 +6,7 @@ V0.16.0
  * A workaround for a rare case of Qt's contradicting QStyle in drawing spin boxes.
  * Fixed the height of combo menu separators.
  * Reset widget palettes on changing style from and to Kvantum. This fixes several problems with on-the-fly style changes, so that an app restart won't be needed in most cases.
+ * Updated the code for Qt 5.15.
 
 V0.15.3
 ---------
