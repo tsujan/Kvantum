@@ -7,6 +7,7 @@ V0.16.0
  * Fixed the height of combo menu separators.
  * Reset widget palettes on changing style from and to Kvantum. This fixes several problems with on-the-fly style changes, so that an app restart won't be needed in most cases.
  * Updated the code for Qt 5.15.
+ * Added a workaround for a regression in Qt 5.15, which results in QStyleOptionTab reporting an incorrect tab position.
 
 V0.15.3
 ---------

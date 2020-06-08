@@ -5198,6 +5198,34 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
   return icnMode;
 }
 
+/* NOTE: This is a workaround for a regression in Qt 5.15, which results in
+         QStyleOptionTab reporting an incorrect tab position. It's used only
+         for checking "QStyleOptionTab::Middle" and "QStyleOptionTab::End". */
+static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+  const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
+  if (tb == nullptr)
+    return opt->position;
+  if (opt->position == QStyleOptionTab::Middle)
+  {
+    int index = tb->tabAt(opt->rect.center());
+    if (index > 0 && index == tb->count() - 1)
+      return  QStyleOptionTab::End;
+  }
+  else if (opt->position == QStyleOptionTab::End)
+  {
+    int index = tb->tabAt(opt->rect.center());
+    if (index > 0 && index < tb->count() - 1)
+      return  QStyleOptionTab::Middle;
+  }
+  return opt->position;
+#else
+  Q_UNUSED(widget);
+  return opt->position;
+#endif
+}
+
 void Style::drawControl(QStyle::ControlElement element,
                         const QStyleOption *option,
                         QPainter *painter,
@@ -6288,7 +6316,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 hPos = -1;
               }
             }
-            else if (opt->position == QStyleOptionTab::Middle)
+            else if (tabPosition(opt, widget) == QStyleOptionTab::Middle)
             {
               fspec.isAttached = true;
               if ((joinedActiveTab && !noActiveTabSep))
@@ -6300,7 +6328,7 @@ void Style::drawControl(QStyle::ControlElement element,
               else
                 hPos = 0;
             }
-            else if (opt->position == QStyleOptionTab::End)
+            else if (tabPosition(opt, widget) == QStyleOptionTab::End)
             {
               if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
@@ -6321,10 +6349,10 @@ void Style::drawControl(QStyle::ControlElement element,
         bool drawSep(joinedActiveTab
                      && opt->position != QStyleOptionTab::OnlyOneTab
                      && (mirroredBottomTab
-                           ? rtl ? opt->position != QStyleOptionTab::End
+                           ? rtl ? tabPosition(opt, widget) != QStyleOptionTab::End
                                  : opt->position != QStyleOptionTab::Beginning
                            : rtl ? opt->position != QStyleOptionTab::Beginning
-                                 : opt->position != QStyleOptionTab::End));
+                                 : tabPosition(opt, widget) != QStyleOptionTab::End));
         QRect sep, sepTop, sepBottom;
         bool isActiveTabSep = ((option->state & State_Selected)
                                || (mirroredBottomTab
@@ -6558,7 +6586,7 @@ void Style::drawControl(QStyle::ControlElement element,
               else
                 R.adjust(r.width()/2,0,0,0);
             }
-            else if (opt->position == QStyleOptionTab::End)
+            else if (tabPosition(opt, widget) == QStyleOptionTab::End)
             {
               if (rtl)
                 R.adjust(r.width()/2,0,0,0);
