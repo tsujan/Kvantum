@@ -5199,27 +5199,48 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
 }
 
 /* NOTE: This is a workaround for a regression in Qt 5.15, which results in
-         QStyleOptionTab reporting an incorrect tab position. It's used only
-         for checking "QStyleOptionTab::Middle" and "QStyleOptionTab::End". */
+         QStyleOptionTab reporting an incorrect tab position.. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
   const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
-  if (tb == nullptr)
+  if (tb == nullptr
+      /* making an exception in the case of a dragged tab */
+      || (opt->position == QStyleOptionTab::OnlyOneTab
+          && opt->selectedPosition == QStyleOptionTab::NotAdjacent))
+  {
     return opt->position;
-  if (opt->position == QStyleOptionTab::Middle)
-  {
-    int index = tb->tabAt(opt->rect.center());
-    if (index > 0 && index == tb->count() - 1)
-      return  QStyleOptionTab::End;
   }
-  else if (opt->position == QStyleOptionTab::End)
+  int index = tb->tabAt(opt->rect.center());
+  if (index < 0 || index >= tb->count())
+    return QStyleOptionTab::OnlyOneTab;
+  bool start(true);
+  bool end(true);
+  for (int i = 0; i < index; ++i)
   {
-    int index = tb->tabAt(opt->rect.center());
-    if (index > 0 && index < tb->count() - 1)
-      return  QStyleOptionTab::Middle;
+    if (tb->isTabVisible(i))
+    {
+      start = false;
+      break;
+    }
   }
-  return opt->position;
+  for (int i = index + 1; i < tb->count(); ++i)
+  {
+    if (tb->isTabVisible(i))
+    {
+      end = false;
+      break;
+    }
+  }
+  if (start)
+  {
+    if (end)
+      return QStyleOptionTab::OnlyOneTab;
+    return QStyleOptionTab::Beginning;
+  }
+  if (end)
+    return QStyleOptionTab::End;
+  return QStyleOptionTab::Middle;
 #else
   Q_UNUSED(widget);
   return opt->position;
@@ -6283,11 +6304,13 @@ void Style::drawControl(QStyle::ControlElement element,
           sepName = "floating-"+sepName;
         }
 
+        const QStyleOptionTab::TabPosition tabPos = tabPosition(opt, widget);
+
         if (joinedActiveTab) // only use normal and toggled states
         {
           if ((option->state & State_On) || (option->state & State_Selected)
                // use toggled separator on both sides of selected tabs if possible
-              || (opt->position != QStyleOptionTab::OnlyOneTab
+              || (tabPos != QStyleOptionTab::OnlyOneTab
                   && (!mirroredBottomTab ? (!rtl ? opt->selectedPosition == QStyleOptionTab::NextIsSelected
                                              : opt->selectedPosition == QStyleOptionTab::PreviousIsSelected)
                       : (!rtl ? opt->selectedPosition == QStyleOptionTab::PreviousIsSelected
@@ -6305,10 +6328,10 @@ void Style::drawControl(QStyle::ControlElement element,
             || status.startsWith("normal") || status.startsWith("focused"))
         {
           if (tspec_.joined_inactive_tabs
-              && opt->position != QStyleOptionTab::OnlyOneTab)
+              && tabPos != QStyleOptionTab::OnlyOneTab)
           {
             int hPos = 2;
-            if (opt->position == QStyleOptionTab::Beginning)
+            if (tabPos == QStyleOptionTab::Beginning)
             {
               if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::NextIsSelected)
               {
@@ -6316,7 +6339,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 hPos = -1;
               }
             }
-            else if (tabPosition(opt, widget) == QStyleOptionTab::Middle)
+            else if (tabPos == QStyleOptionTab::Middle)
             {
               fspec.isAttached = true;
               if ((joinedActiveTab && !noActiveTabSep))
@@ -6328,7 +6351,7 @@ void Style::drawControl(QStyle::ControlElement element,
               else
                 hPos = 0;
             }
-            else if (tabPosition(opt, widget) == QStyleOptionTab::End)
+            else if (tabPos == QStyleOptionTab::End)
             {
               if ((joinedActiveTab && !noActiveTabSep) || opt->selectedPosition != QStyleOptionTab::PreviousIsSelected)
               {
@@ -6347,12 +6370,12 @@ void Style::drawControl(QStyle::ControlElement element,
         }
 
         bool drawSep(joinedActiveTab
-                     && opt->position != QStyleOptionTab::OnlyOneTab
+                     && tabPos != QStyleOptionTab::OnlyOneTab
                      && (mirroredBottomTab
-                           ? rtl ? tabPosition(opt, widget) != QStyleOptionTab::End
-                                 : opt->position != QStyleOptionTab::Beginning
-                           : rtl ? opt->position != QStyleOptionTab::Beginning
-                                 : tabPosition(opt, widget) != QStyleOptionTab::End));
+                           ? rtl ? tabPos != QStyleOptionTab::End
+                                 : tabPos != QStyleOptionTab::Beginning
+                           : rtl ? tabPos != QStyleOptionTab::Beginning
+                                 : tabPos != QStyleOptionTab::End));
         QRect sep, sepTop, sepBottom;
         bool isActiveTabSep = ((option->state & State_Selected)
                                || (mirroredBottomTab
@@ -6530,7 +6553,7 @@ void Style::drawControl(QStyle::ControlElement element,
         /* handle overlapping */
         int overlap = tspec_.active_tab_overlap;
         if (overlap > 0 && (!joinedActiveTab || noActiveTabSep)
-            && opt->position != QStyleOptionTab::OnlyOneTab)
+            && tabPos != QStyleOptionTab::OnlyOneTab)
         {
           if (!status.startsWith("toggled"))
           {
@@ -6579,14 +6602,14 @@ void Style::drawControl(QStyle::ControlElement element,
             fspec1.isAttached = true;
             fspec1.HPos = 0;
             QRect R = r;
-            if (opt->position == QStyleOptionTab::Beginning)
+            if (tabPos == QStyleOptionTab::Beginning)
             {
               if (rtl)
                 R.adjust(0,0,-r.width()/2,0);
               else
                 R.adjust(r.width()/2,0,0,0);
             }
-            else if (tabPosition(opt, widget) == QStyleOptionTab::End)
+            else if (tabPos == QStyleOptionTab::End)
             {
               if (rtl)
                 R.adjust(r.width()/2,0,0,0);
