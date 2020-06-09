@@ -5198,8 +5198,8 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
   return icnMode;
 }
 
-/* NOTE: This is a workaround for a regression in Qt 5.15, which results in
-         QStyleOptionTab reporting an incorrect tab position.. */
+/* NOTE: This is a workaround for a regression in Qt 5.15, which results
+         in QStyleOptionTab reporting an incorrect tab position. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
@@ -5211,7 +5211,13 @@ static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *op
   {
     return opt->position;
   }
-  int index = tb->tabAt(opt->rect.center());
+  int index = -1;
+  /* first check QStyleOptionTabV4 in Qt 5.15 because getting its
+     variable "tabIndex" is faster than calling "QTabBar::tabAt()" */
+  if (const QStyleOptionTabV4 *opt4 = qstyleoption_cast<const QStyleOptionTabV4*>(opt))
+    index = opt4->tabIndex;
+  if (index < 0)
+    index = tb->tabAt(opt->rect.center());
   if (index < 0 || index >= tb->count())
     return QStyleOptionTab::OnlyOneTab;
   bool start(true);
