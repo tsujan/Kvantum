@@ -22,9 +22,9 @@ Now, you can change the values of variables (keys). Please note that deleting a 
 
 There are many sections and variables in the config file. That's intentional: unlike most theme engines, Kvantum is supposed to be able to control virtually all aspects of widgets. Here are the meanings of various sections:
 
-=====================================================
+======================================================================
 Section                                      Meaning
-=====================================================
+======================================================================
 [%General]                                   General info on the theme and
                                              some general variables. ("%" IS
                                              REQUIRED because Qt uses [General]
@@ -183,7 +183,7 @@ Section                                      Meaning
                                              a QDialog.
 
 [DialogTranslucent]                          Like "WindowTranslucent" but for dialogs.
-=====================================================
+======================================================================
 
 
 The following table shows the variables (keys) you could change to configure the current theme -- without necessarily making a new one -- with the default values of some of them. These are the rules for the value inheritance:
@@ -203,9 +203,9 @@ Exception No.2: If colors are omitted or not valid or if a section they could be
 Exception No.3: Any variable related to compositing or hacking and also "frame.expandedElement" will be ignored if omitted.
 
 
-==============================================================
+======================================================================
 Variable                          Value               Meaning
-==============================================================
+======================================================================
 
                        ****************************
                        *** The %General Section ***
@@ -481,7 +481,7 @@ spread_menuitems                  true/false          By default, menu-items are
                                                       cover the left and right frames of the
                                                       menu but not its shadow.
 
-                                                      Also, see "Theme-Making.pdf" ->
+                                                      Also, see "Theme-Making.pdf" →
                                                       Translucency and Shadow for Menus and
                                                       Tooltips
 
@@ -508,7 +508,7 @@ menu_shadow_depth                 Integer             The depth of the shadow me
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
 
-                                                      Also, see "Theme-Making.pdf" ->
+                                                      Also, see "Theme-Making.pdf" →
                                                       Translucency and Shadow for Menus and
                                                       Tooltips
 
@@ -684,7 +684,7 @@ tickless_slider_handle_size       Integer             The size (width and height
                                                       element of such a handle exists in the
                                                       SVG file (with "-tickless" appended to
                                                       its element name; See "Theme-Making.pdf"
-                                                       -> Indicators). Its value is never
+                                                       → Indicators). Its value is never
                                                       greater than "slider_handle_width",
                                                       which is also its default value.
 
@@ -1178,15 +1178,15 @@ min_height                        Integer             Minimum width or height (i
                                                       NOTE: For combo boxes and line-edits, when "+"
                                                       is used with min_width, the horizontal
                                                       text margins are also increased.
-=============================================================
+======================================================================
 
 
 If you want to make your own theme (see the file "Theme-Making"), you'll also need to know the meanings of these variables:
 
 
-=============================================================
-Variable                Value                Meaning
-=============================================================
+======================================================================
+Variable                       Value                 Meaning
+======================================================================
 interior.element               String                The SVG element to be used for
                                                      drawing the interior of a widget.
 
@@ -1201,7 +1201,7 @@ frame.expandedElement          String                The optional SVG element to
 
 indicator.element              String                The SVG element to be used for
                                                      drawing the indicator of a widget.
-=============================================================
+======================================================================
 
 
 Application Themes

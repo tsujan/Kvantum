@@ -1452,4 +1452,8 @@
 <use width="100%" height="100%" xlink:href="#menu-checkbox-normal" id="item-checkbox-focused" transform="translate(24)"/>
 <use width="100%" height="100%" xlink:href="#menu-checkbox-checked-normal" id="item-checkbox-checked-focused" transform="translate(18)"/>
 <path style="paint-order:normal;fill-rule:evenodd" id="expand-itemview-normal" d="m 136,1232 h 5 v 5 h -5 z"/>
+<g id="menuitem-separator">
+<path style="opacity:.25" d="m 206,1130 h 9.6 l 1.5,7 h 8.9 v 1.5 h -8.9 l -1.5,-7 H 206 Z"/>
+<path style="opacity:.15;fill:#fff" d="m 206,1131.5 h 9.6 l 1.5,7 h 8.9 v 1.5 h -8.9 l -1.5,-7 H 206 Z"/>
+</g>
 </svg>
