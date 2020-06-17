@@ -68,9 +68,13 @@ If you want to compile Kvantum from its source, install these packages:
  * `libkf5windowsystem-dev` (required with Qt >= 5.11)
  * `qttools5-dev-tools` (for localization if you need it)
 
-To install Kvantum directly, execute:
+In Ubuntu, you can install Kvantum directly with:
 
-    sudo apt install qt5-style-kvantum
+    sudo add-apt-repository ppa:papirus/papirus
+    sudo apt update
+    sudo apt install qt5-style-kvantum qt5-style-kvantum-themes
+
+Since the PPA splits the package into `qt5-style-kvantum` and `qt5-style-kvantum-themes`, both of them should be installed.
 
 ### Gentoo-based distributions
 
