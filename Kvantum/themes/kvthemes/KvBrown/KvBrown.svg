@@ -1641,6 +1641,6 @@
 <path style="opacity:0" id="toolbar-normal-topright" d="m 285,199 h -5 v 5 h 5 z"/>
 <g id="menuitem-separator">
 <path style="opacity:.25" d="m 206,1130 h 9.6 l 1.5,7 h 8.9 v 1.5 h -8.9 l -1.5,-7 H 206 Z"/>
-<path style="opacity:.15;fill:#fff" d="m 206,1131.5 h 9.6 l 1.5,7 h 8.9 v 1.5 h -8.9 l -1.5,-7 H 206 Z"/>
+<path style="opacity:.14;fill:#fff" d="m 206,1131.5 h 9.6 l 1.5,7 h 8.9 v 1.5 h -8.9 l -1.5,-7 H 206 Z"/>
 </g>
 </svg>
