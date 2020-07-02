@@ -366,8 +366,12 @@ frame=true
 frame.element=menuitem
 interior.element=menuitem
 indicator.element=menuitem
-text.margin.top=2
-text.margin.bottom=2
+frame.expanded.top=1
+frame.expanded.bottom=1
+frame.expanded.left=1
+frame.expanded.right=1
+text.margin.top=1
+text.margin.bottom=1
 text.focus.color=white
 min_height=0
 
