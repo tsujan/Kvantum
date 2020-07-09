@@ -401,24 +401,27 @@ Miscelánea → Respetar el escritorio actual si es posible</translation>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si está marcado, el contenido de un formulario será
+centrado horizontalmente lo más lejos posible.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Diseños centrados en formularios</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es posible que vea artefactos molestos causados por
+errores en el manejo de Qt al utilizar escalado
+no entero y ventanas translucidas o con gradiente.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="624"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilite la translucidez con escalado no entero</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="676"/>
@@ -439,7 +442,11 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplácese por algunos widgets desplazables
+moviéndolos con el botón izquierdo del mouse.
+
+Advertencia: el desplazamiento cinético de Qt tiene
+errores y puede interferir seriamente con otros trabajos.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="730"/>
