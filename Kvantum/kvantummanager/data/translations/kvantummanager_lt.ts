@@ -1721,7 +1721,7 @@ arba atnaujinti jos peržiūrą.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>Atkurti numatytieji %1 šaknies nustatymai</translation>
     </message>
     <message>

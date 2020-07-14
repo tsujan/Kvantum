@@ -1622,7 +1622,7 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation></translation>
     </message>
     <message>

@@ -1717,7 +1717,7 @@ ou mettre à jour son aperçu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>Restauré les paramètres root par défaut de %1</translation>
     </message>
     <message>

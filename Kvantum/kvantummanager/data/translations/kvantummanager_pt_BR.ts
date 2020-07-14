@@ -157,7 +157,7 @@ todos os widgets apareçam como são por padrão.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Mesclar o painel lateral do PCManFM-qt com seus arredores. 
+        <translation>Mesclar o painel lateral do PCManFM-qt com seus arredores.
 
 No LXQt, é necessário sair
 e entrar na sessão ou fechando
@@ -1721,7 +1721,7 @@ ou atualizar sua visualização.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>Restaurado as configurações padrão de root de %1</translation>
     </message>
     <message>

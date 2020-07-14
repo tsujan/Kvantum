@@ -260,8 +260,8 @@ annoying scroll jumps that may happen
 with the mouse wheel when mouse gestures
 are enabled.</source>
         <translation>Dies ist keine vollständige Korrektur,
-verhindert jedoch lästige Bildlaufsprünge, 
-die mit dem Mausrad auftreten können, 
+verhindert jedoch lästige Bildlaufsprünge,
+die mit dem Mausrad auftreten können,
 wenn Mausgesten aktiviert sind.</translation>
     </message>
     <message>
@@ -1536,7 +1536,7 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation></translation>
     </message>
     <message>

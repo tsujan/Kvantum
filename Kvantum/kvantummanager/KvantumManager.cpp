@@ -2691,7 +2691,7 @@ void KvantumManager::restoreDefault()
     /* correct buttons and label */
     tabChanged (2);
 
-    ui->statusBar->showMessage (tr ("Restored the rool default settings of %1")
+    ui->statusBar->showMessage (tr ("Restored the root default settings of %1")
                                    .arg (kvconfigTheme_ == "Default#" ? tr ("the default theme") : _kvconfigTheme_),
                                 10000);
 

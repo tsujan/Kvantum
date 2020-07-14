@@ -310,7 +310,7 @@ käytössä.</translation>
 when the opacity of disabled icons is not
 reduced by other means.</source>
         <translation>Hyödyllinen yksivärisillä kuvakesarjoilla ja
-kun käytöstä poistettujen kuvakkeiden 
+kun käytöstä poistettujen kuvakkeiden
 peittävyys ei ole vähennettävissä muilla tavoilla.</translation>
     </message>
     <message>
@@ -839,7 +839,7 @@ whether they are on the top or at any
 other position.</source>
         <translation>Vain ylempi työkalurivi tulisi muotoilla?
 
-Oletus arvon mukaan kaikki työkalurivit on 
+Oletus arvon mukaan kaikki työkalurivit on
 muotoiltu, ovatpa ne ylhäällä tai missä tahansa
 muussa asennossa.</translation>
     </message>
@@ -1726,8 +1726,8 @@ tai päivitä sen esikatselu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
-        <translation>Palautettiin %1 roolin oletusasetukset</translation>
+        <source>Restored the root default settings of %1</source>
+        <translation>Palautettiin %1 rootin oletusasetukset</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2695"/>

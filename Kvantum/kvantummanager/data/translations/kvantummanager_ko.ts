@@ -514,7 +514,7 @@ A value of 1.00 means no change.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation>KDE 흐림 효과, 이를 지원하는 그래픽 카드 및 
+        <translation>KDE 흐림 효과, 이를 지원하는 그래픽 카드 및
 반투명 메뉴/풍선 도움말 SVG 요소가 필요합니다.
 
 창 흐림이 활성화되어 있는지 자동으로 확인합니다.</translation>
@@ -532,7 +532,7 @@ This may be useful under DEs that give
 shadow to menus and tooltips.</source>
         <translation>메뉴 및 풍선 도움말에 그림자를 그리지 마십시오.
 
-이 기능은 DE에서 메뉴 및 풍선 도움말에 
+이 기능은 DE에서 메뉴 및 풍선 도움말에
 그림자를 제공하는데 유용할 수 있습니다.</translation>
     </message>
     <message>
@@ -556,7 +556,7 @@ needed for this key to work.</source>
         <translation>창 반투명 기능이 활성화된 경우
 창 불투명도가 감소합니다.
 
-이 키가 작동하는데 
+이 키가 작동하는데
 반투명 SVG 배경이 필요하지 않습니다.</translation>
     </message>
     <message>
@@ -578,7 +578,7 @@ needed for this key to work.</source>
         <location filename="../../kvantummanager.ui" line="1103"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation>일부 위젯의 상태가 주로 마우스에 의해 변경될 때 
+        <translation>일부 위젯의 상태가 주로 마우스에 의해 변경될 때
 200ms 페이딩 애니메이션입니다.</translation>
     </message>
     <message>
@@ -607,7 +607,7 @@ Uncheck it if you want those patterns back!</source>
         <location filename="../../kvantummanager.ui" line="1128"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation>이 테마가 구별되는 경우 활성 및 비활성 창에 
+        <translation>이 테마가 구별되는 경우 활성 및 비활성 창에
 동일한 색상과 모양을 사용하시겠습니까?</translation>
     </message>
     <message>
@@ -732,7 +732,7 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1920"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation>초점이 있는 버튼 및 기타 위젯에서 
+        <translation>초점이 있는 버튼 및 기타 위젯에서
 점선 사각형처럼 보일 수 있습니다.</translation>
     </message>
     <message>
@@ -757,11 +757,11 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>선택한 테마를 모든 사용자 
+        <translation>선택한 테마를 모든 사용자
 설치 경로에서 제거합니다.
 
-루트 설치는 존재하는 경우에도 
-계속 사용할 수 있으며, 
+루트 설치는 존재하는 경우에도
+계속 사용할 수 있으며,
 이 버튼은 사용자 테마만 제거합니다.</translation>
     </message>
     <message>
@@ -865,14 +865,14 @@ Kvantum은 가능한 한 그것들의 행동을 바로잡으려고 노력할 수
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation>KDE 흐림 효과, 이를 지원하는 그래픽 카드, 
+        <translation>KDE 흐림 효과, 이를 지원하는 그래픽 카드,
 테마의 반투명 창 SVG 배경이 필요합니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation>필요할 때 일시적인 스크롤 막대에 
+        <translation>필요할 때 일시적인 스크롤 막대에
 반투명 홈이 있어야 합니까?</translation>
     </message>
     <message>
@@ -1031,7 +1031,7 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation>스타일이 코드의 앱에 의해 설정되지 
+        <translation>스타일이 코드의 앱에 의해 설정되지
 않은 경우에만 효과가 있습니다.
 
 기본값은 &quot;스타일 따르기&quot;입니다.</translation>
@@ -1079,7 +1079,7 @@ By default, combo popups do not cover the combo box.</source>
 scroll arrows on their top and/or bottom?
 
 By default, all of their menu-items are shown.</source>
-        <translation>큰 메뉴를 스크롤할 수 있어야 하며 
+        <translation>큰 메뉴를 스크롤할 수 있어야 하며
 상단 및/또는 하단에 스크롤 화살표가 있어야 합니까?
 
 기본적으로 모든 메뉴 항목이 표시됩니다.</translation>
@@ -1097,10 +1097,10 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation>쉼표로 구분된 실행 파일 목록입니다. 
+        <translation>쉼표로 구분된 실행 파일 목록입니다.
 이 목록의 창은 반투명하면 안 됩니다.
 
-(비디오 플레이어와 같은 일부 앱은 
+(비디오 플레이어와 같은 일부 앱은
 반투명성에 문제가 있을 수 있습니다!)</translation>
     </message>
     <message>
@@ -1112,7 +1112,7 @@ their scroll views only when needed.
 They usually take no extra space.</source>
         <translation>스크롤 막대를 일시적으로 만드십시오!
 
-일시적인 스크롤 막대는 필요할 때만 
+일시적인 스크롤 막대는 필요할 때만
 스크롤 보기 위에 표시됩니다.
 그것들은 일반적으로 여분의 공간을 차지하지 않습니다.</translation>
     </message>
@@ -1181,10 +1181,10 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation>기본적으로 레이블은 프레임에 있고 
+        <translation>기본적으로 레이블은 프레임에 있고
 프레임을 포함하도록 잘라냅니다.
 
-이렇게 하면 레이블이 프레임 바로 위에 
+이렇게 하면 레이블이 프레임 바로 위에
 놓이므로 프레임이 잘리지 않습니다.</translation>
     </message>
     <message>
@@ -1265,7 +1265,7 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1674"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation>전체 편집 가능한 콤보 상자를 화살표가 있는 
+        <translation>전체 편집 가능한 콤보 상자를 화살표가 있는
 선 편집(및 아이콘이 있는 경우)으로 그리시겠습니까?</translation>
     </message>
     <message>
@@ -1290,7 +1290,7 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation>이 설정을 사용하도록 설정하고 선택하면 Kvantum은 
+        <translation>이 설정을 사용하도록 설정하고 선택하면 Kvantum은
 현재 데스크톱 환경의 일부 설정을 준수하려고 시도합니다.
 
 이 확인란을 선택하면 일부 옵션이 비활성화될 수 있습니다.
@@ -1315,7 +1315,7 @@ Uncheck it if you want to use those options!</source>
         <location filename="../../kvantummanager.ui" line="1773"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation>비활성 탭은 기본적으로 함께 결합됩니다. 
+        <translation>비활성 탭은 기본적으로 함께 결합됩니다.
 즉, 이들 탭 사이에는 경계가 없습니다.</translation>
     </message>
     <message>
@@ -1340,7 +1340,7 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation>콤보 팝업을 메뉴로 그릴 때, 
+        <translation>콤보 팝업을 메뉴로 그릴 때,
 각 항목 옆에 확인란이 있습니다
 (비록 Kvantum이 라디오 버튼으로 그리지만).
 
@@ -1704,7 +1704,7 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>%1의 루트 기본 설정을 복원했습니다</translation>
     </message>
     <message>

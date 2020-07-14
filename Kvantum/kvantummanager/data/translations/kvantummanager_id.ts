@@ -1628,8 +1628,8 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
-        <translation>Pengaturan %1 baku untuk rool dipulihkan</translation>
+        <source>Restored the root default settings of %1</source>
+        <translation>Pengaturan %1 baku untuk root dipulihkan</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2695"/>

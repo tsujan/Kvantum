@@ -1729,7 +1729,7 @@ o actualizar su vista previa.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>Se ha restaurado la configuración original de %1</translation>
     </message>
     <message>

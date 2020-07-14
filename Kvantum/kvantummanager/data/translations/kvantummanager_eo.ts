@@ -1772,7 +1772,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2694"/>
-        <source>Restored the rool default settings of %1</source>
+        <source>Restored the root default settings of %1</source>
         <translation>La radikaj defaŭltaj agordoj de %1 estas restaŭritaj</translation>
     </message>
     <message>
