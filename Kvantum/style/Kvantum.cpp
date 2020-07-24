@@ -1045,13 +1045,17 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
   if (!tb
       || w->autoFillBackground()
-      || w->findChild<QTabBar*>() // practically not a toolbar (Kaffeine's sidebar)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       || w->testAttribute(Qt::WA_StyleSheetTarget) // not drawn by Kvantum (CE_ToolBar may not be called)
 #endif
       || isPlasma_)
   {
     return false;
+  }
+  if (QTabBar *tabBar = w->findChild<QTabBar*>())
+  {
+    if (tb->isAncestorOf(tabBar))
+      return false; // practically not a toolbar (Kaffeine's sidebar)
   }
   QWidget *p = getParent(w,1);
   if (p != w->window()) return false; // inside a dock

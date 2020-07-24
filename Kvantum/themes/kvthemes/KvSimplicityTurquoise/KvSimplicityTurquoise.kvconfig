@@ -131,7 +131,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=2
 text.margin.right=2
-frame.expansion=10
+frame.expansion=12
 min_width=+2
 
 [PanelButtonTool]
@@ -330,7 +330,7 @@ text.focus.inactive.color=#000000aa
 text.press.inactive.color=#000000aa
 text.toggle.inactive.color=#000000aa
 text.bold=true
-frame.expansion=10
+frame.expansion=12
 
 [ProgressbarContents]
 inherits=PanelButtonCommand
