@@ -66,7 +66,8 @@ with 32px folder icon</source>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation>Defaŭlta prembutono</translation>
+        <translation>Defaŭlta
+prembutono</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
@@ -641,7 +642,7 @@ markbutono</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2940"/>
         <source>Show tabs in the document mode</source>
-        <translation>Montro la foliojn laŭ la dokumenta moduso</translation>
+        <translation>Montru la foliojn laŭ la dokumenta moduso</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
