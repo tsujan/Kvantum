@@ -617,7 +617,8 @@ void Style::polish(QWidget *widget)
     else // in rare cases like KNotes' font combos or Kcalc
     {
       QPalette palette = widget->palette();
-      if (palette.color(QPalette::Base) == standardPalette().color(QPalette::Base))
+      if (palette.color(QPalette::Active, QPalette::Base)
+          == standardPalette().color(QPalette::Active, QPalette::Base))
       {
         QColor col = standardPalette().color(QPalette::Active,QPalette::Text);
         if (col != palette.color(QPalette::Active,QPalette::Text))

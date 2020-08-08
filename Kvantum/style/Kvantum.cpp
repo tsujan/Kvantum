@@ -1594,7 +1594,8 @@ void Style::drawComboLineEdit(const QStyleOption *option,
 
   /* a workaround for bad codes that change line-edit base color */
   bool colored = group == "LineEdit"
-                 && lineedit->palette().color(QPalette::Base) != standardPalette().color(QPalette::Base);
+                 && lineedit->palette().color(QPalette::Base)
+                    != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base);
 
   /*if (isLibreoffice_) // impossible because lineedit != NULL
   {
@@ -3593,7 +3594,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       else if (qobject_cast<const QLineEdit*>(widget))
       {
         colored = !insideSpinBox && group == "LineEdit"
-                  && widget->palette().color(QPalette::Base) != standardPalette().color(QPalette::Base);
+                  && widget->palette().color(QPalette::Base)
+                     != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base);
         if (colored
             || (
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
@@ -9304,7 +9306,7 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           QColor optCol = opt->palette.color(QPalette::Button);
           // KDE Partition Manager
-          if (optCol.isValid() && optCol != standardPalette().color(QPalette::Button))
+          if (optCol.isValid() && optCol != standardPalette().color(opt->palette.currentColorGroup(), QPalette::Button))
             painter->fillRect(opt->rect, optCol);
           else // FIXME why does Qt Designer use CE_PushButtonBevel for its Widget Box headers?
             drawPrimitive(PE_Frame,option,painter,widget);
@@ -9339,7 +9341,8 @@ void Style::drawControl(QStyle::ControlElement element,
 #endif
                  !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
                 || (opt->text.size() == 0 && opt->icon.isNull()
-                    && widget->palette().color(QPalette::Button) != standardPalette().color(QPalette::Button))))
+                    && widget->palette().color(QPalette::Button)
+                       != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Button))))
         { // color button!?
           fspec.expansion = 0;
           renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
@@ -10855,7 +10858,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             /* a workaround for bad codes that change line-edit base color */
             bool colored(editable && leGroup == "LineEdit"
                          && cb->lineEdit()->palette().color(QPalette::Base)
-                            != standardPalette().color(QPalette::Base));
+                            != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(), QPalette::Base));
 
             if (!opt->editable || colored)
             { // when there isn't enough space (-> CE_ComboBoxLabel)
