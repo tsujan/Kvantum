@@ -1,7 +1,7 @@
 V0.16.1
 ---------
  * Consider a toolbar stylable if it contains a tabbar that isn't inside the same window.
- * Be more explicit about the color group when getting colors from the standard panel.
+ * Be more explicit about the color group when getting colors from the standard palette.
 
 V0.16.0
 ---------
