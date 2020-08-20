@@ -122,6 +122,8 @@
 </linearGradient>
 <linearGradient id="linearGradient5020-1">
 <stop offset="0" style="stop-color:#fff"/>
+<stop offset="0.4" style="stop-color:#cfcfcf"/>
+<stop offset="0.6" style="stop-color:#bababa"/>
 <stop offset="1" style="stop-color:#969696"/>
 </linearGradient>
 <linearGradient gradientTransform="translate(55.5,-2)" xlink:href="#linearGradient6250" id="linearGradient5047" y1="92" x1="82.5" y2="116" gradientUnits="userSpaceOnUse" x2="82.5"/>
@@ -203,7 +205,7 @@
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5243" y1="257.88461" x1="2" y2="297.11539" gradientUnits="userSpaceOnUse" x2="2"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5795" y1="33" x1="262.5" y2="-4.5" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5020" id="linearGradient5458" y1="1.5047" x1="255.62624" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7040" y1="3.9953001" x1="254.13708" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7040" y1="3.3703" x1="254.75" y2="-8.0047" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5020" id="linearGradient9686" y1="235.72643" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="7"/>
 <linearGradient gradientTransform="translate(-2.5009003,0.580106)" xlink:href="#linearGradient5020-1" id="linearGradient5141" y1="867.03754" x1="70" y2="799.41992" x2="69.975342" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5042" id="linearGradient5155" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
@@ -216,7 +218,7 @@
 <linearGradient xlink:href="#linearGradient1829" id="linearGradient1840" y1="1139.75" x1="-56" y2="1091.75" x2="-56" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(0,-50)" xlink:href="#linearGradient5020-1" id="linearGradient1839" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
 <linearGradient gradientTransform="translate(0,-50)" xlink:href="#linearGradient5020-1" id="linearGradient1835" y1="652.5" x1="145" y2="652.50726" gradientUnits="userSpaceOnUse" x2="129"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5354" y1="332.64951" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5354" y1="324" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
 <linearGradient xlink:href="#linearGradient5042" id="linearGradient5151" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5189" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient xlink:href="#linearGradient5149" id="linearGradient1837" y1="102.5" x1="437.5" y2="113" x2="437.5" gradientUnits="userSpaceOnUse"/>
@@ -504,23 +506,23 @@
 <circle cx="225" cy="615" style="fill:#5d86c5;color:#000" r="3.5"/>
 </g>
 <g style="fill-rule:evenodd">
-<g style="fill:#cbcbcb">
+<g style="fill:#c4c4c4">
 <path id="border-button-normal-left" d="M 21.5,89 5,89 l 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal" d="m 38,89 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal-right" d="m 54.5,89 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <path style="fill:#5d86c5" id="border-button-focused-left" d="m 21.75,101 -16.5,0 0,12 16.5,0 0,-12 z"/>
-<path style="fill:#cacaca" id="border-button-toggled-left" d="m 21.75,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#c4c4c4" id="border-button-toggled-left" d="m 21.75,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#5d86c5">
 <path id="border-button-pressed-left" d="m 21.75,113 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-focused" d="m 38.25,101 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<path style="fill:#cacaca" id="border-button-toggled" d="m 38.25,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#c4c4c4" id="border-button-toggled" d="m 38.25,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#5d86c5">
 <path id="border-button-pressed" d="m 38.25,113 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-focused-right" d="m 54.75,101 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<path style="fill:#cacaca" id="border-button-toggled-right" d="m 54.75,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#c4c4c4" id="border-button-toggled-right" d="m 54.75,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:#5d86c5" id="border-button-pressed-right" d="m 54.75,113 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#d2d2d2">
 <path id="expand-button-pressed-left" d="m 21.75,125 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -551,7 +553,7 @@
 <path id="border-tab-focused-bottom" d="m 176.5,793 -16.5,0 0,-12 16.5,0 0,12 z"/>
 <path id="border-tab-focused-left" d="m 26.5,766 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<path style="fill:#cacaca" id="border-tab-toggled-left" d="m 26.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#c4c4c4" id="border-tab-toggled-left" d="m 26.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#5d86c5">
 <path id="border-tab-focused" d="m 43,766 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-focused-right" d="m 59.5,766 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -561,12 +563,12 @@
 <path id="expand-tab-toggled" d="m 43,778 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-tab-toggled-right" d="m 59.5,778 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<g style="fill:#cacaca">
+<g style="fill:#c4c4c4">
 <path id="border-tab-toggled" d="m 43,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-toggled-right" d="m 59.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <circle cx="336.5011" cy="610" style="fill:#e5e5e6;stroke:#5d86c5;stroke-width:2" id="slidercursor-focused" r="7"/>
-<g style="fill:#cbcbcb">
+<g style="fill:#c4c4c4">
 <path id="border-tab-normal-left" d="m 26.5,754 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal" d="m 43,754 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal-right" d="m 59.5,754 -16.5,0 0,12 16.5,0 0,-12 z"/>

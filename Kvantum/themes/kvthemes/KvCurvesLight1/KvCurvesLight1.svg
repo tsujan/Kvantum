@@ -39,6 +39,8 @@
 <linearGradient gradientTransform="translate(-117,-50)" xlink:href="#linearGradient5042" id="linearGradient5034" y1="961" x1="336.75006" y2="985" gradientUnits="userSpaceOnUse" x2="340"/>
 <linearGradient id="linearGradient5020-1">
 <stop offset="0" style="stop-color:#fff"/>
+<stop offset="0.4" style="stop-color:#cfcfcf"/>
+<stop offset="0.6" style="stop-color:#bababa"/>
 <stop offset="1" style="stop-color:#969696"/>
 </linearGradient>
 <linearGradient gradientTransform="matrix(1,0,0,-1,-75,1896)" xlink:href="#linearGradient5041" id="linearGradient5017" y1="985" x1="336.75012" y2="961" gradientUnits="userSpaceOnUse" x2="340"/>
@@ -91,8 +93,8 @@
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5098" y1="204" x1="25.5" y2="228" gradientUnits="userSpaceOnUse" x2="25.5"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5069" y1="208.75" x1="230.5" y2="251.25" x2="230.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient5020">
-<stop offset="0" style="stop-color:#aaa"/>
-<stop offset="1" style="stop-color:#fff"/>
+<stop offset="0" style="stop-color:#ababab"/>
+<stop offset="1" style="stop-color:#e0e0e0"/>
 </linearGradient>
 <linearGradient gradientTransform="translate(4,236.5)" xlink:href="#linearGradient4729" id="linearGradient6879" y1="77.5" x1="39.5" y2="101.5" gradientUnits="userSpaceOnUse" x2="39.5"/>
 <linearGradient gradientTransform="translate(55.5,-2)" xlink:href="#linearGradient6250" id="linearGradient6268" y1="92" x1="14.5" y2="116" gradientUnits="userSpaceOnUse" x2="14.491767"/>
@@ -184,14 +186,14 @@
 <linearGradient gradientTransform="translate(-1.5,-3)" xlink:href="#linearGradient5080" id="linearGradient5081" y1="317" x1="291.5" y2="293" gradientUnits="userSpaceOnUse" x2="291.5"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5239" y1="-7" x1="262.5" y2="35.25" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5363" y1="-7" x1="262.5" y2="35.5" gradientUnits="userSpaceOnUse" x2="262.5"/>
-<linearGradient xlink:href="#linearGradient5020" id="linearGradient5231" y1="17.5047" x1="250.5" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5237" y1="0.9953" x1="255.5" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020" id="linearGradient5231" y1="13.625" x1="252.375" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5237" y1="4.875" x1="256.75" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5235" y1="262.5" x1="-35.5" y2="262.5" gradientUnits="userSpaceOnUse" x2="7"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5369" y1="297.11539" x1="2" y2="257.88461" gradientUnits="userSpaceOnUse" x2="2"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5243" y1="257.88461" x1="2" y2="297.11539" gradientUnits="userSpaceOnUse" x2="2"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5241" y1="292.5" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="-35.5"/>
 <linearGradient xlink:href="#linearGradient6250" id="linearGradient5367" y1="35.5" x1="262.5" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5249" y1="26.9953" x1="241" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5249" y1="26.125" x1="241.625" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5247" y1="35.5" x1="262.5" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5020" id="linearGradient5245" y1="-2" x1="256.47095" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5148" y1="769" x1="80" y2="793" gradientUnits="userSpaceOnUse" x2="80"/>
@@ -199,43 +201,43 @@
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1847" y1="262.5" x1="27.3703" y2="262.5" x2="-35.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5131" y1="841" x1="245" y2="841" x2="250" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(-2.5009003,0.580106)" xlink:href="#linearGradient5020-1" id="linearGradient5141" y1="867.03754" x1="70" y2="799.41992" x2="69.975342" gradientUnits="userSpaceOnUse"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7040" y1="3.9953001" x1="254.13708" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient7040" y1="3.3703" x1="254.75" y2="-8.0047" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5189" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1843" y1="315.91873" x1="2" y2="257.88461" x2="2" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient5179-6" xlink:href="#linearGradient5020-1" y1="972" y2="972" x1="285" x2="269" gradientUnits="userSpaceOnUse"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1823" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5140" y1="769" x1="80" y2="793" gradientUnits="userSpaceOnUse" x2="80"/>
 <linearGradient gradientTransform="translate(10,0)" xlink:href="#linearGradient5149" id="linearGradient5136" y1="841" x1="245" y2="841" gradientUnits="userSpaceOnUse" x2="250"/>
-<linearGradient xlink:href="#linearGradient5020" id="linearGradient9686" y1="235.72643" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="7"/>
+<linearGradient xlink:href="#linearGradient1866" id="linearGradient9686" y1="239.18797" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="7"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1810" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
-<linearGradient xlink:href="#linearGradient5020" id="linearGradient5458" y1="1.5047" x1="255.62624" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5458" y1="-7.3703" x1="265.875" y2="5.7547" gradientUnits="userSpaceOnUse" x2="249.625"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1872" y1="42" x1="82" y2="18" x2="82" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1868" y1="42" x1="82" y2="18" x2="82" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5042" id="linearGradient5155" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1815" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5354" y1="332.64951" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5354" y1="324" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient2668" y1="42" x1="82" y2="18" gradientUnits="userSpaceOnUse" x2="82"/>
 <linearGradient xlink:href="#linearGradient5020-1" id="linearGradient5191" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient xlink:href="#linearGradient5042" id="linearGradient5151" y1="972" x1="285" y2="972" gradientUnits="userSpaceOnUse" x2="269"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient2666" y1="42" x1="82" y2="18" gradientUnits="userSpaceOnUse" x2="82"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1819" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1845" y1="-27.3703" x1="262.5" y2="35.5" x2="262.5" gradientUnits="userSpaceOnUse"/>
-<linearGradient xlink:href="#linearGradient5020" id="linearGradient1947" y1="235.72643" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="7"/>
+<linearGradient xlink:href="#linearGradient1866" id="linearGradient1947" y1="239.18797" x1="7" y2="292.5" gradientUnits="userSpaceOnUse" x2="7"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1827" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
 <linearGradient gradientTransform="translate(68)" xlink:href="#linearGradient1866" id="linearGradient1831" y1="765.625" x1="80" y2="735" gradientUnits="userSpaceOnUse" x2="80"/>
-<linearGradient xlink:href="#linearGradient5020" id="linearGradient1951" y1="1.5047" x1="255.62624" y2="-7" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1951" y1="-7.3703" x1="265.875" y2="5.7547" gradientUnits="userSpaceOnUse" x2="249.625"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1824" y1="-6.875" x1="301.5" y2="55.9953" x2="301.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5251" y1="-7" x1="262.5" y2="35.5" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1832" y1="-27.3703" x1="295" y2="35.5" x2="295" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1844" y1="78.75" x1="138" y2="114" gradientUnits="userSpaceOnUse" x2="138"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1848" y1="78.75" x1="138" y2="114" gradientUnits="userSpaceOnUse" x2="138"/>
 <linearGradient xlink:href="#linearGradient5080" id="linearGradient5253" y1="257.88461" x1="2" y2="297.11539" gradientUnits="userSpaceOnUse" x2="2"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1957" y1="332.64951" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1957" y1="324" x1="9.5" y2="262.49567" gradientUnits="userSpaceOnUse" x2="9.5"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient5199" y1="78.75" x1="138" y2="114" gradientUnits="userSpaceOnUse" x2="138"/>
 <linearGradient xlink:href="#linearGradient1849" id="linearGradient1859" y1="1139.75" x1="-104" y2="1091.7498" x2="-104" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1838" y1="262.5" x1="-55.8703" y2="262.5" x2="7" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1840" y1="55.8703" x1="262.5" y2="-7" x2="262.5" gradientUnits="userSpaceOnUse"/>
-<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1941" y1="3.9953001" x1="254.13708" y2="-8.0046997" gradientUnits="userSpaceOnUse" x2="262.5"/>
+<linearGradient xlink:href="#linearGradient5020-1" id="linearGradient1941" y1="3.3703" x1="254.75" y2="-8.0047" gradientUnits="userSpaceOnUse" x2="262.5"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient5197" y1="78.75" x1="138" y2="114" gradientUnits="userSpaceOnUse" x2="138"/>
 <linearGradient xlink:href="#linearGradient1866" id="linearGradient1834" y1="315.91873" x1="-30.5" y2="257.88461" x2="-30.5" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5149" id="linearGradient1837" y1="110.5" x1="437.5" y2="100.625" x2="437.5" gradientUnits="userSpaceOnUse"/>
@@ -264,7 +266,7 @@
 <path style="fill:#000" d="m -6.6507,57.2922 h 2.5 v 12.5 h -2.5 z " transform="rotate(45)"/>
 <path style="opacity:0" d="m -11.6508,62.2922 h 12.5 v 2.5 h -12.5 Z " transform="rotate(45)"/>
 </g>
-<rect width="14" x="91" y="-400" rx="3" height="14" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="checkbox-normal" transform="scale(1,-1)"/>
+<rect width="14.5" x="90.75" y="-400.25" rx="3" height="14.5" style="fill:#f0f0f0;stroke:#999;color:#000;stroke-width:1.5" id="checkbox-normal" transform="scale(1,-1)"/>
 <g style="fill-rule:evenodd">
 <path style="fill:#98b2da" id="itemview-pressed-top" d="m 260.4872,953.2621 h 8 v 4 h -8 z "/>
 <path style="fill:#3b63a1" id="itemview-pressed-bottom" d="m 260.4872,969.262 h 8 v 4 h -8 z "/>
@@ -320,7 +322,7 @@
 <rect width="9.375" x="220.31252" y="-694.68756" rx="1.7578127" height="9.375" style="fill:#5d86c5" transform="scale(1,-1)"/>
 </g>
 </g>
-<circle cx="98" cy="373" style="fill:#f0f0f0;stroke:#a0a0a0;color:#000;stroke-width:2" id="radio-normal" r="7"/>
+<circle cx="98" cy="373" style="fill:#f0f0f0;stroke:#999;color:#000;stroke-width:1.5" id="radio-normal" r="7.25"/>
 <g id="checkbox-checked-normal" transform="translate(-16.5,-79.5)">
 <use width="100%" height="100%" xlink:href="#checkbox-normal" transform="translate(96.5,79.5)"/>
 <rect width="8" x="190.5" y="-476.5" rx="1.5" height="8" style="fill:#5d86c5" transform="scale(1,-1)"/>
@@ -395,10 +397,9 @@
 <path style="opacity:0" d="m -11.6508,62.2922 h 12.5 v 2.5 h -12.5 Z " transform="rotate(45)"/>
 </g>
 <g style="fill-rule:evenodd">
-<g id="header-separator" transform="translate(0,-0.64261627)">
-<rect width="2" x="-221" y="-48.642616" height="20" style="opacity:0" transform="scale(-1)"/>
-<path style="opacity:.35;fill:#fff" d="m -221,-47.6426 h 1 v 18 h -1 z " transform="scale(-1)"/>
-<path style="opacity:.25" d="m -220,-47.6426 h 1 v 18 h -1 z " transform="scale(-1)"/>
+<g id="header-separator">
+<path style="opacity:0" d="m 221,48 h -2 V 28 h 2 z"/>
+<path style="opacity:.23" d="m 221,46.25 h -1 v -16.5 h 1 z"/>
 </g>
 <path style="fill:url(#linearGradient5316)" id="slider-normal-left" d="m 130.0009,610 h 7.5 v -7.5 h -7.5 z"/>
 </g>
@@ -507,12 +508,10 @@
 <circle cx="225" cy="615" style="fill:#5d86c5;color:#000" r="3.5"/>
 </g>
 <g style="fill-rule:evenodd">
-<g style="fill:#cbcbcb">
+<g style="fill:#c4c4c4">
 <path id="border-button-normal-left" d="M 21.5,89 5,89 l 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal" d="m 38,89 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-normal-right" d="m 54.5,89 -16.5,0 0,12 16.5,0 0,-12 z"/>
-</g>
-<g style="fill:#cacaca">
 <path id="border-button-toggled-left" d="m 21.75,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-pressed-left" d="m 21.75,113 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-button-toggled" d="m 38.25,149 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -543,18 +542,18 @@
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#path4884" id="use8448" transform="matrix(-1,0,0,1,307.5,0)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#expand-progress-pattern-normal-bottomleft" id="expand-progress-pattern-disabled-bottomright" transform="matrix(-1,0,0,1,307.5,0)"/>
 <g style="fill-rule:evenodd">
-<path style="fill:#cacaca" id="border-tab-toggled-left" d="m 26.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
+<path style="fill:#c4c4c4" id="border-tab-toggled-left" d="m 26.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <g style="fill:#cfcfcf">
 <path id="expand-tab-toggled-left" d="m 26.5,778 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-tab-toggled" d="m 43,778 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="expand-tab-toggled-right" d="m 59.5,778 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<g style="fill:#cacaca">
+<g style="fill:#c4c4c4">
 <path id="border-tab-toggled" d="m 43,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-toggled-right" d="m 59.5,790 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
 <circle cx="336.5011" cy="610" style="fill:#e5e5e6;stroke:#5d86c5;stroke-width:2" id="slidercursor-focused" r="7"/>
-<g style="fill:#cbcbcb">
+<g style="fill:#c4c4c4">
 <path id="border-tab-normal-left" d="m 26.5,754 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal" d="m 43,754 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path id="border-tab-normal-right" d="m 59.5,754 -16.5,0 0,12 16.5,0 0,-12 z"/>
@@ -707,9 +706,9 @@
 <path style="fill:url(#linearGradient5219)" id="expand-lineedit-focused-top" d="m 92.5,204 -16.5,0 0,12 16.5,0 0,-12 z"/>
 <path style="fill:url(#linearGradient5221)" id="expand-lineedit-focused-bottom" d="m 92.5,216 -16.5,0 0,12 16.5,0 0,-12 z"/>
 </g>
-<g style="color:#000;stroke:#5d86c5;stroke-width:2;fill:#f0f0f0">
-<circle cx="146" cy="373" id="radio-focused" r="7"/>
-<rect width="14" x="141" y="-400" rx="3" height="14" id="checkbox-focused" transform="scale(1,-1)"/>
+<g style="color:#000;stroke:#5d86c5;stroke-width:1.5;fill:#f0f0f0">
+<circle cx="146" cy="373" id="radio-focused" r="7.25"/>
+<rect width="14.5" x="140.75" y="-400.25" rx="3" height="14.5" id="checkbox-focused" transform="scale(1,-1)"/>
 </g>
 <g style="fill-rule:evenodd">
 <circle cx="122.03081" cy="841.74951" style="fill:url(#radialGradient5010)" id="dial-handle" r="7"/>
@@ -953,11 +952,11 @@
 <use width="100%" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-up-normal" transform="matrix(0,-1,1,0,-650,860)"/>
 <use width="100%" height="100%" xlink:href="#menuitem-right-focused" id="flat-arrow-right-normal" transform="translate(-350,-160)"/>
 <g style="fill-rule:evenodd" id="button-normal-topleft" transform="translate(-8.5,20.4953)">
-<path style="fill:#fff" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#ededed" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient5323)" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z"/>
 </g>
 <g style="fill-rule:evenodd" id="button-normal-top" transform="matrix(1.0833333,0,0,1,-30.37499,20.4953)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#fff" transform="rotate(-90)"/>
+<rect width="7.5" x="2" y="262.5" height="30" style="fill:#f2f2f2" transform="rotate(-90)"/>
 <rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient5325)" transform="rotate(-90)"/>
 </g>
 <g style="fill-rule:evenodd" id="button-normal-bottomleft" transform="matrix(1,0,0,-1,-8.5,48.9953)">
@@ -995,11 +994,11 @@
 <use width="100%" height="100%" xlink:href="#button-normal" id="button-toggled" transform="matrix(1,0,0,-1,142.5,69.5)"/>
 <g style="fill-rule:evenodd" id="lineedit-focused-topleft" transform="translate(21.25,215.75)">
 <path style="fill:#5d86c5" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
-<path style="fill:#fbfbfb" d="m 262.5,-4.5 c -1.5,0 -2.5,1 -2.5,2.5 h 2.5 z"/>
+<path style="fill:#fbfbfb" d="m 262.5,-5 c -1.5,0 -3,1.5 -3,3 h 3 z"/>
 </g>
-<g style="fill-rule:evenodd" id="lineedit-focused-top" transform="matrix(1.0833333,0,0,1,-0.62499075,215.75)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#5d86c5" transform="rotate(-90)"/>
-<rect width="2.5" x="2" y="262.5" height="30" style="fill:#fbfbfb" transform="rotate(-90)"/>
+<g id="lineedit-focused-top">
+<path style="fill:#5d86c5" d="m 283.75,213.75 v -7.5 h 32.5 v 7.5 z"/>
+<path style="fill:#fbfbfb" d="m 283.75,213.75 v -3 h 32.5 v 3 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-focused-bottomleft" transform="matrix(1,0,0,-1,0,460)"/>
 <use width="100%" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-focused-bottom" transform="matrix(1,0,0,-1,0,460)"/>
@@ -1023,26 +1022,26 @@
 <use width="100%" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-toggled-right" transform="matrix(0,1,-1,0,636,-70)"/>
 <use width="100%" height="100%" xlink:href="#lineedit-focused-topleft" id="lineedit-toggled-bottomright" transform="matrix(-1,0,0,-1,706,460)"/>
 <use width="100%" height="100%" xlink:href="#lineedit-focused-top" id="lineedit-toggled-left" transform="matrix(0,-1,1,0,176,530)"/>
-<g style="fill-rule:evenodd">
-<g id="lineedit-normal-bottomright" transform="rotate(180,262.75,122.125)">
+<g style="fill-rule:evenodd" id="lineedit-normal-bottomright" transform="rotate(180,262.75,122.125)">
 <path style="fill:url(#linearGradient5231)" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient5233)" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z"/>
 </g>
-<g id="lineedit-normal-bottom" transform="matrix(-1.0833333,0,0,-1,547.37499,244.25)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#fff" transform="rotate(-90)"/>
-<rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient5235)" transform="rotate(-90)"/>
+<g id="lineedit-normal-bottom">
+<path style="fill:#e0e0e0" d="m 263,251.25 v 2.5 h -32.5 v -2.5 z"/>
+<path style="fill:url(#linearGradient5235)" d="m 263,246.25 v 5 h -32.5 v -5 z"/>
 </g>
-<g id="lineedit-normal-topright" transform="matrix(-1,0,0,1,525.5,215.75)">
+<g style="fill-rule:evenodd" id="lineedit-normal-topright" transform="matrix(-1,0,0,1,525.5,215.75)">
 <path style="fill:url(#linearGradient5237)" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient5239)" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z"/>
 </g>
-<g id="lineedit-normal-top" transform="matrix(-1.0833333,0,0,1,547.37499,215.75)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#969696" transform="rotate(-90)"/>
-<rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient5241)" transform="rotate(-90)"/>
+<g id="lineedit-normal-top">
+<rect width="7.5" x="-213.75" y="-263" height="32.5" style="fill:#969696" transform="matrix(0,-1,-1,0,0,0)"/>
+<path style="fill:url(#linearGradient5241)" d="m 263,213.75 v -5 h -32.5 v 5 z"/>
 </g>
+<g style="fill-rule:evenodd">
 <g id="lineedit-normal-right" transform="matrix(0,1.0833333,-1,0,261,-70.62499)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#e6e6e6" transform="rotate(-90)"/>
-<rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient5243)" transform="rotate(-90)"/>
+<path style="fill:#cdcdcd" d="m 7,262.5 2.5,0 v 30 h -2.5 z " transform="rotate(-90)"/>
+<path style="fill:url(#linearGradient5243)" d="m 2,262.5 h 5 v 30 H 2 Z" transform="rotate(-90)"/>
 </g>
 <g id="lineedit-normal-bottomleft" transform="matrix(1,0,0,-1,-32,244.25)">
 <path style="fill:url(#linearGradient5245)" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
@@ -1052,10 +1051,10 @@
 <path style="fill:url(#linearGradient5249)" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient5251)" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z"/>
 </g>
-<g id="lineedit-normal-left" transform="matrix(0,1.0833333,1,0,232.5,-70.62499)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#aaa" transform="rotate(-90)"/>
-<rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient5253)" transform="rotate(-90)"/>
 </g>
+<g id="lineedit-normal-left">
+<rect width="7.5" x="-230.5" y="213.75" height="32.5" style="fill:#ababab" transform="scale(-1,1)"/>
+<path style="fill:url(#linearGradient5253)" d="m 230.5,213.75 h -5 v 32.5 h 5 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#slider-toggled-topleft" id="expand-menuitem-normal-bottomleft" transform="matrix(0,-1,1,0,-360.2502,853)"/>
 <use width="100%" height="100%" xlink:href="#slider-toggled-left" id="expand-menuitem-normal-bottom" transform="matrix(0,-1,1,0,-360.2502,853)"/>
@@ -1197,11 +1196,11 @@
 <g style="fill-rule:evenodd">
 <path style="fill:url(#linearGradient1824)" id="button-focused" d="M 301.5,18.5 V 51 H 334 V 18.5 Z"/>
 <g id="button-focused-topleft" transform="translate(39,20.4953)">
-<path style="fill:#fff" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
+<path style="fill:#ededed" d="m 262.5,-9.5 c -4.155,0 -7.5,3.345 -7.5,7.5 h 7.5 z"/>
 <path style="fill:url(#linearGradient1845)" d="m 262.5,-7 c -2.5,-0.010896 -4.98587,2.5 -5,5 h 5 z"/>
 </g>
 <g id="button-focused-top" transform="matrix(1.0833333,0,0,1,17.12501,20.4953)">
-<rect width="7.5" x="2" y="262.5" height="30" style="fill:#fff" transform="rotate(-90)"/>
+<rect width="7.5" x="2" y="262.5" height="30" style="fill:#f2f2f2" transform="rotate(-90)"/>
 <rect width="5" x="2" y="262.5" height="30" style="fill:url(#linearGradient1847)" transform="rotate(-90)"/>
 </g>
 <g id="button-focused-bottomleft" transform="matrix(1,0,0,-1,39,48.9953)">

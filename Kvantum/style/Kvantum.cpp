@@ -8338,26 +8338,12 @@ void Style::drawControl(QStyle::ControlElement element,
             fspec.HPos = tspec_.spread_header && (stretched || (rtl && horiz)) ? 0 : 1;
             break;
           case QStyleOptionHeader::Beginning:
-            fspec.isAttached = true;
-            fspec.HPos = tspec_.spread_header && (!(rtl && horiz)|| stretched) ? 0 : -1;
-            if (horiz)
-            {
-              sep.setRect(x+w-fspec.right,
-                          y+fspec.top,
-                          fspec.right,
-                          h-fspec.top-fspec.bottom);
-            }
-            else
-            {
-              sep.setRect(x+fspec.top, // -> CT_HeaderSection
-                          y+h-fspec.right,
-                          w-fspec.top-fspec.bottom,
-                          fspec.right);
-            }
-            break;
           case QStyleOptionHeader::Middle:
             fspec.isAttached = true;
-            fspec.HPos = 0;
+            if (opt->position == QStyleOptionHeader::Beginning)
+              fspec.HPos = tspec_.spread_header && (!(rtl && horiz)|| stretched) ? 0 : -1;
+            else
+              fspec.HPos = 0;
             if (horiz)
             {
               sep.setRect(x+w-fspec.right,
@@ -8373,14 +8359,14 @@ void Style::drawControl(QStyle::ControlElement element,
                           fspec.right);
             }
             break;
-         case QStyleOptionHeader::OnlyOneSection:
+          case QStyleOptionHeader::OnlyOneSection:
             if (tspec_.spread_header)
             {
               fspec.isAttached = true;
               fspec.HPos = stretched ? 0 : rtl ? -1 : 1;
             }
-           break;
-         default: break;
+            break;
+          default: break;
         }
       }
 
