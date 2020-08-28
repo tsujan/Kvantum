@@ -1120,6 +1120,8 @@ bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) c
     { // don't let view-item selection cover widgets without interior
       return true;
     }
+    else if (qobject_cast<QMenu*>(w->window())) // as in QtAv
+      container = "MenuItem";
   }
   if(!container.isEmpty()
      && enoughContrast(color, getFromRGBA(getLabelSpec(container).normalColor)))

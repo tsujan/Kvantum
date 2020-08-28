@@ -1,3 +1,7 @@
+V0.16.2
+---------
+ * Also, take care of widgets without interior SVG elements on a menu that has a high contrast with the window (a possible scenario that hasn't happened with any theme so far).
+
 V0.16.1
 ---------
  * Consider a toolbar stylable if it contains a tabbar that isn't inside the same window.
