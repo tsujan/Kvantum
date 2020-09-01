@@ -2,6 +2,7 @@ V0.16.2
 ---------
  * Also, take care of widgets without interior SVG elements on a menu that has a high contrast with the window (a possible scenario that hasn't happened with any theme so far).
  * A workaround for a rare problem in QWidgetAction when menus have a high contrast with windows.
+ * Fixed text color of thin progressbars inside stylable toolbars of dark-and-light themes.
 
 V0.16.1
 ---------

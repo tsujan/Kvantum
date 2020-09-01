@@ -7812,21 +7812,22 @@ void Style::drawControl(QStyle::ControlElement element,
           sideText = !topText;
           if (topText || sideText)
           {
+            QPalette palette = widget ? widget->palette() : standardPalette();
             if (enoughContrast(getFromRGBA(lspec.normalColor),
-                               standardPalette().color(QPalette::WindowText)))
+                               palette.color(QPalette::WindowText)))
             {
               lspec.normalColor = lspec.focusColor =
-                getName(standardPalette().color(QPalette::Active,QPalette::WindowText));
+                getName(palette.color(QPalette::Active,QPalette::WindowText));
               lspec.normalInactiveColor = lspec.focusInactiveColor =
-                getName(standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                getName(palette.color(QPalette::Inactive,QPalette::WindowText));
             }
             if (enoughContrast(getFromRGBA(lspec.toggleColor),
-                               standardPalette().color(QPalette::HighlightedText)))
+                               palette.color(QPalette::HighlightedText)))
             {
               lspec.toggleColor =
-                getName(standardPalette().color(QPalette::Active,QPalette::HighlightedText));
+                getName(palette.color(QPalette::Active,QPalette::HighlightedText));
               lspec.toggleInactiveColor =
-                getName(standardPalette().color(QPalette::Inactive,QPalette::HighlightedText));
+                getName(palette.color(QPalette::Inactive,QPalette::HighlightedText));
             }
           }
         }
