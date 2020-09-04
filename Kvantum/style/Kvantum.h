@@ -272,10 +272,10 @@ class Style : public QCommonStyle {
     void drawFocusRect(QPainter *painter, const QRect &rect, const QString &element) const;
 
     /* Draws the lineedit of an editable combobox. */
-    void drawComboLineEdit (const QStyleOption *option,
-                            QPainter *painter,
-                            const QWidget *lineedit,
-                            const QWidget *combo) const;
+    void drawComboLineEdit(const QStyleOption *option,
+                           QPainter *painter,
+                           const QWidget *lineedit,
+                           const QWidget *combo) const;
 
     /* Gets a pixmap with a proper size from an icon considering HDPI. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
@@ -313,8 +313,8 @@ class Style : public QCommonStyle {
     }
 
     QWidget* getParent(const QWidget *widget, int level) const;
-    bool enoughContrast (const QColor& col1, const QColor& col2) const;
-    QColor overlayColor(const QColor& bgCol, const QColor& overlayCol) const;
+    bool enoughContrast(const QColor &col1, const QColor &col2) const;
+    QColor overlayColor(const QColor &bgCol, const QColor &overlayCol) const;
 
     /* Can an expanded border be drawn for this frame? */
     bool hasExpandedBorder(const frame_spec &fspec) const;

@@ -80,7 +80,7 @@ namespace Kvantum
 
 // Taken from https://www.w3.org/TR/2008/REC-WCAG20-20081211/.
 // It isn't related to HSL lightness.
-static inline qreal luminance(QColor col)
+static inline qreal luminance(const QColor &col)
 {
   /* all divided by 255 */
   qreal R = col.redF();
@@ -94,7 +94,7 @@ static inline qreal luminance(QColor col)
   return 0.2126*R + 0.7152*G + 0.0722*B;
 }
 
-bool Style::enoughContrast (const QColor& col1, const QColor& col2) const
+bool Style::enoughContrast(const QColor &col1, const QColor &col2) const
 {
   if (!col1.isValid() || !col2.isValid()) return false;
   qreal rl1 = luminance(col1);
@@ -104,7 +104,7 @@ bool Style::enoughContrast (const QColor& col1, const QColor& col2) const
   return true;
 }
 
-QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
+QColor Style::overlayColor(const QColor &bgCol, const QColor &overlayCol) const
 {
   if (!overlayCol.isValid()) return QColor(0,0,0);
   if (!bgCol.isValid()) return overlayCol;
@@ -126,7 +126,7 @@ QColor Style::overlayColor(const QColor& bgCol, const QColor& overlayCol) const
 /* NOTE: This method should be called before a foreground palette is set
          to make opaque text colors out of translucent ones if needed.
          However, Kvantum always uses real text colors to draw labels. */
-void Style::opacifyColor(QColor& col) const
+void Style::opacifyColor(QColor &col) const
 {
   if (hspec_.opaque_colors && col.alpha() < 255)
   {
@@ -165,7 +165,7 @@ QColor Style::getFromRGBA(const QString &str) const
 }
 
 /* Qt >= 5.2 gives #AARRGGBB, while we want #RRGGBBAA. */
-static inline QString getName(const QColor col)
+static inline QString getName(const QColor &col)
 {
   QString colName = col.name();
   long alpha = col.alpha();
@@ -216,18 +216,18 @@ Style::Style(bool useDark) : QCommonStyle()
   }
   if (!themeChooserFile.isEmpty())
   {
-    QSettings themeChooser (themeChooserFile,QSettings::NativeFormat);
+    QSettings themeChooser(themeChooserFile,QSettings::NativeFormat);
     if (themeChooser.status() == QSettings::NoError)
     {
       if (themeChooser.contains("theme"))
         theme = themeChooser.value("theme").toString();
       /* check if this app has a specific theme assigned to it */
       QString appName = qApp->applicationName();
-      themeChooser.beginGroup ("Applications");
+      themeChooser.beginGroup("Applications");
       QStringList list = themeChooser.childKeys();
       for (int i = 0; i < list.count(); ++i)
       {
-        if (themeChooser.value (list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
+        if (themeChooser.value(list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
         {
           theme = list.at(i);
           break;
@@ -282,7 +282,7 @@ Style::Style(bool useDark) : QCommonStyle()
         QVariant v;
         int iconSize;
         KDESettings.beginGroup(QStringLiteral("DialogIcons"));
-        v = KDESettings.value (QStringLiteral("Size"));
+        v = KDESettings.value(QStringLiteral("Size"));
         KDESettings.endGroup();
         if (v.isValid())
         {
@@ -293,7 +293,7 @@ Style::Style(bool useDark) : QCommonStyle()
         else
           tspec_.large_icon_size = 32;
         KDESettings.beginGroup(QStringLiteral("SmallIcons"));
-        v = KDESettings.value (QStringLiteral("Size"));
+        v = KDESettings.value(QStringLiteral("Size"));
         KDESettings.endGroup();
         if (v.isValid())
         {
@@ -469,14 +469,14 @@ static inline bool isThemeDir(const QString &path, const QString &themeName)
   if (themeName.isEmpty()) return false;
   if (path.endsWith("/Kvantum"))
   {
-    if (QFile::exists (path + QString("/%1/%1.kvconfig").arg(themeName))
-        || QFile::exists (path + QString("/%1/%1.svg").arg(themeName)))
+    if (QFile::exists(path + QString("/%1/%1.kvconfig").arg(themeName))
+        || QFile::exists(path + QString("/%1/%1.svg").arg(themeName)))
     {
       return true;
     }
   }
-  else if (QFile::exists (path + QString("/%1/Kvantum/%1.kvconfig").arg(themeName))
-           || QFile::exists (path + QString("/%1/Kvantum/%1.svg").arg(themeName)))
+  else if (QFile::exists(path + QString("/%1/Kvantum/%1.kvconfig").arg(themeName))
+           || QFile::exists(path + QString("/%1/Kvantum/%1.svg").arg(themeName)))
   {
     return true;
   }
@@ -502,7 +502,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
       /* "Kvantum" is reserved for the alternative installation paths */
       && baseThemeName != "Kvantum"
       /* no space in theme name */
-      && !(baseThemeName.simplified()).contains (" ")
+      && !(baseThemeName.simplified()).contains(" ")
       /* "#" is reserved by Kvantum Manager as an ending for copied root themes */
       && (!baseThemeName.contains("#")
           || (baseThemeName.length() > 1
@@ -1595,7 +1595,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   const size_spec sspec = getSizeSpec(group);
 
   /* a workaround for bad codes that change line-edit base color */
-  bool colored = group == "LineEdit"
+  bool colored = !isPcmanfm_ && group == "LineEdit"
                  && lineedit->palette().color(QPalette::Base)
                     != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base);
 
@@ -2676,7 +2676,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        bool animate (!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
+        bool animate(!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
         if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
             && elementExists("menu-"+ispec.element+suffix))
           prefix = "menu-"; // make exception for menuitems
@@ -3595,7 +3595,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }*/
       else if (qobject_cast<const QLineEdit*>(widget))
       {
-        colored = !insideSpinBox && group == "LineEdit"
+        colored = !isPcmanfm_ && !insideSpinBox && group == "LineEdit"
                   && widget->palette().color(QPalette::Base)
                      != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base);
         if (colored
@@ -10732,7 +10732,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           ispec.px = ispec.py = 0;
         }
         int arrowFrameSize = rtl ? fspec.left : fspec.right;
-        const bool drwaAsLineEdit (tspec_.combo_as_lineedit || tspec_.square_combo_button);
+        const bool drwaAsLineEdit(tspec_.combo_as_lineedit || tspec_.square_combo_button);
         if (editable) // otherwise the arrow part will be integrated
         {
           if (drwaAsLineEdit)
@@ -10845,7 +10845,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
 
             /* a workaround for bad codes that change line-edit base color */
-            bool colored(editable && leGroup == "LineEdit"
+            bool colored(!isPcmanfm_ && editable && leGroup == "LineEdit"
                          && cb->lineEdit()->palette().color(QPalette::Base)
                             != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(), QPalette::Base));
 
@@ -11004,7 +11004,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   painter->setTransform(m, true);
                 }
                 else
-                  sep = QRect (x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+                  sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
                 if (renderElement(painter, sepName+"-"+_status, sep))
                 {
                   sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
@@ -12387,7 +12387,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       int v = qMax(fspec.top,fspec.bottom);
       int h = 0;
       theme_spec tspec_now = settings_->getCompositeSpec();
-      bool shadowDecided (tspec_.shadowless_popup || noComposite_ || !tspec_now.composite);
+      bool shadowDecided(tspec_.shadowless_popup || noComposite_ || !tspec_now.composite);
       if (!(tspec_.spread_menuitems && shadowDecided))
       { // this condition was used in getMenuMargin()
         h = qMax(fspec.left,fspec.right);
@@ -13780,7 +13780,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
            how margins and frames are changed in such cases.
         */
 
-        s = contentsSize + QSize (0, contentsSize.height() % 2)
+        s = contentsSize + QSize(0, contentsSize.height() % 2)
             /* Qt just adds 6 and 5 px to the width and height respectively
                (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint())
                but we add add our frames and spacings instead. */
@@ -15703,11 +15703,11 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             int len = pixelMetric(PM_SliderLength,option,widget);
             if (len == pixelMetric(PM_SliderControlThickness,option,widget))
               len = qMin(len, horiz ? h : w); // see drawComplexControl() -> CC_Slider
-            const int sliderPos = sliderPositionFromValue (opt->minimum,
-                                                           opt->maximum,
-                                                           opt->sliderPosition,
-                                                           (horiz ? w : h) - len,
-                                                           opt->upsideDown);
+            const int sliderPos = sliderPositionFromValue(opt->minimum,
+                                                          opt->maximum,
+                                                          opt->sliderPosition,
+                                                          (horiz ? w : h) - len,
+                                                          opt->upsideDown);
             if (horiz)
               return QRect(x+sliderPos, y, len, h);
             else

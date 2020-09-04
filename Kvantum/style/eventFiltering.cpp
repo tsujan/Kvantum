@@ -1352,7 +1352,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::PaletteChange :
-    if (qobject_cast<QLineEdit*>(o) && (tspec_.combo_as_lineedit || tspec_.square_combo_button))
+    if (!isPcmanfm_ && qobject_cast<QLineEdit*>(o) && (tspec_.combo_as_lineedit || tspec_.square_combo_button))
     {
       if (QComboBox *cb = qobject_cast<QComboBox*>(w->parentWidget()))
       {
