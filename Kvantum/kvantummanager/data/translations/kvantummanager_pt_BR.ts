@@ -159,8 +159,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Mesclar o painel lateral do PCManFM-qt com seus arredores.
 
-No LXQt, é necessário sair
-e entrar na sessão ou fechando
+No LXQt, é necessário sair e entrar na sessão ou fechando o
 PCManFM-qt e, em seguida, parando e iniciando a Área de Trabalho
 nas Configurações de Sessão LXQt.</translation>
     </message>
@@ -414,12 +413,14 @@ centralizado horizontalmente, na medida do possível.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Você pode ver artefatos irritantes que são causados
+por bugs no tratamento do Qt de escalonamento não inteiro
+com translucidez ou gradiente de janela.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="624"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Desative a translucidez com escala não inteira</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="676"/>
