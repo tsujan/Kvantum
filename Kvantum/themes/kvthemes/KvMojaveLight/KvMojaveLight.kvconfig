@@ -498,7 +498,7 @@ frame.left=3
 frame.right=3
 frame.element=menu
 interior.element=menu
-text.normal.color=#fafafa
+text.normal.color=#050505
 frame.expansion=0
 
 [GroupBox]
