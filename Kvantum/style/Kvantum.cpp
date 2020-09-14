@@ -10491,7 +10491,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         }
 
         if ((verticalIndicators || tspec_.inline_spin_indicators)
-            && opt->subControls & SC_SpinBoxUp)
+            && (opt->subControls & SC_SpinBoxUp))
         {
           QString leGroup;
           if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
@@ -10569,8 +10569,6 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               if (maxTxt.isEmpty()
                   || editRect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
-                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
-                                             ? fspec.right : 0)
                   || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                       && sb->width() < editRect.width() + 2*tspec_.spin_button_width
                                                         + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right)
@@ -13342,6 +13340,21 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       const size_spec sspec = getSizeSpec(QStringLiteral("IndicatorSpinBox"));
       if (sb)
       {
+        int extraWidth = 0;
+        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons) // as in qpdfview
+        {
+          extraWidth = fspec.left + lspec.left + fspec.right + lspec.right
+                       + (sspecLE.incrementW ? sspecLE.minW : 0);
+        }
+        else if (tspec_.vertical_spin_indicators)
+          extraWidth = fspec.left + tspec_.spin_button_width + fspec.right;
+        else
+        {
+          extraWidth = fspec.left + lspec.left + 2*tspec_.spin_button_width
+                       + fspec1.right
+                       + (sspecLE.incrementW ? sspecLE.minW : 0);
+        }
+        extraWidth += 2; // cursor padding
         QString maxTxt = spinMaxText(sb);
         if (!maxTxt.isEmpty())
         {
@@ -13349,14 +13362,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           QSize txtSize = textSize(sb->font(),maxTxt);
           txtSize.rheight() += txtSize.height() % 2; // for vertical centering
           s = txtSize
-              + QSize(fspec.left + (tspec_.vertical_spin_indicators ? 0
-                                      : lspec.left
-                                        + (sspecLE.incrementW ? sspecLE.minW : 0))
-                                        + 2 // cursor padding
-                                 + 2*tspec_.spin_button_width
-                                 + (tspec_.vertical_spin_indicators
-                                    || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? // as in qpdfview
-                                      fspec.right : fspec1.right),
+              + QSize(extraWidth,
                       lspec.top + lspec.bottom
                       + (tspec_.vertical_spin_indicators
                          || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.top + fspec.bottom
@@ -15347,10 +15353,10 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           return option->rect;
         case SC_SpinBoxEditField : {
           if (sw == 0) return option->rect; // no button
-          int margin = 0;
-          //if (isLibreoffice_)
-            //margin = qMin(fspecLE.left,3);
-          return QRect(x + margin,
+          /*int margin = 0;
+            if (isLibreoffice_)
+              margin = qMin(fspecLE.left,3);*/
+          return QRect(x/* + margin*/,
                        y,
                        w - (sw + fspec.right) - (verticalIndicators ? 0 : sw),
                        h);
