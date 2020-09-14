@@ -252,34 +252,36 @@ void Style::polish(QWidget *widget)
       }
     }
   }
-  else if (qobject_cast<QToolBar*>(pw) && qobject_cast<QLabel*>(widget))
-  { // on toolbars, labels get the button text color; that's corrected here
-    QPalette palette = widget->palette();
-    palette.setColor(QPalette::Active, QPalette::ButtonText,
-                     standardPalette().color(QPalette::Active,QPalette::WindowText));
-    palette.setColor(QPalette::Inactive, QPalette::ButtonText,
-                     standardPalette().color(QPalette::Inactive,QPalette::WindowText));
-    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
-                     standardPalette().color(QPalette::Disabled,QPalette::WindowText));
-    forcePalette(widget, palette);
-    respectDarkness = false;
-  }
-  else if (qobject_cast<QMenu*>(pw))
+  else if (qobject_cast<QLabel*>(widget))
   {
-    /* Due to a weird problem in QWidgetAction, the window text color may need to
-       be set explicitly, although the palette of the parent menu has been changed
-       below, in "switch (widget->windowFlags()...)". */
-    QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
-    if (menuTextColor.isValid())
+    if (qobject_cast<QToolBar*>(pw))
+    { // on toolbars, labels get the button text color; that's corrected here
+      QPalette palette = widget->palette();
+      palette.setColor(QPalette::Active, QPalette::ButtonText,
+                      standardPalette().color(QPalette::Active,QPalette::WindowText));
+      palette.setColor(QPalette::Inactive, QPalette::ButtonText,
+                      standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+      palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                      standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+      forcePalette(widget, palette);
+      respectDarkness = false;
+    }
+    else if (qobject_cast<QMenu*>(widget->window()))
     {
-      opacifyColor(menuTextColor);
-      if (menuTextColor != standardPalette().color(QPalette::Active,QPalette::WindowText))
+      /* The label may be shown after its parent menu is polished below, in
+         "switch (widget->windowFlags()...)". Other widgets are ignored for now. */
+      QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+      if (menuTextColor.isValid())
       {
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
-        palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
-        forcePalette(widget, palette);
-        respectDarkness = false;
+        opacifyColor(menuTextColor);
+        if (menuTextColor != standardPalette().color(QPalette::Active,QPalette::WindowText))
+        {
+          QPalette palette = widget->palette();
+          palette.setColor(QPalette::Active,QPalette::WindowText,menuTextColor);
+          palette.setColor(QPalette::Inactive,QPalette::WindowText,menuTextColor);
+          forcePalette(widget, palette);
+          respectDarkness = false;
+        }
       }
     }
   }

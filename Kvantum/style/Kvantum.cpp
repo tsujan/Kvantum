@@ -8612,6 +8612,7 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
               {
+                if (widget != child->parentWidget()) continue; // not inside another window
                 QPalette palette = child->palette();
                 if (!qobject_cast<QToolButton*>(child)
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
@@ -8648,7 +8649,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
                   for (QComboBox *cb : combos)
                   {
-                    if (!widget->isAncestorOf(cb)) continue; // not within another window
+                    if (!widget->isAncestorOf(cb)) continue; // not inside another window
                     QPalette palette = cb->palette();
                     if (comboTxtCol != palette.color(QPalette::ButtonText))
                     {
@@ -8696,6 +8697,7 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
               for (QLabel *label : labels)
               {
+                if (widget != label->parentWidget()) continue;
                 QPalette palette = label->palette();
                 palette.setColor(QPalette::Active, QPalette::ButtonText,
                                  standardPalette().color(QPalette::Active,QPalette::WindowText));
@@ -8769,6 +8771,7 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
               {
+                if (widget != child->parentWidget()) continue;
                 /* this is only a workaround for a new bug in Audacious 4.0 but is
                    harmless in other places because the whole stylesheet is checked */
                 if (child->styleSheet() == QStringLiteral("font-weight: bold"))
@@ -8862,6 +8865,7 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QLabel*> labels = widget->findChildren<QLabel*>(QString(), Qt::FindDirectChildrenOnly);
               for (QLabel *label : labels)
               {
+                if (widget != label->parentWidget()) continue;
                 QPalette palette = label->palette();
                 palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
                 palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
