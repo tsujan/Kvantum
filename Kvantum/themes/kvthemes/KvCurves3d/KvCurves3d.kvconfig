@@ -45,6 +45,7 @@ tooltip_delay=-1
 animate_states=true
 no_window_pattern=false
 button_contents_shift=false
+remove_extra_frames=true
 dark_titlebar=true
 
 [GeneralColors]

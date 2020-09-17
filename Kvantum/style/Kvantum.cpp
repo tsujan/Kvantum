@@ -4403,13 +4403,65 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
 
-        /* use the "flat" indicator with flat buttons if it exists */
-        if (status.startsWith("normal") && autoraise && !drawRaised
-            && themeRndr_ && themeRndr_->isValid())
+        /* distinguish popup indicators from other button indicators */
+        if (!status.startsWith("normal"))
         {
-          QString group1 = "PanelButtonTool";
-          if (group == "ToolbarButton")
-            group1 = group;
+          if (r.isValid()
+              && (option->state & State_Enabled)
+              && (option->state & State_MouseOver)
+              && !status.startsWith("pressed"))
+          {
+            QString group1 = group == "ToolbarButton" ? group : "PanelButtonTool";
+            QColor col;
+            if (status.startsWith("toggled"))
+            {
+              if(status.endsWith("-inactive"))
+              {
+                col = getFromRGBA(getLabelSpec(group1).toggleInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(getLabelSpec(group1).toggleColor);
+              }
+              else
+                col = getFromRGBA(getLabelSpec(group1).toggleColor);
+            }
+            else
+            {
+              if(status.endsWith("-inactive"))
+              {
+                col = getFromRGBA(getLabelSpec(group1).focusInactiveColor);
+                if (!col.isValid())
+                  col = getFromRGBA(getLabelSpec(group1).focusColor);
+              }
+              else
+                col = getFromRGBA(getLabelSpec(group1).focusColor);
+            }
+            if (!col.isValid())
+              col = standardPalette().color(status.endsWith("-inactive")
+                                              ? QPalette::Inactive : QPalette::Active,
+                                            QPalette::ButtonText);
+            col.setAlphaF(0.4);
+            /* see renderIndicator() */
+            QRect interior = interiorRect(r,fspec);
+            int s;
+            if (!interior.isValid())
+              s = qMin(r.width(), r.height());
+            else
+              s = qMin(interior.width(), interior.height());
+            s = qMin(s, dspec.size);
+            if (interior.height() - s >= vOffset)
+              interior.adjust(0,-vOffset,0,-vOffset);
+            QPoint center(rtl ? interior.right() + 1 : interior.left(),
+                          (interior.top() + interior.bottom() + 1) / 2);
+            painter->save();
+            painter->setPen(col);
+            painter->drawLine(center - QPoint(0, s/2 + 1), center + QPoint(0, s/2 + 1));
+            painter->restore();
+          }
+        }
+        /* use the "flat" indicator with flat buttons if it exists */
+        else if (autoraise && !drawRaised && themeRndr_ && themeRndr_->isValid())
+        {
+          QString group1 = group == "ToolbarButton" ? group : "PanelButtonTool";
           const indicator_spec dspec1 = getIndicatorSpec(group1);
           if (flatArrowExists(dspec1.element))
           {
