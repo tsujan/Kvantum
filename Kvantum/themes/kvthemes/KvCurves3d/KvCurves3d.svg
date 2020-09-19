@@ -1127,4 +1127,10 @@
 <path style="opacity:.7;fill:#fff" id="path2073" d="m 225,391.5 a 8.5,8.5 0 0 0 -8.5,8.5 8.5,8.5 0 0 0 8.5,8.5 8.5,8.5 0 0 0 8.5,-8.5 8.5,8.5 0 0 0 -8.5,-8.5 z m 0,4 a 4.5,4.5 0 0 1 4.5,4.5 4.5,4.5 0 0 1 -4.5,4.5 4.5,4.5 0 0 1 -4.5,-4.5 4.5,4.5 0 0 1 4.5,-4.5 z" transform="matrix(2,0,0,2,-225,-340)"/>
 </g>
 </g>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-topleft" id="expand-toolbar-normal-bottomleft" transform="matrix(1,0,0,-1,0,188)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-top" id="expand-toolbar-normal-bottom" transform="matrix(1,0,0,-1,0,188)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-bottomleft" id="expand-toolbar-normal-topleft" transform="matrix(1,0,0,-1,0,188)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-bottom" id="expand-toolbar-normal-top" transform="matrix(1,0,0,-1,0,188)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-topright" id="expand-toolbar-normal-bottomright" transform="matrix(1,0,0,-1,0,188)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#border-button-normal-bottomright" id="expand-toolbar-normal-topright" transform="matrix(1,0,0,-1,0,188)"/>
 </svg>

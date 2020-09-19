@@ -12,15 +12,15 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    sodipodi:docname="Glassy.svg"
-   inkscape:version="0.91 r13725"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:version="0.32"
    id="svg2"
    height="1380"
    width="450"
    version="1.0">
   <sodipodi:namedview
-     inkscape:window-height="1050"
-     inkscape:window-width="1880"
+     inkscape:window-height="1047"
+     inkscape:window-width="1884"
      inkscape:pageshadow="2"
      inkscape:pageopacity="1"
      guidetolerance="10.0"
@@ -33,8 +33,8 @@
      showgrid="true"
      inkscape:zoom="1.1697645"
      inkscape:cx="68.418125"
-     inkscape:cy="1048.2994"
-     inkscape:window-x="40"
+     inkscape:cy="330.20614"
+     inkscape:window-x="36"
      inkscape:window-y="0"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -53,7 +53,8 @@
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:snap-bbox-midpoints="true"
      inkscape:object-paths="false"
-     inkscape:snap-grids="true">
+     inkscape:snap-grids="true"
+     inkscape:document-rotation="0">
     <sodipodi:guide
        id="guide3599"
        position="179.93478,1249.5472"
@@ -113,8 +114,10 @@
        visible="true"
        enabled="true"
        snapvisiblegridlinesonly="true"
-       spacingx="0.5px"
-       spacingy="0.5px" />
+       spacingx="0.5"
+       spacingy="0.5"
+       originx="0"
+       originy="0" />
   </sodipodi:namedview>
   <metadata
      id="metadata2759">
@@ -124,7 +127,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3482,8 +3485,7 @@
      id="g6850"
      transform="matrix(1,0,0,-1,-173,791.58915)" />
   <text
-     sodipodi:linespacing="125%"
-     style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:justify;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Gill Sans"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14px;line-height:0%;font-family:'Gill Sans';text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
      xml:space="preserve"
      id="text6990"
      y="288.55786"
@@ -3495,88 +3497,93 @@
      id="text3561-2"
      y="295.72629"
      x="159.18268"
-     style="font-size:20.69886208px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      xml:space="preserve"><tspan
        y="295.72629"
        x="159.18268"
        id="tspan3563-1"
-       sodipodi:role="line">Checkbox</tspan></text>
+       sodipodi:role="line"
+       style="font-size:20.6989px;line-height:0">Checkbox</tspan></text>
   <text
      id="text3561-1-8"
      y="350.9614"
      x="55.768745"
-     style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      xml:space="preserve"><tspan
        id="tspan5841-2"
        y="350.9614"
        x="55.768745"
-       sodipodi:role="line">Checked</tspan></text>
+       sodipodi:role="line"
+       style="font-size:10px;line-height:0">Checked</tspan></text>
   <g
      id="g5761">
     <text
        xml:space="preserve"
-       style="font-size:18.46375656px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:umr10;-inkscape-font-specification:umr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:umr10;-inkscape-font-specification:umr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        x="-364.99722"
        y="49.028126"
-       id="text5355"
-       sodipodi:linespacing="125%"><tspan
+       id="text5355"><tspan
          sodipodi:role="line"
          x="-364.99722"
          y="49.028126"
-         id="tspan5361">Kvantum Glassy Theme</tspan></text>
+         id="tspan5361"
+         style="font-size:18.4638px;line-height:1.25">Kvantum Glassy Theme</tspan></text>
     <text
-       sodipodi:linespacing="125%"
        id="text7240"
        y="81.159393"
        x="-392.25565"
-       style="font-size:18.46375656000000021px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:umr10;-inkscape-font-specification:umr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:umr10;-inkscape-font-specification:umr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        xml:space="preserve"><tspan
          id="tspan7246"
          y="81.159393"
          x="-392.25565"
-         sodipodi:role="line">by Tsu Jan, under the GNU GPL v2+</tspan></text>
+         sodipodi:role="line"
+         style="font-size:18.4638px;line-height:1.25">by Tsu Jan, under the GNU GPL v2+</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14.76035500000000056px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:0px;word-spacing:0px;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999987999999995px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:umr10;-inkscape-font-specification:umr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:umr10;-inkscape-font-specification:umr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        x="-340.39639"
        y="113.84963"
-       id="text7248"
-       sodipodi:linespacing="125%"><tspan
+       id="text7248"><tspan
          sodipodi:role="line"
          x="-340.39639"
          y="113.84963"
-         id="tspan7254">tsujan2000@gmail.com</tspan></text>
+         id="tspan7254"
+         style="font-size:14.7604px;line-height:1.25">tsujan2000@gmail.com</tspan></text>
   </g>
   <text
      xml:space="preserve"
-     style="font-size:20.34791374px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      x="8.3355455"
      y="126.83562"
      id="text7245"><tspan
        sodipodi:role="line"
        id="tspan7247"
        x="8.3355455"
-       y="126.83562">Button</tspan></text>
+       y="126.83562"
+       style="font-size:20.3479px;line-height:0">Button</tspan></text>
   <text
      xml:space="preserve"
-     style="font-size:24.48666191px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      x="29.973066"
      y="449.12869"
      id="text7084"><tspan
        sodipodi:role="line"
        id="tspan7086"
        x="29.973066"
-       y="449.12869">Tab</tspan></text>
+       y="449.12869"
+       style="font-size:24.4867px;line-height:0">Tab</tspan></text>
   <text
      xml:space="preserve"
-     style="font-size:20.34791374px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      x="-1.3368375"
      y="225.61356"
      id="text6588"><tspan
        sodipodi:role="line"
        id="tspan6590"
        x="-1.3368375"
-       y="225.61356">Progressbar</tspan></text>
+       y="225.61356"
+       style="font-size:20.3479px;line-height:0">Progressbar</tspan></text>
   <path
      style="fill:url(#linearGradient7976);fill-opacity:1;fill-rule:evenodd;stroke:none"
      d="m 247.5,103.75 32.5,0 0,-7.5 -32.5,0 0,7.5 z"
@@ -5204,12 +5211,13 @@
      id="text5769"
      y="669.12872"
      x="46.218761"
-     style="font-size:24.48666191px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      xml:space="preserve"><tspan
        y="669.12872"
        x="46.218761"
        id="tspan5771"
-       sodipodi:role="line">Dial</tspan></text>
+       sodipodi:role="line"
+       style="font-size:24.4867px;line-height:0">Dial</tspan></text>
   <path
      style="fill:url(#linearGradient4751);fill-opacity:1;fill-rule:evenodd;stroke:none"
      d="m 196.00004,719.75005 0,12 12,0 c 0,-6.648 -5.352,-12 -12,-12 z"
@@ -5555,24 +5563,26 @@
      transform="translate(12.000102,135.00005)">
     <text
        xml:space="preserve"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        x="36.533894"
        y="679.79248"
        id="text4818"><tspan
          sodipodi:role="line"
          x="36.533894"
          y="679.79248"
-         id="tspan4820">Scrollbar Grips</tspan></text>
+         id="tspan4820"
+         style="font-size:14.6562px;line-height:0">Scrollbar Grips</tspan></text>
     <text
        id="text4822"
        y="701.13525"
        x="54.178974"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        xml:space="preserve"><tspan
          id="tspan4824"
          y="701.13525"
          x="54.178974"
-         sodipodi:role="line">(invisible)</tspan></text>
+         sodipodi:role="line"
+         style="font-size:14.6562px;line-height:0">(invisible)</tspan></text>
   </g>
   <g
      id="g4836"
@@ -5581,32 +5591,35 @@
        id="text8257"
        y="590.05579"
        x="11.533894"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        xml:space="preserve"><tspan
          id="tspan8259"
          y="590.05579"
          x="11.533894"
-         sodipodi:role="line">Scrollbar Slider</tspan></text>
+         sodipodi:role="line"
+         style="font-size:14.6562px;line-height:0">Scrollbar Slider</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        x="22.467632"
        y="611.13525"
        id="text4826"><tspan
          sodipodi:role="line"
          x="22.467632"
          y="611.13525"
-         id="tspan4828">(invisible top</tspan></text>
+         id="tspan4828"
+         style="font-size:14.6562px;line-height:0">(invisible top</tspan></text>
     <text
        id="text4832"
        y="631.54333"
        x="5.9961963"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        xml:space="preserve"><tspan
          id="tspan4834"
          y="631.54333"
          x="5.9961963"
-         sodipodi:role="line">and bottom parts)</tspan></text>
+         sodipodi:role="line"
+         style="font-size:14.6562px;line-height:0">and bottom parts)</tspan></text>
   </g>
   <rect
      width="15"
@@ -5671,12 +5684,13 @@
      id="text3887"
      y="569.12872"
      x="27.868681"
-     style="font-size:24.48666191px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      xml:space="preserve"><tspan
        y="569.12872"
        x="27.868681"
        id="tspan3889"
-       sodipodi:role="line">Tab Frame</tspan></text>
+       sodipodi:role="line"
+       style="font-size:24.4867px;line-height:0">Tab Frame</tspan></text>
   <path
      style="fill:url(#linearGradient3943);fill-opacity:1;fill-rule:evenodd;stroke:none"
      d="m 158.75,989.75 0,32.5 32.5,0 0,-32.5 -32.5,0 z"
@@ -5765,12 +5779,13 @@
      id="text5124"
      y="1015.1287"
      x="12.125089"
-     style="font-size:24.48666191px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
      xml:space="preserve"><tspan
        y="1015.1287"
        x="12.125089"
        id="tspan5126"
-       sodipodi:role="line">LineEdit</tspan></text>
+       sodipodi:role="line"
+       style="font-size:24.4867px;line-height:0">LineEdit</tspan></text>
   <g
      id="lineedit-normal-top"
      inkscape:label="#g4785"
@@ -6021,22 +6036,24 @@
        id="text3951"
        y="906.13525"
        x="63.07703"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        xml:space="preserve"><tspan
          id="tspan3953"
          y="906.13525"
          x="63.07703"
-         sodipodi:role="line">Slider Glow</tspan></text>
+         sodipodi:role="line"
+         style="font-size:14.6562px;line-height:0">Slider Glow</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14.65617085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.99999988px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:cmr10;-inkscape-font-specification:cmr10"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:cmr10;-inkscape-font-specification:cmr10;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"
        x="68.722107"
        y="927.47803"
        id="text3955"><tspan
          sodipodi:role="line"
          x="68.722107"
          y="927.47803"
-         id="tspan3957">(invisible)</tspan></text>
+         id="tspan3957"
+         style="font-size:14.6562px;line-height:0">(invisible)</tspan></text>
   </g>
   <rect
      inkscape:label="#rect4888"
