@@ -14537,30 +14537,29 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           }
         }
       }
-      bool isSpinBox(false);
-      if (QAbstractSpinBox *p = qobject_cast<QAbstractSpinBox*>(getParent(widget,1)))
+      QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(getParent(widget,1));
+      if (sb)
       {
-        isSpinBox = true;
         lspec.right = 0;
-        if (!tspec_.vertical_spin_indicators || p->buttonSymbols() == QAbstractSpinBox::NoButtons)
+        if (!tspec_.vertical_spin_indicators || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
         {
-          QString maxTxt = spinMaxText(p);
+          QString maxTxt = spinMaxText(sb);
           if (maxTxt.isEmpty()
-              || option->rect.width() < textSize(p->font(),maxTxt).width() + fspec.left
+              || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
-                                        + (p->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
-              || (p->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && p->width() < option->rect.width() + 2*tspec_.spin_button_width
+                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+              || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
+                  && sb->width() < option->rect.width() + 2*tspec_.spin_button_width
                                                        + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
             lspec.left = 0;
             sspec.incrementW = false;
-            if (p->buttonSymbols() == QAbstractSpinBox::NoButtons)
+            if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
               lspec.right = 0;
           }
-          if (p->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
+          if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
             fspec.top = qMin(fspec.top,3);
             fspec.bottom = qMin(fspec.bottom,3);
@@ -14581,7 +14580,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       QRect rect = labelRect(option->rect, fspec, lspec);
       if (sspec.incrementW)
       {
-        if (rtl && !isSpinBox)
+        if (rtl && (sb == nullptr || sb->buttonSymbols() == QAbstractSpinBox::NoButtons))
           rect.adjust(0,0,-sspec.minW/2,0);
         else
           rect.adjust(sspec.minW/2,0,0,0);
@@ -14621,7 +14620,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
                           0, 0, 0);
           }
         }
-        else if (qobject_cast<QAbstractSpinBox*>(widget->parentWidget()))
+        else if (sb && sb->buttonSymbols() != QAbstractSpinBox::NoButtons)
           rect.adjust(0,0,fspec.right,0);
       }
 
