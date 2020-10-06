@@ -2858,6 +2858,9 @@ check box</string>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonFollowStyle</enum>
    </property>
@@ -2874,6 +2877,9 @@ check box</string>
   <widget class="QToolBar" name="toolBar_2">
    <property name="windowTitle">
     <string>toolBar_2</string>
+   </property>
+   <property name="movable">
+    <bool>true</bool>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonFollowStyle</enum>

@@ -32,6 +32,7 @@
 #include <QAbstractItemView>
 #include <QWindow>
 #include <QToolButton>
+#include <QGraphicsDropShadowEffect>
 
 namespace KvManager {
 
@@ -2806,6 +2807,24 @@ void KvantumManager::aboutDialog()
 #endif
             aboutUi.setupUi (this);
             aboutUi.textLabel->setOpenExternalLinks (true);
+
+            QGraphicsOpacityEffect *opacity = new QGraphicsOpacityEffect();
+            aboutUi.titleLabel->setGraphicsEffect (opacity);
+            QPropertyAnimation *animation = new QPropertyAnimation (opacity, "opacity", this);
+            animation->stop();
+            animation->setDuration (1500);
+            animation->setStartValue (0.0);
+            animation->setEndValue (1.0);
+            animation->start();
+
+            QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect();
+            if (qGray (QApplication::palette().color (QPalette::Window).rgb()) > 100)
+                shadow->setColor (QColor (0, 0, 0, 60));
+            else
+                shadow->setColor (QColor (0, 0, 0, 180));
+            shadow->setOffset (0.5, 3);
+            shadow->setBlurRadius (15);
+            aboutUi.iconLabel->setGraphicsEffect (shadow);
         }
         void setTabTexts (const QString& first, const QString& sec) {
             aboutUi.tabWidget->setTabText (0, first);

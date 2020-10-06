@@ -600,72 +600,72 @@ markbutono</translation>
         <translation>Ilbreto</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2876"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>toolBar_2</source>
         <translation>Ilbreto_2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2895"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2901"/>
         <source>&amp;Quit</source>
         <translation>&amp;Eliri</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2898"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2904"/>
         <source>Quit</source>
         <translation>Eliri</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2901"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2907"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2909"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2915"/>
         <source>&amp;Checkbox</source>
         <translation>&amp;Markbutono</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2922"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2928"/>
         <source>Toggle Layout</source>
         <translation>Inversi la aranĝon</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2925"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2931"/>
         <source>Toggle layout direction</source>
         <translation>Inversi la direkton de la aranĝo</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2937"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2943"/>
         <source>&amp;Doc Mode</source>
         <translation>&amp;Dokumenta moduso</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2940"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2946"/>
         <source>Show tabs in the document mode</source>
         <translation>Montru la foliojn laŭ la dokumenta moduso</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2952"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2958"/>
         <source>Menu Button</source>
         <translation>Menubutono</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2955"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2961"/>
         <source>Hold pressed to show a menu</source>
         <translation>Tenu premante por montri menuon</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2966"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2972"/>
         <source>C&amp;heckbox</source>
         <translation>M&amp;arkbutono</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2974"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2980"/>
         <source>&amp;Radio button</source>
         <translation>&amp;Radiobutono</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2982"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2988"/>
         <source>Radio &amp;button</source>
         <translation>Radi&amp;obutono</translation>
     </message>

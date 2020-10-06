@@ -607,73 +607,73 @@ check box</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2876"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>toolBar_2</source>
         <translation>Панель инструментов 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2895"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2901"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выход</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2898"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2904"/>
         <source>Quit</source>
         <translation>Выйти из программы</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2901"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2907"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2909"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2915"/>
         <source>&amp;Checkbox</source>
         <translation>&amp;Флажок</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2922"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2928"/>
         <source>Toggle Layout</source>
         <translation>Переключить макет</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2925"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2931"/>
         <source>Toggle layout direction</source>
         <translation>Переключить направление макета</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2937"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2943"/>
         <source>&amp;Doc Mode</source>
         <translation>&amp;Режим документов</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2940"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2946"/>
         <source>Show tabs in the document mode</source>
         <translation>Показывать вкладки в режиме документов</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2952"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2958"/>
         <source>Menu Button</source>
         <translation>Кнопка меню</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2955"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2961"/>
         <source>Hold pressed to show a menu</source>
         <translation>Удерживайте кнопку нажатой
 для отображения меню</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2966"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2972"/>
         <source>C&amp;heckbox</source>
         <translation>Фл&amp;ажок</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2974"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2980"/>
         <source>&amp;Radio button</source>
         <translation>&amp;Переключатель</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2982"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2988"/>
         <source>Radio &amp;button</source>
         <translation>П&amp;ереключатель</translation>
     </message>

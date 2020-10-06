@@ -1,3 +1,9 @@
+V0.18.0
+---------
+ * Use PE_FrameStatusBarItem with Qt ≥ 5.13.0 and return from it.
+ * Made toolbars unmovable by default.
+ * Added some effects to the labels of Kvantum Manager's About dialog.
+
 V0.17.0
 ---------
  * Also, take care of widgets without interior SVG elements on a menu that has a high contrast with the window (a possible scenario that hasn't happened with any theme so far).

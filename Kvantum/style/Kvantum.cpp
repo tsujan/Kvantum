@@ -38,7 +38,6 @@
 #include <QHeaderView>
 #include <QDockWidget>
 #include <QDial>
-#include <QScrollBar>
 //#include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QToolBox>
@@ -49,9 +48,6 @@
 #include <QtCore/qmath.h>
 #include <QMenuBar>
 #include <QGraphicsView>
-#include <QStatusBar>
-#include <QCheckBox>
-#include <QRadioButton>
 #include <QStandardPaths>
 #include <QItemSelectionModel>
 #include <QDialogButtonBox> // for dialog buttons layout
@@ -1793,7 +1789,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       break;
     }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,13,0))
     case PE_FrameStatusBar : {return;} // simple is elegant
+#else
+    case PE_FrameStatusBarItem : {return;}
+#endif
 
     case PE_FrameDockWidget : {
       frame_spec fspec = getFrameSpec(QStringLiteral("Dock"));
@@ -13069,6 +13069,8 @@ int Style::styleHint(QStyle::StyleHint hint,
       }
     }
 
+    case SH_ToolBar_Movable : return false;
+
     case SH_ToolButton_PopupDelay : return 250;
     case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;
     case SH_Menu_Scrollable : {
@@ -13083,11 +13085,13 @@ int Style::styleHint(QStyle::StyleHint hint,
        used when reentering a menuitem with submenu and even
        when SH_Menu_SubMenuPopupDelay is negative. Here, we
        set it to 20s for negative delays as a workaround.
-
        NOTE: This has no effect with later versions of Qt5. */
     case SH_Menu_SubMenuSloppyCloseTimeout : {
       return tspec_.submenu_delay < 0 ? 20000 : 1000;
     }
+
+    case SH_Menu_SubMenuUniDirection : return false;
+    case SH_Menu_SubMenuUniDirectionFailCount : return 1;
 
     case SH_Menu_SubMenuResetWhenReenteringParent : return false;
 
