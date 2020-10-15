@@ -1490,8 +1490,9 @@ static inline QSize textSize(const QFont &font, const QString &text)
   if (!text.isEmpty())
   {
     QString t(text);
-    /* remove the '&' mnemonic character and tabs (for menu items) */
-    t.remove('\t');
+    /* remove tabs and also the '&' mnemonic character
+       (two successive ampersands are reduced to one) */
+    t.replace('\t', ' ');
     int i = 0;
     while (i < t.size())
     {
@@ -1514,7 +1515,9 @@ static inline QSize textSize(const QFont &font, const QString &text)
 
     if (l.size() > 1)
     {
-      QRect br = QFontMetrics(font).boundingRect(QRect(0,0,tw,th), Qt::AlignCenter, text);
+      QRect br = QFontMetrics(font).boundingRect(QRect(0,0,tw,th),
+                                                 Qt::AlignCenter | Qt::TextShowMnemonic,
+                                                 text);
       th = br.height();
     }
   }
@@ -6863,7 +6866,7 @@ void Style::drawControl(QStyle::ControlElement element,
           {
             fspec.left = 0;
             if (!opt->icon.isNull())
-              lspec.left = lspec.tispace; // center the text between
+              lspec.left = lspec.tispace; // center the text
           }
           if (ltb > 0)
           {
@@ -6913,6 +6916,7 @@ void Style::drawControl(QStyle::ControlElement element,
             else
               F.setWeight(lspec.boldness);
           }
+          txt.replace('\n', ' ');
           QSize txtSize = textSize(F,txt);
           if (txtSize.width() > txtWidth)
           {
@@ -6984,6 +6988,15 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (verticalTabs)
           painter->restore();
+      }
+
+      break;
+    }
+
+    case CE_ToolBoxTab: {
+      if (const QStyleOptionToolBox *opt = qstyleoption_cast<const QStyleOptionToolBox *>(option)) {
+        drawControl(CE_ToolBoxTabShape, opt, painter, widget);
+        drawControl(CE_ToolBoxTabLabel, opt, painter, widget);
       }
 
       break;
@@ -13566,7 +13579,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                           qMax(qAbs(lspec.yshift)-1,0)+qMax(lspec.depth-1,0));
           if (!opt->icon.isNull())
             s = s + QSize(lspec.tispace, 0);
-          /* take in to account the boldness of default button text
+          /* take into account the boldness of default button text
              and also the possibility of boldness in general */
           if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
           {
@@ -13577,23 +13590,27 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             f.setWeight(lspec.boldness);
             s = s + textSize(f, txt) - s1;
           }
-          // consider a global min. width for push buttons as is done in "qpushbutton.cpp"
-          s = s.expandedTo(QSize(2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
+          // consider a global min. width for push buttons
+          s.rwidth() = qMax(s.width(),
+                            2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-                                   + 6*QFontMetrics(QApplication::font()).horizontalAdvance("W"),
+                              + opt->fontMetrics.horizontalAdvance("W") * 6
 #else
-                                   + 6*QFontMetrics(QApplication::font()).width("W"),
+                              + opt->fontMetrics.width("W") * 6
 #endif
-                                 s.height()));
+                           );
         }
         else
         { // don't let width < height
-          s = s.expandedTo(QSize(s.height(),0));
+          s.rwidth() = qMax(s.width(), s.height());
           sspec.minW = qMax(sspec.minW,sspec.minH);
         }
 
         s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
+
+        if (!txt.isEmpty())
+          s.rwidth() = qMax(s.width(), 80); // not smaller than 80px with text
       }
 
       break;
@@ -13731,10 +13748,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             txt.replace('\n', ' ');
           }
           else
-          {
-            const QStringList l = txt.split('\t');
-            hasLabel = !(l.size() > 0 && l[0].isEmpty());
-          }
+            hasLabel = (txt.indexOf(QLatin1Char('\t')) > 0);
           s = sizeCalculated(f,fspec,lspec,sspec,txt,
                              (opt->icon.isNull() || (hspec_.iconless_menu && hasLabel))
                                ? QSize()
@@ -13951,7 +13965,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                         qMax(iconSize.width(), iconSize.height())
                         : pixelMetric(PM_TabBarIconSize,option,widget); // as in CE_TabBarTabLabel
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
+        QString txt = opt->text;
+        txt.replace('\n', ' '); // always draw the tab text in a single line
+        s = sizeCalculated(f,fspec,lspec,sspec,txt,
                            opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
                            Qt::ToolButtonTextBesideIcon);
 
@@ -13964,7 +13980,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           verticalTabs = true;
         }
 
-        if (opt->text.isEmpty())
+        if (txt.isEmpty())
           s.rwidth() += lspec.left + lspec.right;
 
         if (verticalTabs)
