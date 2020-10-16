@@ -6,6 +6,7 @@ V0.18.0
  * Don't let the width of a push button that has text be smaller than 80px (although the minimum width may be greater because it depends on the font).
  * Replace text tabs with spaces when calculating label sizes (because text tabs aren't expanded when labels are drawn).
  * Always draw the tab text in a single line.
+ * Horizontally smaller menus when they have accelerators.
 
 V0.17.0
 ---------

@@ -5384,19 +5384,17 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
 
-          QStringList l;
-          bool hasLabel, haShortcut;
-          bool hasNewLine(opt->text.contains('\n')); // may happen with combos
-          if (hasNewLine)
+          QString txt = opt->text;
+          txt.replace('\n', ' '); // may be needed with combos
+          QString shortcutTxt;
+          if (!isComboMenu)
           {
-            hasLabel = true;
-            haShortcut = false;
-          }
-          else
-          {
-            l = opt->text.split('\t');
-            hasLabel = (l.size() > 0);
-            haShortcut = (l.size() > 1);
+            int tabIndex = txt.indexOf(QLatin1Char('\t'));
+            if (tabIndex > 0)
+            {
+              shortcutTxt = txt.mid(tabIndex + 1);
+              txt = txt.left(tabIndex);
+            }
           }
 
           int smallIconSize = pixelMetric(PM_SmallIconSize);
@@ -5450,26 +5448,21 @@ void Style::drawControl(QStyle::ControlElement element,
 
           int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           int ih = qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget));
-          if (hasLabel) // menu label
+
+          /* label */
+          painter->save();
+          painter->setFont(opt->font); // some apps (like TeXstudio) use special fonts
+          int checkSpace = 0;
+          if (!hideCheckBoxes
+              && ((widget && opt->menuHasCheckableItems)
+                  || opt->checkType != QStyleOptionMenuItem::NotCheckable)) // as in CT_MenuItem
           {
-            painter->save();
-            painter->setFont(opt->font); // some apps (like TeXstudio) use special fonts
-            QString txt;
-            if (hasNewLine)
-            {
-              txt = opt->text;
-              txt.replace('\n', ' ');
-            }
-            else txt = l[0];
-            int checkSpace = 0;
-            if (!hideCheckBoxes
-                && ((widget && opt->menuHasCheckableItems)
-                    || opt->checkType != QStyleOptionMenuItem::NotCheckable)) // as in CT_MenuItem
-            {
-              checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
-            }
-            int iconSpace = 0;
-            if (opt->icon.isNull() || (hspec_.iconless_menu && !txt.isEmpty()))
+            checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
+          }
+          int iconSpace = 0;
+          if (opt->icon.isNull() || hspec_.iconless_menu)
+          {
+            if (!txt.isEmpty())
             {
               if (((opt->maxIconWidth
                     /* combobox always announces the existence of an icon,
@@ -5491,57 +5484,59 @@ void Style::drawControl(QStyle::ControlElement element,
                           state,
                           status.contains("-inactive"));
             }
-            else
+          }
+          else
+          {
+            int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
+            if (lxqtMenuIconSize >= 16
+                && lxqtMenuIconSize != smallIconSize
+                && qobject_cast<const QMenu*>(widget))
             {
-              int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
-              if (lxqtMenuIconSize >= 16
-                  && lxqtMenuIconSize != smallIconSize
-                  && qobject_cast<const QMenu*>(widget))
+              if (widget->objectName() == "TopLevelMainMenu")
+                smallIconSize = lxqtMenuIconSize;
+              else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
               {
-                if (widget->objectName() == "TopLevelMainMenu")
+                if (menu->objectName() == "TopLevelMainMenu")
                   smallIconSize = lxqtMenuIconSize;
-                else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
+                else
                 {
-                  if (menu->objectName() == "TopLevelMainMenu")
-                    smallIconSize = lxqtMenuIconSize;
-                  else
+                  while (qobject_cast<QMenu*>(getParent(menu, 1)))
                   {
-                    while (qobject_cast<QMenu*>(getParent(menu, 1)))
+                    menu = qobject_cast<QMenu*>(getParent(menu, 1));
+                    if (menu->objectName() == "TopLevelMainMenu")
                     {
-                      menu = qobject_cast<QMenu*>(getParent(menu, 1));
-                      if (menu->objectName() == "TopLevelMainMenu")
-                      {
-                        smallIconSize = lxqtMenuIconSize;
-                        break;
-                      }
+                      smallIconSize = lxqtMenuIconSize;
+                      break;
                     }
                   }
                 }
               }
-              QSize iconSize = QSize(smallIconSize,smallIconSize);
-              bool isInactive(status.contains("-inactive"));
-              QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
-              if (px.isNull()) // with a non-null icon
-                iconSpace = smallIconSize + lspec.tispace;
-              QRect r = option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
-                                              0,
-                                              rtl ? -iconSpace-checkSpace : 0,
-                                              0);
-              if (txt.isEmpty()) // textless menuitem, as in Kdenlive's play button menu
-                r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
-                                iconSize,labelRect(r,fspec,lspec));
-              renderLabel(option,painter,r,
-                          fspec,lspec,
-                          Qt::AlignLeft | talign,
-                          txt,QPalette::Text,
-                          state,
-                          isInactive,
-                          px,
-                          iconSize);
             }
-            painter->restore();
+            QSize iconSize = QSize(smallIconSize,smallIconSize);
+            bool isInactive(status.contains("-inactive"));
+            QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
+            if (px.isNull()) // with a non-null icon
+              iconSpace = smallIconSize + lspec.tispace;
+            QRect r = option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
+                                            0,
+                                            rtl ? -iconSpace-checkSpace : 0,
+                                            0);
+            if (txt.isEmpty()) // textless menuitem, as in Kdenlive's play button menu
+              r = alignedRect(option->direction,Qt::AlignVCenter | Qt::AlignLeft,
+                              iconSize,labelRect(r,fspec,lspec));
+            renderLabel(option,painter,r,
+                        fspec,lspec,
+                        Qt::AlignLeft | talign,
+                        txt,QPalette::Text,
+                        state,
+                        isInactive,
+                        px,
+                        iconSize);
           }
-          if (haShortcut) // shortcut
+          painter->restore();
+
+          /* shortcut */
+          if (!shortcutTxt.isEmpty())
           {
             int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
@@ -5553,7 +5548,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                               0),
                         fspec,lspec,
                         Qt::AlignRight | talign,
-                        l[1],QPalette::Text,
+                        shortcutTxt,QPalette::Text,
                         state,
                         status.contains("-inactive"));
           }
@@ -13704,10 +13699,6 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
-        QFont f;
-        f = opt->font; // some apps (like TeXstudio) use special fonts (see CE_MenuItem)
-        if (lspec.boldFont) f.setWeight(lspec.boldness);
-
         int smallIconSize = pixelMetric(PM_SmallIconSize);
         int iconSize = qMax(smallIconSize, opt->maxIconWidth);
         int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
@@ -13740,19 +13731,24 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = QSize(contentsSize.width(), tspec_.menu_separator_height);
         else
         {
+          QFont f = opt->font; // some apps (like TeXstudio) use special fonts (see CE_MenuItem)
           QString txt = opt->text;
-          bool hasLabel;
-          if (txt.contains('\n')) // may happen with combos
+          txt.replace('\n', ' '); // may be needed with combos
+          int shortcutSpace = 0;
+          if (!qobject_cast<const QComboBox*>(widget))
           {
-            hasLabel = true;
-            txt.replace('\n', ' ');
+            int tabIndex = txt.indexOf(QLatin1Char('\t'));
+            if (tabIndex > 0)
+            {
+              txt = txt.left(tabIndex);
+              shortcutSpace = QFontMetrics(f).height() * 3;
+            }
           }
-          else
-            hasLabel = (txt.indexOf(QLatin1Char('\t')) > 0);
           s = sizeCalculated(f,fspec,lspec,sspec,txt,
-                             (opt->icon.isNull() || (hspec_.iconless_menu && hasLabel))
+                             (opt->icon.isNull() || hspec_.iconless_menu)
                                ? QSize()
                                : QSize(iconSize,iconSize));
+          s.rwidth() += shortcutSpace;
         }
 
         /* even when there's no icon, another menuitem may have icon
