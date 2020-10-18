@@ -6919,10 +6919,10 @@ void Style::drawControl(QStyle::ControlElement element,
                it might not fit into our available space. So, we always
                elide it but respect the elide mode when present. */
             QFontMetrics fm(F);
-            txt = fm.elidedText(txt, (tb && tb->elideMode() != Qt::ElideNone)
-                                       ? tb->elideMode()
-                                       : Qt::ElideRight,
-                                txtWidth);
+            txt = fm.elidedText(txt,
+                                (tb && tb->elideMode() != Qt::ElideNone)
+                                  ? tb->elideMode() : Qt::ElideRight,
+                                txtWidth, Qt::TextShowMnemonic);
           }
           if (txtSize.height() > r.height() - lspec.top-lspec.bottom-fspec.top-fspec.bottom)
           { // try to work around design flaws as far as possible
@@ -7167,7 +7167,8 @@ void Style::drawControl(QStyle::ControlElement element,
           }
         }
 
-        QString txt = QFontMetrics(painter->font()).elidedText(opt->text,Qt::ElideRight,tr.width());
+        QString txt = QFontMetrics(painter->font()).elidedText(opt->text, Qt::ElideRight,
+                                                               tr.width(), Qt::TextShowMnemonic);
 
         if (!px.isNull())
           drawItemPixmap(painter, ir, Qt::AlignCenter, px);
@@ -7928,7 +7929,7 @@ void Style::drawControl(QStyle::ControlElement element,
           }
         }
 
-        txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length);
+        txt = QFontMetrics(f).elidedText(txt, Qt::ElideRight, length, Qt::TextShowMnemonic);
 
         bool isInactive(isWidgetInactive(widget));
         int state = option->state & State_Enabled ?
@@ -9892,7 +9893,8 @@ void Style::drawControl(QStyle::ControlElement element,
                   else // If the text is beside the icon but doesn't fit in,...
                   { // ... elide it!
                     QFontMetrics fm(painter->font());
-                    txt = fm.elidedText(txt, Qt::ElideRight, availableSize.width());
+                    txt = fm.elidedText(txt, Qt::ElideRight,
+                                        availableSize.width(), Qt::TextShowMnemonic);
                   }
                 }
               }
@@ -9920,7 +9922,8 @@ void Style::drawControl(QStyle::ControlElement element,
                   else // again, elide the text if it doesn't fit in
                   {
                     QFontMetrics fm(painter->font());
-                    txt = fm.elidedText(txt, Qt::ElideRight, availableSize.width());
+                    txt = fm.elidedText(txt, Qt::ElideRight,
+                                        availableSize.width(), Qt::TextShowMnemonic);
                   }
                 }
               }
@@ -10253,7 +10256,8 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           QFont F(painter->font());
           if (lspec.boldFont) F.setWeight(lspec.boldness);
-          title = QFontMetrics(F).elidedText(title, Qt::ElideRight, tRect.width());
+          title = QFontMetrics(F).elidedText(title, Qt::ElideRight,
+                                             tRect.width(), Qt::TextShowMnemonic);
         }
         int talign = Qt::AlignHCenter | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
@@ -11961,7 +11965,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             title = fm.elidedText(title, Qt::ElideRight,
                                   o.rect.width()-(pixelMetric(PM_TitleBarHeight)-4+lspec.tispace)
                                                 // titlebars have no frame
-                                                -lspec.right-lspec.left);
+                                                -lspec.right-lspec.left,
+                                  Qt::TextShowMnemonic);
           }
           int icnSize = pixelMetric(PM_TitleBarHeight) - 4; // 2-px margins for the icon
           QSize iconSize = QSize(icnSize,icnSize);
