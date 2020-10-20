@@ -8809,8 +8809,14 @@ void Style::drawControl(QStyle::ControlElement element,
 
           if (txtCol.isValid())
           {
-            QColor inactiveTxtCol = getFromRGBA(tlspec.normalInactiveColor);
-            if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
+            QColor inactiveTxtCol;
+            if (tspec_.no_inactiveness)
+              inactiveTxtCol = txtCol;
+            else
+            {
+              inactiveTxtCol = getFromRGBA(tlspec.normalInactiveColor);
+              if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
+            }
             QColor disabledTxtCol = txtCol;
             disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))

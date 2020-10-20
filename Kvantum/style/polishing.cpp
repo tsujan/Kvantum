@@ -171,9 +171,14 @@ void Style::polish(QWidget *widget)
       && !qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
       && getStylableToolbarContainer(widget))
   {
-    QColor inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
-    if (!inactiveCol.isValid())
+    QColor inactiveCol;
+    if (tspec_.no_inactiveness)
       inactiveCol = tColor;
+    else
+    {
+      inactiveCol = getFromRGBA(tLspec.normalInactiveColor);
+      if (!inactiveCol.isValid()) inactiveCol = tColor;
+    }
     QColor disabledCol = tColor;
     disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
 #if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))

@@ -7,6 +7,7 @@ V0.18.0
  * Replace text tabs with spaces when calculating label sizes (because text tabs aren't expanded when labels are drawn).
  * Always draw the tab text in a single line.
  * Horizontally smaller menus when they have accelerators.
+ * Respect the key "no_inactiveness" with all widgets.
 
 V0.17.0
 ---------
