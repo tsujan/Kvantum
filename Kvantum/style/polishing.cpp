@@ -506,15 +506,14 @@ void Style::polish(QWidget *widget)
               {
                 if (tspec_now.menu_shadow_depth > 0)
                   getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-                QList<qreal> tooltipS;
                 if (tspec_now.tooltip_shadow_depth > 0)
                 {
                   const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
                   int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
                   thickness += tspec_now.tooltip_shadow_depth;
-                  tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+                  getShadow(QStringLiteral("ToolTip"), thickness);
                 }
-                blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+                blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                              tspec_.contrast, tspec_.intensity, tspec_.saturation);
               }
               if (blurHelper_)
@@ -1052,15 +1051,14 @@ void Style::polish(QWidget *widget)
       {
         if (blurHelper_ == nullptr && tspec_now.popup_blurring)
         {
-          QList<qreal> tooltipS;
           if (tspec_now.tooltip_shadow_depth > 0)
           {
             const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
             int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
             thickness += tspec_now.tooltip_shadow_depth;
-            tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+            getShadow(QStringLiteral("ToolTip"), thickness);
           }
-          blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+          blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                        tspec_.contrast, tspec_.intensity, tspec_.saturation);
         }
         /* blurHelper_ may exist because of blurring hard-coded translucency */

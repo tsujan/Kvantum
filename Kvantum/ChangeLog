@@ -8,6 +8,7 @@ V0.18.0
  * Always draw the tab text in a single line.
  * Horizontally smaller menus when they have accelerators.
  * Respect the key "no_inactiveness" with all widgets.
+ * Get tooltip shadow dimensions only once if compositing is available.
 
 V0.17.0
 ---------

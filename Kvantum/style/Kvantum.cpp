@@ -385,15 +385,14 @@ Style::Style(bool useDark) : QCommonStyle()
   {
     if (tspec_.menu_shadow_depth > 0)
       getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
-    QList<qreal> tooltipS;
     if (tspec_.tooltip_shadow_depth > 0)
     {
       const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
       int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
       thickness += tspec_.tooltip_shadow_depth;
-      tooltipS = getShadow(QStringLiteral("ToolTip"), thickness);
+      getShadow(QStringLiteral("ToolTip"), thickness);
     }
-    blurHelper_ = new BlurHelper(this, menuShadow_, tooltipS,
+    blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                  tspec_.contrast, tspec_.intensity, tspec_.saturation);
   }
 }
@@ -905,26 +904,28 @@ int Style::getMenuMargin(bool horiz) const
   return margin;
 }
 
-QList<qreal> Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
+// Should be called only when compositing is available.
+void Style::getShadow(const QString &widgetName, int thicknessH, int thicknessV)
 {
-  if (tspec_.shadowless_popup)
+  if (widgetName == "Menu")
   {
-    if (widgetName == "Menu")
+    if (menuShadow_.count() == 4)
+      return;
+    if (tspec_.shadowless_popup)
     {
       menuShadow_ = {0,0,0,0};
       realMenuShadow_ = {0,0,0,0};
       setProperty("menu_shadow", QVariant::fromValue(realMenuShadow_));
     }
-    return menuShadow_;
   }
-  if (widgetName == "Menu"
-      && menuShadow_.count() == 4)
+  else
   {
-    return menuShadow_;
+    if (tooltipShadow_.count() == 4 || tspec_.shadowless_popup)
+      return;
   }
 
   QList<qreal> s;
-  s << 0 << 0 << 0 << 0;
+  s << 0 << 0 << 0 << 0; // [left, top, right, bottom]
 
   QSvgRenderer *renderer = 0;
   qreal divisor = 0;
@@ -971,10 +972,9 @@ QList<qreal> Style::getShadow(const QString &widgetName, int thicknessH, int thi
       menuShadow_[0] = menuShadow_[2] = static_cast<qreal>(thicknessH);
     }
     setProperty("menu_shadow", QVariant::fromValue(shadow));
-    return menuShadow_;
   }
-
-  return s; // [left, top, right, bottom]
+  else
+    tooltipShadow_ = s;
 }
 
 // also checks for NULL widgets
