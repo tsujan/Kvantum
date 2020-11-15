@@ -9,6 +9,7 @@ V0.18.0
  * Horizontally smaller menus when they have accelerators.
  * Respect the key "no_inactiveness" with all widgets.
  * Get tooltip shadow dimensions only once if compositing is available.
+ * Enable dragging from inside windows (x11drag) under Wayland and with Qt ≥ 5.15 by leaving it to the window manager.
 
 V0.17.0
 ---------

@@ -2,7 +2,7 @@
 // and QtCurve's windowmanager.cpp v1.8.17
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2020 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -62,7 +62,7 @@ public:
     }
   }
 
-  explicit WindowManager (QObject *parent, Drag drag);
+  explicit WindowManager (QObject *parent, Drag drag, bool WMDrag);
   virtual ~WindowManager() {}
 
   void initialize (const QStringList &whiteList=QStringList(),
@@ -81,6 +81,10 @@ protected:
   bool enabled() const
   {
     return enabled_;
+  }
+  bool isWMDrag() const
+  {
+    return WMDrag_;
   }
   void setEnabled (bool value)
   {
@@ -158,6 +162,7 @@ private:
   bool dragInProgress_;
   bool locked_;
   Drag drag_;
+  bool WMDrag_;
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   bool cursorOverride_;
 #endif
@@ -173,7 +178,9 @@ private:
     AppEventFilter (WindowManager *parent) :
                    QObject (parent),
                    parent_ (parent)
-    {}
+    {
+      WMDrag_ = parent_->isWMDrag();
+    }
   virtual bool eventFilter (QObject*, QEvent*);
   protected:
     // application-wise event.
@@ -181,6 +188,7 @@ private:
     bool appMouseEvent (QObject*, QEvent*);
   private:
     WindowManager *parent_;
+    bool WMDrag_;
   };
 
   AppEventFilter *_appEventFilter;

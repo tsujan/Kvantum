@@ -2,7 +2,7 @@
 // and QtCurve's windowmanager.cpp v1.8.17
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2020 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -37,9 +37,15 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QGraphicsView>
-/* Qt got a new X11 bug since Qt5.11 and, as a result, the X11 drag
-   started to have a problem. However, dragging is still possible by
-   using QWindow::setPosition(); hence, these cases of "#if". */
+/* NOTE: "WMDrag_" means letting the WM do the dragging. It should be true under
+         Wayland and only with Qt >= 5.15.
+
+         As for X11, Qt got a mouseover bug about WM dragging since Qt5.11.
+         But a good dragging is still possible by using QWindow::setPosition();
+         hence, the following cases of "#if".
+
+         The mouseover bug also exists under Wayland but nothing can be done
+         for it because QWindow::setPosition() doesn't work there. */
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
 #include "windowmanager.h"
 #else
@@ -73,7 +79,7 @@ static inline bool isPrimaryToolBar(QWidget *w)
   return false;
 }
 
-WindowManager::WindowManager (QObject* parent, Drag drag) :
+WindowManager::WindowManager (QObject* parent, Drag drag, bool WMDrag) :
                QObject (parent),
                enabled_ (true),
                dragDistance_ (QApplication::startDragDistance()),
@@ -81,12 +87,16 @@ WindowManager::WindowManager (QObject* parent, Drag drag) :
                dragAboutToStart_ (false),
                dragInProgress_ (false),
                locked_ (false),
-               drag_ (drag)
+               drag_ (drag),
+               WMDrag_ (WMDrag)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
                , cursorOverride_ (false)
 #endif
 {
-  _appEventFilter = new AppEventFilter( this );
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
+  WMDrag_ = false;
+#endif
+  _appEventFilter = new AppEventFilter (this);
   qApp->installEventFilter (_appEventFilter);
 }
 /*************************/
@@ -106,7 +116,10 @@ void WindowManager::registerWidget (QWidget* widget)
     the drag to happen
   */
   if (isBlackListed (widget) || isDragable (widget))
+  {
+    widget->removeEventFilter (this);
     widget->installEventFilter (this);
+  }
 
 }
 /*************************/
@@ -177,7 +190,6 @@ bool WindowManager::eventFilter (QObject* object, QEvent* event)
 /*************************/
 void WindowManager::timerEvent (QTimerEvent* event)
 {
-
   if (event->timerId() == dragTimer_.timerId())
   {
     dragTimer_.stop();
@@ -213,7 +225,10 @@ bool WindowManager::mousePressEvent (QObject* object, QEvent* event)
   // retrieve widget's child at event position
   QPoint position;
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  position = widget->mapFromGlobal (mouseEvent->globalPos()); // see WindowManager::mouseMoveEvent for the reason
+  if (!WMDrag_)
+    position = widget->mapFromGlobal (mouseEvent->globalPos()); // see WindowManager::mouseMoveEvent for the reason
+  else
+    position = mouseEvent->pos();
 #else
   position = mouseEvent->pos();
 #endif
@@ -258,16 +273,13 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
     if (dragAboutToStart_)
     {
       if (mouseEvent->globalPos() == globalDragPoint_)
-      {
-        // start timer,
+      { // start timer
         dragAboutToStart_ = false;
         if (dragTimer_.isActive())
           dragTimer_.stop();
         dragTimer_.start (dragDelay_, this);
-
       }
       else resetDrag();
-
     }
     else if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
       dragTimer_.start (0, this);
@@ -277,7 +289,7 @@ bool WindowManager::mouseMoveEvent (QObject* object, QEvent* event)
   else
   {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-    if (target_)
+    if (!WMDrag_ && target_)
     { // use QWindow::setPosition (or QWidget::move) for the dragging
       QWidget* window = target_.data()->window();
       /* FIXME: For some unknown reason, mapping from the global position
@@ -482,8 +494,9 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 
   // tool buttons
 
-  if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget)) {
-    if (drag_ < DRAG_ALL && !isPrimaryToolBar(widget->parentWidget()))
+  if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
+  {
+    if (drag_ < DRAG_ALL && !isPrimaryToolBar (widget->parentWidget()))
       return false;
     return toolButton->autoRaise() && !toolButton->isEnabled();
   }
@@ -491,7 +504,6 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
   // check menubar
   if (QMenuBar* menuBar = qobject_cast<QMenuBar*>(widget))
   {
-
     // check if there is an active action
     if(menuBar->activeAction() && menuBar->activeAction()->isEnabled())
       return false;
@@ -507,7 +519,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
     return true;
   }
 
-  bool isToolbar = isPrimaryToolBar(widget);
+  bool isToolbar = isPrimaryToolBar (widget);
   if (drag_< DRAG_MENUBAR_AND_PRIMARY_TOOLBAR && isToolbar)
     return false;
 
@@ -628,7 +640,7 @@ bool WindowManager::canDrag (QWidget* widget, QWidget* child, const QPoint& posi
 void WindowManager::resetDrag()
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  if (target_ && cursorOverride_)
+  if (!WMDrag_ && target_ && cursorOverride_)
   {
     qApp->restoreOverrideCursor();
     cursorOverride_ = false;
@@ -647,18 +659,27 @@ void WindowManager::resetDrag()
 void WindowManager::startDrag (QWidget *widget, const QPoint &position)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  Q_UNUSED(position);
+  if (!WMDrag_)
+    Q_UNUSED(position);
 #endif
 
   if (!(enabled() && widget) || QWidget::mouseGrabber())
     return;
 
-
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  if (!cursorOverride_)
+  if (!WMDrag_)
   {
-    qApp->setOverrideCursor (Qt::OpenHandCursor);
-    cursorOverride_ = true;
+    if (!cursorOverride_)
+    {
+      qApp->setOverrideCursor (Qt::OpenHandCursor);
+      cursorOverride_ = true;
+    }
+  }
+  else
+  {
+    if (QWindow *winHandle = widget->window()->windowHandle())
+      dragInProgress_ = winHandle->startSystemMove();
+    return;
   }
 #else
   qreal pixelRatio = qApp->devicePixelRatio();
@@ -686,7 +707,8 @@ bool WindowManager::isDockWidgetTitle (const QWidget* widget) const
 bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  Q_UNUSED(object);
+  if (!WMDrag_)
+    Q_UNUSED(object);
 #endif
 
   if (event->type() == QEvent::MouseButtonRelease)
@@ -694,22 +716,31 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
     // stop drag timer
     if (parent_->dragTimer_.isActive())
       parent_->resetDrag();
-
     // unlock
     if (parent_->isLocked())
       parent_->setLocked (false);
   }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  return false;
+  if (!WMDrag_)
+    return false;
+  else
+  {
+    if (!parent_->enabled()) return false;
+    if (parent_->dragInProgress_
+        && parent_->target_
+        && (event->type() == QEvent::MouseMove
+            || event->type() == QEvent::MouseButtonPress))
+    {
+      return appMouseEvent (object, event);
+    }
+    return false;
+  }
 #else
   if (!parent_->enabled()) return false;
-
-  /*
-    If a drag is in progress, the widget will not receive any event.
-    We trigger on the first MouseMove or MousePress events that are received
-    by any widget in the application to detect that the drag is finished.
-  */
+  /* If a drag is in progress, the widget will not receive any event.
+     We wait for the first MouseMove or MousePress event that is received
+     by any widget in the application to detect that the drag is finished. */
   if (parent_->dragInProgress_
       && parent_->target_
       && (event->type() == QEvent::MouseMove
@@ -726,11 +757,8 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
 {
   Q_UNUSED(object);
   Q_UNUSED(event);
-
-  /*
-    Post some mouseRelease event to the target, in order to counter balance
-    the mouse press that triggered the drag. Note that it triggers resetDrag()!
-  */
+  /* Post a mouseRelease event to the target, in order to counterbalance
+    the mouse press that triggered the drag. Note that it triggers resetDrag()! */
   QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
                           parent_->dragPoint_,
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
@@ -738,4 +766,5 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
 
   return true;
 }
+
 }

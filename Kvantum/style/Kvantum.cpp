@@ -375,10 +375,18 @@ Style::Style(bool useDark) : QCommonStyle()
   itsWindowManager_ = nullptr;
   blurHelper_ = nullptr;
 
-  if (tspec_.x11drag && tspec_.isX11)
-  {
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
+  if (tspec_.x11drag)
+  { // See the explanation near the top of "windowmanager.cpp"
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag, !tspec_.isX11);
     itsWindowManager_->initialize();
+#else
+    if (tspec_.isX11)
+    {
+      itsWindowManager_ = new WindowManager(this, tspec_.x11drag, false);
+      itsWindowManager_->initialize();
+    }
+#endif
   }
 
   if (tspec_.blurring)
