@@ -682,8 +682,6 @@ void WindowManager::startDrag (QWidget *widget, const QPoint &position)
   }
 #else
   qreal pixelRatio = qApp->devicePixelRatio();
-  if (QWindow *winHandle = widget->windowHandle())
-    pixelRatio = winHandle->devicePixelRatio();
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   X11MoveTrigger (widget->window()->internalWinId(),
                   qRound(static_cast<qreal>(position.x())*pixelRatio),

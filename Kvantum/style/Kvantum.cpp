@@ -12872,14 +12872,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       if (/*isLibreoffice_
           ||*/ qobject_cast<QAbstractItemView*>(getParent(widget,2)))
       {
-        qreal pixelRatio = qApp->devicePixelRatio();
-        if (widget)
-        {
-          if (QWindow *winHandle = widget->windowHandle())
-            pixelRatio = winHandle->devicePixelRatio();
-        }
-        pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
-        return qMin(qRound(static_cast<qreal>(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget))*pixelRatio),
+        return qMin(QCommonStyle::pixelMetric(PM_IndicatorWidth,option,widget),
                     tspec_.check_size);
       }
       if (qstyleoption_cast<const QStyleOptionMenuItem*>(option)
