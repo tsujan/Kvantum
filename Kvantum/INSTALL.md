@@ -195,7 +195,11 @@ Or, better, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For e
 
     export QT_STYLE_OVERRIDE=kvantum
 
-If the display manager you use does not source `~/.profile`, you could probably add the above line to `~/.xsessionrc`. The last resort is `/etc/environment` but most desktop environments have GUI tools for setting environment variables.
+If the desktop environment you use does not source `~/.profile`, you could try `~/.config/environment.d/*.conf`: make a file like `~/.config/environment.d/qt.conf` and put this into it:
+
+    QT_STYLE_OVERRIDE=kvantum
+
+The last resort is `/etc/environment` but most desktop environments have GUI tools for setting environment variables.
 
 ### Using other themes
 
