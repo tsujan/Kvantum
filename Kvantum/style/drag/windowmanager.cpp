@@ -659,8 +659,7 @@ void WindowManager::resetDrag()
 void WindowManager::startDrag (QWidget *widget, const QPoint &position)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  if (!WMDrag_)
-    Q_UNUSED(position);
+  Q_UNUSED(position);
 #endif
 
   if (!(enabled() && widget) || QWidget::mouseGrabber())
@@ -706,11 +705,6 @@ bool WindowManager::isDockWidgetTitle (const QWidget* widget) const
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  if (!WMDrag_)
-    Q_UNUSED(object);
-#endif
-
   if (event->type() == QEvent::MouseButtonRelease)
   {
     // stop drag timer
@@ -724,19 +718,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   if (!WMDrag_)
     return false;
-  else
-  {
-    if (!parent_->enabled()) return false;
-    if (parent_->dragInProgress_
-        && parent_->target_
-        && (event->type() == QEvent::MouseMove
-            || event->type() == QEvent::MouseButtonPress))
-    {
-      return appMouseEvent (object, event);
-    }
-    return false;
-  }
-#else
+#endif
   if (!parent_->enabled()) return false;
   /* If a drag is in progress, the widget will not receive any event.
      We wait for the first MouseMove or MousePress event that is received
@@ -750,7 +732,6 @@ bool WindowManager::AppEventFilter::eventFilter (QObject* object, QEvent* event)
   }
 
   return false;
-#endif
 }
 /*************************/
 bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* event)
@@ -758,7 +739,7 @@ bool WindowManager::AppEventFilter::appMouseEvent (QObject* object, QEvent* even
   Q_UNUSED(object);
   Q_UNUSED(event);
   /* Post a mouseRelease event to the target, in order to counterbalance
-    the mouse press that triggered the drag. Note that it triggers resetDrag()! */
+     the mouse press that triggered the drag and also to reset the drag. */
   QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
                           parent_->dragPoint_,
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
