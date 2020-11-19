@@ -252,12 +252,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   globalDragPoint_ = mouseEvent->globalPos();
   dragAboutToStart_ = true;
 
-  /* Send a move event to the target window with same position
-     if received, it is caught to actually start the drag. */
-  QMouseEvent mouseMoveEvent (QEvent::MouseMove, winDragPoint_, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-  qApp->sendEvent (w, &mouseMoveEvent);
-
-  /* Because the widget may react to mouse press events, we send a press event to it.
+  /* Because the widget may react to mouse press events, we first send a press event to it.
      A release event will be sent in WindowManager::AppEventFilter::eventFilter.
      Also, the widget should get focus if it accepts focus by clicking. */
   if (widget->focusPolicy() > Qt::TabFocus
@@ -267,6 +262,15 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   }
   QMouseEvent mousePressEvent (QEvent::MouseButtonPress, widgetDragPoint_, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (widget, &mousePressEvent);
+
+  /* Steal the event if the window is inactive now. The window may become
+     inactive here due to the mouse press event that was sent above. */
+  if (!w->isActive()) return true;
+
+  /* Send a move event to the target window with same position
+     if received, it is caught to actually start the drag. */
+  QMouseEvent mouseMoveEvent (QEvent::MouseMove, winDragPoint_, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+  qApp->sendEvent (w, &mouseMoveEvent);
 
   /* consume the event */
   return true;
