@@ -62,8 +62,7 @@ public:
   explicit WindowManager (QObject *parent, Drag drag);
   virtual ~WindowManager() {}
 
-  void initialize (const QStringList &whiteList = QStringList(),
-                   const QStringList &blackList = QStringList());
+  void initialize (const QStringList &blackList = QStringList());
 
   void registerWidget (QWidget*);
   void unregisterWidget (QWidget*);
@@ -82,10 +81,8 @@ protected:
     enabled_ = value;
   }
 
-  void initializeWhiteList (const QStringList &list);
   void initializeBlackList (const QStringList &list);
   bool isBlackListed (QWidget*);
-  bool isWhiteListed (QWidget*) const;
   // returns true if drag can be started from current widget
   bool canDrag (QWidget*);
   void resetDrag();
