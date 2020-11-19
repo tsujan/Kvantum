@@ -25,7 +25,11 @@
 #include <QToolButton>
 
 #include "shortcuthandler.h"
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
 #include "drag/windowmanager.h"
+#else
+#include "drag/windowmanager-old.h"
+#endif
 #include "themeconfig/ThemeConfig.h"
 #include "blur/blurhelper.h"
 #include "animation/animation.h"

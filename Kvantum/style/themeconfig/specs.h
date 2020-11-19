@@ -20,7 +20,11 @@
 
 #include <QStringList>
 #if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
 #include "drag/windowmanager.h"
+#else
+#include "drag/windowmanager-old.h"
+#endif
 #else
 #include "qt4/windowmanager4.h"
 #endif
