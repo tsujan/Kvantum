@@ -36,16 +36,21 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              rendering.cpp \
              standardIcons.cpp \
              KvantumPlugin.cpp \
-             drag/x11wmmove.cpp \
-             drag/windowmanager.cpp \
              blur/blurhelper.cpp \
              animation/animation.cpp
   HEADERS += Kvantum.h \
              KvantumPlugin.h \
-             drag/x11wmmove.h \
-             drag/windowmanager.h \
              blur/blurhelper.h \
              animation/animation.h
+  greaterThan(QT_MINOR_VERSION, 14) {
+    SOURCES += drag/windowmanager.cpp
+    HEADERS += drag/windowmanager.h
+  } else {
+    SOURCES += drag/x11wmmove.cpp \
+               drag/windowmanager-old.cpp
+    HEADERS += drag/x11wmmove.h \
+               drag/windowmanager-old.h
+  }
   OTHER_FILES += kvantum.json
 } else {
   SOURCES += qt4/Kvantum4.cpp \

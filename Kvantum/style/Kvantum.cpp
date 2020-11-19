@@ -378,12 +378,12 @@ Style::Style(bool useDark) : QCommonStyle()
   if (tspec_.x11drag)
   { // See the explanation near the top of "windowmanager.cpp"
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag, !tspec_.isX11);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
     itsWindowManager_->initialize();
 #else
     if (tspec_.isX11)
     {
-      itsWindowManager_ = new WindowManager(this, tspec_.x11drag, false);
+      itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
       itsWindowManager_->initialize();
     }
 #endif
@@ -4933,10 +4933,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                          (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
                          (option->state & State_Selected) ? "toggled" :
                          ((option->state & State_MouseOver)
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                           /* Qt has a bug that gives a mouse-over state to a view item
                              when the view is scrolled by holding a scrollbar and the
                              cursor goes over the item. This is a simple workaround. */
-                          && !(QApplication::mouseButtons() & Qt::LeftButton)) ? "focused"
+                          && !(QApplication::mouseButtons() & Qt::LeftButton)
+#endif
+                         ) ? "focused"
                          : "normal" : "disabled";
       if (ivStatus.startsWith("disabled") && (option->state & State_Selected))
       {
@@ -5642,7 +5645,10 @@ void Style::drawControl(QStyle::ControlElement element,
                       (widget && widget->hasFocus() && (option->state & State_Selected)) ? 3 :
                       (option->state & State_Selected) ? 4 :
                       ((option->state & State_MouseOver)
-                       && !(QApplication::mouseButtons() & Qt::LeftButton)) ? 2 : 1 : 0;
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
+                       && !(QApplication::mouseButtons() & Qt::LeftButton)
+#endif
+                      ) ? 2 : 1 : 0;
           if (state == 0 && (option->state & State_Selected))
             state = 3; // see the workaround for Qt Creator in PE_PanelItemViewItem
           else if (state == 2

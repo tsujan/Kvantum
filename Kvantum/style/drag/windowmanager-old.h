@@ -1,5 +1,8 @@
+// Adapted from oxygenwindowmanager.cpp svnversion: 1139230
+// and QtCurve's windowmanager.cpp v1.8.17
+
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2020 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -15,17 +18,15 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WINDOWMANAGER_H
-#define WINDOWMANAGER_H
+#ifndef WINDOWMANAGER_OLD_H
+#define WINDOWMANAGER_OLD_H
 
 #include <QBasicTimer>
 #include <QSet>
 #include <QPointer>
-#include <QWindow>
 #include <QWidget>
 
 namespace Kvantum {
-
 class WindowManager: public QObject
 {
   Q_OBJECT
@@ -39,7 +40,8 @@ public:
     DRAG_COUNT
   };
 
-  static Drag toDrag (const QString &str) {
+  static Drag toDrag (const QString &str)
+  {
     for (int i = 0; i < DRAG_COUNT; ++i)
     {
       if (toStr (static_cast<Drag>(i)) == str)
@@ -48,7 +50,8 @@ public:
     return DRAG_NONE;
   }
 
-  static QString toStr (Drag drag) {
+  static QString toStr (Drag drag)
+  {
     switch (drag)
     {
       default:
@@ -62,8 +65,8 @@ public:
   explicit WindowManager (QObject *parent, Drag drag);
   virtual ~WindowManager() {}
 
-  void initialize (const QStringList &whiteList = QStringList(),
-                   const QStringList &blackList = QStringList());
+  void initialize (const QStringList &whiteList=QStringList(),
+                   const QStringList &blackList=QStringList());
 
   void registerWidget (QWidget*);
   void unregisterWidget (QWidget*);
@@ -75,26 +78,43 @@ protected:
   bool mousePressEvent (QObject*, QEvent*);
   bool mouseMoveEvent (QObject*, QEvent*);
   bool mouseReleaseEvent (QObject*, QEvent*);
-  bool enabled() const {
+  bool enabled() const
+  {
     return enabled_;
   }
-  void setEnabled (bool value) {
+  void setEnabled (bool value)
+  {
     enabled_ = value;
+  }
+  // drag distance (pixels)
+  void setDragDistance (int value)
+  {
+    dragDistance_ = value;
+  }
+  // drag delay (msec)
+  void setDragDelay (int value)
+  {
+    dragDelay_ = value;
   }
 
   void initializeWhiteList (const QStringList &list);
   void initializeBlackList (const QStringList &list);
+  bool isDragable (QWidget*);
   bool isBlackListed (QWidget*);
   bool isWhiteListed (QWidget*) const;
   // returns true if drag can be started from current widget
   bool canDrag (QWidget*);
+  bool canDrag (QWidget*, QWidget*, const QPoint&);
   void resetDrag();
-  void startDrag (QWindow*, const QPoint&);
+  void startDrag (QWidget*, const QPoint&);
+  bool isDockWidgetTitle (const QWidget*) const;
 
-  void setLocked (bool value) {
+  void setLocked (bool value)
+  {
     locked_ = value;
   }
-  bool isLocked() const {
+  bool isLocked() const
+  {
     return locked_;
   }
 private:
@@ -107,7 +127,8 @@ private:
   class ExceptionId: public QPair<QString, QString>
   {
   public:
-    ExceptionId (const QString &value) {
+    ExceptionId (const QString &value)
+    {
       const QStringList args (value.split (QStringLiteral("@")));
       if (args.isEmpty())
         return;
@@ -115,11 +136,13 @@ private:
       if (args.size() > 1)
         first = args[1].trimmed();
     }
-    const QString& appName() const {
-      return first;
+    const QString& appName() const
+    {
+            return first;
     }
-    const QString& className() const {
-      return second;
+    const QString& className() const
+    {
+            return second;
     }
   };
 
@@ -127,16 +150,17 @@ private:
   ExceptionSet whiteList_;
   ExceptionSet blackList_;
 
-  QPoint winDragPoint_;
-  QPoint widgetDragPoint_;
+  QPoint dragPoint_;
   QPoint globalDragPoint_;
   QBasicTimer dragTimer_;
-  QPointer<QWindow> winTarget_;
-  QPointer<QWidget> widgetTarget_;
+  QPointer<QWidget> target_;
   bool dragAboutToStart_;
   bool dragInProgress_;
   bool locked_;
-  Drag drag_;;
+  Drag drag_;
+#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
+  bool cursorOverride_;
+#endif
 
   // provide application-wise event filter
   /*
@@ -147,17 +171,20 @@ private:
   {
   public:
     AppEventFilter (WindowManager *parent) :
-                    QObject (parent),
-                    parent_ (parent) {}
+                   QObject (parent),
+                   parent_ (parent)
+    {}
   virtual bool eventFilter (QObject*, QEvent*);
   protected:
+    // application-wise event.
+    /* needed to catch end of XMoveResize events */
     bool appMouseEvent (QObject*, QEvent*);
   private:
     WindowManager *parent_;
   };
 
   AppEventFilter *_appEventFilter;
-  /* allow access of all private members to the app event filter */
+  // allow access of all private members to the app event filter
   friend class AppEventFilter;
 };
 }

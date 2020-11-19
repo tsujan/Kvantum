@@ -51,19 +51,34 @@ endif()
 add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 
 if(NOT ENABLE_QT4)
-  set(kvantum_SOURCES
-      Kvantum.cpp
-      eventFiltering.cpp
-      polishing.cpp
-      rendering.cpp
-      standardIcons.cpp
-      KvantumPlugin.cpp
-      shortcuthandler.cpp
-      blur/blurhelper.cpp
-      drag/windowmanager.cpp
-      drag/x11wmmove.cpp
-      themeconfig/ThemeConfig.cpp
-      animation/animation.cpp)
+  if((Qt5Widgets_VERSION GREATER 5.15.0) OR (Qt5Widgets_VERSION EQUAL 5.15.0))
+    set(kvantum_SOURCES
+        Kvantum.cpp
+        eventFiltering.cpp
+        polishing.cpp
+        rendering.cpp
+        standardIcons.cpp
+        KvantumPlugin.cpp
+        shortcuthandler.cpp
+        blur/blurhelper.cpp
+        drag/windowmanager.cpp
+        themeconfig/ThemeConfig.cpp
+        animation/animation.cpp)
+  else()
+    set(kvantum_SOURCES
+        Kvantum.cpp
+        eventFiltering.cpp
+        polishing.cpp
+        rendering.cpp
+        standardIcons.cpp
+        KvantumPlugin.cpp
+        shortcuthandler.cpp
+        blur/blurhelper.cpp
+        drag/windowmanager-old.cpp
+        drag/x11wmmove.cpp
+        themeconfig/ThemeConfig.cpp
+        animation/animation.cpp)
+  endif()
 else()
   set(kvantum_SOURCES
       qt4/Kvantum4.cpp

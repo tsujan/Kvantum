@@ -195,7 +195,7 @@ Or, better, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For e
 
     export QT_STYLE_OVERRIDE=kvantum
 
-If the desktop environment you use does not source `~/.profile`, you could try `~/.config/environment.d/*.conf`: make a file like `~/.config/environment.d/qt.conf` and put this into it:
+If the desktop environment you use does not source `~/.profile`, you could try `~/.config/environment.d/*.conf`: make a file like `~/.config/environment.d/qt.conf`, put this into it and reboot:
 
     QT_STYLE_OVERRIDE=kvantum
 
