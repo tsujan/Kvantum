@@ -381,6 +381,8 @@ bool WindowManager::canDrag (QWidget *widget)
   {
     if (drag_ == DRAG_MENUBAR_ONLY) return false;
 
+    if (isPrimaryToolBar (widget)) return true;
+
     QWidget *tb = toolbarContainer (widget);
     if (tb == nullptr) return false;
 
