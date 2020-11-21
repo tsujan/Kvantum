@@ -73,6 +73,7 @@ protected:
   void timerEvent (QTimerEvent*);
   bool mousePressEvent (QObject*, QEvent*);
   bool mouseMoveEvent (QObject*, QEvent*);
+  bool mouseDblClickEvent (QObject*, QEvent*);
   bool mouseReleaseEvent (QObject*, QEvent*);
   bool enabled() const {
     return enabled_;
@@ -86,7 +87,6 @@ protected:
   // returns true if drag can be started from current widget
   bool canDrag (QWidget*);
   void resetDrag();
-  void startDrag (QWindow*, const QPoint&);
 
   void setLocked (bool value) {
     locked_ = value;

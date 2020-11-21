@@ -122,9 +122,10 @@ void Style::polish(QWidget *widget)
   if (!widget->testAttribute(Qt::WA_SetPalette))
     widget->setPalette(QPalette());
 
-  // for moving the window containing this widget
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
   if (itsWindowManager_)
     itsWindowManager_->registerWidget(widget);
+#endif
 
   QWidget *pw = widget->parentWidget();
 
@@ -335,6 +336,10 @@ void Style::polish(QWidget *widget)
     case Qt::Popup:
     case Qt::ToolTip: // a window, not a real tooltip
     case Qt::Sheet: { // WARNING: What the hell?! On Linux? Yes, a Qt5 bug!
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+      if (itsWindowManager_)
+        itsWindowManager_->registerWidget(widget);
+#endif
       QRegion wMask = widget->mask();
       if (!wMask.isEmpty() && wMask != QRegion(widget->rect()))
         break; // like Vokoscreen's QvkAnimateWindow
@@ -1115,8 +1120,10 @@ void Style::unpolish(QWidget *widget)
 {
   if (widget)
   {
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
     if (itsWindowManager_)
       itsWindowManager_->unregisterWidget(widget);
+#endif
 
     /*widget->setAttribute(Qt::WA_Hover, false);*/
 
@@ -1126,6 +1133,10 @@ void Style::unpolish(QWidget *widget)
       case Qt::Popup:
       case Qt::ToolTip:
       case Qt::Sheet: {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+        if (itsWindowManager_)
+          itsWindowManager_->unregisterWidget(widget);
+#endif
         if (qobject_cast<QMenu*>(widget)
             || widget->inherits("QTipLabel")
             || qobject_cast<QLabel*>(widget))

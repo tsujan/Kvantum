@@ -37,6 +37,7 @@
 #include <QTreeView>
 #include <QGraphicsView>
 #include <QDockWidget>
+#include <QMdiArea>
 #include <QMdiSubWindow>
 #include "windowmanager.h"
 
@@ -106,10 +107,11 @@ void WindowManager::initialize (const QStringList &blackList)
 /*************************/
 void WindowManager::registerWidget (QWidget *widget)
 {
-  if (!qobject_cast<QMainWindow*>(widget) && !qobject_cast<QDialog*>(widget))
+  if (!widget || !widget->isWindow()) return;
+  Qt::WindowType type = widget->windowType();
+  if (type != Qt::Window && type != Qt::Dialog)
     return;
-  QWindow *w = widget->isWindow() ? widget->windowHandle() : nullptr;
-  if (w)
+  if (QWindow *w = widget->windowHandle())
   {
     w->removeEventFilter (this);
     w->installEventFilter (this);
@@ -143,7 +145,6 @@ void WindowManager::initializeBlackList (const QStringList &list)
     if (!id.className().isEmpty())
       blackList_.insert (exception);
   }
-
 }
 /*************************/
 bool WindowManager::eventFilter (QObject *object, QEvent *event)
@@ -161,16 +162,22 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
         return mouseMoveEvent (object, event);
       break;
 
+    case QEvent::MouseButtonDblClick:
+      if (object == winTarget_.data())
+        return mouseDblClickEvent (object, event);
+      break;
+
     case QEvent::MouseButtonRelease:
       if (winTarget_) return mouseReleaseEvent (object, event);
       break;
 
     case QEvent::WinIdChange: {
-      if (!qobject_cast<QMainWindow*>(object) && !qobject_cast<QDialog*>(object))
-        break;
       QWidget *widget = qobject_cast<QWidget*>(object);
-      QWindow *w = widget->isWindow() ? widget->windowHandle() : nullptr;
-      if (w)
+      if (!widget || !widget->isWindow()) break;
+      Qt::WindowType type = widget->windowType();
+      if (type != Qt::Window && type != Qt::Dialog)
+        break;
+      if (QWindow *w = widget->windowHandle())
       {
         w->removeEventFilter (this);
         w->installEventFilter (this);
@@ -191,7 +198,7 @@ void WindowManager::timerEvent (QTimerEvent *event)
   {
     dragTimer_.stop();
     if (winTarget_)
-      startDrag (winTarget_.data(), globalDragPoint_);
+      dragInProgress_ = winTarget_.data()->startSystemMove();
   }
   else
     return QObject::timerEvent (event);
@@ -258,8 +265,6 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 /*************************/
 bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
 {
-  Q_UNUSED (object);
-
   if (!qobject_cast<QWindow*>(object)) return false;
 
   /* stop the timer */
@@ -285,6 +290,14 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
 
     return true;
   }
+  return false;
+}
+/*************************/
+bool WindowManager::mouseDblClickEvent (QObject *object, QEvent *event)
+{
+  Q_UNUSED(event);
+  if (!dragInProgress_ && qobject_cast<QWindow*>(object))
+    resetDrag();
   return false;
 }
 /*************************/
@@ -340,6 +353,14 @@ bool WindowManager::canDrag (QWidget *widget)
   // X11BypassWindowManagerHint can be used to fix the position
   if (widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
     return false;
+
+  QWidget *parent = widget->parentWidget();
+  while (parent)
+  {
+    if (qobject_cast<QMdiSubWindow*>(parent))
+      return false;
+    parent = parent->parentWidget();
+  }
 
   if (QMenuBar *menuBar = qobject_cast<QMenuBar*>(widget))
   {
@@ -525,13 +546,8 @@ bool WindowManager::canDrag (QWidget *widget)
     }
   }
 
-  QWidget *parent = widget->parentWidget();
-  while (parent)
-  {
-    if (qobject_cast<QMdiSubWindow*>(parent))
-      return false;
-    parent = parent->parentWidget();
-  }
+  if (qobject_cast<QMdiArea*>(widget->parentWidget()))
+    return false;
 
   return true;
 }
@@ -547,13 +563,6 @@ void WindowManager::resetDrag()
   globalDragPoint_ = QPoint();
   dragAboutToStart_ = false;
   dragInProgress_ = false;
-}
-/*************************/
-void WindowManager::startDrag (QWindow *window, const QPoint &position)
-{
-  Q_UNUSED(position);
-
-  dragInProgress_ = window->startSystemMove();
 }
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
