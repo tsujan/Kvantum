@@ -354,7 +354,7 @@ bool WindowManager::canDrag (QWidget *widget)
   if (widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint))
     return false;
 
-  QWidget *parent = widget->parentWidget();
+  QWidget *parent = widget;
   while (parent)
   {
     if (qobject_cast<QMdiSubWindow*>(parent))
@@ -550,6 +550,16 @@ bool WindowManager::canDrag (QWidget *widget)
 
   if (qobject_cast<QMdiArea*>(widget->parentWidget()))
     return false;
+
+  /* this is for QMdi::ControllerWidget, which isn't caught by QObject::inherits() */
+  if (QMenuBar *menuBar = qobject_cast<QMenuBar*>(widget->parentWidget()))
+  {
+    if (widget == menuBar->cornerWidget (Qt::TopLeftCorner)
+        || widget == menuBar->cornerWidget (Qt::TopRightCorner))
+    {
+      return false;
+    }
+  }
 
   return true;
 }
