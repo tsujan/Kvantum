@@ -508,6 +508,15 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       r.top = qMax(0,r.top-1);
       r.bottom = qMax(0,r.bottom-1);
     }
+    else if(name == "ItemView")
+    {
+      /* we should be cautious about view items because
+         we don't draw their texts (see Kvantum.cpp -> CE_ItemViewItem) */
+      r.left = qMin(r.left,4);
+      r.right = qMin(r.right,4);
+      r.top = qMin(r.top,4);
+      r.bottom = qMin(r.bottom,4);
+    }
   }
 
   v = getValue(name,KSL("text.iconspacing"), i);

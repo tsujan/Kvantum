@@ -1116,12 +1116,16 @@ text.italic                       true/false          Italic font for text? The 
 text.shadow                       true/false          Draw a shadow for the text?
 
 text.shadow.xshift
-text.shadow.yshift                Integer             The vertical/horizontal shifts
-                                                      of the text shadow if it exists.
+text.shadow.yshift                Integer             The vertical/horizontal shifts of the
+                                                      text shadow if it exists.
 
-text.shadow.color                 String (#RRGGBBAA)  The color of the text shadow as
-                                                      #RRGGBB or #RRGGBBAA or with a valid
-                                                      name like white, black, red, etc.
+text.shadow.color                 String (#RRGGBBAA)  The color of the text shadow as #RRGGBB or
+                                                      #RRGGBBAA or with a valid name like white,
+                                                      black, red, etc.
+
+                                                      It should have enough contrast with the
+                                                      text color; otherwise, it won't be drawn;
+                                                      e.g., black texts can't have black shadows.
 
 text.inactive.shadow.color        String (#RRGGBBAA)  Like "text.shadow.color" and falling back
                                                       to it if missing but for inactive widgets.

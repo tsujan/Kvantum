@@ -5621,9 +5621,9 @@ void Style::drawControl(QStyle::ControlElement element,
 
     case CE_ItemViewItem: {
       /*
-          Here we rely on QCommonStyle::drawControl() for text
-          eliding and other calculations and just use our custom
-          colors instead of the default ones whenever possible.
+          Here, we rely on QCommonStyle::drawControl() for text eliding and other
+          calculations (because it includes private headers like "qtextengine_p.h")
+          and just use our custom colors instead of the default ones wherever possible.
       */
       if (const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
       {
