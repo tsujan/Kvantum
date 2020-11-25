@@ -296,8 +296,13 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
 bool WindowManager::mouseDblClickEvent (QObject *object, QEvent *event)
 {
   Q_UNUSED(event);
-  if (!dragInProgress_ && qobject_cast<QWindow*>(object))
-    resetDrag();
+  if (!dragInProgress_ && object == winTarget_.data())
+  { // don't drag by double clicking
+    QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
+                            winDragPoint_,
+                            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    qApp->sendEvent (winTarget_.data(), &mouseEvent);
+  }
   return false;
 }
 /*************************/
@@ -538,14 +543,6 @@ bool WindowManager::canDrag (QWidget *widget)
   {
     if (label->textInteractionFlags().testFlag (Qt::TextSelectableByMouse))
       return false;
-
-    QWidget *parent = label->parentWidget();
-    while (parent)
-    {
-      if (qobject_cast<QStatusBar*>(parent))
-        return true;
-      parent = parent->parentWidget();
-    }
   }
 
   if (qobject_cast<QMdiArea*>(widget->parentWidget()))

@@ -133,7 +133,7 @@ private:
   bool dragAboutToStart_;
   bool dragInProgress_;
   bool locked_;
-  Drag drag_;;
+  Drag drag_;
 
   // provide application-wise event filter
   /*
