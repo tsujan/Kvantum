@@ -10,6 +10,7 @@ V0.18.0
  * Respect the key "no_inactiveness" with all widgets.
  * Get tooltip shadow dimensions only once if compositing is available.
  * With Qt ≥ 5.15, drag from inside windows (x11drag) under X11 and Wayland by calling the window manager.
+ * Draw the icon of the menubar item instead of its text if it's given.
 
 V0.17.0
 ---------

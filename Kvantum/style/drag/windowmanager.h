@@ -68,13 +68,10 @@ public:
   void unregisterWidget (QWidget*);
   virtual bool eventFilter (QObject*, QEvent*);
 protected:
-  // timer event,
-  /* used to start drag if button is pressed for a long enough time */
   void timerEvent (QTimerEvent*);
   bool mousePressEvent (QObject*, QEvent*);
   bool mouseMoveEvent (QObject*, QEvent*);
   bool mouseDblClickEvent (QObject*, QEvent*);
-  bool mouseReleaseEvent (QObject*, QEvent*);
   bool enabled() const {
     return enabled_;
   }
@@ -84,7 +81,6 @@ protected:
 
   void initializeBlackList (const QStringList &list);
   bool isBlackListed (QWidget*);
-  // returns true if drag can be started from current widget
   bool canDrag (QWidget*);
   void resetDrag();
 
@@ -95,10 +91,10 @@ protected:
     return locked_;
   }
 private:
-  // the value of QT_DEVICE_PIXEL_RATIO
   bool enabled_;
   int dragDistance_;
   int dragDelay_;
+  bool isDelayed_;
 
   // wrapper for exception id
   class ExceptionId: public QPair<QString, QString>
@@ -121,10 +117,8 @@ private:
   };
 
   typedef QSet<ExceptionId> ExceptionSet;
-  ExceptionSet whiteList_;
   ExceptionSet blackList_;
 
-  QPoint winDragPoint_;
   QPoint widgetDragPoint_;
   QPoint globalDragPoint_;
   QBasicTimer dragTimer_;
@@ -137,8 +131,8 @@ private:
 
   // provide application-wise event filter
   /*
-    it is used to unlock dragging and make sure event look
-    is properly restored after a drag has occurred
+    used to unlock dragging and make sure the event
+    is properly restored after a drag is finished
   */
   class AppEventFilter: public QObject
   {
@@ -147,9 +141,8 @@ private:
                     QObject (parent),
                     parent_ (parent) {}
   virtual bool eventFilter (QObject*, QEvent*);
-  protected:
-    bool appMouseEvent (QObject*, QEvent*);
   private:
+    void widgetMouseRelease();
     WindowManager *parent_;
   };
 

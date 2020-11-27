@@ -6005,11 +6005,28 @@ void Style::drawControl(QStyle::ControlElement element,
               state = 3;
           }
         }
-        renderLabel(option,painter,r,
-                    fspec,lspec,
-                    talign,opt->text,QPalette::WindowText,
-                    state,
-                    status.contains("-inactive"));
+        bool isInactive(status.contains("-inactive"));
+        if (!opt->icon.isNull())
+        {
+          int icnSize = pixelMetric(PM_SmallIconSize);
+          QSize iconSize(icnSize,icnSize);
+          QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec),iconstate,iconSize);
+          renderLabel(option,painter,r,
+                      fspec,lspec,
+                      talign,QString(),QPalette::WindowText,
+                      state,
+                      isInactive,
+                      px,
+                      iconSize);
+        }
+        else
+        {
+          renderLabel(option,painter,r,
+                      fspec,lspec,
+                      talign,opt->text,QPalette::WindowText,
+                      state,
+                      isInactive);
+        }
       }
 
       break;
@@ -13827,13 +13844,22 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
            (see PM_MenuBarItemSpacing for the reason) */
         fspec.top += fspec1.top+fspec1.bottom;
 
-        QFont f;
-        if (widget) f = widget->font();
-        else f = QApplication::font();
-        if (lspec.boldFont) f.setWeight(lspec.boldness);
+        if (!opt->icon.isNull())
+        {
+          int iconSize = pixelMetric(PM_SmallIconSize);
+          s = sizeCalculated(QApplication::font(),fspec,lspec,sspec,
+                             QString(),
+                             QSize(iconSize,iconSize));
+        }
+        else
+        {
+          QFont f;
+          if (widget) f = widget->font();
+          else f = QApplication::font();
+          if (lspec.boldFont) f.setWeight(lspec.boldness);
 
-        s = sizeCalculated(f,fspec,lspec,sspec,opt->text,
-                           opt->icon.isNull() ? QSize() : QSize(opt->maxIconWidth,opt->maxIconWidth));
+          s = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
+        }
       }
 
       break;

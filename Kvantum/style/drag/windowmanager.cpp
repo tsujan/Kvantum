@@ -89,6 +89,7 @@ WindowManager::WindowManager (QObject *parent, Drag drag) :
                enabled_ (true),
                dragDistance_ (QApplication::startDragDistance()),
                dragDelay_ (QApplication::startDragTime()),
+               isDelayed_ (false),
                dragAboutToStart_ (false),
                dragInProgress_ (false),
                locked_ (false),
@@ -101,7 +102,6 @@ WindowManager::WindowManager (QObject *parent, Drag drag) :
 void WindowManager::initialize (const QStringList &blackList)
 {
   setEnabled (true);
-  dragDelay_ = QApplication::startDragTime();
   initializeBlackList (blackList);
 }
 /*************************/
@@ -167,10 +167,6 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
         return mouseDblClickEvent (object, event);
       break;
 
-    case QEvent::MouseButtonRelease:
-      if (winTarget_) return mouseReleaseEvent (object, event);
-      break;
-
     case QEvent::WinIdChange: {
       QWidget *widget = qobject_cast<QWidget*>(object);
       if (!widget || !widget->isWindow()) break;
@@ -194,14 +190,27 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
 /*************************/
 void WindowManager::timerEvent (QTimerEvent *event)
 {
+  QObject::timerEvent (event);
   if (event->timerId() == dragTimer_.timerId())
   {
     dragTimer_.stop();
     if (winTarget_)
-      dragInProgress_ = winTarget_.data()->startSystemMove();
+    {
+      /* NOTE: Under X11, if dragging is started with a delay and the left
+               mouse button is released short after it, it will continue
+               until a mouse button is pressed or the mouse wheel is turned.
+               As a workaround, we don't start dragging with a delay but
+               only change and restore the window cursor appropriately. */
+      if (isDelayed_)
+        winTarget_.data()->setCursor (Qt::OpenHandCursor);
+      else
+      {
+        winTarget_.data()->unsetCursor();
+        dragInProgress_ = winTarget_.data()->startSystemMove();
+      }
+    }
+    isDelayed_ = false;
   }
-  else
-    return QObject::timerEvent (event);
 }
 /*************************/
 bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
@@ -225,7 +234,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   if (!widget)
     widget = activeWin;
 
-  widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos());
+  widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()
 
   /* check if widget can be dragged */
   if (isBlackListed (widget) || !canDrag (widget))
@@ -234,9 +243,10 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* save target and drag point */
   winTarget_ = w;
   widgetTarget_ = widget;
-  winDragPoint_ = mouseEvent->pos();
   globalDragPoint_ = mouseEvent->globalPos();
   dragAboutToStart_ = true;
+
+  QPoint winDragPoint = mouseEvent->pos();
 
   /* Because the widget may react to mouse press events, we first send a press event to it.
      A release event will be sent in WindowManager::AppEventFilter::eventFilter. */
@@ -255,10 +265,11 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 
   /* Send a move event to the target window with the same position.
      If received, it is caught to actually start the drag. */
-  QMouseEvent mouseMoveEvent (QEvent::MouseMove, winDragPoint_, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+  QMouseEvent mouseMoveEvent (QEvent::MouseMove, winDragPoint, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (w, &mouseMoveEvent);
 
-  /* consume the event */
+  /* NOTE: The event should be consumed; otherwise, mouseover effects
+           won't work after dragging (unless a mouse button is pressed). */
   return true;
 
 }
@@ -277,10 +288,9 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
     if (dragAboutToStart_)
     {
       if (mouseEvent->globalPos() == globalDragPoint_)
-      { // start the timer
+      {
         dragAboutToStart_ = false;
-        if (dragTimer_.isActive())
-          dragTimer_.stop();
+        isDelayed_ = true;
         dragTimer_.start (dragDelay_, this);
       }
       else resetDrag();
@@ -296,21 +306,13 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
 bool WindowManager::mouseDblClickEvent (QObject *object, QEvent *event)
 {
   Q_UNUSED(event);
-  if (!dragInProgress_ && object == winTarget_.data())
+  if (!dragInProgress_ && object == winTarget_.data() && widgetTarget_)
   { // don't drag by double clicking
     QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
-                            winDragPoint_,
+                            widgetDragPoint_,
                             Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-    qApp->sendEvent (winTarget_.data(), &mouseEvent);
+    qApp->sendEvent (widgetTarget_.data(), &mouseEvent);
   }
-  return false;
-}
-/*************************/
-bool WindowManager::mouseReleaseEvent (QObject *object, QEvent *event)
-{
-  Q_UNUSED (object);
-  Q_UNUSED (event);
-  resetDrag();
   return false;
 }
 /*************************/
@@ -532,8 +534,12 @@ bool WindowManager::canDrag (QWidget *widget)
     if(dw->allowedAreas() == (Qt::DockWidgetArea_Mask | Qt::AllDockWidgetAreas))
       return true;
   }
-  else if (qobject_cast<QDockWidget*>(widget->parentWidget()))
+  else if (qobject_cast<QDockWidget*>(widget->parentWidget())
+           /* not a titlebar button */
+           && !qobject_cast<QAbstractButton*>(widget))
+  {
     return true;
+  }
 
   if (widget->testAttribute (Qt::WA_Hover) || widget->testAttribute (Qt::WA_SetCursor))
     return false;
@@ -563,11 +569,12 @@ bool WindowManager::canDrag (QWidget *widget)
 /*************************/
 void WindowManager::resetDrag()
 {
+  if (winTarget_)
+    winTarget_.data()->unsetCursor();
   winTarget_.clear();
   widgetTarget_.clear();
   if (dragTimer_.isActive())
     dragTimer_.stop();
-  winDragPoint_ = QPoint();
   widgetDragPoint_ = QPoint();
   globalDragPoint_ = QPoint();
   dragAboutToStart_ = false;
@@ -576,52 +583,45 @@ void WindowManager::resetDrag()
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
 {
-  if (event->type() == QEvent::MouseButtonRelease)
+  Q_UNUSED(object);
+
+  /* unlock the window and cancel dragging if mouse button
+     is released before the start of dragging */
+  if (event->type() == QEvent::MouseButtonRelease
+      && parent_->isLocked())
   {
-    if (parent_->winTarget_ && parent_->widgetTarget_ && object == parent_->winTarget_.data())
+    if (parent_->widgetTarget_ && object == parent_->winTarget_.data())
+      widgetMouseRelease();
+    if (parent_->isLocked()) // may have been unlocked above
     {
-      /* also, send a release event to the widget because
-         a press event was sent by WindowManager::mousePressEvent */
-      QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
-                              parent_->widgetDragPoint_,
-                              Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-      qApp->sendEvent (parent_->widgetTarget_.data(), &mouseEvent);
-    }
-    /* stop the drag timer */
-    if (parent_->dragTimer_.isActive())
       parent_->resetDrag();
-    /* unlock */
-    if (parent_->isLocked())
       parent_->setLocked (false);
+    }
   }
 
-  if (!parent_->enabled()) return false;
-  /* If a drag is in progress, the widget will not receive any event.
-     We wait for the first MouseMove or MousePress event that is received
-     by any widget in the application to detect that the drag is finished. */
-  if (parent_->dragInProgress_
-      && parent_->winTarget_
+  /* If a drag is in progress, no event will be received. Therefore,
+     we wait for the first mouse move or press event that is received
+     by any object in the application to detect that the drag is finished. */
+  if (parent_->enabled()
+      && parent_->dragInProgress_
+      && parent_->widgetTarget_
       && (event->type() == QEvent::MouseMove
           || event->type() == QEvent::MouseButtonPress))
   {
-    return appMouseEvent (object, event);
+    widgetMouseRelease();
   }
 
   return false;
 }
 /*************************/
-bool WindowManager::AppEventFilter::appMouseEvent (QObject *object, QEvent *event)
+void WindowManager::AppEventFilter::widgetMouseRelease()
 {
-  Q_UNUSED(object);
-  Q_UNUSED(event);
-  /* Post a mouseRelease event to the target, in order to counterbalance
-     the mouse press that triggered the drag and also to reset the drag. */
+  /* Send a mouse release event to the widget, in order to counterbalance
+     the mouse press that was sent by WindowManager::mousePressEvent. */
   QMouseEvent mouseEvent (QEvent::MouseButtonRelease,
-                          parent_->winDragPoint_,
+                          parent_->widgetDragPoint_,
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-  qApp->sendEvent (parent_->winTarget_.data(), &mouseEvent);
-
-  return true;
+  qApp->sendEvent (parent_->widgetTarget_.data(), &mouseEvent);
 }
 
 }
