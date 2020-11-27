@@ -278,10 +278,6 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
 {
   if (!qobject_cast<QWindow*>(object)) return false;
 
-  /* stop the timer */
-  if (dragTimer_.isActive())
-    dragTimer_.stop();
-
   QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
   if (!dragInProgress_)
   {
@@ -289,14 +285,21 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
     {
       if (mouseEvent->globalPos() == globalDragPoint_)
       {
+        if (dragTimer_.isActive())
+          dragTimer_.stop();
         dragAboutToStart_ = false;
         isDelayed_ = true;
         dragTimer_.start (dragDelay_, this);
       }
       else resetDrag();
     }
-    else if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
+    else if (!dragTimer_.isActive() // drag timeout
+             || QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
+    {
+      if (dragTimer_.isActive())
+        dragTimer_.stop();
       dragTimer_.start (0, this);
+    }
 
     return true;
   }
