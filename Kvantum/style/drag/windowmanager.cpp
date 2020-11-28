@@ -197,7 +197,7 @@ void WindowManager::timerEvent (QTimerEvent *event)
     if (winTarget_)
     {
       /* NOTE: Under X11, if dragging is started with a delay and the left
-               mouse button is released short after it, it will continue
+               mouse button is released shortly after it, it will continue
                until a mouse button is pressed or the mouse wheel is turned.
                As a workaround, we don't start dragging with a delay but
                only change and restore the window cursor appropriately. */
@@ -269,9 +269,8 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   qApp->sendEvent (w, &mouseMoveEvent);
 
   /* NOTE: The event should be consumed; otherwise, mouseover effects
-           won't work after dragging (unless a mouse button is pressed). */
+           won't work after dragging (until a mouse button is pressed). */
   return true;
-
 }
 /*************************/
 bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)

@@ -13301,7 +13301,7 @@ int Style::styleHint(QStyle::StyleHint hint,
     /* forms */
     case SH_FormLayoutFieldGrowthPolicy : {
       if (hspec_.centered_forms)
-        return QFormLayout::FieldsStayAtSizeHint;
+        return QFormLayout::ExpandingFieldsGrow;
       return QFormLayout::AllNonFixedFieldsGrow;
     }
     case SH_FormLayoutFormAlignment : return Qt::AlignLeft | Qt::AlignTop;
