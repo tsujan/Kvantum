@@ -298,6 +298,7 @@ bool WindowManager::mouseMoveEvent (QObject *object, QEvent *event)
     {
       if (dragTimer_.isActive())
         dragTimer_.stop();
+      isDelayed_ = false;
       dragTimer_.start (0, this);
     }
 
