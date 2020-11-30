@@ -273,12 +273,12 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   if (isBlackListed (widget) || !canDrag (widget))
     return false;
 
-  /* save targets and drag points */
+  /* save some targets and drag points */
   winTarget_ = w;
-  widgetTarget_ = widget;
   globalDragPoint_ = mouseEvent->globalPos();
   dragAboutToStart_ = true;
 
+  widgetTarget_.clear(); // a safeguard; see WindowManager::AppEventFilter::eventFilter()
   QPoint winDragPoint = mouseEvent->pos();
 
   /* Because the widget may react to mouse press events, we first send a press event to it.
@@ -304,9 +304,12 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
       && !widget->isWindow())
   {
     resetDrag();
+    /* to prevent a double press in WindowManager::AppEventFilter::eventFilter() */
+    widgetTarget_ = widget;
     return false;
   }
 
+  widgetTarget_ = widget;
   locked_ = true;
 
   /* Send a move event to the target window with the same position.
@@ -646,8 +649,8 @@ void WindowManager::widgetMouseRelease (bool inside)
   /* Send a mouse release event to the widget, in order to counterbalance
      the mouse press that was sent by WindowManager::mousePressEvent().
 
-     On starting the drag, we release the mouse outside the widget
-     to prevent a click. In this way, it's possible to drag button-like
+     On starting the drag, we release the mouse outside the widget to
+     prevent a click. In this way, it's possible to drag from button-like
      widgets safely (as in GTK), although most of them are excluded.
   */
   QMouseEvent mouseRelease (QEvent::MouseButtonRelease,
@@ -660,7 +663,12 @@ void WindowManager::widgetMouseRelease (bool inside)
 /*************************/
 bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
 {
-  Q_UNUSED(object);
+  if (event->type() == QEvent::MouseButtonPress
+      && object == parent_->widgetTarget_.data() && !parent_->isLocked())
+  { // no double press; the widget was pressed in WindowManager::mousePressEvent()
+    parent_->widgetTarget_.clear();
+    return true;
+  }
 
   /* If a drag is in progress, no event will be received. Therefore,
      we wait for the first mouse move or press event that is received
