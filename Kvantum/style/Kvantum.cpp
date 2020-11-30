@@ -2073,6 +2073,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
       }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
       /* Due to a Qt5 bug (which I call "the hover bug"), after their menus are closed,
          comboboxes and buttons will have the WA_UnderMouse attribute without the cursor
          being over them. Hence we use the following logic in several places. It will
@@ -2082,6 +2083,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         status.replace("focused","normal");
       }
+#endif
 
       bool hasPanel = false;
 
@@ -4299,7 +4301,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           status = (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver)
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                       && widget->rect().contains(widget->mapFromGlobal(QCursor::pos())) // hover bug
+#endif
                     ? "focused" :
                     (option->state & State_Sunken)
                     || (option->state & State_Selected) ? "pressed" : "normal"
@@ -4362,11 +4366,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       if (tb)
       {
         bool drawSep(false);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
         if (status.startsWith("focused")
             && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
         {
           status.replace("focused","normal");
         }
+#endif
         const QToolBar *toolBar = qobject_cast<const QToolBar*>(tb->parentWidget());
         const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
         fspec.top = fspec1.top; fspec.bottom = fspec1.bottom;
@@ -4947,11 +4953,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
            the headers of a cmake project and let the user select them! */
         ivStatus.replace("disabled","pressed");
       }
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
       else if (ivStatus.startsWith("focused")
                && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
         ivStatus.replace("focused","normal");
       }
+#endif
       bool isInactive(isWidgetInactive(widget));
 
       const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option);
@@ -5651,11 +5659,13 @@ void Style::drawControl(QStyle::ControlElement element,
                       ) ? 2 : 1 : 0;
           if (state == 0 && (option->state & State_Selected))
             state = 3; // see the workaround for Qt Creator in PE_PanelItemViewItem
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
           else if (state == 2
                    && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
           {
             state = 1;
           }
+#endif
           if (state != 0)
           {
             const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
@@ -6235,7 +6245,9 @@ void Style::drawControl(QStyle::ControlElement element,
                  (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
                   (option->state & State_MouseOver)
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                     && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+#endif
                   ? "focused" :
                   (option->state & State_Sunken)
                   // to know it has focus
@@ -6329,8 +6341,10 @@ void Style::drawControl(QStyle::ControlElement element,
             lspec.tispace += sspec.minW/2;
         }
         QStyleOptionComboBox o(*opt);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+#endif
         bool isInactive(status.contains("-inactive"));
         renderLabel(&o,painter,r,
                     fspec,lspec,
@@ -8273,11 +8287,13 @@ void Style::drawControl(QStyle::ControlElement element,
                        : "disabled";
       if (isWidgetInactive(widget))
         status.append("-inactive");
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
       if (status.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
       {
         status.replace("focused","normal");
       }
+#endif
       QString sStatus = status; // slider state
       if (!tspec_.animate_states // focus on entering the groove only with animation
           && (option->state & State_Enabled))
@@ -9175,7 +9191,10 @@ void Style::drawControl(QStyle::ControlElement element,
         else if (status.startsWith("toggled"))
           state = 4;
         else if ((option->state & State_MouseOver)
-                 && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
+                 && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+#endif
+                )
           state = 2;
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
@@ -9185,8 +9204,10 @@ void Style::drawControl(QStyle::ControlElement element,
         }
 
         QStyleOptionButton o(*opt);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
         if ((option->state & State_MouseOver) && state != 2)
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+#endif
 
         /* center text+icon */
         QRect R = r;
@@ -9229,11 +9250,13 @@ void Style::drawControl(QStyle::ControlElement element,
 
       if (opt) {
         QString status = getState(option,widget);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
         if (status.startsWith("focused")
             && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
         {
           status.replace("focused","normal");
         }
+#endif
         const QString group = "PanelButtonCommand";
         frame_spec fspec = getFrameSpec(group);
         const interior_spec ispec = getInteriorSpec(group);
@@ -9580,7 +9603,10 @@ void Style::drawControl(QStyle::ControlElement element,
             else if (status.startsWith("toggled") || status.startsWith("pressed"))
               aStatus = "pressed";
             else if ((option->state & State_MouseOver)
-                     && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
+                     && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+#endif
+                    )
               aStatus = "focused";
           }
           if (isWidgetInactive(widget))
@@ -9726,8 +9752,10 @@ void Style::drawControl(QStyle::ControlElement element,
             QRect R = option->rect;
             if (fspec.expansion > 0 || (tb && tb->popupMode() != QToolButton::MenuButtonPopup))
               R = widget->rect();
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
             if (!R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
               status.replace("focused","normal");
+#endif
           }
         }
 
@@ -10145,8 +10173,10 @@ void Style::drawControl(QStyle::ControlElement element,
           else if (status.startsWith("focused"))
             state = 2;
           QStyleOptionToolButton o(*opt);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
           if ((option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+#endif
           bool isInactive(status.contains("-inactive"));
           QSize iconSize = opt->iconSize;
           if (widget && widget->inherits("QDockWidgetTitleButton"))
@@ -10481,11 +10511,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             lspec = getLabelSpec(group);
 
             QString aStatus = getState(option,widget);
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
             if (aStatus.startsWith("focused")
                 && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
             {
               aStatus.replace("focused","normal");
             }
+#endif
 
             /* use the "flat" indicator with flat buttons if it exists */
             if (aStatus.startsWith("normal")
@@ -10875,7 +10907,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                    (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver)
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                       && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+#endif
                     ? "focused" :
                     (option->state & State_Sunken)
                     // to know it has focus

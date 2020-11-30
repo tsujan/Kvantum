@@ -9,7 +9,7 @@ V0.18.0
  * Horizontally smaller menus when they have accelerators.
  * Respect the key "no_inactiveness" with all widgets.
  * Get tooltip shadow dimensions only once if compositing is available.
- * With Qt ≥ 5.15, drag from inside windows (x11drag) under X11 and Wayland by calling the window manager.
+ * A better window dragging code (x11drag) with Qt ≥ 5.15, that works under X11 and Wayland alike by calling the window manager.
  * Draw the icon of the menubar item instead of its text if it's given.
  * Fixed the field growth policy of centered form layouts.
 

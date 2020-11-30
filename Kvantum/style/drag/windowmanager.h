@@ -67,11 +67,15 @@ public:
   void registerWidget (QWidget*);
   void unregisterWidget (QWidget*);
   virtual bool eventFilter (QObject*, QEvent*);
+
 protected:
   void timerEvent (QTimerEvent*);
   bool mousePressEvent (QObject*, QEvent*);
-  bool mouseMoveEvent (QObject*, QEvent*);
-  bool mouseDblClickEvent (QObject*, QEvent*);
+  bool mouseMoveEvent (QEvent*);
+  bool mouseReleaseEvent();
+  bool leavingWindow();
+  void widgetMouseRelease (bool inside = false);
+
   bool enabled() const {
     return enabled_;
   }
@@ -84,16 +88,19 @@ protected:
   bool canDrag (QWidget*);
   void resetDrag();
 
-  void setLocked (bool value) {
-    locked_ = value;
-  }
   bool isLocked() const {
     return locked_;
   }
+  void unlock() {
+    locked_ = false;
+    dragInProgress_ = false;
+  }
+
 private:
   bool enabled_;
   int dragDistance_;
   int dragDelay_;
+  int doubleClickInterval_;
   bool isDelayed_;
 
   // wrapper for exception id
@@ -122,6 +129,7 @@ private:
   QPoint widgetDragPoint_;
   QPoint globalDragPoint_;
   QBasicTimer dragTimer_;
+  QBasicTimer doubleClickTimer_;
   QPointer<QWindow> winTarget_;
   QPointer<QWidget> widgetTarget_;
   bool dragAboutToStart_;
@@ -140,9 +148,9 @@ private:
     AppEventFilter (WindowManager *parent) :
                     QObject (parent),
                     parent_ (parent) {}
-  virtual bool eventFilter (QObject*, QEvent*);
+    virtual bool eventFilter (QObject*, QEvent*);
+
   private:
-    void widgetMouseRelease();
     WindowManager *parent_;
   };
 
