@@ -233,6 +233,14 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   if (!(mouseEvent->modifiers() == Qt::NoModifier && mouseEvent->button() == Qt::LeftButton))
     return false;
 
+  if (qApp->activePopupWidget())
+  {
+    /* logically, this should never happen but Qt has bad bugs
+       about popup widgets under X11 and Wayland alike */
+    unlock();
+    return false;
+  }
+
   /* don't drag by double clicking */
   if (doubleClickTimer_.isActive())
   {
