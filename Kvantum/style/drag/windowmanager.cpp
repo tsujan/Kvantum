@@ -168,7 +168,7 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
         return mouseReleaseEvent();
       break;
 
-    case QEvent::WindowBlocked:
+    case QEvent::WindowBlocked: // not needed
     case QEvent::Leave:
     case QEvent::Hide:
       if (object == winTarget_.data())
@@ -275,10 +275,11 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 
   /* save some targets and drag points */
   winTarget_ = w;
+  widgetTarget_ = widget;
   globalDragPoint_ = mouseEvent->globalPos();
   dragAboutToStart_ = true;
 
-  widgetTarget_.clear(); // a safeguard; see WindowManager::AppEventFilter::eventFilter()
+  pressedWidget_.clear(); // a safeguard; see WindowManager::AppEventFilter::eventFilter()
   QPoint winDragPoint = mouseEvent->pos();
 
   /* Because the widget may react to mouse press events, we first send a press event to it.
@@ -286,10 +287,16 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   QMouseEvent mousePress (QEvent::MouseButtonPress, widgetDragPoint_, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (widget, &mousePress);
 
-  /* If the target window is blokced, left or hidden now, the drag
+  /* If the target window has been left or hidden now, the drag
      has been cancelled (-> leavingWindow). Steal the press event! */
   if (winTarget_ == nullptr)
     return true;
+
+  if (!widget->isVisible() || !widget->isEnabled())
+  { // possible, as with Fm::PathBar
+    resetDrag();
+    return false;
+  }
 
   /* don't start dragging if the mouse press is accepted
      but allow dragging from inside some widget types */
@@ -305,11 +312,10 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   {
     resetDrag();
     /* to prevent a double press in WindowManager::AppEventFilter::eventFilter() */
-    widgetTarget_ = widget;
+    pressedWidget_ = widget;
     return false;
   }
 
-  widgetTarget_ = widget;
   locked_ = true;
 
   /* Send a move event to the target window with the same position.
@@ -376,7 +382,7 @@ bool WindowManager::leavingWindow()
 {
   if (!dragInProgress_ && widgetTarget_)
   {
-    widgetMouseRelease(); // blocked, left or hidden before the drag
+    widgetMouseRelease(); // left or hidden before the drag
     resetDrag();
   }
   return false;
@@ -468,12 +474,6 @@ bool WindowManager::canDrag (QWidget *widget)
     if (tb == nullptr) return false;
 
     /* consider some widgets inside toolbars */
-    if (widget->focusPolicy() > Qt::TabFocus
-        || (widget->focusProxy() && widget->focusProxy()->focusPolicy() > Qt::TabFocus
-            && widget->focusProxy()->underMouse()))
-    {
-      return false;
-    }
     if (widget->testAttribute (Qt::WA_Hover) || widget->testAttribute (Qt::WA_SetCursor))
       return false;
     if (QLabel *label = qobject_cast<QLabel*>(widget))
@@ -596,13 +596,6 @@ bool WindowManager::canDrag (QWidget *widget)
     return !r.contains (widgetDragPoint_);
   }
 
-  if (widget->focusPolicy() > Qt::TabFocus
-      || (widget->focusProxy() && widget->focusProxy()->focusPolicy() > Qt::TabFocus
-          && widget->focusProxy()->underMouse()))
-  {
-    return false;
-  }
-
   if (QDockWidget *dw = qobject_cast<QDockWidget*>(widget))
   {
     if(dw->allowedAreas() == (Qt::DockWidgetArea_Mask | Qt::AllDockWidgetAreas))
@@ -664,9 +657,9 @@ void WindowManager::widgetMouseRelease (bool inside)
 bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
 {
   if (event->type() == QEvent::MouseButtonPress
-      && object == parent_->widgetTarget_.data() && !parent_->isLocked())
+      && object == parent_->pressedWidget_.data() && !parent_->isLocked())
   { // no double press; the widget was pressed in WindowManager::mousePressEvent()
-    parent_->widgetTarget_.clear();
+    parent_->pressedWidget_.clear();
     return true;
   }
 

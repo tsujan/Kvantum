@@ -132,6 +132,7 @@ private:
   QBasicTimer doubleClickTimer_;
   QPointer<QWindow> winTarget_;
   QPointer<QWidget> widgetTarget_;
+  QPointer<QWidget> pressedWidget_;
   bool dragAboutToStart_;
   bool dragInProgress_;
   bool locked_;
