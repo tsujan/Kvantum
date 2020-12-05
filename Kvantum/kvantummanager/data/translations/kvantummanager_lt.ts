@@ -1372,8 +1372,8 @@ jie gali atrodyti kaip stačiakampiai su taškeliais.</translation>
         <location filename="../../kvantummanager.ui" line="1968"/>
         <source>Warning: This can be quite confusing at first.
 
-If you have enabled it and a button can be dragged and
-dropped, you could temporarily disable it by pressing
+If you have enabled it, you could temporarily disable it
+for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
         <translation type="unfinished"></translation>
     </message>
