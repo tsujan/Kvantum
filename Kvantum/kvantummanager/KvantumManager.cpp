@@ -122,6 +122,10 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                                                     << tr ("Menubar and primary toolbar")
                                                     << tr ("Anywhere possible"));
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
+    ui->checkBoxBtnDrag->setVisible (false);
+#endif
+
     ui->appsEdit->setClearButtonEnabled (true);
 
     QLabel *statusLabel = new QLabel();
@@ -172,6 +176,11 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->aboutButton, &QAbstractButton::clicked, this, &KvantumManager::aboutDialog);
     connect (ui->whatsthisButton, &QAbstractButton::clicked, this, &KvantumManager::showWhatsThis);
     connect (ui->checkBoxComboMenu, &QAbstractButton::clicked, this, &KvantumManager::comboMenu);
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+    connect (ui->comboX11Drag, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int index) {
+        ui->checkBoxBtnDrag->setEnabled (index > 1);
+    });
+#endif
 
     /* in this special case, show a message box */
     connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
@@ -1081,6 +1090,8 @@ void KvantumManager::defaultThemeButtons()
     }
     ui->comboDialogButton->setCurrentIndex (index);
     ui->comboX11Drag->setCurrentIndex (toDrag (defaultSettings.value ("x11drag").toString()));
+    ui->checkBoxBtnDrag->setChecked (defaultSettings.value ("drag_from_buttons").toBool());
+    ui->checkBoxBtnDrag->setEnabled (ui->comboX11Drag->currentIndex() > 1);
     if (defaultSettings.contains ("respect_DE"))
         ui->checkBoxDE->setChecked (defaultSettings.value ("respect_DE").toBool());
     else
@@ -1414,6 +1425,9 @@ void KvantumManager::tabChanged (int index)
                 }
                 if (themeSettings.contains ("x11drag"))
                     ui->comboX11Drag->setCurrentIndex(toDrag (themeSettings.value ("x11drag").toString()));
+                if (themeSettings.contains ("drag_from_buttons"))
+                    ui->checkBoxBtnDrag->setChecked (themeSettings.value ("drag_from_buttons").toBool());
+                ui->checkBoxBtnDrag->setEnabled (ui->comboX11Drag->currentIndex() > 1);
                 if (themeSettings.contains ("respect_DE"))
                     ui->checkBoxDE->setChecked (themeSettings.value ("respect_DE").toBool());
                 if (themeSettings.contains ("inline_spin_indicators"))
@@ -2268,6 +2282,7 @@ void KvantumManager::writeConfig()
         generalKeys.insert ("toolbutton_style", str.setNum (ui->comboToolButton->currentIndex()));
         generalKeys.insert ("dialog_button_layout", str.setNum (ui->comboDialogButton->currentIndex()));
         generalKeys.insert ("x11drag", toStr(static_cast<Drag>(ui->comboX11Drag->currentIndex())));
+        generalKeys.insert ("drag_from_buttons", boolToStr (ui->checkBoxBtnDrag->isChecked()));
         generalKeys.insert ("respect_DE", boolToStr (ui->checkBoxDE->isChecked()));
         generalKeys.insert ("inline_spin_indicators", boolToStr (ui->checkBoxInlineSpin->isChecked()));
         generalKeys.insert ("vertical_spin_indicators", boolToStr (ui->checkBoxVSpin->isChecked()));
@@ -2360,6 +2375,7 @@ void KvantumManager::writeConfig()
                != static_cast<qreal>(ui->spinSaturation->value())
 
             || toDrag (themeSettings.value ("x11drag").toString()) != ui->comboX11Drag->currentIndex()
+            || themeSettings.value ("drag_from_buttons").toBool() != ui->checkBoxBtnDrag->isChecked()
             || themeSettings.value ("inline_spin_indicators").toBool() != ui->checkBoxInlineSpin->isChecked()
             || themeSettings.value ("vertical_spin_indicators").toBool() != ui->checkBoxVSpin->isChecked()
             || themeSettings.value ("combo_menu").toBool() != ui->checkBoxComboMenu->isChecked()
@@ -2763,6 +2779,7 @@ void KvantumManager::respectDE (bool checked)
         {
             //ui->labelX11Drag->setEnabled (!checked);
             //ui->comboX11Drag->setEnabled (!checked);
+            //ui->checkBoxBtnDrag->setEnabled (!checked);
             ui->checkBoxIconlessBtn->setEnabled (!checked);
             ui->checkBoxIconlessMenu->setEnabled (!checked);
             ui->checkBoxNoComposite->setEnabled (!checked);

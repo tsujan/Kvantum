@@ -376,9 +376,9 @@ Style::Style(bool useDark) : QCommonStyle()
   blurHelper_ = nullptr;
 
   if (tspec_.x11drag)
-  { // See the explanation near the top of "windowmanager.cpp"
+  { // See Style::~Style() and the explanation near the top of "windowmanager.cpp"
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-    itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
+    itsWindowManager_ = new WindowManager(nullptr, tspec_.x11drag, tspec_.drag_from_buttons);
     itsWindowManager_->initialize();
 #else
     if (tspec_.isX11)
@@ -407,6 +407,13 @@ Style::Style(bool useDark) : QCommonStyle()
 
 Style::~Style()
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+  /* itsWindowManager_ shouldn't have "this" as its parent because
+     it sends mouse events that can delete "this". Instead, it should
+     be deleted only when the control returns to the event loop. */
+  itsWindowManager_->deleteLater();
+#endif
+
   QHash<const QObject*, Animation*>::iterator i = animations_.begin();
   while (i != animations_.end())
   {
@@ -4301,9 +4308,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           status = (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver)
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                       && widget->rect().contains(widget->mapFromGlobal(QCursor::pos())) // hover bug
-#endif
                     ? "focused" :
                     (option->state & State_Sunken)
                     || (option->state & State_Selected) ? "pressed" : "normal"
@@ -6245,9 +6250,7 @@ void Style::drawControl(QStyle::ControlElement element,
                  (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
                   (option->state & State_MouseOver)
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                     && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-#endif
                   ? "focused" :
                   (option->state & State_Sunken)
                   // to know it has focus
@@ -6341,10 +6344,8 @@ void Style::drawControl(QStyle::ControlElement element,
             lspec.tispace += sspec.minW/2;
         }
         QStyleOptionComboBox o(*opt);
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
         if ((option->state & State_MouseOver) && !status.startsWith("focused"))
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
-#endif
         bool isInactive(status.contains("-inactive"));
         renderLabel(&o,painter,r,
                     fspec,lspec,
@@ -9639,7 +9640,8 @@ void Style::drawControl(QStyle::ControlElement element,
                                              Qt::AlignLeft : Qt::AlignRight));
         }
 
-        if (opt->state & State_HasFocus)
+        if ((opt->state & State_HasFocus)
+            && (!widget || !widget->focusProxy())) // workaround for Kate's StatusBarButton
         {
           if (fspec.hasFocusFrame)
           {
@@ -10907,9 +10909,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                    (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver)
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
                       && (!widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
-#endif
                     ? "focused" :
                     (option->state & State_Sunken)
                     // to know it has focus

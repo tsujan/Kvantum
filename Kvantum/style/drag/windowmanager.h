@@ -59,7 +59,7 @@ public:
     }
   }
 
-  explicit WindowManager (QObject *parent, Drag drag);
+  explicit WindowManager (QObject *parent, Drag drag, bool dragFromBtns);
   virtual ~WindowManager() {}
 
   void initialize (const QStringList &blackList = QStringList());
@@ -128,14 +128,17 @@ private:
 
   QPoint widgetDragPoint_;
   QPoint globalDragPoint_;
+  QPoint lastWinDragPoint_; // used to find double clicks
   QBasicTimer dragTimer_;
   QBasicTimer doubleClickTimer_;
   QPointer<QWindow> winTarget_;
+  QPointer<QWindow> lastWin_;
   QPointer<QWidget> widgetTarget_;
   QPointer<QWidget> pressedWidget_;
   bool dragAboutToStart_;
   bool dragInProgress_;
   bool locked_;
+  bool dragFromBtns_;
   Drag drag_;
 
   // provide application-wise event filter

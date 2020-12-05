@@ -37,8 +37,10 @@ typedef struct {
   /* running on X11? (only used internally) */
   bool isX11;
   /* draggable from menubar, primary toolbar
-     or anywhere possible (under x11)? */
+     or anywhere possible (under X11 and Wayland)? */
   WindowManager::Drag x11drag;
+  /* also, drag from buttons? */
+  bool drag_from_buttons;
   /* should some settings of the current DE be respected? */
   bool respect_DE;
   /* show mnemonics only if Alt is pressed? */
@@ -466,6 +468,7 @@ static inline void default_size_spec(size_spec &sspec) {
 static inline void default_theme_spec(theme_spec &tspec) {
   tspec.isX11 = false;
   tspec.x11drag = WindowManager::DRAG_ALL;
+  tspec.drag_from_buttons = false;
   tspec.respect_DE = true;
   tspec.alt_mnemonic = true;
   tspec.click_behavior = 0;

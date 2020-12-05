@@ -1601,15 +1601,16 @@ Uncheck it if you want to use those options!</string>
                 </widget>
                </item>
                <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxScrollableMenu">
+                <widget class="QCheckBox" name="checkBoxGroupLabel">
                  <property name="toolTip">
-                  <string>Should big menus be scrollable and have
-scroll arrows on their top and/or bottom?
+                  <string>By default, the label is on the frame
+and the frame is cut to contain it.
 
-By default, all of their menu-items are shown.</string>
+Checking this puts the label right above
+the frame, so that the frame isn't cut.</string>
                  </property>
                  <property name="text">
-                  <string>Scrollable menus</string>
+                  <string>Group-box label above frame</string>
                  </property>
                 </widget>
                </item>
@@ -1628,16 +1629,16 @@ into the spin line-edit..</string>
                 </widget>
                </item>
                <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGroupLabel">
+                <widget class="QCheckBox" name="checkBoxRubber">
                  <property name="toolTip">
-                  <string>By default, the label is on the frame
-and the frame is cut to contain it.
+                  <string>By default, drop rectangles for movable
+toolbars and dock widgets are hollow.
 
-Checking this puts the label right above
-the frame, so that the frame isn't cut.</string>
+This option fills drop rectangles with
+the highlight color.</string>
                  </property>
                  <property name="text">
-                  <string>Group-box label above frame</string>
+                  <string>Fill rubber-band rectangles</string>
                  </property>
                 </widget>
                </item>
@@ -1655,16 +1656,16 @@ spin-down one inside the spin line-edit.</string>
                 </widget>
                </item>
                <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxRubber">
+                <widget class="QCheckBox" name="checkBoxMenubar">
                  <property name="toolTip">
-                  <string>By default, drop rectangles for movable
-toolbars and dock widgets are hollow.
-
-This option fills drop rectangles with
-the highlight color.</string>
+                  <string>Mouse tracking is enabled
+for menubars by default.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>Fill rubber-band rectangles</string>
+                  <string>Mouse tracking for menubars</string>
                  </property>
                 </widget>
                </item>
@@ -1683,16 +1684,13 @@ line-edit with arrow (and icon, if it exists)?</string>
                 </widget>
                </item>
                <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenubar">
+                <widget class="QCheckBox" name="checkBoxMenuToolbar">
                  <property name="toolTip">
-                  <string>Mouse tracking is enabled
-for menubars by default.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>If checked, the menubar and toolbar will be drawn as a whole by
+the toolbar SVG element when they are adjacent to each another.</string>
                  </property>
                  <property name="text">
-                  <string>Mouse tracking for menubars</string>
+                  <string>Merge menubar with toolbar</string>
                  </property>
                 </widget>
                </item>
@@ -1709,13 +1707,13 @@ By default, combo popups do not cover the combo box.</string>
                 </widget>
                </item>
                <item row="4" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxMenuToolbar">
+                <widget class="QCheckBox" name="checkBoxGroupToolbar">
                  <property name="toolTip">
-                  <string>If checked, the menubar and toolbar will be drawn as a whole by
-the toolbar SVG element when they are adjacent to each another.</string>
+                  <string>If checked, toolbar buttons will be drawn grouped and raised
+between toolbar separators.</string>
                  </property>
                  <property name="text">
-                  <string>Merge menubar with toolbar</string>
+                  <string>Group toolbar buttons</string>
                  </property>
                 </widget>
                </item>
@@ -1734,13 +1732,15 @@ This option will hide these.</string>
                 </widget>
                </item>
                <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxGroupToolbar">
+                <widget class="QCheckBox" name="checkBoxButtonShift">
                  <property name="toolTip">
-                  <string>If checked, toolbar buttons will be drawn grouped and raised
-between toolbar separators.</string>
+                  <string>Shift the contents of push buttons when pressed?
+
+By default, the contents are shifted by 1px
+both horizontally and vertically.</string>
                  </property>
                  <property name="text">
-                  <string>Group toolbar buttons</string>
+                  <string>Shift push-button contents</string>
                  </property>
                 </widget>
                </item>
@@ -1755,15 +1755,12 @@ between toolbar separators.</string>
                 </widget>
                </item>
                <item row="6" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxButtonShift">
+                <widget class="QCheckBox" name="checkBoxAlt">
                  <property name="toolTip">
-                  <string>Shift the contents of push buttons when pressed?
-
-By default, the contents are shifted by 1px
-both horizontally and vertically.</string>
+                  <string>If unchecked, shortcuts will not be underlined at all.</string>
                  </property>
                  <property name="text">
-                  <string>Shift push-button contents</string>
+                  <string>Underline shortcuts with Alt</string>
                  </property>
                 </widget>
                </item>
@@ -1775,16 +1772,6 @@ i.e., there is no border between them.</string>
                  </property>
                  <property name="text">
                   <string>Join inactive tabs</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxAlt">
-                 <property name="toolTip">
-                  <string>If unchecked, shortcuts will not be underlined at all.</string>
-                 </property>
-                 <property name="text">
-                  <string>Underline shortcuts with Alt</string>
                  </property>
                 </widget>
                </item>
@@ -1959,6 +1946,33 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollableMenu">
+                 <property name="toolTip">
+                  <string>Should big menus be scrollable and have
+scroll arrows on their top and/or bottom?
+
+By default, all of their menu-items are shown.</string>
+                 </property>
+                 <property name="text">
+                  <string>Scrollable menus</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="12" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxBtnDrag">
+                 <property name="toolTip">
+                  <string>Warning: This can be quite confusing at first.
+
+If you have enabled it and a button can be dragged and
+dropped, you could temporarily disable it by pressing
+the Ctrl key before pressing the button.</string>
+                 </property>
+                 <property name="text">
+                  <string>Allow dragging from buttons</string>
                  </property>
                 </widget>
                </item>
