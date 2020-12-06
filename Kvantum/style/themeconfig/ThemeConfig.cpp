@@ -738,8 +738,10 @@ theme_spec ThemeConfig::getThemeSpec()
       r.x11drag = WindowManager::toDrag(v.toString());
   }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
   v = getValue(KSL("General"),KSL("drag_from_buttons"));
   r.drag_from_buttons = v.toBool();
+#endif
 
   v = getValue(KSL("General"),KSL("respect_DE"));
   if (v.isValid()) // true by default

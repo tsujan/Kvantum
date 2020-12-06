@@ -64,15 +64,15 @@ public:
 
   void initialize (const QStringList &blackList = QStringList());
 
-  void registerWidget (QWidget*);
-  void unregisterWidget (QWidget*);
-  virtual bool eventFilter (QObject*, QEvent*);
+  void registerWidget (QWidget *widget);
+  void unregisterWidget (QWidget *widget);
+  virtual bool eventFilter (QObject *object, QEvent *event);
 
 protected:
-  void timerEvent (QTimerEvent*);
-  bool mousePressEvent (QObject*, QEvent*);
-  bool mouseMoveEvent (QEvent*);
-  bool mouseReleaseEvent();
+  void timerEvent (QTimerEvent *event);
+  bool mousePressEvent (QObject *object, QEvent *event);
+  bool mouseMoveEvent (QEvent *event);
+  bool mouseReleaseEvent (QEvent *event);
   bool leavingWindow();
   void widgetMouseRelease (bool inside = false);
 
@@ -84,8 +84,9 @@ protected:
   }
 
   void initializeBlackList (const QStringList &list);
-  bool isBlackListed (QWidget*);
-  bool canDrag (QWidget*);
+  bool isBlackListed (QWidget *widget);
+  bool canDrag (QWidget *widget);
+  bool isDraggable (QWidget *widget);
   void resetDrag();
 
   bool isLocked() const {
@@ -135,16 +136,16 @@ private:
   QPointer<QWindow> lastWin_;
   QPointer<QWidget> widgetTarget_;
   QPointer<QWidget> pressedWidget_;
+  QPointer<QWidget> lastPressedWidget_;
   bool dragAboutToStart_;
   bool dragInProgress_;
   bool locked_;
   bool dragFromBtns_;
   Drag drag_;
 
-  // provide application-wise event filter
   /*
-    used to unlock dragging and make sure the event
-    is properly restored after a drag is finished
+     provide application-wise event filter
+     (used to unlock dragging and checking some mouse events)
   */
   class AppEventFilter: public QObject
   {
@@ -152,7 +153,7 @@ private:
     AppEventFilter (WindowManager *parent) :
                     QObject (parent),
                     parent_ (parent) {}
-    virtual bool eventFilter (QObject*, QEvent*);
+    virtual bool eventFilter (QObject *object, QEvent *event);
 
   private:
     WindowManager *parent_;
@@ -162,6 +163,7 @@ private:
   /* allow access of all private members to the app event filter */
   friend class AppEventFilter;
 };
+
 }
 
 #endif
