@@ -496,6 +496,7 @@ bool WindowManager::canDrag (QWidget *widget)
   {
     if (qobject_cast<QMdiSubWindow*>(parent))
       return false;
+    if (parent->isWindow()) break; // not inside a subwindow
     parent = parent->parentWidget();
   }
 
