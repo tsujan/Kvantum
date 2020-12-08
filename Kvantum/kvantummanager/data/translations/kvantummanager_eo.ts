@@ -1388,7 +1388,7 @@ the Ctrl key before pressing the button.</source>
 
 Se vi jam ebligis ĝin, vi povas portempe malebligi
 ĝin por butono, kiu povas esti ŝovita kaj demetita,
-preminte la Ctrl-klavo antaŭ ol premi la butonon.</translation>
+preminte la Ctrl-klavon antaŭ ol premi la butonon.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1975"/>

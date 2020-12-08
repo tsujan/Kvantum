@@ -445,12 +445,12 @@ bool WindowManager::isBlackListed (QWidget *widget)
       continue;
     if (id.className() == "*" && !id.appName().isEmpty())
     {
-      /* if application name matches and all classes are selected
+      /* if application name matches and all classes are selected,
          disable the grabbing entirely */
       setEnabled (false);
       return true;
     }
-    if (widget->inherits (id.className().toLatin1()))
+    if (widget->inherits (id.className().toLatin1().data()))
       return true;
   }
   return false;
@@ -472,12 +472,12 @@ bool WindowManager::canDrag (QWidget *widget)
     return false;
 
   QWidget *win = widget->window();
-  if (win == widget
+  /*if (win == widget
       && !qobject_cast<QMainWindow*>(widget)
       && !qobject_cast<QDialog*>(widget))
   {
     return false;
-  }
+  }*/
   if (win->testAttribute (Qt::WA_X11NetWmWindowTypeDesktop))
     return false;
   /* the window type may have changed */
