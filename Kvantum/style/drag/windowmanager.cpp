@@ -338,7 +338,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
      but allow dragging from inside some widget types */
   if (mousePress.isAccepted())
   {
-    /* the last pressed widget does the main job with the press event */
+    /* the last pressed widget may do something with the press event */
     if (!isDraggable (lastPressedWidget_ ? lastPressedWidget_.data() : widget))
     {
       resetDrag();
@@ -548,12 +548,14 @@ bool WindowManager::canDrag (QWidget *widget)
 
   /* pay attention to some details of item views */
   QAbstractItemView *itemView (nullptr);
-  bool isDraggable (false);
+  bool draggable (false);
   if ((itemView = qobject_cast<QListView*>(widget->parentWidget()))
       || (itemView = qobject_cast<QTreeView*>(widget->parentWidget())))
   {
     if (widget == itemView->viewport())
     {
+      if (isBlackListed (itemView))
+        return false;
       if (itemView->frameShape() != QFrame::NoFrame)
         return false;
       if (itemView->selectionMode() != QAbstractItemView::NoSelection
@@ -564,34 +566,39 @@ bool WindowManager::canDrag (QWidget *widget)
       }
       if (itemView->model() && itemView->indexAt (widgetDragPoint_).isValid())
         return false;
-      isDraggable = true;
+      draggable = true;
     }
   }
   else if ((itemView = qobject_cast<QAbstractItemView*>(widget->parentWidget())))
   {
     if (widget == itemView->viewport())
     {
+      if (isBlackListed (itemView))
+        return false;
       if (itemView->frameShape() != QFrame::NoFrame)
         return false;
       if (itemView->indexAt (widgetDragPoint_).isValid())
         return false;
-      isDraggable = true;
+      draggable = true;
     }
   }
   else if (QGraphicsView *graphicsView = qobject_cast<QGraphicsView*>(widget->parentWidget()))
   {
     if (widget == graphicsView->viewport())
     {
+      return false; // can be troublesome for users of apps like kpat
+      /*if (isBlackListed (graphicsView))
+        return false;
       if (graphicsView->frameShape() != QFrame::NoFrame)
         return false;
       if (graphicsView->dragMode() != QGraphicsView::NoDrag)
         return false;
       if (graphicsView->itemAt (widgetDragPoint_))
         return false;
-      isDraggable = true;
+      draggable = true;*/
     }
   }
-  if (isDraggable)
+  if (draggable)
   {
     if (widget->focusPolicy() > Qt::TabFocus
         || (widget->focusProxy() && widget->focusProxy()->focusPolicy() > Qt::TabFocus))
@@ -719,11 +726,11 @@ bool WindowManager::isDraggable (QWidget *widget)
     if (treeView->viewport() == widget && !isBlackListed (treeView))
       return true;
   }
-  else if (QGraphicsView *graphicsView = qobject_cast<QGraphicsView*>(widget->parentWidget()))
+  /*else if (QGraphicsView *graphicsView = qobject_cast<QGraphicsView*>(widget->parentWidget()))
   {
     if (graphicsView->viewport() == widget && !isBlackListed (graphicsView))
       return true;
-  }
+  }*/
 
   return false;
 }
