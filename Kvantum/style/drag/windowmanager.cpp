@@ -187,8 +187,11 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
       QWidget *widget = qobject_cast<QWidget*>(object);
       if (!widget || !widget->isWindow()) break;
       Qt::WindowType type = widget->windowType();
-      if (type != Qt::Window && type != Qt::Dialog && type != Qt::Sheet)
+      if (type != Qt::Window && type != Qt::Dialog && type != Qt::Sheet
+          && type != Qt::Tool) // an exception; see WindowManager::canDrag()
+      {
         break;
+      }
       if (QWindow *w = widget->windowHandle())
       {
         w->removeEventFilter (this);
@@ -480,10 +483,13 @@ bool WindowManager::canDrag (QWidget *widget)
   }*/
   if (win->testAttribute (Qt::WA_X11NetWmWindowTypeDesktop))
     return false;
-  /* the window type may have changed */
+  /* the window type may have changed but we accept Qt::Tool (as in Krita) */
   Qt::WindowType type = win->windowType();
-  if (type != Qt::Window && type != Qt::Dialog && type != Qt::Sheet)
+  if (type != Qt::Window && type != Qt::Dialog && type != Qt::Sheet
+      && type != Qt::Tool)
+  {
     return false;
+  }
   /* X11BypassWindowManagerHint can be used to fix the position */
   if (win->windowFlags().testFlag (Qt::X11BypassWindowManagerHint)
       || win->windowFlags().testFlag (Qt::WindowDoesNotAcceptFocus))

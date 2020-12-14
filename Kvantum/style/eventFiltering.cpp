@@ -232,19 +232,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                /*&& tspec_.translucent_windows*/ // this could have weird effects with style or settings change
               )
       {
-        switch (w->windowFlags() & Qt::WindowType_Mask) {
-          case Qt::Window:
-          case Qt::Dialog:
-          case Qt::Popup:
-          case Qt::ToolTip:
-          case Qt::Sheet: {
-            if (qobject_cast<QMenu*>(w)) break;
-            QPainter p(w);
-            p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
-            drawBg(&p,w);
-            break;
-          }
-          default: break;
+        int t = (w->windowFlags() & Qt::WindowType_Mask);
+        if (t == Qt::Window || t == Qt::Dialog
+            || t == Qt::Popup || t == Qt::ToolTip || t == Qt::Sheet
+            /* the window type may have changed after polishing
+               but we accept Qt::Tool (as with a dialog in Krita) */
+            || (t == Qt::Tool && forcedTranslucency_.contains(w)))
+        {
+          if (qobject_cast<QMenu*>(w)) break; // QMenu has a filter event too
+          QPainter p(w);
+          p.setClipRegion(static_cast<QPaintEvent*>(e)->region());
+          drawBg(&p,w);
         }
       }
       else if (!w->underMouse() && w->inherits("KMultiTabBarTab"))

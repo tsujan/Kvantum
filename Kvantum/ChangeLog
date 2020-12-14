@@ -13,6 +13,7 @@ V0.18.0
  * Fixed the field growth policy of centered form layouts.
  * A better window dragging code (x11drag) with Qt ≥ 5.15, that works under X11 and Wayland alike by calling the window manager.
  * Added an option (to Kvantum Manager) for dragging windows from buttons.
+ * Considered a rare case of window type change for window translucency and dragging.
 
 V0.17.0
 ---------

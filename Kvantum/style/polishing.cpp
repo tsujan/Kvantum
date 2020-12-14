@@ -1024,8 +1024,8 @@ void Style::polish(QWidget *widget)
       if (qobject_cast<QMenu*>(widget))
       {
         /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
-            the RTL property isn't set yet, we should move them later. On the other hand,
-            menus should be moved to compensate for the offset created by their shadows. */
+           the RTL property isn't set yet, we should move them later. On the other hand,
+           menus should be moved to compensate for the offset created by their shadows. */
         widget->installEventFilter(this);
       }
 
