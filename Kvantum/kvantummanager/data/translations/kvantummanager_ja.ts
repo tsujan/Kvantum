@@ -369,8 +369,7 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
         <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; は全てのデスクトップ環境から独立しているため、最初に Qt プラットフォームの統合プログラムを &lt;i&gt;アクティブ化&lt;/i&gt; して下さい。KDE と LXQt は、アクティブな Qt スタイルのプラグインを変更するシンプルなツールが提供されています。他のプラットフォームでは、Qt 設定ツールが必要になります。
-&lt;br/&gt;&lt;br/&gt;KDE では、いくつかの KDE アプリケーションは、KDE カラースキームからそのディレクトリを取得し、そのテーマの配色を選択して適用することも出来ます。&lt;br/&gt;&lt;br/&gt;実行中のアプリケーションは、閉じて再び開くと新しいテーマが取得されます。すべての KDE/LXQt パーツが、完全にテーマを表示されるようにするためには、ログイン・ログアウトが便利です。
-</translation>
+&lt;br/&gt;&lt;br/&gt;KDE では、いくつかの KDE アプリケーションは、KDE カラースキームからそのディレクトリを取得し、そのテーマの配色を選択して適用することも出来ます。&lt;br/&gt;&lt;br/&gt;実行中のアプリケーションは、閉じて再び開くと新しいテーマが取得されます。すべての KDE/LXQt パーツが、完全にテーマを表示されるようにするためには、ログイン・ログアウトが便利です。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -1221,7 +1220,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2084"/>
         <source>app1,app2,app3</source>
-        <translation>app1,app2,app3</translation>
+        <translation>アプリ1,アプリ2,アプリ3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2112"/>
