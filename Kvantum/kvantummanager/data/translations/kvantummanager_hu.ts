@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="149"/>
         <source>License</source>
-        <translation>Licensz</translation>
+        <translation>Licenc</translation>
     </message>
 </context>
 <context>
@@ -285,7 +285,7 @@ bosszantó ugrásokat görgetésnél, amelyek
         <location filename="../../kvantummanager.ui" line="652"/>
         <source>Tint label icons on mouseover by </source>
         <translation>Címikonok színezése az
-egérmutató alatt ennyivel:</translation>
+egérmutató alatt ennyivel: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="666"/>
@@ -683,7 +683,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1379"/>
         <source>Submenu overlap: </source>
-        <translation>Almenü átfedése:</translation>
+        <translation>Almenü átfedése: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1404"/>

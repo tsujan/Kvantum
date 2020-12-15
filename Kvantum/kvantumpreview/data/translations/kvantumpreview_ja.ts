@@ -416,7 +416,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation>列 </translation>
+        <translation>列 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
