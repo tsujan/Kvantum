@@ -93,7 +93,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reverter para as definições padrão (root) deste tema!&lt;/p&gt;&lt;p&gt;Quando clicado e confirmado, todas as alterações na configuração serão perdidas, mas o ficheiro SVG provavelmente personalizado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reverter para as definições padrão (root) deste tema!&lt;/p&gt;&lt;p&gt;Quando clicado e confirmado, todas as alterações na configuração serão perdidas, mas o ficheiro SVG provavelmente personalizado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -166,12 +166,12 @@ nas definições de sessão LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished">Painel lateral transparente para PCManFM-qt</translation>
+        <translation>Painel lateral transparente para PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished">Botões sem ícones</translation>
+        <translation>Botões sem ícones</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -180,36 +180,36 @@ nas definições de sessão LXQt.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished">Mesclar a visualização do PCManFM-qt com seus arredores.
+        <translation>Unir a visualização do PCManFM-qt com o seu ambiente.
 
 No LXQt, é necessário sair e entrar na sessão ou fechando
-o PCManFM-qt e, em seguida, parar e iniciar a Área de Trabalho
-nas Configurações da Sessão do LXQt.</translation>
+o PCManFM-qt e depois, parar e iniciar o ambiente de trabalho
+nas definições da sessão do LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished">Visualização transparente para PCManFM-qt</translation>
+        <translation>Visualização transparente para PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation type="unfinished">Menus sem ícones</translation>
+        <translation>Menus sem ícones</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished">Borrar janelas explicitamente translúcidas</translation>
+        <translation>Desfocar janelas explicitamente translúcidas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished">Barra de ferramenta superior única</translation>
+        <translation>Barra de ferramentas superior única</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished">Não desenhar qualquer plano de fundo para KTitles.</translation>
+        <translation>Não desenhar qualquer plano de fundo para KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -219,13 +219,13 @@ nas Configurações da Sessão do LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished">Rótulo transparente KTitle</translation>
+        <translation>Etiqueta KTitle transparente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished">Não colorir os ícones de etiquetas
+        <translation>Não colorir os ícones de etiquetas
 selecionados com a cor de destaque!</translation>
     </message>
     <message>
@@ -236,13 +236,13 @@ selecionados com a cor de destaque!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
         <source>No selection tint</source>
-        <translation type="unfinished">Nenhuma coloração de seleção</translation>
+        <translation>Nenhuma coloração de seleção</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished">Não desenhar nenhum fundo para os títulos de menu (KDE).
+        <translation>Não desenhar nenhum fundo para os títulos de menu (KDE).
 (Necessário Sair e Entrar para os menus do Plasma.)</translation>
     </message>
     <message>
@@ -253,12 +253,12 @@ selecionados com a cor de destaque!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished">Título do menu transparente</translation>
+        <translation>Título do menu transparente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation type="unfinished">Estilo barras de capacidade do KDE como barras de progresso.</translation>
+        <translation>Estilo barras de capacidade do KDE como barras de progresso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
