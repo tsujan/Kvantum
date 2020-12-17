@@ -3959,7 +3959,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.expansion = 0;
       } */
 
-      QString iStatus = getState(option,widget);; // indicator state
+      QString iStatus = getState(option,widget); // indicator state
       QString bStatus = iStatus; // button state
       if (option->state & State_Enabled)
       {
@@ -4022,6 +4022,24 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       QRect r = option->rect;
       indicator_spec dspec = getIndicatorSpec(group);
 
+      bool inlineOnDarkToolbar = false;
+      if ((verticalIndicators || tspec_.inline_spin_indicators)
+          && themeRndr_ && themeRndr_->isValid())
+      {
+        if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+            && getStylableToolbarContainer(widget, true))
+        {
+          QColor tCol = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
+          QLineEdit *le = widget->findChild<QLineEdit*>();
+          if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), tCol)
+              && !enoughContrast(le->palette().color(QPalette::Active, QPalette::Text), tCol))
+          {
+            inlineOnDarkToolbar = true;
+          }
+        }
+      }
+
       if (!verticalIndicators && (!tspec_.inline_spin_indicators || tspec_.inline_spin_separator))
       {
         if (bStatus.startsWith("disabled"))
@@ -4037,7 +4055,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           renderFrame(painter,r,fspec,fspec.element+"-"+bStatus,0,0,0,0,0,true);
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+bStatus,true);
         }
-        if (element == PE_IndicatorSpinDown || element == PE_IndicatorSpinMinus)
+        if (!inlineOnDarkToolbar
+            && (element == PE_IndicatorSpinDown || element == PE_IndicatorSpinMinus))
         { // draw spinbox separator if it exists
           QString sepName = dspec.element + "-separator";
           QRect sep;
@@ -4075,20 +4094,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             && flatArrowExists(dspec.element))
           dspec.element = "flat-"+dspec.element;
 
-        if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-            && getStylableToolbarContainer(widget, true))
+        if (inlineOnDarkToolbar)
         {
-          QColor tCol = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
-          QLineEdit *le = widget->findChild<QLineEdit*>();
-          if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), tCol)
-              && !enoughContrast(le->palette().color(QPalette::Active, QPalette::Text), tCol))
-          {
-            if (dspec.element.startsWith("flat-"))
-              dspec.element.remove(0, 5);
-            else
-              dspec.element = "flat-"+dspec.element;;
-          }
+          if (dspec.element.startsWith("flat-"))
+            dspec.element.remove(0, 5);
+          else
+            dspec.element = "flat-"+dspec.element;
         }
       }
       renderIndicator(painter,
