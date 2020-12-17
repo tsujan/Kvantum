@@ -4580,29 +4580,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
         renderFrame(painter,r,fspec,fspec.element+"-"+_status);
 
-        /* draw combo separator if it exists */
-        const QString sepName = getIndicatorSpec(cGroup).element + "-separator";
-        QRect sep;
-        if (rtl)
-        {
-          sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
-          painter->save();
-          QTransform m;
-          m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
-          painter->setTransform(m, true);
-        }
-        else
-          sep = QRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
-        if (renderElement(painter, sepName+"-"+_status, sep))
-        {
-          sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
-          renderElement(painter, sepName+"-top-"+_status, sep);
-          sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
-          renderElement(painter, sepName+"-bottom-"+_status, sep);
-        }
-        if (rtl)
-          painter->restore();
-
         if (animate)
         {
           if (animatePanel)
@@ -4629,6 +4606,30 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           comboCol.setAlpha(255);
           painter->fillRect(interiorRect(r,fspec), comboCol);
         }
+
+        /* draw combo separator if it exists */
+        const QString sepName = getIndicatorSpec(cGroup).element + "-separator";
+        QRect sep;
+        if (rtl)
+        {
+          sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+          painter->save();
+          QTransform m;
+          m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
+          painter->setTransform(m, true);
+        }
+        else
+          sep = QRect(x, y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+        if (renderElement(painter, sepName+"-"+_status, sep))
+        {
+          sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+          renderElement(painter, sepName+"-top-"+_status, sep);
+          sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+          renderElement(painter, sepName+"-bottom-"+_status, sep);
+        }
+        if (rtl)
+          painter->restore();
+
         if (!(option->state & State_Enabled))
         {
           painter->restore();
@@ -11101,31 +11102,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               renderFrame(painter,r,fspec,fspec.element+"-"+_status);
               if (!fillWidgetInterior)
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
+
+              /* draw the line-edit part */
               if (!drwaAsLineEdit && editable)
               {
-                /* draw combo icon separator if it exists */
-                const QString sepName = fspec.element + "-icon-separator";
-                QRect sep;
-                if (rtl)
-                {
-                  sep = QRect(r.x(), y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
-                  painter->save();
-                  QTransform m;
-                  m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
-                  painter->setTransform(m, true);
-                }
-                else
-                  sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
-                if (renderElement(painter, sepName+"-"+_status, sep))
-                {
-                  sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
-                  renderElement(painter, sepName+"-top-"+_status, sep);
-                  sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
-                  renderElement(painter, sepName+"-bottom-"+_status, sep);
-                }
-                if (rtl)
-                  painter->restore();
-                /* draw the line-edit part */
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
                               | State_KeyboardFocusChange;
                 if (animate && !animatePanel)
@@ -11137,6 +11117,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 if (animate && !animatePanel)
                   painter->restore();
               }
+
               if (animate)
               {
                 if (animatePanel)
@@ -11173,6 +11154,32 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                                        : QPalette::Button);
                 comboCol.setAlpha(255);
                 painter->fillRect(interiorRect(r,fspec), comboCol);
+              }
+
+              /* draw combo icon separator if it exists */
+              if (!drwaAsLineEdit && editable)
+              {
+                const QString sepName = fspec.element + "-icon-separator";
+                QRect sep;
+                if (rtl)
+                {
+                  sep = QRect(r.x(), y+fspec.top, fspec.left, h-fspec.top-fspec.bottom);
+                  painter->save();
+                  QTransform m;
+                  m.translate(2*sep.x() + sep.width(), 0); m.scale(-1,1);
+                  painter->setTransform(m, true);
+                }
+                else
+                  sep = QRect(x+r.width()-fspec.right, y+fspec.top, fspec.right, h-fspec.top-fspec.bottom);
+                if (renderElement(painter, sepName+"-"+_status, sep))
+                {
+                  sep.adjust(0, -fspec.top, 0, -h+fspec.top+fspec.bottom);
+                  renderElement(painter, sepName+"-top-"+_status, sep);
+                  sep.adjust(0, h-fspec.bottom, 0, h-fspec.top);
+                  renderElement(painter, sepName+"-bottom-"+_status, sep);
+                }
+                if (rtl)
+                  painter->restore();
               }
             }
             if (libreoffice) painter->restore();
