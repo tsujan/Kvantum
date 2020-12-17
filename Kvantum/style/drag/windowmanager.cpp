@@ -224,8 +224,7 @@ void WindowManager::timerEvent (QTimerEvent *event)
         winTarget_.data()->setCursor (Qt::OpenHandCursor);
       else
       {
-        /* release mouse outside the widget on dragging */
-        if (widgetTarget_)
+        if (widgetTarget_) // release mouse outside the widget on dragging
           widgetMouseRelease();
         winTarget_.data()->unsetCursor();
         dragInProgress_ = winTarget_.data()->startSystemMove();
@@ -782,10 +781,13 @@ bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
       if (mouseEvent->modifiers() == Qt::NoModifier && mouseEvent->button() == Qt::LeftButton)
         return true;
     }
-    else if (QWidget *widget = qobject_cast<QWidget*>(object))
-    {
-      if (mouseEvent->modifiers() == Qt::NoModifier && mouseEvent->button() == Qt::LeftButton)
-        parent_->lastPressedWidget_ = widget;
+    else if (parent_->dragAboutToStart_)
+    { // find the last pressed widget in WindowManager::mousePressEvent()
+      if (QWidget *widget = qobject_cast<QWidget*>(object))
+      {
+        if (mouseEvent->modifiers() == Qt::NoModifier && mouseEvent->button() == Qt::LeftButton)
+          parent_->lastPressedWidget_ = widget;
+      }
     }
     return false;
   }

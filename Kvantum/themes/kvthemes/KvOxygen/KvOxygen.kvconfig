@@ -88,6 +88,7 @@ single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=false
 transparent_arrow_button=true
+centered_forms=true
 
 [PanelButtonCommand]
 frame=true

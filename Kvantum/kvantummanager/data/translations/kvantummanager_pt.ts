@@ -4,7 +4,7 @@
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
-        <location filename="../../about.ui" line="149"/>
+        <location filename="../../about.ui" line="151"/>
         <source>License</source>
         <translation>Licença</translation>
     </message>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;&lt;b&gt;&gt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; vem com muitos temas mas também podem ser instalados temas externos para serem utilizados por ele. Aqui pode escolher uma pasta de temas e depois premir o botão abaixo para a instalar na sua Pasta Pessoal.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; vem com muitos temas mas também podem ser instalados temas externos para serem utilizados por ele. Aqui pode escolher uma pasta de temas e depois premir o botão abaixo para a instalar na sua Pasta Pessoal.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
