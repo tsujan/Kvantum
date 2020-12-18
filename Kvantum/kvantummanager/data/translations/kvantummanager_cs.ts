@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="151"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licence</translation>
     </message>
 </context>
 <context>
@@ -14,23 +14,24 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Nainstalovat/aktualizovat motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; přichází s mnoha motivy vzhledu, ale je také možné nainstalovat a používat jeho prostřednictvím i externí motivy. Zde je možné zvolit složku s motivy a poté stisknutím tlačítka níže ho nainstalovat do své domovské složky.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte složku pro Kvantum
+motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
