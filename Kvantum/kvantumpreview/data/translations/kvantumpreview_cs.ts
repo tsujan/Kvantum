@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhled Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Stisknutá tlačítka</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
