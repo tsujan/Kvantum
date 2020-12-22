@@ -214,7 +214,7 @@ nas definições da sessão do LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar qualquer plano de fundo para KTitles?&lt;/p&gt;&lt;p&gt;Ktitles são usados por alguns aplicativos do KDE para exibir diferentes seções nos diálogos de configuração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar qualquer plano de fundo para KTitles?&lt;/p&gt;&lt;p&gt;Ktitles são utilizados por algumas aplicações do KDE para mostrar diferentes secções nos diálogos de configuração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -231,7 +231,7 @@ selecionados com a cor de destaque!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Por padrão, os ícones de etiqueta selecionados são coloridos pela cor de destaque.&lt;/p&gt;&lt;p&gt;Marcar esta caixa remove a coloração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Por padrão, os ícones de etiqueta selecionados são coloridos pela cor de destaque.&lt;/p&gt;&lt;p&gt;Marcar esta caixa remove a coloração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
@@ -248,7 +248,7 @@ selecionados com a cor de destaque!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar nenhum fundo para títulos de menu (KDE)?&lt;/p&gt;&lt;p&gt;Títulos de menu são como separadores de menu, mas com ícone e texto.&lt;/p&gt;&lt;p&gt;Isso necessita Sair e Entrar para os menus do KDE Plasma. Para o painel LXQt, basta reiniciar o painel com as &lt;span style=&quot; font-style:italic;&quot;&gt; Configurações da Sessão. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Não desenhar nenhum fundo para títulos de menu (KDE)?&lt;/p&gt;&lt;p&gt;Títulos de menu são como separadores de menu, mas com ícone e texto.&lt;/p&gt;&lt;p&gt;Isto necessita Sair e Entrar para os menus do KDE Plasma. Para o painel LXQt, basta reiniciar o painel com as &lt;span style=&quot; font-style:italic;&quot;&gt; Definições da sessão. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -263,7 +263,7 @@ selecionados com a cor de destaque!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estilo barras de capacidade do KDE como barras de progresso?&lt;/p&gt;&lt;p&gt;Barras de capacidade são geralmente usadas por alguns aplicativos do KDE para exibir tamanhos de volumes e ter seu próprio estilo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estilo barras de capacidade do KDE como barras de progresso?&lt;/p&gt;&lt;p&gt;Barras de capacidade são geralmente usadas por algumas aplicações do KDE para mostrar tamanhos de volumes e ter seu próprio estilo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
