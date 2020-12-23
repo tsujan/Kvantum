@@ -121,7 +121,7 @@ transparent_pcmanfm_view=true
 transparent_arrow_button=true
 centered_forms=true
 kinetic_scrolling=false
-scroll_jump_workaround=true
+scroll_jump_workaround=false
 noninteger_translucency=false
 
 [PanelButtonCommand]

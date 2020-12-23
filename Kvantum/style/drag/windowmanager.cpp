@@ -474,12 +474,12 @@ bool WindowManager::canDrag (QWidget *widget)
     return false;
 
   QWidget *win = widget->window();
-  /*if (win == widget
+  if (win == widget
       && !qobject_cast<QMainWindow*>(widget)
       && !qobject_cast<QDialog*>(widget))
   {
     return false;
-  }*/
+  }
   if (win->testAttribute (Qt::WA_X11NetWmWindowTypeDesktop))
     return false;
   /* the window type may have changed but we accept Qt::Tool (as in Krita) */
@@ -701,14 +701,15 @@ bool WindowManager::canDrag (QWidget *widget)
 /*************************/
 bool WindowManager::isDraggable (QWidget *widget)
 {
-  if (!widget) return false;
+  if (!widget || QWidget::mouseGrabber())
+    return false;
 
   if (dragFromBtns_ && qobject_cast<QAbstractButton*>(widget))
     return true;
 
   if (widget->isWindow()
       && (qobject_cast<QMainWindow*>(widget)
-          || !qobject_cast<QDialog*>(widget)))
+          || qobject_cast<QDialog*>(widget)))
   {
     return true;
   }
