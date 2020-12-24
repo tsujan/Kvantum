@@ -146,7 +146,7 @@ width</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="791"/>
         <source>Auto-raise</source>
-        <translation></translation>
+        <translation>Automatisch erhöhen</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="812"/>
@@ -210,7 +210,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1437"/>
         <location filename="../../KvantumPreviewBase.ui" line="1495"/>
         <source>Frameless (no difference)</source>
-        <translation></translation>
+        <translation>Rahmenlos (kein Unterschied)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1107"/>
@@ -248,7 +248,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 1</source>
-        <translation></translation>
+        <translation>Rahmenlos 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1196"/>
@@ -256,7 +256,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1379"/>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <source>Frameless 2</source>
-        <translation></translation>
+        <translation>Rahmenlos 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1201"/>
@@ -264,7 +264,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <source>Frameless 3</source>
-        <translation></translation>
+        <translation>Rahmenlos 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -272,43 +272,43 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1389"/>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <source>Frameless 4</source>
-        <translation></translation>
+        <translation>Rahmenlos 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
         <location filename="../../KvantumPreviewBase.ui" line="1394"/>
         <source>Frameless 5</source>
-        <translation></translation>
+        <translation>Rahmenlos 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1399"/>
         <source>Frameless 6</source>
-        <translation></translation>
+        <translation>Rahmenlos 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1404"/>
         <source>Frameless 7</source>
-        <translation></translation>
+        <translation>Rahmenlos 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1409"/>
         <source>Frameless 8</source>
-        <translation></translation>
+        <translation>Rahmenlos 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1414"/>
         <source>Frameless 9</source>
-        <translation></translation>
+        <translation>Rahmenlos 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1419"/>
         <source>Frameless 10</source>
-        <translation></translation>
+        <translation>Rahmenlos 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
