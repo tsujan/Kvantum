@@ -1066,12 +1066,12 @@
 <rect width="5" x="255" y="825" rx="2.5" height="32" style="fill:url(#linearGradient5136);fill-rule:evenodd" id="splitter-grip-focused"/>
 <use width="100%" height="100%" xlink:href="#splitter-grip-focused" id="splitter-grip-pressed" transform="translate(10,0)"/>
 <g id="common-focused-left" transform="translate(-180,-162)">
-<path style="fill:#5d86c5" d="m 270.5,1170 h 1.5 v 30 h -1.5 z"/>
+<path style="fill:#5e86c5" d="m 271,1170 h 1 v 30 h -1 z"/>
 <path style="fill:#fbfbfb;fill-opacity:.588" d="m 272,1170 v 30 h 1 v -30 z"/>
 <path style="fill-rule:evenodd;fill-opacity:0" d="m 270,1170 v 30 h 1 v -30 z"/>
 </g>
 <g id="common-focused-topleft" transform="translate(-180,-162)">
-<path style="fill:#5d86c5" d="m 93,1005.5 c -1.525022,0 -2.50306,0.9771 -2.498047,2.5 H 92 c 0,-0.5664 0.441406,-1 1,-1 z" transform="translate(180,162)"/>
+<path style="fill:#5e86c5" d="m 93,1006 c -1.125,0 -2,0.875 -1.998024,2 H 92 c 0,-0.5664 0.441406,-1 1,-1 z" transform="translate(180,162)"/>
 <path style="fill:#fbfbfb;fill-opacity:.588" d="m 273,1169 c -0.57031,0 -1,0.4336 -1,1 h 1 z"/>
 <path style="fill-opacity:0" d="m 273,1167 c -1.5,0 -3,1.5 -3,3 h 1 c 0,-1.125 0.875,-2 2,-2 z"/>
 </g>
