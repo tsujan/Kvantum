@@ -179,12 +179,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation></translation>
+        <translation>Symbolfreie Menüs</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation></translation>
+        <translation>Explizit lichtdurchlässige Fenster weichzeichnen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
@@ -194,7 +194,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation></translation>
+        <translation>Keinen Hintergrund für KTitles zeichnen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -241,7 +241,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation></translation>
+        <translation>KDE-Kapazitätsbalken als Fortschrittsbalken gestalten.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
@@ -344,7 +344,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="774"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation></translation>
+        <translation>Komposition &amp;&amp; Allgemeines Aussehen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="930"/>
@@ -355,7 +355,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="948"/>
         <source>Opaque apps:</source>
-        <translation></translation>
+        <translation>Undurchsichtige Apps:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="780"/>
@@ -392,7 +392,7 @@ with window translucency or gradient.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="624"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Transluzenz mit nicht-ganzzahliger Skalierung deaktivieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="676"/>
@@ -438,7 +438,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>Disable composite effects</source>
-        <translation></translation>
+        <translation>Komposit-Effekte deaktivieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="799"/>
@@ -551,7 +551,7 @@ Uncheck it if you want those patterns back!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1121"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation></translation>
+        <translation>Kachelmuster für Fenster/Dialoge entfernen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1128"/>
@@ -633,7 +633,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1379"/>
         <source>Submenu overlap: </source>
-        <translation></translation>
+        <translation>Untermenüüberlappung: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1404"/>
@@ -833,7 +833,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1435"/>
         <location filename="../../kvantummanager.ui" line="1448"/>
         <source>The minimum length of scrollbars.</source>
-        <translation></translation>
+        <translation>Die minimale Länge der Bildlaufleisten.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1438"/>
@@ -844,7 +844,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1441"/>
         <source>Minimum scrollbar length: </source>
-        <translation></translation>
+        <translation>Minimale Länge der Bildlaufleiste: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1486"/>
@@ -1002,7 +1002,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>No arrows for scrollbars</source>
-        <translation></translation>
+        <translation>Keine Pfeile für Bildlaufleisten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1883"/>
@@ -1061,7 +1061,7 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1693"/>
         <source>Merge menubar with toolbar</source>
-        <translation></translation>
+        <translation>Menüleiste mit Werkzeugleiste zusammenführen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1712"/>
@@ -1072,7 +1072,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1716"/>
         <source>Group toolbar buttons</source>
-        <translation></translation>
+        <translation>Werkzeugleistenschaltflächen gruppieren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
@@ -1201,7 +1201,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1998"/>
         <source>Application Themes</source>
-        <translation></translation>
+        <translation>Anwendungsthemen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2004"/>
@@ -1221,7 +1221,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2084"/>
         <source>app1,app2,app3</source>
-        <translation></translation>
+        <translation>App1,App2,App3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2112"/>
@@ -1253,7 +1253,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2165"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation></translation>
+        <translation>Vorschau des aktiven Themas oder
+Aktualisierung seiner Vorschau.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2169"/>
@@ -1302,7 +1303,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="583"/>
         <source>First you have to delete its modified version!</source>
-        <translation></translation>
+        <translation>Zuerst müssen Sie dessen modifizierte Version löschen!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="607"/>
@@ -1479,7 +1480,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="644"/>
         <source>This theme is also installed as root in:</source>
-        <translation></translation>
+        <translation>Dieses Thema ist auch als root installiert in:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="646"/>
@@ -1489,7 +1490,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="660"/>
         <source>This theme is also installed as user in:</source>
-        <translation></translation>
+        <translation>Dieses Thema ist auch als Benutzer installiert in:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="662"/>
@@ -1499,24 +1500,24 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="762"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation>Möchten sie wirklich  &lt;i&gt;%1&lt;/i&gt; löschen?</translation>
+        <translation>Möchten Sie &lt;i&gt;%1&lt;/i&gt; wirklich löschen?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="765"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation></translation>
+        <translation>Es kann nicht wiederhergestellt werden, es sei denn, Sie haben eine Kopie davon.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1308"/>
         <location filename="../../KvantumManager.cpp" line="1327"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation></translation>
+        <translation>Dies sind die Einstellungen, die sicher geändert werden können.&lt;br&gt;Für die anderen klicken Sie auf &lt;i&gt;Speichern&lt;/i&gt; und bearbeiten dann diese Datei:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1323"/>
         <location filename="../../KvantumManager.cpp" line="2576"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation></translation>
+        <translation>Dies sind die Einstellungen, die sicher geändert werden können.&lt;br&gt;Für die anderen bearbeiten Sie diese Datei:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1692"/>
@@ -1526,7 +1527,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2165"/>
         <source>A copy of the root config is created.</source>
-        <translation></translation>
+        <translation>Es wird eine Kopie der root-Konfiguration erstellt.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2176"/>
@@ -1541,7 +1542,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2673"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation></translation>
+        <translation>Möchten Sie zu den Standardeinstellungen (root) dieses Themas zurückkehren?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2676"/>
@@ -1551,7 +1552,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2711"/>
         <source>Restored the root default settings of %1</source>
-        <translation></translation>
+        <translation>Die root-Standardeinstellungen von %1 wurden wiederhergestellt</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2712"/>
@@ -1597,7 +1598,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="519"/>
         <source>You might want to investigate the cause.</source>
-        <translation></translation>
+        <translation>Sie sollten der Ursache nachgehen.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="945"/>
