@@ -270,8 +270,8 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
     return false;
   }
 
-  /* check the lock */
-  if (isLocked())
+  /* check the lock and drag state */
+  if (isLocked() || dragInProgress_)
   {
     resetDrag();
     unlock();
