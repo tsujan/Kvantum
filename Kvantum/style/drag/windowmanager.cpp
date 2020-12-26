@@ -90,8 +90,8 @@ static inline QWidget* toolbarContainer (QWidget *w)
 WindowManager::WindowManager (QObject *parent, Drag drag, bool dragFromBtns) :
                QObject (parent), // nullptr
                enabled_ (true),
-               dragDistance_ (QApplication::startDragDistance()),
-               dragDelay_ (QApplication::startDragTime()),
+               dragDistance_ (qMax (QApplication::startDragDistance(), 10)),
+               dragDelay_ (qMax (QApplication::startDragTime(), 50)),
                doubleClickInterval_ (QApplication::doubleClickInterval()),
                isDelayed_ (false),
                dragAboutToStart_ (false),
