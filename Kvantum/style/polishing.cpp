@@ -113,6 +113,9 @@ static void setAppFont()
   }
 }
 
+/* WARNING: For easily distinguishing animated widgets (-> "eventFiltering.cpp")
+            from others that also have event filter, event filters should be
+            installed with care. */
 void Style::polish(QWidget *widget)
 {
   if (!widget) return;
@@ -539,11 +542,8 @@ void Style::polish(QWidget *widget)
 
       break;
     }
-    default: {
-      if (hspec_.scroll_jump_workaround)
-        widget->installEventFilter(this);
+    default:
       break;
-    }
   }
 
   if (isDolphin_
@@ -1169,11 +1169,8 @@ void Style::unpolish(QWidget *widget)
         forcedTranslucency_.remove(widget);
         break;
       }
-      default: {
-        if (hspec_.scroll_jump_workaround)
-          widget->removeEventFilter(this);
+      default:
         break;
-      }
     }
 
     if (widget->inherits("KisAbstractSliderSpinBox")

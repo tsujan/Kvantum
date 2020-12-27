@@ -116,7 +116,6 @@ tint_on_mouseover=0
 lxqtmainmenu_iconsize=0
 middle_click_scroll=false
 no_selection_tint=false
-scroll_jump_workaround=false
 transparent_pcmanfm_view=false
 
 [PanelButtonCommand]

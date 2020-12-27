@@ -31,7 +31,6 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include <QStatusBar>
-#include <QToolButton>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -215,12 +214,21 @@ void WindowManager::timerEvent (QTimerEvent *event)
     dragTimer_.stop();
     if (winTarget_)
     {
+      if (qApp->activePopupWidget())
+      {
+        /* Due to a Qt bug, that exists under X11 and Wayland alike,
+           the drag may be started even when an active popup is shown.
+           As a workaround, we don't start dragging in this case. */
+        winTarget_.data()->unsetCursor();
+        resetDrag();
+        unlock();
+      }
       /* NOTE: Under X11, if dragging is started with a delay and the left
                mouse button is released shortly after it, it will continue
                until a mouse button is pressed or the mouse wheel is turned.
                As a workaround, we don't start dragging with a delay but
                only change and restore the window cursor appropriately. */
-      if (isDelayed_)
+      else if (isDelayed_)
         winTarget_.data()->setCursor (Qt::OpenHandCursor);
       else
       {
@@ -262,9 +270,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   doubleClickTimer_.start (doubleClickInterval_, this);
 
   if (qApp->activePopupWidget())
-  {
-    /* logically, this should never happen but Qt has bad bugs
-       about popup widgets, under X11 and Wayland alike */
+  { // -> the workaround in timerEvent()
     resetDrag();
     unlock();
     return false;
@@ -369,9 +375,9 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 /*************************/
 bool WindowManager::mouseMoveEvent (QEvent *event)
 {
-  QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
   if (!dragInProgress_)
   {
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
     if (dragAboutToStart_)
     {
       dragAboutToStart_ = false;

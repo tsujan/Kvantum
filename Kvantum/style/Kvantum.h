@@ -399,6 +399,9 @@ class Style : public QCommonStyle {
     /* Forcing palettes when needed: */
     void forcePalette(QWidget *widget, const QPalette &p) const;
 
+    /* Checking whether dragging from buttons is enabled and in progress: */
+    bool btnDragInProgress() const;
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
@@ -465,9 +468,6 @@ class Style : public QCommonStyle {
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
     //mutable KvPointer<QWidget> sunkenButton_;
     mutable QPointer<QWidget> sunkenButton_;
-
-    /* Keep track of the widget in which the mouse cursor is entered (to work around Qt scroll jumps). */
-    QPointer<QWidget> enteredWidget_;
 
     /* For not getting the menu/tooltip shadows repeatedly.
        They're used to find blurred regions and also to position menus correctly. */

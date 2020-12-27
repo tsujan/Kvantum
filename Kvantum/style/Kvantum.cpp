@@ -1540,6 +1540,17 @@ static inline QSize textSize(const QFont &font, const QString &text)
   return QSize(tw,th);
 }
 
+bool Style::btnDragInProgress() const
+{
+#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
+  return (tspec_.drag_from_buttons
+          && itsWindowManager_
+          && itsWindowManager_->dragInProgress());
+#else
+  return false;
+#endif
+}
+
 QString Style::getState(const QStyleOption *option, const QWidget *widget) const
 { // here only widget may be NULL
   QString status =
@@ -2083,8 +2094,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       /* Due to a Qt5 bug (which I call "the hover bug"), after their menus are closed,
          comboboxes and buttons will have the WA_UnderMouse attribute without the cursor
          being over them. Hence we use the following logic in several places. It will
-         be harmless if the bug is fixed but shouldn't be used with "drag_from_buttons". */
-      if (!tspec_.drag_from_buttons && status.startsWith("focused")
+         be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
+      if (!btnDragInProgress() && status.startsWith("focused")
           && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))
       {
         status.replace("focused","normal");
@@ -2432,7 +2443,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QString animationStartState;
         if (styleObject)
           animationStartState = styleObject->property("_kv_state").toString();
-        bool animate(widget->isEnabled() && animatedWidget_ == widget
+        bool animate(!btnDragInProgress()
+                     && widget->isEnabled() && animatedWidget_ == widget
                      && !animationStartState.isEmpty());
         if (animate && animationStartState == status)
         {
@@ -4380,7 +4392,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       if (tb)
       {
         bool drawSep(false);
-        if (!tspec_.drag_from_buttons && status.startsWith("focused")
+        if (!btnDragInProgress() && status.startsWith("focused")
             && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
         {
           status.replace("focused","normal");
@@ -9194,7 +9206,7 @@ void Style::drawControl(QStyle::ControlElement element,
         else if (status.startsWith("toggled"))
           state = 4;
         else if ((option->state & State_MouseOver)
-                 && (tspec_.drag_from_buttons || !widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
+                 && (btnDragInProgress() || !widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
           state = 2;
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
@@ -9204,7 +9216,7 @@ void Style::drawControl(QStyle::ControlElement element,
         }
 
         QStyleOptionButton o(*opt);
-        if (!tspec_.drag_from_buttons && (option->state & State_MouseOver) && state != 2)
+        if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
 
         /* center text+icon */
@@ -9248,7 +9260,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
       if (opt) {
         QString status = getState(option,widget);
-        if (!tspec_.drag_from_buttons && status.startsWith("focused")
+        if (!btnDragInProgress() && status.startsWith("focused")
             && widget && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
         {
           status.replace("focused","normal");
@@ -9475,7 +9487,8 @@ void Style::drawControl(QStyle::ControlElement element,
           QString animationStartState;
           if (styleObject)
             animationStartState = styleObject->property("_kv_state").toString();
-          bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+          bool animate(!btnDragInProgress()
+                       && widget && widget->isEnabled() && animatedWidget_ == widget
                        && !animationStartState.isEmpty()
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
           if (animate && animationStartState == status)
@@ -9599,7 +9612,7 @@ void Style::drawControl(QStyle::ControlElement element,
             else if (status.startsWith("toggled") || status.startsWith("pressed"))
               aStatus = "pressed";
             else if ((option->state & State_MouseOver)
-                     && (tspec_.drag_from_buttons || !widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
+                     && (btnDragInProgress() || !widget || widget->rect().contains(widget->mapFromGlobal(QCursor::pos())))) // hover bug
               aStatus = "focused";
           }
           if (isWidgetInactive(widget))
@@ -9746,7 +9759,7 @@ void Style::drawControl(QStyle::ControlElement element,
             QRect R = option->rect;
             if (fspec.expansion > 0 || (tb && tb->popupMode() != QToolButton::MenuButtonPopup))
               R = widget->rect();
-            if (!tspec_.drag_from_buttons && !R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
+            if (!btnDragInProgress() && !R.contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
               status.replace("focused","normal");
           }
         }
@@ -10165,7 +10178,7 @@ void Style::drawControl(QStyle::ControlElement element,
           else if (status.startsWith("focused"))
             state = 2;
           QStyleOptionToolButton o(*opt);
-          if (!tspec_.drag_from_buttons && (option->state & State_MouseOver) && state != 2)
+          if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
           bool isInactive(status.contains("-inactive"));
           QSize iconSize = opt->iconSize;
@@ -10501,7 +10514,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             lspec = getLabelSpec(group);
 
             QString aStatus = getState(option,widget);
-            if (!tspec_.drag_from_buttons && aStatus.startsWith("focused")
+            if (!btnDragInProgress() && aStatus.startsWith("focused")
                 && !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()))) // hover bug
             {
               aStatus.replace("focused","normal");

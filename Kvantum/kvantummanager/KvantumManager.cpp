@@ -1002,7 +1002,6 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
     ui->checkBoxScrollJump->setChecked (defaultSettings.value ("middle_click_scroll").toBool());
     ui->checkBoxKineticScrolling->setChecked (defaultSettings.value ("kinetic_scrolling").toBool());
-    ui->checkBoxJumpWorkaround->setChecked (defaultSettings.value ("scroll_jump_workaround").toBool());
     ui->checkBoxNoninteger->setChecked (!defaultSettings.value ("noninteger_translucency").toBool());
     ui->checkBoxNormalBtn->setChecked (defaultSettings.value ("normal_default_pushbutton").toBool());
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
@@ -1571,7 +1570,6 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
                 ui->checkBoxScrollJump->setChecked (themeSettings.value ("middle_click_scroll").toBool());
                 ui->checkBoxKineticScrolling->setChecked (themeSettings.value ("kinetic_scrolling").toBool());
-                ui->checkBoxJumpWorkaround->setChecked (themeSettings.value ("scroll_jump_workaround").toBool());
                 ui->checkBoxNoninteger->setChecked (!themeSettings.value ("noninteger_translucency").toBool());
                 ui->checkBoxNormalBtn->setChecked (themeSettings.value ("normal_default_pushbutton").toBool());
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
@@ -2245,7 +2243,6 @@ void KvantumManager::writeConfig()
         hackKeys.insert ("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
         hackKeys.insert ("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));
         hackKeys.insert ("kinetic_scrolling", boolToStr (ui->checkBoxKineticScrolling->isChecked()));
-        hackKeys.insert ("scroll_jump_workaround", boolToStr (ui->checkBoxJumpWorkaround->isChecked()));
         hackKeys.insert ("noninteger_translucency", boolToStr (!ui->checkBoxNoninteger->isChecked()));
         hackKeys.insert ("normal_default_pushbutton", boolToStr (ui->checkBoxNormalBtn->isChecked()));
         hackKeys.insert ("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));

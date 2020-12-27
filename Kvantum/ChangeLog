@@ -14,6 +14,7 @@ V0.18.0
  * A better window dragging code (x11drag) with Qt ≥ 5.15, that works under X11 and Wayland alike by calling the window manager.
  * Added an option (to Kvantum Manager) for dragging windows from buttons.
  * Considered a rare case of window type change for window translucency and dragging.
+ * Removed the scroll jump workaround. It interfered with animations and cluttered the code to partially compensate for Qt's scroll jumps that appeared with mouse gestures.
 
 V0.17.0
 ---------

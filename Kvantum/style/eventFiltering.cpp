@@ -395,36 +395,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
-  case QEvent::Enter:
-    if (w && hspec_.scroll_jump_workaround)
-    {
-      if (qobject_cast<QLineEdit*>(o))
-      { // consider the special case of a spin box
-        if (QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(w->parentWidget()))
-        {
-          enteredWidget_ = sb;
-          break;
-        }
-      }
-      /* In the case of Dolphin, first KItemListContainerViewport is entered
-         and then only a QWidget, which ruins our workaround. Fortunately,
-         KItemListContainerViewport is the parent of that QWidget. */
-      if (enteredWidget_ && enteredWidget_.data()->inherits("KItemListContainerViewport")
-          && w->parentWidget() == enteredWidget_)
-      {
-        break;
-      }
-      enteredWidget_ = w;
-      /* NOTE: Qt doc says, "If multiple event filters are installed on a single object,
-               the filter that was installed last is activated first." Because an event
-               filter can be installed by the app without polishing the widget (like when
-               the view is switched in pcmanfm-qt between the icon and thumbnail modes),
-               we need to reinstall the event filter here to catch the wheel event always
-               before it's processed by the app. */
-      w->installEventFilter(this);
-    }
-    break;
-
   case QEvent::HoverMove:
     if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
     { // see QEvent::HoverEnter below
@@ -504,7 +474,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         tabHoverRect_ = QRect();
     }
     else if (w && w->isEnabled() && tspec_.animate_states
-             && !w->isWindow() // WARNING: Translucent (Qt5) windows have enter event!
+             /* WARNING: Toolbars and translucent windows have hover-enter event! */
+             && !w->isWindow() && !qobject_cast<QToolBar*>(o)
              && !qobject_cast<QAbstractSpinBox*>(o) && !qobject_cast<QProgressBar*>(o)
              && !qobject_cast<QLineEdit*>(o) && !qobject_cast<QAbstractScrollArea*>(o)
              && !((tspec_.combo_as_lineedit || tspec_.square_combo_button)
@@ -1336,18 +1307,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (QAction *clearAction = w->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
           clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, w));
 #endif
-      }
-    }
-    break;
-
-  case QEvent::Wheel :
-    if (w && enteredWidget_.data() == w/* && hspec_.scroll_jump_workaround*/)
-    {
-      if (QWheelEvent *we = static_cast<QWheelEvent*>(e))
-      {
-        enteredWidget_.clear();
-        if (we->angleDelta().manhattanLength() >= 240)
-          return true;
       }
     }
     break;
