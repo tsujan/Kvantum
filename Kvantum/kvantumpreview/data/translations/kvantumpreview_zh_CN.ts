@@ -269,7 +269,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 1</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1196"/>
@@ -277,7 +277,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1379"/>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <source>Frameless 2</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1201"/>
@@ -285,7 +285,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <source>Frameless 3</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -293,43 +293,43 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1389"/>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <source>Frameless 4</source>
-        <translation type="unfinished"></translation>
+        <translation>无框画4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
         <location filename="../../KvantumPreviewBase.ui" line="1394"/>
         <source>Frameless 5</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1399"/>
         <source>Frameless 6</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1404"/>
         <source>Frameless 7</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1409"/>
         <source>Frameless 8</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1414"/>
         <source>Frameless 9</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1419"/>
         <source>Frameless 10</source>
-        <translation type="unfinished"></translation>
+        <translation>无框 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
@@ -341,25 +341,25 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1296"/>
         <location filename="../../KvantumPreviewBase.ui" line="1335"/>
         <source>Editable combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的 combo box 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1301"/>
         <location filename="../../KvantumPreviewBase.ui" line="1340"/>
         <source>Editable combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的 combo box 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1306"/>
         <location filename="../../KvantumPreviewBase.ui" line="1345"/>
         <source>Editable combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的 combo box 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1311"/>
         <location filename="../../KvantumPreviewBase.ui" line="1350"/>
         <source>Editable combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑的 combo box 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1469"/>
@@ -395,102 +395,102 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <source>3rd Item</source>
-        <translation type="unfinished"></translation>
+        <translation>第三个条目</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
         <source>2nd Item</source>
-        <translation type="unfinished"></translation>
+        <translation>第二个条目</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>第二个子代</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation type="unfinished"></translation>
+        <translation>第一个子代</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
         <source>1st Item</source>
-        <translation type="unfinished"></translation>
+        <translation>第一个条目</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>第三个子代</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2462"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Row 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Row 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2472"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Column 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2480"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Column 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2493"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2501"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2509"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>可编辑</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>无可编辑</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2229"/>
         <source>Subwindow</source>
-        <translation type="unfinished"></translation>
+        <translation>子窗口</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2276"/>
         <source>Panel frame</source>
-        <translation type="unfinished"></translation>
+        <translation>面板框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2295"/>
         <location filename="../../KvantumPreviewBase.ui" line="2436"/>
         <location filename="../../KvantumPreviewBase.ui" line="2528"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>GroupBox</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2315"/>
@@ -499,12 +499,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2738"/>
         <location filename="../../KvantumPreviewBase.ui" line="2786"/>
         <source>Tab 1</source>
-        <translation type="unfinished"></translation>
+        <translation>标签1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
         <source>Page 1 (disabled)</source>
-        <translation type="unfinished"></translation>
+        <translation>第一页（禁用的）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2333"/>
@@ -513,7 +513,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2752"/>
         <location filename="../../KvantumPreviewBase.ui" line="2800"/>
         <source>Tab 2</source>
-        <translation type="unfinished"></translation>
+        <translation>标签2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2339"/>
