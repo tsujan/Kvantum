@@ -387,12 +387,14 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>您可能会看到令人讨厌的人工痕迹
+通过Qt处理非整数缩放中的错误
+具有窗口半透明或渐变。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>使用非整数缩放禁用半透明</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="663"/>
@@ -1343,12 +1345,16 @@ This option will hide these.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>警告：起初这可能会很混乱。
+
+如果已启用它，则可以暂时将其禁用
+对于可以通过按下来拖放的按钮
+按下Ctrl键之前，再按下这个按钮。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>允许从按钮拖动</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
@@ -1373,7 +1379,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2071"/>
         <source>app1,app2,app3</source>
-        <translation>app1,app2,app3</translation>
+        <translation>应用1，应用2，应用3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2099"/>
