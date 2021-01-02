@@ -746,7 +746,7 @@
 </g>
 <g id="menu-shadow-left" transform="translate(171,-439.625)">
 <path style="opacity:.95;fill:url(#linearGradient1859)" d="m -109,1091.7501 h 5 v 48 h -5 z"/>
-<path style="opacity:.25;fill:url(#linearGradient6752)" d="m -116.2495,1091.75 v 48 h 7.25 v -48 z"/>
+<path style="opacity:.25;fill:url(#linearGradient6752)" d="m -116.25,1091.75 v 48 h 7.25 v -48 z"/>
 </g>
 <g id="menu-shadow-right" transform="translate(171,-439.625)">
 <path style="opacity:.95;fill:url(#linearGradient1867)" d="m -56,1091.7501 h 5 v 48 h -5 z"/>

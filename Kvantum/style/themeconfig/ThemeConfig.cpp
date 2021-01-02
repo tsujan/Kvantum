@@ -585,7 +585,6 @@ theme_spec ThemeConfig::getCompositeSpec()
   bool compositing(false);
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
-  /* set to false if no compositing manager is running */
 #if (QT_VERSION >= QT_VERSION_CHECK(5,2,0))
   if (isX11_)
   {
@@ -599,8 +598,6 @@ theme_spec ThemeConfig::getCompositeSpec()
   if (QX11Info::isCompositingManagerRunning())
     compositing = true;
 #endif
-/*#elif (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-  compositing = true; // presuppose a compositor without Linux and X11*/
 #endif
 
   /* no blurring or window translucency without compositing */

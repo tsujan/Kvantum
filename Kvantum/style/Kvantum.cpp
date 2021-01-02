@@ -5303,8 +5303,9 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
   return icnMode;
 }
 
-/* NOTE: This is a workaround for a regression in Qt 5.15, which results
-         in QStyleOptionTab reporting an incorrect tab position. */
+/* NOTE: This is a workaround for a regression in Qt 5.15.0, which results
+         in QStyleOptionTab reporting an incorrect tab position when there
+         are two tabs and a new active tab is created after the first one. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
@@ -5316,33 +5317,33 @@ static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *op
   {
     return opt->position;
   }
-  int index = -1;
-  /* first check QStyleOptionTabV4 in Qt 5.15 because getting its
-     variable "tabIndex" is faster than calling "QTabBar::tabAt()" */
-  if (const QStyleOptionTabV4 *opt4 = qstyleoption_cast<const QStyleOptionTabV4*>(opt))
-    index = opt4->tabIndex;
-  if (index < 0)
-    index = tb->tabAt(opt->rect.center());
-  if (index < 0 || index >= tb->count())
+
+  if(!opt->rect.isValid())
     return QStyleOptionTab::OnlyOneTab;
+
+  QPoint c = opt->rect.center();
   bool start(true);
   bool end(true);
-  for (int i = 0; i < index; ++i)
+
+  for (int i = 0; i < tb->count(); ++i)
   {
     if (tb->isTabVisible(i))
     {
-      start = false;
+      if (!tb->tabRect(i).contains(c))
+        start = false;
       break;
     }
   }
-  for (int i = index + 1; i < tb->count(); ++i)
+  for (int i = tb->count() - 1; i >= 0; --i)
   {
     if (tb->isTabVisible(i))
     {
-      end = false;
+      if (!tb->tabRect(i).contains(c))
+        end = false;
       break;
     }
   }
+
   if (start)
   {
     if (end)
@@ -13226,7 +13227,7 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_Slider_StopMouseOverSlider : return true;
     case SH_Slider_AbsoluteSetButtons : return Qt::LeftButton;
-    case SH_Slider_PageSetButtons : return Qt::MidButton;
+    case SH_Slider_PageSetButtons : return Qt::MiddleButton;
 
     /* scrollbar_in_view is always false when transient_scrollbar is true (see "ThemeConfig.cpp") */
     case SH_ScrollView_FrameOnlyAroundContents : return !tspec_.scrollbar_in_view;

@@ -1256,7 +1256,6 @@ void Style::unpolish(QApplication *app)
       w->setAttribute(Qt::WA_NoSystemBackground, false);
 #if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
       w->setAttribute(Qt::WA_TranslucentBackground, false);
-
 #endif
     }
   }
