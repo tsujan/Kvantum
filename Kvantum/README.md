@@ -6,7 +6,7 @@ Kvantum (by [Pedram Pourang, a.k.a. Tsu Jan](#contact)) is an SVG-based theme en
 
 Kvantum has a default dark theme, which is inspired by the default theme of Enlightenment. Creation of realistic themes like that for KDE was my first reason to make Kvantum but it goes far beyond its default theme: you could make themes with very different looks and feels for it, whether they be photorealistic or cartoonish, 3D or flat, embellished or minimalistic, or something in between, and Kvantum will let you control almost every aspect of Qt widgets.
 
-Kvantum also comes with extra themes that are installed as root with Qt5 installation and can be selected and activated by using Kvantum Manager.
+Kvantum also comes with many other themes that are installed as root and can be selected and activated by using Kvantum Manager.
 
 ## Installation and usage
 
