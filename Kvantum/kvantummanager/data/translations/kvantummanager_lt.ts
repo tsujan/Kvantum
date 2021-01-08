@@ -19,46 +19,46 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Įdiegti/Atnaujinti temą</translation>
+        <translation>Įdiegti/Atnaujinti apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Programa &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; pateikiama su daugeliu temų, tačiau naudojimui gali būti įdiegtos ir išorinės temos. Čia galite pasirinkti temos aplanką, o tuomet spustelėti mygtuką žemiau, kad įdiegtumėte ją į savo Namų aplanką.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Programa &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; pateikiama su daugeliu apipavidalinimų, tačiau naudojimui gali būti įdiegti ir išoriniai apipavidalinimai. Čia galite pasirinkti apipavidalinimo aplanką, o tuomet spustelėti mygtuką žemiau, kad įdiegtumėte jį į savo Namų aplanką.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
         <translation>Pasirinkti Kvantum
-temos aplanką</translation>
+apipavidalinimo aplanką</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>Pridėti šią temą į sąrašą temų, kurias Kvantum
-gali naudoti papildomai prie savo temų.</translation>
+        <translation>Pridėti šį apipavidalinimą į sąrašą apipavidalinimų, kuriuos Kvantum
+gali naudoti papildomai prie savo apipavidalinimų.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation>Įdiegti šią temą</translation>
+        <translation>Įdiegti šį apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Keisti/Ištrinti temą</translation>
+        <translation>Keisti/Ištrinti apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Pasirinkite temą:</translation>
+        <translation>Pasirinkite apipavidalinimą:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Ištrinti šią temą</translation>
+        <translation>Ištrinti šį apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -66,20 +66,20 @@ gali naudoti papildomai prie savo temų.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Padaryti, kad Kvantum naudotų šią temą!
+        <translation>Padaryti, kad Kvantum naudotų šį apipavidalinimą!
 
 Išjungtas mygtukas reiškia, kad
-tema jau yra naudojama.</translation>
+apipavidalinimas jau yra naudojamas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Naudoti šią temą</translation>
+        <translation>Naudoti šį apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Konfigūruoti aktyvią temą</translation>
+        <translation>Konfigūruoti aktyvų apipavidalinimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -87,13 +87,13 @@ tema jau yra naudojama.</translation>
 settings of this theme.
 (Ctrl+Z)</source>
         <translation>Sugrąžinti į numatytuosius (root)
-šios temos nustatymus.
-(Ctrl(Vald)+Z)</translation>
+šio apipavidalinimo nustatymus.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sugrąžinti į numatytuosius (root) šios temos nustatymus!&lt;/p&gt;&lt;p&gt;Spustelėjus ir patvirtinus, visi konfigūracijos pakeitimai bus prarasti, tačiau galimas tinkintas SVG failas išliks nepaliestas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sugrąžinti į numatytuosius (root) šio apipavidalinimo nustatymus!&lt;/p&gt;&lt;p&gt;Spustelėjus ir patvirtinus, visi konfigūracijos pakeitimai bus prarasti, tačiau galimas tinkintas SVG failas išliks nepaliestas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -103,14 +103,14 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation>Ctrl(Vald)+Z</translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
         <translation>Įrašyti šią konfigūraciją
-(Ctrl(Vald)+S)</translation>
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
@@ -121,7 +121,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation>Ctrl(Vald)+S</translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
@@ -286,7 +286,7 @@ paryškinimo spalvos atspalvį!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation>Gerbti tamsias temas</translation>
+        <translation>Gerbti tamsius apipavidalinimus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="674"/>
@@ -378,7 +378,7 @@ Jei tai yra išjungta, žiūrėkite:
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Kadangi &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; yra nepriklausoma nuo visų darbalaukio aplinkų, visų pirma, turite ją &lt;i&gt;aktyvuoti&lt;/i&gt;, naudodami Qt platformos integravimo programą. KDE ir LXQt pateikia paprastus įrankius, skirtus keisti aktyvaus Qt stiliaus įskiepį. Kitose platformose, jums reikia Qt konfigūravimo įrankio.&lt;br/&gt;&lt;br/&gt;Naudojant KDE, taip pat pasirinkite ir taikykite šios temos spalvų rinkinį, nes kai kurios KDE programos gali imti spalvas tiesiogiai iš KDE spalvų rinkinio.&lt;br/&gt;&lt;br/&gt;Paleistos programos įgaus naują temą, jas užvėrus ir atvėrus iš naujo. Atsijungimas ir prisijungimas pravers visoms KDE/LXQt dalims, kad galėtumėte pilnai matyti naują temą.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Kadangi &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; yra nepriklausoma nuo visų darbalaukio aplinkų, visų pirma, turite ją &lt;i&gt;aktyvuoti&lt;/i&gt;, naudodami Qt platformos integravimo programą. KDE ir LXQt pateikia paprastus įrankius, skirtus keisti aktyvaus Qt stiliaus įskiepį. Kitose platformose, jums reikia Qt konfigūravimo įrankio.&lt;br/&gt;&lt;br/&gt;Naudojant KDE, taip pat pasirinkite ir taikykite šio apipavidalinimo spalvų rinkinį, nes kai kurios KDE programos gali imti spalvas tiesiogiai iš KDE spalvų rinkinio.&lt;br/&gt;&lt;br/&gt;Paleistos programos įgaus naują apipavidalinimą, jas užvėrus ir atvėrus iš naujo. Atsijungimas ir prisijungimas pravers visoms KDE/LXQt dalims, kad galėtumėte pilnai matyti naują apipavidalinimą.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -453,7 +453,7 @@ arba atsijungiant ir vėl prisijungiant.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="774"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jei pažymėta, meniu, paaiškinimai ir langai neturės dalinio permatomumo ar šešėlio.&lt;/p&gt;&lt;p&gt;Nuėmus žymėjimą, dalinis permatomumas ir šešėlis bus prieinami tuomet, jei temos SVG faile bus tinkami elementai.&lt;/p&gt;&lt;p&gt;Jei tai yra išjungta, žiūrėkite Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Jei pažymėta, meniu, paaiškinimai ir langai neturės dalinio permatomumo ar šešėlio.&lt;/p&gt;&lt;p&gt;Nuėmus žymėjimą, dalinis permatomumas ir šešėlis bus prieinami tuomet, jei apipavidalinimo SVG faile bus tinkami elementai.&lt;/p&gt;&lt;p&gt;Jei tai yra išjungta, žiūrėkite Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="777"/>
@@ -571,7 +571,7 @@ kai kurių valdiklių būsena, daugiausiai dėl pelės.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1094"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200ms išblukimo animacija, kuomet pasikeičia kai kurių valdiklių būsena, daugiausiai dėl pelės.&lt;/p&gt;&lt;p&gt;Procesoriaus naudojimas yra nedidelis, nes, dažnai, yra animuojamas tik vienas valdiklis. Galutinis vaizdinis efektas priklauso nuo aktyvios temos.&lt;/p&gt;&lt;p&gt;Yra palaikomi šie valdikliai: mygtukai (įskaitant akutes ir žymimuosius langelius), jungtiniai langeliai, sukimosi langeliai, slinktuko rankenos, redaguojamos eilutės ir slinkimo rodiniai.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200ms išblukimo animacija, kuomet pasikeičia kai kurių valdiklių būsena, daugiausiai dėl pelės.&lt;/p&gt;&lt;p&gt;Procesoriaus naudojimas yra nedidelis, nes, dažnai, yra animuojamas tik vienas valdiklis. Galutinis vaizdinis efektas priklauso nuo aktyvaus apipavidalinimo.&lt;/p&gt;&lt;p&gt;Yra palaikomi šie valdikliai: mygtukai (įskaitant akutes ir žymimuosius langelius), jungtiniai langeliai, sukimosi langeliai, slinktuko rankenos, redaguojamos eilutės ir slinkimo rodiniai.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1097"/>
@@ -595,7 +595,7 @@ Nuimkite žymėjimą, norėdami tuos šablonus sugrąžinti!</translation>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Naudoti tas pačias spalvas ir formas su aktyviais ir pasyviais
-langais, jei ši tema juos atskiria?</translation>
+langais, jei šia apipavidalinimas juos atskiria?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1119"/>
@@ -719,7 +719,7 @@ Pagal numatymą, medžio atšakose yra indikatoriai, tačiau jokios linijos.</tr
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>Naudoti aktyvią temą visoms programoms!
+        <translation>Naudoti aktyvų apipavidalinimą visoms programoms!
 
 Tam, kad įsigaliotų, reikia įrašyti.</translation>
     </message>
@@ -731,12 +731,12 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Šalinti pasirinktą temą iš visų
+        <translation>Šalinti pasirinktą apipavidalinimą iš visų
 naudotojo diegimo kelių.
 
 Šaknies diegimas, jei toks yra, vis dar
 išliks prieinamas; šis mygtukas pašalina
-tik naudotojo temas.</translation>
+tik naudotojo apipavidalinimus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="389"/>
@@ -831,7 +831,7 @@ Tai labiausiai aktualu naudojant vienspalves piktogramas.
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation>Kai kurios programos gali negerbti tamsių temų.
+        <translation>Kai kurios programos gali negerbti tamsių apipavidalinimų.
 Kvantum, kiek tai įmanoma, gali bandyti pataisyti
 jų elgseną.</translation>
     </message>
@@ -841,7 +841,7 @@ jų elgseną.</translation>
 that supports it, and a translucent
 window SVG background in the theme.</source>
         <translation>Reikalauja KDE suliejimo efekto, tai palaikančios
-grafikos plokštės ir temoje esančio dalinai permatomo
+grafikos plokštės ir apipavidalinime esančio dalinai permatomo
 SVG lango fono.</translation>
     </message>
     <message>
@@ -1370,17 +1370,17 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
         <source>Application Themes</source>
-        <translation>Programų temos</translation>
+        <translation>Programų apipavidalinimai</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1991"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Čia, jūs galėtumėte priskirti temas tam tikroms programoms.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Kiekvienai temai galite pridėti sąrašą su kableliais atskirtais vykdomaisiais tų programų, kurios vietoj aktyvios temos, turėtų naudoti šią temą. Atlikę tai visoms pasirinktoms temoms, įrašykite rezultatą, spusteldami mygtuką &lt;i&gt;Įrašyti&lt;/i&gt;!&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Čia, jūs galėtumėte priskirti apipavidalinimus tam tikroms programoms.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Kiekvienam apipavidalinimui galite pridėti sąrašą su kableliais atskirtais vykdomaisiais tų programų, kurios vietoj aktyvaus apipavidalinimo, turėtų naudoti šį apipavidalinimą. Atlikę tai visiems pasirinktiems apipavidalinimams, įrašykite rezultatą, spusteldami mygtuką &lt;i&gt;Įrašyti&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2026"/>
         <source>Installed Theme</source>
-        <translation>Įdiegta tema</translation>
+        <translation>Įdiegtas apipavidalinimas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2042"/>
@@ -1405,13 +1405,13 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2109"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Įrašykite esamą programų, su jų atitinkamomis temomis, sąrašą!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Įrašykite esamą programų, su jų atitinkamais apipavidalinimais, sąrašą!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
         <location filename="../../kvantummanager.ui" line="2142"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl(Vald)+Q</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
@@ -1422,8 +1422,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2152"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation>Peržiūrėti aktyvią temą
-arba atnaujinti jos peržiūrą.</translation>
+        <translation>Peržiūrėti aktyvų apipavidalinimą
+arba atnaujinti jo peržiūrą.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
@@ -1453,7 +1453,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="312"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation>Atverti Kvantum temos aplanką...</translation>
+        <translation>Atverti Kvantum apipavidalinimo aplanką...</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="189"/>
@@ -1494,7 +1494,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="946"/>
         <source>Theme changed to %1.</source>
-        <translation>Tema pakeista į %1.</translation>
+        <translation>Apipavidalinimas pakeistas į %1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="500"/>
@@ -1597,12 +1597,12 @@ arba atnaujinti jos peržiūrą.</translation>
         <location filename="../../KvantumManager.cpp" line="533"/>
         <location filename="../../KvantumManager.cpp" line="544"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation>Tai nėra Kvantum tema, kurią galima įdiegti!</translation>
+        <translation>Tai nėra Kvantum apipavidalinimas, kurį galima įdiegti!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="534"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation>Galimų įdiegti temų pavadinimai neturėtų būti &quot;Default&quot;.</translation>
+        <translation>Galimų įdiegti apipavidalinimų pavadinimai neturėtų būti &quot;Default&quot;.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="535"/>
@@ -1614,22 +1614,22 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="545"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation>Galimų įdiegti temų pavadinimuose neturėtų būti &quot;#&quot; simbolio.</translation>
+        <translation>Galimų įdiegti apipavidalinimų pavadinimuose neturėtų būti &quot;#&quot; simbolio.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="555"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation>Tai nėra Kvantum temos aplankas!</translation>
+        <translation>Tai nėra Kvantum apipavidalinimo aplankas!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
         <source>The theme already exists in modified form.</source>
-        <translation>Tema jau yra modifikuotu pavidalu.</translation>
+        <translation>Apipavidalinimas jau yra modifikuotu pavidalu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="597"/>
         <source>You have selected an installed theme folder.</source>
-        <translation>Jūs pasirinkote įdiegtos temos aplanką.</translation>
+        <translation>Jūs pasirinkote įdiegto apipavidalinimo aplanką.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="598"/>
@@ -1639,7 +1639,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="608"/>
         <source>The theme already exists.</source>
-        <translation>Tema jau yra.</translation>
+        <translation>Apipavidalinimas jau yra.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="609"/>
@@ -1649,7 +1649,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="644"/>
         <source>This theme is also installed as root in:</source>
-        <translation>Ši tema taip pat yra įdiegta kaip šaknis ties:</translation>
+        <translation>Šis apipavidalinimas taip pat yra įdiegtas kaip šaknis ties:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="646"/>
@@ -1659,7 +1659,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="660"/>
         <source>This theme is also installed as user in:</source>
-        <translation>Ši tema taip pat yra įdiegta kaip naudotojas ties:</translation>
+        <translation>Šis apipavidalinimas taip pat yra įdiegtas kaip naudotojas ties:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="662"/>
@@ -1711,7 +1711,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2670"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation>Ar norite sugrąžinti į numatytuosius (šaknies) šios temos nustatymus?</translation>
+        <translation>Ar norite sugrąžinti į numatytuosius (šaknies) šio apipavidalinimo nustatymus?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2673"/>
@@ -1726,7 +1726,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2709"/>
         <source>the default theme</source>
-        <translation>numatytoji tema</translation>
+        <translation>numatytasis apipavidalinimas</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2868"/>
@@ -1742,7 +1742,7 @@ arba atnaujinti jos peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2866"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Įrankis, skirtas diegti, pasirinkti&lt;br&gt;ir konfigūruoti &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; temas</translation>
+        <translation>Įrankis, skirtas diegti, pasirinkti&lt;br&gt;ir konfigūruoti &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; apipavidalinimus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2867"/>
@@ -1774,7 +1774,7 @@ arba atnaujinti jos peržiūrą.</translation>
         <location filename="../../KvantumManager.cpp" line="2106"/>
         <location filename="../../KvantumManager.cpp" line="2568"/>
         <source>Active theme:</source>
-        <translation>Aktyvi tema:</translation>
+        <translation>Aktyvus apipavidalinimas:</translation>
     </message>
 </context>
 <context>
