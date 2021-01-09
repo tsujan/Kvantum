@@ -620,7 +620,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2907"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl(Vald)+Q</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2915"/>
