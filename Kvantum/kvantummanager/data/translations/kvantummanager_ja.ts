@@ -1288,7 +1288,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="583"/>
         <source>First you have to delete its modified version!</source>
-        <translation>最初に修正したバージョンを削除する必要があります!</translation>
+        <translation>最初に修正したバージョンを削除する必要があります！</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="607"/>
@@ -1460,7 +1460,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="609"/>
         <source>Do you want to overwrite it?</source>
-        <translation>これを上書きしますか?</translation>
+        <translation>これを上書きしますか？</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="644"/>
@@ -1527,7 +1527,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2670"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation>このテーマの標準(root)設定に戻しますか?</translation>
+        <translation>このテーマの標準 (root) 設定に戻しますか？</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2673"/>
