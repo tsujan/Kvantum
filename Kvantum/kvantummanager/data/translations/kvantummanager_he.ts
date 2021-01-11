@@ -196,7 +196,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים עליון יחיד</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
