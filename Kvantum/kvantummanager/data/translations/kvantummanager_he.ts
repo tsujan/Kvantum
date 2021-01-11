@@ -142,12 +142,12 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation>דולפין שקוף</translation>
+        <translation>תצוגה שקופה ב־Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>גופן רגיל לכפתורי לחיצה כבררת מחדל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
