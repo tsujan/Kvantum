@@ -19,44 +19,46 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>התקן/עדכן ערכת נושא</translation>
+        <translation>התקנת/עדכון ערכת עיצוב</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;ל־&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; מצורפות מגוון ערכות עיצוב. כאן ניתן לבחור תיקיית ערכות עיצוב ואז ללחוץ על הכפתור להלן כדי להתקין אותם בתיקיית הבית שלך.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור תיקיית ערכות
+עיצוב של Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>להוסיף את ערכת העיצוב הזאת לרשימת ערכת העיצוב
+בהן יכול Kvantum להשתמש במקום ערכות העיצוב שלו.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>התקנת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>החלפת/מחיקת ערכת עיצוב</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור ערכת עיצוב:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>מחיקת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -1192,12 +1194,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2026"/>
         <source>Installed Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת עיצוב מותקנת</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2042"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>יישום/יישומים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2071"/>
@@ -1239,12 +1241,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2163"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>על אודות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2186"/>
@@ -1295,12 +1297,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="722"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 הותקנה.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="892"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 נמחקה.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="946"/>
@@ -1598,12 +1600,12 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="134"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum אינו מותקן במערכת שלך.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>נא להתקין תחילה את תוסף העיצוב של Kvantum!</translation>
     </message>
 </context>
 </TS>
