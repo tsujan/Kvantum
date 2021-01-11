@@ -92,7 +92,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>חזור להגדרות ברירת המחדל של ערכת הנושא הזו (דורש גישת מנהל)! כשלוחצים ומאשרים, כל השינויים יאבדו  אך קובץ ה- SVG המותאם אישית האפשרי יישאר שלם.</translation>
+        <translation>חזור להגדרות ברירת המחדל של ערכת הנושא הזו (דורש גישת מנהל)! כשלוחצים ומאשרים, כל השינויים יאבדו אך קובץ ה- SVG המותאם אישית האפשרי יישאר שלם.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
