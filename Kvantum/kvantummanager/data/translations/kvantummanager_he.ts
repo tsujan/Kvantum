@@ -181,17 +181,17 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation>PCManFM-qt שקוף</translation>
+        <translation>תצוגה שקופה עבור PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation>תפריטים ללא אייקונים</translation>
+        <translation>תפריטים ללא סמלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation>טשטש חלונות שקופים במפורש</translation>
+        <translation>טשטוש חלונות שהם שקופים במפורש</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
@@ -201,7 +201,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא לצייר רקע כלשהו עבור כותרות KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
