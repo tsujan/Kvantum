@@ -86,8 +86,9 @@ the theme is already used.</source>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>חזור לברירת המחדל
-הגדרות לערכת הנושא הזו</translation>
+        <translation>להחזיר להגדרות בררת המחדל
+(בסיס - root) של ערכת העיצוב הזו.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
