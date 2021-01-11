@@ -211,7 +211,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית KTitle שקופה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
