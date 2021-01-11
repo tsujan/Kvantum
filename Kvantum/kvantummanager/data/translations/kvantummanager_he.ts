@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="151"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>רישיון</translation>
     </message>
 </context>
 <context>
@@ -14,49 +14,51 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>מנהל Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>התקנת/עדכון ערכת עיצוב</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;ל־&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; מצורפות מגוון ערכות עיצוב. כאן ניתן לבחור תיקיית ערכות עיצוב ואז ללחוץ על הכפתור להלן כדי להתקין אותם בתיקיית הבית שלך.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור תיקיית ערכות
+עיצוב של Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>להוסיף את ערכת העיצוב הזאת לרשימת ערכת העיצוב
+בהן יכול Kvantum להשתמש במקום ערכות העיצוב שלו.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>התקנת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>החלפת/מחיקת ערכת עיצוב</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור ערכת עיצוב:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>מחיקת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,82 +66,89 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>לגרום ל־Kvantum להשתמש בערכת העיצוב הזו!
+
+כפתור מושבת משמעו שערכת
+העיצוב הזו כבר נמצאת בשימוש.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>להשתמש בערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת ערכת עיצוב פעילה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>להחזיר להגדרות בררת המחדל
+(משתמש על - root) של ערכת העיצוב הזו.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;החזרה להגדרות בררת המחדל (משתמש על - root) של ערכת העיצוב הזו!&lt;/p&gt;&lt;p&gt;לאחר לחיצה ואישור, כל השינויים להגדרות יאבדו אך קובץ ה־ SVG שכנראה השתנה יישאר כמו שהוא.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>שחזור</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>לשמור את ההגדרה הזאת
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
         <location filename="../../kvantummanager.ui" line="2112"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרות בטוחות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>יש לבטל את הסימון על כל התיבות האלה אם
+ברצונך שהווידג׳טים יופיעו כפי שהם כבררת מחדל.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>שפצורים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה שקופה ב־Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>גופן רגיל לכפתורי לחיצה כבררת מחדל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -148,17 +157,18 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>מזג את ה sidepane של PCManFM-qt עם הסביבה שלו.
+בLXQt, נדרש לסגור את PCManFM-qt, ואז לעצור ולהדליק את Desktop עם  LXQt Session Settings.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>חלונית צד שקופה עבור PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתורים ללא אייקונים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -172,27 +182,27 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה שקופה עבור PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריטים ללא סמלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>טשטוש חלונות שהם שקופים במפורש</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל כלים עליון יחיד</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא לצייר רקע כלשהו עבור כותרות KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -202,7 +212,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>תווית KTitle שקופה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -978,12 +988,12 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>שונות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1775"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>אין חצים בפסי הגלילה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1870"/>
@@ -997,7 +1007,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1877"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>פסי גלילה בתוך מסגרות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1910"/>
@@ -1053,7 +1063,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1703"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>קיבוץ כפתורי סרגל כלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1730"/>
@@ -1118,7 +1128,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1586"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>לכבד את סביבת שולחן העבודה הנוכחית אם ניתן</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1692"/>
@@ -1128,7 +1138,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1740"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>לשוניות מיושרות לשמאל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
@@ -1139,7 +1149,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>צירוף לשוניות בלתי פעילות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1948"/>
@@ -1192,22 +1202,22 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2026"/>
         <source>Installed Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת עיצוב מותקנת</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2042"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>יישום/יישומים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2071"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation>יישום1,יישום2,יישום3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2099"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>הסרת רשימה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2106"/>
@@ -1239,12 +1249,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2163"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>על אודות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2186"/>
@@ -1295,12 +1305,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="722"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 הותקנה.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="892"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 נמחקה.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="946"/>
@@ -1598,12 +1608,12 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="134"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum אינו מותקן במערכת שלך.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>נא להתקין תחילה את תוסף העיצוב של Kvantum!</translation>
     </message>
 </context>
 </TS>
