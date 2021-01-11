@@ -157,8 +157,11 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>מזג את ה sidepane של PCManFM-qt עם הסביבה שלו.
-בLXQt, נדרש לסגור את PCManFM-qt, ואז לעצור ולהדליק את Desktop עם  LXQt Session Settings.</translation>
+        <translation>מיזוג חלונית הצד של PCManFM-qt עם סביבתה.
+
+תחת LXQt, יש לצאת ולהיכנס או לסגור את PCManFM-qt
+ואז לעצור ולהפעיל את שולחן העבודה עם הגדרות הפעלה
+של LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
@@ -207,34 +210,36 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;לא לצייר כלל רקע לכותרות KTitles?&lt;/p&gt;&lt;p&gt;Ktitles משמשות כל מיני יישומי KDE להצגת אגפים שונים בתיבות דו־שיח של הגדרות.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation>תווית KTitle שקופה</translation>
+        <translation>כותרת KTitle שקופה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>לא לצבוע על גבי סמלי
+תוויות עם צבע ההדגשה!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;כבררת מחדל, סמלי התוויות שנבחרים נצבעים בצבע ההדגשה.&lt;/p&gt;&lt;p&gt;סימון התיבה הזאת מסיר את הצביעה.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>בלי צביעת בחירה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>לא לצייר רקע עבור כותרות תפריטים (KDE).
+(דורש יציאה וכניסה בשביל התפריטים של Plasma.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
@@ -244,7 +249,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>כותרת תפריט שקופה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
@@ -277,7 +282,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>לכבד ערכות עיצוב כהות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="674"/>
@@ -317,7 +322,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>גודל סמל תפריט ראשי של LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
@@ -331,7 +336,7 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1406"/>
         <location filename="../../kvantummanager.ui" line="1441"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> פיקסלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="761"/>
@@ -1222,23 +1227,23 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2106"/>
         <source>Save the current list of apps</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת רשימת היישומים הנוכחית</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2109"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;לשמור את רשימת היישומים הנוכחיים על ערכות העיצוב שלהם!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
         <location filename="../../kvantummanager.ui" line="2142"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>יציאה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2152"/>
@@ -1259,7 +1264,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2186"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>מה זה?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2189"/>
@@ -1269,12 +1274,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2192"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>עזרה</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="312"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>פתיחת תיקיית ערכות העיצוב של Kvantum…</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="189"/>
@@ -1288,19 +1293,19 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="643"/>
         <location filename="../../KvantumManager.cpp" line="659"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="583"/>
         <source>First you have to delete its modified version!</source>
-        <translation type="unfinished"></translation>
+        <translation>תחילה עליך למחוק את הגרסה הערוכה שלה!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="607"/>
         <location filename="../../KvantumManager.cpp" line="761"/>
         <location filename="../../KvantumManager.cpp" line="2669"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>אישור</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="722"/>
@@ -1332,12 +1337,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>לחיצה בודדת</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>לחיצה כפולה</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
@@ -1362,27 +1367,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת Gnome</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="120"/>
@@ -1445,7 +1450,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
         <source>The theme already exists in modified form.</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב כבר קיימת עם שינויים.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="597"/>
@@ -1460,7 +1465,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="608"/>
         <source>The theme already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב קיימת.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="609"/>
@@ -1512,7 +1517,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1690"/>
         <source>No description</source>
-        <translation type="unfinished"></translation>
+        <translation>אין תיאור</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2163"/>
@@ -1583,7 +1588,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="512"/>
         <source>This directory cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>אי אפשר להסיר את התיקייה הזאת:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="519"/>
@@ -1595,7 +1600,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2106"/>
         <location filename="../../KvantumManager.cpp" line="2568"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב הפעילה:</translation>
     </message>
 </context>
 <context>
@@ -1603,7 +1608,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="133"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="134"/>
