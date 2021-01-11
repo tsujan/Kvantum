@@ -138,7 +138,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>האקס</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
