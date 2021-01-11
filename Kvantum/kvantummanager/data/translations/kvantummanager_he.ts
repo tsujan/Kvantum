@@ -981,12 +981,12 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>שונות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1775"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>אין חצים בפסי הגלילה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1870"/>
@@ -1000,7 +1000,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1877"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>פסי גלילה בתוך מסגרות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1910"/>
@@ -1056,7 +1056,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1703"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>קיבוץ כפתורי סרגל כלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1730"/>
@@ -1121,7 +1121,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1586"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>לכבד את סביבת שולחן העבודה הנוכחית אם ניתן</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1692"/>
@@ -1131,7 +1131,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1740"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>לשוניות מיושרות לשמאל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
@@ -1142,7 +1142,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>צירוף לשוניות בלתי פעילות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1948"/>
@@ -1205,12 +1205,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2071"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation>יישום1,יישום2,יישום3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2099"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>הסרת רשימה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2106"/>
