@@ -97,7 +97,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>שחזר</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
