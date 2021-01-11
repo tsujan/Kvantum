@@ -142,7 +142,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>דולפין שקוף</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
