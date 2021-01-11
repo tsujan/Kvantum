@@ -31,34 +31,34 @@
         <source>Select a Kvantum
 theme folder</source>
         <translation>נא לבחור תיקיית ערכות
-נושא של Kvantum</translation>
+עיצוב של Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>הוסף את ערכת העיצוב הזאת לרשימת ערכת הנושא
-בהן Kvantum יכול להשתמש בנוסף לערכות הנושא שלו.</translation>
+        <translation>להוסיף את ערכת העיצוב הזאת לרשימת ערכת העיצוב
+בהן יכול Kvantum להשתמש במקום ערכות העיצוב שלו.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation>התקן את ערכת הנושא הזו</translation>
+        <translation>התקנת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>החלף/מחק ערכת נושא</translation>
+        <translation>החלפת/מחיקת ערכת עיצוב</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>נא לבחור ערכת נושא:</translation>
+        <translation>נא לבחור ערכת עיצוב:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>מחיקת ערכת הנושא הזו</translation>
+        <translation>מחיקת ערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -66,18 +66,20 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>גרום לKvantum להשתמש בערכת הנושא הזו
-כפתור חסום אומר שערכת הנושא הזו כבר נמצאת בשימוש.</translation>
+        <translation>לגרום ל־Kvantum להשתמש בערכת העיצוב הזו!
+
+כפתור מושבת משמעו שערכת
+העיצוב הזו כבר נמצאת בשימוש.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>השתמש בערכת הנושא הזו</translation>
+        <translation>להשתמש בערכת העיצוב הזו</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>ערוך ערכת נושא פעילה</translation>
+        <translation>הגדרת ערכת עיצוב פעילה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
