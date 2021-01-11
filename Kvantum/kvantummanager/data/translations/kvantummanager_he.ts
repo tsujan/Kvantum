@@ -132,7 +132,8 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>בטל את הסימון של כל התיבות האלה אם אתה רוצה שכל 
+היישומנים האלו יופיעו כאילו היו ברירת מחדל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
