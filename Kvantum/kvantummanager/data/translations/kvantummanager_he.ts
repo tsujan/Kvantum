@@ -157,7 +157,8 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>מזג את ה sidepane של PCManFM-qt עם הסביבה שלו.
+בLXQt, נדרש לסגור את PCManFM-qt, ואז לעצור ולהדליק את Desktop עם  LXQt Session Settings.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
