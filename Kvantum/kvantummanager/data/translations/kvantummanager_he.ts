@@ -87,7 +87,7 @@ the theme is already used.</source>
 settings of this theme.
 (Ctrl+Z)</source>
         <translation>להחזיר להגדרות בררת המחדל
-(בסיס - root) של ערכת העיצוב הזו.
+(משתמש על - root) של ערכת העיצוב הזו.
 (Ctrl+Z)</translation>
     </message>
     <message>
@@ -132,13 +132,13 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>בטל את הסימון של כל התיבות האלה אם אתה רוצה שכל 
-היישומנים האלו יופיעו כאילו היו ברירת מחדל</translation>
+        <translation>יש לבטל את הסימון על כל התיבות האלה אם
+ברצונך שהווידג׳טים יופיעו כפי שהם כבררת מחדל.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation>האקס</translation>
+        <translation>שפצורים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
@@ -162,7 +162,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>חלונית צד שקופה עבור PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
