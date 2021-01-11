@@ -167,7 +167,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתורים ללא אייקונים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -181,17 +181,17 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>PCManFM-qt שקוף</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריטים ללא אייקונים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>טשטש חלונות שקופים במפורש</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
