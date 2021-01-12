@@ -1,3 +1,7 @@
+V0.19.0
+---------
+ * Allow dragging from some disabled widgets.
+
 V0.18.0
 ---------
  * Use PE_FrameStatusBarItem with Qt ≥ 5.13.0 and return from it.

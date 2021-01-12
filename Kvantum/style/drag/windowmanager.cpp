@@ -31,6 +31,7 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include <QStatusBar>
+#include <QToolButton>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -335,8 +336,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
     return true;
 
   if (widgetTarget_ == nullptr // the widget has been deleted
-      || !widget->isVisible() // as with Fm::PathBar
-      || !widget->isEnabled())
+      || !widget->isVisible()) // as with Fm::PathBar
   {
     resetDrag();
     return true;
@@ -466,7 +466,7 @@ bool WindowManager::isBlackListed (QWidget *widget)
 /*************************/
 bool WindowManager::canDrag (QWidget *widget)
 {
-  if (!widget || !widget->isEnabled() || !enabled()
+  if (!widget || !enabled()
       || drag_ == DRAG_NONE) // impossible
   {
     return false;
@@ -536,7 +536,10 @@ bool WindowManager::canDrag (QWidget *widget)
     if (tb == nullptr) return false;
 
     /* consider some widgets inside toolbars */
-    if (((!dragFromBtns_ || !qobject_cast<QAbstractButton*>(widget))
+    bool allowedBtn = false;
+    if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
+      allowedBtn = toolButton->autoRaise() && !toolButton->isEnabled();
+    if ((((!dragFromBtns_ && !allowedBtn) || !qobject_cast<QAbstractButton*>(widget))
          && widget->testAttribute (Qt::WA_Hover))
         || widget->testAttribute (Qt::WA_SetCursor))
     {
@@ -679,7 +682,10 @@ bool WindowManager::canDrag (QWidget *widget)
   else if (qobject_cast<QDockWidget*>(widget->parentWidget()))
     return !qobject_cast<QAbstractButton*>(widget); // not a titlebar button
 
-  if (((!dragFromBtns_ || !qobject_cast<QAbstractButton*>(widget))
+  bool allowedBtn = false;
+  if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
+    allowedBtn = toolButton->autoRaise() && !toolButton->isEnabled();
+  if ((((!dragFromBtns_ && !allowedBtn) || !qobject_cast<QAbstractButton*>(widget))
        && widget->testAttribute (Qt::WA_Hover))
       || widget->testAttribute (Qt::WA_SetCursor))
   {
@@ -710,8 +716,16 @@ bool WindowManager::isDraggable (QWidget *widget)
   if (!widget || QWidget::mouseGrabber())
     return false;
 
-  if (dragFromBtns_ && qobject_cast<QAbstractButton*>(widget))
-    return true;
+  if (qobject_cast<QAbstractButton*>(widget))
+  {
+    if (dragFromBtns_)
+      return true;
+    if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
+    {
+      if (toolButton->autoRaise() && !toolButton->isEnabled())
+        return true;
+    }
+  }
 
   if (widget->isWindow()
       && (qobject_cast<QMainWindow*>(widget)
