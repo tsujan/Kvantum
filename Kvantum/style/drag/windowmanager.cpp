@@ -511,6 +511,9 @@ bool WindowManager::canDrag (QWidget *widget)
     parent = parent->parentWidget();
   }
 
+  if (qobject_cast<QMdiArea*>(widget->parentWidget()))
+    return false;
+
   if (QMenuBar *menuBar = qobject_cast<QMenuBar*>(widget))
   {
     if (menuBar->activeAction() && menuBar->activeAction()->isEnabled())
@@ -698,9 +701,6 @@ bool WindowManager::canDrag (QWidget *widget)
     if (label->textInteractionFlags().testFlag (Qt::TextSelectableByMouse))
       return false;
   }
-
-  if (qobject_cast<QMdiArea*>(widget->parentWidget()))
-    return false;
 
   if (widget->focusPolicy() > Qt::TabFocus
       || (widget->focusProxy() && widget->focusProxy()->focusPolicy() > Qt::TabFocus))
