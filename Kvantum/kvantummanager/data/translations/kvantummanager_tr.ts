@@ -396,12 +396,14 @@ yatay olarak ortalanır.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neden olduğu can sıkıcı eserler görebilirsiniz
+Qt&apos;nin tamsayı olmayan ölçeklendirmeyi işlemesindeki hatalarla
+pencere yarı saydamlığı veya gradyan ile.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamsayı olmayan ölçeklemeyle yarı saydamlığı devre dışı bırakın</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="663"/>
@@ -1356,12 +1358,15 @@ Bu seçenek bunları gizleyecektir.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uyarı: Bu ilk başta oldukça kafa karıştırıcı olabilir.
+Etkinleştirdiyseniz, geçici olarak devre dışı bırakabilirsiniz
+bir düğmeye basarak sürükleyip bırakılabilen bir düğme için
+düğmeye basmadan önce Ctrl tuşu.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Düğmelerden sürüklemeye izin ver</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
