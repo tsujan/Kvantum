@@ -254,7 +254,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Style KDE capacity bars as progressbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>לעצב את סרגלי התפוסה של KDE כסרגלי התקדמות.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
