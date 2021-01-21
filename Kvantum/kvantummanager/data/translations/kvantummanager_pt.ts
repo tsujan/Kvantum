@@ -425,10 +425,10 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished">Role alguns widgets roláveis invertendo-os com
-o botão esquerdo do mouse.
+        <translation>Role alguns widgets roláveis invertendo-os com
+o botão esquerdo do rato.
 
-Aviso: A rolagem cinética do Qt tem bugs e pode interferir
+Aviso: A rolagem cinética do Qt tem erros e pode interferir
 seriamente com outros trabalhos.</translation>
     </message>
     <message>
