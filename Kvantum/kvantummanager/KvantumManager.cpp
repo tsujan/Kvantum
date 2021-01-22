@@ -1171,11 +1171,21 @@ void KvantumManager::defaultThemeButtons()
 
     tmp = 22;
     if (defaultSettings.contains ("toolbar_icon_size"))
-        tmp = defaultSettings.value ("toolbar_icon_size").toInt();
+    {
+        QString str = defaultSettings.value ("toolbar_icon_size").toString();
+        if (str == "font")
+            ui->spinToolbar->setValue (15);
+        else
+        {
+            tmp = defaultSettings.value ("toolbar_icon_size").toInt();
+            tmp = qMin (qMax (tmp,16), 64);
+            ui->spinToolbar->setValue (tmp);
+        }
+    }
     else if (defaultSettings.value ("slim_toolbars").toBool())
-        tmp = 16;
-    tmp = qMin (qMax (tmp,16), 64);
-    ui->spinToolbar->setValue (tmp);
+        ui->spinToolbar->setValue (16);
+    else
+        ui->spinToolbar->setValue (tmp);
 
     tmp = 2;
     if (defaultSettings.contains ("layout_spacing"))
@@ -1511,9 +1521,15 @@ void KvantumManager::tabChanged (int index)
                 }
                 if (themeSettings.contains ("toolbar_icon_size"))
                 {
-                    int icnSize = themeSettings.value ("toolbar_icon_size").toInt();
-                    icnSize = qMin (qMax (icnSize,16), 64);
-                    ui->spinToolbar->setValue (icnSize);
+                    QString str = themeSettings.value ("toolbar_icon_size").toString();
+                    if (str == "font")
+                        ui->spinToolbar->setValue (15);
+                    else
+                    {
+                        int icnSize = themeSettings.value ("toolbar_icon_size").toInt();
+                        icnSize = qMin (qMax (icnSize,16), 64);
+                        ui->spinToolbar->setValue (icnSize);
+                    }
                 }
                 else if (themeSettings.contains ("slim_toolbars"))
                     ui->spinToolbar->setValue (16);
@@ -2300,7 +2316,11 @@ void KvantumManager::writeConfig()
         generalKeys.insert ("small_icon_size", str.setNum (ui->spinSmall->value()));
         generalKeys.insert ("large_icon_size", str.setNum (ui->spinLarge->value()));
         generalKeys.insert ("button_icon_size", str.setNum (ui->spinButton->value()));
-        generalKeys.insert ("toolbar_icon_size", str.setNum (ui->spinToolbar->value()));
+        int icnSize = ui->spinToolbar->value();
+        if (icnSize == 15)
+            generalKeys.insert ("toolbar_icon_size", "font");
+        else
+            generalKeys.insert ("toolbar_icon_size", str.setNum (icnSize));
         generalKeys.insert ("layout_spacing", str.setNum (ui->spinLayout->value()));
         generalKeys.insert ("layout_margin", str.setNum (ui->spinLayoutMargin->value()));
         generalKeys.insert ("submenu_overlap", str.setNum (ui->spinOverlap->value()));

@@ -1,6 +1,7 @@
 V0.19.0
 ---------
  * Allow dragging from some disabled widgets.
+ * Added an option (to Kvantum Manager) for setting the toolbar icon size to the font height if possible.
 
 V0.18.0
 ---------

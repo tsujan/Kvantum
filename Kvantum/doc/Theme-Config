@@ -418,8 +418,10 @@ slim_toolbars                     true/false          When true, the size of too
                                                       set in the app. If false, the size
                                                       will be determined by the DE or
                                                       the app. False by default.
-                                                      You could use "toolbar_icon_size"
-                                                      instead of this key (see below).
+
+                                                      Note: "toolbar_icon_size" will take
+                                                      priority over this key if existing
+                                                      (see below).
 
 toolbutton_style                  Integer             Sets the toolbutton style when it
                                                       is not set by the app. 0: follow,
@@ -716,12 +718,19 @@ layout_margin                     Integer             Obvious. Its value is betw
 
 small_icon_size
 large_icon_size
-button_icon_size
-toolbar_icon_size                 Integer             These affect menu-items/headers,
-                                                      icon-views, buttons/tabbars/listviews
-                                                      and toolbars respectively. KDE setting
-                                                      will have priority over these values
-                                                      if it exists.
+button_icon_size                  Integer             These affect menu-items/headers,
+                                                      icon-views and buttons/tabbars/listviews
+                                                      respectively. KDE setting will have
+                                                      priority over these values if it exists.
+
+toolbar_icon_size                 Integer/String      The icons size of toolbar buttons (KDE
+                                                      setting will have priority if it exists).
+
+                                                      Its value can also be "font", in which
+                                                      case, the size of toolbar icons will be
+                                                      set to the application font height if
+                                                      possible. That may be useful for aligning
+                                                      textless toolbar buttons with others.
 
 fill_rubberband                   true/false          Always fill the rubber-band rectangle
                                                       with the highlight color? By default,
@@ -916,11 +925,6 @@ middle_click_scroll               true/false          Should the scroll slider j
                                                       position when the scrollbar is middle
                                                       clicked? The default is false and the
                                                       jump is done by a left click.
-
-scroll_jump_workaround            true/false          Qt5 has a bug that causes annoying mouse
-                                                      wheel scroll jumps when mouse gestures
-                                                      are enabled. This key provides a
-                                                      workaround.
 
                            **********************
                            *** Other Sections ***

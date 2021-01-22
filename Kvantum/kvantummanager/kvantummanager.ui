@@ -1290,11 +1290,14 @@ The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</string>
                     </property>
+                    <property name="specialValueText">
+                     <string>Font size</string>
+                    </property>
                     <property name="suffix">
                      <string> px</string>
                     </property>
                     <property name="minimum">
-                     <number>16</number>
+                     <number>15</number>
                     </property>
                     <property name="maximum">
                      <number>64</number>

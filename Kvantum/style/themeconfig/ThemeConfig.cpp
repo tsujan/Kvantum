@@ -1014,7 +1014,14 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue(KSL("General"),KSL("toolbar_icon_size"));
   if (v.isValid()) // 22 by default
-    r.toolbar_icon_size = qMin(qMax(v.toInt(),16), 64);
+  {
+    int icnSize;
+    if (v.toString() == "font")
+      icnSize = QFontMetrics(QApplication::font()).height();
+    else
+      icnSize = v.toInt();
+    r.toolbar_icon_size = qMin(qMax(icnSize,16), 64);
+  }
   else if (r.slim_toolbars)
     r.toolbar_icon_size = 16;
 
