@@ -953,12 +953,18 @@ frame.right                       Integer             The height or width of the
 frame.expanded.top
 frame.expanded.bottom
 frame.expanded.left
-frame.expanded.right              Integer             The same as above but for expanded frames
-                                                      (see "frame.expansion" below).
+frame.expanded.right              Integer             When a frame expansion is done with both
+                                                      "expand-" and "border-" SVG elements (see
+                                                      "Theme-Making.pdf" → "Frame Expansion and
+                                                      Border"), the drawn border serves as a
+                                                      kind of frame. Then, these keys determine
+                                                      the thicknesses of its corresponding parts.
+
                                                       If they are set to zero, missing or
                                                       greater than their corresponding ordinary
                                                       frame sizes, the ordinary frame sizes
-                                                      will be used for expanded frames.
+                                                      will be used for the thickness of the
+                                                      expanded border.
 
 frame.expansion                   Integer             A positive value (in px) will expand the
                                   or                  frames until the corner frames meet
