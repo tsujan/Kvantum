@@ -1460,7 +1460,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="608"/>
         <source>The theme already exists.</source>
-        <translation>テーマは既に存在しています。</translation>
+        <translation>テーマが既に存在しています。</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="609"/>
@@ -1522,7 +1522,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2190"/>
         <source>A copy was already created.</source>
-        <translation>コピーは既に作成されています。</translation>
+        <translation>コピーが既に作成されています。</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2579"/>
