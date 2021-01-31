@@ -96,6 +96,15 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
+      /* this is commented out because vertical toolbars aren't stylable */
+      /*if (!hspec_.single_top_toolbar
+          && themeRndr_ && themeRndr_->isValid()
+          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor),
+                            standardPalette().color(QPalette::Active,QPalette::WindowText)))
+      {
+        dspec.element = "flat-"+dspec.element;
+      }*/
+
       if (renderElement(&painter, dspec.element+"-down-normal", QRect(0,0,s,s)))
         return QIcon(pm);
       else break;

@@ -8840,7 +8840,7 @@ void Style::drawControl(QStyle::ControlElement element,
       }
 
       if (!(option->state & State_Horizontal))
-      {
+      { // shouldn't happen because vertical toolbars aren't stylable
         r.setRect(0, 0, h, w);
         painter->save();
         QTransform m;
