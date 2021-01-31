@@ -1073,8 +1073,8 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
   /* don't style toolbars in places like KAboutDialog (-> KAboutData -> KAboutPerson) */
   if (QMainWindow *mw = qobject_cast<QMainWindow*>(p))
   {
+    if (tb->orientation() == Qt::Vertical) return false; // otherwise, it might look ugly
     if (!hspec_.single_top_toolbar) return true;
-    if (tb->orientation() == Qt::Vertical) return false;
     if (QWidget *mb = mw->menuWidget()) // WARNING: an empty menubar may be created by menuBar()
     {
       if (mb->isVisible())

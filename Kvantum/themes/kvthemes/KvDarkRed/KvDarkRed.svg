@@ -598,7 +598,7 @@
 <path style="stroke-opacity:.494;fill:url(#linearGradient6059);stroke:#000;stroke-width:.41" id="slidercursor-focused" d="m 272.3005,646.2275 c -2.82567,-2.21557 -2.76172,-8.16036 0,-10.4199 2.83042,-2.31573 15.4943,2.61098 15.4943,5.20994 0,2.59897 -12.6639,7.42925 -15.4943,5.20996 z "/>
 <path style="stroke-opacity:.494;fill:url(#linearGradient5705);stroke:#000;stroke-width:.41" id="slidercursor-disabled" d="m 354.8005,646.2275 c -2.82567,-2.21557 -2.76172,-8.16036 0,-10.4199 2.83042,-2.31573 15.4943,2.61098 15.4943,5.20994 0,2.59897 -12.6639,7.42925 -15.4943,5.20996 z "/>
 <path style="opacity:.3;fill:#fff" id="button-default-indicator" d="m 330,25 0,25 -25,0 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z "/>
-<path style="opacity:.62;fill:url(#linearGradient6583)" id="toolbar-normal" d="m 355,25 h 30 v 30 h -30 z"/>
+<path style="opacity:.58;fill:url(#linearGradient6583)" id="toolbar-normal" d="m 355,25 h 30 v 30 h -30 z"/>
 <g id="scrollbarslider-focused-topright" transform="translate(-165.5,465.2)">
 <rect width="12" x="225" y="669.797" height="8.702877" style="opacity:0"/>
 <path style="fill:url(#linearGradient6016);fill-rule:evenodd" d="m 225,669.8 v 8.7 h 8.5 c 0,-5.5 -3.514,-8.7 -8.5,-8.7 z "/>
