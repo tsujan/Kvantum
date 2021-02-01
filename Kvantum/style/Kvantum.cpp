@@ -376,9 +376,9 @@ Style::Style(bool useDark) : QCommonStyle()
   blurHelper_ = nullptr;
 
   if (tspec_.x11drag)
-  { // See Style::~Style() and the explanation near the top of "windowmanager.cpp"
+  {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-    itsWindowManager_ = new WindowManager(nullptr, tspec_.x11drag, tspec_.drag_from_buttons);
+    itsWindowManager_ = new WindowManager(this, tspec_.x11drag, tspec_.drag_from_buttons);
     itsWindowManager_->initialize();
 #else
     if (tspec_.isX11)
@@ -407,13 +407,6 @@ Style::Style(bool useDark) : QCommonStyle()
 
 Style::~Style()
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-  /* itsWindowManager_ shouldn't have "this" as its parent because "this" may
-     be deleted after it sends mouse events and in response to them. Instead,
-     it should be deleted only when the control returns to the event loop. */
-  itsWindowManager_->deleteLater();
-#endif
-
   QHash<const QObject*, Animation*>::iterator i = animations_.begin();
   while (i != animations_.end())
   {

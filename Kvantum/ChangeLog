@@ -3,6 +3,7 @@ V0.19.0
  * Allow dragging from some disabled widgets.
  * Added an option (to Kvantum Manager) for setting the toolbar icon size to the font height if possible.
  * Don't style vertical toolbars because, otherwise, they might look ugly.
+ * Always check if the drag manager is deleted after it sends mouse events (to prevent any crash).
 
 V0.18.0
 ---------

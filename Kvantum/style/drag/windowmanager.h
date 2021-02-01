@@ -60,7 +60,7 @@ public:
   }
 
   explicit WindowManager (QObject *parent, Drag drag, bool dragFromBtns);
-  virtual ~WindowManager() {}
+  ~WindowManager();
 
   void initialize (const QStringList &blackList = QStringList());
 
@@ -79,7 +79,6 @@ protected:
   bool mouseMoveEvent (QEvent *event);
   bool mouseReleaseEvent (QEvent *event);
   bool leavingWindow();
-  void widgetMouseRelease (bool inside = false);
 
   bool enabled() const {
     return enabled_;
