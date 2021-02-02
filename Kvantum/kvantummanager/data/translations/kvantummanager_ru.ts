@@ -19,7 +19,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Установка или обновление тем</translation>
+        <translation>Установка/Обновление тем</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -224,7 +224,7 @@ with LXQt Session Settings.</source>
         <source>Do not tint selected label icons with
 the highlight color!</source>
         <translation>Не окрашивать выбранные значки
-в цвет подсветки.</translation>
+в цвет подсветки!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
@@ -591,7 +591,7 @@ some widgets is changed, mostly by the mouse.</source>
 Uncheck it if you want those patterns back!</source>
         <translation>Установите флажок, чтобы удалить все шаблоны
 размещения диалоговых окон. Снимите флажок,
-чтобы восстановить шаблоны.</translation>
+чтобы восстановить шаблоны!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1108"/>
@@ -603,7 +603,7 @@ Uncheck it if you want those patterns back!</source>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Использовать одни и те же цвета и формы для активных
-и неактивных окон, если данная тема их разделяет.</translation>
+и неактивных окон, если данная тема их разделяет?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1119"/>
@@ -648,7 +648,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер шрифта</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -697,8 +697,8 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1405"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation>Ширина горизонтальных счётчиков. Действие эффекта
-не распространяется на вертикальные счётчики.</translation>
+        <translation>Ширина горизонтальных счётчиков. (Действие эффекта
+не распространяется на вертикальные счётчики.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1398"/>
@@ -796,7 +796,7 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Убрать значки из кнопок с текстом.
+        <translation>Убрать значки из кнопок с текстом?
 
 По умолчанию большинство кнопок имеют значки.
 
@@ -811,7 +811,7 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Убрать значки из пунктов меню.
+        <translation>Убрать значки из пунктов меню?
 
 По умолчанию некоторые из них имеют значки.
 
@@ -884,7 +884,7 @@ window SVG background in the theme.</source>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation>Наличие у временных полос прокрутки
-полупрозрачных желобков при необходимости.</translation>
+полупрозрачных желобков при необходимости?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1147"/>
@@ -1006,7 +1006,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 Установка данного флажка приводит к их удалению.
 
 Если флажок снят, смотрите пункт меню:
-Компоновка и общий вид → Временные полосы прокрутки</translation>
+Компоновка и общий вид → Временные полосы прокрутки!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1624"/>
@@ -1051,7 +1051,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Перетаскивание окон из строк меню, основных
 панелей инструментов или других мест,
-а не только из заголовков окон.
+(а не только из заголовков окон)?
 
 Если параметр отключён, смотрите пункт меню:
 Разное → Учитывать параметры текущей среды.</translation>
@@ -1197,13 +1197,13 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation>Отображение полос прокрутки внутри поля содержимого.
+        <translation>Отображение полос прокрутки внутри поля содержимого?
 
 По умолчанию полосы прокрутки отображаются вне поля
 содержимого.
 
 Если флажок снят, смотрите пункт меню:
-Компоновка и общий вид → Временные полосы прокрутки</translation>
+Компоновка и общий вид → Временные полосы прокрутки!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1880"/>
@@ -1407,12 +1407,16 @@ This option will hide these.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение: поначалу это может сбивать с толку.
+
+Если вы включили его, вы можете временно отключить его.
+для кнопки, которую можно перетащить, нажав
+клавишу Ctrl перед нажатием кнопки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1965"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить перетаскивание с кнопок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
