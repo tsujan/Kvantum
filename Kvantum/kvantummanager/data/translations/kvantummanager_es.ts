@@ -643,7 +643,7 @@ inactivas si este tema distingue entre ellas?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de fuente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -1377,7 +1377,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1965"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir arrastrar con botones</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
