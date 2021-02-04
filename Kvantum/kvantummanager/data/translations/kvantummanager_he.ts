@@ -341,7 +341,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="761"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>הרכבת חלונות ומראה כללי</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="917"/>
@@ -564,7 +564,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1133"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגלי גלילה מתחבאים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1155"/>
@@ -1012,7 +1012,11 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>לצייר סרגלי גלילה בתוך מסגרות הצגה?
+
+כבררת מחדל, סרגלי הגלילה מצוירים מחוץ למסגרות ההצגה.
+
+אם האפשרות מושבתת, יש לעיין בהרכבת חלונות ומראה כללי ← סרגלי גלילה מתחבאים!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1880"/>
