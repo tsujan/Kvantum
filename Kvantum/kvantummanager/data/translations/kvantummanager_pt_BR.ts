@@ -642,7 +642,7 @@ se esse tema fizer distinção entre elas?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho da fonte</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -1365,12 +1365,16 @@ Esta opção irá ocultar isso.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: isso pode ser bastante confuso no início.
+
+Se você ativou, pode desativá-lo temporariamente
+para um botão que pode ser arrastado e solto pressionando
+a tecla Ctrl antes de pressionar o botão.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1965"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir arrastar de botões</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
