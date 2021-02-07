@@ -85,7 +85,7 @@ WindowManager::WindowManager (QObject *parent, Drag drag, bool dragFromBtns) :
                QObject (parent),
                enabled_ (true),
                dragDistance_ (qMax (QApplication::startDragDistance(), 10)),
-               dragDelay_ (qMax (QApplication::startDragTime(), 50)),
+               dragDelay_ (qMax (QApplication::startDragTime(), 500)),
                doubleClickInterval_ (QApplication::doubleClickInterval()),
                isDelayed_ (false),
                dragAboutToStart_ (false),
@@ -326,6 +326,8 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()
 
   /* check if the widget can be dragged */
+  dragDistance_ = qMax (QApplication::startDragDistance(), 10);
+  dragDelay_ = qMax (QApplication::startDragTime(), 500);
   if (isBlackListed (widget) || !canDrag (widget))
     return false;
 
@@ -408,7 +410,7 @@ bool WindowManager::mouseMoveEvent (QEvent *event)
       dragAboutToStart_ = false;
       if (dragTimer_.isActive())
         dragTimer_.stop();
-      if (mouseEvent->globalPos() == globalDragPoint_)
+      if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() < dragDistance_)
       {
         isDelayed_ = true;
         dragTimer_.start (dragDelay_, this);
@@ -567,11 +569,11 @@ bool WindowManager::canDrag (QWidget *widget)
     if (tb == nullptr) return false;
 
     /* consider some widgets inside toolbars */
+    bool draggedBtn (dragFromBtns_ && qobject_cast<QAbstractButton*>(widget));
     bool allowedBtn = false;
     if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
       allowedBtn = toolButton->autoRaise() && !toolButton->isEnabled();
-    if ((((!dragFromBtns_ && !allowedBtn) || !qobject_cast<QAbstractButton*>(widget))
-         && widget->testAttribute (Qt::WA_Hover))
+    if ((!draggedBtn && !allowedBtn && widget->testAttribute (Qt::WA_Hover))
         || widget->testAttribute (Qt::WA_SetCursor))
     {
       return false;
@@ -582,7 +584,13 @@ bool WindowManager::canDrag (QWidget *widget)
         return false;
     }
 
-    return isPrimaryToolBar (tb);
+    if (!isPrimaryToolBar (tb)) return false;
+    if (draggedBtn)
+    { // to make pressing buttons easier
+      dragDistance_ *= 1.5;
+      dragDelay_ *= 2;
+    }
+    return true;
   }
 
   if (QTabBar *tabBar = qobject_cast<QTabBar*>(widget))
@@ -713,11 +721,11 @@ bool WindowManager::canDrag (QWidget *widget)
   else if (qobject_cast<QDockWidget*>(widget->parentWidget()))
     return !qobject_cast<QAbstractButton*>(widget); // not a titlebar button
 
+  bool draggedBtn (dragFromBtns_ && qobject_cast<QAbstractButton*>(widget));
   bool allowedBtn = false;
   if (QToolButton *toolButton = qobject_cast<QToolButton*>(widget))
     allowedBtn = toolButton->autoRaise() && !toolButton->isEnabled();
-  if ((((!dragFromBtns_ && !allowedBtn) || !qobject_cast<QAbstractButton*>(widget))
-       && widget->testAttribute (Qt::WA_Hover))
+  if ((!draggedBtn && !allowedBtn && widget->testAttribute (Qt::WA_Hover))
       || widget->testAttribute (Qt::WA_SetCursor))
   {
     return false;
@@ -736,6 +744,11 @@ bool WindowManager::canDrag (QWidget *widget)
     widget->setFocus (Qt::MouseFocusReason);
   }
 
+  if (draggedBtn)
+  { // to make pressing buttons easier
+    dragDistance_ *= 1.5;
+    dragDelay_ *= 2;
+  }
   return true;
 }
 /*************************/
