@@ -186,7 +186,7 @@ Section                                      Meaning
 ======================================================================
 
 
-The following table shows the variables (keys) you could change to configure the current theme -- without necessarily making a new one -- with the default values of some of them. These are the rules for the value inheritance:
+The following table shows the variables (keys) you could change to configure the current theme — without necessarily making a new one — with the default values of some of them. These are the rules for the value inheritance:
 
 (1) If a section (group) is not present in your configuration, its variables and their values will be taken from the default config file.
 
@@ -235,7 +235,7 @@ x11drag                           String              Drag windows from contents
                                                         all (default)
 
                                                       Boolean values are also supported:
-                                                        true (the same as "all" -- default)
+                                                        true (the same as "all" — default)
                                                         false (the same as "none")
 
                                                       "x11drag" is disabled on wayland.
@@ -946,7 +946,7 @@ frame.right                       Integer             The height or width of the
                                                       there are two exceptions: (1) Where there
                                                       is not enough space (because of a bad GUI
                                                       design); and (2) A few widgets may not
-                                                      accept the exact values -- for example,
+                                                      accept the exact values — for example,
                                                       toolbars use the maximum value in all
                                                       directions.
 
@@ -1059,7 +1059,8 @@ text.margin.right                 Integer             The sizes of the text marg
                                                       Also, in widgets like LineEdit, where
                                                       texts are not drawn by Kvantum, the real
                                                       left/right text margins may be a little
-                                                      greater than text.margin.left/right.
+                                                      greater than text.margin.left/right. In
+                                                      ItemView, the maximum margin is 4.
 
 text.normal.color                 String (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid

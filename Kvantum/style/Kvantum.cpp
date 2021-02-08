@@ -2947,7 +2947,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         frame_spec fspec;
         default_frame_spec(fspec);
 
-
         QString status = getState(option,widget);
         QString eStatus = "normal";
         /* some apps (like Dolphin) don't set the state to enabled; moreover,
@@ -12939,6 +12938,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       return tspec_.check_size;
     }
 
+    case PM_TreeViewIndentation : return 20;
+
     default : return QCommonStyle::pixelMetric(metric,option,widget);
   }
 }
@@ -13133,7 +13134,9 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_DitherDisabledText :
     case SH_Menu_AllowActiveAndDisabled :
     case SH_MenuBar_AltKeyNavigation :
-    case SH_ItemView_ShowDecorationSelected :
+    case SH_ItemView_ShowDecorationSelected : return false;
+
+    /* if this is set to true, the left key might not hide child items */
     case SH_ItemView_ArrowKeysNavigateIntoChildren : return false;
 
     case SH_ItemView_ActivateItemOnSingleClick : {
@@ -14736,12 +14739,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
 
       if (opt)
       {
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
-        bool hasIcon = false;
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
-          hasIcon = true;
-
+        bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration);
         Qt::Alignment align = opt->displayAlignment;
         QStyleOptionViewItem::Position pos = opt->decorationPosition;
         const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
