@@ -13414,11 +13414,11 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                               const QSize &contentsSize,
                               const QWidget *widget) const
 {
-  QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
   QSize s = QSize(0,0);
 
   switch (type) {
     case CT_LineEdit : {
+      QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2))) // when editing itemview texts
         return defaultSize;
 
@@ -13450,19 +13450,26 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
       if (s.height() < defaultSize.height() && le == nullptr)
         s.rheight() = defaultSize.height();
-      return s;
 
-      break;
+      return s;
     }
 
     case CT_SpinBox : {
       /* Here we don't use defaultSize because, for Qt4, it was based on spinbox size hint,
          which in turn was based on SC_SpinBoxEditField (Qt4 -> qabstractspinbox.cpp).
          That's corrected in Qt5 but the following method is always reliable. */
+      const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
+      bool hasButtons = true;
+      if (sb)
+      {
+        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+          hasButtons = false;
+      }
+      else if (opt && opt->buttonSymbols == QAbstractSpinBox::NoButtons)
+        hasButtons = false;
       frame_spec fspec = getFrameSpec(QStringLiteral("LineEdit"));
-      if (tspec_.vertical_spin_indicators
-          && !(sb && sb->buttonSymbols() == QAbstractSpinBox::NoButtons))
+      if (tspec_.vertical_spin_indicators && hasButtons)
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -13473,10 +13480,11 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       const size_spec sspecLE = getSizeSpec(QStringLiteral("LineEdit"));
       const frame_spec fspec1 = getFrameSpec(QStringLiteral("IndicatorSpinBox"));
       const size_spec sspec = getSizeSpec(QStringLiteral("IndicatorSpinBox"));
+
       if (sb)
       {
         int extraWidth = 0;
-        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons) // as in qpdfview
+        if (!hasButtons) // as in qpdfview
         {
           extraWidth = fspec.left + lspec.left + fspec.right + lspec.right
                        + (sspecLE.incrementW ? sspecLE.minW : 0);
@@ -13499,15 +13507,15 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = txtSize
               + QSize(extraWidth,
                       lspec.top + lspec.bottom
-                      + (tspec_.vertical_spin_indicators
-                         || sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.top + fspec.bottom
+                      + (tspec_.vertical_spin_indicators || !hasButtons
+                         ? fspec.top + fspec.bottom
                          : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
         }
         else
         {
           /* This is for some apps (like Kdenlive with its
              TimecodeDisplay) that subclass only QAbstractSpinBox. */
-          if (tspec_.vertical_spin_indicators || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+          if (tspec_.vertical_spin_indicators || !hasButtons)
             s.rwidth() = sb->minimumWidth();
           else
             s.rwidth() = sb->minimumWidth() + tspec_.spin_button_width;
@@ -13517,7 +13525,24 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
       }
 
-      break;
+      QSize defaultSize(0, 0); // is calculated as in qcommonstyle.cpp
+      if (opt)
+      {
+        int buttonWidth;
+        if (!hasButtons)
+          buttonWidth = 0;
+        else
+        {
+          /* the measure we used in CC_SpinBox at drawComplexControl() (for QML) */
+          if (tspec_.vertical_spin_indicators || (!widget && opt->frame))
+            buttonWidth = tspec_.spin_button_width + qMin(fspec.right,3);
+          else
+            buttonWidth = 2*tspec_.spin_button_width + fspec1.right;
+        }
+        defaultSize = contentsSize + QSize(buttonWidth, 0);
+      }
+
+      return s.expandedTo(defaultSize);
     }
 
     case CT_ComboBox : {
@@ -13582,6 +13607,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                                : tspec_.combo_as_lineedit ? fspec1.right : fspec.right;
         if (tspec_.square_combo_button && COMBO_ARROW_LENGTH + arrowFrameSize < s.height())
           s.rwidth() += s.height() - COMBO_ARROW_LENGTH - arrowFrameSize;
+
+        return s;
       }
 
       break;
@@ -13677,6 +13704,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
         if (!txt.isEmpty())
           s.rwidth() = qMax(s.width(), 80); // not smaller than 80px with text
+
+        return s;
       }
 
       break;
@@ -13718,7 +13747,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         s = s + QSize(pixelMetric(PM_ExclusiveIndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
 
-      break;
+      return s.expandedTo(QCommonStyle::sizeFromContents(type,option,contentsSize,widget));
     }
 
     case CT_CheckBox : {
@@ -13757,7 +13786,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         s = s + QSize(pixelMetric(PM_IndicatorWidth,option,widget), (s.height() < ih ? ih : 0));
       }
 
-      break;
+      return s.expandedTo(QCommonStyle::sizeFromContents(type,option,contentsSize,widget));
     }
 
     case CT_MenuItem : {
@@ -13819,6 +13848,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                              (opt->icon.isNull() || hspec_.iconless_menu)
                                ? QSize()
                                : QSize(iconSize,iconSize));
+          s.setWidth(qMax(s.width(), contentsSize.width()));
+          s.setHeight(qMax(s.height(), opt->fontMetrics.height() + 8)); // as in qcommonstyle.cpp
           s.rwidth() += shortcutSpace;
         }
 
@@ -13857,6 +13888,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             s.rheight() += (cSize > s.height() ? cSize : 0);
           }
         }
+
+        return s;
       }
 
       break;
@@ -13898,7 +13931,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
       }
 
-      break;
+      return s.expandedTo(contentsSize);
     }
 
     case CT_ToolButton : {
@@ -13959,6 +13992,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             const QString group1 = "DropDownButton";
             const frame_spec fspec1 = getFrameSpec(group1);
             indicator_spec dspec1 = getIndicatorSpec(group1);
+            QSize defaultSize(contentsSize.width() + 6, contentsSize.height() + 5); // as in qcommonstyle.cpp
             dspec1.size = qMin(dspec1.size,qMin(defaultSize.height(),defaultSize.width()));
             s.rwidth() += (opt->direction == Qt::RightToLeft ?
                              fspec1.left-fspec.left
@@ -14000,7 +14034,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           }
         }
         else if(opt->icon.isNull()) // nothing or only an arrow
-          break;
+          return s;
 
         if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
         { // don't let width < height
@@ -14013,6 +14047,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                  sspec.minH + (sspec.incrementH ? s.height() : 0)));
         }
+
+        return s;
       }
 
       break;
@@ -14115,8 +14151,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
 
         // for Calligra Words
-        int dw = defaultSize.width() - s.width();
-        int dh = defaultSize.height() - s.height();
+        int dw = contentsSize.width() - s.width();
+        int dh = contentsSize.height() - s.height();
         if (!verticalTabs)
           s += QSize(dw > 0 ? dw + fspec.left+fspec.right+lspec.left+lspec.right : 0,
                      dh > 0 ? dh + fspec.top+fspec.bottom+lspec.top+lspec.bottom : 0);
@@ -14125,7 +14161,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                      dh > 0 ? dh + fspec.left+fspec.right+lspec.left+lspec.right : 0);
       }
 
-      break;
+      return s.expandedTo(contentsSize);
     }
 
     case CT_HeaderSection : {
@@ -14162,7 +14198,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s.rwidth() += dspec.size + pixelMetric(PM_HeaderMargin);
       }
 
-      break;
+      return s.expandedTo(QCommonStyle::sizeFromContents(type,option,contentsSize,widget));
     }
 
     /* digiKam doesn't like this calculation */
@@ -14182,7 +14218,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
          PM_FocusFrameVMargin by default (-> Qt -> qcommonstyle.cpp).
       */
 
-      s = defaultSize;
+      s = QCommonStyle::sizeFromContents(type,option,contentsSize,widget); // heavy calculation by Qt
 
       const QStyleOptionViewItem *opt =
           qstyleoption_cast<const QStyleOptionViewItem*>(option);
@@ -14259,15 +14295,14 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s.setHeight(h);
       }*/
 
-      break;
+      return s;
     }
 
     case CT_TabWidget : {
       const frame_spec fspec = getFrameSpec(QStringLiteral("TabFrame"));
-      s = defaultSize + QSize(fspec.left+fspec.right,
-                              fspec.top+fspec.bottom);
-
-      break;
+      return contentsSize + QSize(4, 4) // as in qcommonstyle.cpp
+             + QSize(fspec.left+fspec.right,
+                     fspec.top+fspec.bottom);
     }
 
     case CT_GroupBox : {
@@ -14315,6 +14350,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
       int spacing = (tspec_.groupbox_top_label ? 0 : 6 + 10); /* 3px between text and frame and
                                                                  text starts at 10px after the left frame */
+      QSize defaultSize = contentsSize // as in qcommonstyle.cpp
+                          + QSize(opt && opt->features.testFlag(QStyleOptionFrame::Flat) ? 0 : 16, 0);
       s = QSize(qMax(defaultSize.width(), textSize.width() + checkWidth + spacing)
                   + fspec.left + fspec.right + lspec.left + lspec.right,
                 defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
@@ -14322,7 +14359,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                      ? 3 // 3 px spacing between text and top frame (-> CC_GroupBox in subControlRect)
                      : qMax(checkable ? pixelMetric(PM_IndicatorHeight) : 0, textSize.height())/2));
 
-      break;
+      return s;
     }
 
     case CT_ProgressBar : {
@@ -14341,7 +14378,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         /* Set the size so that the text could be above the bar only if
            there isn't enough space inside the bar. The are safeguards
            in other places when a progressbar doesn't consult this function. */
-        s = defaultSize;
+        s = contentsSize;
         if (isVertical)
           s.rwidth() = tspec_.progressbar_thickness + QFontMetrics(f).height()+3;
         else
@@ -14354,7 +14391,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         s.rwidth() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
       else
         s.rheight() = QFontMetrics(f).height() + fspec.top + fspec.bottom;
-      break;
+
+      return s.expandedTo(contentsSize);
     }
 
     case CT_MdiControls : {
@@ -14384,11 +14422,10 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       }
     }
 
-    default : return defaultSize;
+    default : break;
   }
 
-  /* set the minimum to the default size */
-  return s.expandedTo(defaultSize);
+  return QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
 }
 
 QSize Style::sizeCalculated(const QFont &font,
@@ -15435,56 +15472,61 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators || (!widget && opt && opt->frame));
 
+      bool hasButtons = true;
+      if (sb)
+      {
+        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+          hasButtons = false;
+      }
+      else if (opt && opt->buttonSymbols == QAbstractSpinBox::NoButtons)
+        hasButtons = false;
+      if (!hasButtons) sw = 0;
+
       // a workaround for LibreOffice
       /*if (isLibreoffice_)
       {
         sw = 12;
         fspec.right = qMin(fspec.right,3);
       }
-      else*/ if (sb)
-      {
-        if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
-          sw = 0;
-        else if (!verticalIndicators)
-        { // when there isn't enough horizontal space (as in VLC and Pencil)
-          QString maxTxt = spinMaxText(sb);
-          if (!maxTxt.isEmpty()
-              /* some codes may wrongly add a special text
-                 only when the value is minimum */
-              && maxTxt != sb->specialValueText())
+      else*/ if (sb && hasButtons && !verticalIndicators)
+      { // when there isn't enough horizontal space (as in VLC and Pencil)
+        QString maxTxt = spinMaxText(sb);
+        if (!maxTxt.isEmpty()
+            /* some codes may wrongly add a special text
+               only when the value is minimum */
+            && maxTxt != sb->specialValueText())
+        {
+          maxTxt += QLatin1Char(' ');
+          int txtWidth = textSize(sb->font(),maxTxt).width();
+          int rightFrame = w - txtWidth - 2*sw
+                           - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
+                           - 2; // for padding
+          if (rightFrame < 0) rightFrame = 1;
+          if (fspec.right > rightFrame)
           {
-            maxTxt += QLatin1Char(' ');
-            int txtWidth = textSize(sb->font(),maxTxt).width();
-            int rightFrame = w - txtWidth - 2*sw
-                            - fspecLE.left - (sspecLE.incrementW ? sspecLE.minW : 0)
-                            - 2; // for padding
-            if (rightFrame < 0) rightFrame = 1;
+            sw = 16;
+            // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
+            rightFrame = w-txtWidth-2*sw-3-2;
             if (fspec.right > rightFrame)
             {
-              sw = 16;
-              // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
-              rightFrame = w-txtWidth-2*sw-3-2;
-              if (fspec.right > rightFrame)
+              rightFrame = qMax(rightFrame,2);
+              if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
               {
-                rightFrame = qMax(rightFrame,2);
-                if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
-                {
-                  if (rightFrame == 2) // see PE_IndicatorSpinUp
-                    sw = 8;
-                  fspec.right = qMin(fspec.right,
-                                     qMin(rightFrame,3)); // for a uniform look
-                }
-                else fspec.right = qMin(fspec.right,3); // better than nothing
+                if (rightFrame == 2) // see PE_IndicatorSpinUp
+                  sw = 8;
+                fspec.right = qMin(fspec.right,
+                                   qMin(rightFrame,3)); // for a uniform look
               }
+              else fspec.right = qMin(fspec.right,3); // better than nothing
             }
           }
-          else fspec.right = qMin(fspec.right,3);
         }
+        else fspec.right = qMin(fspec.right,3);
       }
 
       if (sw != 0 && verticalIndicators)
       {
-        fspecLE.right = qMin(fspecLE.left,3);
+        fspecLE.right = qMin(fspecLE.right,3);
         fspec = fspecLE;
         sw = 8;
       }

@@ -5,6 +5,7 @@ V0.19.0
  * Don't style vertical toolbars because, otherwise, they might look ugly.
  * Always check if the drag manager is deleted after it sends mouse events (to prevent any crash).
  * Increased the drag distance and delay when dragging is done from buttons.
+ * Try to do less calculations to get widget sizes by not consulting QCommonStyle as far as possible.
 
 V0.18.0
 ---------
