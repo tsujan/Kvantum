@@ -198,12 +198,10 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
 
       if(name == "ItemView")
       {
-        /* we should be cautious about view items because
-          we don't draw their texts (see Kvantum.cpp -> CE_ItemViewItem) */
-        r.left = qMin(r.left,3);
-        r.right = qMin(r.right,3);
-        r.top = qMin(r.top,3);
-        r.bottom = qMin(r.bottom,3);
+        r.left = qMin(r.left,6);
+        r.right = qMin(r.right,6);
+        r.top = qMin(r.top,6);
+        r.bottom = qMin(r.bottom,6);
       }
 
       v = getValue(name,KSL("frame.patternsize"), i);
@@ -518,17 +516,20 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       r.top = qMax(0,r.top-1);
       r.bottom = qMax(0,r.bottom-1);
     }
-    else if(name == "ItemView")
-    { // as in getFrameSpec()
-      r.left = qMin(r.left,3);
-      r.right = qMin(r.right,3);
-      r.top = qMin(r.top,3);
-      r.bottom = qMin(r.bottom,3);
-    }
   }
 
   v = getValue(name,KSL("text.iconspacing"), i);
   r.tispace = qMax(v.toInt(),0);
+
+  if(name == "ItemView")
+  {
+    r.tispace = qBound(6, r.tispace, 12);
+    /* as in getFrameSpec() */
+    r.left = qMin(r.left,6);
+    r.right = qMin(r.right,6);
+    r.top = qMin(r.top,6);
+    r.bottom = qMin(r.bottom,6);
+  }
 
   lSpecs_[elementName] = r;
   return r;

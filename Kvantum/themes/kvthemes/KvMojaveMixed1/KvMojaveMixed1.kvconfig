@@ -393,17 +393,17 @@ interior.element=progress-pattern
 
 [ItemView]
 inherits=PanelButtonCommand
-text.margin=0
+text.margin=true
 frame.element=itemview
 interior.element=itemview
 frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
-text.margin.top=2
-text.margin.bottom=2
-text.margin.left=4
-text.margin.right=4
+text.margin.top=0
+text.margin.bottom=0
+text.margin.left=2
+text.margin.right=2
 text.normal.color=#050505
 text.focus.color=black
 text.press.color=white

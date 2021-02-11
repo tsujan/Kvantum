@@ -312,8 +312,8 @@ frame.left=1
 frame.right=1
 text.margin.top=1
 text.margin.bottom=1
-text.margin.left=1
-text.margin.right=1
+text.margin.left=3
+text.margin.right=3
 frame.expansion=10
 
 [Splitter]

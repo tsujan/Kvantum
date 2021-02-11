@@ -58,6 +58,7 @@ if(NOT ENABLE_QT4)
         polishing.cpp
         rendering.cpp
         standardIcons.cpp
+        viewItems.cpp
         KvantumPlugin.cpp
         shortcuthandler.cpp
         blur/blurhelper.cpp
@@ -71,6 +72,7 @@ if(NOT ENABLE_QT4)
         polishing.cpp
         rendering.cpp
         standardIcons.cpp
+        viewItems.cpp
         KvantumPlugin.cpp
         shortcuthandler.cpp
         blur/blurhelper.cpp

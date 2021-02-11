@@ -45,7 +45,7 @@
 #include <QDoubleSpinBox>
 #include <QDateTimeEdit>
 //#include <QBitmap>
-#include <QtCore/qmath.h>
+#include <QtMath>
 #include <QMenuBar>
 #include <QGraphicsView>
 #include <QStandardPaths>
@@ -403,10 +403,18 @@ Style::Style(bool useDark) : QCommonStyle()
     blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                  tspec_.contrast, tspec_.intensity, tspec_.saturation);
   }
+
+  cachedOption_ = nullptr;
 }
 
 Style::~Style()
 {
+  if (cachedOption_)
+  {
+    delete cachedOption_;
+    cachedOption_ = nullptr;
+  }
+
   QHash<const QObject*, Animation*>::iterator i = animations_.begin();
   while (i != animations_.end())
   {
@@ -4916,7 +4924,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           cg = QPalette::Inactive; // Qt checks QStyle::State_Active, which isn't consistent with inactive base color
 
         if ((opt->state & QStyle::State_Selected) && styleHint(QStyle::SH_ItemView_ShowDecorationSelected, opt, widget))
-          painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::Highlight));
+        {
+          /* we never do this: */
+          //painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::Highlight));
+          break;
+        }
         else if (opt->features & QStyleOptionViewItem::Alternate)
           painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::AlternateBase));
       }
@@ -5644,11 +5656,6 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_ItemViewItem: {
-      /*
-          Here, we rely on QCommonStyle::drawControl() for text eliding and other
-          calculations (because it includes private headers like "qtextengine_p.h")
-          and just use our custom colors instead of the default ones wherever possible.
-      */
       if (const QStyleOptionViewItem *opt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
       {
         bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration
@@ -5753,7 +5760,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
-                QCommonStyle::drawControl(element,&o,painter,widget);
+                drawViewItem(&o,painter,widget);
                 return;
               }
             }
@@ -5809,7 +5816,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     o.icon = QIcon(px);
                   }
                 }
-                QCommonStyle::drawControl(element,&o,painter,widget);
+                drawViewItem(&o,painter,widget);
                 return;
               }
             }
@@ -5831,7 +5838,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
-                QCommonStyle::drawControl(element,&o,painter,widget);
+                drawViewItem(&o,painter,widget);
                 return;
               }
             }
@@ -5855,7 +5862,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                  iconstate, opt->decorationSize);
                   o.icon = QIcon(px);
                 }
-                QCommonStyle::drawControl(element,&o,painter,widget);
+                drawViewItem(&o,painter,widget);
                 return;
               }
             }
@@ -5875,13 +5882,12 @@ void Style::drawControl(QStyle::ControlElement element,
                                                                opt->decorationSize),
                                              opacityPercentage);
               o.icon = QIcon(px);
-              QCommonStyle::drawControl(element,&o,painter,widget);
+              drawViewItem(&o,painter,widget);
               return;
             }
           }
         }
-        /* the focus rect is drawn by QCommonStyle with SE_ItemViewItemFocusRect */
-        QCommonStyle::drawControl(element,option,painter,widget);
+        drawViewItem(opt,painter,widget);
       }
 
       break;
@@ -13133,8 +13139,13 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_EtchDisabledText :
     case SH_DitherDisabledText :
     case SH_Menu_AllowActiveAndDisabled :
-    case SH_MenuBar_AltKeyNavigation :
-    case SH_ItemView_ShowDecorationSelected : return false;
+    case SH_MenuBar_AltKeyNavigation : return false;
+
+
+    case SH_ItemView_ShowDecorationSelected : {
+      /* give all available space to the text when editing a view-item */
+      return (qobject_cast<const QLineEdit*>(widget) != nullptr);
+    }
 
     /* if this is set to true, the left key might not hide child items */
     case SH_ItemView_ArrowKeysNavigateIntoChildren : return false;
@@ -14201,101 +14212,23 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       return s.expandedTo(QCommonStyle::sizeFromContents(type,option,contentsSize,widget));
     }
 
-    /* digiKam doesn't like this calculation */
-    /*case CT_Slider : {
-      if (option->state & State_Horizontal)
-        s = QSize(defaultSize.width(), pixelMetric(PM_SliderThickness,option,widget));
-      else
-        s = QSize(pixelMetric(PM_SliderThickness,option,widget), defaultSize.height());
-      return s;
-    }*/
-
     case CT_ItemViewItem : {
-      /*
-         This works alongside SE_ItemViewItemText.
-
-         Margins are (partially) set with PM_FocusFrameHMargin and
-         PM_FocusFrameVMargin by default (-> Qt -> qcommonstyle.cpp).
-      */
-
-      s = QCommonStyle::sizeFromContents(type,option,contentsSize,widget); // heavy calculation by Qt
-
       const QStyleOptionViewItem *opt =
           qstyleoption_cast<const QStyleOptionViewItem*>(option);
       if (opt)
       {
-        const QString group = "ItemView";
-        const frame_spec fspec = getFrameSpec(group);
-        const label_spec lspec = getLabelSpec(group);
-        const size_spec sspec = getSizeSpec(group);
-        QStyleOptionViewItem::Position pos = opt->decorationPosition;
-
-        s.rheight() += fspec.top + fspec.bottom;
-        /* the width is already increased with PM_FocusFrameHMargin */
-        //s.rwidth() += fspec.left + fspec.right;
-
-        bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration);
-
-        /* this isn't needed anymore because PM_FocusFrameHMargin and
-           PM_FocusFrameVMargin are adjusted to put icon inside frame */
-        /*if (hasIcon)
-        {
-          // put the icon inside the frame (->SE_ItemViewItemDecoration)
-          s.rwidth() += fspec.left + fspec.right;
-          s.rheight() += fspec.top + fspec.bottom;
-          // forget about text-icon spacing because the text margin
-          // is used for it automatically (-> Qt -> qcomonstyle.cpp)
-          if (pos == QStyleOptionViewItem::Top || pos == QStyleOptionViewItem::Bottom)
-            s.rheight() += lspec.tispace;
-          else if (pos == QStyleOptionViewItem::Left || pos == QStyleOptionViewItem::Right)
-            s.rwidth() += lspec.tispace;
-        }*/
-
-        Qt::Alignment align = opt->displayAlignment;
-
-        if (align & Qt::AlignLeft)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Left)
-            s.rwidth() += lspec.left;
-        }
-        else if (align & Qt::AlignRight)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Right)
-            s.rwidth() += lspec.right;
-        }
-        else if (!hasIcon)
-          s.rwidth() += lspec.left + lspec.right;
-
-        if (align & Qt::AlignTop)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Top)
-            s.rheight() += lspec.top;
-        }
-        else if (align & Qt::AlignBottom)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Bottom)
-            s.rheight() += lspec.bottom;
-        }
-        else if (!hasIcon)
-          s.rheight() += lspec.top + lspec.bottom;
-
+        QRect decorationRect, displayRect, checkRect;
+        viewItemLayout(opt, &checkRect, &decorationRect, &displayRect, true);
+        s = (decorationRect|displayRect|checkRect).size();
+        if (decorationRect.isValid() && s.height() == decorationRect.height())
+          s.rheight() += 2; // as in qcommonstyle.cpp
+        if (checkRect.isValid() && s.height() == checkRect.height())
+          s.rheight() += 2;
+        const size_spec sspec = getSizeSpec("ItemView");
         s = s.expandedTo(QSize(0, // minW doesn't have meaning here
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
       }
-
-      // the item text may be inside a button like in Kate's font preferences (see SE_PushButtonContents)
-      /*const QStyleOptionViewItem *opt =
-          qstyleoption_cast<const QStyleOptionViewItem*>(option);
-      if (opt)
-      {
-        const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
-        const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonCommand"));
-        int h = opt->font.pointSize() + fspec.top + fspec.bottom + fspec1.top + fspec1.bottom;
-        if (h > s.height())
-          s.setHeight(h);
-      }*/
-
-      return s;
+      return s.expandedTo(contentsSize);
     }
 
     case CT_TabWidget : {
@@ -14567,20 +14500,6 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
     case SE_ComboBoxFocusRect :
     case SE_SliderFocusRect : return QRect();
 
-    /* this is needed for QCommonStyle to draw
-       the focus rect at CE_ItemViewItem */
-    case SE_ItemViewItemFocusRect : {
-      QRect r;
-      if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
-      {
-        if (option->state & State_Selected)
-          r = interiorRect(option->rect, getFrameSpec(QStringLiteral("ItemView")));
-        else
-          r = option->rect.adjusted(1,1,-1,-1);
-      }
-      return r;
-    }
-
     case SE_ToolBoxTabContents : {
       if (option->direction == Qt::RightToLeft)
         return option->rect.adjusted(30,0,0,0);
@@ -14765,133 +14684,42 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         return rect;
     }
 
+    case SE_ItemViewItemCheckIndicator:
+      if (!qstyleoption_cast<const QStyleOptionViewItem*>(option))
+        return subElementRect(SE_CheckBoxIndicator, option, widget);
+      /* Falls through. */
+    case SE_ItemViewItemDecoration :
     case SE_ItemViewItemText : {
-      /*
-         This works alongside CT_ItemViewItem.
-      */
-
-      QRect r = QCommonStyle::subElementRect(element,option,widget);
+      QRect r;
       const QStyleOptionViewItem *opt =
           qstyleoption_cast<const QStyleOptionViewItem*>(option);
-
       if (opt)
       {
-        bool hasIcon(opt->features & QStyleOptionViewItem::HasDecoration);
-        Qt::Alignment align = opt->displayAlignment;
-        QStyleOptionViewItem::Position pos = opt->decorationPosition;
-        const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
-
-        /* The right and left text margins are added in
-           PM_FocusFrameHMargin, so there's no need to this.
-           They're always equal to each other because otherwise,
-           eliding would be incorrect. They also set the
-           horizontal text-icon spacing. */
-        /*if (align & Qt::AlignLeft)
+        if (!isViewItemCached(*opt))
         {
-          if (!hasIcon || pos != QStyleOptionViewItem::Left)
-            r.adjust(lspec.left, 0, 0, 0);
-        }
-        else if (align & Qt::AlignRight)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Right)
-            r.adjust(0, 0, -lspec.right, 0);
-        }*/
-
-        /* also add the top and bottom frame widths
-           because they aren't added in qcommonstyle.cpp */
-        const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
-        if (align & Qt::AlignTop)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Top)
-            r.adjust(0, lspec.top+fspec.top, 0, 0);
-        }
-        else if (align & Qt::AlignBottom)
-        {
-          if (!hasIcon || pos != QStyleOptionViewItem::Bottom)
-            r.adjust(0, 0, 0, -lspec.bottom-fspec.bottom);
-        }
-        else if (!hasIcon || (pos != QStyleOptionViewItem::Top
-                              && pos != QStyleOptionViewItem::Bottom))
-        {
-          /* give all the available vertical space to the text
-             (good when editing the item) */
-          if (r.top() > option->rect.top())
-            r.setTop(option->rect.top());
-          if (r.bottom() < option->rect.bottom())
-            r.setBottom(option->rect.bottom());
-        }
-
-        if (hasIcon)
-        {
-          /* forget about text-icon spacing because the text
-             margin is used for it (-> Qt -> qcomonstyle.cpp) */
-          ;
-          /*if (pos == QStyleOptionViewItem::Left)
-            r.adjust(lspec.tispace, 0, lspec.tispace, 0);
-          else if (pos == QStyleOptionViewItem::Right)
-            r.adjust(-lspec.tispace, 0, -lspec.tispace, 0);
-          else if (pos == QStyleOptionViewItem::Top)
-            r.adjust(0, lspec.tispace, 0, lspec.tispace);
-          else if (pos == QStyleOptionViewItem::Bottom)
-            r.adjust(0, -lspec.tispace, 0, -lspec.tispace);*/
-        }
-        else
-        {
-          /* deal with the special case, where the text has no
-             vertical alignment (a bug in the Qt file dialog?) */
-          if (align == Qt::AlignRight
-              || align == Qt::AlignLeft
-              || align == Qt::AlignHCenter
-              || align == Qt::AlignJustify)
-          {
-            QString txt = opt->text;
-            if (!txt.isEmpty())
-            {
-              QStringList l = txt.split('\n');
-              int txtHeight = QFontMetrics(opt->font).height()*(l.size());
-              if (l.size() > 1)
-              {
-                QRect br = QFontMetrics(opt->font).boundingRect(QRect(0,0,r.width(),txtHeight), Qt::AlignCenter, txt);
-                txtHeight = br.height();
-              }
-              r = alignedRect(option->direction,
-                             align | Qt::AlignVCenter,
-                             QSize(r.width(), txtHeight),
-                             r);
-            }
+          viewItemLayout(opt, &checkRect_, &decorationRect_, &displayRect_, false);
+          if (cachedOption_) {
+              delete cachedOption_;
+              cachedOption_ = nullptr;
           }
+          cachedOption_ = new QStyleOptionViewItem(*opt);
         }
+        if (element == SE_ItemViewItemCheckIndicator)
+          r = checkRect_;
+        else if (element == SE_ItemViewItemDecoration)
+          r = decorationRect_;
+        else if (element == SE_ItemViewItemText)
+          r = displayRect_;
       }
       return r;
     }
 
-    /* this isn't needed anymore because PM_FocusFrameHMargin and
-       PM_FocusFrameVMargin are adjusted to put icons inside frame */
-    /*case SE_ItemViewItemDecoration : {
-      QRect r = QCommonStyle::subElementRect(element,option,widget);
-      const QStyleOptionViewItem *opt =
-          qstyleoption_cast<const QStyleOptionViewItem*>(option);
-      if (opt)
-      {
-        // put the icon inside the frame
-        const QStyleOptionViewItem *vopt =
-            qstyleoption_cast<const QStyleOptionViewItem*>(option);
-        if (vopt && (vopt->features & QStyleOptionViewItem::HasDecoration))
-        {
-          QStyleOptionViewItem::Position pos = opt->decorationPosition;
-          const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
-          if (pos == QStyleOptionViewItem::Left)
-            r.adjust(fspec.left, 0, fspec.left, 0);
-          else if (pos == QStyleOptionViewItem::Right)
-            r.adjust(-fspec.right, 0, -fspec.right, 0);
-          else if (pos == QStyleOptionViewItem::Top)
-            r.adjust(0, fspec.top, 0, fspec.top);
-          else if (pos == QStyleOptionViewItem::Bottom)
-            r.adjust(0, -fspec.bottom, 0, -fspec.bottom);
-        }
-      }
+    case SE_ItemViewItemFocusRect : {
+      QRect r;
+      if (qstyleoption_cast<const QStyleOptionViewItem*>(option))
+        r = option->rect.adjusted(1,1,-1,-1);
       return r;
-    }*/
+    }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
     case SE_PushButtonBevel : {

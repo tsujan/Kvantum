@@ -23,6 +23,7 @@
 #include <QItemDelegate>
 #include <QAbstractItemView>
 #include <QToolButton>
+#include <QTextOption>
 
 #include "shortcuthandler.h"
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
@@ -402,6 +403,41 @@ class Style : public QCommonStyle {
     /* Checking whether dragging from buttons is enabled and in progress: */
     bool btnDragInProgress() const;
 
+    /* These methods are for item views:*/
+    QSize viewItemSize(const QStyleOptionViewItem *option, int role) const;
+    void viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
+                        QRect *pixmapRect, QRect *textRect, bool sizehint) const;
+    QString calculateElidedText(const QString &text,
+                                const QTextOption &textOption,
+                                const QFont &font,
+                                const QRect &textRect,
+                                const Qt::Alignment valign,
+                                Qt::TextElideMode textElideMode,
+                                int flags,
+                                bool lastVisibleLineShouldBeElided,
+                                QPointF *paintStartPosition) const;
+    void viewItemDrawText(QPainter *p, const QStyleOptionViewItem *option, const QRect &rect) const;
+    void drawViewItem(const QStyleOption *option,
+                      QPainter *painter,
+                      const QWidget *widget) const;
+    bool isViewItemCached(const QStyleOptionViewItem &option) const {
+        return cachedOption_ != nullptr
+               && (option.widget == cachedOption_->widget
+                   && option.index == cachedOption_->index
+                   && option.state == cachedOption_->state
+                   && option.rect == cachedOption_->rect
+                   && option.text == cachedOption_->text
+                   && option.direction == cachedOption_->direction
+                   && option.displayAlignment == cachedOption_->displayAlignment
+                   && option.decorationAlignment == cachedOption_->decorationAlignment
+                   && option.decorationPosition == cachedOption_->decorationPosition
+                   && option.decorationSize == cachedOption_->decorationSize
+                   && option.features == cachedOption_->features
+                   && option.icon.isNull() == cachedOption_->icon.isNull()
+                   && option.font == cachedOption_->font
+                   && option.viewItemPosition == cachedOption_->viewItemPosition);
+    }
+
   private slots:
     /* Called on timer timeout to advance busy progress bars. */
     void advanceProgressbar();
@@ -502,6 +538,10 @@ class Style : public QCommonStyle {
     mutable QHash<const QString, bool>elements_;
 
     mutable QHash<const QObject*, Animation*> animations_; // For transient scrollbars
+
+    // For item views:
+    mutable QStyleOptionViewItem *cachedOption_;
+    mutable QRect decorationRect_, displayRect_, checkRect_;
 };
 }
 

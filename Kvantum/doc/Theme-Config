@@ -1060,7 +1060,7 @@ text.margin.right                 Integer             The sizes of the text marg
                                                       texts are not drawn by Kvantum, the real
                                                       left/right text margins may be a little
                                                       greater than text.margin.left/right. In
-                                                      ItemView, the maximum margin is 3.
+                                                      ItemView, the maximum margin is 6.
 
 text.normal.color                 String (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid

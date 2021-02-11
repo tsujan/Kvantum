@@ -266,12 +266,17 @@ frame.expanded.right=1
 
 [ItemView]
 inherits=PanelButtonCommand
+text.margin=true
 text.toggle.color=white
 text.press.color=white
 frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+text.margin.top=0
+text.margin.bottom=0
+text.margin.left=2
+text.margin.right=2
 frame.expansion=8
 
 [Menu]

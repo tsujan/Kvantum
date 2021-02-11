@@ -35,6 +35,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              polishing.cpp \
              rendering.cpp \
              standardIcons.cpp \
+             viewItems.cpp \
              KvantumPlugin.cpp \
              blur/blurhelper.cpp \
              animation/animation.cpp

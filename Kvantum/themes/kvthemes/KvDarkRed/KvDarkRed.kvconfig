@@ -270,13 +270,17 @@ frame.right=2
 
 [ItemView]
 inherits=PanelButtonCommand
-text.margin=0
+text.margin=true
 frame.element=itemview
 interior.element=itemview
 frame.top=2
 frame.bottom=2
 frame.left=2
 frame.right=2
+text.margin.top=0
+text.margin.bottom=0
+text.margin.left=2
+text.margin.right=2
 min_height=0
 
 [Menu]
