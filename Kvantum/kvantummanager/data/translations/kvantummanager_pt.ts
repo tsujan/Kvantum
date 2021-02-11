@@ -445,12 +445,12 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished">Tem efeito somente quando o menu principal NÃO é estilizado pelo LXQt.
+        <translation>Tem efeito apenas quando o menu principal NÃO é estilizado pelo LXQt.
 
 Valores menores que 16 significam o tamanho do ícone padrão do menu.
 
-Necessita de painel LXQt para ser reiniciado ou por &quot;Configurações de sessão&quot;
-ou através de sair e entrar novamente.</translation>
+Necessita de painel LXQt para ser reiniciado ou por &quot;Definições de sessão&quot;
+ou através do sair e entrar novamente.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="774"/>
@@ -643,7 +643,7 @@ se esse tema fizer distinção entre elas?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho da fonte</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
