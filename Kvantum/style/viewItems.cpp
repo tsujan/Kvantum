@@ -163,22 +163,26 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   QSize pm(0, 0);
   if (hasPixmap)
     pm = pixmapRect->size();
-  if (sizehint)
-  { // the check button will be taken into account later
+  if (sizehint) // give enough space to the view-item, regardless of opt->rect
+  {
+    /* The vertical margin is added only when there is text or pixmap.
+       The check button width will be taken into account later. */
     if (opt->decorationPosition == QStyleOptionViewItem::Left
         || opt->decorationPosition == QStyleOptionViewItem::Right)
     {
-      w = textRect->width() + pm.width() + textMargin + (hasPixmap ? pixmapMargin+textIconSpacing : textMargin);
+      w = textRect->width() + pm.width() + (hasPixmap && hasText ? textIconSpacing : 0)
+          + 2*frameHMargin;
       h = qMax(checkRect->height(), qMax(textRect->height(), pm.height()));
-      if (hasPixmap || hasText)
-        h += 2*frameVMargin;
     }
     else
     {
-      if (hasPixmap || hasText)
-        w = qMax(textRect->width(), pm.width()) + 2*frameHMargin;
-      h = 2*frameVMargin + (hasText ? textIconSpacing : 0) + pm.height() + textRect->height();
+      w = qMax(textRect->width(), pm.width())
+          + 2*frameHMargin;
+      h = qMax(checkRect->height(),
+               pm.height() + textRect->height() + (hasPixmap && hasText ? textIconSpacing : 0));
     }
+    if (hasPixmap || hasText)
+      h += 2*frameVMargin;
   }
   else
   {
@@ -192,16 +196,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   {
     cw = checkRect->width() + ((hasPixmap || hasText) ? textIconSpacing : 0);
     if (sizehint)
-    {
       w += cw;
-      if (opt->decorationPosition == QStyleOptionViewItem::Left
-          || opt->decorationPosition == QStyleOptionViewItem::Right)
-      {
-        if (checkRect->height() > pm.height() + (hasPixmap ? textIconSpacing : 0) + textRect->height())
-          h = checkRect->height() + ((hasPixmap || hasText) ? 2*frameVMargin : 0);
-      }
-    }
-
     if (opt->direction == Qt::RightToLeft)
       check.setRect(x+w-checkMargin-checkRect->width(), y, checkRect->width(), h);
     else
@@ -212,36 +207,53 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   QRect decoration;
   switch (opt->decorationPosition) {
     case QStyleOptionViewItem::Top: {
+      /* consider the available space when drawing vertical view-items */
       int hMargin = 0, vMargin = 0, vSpacing = 4;
       if (!sizehint)
       {
-        hMargin = qMin(qMax(((opt->rect.width() - qMax(textRect->width(), pm.width()) - cw) / 2), 0),
+        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width()) / 2, 0),
                        frameHMargin);
         if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
         {
           vSpacing = qMin(opt->rect.height() - pm.height() - textRect->height() - 2*frameVMargin,
                           textIconSpacing);
         }
-        vMargin = qMin(qMax(((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2), 0),
+        vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
                        frameVMargin);
+        cw = checkRect->width();
+        if (hasCheck && (hasPixmap || hasText))
+        {
+          cw += qMin(qMax(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*hMargin, 0),
+                     textIconSpacing);
+        }
       }
 
       if (opt->direction == Qt::RightToLeft)
       {
         if (sizehint)
         {
-          decoration.setRect(x, y, w-cw, frameVMargin+pm.height());
+          decoration.setRect(x,
+                             y,
+                             w - cw - checkMargin,
+                             frameVMargin + pm.height());
           display.setRect(x,
-                          y + frameVMargin+pm.height() + textIconSpacing,
-                          w - cw,
-                          h - pm.height() - frameVMargin - textIconSpacing);
+                          y + frameVMargin + pm.height(),
+                          w - cw - checkMargin,
+                          h - pm.height() - frameVMargin);
         }
         else
         {
-          decoration.setRect(x, y+vMargin, w-cw, pm.height());
+          check.setRect(x + w - hMargin - checkRect->width(),
+                        y,
+                        checkRect->width(),
+                        h);
+          decoration.setRect(x + hMargin,
+                             y + vMargin,
+                             w - cw - 2*hMargin,
+                             pm.height());
           display.setRect(x + hMargin,
                           y + vMargin + pm.height() + vSpacing,
-                          w - 2*hMargin - cw,
+                          w - cw - 2*hMargin,
                           h - pm.height() - 2*vMargin - vSpacing);
         }
       }
@@ -249,18 +261,28 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       {
         if (sizehint)
         {
-          decoration.setRect(x+cw, y, w-cw, frameVMargin+pm.height());
-          display.setRect(x + cw,
-                          y + frameVMargin+pm.height() + textIconSpacing,
-                          w - cw,
-                          h - pm.height() - frameVMargin - textIconSpacing);
+          decoration.setRect(x + cw + checkMargin,
+                             y,
+                             w - cw - checkMargin,
+                             frameVMargin + pm.height());
+          display.setRect(x + cw + checkMargin,
+                          y + frameVMargin + pm.height(),
+                          w - cw - checkMargin,
+                          h - pm.height() - frameVMargin);
         }
         else
         {
-          decoration.setRect(x+cw, y+vMargin, w-cw, pm.height());
-          display.setRect(x + hMargin + cw,
+          check.setRect(x + hMargin,
+                        y,
+                        checkRect->width(),
+                        h);
+          decoration.setRect(x + cw + hMargin,
+                             y + vMargin,
+                             w - cw - 2*hMargin,
+                             pm.height());
+          display.setRect(x + cw + hMargin,
                           y + vMargin + pm.height() + vSpacing,
-                          w - 2*hMargin - cw,
+                          w - cw - 2*hMargin,
                           h - pm.height() - 2*vMargin - vSpacing);
         }
       }
@@ -270,33 +292,49 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       int hMargin = 0, vMargin = 0, vSpacing = 4;
       if (!sizehint)
       {
-        hMargin = qMin(qMax(((opt->rect.width() - qMax(textRect->width(), pm.width()) - cw) / 2), 0),
+        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width()) / 2, 0),
                        frameHMargin);
         if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
         {
           vSpacing = qMin(opt->rect.height() - pm.height() - textRect->height() - 2*frameVMargin,
                           textIconSpacing);
         }
-        vMargin = qMin(qMax(((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2), 0),
+        vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
                        frameVMargin);
+        cw = checkRect->width();
+        if (hasCheck && (hasPixmap || hasText))
+        {
+          cw += qMin(qMax(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*hMargin, 0),
+                     textIconSpacing);
+        }
       }
 
       if (opt->direction == Qt::RightToLeft)
       {
         if (sizehint)
         {
-          decoration.setRect(x, y-frameVMargin-pm.height(), w-cw, frameVMargin+pm.height());
+          decoration.setRect(x,
+                             y + h - frameVMargin - pm.height(),
+                             w - cw - checkMargin,
+                             frameVMargin + pm.height());
           display.setRect(x,
                           y,
-                          w - cw,
-                          h - pm.height() - frameVMargin - textIconSpacing);
+                          w - cw - checkMargin,
+                          h - pm.height() - frameVMargin);
         }
         else
         {
-          decoration.setRect(x, y-vMargin-pm.height(), w-cw, pm.height());
+          check.setRect(x + w - hMargin - checkRect->width(),
+                        y,
+                        checkRect->width(),
+                        h);
+          decoration.setRect(x + hMargin,
+                             y + h - vMargin - pm.height(),
+                             w - cw - 2*hMargin,
+                             pm.height());
           display.setRect(x + hMargin,
                           y + vMargin,
-                          w - 2*hMargin - cw,
+                          w - cw - 2*hMargin,
                           h - pm.height() - 2*vMargin - vSpacing);
         }
       }
@@ -304,18 +342,28 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       {
         if (sizehint)
         {
-          decoration.setRect(x+cw, y-frameVMargin-pm.height(), w-cw, frameVMargin+pm.height());
-          display.setRect(x + cw,
+          decoration.setRect(x + cw + checkMargin,
+                             y + h - frameVMargin - pm.height(),
+                             w - cw - checkMargin,
+                             frameVMargin + pm.height());
+          display.setRect(x + cw + checkMargin,
                           y,
-                          w - cw,
-                          h - pm.height() - frameVMargin - textIconSpacing);
+                          w - cw - checkMargin,
+                          h - pm.height() - frameVMargin);
         }
         else
         {
-          decoration.setRect(x+cw, y-vMargin-pm.height(), w-cw, pm.height());
-          display.setRect(x + hMargin + cw,
+          check.setRect(x + hMargin,
+                        y,
+                        checkRect->width(),
+                        h);
+          decoration.setRect(x + cw + hMargin,
+                             y + h - vMargin - pm.height(),
+                             w - cw - 2*hMargin,
+                             pm.height());
+          display.setRect(x + cw + hMargin,
                           y + vMargin,
-                          w - 2*hMargin - cw,
+                          w - cw - 2*hMargin,
                           h - pm.height() - 2*vMargin - vSpacing);
         }
       }
@@ -326,7 +374,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       {
         if (sizehint)
         {
-          decoration.setRect(x + (hasCheck ? cw + checkMargin : 0),
+          decoration.setRect(x + cw + checkMargin,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
@@ -337,7 +385,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
                         y,
-                        w  -pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                         h);
       }
       else
@@ -355,7 +403,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         display.setRect(x,
                         y,
-                        w  -pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                         h);
       }
       break;
@@ -376,14 +424,14 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         display.setRect(x,
                         y,
-                        w  -pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                         h);
       }
       else
       {
         if (sizehint)
         {
-          decoration.setRect(x + (hasCheck ? cw + checkMargin : 0),
+          decoration.setRect(x + cw + checkMargin,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
@@ -394,7 +442,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
                         y,
-                        w  -pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                         h);
       }
       break;
