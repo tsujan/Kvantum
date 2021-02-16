@@ -1504,7 +1504,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="762"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>למחוק את &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="765"/>
@@ -1561,18 +1561,18 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2729"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב כבררת מחדל</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2888"/>
         <location filename="../../KvantumManager.cpp" line="2889"/>
         <source>About Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>על מנהל Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2888"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>מתרגמים</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2886"/>
@@ -1587,12 +1587,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="48"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation>נערך</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="49"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>בררת מחדל</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="512"/>
@@ -1602,7 +1602,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="519"/>
         <source>You might want to investigate the cause.</source>
-        <translation type="unfinished"></translation>
+        <translation>אולי עדיף לך לחקור את הגורם לכך.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="945"/>
