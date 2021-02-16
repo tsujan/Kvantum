@@ -14220,10 +14220,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         QRect decorationRect, displayRect, checkRect;
         viewItemLayout(opt, &checkRect, &decorationRect, &displayRect, true);
         s = (decorationRect|displayRect|checkRect).size();
-        if (decorationRect.isValid() && s.height() == decorationRect.height())
-          s.rheight() += 2; // as in qcommonstyle.cpp
         if (checkRect.isValid() && s.height() == checkRect.height())
-          s.rheight() += 2;
+          s.rheight() += 4;
         const size_spec sspec = getSizeSpec("ItemView");
         s = s.expandedTo(QSize(0, // minW doesn't have meaning here
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
