@@ -928,16 +928,16 @@
 <path style="fill:url(#linearGradient1823)" id="expand-tab-focused-bottomleft" d="m 148,747 v 6 c 0,5 1,6 6,6 h 6 v -12 z"/>
 <path style="fill:url(#linearGradient1827)" id="expand-tab-focused-topleft" d="m 148,747 c 0,-7 5,-12 12,-12 v 12 z"/>
 <path style="fill:url(#linearGradient1831)" id="expand-tab-focused-bottomright" d="m 188.5,747 c 0,7 -5,12 -12,12 v -12 z"/>
+</g>
 <g id="tab-close-normal">
 <rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-opacity:0"/>
-<path style="fill:#6e6e6e" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
-</g>
+<path style="fill:#6e6e6e" d="m 329,799 c -2.74657,0 -5,2.25343 -5,5 0,2.74656 2.25343,5 5,5 2.74656,0 5,-2.25344 5,-5 0,-2.74657 -2.25344,-5 -5,-5 z m 0,2.5 c 1.39546,0 2.5,1.10453 2.5,2.5 0,1.39546 -1.10454,2.5 -2.5,2.5 -1.39547,0 -2.5,-1.10454 -2.5,-2.5 0,-1.39547 1.10453,-2.5 2.5,-2.5 z"/>
 </g>
 <path style="fill:#4b6da0;fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 369,796 a 8,8 0 0 0 -8,8 8,8 0 0 0 8,8 8,8 0 0 0 8,-8 8,8 0 0 0 -8,-8 z m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z"/>
 <use width="100%" height="100%" style="opacity:.9" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-20)"/>
-<g style="fill-rule:evenodd" id="tab-close-disabled" transform="translate(60)">
-<rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-opacity:0"/>
-<path style="fill-opacity:.275" d="m 329,799.5 a 4.5,4.5 0 0 0 -4.5,4.5 4.5,4.5 0 0 0 4.5,4.5 4.5,4.5 0 0 0 4.5,-4.5 4.5,4.5 0 0 0 -4.5,-4.5 z m 0,2.25 a 2.25,2.25 0 0 1 2.25,2.25 2.25,2.25 0 0 1 -2.25,2.25 2.25,2.25 0 0 1 -2.25,-2.25 2.25,2.25 0 0 1 2.25,-2.25 z"/>
+<g id="tab-close-disabled">
+<path style="fill-opacity:.27" d="m 389,799 c -2.74657,0 -5,2.25343 -5,5 0,2.74656 2.25343,5 5,5 2.74656,0 5,-2.25344 5,-5 0,-2.74657 -2.25344,-5 -5,-5 z m 0,2.5 c 1.39546,0 2.5,1.10453 2.5,2.5 0,1.39546 -1.10454,2.5 -2.5,2.5 -1.39547,0 -2.5,-1.10454 -2.5,-2.5 0,-1.39547 1.10453,-2.5 2.5,-2.5 z"/>
+<rect width="18" x="380" y="795" height="18" style="fill:#5a5a5a;fill-opacity:0"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-toggled-bottomleft" transform="matrix(1,0,0,-1,180,273)"/>
 <use width="100%" height="100%" xlink:href="#border-button-normal-top" id="border-button-toggled-bottom" transform="matrix(1,0,0,-1,180,273)"/>

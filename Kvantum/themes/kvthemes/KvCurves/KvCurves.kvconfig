@@ -205,7 +205,7 @@ text.margin.top=2
 text.margin.bottom=2
 frame.element=tab
 indicator.element=tab
-indicator.size=9
+indicator.size=12
 text.press.color=white
 text.toggle.color=white
 
