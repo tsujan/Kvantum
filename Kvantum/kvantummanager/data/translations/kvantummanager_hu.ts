@@ -24,20 +24,20 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;A &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sok témával rendelkezik, de külső témák is telepíthetők, hogy azok is használják. Itt választhatja ki a téma mappáját, és a lentebbi gombbal telepítheti a home könyvtárába.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;A &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sok témával rendelkezik, de külső témák is telepíthetők, hogy azokat is lehessen. Itt választhatja ki a téma mappáját, és a lenti gombbal telepítheti a home könyvtárába.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished">Mappa kiválasztása</translation>
+        <translation>Mappa kiválasztása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished">Téma hozzáadása a témák listájához.
-A Kvantum saját témáin kívül ezt is használhatja.</translation>
+        <translation>Téma hozzáadása a témák listájához.
+A Kvantum a saját témáin kívül ezt is használhatja.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -65,7 +65,7 @@ A Kvantum saját témáin kívül ezt is használhatja.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished">A Kvantum ezt a témát fogja használni!
+        <translation>A Kvantum ezt a témát fogja használni!
 
 A letiltott gomb azt jelenti, hogy
 már ez a téma van használatban.</translation>
@@ -85,14 +85,14 @@ már ez a téma van használatban.</translation>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished">Visszatérés a téma alapértelmezett (root)
+        <translation>Visszatérés a téma alapértelmezett (root)
 beállításaihoz.
 (Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Visszatér a téma alapértelmezett (root) beállításaihoz! &lt;/p&gt; &lt;p&gt; A kattintás és a megerősítés után a konfiguráció minden változtatása elveszik, de a valószínűleg testreszabott SVG a fájl sértetlen marad. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt; &lt;p&gt; Visszatér a téma alapértelmezett (root) beállításaihoz! &lt;/p&gt; &lt;p&gt; A kattintás és a megerősítés után a konfiguráció minden változtatása elveszik, de a valószínűleg testreszabott SVG a fájl sértetlen marad. &lt;/p&gt; &lt;/body&gt; &lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -131,13 +131,13 @@ beállításaihoz.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished">Jelölje ki innen az összes dobozt, ha azt szeretné,
+        <translation>Jelölje ki innen az összes négyzetet, ha azt szeretné,
 hogy az elemek az alapértelmezésük szerint jelenjenek meg.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished">Hackek</translation>
+        <translation>Hackek</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
@@ -147,7 +147,7 @@ hogy az elemek az alapértelmezésük szerint jelenjenek meg.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished">Normál betűtípus a gombokhoz</translation>
+        <translation>Normál betű az alapértelmezett gombokhoz</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -156,21 +156,21 @@ hogy az elemek az alapértelmezésük szerint jelenjenek meg.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished">A PCManFM-qt oldalsávjának egyesítése a környezetével.
+        <translation>A PCManFM-qt oldalsávjának egyesítése a környezetével.
 
 Az LXQt alatt ez ki- és bejelelentkezést igényel, vagy a PCManFM-qt
-bezárását aztán az asztal szolgáltatás leállítását és elindítását
+bezárását és az asztal szolgáltatás leállítását és elindítását
 az LXQt munkamenetbeállításokban.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="449"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished">Átlátszó oldalsáv a PCManfm-qt-hoz</translation>
+        <translation>Átlátszó oldalsáv a PCManfm-qt-hoz</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished">Ikon nélküli nyomógombok</translation>
+        <translation>Ikon nélküli nyomógombok</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -184,7 +184,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished">Átlátszó nézet a PCManFM-qt-hoz</translation>
+        <translation>Átlátszó nézet a PCManFM-qt-hoz</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="493"/>
@@ -194,17 +194,17 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="508"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished">Kifejezetten áttetsző ablakok elmosása</translation>
+        <translation>Kifejezetten áttetsző ablakok elmosása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished">Egyetlen felső eszköztár</translation>
+        <translation>Egyetlen felső eszköztár</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished">Ne rajzoljon semmilyen hátteret a KTitle-ek számára.</translation>
+        <translation>Ne rajzoljon hátteret a KTitle-ek számára.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -220,7 +220,7 @@ with LXQt Session Settings.</source>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished">Ne színezze a kiválasztott címikonokat
+        <translation>Ne színezze a kiválasztott címikonokat
 a kiemelési színnel!</translation>
     </message>
     <message>
