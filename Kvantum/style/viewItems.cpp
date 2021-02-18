@@ -378,15 +378,39 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
+          display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                          y,
+                          w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                          h);
         }
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
+          /* let the text use the right margin only if it's left aligned */
+          if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+          }
+          else if ((opt->displayAlignment & Qt::AlignHCenter)
+                   || (opt->displayAlignment & Qt::AlignJustify))
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
         }
-        display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
-                        y,
-                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
-                        h);
       }
       else
       {
@@ -396,19 +420,42 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
+          display.setRect(x,
+                          y,
+                          w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                          h);
         }
         else
         {
           decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
+          if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(x + frameHMargin,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+          }
+          else if ((opt->displayAlignment & Qt::AlignHCenter)
+                   || (opt->displayAlignment & Qt::AlignJustify))
+          {
+            display.setRect(x + frameHMargin,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else
+          {
+            display.setRect(x,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
         }
-        display.setRect(x,
-                        y,
-                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
-                        h);
       }
       break;
     }
-    case QStyleOptionViewItem::Right: {
+    case QStyleOptionViewItem::Right: { // horizontal mirroring of QStyleOptionViewItem::Left
       if (opt->direction == Qt::LeftToRight)
       {
         if (sizehint)
@@ -417,15 +464,38 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
+          display.setRect(x,
+                          y,
+                          w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                          h);
         }
         else
         {
           decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
+          if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(x + frameHMargin,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+          }
+          else if ((opt->displayAlignment & Qt::AlignHCenter)
+                   || (opt->displayAlignment & Qt::AlignJustify))
+          {
+            display.setRect(x + frameHMargin,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else
+          {
+            display.setRect(x,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
         }
-        display.setRect(x,
-                        y,
-                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
-                        h);
       }
       else
       {
@@ -435,15 +505,39 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                              y,
                              pm.width() + (hasCheck ? 0 : pixmapMargin),
                              h);
+          display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                          y,
+                          w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                          h);
         }
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
+          /* let the text use the right margin only if it's left aligned */
+          if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+          }
+          else if ((opt->displayAlignment & Qt::AlignHCenter)
+                   || (opt->displayAlignment & Qt::AlignJustify))
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
         }
-        display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
-                        y,
-                        w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
-                        h);
       }
       break;
     }
