@@ -13429,9 +13429,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
   switch (type) {
     case CT_LineEdit : {
-      QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
       if (qobject_cast<QAbstractItemView*>(getParent(widget,2))) // when editing itemview texts
-        return defaultSize;
+        return contentsSize + QSize(2,2);
 
       QFont f;
       if (widget) f = widget->font();
@@ -13450,6 +13449,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         clearBtnSize = pixelMetric(PM_SmallIconSize);
 #endif
 
+      QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
       int minW = sspec.minW;
       sspec.minW = 0;
       s = sizeCalculated(f,fspec,lspec,sspec,QStringLiteral("W"),QSize(clearBtnSize,clearBtnSize));
@@ -14220,8 +14220,6 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         QRect decorationRect, displayRect, checkRect;
         viewItemLayout(opt, &checkRect, &decorationRect, &displayRect, true);
         s = (decorationRect|displayRect|checkRect).size();
-        if (checkRect.isValid() && s.height() == checkRect.height())
-          s.rheight() += 4;
         const size_spec sspec = getSizeSpec("ItemView");
         s = s.expandedTo(QSize(0, // minW doesn't have meaning here
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));

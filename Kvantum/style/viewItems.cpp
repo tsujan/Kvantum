@@ -165,24 +165,23 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
     pm = pixmapRect->size();
   if (sizehint) // give enough space to the view-item, regardless of opt->rect
   {
-    /* The vertical margin is added only when there is text or pixmap.
-       The check button width will be taken into account later. */
+    /* the check button width will be taken into account later */
     if (opt->decorationPosition == QStyleOptionViewItem::Left
         || opt->decorationPosition == QStyleOptionViewItem::Right)
     {
       w = textRect->width() + pm.width() + (hasPixmap && hasText ? textIconSpacing : 0)
           + 2*frameHMargin;
-      h = qMax(checkRect->height(), qMax(textRect->height(), pm.height()));
+      h = qMax(checkRect->height(), qMax(textRect->height(), pm.height()))
+          + 2*frameVMargin;
     }
     else
     {
       w = qMax(textRect->width(), pm.width())
           + 2*frameHMargin;
       h = qMax(checkRect->height(),
-               pm.height() + textRect->height() + (hasPixmap && hasText ? textIconSpacing : 0));
+               pm.height() + textRect->height() + (hasPixmap && hasText ? textIconSpacing : 0))
+          + 2*frameVMargin;
     }
-    if (hasPixmap || hasText)
-      h += 2*frameVMargin;
   }
   else
   {
@@ -196,11 +195,20 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   {
     cw = checkRect->width() + ((hasPixmap || hasText) ? textIconSpacing : 0);
     if (sizehint)
+    {
       w += cw;
-    if (opt->direction == Qt::RightToLeft)
-      check.setRect(x+w-checkMargin-checkRect->width(), y, checkRect->width(), h);
+      if (opt->direction == Qt::RightToLeft)
+        check.setRect(x+w-checkRect->width(), y, checkRect->width(), h);
+      else // include the left margin (the exact width isn't important)
+        check.setRect(x, y, checkRect->width(), h);
+    }
     else
-      check.setRect(x+checkMargin, y, checkRect->width(), h);
+    {
+      if (opt->direction == Qt::RightToLeft)
+        check.setRect(x+w-checkMargin-checkRect->width(), y, checkRect->width(), h);
+      else
+        check.setRect(x+checkMargin, y, checkRect->width(), h);
+    }
   }
 
   QRect display;
@@ -211,7 +219,19 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       int hMargin = 0, vMargin = 0, vSpacing = 4;
       if (!sizehint)
       {
-        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width()) / 2, 0),
+        int hSpacing = 0;
+        cw = checkRect->width();
+        if (hasCheck && (hasPixmap || hasText))
+        {
+          hSpacing = 4;
+          if (opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing > 2*frameHMargin)
+          {
+            hSpacing = qMin(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*frameHMargin,
+                            textIconSpacing);
+          }
+          cw += hSpacing;
+        }
+        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing) / 2, 0),
                        frameHMargin);
         if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
         {
@@ -220,12 +240,6 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
                        frameVMargin);
-        cw = checkRect->width();
-        if (hasCheck && (hasPixmap || hasText))
-        {
-          cw += qMin(qMax(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*hMargin, 0),
-                     textIconSpacing);
-        }
       }
 
       if (opt->direction == Qt::RightToLeft)
@@ -292,7 +306,19 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       int hMargin = 0, vMargin = 0, vSpacing = 4;
       if (!sizehint)
       {
-        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width()) / 2, 0),
+        int hSpacing = 0;
+        cw = checkRect->width();
+        if (hasCheck && (hasPixmap || hasText))
+        {
+          hSpacing = 4;
+          if (opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing > 2*frameHMargin)
+          {
+            hSpacing = qMin(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*frameHMargin,
+                            textIconSpacing);
+          }
+          cw += hSpacing;
+        }
+        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing) / 2, 0),
                        frameHMargin);
         if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
         {
@@ -301,12 +327,6 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
         vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
                        frameVMargin);
-        cw = checkRect->width();
-        if (hasCheck && (hasPixmap || hasText))
-        {
-          cw += qMin(qMax(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*hMargin, 0),
-                     textIconSpacing);
-        }
       }
 
       if (opt->direction == Qt::RightToLeft)
@@ -370,6 +390,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       break;
     }
     case QStyleOptionViewItem::Left: {
+      /* let the text use the right margin only if it's left aligned */
       if (opt->direction == Qt::LeftToRight)
       {
         if (sizehint)
@@ -386,7 +407,6 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
-          /* let the text use the right margin only if it's left aligned */
           if (opt->displayAlignment & Qt::AlignRight)
           {
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
@@ -455,7 +475,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       }
       break;
     }
-    case QStyleOptionViewItem::Right: { // horizontal mirroring of QStyleOptionViewItem::Left
+    case QStyleOptionViewItem::Right: {
       if (opt->direction == Qt::LeftToRight)
       {
         if (sizehint)
@@ -474,10 +494,9 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
           if (opt->displayAlignment & Qt::AlignRight)
           {
-            display.setRect(x + frameHMargin,
+            display.setRect(x,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else if ((opt->displayAlignment & Qt::AlignHCenter)
@@ -490,9 +509,10 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           }
           else
           {
-            display.setRect(x,
+            display.setRect(x + frameHMargin,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
                             h);
           }
         }
@@ -513,13 +533,11 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
-          /* let the text use the right margin only if it's left aligned */
           if (opt->displayAlignment & Qt::AlignRight)
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else if ((opt->displayAlignment & Qt::AlignHCenter)
@@ -532,9 +550,10 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           }
           else
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
                             h);
           }
         }
