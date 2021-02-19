@@ -87,6 +87,8 @@ public:
                                        toolBar->sizeHint().width() + toolBar_2->sizeHint().width())),
                            ag.width()),
                      qMin (size().height(), ag.height())));
+
+      splitter->setSizes (QList<int>() << 100 << 100 << 100);
     }
   }
 

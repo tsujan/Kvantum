@@ -2223,6 +2223,46 @@ check box</string>
           </item>
          </item>
         </widget>
+        <widget class="QListWidget" name="listWidget">
+         <property name="viewMode">
+          <enum>QListView::IconMode</enum>
+         </property>
+         <item>
+          <property name="text">
+           <string>1st Item</string>
+          </property>
+          <property name="checkState">
+           <enum>Unchecked</enum>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+          </property>
+          <property name="flags">
+           <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2nd Item</string>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+          </property>
+          <property name="flags">
+           <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3rd Item</string>
+          </property>
+          <property name="flags">
+           <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+        </widget>
         <widget class="QMdiArea" name="mdiArea">
          <widget class="QWidget" name="subwindow">
           <property name="windowTitle">
