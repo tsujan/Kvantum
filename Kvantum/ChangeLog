@@ -7,6 +7,7 @@ V0.19.0
  * Increased the drag distance and delay when dragging is done from buttons.
  * Try to do less calculations to get widget sizes by not consulting QCommonStyle as far as possible.
  * Draw view-items independently of QCommonStyle to apply all size settings correctly.
+ * Always reserve the vertical space for a single-line text in view-items. QCommonStyle is inconsistent in this regard and may create a tiny item editor when the text is empty. Qt doesn't give enough info to QStyle for knowing whether the editor is active.
 
 V0.18.0
 ---------

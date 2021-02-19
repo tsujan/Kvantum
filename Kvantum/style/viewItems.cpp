@@ -137,25 +137,25 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   const QWidget *widget = opt->widget;
   const bool hasCheck = checkRect->isValid();
   const bool hasPixmap = pixmapRect->isValid();
-  const bool hasText = textRect->isValid();
+  const bool hasText = true; // irrelevant (see below); kept for code editing
   const int frameHMargin = pixelMetric(QStyle::PM_FocusFrameHMargin, opt, widget) + 1;
   const int frameVMargin = pixelMetric(QStyle::PM_FocusFrameVMargin, opt, widget);
-  const int textMargin = hasText ? frameHMargin : 0;
   const int pixmapMargin = hasPixmap ? frameHMargin : 0;
   const int checkMargin = hasCheck ? frameHMargin : 0;
   const int x = opt->rect.left();
   const int y = opt->rect.top();
   int w = 0, h = 0;
 
-  const int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
+  int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
 
   /* if there is no text, we still want a decent height
      for the size hint and the editor */
-  if (textRect->height() == 0 && (!hasPixmap || !sizehint))
+  if (!textRect->isValid())
   {
-    const frame_spec fspec = getFrameSpec(QStringLiteral("ItemView"));
-    textRect->setHeight(opt->fontMetrics.height() + fspec.top + fspec.bottom);
+    textRect->setHeight(opt->fontMetrics.height());
+    textRect->setWidth(2);
   }
+  const int textMargin = hasText ? frameHMargin : 0;
 
   QSize pm(0, 0);
   if (hasPixmap)
@@ -208,41 +208,44 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
     }
   }
 
+  /* consider the available space when drawing vertical view-items */
+  int hMargin = 0, vMargin = 0, vSpacing = 0;
+  if (!sizehint
+      && (opt->decorationPosition == QStyleOptionViewItem::Top
+          || opt->decorationPosition == QStyleOptionViewItem::Bottom))
+  {
+    int hSpacing = 0;
+    cw = checkRect->width();
+    if (hasCheck && (hasPixmap || hasText))
+    {
+      hSpacing = qMin(4, textIconSpacing);
+      if (opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing > 2*frameHMargin)
+      {
+        hSpacing = qMin(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*frameHMargin,
+                        textIconSpacing);
+      }
+      cw += hSpacing;
+    }
+    hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing) / 2, 0),
+                   frameHMargin);
+    if (hasPixmap && hasText)
+    {
+      vSpacing = qMin(4, textIconSpacing);
+      if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
+      {
+        vSpacing = qMin(opt->rect.height() - pm.height() - textRect->height() - 2*frameVMargin,
+                        textIconSpacing);
+      }
+    }
+    vMargin = qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0);
+    if (hasText)
+      vMargin = qMin(vMargin, frameVMargin);
+  }
+
   QRect display;
   QRect decoration;
   switch (opt->decorationPosition) {
     case QStyleOptionViewItem::Top: {
-      /* consider the available space when drawing vertical view-items */
-      int hMargin = 0, vMargin = 0, vSpacing = 0;
-      if (!sizehint)
-      {
-        int hSpacing = 0;
-        cw = checkRect->width();
-        if (hasCheck && (hasPixmap || hasText))
-        {
-          hSpacing = 4;
-          if (opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing > 2*frameHMargin)
-          {
-            hSpacing = qMin(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*frameHMargin,
-                            textIconSpacing);
-          }
-          cw += hSpacing;
-        }
-        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing) / 2, 0),
-                       frameHMargin);
-        if (hasPixmap && hasText)
-        {
-          vSpacing = 4;
-          if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
-          {
-            vSpacing = qMin(opt->rect.height() - pm.height() - textRect->height() - 2*frameVMargin,
-                            textIconSpacing);
-          }
-        }
-        vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
-                       frameVMargin);
-      }
-
       if (opt->direction == Qt::RightToLeft)
       {
         if (sizehint)
@@ -304,36 +307,6 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       break;
     }
     case QStyleOptionViewItem::Bottom: {
-      int hMargin = 0, vMargin = 0, vSpacing = 0;
-      if (!sizehint)
-      {
-        int hSpacing = 0;
-        cw = checkRect->width();
-        if (hasCheck && (hasPixmap || hasText))
-        {
-          hSpacing = 4;
-          if (opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing > 2*frameHMargin)
-          {
-            hSpacing = qMin(opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - 2*frameHMargin,
-                            textIconSpacing);
-          }
-          cw += hSpacing;
-        }
-        hMargin = qMin(qMax((opt->rect.width() - qMax(textRect->width(), pm.width()) - checkRect->width() - hSpacing) / 2, 0),
-                       frameHMargin);
-        if (hasPixmap && hasText)
-        {
-          vSpacing = 4;
-          if (opt->rect.height() - pm.height() - textRect->height() - vSpacing > 2*frameVMargin)
-          {
-            vSpacing = qMin(opt->rect.height() - pm.height() - textRect->height() - 2*frameVMargin,
-                            textIconSpacing);
-          }
-        }
-        vMargin = qMin(qMax((opt->rect.height() - pm.height() - textRect->height() - vSpacing) / 2, 0),
-                       frameVMargin);
-      }
-
       if (opt->direction == Qt::RightToLeft)
       {
         if (sizehint)
