@@ -146,7 +146,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   const int y = opt->rect.top();
   int w = 0, h = 0;
 
-  int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
+  const int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
 
   /* if there is no text, we still want a decent height
      for the size hint and the editor */
