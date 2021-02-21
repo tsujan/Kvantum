@@ -5096,14 +5096,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             default: break;
           }
         }
-        if (opt->backgroundBrush.style() != Qt::NoBrush)
+        if (opt->backgroundBrush.style() != Qt::NoBrush
+            && !ivStatus.startsWith("pressed") && !ivStatus.startsWith("toggled"))
         {
-          /* in this case, the item is colored intentionally
-             (as in Konsole's color scheme editing dialog) */
+          /* In this case, the item is colored intentionally.
+             However, since QCommonStyle excludes the selected states, we did so too. */
           fspec.expansion = 0;
-          if (opt->state & State_HasFocus)
+          /*if (opt->state & State_HasFocus)
             renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.isAttached,true);
-          else if (ivStatus != "normal" && ivStatus != "disabled")
+          else*/ if (ivStatus != "normal" && ivStatus != "disabled")
           {
             if (isWidgetInactive(widget))
               ivStatus.append("-inactive");
@@ -5111,16 +5112,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
-          if ((ivStatus.startsWith("pressed") || ivStatus.startsWith("toggled"))
-              && !enoughContrast(col, opt->palette.color(QPalette::HighlightedText)))
-          {
+          //if ((ivStatus.startsWith("pressed") || ivStatus.startsWith("toggled"))
+              //&& !enoughContrast(col, opt->palette.color(QPalette::HighlightedText)))
+          //{
             /* Wireshark sets the whole color of "QStyleOptionViewItem::backgroundBrush".
                While there's no guarantee for a high contrast between that color and the
                highlighted text color for active items, Wireshark doesn't style active
                items itself. This workaround is for such cases of incomplete hard-coded styling. */
-            col = opt->palette.brush(QPalette::Active, QPalette::Highlight).color();
-            brush.setColor(col);
-          }
+            //col = opt->palette.brush(QPalette::Active, QPalette::Highlight).color();
+           // brush.setColor(col);
+          //}
           if (col.alpha() < 255)
           {
             /* this is for deciding on the text color at CE_ItemViewItem later */
@@ -5133,11 +5134,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->setBrushOrigin(oldBO);
           break;
         }
-        else if (opt->index.isValid() && !(opt->index.flags() & Qt::ItemIsEditable)
+        else if (indx.isValid() && !(indx.flags() & Qt::ItemIsEditable)
                  && iv && (option->state & State_Enabled))
         {
           /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */
-          if (QWidget *iw = iv->indexWidget(opt->index))
+          if (QWidget *iw = iv->indexWidget(indx))
           {
             const label_spec lspec = getLabelSpec(group);
             QColor col;
@@ -5696,7 +5697,7 @@ void Style::drawControl(QStyle::ControlElement element,
             QColor toggleColor = getFromRGBA(lspec.toggleColor);
             bool isInactive;
             QColor col;
-            if (opt->backgroundBrush.style() != Qt::NoBrush) //-> PE_PanelItemViewItem
+            if (opt->backgroundBrush.style() != Qt::NoBrush && state <= 2) //-> PE_PanelItemViewItem
             {
               col = QColor(Qt::white);
               Qt::BrushStyle bs = opt->backgroundBrush.style();
@@ -5719,7 +5720,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   }
                 }
               }
-              normalColor = focusColor = pressColor = toggleColor = col;
+              normalColor = focusColor = /*pressColor = toggleColor =*/ col;
               isInactive = false;
             }
             else

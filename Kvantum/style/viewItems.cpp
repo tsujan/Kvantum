@@ -731,8 +731,11 @@ void Style::drawViewItem(const QStyleOption *option,
     {
       QPalette::ColorGroup cg = opt->state & QStyle::State_Enabled ?
                                 QPalette::Normal : QPalette::Disabled;
-      if (cg == QPalette::Normal && !(opt->state & QStyle::State_Active))
+      /* QCommonStyle checks QStyle::State_Active,
+         which isn't consistent with inactive base color */
+      if (cg == QPalette::Normal && isWidgetInactive(widget))
           cg = QPalette::Inactive;
+
       if (opt->state & QStyle::State_Selected)
         painter->setPen(opt->palette.color(cg, QPalette::HighlightedText));
       else
