@@ -138,6 +138,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   const bool hasCheck = checkRect->isValid();
   const bool hasPixmap = pixmapRect->isValid();
   const bool hasText = true; // irrelevant (see below); kept for code editing
+  const bool emptyText = !textRect->isValid(); // used with horizontal items
   const int frameHMargin = pixelMetric(QStyle::PM_FocusFrameHMargin, opt, widget) + 1;
   const int frameVMargin = pixelMetric(QStyle::PM_FocusFrameVMargin, opt, widget);
   const int pixmapMargin = hasPixmap ? frameHMargin : 0;
@@ -368,7 +369,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       break;
     }
     case QStyleOptionViewItem::Left: {
-      /* let the text use the right margin only if it's left aligned */
+      /* let the text use the right margin only if it's left aligned and there is no space */
       if (opt->direction == Qt::LeftToRight)
       {
         if (sizehint)
@@ -385,20 +386,31 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
-          if (opt->displayAlignment & Qt::AlignRight)
+          if (emptyText)
+          { // give both margins to the display rectangle because it can be used by a widget
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing
+                                      : x + (hasCheck ? frameHMargin + cw : 0),
+                            y,
+                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+            break;
+          }
+          if ((opt->displayAlignment & Qt::AlignHCenter)
+              || (opt->displayAlignment & Qt::AlignJustify)
+              || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else if (opt->displayAlignment & Qt::AlignRight)
           {
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
-                            h);
-          }
-          else if ((opt->displayAlignment & Qt::AlignHCenter)
-                   || (opt->displayAlignment & Qt::AlignJustify))
-          {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
-                            y,
-                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else
@@ -426,20 +438,30 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
-          if (opt->displayAlignment & Qt::AlignRight)
+          if (emptyText)
+          {
+            display.setRect(x,
+                            y,
+                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            h);
+            break;
+          }
+          if ((opt->displayAlignment & Qt::AlignHCenter)
+              || (opt->displayAlignment & Qt::AlignJustify)
+              || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
+          {
+            display.setRect(x + frameHMargin,
+                            y,
+                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else if (opt->displayAlignment & Qt::AlignRight)
           {
             display.setRect(x + frameHMargin,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
-                            h);
-          }
-          else if ((opt->displayAlignment & Qt::AlignHCenter)
-                   || (opt->displayAlignment & Qt::AlignJustify))
-          {
-            display.setRect(x + frameHMargin,
-                            y,
-                            w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else
@@ -470,19 +492,29 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
-          if (opt->displayAlignment & Qt::AlignRight)
+          if (emptyText)
           {
             display.setRect(x,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
                             h);
+            break;
           }
-          else if ((opt->displayAlignment & Qt::AlignHCenter)
-                   || (opt->displayAlignment & Qt::AlignJustify))
+          if ((opt->displayAlignment & Qt::AlignHCenter)
+              || (opt->displayAlignment & Qt::AlignJustify)
+              || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
           {
             display.setRect(x + frameHMargin,
                             y,
                             w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(x,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else
@@ -511,19 +543,30 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         else
         {
           decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
-          if (opt->displayAlignment & Qt::AlignRight)
+          if (emptyText)
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing
+                                      : x + (hasCheck ? frameHMargin + cw : 0),
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
                             h);
+            break;
           }
-          else if ((opt->displayAlignment & Qt::AlignHCenter)
-                   || (opt->displayAlignment & Qt::AlignJustify))
+          if ((opt->displayAlignment & Qt::AlignHCenter)
+              || (opt->displayAlignment & Qt::AlignJustify)
+              || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
           {
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
                             y,
                             w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            h);
+          }
+          else if (opt->displayAlignment & Qt::AlignRight)
+          {
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+                            y,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else
