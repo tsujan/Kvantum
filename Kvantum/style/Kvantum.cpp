@@ -11357,7 +11357,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           if (styleObject && styleHint(SH_ScrollBar_Transient,option,widget))
           {
             qreal opacity = 0.0;
-            bool transient = !option->activeSubControls;
+            bool transient(option->activeSubControls == QStyle::SC_None);
 
             int oldPos = styleObject->property("_q_stylepos").toInt();
             int oldMin = styleObject->property("_q_stylemin").toInt();
@@ -11401,14 +11401,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
             ScrollbarAnimation *anim = qobject_cast<ScrollbarAnimation *>(animations_.value(styleObject));
             if (anim && anim->mode() == ScrollbarAnimation::Deactivating)
-            {
-              if (anim->isLastUpdate()) // ensure total transparency with the last frame
-                opacity = 0.0;
-              else
-                opacity = anim->currentValue();
-            }
+              opacity = anim->currentValue();
 
-            if (opacity == 0.0) return;
+            if (qFuzzyIsNull(opacity))
+              return; // as in "animation.cpp" -> ScrollbarAnimation::updateCurrentTime()
 
             isTransient = true;
             painter->save();

@@ -1,7 +1,7 @@
 // Adapted from Qt
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -98,7 +98,7 @@ void Animation::updateTarget()
 void Animation::start()
 {
   skip_ = 0;
-  QAbstractAnimation::start(DeleteWhenStopped);
+  QAbstractAnimation::start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 bool Animation::isUpdateNeeded() const
@@ -153,14 +153,6 @@ qreal NumberAnimation::currentValue() const
   return start_ + qMax(0.0, step) * (end_ - start_);
 }
 
-bool NumberAnimation::isLastUpdate() const
-{
-  if (duration() < 0) return false;
-
-  int frameDuration = (qMax(frameRate(),SixtyFps) * 50) / 3; // 60 updates per 1000 ms.
-  return (duration() - currentTime() < frameDuration);
-}
-
 bool NumberAnimation::isUpdateNeeded() const
 {
   if (Animation::isUpdateNeeded())
@@ -182,16 +174,16 @@ ScrollbarAnimation::ScrollbarAnimation(Mode mode, QObject *target) :
     mode_(mode)
 {
   switch (mode) {
-  case Activating: // not used
+  case Activating: // not used by Kvantum
     setDuration(ScrollBarFadeOutDuration);
-    setStartValue(0.01);
+    setStartValue(0.0);
     setEndValue(1.0);
     break;
   case Deactivating:
     setDuration(ScrollBarFadeOutDelay + ScrollBarFadeOutDuration);
     setDelay(ScrollBarFadeOutDelay);
     setStartValue(1.0);
-    setEndValue(0.01);
+    setEndValue(0.0);
     break;
   }
 }
@@ -201,11 +193,12 @@ ScrollbarAnimation::Mode ScrollbarAnimation::mode() const
   return mode_;
 }
 
-/*void ScrollbarAnimation::updateCurrentTime(int time)
+void ScrollbarAnimation::updateCurrentTime(int time)
 {
   NumberAnimation::updateCurrentTime(time);
+  /* make sure the target is updated in the end */
   if (mode_ == Deactivating && qFuzzyIsNull(currentValue()))
-    target()->setProperty("visible", QVariant(false));
-}*/
+    updateTarget();
+}
 
 }

@@ -1,7 +1,7 @@
 // Adapted from Qt
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -35,7 +35,7 @@ public:
 
   QObject *target() const;
 
-  int duration() const Q_DECL_OVERRIDE;
+  int duration() const override;
   void setDuration(int duration);
 
   int delay() const;
@@ -61,8 +61,8 @@ public Q_SLOTS:
   void start();
 
 protected:
-  virtual bool isUpdateNeeded() const;
   virtual void updateCurrentTime(int time) override;
+  virtual bool isUpdateNeeded() const;
 
 private:
   int delay_;
@@ -86,10 +86,9 @@ public:
   void setEndValue(qreal value);
 
   qreal currentValue() const;
-  bool isLastUpdate() const;
 
 protected:
-  bool isUpdateNeeded() const Q_DECL_OVERRIDE;
+  bool isUpdateNeeded() const override;
 
 private:
   qreal start_;
@@ -111,11 +110,8 @@ public:
 
   Mode mode() const;
 
-  bool wasActive() const;
-  void setActive(bool active);
-
-/*private slots:
-  void updateCurrentTime(int time) Q_DECL_OVERRIDE;*/
+private slots:
+  void updateCurrentTime(int time) override;
 
 private:
   Mode mode_;
