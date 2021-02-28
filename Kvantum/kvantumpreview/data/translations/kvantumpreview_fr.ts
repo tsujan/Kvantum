@@ -52,7 +52,7 @@ la largeur</translation>
         <source>Multi-line
  push button</source>
         <translation>Multi-ligne
-  bouton poussoir</translation>
+ bouton poussoir</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>

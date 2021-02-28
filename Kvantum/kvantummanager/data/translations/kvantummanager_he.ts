@@ -244,7 +244,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;לא לצייר רקע כלשהו לכותרת תפריטים (KDE)?&lt;/p&gt;&lt;p&gt;כותרות תפריטים הן כמו מפרידי תפריטים אבל בלי סמל וטקסט.&lt;/p&gt;&lt;p&gt;נדרשת יציאה וכניסה מהחשבון לטובת תפריטי KDE Plasma. ללוח של LXQt מספיקה הפעלה מחדש עם &lt;span style=&quot; font-style:italic;&quot;&gt;הגדרות הפעלה &lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
