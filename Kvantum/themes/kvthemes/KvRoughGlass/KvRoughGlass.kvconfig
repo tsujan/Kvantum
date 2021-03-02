@@ -101,14 +101,15 @@ single_top_toolbar=true
 tint_on_mouseover=0
 transparent_pcmanfm_view=true
 no_selection_tint=false
+centered_forms=true
 
 [PanelButtonCommand]
 frame.top=3
-frame.bottom=3
+frame.bottom=4
 frame.left=3
 frame.right=3
 frame.expanded.top=1
-frame.expanded.bottom=1
+frame.expanded.bottom=2
 frame.expanded.left=1
 frame.expanded.right=1
 text.margin.top=2
@@ -140,11 +141,13 @@ indicator.element=combo
 indicator.size=11
 text.margin.left=3
 text.margin.right=3
+frame.bottom=3
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
 interior.element=button
 frame.element=button
+frame.bottom=3
 
 [DropDownButton]
 inherits=PanelButtonCommand
@@ -197,6 +200,7 @@ indicator.element=arrow
 inherits=PanelButtonCommand
 interior.element=button
 frame.element=button
+frame.bottom=3
 frame.expansion=0
 min_height=0
 
@@ -349,6 +353,8 @@ frame.expansion=0
 [ComboBox]
 inherits=PanelButtonCommand
 indicator.element=combo
+text.margin.left=5
+text.margin.right=5
 indicator.size=11
 
 [WindowTranslucent]
