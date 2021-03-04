@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="153"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisens</translation>
     </message>
 </context>
 <context>
@@ -46,17 +46,17 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre/slett drakt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg en drakt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett denne drakten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -69,12 +69,12 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk denne drakten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett opp aktiv drakt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -91,34 +91,35 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre dette oppsettet
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
         <location filename="../../kvantummanager.ui" line="2115"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Trygge innstillinger</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
@@ -202,7 +203,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjennomsiktig KTitle-etikett</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -267,7 +268,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Respekter mørke drakter</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="674"/>
@@ -445,12 +446,12 @@ A value of 1.00 means no change.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="807"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensitet:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="814"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrast:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="891"/>
@@ -559,32 +560,32 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1161"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Størrelser</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1176"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lite ikon:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stort ikon:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1248"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Knappeikon:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1280"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verktøylinjeikon:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriftstørrelse</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -643,7 +644,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikkoppførsel:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1908"/>
@@ -978,17 +979,17 @@ while 0 means no delay.</source>
         <location filename="../../kvantummanager.ui" line="1517"/>
         <location filename="../../kvantummanager.ui" line="1540"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1573"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Ymse</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1778"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen piler for rullefelter</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1873"/>
@@ -1233,7 +1234,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2142"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avslutt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2155"/>
@@ -1244,17 +1245,17 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2159"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Forhåndsvis</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2166"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Om</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2189"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hva er dette?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2192"/>
@@ -1264,7 +1265,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2195"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjelp</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="312"/>
@@ -1283,7 +1284,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="643"/>
         <location filename="../../KvantumManager.cpp" line="659"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="583"/>
@@ -1295,22 +1296,22 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="761"/>
         <location filename="../../KvantumManager.cpp" line="2689"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekreftelse</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="722"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 installert.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="892"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 slettet.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="946"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drakt endret til %1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="500"/>
@@ -1322,37 +1323,37 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="107"/>
         <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Følg stil</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkelt klikk</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobbeltklikk</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Kun ikon</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Kun tekst</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst ved siden av ikon</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst under ikon</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="114"/>
@@ -1382,17 +1383,17 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tittelfelt</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyfelt</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar and primary toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyfelt og hovedverktøylinje</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
@@ -1402,7 +1403,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="502"/>
         <source>Please fix that first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fikse dette først.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="514"/>
@@ -1542,18 +1543,18 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2729"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>forvalgt drakt</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2888"/>
         <location filename="../../KvantumManager.cpp" line="2889"/>
         <source>About Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Om Kvantum-håndterer</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2888"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Oversettere</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2886"/>
@@ -1568,17 +1569,17 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="48"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation>endret</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="49"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>forvalg</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="512"/>
         <source>This directory cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Denne mappen kan ikke fjernes:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="519"/>
@@ -1590,7 +1591,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2122"/>
         <location filename="../../KvantumManager.cpp" line="2588"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>AKtiv drakt:</translation>
     </message>
 </context>
 <context>
@@ -1598,12 +1599,12 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="133"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="134"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum er ikke installert på systemet ditt.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
