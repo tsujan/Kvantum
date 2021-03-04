@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<TS version="2.1" language="si">
 <context>
     <name>KvantumPreviewBase</name>
     <message>
@@ -67,58 +67,53 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation>Knappeboks</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation>Verktøyknapper</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
         <location filename="../../KvantumPreviewBase.ui" line="446"/>
         <source>Simple toolbutton</source>
-        <translation>Enkel verktøyknapp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="453"/>
         <location filename="../../KvantumPreviewBase.ui" line="464"/>
         <source>Multi-line
 toolbutton</source>
-        <translation>Verktøyknapp
-over flere linjer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="472"/>
         <location filename="../../KvantumPreviewBase.ui" line="495"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation>Vekslingsbar verktøyknapp
-med en pil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="560"/>
         <location filename="../../KvantumPreviewBase.ui" line="584"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation>Verktøyknapp med 32 px SVG-ikon
-og tekst nedenfor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="605"/>
         <location filename="../../KvantumPreviewBase.ui" line="626"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation>Verktøylinje med tekst under
-og pil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="644"/>
         <location filename="../../KvantumPreviewBase.ui" line="665"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation>Verktøyknapp med et ikon på siden
-og pil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="683"/>
@@ -126,17 +121,14 @@ og pil</translation>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation>Vekslingsbar verktøykknapp med ikon,
-vanlig pil
-og rullegardinsmeny-pil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="515"/>
         <location filename="../../KvantumPreviewBase.ui" line="539"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation>Verktøyknapp med 32 px PNG-ikon
-ved siden av tekst</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="402"/>
@@ -149,20 +141,12 @@ height
 greater
 than
 width</source>
-        <translation>Veksle
-verktøylinje
-knapp
-
-med
-høyde
-større
-enn
-bredde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="791"/>
         <source>Auto-raise</source>
-        <translation>Auto-hev</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="812"/>
@@ -375,29 +359,29 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation>Overskrift 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation>Overskrift 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation>Overskrift 3</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <location filename="../../KvantumPreviewBase.ui" line="2259"/>
         <source>3rd Item</source>
-        <translation>tredje element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
         <location filename="../../KvantumPreviewBase.ui" line="2247"/>
         <source>2nd Item</source>
-        <translation>Andre element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
@@ -415,7 +399,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
         <location filename="../../KvantumPreviewBase.ui" line="2232"/>
         <source>1st Item</source>
-        <translation>Første element</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
@@ -440,55 +424,55 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Column 1</source>
-        <translation>Kolonne 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
         <source>0-0</source>
-        <translation>0-0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2533"/>
         <source>0-1</source>
-        <translation>0-1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2541"/>
         <source>1-0</source>
-        <translation>1-0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2549"/>
         <source>1-1</source>
-        <translation>1-1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation type="unfinished">Redigerbart</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation>Ikke redigerbart</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2269"/>
         <source>Subwindow</source>
-        <translation>Undervindu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
         <source>Panel frame</source>
-        <translation>Panelramme</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2335"/>
         <location filename="../../KvantumPreviewBase.ui" line="2476"/>
         <location filename="../../KvantumPreviewBase.ui" line="2568"/>
         <source>GroupBox</source>
-        <translation>Gruppeboks</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2355"/>
@@ -497,12 +481,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2778"/>
         <location filename="../../KvantumPreviewBase.ui" line="2826"/>
         <source>Tab 1</source>
-        <translation>Fane 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2361"/>
         <source>Page 1 (disabled)</source>
-        <translation>Side 1 (avskrudd)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2373"/>
@@ -511,12 +495,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2792"/>
         <location filename="../../KvantumPreviewBase.ui" line="2840"/>
         <source>Tab 2</source>
-        <translation>Fane 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2379"/>
         <source>Page 2 (disabled)</source>
-        <translation>Side 2 (avskrudd)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2413"/>
@@ -525,7 +509,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2784"/>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>Page 1</source>
-        <translation>Side 1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2427"/>
@@ -535,7 +519,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2798"/>
         <location filename="../../KvantumPreviewBase.ui" line="2846"/>
         <source>Page 2</source>
-        <translation>Side 2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2451"/>
