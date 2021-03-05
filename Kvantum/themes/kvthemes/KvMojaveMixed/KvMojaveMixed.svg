@@ -861,11 +861,9 @@
 <use width="100%" height="100%" xlink:href="#progress-pattern-normal-left" id="progress-pattern-normal-right" transform="matrix(-1,0,0,1,61.5,0)"/>
 <use width="100%" height="100%" xlink:href="#progress-pattern-normal-topleft" id="progress-pattern-normal-topright" transform="matrix(-1,0,0,1,61.5,0)"/>
 <use width="100%" height="100%" xlink:href="#progress-pattern-normal-bottomleft" id="progress-pattern-normal-bottomright" transform="matrix(-1,0,0,1,61.5,0)"/>
-<g style="fill-rule:evenodd" id="g1886" transform="translate(-8,37)">
-<path d="m 180,110 h 5 v 5 h -5 z"/>
-<path d="m 180,120 h 5 v 5 h -5 z"/>
-<path d="m 180,115 h 5 v 5 h -5 z"/>
-</g>
+<path style="fill-rule:evenodd" id="expand-progress-normal" d="m 172,147 h 5 v 5 h -5 z"/>
+<path style="fill-rule:evenodd" id="expand-progress-pattern-disabled" d="m 172,157 h 5 v 5 h -5 z"/>
+<path style="fill-rule:evenodd" id="expand-progress-pattern-normal" d="m 172,152 h 5 v 5 h -5 z"/>
 <path style="opacity:.8;fill:#295e9f;fill-rule:evenodd" id="progress-pattern-normal-inactive-left" d="m 188.5,182 v -32.4998 h -7.5 v 32.5 z"/>
 <path style="opacity:.8;fill:#295e9f;fill-rule:evenodd" id="progress-pattern-normal-inactive-topleft" d="m 188.5,142 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
 <path style="opacity:.8;fill:#295e9f;fill-rule:evenodd" id="progress-pattern-normal-inactive" d="M 188.5,149.5 V 182 h 32.5 v -32.5 z"/>

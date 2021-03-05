@@ -10614,7 +10614,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         else if (widget)
         {
           le = widget->findChild<QLineEdit*>();
-          if (le && le->width() < editRect.width())
+          if (le && le->isVisible() && le->width() < editRect.width()
+              && le->rect().left() == editRect.left())
           { // rarely happens, because of bugs in how Qt draws spin boxes
             o.rect = editRect;
             painter->save();

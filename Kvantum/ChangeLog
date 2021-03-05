@@ -10,6 +10,7 @@ V0.19.0
  * Always reserve the vertical space for a single-line text in view-items. QCommonStyle is inconsistent in this regard and may create a tiny item editor when the text is empty. Qt doesn't give enough info to QStyle for knowing whether the editor is active.
  * Ignore a view-item's custom brush when it's selected (as QCommonStyle does).
  * Cleaned up the code of transient scrollbar animation (and fixed a rare case, where a transient scrollbar might not disappear after app startup — as in kcharselect).
+ * Fixed a small problem in (Krita's) KisSliderSpinBox.
 
 V0.18.0
 ---------
