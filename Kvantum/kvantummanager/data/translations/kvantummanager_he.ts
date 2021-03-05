@@ -171,7 +171,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="464"/>
         <source>Iconless push buttons</source>
-        <translation>כפתורים ללא אייקונים</translation>
+        <translation>כפתורים ללא סמלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="471"/>
@@ -180,7 +180,11 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>מזג את ה sidepane של PCManFM-qt עם הסביבה שלו. בLXQt, נדרש לסגור את PCManFM-qt, ואז לעצור ולהדליק את Desktop עם LXQt Session Settings.</translation>
+        <translation>מיזוג התצוגה של PCManFM-qtעם סביבתה.
+
+תחת LXQt, נדרשת יציאה וכניסה מחדש או סגירה של
+PCManFM-qt ואז עצירה והפעלה מחדש של שולחן העובדה
+עם הגדרות ההפעלה של LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="478"/>
@@ -259,12 +263,12 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;לעצב את סרגלי התפוסה של KDE כסרגלי התקדמות?&lt;/p&gt;&lt;p&gt;בסרגלי תפוסה בדרך כלל נעשה שימוש ביישומי KDE כדי להציג גדלים של כרכים ויש להם סגנון משלהם.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="587"/>
         <source>Show KCapacityBar as progressbar</source>
-        <translation type="unfinished"></translation>
+        <translation>להציג KCapacityBar כסרגלי התקדמות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="639"/>
@@ -352,7 +356,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="935"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>יישומים אטומים:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="767"/>
@@ -414,7 +418,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="717"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>גלילה קינטית</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="724"/>
@@ -425,7 +429,12 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished"></translation>
+        <translation>חל רק כאשר התפריט הראשי אינו בעיצוב של LXQt.
+
+ערכים פחות מ־16 יובילו לגודל סמל בררת מחדל בתפריט.
+
+יש להפעיל הלוח של LXQt מחדש או על ידי „הגדרות הפעלה” או
+ביציאה וכניסה מחדש.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="774"/>
@@ -455,17 +464,17 @@ A value of 1.00 means no change.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="800"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>רוויה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="807"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>חוזק:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="814"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>ניגודיות:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="891"/>
@@ -569,60 +578,61 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1155"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>גדלים והשהיות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1161"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>גדלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1176"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>סמל קטן:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>סמל גדול:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1248"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>סמל כפתור:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1280"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>סמל סרגל כלים:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>גודל גופן</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
         <location filename="../../kvantummanager.ui" line="1321"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>גודל בררת המחדל הוא 2 פיקסלים אבל
+חלק מהיישומים מגדירים זאת עצמאית.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1314"/>
         <source>Layout spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>ריווח פריסה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1338"/>
         <location filename="../../kvantummanager.ui" line="1348"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך בררת המחדל הוא 4 פיקסלים אבל חלק מהיישומים מגדירים זאת עצמאית.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1341"/>
         <source>Layout margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>גבול פריסה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1364"/>
@@ -630,24 +640,27 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>החפיפה האופקית בין תת־התפריט וההורה שלו.
+
+0 כבררת מחדל.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1369"/>
         <source>Submenu overlap: </source>
-        <translation type="unfinished"></translation>
+        <translation>חפיפת תת־תפריט: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1394"/>
         <location filename="../../kvantummanager.ui" line="1405"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב כפתורי ההיפוך האופקיים.
+(אין לזה השפעה כאשר מחווני ההיפוך הם אנכיים.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1398"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>רוחב כפתור ההיפוך: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1785"/>
