@@ -7341,8 +7341,9 @@ void Style::drawControl(QStyle::ControlElement element,
         if (pb->invertedAppearance())
           inverted = true;
       }
-      /* always invert RTL horizontal bars */
-      if (!isVertical && option->direction == Qt::RightToLeft)
+      /* always invert RTL horizontal bars
+         (but not for KisSliders, which have spinboxes) */
+      if (!isVertical && !isKisSlider_ && option->direction == Qt::RightToLeft)
         inverted = !inverted;
 
       QFont f(painter->font());
@@ -7491,8 +7492,8 @@ void Style::drawControl(QStyle::ControlElement element,
           if (pb->invertedAppearance())
             inverted = true;
         }
-        /* horizontal bars are inverted in CE_ProgressBarGroove */
-        if (!isVertical && option->direction == Qt::RightToLeft)
+        /* horizontal bars are inverted in CE_ProgressBarGroove (but not for KisSliders) */
+        if (!isVertical && !isKisSlider_ && option->direction == Qt::RightToLeft)
           inverted = !inverted;
 
         frame_spec fspecPr = getFrameSpec(QStringLiteral("Progressbar"));
@@ -7916,7 +7917,7 @@ void Style::drawControl(QStyle::ControlElement element,
         bool isVertical(opt->orientation == Qt::Vertical);
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
         bool inverted(pb && pb->invertedAppearance());
-        if ((!isVertical && option->direction == Qt::RightToLeft) // -> CE_ProgressBarGroove
+        if ((!isVertical && !isKisSlider_ && option->direction == Qt::RightToLeft) // -> CE_ProgressBarGroove
             || (isVertical && opt->bottomToTop))
         {
           inverted = !inverted;
