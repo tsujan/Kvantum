@@ -1595,7 +1595,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2887"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>יוצר: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;פדרם פורנג (ידוע בכינוי Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="48"/>
