@@ -4,7 +4,7 @@
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
-        <location filename="../../about.ui" line="153"/>
+        <location filename="../../about.ui" line="155"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
