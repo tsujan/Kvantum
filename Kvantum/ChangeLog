@@ -1,3 +1,9 @@
+V0.20.0
+---------
+ * Dropped the support for Qt5 < 5.12.
+ * Added a theme (KvDark).
+ * Better colors for texts and symbolic icons of disabled toggled buttons.
+
 V0.19.0
 ---------
  * Allow dragging from some disabled widgets.

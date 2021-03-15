@@ -158,9 +158,7 @@ private:
   bool dragInProgress_;
   bool locked_;
   Drag drag_;
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   bool cursorOverride_;
-#endif
 
   // provide application-wise event filter
   /*
@@ -175,10 +173,6 @@ private:
                    parent_ (parent)
     {}
   virtual bool eventFilter (QObject*, QEvent*);
-  protected:
-    // application-wise event.
-    /* needed to catch end of XMoveResize events */
-    bool appMouseEvent (QObject*, QEvent*);
   private:
     WindowManager *parent_;
   };

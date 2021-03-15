@@ -4,10 +4,11 @@ CONFIG += qt \
           warn_on
 
 QT += svg
+
 greaterThan(QT_MAJOR_VERSION, 4) {
   lessThan(QT_MAJOR_VERSION, 6) {
-    lessThan(QT_MINOR_VERSION, 9) {
-      error("Kvantum needs at least Qt 5.9.0")
+    lessThan(QT_MINOR_VERSION, 12) {
+      error("Kvantum needs at least Qt 5.12.0")
     }
   }
   QT += x11extras
@@ -47,10 +48,8 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     SOURCES += drag/windowmanager.cpp
     HEADERS += drag/windowmanager.h
   } else {
-    SOURCES += drag/x11wmmove.cpp \
-               drag/windowmanager-old.cpp
-    HEADERS += drag/x11wmmove.h \
-               drag/windowmanager-old.h
+    SOURCES += drag/windowmanager-old.cpp
+    HEADERS += drag/windowmanager-old.h
   }
   OTHER_FILES += kvantum.json
 } else {

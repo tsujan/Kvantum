@@ -1,4 +1,4 @@
-set(QT_MINIMUM_VERSION "5.9.0")
+set(QT_MINIMUM_VERSION "5.12.0")
 
 find_package(Qt5Core "${QT_MINIMUM_VERSION}" REQUIRED)
 find_package (Qt5Widgets REQUIRED)

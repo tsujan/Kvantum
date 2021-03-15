@@ -300,9 +300,23 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         /* find the state and set the text color accordingly */
         int state;
         QPalette pPalette = option.palette;
-        QColor col;
+        QColor col, disabledCol;
         if (!cbtn->isEnabled())
+        {
           state = 0;
+          if (cbtn->isChecked())
+          {
+            if (isInactive)
+              disabledCol = getFromRGBA(lspec.toggleInactiveColor);
+            if (!disabledCol.isValid())
+              disabledCol = getFromRGBA(lspec.toggleColor);
+            if (disabledCol.isValid())
+            {
+              disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+              pPalette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
+            }
+          }
+        }
         else if (cbtn->isChecked())
         {
           state = 4;
@@ -345,7 +359,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!cbtn->icon().isNull())
           p.drawPixmap(leftMargin + hOffset, topMargin + vOffset,
                        getPixmapFromIcon(cbtn->icon(),
-                                         getIconMode(state, isInactive, lspec),
+                                         getIconMode(disabledCol.isValid()
+                                                     && !enoughContrast(disabledCol,
+                                                                        standardPalette().color(QPalette::Window))
+                                                       ? -1 : state,
+                                                     isInactive, lspec),
                                          cbtn->isChecked() ? QIcon::On : QIcon::Off,
                                          cbtn->iconSize()));
 
@@ -904,17 +922,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             progressTimer_->start(50);
         }
       }
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
       else if (QMenu *menu = qobject_cast<QMenu*>(o))
-#else
-      else if (qobject_cast<QMenu*>(o))
-#endif
       {
         //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
         if (w->testAttribute(Qt::WA_StyleSheetTarget)) break; // not drawn by Kvantum (see PM_MenuHMargin)
-#endif
         if (movedMenus.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
@@ -1133,7 +1145,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             dY -= static_cast<qreal>(getFrameSpec(group).bottom);
         }
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
         /* compensate for an annoyance in Qt 5.11 -> QMenu::internalDelayedPopup() */
         if (parentMenu)
         {
@@ -1153,7 +1164,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
           }
         }
-#endif
 
         int DX = qRound(dX);
         int DY = qRound(dY);
@@ -1292,21 +1302,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           opacifyColor(col1);
         }
         palette.setColor(QPalette::Inactive, QPalette::Text, col1);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
         col1 = col; // placeholder
         col1.setAlpha(128);
         opacifyColor(col1);
         palette.setColor(QPalette::PlaceholderText, col1);
-#endif
         col.setAlpha(102); // 0.4 * disabledCol.alpha()
         opacifyColor(col);
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         forcePalette(w, palette);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
         /* also correct the color of the symbolic clear icon (-> CE_ToolBar) */
         if (QAction *clearAction = w->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
           clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, w));
-#endif
       }
     }
     break;

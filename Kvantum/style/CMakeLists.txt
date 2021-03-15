@@ -1,4 +1,4 @@
-set(QT_MINIMUM_VERSION "5.9.0")
+set(QT_MINIMUM_VERSION "5.12.0")
 
 if(NOT ENABLE_QT4)
   find_package(Qt5Core "${QT_MINIMUM_VERSION}" REQUIRED)
@@ -77,7 +77,6 @@ if(NOT ENABLE_QT4)
         shortcuthandler.cpp
         blur/blurhelper.cpp
         drag/windowmanager-old.cpp
-        drag/x11wmmove.cpp
         themeconfig/ThemeConfig.cpp
         animation/animation.cpp)
   endif()

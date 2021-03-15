@@ -1057,9 +1057,7 @@ bool Style::isStylableToolbar(const QWidget *w, bool allowInvisible) const
   const QToolBar *tb = qobject_cast<const QToolBar*>(w);
   if (!tb
       || w->autoFillBackground()
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       || w->testAttribute(Qt::WA_StyleSheetTarget) // not drawn by Kvantum (CE_ToolBar may not be called)
-#endif
       || isPlasma_)
   {
     return false;
@@ -1256,11 +1254,7 @@ static void getMaxDay(const QLocale l, bool full)
   for (int i=1; i<=7 ; ++i)
   {
     QString theDay = l.dayName(i,format);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     int size = QFontMetrics(QApplication::font()).horizontalAdvance(theDay);
-#else
-    int size = QFontMetrics(QApplication::font()).width(theDay);
-#endif
     if (max < size)
     {
       max = size;
@@ -1278,11 +1272,7 @@ static void getMaxMonth(const QLocale l, bool full)
   for (int i=1; i<=12 ; ++i)
   {
     QString theMonth = l.monthName(i,format);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     int size = QFontMetrics(QApplication::font()).horizontalAdvance(theMonth);
-#else
-    int size = QFontMetrics(QApplication::font()).width(theMonth);
-#endif
     if (max < size)
     {
       max = size;
@@ -1397,11 +1387,7 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     if (!svt.isEmpty())
     {
       QFontMetrics fm(sp->font());
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
       if (fm.horizontalAdvance(svt) > fm.horizontalAdvance(maxTxt))
-#else
-      if (fm.width(svt) > fm.width(maxTxt))
-#endif
         maxTxt = svt;
     }
   }
@@ -1427,11 +1413,7 @@ static inline QString progressMaxText(const QProgressBar *pb, const QStyleOption
     l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
     QString percentTxt = QString(l.percent()) + l.toString(100);
     QFontMetrics fm = opt->fontMetrics;
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     if (fm.horizontalAdvance(percentTxt) > fm.horizontalAdvance(maxTxt))
-#else
-    if (fm.width(percentTxt) > fm.width(maxTxt))
-#endif
       maxTxt = percentTxt;
   }
   return maxTxt;
@@ -1523,11 +1505,7 @@ static inline QSize textSize(const QFont &font, const QString &text)
     th = QFontMetrics(font).height()*(l.size());
 
     for (int i=0; i<l.size(); i++)
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
       tw = qMax(tw,QFontMetrics(font).horizontalAdvance(l[i]));
-#else
-      tw = qMax(tw,QFontMetrics(font).width(l[i]));
-#endif
 
     if (l.size() > 1)
     {
@@ -1635,11 +1613,8 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   else
   {*/
     bool noSpace(colored
-                 || (
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                     lineedit->testAttribute(Qt::WA_StyleSheetTarget) &&
-#endif
-                     !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+                 || (lineedit->testAttribute(Qt::WA_StyleSheetTarget)
+                     && !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
         && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
@@ -3372,11 +3347,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (QWidget *vp = sa->viewport())
         {
           if (!vp->autoFillBackground()
-              || (
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                  vp->testAttribute(Qt::WA_StyleSheetTarget) &&
-#endif
-                  !vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
+              || (vp->testAttribute(Qt::WA_StyleSheetTarget)
+                  && !vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
           {
             return;
           }
@@ -3629,11 +3601,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                   && widget->palette().color(QPalette::Base)
                      != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base);
         if (colored
-            || (
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                widget->testAttribute(Qt::WA_StyleSheetTarget) &&
-#endif
-                !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+            || (widget->testAttribute(Qt::WA_StyleSheetTarget)
+                && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
             || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         {
@@ -5268,6 +5237,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
 Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspec) const
 {
+  if (state == -1) // a special case used by disabled toggled buttons
+    return DisabledSelected;
   KvIconMode icnMode = state == 0 ? Disabled : Normal;
   QColor txtCol;
   if (state == 1 || state == 0)
@@ -7244,11 +7215,11 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         if (col.isValid())
         {
-          if (hspec_.opaque_colors)
-          {
+          //if (hspec_.opaque_colors)
+          //{
             painter->setOpacity(col.alphaF());
             col.setAlpha(255);
-          }
+          //}
           painter->setPen(col);
         }
         painter->setLayoutDirection(option->direction); // because of a bug in QToolBox?
@@ -7581,11 +7552,7 @@ void Style::drawControl(QStyle::ControlElement element,
               QString maxText = progressMaxText(pb, opt);
               if (!maxText.isEmpty())
               {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
                 int textWidth = QFontMetrics(f).horizontalAdvance(maxText) + 6; // 3px space + margin
-#else
-                int textWidth = QFontMetrics(f).width(maxText) + 6;
-#endif
                 if (isVertical)
                 {
                   if (inverted)
@@ -8720,9 +8687,7 @@ void Style::drawControl(QStyle::ControlElement element,
               || toolbarState == "styled") // the toolbar was styled before
           {
             QColor txtCol = standardPalette().color(QPalette::Active, QPalette::Text);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
             QColor pTxtCol = standardPalette().color(QPalette::PlaceholderText);
-#endif
             QColor toolbarTxtCol(getFromRGBA(getLabelSpec(group).normalColor));
 
             if (enoughContrast(txtCol, toolbarTxtCol))
@@ -8753,9 +8718,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
-#endif
                   }
                   forcePalette(child, palette);
                 }
@@ -8801,17 +8764,13 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
-#endif
                     forcePalette(le, palette);
                   }
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                   /* if this line-edit is inside a combo, its palette is
                      already set but its icon still needs to be updated */
                   if (QAction *clearAction = le->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
                     clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, le));
-#endif
                   /* all line-edits should be checked because some may be inside combos */
                 }
               }
@@ -8882,11 +8841,9 @@ void Style::drawControl(QStyle::ControlElement element,
             }
             QColor disabledTxtCol = txtCol;
             disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
             QColor pTxtCol = txtCol; // placeholder
             pTxtCol.setAlpha(128);
             opacifyColor(pTxtCol);
-#endif
             opacifyColor(disabledTxtCol);
             opacifyColor(inactiveTxtCol);
 
@@ -8928,9 +8885,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
-#endif
                   }
                   forcePalette(child, palette);
                 }
@@ -8976,15 +8931,11 @@ void Style::drawControl(QStyle::ControlElement element,
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
                     palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
                     palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     palette.setColor(QPalette::PlaceholderText, pTxtCol);
-#endif
                     forcePalette(le, palette);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
                     /* also correct the color of the symbolic clear icon */
                     if (QAction *clearAction = le->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
                       clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, le));
-#endif
                   }
                 }
               }
@@ -9220,6 +9171,25 @@ void Style::drawControl(QStyle::ControlElement element,
         if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
 
+        bool isInactive(status.contains("-inactive"));
+        QColor disabledCol;
+        if (state == 0
+            && ((option->state & State_On)
+                || (!(option->state & State_Sunken) && (option->state & State_Selected))))
+        {
+          if (isInactive)
+            disabledCol = getFromRGBA(lspec.toggleInactiveColor);
+          if (!disabledCol.isValid())
+            disabledCol = getFromRGBA(lspec.toggleColor);
+          if (disabledCol.isValid())
+          {
+            disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+            QPalette palette(opt->palette);
+            palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
+            o.palette = palette;
+          }
+        }
+
         /* center text+icon */
         QRect R = r;
         if (!txtSize.isEmpty() && !opt->icon.isNull())
@@ -9231,7 +9201,6 @@ void Style::drawControl(QStyle::ControlElement element,
             R.adjust(margin, 0, -margin, 0);
         }
 
-        bool isInactive(status.contains("-inactive"));
         renderLabel(&o,painter,
                     R,
                     fspec,lspec,
@@ -9239,7 +9208,13 @@ void Style::drawControl(QStyle::ControlElement element,
                     state,
                     isInactive,
                     (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
-                      : getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
+                      : getPixmapFromIcon(opt->icon,
+                                          getIconMode(disabledCol.isValid()
+                                                      && !enoughContrast(disabledCol,
+                                                                         standardPalette().color(QPalette::Window))
+                                                        ? -1 : state,
+                                                      isInactive, lspec),
+                                          iconstate, opt->iconSize),
                     opt->iconSize);
         if(isDefaultBtn)
           painter->restore();
@@ -9458,11 +9433,8 @@ void Style::drawControl(QStyle::ControlElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         if (widget && !(opt->features & QStyleOptionButton::Flat)
-            && ((
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                 widget->testAttribute(Qt::WA_StyleSheetTarget) &&
-#endif
-                 !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
+            && ((widget->testAttribute(Qt::WA_StyleSheetTarget)
+                 && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
                 || (opt->text.size() == 0 && opt->icon.isNull()
                     && widget->palette().color(QPalette::Button)
                        != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Button))))
@@ -10181,7 +10153,26 @@ void Style::drawControl(QStyle::ControlElement element,
           QStyleOptionToolButton o(*opt);
           if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
+
           bool isInactive(status.contains("-inactive"));
+          QColor disabledCol;
+          if (state == 0
+              && ((option->state & State_On)
+                  || (!(option->state & State_Sunken) && (option->state & State_Selected))))
+          {
+            if (isInactive)
+              disabledCol = getFromRGBA(lspec.toggleInactiveColor);
+            if (!disabledCol.isValid())
+              disabledCol = getFromRGBA(lspec.toggleColor);
+            if (disabledCol.isValid())
+            {
+              disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
+              QPalette palette(opt->palette);
+              palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledCol);
+              o.palette = palette;
+            }
+          }
+
           QSize iconSize = opt->iconSize;
           if (widget && widget->inherits("QDockWidgetTitleButton"))
           {
@@ -10206,7 +10197,13 @@ void Style::drawControl(QStyle::ControlElement element,
                       talign,txt,QPalette::ButtonText,
                       state,
                       isInactive,
-                      getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize),
+                      getPixmapFromIcon(opt->icon,
+                                        getIconMode(disabledCol.isValid()
+                                                    && !enoughContrast(disabledCol,
+                                                                      standardPalette().color(QPalette::Window))
+                                                      ? -1 : state,
+                                                    isInactive, lspec),
+                                        iconstate, iconSize),
                       iconSize,tialign);
           iAlignment |= Qt::AlignLeft;
         }
@@ -10674,11 +10671,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             {
               const label_spec lspec = getLabelSpec(leGroup);
               const size_spec sspec = getSizeSpec(leGroup);
-              if ((
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                   le->testAttribute(Qt::WA_StyleSheetTarget) &&
-#endif
-                   !le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
+              if ((le->testAttribute(Qt::WA_StyleSheetTarget)
+                   && !le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
                   || le->minimumWidth() == le->maximumWidth()
                   || le->height() < sizeCalculated(le->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
               {
@@ -12366,11 +12360,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               painter->save();
               if (lspec.a < 255)
                 shadowColor.setAlpha(lspec.a);
-              if (hspec_.opaque_colors)
-              {
+              //if (hspec_.opaque_colors)
+              //{
                 painter->setOpacity(shadowColor.alphaF());
                 shadowColor.setAlpha(255);
-              }
+              //}
               painter->setPen(shadowColor);
               for (int i=0; i<lspec.depth; i++)
               {
@@ -12384,11 +12378,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
 
           painter->save();
-          if (hspec_.opaque_colors)
-          {
+          //if (hspec_.opaque_colors)
+          //{
             painter->setOpacity(col.alphaF());
             col.setAlpha(255);
-          }
+          //}
           painter->setPen(col);
 
           drawItemText(painter, textRect, talign,
@@ -12480,10 +12474,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuDesktopFrameWidth : return 0;
 
     case PM_SubMenuOverlap : {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
         return 0;
-#endif
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
         return 0; // RTL submenu positioning is a mess in Qt5
@@ -12497,12 +12489,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_MenuHMargin :
     case PM_MenuVMargin:
     case PM_MenuTearoffHeight : {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       /* WARNING: It's a nasty Qt issue that, also when a menu is drawn by a stylesheet,
                   this block is called. Luckily, this workaround exists with Qt >= 5.12. */
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget))
         return QCommonStyle::pixelMetric(metric,option,widget);
-#endif
 
       /* In Qt -> qcombobox.cpp, PM_MenuVMargin is used to add a
          vertical margin to the combo menu but we don't want it. */
@@ -12555,37 +12545,6 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
           h = qMin(2,h);
       }
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
-      /* Sometimes (like in VLC or SVG Cleaner), developers make this
-         mistake that they give a stylesheet to a subclassed lineedit
-         but forget to prevent its propagation to the context menu.
-         What follows is a simple workaround for such cases. */
-      if (qobject_cast<const QMenu*>(widget)
-          && widget->style() != this
-          && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
-      {
-        QString css;
-        if (QWidget *p = widget->parentWidget())
-        {
-          if (qobject_cast<QLineEdit*>(p))
-            css = p->styleSheet();
-          else if (qobject_cast<QMenu*>(p))
-          {
-            if (QLineEdit *pp = qobject_cast<QLineEdit*>(p->parentWidget()))
-              css = pp->styleSheet();
-          }
-        }
-        if (!css.isEmpty() && css.contains("padding") && !css.contains("{"))
-        {
-          v = qMin(2,v);
-          if (tspec_.spread_menuitems)
-            h = 0;
-          else
-            h = qMin(2,h);
-        }
-      }
-#endif
-
       /* remember the margins if it's decided whether the menu has shadow or not */
       if (shadowDecided && widget && !drawnMenus_.contains(widget))
       {
@@ -12604,10 +12563,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
 
     case PM_MenuScrollerHeight : {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
         return QCommonStyle::pixelMetric(metric,option,widget);
-#endif
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("MenuItem"));
       return qMax(pixelMetric(PM_MenuVMargin,option,widget), dspec.size);
     }
@@ -12999,39 +12956,6 @@ void Style::setSurfaceFormat(QWidget *widget) const
     /* we want translucency and/or shadow for menus and
        tooltips even if the main window isn't translucent */
     realWindow = false;
-
-#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
-    /* WARNING: For some reason unknown to me, if WA_TranslucentBackground
-                is set on wayland, menus will be rendered with artifacts.
-                Instead, the native handle should be created, the alpha
-                channel should be added to it, and the widget background
-                color should be made transparent (at polish()). */
-    if (!tspec_.isX11 && !widget->inherits("QTipLabel"))
-    {
-      QWindow *window = widget->windowHandle();
-      if (!window)
-      {
-        bool noNativeSiblings = true;
-        if (!qApp->testAttribute(Qt::AA_DontCreateNativeWidgetSiblings))
-        {
-          noNativeSiblings = false;
-          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
-        }
-        widget->setAttribute(Qt::WA_NativeWindow, true);
-        window = widget->windowHandle();
-        /* reverse the changes */
-        widget->setAttribute(Qt::WA_NativeWindow, false);
-        if (!noNativeSiblings)
-          qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, false);
-      }
-      if (window)
-      {
-        QSurfaceFormat format = window->format();
-        format.setAlphaBufferSize(8);
-        window->setFormat(format);
-      }
-    }
-#endif
   }
   else
   {
@@ -13085,13 +13009,12 @@ void Style::setSurfaceFormat(QWidget *widget) const
   theme_spec tspec_now = settings_->getCompositeSpec();
   if (!tspec_now.composite
       || (realWindow && !tspec_now.translucent_windows))
+  {
     return;
+  }
 
-  /* this will set the alpha buffer size to 8 in a safe way on X11 */
-#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
-  if (tspec_.isX11 || realWindow)
-#endif
-    widget->setAttribute(Qt::WA_TranslucentBackground);
+  /* this will set the alpha buffer size to 8 in a safe way */
+  widget->setAttribute(Qt::WA_TranslucentBackground);
   /* distinguish forced translucency from hard-coded translucency */
   forcedTranslucency_.insert(widget);
   connect(widget, &QObject::destroyed, this, &Style::noTranslucency);
@@ -13163,10 +13086,8 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_ToolButton_PopupDelay : return 250;
     case SH_Menu_SubMenuPopupDelay : return tspec_.submenu_delay;
     case SH_Menu_Scrollable : {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       if (widget && widget->testAttribute(Qt::WA_StyleSheetTarget)) // not drawn by Kvantum
         return QCommonStyle::styleHint(hint,option,widget,returnData);
-#endif
       return tspec_.scrollable_menu;
     }
     case SH_Menu_SloppySubMenus : return true;
@@ -13318,9 +13239,7 @@ int Style::styleHint(QStyle::StyleHint hint,
         case 2 : return QDialogButtonBox::GnomeLayout;
         case 3 : return QDialogButtonBox::MacLayout;
         case 4 : return QDialogButtonBox::WinLayout;
-#if (QT_VERSION >= QT_VERSION_CHECK(5,10,0))
         case 5 : return QDialogButtonBox::AndroidLayout;
-#endif
         default :return QCommonStyle::styleHint(hint,option,widget,returnData);
       }
     }
@@ -13340,9 +13259,7 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_ToolBox_SelectedPageTitleBold : return true;
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
     case SH_SpinBox_ButtonsInsideFrame : return true;
-#endif
 
     /* forms */
     case SH_FormLayoutFieldGrowthPolicy : {
@@ -13443,10 +13360,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
       int clearBtnSize = 0;
       const QLineEdit *le = qobject_cast<const QLineEdit*>(widget);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       if (le && le->isClearButtonEnabled())
         clearBtnSize = pixelMetric(PM_SmallIconSize);
-#endif
 
       QSize defaultSize = QCommonStyle::sizeFromContents(type,option,contentsSize,widget);
       int minW = sspec.minW;
@@ -13575,11 +13490,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         bool hasIcon = false;
         if (const QComboBox *cb = qobject_cast<const QComboBox*>(widget))
         {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
           const QLineEdit *le = cb->lineEdit();
           if (le && le->isClearButtonEnabled())
             clearBtnSize = pixelMetric(PM_SmallIconSize);
-#endif
           for (int i = 0; i < cb->count(); i++)
           {
             if (!cb->itemIcon(i).isNull())
@@ -13696,12 +13609,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           // consider a global min. width for push buttons
           s.rwidth() = qMax(s.width(),
                             2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
-                              + opt->fontMetrics.horizontalAdvance("W") * 6
-#else
-                              + opt->fontMetrics.width("W") * 6
-#endif
-                           );
+                              + opt->fontMetrics.horizontalAdvance("W") * 6);
         }
         else
         { // don't let width < height
@@ -14543,9 +14451,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       else if (widget)
       {
         if (qobject_cast<const QLineEdit*>(widget)
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
             && widget->testAttribute(Qt::WA_StyleSheetTarget)
-#endif
             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
         {
           fspec.left = qMin(fspec.left,3);

@@ -185,11 +185,9 @@ void Style::polish(QWidget *widget)
     }
     QColor disabledCol = tColor;
     disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
     QColor ptColor = tColor; // placeholder
     ptColor.setAlpha(128);
     opacifyColor(ptColor);
-#endif
     opacifyColor(tColor);
     opacifyColor(inactiveCol);
     opacifyColor(disabledCol);
@@ -209,9 +207,7 @@ void Style::polish(QWidget *widget)
         palette.setColor(QPalette::Active, QPalette::Text, tColor);
         palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
         palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
         palette.setColor(QPalette::PlaceholderText, ptColor);
-#endif
         respectDarkness = false; // we don't want to change its text color again
       }
       forcePalette(widget, palette);
@@ -228,15 +224,11 @@ void Style::polish(QWidget *widget)
           palette.setColor(QPalette::Active, QPalette::Text, tColor);
           palette.setColor(QPalette::Inactive, QPalette::Text, inactiveCol);
           palette.setColor(QPalette::Disabled, QPalette::Text, disabledCol);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
           palette.setColor(QPalette::PlaceholderText, ptColor);
-#endif
           forcePalette(widget, palette);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
           /* also correct the color of the symbolic clear icon */
           if (QAction *clearAction = widget->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
             clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, widget));
-#endif
         }
       }
     }
@@ -886,11 +878,8 @@ void Style::polish(QWidget *widget)
       {
         // support animation only if the background is flat
         if ((tspec_.animate_states
-             && (!vp || vp->autoFillBackground() || (!vp->styleSheet().isEmpty()
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                 && vp->testAttribute(Qt::WA_StyleSheetTarget)
-#endif
-                ))
+             && (!vp || vp->autoFillBackground()
+                 || (!vp->styleSheet().isEmpty() && vp->testAttribute(Qt::WA_StyleSheetTarget)))
              && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
            || (hasInactiveSelItemCol_
                && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items
@@ -901,11 +890,8 @@ void Style::polish(QWidget *widget)
         if ((tspec_.scrollbar_in_view || (widget->inherits("QComboBoxListView")
                                           && (!tspec_.combo_menu /*|| isLibreoffice_*/)))
             && vp && vp->autoFillBackground()
-            && (
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
-                !vp->testAttribute(Qt::WA_StyleSheetTarget) ||
-#endif
-                vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
+            && (!vp->testAttribute(Qt::WA_StyleSheetTarget)
+                || vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
             // but not when the combo popup is drawn as a menu
             && !(tspec_.combo_menu /*&& !isLibreoffice_*/ && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys
@@ -1029,24 +1015,11 @@ void Style::polish(QWidget *widget)
         widget->installEventFilter(this);
       }
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
-      if (tspec_.isX11 || widget->inherits("QTipLabel"))
-      {
-#endif
-        if (!widget->testAttribute(Qt::WA_TranslucentBackground))
-          widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+      if (!widget->testAttribute(Qt::WA_TranslucentBackground))
+        widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
 #if (QT_VERSION >= QT_VERSION_CHECK(5,13,1))
-        else if (!widget->testAttribute(Qt::WA_NoSystemBackground))
-          widget->setAttribute(Qt::WA_NoSystemBackground);
-#endif
-#if (QT_VERSION < QT_VERSION_CHECK(5,12,0))
-      }
-      else
-      { // see "Kvantum.cpp" -> setSurfaceFormat() for an explanation
-        QPalette palette = widget->palette();
-        palette.setColor(widget->backgroundRole(), QColor(Qt::transparent));
-        forcePalette(widget, palette);
-      }
+      else if (!widget->testAttribute(Qt::WA_NoSystemBackground))
+        widget->setAttribute(Qt::WA_NoSystemBackground);
 #endif
 
       translucentWidgets_.insert(widget);
@@ -1402,24 +1375,18 @@ QPalette Style::standardPalette() const
   col = getFromRGBA(cspec_.textColor);
   if (col.isValid())
   {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
     QColor placeholderTextColor = col;
     placeholderTextColor.setAlpha(128);
-#endif
     if (hspec_.opaque_colors)
     { // if opaqueness is forced, apply it over the base color
       QColor baseCol = standardPalette_.color(QPalette::Active,QPalette::Base);
       baseCol.setAlpha(255);
       if (col.alpha() < 255)
         col = overlayColor(baseCol,col);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
       placeholderTextColor = overlayColor(baseCol,placeholderTextColor);
-#endif
     }
     standardPalette_.setColor(QPalette::Active,QPalette::Text,col);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,12,0))
     standardPalette_.setColor(QPalette::PlaceholderText,placeholderTextColor);
-#endif
     col1 = getFromRGBA(cspec_.inactiveTextColor);
     if (col1.isValid() && hasInactiveness)
     {

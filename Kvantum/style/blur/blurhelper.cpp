@@ -26,30 +26,15 @@
 #include <QWindow> // for hdpi
 #include <QApplication> // for hdpi
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
 #include <KWindowEffects>
-#elif defined Q_WS_X11 || defined Q_OS_LINUX
-#include <QX11Info>
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
-#endif
 
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
                         qreal contrast, qreal intensity, qreal saturation) : QObject (parent)
 {
-#if (QT_VERSION < QT_VERSION_CHECK(5,11,0))
-  Q_UNUSED (contrast);
-  Q_UNUSED (intensity);
-  Q_UNUSED (saturation);
-#if defined Q_WS_X11 || defined Q_OS_LINUX
-  atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
-#endif
-#else
   contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
   intensity_ = qBound (static_cast<qreal>(0), intensity, static_cast<qreal>(2));
   saturation_ = qBound (static_cast<qreal>(0), saturation, static_cast<qreal>(2));
-#endif
 
   if (!menuS.isEmpty() && menuS.size() >= 4)
     menuShadow_ = menuS;
@@ -142,21 +127,13 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
     r = tooltipShadow_;
   }
 
-  qreal dpr = static_cast<qreal>(1);
-  /* KDE blur effect supports HDPI after Qt 5.11 */
-#if (QT_VERSION <= QT_VERSION_CHECK(5,11,0))
-  dpr = qApp->devicePixelRatio();
-  if (dpr > static_cast<qreal>(1))
-    rect.setSize ((QSizeF(rect.size()) * dpr).toSize());
-#endif
-
   return (wMask.isEmpty()
             ? r.isEmpty()
                 ? rect
-                : rect.adjusted (ceilingInt(dpr * r.at(0)),
-                                 ceilingInt(dpr * r.at(1)),
-                                 -ceilingInt(dpr * r.at(2)),
-                                 -ceilingInt(dpr * r.at(3)))
+                : rect.adjusted (ceilingInt(r.at(0)),
+                                 ceilingInt(r.at(1)),
+                                 -ceilingInt(r.at(2)),
+                                 -ceilingInt(r.at(3)))
             : wMask); // is the same as rect (see above)
 }
 /*************************/
@@ -168,7 +145,6 @@ void BlurHelper::update (QWidget* widget) const
   const QRegion region (blurRegion (widget));
   if (region.isEmpty())
     clear (widget);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   else
   {
     KWindowEffects::enableBlurBehind (widget->internalWinId(), true, region);
@@ -187,21 +163,6 @@ void BlurHelper::update (QWidget* widget) const
                                                 region);
     }
   }
-#elif defined Q_WS_X11 || defined Q_OS_LINUX
-  else
-  {
-    QVector<unsigned long> data;
-    const QVector<QRect> allRects = region.rects();
-    for (const QRect& rect : allRects)
-    {
-      data << rect.x() << rect.y() << rect.width() << rect.height();
-    }
-    XChangeProperty (QX11Info::display(), widget->internalWinId(),
-                     atom_blur_, XA_CARDINAL, 32, PropModeReplace,
-                     reinterpret_cast<const unsigned char *>(data.constData()),
-                     data.size());
-  }
-#endif
   // force update
   if (widget->isVisible())
     widget->update();
@@ -211,7 +172,6 @@ void BlurHelper::clear (QWidget* widget) const
 {
   // WARNING never use winId()
   if (widget->internalWinId())
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
   {
     KWindowEffects::enableBlurBehind (widget->internalWinId(), false);
     if ((contrast_ != static_cast<qreal>(1)
@@ -225,10 +185,6 @@ void BlurHelper::clear (QWidget* widget) const
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), false);
     }
   }
-#elif defined Q_WS_X11 || defined Q_OS_LINUX
-    XDeleteProperty (QX11Info::display(), widget->internalWinId(), atom_blur_);
-#else
-  Q_UNUSED (widget);
-#endif
 }
+
 }

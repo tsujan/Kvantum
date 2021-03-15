@@ -1,19 +1,15 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2014-10-12T19:55:24
-#
-#-------------------------------------------------
-
-QT += core gui widgets \
-      svg
-
-greaterThan(QT_MAJOR_VERSION, 4) {
+lessThan(QT_MAJOR_VERSION, 5) {
+  error("Kvantum Manager needs at least Qt 5.12.0")
+} else {
   lessThan(QT_MAJOR_VERSION, 6) {
-    lessThan(QT_MINOR_VERSION, 9) {
-      error("Kvantum Manager needs at least Qt 5.9.0")
+    lessThan(QT_MINOR_VERSION, 12) {
+      error("Kvantum Manager needs at least Qt 5.12.0")
     }
   }
 }
+
+QT += core gui widgets \
+      svg
 
 TARGET = kvantummanager
 TEMPLATE = app
