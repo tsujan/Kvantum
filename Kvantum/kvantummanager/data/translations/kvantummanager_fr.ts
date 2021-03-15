@@ -66,7 +66,7 @@ Kvantum peut utiliser en plus de ses propres thèmes.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Kvantum utilise ce thème!
+        <translation>Kvantum utilise ce thème !
 
 Un bouton désactivé signifie que
 le thème est déjà utilisé.</translation>
@@ -395,12 +395,14 @@ centré horizontalement autant que possible.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez voir des artefacts gênants causés
+par des bogues dans la gestion par Qt de la mise à l&apos;échelle incomplête
+avec transparence ou dégradé des fenêtre.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished">Désactiver la transparence pour une mise à l&apos;échelle incomplète</translation>
+        <translation>Désactiver la transparence pour une mise à l&apos;échelle incomplète</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="663"/>
@@ -1360,7 +1362,7 @@ Cette option les cachera.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
@@ -1369,7 +1371,7 @@ appuyez sur la touche Ctrl avant d&apos;appuyer sur le bouton.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1965"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished">Autoriser le glissement à partir des boutons</translation>
+        <translation>Autoriser le glissement à partir des boutons</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
