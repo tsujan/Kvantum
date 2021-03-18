@@ -598,7 +598,7 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>&amp;Submenu</source>
-        <translation>&amp;Submenu</translation>
+        <translation>&amp;Sub-menu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
@@ -643,7 +643,7 @@ caixa de seleção</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
         <source>&amp;Doc Mode</source>
-        <translation>Modo &amp;Doc</translation>
+        <translation>Modo &amp;Doca</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>

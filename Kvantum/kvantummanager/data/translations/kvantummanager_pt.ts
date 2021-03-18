@@ -148,7 +148,7 @@ todos os widgets apareçam como são por padrão.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation>Fonte normal para botões de premir padrão</translation>
+        <translation>Fonte normal para botões de premir predefinidos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -416,7 +416,7 @@ para uma posição quando a barra de deslizamento é clicada.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="667"/>
         <source>Scroll jump with middle click</source>
-        <translation>Saltar de deslizamento com o clique do meio</translation>
+        <translation>Salto de rolagem com clique do meio</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="710"/>
@@ -772,9 +772,9 @@ Por padrão, ele tem o plano de fundo base.</translation>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation>Nenhuma fonte em negrito para botões padrão?
+        <translation>Nenhuma fonte em negrito para botões predefinidos?
 
-Esses botões têm texto em negrito por padrão.</translation>
+Tais botões têm texto em negrito por padrão.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="456"/>
@@ -984,9 +984,9 @@ Checking this box removes arrows as far as possible.
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
         <translation>As barras de rolagem têm setas de linha e sub-linha por padrão.
 
-Marcar esta caixa remove as setas o máximo possível.
+Marcar esta caixa remove as setas tanto quanto possível.
 
-Se desabilitado, consulte Composição e Aparência Geral → Barras de rolagem transitórias!</translation>
+Se desativado, veja Composição e Aparência Geral → Barras de rolagem transitórias!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1624"/>
@@ -1169,11 +1169,11 @@ enquanto 0 significa sem atraso.</translation>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation>Desenhar barras de rolagem dentro de quadros de visualização?
+        <translation>Desenhar barras de rolagem dentro de molduras de visualização?
 
 Por padrão, as barras de rolagem são desenhadas em quadros de visualização externas.
 
-Se desabilitado, consulte Composição e Aparência Geral → Barras de rolagem transitórias!</translation>
+Se desativado, veja Composição e Aparência Geral → Barras de rolagem transitórias!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1880"/>
@@ -1410,12 +1410,12 @@ a tecla Ctrl antes de premir o botão.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2109"/>
         <source>Save the current list of apps</source>
-        <translation>Salvar a lista atual de aplicativos</translation>
+        <translation>Guardar a lista atual de aplicações</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2112"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Salvar a lista atual de aplicativos com seus temas correspondentes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Guardar a lista atual de aplicações com os seus temas correspondentes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
@@ -1690,7 +1690,7 @@ ou atualizar a sua pré-visualização.</translation>
         <location filename="../../KvantumManager.cpp" line="1317"/>
         <location filename="../../KvantumManager.cpp" line="1336"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation>Estas são as configurações que podem ser alteradas com segurança.&lt;br&gt;Para outros, clique em &lt;i&gt;Salvar&lt;/i&gt; e edite esse arquivo:</translation>
+        <translation>Estas são as definições que podem ser alteradas com segurança.&lt;br&gt;Para as outras, clique em &lt;i&gt;Guardar&lt;/i&gt; e edite este ficheiro:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1332"/>
