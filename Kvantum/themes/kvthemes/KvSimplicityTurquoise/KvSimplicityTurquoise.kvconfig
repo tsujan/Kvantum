@@ -360,7 +360,7 @@ text.focus.color=#005161
 text.press.color=white
 text.toggle.color=white
 text.toggle.inactive.color=white
-frame.expansion=6
+frame.expansion=8
 
 [Splitter]
 indicator.size=32

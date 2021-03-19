@@ -98,6 +98,12 @@ text.normal.color=white
 text.press.color=white
 text.toggle.color=black
 text.focus.color=white
+text.shadow=true
+text.shadow.xshift=0
+text.shadow.yshift=-1
+text.shadow.color=#000000
+text.shadow.alpha=200
+text.shadow.depth=1
 indicator.size=10
 frame.expansion=8
 min_width=+0.2font
@@ -115,6 +121,12 @@ indicator.element=arrow
 [DockTitle]
 text.bold=true
 text.focus.color=white
+text.shadow=true
+text.shadow.xshift=0
+text.shadow.yshift=-1
+text.shadow.color=#000000
+text.shadow.alpha=200
+text.shadow.depth=1
 
 [LineEdit]
 inherits=PanelButtonCommand
@@ -140,9 +152,11 @@ frame.element=button
 
 [RadioButton]
 inherits=PanelButtonCommand
+text.shadow=false
 
 [CheckBox]
 inherits=PanelButtonCommand
+text.shadow=false
 
 [GenericFrame]
 inherits=PanelButtonCommand
@@ -161,6 +175,7 @@ text.margin.top=2
 text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
+text.shadow=false
 
 [Tab]
 inherits=PanelButtonCommand
@@ -169,6 +184,7 @@ text.margin.right=6
 text.margin.top=3
 text.margin.bottom=4
 text.toggle.color=white
+text.shadow=false
 frame.top=3
 frame.bottom=3
 frame.left=3
@@ -217,6 +233,7 @@ frame.left=4
 frame.right=4
 text.press.color=white
 text.bold=true
+text.shadow=false
 
 [SizeGrip]
 inherits=PanelButtonCommand
@@ -262,6 +279,7 @@ frame.right=4
 [Progressbar]
 text.bold=true
 text.focus.color=white
+text.shadow=false
 frame.expansion=3.4font
 
 [ProgressbarContents]
@@ -314,6 +332,7 @@ frame.bottom=2
 frame.left=2
 frame.right=2
 text.focus.color=black
+text.shadow=false
 min_width=0
 min_height=0
 
@@ -327,6 +346,7 @@ frame.left=2
 frame.right=2
 text.margin.left=4
 text.margin.right=4
+text.shadow=false
 min_width=0
 min_height=0
 
