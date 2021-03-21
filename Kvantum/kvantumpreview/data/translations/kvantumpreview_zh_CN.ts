@@ -521,7 +521,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2379"/>
         <source>Page 2 (disabled)</source>
-        <translation type="unfinished">第一页（禁用的） {2 ?}</translation>
+        <translation type="unfinished">第二页（禁用的） {2 ?}</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2413"/>
@@ -530,7 +530,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2784"/>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>Page 1</source>
-        <translation type="unfinished"></translation>
+        <translation>第一页</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2427"/>
@@ -540,7 +540,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2798"/>
         <location filename="../../KvantumPreviewBase.ui" line="2846"/>
         <source>Page 2</source>
-        <translation type="unfinished"></translation>
+        <translation>第二页</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2451"/>
