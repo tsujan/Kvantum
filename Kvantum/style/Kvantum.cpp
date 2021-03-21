@@ -6366,8 +6366,6 @@ void Style::drawControl(QStyle::ControlElement element,
         int frameExpansion = fspec.expansion;
         if (status != "toggled" && tspec_.no_inactive_tab_expansion)
           fspec.expansion = 0;
-        if (isWidgetInactive(widget))
-          status.append("-inactive");
 
         QRect r = option->rect;
         bool verticalTabs = false;
@@ -6418,11 +6416,9 @@ void Style::drawControl(QStyle::ControlElement element,
           else
             sepName = sepName+"-normal";
         }
-        if (isWidgetInactive(widget))
-          sepName += "-inactive";
 
         if ((joinedActiveTab && !noActiveTabSep)
-            || status.startsWith("normal") || status.startsWith("focused"))
+            || status == "normal" || status == "focused")
         {
           if (tspec_.joined_inactive_tabs
               && tabPos != QStyleOptionTab::OnlyOneTab)
@@ -6652,7 +6648,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (overlap > 0 && (!joinedActiveTab || noActiveTabSep)
             && tabPos != QStyleOptionTab::OnlyOneTab)
         {
-          if (!status.startsWith("toggled"))
+          if (status != "toggled")
           {
             int exp = qMin(frameExpansion, qMin(r.width(), r.height())) / 2 + 1;
             overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
@@ -6718,6 +6714,11 @@ void Style::drawControl(QStyle::ControlElement element,
           }
         }
 
+        if (isWidgetInactive(widget))
+        {
+          status.append("-inactive");
+          sepName.append("-inactive");
+        }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
         if ((opt->state & State_HasFocus)
@@ -10730,7 +10731,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           if (isKisSlider_) leStatus = "normal";
           else leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
           if (isWidgetInactive(widget))
-            leStatus .append("-inactive");
+            leStatus.append("-inactive");
           if (!(option->state & State_Enabled))
           {
             painter->save();

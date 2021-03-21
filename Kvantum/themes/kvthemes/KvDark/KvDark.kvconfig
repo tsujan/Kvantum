@@ -105,7 +105,7 @@ text.shadow.color=#000000
 text.shadow.alpha=200
 text.shadow.depth=1
 indicator.size=10
-frame.expansion=8
+frame.expansion=10
 min_width=+0.2font
 min_height=+0.15font
 
@@ -308,6 +308,7 @@ text.margin.top=0
 text.margin.bottom=0
 text.margin.left=2
 text.margin.right=2
+frame.expansion=8
 min_height=0
 
 [Menu]
@@ -333,6 +334,7 @@ frame.left=2
 frame.right=2
 text.focus.color=black
 text.shadow=false
+frame.expansion=8
 min_width=0
 min_height=0
 
