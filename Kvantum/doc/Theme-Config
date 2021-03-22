@@ -1049,8 +1049,7 @@ text.margin                       true/false          Put a margin around the te
 text.margin.top
 text.margin.bottom
 text.margin.left
-text.margin.right                 Integer             The sizes of the text margins
-                                                      if there is any.
+text.margin.right                 Integer             The sizes of the text margins if any.
 
                                                       These values are mostly respected but
                                                       not if there is a lack of space because
@@ -1061,6 +1060,11 @@ text.margin.right                 Integer             The sizes of the text marg
                                                       left/right text margins may be a little
                                                       greater than text.margin.left/right. In
                                                       ItemView, the maximum margin is 6.
+
+                                                      Note: For historical reasons, Kvantum draws
+                                                      button like widgets a little more compact
+                                                      by subtracting one pixel from their text
+                                                      margins.
 
 text.normal.color                 String (#RRGGBBAA)  The color of the normal text as
                                                       #RRGGBB or #RRGGBBAA or with a valid

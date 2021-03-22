@@ -1035,7 +1035,7 @@
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,474,0)">
 <path style="opacity:0" id="path5158" d="m 277,960 -12,0 0,12 12,0 z"/>
-<path style="fill:url(#linearGradient5177)" id="path5160" d="m 277,960 c -4,0 -8,3.48232 -8,9 v 3 h 8 z "/>
+<path style="fill:url(#linearGradient5177)" id="path5160" d="m 277,960 c -4.5,0 -8,3.5 -8,8 v 4 h 8 z"/>
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-normal-left" transform="matrix(-1,0,0,1,474,0)">
 <path style="opacity:0" id="path5164" d="m 289,972 0,16.4064 0,.094 -12,0 0,-16.5 12,0 z "/>
@@ -1043,7 +1043,7 @@
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-normal-topleft" transform="matrix(-1,0,0,1,474,0)">
 <path style="opacity:0" id="path5170" d="m 277,960 12,0 0,12 -12,0 z"/>
-<path style="fill:url(#linearGradient5182)" id="path5172" d="m 277,960 c 4,0 8,3.48232 8,9 v 3 h -8 z "/>
+<path style="fill:url(#linearGradient5182)" id="path5172" d="m 277,960 c 4.5,0 8,3.5 8,8 v 4 h -8 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topright" id="scrollbarslider-normal-bottomright" transform="matrix(1,0,0,-1,0,1960.5004)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomleft" transform="matrix(1,0,0,-1,0,1960.5004)"/>
@@ -1053,7 +1053,7 @@
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-focused-topright" transform="matrix(-1,0,0,1,509,0)">
 <path style="opacity:0" id="path5054" d="m 277,960 -12,0 0,12 12,0 z"/>
-<path style="fill:url(#linearGradient5411)" id="path5056" d="m 277,960 c -4,0 -8,3.48232 -8,9 v 3 h 8 z "/>
+<path style="fill:url(#linearGradient5411)" id="path5056" d="m 277,960 c -4.5,0 -8,3.5 -8,8 v 4 h 8 z"/>
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-focused-left" transform="matrix(-1,0,0,1,509,0)">
 <path style="opacity:0" id="path5060" d="m 289,972 0,16.4064 0,.094 -12,0 0,-16.5 12,0 z "/>
@@ -1061,7 +1061,7 @@
 </g>
 <g style="fill-rule:evenodd" id="scrollbarslider-focused-topleft" transform="matrix(-1,0,0,1,509,0)">
 <path style="opacity:0" id="path5067" d="m 277,960 12,0 0,12 -12,0 z"/>
-<path style="fill:url(#linearGradient5413)" id="path5069" d="m 277,960 c 4,0 8,3.48232 8,9 v 3 h -8 z "/>
+<path style="fill:url(#linearGradient5413)" id="path5069" d="m 277,960 c 4.5,0 8,3.5 8,8 v 4 h -8 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-focused-bottomright" transform="matrix(1,0,0,-1,0,1960.5004)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-bottomleft" transform="matrix(1,0,0,-1,0,1960.5004)"/>
