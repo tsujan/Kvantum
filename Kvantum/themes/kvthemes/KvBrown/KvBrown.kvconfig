@@ -28,13 +28,13 @@ animate_states=true
 alt_mnemonic=true
 button_contents_shift=true
 button_icon_size=16
-combo_as_lineedit=false
+combo_as_lineedit=true
 combo_menu=true
 combo_focus_rect=true
 square_combo_button=true
 fill_rubberband=false
 groupbox_top_label=true
-inline_spin_indicators=false
+inline_spin_indicators=true
 joined_inactive_tabs=true
 no_inactive_tab_expansion=true
 tab_button_extra_margin=0.15font
@@ -184,9 +184,9 @@ frame.expanded.right=1
 text.press.color=white
 text.toggle.color=white
 frame.expansion=3.6font
-indicator.size=12
+indicator.size=13
 min_width=+0.1font
-min_height=+0.2font
+min_height=+0.22font
 focusFrame=true
 
 [TabFrame]
@@ -284,7 +284,7 @@ text.toggle.color=black
 text.press.color=black
 min_width=0
 min_height=0
-frame.expansion=0
+frame.expansion=8
 
 [Menu]
 inherits=PanelButtonCommand

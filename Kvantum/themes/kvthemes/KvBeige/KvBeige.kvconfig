@@ -177,7 +177,7 @@ text.press.color=black
 text.toggle.color=black
 text.toggle.inactive.color=#000000bf
 frame.expansion=3.6font
-indicator.size=12
+indicator.size=13
 
 [TabFrame]
 inherits=PanelButtonCommand
@@ -270,7 +270,7 @@ text.margin.left=2
 text.margin.right=2
 text.toggle.color=white
 text.press.color=white
-frame.expansion=6
+frame.expansion=8
 
 [Menu]
 inherits=PanelButtonCommand
