@@ -585,12 +585,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2875"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>文件(&amp;F)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>&amp;Submenu</source>
-        <translation type="unfinished"></translation>
+        <translation>子菜单(&amp;S)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
@@ -605,22 +605,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>退出(&amp;Q)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2944"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2947"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>选择框(&amp;C)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
@@ -635,7 +635,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
         <source>&amp;Doc Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>文档模式(&amp;D)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>
