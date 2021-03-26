@@ -650,30 +650,6 @@
 <use width="100%" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomleft" transform="matrix(0,-1,1,0,-1080,1278)"/>
 <use width="100%" height="100%" xlink:href="#common-focused-left" id="common-focused-right" transform="matrix(-1,0,0,1,198,0)"/>
 <use width="100%" height="100%" xlink:href="#common-focused-topleft" id="common-focused-bottomright" transform="matrix(-1,0,0,-1,198,2358)"/>
-<g style="fill-rule:evenodd" id="scrollbarslider-focused-topleft" transform="translate(81,-82)">
-<rect width="12" x="130" y="1110" height="12" style="stroke-linejoin:round;fill-opacity:0;stroke-linecap:round;stroke-width:3" id="rect4920"/>
-<g id="g4922" transform="translate(-13,21)">
-<path style="fill:#c86c00" id="path4924" d="m 155,1089 c -6.51094,0 -10,5 -10,12 h 10 z "/>
-<path style="fill:#555" id="path4926" d="m 155,1093 c -4.48765,-0.023 -6,3 -6,8 h 6 z "/>
-</g>
-</g>
-<g style="fill-rule:evenodd" id="scrollbarslider-focused-left" transform="translate(81,-82)">
-<rect width="12" x="130" y="1122" height="16" style="stroke-linejoin:round;fill-opacity:0;stroke-linecap:round;stroke-width:3" id="rect4930"/>
-<g id="g4932" transform="translate(-13,21)">
-<path style="fill:#c86c00" id="path4934" d="m 145,1101 0,15.9089 0,.091 10,0 0,-16 -10,0 z "/>
-<path style="fill:#555" id="path4936" d="m 149,1101 0,15.9087 0,.091 6,0 0,-16 -6,0 z "/>
-</g>
-</g>
-<use width="100%" height="100%" id="scrollbarslider-focused-topright" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(-1,0,0,1,446,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-focused-right" xlink:href="#scrollbarslider-focused-left" transform="matrix(-1,0,0,1,446,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-focused-bottomleft" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(1,0,0,-1,0,2096)"/>
-<use width="100%" height="100%" id="scrollbarslider-focused-bottomright" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(-1,0,0,-1,446,2096)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-topleft" xlink:href="#scrollbarslider-focused-topleft" transform="translate(54,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-left" xlink:href="#scrollbarslider-focused-left" transform="translate(54,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-topright" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(-1,0,0,1,500,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-right" xlink:href="#scrollbarslider-focused-left" transform="matrix(-1,0,0,1,500,0)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-bottomleft" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(1,0,0,-1,54,2095.9085)"/>
-<use width="100%" height="100%" id="scrollbarslider-pressed-bottomright" xlink:href="#scrollbarslider-focused-topleft" transform="matrix(-1,0,0,-1,500,2095.9085)"/>
 <g style="fill-rule:evenodd">
 <g id="tab-close-pressed" transform="translate(57,706)">
 <circle cx="225" cy="460" style="opacity:0" id="path4835" r="9"/>
@@ -744,22 +720,40 @@
 <path id="progress-normal-right" d="m 215,304.25 v 32.5 h -5.25 v -32.5 z "/>
 <path id="progress-normal-topright" d="m 209.75,299 c 3,1e-05 5.25,2.25001 5.25,5.25 h -5.25 z "/>
 </g>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-topleft" transform="translate(23,-61.5009)">
-<path style="fill:#969696;fill-opacity:0" id="scrollbarslider-normal-topleft0-9" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 z"/>
-<path style="fill:#787878" id="path4475-1" d="m 155,1092.5 c -4,0.011 -4,2.7501 -4,8.4998 h 4 z"/>
+<g style="fill-rule:evenodd" id="scrollbarslider-normal-topleft" transform="translate(45,-52.5)">
+<path style="opacity:0" id="path1497" d="m 146,1078.5 v 12 h 12 v -12 z"/>
+<g style="fill:#787878" id="g1561">
+<path id="path1463" d="m 158,1078.5 c -2.216,0 -4,1.784 -4,4 h 4 z"/>
+<path id="rect1483" d="m 154,1082.5 h 4 v 8 h -4 z"/>
 </g>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-left" transform="translate(23,-61.5009)">
-<path style="fill:#969696;fill-opacity:0" id="scrollbarslider-normal-left0-1" d="m 143,1101 v 16.4064 0.094 h 12 v -16.5 h -12 z"/>
-<path style="fill:#787878" id="path4477-3" d="m 151,1101 v 16.4064 0.094 h 4 v -16.5 h -4 z"/>
 </g>
-<use width="450" height="1230" id="scrollbarslider-normal-bottomleft" xlink:href="#scrollbarslider-normal-topleft" transform="matrix(1,0,0,-1,0,2095.4991)"/>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,333,-61.5009)">
-<path style="fill:#969696;fill-opacity:0" id="path6017" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 z"/>
-<path style="fill:#787878" id="path6019" d="m 155,1092.5 c -4,0.011 -4,2.7501 -4,8.4998 h 4 z"/>
+<g style="fill-rule:evenodd" id="scrollbarslider-normal-left" transform="translate(45,-55.5)">
+<path style="opacity:0" id="path1465" d="m 146,1093.5 v 12 h 12 v -12 z"/>
+<path style="fill:#787878" id="path1491" d="m 154,1093.5 v 12 h 4 v -12 z"/>
 </g>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-right" transform="matrix(-1,0,0,1,333,-61.5009)">
-<path style="fill:#969696;fill-opacity:0" id="path6025" d="m 143,1101 v 16.4064 0.094 h 12 v -16.5 h -12 z"/>
-<path style="fill:#787878" id="path6027" d="m 151,1101 v 16.4064 0.094 h 4 v -16.5 h -4 z"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomleft" transform="matrix(1,0,0,-1,0,2088)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,406,0)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-normal-left" id="scrollbarslider-normal-right" transform="matrix(-1,0,0,1,406,0)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomright" transform="rotate(180,203,1044)"/>
+<g style="fill-rule:evenodd" id="scrollbarslider-focused-topleft" transform="translate(77,-52.5)">
+<path style="opacity:0" id="path1558" d="m 146,1078.5 v 12 h 12 v -12 z"/>
+<g style="fill:#c86c00" id="g1574">
+<path id="path1560" d="m 158,1078.5 c -2.216,0 -4,1.784 -4,4 h 4 z"/>
+<path id="path1562" d="m 154,1082.5 h 4 v 8 h -4 z"/>
 </g>
-<use width="100%" height="100%" id="scrollbarslider-normal-bottomright" xlink:href="#scrollbarslider-normal-topright" transform="matrix(1,0,0,-1,0,2095.499)"/>
+</g>
+<g style="fill-rule:evenodd" id="scrollbarslider-focused-left" transform="translate(77,-55.5)">
+<path style="opacity:0" id="path1566" d="m 146,1093.5 v 12 h 12 v -12 z"/>
+<path style="fill:#c86c00" id="path1568" d="m 154,1093.5 v 12 h 4 v -12 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-topright" transform="matrix(-1,0,0,1,470,0)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-focused-right" transform="matrix(-1,0,0,1,470,0)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-bottomleft" transform="matrix(1,0,0,-1,-6e-5,2088)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-bottomright" transform="rotate(180,235,1044)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-pressed-topleft" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-left" id="scrollbarslider-pressed-left" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-pressed-topright" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-right" id="scrollbarslider-pressed-right" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-bottomleft" id="scrollbarslider-pressed-bottomleft" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#scrollbarslider-focused-bottomright" id="scrollbarslider-pressed-bottomright" transform="translate(30)"/>
 </svg>

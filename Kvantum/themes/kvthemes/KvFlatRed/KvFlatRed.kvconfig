@@ -10,6 +10,7 @@ spread_progressbar=true
 progressbar_thickness=6
 composite=true
 menu_shadow_depth=6
+spread_menuitems=true
 tooltip_shadow_depth=6
 splitter_width=7
 scroll_width=12

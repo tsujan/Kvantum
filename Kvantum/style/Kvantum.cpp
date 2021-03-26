@@ -8293,9 +8293,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
       const QString group = "ScrollbarSlider";
 
-      frame_spec fspec = getFrameSpec(group);
-      fspec.expansion = 0; // no need to frame expansion because the thickness is known
-      interior_spec ispec = getInteriorSpec(group);
+      frame_spec fspec;
+      interior_spec ispec;
       const indicator_spec dspec = getIndicatorSpec(group);
 
       QRect r = option->rect;
@@ -8337,17 +8336,22 @@ void Style::drawControl(QStyle::ControlElement element,
           else
             r.adjust(space, 0, 0, 0);
         }
-        /* use traansient elements if they exist */
-        const frame_spec fspec1 = getFrameSpec(QStringLiteral("ScrollbarTransientSlider"));
-        const interior_spec ispec1 = getInteriorSpec(QStringLiteral("ScrollbarTransientSlider"));
-        if (fspec1.hasFrame || ispec1.hasInterior)
+        /* use transient elements if they exist */
+        fspec = getFrameSpec(QStringLiteral("ScrollbarTransientSlider"));
+        ispec = getInteriorSpec(QStringLiteral("ScrollbarTransientSlider"));
+        if (!fspec.hasFrame && !ispec.hasInterior)
         {
-          fspec.hasFrame = fspec1.hasFrame;
-          ispec.hasInterior = ispec1.hasInterior;
-          fspec.element = fspec1.element;
-          ispec.element = ispec1.element;
+          fspec = getFrameSpec(group);
+          ispec = getInteriorSpec(group);
         }
       }
+      else
+      {
+        fspec = getFrameSpec(group);
+        ispec = getInteriorSpec(group);
+      }
+
+      fspec.expansion = 0; // no need to frame expansion because the thickness is known
 
       if (!(option->state & State_Enabled))
       {

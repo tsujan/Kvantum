@@ -1,7 +1,7 @@
 [%General]
 author=Tsu Jan
 comment=A dark flat theme inspired by Breeze
-x11drag=true
+x11drag=all
 alt_mnemonic=true
 left_tabs=false
 attach_active_tab=true
@@ -10,6 +10,7 @@ spread_progressbar=true
 progressbar_thickness=3font
 composite=true
 menu_shadow_depth=6
+spread_menuitems=true
 tooltip_shadow_depth=6
 splitter_width=7
 scroll_width=12
@@ -24,6 +25,8 @@ check_size=16
 toolbar_icon_size=16
 dark_titlebar=true
 animate_states=true
+transient_groove=false
+transient_scrollbar=true
 
 [GeneralColors]
 window.color=#3D3D3E
@@ -273,6 +276,15 @@ frame.left=2
 frame.right=2
 indicator.element=grip
 indicator.size=13
+
+[ScrollbarTransientSlider]
+frame=true
+frame.element=ss
+interior=false
+frame.top=6
+frame.bottom=6
+frame.left=6
+frame.right=6
 
 [ScrollbarGroove]
 inherits=PanelButtonCommand

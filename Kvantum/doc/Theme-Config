@@ -127,9 +127,15 @@ Section                                      Meaning
                                              scrollbars (see "transient_scrollbar" below).
                                              It takes all of its values from
                                              "ScrollbarSlider", except for its frame and
-                                             interior elements. It is useful when the
-                                             ordinary scrollbar slider elements are not good
-                                             enough with transient scrollbars.
+                                             interior elements.
+
+                                             It can also have its own frame sizes but if
+                                             they don't exist, those of "ScrollbarSlider"
+                                             will be used.
+
+                                             It is useful when the ordinary scrollbar
+                                             slider elements are not good enough with
+                                             transient scrollbars.
 
 [Slider]                                     A slider (a classic widget for
                                              controlling a bounded value).

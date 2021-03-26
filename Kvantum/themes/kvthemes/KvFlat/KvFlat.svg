@@ -771,4 +771,40 @@
 <rect width="2" x="-372.5" y="-130" height="10" style="fill-opacity:0" id="rect4954" transform="scale(-1,-1)"/>
 <rect width="1" x="371.5" y="120" height="10" style="fill:#2e2e2e" id="rect4956"/>
 </g>
+<g style="fill-rule:evenodd" id="ss-normal-topleft" transform="translate(16,79.5)">
+<path style="opacity:0" id="path1497" d="m 146,1078.5 v 12 h 12 v -12 h -12 z "/>
+<g style="fill:#707070">
+<path id="path1463" d="m 158,1078.5 c -2.216,0 -4,1.784 -4,4 h 4 z"/>
+<path id="rect1483" d="m 154,1082.5 h 4 v 8 h -4 z"/>
+</g>
+</g>
+<g style="fill-rule:evenodd" id="ss-normal-left" transform="translate(16,76.5)">
+<path style="opacity:0" id="path1465" d="m 146,1093.5 v 12 h 12 v -12 Z "/>
+<path style="fill:#707070" id="path1491" d="m 154,1093.5 v 12 h 4 v -12 Z "/>
+</g>
+<use width="100%" height="100%" xlink:href="#ss-normal-topleft" id="ss-normal-bottomleft" transform="matrix(1,0,0,-1,0,2352)"/>
+<use width="100%" height="100%" xlink:href="#ss-normal-topleft" id="ss-normal-topright" transform="matrix(-1,0,0,1,348,0)"/>
+<use width="100%" height="100%" xlink:href="#ss-normal-left" id="ss-normal-right" transform="matrix(-1,0,0,1,348,0)"/>
+<use width="100%" height="100%" xlink:href="#ss-normal-topleft" id="ss-normal-bottomright" transform="rotate(180,174,1176)"/>
+<g style="fill-rule:evenodd" id="ss-focused-topleft" transform="translate(48,79.5)">
+<path style="opacity:0" id="path1558" d="m 146,1078.5 v 12 h 12 v -12 h -12 z "/>
+<g style="fill:#148acc">
+<path id="path1560" d="m 158,1078.5 c -2.216,0 -4,1.784 -4,4 h 4 z"/>
+<path id="path1562" d="m 154,1082.5 h 4 v 8 h -4 z"/>
+</g>
+</g>
+<g style="fill-rule:evenodd" id="ss-focused-left" transform="translate(48,76.5)">
+<path style="opacity:0" id="path1566" d="m 146,1093.5 v 12 h 12 v -12 Z "/>
+<path style="fill:#148acc" id="path1568" d="m 154,1093.5 v 12 h 4 v -12 Z "/>
+</g>
+<use width="100%" height="100%" xlink:href="#ss-focused-topleft" id="ss-focused-topright" transform="matrix(-1,0,0,1,412,0)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-left" id="ss-focused-right" transform="matrix(-1,0,0,1,412,0)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-topleft" id="ss-focused-bottomleft" transform="matrix(1,0,0,-1,-6e-5,2352)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-topleft" id="ss-focused-bottomright" transform="rotate(180,206,1176)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-topleft" id="ss-pressed-topleft" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-left" id="ss-pressed-left" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-topright" id="ss-pressed-topright" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-right" id="ss-pressed-right" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-bottomleft" id="ss-pressed-bottomleft" transform="translate(30)"/>
+<use width="100%" height="100%" xlink:href="#ss-focused-bottomright" id="ss-pressed-bottomright" transform="translate(30)"/>
 </svg>

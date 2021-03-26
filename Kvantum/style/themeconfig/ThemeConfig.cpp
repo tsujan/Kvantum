@@ -186,6 +186,8 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
       {
         i = getValue(name, KSL("inherits")).toString();
       }
+      else if (elementName == "ScrollbarTransientSlider")
+        i = "ScrollbarSlider"; // to get the frame sizes
 
       v = getValue(name,KSL("frame.top"), i);
       r.top = qMax(v.toInt(),0);
