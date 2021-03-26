@@ -8291,12 +8291,6 @@ void Style::drawControl(QStyle::ControlElement element,
         }
       }
 
-      const QString group = "ScrollbarSlider";
-
-      frame_spec fspec;
-      interior_spec ispec;
-      const indicator_spec dspec = getIndicatorSpec(group);
-
       QRect r = option->rect;
       if (option->state & State_Horizontal)
       {
@@ -8336,7 +8330,15 @@ void Style::drawControl(QStyle::ControlElement element,
           else
             r.adjust(space, 0, 0, 0);
         }
-        /* use transient elements if they exist */
+      }
+
+      const QString group = "ScrollbarSlider";
+      frame_spec fspec;
+      interior_spec ispec;
+      const indicator_spec dspec = getIndicatorSpec(group);
+
+      if (option->styleObject && styleHint(SH_ScrollBar_Transient,option,widget)) // as in CC_ScrollBar
+      { // use transient elements if they exist
         fspec = getFrameSpec(QStringLiteral("ScrollbarTransientSlider"));
         ispec = getInteriorSpec(QStringLiteral("ScrollbarTransientSlider"));
         if (!fspec.hasFrame && !ispec.hasInterior)

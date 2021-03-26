@@ -576,7 +576,7 @@ void Style::polish(QWidget *widget)
   if (wBaseCol.alpha() < 255 && wBaseCol == standardPalette().color(QPalette::Base)
       && ((isOpaque_ && qobject_cast<QAbstractItemView*>(widget)) // like in VLC play list view
           /* Without combo menu, "QComboBoxPrivateContainer" should be opaque.
-            With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
+             With combo menu, it may be changed by the app and so, polished again (like in Lyx). */
           || widget->inherits("QComboBoxPrivateContainer")
           || (!tspec_.combo_menu && widget->inherits("QComboBoxListView")) // simple combo popup
           || widget->inherits("QTextEdit") || widget->inherits("QPlainTextEdit")
