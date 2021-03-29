@@ -910,7 +910,7 @@
 <path style="fill-opacity:0" id="toolbar-normal-topright" d="m 385,20 v 5 h 5 v -5 z"/>
 <path style="fill-opacity:0" id="toolbar-normal-bottom" d="m 355,55 v 5 h 30 v -5 z"/>
 <path style="fill-opacity:0" id="toolbar-normal-bottomright" d="m 385,55 v 5 h 5 v -5 z"/>
-<path style="fill:#726a6a;fill-rule:evenodd" id="tab-tear" d="m 420.5,822.5 h 15 v 15 h -15 z"/>
+<path style="fill:#b2b2b2;fill-rule:evenodd" id="tab-tear" d="m 420.5,822.5 h 15 v 15 h -15 z"/>
 <path style="fill:#a6a6a6" id="menubaritem-pressed-bottom" d="m 290,735 h 30 v 2.5 h -30 z"/>
 <use width="450" height="1230" xlink:href="#menubaritem-pressed-bottom" id="menubaritem-toggled-bottom" transform="translate(40,0)"/>
 <g style="fill-rule:evenodd" id="menuitem-tearoff-focused" transform="translate(761.2612,106.75)">

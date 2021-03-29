@@ -12705,11 +12705,9 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_FocusFrameVMargin :
     case PM_FocusFrameHMargin : {
       int margin = 0;
-      /* This is for putting the viewitem's text and icon inside
-         its (forced) frame. It also sets the text-icon spacing
-         (-> Qt ->qcommonstyle.cpp). It seems that apart from
-         viewitems, it's only used for CT_ComboBox, whose default
-         size I don't use. */
+      /* This is for putting the viewitem's text and icon
+         inside its (forced) frame. Apart from viewitems,
+         it's only used in CT_ComboBox. */
       const QString group = "ItemView";
       const frame_spec fspec = getFrameSpec(group);
       const label_spec lspec = getLabelSpec(group);
@@ -13511,9 +13509,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         }
         else hasIcon = true;
 
-        /* exactly as in QCommonStyle (needed in subControlRect -> CC_ComboBox) */
+        /* almost as in QCommonStyle (needed in subControlRect -> CC_ComboBox) */
         int comboWidth = contentsSize.width()
-                         + qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                         + qMax(23, 2*(pixelMetric(PM_FocusFrameHMargin) + 1)
                                     + pixelMetric(PM_ScrollBarExtent,option,widget))
                          + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
 
@@ -15391,12 +15389,12 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                            : qMin(pixelMetric(PM_SmallIconSize), pixelMetric(PM_IndicatorWidth,option,widget))
                              + pixelMetric(PM_CheckBoxLabelSpacing))
                       /* NOTE: We added this to combobox width (as QCommonStyle does):
-                                qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                                qMax(23, 2*(pixelMetric(PM_FocusFrameHMargin) + 1)
                                          + pixelMetric(PM_ScrollBarExtent))
                                          + (opt->frame ? pixelMetric(PM_ComboBoxFrameWidth)*2 : 0)
                                But We don't need it here. As for reserving space for scrollbar,
                                it shouldn't be needed with a menu and special cases can be ignored. */
-                      - qMax(23, 4*(pixelMetric(PM_FocusFrameHMargin) + 1)
+                      - qMax(23, 2*(pixelMetric(PM_FocusFrameHMargin) + 1)
                                  + pixelMetric(PM_ScrollBarExtent,option,widget))
                       - (opt && opt->frame ? pixelMetric(PM_ComboBoxFrameWidth, opt, widget)*2 : 0);
 

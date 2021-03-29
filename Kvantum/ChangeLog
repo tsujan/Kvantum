@@ -4,6 +4,7 @@ V0.20.0
  * Added a theme (KvDark).
  * Better colors for texts and symbolic icons of disabled toggled buttons.
  * Use frame sizes of "ScrollbarTransientSlider" if existing.
+ * Decreased the combo box width by 2*PM_FocusFrameHMargin, which was added before drawing view-items inside Kvantum.
 
 V0.19.0
 ---------
