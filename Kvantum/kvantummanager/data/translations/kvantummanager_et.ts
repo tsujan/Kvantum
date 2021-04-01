@@ -244,7 +244,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ära loo (KDE) menüünimedele tausta&lt;/p&gt;&lt;p&gt;Menüünimed sarnanaevad menüü eraldajatele, aga neil on ikoon ja tekst.&lt;/p&gt;&lt;p&gt;Jõustamiseks tuleb välja ja sisse logida. LXQt paneeli puhul piisab paneeli taaskäivitamisest  &lt;span style=&quot; font-style:italic;&quot;&gt;Seansi seadetes &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ära loo (KDE) menüünimedele tausta&lt;/p&gt;&lt;p&gt;Menüünimed sarnanevad menüü eraldajatele, aga neil on ikoon ja tekst.&lt;/p&gt;&lt;p&gt;Jõustamiseks tuleb välja ja sisse logida. LXQt paneeli puhul piisab paneeli taaskäivitamisest &lt;span style=&quot; font-style:italic;&quot;&gt;Seansi seadetes &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -624,7 +624,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1294"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondi suurus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -1272,7 +1272,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1965"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Luba lohistanime nuppudest</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
@@ -1417,12 +1417,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>üks klõps</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>kaks klõpsu</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
