@@ -5,6 +5,7 @@ V0.20.0
  * Better colors for texts and symbolic icons of disabled toggled buttons.
  * Use frame sizes of "ScrollbarTransientSlider" if existing.
  * Decreased the combo box width by 2*PM_FocusFrameHMargin, which was added before drawing view-items inside Kvantum.
+ * A little more compact busy indicator for ordinary progressbars.
 
 V0.19.0
 ---------

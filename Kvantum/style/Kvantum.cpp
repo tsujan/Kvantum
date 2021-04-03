@@ -7754,6 +7754,12 @@ void Style::drawControl(QStyle::ControlElement element,
           QWidget *wi = const_cast<QWidget*>(widget);
           int animcount = progressbars_[wi];
           int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);
+          if (pm > h
+              && h >= fspec.left+fspec.right
+              && h >= QFontMetrics(f).height())
+          { // make it compact with ordinary progressbars
+            pm = h;
+          }
           QRect R = r.adjusted(animcount,0,0,0);
           if (isVertical)
           {
