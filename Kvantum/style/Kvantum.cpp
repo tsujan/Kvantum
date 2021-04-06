@@ -13135,19 +13135,22 @@ int Style::styleHint(QStyle::StyleHint hint,
       return tspec_.menubar_mouse_tracking;
 
     case SH_TabBar_Alignment : {
-      if (tspec_.left_tabs)
+      const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
+      if (!tw || tw->documentMode()) // floating tabs
       {
         if (tspec_.center_doc_tabs)
-        {
-          const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
-          if (!tw || tw->documentMode())
-            return Qt::AlignCenter;
-        }
-        return Qt::AlignLeft;
+            return Qt::AlignCenter;  // floating tabs centered
+          else
+            return Qt::AlignLeft;  // floating tabs left-aligned
       }
-      else
-        return Qt::AlignCenter;
-    }
+      else // normal tabs
+      {
+        if (tspec_.left_tabs)
+          return Qt::AlignLeft;  // normal tabs left-aligned
+        else
+          return Qt::AlignCenter;  // normal tabs centered
+      }
+    }      
 
     case SH_TabBar_ElideMode : return Qt::ElideNone; // don't interfere with CE_TabBarTabLabel
 
