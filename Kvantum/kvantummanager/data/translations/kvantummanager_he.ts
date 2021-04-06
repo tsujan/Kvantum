@@ -281,7 +281,7 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1022"/>
         <location filename="../../kvantummanager.ui" line="1055"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
@@ -294,7 +294,9 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation>שימושי עם ערכות סמלים מונוכרוניות
+וכאשר האטימות של סמלים מושבתים
+לא מופחתת בשום צורה אחרת.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="679"/>
