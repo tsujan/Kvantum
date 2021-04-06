@@ -53,6 +53,8 @@ typedef struct {
   bool left_tabs;
   /* always center tabs in the document mode? */
   bool center_doc_tabs;
+  /* always center normal tabs? */
+  bool center_normal_tabs;
   /* join inactive tabs together?
      (by default, they are joined) */
   bool joined_inactive_tabs;
@@ -470,6 +472,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.click_behavior = 0;
   tspec.left_tabs = false;
   tspec.center_doc_tabs = false;
+  tspec.center_normal_tabs = false;
   tspec.joined_inactive_tabs = true;
   tspec.attach_active_tab = false;
   tspec.embedded_tabs = false;

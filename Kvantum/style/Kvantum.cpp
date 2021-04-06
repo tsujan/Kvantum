@@ -13137,12 +13137,14 @@ int Style::styleHint(QStyle::StyleHint hint,
     case SH_TabBar_Alignment : {
       if (tspec_.left_tabs)
       {
-        if (tspec_.center_doc_tabs)
+        const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
+        if (!tw || tw->documentMode())
         {
-          const QTabWidget *tw = qobject_cast<const QTabWidget*>(widget);
-          if (!tw || tw->documentMode())
+          if (tspec_.center_doc_tabs)
             return Qt::AlignCenter;
         }
+        else if (tspec_.center_normal_tabs)
+          return Qt::AlignCenter;
         return Qt::AlignLeft;
       }
       else

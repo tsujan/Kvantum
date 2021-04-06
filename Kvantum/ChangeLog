@@ -7,6 +7,7 @@ V0.20.0
  * Decreased the combo box width by 2*PM_FocusFrameHMargin, which was added before drawing view-items inside Kvantum.
  * A little more compact busy indicator for ordinary progressbars.
  * Removed the key about KCapacityBar. It's a redundant KDE widget that should always be drawn as a progressbar.
+ * Added a key for always centering normal tabs (in contrast to those in the document mode).
 
 V0.19.0
 ---------

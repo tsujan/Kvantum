@@ -128,6 +128,8 @@ private:
     QString lang_;
     QString modifiedSuffix_;
     QString kvDefault_;
+
+    bool centerDefaultDocTabs_, centerDefaultNormalTabs_;
 };
 
 }

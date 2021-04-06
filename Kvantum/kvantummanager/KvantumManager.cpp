@@ -48,6 +48,8 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     modifiedSuffix_ = " (" + tr ("modified") + ")";
     kvDefault_ = "Kvantum (" + tr ("default") + ")";
 
+    centerDefaultDocTabs_ = centerDefaultNormalTabs_ = false; // not really needed
+
 #if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
     ui->checkBoxKineticScrolling->setEnabled (false);
 #endif
@@ -1023,19 +1025,26 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxAnimation->setChecked (defaultSettings.value ("animate_states").toBool());
     ui->checkBoxPattern->setChecked (defaultSettings.value ("no_window_pattern").toBool());
     ui->checkBoxInactiveness->setChecked (defaultSettings.value ("no_inactiveness").toBool());
-    ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool());
+
+    /* tab aligning keys are a little different */
+    bool centerDefaultDocTabs_ = defaultSettings.value ("center_doc_tabs").toBool();
+    bool centerDefaultNormalTabs_ = defaultSettings.value ("center_normal_tabs").toBool();
+    ui->checkBoxleftTab->setChecked (defaultSettings.value ("left_tabs").toBool()
+                                     && !(centerDefaultDocTabs_ && centerDefaultNormalTabs_));
+    ui->checkBoxleftTab->setEnabled (!centerDefaultDocTabs_ && !centerDefaultNormalTabs_);
+
     ui->checkBoxJoinTab->setChecked (defaultSettings.value ("joined_inactive_tabs").toBool());
     if (defaultSettings.contains ("scroll_arrows")) // it's true by default
-      ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
+        ui->checkBoxNoScrollArrow->setChecked (!defaultSettings.value ("scroll_arrows").toBool());
     else
-      ui->checkBoxNoScrollArrow->setChecked (false);
+        ui->checkBoxNoScrollArrow->setChecked (false);
     ui->checkBoxScrollIn->setChecked (defaultSettings.value ("scrollbar_in_view").toBool());
     ui->checkBoxTransient->setChecked (defaultSettings.value ("transient_scrollbar").toBool());
     ui->checkBoxTransientGroove->setChecked (defaultSettings.value ("transient_groove").toBool());
     if (defaultSettings.contains ("scrollable_menu")) // it's true by default
-      ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
+        ui->checkBoxScrollableMenu->setChecked (defaultSettings.value ("scrollable_menu").toBool());
     else
-      ui->checkBoxScrollableMenu->setChecked (true);
+        ui->checkBoxScrollableMenu->setChecked (true);
     ui->checkBoxTree->setChecked (defaultSettings.value ("tree_branch_line").toBool());
     ui->checkBoxGroupLabel->setChecked (defaultSettings.value ("groupbox_top_label").toBool());
     ui->checkBoxRubber->setChecked (defaultSettings.value ("fill_rubberband").toBool());
@@ -1352,6 +1361,8 @@ void KvantumManager::tabChanged (int index)
 
             if (QFile::exists (themeConfig)) // doesn't exist for a root theme without config
             {
+                /* NOTE: The existence of keys should be checked because of inheritance. */
+
                 QSettings themeSettings (themeConfig, QSettings::NativeFormat);
                 /* consult the default config file if a key doesn't exist */
                 themeSettings.beginGroup ("General");
@@ -1368,8 +1379,19 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxPattern->setChecked (themeSettings.value ("no_window_pattern").toBool());
                 if (themeSettings.contains ("no_inactiveness"))
                     ui->checkBoxInactiveness->setChecked (themeSettings.value ("no_inactiveness").toBool());
-                if (themeSettings.contains ("left_tabs"))
+
+                bool centerDocTabs = centerDefaultDocTabs_;
+                bool centerNormalTabs = centerDefaultNormalTabs_;
+                if (themeSettings.contains ("center_doc_tabs"))
+                    centerDocTabs = themeSettings.value ("center_doc_tabs").toBool();
+                if (themeSettings.contains ("center_normal_tabs"))
+                    centerNormalTabs = themeSettings.value ("center_normal_tabs").toBool();
+                if (centerDocTabs && centerNormalTabs)
+                    ui->checkBoxleftTab->setChecked (false);
+                else if (themeSettings.contains ("left_tabs"))
                     ui->checkBoxleftTab->setChecked (themeSettings.value ("left_tabs").toBool());
+                ui->checkBoxleftTab->setEnabled (!centerDocTabs && !centerNormalTabs);
+
                 if (themeSettings.contains ("joined_inactive_tabs"))
                     ui->checkBoxJoinTab->setChecked (themeSettings.value ("joined_inactive_tabs").toBool());
                 if (themeSettings.contains ("joined_tabs")) // backward compatibility

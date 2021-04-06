@@ -768,6 +768,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("center_doc_tabs"));
   r.center_doc_tabs = v.toBool();
 
+  v = getValue(KSL("General"),KSL("center_normal_tabs"));
+  r.center_normal_tabs = v.toBool();
+
   v = getValue(KSL("General"),KSL("joined_inactive_tabs"));
   if (v.isValid()) // true by default
     r.joined_inactive_tabs = v.toBool();

@@ -320,14 +320,22 @@ square_combo_button               true/false          Should the combo arrow but
                                                       that case, the whole editable combo box
                                                       will be drawn as a line-edit.
 
-left_tabs                         true/false          Align tabs to the left edge?
-                                                      Tabs are centered by default.
+left_tabs                         true/false          Align tabs to the left edge (the right
+                                                      edge with RTL layouts)? Tabs are centered
+                                                      by default.
 
-center_doc_tabs                   true/false          Always center tabs if the tab widget is
+center_doc_tabs                   true/false          Always center tabs if their tab widget is
                                                       in the document mode and even when the
                                                       key "left_tabs" is true? False by default,
                                                       which means that tabs are aligned in the
                                                       document mode as in the usual mode.
+
+center_normal_tabs                true/false          Always center normal tabs, even when the
+                                                      key "left_tabs" is true? False by default.
+
+                                                      Tabs are considered normal if they have
+                                                      a tab widget that is NOT in the document
+                                                      mode.
 
 attach_active_tab                 true/false          Attach the active tab to the tab widget
                                                       or the tab-bar base? It is detached
