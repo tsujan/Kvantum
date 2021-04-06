@@ -992,10 +992,6 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxBlurTranslucent->setChecked (defaultSettings.value ("blur_translucent").toBool());
     ui->checkBoxKtitle->setChecked (defaultSettings.value ("transparent_ktitle_label").toBool());
     ui->checkBoxMenuTitle->setChecked (defaultSettings.value ("transparent_menutitle").toBool());
-    if (defaultSettings.contains ("kcapacitybar_as_progressbar")) // it's true by default
-        ui->checkBoxKCapacity->setChecked (defaultSettings.value ("kcapacitybar_as_progressbar").toBool());
-    else
-        ui->checkBoxKCapacity->setChecked (true);
     ui->checkBoxDark->setChecked (defaultSettings.value ("respect_darkness").toBool());
     ui->checkBoxGrip->setChecked (defaultSettings.value ("force_size_grip").toBool());
     ui->checkBoxScrollJump->setChecked (defaultSettings.value ("middle_click_scroll").toBool());
@@ -1578,8 +1574,6 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxBlurTranslucent->setChecked (blurTrans);
                 ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
-                if (themeSettings.contains ("kcapacitybar_as_progressbar"))
-                    ui->checkBoxKCapacity->setChecked (themeSettings.value ("kcapacitybar_as_progressbar").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());
                 ui->checkBoxGrip->setChecked (themeSettings.value ("force_size_grip").toBool());
                 ui->checkBoxScrollJump->setChecked (themeSettings.value ("middle_click_scroll").toBool());
@@ -2236,7 +2230,6 @@ void KvantumManager::writeConfig()
         hackKeys.insert ("blur_translucent", boolToStr (ui->checkBoxBlurTranslucent->isChecked()));
         hackKeys.insert ("transparent_ktitle_label", boolToStr (ui->checkBoxKtitle->isChecked()));
         hackKeys.insert ("transparent_menutitle", boolToStr (ui->checkBoxMenuTitle->isChecked()));
-        hackKeys.insert ("kcapacitybar_as_progressbar", boolToStr (ui->checkBoxKCapacity->isChecked()));
         hackKeys.insert ("respect_darkness", boolToStr (ui->checkBoxDark->isChecked()));
         hackKeys.insert ("force_size_grip", boolToStr (ui->checkBoxGrip->isChecked()));
         hackKeys.insert ("middle_click_scroll", boolToStr (ui->checkBoxScrollJump->isChecked()));

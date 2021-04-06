@@ -88,7 +88,6 @@ transparent_pcmanfm_sidepane=true
 transparent_ktitle_label=true
 blur_translucent=false
 transparent_menutitle=true
-kcapacitybar_as_progressbar=true
 respect_darkness=true
 single_top_toolbar=true
 disabled_icon_opacity=90

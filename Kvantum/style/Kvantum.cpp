@@ -13286,7 +13286,7 @@ int Style::styleHint(QStyle::StyleHint hint,
     }
 
     default : {
-      if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
+      if (hint >= SH_CustomBase
           && widget && widget->objectName() == "CE_CapacityBar")
       {
         return CE_Kv_KCapacityBar;

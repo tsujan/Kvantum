@@ -11290,7 +11290,7 @@ int Style::styleHint(StyleHint hint,
     //case SH_SpinControls_DisableOnBounds: return true;
 
     default : {
-      if (hint >= SH_CustomBase && hspec_.kcapacitybar_as_progressbar
+      if (hint >= SH_CustomBase
           && widget && widget->objectName() == "CE_CapacityBar")
       {
         return CE_Kv_KCapacityBar;

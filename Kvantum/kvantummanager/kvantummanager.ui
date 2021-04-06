@@ -576,15 +576,14 @@ horizontally centered as far as possible.</string>
                 </widget>
                </item>
                <item row="6" column="1">
-                <widget class="QCheckBox" name="checkBoxKCapacity">
+                <widget class="QCheckBox" name="checkBoxDark">
                  <property name="toolTip">
-                  <string>Style KDE capacity bars as progressbars.</string>
-                 </property>
-                 <property name="whatsThis">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Style KDE capacity bars as progressbars?&lt;/p&gt;&lt;p&gt;Capacity bars are usually used by some KDE applications to show volume sizes and have their own style.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>Some apps may not respect dark themes.
+Kvantum can try to correct their behavior
+as far as possible.</string>
                  </property>
                  <property name="text">
-                  <string>Show KCapacityBar as progressbar</string>
+                  <string>Respect dark themes</string>
                  </property>
                 </widget>
                </item>
@@ -601,18 +600,6 @@ with window translucency or gradient.</string>
                 </widget>
                </item>
                <item row="7" column="1">
-                <widget class="QCheckBox" name="checkBoxDark">
-                 <property name="toolTip">
-                  <string>Some apps may not respect dark themes.
-Kvantum can try to correct their behavior
-as far as possible.</string>
-                 </property>
-                 <property name="text">
-                  <string>Respect dark themes</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="1">
                 <widget class="QCheckBox" name="checkBoxGrip">
                  <property name="toolTip">
                   <string>Show size grips of dialogs and statusbars
@@ -626,7 +613,7 @@ as far as possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3">
+               <item row="7" column="3">
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -640,7 +627,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="4">
+               <item row="7" column="4">
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -657,7 +644,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
+               <item row="8" column="1">
                 <widget class="QCheckBox" name="checkBoxScrollJump">
                  <property name="toolTip">
                   <string>By default, the scroll slider jumps to a position
@@ -668,7 +655,7 @@ when the scrollbar is left clicked.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="3">
+               <item row="8" column="3">
                 <widget class="QLabel" name="labelOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -683,7 +670,7 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="4">
+               <item row="8" column="4">
                 <widget class="QSpinBox" name="spinOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -704,7 +691,7 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="1">
+               <item row="9" column="1">
                 <widget class="QCheckBox" name="checkBoxKineticScrolling">
                  <property name="toolTip">
                   <string>Scroll some scrollable widgets by flicking them
@@ -718,7 +705,7 @@ seriously interfere with other jobs.</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -733,7 +720,7 @@ or through logging out and in again.</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="4">
+               <item row="9" column="4">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.

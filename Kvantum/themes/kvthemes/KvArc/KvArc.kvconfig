@@ -85,7 +85,6 @@ transparent_pcmanfm_sidepane=true
 blur_translucent=false
 transparent_menutitle=true
 respect_darkness=false
-kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=true
 iconless_menu=false

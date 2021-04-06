@@ -105,7 +105,6 @@ blur_translucent=false
 transparent_menutitle=false
 transparent_arrow_button=true
 respect_darkness=false
-kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_pushbutton=false
 iconless_menu=false

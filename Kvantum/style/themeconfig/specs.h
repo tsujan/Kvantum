@@ -281,8 +281,6 @@ typedef struct {
   bool transparent_ktitle_label;
   /* transparent background for (KDE) menu titles */
   bool transparent_menutitle;
-  /* draw KCapacityBars as progressbars? */
-  bool kcapacitybar_as_progressbar;
   /* Some apps don't respect dark themes.
      Fix that as far as possible! */
   bool respect_darkness;
@@ -566,7 +564,6 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.opaque_colors = false;
   hspec.transparent_ktitle_label = false;
   hspec.transparent_menutitle = false;
-  hspec.kcapacitybar_as_progressbar = true;
   hspec.respect_darkness = false;
   hspec.forceSizeGrip = false;
   hspec.tint_on_mouseover = 0;

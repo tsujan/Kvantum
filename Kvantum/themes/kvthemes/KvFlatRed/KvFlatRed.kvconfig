@@ -80,7 +80,6 @@ blur_translucent=true
 transparent_dolphin_view=false
 transparent_ktitle_label=true
 transparent_menutitle=false
-kcapacitybar_as_progressbar=true
 disabled_icon_opacity=100
 force_size_grip=true
 iconless_menu=false

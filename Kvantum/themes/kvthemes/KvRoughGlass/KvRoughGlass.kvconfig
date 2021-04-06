@@ -89,7 +89,6 @@ transparent_ktitle_label=true
 blur_translucent=true
 transparent_menutitle=false
 respect_darkness=false
-kcapacitybar_as_progressbar=true
 force_size_grip=true
 iconless_menu=false
 iconless_pushbutton=false

@@ -885,11 +885,6 @@ transparent_ktitle_label          true/false          No background for the labe
 
 transparent_menutitle             true/false          No background for (KDE) menu titles?
 
-kcapacitybar_as_progressbar       true/false          Draw KCapacityBar as progressbar?
-                                                      KCapacityBar has its hard-coded
-                                                      style but is drawn as a progressbar
-                                                      by default.
-
 respect_darkness                  true/false          Some apps don't respect dark themes.
                                                       Fix that as far as possible?
 

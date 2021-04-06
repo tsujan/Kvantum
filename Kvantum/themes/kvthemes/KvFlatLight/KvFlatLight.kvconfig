@@ -77,7 +77,6 @@ transparent_dolphin_view=false
 blur_translucent=true
 transparent_menutitle=false
 respect_darkness=false
-kcapacitybar_as_progressbar=true
 disabled_icon_opacity=100
 force_size_grip=true
 iconless_menu=false
