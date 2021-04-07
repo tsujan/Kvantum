@@ -155,7 +155,7 @@ void Style::polish(QWidget *widget)
   */
   if (qobject_cast<QAbstractButton*>(widget)
       || qobject_cast<QAbstractSlider*>(widget)
-      || qobject_cast<QAbstractItemView*>(getParent(widget,1))
+      || qobject_cast<QAbstractItemView*>(pw)
       || widget->inherits("QSplitterHandle")
       || widget->inherits("QHeaderView")
       || widget->inherits("QSizeGrip"))
@@ -848,12 +848,27 @@ void Style::polish(QWidget *widget)
        && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
        && !widget->inherits("KSignalPlotter"))
     {
-      QScroller::grabGesture(vp, QScroller::LeftMouseButtonGesture);
-      auto sp = QScroller::scroller(vp)->scrollerProperties();
-      sp.setScrollMetric(QScrollerProperties::OvershootScrollTime, static_cast<qreal>(0.3));
-      sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, static_cast<qreal>(0.1));
-      sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, static_cast<qreal>(0.1));
-      QScroller::scroller(vp)->setScrollerProperties(sp);
+      bool insideSubwin(false);
+      QWidget *parent = pw;
+      while (parent)
+      {
+        if (qobject_cast<QMdiSubWindow*>(parent))
+        {
+          insideSubwin = true; // as in Krita
+          break;
+        }
+        if (parent->isWindow()) break;
+        parent = parent->parentWidget();
+      }
+      if(!insideSubwin)
+      {
+        QScroller::grabGesture(vp, QScroller::LeftMouseButtonGesture);
+        auto sp = QScroller::scroller(vp)->scrollerProperties();
+        sp.setScrollMetric(QScrollerProperties::OvershootScrollTime, static_cast<qreal>(0.3));
+        sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, static_cast<qreal>(0.1));
+        sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, static_cast<qreal>(0.1));
+        QScroller::scroller(vp)->setScrollerProperties(sp);
+      }
     }
 #endif
     if (/*sa->frameShape() == QFrame::NoFrame &&*/ // Krita and digiKam aren't happy with this

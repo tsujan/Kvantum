@@ -8,6 +8,7 @@ V0.20.0
  * A little more compact busy indicator for ordinary progressbars.
  * Removed the key about KCapacityBar. It's a redundant KDE widget that should always be drawn as a progressbar.
  * Added a key for always centering normal tabs (in contrast to those in the document mode).
+ * Disable kinetic scrolling inside subwindows.
 
 V0.19.0
 ---------
