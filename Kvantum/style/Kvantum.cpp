@@ -13624,17 +13624,14 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                             2*qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right))
                               + opt->fontMetrics.horizontalAdvance("W") * 6);
         }
-        else
-        { // don't let width < height
-          s.rwidth() = qMax(s.width(), s.height());
-          sspec.minW = qMax(sspec.minW,sspec.minH);
-        }
 
         s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
 
         if (!txt.isEmpty())
           s.rwidth() = qMax(s.width(), 80); // not smaller than 80px with text
+        else
+          s.rwidth() = qMax(s.width(), s.height()); // don't let width < height
 
         return s;
       }
@@ -13965,12 +13962,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           }
         }
         else if(opt->icon.isNull()) // nothing or only an arrow
-          return s;
-
-        if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
-        { // don't let width < height
+        {
           s = s.expandedTo(QSize(s.height(),0));
-          sspec.minW = qMax(sspec.minW,sspec.minH);
+          return s;
         }
 
         if (!qobject_cast<QAbstractItemView*>(getParent(widget,2))) // -> CE_ToolButtonLabel
@@ -13978,6 +13972,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                  sspec.minH + (sspec.incrementH ? s.height() : 0)));
         }
+
+        if (tialign == Qt::ToolButtonIconOnly || opt->text.isEmpty())
+          s = s.expandedTo(QSize(s.height(),0)); // don't let width < height
 
         return s;
       }

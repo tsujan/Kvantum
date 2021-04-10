@@ -9,6 +9,7 @@ V0.20.0
  * Removed the key about KCapacityBar. It's a redundant KDE widget that should always be drawn as a progressbar.
  * Added a key for always centering normal tabs (in contrast to those in the document mode).
  * Disable kinetic scrolling inside subwindows.
+ * Guarantee that the width hint of an icon-only button isn't smaller than its height hint.
 
 V0.19.0
 ---------
