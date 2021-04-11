@@ -1541,7 +1541,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2576"/>
         <source>Configuration saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>התצורה נשמרה.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2687"/>
@@ -1551,7 +1551,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2690"/>
         <source>You will lose the changes you might have made.</source>
-        <translation type="unfinished"></translation>
+        <translation>השינויים שלכאורה ביצעת יאבדו.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2725"/>
