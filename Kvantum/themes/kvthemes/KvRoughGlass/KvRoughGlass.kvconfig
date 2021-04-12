@@ -107,7 +107,7 @@ frame.top=3
 frame.bottom=4
 frame.left=3
 frame.right=3
-frame.expanded.top=1
+frame.expanded.top=0
 frame.expanded.bottom=2
 frame.expanded.left=1
 frame.expanded.right=1
@@ -121,9 +121,11 @@ focusFrame=true
 frame.expansion=3font
 indicator.size=10
 min_height=+0.18font
+min_width=0
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
+min_width=+0.14font
 
 [DockTitle]
 text.bold=true
@@ -141,6 +143,7 @@ indicator.size=11
 text.margin.left=3
 text.margin.right=3
 frame.bottom=3
+min_width=0
 
 [IndicatorSpinBox]
 inherits=PanelButtonCommand
@@ -171,12 +174,11 @@ frame.top=5
 frame.bottom=5
 frame.left=5
 frame.right=5
-text.margin.top=0
-text.margin.bottom=0
-text.margin.left=0
-text.margin.right=0
-frame.expansion=0
-indicator.size=11
+text.margin.top=1
+text.margin.bottom=2
+text.margin.left=3
+text.margin.right=3
+indicator.size=12
 min_width=+0.4font
 min_height=0
 
@@ -202,6 +204,7 @@ frame.element=button
 frame.bottom=3
 frame.expansion=0
 min_height=0
+min_width=0
 
 [GroupBox]
 interior=false
@@ -292,8 +295,9 @@ text.normal.color=black
 text.focus.color=black
 text.press.color=white
 text.toggle.color=white
-frame.expansion=6
+frame.expansion=8
 min_height=0
+min_width=0
 
 [Menu]
 inherits=PanelButtonCommand
@@ -314,6 +318,7 @@ text.margin.left=3
 text.margin.right=3
 frame.expansion=0
 min_height=0
+min_width=0
 
 [MenuBar]
 inherits=PanelButtonCommand
@@ -336,6 +341,7 @@ text.margin.left=4
 text.margin.right=4
 frame.expansion=0
 min_height=0
+min_width=0
 
 [TitleBar]
 inherits=PanelButtonCommand
@@ -355,6 +361,7 @@ indicator.element=combo
 text.margin.left=5
 text.margin.right=5
 indicator.size=11
+min_width=0
 
 [WindowTranslucent]
 interior=true
