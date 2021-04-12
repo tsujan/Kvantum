@@ -369,24 +369,27 @@ Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kruis aan om de inhoud van formulieren zo
+horizontaal mogelijk te centreren.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulieren centreren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="593"/>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het kan zijn dat je irritante vervorming ziet, welke wordt
+veroorzaakt door bugs it Qt&apos;s afhandeling van schaling
+met doorzichtigheid of kleurverlopen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="598"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzichtigheid bij bepaalde schaling uitschakelen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="650"/>
@@ -622,7 +625,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstgrootte</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1297"/>
@@ -1216,12 +1219,16 @@ This option will hide these.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing: dit kan op het eerste gezicht verwarrend lijken.
+
+Als je dit hebt ingeschakeld, dan kun je het tijdelijk
+uitschakelen voor knoppen die kunnen worden versleept
+middels de Ctrl-toets.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1952"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Knopversleping inschakelen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1975"/>
