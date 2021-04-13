@@ -1536,7 +1536,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2188"/>
         <source>A copy was already created.</source>
-        <translation type="unfinished"></translation>
+        <translation>כבר נוצר עותק.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2576"/>
