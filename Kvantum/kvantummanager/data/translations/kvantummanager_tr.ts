@@ -931,7 +931,7 @@ KDE uygulamaları bunu KDE ayarından alır.</translation>
         <location filename="../../kvantummanager.ui" line="1415"/>
         <location filename="../../kvantummanager.ui" line="1428"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ikey kaydırma çubuklarının en az  yüksekliği ve yatay kaydırma çubuklarının en az genişliği.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dikey kaydırma çubuklarının en az yüksekliği ve yatay kaydırma çubuklarının en az genişliği.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1418"/>
@@ -1635,7 +1635,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="609"/>
         <source>Do you want to overwrite it?</source>
-        <translation>Do you want to overwrite it?</translation>
+        <translation>Üzerine yazmak ister misin?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="644"/>
