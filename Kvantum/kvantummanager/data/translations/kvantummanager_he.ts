@@ -1449,12 +1449,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="545"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation type="unfinished"></translation>
+        <translation>לערכות עיצוב שמיועדות להתקנה אסור שתהיה סולמית (#) בשם.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="555"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation type="unfinished"></translation>
+        <translation>זו לא תיקיית ערכות עיצוב של Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
@@ -1521,7 +1521,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1335"/>
         <location filename="../../KvantumManager.cpp" line="2590"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>אלו ההגדרות שמותר לשנות בבטחה.&lt;br&gt;לשאר, יש לערוך את הקובץ הזה:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1720"/>
@@ -1577,7 +1577,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2883"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished"></translation>
+        <translation>כלי להתקנה, בחירה&lt;br&gt;והגדרה של ערכות עיצוב של &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2884"/>
