@@ -1515,7 +1515,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1320"/>
         <location filename="../../KvantumManager.cpp" line="1339"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>אלו ההגדרות שניתן לשנות בבטחה.&lt;br&gt;לאחרות, יש ללחוץ על &lt;b&gt;שמירה&lt;/b&gt; ואז לערוך את הקובץ הזה:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1335"/>
