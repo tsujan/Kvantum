@@ -93,7 +93,7 @@ dit thema terugzetten.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Herstel de standaardinstellingen van dit thema!&lt;/p&gt;&lt;p&gt;Als je klikt en bevestigt, dan worden alle aangebrachte wijzigingen ongedaan gemaakt, maar het aangepaste SVG-bestand blijft behouden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Herstel de standaardinstellingen van dit thema!&lt;/p&gt;&lt;p&gt;Als je klikt en bevestigt, dan worden alle aangebrachte wijzigingen ongedaan gemaakt, maar het aangepaste svg-bestand blijft behouden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -132,8 +132,8 @@ dit thema terugzetten.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>Vink alle vakjes uit als je wilt dat widgets
-eruitzien zoals ze er standaard uit zien.</translation>
+        <translation>Kruis alle vakjes af als je wilt dat widgets
+eruit zien zoals ze er standaard uit zien.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
@@ -148,7 +148,7 @@ eruitzien zoals ze er standaard uit zien.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="422"/>
         <source>Normal font for default push buttons</source>
-        <translation>&apos;Normaal&apos; lettertype voor standaard drukknoppen</translation>
+        <translation>&apos;Normaal&apos; lettertype op standaard drukknoppen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="442"/>
@@ -159,7 +159,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Voeg PCManFM-qt&apos;s zijbalk samen met alles eromheen.
 
-Als je LXQt gebruikt, dan moet je uit- en inloggen, of
+Als je LXQt gebruikt, dan moet je af- en aanmelden, of
 PCManFM-qt sluiten en daarna het Bureaublad sluiten
 via de LXQt-sessie-instellingen.</translation>
     </message>
@@ -182,7 +182,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Voeg PCManFM-qt&apos;s zijbalk samen met alles eromheen.
 
-Als je LXQt gebruikt, dan moet je uit- en inloggen, of
+Als je LXQt gebruikt, dan moet je af- en aanmelden, of
 PCManFM-qt sluiten en daarna het Bureaublad sluiten
 via de LXQt-sessie-instellingen.</translation>
     </message>
@@ -214,7 +214,7 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond bij KTitles?&lt;/p&gt;&lt;p&gt;KTitles worden gebruikt door sommige KDE-applicaties om de verschillende secties aan te geven in configuratieschermen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond bij KTitles?&lt;/p&gt;&lt;p&gt;KTitles worden gebruikt door sommige KDE-programma&apos;s om de verschillende secties op instelschermen aan te duiden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -225,13 +225,13 @@ via de LXQt-sessie-instellingen.</translation>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation>Geselecteerde labelpictogrammen niet markeren
-met de markeerkleur!</translation>
+        <translation>Markeer geselecteerde labelpictogrammen
+niet met de markeerkleur!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Standaard worden geselecteerde labelpictogrammen gemarkeerd door de markeerkleur.&lt;/p&gt;&lt;p&gt;Door dit aan te vinken, wordt deze markering verwijderd.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Standaard worden geselecteerde labelpictogrammen gemarkeerd door de markeerkleur.&lt;/p&gt;&lt;p&gt;Door dit aan te kruisen, wordt deze markering verwijderd.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
@@ -248,7 +248,7 @@ met de markeerkleur!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond tekenen bij (KDE) menutitels?&lt;/p&gt;&lt;p&gt;Menutitels zijn hetzelfde als menuscheidingen, maar dan met een pictogram en tekst.&lt;/p&gt;&lt;p&gt;Voor Plasma-menu&apos;s moet je uit- en inloggen om de wijziging toe te passen; voor het LXQt-paneel is het herstarten via de &lt;span style=&quot; font-style:italic;&quot;&gt;Sessie-instellingen &lt;/span&gt;voldoende.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond tekenen bij (KDE) menutitels?&lt;/p&gt;&lt;p&gt;Menutitels zijn hetzelfde als menuscheidingen, maar dan met een pictogram en tekst.&lt;/p&gt;&lt;p&gt;Voor Plasma-menu&apos;s moet je aan- en afmelden om de wijziging toe te passen; voor het LXQt-paneel is het herstarten via de &lt;span style=&quot; font-style:italic;&quot;&gt;Sessie-instellingen &lt;/span&gt;voldoende.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -258,7 +258,7 @@ met de markeerkleur!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Tint label icons on mouseover by </source>
-        <translation>Labelpictogrammen markeren bij zweven met muis met </translation>
+        <translation>Labelpictogrammen markeren bij aanwijzen met cursor met </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
@@ -298,23 +298,23 @@ niet op andere manieren wordt verminderd.</translation>
         <location filename="../../kvantummanager.ui" line="605"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation>Groottegrepen tonen bij dialoogvensters en statusbalken,
+        <translation>Groottegrepen tonen op dialoogvensters en statusbalken,
 voor zover mogelijk.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="609"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je groottegrepen tonen bij dialoogvensters en statusbalken, voor zover mogelijk?&lt;/p&gt;&lt;p&gt;Standaard bepalen applicaties of ze getoond moeten worden, maar deze truc kan handig zijn voor het wijzigingen van de grootte van vensters zonder vensterrand.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je groottegrepen tonen op dialoogvensters en statusbalken, voor zover mogelijk?&lt;/p&gt;&lt;p&gt;Standaard bepalen programma&apos;s of ze getoond moeten worden, maar deze truc kan handig zijn voor het wijzigen van de grootte van vensters zonder vensterrand.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Force size grips</source>
-        <translation>Groottegrepen forceren</translation>
+        <translation>Groottegrepen afdwingen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
         <source>LXQt main menu icon size:</source>
-        <translation>Pictogramgrootte van LXQt-hoofdmenu:</translation>
+        <translation>Pictogramgrootte in LXQt-hoofdmenu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="734"/>
@@ -333,19 +333,19 @@ voor zover mogelijk.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="748"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>3D en algemene opmaak</translation>
+        <translation>Hardwareversnelling en algemene opmaak</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="904"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation>Werkt alleen als er een doorzichtige SVG-achtergrond aanwezig is voor ven-
+        <translation>Werkt alleen als er een doorzichtige svg-achtergrond aanwezig is voor ven-
 sters of als de vensterondoorzichtigheid wordt verminderd (zie hieronder).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
         <source>Opaque apps:</source>
-        <translation>Ondoorzichtige apps:</translation>
+        <translation>Ondoorzichtige programma&apos;s:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="754"/>
@@ -354,7 +354,7 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Als dit wordt aangevinkt, dan bevatten menu&apos;s, hulpballonnen
+        <translation>Als dit wordt aangekruist, dan bevatten menu&apos;s, hulpballonnen
 en vensters geen doorzichtigheid of schaduw.
 
 Als dit wordt uitgeschakeld, bekijk dan:
@@ -363,7 +363,7 @@ Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Omdat &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; losstaat van werkomgevingen, moet je Kvantum eerst &lt;i&gt;activeren&lt;/i&gt; met een Qt-platformintegratiehulpmiddel. KDE en LXQt bevatten eenvoudige hulpmiddelen voor het wijzigen van de actieve Qt-stijlplug-in. In andere werkomgevingen heb je een Qt-configuratiehulpmiddel.&lt;br/&gt;&lt;br/&gt;In KDE met je ook het kleurenschema van dit thema kiezen en toepassen omdat sommige KDE-applicaties hun kleuren daar uit halen.&lt;br/&gt;&lt;br/&gt;Actieve applicaties moeten worden herstart om het thema toe te passen. Uit- en inloggen is nóg beter.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Omdat &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; losstaat van werkomgevingen, dien je Kvantum eerst te &lt;i&gt;activeren&lt;/i&gt; met een Qt-platformintegratiehulpmiddel. KDE en LXQt hebben eenvoudige hulpmiddelen voor het wijzigen van de actieve Qt-stijlplug-in - in andere werkomgevingen heb je een Qt-configuratiehulpmiddel nodig.&lt;br/&gt;&lt;br/&gt;In KDE dien je ook het kleurenschema van dit thema te kiezen en toe te passen omdat sommige KDE-programma&apos;s hun kleuren daaruit halen.&lt;br/&gt;&lt;br/&gt;Actieve programma&apos;s moeten worden herstart om het thema toe te passen, maar af- en aanmelden is nóg beter.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -383,7 +383,7 @@ horizontaal mogelijk te centreren.</translation>
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
         <translation>Het kan zijn dat je irritante vervorming ziet, welke wordt
-veroorzaakt door bugs it Qt&apos;s afhandeling van schaling
+veroorzaakt door bugs in Qt&apos;s afhandeling van schaling
 met doorzichtigheid of kleurverlopen.</translation>
     </message>
     <message>
@@ -396,7 +396,7 @@ met doorzichtigheid of kleurverlopen.</translation>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
         <translation>Standaard verspringt de schuifbalk naar de positie
-van de muiscursor.</translation>
+van de cursor.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="654"/>
@@ -410,11 +410,11 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation>Scrol bepaalde scrolwidgets door ze met
-de linker muistoets een duwtje te geven.
+        <translation>Scroll bepaalde scrollelementen door ze met
+een duwtje te geven met de linkermuisknop.
 
 Waarschuwing: kinetisch scrollen in Qt heeft bugs en
-kan andere taken in de interface verstoren.</translation>
+kan andere taken in de vormgeving verstoren.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="704"/>
@@ -434,13 +434,13 @@ or through logging out and in again.</source>
 
 Waarden lager dan 16 betekenen &apos;standaard menupictogramgrootte&apos;.
 
-Het LXQt-paneel moet worden herstart via de &quot;Sessie-instellingen&quot;
-of je moet volledig uit- en inloggen.</translation>
+Het LXQt-paneel moet worden herstart via de sessie-instellingen
+of meld af en weer aan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="761"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit wordt aangevinkt, dan bevatten menu&apos;s, hulpballonnen en vensters geen doorzichtigheid of schaduw.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, dan zijn doorzichtigheid en schaduw beschikbaar als de daarvoor bestemde elementen aanwezig zijn in het SVG-bestand van het thema.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, bekijk dan Overig → Huidige werkomgeving respecteren (indien mogelijk)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit wordt aangekruist, dan bevatten menu&apos;s, hulpballonnen en vensters geen doorzichtigheid of schaduw.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, dan zijn doorzichtigheid en schaduw beschikbaar als de daarvoor bestemde elementen aanwezig zijn in het svg-bestand van het thema.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, bekijk dan Overig → Huidige werkomgeving respecteren (indien mogelijk)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="764"/>
@@ -488,10 +488,10 @@ Een waarde van 1.00 betekent &apos;geen aanpassingen&apos;.</translation>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation>Vereisten: KDE-vervagingseffect, een grafische kaart met ondersteuning,
+        <translation>Vereisten: KDE-vervagingseffect, een grafische kaart met ondersteuning
 daarvoor en doorzichtige menu- en hulpballonelementen.
 
-Dit wordt automatisch aangevinkt als venstervervaging is ingeschakeld.</translation>
+Dit wordt automatisch aangekruist als venstervervaging is ingeschakeld.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="884"/>
@@ -530,7 +530,7 @@ needed for this key to work.</source>
         <translation>Dit vermindert de vensterdoorzichtigheid als
 vensterdoorzichtigheid is ingeschakeld.
 
-Dit item werkt óók zonder een doorzichtige SVG-
+Dit item werkt ook zónder een doorzichtige svg-
 achtergrond.</translation>
     </message>
     <message>
@@ -563,18 +563,19 @@ widgets wijzigt, meestal door muisbeweging.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1084"/>
         <source>Animation for state change under mouse</source>
-        <translation></translation>
+        <translation>Animatie bij statuswijziging onder de cursor</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1091"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation></translation>
+        <translation>Kruis aan om alle venster-tegelpatronen uit te schakelen, en
+kruis af om weer in te schakelen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1095"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation></translation>
+        <translation>Venster-tegelpatronen uitschakelen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1102"/>
