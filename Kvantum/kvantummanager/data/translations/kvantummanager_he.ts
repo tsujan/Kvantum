@@ -258,7 +258,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>הסמלים מתכהים עם מעבר העכבר מעליהם ב־ </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
