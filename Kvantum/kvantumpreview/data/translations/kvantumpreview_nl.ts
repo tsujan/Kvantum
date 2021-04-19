@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation>Kvantum-voorbeeld</translation>
+        <translation>Kvantum-voorvertoning</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
@@ -51,9 +51,8 @@ breedte</translation>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation>Drukknop
- met
-  meerdere regels</translation>
+        <translation>Drukknop met
+ meerdere regels</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
@@ -97,8 +96,7 @@ drukknop</translation>
         <location filename="../../KvantumPreviewBase.ui" line="464"/>
         <source>Multi-line
 toolbutton</source>
-        <translation>Hulpmiddelknop
-met
+        <translation>Hulpmiddelknop met
 meerdere regels</translation>
     </message>
     <message>
@@ -114,7 +112,7 @@ met een pijl</translation>
         <location filename="../../KvantumPreviewBase.ui" line="584"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation>Hulpmiddelknop met 32px SVG-pictogram
+        <translation>Hulpmiddelknop met 32px svg-pictogram
 en tekst eronder</translation>
     </message>
     <message>
@@ -148,7 +146,7 @@ en pijl voor uitrollijst</translation>
         <location filename="../../KvantumPreviewBase.ui" line="539"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation>Hulpmiddelknop met 32px PNG-pictogram
+        <translation>Hulpmiddelknop met 32px png-pictogram
 naast tekst</translation>
     </message>
     <message>
@@ -193,42 +191,40 @@ breedte</translation>
         <location filename="../../KvantumPreviewBase.ui" line="867"/>
         <source>Multi-line
 radio button</source>
-        <translation>Keuzerondje
-met
+        <translation>Keuzerondje met
 meerdere regels</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="878"/>
         <location filename="../../KvantumPreviewBase.ui" line="904"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation>Keuzerondje met 32px SVG-pictogram</translation>
+        <translation>Keuzerondje met 32px svg-pictogram</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="927"/>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
         <source>Simple check box</source>
-        <translation>Eenvoudig selectievakje</translation>
+        <translation>Eenvoudig aankruisvakje</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="950"/>
         <location filename="../../KvantumPreviewBase.ui" line="961"/>
         <source>Multi-line
 check box</source>
-        <translation>Selectievakje
-met
+        <translation>Aankruisvakje met
 meerdere regels</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="969"/>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
         <source>Tri-state check box</source>
-        <translation>Selectievakje met drie statussen</translation>
+        <translation>Aankruisvakje met drie statussen</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="992"/>
         <location filename="../../KvantumPreviewBase.ui" line="1006"/>
         <source>Check box with icon</source>
-        <translation>Selectievakje met pictogram</translation>
+        <translation>Aankruisvakje met pictogram</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1062"/>
@@ -577,7 +573,7 @@ meerdere regels</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2577"/>
         <source>Checkable group box</source>
-        <translation>Aanvinkbaar frame</translation>
+        <translation>Aankruisbaar frame</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2612"/>
@@ -632,7 +628,7 @@ meerdere regels</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation>Sele&amp;ctievakje</translation>
+        <translation>Aan&amp;kruisvakje</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
@@ -667,7 +663,7 @@ meerdere regels</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>
         <source>C&amp;heckbox</source>
-        <translation>Sele&amp;ctievakje</translation>
+        <translation>Aan&amp;kruisvakje</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3020"/>
