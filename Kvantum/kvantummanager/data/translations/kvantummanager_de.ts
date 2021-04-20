@@ -1547,7 +1547,7 @@ Aktualisierung seiner Vorschau.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2883"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished">Ein Werkzeug um &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum-Themes&lt;/a&gt;&lt;br&gt; zu installieren, auszuwählen und zu konfigurieren</translation>
+        <translation>Ein Werkzeug um &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum-Themes&lt;/a&gt;&lt;br&gt; zu installieren, auszuwählen und zu konfigurieren</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2884"/>
