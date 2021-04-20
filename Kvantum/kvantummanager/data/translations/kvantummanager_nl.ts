@@ -581,47 +581,48 @@ kruis af om weer in te schakelen.</translation>
         <location filename="../../kvantummanager.ui" line="1102"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation></translation>
+        <translation>Wilt u dezelfde kleuren en vormen gebruiken voor actieve en
+inactieve vensters als dit thema daar onderscheid in maakt?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1106"/>
         <source>Ignore inactive state</source>
-        <translation></translation>
+        <translation>Inactive staat negeren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1120"/>
         <source>Transient scrollbars</source>
-        <translation></translation>
+        <translation>Opduikende schuifbalken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1142"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation></translation>
+        <translation>Afmetingen en vertragingen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
         <source>Sizes</source>
-        <translation></translation>
+        <translation>Afmetingen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1163"/>
         <source>Small icon:</source>
-        <translation></translation>
+        <translation>Klein pictogram:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1201"/>
         <source>Large icon:</source>
-        <translation></translation>
+        <translation>Groot pictogram:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1235"/>
         <source>Button icon:</source>
-        <translation></translation>
+        <translation>Knoppictogram:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1267"/>
         <source>Toolbar icon:</source>
-        <translation></translation>
+        <translation>Werkbalkpictogram:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
@@ -633,23 +634,24 @@ windows if this theme distinguishes between them?</source>
         <location filename="../../kvantummanager.ui" line="1308"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation></translation>
+        <translation>De standaardwaarde is 2 px, maar som-
+mige programma&apos;s negeren dit.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1301"/>
         <source>Layout spacing:</source>
-        <translation></translation>
+        <translation>Ruimtelijke indeling:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1325"/>
         <location filename="../../kvantummanager.ui" line="1335"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation></translation>
+        <translation>De standaardwaarde is 4 px, maar sommige programma&apos;s negeren dit.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1328"/>
         <source>Layout margin:</source>
-        <translation></translation>
+        <translation>Rand van indeling:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1351"/>
@@ -657,24 +659,27 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation></translation>
+        <translation>De horizontale overlap tussen een onderliggend en hoofdmenu.
+
+Standaard: 0.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1356"/>
         <source>Submenu overlap: </source>
-        <translation></translation>
+        <translation>Overlap onderliggend menu: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1381"/>
         <location filename="../../kvantummanager.ui" line="1392"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation></translation>
+        <translation>De breedte van horizontale getalkeuzevakjes.
+(niet van toepassing als deze verticaal zijn)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1385"/>
         <source>Spin button width: </source>
-        <translation></translation>
+        <translation>Breedte van getalkeuzevakjes: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1772"/>
@@ -692,7 +697,9 @@ some apps set it themeselves.</source>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation></translation>
+        <translation>Lijnen in boomweergave tekenen?
+
+Standaard ziet u lijnloze indicatoren.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1874"/>
@@ -716,7 +723,9 @@ op gefocuste knoppen en andere widgets.</translation>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation></translation>
+        <translation>Pas het huidige thema toe op alle programma&apos;s.
+
+Sla op om dit toe te passen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -726,21 +735,29 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation></translation>
+        <translation>Verwijder het geselecteerde thema
+uit alle installatielocaties.
+
+De root-installatie blijft behouden;
+alleen gebruikersthema&apos;s worden verwijderd.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="389"/>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation></translation>
+        <translation>Dolphin&apos;s weergave samenvoegen met allen eromheen?
+
+Standaard gebruikt Dolphin de hoofdachtergrond.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="417"/>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation></translation>
+        <translation>Geen vetgedrukt lettertype op standaard drukknoppen?
+
+Standaard gebruiken deze een vetgedrukt lettertype.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="456"/>
@@ -750,7 +767,12 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Geen pictogram op drukknoppen met tekst?
+
+Standaard gebruiken de meeste een pictogram.
+
+Indien uitgeschakeld:
+Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="485"/>
@@ -760,7 +782,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Geen pictogram op menu-items?
+
+Standaard gebruiken sommige items een pictogram.
+
+Indien uitgeschakeld:
+Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="500"/>
@@ -796,7 +823,9 @@ Hard-coded icons/styles may not respect this key.</source>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation></translation>
+        <translation>Sommige programma&apos;s nemen donkere thema&apos;s niet over.
+Kvantum kan proberen om dit zo veel mogelijk af te
+dwingen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1052"/>
