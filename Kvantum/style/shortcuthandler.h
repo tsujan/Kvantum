@@ -27,6 +27,7 @@
 class QWidget;
 
 namespace Kvantum {
+
 class ShortcutHandler: public QObject {
     Q_OBJECT
 
@@ -36,28 +37,25 @@ public:
 
     bool hasSeenAlt(const QWidget *widget) const;
     bool
-    isAltDown() const
-    {
+    isAltDown() const {
         return itsAltDown_;
     }
     bool showShortcut(const QWidget *widget) const;
 
 private Q_SLOTS:
-
     void widgetDestroyed(QObject *o);
 
 protected:
-
     void updateWidget(QWidget *w);
     bool eventFilter(QObject *watched, QEvent *event);
 
 private:
-
     bool itsAltDown_;
     QSet<QWidget*> itsSeenAlt_;
     QSet<QWidget*> itsUpdated_;
     QList<QWidget*> itsOpenMenus_;
 };
+
 }
 
 #endif
