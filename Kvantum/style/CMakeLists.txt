@@ -84,7 +84,7 @@ else()
   set(kvantum_SOURCES
       qt4/Kvantum4.cpp
       qt4/KvantumPlugin4.cpp
-      shortcuthandler.cpp
+      qt4/shortcuthandler4.cpp
       qt4/blurhelper4.cpp
       qt4/windowmanager4.cpp
       qt4/x11wmmove4.cpp

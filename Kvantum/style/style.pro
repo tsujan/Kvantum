@@ -20,12 +20,10 @@ CONFIG += c++11
 
 VERSION = 0.1
 
-SOURCES += themeconfig/ThemeConfig.cpp \
-           shortcuthandler.cpp
+SOURCES += themeconfig/ThemeConfig.cpp
 
 HEADERS += themeconfig/specs.h \
-           themeconfig/ThemeConfig.h \
-           shortcuthandler.h
+           themeconfig/ThemeConfig.h
 
 greaterThan(QT_MAJOR_VERSION, 4) {
   greaterThan(QT_MINOR_VERSION, 10) {
@@ -38,10 +36,12 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              standardIcons.cpp \
              viewItems.cpp \
              KvantumPlugin.cpp \
+             shortcuthandler.cpp \
              blur/blurhelper.cpp \
              animation/animation.cpp
   HEADERS += Kvantum.h \
              KvantumPlugin.h \
+             shortcuthandler.h \
              blur/blurhelper.h \
              animation/animation.h
   greaterThan(QT_MINOR_VERSION, 14) {
@@ -55,11 +55,13 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 } else {
   SOURCES += qt4/Kvantum4.cpp \
              qt4/KvantumPlugin4.cpp \
+             qt4/shortcuthandler4.cpp \
              qt4/x11wmmove4.cpp \
              qt4/windowmanager4.cpp \
              qt4/blurhelper4.cpp
   HEADERS += qt4/Kvantum4.h \
              qt4/KvantumPlugin4.h \
+             qt4/shortcuthandler4.h \
              qt4/x11wmmove4.h \
              qt4/windowmanager4.h \
              qt4/blurhelper4.h

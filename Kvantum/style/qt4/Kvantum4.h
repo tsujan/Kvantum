@@ -23,7 +23,7 @@
 #include <QItemDelegate>
 #include <QAbstractItemView>
 
-#include "../shortcuthandler.h"
+#include "shortcuthandler4.h"
 #include "windowmanager4.h"
 #include "../themeconfig/ThemeConfig.h"
 #include "blurhelper4.h"

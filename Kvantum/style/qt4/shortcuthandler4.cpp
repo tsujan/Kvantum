@@ -1,7 +1,7 @@
 // Taken from QtCurve (C) Craig Drummond, 2007 - 2010
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,11 +17,11 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "shortcuthandler.h"
+#include "shortcuthandler4.h"
 
 #include <QEvent>
 #include <QKeyEvent>
-#include <QGuiApplication>
+#include <QApplication>
 #include <QMenu>
 #include <QMenuBar>
 
@@ -64,7 +64,7 @@ void ShortcutHandler::updateWidget(QWidget *w)
     {
         itsUpdated_.insert(w);
         w->update();
-        connect(w, &QObject::destroyed, this, &ShortcutHandler::widgetDestroyed);
+        connect(w, SIGNAL(destroyed(QObject *)), this, SLOT(widgetDestroyed(QObject *)));
     }
 }
 
@@ -124,11 +124,11 @@ bool ShortcutHandler::eventFilter(QObject *o, QEvent *e)
         {
             QWidget *prev = !itsOpenMenus_.isEmpty() ? itsOpenMenus_.last() : nullptr;
             itsOpenMenus_.append(widget);
-            if (!(QGuiApplication::keyboardModifiers() & Qt::AltModifier))
+            if (!(QApplication::keyboardModifiers() & Qt::AltModifier))
                 itsAltDown_ = false; // possible with tray menus
             if (itsAltDown_ && prev)
                 prev->update();
-            connect(widget, &QObject::destroyed, this, &ShortcutHandler::widgetDestroyed);
+            connect(widget, SIGNAL(destroyed(QObject*)), this, SLOT(widgetDestroyed(QObject*)));
         }
         break;
     case QEvent::Hide:
