@@ -287,28 +287,29 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="666"/>
         <location filename="../../kvantummanager.ui" line="681"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;יעיל עם ערכות סמלים בצבעים אחידים כאשר האטימות של סמלים מושבתים לא מופחתת מסיבות אחרות.&lt;/p&gt;&lt;p&gt;מערכת KDE מפחיתה אוטומטית את אטימותם של סמלים מושבתים. לכן, אפשרות זו עשויה להיות שימושית גם לסביבות שולחן עבודה אחרות.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="669"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>אטימות של סמלים מושבתים:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="605"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>להציג ידיות שינוי גודל של חלוניות
+ושורות מצב ככל הניתן.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="609"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;להציג ידיות שינוי גודל של חלוניות ושורות מצב ככל הניתן?&lt;/p&gt;&lt;p&gt;כבררת מחדל, היישום מחליט האם הן תופענה אך השפצור הזה עשוי להיות שימושי לשינוי גדלי חלונות כשאין גבולות לחלונות.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>אילוץ ידיות שינוי גודל</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
@@ -338,7 +339,8 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="904"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translation>משפיע רק כאשר לחלונות יש רקע SVG שקוף למחצה
+או שאטימות החלון היא נמוכה (כדלהלן).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
@@ -352,7 +354,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>אם האפשרות מסומנת, תפריטים, חלוניות וחלונות
+לא יהיו שקופים למחצה ולא יהיה להם צל.
+
+אם האפשרות מושבתת, יש לגשת אל:
+שונות ← לכבד את סביבת שולחן העבודה הנוכחית אם ניתן</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -446,7 +452,7 @@ A value of 1.00 means no change.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="781"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>אפקט ניגוד</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="787"/>
@@ -533,7 +539,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1084"/>
         <source>Animation for state change under mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>הנפשה לשינוי מצב תחת העכבר</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1091"/>
@@ -1026,7 +1032,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1900"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>קווי ענפי עץ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1583"/>
