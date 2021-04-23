@@ -619,7 +619,7 @@ ablakok, ha a téma különbséget tesz közöttük?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Betűméret</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1297"/>
@@ -669,7 +669,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1385"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>Léptetőgomb szélessége: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1772"/>
@@ -1140,7 +1140,7 @@ Ennek bejelölése a címet a keret fölé helyezi,
     <message>
         <location filename="../../kvantummanager.ui" line="1590"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Csoportdoboz címe a keret felett</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1618"/>
@@ -1209,7 +1209,7 @@ lesznek az elválasztók közül.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soron belüli léptetőgombok</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1652"/>
@@ -1230,7 +1230,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1631"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Függőleges léptetőgombok</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1566"/>
@@ -1309,7 +1309,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1952"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Húzás engedélyezése a gombokról</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1975"/>
