@@ -303,7 +303,7 @@ text.normal.color=white
 text.focus.color=#9bccff
 text.press.color=white
 text.toggle.color=white
-frame.expansion=6
+frame.expansion=8
 
 [Splitter]
 indicator.size=32
@@ -346,7 +346,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-frame.expansion=0
+frame.expansion=8
 
 [MenuBar]
 inherits=PanelButtonCommand
