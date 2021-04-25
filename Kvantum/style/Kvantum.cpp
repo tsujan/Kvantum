@@ -7364,11 +7364,7 @@ void Style::drawControl(QStyle::ControlElement element,
             QString maxText = progressMaxText(pb, opt);
             if (!maxText.isEmpty())
             {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,11,0))
               int textWidth = QFontMetrics(f).horizontalAdvance(maxText) + 6; // 3px space + margin
-#else
-              int textWidth = QFontMetrics(f).width(maxText) + 6;
-#endif
               if (isVertical)
               {
                 if (inverted)

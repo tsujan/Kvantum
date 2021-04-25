@@ -11456,7 +11456,6 @@ QSize Style::sizeFromContents(ContentsType type,
         label_spec lspec = getLabelSpec(group);
         const frame_spec fspec1 = getFrameSpec("LineEdit");
         const label_spec lspec1 = getLabelSpec("LineEdit");
-        const size_spec sspec1 = getSizeSpec("LineEdit");
 
         QFont f;
         if (widget) f = widget->font();

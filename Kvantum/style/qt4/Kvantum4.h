@@ -25,7 +25,7 @@
 
 #include "shortcuthandler4.h"
 #include "windowmanager4.h"
-#include "../themeconfig/ThemeConfig.h"
+#include "ThemeConfig4.h"
 #include "blurhelper4.h"
 
 class QSvgRenderer;

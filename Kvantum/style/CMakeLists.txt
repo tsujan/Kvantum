@@ -88,7 +88,7 @@ else()
       qt4/blurhelper4.cpp
       qt4/windowmanager4.cpp
       qt4/x11wmmove4.cpp
-      themeconfig/ThemeConfig.cpp)
+      qt4/ThemeConfig4.cpp)
 endif()
 
 set(kvantum_RESOURCES themeconfig/defaulttheme.qrc)

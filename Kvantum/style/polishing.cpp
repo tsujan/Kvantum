@@ -1319,15 +1319,16 @@ QPalette Style::standardPalette() const
   else
   {
     col = standardPalette_.color(QPalette::Active,QPalette::Base);
-    int v = col.value();
-    if (v < 127) v += 5; else v -= 5;
-    col.setHsv(col.hue(), col.saturation(), v);
+    int l = col.lightness();
+    if (l < 127) l += 10; else l -= 10;
+    col.setHsl(col.hue(), col.saturation(), l, col.alpha());
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
 
     col = standardPalette_.color(QPalette::Inactive,QPalette::Base);
-    v = col.value();
-    if (v < 127) v += 5; else v -= 5;
-    col.setHsv(col.hue(), col.saturation(), v);
+    l = col.lightness();
+    if (l < 127) l += 10; else l -= 10;
+    col.setHsl(col.hue(), col.saturation(), l, col.alpha());
     standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
   }
 

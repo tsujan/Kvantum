@@ -18,13 +18,11 @@
 #include <QSettings>
 #include <QFile>
 #include <QApplication>
-#include "ThemeConfig.h"
+#include "ThemeConfig4.h"
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
 #include <QX11Info>
-#include <X11/Xlib.h>
-#include <X11/Xatom.h>
 #endif
-#define KSL(x) QStringLiteral(x)
+#define KSL(x) QString(x)
 
 namespace Kvantum {
 ThemeConfig::ThemeConfig(const QString& theme) :
@@ -34,30 +32,14 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   /* For now, the lack of x11 means wayland.
      Later, a better method should be found. */
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
-  isX11_ = QX11Info::isPlatformX11();
+  isX11_ = true;
 #else
   isX11_ = false;
 #endif
 
   load(theme);
 
-  /* WARNING: Qt has a bug that causes drawing problems with a non-integer
-     scale factor. Those problems can be seen with Fusion too but they become
-     intense with an SVG window gradient and/or window translucency. As a
-     workaround, we remove the window interior and translucency in this case. */
-  const qreal dpr = qApp->devicePixelRatio();
-  nonIntegerScale = (dpr > static_cast<qreal>(1) && static_cast<qreal>(qRound(dpr)) != dpr);
-  if (nonIntegerScale)
-  {
-    nonIntegerScale = !getValue(KSL("Hacks"),KSL("noninteger_translucency")).toBool();
-    if (nonIntegerScale)
-    {
-      interior_spec r;
-      default_interior_spec(r);
-      r.hasInterior = false;
-      iSpecs_[KSL("WindowTranslucent")] = iSpecs_[KSL("Window")] = iSpecs_[KSL("Dialog")] = r;
-    }
-  }
+  nonIntegerScale = false;
 
   default_theme_spec(compositeSpecs_);
 }
@@ -407,31 +389,6 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
       v = getValue(elementName,KSL("text.bold"), i);
       r.boldFont = v.toBool();
 
-      v = getValue(elementName,KSL("text.boldness"), i);
-      if (v.isValid()) // QFont::Bold by default
-      {
-        int b = qMin(qMax(v.toInt(),1),5);
-        switch (b) {
-          case 1:
-            r.boldness = QFont::Medium;
-            break;
-          case 2:
-            r.boldness = QFont::DemiBold;
-            break;
-          case 3:
-            r.boldness = QFont::Bold;
-            break;
-          case 4:
-            r.boldness = QFont::ExtraBold;
-            break;
-          case 5:
-            r.boldness = QFont::Black;
-            break;
-          default:
-            r.boldness = QFont::Bold;
-        }
-      }
-
       v = getValue(elementName,KSL("text.italic"), i);
       r.italicFont = v.toBool();
     }
@@ -582,14 +539,8 @@ theme_spec ThemeConfig::getCompositeSpec()
   bool compositing(false);
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
-  if (isX11_)
-  {
-    Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
-    if (XGetSelectionOwner(QX11Info::display(), atom))
-      compositing = true;
-  }
-  else
-    compositing = true; // wayland is always composited
+  if (QX11Info::isCompositingManagerRunning())
+    compositing = true;
 #endif
 
   /* no blurring or window translucency without compositing */
@@ -620,7 +571,7 @@ theme_spec ThemeConfig::getCompositeSpec()
           compositeSpecs_.translucent_windows = v.toBool();
 
         /* no window blurring without window translucency */
-        if (compositeSpecs_.translucent_windows)
+        if (isX11_ && compositeSpecs_.translucent_windows)
         {
           v = getValue(KSL("General"),KSL("blurring"));
           if (v.isValid())
@@ -629,17 +580,20 @@ theme_spec ThemeConfig::getCompositeSpec()
       }
 
       /* "blurring" is sufficient but not necessary for "popup_blurring" */
-      if (compositeSpecs_.blurring)
-        compositeSpecs_.popup_blurring = true;
-      else
+      if (isX11_)
       {
-        interior_spec ispecM = getInteriorSpec(KSL("Menu"));
-        interior_spec ispecT = getInteriorSpec(KSL("ToolTip"));
-        if (ispecM.hasInterior || ispecT.hasInterior)
+        if (compositeSpecs_.blurring)
+          compositeSpecs_.popup_blurring = true;
+        else
         {
-          v = getValue(KSL("General"),KSL("popup_blurring"));
-          if (v.isValid())
-            compositeSpecs_.popup_blurring = v.toBool();
+          interior_spec ispecM = getInteriorSpec(KSL("Menu"));
+          interior_spec ispecT = getInteriorSpec(KSL("ToolTip"));
+          if (ispecM.hasInterior || ispecT.hasInterior)
+          {
+            v = getValue(KSL("General"),KSL("popup_blurring"));
+            if (v.isValid())
+              compositeSpecs_.popup_blurring = v.toBool();
+          }
         }
       }
 
@@ -694,18 +648,6 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("shadowless_popup"));
   r.shadowless_popup = v.toBool();
 
-    /* NOTE: The contrast effect is applied by BlurHelper, so that the following values have
-             effect only for windows that can be blurred, whether they are blurred or not. */
-  v = getValue(KSL("General"),KSL("contrast"));
-  if (v.isValid()) // 1 by default
-    r.contrast = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue(KSL("General"),KSL("intensity"));
-  if (v.isValid()) // 1 by default
-    r.intensity = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-  v = getValue(KSL("General"),KSL("saturation"));
-  if (v.isValid()) // 1 by default
-    r.saturation = qBound (static_cast<qreal>(0), v.toReal(), static_cast<qreal>(2));
-
   v = getValue(KSL("General"),KSL("x11drag"));
   if (v.isValid()) // "WindowManager::DRAG_ALL" by default
   {
@@ -713,11 +655,6 @@ theme_spec ThemeConfig::getThemeSpec()
     if (!(v.toString() == "true" || v.toInt() == 1))
       r.x11drag = WindowManager::toDrag(v.toString());
   }
-
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
-  v = getValue(KSL("General"),KSL("drag_from_buttons"));
-  r.drag_from_buttons = v.toBool();
-#endif
 
   v = getValue(KSL("General"),KSL("respect_DE"));
   if (v.isValid()) // true by default
@@ -946,10 +883,7 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // true by default
     r.button_contents_shift = v.toBool();
 
-  v = getValue(KSL("General"),KSL("transient_scrollbar"));
-  r.transient_scrollbar = v.toBool();
-  v = getValue(KSL("General"),KSL("transient_groove"));
-  r.transient_groove = v.toBool();
+  r.transient_scrollbar=false;
 
   /* for technical reasons, we always set scrollbar_in_view
      to false with transient scrollbars and (try to) put
@@ -1129,14 +1063,11 @@ hacks_spec ThemeConfig::getHacksSpec() const
   if (v.isValid())
     r.lxqtmainmenu_iconsize = qMin(qMax(v.toInt(),0),32);
 
-  v = getValue(KSL("Hacks"),KSL("blur_translucent"));
-  r.blur_translucent = v.toBool();
-
-#if (QT_VERSION == QT_VERSION_CHECK(5,14,0))
-  /* A workaround for a nasty bug about text translucency in Qt 5.14.0.
-     The bug was fixed in Qt 5.14.1. */
-  r.opaque_colors = true; // false by default
-#endif
+  if (isX11_)
+  {
+    v = getValue(KSL("Hacks"),KSL("blur_translucent"));
+    r.blur_translucent = v.toBool();
+  }
 
   v = getValue(KSL("Hacks"),KSL("transparent_ktitle_label"));
   r.transparent_ktitle_label = v.toBool();
