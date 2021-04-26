@@ -1324,12 +1324,16 @@ QPalette Style::standardPalette() const
     col.setHsl(col.hue(), col.saturation(), l, col.alpha());
     standardPalette_.setColor(QPalette::Active,QPalette::AlternateBase,col);
     standardPalette_.setColor(QPalette::Disabled,QPalette::AlternateBase,col);
-
-    col = standardPalette_.color(QPalette::Inactive,QPalette::Base);
-    l = col.lightness();
-    if (l < 127) l += 10; else l -= 10;
-    col.setHsl(col.hue(), col.saturation(), l, col.alpha());
-    standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+    if (!hasInactiveness)
+      standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+    else
+    {
+      col = standardPalette_.color(QPalette::Inactive,QPalette::Base);
+      l = col.lightness();
+      if (l < 127) l += 10; else l -= 10;
+      col.setHsl(col.hue(), col.saturation(), l, col.alpha());
+      standardPalette_.setColor(QPalette::Inactive,QPalette::AlternateBase,col);
+    }
   }
 
   col = getFromRGBA(cspec_.buttonColor);

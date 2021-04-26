@@ -19,7 +19,7 @@
 #define SPEC_H
 
 #include <QStringList>
-#include "qt4/windowmanager4.h"
+#include "windowmanager4.h"
 
 namespace Kvantum {
 /* Generic information about a theme */
