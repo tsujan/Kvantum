@@ -182,6 +182,13 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     });
 #endif
 
+    /* vertical toolbars could be styled only if all toolbars can */
+    connect (ui->checkBoxToolbar, &QAbstractButton::clicked, [this] (bool checked) {
+        if (checked)
+            ui->checkBoxVToolbar->setChecked (false);
+        ui->checkBoxVToolbar->setEnabled (!checked);
+    });
+
     /* in this special case, show a message box */
     connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
         if (checked) return;
@@ -1003,6 +1010,9 @@ void KvantumManager::defaultThemeButtons()
     ui->checkBoxIconlessBtn->setChecked (defaultSettings.value ("iconless_pushbutton").toBool());
     ui->checkBoxIconlessMenu->setChecked (defaultSettings.value ("iconless_menu").toBool());
     ui->checkBoxToolbar->setChecked (defaultSettings.value ("single_top_toolbar").toBool());
+    ui->checkBoxVToolbar->setChecked (!ui->checkBoxToolbar->isChecked()
+                                      && defaultSettings.value ("style_vertical_toolbars").toBool());
+    ui->checkBoxVToolbar->setEnabled (!ui->checkBoxToolbar->isChecked());
     ui->checkBoxTint->setChecked (defaultSettings.value ("no_selection_tint").toBool());
     ui->checkBoxCenteredForms->setChecked (defaultSettings.value ("centered_forms").toBool());
     int tmp = 0;
@@ -1605,6 +1615,9 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxIconlessBtn->setChecked (themeSettings.value ("iconless_pushbutton").toBool());
                 ui->checkBoxIconlessMenu->setChecked (themeSettings.value ("iconless_menu").toBool());
                 ui->checkBoxToolbar->setChecked (themeSettings.value ("single_top_toolbar").toBool());
+                ui->checkBoxVToolbar->setChecked (!ui->checkBoxToolbar->isChecked()
+                                                  && themeSettings.value ("style_vertical_toolbars").toBool());
+                ui->checkBoxVToolbar->setEnabled (!ui->checkBoxToolbar->isChecked());
                 ui->checkBoxTint->setChecked (themeSettings.value ("no_selection_tint").toBool());
                 ui->checkBoxCenteredForms->setChecked (themeSettings.value ("centered_forms").toBool());
                 int tmp = 0;
@@ -2261,6 +2274,7 @@ void KvantumManager::writeConfig()
         hackKeys.insert ("iconless_pushbutton", boolToStr (ui->checkBoxIconlessBtn->isChecked()));
         hackKeys.insert ("iconless_menu", boolToStr (ui->checkBoxIconlessMenu->isChecked()));
         hackKeys.insert ("single_top_toolbar", boolToStr (ui->checkBoxToolbar->isChecked()));
+        hackKeys.insert ("style_vertical_toolbars", boolToStr (ui->checkBoxVToolbar->isChecked()));
         hackKeys.insert ("no_selection_tint", boolToStr (ui->checkBoxTint->isChecked()));
         hackKeys.insert ("centered_forms", boolToStr (ui->checkBoxCenteredForms->isChecked()));
         hackKeys.insert ("tint_on_mouseover", str.setNum (ui->spinTint->value()));

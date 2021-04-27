@@ -411,18 +411,6 @@ By default, it has the base background.</string>
                  </property>
                 </spacer>
                </item>
-               <item row="0" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxNormalBtn">
-                 <property name="toolTip">
-                  <string>No bold font for default push buttons?
-
-Such push buttons have bold text by default.</string>
-                 </property>
-                 <property name="text">
-                  <string>Normal font for default push buttons</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="5">
                 <spacer name="horizontalSpacer_3">
                  <property name="orientation">
@@ -435,6 +423,21 @@ Such push buttons have bold text by default.</string>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item row="0" column="3" colspan="2">
+                <widget class="QCheckBox" name="checkBoxIconlessBtn">
+                 <property name="toolTip">
+                  <string>No icon for push buttons that have text?
+
+By default, most push buttons have icon.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
+                 </property>
+                 <property name="text">
+                  <string>Iconless push buttons</string>
+                 </property>
+                </widget>
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="checkBoxPcmanfmSide">
@@ -451,17 +454,17 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="1" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessBtn">
+                <widget class="QCheckBox" name="checkBoxIconlessMenu">
                  <property name="toolTip">
-                  <string>No icon for push buttons that have text?
+                  <string>No icon for menu-items?
 
-By default, most push buttons have icon.
+By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
-                  <string>Iconless push buttons</string>
+                  <string>Iconless menus</string>
                  </property>
                 </widget>
                </item>
@@ -480,17 +483,16 @@ with LXQt Session Settings.</string>
                 </widget>
                </item>
                <item row="2" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxIconlessMenu">
+                <widget class="QCheckBox" name="checkBoxToolbar">
                  <property name="toolTip">
-                  <string>No icon for menu-items?
+                  <string>Only the top toolbar should be styled?
 
-By default, some of them may have icon.
-
-If this is disabled, see:
-Miscellaneous → Respect current DE if possible</string>
+By default, all toolbars are styled,
+whether they are on the top or at any
+other position.</string>
                  </property>
                  <property name="text">
-                  <string>Iconless menus</string>
+                  <string>Single top toolbar</string>
                  </property>
                 </widget>
                </item>
@@ -509,17 +511,15 @@ Konsole, QTerminal and LXQt panel are some examples.</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxToolbar">
+               <item row="3" column="3">
+                <widget class="QCheckBox" name="checkBoxVToolbar">
                  <property name="toolTip">
-                  <string>Only the top toolbar should be styled?
+                  <string>By default, vertical toolbars are not styled.
 
-By default, all toolbars are styled,
-whether they are on the top or at any
-other position.</string>
+If this is disabled, see the above option.</string>
                  </property>
                  <property name="text">
-                  <string>Single top toolbar</string>
+                  <string>Style vertical toolbars</string>
                  </property>
                 </widget>
                </item>
@@ -613,7 +613,18 @@ as far as possible.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="3">
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkBoxScrollJump">
+                 <property name="toolTip">
+                  <string>By default, the scroll slider jumps to a position
+when the scrollbar is left clicked.</string>
+                 </property>
+                 <property name="text">
+                  <string>Scroll jump with middle click</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="3">
                 <widget class="QLabel" name="labelTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -627,7 +638,7 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="7" column="4">
+               <item row="8" column="4">
                 <widget class="QSpinBox" name="spinTint">
                  <property name="toolTip">
                   <string>The highlight color is used for tinting.
@@ -644,18 +655,21 @@ Hard-coded icons/styles may not respect this key.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="1">
-                <widget class="QCheckBox" name="checkBoxScrollJump">
+               <item row="9" column="1">
+                <widget class="QCheckBox" name="checkBoxKineticScrolling">
                  <property name="toolTip">
-                  <string>By default, the scroll slider jumps to a position
-when the scrollbar is left clicked.</string>
+                  <string>Scroll some scrollable widgets by flicking them
+with the left mouse button.
+
+Warning: Qt's kinetic scrolling has bugs and may
+seriously interfere with other jobs.</string>
                  </property>
                  <property name="text">
-                  <string>Scroll jump with middle click</string>
+                  <string>Kinetic scrolling</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="labelOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -670,7 +684,7 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="8" column="4">
+               <item row="9" column="4">
                 <widget class="QSpinBox" name="spinOpacity">
                  <property name="toolTip">
                   <string>Useful with monochrome icon sets and
@@ -691,21 +705,19 @@ reduced by other means.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="1">
-                <widget class="QCheckBox" name="checkBoxKineticScrolling">
+               <item row="10" column="1">
+                <widget class="QCheckBox" name="checkBoxNormalBtn">
                  <property name="toolTip">
-                  <string>Scroll some scrollable widgets by flicking them
-with the left mouse button.
+                  <string>No bold font for default push buttons?
 
-Warning: Qt's kinetic scrolling has bugs and may
-seriously interfere with other jobs.</string>
+Such push buttons have bold text by default.</string>
                  </property>
                  <property name="text">
-                  <string>Kinetic scrolling</string>
+                  <string>Normal font for default push buttons</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="3">
+               <item row="10" column="3">
                 <widget class="QLabel" name="labelLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.
@@ -720,7 +732,7 @@ or through logging out and in again.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="4">
+               <item row="10" column="4">
                 <widget class="QSpinBox" name="spinLxqtMenu">
                  <property name="toolTip">
                   <string>Has effect only when the main menu is NOT styled by LXQt.

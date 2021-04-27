@@ -302,6 +302,8 @@ typedef struct {
   bool iconless_menu;
   /* only style the top toolbar? */
   bool single_top_toolbar;
+  /* style vertical toolbars? */
+  bool style_vertical_toolbars;
   /* should the scroll jump be done by middle clicking?
      (By default, it's done by left clicking.) */
   bool middle_click_scroll;
@@ -573,6 +575,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.transparent_arrow_button=false;
   hspec.iconless_menu = false;
   hspec.single_top_toolbar = false;
+  hspec.style_vertical_toolbars = false;
   hspec.middle_click_scroll = false;
   hspec.centered_forms = false;
   hspec.kinetic_scrolling = false;

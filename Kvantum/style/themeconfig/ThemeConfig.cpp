@@ -1174,7 +1174,13 @@ hacks_spec ThemeConfig::getHacksSpec() const
   r.iconless_menu = v.toBool();
 
   v = getValue(KSL("Hacks"),KSL("single_top_toolbar"));
-  r.single_top_toolbar = v.toBool();
+  if (v.toBool())
+    r.single_top_toolbar = true; // false by default
+  else
+  { // vertical toolbars could be styled only if all toolbars can
+    v = getValue(KSL("Hacks"),KSL("style_vertical_toolbars"));
+    r.style_vertical_toolbars = v.toBool();
+  }
 
   v = getValue(KSL("Hacks"),KSL("middle_click_scroll"));
   r.middle_click_scroll = v.toBool();

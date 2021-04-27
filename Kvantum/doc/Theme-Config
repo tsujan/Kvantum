@@ -928,7 +928,14 @@ single_top_toolbar                true/false          Style only the top toolbar
                                                       is immediately below the menubar or at
                                                       the top of the main window, will be
                                                       styled. By default, all toolbars are
-                                                      styled, except for the vertical ones.
+                                                      styled, except for the vertical ones
+                                                      (also, see "style_vertical_toolbars").
+
+style_vertical_toolbars           true/false          Vertical toolbars will be styled only
+                                                      if this key is set to "true" and
+                                                      "single_top_toolbar" is "false".
+                                                      By default, vertical toolbars are not
+                                                      styled.
 
 middle_click_scroll               true/false          Should the scroll slider jump to a
                                                       position when the scrollbar is middle
