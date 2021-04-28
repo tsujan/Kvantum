@@ -68,7 +68,8 @@ public:
   void unregisterWidget (QWidget *widget);
   virtual bool eventFilter (QObject *object, QEvent *event);
 
-  /* needed for widget animation in "Kvantum.cpp" */
+  /* needed in "Kvantum.cpp" for animations
+     and also for the workaround of hover bug */
   bool dragInProgress() const {
     return dragInProgress_;
   }
