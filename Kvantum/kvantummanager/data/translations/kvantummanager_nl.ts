@@ -370,12 +370,14 @@ Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard worden verticale werkbalken niet gestileerd.
+
+Als dit is uitgeschakeld, zie dan bovenstaande optie.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Verticale werkbalken stileren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
