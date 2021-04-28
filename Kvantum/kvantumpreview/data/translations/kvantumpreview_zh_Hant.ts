@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum 預覽</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>按鈕</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -30,13 +30,13 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>簡易按鈕</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>切換按鈕</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
