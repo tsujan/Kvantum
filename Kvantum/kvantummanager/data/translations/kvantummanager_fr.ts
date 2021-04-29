@@ -368,12 +368,14 @@ Divers → Respecter le DE actuel si possible</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut, les barres d&apos;outils verticales ne sont pas stylisées.
+
+Si cela est désactivé, reportez-vous à l&apos;option ci-dessus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Styliser les barres d&apos;outils verticales</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -1359,7 +1361,7 @@ Cette option les cachera.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
