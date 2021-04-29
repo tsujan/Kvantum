@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantumi eelvaade</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Nupud</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -30,39 +30,42 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Lihtne nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Sisse/välja lülitatav nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitmerealine
+nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Nupp 32-pikslise
+kaustaikooniga</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaikimisi
+nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Lame nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
@@ -359,17 +362,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pealkiri 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pealkiri 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Pealkiri 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
@@ -409,27 +412,27 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Rida 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2507"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Rida 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2512"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Veerg 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Veerg 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2533"/>
@@ -439,23 +442,23 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2541"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2549"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Muudetav</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei ole muudetav</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2269"/>
