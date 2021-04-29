@@ -2081,12 +2081,34 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
       }
 
-      /* Due to a Qt5 bug (which I call "the hover bug"), after their menus are closed,
-         comboboxes and buttons will have the WA_UnderMouse attribute without the cursor
-         being over them. Hence we use the following logic in several places. It will
-         be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
-      if (!btnDragInProgress() && status.startsWith("focused") && isCursorOutsideWidget(widget))
-        status.replace("focused","normal");
+      QObject *styleObject = option->styleObject;
+      const QString prevState = styleObject != nullptr
+                                  ? styleObject->property("_kv_state").toString()
+                                  : QString();
+
+      /* Due to a Qt5 bug (which I call "the hover bug"), comboboxes and buttons may have
+         the WA_UnderMouse attribute without being under the cursor after their menus are
+         closed or they are enabled. Hence we use the following logic in several places.
+         It will be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
+      if (!prevState.isEmpty())
+      {
+        if (!btnDragInProgress() && status.startsWith("focused")
+            && (prevState.startsWith("pressed") // if it was pressed before...
+                /* ... or if it was disabled (see below) */
+                || (prevState.startsWith("normal") && styleObject->property("_kv_hover_bug").toBool()))
+            && isCursorOutsideWidget(widget))
+        {
+          styleObject->setProperty("_kv_hover_bug", true);
+          status.replace("focused","normal");
+        }
+        else if (!(option->state & State_Enabled))
+        {
+          /* to mark the disabled state (drawn as normal but with translucency) */
+          styleObject->setProperty("_kv_hover_bug", true);
+        }
+        else
+          styleObject->setProperty("_kv_hover_bug", QVariant());
+      }
 
       bool hasPanel = false;
 
@@ -2403,7 +2425,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             // don't focus the button if only its arrow is focused
             if (pbStatus == "focused"
                 && ((opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
-                    || (!btnDragInProgress() && isCursorOutsideWidget(widget)))) // hover bug
+                    || (styleObject && styleObject->property("_kv_hover_bug").toBool()))) // hover bug
             {
               pbStatus = "normal";
             }
@@ -2426,14 +2448,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                    0);
         }
 
-        QObject *styleObject = option->styleObject;
-        QString animationStartState;
-        if (styleObject)
-          animationStartState = styleObject->property("_kv_state").toString();
         bool animate(!btnDragInProgress()
                      && widget->isEnabled() && animatedWidget_ == widget
-                     && !animationStartState.isEmpty());
-        if (animate && animationStartState == status)
+                     && !prevState.isEmpty());
+        if (animate && prevState == status)
         {
           if (opacityTimer_->isActive())
             opacityTimer_->stop();
@@ -2452,11 +2470,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               opacityTimer_->start(ANIMATION_FRAME);
             }
             if (animationOpacity_ < 100
-                && (!autoraise || !animationStartState.startsWith("normal") || drawRaised))
+                && (!autoraise || !prevState.startsWith("normal") || drawRaised))
             {
-              renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState,0,0,0,0,0,drawRaised);
+              renderFrame(painter,r,fspec,fspec.element+"-"+prevState,0,0,0,0,0,drawRaised);
               if (!fillWidgetInterior)
-                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState,drawRaised);
+                renderInterior(painter,r,fspec,ispec,ispec.element+"-"+prevState,drawRaised);
             }
             painter->save();
             painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
@@ -2480,7 +2498,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           hasPanel = true;
         }
         // auto-raised fade out animation
-        else if (animate && !animationStartState.startsWith("normal"))
+        else if (animate && !prevState.startsWith("normal"))
         {
           if (!opacityTimer_->isActive())
           {
@@ -2491,9 +2509,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             painter->save();
             painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
-            renderFrame(painter,r,fspec,fspec.element+"-"+animationStartState);
+            renderFrame(painter,r,fspec,fspec.element+"-"+prevState);
             if (!fillWidgetInterior)
-              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+animationStartState);
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+prevState);
             painter->restore();
             if (fillWidgetInterior)
               painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
@@ -2510,47 +2528,52 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         /*if (!isHorizontal && !withArrow)
           painter->restore();*/
       }
-      else if (!autoraise || !status.startsWith("normal"))
+      else
       {
-        bool libreoffice = false;
-        if (isLibreoffice_ && widget == nullptr
-            && (option->state & State_Enabled) && !status.startsWith("toggled")
-            && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
+        if (styleObject)
+          styleObject->setProperty("_kv_state", status);
+        if (!autoraise || !status.startsWith("normal"))
         {
-          libreoffice = true;
-          painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
-          painter->save();
-          painter->setOpacity(0.5);
-        }
-        if (!fillWidgetInterior)
-        {
-          if ((option->state & State_Enabled) // Damn! QML has a bad text color for the diabled state.
-              && widget == nullptr
-              && enoughContrast(option->palette.color(QPalette::ButtonText),
-                                standardPalette().color(QPalette::ButtonText)))
-          { // QML colorized button
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
-            if (hasExpandedBorder(fspec))
-              fspec.expansion = 0;
-            else
-              fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
-            painter->fillRect(interiorRect(r,fspec),
-                              option->palette.brush(QPalette::Active, QPalette::Button));
+          bool libreoffice = false;
+          if (isLibreoffice_ && widget == nullptr
+              && (option->state & State_Enabled) && !status.startsWith("toggled")
+              && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
+          {
+            libreoffice = true;
+            painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
+            painter->save();
+            painter->setOpacity(0.5);
           }
-          else
-            renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          if (!fillWidgetInterior)
+          {
+            if ((option->state & State_Enabled) // Damn! QML has a bad text color for the diabled state.
+                && widget == nullptr
+                && enoughContrast(option->palette.color(QPalette::ButtonText),
+                                  standardPalette().color(QPalette::ButtonText)))
+            { // QML colorized button
+              fspec.left = qMin(fspec.left,3);
+              fspec.right = qMin(fspec.right,3);
+              fspec.top = qMin(fspec.top,3);
+              fspec.bottom = qMin(fspec.bottom,3);
+              if (hasExpandedBorder(fspec))
+                fspec.expansion = 0;
+              else
+                fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
+              painter->fillRect(interiorRect(r,fspec),
+                                option->palette.brush(QPalette::Active, QPalette::Button));
+            }
+            else
+              renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
+          }
+          else // widget isn't null
+            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
+                                                                               ? QPalette::Inactive
+                                                                               : QPalette::Active,
+                                                                             QPalette::Button));
+          renderFrame(painter,r,fspec,fspec.element+"-"+status);
+          if (libreoffice) painter->restore();
+          hasPanel = true;
         }
-        else // widget isn't null
-          painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                             ? QPalette::Inactive
-                                                                             : QPalette::Active,
-                                                                           QPalette::Button));
-        renderFrame(painter,r,fspec,fspec.element+"-"+status);
-        if (libreoffice) painter->restore();
-        hasPanel = true;
       }
 
       /* the disabled painter is already restored when drawRaised is true */
@@ -2703,9 +2726,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));*/
         QObject *styleObject = option->styleObject;
-        QString animationStartState;
-        if (styleObject)
-          animationStartState = styleObject->property("_kv_state").toString();
+        const QString animationStartState = styleObject != nullptr
+                                              ? styleObject->property("_kv_state").toString()
+                                              : QString();
         animate = animate && widget && animatedWidget_ == widget
                   && !animationStartState.isEmpty()
                   && animationStartState != suffix
@@ -2839,9 +2862,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             && qstyleoption_cast<const QStyleOptionMenuItem*>(option))
           painter->fillRect(option->rect, option->palette.brush(QPalette::Highlight));*/
         QObject *styleObject = option->styleObject;
-        QString animationStartState;
-        if (styleObject)
-          animationStartState = styleObject->property("_kv_state").toString();
+        const QString animationStartState = styleObject != nullptr
+                                              ? styleObject->property("_kv_state").toString()
+                                              : QString();
         animate =  animate && widget && animatedWidget_ == widget
                    && !animationStartState.isEmpty()
                    && animationStartState != suffix
@@ -4309,7 +4332,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           status = (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver)
-                      && !isCursorOutsideWidget(widget) // hover bug
+                      && !(option->styleObject
+                           && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
                     ? "focused" :
                     (option->state & State_Sunken)
                     || (option->state & State_Selected) ? "pressed" : "normal"
@@ -4372,10 +4396,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       if (tb)
       {
         bool drawSep(false);
-        if (!btnDragInProgress() && status.startsWith("focused")
-            && isCursorOutsideWidget(widget)) // hover bug
-        {
-          status.replace("focused","normal");
+        if (QObject *styleObject = option->styleObject)
+        { // hover bug
+          if (status.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
+            status.replace("focused","normal");
         }
         const QToolBar *toolBar = qobject_cast<const QToolBar*>(tb->parentWidget());
         const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
@@ -4721,9 +4745,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         status.append("-inactive");
 
       QObject *styleObject = option->styleObject;
-      QString animationStartState;
-      if (styleObject)
-        animationStartState = styleObject->property("_kv_state").toString();
+      const QString animationStartState = styleObject != nullptr
+                                            ? styleObject->property("_kv_state").toString()
+                                            : QString();
       bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
                    && !animationStartState.isEmpty()
                    && qobject_cast<const QAbstractButton*>(widget));
@@ -6248,7 +6272,8 @@ void Style::drawControl(QStyle::ControlElement element,
                  (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
                   (option->state & State_MouseOver)
-                    && !isCursorOutsideWidget(widget) // hover bug
+                    && !(option->styleObject
+                         && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
                   ? "focused" :
                   (option->state & State_Sunken)
                   // to know it has focus
@@ -8286,11 +8311,11 @@ void Style::drawControl(QStyle::ControlElement element,
                        : "disabled";
       if (isWidgetInactive(widget))
         status.append("-inactive");
-      if (status.startsWith("focused")
+      /*if (status.startsWith("focused")
           && isCursorOutsideWidget(widget)) // hover bug
       {
         status.replace("focused","normal");
-      }
+      }*/
       QString sStatus = status; // slider state
       if (!tspec_.animate_states // focus on entering the groove only with animation
           && (option->state & State_Enabled))
@@ -9177,10 +9202,13 @@ void Style::drawControl(QStyle::ControlElement element,
           state = 3;
         else if (status.startsWith("toggled"))
           state = 4;
-        else if ((option->state & State_MouseOver)
-                 && (btnDragInProgress() || !isCursorOutsideWidget(widget))) // hover bug
+        else if (option->state & State_MouseOver)
         {
-          state = 2;
+          if (option->styleObject == nullptr
+              || !option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
+          {
+            state = 2;
+          }
         }
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
@@ -9257,11 +9285,30 @@ void Style::drawControl(QStyle::ControlElement element,
           qstyleoption_cast<const QStyleOptionButton*>(option);
 
       if (opt) {
+        QObject *styleObject = option->styleObject;
+        const QString prevState = styleObject != nullptr
+                                    ? styleObject->property("_kv_state").toString()
+                                    : QString();
+
         QString status = getState(option,widget);
-        if (!btnDragInProgress() && status.startsWith("focused")
-            && isCursorOutsideWidget(widget)) // hover bug
-        {
-          status.replace("focused","normal");
+        if (!prevState.isEmpty())
+        { // hover bug
+          if (!btnDragInProgress() && status.startsWith("focused")
+              && (prevState.startsWith("pressed") // if it was pressed before…
+                  /* ... or if it was disabled (see below) */
+                  || (prevState.startsWith("normal") && styleObject->property("_kv_hover_bug").toBool()))
+              && isCursorOutsideWidget(widget))
+          {
+            styleObject->setProperty("_kv_hover_bug", true);
+            status.replace("focused","normal");
+          }
+          else if (!(option->state & State_Enabled))
+          {
+            /* to mark the disabled state (drawn as normal but with translucency) */
+            styleObject->setProperty("_kv_hover_bug", true);
+          }
+          else
+            styleObject->setProperty("_kv_hover_bug", QVariant());
         }
         const QString group = "PanelButtonCommand";
         frame_spec fspec = getFrameSpec(group);
@@ -9478,15 +9525,11 @@ void Style::drawControl(QStyle::ControlElement element,
             painter->save();
             painter->setOpacity(0.5);
           }
-          QObject *styleObject = option->styleObject;
-          QString animationStartState;
-          if (styleObject)
-            animationStartState = styleObject->property("_kv_state").toString();
           bool animate(!btnDragInProgress()
                        && widget && widget->isEnabled() && animatedWidget_ == widget
-                       && !animationStartState.isEmpty()
+                       && !prevState.isEmpty()
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
-          if (animate && animationStartState == status)
+          if (animate && prevState == status)
           {
             if (opacityTimer_->isActive())
               opacityTimer_->stop();
@@ -9504,11 +9547,11 @@ void Style::drawControl(QStyle::ControlElement element,
               }
               if (animationOpacity_ < 100
                   && (!(opt->features & QStyleOptionButton::Flat)
-                      || !animationStartState.startsWith("normal")))
+                      || !prevState.startsWith("normal")))
               {
-                renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
+                renderFrame(painter,option->rect,fspec,fspec.element+"-"+prevState);
                 if (!fillWidgetInterior)
-                  renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
+                  renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+prevState);
               }
               painter->save();
               painter->setOpacity(static_cast<qreal>(animationOpacity_)/100.0);
@@ -9550,7 +9593,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                                                           QPalette::Button));
           }
           // fade out animation
-          else if (animate && !animationStartState.startsWith("normal"))
+          else if (animate && !prevState.startsWith("normal"))
           {
             if (!opacityTimer_->isActive())
             {
@@ -9561,9 +9604,9 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               painter->save();
               painter->setOpacity(1.0 - static_cast<qreal>(animationOpacity_)/100.0);
-              renderFrame(painter,option->rect,fspec,fspec.element+"-"+animationStartState);
+              renderFrame(painter,option->rect,fspec,fspec.element+"-"+prevState);
               if (!fillWidgetInterior)
-                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+animationStartState);
+                renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+prevState);
               painter->restore();
               if (fillWidgetInterior)
                 painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
@@ -9606,10 +9649,13 @@ void Style::drawControl(QStyle::ControlElement element,
               aStatus = "disabled";
             else if (status.startsWith("toggled") || status.startsWith("pressed"))
               aStatus = "pressed";
-            else if ((option->state & State_MouseOver)
-                     && (btnDragInProgress() || !isCursorOutsideWidget(widget))) // hover bug
+            else if (option->state & State_MouseOver)
             {
-              aStatus = "focused";
+              if (styleObject == nullptr
+                  || !styleObject->property("_kv_hover_bug").toBool()) // hover bug
+              {
+                aStatus = "focused";
+              }
             }
           }
           if (isWidgetInactive(widget))
@@ -9749,10 +9795,10 @@ void Style::drawControl(QStyle::ControlElement element,
 
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
 
-        if (!btnDragInProgress() && status.startsWith("focused")
-            && isCursorOutsideWidget(widget)) // hover bug
-        {
-          status.replace("focused","normal");
+        if (QObject *styleObject = option->styleObject)
+        { // hover bug
+          if (status.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
+            status.replace("focused","normal");
         }
 
         if (tb)
@@ -10531,10 +10577,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             lspec = getLabelSpec(group);
 
             QString aStatus = getState(option,widget);
-            if (!btnDragInProgress() && aStatus.startsWith("focused")
-                && isCursorOutsideWidget(widget)) // hover bug
-            {
-              aStatus.replace("focused","normal");
+            if (QObject *styleObject = option->styleObject)
+            { // hover bug
+              if (aStatus.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
+                aStatus.replace("focused","normal");
             }
 
             /* use the "flat" indicator with flat buttons if it exists */
@@ -10922,13 +10968,37 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           QString status =
                    (option->state & State_Enabled) ?
                     (option->state & State_On) ? "toggled" :
-                    (option->state & State_MouseOver)
-                      && !isCursorOutsideWidget(widget) // hover bug
-                    ? "focused" :
+                    (option->state & State_MouseOver) ? "focused" :
                     (option->state & State_Sunken)
                     // to know it has focus
                     || (option->state & State_Selected) ? "pressed" : "normal"
                    : "disabled";
+          if (QObject *styleObject = option->styleObject)
+          { // hover bug
+            if (status == "focused")
+            {
+              if (styleObject->property("_kv_state").toString() == "sunken"
+                  && isCursorOutsideWidget(widget))
+              {
+                styleObject->setProperty("_kv_hover_bug", true);
+                styleObject->setProperty("_kv_state", QVariant());
+                status = "normal";
+              }
+              else
+              {
+                styleObject->setProperty("_kv_hover_bug", QVariant());
+                styleObject->setProperty("_kv_state", QVariant());
+              }
+            }
+            else
+            {
+              styleObject->setProperty("_kv_hover_bug", QVariant());
+              if (status == "normal")
+                styleObject->setProperty("_kv_state", QVariant());
+              else
+                styleObject->setProperty("_kv_state", "sunken"); // includes the disabled state too
+            }
+          }
           if (isWidgetInactive(widget))
             status.append("-inactive");
 
