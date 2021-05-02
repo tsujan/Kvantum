@@ -4934,7 +4934,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
         else if (opt->features & QStyleOptionViewItem::Alternate)
+        {
+          if ((isDolphin_ && hspec_.transparent_dolphin_view)
+              || (isPcmanfm_ && hspec_.transparent_pcmanfm_view))
+          {
+            if (const auto *iv = qobject_cast<const QAbstractItemView*>(widget))
+            {
+              if (iv->viewport() && !iv->viewport()->autoFillBackground())
+                break;
+            }
+          }
           painter->fillRect(opt->rect, opt->palette.brush(cg, QPalette::AlternateBase));
+        }
       }
       break;
     }
