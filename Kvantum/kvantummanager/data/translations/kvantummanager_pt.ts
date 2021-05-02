@@ -370,12 +370,14 @@ Diversos → Respeitar o DE atual se possível</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, as barras de ferramentas verticais não são estilizadas.
+
+Se isto for desativado, ver a opção acima.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilizar barras de ferramentas verticais</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
