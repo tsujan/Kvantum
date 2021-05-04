@@ -187,19 +187,19 @@ In case you use Compton as the X compositor (not recommended), be sure to disabl
 
 #### In Other DEs:
 
-In desktop environments that do not have a Qt5 configuration utility, you could use this command to run a Qt5 application APP:
+In desktop environments that do not have a Qt5 configuration utility, you could try this command to run a Qt5 application APP:
 
     APP -style kvantum
 
-Or, better, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For example, you could add this line to your `~/.profile` or `~/.bashrc`:
+To style all native Qt5 applications with Kvantum, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For example, you could add this line to your `~/.profile` or `~/.bashrc`:
 
     export QT_STYLE_OVERRIDE=kvantum
 
-If the desktop environment you use does not source `~/.profile`, you could try `~/.config/environment.d/*.conf`: make a file like `~/.config/environment.d/qt.conf`, put this into it and reboot:
+Under GNOME and desktop environments that do not source `~/.profile`, you could make a file like `~/.config/environment.d/qt.conf` with the following line in it and reboot:
 
     QT_STYLE_OVERRIDE=kvantum
 
-The last resort is `/etc/environment` but most desktop environments have GUI tools for setting environment variables.
+The last resort is `/etc/environment` but, most probably, you will not need to touch it.
 
 ### Using other themes
 
