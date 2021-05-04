@@ -186,7 +186,7 @@ text.margin.top=3
 text.margin.bottom=3
 text.margin.left=1
 text.margin.right=1
-frame.expansion=10
+frame.expansion=12
 
 [DropDownButton]
 inherits=PanelButtonCommand

@@ -19,6 +19,7 @@
 
 #include <QDir>
 #include <QPainter>
+#include <QPainterPath>
 #include <QSettings>
 #include <QTimer>
 #include <QSvgRenderer>
@@ -1521,6 +1522,16 @@ static inline QSize textSize(const QFont &font, const QString &text)
   return QSize(tw,th);
 }
 
+static inline void colorizeRect(QPainter *painter, const QColor &col, const QRect &rect)
+{ // used in a workaround for bad codes that change line-edit base color
+  QPainterPath path;
+  path.addRoundedRect(rect, 3, 3);
+  painter->save();
+  painter->setRenderHints(QPainter::Antialiasing, true);
+  painter->fillPath(path, col);
+  painter->restore();
+}
+
 bool Style::btnDragInProgress() const
 {
 #if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
@@ -1600,11 +1611,6 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   label_spec lspec = getLabelSpec(group);
   const size_spec sspec = getSizeSpec(group);
 
-  /* a workaround for bad codes that change line-edit base color */
-  bool colored = !isPcmanfm_ && group == "LineEdit"
-                 && lineedit->palette().color(QPalette::Base)
-                    != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base);
-
   /*if (isLibreoffice_) // impossible because lineedit != NULL
   {
     fspec.left = qMin(fspec.left,3);
@@ -1614,9 +1620,8 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   }
   else
   {*/
-    bool noSpace(colored
-                 || (lineedit->testAttribute(Qt::WA_StyleSheetTarget)
-                     && !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+    bool noSpace((lineedit->testAttribute(Qt::WA_StyleSheetTarget)
+                  && !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
         && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
@@ -1637,15 +1642,10 @@ void Style::drawComboLineEdit(const QStyleOption *option,
         fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
       else
       {
-        if (colored)
-          fspec.expansion = 0;
-        else
-        {
-          fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-          fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-          fspec.topExpanded = qMin(fspec.topExpanded,3);
-          fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-        }
+        fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+        fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+        fspec.topExpanded = qMin(fspec.topExpanded,3);
+        fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
       }
     }
   //}
@@ -1690,10 +1690,22 @@ void Style::drawComboLineEdit(const QStyleOption *option,
                 option->rect,
               fspec,
               fspec.element+leStatus);
-  if (!colored
-      && (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text))))
+  if (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text)))
   {
     renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
+
+    /* a workaround for bad codes that change line-edit base color */
+    if (!isPcmanfm_ && group == "LineEdit")
+    {
+      QColor baseCol = lineedit->palette().color(QPalette::Base);
+      if (baseCol != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base))
+      {
+        baseCol.setAlpha(255);
+        QStyleOption o(*option);
+        o.rect = lineedit->rect();
+        colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, &o, lineedit));
+      }
+    }
   }
   else
   {
@@ -3634,9 +3646,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         colored = !isPcmanfm_ && !insideSpinBox && group == "LineEdit"
                   && widget->palette().color(QPalette::Base)
                      != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base);
-        if (colored
-            || (widget->testAttribute(Qt::WA_StyleSheetTarget)
-                && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+        if ((widget->testAttribute(Qt::WA_StyleSheetTarget)
+             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
             || widget->minimumWidth() == widget->maximumWidth()
             || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         {
@@ -3649,15 +3660,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           else
           {
-            if (colored)
-              fspec.expansion = 0;
-            else
-            {
-              fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-              fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-              fspec.topExpanded = qMin(fspec.topExpanded,3);
-              fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-            }
+            fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+            fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+            fspec.topExpanded = qMin(fspec.topExpanded,3);
+            fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
           }
         }
       }
@@ -3735,11 +3741,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
       }
 
-      bool fillWidgetInterior(colored
-                              || (!ispec.hasInterior
-                                  && hasHighContrastWithContainer(widget,
-                                                                  widget ? widget->palette().color(QPalette::Text)
-                                                                  : standardPalette().color(QPalette::Text))));
+      bool fillWidgetInterior(!ispec.hasInterior
+                              && hasHighContrastWithContainer(widget,
+                                                              widget ? widget->palette().color(QPalette::Text)
+                                                              : standardPalette().color(QPalette::Text)));
 
       // lineedits only have normal and focused states in Kvantum
       QString leStatus = (option->state & State_HasFocus) ? "focused" : "normal";
@@ -3812,6 +3817,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                                                  QPalette::Base);
         baseCol.setAlpha(255);
         painter->fillRect(interiorRect(option->rect,fspec), baseCol);
+      }
+      else if (colored) // widget isn't null
+      {
+        QColor baseCol = widget->palette().color(QPalette::Base);
+        baseCol.setAlpha(255);
+        colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, option, widget));
       }
       if (!(option->state & State_Enabled))
         painter->restore();
@@ -11081,20 +11092,16 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                          && cb->lineEdit()->palette().color(QPalette::Base)
                             != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(), QPalette::Base));
 
-            if (!opt->editable || colored)
+            if (!opt->editable)
             { // when there isn't enough space (-> CE_ComboBoxLabel)
-              bool noSpace = colored;
-              if (!noSpace)
-              {
-                int cbH = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget).height();
-                if (cb && !cb->lineEdit())
-                  cbH = qMin(cb->height(), cbH);
-                QFont F(painter->font());
-                if (lspec.boldFont) F.setWeight(lspec.boldness);
-                QSize txtSize = textSize(F,opt->currentText);
-                noSpace = /*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
-                          ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom;
-              }
+              int cbH = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget).height();
+              if (cb && !cb->lineEdit())
+                cbH = qMin(cb->height(), cbH);
+              QFont F(painter->font());
+              if (lspec.boldFont) F.setWeight(lspec.boldness);
+              QSize txtSize = textSize(F,opt->currentText);
+              bool noSpace = /*cb->width() < fspec.left+lspec.left+txtSize.width()+lspec.right+COMBO_ARROW_LENGTH+fspec.right
+                             ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom;
               if (noSpace)
               {
                 fspec.left = qMin(fspec.left,3);
@@ -11106,15 +11113,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
                 else
                 {
-                  if (colored)
-                    fspec.expansion = 0;
-                  else
-                  {
-                    fspec.leftExpanded = qMin(fspec.leftExpanded,3);
-                    fspec.rightExpanded = qMin(fspec.rightExpanded,3);
-                    fspec.topExpanded = qMin(fspec.topExpanded,3);
-                    fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
-                  }
+                  fspec.leftExpanded = qMin(fspec.leftExpanded,3);
+                  fspec.rightExpanded = qMin(fspec.rightExpanded,3);
+                  fspec.topExpanded = qMin(fspec.topExpanded,3);
+                  fspec.bottomExpanded = qMin(fspec.bottomExpanded,3);
                 }
 
                 lspec.left = qMin(lspec.left,2);
@@ -11143,12 +11145,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 // nothing should be drawn here if the lineedit is transparent (as in Cantata)
                 || cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() != 0)
             {
-              bool fillWidgetInterior(colored ||
-                                      (!ispec.hasInterior
-                                       && hasHighContrastWithContainer(widget,
-                                                                       drwaAsLineEdit && editable
-                                                                       ? cb->lineEdit()->palette().color(QPalette::Text)
-                                                                       : getFromRGBA(getLabelSpec(group).normalColor))));
+              bool fillWidgetInterior(!ispec.hasInterior
+                                      && hasHighContrastWithContainer(widget,
+                                                                      drwaAsLineEdit && editable
+                                                                      ? cb->lineEdit()->palette().color(QPalette::Text)
+                                                                      : getFromRGBA(getLabelSpec(group).normalColor)));
 
               QStyleOptionComboBox leOpt(*opt);
               if (!drwaAsLineEdit && editable)
@@ -11274,6 +11275,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                                        : QPalette::Button);
                 comboCol.setAlpha(255);
                 painter->fillRect(interiorRect(r,fspec), comboCol);
+              }
+              else if (colored) // cb isn't null
+              {
+                QColor baseCol = cb->lineEdit()->palette().color(QPalette::Base);
+                baseCol.setAlpha(255);
+                o.rect = cb->lineEdit()->rect();
+                colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, &o, cb->lineEdit()));
               }
 
               /* draw combo icon separator if it exists */
@@ -14674,12 +14682,15 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           rect.adjust(0,0,fspec.right,0);
       }
 
-      /* this is for editable view items */
-      int h = QCommonStyle::subElementRect(element,option,widget).height();
-      if (rect.height() < h)
-        return rect.adjusted(0,-h/2,0,h/2);
-      else
-        return rect;
+      /* final check */
+      if (rect.height() < (widget ? widget->fontMetrics() : option->fontMetrics).height())
+      {
+        QRect commonRect = QCommonStyle::subElementRect(element,option,widget);
+        rect.setTop(qMin(rect.top(), commonRect.top()));
+        rect.setBottom(qMax(rect.bottom(), commonRect.bottom()));
+      }
+
+      return rect;
     }
 
     case SE_ItemViewItemCheckIndicator:

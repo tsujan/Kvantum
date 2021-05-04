@@ -656,8 +656,8 @@ void Style::polish(QWidget *widget)
     if (qobject_cast<QLineEdit*>(widget)
         && (tspec_.animate_states
             /* a workaround for bad codes that change line-edit base color */
-            || (!isPcmanfm_ && (tspec_.combo_as_lineedit || tspec_.square_combo_button)
-                && qobject_cast<QComboBox*>(pw))))
+            /*|| (!isPcmanfm_ && (tspec_.combo_as_lineedit || tspec_.square_combo_button)
+                && qobject_cast<QComboBox*>(pw))*/))
     {
       widget->installEventFilter(this);
     }
