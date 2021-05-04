@@ -360,12 +360,14 @@ Miscellaneous → Respect current DE if possible</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，垂直工具栏是没有样式的。
+
+如果禁用此选项，参见上面的选项。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>垂直工具栏样式</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -384,14 +386,14 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>您可能会看到令人讨厌的人工痕迹
-通过Qt处理非整数缩放中的错误
-具有窗口半透明或渐变。</translation>
+        <translation>您可能会看到一些讨厌的伪影，
+这些伪影是由Qt处理非整数缩放
+与窗口半透明或梯度的错误引起的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="598"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation>使用非整数缩放禁用半透明</translation>
+        <translation>禁用非整数比例的半透明</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
