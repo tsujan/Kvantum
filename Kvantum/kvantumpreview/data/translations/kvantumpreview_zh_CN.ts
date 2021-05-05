@@ -545,32 +545,32 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2451"/>
         <source>Stack widget (page1)</source>
-        <translation type="unfinished"></translation>
+        <translation>堆叠组件（第1页）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2465"/>
         <source>Stack Widget (page2)</source>
-        <translation type="unfinished"></translation>
+        <translation>堆叠组件（第2页）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2482"/>
         <source>Group box</source>
-        <translation type="unfinished"></translation>
+        <translation>组合框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2560"/>
         <source>Dock Widget</source>
-        <translation type="unfinished"></translation>
+        <translation>Dock组件</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2577"/>
         <source>Checkable group box</source>
-        <translation type="unfinished"></translation>
+        <translation>可勾选的组合框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2612"/>
         <source>Tool Box</source>
-        <translation type="unfinished"></translation>
+        <translation>工具箱</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2707"/>

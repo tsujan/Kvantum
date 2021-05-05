@@ -369,12 +369,14 @@ Bu devre dışı bırakılmışsa, bkz.
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan olarak, dikey araç çubuklarının biçemi yoktur.
+
+Bu devre dışı bırakılırsa, yukarıdaki seçeneğe bakın.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Dikey araç çubuklarının biçemini ayarla</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>

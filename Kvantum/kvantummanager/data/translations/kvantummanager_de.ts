@@ -583,7 +583,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1293"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgrad</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1309"/>
