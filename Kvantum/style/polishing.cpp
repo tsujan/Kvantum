@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -40,7 +40,7 @@
 #include <QWindow>
 #include <QDialog>
 #include <QLayout> // only for forceSizeGrip
-#include <QCompleter> // only for combo menu change in  Kvantum Manager
+#include <QCompleter> // only for combo menu change in Kvantum Manager
 #include <QScroller>
 
 namespace Kvantum
@@ -52,31 +52,33 @@ static QString readDconfSetting(const QString &setting) // by Craig Drummond
   // Destroying the QProcess seems to block, causing the app to appear to hang before starting.
   // So, create QProcess on the heap - and only wait 1.5s for response. Connect finished to deleteLater
   // so that the object is destroyed.
-  QString schemeToUse=QLatin1String("/org/gnome/desktop/interface/");
-  QProcess *process=new QProcess();
-  process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse+setting);
+  QString schemeToUse = QLatin1String("/org/gnome/desktop/interface/");
+  QProcess *process = new QProcess();
+  process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse + setting);
   QObject::connect(process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
                    [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
 
-  if (process->waitForFinished(1500)) {
+  if (process->waitForFinished(1500))
+  {
     QString resp = process->readAllStandardOutput();
     resp = resp.trimmed();
     resp.remove('\'');
 
-    if (resp.isEmpty()) {
-      // Probably set to the default, and dconf does not store defaults! Therefore, need to read via gsettings...
+    if (resp.isEmpty())
+    { // Probably set to the default, and dconf does not store defaults! Therefore, need to read via gsettings...
       schemeToUse=schemeToUse.mid(1, schemeToUse.length()-2).replace("/", ".");
-      QProcess *gsettingsProc=new QProcess();
+      QProcess *gsettingsProc = new QProcess();
       gsettingsProc->start(QLatin1String("gsettings"), QStringList() << QLatin1String("get") << schemeToUse << setting);
       QObject::connect(gsettingsProc, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
                        [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
-      if (gsettingsProc->waitForFinished(1500)) {
+      if (gsettingsProc->waitForFinished(1500))
+      {
         resp = gsettingsProc->readAllStandardOutput();
         resp = resp.trimmed();
         resp.remove('\'');
-      } else {
-        gsettingsProc->kill();
       }
+      else
+        gsettingsProc->kill();
     }
     return resp;
   }
@@ -104,7 +106,7 @@ static void setAppFont()
     if (parts.length()>1)
     {
       uint size = parts.takeLast().toUInt();
-      if (size>5 && size<20)
+      if (size > 5 && size < 20)
       {
         QFont f(parts.join(" "), size);
         QApplication::setFont(f);
@@ -259,11 +261,11 @@ void Style::polish(QWidget *widget)
     { // on toolbars, labels get the button text color; that's corrected here
       QPalette palette = widget->palette();
       palette.setColor(QPalette::Active, QPalette::ButtonText,
-                      standardPalette().color(QPalette::Active,QPalette::WindowText));
+                       standardPalette().color(QPalette::Active,QPalette::WindowText));
       palette.setColor(QPalette::Inactive, QPalette::ButtonText,
-                      standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                       standardPalette().color(QPalette::Inactive,QPalette::WindowText));
       palette.setColor(QPalette::Disabled, QPalette::ButtonText,
-                      standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+                       standardPalette().color(QPalette::Disabled,QPalette::WindowText));
       forcePalette(widget, palette);
       respectDarkness = false;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,14 +19,17 @@
 #include <QFile>
 #include <QApplication>
 #include "ThemeConfig.h"
+
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
 #include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
+
 #define KSL(x) QStringLiteral(x)
 
 namespace Kvantum {
+
 ThemeConfig::ThemeConfig(const QString& theme) :
   settings_(nullptr),
   parentConfig_(nullptr)
@@ -1196,4 +1199,5 @@ hacks_spec ThemeConfig::getHacksSpec() const
 
   return r;
 }
+
 }

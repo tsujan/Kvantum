@@ -26,6 +26,7 @@
 #endif
 
 namespace Kvantum {
+
 /* Generic information about a theme */
 typedef struct {
   QString author;
@@ -581,6 +582,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.kinetic_scrolling = false;
   hspec.noninteger_translucency = false;
 }
+
 }
 
 #endif

@@ -23,6 +23,7 @@
 class QSettings;
 
 namespace Kvantum {
+
 /*
    Class that loads theme settings.
  */
@@ -103,6 +104,7 @@ class ThemeConfig {
 
     bool nonIntegerScale;
 };
+
 }
 
 #endif // THEMECONFIG_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2020 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1244,46 +1244,84 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
   return res;
 }
 
-/* get the widest day/month string for the locale if needed */
-static QHash<const QLocale, QString> maxDay;
-static QHash<const QLocale, QString> maxMonth;
-static QHash<const QLocale, QString> maxFullDay;
-static QHash<const QLocale, QString> maxFullMonth;
-static void getMaxDay(const QLocale l, bool full)
+/* get the widest digit/day/month string for the locale if needed */
+static QHash<const QLocale, QString> allDigits;
+static QHash<const QPair<QLocale, QFont>, QString> maxDigit;
+static QHash<const QPair<QLocale, QFont>, QString> maxDay;
+static QHash<const QPair<QLocale, QFont>, QString> maxMonth;
+static QHash<const QPair<QLocale, QFont>, QString> maxFullDay;
+static QHash<const QPair<QLocale, QFont>, QString> maxFullMonth;
+static QHash<const QPair<QLocale, QFont>, QString> maxAmPm;
+
+static void getAllDigits(const QLocale &l)
+{ // to be used in regular expressions
+  QString all = l.toString(0);
+  for (int i = 1; i < 10; ++i)
+    all += "|" + l.toString(i);
+  allDigits.insert(l, all);
+}
+static void getMaxDigit(const QPair<QLocale, QFont> &data)
+{
+  int widestDigit = 0;
+  int max = 0;
+  QFontMetrics fm(data.second);
+  for (int i = 0; i < 10; ++i)
+  {
+    int size = fm.horizontalAdvance(data.first.toString(i));
+    if (max < size)
+    {
+      max = size;
+      widestDigit = i;
+    }
+  }
+  maxDigit.insert(data, data.first.toString(widestDigit));
+}
+static void getMaxDay(const QPair<QLocale, QFont> &data, bool full)
 {
   QString day;
   int max = 0;
   QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
+  QFontMetrics fm(data.second);
   for (int i=1; i<=7 ; ++i)
   {
-    QString theDay = l.dayName(i,format);
-    int size = QFontMetrics(QApplication::font()).horizontalAdvance(theDay);
+    QString theDay = data.first.dayName(i,format);
+    int size = fm.horizontalAdvance(theDay);
     if (max < size)
     {
       max = size;
       day = theDay;
     }
   }
-  if (full) maxFullDay.insert(l, day);
-  else maxDay.insert(l, day);
+  if (full) maxFullDay.insert(data, day);
+  else maxDay.insert(data, day);
 }
-static void getMaxMonth(const QLocale l, bool full)
+static void getMaxMonth(const QPair<QLocale, QFont> &data, bool full)
 {
   QString month;
   int max = 0;
   QLocale::FormatType format = full ? QLocale::LongFormat : QLocale::ShortFormat;
+  QFontMetrics fm(data.second);
   for (int i=1; i<=12 ; ++i)
   {
-    QString theMonth = l.monthName(i,format);
-    int size = QFontMetrics(QApplication::font()).horizontalAdvance(theMonth);
+    QString theMonth = data.first.monthName(i,format);
+    int size = fm.horizontalAdvance(theMonth);
     if (max < size)
     {
       max = size;
       month = theMonth;
     }
   }
-  if (full) maxFullMonth.insert(l, month);
-  else maxMonth.insert(l, month);
+  if (full) maxFullMonth.insert(data, month);
+  else maxMonth.insert(data, month);
+}
+static void getMaxAmPm(const QPair<QLocale, QFont> &data)
+{
+  QFontMetrics fm(data.second);
+  QString pmText = data.first.pmText();
+  QString amText = data.first.amText();
+  QString ap = fm.horizontalAdvance(pmText) > fm.horizontalAdvance(amText)
+                 ? pmText : amText;
+  maxAmPm.insert(data, ap);
 }
 
 static inline QString spinMaxText(const QAbstractSpinBox *sp)
@@ -1294,6 +1332,7 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     QLocale l = sp->locale();
     if (!sb->isGroupSeparatorShown())
       l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+
     QString maxStr = l.toString(sb->maximum());
     QString minStr = l.toString(sb->minimum());
     if (minStr.size() > maxStr.size())
@@ -1301,6 +1340,12 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     /* QAbstractSpinBox::sizeHint() sets a maximum of 18 characters
        but truncating isn't really needed here because of MAX_INT */
     maxStr.truncate(20);
+
+    if (!allDigits.contains(l)) getAllDigits(l);
+    QPair<QLocale, QFont> data(l, sb->font());
+    if (!maxDigit.contains(data)) getMaxDigit(data);
+
+    maxStr.replace(QRegularExpression(allDigits.value(l)), maxDigit.value(data));
     maxTxt = sb->prefix() + maxStr + sb->suffix();
   }
   else if (const QDoubleSpinBox *sb = qobject_cast<const QDoubleSpinBox*>(sp))
@@ -1308,6 +1353,7 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     QLocale l = sp->locale();
     if (!sb->isGroupSeparatorShown())
       l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+
     /* at first, only consider integers... */
     int max = sb->maximum();
     int min = sb->minimum();
@@ -1316,74 +1362,84 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     if (minStr.size() > maxStr.size())
       maxStr = minStr;
     maxStr.truncate(20);
+
+    if (!allDigits.contains(l)) getAllDigits(l);
+    QPair<QLocale, QFont> data(l, sb->font());
+    if (!maxDigit.contains(data)) getMaxDigit(data);
+    QString widestDigit = maxDigit.value(data);
+
+    maxStr.replace(QRegularExpression(allDigits.value(l)), widestDigit);
     maxTxt = sb->prefix() + maxStr + sb->suffix();
+
     /* ... then, take decimals into account */
     int dec = sb->decimals();
     if (dec > 0)
     {
       maxTxt += l.decimalPoint();
-      QString zero = l.toString(0);
       for (int i = 0; i < dec ; ++i)
-        maxTxt += zero;
+        maxTxt += widestDigit;
     }
   }
   else if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit*>(sp))
   {
     QLocale l = sp->locale();
     l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
+
+    QPair<QLocale, QFont> data(l, sb->font());
+    if (!maxDigit.contains(data)) getMaxDigit(data);
+    QString widestDigit = maxDigit.value(data);
+    QString twoDigits = widestDigit + widestDigit; // 00
+    QString threeDigits = twoDigits + widestDigit; // 000
+    if (!maxAmPm.contains(data)) getMaxAmPm(data);
+
     maxTxt = sb->displayFormat();
-    QString twoDigits = l.toString(99);
+
     /* take into account leading zeros */
-    QRegularExpression exp;
-    exp.setPattern(QStringLiteral("hh|HH|mm|ss"));
-    maxTxt.replace(exp,twoDigits);
-    exp.setPattern(QStringLiteral("h|H|m|s"));
-    maxTxt.replace(exp,twoDigits);
-    maxTxt.replace("zzz",l.toString(999));
-    maxTxt.replace("z",l.toString(999));
+    maxTxt.replace(QRegularExpression(QStringLiteral("hh|HH|mm|ss")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("h|H|m|s")), twoDigits);
+    maxTxt.replace("zzz", threeDigits);
+    maxTxt.replace("z", threeDigits);
     /* year */
-    maxTxt.replace("yy",twoDigits);
-    maxTxt.replace("yyyy",l.toString(9999));
+    maxTxt.replace("yy", twoDigits);
+    maxTxt.replace("yyyy", twoDigits+twoDigits); // 0000
     /* am/pm */
-    QString ap = l.pmText().size() > l.amText().size()
-                   ? l.pmText() : l.amText();
-    maxTxt.replace("ap",ap,Qt::CaseInsensitive);
-    maxTxt.replace("a",ap,Qt::CaseInsensitive);
+    QString ap = maxAmPm.value(data);
+    maxTxt.replace("ap", ap, Qt::CaseInsensitive);
+    maxTxt.replace("a", ap, Qt::CaseInsensitive);
     /* these will be replaced later */
-    maxTxt.replace("dddd","eeee");
-    maxTxt.replace("MMMM","ffff");
-    maxTxt.replace("ddd","eee");
-    maxTxt.replace("MMM","fff");
+    maxTxt.replace("dddd", "eeee");
+    maxTxt.replace("MMMM", "ffff");
+    maxTxt.replace("ddd", "eee");
+    maxTxt.replace("MMM", "fff");
     /* leading zeros */
-    exp.setPattern(QStringLiteral("dd|MM"));
-    maxTxt.replace(exp,twoDigits);
-    exp.setPattern(QStringLiteral("d|M"));
-    maxTxt.replace(exp,twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("dd|MM")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("d|M")), twoDigits);
     /* time zone */
-    maxTxt.replace("t",sb->dateTime().toString("t"));
+    maxTxt.replace("t", sb->dateTime().toString("t"));
     /* full day/month name */
     if (maxTxt.contains("eeee"))
     {
-      if (!maxFullDay.contains(l)) getMaxDay(l, true);
-      maxTxt.replace("eeee",maxFullDay.value(l));
+      if (!maxFullDay.contains(data)) getMaxDay(data, true);
+      maxTxt.replace("eeee", maxFullDay.value(data));
     }
     if (maxTxt.contains("ffff"))
     {
-      if (!maxFullMonth.contains(l)) getMaxMonth(l, true);
-      maxTxt.replace("ffff",maxFullMonth.value(l));
+      if (!maxFullMonth.contains(data)) getMaxMonth(data, true);
+      maxTxt.replace("ffff", maxFullMonth.value(data));
     }
     /* short day/month name */
     if (maxTxt.contains("eee"))
     {
-      if (!maxDay.contains(l)) getMaxDay(l, false);
-      maxTxt.replace("eee",maxDay.value(l));
+      if (!maxDay.contains(data)) getMaxDay(data, false);
+      maxTxt.replace("eee", maxDay.value(data));
     }
     if (maxTxt.contains("fff"))
     {
-      if (!maxMonth.contains(l)) getMaxMonth(l, false);
-      maxTxt.replace("fff",maxMonth.value(l));
+      if (!maxMonth.contains(data)) getMaxMonth(data, false);
+      maxTxt.replace("fff", maxMonth.value(data));
     }
   }
+
   if (!maxTxt.isEmpty())
   {
     QString svt = sp->specialValueText();
@@ -1394,7 +1450,15 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
         maxTxt = svt;
     }
   }
+
   return maxTxt;
+}
+
+static inline bool spinTextless(const QAbstractSpinBox *sp)
+{
+  if (const QDateTimeEdit *sb = qobject_cast<const QDateTimeEdit*>(sp))
+    return sb->displayFormat().isEmpty();
+  return (!qobject_cast<const QSpinBox*>(sp) && !qobject_cast<const QDoubleSpinBox*>(sp));
 }
 
 static inline QString progressMaxText(const QProgressBar *pb, const QStyleOptionProgressBar *opt)
@@ -3949,7 +4013,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           if (const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget))
           {
-            if (spinMaxText(sb).isEmpty())
+            if (spinTextless(sb))
             {
               fspec.right = qMin(fspec.right,3);
               //fspec.expansion = 0;
