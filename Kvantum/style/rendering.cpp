@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -27,7 +27,8 @@ namespace Kvantum
 
 /* Here, instead of using the render() method of QSvgRenderer
    directly, we first make a QPixmap for drawing SVG elements. */
-static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter, QRect bounds, QString element,
+static inline void drawSvgElement(QSvgRenderer *renderer, QPainter *painter,
+                                  const QRect &bounds, const QString &element,
                                   qreal pixelRatio)
 {
   QPixmap pixmap = QPixmap((QSizeF(bounds.size())*pixelRatio).toSize());
@@ -54,11 +55,11 @@ bool Style::renderElement(QPainter *painter,
 
   if (themeRndr_ && themeRndr_->isValid()
       && (themeRndr_->elementExists(_element)
-          || themeRndr_->elementExists(_element.remove("-inactive"))
+          || themeRndr_->elementExists(_element.remove(QLatin1String("-inactive")))
           // fall back to the normal state if other states aren't found
-          || themeRndr_->elementExists(_element.replace("-toggled","-normal")
-                                               .replace("-pressed","-normal")
-                                               .replace("-focused","-normal"))))
+          || themeRndr_->elementExists(_element.replace(QLatin1String("-toggled"),QLatin1String("-normal"))
+                                               .replace(QLatin1String("-pressed"),QLatin1String("-normal"))
+                                               .replace(QLatin1String("-focused"),QLatin1String("-normal")))))
   {
     renderer = themeRndr_;
   }
@@ -67,11 +68,11 @@ bool Style::renderElement(QPainter *painter,
   else if (defaultRndr_ && defaultRndr_->isValid())
   {
     _element = element;
-    if (defaultRndr_->elementExists(_element.remove("-inactive"))
+    if (defaultRndr_->elementExists(_element.remove(QLatin1String("-inactive")))
         // even the default theme may not have all states
-        || defaultRndr_->elementExists(_element.replace("-toggled","-normal")
-                                               .replace("-pressed","-normal")
-                                               .replace("-focused","-normal")))
+        || defaultRndr_->elementExists(_element.replace(QLatin1String("-toggled"),QLatin1String("-normal"))
+                                               .replace(QLatin1String("-pressed"),QLatin1String("-normal"))
+                                               .replace(QLatin1String("-focused"),QLatin1String("-normal"))))
     {
       renderer = defaultRndr_;
     }
@@ -160,7 +161,7 @@ void Style::renderSliderTick(QPainter *painter,
                              bool above,
                              bool inverted) const
 {
-  if (!ticksRect.isValid())
+  if (!ticksRect.isValid() || interval < 1)
     return;
 
   QSvgRenderer *renderer = 0;
@@ -168,20 +169,18 @@ void Style::renderSliderTick(QPainter *painter,
 
   if (themeRndr_ && themeRndr_->isValid()
       && (themeRndr_->elementExists(_element)
-          || (_element.contains("-inactive")
-              && themeRndr_->elementExists(_element.remove("-inactive")))))
+          || (_element.contains(QLatin1String("-inactive"))
+              && themeRndr_->elementExists(_element.remove(QLatin1String("-inactive"))))))
   {
     renderer = themeRndr_;
   }
   else if (defaultRndr_ && defaultRndr_->isValid()
-           && defaultRndr_->elementExists(_element.remove("-inactive")))
+           && defaultRndr_->elementExists(_element.remove(QLatin1String("-inactive"))))
   {
     renderer = defaultRndr_;
   }
   else
     return;
-
-  if (interval < 1) return;
 
   int thickness = 1;
   int len = pixelMetric(PM_SliderLength);
@@ -263,9 +262,9 @@ void Style::renderFrame(QPainter *painter,
     if (isInactive)
       realElement += "-inactive";
   }
-  else if (element.endsWith("-default")) // default button
+  else if (element.endsWith(QLatin1String("-default"))) // default button
     realElement += "-default";
-  else if (element.endsWith("-focus")) // focus element
+  else if (element.endsWith(QLatin1String("-focus"))) // focus element
     realElement += "-focus";
 
   QString element1(realElement); // the element that will be drawn
@@ -284,10 +283,10 @@ void Style::renderFrame(QPainter *painter,
   if (fspec.expansion > 0
       && ((e <= fspec.expansion && (isHAttached ? 2*w >= h : (!grouped || w >= h)))
           || (themeRndr_ && themeRndr_->isValid()
-              && (themeRndr_->elementExists(element0.remove("-inactive"))
+              && (themeRndr_->elementExists(element0.remove(QLatin1String("-inactive")))
                   // fall back to the normal state
                   || (!state.isEmpty()
-                      && themeRndr_->elementExists(element0.replace(state,"-normal")))))))
+                      && themeRndr_->elementExists(element0.replace(state,QLatin1String("-normal"))))))))
   {
     drawExpanded = true; // can change below
   }
@@ -307,8 +306,9 @@ void Style::renderFrame(QPainter *painter,
     /* find the element that should be drawn (element1) */
     element0 = "border-"+realElement;
     if (drawBorder && themeRndr_ && themeRndr_->isValid()
-        && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
+        && (themeRndr_->elementExists(element0.remove(QLatin1String("-inactive")) + QLatin1String("-top"))
+            || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,QLatin1String("-normal"))
+                                                              + QLatin1String("-top")))))
     {
       element1 = element0;
       if (isInactive)
@@ -318,8 +318,9 @@ void Style::renderFrame(QPainter *painter,
     {
       element0 = "expand-"+realElement;
       if (themeRndr_ && themeRndr_->isValid()
-          && (themeRndr_->elementExists(element0.remove("-inactive")+"-top")
-              || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,"-normal")+"-top"))))
+          && (themeRndr_->elementExists(element0.remove(QLatin1String("-inactive")) + QLatin1String("-top"))
+              || (!state.isEmpty() && themeRndr_->elementExists(element0.replace(state,QLatin1String("-normal"))
+                                                                + QLatin1String("-top")))))
       {
         element1 = element0;
         if (isInactive)
@@ -792,14 +793,14 @@ bool Style::renderInterior(QPainter *painter,
       frameElement = fspec.element;
     QString element0(element);
     /* the interior used for partial frame expansion has the frame name */
-    element0 = element0.remove("-inactive").replace(ispec.element, frameElement);
+    element0 = element0.remove(QLatin1String("-inactive")).replace(ispec.element, frameElement);
     element0 = "expand-"+element0;
     if (((e <= fspec.expansion && (isHAttached ? 2*w >= h : (!grouped || w >= h)))
          || (themeRndr_ && themeRndr_->isValid()
              && (themeRndr_->elementExists(element0)
-                 || themeRndr_->elementExists(element0.replace("-toggled","-normal")
-                                                      .replace("-pressed","-normal")
-                                                      .replace("-focused","-normal")))))
+                 || themeRndr_->elementExists(element0.replace(QLatin1String("-toggled"),QLatin1String("-normal"))
+                                                      .replace(QLatin1String("-pressed"),QLatin1String("-normal"))
+                                                      .replace(QLatin1String("-focused"),QLatin1String("-normal"))))))
         && (!fspec.isAttached || fspec.VPos == 2)
         && (h <= 2*w || (fspec.HPos != 1 && fspec.HPos != -1)
             || fspec.expansion < 2*qMin(h,w)))

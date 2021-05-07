@@ -185,7 +185,7 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   int dw = sspec.incrementW ? sspec.minW : qMax(sspec.minW - bgndRect.width(), 0);
   if (!renderInterior(p,bgndRect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency
-    p->fillRect(bgndRect, standardPalette().color(suffix.contains("-inactive")
+    p->fillRect(bgndRect, standardPalette().color(suffix.contains(QLatin1String("-inactive"))
                                                     ? QPalette::Inactive
                                                     : QPalette::Active,
                                                   QPalette::Window));
@@ -522,7 +522,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!w->hasFocus())
           animationStartState_ = "normal";
         /* the popup may have been closed (with Qt5) */
-        else if (!(animatedWidget_ == w && animationStartState_.startsWith("c-toggled")))
+        else if (!(animatedWidget_ == w && animationStartState_.startsWith(QLatin1String("c-toggled"))))
           animationStartState_ = "pressed";
         if (isWidgetInactive(w))
           animationStartState_.append("-inactive");
@@ -556,8 +556,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animatedWidget_->update();
         }
         if (!(animatedWidget_ == w
-              && (animationStartState_.startsWith("c-toggled")
-                  || animationStartState_.startsWith("normal"))))
+              && (animationStartState_.startsWith(QLatin1String("c-toggled"))
+                  || animationStartState_.startsWith(QLatin1String("normal")))))
         { // it was hidden or another widget was interacted with  -- there's no other possibility
           animationStartState_ = "normal";
           if (isWidgetInactive(w))

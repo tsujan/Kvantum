@@ -206,7 +206,7 @@ frame_spec ThemeConfig::getFrameSpec(const QString &elementName)
         if (v.isValid())
         {
           QString value = v.toString();
-          if (value.endsWith("font"))
+          if (value.endsWith(QLatin1String("font")))
           { // multiply by the app font height
             r.expansion = qMax(value.left(value.length()-4).toFloat(), 0.0f)
                           * QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
@@ -549,9 +549,9 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   if (v.isValid())
   {
     QString value = v.toString();
-    if (value.startsWith("+"))
+    if (value.startsWith(QLatin1String("+")))
       r.incrementH = true;
-    if (value.endsWith("font"))
+    if (value.endsWith(QLatin1String("font")))
     { // multiply by the app font height
       r.minH = qMax(value.left(value.length()-4).toFloat(), 0.0f)
                * QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
@@ -565,9 +565,9 @@ size_spec ThemeConfig::getSizeSpec(const QString& elementName)
   if (v.isValid())
   {
     QString value = v.toString();
-    if (value.startsWith("+"))
+    if (value.startsWith(QLatin1String("+")))
       r.incrementW = true;
-    if (value.endsWith("font"))
+    if (value.endsWith(QLatin1String("font")))
     { // multiply by the app font height
       r.minW = qMax(value.left(value.length()-4).toFloat(), 0.0f)
                * QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
@@ -762,7 +762,7 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // 0 by default
   {
     QString value = v.toString();
-    if (value.endsWith("font"))
+    if (value.endsWith(QLatin1String("font")))
     { // multiply by the app font height
       r.active_tab_overlap = qMax(value.left(value.length()-4).toFloat(), 0.0f)
                              * QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
@@ -783,7 +783,7 @@ theme_spec ThemeConfig::getThemeSpec()
   {
     int max = QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;
     QString value = v.toString();
-    if (value.endsWith("font"))
+    if (value.endsWith(QLatin1String("font")))
     { // multiply by the app font height
       r.tab_button_extra_margin = qMin(qMax(value.left(value.length()-4).toFloat(), 0.0f),1.0f)
                                   * max;
@@ -836,7 +836,7 @@ theme_spec ThemeConfig::getThemeSpec()
   if (v.isValid()) // 0 by default
   {
     QString value = v.toString();
-    if (value.endsWith("font"))
+    if (value.endsWith(QLatin1String("font")))
     { // multiply by the app font height
       r.progressbar_thickness = qMax(value.left(value.length()-4).toFloat(), 0.0f)
                                 * QFontMetrics(QApplication::font()).boundingRect(QLatin1Char('M')).height()*1.6;

@@ -908,7 +908,7 @@ void Style::polish(QWidget *widget)
                                           && (!tspec_.combo_menu /*|| isLibreoffice_*/)))
             && vp && vp->autoFillBackground()
             && (!vp->testAttribute(Qt::WA_StyleSheetTarget)
-                || vp->styleSheet().isEmpty() || !vp->styleSheet().contains("background"))
+                || vp->styleSheet().isEmpty() || !vp->styleSheet().contains(QLatin1String("background")))
             // but not when the combo popup is drawn as a menu
             && !(tspec_.combo_menu /*&& !isLibreoffice_*/ && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys

@@ -148,7 +148,7 @@ void Style::opacifyColor(QColor &col) const
 QColor Style::getFromRGBA(const QString &str) const
 {
   QColor col(str);
-  if (str.isEmpty() || !(str.size() == 9 && str.startsWith("#")))
+  if (str.isEmpty() || !(str.size() == 9 && str.startsWith(QLatin1String("#"))))
     return col;
   bool ok;
   int alpha = str.right(2).toInt(&ok, 16);
@@ -217,7 +217,7 @@ Style::Style(bool useDark) : QCommonStyle()
     QSettings themeChooser(themeChooserFile,QSettings::NativeFormat);
     if (themeChooser.status() == QSettings::NoError)
     {
-      if (themeChooser.contains("theme"))
+      if (themeChooser.contains(QStringLiteral("theme")))
         theme = themeChooser.value("theme").toString();
       /* check if this app has a specific theme assigned to it */
       QString appName = qApp->applicationName();
@@ -480,7 +480,7 @@ void Style::setBuiltinDefaultTheme()
 static inline bool isThemeDir(const QString &path, const QString &themeName)
 {
   if (themeName.isEmpty()) return false;
-  if (path.endsWith("/Kvantum"))
+  if (path.endsWith(QLatin1String("/Kvantum")))
   {
     if (QFile::exists(path + QString("/%1/%1.kvconfig").arg(themeName))
         || QFile::exists(path + QString("/%1/%1.svg").arg(themeName)))
@@ -515,9 +515,9 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
       /* "Kvantum" is reserved for the alternative installation paths */
       && baseThemeName != "Kvantum"
       /* no space in theme name */
-      && !(baseThemeName.simplified()).contains(" ")
+      && !(baseThemeName.simplified()).contains(QLatin1String(" "))
       /* "#" is reserved by Kvantum Manager as an ending for copied root themes */
-      && (!baseThemeName.contains("#")
+      && (!baseThemeName.contains(QLatin1String("#"))
           || (baseThemeName.length() > 1
               && baseThemeName.indexOf("#") == baseThemeName.size() - 1)))
   {
@@ -525,7 +525,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
     if (useDark)
     {
       QString name = baseThemeName;
-      if (name.endsWith("#"))
+      if (name.endsWith(QLatin1String("#")))
         name.chop(1);
       /* give priority to modified themes */
       themeMames.append(name + "Dark#");
@@ -536,7 +536,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
     {
       QString userConfig, userSvg, temp, lightName;
 
-      if (themeName.length() > 4 && themeName.endsWith("Dark"))
+      if (themeName.length() > 4 && themeName.endsWith(QLatin1String("Dark")))
       { // dark theme inside light theme folder
         lightName = themeName.left(themeName.length() - 4);
       }
@@ -564,9 +564,9 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
           userSvg = temp;
       }
 
-      if (themeName.endsWith("#"))
+      if (themeName.endsWith(QLatin1String("#")))
       {
-        if (themeName.length() > 5 && themeName.endsWith("Dark#"))
+        if (themeName.length() > 5 && themeName.endsWith(QLatin1String("Dark#")))
         { // root dark theme inside root light theme folder
           lightName = themeName.left(themeName.length() - 5);
         }
@@ -646,7 +646,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
         themeSettings_ = new ThemeConfig(userConfig);
       }
       else if (userSvg.isEmpty() // otherwise it's a user theme without config file
-               && !themeName.endsWith("#")) // root theme names can't have the ending "#"
+               && !themeName.endsWith(QLatin1String("#"))) // root theme names can't have the ending "#"
       { // root theme
         temp = QString(DATADIR)
                + QString("/Kvantum/%1/%1.kvconfig").arg(themeName);
@@ -699,7 +699,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
       }
       else
       {
-        if (!themeName.endsWith("#"))
+        if (!themeName.endsWith(QLatin1String("#")))
         {
           if (userConfig.isEmpty()) // otherwise it's a user theme without SVG image
           { // root theme
@@ -760,7 +760,7 @@ void Style::setTheme(const QString &baseThemeName, bool useDark)
         else if (!userConfig.isEmpty()) // otherwise, the folder has been emptied manually
         { // find the SVG image of the root theme, of which this is a copy
           QString _themeName = themeName.left(themeName.length() - 1);
-          if (!_themeName.isEmpty() && !_themeName.contains("#"))
+          if (!_themeName.isEmpty() && !_themeName.contains(QLatin1String("#")))
           {
             temp = QString(DATADIR)
                    + QString("/Kvantum/%1/%1.svg").arg(_themeName);
@@ -1395,48 +1395,48 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     maxTxt = sb->displayFormat();
 
     /* take into account leading zeros */
-    maxTxt.replace(QRegularExpression(QStringLiteral("hh|HH|mm|ss")), twoDigits);
-    maxTxt.replace(QRegularExpression(QStringLiteral("h|H|m|s")), twoDigits);
-    maxTxt.replace("zzz", threeDigits);
-    maxTxt.replace("z", threeDigits);
+    maxTxt.replace(QRegularExpression(QLatin1String("hh|HH|mm|ss")), twoDigits);
+    maxTxt.replace(QRegularExpression(QLatin1String("h|H|m|s")), twoDigits);
+    maxTxt.replace(QLatin1String("zzz"), threeDigits);
+    maxTxt.replace(QLatin1String("z"), threeDigits);
     /* year */
-    maxTxt.replace("yy", twoDigits);
-    maxTxt.replace("yyyy", twoDigits+twoDigits); // 0000
+    maxTxt.replace(QLatin1String("yy"), twoDigits);
+    maxTxt.replace(QLatin1String("yyyy"), twoDigits+twoDigits); // 0000
     /* am/pm */
     QString ap = maxAmPm.value(data);
-    maxTxt.replace("ap", ap, Qt::CaseInsensitive);
-    maxTxt.replace("a", ap, Qt::CaseInsensitive);
+    maxTxt.replace(QLatin1String("ap"), ap, Qt::CaseInsensitive);
+    maxTxt.replace(QLatin1String("a"), ap, Qt::CaseInsensitive);
     /* these will be replaced later */
-    maxTxt.replace("dddd", "eeee");
-    maxTxt.replace("MMMM", "ffff");
-    maxTxt.replace("ddd", "eee");
-    maxTxt.replace("MMM", "fff");
+    maxTxt.replace(QLatin1String("dddd"), QLatin1String("eeee"));
+    maxTxt.replace(QLatin1String("MMMM"), QLatin1String("ffff"));
+    maxTxt.replace(QLatin1String("ddd"), QLatin1String("eee"));
+    maxTxt.replace(QLatin1String("MMM"), QLatin1String("fff"));
     /* leading zeros */
-    maxTxt.replace(QRegularExpression(QStringLiteral("dd|MM")), twoDigits);
-    maxTxt.replace(QRegularExpression(QStringLiteral("d|M")), twoDigits);
+    maxTxt.replace(QRegularExpression(QLatin1String("dd|MM")), twoDigits);
+    maxTxt.replace(QRegularExpression(QLatin1String("d|M")), twoDigits);
     /* time zone */
-    maxTxt.replace("t", sb->dateTime().toString("t"));
+    maxTxt.replace(QLatin1String("t"), sb->dateTime().toString("t"));
     /* full day/month name */
-    if (maxTxt.contains("eeee"))
+    if (maxTxt.contains(QLatin1String("eeee")))
     {
       if (!maxFullDay.contains(data)) getMaxDay(data, true);
-      maxTxt.replace("eeee", maxFullDay.value(data));
+      maxTxt.replace(QLatin1String("eeee"), maxFullDay.value(data));
     }
-    if (maxTxt.contains("ffff"))
+    if (maxTxt.contains(QLatin1String("ffff")))
     {
       if (!maxFullMonth.contains(data)) getMaxMonth(data, true);
-      maxTxt.replace("ffff", maxFullMonth.value(data));
+      maxTxt.replace(QLatin1String("ffff"), maxFullMonth.value(data));
     }
     /* short day/month name */
-    if (maxTxt.contains("eee"))
+    if (maxTxt.contains(QLatin1String("eee")))
     {
       if (!maxDay.contains(data)) getMaxDay(data, false);
-      maxTxt.replace("eee", maxDay.value(data));
+      maxTxt.replace(QLatin1String("eee"), maxDay.value(data));
     }
-    if (maxTxt.contains("fff"))
+    if (maxTxt.contains(QLatin1String("fff")))
     {
       if (!maxMonth.contains(data)) getMaxMonth(data, false);
-      maxTxt.replace("fff", maxMonth.value(data));
+      maxTxt.replace(QLatin1String("fff"), maxMonth.value(data));
     }
   }
 
@@ -1469,9 +1469,9 @@ static inline QString progressMaxText(const QProgressBar *pb, const QStyleOption
     QLocale l = pb->locale();
     l.setNumberOptions(l.numberOptions() | QLocale::OmitGroupSeparator);
     maxTxt = pb->format();
-    maxTxt.replace("%p", l.toString(100));
-    maxTxt.replace("%v", l.toString(pb->maximum()));
-    maxTxt.replace("%m", l.toString(pb->maximum()));
+    maxTxt.replace(QLatin1String("%p"), l.toString(100));
+    maxTxt.replace(QLatin1String("%v"), l.toString(pb->maximum()));
+    maxTxt.replace(QLatin1String("%m"), l.toString(pb->maximum()));
   }
   else if (opt && opt->textVisible && !opt->text.isEmpty())
   {
@@ -1685,7 +1685,8 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   else
   {*/
     bool noSpace((lineedit->testAttribute(Qt::WA_StyleSheetTarget)
-                  && !lineedit->styleSheet().isEmpty() && lineedit->styleSheet().contains("padding"))
+                  && !lineedit->styleSheet().isEmpty()
+                  && lineedit->styleSheet().contains(QLatin1String("padding")))
                  || lineedit->minimumWidth() == lineedit->maximumWidth());
     if (!noSpace
         && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
@@ -1773,7 +1774,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   }
   else
   {
-    QColor baseCol = lineedit->palette().color(leStatus.contains("-inactive")
+    QColor baseCol = lineedit->palette().color(leStatus.contains(QLatin1String("-inactive"))
                                                  ? QPalette::Inactive
                                                  : QPalette::Active,
                                                QPalette::Base);
@@ -1898,7 +1899,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       QString status = getState(option,widget);
       if (!(option->state & State_Enabled))
       {
-        status.replace("disabled","normal");
+        status.replace(QLatin1String("disabled"),QLatin1String("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -2019,14 +2020,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QString status = getState(option,widget);
         if (!(option->state & State_Enabled))
         {
-          status.replace("disabled","normal");
+          status.replace(QLatin1String("disabled"),QLatin1String("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
         // TabBarFrame seems to have a redundant focus state
-        else if (!status.startsWith("normal"))
+        else if (!status.startsWith(QLatin1String("normal")))
         {
-          if (status.endsWith("-inactive")) status = "normal-inactive";
+          if (status.endsWith(QLatin1String("-inactive"))) status = "normal-inactive";
           else status = "normal";
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
@@ -2064,7 +2065,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const QStyleOptionButton *opt =
           qstyleoption_cast<const QStyleOptionButton*>(option);
       if (opt == nullptr
-          || !(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
+          || !(opt->features & QStyleOptionButton::Flat) || !status.startsWith(QLatin1String("normal")))
       {
         renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+status);
         renderFrame(painter,option->rect,fspec,fspec.element+"-"+status);
@@ -2149,7 +2150,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fspec.expansion = 0;
         if (pb->text().isEmpty())
         {
-          painter->fillRect(option->rect, option->palette.brush(status.contains("-inactive")
+          painter->fillRect(option->rect, option->palette.brush(status.contains(QLatin1String("-inactive"))
                                                                   ? QPalette::Inactive
                                                                   : QPalette::Active,
                                                                 QPalette::Button));
@@ -2168,14 +2169,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
          It will be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
       if (!prevState.isEmpty())
       {
-        if (!btnDragInProgress() && status.startsWith("focused")
-            && (prevState.startsWith("pressed") // if it was pressed before...
+        if (!btnDragInProgress() && status.startsWith(QLatin1String("focused"))
+            && (prevState.startsWith(QLatin1String("pressed")) // if it was pressed before...
                 /* ... or if it was disabled (see below) */
-                || (prevState.startsWith("normal") && styleObject->property("_kv_hover_bug").toBool()))
+                || (prevState.startsWith(QLatin1String("normal"))
+                    && styleObject->property("_kv_hover_bug").toBool()))
             && isCursorOutsideWidget(widget))
         {
           styleObject->setProperty("_kv_hover_bug", true);
-          status.replace("focused","normal");
+          status.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
         else if (!(option->state & State_Enabled))
         {
@@ -2208,13 +2210,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }*/
       if (widget && widget->inherits("QDockWidgetTitleButton"))
       {
-        if (status.startsWith("focused"))
+        if (status.startsWith(QLatin1String("focused")))
         {
           QColor col = widget->palette().color(QPalette::Active,QPalette::Highlight);
           col.setAlpha(50);
           painter->fillRect(r,col);
         }
-        else if (status.startsWith("pressed"))
+        else if (status.startsWith(QLatin1String("pressed")))
         {
           QColor col = widget->palette().color(QPalette::Active,QPalette::Highlight);
           painter->save();
@@ -2239,7 +2241,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (qobject_cast<QTabBar*>(p)) // tabbar scroll button (-> PM_TabBarScrollButtonWidth)
           {
             bool painterSaved = false;
-            painter->fillRect(option->rect, standardPalette().color(status.contains("-inactive")
+            painter->fillRect(option->rect, standardPalette().color(status.contains(QLatin1String("-inactive"))
                                                                       ? QPalette::Inactive
                                                                       : QPalette::Active,
                                                                     QPalette::Window));
@@ -2360,7 +2362,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
             && qobject_cast<QMenu*>(p))
         {
-          status.replace("pressed","toggled");
+          status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
         }
 
         /* only group tool buttons whose immediate parent is a horizontal toolbar */
@@ -2536,7 +2538,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         if (tb->autoRaise())
           autoraise = true;
-        if (!autoraise || !status.startsWith("normal") || drawRaised)
+        if (!autoraise || !status.startsWith(QLatin1String("normal")) || drawRaised)
         {
           if (animate)
           {
@@ -2546,7 +2548,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               opacityTimer_->start(ANIMATION_FRAME);
             }
             if (animationOpacity_ < 100
-                && (!autoraise || !prevState.startsWith("normal") || drawRaised))
+                && (!autoraise || !prevState.startsWith(QLatin1String("normal")) || drawRaised))
             {
               renderFrame(painter,r,fspec,fspec.element+"-"+prevState,0,0,0,0,0,drawRaised);
               if (!fillWidgetInterior)
@@ -2567,14 +2569,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else if (styleObject)
             styleObject->setProperty("_kv_state", status);
           if (fillWidgetInterior)
-            painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
-                                                                           ? QPalette::Inactive
-                                                                           : QPalette::Active,
-                                                                         QPalette::Button));
+            painter->fillRect(interiorRect(r,fspec),
+                              tb->palette().brush(status.contains(QLatin1String("-inactive"))
+                                                                    ? QPalette::Inactive
+                                                                    : QPalette::Active,
+                                                                  QPalette::Button));
           hasPanel = true;
         }
         // auto-raised fade out animation
-        else if (animate && !prevState.startsWith("normal"))
+        else if (animate && !prevState.startsWith(QLatin1String("normal")))
         {
           if (!opacityTimer_->isActive())
           {
@@ -2590,10 +2593,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+prevState);
             painter->restore();
             if (fillWidgetInterior)
-              painter->fillRect(interiorRect(r,fspec), tb->palette().brush(status.contains("-inactive")
-                                                                             ? QPalette::Inactive
-                                                                             : QPalette::Active,
-                                                                           QPalette::Button));
+              painter->fillRect(interiorRect(r,fspec),
+                                tb->palette().brush(status.contains(QLatin1String("-inactive"))
+                                                                      ? QPalette::Inactive
+                                                                      : QPalette::Active,
+                                                                     QPalette::Button));
           }
           if (animationOpacity_ >= 100)
             styleObject->setProperty("_kv_state", status);
@@ -2608,11 +2612,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         if (styleObject)
           styleObject->setProperty("_kv_state", status);
-        if (!autoraise || !status.startsWith("normal"))
+        if (!autoraise || !status.startsWith(QLatin1String("normal")))
         {
           bool libreoffice = false;
           if (isLibreoffice_ && widget == nullptr
-              && (option->state & State_Enabled) && !status.startsWith("toggled")
+              && (option->state & State_Enabled) && !status.startsWith(QLatin1String("toggled"))
               && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
           {
             libreoffice = true;
@@ -2642,10 +2646,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
           }
           else // widget isn't null
-            painter->fillRect(interiorRect(r,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                               ? QPalette::Inactive
-                                                                               : QPalette::Active,
-                                                                             QPalette::Button));
+            painter->fillRect(interiorRect(r,fspec),
+                              widget->palette().brush(status.contains(QLatin1String("-inactive"))
+                                                                        ? QPalette::Inactive
+                                                                        : QPalette::Active,
+                                                                      QPalette::Button));
           renderFrame(painter,r,fspec,fspec.element+"-"+status);
           if (libreoffice) painter->restore();
           hasPanel = true;
@@ -2669,7 +2674,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QColor col;
         if (hasPanel)
         {
-          if (status.startsWith("pressed"))
+          if (status.startsWith(QLatin1String("pressed")))
           {
             if (isInactive)
             {
@@ -2680,7 +2685,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             else
               col = getFromRGBA(lspec.pressColor);
           }
-          else if (status.startsWith("toggled"))
+          else if (status.startsWith(QLatin1String("toggled")))
           {
             if (isInactive)
             {
@@ -3048,7 +3053,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           eStatus = "disabled";
         else */if (option->state & State_MouseOver)
           eStatus = "focused";
-        else if (status.startsWith("toggled") || status.startsWith("pressed"))
+        else if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
           eStatus = "pressed";
         if (isWidgetInactive(widget))
           eStatus.append("-inactive");
@@ -3259,7 +3264,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                   // not renaming area
                   && !qobject_cast<QAbstractScrollArea*>(pw)
                   // only Dolphin's view
-                  && QString(pw->metaObject()->className()).startsWith("Dolphin"))
+                  && QString(pw->metaObject()->className()).startsWith(QLatin1String("Dolphin")))
               {
                 break;
               }
@@ -3402,13 +3407,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         bool animate(!pcmanfmInactiveView
                      && widget && widget->isEnabled()
-                     && ((animatedWidget_ == widget && !fStatus.startsWith("normal"))
-                         || (animatedWidgetOut_ == widget && fStatus.startsWith("normal"))));
+                     && ((animatedWidget_ == widget && !fStatus.startsWith(QLatin1String("normal")))
+                         || (animatedWidgetOut_ == widget && fStatus.startsWith(QLatin1String("normal")))));
         QString animationStartState(animationStartState_);
         int animationOpacity = animationOpacity_;
         if (animate)
         {
-          if (fStatus.startsWith("normal")) // -> QEvent::FocusOut
+          if (fStatus.startsWith(QLatin1String("normal"))) // -> QEvent::FocusOut
           {
             animationStartState = animationStartStateOut_;
             animationOpacity = animationOpacityOut_;
@@ -3416,7 +3421,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (animationStartState == fStatus)
           {
             animationOpacity = 100;
-            if (fStatus.startsWith("normal"))
+            if (fStatus.startsWith(QLatin1String("normal")))
               animationOpacityOut_ = 100;
             else
               animationOpacity_ = 100;
@@ -3432,7 +3437,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->restore();
           if (animationOpacity >= 100)
           {
-            if (fStatus.startsWith("normal"))
+            if (fStatus.startsWith(QLatin1String("normal")))
               animationStartStateOut_ = fStatus;
             else
               animationStartState_ = fStatus;
@@ -3458,7 +3463,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (!vp->autoFillBackground()
               || (vp->testAttribute(Qt::WA_StyleSheetTarget)
-                  && !vp->styleSheet().isEmpty() && vp->styleSheet().contains("background")))
+                  && !vp->styleSheet().isEmpty() && vp->styleSheet().contains(QLatin1String("background"))))
           {
             return;
           }
@@ -3711,7 +3716,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                   && widget->palette().color(QPalette::Base)
                      != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base);
         if ((widget->testAttribute(Qt::WA_StyleSheetTarget)
-             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+             && !widget->styleSheet().isEmpty() && widget->styleSheet().contains(QLatin1String("padding")))
             || widget->minimumWidth() == widget->maximumWidth()
             || widget->height() < sizeCalculated(widget->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
         {
@@ -3820,18 +3825,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->setOpacity(DISABLED_OPACITY);
       }
       bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
-                       && ((animatedWidget_ == p && !leStatus.startsWith("normal"))
-                           || (animatedWidgetOut_ == p && leStatus.startsWith("normal"))));
+                       && ((animatedWidget_ == p && !leStatus.startsWith(QLatin1String("normal")))
+                           || (animatedWidgetOut_ == p && leStatus.startsWith(QLatin1String("normal")))));
       bool animate(/*!isLibreoffice_ &&*/ widget && widget->isEnabled()
                    && !qobject_cast<const QAbstractScrollArea*>(widget)
-                   && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
-                       || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))
+                   && ((animatedWidget_ == widget && !leStatus.startsWith(QLatin1String("normal")))
+                       || (animatedWidgetOut_ == widget && leStatus.startsWith(QLatin1String("normal")))
                        || animateSpin));
       QString animationStartState(animationStartState_);
       int animationOpacity = animationOpacity_;
       if (animate)
       {
-        if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
+        if (leStatus.startsWith(QLatin1String("normal"))) // -> QEvent::FocusOut
         {
           animationStartState = animationStartStateOut_;
           animationOpacity = animationOpacityOut_;
@@ -3839,7 +3844,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (animationStartState == leStatus)
         {
           animationOpacity = 100;
-          if (leStatus.startsWith("normal"))
+          if (leStatus.startsWith(QLatin1String("normal")))
             animationOpacityOut_ = 100;
           else
             animationOpacity_ = 100;
@@ -3867,7 +3872,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->restore();
         if (animationOpacity >= 100)
         {
-          if (leStatus.startsWith("normal"))
+          if (leStatus.startsWith(QLatin1String("normal")))
             animationStartStateOut_ = leStatus;
           else
             animationStartState_ = leStatus;
@@ -3875,7 +3880,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       if (fillWidgetInterior) // widget isn't null
       {
-        QColor baseCol = widget->palette().color(leStatus.contains("-inactive")
+        QColor baseCol = widget->palette().color(leStatus.contains(QLatin1String("-inactive"))
                                                    ? QPalette::Inactive
                                                    : QPalette::Active,
                                                  QPalette::Base);
@@ -4082,14 +4087,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (iStatus == "disabled")
           bStatus = "normal";
         // don't focus the indicator when the cursor isn't on the button
-        else if (bStatus.startsWith("normal"))
+        else if (bStatus.startsWith(QLatin1String("normal")))
           iStatus = "normal";
 
         if (isWidgetInactive(widget))
         {
-          if (!iStatus.endsWith("-inactive"))
+          if (!iStatus.endsWith(QLatin1String("-inactive")))
             iStatus.append("-inactive");
-          if (!bStatus.endsWith("-inactive"))
+          if (!bStatus.endsWith(QLatin1String("-inactive")))
             bStatus.append("-inactive");
         }
       }
@@ -4132,9 +4137,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       if (!verticalIndicators && (!tspec_.inline_spin_indicators || tspec_.inline_spin_separator))
       {
-        if (bStatus.startsWith("disabled"))
+        if (bStatus.startsWith(QLatin1String("disabled")))
         {
-          bStatus.replace("disabled","normal");
+          bStatus.replace(QLatin1String("disabled"),QLatin1String("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -4186,7 +4191,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
         if (inlineOnDarkToolbar)
         {
-          if (dspec.element.startsWith("flat-"))
+          if (dspec.element.startsWith(QLatin1String("flat-")))
             dspec.element.remove(0, 5);
           else
             dspec.element = "flat-"+dspec.element;
@@ -4229,10 +4234,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         QString aStatus = getState(option,widget);
         /* distinguish between the toggled and pressed states
            only if a toggled down arrow element exists */
-        if (aStatus.startsWith("toggled"))
+        if (aStatus.startsWith(QLatin1String("toggled")))
         {
           if (!elementExists(dspec.element+"-down-toggled"))
-            aStatus.replace("toggled","pressed");
+            aStatus.replace(QLatin1String("toggled"),QLatin1String("pressed"));
         }
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-down-"+aStatus,option->direction);
@@ -4460,10 +4465,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               status = "focused-inactive";
               else status = "focused";
             }
-            else if (status.startsWith("focused"))
-              status.replace("focused","normal");
-            else if (status.startsWith("toggled"))
-              status.replace("toggled","normal");
+            else if (status.startsWith(QLatin1String("focused")))
+              status.replace(QLatin1String("focused"),QLatin1String("normal"));
+            else if (status.startsWith(QLatin1String("toggled")))
+              status.replace(QLatin1String("toggled"),QLatin1String("normal"));
           }
         }
       }
@@ -4473,8 +4478,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         bool drawSep(false);
         if (QObject *styleObject = option->styleObject)
         { // hover bug
-          if (status.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
-            status.replace("focused","normal");
+          if (status.startsWith(QLatin1String("focused")) && styleObject->property("_kv_hover_bug").toBool())
+            status.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
         const QToolBar *toolBar = qobject_cast<const QToolBar*>(tb->parentWidget());
         const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
@@ -4524,18 +4529,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
 
         /* distinguish popup indicators from other button indicators */
-        if (!status.startsWith("normal"))
+        if (!status.startsWith(QLatin1String("normal")))
         {
           if (r.isValid()
               && (option->state & State_Enabled)
               && (option->state & State_MouseOver)
-              && !status.startsWith("pressed"))
+              && !status.startsWith(QLatin1String("pressed")))
           {
             QString group1 = group == "ToolbarButton" ? group : "PanelButtonTool";
             QColor col;
-            if (status.startsWith("toggled"))
+            if (status.startsWith(QLatin1String("toggled")))
             {
-              if(status.endsWith("-inactive"))
+              if(status.endsWith(QLatin1String("-inactive")))
               {
                 col = getFromRGBA(getLabelSpec(group1).toggleInactiveColor);
                 if (!col.isValid())
@@ -4546,7 +4551,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
             else
             {
-              if(status.endsWith("-inactive"))
+              if(status.endsWith(QLatin1String("-inactive")))
               {
                 col = getFromRGBA(getLabelSpec(group1).focusInactiveColor);
                 if (!col.isValid())
@@ -4556,7 +4561,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 col = getFromRGBA(getLabelSpec(group1).focusColor);
             }
             if (!col.isValid())
-              col = standardPalette().color(status.endsWith("-inactive")
+              col = standardPalette().color(status.endsWith(QLatin1String("-inactive"))
                                               ? QPalette::Inactive : QPalette::Active,
                                             QPalette::ButtonText);
             col.setAlphaF(0.4);
@@ -4621,29 +4626,29 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         fillWidgetInterior = !ispec.hasInterior
                              && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(cGroup).normalColor));
         if (tspec_.square_combo_button) // the rest of the combo is like a lineedit
-          status.replace("focused","normal");
+          status.replace(QLatin1String("focused"),QLatin1String("normal"));
         if (!(option->state & State_Enabled))
         {
-          status.replace("disabled","normal");
+          status.replace(QLatin1String("disabled"),QLatin1String("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
         bool mouseAnimation(animatedWidget_ == widget
-                            && (!status.startsWith("normal")
-                                || animationStartState_.startsWith("focused")));
+                            && (!status.startsWith(QLatin1String("normal"))
+                                || animationStartState_.startsWith(QLatin1String("focused"))));
         bool animate(cb && cb->isEnabled()
                      && !qobject_cast<const QAbstractScrollArea*>(widget)
                      && (mouseAnimation
-                         || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
+                         || (animatedWidgetOut_ == widget && status.startsWith(QLatin1String("normal")))));
         QString animationStartState(animationStartState_);
-        if (animationStartState.startsWith("c-"))
+        if (animationStartState.startsWith(QLatin1String("c-")))
           animationStartState.remove(0, 2);
         int animationOpacity = animationOpacity_;
         bool animatePanel(!(tspec_.combo_focus_rect
-                            && (status.startsWith("normal")
-                                || status.startsWith("pressed"))
-                            && (animationStartState.startsWith("normal")
-                                || animationStartState.startsWith("pressed"))));
+                            && (status.startsWith(QLatin1String("normal"))
+                                || status.startsWith(QLatin1String("pressed")))
+                            && (animationStartState.startsWith(QLatin1String("normal"))
+                                || animationStartState.startsWith(QLatin1String("pressed")))));
         QString _status;
         if (animate)
         {
@@ -4664,7 +4669,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             _status = animationStartState;
             if (tspec_.combo_focus_rect)
-              _status.replace("pressed", "normal");
+              _status.replace(QLatin1String("pressed"), QLatin1String("normal"));
             if (!fillWidgetInterior)
               renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
             renderFrame(painter,r,fspec,fspec.element+"-"+_status);
@@ -4677,7 +4682,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         _status = status;
         if (tspec_.combo_focus_rect)
-          _status.replace("pressed", "normal");
+          _status.replace(QLatin1String("pressed"), QLatin1String("normal"));
         if (!fillWidgetInterior)
           renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
         renderFrame(painter,r,fspec,fspec.element+"-"+_status);
@@ -4692,7 +4697,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             {
               animationStartState_ = status;
               // distinguish between toggled combo and toggled button
-              if (animationStartState_.startsWith("toggled"))
+              if (animationStartState_.startsWith(QLatin1String("toggled")))
                 animationStartState_ = "c-" + animationStartState_;
             }
             if (!mouseAnimation)
@@ -4701,7 +4706,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         if (fillWidgetInterior) // widget isn't null
         {
-          QColor comboCol = widget->palette().color(status.contains("-inactive")
+          QColor comboCol = widget->palette().color(status.contains(QLatin1String("-inactive"))
                                                       ? QPalette::Inactive
                                                       : QPalette::Active,
                                                     QPalette::Button);
@@ -4743,11 +4748,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       /* distinguish between the toggled and pressed states
          only if a toggled arrow element exists */
-      if (status.startsWith("toggled")
+      if (status.startsWith(QLatin1String("toggled"))
           && !(themeRndr_ && themeRndr_->isValid()
                && themeRndr_->elementExists(dspec.element+"-toggled")))
       {
-        status.replace("toggled","pressed");
+        status.replace(QLatin1String("toggled"),QLatin1String("pressed"));
       }
       /* Konqueror may have added an icon to the right of lineedit (for LTR),
          in which case, the arrow rectangle whould be widened at CC_ComboBox */
@@ -5066,16 +5071,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 #endif
                          ) ? "focused"
                          : "normal" : "disabled";
-      if (ivStatus.startsWith("disabled") && (option->state & State_Selected))
+      if (ivStatus.startsWith(QLatin1String("disabled")) && (option->state & State_Selected))
       {
         /* Disabled items aren't selectable but Qt Creator wrongly disables
            the headers of a cmake project and let the user select them! */
-        ivStatus.replace("disabled","pressed");
+        ivStatus.replace(QLatin1String("disabled"),QLatin1String("pressed"));
       }
-      else if (ivStatus.startsWith("focused")
+      else if (ivStatus.startsWith(QLatin1String("focused"))
                && isCursorOutsideWidget(widget)) // hover bug
       {
-        ivStatus.replace("focused","normal");
+        ivStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
       }
       bool isInactive(isWidgetInactive(widget));
 
@@ -5187,7 +5192,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
         if (opt->backgroundBrush.style() != Qt::NoBrush
-            && !ivStatus.startsWith("pressed") && !ivStatus.startsWith("toggled"))
+            && !ivStatus.startsWith(QLatin1String("pressed")) && !ivStatus.startsWith(QLatin1String("toggled")))
         {
           /* In this case, the item is colored intentionally.
              However, since QCommonStyle excludes the selected states, we did so too. */
@@ -5506,7 +5511,7 @@ void Style::drawControl(QStyle::ControlElement element,
         else
         {
           /* don't draw panel for normal and disabled states */
-          if (!status.startsWith("normal") && (option->state & State_Enabled))
+          if (!status.startsWith(QLatin1String("normal")) && (option->state & State_Enabled))
           {
             if (isLibreoffice_ && widget == nullptr)
             {
@@ -5547,14 +5552,14 @@ void Style::drawControl(QStyle::ControlElement element,
           int state = 1;
           if (!(option->state & State_Enabled))
             state = 0;
-          else if (status.startsWith("pressed"))
+          else if (status.startsWith(QLatin1String("pressed")))
           { // only if it exists (focus color seems more natural)
             if (lspec.pressColor.isEmpty())
               state = 2;
             else
               state = 3;
           }
-          else if (status.startsWith("toggled"))
+          else if (status.startsWith(QLatin1String("toggled")))
           { // only if it exists (focus color seems more natural)
             if (lspec.toggleColor.isEmpty())
               state = 2;
@@ -5622,7 +5627,7 @@ void Style::drawControl(QStyle::ControlElement element,
                           Qt::AlignLeft | talign,
                           txt,QPalette::Text,
                           state,
-                          status.contains("-inactive"));
+                          status.contains(QLatin1String("-inactive")));
             }
           }
           else
@@ -5653,7 +5658,7 @@ void Style::drawControl(QStyle::ControlElement element,
               }
             }
             QSize iconSize = QSize(smallIconSize,smallIconSize);
-            bool isInactive(status.contains("-inactive"));
+            bool isInactive(status.contains(QLatin1String("-inactive")));
             QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
             if (px.isNull()) // with a non-null icon
               iconSpace = smallIconSize + lspec.tispace;
@@ -5690,7 +5695,7 @@ void Style::drawControl(QStyle::ControlElement element,
                         Qt::AlignRight | talign,
                         shortcutTxt,QPalette::Text,
                         state,
-                        status.contains("-inactive"));
+                        status.contains(QLatin1String("-inactive")));
           }
 
           QStyleOptionMenuItem o(*opt);
@@ -5999,10 +6004,10 @@ void Style::drawControl(QStyle::ControlElement element,
         QString status = getState(option,widget);
         if (!styleHint(SH_MenuBar_MouseTracking, opt, widget))
         {
-          if (status.startsWith("toggled"))
-            status.replace("toggled","normal");
-          if (status.startsWith("focused"))
-            status.replace("focused","normal");
+          if (status.startsWith(QLatin1String("toggled")))
+            status.replace(QLatin1String("toggled"),QLatin1String("normal"));
+          if (status.startsWith(QLatin1String("focused")))
+            status.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
 
         QString group = "MenuBarItem";
@@ -6066,7 +6071,7 @@ void Style::drawControl(QStyle::ControlElement element,
         r = option->rect.adjusted(0,topFrame,0,-bottomFrame);
 
         /* draw a panel for the menubar-item only if it's focused or pressed */
-        if (!status.startsWith("normal") && (option->state & State_Enabled))
+        if (!status.startsWith(QLatin1String("normal")) && (option->state & State_Enabled))
         {
           if (isLibreoffice_ && widget == nullptr)
           {
@@ -6105,14 +6110,14 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           if (styleHint(SH_MenuBar_MouseTracking, opt, widget))
           {
-            if (status.startsWith("pressed"))
+            if (status.startsWith(QLatin1String("pressed")))
             {
               if (lspec.pressColor.isEmpty())
                 state = 2;
               else
                 state = 3;
             }
-            else if (status.startsWith("toggled"))
+            else if (status.startsWith(QLatin1String("toggled")))
             {
               if (lspec.toggleColor.isEmpty())
                 state = 2;
@@ -6120,7 +6125,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 state = 4;
             }
           }
-          else if (status.startsWith("pressed"))
+          else if (status.startsWith(QLatin1String("pressed")))
           {
             if (lspec.pressColor.isEmpty())
               state = 2;
@@ -6128,7 +6133,7 @@ void Style::drawControl(QStyle::ControlElement element,
               state = 3;
           }
         }
-        bool isInactive(status.contains("-inactive"));
+        bool isInactive(status.contains(QLatin1String("-inactive")));
         if (!opt->icon.isNull())
         {
           int icnSize = pixelMetric(PM_SmallIconSize);
@@ -6404,11 +6409,11 @@ void Style::drawControl(QStyle::ControlElement element,
         int state = 1;
         if (!(option->state & State_Enabled))
           state = 0;
-        else if (status.startsWith("pressed"))
+        else if (status.startsWith(QLatin1String("pressed")))
           state = 3;
-        else if (status.startsWith("toggled"))
+        else if (status.startsWith(QLatin1String("toggled")))
           state = 4;
-        else if (status.startsWith("focused"))
+        else if (status.startsWith(QLatin1String("focused")))
           state = 2;
 
         /* when there isn't enough space */
@@ -6452,9 +6457,9 @@ void Style::drawControl(QStyle::ControlElement element,
           else
             lspec.tispace += sspec.minW/2;
         }
-        bool isInactive(status.contains("-inactive"));
+        bool isInactive(status.contains(QLatin1String("-inactive")));
         QStyleOptionComboBox o(*opt);
-        if ((option->state & State_MouseOver) && !status.startsWith("focused"))
+        if ((option->state & State_MouseOver) && !status.startsWith(QLatin1String("focused")))
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
         renderLabel(&o,painter,r,
                     fspec,lspec,
@@ -8298,7 +8303,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
       if (!(option->state & State_Enabled))
       {
-        status.replace("disabled","normal");
+        status.replace(QLatin1String("disabled"),QLatin1String("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -8354,7 +8359,7 @@ void Style::drawControl(QStyle::ControlElement element,
             iStatus = "normal";
 
           if (isWidgetInactive(widget)
-              && !iStatus.endsWith("-inactive"))
+              && !iStatus.endsWith(QLatin1String("-inactive")))
           {
             iStatus.append("-inactive");
           }
@@ -8481,7 +8486,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
       if (!(option->state & State_Enabled))
       {
-        sStatus.replace("disabled","normal");
+        sStatus.replace(QLatin1String("disabled"),QLatin1String("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -8619,7 +8624,7 @@ void Style::drawControl(QStyle::ControlElement element,
       QString status = getState(option,widget);
       if (!(option->state & State_Enabled))
       {
-        status.replace("disabled","normal");
+        status.replace(QLatin1String("disabled"),QLatin1String("normal"));
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
@@ -8736,15 +8741,15 @@ void Style::drawControl(QStyle::ControlElement element,
         int state = 1;
         if (!(option->state & State_Enabled))
           state = 0;
-        else if (status.startsWith("pressed"))
+        else if (status.startsWith(QLatin1String("pressed")))
           state = 3;
-        else if (status.startsWith("toggled"))
+        else if (status.startsWith(QLatin1String("toggled")))
           state = 4;
-        else if (status.startsWith("focused"))
+        else if (status.startsWith(QLatin1String("focused")))
           state = 2;
 
         QSize iconSize = QSize(smallIconSize,smallIconSize);
-        bool isInactive(status.contains("-inactive"));
+        bool isInactive(status.contains(QLatin1String("-inactive")));
         renderLabel(option,painter,
                     option->rect.adjusted(rtl ?
                                             opt->sortIndicator != QStyleOptionHeader::None ?
@@ -9269,7 +9274,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                         -(opt->direction == Qt::RightToLeft ? 0 : ind),
                                         0);
         QString status = getState(option,widget);
-        if (status.startsWith("toggled") || status.startsWith("pressed"))
+        if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
         {
           int hShift = pixelMetric(PM_ButtonShiftHorizontal);
           int vShift = pixelMetric(PM_ButtonShiftVertical);
@@ -9284,9 +9289,9 @@ void Style::drawControl(QStyle::ControlElement element,
         int state = 1;
         if (!(option->state & State_Enabled))
           state = 0;
-        else if (status.startsWith("pressed"))
+        else if (status.startsWith(QLatin1String("pressed")))
           state = 3;
-        else if (status.startsWith("toggled"))
+        else if (status.startsWith(QLatin1String("toggled")))
           state = 4;
         else if (option->state & State_MouseOver)
         {
@@ -9307,7 +9312,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
           o.state = o.state & ~QStyle::State_MouseOver; // hover bug
 
-        bool isInactive(status.contains("-inactive"));
+        bool isInactive(status.contains(QLatin1String("-inactive")));
         QColor disabledCol;
         if (state == 0
             && ((option->state & State_On)
@@ -9379,14 +9384,15 @@ void Style::drawControl(QStyle::ControlElement element,
         QString status = getState(option,widget);
         if (!prevState.isEmpty())
         { // hover bug
-          if (!btnDragInProgress() && status.startsWith("focused")
-              && (prevState.startsWith("pressed") // if it was pressed before…
+          if (!btnDragInProgress() && status.startsWith(QLatin1String("focused"))
+              && (prevState.startsWith(QLatin1String("pressed")) // if it was pressed before…
                   /* ... or if it was disabled (see below) */
-                  || (prevState.startsWith("normal") && styleObject->property("_kv_hover_bug").toBool()))
+                  || (prevState.startsWith(QLatin1String("normal"))
+                      && styleObject->property("_kv_hover_bug").toBool()))
               && isCursorOutsideWidget(widget))
           {
             styleObject->setProperty("_kv_hover_bug", true);
-            status.replace("focused","normal");
+            status.replace(QLatin1String("focused"),QLatin1String("normal"));
           }
           else if (!(option->state & State_Enabled))
           {
@@ -9406,11 +9412,11 @@ void Style::drawControl(QStyle::ControlElement element,
         if (widget && !standardButton.contains(widget)
             && (option->state & State_Enabled))
         {
-          bool isInactive(status.contains("-inactive"));
+          bool isInactive(status.contains(QLatin1String("-inactive")));
           QColor col;
-          if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
+          if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith(QLatin1String("normal")))
           {
-            if (status.startsWith("pressed"))
+            if (status.startsWith(QLatin1String("pressed")))
             {
               if (isInactive)
               {
@@ -9421,7 +9427,7 @@ void Style::drawControl(QStyle::ControlElement element,
               else
                 col = getFromRGBA(lspec.pressColor);
             }
-            else if (status.startsWith("toggled"))
+            else if (status.startsWith(QLatin1String("toggled")))
             {
               if (isInactive)
               {
@@ -9589,7 +9595,7 @@ void Style::drawControl(QStyle::ControlElement element,
         }
         if (widget && !(opt->features & QStyleOptionButton::Flat)
             && ((widget->testAttribute(Qt::WA_StyleSheetTarget)
-                 && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("background"))
+                 && !widget->styleSheet().isEmpty() && widget->styleSheet().contains(QLatin1String("background")))
                 || (opt->text.size() == 0 && opt->icon.isNull()
                     && widget->palette().color(QPalette::Button)
                        != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Button))))
@@ -9622,7 +9628,7 @@ void Style::drawControl(QStyle::ControlElement element,
             animationOpacity_ = 0;
             animate = false;
           }
-          if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith("normal"))
+          if (!(opt->features & QStyleOptionButton::Flat) || !status.startsWith(QLatin1String("normal")))
           {
             if (animate)
             {
@@ -9633,7 +9639,7 @@ void Style::drawControl(QStyle::ControlElement element,
               }
               if (animationOpacity_ < 100
                   && (!(opt->features & QStyleOptionButton::Flat)
-                      || !prevState.startsWith("normal")))
+                      || !prevState.startsWith(QLatin1String("normal"))))
               {
                 renderFrame(painter,option->rect,fspec,fspec.element+"-"+prevState);
                 if (!fillWidgetInterior)
@@ -9673,13 +9679,14 @@ void Style::drawControl(QStyle::ControlElement element,
             else if (styleObject)
               styleObject->setProperty("_kv_state", status);
             if (fillWidgetInterior) // widget isn't null
-              painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                                            ? QPalette::Inactive
-                                                                                            : QPalette::Active,
-                                                                                          QPalette::Button));
+              painter->fillRect(interiorRect(option->rect,fspec),
+                                widget->palette().brush(status.contains(QLatin1String("-inactive"))
+                                                          ? QPalette::Inactive
+                                                          : QPalette::Active,
+                                                        QPalette::Button));
           }
           // fade out animation
-          else if (animate && !prevState.startsWith("normal"))
+          else if (animate && !prevState.startsWith(QLatin1String("normal")))
           {
             if (!opacityTimer_->isActive())
             {
@@ -9695,10 +9702,11 @@ void Style::drawControl(QStyle::ControlElement element,
                 renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-"+prevState);
               painter->restore();
               if (fillWidgetInterior)
-                painter->fillRect(interiorRect(option->rect,fspec), widget->palette().brush(status.contains("-inactive")
-                                                                                              ? QPalette::Inactive
-                                                                                              : QPalette::Active,
-                                                                                            QPalette::Button));
+                painter->fillRect(interiorRect(option->rect,fspec),
+                                  widget->palette().brush(status.contains(QLatin1String("-inactive"))
+                                                            ? QPalette::Inactive
+                                                            : QPalette::Active,
+                                                          QPalette::Button));
             }
             if (animationOpacity_ >= 100)
               styleObject->setProperty("_kv_state", status);
@@ -9717,7 +9725,7 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           QString aStatus = "normal";
           /* use the "flat" indicator with flat buttons if it exists */
-          if ((opt->features & QStyleOptionButton::Flat) && status.startsWith("normal"))
+          if ((opt->features & QStyleOptionButton::Flat) && status.startsWith(QLatin1String("normal")))
           {
             if (themeRndr_ && themeRndr_->isValid())
             {
@@ -9733,7 +9741,7 @@ void Style::drawControl(QStyle::ControlElement element,
           {
             if (!(option->state & State_Enabled))
               aStatus = "disabled";
-            else if (status.startsWith("toggled") || status.startsWith("pressed"))
+            else if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
               aStatus = "pressed";
             else if (option->state & State_MouseOver)
             {
@@ -9760,7 +9768,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (pb && pb->isDefault() && (option->state & State_Enabled))
         {
           QString di = "button-default-indicator";
-          if (!((opt->features & QStyleOptionButton::Flat) && status.startsWith("normal")))
+          if (!((opt->features & QStyleOptionButton::Flat) && status.startsWith(QLatin1String("normal"))))
           {
             renderFrame(painter,option->rect,fspec,fspec.element+"-default");
             renderInterior(painter,option->rect,fspec,ispec,ispec.element+"-default");
@@ -9883,8 +9891,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (QObject *styleObject = option->styleObject)
         { // hover bug
-          if (status.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
-            status.replace("focused","normal");
+          if (status.startsWith(QLatin1String("focused")) && styleObject->property("_kv_hover_bug").toBool())
+            status.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
 
         if (tb)
@@ -9895,7 +9903,7 @@ void Style::drawControl(QStyle::ControlElement element,
               && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
               && qobject_cast<QMenu*>(p))
           {
-            status.replace("pressed","toggled");
+            status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
           }
 
           /* the right arrow is attached */
@@ -9914,9 +9922,9 @@ void Style::drawControl(QStyle::ControlElement element,
           bool noPanel(!paneledButtons.contains(widget));
           if ((autoraise && !drawRaised) /*|| inPlasma*/ || noPanel)
           {
-            bool isNormal(status.startsWith("normal")
+            bool isNormal(status.startsWith(QLatin1String("normal"))
                           /* cover the simple disabled state too */
-                          || (status.startsWith("disabled")
+                          || (status.startsWith(QLatin1String("disabled"))
                               && !(option->state & State_On)
                               && !(option->state & State_Sunken)
                               && !(option->state & State_Selected)));
@@ -9925,11 +9933,11 @@ void Style::drawControl(QStyle::ControlElement element,
             QColor ncol;
             if (noPanel && (option->state & State_Enabled))
             {
-              if (status.startsWith("normal"))
+              if (status.startsWith(QLatin1String("normal")))
                 ncol = getFromRGBA(lspec.normalColor);
-              else if (status.startsWith("focused"))
+              else if (status.startsWith(QLatin1String("focused")))
                 ncol = getFromRGBA(lspec.focusColor);
-              else if (status.startsWith("pressed"))
+              else if (status.startsWith(QLatin1String("pressed")))
                 ncol = getFromRGBA(lspec.pressColor);
               else// if (status.startsWith("toggled"))
                 ncol = getFromRGBA(lspec.toggleColor);
@@ -9987,17 +9995,17 @@ void Style::drawControl(QStyle::ControlElement element,
             {
               QColor col;
               if (!(autoraise && !drawRaised) && noPanel) // an already styled toolbutton
-                col = opt->palette.color(status.contains("-inactive")
+                col = opt->palette.color(status.contains(QLatin1String("-inactive"))
                                            ? QPalette::Inactive
                                            : QPalette::Active,
                                          QPalette::ButtonText); // p->palette()?
               else
-                col = p->palette().color(status.contains("-inactive")
+                col = p->palette().color(status.contains(QLatin1String("-inactive"))
                                            ? QPalette::Inactive
                                            : QPalette::Active,
                                          p->foregroundRole());
               if (!col.isValid())
-                col = standardPalette().color(status.contains("-inactive")
+                col = standardPalette().color(status.contains(QLatin1String("-inactive"))
                                                ? QPalette::Inactive
                                                : QPalette::Active,
                                               QPalette::WindowText);
@@ -10294,18 +10302,18 @@ void Style::drawControl(QStyle::ControlElement element,
           int state = 1;
           if (!(option->state & State_Enabled))
             state = 0;
-          else if (status.startsWith("pressed"))
+          else if (status.startsWith(QLatin1String("pressed")))
             state = 3;
-          else if (status.startsWith("toggled"))
+          else if (status.startsWith(QLatin1String("toggled")))
             state = 4;
-          else if (status.startsWith("focused"))
+          else if (status.startsWith(QLatin1String("focused")))
             state = 2;
 
           QStyleOptionToolButton o(*opt);
           if (!btnDragInProgress() && (option->state & State_MouseOver) && state != 2)
             o.state = o.state & ~QStyle::State_MouseOver; // hover bug
 
-          bool isInactive(status.contains("-inactive"));
+          bool isInactive(status.contains(QLatin1String("-inactive")));
           QColor disabledCol;
           if (state == 0
               && ((option->state & State_On)
@@ -10367,13 +10375,13 @@ void Style::drawControl(QStyle::ControlElement element,
           break;
         }
 
-        if (status.startsWith("toggled")
+        if (status.startsWith(QLatin1String("toggled"))
             && (!themeRndr_ || !themeRndr_->isValid()
                 || !themeRndr_->elementExists(dspec.element+"-down-toggled")))
         {
           /* distinguish between the toggled and pressed states
              only if a toggled down arrow element exists */
-          status.replace("toggled","pressed");
+          status.replace(QLatin1String("toggled"),QLatin1String("pressed"));
         }
         if (!txt.isEmpty()) // it's empty for QStackedWidget
           r.adjust(lspec.left,lspec.top,-lspec.right,-lspec.bottom);
@@ -10444,7 +10452,7 @@ void Style::drawControl(QStyle::ControlElement element,
         QString status = getState(option,widget);
         if (!(option->state & State_Enabled))
         {
-          status.replace("disabled","normal");
+          status.replace(QLatin1String("disabled"),QLatin1String("normal"));
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
@@ -10488,7 +10496,7 @@ void Style::drawControl(QStyle::ControlElement element,
                     fspec,lspec,
                     talign,title,QPalette::WindowText,
                     option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    status.contains("-inactive"));
+                    status.contains(QLatin1String("-inactive")));
 
         if (hasVertTitle)
         {
@@ -10665,12 +10673,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             QString aStatus = getState(option,widget);
             if (QObject *styleObject = option->styleObject)
             { // hover bug
-              if (aStatus.startsWith("focused") && styleObject->property("_kv_hover_bug").toBool())
-                aStatus.replace("focused","normal");
+              if (aStatus.startsWith(QLatin1String("focused")) && styleObject->property("_kv_hover_bug").toBool())
+                aStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
             }
 
             /* use the "flat" indicator with flat buttons if it exists */
-            if (aStatus.startsWith("normal")
+            if (aStatus.startsWith(QLatin1String("normal"))
                 && autoraise && !drawRaised
                 && themeRndr_ && themeRndr_->isValid()
                 && flatArrowExists(dspec.element))
@@ -10719,11 +10727,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
             /* distinguish between the toggled and pressed states
                only if a toggled down arrow element exists */
-            if (aStatus.startsWith("toggled")
+            if (aStatus.startsWith(QLatin1String("toggled"))
                 && !(themeRndr_ && themeRndr_->isValid()
                      && themeRndr_->elementExists(dspec.element+"-down-toggled")))
             {
-              aStatus.replace("toggled","pressed");
+              aStatus.replace(QLatin1String("toggled"),QLatin1String("pressed"));
             }
             renderIndicator(painter,
                             o.rect,
@@ -10823,7 +10831,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               const label_spec lspec = getLabelSpec(leGroup);
               const size_spec sspec = getSizeSpec(leGroup);
               if ((le->testAttribute(Qt::WA_StyleSheetTarget)
-                   && !le->styleSheet().isEmpty() && le->styleSheet().contains("padding"))
+                   && !le->styleSheet().isEmpty() && le->styleSheet().contains(QLatin1String("padding")))
                   || le->minimumWidth() == le->maximumWidth()
                   || le->height() < sizeCalculated(le->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
               {
@@ -10889,14 +10897,14 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
           bool animate(widget && widget->isEnabled()
                        && !qobject_cast<const QAbstractScrollArea*>(widget)
-                       && ((animatedWidget_ == widget && !leStatus.startsWith("normal"))
-                           || (animatedWidgetOut_ == widget && leStatus.startsWith("normal"))));
+                       && ((animatedWidget_ == widget && !leStatus.startsWith(QLatin1String("normal")))
+                           || (animatedWidgetOut_ == widget && leStatus.startsWith(QLatin1String("normal")))));
 
           QString animationStartState(animationStartState_);
           int animationOpacity = animationOpacity_;
           if (animate)
           {
-            if (leStatus.startsWith("normal")) // -> QEvent::FocusOut
+            if (leStatus.startsWith(QLatin1String("normal"))) // -> QEvent::FocusOut
             {
               animationStartState = animationStartStateOut_;
               animationOpacity = animationOpacityOut_;
@@ -10904,7 +10912,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (animationStartState == leStatus)
             {
               animationOpacity = 100;
-              if (leStatus.startsWith("normal"))
+              if (leStatus.startsWith(QLatin1String("normal")))
                 animationOpacityOut_ = 100;
               else
                 animationOpacity_ = 100;
@@ -10926,7 +10934,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->restore();
             if (animationOpacity >= 100)
             {
-              if (leStatus.startsWith("normal"))
+              if (leStatus.startsWith(QLatin1String("normal")))
                 animationStartStateOut_ = leStatus;
               else
                 animationStartState_ = leStatus;
@@ -10934,7 +10942,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
           if (fillWidgetInterior) // widget isn't null
           {
-            QColor baseCol = widget->palette().color(leStatus.contains("-inctive")
+            QColor baseCol = widget->palette().color(leStatus.contains(QLatin1String("-inctive"))
                                                        ? QPalette::Inactive
                                                        : QPalette::Active,
                                                      QPalette::Base);
@@ -11104,7 +11112,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
           if (!(option->state & State_Enabled))
           {
-            status.replace("disabled","normal");
+            status.replace(QLatin1String("disabled"),QLatin1String("normal"));
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
@@ -11143,10 +11151,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 }
                 else if (drwaAsLineEdit)
                 {
-                  if (status.startsWith("focused"))
-                    status.replace("focused","normal");
-                  else if (status.startsWith("toggled"))
-                    status.replace("toggled","normal");
+                  if (status.startsWith(QLatin1String("focused")))
+                    status.replace(QLatin1String("focused"),QLatin1String("normal"));
+                  else if (status.startsWith(QLatin1String("toggled")))
+                    status.replace(QLatin1String("toggled"),QLatin1String("normal"));
                 }
               }
             }
@@ -11222,23 +11230,23 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                              rtl ? editWidth-o.rect.width() : 0, 0);
               }
               bool mouseAnimation(animatedWidget_ == widget
-                                  && (!status.startsWith("normal")
+                                  && (!status.startsWith(QLatin1String("normal"))
                                       || ((!editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
-                                          && animationStartState_.startsWith("focused"))));
+                                          && animationStartState_.startsWith(QLatin1String("focused")))));
               bool animate(cb && cb->isEnabled()
                            && (mouseAnimation
-                               || (animatedWidgetOut_ == widget && status.startsWith("normal"))));
+                               || (animatedWidgetOut_ == widget && status.startsWith(QLatin1String("normal")))));
               QString animationStartState(animationStartState_);
-              if (animationStartState.startsWith("c-"))
+              if (animationStartState.startsWith(QLatin1String("c-")))
                 animationStartState.remove(0, 2);
               int animationOpacity = animationOpacity_;
               bool animatePanel(!(tspec_.combo_focus_rect
                                   && (!drwaAsLineEdit || !editable)
-                                  && (status.startsWith("normal")
-                                      || status.startsWith("pressed"))
-                                  && (animationStartState.startsWith("normal")
-                                      || animationStartState.startsWith("pressed"))));
+                                  && (status.startsWith(QLatin1String("normal"))
+                                      || status.startsWith(QLatin1String("pressed")))
+                                  && (animationStartState.startsWith(QLatin1String("normal"))
+                                      || animationStartState.startsWith(QLatin1String("pressed")))));
               QString _status;
               if (animate)
               {
@@ -11261,7 +11269,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   {
                     _status = animationStartState;
                     if (tspec_.combo_focus_rect)
-                      _status.replace("pressed", "normal");
+                      _status.replace(QLatin1String("pressed"), QLatin1String("normal"));
                     renderFrame(painter,r,fspec,fspec.element+"-"+_status);
                     if (!fillWidgetInterior)
                       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
@@ -11283,7 +11291,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               }
               _status = status;
               if (tspec_.combo_focus_rect)
-                _status.replace("pressed", "normal");
+                _status.replace(QLatin1String("pressed"), QLatin1String("normal"));
               renderFrame(painter,r,fspec,fspec.element+"-"+_status);
               if (!fillWidgetInterior)
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
@@ -11318,7 +11326,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   else
                     animationStartState_ = status;
                   // distinguish between toggled combo and toggled button
-                  if (animationStartState_.startsWith("toggled"))
+                  if (animationStartState_.startsWith(QLatin1String("toggled")))
                     animationStartState_ = "c-" + animationStartState_;
                 }
               }
@@ -11326,12 +11334,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               {
                 QColor comboCol;
                 if (colored)
-                  comboCol = cb->lineEdit()->palette().color(status.contains("-inactive")
+                  comboCol = cb->lineEdit()->palette().color(status.contains(QLatin1String("-inactive"))
                                                               ? QPalette::Inactive
                                                               : QPalette::Active,
                                                              QPalette::Base);
                 else
-                  comboCol = widget->palette().color(status.contains("-inactive")
+                  comboCol = widget->palette().color(status.contains(QLatin1String("-inactive"))
                                                        ? QPalette::Inactive
                                                        : QPalette::Active,
                                                      drwaAsLineEdit
@@ -11404,9 +11412,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               {
                 QColor col;
                 col = getFromRGBA(lspec.normalColor);
-                if (status.startsWith("pressed"))
+                if (status.startsWith(QLatin1String("pressed")))
                   col = getFromRGBA(lspec.pressColor);
-                else if (status.startsWith("toggled"))
+                else if (status.startsWith(QLatin1String("toggled")))
                   col = getFromRGBA(lspec.toggleColor);
                 else if (option->state & State_MouseOver)
                   col = getFromRGBA(lspec.focusColor);
@@ -11440,11 +11448,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             int state = 1;
             if (!(option->state & State_Enabled))
               state = 0;
-            else if (status.startsWith("pressed"))
+            else if (status.startsWith(QLatin1String("pressed")))
               state = 3;
-            else if (status.startsWith("toggled"))
+            else if (status.startsWith(QLatin1String("toggled")))
               state = 4;
-            else if (status.startsWith("focused"))
+            else if (status.startsWith(QLatin1String("focused")))
               state = 2;
 
             if (editable && drwaAsLineEdit)
@@ -11481,7 +11489,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               }
             }
             QPixmap icn = getPixmapFromIcon(opt->currentIcon,
-                                            getIconMode(state,status.contains("-inactive"),lspec),
+                                            getIconMode(state,status.contains(QLatin1String("-inactive")),lspec),
                                             iconstate, opt->iconSize);
             QRect iconRect = alignedRect(option->direction,
                                          Qt::AlignVCenter | Qt::AlignLeft,
@@ -11896,7 +11904,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               fspec.VPos = -1;
             else
               fspec.VPos = 1;
-            suffix.replace("normal","toggled");
+            suffix.replace(QLatin1String("normal"),QLatin1String("toggled"));
             renderFrame(painter,full,fspec,fspec.element+suffix);
             renderInterior(painter,full,fspec,ispec,ispec.element+suffix);
           }
@@ -13163,14 +13171,14 @@ void Style::setSurfaceFormat(QWidget *widget) const
       if (p) return;
       /* stylesheets with background can cause total transparency */
       QString ss = mw->styleSheet();
-      if (!ss.isEmpty() && ss.contains("background"))
+      if (!ss.isEmpty() && ss.contains(QLatin1String("background")))
         return;
       if (QWidget *cw = mw->centralWidget())
       {
         if (cw->autoFillBackground())
           return;
         ss = cw->styleSheet();
-        if (!ss.isEmpty() && ss.contains("background"))
+        if (!ss.isEmpty() && ss.contains(QLatin1String("background")))
           return; // as in smplayer
       }
     }
@@ -14621,7 +14629,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       {
         if (qobject_cast<const QLineEdit*>(widget)
             && widget->testAttribute(Qt::WA_StyleSheetTarget)
-            && !widget->styleSheet().isEmpty() && widget->styleSheet().contains("padding"))
+            && !widget->styleSheet().isEmpty() && widget->styleSheet().contains(QLatin1String("padding")))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
