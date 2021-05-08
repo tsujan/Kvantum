@@ -15,6 +15,7 @@ V0.20.0
  * Improved the workaround for Qt's hover bug.
  * Don't sharpen the round corners of a colorized line-edit (only fill its contents rectangle).
  * More precise calculations for finding the widest spinbox text.
+ * Don't consider tab overlap in drawing the tabbar frame.
 
 V0.19.0
 ---------

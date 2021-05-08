@@ -1986,8 +1986,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
         frame_spec fspec;
 
-        /* consider overlap, as in CE_TabBarTabShape */
-        if (l > 0)
+        /* don't consider overlap (as in CE_TabBarTabShape) because
+           the tabbar frame should be cut under the active tab */
+        /*if (l > 0)
         {
           int overlap = tspec_.active_tab_overlap;
           if (overlap > 0)
@@ -2011,7 +2012,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               if (l < 0) l = 0;
             }
           }
-        }
+        }*/
 
         fspec = getFrameSpec(QStringLiteral("TabBarFrame"));
         const interior_spec ispec = getInteriorSpec(QStringLiteral("TabBarFrame"));
