@@ -595,12 +595,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>工具栏（2）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
