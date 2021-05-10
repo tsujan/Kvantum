@@ -1986,8 +1986,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
         frame_spec fspec;
 
-        /* don't consider overlap (as in CE_TabBarTabShape) because
-           the tabbar frame should be cut under the active tab */
+        /* don't consider the overlap (as in PE_FrameTabWidget) */
         /*if (l > 0)
         {
           int overlap = tspec_.active_tab_overlap;
