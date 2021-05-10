@@ -370,19 +370,21 @@ Diversos → Respeitar o DE atual se possível</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, a barra de ferramentas vertical não é habilitada.
+
+Se estiver desabilitada, verifique a opção acima.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo barra de ferramentas vertical</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation>Se marcado, o conteúdo de um formulário será
-centralizado horizontalmente, na medida do possível.</translation>
+        <translation>Se marcado, os conteúdos de um formulário serão
+centralizados horizontalmente, na medida do possível.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
@@ -407,7 +409,8 @@ com translucidez ou gradiente de janela.</translation>
         <location filename="../../kvantummanager.ui" line="619"/>
         <source>By default, the scroll slider jumps to a position
 when the scrollbar is left clicked.</source>
-        <translation>Por padrão, o controle deslizante de rolagem salta para uma posição quando a barra de rolagem é clicada.</translation>
+        <translation>Por padrão, o controle deslizante de rolagem salta para uma posição
+quando a barra de rolagem é clicada com o botão esquerdo do mouse.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
@@ -445,7 +448,7 @@ or through logging out and in again.</source>
 
 Valores menores que 16 significam o tamanho do ícone padrão do menu.
 
-Necessita de painel LXQt para ser reiniciado ou por &quot;Configurações de sessão&quot;
+Necessita do painel LXQt para ser reiniciado ou por &quot;Configurações de sessão&quot;
 ou através de sair e entrar novamente.</translation>
     </message>
     <message>
