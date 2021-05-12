@@ -417,8 +417,9 @@ toolbar_interior_spacing          Integer             The space around the inter
                                                       Zero by default.
 
 toolbar_separator_thickness       Integer             The thickness of toolbar separators. It is
-                                                      never less than the toolbar indicator size
-                                                      or 4, whichever is greater.
+                                                      never less than 2. Its default value is
+                                                      the toolbar indicator size or 4, whichever
+                                                      is greater.
 
 center_toolbar_handle             true/false          If "true", the SVG element for the
                                                       toolbar handle will be centered

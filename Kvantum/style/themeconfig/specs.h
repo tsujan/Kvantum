@@ -485,7 +485,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.group_toolbar_buttons = false;
   tspec.toolbar_item_spacing = 0;
   tspec.toolbar_interior_spacing = 0;
-  tspec.toolbar_separator_thickness = 0;
+  tspec.toolbar_separator_thickness = -1;
   tspec.center_toolbar_handle = false;
   tspec.slim_toolbars = false;
   tspec.merge_menubar_with_toolbar = false;

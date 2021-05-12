@@ -12764,8 +12764,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       return 8;
     }
     case PM_ToolBarSeparatorExtent : {
+      int thickness = tspec_.toolbar_separator_thickness;
+      if (thickness > 0) return qMax(thickness,2); // 1 would trigger a bug in QWidget::childAt()
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Toolbar"));
-      return qMax(tspec_.toolbar_separator_thickness, qMax(dspec.size,4));
+      return qMax(dspec.size,4);
     }
     case PM_ToolBarIconSize : return tspec_.toolbar_icon_size;
     /* we don't use this in standardIcon() -> SP_ToolBarHorizontalExtensionButton

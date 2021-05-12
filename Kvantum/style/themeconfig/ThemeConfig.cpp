@@ -813,7 +813,7 @@ theme_spec ThemeConfig::getThemeSpec()
     r.toolbar_interior_spacing = qMax(v.toInt(),0);
 
   v = getValue(KSL("General"),KSL("toolbar_separator_thickness"));
-  if (v.isValid()) // 0 by default
+  if (v.isValid()) // -1 by default
     r.toolbar_separator_thickness = qMax(v.toInt(),0);
 
   v = getValue(KSL("General"),KSL("center_toolbar_handle"));
