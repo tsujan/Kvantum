@@ -1173,14 +1173,17 @@ int Style::whichGroupedTBtn(const QToolButton *tb, const QWidget *parentBar, boo
   drawSeparator = false;
 
   if (!tb || !parentBar
-      /* Although the toolbar extension button can be on the immediate right of
-         the last toolbutton, there's a 1px gap between them. I see this as a
-         Qt bug but because of it, the extension button should be excluded here. */
+      /* When the toolbar extension button is to the immediate right of the last toolbutton,
+         there's a 1px gap between them (see the comment below). So, the extension button
+         is excluded here. */
       || tb->objectName() == "qt_toolbar_ext_button")
   {
     return res;
   }
 
+  /* There's no method for getting a child widget that properly contains a point. Therefore,
+     instead of adding more computation, we set the minimum of PM_ToolBarSeparatorExtent to
+     2 and check the existence of adjacent children by going 1px to the right and left. */
   const QRect g = tb->geometry();
   QToolButton *left = qobject_cast<QToolButton*>(parentBar->childAt(g.x()-1, g.y()));
   if (left && left->objectName() == "qt_toolbar_ext_button")
@@ -12765,7 +12768,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     }
     case PM_ToolBarSeparatorExtent : {
       int thickness = tspec_.toolbar_separator_thickness;
-      if (thickness > 0) return qMax(thickness,2); // 1 would trigger a bug in QWidget::childAt()
+      if (thickness > 0) return qMax(thickness,2); // see whichGroupedTBtn() for the reason
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("Toolbar"));
       return qMax(dspec.size,4);
     }
