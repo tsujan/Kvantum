@@ -23,10 +23,10 @@
 #include <QVector>
 #include <QMenu>
 #include <QFrame>
-#include <QWindow> // for hdpi
-#include <QApplication> // for hdpi
+#include <QWindow>
 
 #include <KWindowEffects>
+#include <KF5/kwindowsystem_version.h>
 
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
@@ -139,15 +139,24 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 /*************************/
 void BlurHelper::update (QWidget* widget) const
 {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
   if (!(widget->testAttribute (Qt::WA_WState_Created) || widget->internalWinId()))
     return;
+#else
+  if (widget->windowHandle() == nullptr)
+    return;
+#endif
 
   const QRegion region (blurRegion (widget));
   if (region.isEmpty())
     clear (widget);
   else
   {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
     KWindowEffects::enableBlurBehind (widget->internalWinId(), true, region);
+#else
+    KWindowEffects::enableBlurBehind (widget->windowHandle(), true, region);
+#endif
     /*NOTE: The contrast effect isn't used with menus and tooltips
             because their borders may be anti-aliased. */
     if ((contrast_ != static_cast<qreal>(1)
@@ -158,9 +167,15 @@ void BlurHelper::update (QWidget* widget) const
         && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
             && !qobject_cast<QFrame*>(widget)))
     {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), true,
                                                 contrast_, intensity_, saturation_,
                                                 region);
+#else
+      KWindowEffects::enableBackgroundContrast (widget->windowHandle(), true,
+                                                contrast_, intensity_, saturation_,
+                                                region);
+#endif
     }
   }
   // force update
@@ -170,10 +185,16 @@ void BlurHelper::update (QWidget* widget) const
 /*************************/
 void BlurHelper::clear (QWidget* widget) const
 {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
   // WARNING never use winId()
   if (widget->internalWinId())
   {
     KWindowEffects::enableBlurBehind (widget->internalWinId(), false);
+#else
+  if (widget->windowHandle() != nullptr)
+  {
+    KWindowEffects::enableBlurBehind (widget->windowHandle(), false);
+#endif
     if ((contrast_ != static_cast<qreal>(1)
          || intensity_ != static_cast<qreal>(1)
          || saturation_ != static_cast<qreal>(1))
@@ -182,7 +203,11 @@ void BlurHelper::clear (QWidget* widget) const
         && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
             && !qobject_cast<QFrame*>(widget)))
     {
+#if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), false);
+#else
+      KWindowEffects::enableBackgroundContrast (widget->windowHandle(), false);
+#endif
     }
   }
 }

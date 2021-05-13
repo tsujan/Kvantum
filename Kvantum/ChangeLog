@@ -17,6 +17,8 @@ V0.20.0
  * More precise calculations for finding the widest spinbox text.
  * Don't consider the tab overlap in drawing the tabbar frame (as with the tab widget frame).
  * Allowed toolbar_separator_thickness to be set to a value less than toolbar indicator size, without changing its default value (the maximum of toolbar indicator size and 4). The minimum value is 2.
+ * Fixed drawing of view-items with right-aligned decorations.
+ * Used version check for KWindowSystem because of method deprecations.
 
 V0.19.0
 ---------

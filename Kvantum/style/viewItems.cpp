@@ -116,9 +116,8 @@ QSize Style::viewItemSize(const QStyleOptionViewItem *option, int role) const
     }
     break;
   case Qt::DecorationRole:
-    if (option->features & QStyleOptionViewItem::HasDecoration) {
+    if (option->features & QStyleOptionViewItem::HasDecoration)
       return option->decorationSize;
-    }
     break;
   default:
       break;
@@ -480,21 +479,21 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       {
         if (sizehint)
         {
-          decoration.setRect(x + w - cw - pixmapMargin - pm.width(),
+          decoration.setRect(x + w - pixmapMargin - pm.width(),
                              y,
-                             pm.width() + (hasCheck ? 0 : pixmapMargin),
+                             pm.width() + pixmapMargin,
                              h);
-          display.setRect(x,
+          display.setRect(x + textMargin + cw,
                           y,
                           w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                           h);
         }
         else
         {
-          decoration.setRect(x+w-pixmapMargin-cw-pm.width(), y, pm.width(), h);
+          decoration.setRect(x+w-pixmapMargin-pm.width(), y, pm.width(), h);
           if (emptyText)
           {
-            display.setRect(x,
+            display.setRect(x + (hasCheck ? frameHMargin + cw : 0),
                             y,
                             w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
@@ -505,24 +504,24 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
               || (opt->displayAlignment & Qt::AlignJustify)
               || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
           {
-            display.setRect(x + frameHMargin,
+            display.setRect(x + textMargin + cw,
                             y,
                             w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else if (opt->displayAlignment & Qt::AlignRight)
           {
-            display.setRect(x,
+            display.setRect(x + checkMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
+                              - (hasPixmap || hasCheck ? frameHMargin : 0),
                             h);
           }
           else
           {
-            display.setRect(x + frameHMargin,
+            display.setRect(x + textMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
         }
@@ -531,22 +530,22 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
       {
         if (sizehint)
         {
-          decoration.setRect(x + cw + checkMargin,
+          decoration.setRect(x,
                              y,
-                             pm.width() + (hasCheck ? 0 : pixmapMargin),
+                             pm.width() + pixmapMargin,
                              h);
-          display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+          display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
                           y,
                           w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                           h);
         }
         else
         {
-          decoration.setRect(x+pixmapMargin+cw, y, pm.width(), h);
+          decoration.setRect(x+pixmapMargin, y, pm.width(), h);
           if (emptyText)
           {
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing
-                                      : x + (hasCheck ? frameHMargin + cw : 0),
+                                      : x,
                             y,
                             w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
@@ -557,21 +556,21 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
               || (opt->displayAlignment & Qt::AlignJustify)
               || textRect->width() <= w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw)
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
                             y,
                             w - pm.width() - 2*frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else if (opt->displayAlignment & Qt::AlignRight)
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
                             h);
           }
           else
           {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + checkMargin + cw,
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
