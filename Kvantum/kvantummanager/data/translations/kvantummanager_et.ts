@@ -1094,7 +1094,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
         <source>Tree branch lines</source>
-        <translation></translation>
+        <translation>Puuharude jooned</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1595"/>
@@ -1145,7 +1145,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Group toolbar buttons</source>
-        <translation></translation>
+        <translation>Rühmita tööriistariba nupud</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1732"/>
@@ -1160,17 +1160,17 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1836"/>
         <source>Toolbutton style:</source>
-        <translation></translation>
+        <translation>Tööriistariba stiil:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1749"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation></translation>
+        <translation>Kui see valik pole kasutusel, siis kiirklahvid pole allajoonitud.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1752"/>
         <source>Underline shortcuts with Alt</source>
-        <translation></translation>
+        <translation>Lisa kiirklahvidele alakriips</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1616"/>
@@ -1624,7 +1624,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2739"/>
         <source>Restored the root default settings of %1</source>
-        <translation></translation>
+        <translation>Taastasime %1 teema vaikeväärtused</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2740"/>
@@ -1645,7 +1645,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2897"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation></translation>
+        <translation>Tööriist, millega saad paigaldada, valida&lt;br&gt;ja hallata &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;-teemasid</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2898"/>
