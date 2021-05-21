@@ -143,7 +143,8 @@ void BlurHelper::update (QWidget* widget) const
   if (!(widget->testAttribute (Qt::WA_WState_Created) || widget->internalWinId()))
     return;
 #else
-  if (widget->windowHandle() == nullptr)
+  QWindow *win = widget->windowHandle();
+  if (win == nullptr)
     return;
 #endif
 
@@ -155,7 +156,7 @@ void BlurHelper::update (QWidget* widget) const
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
     KWindowEffects::enableBlurBehind (widget->internalWinId(), true, region);
 #else
-    KWindowEffects::enableBlurBehind (widget->windowHandle(), true, region);
+    KWindowEffects::enableBlurBehind (win, true, region);
 #endif
     /*NOTE: The contrast effect isn't used with menus and tooltips
             because their borders may be anti-aliased. */
@@ -172,7 +173,7 @@ void BlurHelper::update (QWidget* widget) const
                                                 contrast_, intensity_, saturation_,
                                                 region);
 #else
-      KWindowEffects::enableBackgroundContrast (widget->windowHandle(), true,
+      KWindowEffects::enableBackgroundContrast (win, true,
                                                 contrast_, intensity_, saturation_,
                                                 region);
 #endif
@@ -191,9 +192,10 @@ void BlurHelper::clear (QWidget* widget) const
   {
     KWindowEffects::enableBlurBehind (widget->internalWinId(), false);
 #else
-  if (widget->windowHandle() != nullptr)
+  QWindow *win = widget->windowHandle();
+  if (win != nullptr)
   {
-    KWindowEffects::enableBlurBehind (widget->windowHandle(), false);
+    KWindowEffects::enableBlurBehind (win, false);
 #endif
     if ((contrast_ != static_cast<qreal>(1)
          || intensity_ != static_cast<qreal>(1)
@@ -206,7 +208,7 @@ void BlurHelper::clear (QWidget* widget) const
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
       KWindowEffects::enableBackgroundContrast (widget->internalWinId(), false);
 #else
-      KWindowEffects::enableBackgroundContrast (widget->windowHandle(), false);
+      KWindowEffects::enableBackgroundContrast (win, false);
 #endif
     }
   }

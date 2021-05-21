@@ -370,7 +370,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
     case QStyleOptionViewItem::Left: {
       /* let the text use the right margin only if it's left aligned and there is no space */
       if (opt->direction == Qt::LeftToRight)
-      {
+      { // checkbox-icon-text
         if (sizehint)
         {
           decoration.setRect(x + cw + checkMargin,
@@ -388,7 +388,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           if (emptyText)
           { // give both margins to the display rectangle because it can be used by a widget
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing
-                                      : x + (hasCheck ? frameHMargin + cw : 0),
+                                      : x + checkMargin + cw,
                             y,
                             w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
                               - (hasPixmap || hasCheck ? frameHMargin : 0),
@@ -422,7 +422,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
         }
       }
       else
-      {
+      { // text-icon-checkbox
         if (sizehint)
         {
           decoration.setRect(x + w - cw - pixmapMargin - pm.width(),
@@ -456,7 +456,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                             h);
           }
           else if (opt->displayAlignment & Qt::AlignRight)
-          {
+          { // really left aligned
             display.setRect(x + frameHMargin,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
@@ -464,7 +464,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                             h);
           }
           else
-          {
+          { // really right aligned
             display.setRect(x,
                             y,
                             w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
@@ -476,7 +476,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
     }
     case QStyleOptionViewItem::Right: {
       if (opt->direction == Qt::LeftToRight)
-      {
+      { // checkbox-text-icon
         if (sizehint)
         {
           decoration.setRect(x + w - pixmapMargin - pm.width(),
@@ -493,10 +493,10 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           decoration.setRect(x+w-pixmapMargin-pm.width(), y, pm.width(), h);
           if (emptyText)
           {
-            display.setRect(x + (hasCheck ? frameHMargin + cw : 0),
+            display.setRect(x + checkMargin + cw,
                             y,
-                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - (hasPixmap ? textIconSpacing + frameHMargin : 0)
+                              - cw - checkMargin,
                             h);
             break;
           }
@@ -513,21 +513,21 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
           {
             display.setRect(x + checkMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0)
+                              - cw - checkMargin,
                             h);
           }
           else
           {
             display.setRect(x + textMargin + cw,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing + frameHMargin : 0) - cw,
                             h);
           }
         }
       }
       else
-      {
+      { // icon-text-checkbox
         if (sizehint)
         {
           decoration.setRect(x,
@@ -547,8 +547,8 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing
                                       : x,
                             y,
-                            w - pm.width() - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - (hasPixmap ? textIconSpacing + frameHMargin : 0)
+                              - cw - checkMargin,
                             h);
             break;
           }
@@ -562,18 +562,18 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                             h);
           }
           else if (opt->displayAlignment & Qt::AlignRight)
-          {
+          { // really left aligned
             display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw,
+                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0)
+                              - cw - checkMargin,
                             h);
           }
           else
-          {
-            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x + textMargin,
+          { // really right aligned
+            display.setRect(hasPixmap ? decoration.right() + 1 + textIconSpacing : x,
                             y,
-                            w - pm.width() - frameHMargin - (hasPixmap ? textIconSpacing : 0) - cw
-                              - (hasPixmap || hasCheck ? frameHMargin : 0),
+                            w - pm.width() - (hasPixmap ? textIconSpacing + frameHMargin : 0) - frameHMargin - cw,
                             h);
           }
         }
