@@ -85,8 +85,8 @@ the theme is already used.</source>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>이 테마의
-기본(루트)  설정으로 되돌리기.
+        <translation>이 테마의 기본(루트)
+설정으로 돌아갑니다.
 (Ctrl+Z)</translation>
     </message>
     <message>
@@ -368,12 +368,14 @@ Miscellaneous → Respect current DE if possible</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본적으로 세로 도구모음은 스타일이 없습니다.
+
+이 옵션을 사용하지 않는 경우, 위의 옵션을 참조하십시오.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>스타일 세로 도구모음</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -635,7 +637,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1293"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>글꼴 크기</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1309"/>
@@ -970,7 +972,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation type="unfinished">스크롤바에는 기본적으로 추가 줄 및 하위 줄 화살표가 있습니다.
+
+이 상자를 선택하면 화살표가 최대한 제거됩니다.
+
+비활성화된 경우, Compositing &amp; General Look → Transient scrollbars! 를 참조하십시오</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1623"/>
@@ -1009,7 +1015,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation type="unfinished">메뉴 모음, 기본 도구 모음 또는 가능한 곳(제목 표시줄뿐
+아니라)에서 창을 끌어다 놓으시겠습니까?
+
+이 기능이 비활성화된 경우 다음을 참조하십시오:
+기타 → Respect current DE if possible</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1830"/>
@@ -1345,12 +1355,16 @@ This option will hide these.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>경고: 이것은 처음에는 매우 혼란스러울 수 있습니다.
+
+이 기능을 활성화한 경우, 버튼을 누르기 전에 
+Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해 
+일시적으로 비활성화할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1964"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>버튼에서 드래그 허용</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1987"/>
@@ -1614,12 +1628,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="604"/>
         <source>You have selected an installed theme folder.</source>
-        <translation>You have selected an installed theme folder.</translation>
+        <translation>설치된 테마 폴더를 선택했습니다.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="605"/>
         <source>Please choose another directory!</source>
-        <translation>Please choose another directory!</translation>
+        <translation>다른 디렉토리를 선택하십시오!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="615"/>
@@ -1681,7 +1695,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2190"/>
         <source>A copy of the root config is created.</source>
-        <translation>A copy of the root config is created.</translation>
+        <translation>루트 구성의 사본이 생성됩니다.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2201"/>
