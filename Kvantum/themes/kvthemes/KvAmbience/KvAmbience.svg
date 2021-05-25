@@ -322,26 +322,26 @@
 <path style="opacity:0;fill:#fff" d="m 109,204 v -24 h 24 v 24 z"/>
 <path d="m 109,199.493 12,-14.986 12,14.986 c 0,0 -7,-3.18601 -12,-3.18601 -5,0 -12,3.18601 -12,3.18601 z "/>
 </g>
-<g style="fill:#3daee9;fill-rule:evenodd" id="group-normal-left" transform="matrix(0.66666667,0,0,1,318.33333,-344.5)">
-<path style="fill-opacity:0" d="m -106,-1148.5 h 6 v 30 h -6 z" transform="scale(-1)"/>
-<path style="opacity:.3;fill:#000" d="m 101.5,1118.5 h 1.5 v 30 h -1.5 z"/>
+<g id="group-normal-left">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 389,804 h -4 v -30 h 4 z"/>
+<path style="opacity:.3;fill-rule:evenodd" d="m 386,774 h 1 v 30 h -1 z"/>
 </g>
-<g style="fill:#3daee9" id="group-normal-topleft" transform="matrix(0.66666667,0,0,0.66666667,318.33333,28.33339)">
-<rect width="6" x="-106" y="-1118.5" height="6" style="fill-rule:evenodd;fill-opacity:0" transform="scale(-1)"/>
-<path style="opacity:.3;fill:#000" d="m 106,1114 c -2.625,0 -4.5,1.875 -4.5,4.5 h 1.5 c 0,-1.8751 1.125,-3 3,-3 z"/>
+<g id="group-normal-topleft">
+<rect width="4" x="-389" y="-774" height="4" style="fill-rule:evenodd;fill-opacity:0" transform="scale(-1)"/>
+<path style="opacity:.3" d="m 389,771 c -1.75,0 -3,1.25 -3,3 h 1 c 0,-1.25 0.75,-2 2,-2 z"/>
 </g>
 <circle cx="80" cy="835" style="fill:url(#radialGradient5079);fill-rule:evenodd" r="5" id="dial-handle"/>
 <path style="fill:url(#linearGradient5948);fill-rule:evenodd" id="slider-toggled-topleft" d="m 77,590 c -6.648,0 -12,5.352 -12,12 h 12 v -12 z "/>
 <path style="fill:url(#linearGradient5248);fill-rule:evenodd" id="slider-toggled-left" d="m 65,602 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
-<g id="common-normal-left" transform="matrix(1.3333333,0,0,1,-271,-302)">
-<rect width="3" x="270" y="1170" height="30" style="fill:#aaa"/>
-<path style="fill:#fafafa" d="m 271.5,1170 v 30 h 1.5 v -30 z"/>
-<path style="fill:#e6e5e4;fill-rule:evenodd" d="m 270,1170 v 30 h 0.75001 v -30 z"/>
+<g id="common-normal-left">
+<rect width="4" x="89" y="868" height="30" style="fill:#aaa"/>
+<path style="fill:#fafafa" d="m 91,868 v 30 h 2 v -30 z"/>
+<path style="fill:#e6e5e4;fill-rule:evenodd" d="m 89,868 v 30 h 1 v -30 z"/>
 </g>
-<g id="common-normal-topleft" transform="matrix(1.3333333,0,0,1.3333333,-271,-692)">
-<path style="fill:#aaa" d="M 270.75,1167.75 H 273 v 2.25 h -2.25 z"/>
-<path style="fill:#fafafa" d="m 273,1168.5 c -1.03823,0 -1.5,0.4484 -1.5,1.5 h 1.5 z"/>
-<path style="fill:#e6e5e4" d="m 273,1167 c -2.04063,0 -3,0.966 -3,3 h 0.75001 c 0,-1.5 0.75,-2.25 2.25,-2.25 z"/>
+<g id="common-normal-topleft">
+<path style="fill:#aaa" d="m 90,865 h 3 v 3 h -3 z"/>
+<path style="fill:#fafafa" d="m 93,866 c -1.38431,0 -2,0.59787 -2,2 h 2 z "/>
+<path style="fill:#e6e5e4" d="m 93,864 c -2.72084,0 -4,1.288 -4,4 h 1 c 0,-2 1,-3 3,-3 z"/>
 </g>
 <path style="fill:url(#linearGradient5952);fill-rule:evenodd" id="slider-toggled-topright" d="m 77,590 c 6.648,0 12,5.352 12,12 h -12 v -12 z "/>
 <path style="fill:url(#linearGradient5244);fill-rule:evenodd" id="slider-toggled-right" d="m 77,602 0,16.4063 0,.094 12,0 0,-16.5 -12,0 z "/>
@@ -606,13 +606,13 @@
 <use width="100%" height="100%" id="progress-pattern-normal-right" xlink:href="#progress-pattern-normal-left" transform="matrix(-1,0,0,1,77.5,0)"/>
 <use width="100%" height="100%" id="progress-pattern-normal-topright" xlink:href="#progress-pattern-normal-topleft" transform="matrix(-1,0,0,1,77.5,0)"/>
 <use width="100%" height="100%" id="progress-pattern-normal-bottomright" xlink:href="#progress-pattern-normal-bottomleft" transform="matrix(-1,0,0,1,77.5,0)"/>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-topleft" transform="translate(72,-274)">
-<path style="fill:#969696;fill-opacity:0" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 z"/>
-<path style="opacity:.6;fill:#787878" d="m 155,1092.5 c -4,0.011 -4,2.7501 -4,8.4998 h 4 z"/>
+<g id="scrollbarslider-normal-topleft">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 227,815 c -6.648,0 -12,5.3521 -12,12 h 12 z"/>
+<path style="opacity:.6;fill:#787878;fill-rule:evenodd" d="m 227,816.5 c -2.25,0 -4,1.75 -4,4 v 6.5 h 4 z"/>
 </g>
-<g style="fill-rule:evenodd" id="scrollbarslider-normal-left" transform="translate(72,-274)">
-<path style="fill:#969696;fill-opacity:0" d="m 143,1101 v 16.4064 0.094 h 12 v -16.5 h -12 z"/>
-<path style="opacity:.6;fill:#787878" d="m 151,1101 v 16.5 h 4 v -16.5 z"/>
+<g id="scrollbarslider-normal-left">
+<path style="fill-rule:evenodd;fill-opacity:0" d="m 215,827 v 16.4064 0.094 h 12 v -16.5 h -12 z"/>
+<path style="opacity:.6;fill:#787878;fill-rule:evenodd" d="m 223,827 v 16.5 h 4 V 827 Z"/>
 </g>
 <use width="450" height="1230" xlink:href="#scrollbarslider-normal-left" id="scrollbarslider-normal-right" transform="matrix(-1,0,0,1,454,0)"/>
 <use width="450" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,454,0)"/>
