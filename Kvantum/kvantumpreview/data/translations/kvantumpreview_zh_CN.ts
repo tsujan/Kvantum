@@ -430,22 +430,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
         <source>Row 0</source>
-        <translation>Row 0</translation>
+        <translation>第0行</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2507"/>
         <source>Row 1</source>
-        <translation>Row 1</translation>
+        <translation>第1行</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2512"/>
         <source>Column 0</source>
-        <translation>Column 0</translation>
+        <translation>第0列</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Column 1</source>
-        <translation>Column 1</translation>
+        <translation>第1列</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
@@ -493,7 +493,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2476"/>
         <location filename="../../KvantumPreviewBase.ui" line="2568"/>
         <source>GroupBox</source>
-        <translation>GroupBox</translation>
+        <translation>分组框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2355"/>
@@ -625,12 +625,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
         <source>Toggle Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>更改布局</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>Toggle layout direction</source>
-        <translation type="unfinished"></translation>
+        <translation>改变布局方向</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
@@ -645,7 +645,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>菜单按钮</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
@@ -655,17 +655,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>
         <source>C&amp;heckbox</source>
-        <translation type="unfinished"></translation>
+        <translation>复选框(&amp;H)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3020"/>
         <source>&amp;Radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>单选按钮(&amp;R)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3028"/>
         <source>Radio &amp;button</source>
-        <translation type="unfinished"></translation>
+        <translation>单选按钮(&amp;B)</translation>
     </message>
 </context>
 </TS>
