@@ -972,11 +972,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished">스크롤바에는 기본적으로 추가 줄 및 하위 줄 화살표가 있습니다.
+        <translation>스크롤바에는 기본적으로 추가 줄 및 하위 줄 화살표가 있습니다.
 
 이 상자를 선택하면 화살표가 최대한 제거됩니다.
 
-비활성화된 경우, Compositing &amp; General Look → Transient scrollbars! 를 참조하십시오</translation>
+비활성화된 경우, 참조: 합성 &amp; 일반 모습 → 일시적인 스크롤바!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1623"/>
@@ -1015,11 +1015,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished">메뉴 모음, 기본 도구 모음 또는 가능한 곳(제목 표시줄뿐
+        <translation>메뉴 모음, 기본 도구 모음 또는 가능한 곳(제목 표시줄뿐
 아니라)에서 창을 끌어다 놓으시겠습니까?
 
-이 기능이 비활성화된 경우 다음을 참조하십시오:
-기타 → Respect current DE if possible</translation>
+이 기능이 비활성화된 경우, 다음 참조:
+기타 → 가능한 경우 현재 DE 존중</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1830"/>
