@@ -14,7 +14,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation>Správce Kvantum</translation>
+        <translation>Kvantum Manager</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
@@ -37,7 +37,8 @@ motiv Kvantum</translation>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknutím na toto tlačítko přidáte motiv do seznamu, který
+může Kvantum použít.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -52,7 +53,7 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Zvolte nainstalovaný motiv</translation>
+        <translation>Zvolte nainstalovaný motiv:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
@@ -65,7 +66,7 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
@@ -82,7 +83,7 @@ the theme is already used.</source>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
@@ -125,7 +126,7 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
@@ -140,7 +141,7 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="716"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -149,7 +150,7 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="452"/>
@@ -168,7 +169,7 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
@@ -193,12 +194,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="529"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -209,12 +210,12 @@ with LXQt Session Settings.</source>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
@@ -225,12 +226,12 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -267,7 +268,7 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="680"/>
         <location filename="../../kvantummanager.ui" line="695"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
@@ -288,7 +289,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="731"/>
@@ -403,7 +404,7 @@ vážně zasahovat do jiných úloh.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="668"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="723"/>
@@ -521,7 +522,7 @@ needed for this key to work.</source>
         <location filename="../../kvantummanager.ui" line="1089"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1093"/>
@@ -593,14 +594,14 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1293"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1309"/>
         <location filename="../../kvantummanager.ui" line="1320"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1313"/>
@@ -647,12 +648,12 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1784"/>
         <location filename="../../kvantummanager.ui" line="1794"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Jak aktivujete viditelné prvky?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1907"/>
@@ -762,14 +763,14 @@ Hard-coded icons/styles may not respect this key.</source>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1064"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Potřebujete rozmazaný efekt od KDE.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1142"/>
@@ -828,7 +829,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1424"/>
         <location filename="../../kvantummanager.ui" line="1437"/>
         <source>The minimum length of scrollbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimální šírka scrollbárů</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1427"/>
@@ -854,7 +855,7 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1770"/>
@@ -863,7 +864,7 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1623"/>
@@ -872,7 +873,7 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1678"/>
@@ -934,7 +935,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1944"/>
@@ -987,7 +988,7 @@ while 0 means no delay.</source>
         <location filename="../../kvantummanager.ui" line="1516"/>
         <location filename="../../kvantummanager.ui" line="1539"/>
         <source> ms</source>
-        <translation></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1572"/>
@@ -1006,7 +1007,7 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1879"/>
@@ -1077,7 +1078,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1926"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přetáhnout z:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1836"/>
@@ -1087,7 +1088,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1749"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1752"/>
@@ -1113,7 +1114,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1671"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravitelná kombinace jako editace řádku</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1643"/>
@@ -1127,7 +1128,7 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1588"/>
@@ -1137,23 +1138,23 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1694"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyskakovací okno nabídky</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1742"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Karty zarovnané vlevo</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1759"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1763"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojte aktivní karty.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1950"/>
@@ -1177,7 +1178,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1719"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezaškrtnutelná kombinovaná nabídka</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1957"/>
@@ -1201,7 +1202,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1993"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Zde můžete přiřadit motiv konkrétním aplikacím.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Pro každý motiv můřete přidat čárkou oddělený seznam spustitelných souborů, jejichž aplikace by měly použít jiný motiv, místo motivu Kvantum. Poté, co tak učiníte pro všechna zvolená témata, uložte výsledek klepnutím na tlačítko &lt;i&gt;Uložit&lt;/i&gt;!&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;Zde můžete přiřadit motiv konkrétním aplikacím.&lt;/b&gt;&lt;/center&gt;&lt;br&gt;&lt;center&gt;Pro každý motiv můřete přidat čárkou oddělený seznam spustitelných souborů, jejichž aplikace by měly použít jiný motiv, místo motivu Kvantum. Poté, co tak učiníte pro všechna zvolená témata, uložte výsledek klepnutím na tlačítko &lt;i&gt;Uložit&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2028"/>
@@ -1237,7 +1238,7 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2138"/>
         <location filename="../../kvantummanager.ui" line="2144"/>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2141"/>
@@ -1248,7 +1249,7 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2154"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Podívejte se, jak vypadá váš zvolený motiv Kvantum.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2158"/>
@@ -1278,7 +1279,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="319"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřete umíštění pro motiv Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="196"/>
@@ -1292,7 +1293,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="650"/>
         <location filename="../../KvantumManager.cpp" line="666"/>
         <source>Kvantum</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="590"/>
@@ -1304,17 +1305,17 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="768"/>
         <location filename="../../KvantumManager.cpp" line="2700"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrzení</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="729"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 nainstalován.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="899"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 byl odstraněn.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="953"/>
@@ -1336,22 +1337,22 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="107"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojité kliknutí</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Jenom ikony</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Jenom Text</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="112"/>
@@ -1557,7 +1558,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2899"/>
         <location filename="../../KvantumManager.cpp" line="2900"/>
         <source>About Kvantum Manager</source>
-        <translation>O Kvantum Manager</translation>
+        <translation>O Programu</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2899"/>
@@ -1567,12 +1568,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2897"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Nástroj pro instalci &lt;br&gt;a úpravu motivů &lt;a&gt; href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
+        <translation>Nástroj pro instalci &lt;br&gt;a úpravu motivů &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2898"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation>Autorem je &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (resp. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
+        <translation>Autorem je &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="48"/>
@@ -1582,12 +1583,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="49"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>vývhozí</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="519"/>
         <source>This directory cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto umíštění nelze odstranit</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="526"/>
@@ -1599,7 +1600,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2133"/>
         <location filename="../../KvantumManager.cpp" line="2599"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Akltivní motiv:</translation>
     </message>
 </context>
 <context>
