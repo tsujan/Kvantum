@@ -370,12 +370,14 @@ Jei tai yra išjungta, žiūrėkite:
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagal numatymą, vertikalios įrankių juostos nėra stilizuojamos.
+
+Jei tai išjungta, žiūrėkite aukštesnę parinktį.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Stilizuoti vertikalias įrankių juostas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -394,12 +396,14 @@ labiau horizontaliai centruotas.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Galite matyti erzinančias liekanas, kurias sukelia klaidos,
+esančios Qt nesveikųjų skaičių mastelio keitimo apdorojime
+su lango dalinio permatomumu ar gradientu.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="598"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Išjungti dalinį permatomumą, naudojantį nesveikųjų skaičių mastelio keitimą</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
@@ -440,11 +444,11 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation>Įsigalioja tik tuomet, kai pagrindinis meniu nėra stilizuojamas LXQt.
+        <translation>Įsigalioja tik tuomet, kai pagrindinis meniu NĖRA stilizuojamas LXQt.
 
 Reikšmės mažesnės nei 16, reiškia numatytąjį meniu piktogramos dydį.
 
-Reikalauja, kad LXQt skydelis būtų paleistas iš naujo per &quot;Seanso nustatymus&quot;
+Reikalauja, kad LXQt skydelis būtų paleistas iš naujo per „Seanso nustatymus“
 arba atsijungiant ir vėl prisijungiant.</translation>
     </message>
     <message>
@@ -637,7 +641,7 @@ langais, jei šia apipavidalinimas juos atskiria?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1293"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Šrifto dydis</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1309"/>
@@ -1006,7 +1010,7 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Vilkti langus spustelėjus ant meniu juostų, pavadinimo juostų, pirminių
+        <translation>Tempti langus spustelėjus ant meniu juostų, pavadinimo juostų, pirminių
 įrankių juostų ar bet kur, kur įmanoma (ne tik ant jų pavadinimo juostų)?
 
 Jeigu tai išjungta, žiūrėkite:
@@ -1230,7 +1234,7 @@ tarp įrankių juostos skirtukų.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1926"/>
         <source>Drag from:</source>
-        <translation>Vilkti spustelėjus ant:</translation>
+        <translation>Tempti spustelėjus ant:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1836"/>
@@ -1362,12 +1366,15 @@ jie gali atrodyti kaip stačiakampiai su taškeliais.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Įspėjimas: Iš pradžių, tai gali atrodyti sudėtinga.
+
+Jeigu tai įjungėte, galite laikinai tai išjungti mygtukui,
+už kurio bus tempiama, paspaudę Ctrl klavišą prieš paspausdami tą mygtuką.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1964"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Leisti tempti už mygtukus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1987"/>
