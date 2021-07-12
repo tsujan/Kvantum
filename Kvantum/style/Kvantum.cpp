@@ -1767,7 +1767,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
     {
       QColor baseCol = lineedit->palette().color(QPalette::Base);
       if (baseCol != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base)
-          && baseCol.saturation() != 0)
+          && baseCol.saturation() > 10) // should have enough saturation
       {
         baseCol.setAlpha(255);
         QStyleOption o(*option);
@@ -3719,7 +3719,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         colored = !isPcmanfm_ && !insideSpinBox && group == "LineEdit"
                   && widget->palette().color(QPalette::Base)
                      != standardPalette().color(widget->palette().currentColorGroup(), QPalette::Base)
-                  && widget->palette().color(QPalette::Base).saturation() != 0;
+                  && widget->palette().color(QPalette::Base).saturation() > 10;
         if ((widget->testAttribute(Qt::WA_StyleSheetTarget)
              && !widget->styleSheet().isEmpty() && widget->styleSheet().contains(QLatin1String("padding")))
             || widget->minimumWidth() == widget->maximumWidth()
@@ -11168,7 +11168,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             bool colored(!isPcmanfm_ && editable && leGroup == "LineEdit"
                          && cb->lineEdit()->palette().color(QPalette::Base)
                             != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(), QPalette::Base)
-                         && cb->lineEdit()->palette().color(QPalette::Base).saturation() != 0);
+                         && cb->lineEdit()->palette().color(QPalette::Base).saturation() > 10);
 
             if (!opt->editable)
             { // when there isn't enough space (-> CE_ComboBoxLabel)

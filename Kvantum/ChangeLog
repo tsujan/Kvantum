@@ -1,6 +1,6 @@
 V0.20.1
 ---------
- * In the case of bad hard-coded styles, ignore non-base background colors of line-edits if they have no saturation.
+ * In the case of bad hard-coded styles, ignore non-base background colors of line-edits if their saturations are small enough.
 
 V0.20.0
 ---------
