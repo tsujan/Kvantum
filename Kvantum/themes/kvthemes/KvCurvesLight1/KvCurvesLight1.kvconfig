@@ -99,7 +99,7 @@ single_top_toolbar=false
 tint_on_mouseover=0
 transparent_pcmanfm_view=true
 middle_click_scroll=false
-no_selection_tint=false
+no_selection_tint=true
 
 [PanelButtonCommand]
 frame=true

@@ -1,3 +1,7 @@
+V0.20.1
+---------
+ * In the case of bad hard-coded styles, ignore non-base background colors of line-edits if they have no saturation.
+
 V0.20.0
 ---------
  * Dropped the support for Qt5 < 5.12.
