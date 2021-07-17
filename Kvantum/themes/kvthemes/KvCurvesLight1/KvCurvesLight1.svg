@@ -1146,15 +1146,15 @@
 <path style="opacity:.4" id="expand-button-focus-left" d="M 21.75,161 H 5.25 v 12 h 16.5 z"/>
 <path style="opacity:.4" id="expand-button-focus" d="m 38.25,161 h -16.5 v 12 h 16.5 z"/>
 <path style="opacity:.4" id="expand-button-focus-right" d="m 54.75,161 h -16.5 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus-topleft" d="m 331.5,96 c 0,-7 5,-12 12,-12 v 12 z"/>
-<path style="opacity:.37" id="expand-tab-focus-top" d="M 360,84 H 343.5 V 96 H 360 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottom" d="M 360,108 H 343.5 V 96 H 360 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-topright" d="m 372,96 v -6 c 0,-5 -1,-6 -6,-6 h -6 v 12 z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottomleft" d="m 331.5,96 v 6 c 0,5 1,6 6,6 h 6 V 96 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottomright" d="m 372,96 c 0,7 -5,12 -12,12 V 96 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-left" d="M 21.75,173 H 5.25 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus" d="m 38.25,173 h -16.5 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus-right" d="m 54.75,173 h -16.5 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus-topleft" d="m 331.5,96 c 0,-7 5,-12 12,-12 v 12 z"/>
+<path style="opacity:.3" id="expand-tab-focus-top" d="M 360,84 H 343.5 V 96 H 360 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottom" d="M 360,108 H 343.5 V 96 H 360 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-topright" d="m 372,96 v -6 c 0,-5 -1,-6 -6,-6 h -6 v 12 z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottomleft" d="m 331.5,96 v 6 c 0,5 1,6 6,6 h 6 V 96 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottomright" d="m 372,96 c 0,7 -5,12 -12,12 V 96 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-left" d="M 21.75,173 H 5.25 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus" d="m 38.25,173 h -16.5 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus-right" d="m 54.75,173 h -16.5 v 12 h 16.5 z"/>
 </g>
 <path style="opacity:0" id="border-button-focus-top" d="m 360,169 h -16.5 v 12 H 360 Z"/>
 <path style="opacity:0" id="border-tab-focus-top" d="m 360,112 h -16.5 v 12 H 360 Z"/>
