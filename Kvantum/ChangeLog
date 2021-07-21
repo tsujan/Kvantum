@@ -1,6 +1,7 @@
 V0.20.1
 ---------
  * In the case of bad hard-coded styles, ignore non-base background colors of line-edits if their saturations are small enough.
+ * Blacklisted QQuickWidget with window dragging.
 
 V0.20.0
 ---------
