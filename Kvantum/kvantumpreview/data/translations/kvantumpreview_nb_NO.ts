@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum-forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Trykk-knapper</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -370,7 +370,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation type="unfinished"></translation>
+        <translation>Beholdere</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
@@ -600,22 +600,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Avslutt</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2944"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avslutt</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2947"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Avkryssningsboks</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
@@ -640,7 +640,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyknapp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
