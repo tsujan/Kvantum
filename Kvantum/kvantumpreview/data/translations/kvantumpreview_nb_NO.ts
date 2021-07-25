@@ -590,12 +590,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Verktøylinje</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>Verktøylinje_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
@@ -620,7 +620,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
         <source>Toggle Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Veksle visning</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
@@ -630,7 +630,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
         <source>&amp;Doc Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Dokumentmodus</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>
