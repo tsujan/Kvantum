@@ -187,11 +187,13 @@ In case you use Compton as the X compositor (not recommended), be sure to disabl
 
 #### In Other DEs:
 
-In desktop environments that do not have a Qt5 configuration utility, you could try this command to run a Qt5 application APP:
+*NOTE: It is highly preferable that you install a Qt configuration utility (which provides a Qt plugin) and select Kvantum with it, instead of using the following methods directly.* Otherwise, there will be no guarantee that any style, other than Qt's default style, will work properly with all Qt applications.
+
+That being said, you could try this command to run a Qt application APP with Kvantum:
 
     APP -style kvantum
 
-To style all native Qt5 applications with Kvantum, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For example, you could add this line to your `~/.profile` or `~/.bashrc`:
+To style all native Qt applications with Kvantum, set the environment variable `QT_STYLE_OVERRIDE` to `kvantum`. For example, you could add this line to your `~/.profile` or `~/.bashrc`:
 
     export QT_STYLE_OVERRIDE=kvantum
 
@@ -199,7 +201,7 @@ Under GNOME and desktop environments that do not source `~/.profile`, you could 
 
     QT_STYLE_OVERRIDE=kvantum
 
-The last resort is `/etc/environment` but, most probably, you will not need to touch it.
+Touching `/etc/environment` is *not* recommended.
 
 ### Using other themes
 
@@ -229,7 +231,7 @@ Themes can also be packaged as deb, rpm, xz,... packages and installed as root:
 
 Please see [Theme-Making](doc/Theme-Making.pdf) for more information on theme installation paths and their priorities.
 
-The default Qt5 installation adds several root themes, that can be selected by using *Kvantum Manager*. Their corresponding KDE color schemes are also installed.
+The default Qt installation adds several root themes, that can be selected by using *Kvantum Manager*. Their corresponding KDE color schemes are also installed.
 
 ## GTK
 
