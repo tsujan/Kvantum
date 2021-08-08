@@ -375,7 +375,7 @@ If this is disabled, see the above option.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Стилизовать вертикальные полосы прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
