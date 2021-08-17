@@ -50,7 +50,7 @@
            <bool>true</bool>
           </property>
           <property name="textInteractionFlags">
-           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+           <set>Qt::LinksAccessibleByMouse</set>
           </property>
          </widget>
         </item>
@@ -233,7 +233,7 @@ the theme is already used.</string>
            <bool>true</bool>
           </property>
           <property name="textInteractionFlags">
-           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+           <set>Qt::LinksAccessibleByMouse</set>
           </property>
          </widget>
         </item>
@@ -266,7 +266,7 @@ the theme is already used.</string>
            <bool>true</bool>
           </property>
           <property name="textInteractionFlags">
-           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+           <set>Qt::LinksAccessibleByMouse</set>
           </property>
          </widget>
         </item>
@@ -1998,7 +1998,7 @@ the Ctrl key before pressing the button.</string>
            <bool>true</bool>
           </property>
           <property name="textInteractionFlags">
-           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+           <set>Qt::LinksAccessibleByMouse</set>
           </property>
          </widget>
         </item>
