@@ -100,22 +100,13 @@ else()
 endif()
 
 if(NOT ENABLE_QT4)
-  if((Qt5Widgets_VERSION GREATER 5.11.0) OR (Qt5Widgets_VERSION EQUAL 5.11.0))
-    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                  ${Qt5Gui_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Svg_LIBRARIES}
-                                  ${Qt5X11Extras_LIBRARIES}
-                                  ${X11_LIBRARIES}
-                                  KF5::WindowSystem)
-  else()
-    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                  ${Qt5Gui_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Svg_LIBRARIES}
-                                  ${Qt5X11Extras_LIBRARIES}
-                                  ${X11_LIBRARIES})
-  endif()
+  target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                ${Qt5Gui_LIBRARIES}
+                                ${Qt5Widgets_LIBRARIES}
+                                ${Qt5Svg_LIBRARIES}
+                                ${Qt5X11Extras_LIBRARIES}
+                                ${X11_LIBRARIES}
+                                KF5::WindowSystem)
 else()
   target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}
                                 ${QT_QTGUI_LIBRARY}
