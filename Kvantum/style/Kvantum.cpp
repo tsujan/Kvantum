@@ -301,6 +301,10 @@ Style::Style(bool useDark) : QCommonStyle()
         }
         else
           tspec_.small_icon_size = 16;
+        KDESettings.beginGroup(QStringLiteral("KDE"));
+        v = KDESettings.value(QStringLiteral("ScrollbarLeftClickNavigatesByPage"));
+        KDESettings.endGroup();
+        hspec_.middle_click_scroll = (!v.isValid() || v.toBool());
       }
     }
   }

@@ -1,6 +1,7 @@
 V0.20.2
 ---------
  * Allow opening of the user config file from Kvantum Manager.
+ * Respect KDE's scrollbar click behavior by default.
 
 V0.20.1
 ---------

@@ -617,7 +617,10 @@ as far as possible.</string>
                 <widget class="QCheckBox" name="checkBoxScrollJump">
                  <property name="toolTip">
                   <string>By default, the scroll slider jumps to a position
-when the scrollbar is left clicked.</string>
+when the scrollbar is left clicked.
+
+If this is disabled, see:
+Miscellaneous → Respect current DE if possible</string>
                  </property>
                  <property name="text">
                   <string>Scroll jump with middle click</string>

@@ -2817,6 +2817,7 @@ void KvantumManager::respectDE (bool checked)
         ui->spinSmall->setEnabled (!checked);
         ui->labelLarge->setEnabled (!checked);
         ui->spinLarge->setEnabled (!checked);
+        ui->checkBoxScrollJump->setEnabled (!checked);
     }
     else
     {
