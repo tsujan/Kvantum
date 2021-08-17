@@ -114,7 +114,7 @@ ayarlarına geri dönün.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
-        <location filename="../../kvantummanager.ui" line="2114"/>
+        <location filename="../../kvantummanager.ui" line="2113"/>
         <source>Save</source>
         <translation>Kaydet</translation>
     </message>
@@ -262,8 +262,8 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
         <location filename="../../kvantummanager.ui" line="698"/>
-        <location filename="../../kvantummanager.ui" line="1021"/>
-        <location filename="../../kvantummanager.ui" line="1054"/>
+        <location filename="../../kvantummanager.ui" line="1020"/>
+        <location filename="../../kvantummanager.ui" line="1053"/>
         <source> %</source>
         <translation> %</translation>
     </message>
@@ -317,15 +317,15 @@ boyut tutamaklarını mümkün olduğunca gösterin.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="746"/>
-        <location filename="../../kvantummanager.ui" line="1191"/>
-        <location filename="../../kvantummanager.ui" line="1229"/>
-        <location filename="../../kvantummanager.ui" line="1259"/>
-        <location filename="../../kvantummanager.ui" line="1296"/>
-        <location filename="../../kvantummanager.ui" line="1324"/>
-        <location filename="../../kvantummanager.ui" line="1350"/>
-        <location filename="../../kvantummanager.ui" line="1380"/>
-        <location filename="../../kvantummanager.ui" line="1408"/>
-        <location filename="../../kvantummanager.ui" line="1443"/>
+        <location filename="../../kvantummanager.ui" line="1190"/>
+        <location filename="../../kvantummanager.ui" line="1228"/>
+        <location filename="../../kvantummanager.ui" line="1258"/>
+        <location filename="../../kvantummanager.ui" line="1295"/>
+        <location filename="../../kvantummanager.ui" line="1323"/>
+        <location filename="../../kvantummanager.ui" line="1349"/>
+        <location filename="../../kvantummanager.ui" line="1379"/>
+        <location filename="../../kvantummanager.ui" line="1407"/>
+        <location filename="../../kvantummanager.ui" line="1442"/>
         <source> px</source>
         <translation> piksel</translation>
     </message>
@@ -335,14 +335,14 @@ boyut tutamaklarını mümkün olduğunca gösterin.</translation>
         <translation>Birleşiklik ve Genel Bakış</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="916"/>
+        <location filename="../../kvantummanager.ui" line="915"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
         <translation>Yalnızca pencereler için yarı saydam bir SVG arka planı olduğunda
 veya pencere matlığı azaldığında etkili olur (aşağıya bakın).</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="934"/>
+        <location filename="../../kvantummanager.ui" line="933"/>
         <source>Opaque apps:</source>
         <translation>Mat uygulamalar:</translation>
     </message>
@@ -461,42 +461,27 @@ açarak yeniden başlatılması gerekir.</translation>
         <translation>Kompozit efektleri devre dışı bırak</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="785"/>
-        <source>This needs the KDE contrast effect with Qt ≥ 5.11
-and is applied only to translucent windows that
-support the blur effect (but the KDE blur effect
-can be disabled).
-
-A value of 1.00 means no change.</source>
-        <translation>Bunun Qt ≥ 5.11 ile KDE karşıtlık efektine ihtiyacı vardır
-ve yalnızca bulanıklaştırma efektini destekleyen yarı saydam
-pencerelere uygulanır (ancak KDE bulanıklaştırma efekti
-devre dışı bırakılabilir).
-
-1.00 değeri değişiklik olmadığı anlamına gelir.</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="793"/>
+        <location filename="../../kvantummanager.ui" line="792"/>
         <source>Contrast Effect</source>
         <translation>Karşıtlık Efekti</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="799"/>
+        <location filename="../../kvantummanager.ui" line="798"/>
         <source>Saturation:</source>
         <translation>Doygunluk:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="806"/>
+        <location filename="../../kvantummanager.ui" line="805"/>
         <source>Intensity:</source>
         <translation>Yoğunluk:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="813"/>
+        <location filename="../../kvantummanager.ui" line="812"/>
         <source>Contrast:</source>
         <translation>Karşıtlık:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="890"/>
+        <location filename="../../kvantummanager.ui" line="889"/>
         <source>Needs KDE blur effect, a graphic card that supports it,
 and translucent menu/tooltip SVG elements.
 
@@ -507,12 +492,12 @@ ve yarı saydam menü/araç ipucu SVG öğeleri gerekir.
 Pencere bulanıklaştırmanın etkin olup olmadığını kendiliğinden denetler.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="896"/>
+        <location filename="../../kvantummanager.ui" line="895"/>
         <source>Blurring for menus and tooltips</source>
         <translation>Menüler ve araç ipuçları için bulanıklık</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="903"/>
+        <location filename="../../kvantummanager.ui" line="902"/>
         <source>Do not draw shadows for menus and tooltips.
 
 This may be useful under DEs that give
@@ -523,18 +508,18 @@ Bu, menülere ve araç ipuçlarına gölge veren
 masaüstü ortamları altında yararlı olabilir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="909"/>
+        <location filename="../../kvantummanager.ui" line="908"/>
         <source>Shadowless menus and tooltips</source>
         <translation>Gölgesiz menüler ve ipuçları</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="920"/>
+        <location filename="../../kvantummanager.ui" line="919"/>
         <source>Translucent windows</source>
         <translation>Yarı saydam pencereler</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="984"/>
-        <location filename="../../kvantummanager.ui" line="1014"/>
+        <location filename="../../kvantummanager.ui" line="983"/>
+        <location filename="../../kvantummanager.ui" line="1013"/>
         <source>This will reduce the window opacity
 if window translucency is enabled.
 
@@ -547,128 +532,128 @@ Bu anahtarın çalışması için yarı saydam bir
 SVG arka planı gerekli DEĞİLDİR.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="991"/>
+        <location filename="../../kvantummanager.ui" line="990"/>
         <source>Reduce window opacity by</source>
         <translation>Pencere matlığını azalt</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1031"/>
+        <location filename="../../kvantummanager.ui" line="1030"/>
         <source>Reduce menu opacity by</source>
         <translation>Menü matlığını azalt</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1069"/>
+        <location filename="../../kvantummanager.ui" line="1068"/>
         <source>Blurring for translucent windows</source>
         <translation>Yarı saydam pencereler için bulanıklaştırma</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1089"/>
+        <location filename="../../kvantummanager.ui" line="1088"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation>Bazı widget&apos;ların durumu çoğunlukla fare tarafından
 değiştirildiğinde 200 ms&apos;lik bir solma animasyonu.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1093"/>
+        <location filename="../../kvantummanager.ui" line="1092"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bazı widget&apos;ların durumu, çoğunlukla fare ile değiştirildiğinde 200 ms&apos;lik bir solma animasyonu.&lt;/p&gt;&lt;p&gt;CPU kullanımı göz ardı edilebilir, çünkü genellikle sadece bir widget animasyonludur. Ortaya çıkan görsel efekt etkin temaya bağlıdır.&lt;/p&gt;&lt;p&gt;Bu widget&apos;lar desteklenir: düğmeler (radyo düğmeleri ve onay kutuları dahil), açılır kutular, döndürme kutuları, kaydırma tutamaçları, satır düzenlemeleri ve kaydırma görünümleri.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1096"/>
+        <location filename="../../kvantummanager.ui" line="1095"/>
         <source>Animation for state change under mouse</source>
         <translation>Fare altında durum değişikliği için animasyon</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1103"/>
+        <location filename="../../kvantummanager.ui" line="1102"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation>Tüm pencere/iletişim kutusu döşeme desenlerini kaldırmak için bunu işaretleyin!
 Bu desenleri geri almak istiyorsanız işaretini kaldırın!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1107"/>
+        <location filename="../../kvantummanager.ui" line="1106"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation>Pencere/iletişim kutusu döşeme desenlerini kaldır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1114"/>
+        <location filename="../../kvantummanager.ui" line="1113"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Bu tema, aralarında ayrım yapıyorsa, etkin ve etkin olmayan
 pencerelerde aynı renkleri ve şekilleri kullansın mı?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1118"/>
+        <location filename="../../kvantummanager.ui" line="1117"/>
         <source>Ignore inactive state</source>
         <translation>Etkin olmayan durumu yoksay</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1132"/>
+        <location filename="../../kvantummanager.ui" line="1131"/>
         <source>Transient scrollbars</source>
         <translation>Geçici kaydırma çubukları</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1154"/>
+        <location filename="../../kvantummanager.ui" line="1153"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation>Boyutlar &amp;&amp; Gecikmeler</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1160"/>
+        <location filename="../../kvantummanager.ui" line="1159"/>
         <source>Sizes</source>
         <translation>Boyutlar</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1175"/>
+        <location filename="../../kvantummanager.ui" line="1174"/>
         <source>Small icon:</source>
         <translation>Küçük simge:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1213"/>
+        <location filename="../../kvantummanager.ui" line="1212"/>
         <source>Large icon:</source>
         <translation>Büyük simge:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1247"/>
+        <location filename="../../kvantummanager.ui" line="1246"/>
         <source>Button icon:</source>
         <translation>Düğme simgesi:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1279"/>
+        <location filename="../../kvantummanager.ui" line="1278"/>
         <source>Toolbar icon:</source>
         <translation>Araç çubuğu simgesi:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1293"/>
+        <location filename="../../kvantummanager.ui" line="1292"/>
         <source>Font size</source>
         <translation>Yazı Boyutu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1309"/>
-        <location filename="../../kvantummanager.ui" line="1320"/>
+        <location filename="../../kvantummanager.ui" line="1308"/>
+        <location filename="../../kvantummanager.ui" line="1319"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
         <translation>Varsayılan değer 2 pikseldir, ancak
 bazı uygulamalar bunu kendileri belirler.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1313"/>
+        <location filename="../../kvantummanager.ui" line="1312"/>
         <source>Layout spacing:</source>
         <translation>Düzen aralığı:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1337"/>
-        <location filename="../../kvantummanager.ui" line="1347"/>
+        <location filename="../../kvantummanager.ui" line="1336"/>
+        <location filename="../../kvantummanager.ui" line="1346"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation>Varsayılan değer 4 pikseldir, ancak bazı uygulamalar bunu kendileri belirler.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1340"/>
+        <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Layout margin:</source>
         <translation>Düzen kenar payı:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1363"/>
-        <location filename="../../kvantummanager.ui" line="1375"/>
+        <location filename="../../kvantummanager.ui" line="1362"/>
+        <location filename="../../kvantummanager.ui" line="1374"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
@@ -677,36 +662,36 @@ bazı uygulamalar bunu kendileri belirler.</translation>
 Varsayılan olarak 0&apos;dır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1368"/>
+        <location filename="../../kvantummanager.ui" line="1367"/>
         <source>Submenu overlap: </source>
         <translation>Alt menü örtüşmesi: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1393"/>
-        <location filename="../../kvantummanager.ui" line="1404"/>
+        <location filename="../../kvantummanager.ui" line="1392"/>
+        <location filename="../../kvantummanager.ui" line="1403"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation>Yatay döndürme düğmelerinin genişliği.
 (dönme göstergeleri dikey olduğunda etkisi yoktur.)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1397"/>
+        <location filename="../../kvantummanager.ui" line="1396"/>
         <source>Spin button width: </source>
         <translation>Döndürme düğmesi genişliği: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1784"/>
-        <location filename="../../kvantummanager.ui" line="1794"/>
+        <location filename="../../kvantummanager.ui" line="1783"/>
+        <location filename="../../kvantummanager.ui" line="1793"/>
         <source>How to activate view items?</source>
         <translation>Görüntüleme öğeleri nasıl etkinleştirilir?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1787"/>
+        <location filename="../../kvantummanager.ui" line="1786"/>
         <source>Click behavior:</source>
         <translation>Tıklama davranışı:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1907"/>
+        <location filename="../../kvantummanager.ui" line="1906"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -715,24 +700,24 @@ By default, tree branches have indicators but no line.</source>
 Varsayılan olarak, ağaç dallarının göstergeleri vardır ancak çizgileri yoktur.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1886"/>
+        <location filename="../../kvantummanager.ui" line="1885"/>
         <source>Dialog button layout:</source>
         <translation>İletişim kutusu düğmesi düzeni:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1896"/>
+        <location filename="../../kvantummanager.ui" line="1895"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation>Odaklanmış düğmeler ve diğer widget&apos;larda
 noktalı dikdörtgenler gibi görünebilirler.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1900"/>
+        <location filename="../../kvantummanager.ui" line="1899"/>
         <source>Remove focus rectangles</source>
         <translation>Odak dikdörtgenlerini kaldır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2096"/>
+        <location filename="../../kvantummanager.ui" line="2095"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -855,7 +840,7 @@ Kvantum davranışlarını mümkün olduğunca
 düzeltmeye çalışabilir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1064"/>
+        <location filename="../../kvantummanager.ui" line="1063"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
@@ -864,20 +849,20 @@ bir grafik kartı ve temada yarı saydam bir
 pencere SVG arka planı gerekir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1142"/>
+        <location filename="../../kvantummanager.ui" line="1141"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation>Geçici kaydırma çubuklarında
 gerektiğinde yarı saydam kanallar olmalı mı?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1146"/>
+        <location filename="../../kvantummanager.ui" line="1145"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation>Gerektiğinde geçici kaydırma çubuğu kanalları</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1166"/>
-        <location filename="../../kvantummanager.ui" line="1182"/>
+        <location filename="../../kvantummanager.ui" line="1165"/>
+        <location filename="../../kvantummanager.ui" line="1181"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -894,8 +879,8 @@ Bu devre dışı bırakılmışsa, bkz.
 Çeşitli → Mümkünse mevcut masaüstü ortamına uygun davran</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1204"/>
-        <location filename="../../kvantummanager.ui" line="1220"/>
+        <location filename="../../kvantummanager.ui" line="1203"/>
+        <location filename="../../kvantummanager.ui" line="1219"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -912,8 +897,8 @@ Bu devre dışı bırakılmışsa, bkz.
 Çeşitli → Mümkünse mevcut masaüstü ortamına uygun davran</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1242"/>
-        <location filename="../../kvantummanager.ui" line="1254"/>
+        <location filename="../../kvantummanager.ui" line="1241"/>
+        <location filename="../../kvantummanager.ui" line="1253"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
@@ -922,8 +907,8 @@ The default value is 16 px.</source>
 Varsayılan değer 16 pikseldir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1272"/>
-        <location filename="../../kvantummanager.ui" line="1286"/>
+        <location filename="../../kvantummanager.ui" line="1271"/>
+        <location filename="../../kvantummanager.ui" line="1285"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -936,30 +921,30 @@ bazı uygulamalar bunu kendileri belirler.
 KDE uygulamaları bunu KDE ayarından alır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1424"/>
-        <location filename="../../kvantummanager.ui" line="1437"/>
+        <location filename="../../kvantummanager.ui" line="1423"/>
+        <location filename="../../kvantummanager.ui" line="1436"/>
         <source>The minimum length of scrollbars.</source>
         <translation>Kaydırma çubuklarının en az uzunluğu.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1427"/>
-        <location filename="../../kvantummanager.ui" line="1440"/>
+        <location filename="../../kvantummanager.ui" line="1426"/>
+        <location filename="../../kvantummanager.ui" line="1439"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dikey kaydırma çubuklarının en az yüksekliği ve yatay kaydırma çubuklarının en az genişliği.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1430"/>
+        <location filename="../../kvantummanager.ui" line="1429"/>
         <source>Minimum scrollbar length: </source>
         <translation>En az kaydırma çubuğu uzunluğu: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1475"/>
+        <location filename="../../kvantummanager.ui" line="1474"/>
         <source>Delays</source>
         <translation>Gecikmeler</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1481"/>
-        <location filename="../../kvantummanager.ui" line="1509"/>
+        <location filename="../../kvantummanager.ui" line="1480"/>
+        <location filename="../../kvantummanager.ui" line="1508"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -972,7 +957,7 @@ Sıfır, araç ipuçlarının anında gösterilmesi anlamına gelir.
 -1, varsayılan Qt davranışı anlamına gelir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1770"/>
+        <location filename="../../kvantummanager.ui" line="1769"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -985,7 +970,7 @@ Bu kutunun işaretlenmesi okları olabildiğince kaldırır.
 Devre dışı bırakılmışsa, bkz. Birleşiklik ve Genel Bakış → Geçici kaydırma çubukları!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1623"/>
+        <location filename="../../kvantummanager.ui" line="1622"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -998,14 +983,14 @@ Bu seçenek, bırakma dikdörtgenlerini
 vurgu rengiyle doldurur.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1678"/>
+        <location filename="../../kvantummanager.ui" line="1677"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation>İşaretlenirse, menü çubuğu ve araç çubuğu, birbirlerine bitişik
 olduklarında araç çubuğu SVG öğesi tarafından bir bütün olarak çizilir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1726"/>
+        <location filename="../../kvantummanager.ui" line="1725"/>
         <source>Shift the contents of push buttons when pressed?
 
 By default, the contents are shifted by 1px
@@ -1015,8 +1000,8 @@ both horizontally and vertically.</source>
 Varsayılan olarak, içerik yatay ve dikey olarak 1 piksel kaydırılır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1919"/>
-        <location filename="../../kvantummanager.ui" line="1933"/>
+        <location filename="../../kvantummanager.ui" line="1918"/>
+        <location filename="../../kvantummanager.ui" line="1932"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -1029,8 +1014,8 @@ Bu devre dışı bırakılmışsa, bkz.
 Çeşitli → Mümkünse mevcut masaüstüne uygun davran</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1830"/>
-        <location filename="../../kvantummanager.ui" line="1849"/>
+        <location filename="../../kvantummanager.ui" line="1829"/>
+        <location filename="../../kvantummanager.ui" line="1848"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -1040,7 +1025,7 @@ Default is &quot;Follow Style&quot;.</source>
 Varsayılan &quot;Takip Tarzı&quot; dır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1609"/>
+        <location filename="../../kvantummanager.ui" line="1608"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -1053,7 +1038,7 @@ Bunu işaretlemek, döndürme göstergelerini
 döndürme çizgisi düzenlemesine entegre eder.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1637"/>
+        <location filename="../../kvantummanager.ui" line="1636"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -1064,7 +1049,7 @@ Bunu işaretlemek, yukarı döndürme göstergesini döndürme çizgisi düzenle
 içine aşağı döndürme&apos;nin üstüne getirir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1689"/>
+        <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
@@ -1073,29 +1058,18 @@ By default, combo popups do not cover the combo box.</source>
 Varsayılan olarak, birleşik açılır pencereler açılır kutuyu kapsamaz.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1739"/>
+        <location filename="../../kvantummanager.ui" line="1738"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation>Kvantum&apos;da, sekmeler varsayılan olarak ortalanır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1944"/>
-        <source>Should big menus be scrollable and have
-scroll arrows on their top and/or bottom?
-
-By default, all of their menu-items are shown.</source>
-        <translation>Büyük menüler kaydırılabilir mi ve üstlerinde
-ve/veya altlarında kaydırma okları olmalı mı?
-
-Varsayılan olarak, tüm menü öğeleri gösterilir.</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="1488"/>
+        <location filename="../../kvantummanager.ui" line="1487"/>
         <source>Tooltip delay:</source>
         <translation>İpucu gecikmesi:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="927"/>
-        <location filename="../../kvantummanager.ui" line="957"/>
+        <location filename="../../kvantummanager.ui" line="926"/>
+        <location filename="../../kvantummanager.ui" line="956"/>
         <source>A comma-separated list of executables,
 whose windows should not be translucent.
 
@@ -1108,7 +1082,7 @@ virgülle ayrılmış yürütülebilir dosyalar listesi.
 yarı saydamlık sorunları olabilir!)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1125"/>
+        <location filename="../../kvantummanager.ui" line="1124"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -1121,8 +1095,8 @@ kaydırma görünümlerinin üstünde görünür.
 Genellikle fazladan yer kaplamazlar.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1495"/>
-        <location filename="../../kvantummanager.ui" line="1532"/>
+        <location filename="../../kvantummanager.ui" line="1494"/>
+        <location filename="../../kvantummanager.ui" line="1531"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -1135,28 +1109,28 @@ Varsayılan olarak 250.
 0 gecikme olmadığı anlamına gelir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1502"/>
+        <location filename="../../kvantummanager.ui" line="1501"/>
         <source>Submenu delay: </source>
         <translation>Alt menü gecikmesi: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1516"/>
-        <location filename="../../kvantummanager.ui" line="1539"/>
+        <location filename="../../kvantummanager.ui" line="1515"/>
+        <location filename="../../kvantummanager.ui" line="1538"/>
         <source> ms</source>
         <translation> ms</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1572"/>
+        <location filename="../../kvantummanager.ui" line="1571"/>
         <source>Miscellaneous</source>
         <translation>Çeşitli</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1777"/>
+        <location filename="../../kvantummanager.ui" line="1776"/>
         <source>No arrows for scrollbars</source>
         <translation>Kaydırma çubukları için ok yok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1872"/>
+        <location filename="../../kvantummanager.ui" line="1871"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1169,17 +1143,17 @@ Varsayılan olarak kaydırma çubukları görünüm çerçevelerinin dışına �
 Devre dışı bırakılmışsa, bkz. Birleşiklik &amp; Genel Bakış → Geçici kaydırma çubukları!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1879"/>
+        <location filename="../../kvantummanager.ui" line="1878"/>
         <source>Scrollbars inside frames</source>
         <translation>Kaydırma çubukları çerçevelerin içinde</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1912"/>
+        <location filename="../../kvantummanager.ui" line="1911"/>
         <source>Tree branch lines</source>
         <translation>Ağaç dalı hatları</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1595"/>
+        <location filename="../../kvantummanager.ui" line="1594"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -1192,103 +1166,103 @@ Bunu işaretlemek etiketi çerçevenin tam üzerine
 koyar, böylece çerçeve kesilmez.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1602"/>
+        <location filename="../../kvantummanager.ui" line="1601"/>
         <source>Group-box label above frame</source>
         <translation>Grup kutusu etiketi çerçevenin üzerinde</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1630"/>
+        <location filename="../../kvantummanager.ui" line="1629"/>
         <source>Fill rubber-band rectangles</source>
         <translation>Lastik bant dikdörtgenleri doldur</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1650"/>
+        <location filename="../../kvantummanager.ui" line="1649"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation>Fare izleme menü çubuklarında
 varsayılan olarak etkindir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1654"/>
+        <location filename="../../kvantummanager.ui" line="1653"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fare izleme, menü çubukları için varsayılan olarak etkindir, yani bir menü çubuğu öğesi tıklatıldıktan ve menüsü gösterildikten sonra, imleç tıklama olmadan üzerine getirilirse diğer menü çubuğu öğelerinin menüleri gösterilir.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1657"/>
+        <location filename="../../kvantummanager.ui" line="1656"/>
         <source>Mouse tracking for menubars</source>
         <translation>Menü çubukları için fare izleme</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1682"/>
+        <location filename="../../kvantummanager.ui" line="1681"/>
         <source>Merge menubar with toolbar</source>
         <translation>Menü çubuğunu araç çubuğuyla birleştir</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1701"/>
+        <location filename="../../kvantummanager.ui" line="1700"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>İşaretlenirse, araç çubuğu düğmeleri gruplandırılmış ve
 araç çubuğu ayırıcılar arasında kaldırılır.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1704"/>
         <source>Group toolbar buttons</source>
         <translation>Grup araç çubuğu düğmeleri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1732"/>
+        <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Shift push-button contents</source>
         <translation>Basma düğmesi içeriğini kaydır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1926"/>
+        <location filename="../../kvantummanager.ui" line="1925"/>
         <source>Drag from:</source>
         <translation>Şuradan sürükle:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1836"/>
+        <location filename="../../kvantummanager.ui" line="1835"/>
         <source>Toolbutton style:</source>
         <translation>Araç düğmesi tarzı:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1749"/>
+        <location filename="../../kvantummanager.ui" line="1748"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation>İşaretlenmezse, kısayolların altı hiç çizilmez.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1752"/>
+        <location filename="../../kvantummanager.ui" line="1751"/>
         <source>Underline shortcuts with Alt</source>
         <translation>Alt ile kısayolların altını çiz</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1616"/>
+        <location filename="../../kvantummanager.ui" line="1615"/>
         <source>Inline spin indicators</source>
         <translation>Satır içi dönme göstergeleri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1664"/>
+        <location filename="../../kvantummanager.ui" line="1663"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>Düzenlenebilir açılır kutunun tamamı
 okla (ve varsa simgesiyle) satır düzenleme olarak çizilsin mi?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1668"/>
+        <location filename="../../kvantummanager.ui" line="1667"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Düzenlenebilir açılır kutunun tamamı okla (ve varsa simgesiyle) satır düzenleme olarak çizilsin mi?&lt;/p&gt;&lt;p&gt;Varsayılan olarak, açılır kutu bir satır düzenleme, bir tarafta oklu bir düğme ve diğer tarafta simgesi olan başka bir düğmeden oluşur.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1671"/>
+        <location filename="../../kvantummanager.ui" line="1670"/>
         <source>Editable combo as line-edit</source>
         <translation>Satır düzenleme olarak düzenlenebilir birleşik</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1643"/>
+        <location filename="../../kvantummanager.ui" line="1642"/>
         <source>Vertical spin indicators</source>
         <translation>Dikey dönme göstergeleri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1578"/>
+        <location filename="../../kvantummanager.ui" line="1577"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1301,44 +1275,53 @@ Bu onay kutusu bazı seçenekleri devre dışı bırakabilir.
 Bu seçenekleri kullanmak istiyorsanız işaretini kaldırın!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1588"/>
+        <location filename="../../kvantummanager.ui" line="1587"/>
         <source>Respect current DE if possible</source>
         <translation>Mümkünse mevcut masaüstü ortamına uygun davran</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1694"/>
+        <location filename="../../kvantummanager.ui" line="1693"/>
         <source>Combo popup as menu</source>
         <translation>Menü olarak birleşik açılır pencere</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1742"/>
+        <location filename="../../kvantummanager.ui" line="1741"/>
         <source>Left aligned tabs</source>
         <translation>Sola hizalanmış sekmeler</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1759"/>
+        <location filename="../../kvantummanager.ui" line="1758"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation>Etkin olmayan sekmeler varsayılan olarak
 bir araya getirilir, yani aralarında kenarlık yoktur.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1763"/>
+        <location filename="../../kvantummanager.ui" line="1762"/>
         <source>Join inactive tabs</source>
         <translation>Etkin olmayan sekmelere katıl</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1950"/>
+        <location filename="../../kvantummanager.ui" line="1949"/>
         <source>Scrollable menus</source>
         <translation>Kaydırılabilir menüler</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1585"/>
+        <location filename="../../kvantummanager.ui" line="1584"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bu etkinleştirildiğinde ve işaretlendiğinde, KDE, Unity, Gnome veya Pantheon mevcut masaüstü ortamı ise Kvantum bunların bazı ayarlarına uymaya çalışacaktır.&lt;/p&gt;&lt;p&gt;KDE altında, Kvantum&apos;un küçük ve büyük simge boyutları ve tek veya çift tıklama için KDE ayarlarını okumasını sağlar.&lt;/p&gt;&lt;p&gt;Unity, Gnome ve Pantheon altında, menülerden ve basma düğmelerinden (karşılık gelen dconf tuşları değiştirilse bile) simgeleri kaldırır ve pencere saydamlığını devre dışı bırakır.&lt;/p&gt;&lt;p&gt;Bu onay kutusu bazı seçenekleri devre dışı bırakabilir. Bu seçenekleri kullanmak istiyorsanız işaretini kaldırın!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1712"/>
+        <location filename="../../kvantummanager.ui" line="785"/>
+        <source>This needs the KDE contrast effect and is applied
+only to translucent windows that support the blur
+effect (but the KDE blur effect can be disabled).
+
+A value of 1.00 means no change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1711"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1351,12 +1334,20 @@ bunu bir radyo düğmesi olarak çizmesine rağmen).
 Bu seçenek bunları gizleyecektir.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1719"/>
+        <location filename="../../kvantummanager.ui" line="1718"/>
         <source>Non-checkable combo menu</source>
         <translation>Kontrol edilemeyen birleşik menü</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1957"/>
+        <location filename="../../kvantummanager.ui" line="1943"/>
+        <source>Should big menus be scrollable and have
+scroll arrows on their top and/or bottom?
+
+By default, big menus are scrollable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="1956"/>
         <source>Warning: This can be quite confusing at first.
 
 If you have enabled it, you could temporarily disable it
@@ -1368,90 +1359,90 @@ bir düğmeye basarak sürükleyip bırakılabilen bir düğme için
 düğmeye basmadan önce Ctrl tuşu.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1964"/>
+        <location filename="../../kvantummanager.ui" line="1963"/>
         <source>Allow dragging from buttons</source>
         <translation>Düğmelerden sürüklemeye izin ver</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1987"/>
+        <location filename="../../kvantummanager.ui" line="1986"/>
         <source>Application Themes</source>
         <translation>Uygulama Temaları</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1993"/>
+        <location filename="../../kvantummanager.ui" line="1992"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Burada belirli uygulamalara temalar atayabilirsiniz.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Her tema için, uygulamaların etkin tema yerine bu temayı kullanması gereken virgülle ayrılmış yürütülebilir dosyalar listesi ekleyebilirsiniz. Tüm seçtiğiniz temalar için bunu yaptıktan sonra, &lt;i&gt;Kaydet&lt;/i&gt; düğmesine tıklayarak sonucu kaydedin!&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2028"/>
+        <location filename="../../kvantummanager.ui" line="2027"/>
         <source>Installed Theme</source>
         <translation>Yüklü Tema</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2044"/>
+        <location filename="../../kvantummanager.ui" line="2043"/>
         <source>Application(s)</source>
         <translation>Uygulama(lar)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2073"/>
+        <location filename="../../kvantummanager.ui" line="2072"/>
         <source>app1,app2,app3</source>
         <translation>uyg1,uyg2,uyg3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2101"/>
+        <location filename="../../kvantummanager.ui" line="2100"/>
         <source>Remove List</source>
         <translation>Listeyi Kaldır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2108"/>
+        <location filename="../../kvantummanager.ui" line="2107"/>
         <source>Save the current list of apps</source>
         <translation>Geçerli uygulama listesini kaydet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2111"/>
+        <location filename="../../kvantummanager.ui" line="2110"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geçerli uygulama listesini ilgili temalarıyla kaydedin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2138"/>
-        <location filename="../../kvantummanager.ui" line="2144"/>
+        <location filename="../../kvantummanager.ui" line="2137"/>
+        <location filename="../../kvantummanager.ui" line="2143"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2141"/>
+        <location filename="../../kvantummanager.ui" line="2140"/>
         <source>Quit</source>
         <translation>Çık</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2154"/>
+        <location filename="../../kvantummanager.ui" line="2153"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Etkin temayı önizleyin veya
 önizlemesini güncelleyin.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2158"/>
+        <location filename="../../kvantummanager.ui" line="2157"/>
         <source>Preview</source>
         <translation>Ön izleme</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2165"/>
+        <location filename="../../kvantummanager.ui" line="2164"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2188"/>
+        <location filename="../../kvantummanager.ui" line="2187"/>
         <source>What&apos;s This?</source>
         <translation>Bu Nedir?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2191"/>
+        <location filename="../../kvantummanager.ui" line="2190"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bu düğmeye tıklayın ve ardından ne yaptığı hakkında bilgi almak için &amp;quot;Bu Nedir&amp;quot; ipucu içeren bir arayüz öğesine tıklayın.&lt;/p&gt;&lt;p&gt;Sıradan araç ipuçları da var, ancak bu tür araç ipucu bir yere tıklayana kadar kaybolmayacak.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2194"/>
+        <location filename="../../kvantummanager.ui" line="2193"/>
         <source>Help</source>
         <translation>Yardım</translation>
     </message>

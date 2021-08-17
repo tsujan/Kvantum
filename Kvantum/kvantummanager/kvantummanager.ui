@@ -782,10 +782,9 @@ Miscellaneous → Respect current DE if possible</string>
                  <item>
                   <widget class="QGroupBox" name="contrastBox">
                    <property name="toolTip">
-                    <string>This needs the KDE contrast effect with Qt ≥ 5.11
-and is applied only to translucent windows that
-support the blur effect (but the KDE blur effect
-can be disabled).
+                    <string>This needs the KDE contrast effect and is applied
+only to translucent windows that support the blur
+effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</string>
                    </property>
@@ -1944,7 +1943,7 @@ Miscellaneous → Respect current DE if possible</string>
                   <string>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
-By default, all of their menu-items are shown.</string>
+By default, big menus are scrollable.</string>
                  </property>
                  <property name="text">
                   <string>Scrollable menus</string>
