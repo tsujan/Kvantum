@@ -68,6 +68,7 @@ private slots:
     void trantsientScrollbarEnbled (bool checked);
     void showWhatsThis();
     void aboutDialog();
+    void openUserConfigFile (const QString &link);
 
 private:
     void fitThirdPageToContents();
@@ -128,6 +129,7 @@ private:
     QString lang_;
     QString modifiedSuffix_;
     QString kvDefault_;
+    QString userConfigFile_;
 
     bool centerDefaultDocTabs_, centerDefaultNormalTabs_;
 };

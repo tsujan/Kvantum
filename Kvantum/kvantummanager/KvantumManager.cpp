@@ -33,6 +33,8 @@
 #include <QWindow>
 #include <QToolButton>
 #include <QGraphicsDropShadowEffect>
+#include <QUrl>
+#include <QDesktopServices>
 
 namespace KvManager {
 
@@ -199,6 +201,10 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                             this);
         msgBox.exec();
     });
+
+    /* we want to open the config file but QLabel's link implementation has problems */
+    ui->configLabel->setOpenExternalLinks (false);
+    connect (ui->configLabel, &QLabel::linkActivated, this, &KvantumManager::openUserConfigFile);
 
     if (auto viewport = ui->toolBox->widget (2)->parentWidget())
         viewport->installEventFilter (this); // see eventFilter()
@@ -1337,13 +1343,14 @@ void KvantumManager::tabChanged (int index)
             /* a config other than the default Kvantum one */
             QString themeDir = userThemeDir (kvconfigTheme_);
             QString themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (kvconfigTheme_);
+            userConfigFile_ = themeConfig;
             QString userSvg = QString ("%1/%2.svg").arg (themeDir).arg (kvconfigTheme_);
 
             /* If themeConfig doesn't exist but userSvg does, themeConfig be created by copying
                the default config below and this message will be correct. If neither themeConfig
                nor userSvg exists, this message will be replaced by the one that follows it. */
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
-                                      + QString ("<br><i>%1").arg (themeDir) + QString ("/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
+                                      + QString ("<a href='%2'><br><i>%1").arg (themeDir).arg (userConfigFile_) + QString ("/<b>%1.kvconfig</b></i></a>").arg (kvconfigTheme_));
             if (!QFile::exists (themeConfig) && !QFile::exists (userSvg))
             { // no user theme but a root one
                 ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
@@ -1663,6 +1670,16 @@ void KvantumManager::tabChanged (int index)
             fitThirdPageToContents();
         }
     }
+}
+/*************************/
+void KvantumManager::openUserConfigFile (const QString& /*link*/)
+{
+    if (userConfigFile_.isEmpty()) return;
+    QUrl url (userConfigFile_);
+    /* QDesktopServices::openUrl() may resort to "xdg-open", which isn't
+       the best choice. "gio" is always reliable, so we check it first. */
+    if (!QProcess::startDetached ("gio", QStringList() << "open" << url.toString()))
+        QDesktopServices::openUrl (url);
 }
 /*************************/
 /* Gets the comment and sets the state of the "deleteTheme" button. */
@@ -2246,6 +2263,7 @@ void KvantumManager::writeConfig()
         themeConfig = QString ("%1/Kvantum/%2/%2.kvconfig").arg (xdg_config_home).arg (kvconfigTheme_);
     if (QFile::exists (themeConfig)) // user theme (originally or after copying)
     {
+        userConfigFile_ = themeConfig;
         QSettings themeSettings (themeConfig, QSettings::NativeFormat);
         if (!themeSettings.isWritable())
         {
@@ -2602,7 +2620,7 @@ void KvantumManager::writeConfig()
         {
             ui->restoreButton->show();
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
-                                      + QString ("<br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i>").arg (kvconfigTheme_));
+                                      + QString ("<a href='%2'><br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i></a>").arg (kvconfigTheme_).arg (userConfigFile_));
             showAnimated (ui->configLabel, 1000);
         }
 
