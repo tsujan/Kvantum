@@ -45,7 +45,7 @@ If you want to compile Kvantum from its source, install the following packages:
  * `gcc` (or gcc-multilib for multilib systems)
  * `libx11` and `libxext` (for X11)
  * `qt5-base`, `qt5-svg` and `qt5-x11extras` (for Qt5)
- * `kwindowsystem` (required with Qt >= 5.11)
+ * `kwindowsystem`
  * `qt5-tools` (for localization if you need it)
 
 To install Kvantum directly, you have the choice to install the stable package **or**, preferably, the git package. Respectively, execute:
@@ -65,7 +65,7 @@ If you want to compile Kvantum from its source, install these packages:
  * `g++`
  * `libx11-dev` and `libxext-dev` (for X11)
  * `qtbase5-dev`, `libqt5svg5-dev` and `libqt5x11extras5-dev` (for Qt5)
- * `libkf5windowsystem-dev` (required with Qt >= 5.11)
+ * `libkf5windowsystem-dev`
  * `qttools5-dev-tools` (for localization if you need it)
 
 In Ubuntu, you can install Kvantum directly with:
@@ -95,7 +95,7 @@ If you want to compile Kvantum from its source, install these packages:
  * `libqt5-qtbase-devel`
  * `libqt5-qtsvg-devel`
  * `libqt5-qttools-devel`
- * `kwindowsystem-devel` (required with Qt >= 5.11)
+ * `kwindowsystem-devel`
 
 #### Leap
 see [Compilation](#compilation) on how to compile and install Kvantum.
@@ -117,7 +117,7 @@ If you want to compile Kvantum from its source in Red Hat based distributions li
  * `qt5-qtbase-devel`
  * `qt5-qtsvg-devel`
  * `qt5-qttools-devel`
- * `kf5-kwindowsystem-devel` (required with Qt >= 5.11)
+ * `kf5-kwindowsystem-devel`
 
 To install Kvantum directly, execute:
 

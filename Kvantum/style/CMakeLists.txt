@@ -13,7 +13,7 @@ else()
   include(${QT_USE_FILE})
   add_definitions(${QT_DEFINITIONS})
 endif()
-find_package(X11)
+find_package(X11 REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
