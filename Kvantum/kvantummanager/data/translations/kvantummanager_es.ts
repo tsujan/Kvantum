@@ -371,12 +371,14 @@ Miscelánea → Respetar el escritorio actual si es posible</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto, las barras de herramientas verticales no se muestran.
+
+Si esto está deshabilitado, vea la opción de arriba.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar estilo a las barras de herramientas verticales</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
@@ -411,7 +413,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto, el deslizador de la barra de desplazamiento salta a la posición
+al hacer clic izquierdo en la barra de desplazamiento.
+
+Si esto está deshabilitado, sea:
+Miscelánea → Respetar el entorno de escritorio actual si es posible</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1327,7 +1333,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto necesita que el efecto de contraste de KDE esté habilitado y se aplica
+solo a las ventanas translúcidas que admiten el efecto de
+desenfoque (aunque el efecto de desenfoque de KDE puede deshabilitarse).
+
+Un valor de 1.00 significa que no hay cambios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1353,7 +1363,10 @@ Esta opción las oculta.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Deberían permitir desplazamiento los menús grandes
+ y tener flechas en la parte superior y/o inferior?
+
+Por defecto, los menús grandes permiten desplazamiento.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
@@ -1362,7 +1375,11 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: esto puede ser bastante confuso al principio.
+
+Si lo ha habilitado, puede deshabilitarlo temporalmente
+para un botón que permita arrastrar y soltar presionando
+la tecla Ctrl antes de pulsar el botón.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1966"/>
