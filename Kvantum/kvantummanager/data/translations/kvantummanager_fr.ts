@@ -30,8 +30,8 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Sélectionner un Kvantum
-dossier de thème</translation>
+        <translation>Sélectionner un dossier
+de thème Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -410,7 +410,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut, le curseur de défilement saute à une position
+lorsque la barre de défilement est cliqué avec le bouton gauche.
+
+Si cette option est désactivée, consulter :
+Divers → Respecter le DE courant si possible</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1319,7 +1323,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cela nécessite l&apos;effet de contraste KDE et s&apos;applique
+uniquement aux fenêtres translucides qui prennent en charge l&apos;effet de flou
+(mais l&apos;effet de flou KDE peut être désactivé).
+
+Une valeur de 1,00 signifie aucun changement.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1345,7 +1353,10 @@ Cette option les cachera.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les grands menus devraient-ils être déroulants et avoir
+des flèches de défilement en haut et/ou en bas ?
+
+Par défaut, les grands menus sont déroulants.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
@@ -1354,7 +1365,7 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
@@ -1373,7 +1384,7 @@ appuyez sur la touche Ctrl avant d&apos;appuyer sur le bouton.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1995"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Vous pouvez ici affecter des thèmes à des applications spécifiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt; Pour chaque thème, vous pouvez ajouter une liste d&apos;exécutables séparés par des virgules dont les applications doivent utiliser ce thème au lieu du thème actif. Après cela, pour tous les thèmes choisis, sauvegardez le résultat en cliquant sur le bouton &lt;i&gt;Enregistrer&lt;/i&gt;&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Vous pouvez ici affecter des thèmes à des applications spécifiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt; Pour chaque thème, vous pouvez ajouter une liste d&apos;exécutables séparés par des virgules dont les applications doivent utiliser ce thème au lieu du thème actif. Après cela, pour tous les thèmes choisis, sauvegarder le résultat en cliquant sur le bouton &lt;i&gt;Enregistrer&lt;/i&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2030"/>
