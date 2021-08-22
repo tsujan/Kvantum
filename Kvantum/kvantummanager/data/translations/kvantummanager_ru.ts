@@ -370,7 +370,8 @@ Miscellaneous → Respect current DE if possible</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию вертикальные  панели инструментов не имеют стиля.
+Если отключено - см. параметр выше.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
