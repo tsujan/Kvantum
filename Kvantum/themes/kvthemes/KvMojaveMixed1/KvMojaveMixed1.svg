@@ -870,21 +870,21 @@
 <path style="opacity:.8;fill:url(#linearGradient2150);fill-rule:evenodd" id="progress-pattern-normal-topleft" d="m 14.5,142 c -3.80963,0 -7.5,3.69037 -7.5,7.5 h 7.5 z"/>
 <path style="opacity:.8;fill:#187198;fill-rule:evenodd" id="progress-pattern-normal" d="M 14.5,149.5 V 182 h 32.5 v -32.5 z"/>
 <g id="progress-normal-left" transform="matrix(0.53333333,0,0,0.98461538,114.6667,101.99846)">
-<path style="opacity:.31;fill:#969696;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -5.625025 v 32.5 z"/>
+<path style="opacity:.5;fill:#b5b5b5;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -5.625025 v 32.5 z"/>
 <path style="opacity:.865;fill:#969696;color:#000" d="m 21.25,48.7516 v 32.5 h 1.87497 v -32.5 z"/>
 </g>
 <g id="progress-normal-topleft" transform="matrix(0.53333049,0,0,0.53333049,114.66676,124)">
-<path style="opacity:.31;fill:#969696;fill-rule:evenodd" d="m 28.75,43.1265 c -3.26541,0 -5.62503,2.25511 -5.62503,5.62503 h 5.625 z "/>
+<path style="opacity:.5;fill:#b5b5b5;fill-rule:evenodd" d="m 28.75,43.1265 c -3.26541,0 -5.62503,2.25511 -5.62503,5.62503 h 5.625 z "/>
 <path style="opacity:.865;fill:#969696;color:#000" d="m 28.75,41.2516 c -4.68751,0 -7.5,2.81242 -7.5,7.5 h 1.87499 c 0,-3.30015 2.35961,-5.62503 5.62502,-5.62503 z"/>
 </g>
-<path style="opacity:.31;fill:#969696;fill-rule:evenodd" id="progress-normal" d="m 130,150 v 32 h 32 v -32 z"/>
+<path style="opacity:.5;fill:#b5b5b5;fill-rule:evenodd" id="progress-normal" d="m 130,150 v 32 h 32 v -32 z"/>
 <use width="100%" height="100%" xlink:href="#progress-normal-left" id="progress-normal-right" transform="matrix(-1,0,0,1,292,0)"/>
 <use width="100%" height="100%" xlink:href="#progress-normal-topleft" id="progress-normal-topright" transform="matrix(-1,0,0,1,292,0)"/>
 <path style="opacity:.8;fill:url(#linearGradient2048);fill-rule:evenodd" id="progress-pattern-normal-top" d="m 14.5002,149.5 h 32.4998 v -7.5 h -32.5 z "/>
 <path style="opacity:.8;fill:url(#linearGradient2050);fill-rule:evenodd" id="progress-pattern-normal-bottom" d="m 47,149.5 h -32.4998 v 7.5 h 32.5 z"/>
 <path style="opacity:.8;fill:url(#linearGradient2301);fill-rule:evenodd" id="progress-pattern-normal-bottomleft" d="m 14.5,157 c -3.80963,0 -7.5,-3.69037 -7.5,-7.5 h 7.5 z"/>
 <g id="progress-normal-top" transform="matrix(0,0.53333333,-0.98461538,0,210.00159,134.66669)">
-<path style="opacity:.31;fill:#969696;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -5.625049 v 32.5 z"/>
+<path style="opacity:.5;fill:#b5b5b5;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -5.625049 v 32.5 z"/>
 <path style="opacity:.865;fill:#969696;color:#000" d="m 21.25,48.7516 v 32.5 h 1.87495 v -32.5 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#progress-normal-top" id="progress-normal-bottom" transform="matrix(1,0,0,-1,0,300.00005)"/>
