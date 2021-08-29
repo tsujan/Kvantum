@@ -2,6 +2,8 @@ V0.20.2
 ---------
  * Allow opening of the user config file from Kvantum Manager.
  * Respect KDE's scrollbar click behavior by default.
+ * Elide push button text if there isn't enough space for it.
+ * Better eliding of multiline texts.
 
 V0.20.1
 ---------

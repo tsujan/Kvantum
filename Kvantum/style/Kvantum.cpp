@@ -1564,17 +1564,17 @@ static inline QSize textSize(const QFont &font, const QString &text)
     QString t(text);
     /* remove tabs and also the '&' mnemonic character
        (two successive ampersands are reduced to one) */
-    t.replace('\t', ' ');
+    t.replace(QLatin1Char('\t'), QLatin1Char(' '));
     int i = 0;
     while (i < t.size())
     {
-      if (t.at(i) == '&')
+      if (t.at(i) == QLatin1Char('&'))
         t.remove(i,1);
       i++;
     }
 
     /* deal with newlines */
-    QStringList l = t.split('\n');
+    QStringList l = t.split(QLatin1Char('\n'));
 
     th = QFontMetrics(font).height()*(l.size());
 
@@ -1591,6 +1591,15 @@ static inline QSize textSize(const QFont &font, const QString &text)
   }
 
   return QSize(tw,th);
+}
+
+/* Elide a non-empty (and, probably, multiline) text that doesn't include '\t'. */
+static inline QString makeTextElided(const QFontMetrics &fm, const QString &text, int width)
+{
+  QStringList l = text.split(QLatin1Char('\n'));
+  for (int i=0; i<l.size(); i++)
+    l[i] = fm.elidedText(l[i], Qt::ElideRight, width, Qt::TextShowMnemonic);
+  return l.join(QLatin1Char('\n'));
 }
 
 static inline void colorizeRect(QPainter *painter, const QColor &col, const QRect &rect)
@@ -9243,39 +9252,6 @@ void Style::drawControl(QStyle::ControlElement element,
           painter->setFont(f);
         }
 
-        QSize txtSize;
-        if (!opt->text.isEmpty())
-        {
-          QFont fnt(painter->font());
-          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
-            fnt.setWeight(lspec.boldness);
-          txtSize = textSize(fnt,opt->text);
-          /* in case there isn't enough space */
-          if (pb)
-          { // not needed; just for "nostalgic" reasons
-            w = pb->width();
-            h = pb->height();
-          }
-          if (w < txtSize.width()
-                  +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                  +lspec.left+lspec.right+fspec.left+fspec.right)
-          {
-            lspec.left = lspec.right = 0;
-            fspec.left = qMin(fspec.left,3);
-            fspec.right = qMin(fspec.right,3);
-            lspec.tispace = qMin(lspec.tispace,3);
-            lspec.boldFont = false;
-          }
-          if (h < txtSize.height() +lspec.top+lspec.bottom+fspec.top+fspec.bottom)
-          {
-            lspec.top = lspec.bottom = 0;
-            fspec.top = qMin(fspec.top,3);
-            fspec.bottom = qMin(fspec.bottom,3);
-            lspec.tispace = qMin(lspec.tispace,3);
-            lspec.boldFont = false;
-          }
-        }
-
         /* take into account the possibility of the presence of an indicator */
         int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
         QRect r = option->rect.adjusted((opt->direction == Qt::RightToLeft ? ind : 0),
@@ -9289,6 +9265,43 @@ void Style::drawControl(QStyle::ControlElement element,
           int vShift = pixelMetric(PM_ButtonShiftVertical);
           r = r.adjusted(hShift,vShift,hShift,vShift);
         }
+
+        QSize txtSize;
+        QString txt = opt->text;
+        if (!txt.isEmpty())
+        {
+          /* in case there isn't enough space */
+          QFont fnt(painter->font());
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+            fnt.setWeight(lspec.boldness);
+          txtSize = textSize(fnt,txt);
+          QSize availableSize = r.size()
+                                - QSize(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace, 0)
+                                - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                        fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+          if (txtSize.height() > availableSize.height())
+          {
+            lspec.top = lspec.bottom = 0;
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+            lspec.tispace = qMin(lspec.tispace,3);
+            lspec.boldFont = false;
+          }
+          if (txtSize.width() > availableSize.width())
+          {
+            lspec.left = lspec.right = 0;
+            fspec.left = qMin(fspec.left,3);
+            fspec.right = qMin(fspec.right,3);
+            lspec.tispace = qMin(lspec.tispace,3);
+            lspec.boldFont = false;
+            /* elide the text if the space still isn't enough */
+            int availableWidth = r.width()
+                                 - (opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                                 - fspec.left-fspec.right;
+            txt = makeTextElided(QFontMetrics(painter->font()), txt, availableWidth);
+          }
+        }
+
         int talign = Qt::AlignHCenter | Qt::AlignVCenter;
         if (!styleHint(SH_UnderlineShortcut, opt, widget))
           talign |= Qt::TextHideMnemonic;
@@ -9354,10 +9367,10 @@ void Style::drawControl(QStyle::ControlElement element,
         renderLabel(&o,painter,
                     R,
                     fspec,lspec,
-                    talign,opt->text,QPalette::ButtonText,
+                    talign,txt,QPalette::ButtonText,
                     state,
                     isInactive,
-                    (hspec_.iconless_pushbutton && !opt->text.isEmpty()) ? QPixmap()
+                    (hspec_.iconless_pushbutton && !txt.isEmpty()) ? QPixmap()
                       : getPixmapFromIcon(opt->icon,
                                           getIconMode(disabledCol.isValid()
                                                       && !enoughContrast(disabledCol,
@@ -10076,6 +10089,11 @@ void Style::drawControl(QStyle::ControlElement element,
                   availableSize -= QSize(lspec.tispace, 0);
                 else
                   availableSize -= QSize(0, lspec.tispace);
+                if ((opt->features & QStyleOptionToolButton::Arrow)
+                    && opt->arrowType != Qt::NoArrow)
+                {
+                  availableSize -= QSize(dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin), 0);
+                }
                 if (txtSize.height() > availableSize.height())
                 {
                   lspec.top = lspec.bottom = 0;
@@ -10102,9 +10120,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   }
                   else // If the text is beside the icon but doesn't fit in,...
                   { // ... elide it!
-                    QFontMetrics fm(painter->font());
-                    txt = fm.elidedText(txt, Qt::ElideRight,
-                                        availableSize.width(), Qt::TextShowMnemonic);
+                    txt = makeTextElided(QFontMetrics(painter->font()), txt, availableSize.width());
                   }
                 }
               }
@@ -10129,11 +10145,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     lspec.left = lspec.right = 0;
                     fspec.left = fspec.right = 0;
                   }
-                  else // again, elide the text if it doesn't fit in
-                  {
-                    QFontMetrics fm(painter->font());
-                    txt = fm.elidedText(txt, Qt::ElideRight,
-                                        availableSize.width(), Qt::TextShowMnemonic);
+                  else
+                  { // again, elide the text if it doesn't fit in
+                    txt = makeTextElided(QFontMetrics(painter->font()), txt, availableSize.width());
                   }
                 }
               }
