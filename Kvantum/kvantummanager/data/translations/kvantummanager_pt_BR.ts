@@ -412,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, o controle deslizante de rolagem pula para uma posição
+quando a barra de rolagem é clicada com o botão esquerdo.
+
+Se estiver desativado, consulte:
+Diversos → Respeite o DE atual, se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
