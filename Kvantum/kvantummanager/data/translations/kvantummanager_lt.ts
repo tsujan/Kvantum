@@ -412,7 +412,12 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagal numatymą, spustelėjus ant slankjuostės
+kairiuoju pelės mygtuku, slinkimo slinktukas
+peršoks į spustelėtą poziciją.
+
+Jei tai yra išjungta, žiūrėkite:
+Įvairūs → Jei įmanoma, gerbti esamą darbalaukio aplinką</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1320,7 +1325,12 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai reikalauja KDE kontrasto efekto ir yra taikoma
+tik dalinai permatomiems langams, palaikantiems
+suliejimo efektą (bet KDE suliejimo efektas gali
+būti išjungtas).
+
+Reikšmė 1.00 reiškia jokių pakeitimų.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
@@ -1350,7 +1360,11 @@ jie gali atrodyti kaip stačiakampiai su taškeliais.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ar dideli meniu turėtų būti slenkami
+ir, ar jų viršuje ir/ar apačioje turėtų būti
+slinkimo rodyklės?
+
+Pagal numatymą, dideli meniu yra slenkami.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
