@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="157"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Ліцензія</translation>
     </message>
 </context>
 <context>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджер тем Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити/оновити тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -30,7 +30,8 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть теку
+теми Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -41,22 +42,22 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити цю тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінити/видалити тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрати тему:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити цю тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -69,12 +70,12 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Задіяти цю тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштувати діючу тему</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -91,34 +92,35 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="339"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти цю this конфігурацію
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="343"/>
         <location filename="../../kvantummanager.ui" line="2116"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="353"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Безпечні налаштування</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
@@ -129,17 +131,17 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="370"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Лазівки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="394"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозорий вигляд Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Звичайний шрифт для типових кнопок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -153,12 +155,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="452"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозора бічна панель для PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="438"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопки без значків</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
@@ -172,12 +174,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозорий вигляд для PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню без значків</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
@@ -247,12 +249,12 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1023"/>
         <location filename="../../kvantummanager.ui" line="1056"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="586"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Переважно темні теми</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="678"/>
@@ -306,7 +308,7 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1410"/>
         <location filename="../../kvantummanager.ui" line="1445"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> px</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
@@ -399,7 +401,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="671"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Плавне гортання</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="726"/>
@@ -549,32 +551,32 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Розміри</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1177"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Маленький значок:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1215"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Великий значок:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1249"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок кнопки:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Значок панелі інструментів:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1295"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір шрифту</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1311"/>
