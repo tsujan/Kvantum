@@ -135,6 +135,7 @@ void WindowManager::initializeBlackList (const QStringList &list)
   blackList_.clear();
   blackList_.insert (ExceptionId (QStringLiteral("CustomTrackView@kdenlive")));
   blackList_.insert (ExceptionId (QStringLiteral("MuseScore")));
+  blackList_.insert (ExceptionId (QStringLiteral ("*@soffice.bin")));
   for (const QString& exception : list)
   {
     ExceptionId id (exception);

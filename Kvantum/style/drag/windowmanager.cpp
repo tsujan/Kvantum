@@ -148,6 +148,7 @@ void WindowManager::initializeBlackList (const QStringList &list)
   blackList_.insert (ExceptionId (QStringLiteral ("MuseScore")));
   blackList_.insert (ExceptionId (QStringLiteral ("KGameCanvasWidget")));
   blackList_.insert (ExceptionId (QStringLiteral ("QQuickWidget")));
+  blackList_.insert (ExceptionId (QStringLiteral ("*@soffice.bin")));
   for (const QString& exception : list)
   {
     ExceptionId id (exception);

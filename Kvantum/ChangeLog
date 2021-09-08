@@ -4,6 +4,7 @@ V0.20.2
  * Respect KDE's scrollbar click behavior by default.
  * Elide push button text if there isn't enough space for it.
  * Better eliding of multiline texts.
+ * Added LibreOffice to the black list of window dragging (as a workaround for issues related to its Qt5 skin under Wayland).
 
 V0.20.1
 ---------
