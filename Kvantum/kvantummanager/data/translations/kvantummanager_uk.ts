@@ -219,24 +219,24 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>Transparent KTitle label</source>
-        <translation>Прозорість міток KTitle</translation>
+        <translation>Прозорість підписів KTitle</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation>Не тонувати підписи обраних
-піктограм підсвіченим кольором!</translation>
+        <translation>Не тонувати підписи вибраних
+піктограм кольором підсвічування!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Типово, підписи обраних піктограм тонуються підсвіченим кольором.&lt;/p&gt;&lt;p&gt; Встановлення у цьому полі позначки видаляє тонування підпису.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Типово, підписи вибраних піктограм тонуються кольором підсвічування.&lt;/p&gt;&lt;p&gt; Встановлення у цьому полі позначки видаляє тонування підпису.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
         <source>No selection tint</source>
-        <translation>Тонування підписів не обраних піктограм</translation>
+        <translation>Тонування підписів не вибраних піктограм</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="556"/>
@@ -279,34 +279,37 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation>Корисно для монохромних наборів піктограм і
+якщо непрозорість вимкнених піктограм не
+зменшується іншими засобами.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <location filename="../../kvantummanager.ui" line="698"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Корисно, якщо встановлено монохромні набори піктограм і якщо непрозорість вимкнених піктограм не зменшується іншими засобами.&lt;/p&gt;&lt;p&gt;KDE автоматично зменшує непрозорість вимкнених піктограм. Тому ця опція швидше буде корисною для інших стільничних середовищ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="686"/>
         <source>Opacity of disabled icons:</source>
-        <translation>Непрозорість відключених значків:</translation>
+        <translation>Непрозорість вимкнених піктограм:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="605"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати межі діалогових вікон
+та панелей стану, якщо це можливо.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="609"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показувати межі діалогових вікон та панелей стану, якщо це можливо?&lt;/p&gt;&lt;p&gt;Типово, застосунок вирішує, чи потрібно їх показувати, але ця хитрість може бути корисною для полегшення зміни розміру безрамкових вікон.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово показувати межі вікон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="734"/>
@@ -336,7 +339,8 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="918"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translation>Працює лише за наявності напівпрозорого тла SVG
+для вікон або непрозорість вікна зменшується (див. далі).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
@@ -350,7 +354,11 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо позначено, меню, підказки та вікна
+не напівпрозорості покриття або тіней.
+
+Якщо вимкнено, перейдіть до:
+Різне → Дотримуватися параметрів стільниці, якщо можливо</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -984,7 +992,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1574"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Різне</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1779"/>
@@ -1124,7 +1132,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1590"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Дотримуватися параметрів стільниці, якщо можливо</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1696"/>
