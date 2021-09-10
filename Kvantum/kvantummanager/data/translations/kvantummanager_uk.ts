@@ -1266,7 +1266,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2167"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Про застосунок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2190"/>
