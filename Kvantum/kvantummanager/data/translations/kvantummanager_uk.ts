@@ -248,7 +248,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не малювати тло для заголовків меню (KDE)?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;Для Plasma потрібно вийти із системи та знову зайти. Для LXQt виконайте перезапуск панелі разом з &lt;span style=&quot; font-style:italic;&quot;&gt;Налаштування сеансу&lt;/span&gt;, цього достатньо.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не малювати тло для заголовків меню (KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню схожі на розділювачі меню, але з піктограмою та текстом.&lt;/p&gt;&lt;p&gt;Для Plasma потрібно вийти із системи та знову зайти. Для LXQt достатньо виконати перезапуск панелі разом із &lt;span style=&quot; font-style:italic;&quot;&gt;Налаштуваннями сеансу&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
