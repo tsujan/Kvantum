@@ -225,29 +225,30 @@ with LXQt Session Settings.</source>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation>Не тонувати вибрані піктограми
-міток яскравим кольором!</translation>
+        <translation>Не тонувати підписи обраних
+піктограм підсвіченим кольором!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Типово, підписи обраних піктограм тонуються підсвіченим кольором.&lt;/p&gt;&lt;p&gt; Встановлення у цьому полі позначки видаляє тонування підпису.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Тонування підписів не обраних піктограм</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не малювати тло для заголовків меню (KDE).
+(Для Plasma потрібно вийти із системи та знову зайти.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не малювати тло для заголовків меню (KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню схожі на розділювачі меню, але з піктограмою та текстом.&lt;/p&gt;&lt;p&gt;Для Plasma потрібно вийти із системи та знову зайти. Для LXQt достатньо виконати перезапуск панелі разом із &lt;span style=&quot; font-style:italic;&quot;&gt;Налаштуваннями сеансу&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -257,7 +258,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="640"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>Тонувати підпис піктограм під час наведення курсором миші </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="654"/>
@@ -289,7 +290,7 @@ reduced by other means.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="686"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрозорість відключених значків:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="605"/>
@@ -310,7 +311,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="734"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмір піктограми головного меню LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="749"/>
@@ -329,7 +330,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Композитування та загальний вигляд</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="918"/>
@@ -340,7 +341,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрозорі застосунки:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="769"/>
@@ -403,7 +404,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>Стрибок при гортанні середньою кнопкою миші</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="664"/>
@@ -438,27 +439,27 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути композитні ефекти</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="795"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Ефект контрасту</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Насиченість:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтенсивність:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="815"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Контрастність:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="892"/>
@@ -471,7 +472,7 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
         <source>Blurring for menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмиття для меню та підказок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="905"/>
@@ -484,12 +485,12 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Безтіньові меню та підказки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="922"/>
         <source>Translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Напівпрозорі вікна</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
@@ -504,17 +505,17 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
         <source>Reduce window opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Зменшити непрозорість вікна на</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1033"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Зменшити непрозорість меню на</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1071"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмиття для напівпрозорих вікон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1091"/>
@@ -1615,17 +1616,17 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="133"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="134"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum не встановлений у вашій системі.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="135"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, спочатку встановіть плагін стиля Kvantum!</translation>
     </message>
 </context>
 </TS>
