@@ -437,58 +437,58 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядок 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2507"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Рядок 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2512"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Стовпчик 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Стовпчик 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2533"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2541"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2549"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагований</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Нередагований</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2269"/>
         <source>Subwindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Підвікна</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
