@@ -415,24 +415,24 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation>2й дочірній елемент</translation>
+        <translation>2й син</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation>1й дочірній елемент</translation>
+        <translation>1й син</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
         <location filename="../../KvantumPreviewBase.ui" line="2232"/>
         <source>1st Item</source>
-        <translation type="unfinished"></translation>
+        <translation>1й елемент</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>3й син</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
