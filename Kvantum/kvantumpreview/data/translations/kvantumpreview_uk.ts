@@ -138,7 +138,7 @@ ordinary arrow
 and dropdown menu arrow</source>
         <translation>Кнопка інструмента з піктограмою,
 звичайною стрілкою
-та стрілкою спадаючого меню</translation>
+та стрілкою спадного меню</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="515"/>
@@ -382,7 +382,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
         <source>Containers</source>
-        <translation>Вмістилища</translation>
+        <translation>Контейнери</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
@@ -415,13 +415,13 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation>2й син</translation>
+        <translation>2й дочірній елемент</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation>1й син</translation>
+        <translation>1й дочірній елемент</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -432,7 +432,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation>3й син</translation>
+        <translation>3й дочірній елемент</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
