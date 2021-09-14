@@ -4,7 +4,7 @@
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
-        <location filename="../../about.ui" line="157"/>
+        <location filename="../../about.ui" line="159"/>
         <source>License</source>
         <translation>Ліцензія</translation>
     </message>
@@ -1309,7 +1309,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="656"/>
         <location filename="../../KvantumManager.cpp" line="672"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="596"/>
