@@ -77,7 +77,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation>Ділянка кнопок</translation>
+        <translation>Віконце кнопок</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
@@ -493,14 +493,14 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
         <source>Panel frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Рамка панелі</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2335"/>
         <location filename="../../KvantumPreviewBase.ui" line="2476"/>
         <location filename="../../KvantumPreviewBase.ui" line="2568"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>GroupBox</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2355"/>
@@ -509,12 +509,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2778"/>
         <location filename="../../KvantumPreviewBase.ui" line="2826"/>
         <source>Tab 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладка 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2361"/>
         <source>Page 1 (disabled)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторінка 1 (вимкнено)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2373"/>
@@ -523,12 +523,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2792"/>
         <location filename="../../KvantumPreviewBase.ui" line="2840"/>
         <source>Tab 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Вкладка 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2379"/>
         <source>Page 2 (disabled)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторінка 2 (вимкнено)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2413"/>
@@ -537,7 +537,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2784"/>
         <location filename="../../KvantumPreviewBase.ui" line="2832"/>
         <source>Page 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторінка 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2427"/>
@@ -547,47 +547,47 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2798"/>
         <location filename="../../KvantumPreviewBase.ui" line="2846"/>
         <source>Page 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторінка 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2451"/>
         <source>Stack widget (page1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Віджет Щабель (сторінка1)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2465"/>
         <source>Stack Widget (page2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Віджет Щабель (сторінка2)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2482"/>
         <source>Group box</source>
-        <translation type="unfinished"></translation>
+        <translation>Віконце групи</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2560"/>
         <source>Dock Widget</source>
-        <translation type="unfinished"></translation>
+        <translation>Віджет Док</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2577"/>
         <source>Checkable group box</source>
-        <translation type="unfinished"></translation>
+        <translation>Віконце групи для перевірки</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2612"/>
         <source>Tool Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Віконце інструментів</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2707"/>
         <source>Document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим Документа</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2745"/>
         <source>Box frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Рамка віконця</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2875"/>
@@ -597,17 +597,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>&amp;Submenu</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Підменю</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>toolBar</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>toolBar_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
@@ -627,52 +627,52 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Віконце перевірки</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
         <source>Toggle Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключити макет</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>Toggle layout direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінити напрямок макета</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
         <source>&amp;Doc Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Режим документів</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>
         <source>Show tabs in the document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Відображати вкладки у режимі документів</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка меню</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
         <source>Hold pressed to show a menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть та утримуйте, щоб відкрити меню</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>
         <source>C&amp;heckbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ві&amp;конце перевірки</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3020"/>
         <source>&amp;Radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>Пере&amp;микач</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3028"/>
         <source>Radio &amp;button</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемика&amp;ч</translation>
     </message>
 </context>
 </TS>
