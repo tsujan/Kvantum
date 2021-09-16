@@ -412,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, o cursor de deslocamento salta para uma posição
+quando a barra de deslizar é clicada à esquerda.
+
+Se esta estiver desativada, veja:
+Diversos → Respeitar o DE atual, se possível</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1323,7 +1327,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Isto necessita do efeito de contraste do KDE e é aplicado
+apenas para janelas translúcidas que suportam o desfocar
+(mas o efeito de desfocagem do KDE pode ser desativado).
+
+Um valor de 1,00 significa que não há alteração.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1349,7 +1357,10 @@ Esta opção irá ocultar isso.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os menus grandes devem poder ser percorridos e ter
+setas de rolagem no seu topo e/ou fundo?
+
+Por padrão, os menus grandes são deslocáveis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>

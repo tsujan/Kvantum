@@ -1327,7 +1327,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Isto precisa do efeito de contraste do KDE e é aplicado
+apenas para janelas translúcidas que suportam o desfoque
+(mas o efeito de desfoque do KDE pode ser desativado).
+
+Um valor de 1,00 significa nenhuma alteração.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1353,7 +1357,10 @@ Esta opção irá ocultar isso.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os menus grandes devem ser roláveis e têm
+setas de rolagem na parte superior e / ou inferior?
+
+Por padrão, os menus grandes são roláveis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
