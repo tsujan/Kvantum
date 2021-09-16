@@ -632,7 +632,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
         <source>Toggle Layout</source>
-        <translation>Переключити макет</translation>
+        <translation>Перемикнути макет</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
