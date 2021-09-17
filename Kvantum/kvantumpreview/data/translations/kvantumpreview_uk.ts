@@ -647,7 +647,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>
         <source>Show tabs in the document mode</source>
-        <translation>Відображати вкладки у режимі документів</translation>
+        <translation>Показувати вкладки у режимі документів</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
