@@ -433,12 +433,12 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished">Has effect only when the main menu is NOT styled by LXQt.
+        <translation>Toimib vaid siis, kui põhimenüü välimus ei ole kontrollitud LXQt poolt.
 
-Values less than 16 mean the default menu icon size.
+Kui väärtus on 16&apos;st väiksem, siis tähistab see ikoonide vaikimisi suurust.
 
-Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
-or through logging out and in again.</translation>
+Eeldab LXQt paneeli uuesti käivitamist kas „Sessiooni seadistustest“
+või logides korraks välja ja tagasi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
@@ -1307,7 +1307,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2113"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Salvesta praegune rakenduste loend koos neile vastavate teemadega!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2140"/>
@@ -1324,7 +1324,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation></translation>
+        <translation>Vaata kasutatava teema eelvaadet
+või uuenda seda.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2160"/>

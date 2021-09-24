@@ -851,17 +851,17 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1429"/>
         <location filename="../../kvantummanager.ui" line="1442"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;הגובה המזערי לפסי גלילה אנכיים והרוחב המזערי לפסי גלילה אופקיים.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1432"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished"></translation>
+        <translation>אורך מזערי לפס גלילה: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1477"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>השהיות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1483"/>
@@ -871,7 +871,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>ההשהיה, במילישניות, בטרם הופעת חלונית עצה.
+
+אפס משמעו שהחלוניות מופיעות מיד.
+
+‎-1 היא התנהגות בררת המחדל של Qt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1772"/>
