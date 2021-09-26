@@ -410,7 +410,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>기본적으로 스크롤 슬라이더는 스크롤 막대를
+왼쪽 클릭하면 해당 위치로 이동합니다.
+
+비활성화된 경우, 다음 참조:
+기타 → 가능한 경우 현재 DE 준수</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1314,7 +1318,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>이것은 KDE 대비 효과가 필요하며 흐림 효과를
+지원하는 반투명 창에만 적용됩니다
+(그러나 KDE 흐림 효과는 비활성화할 수 있음).
+
+값이 1.00이면 변동 사항이 없음을 의미합니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1340,7 +1348,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>큰 메뉴는 스크롤이 가능하고 상단 및/또는
+하단에 스크롤 화살표가 있어야 합니까?
+
+기본적으로 큰 메뉴는 스크롤 가능합니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>

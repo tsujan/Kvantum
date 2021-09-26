@@ -231,7 +231,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="546"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Типово, підписи вибраних піктограм тонуються кольором підсвічування.&lt;/p&gt;&lt;p&gt; Встановлення у цьому полі позначки видаляє тонування підпису.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Типово, підписи вибраних піктограм тонуються кольором підсвічування.&lt;/p&gt;&lt;p&gt; Встановлення прапорця видаляє тонування підпису.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="549"/>
@@ -534,7 +534,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1095"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анімація із затуханням 200 мс, коли стан деяких віджетів змінюється, переважно мишею.&lt;/p&gt;&lt;p&gt;Використання процесора є незначним, оскільки часто анімований лише один віджет. Отриманий візуальний ефект залежить від активної теми.&lt;/p&gt;&lt;p&gt;Підтримуються віджети: кнопки (включаючи перемикачі та прапорці), поля зі списком, прокрутки, ричажки повзунків, рядки вводу та перегляди прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1098"/>
@@ -566,7 +566,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1134"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Перехідні панелі прокрутки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
@@ -786,7 +786,8 @@ window SVG background in the theme.</source>
         <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Чи повинні перехідні панелі прокрутки мати
+напівпрозорі канавки коли потрібно?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
@@ -874,7 +875,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово панелі прокрутки мають стрілки додаткових рядків та підрядків.
+
+Встановлення прапорця видаляє стрілки, якщо це можливо.
+
+Якщо вимкнено, див. Композитування та загальний вигляд → Перехідні панелі прокрутки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1625"/>
@@ -925,7 +930,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово індикатори прокрутки відображаються як
+дві кнопки зі стрілками або знаками +/-.
+
+Встановлення прапорця об&apos;єднує індикатори
+прокрутки у лічильник рядка вводу.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1639"/>
@@ -933,14 +942,19 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово індикатори прокрутки малюються на сусідніх кнопках.
+
+При встановленні прапорця, індикатор вгору буде вище
+індикатора вниз всередині лічильника рядка вводу.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відображати спливаючі поля зі списком як спливаючі меню (наприклад, як у Gtk)?
+
+Типово спливаючі поля зі списком не охоплюють поле зі списком.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
@@ -969,7 +983,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити перехідні панелі прокрутки.
+
+Перехідні панелі прокрутки з&apos;являються поверх
+їх переглядів прокрутки лише за потреби.
+Зазвичай вони не займають зайвого місця.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1497"/>
@@ -1009,12 +1027,16 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Відображати панелі прокрутки всередині рамок подання?
+
+Типово панелі прокрутки відображаються поза рамками подання.
+
+Якщо вимкнено, див. Композитування та загальний вигляд → Перехідні панелі прокрутки.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1881"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Панелі прокрутки всередині рамок подання</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1914"/>
@@ -1028,12 +1050,16 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово підпис знаходиться на рамці
+і рамка розрізається, щоб містити його.
+
+При встановленні прапорця, підпис буде розташовано
+ вище рамки, щоб рамка не була розрізана.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Підпис групового ящика над рамкою</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1632"/>
@@ -1106,17 +1132,18 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1666"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Відображати все поле зі списком для редагування як
+рядок вводу зі стрілкою (та піктограмою, якщо вона існує)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Відображати все поле зі списком для редагування, як рядок вводу зі стрілкою (та піктограмою, якщо вона існує)?&lt;/p&gt;&lt;p&gt;Типово поле зі списком складається з рядку вводу, кнопки зі стрілкою на одній стороні та кнопки з піктограмою на іншій стороні.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Поле зі списком для редагування як рядок вводу</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1645"/>
@@ -1140,7 +1167,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1696"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Спливаюче поле зі списком як меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1744"/>
@@ -1184,12 +1211,16 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation type="unfinished"></translation>
+        <translation>При відображенні спливаючих полів зі списком як меню,
+біля кожного запису буде встановлено прапорець
+(Kvantum малює його як перемикач).
+
+Ця опція приховає їх.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Поле зі списком як меню без прапорця</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1946"/>
@@ -1211,7 +1242,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1966"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити перетягування з кнопок</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1989"/>

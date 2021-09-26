@@ -370,7 +370,7 @@ Miscellaneous → Respect current DE if possible</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation>По умолчанию вертикальные  панели инструментов не имеют стиля.
+        <translation>По умолчанию вертикальные панели инструментов не имеют стиля.
 Если отключено - см. параметр выше.</translation>
     </message>
     <message>
@@ -412,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию ползунок прокрутки переходит на позицию
+при щелчке левой кнопкой мыши по полосе прокрутки.
+
+Если отключено, смотрите пункт меню:
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -786,7 +790,7 @@ Miscellaneous → Respect current DE if possible</source>
 По умолчанию большинство кнопок имеют значки.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей среды.</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="459"/>
@@ -801,7 +805,7 @@ Miscellaneous → Respect current DE if possible</source>
 По умолчанию некоторые из них имеют значки.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей среды.</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="502"/>
@@ -894,7 +898,7 @@ Miscellaneous → Respect current DE if possible</source>
 свои значения.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей среды.</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1206"/>
@@ -913,7 +917,7 @@ Miscellaneous → Respect current DE if possible</source>
 свои значения.
 
 Если флажок снят, смотрите пункт меню:
-Разное → Учитывать параметры текущей среды.</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1244"/>
@@ -1039,7 +1043,7 @@ Miscellaneous → Respect current DE if possible</source>
 (а не только из заголовков окон)?
 
 Если параметр отключён, смотрите пункт меню:
-Разное → Учитывать параметры текущей среды.</translation>
+Разное → Учитывать параметры текущей среды</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1832"/>
@@ -1222,7 +1226,7 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1656"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию отслеживание мыши для строк меню включено: после щелчка по элементу строки меню и отображения соответствующего меню, меню других элементов будут показаны при наведении на них указателя мыши.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию отслеживание мыши для строк меню включено: после щелчка по элементу строки меню и отображения соответствующего меню и меню других элементов будут показаны при наведении на них указателя мыши.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
@@ -1360,7 +1364,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходим включённый эффект контраста KDE и применяется
+только для полупрозрачных окон, поддерживающих эффект
+размытия (эффект размытия KDE можно отключить).
+
+Значение 1,00 означает отсутствие изменений.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1388,7 +1396,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Большие меню будут прокручиватся и будут
+иметь стрелки прокрутки вверху и/или внизу.
+
+По умолчанию большие меню прокручиваются.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
