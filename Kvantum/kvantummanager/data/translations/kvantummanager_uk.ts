@@ -370,35 +370,40 @@ Miscellaneous → Respect current DE if possible</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово вертикальні панелі інструментів не стилізовані.
+
+Якщо це вимкнено, перегляньте згадану вгорі опцію.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="522"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Стилізувати вертикальні панелі інструментів</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="570"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо позначено, вміст форми
+центруватиметься по горизонталі.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Центрувати вміст форм</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="593"/>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви можете побачити дратівливі артефакти
+через помилки обробки Qt не цільночисельного
+масштабування напівпрозорих або градієнтних вікон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="598"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкнути напівпрозорість з не ціленочисельним масштабуванням</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="619"/>
@@ -475,7 +480,10 @@ or through logging out and in again.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Потрібен ефект розмиття KDE, графічна карта, яка його
+підтримує, та напівпрозорі елементи SVG меню/підказки.
+
+Вмикається автоматично, якщо увімкнено розмиття вікна.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="898"/>
@@ -488,7 +496,10 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не малювати тіні для меню та підказок.
+
+Це може бути корисним для стільниць,
+які мають тінь для меню та підказок.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="911"/>
@@ -508,7 +519,11 @@ if window translucency is enabled.
 
 A translucent SVG background is NOT
 needed for this key to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Це зменшить непрозорість вікна
+якщо її увімкнено.
+
+Напівпрозоре тло SVG НЕ
+обов&apos;язкове для роботи цієї опції.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
@@ -529,39 +544,42 @@ needed for this key to work.</source>
         <location filename="../../kvantummanager.ui" line="1091"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Анімація із затуханням 200 мс, коли стан
+віджета змінюється, переважно вказівником миші.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1095"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анімація із затуханням 200 мс, коли стан деяких віджетів змінюється, переважно мишею.&lt;/p&gt;&lt;p&gt;Використання процесора є незначним, оскільки часто анімований лише один віджет. Отриманий візуальний ефект залежить від активної теми.&lt;/p&gt;&lt;p&gt;Підтримуються віджети: кнопки (включаючи перемикачі та прапорці), поля зі списком, прокрутки, ричажки повзунків, рядки вводу та перегляди прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Анімація із затуханням 200 мс, коли стан деяких віджетів змінюється, переважно мишею.&lt;/p&gt;&lt;p&gt;Використання процесора незначне, оскільки часто анімовано лише один віджет. Отриманий візуальний ефект залежить від активної теми.&lt;/p&gt;&lt;p&gt;Підтримуються віджети: кнопки (включно з перемикачами та прапорці), поля зі списком, прокрутки, важільці повзунків, рядки вводу та вигляд елементів прокрутки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1098"/>
         <source>Animation for state change under mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Анімація змін стану під вказівником миші</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1105"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation type="unfinished"></translation>
+        <translation>Позначте, щоб вилучити всі шаблони розміщення вікон/діалогів!
+Приберіть прапорець, якщо хочете повернути ці шаблони!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1109"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити шаблони розташування вікон/ діалогових вікон</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1116"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати однакові кольори та форми для
+активних та неактивних вікон, якщо ця тема розрізняє їх?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1120"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished"></translation>
+        <translation>Нехтувати неактивним станом</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1134"/>
@@ -571,7 +589,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>Розміри й затримки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
@@ -952,14 +970,14 @@ spin-down one inside the spin line-edit.</source>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation>Відображати спливаючі поля зі списком як спливаючі меню (наприклад, як у Gtk)?
+        <translation>Показувати спливні поля зі списком, як спливні меню (наприклад, як у Gtk)?
 
-Типово спливаючі поля зі списком не охоплюють поле зі списком.</translation>
+Типово спливні поля зі списком не охоплюють поле зі списком.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово у Kvantum вкаладки центруються.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1490"/>
@@ -1027,9 +1045,9 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation>Відображати панелі прокрутки всередині рамок подання?
+        <translation>Показувати панелі прокрутки всередині рамок подання?
 
-Типово панелі прокрутки відображаються поза рамками подання.
+Типово панелі прокрутки показано поза рамками подання.
 
 Якщо вимкнено, див. Композитування та загальний вигляд → Перехідні панелі прокрутки.</translation>
     </message>
@@ -1051,52 +1069,54 @@ and the frame is cut to contain it.
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
         <translation>Типово підпис знаходиться на рамці
-і рамка розрізається, щоб містити його.
+й вона розрізається, щоб містити його.
 
-При встановленні прапорця, підпис буде розташовано
- вище рамки, щоб рамка не була розрізана.</translation>
+Якщо позначено, підпис буде розташовано
+над рамкою, щоб вона не була розрізана.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
         <source>Group-box label above frame</source>
-        <translation>Підпис групового ящика над рамкою</translation>
+        <translation>Підпис групи над рамкою</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1632"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Заповнювати прямокутники змінного розміру</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1652"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження положення курсора
+на панелях меню типово увімкнено.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1656"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Відстеження положення курсора типово ввімкнено для панелей меню, тобто, після натискання на елемент меню та появи його меню, меню інших елементів меню буде показано, якщо курсор наведено на них бе натискання.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Відстеження курсора для панелей меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Об&apos;єднати панель меню з панеллю інструментів</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1703"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо позначено, кнопки панелі інструментів буде згруповано
+й розташовано між роздільниками панелі інструментів.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1707"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Групувати кнопки панелей інструментів</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1734"/>
@@ -1138,7 +1158,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Відображати все поле зі списком для редагування, як рядок вводу зі стрілкою (та піктограмою, якщо вона існує)?&lt;/p&gt;&lt;p&gt;Типово поле зі списком складається з рядку вводу, кнопки зі стрілкою на одній стороні та кнопки з піктограмою на іншій стороні.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показувати все поле зі списком для редагування, як рядок вводу зі стрілкою (та піктограмою, якщо вона існує)?&lt;/p&gt;&lt;p&gt;Типово поле зі списком складається з рядка вводу, кнопки зі стрілкою на одній стороні та кнопки з піктограмою на іншій стороні.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
@@ -1167,12 +1187,12 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1696"/>
         <source>Combo popup as menu</source>
-        <translation>Спливаюче поле зі списком як меню</translation>
+        <translation>Спливне поле зі списком як меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1744"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Вирівнювання вкладок ліворуч</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1761"/>
@@ -1211,16 +1231,16 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation>При відображенні спливаючих полів зі списком як меню,
+        <translation>Під час показу спливних полів зі списком як меню,
 біля кожного запису буде встановлено прапорець
-(Kvantum малює його як перемикач).
+(Kvantum малює його у вигляді перемикача).
 
-Ця опція приховає їх.</translation>
+Ця опція сховає їх.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
         <source>Non-checkable combo menu</source>
-        <translation>Поле зі списком як меню без прапорця</translation>
+        <translation>Поле зі списком у вигляді меню без прапорця</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1946"/>
