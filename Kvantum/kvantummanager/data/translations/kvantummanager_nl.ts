@@ -148,7 +148,7 @@ eruit zien zoals ze er standaard uit zien.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="719"/>
         <source>Normal font for default push buttons</source>
-        <translation>&apos;Normaal&apos; lettertype op standaard drukknoppen</translation>
+        <translation>‘Normaal’ lettertype op standaard drukknoppen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -242,13 +242,13 @@ niet met de markeerkleur!</translation>
         <location filename="../../kvantummanager.ui" line="556"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation>Teken geen achtergrond bij (KDE) menutitels.
-(voor Plasma-menu&apos;s moet je uit- en inloggen om de wijziging toe te passen)</translation>
+        <translation>Teken geen achtergrond bij (KDE-)menutitels.
+(voor Plasma-menu&apos;s moet je af- en aanmelden om de wijziging toe te passen)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond tekenen bij (KDE) menutitels?&lt;/p&gt;&lt;p&gt;Menutitels zijn hetzelfde als menuscheidingen, maar dan met een pictogram en tekst.&lt;/p&gt;&lt;p&gt;Voor Plasma-menu&apos;s moet je aan- en afmelden om de wijziging toe te passen; voor het LXQt-paneel is het herstarten via de &lt;span style=&quot; font-style:italic;&quot;&gt;Sessie-instellingen &lt;/span&gt;voldoende.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je geen achtergrond tekenen bij (KDE-)menutitels?&lt;/p&gt;&lt;p&gt;Menutitels zijn hetzelfde als menuscheidingen, maar dan met een pictogram en tekst.&lt;/p&gt;&lt;p&gt;Voor Plasma-menu&apos;s moet je af- en aanmelden om de wijziging toe te passen; voor het LXQt-paneel is het herstarten via de &lt;span style=&quot; font-style:italic;&quot;&gt;Sessie-instellingen &lt;/span&gt;voldoende.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="563"/>
@@ -287,7 +287,7 @@ niet op andere manieren wordt verminderd.</translation>
         <location filename="../../kvantummanager.ui" line="683"/>
         <location filename="../../kvantummanager.ui" line="698"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Handig bij monochrome pictogramthema&apos;s en als de ondoorzichtigheid van uitgeschakelde pictogrammen niet op andere manieren wordt verminderd.&lt;/p&gt;&lt;p&gt;KDE vermindert automatisch tde ondoorzichtigheid van uitgeschakelde pictogrammen. Deze optie is dus alleen handig bij andere werkomgevingen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Handig bij monochrome pictogramthema&apos;s en als de ondoorzichtigheid van uitgeschakelde pictogrammen niet op andere manieren wordt verminderd.&lt;/p&gt;&lt;p&gt;KDE vermindert automatisch de ondoorzichtigheid van uitgeschakelde pictogrammen. Deze optie is dus alleen handig bij andere werkomgevingen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="686"/>
@@ -333,7 +333,7 @@ voor zover mogelijk.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>Hardwareversnelling en algemene opmaak</translation>
+        <translation>Hardwareversnelling en algemene vormgeving</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="918"/>
@@ -412,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard verspringt de schuifbalk naar een positie
+als deze wordt aangeklikt.
+
+Als dit wordt uitgeschakeld, bekijk dan:
+Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -426,10 +430,10 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation>Scroll bepaalde scrollelementen door ze met
+        <translation>Scrol bepaalde scrolbare elementen door ze
 een duwtje te geven met de linkermuisknop.
 
-Waarschuwing: kinetisch scrollen in Qt heeft bugs en
+Waarschuwing: kinetisch scrollen in Qt bevat bugs en
 kan andere taken in de vormgeving verstoren.</translation>
     </message>
     <message>
@@ -448,7 +452,7 @@ Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
         <translation>Werkt alleen als het hoofdmenu NIET door LXQt wordt opgemaakt.
 
-Waarden lager dan 16 betekenen &apos;standaard menupictogramgrootte&apos;.
+Waarden lager dan 16 betekenen ‘standaard menupictogramgrootte’.
 
 Het LXQt-paneel moet worden herstart via de sessie-instellingen
 of meld af en weer aan.</translation>
@@ -839,12 +843,13 @@ window SVG background in the theme.</source>
         <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation></translation>
+        <translation>Moeten opduikende schuifbalken half-doorzichtige
+groeven tonen (indien nodig)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation></translation>
+        <translation>Groeven op opduikende schuifbalken (indien nodig)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
@@ -892,18 +897,18 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1426"/>
         <location filename="../../kvantummanager.ui" line="1439"/>
         <source>The minimum length of scrollbars.</source>
-        <translation></translation>
+        <translation>De minimale lengte van schuifbalken.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1429"/>
         <location filename="../../kvantummanager.ui" line="1442"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;De minimale lengte van verticale en minimale breedte van horizontale schuifbalken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1432"/>
         <source>Minimum scrollbar length: </source>
-        <translation></translation>
+        <translation>Minimale schuifbalklengte: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1477"/>
@@ -927,7 +932,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation>Schuifbalken zijn standaard voorzien van pijlen.
+
+Kruis dit aan om alle pijlen zoveel mogelijk te verbergen.
+
+Indien uitgeschakeld, zie Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1625"/>
@@ -1022,7 +1031,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation></translation>
+        <translation>Laat schuifbalken opduiken!
+
+Ze worden dan alleen getoond indien
+nodig en nemen geen extra ruimte
+in beslag.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1497"/>
@@ -1053,7 +1066,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1779"/>
         <source>No arrows for scrollbars</source>
-        <translation></translation>
+        <translation>Geen pijlen op schuifbalken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1874"/>
@@ -1062,12 +1075,16 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation></translation>
+        <translation>Schuifbalken tonen ín weergavesecties?
+
+Standaard worden ze erbuiten getoond.
+
+If disabled, see Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1881"/>
         <source>Scrollbars inside frames</source>
-        <translation></translation>
+        <translation>Schuifbalken in weergaven</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1914"/>
@@ -1214,7 +1231,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1952"/>
         <source>Scrollable menus</source>
-        <translation></translation>
+        <translation>Scrolbare menu&apos;s</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1587"/>
@@ -1228,7 +1245,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiervoor dient het KDE-contrasteffect te zijn ingeschakeld.
+Deze optie werkt alleen in doorzichtige vensters die het vervagingseffect
+ondersteunen (maar het gelijknamige KDE-effect kan worden uitgeschakeld).
+
+1.00 = niet aanpassen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1250,7 +1271,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Moeten lange menu&apos;s scrolbaar zijn en scrol-
+pijlen tonen aan de boven- en onderkant?
+
+Standaard zijn zulke menu&apos;s scrolbaar.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
@@ -1340,7 +1364,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2190"/>
         <source>What&apos;s This?</source>
-        <translation></translation>
+        <translation>Wat is dit?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2193"/>
@@ -1649,7 +1673,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2917"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation></translation>
+        <translation>Maker: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (ook bekend als Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="50"/>
