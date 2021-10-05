@@ -402,7 +402,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，滚动滑块跳转到一个位置
+当滚动条被左键单击时。
+
+如果禁用，请参阅：
+其他 → 如果可能，尊从当前的 DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="626"/>
@@ -1308,7 +1312,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>这需要KDE对比效果并应用
+仅支持模糊的半透明窗口
+效果（但可以禁用 KDE 模糊效果）。
+
+值 1.00 表示没有变化。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1714"/>
@@ -1334,7 +1342,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>大菜单应该是可滚动的并且有
+在顶部和/或底部滚动箭头？
+
+默认情况下，大菜单是可滚动的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
