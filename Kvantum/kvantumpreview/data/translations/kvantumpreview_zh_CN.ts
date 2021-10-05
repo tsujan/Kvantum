@@ -580,7 +580,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2745"/>
         <source>Box frame</source>
-        <translation type="unfinished"></translation>
+        <translation>框</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2875"/>
