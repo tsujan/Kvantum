@@ -417,7 +417,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
     { // see QEvent::HoverEnter below
       QHoverEvent *he = static_cast<QHoverEvent*>(e);
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
       int indx = tabbar->tabAt(he->pos());
+
+#else
+      int indx = tabbar->tabAt(he->position().toPoint());
+#endif
       if (indx > -1)
       {
         int diff = qAbs(indx - tabbar->currentIndex());
@@ -469,7 +474,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
          results in an ugly hover effect with overlapping. So, we update
          the extended tab rect when there's an overlapping. */
       QHoverEvent *he = static_cast<QHoverEvent*>(e);
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
       int indx = tabbar->tabAt(he->pos());
+#else
+      int indx = tabbar->tabAt(he->position().toPoint());
+#endif
       if (indx > -1 && qAbs(indx - tabbar->currentIndex()) == 1)
       {
         QRect r = tabbar->tabRect(indx);

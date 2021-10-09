@@ -20,13 +20,14 @@
 #include "blurhelper.h"
 
 #include <QEvent>
-#include <QVector>
 #include <QMenu>
 #include <QFrame>
 #include <QWindow>
 
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <KWindowEffects>
 #include <KF5/kwindowsystem_version.h>
+#endif
 
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
@@ -139,6 +140,7 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 /*************************/
 void BlurHelper::update (QWidget* widget) const
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
   if (!(widget->testAttribute (Qt::WA_WState_Created) || widget->internalWinId()))
     return;
@@ -182,10 +184,12 @@ void BlurHelper::update (QWidget* widget) const
   // force update
   if (widget->isVisible())
     widget->update();
+#endif
 }
 /*************************/
 void BlurHelper::clear (QWidget* widget) const
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #if KWINDOWSYSTEM_VERSION < QT_VERSION_CHECK(5,82,0)
   // WARNING never use winId()
   if (widget->internalWinId())
@@ -212,6 +216,7 @@ void BlurHelper::clear (QWidget* widget) const
 #endif
     }
   }
+#endif
 }
 
 }

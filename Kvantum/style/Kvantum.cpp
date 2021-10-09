@@ -59,7 +59,9 @@
 #include <QScreen> // for isCursorOutsideWidget()
 #include <QProxyStyle> // only inside setSurfaceFormat()
 #if defined Q_WS_X11 || defined Q_OS_LINUX
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QtPlatformHeaders/QXcbWindowFunctions>
+#endif
 #endif
 
 #define M_PI 3.14159265358979323846
@@ -8029,8 +8031,12 @@ void Style::drawControl(QStyle::ControlElement element,
 
         QFont f(painter->font());
         if (lspec.boldFont) f.setWeight(lspec.boldness);
-        bool isVertical(opt->orientation == Qt::Vertical);
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+        bool isVertical(opt->orientation == Qt::Vertical);
+#else
+        bool isVertical(pb && pb->orientation() == Qt::Vertical);
+#endif
         bool inverted(pb && pb->invertedAppearance());
         if ((!isVertical && !isKisSlider_ && option->direction == Qt::RightToLeft) // -> CE_ProgressBarGroove
             || (isVertical && opt->bottomToTop))
@@ -13241,6 +13247,7 @@ void Style::setMenuType(const QWidget *widget) const
       || !widget->windowHandle())
     return;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   int wmWindowType = 0;
   if (widget->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
     wmWindowType |= QXcbWindowFunctions::DropDownMenu;
@@ -13249,6 +13256,7 @@ void Style::setMenuType(const QWidget *widget) const
   if (wmWindowType == 0) return;
   QXcbWindowFunctions::setWmWindowType(widget->windowHandle(),
                                        static_cast<QXcbWindowFunctions::WmWindowType>(wmWindowType));
+#endif
 #endif
 }
 
@@ -16278,7 +16286,11 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
                            int alignment, const QPixmap &pixmap) const
 {
   qreal scale = qApp->devicePixelRatio();
-  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) && !pixmap.isNull())
+  if (
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+      qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) &&
+#endif
+      !pixmap.isNull())
     scale = pixmap.devicePixelRatio();
   scale = qMax(scale, static_cast<qreal>(1));
 
@@ -16304,9 +16316,13 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   else// if (iconmode == Selected || iconmode == DisabledSelected)
     icnMode = QIcon::Selected;
 
-  bool hdpi(false);
-  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
-    hdpi = true;
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+   bool hdpi(false);
+   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
+     hdpi = true;
+#else
+  bool hdpi(true);
+#endif
   QPixmap px = icon.pixmap(hdpi ? iconSize
                                 : (QSizeF(iconSize)*qMax(qApp->devicePixelRatio(), static_cast<qreal>(1))).toSize(),
                            icnMode,iconstate);

@@ -33,9 +33,13 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                           const QStyleOption *option,
                           const QWidget *widget) const
 {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   bool hdpi(false);
   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
     hdpi = true;
+#else
+  bool hdpi(true);
+#endif
   qreal pixelRatio = qApp->devicePixelRatio();
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   const bool rtl(option != nullptr ? option->direction == Qt::RightToLeft
@@ -434,8 +438,14 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         {
           int size = sizes[i].width();
           QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
           QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
           QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
+#else
+          qreal _pixelRatio = win ? win->devicePixelRatio() : pixelRatio;
+          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), _pixelRatio);
+          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), _pixelRatio);
+#endif
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);
           icn.addPixmap(basePixmap);
@@ -454,8 +464,14 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         {
           int size = sizes[i].width();
           QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
           QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
           QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
+#else
+          qreal _pixelRatio = win ? win->devicePixelRatio() : pixelRatio;
+          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), _pixelRatio);
+          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), _pixelRatio);
+#endif
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);
           icn.addPixmap(basePixmap);

@@ -315,17 +315,29 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
     /* This can happen under Wayland if the window is inactive before being
        dragged. QApplication::widgetAt() is fast because the window can't have
        "Qt::WA_TransparentForMouseEvents" (-> Qt -> QApplication::widgetAt). */
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
     widget = qApp->widgetAt (mouseEvent->globalPos());
+#else
+    widget = qApp->widgetAt (mouseEvent->globalPosition().toPoint());
+#endif
   }
   else
   {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
     widget = activeWin->childAt (activeWin->mapFromGlobal (mouseEvent->globalPos()));
+#else
+    widget = activeWin->childAt (activeWin->mapFromGlobal (mouseEvent->globalPosition()).toPoint());
+#endif
     if (!widget)
       widget = activeWin;
   }
   if (!widget) return false;
 
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()
+#else
+  widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPosition().toPoint()); // needed by canDrag()
+#endif
 
   /* check if the widget can be dragged */
   dragDistance_ = qMax (QApplication::startDragDistance(), 10);
@@ -336,7 +348,11 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* save some targets and drag points */
   winTarget_ = w;
   widgetTarget_ = widget;
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   globalDragPoint_ = mouseEvent->globalPos();
+#else
+  globalDragPoint_ = mouseEvent->globalPosition().toPoint();
+#endif
   dragAboutToStart_ = true;
 
   /* clear the info about pressing the mouse button */
@@ -412,7 +428,11 @@ bool WindowManager::mouseMoveEvent (QEvent *event)
       dragAboutToStart_ = false;
       if (dragTimer_.isActive())
         dragTimer_.stop();
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
       if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() < dragDistance_)
+#else
+      if (QPoint (mouseEvent->globalPosition().toPoint() - globalDragPoint_).manhattanLength() < dragDistance_)
+#endif
       {
         isDelayed_ = true;
         dragTimer_.start (dragDelay_, this);
@@ -426,7 +446,11 @@ bool WindowManager::mouseMoveEvent (QEvent *event)
       }
     }
     else if (!dragTimer_.isActive() // drag timeout
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
              || QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
+#else
+             || QPoint (mouseEvent->globalPosition().toPoint() - globalDragPoint_).manhattanLength() >= dragDistance_)
+#endif
     {
       if (dragTimer_.isActive())
         dragTimer_.stop();

@@ -1,9 +1,17 @@
 lessThan(QT_MAJOR_VERSION, 5) {
-  error("Kvantum Preview needs at least Qt 5.12.0")
+  error("Kvantum Preview needs at least Qt 5.12.0.")
 } else {
   lessThan(QT_MAJOR_VERSION, 6) {
     lessThan(QT_MINOR_VERSION, 12) {
-      error("Kvantum Preview needs at least Qt 5.12.0")
+      error("Kvantum Preview needs at least Qt 5.12.0.")
+    }
+  } else {
+    equals(QT_MAJOR_VERSION, 6) {
+      lessThan(QT_MINOR_VERSION, 2) {
+        error("Kvantum needs at least Qt 6.2.0.")
+      }
+    } else {
+      error("Kvantum cannot be compiled against this version.")
     }
   }
 }

@@ -8,10 +8,18 @@ QT += svg
 greaterThan(QT_MAJOR_VERSION, 4) {
   lessThan(QT_MAJOR_VERSION, 6) {
     lessThan(QT_MINOR_VERSION, 12) {
-      error("Kvantum needs at least Qt 5.12.0")
+      error("Kvantum needs at least Qt 5.12.0.")
+    }
+    QT += x11extras
+  } else {
+    equals(QT_MAJOR_VERSION, 6) {
+      lessThan(QT_MINOR_VERSION, 2) {
+        error("Kvantum needs at least Qt 6.2.0.")
+      }
+    } else {
+      error("Kvantum cannot be compiled against this version.")
     }
   }
-  QT += x11extras
 }
 
 TARGET = kvantum
@@ -21,7 +29,9 @@ CONFIG += c++11
 VERSION = 0.1
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-  QT += KWindowSystem
+  lessThan(QT_MAJOR_VERSION, 6) {
+    QT += KWindowSystem
+  }
   SOURCES += Kvantum.cpp \
              eventFiltering.cpp \
              polishing.cpp \
@@ -40,12 +50,17 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              animation/animation.h \
              themeconfig/ThemeConfig.h \
              themeconfig/specs.h
-  greaterThan(QT_MINOR_VERSION, 14) {
-    SOURCES += drag/windowmanager.cpp
-    HEADERS += drag/windowmanager.h
+  lessThan(QT_MAJOR_VERSION, 6) {
+    greaterThan(QT_MINOR_VERSION, 14) {
+      SOURCES += drag/windowmanager.cpp
+      HEADERS += drag/windowmanager.h
+    } else {
+      SOURCES += drag/windowmanager-old.cpp
+      HEADERS += drag/windowmanager-old.h
+    }
   } else {
-    SOURCES += drag/windowmanager-old.cpp
-    HEADERS += drag/windowmanager-old.h
+      SOURCES += drag/windowmanager.cpp
+      HEADERS += drag/windowmanager.h
   }
   OTHER_FILES += kvantum.json
 } else {
@@ -87,6 +102,13 @@ unix {
   colors.files += ../color/Kvantum.colors
   kf5colors.path = $$KF5COLORSDIR
   kf5colors.files += ../color/Kvantum.colors
-  equals(QT_MAJOR_VERSION, 4): INSTALLS += target colors
-  greaterThan(QT_MAJOR_VERSION, 4): INSTALLS += target kf5colors
+  lessThan(QT_MAJOR_VERSION, 5) {
+    INSTALLS += target colors
+  } else {
+    lessThan(QT_MAJOR_VERSION, 6) {
+      INSTALLS += target kf5colors
+    } else {
+      INSTALLS += target
+    }
+  }
 }

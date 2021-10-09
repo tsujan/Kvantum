@@ -19,6 +19,7 @@
 #define KVANTUMPREVIEW_H
 
 #include "ui_KvantumPreviewBase.h"
+#include <QActionGroup>
 #include <QScreen>
 #include <QWindow>
 
