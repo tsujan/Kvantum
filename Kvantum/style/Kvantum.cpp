@@ -14092,23 +14092,23 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const Qt::ToolButtonStyle tialign = opt->toolButtonStyle;
 
         /*
-           Don't use sizeCalculated() for calculating the size
+           We don't use "sizeCalculated()" to calculate the size
            because the button may be vertical, like in digiKam.
            Unfortunately, there's no standard way to determine
            how margins and frames are changed in such cases.
+           Another drawback is that, if there's an arrow but no icon
+           (in fact, if the style isn't "Qt::ToolButtonTextOnly"),
+           Qt will add the icon size before making "contentsSize".
         */
 
         s = contentsSize + QSize(0, contentsSize.height() % 2)
-            /* Qt just adds 6 and 5 px to the width and height respectively
-               (-> qcommonstyle.cpp and qtoolbutton.cpp -> QSize QToolButton::sizeHint())
-               but we add add our frames and spacings instead. */
             + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                     fspec.top+fspec.bottom+lspec.top+lspec.bottom)
             + QSize(!(opt->features & QStyleOptionToolButton::Arrow)
-                        || opt->arrowType == Qt::NoArrow
-                        || tialign == Qt::ToolButtonTextOnly
-                        || ((opt->text.isEmpty() || tialign == Qt::ToolButtonIconOnly)
-                            && opt->icon.isNull()) // nothing or only arrows
+                    || opt->arrowType == Qt::NoArrow
+                    || tialign == Qt::ToolButtonTextOnly
+                    || ((opt->text.isEmpty() || tialign == Qt::ToolButtonIconOnly)
+                        && opt->icon.isNull()) // nothing or only arrows
                       ? 0
                       // also add a margin between indicator and text (-> CE_ToolButtonLabel)
                       : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
@@ -14127,7 +14127,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                              fspec1.left-fspec.left
                              : fspec1.right-fspec.right) // there's an attachment
                           +dspec1.size+2*TOOL_BUTTON_ARROW_MARGIN
-                          -pixelMetric(PM_MenuButtonIndicator); // added in qcommonstyle.cpp
+                          -pixelMetric(PM_MenuButtonIndicator); // added in QToolButton::sizeHint()
           }
           else if ((/*tb->popupMode() == QToolButton::InstantPopup
                     || */tb->popupMode() == QToolButton::DelayedPopup)

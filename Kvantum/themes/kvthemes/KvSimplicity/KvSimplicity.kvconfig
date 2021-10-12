@@ -80,6 +80,7 @@ iconless_menu=false
 transparent_arrow_button=true
 lxqtmainmenu_iconsize=22
 single_top_toolbar=true
+no_selection_tint=true
 
 [PanelButtonCommand]
 frame=true
@@ -99,8 +100,8 @@ text.shadow=0
 text.margin=1
 text.iconspacing=4
 indicator.element=arrow
-text.margin.top=3
-text.margin.bottom=3
+text.margin.top=2
+text.margin.bottom=2
 text.margin.left=3
 text.margin.right=3
 frame.expansion=10
@@ -133,7 +134,7 @@ frame.top=3
 frame.bottom=3
 frame.left=3
 frame.right=3
-indicator.size=9
+indicator.size=10
 text.normal.color=black
 
 [RadioButton]
