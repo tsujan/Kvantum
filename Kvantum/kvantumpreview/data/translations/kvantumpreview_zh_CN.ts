@@ -521,7 +521,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2379"/>
         <source>Page 2 (disabled)</source>
-        <translation type="unfinished">第二页（禁用的） {2 ?}</translation>
+        <translation>第二页（已禁用）</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2413"/>
