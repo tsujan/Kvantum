@@ -470,8 +470,8 @@
 <path style="fill:url(#linearGradient9120);color:#000" d="m 28.75,41.2516 c -4.12497,0 -7.5,3.37497 -7.5,7.5 h 1.5 c 0,-3.18752 2.81253,-6 6,-6 z "/>
 </g>
 <path style="fill:url(#linearGradient5004);fill-rule:evenodd" id="button-toggled-left" d="m 242.5,17.5002 0,32.4998 -7.5,0 0,-32.5 z "/>
-<path style="fill:url(#linearGradient4996);fill-rule:evenodd" id="button-toggled-bottomleft" d="m 242.5,57.5 c -5,0 -7.5,-2.5 -7.5,-7.5 h 7.5 z"/>
-<path style="fill:url(#linearGradient4988);fill-rule:evenodd" id="button-toggled-topleft" d="m 235,17.5 c 0,-5 2.5,-7.5 7.5,-7.5 v 7.5 z"/>
+<path style="fill:url(#linearGradient4996);fill-rule:evenodd" id="button-toggled-bottomleft" d="m 242.5,57.5 c -4.5,0 -7.5,-3 -7.5,-7.5 h 7.5 z"/>
+<path style="fill:url(#linearGradient4988);fill-rule:evenodd" id="button-toggled-topleft" d="m 235,17.5 c 0,-4.5 3,-7.5 7.5,-7.5 v 7.5 z"/>
 <path style="fill:url(#linearGradient4978);fill-rule:evenodd" id="button-toggled-bottom" d="m 242.5002,50 32.4998,0 0,7.5 -32.5,0 z"/>
 <path style="fill:url(#linearGradient4970);fill-rule:evenodd" id="button-toggled-top" d="m 275,17.5001 -32.4998,0 0,-7.5 32.5,0 z"/>
 <path style="fill:url(#linearGradient4962);fill-rule:evenodd" id="button-toggled" d="m 242.5,50 0,-32.5 32.5,0 0,32.5 -32.5,0 z"/>
@@ -867,8 +867,8 @@
 <use width="100%" height="100%" style="opacity:.68" id="tab-close-focused" xlink:href="#tab-close-pressed" transform="translate(-24)"/>
 <use width="100%" height="100%" style="opacity:.55" xlink:href="#tab-close-normal" id="tab-close-disabled" transform="translate(78)"/>
 <path style="fill:url(#linearGradient5212);fill-rule:evenodd" id="button-toggled-inactive-left" d="M 92.5,89 V 121.5 H 85 V 89 Z"/>
-<path style="fill:url(#linearGradient5214);fill-rule:evenodd" id="button-toggled-inactive-bottomleft" d="m 92.5,129 c -5,0 -7.5,-2.5 -7.5,-7.5 h 7.5 z"/>
-<path style="fill:url(#linearGradient5216);fill-rule:evenodd" id="button-toggled-inactive-topleft" d="m 85,89 c 0,-5 2.5,-7.5 7.5,-7.5 V 89 Z"/>
+<path style="fill:url(#linearGradient5214);fill-rule:evenodd" id="button-toggled-inactive-bottomleft" d="m 92.5,129 c -4.5,0 -7.5,-3 -7.5,-7.5 h 7.5 z"/>
+<path style="fill:url(#linearGradient5216);fill-rule:evenodd" id="button-toggled-inactive-topleft" d="m 85,89 c 0,-4.5 3,-7.5 7.5,-7.5 V 89 Z"/>
 <path style="fill:url(#linearGradient5219);fill-rule:evenodd" id="button-toggled-inactive-bottom" d="M 92.5,121.5 H 125 V 129 H 92.5 Z"/>
 <path style="fill:url(#linearGradient5221);fill-rule:evenodd" id="button-toggled-inactive-top" d="M 125,89 H 92.5 v -7.5 h 32.5 z"/>
 <path style="fill:url(#linearGradient5224);fill-rule:evenodd" id="button-toggled-inactive" d="M 92.5,121.5 V 89 H 125 v 32.5 z"/>

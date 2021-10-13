@@ -1,6 +1,8 @@
 V1.0.0
 ---------
  * Enabled experimental compilation of Kvantum's plugin against Qt6. With cmake, "ENABLE_QT5" should be set to "OFF" (as in `cmake .. -DENABLE_QT5=OFF`) — it's "ON" by default.
+ * A little more precise calculation of sizes of buttons with bold texts.
+ * Take "ToolButtonFollowStyle" into account when taking the style from the toolbutton itself (a logical consideration with no effect).
 
 V0.20.2
 ---------

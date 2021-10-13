@@ -2248,7 +2248,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         return;
       }
       QToolBar *toolBar = qobject_cast<QToolBar*>(p);
-      if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly || tb->text().isEmpty())
+      if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly
+                  || (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle
+                      && styleHint(SH_ToolButtonStyle,option,widget) == Qt::ToolButtonIconOnly)
+                  || tb->text().isEmpty())
            && tb->icon().isNull())
           || (opt && (opt->toolButtonStyle == Qt::ToolButtonIconOnly || opt->text.isEmpty())
               && opt->icon.isNull()))
@@ -2378,7 +2381,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       {
         /* always show menu titles in the toggled state */
         if (!hspec_.transparent_menutitle
-            && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+            && tb->isDown()
+            && (tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+                || (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle
+                    && styleHint(SH_ToolButtonStyle,option,widget) == Qt::ToolButtonTextBesideIcon))
             && qobject_cast<QMenu*>(p))
         {
           status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
@@ -9928,7 +9934,10 @@ void Style::drawControl(QStyle::ControlElement element,
           /* always show menu titles in the toggled state */
           bool transMenuTitle(hspec_.transparent_menutitle);
           if (!transMenuTitle
-              && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+              && tb->isDown()
+              && (tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+                  || (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle
+                      && styleHint(SH_ToolButtonStyle,option,widget) == Qt::ToolButtonTextBesideIcon))
               && qobject_cast<QMenu*>(p))
           {
             status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
@@ -10650,7 +10659,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
         /* make an exception for (KDE) menu titles */
         if (hspec_.transparent_menutitle
-            && tb && tb->isDown() && tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+            && tb && tb->isDown()
+            && (tb->toolButtonStyle() == Qt::ToolButtonTextBesideIcon
+                || (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle
+                    && styleHint(SH_ToolButtonStyle,option,widget) == Qt::ToolButtonTextBesideIcon))
             && qobject_cast<QMenu*>(getParent(widget,1)))
         {
           drawControl(CE_ToolButtonLabel,&o,painter,widget);
@@ -13816,9 +13828,12 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             QFont f;
             if (widget) f = widget->font();
             else f = QApplication::font();
-            QSize s1 = textSize(f, txt);
+            QSize sNormal = textSize(f, txt);
             f.setWeight(lspec.boldness);
-            s = s + textSize(f, txt) - s1;
+            QSize sBold = textSize(f, txt);
+            QSize delta = sBold - (opt->icon.isNull() || sNormal.height() >= opt->iconSize.height()
+                                     ? sNormal : QSize(sNormal.width(), opt->iconSize.height()));
+            s = s + delta.expandedTo(QSize(0,0));
           }
           // consider a global min. width for push buttons
           s.rwidth() = qMax(s.width(),
@@ -14157,9 +14172,23 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             QFont f;
             if (widget) f = widget->font();
             else f = QApplication::font();
-            QSize s1 = textSize(f, opt->text);
+            QSize sNormal = textSize(f, opt->text);
             f.setWeight(lspec.boldness);
-            s = s + textSize(f, opt->text) - s1;
+            QSize sBold = textSize(f, opt->text);
+            QSize delta;
+            if (opt->icon.isNull() || tialign == Qt::ToolButtonTextOnly)
+              delta = sBold - sNormal;
+            else if (tialign == Qt::ToolButtonTextBesideIcon)
+            {
+              delta = sBold - (sNormal.height() >= opt->iconSize.height()
+                                 ? sNormal : QSize(sNormal.width(), opt->iconSize.height()));
+            }
+            else if (tialign == Qt::ToolButtonTextUnderIcon)
+            {
+              delta = sBold - (sNormal.width() >= opt->iconSize.width()
+                                 ? sNormal : QSize(opt->iconSize.width(), sNormal.height()));
+            }
+            s = s + delta.expandedTo(QSize(0,0));
           }
         }
         else if(opt->icon.isNull()) // nothing or only an arrow
