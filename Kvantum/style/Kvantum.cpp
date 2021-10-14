@@ -3659,7 +3659,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     /* frame is forced on lineedits at PE_PanelLineEdit */
-    case PE_FrameLineEdit : {return;}
+    case PE_FrameLineEdit : {
+      if (isLibreoffice_ && widget == nullptr) // Libreoffice doesn't use PE_PanelLineEdit
+        drawPrimitive(PE_PanelLineEdit, option, painter, widget);
+      return;
+    }
 
     case PE_PanelLineEdit : {
       /* don't draw the interior or frame of a Plasma spinbox */
