@@ -211,12 +211,14 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     /* some useful shortcuts */
     QShortcut *shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Down), this);
     connect (shortcut, &QShortcut::activated, ui->toolBox, [this] {
+        if (QApplication::activePopupWidget()) return; // workaround for the popup completer
         int indx = qMax (ui->toolBox->currentIndex(), 0) + 1;
         if (indx >= ui->toolBox->count()) indx = 0;
         ui->toolBox->setCurrentIndex (indx);
     });
     shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Up), this);
     connect (shortcut, &QShortcut::activated, ui->toolBox, [this] {
+        if (QApplication::activePopupWidget()) return;
         int indx = qMin (ui->toolBox->currentIndex(), ui->toolBox->count()) - 1;
         if (indx < 0) indx = ui->toolBox->count() - 1;
         ui->toolBox->setCurrentIndex (indx);
