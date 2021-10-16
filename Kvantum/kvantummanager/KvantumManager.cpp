@@ -32,6 +32,7 @@
 #include <QAbstractItemView>
 #include <QWindow>
 #include <QToolButton>
+#include <QShortcut>
 #include <QGraphicsDropShadowEffect>
 #include <QUrl>
 #include <QDesktopServices>
@@ -172,6 +173,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->lineEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
     connect (ui->appsEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
     connect (ui->toolBox, &QToolBox::currentChanged, this, &KvantumManager::tabChanged);
+    connect (ui->tabWidget, &QTabWidget::currentChanged, this, &KvantumManager::setTabWidgetFocus);
     connect (ui->saveAppButton, &QAbstractButton::clicked, this, &KvantumManager::writeAppLists);
     connect (ui->removeAppButton, &QAbstractButton::clicked, this, &KvantumManager::removeAppList);
     connect (ui->preview, &QAbstractButton::clicked, this, &KvantumManager::preview);
@@ -205,6 +207,34 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     /* we want to open the config file but QLabel's link implementation has problems */
     ui->configLabel->setOpenExternalLinks (false);
     connect (ui->configLabel, &QLabel::linkActivated, this, &KvantumManager::openUserConfigFile);
+
+    /* some useful shortcuts */
+    QShortcut *shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Down), this);
+    connect (shortcut, &QShortcut::activated, ui->toolBox, [this] {
+        int indx = qMax (ui->toolBox->currentIndex(), 0) + 1;
+        if (indx >= ui->toolBox->count()) indx = 0;
+        ui->toolBox->setCurrentIndex (indx);
+    });
+    shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Up), this);
+    connect (shortcut, &QShortcut::activated, ui->toolBox, [this] {
+        int indx = qMin (ui->toolBox->currentIndex(), ui->toolBox->count()) - 1;
+        if (indx < 0) indx = ui->toolBox->count() - 1;
+        ui->toolBox->setCurrentIndex (indx);
+    });
+    shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Tab), this);
+    connect (shortcut, &QShortcut::activated, ui->tabWidget, [this] {
+        if (!ui->tabWidget->isVisible()) return;
+        int indx = qMax (ui->tabWidget->currentIndex(), 0) + 1;
+        if (indx >= ui->tabWidget->count()) indx = 0;
+        ui->tabWidget->setCurrentIndex (indx);
+    });
+    shortcut = new QShortcut (QKeySequence (Qt::CTRL | Qt::Key_Backtab), this);
+    connect (shortcut, &QShortcut::activated, ui->tabWidget, [this] {
+        if (!ui->tabWidget->isVisible()) return;
+        int indx = qMin (ui->tabWidget->currentIndex(), ui->tabWidget->count()) - 1;
+        if (indx < 0) indx = ui->tabWidget->count() - 1;
+        ui->tabWidget->setCurrentIndex (indx);
+    });
 
     if (auto viewport = ui->toolBox->widget (2)->parentWidget())
         viewport->installEventFilter (this); // see eventFilter()
@@ -316,6 +346,25 @@ QString KvantumManager::tooTipToWhatsThis (const QString &tip)
     for (int i = 0; i < paragraphs.size(); ++i)
         simplified.append (paragraphs.at (i).simplified());
     return simplified.join ("\n\n");
+}
+/*************************/
+// Gives the focus to the first enabled widget of the active tab.
+void KvantumManager::setTabWidgetFocus()
+{
+    if (auto tab = ui->tabWidget->currentWidget())
+    {
+        if (tab->isAncestorOf (QApplication::focusWidget())) return;
+        auto w = tab->findChild<QWidget*>();
+        QList<QWidget*> disabled;
+        while (w && !w->isEnabled())
+        {
+            if (disabled.contains (w)) return;
+            disabled << w;
+            w = w->nextInFocusChain();
+            if (!tab->isAncestorOf (w)) return;
+        }
+        if (w) w->setFocus();
+    }
 }
 /*************************/
 void KvantumManager::openTheme()
@@ -1299,11 +1348,15 @@ void KvantumManager::tabChanged (int index)
 {
     ui->statusBar->clearMessage();
     if (index == 0)
+    {
         showAnimated (ui->installLabel, 1000);
-    if (index == 1 || index == 3)
+        ui->openTheme->setFocus();
+    }
+    else if (index == 1 || index == 3)
     {
         if (index == 1)
         {
+            ui->comboBox->setFocus();
             /* put the active theme in the theme combobox */
             QString activeTheme;
             if (kvconfigTheme_.isEmpty())
@@ -1324,12 +1377,16 @@ void KvantumManager::tabChanged (int index)
             }
         }
         else
+        {
             showAnimated (ui->appLabel, 1000);
+            ui->appCombo->setFocus();
+        }
     }
     else if (index == 2)
     {
         ui->opaqueEdit->clear();
         defaultThemeButtons();
+        setTabWidgetFocus();
 
         if (kvconfigTheme_.isEmpty())
         {

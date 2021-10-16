@@ -69,6 +69,7 @@ private slots:
     void showWhatsThis();
     void aboutDialog();
     void openUserConfigFile (const QString &link);
+    void setTabWidgetFocus();
 
 private:
     void fitThirdPageToContents();
