@@ -1071,7 +1071,7 @@ la ŝpinan liniredaktilon kaj eliminas la butonojn.</translation>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation>Defaŭlte, la ŝpinindilikoj estas unu apud la alia horizontale.
+        <translation>Defaŭlte, la ŝpinindikiloj estas unu apud la alia horizontale.
 
 Marki ĉi tiun butonon metas la supreniran indikilon super la
 malsupreniran, interne de la ŝpina liniredaktilon.</translation>
