@@ -253,12 +253,12 @@
 <linearGradient xlink:href="#linearGradient5469" id="linearGradient8607" y1="40.966312" x1="30.249954" y2="52.661354" gradientUnits="userSpaceOnUse" x2="19"/>
 <linearGradient gradientTransform="translate(-443,0)" xlink:href="#linearGradient4963" id="linearGradient6924" y1="-305" x1="805" y2="-305" gradientUnits="userSpaceOnUse" x2="825"/>
 <linearGradient gradientTransform="translate(-443,0)" xlink:href="#linearGradient5223" id="linearGradient6928" y1="-305" x1="825" y2="-305" gradientUnits="userSpaceOnUse" x2="830"/>
-<linearGradient gradientTransform="matrix(0.75,0,0,1.3938973,139.12547,-254.71394)" xlink:href="#linearGradient6741-7" id="linearGradient6970" y1="669.49988" x1="128.50024" y2="669.5" gradientUnits="userSpaceOnUse" x2="100.5"/>
+<linearGradient gradientTransform="matrix(0.75,0,0,1.3938973,-5.87176,-274.21406)" xlink:href="#linearGradient6741-7" id="linearGradient6970" y1="669.5" x1="125.16235" y2="669.5" gradientUnits="userSpaceOnUse" x2="103.82901"/>
 <linearGradient gradientTransform="matrix(1,0,0,-1,-11.25,221.25169)" xlink:href="#linearGradient6741" id="linearGradient7012" y1="41.251579" x1="28.75" y2="88.751526" gradientUnits="userSpaceOnUse" x2="28.75"/>
-<linearGradient gradientTransform="matrix(0.75,0,0,1.3938973,139.12547,-254.71393)" xlink:href="#linearGradient6741-7" id="linearGradient6972" y1="669.49988" x1="128.50024" y2="669.5" gradientUnits="userSpaceOnUse" x2="100.5"/>
-<linearGradient gradientTransform="matrix(0.75,0,0,0.70049229,139.12552,209.52031)" xlink:href="#linearGradient6741-7" id="linearGradient6968" y1="669.50012" x1="128.50018" y2="669.50043" gradientUnits="userSpaceOnUse" x2="100.5"/>
+<linearGradient gradientTransform="matrix(0.75,0,0,1.3938973,-5.87176,-274.21405)" xlink:href="#linearGradient6741-7" id="linearGradient6972" y1="669.5" x1="125.16235" y2="669.5" gradientUnits="userSpaceOnUse" x2="103.82901"/>
+<linearGradient gradientTransform="matrix(0.75,0,0,0.96585103,-5.87171,12.36262)" xlink:href="#linearGradient6741-7" id="linearGradient6968" y1="669.5" x1="125.16228" y2="669.5" gradientUnits="userSpaceOnUse" x2="103.82894"/>
 <linearGradient xlink:href="#linearGradient5095" id="linearGradient6942" y1="729.50061" x1="84" y2="729.5" gradientUnits="userSpaceOnUse" x2="100"/>
-<linearGradient gradientTransform="matrix(0.75,0,0,0.7004931,139.12552,209.51978)" xlink:href="#linearGradient6741-7" id="linearGradient6966" y1="669.50018" x1="128.50018" y2="669.50043" gradientUnits="userSpaceOnUse" x2="100.5"/>
+<linearGradient gradientTransform="matrix(0.75,0,0,0.96585102,-5.87171,12.362594)" xlink:href="#linearGradient6741-7" id="linearGradient6966" y1="669.5" x1="125.16228" y2="669.5" gradientUnits="userSpaceOnUse" x2="103.82894"/>
 <linearGradient xlink:href="#linearGradient5095" id="linearGradient6944" y1="729.50061" x1="100" y2="729.50061" gradientUnits="userSpaceOnUse" x2="84"/>
 <linearGradient gradientTransform="matrix(1,0,0,1,32.497452,-443.00556)" xlink:href="#linearGradient5094" id="linearGradient6964" y1="763.49963" x1="330" y2="728.49988" gradientUnits="userSpaceOnUse" x2="330"/>
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient6741-7" id="linearGradient6948" y1="1200" x1="52" y2="1192" gradientUnits="userSpaceOnUse" x2="52"/>
@@ -499,21 +499,21 @@
 <use width="450" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-topright" transform="matrix(-1,0,0,1,39,0)"/>
 <use width="450" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomleft" transform="matrix(1,0,0,-1,0,1344)"/>
 <use width="450" height="1230" xlink:href="#scrollbarslider-normal-topleft" id="scrollbarslider-normal-bottomright" transform="matrix(-1,0,0,-1,39,1344)"/>
-<g id="scrollbarslider-focused-topright" transform="matrix(1,0,0,1.3788159,-144.99723,-276.52661)">
-<rect width="12" x="225" y="669.797" height="8.702877" style="opacity:0"/>
-<path style="fill:url(#linearGradient6966);fill-rule:evenodd" d="m 225,670.8848 0,7.6152 10.5,0 c 0,-4.35156 -4.5,-7.61523 -10.5,-7.61521 z"/>
+<g id="scrollbarslider-focused-topright">
+<path style="opacity:0" d="m 80,647 12,0 v 12 h -12 z "/>
+<path style="fill:url(#linearGradient6966);fill-rule:evenodd" d="m 80,648.5 v 10.5 h 8 v -2.5 c 0,-4.75 -3.25,-8 -8,-8 z"/>
 </g>
-<g id="scrollbarslider-focused-topleft" transform="matrix(1,0,0,1.3788175,-144.99723,-276.52765)">
-<rect width="12" x="213" y="669.79688" height="8.7029018" style="opacity:0"/>
-<path style="fill:url(#linearGradient6968);fill-rule:evenodd" d="m 225,670.8847 c -6,0 -10.5,3.2637 -10.5,7.6152 h 10.5 z "/>
+<g id="scrollbarslider-focused-topleft">
+<path style="opacity:0" d="M 68,647 H 80 V 659 H 68 Z"/>
+<path style="fill:url(#linearGradient6968);fill-rule:evenodd" d="m 80,648.5 c -4.75,0 -8,3.25 -8,8 V 659 h 8 z"/>
 </g>
-<g id="scrollbarslider-focused-left" transform="translate(-144.99723,-19.50012)">
-<rect width="12" x="213" y="678.49976" height="23" style="opacity:0"/>
-<path style="fill:url(#linearGradient6970);fill-rule:evenodd" d="m 214.5,678.5004 0,22.8687 0,.131 10.5,0 0,-23 -10.5,0 z "/>
+<g id="scrollbarslider-focused-left">
+<path style="opacity:0" d="m 68,659 h 12 v 23 H 68 Z"/>
+<path style="fill:url(#linearGradient6970);fill-rule:evenodd" d="m 72,682 8,0 0,-23 h -8 z"/>
 </g>
-<g id="scrollbarslider-focused-right" transform="translate(-144.99723,-19.50012)">
-<rect width="12" x="225" y="678.50287" height="22.993509" style="opacity:0"/>
-<path style="fill:url(#linearGradient6972);fill-rule:evenodd" d="m 225,678.5005 0,23 10.5,0 c 0,-0.0452 0,-0.086 0,-0.131 v -22.8686 h -10.5 z "/>
+<g id="scrollbarslider-focused-right">
+<path style="opacity:0" d="m 80,659.0029 12,0 v 23 h -12 z "/>
+<path style="fill:url(#linearGradient6972);fill-rule:evenodd" d="m 80,659 v 23 h 8 v -23 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topright" id="scrollbarslider-focused-bottomright" transform="matrix(1,0,0,-1,-0,1341)"/>
 <use width="100%" height="100%" xlink:href="#scrollbarslider-focused-topleft" id="scrollbarslider-focused-bottomleft" transform="matrix(1,0,0,-1,0,1341)"/>
