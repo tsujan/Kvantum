@@ -5,6 +5,7 @@ V1.0.0
  * Take "ToolButtonFollowStyle" into account when getting the style from the toolbutton itself (a logical consideration with no effect).
  * Added a workaround for missing panels and frames of LibreOffice's input fields.
  * Made Kvantum Manager a little more keyboard friendly.
+ * Ensure that the left mouse button is pressed on starting window dragging (it may not be pressed in very rare cases, where a popup is shown after moving the cursor and closed before dragging).
 
 V0.20.2
 ---------

@@ -216,11 +216,15 @@ void WindowManager::timerEvent (QTimerEvent *event)
     dragTimer_.stop();
     if (winTarget_)
     {
-      if (qApp->activePopupWidget())
+      if (qApp->activePopupWidget()
+          || !(QGuiApplication::mouseButtons() & Qt::LeftButton))
       {
         /* WARNING: Due to a Qt bug, that exists under X11 and Wayland alike,
                     the drag may be started even when an active popup is shown.
-                    As a workaround, we don't start dragging in this case. */
+                    As a workaround, we don't start dragging in this case.
+
+                    Also, rarely, the left mouse button may have been released
+                    inside a popup, without sending an event to the window. */
         winTarget_.data()->unsetCursor();
         resetDrag();
         unlock();
