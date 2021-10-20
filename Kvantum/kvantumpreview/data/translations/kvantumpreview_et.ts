@@ -75,13 +75,13 @@ nupp</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Tööriistariba nupud</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
         <location filename="../../KvantumPreviewBase.ui" line="446"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Lihtne tööriistariba nupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="453"/>
