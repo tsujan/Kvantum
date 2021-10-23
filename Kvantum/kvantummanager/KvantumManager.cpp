@@ -239,7 +239,11 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     });
 
     if (auto viewport = ui->toolBox->widget (2)->parentWidget())
+    {
         viewport->installEventFilter (this); // see eventFilter()
+        if (auto scrollArea = qobject_cast<QAbstractScrollArea*>(viewport->parentWidget()))
+            scrollArea->setFocusPolicy (Qt::NoFocus); // keep the focus inside
+    }
 
     /* get ready for translucency */
     setAttribute (Qt::WA_NativeWindow, true);
